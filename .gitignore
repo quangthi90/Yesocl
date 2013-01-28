@@ -1,0 +1,8 @@
+/.htaccess.txt
+/.project
+/php.ini
+/.settings
+/.buildpath
+/system/logs
+/system/cache
+/image/cache
