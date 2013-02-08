@@ -8,3 +8,5 @@
 /image/cache
 /config.php
 /admin/config.php
+/object/proxy
+/object/hydrator
