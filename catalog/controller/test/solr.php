@@ -1,65 +1,69 @@
 <?php
-class ControllerTestSolr extends Controller{
-	public function index(){
-		//------------------ Bootstrap --------------------
-		/* Domain name of the Solr server */
-		define('SOLR_SERVER_HOSTNAME', 'http://localhost:8983/solr/');
+Class ControllerTestSolr extends Controller {
+	private $error = array();
+	
+	public function index() {
+		$this->load->model('test/solr');
 		
-		/* Whether or not to run in secure mode */
-		define('SOLR_SECURE', true);
+		// request
+		if ( isset($this->request->post) && $this->validateForm( $this->request->post ) ) {
+			$this->model_test_solr->addPost( $this->request->post );
+			
+			$this->redirect($this->url->link('test/solr'));
+		}
 		
-		/* HTTP Port to connection */
-		define('SOLR_SERVER_PORT', ((SOLR_SECURE) ? 8443 : 8983));
+		// posts
+		$post_data = $this->model_test_solr->getPosts();
+		$this->data['posts'] = array();
+		foreach ($post_data as $post) {
+			$this->data['posts'][] = array(
+				'id' => $post->getId(),
+				'author' => $post->getAuthor(),
+				'content' => $post->getContent(),
+				'create' => $post->getCreate()->format('Y-m-d H:i:s'),
+			);
+		}
 		
-		/* HTTP Basic Authentication Username */
-		define('SOLR_SERVER_USERNAME', 'root');
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/test/solr.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/test/solr.tpl';
+		} else {
+			$this->template = 'default/template/test/solr.tpl';
+		}
 		
-		/* HTTP Basic Authentication password */
-		define('SOLR_SERVER_PASSWORD', 'changeit');
+		//$this->children = array();
+				
+		$this->response->setOutput($this->render());
+	}
+	
+	public function delete() {
+		$this->load->model('test/solr');
 		
-		/* HTTP connection timeout */
-		/* This is maximum time in seconds allowed for the http data transfer operation. Default value is 30 seconds */
-		define('SOLR_SERVER_TIMEOUT', 10);
+		// request
+		if (isset( $this->request->get['id'] )) {
+			$this->model_test_solr->deletePost( array( 'id' => $this->request->get['id'] ) );
+			
+			$this->redirect($this->url->link('test/solr'));
+		}
+	}
+	
+	public function validateForm( $data = array() ) {
+		if ( !isset($data['author']) || utf8_strlen($data['author']) < 1 || utf8_strlen($data['author']) > 50 ) {
+			$this->error['author'] = 'error';
+		}
 		
-		/* File name to a PEM-formatted private key + private certificate (concatenated in that order) */
-		define('SOLR_SSL_CERT', 'certs/combo.pem');
+		if ( !isset($data['content']) || utf8_strlen($data['author']) < 1 || utf8_strlen($data['author']) > 200 ) {
+			$this->error['content'] = 'error';
+		}
 		
-		/* File name to a PEM-formatted private certificate only */
-		define('SOLR_SSL_CERT_ONLY', 'certs/solr.crt');
-		
-		/* File name to a PEM-formatted private key */
-		define('SOLR_SSL_KEY', 'certs/solr.key');
-		
-		/* Password for PEM-formatted private key file */
-		define('SOLR_SSL_KEYPASSWORD', 'StrongAndSecurePassword');
-		
-		/* Name of file holding one or more CA certificates to verify peer with*/
-		define('SOLR_SSL_CAINFO', 'certs/cacert.crt');
-		
-		/* Name of directory holding multiple CA certificates to verify peer with */
-		define('SOLR_SSL_CAPATH', 'certs/');
-		
-		//------------------ end Bootstrap -----------------
-		
-		$options = array
-		(
-		    'hostname' => SOLR_SERVER_HOSTNAME,
-		    'login'    => SOLR_SERVER_USERNAME,
-//		    'password' => SOLR_SERVER_PASSWORD,
-		    'port'     => SOLR_SERVER_PORT,
-		);
-		
-		$client = new SolrClient($options);
-		
-		$doc = new SolrInputDocument();
-		
-		$doc->addField('id', 334455);
-		$doc->addField('cat', 'Software');
-		$doc->addField('cat', 'Lucene');
-		
-		$updateResponse = $client->addDocument($doc);
-		
-		print_r($updateResponse->getResponse());
+		if ( count( $this->error ) ) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	public function test() {
+		$this->load->model('test/solr');
+		$this->model_test_solr->test();
 	}
 }
-?>

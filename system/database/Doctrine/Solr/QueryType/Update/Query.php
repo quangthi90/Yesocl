@@ -29,7 +29,7 @@ class Query extends UpdateQuery
      */
     public function addDocuments($documents, $overwrite = null, $commitWithin = null)
     {
-        $convertedDocs = [];
+        $convertedDocs = array();
         foreach ($documents as $document) {
             $convertedDocs[] = $this->converter->toSolrDocument($document);
         }
@@ -44,7 +44,7 @@ class Query extends UpdateQuery
      */
     public function removeDocument($document)
     {
-        return $this->removeDocuments([$document]);
+        return $this->removeDocuments(array($document));
     }
 
     /**
@@ -54,7 +54,7 @@ class Query extends UpdateQuery
      */
     public function removeDocuments(array $documents)
     {
-        $queries = [];
+        $queries = array();
         foreach ($documents as $document) {
             $queries[] = $this->converter->toQuery($document);
         }

@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.5.3.1');
+define('VERSION', '1.5.3');
 
 // Configuration
 require_once('config.php');
@@ -38,10 +38,28 @@ $registry->set('config', $config);
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $registry->set('db', $db);
 
-// Doctrine
-//$doctrine = new Doctrine();
-//$registry->set('doctrine', $doctrine);
-//define('LIB_ANNOTATIONS', DIR_SYSTEM . 'library/Doctrine/ODM/MongoDB/Mapping/Annotations/');
+// Solr Client
+/* Domain name of the Solr server */
+define('SOLR_SERVER_HOSTNAME', 'localhost');
+
+/* Whether or not to run in secure mode (def = true) */
+define('SOLR_SECURE', false);
+
+/* HTTP Port to connection */
+define('SOLR_SERVER_PORT', ((SOLR_SECURE) ? 8443 : 8983));
+
+/* HTTP connection timeout */
+/* This is maximum time in seconds allowed for the http data transfer operation. Default value is 30 seconds */
+define('SOLR_SERVER_TIMEOUT', 10);
+
+$options = array
+(
+    'hostname' => SOLR_SERVER_HOSTNAME,
+    'port'     => SOLR_SERVER_PORT,
+);
+
+$client = new SolrClient( array( 'hostname' => SOLR_SERVER_HOSTNAME, 'port' => SOLR_SERVER_PORT ) );
+$registry->set('solr', $client);
 
 // Store
 if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {

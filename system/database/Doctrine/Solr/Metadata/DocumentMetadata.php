@@ -12,7 +12,7 @@ class DocumentMetadata implements ClassMetadata
      * These values are derived from schema.xml of Solr collection.
      * @var array
      */
-    public static $allowedFieldTypes = [
+    public static $allowedFieldTypes = array(
         'string' => '*_s',
         'text' => '*_t',
         'int' => '*_i',
@@ -21,12 +21,12 @@ class DocumentMetadata implements ClassMetadata
         'double' => '*_d',
         'date' => '*_dt',
         'boolean' => '*_b',
-    ];
+    );
 
-    public static $pass = [
+    public static $pass = array(
         '*',
         'score',
-    ];
+    );
 
     public $collection;
 
@@ -55,24 +55,24 @@ class DocumentMetadata implements ClassMetadata
     public function addField(array $field)
     {
         if (!isset($field['type']) || !isset($field['name'])) {
-            throw new \InvalidArgumentException(
-                "Field must contain both 'name' and 'type' keys"
-            );
-        }
+            //throw new \InvalidArgumentException(
+            //    "Field must contain both 'name' and 'type' keys"
+            //);
+        }else {
+			$name = $field['name'];
+			unset($field['name']);
 
-        $name = $field['name'];
-        unset($field['name']);
+			if ($this->hasField($name)) {
+				throw new \InvalidArgumentException("Can't edit field information");
+			}
 
-        if ($this->hasField($name)) {
-            throw new \InvalidArgumentException("Can't edit field information");
-        }
+			if (!isset($field['solrFieldName'])) {
+				$field['solrFieldName'] = $this->convertToSolrFieldName($name, $field['type']);
+			}
 
-        if (!isset($field['solrFieldName'])) {
-            $field['solrFieldName'] = $this->convertToSolrFieldName($name, $field['type']);
-        }
-
-        $allowedTags = array('type' => 1, 'uniqueKey' => 1, 'solrFieldName' => 1);
-        $this->fields[$name] = array_intersect_key($field, $allowedTags);
+			$allowedTags = array('type' => 1, 'uniqueKey' => 1, 'solrFieldName' => 1);
+			$this->fields[$name] = array_intersect_key($field, $allowedTags);
+		} 
     }
 
     /**
@@ -184,8 +184,9 @@ class DocumentMetadata implements ClassMetadata
      */
     public function getTypeOfField($fieldName)
     {
+		$field = $this->getField($fieldName);
         return $this->hasField($fieldName) ?
-               $this->getField($fieldName)['type'] : null;
+               $field['type'] : null;
     }
 
     /**
@@ -209,7 +210,7 @@ class DocumentMetadata implements ClassMetadata
         if ($this->hasField($fieldName)) {
             return $this->fields[$fieldName];
         } else {
-            return [];
+            return array();
         }
     }
 

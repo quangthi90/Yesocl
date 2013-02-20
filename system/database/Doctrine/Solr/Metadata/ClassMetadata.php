@@ -24,7 +24,7 @@ interface ClassMetadata extends BaseClassMetadata
      *
      * @return string
      */
-    public function getTypeOfField($fieldName);
+    //public function getTypeOfField($fieldName);
 
     /**
      * Returns if field should be unique

@@ -80,6 +80,7 @@ require_once(DIR_SYSTEM . 'engine/front.php');
 require_once(DIR_SYSTEM . 'engine/loader.php'); 
 require_once(DIR_SYSTEM . 'engine/model.php');
 require_once(DIR_SYSTEM . 'engine/registry.php');
+require_once(DIR_DATABASE . 'doctrine.php');
 
 // Common
 require_once(DIR_SYSTEM . 'library/cache.php');
@@ -87,7 +88,6 @@ require_once(DIR_SYSTEM . 'library/url.php');
 require_once(DIR_SYSTEM . 'library/config.php');
 require_once(DIR_SYSTEM . 'library/db.php');
 require_once(DIR_SYSTEM . 'library/document.php');
-require_once(DIR_DATABASE . 'doctrine.php');
 require_once(DIR_SYSTEM . 'library/encryption.php');
 require_once(DIR_SYSTEM . 'library/image.php');
 require_once(DIR_SYSTEM . 'library/language.php');

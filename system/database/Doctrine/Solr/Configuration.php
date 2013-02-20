@@ -13,7 +13,7 @@ class Configuration extends AbstractConfiguration
      * Sets metadata driver closure.
      * @param callable $driver should return a MappingDriver instance.
      */
-    public function setMetadataDriverImpl(callable $driver)
+    public function setMetadataDriverImpl($driver)
     {
         $this->setAttributeClosure('metadataDriverImpl', $driver);
     }
@@ -31,7 +31,7 @@ class Configuration extends AbstractConfiguration
      * Sets DoctrineSolrManager closure.
      * @param callable $client should return a DoctrineSolrManager instance.
      */
-    public function setDoctrineSolrManager(callable $dsm)
+    public function setDoctrineSolrManager($dsm)
     {
         $this->setAttributeClosure('doctrineSolrManager', $dsm);
     }
@@ -49,7 +49,7 @@ class Configuration extends AbstractConfiguration
      * Sets ClassMetadataFactory closure.
      * @param callable $client should return a ClassMetadataFactory instance.
      */
-    public function setClassMetadataFactory(callable $cmf)
+    public function setClassMetadataFactory($cmf)
     {
         $this->setAttributeClosure('classMetadataFactory', $cmf);
     }
@@ -67,7 +67,7 @@ class Configuration extends AbstractConfiguration
      * Sets solarium client closure.
      * @param callable $client should return a Solarium\Client instance.
      */
-    public function setSolariumClientImpl(callable $client)
+    public function setSolariumClientImpl($client)
     {
         $this->setAttributeClosure('solariumClientImpl', $client);
     }
@@ -85,7 +85,7 @@ class Configuration extends AbstractConfiguration
      * Sets a converter closure.
      * @param callable $converter should return a Doctrine\Solr\Converter\Converter instance.
      */
-    public function setConverter(callable $converter)
+    public function setConverter($converter)
     {
         $this->setAttributeClosure('converter', $converter);
     }
@@ -103,7 +103,7 @@ class Configuration extends AbstractConfiguration
      * Sets a subscriber closure.
      * @param callable $subscriber should return a Doctrine\Solr\Subscriber\... instance.
      */
-    public function setSubscriber(callable $subscriber)
+    public function setSubscriber($subscriber)
     {
         $this->setAttributeClosure('subscriber', $subscriber);
     }
@@ -160,9 +160,9 @@ class Configuration extends AbstractConfiguration
             return new $mapping_driver(new $reader());
         });
 
-//        $configuration->setSolariumClientImpl(function() use ($solarium_client, $solarium_client_config) {
-//            return new $solarium_client($solarium_client_config);
-//        });
+        $configuration->setSolariumClientImpl(function() use ($solarium_client, $solarium_client_config) {
+            return new $solarium_client($solarium_client_config);
+        });
 
         $configuration->setDoctrineSolrManager(function() use ($doctrine_solr_manager, $configuration) {
             return new $doctrine_solr_manager($configuration);

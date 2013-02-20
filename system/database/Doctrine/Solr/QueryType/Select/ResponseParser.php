@@ -15,7 +15,7 @@ class ResponseParser extends SelectResponseParser
      *
      * @param callable $convert
      */
-    public function __construct(callable $convert) {
+    public function __construct($convert) {
         $this->convert = $convert;
     }
 
@@ -23,7 +23,7 @@ class ResponseParser extends SelectResponseParser
         $out = parent::parse($result);
 
         // convert the documents
-        $documents = [];
+        $documents = array();
         if (isset($out['documents'])) {
             foreach ($out['documents'] as $solrDocument) {
                 $documents[] = call_user_func($this->convert, $solrDocument);

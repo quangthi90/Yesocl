@@ -49,9 +49,9 @@ class MongoDBSubscriber implements EventSubscriber
     {
         $this->client = $config->getSolariumClientImpl();
         $this->converter = $config->getConverter();
-        $this->query = $this->client->createUpdate([
+        $this->query = $this->client->createUpdate( array(
             'converter' => $this->converter,
-        ]);
+        ));
     }
 
     public function getSubscribedEvents()
@@ -71,9 +71,9 @@ class MongoDBSubscriber implements EventSubscriber
     public function postFlush(PostFlushEventArgs $eventArgs)
     {
         $this->client->execute($this->query);
-        $this->query = $this->client->createUpdate([
+        $this->query = $this->client->createUpdate(array(
             'converter' => $this->converter,
-        ]);
+        ));
     }
 
     /**

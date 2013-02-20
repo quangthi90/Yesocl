@@ -1,19 +1,16 @@
 <?php
 use Doctrine\MongoDB\Connection,
     Doctrine\Common\ClassLoader,
-//    Doctrine\Common\EventManager,
     Doctrine\Common\Annotations\AnnotationRegistry,
     Doctrine\ODM\MongoDB\DocumentManager,
     Doctrine\ODM\MongoDB\Configuration,
     Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver;
-//    Doctrine\Solr\Subscriber\MongoDBSubscriber,
-//	Doctrine\Solr\Metadata\Driver\AnnotationDriver as SolrDriver,
-//	Doctrine\Solr\Configuration as SolrConfig;
 
 class Doctrine {
     protected $registry;
     protected $dm;
-//    protected $client;
+	protected $solr;
+	protected $client;
 
     public function __construct($registry) {
         $this->registry = $registry;
@@ -32,10 +29,18 @@ class Doctrine {
         // Common
         $classLoader = new \Doctrine\Common\ClassLoader('Doctrine\Common', DIR_DATABASE);
         $classLoader->register();
-        
-        // Solr
-//        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine\Solr', DIR_DATABASE);
-//        $classLoader->register();
+		
+		// Solr
+        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine\Solr', DIR_DATABASE);
+        $classLoader->register();
+		
+		// Solarium
+        $classLoader = new \Doctrine\Common\ClassLoader('Solarium', DIR_DATABASE);
+        $classLoader->register();
+		
+		// Symfony
+        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', DIR_DATABASE);
+        $classLoader->register();
         
         // -------------------------- Others --------------------
         $classLoader = new \Doctrine\Common\ClassLoader('Document', DIR_ROOT . '/object');
@@ -54,25 +59,33 @@ class Doctrine {
         $configD->setProxyNamespace('Proxy');
         $configD->setHydratorDir(DIR_ROOT . '/object/hydrator');
         $configD->setHydratorNamespace('Hydrator'); 
-        $configD->setDefaultDB('yesocl');
+        $configD->setDefaultDB('solr');
 
-        $connection = new \Doctrine\MongoDB\Connection('mongodb://admin:admin@ds041367.mongolab.com:41367/yesocl');
+        $connection = new \Doctrine\MongoDB\Connection(new Mongo());
 
         $this->dm = \Doctrine\ODM\MongoDB\DocumentManager::create($connection, $configD); 
 
         \Doctrine\ODM\MongoDB\Mapping\Driver\AnnotationDriver::registerAnnotationClasses();
         
-//        SolrDriver::registerAnnotationClasses();
 		AnnotationRegistry::registerFile(
 		    DIR_DATABASE . 'Doctrine/ODM/MongoDB/Mapping/Annotations/DoctrineAnnotations.php'
 		);
 		
-		// Config Solr
-//        $config = \Doctrine\Solr\Configuration::fromConfig(array());
-//		$em = new EventManager();
-//		Doctrine\Solr\Runner::run($config, $em);
-//		
-//		$this->client =  $config->getSolariumClientImpl();
+		AnnotationRegistry::registerFile(
+		    DIR_DATABASE . 'Doctrine/Solr/Mapping/Annotations/SolrAnnotations.php'
+		);
+			
+		// solr
+		$optionArr = array(
+			'solarium_client_config' => array(
+			//'querytype' => array(),
+				'host' => '127.0.0.1',
+				'port' => 8983,
+				'path' => '/solr/',
+				),
+			);
+		$this->solr = Doctrine\Solr\Configuration::fromConfig( $optionArr );
+		$this->client = $this->solr->getSolariumClientImpl();
 	}
 
     public function __get($key) {
