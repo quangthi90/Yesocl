@@ -66,4 +66,9 @@ Class ControllerTestSolr extends Controller {
 		$this->load->model('test/solr');
 		$this->model_test_solr->test();
 	}
+	
+	public function testupdate() {
+		$this->load->model('test/solr');
+		$this->model_test_solr->testupdate();
+	}
 }

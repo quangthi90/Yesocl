@@ -53,6 +53,12 @@ Class ModelTestSolr extends Doctrine {
 		}
 	}
 	
+	public function testupdate() {
+		$post = $this->dm->getRepository('Document\Post')->find('512642a5913db4e80e000036');
+		$post->setAuthor('testupdate');
+		$this->dm->flush();
+	}
+	
 	public function editPost( $post_id, $data = array() ) {
 		if ( isset($post_id) ) {
 			$post = $this->dm->getRepository('Document\Post')->find( $data['id'] );

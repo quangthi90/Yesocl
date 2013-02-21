@@ -37,7 +37,7 @@ input[name='content'] {width: 500px;}
 				<span class="post-content" ><?php echo $post['content']; ?></span>
 			</div>
 			<div>
-				<span class="post-create" ><?php echo $post['create']; ?></span>
+				<span class="post-create" ><?php echo $post['create']; ?></span><span onclick="window.location='http://localhost/solrbundle/index.php?route=test/solr/delete&id=<?php echo $post['id']; ?>';" >[X]</span>
 			</div>
 			<div class="cleaner" ></div>
 		</div>
