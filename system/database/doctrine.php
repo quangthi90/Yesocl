@@ -9,7 +9,6 @@ use Doctrine\MongoDB\Connection,
 class Doctrine {
     protected $registry;
     protected $dm;
-	protected $solr;
 	protected $client;
 
     public function __construct($registry) {
@@ -78,14 +77,15 @@ class Doctrine {
 		// solr
 		$optionArr = array(
 			'solarium_client_config' => array(
-			//'querytype' => array(),
 				'host' => '127.0.0.1',
 				'port' => 8983,
 				'path' => '/solr/',
 				),
 			);
-		$this->solr = Doctrine\Solr\Configuration::fromConfig( $optionArr );
-		$this->client = $this->solr->getSolariumClientImpl();
+		$configSolr = Doctrine\Solr\Configuration::fromConfig( $optionArr );
+		Doctrine\Solr\Runner::run($configSolr, $this->dm->getEventManager());
+		$this->client = $configSolr->getSolariumClientImpl();
+		
 	}
 
     public function __get($key) {

@@ -27,7 +27,19 @@ class Query extends SelectQuery
 
     protected function init()
     {
-        $this->config = $this->options['config'];
+		if (isset($this->options['config'])) {
+			$this->config = $this->options['config'];
+		}else {
+			$this->config = Configuration::fromConfig( 
+				array( 
+					'solarium_client_config' => array(
+						'host' => '127.0.0.1',
+						'port' => 8983,
+						'path' => '/solr/',
+						), 
+					)
+				);
+		}
         $this->documentMetadata = $this->config->getClassMetadataFactory()->getMetadataFor($this->options['mappedDocument']);
         $this->converter = $this->config->getConverter();
         parent::init();

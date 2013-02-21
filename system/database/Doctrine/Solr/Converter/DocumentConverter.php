@@ -22,12 +22,12 @@ class DocumentConverter implements Converter
     {
         /** @var $metadata DocumentMetadata */
         $metadata = $this->cmf->getMetadataFor(get_class($document));
-
+	
         $converted = new Document();
 
         foreach ($metadata->getFieldNames() as $fieldName) {
 			$action = 'get' . ucfirst($fieldName);
-            $converted->addField($metadata->getSolrFieldName($fieldName), $document->$action());
+            $converted->addField($metadata->getSolrFieldName($fieldName), $document->$fieldName);
         }
 
         return $converted;
@@ -44,15 +44,15 @@ class DocumentConverter implements Converter
 
         foreach ($document->getFields() as $field => $value) {
             if (isset($map[$field])) {
-				$action = 'get' . ucfirst( $map[$field] );
-                $converted->$action = $value;
+                $converted->{$map[$field]} = $value;
             }
         }
 
         return $converted;
     }
 
-    public function toQuery($document, $toSolrDocument = false)
+	// $toSolrDocument = false
+    public function toQuery($document, $toSolrDocument = true)
     {
         if ($toSolrDocument) {
             $document = $this->toSolrDocument($document);

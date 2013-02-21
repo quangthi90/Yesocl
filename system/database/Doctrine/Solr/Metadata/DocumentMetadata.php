@@ -13,6 +13,7 @@ class DocumentMetadata implements ClassMetadata
      * @var array
      */
     public static $allowedFieldTypes = array(
+		'id' => '*',
         'string' => '*_s',
         'text' => '*_t',
         'int' => '*_i',
@@ -55,24 +56,24 @@ class DocumentMetadata implements ClassMetadata
     public function addField(array $field)
     {
         if (!isset($field['type']) || !isset($field['name'])) {
-            //throw new \InvalidArgumentException(
-            //    "Field must contain both 'name' and 'type' keys"
-            //);
-        }else {
-			$name = $field['name'];
-			unset($field['name']);
+            throw new \InvalidArgumentException(
+                "Field must contain both 'name' and 'type' keys"
+            );
+		}
+        
+		$name = $field['name'];
+		unset($field['name']);
 
-			if ($this->hasField($name)) {
-				throw new \InvalidArgumentException("Can't edit field information");
-			}
+		if ($this->hasField($name)) {
+			throw new \InvalidArgumentException("Can't edit field information");
+		}
 
-			if (!isset($field['solrFieldName'])) {
-				$field['solrFieldName'] = $this->convertToSolrFieldName($name, $field['type']);
-			}
+		if (!isset($field['solrFieldName'])) {
+			$field['solrFieldName'] = $this->convertToSolrFieldName($name, $field['type']);
+		}
 
-			$allowedTags = array('type' => 1, 'uniqueKey' => 1, 'solrFieldName' => 1);
-			$this->fields[$name] = array_intersect_key($field, $allowedTags);
-		} 
+		$allowedTags = array('type' => 1, 'uniqueKey' => 1, 'solrFieldName' => 1);
+		$this->fields[$name] = array_intersect_key($field, $allowedTags);
     }
 
     /**

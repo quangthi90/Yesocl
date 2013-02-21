@@ -4,33 +4,34 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
- * @MongoDB\Document
- * @SOLR\Document
+ * @MongoDB\Document(collection="post")
+ * @SOLR\Document(collection="post")
  */
 Class post {
 	/** 
 	 * @MongoDB\Id
 	 * @SOLR\UniqueKey
+	 * @SOLR\Field(type="id")
 	 */
-	private $id;
+	public $id;
 	
 	/** 
 	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
+	 * @SOLR\Field(type="string")
 	 */
-	private $author;
+	public $author;
 	
 	/** 
-	 * @SOLR\Field(type="text")
+	 * @SOLR\Field(type="string")
 	 * @MongoDB\String 
 	 */
-	private $content;
+	public $content;
 	
 	/** @MongoDB\Date */
-	private $create;
+	public $create;
 	
 	/** @MongoDB\Boolean */
-	private $status;
+	public $status;
 	
 	public function getId() {
 		return $this->id;

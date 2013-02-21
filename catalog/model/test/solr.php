@@ -15,6 +15,10 @@ Class ModelTestSolr extends Doctrine {
 			
 			$this->dm->persist( $post );
 			$this->dm->flush();
+			
+			//$query = $this->client->createUpdate();
+			//$query->addDocuments( array($post) );
+			//$this->client->execute($query);
 		}
 	}
 	
@@ -31,16 +35,15 @@ Class ModelTestSolr extends Doctrine {
 	
 	public function test() {
 		$document = new Post();
-		$document->setContent('aaaaaa');
+		$document->setAuthor('tester');
 		
 		//$query = $this->client->createSelect();
 		$query = $this->client->createSelect(
 			array(
-				'config' => $this->solr,
 				'mappedDocument' => 'Document\Post',
 				)
 			);
-		$query->setQueryByDocument( $document );
+		//$query->setQueryByDocument( $document );
 		//echo '<pre>';var_dump( $query );echo '</pre>';
 		//$query->addField( 'author_t' );
 		//$query->setQuery( 'author_t: test' );

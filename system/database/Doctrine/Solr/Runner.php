@@ -8,7 +8,6 @@ class Runner
     {
         $driver = $config->getMetadataDriverImpl();
         $driver::registerAnnotationClasses();
-
         $em->addEventSubscriber($config->getSubscriber());
     }
 }

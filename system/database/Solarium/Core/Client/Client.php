@@ -723,6 +723,7 @@ class Client extends Configurable
         }
 
         $resultClass = $query->getResultClass();
+		
         $result = new $resultClass($this, $query, $response);
 
         if (!($result instanceof ResultInterface)) {
@@ -752,7 +753,7 @@ class Client extends Configurable
             return $event->getResult();
         }
 
-        $request = $this->createRequest($query);
+        $request = $this->createRequest($query);// debug point
         $response = $this->executeRequest($request, $endpoint);
         $result = $this->createResult($query, $response);
 
@@ -783,7 +784,7 @@ class Client extends Configurable
         if ($event->getResponse() !== null) {
             $response = $event->getResponse(); //a plugin result overrules the standard execution result
         } else {
-            $response = $this->getAdapter()->execute($request, $endpoint);
+            $response = $this->getAdapter()->execute($request, $endpoint);// debug point
         }
 
         $this->eventDispatcher->dispatch(
