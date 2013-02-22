@@ -33,6 +33,30 @@ Class ModelTestSolr extends Doctrine {
 		}
 	}
 	
+	public function searchPosts( $query_data = null ) {
+		$query = $this->client->createSelect(
+			array(
+				'mappedDocument' => 'Document\Post',
+				)
+			);
+			
+		if( $query_data == null ) {
+			
+		}elseif(is_array($query_data)) {
+			$document = new Post();
+			if (isset($query_data['content'])) {
+				$document->setContent($query_data['content']);
+			}
+			if (isset($query_data['author'])) {
+				$document->setAuthor($query_data['author']);
+			}
+			$query->setQueryByDocument( $document );
+		}else {
+			$query->setQuery( $query_data );
+		}
+		return $this->client->execute($query);
+	}
+	
 	public function test() {
 		$document = new Post();
 		$document->setAuthor('tester');

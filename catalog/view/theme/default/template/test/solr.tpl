@@ -22,10 +22,11 @@ input[name='content'] {width: 500px;}
 </head>
 <body>
 <div id="warper" >
+	<div><a href="<?php echo $home; ?>" >HOME</a></div>
 	<div id="header" >
 		<input name="search" type="text" />
-		<button onclick="window.location='http://localhost:8983/solr/select/?q=content_t:' + $('input[name=\'search\']').val() + '&version=2.2&start=0&rows=10&indent=on';" >Search Content</button>
-		<button onclick="window.location='http://localhost:8983/solr/select/?q=author_t:' + $('input[name=\'search\']').val() + '&version=2.2&start=0&rows=10&indent=on';" >Search Author</button>
+		<button onclick="window.location='<?php echo $search; ?>' + '&content=' + $('input[name=\'search\']').val();" >Search Content</button>
+		<button onclick="window.location='<?php echo $search; ?>' + '&author=' + $('input[name=\'search\']').val();" >Search Author</button>
 	</div>
 	<div id="content" >
 		<?php foreach ($posts as $post) { ?>
@@ -37,12 +38,13 @@ input[name='content'] {width: 500px;}
 				<span class="post-content" ><?php echo $post['content']; ?></span>
 			</div>
 			<div>
-				<span class="post-create" ><?php echo $post['create']; ?></span><span onclick="window.location='http://localhost/solrbundle/index.php?route=test/solr/delete&id=<?php echo $post['id']; ?>';" >[X]</span>
+				<span class="post-create" ><?php echo $post['create']; ?></span><span onclick="window.location='<?php echo $delete . '&id=' . $post['id']; ?>';" >[delete]</span>
 			</div>
 			<div class="cleaner" ></div>
 		</div>
 		<?php } ?>
-		<form method="POST" >
+		<?php if(isset($add)) { ?>
+		<form method="POST" action="<?php echo $add; ?>" >
 		<div id="postform-warper" >
 			<div>
 				Author: 
@@ -55,10 +57,9 @@ input[name='content'] {width: 500px;}
 			<div><input type="submit" value="Submit" /></div>
 		</div>
 		</form>
+		<?php } ?>
 	</div>
 	<div id="footer" >
-		<a href="http://localhost:8983/solr/select/?q=content_t:test&version=2.2&start=0&rows=10&indent=on" >Search</a><br />
-		<a href="http://localhost:8983/solr/select/?q=id:511e4ceb913db4a408000006&version=2.2&start=0&rows=10&indent=on" >Search</a><br />
 	</div>
 </div>
 </body>
