@@ -27,7 +27,7 @@ class DocumentConverter implements Converter
 
         foreach ($metadata->getFieldNames() as $fieldName) {
 			$action = 'get' . ucfirst($fieldName);
-            $converted->addField($metadata->getSolrFieldName($fieldName), $document->$fieldName);
+            $converted->addField($metadata->getSolrFieldName($fieldName), $document->$action());
         }
 
         return $converted;
@@ -44,7 +44,9 @@ class DocumentConverter implements Converter
 
         foreach ($document->getFields() as $field => $value) {
             if (isset($map[$field])) {
-                $converted->{$map[$field]} = $value;
+				$action = 'set' . ucfirst($map[$field]);
+                //$converted->{$map[$field]} = $value;
+				$converted->$action($value);
             }
         }
 

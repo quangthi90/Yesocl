@@ -1,11 +1,25 @@
 <?php
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
+use Document\User\Email;
 
-/** @MongoDB\Document(db="yesocl", collection="user") */
+/** 
+ * @MongoDB\Document(db="yesocl", collection="user")
+ * @SOLR\Document(collection="user")
+ */
 Class User {
-	/** @MongoDB\Id */
+	/** 
+	 * @MongoDB\Id 
+	 * @SOLR\UniqueKey
+	 * @Solr\Field(type="id")
+	 */
 	private $id; 
+	
+	/**
+	 * @SOLR\Field(type="string");
+	 */
+	private $primaryEmail;
 
 	/** @MongoDB\EmbedMany(targetDocument="Email") */
 	private $emails = array();
@@ -36,10 +50,14 @@ Class User {
 	 * 		string email have primary key
 	 * 		null if not found email with primary key
 	 */
-	public function getPrimaryEmail(){
+	public function getPrimaryEmail( $isObject = false){
 		foreach ( $this->emails as $email ){
 			if ( $email->getPrimary() === true ){
-				return $email;
+				if ( $isObject ) {
+					return $email;
+				}else {
+					return $email->getEmail();
+				}
 			}
 		}
 		return null;
@@ -71,8 +89,35 @@ Class User {
 		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
 	}
 
+	public function setId( $id ){
+		$this->id = $id;
+	}
+	
 	public function getId(){
 		return $this->id;
+	}
+	
+	public function setPrimaryEmail( $primary_email ){
+		// disable old primary email
+		foreach ( $this->emails as $key => $email ){
+			if ( $email->getPrimary() === true ){
+				$this->emails[$key]->setPrimary( false );
+			}
+		}
+		
+		// check exist emails
+		if ( $this->isExistEmail( $primary_email ) ) {
+			foreach ($this->emails as $key => $email) {
+				if ( $email->getEmail() === $primary_email ){
+					$this->emails[$key]->setPrimary( true );
+				}
+			}
+		}else {
+			$new_primary_email = new Email();
+			$new_primary_email->setEmail( $primary_email );
+			$new_primary_email->setPrimary( true );
+			$this->emails->addEmail( $new_primary_email );
+		}
 	}
 
 	public function addEmail( Email $email ){

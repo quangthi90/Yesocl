@@ -3,13 +3,22 @@ namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Solr\Mapping\Annotations as SOLR;
 
-/** @MongoDB\EmbeddedDocument */
+/** 
+ * @MongoDB\EmbeddedDocument
+ * @SOLR\Document(collection="email") 
+ */
 Class Email {
-	/** @MongoDB\Id */
+	/** 
+	 * @MongoDB\Id 
+	 * @SOLR\UniqueKey
+	 * @Solr\Field(type="id")
+	 */
 	private $id; 
 
-	/** @SOLR\Field */
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 * @Solr\Field(type="string")
+	 */
 	private $email;
 	
 	/** @MongoDB\Boolean */
