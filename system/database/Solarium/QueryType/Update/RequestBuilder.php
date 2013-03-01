@@ -112,31 +112,39 @@ class RequestBuilder extends BaseRequestBuilder
      */
     public function buildAddXml($command)
     {
-        $xml = '<add';
-        $xml .= $this->boolAttrib('overwrite', $command->getOverwrite());
-        $xml .= $this->attrib('commitWithin', $command->getCommitWithin());
-        $xml .= '>';
-
+		$doc_xml = '';
         foreach ($command->getDocuments() as $doc) {
-            $xml .= '<doc';
-            $xml .= $this->attrib('boost', $doc->getBoost());
-            $xml .= '>';
+			if ($doc) {
+				$doc_xml .= '<doc';
+				$doc_xml .= $this->attrib('boost', $doc->getBoost());
+				$doc_xml .= '>';
 
-            foreach ($doc->getFields() as $name => $value) {
-                $boost = $doc->getFieldBoost($name);
-                if (is_array($value)) {
-                    foreach ($value as $multival) {
-                        $xml .= $this->buildFieldXml($name, $boost, $multival);
-                    }
-                } else {
-                    $xml .= $this->buildFieldXml($name, $boost, $value);
-                }
-            }
+				foreach ($doc->getFields() as $name => $value) {
+					$boost = $doc->getFieldBoost($name);
+					if (is_array($value)) {
+						foreach ($value as $multival) {
+							$doc_xml .= $this->buildFieldXml($name, $boost, $multival);
+						}
+					} else {
+						$doc_xml .= $this->buildFieldXml($name, $boost, $value);
+					}
+				}
 
-            $xml .= '</doc>';
+				$doc_xml .= '</doc>';
+			}
         }
+		
+		$xml = '';
+		if ($doc_xml) {
+			$xml .= '<add';
+			$xml .= $this->boolAttrib('overwrite', $command->getOverwrite());
+			$xml .= $this->attrib('commitWithin', $command->getCommitWithin());
+			$xml .= '>';
+			
+			$xml .= $doc_xml;
 
-        $xml .= '</add>';
+			$xml .= '</add>';
+		}
 
         return $xml;
     }
@@ -169,14 +177,29 @@ class RequestBuilder extends BaseRequestBuilder
      */
     public function buildDeleteXml($command)
     {
-        $xml = '<delete>';
+		$id_xml = '';
         foreach ($command->getIds() as $id) {
-            $xml .= '<id>' . htmlspecialchars($id, ENT_NOQUOTES, 'UTF-8') . '</id>';
+			if ($id) {
+				$id_xml .= '<id>' . htmlspecialchars($id, ENT_NOQUOTES, 'UTF-8') . '</id>';
+			}
         }
+		
+		$query_xml = '';
         foreach ($command->getQueries() as $query) {
-            $xml .= '<query>' . htmlspecialchars($query, ENT_NOQUOTES, 'UTF-8') . '</query>';
+			if ($query) {
+				$query_xml .= '<query>' . htmlspecialchars($query, ENT_NOQUOTES, 'UTF-8') . '</query>';
+			}
         }
-        $xml .= '</delete>';
+        
+		$xml = '';
+		if (count($command->getIds()) + count($command->getQueries())) {
+			$xml = '<delete>';
+			
+			$xml .= $id_xml;
+			$xml .= $query_xml;
+			
+			$xml .= '</delete>';
+		}
 
         return $xml;
     }

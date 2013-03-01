@@ -22,15 +22,19 @@ class DocumentConverter implements Converter
     {
         /** @var $metadata DocumentMetadata */
         $metadata = $this->cmf->getMetadataFor(get_class($document));
-	
-        $converted = new Document();
+		
+		if ($metadata->hasField('id')) {
+			$converted = new Document();
 
-        foreach ($metadata->getFieldNames() as $fieldName) {
-			$action = 'get' . ucfirst($fieldName);
-            $converted->addField($metadata->getSolrFieldName($fieldName), $document->$action());
-        }
+			foreach ($metadata->getFieldNames() as $fieldName) {
+				$action = 'get' . ucfirst($fieldName);
+				$converted->addField($metadata->getSolrFieldName($fieldName), $document->$action());
+			}
 
-        return $converted;
+			return $converted;
+		}else {
+			return null;
+		}
     }
 
     public function fromSolrDocument($document, $class)
@@ -45,8 +49,7 @@ class DocumentConverter implements Converter
         foreach ($document->getFields() as $field => $value) {
             if (isset($map[$field])) {
 				$action = 'set' . ucfirst($map[$field]);
-                //$converted->{$map[$field]} = $value;
-				$converted->$action($value);
+                $converted->$action($value);
             }
         }
 
@@ -60,9 +63,13 @@ class DocumentConverter implements Converter
             $document = $this->toSolrDocument($document);
         }
         $query = array();
-        foreach ($document->getIterator() as $key => $value) {
-            $query[] = "(${key}:\"${value}\")";
-        }
+		
+		if ($document) {
+			foreach ($document->getIterator() as $key => $value) {
+				$query[] = "(${key}:\"${value}\")";
+			}
+		}
+		
         return implode('AND', $query);
     }
 }

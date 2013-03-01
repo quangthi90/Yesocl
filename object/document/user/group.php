@@ -4,14 +4,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
- * @MongoDB\Document(db="yesocl", collection="user_group")
- * @SOLR\Document(collection="user_group") 
+ * @MongoDB\Document(db="yesocl", collection="user_group") 
  */
 Class Group {
 	/** 
 	 * @MongoDB\Id 
-	 * @SOLR\UniqueKey
-	 * @Solr\Field(type="id")
 	 */
 	private $id; 
 

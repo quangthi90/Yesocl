@@ -753,7 +753,7 @@ class Client extends Configurable
             return $event->getResult();
         }
 
-        $request = $this->createRequest($query);// debug point
+        $request = $this->createRequest($query);
         $response = $this->executeRequest($request, $endpoint);
         $result = $this->createResult($query, $response);
 
@@ -784,6 +784,7 @@ class Client extends Configurable
         if ($event->getResponse() !== null) {
             $response = $event->getResponse(); //a plugin result overrules the standard execution result
         } else {
+		echo '<pre>';var_dump($request);echo '</pre>';
             $response = $this->getAdapter()->execute($request, $endpoint);// debug point
         }
 
