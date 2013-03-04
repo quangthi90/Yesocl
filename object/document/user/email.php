@@ -19,6 +19,11 @@ Class Email {
 	/** @MongoDB\Boolean */
 	private $primary;
 
+	/**
+	 * @MongoDB\String
+	 */
+	private $visible;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -37,5 +42,13 @@ Class Email {
 
 	public function getPrimary(){
 		return $this->primary;
+	}
+
+	public function setVisible( $visible ){
+		$this->visible = $visible;
+	}
+
+	public function getVisible(){
+		return $this->visible;
 	}
 }

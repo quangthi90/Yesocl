@@ -21,6 +21,27 @@ Class Meta {
 	 */
 	private $lastname;
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $headingLine;
+
+	/** @MongoDB\EmbedOne(targetDocument="Location") */
+    private $location;
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $postalCode;
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $industry;
+
+	/** @MongoDB\EmbedMany(targetDocument="Former") */
+	private $formers = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -39,5 +60,49 @@ Class Meta {
 
 	public function getLastname(){
 		return $this->lastname;
+	}
+
+	public function setHeadingLine( $headingLine ){
+		$this->headingLine = $headingLine;
+	}
+
+	public function getHeadingLine(){
+		return $this->headingLine;
+	}
+
+	public function setLocation( $location ){
+		$this->location = $location;
+	}
+
+	public function getLocation(){
+		return $this->location;
+	}
+
+	public function setPostalCode( $postalCode ){
+		$this->postalCode = $postalCode;
+	}
+
+	public function getPostalCode(){
+		return $this->postalCode;
+	}
+
+	public function setIndustry( $industry ){
+		$this->industry = $industry;
+	}
+
+	public function getIndustry(){
+		return $this->industry;
+	}
+
+	public function addFormer( Former $former ){
+		$this->formers[] = $former;
+	}
+
+	public function setFormers( $formers ){
+		$this->formers = $formers;
+	}
+
+	public function getFormers(){
+		return $this->formers;
 	}
 }
