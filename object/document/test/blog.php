@@ -5,7 +5,7 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="test_blog")
- * @SOLR\Document(collection="blog")
+ * @SOLR\Document(collection="test_blog")
  */
 Class Blog {
 	/** 
