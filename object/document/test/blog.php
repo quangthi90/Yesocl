@@ -5,7 +5,7 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="test_blog")
- * @SOLR\Document(collection="post")
+ * @SOLR\Document(collection="blog")
  */
 Class Blog {
 	/** 
@@ -17,13 +17,11 @@ Class Blog {
 
 	/** 
 	 * @MongoDB\String 
-	 * @SOLR\Field(type="string")
 	 */
 	private $author;
 
 	/** 
 	 * @MongoDB\String 
-	 * @SOLR\Field(type="string")
 	 */
 	private $name;
 
@@ -72,8 +70,8 @@ Class Blog {
 	}
 
 	public function getSolrContent(){
-		$solrContent = '';
-
+		$solrContent = $this->name;
+		$solrContent .= $this->author;
 		if (count($this->posts) > 0) {
 			foreach ($this->posts as $post) {
 				$solrContent .= $post->getAuthor() . ' ' . $post->getContent() . ' ';
