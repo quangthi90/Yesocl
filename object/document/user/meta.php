@@ -42,6 +42,18 @@ Class Meta {
 	/** @MongoDB\EmbedMany(targetDocument="Former") */
 	private $formers = array();
 
+	/** @MongoDB\String */
+	private $im;
+
+	/** @MongoDB\String */
+	private $phone;
+
+	/** @MongoDB\String */
+	private $address;
+
+	/** @MongoDB\EmbedMany(targetDocument="Website") */
+	private $websites = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -104,5 +116,41 @@ Class Meta {
 
 	public function getFormers(){
 		return $this->formers;
+	}
+
+	public function setIm( $im ){
+		$this->im = $im;
+	}
+
+	public function getIm(){
+		return $this->im;
+	}
+
+	public function setPhone( $phone ){
+		$this->phone = $phone;
+	}
+
+	public function getPhone(){
+		return $this->phone;
+	}
+
+	public function setAddresss( $address ){
+		$this->address = $address;
+	}
+
+	public function getAddresss(){
+		return $this->address;
+	}
+
+	public function addWebsite( Website $website ){
+		$this->websites[] = $website;
+	}
+
+	public function setWebsites( $websites ){
+		$this->websites = $websites;
+	}
+
+	public function getWebsites(){
+		return $this->websites;
 	}
 }

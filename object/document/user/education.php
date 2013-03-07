@@ -25,8 +25,8 @@ Class Education {
 	/** @MongoDB\String */
 	private $grace;
 
-	/** @MongoDB\EmbedMany(targetDocument="Experience") */
-    private $societies = array();
+	/** @MongoDB\String */
+    private $societies;
 
     /** @MongoDB\String */
 	private $description;
@@ -81,10 +81,6 @@ Class Education {
 
 	public function getGrace() {
 		return $this->grace;
-	}
-
-	public function addSociety( Societiy $society ){
-		$this->societies[] = $society;
 	}
 
 	public function setSocieties( $societies ){

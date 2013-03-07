@@ -22,22 +22,10 @@ Class User {
 	/** @MongoDB\EmbedMany(targetDocument="Email") */
 	private $emails = array();
 
-	/** @MongoDB\EmbedMany(targetDocument="Im") */
-	private $ims = array();
-
-	/** @MongoDB\EmbedMany(targetDocument="Phone") */
-	private $phones = array();
-
-	/** @MongoDB\EmbedMany(targetDocument="Address") */
-	private $addresses = array();
-
-	/** @MongoDB\EmbedMany(targetDocument="Website") */
-	private $websites = array();
-
 	/** @MongoDB\EmbedOne(targetDocument="Meta") */
     private $meta;
 
-    /** @MongoDB\ReferenceOne(targetDocument="Background", inversedBy="user") */
+    /** @MongoDB\EmbedOne(targetDocument="Background") */
     private $background;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
@@ -82,54 +70,6 @@ Class User {
 
 	public function getEmails(){
 		return $this->emails;
-	}
-
-	public function addIm( Im $im ){
-		$this->ims[] = $im;
-	}
-
-	public function setIms( $ims ){
-		$this->ims = $ims;
-	}
-
-	public function getIms(){
-		return $this->ims;
-	}
-
-	public function addPhone( Phone $phone ){
-		$this->phones[] = $phone;
-	}
-
-	public function setPhones( $phones ){
-		$this->phones = $phones;
-	}
-
-	public function getPhones(){
-		return $this->phones;
-	}
-
-	public function addAddress( Address $address ){
-		$this->addresses[] = $address;
-	}
-
-	public function setAddresss( $addresses ){
-		$this->addresses = $addresses;
-	}
-
-	public function getAddresss(){
-		return $this->addresses;
-	}
-
-	public function addWebsite( Website $website ){
-		$this->websites[] = $website;
-	}
-
-	public function setWebsites( $websites ){
-		$this->websites = $websites;
-	}
-
-	public function getWebsites(){
-		return $this->websites;
 	}
 
 	public function setMeta( $meta ){

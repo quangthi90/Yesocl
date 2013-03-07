@@ -19,7 +19,7 @@ Class Website {
 	/**
 	 * @MongoDB\String
 	 */
-	private $visible;
+	private $title;
 
 	public function getId(){
 		return $this->id;
@@ -33,11 +33,11 @@ Class Website {
 		return $this->url;
 	}
 
-	public function setVisible( $visible ){
-		$this->visible = $visible;
+	public function setTitle( $title ){
+		$this->title = $title;
 	}
 
-	public function getVisible(){
-		return $this->visible;
+	public function getTitle(){
+		return $this->title;
 	}
 }

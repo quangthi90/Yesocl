@@ -11,9 +11,6 @@ Class Background {
 	 */
 	private $id; 
 
-	/** @MongoDB\ReferenceOne(targetDocument="User", inversedBy="background") */
-    private $user;
-
     /** @MongoDB\EmbedMany(targetDocument="Experience") */
     private $experiences = array();
 
@@ -34,14 +31,6 @@ Class Background {
 
 	public function getId(){
 		return $this->id;
-	}
-
-	public function setUser( $user ){
-		$this->user = $user;
-	}
-
-	public function getUser(){
-		return $this->user;
 	}
 
 	public function addExperience( Experience $experience ){
