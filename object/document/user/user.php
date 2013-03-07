@@ -2,32 +2,64 @@
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** @MongoDB\Document(db="yesocl", collection="user") */
+/** 
+ * @MongoDB\Document(db="yesocl", collection="user")
+ */
 Class User {
-	/** @MongoDB\Id */
+	/** 
+	 * @MongoDB\Id 
+	 */
 	private $id; 
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $username;
+
+	/** @MongoDB\String */
+	private $password;
 
 	/** @MongoDB\EmbedMany(targetDocument="Email") */
 	private $emails = array();
-	
-	/** @MongoDB\String */
-	private $password;
+
+	/** @MongoDB\EmbedOne(targetDocument="Meta") */
+    private $meta;
+
+    /** @MongoDB\EmbedOne(targetDocument="Background") */
+    private $background;
+
+	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
+    private $groupUser;
+
+    /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
+	private $groups = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
 	
 	/** @MongoDB\Date */
 	private $created;
-	
-	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
-    private $groupUser;
-	
-	/** @MongoDB\EmbedOne(targetDocument="Meta") */
-    private $meta;
-	
-	/** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
-	private $groups = array();
-	
+
+	public function getId() {
+		return $this->id;
+	}
+
+	public function setUsername( $username ){
+		$this->username = $username;
+	}
+
+	public function getUsername(){
+		return $this->username;
+	}
+
+	public function setPassword( $password ){
+		$this->password = $password;
+	}
+
+	public function getPassword(){
+		return $this->password;
+	}
+
 	/**
 	 * Get Primary Email
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -36,43 +68,17 @@ Class User {
 	 * 		string email have primary key
 	 * 		null if not found email with primary key
 	 */
-	public function getPrimaryEmail(){
+	public function getPrimaryEmail( $isObject = false){
 		foreach ( $this->emails as $email ){
 			if ( $email->getPrimary() === true ){
-				return $email;
+				if ( $isObject ) {
+					return $email;
+				}else {
+					return $email->getEmail();
+				}
 			}
 		}
 		return null;
-	}
-	
-	/**
-	 * Check exit Email
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: string Email
-	 * @return: boolean
-	 */
-	public function isExistEmail( $email ){
-		foreach ( $this->emails as $data ){
-			if ( $data->getEmail() === $email ){
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Get Full name
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @return: 
-	 * 		string full name
-	 */
-	public function getFullname(){
-		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
-	}
-
-	public function getId(){
-		return $this->id;
 	}
 
 	public function addEmail( Email $email ){
@@ -87,12 +93,40 @@ Class User {
 		return $this->emails;
 	}
 
-	public function setPassword( $password ){
-		$this->password = $password;
+	public function setMeta( $meta ){
+		$this->meta = $meta;
 	}
 
-	public function getPassword(){
-		return $this->password;
+	public function getMeta(){
+		return $this->meta;
+	}
+
+	public function setBackground( $background ){
+		$this->background = $background;
+	}
+
+	public function getBackground(){
+		return $this->background;
+	}
+
+	public function setGroupUser( $groupUser ){
+		$this->groupUser = $groupUser;
+	}
+
+	public function getGroupUser(){
+		return $this->groupUser;
+	}
+
+	public function addGroup( \Document\Group\Group $group ){
+		$this->groups[] = $group;
+	}
+
+	public function setGroups( $groups ){
+		$this->groups = $groups;
+	}
+
+	public function getGroups(){
+		return $this->groups;
 	}
 
 	public function setStatus( $status ){
@@ -114,33 +148,5 @@ Class User {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
-	}
-
-	public function setGroupUser( $groupUser ){
-		$this->groupUser = $groupUser;
-	}
-
-	public function getGroupUser(){
-		return $this->groupUser;
-	}
-
-	public function setMeta( $meta ){
-		$this->meta = $meta;
-	}
-
-	public function getMeta(){
-		return $this->meta;
-	}
-
-	public function addGroup( \Document\Group\Group $group ){
-		$this->groups[] = $group;
-	}
-
-	public function setGroups( $groups ){
-		$this->groups = $groups;
-	}
-
-	public function getGroups(){
-		return $this->groups;
 	}
 }

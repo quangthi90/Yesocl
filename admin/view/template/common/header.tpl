@@ -99,6 +99,12 @@ $(document).ready(function(){
               <li><a href="<?php echo $street; ?>"><?php echo $text_street; ?></a></li>
             </ul>
           </li>
+          <li><a class="parent"><?php echo $text_information; ?></a>
+            <ul>
+              <li><a href="<?php echo $industry; ?>"><?php echo $text_industry; ?></a></li>
+              <li><a href="<?php echo $school; ?>"><?php echo $text_school; ?></a></li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>

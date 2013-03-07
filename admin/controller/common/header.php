@@ -54,6 +54,10 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_district'] = $this->language->get('text_district');
 		$this->data['text_ward'] = $this->language->get('text_ward');
 		$this->data['text_street'] = $this->language->get('text_street');
+
+		$this->data['text_information'] = $this->language->get('text_information');
+		$this->data['text_industry'] = $this->language->get('text_industry');
+		$this->data['text_school'] = $this->language->get('text_school');
 		
 		// Other
 		$this->data['text_confirm'] = $this->language->get('text_confirm');
@@ -79,6 +83,9 @@ class ControllerCommonHeader extends Controller {
 		$this->data['ward'] = $this->url->link('localisation/ward');
 		$this->data['street'] = $this->url->link('localisation/street');
 		
+		// information
+		$this->data['industry'] = $this->url->link('information/industry');
+		$this->data['school'] = $this->url->link('information/school');
 		
 		
 		$this->template = 'common/header.tpl';

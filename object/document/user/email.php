@@ -1,15 +1,19 @@
 <?php
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Doctrine\Solr\Mapping\Annotations as SOLR;
 
-/** @MongoDB\EmbeddedDocument */
+/** 
+ * @MongoDB\EmbeddedDocument
+ */
 Class Email {
-	/** @MongoDB\Id */
+	/** 
+	 * @MongoDB\Id 
+	 */
 	private $id; 
 
-	/** @SOLR\Field */
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 */
 	private $email;
 	
 	/** @MongoDB\Boolean */
