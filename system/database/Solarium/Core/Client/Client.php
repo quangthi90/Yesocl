@@ -753,7 +753,7 @@ class Client extends Configurable
             return $event->getResult();
         }
 
-        $request = $this->createRequest($query);// debug point
+        $request = $this->createRequest($query);
         $response = $this->executeRequest($request, $endpoint);
         $result = $this->createResult($query, $response);
 
