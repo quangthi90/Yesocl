@@ -60,7 +60,7 @@ class ModelInformationSchool extends Doctrine {
 	}
 	
 	public function getTotalSchools() {
-		$schools = $this->dm->getRepository( 'Document\Information\school' )->findAll();
+		$schools = $this->dm->getRepository( 'Document\Information\School' )->findAll();
 
 		return count($schools);
 	}
