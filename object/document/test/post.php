@@ -13,10 +13,14 @@ Class Blog {
 
 	/** 
 	 * @MongoDB\String 
+	 * @BmSolr
 	 */
 	private $author;
 
-	/** @MongoDB\String */
+	/** 
+	 * @BmSolr
+	 * @MongoDB\String 
+	 */
 	private $content;
 
 	public function getId() {

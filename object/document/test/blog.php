@@ -21,17 +21,13 @@ Class Blog {
 	private $author;
 
 	/** 
+	 * @BmSolr
 	 * @MongoDB\String 
 	 */
 	private $name;
 
-	/** @MongoDB\EmbedMany(targetDocument="Post") */
+	/** @MongoDB\EmbedMany(targetDocument="\Test\Post") */
 	private $posts = array();
-
-	/**
-	 * @SOLR\Field(type="text")
-	 */
-	private $solrContent;
 
 	public function getId() {
 		return $this->id;
@@ -65,19 +61,27 @@ Class Blog {
 		return $this->posts;
 	}
 
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrContent;
+
 	public function setSolrContent( $solrContent ){
 		$this->solrContent = $solrContent;
 	}
 
 	public function getSolrContent(){
-		$solrContent = $this->name;
-		$solrContent .= $this->author;
-		if (count($this->posts) > 0) {
-			foreach ($this->posts as $post) {
-				$solrContent .= $post->getAuthor() . ' ' . $post->getContent() . ' ';
+		$solrContent = "";
+		$solrContent .= $this->getName() . "  ";
+
+		if ( count($this->getPosts()) > 0 ) {
+			foreach ($this->getPosts() as $data) {
+		$solrContent .= $data->getAuthor() . "  ";
+		$solrContent .= $data->getContent() . "  ";
 			}
 		}
-		
-		return $this->solrContent;
+
+		$this->solrContent = $solrContent;
+		return $solrContent;
 	}
 }
