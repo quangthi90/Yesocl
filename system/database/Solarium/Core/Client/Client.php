@@ -784,6 +784,7 @@ class Client extends Configurable
         if ($event->getResponse() !== null) {
             $response = $event->getResponse(); //a plugin result overrules the standard execution result
         } else {
+		echo '<pre>';var_dump($request);echo '</pre>';
             $response = $this->getAdapter()->execute($request, $endpoint);// debug point
         }
 

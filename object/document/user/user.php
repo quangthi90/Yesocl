@@ -39,6 +39,7 @@ Class User {
 	
 	/** @MongoDB\Date */
 	private $created;
+	}
 
 	public function getId() {
 		return $this->id;
@@ -52,33 +53,12 @@ Class User {
 		return $this->username;
 	}
 
-	public function setPassword( $password ){
-		$this->password = $password;
+	public function setMeta( $meta ){
+		$this->meta = $meta;
 	}
 
-	public function getPassword(){
-		return $this->password;
-	}
-
-	/**
-	 * Get Primary Email
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: empty
-	 * @return: 
-	 * 		string email have primary key
-	 * 		null if not found email with primary key
-	 */
-	public function getPrimaryEmail( $isObject = false){
-		foreach ( $this->emails as $email ){
-			if ( $email->getPrimary() === true ){
-				if ( $isObject ) {
-					return $email;
-				}else {
-					return $email->getEmail();
-				}
-			}
-		}
-		return null;
+	public function getMeta(){
+		return $this->meta;
 	}
 
 	public function addEmail( Email $email ){
