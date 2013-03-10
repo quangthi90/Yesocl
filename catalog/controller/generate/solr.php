@@ -30,7 +30,7 @@ class ControllerGenerateSolr extends Controller{
 
 		// print($code);
 		// exit;
-		$file = DIR_ROOT . 'object/document/' . $this->request->get['document'] . '.php';
+		$file = DIR_ROOT . 'object/' . $this->request->get['document'] . '.php';
 
 		$fp = fopen( $file, 'a' );
 		fwrite($fp, $code);
@@ -40,7 +40,7 @@ class ControllerGenerateSolr extends Controller{
 	}
 
 	private function getCode( $file_name, $parent ){
-		$file = DIR_ROOT . 'object/document/' . $file_name . '.php';
+		$file = DIR_ROOT . 'object/' . $file_name . '.php';
 		
 		$lines = file($file);
 		

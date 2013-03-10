@@ -152,7 +152,7 @@ class ControllerUserUser extends Controller {
 			
 				$this->data['users'][] = array(
 					'id' => $user->getId(),
-					'email' => $user->getPrimaryEmail( true )->getEmail(),
+					'email' => $user->getPrimaryEmail()->getEmail(),
 					'status' => $user->getStatus() === true ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'group' => $user->getGroupUser()->getName(),
 					'action' => $action,

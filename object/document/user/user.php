@@ -39,7 +39,6 @@ Class User {
 	
 	/** @MongoDB\Date */
 	private $created;
-	}
 
 	public function getId() {
 		return $this->id;
@@ -53,14 +52,6 @@ Class User {
 		return $this->username;
 	}
 
-	public function setMeta( $meta ){
-		$this->meta = $meta;
-	}
-
-	public function getMeta(){
-		return $this->meta;
-	}
-
 	public function addEmail( Email $email ){
 		$this->emails[] = $email;
 	}
@@ -71,6 +62,14 @@ Class User {
 
 	public function getEmails(){
 		return $this->emails;
+	}
+	
+	public function getPrimaryEmail() {
+		foreach ($this->emails as $email) {
+			if ($email->getPrimary()) {
+				return $email;
+			}
+		}
 	}
 
 	public function setMeta( $meta ){
