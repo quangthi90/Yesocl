@@ -1,9 +1,11 @@
 <?php
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="user")
+ * @SOLR\Document(collection="user")
  */
 Class User {
 	/** 
@@ -12,6 +14,7 @@ Class User {
 	private $id; 
 
 	/** 
+	 * @BmSolr
 	 * @MongoDB\String 
 	 */
 	private $username;
@@ -19,10 +22,16 @@ Class User {
 	/** @MongoDB\String */
 	private $password;
 
-	/** @MongoDB\EmbedMany(targetDocument="Email") */
+	/** 
+	 * @BmSolr
+	 * @MongoDB\EmbedMany(targetDocument="Document/User/Email") 
+	 */
 	private $emails = array();
 
-	/** @MongoDB\EmbedOne(targetDocument="Meta") */
+	/** 
+	 * @BmSolr
+	 * @MongoDB\EmbedOne(targetDocument="Document/User/Meta") 
+	 */
     private $meta;
 
     /** @MongoDB\EmbedOne(targetDocument="Background") */
@@ -127,5 +136,33 @@ Class User {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrContent;
+
+	public function setSolrContent( $solrContent ){
+		$this->solrContent = $solrContent;
+	}
+
+	public function getSolrContent(){
+		$solrContent = "";
+
+		$solrContent .= $this->getUsername() . "  ";
+
+		if ( count($this->getEmails()) > 0 ) {
+			foreach ($this->getEmails() as $data) {
+		$solrContent .= $data->getEmail() . "  ";
+			}
+		}
+
+		$solrContent .= $this->meta->getFirstname() . "  ";
+		$solrContent .= $this->meta->getLastname() . "  ";
+
+
+		$this->solrContent = $solrContent;
+		return $solrContent;
 	}
 }

@@ -20,16 +20,16 @@ class ControllerGenerateSolr extends Controller{
 
 		$code .= "\n\n\t" . 'public function getSolrContent(){';
 		$code .= "\n\t\t" . '$solrContent = "";';
+		$code .= "\n";
 		
 		$code .= $this->getCode( $this->request->get['document'], '$this->' );
 
-		$code .= "\n\t\t" . '$this->solrContent = $solrContent;';
+		$code .= "\n";
+		$code .= "\n\n\t\t" . '$this->solrContent = $solrContent;';
 		$code .= "\n\t\t" . 'return $solrContent;';
 		$code .= "\n\t" . '}';
 		$code .= "\n" . '}';
-
-		// print($code);
-		// exit;
+		
 		$file = DIR_ROOT . 'object/' . $this->request->get['document'] . '.php';
 
 		$fp = fopen( $file, 'a' );
@@ -40,7 +40,7 @@ class ControllerGenerateSolr extends Controller{
 	}
 
 	private function getCode( $file_name, $parent ){
-		$file = DIR_ROOT . 'object/' . $file_name . '.php';
+		$file = DIR_ROOT . 'object/' . strtolower($file_name) . '.php';
 		
 		$lines = file($file);
 		
@@ -56,45 +56,54 @@ class ControllerGenerateSolr extends Controller{
 
 		$clear_document = array(
 			'/** @MongoDB\EmbedMany(targetDocument="', 
-			'/** @MongoDB\ReferenceMany(targetDocument="',
+			'* @MongoDB\EmbedMany(targetDocument="',
+			'/** @MongoDB\EmbedOne(targetDocument="',  
+			'* @MongoDB\EmbedOne(targetDocument="',
 			'") */',
+			'")',
 		);
 
 		$code = '';
 		
+		$collected = true;
 		foreach ( $lines as $key => $line ){
-			if ( strpos($line, '@BmSolr') != null ){
+			if ( strpos($line, '@BmSolr') != null ) {
 				$collected = false;
-				for ( $i = $key; $i < count($lines); $i++ ){
-					if ( strpos($lines[$i], '$') != null ){
-						$param_name = 'get' . trim( ucwords(str_replace($clear_global, "", $lines[$i])) ) . '()';
-						$collected = true;
-						$code .= "\n\t\t" . '$solrContent .= ' . $parent . $param_name . ' . "  ";';
-					}
-
-					if ( $collected ){
-						break;
-					}
-				}
 			}
 
-			if ( strpos($line, "EmbedMany") != null ){
-				$file_name = trim( str_replace($clear_document, "", $line) );
+			if ( !$collected ) {
+				if ( strpos($line, "EmbedMany") != null ) {
+					$file_name = trim( str_replace($clear_document, "", $line) );
+					$param = $this->getParam($lines, $key);
 
-				$param = $this->getParam($lines, $key);
-				$code .= "\n\n\t\t" . 'if ( count($this->' . $param . ') > 0 ) {';
-				$code .= "\n\t\t\t" . 'foreach ($this->' . $param . ' as $data) {';
-				$code .= $this->getCode( $file_name, '$data->' );
-				$code .= "\n\t\t\t" . '}';
-				$code .= "\n\t\t" . '}' . "\n";
-				// print($code); exit;
+					$code .= "\n\n\t\t" . 'if ( count($this->' . $param . ') > 0 ) {';
+					$code .= "\n\t\t\t" . 'foreach ($this->' . $param . ' as $data) {';
+					$code .= $this->getCode( $file_name, '$data->' );
+					$code .= "\n\t\t\t" . '}';
+					$code .= "\n\t\t" . '}';
+					$code .= "\n";
+
+					$collected = true;
+				}elseif( strpos($line, "EmbedOne") != null) {
+					$file_name = trim( str_replace($clear_document, "", $line) );
+					$param = $this->getParam($lines, $key, $upcase = false);
+
+					$code .= $this->getCode( $file_name, $parent . $param . '->' );
+
+					$collected = true;
+				}elseif ( strpos($line, '$') != null ) {
+					$param_name = 'get' . trim( ucwords(str_replace($clear_global, "", $line)) ) . '()';
+					$code .= "\n\t\t" . '$solrContent .= ' . $parent . $param_name . ' . "  ";';
+					
+					$collected = true;
+				}
 			}
 		}
 
 		return $code;
 	}
 
-	private function getParam( $lines, $index ){
+	private function getParam( $lines, $index, $upcase = true ){
 		$clear_global = array(
 			'private',
 			'protected',
@@ -107,7 +116,11 @@ class ControllerGenerateSolr extends Controller{
 
 		for ( $i = $index; $i < count($lines); $i++ ){
 			if ( strpos($lines[$i], '$') != null ){
-				return 'get' . trim( ucwords(str_replace($clear_global, "", $lines[$i])) ) . '()';
+				if ( $upcase ) {
+					return 'get' . trim( ucwords(str_replace($clear_global, "", $lines[$i])) ) . '()';
+				}else {
+					return trim( str_replace($clear_global, "", $lines[$i]) );
+				}
 			}
 		}
 	}
