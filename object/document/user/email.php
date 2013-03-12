@@ -12,7 +12,7 @@ Class Email {
 	private $id; 
 
 	/** 
-	 * @BmSolr
+	 * BmSolr
 	 * @MongoDB\String 
 	 */
 	private $email;

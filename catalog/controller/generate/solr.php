@@ -28,12 +28,31 @@ class ControllerGenerateSolr extends Controller{
 		$code .= "\n\n\t\t" . '$this->solrContent = $solrContent;';
 		$code .= "\n\t\t" . 'return $solrContent;';
 		$code .= "\n\t" . '}';
-		$code .= "\n" . '}';
 		
 		$file = DIR_ROOT . 'object/' . $this->request->get['document'] . '.php';
 
-		$fp = fopen( $file, 'a' );
-		fwrite($fp, $code);
+		$new_file = '';
+		$lines = file($file);
+
+		$position = 0;
+		for ($i = count($lines) - 1; $i > 0; $i--) {
+			if ( strpos($lines[$i], "}") != null ) {
+				$position = $i - 1;
+				break;
+			}
+		}
+
+		foreach ($lines as $key => $line) {
+			if ( strpos($line, "* BmSolr") == null ) {
+				$new_file .= $line;
+				if ( $key == $position ) {
+					$new_file .= $code;
+				}
+			}
+		}
+
+		$fp = fopen( $file, 'w' );
+		fwrite($fp, $new_file);
 		fclose($fp);
 		
 		print "Document is written success! Please check file: " . $file;
@@ -67,7 +86,7 @@ class ControllerGenerateSolr extends Controller{
 		
 		$collected = true;
 		foreach ( $lines as $key => $line ){
-			if ( strpos($line, '@BmSolr') != null ) {
+			if ( strpos($line, 'BmSolr') != null ) {
 				$collected = false;
 			}
 

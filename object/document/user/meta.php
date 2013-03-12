@@ -12,13 +12,13 @@ Class Meta {
 	private $id; 
 
 	/** 
-	 * @BmSolr
+	 * BmSolr
 	 * @MongoDB\String 
 	 */
 	private $firstname;
 	
 	/** 
-	 * @BmSolr
+	 * BmSolr
 	 * @MongoDB\String 
 	 */
 	private $lastname;
