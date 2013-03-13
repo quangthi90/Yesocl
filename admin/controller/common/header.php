@@ -47,6 +47,9 @@ class ControllerCommonHeader extends Controller {
 		
 		// System
 		$this->data['text_system'] = $this->language->get('text_system');
+		$this->data['text_admin'] = $this->language->get('text_admin');
+		$this->data['text_admin_group'] = $this->language->get('text_admin_group');
+		$this->data['text_admin_user'] = $this->language->get('text_admin_user');
 		
 		$this->data['text_localisation'] = $this->language->get('text_localisation');
 		$this->data['text_country'] = $this->language->get('text_country');
@@ -90,6 +93,10 @@ class ControllerCommonHeader extends Controller {
 		$this->data['school'] = $this->url->link('information/school');
 		$this->data['degree'] = $this->url->link('information/degree');
 		$this->data['fieldofstudy'] = $this->url->link('information/fieldofstudy');
+
+		// system
+		$this->data['admin_group'] = $this->url->link('admin/group');
+		$this->data['admin'] = $this->url->link('admin/admin');
 		
 		
 		$this->template = 'common/header.tpl';

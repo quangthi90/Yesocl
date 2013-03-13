@@ -89,15 +89,21 @@ $(document).ready(function(){
           </li>
       	</ul>
       </li>
-      <li id="attribute"><a class="top"><?php echo $text_attributes; ?></a>
+      <!--li id="attribute"><a class="top"><?php echo $text_attributes; ?></a>
       	<ul>
       		<li><a href="<?php echo $attribute; ?>"><?php echo $text_attribute; ?></a></li>
       		<li><a href="<?php echo $attribute_group; ?>"><?php echo $text_attribute_group; ?></a></li>
       		<li><a href="<?php echo $attribute_type; ?>"><?php echo $text_attribute_type; ?></a></li>
       	</ul>
-      </li>
+      </li-->
       <li id="system"><a class="top"><?php echo $text_system; ?></a>
         <ul>
+          <li><a class="parent"><?php echo $text_admin; ?></a>
+            <ul>
+              <li><a href="<?php echo $admin; ?>"><?php echo $text_admin_user; ?></a></li>
+              <li><a href="<?php echo $admin_group; ?>"><?php echo $text_admin_group; ?></a></li>
+            </ul>
+          </li>
           <li><a class="parent"><?php echo $text_localisation; ?></a>
             <ul>
               <li><a href="<?php echo $country; ?>"><?php echo $text_country; ?></a></li>

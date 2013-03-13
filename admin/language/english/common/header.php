@@ -36,6 +36,11 @@ $_['text_school']                      = 'Schools';
 $_['text_degree']                      = 'Degrees';
 $_['text_fieldofstudy']                = 'Fields Of Study';
 
+// System
+$_['text_admin']                       = 'Admin Manage';
+$_['text_admin_group']                 = 'Admin Group';
+$_['text_admin_user']                  = 'Admin';
+
 $_['text_logged']                      = 'You are logged in as <span>%s</span>';
 $_['text_logout']                      = 'Logout';
 $_['text_setting']                     = 'Settings';
