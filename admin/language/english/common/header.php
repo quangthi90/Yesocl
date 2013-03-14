@@ -30,11 +30,9 @@ $_['text_ward']                        = 'Wards';
 $_['text_street']                      = 'Streets';
 
 // User profile
-$_['text_user_profile']                = 'User Profiles';
-$_['text_industry']                    = 'Industries';
-$_['text_school']                      = 'Schools';
-$_['text_degree']                      = 'Degrees';
-$_['text_fieldofstudy']                = 'Fields Of Study';
+$_['text_data_list']                = 'Data List';
+$_['text_type']                    = 'Type';
+$_['text_value']                      = 'Value';
 
 $_['text_logged']                      = 'You are logged in as <span>%s</span>';
 $_['text_logout']                      = 'Logout';

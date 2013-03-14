@@ -79,15 +79,13 @@ $(document).ready(function(){
       				<li><a href="<?php echo $user; ?>"><?php echo $text_user; ?></a></li>
       			</ul>
       		</li>
-          <li><a class="parent"><?php echo $text_user_profile; ?></a>
-            <ul>
-              <li><a href="<?php echo $industry; ?>"><?php echo $text_industry; ?></a></li>
-              <li><a href="<?php echo $school; ?>"><?php echo $text_school; ?></a></li>
-              <li><a href="<?php echo $degree; ?>"><?php echo $text_degree; ?></a></li>
-              <li><a href="<?php echo $fieldofstudy; ?>"><?php echo $text_fieldofstudy; ?></a></li>
-            </ul>
-          </li>
       	</ul>
+      </li>
+      <li><a class="parent"><?php echo $text_data_list; ?></a>
+        <ul>
+          <li><a href="<?php echo $type; ?>"><?php echo $text_type; ?></a></li>
+          <li><a href="<?php echo $value; ?>"><?php echo $text_value; ?></a></li>
+        </ul>
       </li>
       <li id="attribute"><a class="top"><?php echo $text_attributes; ?></a>
       	<ul>
