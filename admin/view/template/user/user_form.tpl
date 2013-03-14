@@ -22,11 +22,11 @@
 		    <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
 		    <li><a href="#tab-email" data-toggle="tab"><?php echo $tab_email; ?></a></li>
 		    <li><a href="#tab-info" data-toggle="tab"><?php echo $tab_information; ?></a></li>
-        <li><a href="#tab-contact" data-toggle="tab">Contact Info</a></li>
-        <li><a href="#tab-website" data-toggle="tab">Website</a></li>
-        <li><a href="#tab-experience" data-toggle="tab">Experience</a></li>
-        <li><a href="#tab-education" data-toggle="tab">Education</a></li>
-        <li><a href="#tab-former" data-toggle="tab">Former</a></li>
+        <li><a href="#tab-contact" data-toggle="tab"><?php echo $tab_contact; ?></a></li>
+        <li><a href="#tab-website" data-toggle="tab"><?php echo $tab_website; ?></a></li>
+        <li><a href="#tab-experience" data-toggle="tab"><?php echo $tab_experience; ?></a></li>
+        <li><a href="#tab-education" data-toggle="tab"><?php echo $tab_education; ?></a></li>
+        <li><a href="#tab-former" data-toggle="tab"><?php echo $tab_former; ?></a></li>
 	    </ul>
 	    <div class="tab-content">
 	    	<!-- General tab -->

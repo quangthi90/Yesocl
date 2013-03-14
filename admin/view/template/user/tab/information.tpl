@@ -20,40 +20,45 @@
         </td>
 	</tr>
     <tr>
-        <td> Birthday:</td>
-        <td><input class="input-medium" type="text" name="user[background][birthday]" value="" /></td>
+        <td><?php echo $entry_birthday; ?></td>
+        <td><input class="input-medium" type="text" name="user[background][birthday]" value="<?php echo $birthday; ?>" /></td>
     </tr>
     <tr>
-        <td> Marital Status:</td>
+        <td><?php echo $entry_marital_status; ?></td>
         <td><select class="input-medium" name="user[background][maritalstatus]" >
-            <option value="1">Yes</option>
-            <option value="0">Not Yet</option>
+            <?php if ($maritalstatus) { ?>
+                <option value="1" selected="selected"><?php echo $text_yes; ?></option>
+                <option value="0"><?php echo $text_no; ?></option>
+            <?php }else { ?>
+                <option value="1"><?php echo $text_yes; ?></option>
+                <option value="0" selected="selected"><?php echo $text_no; ?></option>
+            <?php } ?>
         </select></td>
     </tr>
     <tr>
-        <td> Country:</td>
-        <td><input required="required" class="input-medium" type="text" name="user[meta][location][country]" value="" /></td>
-        <input type="hidden" name="user[meta][location][country_id]" />
+        <td><?php echo $entry_country; ?></td>
+        <td><input required="required" class="input-medium" type="text" name="user[meta][location][country]" value="<?php echo $coutry; ?>" /></td>
+        <input type="hidden" name="user[meta][location][country_id]" value="<?php echo $coutry_id; ?>" />
     </tr>
     <tr>
-        <td> City:</td>
-        <td><input required="required" class="input-medium" type="text" name="user[meta][location][city]" value="" /></td>
-        <input type="hidden" name="user[meta][location][city]" />
+        <td><?php echo $entry_city; ?></td>
+        <td><input required="required" class="input-medium" type="text" name="user[meta][location][city]" value="<?php echo $city; ?>" /></td>
+        <input type="hidden" name="user[meta][location][city_id]" value="<?php echo $city_id; ?>" />
     </tr>
     <tr>
-        <td> Postal Code:</td>
-        <td><input class="input-medium" type="text" name="user[meta][postalcode]" value="" /></td>
+        <td><?php echo $entry_postal_code; ?></td>
+        <td><input class="input-medium" type="text" name="user[meta][postalcode]" value="<?php echo $postalcode; ?>" /></td>
     </tr>
     <tr>
-        <td> Industry:</td>
-        <td><input required="required" class="input-medium" type="text" name="user[meta][industry]" value="" /></td>
+        <td><?php echo $entry_industry; ?></td>
+        <td><input required="required" class="input-medium" type="text" name="user[meta][industry]" value="<?php echo $industry; ?>" /></td>
     </tr>
     <tr>
-        <td> Headingline:</td>
-        <td><input class="input-xxlarge" type="text" name="user[background][interest]" value="" /></td>
+        <td><?php echo $entry_headingline; ?></td>
+        <td><input class="input-xxlarge" type="text" name="user[meta][headingline]" value="<?php echo $headingline; ?>" /></td>
     </tr>
     <tr>
-        <td> Interest:</td>
-        <td><input class="input-xxlarge" type="text" name="user[background][interest]" value="" /></td>
+        <td><?php echo $entry_interest; ?></td>
+        <td><input class="input-xxlarge" type="text" name="user[background][interest]" value="<?php echo $interest; ?>" /></td>
     </tr>
 </table>
