@@ -81,7 +81,7 @@ $(document).ready(function(){
       		</li>
       	</ul>
       </li>
-      <li><a class="parent"><?php echo $text_data_list; ?></a>
+      <li><a id="datalist"><?php echo $text_data_list; ?></a>
         <ul>
           <li><a href="<?php echo $type; ?>"><?php echo $text_type; ?></a></li>
           <li><a href="<?php echo $value; ?>"><?php echo $text_value; ?></a></li>
