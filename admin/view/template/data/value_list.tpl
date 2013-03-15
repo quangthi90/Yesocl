@@ -25,12 +25,26 @@
           <thead>
             <tr>
               <td><input type="checkbox"/  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" ></td>
-              <td><?php echo $column_type; ?></td>
-              <td><?php echo $column_value; ?></td>
+              <td><?php if ($sort == 'this.type.name') { ?>
+                <a href="<?php echo $sort_type; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_type; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_type; ?>"><?php echo $column_type; ?></a>
+                <?php } ?></td>
+              <td><?php if ($sort == 'value') { ?>
+                <a href="<?php echo $sort_value; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_value; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_value; ?>"><?php echo $column_value; ?></a>
+                <?php } ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
+            <tr class="filter">
+              <td></td>
+              <td><input type="text" name="filter_type" value="<?php echo $filter_type; ?>" /></td>
+              <td><input type="text" name="filter_value" value="<?php echo $filter_value; ?>" /></td>
+              <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
+            </tr>
             <?php if ($values) { ?>
             <?php foreach ($values as $value) { ?>
             <tr>
@@ -56,3 +70,83 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--
+function filter() {
+  url = 'index.php?route=data/value';
+  
+  var filter_type = $('input[name=\'filter_type\']').attr('value');
+  
+  if (filter_type) {
+    url += '&filter_type=' + encodeURIComponent(filter_type);
+  }
+  
+  var filter_value = $('input[name=\'filter_value\']').attr('value');
+  
+  if (filter_value) {
+    url += '&filter_value=' + encodeURIComponent(filter_value);
+  } 
+
+  location = url;
+}
+//--></script> 
+<script type="text/javascript"><!--
+$('#form input').keydown(function(e) {
+  if (e.keyCode == 13) {
+    filter();
+  }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_type\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/value/autocomplete&filter_type=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.type,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_type\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_value\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/value/autocomplete&filter_value=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.value,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_value\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 

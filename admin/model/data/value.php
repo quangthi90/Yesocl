@@ -72,11 +72,33 @@ class ModelDataValue extends Doctrine {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\Data\Value' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+		$query = $this->dm->createQueryBuilder( 'Document\Data\Value' )
+    		->limit( $data['limit'] )
+    		->skip( $data['start'] );
+
+    	if ( isset( $data['filter_type'] ) ) {
+    		$query->field( 'this.type.name' )->equals( new \MongoRegex('/' . $data['filter_type'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_value'] ) ) {
+    		$query->field( 'value' )->equals( new \MongoRegex('/' . $data['filter_value'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['sort'] ) ) {
+    		if ( isset( $data['order'] ) && $data['order'] == 'desc' ) {
+    			$query->sort( $data['sort'], 'desc' );
+    		}else {
+    			$query->sort( $data['sort'], 'asc' );
+    		}
+    	}
+    		
+    	return $query->getQuery()->execute();
 	}
 	
-	public function getTotalValues() {
-		$values = $this->dm->getRepository( 'Document\Data\Value' )->findAll();
+	public function getTotalValues( $data ) {
+		$query = $this->dm->createQueryBuilder( 'Document\Data\Value' );
+    		
+    	$values = $query->getQuery()->execute();
 
 		return count($values);
 	}

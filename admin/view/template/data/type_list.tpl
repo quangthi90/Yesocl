@@ -25,11 +25,20 @@
           <thead>
             <tr>
               <td><input type="checkbox"/  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" ></td>
-              <td><?php echo $column_name; ?></td>
+              <td><?php if ($sort == 'name') { ?>
+                <a href="<?php echo $sort_name; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_name; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
+                <?php } ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
+            <tr class="filter">
+              <td></td>
+              <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
+              <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
+            </tr>
             <?php if ($types) { ?>
             <?php foreach ($types as $type) { ?>
             <tr>
@@ -54,3 +63,50 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--
+function filter() {
+  url = 'index.php?route=data/type';
+  
+  var filter_name = $('input[name=\'filter_name\']').attr('value');
+  
+  if (filter_name) {
+    url += '&filter_name=' + encodeURIComponent(filter_name);
+  }
+
+  location = url;
+}
+//--></script> 
+<script type="text/javascript"><!--
+$('#form input').keydown(function(e) {
+  if (e.keyCode == 13) {
+    filter();
+  }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_name\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/type/autocomplete&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_name\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 

@@ -87,10 +87,42 @@ class ControllerDataType extends Controller {
 			$this->data['success'] = '';
 		}
 		
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$sort = $this->request->get['sort'];
+		} else {
+			$sort = 'name';
+		}
+		
+		if (isset($this->request->get['order'])) {
+			$order = $this->request->get['order'];
+		} else {
+			$order = 'asc';
+		}
+
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
 		}
 
 		// breadcrumbs
@@ -123,15 +155,24 @@ class ControllerDataType extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
+		$this->data['button_filter'] = $this->language->get( 'button_filter' );
 		
 		// Link
 		$this->data['insert'] = $this->url->link( 'data/type/insert' );
 		$this->data['delete'] = $this->url->link( 'data/type/delete' );
 
+		$data = array(
+			'filter_name' => $filter_name,
+			'sort' => $sort,
+			'order' => $order,
+			'start' => ($page - 1) * $this->limit,
+			'limit' => $this->limit,
+			);
+
 		// Group
-		$types = $this->model_data_type->getTypes( );
+		$types = $this->model_data_type->getTypes( $data );
 		
-		$type_total = $this->model_data_type->getTotalTypes();
+		$type_total = $this->model_data_type->getTotalTypes( $data );
 		
 		$this->data['types'] = array();
 		if ( $types ){
@@ -151,15 +192,44 @@ class ControllerDataType extends Controller {
 				);
 			}
 		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if ($order == 'asc') {
+			$url .= '&order=desc';
+		} else {
+			$url .= '&order=asc';
+		}
+					
+		$this->data['sort_name'] = $this->url->link('data/type', 'page=' . $page . '&sort=name' . $url );
+		
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		$url .= '&sort=' . $sort;
+											
+		$url .= '&order=' . $order;
 		
 		$pagination = new Pagination();
 		$pagination->total = $type_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('data/type', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('data/type', '&page={page}' . $url, 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
+
+		$this->data['filter_name'] = $filter_name;
+		
+		$this->data['sort'] = $sort;
+		$this->data['order'] = $order;
 
 		$this->template = 'data/type_list.tpl';
 		$this->children = array(
@@ -272,6 +342,32 @@ class ControllerDataType extends Controller {
 		}else {
 			return true;	
 		}
+	}
+
+	public function autocomplete() {
+		$this->load->model( 'data/type' );
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			);
+
+		$type_data = $this->model_data_type->getTypes( $data );
+
+		$json = array();
+		foreach ($type_data as $type) {
+			$json[] = array(
+				'name' => $type->getName(),
+				'id' => $type->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>

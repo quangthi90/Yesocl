@@ -86,12 +86,58 @@ class ControllerDataValue extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
+
+		if (isset($this->request->get['filter_type'])) {
+			$filter_type = $this->request->get['filter_type'];
+		} else {
+			$filter_type = null;
+		}
+
+		if (isset($this->request->get['filter_value'])) {
+			$filter_value = $this->request->get['filter_value'];
+		} else {
+			$filter_value = null;
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$sort = $this->request->get['sort'];
+		} else {
+			$sort = 'this.type.name';
+		}
+		
+		if (isset($this->request->get['order'])) {
+			$order = $this->request->get['order'];
+		} else {
+			$order = 'asc';
+		}
 		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
 		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_type'])) {
+			$url .= '&filter_type=' . $this->request->get['filter_type'];
+		}
+
+		if (isset($this->request->get['filter_value'])) {
+			$url .= '&filter_value=' . $this->request->get['filter_value'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+		
+		//if (isset($this->request->get['page'])) {
+		//	$url .= '&page=' . $this->request->get['page'];
+		//}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -124,15 +170,25 @@ class ControllerDataValue extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
+		$this->data['button_filter'] = $this->language->get( 'button_filter' );
 		
 		// Link
 		$this->data['insert'] = $this->url->link( 'data/value/insert' );
-		$this->data['delete'] = $this->url->link( 'data/value/delete' );
+		$this->data['delete'] = $this->url->link( 'data/value/delete', 'page=' . $page . $url );
+
+		$data = array(
+			'filter_type' => $filter_type,
+			'filter_value' => $filter_value,
+			'sort' => $sort,
+			'order' => $order,
+			'start' => ($page - 1) * $this->limit,
+			'limit' => $this->limit,
+			);
 
 		// Value
-		$values = $this->model_data_value->getValues( );
+		$values = $this->model_data_value->getValues( $data );
 		
-		$value_total = $this->model_data_value->getTotalValues();
+		$value_total = $this->model_data_value->getTotalValues( $data );
 		
 		$this->data['values'] = array();
 		if ( $values ){
@@ -153,15 +209,54 @@ class ControllerDataValue extends Controller {
 				);
 			}
 		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_type'])) {
+			$url .= '&filter_type=' . $this->request->get['filter_type'];
+		}
+
+		if (isset($this->request->get['filter_value'])) {
+			$url .= '&filter_value=' . $this->request->get['filter_value'];
+		}
+
+		if ($order == 'asc') {
+			$url .= '&order=desc';
+		} else {
+			$url .= '&order=asc';
+		}
+					
+		$this->data['sort_type'] = $this->url->link('data/value', 'page=' . $page . '&sort=this.type.name' . $url );
+		$this->data['sort_value'] = $this->url->link('data/value', 'page=' . $page . '&sort=value' . $url );
 		
+		$url = '';
+
+		if (isset($this->request->get['filter_type'])) {
+			$url .= '&filter_type=' . $this->request->get['filter_type'];
+		}
+
+		if (isset($this->request->get['filter_value'])) {
+			$url .= '&filter_value=' . $this->request->get['filter_value'];
+		}
+
+		$url .= '&sort=' . $sort;
+											
+		$url .= '&order=' . $order;
+
 		$pagination = new Pagination();
 		$pagination->total = $value_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('data/value', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('data/value', '&page={page}' . $url, 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
+
+		$this->data['filter_type'] = $filter_type;
+		$this->data['filter_value'] = $filter_value;
+		
+		$this->data['sort'] = $sort;
+		$this->data['order'] = $order;
 
 		$this->template = 'data/value_list.tpl';
 		$this->children = array(
@@ -296,6 +391,40 @@ class ControllerDataValue extends Controller {
 		}else {
 			return true;	
 		}
+	}
+
+	public function autocomplete() {
+		$this->load->model( 'data/value' );
+
+		if ( isset( $this->request->get['filter_type'] ) ) {
+			$filter_type = $this->request->get['filter_type'];
+		}else {
+			$filter_type = null;
+		}
+
+		if ( isset( $this->request->get['filter_value'] ) ) {
+			$filter_value = $this->request->get['filter_value'];
+		}else {
+			$filter_value = null;
+		}
+
+		$data = array(
+			'filter_type' => $filter_type,
+			'filter_value' => $filter_value,
+			);
+
+		$value_data = $this->model_data_value->getValues( $data );
+
+		$json = array();
+		foreach ($value_data as $value) {
+			$json[] = array(
+				'type' => $value->getType()->getName(),
+				'value' => $value->getValue(),
+				'id' => $value->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
