@@ -1,14 +1,14 @@
-<?php 
+<?php
 class ControllerDataValue extends Controller {
 	private $error = array( );
 	private $limit = 10;
- 
+
 	public function index(){
 		$this->load->language( 'data/value' );
 		$this->load->model( 'data/value' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-		
+
 		$this->getList();
 	}
 
@@ -21,13 +21,13 @@ class ControllerDataValue extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			$this->model_data_value->addValue( $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'data/value') );
 		}
 
 		$this->data['action'] = $this->url->link( 'data/value/insert' );
-		
+
 		$this->getForm( );
 	}
 
@@ -40,14 +40,14 @@ class ControllerDataValue extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			$this->model_data_value->editValue( $this->request->get['value_id'], $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'data/value') );
 		}
-		
+
 		$this->getForm();
 	}
- 
+
 	public function delete(){
 		$this->load->language( 'data/value' );
 		$this->load->model( 'data/value' );
@@ -57,7 +57,7 @@ class ControllerDataValue extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
 			$this->model_data_value->deleteValue( $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'data/value') );
 		}
@@ -73,15 +73,15 @@ class ControllerDataValue extends Controller {
 			unset( $this->session->data['error_warning'] );
 		} elseif ( isset($this->session->data['error_warning']) ) {
 			$this->data['error_warning'] = $this->session->data['error_warning'];
-			
+
 			unset( $this->session->data['error_warning'] );
 		} else {
 			$this->data['error_warning'] = '';
 		}
-		
+
 		if ( isset($this->session->data['success']) ){
 			$this->data['success'] = $this->session->data['success'];
-		
+
 			unset( $this->session->data['success'] );
 		} else {
 			$this->data['success'] = '';
@@ -102,15 +102,15 @@ class ControllerDataValue extends Controller {
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
-			$sort = 'this.type.name';
+			$sort = 'type.name';
 		}
-		
+
 		if (isset($this->request->get['order'])) {
 			$order = $this->request->get['order'];
 		} else {
 			$order = 'asc';
 		}
-		
+
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
@@ -134,7 +134,7 @@ class ControllerDataValue extends Controller {
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
-		
+
 		//if (isset($this->request->get['page'])) {
 		//	$url .= '&page=' . $this->request->get['page'];
 		//}
@@ -153,25 +153,25 @@ class ControllerDataValue extends Controller {
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get( 'heading_title' );
-		
+
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
 		//$this->data['text_status'] = $this->language->get( 'text_status' );
 		$this->data['column_type'] = $this->language->get( 'column_type' );
-		$this->data['column_value'] = $this->language->get( 'column_value' );	
+		$this->data['column_value'] = $this->language->get( 'column_value' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
-		
+
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get( 'confirm_del' );
-		
+
 		// Button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		$this->data['button_filter'] = $this->language->get( 'button_filter' );
-		
+
 		// Link
 		$this->data['insert'] = $this->url->link( 'data/value/insert' );
 		$this->data['delete'] = $this->url->link( 'data/value/delete', 'page=' . $page . $url );
@@ -183,24 +183,25 @@ class ControllerDataValue extends Controller {
 			'order' => $order,
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit,
-			);
+		);
 
 		// Value
 		$values = $this->model_data_value->getValues( $data );
-		
+
 		$value_total = $this->model_data_value->getTotalValues( $data );
-		
+
 		$this->data['values'] = array();
+		// print(count($values)); exit;
 		if ( $values ){
 			foreach ( $values as $value ){
 				$action = array();
-			
+
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'data/value/update', 'value_id=' . $value->getId() ),
 					'icon' => 'icon-edit',
 				);
-			
+
 				$this->data['values'][] = array(
 					'id' => $value->getId(),
 					'type' => $value->getType()->getName(),
@@ -225,10 +226,10 @@ class ControllerDataValue extends Controller {
 		} else {
 			$url .= '&order=asc';
 		}
-					
-		$this->data['sort_type'] = $this->url->link('data/value', 'page=' . $page . '&sort=this.type.name' . $url );
+
+		$this->data['sort_type'] = $this->url->link('data/value', 'page=' . $page . '&sort=type.name' . $url );
 		$this->data['sort_value'] = $this->url->link('data/value', 'page=' . $page . '&sort=value' . $url );
-		
+
 		$url = '';
 
 		if (isset($this->request->get['filter_type'])) {
@@ -240,7 +241,7 @@ class ControllerDataValue extends Controller {
 		}
 
 		$url .= '&sort=' . $sort;
-											
+
 		$url .= '&order=' . $order;
 
 		$pagination = new Pagination();
@@ -249,12 +250,12 @@ class ControllerDataValue extends Controller {
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('data/value', '&page={page}' . $url, 'SSL');
-			
+
 		$this->data['pagination'] = $pagination->render();
 
 		$this->data['filter_type'] = $filter_type;
 		$this->data['filter_value'] = $filter_value;
-		
+
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 
@@ -263,7 +264,7 @@ class ControllerDataValue extends Controller {
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -274,15 +275,15 @@ class ControllerDataValue extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}
-		
+
 		if ( isset($this->session->data['success']) ){
 			$this->data['success'] = $this->session->data['success'];
-		
+
 			unset( $this->session->data['success'] );
 		} else {
 			$this->data['success'] = '';
 		}
-		
+
 		if ( isset($this->error['error_value']) ) {
 			$this->data['error_value'] = $this->error['error_value'];
 		} else {
@@ -303,28 +304,28 @@ class ControllerDataValue extends Controller {
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get( 'heading_title' );
-		
-		// Text	
+
+		// Text
 		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
-		
+
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
-		
+
 		// Entry
 		$this->data['entry_type'] = $this->language->get( 'entry_type' );
 		$this->data['entry_value'] = $this->language->get( 'entry_value' );
-		
+
 		// Link
 		$this->data['cancel'] = $this->url->link( 'data/value' );
-		
+
 		// Group
 		if ( isset($this->request->get['value_id']) ){
 			$value = $this->model_data_value->getValue( $this->request->get['value_id'] );
-			
+
 			if ( $value ){
-				$this->data['action'] = $this->url->link( 'data/value/update', 'value_id=' . $value->getId() );	
+				$this->data['action'] = $this->url->link( 'data/value/update', 'value_id=' . $value->getId() );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -342,7 +343,7 @@ class ControllerDataValue extends Controller {
 		$this->load->model('data/type');
 
 		$types = $this->model_data_type->getTypes();
-		
+
 		$this->data['types'] = array();
 		foreach ($types as $type) {
 			$this->data['types'][] = array(
@@ -365,7 +366,7 @@ class ControllerDataValue extends Controller {
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -377,7 +378,7 @@ class ControllerDataValue extends Controller {
 		if ( $this->error){
 			return false;
 		}else {
-			return true;	
+			return true;
 		}
 	}
 
@@ -389,7 +390,7 @@ class ControllerDataValue extends Controller {
 		if ( $this->error){
 			return false;
 		}else {
-			return true;	
+			return true;
 		}
 	}
 

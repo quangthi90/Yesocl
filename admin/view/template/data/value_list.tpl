@@ -25,7 +25,7 @@
           <thead>
             <tr>
               <td><input type="checkbox"/  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" ></td>
-              <td><?php if ($sort == 'this.type.name') { ?>
+              <td><?php if ($sort == 'type.name') { ?>
                 <a href="<?php echo $sort_type; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_type; ?></a>
                 <?php } else { ?>
                 <a href="<?php echo $sort_type; ?>"><?php echo $column_type; ?></a>
@@ -73,29 +73,29 @@
 <script type="text/javascript"><!--
 function filter() {
   url = 'index.php?route=data/value';
-  
+
   var filter_type = $('input[name=\'filter_type\']').attr('value');
-  
+
   if (filter_type) {
     url += '&filter_type=' + encodeURIComponent(filter_type);
   }
-  
+
   var filter_value = $('input[name=\'filter_value\']').attr('value');
-  
+
   if (filter_value) {
     url += '&filter_value=' + encodeURIComponent(filter_value);
-  } 
+  }
 
   location = url;
 }
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('#form input').keydown(function(e) {
   if (e.keyCode == 13) {
     filter();
   }
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('input[name=\'filter_type\']').autocomplete({
   delay: 0,
@@ -103,7 +103,7 @@ $('input[name=\'filter_type\']').autocomplete({
     $.ajax({
       url: 'index.php?route=data/value/autocomplete&filter_type=' +  encodeURIComponent(request.term),
       dataType: 'json',
-      success: function(json) {   
+      success: function(json) {
         response($.map(json, function(item) {
           return {
             label: item.type,
@@ -112,17 +112,17 @@ $('input[name=\'filter_type\']').autocomplete({
         }));
       }
     });
-  }, 
+  },
   select: function(event, ui) {
     $('input[name=\'filter_type\']').val(ui.item.label);
-            
+
     return false;
   },
   focus: function(event, ui) {
         return false;
     }
 });
-//--></script> 
+//--></script>
 <script type="text/javascript"><!--
 $('input[name=\'filter_value\']').autocomplete({
   delay: 0,
@@ -130,7 +130,7 @@ $('input[name=\'filter_value\']').autocomplete({
     $.ajax({
       url: 'index.php?route=data/value/autocomplete&filter_value=' +  encodeURIComponent(request.term),
       dataType: 'json',
-      success: function(json) {   
+      success: function(json) {
         response($.map(json, function(item) {
           return {
             label: item.value,
@@ -139,14 +139,14 @@ $('input[name=\'filter_value\']').autocomplete({
         }));
       }
     });
-  }, 
+  },
   select: function(event, ui) {
     $('input[name=\'filter_value\']').val(ui.item.label);
-            
+
     return false;
   },
   focus: function(event, ui) {
         return false;
     }
 });
-//--></script> 
+//--></script>
