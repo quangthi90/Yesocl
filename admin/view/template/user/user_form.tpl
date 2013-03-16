@@ -22,7 +22,8 @@
 		    <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
 		    <li><a href="#tab-email" data-toggle="tab"><?php echo $tab_email; ?></a></li>
 		    <li><a href="#tab-info" data-toggle="tab"><?php echo $tab_information; ?></a></li>
-        <li><a href="#tab-contact" data-toggle="tab"><?php echo $tab_contact; ?></a></li>
+        <li><a href="#tab-im" data-toggle="tab"><?php echo $tab_im; ?></a></li>
+        <li><a href="#tab-phone" data-toggle="tab"><?php echo $tab_phone; ?></a></li>
         <li><a href="#tab-website" data-toggle="tab"><?php echo $tab_website; ?></a></li>
         <li><a href="#tab-experience" data-toggle="tab"><?php echo $tab_experience; ?></a></li>
         <li><a href="#tab-education" data-toggle="tab"><?php echo $tab_education; ?></a></li>
@@ -44,9 +45,14 @@
 	    		<?php include 'tab/information.tpl'; ?>
 	    	</div>
 
-        <!-- Contact tab -->
-        <div class="tab-pane" id="tab-contact">
-          <?php include '/tab/contact.tpl'; ?>
+        <!-- Im tab -->
+        <div class="tab-pane" id="tab-im">
+          <?php include 'tab/im.tpl'; ?>
+        </div>
+
+        <!-- Phone tab -->
+        <div class="tab-pane" id="tab-phone">
+          <?php include 'tab/phone.tpl'; ?>
         </div>
 
         <!-- Website tab -->

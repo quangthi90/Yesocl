@@ -11,9 +11,9 @@
             <td><span class="required">*</span> <?php echo $entry_password; ?></td>
             <td><input class="input-xxlarge" required="required" type="password" name="user[password]" value="<?php echo $password; ?>" />
             <?php if ($error_password) { ?>
-              <div class="alert alert-error">
-				          <strong>Error!</strong> <?php echo $error_password; ?>
-				      </div>
+              	<div class="alert alert-error">
+				  <strong>Error!</strong> <?php echo $error_password; ?>
+				</div>
             <?php } ?></td>
           </tr>
           <tr>

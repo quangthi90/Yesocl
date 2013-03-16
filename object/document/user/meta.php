@@ -45,12 +45,6 @@ Class Meta {
 	private $formers = array();
 
 	/** @MongoDB\String */
-	private $im;
-
-	/** @MongoDB\String */
-	private $phone;
-
-	/** @MongoDB\String */
 	private $address;
 
 	/** @MongoDB\EmbedMany(targetDocument="Website") */

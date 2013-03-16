@@ -27,6 +27,16 @@ Class User {
 	private $emails = array();
 
 	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document/User/Im") 
+	 */
+	private $ims = array();
+
+	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document/User/Phone") 
+	 */
+	private $phones = array();
+
+	/** 
 	 * @MongoDB\EmbedOne(targetDocument="Document/User/Meta") 
 	 */
     private $meta;
@@ -76,6 +86,30 @@ Class User {
 				return $email;
 			}
 		}
+	}
+
+	public function addIm( Im $im ){
+		$this->ims[] = $im;
+	}
+
+	public function setIms( $ims ){
+		$this->ims = $ims;
+	}
+
+	public function getIms(){
+		return $this->ims;
+	}
+
+	public function addPhone( Phone $phone ){
+		$this->phones[] = $phone;
+	}
+
+	public function setPhones( $phones ){
+		$this->phones = $phones;
+	}
+
+	public function getPhones(){
+		return $this->phones;
 	}
 
 	public function setMeta( $meta ){

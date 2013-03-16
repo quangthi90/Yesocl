@@ -262,11 +262,16 @@ class ControllerUserUser extends Controller {
 		$this->data['text_name'] = 'Name';//$this->language->get( 'text_no' );
 		$this->data['text_value'] = 'Value';//$this->language->get( 'text_no' );
 		$this->data['text_visible'] = 'Visible';//$this->language->get( 'text_no' );
+		$this->data['text_type'] = 'Type';//$this->language->get( 'text_no' );
+		$this->data['text_im'] = 'Im';//$this->language->get( 'text_no' );
+		$this->data['text_phone'] = 'Phone';//$this->language->get( 'text_no' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 		$this->data['button_add_email'] = $this->language->get( 'button_add_email' );
+		$this->data['button_add_phone'] = 'Add Phone';//$this->language->get( 'button_add_email' );
+		$this->data['button_add_im'] = 'Add Im';//$this->language->get( 'button_add_email' );
 		$this->data['button_add_website'] = 'Add Website';//$this->language->get( 'button_save' );
 		$this->data['button_add_experience'] = 'Add Experience';//$this->language->get( 'button_save' );
 		$this->data['button_add_education'] = 'Add Education';//$this->language->get( 'button_add_email' );
@@ -320,7 +325,8 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_general'] = $this->language->get( 'tab_general' );
 		$this->data['tab_information'] = $this->language->get( 'tab_information' );
 		$this->data['tab_email'] = $this->language->get( 'tab_email' );
-		$this->data['tab_contact'] = 'Contact Info';//$this->language->get( 'tab_email' );
+		$this->data['tab_im'] = 'Im';//$this->language->get( 'tab_email' );
+		$this->data['tab_phone'] = 'Phone';//$this->language->get( 'tab_email' );
 		$this->data['tab_website'] = 'Website';//$this->language->get( 'tab_email' );
 		$this->data['tab_experience'] = 'Experience';//$this->language->get( 'tab_email' );
 		$this->data['tab_education'] = 'Education';//$this->language->get( 'tab_email' );
@@ -410,84 +416,6 @@ class ControllerUserUser extends Controller {
 			$this->data['lastname'] = '';
 		}
 
-		// Entry birthday
-		if ( isset($this->request->post['user']['background']['birthday']) ){
-			$this->data['birthday'] = $this->request->post['user']['background']['birthday'];
-		}elseif ( isset($user) ) {
-			$this->data['birthday'] = '';
-		}else {
-			$this->data['birthday'] = '';
-		}
-
-		// Entry marital status
-		if ( isset($this->request->post['user']['background']['maritalstatus']) ){
-			$this->data['maritalstatus'] = $this->request->post['user']['background']['maritalstatus'];
-		}elseif ( isset($user) ) {
-			$this->data['maritalstatus'] = 0;
-		}else {
-			$this->data['maritalstatus'] = 0;
-		}
-
-		// Entry country
-		if ( isset($this->request->post['user']['meta']['location']['country_id']) ){
-			$this->data['country_id'] = $this->request->post['user']['meta']['location']['country_id'];
-			$this->data['country'] = $this->request->post['user']['meta']['location']['country_id'];
-		}elseif ( isset($user) ) {
-			$this->data['country_id'] = 0;
-			$this->data['country'] = 0;
-		}else {
-			$this->data['country_id'] = 0;
-			$this->data['country'] = 0;
-		}
-
-		// Entry city
-		if ( isset($this->request->post['user']['meta']['location']['city_id']) ){
-			$this->data['city_id'] = $this->request->post['user']['meta']['location']['city_id'];
-			$this->data['city'] = $this->request->post['user']['meta']['location']['city_id'];
-		}elseif ( isset($user) ) {
-			$this->data['city_id'] = '';
-			$this->data['city'] = '';
-		}else {
-			$this->data['city_id'] = '';
-			$this->data['city'] = '';
-		}
-
-		// Entry postal code
-		if ( isset($this->request->post['user']['meta']['postalcode']) ){
-			$this->data['postalcode'] = $this->request->post['user']['meta']['postalcode'];
-		}elseif ( isset($user) ) {
-			$this->data['postalcode'] = '';
-		}else {
-			$this->data['postalcode'] = '';
-		}
-
-		// Entry industry
-		if ( isset($this->request->post['user']['meta']['industry']) ){
-			$this->data['industry'] = $this->request->post['user']['meta']['industry'];
-		}elseif ( isset($user) ) {
-			$this->data['industry'] = '';
-		}else {
-			$this->data['industry'] = '';
-		}
-
-		// Entry headingline
-		if ( isset($this->request->post['user']['meta']['headingline']) ){
-			$this->data['headingline'] = $this->request->post['user']['meta']['headingline'];
-		}elseif ( isset($user) ) {
-			$this->data['headingline'] = '';
-		}else {
-			$this->data['headingline'] = '';
-		}
-
-		// Entry interest
-		if ( isset($this->request->post['user']['background']['interest']) ){
-			$this->data['interest'] = $this->request->post['user']['background']['interest'];
-		}elseif ( isset($user) ) {
-			$this->data['interest'] = '';
-		}else {
-			$this->data['interest'] = '';
-		}
-
 		// Entry im
 		$this->data['im_types'] = array();
 		$this->data['im_types'][] = array(
@@ -499,17 +427,6 @@ class ControllerUserUser extends Controller {
 			'code' => 'yahoo',
 			);
 
-		if ( isset($this->request->post['user']['meta']['im']) ){
-			$this->data['im'] = $this->request->post['user']['meta']['im'];
-			$this->data['imtype'] = $this->request->post['user']['meta']['im-type'];
-		}elseif ( isset($user) ) {
-			$this->data['im'] = '';
-			$this->data['imtype'] = '';
-		}else {
-			$this->data['im'] = '';
-			$this->data['imtype'] = '';
-		}
-
 		// Entry phone
 		$this->data['phone_types'] = array();
 		$this->data['phone_types'][] = array(
@@ -520,35 +437,6 @@ class ControllerUserUser extends Controller {
 			'text' => 'Telephone',
 			'code' => 'telephone',
 			);
-
-		if ( isset($this->request->post['user']['meta']['phone']) ){
-			$this->data['phone'] = $this->request->post['user']['meta']['phone'];
-			$this->data['phonetype'] = $this->request->post['user']['meta']['im-type'];
-		}elseif ( isset($user) ) {
-			$this->data['phone'] = '';
-			$this->data['phonetype'] = '';
-		}else {
-			$this->data['phone'] = '';
-			$this->data['phonetype'] = '';
-		}
-
-		// Entry address
-		if ( isset($this->request->post['user']['meta']['address']) ){
-			$this->data['address'] = $this->request->post['user']['meta']['address'];
-		}elseif ( isset($user) ) {
-			$this->data['address'] = '';
-		}else {
-			$this->data['address'] = '';
-		}
-
-		// Entry advice of contact
-		if ( isset($this->request->post['user']['background']['adviceofcontact']) ){
-			$this->data['adviceofcontact'] = $this->request->post['user']['background']['adviceofcontact'];
-		}elseif ( isset($user) ) {
-			$this->data['adviceofcontact'] = '';
-		}else {
-			$this->data['adviceofcontact'] = '';
-		}
 
 		// Entry website title
 		$this->data['title_types'] = array();
@@ -564,14 +452,6 @@ class ControllerUserUser extends Controller {
 			'text' => 'Other...',
 			'code' => 'other',
 			);
-
-		if ( isset($this->request->post['user']['website']) ){
-			$this->data['webtitle'] = $this->request->post['user']['website']['title'];
-		}elseif ( isset($user) ) {
-			$this->data['webtitle'] = array();
-		}else {
-			$this->data['webtitle'] = array();
-		}
 
 		// Entry former visible
 		$this->data['visible_types'] = array();
