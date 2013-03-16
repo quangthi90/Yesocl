@@ -4,13 +4,17 @@ $_['heading_title']     = 'Data type';
 
 // Text
 $_['text_success']      = 'Success: You have modified data type!';
+$_['text_disable']      = 'Disable';
+$_['text_enable']      = 'Enable';
 
 // Column
 $_['column_name']       = 'Type';
+$_['column_status']       = 'Status';
 $_['column_action']     = 'Action';
 
 // Entry
 $_['entry_name']        = 'Name:';
+$_['entry_status']        = 'Status:';
 $_['entry_access']      = 'Access Permission:';
 $_['entry_modify']      = 'Modify Permission:';
 

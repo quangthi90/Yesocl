@@ -76,7 +76,13 @@ class ModelDataType extends Doctrine {
 	}
 	
 	public function getTotalTypes( $data ) {
-		$types = $this->dm->getRepository( 'Document\Data\Type' )->findAll();
+		$query = $this->dm->createQueryBuilder( 'Document\Data\Type' );
+
+		if ( isset( $data['filter_name'] ) ) {
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    	}
+
+		$types = $query->getQuery()->execute();
 
 		return count($types);
 	}

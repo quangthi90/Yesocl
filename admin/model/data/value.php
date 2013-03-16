@@ -4,7 +4,7 @@ use Document\Data\Value;
 class ModelDataValue extends Doctrine {
 	public function addValue( $data = array() ) {
 		// Name is require
-		if ( !isset($data['value']) || empty($data['value']) ){
+		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
 
@@ -13,7 +13,13 @@ class ModelDataValue extends Doctrine {
 			return false;
 		}
 
+		// Value is require
+		if ( !isset($data['value']) || empty($data['value']) ){
+			return false;
+		}
+		
 		$value = new Value();
+		$value->setname( $data['name'] );
 		$value->setValue( $data['value'] );
 
 		$type = $this->dm->getRepository('Document\Data\Type')->find( $data['type'] );
@@ -25,6 +31,11 @@ class ModelDataValue extends Doctrine {
 
 	public function editValue( $id, $data = array() ) {
 		// Name is require
+		if ( !isset($data['name']) || empty($data['name']) ){
+			return false;
+		}
+
+		// Value is require
 		if ( !isset($data['value']) || empty($data['value']) ){
 			return false;
 		}
@@ -33,14 +44,15 @@ class ModelDataValue extends Doctrine {
 		if ( !isset($data['type']) || empty($data['type']) ){
 			return false;
 		}
-
+		
 		$value = $this->dm->getRepository('Document\Data\Value')->find( $id );
-
+		
 		if ( !$value ){
 			return false;
 		}
 
-		$value->setValue( $data['value'] );
+		$value->setname( $data['name'] );
+		$value->setValue( $data['value'] ); 
 
 		$type = $this->dm->getRepository('Document\Data\Type')->find( $data['type'] );
 		$value->setType( $type );
@@ -56,10 +68,10 @@ class ModelDataValue extends Doctrine {
 				$this->dm->remove($value);
 			}
 		}
-
+		
 		$this->dm->flush();
 	}
-
+	
 	public function getValue( $value_id ) {
 		return $this->dm->getRepository( 'Document\Data\Value' )->find( $value_id );
 	}
@@ -72,52 +84,48 @@ class ModelDataValue extends Doctrine {
 			$data['start'] = 0;
 		}
 
-		// $query = $this->dm->createQueryBuilder( 'Document\Data\Value' )
-  //   		->limit( $data['limit'] )
-  //   		->skip( $data['start'] );
+		$query = $this->dm->createQueryBuilder( 'Document\Data\Value' )
+    		->limit( $data['limit'] )
+    		->skip( $data['start'] );
 
-  //   	if ( isset( $data['filter_type'] ) ) {
-  //   		$query->field( 'type.name' )->equals( new \MongoRegex('/' . $data['filter_type'] . '.*/i') );
-  //   	}
-
-  //   	if ( isset( $data['filter_value'] ) ) {
-  //   		$query->field( 'value' )->equals( new \MongoRegex('/' . $data['filter_value'] . '.*/i') );
-  //   	}
-
-  //   	if ( isset( $data['sort'] ) ) {
-  //   		if ( isset( $data['order'] ) && $data['order'] == 'desc' ) {
-  //   			$query->sort( $data['sort'], 'desc' );
-  //   		}else {
-  //   			$query->sort( $data['sort'], 'asc' );
-  //   		}
-  //   	}
-
-    	// return $query->getQuery()->execute();
-
-    	$arr_query = array();
-
-    	if ( isset($data['filter_type']) ){
-    		$arr_query['type.name'] = new \MongoRegex('/' . $data['filter_type'] . '.*/i');
+    	if ( isset( $data['filter_name'] ) ) {
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
     	}
 
-    	if ( isset($data['filter_value']) ){
-    		$arr_query['value'] = new \MongoRegex('/' . $data['filter_value'] . '.*/i');
+    	if ( isset( $data['filter_type'] ) ) {
+    		$query->field( 'this.type.name' )->equals( new \MongoRegex('/' . $data['filter_type'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_value'] ) ) {
+    		$query->field( 'value' )->equals( new \MongoRegex('/' . $data['filter_value'] . '.*/i') );
     	}
 
     	if ( isset( $data['sort'] ) ) {
     		if ( isset( $data['order'] ) && $data['order'] == 'desc' ) {
-    			$sort = array( $data['sort'] => -1 );
+    			$query->sort( $data['sort'], 'desc' );
     		}else {
-    			$sort = array( $data['sort'] => 1 );
+    			$query->sort( $data['sort'], 'asc' );
     		}
     	}
-
-    	return $this->dm->getRepository('Document\Data\Value')->findBy( $arr_query )->skip( $data['start'] )->limit( $data['limit'] )->sort( $sort );
+    		
+    	return $query->getQuery()->execute();
 	}
-
+	
 	public function getTotalValues( $data ) {
 		$query = $this->dm->createQueryBuilder( 'Document\Data\Value' );
 
+		if ( isset( $data['filter_name'] ) ) {
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_type'] ) ) {
+    		$query->field( 'this.type.name' )->equals( new \MongoRegex('/' . $data['filter_type'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_value'] ) ) {
+    		$query->field( 'value' )->equals( new \MongoRegex('/' . $data['filter_value'] . '.*/i') );
+    	}
+    		
     	$values = $query->getQuery()->execute();
 
 		return count($values);

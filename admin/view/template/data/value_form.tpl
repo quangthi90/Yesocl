@@ -10,7 +10,7 @@
   <?php } ?>
   <div class="box">    
     <div class="heading">
-      <span><img src="view/image/data_type.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/data_value.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
         <a onclick="$('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
         <a onclick="location = '<?php echo $cancel; ?>';" class="btn btn-danger"><?php echo $button_cancel; ?></a>
@@ -19,6 +19,15 @@
     <div class="content">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <table class="form">
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="name" value="<?php echo $name; ?>" />
+            <?php if ($error_name) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_name; ?>
+        </div>
+            <?php } ?></td>
+          </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_type; ?></td>
             <td><select name="type"><?php foreach ($types as $type_data) { ?><option value="<?php echo $type_data['id']; ?>" <?php echo ($type == $type_data['id']) ? 'selected="selected"' : ''; ?>><?php echo $type_data['name']; ?></option><?php } ?></select>

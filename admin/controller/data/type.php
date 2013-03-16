@@ -347,6 +347,8 @@ class ControllerDataType extends Controller {
 	public function autocomplete() {
 		$this->load->model( 'data/type' );
 
+		$sort = 'name';
+
 		if ( isset( $this->request->get['filter_name'] ) ) {
 			$filter_name = $this->request->get['filter_name'];
 		}else {
@@ -355,6 +357,7 @@ class ControllerDataType extends Controller {
 
 		$data = array(
 			'filter_name' => $filter_name,
+			'sort' => $sort,
 			);
 
 		$type_data = $this->model_data_type->getTypes( $data );

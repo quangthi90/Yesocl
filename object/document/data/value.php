@@ -14,6 +14,11 @@ Class Value {
 	/** 
 	 * @MongoDB\String 
 	 */
+	private $name; 
+
+	/** 
+	 * @MongoDB\String 
+	 */
 	private $value; 
 
 	/** @MongoDB\ReferenceOne(targetDocument="Type", inversedBy="values") */
@@ -21,6 +26,14 @@ Class Value {
 
 	public function getId(){
 		return $this->id;
+	}
+
+	public function setName( $name ){
+		$this->name = $name;
+	}
+
+	public function getName(){
+		return $this->name;
 	}
 
 	public function setValue( $value ){
