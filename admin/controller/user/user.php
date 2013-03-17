@@ -19,13 +19,11 @@ class ControllerUserUser extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
-		//if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') ){
-			echo '<pre>';var_dump($this->request->post);echo '</pre>';exit();
-			$this->model_user_user->adduser( $this->request->post );
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
+			$this->model_user_user->addUser( $this->request->post );
 			
-			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'user/user') );
+			//$this->session->data['success'] = $this->language->get( 'text_success' );
+			//$this->redirect( $this->url->link( 'user/user') );
 		}
 
 		$this->data['action'] = $this->url->link( 'user/user/insert' );
@@ -58,7 +56,7 @@ class ControllerUserUser extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_user_user->deleteuser( $this->request->post );
+			$this->model_user_user->deleteUser( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'user/user') );
@@ -349,12 +347,16 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry email
+		$this->data['emails'] = array();
 		if ( isset($this->request->post['user']['emails']) ){
 			$this->data['emails'] = $this->request->post['user']['emails'];
 		}elseif ( isset($user) ){
-			$this->data['emails'] = $user->getEmails();
-		}else {
-			$this->data['emails'] = array();
+			foreach ($user->getEmails() as $key => $email) {
+				$this->data['emails'][$key] = array(
+					'email' => $email->getEmail(),
+					'primary' => $email->getPrimary(),
+					);
+			}
 		}
 		
 		// Entry password
@@ -416,6 +418,102 @@ class ControllerUserUser extends Controller {
 			$this->data['lastname'] = '';
 		}
 
+		// Entry birthday
+		if ( isset($this->request->post['background']['birthday']) ){
+			$this->data['birthday'] = $this->request->post['background']['birthday'];
+		}elseif ( isset($user) && $user->getBackground() ){
+			$this->data['birthday'] = $user->getBackground()->getBirthday()->format('d-m-Y');
+		}else {
+			$this->data['birthday'] = '';
+		}
+
+		// Entry marital status
+		if ( isset($this->request->post['background']['maritalstatus']) ){
+			$this->data['marital_status'] = $this->request->post['background']['maritalstatus'];
+		}elseif ( isset($user) && $user->getBackground() ){
+			$this->data['marital_status'] = $user->getBackground()->getMaritalStatus();
+		}else {
+			$this->data['marital_status'] = 0;
+		}
+
+		// Entry localtion country
+		if ( isset($this->request->post['meta']['localtion']['country']) ){
+			$this->data['country'] = $this->request->post['meta']['localtion']['country'];
+			$this->data['country_id'] = $this->request->post['meta']['localtion']['country_id'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
+			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
+		}else {
+			$this->data['country'] = '';
+			$this->data['country_id'] = 0;
+		}
+
+		// Entry localtion city
+		if ( isset($this->request->post['meta']['localtion']['city']) ){
+			$this->data['city'] = $this->request->post['meta']['localtion']['city'];
+			$this->data['city_id'] = $this->request->post['meta']['localtion']['city_id'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
+			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
+		}else {
+			$this->data['city'] = '';
+			$this->data['city_id'] = 0;
+		}
+
+		// Entry postal code
+		if ( isset($this->request->post['meta']['postalcode']) ){
+			$this->data['postal_code'] = $this->request->post['meta']['postalcode'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['postal_code'] = $user->getMeta()->getPostalCode();
+		}else {
+			$this->data['postal_code'] = '';
+		}
+
+		// Entry address
+		if ( isset($this->request->post['meta']['address']) ){
+			$this->data['address'] = $this->request->post['meta']['address'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['address'] = $user->getMeta()->getAddress();
+		}else {
+			$this->data['address'] = '';
+		}
+
+		// Entry advice of contact
+		if ( isset($this->request->post['background']['adviceofcontact']) ){
+			$this->data['advice_of_contact'] = $this->request->post['background']['adviceofcontact'];
+		}elseif ( isset($user) && $user->getBackground() ){
+			$this->data['advice_of_contact'] = $user->getBackground()->getAdviceOfContact();
+		}else {
+			$this->data['advice_of_contact'] = '';
+		}
+
+		// Entry industry
+		if ( isset($this->request->post['meta']['industry']) ){
+			$this->data['industry'] = $this->request->post['meta']['industry'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['industry'] = $user->getMeta()->getIndustry();
+		}else {
+			$this->data['industry'] = '';
+		}
+
+		// Entry heading line
+		if ( isset($this->request->post['meta']['headingline']) ){
+			$this->data['heading_line'] = $this->request->post['meta']['headingline'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['heading_line'] = $user->getMeta()->getHeadingLine();
+		}else {
+			$this->data['heading_line'] = '';
+		}
+
+		// Entry interest
+		if ( isset($this->request->post['background']['interest']) ){
+			$this->data['interest'] = $this->request->post['background']['interest'];
+		}elseif ( isset($user) && $user->getBackground() ){
+			$this->data['interest'] = $user->getBackground()->getInterest();
+		}else {
+			$this->data['interest'] = '';
+		}
+
 		// Entry im
 		$this->data['im_types'] = array();
 		$this->data['im_types'][] = array(
@@ -427,6 +525,19 @@ class ControllerUserUser extends Controller {
 			'code' => 'yahoo',
 			);
 
+		$this->data['ims'] = array();
+		if ( isset($this->request->post['user']['ims']) ){
+			$this->data['ims'] = $this->request->post['user']['ims'];
+		}elseif ( isset($user) ){
+			foreach ($user->getIms() as $key => $im) {
+				$this->data['ims'][$key] = array(
+					'type' => $im->getType(),
+					'im' => $im->getIm(),
+					'visible' => $im->getVisible(),
+					);
+			}
+		}
+
 		// Entry phone
 		$this->data['phone_types'] = array();
 		$this->data['phone_types'][] = array(
@@ -437,6 +548,19 @@ class ControllerUserUser extends Controller {
 			'text' => 'Telephone',
 			'code' => 'telephone',
 			);
+
+		$this->data['phones'] = array();
+		if ( isset($this->request->post['user']['phones']) ){
+			$this->data['phones'] = $this->request->post['user']['phones'];
+		}elseif ( isset($user) ){
+			foreach ($user->getPhones() as $key => $phone) {
+				$this->data['phones'][$key] = array(
+					'type' => $phone->getType(),
+					'phone' => $phone->getPhone(),
+					'visible' => $phone->getVisible(),
+					);
+			}
+		}
 
 		// Entry website title
 		$this->data['title_types'] = array();
@@ -452,6 +576,69 @@ class ControllerUserUser extends Controller {
 			'text' => 'Other...',
 			'code' => 'other',
 			);
+
+		$this->data['websites'] = array();
+		if ( isset($this->request->post['user']['websites']) ){
+			$this->data['websites'] = $this->request->post['user']['websites'];
+		}elseif ( isset($user) ){
+			foreach ($user->getWebsites() as $key => $website) {
+				$this->data['websites'][$key] = array(
+					'title' => $website->getTitle(),
+					'url' => $website->getUrl(),
+					);
+			}
+		}
+
+		// Entry experiencies
+		$this->data['experiencies'] = array();
+		if ( isset($this->request->post['background']['experiencies']) ){
+			$this->data['experiencies'] = $this->request->post['background']['experiencies'];
+		}elseif ( isset($user) && $user->getBackground()  ){
+			foreach ($user->getBackground()->getExperiencies() as $key => $experience) {
+				$this->data['experiencies'][$key] = array(
+					'company' => $experience->getCompany(),
+					'current' => $experience->getCurrent(),
+					'title' => $experience->getTitle(),
+					'location' => $experience->getLocation(),
+					'ended' => $experience->getEnded(),
+					'started' => $experience->getStarted(),
+					'description' => $experience->getDescription(),
+					);
+			}
+		}
+
+		// Entry educations
+		$this->data['educations'] = array();
+		if ( isset($this->request->post['background']['educations']) ){
+			$this->data['educations'] = $this->request->post['background']['educations'];
+		}elseif ( isset($user) && $user->getBackground()  ){
+			foreach ($user->getBackground()->getEducations() as $key => $education) {
+				$this->data['educations'][$key] = array(
+					'school' => $education->getSchool(),
+					'degree' => $education->getDegree(),
+					'grace' => $education->getGrace(),
+					'fieldofstudy' => $education->getFieldOfStudy(),
+					'societies' => $education->getSocieties(),
+					'ended' => $education->getEnded(),
+					'started' => $education->getStarted(),
+					'description' => $education->getDescription(),
+					);
+			}
+		}
+
+		// Entry Formers
+		$this->data['formers'] = array();
+		if ( isset($this->request->post['user']['formers']) ){
+			$this->data['formers'] = $this->request->post['user']['formers'];
+		}elseif ( isset($user) ){
+			foreach ($user->getFormers() as $key => $former) {
+				$this->data['formers'][$key] = array(
+					'name' => $former->getName(),
+					'value' => $former->getValue(),
+					'visible' => $former->getVisible(),
+					);
+			}
+		}
 
 		// Entry former visible
 		$this->data['visible_types'] = array();
@@ -483,11 +670,11 @@ class ControllerUserUser extends Controller {
 			$user_id = $this->request->get['user_id'];
 		}
 		
-		if ((utf8_strlen($this->request->post['user']['meta']['firstname']) < 1) || (utf8_strlen($this->request->post['user']['meta']['firstname']) > 32)) {
+		if ((utf8_strlen($this->request->post['meta']['firstname']) < 1) || (utf8_strlen($this->request->post['meta']['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
 
-    	if ((utf8_strlen($this->request->post['user']['meta']['lastname']) < 1) || (utf8_strlen($this->request->post['user']['meta']['lastname']) > 32)) {
+    	if ((utf8_strlen($this->request->post['meta']['lastname']) < 1) || (utf8_strlen($this->request->post['meta']['lastname']) > 32)) {
       		$this->error['lastname'] = $this->language->get('error_lastname');
     	}
 		
@@ -558,8 +745,69 @@ class ControllerUserUser extends Controller {
 		return;
 	}
 	
-	public function autoComplete(){
-		
+	public function autocompleteCountry(){
+		$this->load->model( 'localisation/country' );
+
+		$sort = 'name';
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'sort' => $sort,
+			);
+
+		$country_data = $this->model_localisation_country->getCountries( $data );
+
+		$json = array();
+		foreach ($country_data as $country) {
+			$json[] = array(
+				'name' => $country->getName(),
+				'id' => $country->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function autocompleteCity(){
+		$this->load->model( 'localisation/city' );
+
+		$sort = 'name';
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		if ( isset( $this->request->get['filter_country'] ) ) {
+			$filter_country = $this->request->get['filter_country'];
+		}else {
+			$filter_country = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'filter_country' => $filter_country,
+			'sort' => $sort,
+			);
+
+		$city_data = $this->model_localisation_city->getCities( $data );
+
+		$json = array();
+		foreach ($city_data as $city) {
+			$json[] = array(
+				'name' => $city->getName(),
+				'id' => $city->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>

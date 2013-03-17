@@ -36,6 +36,12 @@ Class User {
 	 */
 	private $phones = array();
 
+	/** @MongoDB\EmbedMany(targetDocument="Website") */
+	private $websites = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Former") */
+	private $formers = array();
+
 	/** 
 	 * @MongoDB\EmbedOne(targetDocument="Document/User/Meta") 
 	 */
@@ -110,6 +116,30 @@ Class User {
 
 	public function getPhones(){
 		return $this->phones;
+	}
+
+	public function addWebsite( Website $website ){
+		$this->websites[] = $website;
+	}
+
+	public function setWebsites( $websites ){
+		$this->websites = $websites;
+	}
+
+	public function getWebsites(){
+		return $this->websites;
+	}
+
+	public function addFormer( Former $former ){
+		$this->formers[] = $former;
+	}
+
+	public function setFormers( $formers ){
+		$this->formers = $formers;
+	}
+
+	public function getFormers(){
+		return $this->formers;
 	}
 
 	public function setMeta( $meta ){

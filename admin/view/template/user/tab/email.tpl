@@ -12,15 +12,15 @@
 		  <?php foreach ( $emails as $key => $email ){ ?>
 		  <tr>
             <td>
-            	<input class="email input-xxlarge" type="text" name="user[emails][<?php echo $key; ?>][email]" value="<?php echo $email->getEmail(); ?>" />
-            	<input class="primary input-xxlarge" type="hidden" name="user[emails][<?php echo $key; ?>][primary]" value="<?php echo $email->getPrimary(); ?>" />
+            	<input class="email input-xxlarge" type="text" name="user[emails][<?php echo $key; ?>][email]" value="<?php echo $email['email']; ?>" />
+            	<input class="primary input-xxlarge" type="hidden" name="user[emails][<?php echo $key; ?>][primary]" value="<?php echo $email['primary']; ?>" />
             </td>
             <td>
-            	<a class="btn-lost-primary btn btn-success disabled <?php if ( $email->getPrimary() !== true ){ ?>hide<?php } ?>"><i class="icon-ok"></i></a>
-            	<a class="btn-set-primary btn btn-danger <?php if ( $email->getPrimary() === true ){ ?>hide<?php } ?>"><i class="icon-minus"></i></a>
+            	<a class="btn-lost-primary btn btn-success disabled <?php if ( $email['primary'] !== true ){ ?>hide<?php } ?>"><i class="icon-ok"></i></a>
+            	<a class="btn-set-primary btn btn-danger <?php if ( $email['primary'] === true ){ ?>hide<?php } ?>"><i class="icon-minus"></i></a>
             </td>
             <td>
-            	<a class="btn-remove-email btn btn-danger <?php if ( $email->getPrimary() === true ){ ?>hide<?php } ?>"><i class="icon-trash"></i></a>
+            	<a class="btn-remove-email btn btn-danger <?php if ( $email['primary'] === true ){ ?>hide<?php } ?>"><i class="icon-trash"></i></a>
             </td>
           </tr>
           <?php } ?>

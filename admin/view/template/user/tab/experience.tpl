@@ -1,48 +1,50 @@
 		<table class="form">
+			<?php foreach ($experiencies as $key => $experience) { ?>
 			<tr>
 				<td>
 				<div class="row-fluid">
 					<div class="span4">
 						<div class="span3"><strong><?php echo $entry_company; ?></strong></div>
-						<div class="span9"><input class="company input-medium" type="text" name="user[background][experience][0][company]" value="" /></div>
+						<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /></div>
 					</div>
 					<div class="span4">
 						<div class="span3"><?php echo $entry_current; ?></div>
-						<div class="span9"><a class="btn-lost-current btn btn-success disabled hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="user[background][experience][0][current]" value="true" /></div>
+						<div class="span9"><?php if ( $experience['current'] ) { ?><a class="btn-lost-current btn btn-success disabled"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger hide"><i class="icon-minus"></i></a><?php }else { ?><a class="btn-lost-current btn btn-success disabled hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><?php } ?><input class="current" type="hidden" name="background[experiencies][<?php echo $key; ?>][current]" value="<?php echo $experience['current']; ?>" /></div>
 					</div>
 					<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>
 				</div>
 				<div class="row-fluid">
           			<div class="span4">
           				<div class="span3"><?php echo $entry_title; ?></div>
-          				<div class="span9"><input class="title input-medium" type="text" name="user[background][experience][0][title]" value="" /></div>
+          				<div class="span9"><input class="title input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][title]" value="<?php echo $experience['title']; ?>" /></div>
           			</div>
           			<div class="span4">
           				<div class="span3"><?php echo $entry_location; ?></div>
-          				<div class="span9"><input class="localtion input-medium" type="text" name="user[background][experience][0][localtion]" value="" /></div>
+          				<div class="span9"><input class="localtion input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][localtion]" value="<?php echo $experience['location']; ?>" /></div>
           			</div>
           		</div>
           		<div class="row-fluid">
           			<div class="span4">
           				<div class="span3"><?php echo $entry_time_period; ?></div>
-          				<div class="span9"><input class="started input-small" type="text" name="user[background][experience][0][started]" value="" /> <?php echo $text_to; ?> <input class="ended input-small" type="text" name="user[background][experience][0][ended]" value="" /></div>
+          				<div class="span9"><input class="started input-small" type="text" name="background[experiencies][<?php echo $key; ?>][started]" value="<?php echo $experience['started']; ?>" /> <?php echo $text_to; ?> <input class="ended input-small" type="text" name="background[experiencies][<?php echo $key; ?>][ended]" value="<?php echo $experience['ended']; ?>" /></div>
           			</div>
           		</div>
           		<div class="row-fluid">
           			<div class="span4">
           				<div class="span3"><?php echo $entry_description; ?></div>
-          				<div class="span9"><input class="description input-xxlarge" type="text" name="user[background][experience][0][description]" value="" /></div>
+          				<div class="span9"><input class="description input-xxlarge" type="text" name="background[experiencies][<?php echo $key; ?>][description]" value="<?php echo $experience['description']; ?>" /></div>
           			</div>
           		</div>
 				</td>
 			</tr>
+			<?php } ?>
           	<tr class="index-add-experience"></tr>
 		</table>
 <a class="btn-add-experience btn btn-success" ><?php echo $button_add_experience; ?><i class="icon-plus"></i></a>
 
 <script>
-	var exist_current = 0;
-	var experience_length = 1;
+	var exist_current = <?php echo (count( $experiencies )) ? 1 : 0; ?>;
+	var experience_length = <?php echo count( $experiencies ); ?>;
 	$(document).ready(function(){
 		$('#tab-experience').on('click', '.btn-add-experience', function(){
 
@@ -51,34 +53,34 @@
 			html += 	'<div class="row-fluid">';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><strong><?php echo $entry_company; ?></strong></div>';
-			html += 			'<div class="span9"><input class="experience input-medium" type="text" name="user[background][experience][' + experience_length + '][company]" value="" /></div>';
+			html += 			'<div class="span9"><input class="experience input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
-			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success disabled hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="user[background][experience][' + experience_length + '][current]" value="true" /></div>';
+			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success disabled hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="true" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html += 	'</div>';
 			html += 	'<div class="row-fluid">';
           	html += 		'<div class="span4">';
           	html += 			'<div class="span3"><?php echo $entry_title; ?></div>';
-          	html += 			'<div class="span9"><input class="title input-medium" type="text" name="user[background][experience][' + experience_length + '][title]" value="" /></div>';
+          	html += 			'<div class="span9"><input class="title input-medium" type="text" name="background[experiencies][' + experience_length + '][title]" value="" /></div>';
           	html += 		'</div>';
           	html += 		'<div class="span4">';
           	html += 			'<div class="span3"><?php echo $entry_location; ?></div>';
-          	html += 			'<div class="span9"><input class="localtion input-medium" type="text" name="user[background][experience][' + experience_length + '][localtion]" value="" /></div>';
+          	html += 			'<div class="span9"><input class="localtion input-medium" type="text" name="background[experiencies][' + experience_length + '][localtion]" value="" /></div>';
           	html += 		'</div>';
           	html += 	'</div>';
           	html += 	'<div class="row-fluid">';
           	html += 		'<div class="span4">';
           	html += 			'<div class="span3"><?php echo $entry_time_period; ?></div>';
-          	html += 			'<div class="span9"><input class="started input-small" type="text" name="user[background][experience][' + experience_length + '][started]" value="" /> to <input class="ended input-small" type="text" name="user[background][experience][' + experience_length + '][ended]" value="" /></div>';
+          	html += 			'<div class="span9"><input class="started input-small" type="text" name="background[experiencies][' + experience_length + '][started]" value="" /> to <input class="ended input-small" type="text" name="background[experiencies][' + experience_length + '][ended]" value="" /></div>';
           	html += 		'</div>';
           	html += 	'</div>';
           	html += 	'<div class="row-fluid">';
           	html += 		'<div class="span4">';
           	html += 			'<div class="span3"><?php echo $entry_description; ?></div>';
-          	html += 			'<div class="span9"><input class="description input-xxlarge" type="text" name="user[background][experience][' + experience_length + '][description]" value="" /></div>';
+          	html += 			'<div class="span9"><input class="description input-xxlarge" type="text" name="background[experiencies][' + experience_length + '][description]" value="" /></div>';
           	html += 		'</div>';
           	html += 	'</div>';
 			html += 	'</td>';
