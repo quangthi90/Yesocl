@@ -21,7 +21,7 @@
 	</tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_birthday; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="background[birthday]" value="<?php echo $birthday; ?>" /></td>
+        <td><input required="required" class="input-medium date" type="text" name="background[birthday]" value="<?php echo $birthday; ?>" /></td>
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_marital_status; ?></td>
@@ -54,8 +54,8 @@
         <td><input required="required" class="input-large" type="text" name="meta[address]" value="<?php echo $address; ?>" /></td>
     </tr>
     <tr>
-        <td><?php echo $entry_advice_of_contact; ?></td>
-        <td><input class="input-xxlarge" type="text" name="background[adviceofcontact]" value="<?php echo $advice_of_contact; ?>" /></td>
+        <td><?php echo $entry_advice_for_contact; ?></td>
+        <td><input class="input-xxlarge" type="text" name="background[adviceforcontact]" value="<?php echo $advice_for_contact; ?>" /></td>
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
@@ -70,6 +70,9 @@
         <td><input class="input-xxlarge" type="text" name="background[interest]" value="<?php echo $interest; ?>" /></td>
     </tr>
 </table>
+<script type="text/javascript"><!--//
+    $('.date').datepicker();
+//--></script>
 <script type="text/javascript"><!--
 $('input[name=\'meta[location][country]\']').autocomplete({
   delay: 0,
@@ -86,31 +89,33 @@ $('input[name=\'meta[location][country]\']').autocomplete({
         }));
       }
     });
-  }, 
-  select: function(event, ui) {
-    $('input[name=\'meta[location][country]\']').val(ui.item.label);
-    $('input[name=\'meta[location][country_id]\']').val(ui.item.id);
-            
-    return false;
   },
   focus: function(event, ui) {
-        return false;
-    }
+    $('input[name=\'meta[location][country]\']').val( ui.item.label );
+        
+    return false;
+    }, 
+  select: function(event, ui) {
+    $('input[name=\'meta[location][country]\']').val( ui.item.label );
+    $('input[name=\'meta[location][country_id]\']').val( ui.item.value );
+            
+    return false;
+  }
 });
 //--></script> 
 <script type="text/javascript"><!--
 $('input[name=\'meta[location][city]\']').autocomplete({
   delay: 0,
   source: function(request, response) {
-    /*var url = '';
+    var url = '';
     if ( $('input[name=\'meta[location][country_id]\']').val() != '' ) {
         url = 'index.php?route=user/user/autocompleteCity&filter_country=' + $('input[name=\'meta[location][country_id]\']').val() + '&filter_name=';
     }else {
         url = 'index.php?route=user/user/autocompleteCity&filter_name=';
-    }*/
+    }
 
     $.ajax({
-      url: 'index.php?route=user/user/autocompleteCity&filter_name=' +  encodeURIComponent(request.term),
+      url: url +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -122,14 +127,15 @@ $('input[name=\'meta[location][city]\']').autocomplete({
       }
     });
   }, 
+  focus: function(event, ui) {
+    $('input[name=\'meta[location][city]\']').val( ui.item.label );
+    return false;
+    }, 
   select: function(event, ui) {
-    $('input[name=\'meta[location][city]\']').val(ui.item.label);
-    $('input[name=\'meta[location][city_id]\']').val(ui.item.id);
+    $('input[name=\'meta[location][city]\']').val( ui.item.label );
+    $('input[name=\'meta[location][city_id]\']').val( ui.item.value );
             
     return false;
-  },
-  focus: function(event, ui) {
-        return false;
-    }
+  }
 });
 //--></script> 

@@ -22,8 +22,8 @@ class ControllerUserUser extends Controller {
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			$this->model_user_user->addUser( $this->request->post );
 			
-			//$this->session->data['success'] = $this->language->get( 'text_success' );
-			//$this->redirect( $this->url->link( 'user/user') );
+			$this->session->data['success'] = $this->language->get( 'text_success' );
+			$this->redirect( $this->url->link( 'user/user') );
 		}
 
 		$this->data['action'] = $this->url->link( 'user/user/insert' );
@@ -39,7 +39,7 @@ class ControllerUserUser extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_user_user->edituser( $this->request->get['user_id'], $this->request->post );
+			$this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'user/user') );
@@ -297,7 +297,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_im'] = 'IM:';//$this->language->get( 'entry_birthday' );
 		$this->data['entry_phone'] = 'Phone:';//$this->language->get( 'entry_birthday' );
 		$this->data['entry_address'] = 'Address:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_advice_of_contact'] = 'Advice Of Contact:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_advice_for_contact'] = 'Advice For Contact:';//$this->language->get( 'entry_birthday' );
 
 		$this->data['entry_company'] = 'Company:';//$this->language->get( 'entry_birthday' );
 		$this->data['entry_current'] = 'Current:';//$this->language->get( 'entry_birthday' );
@@ -478,13 +478,13 @@ class ControllerUserUser extends Controller {
 			$this->data['address'] = '';
 		}
 
-		// Entry advice of contact
-		if ( isset($this->request->post['background']['adviceofcontact']) ){
-			$this->data['advice_of_contact'] = $this->request->post['background']['adviceofcontact'];
+		// Entry advice for contact
+		if ( isset($this->request->post['background']['adviceforcontact']) ){
+			$this->data['advice_for_contact'] = $this->request->post['background']['adviceforcontact'];
 		}elseif ( isset($user) && $user->getBackground() ){
-			$this->data['advice_of_contact'] = $user->getBackground()->getAdviceOfContact();
+			$this->data['advice_for_contact'] = $user->getBackground()->getAdviceForContact();
 		}else {
-			$this->data['advice_of_contact'] = '';
+			$this->data['advice_for_contact'] = '';
 		}
 
 		// Entry industry

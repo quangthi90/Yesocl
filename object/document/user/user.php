@@ -22,17 +22,17 @@ Class User {
 	private $password;
 
 	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Document/User/Email") 
+	 * @MongoDB\EmbedMany(targetDocument="Email") 
 	 */
 	private $emails = array();
 
 	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Document/User/Im") 
+	 * @MongoDB\EmbedMany(targetDocument="Im") 
 	 */
 	private $ims = array();
 
 	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Document/User/Phone") 
+	 * @MongoDB\EmbedMany(targetDocument="Phone") 
 	 */
 	private $phones = array();
 
@@ -43,7 +43,7 @@ Class User {
 	private $formers = array();
 
 	/** 
-	 * @MongoDB\EmbedOne(targetDocument="Document/User/Meta") 
+	 * @MongoDB\EmbedOne(targetDocument="Meta") 
 	 */
     private $meta;
 
@@ -72,6 +72,14 @@ Class User {
 
 	public function getUsername(){
 		return $this->username;
+	}
+
+	public function setPassword( $password ){
+		$this->password = $password;
+	}
+
+	public function getPassword(){
+		return $this->password;
 	}
 
 	public function addEmail( Email $email ){

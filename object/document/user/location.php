@@ -31,12 +31,12 @@ Class Location {
 		return $this->country;
 	}
 
-	public function setCountryId( $countryid ){
-		$this->countryid = $countryid;
+	public function setCountryId( $countryId ){
+		$this->countryId = $countryId;
 	}
 
 	public function getCountryId(){
-		return $this->countryid;
+		return $this->countryId;
 	}
 
 	public function setCity( $city ){
@@ -47,11 +47,11 @@ Class Location {
 		return $this->city;
 	}
 
-	public function setCityId( $cityid ){
-		$this->cityid = $cityid;
+	public function setCityId( $cityId ){
+		$this->cityId = $cityId;
 	}
 
 	public function getCityId(){
-		return $this->cityid;
+		return $this->cityId;
 	}
 }

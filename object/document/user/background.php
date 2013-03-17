@@ -18,7 +18,7 @@ Class Background {
     private $educations = array();
 
     /** @MongoDB\String */
-    private $interests;
+    private $interest;
 
     /** @MongoDB\Date */
 	private $birthday;
@@ -57,12 +57,12 @@ Class Background {
 		return $this->educations;
 	}
 
-	public function setInterests( $interests ){
-		$this->interests = $interests;
+	public function setInterest( $interest ){
+		$this->interest = $interest;
 	}
 
-	public function getInterests(){
-		return $this->interests;
+	public function getInterest(){
+		return $this->interest;
 	}
 
 	public function setBirthday( $birthday ){

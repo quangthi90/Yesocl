@@ -97,8 +97,8 @@ class ModelLocalisationCity extends Doctrine {
     		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
     	}
 
-    	if ( isset( $data['filter_country'] ) ) {
-    		$query->field( 'country.id' )->equals( new \MongoRegex('/' . $data['filter_country'] . '.*/i') );
+    	if ( isset( $data['filter_country'] ) && $data['filter_country'] ) {
+    		$query->field( 'this.country.id' )->equals( new \MongoRegex('/' . $data['filter_country'] . '.*/i') );
     	}
 
     	if ( isset( $data['sort'] ) ) {

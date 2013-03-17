@@ -96,11 +96,11 @@ Class Meta {
 		return $this->industry;
 	}
 
-	public function setAddresss( $address ){
+	public function setAddress( $address ){
 		$this->address = $address;
 	}
 
-	public function getAddresss(){
+	public function getAddress(){
 		return $this->address;
 	}
 }
