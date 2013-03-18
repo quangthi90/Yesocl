@@ -87,6 +87,12 @@ class ControllerDataValue extends Controller {
 			$this->data['success'] = '';
 		}
 
+		if (isset($this->request->get['filter_type_name'])) {
+			$filter_type_name = $this->request->get['filter_type_name'];
+		} else {
+			$filter_type_name = null;
+		}
+
 		if (isset($this->request->get['filter_type'])) {
 			$filter_type = $this->request->get['filter_type'];
 		} else {
@@ -274,6 +280,7 @@ class ControllerDataValue extends Controller {
 			
 		$this->data['pagination'] = $pagination->render();
 
+		$this->data['filter_type_name'] = $filter_type_name;
 		$this->data['filter_name'] = $filter_name;
 		$this->data['filter_type'] = $filter_type;
 		$this->data['filter_value'] = $filter_value;

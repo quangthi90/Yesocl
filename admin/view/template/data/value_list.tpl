@@ -48,7 +48,7 @@
             <tr class="filter">
               <td></td>
               <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
-              <td><input type="text" name="filter_type" value="<?php echo $filter_type; ?>" /></td>
+              <td><input type="text" name="filter_type_name" value="<?php echo $filter_type_name; ?>" /><input type="hidden" name="filter_type" value="<?php echo $filter_type; ?>" /></td>
               <td><input type="text" name="filter_value" value="<?php echo $filter_value; ?>" /></td>
               <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
             </tr>
@@ -111,16 +111,16 @@ $('#form input').keydown(function(e) {
 });
 //--></script> 
 <script type="text/javascript"><!--
-$('input[name=\'filter_type\']').autocomplete({
+$('input[name=\'filter_type_name\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=' +  encodeURIComponent(request.term),
+      url: 'index.php?route=data/type/autocomplete&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
           return {
-            label: item.type,
+            label: item.name,
             value: item.id
           }
         }));
@@ -128,7 +128,8 @@ $('input[name=\'filter_type\']').autocomplete({
     });
   }, 
   select: function(event, ui) {
-    $('input[name=\'filter_type\']').val(ui.item.label);
+    $('input[name=\'filter_type_name\']').val(ui.item.label);
+    $('input[name=\'filter_type\']').val(ui.item.value);
             
     return false;
   },

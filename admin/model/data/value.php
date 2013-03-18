@@ -91,9 +91,9 @@ class ModelDataValue extends Doctrine {
     	if ( isset( $data['filter_name'] ) ) {
     		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
     	}
-
+    	
     	if ( isset( $data['filter_type'] ) ) {
-    		$query->field( 'this.type.name' )->equals( new \MongoRegex('/' . $data['filter_type'] . '.*/i') );
+    		$query->field( 'type.id' )->equals( $data['filter_type'] );
     	}
 
     	if ( isset( $data['filter_value'] ) ) {
