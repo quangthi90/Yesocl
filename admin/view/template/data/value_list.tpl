@@ -30,12 +30,7 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-              <td><?php if ($sort == 'this.type.name') { ?>
-                <a href="<?php echo $sort_type; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_type; ?></a>
-                <?php } else { ?>
-                <a href="<?php echo $sort_type; ?>"><?php echo $column_type; ?></a>
-                <?php } ?></td>
-              <td><?php echo $column_action; ?></td>
+              <td><a><?php echo $column_type; ?></a></td>
               <td><?php if ($sort == 'value') { ?>
                 <a href="<?php echo $sort_value; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_value; ?></a>
                 <?php } else { ?>

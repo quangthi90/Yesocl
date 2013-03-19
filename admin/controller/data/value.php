@@ -250,7 +250,6 @@ class ControllerDataValue extends Controller {
 		}
 					
 		$this->data['sort_name'] = $this->url->link('data/value', 'page=' . $page . '&sort=name' . $url );
-		$this->data['sort_type'] = $this->url->link('data/value', 'page=' . $page . '&sort=this.type.name' . $url );
 		$this->data['sort_value'] = $this->url->link('data/value', 'page=' . $page . '&sort=value' . $url );
 		
 		$url = '';

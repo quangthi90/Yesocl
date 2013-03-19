@@ -37,6 +37,11 @@ class ModelDataType extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$type = $this->dm->getRepository( 'Document\Data\Type' )->find( $id );
 
+				$values = $this->dm->getRepository( 'Document\Data\value' )->findBy( array( 'type.id' => $id ) );
+				foreach ($values as $value) {
+					$this->dm->remove($value);
+				}
+
 				$this->dm->remove($type);
 			}
 		}
