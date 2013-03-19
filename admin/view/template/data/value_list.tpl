@@ -30,7 +30,7 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
-              <td><a><?php echo $column_type; ?></a></td>
+              <td><?php echo $column_type; ?></td>
               <td><?php if ($sort == 'value') { ?>
                 <a href="<?php echo $sort_value; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_value; ?></a>
                 <?php } else { ?>

@@ -235,6 +235,10 @@ class ControllerDataValue extends Controller {
 			$url .= '&filter_name=' . $this->request->get['filter_name'];
 		}
 
+		if (isset($this->request->get['filter_type_name'])) {
+			$url .= '&filter_type_name=' . $this->request->get['filter_type_name'];
+		}
+
 		if (isset($this->request->get['filter_type'])) {
 			$url .= '&filter_type=' . $this->request->get['filter_type'];
 		}
