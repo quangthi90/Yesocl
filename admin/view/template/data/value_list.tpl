@@ -76,6 +76,12 @@
 <script type="text/javascript"><!--
 function filter() {
   url = 'index.php?route=data/value';
+
+  var filter_type_name = $('input[name=\'filter_type_name\']').attr('value');
+  
+  if (filter_type_name) {
+    url += '&filter_type_name=' + encodeURIComponent(filter_type_name);
+  }
   
   var filter_type = $('input[name=\'filter_type\']').attr('value');
   
