@@ -1,11 +1,11 @@
 <?php 
-class ControllerInformationSchool extends Controller {
+class ControllerDataType extends Controller {
 	private $error = array( );
 	private $limit = 10;
  
 	public function index(){
-		$this->load->language( 'information/school' );
-		$this->load->model( 'information/school' );
+		$this->load->language( 'data/type' );
+		$this->load->model( 'data/type' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 		
@@ -13,53 +13,53 @@ class ControllerInformationSchool extends Controller {
 	}
 
 	public function insert(){
-		$this->load->language( 'information/school' );
-		$this->load->model( 'information/school' );
+		$this->load->language( 'data/type' );
+		$this->load->model( 'data/type' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_information_school->addSchool( $this->request->post );
+			$this->model_data_type->addType( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'information/school') );
+			$this->redirect( $this->url->link( 'data/type') );
 		}
 
-		$this->data['action'] = $this->url->link( 'information/school/insert' );
+		$this->data['action'] = $this->url->link( 'data/type/insert' );
 		
 		$this->getForm( );
 	}
 
 	public function update(){
-		$this->load->language( 'information/school' );
-		$this->load->model( 'information/school' );
+		$this->load->language( 'data/type' );
+		$this->load->model( 'data/type' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_information_school->editSchool( $this->request->get['school_id'], $this->request->post );
+			$this->model_data_type->editType( $this->request->get['type_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'information/school') );
+			$this->redirect( $this->url->link( 'data/type') );
 		}
 		
 		$this->getForm();
 	}
  
 	public function delete(){
-		$this->load->language( 'information/school' );
-		$this->load->model( 'information/school' );
+		$this->load->language( 'data/type' );
+		$this->load->model( 'data/type' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_information_school->deleteSchool( $this->request->post );
+			$this->model_data_type->deleteType( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'information/school') );
+			$this->redirect( $this->url->link( 'data/type') );
 		}
 
 		$this->getList( );
@@ -87,10 +87,42 @@ class ControllerInformationSchool extends Controller {
 			$this->data['success'] = '';
 		}
 		
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$sort = $this->request->get['sort'];
+		} else {
+			$sort = 'name';
+		}
+		
+		if (isset($this->request->get['order'])) {
+			$order = $this->request->get['order'];
+		} else {
+			$order = 'asc';
+		}
+
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
 		}
 
 		// breadcrumbs
@@ -101,7 +133,7 @@ class ControllerInformationSchool extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'information/school' ),
+			'href'      => $this->url->link( 'data/type' ),
       		'separator' => ' :: '
    		);
 
@@ -123,45 +155,83 @@ class ControllerInformationSchool extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
+		$this->data['button_filter'] = $this->language->get( 'button_filter' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'information/school/insert' );
-		$this->data['delete'] = $this->url->link( 'information/school/delete' );
+		$this->data['insert'] = $this->url->link( 'data/type/insert' );
+		$this->data['delete'] = $this->url->link( 'data/type/delete' );
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'sort' => $sort,
+			'order' => $order,
+			'start' => ($page - 1) * $this->limit,
+			'limit' => $this->limit,
+			);
 
 		// Group
-		$schools = $this->model_information_school->getSchools( );
+		$types = $this->model_data_type->getTypes( $data );
 		
-		$school_total = $this->model_information_school->getTotalSchools();
+		$type_total = $this->model_data_type->getTotalTypes( $data );
 		
-		$this->data['schools'] = array();
-		if ( $schools ){
-			foreach ( $schools as $school ){
+		$this->data['types'] = array();
+		if ( $types ){
+			foreach ( $types as $type ){
 				$action = array();
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'information/school/update', 'school_id=' . $school->getId() ),
+					'href' => $this->url->link( 'data/type/update', 'type_id=' . $type->getId() ),
 					'icon' => 'icon-edit',
 				);
 			
-				$this->data['schools'][] = array(
-					'id' => $school->getId(),
-					'name' => $school->getName(),
+				$this->data['types'][] = array(
+					'id' => $type->getId(),
+					'name' => $type->getName(),
 					'action' => $action,
 				);
 			}
 		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if ($order == 'asc') {
+			$url .= '&order=desc';
+		} else {
+			$url .= '&order=asc';
+		}
+					
+		$this->data['sort_name'] = $this->url->link('data/type', 'page=' . $page . '&sort=name' . $url );
+		
+		$url = '';
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		$url .= '&sort=' . $sort;
+											
+		$url .= '&order=' . $order;
 		
 		$pagination = new Pagination();
-		$pagination->total = $school_total;
+		$pagination->total = $type_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('information/school', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('data/type', '&page={page}' . $url, 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
-		$this->template = 'information/school_list.tpl';
+		$this->data['filter_name'] = $filter_name;
+		
+		$this->data['sort'] = $sort;
+		$this->data['order'] = $order;
+
+		$this->template = 'data/type_list.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -200,7 +270,7 @@ class ControllerInformationSchool extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'information/school' ),
+			'href'      => $this->url->link( 'data/type' ),
       		'separator' => ' :: '
    		);
 
@@ -219,14 +289,14 @@ class ControllerInformationSchool extends Controller {
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'information/school' );
+		$this->data['cancel'] = $this->url->link( 'data/type' );
 		
 		// Group
-		if ( isset($this->request->get['school_id']) ){
-			$school = $this->model_information_school->getSchool( $this->request->get['school_id'] );
+		if ( isset($this->request->get['type_id']) ){
+			$type = $this->model_data_type->getType( $this->request->get['type_id'] );
 			
-			if ( $school ){
-				$this->data['action'] = $this->url->link( 'information/school/update', 'school_id=' . $school->getId() );	
+			if ( $type ){
+				$this->data['action'] = $this->url->link( 'data/type/update', 'type_id=' . $type->getId() );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -235,13 +305,13 @@ class ControllerInformationSchool extends Controller {
 		// Entry name
 		if ( isset($this->request->post['name']) ){
 			$this->data['name'] = $this->request->post['name'];
-		}elseif ( isset($school) ){
-			$this->data['name'] = $school->getName();
+		}elseif ( isset($type) ){
+			$this->data['name'] = $type->getName();
 		}else {
 			$this->data['name'] = '';
 		}
 
-		$this->template = 'information/school_form.tpl';
+		$this->template = 'data/type_form.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -272,6 +342,35 @@ class ControllerInformationSchool extends Controller {
 		}else {
 			return true;	
 		}
+	}
+
+	public function autocomplete() {
+		$this->load->model( 'data/type' );
+
+		$sort = 'name';
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'sort' => $sort,
+			);
+
+		$type_data = $this->model_data_type->getTypes( $data );
+
+		$json = array();
+		foreach ($type_data as $type) {
+			$json[] = array(
+				'name' => $type->getName(),
+				'id' => $type->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
