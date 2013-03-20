@@ -55,11 +55,9 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_ward'] = $this->language->get('text_ward');
 		$this->data['text_street'] = $this->language->get('text_street');
 
-		$this->data['text_user_profile'] = $this->language->get('text_user_profile');
-		$this->data['text_industry'] = $this->language->get('text_industry');
-		$this->data['text_school'] = $this->language->get('text_school');
-		$this->data['text_degree'] = $this->language->get('text_degree');
-		$this->data['text_fieldofstudy'] = $this->language->get('text_fieldofstudy');
+		$this->data['text_data_list'] = $this->language->get('text_data_list');
+		$this->data['text_type'] = $this->language->get('text_type');
+		$this->data['text_value'] = $this->language->get('text_value');
 		
 		// Other
 		$this->data['text_confirm'] = $this->language->get('text_confirm');
@@ -86,10 +84,8 @@ class ControllerCommonHeader extends Controller {
 		$this->data['street'] = $this->url->link('localisation/street');
 		
 		// user profile
-		$this->data['industry'] = $this->url->link('information/industry');
-		$this->data['school'] = $this->url->link('information/school');
-		$this->data['degree'] = $this->url->link('information/degree');
-		$this->data['fieldofstudy'] = $this->url->link('information/fieldofstudy');
+		$this->data['type'] = $this->url->link('data/type');
+		$this->data['value'] = $this->url->link('data/value');
 		
 		
 		$this->template = 'common/header.tpl';

@@ -14,7 +14,6 @@ Class User {
 	private $id; 
 
 	/** 
-	 * @BmSolr
 	 * @MongoDB\String 
 	 */
 	private $username;
@@ -23,13 +22,11 @@ Class User {
 	private $password;
 
 	/** 
-	 * @BmSolr
 	 * @MongoDB\EmbedMany(targetDocument="Document/User/Email") 
 	 */
 	private $emails = array();
 
 	/** 
-	 * @BmSolr
 	 * @MongoDB\EmbedOne(targetDocument="Document/User/Meta") 
 	 */
     private $meta;

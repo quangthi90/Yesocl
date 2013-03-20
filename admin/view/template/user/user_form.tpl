@@ -22,6 +22,11 @@
 		    <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
 		    <li><a href="#tab-email" data-toggle="tab"><?php echo $tab_email; ?></a></li>
 		    <li><a href="#tab-info" data-toggle="tab"><?php echo $tab_information; ?></a></li>
+        <li><a href="#tab-contact" data-toggle="tab">Contact Info</a></li>
+        <li><a href="#tab-website" data-toggle="tab">Website</a></li>
+        <li><a href="#tab-experience" data-toggle="tab">Experience</a></li>
+        <li><a href="#tab-education" data-toggle="tab">Education</a></li>
+        <li><a href="#tab-former" data-toggle="tab">Former</a></li>
 	    </ul>
 	    <div class="tab-content">
 	    	<!-- General tab -->
@@ -38,6 +43,31 @@
 	    	<div class="tab-pane" id="tab-info">
 	    		<?php include 'tab/information.tpl'; ?>
 	    	</div>
+
+        <!-- Contact tab -->
+        <div class="tab-pane" id="tab-contact">
+          <?php include '/tab/contact.tpl'; ?>
+        </div>
+
+        <!-- Website tab -->
+        <div class="tab-pane" id="tab-website">
+          <?php include '/tab/website.tpl'; ?>
+        </div>
+
+        <!-- Experience tab -->
+        <div class="tab-pane" id="tab-experience">
+          <?php include '/tab/experience.tpl'; ?>
+        </div>
+
+        <!-- Education tab -->
+        <div class="tab-pane" id="tab-education">
+          <?php include '/tab/education.tpl'; ?>
+        </div>
+
+        <!-- Former tab -->
+        <div class="tab-pane" id="tab-former">
+          <?php include '/tab/former.tpl'; ?>
+        </div>
 	    </div>
       </form>
     </div>
