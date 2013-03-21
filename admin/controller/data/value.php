@@ -460,7 +460,6 @@ class ControllerDataValue extends Controller {
 
 		if ( isset( $this->request->get['filter_type'] ) ) {
 			$filter_type = $this->request->get['filter_type'];
-			$sort = 'this.type.name';
 		}else {
 			$filter_type = null;
 		}

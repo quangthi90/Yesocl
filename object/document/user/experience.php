@@ -16,10 +16,10 @@ Class Experience {
 	/** @MongoDB\String */
 	private $localtion;
 
-	/** @MongoDB\Date */
+	/** @MongoDB\String */
 	private $started;
 
-	/** @MongoDB\Date */
+	/** @MongoDB\String */
 	private $ended;
 
 	/** @MongoDB\Boolean */

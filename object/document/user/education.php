@@ -10,10 +10,10 @@ Class Education {
 	/** @MongoDB\String */
 	private $school;
 
-	/** @MongoDB\Date */
+	/** @MongoDB\String */
 	private $started;
 
-	/** @MongoDB\Date */
+	/** @MongoDB\String */
 	private $ended;
 
 	/** @MongoDB\String */

@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
+        <td><input required="required" class="industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
     </tr>
     <tr>
         <td><?php echo $entry_headingline; ?></td>
@@ -139,3 +139,30 @@ $('input[name=\'meta[location][city]\']').autocomplete({
   }
 });
 //--></script> 
+<script type="text/javascript"><!--//
+$('input.industry').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/value/autocomplete&filter_type=514af77a913db48c05000012&filter_name' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $(this).val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+     return false;
+     }
+});
+//--></script>

@@ -611,7 +611,7 @@ class ControllerUserUser extends Controller {
 		$this->data['educations'] = array();
 		if ( isset($this->request->post['background']['educations']) ){
 			$this->data['educations'] = $this->request->post['background']['educations'];
-		}elseif ( isset($user) && $user->getBackground()  ){
+		}elseif ( isset($user) ){
 			foreach ($user->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),

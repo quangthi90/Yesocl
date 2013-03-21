@@ -3,7 +3,7 @@ namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
- * @MongoDB\Document(collection="user_background")
+ * @MongoDB\EmbeddedDocument
  */
 Class Background {
 	/** 

@@ -163,7 +163,7 @@ class ModelUserUser extends Doctrine {
 		// Get primary email
 		$primary_email = '';
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( $email_data['primary'] == 'true' ){
+			if ( $email_data['primary'] ){
 				$primary_email = strtolower($email_data['email']);
 				break;
 			}
@@ -177,6 +177,8 @@ class ModelUserUser extends Doctrine {
 		foreach ( $data['user']['emails'] as $email_data ){
 			if ( strtolower($email_data['email']) === $primary_email ){
 				continue;
+			}elseif ( !$email_data['email'] ) {
+				continue;
 			}
 			$email = new Email();
 			$email->setEmail( $data['email'] );
@@ -187,6 +189,9 @@ class ModelUserUser extends Doctrine {
 		// Create Experiencies
 		$experiencies = array();
 		foreach ($data['background']['experiencies'] as $experience_data) {
+			if ( !$experience_data['company'] ) {
+				continue;
+			}
 			$experience = new Experience();
 			$experience->setCompany( $experience_data['company'] );
 			$experience->setCurrent( $experience_data['current'] );
@@ -201,6 +206,9 @@ class ModelUserUser extends Doctrine {
 		// Create Educations
 		$educations = array();
 		foreach ($data['background']['educations'] as $education_data) {
+			if ( !$education_data['school'] ) {
+				continue;
+			}
 			$education = new Education();
 			$education->setSchool( $education_data['school'] );
 			$education->setDegree( $education_data['degree'] );
@@ -225,6 +233,9 @@ class ModelUserUser extends Doctrine {
 		// Create Ims
 		$ims = array();
 		foreach ($data['user']['ims'] as $im_data) {
+			if ( !$im_data['im'] ) {
+				continue;
+			}
 			$im = new Im();
 			$im->setIm( $im_data['im'] );
 			$im->setType( $im_data['type'] );
@@ -235,6 +246,9 @@ class ModelUserUser extends Doctrine {
 		// Create Phones
 		$phones = array();
 		foreach ($data['user']['phones'] as $phone_data) {
+			if ( !$phone_data['phone'] ) {
+				continue;
+			}
 			$phone = new Phone();
 			$phone->setPhone( $phone_data['phone'] );
 			$phone->setType( $phone_data['type'] );
@@ -245,6 +259,9 @@ class ModelUserUser extends Doctrine {
 		// Create Websites
 		$websites = array();
 		foreach ($data['user']['websites'] as $website_data) {
+			if ( !$website_data['url'] ) {
+				continue;
+			}
 			$website = new Website();
 			$website->setUrl( $website_data['url'] );
 			$website->setTitle( $website_data['title'] );
@@ -254,6 +271,9 @@ class ModelUserUser extends Doctrine {
 		// Create Formers
 		$formers = array();
 		foreach ($data['user']['formers'] as $former_data) {
+			if ( !$former_data['name'] ) {
+				continue;
+			}
 			$former = new Website();
 			$former->setName( $former_data['name'] );
 			$former->setValue( $former_data['value'] );
@@ -443,7 +463,7 @@ class ModelUserUser extends Doctrine {
 		// Get primary email
 		$primary_email = '';
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( $email_data['primary'] == 'true' ){
+			if ( $email_data['primary'] ){
 				$primary_email = strtolower($email_data['email']);
 				break;
 			}
@@ -457,6 +477,8 @@ class ModelUserUser extends Doctrine {
 		foreach ( $data['user']['emails'] as $email_data ){
 			if ( strtolower($email_data['email']) === $primary_email ){
 				continue;
+			}elseif ( !$email_data['email'] ) {
+				continue;
 			}
 			$email = new Email();
 			$email->setEmail( $email_data['email'] );
@@ -467,6 +489,9 @@ class ModelUserUser extends Doctrine {
 		// Create Experiencies
 		$experiencies = array();
 		foreach ($data['background']['experiencies'] as $experience_data) {
+			if ( !$experience_data['company'] ) {
+				continue;
+			}
 			$experience = new Experience();
 			$experience->setCompany( $experience_data['company'] );
 			$experience->setCurrent( $experience_data['current'] );
@@ -481,6 +506,9 @@ class ModelUserUser extends Doctrine {
 		// Create Educations
 		$educations = array();
 		foreach ($data['background']['educations'] as $education_data) {
+			if ( !$education_data['school'] ) {
+				continue;
+			}
 			$education = new Education();
 			$education->setSchool( $education_data['school'] );
 			$education->setDegree( $education_data['degree'] );
@@ -505,6 +533,9 @@ class ModelUserUser extends Doctrine {
 		// Create Ims
 		$ims = array();
 		foreach ($data['user']['ims'] as $im_data) {
+			if ( !$im_data['im'] ) {
+				continue;
+			}
 			$im = new Im();
 			$im->setIm( $im_data['im'] );
 			$im->setType( $im_data['type'] );
@@ -515,6 +546,9 @@ class ModelUserUser extends Doctrine {
 		// Create Phones
 		$phones = array();
 		foreach ($data['user']['phones'] as $phone_data) {
+			if ( !$phone_data['phone'] ) {
+				continue;
+			}
 			$phone = new Phone();
 			$phone->setPhone( $phone_data['phone'] );
 			$phone->setType( $phone_data['type'] );
@@ -525,6 +559,9 @@ class ModelUserUser extends Doctrine {
 		// Create Websites
 		$websites = array();
 		foreach ($data['user']['websites'] as $website_data) {
+			if ( !$website_data['url'] ) {
+				continue;
+			}
 			$website = new Website();
 			$website->setUrl( $website_data['url'] );
 			$website->setTitle( $website_data['title'] );
@@ -534,6 +571,9 @@ class ModelUserUser extends Doctrine {
 		// Create Formers
 		$formers = array();
 		foreach ($data['user']['formers'] as $former_data) {
+			if ( !$former_data['name'] ) {
+				continue;
+			}
 			$former = new Website();
 			$former->setName( $former_data['name'] );
 			$former->setValue( $former_data['value'] );
@@ -552,12 +592,12 @@ class ModelUserUser extends Doctrine {
 		$user->setPhones( $phones );
 		$user->setWebsites( $websites );
 		$user->setFormers( $formers );
-		
+	
 		// Add status
 		if ( isset($data['user']['status']) ){
 			$user->setStatus( $data['user']['status'] );
 		}
-		
+
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
