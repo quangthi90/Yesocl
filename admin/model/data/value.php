@@ -88,12 +88,17 @@ class ModelDataValue extends Doctrine {
     		->limit( $data['limit'] )
     		->skip( $data['start'] );
 
-    	if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    	if ( isset( $data['filter_type_name'] ) ) {
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => $data['filter_type_name'] ) )->getId();
+    		$query->field( 'type.id' )->equals( $type_id );
     	}
     	
     	if ( isset( $data['filter_type'] ) ) {
     		$query->field( 'type.id' )->equals( $data['filter_type'] );
+    	}
+
+    	if ( isset( $data['filter_name'] ) ) {
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
     	}
 
     	if ( isset( $data['filter_value'] ) ) {
@@ -118,8 +123,13 @@ class ModelDataValue extends Doctrine {
     		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
     	}
 
+    	if ( isset( $data['filter_type_name'] ) ) {
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => $data['filter_type_name'] ) )->getId();
+    		$query->field( 'type.id' )->equals( $type_id );
+    	}
+
     	if ( isset( $data['filter_type'] ) ) {
-    		$query->field( 'this.type.name' )->equals( new \MongoRegex('/' . $data['filter_type'] . '.*/i') );
+    		$query->field( 'type.id' )->equals( $data['filter_type'] );
     	}
 
     	if ( isset( $data['filter_value'] ) ) {

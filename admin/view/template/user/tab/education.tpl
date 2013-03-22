@@ -4,7 +4,7 @@
                     <td>
                     <div class="row-fluid">
                          <div class="span2"><strong><?php echo $entry_school; ?></strong></div>
-                         <div class="span9"><input class="school input-medium" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" /></div>
+                         <div class="span9"><input datalist="School" class="datalist school input-medium" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" /></div>
                          <div class="span1"><a class="btn-remove-education btn btn-danger"><i class="icon-trash"></i></a></div>
                     </div>
                     <div class="row-fluid">
@@ -13,11 +13,11 @@
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_degree; ?></div>
-                         <div class="span10"><input class="degree input-medium" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
+                         <div class="span10"><input datalist="Degree" class="datalist degree input-medium" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_field_of_study; ?></div>
-                         <div class="span10"><input class="fieldofstudy input-medium" type="text" name="background[educations][<?php echo $key; ?>][fieldofstudy]" value="<?php echo $education['fieldofstudy']; ?>" /></div>
+                         <div class="span10"><input datalist="Field Of Study" class="datalist fieldofstudy input-medium" type="text" name="background[educations][<?php echo $key; ?>][fieldofstudy]" value="<?php echo $education['fieldofstudy']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_grace; ?></div>
@@ -47,7 +47,7 @@
 			html +=	'<td>';
 			html +=	'<div class="row-fluid">';
 			html +=		'<div class="span2"><strong><?php echo $entry_school; ?></strong></div>';
-			html +=		'<div class="span9"><input class="school input-medium" type="text" name="background[educations][' + education_length + '][school]" value="" /></div>';
+			html +=		'<div class="span9"><input datalist="School" class="datalist school input-medium" type="text" name="background[educations][' + education_length + '][school]" value="" /></div>';
 			html +=		'<div class="span1"><a class="btn-remove-education btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html +=	'</div>';
           	html +=	'<div class="row-fluid">';
@@ -56,11 +56,11 @@
           	html +=	'</div>';
 			html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_degree; ?></div>';
-          	html +=		'<div class="span10"><input class="degree input-medium" type="text" name="background[educations][' + education_length + '][degree]" value="" /></div>';
+          	html +=		'<div class="span10"><input datalist="Degree" class="datalist degree input-medium" type="text" name="background[educations][' + education_length + '][degree]" value="" /></div>';
           	html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_field_of_study; ?></div>';
-          	html +=		'<div class="span10"><input class="fieldofstudy input-medium" type="text" name="background[educations][' + education_length + '][fieldofstudy]" value="" /></div>';
+          	html +=		'<div class="span10"><input datalist="Field Of Study" class="datalist fieldofstudy input-medium" type="text" name="background[educations][' + education_length + '][fieldofstudy]" value="" /></div>';
           	html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_grace; ?></div>';
@@ -82,11 +82,14 @@
 			education_length++; 
 
 
-$('input.school').autocomplete({
+$('input.datalist').autocomplete({
    delay: 0,
+   search: function( event, ui ) {
+    type = $(this).attr('datalist');
+   },
    source: function(request, response) {
      $.ajax({
-       url: 'index.php?route=data/value/autocomplete&filter_type=514af76a913db48c05000010&filter_name=' +  encodeURIComponent(request.term),
+       url: 'index.php?route=data/value/autocomplete&filter_type_name=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
        dataType: 'json',
        success: function(json) {   
          response($.map(json, function(item) {
@@ -108,140 +111,10 @@ $('input.school').autocomplete({
       }
 });
 
-$('input.fieldofstudy').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af7a3913db48c05000013&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $(this).val(ui.item.label);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-     return false;
-     }
-});
-
-$('input.degree').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af771913db48c05000011&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $(this).val(ui.item.label);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-     return false;
-     }
-});
 		});
 
 		$('#tab-education').on('click', '.btn-remove-education', function(){
 			$(this).parent().parent().parent().parent().remove();
 		});
 	});
-//--></script>
-<script type="text/javascript"><!--//
-$('input.school').autocomplete({
-   delay: 0,
-   source: function(request, response) {
-     $.ajax({
-       url: 'index.php?route=data/value/autocomplete&filter_type=514af76a913db48c05000010&filter_name=' +  encodeURIComponent(request.term),
-       dataType: 'json',
-       success: function(json) {   
-         response($.map(json, function(item) {
-           return {
-             label: item.name,
-             value: item.id
-           }
-         }));
-       }
-     });
-   }, 
-   select: function(event, ui) {
-     $(this).val(ui.item.label);
-            
-     return false;
-   },
-   focus: function(event, ui) {
-      return false;
-      }
-});
-
-$('input.fieldofstudy').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af7a3913db48c05000013&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $(this).val(ui.item.label);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-     return false;
-     }
-});
-
-$('input.degree').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af771913db48c05000011&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $(this).val(ui.item.label);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-     return false;
-     }
-});
 //--></script>

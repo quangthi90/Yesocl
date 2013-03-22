@@ -59,7 +59,7 @@
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
-        <td><input required="required" class="industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
+        <td><input required="required" datalist="Industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
     </tr>
     <tr>
         <td><?php echo $entry_headingline; ?></td>
@@ -140,11 +140,16 @@ $('input[name=\'meta[location][city]\']').autocomplete({
 });
 //--></script> 
 <script type="text/javascript"><!--//
-$('input.industry').autocomplete({
+$(function () {
+var type;
+$('input.datalist').autocomplete({
   delay: 0,
+  search: function( event, ui ) {
+    type = $(this).attr('datalist');
+  },
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af77a913db48c05000012&filter_name' +  encodeURIComponent(request.term),
+      url: 'index.php?route=data/value/autocomplete&filter_type_name=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -164,5 +169,6 @@ $('input.industry').autocomplete({
   focus: function(event, ui) {
      return false;
      }
+});
 });
 //--></script>
