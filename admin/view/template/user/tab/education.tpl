@@ -86,7 +86,7 @@ $('input.school').autocomplete({
    delay: 0,
    source: function(request, response) {
      $.ajax({
-       url: 'index.php?route=data/value/autocomplete&filter_type=514af76a913db48c05000010&filter_name' +  encodeURIComponent(request.term),
+       url: 'index.php?route=data/value/autocomplete&filter_type=514af76a913db48c05000010&filter_name=' +  encodeURIComponent(request.term),
        dataType: 'json',
        success: function(json) {   
          response($.map(json, function(item) {
@@ -112,7 +112,7 @@ $('input.fieldofstudy').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af7a3913db48c05000013&filter_name' +  encodeURIComponent(request.term),
+      url: 'index.php?route=data/value/autocomplete&filter_type=514af7a3913db48c05000013&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -138,7 +138,7 @@ $('input.degree').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type=514af771913db48c05000011&filter_name' +  encodeURIComponent(request.term),
+      url: 'index.php?route=data/value/autocomplete&filter_type=514af771913db48c05000011&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -165,4 +165,83 @@ $('input.degree').autocomplete({
 			$(this).parent().parent().parent().parent().remove();
 		});
 	});
+//--></script>
+<script type="text/javascript"><!--//
+$('input.school').autocomplete({
+   delay: 0,
+   source: function(request, response) {
+     $.ajax({
+       url: 'index.php?route=data/value/autocomplete&filter_type=514af76a913db48c05000010&filter_name=' +  encodeURIComponent(request.term),
+       dataType: 'json',
+       success: function(json) {   
+         response($.map(json, function(item) {
+           return {
+             label: item.name,
+             value: item.id
+           }
+         }));
+       }
+     });
+   }, 
+   select: function(event, ui) {
+     $(this).val(ui.item.label);
+            
+     return false;
+   },
+   focus: function(event, ui) {
+      return false;
+      }
+});
+
+$('input.fieldofstudy').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/value/autocomplete&filter_type=514af7a3913db48c05000013&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $(this).val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+     return false;
+     }
+});
+
+$('input.degree').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/value/autocomplete&filter_type=514af771913db48c05000011&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $(this).val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+     return false;
+     }
+});
 //--></script>
