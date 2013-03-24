@@ -20,9 +20,9 @@ class ModelDataType extends Doctrine {
 		}
 		
 		$type = new Type();
-		$type->setName( $data['name'] );
-		$type->setCode( utf8_strtolower($data['code']) );
-		$type->setStatus( $data['status'] ); 
+		$type->setName( trim( $data['name'] ) );
+		$type->setCode( trim( utf8_strtolower($data['code']) ) );
+		$type->setStatus( trim( $data['status'] ) ); 
 
 		$this->dm->persist( $type );
 		$this->dm->flush();
@@ -35,9 +35,9 @@ class ModelDataType extends Doctrine {
 		}
 
 		// Code is require
-		//if ( !isset($data['code']) || empty($data['code']) ){
-		//	return false;
-		//}
+		if ( !isset($data['code']) || empty($data['code']) ){
+			return false;
+		}
 
 		if ( isset($data['status']) ){
 			$data['status'] = (int)$data['status'];
@@ -51,8 +51,8 @@ class ModelDataType extends Doctrine {
 			return false;
 		}
 
-		$type->setName( $data['name'] ); 
-		//$type->setCode( utf8_strtolower($data['code']) );
+		$type->setName( trim( $data['name'] ) ); 
+		$type->setCode( trim( utf8_strtolower($data['code']) ) );
 		$type->setStatus( $data['status'] ); 
 
 		$this->dm->flush();
@@ -81,6 +81,20 @@ class ModelDataType extends Doctrine {
 		return $this->dm->getRepository( 'Document\Data\Type' )->find( $type_id );
 	}
 
+	public function getTypeByCode( $code ) {
+		return $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => strtolower( trim( $code ) ) ) );
+	}
+
+	public function isExistCode( $code ) {
+		$type = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => strtolower( trim( $code ) ) ) );
+
+		if ( !empty( $type ) ) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 	public function getTypes( $data = array() ) {
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
@@ -94,11 +108,11 @@ class ModelDataType extends Doctrine {
     		->skip( $data['start'] );
 
     	if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
     	}
 
     	if ( isset( $data['filter_code'] ) ) {
-    		$query->field( 'code' )->equals( new \MongoRegex('/' . $data['filter_code'] . '.*/i') );
+    		$query->field( 'code' )->equals( new \MongoRegex('/' . trim( $data['filter_code'] ) . '.*/i') );
     	}
     	
     	if ( isset( $data['filter_status'] ) ) {
@@ -120,11 +134,11 @@ class ModelDataType extends Doctrine {
 		$query = $this->dm->createQueryBuilder( 'Document\Data\Type' );
 
 		if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
     	}
 
     	if ( isset( $data['filter_code'] ) ) {
-    		$query->field( 'code' )->equals( new \MongoRegex('/' . $data['filter_code'] . '.*/i') );
+    		$query->field( 'code' )->equals( new \MongoRegex('/' . trim( $data['filter_code'] ) . '.*/i') );
     	}
     	
     	if ( isset( $data['filter_status'] ) ) {

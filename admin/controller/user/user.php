@@ -19,7 +19,7 @@ class ControllerUserUser extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateInsert() ){
 			$this->model_user_user->addUser( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
@@ -38,7 +38,7 @@ class ControllerUserUser extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateUpdate() ){
 			$this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
@@ -63,6 +63,111 @@ class ControllerUserUser extends Controller {
 		}
 
 		$this->getList( );
+	}
+
+	public function changepassword(){
+		$this->load->language( 'user/user' );
+		$this->load->model( 'user/user' );
+
+		$this->document->setTitle( $this->language->get('heading_title') );
+
+		// request
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateChangePassword() ){
+			$this->model_user_user->changePassword( $this->request->get['user_id'], $this->request->post );
+			
+			$this->session->data['success'] = $this->language->get( 'text_success' );
+			$this->redirect( $this->url->link( 'user/user') );
+		}
+		
+		// catch error
+		if ( isset($this->error['warning']) ){
+			$this->data['error_warning'] = $this->error['warning'];
+		} else {
+			$this->data['error_warning'] = '';
+		}
+ 	
+		if ( isset($this->session->data['success']) ){
+			$this->data['success'] = $this->session->data['success'];
+		
+			unset( $this->session->data['success'] );
+		} else {
+			$this->data['success'] = '';
+		}
+
+		// Error password
+		if ( isset($this->error['password']) ) {
+			$this->data['error_password'] = $this->error['password'];
+		} else {
+			$this->data['error_password'] = '';
+		}
+
+		// Error confirm
+		if ( isset($this->error['confirm']) ) {
+			$this->data['error_confirm'] = $this->error['confirm'];
+		} else {
+			$this->data['error_confirm'] = '';
+		}
+
+		// breadcrumbs
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'text_home' ),
+			'href'      => $this->url->link( 'common/home' ),
+      		'separator' => false
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'heading_title' ),
+			'href'      => $this->url->link( 'user/user' ),
+      		'separator' => ' :: '
+   		);
+
+   		// Heading title
+		$this->data['heading_title'] = $this->language->get( 'heading_title' );
+		
+		// Button
+		$this->data['button_save'] = $this->language->get( 'button_save' );
+		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+
+		// Entry
+		$this->data['entry_password'] = $this->language->get( 'entry_password' );
+		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
+
+		// Link
+		$this->data['cancel'] = $this->url->link( 'user/user' );
+		
+		// user
+		if ( isset($this->request->get['user_id']) ){
+			$user = $this->model_user_user->getUser( array('user_id' => $this->request->get['user_id']) );
+			
+			if ( $user ){
+				$this->data['action'] = $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() );	
+			}else {
+				$this->redirect( $this->data['cancel'] );
+			}
+		}else {
+			$this->redirect( $this->data['cancel'] );
+		}
+
+		// Password
+		if ( isset($this->request->post['password']) ){
+			$this->data['password'] = $this->request->post['password'];
+		}else {
+			$this->data['password'] = '';
+		}
+
+		// Confirm
+		if ( isset($this->request->post['confirm']) ){
+			$this->data['confirm'] = $this->request->post['confirm'];
+		}else {
+			$this->data['confirm'] = '';
+		}
+
+		$this->template = 'user/user_password.tpl';
+		$this->children = array(
+			'common/header',
+			'common/footer'
+		);
+				
+		$this->response->setOutput( $this->render() );
 	}
 
 	private function getList( ){
@@ -147,6 +252,12 @@ class ControllerUserUser extends Controller {
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'user/user/update', 'user_id=' . $user->getId() ),
+					'icon' => 'icon-edit',
+				);
+
+				$action[] = array(
+					'text' => 'Change Password',//$this->language->get( 'text_change_password' )
+					'href' => $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -362,6 +473,8 @@ class ControllerUserUser extends Controller {
 		// Entry password
 		if ( isset($this->request->post['user']['password']) ){
 			$this->data['password'] = $this->request->post['user']['password'];
+		}elseif ( isset($user) ) {
+			
 		}else {
 			$this->data['password'] = '';
 		}
@@ -664,7 +777,7 @@ class ControllerUserUser extends Controller {
 		$this->response->setOutput( $this->render() );
 	}
 
-	private function isValidateForm(){
+	private function isValidateInsert(){
 		$user_id = 0;
 		if ( isset($this->request->get['user_id']) ){
 			$user_id = $this->request->get['user_id'];
@@ -700,6 +813,60 @@ class ControllerUserUser extends Controller {
       		}
 	
 	  		if ($this->request->post['user']['password'] != $this->request->post['user']['confirm']) {
+	    		$this->error['confirm'] = $this->language->get('error_confirm');
+	  		}
+    	}
+
+		if ( $this->error){
+			return false;
+		}else {
+			return true;	
+		}
+	}
+
+	private function isValidateUpdate(){
+		$user_id = 0;
+		if ( isset($this->request->get['user_id']) ){
+			$user_id = $this->request->get['user_id'];
+		}
+		
+		if ((utf8_strlen($this->request->post['meta']['firstname']) < 1) || (utf8_strlen($this->request->post['meta']['firstname']) > 32)) {
+      		$this->error['firstname'] = $this->language->get('error_firstname');
+    	}
+
+    	if ((utf8_strlen($this->request->post['meta']['lastname']) < 1) || (utf8_strlen($this->request->post['meta']['lastname']) > 32)) {
+      		$this->error['lastname'] = $this->language->get('error_lastname');
+    	}
+		
+    	$this->load->model( 'user/user' );
+		if ( isset($this->request->post['user']['emails']) ){
+			foreach ( $this->request->post['user']['emails'] as $email ) {
+				if ((utf8_strlen($email['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email'])) {
+		      		$this->error['email'] = $this->language->get('error_email');
+		      		break;
+		    	}
+		    	
+		    	if ( $this->model_user_user->isExistEmail($user_id, $email['email']) ){
+		    		$this->error['email'] = $this->language->get('error_exist_email');
+		      		break;
+		    	}
+			}
+		}
+
+		if ( $this->error){
+			return false;
+		}else {
+			return true;	
+		}
+	}
+
+	private function isValidateChangePassword(){
+		if ($this->request->post['password'] || (!isset($this->request->get['user_id']))) {
+      		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
+        		$this->error['password'] = $this->language->get('error_password');
+      		}
+	
+	  		if ($this->request->post['password'] != $this->request->post['confirm']) {
 	    		$this->error['confirm'] = $this->language->get('error_confirm');
 	  		}
     	}

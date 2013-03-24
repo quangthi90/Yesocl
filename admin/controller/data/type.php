@@ -19,7 +19,7 @@ class ControllerDataType extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateInsert() ){
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			$this->model_data_type->addType( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
@@ -38,7 +38,7 @@ class ControllerDataType extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateUpdate() ){
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			$this->model_data_type->editType( $this->request->get['type_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
@@ -330,6 +330,9 @@ class ControllerDataType extends Controller {
 		// Text	
 		$this->data['text_enable'] = $this->language->get( 'text_enable' );
 		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+
+		// Error
+		$this->data['error_exist_code'] = $this->language->get( 'error_exist_code' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -342,15 +345,15 @@ class ControllerDataType extends Controller {
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'data/type' );
+		$this->data['codeValidate'] = $this->url->link( 'data/type/codeValidate' );
 		
 		// Group
-		$this->data['isUpdate'] = false;
 		if ( isset($this->request->get['type_id']) ){
 			$type = $this->model_data_type->getType( $this->request->get['type_id'] );
 			
 			if ( $type ){
 				$this->data['action'] = $this->url->link( 'data/type/update', 'type_id=' . $type->getId() );	
-				$this->data['isUpdate'] = true;
+				$this->data['codeValidate'] = $this->url->link( 'data/type/codeValidate&type_id=' . $type->getId() );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -392,25 +395,13 @@ class ControllerDataType extends Controller {
 		$this->response->setOutput( $this->render() );
 	}
 
-	private function isValidateInsert(){
+	private function isValidateForm(){
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}
 
 		if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 128 ){
 			$this->error['error_code'] = $this->language->get( 'error_code' );
-		}
-
-		if ( $this->error){
-			return false;
-		}else {
-			return true;	
-		}
-	}
-
-	private function isValidateUpdate(){
-		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
-			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}
 
 		if ( $this->error){
@@ -468,6 +459,35 @@ class ControllerDataType extends Controller {
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function codeValidate(){
+		if ( !isset($this->request->get['code']) || empty($this->request->get['code']) ){
+			//$this->response->setOutput('false');
+			return;
+		}
+		
+		if ( isset($this->request->get['type_id']) ){
+			$type_id = $this->request->get['type_id'];
+		}
+
+		$this->load->model( 'data/type' );
+
+		if ( isset( $type_id ) ) {
+			$type = $this->model_data_type->getTypeByCode( $this->request->get['code'] );
+			if ( !empty( $type ) && $type->getId() != $type_id ) {
+				$this->response->setOutput('false');
+				return;
+			}
+		}else {
+			if ( $this->model_data_type->isExistCode( $this->request->get['code'] ) ) {
+				$this->response->setOutput('false');
+				return;
+			}
+		}
+		
+		$this->response->setOutput('true');
+		return;
 	}
 }
 ?>

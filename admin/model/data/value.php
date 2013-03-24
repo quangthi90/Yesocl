@@ -89,25 +89,25 @@ class ModelDataValue extends Doctrine {
     		->skip( $data['start'] );
 
     	if ( isset( $data['filter_type_name'] ) ) {
-    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => $data['filter_type_name'] ) )->getId();
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => trim( $data['filter_type_name'] ) ) )->getId();
     		$query->field( 'type.id' )->equals( $type_id );
     	}
 
     	if ( isset( $data['filter_type_code'] ) ) {
-    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => $data['filter_type_code'] ) )->getId();
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => trim( $data['filter_type_code'] ) ) )->getId();
     		$query->field( 'type.id' )->equals( $type_id );
     	}
     	
     	if ( isset( $data['filter_type'] ) ) {
-    		$query->field( 'type.id' )->equals( $data['filter_type'] );
+    		$query->field( 'type.id' )->equals( trim( $data['filter_type'] ) );
     	}
 
     	if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
     	}
 
     	if ( isset( $data['filter_value'] ) ) {
-    		$query->field( 'value' )->equals( new \MongoRegex('/' . $data['filter_value'] . '.*/i') );
+    		$query->field( 'value' )->equals( new \MongoRegex('/' . trim( $data['filter_value'] ) . '.*/i') );
     	}
 
     	if ( isset( $data['sort'] ) ) {
@@ -125,25 +125,25 @@ class ModelDataValue extends Doctrine {
 		$query = $this->dm->createQueryBuilder( 'Document\Data\Value' );
 
 		if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
     	}
 
     	if ( isset( $data['filter_type_name'] ) ) {
-    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => $data['filter_type_name'] ) )->getId();
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => trim( $data['filter_type_name'] ) ) )->getId();
     		$query->field( 'type.id' )->equals( $type_id );
     	}
 
     	if ( isset( $data['filter_type_code'] ) ) {
-    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => $data['filter_type_code'] ) )->getId();
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => trim( $data['filter_type_code'] ) ) )->getId();
     		$query->field( 'type.id' )->equals( $type_id );
     	}
 
     	if ( isset( $data['filter_type'] ) ) {
-    		$query->field( 'type.id' )->equals( $data['filter_type'] );
+    		$query->field( 'type.id' )->equals( trim( $data['filter_type'] ) );
     	}
 
     	if ( isset( $data['filter_value'] ) ) {
-    		$query->field( 'value' )->equals( new \MongoRegex('/' . $data['filter_value'] . '.*/i') );
+    		$query->field( 'value' )->equals( new \MongoRegex('/' . trim( $data['filter_value'] ) . '.*/i') );
     	}
     		
     	$values = $query->getQuery()->execute();

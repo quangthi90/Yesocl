@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="code" value="<?php echo $code; ?>" <?php if ($isUpdate) { ?>disabled="disabled"<?php } ?> />
+            <td><input class="input-xxlarge" required="required" type="text" name="code" value="<?php echo $code; ?>" />
             <?php if ($error_code) { ?>
                 <div class="alert alert-error">
           <strong>Error!</strong> <?php echo $error_code; ?>
@@ -47,3 +47,29 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--//
+$(function () {
+$('body').on('blur', 'input[name=\'code\']', function(){
+      $.ajax({
+        url: '<?php echo $codeValidate; ?>&code=' + $('input[name=\'code\']').val(),
+        dataType: 'html',
+        beforeSend: function() {
+          $('input[name=\'code\']').after('<span class="wait">&nbsp;<img src="view/image/loading.gif" alt="" /></span>');
+        },    
+        complete: function() {
+          $('.wait').remove();
+        },      
+        success: function(output) {
+          $('input[name=\'code\']').parent().find('.warning').remove();
+          
+          if (output == 'false'){
+            $('input[name=\'code\']').after('<div class="warning"><?php echo $error_exist_code; ?></div>');
+          }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+          alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+      });
+    });
+});
+//--></script>
