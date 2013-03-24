@@ -12,6 +12,371 @@ class ControllerUserUser extends Controller {
 		$this->getList();
 	}
 
+	public function view(){
+		$this->load->language( 'user/user' );
+		$this->load->model( 'user/user' );
+
+		$this->document->setTitle( $this->language->get('heading_title') );
+		
+		// breadcrumbs
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'text_home' ),
+			'href'      => $this->url->link( 'common/home' ),
+      		'separator' => false
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'heading_title' ),
+			'href'      => $this->url->link( 'user/user' ),
+      		'separator' => ' :: '
+   		);
+
+   		// Heading title
+		$this->data['heading_title'] = $this->language->get( 'heading_title' );
+		
+		// Text	
+		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
+		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_true'] = $this->language->get( 'text_true' );
+		$this->data['text_false'] = $this->language->get( 'text_false' );
+		$this->data['text_email'] = $this->language->get( 'text_email' );
+		$this->data['text_primary'] = $this->language->get( 'text_primary' );
+		$this->data['text_delete'] = $this->language->get( 'text_delete' );
+		$this->data['text_yes'] = $this->language->get( 'text_yes' );
+		$this->data['text_no'] = $this->language->get( 'text_no' );
+		$this->data['text_title'] = 'Title';//$this->language->get( 'text_no' );
+		$this->data['text_url'] = 'Url';//$this->language->get( 'text_no' );
+		$this->data['text_to'] = 'to';//$this->language->get( 'text_no' );
+		$this->data['text_name'] = 'Name';//$this->language->get( 'text_no' );
+		$this->data['text_value'] = 'Value';//$this->language->get( 'text_no' );
+		$this->data['text_visible'] = 'Visible';//$this->language->get( 'text_no' );
+		$this->data['text_type'] = 'Type';//$this->language->get( 'text_no' );
+		$this->data['text_im'] = 'Im';//$this->language->get( 'text_no' );
+		$this->data['text_phone'] = 'Phone';//$this->language->get( 'text_no' );
+		
+		// Button
+		$this->data['button_save'] = $this->language->get( 'button_save' );
+		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_add_email'] = $this->language->get( 'button_add_email' );
+		$this->data['button_add_phone'] = 'Add Phone';//$this->language->get( 'button_add_email' );
+		$this->data['button_add_im'] = 'Add Im';//$this->language->get( 'button_add_email' );
+		$this->data['button_add_website'] = 'Add Website';//$this->language->get( 'button_save' );
+		$this->data['button_add_experience'] = 'Add Experience';//$this->language->get( 'button_save' );
+		$this->data['button_add_education'] = 'Add Education';//$this->language->get( 'button_add_email' );
+		$this->data['button_add_former'] = 'Add Former';//$this->language->get( 'button_save' );
+
+		// Entry
+		$this->data['entry_email'] = $this->language->get( 'entry_email' );
+		$this->data['entry_password'] = $this->language->get( 'entry_password' );
+		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
+		$this->data['entry_group'] = $this->language->get( 'entry_group' );
+		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_have_value'] = $this->language->get( 'entry_have_value' );
+		
+		$this->data['entry_firstname'] = $this->language->get( 'entry_firstname' );
+		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
+		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
+		$this->data['entry_marital_status'] = 'Marital Status:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_country'] = 'Country:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_city'] = 'City:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_postal_code'] = 'Postal Code:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_industry'] = 'Industry:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_headingline'] = 'Headingline:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_interest'] = 'Interest:';//$this->language->get( 'entry_birthday' );
+		
+		$this->data['entry_im'] = 'IM:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_phone'] = 'Phone:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_address'] = 'Address:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_advice_for_contact'] = 'Advice For Contact:';//$this->language->get( 'entry_birthday' );
+
+		$this->data['entry_company'] = 'Company:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_current'] = 'Current:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_title'] = 'Title:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_location'] = 'Location:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_time_period'] = 'Time Period:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_description'] = 'Description:';//$this->language->get( 'entry_birthday' );
+
+		$this->data['entry_school'] = 'School:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_date_attended'] = 'Date Attended:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_degree'] = 'Degree:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_field_of_study'] = 'Field Of Study:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_grace'] = 'Grace:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_societies'] = 'Societies:';//$this->language->get( 'entry_birthday' );
+
+		// Warning
+		$this->data['error_primary_email'] = $this->language->get( 'error_primary_email' );
+		$this->data['error_email_empty'] = $this->language->get( 'error_email_empty' );
+		$this->data['error_exist_email'] = $this->language->get( 'error_exist_email' );
+		$this->data['error_experience_empty'] = 'Error Empty Experience';//$this->language->get( 'error_email_empty' );
+		
+		// Tab
+		$this->data['tab_general'] = $this->language->get( 'tab_general' );
+		$this->data['tab_information'] = $this->language->get( 'tab_information' );
+		$this->data['tab_email'] = $this->language->get( 'tab_email' );
+		$this->data['tab_im'] = 'Im';//$this->language->get( 'tab_email' );
+		$this->data['tab_phone'] = 'Phone';//$this->language->get( 'tab_email' );
+		$this->data['tab_website'] = 'Website';//$this->language->get( 'tab_email' );
+		$this->data['tab_experience'] = 'Experience';//$this->language->get( 'tab_email' );
+		$this->data['tab_education'] = 'Education';//$this->language->get( 'tab_email' );
+		$this->data['tab_former'] = 'Former';//$this->language->get( 'tab_email' );
+		
+		// Link
+		$this->data['cancel'] = $this->url->link( 'user/user' );
+		
+		// user
+		if ( isset($this->request->get['user_id']) ){
+			$user = $this->model_user_user->getUser( array('user_id' => $this->request->get['user_id']) );
+			
+			if ( empty( $user ) ){	
+				$this->redirect( $this->data['cancel'] );
+			}
+		}
+
+		// Entry email
+		$this->data['emails'] = array();
+		foreach ($user->getEmails() as $key => $email) {
+			$this->data['emails'][$key] = array(
+				'email' => $email->getEmail(),
+				'primary' => $email->getPrimary(),
+				);
+		}
+		
+		// Entry status
+		$this->data['status'] = $user->getStatus();
+		
+		// Entry Group
+		$this->load->model( 'user/group' );
+		
+		$groups = $this->model_user_group->getGroups( );
+		
+		$this->data['groups'] = array();
+		
+		foreach ( $groups as $group ){
+			$this->data['groups'][] = array(
+				'id' => $group->getId(),
+				'name' => $group->getName()
+			);
+		}
+		
+		if ( $user->getGroupUser() != null ) {
+			$this->data['group_id'] = $user->getGroupUser()->getId();
+		}else {
+			$this->data['group_id'] = 0;
+		}
+		
+		// Entry firstname
+		if ( $user->getMeta() ){
+			$this->data['firstname'] = $user->getMeta()->getFirstname();
+		}else {
+			$this->data['firstname'] = '';
+		}
+		
+		// Entry lastname
+		if ( $user->getMeta() ){
+			$this->data['lastname'] = $user->getMeta()->getLastname();
+		}else {
+			$this->data['lastname'] = '';
+		}
+
+		// Entry birthday
+		if ( $user->getBackground() ){
+			$this->data['birthday'] = $user->getBackground()->getBirthday()->format('d-m-Y');
+		}else {
+			$this->data['birthday'] = '';
+		}
+
+		// Entry marital status
+		if ( $user->getBackground() ){
+			$this->data['marital_status'] = $user->getBackground()->getMaritalStatus();
+		}else {
+			$this->data['marital_status'] = 0;
+		}
+
+		// Entry localtion country
+		if ( $user->getMeta() ){
+			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
+			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
+		}else {
+			$this->data['country'] = '';
+			$this->data['country_id'] = 0;
+		}
+
+		// Entry localtion city
+		if ( $user->getMeta() ){
+			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
+			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
+		}else {
+			$this->data['city'] = '';
+			$this->data['city_id'] = 0;
+		}
+
+		// Entry postal code
+		if ( $user->getMeta() ){
+			$this->data['postal_code'] = $user->getMeta()->getPostalCode();
+		}else {
+			$this->data['postal_code'] = '';
+		}
+
+		// Entry address
+		if ( $user->getMeta() ){
+			$this->data['address'] = $user->getMeta()->getAddress();
+		}else {
+			$this->data['address'] = '';
+		}
+
+		// Entry advice for contact
+		if ( $user->getBackground() ){
+			$this->data['advice_for_contact'] = $user->getBackground()->getAdviceForContact();
+		}else {
+			$this->data['advice_for_contact'] = '';
+		}
+
+		// Entry industry
+		if ( $user->getMeta() ){
+			$this->data['industry'] = $user->getMeta()->getIndustry();
+		}else {
+			$this->data['industry'] = '';
+		}
+
+		// Entry heading line
+		if ( $user->getMeta() ){
+			$this->data['heading_line'] = $user->getMeta()->getHeadingLine();
+		}else {
+			$this->data['heading_line'] = '';
+		}
+
+		// Entry interest
+		if ( $user->getBackground() ){
+			$this->data['interest'] = $user->getBackground()->getInterest();
+		}else {
+			$this->data['interest'] = '';
+		}
+
+		// Entry im
+		$this->data['im_types'] = array();
+		$this->data['im_types'][] = array(
+			'text' => 'Skype',
+			'code' => 'skype',
+			);
+		$this->data['im_types'][] = array(
+			'text' => 'Yahoo',
+			'code' => 'yahoo',
+			);
+
+		$this->data['ims'] = array();
+		foreach ($user->getIms() as $key => $im) {
+			$this->data['ims'][$key] = array(
+				'type' => $im->getType(),
+				'im' => $im->getIm(),
+				'visible' => $im->getVisible(),
+				);
+		}
+
+		// Entry phone
+		$this->data['phone_types'] = array();
+		$this->data['phone_types'][] = array(
+			'text' => 'Mobile',
+			'code' => 'mobile',
+			);
+		$this->data['phone_types'][] = array(
+			'text' => 'Telephone',
+			'code' => 'telephone',
+			);
+
+		$this->data['phones'] = array();
+		foreach ($user->getPhones() as $key => $phone) {
+			$this->data['phones'][$key] = array(
+				'type' => $phone->getType(),
+				'phone' => $phone->getPhone(),
+				'visible' => $phone->getVisible(),
+				);
+		}
+
+		// Entry website title
+		$this->data['title_types'] = array();
+		$this->data['title_types'][] = array(
+			'text' => 'Personal Website',
+			'code' => 'personal',
+			);
+		$this->data['title_types'][] = array(
+			'text' => 'Company Website',
+			'code' => 'company',
+			);
+		$this->data['title_types'][] = array(
+			'text' => 'Other...',
+			'code' => 'other',
+			);
+
+		$this->data['websites'] = array();
+		foreach ($user->getWebsites() as $key => $website) {
+			$this->data['websites'][$key] = array(
+				'title' => $website->getTitle(),
+				'url' => $website->getUrl(),
+				);
+		}
+
+		// Entry experiencies
+		$this->data['experiencies'] = array();
+		foreach ($user->getBackground()->getExperiencies() as $key => $experience) {
+			$this->data['experiencies'][$key] = array(
+				'company' => $experience->getCompany(),
+				'current' => $experience->getCurrent(),
+				'title' => $experience->getTitle(),
+				'location' => $experience->getLocation(),
+				'ended' => $experience->getEnded(),
+				'started' => $experience->getStarted(),
+				'description' => $experience->getDescription(),
+				);
+		}
+
+		// Entry educations
+		$this->data['educations'] = array();
+		foreach ($user->getBackground()->getEducations() as $key => $education) {
+			$this->data['educations'][$key] = array(
+				'school' => $education->getSchool(),
+				'degree' => $education->getDegree(),
+				'grace' => $education->getGrace(),
+				'fieldofstudy' => $education->getFieldOfStudy(),
+				'societies' => $education->getSocieties(),
+				'ended' => $education->getEnded(),
+				'started' => $education->getStarted(),
+				'description' => $education->getDescription(),
+				);
+		}
+
+		// Entry Formers
+		$this->data['formers'] = array();
+		foreach ($user->getFormers() as $key => $former) {
+			$this->data['formers'][$key] = array(
+				'name' => $former->getName(),
+				'value' => $former->getValue(),
+				'visible' => $former->getVisible(),
+				);
+		}
+
+		// Entry former visible
+		$this->data['visible_types'] = array();
+		$this->data['visible_types'][] = array(
+			'text' => 'My Follow',
+			'code' => 'myfollow',
+			);
+		$this->data['visible_types'][] = array(
+			'text' => 'My Network',
+			'code' => 'mynetwork',
+			);
+		$this->data['visible_types'][] = array(
+			'text' => 'Every One',
+			'code' => 'everyone',
+			);
+
+		$this->template = 'user/user_view.tpl';
+		$this->children = array(
+			'common/header',
+			'common/footer'
+		);
+				
+		$this->response->setOutput( $this->render() );
+	}
+
 	public function insert(){
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
@@ -248,16 +613,22 @@ class ControllerUserUser extends Controller {
 		if ( $users ){
 			foreach ( $users as $user ){
 				$action = array();
-			
+
 				$action[] = array(
-					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'user/user/update', 'user_id=' . $user->getId() ),
+					'text' => 'View',//$this->language->get( 'text_view' )
+					'href' => $this->url->link( 'user/user/view', 'user_id=' . $user->getId() ),
 					'icon' => 'icon-edit',
 				);
 
 				$action[] = array(
 					'text' => 'Change Password',//$this->language->get( 'text_change_password' )
 					'href' => $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() ),
+					'icon' => 'icon-edit',
+				);
+			
+				$action[] = array(
+					'text' => $this->language->get( 'text_edit' ),
+					'href' => $this->url->link( 'user/user/update', 'user_id=' . $user->getId() ),
 					'icon' => 'icon-edit',
 				);
 			
