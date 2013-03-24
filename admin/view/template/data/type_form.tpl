@@ -28,6 +28,19 @@
         </div>
             <?php } ?></td>
           </tr>
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_code; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="code" value="<?php echo $code; ?>" <?php if ($isUpdate) { ?>disabled="disabled"<?php } ?> />
+            <?php if ($error_code) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_code; ?>
+        </div>
+            <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_status; ?></td>
+            <td><select name="status"><?php if ($status) { ?><option value="1" selected="selected" ><?php echo $text_enable; ?></option><option value="0" ><?php echo $text_disable; ?></option><?php  }else { ?><option value="1" ><?php echo $text_enable; ?></option><option value="0" selected="selected" ><?php echo $text_disable; ?></option><?php } ?></select></td>
+          </tr>
         </table>
       </form>
     </div>

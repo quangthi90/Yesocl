@@ -16,8 +16,18 @@ Class Type {
 	 */
 	private $name; 
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $code;
+
 	/** @MongoDB\ReferenceMany(targetDocument="Type", mappedBy="type") */
 	private $values = array();
+
+	/** 
+	 * @MongoDB\Boolean 
+	 */
+	private $status;
 
 	public function getId(){
 		return $this->id;
@@ -31,6 +41,14 @@ Class Type {
 		return $this->name;
 	}
 
+	public function setCode( $code ){
+		$this->code = $code;
+	}
+
+	public function getCode(){
+		return $this->code;
+	}
+
 	public function addValue( Value $value ){
 		$this->values[] = $value;
 	}
@@ -41,5 +59,13 @@ Class Type {
 
 	public function getValues(){
 		return $this->values;
+	}
+
+	public function setStatus( $status ){
+		$this->status = $status;
+	}
+
+	public function getStatus(){
+		return $this->status;
 	}
 }

@@ -30,6 +30,16 @@
                 <?php } else { ?>
                 <a href="<?php echo $sort_name; ?>"><?php echo $column_name; ?></a>
                 <?php } ?></td>
+              <td><?php if ($sort == 'code') { ?>
+                <a href="<?php echo $sort_code; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_code; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_code; ?>"><?php echo $column_code; ?></a>
+                <?php } ?></td>
+              <td><?php if ($sort == 'status') { ?>
+                <a href="<?php echo $sort_status; ?>" class="<?php echo strtolower($order); ?>"><?php echo $column_status; ?></a>
+                <?php } else { ?>
+                <a href="<?php echo $sort_status; ?>"><?php echo $column_status; ?></a>
+                <?php } ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
@@ -37,6 +47,8 @@
             <tr class="filter">
               <td></td>
               <td><input type="text" name="filter_name" value="<?php echo $filter_name; ?>" /></td>
+              <td><input type="text" name="filter_code" value="<?php echo $filter_code; ?>" /></td>
+              <td><select name="status"><option></option><option value="1" <?php if ($filter_stauts) { ?>selected="selected"<?php } ?> ><?php echo $text_enable; ?></option><option value="0" <?php if (!$filter_stauts) { ?>selected="selected"<?php } ?> ><?php echo $text_disable; ?></option></select></td>
               <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
             </tr>
             <?php if ($types) { ?>
@@ -44,6 +56,8 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $type['id']; ?>"/></td>
               <td><?php echo $type['name']; ?></td>
+              <td><?php echo $type['code']; ?></td>
+              <td><?php echo ($type['status']) ? $text_enable : $text_disable; ?></td>
               <td class="right"><?php foreach ($type['action'] as $action) { ?>
                 <a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
@@ -52,7 +66,7 @@
             <?php }?>
             <?php if (!$types) { ?>
             <tr class="center">
-              <td colspan="3"><?php echo $text_no_results; ?></td>
+              <td colspan="5"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
@@ -71,6 +85,12 @@ function filter() {
   
   if (filter_name) {
     url += '&filter_name=' + encodeURIComponent(filter_name);
+  }
+
+  var filter_code = $('input[name=\'filter_code\']').attr('value');
+  
+  if (filter_code) {
+    url += '&filter_code=' + encodeURIComponent(filter_code);
   }
 
   location = url;
@@ -102,6 +122,33 @@ $('input[name=\'filter_name\']').autocomplete({
   }, 
   select: function(event, ui) {
     $('input[name=\'filter_name\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
+<script type="text/javascript"><!--
+$('input[name=\'filter_code\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/type/autocomplete&filter_code=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.code,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'filter_code\']').val(ui.item.label);
             
     return false;
   },

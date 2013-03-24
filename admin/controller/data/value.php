@@ -464,6 +464,12 @@ class ControllerDataValue extends Controller {
 			$filter_type_name = null;
 		}
 
+		if ( isset( $this->request->get['filter_type_code'] ) ) {
+			$filter_type_code = $this->request->get['filter_type_code'];
+		}else {
+			$filter_type_code = null;
+		}
+
 		if ( isset( $this->request->get['filter_type'] ) ) {
 			$filter_type = $this->request->get['filter_type'];
 		}else {
@@ -480,6 +486,7 @@ class ControllerDataValue extends Controller {
 		$data = array(
 			'filter_name' => $filter_name,
 			'filter_type_name' => $filter_type_name,
+			'filter_type_code' => $filter_type_code,
 			'filter_type' => $filter_type,
 			'filter_value' => $filter_value,
 			'sort' => $sort,

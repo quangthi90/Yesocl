@@ -7,9 +7,22 @@ class ModelDataType extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		// Code is require
+		if ( !isset($data['code']) || empty($data['code']) ){
+			return false;
+		}
+
+		if ( isset($data['status']) ){
+			$data['status'] = (int)$data['status'];
+		}else {
+			$data['status'] = 0;
+		}
 		
 		$type = new Type();
 		$type->setName( $data['name'] );
+		$type->setCode( utf8_strtolower($data['code']) );
+		$type->setStatus( $data['status'] ); 
 
 		$this->dm->persist( $type );
 		$this->dm->flush();
@@ -20,6 +33,17 @@ class ModelDataType extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		// Code is require
+		//if ( !isset($data['code']) || empty($data['code']) ){
+		//	return false;
+		//}
+
+		if ( isset($data['status']) ){
+			$data['status'] = (int)$data['status'];
+		}else {
+			$data['status'] = 0;
+		}
 		
 		$type = $this->dm->getRepository('Document\Data\Type')->find( $id );
 		
@@ -28,6 +52,8 @@ class ModelDataType extends Doctrine {
 		}
 
 		$type->setName( $data['name'] ); 
+		//$type->setCode( utf8_strtolower($data['code']) );
+		$type->setStatus( $data['status'] ); 
 
 		$this->dm->flush();
 	}
@@ -37,12 +63,14 @@ class ModelDataType extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$type = $this->dm->getRepository( 'Document\Data\Type' )->find( $id );
 
-				$values = $this->dm->getRepository( 'Document\Data\value' )->findBy( array( 'type.id' => $id ) );
-				foreach ($values as $value) {
-					$this->dm->remove($value);
-				}
+				$type->setStatus( 0 );
 
-				$this->dm->remove($type);
+				//$values = $this->dm->getRepository( 'Document\Data\value' )->findBy( array( 'type.id' => $id ) );
+				//foreach ($values as $value) {
+				//	$this->dm->remove($value);
+				//}
+
+				//$this->dm->remove($type);
 			}
 		}
 		
@@ -69,6 +97,14 @@ class ModelDataType extends Doctrine {
     		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
     	}
 
+    	if ( isset( $data['filter_code'] ) ) {
+    		$query->field( 'code' )->equals( new \MongoRegex('/' . $data['filter_code'] . '.*/i') );
+    	}
+    	
+    	if ( isset( $data['filter_status'] ) ) {
+    		$query->field( 'status' )->equals( $data['filter_status'] );
+    	}
+
     	if ( isset( $data['sort'] ) ) {
     		if ( isset( $data['order'] ) && $data['order'] == 'desc' ) {
     			$query->sort( $data['sort'], 'desc' );
@@ -85,6 +121,14 @@ class ModelDataType extends Doctrine {
 
 		if ( isset( $data['filter_name'] ) ) {
     		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_code'] ) ) {
+    		$query->field( 'code' )->equals( new \MongoRegex('/' . $data['filter_code'] . '.*/i') );
+    	}
+    	
+    	if ( isset( $data['filter_status'] ) ) {
+    		$query->field( 'status' )->equals( $data['filter_status'] );
     	}
 
 		$types = $query->getQuery()->execute();

@@ -92,6 +92,11 @@ class ModelDataValue extends Doctrine {
     		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => $data['filter_type_name'] ) )->getId();
     		$query->field( 'type.id' )->equals( $type_id );
     	}
+
+    	if ( isset( $data['filter_type_code'] ) ) {
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => $data['filter_type_code'] ) )->getId();
+    		$query->field( 'type.id' )->equals( $type_id );
+    	}
     	
     	if ( isset( $data['filter_type'] ) ) {
     		$query->field( 'type.id' )->equals( $data['filter_type'] );
@@ -125,6 +130,11 @@ class ModelDataValue extends Doctrine {
 
     	if ( isset( $data['filter_type_name'] ) ) {
     		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'name' => $data['filter_type_name'] ) )->getId();
+    		$query->field( 'type.id' )->equals( $type_id );
+    	}
+
+    	if ( isset( $data['filter_type_code'] ) ) {
+    		$type_id = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => $data['filter_type_code'] ) )->getId();
     		$query->field( 'type.id' )->equals( $type_id );
     	}
 
