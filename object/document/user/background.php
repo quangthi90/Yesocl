@@ -11,10 +11,10 @@ Class Background {
 	 */
 	private $id; 
 
-    /** @MongoDB\EmbedMany(targetDocument="Experience") */
+    /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Experience") */
     private $experiencies = array();
 
-    /** @MongoDB\EmbedMany(targetDocument="Education") */
+    /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Education") */
     private $educations = array();
 
     /** @MongoDB\String */

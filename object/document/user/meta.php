@@ -28,7 +28,7 @@ Class Meta {
 	 */
 	private $headingLine;
 
-	/** @MongoDB\EmbedOne(targetDocument="Location") */
+	/** @MongoDB\EmbedOne(targetDocument="Document\User\Meta\Location") */
     private $location;
 
 	/** 
@@ -43,6 +43,25 @@ Class Meta {
 
 	/** @MongoDB\String */
 	private $address;
+
+	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Im") 
+	 */
+	private $ims = array();
+
+	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Phone") 
+	 */
+	private $phones = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Website") */
+	private $websites = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Former") */
+	private $formers = array();
+
+    /** @MongoDB\EmbedOne(targetDocument="Document\User\Background") */
+    private $background;
 
 	public function getId(){
 		return $this->id;
@@ -102,5 +121,61 @@ Class Meta {
 
 	public function getAddress(){
 		return $this->address;
+	}
+
+	public function addIm( Im $im ){
+		$this->ims[] = $im;
+	}
+
+	public function setIms( $ims ){
+		$this->ims = $ims;
+	}
+
+	public function getIms(){
+		return $this->ims;
+	}
+
+	public function addPhone( Phone $phone ){
+		$this->phones[] = $phone;
+	}
+
+	public function setPhones( $phones ){
+		$this->phones = $phones;
+	}
+
+	public function getPhones(){
+		return $this->phones;
+	}
+
+	public function addWebsite( Website $website ){
+		$this->websites[] = $website;
+	}
+
+	public function setWebsites( $websites ){
+		$this->websites = $websites;
+	}
+
+	public function getWebsites(){
+		return $this->websites;
+	}
+
+	public function addFormer( Former $former ){
+		$this->formers[] = $former;
+	}
+
+	public function setFormers( $formers ){
+		$this->formers = $formers;
+	}
+
+	public function getFormers(){
+		return $this->formers;
+	}
+
+	public function setBackground( $background ){
+		$this->background = $background;
+	}
+
+	public function getBackground(){
+		return $this->background;
 	}
 }

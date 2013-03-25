@@ -22,33 +22,14 @@ Class User {
 	private $password;
 
 	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Email") 
+	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Email") 
 	 */
 	private $emails = array();
-
-	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Im") 
-	 */
-	private $ims = array();
-
-	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Phone") 
-	 */
-	private $phones = array();
-
-	/** @MongoDB\EmbedMany(targetDocument="Website") */
-	private $websites = array();
-
-	/** @MongoDB\EmbedMany(targetDocument="Former") */
-	private $formers = array();
 
 	/** 
 	 * @MongoDB\EmbedOne(targetDocument="Meta") 
 	 */
     private $meta;
-
-    /** @MongoDB\EmbedOne(targetDocument="Background") */
-    private $background;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
@@ -102,68 +83,12 @@ Class User {
 		}
 	}
 
-	public function addIm( Im $im ){
-		$this->ims[] = $im;
-	}
-
-	public function setIms( $ims ){
-		$this->ims = $ims;
-	}
-
-	public function getIms(){
-		return $this->ims;
-	}
-
-	public function addPhone( Phone $phone ){
-		$this->phones[] = $phone;
-	}
-
-	public function setPhones( $phones ){
-		$this->phones = $phones;
-	}
-
-	public function getPhones(){
-		return $this->phones;
-	}
-
-	public function addWebsite( Website $website ){
-		$this->websites[] = $website;
-	}
-
-	public function setWebsites( $websites ){
-		$this->websites = $websites;
-	}
-
-	public function getWebsites(){
-		return $this->websites;
-	}
-
-	public function addFormer( Former $former ){
-		$this->formers[] = $former;
-	}
-
-	public function setFormers( $formers ){
-		$this->formers = $formers;
-	}
-
-	public function getFormers(){
-		return $this->formers;
-	}
-
 	public function setMeta( $meta ){
 		$this->meta = $meta;
 	}
 
 	public function getMeta(){
 		return $this->meta;
-	}
-
-	public function setBackground( $background ){
-		$this->background = $background;
-	}
-
-	public function getBackground(){
-		return $this->background;
 	}
 
 	public function setGroupUser( $groupUser ){

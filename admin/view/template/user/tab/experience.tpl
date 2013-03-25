@@ -20,7 +20,7 @@
           			</div>
           			<div class="span4">
           				<div class="span3"><?php echo $entry_location; ?></div>
-          				<div class="span9"><input class="localtion input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][localtion]" value="<?php echo $experience['location']; ?>" /></div>
+          				<div class="span9"><input class="localtion input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][location]" value="<?php echo $experience['location']; ?>" /></div>
           			</div>
           		</div>
           		<div class="row-fluid">

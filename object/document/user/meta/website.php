@@ -1,5 +1,5 @@
 <?php
-namespace Document\User;
+namespace Document\User\Meta;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 

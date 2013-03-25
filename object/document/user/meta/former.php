@@ -1,45 +1,49 @@
 <?php
-namespace Document\User;
+namespace Document\User\Meta;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
  * @MongoDB\EmbeddedDocument
  */
-Class Im {
+Class Former {
 	/** 
 	 * @MongoDB\Id 
 	 */
-	private $id; 
+	private $id;
 
 	/** 
 	 * @MongoDB\String 
 	 */
-	private $im;
+	private $name; 
 
-	/** @MongoDB\String */
-	private $type;
-	
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $value;
+
+	/**
+	 * @MongoDB\String
+	 */
 	private $visible;
 
 	public function getId(){
 		return $this->id;
 	}
 
-	public function setIm( $im ){
-		$this->im = $im;
+	public function setName( $name ){
+		$this->name = $name;
 	}
 
-	public function getIm(){
-		return $this->im;
+	public function getName(){
+		return $this->name;
 	}
 
-	public function setType( $type ){
-		$this->type = $type;
+	public function setValue( $value ){
+		$this->value = $value;
 	}
 
-	public function getType(){
-		return $this->type;
+	public function getValue(){
+		return $this->value;
 	}
 
 	public function setVisible( $visible ){

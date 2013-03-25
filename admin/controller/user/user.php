@@ -180,15 +180,15 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry birthday
-		if ( $user->getBackground() ){
-			$this->data['birthday'] = $user->getBackground()->getBirthday()->format('d-m-Y');
+		if ( $user->getMeta()->getBackground() ){
+			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('d-m-Y');
 		}else {
 			$this->data['birthday'] = '';
 		}
 
 		// Entry marital status
-		if ( $user->getBackground() ){
-			$this->data['marital_status'] = $user->getBackground()->getMaritalStatus();
+		if ( $user->getMeta()->getBackground() ){
+			$this->data['marital_status'] = $user->getMeta()->getBackground()->getMaritalStatus();
 		}else {
 			$this->data['marital_status'] = 0;
 		}
@@ -226,8 +226,8 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry advice for contact
-		if ( $user->getBackground() ){
-			$this->data['advice_for_contact'] = $user->getBackground()->getAdviceForContact();
+		if ( $user->getMeta()->getBackground() ){
+			$this->data['advice_for_contact'] = $user->getMeta()->getBackground()->getAdviceForContact();
 		}else {
 			$this->data['advice_for_contact'] = '';
 		}
@@ -247,8 +247,8 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry interest
-		if ( $user->getBackground() ){
-			$this->data['interest'] = $user->getBackground()->getInterest();
+		if ( $user->getMeta()->getBackground() ){
+			$this->data['interest'] = $user->getMeta()->getBackground()->getInterest();
 		}else {
 			$this->data['interest'] = '';
 		}
@@ -265,7 +265,7 @@ class ControllerUserUser extends Controller {
 			);
 
 		$this->data['ims'] = array();
-		foreach ($user->getIms() as $key => $im) {
+		foreach ($user->getMeta()->getIms() as $key => $im) {
 			$this->data['ims'][$key] = array(
 				'type' => $im->getType(),
 				'im' => $im->getIm(),
@@ -285,7 +285,7 @@ class ControllerUserUser extends Controller {
 			);
 
 		$this->data['phones'] = array();
-		foreach ($user->getPhones() as $key => $phone) {
+		foreach ($user->getMeta()->getPhones() as $key => $phone) {
 			$this->data['phones'][$key] = array(
 				'type' => $phone->getType(),
 				'phone' => $phone->getPhone(),
@@ -309,7 +309,7 @@ class ControllerUserUser extends Controller {
 			);
 
 		$this->data['websites'] = array();
-		foreach ($user->getWebsites() as $key => $website) {
+		foreach ($user->getMeta()->getWebsites() as $key => $website) {
 			$this->data['websites'][$key] = array(
 				'title' => $website->getTitle(),
 				'url' => $website->getUrl(),
@@ -318,7 +318,7 @@ class ControllerUserUser extends Controller {
 
 		// Entry experiencies
 		$this->data['experiencies'] = array();
-		foreach ($user->getBackground()->getExperiencies() as $key => $experience) {
+		foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 			$started = $experience->getStarted();
 			$ended = $experience->getEnded();
 			$this->data['experiencies'][$key] = array(
@@ -334,7 +334,7 @@ class ControllerUserUser extends Controller {
 
 		// Entry educations
 		$this->data['educations'] = array();
-		foreach ($user->getBackground()->getEducations() as $key => $education) {
+		foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 			$this->data['educations'][$key] = array(
 				'school' => $education->getSchool(),
 				'degree' => $education->getDegree(),
@@ -349,7 +349,7 @@ class ControllerUserUser extends Controller {
 
 		// Entry Formers
 		$this->data['formers'] = array();
-		foreach ($user->getFormers() as $key => $former) {
+		foreach ($user->getMeta()->getFormers() as $key => $former) {
 			$this->data['formers'][$key] = array(
 				'name' => $former->getName(),
 				'value' => $former->getValue(),
@@ -911,8 +911,8 @@ class ControllerUserUser extends Controller {
 		// Entry birthday
 		if ( isset($this->request->post['background']['birthday']) ){
 			$this->data['birthday'] = $this->request->post['background']['birthday'];
-		}elseif ( isset($user) && $user->getBackground() ){
-			$this->data['birthday'] = $user->getBackground()->getBirthday()->format('d-m-Y');
+		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
+			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('d-m-Y');
 		}else {
 			$this->data['birthday'] = '';
 		}
@@ -920,8 +920,8 @@ class ControllerUserUser extends Controller {
 		// Entry marital status
 		if ( isset($this->request->post['background']['maritalstatus']) ){
 			$this->data['marital_status'] = $this->request->post['background']['maritalstatus'];
-		}elseif ( isset($user) && $user->getBackground() ){
-			$this->data['marital_status'] = $user->getBackground()->getMaritalStatus();
+		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
+			$this->data['marital_status'] = $user->getMeta()->getBackground()->getMaritalStatus();
 		}else {
 			$this->data['marital_status'] = 0;
 		}
@@ -971,8 +971,8 @@ class ControllerUserUser extends Controller {
 		// Entry advice for contact
 		if ( isset($this->request->post['background']['adviceforcontact']) ){
 			$this->data['advice_for_contact'] = $this->request->post['background']['adviceforcontact'];
-		}elseif ( isset($user) && $user->getBackground() ){
-			$this->data['advice_for_contact'] = $user->getBackground()->getAdviceForContact();
+		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
+			$this->data['advice_for_contact'] = $user->getMeta()->getBackground()->getAdviceForContact();
 		}else {
 			$this->data['advice_for_contact'] = '';
 		}
@@ -998,8 +998,8 @@ class ControllerUserUser extends Controller {
 		// Entry interest
 		if ( isset($this->request->post['background']['interest']) ){
 			$this->data['interest'] = $this->request->post['background']['interest'];
-		}elseif ( isset($user) && $user->getBackground() ){
-			$this->data['interest'] = $user->getBackground()->getInterest();
+		}elseif ( isset($user) ){
+			$this->data['interest'] = $user->getMeta()->getBackground()->getInterest();
 		}else {
 			$this->data['interest'] = '';
 		}
@@ -1018,8 +1018,8 @@ class ControllerUserUser extends Controller {
 		$this->data['ims'] = array();
 		if ( isset($this->request->post['user']['ims']) ){
 			$this->data['ims'] = $this->request->post['user']['ims'];
-		}elseif ( isset($user) ){
-			foreach ($user->getIms() as $key => $im) {
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getIms() as $key => $im) {
 				$this->data['ims'][$key] = array(
 					'type' => $im->getType(),
 					'im' => $im->getIm(),
@@ -1042,8 +1042,8 @@ class ControllerUserUser extends Controller {
 		$this->data['phones'] = array();
 		if ( isset($this->request->post['user']['phones']) ){
 			$this->data['phones'] = $this->request->post['user']['phones'];
-		}elseif ( isset($user) ){
-			foreach ($user->getPhones() as $key => $phone) {
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getPhones() as $key => $phone) {
 				$this->data['phones'][$key] = array(
 					'type' => $phone->getType(),
 					'phone' => $phone->getPhone(),
@@ -1070,8 +1070,8 @@ class ControllerUserUser extends Controller {
 		$this->data['websites'] = array();
 		if ( isset($this->request->post['user']['websites']) ){
 			$this->data['websites'] = $this->request->post['user']['websites'];
-		}elseif ( isset($user) ){
-			foreach ($user->getWebsites() as $key => $website) {
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getWebsites() as $key => $website) {
 				$this->data['websites'][$key] = array(
 					'title' => $website->getTitle(),
 					'url' => $website->getUrl(),
@@ -1083,8 +1083,8 @@ class ControllerUserUser extends Controller {
 		$this->data['experiencies'] = array();
 		if ( isset($this->request->post['background']['experiencies']) ){
 			$this->data['experiencies'] = $this->request->post['background']['experiencies'];
-		}elseif ( isset($user) && $user->getBackground()  ){
-			foreach ($user->getBackground()->getExperiencies() as $key => $experience) {
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
 				$this->data['experiencies'][$key] = array(
@@ -1103,8 +1103,8 @@ class ControllerUserUser extends Controller {
 		$this->data['educations'] = array();
 		if ( isset($this->request->post['background']['educations']) ){
 			$this->data['educations'] = $this->request->post['background']['educations'];
-		}elseif ( isset($user) ){
-			foreach ($user->getBackground()->getEducations() as $key => $education) {
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),
 					'degree' => $education->getDegree(),
@@ -1122,8 +1122,8 @@ class ControllerUserUser extends Controller {
 		$this->data['formers'] = array();
 		if ( isset($this->request->post['user']['formers']) ){
 			$this->data['formers'] = $this->request->post['user']['formers'];
-		}elseif ( isset($user) ){
-			foreach ($user->getFormers() as $key => $former) {
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getFormers() as $key => $former) {
 				$this->data['formers'][$key] = array(
 					'name' => $former->getName(),
 					'value' => $former->getValue(),

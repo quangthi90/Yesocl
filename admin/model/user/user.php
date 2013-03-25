@@ -1,15 +1,15 @@
 <?php
 use Document\User\User;
 use Document\User\Meta;
-use Document\User\Email;
+use Document\User\Meta\Email;
 use Document\User\Background;
-use Document\User\Location;
-use Document\User\Im;
-use Document\User\Phone;
-use Document\User\Website;
-use Document\User\Education;
-use Document\User\Experience;
-use Document\User\Former;
+use Document\User\Meta\Location;
+use Document\User\Meta\Im;
+use Document\User\Meta\Phone;
+use Document\User\Meta\Website;
+use Document\User\Meta\Education;
+use Document\User\Meta\Experience;
+use Document\User\Meta\Former;
 
 class ModelUserUser extends Doctrine {
 	/**
@@ -149,16 +149,6 @@ class ModelUserUser extends Doctrine {
 		$location->setCity( trim( $data['meta']['location']['city'] ) );
 		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
-		// Create Meta
-		$meta = new Meta();
-		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
-		$meta->setLastname( trim( $data['meta']['lastname'] ) );
-		$meta->setLocation( $location );
-		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
-		$meta->setAddress( trim( $data['meta']['address'] ) );
-		$meta->setIndustry( trim( $data['meta']['industry'] ) );
-		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
-		
 		// Check email
 		// Get primary email
 		$primary_email = '';
@@ -284,6 +274,23 @@ class ModelUserUser extends Doctrine {
 			$former->setVisible( trim( $former_data['visible'] ) );
 			$formers[] = $former;
 		}
+
+		
+		
+		// Create Meta
+		$meta = new Meta();
+		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
+		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setLocation( $location );
+		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
+		$meta->setAddress( trim( $data['meta']['address'] ) );
+		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
+		$meta->setBackground( $background );
+		$meta->setIms( $ims );
+		$meta->setPhones( $phones );
+		$meta->setWebsites( $websites );
+		$meta->setFormers( $formers );
 		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
@@ -292,11 +299,6 @@ class ModelUserUser extends Doctrine {
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
-		$user->setBackground( $background );
-		$user->setIms( $ims );
-		$user->setPhones( $phones );
-		$user->setWebsites( $websites );
-		$user->setFormers( $formers );
 		
 		// Add status
 		if ( isset($data['user']['status']) ){
@@ -453,16 +455,6 @@ class ModelUserUser extends Doctrine {
 		$location->setCity( trim( $data['meta']['location']['city'] ) );
 		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
-		// Create Meta
-		$meta = new Meta();
-		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
-		$meta->setLastname( trim( $data['meta']['lastname'] ) );
-		$meta->setLocation( $location );
-		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
-		$meta->setAddress( trim( $data['meta']['address'] ) );
-		$meta->setIndustry( trim( $data['meta']['industry'] ) );
-		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
-		
 		// Check email
 		// Get primary email
 		$primary_email = '';
@@ -589,17 +581,27 @@ class ModelUserUser extends Doctrine {
 			$formers[] = $former;
 		}
 		
+		// Create Meta
+		$meta = new Meta();
+		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
+		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setLocation( $location );
+		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
+		$meta->setAddress( trim( $data['meta']['address'] ) );
+		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
+		$meta->setBackground( $background );
+		$meta->setIms( $ims );
+		$meta->setPhones( $phones );
+		$meta->setWebsites( $websites );
+		$meta->setFormers( $formers );
+		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user->setEmails( $emails );
 		//$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
-		$user->setBackground( $background );
-		$user->setIms( $ims );
-		$user->setPhones( $phones );
-		$user->setWebsites( $websites );
-		$user->setFormers( $formers );
 	
 		// Add status
 		if ( isset($data['user']['status']) ){

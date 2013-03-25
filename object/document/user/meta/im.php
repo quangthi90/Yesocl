@@ -1,11 +1,11 @@
 <?php
-namespace Document\User;
+namespace Document\User\Meta;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
  * @MongoDB\EmbeddedDocument
  */
-Class Phone {
+Class Im {
 	/** 
 	 * @MongoDB\Id 
 	 */
@@ -14,7 +14,7 @@ Class Phone {
 	/** 
 	 * @MongoDB\String 
 	 */
-	private $phone;
+	private $im;
 
 	/** @MongoDB\String */
 	private $type;
@@ -26,12 +26,12 @@ Class Phone {
 		return $this->id;
 	}
 
-	public function setPhone( $phone ){
-		$this->phone = $phone;
+	public function setIm( $im ){
+		$this->im = $im;
 	}
 
-	public function getPhone(){
-		return $this->phone;
+	public function getIm(){
+		return $this->im;
 	}
 
 	public function setType( $type ){
