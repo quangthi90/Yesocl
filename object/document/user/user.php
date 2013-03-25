@@ -83,6 +83,16 @@ Class User {
 		}
 	}
 
+	public function isExistEmail( $email ) {
+		foreach ( $this->emails as $email_data ) {
+			if ( $email == $email_data->getEmail() ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public function setMeta( $meta ){
 		$this->meta = $meta;
 	}
