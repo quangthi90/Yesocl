@@ -715,6 +715,27 @@ class ControllerUserUser extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 
+		// Error Country
+		if ( isset($this->error['country']) ) {
+			$this->data['error_country'] = $this->error['country'];
+		} else {
+			$this->data['error_country'] = '';
+		}
+
+		// Error City
+		if ( isset($this->error['city']) ) {
+			$this->data['error_city'] = $this->error['city'];
+		} else {
+			$this->data['error_city'] = '';
+		}
+
+		// Error Industry
+		if ( isset($this->error['industry']) ) {
+			$this->data['error_industry'] = $this->error['industry'];
+		} else {
+			$this->data['error_industry'] = '';
+		}
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -1185,7 +1206,6 @@ class ControllerUserUser extends Controller {
 			}
 		}
 		
-    	
 		if ($this->request->post['user']['password'] || (!isset($this->request->get['user']['user_id']))) {
       		if ((utf8_strlen($this->request->post['user']['password']) < 4) || (utf8_strlen($this->request->post['user']['password']) > 20)) {
         		$this->error['password'] = $this->language->get('error_password');
@@ -1194,6 +1214,18 @@ class ControllerUserUser extends Controller {
 	  		if ($this->request->post['user']['password'] != $this->request->post['user']['confirm']) {
 	    		$this->error['confirm'] = $this->language->get('error_confirm');
 	  		}
+    	}
+
+    	if ((utf8_strlen($this->request->post['meta']['location']['country']) < 1) || (utf8_strlen($this->request->post['meta']['location']['country_id']) < 1)) {
+      		$this->error['country'] = $this->language->get('error_country');
+    	}
+
+    	if ((utf8_strlen($this->request->post['meta']['location']['city']) < 1) || (utf8_strlen($this->request->post['meta']['location']['city_id']) < 1)) {
+      		$this->error['city'] = $this->language->get('error_city');
+    	}
+
+    	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
+      		$this->error['industry'] = $this->language->get('error_industry');
     	}
 
 		if ( $this->error){
@@ -1231,6 +1263,18 @@ class ControllerUserUser extends Controller {
 		    	}
 			}
 		}
+
+    	if ((utf8_strlen($this->request->post['meta']['location']['country']) < 1) || (utf8_strlen($this->request->post['meta']['location']['country_id']) < 1)) {
+      		$this->error['country'] = $this->language->get('error_country');
+    	}
+
+    	if ((utf8_strlen($this->request->post['meta']['location']['city']) < 1) || (utf8_strlen($this->request->post['meta']['location']['city_id']) < 1)) {
+      		$this->error['city'] = $this->language->get('error_city');
+    	}
+
+    	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
+      		$this->error['industry'] = $this->language->get('error_industry');
+    	}
 
 		if ( $this->error){
 			return false;

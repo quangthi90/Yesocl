@@ -31,7 +31,9 @@ $_['column_action']           	= 'Action';
 $_['error_name']              	= 'User Name must be between 3 and 128 characters!';
 $_['error_permission']        	= 'Warning: You do not have permission to modify Users!';
 $_['error_primary_email']     	= 'Warning: You must choice Primary Email!';
-$_['error_email_empty']     	= 'Warning: Primary Email is empty!';
+$_['error_country']     	= 'Warning: Country is required!';
+$_['error_city']     	= 'Warning: City is required!';
+$_['error_industry']     	= 'Warning: Industry is required!';
 
 $_['error_default']           	= 'Warning: This User cannot be deleted as it is currently assigned as the default store User !';
 $_['error_email']          		= 'E-Mail Address does not appear to be valid!';
