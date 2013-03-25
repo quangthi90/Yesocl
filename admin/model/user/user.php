@@ -2,7 +2,7 @@
 use Document\User\User;
 use Document\User\Meta;
 use Document\User\Meta\Email;
-use Document\User\Background;
+use Document\User\Meta\Background;
 use Document\User\Meta\Location;
 use Document\User\Meta\Im;
 use Document\User\Meta\Phone;
@@ -268,7 +268,7 @@ class ModelUserUser extends Doctrine {
 			if ( !isset( $former_data['name'] ) || empty( $former_data['name'] ) ) {
 				continue;
 			}
-			$former = new Website();
+			$former = new Former();
 			$former->setName( trim( $former_data['name'] ) );
 			$former->setValue( trim( $former_data['value'] ) );
 			$former->setVisible( trim( $former_data['visible'] ) );
@@ -574,7 +574,7 @@ class ModelUserUser extends Doctrine {
 			if ( !isset( $former_data['name'] ) || empty( $former_data['name'] ) ) {
 				continue;
 			}
-			$former = new Website();
+			$former = new Former();
 			$former->setName( trim( $former_data['name'] ) );
 			$former->setValue( trim( $former_data['value'] ) );
 			$former->setVisible( trim( $former_data['visible'] ) );

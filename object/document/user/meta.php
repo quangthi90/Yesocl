@@ -60,7 +60,7 @@ Class Meta {
 	/** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Former") */
 	private $formers = array();
 
-    /** @MongoDB\EmbedOne(targetDocument="Document\User\Background") */
+    /** @MongoDB\EmbedOne(targetDocument="Document\User\Meta\Background") */
     private $background;
 
 	public function getId(){
