@@ -24,5 +24,6 @@ $_['entry_modify']      = 'Modify Permission:';
 $_['error_permission']  = 'Warning: You do not have permission to modify degree!';
 $_['error_name']        = 'Data type Name must be between 3 and 128 characters!';
 $_['error_code']        = 'Data type Code must be between 3 and 128 characters!';
+$_['error_exist_code']        = 'Data type Code is exist!';
 $_['error_user']        = 'Warning: This user group cannot be deleted as it is currently assigned to %s users!';
 ?>

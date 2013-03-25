@@ -859,7 +859,7 @@ class ControllerUserUser extends Controller {
 		}elseif ( isset($user) ) {
 			$this->data['status'] = $user->getStatus();
 		}else {
-			$this->data['status'] = 0;
+			$this->data['status'] = 1;
 		}
 		
 		// Entry Group
@@ -921,9 +921,9 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry localtion country
-		if ( isset($this->request->post['meta']['localtion']['country']) ){
-			$this->data['country'] = $this->request->post['meta']['localtion']['country'];
-			$this->data['country_id'] = $this->request->post['meta']['localtion']['country_id'];
+		if ( isset($this->request->post['meta']['location']['country']) ){
+			$this->data['country'] = $this->request->post['meta']['location']['country'];
+			$this->data['country_id'] = $this->request->post['meta']['location']['country_id'];
 		}elseif ( isset($user) && $user->getMeta() ){
 			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
 			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
@@ -933,9 +933,9 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry localtion city
-		if ( isset($this->request->post['meta']['localtion']['city']) ){
-			$this->data['city'] = $this->request->post['meta']['localtion']['city'];
-			$this->data['city_id'] = $this->request->post['meta']['localtion']['city_id'];
+		if ( isset($this->request->post['meta']['location']['city']) ){
+			$this->data['city'] = $this->request->post['meta']['location']['city'];
+			$this->data['city_id'] = $this->request->post['meta']['location']['city_id'];
 		}elseif ( isset($user) && $user->getMeta() ){
 			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();

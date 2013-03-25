@@ -8,8 +8,8 @@ class ModelDataType extends Doctrine {
 			return false;
 		}
 
-		// Code is require
-		if ( !isset($data['code']) || empty($data['code']) ){
+		// Code is require & not exist
+		if ( !isset($data['code']) || empty($data['code']) || $this->isExistCode( $data['code'] ) ){
 			return false;
 		}
 
@@ -34,8 +34,14 @@ class ModelDataType extends Doctrine {
 			return false;
 		}
 
-		// Code is require
+		// Code is required
 		if ( !isset($data['code']) || empty($data['code']) ){
+			return false;
+		}
+
+		// Code is not exist
+		$type_tmp = $this->getTypeByCode( $data['code'] );
+		if ( !empty( $type_tmp ) && $type_tmp->getId() != $id ) {
 			return false;
 		}
 

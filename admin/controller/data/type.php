@@ -212,6 +212,7 @@ class ControllerDataType extends Controller {
 					'name' => $type->getName(),
 					'code' => $type->getCode(),
 					'status' => $type->getStatus(),
+					'hasvalues' => ( count( $type->getValues() ) ) ? 1 : 0,
 					'action' => $action,
 				);
 			}
