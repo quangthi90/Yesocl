@@ -192,13 +192,17 @@ class ModelUserUser extends Doctrine {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
+			$ended = new \Datetime();
+			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+			$started = new \Datetime();
+			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience = new Experience();
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
 			$experience->setLocation( trim( $experience_data['location'] ) );
-			$experience->setEnded( trim( $experience_data['ended'] ) );
-			$experience->setStarted( trim( $experience_data['started'] ) );
+			$experience->setEnded( $ended );
+			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiencies[] = $experience;
 		}
@@ -223,7 +227,7 @@ class ModelUserUser extends Doctrine {
 
 		// Create Background
 		$background = new Background();
-		$background->setBirthday(new \Datetime( $data['background']['birthday'] ));
+		$background->setBirthday( new \Datetime( $data['background']['birthday'] ) );
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
@@ -492,13 +496,17 @@ class ModelUserUser extends Doctrine {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
+			$ended = new \Datetime();
+			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+			$started = new \Datetime();
+			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience = new Experience();
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
 			$experience->setLocation( trim( $experience_data['location'] ) );
-			$experience->setEnded( trim( $experience_data['ended'] ) );
-			$experience->setStarted( trim( $experience_data['started'] ) );
+			$experience->setEnded( $ended );
+			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiencies[] = $experience;
 		}

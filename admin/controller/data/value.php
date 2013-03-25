@@ -497,9 +497,9 @@ class ControllerDataValue extends Controller {
 		$json = array();
 		foreach ($value_data as $value) {
 			$json[] = array(
-				'name' => $value->getName(),
+				'name' => html_entity_decode( $value->getName() ),
 				'type' => $value->getType()->getName(),
-				'value' => $value->getValue(),
+				'value' => html_entity_decode( $value->getValue() ),
 				'id' => $value->getId(),
 				);
 		}

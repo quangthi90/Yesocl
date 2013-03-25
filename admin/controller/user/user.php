@@ -46,6 +46,8 @@ class ControllerUserUser extends Controller {
 		$this->data['text_title'] = 'Title';//$this->language->get( 'text_no' );
 		$this->data['text_url'] = 'Url';//$this->language->get( 'text_no' );
 		$this->data['text_to'] = 'to';//$this->language->get( 'text_no' );
+		$this->data['text_month'] = 'Month: ';//$this->language->get( 'text_no' );
+		$this->data['text_year'] = 'Year: ';//$this->language->get( 'text_no' );
 		$this->data['text_name'] = 'Name';//$this->language->get( 'text_no' );
 		$this->data['text_value'] = 'Value';//$this->language->get( 'text_no' );
 		$this->data['text_visible'] = 'Visible';//$this->language->get( 'text_no' );
@@ -317,13 +319,15 @@ class ControllerUserUser extends Controller {
 		// Entry experiencies
 		$this->data['experiencies'] = array();
 		foreach ($user->getBackground()->getExperiencies() as $key => $experience) {
+			$started = $experience->getStarted();
+			$ended = $experience->getEnded();
 			$this->data['experiencies'][$key] = array(
 				'company' => $experience->getCompany(),
 				'current' => $experience->getCurrent(),
 				'title' => $experience->getTitle(),
 				'location' => $experience->getLocation(),
-				'ended' => $experience->getEnded(),
-				'started' => $experience->getStarted(),
+				'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+				'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 				'description' => $experience->getDescription(),
 				);
 		}
@@ -738,7 +742,9 @@ class ControllerUserUser extends Controller {
 		$this->data['text_no'] = $this->language->get( 'text_no' );
 		$this->data['text_title'] = 'Title';//$this->language->get( 'text_no' );
 		$this->data['text_url'] = 'Url';//$this->language->get( 'text_no' );
-		$this->data['text_to'] = 'to';//$this->language->get( 'text_no' );
+		$this->data['text_to'] = ' to ';//$this->language->get( 'text_no' );
+		$this->data['text_month'] = 'Month: ';//$this->language->get( 'text_no' );
+		$this->data['text_year'] = 'Year: ';//$this->language->get( 'text_no' );
 		$this->data['text_name'] = 'Name';//$this->language->get( 'text_no' );
 		$this->data['text_value'] = 'Value';//$this->language->get( 'text_no' );
 		$this->data['text_visible'] = 'Visible';//$this->language->get( 'text_no' );
@@ -793,7 +799,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_degree'] = 'Degree:';//$this->language->get( 'entry_birthday' );
 		$this->data['entry_field_of_study'] = 'Field Of Study:';//$this->language->get( 'entry_birthday' );
 		$this->data['entry_grace'] = 'Grace:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_societies'] = 'Societies:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_societies'] = 'Activities and Societies:';//$this->language->get( 'entry_birthday' );
 
 		// Warning
 		$this->data['error_primary_email'] = $this->language->get( 'error_primary_email' );
@@ -1079,13 +1085,15 @@ class ControllerUserUser extends Controller {
 			$this->data['experiencies'] = $this->request->post['background']['experiencies'];
 		}elseif ( isset($user) && $user->getBackground()  ){
 			foreach ($user->getBackground()->getExperiencies() as $key => $experience) {
+				$started = $experience->getStarted();
+				$ended = $experience->getEnded();
 				$this->data['experiencies'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
 					'location' => $experience->getLocation(),
-					'ended' => $experience->getEnded(),
-					'started' => $experience->getStarted(),
+					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
 					);
 			}

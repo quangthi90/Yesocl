@@ -9,8 +9,20 @@
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_date_attended; ?></div>
-                         <div class="span10"><input class="started input-small" type="text" name="background[educations][<?php echo $key; ?>][started]" value="<?php echo $education['started']; ?>" /> to <input class="ended input-small" type="text" name="background[educations][<?php echo $key; ?>][ended]" value="<?php echo $education['ended']; ?>" /></div>
-                    </div>
+                         <div class="span10">
+                          <?php $cur_year = date('Y'); ?>
+                          <select class="started input-small" name="background[educations][<?php echo $key; ?>][started]" >
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+                            <option value="<?php echo $i; ?>" <?php if ($i == $education['started']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select> 
+                          <?php echo $text_to; ?> 
+                          <select class="ended input-small" name="background[educations][<?php echo $key; ?>][ended]" >
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+                            <option value="<?php echo $i; ?>" <?php if ($i == $education['ended']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_degree; ?></div>
                          <div class="span10"><input datalist="degree" class="datalist degree input-medium" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
@@ -52,7 +64,20 @@
 			html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_date_attended; ?></div>';
-          	html +=		'<div class="span10"><input class="started input-small" type="text" name="background[educations][' + education_length + '][started]" value="" /> to <input class="ended input-small" type="text" name="background[educations][' + education_length + '][ended]" value="" /></div>';
+            html +=              '<div class="span10">';
+                          <?php $cur_year = date('Y'); ?>
+            html +=              '<select class="started input-small" name="background[educations][' + education_length + '][started]" >';
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+            html +=                '<option value="<?php echo $i; ?>" ><?php echo $i; ?></option>';
+                          <?php } ?>
+            html +=              '</select>';
+            html +=              '<?php echo $text_to; ?>';
+            html +=              '<select class="ended input-small" name="background[educations][' + education_length + '][ended]" >';
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+            html +=                '<option value="<?php echo $i; ?>" ><?php echo $i; ?></option>';
+                          <?php } ?>
+            html +=              '</select>';
+            html +=              '</div>';
           	html +=	'</div>';
 			html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_degree; ?></div>';

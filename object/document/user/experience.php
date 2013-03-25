@@ -8,18 +8,18 @@ Class Experience {
 	private $id; 
 
 	/** @MongoDB\String */
-	private $companyName;
+	private $company;
 
 	/** @MongoDB\String */
 	private $title;
 
 	/** @MongoDB\String */
-	private $localtion;
+	private $location;
 
-	/** @MongoDB\String */
+	/** @MongoDB\Date */
 	private $started;
 
-	/** @MongoDB\String */
+	/** @MongoDB\Date */
 	private $ended;
 
 	/** @MongoDB\Boolean */
@@ -32,12 +32,12 @@ Class Experience {
 		return $this->id;
 	}
 
-	public function setCompanyName( $companyName ){
-		$this->companyName = $companyName;
+	public function setCompany( $company ){
+		$this->company = $company;
 	}
 
-	public function getCompanyName(){
-		return $this->companyName;
+	public function getCompany(){
+		return $this->company;
 	}
 
 	public function setTitle( $title ){
@@ -48,12 +48,12 @@ Class Experience {
 		return $this->title;
 	}
 
-	public function setLocaltion( $localtion ){
-		$this->localtion = $localtion;
+	public function setLocation( $location ){
+		$this->location = $location;
 	}
 
-	public function getLocaltion(){
-		return $this->localtion;
+	public function getLocation(){
+		return $this->location;
 	}
 
 	public function setStarted( $started ){

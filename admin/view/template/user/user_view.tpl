@@ -217,7 +217,34 @@
               <div class="row-fluid">
                 <div class="span4">
                   <div class="span3"><?php echo $entry_time_period; ?></div>
-                  <div class="span9"><input disabled="disabled" class="started input-small" type="text" name="background[experiencies][<?php echo $key; ?>][started]" value="<?php echo $experience['started']; ?>" /> <?php echo $text_to; ?> <input disabled="disabled" class="ended input-small" type="text" name="background[experiencies][<?php echo $key; ?>][ended]" value="<?php echo $experience['ended']; ?>" /></div>
+                  <div class="span9">
+                    <?php $cur_year = date('Y'); ?>
+                    <?php echo $text_month; ?>
+                    <select class="started-month input-small" name="background[experiencies][<?php echo $key; ?>][started][month]" >
+                    <?php for ($i = 1 ; $i < 13; $i++) { ?>
+                              <option value="<?php echo $i; ?>" <?php if ($i == $experience['started']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          <?php echo $text_year; ?>
+                          <select class="started-year input-small" name="background[experiencies][<?php echo $key; ?>][started][year]" >
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+                              <option value="<?php echo $i; ?>" <?php if ($i == $experience['started']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          <?php echo $text_to; ?>
+                          <?php echo $text_month; ?>
+                          <select class="ended-month input-small" name="background[experiencies][<?php echo $key; ?>][ended][month]" >
+                    <?php for ($i = 1 ; $i < 13; $i++) { ?>
+                              <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          <?php echo $text_year; ?>
+                          <select class="ended-year input-small" name="background[experiencies][<?php echo $key; ?>][ended][year]" >
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+                              <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                        </div>
                 </div>
               </div>
               <div class="row-fluid">
@@ -244,7 +271,20 @@
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_date_attended; ?></div>
-                         <div class="span10"><input disabled="disabled" class="started input-small" type="text" name="background[educations][<?php echo $key; ?>][started]" value="<?php echo $education['started']; ?>" /> <?php echo $text_to; ?> <input disabled="disabled" class="ended input-small" type="text" name="background[educations][<?php echo $key; ?>][ended]" value="<?php echo $education['ended']; ?>" /></div>
+                         <div class="span10">
+                          <?php $cur_year = date('Y'); ?>
+                          <select class="started input-small" name="background[educations][<?php echo $key; ?>][started]" >
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+                            <option value="<?php echo $i; ?>" <?php if ($i == $education['started']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select> 
+                          <?php echo $text_to; ?> 
+                          <select class="ended input-small" name="background[educations][<?php echo $key; ?>][ended]" >
+                          <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
+                            <option value="<?php echo $i; ?>" <?php if ($i == $education['ended']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
+                          <?php } ?>
+                          </select>
+                          </div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_degree; ?></div>
