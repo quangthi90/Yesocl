@@ -54,7 +54,7 @@
             <?php if ($types) { ?>
             <?php foreach ($types as $type) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $type['id']; ?>" <?php if ( $type['hasvalues'] ) { ?>hasvalues="1"<?php } ?> /></td>
+              <td><input name="id[]" type="checkbox" value="<?php echo $type['id']; ?>" onclick="$(this).attr('checked', 'checked');" <?php if ( $type['hasvalues'] ) { ?>hasvalues="1"<?php } ?> /></td>
               <td><?php echo $type['name']; ?></td>
               <td><?php echo $type['code']; ?></td>
               <td><?php echo ($type['status']) ? $text_enable : $text_disable; ?></td>
@@ -159,13 +159,8 @@ $('input[name=\'filter_code\']').autocomplete({
 //--></script> 
 <script type="text/javascript"><!--//
 $('#form').on('submit', function(){
-  $('input[name*=\'id\']').each( function () {
-    if ( this.checked == "checked" && $(this).attr('hasvalues') == 1) {
-      if (!confirm('<?php echo $text_have_values; ?>')) {
-        return false;
-      }
-      return true;
-    }
-  });
+  if ( $('input[checked=\'checked\'][hasvalues=\'1\']').length > 0 ) {
+    alert('<?php echo $text_has_values; ?>');
+  }
 });
 //--></script>

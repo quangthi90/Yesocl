@@ -162,6 +162,7 @@ class ControllerDataType extends Controller {
 		
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
+		$this->data['text_has_values'] = $this->language->get( 'text_has_values' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_name'] = $this->language->get( 'column_name' );	
 		$this->data['column_code'] = $this->language->get( 'column_code' );	
@@ -331,6 +332,7 @@ class ControllerDataType extends Controller {
 		// Text	
 		$this->data['text_enable'] = $this->language->get( 'text_enable' );
 		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+		$this->data['text_valid_code'] = $this->language->get( 'text_valid_code' );
 
 		// Error
 		$this->data['error_exist_code'] = $this->language->get( 'error_exist_code' );
@@ -405,6 +407,10 @@ class ControllerDataType extends Controller {
 			$this->error['error_code'] = $this->language->get( 'error_code' );
 		}
 
+		if ( $this->model_data_type->isExistCode( $this->request->post['code'] ) ){
+			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
+		}
+
 		if ( $this->error){
 			return false;
 		}else {
@@ -464,7 +470,7 @@ class ControllerDataType extends Controller {
 
 	public function codeValidate(){
 		if ( !isset($this->request->get['code']) || empty($this->request->get['code']) ){
-			//$this->response->setOutput('false');
+			$this->response->setOutput('false');
 			return;
 		}
 		

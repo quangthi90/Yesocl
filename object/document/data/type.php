@@ -21,7 +21,7 @@ Class Type {
 	 */
 	private $code;
 
-	/** @MongoDB\ReferenceMany(targetDocument="Type", mappedBy="type") */
+	/** @MongoDB\ReferenceMany(targetDocument="Value", mappedBy="type") */
 	private $values = array();
 
 	/** 

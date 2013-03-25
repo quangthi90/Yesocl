@@ -12,7 +12,7 @@
     <div class="heading">
       <span><img src="view/image/data_type.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
-        <a onclick="$('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
+        <a onclick="$('#form').submit();" class="save btn btn-success"><?php echo $button_save; ?></a>
         <a onclick="location = '<?php echo $cancel; ?>';" class="btn btn-danger"><?php echo $button_cancel; ?></a>
       </div>
     </div>
@@ -61,13 +61,13 @@ $('body').on('blur', 'input[name=\'code\']', function(){
         },      
         success: function(output) {
           $('input[name=\'code\']').parent().find('.warning').remove();
+          $('input[name=\'code\']').parent().find('.success').remove();
           
           if (output == 'false'){
             $('input[name=\'code\']').after('<div class="warning"><?php echo $error_exist_code; ?></div>');
+          }else {
+            $('input[name=\'code\']').after('<div class="success"><?php echo $text_valid_code; ?></div>');
           }
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-          alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
         }
       });
     });

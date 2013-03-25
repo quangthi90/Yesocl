@@ -92,7 +92,7 @@ class ModelDataType extends Doctrine {
 	}
 
 	public function isExistCode( $code ) {
-		$type = $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => strtolower( trim( $code ) ) ) );
+		$type = $this->getTypeByCode( $code );
 
 		if ( !empty( $type ) ) {
 			return true;

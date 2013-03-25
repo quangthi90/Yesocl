@@ -4,8 +4,10 @@ $_['heading_title']     = 'Data type';
 
 // Text
 $_['text_success']      = 'Success: You have modified data type!';
+$_['text_valid_code']        = 'Data type Code is valid!';
 $_['text_disable']      = 'Disable';
 $_['text_enable']      = 'Enable';
+$_['text_has_values']      = 'This data has values!';
 
 // Column
 $_['column_name']       = 'Type';
