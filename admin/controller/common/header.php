@@ -58,6 +58,8 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_data_list'] = $this->language->get('text_data_list');
 		$this->data['text_type'] = $this->language->get('text_type');
 		$this->data['text_value'] = $this->language->get('text_value');
+
+		$this->data['home'] = $this->url->link('common/home');
 		
 		// Other
 		$this->data['text_confirm'] = $this->language->get('text_confirm');

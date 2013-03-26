@@ -1,15 +1,15 @@
 <?php
 use Document\User\User;
 use Document\User\Meta;
-use Document\User\Email;
-use Document\User\Background;
-use Document\User\Location;
-use Document\User\Im;
-use Document\User\Phone;
-use Document\User\Website;
-use Document\User\Education;
-use Document\User\Experience;
-use Document\User\Former;
+use Document\User\Meta\Email;
+use Document\User\Meta\Background;
+use Document\User\Meta\Location;
+use Document\User\Meta\Im;
+use Document\User\Meta\Phone;
+use Document\User\Meta\Website;
+use Document\User\Meta\Education;
+use Document\User\Meta\Experience;
+use Document\User\Meta\Former;
 
 class ModelUserUser extends Doctrine {
 	/**
@@ -144,27 +144,17 @@ class ModelUserUser extends Doctrine {
 
 		// Create Location
 		$location = new Location();
-		$location->setCountry( $data['meta']['location']['country'] );
-		$location->setCountryId( $data['meta']['location']['country_id'] );
-		$location->setCity( $data['meta']['location']['city'] );
-		$location->setCityId( $data['meta']['location']['city_id'] );
-		
-		// Create Meta
-		$meta = new Meta();
-		$meta->setFirstname( $data['meta']['firstname'] );
-		$meta->setLastname( $data['meta']['lastname'] );
-		$meta->setLocation( $location );
-		$meta->setPostalCode( $data['meta']['postalcode'] );
-		$meta->setAddress( $data['meta']['address'] );
-		$meta->setIndustry( $data['meta']['industry'] );
-		$meta->setHeadingLine( $data['meta']['headingline'] );
+		$location->setCountry( trim( $data['meta']['location']['country'] ) );
+		$location->setCountryId( trim( $data['meta']['location']['country_id'] ) );
+		$location->setCity( trim( $data['meta']['location']['city'] ) );
+		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
 		// Get primary email
 		$primary_email = '';
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( $email_data['primary'] == 'true' ){
-				$primary_email = strtolower($email_data['email']);
+			if ( $email_data['primary'] ){
+				$primary_email = strtolower( trim( $email_data['email'] ) );
 				break;
 			}
 		}
@@ -175,91 +165,133 @@ class ModelUserUser extends Doctrine {
 		$email->setPrimary( true );
 		$emails[] = $email;
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( strtolower($email_data['email']) === $primary_email ){
+			$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+			if ( $email_data['email'] === $primary_email ){
+				continue;
+			}elseif ( !$email_data['email'] ) {
 				continue;
 			}
 			$email = new Email();
-			$email->setEmail( $data['email'] );
+			$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
 			$email->setPrimary( false );
-			$emails[] = $email;
+			$emails[$email_data['email']] = $email;
 		}
 
 		// Create Experiencies
 		$experiencies = array();
 		foreach ($data['background']['experiencies'] as $experience_data) {
+			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
+				continue;
+			}
+			$ended = new \Datetime();
+			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+			$started = new \Datetime();
+			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience = new Experience();
-			$experience->setCompany( $experience_data['company'] );
-			$experience->setCurrent( $experience_data['current'] );
-			$experience->setTitle( $experience_data['title'] );
-			$experience->setLocation( $experience_data['location'] );
-			$experience->setEnded( $experience_data['ended'] );
-			$experience->setStarted( $experience_data['started'] );
-			$experience->setDescription( $experience_data['description'] );
+			$experience->setCompany( trim( $experience_data['company'] ) );
+			$experience->setCurrent( trim( $experience_data['current'] ) );
+			$experience->setTitle( trim( $experience_data['title'] ) );
+			$experience->setLocation( trim( $experience_data['location'] ) );
+			$experience->setEnded( $ended );
+			$experience->setStarted( $started );
+			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiencies[] = $experience;
 		}
 
 		// Create Educations
 		$educations = array();
 		foreach ($data['background']['educations'] as $education_data) {
+			if ( !isset( $education_data['school'] ) || empty( $education_data['school'] ) ) {
+				continue;
+			}
 			$education = new Education();
-			$education->setSchool( $education_data['school'] );
-			$education->setDegree( $education_data['degree'] );
-			$education->setGrace( $education_data['grace'] );
-			$education->setFieldOfStudy( $education_data['fieldofstudy'] );
-			$education->setEnded( $education_data['ended'] );
-			$education->setStarted( $education_data['started'] );
-			$education->setSocieties( $education_data['societies'] );
-			$education->setDescription( $education_data['description'] );
+			$education->setSchool( trim( $education_data['school'] ) );
+			$education->setDegree( trim( $education_data['degree'] ) );
+			$education->setGrace( trim( $education_data['grace'] ) );
+			$education->setFieldOfStudy( trim( $education_data['fieldofstudy'] ) );
+			$education->setEnded( trim( $education_data['ended'] ) );
+			$education->setStarted( trim( $education_data['started'] ) );
+			$education->setSocieties( trim( $education_data['societies'] ) );
+			$education->setDescription( trim( $education_data['description'] ) );
 			$educations[] = $education;
 		}
 
 		// Create Background
 		$background = new Background();
-		$background->setBirthday(new \Datetime( $data['background']['birthday'] ));
+		$background->setBirthday( new \Datetime( $data['background']['birthday'] ) );
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
-		$background->setAdviceForContact( $data['background']['adviceforcontact'] );
-		$background->setInterest( $data['background']['interest'] );
+		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
+		$background->setInterest( trim( $data['background']['interest'] ) );
 		$background->setExperiencies( $experiencies );
 		$background->setEducations( $educations );
 
 		// Create Ims
 		$ims = array();
 		foreach ($data['user']['ims'] as $im_data) {
+			if ( !isset( $im_data['im'] ) || empty( $im_data['im'] ) ) {
+				continue;
+			}
 			$im = new Im();
-			$im->setIm( $im_data['im'] );
-			$im->setType( $im_data['type'] );
-			$im->setVisible( $im_data['visible'] );
+			$im->setIm( strtolower( trim($im_data['im']) ) );
+			$im->setType( trim( $im_data['type'] ) );
+			$im->setVisible( trim( $im_data['visible'] ) );
 			$ims[] = $im;
 		}
 
 		// Create Phones
 		$phones = array();
 		foreach ($data['user']['phones'] as $phone_data) {
+			if ( !isset( $phone_data['phone'] ) || empty( $phone_data['phone'] ) ) {
+				continue;
+			}
 			$phone = new Phone();
-			$phone->setPhone( $phone_data['phone'] );
-			$phone->setType( $phone_data['type'] );
-			$phone->setVisible( $phone_data['visible'] );
+			$phone->setPhone( trim( $phone_data['phone'] ) );
+			$phone->setType( trim( $phone_data['type'] ) );
+			$phone->setVisible( trim( $phone_data['visible'] ) );
 			$phones[] = $phone;
 		}
 
 		// Create Websites
 		$websites = array();
 		foreach ($data['user']['websites'] as $website_data) {
+			if ( !isset( $website_data['url'] ) || empty( $website_data['url'] ) ) {
+				continue;
+			}
 			$website = new Website();
-			$website->setUrl( $website_data['url'] );
-			$website->setTitle( $website_data['title'] );
+			$website->setUrl( strtolower( trim( $website_data['url'] ) ) );
+			$website->setTitle( trim( $website_data['title'] ) );
 			$websites[] = $website;
 		}
 
 		// Create Formers
 		$formers = array();
 		foreach ($data['user']['formers'] as $former_data) {
-			$former = new Website();
-			$former->setName( $former_data['name'] );
-			$former->setValue( $former_data['value'] );
-			$former->setVisible( $former_data['visible'] );
+			if ( !isset( $former_data['name'] ) || empty( $former_data['name'] ) ) {
+				continue;
+			}
+			$former = new Former();
+			$former->setName( trim( $former_data['name'] ) );
+			$former->setValue( trim( $former_data['value'] ) );
+			$former->setVisible( trim( $former_data['visible'] ) );
 			$formers[] = $former;
 		}
+
+		
+		
+		// Create Meta
+		$meta = new Meta();
+		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
+		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setLocation( $location );
+		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
+		$meta->setAddress( trim( $data['meta']['address'] ) );
+		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
+		$meta->setBackground( $background );
+		$meta->setIms( $ims );
+		$meta->setPhones( $phones );
+		$meta->setWebsites( $websites );
+		$meta->setFormers( $formers );
 		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
@@ -268,11 +300,6 @@ class ModelUserUser extends Doctrine {
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
-		$user->setBackground( $background );
-		$user->setIms( $ims );
-		$user->setPhones( $phones );
-		$user->setWebsites( $websites );
-		$user->setFormers( $formers );
 		
 		// Add status
 		if ( isset($data['user']['status']) ){
@@ -312,9 +339,9 @@ class ModelUserUser extends Doctrine {
 		}
 
 		// Password is required
-		if ( !isset($data['user']['password']) || empty($data['user']['password']) ){
-			return false;
-		}
+		//if ( !isset($data['user']['password']) || empty($data['user']['password']) ){
+		//	return false;
+		//}
 
 		// Group is required
 		if ( !isset($data['user']['group']) ){
@@ -424,27 +451,17 @@ class ModelUserUser extends Doctrine {
 
 		// Create Location
 		$location = new Location();
-		$location->setCountry( $data['meta']['location']['country'] );
-		$location->setCountryId( $data['meta']['location']['country_id'] );
-		$location->setCity( $data['meta']['location']['city'] );
-		$location->setCityId( $data['meta']['location']['city_id'] );
-		
-		// Create Meta
-		$meta = new Meta();
-		$meta->setFirstname( $data['meta']['firstname'] );
-		$meta->setLastname( $data['meta']['lastname'] );
-		$meta->setLocation( $location );
-		$meta->setPostalCode( $data['meta']['postalcode'] );
-		$meta->setAddress( $data['meta']['address'] );
-		$meta->setIndustry( $data['meta']['industry'] );
-		$meta->setHeadingLine( $data['meta']['headingline'] );
+		$location->setCountry( trim( $data['meta']['location']['country'] ) );
+		$location->setCountryId( trim( $data['meta']['location']['country_id'] ) );
+		$location->setCity( trim( $data['meta']['location']['city'] ) );
+		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
 		// Get primary email
 		$primary_email = '';
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( $email_data['primary'] == 'true' ){
-				$primary_email = strtolower($email_data['email']);
+			if ( $email_data['primary'] ){
+				$primary_email = strtolower( trim( $email_data['email'] ) );
 				break;
 			}
 		}
@@ -455,41 +472,54 @@ class ModelUserUser extends Doctrine {
 		$email->setPrimary( true );
 		$emails[] = $email;
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( strtolower($email_data['email']) === $primary_email ){
+			$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+			if ( $email_data['email'] === $primary_email ){
+				continue;
+			}elseif ( !$email_data['email'] ) {
 				continue;
 			}
 			$email = new Email();
-			$email->setEmail( $email_data['email'] );
+			$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
 			$email->setPrimary( false );
-			$emails[] = $email;
+			$emails[$email_data['email']] = $email;
 		}
 
 		// Create Experiencies
 		$experiencies = array();
 		foreach ($data['background']['experiencies'] as $experience_data) {
+			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
+				continue;
+			}
+			$ended = new \Datetime();
+			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+			$started = new \Datetime();
+			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience = new Experience();
-			$experience->setCompany( $experience_data['company'] );
-			$experience->setCurrent( $experience_data['current'] );
-			$experience->setTitle( $experience_data['title'] );
-			$experience->setLocation( $experience_data['location'] );
-			$experience->setEnded( $experience_data['ended'] );
-			$experience->setStarted( $experience_data['started'] );
-			$experience->setDescription( $experience_data['description'] );
+			$experience->setCompany( trim( $experience_data['company'] ) );
+			$experience->setCurrent( trim( $experience_data['current'] ) );
+			$experience->setTitle( trim( $experience_data['title'] ) );
+			$experience->setLocation( trim( $experience_data['location'] ) );
+			$experience->setEnded( $ended );
+			$experience->setStarted( $started );
+			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiencies[] = $experience;
 		}
 
 		// Create Educations
 		$educations = array();
 		foreach ($data['background']['educations'] as $education_data) {
+			if ( !isset( $education_data['school'] ) || empty( $education_data['school'] ) ) {
+				continue;
+			}
 			$education = new Education();
-			$education->setSchool( $education_data['school'] );
-			$education->setDegree( $education_data['degree'] );
-			$education->setGrace( $education_data['grace'] );
-			$education->setFieldOfStudy( $education_data['fieldofstudy'] );
-			$education->setEnded( $education_data['ended'] );
-			$education->setStarted( $education_data['started'] );
-			$education->setSocieties( $education_data['societies'] );
-			$education->setDescription( $education_data['description'] );
+			$education->setSchool( trim( $education_data['school'] ) );
+			$education->setDegree( trim( $education_data['degree'] ) );
+			$education->setGrace( trim( $education_data['grace'] ) );
+			$education->setFieldOfStudy( trim( $education_data['fieldofstudy'] ) );
+			$education->setEnded( trim( $education_data['ended'] ) );
+			$education->setStarted( trim( $education_data['started'] ) );
+			$education->setSocieties( trim( $education_data['societies'] ) );
+			$education->setDescription( trim( $education_data['description'] ) );
 			$educations[] = $education;
 		}
 
@@ -497,72 +527,112 @@ class ModelUserUser extends Doctrine {
 		$background = new Background();
 		$background->setBirthday(new \Datetime( $data['background']['birthday'] ));
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
-		$background->setAdviceForContact( $data['background']['adviceforcontact'] );
-		$background->setInterest( $data['background']['interest'] );
+		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
+		$background->setInterest( trim( $data['background']['interest'] ) );
 		$background->setExperiencies( $experiencies );
 		$background->setEducations( $educations );
 
 		// Create Ims
 		$ims = array();
 		foreach ($data['user']['ims'] as $im_data) {
+			if ( !isset( $im_data['im'] ) || empty( $im_data['im'] ) ) {
+				continue;
+			}
 			$im = new Im();
-			$im->setIm( $im_data['im'] );
-			$im->setType( $im_data['type'] );
-			$im->setVisible( $im_data['visible'] );
+			$im->setIm( strtolower( trim($im_data['im']) ) );
+			$im->setType( trim( $im_data['type'] ) );
+			$im->setVisible( trim( $im_data['visible'] ) );
 			$ims[] = $im;
 		}
 
 		// Create Phones
 		$phones = array();
 		foreach ($data['user']['phones'] as $phone_data) {
+			if ( !isset( $phone_data['phone'] ) || empty( $phone_data['phone'] ) ) {
+				continue;
+			}
 			$phone = new Phone();
-			$phone->setPhone( $phone_data['phone'] );
-			$phone->setType( $phone_data['type'] );
-			$phone->setVisible( $phone_data['visible'] );
+			$phone->setPhone( trim( $phone_data['phone'] ) );
+			$phone->setType( trim( $phone_data['type'] ) );
+			$phone->setVisible( trim( $phone_data['visible'] ) );
 			$phones[] = $phone;
 		}
 
 		// Create Websites
 		$websites = array();
 		foreach ($data['user']['websites'] as $website_data) {
+			if ( !isset( $website_data['url'] ) || empty( $website_data['url'] ) ) {
+				continue;
+			}
 			$website = new Website();
-			$website->setUrl( $website_data['url'] );
-			$website->setTitle( $website_data['title'] );
+			$website->setUrl( strtolower( trim( $website_data['url'] ) ) );
+			$website->setTitle( trim( $website_data['title'] ) );
 			$websites[] = $website;
 		}
 
 		// Create Formers
 		$formers = array();
 		foreach ($data['user']['formers'] as $former_data) {
-			$former = new Website();
-			$former->setName( $former_data['name'] );
-			$former->setValue( $former_data['value'] );
-			$former->setVisible( $former_data['visible'] );
+			if ( !isset( $former_data['name'] ) || empty( $former_data['name'] ) ) {
+				continue;
+			}
+			$former = new Former();
+			$former->setName( trim( $former_data['name'] ) );
+			$former->setValue( trim( $former_data['value'] ) );
+			$former->setVisible( trim( $former_data['visible'] ) );
 			$formers[] = $former;
 		}
+		
+		// Create Meta
+		$meta = new Meta();
+		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
+		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setLocation( $location );
+		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
+		$meta->setAddress( trim( $data['meta']['address'] ) );
+		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
+		$meta->setBackground( $background );
+		$meta->setIms( $ims );
+		$meta->setPhones( $phones );
+		$meta->setWebsites( $websites );
+		$meta->setFormers( $formers );
 		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user->setEmails( $emails );
-		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
+		//$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
-		$user->setBackground( $background );
-		$user->setIms( $ims );
-		$user->setPhones( $phones );
-		$user->setWebsites( $websites );
-		$user->setFormers( $formers );
-		
+	
 		// Add status
 		if ( isset($data['user']['status']) ){
 			$user->setStatus( $data['user']['status'] );
 		}
-		
+
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
 		
 		return true;
+	}
+
+	public function changePassword( $id, $data = array() ) {
+		$user = $this->dm->getRepository('Document\User\User')->find( $id );
+		if ( !$user ) {
+			return false;
+		}
+
+		// Password is required
+		if ( !isset($data['password']) || empty($data['password']) ){
+			return false;
+		}
+
+		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+
+		// Save to DB
+		$this->dm->persist( $user );
+		$this->dm->flush();
 	}
 
 	/**

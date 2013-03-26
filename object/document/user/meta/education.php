@@ -1,5 +1,5 @@
 <?php
-namespace Document\User;
+namespace Document\User\Meta;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** @MongoDB\EmbeddedDocument */
@@ -10,10 +10,10 @@ Class Education {
 	/** @MongoDB\String */
 	private $school;
 
-	/** @MongoDB\Date */
+	/** @MongoDB\String */
 	private $started;
 
-	/** @MongoDB\Date */
+	/** @MongoDB\String */
 	private $ended;
 
 	/** @MongoDB\String */

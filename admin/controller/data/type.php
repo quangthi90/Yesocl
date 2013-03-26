@@ -93,6 +93,18 @@ class ControllerDataType extends Controller {
 			$filter_name = null;
 		}
 
+		if (isset($this->request->get['filter_code'])) {
+			$filter_code = $this->request->get['filter_code'];
+		} else {
+			$filter_code = null;
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$filter_status = $this->request->get['filter_status'];
+		} else {
+			$filter_status = null;
+		}
+
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -115,6 +127,14 @@ class ControllerDataType extends Controller {
 
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if (isset($this->request->get['filter_code'])) {
+			$url .= '&filter_code=' . $this->request->get['filter_code'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
 		if (isset($this->request->get['sort'])) {
@@ -142,11 +162,13 @@ class ControllerDataType extends Controller {
 		
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
-		//$this->data['text_status'] = $this->language->get( 'text_status' );
+		$this->data['text_has_values'] = $this->language->get( 'text_has_values' );
+		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_name'] = $this->language->get( 'column_name' );	
+		$this->data['column_code'] = $this->language->get( 'column_code' );	
 		$this->data['column_action'] = $this->language->get( 'column_action' );
-		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
-		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_enable'] = $this->language->get( 'text_enable' );
+		$this->data['text_disable'] = $this->language->get( 'text_disable' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
 		
 		// Confirm
@@ -163,6 +185,7 @@ class ControllerDataType extends Controller {
 
 		$data = array(
 			'filter_name' => $filter_name,
+			'filter_code' => $filter_code,
 			'sort' => $sort,
 			'order' => $order,
 			'start' => ($page - 1) * $this->limit,
@@ -188,6 +211,9 @@ class ControllerDataType extends Controller {
 				$this->data['types'][] = array(
 					'id' => $type->getId(),
 					'name' => $type->getName(),
+					'code' => $type->getCode(),
+					'status' => $type->getStatus(),
+					'hasvalues' => ( count( $type->getValues() ) ) ? 1 : 0,
 					'action' => $action,
 				);
 			}
@@ -199,6 +225,14 @@ class ControllerDataType extends Controller {
 			$url .= '&filter_name=' . $this->request->get['filter_name'];
 		}
 
+		if (isset($this->request->get['filter_code'])) {
+			$url .= '&filter_code=' . $this->request->get['filter_code'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
 		if ($order == 'asc') {
 			$url .= '&order=desc';
 		} else {
@@ -206,11 +240,21 @@ class ControllerDataType extends Controller {
 		}
 					
 		$this->data['sort_name'] = $this->url->link('data/type', 'page=' . $page . '&sort=name' . $url );
+		$this->data['sort_code'] = $this->url->link('data/type', 'page=' . $page . '&sort=code' . $url );
+		$this->data['sort_status'] = $this->url->link('data/type', 'page=' . $page . '&sort=status' . $url );
 		
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
 			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if (isset($this->request->get['filter_code'])) {
+			$url .= '&filter_code=' . $this->request->get['filter_code'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
 		$url .= '&sort=' . $sort;
@@ -227,6 +271,8 @@ class ControllerDataType extends Controller {
 		$this->data['pagination'] = $pagination->render();
 
 		$this->data['filter_name'] = $filter_name;
+		$this->data['filter_code'] = $filter_name;
+		$this->data['filter_status'] = $filter_status;
 		
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
@@ -262,6 +308,12 @@ class ControllerDataType extends Controller {
 			$this->data['error_name'] = '';
 		}
 
+		if ( isset($this->error['error_code']) ) {
+			$this->data['error_code'] = $this->error['error_code'];
+		} else {
+			$this->data['error_code'] = '';
+		}
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -278,8 +330,12 @@ class ControllerDataType extends Controller {
 		$this->data['heading_title'] = $this->language->get( 'heading_title' );
 		
 		// Text	
-		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
-		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_enable'] = $this->language->get( 'text_enable' );
+		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+		$this->data['text_valid_code'] = $this->language->get( 'text_valid_code' );
+
+		// Error
+		$this->data['error_exist_code'] = $this->language->get( 'error_exist_code' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -287,9 +343,12 @@ class ControllerDataType extends Controller {
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
+		$this->data['entry_code'] = $this->language->get( 'entry_code' );
+		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'data/type' );
+		$this->data['codeValidate'] = $this->url->link( 'data/type/codeValidate' );
 		
 		// Group
 		if ( isset($this->request->get['type_id']) ){
@@ -297,6 +356,7 @@ class ControllerDataType extends Controller {
 			
 			if ( $type ){
 				$this->data['action'] = $this->url->link( 'data/type/update', 'type_id=' . $type->getId() );	
+				$this->data['codeValidate'] = $this->url->link( 'data/type/codeValidate&type_id=' . $type->getId() );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -311,6 +371,24 @@ class ControllerDataType extends Controller {
 			$this->data['name'] = '';
 		}
 
+		// Entry code
+		if ( isset($this->request->post['code']) ){
+			$this->data['code'] = $this->request->post['code'];
+		}elseif ( isset($type) ){
+			$this->data['code'] = $type->getCode();
+		}else {
+			$this->data['code'] = '';
+		}
+
+		// Entry status
+		if ( isset($this->request->post['status']) ){
+			$this->data['status'] = $this->request->post['status'];
+		}elseif ( isset($type) ){
+			$this->data['status'] = $type->getStatus();
+		}else {
+			$this->data['status'] = 1;
+		}
+
 		$this->template = 'data/type_form.tpl';
 		$this->children = array(
 			'common/header',
@@ -323,6 +401,14 @@ class ControllerDataType extends Controller {
 	private function isValidateForm(){
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
+		}
+
+		if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 128 ){
+			$this->error['error_code'] = $this->language->get( 'error_code' );
+		}
+
+		if ( $this->model_data_type->isExistCode( $this->request->post['code'] ) ){
+			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
 		}
 
 		if ( $this->error){
@@ -355,8 +441,16 @@ class ControllerDataType extends Controller {
 			$filter_name = null;
 		}
 
+		if ( isset( $this->request->get['filter_code'] ) ) {
+			$filter_code = $this->request->get['filter_code'];
+			$sort = 'code';
+		}else {
+			$filter_code = null;
+		}
+
 		$data = array(
 			'filter_name' => $filter_name,
+			'filter_code' => $filter_code,
 			'sort' => $sort,
 			);
 
@@ -366,11 +460,41 @@ class ControllerDataType extends Controller {
 		foreach ($type_data as $type) {
 			$json[] = array(
 				'name' => $type->getName(),
+				'code' => $type->getCode(),
 				'id' => $type->getId(),
 				);
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function codeValidate(){
+		if ( !isset($this->request->get['code']) || empty($this->request->get['code']) ){
+			$this->response->setOutput('false');
+			return;
+		}
+		
+		if ( isset($this->request->get['type_id']) ){
+			$type_id = $this->request->get['type_id'];
+		}
+
+		$this->load->model( 'data/type' );
+
+		if ( isset( $type_id ) ) {
+			$type = $this->model_data_type->getTypeByCode( $this->request->get['code'] );
+			if ( !empty( $type ) && $type->getId() != $type_id ) {
+				$this->response->setOutput('false');
+				return;
+			}
+		}else {
+			if ( $this->model_data_type->isExistCode( $this->request->get['code'] ) ) {
+				$this->response->setOutput('false');
+				return;
+			}
+		}
+		
+		$this->response->setOutput('true');
+		return;
 	}
 }
 ?>

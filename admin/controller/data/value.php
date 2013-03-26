@@ -458,9 +458,20 @@ class ControllerDataValue extends Controller {
 			$filter_name = null;
 		}
 
+		if ( isset( $this->request->get['filter_type_name'] ) ) {
+			$filter_type_name = $this->request->get['filter_type_name'];
+		}else {
+			$filter_type_name = null;
+		}
+
+		if ( isset( $this->request->get['filter_type_code'] ) ) {
+			$filter_type_code = $this->request->get['filter_type_code'];
+		}else {
+			$filter_type_code = null;
+		}
+
 		if ( isset( $this->request->get['filter_type'] ) ) {
 			$filter_type = $this->request->get['filter_type'];
-			$sort = 'this.type.name';
 		}else {
 			$filter_type = null;
 		}
@@ -474,6 +485,8 @@ class ControllerDataValue extends Controller {
 
 		$data = array(
 			'filter_name' => $filter_name,
+			'filter_type_name' => $filter_type_name,
+			'filter_type_code' => $filter_type_code,
 			'filter_type' => $filter_type,
 			'filter_value' => $filter_value,
 			'sort' => $sort,
@@ -484,9 +497,9 @@ class ControllerDataValue extends Controller {
 		$json = array();
 		foreach ($value_data as $value) {
 			$json[] = array(
-				'name' => $value->getName(),
+				'name' => html_entity_decode( $value->getName() ),
 				'type' => $value->getType()->getName(),
-				'value' => $value->getValue(),
+				'value' => html_entity_decode( $value->getValue() ),
 				'id' => $value->getId(),
 				);
 		}

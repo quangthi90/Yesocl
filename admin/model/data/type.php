@@ -7,9 +7,22 @@ class ModelDataType extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		// Code is require & not exist
+		if ( !isset($data['code']) || empty($data['code']) || $this->isExistCode( $data['code'] ) ){
+			return false;
+		}
+
+		if ( isset($data['status']) ){
+			$data['status'] = (int)$data['status'];
+		}else {
+			$data['status'] = 0;
+		}
 		
 		$type = new Type();
-		$type->setName( $data['name'] );
+		$type->setName( trim( $data['name'] ) );
+		$type->setCode( trim( utf8_strtolower($data['code']) ) );
+		$type->setStatus( trim( $data['status'] ) ); 
 
 		$this->dm->persist( $type );
 		$this->dm->flush();
@@ -20,6 +33,23 @@ class ModelDataType extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		// Code is required
+		if ( !isset($data['code']) || empty($data['code']) ){
+			return false;
+		}
+
+		// Code is not exist
+		$type_tmp = $this->getTypeByCode( $data['code'] );
+		if ( !empty( $type_tmp ) && $type_tmp->getId() != $id ) {
+			return false;
+		}
+
+		if ( isset($data['status']) ){
+			$data['status'] = (int)$data['status'];
+		}else {
+			$data['status'] = 0;
+		}
 		
 		$type = $this->dm->getRepository('Document\Data\Type')->find( $id );
 		
@@ -27,7 +57,9 @@ class ModelDataType extends Doctrine {
 			return false;
 		}
 
-		$type->setName( $data['name'] ); 
+		$type->setName( trim( $data['name'] ) ); 
+		$type->setCode( trim( utf8_strtolower($data['code']) ) );
+		$type->setStatus( $data['status'] ); 
 
 		$this->dm->flush();
 	}
@@ -36,6 +68,8 @@ class ModelDataType extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$type = $this->dm->getRepository( 'Document\Data\Type' )->find( $id );
+
+				//$type->setStatus( 0 );
 
 				$values = $this->dm->getRepository( 'Document\Data\value' )->findBy( array( 'type.id' => $id ) );
 				foreach ($values as $value) {
@@ -53,6 +87,20 @@ class ModelDataType extends Doctrine {
 		return $this->dm->getRepository( 'Document\Data\Type' )->find( $type_id );
 	}
 
+	public function getTypeByCode( $code ) {
+		return $this->dm->getRepository( 'Document\Data\Type' )->findOneBy( array( 'code' => strtolower( trim( $code ) ) ) );
+	}
+
+	public function isExistCode( $code ) {
+		$type = $this->getTypeByCode( $code );
+
+		if ( !empty( $type ) ) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+
 	public function getTypes( $data = array() ) {
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
@@ -66,7 +114,15 @@ class ModelDataType extends Doctrine {
     		->skip( $data['start'] );
 
     	if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_code'] ) ) {
+    		$query->field( 'code' )->equals( new \MongoRegex('/' . trim( $data['filter_code'] ) . '.*/i') );
+    	}
+    	
+    	if ( isset( $data['filter_status'] ) ) {
+    		$query->field( 'status' )->equals( $data['filter_status'] );
     	}
 
     	if ( isset( $data['sort'] ) ) {
@@ -84,7 +140,15 @@ class ModelDataType extends Doctrine {
 		$query = $this->dm->createQueryBuilder( 'Document\Data\Type' );
 
 		if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_code'] ) ) {
+    		$query->field( 'code' )->equals( new \MongoRegex('/' . trim( $data['filter_code'] ) . '.*/i') );
+    	}
+    	
+    	if ( isset( $data['filter_status'] ) ) {
+    		$query->field( 'status' )->equals( $data['filter_status'] );
     	}
 
 		$types = $query->getQuery()->execute();

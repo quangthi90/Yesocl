@@ -37,12 +37,24 @@
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[location][country]" value="<?php echo $country; ?>" /></td>
+        <td><input required="required" class="input-medium" type="text" name="meta[location][country]" value="<?php echo $country; ?>" />
+          <?php if ($error_country) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_country; ?>
+        </div>
+            <?php } ?>
+          </td>
         <input required="required" type="hidden" name="meta[location][country_id]" value="<?php echo $country_id; ?>" />
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[location][city]" value="<?php echo $city; ?>" /></td>
+        <td><input required="required" class="input-medium" type="text" name="meta[location][city]" value="<?php echo $city; ?>" />
+        <?php if ($error_city) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_city; ?>
+        </div>
+            <?php } ?>
+          </td>
         <input required="required" type="hidden" name="meta[location][city_id]" value="<?php echo $city_id; ?>" />
     </tr>
     <tr>
@@ -59,7 +71,13 @@
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
+        <td><input required="required" datalist="industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" />
+        <?php if ($error_industry) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_industry; ?>
+        </div>
+            <?php } ?>
+          </td>
     </tr>
     <tr>
         <td><?php echo $entry_headingline; ?></td>
@@ -139,3 +157,36 @@ $('input[name=\'meta[location][city]\']').autocomplete({
   }
 });
 //--></script> 
+<script type="text/javascript"><!--//
+$(function () {
+var type;
+$('input.datalist').autocomplete({
+  delay: 0,
+  search: function( event, ui ) {
+    type = $(this).attr('datalist');
+  },
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=data/value/autocomplete&filter_type_code=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $(this).val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+     return false;
+     }
+});
+});
+//--></script>
