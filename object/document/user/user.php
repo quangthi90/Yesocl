@@ -85,7 +85,7 @@ Class User {
 
 	public function isExistEmail( $email ) {
 		foreach ( $this->emails as $email_data ) {
-			if ( $email == $email_data->getEmail() ) {
+			if ( strtolower( trim( $email ) ) == $email_data->getEmail() ) {
 				return true;
 			}
 		}

@@ -165,7 +165,8 @@ class ModelUserUser extends Doctrine {
 		$email->setPrimary( true );
 		$emails[] = $email;
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( strtolower( trim( $email_data['email'] ) ) === $primary_email ){
+			$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+			if ( $email_data['email'] === $primary_email ){
 				continue;
 			}elseif ( !$email_data['email'] ) {
 				continue;
@@ -173,7 +174,7 @@ class ModelUserUser extends Doctrine {
 			$email = new Email();
 			$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
 			$email->setPrimary( false );
-			$emails[] = $email;
+			$emails[$email_data['email']] = $email;
 		}
 
 		// Create Experiencies
@@ -471,7 +472,8 @@ class ModelUserUser extends Doctrine {
 		$email->setPrimary( true );
 		$emails[] = $email;
 		foreach ( $data['user']['emails'] as $email_data ){
-			if ( strtolower( trim( $email_data['email'] ) ) === $primary_email ){
+			$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+			if ( $email_data['email'] ) === $primary_email ){
 				continue;
 			}elseif ( !$email_data['email'] ) {
 				continue;
@@ -479,7 +481,7 @@ class ModelUserUser extends Doctrine {
 			$email = new Email();
 			$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
 			$email->setPrimary( false );
-			$emails[] = $email;
+			$emails[$email_data['email']] = $email;
 		}
 
 		// Create Experiencies
