@@ -473,7 +473,7 @@ class ModelUserUser extends Doctrine {
 		$emails[] = $email;
 		foreach ( $data['user']['emails'] as $email_data ){
 			$email_data['email'] = strtolower( trim( $email_data['email'] ) );
-			if ( $email_data['email'] ) === $primary_email ){
+			if ( $email_data['email'] === $primary_email ){
 				continue;
 			}elseif ( !$email_data['email'] ) {
 				continue;
