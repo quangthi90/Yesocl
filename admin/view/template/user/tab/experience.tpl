@@ -1,7 +1,7 @@
 		<table class="form">
 			<?php foreach ($experiencies as $key => $experience) { ?>
 			<tr>
-				<td>
+				<td algin="middle">
 				<div class="row-fluid">
 					<div class="span4">
 						<div class="span3"><strong><?php echo $entry_company; ?></strong></div>
@@ -25,7 +25,7 @@
           		</div>
           		<div class="row-fluid">
           			<div class="span1">
-          				<div class="span4"><?php echo $entry_time_period; ?></div>
+          				<div class="span12"><?php echo $entry_time_period; ?></div>
           			</div>
                 <div class="span8">
                     <?php $cur_year = date('Y'); ?>
@@ -100,7 +100,7 @@
           	html += 	'</div>';
           	html += 	'<div class="row-fluid">';
           	html += 		'<div class="span1">';
-          	html += 			'<div class="span4"><?php echo $entry_time_period; ?></div>';
+          	html += 			'<div class="span12"><?php echo $entry_time_period; ?></div>';
             html +=     '</div>';
           	html += '<div class="span8">';
           					<?php $cur_year = date('Y'); ?>
