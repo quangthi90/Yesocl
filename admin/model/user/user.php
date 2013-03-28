@@ -733,5 +733,48 @@ class ModelUserUser extends Doctrine {
 		
 		return false;
 	}
+
+	public function search( $data = array() ) {
+		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\User\User',
+				)
+    	);
+ 
+		$query_data = 'solrContent_t:*' . $data['filter'] . '*';
+
+		if ( isset( $data['start'] ) ) {
+			$data['start'] = (int)$data['start'];
+		}else {
+			$data['start'] = 0;
+		}
+
+		if ( isset( $data['limit'] ) ) {
+			$data['limit'] = (int)$data['limit'];
+		}else {
+			$data['limit'] = 10;
+		}
+
+		//$query_data .= '&start=' . $data['start'];
+		//$query_data .= '&rows' . $data['limit'];
+ 
+		$query->setQuery( $query_data );
+ 
+		$results = $this->client->execute( $query );
+
+		$users = array();
+
+		foreach ($results as $result) {
+			if ( $user = $this->getUser( array( 'user_id' => $result->getId() ) ) ) {
+				$users[] = $user;
+			}
+		}
+
+		return $users;
+	}
 }
 ?>

@@ -1399,5 +1399,32 @@ class ControllerUserUser extends Controller {
 
 		$this->response->setOutput( json_encode( $json ) );
 	}
+
+	public function searchUser() {
+		$this->load->model( 'user/user' );
+
+		if ( isset( $this->request->get['filter'] ) ) {
+			$filter = $this->request->get['filter'];
+		}else {
+			$filter = null;
+		}
+
+		$data = array(
+			'filter' => $filter,
+			);
+
+		$users = $this->model_user_user->search( $data );
+
+		$json = array();
+
+		foreach ($users as $user) {
+			$json[] = array(
+				'id' => $user->getId(),
+				'primary' => $user->getPrimaryEmail()->getEmail(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
 }
 ?>
