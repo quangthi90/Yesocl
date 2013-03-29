@@ -745,7 +745,7 @@ class ModelUserUser extends Doctrine {
 				)
     	);
  
-		$query_data = 'solrContent_t:*' . $data['filter'] . '*';
+		$query_data = 'solrUserContent_t:*' . $data['filter'] . '*';
 
 		if ( isset( $data['start'] ) ) {
 			$data['start'] = (int)$data['start'];
