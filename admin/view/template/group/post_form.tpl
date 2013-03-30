@@ -20,8 +20,21 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <table class="form">
           <tr>
+            <td><span class="required">*</span> <?php echo $entry_author; ?></td>
+            <td><input type="text" class="input-xxlarge" required="required" name="author" value="<?php echo $author; ?>" /><input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+            <?php if ($error_author) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_author; ?>
+        </div>
+            <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_fullname; ?></td>
+            <td><?php echo $fullname; ?></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_title; ?></td>
-            <td><input type="text" class="input-xxlarge" required="required" name="post[title]" value="<?php echo $title; ?>" />
+            <td><input type="text" class="input-xxlarge" required="required" name="title" value="<?php echo $title; ?>" />
             <?php if ($error_title) { ?>
               	<div class="alert alert-error">
 				  <strong>Error!</strong> <?php echo $error_title; ?>
@@ -30,7 +43,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_content; ?></td>
-            <td><textarea class="input-xxlarge" required="required" name="post[content]"><?php echo $content; ?></textarea>
+            <td><textarea class="input-xxlarge" required="required" name="content"><?php echo $content; ?></textarea>
             <?php if ($error_content) { ?>
               	<div class="alert alert-error">
 				  <strong>Error!</strong> <?php echo $error_content; ?>
@@ -38,17 +51,8 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_author; ?></td>
-            <td><input type="text" class="input-xxlarge" required="required" name="post[author]" value="<?php echo $author; ?>" />
-            <?php if ($error_author) { ?>
-              	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_author; ?>
-				</div>
-            <?php } ?></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_status; ?></td>
-            <td><select name="post[status]">
+            <td><select name="status">
                 <?php if ($status) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
@@ -64,3 +68,31 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--//
+$('input[name=\'author\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.primary,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'author\']').val(ui.item.label);
+    $('input[name=\'user_id\']').val(ui.item.value);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>

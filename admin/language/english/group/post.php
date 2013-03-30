@@ -7,6 +7,9 @@ $_['text_success']            = 'Success: You have modified Posts!';
 $_['text_post'] 			  = 'Post';
 $_['text_group'] 			  = 'Group';
 $_['text_comments']			  = 'Comments';
+$_['text_author']			  = 'Author';
+$_['text_created']			  = 'Created';
+$_['text_title']			  = 'Title';
 $_['text_status']			  = 'Status';
 $_['text_action']			  = 'Action';
 
@@ -15,6 +18,7 @@ $_['entry_title']             = 'Title:';
 $_['entry_content']           = 'Content:';
 $_['entry_author']        	  = 'Author:';
 $_['entry_status']        	  = 'Status:';
+$_['entry_fullname']             = 'Fullname:';
 
 // error
 $_['error_name']              = 'Post Name must be between 3 and 128 characters!';
