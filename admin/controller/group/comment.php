@@ -1,21 +1,19 @@
-<?php 
-use Document\Group\Post;
-
-class Controllergrouppost extends Controller {
+<?php
+class ControllerGroupComment extends Controller {
 	private $error = array( );
-	private $this->limit = 10;
+	private $limit = 10;
  
 	public function index(){
-		$this->load->language( 'group/post' );
+		$this->load->language( 'group/comment' );
 		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
+		if ( !isset($this->request->get['post_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_post');
 			
 			$this->redirect( $this->url->link( 'group/group') );
 		}
 		
 		
-		$this->load->model( 'group/post' );
+		$this->load->model( 'group/comment' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 		
@@ -133,6 +131,10 @@ class Controllergrouppost extends Controller {
 		
 		$this->load->model( 'group/post' );
 		$post = $this->model_group_post->getPost( $this->request->get['post_id'] );
+		if ( empty( $post ) ) {
+			$this->session->data['error_warning'] = $this->language->get('error_post');
+			$this->redirect( $this->url->link( 'group/group') );
+		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -147,12 +149,12 @@ class Controllergrouppost extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'group/post' ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId( $post->getId() ) ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/comment' ),
+			'href'      => $this->url->link( 'group/comment', 'post_id=' . $post->getId() ),
       		'separator' => ' :: '
    		);
 
@@ -161,6 +163,8 @@ class Controllergrouppost extends Controller {
 		
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
+		$this->data['text_author'] = $this->language->get( 'text_author' );
+		$this->data['text_created'] = $this->language->get( 'text_created' );
 		$this->data['text_status'] = $this->language->get( 'text_status' );
 		$this->data['text_post'] = $this->language->get( 'text_post' );	
 		$this->data['text_action'] = $this->language->get( 'text_action' );
@@ -177,9 +181,9 @@ class Controllergrouppost extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'group/post/insert', 'group_id=' . $this->request->get['group_id'] );
-		$this->data['delete'] = $this->url->link( 'group/post/delete', 'group_id=' . $this->request->get['group_id'] );
-		$this->data['back'] = $this->url->link( 'group/group' );
+		$this->data['insert'] = $this->url->link( 'group/comment/insert', 'post_id=' . $post->getId() );
+		$this->data['delete'] = $this->url->link( 'group/comment/delete', 'post_id=' . $post->getId() );
+		$this->data['back'] = $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId( $post->getId() ) );
 
 		// Comment
 		$comments = $post->getComments();
@@ -188,34 +192,35 @@ class Controllergrouppost extends Controller {
 		
 		$this->data['comments'] = array();
 		if ( $comments ){
-			$post_total = count( $comments );
-			for ( $i = (($page - 1) * $this->limit); $i < ($post_total - (($page - 1) * $this->limit)); $i++ ){
+			$comment_total = count( $comments );
+			for ( $i = (($page - 1) * $this->limit); $i < ($comment_total - (($page - 1) * $this->limit)); $i++ ){
 				$action = array();
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/post/update', 'comment_id=' . $comments[$i]->getId() . '&post_id=' . $this->request->get['post_id'] ),
+					'href' => $this->url->link( 'group/comment/update', 'comment_id=' . $comments[$i]->getId() . '&post_id=' . $post->getId() ),
 					'icon' => 'icon-edit',
 				);
 			
 				$this->data['comments'][] = array(
 					'id' => $comments[$i]->getId(),
-					'name' => $comments[$i]->getName(),
+					'author' => $comments[$i]->getAuthor()->getFullname(),
+					'created' => $comments[$i]->getCreated()->format( $this->language->get( 'date_time_format' ) ),
 					'action' => $action,
 				);
 			}
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $post_total;
+		$pagination->total = $comment_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('sale/customer', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('group/comment', '&post_id=' . $post->getId() . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
-		$this->template = 'group/post_list.tpl';
+		$this->template = 'group/comment_list.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'

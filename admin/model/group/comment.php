@@ -1,7 +1,7 @@
 <?php
-use Document\Group\Post;
+use Document\Group\Comment;
 
-class ModelGroupPost extends Doctrine {
+class ModelGroupComment extends Doctrine {
 	public function addPost( $data = array(), $group_id ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
@@ -112,30 +112,6 @@ class ModelGroupPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
-	}
-
-	public function getPost( $post_id ) {
-		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
-
-		if ( empty( $group ) ) {
-			return false;
-		}
-
-		foreach ( $group->getPosts() as $post ){
-			if ( $post->getId() == $post_id ){
-				return $post;
-			}
-		}
-	}
-
-	public function getGroupId( $post_id ) {
-		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
-
-		if ( !empty( $group ) ) {
-			return $group->getId();
-		}
-
-		return false;
 	}
 }
 ?>

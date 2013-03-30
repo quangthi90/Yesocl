@@ -3,12 +3,9 @@ namespace Document\Group;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** @MongoDB\EmbeddedDocument */
-Class Post {
+Class Comment {
 	/** @MongoDB\Id */
 	private $id;
-
-	/** @MongoDB\String */
-	private $title;
 
 	/** @MongoDB\String */
 	private $content;
@@ -19,22 +16,11 @@ Class Post {
 	/** @MongoDB\Date */
 	private $created;
 	
-	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="posts") */
+	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="comment") */
     private $user;
-
-	/** @MongoDB\EmbedMany(targetDocument="Comment") */
-	private $comments = array();
 
 	public function getId(){
 		return $this->id;
-	}
-	
-	public function setTitle( $title ){
-		$this->title = $title;
-	}
-
-	public function getTitle(){
-		return $this->title;
 	}
 
 	public function setContent( $content ){
@@ -72,17 +58,5 @@ Class Post {
 
 	public function getUser(){
 		return $this->user;
-	}
-
-	public function addComment( Comment $comment ){
-		$this->comments[] = $comment;
-	}
-
-	public function setComments( $comments ){
-		$this->comments = $comments;
-	}
-
-	public function getComments(){
-		return $this->comments;
 	}
 }
