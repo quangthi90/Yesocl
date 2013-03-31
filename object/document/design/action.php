@@ -1,5 +1,5 @@
 <?php
-namespace Document\Admin;
+namespace Document\Design;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
