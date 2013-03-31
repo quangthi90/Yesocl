@@ -9,7 +9,7 @@ class ModelGroupPost extends Doctrine {
 		}
 		
 		// content is require
-		if ( !isset($data['content']) || empty($data['content']) ){
+		if ( !isset($data['postcontent']) || empty($data['postcontent']) ){
 			return false;
 		}
 		
@@ -40,7 +40,7 @@ class ModelGroupPost extends Doctrine {
 		
 		$post = new Post();
 		$post->setTitle( $data['title'] );
-		$post->setContent( $data['content'] );
+		$post->setContent( $data['postcontent'] );
 		$post->setUser( $user );
 		$post->setStatus( $data['status'] );
 		
@@ -58,7 +58,7 @@ class ModelGroupPost extends Doctrine {
 		}
 		
 		// content is require
-		if ( !isset($data['content']) || empty($data['content']) ){
+		if ( !isset($data['postcontent']) || empty($data['postcontent']) ){
 			return false;
 		}
 		
@@ -83,7 +83,7 @@ class ModelGroupPost extends Doctrine {
 		foreach ( $group->getPosts() as $post ){
 			if ( $post->getId() == $post_id ){
 				$post->setTitle( $data['title'] );
-				$post->setContent( $data['content'] );
+				$post->setContent( $data['postcontent'] );
 				$post->setUser( $user );
 				$post->setStatus( $data['status'] );
 				break;

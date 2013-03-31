@@ -43,7 +43,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_content; ?></td>
-            <td><textarea class="input-xxlarge" required="required" name="content"><?php echo $content; ?></textarea>
+            <td><textarea class="input-xxlarge" required="required" name="postcontent"><?php echo $content; ?></textarea>
             <?php if ($error_content) { ?>
               	<div class="alert alert-error">
 				  <strong>Error!</strong> <?php echo $error_content; ?>
@@ -70,7 +70,7 @@
 <?php echo $footer; ?>
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
-CKEDITOR.replace('content', {
+CKEDITOR.replace('postcontent', {
   filebrowserBrowseUrl: 'index.php?route=common/filemanager',
   filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',
   filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager',

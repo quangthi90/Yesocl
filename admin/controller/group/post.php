@@ -339,8 +339,8 @@ class ControllerGroupPost extends Controller {
 		}
 		
 		// Entry content
-		if ( isset($this->request->post['content']) ){
-			$this->data['content'] = $this->request->post['content'];
+		if ( isset($this->request->post['postcontent']) ){
+			$this->data['content'] = $this->request->post['postcontent'];
 		}elseif ( isset($post) ){
 			$this->data['content'] = $post->getContent();
 		}else {
