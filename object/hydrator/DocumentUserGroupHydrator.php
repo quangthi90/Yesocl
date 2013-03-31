@@ -43,14 +43,6 @@ class DocumentUserGroupHydrator implements HydratorInterface
             $hydratedData['name'] = $return;
         }
 
-        /** @Field(type="boolean") */
-        if (isset($data['status'])) {
-            $value = $data['status'];
-            $return = (bool) $value;
-            $this->class->reflFields['status']->setValue($document, $return);
-            $hydratedData['status'] = $return;
-        }
-
         /** @Many */
         $mongoData = isset($data['users']) ? $data['users'] : null;
         $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
@@ -62,6 +54,14 @@ class DocumentUserGroupHydrator implements HydratorInterface
         }
         $this->class->reflFields['users']->setValue($document, $return);
         $hydratedData['users'] = $return;
+
+        /** @Field(type="boolean") */
+        if (isset($data['status'])) {
+            $value = $data['status'];
+            $return = (bool) $value;
+            $this->class->reflFields['status']->setValue($document, $return);
+            $hydratedData['status'] = $return;
+        }
         return $hydratedData;
     }
 }

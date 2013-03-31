@@ -40,6 +40,9 @@ $_['text_fieldofstudy']                = 'Fields Of Study';
 $_['text_admin']                       = 'Admin Manage';
 $_['text_admin_group']                 = 'Admin Group';
 $_['text_admin_user']                  = 'Admin';
+$_['text_design']                  	   = 'Design';
+$_['text_layout']                      = 'Layout';
+$_['text_action']                      = 'Action';
 
 $_['text_logged']                      = 'You are logged in as <span>%s</span>';
 $_['text_logout']                      = 'Logout';

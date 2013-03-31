@@ -67,6 +67,12 @@ class ModelDesignLayout extends Doctrine {
     		
     	return $query->getQuery()->execute();
 	}
+
+	public function getAllLayouts() {
+		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' );
+    		
+    	return $query->getQuery()->execute();
+	}
 	
 	public function getTotalLayouts() {
 		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' );

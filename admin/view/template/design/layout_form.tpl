@@ -28,6 +28,14 @@
 				</div>
             <?php } ?></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_path; ?></td>
+            <td><select name="status">
+                <?php foreach ($paths as $path) { ?>
+                <option value="<?php echo $path; ?>"><?php echo $path; ?></option>
+                <?php } ?>
+              </select></td>
+          </tr>
         </table>
       </form>
     </div>

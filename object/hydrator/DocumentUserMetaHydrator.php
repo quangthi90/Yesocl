@@ -50,6 +50,116 @@ class DocumentUserMetaHydrator implements HydratorInterface
             $this->class->reflFields['lastname']->setValue($document, $return);
             $hydratedData['lastname'] = $return;
         }
+
+        /** @Field(type="string") */
+        if (isset($data['headingLine'])) {
+            $value = $data['headingLine'];
+            $return = (string) $value;
+            $this->class->reflFields['headingLine']->setValue($document, $return);
+            $hydratedData['headingLine'] = $return;
+        }
+
+        /** @EmbedOne */
+        if (isset($data['location'])) {
+            $embeddedDocument = $data['location'];
+            $className = $this->dm->getClassNameFromDiscriminatorValue($this->class->fieldMappings['location'], $embeddedDocument);
+            $embeddedMetadata = $this->dm->getClassMetadata($className);
+            $return = $embeddedMetadata->newInstance();
+
+            $embeddedData = $this->dm->getHydratorFactory()->hydrate($return, $embeddedDocument, $hints);
+            $this->unitOfWork->registerManaged($return, null, $embeddedData);
+            $this->unitOfWork->setParentAssociation($return, $this->class->fieldMappings['location'], $document, 'location');
+
+            $this->class->reflFields['location']->setValue($document, $return);
+            $hydratedData['location'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['postalCode'])) {
+            $value = $data['postalCode'];
+            $return = (string) $value;
+            $this->class->reflFields['postalCode']->setValue($document, $return);
+            $hydratedData['postalCode'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['industry'])) {
+            $value = $data['industry'];
+            $return = (string) $value;
+            $this->class->reflFields['industry']->setValue($document, $return);
+            $hydratedData['industry'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['address'])) {
+            $value = $data['address'];
+            $return = (string) $value;
+            $this->class->reflFields['address']->setValue($document, $return);
+            $hydratedData['address'] = $return;
+        }
+
+        /** @Many */
+        $mongoData = isset($data['ims']) ? $data['ims'] : null;
+        $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
+        $return->setHints($hints);
+        $return->setOwner($document, $this->class->fieldMappings['ims']);
+        $return->setInitialized(false);
+        if ($mongoData) {
+            $return->setMongoData($mongoData);
+        }
+        $this->class->reflFields['ims']->setValue($document, $return);
+        $hydratedData['ims'] = $return;
+
+        /** @Many */
+        $mongoData = isset($data['phones']) ? $data['phones'] : null;
+        $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
+        $return->setHints($hints);
+        $return->setOwner($document, $this->class->fieldMappings['phones']);
+        $return->setInitialized(false);
+        if ($mongoData) {
+            $return->setMongoData($mongoData);
+        }
+        $this->class->reflFields['phones']->setValue($document, $return);
+        $hydratedData['phones'] = $return;
+
+        /** @Many */
+        $mongoData = isset($data['websites']) ? $data['websites'] : null;
+        $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
+        $return->setHints($hints);
+        $return->setOwner($document, $this->class->fieldMappings['websites']);
+        $return->setInitialized(false);
+        if ($mongoData) {
+            $return->setMongoData($mongoData);
+        }
+        $this->class->reflFields['websites']->setValue($document, $return);
+        $hydratedData['websites'] = $return;
+
+        /** @Many */
+        $mongoData = isset($data['formers']) ? $data['formers'] : null;
+        $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
+        $return->setHints($hints);
+        $return->setOwner($document, $this->class->fieldMappings['formers']);
+        $return->setInitialized(false);
+        if ($mongoData) {
+            $return->setMongoData($mongoData);
+        }
+        $this->class->reflFields['formers']->setValue($document, $return);
+        $hydratedData['formers'] = $return;
+
+        /** @EmbedOne */
+        if (isset($data['background'])) {
+            $embeddedDocument = $data['background'];
+            $className = $this->dm->getClassNameFromDiscriminatorValue($this->class->fieldMappings['background'], $embeddedDocument);
+            $embeddedMetadata = $this->dm->getClassMetadata($className);
+            $return = $embeddedMetadata->newInstance();
+
+            $embeddedData = $this->dm->getHydratorFactory()->hydrate($return, $embeddedDocument, $hints);
+            $this->unitOfWork->registerManaged($return, null, $embeddedData);
+            $this->unitOfWork->setParentAssociation($return, $this->class->fieldMappings['background'], $document, 'background');
+
+            $this->class->reflFields['background']->setValue($document, $return);
+            $hydratedData['background'] = $return;
+        }
         return $hydratedData;
     }
 }

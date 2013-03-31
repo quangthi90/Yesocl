@@ -50,6 +50,10 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_admin'] = $this->language->get('text_admin');
 		$this->data['text_admin_group'] = $this->language->get('text_admin_group');
 		$this->data['text_admin_user'] = $this->language->get('text_admin_user');
+
+		$this->data['text_design'] = $this->language->get('text_design');
+		$this->data['text_layout'] = $this->language->get('text_layout');
+		$this->data['text_action'] = $this->language->get('text_action');
 		
 		$this->data['text_localisation'] = $this->language->get('text_localisation');
 		$this->data['text_country'] = $this->language->get('text_country');
@@ -97,6 +101,8 @@ class ControllerCommonHeader extends Controller {
 		// system
 		$this->data['admin_group'] = $this->url->link('admin/group');
 		$this->data['admin'] = $this->url->link('admin/admin');
+		$this->data['layout'] = $this->url->link('design/layout');
+		$this->data['action'] = $this->url->link('design/action');
 		
 		
 		$this->template = 'common/header.tpl';

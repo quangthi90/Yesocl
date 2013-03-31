@@ -35,6 +35,22 @@ class DocumentUserUserHydrator implements HydratorInterface
             $hydratedData['id'] = $return;
         }
 
+        /** @Field(type="string") */
+        if (isset($data['username'])) {
+            $value = $data['username'];
+            $return = (string) $value;
+            $this->class->reflFields['username']->setValue($document, $return);
+            $hydratedData['username'] = $return;
+        }
+
+        /** @Field(type="string") */
+        if (isset($data['password'])) {
+            $value = $data['password'];
+            $return = (string) $value;
+            $this->class->reflFields['password']->setValue($document, $return);
+            $hydratedData['password'] = $return;
+        }
+
         /** @Many */
         $mongoData = isset($data['emails']) ? $data['emails'] : null;
         $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
@@ -47,28 +63,19 @@ class DocumentUserUserHydrator implements HydratorInterface
         $this->class->reflFields['emails']->setValue($document, $return);
         $hydratedData['emails'] = $return;
 
-        /** @Field(type="string") */
-        if (isset($data['password'])) {
-            $value = $data['password'];
-            $return = (string) $value;
-            $this->class->reflFields['password']->setValue($document, $return);
-            $hydratedData['password'] = $return;
-        }
+        /** @EmbedOne */
+        if (isset($data['meta'])) {
+            $embeddedDocument = $data['meta'];
+            $className = $this->dm->getClassNameFromDiscriminatorValue($this->class->fieldMappings['meta'], $embeddedDocument);
+            $embeddedMetadata = $this->dm->getClassMetadata($className);
+            $return = $embeddedMetadata->newInstance();
 
-        /** @Field(type="boolean") */
-        if (isset($data['status'])) {
-            $value = $data['status'];
-            $return = (bool) $value;
-            $this->class->reflFields['status']->setValue($document, $return);
-            $hydratedData['status'] = $return;
-        }
+            $embeddedData = $this->dm->getHydratorFactory()->hydrate($return, $embeddedDocument, $hints);
+            $this->unitOfWork->registerManaged($return, null, $embeddedData);
+            $this->unitOfWork->setParentAssociation($return, $this->class->fieldMappings['meta'], $document, 'meta');
 
-        /** @Field(type="date") */
-        if (isset($data['created'])) {
-            $value = $data['created'];
-            if ($value instanceof \MongoDate) { $date = new \DateTime(); $date->setTimestamp($value->sec); $return = $date; } else { $return = new \DateTime($value); }
-            $this->class->reflFields['created']->setValue($document, clone $return);
-            $hydratedData['created'] = $return;
+            $this->class->reflFields['meta']->setValue($document, $return);
+            $hydratedData['meta'] = $return;
         }
 
         /** @ReferenceOne */
@@ -88,21 +95,6 @@ class DocumentUserUserHydrator implements HydratorInterface
             $hydratedData['groupUser'] = $return;
         }
 
-        /** @EmbedOne */
-        if (isset($data['meta'])) {
-            $embeddedDocument = $data['meta'];
-            $className = $this->dm->getClassNameFromDiscriminatorValue($this->class->fieldMappings['meta'], $embeddedDocument);
-            $embeddedMetadata = $this->dm->getClassMetadata($className);
-            $return = $embeddedMetadata->newInstance();
-
-            $embeddedData = $this->dm->getHydratorFactory()->hydrate($return, $embeddedDocument, $hints);
-            $this->unitOfWork->registerManaged($return, null, $embeddedData);
-            $this->unitOfWork->setParentAssociation($return, $this->class->fieldMappings['meta'], $document, 'meta');
-
-            $this->class->reflFields['meta']->setValue($document, $return);
-            $hydratedData['meta'] = $return;
-        }
-
         /** @Many */
         $mongoData = isset($data['groups']) ? $data['groups'] : null;
         $return = new \Doctrine\ODM\MongoDB\PersistentCollection(new \Doctrine\Common\Collections\ArrayCollection(), $this->dm, $this->unitOfWork, '$');
@@ -114,6 +106,22 @@ class DocumentUserUserHydrator implements HydratorInterface
         }
         $this->class->reflFields['groups']->setValue($document, $return);
         $hydratedData['groups'] = $return;
+
+        /** @Field(type="boolean") */
+        if (isset($data['status'])) {
+            $value = $data['status'];
+            $return = (bool) $value;
+            $this->class->reflFields['status']->setValue($document, $return);
+            $hydratedData['status'] = $return;
+        }
+
+        /** @Field(type="date") */
+        if (isset($data['created'])) {
+            $value = $data['created'];
+            if ($value instanceof \MongoDate) { $date = new \DateTime(); $date->setTimestamp($value->sec); $return = $date; } else { $return = new \DateTime($value); }
+            $this->class->reflFields['created']->setValue($document, clone $return);
+            $hydratedData['created'] = $return;
+        }
         return $hydratedData;
     }
 }

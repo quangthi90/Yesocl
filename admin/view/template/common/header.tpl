@@ -98,6 +98,12 @@ $(document).ready(function(){
       </li-->
       <li id="system"><a class="top"><?php echo $text_system; ?></a>
         <ul>
+          <li><a class="parent"><?php echo $text_design; ?></a>
+            <ul>
+              <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
+              <li><a href="<?php echo $action; ?>"><?php echo $text_action; ?></a></li>
+            </ul>
+          </li>
           <li><a class="parent"><?php echo $text_admin; ?></a>
             <ul>
               <li><a href="<?php echo $admin; ?>"><?php echo $text_admin_user; ?></a></li>

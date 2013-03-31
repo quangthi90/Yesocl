@@ -44,31 +44,46 @@ class User extends \Document\User\User implements \Doctrine\ODM\MongoDB\Proxy\Pr
     }
 
     
-    public function getPrimaryEmail()
-    {
-        $this->__load();
-        return parent::getPrimaryEmail();
-    }
-
-    public function isExistEmail($email)
-    {
-        $this->__load();
-        return parent::isExistEmail($email);
-    }
-
-    public function getFullname()
-    {
-        $this->__load();
-        return parent::getFullname();
-    }
-
     public function getId()
     {
+        if ($this->__isInitialized__ === false) {
+            return $this->__identifier__;
+        }
         $this->__load();
         return parent::getId();
     }
 
-    public function addEmail(\Document\User\Email $email)
+    public function setId($id)
+    {
+        $this->__load();
+        return parent::setId($id);
+    }
+
+    public function setUsername($username)
+    {
+        $this->__load();
+        return parent::setUsername($username);
+    }
+
+    public function getUsername()
+    {
+        $this->__load();
+        return parent::getUsername();
+    }
+
+    public function setPassword($password)
+    {
+        $this->__load();
+        return parent::setPassword($password);
+    }
+
+    public function getPassword()
+    {
+        $this->__load();
+        return parent::getPassword();
+    }
+
+    public function addEmail(\Document\User\Meta\Email $email)
     {
         $this->__load();
         return parent::addEmail($email);
@@ -86,16 +101,64 @@ class User extends \Document\User\User implements \Doctrine\ODM\MongoDB\Proxy\Pr
         return parent::getEmails();
     }
 
-    public function setPassword($password)
+    public function getPrimaryEmail()
     {
         $this->__load();
-        return parent::setPassword($password);
+        return parent::getPrimaryEmail();
     }
 
-    public function getPassword()
+    public function isExistEmail($email)
     {
         $this->__load();
-        return parent::getPassword();
+        return parent::isExistEmail($email);
+    }
+
+    public function setMeta($meta)
+    {
+        $this->__load();
+        return parent::setMeta($meta);
+    }
+
+    public function getMeta()
+    {
+        $this->__load();
+        return parent::getMeta();
+    }
+
+    public function getFullname()
+    {
+        $this->__load();
+        return parent::getFullname();
+    }
+
+    public function setGroupUser($groupUser)
+    {
+        $this->__load();
+        return parent::setGroupUser($groupUser);
+    }
+
+    public function getGroupUser()
+    {
+        $this->__load();
+        return parent::getGroupUser();
+    }
+
+    public function addGroup(\Document\Group\Group $group)
+    {
+        $this->__load();
+        return parent::addGroup($group);
+    }
+
+    public function setGroups($groups)
+    {
+        $this->__load();
+        return parent::setGroups($groups);
+    }
+
+    public function getGroups()
+    {
+        $this->__load();
+        return parent::getGroups();
     }
 
     public function setStatus($status)
@@ -128,52 +191,22 @@ class User extends \Document\User\User implements \Doctrine\ODM\MongoDB\Proxy\Pr
         return parent::prePersist();
     }
 
-    public function setGroupUser($groupUser)
+    public function setSolrUserContent($solrContent)
     {
         $this->__load();
-        return parent::setGroupUser($groupUser);
+        return parent::setSolrUserContent($solrContent);
     }
 
-    public function getGroupUser()
+    public function getSolrUserContent()
     {
         $this->__load();
-        return parent::getGroupUser();
-    }
-
-    public function setMeta($meta)
-    {
-        $this->__load();
-        return parent::setMeta($meta);
-    }
-
-    public function getMeta()
-    {
-        $this->__load();
-        return parent::getMeta();
-    }
-
-    public function addGroup(\Document\Group\Group $group)
-    {
-        $this->__load();
-        return parent::addGroup($group);
-    }
-
-    public function setGroups($groups)
-    {
-        $this->__load();
-        return parent::setGroups($groups);
-    }
-
-    public function getGroups()
-    {
-        $this->__load();
-        return parent::getGroups();
+        return parent::getSolrUserContent();
     }
 
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'emails', 'password', 'status', 'created', 'groupUser', 'meta', 'groups');
+        return array('__isInitialized__', 'id', 'username', 'password', 'emails', 'meta', 'groupUser', 'groups', 'status', 'created');
     }
 
     public function __clone()

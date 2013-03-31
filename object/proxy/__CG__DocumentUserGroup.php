@@ -46,6 +46,9 @@ class Group extends \Document\User\Group implements \Doctrine\ODM\MongoDB\Proxy\
     
     public function getId()
     {
+        if ($this->__isInitialized__ === false) {
+            return $this->__identifier__;
+        }
         $this->__load();
         return parent::getId();
     }
@@ -60,18 +63,6 @@ class Group extends \Document\User\Group implements \Doctrine\ODM\MongoDB\Proxy\
     {
         $this->__load();
         return parent::getName();
-    }
-
-    public function setStatus($status)
-    {
-        $this->__load();
-        return parent::setStatus($status);
-    }
-
-    public function getStatus()
-    {
-        $this->__load();
-        return parent::getStatus();
     }
 
     public function addUser(\Document\User\User $user)
@@ -92,10 +83,22 @@ class Group extends \Document\User\Group implements \Doctrine\ODM\MongoDB\Proxy\
         return parent::getUsers();
     }
 
+    public function setStatus($status)
+    {
+        $this->__load();
+        return parent::setStatus($status);
+    }
+
+    public function getStatus()
+    {
+        $this->__load();
+        return parent::getStatus();
+    }
+
 
     public function __sleep()
     {
-        return array('__isInitialized__', 'id', 'name', 'status', 'users');
+        return array('__isInitialized__', 'id', 'name', 'users', 'status');
     }
 
     public function __clone()
