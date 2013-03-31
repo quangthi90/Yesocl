@@ -364,12 +364,6 @@ class ControllerGroupComment extends Controller {
 			$this->data['user_id'] = '';
 		}
 
-		if ( isset( $user ) ){
-			$this->data['fullname'] = $user->getFullname();
-		}else {
-			$this->data['fullname'] = '';
-		}
-
 		$this->template = 'group/comment_form.tpl';
 		$this->children = array(
 			'common/header',

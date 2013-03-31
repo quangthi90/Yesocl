@@ -30,6 +30,10 @@
 		    <div class="tab-pane active" id="tab-general">
 		    	<table class="form">
           <tr>
+            <td><?php echo $entry_username; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="user[username]" value="<?php echo $username; ?>" disabled="disabled" /></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_group; ?></td>
             <td><select name="user[group]" disabled="disabled">
                 <?php foreach ( $groups as $group ){ ?>

@@ -292,13 +292,6 @@ class ControllerGroupGroup extends Controller {
 		}else {
 			$this->data['user_id'] = '';
 		}
-		
-		// Entry fullname
-		if ( isset($group) ){
-			$this->data['fullname'] = $group->getAuthor()->getFullname();
-		}else {
-			$this->data['fullname'] = '';
-		}
 
 		// Entry name
 		if ( isset($this->request->post['name']) ){

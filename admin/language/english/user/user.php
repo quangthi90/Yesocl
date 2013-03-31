@@ -12,6 +12,7 @@ $_['text_primary']		  		= 'Primary';
 $_['text_delete']		  		= 'Delete';
 
 // Entry
+$_['entry_username']            = 'Usename:';
 $_['entry_email']              	= 'Email:';
 $_['entry_password']            = 'Password:';
 $_['entry_confirm']             = 'Confirm:';

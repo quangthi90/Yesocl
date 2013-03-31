@@ -67,6 +67,7 @@ class ControllerUserUser extends Controller {
 		$this->data['button_add_former'] = 'Add Former';//$this->language->get( 'button_save' );
 
 		// Entry
+		$this->data['entry_username'] = $this->language->get( 'entry_username' );
 		$this->data['entry_email'] = $this->language->get( 'entry_email' );
 		$this->data['entry_password'] = $this->language->get( 'entry_password' );
 		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
@@ -132,6 +133,9 @@ class ControllerUserUser extends Controller {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
+
+		// Entry firstname
+		$this->data['username'] = $user->getUsername();
 
 		// Entry email
 		$this->data['emails'] = array();
@@ -786,6 +790,7 @@ class ControllerUserUser extends Controller {
 
 		// Entry
 		$this->data['entry_email'] = $this->language->get( 'entry_email' );
+		$this->data['entry_username'] = $this->language->get( 'entry_username' );
 		$this->data['entry_password'] = $this->language->get( 'entry_password' );
 		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
 		$this->data['entry_group'] = $this->language->get( 'entry_group' );
@@ -853,6 +858,15 @@ class ControllerUserUser extends Controller {
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
+		}
+
+		// Entry username
+		if ( isset($this->request->post['user']['username']) ){
+			$this->data['username'] = $this->request->post['user']['username'];
+		}elseif ( isset($user) ) {
+			$this->data['username'] = $user->getUsername();
+		}else {
+			$this->data['username'] = '';
 		}
 
 		// Entry email
@@ -1420,7 +1434,7 @@ class ControllerUserUser extends Controller {
 		foreach ($users as $user) {
 			$json[] = array(
 				'id' => $user->getId(),
-				'primary' => $user->getPrimaryEmail()->getEmail(),
+				'primary' => $user->getFullname() . '(' . $user->getPrimaryEmail()->getEmail() . ')',
 				);
 		}
 

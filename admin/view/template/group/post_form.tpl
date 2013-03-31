@@ -29,10 +29,6 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><?php echo $entry_fullname; ?></td>
-            <td><?php echo $fullname; ?></td>
-          </tr>
-          <tr>
             <td><span class="required">*</span> <?php echo $entry_title; ?></td>
             <td><input type="text" class="input-xxlarge" required="required" name="title" value="<?php echo $title; ?>" />
             <?php if ($error_title) { ?>

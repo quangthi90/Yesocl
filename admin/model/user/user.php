@@ -26,6 +26,11 @@ class ModelUserUser extends Doctrine {
 	 * @return: boolean
 	 */
 	public function addUser( $data = array() ) {
+		// Username
+		if ( !isset($data['user']['username']) ){
+			$data['user']['username'] = '';
+		}
+
 		// Email is required
 		if ( !isset($data['user']['emails']) || count($data['user']['emails']) < 0 ){
 			return false;
@@ -296,6 +301,7 @@ class ModelUserUser extends Doctrine {
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user = new User();
+		$user->setUsername( $data['user']['username'] );
 		$user->setEmails( $emails );
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
@@ -331,6 +337,11 @@ class ModelUserUser extends Doctrine {
 		$user = $this->dm->getRepository('Document\User\User')->find( $id );
 		if ( !$user ) {
 			return false;
+		}
+		
+		// Username
+		if ( !isset($data['user']['username']) ){
+			$data['user']['username'] = '';
 		}
 
 		// Email is required
@@ -601,6 +612,7 @@ class ModelUserUser extends Doctrine {
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user->setEmails( $emails );
+		$user->setUsername( $data['user']['username'] );
 		//$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );

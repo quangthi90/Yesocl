@@ -29,10 +29,6 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><?php echo $entry_fullname; ?></td>
-            <td><span class="fullname"><?php echo $fullname; ?></span></td>
-          </tr>
-          <tr>
             <td><span class="required">*</span> <?php echo $entry_name; ?></td>
             <td><input class="input-xxlarge" required="required" type="text" name="name" value="<?php echo $name; ?>" />
             <?php if ($error_name) { ?>
@@ -107,7 +103,7 @@ CKEDITOR.replace('sumary', {
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
 });
 //--></script> 
-<script type="text/javascript">
+<script type="text/javascript"><!--//
 $('input[name=\'author\']').autocomplete({
 	delay: 0,
 	source: function(request, response) {
@@ -134,5 +130,5 @@ $('input[name=\'author\']').autocomplete({
       	return false;
    	}
 });
-</script>
+//--></script>
 <?php echo $footer; ?>
