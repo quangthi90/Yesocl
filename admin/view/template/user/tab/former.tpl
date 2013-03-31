@@ -7,7 +7,11 @@
 		  </tr>
 		  <?php foreach ($formers as $key => $former) { ?>
 		  <tr>
-            <td><input class="name input-medium" type="text" name="user[formers][<?php echo $key; ?>][name]" value="<?php echo $former['name']; ?>" /></td>
+            <td><input class="name input-medium" type="text" name="user[formers][<?php echo $key; ?>][name]" value="<?php echo $former['name']; ?>" />
+            	<?php if ( isset( $error_former[$key]['name'] ) ) { ?>
+                          <div class="warning"><?php echo $error_former[$key]['name']; ?></div>
+                          <?php } ?>
+            </td>
             <td><input class="value input-medium" type="text" name="user[formers][<?php echo $key; ?>][value]" value="<?php echo $former['value']; ?>" /></td>
             <td><select class="visible input-medium" name="user[formers][<?php echo $key; ?>][visible]"><?php foreach ($visible_types as $visible_type) { ?><option value="<?php echo $visible_type['code']; ?>" <?php if ( $former['visible'] == $visible_type['code'] ) { ?>selected="selected"<?php } ?>><?php echo $visible_type['text']; ?></option><?php } ?></select></td>
             <td><a class="btn-remove-former btn btn-danger"><i class="icon-trash"></i></a></td>
@@ -38,5 +42,14 @@
 		$('#tab-former').on('click', '.btn-remove-former', function(){
 			$(this).parent().parent().remove();
 		});
+
+	$('#tab-former').on('blur', 'input.name', function(){
+      var curr = $(this);
+
+      curr.parent().find('.warning').remove();
+      if ( !curr.val() ) {
+        curr.after('<div class="warning"><?php echo $text_error_former; ?></div>');
+      }
+    });
 	});
 </script>

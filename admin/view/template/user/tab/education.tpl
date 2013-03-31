@@ -4,7 +4,11 @@
                     <td>
                     <div class="row-fluid">
                          <div class="span2"><strong><?php echo $entry_school; ?></strong></div>
-                         <div class="span9"><input datalist="school" class="datalist school input-medium" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" /></div>
+                         <div class="span9"><input datalist="school" class="datalist school input-medium" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" />
+                          <?php if ( isset( $error_education[$key]['school'] ) ) { ?>
+                          <div class="warning"><?php echo $error_education[$key]['school']; ?></div>
+                          <?php } ?>
+                         </div>
                          <div class="span1"><a class="btn-remove-education btn btn-danger"><i class="icon-trash"></i></a></div>
                     </div>
                     <div class="row-fluid">
@@ -141,5 +145,14 @@ $('input.datalist').autocomplete({
 		$('#tab-education').on('click', '.btn-remove-education', function(){
 			$(this).parent().parent().parent().parent().remove();
 		});
+
+    $('#tab-education').on('blur', 'input.school', function(){
+      var curr = $(this);
+
+      curr.parent().find('.warning').remove();
+      if ( !curr.val() ) {
+        curr.after('<div class="warning"><?php echo $error_school; ?></div>');
+      }
+    });
 	});
 //--></script>
