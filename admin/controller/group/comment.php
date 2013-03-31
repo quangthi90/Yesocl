@@ -380,7 +380,7 @@ class ControllerGroupComment extends Controller {
 	}
 
 	private function isValidateForm(){
-		if ( !isset($this->request->post['content']) || strlen($this->request->post['content']) < 50 ){
+		if ( !isset($this->request->post['content']) || strlen($this->request->post['content']) < 1 ){
 			$this->error['error_content'] = $this->language->get( 'error_content' );
 		}
 
