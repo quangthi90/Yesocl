@@ -133,6 +133,9 @@ class ControllerGroupPost extends Controller {
 		
 		$this->load->model( 'group/group' );
 		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
+		if ( empty( $group ) ) {
+			$this->redirect( $this->url->link( 'group/group' ) );
+		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -147,7 +150,7 @@ class ControllerGroupPost extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/post' ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() ),
       		'separator' => ' :: '
    		);
 
@@ -390,7 +393,7 @@ class ControllerGroupPost extends Controller {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
 		}
 		
-		if ( !isset($this->request->post['content']) || strlen($this->request->post['content']) < 50 ){
+		if ( !isset($this->request->post['postcontent']) || strlen($this->request->post['postcontent']) < 50 ){
 			$this->error['error_content'] = $this->language->get( 'error_content' );
 		}
 
