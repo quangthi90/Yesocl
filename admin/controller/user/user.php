@@ -1432,9 +1432,11 @@ class ControllerUserUser extends Controller {
 		$json = array();
 
 		foreach ($users as $user) {
+			$primary = ( $user->getUsername()) ? $user->getUsername() : $user->getFullname();
+			$primary .= '(' . $user->getPrimaryEmail()->getEmail() . ')';
 			$json[] = array(
 				'id' => $user->getId(),
-				'primary' => $user->getFullname() . '(' . $user->getPrimaryEmail()->getEmail() . ')',
+				'primary' => $primary,
 				);
 		}
 
