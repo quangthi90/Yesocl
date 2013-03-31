@@ -277,6 +277,14 @@ class ControllerGroupPost extends Controller {
 			$this->data['error_author'] = '';
 		}
 
+		// Load model
+		$this->load->model( 'group/group' );
+		
+		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
+		if ( empty( $group ) ) {
+			$this->redirect( $this->data['cancel'] );
+		}
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -285,7 +293,7 @@ class ControllerGroupPost extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/post' ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() ),
       		'separator' => ' :: '
    		);
 
@@ -308,22 +316,17 @@ class ControllerGroupPost extends Controller {
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] );
-		
-		// Load model
-		$this->load->model( 'group/group' );
-		
-		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
+		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $group->getId() );
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
-			if ( $group && $group->getPosts() ){
-				$post = $group->getPostById( $this->request->get['post_id'] );
-				
-				$this->data['action'] = $this->url->link( 'group/post/update', 'post_id=' . $this->request->get['post_id'] . '&group_id=' . $this->request->get['group_id'] );
-			}else {
+			$post = $group->getPostById( $this->request->get['post_id'] );
+
+			if ( empty( $post ) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
+				
+			$this->data['action'] = $this->url->link( 'group/post/update', 'post_id=' . $post->getId() . '&group_id=' . $group->getId() );
 		}
 
 		// Entry title

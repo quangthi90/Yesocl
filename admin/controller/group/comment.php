@@ -21,81 +21,87 @@ class ControllerGroupComment extends Controller {
 	}
 
 	public function insert(){
-		$this->load->language( 'group/post' );
+		$this->load->language( 'group/comment' );
 		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
+		if ( !isset($this->request->get['post_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_post');
 			
 			$this->redirect( $this->url->link( 'group/group') );
 		}
 		
-		$this->load->model( 'group/post' );
+		$this->load->model( 'group/comment' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_post->addPost( $this->request->post, $this->request->get['group_id'] ) == false ){
+			if ( $this->model_group_comment->addComment( $this->request->post, $this->request->get['post_id'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
-				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+				$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+			$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] ) );
 		}
 
-		$this->data['action'] = $this->url->link( 'group/post/insert', 'group_id=' . $this->request->get['group_id'] );
+		$this->data['action'] = $this->url->link( 'group/comment/insert', 'post_id=' . $this->request->get['post_id'] );
 		
 		$this->getForm( );
 	}
 
 	public function update(){
-		$this->load->language( 'group/post' );
+		$this->load->language( 'group/comment' );
 		
-		if ( !isset($this->request->get['group_id']) ){
+		if ( isset($this->request->get['post_id']) ){
+			$cancel = $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] );
+		}else {
+			$cancel = $this->url->link( 'group/group');
+		}
+
+		if ( !isset($this->request->get['comment_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_group');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $cancel );
 		}
 		
-		$this->load->model( 'group/post' );
+		$this->load->model( 'group/comment' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_post->editPost( $this->request->get['post_id'], $this->request->post ) == false ){
+			if ( $this->model_group_comment->editComment( $this->request->get['comment_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
-				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+				$this->redirect( $cancel );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+			$this->redirect( $cancel );
 		}
 		
 		$this->getForm();
 	}
  
 	public function delete(){
-		$this->load->language( 'group/post' );
-		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
-			
-			$this->redirect( $this->url->link( 'group/group') );
+		$this->load->language( 'group/comment' );
+
+		if ( isset($this->request->get['post_id']) ){
+			$cancel = $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] );
+		}else {
+			$cancel = $this->url->link( 'group/group');
 		}
 		
-		$this->load->model( 'group/post' );
+		$this->load->model( 'group/comment' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_group_post->deletePost( $this->request->post );
+			$this->model_group_comment->deletePost( $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+			$this->redirect( $cancel );
 		}
 
 		$this->getList( );
@@ -204,8 +210,9 @@ class ControllerGroupComment extends Controller {
 			
 				$this->data['comments'][] = array(
 					'id' => $comments[$i]->getId(),
-					'author' => $comments[$i]->getAuthor()->getFullname(),
+					'author' => $comments[$i]->getUser()->getFullname(),
 					'created' => $comments[$i]->getCreated()->format( $this->language->get( 'date_time_format' ) ),
+					'status' => $comments[$i]->getStatus(),
 					'action' => $action,
 				);
 			}
@@ -245,10 +252,25 @@ class ControllerGroupComment extends Controller {
 			$this->data['success'] = '';
 		}
 		
-		if ( isset($this->error['error_name']) ) {
-			$this->data['error_name'] = $this->error['error_name'];
+		// content
+		if ( isset($this->error['error_content']) ) {
+			$this->data['error_content'] = $this->error['error_content'];
 		} else {
-			$this->data['error_name'] = '';
+			$this->data['error_content'] = '';
+		}
+		
+		// author
+		if ( isset($this->error['error_author']) ) {
+			$this->data['error_author'] = $this->error['error_author'];
+		} else {
+			$this->data['error_author'] = '';
+		}
+
+		$this->load->model( 'group/post' );
+		$post = $this->model_group_post->getPost( $this->request->get['post_id'] );
+		if ( empty( $post ) ) {
+			$this->session->data['error_warning'] = $this->language->get('error_post');
+			$this->redirect( $this->url->link( 'group/group') );
 		}
 
 		// breadcrumbs
@@ -258,8 +280,18 @@ class ControllerGroupComment extends Controller {
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'text_group' ),
+			'href'      => $this->url->link( 'group/group' ),
+      		'separator' => ' :: '
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'text_post' ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId( $post->getId() ) ),
+      		'separator' => ' :: '
+   		);
+   		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/post' ),
+			'href'      => $this->url->link( 'group/comment', 'post_id=' . $post->getId() ),
       		'separator' => ' :: '
    		);
 
@@ -275,43 +307,70 @@ class ControllerGroupComment extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 		
 		// Entry
-		$this->data['entry_name'] = $this->language->get( 'entry_name' );
-		$this->data['entry_groups'] = $this->language->get( 'entry_groups' );
+		$this->data['entry_content'] = $this->language->get( 'entry_content' );
+		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_author'] = $this->language->get( 'entry_author' );
+		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] );
+		$this->data['cancel'] = $this->url->link( 'group/comment', 'post_id=' . $post->getId() );
 		
-		// Load model
-		$this->load->model( 'group/group' );
-		
-		$group = $this->model_group_group->getgroup( $this->request->get['group_id'] );
-		
-		// post
-		$post = new post();
-		if ( isset($this->request->get['post_id']) ){
-			if ( $group ){
-				foreach ( $group->getposts() as $post ){
-					if ( $post->getId() == $this->request->get['post_id'] ){
-						break;
-					}
-				}
-				
-				$this->data['action'] = $this->url->link( 'group/post/update', 'post_id=' . $this->request->get['post_id'] . '&group_id=' . $this->request->get['group_id'] );
-			}else {
+		// comment
+		if ( isset( $this->request->get['comment_id']) ){
+			$comment = $post->getCommentById( $this->request->get['comment_id'] );
+
+			if ( empty( $comment ) ){
 				$this->redirect( $this->data['cancel'] );
 			}
+				
+			$this->data['action'] = $this->url->link( 'group/comment/update', 'comment_id=' . $comment->getId() . '&post_id=' . $post->getId() );
 		}
 
-		// Entry name
-		if ( isset($this->request->post['post']['name']) ){
-			$this->data['name'] = $this->request->post['post']['name'];
-		}elseif ( isset($post) ){
-			$this->data['name'] = $post->getName();
+		// Entry content
+		if ( isset($this->request->post['content']) ){
+			$this->data['content'] = $this->request->post['content'];
+		}elseif ( isset( $comment ) ){
+			$this->data['content'] = $comment->getContent();
 		}else {
-			$this->data['name'] = '';
+			$this->data['content'] = '';
+		}
+		
+		// Entry status
+		if ( isset($this->request->post['status']) ){
+			$this->data['status'] = $this->request->post['status'];
+		}elseif ( isset( $comment ) ){
+			$this->data['status'] = $comment->getStatus();
+		}else {
+			$this->data['status'] = 1;
+		}
+		
+		// Entry author
+		if ( isset( $comment ) ) {
+			$user = $comment->getUser();
+		}
+		if ( isset($this->request->post['author']) ){
+			$this->data['author'] = $this->request->post['author'];
+		}elseif ( isset( $user ) ){
+			$this->data['author'] = $user->getPrimaryEmail()->getEmail();
+		}else {
+			$this->data['author'] = '';
 		}
 
-		$this->template = 'group/post_form.tpl';
+		if ( isset($this->request->post['user_id']) ){
+			$this->data['user_id'] = $this->request->post['user_id'];
+		}elseif ( isset( $user ) ){
+			$this->data['user_id'] = $user->getId();
+		}else {
+			$this->data['user_id'] = '';
+		}
+
+		if ( isset( $user ) ){
+			$this->data['fullname'] = $user->getFullname();
+		}else {
+			$this->data['fullname'] = '';
+		}
+
+		$this->template = 'group/comment_form.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -321,11 +380,15 @@ class ControllerGroupComment extends Controller {
 	}
 
 	private function isValidateForm(){
-		if ( !isset($this->request->post['post']['name']) || strlen($this->request->post['post']['name']) < 3 || strlen($this->request->post['post']['name']) > 128 ){
-			$this->error['error_name'] = $this->language->get( 'error_name' );
+		if ( !isset($this->request->post['content']) || strlen($this->request->post['content']) < 50 ){
+			$this->error['error_content'] = $this->language->get( 'error_content' );
 		}
 
-		if ( $this->error){
+		if ( !isset($this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ){
+			$this->error['error_author'] = $this->language->get( 'error_author' );
+		}
+
+		if ( $this->error ){
 			return false;
 		}else {
 			return true;	

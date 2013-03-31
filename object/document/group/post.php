@@ -25,6 +25,24 @@ Class Post {
 	/** @MongoDB\EmbedMany(targetDocument="Comment") */
 	private $comments = array();
 
+	/**
+	 * Get Comment By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Comment
+	 * 		- null if not found
+	 */
+	public function getCommentById( $comment_id ){
+		foreach ( $this->comments as $comment ){
+			if ( $comment->getId() === $comment_id ){
+				return  $comment;
+			}
+		}
+		
+		return null;
+	}
+
 	public function getId(){
 		return $this->id;
 	}

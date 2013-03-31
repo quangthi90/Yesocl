@@ -2,12 +2,7 @@
 use Document\Group\Comment;
 
 class ModelGroupComment extends Doctrine {
-	public function addPost( $data = array(), $group_id ) {
-		// title is require
-		if ( !isset($data['title']) || empty($data['title']) ){
-			return false;
-		}
-		
+	public function addComment( $data = array(), $post_id ) {
 		// content is require
 		if ( !isset($data['content']) || empty($data['content']) ){
 			return false;
@@ -30,33 +25,32 @@ class ModelGroupComment extends Doctrine {
 		}
 
 		// Group is required
-		if ( !isset( $group_id ) ) {
+		if ( !isset( $post_id ) ) {
 			return false;
 		}
-		$group = $this->dm->getRepository('Document\Group\Group')->find( $group_id );
+		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
 		if ( empty( $group ) ) {
 			return false;
 		}
+
+		$post = $group->getPostById( $post_id );
+		if ( empty( $post ) ) {
+			return false;
+		}
 		
-		$post = new Post();
-		$post->setTitle( $data['title'] );
-		$post->setContent( $data['content'] );
-		$post->setUser( $user );
-		$post->setStatus( $data['status'] );
+		$comment = new Comment();
+		$comment->setContent( $data['content'] );
+		$comment->setUser( $user );
+		$comment->setStatus( $data['status'] );
 		
-		$group->addPost( $post );
+		$post->addComment( $comment );
 		
 		$this->dm->flush();
 		
 		return true;
 	}
 
-	public function editPost( $post_id, $data = array() ) {
-		// title is require
-		if ( !isset($data['title']) || empty($data['title']) ){
-			return false;
-		}
-		
+	public function editComment( $comment_id, $data = array() ) {
 		// content is require
 		if ( !isset($data['content']) || empty($data['content']) ){
 			return false;
@@ -78,14 +72,17 @@ class ModelGroupComment extends Doctrine {
 			$data['status'] = false;
 		}
 		
-		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
-		
+		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.comments.id' => $comment_id ) );
+		if ( empty( $group ) ) {
+			return false;
+		}
+
 		foreach ( $group->getPosts() as $post ){
-			if ( $post->getId() == $post_id ){
-				$post->setTitle( $data['title'] );
-				$post->setContent( $data['content'] );
-				$post->setUser( $user );
-				$post->setStatus( $data['status'] );
+			$comment = $post->getCommentById( $comment_id );
+			if ( !empty( $comment ) ) {
+				$comment->setContent( $data['content'] );
+				$comment->setUser( $user );
+				$comment->setStatus( $data['status'] );
 				break;
 			}
 		}
@@ -98,17 +95,22 @@ class ModelGroupComment extends Doctrine {
 	public function deletePost( $data = array() ) {
 		if ( isset($data['id']) ) {
 			if ( count($data['id']) > 0 ){
-				$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array('posts.id' => $data['id'][0]) );
+				$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array('posts.comments.id' => $data['id'][0]) );
+			}else {
+				return false;
 			}
 			
 			foreach ( $data['id'] as $id ) {
 				foreach ( $group->getPosts() as $post ){
-					if ( $post->getId() == $id ){
-						$group->getPosts()->removeElement( $post );
+					$comment = $post->getCommentById( $id );
+					if ( !empty( $comment ) ) {
+						$post->getComments()->removeElement( $comment );
 						break;
 					}
 				}
 			}
+		}else {
+			return false;
 		}
 		
 		$this->dm->flush();
