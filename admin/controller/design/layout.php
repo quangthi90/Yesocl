@@ -271,15 +271,30 @@ class ControllerDesignLayout extends Controller {
 			}
 		}
 
+		if ( isset($this->request->post['path']) ){
+			$this->data['path'] = $this->request->post['path'];
+		}
+
 		// Entry action
 		$this->load->model('design/action');
 		$actions = $this->model_design_action->getAllActions();
 
 		$this->data['actions'] = array();
 		foreach ( $actions as $action ) {
+			$checked = false;
+			if ( isset($this->request->post['actions']) ){
+				foreach ( $this->request->post['path'] as $actionId ) {
+					if ( $actionId == $action->getId() ){
+						$checked = true;
+						break;
+					}
+				}
+			}
+
 			$this->data['actions'][] = array(
 				'id' => $action->getId(),
-				'name' => $action->getName()
+				'name' => $action->getName(),
+				'checked' => $checked
 			);
 		}
 

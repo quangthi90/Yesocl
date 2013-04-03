@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <td><?php echo $entry_path; ?></td>
-            <td><select name="status">
+            <td><select name="path">
                 <?php foreach ($paths as $path) { ?>
                 <option value="<?php echo $path; ?>"><?php echo $path; ?></option>
                 <?php } ?>
@@ -42,7 +42,7 @@
               <?php foreach ( $actions as $action ){ ?>
               <div class="controls">
                 <label class="checkbox inline">
-                  <input type="checkbox" name="action" id="<?php echo $action['id']; ?>" />
+                  <input type="checkbox" name="actions[]" id="<?php echo $action['id']; ?>" value="<?php echo $action['id']; ?>" />
                   <?php echo $action['name']; ?>
                 </label>
               </div>

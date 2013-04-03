@@ -15,6 +15,9 @@ Class Action {
 	/** @MongoDB\String */
 	private $code;
 
+	/** @MongoDB\ReferenceMany(targetDocument="Layout", mappedBy="actions") */
+    private $layouts = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -33,5 +36,17 @@ Class Action {
 
 	public function getCode(){
 		return $this->code;
+	}
+
+	public function addLayout( Layout $layout ){
+		$this->layouts[] = $layout;
+	}
+
+	public function setLayouts( $layouts ){
+		$this->layouts = $layouts;
+	}
+
+	public function getLayouts(){
+		return $this->layouts;
 	}
 }

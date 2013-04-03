@@ -10,6 +10,8 @@ class ModelDesignLayout extends Doctrine {
 		
 		$layout = new Layout();
 		$layout->setName( $data['name'] );
+		$layout->setPath( $data['path'] );
+		$layout->setActions( $data['actions'] );
 
 		$this->dm->persist( $layout );
 		$this->dm->flush();
@@ -28,6 +30,13 @@ class ModelDesignLayout extends Doctrine {
 		}
 
 		$layout->setName( $data['name'] ); 
+		$layout->setPath( $data['path'] );
+
+		$this->load->model('design/action');
+		foreach ($data['actions'] as $actionId) {
+			$action = $this->model_design_action->getAction( $actionId );
+			$layout->addAction( $action );
+		}
 
 		$this->dm->flush();
 	}
@@ -36,11 +45,6 @@ class ModelDesignLayout extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$layout = $this->dm->getRepository( 'Document\Design\Layout' )->find( $id );
-
-				$values = $this->dm->getRepository( 'Document\Design\value' )->findBy( array( 'Layout.id' => $id ) );
-				foreach ($values as $value) {
-					$this->dm->remove($value);
-				}
 
 				$this->dm->remove($layout);
 			}

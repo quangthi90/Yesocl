@@ -15,6 +15,9 @@ Class Layout {
 	/** @MongoDB\String */
 	private $path;
 
+	/** @MongoDB\ReferenceMany(targetDocument="Action", inversedBy="layouts") */
+    private $actions = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -33,5 +36,17 @@ Class Layout {
 
 	public function getPath(){
 		return $this->path;
+	}
+
+	public function addAction( Action $action ){
+		$this->actions[] = $action;
+	}
+
+	public function setActions( $actions ){
+		$this->actions = $actions;
+	}
+
+	public function getActions(){
+		return $this->actions;
 	}
 }
