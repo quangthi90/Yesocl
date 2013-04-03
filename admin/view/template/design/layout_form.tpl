@@ -24,8 +24,8 @@
             <td><input class="input-xxlarge" required="required" type="text" name="name" value="<?php echo $name; ?>" />
             <?php if ($error_name) { ?>
               	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_name; ?>
-				</div>
+        				  <strong>Error!</strong> <?php echo $error_name; ?>
+        				</div>
             <?php } ?></td>
           </tr>
           <tr>
@@ -35,6 +35,19 @@
                 <option value="<?php echo $path; ?>"><?php echo $path; ?></option>
                 <?php } ?>
               </select></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_action; ?></td>
+            <td>
+              <?php foreach ( $actions as $action ){ ?>
+              <div class="controls">
+                <label class="checkbox inline">
+                  <input type="checkbox" name="action" id="<?php echo $action['id']; ?>" />
+                  <?php echo $action['name']; ?>
+                </label>
+              </div>
+              <?php } ?>
+            </td>
           </tr>
         </table>
       </form>

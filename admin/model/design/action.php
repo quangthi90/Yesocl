@@ -7,9 +7,14 @@ class ModelDesignAction extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		if ( !isset($data['code']) || empty($data['code']) ){
+			return false;
+		}
 		
 		$action = new Action();
 		$action->setName( $data['name'] );
+		$action->setCode( $data['code'] );
 
 		$this->dm->persist( $action );
 		$this->dm->flush();
@@ -20,6 +25,10 @@ class ModelDesignAction extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		if ( !isset($data['code']) || empty($data['code']) ){
+			return false;
+		}
 		
 		$action = $this->dm->getRepository('Document\Design\Action')->find( $id );
 		
@@ -28,6 +37,7 @@ class ModelDesignAction extends Doctrine {
 		}
 
 		$action->setName( $data['name'] ); 
+		$action->setCode( $data['code'] );
 
 		$this->dm->flush();
 	}
@@ -36,11 +46,6 @@ class ModelDesignAction extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$action = $this->dm->getRepository( 'Document\Design\Action' )->find( $id );
-
-				$values = $this->dm->getRepository( 'Document\Design\value' )->findBy( array( 'Action.id' => $id ) );
-				foreach ($values as $value) {
-					$this->dm->remove($value);
-				}
 
 				$this->dm->remove($action);
 			}

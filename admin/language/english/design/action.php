@@ -24,4 +24,5 @@ $_['column_action']           = 'Action';
 // Error
 $_['error_default']           = 'Warning: This Action cannot be deleted as it is currently assigned as the default store Action!';
 $_['error_name']              = 'Action Name must be between 3 and 128 characters!';
+$_['error_code']              = 'Action Code must be between 3 and 20 characters!';
 ?>

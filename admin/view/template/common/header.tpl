@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="view/stylesheet/bootstrap-responsive.min.css" />
 <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="view/stylesheet/fortAwesome/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="view/stylesheet/uniform.default.css" />
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
@@ -26,6 +27,7 @@
 <script type="text/javascript" src="view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/superfish/js/superfish.js"></script>
 <script type="text/javascript" src="view/javascript/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="view/javascript/bootstrap/jquery.uniform.min.js"></script>
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>

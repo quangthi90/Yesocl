@@ -225,6 +225,7 @@ class ControllerDesignLayout extends Controller {
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_path'] = $this->language->get( 'entry_path' );
+		$this->data['entry_action'] = $this->language->get( 'entry_action' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'design/layout' );
@@ -268,6 +269,18 @@ class ControllerDesignLayout extends Controller {
 			if (!in_array($path, $ignore)) {
 				$this->data['paths'][] = $path;
 			}
+		}
+
+		// Entry action
+		$this->load->model('design/action');
+		$actions = $this->model_design_action->getAllActions();
+
+		$this->data['actions'] = array();
+		foreach ( $actions as $action ) {
+			$this->data['actions'][] = array(
+				'id' => $action->getId(),
+				'name' => $action->getName()
+			);
 		}
 
 		$this->template = 'design/layout_form.tpl';

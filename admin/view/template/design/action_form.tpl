@@ -29,11 +29,11 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_action; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="action" value="<?php echo $action; ?>" />
-            <?php if ($error_action) { ?>
+            <td><span class="required">*</span> <?php echo $entry_code; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="code" value="<?php echo $code; ?>" />
+            <?php if ($error_code) { ?>
                 <div class="alert alert-error">
-                  <strong>Error!</strong> <?php echo $error_action; ?>
+                  <strong>Error!</strong> <?php echo $error_code; ?>
                 </div>
             <?php } ?></td>
           </tr>

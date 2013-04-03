@@ -11,6 +11,7 @@ $_['text_action']			  = 'Action';
 // Entry
 $_['entry_name']              = 'Layout Name:';
 $_['entry_path']              = 'Layout Path:';
+$_['entry_action']            = 'Action:';
 
 // error
 $_['error_name']              = 'Layout Name must be between 3 and 128 characters!';

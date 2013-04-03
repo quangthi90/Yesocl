@@ -140,11 +140,12 @@ class ControllerDesignAction extends Controller {
 		$action_total = $this->model_design_action->getTotalActions();
 		
 		$this->data['actions'] = array();
+		
 		if ( $actions ){
 			foreach ( $actions as $action ){
-				$action = array();
+				$data = array();
 			
-				$action[] = array(
+				$data[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'design/action/update', 'action_id=' . $action->getId() ),
 					'icon' => 'icon-edit',
@@ -154,7 +155,7 @@ class ControllerDesignAction extends Controller {
 					'id' => $action->getId(),
 					'name' => $action->getName(),
 					'code' => $action->getcode(),
-					'action' => $action,
+					'action' => $data,
 				);
 			}
 		}
@@ -197,6 +198,12 @@ class ControllerDesignAction extends Controller {
 			$this->data['error_name'] = $this->error['error_name'];
 		} else {
 			$this->data['error_name'] = '';
+		}
+
+		if ( isset($this->error['error_code']) ) {
+			$this->data['error_code'] = $this->error['error_code'];
+		} else {
+			$this->data['error_code'] = '';
 		}
 
 		// breadcrumbs
@@ -269,6 +276,10 @@ class ControllerDesignAction extends Controller {
 	private function isValidateForm(){
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
+		}
+
+		if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 20 ){
+			$this->error['error_code'] = $this->language->get( 'error_code' );
 		}
 
 		if ( $this->error){
