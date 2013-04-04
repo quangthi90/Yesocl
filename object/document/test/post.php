@@ -3,27 +3,22 @@ namespace Document\Test;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
- * @MongoDB\EmbeddedDocument
+ * @MongoDB\Document(db="yesocl", collection="test_post")
  */
-Class Blog {
-	/** 
-	 * @MongoDB\Id 
-	 */
+Class Post {
+	/** @MongoDB\Id */
 	private $id; 
 
-	/** 
-	 * @MongoDB\String 
-	 * @BmSolr
-	 */
+	/** @MongoDB\String */
 	private $author;
 
-	/** 
-	 * @BmSolr
-	 * @MongoDB\String 
-	 */
+	/** @MongoDB\String */
 	private $content;
 
-	public function getId() {
+	/** @MongoDB\ReferenceMany(targetDocument="Blog", inversedBy="posts") */
+    private $blogs = array();
+
+	public function getId(){
 		return $this->id;
 	}
 
@@ -41,5 +36,17 @@ Class Blog {
 
 	public function getContent(){
 		return $this->content;
+	}
+
+	public function addBlog( Blog $blog ){
+		$this->blogs[] = $blog;
+	}
+
+	public function setBlogs( $blogs ){
+		$this->blogs = $blogs;
+	}
+
+	public function getBlogs(){
+		return $this->blogs;
 	}
 }

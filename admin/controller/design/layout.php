@@ -251,12 +251,23 @@ class ControllerDesignLayout extends Controller {
 
 		$layouts = $this->model_design_layout->getAllLayouts();
 
-		$ignore = array();
-		foreach ( $layouts as $layout ) {
-			$ignore[] = $layout->getPath();
+		// Entry path
+		if ( isset($this->request->post['path']) ){
+			$this->data['path'] = $this->request->post['path'];
+		}elseif ( isset($layout) ){
+			$this->data['path'] = $layout->getPath();
+		}else{
+			$this->data['path'] = '';
 		}
 
-		// Entry path
+		$ignore = array();
+		foreach ( $layouts as $data ) {
+			if ( $data->getPath() == $this->data['path'] ){
+				continue;
+			}
+			$ignore[] = $data->getPath();
+		}
+
 		$this->data['paths'] = array();
 		
 		$files = glob(DIR_APPLICATION . 'controller/*/*.php');
@@ -271,23 +282,28 @@ class ControllerDesignLayout extends Controller {
 			}
 		}
 
-		if ( isset($this->request->post['path']) ){
-			$this->data['path'] = $this->request->post['path'];
-		}
-
 		// Entry action
+		if ( isset($this->request->post['actions']) ){
+			$actionIds = $this->request->post['actions'];
+		}elseif ( isset($layout) ){
+			$actions = $layout->getActions()->toArray();
+			$actionIds = array_map(function($action) {
+				return $action->getId();
+			}, $actions);
+		}else{
+			$actionIds = array();
+		}
+		// print("<pre>"); var_dump($actionIds); exit;
 		$this->load->model('design/action');
 		$actions = $this->model_design_action->getAllActions();
 
 		$this->data['actions'] = array();
 		foreach ( $actions as $action ) {
 			$checked = false;
-			if ( isset($this->request->post['actions']) ){
-				foreach ( $this->request->post['path'] as $actionId ) {
-					if ( $actionId == $action->getId() ){
-						$checked = true;
-						break;
-					}
+			foreach ( $actionIds as $actionId ) {
+				if ( $actionId == $action->getId() ){
+					$checked = true;
+					break;
 				}
 			}
 
@@ -297,6 +313,10 @@ class ControllerDesignLayout extends Controller {
 				'checked' => $checked
 			);
 		}
+		// print(count($layout->getActions())); exit;
+		// foreach ($layout->getActions() as $key => $value) {
+		// 	print("<pre>"); var_dump($value->getName()); exit;
+		// }
 
 		$this->template = 'design/layout_form.tpl';
 		$this->children = array(

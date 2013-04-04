@@ -31,8 +31,8 @@
           <tr>
             <td><?php echo $entry_path; ?></td>
             <td><select name="path">
-                <?php foreach ($paths as $path) { ?>
-                <option value="<?php echo $path; ?>"><?php echo $path; ?></option>
+                <?php foreach ($paths as $data) { ?>
+                <option <?php if ($data == $path){ ?>selected="selected"<?php } ?> value="<?php echo $data; ?>"><?php echo $data; ?></option>
                 <?php } ?>
               </select></td>
           </tr>
@@ -42,7 +42,7 @@
               <?php foreach ( $actions as $action ){ ?>
               <div class="controls">
                 <label class="checkbox inline">
-                  <input type="checkbox" name="actions[]" id="<?php echo $action['id']; ?>" value="<?php echo $action['id']; ?>" />
+                  <input type="checkbox" name="actions[]" value="<?php echo $action['id']; ?>" <?php if ($action['checked'] == true){ ?>checked="checked"<?php } ?> />
                   <?php echo $action['name']; ?>
                 </label>
               </div>

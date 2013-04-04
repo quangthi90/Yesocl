@@ -5,13 +5,10 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="test_blog")
- * @SOLR\Document(collection="test_blog")
  */
 Class Blog {
 	/** 
 	 * @MongoDB\Id
-	 * @SOLR\UniqueKey
-	 * @SOLR\Field(type="id")
 	 */
 	private $id; 
 
@@ -21,12 +18,11 @@ Class Blog {
 	private $author;
 
 	/** 
-	 * @BmSolr
 	 * @MongoDB\String 
 	 */
 	private $name;
 
-	/** @MongoDB\EmbedMany(targetDocument="\Test\Post") */
+	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="blogs") */
 	private $posts = array();
 
 	public function getId() {
@@ -59,29 +55,5 @@ Class Blog {
 
 	public function getPosts(){
 		return $this->posts;
-	}
-
-	/**
-	* @SOLR\Field(type="text")
-	*/
-	private $solrContent;
-
-	public function setSolrContent( $solrContent ){
-		$this->solrContent = $solrContent;
-	}
-
-	public function getSolrContent(){
-		$solrContent = "";
-		$solrContent .= $this->getName() . "  ";
-
-		if ( count($this->getPosts()) > 0 ) {
-			foreach ($this->getPosts() as $data) {
-		$solrContent .= $data->getAuthor() . "  ";
-		$solrContent .= $data->getContent() . "  ";
-			}
-		}
-
-		$this->solrContent = $solrContent;
-		return $solrContent;
 	}
 }

@@ -1,5 +1,6 @@
 <?php
 use Document\Design\Action;
+use Document\Design\Layout;
 
 class ModelDesignAction extends Doctrine {
 	public function addAction( $data = array() ) {
@@ -18,6 +19,22 @@ class ModelDesignAction extends Doctrine {
 
 		$this->dm->persist( $action );
 		$this->dm->flush();
+
+		// $action = new Action();
+		// $action->setName( 'aaa' );
+		// $this->dm->persist( $action );
+
+		// $blog = $this->dm->getRepository( 'Document\Test\Blog')->find( '515d0479471dee3009000000' );
+		// print(get_class($blog)); exit;
+
+		// $layout = new Layout();
+		// $layout->setName( 'abc' );
+		// $layout->addAction( $action );
+		// $this->dm->persist( $layout );
+
+		// $this->dm->flush();
+
+		// exit;
 	}
 
 	public function editAction( $id, $data = array() ) {
@@ -55,7 +72,8 @@ class ModelDesignAction extends Doctrine {
 	}
 	
 	public function getAction( $action_id ) {
-		return $this->dm->getRepository( 'Document\Design\Action' )->find( $action_id );
+		$action = $this->dm->getRepository( 'Document\Design\Action' )->find( $action_id );
+		return $action;
 	}
 
 	public function getActions( $data = array() ) {
