@@ -15,6 +15,9 @@ Class Action {
 	/** @MongoDB\String */
 	private $code;
 
+	/** @MongoDB\Int */
+	private $order;
+
 	/** @MongoDB\ReferenceMany(targetDocument="Layout", mappedBy="actions") */
     private $layouts = array();
 
@@ -48,5 +51,13 @@ Class Action {
 
 	public function getLayouts(){
 		return $this->layouts;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 }

@@ -27,6 +27,7 @@
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $column_name; ?></td>
               <td><?php echo $column_code; ?></td>
+              <td><?php echo $column_order; ?></td>
               <td><?php echo $text_action; ?></td>
             </tr>
           </thead>
@@ -37,6 +38,7 @@
               <td><input name="id[]" type="checkbox" value="<?php echo $action['id']; ?>"/></td>
               <td><?php echo $action['name']; ?></td>
               <td><?php echo $action['code']; ?></td>
+              <td><?php echo $action['order']; ?></td>
               <td class="right"><?php foreach ($action['action'] as $action) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>

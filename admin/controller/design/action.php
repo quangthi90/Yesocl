@@ -112,7 +112,8 @@ class ControllerDesignAction extends Controller {
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
 		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['column_name'] = $this->language->get( 'column_name' );	
-		$this->data['column_code'] = $this->language->get( 'column_code' );	
+		$this->data['column_code'] = $this->language->get( 'column_code' );
+		$this->data['column_order'] = $this->language->get( 'column_order' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
@@ -154,7 +155,8 @@ class ControllerDesignAction extends Controller {
 				$this->data['actions'][] = array(
 					'id' => $action->getId(),
 					'name' => $action->getName(),
-					'code' => $action->getcode(),
+					'code' => $action->getCode(),
+					'order' => $action->getOrder(),
 					'action' => $data,
 				);
 			}
@@ -232,6 +234,7 @@ class ControllerDesignAction extends Controller {
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_code'] = $this->language->get( 'entry_code' );
+		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'design/action' );
@@ -262,6 +265,15 @@ class ControllerDesignAction extends Controller {
 			$this->data['code'] = $action->getcode();
 		}else {
 			$this->data['code'] = '';
+		}
+
+		// Entry order
+		if ( isset($this->request->post['order']) ){
+			$this->data['order'] = $this->request->post['order'];
+		}elseif ( isset($action) ){
+			$this->data['order'] = $action->getOrder();
+		}else {
+			$this->data['order'] = '';
 		}
 
 		$this->template = 'design/action_form.tpl';

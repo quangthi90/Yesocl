@@ -37,6 +37,10 @@
                 </div>
             <?php } ?></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_order; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="order" value="<?php echo $order; ?>" /></td>
+          </tr>
         </table>
       </form>
     </div>

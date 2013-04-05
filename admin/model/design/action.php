@@ -16,25 +16,12 @@ class ModelDesignAction extends Doctrine {
 		$action = new Action();
 		$action->setName( $data['name'] );
 		$action->setCode( $data['code'] );
+		if ( isset($data['order']) && !empty($data['order']) ){
+			$action->setOrder( $data['order'] );
+		}
 
 		$this->dm->persist( $action );
 		$this->dm->flush();
-
-		// $action = new Action();
-		// $action->setName( 'aaa' );
-		// $this->dm->persist( $action );
-
-		// $blog = $this->dm->getRepository( 'Document\Test\Blog')->find( '515d0479471dee3009000000' );
-		// print(get_class($blog)); exit;
-
-		// $layout = new Layout();
-		// $layout->setName( 'abc' );
-		// $layout->addAction( $action );
-		// $this->dm->persist( $layout );
-
-		// $this->dm->flush();
-
-		// exit;
 	}
 
 	public function editAction( $id, $data = array() ) {
@@ -55,6 +42,9 @@ class ModelDesignAction extends Doctrine {
 
 		$action->setName( $data['name'] ); 
 		$action->setCode( $data['code'] );
+		if ( isset($data['order']) && !empty($data['order']) ){
+			$action->setOrder( $data['order'] );
+		}
 
 		$this->dm->flush();
 	}
@@ -63,6 +53,12 @@ class ModelDesignAction extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$action = $this->dm->getRepository( 'Document\Design\Action' )->find( $id );
+
+				$layouts = $this->dm->getRepository( 'Document\Design\Layout' )->findBy( array('action.id' => $id) );
+
+				foreach ( $layouts as $layout ) {
+					$layout->removeAction( $id );
+				}
 
 				$this->dm->remove($action);
 			}
@@ -86,7 +82,8 @@ class ModelDesignAction extends Doctrine {
 
 		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )
     		->limit( $data['limit'] )
-    		->skip( $data['start'] );
+    		->skip( $data['start'] )
+    		->sort( 'order' );
     		
     	return $query->getQuery()->execute();
 	}

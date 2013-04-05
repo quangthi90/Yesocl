@@ -11,6 +11,7 @@ $_['text_action']			  = 'Action';
 // Entry
 $_['entry_name']              = 'Action Name:';
 $_['entry_code']              = 'Action Code:';
+$_['entry_order']             = 'Order:';
 
 // error
 $_['error_name']              = 'Action Name must be between 3 and 128 characters!';
@@ -19,6 +20,7 @@ $_['error_permission']        = 'Warning: You do not have permission to modify A
 // Column
 $_['column_name']             = 'Action Name';
 $_['column_code']             = 'Action Code';
+$_['column_order']            = 'Order';
 $_['column_action']           = 'Action';
 
 // Error

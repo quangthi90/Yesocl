@@ -49,4 +49,24 @@ Class Layout {
 	public function getActions(){
 		return $this->actions;
 	}
+
+	public function removeAction( $action_id ){
+		$actions = array();
+		foreach ( $this->actions as $action ) {
+			if ( $action->getId() != $action_id ){
+				$actions[] = $action;
+			}
+		}
+		$this->setActions( $actions );
+	}
+
+	public function getActionById( $action_id ){
+		foreach ( $this->actions as $action ) {
+			if ( $action->getId() == $action_id ){
+				return $action;
+			}
+		}
+
+		return null;
+	}
 }
