@@ -89,7 +89,7 @@ class ModelDesignAction extends Doctrine {
 	}
 
 	public function getAllActions() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' );
+		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )->sort( 'order' );
     		
     	return $query->getQuery()->execute();
 	}
