@@ -300,11 +300,8 @@ class ControllerDesignLayout extends Controller {
 		$this->data['actions'] = array();
 		foreach ( $actions as $action ) {
 			$checked = false;
-			foreach ( $actionIds as $actionId ) {
-				if ( $actionId == $action->getId() ){
-					$checked = true;
-					break;
-				}
+			if ( in_array($action->getId(), $actionIds) ){
+				$checked = true;
 			}
 
 			$this->data['actions'][] = array(

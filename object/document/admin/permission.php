@@ -3,54 +3,39 @@ namespace Document\Admin;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
- * @MongoDB\Document(db="yesocl", collection="admin_group")
+ * @MongoDB\EmbeddedDocument
  */
-Class Group {
-	/** 
-	 * @MongoDB\Id 
-	 */
+Class Permission {
+	/** @MongoDB\Id */
 	private $id; 
 
-	/** 
-	 * @MongoDB\String 
-	 */
-	private $name;
+	/** @MongoDB\ReferenceOne(targetDocument="\Document\Design\Layout") */
+	private $layout;
 
-    /** @MongoDB\ReferenceMany(targetDocument="Admin", mappedBy="groupAdmin") */
-	private $admins = array();
-	
-	/** @MongoDB\Boolean */
-	private $status;
+    /** @MongoDB\ReferenceMany(targetDocument="\Document\Design\Action") */
+	private $actions = array();
 
-	public function getId() {
+	public function getId(){
 		return $this->id;
 	}
 
-	public function setName( $name ){
-		$this->name = $name;
+	public function setLayout( $layout ){
+		$this->layout = $layout;
 	}
 
-	public function getName(){
-		return $this->name;
+	public function getLayout(){
+		return $this->layout;
 	}
 
-	public function addAdmin( Admin $admin ){
-		$this->admins[] = $admin;
+	public function addAction( \Document\Design\Action $action ){
+		$this->actions[] = $action;
 	}
 
-	public function setAdmins( $admins ){
-		$this->admins = $admins;
+	public function setActions( $actions ){
+		$this->actions = $actions;
 	}
 
-	public function getAdmins(){
-		return $this->admins;
-	}
-
-	public function setStatus( $status ){
-		$this->status = $status;
-	}
-
-	public function getStatus(){
-		return $this->status;
+	public function getActions(){
+		return $this->actions;
 	}
 }

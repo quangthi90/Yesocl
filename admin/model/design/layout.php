@@ -80,13 +80,14 @@ class ModelDesignLayout extends Doctrine {
 
 		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' )
     		->limit( $data['limit'] )
-    		->skip( $data['start'] );
+    		->skip( $data['start'] )
+    		->sort( 'path' );
     		
     	return $query->getQuery()->execute();
 	}
 
 	public function getAllLayouts() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' );
+		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' )->sort( 'path' );
     		
     	return $query->getQuery()->execute();
 	}
