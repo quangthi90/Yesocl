@@ -366,7 +366,7 @@ class ControllerGroupPost extends Controller {
 		if ( isset($this->request->post['author']) ){
 			$this->data['author'] = $this->request->post['author'];
 		}elseif ( isset( $user ) ){
-			$this->data['author'] = $user->getPrimaryEmail()->getEmail();
+			$this->data['author'] = $user->getUsername() . '(' . $user->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['author'] = '';
 		}

@@ -277,10 +277,13 @@ class ControllerGroupGroup extends Controller {
 		}
 		
 		// Entry author
+		if ( isset( $group ) ) {
+			$user = $group->getAuthor();
+		}
 		if ( isset($this->request->post['author']) ){
 			$this->data['author'] = $this->request->post['author'];
-		}elseif ( isset($group) ){
-			$this->data['author'] = $group->getAuthor()->getPrimaryEmail()->getEmail();
+		}elseif ( isset($user) ){
+			$this->data['author'] = $user->getUsername() . '(' . $user->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['author'] = '';
 		}
