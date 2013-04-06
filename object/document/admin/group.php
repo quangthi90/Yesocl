@@ -31,6 +31,22 @@ Class Group {
 		return null;
 	}
 
+	public function getPermissionByActionId( $actions_id ){
+		$permissions = array();
+		foreach ( $this->permissions as $permission ) {
+			$actions = $permission->getActions()->toArray();
+
+			$actionIds = array_map(function($action){
+				return $action->getId();
+			}, $actions);
+
+			if ( in_array($actions_id, $actionIds) ){
+				$permissions[] = $permission;
+			}
+		}
+		return $permissions;
+	}
+
 	public function getId(){
 		return $this->id;
 	}

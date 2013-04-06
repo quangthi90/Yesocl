@@ -58,6 +58,16 @@ class ModelDesignLayout extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$layout = $this->dm->getRepository( 'Document\Design\Layout' )->find( $id );
+				// print($id); exit;
+				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findAll();
+				// print(count($groups)); exit;
+				foreach ( $groups as $group ) {
+					$permission = $group->getPermissionByLayoutId( $id );
+					if ( !$permission ){
+						continue;
+					}
+					$group->getPermissions()->removeElement( $permission );
+				}
 
 				$this->dm->remove($layout);
 			}

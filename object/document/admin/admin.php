@@ -39,7 +39,6 @@ Class User {
 	
 	/** @MongoDB\Date */
 	private $created;
-	}
 
 	public function getId() {
 		return $this->id;

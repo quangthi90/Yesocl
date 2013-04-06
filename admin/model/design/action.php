@@ -60,6 +60,15 @@ class ModelDesignAction extends Doctrine {
 					$layout->removeAction( $id );
 				}
 
+				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permission.actions.id' => $id) );
+				print(count($groups)); exit;
+				foreach ( $groups as $group ) {
+					$permissions = $group->getPermissionByActionId( $id );
+					foreach ( $permissions as $permission ) {
+						$group->getPermissions()->removeElement( $permission );
+					}
+				}
+
 				$this->dm->remove($action);
 			}
 		}
