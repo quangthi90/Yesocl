@@ -19,6 +19,8 @@ class ModelSettingConfig extends Doctrine {
 
 		$this->dm->persist( $config );
 		$this->dm->flush();
+
+		return true;
 	}
 
 	public function editConfig( $config_id, $data = array() ) {
@@ -44,6 +46,8 @@ class ModelSettingConfig extends Doctrine {
 
 		$this->dm->persist( $config );
 		$this->dm->flush();
+		
+		return true;
 	}
 
 	public function deleteConfig( $data = array() ) {
@@ -112,7 +116,11 @@ class ModelSettingConfig extends Doctrine {
 	}
 
 	public function load( $filter_key ) {
-		$configs = $this->getConfigs( array( 'filter_key' => $filter_key ) );
+		$query = $this->dm->createQueryBuilder( 'Document\Setting\Config' );
+
+    	$query->field( 'key' )->equals( new \MongoRegex('/' . trim( $filter_key ) . '.*/i') );
+    		
+    	$configs = $query->getQuery()->execute();
 
 		foreach ($configs as $config) {
 			$this->config->set( $config->getKey(), $config->getValue() );
