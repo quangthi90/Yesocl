@@ -22,8 +22,7 @@ class ModelGroupGroup extends Doctrine {
 		if ( !isset($data['user_id']) || empty($data['user_id']) ){
 			return false;
 		}
-		$this->load->model( 'user/user' );
-		$user = $this->model_user_user->getUser( array( 'user_id' => $data['user_id'] ) );
+		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( !$user ){
 			return false;
 		}
@@ -80,8 +79,7 @@ class ModelGroupGroup extends Doctrine {
 		if ( !isset($data['user_id']) || empty($data['user_id']) ){
 			return false;
 		}
-		$this->load->model( 'user/user' );
-		$user = $this->model_user_user->getUser( array( 'user_id' => $data['user_id'] ) );
+		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( !$user ){
 			return false;
 		}
