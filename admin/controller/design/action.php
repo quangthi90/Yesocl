@@ -294,6 +294,12 @@ class ControllerDesignAction extends Controller {
 			$this->error['error_code'] = $this->language->get( 'error_code' );
 		}
 
+		$actions = $this->model_design_action->getActionByCode( $this->request->post['code'] );
+		// print("<pre>"); var_dump($actions); exit;
+		if ( count($actions) > 1 || (count($actions) == 1 && (!isset($this->request->get['action_id']) || !array_key_exists($this->request->get['action_id'], $actions->toArray()))) ){
+			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
+		}
+
 		if ( $this->error){
 			return false;
 		}else {

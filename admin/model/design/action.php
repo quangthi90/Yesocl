@@ -110,5 +110,9 @@ class ModelDesignAction extends Doctrine {
 
 		return count($actions);
 	}
+
+	public function getActionByCode( $code ){
+		return $this->dm->getRepository( 'Document\Design\Action' )->findBy( array('code' => $code) );
+	}
 }
 ?>
