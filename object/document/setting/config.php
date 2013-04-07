@@ -2,7 +2,7 @@
 namespace Document\Setting;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** @MongoDB\Document(db="yesocl", collection="config") */
+/** @MongoDB\Document(db="yesocl", collection="setting_config") */
 Class Config {
 	/** @MongoDB\Id */
 	private $id; 

@@ -9,7 +9,7 @@ class ModelSettingConfig extends Doctrine {
 		}
 
 		// Value is required
-		if ( !isset($data['key']) || empty($data['key']) ){
+		if ( !isset($data['value']) || empty($data['value']) ){
 			return false;
 		}
 
@@ -30,7 +30,7 @@ class ModelSettingConfig extends Doctrine {
 		}
 
 		// Value is required
-		if ( !isset($data['key']) || empty($data['key']) ){
+		if ( !isset($data['value']) || empty($data['value']) ){
 			return false;
 		}
 
