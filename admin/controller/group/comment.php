@@ -212,7 +212,7 @@ class ControllerGroupComment extends Controller {
 					'id' => $comments[$i]->getId(),
 					'author' => $comments[$i]->getUser()->getFullname(),
 					'created' => $comments[$i]->getCreated()->format( $this->language->get( 'date_time_format' ) ),
-					'status' => $comments[$i]->getStatus(),
+					'status' => $comments[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}

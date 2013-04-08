@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_content; ?></td>
-            <td><textarea class="input-xxlarge" required="required" name="content"><?php echo $content; ?></textarea>
+            <td><textarea class="input-xxlarge" required="required" name="content" rows="4"><?php echo $content; ?></textarea>
             <?php if ($error_content) { ?>
               	<div class="alert alert-error">
 				  <strong>Error!</strong> <?php echo $error_content; ?>

@@ -219,7 +219,7 @@ class ControllerGroupPost extends Controller {
 					'title' => $posts[$i]->getTitle(),
 					'author' => $author,
 					'created' => $posts[$i]->getCreated()->format( $this->language->get('date_time_format') ),
-					'status' => $posts[$i]->getStatus(),
+					'status' => $posts[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}
