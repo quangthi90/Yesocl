@@ -1,46 +1,27 @@
 <?php
-namespace Document\User;
+namespace Document\Admin;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** 
- * @MongoDB\Document(db="yesocl", collection="user")
+ * @MongoDB\Document(db="yesocl", collection="admin")
  */
-Class User {
-	/** 
-	 * @MongoDB\Id 
-	 */
+Class Admin {
+	/** @MongoDB\Id */
 	private $id; 
 
-	/** 
-	 * @MongoDB\String 
-	 */
+	/** @MongoDB\String */
 	private $username;
 
 	/** @MongoDB\String */
 	private $password;
 
-	/** @MongoDB\EmbedMany(targetDocument="Email") */
-	private $emails = array();
-
-	/** @MongoDB\EmbedOne(targetDocument="Meta") */
-    private $meta;
-
-    /** @MongoDB\EmbedOne(targetDocument="Background") */
-    private $background;
-
-	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
-    private $groupUser;
-
-    /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
-	private $groups = array();
+	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="admins") */
+    private $group;
 	
 	/** @MongoDB\Boolean */
 	private $status;
-	
-	/** @MongoDB\Date */
-	private $created;
 
-	public function getId() {
+	public function getId(){
 		return $this->id;
 	}
 
@@ -52,60 +33,20 @@ Class User {
 		return $this->username;
 	}
 
-	public function setMeta( $meta ){
-		$this->meta = $meta;
+	public function setPassword( $password ){
+		$this->password = $password;
 	}
 
-	public function getMeta(){
-		return $this->meta;
+	public function getPassword(){
+		return $this->password;
 	}
 
-	public function addEmail( Email $email ){
-		$this->emails[] = $email;
+	public function setGroup( $group ){
+		$this->group = $group;
 	}
 
-	public function setEmails( $emails ){
-		$this->emails = $emails;
-	}
-
-	public function getEmails(){
-		return $this->emails;
-	}
-
-	public function setMeta( $meta ){
-		$this->meta = $meta;
-	}
-
-	public function getMeta(){
-		return $this->meta;
-	}
-
-	public function setBackground( $background ){
-		$this->background = $background;
-	}
-
-	public function getBackground(){
-		return $this->background;
-	}
-
-	public function setGroupUser( $groupUser ){
-		$this->groupUser = $groupUser;
-	}
-
-	public function getGroupUser(){
-		return $this->groupUser;
-	}
-
-	public function addGroup( \Document\Group\Group $group ){
-		$this->groups[] = $group;
-	}
-
-	public function setGroups( $groups ){
-		$this->groups = $groups;
-	}
-
-	public function getGroups(){
-		return $this->groups;
+	public function getGroup(){
+		return $this->group;
 	}
 
 	public function setStatus( $status ){
@@ -114,18 +55,5 @@ Class User {
 
 	public function getStatus(){
 		return $this->status;
-	}
-
-	public function setCreated( $created ){
-		$this->created = $created;
-	}
-
-	public function getCreated(){
-		return $this->created;
-	}
-
-	/** @MongoDB\PrePersist */
-	public function prePersist(){
-		$this->created = new \DateTime();
 	}
 }

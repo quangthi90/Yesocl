@@ -145,6 +145,10 @@ class ModelAdminGroup extends Doctrine {
 
 		return $this->dm->getRepository( 'Document\Admin\Group' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
 	}
+
+	public function getAllGroups() {
+		return $this->dm->getRepository( 'Document\Admin\Group' )->findAll();
+	}
 	
 	/**
 	 * Get Total Group

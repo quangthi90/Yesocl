@@ -12,7 +12,7 @@ Class Group {
 	/** @MongoDB\String */
 	private $name;
 
-    /** @MongoDB\ReferenceMany(targetDocument="Admin", mappedBy="groupAdmin") */
+    /** @MongoDB\ReferenceMany(targetDocument="Admin", mappedBy="group") */
 	private $admins = array();
 
 	/** @MongoDB\EmbedMany(targetDocument="Permission") */

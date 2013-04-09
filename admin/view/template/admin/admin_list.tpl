@@ -13,7 +13,7 @@
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <span><img src="view/image/user.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/admin.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
 	      <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-success"><?php echo $button_insert; ?> <i class="icon-plus"></i></a>
 	      <a onclick="$('form').submit();" class="btn btn-danger"><?php echo $button_delete; ?> <i class="icon-trash"></i></a>
@@ -25,27 +25,27 @@
           <thead>
             <tr>
               <td><input type="checkbox" onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $text_email; ?></td>
+              <td><?php echo $text_username; ?></td>
               <td><?php echo $text_group; ?></td>
               <td><?php echo $text_status; ?></td>
               <td><?php echo $text_action; ?></td>
             </tr>
           </thead>
           <tbody>
-            <?php if ($users) { ?>
-            <?php foreach ($users as $user) { ?>
+            <?php if ($admins) { ?>
+            <?php foreach ($admins as $admin) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $user['id']; ?>"/></td>
-              <td><?php echo $user['email']; ?></td>
-              <td><?php echo $user['group']; ?></td>
-              <td><?php echo $user['status']; ?></td>
-              <td class="right"><?php foreach ($user['action'] as $action) { ?>
+              <td><input name="id[]" type="checkbox" value="<?php echo $admin['id']; ?>"/></td>
+              <td><?php echo $admin['username']; ?></td>
+              <td><?php echo $admin['group']; ?></td>
+              <td><?php echo $admin['status']; ?></td>
+              <td class="right"><?php foreach ($admin['action'] as $action) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php }?>
-            <?php if (!$users) { ?>
+            <?php if (!$admins) { ?>
             <tr class="center">
               <td colspan="10"><?php echo $text_no_results; ?></td>
             </tr>
