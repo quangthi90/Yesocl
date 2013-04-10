@@ -10,6 +10,13 @@ class ModelCompanyCategory extends Doctrine {
 			return false;
 		}
 
+		// order
+		if ( !isset( $data['order'] ) ) {
+			$data['order'] = 0;
+		}else {
+			$data['order'] = (int)$data['order'];
+		}
+
 		// status
 		if ( !isset( $data['status'] ) ) {
 			$data['status'] = 0;
@@ -17,6 +24,7 @@ class ModelCompanyCategory extends Doctrine {
 
 		$category = new Category();
 		$category->setName( $data['name'] );
+		$category->setOrder( $data['order'] );
 		$category->setStatus( $data['status'] );
 
 		$this->dm->persist( $category );
@@ -31,6 +39,13 @@ class ModelCompanyCategory extends Doctrine {
 			$this->data['name'] = strtolower( trim( $data['name'] ) );
 		}else {
 			return false;
+		}
+
+		// order
+		if ( !isset( $data['order'] ) ) {
+			$data['order'] = 0;
+		}else {
+			$data['order'] = (int)$data['order'];
 		}
 
 		// status
@@ -49,6 +64,7 @@ class ModelCompanyCategory extends Doctrine {
 		}
 
 		$category->setName( $data['name'] );
+		$category->setOrder( $data['order'] );
 		$category->setStatus( $data['status'] );
 		
 		$this->dm->flush();

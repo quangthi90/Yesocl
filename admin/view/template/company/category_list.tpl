@@ -26,6 +26,7 @@
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $column_category; ?></td>
+              <td><?php echo $column_order; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
@@ -36,6 +37,7 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $category['id']; ?>"/></td>
               <td><?php echo $category['name']; ?></td>
+              <td><?php echo $category['order']; ?></td>
               <td><?php echo ( $category['status'] ) ? $text_enable : $text_disable; ?></td>
               <td class="right"><?php foreach ( $category['action'] as $action ) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
@@ -45,7 +47,7 @@
             <?php }?>
             <?php if ( !$categories ) { ?>
             <tr class="center">
-              <td colspan="4"><?php echo $text_no_results; ?></td>
+              <td colspan="5"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

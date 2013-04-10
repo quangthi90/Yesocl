@@ -15,6 +15,9 @@ Class Category {
 	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="category") */
 	private $posts = array();
 	
+	/** @MongoDB\Int */
+	private $order;
+	
 	/** @MongoDB\Boolean */
 	private $status;
 
@@ -40,6 +43,14 @@ Class Category {
 
 	public function getPosts(){
 		return $this->posts;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 
 	public function setStatus( $status ){

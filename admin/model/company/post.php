@@ -53,6 +53,7 @@ class ModelCompanyPost extends Doctrine {
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setCategory( $category );
+		$post->setDescription( $data['description'] );
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
@@ -114,6 +115,7 @@ class ModelCompanyPost extends Doctrine {
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setCategory( $category );
+		$post->setDescription( $data['description'] );
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 

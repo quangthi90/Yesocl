@@ -157,6 +157,7 @@ class ControllerCompanyCategory extends Controller {
 
 		// column
 		$this->data['column_category'] = $this->language->get( 'column_category' );
+		$this->data['column_order'] = $this->language->get( 'column_order' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 
@@ -190,6 +191,7 @@ class ControllerCompanyCategory extends Controller {
 			$this->data['categories'][] = array(
 				'id' => $category->getId(),
 				'name' => $category->getName(),
+				'order' => $category->getOrder(),
 				'status' => $category->getStatus(),
 				'action' => $action,
 				);
@@ -267,6 +269,7 @@ class ControllerCompanyCategory extends Controller {
 
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
+		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 
 		// button
@@ -292,6 +295,15 @@ class ControllerCompanyCategory extends Controller {
 			$this->data['name'] = $category->getName();
 		}else {
 			$this->data['name'] = '';
+		}
+
+		// order
+		if ( isset( $this->request->post['order'] ) ) {
+			$this->data['order'] = $this->request->post['order'];
+		}elseif ( isset( $category ) ) {
+			$this->data['order'] = $category->getOrder();
+		}else {
+			$this->data['order'] = 0;
 		}
 
 		// status
