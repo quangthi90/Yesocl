@@ -217,6 +217,11 @@ class ControllerAdminGroup extends Controller {
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
+		$this->data['entry_permission'] = $this->language->get( 'entry_permission' );
+
+		// Column
+		$this->data['column_layout'] = $this->language->get( 'column_layout' );
+		$this->data['column_action'] = $this->language->get( 'column_action' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'admin/group' );
@@ -239,6 +244,49 @@ class ControllerAdminGroup extends Controller {
 			$this->data['name'] = $group->getName();
 		}else {
 			$this->data['name'] = '';
+		}
+
+		// Layout
+		$this->load->model( 'design/layout' );
+		$layouts = $this->model_design_layout->getAllLayouts();
+
+		$this->data['layouts'] = array();
+		foreach ( $layouts as $layout ) {
+			if ( isset($this->request->post['layouts'][$layout->getId()]) ){
+				$actionIds = $this->request->post['layouts'][$layout->getId()];
+			}elseif ( isset($group) ){
+				$permission = $group->getPermissionByLayoutId( $layout->getId() );
+				if ( !$permission ){
+					$actionIds = array();
+				}else{
+					$actions = $permission->getActions()->toArray();
+					$actionIds = array_map(function($action) {
+						return $action->getId();
+					}, $actions);
+				}
+			}else{
+				$actionIds = array();
+			}
+
+			$actions = array();
+			foreach ( $layout->getActions() as $action ) {
+				$checked = false;
+				if ( in_array($action->getId(), $actionIds) ){
+					$checked = true;
+				}
+				$actions[] = array(
+					'id' => $action->getId(),
+					'name' => $action->getName(),
+					'code' => $action->getCode(),
+					'checked' => $checked
+				);
+			}
+			$this->data['layouts'][] = array(
+				'id' => $layout->getId(),
+				'name' => $layout->getName(),
+				'path' => $layout->getPath(),
+				'actions' => $actions
+			);
 		}
 
 		$this->template = 'admin/group_form.tpl';

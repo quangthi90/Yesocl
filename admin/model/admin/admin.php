@@ -7,85 +7,43 @@ class ModelAdminAdmin extends Doctrine {
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: 
 	 * 	array Data{
-	 * 		string Email
+	 * 		string Username
 	 * 		string Password
-	 * 		int Group ID
-	 * 		string Firstname
-	 * 		string Lastname
+	 * 		Object MongoId or string MongoId Group ID
 	 * 	}
 	 * @return: boolean
 	 */
 	public function addAdmin( $data = array() ) {
-		// Email is required
-		if ( !isset($data['admin']['emails']) || count($data['admin']['emails']) < 0 ){
+		// Username is required
+		if ( !isset($data['username']) || empty($data['username']) ){
 			return false;
 		}
 		
 		// Password is required
-		if ( !isset($data['admin']['password']) || empty($data['admin']['password']) ){
+		if ( !isset($data['password']) || empty($data['password']) ){
 			return false;
 		}
 		
 		// Group is required
-		if ( !isset($data['admin']['group']) ){
+		if ( !isset($data['group']) ){
 			return false;
 		}
-		$group = $this->dm->getRepository('Document\Admin\Group')->find( $data['admin']['group'] );
+
+		$group = $this->dm->getRepository('Document\Admin\Group')->find( $data['group'] );
 		if ( !$group ){
 			return false;
-		}
-		
-		// Firstname is required
-		if ( !isset($data['admin']['meta']['firstname']) || empty($data['admin']['meta']['firstname']) ){
-			return false;
-		}
-		
-		// Lastname is required
-		if ( !isset($data['admin']['meta']['lastname']) || empty($data['admin']['meta']['lastname']) ){
-			return false;
-		}
-		
-		// Create Meta
-		$meta = new Meta();
-		$meta->setFirstname( $data['admin']['meta']['firstname'] );
-		$meta->setLastname( $data['admin']['meta']['lastname'] );
-		$this->dm->persist( $meta );
-		
-		// Check email
-		// Get primary email
-		$primary_email = '';
-		foreach ( $this->request->post['admin']['emails'] as $data ){
-			if ( $data['primary'] == 'true' ){
-				$primary_email = strtolower($data['email']);
-			}
-		}
-		// Get list email 
-		$emails = array();
-		$email = new Email();
-		$email->setEmail( $primary_email );
-		$email->setPrimary( true );
-		$emails[] = $email;
-		foreach ( $this->request->post['admin']['emails'] as $data ){
-			if ( strtolower($data['email']) === $primary_email ){
-				continue;
-			}
-			$email = new Email();
-			$email->setEmail( $data['email'] );
-			$email->setPrimary( false );
-			$emails[] = $email;
 		}
 		
 		// Create Admin
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$admin = new Admin();
-		$admin->setEmails( $emails );
-		$admin->setPassword( sha1($salt . sha1($salt . sha1($data['admin']['password']))) );
-		$admin->setGroupAdmin( $group );
-		$admin->setMeta( $meta );
+		$admin->setUsername( $data['username'] );
+		$admin->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+		$admin->setGroup( $group );
 		
 		// Add status
-		if ( isset($data['admin']['status']) ){
-			$admin->setStatus( $data['admin']['status'] );
+		if ( isset($data['status']) ){
+			$admin->setStatus( $data['status'] );
 		}
 		
 		// Save to DB
@@ -101,90 +59,47 @@ class ModelAdminAdmin extends Doctrine {
 	 * @param:
 	 * 	Admin ID 
 	 * 	array Data{
-	 * 		string Email
+	 * 		string Username
 	 * 		string Password
-	 * 		int Group ID
-	 * 		string Firstname
-	 * 		string Lastname
+	 * 		Object MongoId or string MongoId Group ID
 	 * 	}
 	 * @return: boolean
 	 */
 	public function editAdmin( $id, $data = array() ) {
-		// Email is required
-		if ( !isset($data['admin']['emails']) || count($data['admin']['emails']) < 0 ){
+		// Username is required
+		if ( !isset($data['username']) || empty($data['username']) ){
 			return false;
 		}
 		
 		// Password is required
-		if ( !isset($data['admin']['password']) || empty($data['admin']['password']) ){
+		if ( !isset($data['password']) || empty($data['password']) ){
 			return false;
 		}
 		
 		// Group is required
-		if ( !isset($data['admin']['group']) || empty($data['admin']['group']) ){
+		if ( !isset($data['group']) ){
 			return false;
 		}
 		
-		// Firstname is required
-		if ( !isset($data['admin']['meta']['firstname']) || empty($data['admin']['meta']['firstname']) ){
+		$group = $this->dm->getRepository('Document\Admin\Group')->find( $data['group'] );
+		if ( !$group ){
 			return false;
 		}
-		
-		// Lastname is required
-		if ( !isset($data['admin']['meta']['lastname']) || empty($data['admin']['meta']['lastname']) ){
-			return false;
-		}
-		
-		// Create Meta
-		$meta = new Meta();
-		$meta->setFirstname( $data['admin']['meta']['firstname'] );
-		$meta->setLastname( $data['admin']['meta']['lastname'] );
-		$this->dm->persist( $meta );
 
-		// Check email
-		// Get primary email
-		$primary_email = '';
-		foreach ( $this->request->post['admin']['emails'] as $data ){
-			if ( $data['primary'] == 'true' ){
-				$primary_email = strtolower($data['email']);
-			}
-		}
-		// Get list email 
-		$emails = array();
-		$email = new Email();
-		$email->setEmail( $primary_email );
-		$email->setPrimary( true );
-		$emails[] = $email;
-		foreach ( $this->request->post['admin']['emails'] as $data ){
-			if ( strtolower($data['email']) === $primary_email ){
-				continue;
-			}
-			$email = new Email();
-			$email->setEmail( $data['email'] );
-			$email->setPrimary( false );
-			$emails[] = $email;
+		$admin = $this->dm->getRepository('Document\Admin\Admin')->find( $id );
+		if ( !$admin ){
+			return false;
 		}
 		
 		// Update Admin
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$admin = $this->dm->getRepository('Document\Admin\Admin')->find( $id );
-		$admin->setEmails( $emails );
-		$admin->setPassword( sha1($salt . sha1($salt . sha1($data['admin']['password']))) );
-		$admin->setMeta( $meta );
-		
-		
-		// Set Group
-		if ( $admin->getGroupAdmin() && $admin->getGroupAdmin()->getId() != $data['group'] ){
-			$group = $this->dm->getRepository('Document\Admin\Group')->find( $data['admin']['group'] );
-			if ( !$group ){
-				return false;
-			}
-			$admin->setGroupAdmin( $group );
-		} 
+		$admin->setUsername( $data['username'] );
+		$admin->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+		$admin->setGroup( $group );
 		
 		// Set Status
-		if ( isset($data['admin']['status']) ){
-			$admin->setstatus( $data['admin']['status'] );
+		if ( isset($data['status']) ){
+			$admin->setstatus( $data['status'] );
 		}
 
 		$this->dm->flush();
@@ -268,22 +183,22 @@ class ModelAdminAdmin extends Doctrine {
 	}
 	
 	/**
-	 * Check Exist Email
+	 * Check Exist Username
 	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: string Email
+	 * @param: 
+	 *		Object MongoId or string with format MongoId
+	 *		string username
 	 * @return: boolean
 	 */
-	public function isExistEmail( $curr_Admin_id, $email ) {
-		$admins = $this->dm->getRepository( 'Document\Admin\Admin' )->findAll();
+	public function isExistUsername( $curr_admin_id, $username ) {
+		$admins = $this->dm->getRepository( 'Document\Admin\Admin' )->findByUsername( strtolower(trim($username)) );
 		
 		foreach ( $admins as $admin ) {
-			if ( $admin->getId() == $curr_Admin_id ){
+			if ( $admin->getId() == $curr_admin_id ){
 				continue;
 			}
-			
-			if ( $admin->isExistEmail( $email ) ){
-				return true;
-			}
+
+			return true;
 		}
 		
 		return false;

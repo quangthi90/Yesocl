@@ -28,6 +28,32 @@
 				</div>
             <?php } ?></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_permission; ?></td>
+            <td>
+              <table class="table table-striped">
+                <tr>
+                  <th><?php echo $column_layout; ?></th>
+                  <th><?php echo $column_action; ?></th>
+                </tr>
+                <?php foreach ( $layouts as $layout ) { ?>
+                <tr>
+                  <td><?php echo $layout['name']; ?></td>
+                  <td>
+                    <div class="controls">
+                    <?php foreach ( $layout['actions'] as $action ) { ?>
+                      <label class="checkbox inline">
+                        <input type="checkbox" name="layouts[<?php echo $layout['id']; ?>][]" value="<?php echo $action['id']; ?>" <?php if ($action['checked'] == true){ ?>checked="checked"<?php } ?> />
+                        <?php echo $action['name']; ?>
+                      </label>
+                    <?php } ?>
+                    </div>
+                  </td>
+                </tr>
+                <?php } ?>
+              </table>
+            </td>
+          </tr>
         </table>
       </form>
     </div>

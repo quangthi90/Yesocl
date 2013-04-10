@@ -41,6 +41,14 @@ Class Action {
 		return $this->code;
 	}
 
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
+	}
+
 	public function addLayout( Layout $layout ){
 		$this->layouts[] = $layout;
 	}
@@ -51,13 +59,5 @@ Class Action {
 
 	public function getLayouts(){
 		return $this->layouts;
-	}
-
-	public function setOrder( $order ){
-		$this->order = $order;
-	}
-
-	public function getOrder(){
-		return $this->order;
 	}
 }

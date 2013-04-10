@@ -1,5 +1,6 @@
 <?php
-use Document\Admin\Group;
+use Document\Admin\Group,
+	Document\Admin\Permission;
 
 class ModelAdminGroup extends Doctrine {
 	/**
@@ -19,6 +20,21 @@ class ModelAdminGroup extends Doctrine {
 		
 		$group = new group();
 		$group->setName( $data['name'] );
+
+		if ( isset($data['layouts']) ){
+			foreach ( $data['layouts'] as $layoutId => $actionIds ) {
+				$permission = new Permission();
+				$layout = $this->dm->getRepository( 'Document\Design\Layout' )->find( $layoutId );
+				$permission->setLayout( $layout );
+
+				foreach ( $actionIds as $actionId ) {
+					$action = $this->dm->getRepository( 'Document\Design\Action' )-> find( $actionId );
+					$permission->addAction( $action );
+				}
+				$this->dm->persist( $permission );
+				$group->addPermission( $permission );
+			}
+		}
 
 		$this->dm->persist( $group );
 		$this->dm->flush();
@@ -45,6 +61,30 @@ class ModelAdminGroup extends Doctrine {
 		$group = $this->dm->getRepository('Document\Admin\Group')->find( $id );
 
 		$group->setName( $data['name'] ); 
+
+		if ( isset($data['layouts']) ){
+			$permissions = array();
+			foreach ( $data['layouts'] as $layoutId => $actionIds ) {
+				$permission = new Permission();
+				$layout = $this->dm->getRepository( 'Document\Design\Layout' )->find( $layoutId );
+				if ( !$layout ){
+					continue;
+				}
+				$permission->setLayout( $layout );
+				$actions = array();
+				foreach ( $actionIds as $actionId ) {
+					$action = $this->dm->getRepository( 'Document\Design\Action' )-> find( $actionId );
+					if ( !$action ){
+						continue;
+					}
+					$actions[] = $action;
+				}
+				$permission->setActions( $actions );
+				$this->dm->persist( $permission );
+				$permissions[] = $permission;
+			}
+			$group->setPermissions( $permissions );
+		}
 
 		$this->dm->flush();
 		
@@ -104,6 +144,10 @@ class ModelAdminGroup extends Doctrine {
 		}
 
 		return $this->dm->getRepository( 'Document\Admin\Group' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+	}
+
+	public function getAllGroups() {
+		return $this->dm->getRepository( 'Document\Admin\Group' )->findAll();
 	}
 	
 	/**

@@ -112,7 +112,7 @@ class ControllerAdminAdmin extends Controller {
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
 		$this->data['text_group'] = $this->language->get( 'text_group' );
 		$this->data['text_status'] = $this->language->get( 'text_status' );
-		$this->data['text_email'] = $this->language->get( 'text_email' );	
+		$this->data['text_username'] = $this->language->get( 'text_username' );	
 		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
@@ -152,9 +152,9 @@ class ControllerAdminAdmin extends Controller {
 			
 				$this->data['admins'][] = array(
 					'id' => $admin->getId(),
-					'email' => $admin->getPrimaryEmail( true )->getEmail(),
+					'username' => $admin->getUsername(),
 					'status' => $admin->getStatus() === true ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
-					'group' => $admin->getGroupadmin()->getName(),
+					'group' => $admin->getGroup()->getName(),
 					'action' => $action,
 				);
 			}
@@ -194,25 +194,11 @@ class ControllerAdminAdmin extends Controller {
 			$this->data['success'] = '';
 		}
 		
-		// Error firstname
-		if ( isset($this->error['firstname']) ) {
-			$this->data['error_firstname'] = $this->error['firstname'];
+		// Error username
+		if ( isset($this->error['username']) ) {
+			$this->data['error_username'] = $this->error['username'];
 		} else {
-			$this->data['error_firstname'] = '';
-		}
-		
-		// Error lastname
-		if ( isset($this->error['lastname']) ) {
-			$this->data['error_lastname'] = $this->error['lastname'];
-		} else {
-			$this->data['error_lastname'] = '';
-		}
-		
-		// Error email
-		if ( isset($this->error['email']) ) {
-			$this->data['error_email'] = $this->error['email'];
-		} else {
-			$this->data['error_email'] = '';
+			$this->data['error_username'] = '';
 		}
 		
 		// Error password
@@ -249,65 +235,44 @@ class ControllerAdminAdmin extends Controller {
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_true'] = $this->language->get( 'text_true' );
 		$this->data['text_false'] = $this->language->get( 'text_false' );
-		$this->data['text_email'] = $this->language->get( 'text_email' );
-		$this->data['text_primary'] = $this->language->get( 'text_primary' );
-		$this->data['text_delete'] = $this->language->get( 'text_delete' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
-		$this->data['button_add_email'] = $this->language->get( 'button_add_email' );
 		
 		// Entry
-		$this->data['entry_email'] = $this->language->get( 'entry_email' );
+		$this->data['entry_username'] = $this->language->get( 'entry_username' );
 		$this->data['entry_password'] = $this->language->get( 'entry_password' );
 		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
 		$this->data['entry_group'] = $this->language->get( 'entry_group' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
-		$this->data['entry_have_value'] = $this->language->get( 'entry_have_value' );
-		
-		$this->data['entry_firstname'] = $this->language->get( 'entry_firstname' );
-		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
-		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
-		
-		// Warning
-		$this->data['error_primary_email'] = $this->language->get( 'error_primary_email' );
-		$this->data['error_email_empty'] = $this->language->get( 'error_email_empty' );
-		$this->data['error_exist_email'] = $this->language->get( 'error_exist_email' );
-		
-		// Tab
-		$this->data['tab_general'] = $this->language->get( 'tab_general' );
-		$this->data['tab_information'] = $this->language->get( 'tab_information' );
-		$this->data['tab_email'] = $this->language->get( 'tab_email' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'admin/admin' );
-		$this->data['emailValidate'] = $this->url->link( 'admin/admin/emailValidate' );
 		
 		// admin
 		if ( isset($this->request->get['admin_id']) ){
 			$admin = $this->model_admin_admin->getadmin( array('admin_id' => $this->request->get['admin_id']) );
 			
 			if ( $admin ){
-				$this->data['action'] = $this->url->link( 'admin/admin/update', 'admin_id=' . $admin->getId() );	
-				$this->data['emailValidate'] = $this->url->link( 'admin/admin/emailValidate&admin_id=' . $admin->getId() );
+				$this->data['action'] = $this->url->link( 'admin/admin/update', 'admin_id=' . $admin->getId() );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
 
-		// Entry email
-		if ( isset($this->request->post['admin']['emails']) ){
-			$this->data['emails'] = $this->request->post['admin']['emails'];
+		// Entry username		
+		if ( isset($this->request->post['username']) ){
+			$this->data['username'] = $this->request->post['username'];
 		}elseif ( isset($admin) ){
-			$this->data['emails'] = $admin->getEmails();
+			$this->data['username'] = $admin->getUsername();
 		}else {
-			$this->data['emails'] = array();
+			$this->data['username'] = '';
 		}
 		
 		// Entry password
-		if ( isset($this->request->post['admin']['password']) ){
-			$this->data['password'] = $this->request->post['admin']['password'];
+		if ( isset($this->request->post['password']) ){
+			$this->data['password'] = $this->request->post['password'];
 		}else {
 			$this->data['password'] = '';
 		}
@@ -316,8 +281,8 @@ class ControllerAdminAdmin extends Controller {
 		$this->data['confirm'] = '';
 		
 		// Entry status
-		if ( isset($this->request->post['admin']['status']) ) {
-			$this->data['status'] = $this->request->post['admin']['status'];
+		if ( isset($this->request->post['status']) ) {
+			$this->data['status'] = $this->request->post['status'];
 		}elseif ( isset($admin) ) {
 			$this->data['status'] = $admin->getStatus();
 		}else {
@@ -327,7 +292,7 @@ class ControllerAdminAdmin extends Controller {
 		// Entry Group
 		$this->load->model( 'admin/group' );
 		
-		$groups = $this->model_admin_group->getGroups( );
+		$groups = $this->model_admin_group->getAllGroups();
 		
 		$this->data['groups'] = array();
 		
@@ -338,30 +303,12 @@ class ControllerAdminAdmin extends Controller {
 			);
 		}
 		
-		if ( isset($this->request->post['admin']['group']) ) {
-			$this->data['group_id'] = $this->request->post['admin']['group'];
-		}elseif ( isset($admin) && $admin->getGroupAdmin() != null ) {
-			$this->data['group_id'] = $admin->getGroupAdmin()->getId();
+		if ( isset($this->request->post['group']) ) {
+			$this->data['group_id'] = $this->request->post['group'];
+		}elseif ( isset($admin) && $admin->getGroup() != null ) {
+			$this->data['group_id'] = $admin->getGroup()->getId();
 		}else {
 			$this->data['group_id'] = 0;
-		}
-		
-		// Entry firstname
-		if ( isset($this->request->post['meta']['firstname']) ){
-			$this->data['firstname'] = $this->request->post['meta']['firstname'];
-		}elseif ( isset($admin) && $admin->getMeta() ){
-			$this->data['firstname'] = $admin->getMeta()->getFirstname();
-		}else {
-			$this->data['firstname'] = '';
-		}
-		
-		// Entry lastname
-		if ( isset($this->request->post['meta']['lastname']) ){
-			$this->data['lastname'] = $this->request->post['meta']['lastname'];
-		}elseif ( isset($admin) && $admin->getMeta() ){
-			$this->data['lastname'] = $admin->getMeta()->getLastname();
-		}else {
-			$this->data['lastname'] = '';
 		}
 
 		$this->template = 'admin/admin_form.tpl';
@@ -379,36 +326,25 @@ class ControllerAdminAdmin extends Controller {
 			$admin_id = $this->request->get['admin_id'];
 		}
 		
-		if ((utf8_strlen($this->request->post['admin']['meta']['firstname']) < 1) || (utf8_strlen($this->request->post['admin']['meta']['firstname']) > 32)) {
-      		$this->error['firstname'] = $this->language->get('error_firstname');
-    	}
-
-    	if ((utf8_strlen($this->request->post['admin']['meta']['lastname']) < 1) || (utf8_strlen($this->request->post['admin']['meta']['lastname']) > 32)) {
-      		$this->error['lastname'] = $this->language->get('error_lastname');
-    	}
-		
-    	$this->load->model( 'admin/admin' );
-		if ( isset($this->request->post['admin']['emails']) ){
-			foreach ( $this->request->post['admin']['emails'] as $email ) {
-				if ((utf8_strlen($email['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email'])) {
-		      		$this->error['email'] = $this->language->get('error_email');
-		      		break;
-		    	}
-		    	
-		    	if ( $this->model_admin_admin->isExistEmail($admin_id, $email['email']) ){
-		    		$this->error['email'] = $this->language->get('error_exist_email');
+		if ((utf8_strlen($this->request->post['username']) < 1) || (utf8_strlen($this->request->post['username']) > 32)) {
+      		$this->error['username'] = $this->language->get('error_username');
+    	}else{
+	    	$this->load->model( 'admin/admin' );
+			if ( isset($this->request->post['username']) && !empty($this->request->post['username']) ){
+		    	if ( $this->model_admin_admin->isExistUsername($admin_id, $this->request->post['username']) ){
+		    		$this->error['username'] = $this->language->get('error_exist_username');
 		      		break;
 		    	}
 			}
 		}
 		
     	
-		if ($this->request->post['admin']['password'] || (!isset($this->request->get['admin']['admin_id']))) {
-      		if ((utf8_strlen($this->request->post['admin']['password']) < 4) || (utf8_strlen($this->request->post['admin']['password']) > 20)) {
+		if ( isset($this->request->post['password']) ) {
+      		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
         		$this->error['password'] = $this->language->get('error_password');
       		}
 	
-	  		if ($this->request->post['admin']['password'] != $this->request->post['admin']['confirm']) {
+	  		if ($this->request->post['password'] != $this->request->post['confirm']) {
 	    		$this->error['confirm'] = $this->language->get('error_confirm');
 	  		}
     	}

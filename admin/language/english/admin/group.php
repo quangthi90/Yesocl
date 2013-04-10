@@ -10,6 +10,7 @@ $_['text_action']			  = 'Action';
 
 // Entry
 $_['entry_name']              = 'Group Name:';
+$_['entry_permission']        = 'Permission:';
 
 // error
 $_['error_name']              = 'User Group Name must be between 3 and 128 characters!';
@@ -18,6 +19,7 @@ $_['error_permission']        = 'Warning: You do not have permission to modify G
 // Column
 $_['column_name']             = 'User Group Name';
 $_['column_action']           = 'Action';
+$_['column_layout']           = 'Layout';
 
 // Error
 $_['error_default']           = 'Warning: This User Group cannot be deleted as it is currently assigned as the default store User Group!';
