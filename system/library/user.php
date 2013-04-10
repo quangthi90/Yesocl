@@ -10,9 +10,14 @@ class User {
 		$this->session = $registry->get('session');
 		
     	if (isset($this->session->data['user_id'])) {
-			$user_query = $this->db->dm->getRepository( 'Document\Admin\Admin' )->find( $this->session->data['user_id'] );
+			$user_query = $this->db->dm->getRepository( 'Document\Admin\Admin' )->findOneBy( array(
+				'id' => $this->session->data['user_id'],
+				'status' => 1
+			));
 			
-			if ($user_query->num_rows) {
+			if (!$user_query) {
+				$this->logout();
+			} else {
 				$this->user_id = $user_query->getId();
 				$this->username = $user_query->getUsername();
 				
@@ -22,40 +27,50 @@ class User {
 				
 	  			$permissions = $user_group_query->getPermissions();
 
-				if (is_array($permissions)) {
-	  				foreach ($permissions as $key => $value) {
-	    				$this->permission[$key] = $value;
-	  				}
-				}
-			} else {
-				$this->logout();
+  				foreach ($permissions as $permission) {
+  					$path = $permission->getLayout()->getPath();
+    				$this->permission[$path] = array();
+
+    				foreach ($permission->getActions() as $action) {
+    					$code = $action->getCode();
+    					$this->permission[$path][$code] = true;
+    				}
+  				}
 			}
     	}
   	}
 		
   	public function login($username, $password) {
-    	$user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE username = '" . $this->db->escape($username) . "' AND password = '" . $this->db->escape(md5($password)) . "' AND status = '1'");
+    	$user_query = $this->db->dm->getRepository( 'Document\Admin\Admin' )->findOneBy( array(
+			'username' => $this->db->escape($username),
+			'password' => $this->db->escape(md5($password)),
+			'status' => 1
+		));
 
-    	if ($user_query->num_rows) {
-			$this->session->data['user_id'] = $user_query->row['user_id'];
-			
-			$this->user_id = $user_query->row['user_id'];
-			$this->username = $user_query->row['username'];			
-
-      		$user_group_query = $this->db->query("SELECT permission FROM " . DB_PREFIX . "user_group WHERE user_group_id = '" . (int)$user_query->row['user_group_id'] . "'");
-
-	  		$permissions = unserialize($user_group_query->row['permission']);
-
-			if (is_array($permissions)) {
-				foreach ($permissions as $key => $value) {
-					$this->permission[$key] = $value;
-				}
-			}
-		
-      		return true;
-    	} else {
-      		return false;
+    	if (!$user_query) {
+    		return false;
     	}
+
+    	$this->session->data['user_id'] = $user_query->getId();
+			
+		$this->user_id = $user_query->getId();
+		$this->username = $user_query->getUsername();			
+
+  		$user_group_query = $user_query->getGroup();
+				
+		$permissions = $user_group_query->getPermissions();
+
+		foreach ($permissions as $permission) {
+			$path = $permission->getLayout()->getPath();
+			$this->permission[$path] = array();
+
+			foreach ($permission->getActions() as $action) {
+				$code = $action->getCode();
+				$this->permission[$path][$code] = true;
+			}
+		}
+	
+  		return true;
   	}
 
   	public function logout() {
@@ -67,9 +82,9 @@ class User {
 		session_destroy();
   	}
 
-  	public function hasPermission($key, $value) {
-    	if (isset($this->permission[$key])) {
-	  		return in_array($value, $this->permission[$key]);
+  	public function hasPermission($layout_path, $action_code) {
+    	if (isset($this->permission[$layout_path][$action_code])) {
+	  		return $this->permission[$layout_path][$action_code];
 		} else {
 	  		return false;
 		}
