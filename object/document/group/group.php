@@ -30,6 +30,9 @@ Class Group {
     
     /** @MongoDB\Boolean */
 	private $status;
+
+	/** @MongoDB\EmbedMany(targetDocument="Post") */
+	private $posts = array();
 	
     /**
 	 * Get Post By ID
@@ -112,6 +115,18 @@ Class Group {
 
 	public function getType(){
 		return $this->type;
+	}
+
+	public function addPost( Post $post ){
+		$this->posts[] = $post;
+	}
+
+	public function setPosts( $posts ){
+		$this->posts = $posts;
+	}
+
+	public function getPosts(){
+		return $this->posts;
 	}
 
 	public function setStatus( $status ){

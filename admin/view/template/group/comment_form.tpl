@@ -10,7 +10,7 @@
   <?php } ?>
   <div class="box">    
     <div class="heading">
-      <span><img src="view/image/group_post.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/group_comment.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
       	<a onclick="$('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
       	<a onclick="location = '<?php echo $cancel; ?>';" class="btn btn-danger"><?php echo $button_cancel; ?></a>
@@ -29,17 +29,8 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_title; ?></td>
-            <td><input type="text" class="input-xxlarge" required="required" name="title" value="<?php echo $title; ?>" />
-            <?php if ($error_title) { ?>
-              	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_title; ?>
-				</div>
-            <?php } ?></td>
-          </tr>
-          <tr>
             <td><span class="required">*</span> <?php echo $entry_content; ?></td>
-            <td><textarea class="input-xxlarge" required="required" name="postcontent"><?php echo $content; ?></textarea>
+            <td><textarea class="input-xxlarge" required="required" name="content" rows="4"><?php echo $content; ?></textarea>
             <?php if ($error_content) { ?>
               	<div class="alert alert-error">
 				  <strong>Error!</strong> <?php echo $error_content; ?>
@@ -64,17 +55,6 @@
   </div>
 </div>
 <?php echo $footer; ?>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
-<script type="text/javascript"><!--
-CKEDITOR.replace('postcontent', {
-  filebrowserBrowseUrl: 'index.php?route=common/filemanager',
-  filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',
-  filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager',
-  filebrowserUploadUrl: 'index.php?route=common/filemanager',
-  filebrowserImageUploadUrl: 'index.php?route=common/filemanager',
-  filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
-});
-//--></script> 
 <script type="text/javascript"><!--//
 $('input[name=\'author\']').autocomplete({
   delay: 0,

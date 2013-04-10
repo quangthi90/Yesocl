@@ -10,6 +10,7 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 Class User {
 	/** 
 	 * @MongoDB\Id 
+	 * @SOLR\Field(type="id")
 	 */
 	private $id; 
 
@@ -47,6 +48,10 @@ Class User {
 		return $this->id;
 	}
 
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+
 	public function setUsername( $username ){
 		$this->username = $username;
 	}
@@ -63,7 +68,7 @@ Class User {
 		return $this->password;
 	}
 
-	public function addEmail( Email $email ){
+	public function addEmail( Meta\Email $email ){
 		$this->emails[] = $email;
 	}
 
@@ -99,6 +104,10 @@ Class User {
 
 	public function getMeta(){
 		return $this->meta;
+	}
+
+	public function getFullname(){
+		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
 	}
 
 	public function setGroupUser( $groupUser ){
@@ -145,13 +154,13 @@ Class User {
 	/**
 	* @SOLR\Field(type="text")
 	*/
-	private $solrContent;
+	private $solrUserContent;
 
-	public function setSolrContent( $solrContent ){
+	public function setSolrUserContent( $solrContent ){
 		$this->solrContent = $solrContent;
 	}
 
-	public function getSolrContent(){
+	public function getSolrUserContent(){
 		$solrContent = "";
 
 		$solrContent .= $this->getUsername() . "  ";

@@ -21,16 +21,12 @@
         <table class="form">
           <tr>
             <td><span class="required">*</span> <?php echo $entry_author; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="author" value="<?php echo $author; ?>" />
+            <td><input class="input-xxlarge" required="required" type="text" name="author" value="<?php echo $author; ?>" /><input name="user_id" type="hidden" value="<?php echo $user_id; ?>" />
             <?php if ($error_author) { ?>
               	<div class="alert alert-error">
 				  <strong>Error!</strong> <?php echo $error_author; ?>
 				</div>
             <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_fullname; ?></td>
-            <td><span class="fullname"><?php echo $fullname; ?></span></td>
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_name; ?></td>
@@ -107,25 +103,26 @@ CKEDITOR.replace('sumary', {
 	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
 });
 //--></script> 
-<script type="text/javascript">
+<script type="text/javascript"><!--//
 $('input[name=\'author\']').autocomplete({
 	delay: 0,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=user/user/autocomplete&filter_name=' +  encodeURIComponent(request.term),
+			url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term),
 			dataType: 'json',
 			success: function(json) {		
 				response($.map(json, function(item) {
 					return {
-						label: item.name,
-						value: item.product_id
+						label: item.primary,
+						value: item.id
 					}
 				}));
 			}
 		});
 	}, 
 	select: function(event, ui) {
-		$('input[name=\'filter_name\']').val(ui.item.label);
+		$('input[name=\'author\']').val(ui.item.label);
+    $('input[name=\'user_id\']').val(ui.item.value);
 						
 		return false;
 	},
@@ -133,5 +130,5 @@ $('input[name=\'author\']').autocomplete({
       	return false;
    	}
 });
-</script>
+//--></script>
 <?php echo $footer; ?>

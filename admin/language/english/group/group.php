@@ -36,5 +36,6 @@ $_['error_default']           = 'Warning: This Group cannot be deleted as it is 
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';
 $_['error_sumary']            = 'Group sumary must be more than 50 characters!';
 $_['error_description']       = 'Group description must be more than 50 characters!';
-$_['error_description']       = 'Insert not success!';
+$_['error_author']         	  = 'Warning: Author is required!';
+$_['error_description']       = 'Group Description must be more than 50 characters! ';
 ?>

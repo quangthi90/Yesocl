@@ -26,7 +26,6 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $text_title; ?></td>
               <td><?php echo $text_author; ?></td>
               <td><?php echo $text_created; ?></td>
               <td><?php echo $text_status; ?></td>
@@ -34,21 +33,20 @@
             </tr>
           </thead>
           <tbody>
-            <?php if ($posts) { ?>
-            <?php foreach ($posts as $post) { ?>
+            <?php if ($comments) { ?>
+            <?php foreach ($comments as $comment) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $post['id']; ?>"/></td>
-              <td><?php echo $post['title']; ?></td>
-              <td><?php echo $post['author']; ?></td>
-              <td><?php echo $post['created']; ?></td>
-              <td><?php echo $post['status']; ?></td>
-              <td class="right"><?php foreach ($post['action'] as $action) { ?>
+              <td><input name="id[]" type="checkbox" value="<?php echo $comment['id']; ?>"/></td>
+              <td><?php echo $comment['author']; ?></td>
+              <td><?php echo $comment['created']; ?></td>
+              <td><?php echo $comment['status']; ?></td>
+              <td class="right"><?php foreach ($comment['action'] as $action) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php }?>
-            <?php if (!$posts) { ?>
+            <?php if (!$comments) { ?>
             <tr class="center">
               <td colspan="10"><?php echo $text_no_results; ?></td>
             </tr>
