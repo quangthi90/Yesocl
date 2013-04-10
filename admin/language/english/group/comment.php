@@ -33,6 +33,7 @@ $_['error_default']           = 'Warning: This Post cannot be deleted as it is c
 $_['error_title']             = 'Warning: Title must be between 3 and 128 characters!';
 $_['error_content']           = 'Warning: Content must be more than 50 characters!';
 $_['error_post']        	  = 'Warning: Choice Post to view list Comments';
+$_['error_author']         	  = 'Warning: Author is required!';
 $_['error_insert']         	  = 'Warning: Insert not success!';
 $_['error_update']            = 'Warning: Update not success!';
 ?>
