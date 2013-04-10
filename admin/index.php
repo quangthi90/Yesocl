@@ -17,8 +17,10 @@ require_once(DIR_SYSTEM . 'startup.php');
 // Application Classes
 // require_once(DIR_SYSTEM . 'library/currency.php');
 require_once(DIR_SYSTEM . 'library/user.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
+// require_once(DIR_SYSTEM . 'library/weight.php');
+// require_once(DIR_SYSTEM . 'library/length.php');
+
+require_once(DIR_DATABASE . 'doctrine.php');
 
 // Registry
 $registry = new Registry();
@@ -143,10 +145,10 @@ $registry->set('user', new User($registry));
 $controller = new Front($registry);
 
 // Login
-//$controller->addPreAction(new Action('common/home/login'));
+$controller->addPreAction(new Action('common/home/login'));
 
 // Permission
-//$controller->addPreAction(new Action('common/home/permission'));
+$controller->addPreAction(new Action('common/home/permission'));
 
 // Router
 if (isset($request->get['route'])) {

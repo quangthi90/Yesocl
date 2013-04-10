@@ -10,9 +10,9 @@ class User {
 		$this->session = $registry->get('session');
 		
     	if (isset($this->session->data['user_id'])) {
-			$user_query = $this->db->dm->getRepository( 'Document\Admin\Admin' )->findOneBy( array(
+			$user_query = $this->db->getDm()->getRepository( 'Document\Admin\Admin' )->findOneBy( array(
 				'id' => $this->session->data['user_id'],
-				'status' => 1
+				'status' => true
 			));
 			
 			if (!$user_query) {
@@ -41,19 +41,26 @@ class User {
   	}
 		
   	public function login($username, $password) {
-    	$user_query = $this->db->dm->getRepository( 'Document\Admin\Admin' )->findOneBy( array(
-			'username' => $this->db->escape($username),
-			'password' => $this->db->escape(md5($password)),
-			'status' => 1
+  		$user_query = $this->db->getDm()->getRepository( 'Document\Admin\Admin' )->findOneBy( array(
+			'username' => $username,
+			'status' => true
 		));
 
     	if (!$user_query) {
     		return false;
     	}
 
+    	$salt = $user_query->getSalt();
+    	$user_password = sha1($salt . sha1($salt . sha1($password)));
+    	
+    	if ( $user_password != $user_query->getPassword() ){
+    		return false;
+    	}
+
     	$this->session->data['user_id'] = $user_query->getId();
 			
 		$this->user_id = $user_query->getId();
+		// print($this->user_id); exit;
 		$this->username = $user_query->getUsername();			
 
   		$user_group_query = $user_query->getGroup();

@@ -72,35 +72,41 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_confirm'] = $this->language->get('text_confirm');
 		
 		//----------------------- Link -----------------------
-		// Group
-		$this->data['group_type'] = $this->url->link('group/type');
-		$this->data['group'] = $this->url->link('group/group');
-		
-		// User
-		$this->data['user_group'] = $this->url->link('user/group');
-		$this->data['user'] = $this->url->link('user/user');
-		
-		// Attribute
-		$this->data['attribute_type'] = $this->url->link('attribute/type');
-		$this->data['attribute_group'] = $this->url->link('attribute/group');
-		$this->data['attribute'] = $this->url->link('attribute/attribute');
-		
-		// Localisation
-		$this->data['country'] = $this->url->link('localisation/country');
-		$this->data['city'] = $this->url->link('localisation/city');
-		$this->data['district'] = $this->url->link('localisation/district');
-		$this->data['ward'] = $this->url->link('localisation/ward');
-		$this->data['street'] = $this->url->link('localisation/street');
-		
-		// user profile
-		$this->data['type'] = $this->url->link('data/type');
-		$this->data['value'] = $this->url->link('data/value');
+		if (!$this->user->isLogged() || !isset($this->request->get['token']) || !isset($this->session->data['token']) || ($this->request->get['token'] != $this->session->data['token'])) {
+			$this->data['logged'] = '';
+			
+			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
+		} else {
+			// Group
+			$this->data['group_type'] = $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['group'] = $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL');
+			
+			// User
+			$this->data['user_group'] = $this->url->link('user/group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['user'] = $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL');
+			
+			// Attribute
+			$this->data['attribute_type'] = $this->url->link('attribute/type', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['attribute_group'] = $this->url->link('attribute/group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['attribute'] = $this->url->link('attribute/attribute', 'token=' . $this->session->data['token'], 'SSL');
+			
+			// Localisation
+			$this->data['country'] = $this->url->link('localisation/country', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['city'] = $this->url->link('localisation/city', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['district'] = $this->url->link('localisation/district', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['ward'] = $this->url->link('localisation/ward', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['street'] = $this->url->link('localisation/street', 'token=' . $this->session->data['token'], 'SSL');
+			
+			// user profile
+			$this->data['type'] = $this->url->link('data/type', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['value'] = $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL');
 
-		// system
-		$this->data['admin_group'] = $this->url->link('admin/group');
-		$this->data['admin'] = $this->url->link('admin/admin');
-		$this->data['layout'] = $this->url->link('design/layout');
-		$this->data['action'] = $this->url->link('design/action');
+			// system
+			$this->data['admin_group'] = $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['admin'] = $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['action'] = $this->url->link('design/action', 'token=' . $this->session->data['token'], 'SSL');
+		}
 		
 		
 		$this->template = 'common/header.tpl';
