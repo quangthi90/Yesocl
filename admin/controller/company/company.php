@@ -323,7 +323,7 @@ class ControllerCompanyCompany extends Controller {
 
 		// column
 		$this->data['column_company'] = $this->language->get( 'column_company' );
-		$this->data['column_administrator'] = $this->language->get( 'column_administrator' );
+		$this->data['column_owner'] = $this->language->get( 'column_owner' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -356,7 +356,7 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['relativies'][] = array(
 				'id' => $relative->getId(),
 				'name' => $relative->getName(),
-				'administrator' => $relative->getAdministrator()->getPrimaryEmail()->getEmail(),
+				'owner' => $relative->getOwner()->getPrimaryEmail()->getEmail(),
 				);
 		}
 
@@ -439,7 +439,7 @@ class ControllerCompanyCompany extends Controller {
 
 		// column
 		$this->data['column_company'] = $this->language->get( 'column_company' );
-		$this->data['column_administrator'] = $this->language->get( 'column_administrator' );
+		$this->data['column_owner'] = $this->language->get( 'column_owner' );
 		$this->data['column_created'] = $this->language->get( 'column_created' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
@@ -505,7 +505,7 @@ class ControllerCompanyCompany extends Controller {
 				$this->data['companies'][] = array(
 					'id' => $company->getId(),
 					'name' => $company->getName(),
-					'administrator' => $company->getAdministrator()->getPrimaryEmail()->getEmail(),
+					'owner' => $company->getOwner()->getPrimaryEmail()->getEmail(),
 					'created' => $company->getCreated()->format( 'd/m/Y' ),
 					'status' => $company->getStatus(),
 					'action' => $action,
@@ -554,10 +554,10 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_name'] = '';
 		}
 
-		if ( isset( $this->error['error_administrator'] ) ) {
-			$this->data['error_administrator'] = $this->error['error_administrator'];
+		if ( isset( $this->error['error_owner'] ) ) {
+			$this->data['error_owner'] = $this->error['error_owner'];
 		}else {
-			$this->data['error_administrator'] = '';
+			$this->data['error_owner'] = '';
 		}
 
 		if ( isset( $this->error['error_description'] ) ) {
@@ -598,7 +598,7 @@ class ControllerCompanyCompany extends Controller {
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
-		$this->data['entry_administrator'] = $this->language->get( 'entry_administrator' );
+		$this->data['entry_owner'] = $this->language->get( 'entry_owner' );
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 
 		// button
@@ -626,19 +626,19 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['name'] = '';
 		}
 
-		// administrator
-		if ( isset( $this->request->post['administrator'] ) ) {
-			$this->data['administrator'] = $this->request->post['administrator'];
+		// owner
+		if ( isset( $this->request->post['owner'] ) ) {
+			$this->data['owner'] = $this->request->post['owner'];
 		}elseif ( isset( $company ) ) {
-			$this->data['administrator'] = $company->getAdministrator()->getPrimaryEmail()->getEmail();
+			$this->data['owner'] = $company->getOwner()->getPrimaryEmail()->getEmail();
 		}else {
-			$this->data['administrator'] = '';
+			$this->data['owner'] = '';
 		}
 
 		if ( isset( $this->request->post['user_id'] ) ) {
 			$this->data['user_id'] = $this->request->post['user_id'];
 		}elseif ( isset( $company ) ) {
-			$this->data['user_id'] = $company->getAdministrator()->getId();
+			$this->data['user_id'] = $company->getOwner()->getId();
 		}else {
 			$this->data['user_id'] = '';
 		}
@@ -695,7 +695,7 @@ class ControllerCompanyCompany extends Controller {
 		}
 
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {
-			$this->error['error_administrator'] = $this->language->get( 'error_administrator' );
+			$this->error['error_owner'] = $this->language->get( 'error_owner' );
 		}
 
 		if ( $this->error ) {

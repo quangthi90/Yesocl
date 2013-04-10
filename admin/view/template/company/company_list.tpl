@@ -26,7 +26,7 @@
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $column_company; ?></td>
-              <td><?php echo $column_administrator; ?></td>
+              <td><?php echo $column_owner; ?></td>
               <td><?php echo $column_created; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_action; ?></td>
@@ -38,7 +38,7 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $company['id']; ?>"/></td>
               <td><?php echo $company['name']; ?></td>
-              <td><?php echo $company['administrator']; ?></td>
+              <td><?php echo $company['owner']; ?></td>
               <td><?php echo $company['created']; ?></td>
               <td><?php echo ( $company['status'] ) ? $text_enable : $text_disable; ?></td>
               <td class="right"><?php foreach ( $company['action'] as $action ) { ?>

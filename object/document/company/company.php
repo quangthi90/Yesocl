@@ -27,7 +27,7 @@ Class Company {
 	private $description;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="companiesCreated") */
-	private $administrator;
+	private $owner;
 
 	/** @MongoDB\EmbedMany(targetDocument="Career") */
 	private $careers = array();
@@ -95,12 +95,12 @@ Class Company {
 		return $this->description;
 	}
 
-	public function setAdministrator( $administrator ){
-		$this->administrator = $administrator;
+	public function setOwner( $owner ){
+		$this->owner = $owner;
 	}
 
-	public function getAdministrator(){
-		return $this->administrator;
+	public function getOwner(){
+		return $this->owner;
 	}
 
 	public function addCareer( $career ){

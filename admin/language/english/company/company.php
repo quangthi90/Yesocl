@@ -21,7 +21,7 @@ $_['button_back'] = 'Back';
 
 // column
 $_['column_company'] = 'Company';
-$_['column_administrator'] = 'Administrator';
+$_['column_owner'] = 'Owner';
 $_['column_created'] = 'Created';
 $_['column_status'] = 'Status';
 $_['column_action'] = 'Action';
@@ -31,14 +31,14 @@ $_['column_email'] = 'Email';
 // entry
 $_['entry_name'] = 'Company Name:';
 $_['entry_status'] = 'Status:';
-$_['entry_administrator'] = 'Administrator:';
+$_['entry_owner'] = 'Owner:';
 $_['entry_description'] = 'Description:';
 
 // error
 $_['error_name'] = 'Warning: Company Name must be more than 1 characters and less than 128 characters!';
 $_['error_name_exist'] = 'Warning: Company Name is exist!';
 $_['error_description'] = 'Warning: Description must be more than 50 characters and less than 256 characters!';
-$_['error_administrator'] = 'Warning: Administrator is required!';
+$_['error_owner'] = 'Warning: Owner is required!';
 $_['error_warning'] = 'Warning: Error!';
 $_['success'] = 'Success: You have modified Company!';
 $_['error_follower'] = 'Warning: User is required!';

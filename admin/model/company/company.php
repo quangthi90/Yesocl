@@ -10,7 +10,7 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
-		// administrator is required
+		// owner is required
 		if ( isset( $data['user_id'] ) ) {
 			$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 
@@ -33,7 +33,7 @@ class ModelCompanyCompany extends Doctrine {
 
 		$company = new Company();
 		$company->setName( $data['name'] );
-		$company->setAdministrator( $user );
+		$company->setOwner( $user );
 		$company->setDescription( $data['description'] );
 		$company->setStatus( $data['status'] );
 
@@ -51,7 +51,7 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
-		// administrator is required
+		// owner is required
 		if ( isset( $data['user_id'] ) ) {
 			$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 
@@ -83,7 +83,7 @@ class ModelCompanyCompany extends Doctrine {
 		}
 
 		$company->setName( $data['name'] );
-		$company->setAdministrator( $user );
+		$company->setOwner( $user );
 		$company->setDescription( $data['description'] );
 		$company->setStatus( $data['status'] );
 		

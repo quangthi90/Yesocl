@@ -32,7 +32,7 @@
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $column_company; ?></td>
-              <td><?php echo $column_administrator; ?></td>
+              <td><?php echo $column_owner; ?></td>
               <td></td>
             </tr>
           </thead>
@@ -42,7 +42,7 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $relative['id']; ?>"/></td>
               <td><?php echo $relative['name']; ?></td>
-              <td><?php echo $relative['administrator']; ?></td>
+              <td><?php echo $relative['owner']; ?></td>
               <td></td>
             </tr>
             <?php } ?>

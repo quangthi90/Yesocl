@@ -32,14 +32,14 @@ Class User {
 	 */
     private $meta;
 
+    /** @MongoDB\ReferenceMany(targetDocument="Document\Company\Company", inversedBy="owner") */
+    private $companiesCreated = array();
+
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
 
     /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
 	private $groups = array();
-
-	/** @MongoDB\ReferenceMany(targetDocument="Document\Company\Company", mappedBy="administrator") */
-	private $companiesCreated = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -121,12 +121,12 @@ Class User {
 		return $this->groupUser;
 	}
 
-	public function addCompanyCreated( \Document\Company\Company $company ){
-		$this->companiesCreated[] = $company;
+	public function addCompanyCreated( \Document\Company\Company $companyCreated ){
+		$this->companiesCreated[] = $companyCreated;
 	}
 
-	public function setCompaniesCreated( $companies ){
-		$this->companiesCreated = $companies;
+	public function setCompaniesCreated( $companiesCreated ){
+		$this->companiesCreated = $companiesCreated;
 	}
 
 	public function getCompaniesCreated(){

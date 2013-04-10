@@ -29,11 +29,11 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_administrator; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="administrator" value="<?php echo $administrator; ?>" /><input name="user_id" type="hidden" value="<?php echo $user_id; ?>" />
-            <?php if ($error_administrator) { ?>
+            <td><span class="required">*</span> <?php echo $entry_owner; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="owner" value="<?php echo $owner; ?>" /><input name="user_id" type="hidden" value="<?php echo $user_id; ?>" />
+            <?php if ($error_owner) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_administrator; ?>
+          <strong>Error!</strong> <?php echo $error_owner; ?>
         </div>
             <?php } ?></td>
           </tr>
@@ -67,7 +67,7 @@ CKEDITOR.replace('description', {
 });
 //--></script>
 <script type="text/javascript"><!--//
-$('input[name=\'administrator\']').autocomplete({
+$('input[name=\'owner\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
@@ -84,7 +84,7 @@ $('input[name=\'administrator\']').autocomplete({
     });
   }, 
   select: function(event, ui) {
-    $('input[name=\'administrator\']').val(ui.item.label);
+    $('input[name=\'owner\']').val(ui.item.label);
     $('input[name=\'user_id\']').val(ui.item.value);
             
     return false;
