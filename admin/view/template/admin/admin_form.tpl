@@ -61,10 +61,11 @@
               <select name="status">
               <?php if ($status) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
               <?php } else { ?>
                 <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
               <?php } ?>
-                <option value="0"><?php echo $text_disabled; ?></option>
               </select>
             </td>
           </tr>

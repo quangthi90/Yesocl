@@ -12,11 +12,13 @@ Class Meta {
 	private $id; 
 
 	/** 
+	 * BmSolr
 	 * @MongoDB\String 
 	 */
 	private $firstname;
 	
 	/** 
+	 * BmSolr
 	 * @MongoDB\String 
 	 */
 	private $lastname;
@@ -26,7 +28,7 @@ Class Meta {
 	 */
 	private $headingLine;
 
-	/** @MongoDB\EmbedOne(targetDocument="Location") */
+	/** @MongoDB\EmbedOne(targetDocument="Document\User\Meta\Location") */
     private $location;
 
 	/** 
@@ -39,20 +41,27 @@ Class Meta {
 	 */
 	private $industry;
 
-	/** @MongoDB\EmbedMany(targetDocument="Former") */
-	private $formers = array();
-
-	/** @MongoDB\String */
-	private $im;
-
-	/** @MongoDB\String */
-	private $phone;
-
 	/** @MongoDB\String */
 	private $address;
 
-	/** @MongoDB\EmbedMany(targetDocument="Website") */
+	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Im") 
+	 */
+	private $ims = array();
+
+	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Phone") 
+	 */
+	private $phones = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Website") */
 	private $websites = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Former") */
+	private $formers = array();
+
+    /** @MongoDB\EmbedOne(targetDocument="Document\User\Meta\Background") */
+    private $background;
 
 	public function getId(){
 		return $this->id;
@@ -106,40 +115,36 @@ Class Meta {
 		return $this->industry;
 	}
 
-	public function addFormer( Former $former ){
-		$this->formers[] = $former;
-	}
-
-	public function setFormers( $formers ){
-		$this->formers = $formers;
-	}
-
-	public function getFormers(){
-		return $this->formers;
-	}
-
-	public function setIm( $im ){
-		$this->im = $im;
-	}
-
-	public function getIm(){
-		return $this->im;
-	}
-
-	public function setPhone( $phone ){
-		$this->phone = $phone;
-	}
-
-	public function getPhone(){
-		return $this->phone;
-	}
-
-	public function setAddresss( $address ){
+	public function setAddress( $address ){
 		$this->address = $address;
 	}
 
-	public function getAddresss(){
+	public function getAddress(){
 		return $this->address;
+	}
+
+	public function addIm( Im $im ){
+		$this->ims[] = $im;
+	}
+
+	public function setIms( $ims ){
+		$this->ims = $ims;
+	}
+
+	public function getIms(){
+		return $this->ims;
+	}
+
+	public function addPhone( Phone $phone ){
+		$this->phones[] = $phone;
+	}
+
+	public function setPhones( $phones ){
+		$this->phones = $phones;
+	}
+
+	public function getPhones(){
+		return $this->phones;
 	}
 
 	public function addWebsite( Website $website ){
@@ -152,5 +157,25 @@ Class Meta {
 
 	public function getWebsites(){
 		return $this->websites;
+	}
+
+	public function addFormer( Former $former ){
+		$this->formers[] = $former;
+	}
+
+	public function setFormers( $formers ){
+		$this->formers = $formers;
+	}
+
+	public function getFormers(){
+		return $this->formers;
+	}
+
+	public function setBackground( $background ){
+		$this->background = $background;
+	}
+
+	public function getBackground(){
+		return $this->background;
 	}
 }

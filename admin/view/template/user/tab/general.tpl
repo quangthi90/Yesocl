@@ -1,5 +1,9 @@
 		<table class="form">
           <tr>
+            <td><?php echo $entry_username; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="user[username]" value="<?php echo $username; ?>" /></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_group; ?></td>
             <td><select name="user[group]">
                 <?php foreach ( $groups as $group ){ ?>
@@ -7,6 +11,7 @@
                 <?php } ?>
               </select></td>
           </tr>
+          <?php if (isset( $password )) { ?>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_password; ?></td>
             <td><input class="input-xxlarge" required="required" type="password" name="user[password]" value="<?php echo $password; ?>" />
@@ -25,6 +30,7 @@
 				</div>
             <?php } ?></td>
           </tr>
+          <?php } ?>
           <tr>
             <td><?php echo $entry_status; ?></td>
             <td><select name="user[status]">

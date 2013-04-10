@@ -71,11 +71,6 @@ class ModelAdminAdmin extends Doctrine {
 			return false;
 		}
 		
-		// Password is required
-		if ( !isset($data['password']) || empty($data['password']) ){
-			return false;
-		}
-		
 		// Group is required
 		if ( !isset($data['group']) ){
 			return false;
@@ -92,9 +87,11 @@ class ModelAdminAdmin extends Doctrine {
 		}
 		
 		// Update Admin
-		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		if ( isset($data['password']) || !empty($data['password']) ){
+			$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+			$admin->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+		}
 		$admin->setUsername( $data['username'] );
-		$admin->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 		$admin->setGroup( $group );
 		
 		// Set Status

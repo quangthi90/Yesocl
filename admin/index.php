@@ -15,7 +15,7 @@ if (!defined('DIR_APPLICATION')) {
 require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
-require_once(DIR_SYSTEM . 'library/currency.php');
+// require_once(DIR_SYSTEM . 'library/currency.php');
 require_once(DIR_SYSTEM . 'library/user.php');
 require_once(DIR_SYSTEM . 'library/weight.php');
 require_once(DIR_SYSTEM . 'library/length.php');
@@ -32,8 +32,10 @@ $config = new Config();
 $registry->set('config', $config);
 
 // Database
+$dm = new Doctrine($registry);
+$registry->set('db', $dm);
+
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-$registry->set('db', $db);
 		
 // Settings
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
@@ -126,13 +128,13 @@ $registry->set('language', $language);
 $registry->set('document', new Document()); 		
 		
 // Currency
-$registry->set('currency', new Currency($registry));		
+// $registry->set('currency', new Currency($registry));		
 		
 // Weight
-$registry->set('weight', new Weight($registry));
+// $registry->set('weight', new Weight($registry));
 
 // Length
-$registry->set('length', new Length($registry));
+// $registry->set('length', new Length($registry));
 
 // User
 $registry->set('user', new User($registry));

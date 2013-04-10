@@ -1,13 +1,16 @@
 <?php
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="user")
+ * @SOLR\Document(collection="user")
  */
 Class User {
 	/** 
 	 * @MongoDB\Id 
+	 * @SOLR\Field(type="id")
 	 */
 	private $id; 
 
@@ -19,14 +22,15 @@ Class User {
 	/** @MongoDB\String */
 	private $password;
 
-	/** @MongoDB\EmbedMany(targetDocument="Email") */
+	/** 
+	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Email") 
+	 */
 	private $emails = array();
 
-	/** @MongoDB\EmbedOne(targetDocument="Meta") */
+	/** 
+	 * @MongoDB\EmbedOne(targetDocument="Meta") 
+	 */
     private $meta;
-
-    /** @MongoDB\EmbedOne(targetDocument="Background") */
-    private $background;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
@@ -39,10 +43,13 @@ Class User {
 	
 	/** @MongoDB\Date */
 	private $created;
-	}
 
 	public function getId() {
 		return $this->id;
+	}
+
+	public function setId( $id ) {
+		$this->id = $id;
 	}
 
 	public function setUsername( $username ){
@@ -53,15 +60,15 @@ Class User {
 		return $this->username;
 	}
 
-	public function setMeta( $meta ){
-		$this->meta = $meta;
+	public function setPassword( $password ){
+		$this->password = $password;
 	}
 
-	public function getMeta(){
-		return $this->meta;
+	public function getPassword(){
+		return $this->password;
 	}
 
-	public function addEmail( Email $email ){
+	public function addEmail( Meta\Email $email ){
 		$this->emails[] = $email;
 	}
 
@@ -72,6 +79,24 @@ Class User {
 	public function getEmails(){
 		return $this->emails;
 	}
+	
+	public function getPrimaryEmail() {
+		foreach ($this->emails as $email) {
+			if ($email->getPrimary()) {
+				return $email;
+			}
+		}
+	}
+
+	public function isExistEmail( $email ) {
+		foreach ( $this->emails as $email_data ) {
+			if ( strtolower( trim( $email ) ) == $email_data->getEmail() ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	public function setMeta( $meta ){
 		$this->meta = $meta;
@@ -81,12 +106,8 @@ Class User {
 		return $this->meta;
 	}
 
-	public function setBackground( $background ){
-		$this->background = $background;
-	}
-
-	public function getBackground(){
-		return $this->background;
+	public function getFullname(){
+		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
 	}
 
 	public function setGroupUser( $groupUser ){
@@ -128,5 +149,33 @@ Class User {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrUserContent;
+
+	public function setSolrUserContent( $solrContent ){
+		$this->solrContent = $solrContent;
+	}
+
+	public function getSolrUserContent(){
+		$solrContent = "";
+
+		$solrContent .= $this->getUsername() . "  ";
+
+		if ( count($this->getEmails()) > 0 ) {
+			foreach ($this->getEmails() as $data) {
+		$solrContent .= $data->getEmail() . "  ";
+			}
+		}
+
+		$solrContent .= $this->meta->getFirstname() . "  ";
+		$solrContent .= $this->meta->getLastname() . "  ";
+
+
+		$this->solrContent = $solrContent;
+		return $solrContent;
 	}
 }
