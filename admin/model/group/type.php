@@ -33,6 +33,10 @@ class ModelGroupType extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$type = $this->dm->getRepository( 'Document\Group\Type' )->find( $id );
 
+				foreach ($type->getGroups() as $group) {
+					$this->dm->remove( $group );
+				}
+
 				$this->dm->remove($type);
 			}
 		}

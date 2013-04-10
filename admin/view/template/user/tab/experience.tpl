@@ -5,7 +5,12 @@
 				<div class="row-fluid">
 					<div class="span4">
 						<div class="span3"><strong><?php echo $entry_company; ?></strong></div>
-						<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /></div>
+						<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" />
+
+                          <?php if ( isset( $error_experience[$key]['company'] ) ) { ?>
+                          <div class="warning"><?php echo $error_experience[$key]['company']; ?></div>
+                          <?php } ?>
+            </div>
 					</div>
 					<div class="span4">
 						<div class="span3"><?php echo $entry_current; ?></div>
@@ -80,7 +85,7 @@
 			html += 	'<div class="row-fluid">';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><strong><?php echo $entry_company; ?></strong></div>';
-			html += 			'<div class="span9"><input class="experience input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /></div>';
+			html += 			'<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
@@ -174,5 +179,14 @@
 				value: true
 			});
 		});
+
+    $('#tab-experience').on('blur', 'input.company', function(){
+      var curr = $(this);
+
+      curr.parent().find('.warning').remove();
+      if ( !curr.val() ) {
+        curr.after('<div class="warning"><?php echo $error_company; ?></div>');
+      }
+    });
 	});
 </script>

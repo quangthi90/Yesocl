@@ -137,7 +137,7 @@ class ControllerGroupGroup extends Controller {
 		$this->data['delete'] = $this->url->link( 'group/group/delete' );
 
 		// Group
-		$groups = $this->model_group_group->getGroups( );
+		$groups = $this->model_group_group->getGroups();
 		
 		$group_total = $this->model_group_group->getTotalGroups();
 		
@@ -277,19 +277,23 @@ class ControllerGroupGroup extends Controller {
 		}
 		
 		// Entry author
+		if ( isset( $group ) ) {
+			$user = $group->getAuthor();
+		}
 		if ( isset($this->request->post['author']) ){
 			$this->data['author'] = $this->request->post['author'];
-		}elseif ( isset($group) ){
-			$this->data['author'] = $group->getAuthor()->getPrimaryEmail()->getEmail();
+		}elseif ( isset($user) ){
+			$this->data['author'] = $user->getUsername() . '(' . $user->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['author'] = '';
 		}
-		
-		// Entry fullname
-		if ( isset($group) ){
-			$this->data['fullname'] = $group->getAuthor()->getFullname();
+
+		if ( isset($this->request->post['user_id']) ){
+			$this->data['user_id'] = $this->request->post['user_id'];
+		}elseif ( isset($group) ){
+			$this->data['user_id'] = $group->getAuthor()->getId();
 		}else {
-			$this->data['fullname'] = '';
+			$this->data['user_id'] = '';
 		}
 
 		// Entry name
@@ -334,7 +338,7 @@ class ControllerGroupGroup extends Controller {
 		}elseif ( isset($group) ){
 			$this->data['status'] = $group->getstatus();
 		}else {
-			$this->data['status'] = '';
+			$this->data['status'] = 1;
 		}
 		
 		// Entry type
@@ -369,6 +373,10 @@ class ControllerGroupGroup extends Controller {
 	}
 
 	private function isValidateForm(){
+		if ( !isset( $this->request->post['user_id'] ) || empty( $this->request->post['user_id'] ) ){
+			$this->error['error_author'] = $this->language->get( 'error_author' );
+		}
+
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}

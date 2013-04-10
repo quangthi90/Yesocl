@@ -3,37 +3,47 @@ use Document\Group\Post;
 
 class ModelGroupPost extends Doctrine {
 	public function addPost( $data = array(), $group_id ) {
-		if ( !isset($data['post']) ){
-			return false;
-		}
-		$post_input = $data['post'];
-		
-		
 		// title is require
-		if ( !isset($post_input['title']) || empty($post_input['title']) ){
+		if ( !isset($data['title']) || empty($data['title']) ){
 			return false;
 		}
 		
 		// content is require
-		if ( !isset($post_input['content']) || empty($post_input['content']) ){
+		if ( !isset($data['postcontent']) || empty($data['postcontent']) ){
 			return false;
 		}
 		
 		// author is require
-		if ( !isset($post_input['author']) || empty($post_input['author']) ){
+		if ( !isset($data['user_id']) || empty($data['user_id']) ){
+			return false;
+		}
+		$user = $this->dm->getRepository('Document\User\User')->find( $data['user_id'] );
+		if ( empty( $user ) ) {
+			return false;
+		}
+
+		// status
+		if ( isset( $data['status'] ) ) {
+			$data['status'] = (int)$data['status'];
+		}else {
+			$data['status'] = false;
+		}
+
+		// Group is required
+		if ( !isset( $group_id ) ) {
+			return false;
+		}
+		$group = $this->dm->getRepository('Document\Group\Group')->find( $group_id );
+		if ( empty( $group ) ) {
 			return false;
 		}
 		
-		$user = $this->dm->getRepository('Document\Group\Group')->findOneBy( array('email' => ))
-		
 		$post = new Post();
-		$post->setTitle( $post_input['title'] );
-		$post->setContent( $post_input['content'] );
-		$post->setUser($user)
+		$post->setTitle( $data['title'] );
+		$post->setContent( $data['postcontent'] );
+		$post->setUser( $user );
+		$post->setStatus( $data['status'] );
 		
-		$group_repository = $this->dm->getRepository('Document\Group\Group');
-		
-		$group = $group_repository->find( $group_id );
 		$group->addPost( $post );
 		
 		$this->dm->flush();
@@ -41,24 +51,41 @@ class ModelGroupPost extends Doctrine {
 		return true;
 	}
 
-	public function editPost( $id, $data = array() ) {
-		if ( !isset($data['post']) ){
-			return false;
-		}
-		$post_input = $data['post'];
-		
-		// Name is require
-		if ( !isset($post_input['name']) || empty($post_input['name']) ){
+	public function editPost( $post_id, $data = array() ) {
+		// title is require
+		if ( !isset($data['title']) || empty($data['title']) ){
 			return false;
 		}
 		
-		$group_repository = $this->dm->getRepository('Document\Group\Group');
+		// content is require
+		if ( !isset($data['postcontent']) || empty($data['postcontent']) ){
+			return false;
+		}
 		
-		$group = $group_repository->findOneBy( array('posts.id' => $id) );
+		// author is require
+		if ( !isset($data['user_id']) || empty($data['user_id']) ){
+			return false;
+		}
+		$user = $this->dm->getRepository('Document\User\User')->find( $data['user_id'] );
+		if ( empty( $user ) ) {
+			return false;
+		}
+
+		// status
+		if ( isset( $data['status'] ) ) {
+			$data['status'] = (int)$data['status'];
+		}else {
+			$data['status'] = false;
+		}
+		
+		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
 		
 		foreach ( $group->getPosts() as $post ){
-			if ( $post->getId() == $id ){
-				$post->setName( $post_input['name'] );
+			if ( $post->getId() == $post_id ){
+				$post->setTitle( $data['title'] );
+				$post->setContent( $data['postcontent'] );
+				$post->setUser( $user );
+				$post->setStatus( $data['status'] );
 				break;
 			}
 		}
@@ -85,6 +112,30 @@ class ModelGroupPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
+	}
+
+	public function getPost( $post_id ) {
+		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
+
+		if ( empty( $group ) ) {
+			return false;
+		}
+
+		foreach ( $group->getPosts() as $post ){
+			if ( $post->getId() == $post_id ){
+				return $post;
+			}
+		}
+	}
+
+	public function getGroupId( $post_id ) {
+		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
+
+		if ( !empty( $group ) ) {
+			return $group->getId();
+		}
+
+		return false;
 	}
 }
 ?>

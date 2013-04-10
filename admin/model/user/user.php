@@ -26,6 +26,11 @@ class ModelUserUser extends Doctrine {
 	 * @return: boolean
 	 */
 	public function addUser( $data = array() ) {
+		// Username
+		if ( !isset($data['user']['username']) ){
+			$data['user']['username'] = '';
+		}
+
 		// Email is required
 		if ( !isset($data['user']['emails']) || count($data['user']['emails']) < 0 ){
 			return false;
@@ -296,6 +301,7 @@ class ModelUserUser extends Doctrine {
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user = new User();
+		$user->setUsername( $data['user']['username'] );
 		$user->setEmails( $emails );
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
@@ -331,6 +337,11 @@ class ModelUserUser extends Doctrine {
 		$user = $this->dm->getRepository('Document\User\User')->find( $id );
 		if ( !$user ) {
 			return false;
+		}
+		
+		// Username
+		if ( !isset($data['user']['username']) ){
+			$data['user']['username'] = '';
 		}
 
 		// Email is required
@@ -601,6 +612,7 @@ class ModelUserUser extends Doctrine {
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user->setEmails( $emails );
+		$user->setUsername( $data['user']['username'] );
 		//$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
@@ -732,6 +744,49 @@ class ModelUserUser extends Doctrine {
 		}
 		
 		return false;
+	}
+
+	public function search( $data = array() ) {
+		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\User\User',
+				)
+    	);
+ 
+		$query_data = 'solrUserContent_t:*' . $data['filter'] . '*';
+
+		if ( isset( $data['start'] ) ) {
+			$data['start'] = (int)$data['start'];
+		}else {
+			$data['start'] = 0;
+		}
+
+		if ( isset( $data['limit'] ) ) {
+			$data['limit'] = (int)$data['limit'];
+		}else {
+			$data['limit'] = 10;
+		}
+
+		//$query_data .= '&start=' . $data['start'];
+		//$query_data .= '&rows' . $data['limit'];
+ 
+		$query->setQuery( $query_data );
+ 
+		$results = $this->client->execute( $query );
+
+		$users = array();
+
+		foreach ($results as $result) {
+			if ( $user = $this->getUser( array( 'user_id' => $result->getId() ) ) ) {
+				$users[] = $user;
+			}
+		}
+
+		return $users;
 	}
 }
 ?>

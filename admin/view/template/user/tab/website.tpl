@@ -7,7 +7,11 @@
 		  <?php foreach ($websites as $website) { ?>
 		  <tr>
             <td><select class="input-medium" name="title-type"><?php foreach($title_types as $title_type) { ?><option value="<?php echo $title_type['code']; ?>" <?php if ($website['title'] == $title_type['code']) { ?><?php $title_selected = true; ?>selected="selected"<?php }else { $title_selected = false; } ?>><?php echo $title_type['text']; ?></option><?php } ?></select>  <input class="title input-medium" <?php if ( $title_selected ) { ?>style="display: none;"<?php } ?> type="text" name="user[websites][<?php echo $key; ?>][title]" value="<?php echo $website['title']; ?>" /></td>
-            <td><input class="url input-large" type="text" name="user[websites][<?php echo $key; ?>][url]" value="<?php echo $website['url']; ?>" /></td>
+            <td><input class="url input-large" type="text" name="user[websites][<?php echo $key; ?>][url]" value="<?php echo $website['url']; ?>" />
+            	<?php if ( isset( $error_website[$key]['url'] ) ) { ?>
+                          <div class="warning"><?php echo $error_website[$key]['url']; ?></div>
+                          <?php } ?>
+                      </td>
             <td><a class="btn-remove-website btn btn-danger"><i class="icon-trash"></i></a></td>
           </tr>
 		  <?php } ?>
@@ -45,5 +49,14 @@
 				$(this).parent().find('.title').css('display', 'none');
 			}
 		});
+
+	$('#tab-website').on('blur', 'input.url', function(){
+      var curr = $(this);
+
+      curr.parent().find('.warning').remove();
+      if ( !curr.val() ) {
+        curr.after('<div class="warning"><?php echo $error_url; ?></div>');
+      }
+    });
 	});
 </script>

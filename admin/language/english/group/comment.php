@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']           = 'Post';
+$_['heading_title']           = 'Comment';
 
 // Text
 $_['text_success']            = 'Success: You have modified Posts!';
@@ -32,7 +32,7 @@ $_['column_action']           = 'Action';
 $_['error_default']           = 'Warning: This Post cannot be deleted as it is currently assigned as the default store Group Post!';
 $_['error_title']             = 'Warning: Title must be between 3 and 128 characters!';
 $_['error_content']           = 'Warning: Content must be more than 50 characters!';
-$_['error_group']        	  = 'Warning: Choice Group to view list Posts';
+$_['error_post']        	  = 'Warning: Choice Post to view list Comments';
 $_['error_author']         	  = 'Warning: Author is required!';
 $_['error_insert']         	  = 'Warning: Insert not success!';
 $_['error_update']            = 'Warning: Update not success!';

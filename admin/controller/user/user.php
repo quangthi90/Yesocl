@@ -67,6 +67,7 @@ class ControllerUserUser extends Controller {
 		$this->data['button_add_former'] = 'Add Former';//$this->language->get( 'button_save' );
 
 		// Entry
+		$this->data['entry_username'] = $this->language->get( 'entry_username' );
 		$this->data['entry_email'] = $this->language->get( 'entry_email' );
 		$this->data['entry_password'] = $this->language->get( 'entry_password' );
 		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
@@ -132,6 +133,9 @@ class ControllerUserUser extends Controller {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
+
+		// Entry firstname
+		$this->data['username'] = $user->getUsername();
 
 		// Entry email
 		$this->data['emails'] = array();
@@ -736,6 +740,48 @@ class ControllerUserUser extends Controller {
 			$this->data['error_industry'] = '';
 		}
 
+		// Error Education
+		if ( isset($this->error['education']) ) {
+			$this->data['error_education'] = $this->error['education'];
+		} else {
+			$this->data['error_education'] = array();
+		}
+
+		// Error Experience
+		if ( isset($this->error['experience']) ) {
+			$this->data['error_experience'] = $this->error['experience'];
+		} else {
+			$this->data['error_experience'] = array();
+		}
+
+		// Error Former
+		if ( isset($this->error['former']) ) {
+			$this->data['error_former'] = $this->error['former'];
+		} else {
+			$this->data['error_former'] = array();
+		}
+
+		// Error Im
+		if ( isset($this->error['im']) ) {
+			$this->data['error_im'] = $this->error['im'];
+		} else {
+			$this->data['error_im'] = array();
+		}
+
+		// Error Phone
+		if ( isset($this->error['phone']) ) {
+			$this->data['error_phone'] = $this->error['phone'];
+		} else {
+			$this->data['error_phone'] = array();
+		}
+
+		// Error Website
+		if ( isset($this->error['website']) ) {
+			$this->data['error_website'] = $this->error['website'];
+		} else {
+			$this->data['error_website'] = array();
+		}
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -786,6 +832,7 @@ class ControllerUserUser extends Controller {
 
 		// Entry
 		$this->data['entry_email'] = $this->language->get( 'entry_email' );
+		$this->data['entry_username'] = $this->language->get( 'entry_username' );
 		$this->data['entry_password'] = $this->language->get( 'entry_password' );
 		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
 		$this->data['entry_group'] = $this->language->get( 'entry_group' );
@@ -827,6 +874,12 @@ class ControllerUserUser extends Controller {
 		$this->data['error_email_empty'] = $this->language->get( 'error_email_empty' );
 		$this->data['error_exist_email'] = $this->language->get( 'error_exist_email' );
 		$this->data['error_experience_empty'] = 'Error Empty Experience';//$this->language->get( 'error_email_empty' );
+		$this->data['error_school'] = $this->language->get( 'error_school' );
+		$this->data['error_company'] = $this->language->get( 'error_company' );
+		$this->data['text_error_former'] = $this->language->get( 'error_former' );
+		$this->data['text_error_im'] = $this->language->get( 'error_im' );
+		$this->data['text_error_phone'] = $this->language->get( 'error_phone' );
+		$this->data['error_url'] = $this->language->get( 'error_url' );
 		
 		// Tab
 		$this->data['tab_general'] = $this->language->get( 'tab_general' );
@@ -853,6 +906,15 @@ class ControllerUserUser extends Controller {
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
+		}
+
+		// Entry username
+		if ( isset($this->request->post['user']['username']) ){
+			$this->data['username'] = $this->request->post['user']['username'];
+		}elseif ( isset($user) ) {
+			$this->data['username'] = $user->getUsername();
+		}else {
+			$this->data['username'] = '';
 		}
 
 		// Entry email
@@ -1228,6 +1290,72 @@ class ControllerUserUser extends Controller {
       		$this->error['industry'] = $this->language->get('error_industry');
     	}
 
+    	// Education
+    	$education_error = array();
+    	foreach ($this->request->post['background']['educations'] as $key => $education) {
+    		if ( !trim( $education['school'] ) ) {
+    			$education_error[$key]['school'] = $this->language->get( 'error_school' );
+    		}
+    	}
+    	if ( !empty( $education_error ) ) {
+    		$this->error['education'] = $education_error;
+    	}
+
+    	// Experience
+    	$experience_error = array();
+    	foreach ($this->request->post['background']['experiencies'] as $key => $experience) {
+    		if ( !trim( $experience['company'] ) ) {
+    			$experience_error[$key]['company'] = $this->language->get( 'error_company' );
+    		}
+    	}
+    	if ( !empty( $experience_error ) ) {
+    		$this->error['experience'] = $experience_error;
+    	}
+
+    	// Former
+    	$former_error = array();
+    	foreach ($this->request->post['user']['formers'] as $key => $former) {
+    		if ( !trim( $former['name'] ) ) {
+    			$former_error[$key]['name'] = $this->language->get( 'error_former' );
+    		}
+    	}
+    	if ( !empty( $former_error ) ) {
+    		$this->error['former'] = $former_error;
+    	}
+
+    	// Im
+    	$im_error = array();
+    	foreach ($this->request->post['user']['ims'] as $key => $im) {
+    		if ( !trim( $im['im'] ) ) {
+    			$im_error[$key]['im'] = $this->language->get( 'error_im' );
+    		}
+    	}
+    	if ( !empty( $im_error ) ) {
+    		$this->error['im'] = $im_error;
+    	}
+
+    	// Phone
+    	$phone_error = array();
+    	foreach ($this->request->post['user']['phones'] as $key => $phone) {
+    		if ( !trim( $phone['phone'] ) ) {
+    			$phone_error[$key]['phone'] = $this->language->get( 'error_phone' );
+    		}
+    	}
+    	if ( !empty( $phone_error ) ) {
+    		$this->error['phone'] = $phone_error;
+    	}
+
+    	// Website
+    	$website_error = array();
+    	foreach ($this->request->post['user']['websites'] as $key => $website) {
+    		if ( !trim( $website['url'] ) ) {
+    			$website_error[$key]['url'] = $this->language->get( 'error_url' );
+    		}
+    	}
+    	if ( !empty( $website_error ) ) {
+    		$this->error['website'] = $website_error;
+    	}
+
 		if ( $this->error){
 			return false;
 		}else {
@@ -1274,6 +1402,72 @@ class ControllerUserUser extends Controller {
 
     	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
       		$this->error['industry'] = $this->language->get('error_industry');
+    	}
+
+    	// Education
+    	$education_error = array();
+    	foreach ($this->request->post['background']['educations'] as $key => $education) {
+    		if ( !trim( $education['school'] ) ) {
+    			$education_error[$key]['school'] = $this->language->get( 'error_school' );
+    		}
+    	}
+    	if ( !empty( $education_error ) ) {
+    		$this->error['education'] = $education_error;
+    	}
+
+    	// Experience
+    	$experience_error = array();
+    	foreach ($this->request->post['background']['experiencies'] as $key => $experience) {
+    		if ( !trim( $experience['company'] ) ) {
+    			$experience_error[$key]['company'] = $this->language->get( 'error_company' );
+    		}
+    	}
+    	if ( !empty( $experience_error ) ) {
+    		$this->error['experience'] = $experience_error;
+    	}
+
+    	// Former
+    	$former_error = array();
+    	foreach ($this->request->post['user']['formers'] as $key => $former) {
+    		if ( !trim( $former['name'] ) ) {
+    			$former_error[$key]['name'] = $this->language->get( 'error_former' );
+    		}
+    	}
+    	if ( !empty( $former_error ) ) {
+    		$this->error['former'] = $former_error;
+    	}
+
+    	// Im
+    	$im_error = array();
+    	foreach ($this->request->post['user']['ims'] as $key => $im) {
+    		if ( !trim( $im['im'] ) ) {
+    			$im_error[$key]['im'] = $this->language->get( 'error_im' );
+    		}
+    	}
+    	if ( !empty( $im_error ) ) {
+    		$this->error['im'] = $im_error;
+    	}
+
+    	// Phone
+    	$phone_error = array();
+    	foreach ($this->request->post['user']['phones'] as $key => $phone) {
+    		if ( !trim( $phone['phone'] ) ) {
+    			$phone_error[$key]['phone'] = $this->language->get( 'error_phone' );
+    		}
+    	}
+    	if ( !empty( $phone_error ) ) {
+    		$this->error['phone'] = $phone_error;
+    	}
+
+    	// Website
+    	$website_error = array();
+    	foreach ($this->request->post['user']['websites'] as $key => $website) {
+    		if ( !trim( $website['url'] ) ) {
+    			$website_error[$key]['url'] = $this->language->get( 'error_url' );
+    		}
+    	}
+    	if ( !empty( $website_error ) ) {
+    		$this->error['website'] = $website_error;
     	}
 
 		if ( $this->error){
@@ -1394,6 +1588,35 @@ class ControllerUserUser extends Controller {
 			$json[] = array(
 				'name' => $city->getName(),
 				'id' => $city->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function searchUser() {
+		$this->load->model( 'user/user' );
+
+		if ( isset( $this->request->get['filter'] ) ) {
+			$filter = $this->request->get['filter'];
+		}else {
+			$filter = null;
+		}
+
+		$data = array(
+			'filter' => $filter,
+			);
+
+		$users = $this->model_user_user->search( $data );
+
+		$json = array();
+
+		foreach ($users as $user) {
+			$primary = ( $user->getUsername()) ? $user->getUsername() : $user->getFullname();
+			$primary .= '(' . $user->getPrimaryEmail()->getEmail() . ')';
+			$json[] = array(
+				'id' => $user->getId(),
+				'primary' => $primary,
 				);
 		}
 

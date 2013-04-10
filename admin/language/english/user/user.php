@@ -12,6 +12,7 @@ $_['text_primary']		  		= 'Primary';
 $_['text_delete']		  		= 'Delete';
 
 // Entry
+$_['entry_username']            = 'Usename:';
 $_['entry_email']              	= 'Email:';
 $_['entry_password']            = 'Password:';
 $_['entry_confirm']             = 'Confirm:';
@@ -34,6 +35,12 @@ $_['error_primary_email']     	= 'Warning: You must choice Primary Email!';
 $_['error_country']     	= 'Warning: Country is required!';
 $_['error_city']     	= 'Warning: City is required!';
 $_['error_industry']     	= 'Warning: Industry is required!';
+$_['error_school']     	= 'Warning: School is required!';
+$_['error_company']     	= 'Warning: Company is required!';
+$_['error_former']     	= 'Warning: Former is required!';
+$_['error_im']     	= 'Warning: Im is required!';
+$_['error_phone']     	= 'Warning: Phone is required!';
+$_['error_url']     	= 'Warning: Url is required!';
 
 $_['error_default']           	= 'Warning: This User cannot be deleted as it is currently assigned as the default store User !';
 $_['error_email']          		= 'E-Mail Address does not appear to be valid!';
