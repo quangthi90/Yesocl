@@ -231,7 +231,7 @@ class ControllerCompanyPost extends Controller {
 				'id' => $post->getId(),
 				'title' => $post->getTitle(),
 				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
-				'created' => $post->getCreated()->format( 'd/m/Y' ),
+				'created' => $post->getCreated()->format( 'dd/mm/YY - h:i:s' ),
 				'status' => $post->getStatus(),
 				'action' => $action,
 				);
@@ -342,7 +342,7 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'company/post', $url . 'company_id=' . $this->request->get['company_id'] );
+		$this->data['cancel'] = $this->url->link( 'company/post', $url . '&company_id=' . $this->request->get['company_id'] );
 
 		// company
 		$this->load->model( 'company/company' );
