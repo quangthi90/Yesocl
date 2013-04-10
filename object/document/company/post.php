@@ -14,6 +14,9 @@ Class Post {
 	private $category;
 
 	/** @MongoDB\String */
+	private $description;
+
+	/** @MongoDB\String */
 	private $content;
 	
 	/** @MongoDB\Boolean */
@@ -64,6 +67,14 @@ Class Post {
 
 	public function getCategory(){
 		return $this->category;
+	}
+
+	public function setDescription( $description ){
+		$this->description = $description;
+	}
+
+	public function getDescription(){
+		return $this->description;
 	}
 
 	public function setContent( $content ){

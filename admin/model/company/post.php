@@ -32,6 +32,11 @@ class ModelCompanyPost extends Doctrine {
 			return false;
 		}
 
+		// Description is required
+		if ( !isset( $data['description'] ) || empty( $data['description'] ) ) {
+			return false;
+		} 
+
 		// Content is required
 		if ( !isset( $data['post_content'] ) || empty( $data['post_content'] ) ) {
 			return false;
@@ -87,6 +92,11 @@ class ModelCompanyPost extends Doctrine {
 		if ( empty( $category ) ) {
 			return false;
 		}
+
+		// Description is required
+		if ( !isset( $data['description'] ) || empty( $data['description'] ) ) {
+			return false;
+		} 
 
 		// Content is required
 		if ( !isset( $data['post_content'] ) || empty( $data['post_content'] ) ) {

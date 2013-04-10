@@ -38,6 +38,15 @@
             <?php } ?></td>
           </tr>
           <tr>
+            <td><span class="required">*</span> <?php echo $entry_description; ?></td>
+            <td><textarea class="input-xxlarge" type="text" name="description"><?php echo $description; ?></textarea>
+            <?php if ($error_description) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_description; ?>
+        </div>
+            <?php } ?></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_content; ?></td>
             <td><textarea class="input-xxlarge" type="text" name="post_content"><?php echo $content; ?></textarea>
             <?php if ($error_content) { ?>
@@ -70,6 +79,14 @@
 </div>
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
+CKEDITOR.replace('description', {
+  filebrowserBrowseUrl: 'index.php?route=common/filemanager',
+  filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',
+  filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager',
+  filebrowserUploadUrl: 'index.php?route=common/filemanager',
+  filebrowserImageUploadUrl: 'index.php?route=common/filemanager',
+  filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
+});
 CKEDITOR.replace('post_content', {
   filebrowserBrowseUrl: 'index.php?route=common/filemanager',
   filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',

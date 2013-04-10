@@ -24,6 +24,7 @@ $_['column_action'] = 'Action';
 // entry
 $_['entry_title'] = 'Title:';
 $_['entry_author'] = 'Author:';
+$_['entry_description'] = 'Description:';
 $_['entry_content'] = 'Content:';
 $_['entry_category'] = 'Category:';
 $_['entry_status'] = 'Status:';
@@ -34,6 +35,7 @@ $_['error_title'] = 'Warning: Error Title is required!';
 $_['error_author'] = 'Warning: Error Author is required!';
 $_['error_category'] = 'Warning: Error Category is required!';
 $_['error_content'] = 'Warning: Error Post\'s Content at least 50 characters!';
+$_['error_description'] = 'Warning: Error Post\'s Description at least 50 characters!';
 $_['error_company'] = 'Warning: Error empty company!';
 $_['success'] = 'Success: You have modified Post!';
 ?>

@@ -290,6 +290,12 @@ class ControllerCompanyPost extends Controller {
 			$this->data['error_category'] = '';
 		}
 
+		if ( isset( $this->error['error_description'] ) ) {
+			$this->data['error_description'] = $this->error['error_description'];
+		}else {
+			$this->data['error_description'] = '';
+		}
+
 		if ( isset( $this->error['error_content'] ) ) {
 			$this->data['error_content'] = $this->error['error_content'];
 		}else {
@@ -335,6 +341,7 @@ class ControllerCompanyPost extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_category'] = $this->language->get( 'entry_category' );
+		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 		$this->data['entry_content'] = $this->language->get( 'entry_content' );
 
 		// button
@@ -406,6 +413,15 @@ class ControllerCompanyPost extends Controller {
 			$this->data['category'] = '';
 		}
 
+		// description
+		if ( isset( $this->request->post['description'] ) ) {
+			$this->data['description'] = $this->request->post['description'];
+		}elseif ( isset( $post ) ) {
+			$this->data['description'] = $post->getDescription();
+		}else {
+			$this->data['description'] = '';
+		}
+
 		// content
 		if ( isset( $this->request->post['post_content'] ) ) {
 			$this->data['content'] = $this->request->post['post_content'];
@@ -440,6 +456,10 @@ class ControllerCompanyPost extends Controller {
 	private function isValidateForm() {
 		if ( !isset( $this->request->post['title']) || strlen( trim( $this->request->post['title'] ) ) < 1 || strlen( trim( $this->request->post['title'] ) ) > 256  ) {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
+		}
+
+		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 50 || strlen( trim( $this->request->post['description'] ) ) > 256 ) {
+			$this->error['error_description'] = $this->language->get( 'error_description' );
 		}
 
 		if ( !isset( $this->request->post['post_content']) || strlen( trim( $this->request->post['post_content'] ) ) < 50 ) {
