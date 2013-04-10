@@ -10,6 +10,7 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 Class User {
 	/** 
 	 * @MongoDB\Id 
+	 * @SOLR\Field(type="id")
 	 */
 	private $id; 
 
@@ -36,6 +37,9 @@ Class User {
 
     /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
 	private $groups = array();
+
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Company\Company", mappedBy="administrator") */
+	private $companiesCreated = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -45,6 +49,10 @@ Class User {
 
 	public function getId() {
 		return $this->id;
+	}
+
+	public function setId( $id ) {
+		$this->id = $id;
 	}
 
 	public function setUsername( $username ){
@@ -63,7 +71,7 @@ Class User {
 		return $this->password;
 	}
 
-	public function addEmail( Email $email ){
+	public function addEmail( Meta\Email $email ){
 		$this->emails[] = $email;
 	}
 
@@ -101,12 +109,28 @@ Class User {
 		return $this->meta;
 	}
 
+	public function getFullname(){
+		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+	}
+
 	public function setGroupUser( $groupUser ){
 		$this->groupUser = $groupUser;
 	}
 
 	public function getGroupUser(){
 		return $this->groupUser;
+	}
+
+	public function addCompanyCreated( \Document\Company\Company $company ){
+		$this->companiesCreated[] = $company;
+	}
+
+	public function setCompaniesCreated( $companies ){
+		$this->companiesCreated = $companies;
+	}
+
+	public function getCompaniesCreated(){
+		return $this->companiesCreated;
 	}
 
 	public function addGroup( \Document\Group\Group $group ){
@@ -145,13 +169,13 @@ Class User {
 	/**
 	* @SOLR\Field(type="text")
 	*/
-	private $solrContent;
+	private $solrUserContent;
 
-	public function setSolrContent( $solrContent ){
+	public function setSolrUserContent( $solrContent ){
 		$this->solrContent = $solrContent;
 	}
 
-	public function getSolrContent(){
+	public function getSolrUserContent(){
 		$solrContent = "";
 
 		$solrContent .= $this->getUsername() . "  ";
