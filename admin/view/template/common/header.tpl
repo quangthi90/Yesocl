@@ -61,10 +61,12 @@ $(document).ready(function(){
 <div id="header">
   <div class="div1">
     <div class="div2"><img src="view/image/logo.png" title="<?php echo $heading_title; ?>" onclick="location = '<?php echo $home; ?>'" /></div>
-    
+    <?php if ($logged) { ?>
+    <div class="div3"><img src="view/image/lock.png" alt="" style="position: relative; top: 3px;" />&nbsp;<?php echo $logged; ?></div>
+    <?php } ?>
   
   </div>
-  <?php //if ($logged) { ?>
+  <?php if ($logged) { ?>
   <div id="menu">
     <ul class="left" style="display: none;">
       <li id="user"><a class="top"><?php echo $text_users; ?></a>
@@ -123,6 +125,9 @@ $(document).ready(function(){
           </li>
         </ul>
       </li>
+    </ul>
+    <ul class="right">
+      <li id="store"><a class="top" href="<?php echo $logout; ?>"><?php echo $text_logout; ?></a></li>
     </ul>
     <script type="text/javascript"><!--
 $(document).ready(function() {
@@ -184,5 +189,5 @@ $(document).ready(function() {
 });
 //--></script> 
   </div>
-  <?php //} ?>
+  <?php } ?>
 </div>

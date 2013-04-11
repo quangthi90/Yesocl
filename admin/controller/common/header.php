@@ -21,6 +21,7 @@ class ControllerCommonHeader extends Controller {
 
 		// Heading title
 		$this->data['heading_title'] = $this->language->get('heading_title');
+		$this->data['text_logout'] = $this->language->get('text_logout');
 		
 		// User
 		$this->data['text_users'] = $this->language->get('text_users');
@@ -77,6 +78,8 @@ class ControllerCommonHeader extends Controller {
 			
 			$this->data['home'] = $this->url->link('common/login', '', 'SSL');
 		} else {
+			$this->data['logged'] = sprintf($this->language->get('text_logged'), $this->user->getUserName());
+			
 			// Group
 			$this->data['group_type'] = $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['group'] = $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL');
@@ -106,6 +109,8 @@ class ControllerCommonHeader extends Controller {
 			$this->data['admin'] = $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['action'] = $this->url->link('design/action', 'token=' . $this->session->data['token'], 'SSL');
+
+			$this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 		}
 		
 		
