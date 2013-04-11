@@ -440,6 +440,7 @@ class ControllerCompanyCompany extends Controller {
 		// column
 		$this->data['column_company'] = $this->language->get( 'column_company' );
 		$this->data['column_owner'] = $this->language->get( 'column_owner' );
+		$this->data['column_group'] = $this->language->get( 'column_group' );
 		$this->data['column_created'] = $this->language->get( 'column_created' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
@@ -506,6 +507,7 @@ class ControllerCompanyCompany extends Controller {
 					'id' => $company->getId(),
 					'name' => $company->getName(),
 					'owner' => $company->getOwner()->getPrimaryEmail()->getEmail(),
+					'group' => $company->getGroup()->getName(),
 					'created' => $company->getCreated()->format( 'd/m/Y' ),
 					'status' => $company->getStatus(),
 					'action' => $action,
@@ -560,6 +562,12 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_owner'] = '';
 		}
 
+		if ( isset( $this->error['error_group'] ) ) {
+			$this->data['error_group'] = $this->error['error_group'];
+		}else {
+			$this->data['error_group'] = '';
+		}
+
 		if ( isset( $this->error['error_description'] ) ) {
 			$this->data['error_description'] = $this->error['error_description'];
 		}else {
@@ -598,6 +606,7 @@ class ControllerCompanyCompany extends Controller {
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_group'] = $this->language->get( 'entry_group' );
 		$this->data['entry_owner'] = $this->language->get( 'entry_owner' );
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 
@@ -641,6 +650,24 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['user_id'] = $company->getOwner()->getId();
 		}else {
 			$this->data['user_id'] = '';
+		}
+
+		// group
+		$this->load->model( 'company/group' );
+		$groups = $this->model_company_group->getAllGroups();
+		$this->data['groups'] = array();
+		foreach ($groups as $group) {
+			$this->data['groups'][] = array(
+				'id' => $group->getId(),
+				'name' => $group->getName(),
+				);
+		}
+		if ( isset( $this->request->post['group'] ) ) {
+			$this->data['group'] = $this->request->post['group'];
+		}elseif ( isset( $company ) ) {
+			$this->data['group'] = $company->getGroup()->getId();
+		}else {
+			$this->data['group'] = '';
 		}
 
 		// description
@@ -696,6 +723,10 @@ class ControllerCompanyCompany extends Controller {
 
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {
 			$this->error['error_owner'] = $this->language->get( 'error_owner' );
+		}
+
+		if ( !isset( $this->request->post['group']) || empty( $this->request->post['group'] ) ) {
+			$this->error['error_group'] = $this->language->get( 'error_group' );
 		}
 
 		if ( $this->error ) {

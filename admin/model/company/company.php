@@ -21,6 +21,17 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
+		// owner is required
+		if ( isset( $data['group'] ) ) {
+			$group = $this->dm->getRepository( 'Document\Company\Group' )->find( $data['group'] );
+
+			if ( empty( $group ) ) {
+				return false;
+			}
+		}else {
+			return false;
+		}
+
 		// description is required
 		if ( !isset( $data['description'] ) ) {
 			return false;
@@ -34,6 +45,7 @@ class ModelCompanyCompany extends Doctrine {
 		$company = new Company();
 		$company->setName( $data['name'] );
 		$company->setOwner( $user );
+		$company->setGroup( $group );
 		$company->setDescription( $data['description'] );
 		$company->setStatus( $data['status'] );
 
@@ -62,6 +74,17 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
+		// owner is required
+		if ( isset( $data['group'] ) ) {
+			$group = $this->dm->getRepository( 'Document\Company\Group' )->find( $data['group'] );
+
+			if ( empty( $group ) ) {
+				return false;
+			}
+		}else {
+			return false;
+		}
+
 		// description is required
 		if ( !isset( $data['description'] ) ) {
 			return false;
@@ -84,6 +107,7 @@ class ModelCompanyCompany extends Doctrine {
 
 		$company->setName( $data['name'] );
 		$company->setOwner( $user );
+		$company->setGroup( $group );
 		$company->setDescription( $data['description'] );
 		$company->setStatus( $data['status'] );
 		
@@ -143,7 +167,7 @@ class ModelCompanyCompany extends Doctrine {
 	}
 
 	public function getTotalCompanies( $data = array() ) {
-		$query = $this->dm->createQueryBuilder( 'Document\Data\Type' );
+		$query = $this->dm->createQueryBuilder( 'Document\Company\Company' );
 
 		if ( isset( $data['filter_name'] ) ) {
     		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );

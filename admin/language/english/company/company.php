@@ -22,6 +22,7 @@ $_['button_back'] = 'Back';
 // column
 $_['column_company'] = 'Company';
 $_['column_owner'] = 'Owner';
+$_['column_group'] = 'Group';
 $_['column_created'] = 'Created';
 $_['column_status'] = 'Status';
 $_['column_action'] = 'Action';
@@ -32,6 +33,7 @@ $_['column_email'] = 'Email';
 $_['entry_name'] = 'Company Name:';
 $_['entry_status'] = 'Status:';
 $_['entry_owner'] = 'Owner:';
+$_['entry_group'] = 'Group:';
 $_['entry_description'] = 'Description:';
 
 // error
@@ -39,6 +41,7 @@ $_['error_name'] = 'Warning: Company Name must be more than 1 characters and les
 $_['error_name_exist'] = 'Warning: Company Name is exist!';
 $_['error_description'] = 'Warning: Description must be more than 50 characters and less than 256 characters!';
 $_['error_owner'] = 'Warning: Owner is required!';
+$_['error_group'] = 'Warning: Group is required!';
 $_['error_warning'] = 'Warning: Error!';
 $_['success'] = 'Success: You have modified Company!';
 $_['error_follower'] = 'Warning: User is required!';

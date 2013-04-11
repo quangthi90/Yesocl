@@ -10,7 +10,7 @@
   <?php } ?>
   <div class="box">    
     <div class="heading">
-      <span><img src="view/image/user.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/company_group.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
       	<a onclick="$('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
       	<a onclick="location = '<?php echo $cancel; ?>';" class="btn btn-danger"><?php echo $button_cancel; ?></a>
@@ -25,28 +25,6 @@
             <?php if ($error_name) { ?>
                 <div class="alert alert-error">
           <strong>Error!</strong> <?php echo $error_name; ?>
-        </div>
-            <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_owner; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="owner" value="<?php echo $owner; ?>" /><input name="user_id" type="hidden" value="<?php echo $user_id; ?>" />
-            <?php if ($error_owner) { ?>
-                <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_owner; ?>
-        </div>
-            <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_group; ?></td>
-            <td><select class="input-xxlarge" name="group">
-              <?php foreach ($groups as $group_info) { ?>
-                <option value="<?php echo $group_info['id']; ?>" <?php if ( $group_info['id'] == $group ) { ?>selected="selected"<?php } ?>><?php echo $group_info['name']; ?></option>
-              <?php } ?>
-            </select>
-            <?php if ($error_group) { ?>
-                <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_group; ?>
         </div>
             <?php } ?></td>
           </tr>
@@ -77,34 +55,6 @@ CKEDITOR.replace('description', {
   filebrowserUploadUrl: 'index.php?route=common/filemanager',
   filebrowserImageUploadUrl: 'index.php?route=common/filemanager',
   filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
-});
-//--></script>
-<script type="text/javascript"><!--//
-$('input[name=\'owner\']').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.primary,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $('input[name=\'owner\']').val(ui.item.label);
-    $('input[name=\'user_id\']').val(ui.item.value);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-        return false;
-    }
 });
 //--></script>
 <?php echo $footer; ?>

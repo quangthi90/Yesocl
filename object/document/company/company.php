@@ -29,6 +29,9 @@ Class Company {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="companiesCreated") */
 	private $owner;
 
+	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="companies") */
+	private $group;
+
 	/** @MongoDB\EmbedMany(targetDocument="Career") */
 	private $careers = array();
 
@@ -101,6 +104,14 @@ Class Company {
 
 	public function getOwner(){
 		return $this->owner;
+	}
+
+	public function setGroup( $group ){
+		$this->group = $group;
+	}
+
+	public function getGroup(){
+		return $this->group;
 	}
 
 	public function addCareer( $career ){

@@ -13,7 +13,7 @@
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <span><img src="view/image/company.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/company_group.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
 	      <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-success"><?php echo $button_insert; ?> <i class="icon-plus"></i></a>
 	      <a onclick="$('form').submit();" class="btn btn-danger"><?php echo $button_delete; ?> <i class="icon-trash"></i></a>
@@ -25,33 +25,27 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $column_company; ?></td>
-              <td><?php echo $column_owner; ?></td>
               <td><?php echo $column_group; ?></td>
-              <td><?php echo $column_created; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
-            <?php if ( $companies ) { ?>
-            <?php foreach ( $companies as $company ) { ?>
+            <?php if ( $groups ) { ?>
+            <?php foreach ( $groups as $group ) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $company['id']; ?>"/></td>
-              <td><?php echo $company['name']; ?></td>
-              <td><?php echo $company['owner']; ?></td>
-              <td><?php echo $company['group']; ?></td>
-              <td><?php echo $company['created']; ?></td>
-              <td><?php echo ( $company['status'] ) ? $text_enable : $text_disable; ?></td>
-              <td class="right"><?php foreach ( $company['action'] as $action ) { ?>
+              <td><input name="id[]" type="checkbox" value="<?php echo $group['id']; ?>"/></td>
+              <td><?php echo $group['name']; ?></td>
+              <td><?php echo ( $group['status'] ) ? $text_enable : $text_disable; ?></td>
+              <td class="right"><?php foreach ( $group['action'] as $action ) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php }?>
-            <?php if ( !$companies ) { ?>
+            <?php if ( !$groups ) { ?>
             <tr class="center">
-              <td colspan="7"><?php echo $text_no_results; ?></td>
+              <td colspan="4"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
