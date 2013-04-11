@@ -1,10 +1,10 @@
 <?php
-class ControllerCompanyPost extends Controller {
+class ControllerCompanyComment extends Controller {
 	private $limit = 10;
 	private $error = array();
 
 	public function index() {
-		$this->load->language( 'company/post' );
+		$this->load->language( 'company/comment' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
@@ -13,74 +13,6 @@ class ControllerCompanyPost extends Controller {
 
 			$this->redirect( $this->url->link( 'company/company' ) );
 		}
-
-		$this->load->model( 'company/post' );
-
-		$this->getList();
-	}
-
-	public function insert() {
-		$this->load->language( 'company/post' );
-
-		$this->document->setTitle( $this->language->get( 'heading_title' ) );
-
-		if ( !isset( $this->request->get['company_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
-
-			$this->redirect( $this->url->link( 'company/company' ) );
-		}
-
-		$this->load->model( 'company/post' );
-
-		// page
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-
-		$url = '';
-		$url .= 'page=' . $page;
-
-		// request
-		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_post->addPost( $this->request->get['company_id'], $this->request->post ) ) {
-				$this->session->data['success'] = $this->language->get( 'success' );
-			}else {
-				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
-			}
-
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
-		}
-
-		// action
-		$this->data['action'] = $this->url->link( 'company/post/insert', 'company_id=' . $this->request->get['company_id'] );
-
-		$this->getForm();
-	}
-
-	public function update() {
-		$this->load->language( 'company/post' );
-
-		$this->document->setTitle( $this->language->get( 'heading_title' ) );
-
-		if ( !isset($this->request->get['company_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_company');
-			
-			$this->redirect( $this->url->link( 'company/company') );
-		}
-
-		$this->load->model( 'company/post' );
-
-		// page
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
-
-		$url = '';
-		$url .= 'page=' . $page;
 
 		if ( !isset( $this->request->get['post_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -88,41 +20,133 @@ class ControllerCompanyPost extends Controller {
 			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
 		}
 
+		$this->load->model( 'company/comment' );
+
+		$this->getList();
+	}
+
+	public function insert() {
+		$this->load->language( 'company/comment' );
+
+		$this->document->setTitle( $this->language->get( 'heading_title' ) );
+
+		if ( !isset( $this->request->get['company_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/company' ) );
+		}
+
+		if ( !isset( $this->request->get['post_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+		}
+
+		$this->load->model( 'company/comment' );
+
+		// page
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
+		$url = '';
+		$url .= 'page=' . $page;
+
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_post->editPost( $this->request->get['post_id'], $this->request->post ) ) {
+			if ( $this->model_company_comment->addComment( $this->request->get['post_id'], $this->request->post ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/post/update', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
+		$this->data['action'] = $this->url->link( 'company/comment/insert', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
+
+		$this->getForm();
+	}
+
+	public function update() {
+		$this->load->language( 'company/comment' );
+
+		$this->document->setTitle( $this->language->get( 'heading_title' ) );
+
+		if ( !isset( $this->request->get['company_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/company' ) );
+		}
+
+		if ( !isset( $this->request->get['post_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+		}
+
+		$this->load->model( 'company/comment' );
+
+		// page
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
+		$url = '';
+		$url .= 'page=' . $page;
+
+		if ( !isset( $this->request->get['comment_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
+		}
+
+		// request
+		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
+			if ( $this->model_company_comment->editComment( $this->request->get['post_id'], $this->request->get['comment_id'], $this->request->post ) ) {
+				$this->session->data['success'] = $this->language->get( 'success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			}
+
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
+		}
+
+		// action
+		$this->data['action'] = $this->url->link( 'company/comment/update', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&comment_id=' . $this->request->get['comment_id'] );
 
 		$this->getForm();
 	}
 
 	public function delete(){
-		$this->load->language( 'company/post' );
+		$this->load->language( 'company/comment' );
 		
 		if ( !isset($this->request->get['company_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
 			$this->redirect( $this->url->link( 'company/company') );
 		}
+
+		if ( !isset( $this->request->get['post_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+		}
 		
-		$this->load->model( 'company/post' );
+		$this->load->model( 'company/comment' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_company_post->deletePost( $this->request->post );
+			$this->model_company_comment->deleteComments( $this->request->get['post_id'], $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'success' );
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
 		}
 
 		$this->getList( );
@@ -170,8 +194,13 @@ class ControllerCompanyPost extends Controller {
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get( 'heading_title' ),
+       		'text'      => $this->language->get( 'text_post' ),
 			'href'      => $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ),
+      		'separator' => ' :: '
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'heading_title' ),
+			'href'      => $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ),
       		'separator' => ' :: '
    		);
 
@@ -184,7 +213,6 @@ class ControllerCompanyPost extends Controller {
 		$this->data['text_disable'] = $this->language->get( 'text_disable' );
 
 		// column
-		$this->data['column_post'] = $this->language->get( 'column_post' );
 		$this->data['column_author'] = $this->language->get( 'column_author' );
 		$this->data['column_created'] = $this->language->get( 'column_created' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
@@ -196,9 +224,9 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'company/post/insert', 'company_id=' . $this->request->get['company_id'] );
-		$this->data['delete'] = $this->url->link( 'company/post/delete', 'company_id=' . $this->request->get['company_id'] );
-		$this->data['back'] = $this->url->link( 'company/company' );
+		$this->data['insert'] = $this->url->link( 'company/comment/insert', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
+		$this->data['delete'] = $this->url->link( 'company/comment/delete', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
+		$this->data['back'] = $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] );
 
 		//company
 		$this->load->model( 'company/company' );
@@ -209,52 +237,53 @@ class ControllerCompanyPost extends Controller {
 			$this->redirect( $this->url->link( 'company/company' ) );
 		}
 
+		//post
+		$post = $company->getPostById( $this->request->get['post_id'] );
+		if ( empty( $post ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+		}
+
 		$data = array(
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit,
 			);
 
-		// post
-		$posts = $company->getPosts();
+		// comments
+		$comments = $post->getComments();
 
-		$this->data['posts'] = array();
-		foreach ($posts as $post) {
+		$this->data['comments'] = array();
+		foreach ($comments as $comment) {
 			$action = array();
 
 			$action[] = array(
-				'text' => $this->language->get( 'text_comment' ),
-				'href' => $this->url->link( 'company/comment', 'company_id=' . $company->getId() . '&post_id=' . $post->getId() ),
-				'icon' => 'icon-list',
-				);
-
-			$action[] = array(
 				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'company/post/update', 'company_id=' . $company->getId() . '&post_id=' . $post->getId() ),
+				'href' => $this->url->link( 'company/comment/update', 'company_id=' . $company->getId() . '&post_id=' . $post->getId() . '&comment_id=' . $comment->getId() ),
 				'icon' => 'icon-edit',
 				);
 
-			$this->data['posts'][] = array(
-				'id' => $post->getId(),
-				'title' => $post->getTitle(),
-				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
-				'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
-				'status' => $post->getStatus(),
+			$this->data['comments'][] = array(
+				'id' => $comment->getId(),
+				'author' => $comment->getUser()->getPrimaryEmail()->getEmail(),
+				'created' => $comment->getCreated()->format( 'd/m/Y - h:i:s' ),
+				'status' => $comment->getStatus(),
 				'action' => $action,
 				);
 		}
 
 		// pagination
 		$pagination = new Pagination();
-		$pagination->total = count( $posts );
+		$pagination->total = count( $comments );
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'company/post', '&page={page}', 'SSl' );
+		$pagination->url = $this->url->link( 'company/comment', '&page={page}' . '&company_id=' . $company->getId() . '&post_id=' . $post->getId(), 'SSl' );
 
 		$this->data['pagination'] = $pagination->render();
 
 		// template
-		$this->template = 'company/post_list.tpl';
+		$this->template = 'company/comment_list.tpl';
 
 		// childs
 		$this->children = array(
@@ -278,28 +307,10 @@ class ControllerCompanyPost extends Controller {
 			$this->data['error_warning'] = '';
 		}
 
-		if ( isset( $this->error['error_title'] ) ) {
-			$this->data['error_title'] = $this->error['error_title'];
-		}else {
-			$this->data['error_title'] = '';
-		}
-
 		if ( isset( $this->error['error_author'] ) ) {
 			$this->data['error_author'] = $this->error['error_author'];
 		}else {
 			$this->data['error_author'] = '';
-		}
-
-		if ( isset( $this->error['error_category'] ) ) {
-			$this->data['error_category'] = $this->error['error_category'];
-		}else {
-			$this->data['error_category'] = '';
-		}
-
-		if ( isset( $this->error['error_description'] ) ) {
-			$this->data['error_description'] = $this->error['error_description'];
-		}else {
-			$this->data['error_description'] = '';
 		}
 
 		if ( isset( $this->error['error_content'] ) ) {
@@ -330,8 +341,13 @@ class ControllerCompanyPost extends Controller {
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get( 'heading_title' ),
+       		'text'      => $this->language->get( 'text_post' ),
 			'href'      => $this->url->link( 'company/post', $url . '&company_id=' . $this->request->get['company_id'] ),
+      		'separator' => ' :: '
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get( 'heading_title' ),
+			'href'      => $this->url->link( 'company/comment', $url . '&company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ),
       		'separator' => ' :: '
    		);
 
@@ -343,11 +359,8 @@ class ControllerCompanyPost extends Controller {
 		$this->data['text_disable'] = $this->language->get( 'text_disable' );
 
 		// entry
-		$this->data['entry_title'] = $this->language->get( 'entry_title' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
-		$this->data['entry_category'] = $this->language->get( 'entry_category' );
-		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 		$this->data['entry_content'] = $this->language->get( 'entry_content' );
 
 		// button
@@ -355,35 +368,36 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'company/post', $url . '&company_id=' . $this->request->get['company_id'] );
+		$this->data['cancel'] = $this->url->link( 'company/comment', $url . '&company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
 
-		// company
+		//company
 		$this->load->model( 'company/company' );
 		$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
-
 		if ( empty( $company ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
 			$this->redirect( $this->url->link( 'company/company' ) );
 		}
 
-		if ( isset( $this->request->get['post_id'] ) ) {
-			$post = $company->getPostById( $this->request->get['post_id'] );
-			if ( empty( $post ) ) {
+		//post
+		$post = $company->getPostById( $this->request->get['post_id'] );
+		if ( empty( $post ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+		}
+
+		// comment
+		if ( isset( $this->request->get['comment_id'] ) ) {
+			$comment = $post->getCommentById( $this->request->get['comment_id'] );
+			if ( empty( $comment ) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
 
-		// title
-		if ( isset( $this->request->post['title'] ) ) {
-			$this->data['title'] = $this->request->post['title'];
-		}elseif ( isset( $post ) ) {
-			$this->data['title'] = $post->getTitle();
-		}else {
-			$this->data['title'] = '';
-		}
-
 		// author
-		if ( isset( $post ) ) {
-			$user = $post->getUser();
+		if ( isset( $comment ) ) {
+			$user = $comment->getUser();
 		}
 		if ( isset( $this->request->post['author'] ) ) {
 			$this->data['author'] = $this->request->post['author'];
@@ -401,38 +415,11 @@ class ControllerCompanyPost extends Controller {
 			$this->data['user_id'] = '';
 		}
 
-		// category
-		$this->load->model( 'company/category' );
-		$categories = $this->model_company_category->getCategories();
-		$this->data['categories'] = array();
-		foreach ($categories as $category) {
-			$this->data['categories'][] = array(
-				'id' => $category->getId(),
-				'name' => $category->getName(),
-				);
-		}
-		if ( isset( $this->request->post['category'] ) ) {
-			$this->data['category'] = $this->request->post['category'];
-		}elseif ( isset( $post ) ) {
-			$this->data['category'] = $post->getCategory()->getId();
-		}else {
-			$this->data['category'] = '';
-		}
-
-		// description
-		if ( isset( $this->request->post['description'] ) ) {
-			$this->data['description'] = $this->request->post['description'];
-		}elseif ( isset( $post ) ) {
-			$this->data['description'] = $post->getDescription();
-		}else {
-			$this->data['description'] = '';
-		}
-
 		// content
 		if ( isset( $this->request->post['post_content'] ) ) {
 			$this->data['content'] = $this->request->post['post_content'];
-		}elseif ( isset( $post ) ) {
-			$this->data['content'] = $post->getContent();
+		}elseif ( isset( $comment ) ) {
+			$this->data['content'] = $comment->getContent();
 		}else {
 			$this->data['content'] = '';
 		}
@@ -440,14 +427,14 @@ class ControllerCompanyPost extends Controller {
 		// status
 		if ( isset( $this->request->post['status'] ) ) {
 			$this->data['status'] = $this->request->post['status'];
-		}elseif ( isset( $post ) ) {
-			$this->data['status'] = $post->getStatus();
+		}elseif ( isset( $comment ) ) {
+			$this->data['status'] = $comment->getStatus();
 		}else {
 			$this->data['status'] = 1;
 		}
 
 		// template
-		$this->template = 'company/post_form.tpl';
+		$this->template = 'company/comment_form.tpl';
 
 		// childs
 		$this->children = array(
@@ -460,20 +447,8 @@ class ControllerCompanyPost extends Controller {
 	}
 
 	private function isValidateForm() {
-		if ( !isset( $this->request->post['title']) || strlen( trim( $this->request->post['title'] ) ) < 1 || strlen( trim( $this->request->post['title'] ) ) > 256  ) {
-			$this->error['error_title'] = $this->language->get( 'error_title' );
-		}
-
-		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 50 || strlen( trim( $this->request->post['description'] ) ) > 256 ) {
-			$this->error['error_description'] = $this->language->get( 'error_description' );
-		}
-
-		if ( !isset( $this->request->post['post_content']) || strlen( trim( $this->request->post['post_content'] ) ) < 50 ) {
+		if ( !isset( $this->request->post['comment_content']) || strlen( trim( $this->request->post['comment_content'] ) ) < 1 || strlen( trim( $this->request->post['comment_content'] ) ) > 255 ) {
 			$this->error['error_content'] = $this->language->get( 'error_content' );
-		}
-
-		if ( !isset( $this->request->post['category']) || empty( $this->request->post['category'] ) ) {
-			$this->error['error_category'] = $this->language->get( 'error_category' );
 		}
 
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {
