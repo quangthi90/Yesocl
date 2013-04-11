@@ -21,6 +21,9 @@ Class Admin {
 	/** @MongoDB\Boolean */
 	private $status;
 
+	/** @MongoDB\String */
+	private $salt;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -55,5 +58,13 @@ Class Admin {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function setSalt( $salt ){
+		$this->salt = $salt;
+	}
+
+	public function getSalt(){
+		return $this->salt;
 	}
 }

@@ -65,7 +65,7 @@ class ControllerAdminAdmin extends Controller {
 		$this->getList( );
 	}
 
-	private function getList( ){
+	private function getList(){
 		// catch error
 		if ( isset($this->error['warning']) ){
 			$this->data['error_warning'] = $this->error['warning'];
@@ -311,6 +311,15 @@ class ControllerAdminAdmin extends Controller {
 			$this->data['group_id'] = 0;
 		}
 
+		// Entry status
+		if ( isset($this->request->post['status']) ){
+			$this->data['status'] = $this->request->post['status'];
+		}elseif ( isset($city) ){
+			$this->data['status'] = $city->getStatus();
+		}else {
+			$this->data['status'] = true;
+		}
+
 		$this->template = 'admin/admin_form.tpl';
 		$this->children = array(
 			'common/header',
@@ -340,7 +349,7 @@ class ControllerAdminAdmin extends Controller {
 		
     	
 		if ( isset($this->request->post['password']) ) {
-      		if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
+      		if ((utf8_strlen($this->request->post['password']) < 4 && utf8_strlen($this->request->post['password']) != 0) || (utf8_strlen($this->request->post['password']) > 20) || (utf8_strlen($this->request->post['password']) == 0 && $admin_id == 0) ) {
         		$this->error['password'] = $this->language->get('error_password');
       		}
 	

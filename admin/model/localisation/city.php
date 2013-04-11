@@ -89,7 +89,27 @@ class ModelLocalisationCity extends Doctrine {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\Localisation\City' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+		$query = $this->dm->createQueryBuilder( 'Document\Localisation\City' )
+    		->limit( $data['limit'] )
+    		->skip( $data['start'] );
+
+    	if ( isset( $data['filter_name'] ) ) {
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . $data['filter_name'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['filter_country'] ) && $data['filter_country'] ) {
+    		$query->field( 'this.country.id' )->equals( new \MongoRegex('/' . $data['filter_country'] . '.*/i') );
+    	}
+
+    	if ( isset( $data['sort'] ) ) {
+    		if ( isset( $data['order'] ) && $data['order'] == 'desc' ) {
+    			$query->sort( $data['sort'], 'desc' );
+    		}else {
+    			$query->sort( $data['sort'], 'asc' );
+    		}
+    	}
+    		
+    	return $query->getQuery()->execute();
 	}
 	
 	public function getTotalcities() {

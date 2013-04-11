@@ -10,3 +10,6 @@
 /admin/config.php
 /object/proxy
 /object/hydrator
+/object/hydrator
+/object/proxy
+/object/repository

@@ -80,7 +80,6 @@ require_once(DIR_SYSTEM . 'engine/front.php');
 require_once(DIR_SYSTEM . 'engine/loader.php'); 
 require_once(DIR_SYSTEM . 'engine/model.php');
 require_once(DIR_SYSTEM . 'engine/registry.php');
-require_once(DIR_DATABASE . 'doctrine.php');
 
 // Common
 require_once(DIR_SYSTEM . 'library/cache.php');
@@ -98,7 +97,4 @@ require_once(DIR_SYSTEM . 'library/request.php');
 require_once(DIR_SYSTEM . 'library/response.php');
 require_once(DIR_SYSTEM . 'library/session.php');
 require_once(DIR_SYSTEM . 'library/template.php');
-
-// System settings
-require_once(DIR_SYSTEM . 'config.php');
 ?>

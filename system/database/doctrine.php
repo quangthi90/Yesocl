@@ -58,7 +58,7 @@ class Doctrine {
         $configD->setProxyNamespace('Proxy');
         $configD->setHydratorDir(DIR_ROOT . '/object/hydrator');
         $configD->setHydratorNamespace('Hydrator'); 
-        $configD->setDefaultDB('solr');
+        $configD->setDefaultDB( DB_DATABASE );// yesocl
 
         $connection = new \Doctrine\MongoDB\Connection(new Mongo());
 
@@ -94,6 +94,10 @@ class Doctrine {
     
     public function __set($key, $value) {
         $this->registry->set($key, $value);
+    }
+
+    public function getDm(){
+        return $this->dm;
     }
 }
 ?>

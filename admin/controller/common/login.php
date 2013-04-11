@@ -13,11 +13,11 @@ class ControllerCommonLogin extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) { 
 			$this->session->data['token'] = md5(mt_rand());
-		
+			// print($this->session->data['token']); exit;
 			if (isset($this->request->post['redirect'])) {
 				$this->redirect($this->request->post['redirect'] . '&token=' . $this->session->data['token']);
 			} else {
-				$this->redirect($this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL'));
+				$this->redirect($this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL'));
 			}
 		}
 		
