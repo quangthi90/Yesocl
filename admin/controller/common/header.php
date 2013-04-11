@@ -37,6 +37,12 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_admin_group'] = $this->language->get('text_admin_group');
 		$this->data['text_admin_manage'] = $this->language->get('text_admin_manage');
 		
+		// Company
+		$this->data['text_companies'] = $this->language->get('text_companies');
+		
+		$this->data['text_company'] = $this->language->get('text_company');
+		$this->data['text_company_group'] = $this->language->get('text_company_group');
+		$this->data['text_company_post_category'] = $this->language->get('text_company_post_category');
 		
 		// Attribute
 		$this->data['text_attributes'] = $this->language->get('text_attributes');
@@ -72,6 +78,11 @@ class ControllerCommonHeader extends Controller {
 		// User
 		$this->data['user_group'] = $this->url->link('user/group');
 		$this->data['user'] = $this->url->link('user/user');
+
+		// Company
+		$this->data['company_group'] = $this->url->link('company/group');
+		$this->data['company'] = $this->url->link('company/company');
+		$this->data['company_post_category'] = $this->url->link('company/category');
 		
 		// Attribute
 		$this->data['attribute_type'] = $this->url->link('attribute/type');
