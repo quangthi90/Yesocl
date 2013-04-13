@@ -8,7 +8,7 @@ class ControllerGroupPost extends Controller {
 		if ( !isset($this->request->get['group_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_group');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		
@@ -25,7 +25,7 @@ class ControllerGroupPost extends Controller {
 		if ( !isset($this->request->get['group_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_group');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'group/post' );
@@ -37,14 +37,14 @@ class ControllerGroupPost extends Controller {
 			if ( $this->model_group_post->addPost( $this->request->post, $this->request->get['group_id'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
-				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->data['action'] = $this->url->link( 'group/post/insert', 'group_id=' . $this->request->get['group_id'] );
+		$this->data['action'] = $this->url->link( 'group/post/insert', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -55,7 +55,7 @@ class ControllerGroupPost extends Controller {
 		if ( !isset($this->request->get['group_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_group');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'group/post' );
@@ -67,11 +67,11 @@ class ControllerGroupPost extends Controller {
 			if ( $this->model_group_post->editPost( $this->request->get['post_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
-				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
 		$this->getForm();
@@ -83,7 +83,7 @@ class ControllerGroupPost extends Controller {
 		if ( !isset($this->request->get['group_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_group');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'group/post' );
@@ -94,7 +94,7 @@ class ControllerGroupPost extends Controller {
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
 			$this->model_group_post->deletePost( $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] ) );
+			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -134,23 +134,23 @@ class ControllerGroupPost extends Controller {
 		$this->load->model( 'group/group' );
 		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
 		if ( empty( $group ) ) {
-			$this->redirect( $this->url->link( 'group/group' ) );
+			$this->redirect( $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_group' ),
-			'href'      => $this->url->link( 'group/group' ),
+			'href'      => $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -178,9 +178,9 @@ class ControllerGroupPost extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'group/post/insert', 'group_id=' . $this->request->get['group_id'] );
-		$this->data['delete'] = $this->url->link( 'group/post/delete', 'group_id=' . $this->request->get['group_id'] );
-		$this->data['back'] = $this->url->link( 'group/group' );
+		$this->data['insert'] = $this->url->link( 'group/post/insert', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'group/post/delete', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// post
 		$posts = $group->getPosts();
@@ -195,13 +195,13 @@ class ControllerGroupPost extends Controller {
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/post/update', 'post_id=' . $posts[$i]->getId() . '&group_id=' . $this->request->get['group_id'] ),
+					'href' => $this->url->link( 'group/post/update', 'post_id=' . $posts[$i]->getId() . '&group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_comments' ),
-					'href' => $this->url->link( 'group/comment', 'post_id=' . $posts[$i]->getId() ),
+					'href' => $this->url->link( 'group/comment', 'post_id=' . $posts[$i]->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-list',
 				);
 				
@@ -230,7 +230,7 @@ class ControllerGroupPost extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('group/post', '&group_id=' . $this->request->get['group_id'] . '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('group/post', '&group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -291,12 +291,12 @@ class ControllerGroupPost extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -319,7 +319,7 @@ class ControllerGroupPost extends Controller {
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $group->getId() );
+		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
@@ -329,7 +329,7 @@ class ControllerGroupPost extends Controller {
 				$this->redirect( $this->data['cancel'] );
 			}
 				
-			$this->data['action'] = $this->url->link( 'group/post/update', 'post_id=' . $post->getId() . '&group_id=' . $group->getId() );
+			$this->data['action'] = $this->url->link( 'group/post/update', 'post_id=' . $post->getId() . '&group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 		}
 
 		// Entry title

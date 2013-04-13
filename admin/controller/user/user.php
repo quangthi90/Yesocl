@@ -21,12 +21,12 @@ class ControllerUserUser extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'user/user' ),
+			'href'      => $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -123,7 +123,7 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_former'] = 'Former';//$this->language->get( 'tab_email' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'user/user' );
+		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// user
 		if ( isset($this->request->get['user_id']) ){
@@ -396,10 +396,10 @@ class ControllerUserUser extends Controller {
 			$this->model_user_user->addUser( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'user/user') );
+			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'user/user/insert' );
+		$this->data['action'] = $this->url->link( 'user/user/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -415,7 +415,7 @@ class ControllerUserUser extends Controller {
 			$this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'user/user') );
+			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -432,7 +432,7 @@ class ControllerUserUser extends Controller {
 			$this->model_user_user->deleteUser( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'user/user') );
+			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -449,7 +449,7 @@ class ControllerUserUser extends Controller {
 			$this->model_user_user->changePassword( $this->request->get['user_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'user/user') );
+			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		// catch error
@@ -484,12 +484,12 @@ class ControllerUserUser extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'user/user' ),
+			'href'      => $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -505,14 +505,14 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_confirm'] = $this->language->get( 'entry_confirm' );
 
 		// Link
-		$this->data['cancel'] = $this->url->link( 'user/user' );
+		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// user
 		if ( isset($this->request->get['user_id']) ){
 			$user = $this->model_user_user->getUser( array('user_id' => $this->request->get['user_id']) );
 			
 			if ( $user ){
-				$this->data['action'] = $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() );	
+				$this->data['action'] = $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -574,12 +574,12 @@ class ControllerUserUser extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'user/user' ),
+			'href'      => $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -604,8 +604,8 @@ class ControllerUserUser extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'user/user/insert' );
-		$this->data['delete'] = $this->url->link( 'user/user/delete' );
+		$this->data['insert'] = $this->url->link( 'user/user/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'user/user/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// user
 		$data = array(
@@ -624,19 +624,19 @@ class ControllerUserUser extends Controller {
 
 				$action[] = array(
 					'text' => 'View',//$this->language->get( 'text_view' )
-					'href' => $this->url->link( 'user/user/view', 'user_id=' . $user->getId() ),
+					'href' => $this->url->link( 'user/user/view', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 
 				$action[] = array(
 					'text' => 'Change Password',//$this->language->get( 'text_change_password' )
-					'href' => $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() ),
+					'href' => $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'user/user/update', 'user_id=' . $user->getId() ),
+					'href' => $this->url->link( 'user/user/update', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -655,7 +655,7 @@ class ControllerUserUser extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('user/user', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('user/user', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -785,12 +785,12 @@ class ControllerUserUser extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'user/user' ),
+			'href'      => $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -893,16 +893,16 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_former'] = 'Former';//$this->language->get( 'tab_email' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'user/user' );
-		$this->data['emailValidate'] = $this->url->link( 'user/user/emailValidate' );
+		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['emailValidate'] = $this->url->link( 'user/user/emailValidate', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// user
 		if ( isset($this->request->get['user_id']) ){
 			$user = $this->model_user_user->getUser( array('user_id' => $this->request->get['user_id']) );
 			
 			if ( $user ){
-				$this->data['action'] = $this->url->link( 'user/user/update', 'user_id=' . $user->getId() );	
-				$this->data['emailValidate'] = $this->url->link( 'user/user/emailValidate&user_id=' . $user->getId() );
+				$this->data['action'] = $this->url->link( 'user/user/update', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
+				$this->data['emailValidate'] = $this->url->link( 'user/user/emailValidate', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

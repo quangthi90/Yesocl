@@ -23,10 +23,10 @@ class ControllerDataValue extends Controller {
 			$this->model_data_value->addValue( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'data/value') );
+			$this->redirect( $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'data/value/insert' );
+		$this->data['action'] = $this->url->link( 'data/value/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerDataValue extends Controller {
 			$this->model_data_value->editValue( $this->request->get['value_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'data/value') );
+			$this->redirect( $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerDataValue extends Controller {
 			$this->model_data_value->deleteValue( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'data/value') );
+			$this->redirect( $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -158,12 +158,12 @@ class ControllerDataValue extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'data/value' ),
+			'href'      => $this->url->link( 'data/value', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -190,8 +190,8 @@ class ControllerDataValue extends Controller {
 		$this->data['button_filter'] = $this->language->get( 'button_filter' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'data/value/insert' );
-		$this->data['delete'] = $this->url->link( 'data/value/delete', 'page=' . $page . $url );
+		$this->data['insert'] = $this->url->link( 'data/value/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'data/value/delete', 'page=' . $page . $url . '&token=' . $this->session->data['token'], 'SSL' );
 
 		$data = array(
 			'filter_type' => $filter_type,
@@ -215,7 +215,7 @@ class ControllerDataValue extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'data/value/update', 'value_id=' . $value->getId() ),
+					'href' => $this->url->link( 'data/value/update', 'value_id=' . $value->getId() . '&token=' . $this->session->data['token'], 'SSL' . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -253,8 +253,8 @@ class ControllerDataValue extends Controller {
 			$url .= '&order=asc';
 		}
 					
-		$this->data['sort_name'] = $this->url->link('data/value', 'page=' . $page . '&sort=name' . $url );
-		$this->data['sort_value'] = $this->url->link('data/value', 'page=' . $page . '&sort=value' . $url );
+		$this->data['sort_name'] = $this->url->link('data/value', 'page=' . $page . '&sort=name' . $url . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['sort_value'] = $this->url->link('data/value', 'page=' . $page . '&sort=value' . $url . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		$url = '';
 
@@ -279,7 +279,7 @@ class ControllerDataValue extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('data/value', '&page={page}' . $url, 'SSL');
+		$pagination->url = $this->url->link('data/value', '&page={page}' . $url . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -331,12 +331,12 @@ class ControllerDataValue extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'data/value' ),
+			'href'      => $this->url->link( 'data/value', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -357,14 +357,14 @@ class ControllerDataValue extends Controller {
 		$this->data['entry_value'] = $this->language->get( 'entry_value' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'data/value' );
+		$this->data['cancel'] = $this->url->link( 'data/value', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// Group
 		if ( isset($this->request->get['value_id']) ){
 			$value = $this->model_data_value->getValue( $this->request->get['value_id'] );
 			
 			if ( $value ){
-				$this->data['action'] = $this->url->link( 'data/value/update', 'value_id=' . $value->getId() );	
+				$this->data['action'] = $this->url->link( 'data/value/update', 'value_id=' . $value->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

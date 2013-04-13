@@ -23,10 +23,10 @@ class ControllerAttributeGroup extends Controller {
 			$this->model_attribute_group->addgroup( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'attribute/group') );
+			$this->redirect( $this->url->link('attribute/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'attribute/group/insert' );
+		$this->data['action'] = $this->url->link( 'attribute/group/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerAttributeGroup extends Controller {
 			$this->model_attribute_group->editgroup( $this->request->get['group_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'attribute/group') );
+			$this->redirect( $this->url->link('attribute/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerAttributeGroup extends Controller {
 			$this->model_attribute_group->deletegroup( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'attribute/group') );
+			$this->redirect( $this->url->link('attribute/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerAttributeGroup extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'attribute/group' ),
+			'href'      => $this->url->link( 'attribute/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -125,8 +125,8 @@ class ControllerAttributeGroup extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'attribute/group/insert' );
-		$this->data['delete'] = $this->url->link( 'attribute/group/delete' );
+		$this->data['insert'] = $this->url->link( 'attribute/group/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'attribute/group/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// Group
 		$groups = $this->model_attribute_group->getGroups( );
@@ -140,7 +140,7 @@ class ControllerAttributeGroup extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'attribute/group/update', 'group_id=' . $group->getId() ),
+					'href' => $this->url->link( 'attribute/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -157,7 +157,7 @@ class ControllerAttributeGroup extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('attribute/group', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('attribute/group', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -195,12 +195,12 @@ class ControllerAttributeGroup extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'attribute/group' ),
+			'href'      => $this->url->link( 'attribute/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -219,14 +219,14 @@ class ControllerAttributeGroup extends Controller {
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'attribute/group' );
+		$this->data['cancel'] = $this->url->link( 'attribute/group', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// Group
 		if ( isset($this->request->get['group_id']) ){
 			$group = $this->model_attribute_group->getGroup( $this->request->get['group_id'] );
 			
 			if ( $group ){
-				$this->data['action'] = $this->url->link( 'attribute/group/update', 'group_id=' . $group->getId() );	
+				$this->data['action'] = $this->url->link( 'attribute/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

@@ -23,10 +23,10 @@ class ControllerAdminGroup extends Controller {
 			$this->model_admin_group->addGroup( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'admin/group') );
+			$this->redirect( $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'admin/group/insert' );
+		$this->data['action'] = $this->url->link( 'admin/group/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerAdminGroup extends Controller {
 			$this->model_admin_group->editGroup( $this->request->get['group_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'admin/group') );
+			$this->redirect( $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerAdminGroup extends Controller {
 			$this->model_admin_group->deleteGroup( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'admin/group') );
+			$this->redirect( $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerAdminGroup extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'admin/group' ),
+			'href'      => $this->url->link( 'admin/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -125,8 +125,8 @@ class ControllerAdminGroup extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'admin/group/insert' );
-		$this->data['delete'] = $this->url->link( 'admin/group/delete' );
+		$this->data['insert'] = $this->url->link( 'admin/group/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'admin/group/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// Group
 		$groups = $this->model_admin_group->getGroups( );
@@ -140,7 +140,7 @@ class ControllerAdminGroup extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'admin/group/update', 'group_id=' . $group->getId() ),
+					'href' => $this->url->link( 'admin/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -157,7 +157,7 @@ class ControllerAdminGroup extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('admin/group', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('admin/group', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -195,12 +195,12 @@ class ControllerAdminGroup extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'admin/group' ),
+			'href'      => $this->url->link( 'admin/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -224,14 +224,14 @@ class ControllerAdminGroup extends Controller {
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'admin/group' );
+		$this->data['cancel'] = $this->url->link( 'admin/group', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// Group
 		if ( isset($this->request->get['group_id']) ){
 			$group = $this->model_admin_group->getGroup( $this->request->get['group_id'] );
 			
 			if ( $group ){
-				$this->data['action'] = $this->url->link( 'admin/group/update', 'group_id=' . $group->getId() );	
+				$this->data['action'] = $this->url->link( 'admin/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

@@ -23,10 +23,10 @@ class ControllerLocalisationWard extends Controller {
 			$this->model_localisation_ward->addward( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/ward') );
+			$this->redirect( $this->url->link('localisation/ward', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'localisation/ward/insert' );
+		$this->data['action'] = $this->url->link( 'localisation/ward/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerLocalisationWard extends Controller {
 			$this->model_localisation_ward->editward( $this->request->get['ward_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/ward') );
+			$this->redirect( $this->url->link('localisation/ward', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerLocalisationWard extends Controller {
 			$this->model_localisation_ward->deleteward( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/ward') );
+			$this->redirect( $this->url->link('localisation/ward', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerLocalisationWard extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/ward' ),
+			'href'      => $this->url->link( 'localisation/ward', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -126,8 +126,8 @@ class ControllerLocalisationWard extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'localisation/ward/insert' );
-		$this->data['delete'] = $this->url->link( 'localisation/ward/delete' );
+		$this->data['insert'] = $this->url->link( 'localisation/ward/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'localisation/ward/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// ward
 		$wards = $this->model_localisation_ward->getWards( );
@@ -141,7 +141,7 @@ class ControllerLocalisationWard extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'localisation/ward/update', 'ward_id=' . $ward->getId() ),
+					'href' => $this->url->link( 'localisation/ward/update', 'ward_id=' . $ward->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -160,7 +160,7 @@ class ControllerLocalisationWard extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('localisation/ward', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('localisation/ward', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -198,12 +198,12 @@ class ControllerLocalisationWard extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/ward' ),
+			'href'      => $this->url->link( 'localisation/ward', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -224,14 +224,14 @@ class ControllerLocalisationWard extends Controller {
 		$this->data['entry_district'] = $this->language->get( 'entry_district' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'localisation/ward' );
+		$this->data['cancel'] = $this->url->link( 'localisation/ward', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// ward
 		if ( isset($this->request->get['ward_id']) ){
 			$ward = $this->model_localisation_ward->getward( $this->request->get['ward_id'] );
 			
 			if ( $ward ){
-				$this->data['action'] = $this->url->link( 'localisation/ward/update', 'ward_id=' . $ward->getId() );	
+				$this->data['action'] = $this->url->link( 'localisation/ward/update', 'ward_id=' . $ward->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

@@ -9,7 +9,7 @@ class ControllerGroupComment extends Controller {
 		if ( !isset($this->request->get['post_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		
@@ -26,7 +26,7 @@ class ControllerGroupComment extends Controller {
 		if ( !isset($this->request->get['post_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'group/comment' );
@@ -38,14 +38,14 @@ class ControllerGroupComment extends Controller {
 			if ( $this->model_group_comment->addComment( $this->request->post, $this->request->get['post_id'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
-				$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] ) );
+				$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] ) );
+			$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->data['action'] = $this->url->link( 'group/comment/insert', 'post_id=' . $this->request->get['post_id'] );
+		$this->data['action'] = $this->url->link( 'group/comment/insert', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -54,9 +54,9 @@ class ControllerGroupComment extends Controller {
 		$this->load->language( 'group/comment' );
 		
 		if ( isset($this->request->get['post_id']) ){
-			$cancel = $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] );
+			$cancel = $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		}else {
-			$cancel = $this->url->link( 'group/group');
+			$cancel = $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL');
 		}
 
 		if ( !isset($this->request->get['comment_id']) ){
@@ -88,9 +88,9 @@ class ControllerGroupComment extends Controller {
 		$this->load->language( 'group/comment' );
 
 		if ( isset($this->request->get['post_id']) ){
-			$cancel = $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] );
+			$cancel = $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		}else {
-			$cancel = $this->url->link( 'group/group');
+			$cancel = $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL');
 		}
 		
 		$this->load->model( 'group/comment' );
@@ -139,28 +139,28 @@ class ControllerGroupComment extends Controller {
 		$post = $this->model_group_post->getPost( $this->request->get['post_id'] );
 		if ( empty( $post ) ) {
 			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_group' ),
-			'href'      => $this->url->link( 'group/group' ),
+			'href'      => $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId( $post->getId() ) ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/comment', 'post_id=' . $post->getId() ),
+			'href'      => $this->url->link( 'group/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -187,9 +187,9 @@ class ControllerGroupComment extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'group/comment/insert', 'post_id=' . $post->getId() );
-		$this->data['delete'] = $this->url->link( 'group/comment/delete', 'post_id=' . $post->getId() );
-		$this->data['back'] = $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId( $post->getId() ) );
+		$this->data['insert'] = $this->url->link( 'group/comment/insert', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'group/comment/delete', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') );
 
 		// Comment
 		$comments = $post->getComments();
@@ -204,7 +204,7 @@ class ControllerGroupComment extends Controller {
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/comment/update', 'comment_id=' . $comments[$i]->getId() . '&post_id=' . $post->getId() ),
+					'href' => $this->url->link( 'group/comment/update', 'comment_id=' . $comments[$i]->getId() . '&post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -223,7 +223,7 @@ class ControllerGroupComment extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('group/comment', '&post_id=' . $post->getId() . '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('group/comment', '&post_id=' . $post->getId() . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -270,28 +270,28 @@ class ControllerGroupComment extends Controller {
 		$post = $this->model_group_post->getPost( $this->request->get['post_id'] );
 		if ( empty( $post ) ) {
 			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_group' ),
-			'href'      => $this->url->link( 'group/group' ),
+			'href'      => $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId( $post->getId() ) ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/comment', 'post_id=' . $post->getId() ),
+			'href'      => $this->url->link( 'group/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -313,7 +313,7 @@ class ControllerGroupComment extends Controller {
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/comment', 'post_id=' . $post->getId() );
+		$this->data['cancel'] = $this->url->link( 'group/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		// comment
 		if ( isset( $this->request->get['comment_id']) ){
@@ -323,7 +323,7 @@ class ControllerGroupComment extends Controller {
 				$this->redirect( $this->data['cancel'] );
 			}
 				
-			$this->data['action'] = $this->url->link( 'group/comment/update', 'comment_id=' . $comment->getId() . '&post_id=' . $post->getId() );
+			$this->data['action'] = $this->url->link( 'group/comment/update', 'comment_id=' . $comment->getId() . '&post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 		}
 
 		// Entry content
