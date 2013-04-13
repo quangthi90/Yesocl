@@ -1,6 +1,7 @@
 <?php
-use Document\Design\Action;
-use Document\Design\Layout;
+use Document\Design\Action,
+	Document\Design\Layout,
+	Document\Setting\Config;
 
 class ModelDesignAction extends Doctrine {
 	public function addAction( $data = array() ) {
@@ -12,6 +13,7 @@ class ModelDesignAction extends Doctrine {
 		if ( !isset($data['code']) || empty($data['code']) ){
 			return false;
 		}
+		$data['code'] = strtolower(trim($data['code']));
 		
 		$action = new Action();
 		$action->setName( $data['name'] );
@@ -19,6 +21,12 @@ class ModelDesignAction extends Doctrine {
 		if ( isset($data['order']) && !empty($data['order']) ){
 			$action->setOrder( $data['order'] );
 		}
+
+		$config = new Config();
+		$this->config->load( 'action' );
+		$config->setKey( $this->config->get( 'action_title' ) . $data['code'] );
+		$config->setValue( $data['code'] );
+		$this->dm->persist( $config );		
 
 		$this->dm->persist( $action );
 		$this->dm->flush();
@@ -33,12 +41,24 @@ class ModelDesignAction extends Doctrine {
 		if ( !isset($data['code']) || empty($data['code']) ){
 			return false;
 		}
+
+		$data['code'] = strtolower(trim($data['code']));
 		
 		$action = $this->dm->getRepository('Document\Design\Action')->find( $id );
 		
 		if ( !$action ){
 			return false;
 		}
+
+		$this->config->load( 'action' );
+		// print($this->config->get( 'action_title' )); exit;
+		$config = $this->dm->getRepository('Document\Setting\Config')->findOneByKey( $this->config->get( 'action_title' ) . $action->getCode() );
+		if ( !$config ){
+			$config = new Config();
+			$config->setKey( $this->config->get( 'action_title' ) . $data['code'] );
+			$this->dm->persist( $config );
+		}
+		$config->setValue( $data['code'] );
 
 		$action->setName( $data['name'] ); 
 		$action->setCode( $data['code'] );
@@ -54,14 +74,14 @@ class ModelDesignAction extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$action = $this->dm->getRepository( 'Document\Design\Action' )->find( $id );
 
-				$layouts = $this->dm->getRepository( 'Document\Design\Layout' )->findBy( array('action.id' => $id) );
-
+				$layouts = $this->dm->getRepository( 'Document\Design\Layout' )->findBy( array('actions.id' => $id) );
+				// print(count($layouts)); exit;
 				foreach ( $layouts as $layout ) {
 					$layout->removeAction( $id );
 				}
 
-				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permission.actions.id' => $id) );
-				print(count($groups)); exit;
+				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permissions.actions.id' => $id) );
+				// print(count($groups)); exit;
 				foreach ( $groups as $group ) {
 					$permissions = $group->getPermissionByActionId( $id );
 					foreach ( $permissions as $permission ) {
@@ -69,7 +89,13 @@ class ModelDesignAction extends Doctrine {
 					}
 				}
 
-				$this->dm->remove($action);
+				$this->config->load( 'action' );
+				$config = $this->dm->getRepository('Document\Setting\Config')->findOneByKey( $this->config->get( 'action_title' ) . $action->getCode() );
+				if ( $config ){
+					$this->dm->remove( $config );
+				}
+
+				$this->dm->remove( $action );
 			}
 		}
 		
@@ -93,7 +119,7 @@ class ModelDesignAction extends Doctrine {
     		->limit( $data['limit'] )
     		->skip( $data['start'] )
     		->sort( 'order' );
-    		
+    	
     	return $query->getQuery()->execute();
 	}
 

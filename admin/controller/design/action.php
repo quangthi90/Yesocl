@@ -23,10 +23,10 @@ class ControllerDesignAction extends Controller {
 			$this->model_design_action->addAction( $this->request->post );
 			
 			$this->session->design['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'design/action') );
+			$this->redirect( $this->url->link( 'design/action', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->data['action'] = $this->url->link( 'design/action/insert' );
+		$this->data['action'] = $this->url->link( 'design/action/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerDesignAction extends Controller {
 			$this->model_design_action->editAction( $this->request->get['action_id'], $this->request->post );
 			
 			$this->session->design['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'design/action') );
+			$this->redirect( $this->url->link( 'design/action', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerDesignAction extends Controller {
 			$this->model_design_action->deleteAction( $this->request->post );
 			
 			$this->session->design['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'design/action') );
+			$this->redirect( $this->url->link( 'design/action', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerDesignAction extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'design/action' ),
+			'href'      => $this->url->link( 'design/action', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -128,8 +128,8 @@ class ControllerDesignAction extends Controller {
 		$this->data['button_filter'] = $this->language->get( 'button_filter' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'design/action/insert' );
-		$this->data['delete'] = $this->url->link( 'design/action/delete' );
+		$this->data['insert'] = $this->url->link( 'design/action/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'design/action/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		$data = array(
 			'limit' => $this->limit,
@@ -148,7 +148,7 @@ class ControllerDesignAction extends Controller {
 			
 				$data[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'design/action/update', 'action_id=' . $action->getId() ),
+					'href' => $this->url->link( 'design/action/update', 'action_id=' . $action->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -167,7 +167,7 @@ class ControllerDesignAction extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('design/action', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('design/action', '&page={page}', '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -211,12 +211,12 @@ class ControllerDesignAction extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'design/action' ),
+			'href'      => $this->url->link( 'design/action', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -237,13 +237,13 @@ class ControllerDesignAction extends Controller {
 		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'design/action' );
+		$this->data['cancel'] = $this->url->link( 'design/action', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		if ( isset($this->request->get['action_id']) ){
 			$action = $this->model_design_action->getAction( $this->request->get['action_id'] );
 			
 			if ( $action ){
-				$this->data['action'] = $this->url->link( 'design/action/update', 'action_id=' . $action->getId() );	
+				$this->data['action'] = $this->url->link( 'design/action/update', 'action_id=' . $action->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -294,7 +294,7 @@ class ControllerDesignAction extends Controller {
 			$this->error['error_code'] = $this->language->get( 'error_code' );
 		}
 
-		$actions = $this->model_design_action->getActionByCode( $this->request->post['code'] );
+		$actions = $this->model_design_action->getActionByCode( strtolower(trim($this->request->post['code'])) );
 		// print("<pre>"); var_dump($actions); exit;
 		if ( count($actions) > 1 || (count($actions) == 1 && (!isset($this->request->get['action_id']) || !array_key_exists($this->request->get['action_id'], $actions->toArray()))) ){
 			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
