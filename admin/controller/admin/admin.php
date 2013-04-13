@@ -23,10 +23,10 @@ class ControllerAdminAdmin extends Controller {
 			$this->model_admin_admin->addAdmin( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'admin/admin') );
+			$this->redirect( $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'admin/admin/insert' );
+		$this->data['action'] = $this->url->link( 'admin/admin/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerAdminAdmin extends Controller {
 			$this->model_admin_admin->editAdmin( $this->request->get['admin_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'admin/admin') );
+			$this->redirect( $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerAdminAdmin extends Controller {
 			$this->model_admin_admin->deleteAdmin( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'admin/admin') );
+			$this->redirect( $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerAdminAdmin extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'admin/admin' ),
+			'href'      => $this->url->link( 'admin/admin', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -126,8 +126,8 @@ class ControllerAdminAdmin extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'admin/admin/insert' );
-		$this->data['delete'] = $this->url->link( 'admin/admin/delete' );
+		$this->data['insert'] = $this->url->link( 'admin/admin/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'admin/admin/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// admin
 		$data = array(
@@ -146,7 +146,7 @@ class ControllerAdminAdmin extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'admin/admin/update', 'admin_id=' . $admin->getId() ),
+					'href' => $this->url->link( 'admin/admin/update', 'admin_id=' . $admin->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -165,7 +165,7 @@ class ControllerAdminAdmin extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('admin/admin', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('admin/admin', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -218,12 +218,12 @@ class ControllerAdminAdmin extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'admin/admin' ),
+			'href'      => $this->url->link( 'admin/admin', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -248,14 +248,14 @@ class ControllerAdminAdmin extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'admin/admin' );
+		$this->data['cancel'] = $this->url->link( 'admin/admin', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// admin
 		if ( isset($this->request->get['admin_id']) ){
 			$admin = $this->model_admin_admin->getadmin( array('admin_id' => $this->request->get['admin_id']) );
 			
 			if ( $admin ){
-				$this->data['action'] = $this->url->link( 'admin/admin/update', 'admin_id=' . $admin->getId() );
+				$this->data['action'] = $this->url->link( 'admin/admin/update', 'admin_id=' . $admin->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
