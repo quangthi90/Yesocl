@@ -61,7 +61,7 @@ class ControllerAttributeValue extends Controller {
 	}
 
 	public function update(){
-		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
 		
