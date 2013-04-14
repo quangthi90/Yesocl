@@ -2,8 +2,13 @@
 class ControllerCompanyCategory extends Controller {
 	private $limit = 10;
 	private $error = array();
+	private $route = 'company/category';
 
 	public function index() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/category' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -14,6 +19,10 @@ class ControllerCompanyCategory extends Controller {
 	}
 
 	public function insert() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/category' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -28,7 +37,7 @@ class ControllerCompanyCategory extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
@@ -38,16 +47,20 @@ class ControllerCompanyCategory extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/category', $url ) );
+			$this->redirect( $this->url->link( 'company/category', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/category/insert', $url );
+		$this->data['action'] = $this->url->link( 'company/category/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		$this->getForm();
 	}
 
 	public function update() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/category' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -62,12 +75,12 @@ class ControllerCompanyCategory extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		if ( !isset( $this->request->get['category_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/category' ) );
+			$this->redirect( $this->url->link( 'company/category', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		// request
@@ -78,16 +91,20 @@ class ControllerCompanyCategory extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/category', $url ) );
+			$this->redirect( $this->url->link( 'company/category', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/category/update', $url . '&category_id=' . $this->request->get['category_id'] );
+		$this->data['action'] = $this->url->link( 'company/category/update', 'token=' . $this->session->data['token'] . $url . '&category_id=' . $this->request->get['category_id'], 'SSL' );
 
 		$this->getForm();
 	}
 
 	public function delete() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/category' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -99,7 +116,7 @@ class ControllerCompanyCategory extends Controller {
 
 			$this->session->data['success'] = $this->language->get( 'success' );
 
-			$this->redirect( $this->url->link( 'company/category' ) );
+			$this->redirect( $this->url->link( 'company/category', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->getList();
@@ -138,12 +155,12 @@ class ControllerCompanyCategory extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/category' ),
+			'href'      => $this->url->link( 'company/category', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -166,8 +183,8 @@ class ControllerCompanyCategory extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'company/category/insert' );
-		$this->data['delete'] = $this->url->link( 'company/category/delete' );
+		$this->data['insert'] = $this->url->link( 'company/category/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'company/category/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		$data = array(
 			'start' => ($page - 1) * $this->limit,
@@ -184,7 +201,7 @@ class ControllerCompanyCategory extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'company/category/update', 'category_id=' . $category->getId() ),
+				'href' => $this->url->link( 'company/category/update', 'token=' . $this->session->data['token'] . '&category_id=' . $category->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
 				);
 
@@ -203,7 +220,7 @@ class ControllerCompanyCategory extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'company/category', '&page={page}', 'SSl' );
+		$pagination->url = $this->url->link( 'company/category', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
 
@@ -246,17 +263,17 @@ class ControllerCompanyCategory extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/category', $url ),
+			'href'      => $this->url->link( 'company/category', 'token=' . $this->session->data['token'] . $url, 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -277,7 +294,7 @@ class ControllerCompanyCategory extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'company/category', $url );
+		$this->data['cancel'] = $this->url->link( 'company/category', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		// category
 		if ( isset( $this->request->get['category_id'] ) ) {
@@ -356,6 +373,9 @@ class ControllerCompanyCategory extends Controller {
 	}
 
 	public function autocomplete() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
 	}
 }
 ?>

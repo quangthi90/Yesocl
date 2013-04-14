@@ -2,8 +2,13 @@
 class ControllerCompanyPost extends Controller {
 	private $limit = 10;
 	private $error = array();
+	private $route = 'company/post';
 
 	public function index() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/post' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -11,7 +16,7 @@ class ControllerCompanyPost extends Controller {
 		if ( !isset( $this->request->get['company_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company' ) );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->load->model( 'company/post' );
@@ -20,6 +25,10 @@ class ControllerCompanyPost extends Controller {
 	}
 
 	public function insert() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/post' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -27,7 +36,7 @@ class ControllerCompanyPost extends Controller {
 		if ( !isset( $this->request->get['company_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company' ) );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->load->model( 'company/post' );
@@ -50,16 +59,20 @@ class ControllerCompanyPost extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/post/insert', 'company_id=' . $this->request->get['company_id'] );
+		$this->data['action'] = $this->url->link( 'company/post/insert', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
 
 		$this->getForm();
 	}
 
 	public function update() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/post' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -67,7 +80,7 @@ class ControllerCompanyPost extends Controller {
 		if ( !isset($this->request->get['company_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
-			$this->redirect( $this->url->link( 'company/company') );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->load->model( 'company/post' );
@@ -85,7 +98,7 @@ class ControllerCompanyPost extends Controller {
 		if ( !isset( $this->request->get['post_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
 		}
 
 		// request
@@ -96,22 +109,26 @@ class ControllerCompanyPost extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/post/update', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
+		$this->data['action'] = $this->url->link( 'company/post/update', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'], 'SSL' );
 
 		$this->getForm();
 	}
 
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'company/post' );
 		
 		if ( !isset($this->request->get['company_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
-			$this->redirect( $this->url->link( 'company/company') );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
 		$this->load->model( 'company/post' );
@@ -122,7 +139,7 @@ class ControllerCompanyPost extends Controller {
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
 			$this->model_company_post->deletePost( $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'success' );
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -161,17 +178,17 @@ class ControllerCompanyPost extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_company' ),
-			'href'      => $this->url->link( 'company/company' ),
+			'href'      => $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ),
+			'href'      => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -196,9 +213,9 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'company/post/insert', 'company_id=' . $this->request->get['company_id'] );
-		$this->data['delete'] = $this->url->link( 'company/post/delete', 'company_id=' . $this->request->get['company_id'] );
-		$this->data['back'] = $this->url->link( 'company/company' );
+		$this->data['insert'] = $this->url->link( 'company/post/insert', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'company/post/delete', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
 
 		//company
 		$this->load->model( 'company/company' );
@@ -206,7 +223,7 @@ class ControllerCompanyPost extends Controller {
 		if ( empty( $company ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company' ) );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$data = array(
@@ -223,13 +240,13 @@ class ControllerCompanyPost extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_comment' ),
-				'href' => $this->url->link( 'company/comment', 'company_id=' . $company->getId() . '&post_id=' . $post->getId() ),
+				'href' => $this->url->link( 'company/comment', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId() . '&post_id=' . $post->getId(), 'SSL' ),
 				'icon' => 'icon-list',
 				);
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'company/post/update', 'company_id=' . $company->getId() . '&post_id=' . $post->getId() ),
+				'href' => $this->url->link( 'company/post/update', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId() . '&post_id=' . $post->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
 				);
 
@@ -249,7 +266,7 @@ class ControllerCompanyPost extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'company/post', '&page={page}', 'SSl' );
+		$pagination->url = $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
 
@@ -316,22 +333,22 @@ class ControllerCompanyPost extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_company' ),
-			'href'      => $this->url->link( 'company/company' ),
+			'href'      => $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/post', $url . '&company_id=' . $this->request->get['company_id'] ),
+			'href'      => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . $url . '&company_id=' . $this->request->get['company_id'], 'SSl' ),
       		'separator' => ' :: '
    		);
 
@@ -355,14 +372,14 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'company/post', $url . '&company_id=' . $this->request->get['company_id'] );
+		$this->data['cancel'] = $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . $url . '&company_id=' . $this->request->get['company_id'], 'SSL' );
 
 		// company
 		$this->load->model( 'company/company' );
 		$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 
 		if ( empty( $company ) ) {
-			$this->redirect( $this->url->link( 'company/company' ) );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		if ( isset( $this->request->get['post_id'] ) ) {
