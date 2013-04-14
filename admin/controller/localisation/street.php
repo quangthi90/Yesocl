@@ -23,10 +23,10 @@ class ControllerLocalisationStreet extends Controller {
 			$this->model_localisation_street->addstreet( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/street') );
+			$this->redirect( $this->url->link('localisation/street', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'localisation/street/insert' );
+		$this->data['action'] = $this->url->link( 'localisation/street/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerLocalisationStreet extends Controller {
 			$this->model_localisation_street->editstreet( $this->request->get['street_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/street') );
+			$this->redirect( $this->url->link('localisation/street', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerLocalisationStreet extends Controller {
 			$this->model_localisation_street->deletestreet( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/street') );
+			$this->redirect( $this->url->link('localisation/street', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerLocalisationStreet extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/street' ),
+			'href'      => $this->url->link( 'localisation/street', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -126,8 +126,8 @@ class ControllerLocalisationStreet extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'localisation/street/insert' );
-		$this->data['delete'] = $this->url->link( 'localisation/street/delete' );
+		$this->data['insert'] = $this->url->link( 'localisation/street/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'localisation/street/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// street
 		$streets = $this->model_localisation_street->getStreets( );
@@ -141,7 +141,7 @@ class ControllerLocalisationStreet extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'localisation/street/update', 'street_id=' . $street->getId() ),
+					'href' => $this->url->link( 'localisation/street/update', 'street_id=' . $street->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -160,7 +160,7 @@ class ControllerLocalisationStreet extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('localisation/street', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('localisation/street', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -198,12 +198,12 @@ class ControllerLocalisationStreet extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/street' ),
+			'href'      => $this->url->link( 'localisation/street', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -224,14 +224,14 @@ class ControllerLocalisationStreet extends Controller {
 		$this->data['entry_district'] = $this->language->get( 'entry_district' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'localisation/street' );
+		$this->data['cancel'] = $this->url->link( 'localisation/street', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// street
 		if ( isset($this->request->get['street_id']) ){
 			$street = $this->model_localisation_street->getstreet( $this->request->get['street_id'] );
 			
 			if ( $street ){
-				$this->data['action'] = $this->url->link( 'localisation/street/update', 'street_id=' . $street->getId() );	
+				$this->data['action'] = $this->url->link( 'localisation/street/update', 'street_id=' . $street->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

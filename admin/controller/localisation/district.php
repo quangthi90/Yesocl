@@ -23,10 +23,10 @@ class ControllerLocalisationdistrict extends Controller {
 			$this->model_localisation_district->adddistrict( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/district') );
+			$this->redirect( $this->url->link('localisation/district', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'localisation/district/insert' );
+		$this->data['action'] = $this->url->link( 'localisation/district/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerLocalisationdistrict extends Controller {
 			$this->model_localisation_district->editdistrict( $this->request->get['district_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/district') );
+			$this->redirect( $this->url->link('localisation/district', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerLocalisationdistrict extends Controller {
 			$this->model_localisation_district->deletedistrict( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/district') );
+			$this->redirect( $this->url->link('localisation/district', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerLocalisationdistrict extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/district' ),
+			'href'      => $this->url->link( 'localisation/district', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -126,8 +126,8 @@ class ControllerLocalisationdistrict extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'localisation/district/insert' );
-		$this->data['delete'] = $this->url->link( 'localisation/district/delete' );
+		$this->data['insert'] = $this->url->link( 'localisation/district/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'localisation/district/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// district
 		$districts = $this->model_localisation_district->getDistricts( );
@@ -141,7 +141,7 @@ class ControllerLocalisationdistrict extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'localisation/district/update', 'district_id=' . $district->getId() ),
+					'href' => $this->url->link( 'localisation/district/update', 'district_id=' . $district->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -160,7 +160,7 @@ class ControllerLocalisationdistrict extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('localisation/district', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('localisation/district', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -198,12 +198,12 @@ class ControllerLocalisationdistrict extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/district' ),
+			'href'      => $this->url->link( 'localisation/district', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -224,14 +224,14 @@ class ControllerLocalisationdistrict extends Controller {
 		$this->data['entry_city'] = $this->language->get( 'entry_city' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'localisation/district' );
+		$this->data['cancel'] = $this->url->link( 'localisation/district', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// district
 		if ( isset($this->request->get['district_id']) ){
 			$district = $this->model_localisation_district->getdistrict( $this->request->get['district_id'] );
 			
 			if ( $district ){
-				$this->data['action'] = $this->url->link( 'localisation/district/update', 'district_id=' . $district->getId() );	
+				$this->data['action'] = $this->url->link( 'localisation/district/update', 'district_id=' . $district->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

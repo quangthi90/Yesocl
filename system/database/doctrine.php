@@ -95,5 +95,9 @@ class Doctrine {
     public function __set($key, $value) {
         $this->registry->set($key, $value);
     }
+
+    public function getDm(){
+        return $this->dm;
+    }
 }
 ?>

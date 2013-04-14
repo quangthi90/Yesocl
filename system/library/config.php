@@ -23,6 +23,7 @@ class Config {
 	  		require($file);
 	  
 	  		$this->data = array_merge($this->data, $_);
+	  		// print("<pre>"); var_dump($this->data); exit;
 		} else {
 			trigger_error('Error: Could not load config ' . $filename . '!');
 			exit();

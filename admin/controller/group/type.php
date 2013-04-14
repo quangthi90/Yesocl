@@ -2,8 +2,13 @@
 class ControllerGrouptype extends Controller {
 	private $error = array( );
 	private $limit = 10;
+	private $route = 'group/type';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'group/type' );
 		$this->load->model( 'group/type' );
 
@@ -13,6 +18,10 @@ class ControllerGrouptype extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'group/type' );
 		$this->load->model( 'group/type' );
 
@@ -23,15 +32,19 @@ class ControllerGrouptype extends Controller {
 			$this->model_group_type->addtype( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/type') );
+			$this->redirect( $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'group/type/insert' );
+		$this->data['action'] = $this->url->link( 'group/type/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'group/type' );
 		$this->load->model( 'group/type' );
 
@@ -42,13 +55,17 @@ class ControllerGrouptype extends Controller {
 			$this->model_group_type->edittype( $this->request->get['type_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/type') );
+			$this->redirect( $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'group/type' );
 		$this->load->model( 'group/type' );
 
@@ -59,7 +76,7 @@ class ControllerGrouptype extends Controller {
 			$this->model_group_type->deletetype( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/type') );
+			$this->redirect( $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +113,12 @@ class ControllerGrouptype extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/type' ),
+			'href'      => $this->url->link( 'group/type', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -125,8 +142,8 @@ class ControllerGrouptype extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'group/type/insert' );
-		$this->data['delete'] = $this->url->link( 'group/type/delete' );
+		$this->data['insert'] = $this->url->link( 'group/type/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'group/type/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// type
 		$types = $this->model_group_type->getTypes( );
@@ -140,7 +157,7 @@ class ControllerGrouptype extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/type/update', 'type_id=' . $type->getId() ),
+					'href' => $this->url->link( 'group/type/update', 'type_id=' . $type->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -157,7 +174,7 @@ class ControllerGrouptype extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('group/type', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('group/type', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -195,12 +212,12 @@ class ControllerGrouptype extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/type' ),
+			'href'      => $this->url->link( 'group/type', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -219,14 +236,14 @@ class ControllerGrouptype extends Controller {
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/type' );
+		$this->data['cancel'] = $this->url->link( 'group/type', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// type
 		if ( isset($this->request->get['type_id']) ){
 			$type = $this->model_group_type->getType( $this->request->get['type_id'] );
 			
 			if ( $type ){
-				$this->data['action'] = $this->url->link( 'group/type/update', 'type_id=' . $type->getId() );	
+				$this->data['action'] = $this->url->link( 'group/type/update', 'type_id=' . $type->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

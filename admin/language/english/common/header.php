@@ -40,6 +40,14 @@ $_['text_data_list']                = 'Data List';
 $_['text_type']                    = 'Type';
 $_['text_value']                      = 'Value';
 
+// System
+$_['text_admin']                       = 'Admin Manage';
+$_['text_admin_group']                 = 'Admin Group';
+$_['text_admin_user']                  = 'Admin';
+$_['text_design']                  	   = 'Design';
+$_['text_layout']                      = 'Layout';
+$_['text_action']                      = 'Action';
+
 $_['text_logged']                      = 'You are logged in as <span>%s</span>';
 $_['text_logout']                      = 'Logout';
 $_['text_setting']                     = 'Settings';

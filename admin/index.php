@@ -15,10 +15,12 @@ if (!defined('DIR_APPLICATION')) {
 require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
-require_once(DIR_SYSTEM . 'library/currency.php');
+// require_once(DIR_SYSTEM . 'library/currency.php');
 require_once(DIR_SYSTEM . 'library/user.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
+// require_once(DIR_SYSTEM . 'library/weight.php');
+// require_once(DIR_SYSTEM . 'library/length.php');
+
+require_once(DIR_DATABASE . 'doctrine.php');
 
 // Registry
 $registry = new Registry();
@@ -32,19 +34,19 @@ $config = new Config();
 $registry->set('config', $config);
 
 // Database
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$db = new Doctrine($registry);
 $registry->set('db', $db);
 		
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
- 
-foreach ($query->rows as $setting) {
-	if (!$setting['serialized']) {
-		$config->set($setting['key'], $setting['value']);
-	} else {
-		$config->set($setting['key'], unserialize($setting['value']));
+$configs = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();
+
+foreach ($configs as $setting) {
+	if ( $setting ) {
+		$config->set( $setting->getKey(), $setting->getValue() );
 	}
 }
+$config->load( 'action' );
+$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 // Url
 $url = new Url(HTTP_SERVER, $config->get('config_use_ssl') ? HTTPS_SERVER : HTTP_SERVER);	
@@ -115,36 +117,34 @@ foreach ($query->rows as $result) {
 	$languages[$result['code']] = $result;
 }
 
-$config->set('config_language_id', $languages[$config->get('config_admin_language')]['language_id']);
-
 // Language	
-$language = new Language($languages[$config->get('config_admin_language')]['directory']);
-$language->load($languages[$config->get('config_admin_language')]['filename']);	
+$language = new Language($languages['en']['directory']);
+$language->load($languages['en']['filename']);	
 $registry->set('language', $language); 		
 
 // Document
 $registry->set('document', new Document()); 		
 		
 // Currency
-$registry->set('currency', new Currency($registry));		
+// $registry->set('currency', new Currency($registry));		
 		
 // Weight
-$registry->set('weight', new Weight($registry));
+// $registry->set('weight', new Weight($registry));
 
 // Length
-$registry->set('length', new Length($registry));
+// $registry->set('length', new Length($registry));
 
 // User
 $registry->set('user', new User($registry));
-						
+			
 // Front Controller
 $controller = new Front($registry);
 
 // Login
-//$controller->addPreAction(new Action('common/home/login'));
+$controller->addPreAction(new Action('common/home/login'));
 
 // Permission
-//$controller->addPreAction(new Action('common/home/permission'));
+$controller->addPreAction(new Action('common/home/permission'));
 
 // Router
 if (isset($request->get['route'])) {

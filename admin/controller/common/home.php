@@ -394,8 +394,8 @@ class ControllerCommonHome extends Controller {
 				'error/not_found',
 				'error/permission'		
 			);			
-						
-			if (!in_array($route, $ignore) && !$this->user->hasPermission('access', $route)) {
+			
+			if (!in_array($route, $ignore) && !$this->user->hasPermission($route, $this->config->get('action_view'))) {
 				return $this->forward('error/permission');
 			}
 		}

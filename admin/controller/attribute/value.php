@@ -3,14 +3,19 @@ use Document\Attribute\Value;
 
 class ControllerAttributeValue extends Controller {
 	private $error = array( );
+	private $route = 'attribute/value';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'attribute/value' );
 		
 		if ( !isset($this->request->get['attribute_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_attribute');
 			
-			$this->redirect( $this->url->link( 'attribute/attribute') );
+			$this->redirect( $this->url->link('attribute/attribute', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		
@@ -22,12 +27,16 @@ class ControllerAttributeValue extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'attribute/value' );
 		
 		if ( !isset($this->request->get['attribute_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_attribute');
 			
-			$this->redirect( $this->url->link( 'attribute/attribute') );
+			$this->redirect( $this->url->link('attribute/attribute', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'attribute/value' );
@@ -39,25 +48,29 @@ class ControllerAttributeValue extends Controller {
 			if ( $this->model_attribute_value->addValue( $this->request->post, $this->request->get['attribute_id'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
-				$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] ) );
+				$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] ) );
+			$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->data['action'] = $this->url->link( 'attribute/value/insert', 'attribute_id=' . $this->request->get['attribute_id'] );
+		$this->data['action'] = $this->url->link( 'attribute/value/insert', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'attribute/value' );
 		
 		if ( !isset($this->request->get['attribute_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_attribute');
 			
-			$this->redirect( $this->url->link( 'attribute/attribute') );
+			$this->redirect( $this->url->link('attribute/attribute', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'attribute/value' );
@@ -69,23 +82,27 @@ class ControllerAttributeValue extends Controller {
 			if ( $this->model_attribute_value->editValue( $this->request->get['value_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
-				$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] ) );
+				$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] ) );
+			$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
 		$this->getForm();
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'attribute/value' );
 		
 		if ( !isset($this->request->get['attribute_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_attribute');
 			
-			$this->redirect( $this->url->link( 'attribute/attribute') );
+			$this->redirect( $this->url->link('attribute/attribute', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'attribute/value' );
@@ -97,7 +114,7 @@ class ControllerAttributeValue extends Controller {
 			$this->model_attribute_value->deleteValue( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] ) );
+			$this->redirect( $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -140,12 +157,12 @@ class ControllerAttributeValue extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'attribute/value' ),
+			'href'      => $this->url->link( 'attribute/value', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -170,9 +187,9 @@ class ControllerAttributeValue extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'attribute/value/insert', 'attribute_id=' . $this->request->get['attribute_id'] );
-		$this->data['delete'] = $this->url->link( 'attribute/value/delete', 'attribute_id=' . $this->request->get['attribute_id'] );
-		$this->data['back'] = $this->url->link( 'attribute/attribute' );
+		$this->data['insert'] = $this->url->link( 'attribute/value/insert', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'attribute/value/delete', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'attribute/attribute', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// value
 		$values = $attribute->getValues();
@@ -187,7 +204,7 @@ class ControllerAttributeValue extends Controller {
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'attribute/value/update', 'value_id=' . $values[$i]->getId() . '&attribute_id=' . $this->request->get['attribute_id'] ),
+					'href' => $this->url->link( 'attribute/value/update', 'value_id=' . $values[$i]->getId() . '&attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -204,7 +221,7 @@ class ControllerAttributeValue extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('sale/customer', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('sale/customer', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -242,12 +259,12 @@ class ControllerAttributeValue extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'attribute/value' ),
+			'href'      => $this->url->link( 'attribute/value', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -267,7 +284,7 @@ class ControllerAttributeValue extends Controller {
 		$this->data['entry_attributes'] = $this->language->get( 'entry_attributes' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] );
+		$this->data['cancel'] = $this->url->link( 'attribute/value', 'attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		// Load model
 		$this->load->model( 'attribute/attribute' );
@@ -284,7 +301,7 @@ class ControllerAttributeValue extends Controller {
 					}
 				}
 				
-				$this->data['action'] = $this->url->link( 'attribute/value/update', 'value_id=' . $this->request->get['value_id'] . '&attribute_id=' . $this->request->get['attribute_id'] );
+				$this->data['action'] = $this->url->link( 'attribute/value/update', 'value_id=' . $this->request->get['value_id'] . '&attribute_id=' . $this->request->get['attribute_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}

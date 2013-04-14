@@ -17,6 +17,7 @@
 <link rel="stylesheet" type="text/css" href="view/stylesheet/bootstrap-responsive.min.css" />
 <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
 <link rel="stylesheet" type="text/css" href="view/stylesheet/fortAwesome/css/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="view/stylesheet/uniform.default.css" />
 <?php foreach ($styles as $style) { ?>
 <link rel="<?php echo $style['rel']; ?>" type="text/css" href="<?php echo $style['href']; ?>" media="<?php echo $style['media']; ?>" />
 <?php } ?>
@@ -26,6 +27,7 @@
 <script type="text/javascript" src="view/javascript/jquery/tabs.js"></script>
 <script type="text/javascript" src="view/javascript/jquery/superfish/js/superfish.js"></script>
 <script type="text/javascript" src="view/javascript/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="view/javascript/bootstrap/jquery.uniform.min.js"></script>
 <?php foreach ($scripts as $script) { ?>
 <script type="text/javascript" src="<?php echo $script; ?>"></script>
 <?php } ?>
@@ -59,10 +61,12 @@ $(document).ready(function(){
 <div id="header">
   <div class="div1">
     <div class="div2"><img src="view/image/logo.png" title="<?php echo $heading_title; ?>" onclick="location = '<?php echo $home; ?>'" /></div>
-    
+    <?php if ($logged) { ?>
+    <div class="div3"><img src="view/image/lock.png" alt="" style="position: relative; top: 3px;" />&nbsp;<?php echo $logged; ?></div>
+    <?php } ?>
   
   </div>
-  <?php //if ($logged) { ?>
+  <?php if ($logged) { ?>
   <div id="menu">
     <ul class="left" style="display: none;">
       <li id="user"><a class="top"><?php echo $text_users; ?></a>
@@ -81,6 +85,8 @@ $(document).ready(function(){
       		</li>
       	</ul>
       </li>
+      <!--li id="attribute"><a class="top"><?php echo $text_attributes; ?></a>
+      </li-->
       <li id="company"><a class="top"><?php echo $text_companies; ?></a>
         <ul>
           <li><a href="<?php echo $company; ?>"><?php echo $text_company; ?></a></li>
@@ -103,6 +109,18 @@ $(document).ready(function(){
       </li>
       <li id="system"><a class="top"><?php echo $text_system; ?></a>
         <ul>
+          <li><a class="parent"><?php echo $text_design; ?></a>
+            <ul>
+              <li><a href="<?php echo $layout; ?>"><?php echo $text_layout; ?></a></li>
+              <li><a href="<?php echo $action; ?>"><?php echo $text_action; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_admin; ?></a>
+            <ul>
+              <li><a href="<?php echo $admin; ?>"><?php echo $text_admin_user; ?></a></li>
+              <li><a href="<?php echo $admin_group; ?>"><?php echo $text_admin_group; ?></a></li>
+            </ul>
+          </li>
           <li><a class="parent"><?php echo $text_localisation; ?></a>
             <ul>
               <li><a href="<?php echo $country; ?>"><?php echo $text_country; ?></a></li>
@@ -114,6 +132,9 @@ $(document).ready(function(){
           </li>
         </ul>
       </li>
+    </ul>
+    <ul class="right">
+      <li id="store"><a class="top" href="<?php echo $logout; ?>"><?php echo $text_logout; ?></a></li>
     </ul>
     <script type="text/javascript"><!--
 $(document).ready(function() {
@@ -175,5 +196,5 @@ $(document).ready(function() {
 });
 //--></script> 
   </div>
-  <?php //} ?>
+  <?php } ?>
 </div>

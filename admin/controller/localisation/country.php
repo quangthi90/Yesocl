@@ -23,10 +23,10 @@ class ControllerLocalisationCountry extends Controller {
 			$this->model_localisation_country->addcountry( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/country') );
+			$this->redirect( $this->url->link('localisation/country', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'localisation/country/insert' );
+		$this->data['action'] = $this->url->link( 'localisation/country/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -42,7 +42,7 @@ class ControllerLocalisationCountry extends Controller {
 			$this->model_localisation_country->editcountry( $this->request->get['country_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/country') );
+			$this->redirect( $this->url->link('localisation/country', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -59,7 +59,7 @@ class ControllerLocalisationCountry extends Controller {
 			$this->model_localisation_country->deletecountry( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'localisation/country') );
+			$this->redirect( $this->url->link('localisation/country', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -96,12 +96,12 @@ class ControllerLocalisationCountry extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/country' ),
+			'href'      => $this->url->link( 'localisation/country', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -125,8 +125,8 @@ class ControllerLocalisationCountry extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'localisation/country/insert' );
-		$this->data['delete'] = $this->url->link( 'localisation/country/delete' );
+		$this->data['insert'] = $this->url->link( 'localisation/country/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'localisation/country/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// country
 		$countries = $this->model_localisation_country->getcountries( );
@@ -140,7 +140,7 @@ class ControllerLocalisationCountry extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'localisation/country/update', 'country_id=' . $country->getId() ),
+					'href' => $this->url->link( 'localisation/country/update', 'country_id=' . $country->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -158,7 +158,7 @@ class ControllerLocalisationCountry extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('localisation/country', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('localisation/country', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -196,12 +196,12 @@ class ControllerLocalisationCountry extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'localisation/country' ),
+			'href'      => $this->url->link( 'localisation/country', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -221,14 +221,14 @@ class ControllerLocalisationCountry extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'localisation/country' );
+		$this->data['cancel'] = $this->url->link( 'localisation/country', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// country
 		if ( isset($this->request->get['country_id']) ){
 			$country = $this->model_localisation_country->getcountry( $this->request->get['country_id'] );
 			
 			if ( $country ){
-				$this->data['action'] = $this->url->link( 'localisation/country/update', 'country_id=' . $country->getId() );	
+				$this->data['action'] = $this->url->link( 'localisation/country/update', 'country_id=' . $country->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
