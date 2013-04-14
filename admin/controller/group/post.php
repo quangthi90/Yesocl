@@ -1,8 +1,13 @@
 <?php
 class ControllerGroupPost extends Controller {
 	private $error = array( );
+	private $route = 'group/post';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'group/post' );
 		
 		if ( !isset($this->request->get['group_id']) ){
@@ -20,6 +25,10 @@ class ControllerGroupPost extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'group/post' );
 		
 		if ( !isset($this->request->get['group_id']) ){
@@ -50,6 +59,10 @@ class ControllerGroupPost extends Controller {
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'group/post' );
 		
 		if ( !isset($this->request->get['group_id']) ){
@@ -78,6 +91,10 @@ class ControllerGroupPost extends Controller {
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'group/post' );
 		
 		if ( !isset($this->request->get['group_id']) ){

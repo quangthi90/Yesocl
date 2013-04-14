@@ -2,8 +2,13 @@
 class ControllerDesignLayout extends Controller {
 	private $error = array( );
 	private $limit = 10;
+	private $route = 'design/layout';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'design/layout' );
 		$this->load->model( 'design/layout' );
 
@@ -13,6 +18,10 @@ class ControllerDesignLayout extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'design/layout' );
 		$this->load->model( 'design/layout' );
 
@@ -32,6 +41,10 @@ class ControllerDesignLayout extends Controller {
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'design/layout' );
 		$this->load->model( 'design/layout' );
 
@@ -49,6 +62,10 @@ class ControllerDesignLayout extends Controller {
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'design/layout' );
 		$this->load->model( 'design/layout' );
 

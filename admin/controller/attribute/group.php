@@ -2,8 +2,13 @@
 class ControllerAttributeGroup extends Controller {
 	private $error = array( );
 	private $limit = 10;
+	private $route = 'attribute/group';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'attribute/group' );
 		$this->load->model( 'attribute/group' );
 
@@ -13,6 +18,10 @@ class ControllerAttributeGroup extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'attribute/group' );
 		$this->load->model( 'attribute/group' );
 
@@ -32,6 +41,10 @@ class ControllerAttributeGroup extends Controller {
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'attribute/group' );
 		$this->load->model( 'attribute/group' );
 
@@ -49,6 +62,10 @@ class ControllerAttributeGroup extends Controller {
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'attribute/group' );
 		$this->load->model( 'attribute/group' );
 

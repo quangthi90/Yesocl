@@ -2,8 +2,13 @@
 class ControllerUserUser extends Controller {
 	private $error = array( );
 	private $limit = 10;
+	private $route = 'user/user';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
 
@@ -13,6 +18,10 @@ class ControllerUserUser extends Controller {
 	}
 
 	public function view(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
 
@@ -386,6 +395,10 @@ class ControllerUserUser extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
 
@@ -405,6 +418,10 @@ class ControllerUserUser extends Controller {
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_update')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
 
@@ -422,6 +439,10 @@ class ControllerUserUser extends Controller {
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
 
@@ -439,6 +460,10 @@ class ControllerUserUser extends Controller {
 	}
 
 	public function changepassword(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_change_password')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'user/user' );
 		$this->load->model( 'user/user' );
 
