@@ -84,6 +84,8 @@ class ModelAdminGroup extends Doctrine {
 				$permissions[] = $permission;
 			}
 			$group->setPermissions( $permissions );
+		}else{
+			$group->setPermissions( null );
 		}
 
 		$this->dm->flush();

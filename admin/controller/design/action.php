@@ -145,7 +145,11 @@ class ControllerDesignAction extends Controller {
 		if ( $actions ){
 			foreach ( $actions as $action ){
 				$data = array();
-			
+				
+				if ( $action->getCode() == $this->config->get('action_view') ){
+					continue;
+				}
+
 				$data[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'design/action/update', 'action_id=' . $action->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
@@ -276,7 +280,11 @@ class ControllerDesignAction extends Controller {
 			$this->data['order'] = '';
 		}
 
-		$this->template = 'design/action_form.tpl';
+		if ( isset($this->request->get['action_id']) ){
+			$this->template = 'design/action_form_edit.tpl';
+		}else{
+			$this->template = 'design/action_form_view.tpl';
+		}
 		$this->children = array(
 			'common/header',
 			'common/footer'

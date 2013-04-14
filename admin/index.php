@@ -34,21 +34,19 @@ $config = new Config();
 $registry->set('config', $config);
 
 // Database
-$dm = new Doctrine($registry);
-$registry->set('db', $dm);
-
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$db = new Doctrine($registry);
+$registry->set('db', $db);
 		
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0'");
- 
-foreach ($query->rows as $setting) {
-	if (!$setting['serialized']) {
-		$config->set($setting['key'], $setting['value']);
-	} else {
-		$config->set($setting['key'], unserialize($setting['value']));
+$configs = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();
+
+foreach ($configs as $setting) {
+	if ( $setting ) {
+		$config->set( $setting->getKey(), $setting->getValue() );
 	}
 }
+$config->load( 'action' );
+$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 // Url
 $url = new Url(HTTP_SERVER, $config->get('config_use_ssl') ? HTTPS_SERVER : HTTP_SERVER);	
@@ -119,11 +117,9 @@ foreach ($query->rows as $result) {
 	$languages[$result['code']] = $result;
 }
 
-$config->set('config_language_id', $languages[$config->get('config_admin_language')]['language_id']);
-
 // Language	
-$language = new Language($languages[$config->get('config_admin_language')]['directory']);
-$language->load($languages[$config->get('config_admin_language')]['filename']);	
+$language = new Language($languages['en']['directory']);
+$language->load($languages['en']['filename']);	
 $registry->set('language', $language); 		
 
 // Document
@@ -140,7 +136,7 @@ $registry->set('document', new Document());
 
 // User
 $registry->set('user', new User($registry));
-						
+			
 // Front Controller
 $controller = new Front($registry);
 

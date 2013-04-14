@@ -60,7 +60,7 @@ class User {
     	$this->session->data['user_id'] = $user_query->getId();
 			
 		$this->user_id = $user_query->getId();
-		// print($this->user_id); exit;
+		
 		$this->username = $user_query->getUsername();			
 
   		$user_group_query = $user_query->getGroup();
