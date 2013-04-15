@@ -919,8 +919,11 @@ class ControllerUserUser extends Controller {
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
-		$this->data['emailValidate'] = $this->url->link( 'user/user/emailValidate', 'token=' . $this->session->data['token'], 'SSL' );
-		$this->data['autocomplete_company'] = $this->url->link( 'company/company/autocomplete' );
+		$this->data['emailValidate'] = html_entity_decode( $this->url->link( 'user/user/emailValidate', 'token=' . $this->session->data['token'], 'SSL' ) );
+		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link( 'company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
+		$this->data['autocomplete_country'] = html_entity_decode( $this->url->link( 'user/user/autocompleteCountry', 'token=' . $this->session->data['token'], 'SSL' ) );
+		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
+		$this->data['autocomplete_city'] = html_entity_decode( $this->url->link( 'user/user/autocompleteCity', 'token=' . $this->session->data['token'], 'SSL') );
 		
 		// user
 		if ( isset($this->request->get['user_id']) ){

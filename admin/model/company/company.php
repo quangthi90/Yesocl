@@ -2,7 +2,7 @@
 use Document\Company\Company;
 
 class ModelCompanyCompany extends Doctrine {
-	public function addCompany( $data = array() ) {
+	public function addCompany( $data = array(), $logo = array() ) {
 		// name is required & isn't exist
 		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
 			$this->data['name'] = strtolower( trim( $data['name'] ) );
@@ -32,6 +32,16 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
+		// logo
+		if ( isset( $logo ) ) {
+  			if ( !$this->isValidLogo( $logo ) ) {
+  				return false;
+  			}
+  		}
+		else {
+			$logo = array();
+  		}
+
 		// description is required
 		if ( !isset( $data['description'] ) ) {
 			return false;
@@ -52,10 +62,19 @@ class ModelCompanyCompany extends Doctrine {
 		$this->dm->persist( $company );
 		$this->dm->flush();
 
+		if ( !empty( $logo ) ) {
+			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
+				$company->setLogo( $data['logo'] );
+			}else {
+				$company->setLogo( '' );
+			}
+			$this->dm->flush();
+		}
+
 		return true;
 	}
 
-	public function editCompany( $company_id, $data = array() ) {
+	public function editCompany( $company_id, $data = array(), $logo = array() ) {
 		// name is required
 		if ( isset( $data['name'] ) ) {
 			$this->data['name'] = strtolower( trim( $data['name'] ) );
@@ -74,7 +93,17 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
-		// owner is required
+		// logo
+		if ( isset( $logo ) ) {
+  			if ( !$this->isValidLogo( $logo ) ) {
+  				return false;
+  			}
+  		}
+		else {
+			$logo = array();
+  		}
+
+		// group is required
 		if ( isset( $data['group'] ) ) {
 			$group = $this->dm->getRepository( 'Document\Company\Group' )->find( $data['group'] );
 
@@ -113,6 +142,17 @@ class ModelCompanyCompany extends Doctrine {
 		
 		$this->dm->flush();
 
+		if ( !empty( $logo ) ) {
+			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
+				$company->setLogo( $data['logo'] );
+			}else {
+				$company->setLogo( '' );
+			}
+			$this->dm->flush();
+		}
+
+		return true;
+
 		return true;
 	}
 
@@ -122,6 +162,7 @@ class ModelCompanyCompany extends Doctrine {
 				$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $id );
 
 				if ( !empty( $company ) ) {
+					$this->delete_directory( DIR_IMAGE . 'data/catalog/company/' . $company->getId() );
 					$this->dm->remove( $company );
 				}
 			}
@@ -278,6 +319,56 @@ class ModelCompanyCompany extends Doctrine {
 		}
 
 		$this->dm->flush();
+	}
+
+	public function isValidLogo( $file ) {
+		$allowedExts = array("gif", "jpeg", "jpg", "png");
+		$extension = end(explode(".", $file["name"]));
+		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
+  			if ($file["error"] > 0) {
+    			return false;
+    		}
+  			else {
+	    		return true;
+    		}
+  		}
+		else {
+  			return false;
+  		}
+	}
+
+	public function uploadLogo( $company_id, $logo ) {
+		$ext = end(explode(".", $logo["name"]));
+		$path = 'data/catalog/company/' . $company_id . '/logo.';
+		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
+			unlink($path . '.jpg');
+		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
+			unlink($path . '.jpeg');
+		}elseif ( file_exists( DIR_IMAGE . $path . '.gif' ) ) {
+			unlink($path . '.gif');
+		}elseif ( file_exists( DIR_IMAGE . $path . '.png' ) ) {
+			unlink($path . '.png' );
+		}
+
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $company_id ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/company/' . $company_id );
+		}
+
+		if ( move_uploaded_file( $logo['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
+			return $path . $ext;
+		}else {
+			return false;
+		}
+	}
+
+	public function delete_directory( $dirname ) {
+  		if(is_dir($dirname)){
+    		$files = glob( $dirname . '*', GLOB_MARK );
+    		foreach( $files as $file )
+      			$this->delete_directory( $file );
+    		rmdir( $dirname );
+  		}else
+    		unlink( $dirname );
 	}
 }
 ?>

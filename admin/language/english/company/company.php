@@ -28,6 +28,7 @@ $_['column_status'] = 'Status';
 $_['column_action'] = 'Action';
 $_['column_fullname'] = 'Fullname';
 $_['column_email'] = 'Email';
+$_['column_logo'] = 'Logo';
 
 // entry
 $_['entry_name'] = 'Company Name:';
@@ -35,6 +36,7 @@ $_['entry_status'] = 'Status:';
 $_['entry_owner'] = 'Owner:';
 $_['entry_group'] = 'Group:';
 $_['entry_description'] = 'Description:';
+$_['entry_logo'] = 'Logo:';
 
 // error
 $_['error_name'] = 'Warning: Company Name must be more than 1 characters and less than 128 characters!';
@@ -43,6 +45,7 @@ $_['error_description'] = 'Warning: Description must be more than 50 characters 
 $_['error_owner'] = 'Warning: Owner is required!';
 $_['error_group'] = 'Warning: Group is required!';
 $_['error_warning'] = 'Warning: Error!';
+$_['error_logo'] = 'Warning: Logo upload failed!';
 $_['success'] = 'Success: You have modified Company!';
 $_['error_follower'] = 'Warning: User is required!';
 $_['error_relative'] = 'Warning: Company is required!';

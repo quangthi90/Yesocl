@@ -25,6 +25,7 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
+              <td><?php echo $column_logo; ?></td>
               <td><?php echo $column_company; ?></td>
               <td><?php echo $column_owner; ?></td>
               <td><?php echo $column_group; ?></td>
@@ -38,6 +39,7 @@
             <?php foreach ( $companies as $company ) { ?>
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $company['id']; ?>"/></td>
+              <td><div class="thumbnail" style="width: 80px; height: 80px;"><img src="<?php echo $company['logo']; ?>" /></div></td>
               <td><?php echo $company['name']; ?></td>
               <td><?php echo $company['owner']; ?></td>
               <td><?php echo $company['group']; ?></td>
@@ -51,7 +53,7 @@
             <?php }?>
             <?php if ( !$companies ) { ?>
             <tr class="center">
-              <td colspan="7"><?php echo $text_no_results; ?></td>
+              <td colspan="8"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

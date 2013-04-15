@@ -41,7 +41,10 @@ class ControllerCompanyCompany extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_company->addCompany( $this->request->post ) ) {
+			if ( !isset( $this->request->files['logo'] ) ) {
+				$this->request->files['logo'] = array();
+			}
+			if ( $this->model_company_company->addCompany( $this->request->post, $this->request->files['logo'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -87,7 +90,11 @@ class ControllerCompanyCompany extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_company->editCompany( $this->request->get['company_id'], $this->request->post ) ) {
+			if ( !isset( $this->request->files['logo'] ) ) {
+				$this->request->files['logo'] = array();
+			}
+
+			if ( $this->model_company_company->editCompany( $this->request->get['company_id'], $this->request->post, $this->request->files['logo'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -122,10 +129,6 @@ class ControllerCompanyCompany extends Controller {
 		}
 
 		$this->getList();
-	}
-
-	public function logo() {
-
 	}
 
 	public function follower() {
@@ -469,6 +472,7 @@ class ControllerCompanyCompany extends Controller {
 		$this->data['column_created'] = $this->language->get( 'column_created' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
+		$this->data['column_logo'] = $this->language->get( 'column_logo' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -517,12 +521,6 @@ class ControllerCompanyCompany extends Controller {
 					);
 
 				$action[] = array(
-					'text' => $this->language->get( 'text_logo' ),
-					'href' => $this->url->link( 'company/company/logo', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
-					'icon' => 'icon-edit',
-					);
-
-				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'company/company/update', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
 					'icon' => 'icon-edit',
@@ -530,6 +528,7 @@ class ControllerCompanyCompany extends Controller {
 
 				$this->data['companies'][] = array(
 					'id' => $company->getId(),
+					'logo' => HTTP_IMAGE . $company->getLogo(),
 					'name' => $company->getName(),
 					'owner' => $company->getOwner()->getPrimaryEmail()->getEmail(),
 					'group' => $company->getGroup()->getName(),
@@ -581,6 +580,12 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_name'] = '';
 		}
 
+		if ( isset( $this->error['error_logo'] ) ) {
+			$this->data['error_logo'] = $this->error['error_logo'];
+		}else {
+			$this->data['error_logo'] = '';
+		}
+
 		if ( isset( $this->error['error_owner'] ) ) {
 			$this->data['error_owner'] = $this->error['error_owner'];
 		}else {
@@ -630,6 +635,7 @@ class ControllerCompanyCompany extends Controller {
 
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
+		$this->data['entry_logo'] = $this->language->get( 'entry_logo' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_group'] = $this->language->get( 'entry_group' );
 		$this->data['entry_owner'] = $this->language->get( 'entry_owner' );
@@ -641,6 +647,10 @@ class ControllerCompanyCompany extends Controller {
 
 		// link
 		$this->data['cancel'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
+
+		// image 
+		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 
 		// company
 		if ( isset( $this->request->get['company_id'] ) ) {
@@ -675,6 +685,13 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['user_id'] = $company->getOwner()->getId();
 		}else {
 			$this->data['user_id'] = '';
+		}
+
+		// logo
+		if ( isset( $company ) && trim( $company->getLogo() ) != '' ) {
+			$this->data['img_logo'] = HTTP_IMAGE . $company->getLogo();
+		}else {
+			$this->data['img_logo'] = $this->data['img_default'];
 		}
 
 		// group
@@ -727,18 +744,23 @@ class ControllerCompanyCompany extends Controller {
 	}
 
 	private function isValidateForm() {
+		$this->load->model( 'company/company' );
 		if ( !isset( $this->request->post['name']) || strlen( trim( $this->request->post['name'] ) ) < 1 || strlen( trim( $this->request->post['name'] ) ) > 128  ) {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}else {
 			if ( isset( $this->request->get['company_id'] ) ) {
-				$this->load->model( 'company/company' );
-
 				$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 				if ( !empty( $company ) ) {
 					if ( $this->model_company_company->isExistName( $this->request->post['name'] ) && $company->getName() != strtolower( trim( $this->request->post['name'] ) ) ) {
 						$this->error['error_name'] = $this->language->get( 'error_name_exist' );
 					}
 				}
+			}
+		}
+
+		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) ) {
+			if ( !$this->model_company_company->isValidLogo( $this->request->files['logo'] ) ) {
+				$this->error['error_logo'] = $this->language->get( 'error_logo');
 			}
 		}
 

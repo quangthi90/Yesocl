@@ -96,7 +96,7 @@ $('input[name=\'meta[location][country]\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=user/user/autocompleteCountry&filter_name=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_country; ?>&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -127,9 +127,9 @@ $('input[name=\'meta[location][city]\']').autocomplete({
   source: function(request, response) {
     var url = '';
     if ( $('input[name=\'meta[location][country_id]\']').val() != '' ) {
-        url = 'index.php?route=user/user/autocompleteCity&filter_country=' + $('input[name=\'meta[location][country_id]\']').val() + '&filter_name=';
+        url = '<?php echo $autocomplete_city; ?>&filter_country=' + $('input[name=\'meta[location][country_id]\']').val() + '&filter_name=';
     }else {
-        url = 'index.php?route=user/user/autocompleteCity&filter_name=';
+        url = '<?php echo $autocomplete_city; ?>&filter_name=';
     }
 
     $.ajax({
@@ -167,7 +167,7 @@ $('input.datalist').autocomplete({
   },
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/value/autocomplete&filter_type_code=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_value; ?>&filter_type_code=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
