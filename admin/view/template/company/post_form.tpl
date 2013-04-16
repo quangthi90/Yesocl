@@ -69,6 +69,24 @@
             <?php } ?></td>
           </tr>
           <tr>
+            <td><?php echo $entry_thumb; ?></td>
+            <td>
+              <div class="thumb fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<?php echo $img_thumb; ?>" style="width: 150px; height: 150px;" /></div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                  <span class="btn btn-file"><span class="fileupload-new"><?php echo $text_select_image; ?></span><span class="fileupload-exists"><?php echo $text_change; ?></span><input name="thumb" type="file" /></span>
+                  <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" onclick="$('.thumb img').attr('src', '<?php echo $img_default; ?>');"><?php echo $text_remove; ?></a>
+                </div>
+              </div>
+              <?php if ( $error_thumb ) { ?>
+                <div class="alert alert-error">
+          <strong>Error!</strong> <?php echo $error_thumb; ?>
+        </div>
+              <?php } ?>
+            </td>
+          </tr>
+          <tr>
             <td><?php echo $entry_status; ?></td>
             <td><select class="input-large" name="status" ><?php if ( $status ) { ?><option value="1" selected="selected" ><?php echo $text_enable; ?></option><option value="0" ><?php echo $text_disable; ?><?php }else { ?><option value="1" ><?php echo $text_enable; ?></option><option value="0" selected="selected" ><?php echo $text_disable; ?><?php } ?></select></td>
           </tr>
@@ -101,7 +119,7 @@ $('input[name=\'author\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_user; ?>&filter=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {

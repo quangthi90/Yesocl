@@ -18,6 +18,9 @@ Class Post {
 
 	/** @MongoDB\String */
 	private $content;
+
+	/** @MongoDB\String */
+	private $thumb;
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -83,6 +86,14 @@ Class Post {
 
 	public function getContent(){
 		return $this->content;
+	}
+
+	public function setThumb( $thumb ){
+		$this->thumb = $thumb;
+	}
+
+	public function getThumb(){
+		return $this->thumb;
 	}
 
 	public function setStatus( $status ){

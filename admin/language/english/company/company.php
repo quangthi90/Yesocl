@@ -11,6 +11,9 @@ $_['text_post'] = 'Posts';
 $_['text_logo'] = 'Logo';
 $_['text_follower'] = 'Followers';
 $_['text_relative_company'] = 'Relative Companies';
+$_['text_select_image'] = 'Select image';
+$_['text_change'] = 'Change';
+$_['text_remove'] = 'Remove';
 
 // button
 $_['button_insert'] = 'Insert';

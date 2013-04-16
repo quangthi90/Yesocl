@@ -110,6 +110,11 @@ class ControllerCommonHeader extends Controller {
 			$this->data['type'] = $this->url->link('data/type', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['value'] = $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL');
 
+			// Company
+			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company'] = $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company_post_category'] = $this->url->link('company/category', 'token=' . $this->session->data['token'], 'SSL');
+
 			// system
 			$this->data['admin_group'] = $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['admin'] = $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL');
@@ -118,12 +123,6 @@ class ControllerCommonHeader extends Controller {
 
 			$this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 		}
-		
-
-		// Company
-		$this->data['company_group'] = $this->url->link('company/group');
-		$this->data['company'] = $this->url->link('company/company');
-		$this->data['company_post_category'] = $this->url->link('company/category');
 		
 		$this->template = 'common/header.tpl';
 		

@@ -53,7 +53,11 @@ class ControllerCompanyPost extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_post->addPost( $this->request->get['company_id'], $this->request->post ) ) {
+			if ( !isset( $this->request->files['thumb'] ) ) {
+				$this->request->files['thumb'] = array();
+			}
+
+			if ( $this->model_company_post->addPost( $this->request->get['company_id'], $this->request->post, $this->request->files['thumb'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -103,7 +107,11 @@ class ControllerCompanyPost extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_post->editPost( $this->request->get['post_id'], $this->request->post ) ) {
+			if ( !isset( $this->request->files['thumb'] ) ) {
+				$this->request->files['thumb'] = array();
+			}
+
+			if ( $this->model_company_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -206,6 +214,7 @@ class ControllerCompanyPost extends Controller {
 		$this->data['column_created'] = $this->language->get( 'column_created' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
+		$this->data['column_thumb'] = $this->language->get( 'column_thumb' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -252,6 +261,7 @@ class ControllerCompanyPost extends Controller {
 
 			$this->data['posts'][] = array(
 				'id' => $post->getId(),
+				'thumb' => HTTP_IMAGE . $post->getThumb(),
 				'title' => $post->getTitle(),
 				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
 				'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
@@ -325,6 +335,12 @@ class ControllerCompanyPost extends Controller {
 			$this->data['error_content'] = '';
 		}
 
+		if ( isset( $this->error['error_thumb'] ) ) {
+			$this->data['error_thumb'] = $this->error['error_thumb'];
+		}else {
+			$this->data['error_thumb'] = '';
+		}
+
 		// page
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -358,6 +374,9 @@ class ControllerCompanyPost extends Controller {
 		// text
 		$this->data['text_enable'] = $this->language->get( 'text_enable' );
 		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
+		$this->data['text_change'] = $this->language->get( 'text_change' );
+		$this->data['text_remove'] = $this->language->get( 'text_remove' );
 
 		// entry
 		$this->data['entry_title'] = $this->language->get( 'entry_title' );
@@ -366,6 +385,7 @@ class ControllerCompanyPost extends Controller {
 		$this->data['entry_category'] = $this->language->get( 'entry_category' );
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 		$this->data['entry_content'] = $this->language->get( 'entry_content' );
+		$this->data['entry_thumb'] = $this->language->get( 'entry_thumb' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -373,6 +393,9 @@ class ControllerCompanyPost extends Controller {
 
 		// link
 		$this->data['cancel'] = $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . $url . '&company_id=' . $this->request->get['company_id'], 'SSL' );
+		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
+		// image
+		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 
 		// company
 		$this->load->model( 'company/company' );
@@ -454,6 +477,13 @@ class ControllerCompanyPost extends Controller {
 			$this->data['content'] = '';
 		}
 
+		// logo
+		if ( isset( $post ) && trim( $post->getThumb() ) != '' ) {
+			$this->data['img_thumb'] = HTTP_IMAGE . $post->getThumb();
+		}else {
+			$this->data['img_thumb'] = $this->data['img_default'];
+		}
+
 		// status
 		if ( isset( $this->request->post['status'] ) ) {
 			$this->data['status'] = $this->request->post['status'];
@@ -477,6 +507,8 @@ class ControllerCompanyPost extends Controller {
 	}
 
 	private function isValidateForm() {
+		$this->load->model( 'company/post' );
+
 		if ( !isset( $this->request->post['title']) || strlen( trim( $this->request->post['title'] ) ) < 1 || strlen( trim( $this->request->post['title'] ) ) > 256  ) {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
 		}
@@ -495,6 +527,12 @@ class ControllerCompanyPost extends Controller {
 
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {
 			$this->error['error_author'] = $this->language->get( 'error_author' );
+		}
+
+		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) ) {
+			if ( !$this->model_company_post->isValidThumb( $this->request->files['thumb'] ) ) {
+				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
+			}
 		}
 
 		if ( $this->error ) {
