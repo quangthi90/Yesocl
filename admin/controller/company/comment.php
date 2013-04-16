@@ -386,6 +386,7 @@ class ControllerCompanyComment extends Controller {
 
 		// link
 		$this->data['cancel'] = $this->url->link( 'company/comment', 'token=' . $this->session->data['token'] . $url . '&company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'], 'SSL' );
+		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
 
 		//company
 		$this->load->model( 'company/company' );

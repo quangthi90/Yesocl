@@ -226,7 +226,7 @@ class Curl extends Configurable implements AdapterInterface
         // if there is no data and there are no headers it's a total failure,
         // a connection to the host was impossible.
         if (empty($data) && count($headers) == 0) {
-            throw new HttpException("HTTP request failed");
+            //throw new HttpException("HTTP request failed");
         }
     }
 }

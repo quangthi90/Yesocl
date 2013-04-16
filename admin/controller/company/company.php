@@ -220,6 +220,7 @@ class ControllerCompanyCompany extends Controller {
 		$this->data['insert'] = $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&query=insert&company_id=' . $this->request->get['company_id'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
 		$this->data['back'] = $this->url->link( 'company/company' );
+		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
 
 		// company
 		if ( !isset( $this->request->get['company_id'] ) ) {
@@ -363,6 +364,8 @@ class ControllerCompanyCompany extends Controller {
 		$this->data['delete'] = $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
 		$this->data['back'] = $this->url->link( 'company/company' );
 
+		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link( 'company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
+		
 		// company
 		if ( !isset( $this->request->get['company_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );

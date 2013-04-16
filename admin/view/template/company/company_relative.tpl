@@ -63,7 +63,7 @@ $('input[name=\'company\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=company/company/autocomplete&filter_name=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_company; ?>&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {

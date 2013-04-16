@@ -63,7 +63,7 @@ $('input[name=\'user\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_user; ?>&filter=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
