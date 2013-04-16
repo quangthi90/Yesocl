@@ -41,6 +41,27 @@ db.getCollection("city").ensureIndex({
   
 ]);
 
+/** company indexes **/
+db.getCollection("company").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** company_group indexes **/
+db.getCollection("company_group").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** company_post_category indexes **/
+db.getCollection("company_post_category").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** country indexes **/
 db.getCollection("country").ensureIndex({
   "_id": NumberInt(1)
@@ -138,7 +159,7 @@ db.getCollection("admin_group").insert({
   "name": "Supper Admin",
   "permissions": [
     {
-      "_id": ObjectId("516a6a26471dee000b000013"),
+      "_id": ObjectId("516c975d976982640e000000"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ef471deeac1f000000"),
@@ -168,7 +189,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000014"),
+      "_id": ObjectId("516c975d976982640e000001"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -198,7 +219,127 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000015"),
+      "_id": ObjectId("516c975d976982640e000002"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516aac38913db4a004000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("516c975d976982640e000003"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516ab55f913db42c12000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("516c975d976982640e000004"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516ab59e913db47809000002"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("516c975d976982640e000005"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516c974b976982740a000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("516c975d976982640e000006"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a683d471dee480b00001a"),
@@ -228,7 +369,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000016"),
+      "_id": ObjectId("516c975d976982640e000007"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a684f471dee480b00001b"),
@@ -258,7 +399,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000017"),
+      "_id": ObjectId("516c975d976982640e000008"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -288,7 +429,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000018"),
+      "_id": ObjectId("516c975d976982640e000009"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -318,7 +459,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000019"),
+      "_id": ObjectId("516c975d976982640e00000a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a680e471dee480b000018"),
@@ -348,7 +489,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b00001a"),
+      "_id": ObjectId("516c975d976982640e00000b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67a8471dee480b000016"),
@@ -378,7 +519,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b00001b"),
+      "_id": ObjectId("516c975d976982640e00000c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6823471dee480b000019"),
@@ -408,7 +549,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b00001c"),
+      "_id": ObjectId("516c975d976982640e00000d"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67d6471dee480b000017"),
@@ -438,7 +579,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b00001d"),
+      "_id": ObjectId("516c975d976982640e00000e"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6882471dee480b00001d"),
@@ -468,7 +609,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b00001e"),
+      "_id": ObjectId("516c975d976982640e00000f"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6871471dee480b00001c"),
@@ -498,7 +639,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b00001f"),
+      "_id": ObjectId("516c975d976982640e000010"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -528,7 +669,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516a6a26471dee000b000020"),
+      "_id": ObjectId("516c975d976982640e000011"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -868,6 +1009,45 @@ db.getCollection("city").insert({
   }
 });
 
+/** company records **/
+db.getCollection("company").insert({
+  "_id": ObjectId("516b9622913db4200a000000"),
+  "created": ISODate("2013-04-15T05:54:42.0Z"),
+  "description": "&lt;p&gt;\r\n\tfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfdsfds&lt;\/p&gt;\r\n",
+  "group": {
+    "$ref": "company_group",
+    "$id": ObjectId("516b9417913db47809000003"),
+    "$db": "yesocl"
+  },
+  "logo": "data\/catalog\/company\/516b9622913db4200a000000\/logo.jpg",
+  "name": "IBM",
+  "owner": {
+    "$ref": "user",
+    "$id": ObjectId("516b9398913db43009000001"),
+    "$db": "yesocl"
+  },
+  "posts": [
+    
+  ],
+  "status": true
+});
+
+/** company_group records **/
+db.getCollection("company_group").insert({
+  "_id": ObjectId("516b9417913db47809000003"),
+  "name": "Default",
+  "description": "&lt;p&gt;\r\n\tdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsfdffdsfdsf&lt;\/p&gt;\r\n",
+  "status": true
+});
+
+/** company_post_category records **/
+db.getCollection("company_post_category").insert({
+  "_id": ObjectId("516c9640976982b00c000000"),
+  "name": "Default",
+  "order": NumberInt(1),
+  "status": true
+});
+
 /** country records **/
 db.getCollection("country").insert({
   "_id": ObjectId("5143bf62913db4a408000010"),
@@ -1058,6 +1238,12 @@ db.getCollection("design_action").insert({
   "name": "Change Password",
   "code": "change_password",
   "order": NumberInt(5)
+});
+db.getCollection("design_action").insert({
+  "_id": ObjectId("516aa818913db47809000000"),
+  "name": "Bommer",
+  "code": "demo",
+  "order": NumberInt(6)
 });
 
 /** design_layout records **/
@@ -1444,6 +1630,114 @@ db.getCollection("design_layout").insert({
   "name": "City Manage",
   "path": "localisation\/city"
 });
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516aac38913db4a004000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Company Category",
+  "path": "company\/category"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516ab55f913db42c12000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Company",
+  "path": "company\/company"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516ab59e913db47809000002"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Company Group",
+  "path": "company\/group"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516c974b976982740a000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Company Post",
+  "path": "company\/post"
+});
 
 /** district records **/
 db.getCollection("district").insert({
@@ -1483,6 +1777,11 @@ db.getCollection("setting_config").insert({
   "key": "action_change_password",
   "value": "change_password"
 });
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516aa818913db47809000001"),
+  "key": "action_demo",
+  "value": "demo"
+});
 
 /** street records **/
 db.getCollection("street").insert({
@@ -1497,7 +1796,95 @@ db.getCollection("street").insert({
 });
 
 /** user records **/
+db.getCollection("user").insert({
+  "_id": ObjectId("516b9398913db43009000001"),
+  "created": ISODate("2013-04-15T05:43:52.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("516b9399913db43009000005"),
+      "email": "testemail@gmail.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("516b9398913db43009000002"),
+    "firstname": "fdsfdfdsf",
+    "lastname": "cxvcxsdf",
+    "headingLine": "",
+    "location": {
+      "_id": ObjectId("516b9398913db43009000003"),
+      "countryId": "5143bfa3913db4a408000011",
+      "country": "Việt Nam",
+      "cityId": "5143bfca913db4a408000012",
+      "city": "HCM"
+    },
+    "postalCode": "12345",
+    "industry": "Banking",
+    "address": "fdcvsfdsd",
+    "background": {
+      "_id": ObjectId("516b9398913db43009000004"),
+      "interest": "",
+      "birthday": ISODate("2013-04-11T22:00:00.0Z"),
+      "maritalStatus": false,
+      "adviceForContact": ""
+    }
+  },
+  "password": "6d7f099cc22b4501e2bbb04094404b9f454554cc",
+  "status": true,
+  "username": "tester"
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("516c9acb976982140f000000"),
+  "created": ISODate("2013-04-16T00:26:51.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("516c9acb976982140f000004"),
+      "email": "hughnjt@gmail.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("516c9acb976982140f000001"),
+    "firstname": "hyujikmnhj",
+    "lastname": "gtfhyvbg",
+    "headingLine": "",
+    "location": {
+      "_id": ObjectId("516c9acb976982140f000002"),
+      "countryId": "5143bfa3913db4a408000011",
+      "country": "Việt Nam",
+      "cityId": "5143bfca913db4a408000012",
+      "city": "HCM"
+    },
+    "postalCode": "12345",
+    "industry": "Banking",
+    "address": "kijmnjhuk",
+    "background": {
+      "_id": ObjectId("516c9acb976982140f000003"),
+      "interest": "",
+      "birthday": ISODate("2013-04-11T22:00:00.0Z"),
+      "maritalStatus": false,
+      "adviceForContact": ""
+    }
+  },
+  "password": "8310f3c06e6bd007b6ad653cae8726f70284fe8f",
+  "status": true,
+  "username": "abcdef"
+});
 
 /** user_group records **/
+db.getCollection("user_group").insert({
+  "_id": ObjectId("516b4a91913db43009000000"),
+  "name": "Default"
+});
 
 /** ward records **/
