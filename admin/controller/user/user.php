@@ -251,6 +251,11 @@ class ControllerUserUser extends Controller {
 		}else {
 			$this->data['industry'] = '';
 		}
+		if ( $user->getMeta() ){
+			$this->data['industry_id'] = $user->getMeta()->getIndustryId();
+		}else {
+			$this->data['industry_id'] = 0;
+		}
 
 		// Entry heading line
 		if ( $user->getMeta() ){
@@ -316,9 +321,12 @@ class ControllerUserUser extends Controller {
 		foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 			$this->data['educations'][$key] = array(
 				'school' => $education->getSchool(),
+				'school_id' => $education->getSchoolId(),
 				'degree' => $education->getDegree(),
+				'degree_id' => $education->getDegreeId(),
 				'grace' => $education->getGrace(),
 				'fieldofstudy' => $education->getFieldOfStudy(),
+				'fieldofstudy_id' => $education->getFieldOfStudyId(),
 				'societies' => $education->getSocieties(),
 				'ended' => $education->getEnded(),
 				'started' => $education->getStarted(),
@@ -1094,10 +1102,13 @@ class ControllerUserUser extends Controller {
 		// Entry industry
 		if ( isset($this->request->post['meta']['industry']) ){
 			$this->data['industry'] = $this->request->post['meta']['industry'];
+			$this->data['industry_id'] = $this->request->post['meta']['industry'];
 		}elseif ( isset($user) && $user->getMeta() ){
 			$this->data['industry'] = $user->getMeta()->getIndustry();
+			$this->data['industry_id'] = $user->getMeta()->getIndustryId();
 		}else {
 			$this->data['industry'] = '';
+			$this->data['industry_id'] = 0;
 		}
 
 		// Entry heading line
@@ -1187,9 +1198,12 @@ class ControllerUserUser extends Controller {
 			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),
+					'school_id' => $education->getSchoolId(),
 					'degree' => $education->getDegree(),
+					'degree_id' => $education->getDegreeId(),
 					'grace' => $education->getGrace(),
 					'fieldofstudy' => $education->getFieldOfStudy(),
+					'fieldofstudy_id' => $education->getFieldOfStudyId(),
 					'societies' => $education->getSocieties(),
 					'ended' => $education->getEnded(),
 					'started' => $education->getStarted(),

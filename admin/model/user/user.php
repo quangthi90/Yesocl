@@ -75,9 +75,7 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
 			return false; 
 		}
-		if ( isset($data['meta']['location']['country_id']) ){
-			$data['meta']['location']['country_id'] = (int)$data['meta']['location']['country_id'];
-		}else {
+		if ( !isset($data['meta']['location']['country_id']) ){
 			$data['meta']['location']['country_id'] = 0;
 		}
 		
@@ -85,9 +83,7 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
 			return false;
 		}
-		if ( isset($data['meta']['location']['city_id']) ){
-			$data['meta']['location']['city_id'] = (int)$data['meta']['location']['city_id'];
-		}else {
+		if ( !isset($data['meta']['location']['city_id']) ){
 			$data['meta']['location']['city_id'] = 0;
 		}
 		
@@ -109,6 +105,9 @@ class ModelUserUser extends Doctrine {
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
+		}
+		if ( !isset($data['meta']['industry_id']) ){
+			$data['meta']['industry_id'] = 0;
 		}
 
 		// Heading Line
@@ -215,9 +214,12 @@ class ModelUserUser extends Doctrine {
 			}
 			$education = new Education();
 			$education->setSchool( trim( $education_data['school'] ) );
+			$education->setSchoolId( trim( $education_data['school_id'] ) );
 			$education->setDegree( trim( $education_data['degree'] ) );
+			$education->setDegreeId( trim( $education_data['degree_id'] ) );
 			$education->setGrace( trim( $education_data['grace'] ) );
 			$education->setFieldOfStudy( trim( $education_data['fieldofstudy'] ) );
+			$education->setFieldOfStudyId( trim( $education_data['fieldofstudy_id'] ) );
 			$education->setEnded( trim( $education_data['ended'] ) );
 			$education->setStarted( trim( $education_data['started'] ) );
 			$education->setSocieties( trim( $education_data['societies'] ) );
@@ -295,6 +297,7 @@ class ModelUserUser extends Doctrine {
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
 		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setIndustryId( trim( $data['meta']['industry_id'] ) );
 		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
 		$meta->setBackground( $background );
 		$meta->setIms( $ims );
@@ -392,9 +395,7 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
 			return false; 
 		}
-		if ( isset($data['meta']['location']['country_id']) ){
-			$data['meta']['location']['country_id'] = (int)$data['meta']['location']['country_id'];
-		}else {
+		if ( !isset($data['meta']['location']['country_id']) ){
 			$data['meta']['location']['country_id'] = 0;
 		}
 		
@@ -402,9 +403,7 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
 			return false;
 		}
-		if ( isset($data['meta']['location']['city_id']) ){
-			$data['meta']['location']['city_id'] = (int)$data['meta']['location']['city_id'];
-		}else {
+		if ( !isset($data['meta']['location']['city_id']) ){
 			$data['meta']['location']['city_id'] = 0;
 		}
 		
@@ -426,6 +425,9 @@ class ModelUserUser extends Doctrine {
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
+		}
+		if ( !isset($data['meta']['industry_id']) ){
+			$data['meta']['industry_id'] = 0;
 		}
 
 		// Heading Line
@@ -532,9 +534,12 @@ class ModelUserUser extends Doctrine {
 			}
 			$education = new Education();
 			$education->setSchool( trim( $education_data['school'] ) );
+			$education->setSchoolId( trim( $education_data['school_id'] ) );
 			$education->setDegree( trim( $education_data['degree'] ) );
+			$education->setDegreeId( trim( $education_data['degree_id'] ) );
 			$education->setGrace( trim( $education_data['grace'] ) );
 			$education->setFieldOfStudy( trim( $education_data['fieldofstudy'] ) );
+			$education->setFieldOfStudyId( trim( $education_data['fieldofstudy_id'] ) );
 			$education->setEnded( trim( $education_data['ended'] ) );
 			$education->setStarted( trim( $education_data['started'] ) );
 			$education->setSocieties( trim( $education_data['societies'] ) );
@@ -610,6 +615,7 @@ class ModelUserUser extends Doctrine {
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
 		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setIndustryId( trim( $data['meta']['industry_id'] ) );
 		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
 		$meta->setBackground( $background );
 		$meta->setIms( $ims );

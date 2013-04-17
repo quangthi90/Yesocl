@@ -71,7 +71,7 @@
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
-        <td><input required="required" datalist="industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" />
+        <td><input required="required" datalist="industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /><input name="meta[industry_id]" value="<?php echo $industry_id; ?>" type="hidden" />
         <?php if ($error_industry) { ?>
                 <div class="alert alert-error">
           <strong>Error!</strong> <?php echo $error_industry; ?>
@@ -181,7 +181,7 @@ $('input.datalist').autocomplete({
   }, 
   select: function(event, ui) {
     $(this).val(ui.item.label);
-            
+    $('input[name=\'' + type + '_id\']').val( ui.item.id );     
     return false;
   },
   focus: function(event, ui) {

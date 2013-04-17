@@ -41,6 +41,11 @@ Class Meta {
 	 */
 	private $industry;
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $industry_id;
+
 	/** @MongoDB\String */
 	private $address;
 
@@ -113,6 +118,14 @@ Class Meta {
 
 	public function getIndustry(){
 		return $this->industry;
+	}
+
+	public function setIndustryId( $industry_id ){
+		$this->industry_id = $industry_id;
+	}
+
+	public function getIndustryId(){
+		return $this->industry_id;
 	}
 
 	public function setAddress( $address ){
