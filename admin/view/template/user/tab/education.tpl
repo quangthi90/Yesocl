@@ -63,7 +63,7 @@
 			html +=	'<td>';
 			html +=	'<div class="row-fluid">';
 			html +=		'<div class="span2"><strong><?php echo $entry_school; ?></strong></div>';
-			html +=		'<div class="span9"><input datalist="school" class="datalist school input-medium" type="text" name="background[educations][' + education_length + '][school]" value="" /></div>';
+			html +=		'<div class="span9"><input datalist="<?php echo $code_school; ?>" class="datalist school input-medium" type="text" name="background[educations][' + education_length + '][school]" value="" /><input name="background[educations][' + education_length + '][school_id]" value="0" type="hidden" /></div>';
 			html +=		'<div class="span1"><a class="btn-remove-education btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html +=	'</div>';
           	html +=	'<div class="row-fluid">';
@@ -85,11 +85,11 @@
           	html +=	'</div>';
 			html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_degree; ?></div>';
-          	html +=		'<div class="span10"><input datalist="degree" class="datalist degree input-medium" type="text" name="background[educations][' + education_length + '][degree]" value="" /></div>';
+          	html +=		'<div class="span10"><input datalist="<?php echo $code_degree; ?>" class="datalist degree input-medium" type="text" name="background[educations][' + education_length + '][degree]" value="" /><input name="background[educations][' + education_length + '][degree_id]" value="0" type="hidden" /></div>';
           	html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_field_of_study; ?></div>';
-          	html +=		'<div class="span10"><input datalist="fieldofstudy" class="datalist fieldofstudy input-medium" type="text" name="background[educations][' + education_length + '][fieldofstudy]" value="" /></div>';
+          	html +=		'<div class="span10"><input datalist="<?php echo $code_fieldofstudy; ?>" class="datalist fieldofstudy input-medium" type="text" name="background[educations][' + education_length + '][fieldofstudy]" value="" /><input name="background[educations][' + education_length + '][fieldofstudy_id]" value="0" type="hidden" /></div>';
           	html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_grace; ?></div>';
@@ -132,7 +132,7 @@ $('input.datalist').autocomplete({
    }, 
    select: function(event, ui) {
      $(this).val(ui.item.label);
-     $('input[name=\'' + type + '_id\']').val( ui.item.id );       
+     $(this).next().val( ui.item.value );       
      return false;
    },
    focus: function(event, ui) {

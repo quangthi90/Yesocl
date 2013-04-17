@@ -930,6 +930,16 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_experience'] = $this->language->get( 'tab_experience' );
 		$this->data['tab_education'] = $this->language->get( 'tab_education' );
 		$this->data['tab_former'] = $this->language->get( 'tab_former' );
+
+		// code
+		$this->load->model( 'setting/config' );
+		$this->load->config( 'datatype' );
+		$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
+
+		$this->data['code_industry'] = $this->config->get( 'datatype_industry' );
+		$this->data['code_school'] = $this->config->get( 'datatype_school' );
+		$this->data['code_degree'] = $this->config->get( 'datatype_degree' );
+		$this->data['code_fieldofstudy'] = $this->config->get( 'datatype_fieldofstudy' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
@@ -1231,9 +1241,6 @@ class ControllerUserUser extends Controller {
 		}
 
 		$this->load->model( 'data/value' );
-		$this->load->model( 'setting/config' );
-		$this->load->config( 'datatype' );
-		$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
 		
 		// Im type
 		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );

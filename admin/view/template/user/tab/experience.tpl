@@ -115,7 +115,7 @@
 			html += 	'<div class="row-fluid">';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><strong><?php echo $entry_company; ?></strong></div>';
-			html += 			'<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /><input type="hidden" class="company_id" name="background[experiencies][' + experience_length + '][company_id]" value="" /></div>';
+			html += 			'<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /><input type="hidden" class="company_id" name="background[experiencies][' + experience_length + '][company_id]" value="0" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';

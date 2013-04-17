@@ -181,7 +181,7 @@ $('input.datalist').autocomplete({
   }, 
   select: function(event, ui) {
     $(this).val(ui.item.label);
-    $('input[name=\'' + type + '_id\']').val( ui.item.id );     
+    $(this).next().val(ui.item.value);     
     return false;
   },
   focus: function(event, ui) {
