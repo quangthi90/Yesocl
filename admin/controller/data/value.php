@@ -209,7 +209,9 @@ class ControllerDataValue extends Controller {
 		// Link
 		$this->data['insert'] = $this->url->link( 'data/value/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'data/value/delete', 'page=' . $page . $url . '&token=' . $this->session->data['token'], 'SSL' );
-
+		$this->data['autocomplete_type'] = html_entity_decode( $this->url->link( 'data/type/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
+		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
+		
 		$data = array(
 			'filter_type' => $filter_type,
 			'filter_name' => $filter_name,
@@ -465,7 +467,6 @@ class ControllerDataValue extends Controller {
 
 	public function autocomplete() {
 		$this->load->model( 'data/value' );
-
 
 		$sort = 'name';
 

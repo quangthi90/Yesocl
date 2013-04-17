@@ -118,7 +118,7 @@ $('input.datalist').autocomplete({
    },
    source: function(request, response) {
      $.ajax({
-       url: 'index.php?route=data/value/autocomplete&filter_type_code=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
+       url: '<?php echo $autocomplete_value; ?>&filter_type_code=' + encodeURIComponent(type) + '&filter_name=' +  encodeURIComponent(request.term),
        dataType: 'json',
        success: function(json) {   
          response($.map(json, function(item) {

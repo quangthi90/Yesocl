@@ -32,6 +32,9 @@ Class User {
 	 */
     private $meta;
 
+    /** @MongoDB\ReferenceMany(targetDocument="Document\Company\Company", inversedBy="owner") */
+    private $companiesCreated = array();
+
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
 
@@ -116,6 +119,18 @@ Class User {
 
 	public function getGroupUser(){
 		return $this->groupUser;
+	}
+
+	public function addCompanyCreated( \Document\Company\Company $companyCreated ){
+		$this->companiesCreated[] = $companyCreated;
+	}
+
+	public function setCompaniesCreated( $companiesCreated ){
+		$this->companiesCreated = $companiesCreated;
+	}
+
+	public function getCompaniesCreated(){
+		return $this->companiesCreated;
 	}
 
 	public function addGroup( \Document\Group\Group $group ){

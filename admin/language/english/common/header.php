@@ -15,6 +15,12 @@ $_['text_admin']                        = 'Admin Account';
 $_['text_admin_group']             		= 'Admin Group';
 $_['text_admin_manage']            		= 'Admin Manage';
 
+// Company
+$_['text_companies']                    = 'Companies';
+$_['text_company']                      = 'Company';
+$_['text_company_group']              	= 'Company Group';
+$_['text_company_post_category']              	= 'Post Category';
+
 // Attribute
 $_['text_attributes']                  = 'Attributes Manage';
 $_['text_attribute']                   = 'Attribute';
