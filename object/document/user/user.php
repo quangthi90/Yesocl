@@ -15,7 +15,8 @@ Class User {
 	private $id; 
 
 	/** 
-	 * @MongoDB\String 
+	 * @MongoDB\String
+	 * @SOLR\Field(type="text")
 	 */
 	private $username;
 
@@ -192,5 +193,28 @@ Class User {
 
 		$this->solrContent = $solrContent;
 		return $solrContent;
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrEmail;
+
+	public function setSolrEmail( $solr_email ){
+		$this->solrEmail = $solr_email;
+	}
+
+	public function getSolrEmail(){
+		$solr_email = '';
+
+		foreach ( $this->emails as $email) {
+			$solr_email .= $email->getEmail() . ' ';
+		}
+
+		return $solr_email;
+	}
+
+	public function getDataSolrEmail(){
+		return $this->solrEmail;
 	}
 }

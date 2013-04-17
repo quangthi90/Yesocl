@@ -2,9 +2,15 @@
 namespace Document\Localisation;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** @MongoDB\Document(db="yesocl", collection="city") */
+/** 
+* @MongoDB\Document(db="yesocl", collection="city")
+* @SOLR\Document(collection="location")
+*/
 Class City {
-	/** @MongoDB\Id */
+	/** 
+	* @MongoDB\Id
+	* @SOLR\Field(type="id")
+	*/
 	private $id; 
 
 	/** @MongoDB\String */
@@ -57,5 +63,33 @@ Class City {
 
 	public function getDistricts(){
 		return $this->districts;
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $location;
+
+	/** @PrePersist */
+    public function prePersist()
+    {
+        $this->setDataLocation();
+    }
+
+	public function setDataLocation(){
+		try{
+			$this->location = $this->name . ', ' . $country->getName();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Country is empty!<br>City must be added with Country.', 0, $e);
+		}
+	}
+
+	public function setLocation( $location ){
+		$this->location = $location;
+	}
+
+	public function getLocation(){
+		return $this->location;
 	}
 }
