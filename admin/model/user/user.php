@@ -75,16 +75,20 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
 			return false; 
 		}
-		if ( !isset($data['meta']['location']['country_id']) || empty($data['meta']['location']['country_id']) ){
-			return false; 
+		if ( isset($data['meta']['location']['country_id']) ){
+			$data['meta']['location']['country_id'] = (int)$data['meta']['location']['country_id'];
+		}else {
+			$data['meta']['location']['country_id'] = 0;
 		}
 		
 		// City is required
 		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
 			return false;
 		}
-		if ( !isset($data['meta']['location']['city_id']) || empty($data['meta']['location']['city_id']) ){
-			return false;
+		if ( isset($data['meta']['location']['city_id']) ){
+			$data['meta']['location']['city_id'] = (int)$data['meta']['location']['city_id'];
+		}else {
+			$data['meta']['location']['city_id'] = 0;
 		}
 		
 		// Postal code is required
@@ -388,16 +392,20 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
 			return false; 
 		}
-		if ( !isset($data['meta']['location']['country_id']) || empty($data['meta']['location']['country_id']) ){
-			return false; 
+		if ( isset($data['meta']['location']['country_id']) ){
+			$data['meta']['location']['country_id'] = (int)$data['meta']['location']['country_id'];
+		}else {
+			$data['meta']['location']['country_id'] = 0;
 		}
 		
 		// City is required
 		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
 			return false;
 		}
-		if ( !isset($data['meta']['location']['city_id']) || empty($data['meta']['location']['city_id']) ){
-			return false;
+		if ( isset($data['meta']['location']['city_id']) ){
+			$data['meta']['location']['city_id'] = (int)$data['meta']['location']['city_id'];
+		}else {
+			$data['meta']['location']['city_id'] = 0;
 		}
 		
 		// Postal code is required
@@ -645,6 +653,8 @@ class ModelUserUser extends Doctrine {
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
+
+		return true;
 	}
 
 	/**
@@ -664,6 +674,8 @@ class ModelUserUser extends Doctrine {
 			}
 		}
 		$this->dm->flush();
+
+		return true;
 	}
 	
 	/**
