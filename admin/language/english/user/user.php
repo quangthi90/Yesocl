@@ -68,12 +68,12 @@ $_['entry_title']          	= 'Title:';
 $_['entry_username']            = 'Usename:';
 
 // Tab
-$_['tab_education']            = 'Education:';
-$_['tab_experience']            = 'Experience:';
-$_['tab_former']            = 'Former:';
-$_['tab_im']            = 'Im:';
-$_['tab_phone']            = 'Phone:';
-$_['tab_website']            = 'Website:';
+$_['tab_education']            = 'Education';
+$_['tab_experience']            = 'Experience';
+$_['tab_former']            = 'Former';
+$_['tab_im']            = 'Im';
+$_['tab_phone']            = 'Phone';
+$_['tab_website']            = 'Website';
 
 // Column
 $_['column_name']             	= 'User Name';

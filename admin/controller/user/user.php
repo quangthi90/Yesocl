@@ -1215,7 +1215,7 @@ class ControllerUserUser extends Controller {
 		$this->load->model( 'data/value' );
 		$this->load->model( 'setting/config' );
 		$this->load->config( 'datatype' );
-		$this->model_setting_config->load( 'datatype_title' );
+		$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
 		
 		// Im type
 		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );
@@ -1223,7 +1223,7 @@ class ControllerUserUser extends Controller {
 		foreach ($im_types as $im_type) {
 			$this->data['im_types'][] = array(
 				'text' => $im_type->getName(),
-				'code' => $im_type->getCode(),
+				'code' => $im_type->getValue(),
 				);
 		}
 
@@ -1233,27 +1233,27 @@ class ControllerUserUser extends Controller {
 		foreach ($phone_types as $phone_type) {
 			$this->data['phone_types'][] = array(
 				'text' => $phone_type->getName(),
-				'code' => $phone_type->getCode(),
+				'code' => $phone_type->getValue(),
 				);
 		}
 
 		// Entry website title
-		$title_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_title_type' ) ) );
+		$title_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_website_type' ) ) );
 		$this->data['title_types'] = array();
 		foreach ($title_types as $title_type) {
 			$this->data['title_types'][] = array(
 				'text' => $title_type->getName(),
-				'code' => $title_type->getCode(),
+				'code' => $title_type->getValue(),
 				);
 		}
 
 		// Entry former visible
-		$visible_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_title_type' ) ) );
+		$visible_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_visible_type' ) ) );
 		$this->data['visible_types'] = array();
 		foreach ($visible_types as $visible_type) {
 			$this->data['visible_types'][] = array(
 				'text' => $visible_type->getName(),
-				'code' => $visible_type->getCode(),
+				'code' => $visible_type->getValue(),
 				);
 		}
 

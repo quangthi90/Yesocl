@@ -159,7 +159,7 @@ db.getCollection("admin_group").insert({
   "name": "Supper Admin",
   "permissions": [
     {
-      "_id": ObjectId("516df53b976982640e000013"),
+      "_id": ObjectId("516e2634976982440f000001"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ef471deeac1f000000"),
@@ -189,7 +189,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000014"),
+      "_id": ObjectId("516e2634976982440f000002"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -219,7 +219,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000015"),
+      "_id": ObjectId("516e2634976982440f000003"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516aac38913db4a004000000"),
@@ -249,7 +249,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000016"),
+      "_id": ObjectId("516e2634976982440f000004"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab55f913db42c12000000"),
@@ -279,7 +279,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000017"),
+      "_id": ObjectId("516e2634976982440f000005"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab59e913db47809000002"),
@@ -309,7 +309,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000018"),
+      "_id": ObjectId("516e2634976982440f000006"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516c974b976982740a000000"),
@@ -339,7 +339,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000019"),
+      "_id": ObjectId("516e2634976982440f000007"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a683d471dee480b00001a"),
@@ -369,7 +369,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e00001a"),
+      "_id": ObjectId("516e2634976982440f000008"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a684f471dee480b00001b"),
@@ -399,7 +399,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e00001b"),
+      "_id": ObjectId("516e2634976982440f000009"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -429,7 +429,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e00001c"),
+      "_id": ObjectId("516e2634976982440f00000a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -459,7 +459,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e00001d"),
+      "_id": ObjectId("516e2634976982440f00000b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a680e471dee480b000018"),
@@ -489,7 +489,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e00001e"),
+      "_id": ObjectId("516e2634976982440f00000c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67a8471dee480b000016"),
@@ -519,7 +519,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e00001f"),
+      "_id": ObjectId("516e2634976982440f00000d"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6823471dee480b000019"),
@@ -549,7 +549,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000020"),
+      "_id": ObjectId("516e2634976982440f00000e"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67d6471dee480b000017"),
@@ -579,7 +579,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000021"),
+      "_id": ObjectId("516e2634976982440f00000f"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6882471dee480b00001d"),
@@ -609,7 +609,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000022"),
+      "_id": ObjectId("516e2634976982440f000010"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6871471dee480b00001c"),
@@ -639,7 +639,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000023"),
+      "_id": ObjectId("516e2634976982440f000011"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516df1eb976982440f000000"),
@@ -659,7 +659,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000024"),
+      "_id": ObjectId("516e2634976982440f000012"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -689,7 +689,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("516df53b976982640e000025"),
+      "_id": ObjectId("516e2634976982440f000013"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -1972,6 +1972,26 @@ db.getCollection("setting_config").insert({
   "_id": ObjectId("516df45a976982bc0f000003"),
   "key": "datatype_school",
   "value": "school"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e2662976982140f000007"),
+  "key": "datatype_im_type",
+  "value": "im_type"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e267a976982140f000008"),
+  "key": "datatype_phone_type",
+  "value": "phone_type"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e2689976982140f000009"),
+  "key": "datatype_visible_type",
+  "value": "visible_type"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e26a3976982140f00000a"),
+  "key": "datatype_website_type",
+  "value": "website_type"
 });
 
 /** street records **/
