@@ -8,10 +8,7 @@ Class Location {
 	private $id; 
 
 	/** @MongoDB\String */
-	private $countryId;
-
-	/** @MongoDB\String */
-	private $country;
+	private $location;
 
 	/** @MongoDB\String */
 	private $cityId;
@@ -23,28 +20,12 @@ Class Location {
 		return $this->id;
 	}
 
-	public function setCountry( $country ){
-		$this->country = $country;
+	public function setLoaction( $loaction ){
+		$this->loaction = $loaction;
 	}
 
-	public function getCountry(){
-		return $this->country;
-	}
-
-	public function setCountryId( $countryId ){
-		$this->countryId = $countryId;
-	}
-
-	public function getCountryId(){
-		return $this->countryId;
-	}
-
-	public function setCity( $city ){
-		$this->city = $city;
-	}
-
-	public function getCity(){
-		return $this->city;
+	public function getLoaction(){
+		return $this->loaction;
 	}
 
 	public function setCityId( $cityId ){

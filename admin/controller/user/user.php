@@ -758,18 +758,11 @@ class ControllerUserUser extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 
-		// Error Country
-		if ( isset($this->error['country']) ) {
-			$this->data['error_country'] = $this->error['country'];
+		// Error Location
+		if ( isset($this->error['location']) ) {
+			$this->data['error_location'] = $this->error['location'];
 		} else {
-			$this->data['error_country'] = '';
-		}
-
-		// Error City
-		if ( isset($this->error['city']) ) {
-			$this->data['error_city'] = $this->error['city'];
-		} else {
-			$this->data['error_city'] = '';
+			$this->data['error_location'] = '';
 		}
 
 		// Error Industry
@@ -882,8 +875,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
 		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
-		$this->data['entry_country'] = $this->language->get( 'entry_country' );
-		$this->data['entry_city'] = $this->language->get( 'entry_city' );
+		$this->data['entry_location'] = $this->language->get( 'entry_location' );
 		$this->data['entry_postal_code'] = $this->language->get( 'entry_postal_code' );
 		$this->data['entry_industry'] = $this->language->get( 'entry_industry' );
 		$this->data['entry_headingline'] = $this->language->get( 'entry_headingline' );
@@ -945,9 +937,8 @@ class ControllerUserUser extends Controller {
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['emailValidate'] = html_entity_decode( $this->url->link( 'user/user/emailValidate', 'token=' . $this->session->data['token'], 'SSL' ) );
 		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link( 'company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
-		$this->data['autocomplete_country'] = html_entity_decode( $this->url->link( 'user/user/autocompleteCountry', 'token=' . $this->session->data['token'], 'SSL' ) );
 		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
-		$this->data['autocomplete_city'] = html_entity_decode( $this->url->link( 'user/user/autocompleteCity', 'token=' . $this->session->data['token'], 'SSL') );
+		$this->data['autocomplete_location'] = html_entity_decode( $this->url->link( 'user/user/autocompleteLocation', 'token=' . $this->session->data['token'], 'SSL') );
 		
 		// user
 		if ( isset($this->request->get['user_id']) ){
@@ -1062,27 +1053,15 @@ class ControllerUserUser extends Controller {
 			$this->data['marital_status'] = 0;
 		}
 
-		// Entry localtion country
-		if ( isset($this->request->post['meta']['location']['country']) ){
-			$this->data['country'] = $this->request->post['meta']['location']['country'];
-			$this->data['country_id'] = $this->request->post['meta']['location']['country_id'];
-		}elseif ( isset($user) && $user->getMeta() ){
-			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
-			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
-		}else {
-			$this->data['country'] = '';
-			$this->data['country_id'] = 0;
-		}
-
 		// Entry localtion city
-		if ( isset($this->request->post['meta']['location']['city']) ){
-			$this->data['city'] = $this->request->post['meta']['location']['city'];
+		if ( isset($this->request->post['meta']['location']['location']) ){
+			$this->data['location'] = $this->request->post['meta']['location']['location'];
 			$this->data['city_id'] = $this->request->post['meta']['location']['city_id'];
 		}elseif ( isset($user) && $user->getMeta() ){
-			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
+			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
 		}else {
-			$this->data['city'] = '';
+			$this->data['location'] = '';
 			$this->data['city_id'] = 0;
 		}
 
@@ -1592,67 +1571,31 @@ class ControllerUserUser extends Controller {
 		$this->response->setOutput('true');
 		return;
 	}
-	
-	public function autocompleteCountry(){
-		$this->load->model( 'localisation/country' );
 
-		$sort = 'name';
-
-		if ( isset( $this->request->get['filter_name'] ) ) {
-			$filter_name = $this->request->get['filter_name'];
-		}else {
-			$filter_name = null;
-		}
-
-		$data = array(
-			'filter_name' => $filter_name,
-			'sort' => $sort,
-			);
-
-		$country_data = $this->model_localisation_country->getCountries( $data );
-
-		$json = array();
-		foreach ($country_data as $country) {
-			$json[] = array(
-				'name' => $country->getName(),
-				'id' => $country->getId(),
-				);
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function autocompleteCity(){
+	public function autocompleteLocation(){
 		$this->load->model( 'localisation/city' );
 
 		$sort = 'name';
 
-		if ( isset( $this->request->get['filter_name'] ) ) {
-			$filter_name = $this->request->get['filter_name'];
+		if ( isset( $this->request->get['filter_location'] ) ) {
+			$filter_location = $this->request->get['filter_location'];
 		}else {
-			$filter_name = null;
-		}
-
-		if ( isset( $this->request->get['filter_country'] ) ) {
-			$filter_country = $this->request->get['filter_country'];
-		}else {
-			$filter_country = null;
+			$filter_location = null;
 		}
 
 		$data = array(
-			'filter_name' => $filter_name,
-			'filter_country' => $filter_country,
-			'sort' => $sort,
-			);
+			'filter_location' => $filter_location,
+			// 'sort' => $sort,
+		);
 
-		$city_data = $this->model_localisation_city->getCities( $data );
-
+		$cities = $this->model_localisation_city->searchLocationByKeyword( $data );
+		// print("<pre>"); var_dump($cities); exit;
 		$json = array();
-		foreach ($city_data as $city) {
+		foreach ( $cities as $city ) {
 			$json[] = array(
-				'name' => $city->getName(),
+				'name' => $city->getLocation(),
 				'id' => $city->getId(),
-				);
+			);
 		}
 
 		$this->response->setOutput( json_encode( $json ) );

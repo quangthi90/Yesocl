@@ -36,22 +36,11 @@
         </select></td>
     </tr>
     <tr>
-        <td><span class="required">*</span> <?php echo $entry_country; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[location][country]" value="<?php echo $country; ?>" />
-          <?php if ($error_country) { ?>
+        <td><span class="required">*</span> <?php echo $entry_location; ?></td>
+        <td><input required="required" class="input-medium" type="text" name="meta[location][location]" value="<?php echo $location; ?>" />
+        <?php if ($error_location) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_country; ?>
-        </div>
-            <?php } ?>
-          </td>
-        <input required="required" type="hidden" name="meta[location][country_id]" value="<?php echo $country_id; ?>" />
-    </tr>
-    <tr>
-        <td><span class="required">*</span> <?php echo $entry_city; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[location][city]" value="<?php echo $city; ?>" />
-        <?php if ($error_city) { ?>
-                <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_city; ?>
+          <strong>Error!</strong> <?php echo $error_location; ?>
         </div>
             <?php } ?>
           </td>
@@ -92,45 +81,10 @@
     $('.date').datepicker();
 //--></script>
 <script type="text/javascript"><!--
-$('input[name=\'meta[location][country]\']').autocomplete({
+$('input[name=\'meta[location][location]\']').autocomplete({
   delay: 0,
   source: function(request, response) {
-    $.ajax({
-      url: '<?php echo $autocomplete_country; ?>&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  },
-  focus: function(event, ui) {
-    $('input[name=\'meta[location][country]\']').val( ui.item.label );
-        
-    return false;
-    }, 
-  select: function(event, ui) {
-    $('input[name=\'meta[location][country]\']').val( ui.item.label );
-    $('input[name=\'meta[location][country_id]\']').val( ui.item.value );
-            
-    return false;
-  }
-});
-//--></script> 
-<script type="text/javascript"><!--
-$('input[name=\'meta[location][city]\']').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    var url = '';
-    if ( $('input[name=\'meta[location][country_id]\']').val() != '' ) {
-        url = '<?php echo $autocomplete_city; ?>&filter_country=' + $('input[name=\'meta[location][country_id]\']').val() + '&filter_name=';
-    }else {
-        url = '<?php echo $autocomplete_city; ?>&filter_name=';
-    }
+    var url = '<?php echo $autocomplete_location; ?>&filter_location=';
 
     $.ajax({
       url: url +  encodeURIComponent(request.term),
@@ -146,11 +100,11 @@ $('input[name=\'meta[location][city]\']').autocomplete({
     });
   }, 
   focus: function(event, ui) {
-    $('input[name=\'meta[location][city]\']').val( ui.item.label );
+    $('input[name=\'meta[location][location]\']').val( ui.item.label );
     return false;
     }, 
   select: function(event, ui) {
-    $('input[name=\'meta[location][city]\']').val( ui.item.label );
+    $('input[name=\'meta[location][location]\']').val( ui.item.label );
     $('input[name=\'meta[location][city_id]\']').val( ui.item.value );
             
     return false;
