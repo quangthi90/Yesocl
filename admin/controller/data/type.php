@@ -389,10 +389,12 @@ class ControllerDataType extends Controller {
 		}
 
 		// Entry code
+		$this->data['code_edit'] = true;
 		if ( isset($this->request->post['code']) ){
 			$this->data['code'] = $this->request->post['code'];
 		}elseif ( isset($type) ){
 			$this->data['code'] = $type->getCode();
+			$this->data['code_edit'] = false;
 		}else {
 			$this->data['code'] = '';
 		}

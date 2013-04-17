@@ -30,7 +30,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="code" value="<?php echo $code; ?>" />
+            <td><input class="input-xxlarge" <?php if (!$code_edit) { ?>disabled="disabled"<?php } ?> required="required" type="text" name="code" value="<?php echo $code; ?>" />
             <?php if ($error_code) { ?>
                 <div class="alert alert-error">
           <strong>Error!</strong> <?php echo $error_code; ?>

@@ -2,8 +2,13 @@
 class ControllerSettingConfig extends Controller {
 	private $limit = 10;
 	private $error = array();
+	private $route = 'setting/config';
 
 	public function index() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'setting/config' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -14,6 +19,10 @@ class ControllerSettingConfig extends Controller {
 	}
 
 	public function insert() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'setting/config' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -28,7 +37,7 @@ class ControllerSettingConfig extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
@@ -38,16 +47,20 @@ class ControllerSettingConfig extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'setting/config', $url ) );
+			$this->redirect( $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'setting/config/insert', $url );
+		$this->data['action'] = $this->url->link( 'setting/config/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		$this->getForm();
 	}
 
 	public function update() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'setting/config' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -64,12 +77,12 @@ class ControllerSettingConfig extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		if ( !isset( $this->request->get['config_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'setting/config' ) );
+			$this->redirect( $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] , 'SSL' ) );
 		}
 
 		// request
@@ -80,16 +93,20 @@ class ControllerSettingConfig extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'setting/config', $url ) );
+			$this->redirect( $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'setting/config/update', $url . '&config_id=' . $this->request->get['config_id'] );
+		$this->data['action'] = $this->url->link( 'setting/config/update', 'token=' . $this->session->data['token'] . $url . '&config_id=' . $this->request->get['config_id'], 'SSL' );
 
 		$this->getForm();
 	}
 
 	public function delete() {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'setting/config' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
@@ -101,7 +118,7 @@ class ControllerSettingConfig extends Controller {
 
 			$this->session->data['success'] = $this->language->get( 'success' );
 
-			$this->redirect( $this->url->link( 'setting/config' ) );
+			$this->redirect( $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] , 'SSL' ) );
 		}
 
 		$this->getList();
@@ -135,7 +152,7 @@ class ControllerSettingConfig extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -145,7 +162,7 @@ class ControllerSettingConfig extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'setting/config' ),
+			'href'      => $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] , 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -165,8 +182,8 @@ class ControllerSettingConfig extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'setting/config/insert' );
-		$this->data['delete'] = $this->url->link( 'setting/config/delete' );
+		$this->data['insert'] = $this->url->link( 'setting/config/insert', 'token=' . $this->session->data['token'] , 'SSL' );
+		$this->data['delete'] = $this->url->link( 'setting/config/delete', 'token=' . $this->session->data['token'] , 'SSL' );
 
 		$data = array(
 			'start' => ($page - 1) * $this->limit,
@@ -183,7 +200,7 @@ class ControllerSettingConfig extends Controller {
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'setting/config/update', 'config_id=' . $config->getId() ),
+					'href' => $this->url->link( 'setting/config/update', 'token=' . $this->session->data['token'] . 'config_id=' . $config->getId(), 'SSL' ),
 					'icon' => 'icon-edit',
 					);
 
@@ -201,7 +218,7 @@ class ControllerSettingConfig extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'setting/config', '&page={page}', 'SSl' );
+		$pagination->url = $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
 
@@ -250,7 +267,7 @@ class ControllerSettingConfig extends Controller {
 		}
 
 		$url = '';
-		$url .= 'page=' . $page;
+		$url .= '&page=' . $page;
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -260,7 +277,7 @@ class ControllerSettingConfig extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'setting/config', $url ),
+			'href'      => $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] . $url , 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -276,7 +293,7 @@ class ControllerSettingConfig extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'setting/config', $url );
+		$this->data['cancel'] = $this->url->link( 'setting/config', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		// config
 		if ( isset( $this->request->get['config_id'] ) ) {

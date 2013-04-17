@@ -1,5 +1,6 @@
 <?php
 use Document\Data\Type;
+use Document\Setting\Config;
 
 class ModelDataType extends Doctrine {
 	public function addType( $data = array() ) {
@@ -24,7 +25,14 @@ class ModelDataType extends Doctrine {
 		$type->setCode( trim( utf8_strtolower($data['code']) ) );
 		$type->setStatus( trim( $data['status'] ) ); 
 
+		$this->load->config( 'datatype' );
+
+		$config = new Config();
+		$config->setKey( $this->config->get('datatype_title') . $type->getCode() );
+		$config->setValue( $type->getCode() );
+
 		$this->dm->persist( $type );
+		$this->dm->persist( $config );
 		$this->dm->flush();
 	}
 
@@ -35,15 +43,15 @@ class ModelDataType extends Doctrine {
 		}
 
 		// Code is required
-		if ( !isset($data['code']) || empty($data['code']) ){
-			return false;
-		}
+		//if ( !isset($data['code']) || empty($data['code']) ){
+		//	return false;
+		//}
 
 		// Code is not exist
-		$type_tmp = $this->getTypeByCode( $data['code'] );
-		if ( !empty( $type_tmp ) && $type_tmp->getId() != $id ) {
-			return false;
-		}
+		//$type_tmp = $this->getTypeByCode( $data['code'] );
+		//if ( !empty( $type_tmp ) && $type_tmp->getId() != $id ) {
+		//	return false;
+		//}
 
 		if ( isset($data['status']) ){
 			$data['status'] = (int)$data['status'];
@@ -58,7 +66,7 @@ class ModelDataType extends Doctrine {
 		}
 
 		$type->setName( trim( $data['name'] ) ); 
-		$type->setCode( trim( utf8_strtolower($data['code']) ) );
+		//$type->setCode( trim( utf8_strtolower($data['code']) ) );
 		$type->setStatus( $data['status'] ); 
 
 		$this->dm->flush();
@@ -66,15 +74,21 @@ class ModelDataType extends Doctrine {
 
 	public function deleteType( $data = array() ) {
 		if ( isset($data['id']) ) {
+			$this->load->config( 'datatype' );
+
 			foreach ( $data['id'] as $id ) {
 				$type = $this->dm->getRepository( 'Document\Data\Type' )->find( $id );
 
-				//$type->setStatus( 0 );
+				if ( !empty( $type ) ) {
+					$values = $this->dm->getRepository( 'Document\Data\value' )->findBy( array( 'type.id' => $id ) );
+					foreach ($values as $value) {
+						$this->dm->remove($value);
+					}
 
-				$values = $this->dm->getRepository( 'Document\Data\value' )->findBy( array( 'type.id' => $id ) );
-				foreach ($values as $value) {
-					$this->dm->remove($value);
+					$config = $this->dm->getRepository( 'Document\Setting\Config' )->findOneBy( array( 'key' => $this->config->get('datatype_title') . $type->getCode() ) );
+					$this->dm->remove( $config );
 				}
+				
 
 				$this->dm->remove($type);
 			}
