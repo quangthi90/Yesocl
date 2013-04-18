@@ -297,11 +297,25 @@ class ControllerGroupPost extends Controller {
 			$this->data['error_author'] = '';
 		}
 
+		$group_id = 0;
+		if ( isset($this->request->get['group_id']) && !empty($this->request->get['group_id']) ){
+			$group_id = $this->request->get['group_id'];
+		}
+
+		if ( $group_id == 0 ){
+			$this->session->data['error_warning'] = $this->language->get('error_group');
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
+		}
+
+		// Link
+		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $group_id . '&token=' . $this->session->data['token'], 'SSL' );
+
 		// Load model
 		$this->load->model( 'group/group' );
 		
-		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
-		if ( empty( $group ) ) {
+		$group = $this->model_group_group->getGroup( $group_id );
+		if ( !$group ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_group' );
 			$this->redirect( $this->data['cancel'] );
 		}
 
@@ -334,9 +348,6 @@ class ControllerGroupPost extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
-		
-		// Link
-		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
@@ -395,6 +406,8 @@ class ControllerGroupPost extends Controller {
 		}else {
 			$this->data['user_id'] = '';
 		}
+
+		$this->data['token'] = $this->session->data['token'];
 
 		$this->template = 'group/post_form.tpl';
 		$this->children = array(

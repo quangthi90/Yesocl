@@ -146,6 +146,10 @@ class ModelGroupGroup extends Doctrine {
 		
 		return $this->dm->getRepository( 'Document\Group\Group' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
 	}
+
+	public function getGroupByPostId( $post_id ){
+		return $this->dm->getRepository( 'Document\Group\Group' )->findOneBy( array('posts.id' => $post_id) );
+	}
 	
 	public function getTotalGroups() {
 		$groups = $this->dm->getRepository( 'Document\Group\Group' )->findAll();
