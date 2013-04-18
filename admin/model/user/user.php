@@ -70,21 +70,10 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['background']['maritalstatus']) || empty($data['background']['maritalstatus']) ){
 			$data['background']['maritalstatus'] = false;
 		}
-
-		// Country is required
-		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
-			return false; 
-		}
-		if ( !isset($data['meta']['location']['country_id']) ){
-			$data['meta']['location']['country_id'] = 0;
-		}
 		
 		// City is required
-		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
+		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
 			return false;
-		}
-		if ( !isset($data['meta']['location']['city_id']) ){
-			$data['meta']['location']['city_id'] = 0;
 		}
 		
 		// Postal code is required
@@ -152,9 +141,7 @@ class ModelUserUser extends Doctrine {
 
 		// Create Location
 		$location = new Location();
-		$location->setCountry( trim( $data['meta']['location']['country'] ) );
-		$location->setCountryId( trim( $data['meta']['location']['country_id'] ) );
-		$location->setCity( trim( $data['meta']['location']['city'] ) );
+		$location->setLocation( trim( $data['meta']['location']['location'] ) );
 		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
@@ -390,21 +377,10 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['background']['maritalstatus']) || empty($data['background']['maritalstatus']) ){
 			$data['background']['maritalstatus'] = false;
 		}
-
-		// Country is required
-		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
-			return false; 
-		}
-		if ( !isset($data['meta']['location']['country_id']) ){
-			$data['meta']['location']['country_id'] = 0;
-		}
 		
 		// City is required
-		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
+		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
 			return false;
-		}
-		if ( !isset($data['meta']['location']['city_id']) ){
-			$data['meta']['location']['city_id'] = 0;
 		}
 		
 		// Postal code is required
@@ -472,9 +448,7 @@ class ModelUserUser extends Doctrine {
 
 		// Create Location
 		$location = new Location();
-		$location->setCountry( trim( $data['meta']['location']['country'] ) );
-		$location->setCountryId( trim( $data['meta']['location']['country_id'] ) );
-		$location->setCity( trim( $data['meta']['location']['city'] ) );
+		$location->setLocation( trim( $data['meta']['location']['location'] ) );
 		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
@@ -764,7 +738,7 @@ class ModelUserUser extends Doctrine {
 		return false;
 	}
 
-	public function search( $data = array() ) {
+	public function searchUserByKeyword( $data = array() ) {
 		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
 			return array();
 		}
@@ -775,7 +749,11 @@ class ModelUserUser extends Doctrine {
 				)
     	);
  
-		$query_data = 'solrUserContent_t:*' . $data['filter'] . '*';
+		$query_datas = array(
+			'solrEmail_t:*"' . $data['filter'] . '"*',
+			'solrFullname_t:*"' . $data['filter'] . '"*',
+			'username_t:*"' . $data['filter'] . '"*',
+		);
 
 		if ( isset( $data['start'] ) ) {
 			$data['start'] = (int)$data['start'];
@@ -792,19 +770,11 @@ class ModelUserUser extends Doctrine {
 		//$query_data .= '&start=' . $data['start'];
 		//$query_data .= '&rows' . $data['limit'];
  
-		$query->setQuery( $query_data );
- 
-		$results = $this->client->execute( $query );
-
-		$users = array();
-
-		foreach ($results as $result) {
-			if ( $user = $this->getUser( array( 'user_id' => $result->getId() ) ) ) {
-				$users[] = $user;
-			}
+		foreach ( $query_datas as $query_data ) {
+			$query->setQuery( $query_data );
 		}
-
-		return $users;
+ 
+		return $this->client->execute( $query );
 	}
 }
 ?>

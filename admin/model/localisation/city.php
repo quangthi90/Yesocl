@@ -128,8 +128,8 @@ class ModelLocalisationCity extends Doctrine {
 				'mappedDocument' => 'Document\Localisation\City',
 				)
     	);
- 
-		$query_data = 'location_t:*' . $data['filter_location'] . '*';
+ 		
+		$query_data = 'location_t:*"' . $data['filter_location'] . '"*';
  
 		$query->setQuery( $query_data );
  

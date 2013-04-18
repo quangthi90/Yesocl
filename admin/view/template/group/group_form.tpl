@@ -108,7 +108,7 @@ $('input[name=\'author\']').autocomplete({
 	delay: 0,
 	source: function(request, response) {
 		$.ajax({
-			url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term),
+			url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term) + '&token=<?php echo $token; ?>',
 			dataType: 'json',
 			success: function(json) {		
 				response($.map(json, function(item) {

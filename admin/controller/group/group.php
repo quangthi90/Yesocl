@@ -380,6 +380,8 @@ class ControllerGroupGroup extends Controller {
 			$this->data['type_id'] = 0;
 		}
 
+		$this->data['token'] = $this->session->data['token'];
+
 		$this->template = 'group/group_form.tpl';
 		$this->children = array(
 			'common/header',

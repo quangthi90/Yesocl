@@ -81,6 +81,12 @@ Class City {
         $this->setDataLocation();
     }
 
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+        $this->setDataLocation();
+    }
+
 	public function setDataLocation(){
 		try{
 			$this->location = $this->name . ', ' . $this->country->getName();

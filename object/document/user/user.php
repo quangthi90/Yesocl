@@ -162,11 +162,6 @@ Class User {
 		return $this->created;
 	}
 
-	/** @MongoDB\PrePersist */
-	public function prePersist(){
-		$this->created = new \DateTime();
-	}
-
 	/**
 	* @SOLR\Field(type="text")
 	*/
@@ -195,7 +190,8 @@ Class User {
 		return $solrContent;
 	}
 
-	/**
+    // ----------------- Solr Data cache for Embed & Reference Data -------------------
+    /**
 	* @SOLR\Field(type="text")
 	*/
 	private $solrEmail;
@@ -205,16 +201,81 @@ Class User {
 	}
 
 	public function getSolrEmail(){
-		$solr_email = '';
-
-		foreach ( $this->emails as $email) {
-			$solr_email .= $email->getEmail() . ' ';
-		}
-
-		return $solr_email;
+		return $this->solrEmail;
 	}
 
 	public function getDataSolrEmail(){
-		return $this->solrEmail;
+		try{
+			$this->solrEmail = '';
+
+			foreach ( $this->emails as $email) {
+				$this->solrEmail .= $email->getEmail() . ' ';
+			}
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Email!<br>See User Document <b>Function getDataSolrEmail()</b>', 0, $e);
+		}
 	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrFullname;
+
+	public function setSolrFullname( $solr_fullname ){
+		$this->solrFullname = $solr_fullname;
+	}
+
+	public function getSolrFullname(){
+		return $this->solrFullname;
+	}
+
+	public function getDataSolrFullname(){
+		try{
+			$this->solrFullname .= $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Fullname!<br>See User Document <b>Function getDataSolrFullname()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrPrimaryEmail;
+
+	public function setSolrPrimaryEmail( $solr_primary_email ){
+		$this->solrPrimaryEmail = $solr_primary_email;
+	}
+
+	public function getSolrPrimaryEmail(){
+		return $this->solrPrimaryEmail;
+	}
+
+	public function getDataSolrPrimaryEmail(){
+		try{
+			$this->solrPrimaryEmail .= $this->getPrimaryEmail()->getEmail();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
+		}
+	}
+	//---------------------------------- end Solr Data Cache --------------------------
+
+	/** @MongoDB\PrePersist */
+    public function prePersist()
+    {
+    	$this->created = new \DateTime();
+        $this->getDataSolrEmail();
+        $this->getDataSolrFullname();
+        $this->getDataSolrPrimaryEmail();
+    }
+
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+        $this->getDataSolrEmail();
+        $this->getDataSolrFullname();
+        $this->getDataSolrPrimaryEmail();
+    }
 }

@@ -13,19 +13,16 @@ Class Location {
 	/** @MongoDB\String */
 	private $cityId;
 
-	/** @MongoDB\String */
-	private $city;
-
 	public function getId(){
 		return $this->id;
 	}
 
-	public function setLoaction( $loaction ){
-		$this->loaction = $loaction;
+	public function setLocation( $location ){
+		$this->location = $location;
 	}
 
-	public function getLoaction(){
-		return $this->loaction;
+	public function getLocation(){
+		return $this->location;
 	}
 
 	public function setCityId( $cityId ){

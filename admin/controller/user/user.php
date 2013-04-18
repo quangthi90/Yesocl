@@ -406,15 +406,14 @@ class ControllerUserUser extends Controller {
 		$this->load->model( 'user/user' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-
+		
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateInsert() ){
-			if ( $this->model_user_user->addUser( $this->request->post ) ) {
+			if ( $this->model_user_user->addUser( $this->request->post ) == true ) {
 				$this->session->data['success'] = $this->language->get( 'text_success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
-			
 			
 			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
@@ -1039,7 +1038,7 @@ class ControllerUserUser extends Controller {
 		if ( isset($this->request->post['background']['birthday']) ){
 			$this->data['birthday'] = $this->request->post['background']['birthday'];
 		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
-			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('d/m/Y');
+			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('m/d/Y');
 		}else {
 			$this->data['birthday'] = '';
 		}
@@ -1309,12 +1308,8 @@ class ControllerUserUser extends Controller {
 	  		}
     	}
 
-    	if ( utf8_strlen($this->request->post['meta']['location']['country']) < 1 ) {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-
-    	if ( utf8_strlen($this->request->post['meta']['location']['city']) < 1 ) {
-      		$this->error['city'] = $this->language->get('error_city');
+    	if ( utf8_strlen($this->request->post['meta']['location']['location']) < 1 ) {
+      		$this->error['location'] = $this->language->get('error_location');
     	}
 
     	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
@@ -1423,12 +1418,8 @@ class ControllerUserUser extends Controller {
 			}
 		}
 
-    	if ( utf8_strlen($this->request->post['meta']['location']['country']) < 1 ) {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-
-    	if ( utf8_strlen($this->request->post['meta']['location']['city']) < 1 ) {
-      		$this->error['city'] = $this->language->get('error_city');
+    	if ( utf8_strlen($this->request->post['meta']['location']['location']) < 1 ) {
+      		$this->error['location'] = $this->language->get('error_location');
     	}
 
     	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
@@ -1614,17 +1605,17 @@ class ControllerUserUser extends Controller {
 			'filter' => $filter,
 			);
 
-		$users = $this->model_user_user->search( $data );
+		$users = $this->model_user_user->searchUserByKeyword( $data );
 
 		$json = array();
 
 		foreach ($users as $user) {
 			$primary = ( $user->getUsername()) ? $user->getUsername() : $user->getFullname();
-			$primary .= '(' . $user->getPrimaryEmail()->getEmail() . ')';
+			$primary .= '(' . $user->getSolrPrimaryEmail() . ')';
 			$json[] = array(
 				'id' => $user->getId(),
 				'primary' => $primary,
-				);
+			);
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
