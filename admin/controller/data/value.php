@@ -524,5 +524,46 @@ class ControllerDataValue extends Controller {
 
 		$this->response->setOutput( json_encode( $json ) );
 	}
+
+	public function searchValue() {
+		$this->load->model( 'data/value' );
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		if ( isset( $this->request->get['filter_type_code'] ) ) {
+			$filter_type_code = $this->request->get['filter_type_code'];
+		}else {
+			$filter_type_code = null;
+		}
+
+		if ( isset( $this->request->get['filter_value'] ) ) {
+			$filter_value = $this->request->get['filter_value'];
+		}else {
+			$filter_value = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'filter_type_code' => $filter_type_code,
+			'filter_value' => $filter_value,
+			);
+
+		$value_data = $this->model_data_value->searchValueByKeyword( $data );
+
+		$json = array();
+		foreach ($value_data as $value) {
+			$json[] = array(
+				'name' => html_entity_decode( $value->getName() ),
+				'value' => html_entity_decode( $value->getValue() ),
+				'id' => $value->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
 }
 ?>

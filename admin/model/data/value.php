@@ -156,6 +156,36 @@ class ModelDataValue extends Doctrine {
     		
     	return $query->getQuery()->execute();
 	}
+
+	public function searchValueByKeyword( $data = array() ) {
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\Data\Value',
+				)
+    	);
+
+		$hasQuery = false;
+		if ( isset( $data['filter_type_code'] ) && !empty( $data['filter_type_code'] ) ) {
+    		$query->setQuery( 'dataCode_t:*"' . strtolower( trim( $data['filter_type_code'] ) ) . '"*' );
+    		$hasQuery = true;
+    	}
+
+    	if ( isset( $data['filter_name'] ) && !empty( $data['filter_name'] ) ) {
+    		$query->setQuery( 'name_t:*"' . strtolower( trim( $data['filter_name'] ) ) . '"*' );
+    		$hasQuery = true;
+    	}
+
+    	if ( isset( $data['filter_value'] ) && !empty( $data['filter_value'] ) ) {
+    		$query->setQuery( 'value_t:*"' . strtolower( trim( $data['filter_value'] ) ) . '"*' );
+    		$hasQuery = true;
+    	}
+
+    	if ( !$hasQuery ) {
+    		return array();
+    	}
+ 
+		return $this->client->execute( $query );
+	}
 	
 	public function getTotalValues( $data ) {
 		$query = $this->dm->createQueryBuilder( 'Document\Data\Value' );
