@@ -152,7 +152,7 @@
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
-			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="1" /></div>';
+			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger hide"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="1" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html += 	'</div>';
