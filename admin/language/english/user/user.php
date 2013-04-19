@@ -34,7 +34,7 @@ $_['button_add_website']		  	= 'Add Website';
 
 // Entry
 $_['entry_address']          		= 'Address:';
-$_['entry_advance_for_contact']     = 'Advice For Contact:';
+$_['entry_advice_for_contact']     = 'Advice For Contact:';
 $_['entry_birthday']          		= 'Birthday:';
 $_['entry_company']             	= 'Company:';
 $_['entry_confirm']             	= 'Confirm:';
@@ -48,7 +48,7 @@ $_['entry_firstname']         		= 'Firstname:';
 $_['entry_grace']             		= 'Grace:';
 $_['entry_group']             		= 'User Group:';
 $_['entry_have_value']        		= 'Have Value:';
-$_['entry_headingLine']        		= 'Headingline:';
+$_['entry_headingline']        		= 'Heading Line:';
 $_['entry_industry']          		= 'Industry:';
 $_['entry_interest']          		= 'Interest:';
 $_['entry_im']          			= 'IM:';

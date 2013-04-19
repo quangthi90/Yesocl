@@ -37,14 +37,13 @@
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_location; ?></td>
-        <td><input required="required" class="input-medium" type="text" name="meta[location][location]" value="<?php echo $location; ?>" />
+        <td><input required="required" class="input-medium" type="text" name="meta[location][location]" value="<?php echo $location; ?>" /><input required="required" type="hidden" name="meta[location][city_id]" value="<?php echo $city_id; ?>" />
         <?php if ($error_location) { ?>
                 <div class="alert alert-error">
           <strong>Error!</strong> <?php echo $error_location; ?>
         </div>
             <?php } ?>
           </td>
-        <input required="required" type="hidden" name="meta[location][city_id]" value="<?php echo $city_id; ?>" />
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_postal_code; ?></td>

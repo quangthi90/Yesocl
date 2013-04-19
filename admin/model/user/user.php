@@ -138,11 +138,6 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['user']['formers']) || empty($data['user']['formers']) ){
 			$data['user']['formers'] = array();
 		}
-
-		// Create Location
-		$location = new Location();
-		$location->setLocation( trim( $data['meta']['location']['location'] ) );
-		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
 		// Get primary email
@@ -186,7 +181,13 @@ class ModelUserUser extends Doctrine {
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
-			$experience->setLocation( trim( $experience_data['location'] ) );
+
+			// Create Location
+			$location = new Location();
+			$location->setLocation( trim( $experience_data['location'] ) );
+			$location->setCityId( trim( $experience_data['city_id'] ) );
+			$experience->setLocation( $location );
+
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
@@ -274,7 +275,10 @@ class ModelUserUser extends Doctrine {
 			$formers[] = $former;
 		}
 
-		
+		// Create Location
+		$location = new Location();
+		$location->setLocation( trim( $data['meta']['location']['location'] ) );
+		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Create Meta
 		$meta = new Meta();
@@ -445,11 +449,6 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['user']['formers']) || empty($data['user']['formers']) ){
 			$data['user']['formers'] = array();
 		}
-
-		// Create Location
-		$location = new Location();
-		$location->setLocation( trim( $data['meta']['location']['location'] ) );
-		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
 		// Get primary email
@@ -493,7 +492,13 @@ class ModelUserUser extends Doctrine {
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
-			$experience->setLocation( trim( $experience_data['location'] ) );
+
+			// Create Location
+			$location = new Location();
+			$location->setLocation( trim( $experience_data['location'] ) );
+			$location->setCityId( trim( $experience_data['city_id'] ) );
+			$experience->setLocation( $location );
+			
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
@@ -580,6 +585,11 @@ class ModelUserUser extends Doctrine {
 			$former->setVisible( trim( $former_data['visible'] ) );
 			$formers[] = $former;
 		}
+
+		// Create Location
+		$location = new Location();
+		$location->setLocation( trim( $data['meta']['location']['location'] ) );
+		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Create Meta
 		$meta = new Meta();

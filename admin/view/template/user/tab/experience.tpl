@@ -25,7 +25,7 @@
           			</div>
           			<div class="span4">
           				<div class="span3"><?php echo $entry_location; ?></div>
-          				<div class="span9"><input class="localtion input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][location]" value="<?php echo $experience['location']; ?>" /></div>
+          				<div class="span9"><input class="location input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][location]" value="<?php echo $experience['location']; ?>" /><input required="required" type="hidden" name="background[experiencies][<?php echo $key; ?>][city_id]" value="<?php echo $experience['city_id']; ?>" /></div>
           			</div>
           		</div>
           		<div class="row-fluid">
@@ -93,7 +93,7 @@
    }, 
    select: function(event, ui) {
         $(this).val(ui.item.label);
-        $(this).parent().find('input.company_id').val(ui.item.value);    
+        $(this).next().val(ui.item.value);    
      return false;
    },
    focus: function(event, ui) {
@@ -102,11 +102,44 @@
 });
   }
 //--></script>
+<script type="text/javascript"><!--
+  function buildAutocompleteLocation() {
+    $('input.location').autocomplete({
+      delay: 0,
+      source: function(request, response) {
+        var url = '<?php echo $autocomplete_location; ?>&filter_location=';
+
+        $.ajax({
+          url: url +  encodeURIComponent(request.term),
+          dataType: 'json',
+          success: function(json) {   
+            response($.map(json, function(item) {
+              return {
+                label: item.name,
+                value: item.id
+              }
+            }));
+          }
+        });
+      }, 
+      focus: function(event, ui) {
+        $(this).val(ui.item.label);
+        return false;
+        }, 
+      select: function(event, ui) {
+        $(this).val(ui.item.label);
+        $(this).next().val(ui.item.value);  
+        return false;
+      }
+    });
+  }
+//--></script> 
 <script>
 	var exist_current = <?php echo (count( $experiencies )) ? 1 : 0; ?>;
 	var experience_length = <?php echo count( $experiencies ); ?>;
 	$(document).ready(function(){
     buildAutocompleteCompany();
+    buildAutocompleteLocation();
 
 		$('#tab-experience').on('click', '.btn-add-experience', function(){
 
@@ -119,7 +152,7 @@
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
-			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="true" /></div>';
+			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="1" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html += 	'</div>';
@@ -130,7 +163,7 @@
           	html += 		'</div>';
           	html += 		'<div class="span4">';
           	html += 			'<div class="span3"><?php echo $entry_location; ?></div>';
-          	html += 			'<div class="span9"><input class="location input-medium" type="text" name="background[experiencies][' + experience_length + '][location]" value="" /></div>';
+          	html += 			'<div class="span9"><input class="location input-medium" type="text" name="background[experiencies][' + experience_length + '][location]" value="" /><input required="required" type="hidden" name="background[experiencies][' + experience_length + '][city_id]" value="" /></div>';
           	html += 		'</div>';
           	html += 	'</div>';
           	html += 	'<div class="row-fluid">';
@@ -180,6 +213,7 @@
 			experience_length++; 
 
       buildAutocompleteCompany();
+      buildAutocompleteLocation();
 		});
 
 		$('#tab-experience').on('click', '.btn-remove-experience', function(){

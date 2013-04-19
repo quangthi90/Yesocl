@@ -13,8 +13,8 @@ Class Experience {
 	/** @MongoDB\String */
 	private $title;
 
-	/** @MongoDB\String */
-	private $location;
+	/** @MongoDB\EmbedOne(targetDocument="Location") */
+    private $location;
 
 	/** @MongoDB\Date */
 	private $started;

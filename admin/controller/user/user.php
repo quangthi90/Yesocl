@@ -305,11 +305,13 @@ class ControllerUserUser extends Controller {
 		foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 			$started = $experience->getStarted();
 			$ended = $experience->getEnded();
+			$location = $experience->getLocation();
 			$this->data['experiencies'][$key] = array(
 				'company' => $experience->getCompany(),
 				'current' => $experience->getCurrent(),
 				'title' => $experience->getTitle(),
-				'location' => $experience->getLocation(),
+				'location' => ( $location ) ? $location->getLocation() : '',
+				'city_id' => ( $location ) ? $location->getCityId() : '',
 				'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
 				'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 				'description' => $experience->getDescription(),
@@ -1170,11 +1172,13 @@ class ControllerUserUser extends Controller {
 			foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
+				$location = $experience->getLocation();
 				$this->data['experiencies'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
-					'location' => $experience->getLocation(),
+					'location' => ( $location ) ? $location->getLocation() : '',
+					'city_id' => ( $location ) ? $location->getCityId() : '',
 					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
