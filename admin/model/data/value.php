@@ -164,9 +164,10 @@ class ModelDataValue extends Doctrine {
 				)
     	);
 
+		$document = new Value();
 		$hasQuery = false;
 		if ( isset( $data['filter_type_code'] ) && !empty( $data['filter_type_code'] ) ) {
-    		$query->setQuery( 'dataCode_t:*"' . strtolower( trim( $data['filter_type_code'] ) ) . '"*' );
+    		$document->setDataCode( trim( $data['filter_type_code'] ) );
     		$hasQuery = true;
     	}
 
@@ -183,6 +184,8 @@ class ModelDataValue extends Doctrine {
     	if ( !$hasQuery ) {
     		return array();
     	}
+
+    	$query->setQueryByDocument( $document );
  
 		return $this->client->execute( $query );
 	}

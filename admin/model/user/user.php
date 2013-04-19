@@ -776,9 +776,6 @@ class ModelUserUser extends Doctrine {
 		}else {
 			$data['limit'] = 10;
 		}
-
-		//$query_data .= '&start=' . $data['start'];
-		//$query_data .= '&rows' . $data['limit'];
  
 		foreach ( $query_datas as $query_data ) {
 			$query->setQuery( $query_data );

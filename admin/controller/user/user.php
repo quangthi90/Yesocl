@@ -938,7 +938,7 @@ class ControllerUserUser extends Controller {
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['emailValidate'] = html_entity_decode( $this->url->link( 'user/user/emailValidate', 'token=' . $this->session->data['token'], 'SSL' ) );
 		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link( 'company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
-		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
+		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/searchValue', 'token=' . $this->session->data['token'], 'SSL') );
 		$this->data['autocomplete_location'] = html_entity_decode( $this->url->link( 'user/user/autocompleteLocation', 'token=' . $this->session->data['token'], 'SSL') );
 		
 		// user
