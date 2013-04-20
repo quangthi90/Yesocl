@@ -164,28 +164,43 @@ class ModelDataValue extends Doctrine {
 				)
     	);
 
-		$document = new Value();
 		$hasQuery = false;
 		if ( isset( $data['filter_type_code'] ) && !empty( $data['filter_type_code'] ) ) {
-    		$document->setDataCode( trim( $data['filter_type_code'] ) );
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq1',
+				    'tag' => array('filter_type_code'),
+				    'query' => 'dataCode_t:' . trim( $data['filter_type_code'] ),
+					)
+    			);
     		$hasQuery = true;
     	}
 
     	if ( isset( $data['filter_name'] ) && !empty( $data['filter_name'] ) ) {
-    		$query->setQuery( 'name_t:*"' . strtolower( trim( $data['filter_name'] ) ) . '"*' );
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq2',
+				    'tag' => array('filter_name'),
+				    'query' => 'name_t:*' . trim( $data['filter_name'] . '*' ),
+					)
+    			);
     		$hasQuery = true;
     	}
 
     	if ( isset( $data['filter_value'] ) && !empty( $data['filter_value'] ) ) {
-    		$query->setQuery( 'value_t:*"' . strtolower( trim( $data['filter_value'] ) ) . '"*' );
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq3',
+				    'tag' => array('filter_value'),
+				    'query' => 'value_t:*' . trim( $data['filter_value'] . '*' ),
+					)
+    			);
     		$hasQuery = true;
     	}
 
     	if ( !$hasQuery ) {
     		return array();
     	}
-
-    	$query->setQueryByDocument( $document );
  
 		return $this->client->execute( $query );
 	}
