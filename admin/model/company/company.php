@@ -350,6 +350,18 @@ class ModelCompanyCompany extends Doctrine {
 			unlink($path . '.png' );
 		}
 
+		if ( !is_dir( DIR_IMAGE . 'data' ) ) {
+			mkdir( DIR_IMAGE . 'data' );
+		}
+
+		if ( !is_dir( DIR_IMAGE . 'data/catalog' ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog' );
+		}
+
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/company' ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/company' );
+		}
+
 		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $company_id ) ) {
 			mkdir( DIR_IMAGE . 'data/catalog/company/' . $company_id );
 		}
