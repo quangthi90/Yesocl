@@ -1134,122 +1134,122 @@ db.getCollection("data_type").insert({
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af827913db48c05000014"),
   "name": "Vietnam National University - Ho Chi Minh City",
-  "value": "Vietnam National University - Ho Chi Minh City",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af76a913db48c05000010"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Vietnam National University - Ho Chi Minh City"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af84e913db48c05000015"),
   "name": "University of Economics Ho Chi Minh City",
-  "value": "University of Economics Ho Chi Minh City",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af76a913db48c05000010"),
     "$db": "yesocl"
-  }
+  },
+  "value": "University of Economics Ho Chi Minh City"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af88b913db48c05000016"),
   "name": "Vietnam National University - Ha Noi",
-  "value": "Vietnam National University - Ha Noi",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af76a913db48c05000010"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Vietnam National University - Ha Noi"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af8f4913db48c05000017"),
   "name": "Master Of Library &amp; Information Science",
-  "value": "Master Of Library &amp; Information Science",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af771913db48c05000011"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Master Of Library &amp; Information Science"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af917913db48c05000018"),
   "name": "Master Of Technology",
-  "value": "Master Of Technology",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af771913db48c05000011"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Master Of Technology"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af952913db48c05000019"),
   "name": "Bachelor Of Engineering",
-  "value": "Bachelor Of Engineering",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af771913db48c05000011"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Bachelor Of Engineering"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af970913db48c0500001a"),
   "name": "Information Technology",
-  "value": "Information Technology",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af7a3913db48c05000013"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Information Technology"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af992913db48c0500001b"),
   "name": "Economics",
-  "value": "Economics",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af7a3913db48c05000013"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Economics"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af9b3913db48c0500001c"),
   "name": "Accounting",
-  "value": "Accounting",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af7a3913db48c05000013"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Accounting"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514b094d913db4ac0800001f"),
   "name": "Banking",
-  "value": "Banking",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af77a913db48c05000012"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Banking"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514b0970913db4ac08000020"),
   "name": "Chemicals",
-  "value": "Chemicals",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af77a913db48c05000012"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Chemicals"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514b0983913db4ac08000021"),
   "name": "Design",
-  "value": "Design",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af77a913db48c05000012"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Design"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("516e02ac976982b00c000015"),
@@ -2012,7 +2012,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-04-15T05:43:52.0Z"),
   "emails": [
     {
-      "_id": ObjectId("516b9399913db43009000005"),
+      "_id": ObjectId("51708e99976982bc0f00000b"),
       "email": "testemail@gmail.com",
       "primary": true
     }
@@ -2023,22 +2023,37 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("516b9398913db43009000002"),
+    "_id": ObjectId("51708e99976982bc0f000006"),
     "firstname": "fdsfdfdsf",
     "lastname": "cxvcxsdf",
     "headingLine": "",
     "location": {
-      "_id": ObjectId("516b9398913db43009000003"),
-      "countryId": "5143bfa3913db4a408000011",
-      "country": "Việt Nam",
-      "cityId": "5143bfca913db4a408000012",
-      "city": "HCM"
+      "_id": ObjectId("51708e99976982bc0f000007"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
     },
     "postalCode": "12345",
     "industry": "Banking",
+    "industry_id": "",
     "address": "fdcvsfdsd",
     "background": {
-      "_id": ObjectId("516b9398913db43009000004"),
+      "_id": ObjectId("51708e99976982bc0f000008"),
+      "experiencies": [
+        {
+          "_id": ObjectId("51708e99976982bc0f000009"),
+          "company": "IBM",
+          "title": "dasdsad",
+          "location": {
+            "_id": ObjectId("51708e99976982bc0f00000a"),
+            "location": "HCM, Việt Nam",
+            "cityId": "5143bfca913db4a408000012"
+          },
+          "started": ISODate("2013-01-01T01:23:53.0Z"),
+          "ended": ISODate("2013-01-01T01:23:53.0Z"),
+          "current": true,
+          "description": "dsadasdasds"
+        }
+      ],
       "interest": "",
       "birthday": ISODate("2013-04-11T22:00:00.0Z"),
       "maritalStatus": false,
@@ -2054,7 +2069,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-04-16T00:26:51.0Z"),
   "emails": [
     {
-      "_id": ObjectId("516c9acb976982140f000004"),
+      "_id": ObjectId("517090b1976982740a000006"),
       "email": "hughnjt@gmail.com",
       "primary": true
     }
@@ -2065,22 +2080,37 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("516c9acb976982140f000001"),
+    "_id": ObjectId("517090b1976982740a000001"),
     "firstname": "hyujikmnhj",
     "lastname": "gtfhyvbg",
     "headingLine": "",
     "location": {
-      "_id": ObjectId("516c9acb976982140f000002"),
-      "countryId": "5143bfa3913db4a408000011",
-      "country": "Việt Nam",
-      "cityId": "5143bfca913db4a408000012",
-      "city": "HCM"
+      "_id": ObjectId("517090b1976982740a000002"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
     },
     "postalCode": "12345",
     "industry": "Banking",
+    "industry_id": "Banking",
     "address": "kijmnjhuk",
     "background": {
-      "_id": ObjectId("516c9acb976982140f000003"),
+      "_id": ObjectId("517090b1976982740a000003"),
+      "experiencies": [
+        {
+          "_id": ObjectId("517090b1976982740a000004"),
+          "company": "IBM",
+          "title": "dadasvcx",
+          "location": {
+            "_id": ObjectId("517090b1976982740a000005"),
+            "location": "HCM, Việt Nam",
+            "cityId": "5143bfca913db4a408000012"
+          },
+          "started": ISODate("2013-01-01T01:32:49.0Z"),
+          "ended": ISODate("2013-01-01T01:32:49.0Z"),
+          "current": true,
+          "description": "dsafdscvd"
+        }
+      ],
       "interest": "",
       "birthday": ISODate("2013-04-11T22:00:00.0Z"),
       "maritalStatus": false,
