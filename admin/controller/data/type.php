@@ -199,6 +199,7 @@ class ControllerDataType extends Controller {
 		// Link
 		$this->data['insert'] = $this->url->link( 'data/type/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'data/type/delete', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['autocomplete_type'] = html_entity_decode( $this->url->link( 'data/type/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
 
 		$data = array(
 			'filter_name' => $filter_name,

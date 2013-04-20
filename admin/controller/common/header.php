@@ -38,6 +38,12 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_admin_group'] = $this->language->get('text_admin_group');
 		$this->data['text_admin_manage'] = $this->language->get('text_admin_manage');
 		
+		// Company
+		$this->data['text_companies'] = $this->language->get('text_companies');
+		
+		$this->data['text_company'] = $this->language->get('text_company');
+		$this->data['text_company_group'] = $this->language->get('text_company_group');
+		$this->data['text_company_post_category'] = $this->language->get('text_company_post_category');
 		
 		// Attribute
 		$this->data['text_attributes'] = $this->language->get('text_attributes');
@@ -104,6 +110,11 @@ class ControllerCommonHeader extends Controller {
 			$this->data['type'] = $this->url->link('data/type', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['value'] = $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL');
 
+			// Company
+			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company'] = $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company_post_category'] = $this->url->link('company/category', 'token=' . $this->session->data['token'], 'SSL');
+
 			// system
 			$this->data['admin_group'] = $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['admin'] = $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL');
@@ -112,7 +123,6 @@ class ControllerCommonHeader extends Controller {
 
 			$this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 		}
-		
 		
 		$this->template = 'common/header.tpl';
 		

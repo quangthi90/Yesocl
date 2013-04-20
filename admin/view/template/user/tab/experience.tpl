@@ -5,7 +5,7 @@
 				<div class="row-fluid">
 					<div class="span4">
 						<div class="span3"><strong><?php echo $entry_company; ?></strong></div>
-						<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" />
+						<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /><input type="hidden" class="company_id" name="background[experiencies][<?php echo $key; ?>][company_id]" value="" />
 
                           <?php if ( isset( $error_experience[$key]['company'] ) ) { ?>
                           <div class="warning"><?php echo $error_experience[$key]['company']; ?></div>
@@ -14,7 +14,7 @@
 					</div>
 					<div class="span4">
 						<div class="span3"><?php echo $entry_current; ?></div>
-						<div class="span9"><?php if ( $experience['current'] ) { ?><a class="btn-lost-current btn btn-success disabled"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger hide"><i class="icon-minus"></i></a><?php }else { ?><a class="btn-lost-current btn btn-success disabled hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><?php } ?><input class="current" type="hidden" name="background[experiencies][<?php echo $key; ?>][current]" value="<?php echo $experience['current']; ?>" /></div>
+						<div class="span9"><?php if ( $experience['current'] ) { ?><a class="btn-lost-current btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger hide"><i class="icon-minus"></i></a><?php }else { ?><a class="btn-lost-current btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><?php } ?><input class="current" type="hidden" name="background[experiencies][<?php echo $key; ?>][current]" value="<?php echo $experience['current']; ?>" /></div>
 					</div>
 					<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>
 				</div>
@@ -73,11 +73,41 @@
           	<tr class="index-add-experience"></tr>
 		</table>
 <a class="btn-add-experience btn btn-success" ><?php echo $button_add_experience; ?><i class="icon-plus"></i></a>
-
+<script type="text/javascript"><!--//
+  function buildAutocompleteCompany() {
+    $('input.company').autocomplete({
+   delay: 0,
+   source: function(request, response) {
+     $.ajax({
+       url: '<?php echo $autocomplete_company; ?>&filter_name=' +  encodeURIComponent(request.term),
+       dataType: 'json',
+       success: function(json) {   
+         response($.map(json, function(item) {
+           return {
+             label: item.name,
+             value: item.id
+           }
+         }));
+       }
+     });
+   }, 
+   select: function(event, ui) {
+        $(this).val(ui.item.label);
+        $(this).parent().find('input.company_id').val(ui.item.value);    
+     return false;
+   },
+   focus: function(event, ui) {
+      return false;
+      }
+});
+  }
+//--></script>
 <script>
 	var exist_current = <?php echo (count( $experiencies )) ? 1 : 0; ?>;
 	var experience_length = <?php echo count( $experiencies ); ?>;
 	$(document).ready(function(){
+    buildAutocompleteCompany();
+
 		$('#tab-experience').on('click', '.btn-add-experience', function(){
 
 			var html = '<tr>';
@@ -85,11 +115,11 @@
 			html += 	'<div class="row-fluid">';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><strong><?php echo $entry_company; ?></strong></div>';
-			html += 			'<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /></div>';
+			html += 			'<div class="span9"><input class="company input-medium" type="text" name="background[experiencies][' + experience_length + '][company]" value="" /><input type="hidden" class="company_id" name="background[experiencies][' + experience_length + '][company_id]" value="" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
-			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success disabled hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="true" /></div>';
+			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiencies][' + experience_length + '][current]" value="true" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html += 	'</div>';
@@ -148,6 +178,8 @@
 			$('.index-add-experience').before( html );
 
 			experience_length++; 
+
+      buildAutocompleteCompany();
 		});
 
 		$('#tab-experience').on('click', '.btn-remove-experience', function(){
@@ -155,30 +187,30 @@
 		});
 
 		$('#tab-experience').on('click', '.btn-set-current', function(){
-			if ( $(this).parent().parent().find('input').val() == '' ){
-				alert('<?php echo $error_experience_empty; ?>');
-				return false;
-			}
-			
-			exist_current = 1;
-			
-			var btn_remove = $(this).parent().parent().parent().parent().find('.btn-remove-experience');
-
-			$('#tab-experience').find('.btn-lost-current').hide();
-			$('#tab-experience').find('.btn-set-current').show();
-			$('#tab-experience').find('.btn-remove-experience').show();
+      if ( $(this).parent().parent().parent().find('input.company').val() == '' ){
+        alert('<?php echo $error_experience_empty; ?>');
+        return false;
+      }
 			
 			$(this).hide();
 			$(this).parent().parent().find('.btn-lost-current').show();
-			btn_remove.hide();
-
-			$('.current').attr({
-				value: false
-			});
 			$(this).parent().parent().find('input.current').attr({
-				value: true
+				value: 1
 			});
 		});
+
+    $('#tab-experience').on('click', '.btn-lost-current', function(){
+      if ( $(this).parent().parent().parent().find('input.company').val() == '' ){
+        alert('<?php echo $error_experience_empty; ?>');
+        return false;
+      }
+      
+      $(this).hide();
+      $(this).parent().parent().find('.btn-set-current').show();
+      $(this).parent().parent().find('input.current').attr({
+        value: 0
+      });
+    });
 
     $('#tab-experience').on('blur', 'input.company', function(){
       var curr = $(this);

@@ -108,7 +108,7 @@ $('input[name=\'filter_name\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/type/autocomplete&filter_name=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_type; ?>&filter_name=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
@@ -135,7 +135,7 @@ $('input[name=\'filter_code\']').autocomplete({
   delay: 0,
   source: function(request, response) {
     $.ajax({
-      url: 'index.php?route=data/type/autocomplete&filter_code=' +  encodeURIComponent(request.term),
+      url: '<?php echo $autocomplete_type; ?>&filter_code=' +  encodeURIComponent(request.term),
       dataType: 'json',
       success: function(json) {   
         response($.map(json, function(item) {
