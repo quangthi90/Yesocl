@@ -78,6 +78,10 @@
             <?php } ?></td>
           </tr>
           <tr>
+            <td><span class="required">*</span> <?php echo $entry_created; ?></td>
+            <td><input required="required" class="input-medium date" type="text" name="created" value="<?php echo $created; ?>" /></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_status; ?></td>
             <td><select class="input-large" name="status" ><?php if ( $status ) { ?><option value="1" selected="selected" ><?php echo $text_enable; ?></option><option value="0" ><?php echo $text_disable; ?><?php }else { ?><option value="1" ><?php echo $text_enable; ?></option><option value="0" selected="selected" ><?php echo $text_disable; ?><?php } ?></select></td>
           </tr>
@@ -86,6 +90,9 @@
     </div>
   </div>
 </div>
+<script type="text/javascript"><!--//
+    $('.date').datepicker();
+//--></script>
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
 CKEDITOR.replace('description', {

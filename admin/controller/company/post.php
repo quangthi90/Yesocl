@@ -529,7 +529,7 @@ class ControllerCompanyPost extends Controller {
 			$this->error['error_author'] = $this->language->get( 'error_author' );
 		}
 
-		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) ) {
+		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
 			if ( !$this->model_company_post->isValidThumb( $this->request->files['thumb'] ) ) {
 				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
 			}

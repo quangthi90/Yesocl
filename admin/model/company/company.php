@@ -32,6 +32,11 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
+		// created is required
+		if ( !isset($data['created']) || empty($data['created']) ){
+			return false;
+		}
+
 		// logo
 		if ( isset( $logo ) ) {
   			if ( !$this->isValidLogo( $logo ) ) {
@@ -57,6 +62,7 @@ class ModelCompanyCompany extends Doctrine {
 		$company->setOwner( $user );
 		$company->setGroup( $group );
 		$company->setDescription( $data['description'] );
+		$company->setCreated( new \Datetime( $data['created'] ) );
 		$company->setStatus( $data['status'] );
 
 		$this->dm->persist( $company );
@@ -93,8 +99,13 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
+		// created is required
+		if ( !isset($data['created']) || empty($data['created']) ){
+			return false;
+		}
+
 		// logo
-		if ( isset( $logo ) ) {
+		if ( isset( $logo ) && $logo['size'] > 0 ) {
   			if ( !$this->isValidLogo( $logo ) ) {
   				return false;
   			}
@@ -138,6 +149,7 @@ class ModelCompanyCompany extends Doctrine {
 		$company->setOwner( $user );
 		$company->setGroup( $group );
 		$company->setDescription( $data['description'] );
+		$company->setCreated( new \Datetime( $data['created'] ) );
 		$company->setStatus( $data['status'] );
 		
 		$this->dm->flush();
@@ -202,6 +214,12 @@ class ModelCompanyCompany extends Doctrine {
     		}else {
     			$query->sort( $data['sort'], 'asc' );
     		}
+		}else {
+			if ( isset( $data['order'] ) && $data['order'] == 'asc' ) {
+				$query->sort( 'created', 'asc' );
+			}else {
+				$query->sort( 'created', 'desc' );
+			}
 		}
 
 		return $query->getQuery()->execute();
