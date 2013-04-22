@@ -268,12 +268,15 @@ class ModelCompanyCompany extends Doctrine {
 	}
 
 	public function isExistFollower( $company_id, $user_id ) {
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->findOneBy( array( 'followers.id' => $user_id ) );
-		if ( !empty( $company ) && $company->getId() != $company_id ) {
-			return true;
-		}else {
-			return false;
+		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array( 'followers.id' => $user_id ) );
+		
+		foreach ($companies as $company) {
+			if ( $company->getId() == $company_id  ) {
+				return true;
+			}
 		}
+		
+		return false;
 	}
 
 	public function removeFollowers( $company_id, $data = array() ) {
@@ -293,6 +296,10 @@ class ModelCompanyCompany extends Doctrine {
 	}
 
 	public function addRelativeCompany( $company_id, $relative_id ) {
+		if ( $company_id == $relative_id ) {
+			return false;
+		}
+
 		$relative = $this->dm->getRepository( 'Document\Company\Company' )->find( $relative_id );
 		if ( empty( $relative ) ) {
 			return false;
@@ -315,12 +322,15 @@ class ModelCompanyCompany extends Doctrine {
 	}
 
 	public function isExistRelativeCompany( $company_id, $relative_id ) {
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->findOneBy( array( 'relativeCompanies.id' => $relative_id ) );
-		if ( !empty( $company ) && $company->getId() != $company_id ) {
-			return true;
-		}else {
-			return false;
+		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array( 'relativeCompanies.id' => $relative_id ) );
+		
+		foreach ($companies as $company) {
+			if ( $company->getId() == $company_id  ) {
+				return true;
+			}
 		}
+		
+		return false;
 	}
 
 	public function removeRelativeCompanies( $company_id, $data = array() ) {

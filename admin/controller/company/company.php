@@ -142,25 +142,6 @@ class ControllerCompanyCompany extends Controller {
 
 		$this->load->model( 'company/company' );
 
-		// catch errors
-		if ( isset( $this->session->data['success'] ) ) {
-			$this->data['success'] = $this->session->data['success'];
-
-			unset( $this->session->data['success'] );
-		}else {
-			$this->data['success'] = '';
-		}
-
-		if ( isset( $this->session->data['error_warning'] ) ) {
-			$this->data['error_warning'] = $this->session->data['error_warning'];
-
-			unset( $this->session->data['error_warning'] );
-		} elseif ( isset( $this->error['error_warning'] ) ) {
-			$this->data['error_warning'] = $this->error['error_warning'];
-		}else {
-			$this->data['error_warning'] = '';
-		}
-
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
 			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
@@ -182,6 +163,25 @@ class ControllerCompanyCompany extends Controller {
 
 				$this->redirect( $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
 			}
+		}
+
+		// catch errors
+		if ( isset( $this->session->data['success'] ) ) {
+			$this->data['success'] = $this->session->data['success'];
+
+			unset( $this->session->data['success'] );
+		}else {
+			$this->data['success'] = '';
+		}
+
+		if ( isset( $this->session->data['error_warning'] ) ) {
+			$this->data['error_warning'] = $this->session->data['error_warning'];
+
+			unset( $this->session->data['error_warning'] );
+		} elseif ( isset( $this->error['error_warning'] ) ) {
+			$this->data['error_warning'] = $this->error['error_warning'];
+		}else {
+			$this->data['error_warning'] = '';
 		}
 
 		// breadcrumbs
@@ -283,7 +283,36 @@ class ControllerCompanyCompany extends Controller {
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
+		if ( !isset( $this->request->get['company_id'] ) ) {
+			$this->redirect( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
+		}
+
 		$this->load->model( 'company/company' );
+
+		// request
+		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
+			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
+				if ( !isset( $this->request->post['company_id'] ) || empty( $this->request->post['company_id'] ) ) {
+					$this->data['error_warning'] = $this->language->get( 'error_relative' );
+				}elseif ( $this->request->post['company_id'] == $this->request->get['company_id'] ) {
+					$this->data['error_warning'] = $this->language->get( 'error_relative' );
+				}else {
+					if ( !$this->model_company_company->addRelativeCompany( $this->request->get['company_id'], $this->request->post['company_id'] ) ) {
+						$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+					}else {
+						$this->session->data['success'] = $this->language->get( 'success' );
+
+						$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+					}
+				}
+			}else {
+				$this->model_company_company->removeRelativeCompanies( $this->request->get['company_id'], $this->request->post );
+
+				$this->session->data['success'] = $this->language->get( 'success' );
+
+				$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+			}
+		}
 
 		// catch errors
 		if ( isset( $this->session->data['success'] ) ) {
@@ -302,29 +331,6 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_warning'] = $this->error['error_warning'];
 		}else {
 			$this->data['error_warning'] = '';
-		}
-
-		// request
-		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
-			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
-				if ( !isset( $this->request->post['company_id'] ) || empty( $this->request->post['company_id'] ) ) {
-					$this->data['error_warning'] = $this->language->get( 'error_relative' );
-				}else {
-					if ( !$this->model_company_company->addRelativeCompany( $this->request->get['company_id'], $this->request->post['company_id'] ) ) {
-						$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
-					}else {
-						$this->session->data['success'] = $this->language->get( 'success' );
-
-						$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
-					}
-				}
-			}else {
-				$this->model_company_company->removeRelativeCompanies( $this->request->get['company_id'], $this->request->post );
-
-				$this->session->data['success'] = $this->language->get( 'success' );
-
-				$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
-			}
 		}
 
 		// breadcrumbs
