@@ -17,6 +17,12 @@ Class Category {
 	
 	/** @MongoDB\Int */
 	private $order;
+
+	/** @MongoDB\ReferenceOne(targetDocument="Category", inversedBy="childs") */
+	private $parent;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="parent") */
+	private $childs = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -51,6 +57,26 @@ Class Category {
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function setParent( $parent ){
+		$this->parent = $parent;
+	}
+
+	public function getParent(){
+		return $this->parent;
+	}
+
+	public function addChild( $child ){
+		$this->childs[] = $child;
+	}
+
+	public function setChilds( $childs ){
+		$this->childs = $childs;
+	}
+
+	public function getChilds(){
+		return $this->childs;
 	}
 
 	public function setStatus( $status ){

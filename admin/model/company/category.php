@@ -17,6 +17,12 @@ class ModelCompanyCategory extends Doctrine {
 			$data['order'] = (int)$data['order'];
 		}
 
+		// parent
+		$parent = null;
+		if ( isset( $data['parent'] ) ) {
+			$parent = $this->dm->getRepository( 'Document\Company\Category' )->find( $data['parent'] );
+		}
+
 		// status
 		if ( !isset( $data['status'] ) ) {
 			$data['status'] = 0;
@@ -25,6 +31,7 @@ class ModelCompanyCategory extends Doctrine {
 		$category = new Category();
 		$category->setName( $data['name'] );
 		$category->setOrder( $data['order'] );
+		$category->setParent( $parent );
 		$category->setStatus( $data['status'] );
 
 		$this->dm->persist( $category );
@@ -48,6 +55,16 @@ class ModelCompanyCategory extends Doctrine {
 			$data['order'] = (int)$data['order'];
 		}
 
+		// parent
+		$parent = null;
+		if ( isset( $data['parent'] ) && $data['parent'] ) {
+			$parent = $this->dm->getRepository( 'Document\Company\Category' )->find( $data['parent'] );
+
+			if ( $parent->getId() == $category_id ) {
+				$parent = null;
+			}
+		}
+
 		// status
 		if ( !isset( $data['status'] ) ) {
 			$data['status'] = 0;
@@ -65,6 +82,7 @@ class ModelCompanyCategory extends Doctrine {
 
 		$category->setName( $data['name'] );
 		$category->setOrder( $data['order'] );
+		$category->setParent( $parent );
 		$category->setStatus( $data['status'] );
 		
 		$this->dm->flush();
@@ -78,6 +96,11 @@ class ModelCompanyCategory extends Doctrine {
 				$category = $this->dm->getRepository( 'Document\Company\Category' )->find( $id );
 
 				if ( !empty( $category ) ) {
+					$this->dm->createQueryBuilder( 'Document\Company\Category' )
+    					->remove()
+    					->field('parent.id')->equals( $category->getId() )
+    					->getQuery()
+    					->execute();
 					$this->dm->remove( $category );
 				}
 			}
@@ -103,7 +126,15 @@ class ModelCompanyCategory extends Doctrine {
 			$data['limit'] = 10;
 		}
 
-		return $this->dm->getRepository( 'Document\Company\Category' )->findAll()->limit( $this->data['limit'] )->skip( $this->data['start'] );
+		$query = $this->dm->createQueryBuilder( 'Document\Company\Category' )
+    		->limit( $data['limit'] )
+    		->skip( $data['start'] );
+
+    	if ( isset( $data['ignores'] ) && is_array( $data['ignores'] ) ) {
+    		$query->field('id')->notIn( $data['ignores'] );
+    	}
+
+		return $query->getQuery()->execute();
 	}
 
 	public function getTotalCategories( $data = array() ) {
