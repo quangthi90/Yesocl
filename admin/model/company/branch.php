@@ -60,8 +60,9 @@ class ModelCompanyBranch extends Doctrine {
 		if ( isset( $data['id'] ) ) {
 			foreach ($data['id'] as $id) {
 				$branch = $this->dm->getRepository( 'Document\Company\Branch' )->find( $id );
-
 				if ( !empty( $branch ) ) {
+					$this->dm->createQueryBuilder( 'Document\Company\Position' )->remove()->field( 'branchs.id' )->equals( $branch->getId() )->getQuery()->execute();
+				
 					$this->dm->remove( $branch );
 				}
 			}
