@@ -87,7 +87,13 @@ class ModelCompanyBranch extends Doctrine {
 			$data['limit'] = 10;
 		}
 
-		return $this->dm->getRepository( 'Document\Company\Branch' )->findAll()->limit( $this->data['limit'] )->skip( $this->data['start'] );
+		$query = $this->dm->createQueryBuilder( 'Document\Company\Branch' )->skip( $data['start'] )->limit( $data['limit'] );
+
+		if ( isset( $data['filter_name'] ) ) {
+			$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i' ) );
+		}
+
+		return $query->getQuery()->execute();
 	}
 
 	public function getTotalBranchs( $data = array() ) {
