@@ -6,9 +6,6 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 Class Career {
 	/** @MongoDB\Id */
 	private $id;
-
-	/** @MongoDB\String */
-	private $title;
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -18,20 +15,15 @@ Class Career {
 
 	/** @MongoDB\Date */
 	private $updated;
-	
-	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="career") */
+
+	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="careers") */
     private $user;
+	
+	/** @MongoDB\ReferenceOne(targetDocument="Position", inversedBy="careers") */
+    private $position;
 
 	public function getId(){
 		return $this->id;
-	}
-	
-	public function setTitle( $title ){
-		$this->title = $title;
-	}
-
-	public function getTitle(){
-		return $this->title;
 	}
 
 	public function setStatus( $status ){
@@ -64,11 +56,24 @@ Class Career {
 		$this->updated = new \DateTime();
 	}
 
+	/** @MongoDB\PreUpdate */
+	public function prePersist(){
+		$this->updated = new \DateTime();
+	}
+
 	public function setUser( $user ){
 		$this->user = $user;
 	}
 
 	public function getUser(){
 		return $this->user;
+	}
+
+	public function setPosition( $position ){
+		$this->position = $position;
+	}
+
+	public function getPosition(){
+		return $this->position;
 	}
 }

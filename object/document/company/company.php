@@ -70,6 +70,24 @@ Class Company {
 		return null;
 	}
 
+	/**
+	 * Get Career By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Career
+	 * 		- null if not found
+	 */
+	public function getCareerById( $career_id ){
+		foreach ( $this->careers as $career ){
+			if ( $career->getId() === $career_id ){
+				return  $career;
+			}
+		}
+		
+		return null;
+	}
+
 	public function getId(){
 		return $this->id;
 	}

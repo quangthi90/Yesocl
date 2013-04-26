@@ -127,6 +127,10 @@ class ModelCompanyPosition extends Doctrine {
 		return $this->dm->getRepository( 'Document\Company\Position' )->findAll()->limit( $this->data['limit'] )->skip( $this->data['start'] );
 	}
 
+	public function getAllPositions( $data = array() ) {
+		return $this->dm->getRepository( 'Document\Company\Position' )->findAll();
+	}
+
 	public function getTotalPositions( $data = array() ) {
 		return count( $this->dm->getRepository( 'Document\Company\Position' )->findAll() );
 	}
