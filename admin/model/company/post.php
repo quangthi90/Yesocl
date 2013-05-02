@@ -43,7 +43,7 @@ class ModelCompanyPost extends Doctrine {
 		} 
 
 		// thumb
-		if ( isset( $thumb ) ) {
+		if ( isset( $thumb ) && $thumb['size'] > 0 ) {
   			if ( !$this->isValidThumb( $thumb ) ) {
   				return false;
   			}

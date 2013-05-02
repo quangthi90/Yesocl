@@ -34,6 +34,7 @@ $_['column_email'] = 'Email';
 $_['column_logo'] = 'Logo';
 
 // entry
+$_['entry_created'] = 'Created:';
 $_['entry_name'] = 'Company Name:';
 $_['entry_status'] = 'Status:';
 $_['entry_owner'] = 'Owner:';

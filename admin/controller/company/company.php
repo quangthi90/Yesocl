@@ -142,25 +142,6 @@ class ControllerCompanyCompany extends Controller {
 
 		$this->load->model( 'company/company' );
 
-		// catch errors
-		if ( isset( $this->session->data['success'] ) ) {
-			$this->data['success'] = $this->session->data['success'];
-
-			unset( $this->session->data['success'] );
-		}else {
-			$this->data['success'] = '';
-		}
-
-		if ( isset( $this->session->data['error_warning'] ) ) {
-			$this->data['error_warning'] = $this->session->data['error_warning'];
-
-			unset( $this->session->data['error_warning'] );
-		} elseif ( isset( $this->error['error_warning'] ) ) {
-			$this->data['error_warning'] = $this->error['error_warning'];
-		}else {
-			$this->data['error_warning'] = '';
-		}
-
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
 			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
@@ -182,6 +163,25 @@ class ControllerCompanyCompany extends Controller {
 
 				$this->redirect( $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
 			}
+		}
+
+		// catch errors
+		if ( isset( $this->session->data['success'] ) ) {
+			$this->data['success'] = $this->session->data['success'];
+
+			unset( $this->session->data['success'] );
+		}else {
+			$this->data['success'] = '';
+		}
+
+		if ( isset( $this->session->data['error_warning'] ) ) {
+			$this->data['error_warning'] = $this->session->data['error_warning'];
+
+			unset( $this->session->data['error_warning'] );
+		} elseif ( isset( $this->error['error_warning'] ) ) {
+			$this->data['error_warning'] = $this->error['error_warning'];
+		}else {
+			$this->data['error_warning'] = '';
 		}
 
 		// breadcrumbs
@@ -219,7 +219,7 @@ class ControllerCompanyCompany extends Controller {
 		// link
 		$this->data['insert'] = $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&query=insert&company_id=' . $this->request->get['company_id'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'company/company/follower', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'company/company' );
+		$this->data['back'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
 
 		// company
@@ -283,7 +283,36 @@ class ControllerCompanyCompany extends Controller {
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
+		if ( !isset( $this->request->get['company_id'] ) ) {
+			$this->redirect( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
+		}
+
 		$this->load->model( 'company/company' );
+
+		// request
+		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
+			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
+				if ( !isset( $this->request->post['company_id'] ) || empty( $this->request->post['company_id'] ) ) {
+					$this->data['error_warning'] = $this->language->get( 'error_relative' );
+				}elseif ( $this->request->post['company_id'] == $this->request->get['company_id'] ) {
+					$this->data['error_warning'] = $this->language->get( 'error_relative' );
+				}else {
+					if ( !$this->model_company_company->addRelativeCompany( $this->request->get['company_id'], $this->request->post['company_id'] ) ) {
+						$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+					}else {
+						$this->session->data['success'] = $this->language->get( 'success' );
+
+						$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+					}
+				}
+			}else {
+				$this->model_company_company->removeRelativeCompanies( $this->request->get['company_id'], $this->request->post );
+
+				$this->session->data['success'] = $this->language->get( 'success' );
+
+				$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+			}
+		}
 
 		// catch errors
 		if ( isset( $this->session->data['success'] ) ) {
@@ -302,29 +331,6 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_warning'] = $this->error['error_warning'];
 		}else {
 			$this->data['error_warning'] = '';
-		}
-
-		// request
-		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
-			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
-				if ( !isset( $this->request->post['company_id'] ) || empty( $this->request->post['company_id'] ) ) {
-					$this->data['error_warning'] = $this->language->get( 'error_relative' );
-				}else {
-					if ( !$this->model_company_company->addRelativeCompany( $this->request->get['company_id'], $this->request->post['company_id'] ) ) {
-						$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
-					}else {
-						$this->session->data['success'] = $this->language->get( 'success' );
-
-						$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
-					}
-				}
-			}else {
-				$this->model_company_company->removeRelativeCompanies( $this->request->get['company_id'], $this->request->post );
-
-				$this->session->data['success'] = $this->language->get( 'success' );
-
-				$this->redirect( $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
-			}
 		}
 
 		// breadcrumbs
@@ -362,7 +368,7 @@ class ControllerCompanyCompany extends Controller {
 		// link
 		$this->data['insert'] = $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&query=insert&company_id=' . $this->request->get['company_id'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'company/company/relativeCompany', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'company/company' );
+		$this->data['back'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
 
 		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link( 'company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
 		
@@ -607,6 +613,12 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_description'] = '';
 		}
 
+		if ( isset( $this->error['error_created'] ) ) {
+			$this->data['error_created'] = $this->error['error_created'];
+		}else {
+			$this->data['error_created'] = '';
+		}
+
 		// page
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -642,6 +654,7 @@ class ControllerCompanyCompany extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_group'] = $this->language->get( 'entry_group' );
 		$this->data['entry_owner'] = $this->language->get( 'entry_owner' );
+		$this->data['entry_created'] = $this->language->get( 'entry_created' );
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 
 		// button
@@ -677,7 +690,7 @@ class ControllerCompanyCompany extends Controller {
 		if ( isset( $this->request->post['owner'] ) ) {
 			$this->data['owner'] = $this->request->post['owner'];
 		}elseif ( isset( $company ) ) {
-			$this->data['owner'] = $company->getOwner()->getPrimaryEmail()->getEmail();
+			$this->data['owner'] = $company->getOwner()->getUsername() . '(' . $company->getOwner()->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['owner'] = '';
 		}
@@ -724,6 +737,15 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['description'] = '';
 		}
 
+		// created
+		if ( isset( $this->request->post['created'] ) ) {
+			$this->data['created'] = $this->request->post['created'];
+		}elseif ( isset( $company ) ) {
+			$this->data['created'] = $company->getCreated()->format( 'd/m/Y' );
+		}else {
+			$this->data['created'] = '';
+		}
+
 		// status
 		if ( isset( $this->request->post['status'] ) ) {
 			$this->data['status'] = $this->request->post['status'];
@@ -761,7 +783,7 @@ class ControllerCompanyCompany extends Controller {
 			}
 		}
 
-		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) ) {
+		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) && $this->request->files['logo']['size'] > 0 ) {
 			if ( !$this->model_company_company->isValidLogo( $this->request->files['logo'] ) ) {
 				$this->error['error_logo'] = $this->language->get( 'error_logo');
 			}
@@ -777,6 +799,10 @@ class ControllerCompanyCompany extends Controller {
 
 		if ( !isset( $this->request->post['group']) || empty( $this->request->post['group'] ) ) {
 			$this->error['error_group'] = $this->language->get( 'error_group' );
+		}
+
+		if ( !isset( $this->request->post['created']) || empty( $this->request->post['created'] ) ) {
+			$this->error['error_created'] = $this->language->get( 'error_created' );
 		}
 
 		if ( $this->error ) {
