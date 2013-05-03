@@ -29,6 +29,22 @@
             <?php } ?></td>
           </tr>
           <tr>
+            <td><span class="required">*</span> <?php echo $entry_parent; ?></td>
+            <td><select name="parent">
+              <?php if ($parent) { ?>
+              <option value="" ><?php echo $text_root; ?></option>
+              <?php foreach ($categories as $category) { ?>
+              <option value="<?php echo $category['id']; ?>" <?php if ($category['id'] == $parent) { ?>selected="selected"<?php } ?>><?php echo $category['name']; ?></option>
+              <?php } ?>
+              <?php }else { ?>
+              <option value="" selected="selected" ><?php echo $text_root; ?></option>
+              <?php foreach ($categories as $category) { ?>
+              <option value="<?php echo $category['id']; ?>" ><?php echo $category['name']; ?></option>
+              <?php } ?>
+              <?php } ?>
+            </select></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_order; ?></td>
             <td><input class="input-large" required="required" type="text" name="order" value="<?php echo $order; ?>" />
             </td>

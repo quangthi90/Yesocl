@@ -34,6 +34,7 @@ $_['column_email'] = 'Email';
 $_['column_logo'] = 'Logo';
 
 // entry
+$_['entry_created'] = 'Created:';
 $_['entry_name'] = 'Company Name:';
 $_['entry_status'] = 'Status:';
 $_['entry_owner'] = 'Owner:';
@@ -51,5 +52,7 @@ $_['error_warning'] = 'Warning: Error!';
 $_['error_logo'] = 'Warning: Logo upload failed!';
 $_['success'] = 'Success: You have modified Company!';
 $_['error_follower'] = 'Warning: User is required!';
+$_['error_exist_follower'] = 'Warning: User is exist!';
 $_['error_relative'] = 'Warning: Company is required!';
+$_['error_exist_relative'] = 'Warning: Company is exist!';
 ?>

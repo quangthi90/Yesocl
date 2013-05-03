@@ -42,13 +42,13 @@ class ControllerCompanyComment extends Controller {
 		if ( !isset( $this->request->get['company_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company' ) );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		if ( !isset( $this->request->get['post_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->load->model( 'company/comment' );
@@ -71,11 +71,11 @@ class ControllerCompanyComment extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/comment/insert', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] );
+		$this->data['action'] = $this->url->link( 'company/comment/insert', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 
 		$this->getForm();
 	}
@@ -92,13 +92,13 @@ class ControllerCompanyComment extends Controller {
 		if ( !isset( $this->request->get['company_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company' ) );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		if ( !isset( $this->request->get['post_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] ) );
+			$this->redirect( $this->url->link( 'company/post', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->load->model( 'company/comment' );
@@ -116,7 +116,7 @@ class ControllerCompanyComment extends Controller {
 		if ( !isset( $this->request->get['comment_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		// request
@@ -127,11 +127,11 @@ class ControllerCompanyComment extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] ) );
+			$this->redirect( $this->url->link( 'company/comment', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/comment/update', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&comment_id=' . $this->request->get['comment_id'] );
+		$this->data['action'] = $this->url->link( 'company/comment/update', 'company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'] . '&comment_id=' . $this->request->get['comment_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 
 		$this->getForm();
 	}
