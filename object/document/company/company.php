@@ -170,11 +170,6 @@ Class Company {
 		return $this->created;
 	}
 
-	/** @MongoDB\PrePersist */
-	public function prePersist(){
-		$this->created = new \DateTime();
-	}
-
 	public function setStatus( $status ){
 		$this->status = $status;
 	}
