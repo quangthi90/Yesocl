@@ -51,7 +51,7 @@ class ControllerCommonFooter extends Controller {
 			$this->template = 'default/template/common/footer.tpl';
 		}
 		
-		$this->render();
+		$this->twig_render();
 	}
 }
 ?>

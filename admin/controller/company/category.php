@@ -283,10 +283,12 @@ class ControllerCompanyCategory extends Controller {
 		// text
 		$this->data['text_enable'] = $this->language->get( 'text_enable' );
 		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+		$this->data['text_root'] = $this->language->get( 'text_root' );
 
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_order'] = $this->language->get( 'entry_order' );
+		$this->data['entry_parent'] = $this->language->get( 'entry_parent' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 
 		// button
@@ -297,12 +299,15 @@ class ControllerCompanyCategory extends Controller {
 		$this->data['cancel'] = $this->url->link( 'company/category', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		// category
+		$ignores = array();
 		if ( isset( $this->request->get['category_id'] ) ) {
 			$category = $this->model_company_category->getCategory( $this->request->get['category_id'] );
 
 			if ( empty( $category ) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
+
+			$ignores[] = $category->getId();
 		}
 
 		// name
@@ -321,6 +326,24 @@ class ControllerCompanyCategory extends Controller {
 			$this->data['order'] = $category->getOrder();
 		}else {
 			$this->data['order'] = 0;
+		}
+
+		// categories
+		if ( isset( $this->request->post['parent'] ) ) {
+			$this->data['parent'] = $this->request->post['parent'];
+		}elseif ( isset( $category ) && $category->getParent() ) {
+			$this->data['parent'] = $category->getParent()->getId();
+		}else {
+			$this->data['parent'] = '';
+		}
+
+		$categories = $this->model_company_category->getCategories( array( 'ignores' => $ignores ) );
+		$this->data['categories'] = array();
+		foreach ($categories as $category_data) {
+			$this->data['categories'][] = array(
+				'id' => $category_data->getId(),
+				'name' => $category_data->getName(),
+				);
 		}
 
 		// status
