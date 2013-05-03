@@ -1,6 +1,12 @@
 <?php  
 class ControllerCommonHome extends Controller {
 	public function index() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = $this->config->get('config_url');
+		}
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
@@ -21,7 +27,7 @@ class ControllerCommonHome extends Controller {
 			'common/header'
 		);
 										
-		$this->response->setOutput($this->render());
+		$this->response->setOutput($this->twig_render());
 	}
 }
 ?>
