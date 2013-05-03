@@ -1,14 +1,92 @@
-{% extends '@template/default/template/common/master.tpl' %}
+{% extends '@template/default/template/common/layout.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    {{ parent() }}
     <link href="catalog/view/javascript/jquery/datepicker/datepicker.css" rel="stylesheet" media="screen" />
 {% endblock %}
 
+{% block header %}
+{% endblock %}
+
+{% block body %}
+<div id="y-content" class="y-sub-container-1">
+    <div id="intro-bg">
+        <img src="catalog/view/theme/default/image/intro-2-bg.png" alt="" width="100%" height="100%" />
+        <a href="#" class="link-join"><span>Join</span></a>
+    </div>
+    <div id="y-frm-login" class="y-frm">
+        <a href="#" class="close">Close</a>
+        <div class="frm-title">
+            Join <strong>YESOCL.com</strong>
+        </div>
+        <div class="frm-content">
+            <form action="#" class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label" for="reg-first-name">First Name</label>
+                    <div class="controls">
+                        <input type="text" id="reg-first-name" placeholder="Please enter your first name" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="reg-last-name">Last Name</label>
+                    <div class="controls">
+                        <input type="text" id="reg-last-name" placeholder="Please enter your last name" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="reg-email">Email</label>
+                    <div class="controls">
+                        <input type="text" id="reg-email" placeholder="Please enter your email" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="reg-password">
+                        Password</label>
+                    <div class="controls">
+                        <input type="password" id="reg-password" placeholder="Please enter your password" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="reg-re-password">
+                        Re-type Password</label>
+                    <div class="controls">
+                        <input type="password" id="reg-re-password" placeholder="Please re-enter your password" />
+                    </div>
+                </div>
+				<div class="control-group">
+                    <label class="control-label" for="reg-birthay">
+                        Birthday</label>
+                    <div class="controls">
+                        <input type="text" class="y-date" id="reg-birthay" data-datepicker-format="mm/dd/yyyy"  placeholder="Please enter your birthday" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="reg-sex">
+                        Sex</label>
+                    <div class="controls">
+                        <select id="reg-sex">
+                            <option>-- Select sex --</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Unknow</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input type="checkbox" name="lg-remember" />Remember me</label>
+                        <button type="submit" class="btn btn-ystandard">Sign in</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block javascript %}
-    {{ parent() }}
     <script type="text/javascript" src="catalog/view/javascript/jquery/datepicker/datepicker.js"></script>    
     <script type="text/javascript">
         jQuery(document).ready(function () {
@@ -66,85 +144,4 @@
             $('#intro-bg').width(content*760/630);      
         }
     </script>
-{% endblock %}
-
-{% block head %}
-    {{ parent() }}
-{% endblock %}
-
-{% block content %}
-        <div id="y-content" class="y-sub-container-1">
-            <div id="intro-bg">
-                <img src="catalog/view/theme/default/image/intro-2-bg.png" alt="" width="100%" height="100%" />
-                <a href="#" class="link-join"><span>Join</span></a>
-            </div>
-            <div id="y-frm-login" class="y-frm">
-                <a href="#" class="close">Close</a>
-                <div class="frm-title">
-                    Join <strong>YESOCL.com</strong>
-                </div>
-                <div class="frm-content">
-                    <form action="#" class="form-horizontal">
-                        <div class="control-group">
-                            <label class="control-label" for="reg-first-name">First Name</label>
-                            <div class="controls">
-                                <input type="text" id="reg-first-name" placeholder="Please enter your first name" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="reg-last-name">Last Name</label>
-                            <div class="controls">
-                                <input type="text" id="reg-last-name" placeholder="Please enter your last name" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="reg-email">Email</label>
-                            <div class="controls">
-                                <input type="text" id="reg-email" placeholder="Please enter your email" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="reg-password">
-                                Password</label>
-                            <div class="controls">
-                                <input type="password" id="reg-password" placeholder="Please enter your password" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="reg-re-password">
-                                Re-type Password</label>
-                            <div class="controls">
-                                <input type="password" id="reg-re-password" placeholder="Please re-enter your password" />
-                            </div>
-                        </div>
-						<div class="control-group">
-                            <label class="control-label" for="reg-birthay">
-                                Birthday</label>
-                            <div class="controls">
-                                <input type="text" class="y-date" id="reg-birthay" data-datepicker-format="mm/dd/yyyy"  placeholder="Please enter your birthday" />
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label" for="reg-sex">
-                                Sex</label>
-                            <div class="controls">
-                                <select id="reg-sex">
-                                    <option>-- Select sex --</option>
-                                    <option>Male</option>
-                                    <option>Female</option>
-                                    <option>Unknow</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <div class="controls">
-                                <label class="checkbox">
-                                    <input type="checkbox" name="lg-remember" />Remember me</label>
-                                <button type="submit" class="btn btn-ystandard">Sign in</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
 {% endblock %}
