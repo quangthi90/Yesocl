@@ -146,7 +146,9 @@ class ControllerCompanyCompany extends Controller {
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
 			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
 				if ( !isset( $this->request->post['user_id'] ) || empty( $this->request->post['user_id'] ) ) {
-					$this->data['error_warning'] = $this->language->get( 'error_follower' );
+					$this->session->data['error_warning'] = $this->language->get( 'error_follower' );
+				}elseif ( $this->model_company_company->isExistFollower( $this->request->get['company_id'], $this->request->post['user_id'] ) ) {
+					$this->session->data['error_warning'] = $this->language->get( 'error_exist_follower' );
 				}else {
 					if ( !$this->model_company_company->addFollower( $this->request->get['company_id'], $this->request->post['user_id'] ) ) {
 						$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -293,9 +295,9 @@ class ControllerCompanyCompany extends Controller {
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' ) {
 			if ( isset( $this->request->get['query'] ) && $this->request->get['query'] == 'insert' ) {
 				if ( !isset( $this->request->post['company_id'] ) || empty( $this->request->post['company_id'] ) ) {
-					$this->data['error_warning'] = $this->language->get( 'error_relative' );
-				}elseif ( $this->request->post['company_id'] == $this->request->get['company_id'] ) {
-					$this->data['error_warning'] = $this->language->get( 'error_relative' );
+					$this->session->data['error_warning'] = $this->language->get( 'error_relative' );
+				}elseif ( $this->request->post['company_id'] == $this->request->get['company_id'] || $this->model_company_company->isExistRelativeCompany( $this->request->get['company_id'], $this->request->post['company_id'] ) ) {
+					$this->session->data['error_warning'] = $this->language->get( 'error_exist_relative' );
 				}else {
 					if ( !$this->model_company_company->addRelativeCompany( $this->request->get['company_id'], $this->request->post['company_id'] ) ) {
 						$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
