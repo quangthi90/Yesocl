@@ -30,6 +30,17 @@ $registry = new Registry();
 $loader = new Loader($registry);
 $registry->set('load', $loader);
 
+// Twig
+require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
+Twig_Autoloader::register();
+$twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
+$twig_loader->addPath(DIR_TEMPLATE, 'template');	
+$twig = new Twig_Environment($twig_loader, array(
+    'cache' => DIR_SYSTEM . '/cache/twig',
+	));
+$twig->addExtension(new Twig_Extension_StringLoader());
+$registry->set('twig', $twig);
+
 // Config
 $config = new Config();
 $registry->set('config', $config);
