@@ -4,25 +4,21 @@
 		<title>{% block title %}Yesocl{% endblock %}</title>
 		<base href="{{ base }}" />
 
-		<link rel="stylesheet" type="text/css" href="catalog/view/javascript/bootstrap/bootstrap.min.css" media="screen" />
-		<link href="catalog/view/javascript/bootstrap/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
-		<link href="catalog/view/theme/default/stylesheet/yes.css" rel="stylesheet" media="screen" />
+		<link href="catalog/view/theme/default/stylesheet/libs/bootstrap.min.css" rel="stylesheet" media="screen" />
+		<link href="catalog/view/theme/default/stylesheet/libs/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
 	<body>	
 		<div id="y-container">
-			{% block header %}
-		        {{ include(template_from_string( header )) }}
+			{{ include(template_from_string( header )) }}
+			<div class="clear"></div>
+
+			{% block body %}
 			{% endblock %}
 			<div class="clear"></div>
 
-			{% block body %}{% endblock %}
-			<div class="clear"></div>
-
-			{% block footer %}
-                {{ include(template_from_string( footer )) }}
-			{% endblock %}
+			{{ include(template_from_string( footer )) }}
 		</div>
     	<div id="overlay"></div>
     	

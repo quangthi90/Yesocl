@@ -1,32 +1,41 @@
-        <div id="y-header" class="y-sub-container-1">
-            <div id="y-logo" class="fl">
-                <a href="#">YESOCL NETWORK </a>
+        <div id="y-header" class="y-sub-container-1 row-fluid">
+            <div id="y-logo" class="span2 offset1">
+                <a href="#"><img src="image/template/logo.png" /></a>
             </div>
-            <div class=".y-container fr">                 
-                <ul id="y-welcome-menu" class="fl y-menu unstyled">
-                    <li><a href="#" target="blank">Yestock</a> </li>
-                    <li><a href="#">Why Yesocl ?</a> </li>
-                    <li><a href="#">About Us</a> </li>
-                </ul>                
-                <div id="y-form-login" class="fr">
-                    <form action="#" method="post">
-                        <div class="list-controls fr">
-                            <button type="submit" class="btn btn-ystandard">Sign in</button>
-                        </div>
-                        <div class="control-group fr">
-                            <label>Password</label>
-                            <input type="password" id="inputPassword" name="inputPassword" />
-                            <a href="#" class="small-link">Forgot password !</a>
-                        </div>                        
-                        <div class="control-group fr">
-                            <label>
-                                Email</label>
-                            <input type="text" id="inputEmail" name="inputEmail" />
-                            <label class="checkbox"><input type="checkbox" name="remember" />
-                                Remember me
-                            </label>
-                        </div>                    
-                    </form>
+            <div class="span4">
+                <div class="row-fluid" id="y-welcome-menu">
+                    <div class="span4 menu-active">
+                        <a href="#">Yestock</a>
+                    </div>
+                    <div class="span4">
+                        <a href="#">Why Yesocl ?</a>
+                    </div>
+                    <div class="span4">
+                        <a href="#">About Us</a>
+                    </div>
                 </div>
-            </div>           
+            </div>
+            <div class="span4 y-welcome-login">
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="row-fluid text-welcome-login-top">Email:</div>
+                        <div class="row-fluid">
+                            <input type="text" class="span12 input-welcome" />
+                        </div>
+                        <div class="row-fluid text-welcome-login-bottom">Remember me</div>
+                    </div>
+                    <div class="span5">
+                        <div class="row-fluid text-welcome-login-top">Password:</div>
+                        <div class="row-fluid">
+                            <input type="text" class="span12 input-welcome" />
+                        </div>
+                        <div class="row-fluid text-welcome-login-bottom">
+                            <a href="#">Forgot password</a>
+                        </div>
+                    </div>
+                    <div class="span2 button-login-welcome">
+                        <button class="btn">Login</button>
+                    </div>
+                </div>
+            </div>          
         </div>
