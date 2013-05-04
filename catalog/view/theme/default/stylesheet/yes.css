@@ -83,7 +83,6 @@ select
 body
 {
     font-size: 13px;
-    background: #fff url(../img/body-bg.jpg) repeat-x top left;
 }
 
 a,a:visited
@@ -160,16 +159,22 @@ a:hover, a.active
 
 .y-sub-container-1
 {
-    /*padding: 0px 50px;*/
-    /*overflow: hidden;*/
+    background: #b0afaf; /* Old browsers */
+    background: -moz-linear-gradient(top,  #b0afaf 0%, #ffffff 45%, #ffffff 88%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b0afaf), color-stop(45%,#ffffff), color-stop(88%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0afaf', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
 #y-header{
-    height:80px;
+    height:70px;
     z-index:1;
     box-shadow: 1px 1px 1px #bdbbbb;
-    background-color: #232323;
     max-width: 100%;
+    background: url('../image/welcome-header-bg.jpg') repeat-x;
 }
 
 #y-content
@@ -193,7 +198,7 @@ a:hover, a.active
 ----------------------------------------------------------------------
 */
 #y-header #y-logo{
-    line-height: 80px;
+    line-height: 70px;
 }
 
 #y-header #y-logo > a > img
@@ -224,8 +229,7 @@ a:hover, a.active
 #y-header #y-welcome-menu > div:hover,
 #y-header #y-welcome-menu .menu-active{
     cursor: pointer;
-    height: 81px;
-    color: #000;
+    height: 75px;
     background: #6be436; /* Old browsers */
     background: -moz-linear-gradient(top,  #6be436 0%, #389e0f 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6be436), color-stop(100%,#389e0f)); /* Chrome,Safari4+ */
@@ -236,17 +240,33 @@ a:hover, a.active
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6be436', endColorstr='#389e0f',GradientType=0 ); /* IE6-9 */
 }
 
+#y-header #y-welcome-menu > div:hover > a,
+#y-header #y-welcome-menu .menu-active > a{
+    color: #000;
+}
+
 #y-header .y-welcome-login,
 #y-header .y-welcome-login .text-welcome-login-bottom > a{
     color: #fff;
+}
+
+#y-header .y-welcome-login .text-welcome-login-top,
+#y-header .y-welcome-login .text-welcome-login-bottom,
+#y-header .y-welcome-login .text-welcome-login-bottom > a{
+    color: #BABABA;
 }
 
 #y-header .y-welcome-login .text-welcome-login-top{
     font-size: 12px;
 }
 
-#y-header .y-welcome-login .text-welcome-login-bottom{
+#y-header .y-welcome-login .text-welcome-login-bottom,
+#y-header .y-welcome-login .text-welcome-login-bottom > label{
     font-size: 11px;
+}
+
+#y-header .y-welcome-login .text-welcome-login-bottom > label{
+    cursor: pointer;
 }
 
 #y-header .y-welcome-login .text-welcome-login-bottom > a:hover{
@@ -254,13 +274,21 @@ a:hover, a.active
 }
 
 #y-header .y-welcome-login .button-login-welcome{
-    line-height: 80px;
+    line-height: 70px;
+}
+
+#y-header .y-welcome-login .button-login-welcome > button{
+    height: 22px;
+    line-height: 12px;
+    padding: 4px 7px;
+    margin-top: -3px;
 }
 
 #y-header .y-welcome-login .input-welcome{
     margin-top: 5px;
     margin-bottom: 2px;
-    height: 30px;
+    height: 22px;
+    min-height: 22px
 }
 
 #y-form-login
@@ -334,10 +362,12 @@ a:hover, a.active
     CONTENT
 ----------------------------------------------------------------------
 */
-#y-content #intro-bg
+#y-content #intro-bg > img
 {
-    margin:0px auto;
-    position: relative;
+    /*background: url('../image/welcome-center-big-logo.png') no-repeat;*/
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
 }
 
 #y-content #intro-bg a.link-join{
@@ -384,7 +414,11 @@ a:hover, a.active
 */
 #y-footer .y-footer-container
 {
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0;
+}
+
+#y-footer .y-footer-container:nth-child(2){
+    text-align: center;
 }
 
 #y-footer .input-append .add-on, .input-prepend .add-on
@@ -419,6 +453,12 @@ a:hover, a.active
 {
     min-width:300px;
     overflow:hidden;
+}
+
+#y-footer .footer-help > div > i{
+    border: 1px solid #34731a;
+    border-radius: 25px;
+    margin-left: 10px;
 }
 
 #y-footer .footer-help .help-phone

@@ -22,19 +22,23 @@
                         <div class="row-fluid">
                             <input type="text" class="span12 input-welcome" />
                         </div>
-                        <div class="row-fluid text-welcome-login-bottom">Remember me</div>
+                        <div class="row-fluid text-welcome-login-bottom">
+                            <label class="checkbox">
+                                <input type="checkbox"> Remember me
+                            </label>
+                        </div>
                     </div>
                     <div class="span5">
                         <div class="row-fluid text-welcome-login-top">Password:</div>
                         <div class="row-fluid">
-                            <input type="text" class="span12 input-welcome" />
+                            <input type="password" class="span12 input-welcome" />
                         </div>
                         <div class="row-fluid text-welcome-login-bottom">
-                            <a href="#">Forgot password</a>
+                            <a href="#">Forgot password!</a>
                         </div>
                     </div>
                     <div class="span2 button-login-welcome">
-                        <button class="btn">Login</button>
+                        <button class="btn btn-success">Sign in</button>
                     </div>
                 </div>
             </div>          
