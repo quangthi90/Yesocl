@@ -3,10 +3,8 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
+    <link href="catalog/view/theme/default/stylesheet/yes.css" rel="stylesheet" media="screen" />
     <link href="catalog/view/javascript/jquery/datepicker/datepicker.css" rel="stylesheet" media="screen" />
-{% endblock %}
-
-{% block header %}
 {% endblock %}
 
 {% block body %}

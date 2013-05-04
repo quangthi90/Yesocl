@@ -1,0 +1,437 @@
+
+/*OVERLOAD BOOTSTRAP*/
+.btn
+{
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    border-radius: 1px;
+    line-height: 18px;
+    padding: 4px 16px;
+}
+
+textarea, 
+input[type="text"], 
+input[type="password"], 
+input[type="datetime"], 
+input[type="datetime-local"], 
+input[type="date"], 
+input[type="month"], 
+input[type="time"], 
+input[type="week"], 
+input[type="number"], 
+input[type="email"], 
+input[type="url"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="color"], .uneditable-input
+{
+    font-size: 13px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    height: 16px;
+}
+
+.input-prepend .add-on:first-child, .input-prepend .btn:first-child
+{
+    -webkit-border-radius: 2px 0px 0px 2px;
+    -moz-border-radius: 2px 0px 0px 2px;
+    border-radius: 2px 0px 0px 2px;
+}
+
+.input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input
+{
+    -webkit-border-radius: 0px 2px 2px 0px;
+    -moz-border-radius:  0px 2px 2px 0px;
+    border-radius:  0px 2px 2px 0px;
+}
+
+.input-append .add-on, .input-prepend .add-on
+{
+    font-size:13px;
+}
+
+form
+{
+    margin:0px;
+}
+
+label
+{
+    font-size: 13px;
+}
+
+/*END OVERLOAD BOOTSTRAP*/
+
+/*Start Y-CSS*/
+
+/*--------------------------------------------------------------------
+    COMMON
+----------------------------------------------------------------------
+*/
+.fl{float: left;}
+.fr{float: right;}
+.clear {clear:both;}
+
+select 
+{
+    height: 25px;
+    width: 180px;
+    font-size:13px;
+}
+
+body
+{
+    font-size: 13px;
+    background: #fff url(../img/body-bg.jpg) repeat-x top left;
+}
+
+a,a:visited
+{
+    color: #111111;
+    text-decoration: none;
+    border: none;
+}
+
+a:hover, a.active
+{
+    color: #3f981a;
+    text-decoration: none;
+}
+
+.y-frm
+{
+    width: 500px;
+    height:auto;
+    padding: 15px;
+    position: fixed;
+    font-size:14px;
+    z-index:101;
+    display:none;
+    background:#fff;
+}
+
+.y-frm .frm-title
+{
+    font-size: 15px;
+    font-weight:bold;
+    padding:5px 0px 5px 0px;
+    border-bottom: 2px solid #2d8806;
+}
+
+.y-frm .frm-title strong
+{
+    color: #2d8806;
+    text-shadow: 1px 1px 1px #ddd;
+}
+
+.y-frm .frm-content
+{
+    padding: 15px 0px 5px 0px;
+}
+
+#overlay 
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+    z-index:100;
+    background-color:#000;
+	opacity: 0.1;
+    display:none;
+    width:100%;
+    height:100%;
+}
+
+/*--------------------------------------------------------------------
+    MAIN LAYOUT
+----------------------------------------------------------------------
+*/
+#y-container
+{
+    margin: 0px 0px;
+    /*overflow:hidden;*/
+}
+
+.y-container
+{
+    overflow: hidden;
+}
+
+.y-sub-container-1
+{
+    /*padding: 0px 50px;*/
+    /*overflow: hidden;*/
+}
+
+#y-header{
+    height:80px;
+    z-index:1;
+    box-shadow: 1px 1px 1px #bdbbbb;
+    background-color: #232323;
+    max-width: 100%;
+}
+
+#y-content
+{    
+}
+
+#y-footer
+{
+    position:fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-top: 3px solid #000;
+    background:#fff;   
+    z-index:1; 
+	max-height: 85px;
+}
+
+/*--------------------------------------------------------------------
+    HEADER
+----------------------------------------------------------------------
+*/
+#y-header #y-logo{
+    line-height: 80px;
+}
+
+#y-header #y-logo > a > img
+{
+    /*display: block;
+    text-indent: -99999px;
+    width: 125px;
+    height: 72px;
+    background: transparent url(../img/logo.png) no-repeat 50% 50%;*/
+}
+
+#y-header #y-welcome-menu{
+    overflow: hidden;
+    text-align: center;
+    line-height: 80px;
+}
+
+#y-header #y-welcome-menu > div{
+    /*height: 81px;*/
+}
+
+#y-header #y-welcome-menu > div > a{
+    color: #fff;
+    font-weight:bold;
+    font-size:15px; 
+}
+
+#y-header #y-welcome-menu > div:hover,
+#y-header #y-welcome-menu .menu-active{
+    cursor: pointer;
+    height: 81px;
+    color: #000;
+    background: #6be436; /* Old browsers */
+    background: -moz-linear-gradient(top,  #6be436 0%, #389e0f 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6be436), color-stop(100%,#389e0f)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #6be436 0%,#389e0f 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #6be436 0%,#389e0f 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #6be436 0%,#389e0f 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #6be436 0%,#389e0f 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6be436', endColorstr='#389e0f',GradientType=0 ); /* IE6-9 */
+}
+
+#y-header .y-welcome-login,
+#y-header .y-welcome-login .text-welcome-login-bottom > a{
+    color: #fff;
+}
+
+#y-header .y-welcome-login .text-welcome-login-top{
+    font-size: 12px;
+}
+
+#y-header .y-welcome-login .text-welcome-login-bottom{
+    font-size: 11px;
+}
+
+#y-header .y-welcome-login .text-welcome-login-bottom > a:hover{
+    text-decoration: underline;
+}
+
+#y-header .y-welcome-login .button-login-welcome{
+    line-height: 80px;
+}
+
+#y-header .y-welcome-login .input-welcome{
+    margin-top: 5px;
+    margin-bottom: 2px;
+    height: 30px;
+}
+
+#y-form-login
+{
+    overflow:hidden;
+}
+
+#y-form-login .control-group
+{
+    margin: 0px 5px 0px 0px;
+}
+
+#y-form-login .control-group label
+{
+    color: #BABABA;
+    margin:2px;
+    font-size:12px;
+}
+
+#y-form-login .control-group label.checkbox
+{
+    font-size:10px;
+    font-weight:bold;
+}
+
+#y-form-login .control-group label.checkbox:hover
+{
+    cursor:pointer;
+}
+
+#y-form-login input[type="text"]
+{
+    width: 150px;
+    height:12px;
+    margin:0px;
+}
+
+#y-form-login input[type="password"]
+{
+    width: 120px;    
+    height:12px;
+    margin:0px;
+}
+
+#y-form-login a.small-link
+{
+    color: #BABABA;
+    font-weight:bold;
+    font-size: 10px;
+    display:block;
+}
+
+#y-form-login a.small-link:hover
+{
+    text-decoration: underline;
+}
+
+#y-form-login .list-controls
+{
+    padding: 24px 0px 20px 0px;
+}
+
+#y-form-login .list-controls .btn
+{
+    height: 22px;
+    line-height:14px;
+    font-size:12px;
+}
+
+/*--------------------------------------------------------------------
+    CONTENT
+----------------------------------------------------------------------
+*/
+#y-content #intro-bg
+{
+    margin:0px auto;
+    position: relative;
+}
+
+#y-content #intro-bg a.link-join{
+	display:block;
+}
+
+#y-content #intro-bg a.link-join span
+{    
+	position:absolute;
+	display:block;
+    top: 11%;
+    right: 9%;
+	height:90px;width: 110px;	
+	z-index: 10;
+	background-color: transparent;
+	cursor: pointer;
+	text-indent: -9999px;
+}
+
+#y-frm-login
+{
+    width:340px;
+	top: 100px;
+	right: -9990px;
+	display: block;
+	border: 2px solid #ddd;
+	box-shadow: 2px 1px 1px #ddd;
+}
+
+#y-frm-login  .form-horizontal .control-group  .control-label{
+	width: 110px;
+}
+#y-frm-login  .form-horizontal .control-group  .controls{
+	margin-left: 120px;
+}
+
+#y-frm-login  .form-horizontal .control-group{
+	margin-bottom: 10px;
+}
+
+/*--------------------------------------------------------------------
+    FOOTER
+----------------------------------------------------------------------
+*/
+#y-footer .y-footer-container
+{
+    padding: 10px 0px 10px 0px;
+}
+
+#y-footer .input-append .add-on, .input-prepend .add-on
+{
+    line-height:15px;
+    height:15px;
+}
+
+#y-footer a
+{    
+    font-size: 12px;
+    font-weight:bold;
+    padding-bottom:2px;
+}
+
+#y-footer a:hover
+{
+    border-bottom:1px solid #3f981a;
+}
+
+#y-footer .language-selection
+{
+    margin-bottom:10px;
+}
+
+#y-footer .links-footer
+{
+    margin-bottom:10px;
+}
+
+#y-footer .footer-help
+{
+    min-width:300px;
+    overflow:hidden;
+}
+
+#y-footer .footer-help .help-phone
+{
+    padding:5px 0px 5px 35px;
+    background:transparent url(../img/help-fone.png) no-repeat 0px 50%;
+    margin-right:20px;
+}
+
+#y-footer .footer-help .help-email
+{
+    padding:5px 0px 5px 35px;
+    background:transparent url(../img/help-email.png) no-repeat 0px 50%;
+}
+
+/*End Y-CSS*/
