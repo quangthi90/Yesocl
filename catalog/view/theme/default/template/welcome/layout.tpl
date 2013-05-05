@@ -21,7 +21,7 @@
 		</div>
     	<div id="overlay"></div>    	
     	<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap.min.js"></script>
     	{% block javascript %}
 		{% endblock %}
 	</body>

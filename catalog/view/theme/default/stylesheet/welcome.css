@@ -9,6 +9,26 @@
     padding: 4px 16px;
 }
 
+.btn-ystandard {
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+    background-color: #5bb75b;
+    background-image: -moz-linear-gradient(top,#62c462,#51a351);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#62c462),to(#51a351));
+    background-image: -webkit-linear-gradient(top,#62c462,#51a351);
+    background-image: -o-linear-gradient(top,#62c462,#51a351);
+    background-image: linear-gradient(to bottom,#62c462,#51a351);
+    background-repeat: repeat-x;
+    border-color: #51a351 #51a351 #387038;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff62c462',endColorstr='#ff51a351',GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-ystandard:hover {
+    background-position: 0px 0px;
+    color: #eee;
+}
+
 textarea, 
 input[type="text"], 
 input[type="password"], 
@@ -126,7 +146,7 @@ a:hover, a.active
 
 .y-frm .frm-content
 {
-    padding: 15px 0px 5px 0px;
+    padding: 15px 10px 5px 10px;
 }
 
 #overlay 
@@ -136,10 +156,26 @@ a:hover, a.active
     left:0px;
     z-index:100;
     background-color:#000;
-	opacity: 0.1;
+	opacity: 0.05;
     display:none;
     width:100%;
     height:100%;
+}
+
+.outer-30 {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.outer-20 {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.line-shadow {
+    box-shadow: 0px 2px 5px #ddd;
+    height: 1px;
+    background-color: #000;
 }
 
 /*--------------------------------------------------------------------
@@ -178,7 +214,12 @@ a:hover, a.active
 }
 
 #y-content
-{    
+{   
+    position: absolute;
+    top: 70px;
+    bottom: 80px;
+    left: 0px;
+    right: 0px;
 }
 
 #y-footer
@@ -190,7 +231,7 @@ a:hover, a.active
     border-top: 3px solid #000;
     background:#fff;   
     z-index:1; 
-	max-height: 85px;
+	height: 80px;
 }
 
 /*--------------------------------------------------------------------
@@ -217,7 +258,7 @@ a:hover, a.active
 }
 
 #y-header #y-welcome-menu > div{
-    /*height: 81px;*/
+    height: 70px;
 }
 
 #y-header #y-welcome-menu > div > a{
@@ -226,10 +267,8 @@ a:hover, a.active
     font-size:15px; 
 }
 
-#y-header #y-welcome-menu > div:hover,
-#y-header #y-welcome-menu .menu-active{
-    cursor: pointer;
-    height: 75px;
+#y-header #y-welcome-menu > div:hover {
+    cursor: pointer;    
     background: #6be436; /* Old browsers */
     background: -moz-linear-gradient(top,  #6be436 0%, #389e0f 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6be436), color-stop(100%,#389e0f)); /* Chrome,Safari4+ */
@@ -285,7 +324,7 @@ a:hover, a.active
 }
 
 #y-header .y-welcome-login .input-welcome{
-    margin-top: 5px;
+    margin-top: 23px;
     margin-bottom: 2px;
     height: 22px;
     min-height: 22px
@@ -321,15 +360,11 @@ a:hover, a.active
 
 #y-form-login input[type="text"]
 {
-    width: 150px;
-    height:12px;
     margin:0px;
 }
 
 #y-form-login input[type="password"]
-{
-    width: 120px;    
-    height:12px;
+{   
     margin:0px;
 }
 
@@ -362,34 +397,24 @@ a:hover, a.active
     CONTENT
 ----------------------------------------------------------------------
 */
+#y-content #intro-bg {
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
 #y-content #intro-bg > img
 {
     /*background: url('../image/welcome-center-big-logo.png') no-repeat;*/
-    max-width: 100%;
-    height: auto;
-    width: auto\9;
-}
-
-#y-content #intro-bg a.link-join{
-	display:block;
-}
-
-#y-content #intro-bg a.link-join span
-{    
-	position:absolute;
-	display:block;
-    top: 11%;
-    right: 9%;
-	height:90px;width: 110px;	
-	z-index: 10;
-	background-color: transparent;
-	cursor: pointer;
-	text-indent: -9999px;
+    height: 100%;
+    width: auto;   
+    cursor: pointer; 
 }
 
 #y-frm-login
 {
-    width:340px;
+    width:390px;
 	top: 100px;
 	right: -9990px;
 	display: block;
@@ -397,15 +422,26 @@ a:hover, a.active
 	box-shadow: 2px 1px 1px #ddd;
 }
 
-#y-frm-login  .form-horizontal .control-group  .control-label{
-	width: 110px;
-}
-#y-frm-login  .form-horizontal .control-group  .controls{
-	margin-left: 120px;
+#y-frm-login a.close {
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-#y-frm-login  .form-horizontal .control-group{
-	margin-bottom: 10px;
+#y-frm-login button  {
+    width: 100%;
+}
+
+#y-frm-login .controls {
+    margin-bottom: 8px;
+}
+
+#y-frm-login  select {
+    height: 28px;
+}
+
+#y-frm-login  select.birthday {
+    width: 28%;
 }
 
 /*--------------------------------------------------------------------
