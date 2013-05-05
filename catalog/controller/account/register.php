@@ -1,8 +1,35 @@
 <?php 
 class ControllerAccountRegister extends Controller {
 	private $error = array();
+
+	public function index(){
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = $this->config->get('config_url');
+		}
+
+		$this->document->setTitle($this->config->get('config_title'));
+		$this->document->setDescription($this->config->get('config_meta_description'));
+
+		$this->data['heading_title'] = $this->config->get('config_title');
+		
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/register.tpl';
+		} else {
+			$this->template = 'default/template/account/register.tpl';
+		}
+		
+		$this->children = array(
+			'common/column_left',
+			'common/footer',
+			'common/header'
+		);
+										
+		$this->response->setOutput($this->twig_render());
+	}
 	      
-  	public function index() {
+  	/*public function index() {
 		if ($this->customer->isLogged()) {
 	  		$this->redirect($this->url->link('account/account', '', 'SSL'));
     	}
@@ -39,8 +66,8 @@ class ControllerAccountRegister extends Controller {
       	$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),        	
+        	'text'      => $this->language->get('text_register'),
+			'href'      => $this->url->link('common/register'),        	
         	'separator' => false
       	); 
 
@@ -345,9 +372,9 @@ class ControllerAccountRegister extends Controller {
 		);
 				
 		$this->response->setOutput($this->render());	
-  	}
+  	}*/
 
-  	private function validate() {
+  	/*private function validate() {
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
@@ -447,9 +474,9 @@ class ControllerAccountRegister extends Controller {
     	} else {
       		return false;
     	}
-  	}
+  	}*/
 	
-	public function country() {
+	/*public function country() {
 		$json = array();
 		
 		$this->load->model('localisation/country');
@@ -472,6 +499,6 @@ class ControllerAccountRegister extends Controller {
 		}
 		
 		$this->response->setOutput(json_encode($json));
-	}	
+	}*/	
 }
 ?>

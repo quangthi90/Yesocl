@@ -1,0 +1,124 @@
+#y-sidebar {
+	background: url('../../image/main-left-column-bg.jpg');
+    width: 15%;
+    position: fixed;
+    top: 0px;
+    bottom: 43px;
+    z-index: 10;
+    color: #fff;
+    text-align: center;
+    border-right: 4px solid #001000;
+    height: 100%
+}
+	#y-sidebar .sidebar-border-right{
+		border-right: 1px solid #032d03;
+	}
+
+		#y-sidebar .sidebar-border-right .sidebar-box{
+			border-bottom: 1px solid #054105;
+			border-top: 1px solid #000b00;
+		}
+
+		#y-sidebar .sidebar-border-right > .sidebar-box:first-child{
+			border-top: none;
+		}
+
+		#y-sidebar .sidebar-border-right .logo{
+			height: 10%;
+			line-height: 10%;
+		}
+
+			#y-sidebar .sidebar-border-right .logo > a > img{
+				max-height: 80%;
+				margin: 10px;
+			}
+
+		#y-sidebar .sidebar-border-right .sidebar-user{
+			height: 30%;
+			line-height: 30%;
+		}
+
+			#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info{
+				height: 80%;
+				width: 80%;
+				margin: 20px auto;
+			}
+
+				#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-avatar{
+					height: 70%;
+					line-height: 70%;
+					border: 5px solid #b5c1c2;
+					background-color: #fff;
+				}
+
+					#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-avatar > a > img{
+						max-width: 98%;
+						max-height: 98%;
+						margin: 15px;
+					}
+
+				#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name{
+					height: 30%;
+					line-height: 30%;
+					padding: 5px;
+					height: 30px;
+					max-height: 50px;
+					line-height: 30px;
+					border-top: 1px solid #629843;
+					background: #74b93c; /* Old browsers */
+					background: -moz-linear-gradient(top,  #74b93c 0%, #519839 100%); /* FF3.6+ */
+					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#74b93c), color-stop(100%,#519839)); /* Chrome,Safari4+ */
+					background: -webkit-linear-gradient(top,  #74b93c 0%,#519839 100%); /* Chrome10+,Safari5.1+ */
+					background: -o-linear-gradient(top,  #74b93c 0%,#519839 100%); /* Opera 11.10+ */
+					background: -ms-linear-gradient(top,  #74b93c 0%,#519839 100%); /* IE10+ */
+					background: linear-gradient(to bottom,  #74b93c 0%,#519839 100%); /* W3C */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b93c', endColorstr='#519839',GradientType=0 ); /* IE6-9 */
+				}
+
+					#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name > a{
+						font-size: 20px;
+						color: #fff;
+					}
+
+		#y-sidebar .sidebar-border-right .sidebar-welcome{
+			padding: 10px 0 10px 5px;
+			text-align: left;
+		}
+
+			#y-sidebar .sidebar-border-right .sidebar-welcome > p{
+				margin-bottom: 0;
+				font-size: 12px;
+			}
+
+		#y-sidebar .sidebar-border-right .sidebar-menus{
+			height: 50%;
+		}
+
+			#y-sidebar .sidebar-border-right .sidebar-menu{
+				padding: 10px 0 10px 5px;
+				text-align: left;
+				cursor: pointer;
+			}
+
+			#y-sidebar .sidebar-border-right .sidebar-menu-active,
+			#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child,
+			#y-sidebar .sidebar-border-right .sidebar-menu:hover{
+				background-color: #3d9915;
+			}
+
+				#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child{
+					text-align: center;
+					line-height: 40px;
+				}
+
+					#y-sidebar .sidebar-border-right .sidebar-menu > div > i{
+						font-size: 25px;
+					}
+
+					#y-sidebar .sidebar-border-right .sidebar-menu > div > span{
+						font-size: 12px;
+					}					
+
+					#y-sidebar .sidebar-border-right .sidebar-menu > div > a{
+						color: #fff;
+					}
