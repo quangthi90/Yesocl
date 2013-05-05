@@ -213,36 +213,6 @@ a.btn-manual-add{
     MAIN LAYOUT
 ----------------------------------------------------------------------
 */
-#y-container
-{
-    margin: 0px 0px;    
-    width: 100%;
-    height: 100%;   
-}
-
-#y-main-content{    
-    padding: 20px;
-    height: 100%;
-    position: absolute;
-    top: 50px;
-    left: 200px;
-    right:0px;
-    bottom: 43px;
-    background: #fff url(../img/content_bg.png) repeat-x left bottom;
-}
-
-#y-footer
-{
-    position:fixed;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
-    border-top: 3px solid #000;
-    background:#fff;   
-    z-index:1; 
-    height: 43px;
-}
-
 #ascrail2000-hr{
     bottom: 45px !important;
     right: 3px;

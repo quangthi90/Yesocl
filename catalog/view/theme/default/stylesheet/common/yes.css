@@ -1,22 +1,69 @@
+#y-container
+{
+    margin: 0;    
+    width: 85.4701%;
+    height: 100%;   
+}
+
+#y-content{
+	overflow: auto;
+}
+
+.main-content-bommer{
+	-moz-column-count: 2;
+	-moz-column-gap: 10px;
+}
+
+.box-demo{
+	width: 300px;
+	height: 200px;
+	background-color: silver;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+#y-main-content{    
+    padding: 20px;
+    height: 100%;
+    position: absolute;
+    top: 50px;
+    left: 200px;
+    right:0px;
+    bottom: 43px;
+    background: #fff url(../img/content_bg.png) repeat-x left bottom;
+}
+
+#y-footer
+{
+    /*position:fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;*/
+    border-top: 3px solid #000;
+    background:#fff;   
+    /*z-index:1;*/
+    height: 43px;
+}
+
 #y-header{
     height:40px;  
-    z-index:1;
+    /*z-index:1;*/
     background: url('../../image/main-header-bg.jpg');
-    position: fixed;
+    /*position: fixed;
     top:0px;
     right: 0px;
-    left: 200px;
+    left: 200px;*/
     padding: 5px;   
     box-shadow: 0 -3px 5px -1px gray inset; 
 }
 
 #y-sidebar {
 	background: url('../../image/main-left-column-bg.jpg');
-    width: 15%;
-    position: fixed;
-    top: 0px;
+    /*width: 15%;*/
+    /*position: fixed;*/
+    /*top: 0px;
     bottom: 43px;
-    z-index: 10;
+    z-index: 10;*/
     color: #fff;
     text-align: center;
     border-right: 4px solid #001000;

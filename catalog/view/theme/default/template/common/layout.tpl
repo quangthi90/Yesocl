@@ -19,22 +19,18 @@
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
-	<body>
-		<div class="row-fluid">
-			<div id="y-sidebar" class="pull-left">	
-				{{ include(template_from_string( column_left )) }}
-			</div>
-			<div id="y-container" class="pull-left">
-				{{ include(template_from_string( header )) }}
+	<body class="row-fluid">
+		<div id="y-sidebar" class="span2">	
+			{{ include(template_from_string( column_left )) }}
+		</div>
+		<div id="y-container" class="span10">
+			{{ include(template_from_string( header )) }}
 
-				{% block body %}
-				{% endblock %}
+			{% block body %}
+			{% endblock %}
 
-				{{ include(template_from_string( footer )) }}
-			</div>
-    	
-    	</div>
-
+			{{ include(template_from_string( footer )) }}
+		</div>
     	<!-- Library Script -->
     	<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/bootstrap/bootstrap.min.js"></script>
