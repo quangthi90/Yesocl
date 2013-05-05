@@ -220,18 +220,6 @@ a.btn-manual-add{
     height: 100%;   
 }
 
-#y-header
-{
-    height:40px;  
-    z-index:1;
-    background: #daecef url(../img/header_bg.png) repeat-x bottom left;
-    position: fixed;
-    top:0px;
-    right: 0px;
-    left: 200px;
-    padding: 5px;    
-}
-
 #y-main-content{    
     padding: 20px;
     height: 100%;

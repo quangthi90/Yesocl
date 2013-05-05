@@ -1,3 +1,15 @@
+#y-header{
+    height:40px;  
+    z-index:1;
+    background: url('../../image/main-header-bg.jpg');
+    position: fixed;
+    top:0px;
+    right: 0px;
+    left: 200px;
+    padding: 5px;   
+    box-shadow: 0 -3px 5px -1px gray inset; 
+}
+
 #y-sidebar {
 	background: url('../../image/main-left-column-bg.jpg');
     width: 15%;
@@ -95,13 +107,13 @@
 		}
 
 			#y-sidebar .sidebar-border-right .sidebar-menu{
-				padding: 10px 0 10px 5px;
+				padding: 10px 0 10px 0;
 				text-align: left;
 				cursor: pointer;
 			}
 
 			#y-sidebar .sidebar-border-right .sidebar-menu-active,
-			#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child,
+			#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child > div,
 			#y-sidebar .sidebar-border-right .sidebar-menu:hover{
 				background-color: #3d9915;
 			}
@@ -111,9 +123,13 @@
 					line-height: 40px;
 				}
 
-					#y-sidebar .sidebar-border-right .sidebar-menu > div > i{
-						font-size: 25px;
+					#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child > div{
+						margin-left: 5px;
 					}
+
+						#y-sidebar .sidebar-border-right .sidebar-menu > div > div > i{
+							font-size: 25px;
+						}
 
 					#y-sidebar .sidebar-border-right .sidebar-menu > div > span{
 						font-size: 12px;

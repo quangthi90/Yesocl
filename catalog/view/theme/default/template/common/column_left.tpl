@@ -24,7 +24,9 @@
 		<div class="row-fluid sidebar-menus">
 			<div class="sidebar-box sidebar-menu sidebar-menu-active row-fluid">
 				<div class="span3">
-					<i class="icon-chevron-right"></i>
+					<div>
+						<i class="icon-chevron-right"></i>
+					</div>
 				</div>
 				<div class="span9">
 					<span class="row-fluid">Start</span>
@@ -33,7 +35,9 @@
 			</div>
 			<div class="sidebar-box sidebar-menu row-fluid">
 				<div class="span3">
-					<i class="icon-chevron-right"></i>
+					<div>
+						<i class="icon-chevron-right"></i>
+					</div>
 				</div>
 				<div class="span9">
 					<span class="row-fluid">Next</span>
@@ -42,7 +46,9 @@
 			</div>
 			<div class="sidebar-box sidebar-menu row-fluid">
 				<div class="span3">
-					<i class="icon-chevron-right"></i>
+					<div>
+						<i class="icon-chevron-right"></i>
+					</div>
 				</div>
 				<div class="span9">
 					<span class="row-fluid">Next</span>
@@ -51,7 +57,9 @@
 			</div>
 			<div class="sidebar-box sidebar-menu row-fluid">
 				<div class="span3">
-					<i class="icon-chevron-right"></i>
+					<div>
+						<i class="icon-chevron-right"></i>
+					</div>
 				</div>
 				<div class="span9">
 					<span class="row-fluid">Finish</span>
