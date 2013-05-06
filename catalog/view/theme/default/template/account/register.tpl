@@ -29,17 +29,17 @@ function setHeight(){
 column();
 
 function column(){
-	var column_count = parseInt($('.main-content-bommer').css('-moz-column-count'), 10) + 1;
+	var column_count = parseInt($('.main-content-bommer').css('-webkit-column-count'), 10) + 1;
 	var error = false;
 	if ( $('.main-content-bommer').height() > 655 ){
-		$('.main-content-bommer').attr('style', '-moz-column-count: ' + column_count);
+		$('.main-content-bommer').attr('style', '-webkit-column-count: ' + column_count);
 		column();
 		error = true;
 	}
 
 	$('.box-demo').each(function(){
 		if ( $(this).width() > 310 ){
-			$('.main-content-bommer').attr('style', '-moz-column-count: ' + column_count);
+			$('.main-content-bommer').attr('style', '-webkit-column-count: ' + column_count);
 			column();
 			error = true;
 		}

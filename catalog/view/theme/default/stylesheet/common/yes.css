@@ -12,6 +12,8 @@
 .main-content-bommer{
 	-moz-column-count: 2;
 	-moz-column-gap: 10px;
+	-webkit-column-count:3;
+	-webkit-column-gap: 10px;
 }
 
 .box-demo{
