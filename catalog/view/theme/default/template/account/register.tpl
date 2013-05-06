@@ -9,8 +9,9 @@
 {% block body %}
 <div id="y-content" class="y-sub-container-1 row-fluid">
 	<div class="main-content-bommer">
-    {% for i in 1..10 %}
-    <div class="box-demo"></div>
+    {% for i in 1..15 %}
+    {% set height = random([200, 300, 100, 50, 400]) %}
+    <div class="box-demo" data-height="{{ height }}" style="height: {{ height }}px;"></div>
     {% endfor %}
 	</div>
 </div>
@@ -18,37 +19,41 @@
 
 {% block javascript %}
 <script type="text/javascript">
-setHeight();
+var screen_height = $(window).height();
+var content_height = screen_height - 96;
 
-function setHeight(){
-	var screen_height = 655;
-	$('#y-sidebar').height(screen_height);
-	$('#y-content').height(screen_height - 96);
-}
+setHeight();
 
 column();
 
+function setHeight(){
+	$('#y-sidebar').attr('style', 'height: ' + screen_height + 'px;');
+	$('#y-content').attr('style', 'height: ' + content_height + 'px;');
+}
+
 function column(){
 	var column_count = parseInt($('.main-content-bommer').css('-moz-column-count'), 10) + 1;
-	var error = false;
-	if ( $('.main-content-bommer').height() > 655 ){
+	if ( $('.main-content-bommer').height() > content_height ){
 		$('.main-content-bommer').attr('style', '-moz-column-count: ' + column_count);
-		column();
-		error = true;
+	}else{
+		return false;
 	}
 
+	var error = false;
 	$('.box-demo').each(function(){
 		if ( $(this).width() > 310 ){
-			$('.main-content-bommer').attr('style', '-moz-column-count: ' + column_count);
-			column();
+			var this_height = $(this).attr('data-height');
+			$(this).attr('style', 'margin-top: ' + content_height + 'px; height: ' + this_height + 'px;');
 			error = true;
 		}
 	});
 
-	if ( error == false ){
-		var width = column_count * 310;
-		$('.main-content-bommer').css({'width': width});
+	if ( error == true ){
+		column();
 	}
+
+	var width_total = column_count * 310;
+	$('.main-content-bommer').attr('style', 'width:' + width_total + 'px;');
 }
 </script>
 {% endblock %}
