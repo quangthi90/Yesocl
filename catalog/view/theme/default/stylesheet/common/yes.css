@@ -9,21 +9,6 @@
 	overflow: auto;
 }
 
-.main-content-bommer{
-	-moz-column-count: 2;
-	-moz-column-gap: 10px;
-	-webkit-column-count:3;
-	-webkit-column-gap: 10px;
-}
-
-.box-demo{
-	width: 300px;
-	height: 200px;
-	background-color: silver;
-	margin-top: 10px;
-	margin-left: 10px;
-}
-
 #y-main-content{    
     padding: 20px;
     height: 100%;
