@@ -1,5 +1,5 @@
         <div id="y-footer" class="y-sub-container-1 row-fluid">
-            <!--div class="y-footer-container span3 offset1">
+            <div class="y-footer-container span3 offset1">
                 <div class="language-selection row-fluid">                    
                     <form action="#" class="form-inline">
                         <div class="input-prepend">
@@ -28,5 +28,5 @@
                         <i class="icon-envelope-alt"></i> <a href="mailto:support@yesocl.com">support@yesocl.com</a>
                     </div>
                 </div>
-            </div-->
+            </div>
         </div>

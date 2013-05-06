@@ -1,41 +1,21 @@
-        <div id="y-header" class="y-sub-container-1 row-fluid">
-            <div id="y-logo" class="span2 offset1">
-                <a href="#"><img src="image/template/logo.png" /></a>
-            </div>
-            <div class="span4">
-                <div class="row-fluid" id="y-welcome-menu">
-                    <div class="span4 menu-active">
-                        <a href="#">Yestock</a>
-                    </div>
-                    <div class="span4">
-                        <a href="#">Why Yesocl ?</a>
-                    </div>
-                    <div class="span4">
-                        <a href="#">About Us</a>
-                    </div>
+<div id="y-header">  
+    <form class="custom">
+        <div class="row" style="width: 40%; float: right;">
+            <div class="row collapse">
+                <div class="large-7 small-7 columns">
+                  <input class="prefix" type="text" placeholder="enter a key word"/>
                 </div>
-            </div>
-            <div class="span4 y-welcome-login">
-                <div class="row-fluid">
-                    <div class="span5">
-                        <div class="row-fluid text-welcome-login-top">Email:</div>
-                        <div class="row-fluid">
-                            <input type="text" class="span12 input-welcome" />
-                        </div>
-                        <div class="row-fluid text-welcome-login-bottom">Remember me</div>
-                    </div>
-                    <div class="span5">
-                        <div class="row-fluid text-welcome-login-top">Password:</div>
-                        <div class="row-fluid">
-                            <input type="text" class="span12 input-welcome" />
-                        </div>
-                        <div class="row-fluid text-welcome-login-bottom">
-                            <a href="#">Forgot password</a>
-                        </div>
-                    </div>
-                    <div class="span2 button-login-welcome">
-                        <button class="btn">Login</button>
-                    </div>
+                <div class="large-3 small-3 columns">
+                  <select>
+                    <option>Friend</option>
+                    <option>Job</option>
+                    <option>Company</option>
+                  </select>
                 </div>
-            </div>          
-        </div>
+                <div class="large-2 small-2 columns">
+                    <a href="#" class="small button postfix" >Search</a>
+                </div>                  
+            </div>      
+      </div>          
+    </form>                         
+</div>
