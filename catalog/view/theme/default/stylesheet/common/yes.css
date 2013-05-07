@@ -1,3 +1,14 @@
+/*Format Yes Style*/
+.radio input[type="radio"], .checkbox input[type="checkbox"]{
+	margin-left: 0;
+	margin-top: 0;
+}
+div.radio.active, div.checker.active{
+	margin-right: 0;
+	position: fixed;
+}
+/*end Format Yes Style*/
+
 #y-container
 {
     margin: 0;    
