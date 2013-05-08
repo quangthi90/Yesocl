@@ -1,5 +1,5 @@
 {% block register_tabs_step1 %}
-<div class="row-fluid register-box">
+<div class="row-fluid register-box register-step1">
 	<div class="span1 offset1 register-box-left register-box-extend">
 		<div class="register-box-background"></div>
 	</div>

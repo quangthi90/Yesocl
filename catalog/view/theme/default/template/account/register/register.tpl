@@ -1,6 +1,7 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
 {% use '@template/default/template/account/register/tabs/step1.tpl' %}
+{% use '@template/default/template/account/register/tabs/step2.tpl' %}
 
 {% block title %}Sign up for Yesocl{% endblock %}
 
@@ -18,6 +19,7 @@
 		  			{{ block('register_tabs_step1') }}
 				</div>
 				<div class="item">
+					{{ block('register_tabs_step2') }}
 				</div>
 		  	</div>
 		  	<!-- Carousel nav -->
@@ -41,22 +43,19 @@ jQuery(document).ready(function (){
 		// Main content height
 		var mwid = wid - hwid - fwid - 10;
 		$('#y-main-content').height( mwid );
-
-		// Register box auto margin-top
-		var rwid = $('.register-box').innerHeight();
-		$('.register-box').attr('style', 'margin-top:' + (mwid / 2 - rwid / 2) + 'px;');
-
-		// Register box extend
-		var stwid = $('.register-box-step').innerHeight();
-		$('.register-box-extend').height( stwid - 60 );
 	} 
 	
 	$(window).resize(function() {
 		updateContentSize();
-	}); 
+	});
+
+	$('#myCarousel').on('slid', function(){
+		$(this).carousel('pause');
+	});
 });
 
 {{ block('register_tabs_step1_javascript') }}
+{{ block('register_tabs_step2_javascript') }}
 
 </script>
 {% endblock %}
