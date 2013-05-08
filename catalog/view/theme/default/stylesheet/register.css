@@ -1,23 +1,53 @@
 #y-content .register-box{
-    /*margin-bottom: 20px;*/
+    padding-bottom: 50px;
 }
     #y-content .register-box .register-box-step{
         border: 1px solid #c0c0c0;
         margin-left: 0;
+        box-shadow: 0px 10px 20px #949494;
     }
         #y-content .register-box .register-box-step .register-box-title{
             color: #3d9915;
         }
-        #y-content .register-box .register-box-left,
-        #y-content .register-box .register-box-right{
-            height: 437px;
-            padding: 30px 0;
-        }
-        #y-content .register-box .register-box-right{
-            margin-left: 0;
-        }
-            #y-content .register-box .register-box-background{
-                background-color: #3d9915;
-                height: 100%;
-                width: 100%;
+            #y-content .register-box .register-box-step .form-horizontal > label{
+                width: 30%;
             }
+            #y-content .register-box .register-box-step .form-horizontal > .controls{
+                margin-left: 35%;
+            }
+        #y-content .register-box .register-box-step .register-box-recommend{
+            border: 1px solid #3d9915;
+            border-radius: 5px;
+            padding: 10px;
+        }
+            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-heading{
+                height: 50px;
+                line-height: 32px;
+            }
+            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-heading,
+            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-content{
+                width: 90%;
+                margin: auto;
+            }
+            #y-content .register-box .register-box-step .register-box-recommend .regisert-recommend-icon{
+                background: url("../image/register-recommend-heading-icon.png") no-repeat;
+                height: 32px;
+                width: 20px;
+                margin-right: 5px;
+                margin-left: 5px;
+                float: left;
+            }
+    #y-content .register-box .register-box-extend{
+        width: 3%;
+        height: 437px;
+        padding: 30px 0;
+    }
+    #y-content .register-box .register-box-right{
+        margin-left: 0;
+    }
+        #y-content .register-box .register-box-background{
+            background-color: #3d9915;
+            height: 100%;
+            width: 100%;
+            box-shadow: 0px 10px 20px #949494;
+        }
