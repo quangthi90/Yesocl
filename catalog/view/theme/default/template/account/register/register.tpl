@@ -2,6 +2,7 @@
 
 {% use '@template/default/template/account/register/tabs/step1.tpl' %}
 {% use '@template/default/template/account/register/tabs/step2.tpl' %}
+{% use '@template/default/template/account/register/tabs/step3.tpl' %}
 
 {% block title %}Sign up for Yesocl{% endblock %}
 
@@ -15,11 +16,14 @@
 		<div id="myCarousel" class="carousel slide">
 		  	<!-- Carousel items -->
 		  	<div class="carousel-inner">
-		  		<div class="active item">
+		  		<div class="item">
 		  			{{ block('register_tabs_step1') }}
 				</div>
 				<div class="item">
 					{{ block('register_tabs_step2') }}
+				</div>
+				<div class="active item">
+					{{ block('register_tabs_step3') }}
 				</div>
 		  	</div>
 		  	<!-- Carousel nav -->
@@ -53,9 +57,8 @@ jQuery(document).ready(function (){
 		$(this).carousel('pause');
 	});
 });
-
+</script>
 {{ block('register_tabs_step1_javascript') }}
 {{ block('register_tabs_step2_javascript') }}
-
-</script>
+{{ block('register_tabs_step3_javascript') }}
 {% endblock %}

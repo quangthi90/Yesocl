@@ -1,11 +1,3 @@
-.space-top-10px{
-    margin-top: 10px;
-}
-
-.space-top-20px{
-    margin-top: 20px;
-}
-
 #y-content .register-box{
     padding-bottom: 50px;
     margin-top: 50px;
@@ -14,11 +6,11 @@
         border: 1px solid #c0c0c0;
         margin-left: 0;
         box-shadow: 0px 10px 20px #949494;
-        height: 437px;
+        height: 485px;
     }
     #y-content .register-box .register-box-extend{
         width: 3%;
-        height: 437px;
+        height: 485px;
         padding: 30px 0;
     }
     #y-content .register-box .register-box-right{
@@ -29,9 +21,7 @@
             height: 100%;
             width: 100%;
             box-shadow: 0px 10px 20px #949494;
-        }
-        #y-content .register-box .register-box-background{
-            height: 377px;
+            height: 425px;
         }
         #y-content .register-box .register-box-step .register-box-title{
             color: #3d9915;
@@ -99,3 +89,54 @@
                 #y-content .register-step2 .register-box-step .register-add-email .control-group input[type="text"]{
                     width: 80%;
                 }
+            #y-content .register-box .register-box-step .register-table-heading{
+                background: #ffffff; /* Old browsers */
+                background: -moz-linear-gradient(top,  #ffffff 0%, #eaeaea 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #ffffff 0%,#eaeaea 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 ); /* IE6-9 */
+                height: 30px;
+                line-height: 30px;
+            }
+#y-content .register-table{
+    border: 1px solid #cfcfcf;
+}
+    #y-content .register-table .register-table-heading > .pull-left{
+        margin-left: 10px;
+    }
+    #y-content .register-table .register-table-heading > .pull-right{
+        margin-right: 10px;
+    }
+    #y-content .register-table .register-table-content{
+        height: 287px;
+        overflow: auto;
+    }
+    #y-content .register-table .register-user-list{
+        border-top: 1px solid #cfcfcf;
+    }
+        #y-content .register-table .register-user-box .register-user-info .pull-left:first-child{
+            margin-left: 5px;
+            margin-top: 15px;
+        }
+        #y-content .register-table .register-user-box .register-user-info > div{
+            padding: 10px 5px;
+        }
+        #y-content .register-table .register-user-box .register-user-avatar{
+            border: 3px solid #b5c1c2;
+        }
+        #y-content .register-table .register-user-box .register-user-name{
+            font-weight: bold;
+            margin-top: 5px;
+        }
+.space-top-10px{
+    margin-top: 10px;
+}
+.space-top-20px{
+    margin-top: 20px;
+}
+.border-top-none{
+    border-top: none !important;
+}

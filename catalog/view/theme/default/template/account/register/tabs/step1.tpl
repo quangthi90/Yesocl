@@ -43,7 +43,7 @@
 			    </div>
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
-					    <label class="checkbox">
+					    <label>
 					    	<input type="checkbox"> I am a self-employed
 					    </label>
 				    </div>

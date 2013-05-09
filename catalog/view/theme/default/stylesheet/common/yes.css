@@ -4,8 +4,7 @@
 	margin-top: 0;
 }
 div.radio.active, div.checker.active{
-	margin-right: 0;
-	position: fixed;
+	display: inline-block;
 }
 /*end Format Yes Style*/
 
