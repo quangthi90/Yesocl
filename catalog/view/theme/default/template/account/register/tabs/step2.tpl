@@ -7,7 +7,7 @@
 		<h2 class="row-fluid">
 			<span class="span11 offset1 register-box-title">Adding Email</span>
 		</h2>
-		<div class="row-fluid">
+		<div class="row-fluid register-step2-content">
 			<div class="span12">
 				<div class="row-fluid">
 					<h5 class="span11 offset1 register-note">Get start adding your email address</h5>

@@ -10,20 +10,20 @@
 		<div class="row-fluid">
     		<form class="form-horizontal span7">
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2" for="inputLocation">I live in</label>
-				    <div class="controls span10">
+				    <label class="control-label span2 offset1" for="inputLocation">I live in</label>
+				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputLocation" placeholder="Input Text">
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2" for="inputPostal">Postal code</label>
-				    <div class="controls span10">
+				    <label class="control-label span2 offset1" for="inputPostal">Postal code</label>
+				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputPostal" placeholder="Input Text">
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-			    	<label class="control-label span2">I am current</label>
-				    <div class="controls span10">
+			    	<label class="control-label span2 offset1">I am current</label>
+				    <div class="controls span9">
 					    <label class="radio inline">
 					    	<input type="radio" name="current"> Employed
 					    </label>
@@ -36,26 +36,26 @@
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2" for="inputJob">Job title</label>
-				    <div class="controls span10">
+				    <label class="control-label span2 offset1" for="inputJob">Job title</label>
+				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputJob" placeholder="Input Text">
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <div class="controls span10 offset2">
+				    <div class="controls span9 offset3">
 					    <label class="checkbox">
 					    	<input type="checkbox"> I am a self-employed
 					    </label>
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2" for="inputCompany">Company</label>
-				    <div class="controls span10">
+				    <label class="control-label span2 offset1" for="inputCompany">Company</label>
+				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputCompany" placeholder="Input Text">
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <div class="controls span10 offset2">
+				    <div class="controls span9 offset3">
 				    	<a href="#myCarousel" data-slide="next"><button class="btn btn-success">Create my profile</button></a>
 				    </div>
 			    </div>
@@ -63,13 +63,13 @@
 		    <div class="span4">
 		    	<div class="register-box-recommend">
 		    		<div class="row-fluid register-recommend-heading">
-		    			<div class="span8 offset2">
+		    			<div class="span12">
 					    	<i class="regisert-recommend-icon"></i>
 					    	<h5>A Yesocl profile helps you...</h5>
 					    </div>
 				    </div>
 			    	<div class="row-fluid register-recommend-content">
-			    		<div class="span8 offset2">
+			    		<div class="span12">
 				    		<p>Showcase your skills and experience</p>
 				    		<p>Be found for new opportunities</p>
 				    		<p>Stay in touch with colleagues and friends</p>
