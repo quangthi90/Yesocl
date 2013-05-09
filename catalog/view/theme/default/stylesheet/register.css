@@ -1,6 +1,6 @@
 #y-content .register-box{
-    padding-bottom: 50px;
-    margin-top: 50px;
+    padding-bottom: 40px;
+    margin-top: 40px;
 }
     #y-content .register-box .register-box-step{
         border: 1px solid #c0c0c0;
@@ -101,6 +101,9 @@
                 height: 30px;
                 line-height: 30px;
             }
+        #y-content .register-box .register-box-step .register-skip{
+            color: #64ad44;
+        }
 #y-content .register-table{
     border: 1px solid #cfcfcf;
 }
