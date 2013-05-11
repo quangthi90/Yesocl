@@ -5,7 +5,7 @@
 	</div>
 	<div class="span10 register-box-step">
 		<h2 class="row-fluid">
-			<span class="span11 offset1 register-box-title">Invite to join Yesocl </span>
+			<span class="span11 offset1 register-box-title">Invite to join Yesocl</span>
 		</h2>
 		<div class="row-fluid">
 			<div class="span10 offset1">

@@ -4,6 +4,7 @@
 {% use '@template/default/template/account/register/tabs/step2.tpl' %}
 {% use '@template/default/template/account/register/tabs/step3.tpl' %}
 {% use '@template/default/template/account/register/tabs/step4.tpl' %}
+{% use '@template/default/template/account/register/tabs/step5.tpl' %}
 
 {% block title %}Sign up for Yesocl{% endblock %}
 
@@ -26,8 +27,11 @@
 				<div class="item">
 					{{ block('register_tabs_step3') }}
 				</div>
-				<div class="active item">
+				<div class="item">
 					{{ block('register_tabs_step4') }}
+				</div>
+				<div class="active item">
+					{{ block('register_tabs_step5') }}
 				</div>
 		  	</div>
 		  	<!-- Carousel nav -->
@@ -66,4 +70,5 @@ jQuery(document).ready(function (){
 {{ block('register_tabs_step2_javascript') }}
 {{ block('register_tabs_step3_javascript') }}
 {{ block('register_tabs_step4_javascript') }}
+{{ block('register_tabs_step5_javascript') }}
 {% endblock %}
