@@ -18,7 +18,7 @@
 		<div id="myCarousel" class="carousel slide">
 		  	<!-- Carousel items -->
 		  	<div class="carousel-inner">
-		  		<div class="item">
+		  		<div class="active item">
 		  			{{ block('register_tabs_step1') }}
 				</div>
 				<div class="item">
@@ -30,7 +30,7 @@
 				<div class="item">
 					{{ block('register_tabs_step4') }}
 				</div>
-				<div class="active item">
+				<div class="item">
 					{{ block('register_tabs_step5') }}
 				</div>
 		  	</div>
