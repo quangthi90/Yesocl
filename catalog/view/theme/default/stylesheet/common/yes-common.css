@@ -86,7 +86,7 @@ select
 {
     height: 25px;
     width: 180px;
-    font-size:14px;
+    font-size: 12px;
 }
 
 body
@@ -274,7 +274,7 @@ label.in-line{
 
 #y-header
 {
-    height:40px;  
+    height:30px;  
     z-index:1;
     background: #daecef url(../../image/header_bg.png) repeat-x bottom left;
     position: fixed;
@@ -288,10 +288,10 @@ label.in-line{
 #y-content {
     padding: 20px;
     position: absolute;
-    top: 50px;
+    top: 40px;
     left: 150px;
     right:0px;
-    bottom: 43px;    
+    bottom: 40px;    
     background: #ffffff url(../../image/content_bg.png) repeat-x top left;
     overflow-y: hidden;
     overflow-x: auto;
@@ -302,16 +302,41 @@ label.in-line{
     height: 100%;
 }
 
+
 #y-footer
 {
     position:fixed;
     bottom: 0px;
-    left: 150px;
+    left: 0px;
     right: 0px;
     border-top: 3px solid #000;
-    background:#fff;   
+    background:#fff url(../../image/footer_bg.png) repeat-x bottom left;   
     z-index:1; 
-    height: 43px;
+    height: 30px;
+    padding: 6px 20px 4px 20px;
+    font-size: 12px;
+}
+
+#y-footer .copyright {
+    text-shadow: 1px 1px 1px #ddd;
+}
+
+#y-footer .copyright strong {
+    color: #53A753;
+    font-size: 15px;
+}
+
+#y-footer .links-footer {
+    font-weight: bold;
+    text-align: center;
+}
+
+#y-footer .language-selection {
+  text-align: right;
+}
+
+#y-footer .language-selection select {
+    height: 30px;
 }
 
 #ascrail2000-hr{
@@ -325,7 +350,7 @@ label.in-line{
     background: #265607 url(../../image/sidebar_bg.png) repeat top left;
     position: fixed;
     top: 0px;
-    bottom: 43px;
+    bottom: 40px;
     z-index: 10;
     color: #fff;
     text-align: center;     
@@ -378,10 +403,6 @@ label.in-line{
 					}
 
 				#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name{
-					height: 30%;
-					line-height: 30%;
-					padding: 5px;
-					height: 30px;
 					max-height: 50px;
 					line-height: 30px;
 					border-top: 1px solid #629843;
@@ -396,7 +417,7 @@ label.in-line{
 				}
 
 					#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name > a{
-						font-size: 20px;
+						font-size: 15px;
 						color: #fff;
 					}
 
@@ -407,7 +428,7 @@ label.in-line{
 
 			#y-sidebar .sidebar-border-right .sidebar-welcome > p{
 				margin-bottom: 0;
-				font-size: 12px;
+				font-size: 13px;
 			}
 
 		#y-sidebar .sidebar-border-right .sidebar-menus{
@@ -584,4 +605,49 @@ label.in-line{
 .post_new .post_new_control  {
     height: 25px;
     padding: 3px 0px 0px 0px;
+}
+
+/*NAV SIDEBAR*/
+.sidebar-controls {
+  color: #fff;
+}
+
+.sidebar-controls .nav-list > li {
+  text-align: left;
+}
+
+.sidebar-controls .nav-list .nav-header {
+  text-shadow: 0px 0px 0px #fff;
+}
+
+.sidebar-controls .nav-list > li > a {
+  text-shadow: 0px 0px 0px #fff;
+  color: #cdf4d7;
+  background-color: transparent;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.sidebar-controls .nav-list > li > a > i {
+  font-size: 18px;
+}
+
+.sidebar-controls .nav > li > a:hover, .nav > li > a:focus{
+  background-color: #fff;
+  color: #000;
+}
+
+.sidebar-controls .nav-list .nav-header { 
+  color: #fff;
+  font-size: 13px;
+}
+
+.sidebar-controls .nav-list .divider {
+  border-bottom: 1px solid #054105;
+  background-color: #000;
+}
+
+.sidebar-controls .nav-list > .active > a, .nav-list > .active > a:hover, .nav-list > .active > a:focus {
+  color: #fff;
+  background-color: #53a753;
 }
