@@ -198,7 +198,8 @@ $registry->set('language', $language);
 $registry->set('document', new Document()); 		
 
 // Customer
-$registry->set('customer', new Customer($registry));
+$customer = new Customer($registry);
+$registry->set('customer', $customer);
 
 // Affiliate
 $registry->set('affiliate', new Affiliate($registry));
@@ -235,9 +236,13 @@ $controller->addPreAction(new Action('common/maintenance'));
 $controller->addPreAction(new Action('common/seo_url'));	
 	
 // Router
-if (isset($request->get['route'])) {
-	$action = new Action($request->get['route']);
-} else {
+if ( $customer->isLogged() ) {
+	if (isset($request->get['route'])) {
+		$action = new Action($request->get['route']);
+	} else {
+		$action = new Action('common/home');
+	}
+}else{
 	$action = new Action('welcome/home');
 }
 
