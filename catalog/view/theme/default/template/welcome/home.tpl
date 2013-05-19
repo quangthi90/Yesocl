@@ -18,7 +18,7 @@
         Join <strong>YESOCL.com</strong>
     </div>
     <div class="frm-content">
-    	<form action="#">
+    	<form action="{{ action }}" method="post">
     		<div class="controls controls-row">
     			<input type="text" class="span2" id="reg-first-name" placeholder="First Name" />
     			<input type="text" class="span2"  id="reg-last-name" placeholder="Last Name" />

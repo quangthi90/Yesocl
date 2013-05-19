@@ -9,6 +9,29 @@ class ControllerAccountRegister extends Controller {
 			$this->data['base'] = $this->config->get('config_url');
 		}
 
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$this->model_account_customer->addCustomer($this->request->post);
+
+			$this->customer->login($this->request->post['email'], $this->request->post['password']);
+			
+			unset($this->session->data['guest']);
+			
+			// Default Shipping Address
+			if ($this->config->get('config_tax_customer') == 'shipping') {
+				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
+				$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
+				$this->session->data['shipping_postcode'] = $this->request->post['postcode'];				
+			}
+			
+			// Default Payment Address
+			if ($this->config->get('config_tax_customer') == 'payment') {
+				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
+				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];			
+			}
+							  	  
+	  		$this->redirect($this->url->link('account/success'));
+    	}
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
@@ -374,7 +397,7 @@ class ControllerAccountRegister extends Controller {
 		$this->response->setOutput($this->render());	
   	}*/
 
-  	/*private function validate() {
+  	private function validate() {
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
@@ -389,10 +412,6 @@ class ControllerAccountRegister extends Controller {
 
     	if ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
       		$this->error['warning'] = $this->language->get('error_exists');
-    	}
-		
-    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-      		$this->error['telephone'] = $this->language->get('error_telephone');
     	}
 		
 		// Customer Group
@@ -474,7 +493,7 @@ class ControllerAccountRegister extends Controller {
     	} else {
       		return false;
     	}
-  	}*/
+  	}
 	
 	/*public function country() {
 		$json = array();
