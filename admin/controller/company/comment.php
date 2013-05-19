@@ -465,10 +465,6 @@ class ControllerCompanyComment extends Controller {
 	}
 
 	private function isValidateForm() {
-		if ( !isset( $this->request->post['comment_content']) || strlen( trim( $this->request->post['comment_content'] ) ) < 1 || strlen( trim( $this->request->post['comment_content'] ) ) > 255 ) {
-			$this->error['error_content'] = $this->language->get( 'error_content' );
-		}
-
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {
 			$this->error['error_author'] = $this->language->get( 'error_author' );
 		}

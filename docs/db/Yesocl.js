@@ -104,6 +104,20 @@ db.getCollection("district").ensureIndex({
   
 ]);
 
+/** group indexes **/
+db.getCollection("group").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** group_type indexes **/
+db.getCollection("group_type").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** setting_config indexes **/
 db.getCollection("setting_config").ensureIndex({
   "_id": NumberInt(1)
@@ -159,7 +173,7 @@ db.getCollection("admin_group").insert({
   "name": "Supper Admin",
   "permissions": [
     {
-      "_id": ObjectId("51828071471dee0808000001"),
+      "_id": ObjectId("518f5c8f471deeb409000000"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ef471deeac1f000000"),
@@ -189,7 +203,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000002"),
+      "_id": ObjectId("518f5c8f471deeb409000001"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -219,7 +233,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000003"),
+      "_id": ObjectId("518f5c8f471deeb409000002"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516aac38913db4a004000000"),
@@ -249,7 +263,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000004"),
+      "_id": ObjectId("518f5c8f471deeb409000003"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51828041471dee0808000000"),
@@ -279,7 +293,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000005"),
+      "_id": ObjectId("518f5c8f471deeb409000004"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab55f913db42c12000000"),
@@ -309,7 +323,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000006"),
+      "_id": ObjectId("518f5c8f471deeb409000005"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab59e913db47809000002"),
@@ -339,7 +353,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000007"),
+      "_id": ObjectId("518f5c8f471deeb409000006"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516c974b976982740a000000"),
@@ -369,7 +383,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000008"),
+      "_id": ObjectId("518f5c8f471deeb409000007"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a683d471dee480b00001a"),
@@ -399,7 +413,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000009"),
+      "_id": ObjectId("518f5c8f471deeb409000008"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a684f471dee480b00001b"),
@@ -429,7 +443,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee080800000a"),
+      "_id": ObjectId("518f5c8f471deeb409000009"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -459,7 +473,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee080800000b"),
+      "_id": ObjectId("518f5c8f471deeb40900000a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -489,7 +503,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee080800000c"),
+      "_id": ObjectId("518f5c8f471deeb40900000b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a680e471dee480b000018"),
@@ -519,7 +533,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee080800000d"),
+      "_id": ObjectId("518f5c8f471deeb40900000c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67a8471dee480b000016"),
@@ -549,7 +563,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee080800000e"),
+      "_id": ObjectId("518f5c8f471deeb40900000d"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6823471dee480b000019"),
@@ -579,7 +593,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee080800000f"),
+      "_id": ObjectId("518f5c8f471deeb40900000e"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67d6471dee480b000017"),
@@ -609,7 +623,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000010"),
+      "_id": ObjectId("518f5c8f471deeb40900000f"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6882471dee480b00001d"),
@@ -639,7 +653,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000011"),
+      "_id": ObjectId("518f5c8f471deeb409000010"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6871471dee480b00001c"),
@@ -669,7 +683,37 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000012"),
+      "_id": ObjectId("518f5c8f471deeb409000011"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516df1eb976982440f000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("518f5c8f471deeb409000012"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -699,7 +743,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51828071471dee0808000013"),
+      "_id": ObjectId("518f5c8f471deeb409000013"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -1197,125 +1241,249 @@ db.getCollection("data_type").insert({
   "name": "School",
   "status": true
 });
+db.getCollection("data_type").insert({
+  "_id": ObjectId("516e0288976982b00c000014"),
+  "name": "IM Type",
+  "code": "im_type",
+  "status": true
+});
+db.getCollection("data_type").insert({
+  "_id": ObjectId("516e02e4976982640e000027"),
+  "name": "Phone Type",
+  "code": "phone_type",
+  "status": true
+});
+db.getCollection("data_type").insert({
+  "_id": ObjectId("516e033d976982640e000028"),
+  "name": "Website Type",
+  "code": "website_type",
+  "status": true
+});
+db.getCollection("data_type").insert({
+  "_id": ObjectId("516e03b4976982640e00002c"),
+  "name": "Visible Type",
+  "code": "visible_type",
+  "status": true
+});
 
 /** data_value records **/
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af827913db48c05000014"),
   "name": "Vietnam National University - Ho Chi Minh City",
-  "value": "Vietnam National University - Ho Chi Minh City",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af76a913db48c05000010"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Vietnam National University - Ho Chi Minh City "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af84e913db48c05000015"),
   "name": "University of Economics Ho Chi Minh City",
-  "value": "University of Economics Ho Chi Minh City",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af76a913db48c05000010"),
     "$db": "yesocl"
-  }
+  },
+  "value": "University of Economics Ho Chi Minh City "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af88b913db48c05000016"),
   "name": "Vietnam National University - Ha Noi",
-  "value": "Vietnam National University - Ha Noi",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af76a913db48c05000010"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Vietnam National University - Ha Noi "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af8f4913db48c05000017"),
   "name": "Master Of Library &amp; Information Science",
-  "value": "Master Of Library &amp; Information Science",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af771913db48c05000011"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Master Of Library &amp; Information Science "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af917913db48c05000018"),
   "name": "Master Of Technology",
-  "value": "Master Of Technology",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af771913db48c05000011"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Master Of Technology "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af952913db48c05000019"),
   "name": "Bachelor Of Engineering",
-  "value": "Bachelor Of Engineering",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af771913db48c05000011"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Bachelor Of Engineering "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af970913db48c0500001a"),
   "name": "Information Technology",
-  "value": "Information Technology",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af7a3913db48c05000013"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Information Technology "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af992913db48c0500001b"),
   "name": "Economics",
-  "value": "Economics",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af7a3913db48c05000013"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Economics "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514af9b3913db48c0500001c"),
   "name": "Accounting",
-  "value": "Accounting",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af7a3913db48c05000013"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Accounting"
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514b094d913db4ac0800001f"),
   "name": "Banking",
-  "value": "Banking",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af77a913db48c05000012"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Banking "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514b0970913db4ac08000020"),
   "name": "Chemicals",
-  "value": "Chemicals",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af77a913db48c05000012"),
     "$db": "yesocl"
-  }
+  },
+  "value": "Chemicals "
 });
 db.getCollection("data_value").insert({
   "_id": ObjectId("514b0983913db4ac08000021"),
   "name": "Design",
-  "value": "Design",
   "type": {
     "$ref": "data_type",
     "$id": ObjectId("514af77a913db48c05000012"),
+    "$db": "yesocl"
+  },
+  "value": "Design "
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e02ac976982b00c000015"),
+  "name": "Skype",
+  "value": "skype",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e0288976982b00c000014"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e02c7976982640e000026"),
+  "name": "Yahoo",
+  "value": "yahoo",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e0288976982b00c000014"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e02f9976982b00c000016"),
+  "name": "Mobile",
+  "value": "mobile",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e02e4976982640e000027"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e030c976982b00c000017"),
+  "name": "Telephone",
+  "value": "telephone",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e02e4976982640e000027"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e0364976982640e000029"),
+  "name": "Personal Website",
+  "value": "personal",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e033d976982640e000028"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e0377976982640e00002a"),
+  "name": "Company Website",
+  "value": "company",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e033d976982640e000028"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e038b976982640e00002b"),
+  "name": "Other...",
+  "value": "other",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e033d976982640e000028"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e03d0976982640e00002d"),
+  "name": "My Follow",
+  "value": "myfollow",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e03b4976982640e00002c"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e03e4976982640e00002e"),
+  "name": "My Network",
+  "value": "mynetwork",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e03b4976982640e00002c"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("data_value").insert({
+  "_id": ObjectId("516e03f5976982640e00002f"),
+  "name": "Every One",
+  "value": "everyone",
+  "type": {
+    "$ref": "data_type",
+    "$id": ObjectId("516e03b4976982640e00002c"),
     "$db": "yesocl"
   }
 });
@@ -1871,6 +2039,33 @@ db.getCollection("design_layout").insert({
   "name": "Comment Of Company",
   "path": "company\/comment"
 });
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516df1eb976982440f000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Config Manager",
+  "path": "setting\/config"
+});
 
 /** district records **/
 db.getCollection("district").insert({
@@ -1882,6 +2077,60 @@ db.getCollection("district").insert({
     "$id": ObjectId("5143bfca913db4a408000012"),
     "$db": "yesocl"
   }
+});
+
+/** group records **/
+db.getCollection("group").insert({
+  "_id": ObjectId("518f5e6d471dee140a000000"),
+  "author": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  },
+  "created": ISODate("2013-05-12T09:18:36.0Z"),
+  "description": "&lt;p&gt;\r\n\tEu nobis prompta menandri nam, aliquando reprimique pri eu, omnis legere cu vix. Ex pro liber postea, ad verear omnesque accusamus eam. Eam an inciderint consectetuer. Recusabo assueverit ad pri, nec alia facilisi ea. Minimum convenire est no, has eu case probo incorrupte. Ut nec wisi paulo efficiantur.&lt;\/p&gt;\r\n",
+  "name": "Yesocl Group",
+  "posts": [
+    {
+      "_id": ObjectId("518f5f67471deeb40900002a"),
+      "comments": [
+        {
+          "_id": ObjectId("518f600c471dee240a000001"),
+          "content": "Dolorem scribentur concludaturque id mel, consequuntur voluptatibus vis no. Ei habemus atomorum imperdiet mel.\r\n",
+          "status": true,
+          "created": ISODate("2013-05-12T09:25:32.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "&lt;p&gt;\r\n\tNe pri mazim dolore debitis. Nihil signiferumque mei id. Cu diam nemore repudiandae sit, eu ius dolor assueverit. Pertinacia constituam ei vis, dolorem contentiones eam no. Ne quot nemore his, nusquam persecuti ut vim.&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-05-12T09:22:47.0Z"),
+      "status": true,
+      "title": "Tollit oportere usu ex, mea doming vidisse necessitatibus eu",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "status": true,
+  "sumary": "&lt;p&gt;\r\n\tEi timeam dissentias consectetuer has. Meis impetus abhorreant ad quo, id indoctum liberavisse vim. Vis copiosae singulis ut. Est solum dissentias cu, per labitur meliore scribentur ne, debitis detraxit cu est. Docendi gubergren referrentur sit te, at sale ignota habemus vel.&lt;\/p&gt;\r\n",
+  "type": {
+    "$ref": "group_type",
+    "$id": ObjectId("518f5e39471deeb40900001e"),
+    "$db": "yesocl"
+  },
+  "website": "www.yesocl.com"
+});
+
+/** group_type records **/
+db.getCollection("group_type").insert({
+  "_id": ObjectId("518f5e39471deeb40900001e"),
+  "name": "Normal"
 });
 
 /** setting_config records **/
@@ -1910,6 +2159,46 @@ db.getCollection("setting_config").insert({
   "key": "action_change_password",
   "value": "change_password"
 });
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516df423976982bc0f000000"),
+  "key": "datatype_degree",
+  "value": "degree"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516df43b976982bc0f000001"),
+  "key": "datatype_fieldofstudy",
+  "value": "fieldofstudy"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516df449976982bc0f000002"),
+  "key": "datatype_industry",
+  "value": "industry"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516df45a976982bc0f000003"),
+  "key": "datatype_school",
+  "value": "school"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e2662976982140f000007"),
+  "key": "datatype_im_type",
+  "value": "im_type"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e267a976982140f000008"),
+  "key": "datatype_phone_type",
+  "value": "phone_type"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e2689976982140f000009"),
+  "key": "datatype_visible_type",
+  "value": "visible_type"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("516e26a3976982140f00000a"),
+  "key": "datatype_website_type",
+  "value": "website_type"
+});
 
 /** street records **/
 db.getCollection("street").insert({
@@ -1925,12 +2214,12 @@ db.getCollection("street").insert({
 
 /** user records **/
 db.getCollection("user").insert({
-  "_id": ObjectId("516b9398913db43009000001"),
-  "created": ISODate("2013-04-15T05:43:52.0Z"),
+  "_id": ObjectId("518f5555471deea409000000"),
+  "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("516b9399913db43009000005"),
-      "email": "testemail@gmail.com",
+      "_id": ObjectId("518f5ddb471deeb40900001d"),
+      "email": "user1@test.com",
       "primary": true
     }
   ],
@@ -1940,39 +2229,93 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("516b9398913db43009000002"),
-    "firstname": "fdsfdfdsf",
-    "lastname": "cxvcxsdf",
+    "_id": ObjectId("518f5ddb471deeb409000014"),
+    "firstname": "user1",
+    "lastname": "yesocl",
     "headingLine": "",
     "location": {
-      "_id": ObjectId("516b9398913db43009000003"),
-      "countryId": "5143bfa3913db4a408000011",
-      "country": "Việt Nam",
-      "cityId": "5143bfca913db4a408000012",
-      "city": "HCM"
+      "_id": ObjectId("518f5ddb471deeb409000015"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
     },
-    "postalCode": "12345",
-    "industry": "Banking",
-    "address": "fdcvsfdsd",
+    "postalCode": "84",
+    "industry": "Chemicals",
+    "industry_id": "514b0970913db4ac08000020",
+    "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
+    "ims": [
+      {
+        "_id": ObjectId("518f5ddb471deeb409000016"),
+        "im": "user1",
+        "type": "skype",
+        "visible": "myfollow"
+      }
+    ],
+    "phones": [
+      {
+        "_id": ObjectId("518f5ddb471deeb409000017"),
+        "phone": "0903000333",
+        "type": "mobile",
+        "visible": "myfollow"
+      }
+    ],
+    "websites": [
+      {
+        "_id": ObjectId("518f5ddb471deeb409000018"),
+        "url": "www.yesocl.com",
+        "title": ""
+      }
+    ],
     "background": {
-      "_id": ObjectId("516b9398913db43009000004"),
+      "_id": ObjectId("518f5ddb471deeb409000019"),
+      "experiencies": [
+        {
+          "_id": ObjectId("518f5ddb471deeb40900001a"),
+          "company": "Yesocl",
+          "title": "My Company",
+          "location": {
+            "_id": ObjectId("518f5ddb471deeb40900001b"),
+            "location": "HCM, Việt Nam",
+            "cityId": "5143bfca913db4a408000012"
+          },
+          "started": ISODate("2013-01-01T10:16:11.0Z"),
+          "ended": ISODate("2013-01-01T10:16:11.0Z"),
+          "current": false,
+          "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
+        }
+      ],
+      "educations": [
+        {
+          "_id": ObjectId("518f5ddb471deeb40900001c"),
+          "school": "Vietnam National University - Ho Chi Minh City",
+          "school_id": "514af827913db48c05000014",
+          "started": "2008",
+          "ended": "2012",
+          "degree": "Master Of Technology",
+          "degree_id": "514af917913db48c05000018",
+          "fieldOfStudy": "Information Technology",
+          "fieldOfStudy_id": "514af970913db48c0500001a",
+          "grace": "",
+          "societies": "",
+          "description": ""
+        }
+      ],
       "interest": "",
-      "birthday": ISODate("2013-04-11T22:00:00.0Z"),
+      "birthday": ISODate("2013-05-14T22:00:00.0Z"),
       "maritalStatus": false,
       "adviceForContact": ""
     }
   },
-  "password": "6d7f099cc22b4501e2bbb04094404b9f454554cc",
+  "password": "8aeb538456e9fc680883f24c93bc7ca33175f91e",
   "status": true,
-  "username": "tester"
+  "username": "user1"
 });
 db.getCollection("user").insert({
-  "_id": ObjectId("516c9acb976982140f000000"),
-  "created": ISODate("2013-04-16T00:26:51.0Z"),
+  "_id": ObjectId("518f5f43471deeb40900001f"),
+  "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
-      "_id": ObjectId("516c9acb976982140f000004"),
-      "email": "hughnjt@gmail.com",
+      "_id": ObjectId("518f5f43471deeb409000029"),
+      "email": "user2@test.com",
       "primary": true
     }
   ],
@@ -1982,31 +2325,85 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("516c9acb976982140f000001"),
-    "firstname": "hyujikmnhj",
-    "lastname": "gtfhyvbg",
-    "headingLine": "",
+    "_id": ObjectId("518f5f43471deeb409000020"),
+    "firstname": "user2",
+    "lastname": "yesocl",
+    "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
     "location": {
-      "_id": ObjectId("516c9acb976982140f000002"),
-      "countryId": "5143bfa3913db4a408000011",
-      "country": "Việt Nam",
-      "cityId": "5143bfca913db4a408000012",
-      "city": "HCM"
+      "_id": ObjectId("518f5f43471deeb409000021"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
     },
-    "postalCode": "12345",
-    "industry": "Banking",
-    "address": "kijmnjhuk",
+    "postalCode": "84",
+    "industry": "Chemicals",
+    "industry_id": "514b0970913db4ac08000020",
+    "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
+    "ims": [
+      {
+        "_id": ObjectId("518f5f43471deeb409000022"),
+        "im": "user2",
+        "type": "skype",
+        "visible": "myfollow"
+      }
+    ],
+    "phones": [
+      {
+        "_id": ObjectId("518f5f43471deeb409000023"),
+        "phone": "0904000444",
+        "type": "mobile",
+        "visible": "myfollow"
+      }
+    ],
+    "websites": [
+      {
+        "_id": ObjectId("518f5f43471deeb409000024"),
+        "url": "www.yesocl.com",
+        "title": ""
+      }
+    ],
     "background": {
-      "_id": ObjectId("516c9acb976982140f000003"),
-      "interest": "",
-      "birthday": ISODate("2013-04-11T22:00:00.0Z"),
-      "maritalStatus": false,
-      "adviceForContact": ""
+      "_id": ObjectId("518f5f43471deeb409000025"),
+      "experiencies": [
+        {
+          "_id": ObjectId("518f5f43471deeb409000026"),
+          "company": "Yesocl",
+          "title": "My Company",
+          "location": {
+            "_id": ObjectId("518f5f43471deeb409000027"),
+            "location": "HCM, Việt Nam",
+            "cityId": "5143bfca913db4a408000012"
+          },
+          "started": ISODate("2013-01-01T10:22:11.0Z"),
+          "ended": ISODate("2013-01-01T10:22:11.0Z"),
+          "current": false,
+          "description": "Sed et utamur argumentum. Eum an habeo ubique efficiantur. Eu sea oporteat vituperatoribus, eos in graecis delicata persecuti. Mel an summo dicit eleifend. Copiosae quaestio mandamus vim et."
+        }
+      ],
+      "educations": [
+        {
+          "_id": ObjectId("518f5f43471deeb409000028"),
+          "school": "University of Economics Ho Chi Minh City",
+          "school_id": "514af84e913db48c05000015",
+          "started": "2009",
+          "ended": "2013",
+          "degree": "Master Of Technology",
+          "degree_id": "514af917913db48c05000018",
+          "fieldOfStudy": "Accounting",
+          "fieldOfStudy_id": "514af9b3913db48c0500001c",
+          "grace": "Oratio recusabo",
+          "societies": "Amet inciderint ex nam, ei vide tota instructior mel. Ut dictas ancillae vix. Posidonium argumentum te sit, ea eius bonorum sea",
+          "description": "Elitr regione an his, ad eirmod propriae quo, vel ut unum putant ancillae. Pri omnesque definiebas ex, an omnium reprehendunt sea. An iusto ludus iriure eos, omnes postea id eum. Has pertinacia inciderint ex. Et qui postea vidisse pertinacia. Ne sea probo voluptatibus, an aperiri sadipscing consectetuer eam, ex detraxit adipiscing vix."
+        }
+      ],
+      "interest": "Eu nam eius consul aliquando, choro integre iuvaret no nec, ut pericula scripserit per. Nam eu alii idque, suas patrioque vituperata ex est.",
+      "birthday": ISODate("2013-05-12T22:00:00.0Z"),
+      "maritalStatus": true,
+      "adviceForContact": "Et vim quando vocent theophrastus, cetero ullamcorper ne his"
     }
   },
-  "password": "8310f3c06e6bd007b6ad653cae8726f70284fe8f",
+  "password": "c79e61c5f29893efeef9265bf06ea18f8b61604c",
   "status": true,
-  "username": "abcdef"
+  "username": "user2"
 });
 
 /** user_group records **/

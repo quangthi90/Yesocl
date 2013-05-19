@@ -75,7 +75,7 @@
 <?php echo $footer; ?>
 <script type="text/javascript"><!--
 function filter() {
-  url = 'index.php?route=data/value';
+  url = 'index.php?route=data/value&token=<?php echo $token; ?>';
 
   var filter_type_name = $('input[name=\'filter_type_name\']').attr('value');
   

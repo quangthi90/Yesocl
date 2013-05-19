@@ -408,10 +408,6 @@ class ControllerGroupComment extends Controller {
 	}
 
 	private function isValidateForm(){
-		if ( !isset($this->request->post['content']) || strlen($this->request->post['content']) < 1 || strlen($this->request->post['content']) > 50 ){
-			$this->error['error_content'] = $this->language->get( 'error_content' );
-		}
-
 		if ( !isset($this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ){
 			$this->error['error_author'] = $this->language->get( 'error_author' );
 		}

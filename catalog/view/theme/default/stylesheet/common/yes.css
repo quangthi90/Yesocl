@@ -1,3 +1,50 @@
+/*Format Yes Style*/
+.radio input[type="radio"], .checkbox input[type="checkbox"]{
+	margin-left: 0;
+	margin-top: 0;
+}
+div.radio.active, div.checker.active{
+	display: inline-block;
+}
+.btn-twitter,
+.btn-twitter:hover{
+	border: 1px solid #0b8bb1;
+	color: #fff;
+	font-weight: normal;
+	background: #82d3e9; /* Old browsers */
+	background: -moz-linear-gradient(top,  #82d3e9 0%, #199fc7 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82d3e9), color-stop(100%,#199fc7)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #82d3e9 0%,#199fc7 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #82d3e9 0%,#199fc7 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #82d3e9 0%,#199fc7 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #82d3e9 0%,#199fc7 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#82d3e9', endColorstr='#199fc7',GradientType=0 ); /* IE6-9 */
+}
+.btn-facebook,
+.btn-facebook:hover{
+	border: 1px solid #205198;
+	background: #8d9ec3; /* Old browsers */
+	background: -moz-linear-gradient(top,  #8d9ec3 0%, #395795 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8d9ec3), color-stop(100%,#395795)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #8d9ec3 0%,#395795 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #8d9ec3 0%,#395795 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #8d9ec3 0%,#395795 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #8d9ec3 0%,#395795 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8d9ec3', endColorstr='#395795',GradientType=0 ); /* IE6-9 */
+	color: #fff;
+	font-weight: normal;
+}
+.icon-yes-facebook{
+	background: url('../../image/facebook-logo.png');
+	width: 27px;
+	height: 27px;
+}
+.icon-yes-twitter{
+	background: url('../../image/twitter-logo.png');
+	width: 27px;
+	height: 27px;
+}
+/*end Format Yes Style*/
 
 /*OVERLOAD BOOTSTRAP*/
 .btn

@@ -14,10 +14,10 @@ class ControllerAccountRegister extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/register.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
 		} else {
-			$this->template = 'default/template/account/register.tpl';
+			$this->template = 'default/template/account/register/register.tpl';
 		}
 		
 		$this->children = array(

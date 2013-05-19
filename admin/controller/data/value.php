@@ -318,6 +318,8 @@ class ControllerDataValue extends Controller {
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 
+		$this->data['token'] = $this->session->data['token'];
+
 		$this->template = 'data/value_list.tpl';
 		$this->children = array(
 			'common/header',
