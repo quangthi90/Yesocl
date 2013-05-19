@@ -23,7 +23,7 @@
                         <input type="text" placeholder="Email"  class="span12 input-welcome" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
-                        <label class="checkbox">
+                        <label>
                             <input type="checkbox"> Remember me
                         </label>
                     </div>
