@@ -339,12 +339,6 @@ label.in-line{
     height: 30px;
 }
 
-#ascrail2000-hr{
-    bottom: 45px !important;
-    right: 3px;
-}
-
-
 #y-sidebar {
     width: 150px;
     background: #265607 url(../../image/sidebar_bg.png) repeat top left;
@@ -479,40 +473,43 @@ label.in-line{
 }
 
 .columns{
-    -webkit-column-width: 420px;
-    -webkit-column-gap: 10px;
+    -webkit-column-width: 420px;    
     -moz-column-width: 420px;
-    -moz-column-gap: 10px;
-    column-gap: 1em;
-    column-rule-width: 1em;
-    column-rule-style: solid;
-    column-rule-color: black;
-    column-gap: 10px;
     column-width: 420px;
+    -moz-column-gap: 15px;    
+    -webkit-column-gap: 15px;
+    column-gap: 15px;
     height: 100%;
-    width: auto;
 }
 
-.columns .feedItem {   
+.columns .feed-item {   
     height: auto;
     min-height: 80px;    
     display:inline-block;
-    margin: 0px 15px 25px 0px !important;
+    margin: 0px 0px 25px 0px;
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
     white-space: nowrap ;
 }
 
-.columns .feed-title {
-     -webkit-column-span: all;
-    -moz-column-span: all;
-    column-span: all;
+#feed-end {
+    visibility: visible;
+    -webkit-column-break-before: always;
+    -moz-column-break-before: always;
+    column-break-before: always;
+}
+
+.feed-break {
+    visibility: visible;
+    -webkit-column-break-before: always;
+    -moz-column-break-before: always;
+    column-break-before: always;
 }
 
 /*POST*/
 .post {
-    width: 500px;
+    width: 420px;
     height: auto;
     padding: 0px;
     background: #fff;
@@ -593,7 +590,7 @@ label.in-line{
 }
 .post_new {
     padding: 10px;
-    width: 480px;
+    width: 400px;
 }
 .post_new  .txt_editor {
     overflow: hidden;

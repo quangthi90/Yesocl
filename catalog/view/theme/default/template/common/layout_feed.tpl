@@ -34,7 +34,7 @@
     	<!-- Library Script -->
     	<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
     	<script type="text/javascript" src="catalog/view/javascript/libs/jquery.nicescroll.js"></script>
-		<!--script type="text/javascript" src="catalog/view/javascript/bootstrap/bootstrap.min.js"></script-->
+		<script type="text/javascript" src="catalog/view/javascript/common.js"></script
 
 		<!-- Custom Script -->
     	{% block javascript %}
