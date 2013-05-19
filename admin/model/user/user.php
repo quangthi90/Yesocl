@@ -304,6 +304,7 @@ class ModelUserUser extends Doctrine {
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
+		$user->setSalt( $salt );
 		
 		// Add status
 		if ( isset($data['user']['status']) ){
@@ -638,6 +639,8 @@ class ModelUserUser extends Doctrine {
 			return false;
 		}
 
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$user->setSalt( $salt );
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 
 		// Save to DB

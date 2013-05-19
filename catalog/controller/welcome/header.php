@@ -131,6 +131,8 @@ class ControllerWelcomeHeader extends Controller {
 		// 	'module/currency',
 		// 	'module/cart'
 		// );
+
+		$this->data['action'] = $this->url->link('account/login', '', 'SSL');
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/welcome/header.tpl';

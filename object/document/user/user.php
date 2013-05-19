@@ -23,6 +23,9 @@ Class User {
 	/** @MongoDB\String */
 	private $password;
 
+	/** @MongoDB\String */
+	private $salt;
+
 	/** 
 	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Email") 
 	 */
@@ -70,6 +73,14 @@ Class User {
 
 	public function getPassword(){
 		return $this->password;
+	}
+
+	public function setSalt( $salt ){
+		$this->salt = $salt;
+	}
+
+	public function getSalt(){
+		return $this->salt;
 	}
 
 	public function addEmail( Meta\Email $email ){
