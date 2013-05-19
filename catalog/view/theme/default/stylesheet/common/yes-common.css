@@ -122,13 +122,14 @@ a:focus > i {
 
 
 .btn {
-  color: #fff;
+  padding: 2px 15px;
+  font-size: 13px;
+  border-radius: 1px;
+  /*color: #fff;
   display: inline-block;
   *display: inline;
-  padding: 2px 15px;
   margin-bottom: 0;
   *margin-left: .3em;
-  font-size: 13px;
   line-height: 20px;
   color: #333333;
   text-align: center;
@@ -156,12 +157,12 @@ a:focus > i {
   *zoom: 1;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
      -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);*/
 }
 
-.btn:hover, .btn:focus, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
+/*.btn:hover, .btn:focus, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
     background-color: #ccc;
-}
+}*/
 
 .btn-yes {
   color: #ffffff;

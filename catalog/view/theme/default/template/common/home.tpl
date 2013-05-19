@@ -12,7 +12,7 @@
         <ul class="list-content columns">
 			<li class="feed-item">	
 				<div class="post post_new">
-					<div class="txt_editor">
+					<div class="row-fluid txt_editor">
 						<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 					</div>
 					<div class="row-fluid"> 
@@ -22,7 +22,7 @@
 							</a>
 						</div>
 						<div class="span2">
-							<a href="#" class="btn  btn-yes">Post</a>
+							<a href="#" class="btn  btn-success">Post</a>
 						</div>
 					</div>
 				</div>
