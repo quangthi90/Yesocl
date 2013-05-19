@@ -41,10 +41,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Nhận định thị trường chứng khoán 06.05 – 10.05.2013</h4>
+							<h6 class="post_title">Nhận định thị trường chứng khoán 06.06 – 10.05.2013</h4>
 						</div>
 					</div>
 					<div class="post_body">
@@ -75,10 +75,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Title of this post</h4>
+							<h6 class="post_title">Title of this post</h6>
 						</div>
 					</div>
 					<div class="post_body">
@@ -110,10 +110,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Title of this post</h4>
+							<h6 class="post_title">Title of this post</h6>
 						</div>
 					</div>
 					<div class="post_body">
@@ -144,10 +144,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Nhận định thị trường chứng khoán 06.05 – 10.05.2013</h4>
+							<h6 class="post_title">Nhận định thị trường chứng khoán 06.06 – 10.05.2013</h4>
 						</div>
 					</div>
 					<div class="post_body">
@@ -178,10 +178,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Title of this post</h4>
+							<h6 class="post_title">Title of this post</h6>
 						</div>
 					</div>
 					<div class="post_body">
@@ -212,10 +212,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Nhận định thị trường chứng khoán 06.05 – 10.05.2013</h4>
+							<h6 class="post_title">Nhận định thị trường chứng khoán 06.06 – 10.05.2013</h4>
 						</div>
 					</div>
 					<div class="post_body">
@@ -246,10 +246,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Title of this post</h4>
+							<h6 class="post_title">Title of this post</h6>
 						</div>
 					</div>
 					<div class="post_body">
@@ -281,10 +281,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Title of this post</h4>
+							<h6 class="post_title">Title of this post</h6>
 						</div>
 					</div>
 					<div class="post_body">
@@ -315,10 +315,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Nhận định thị trường chứng khoán 06.05 – 10.05.2013</h4>
+							<h6 class="post_title">Nhận định thị trường chứng khoán 06.06 – 10.05.2013</h4>
 						</div>
 					</div>
 					<div class="post_body">
@@ -349,10 +349,10 @@
 									<a href="#">Username</a>
 								</div>
 								<div class="span4 post_time">
-									<i class="icon-double-angle-right icon-2x"></i> 1 minute ago
+									<i class="icon-time icon-2x"></i> 1 minute ago
 								</div>
 							</div>
-							<h4 class="post_title">Title of this post</h4>
+							<h6 class="post_title">Title of this post</h6>
 						</div>
 					</div>
 					<div class="post_body">

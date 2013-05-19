@@ -195,6 +195,10 @@ i.medium-icon {
     font-size: 20px;
 }
 
+i.icon-2x{
+  font-size: 16px;
+}
+
 /*FORM*/
 .y-frm
 {
@@ -545,7 +549,7 @@ label.in-line{
     .post .post_header .post_user a {
         color: #082902;
         font-weight: bold;
-        font-size: 12px;
+        font-size: 14px;
     }
 .post .post_header .avatar_thumb {
 
@@ -553,11 +557,11 @@ label.in-line{
 .post .post_header .post_time {
     padding-top: 4px;
     padding-right: 10px;
-    font-size: 11px;
+    font-size: 12px;
     text-align: right;
 }
 .post .post_header .post_title {
-    font-size: 14px;        
+    /*font-size: 14px;*/
     color: #3e9314;
     margin: 3px 0px 0px 0px;
     white-space: normal;
@@ -567,7 +571,7 @@ label.in-line{
 .post .post_body {
     white-space: normal;
     padding: 10px 5px;
-    font-size: 14px;
+    font-size: 12px;
 }
 .post .post_body img {
     width: 90%;
