@@ -2,7 +2,7 @@
 class ControllerAccountRegister extends Controller {
 	private $error = array();
 
-	public function index(){
+	public function register(){
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
@@ -33,6 +33,49 @@ class ControllerAccountRegister extends Controller {
 							  	  
 	  		$this->redirect($this->url->link('account/success'));
     	}
+    	
+    	if (isset($this->error['warning'])) {
+			$this->data['error_warning'] = $this->error['warning'];
+		} else {
+			$this->data['error_warning'] = '';
+		}
+		
+		if (isset($this->error['firstname'])) {
+			$this->data['error_firstname'] = $this->error['firstname'];
+		} else {
+			$this->data['error_firstname'] = '';
+		}	
+		
+		if (isset($this->error['lastname'])) {
+			$this->data['error_lastname'] = $this->error['lastname'];
+		} else {
+			$this->data['error_lastname'] = '';
+		}		
+	
+		if (isset($this->error['email'])) {
+			$this->data['error_email'] = $this->error['email'];
+		} else {
+			$this->data['error_email'] = '';
+		}
+		
+		if (isset($this->error['telephone'])) {
+			$this->data['error_telephone'] = $this->error['telephone'];
+		} else {
+			$this->data['error_telephone'] = '';
+		}
+		
+		if (isset($this->error['password'])) {
+			$this->data['error_password'] = $this->error['password'];
+		} else {
+			$this->data['error_password'] = '';
+		}
+		
+ 		if (isset($this->error['confirm'])) {
+			$this->data['error_confirm'] = $this->error['confirm'];
+		} else {
+			$this->data['error_confirm'] = '';
+		}
+
     	exit;
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
