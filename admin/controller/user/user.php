@@ -63,6 +63,9 @@ class ControllerUserUser extends Controller {
 		$this->data['text_type'] = $this->language->get( 'text_type' );
 		$this->data['text_im'] = $this->language->get( 'text_im' );
 		$this->data['text_phone'] = $this->language->get( 'text_phone' );
+		$this->data['text_male'] = $this->language->get( 'text_male' );
+		$this->data['text_female'] = $this->language->get( 'text_female' );
+		$this->data['text_other'] = $this->language->get( 'text_other' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -87,6 +90,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_firstname'] = $this->language->get( 'entry_firstname' );
 		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
+		$this->data['entry_sex'] = $this->language->get( 'entry_sex' );
 		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
 		$this->data['entry_country'] = $this->language->get( 'entry_country' );
 		$this->data['entry_city'] = $this->language->get( 'entry_city' );
@@ -192,9 +196,16 @@ class ControllerUserUser extends Controller {
 			$this->data['lastname'] = '';
 		}
 
+		// Entry sex
+		if ( $user->getMeta() ){
+			$this->data['sex'] = $user->getMeta()->getSex();
+		}else {
+			$this->data['sex'] = '';
+		}
+
 		// Entry birthday
-		if ( $user->getMeta()->getBackground() ){
-			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('d/m/Y');
+		if ( $user->getMeta() ){
+			$this->data['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');
 		}else {
 			$this->data['birthday'] = '';
 		}
@@ -851,6 +862,9 @@ class ControllerUserUser extends Controller {
 		$this->data['text_type'] = $this->language->get( 'text_type' );
 		$this->data['text_im'] = $this->language->get( 'text_im' );
 		$this->data['text_phone'] = $this->language->get( 'text_phone' );
+		$this->data['text_male'] = $this->language->get( 'text_male' );
+		$this->data['text_female'] = $this->language->get( 'text_female' );
+		$this->data['text_other'] = $this->language->get( 'text_other' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -875,6 +889,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_firstname'] = $this->language->get( 'entry_firstname' );
 		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
+		$this->data['entry_sex'] = $this->language->get( 'entry_sex' );
 		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
 		$this->data['entry_postal_code'] = $this->language->get( 'entry_postal_code' );
@@ -1036,11 +1051,20 @@ class ControllerUserUser extends Controller {
 			$this->data['lastname'] = '';
 		}
 
+		// Entry sex
+		if ( isset($this->request->post['meta']['sex']) ){
+			$this->data['sex'] = $this->request->post['meta']['sex'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['sex'] = $user->getMeta()->getSex();
+		}else {
+			$this->data['sex'] = 1;
+		}
+
 		// Entry birthday
-		if ( isset($this->request->post['background']['birthday']) ){
-			$this->data['birthday'] = $this->request->post['background']['birthday'];
-		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
-			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('m/d/Y');
+		if ( isset($this->request->post['meta']['birthday']) ){
+			$this->data['birthday'] = $this->request->post['meta']['birthday'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['birthday'] = $user->getMeta()->getBirthday()->format('m/d/Y');
 		}else {
 			$this->data['birthday'] = '';
 		}

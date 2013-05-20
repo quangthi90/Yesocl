@@ -61,8 +61,15 @@ class ModelUserUser extends Doctrine {
 			return false;
 		}
 
+		// sex is required
+		if ( isset($data['meta']['sex']) || empty($data['meta']['sex']) || $data['meta']['sex'] < 0 || $data['meta']['sex'] > 2 ){
+			$data['meta']['sex'] = 1;
+		}else {
+			$data['meta']['sex'] = (int)$data['meta']['sex'];
+		}
+
 		// Birthday is required
-		if ( !isset($data['background']['birthday']) || empty($data['background']['birthday']) ){
+		if ( !isset($data['meta']['birthday']) || empty($data['meta']['birthday']) ){
 			return false;
 		}
 
@@ -217,7 +224,6 @@ class ModelUserUser extends Doctrine {
 
 		// Create Background
 		$background = new Background();
-		$background->setBirthday( new \Datetime( $data['background']['birthday'] ) );
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
@@ -284,6 +290,8 @@ class ModelUserUser extends Doctrine {
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setBirthday( new \Datetime( $data['background']['birthday'] ) );
+		$meta->setSex( $data['meta']['sex'] );
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
@@ -372,8 +380,15 @@ class ModelUserUser extends Doctrine {
 			return false;
 		}
 
+		// sex is required
+		if ( isset($data['meta']['sex']) || empty($data['meta']['sex']) || $data['meta']['sex'] < 0 || $data['meta']['sex'] > 2 ){
+			$data['meta']['sex'] = 1;
+		}else {
+			$data['meta']['sex'] = (int)$data['meta']['sex'];
+		}
+
 		// Birthday is required
-		if ( !isset($data['background']['birthday']) || empty($data['background']['birthday']) ){
+		if ( !isset($data['meta']['birthday']) || empty($data['meta']['birthday']) ){
 			return false;
 		}
 
@@ -528,7 +543,6 @@ class ModelUserUser extends Doctrine {
 
 		// Create Background
 		$background = new Background();
-		$background->setBirthday(new \Datetime( $data['background']['birthday'] ));
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
@@ -595,6 +609,8 @@ class ModelUserUser extends Doctrine {
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setSex( $data['meta']['sex'] );
+		$meta->setBirthday(new \Datetime( $data['background']['birthday'] ));
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );

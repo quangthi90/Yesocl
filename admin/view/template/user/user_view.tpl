@@ -91,7 +91,25 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_birthday; ?></td>
-            <td><input disabled="disabled" required="required" class="input-medium date" type="text" name="background[birthday]" value="<?php echo $birthday; ?>" /></td>
+            <td><input disabled="disabled" required="required" class="input-medium date" type="text" name="meta[birthday]" value="<?php echo $birthday; ?>" /></td>
+          </tr>
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_sex; ?></td>
+            <td><select disabled="disabled" required="required" class="input-medium" name="meta[sex]" >
+            <?php if ($sex == 1) { ?>
+            <option value="1" selected="selected"><?php echo $text_male; ?></option>
+            <option value="0"><?php echo $text_female; ?></option>
+            <option value="2"><?php echo $text_other; ?></option>
+            <?php }elseif ($sex == 2) { ?>
+            <option value="1"><?php echo $text_male; ?></option>
+            <option value="0"><?php echo $text_female; ?></option>
+            <option value="2" selected="selected"><?php echo $text_other; ?></option>
+            <?php }else { ?>
+            <option value="1"><?php echo $text_male; ?></option>
+            <option value="0" selected="selected"><?php echo $text_female; ?></option>
+            <option value="2"><?php echo $text_other; ?></option>
+            <?php } ?>
+            </select></td>
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_marital_status; ?></td>

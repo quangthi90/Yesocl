@@ -23,6 +23,12 @@ Class Meta {
 	 */
 	private $lastname;
 
+    /** @MongoDB\Date */
+	private $birthday;
+
+    /** @MongoDB\Int */
+	private $sex;
+
 	/** 
 	 * @MongoDB\String 
 	 */
@@ -86,6 +92,22 @@ Class Meta {
 
 	public function getLastname(){
 		return $this->lastname;
+	}
+
+	public function setBirthday( $birthday ){
+		$this->birthday = $birthday;
+	}
+
+	public function getSex(){
+		return $this->sex;
+	}
+
+	public function setSex( $sex ){
+		$this->sex = $sex;
+	}
+
+	public function getBirthday(){
+		return $this->birthday;
 	}
 
 	public function setHeadingLine( $headingLine ){
