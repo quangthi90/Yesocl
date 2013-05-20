@@ -72,7 +72,8 @@ foreach ($configs as $setting) {
 		$config->set( $setting->getKey(), $setting->getValue() );
 	}
 }
-$config->load( 'action' );
+$config->load( 'title' );
+$config->load( 'user' );
 
 /*if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
@@ -240,7 +241,7 @@ if ( $customer->isLogged() ) {
 	if (isset($request->get['route'])) {
 		$action = new Action($request->get['route']);
 	} else {
-		$action = new Action('common/home');
+		$action = new Action('welcome/home');
 	}
 }else{
 	if (isset($request->get['route']) && $request->get['route'] == 'account/login') {
