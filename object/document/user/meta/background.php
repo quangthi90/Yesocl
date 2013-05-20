@@ -20,9 +20,6 @@ Class Background {
     /** @MongoDB\String */
     private $interest;
 
-    /** @MongoDB\Date */
-	private $birthday;
-
 	/** @MongoDB\Boolean */
     private $maritalStatus;
 
@@ -63,14 +60,6 @@ Class Background {
 
 	public function getInterest(){
 		return $this->interest;
-	}
-
-	public function setBirthday( $birthday ){
-		$this->birthday = $birthday;
-	}
-
-	public function getBirthday(){
-		return $this->birthday;
 	}
 
 	public function setMaritalStatus( $maritalStatus ){
