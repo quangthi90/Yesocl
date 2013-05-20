@@ -926,7 +926,6 @@ class ControllerUserUser extends Controller {
 
 		// code
 		$this->load->model( 'setting/config' );
-		$this->load->config( 'datatype' );
 		$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
 
 		$this->data['code_industry'] = $this->config->get( 'datatype_industry' );

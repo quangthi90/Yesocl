@@ -1,29 +1,43 @@
 <?php
-class ModelAccountCustomer extends Model {
+use Document\User\User,
+	Document\User\Meta,
+	Document\User\Meta\Email,
+	Document\User\Meta\Background;
+
+class ModelAccountCustomer extends Doctrine {
 	public function addCustomer($data) {
-		if (isset($data['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($data['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+		$user_config = $this->config->get('user');
+
+		/*if (isset($data['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($data['customer_group_id'], $this->config->get('config_customer_group_display'))) {
 			$customer_group_id = $data['customer_group_id'];
 		} else {
 			$customer_group_id = $this->config->get('config_customer_group_id');
-		}
+		}*/
 		
-		$this->load->model('account/customer_group');
+		$customer_group_info = $this->dm->getRepository('Document\User\Group')->findOneByName( $user_config['default']['group_name']);
 		
-		$customer_group_info = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
-		
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "customer SET store_id = '" . (int)$this->config->get('config_store_id') . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "', password = '" . $this->db->escape(md5($data['password'])) . "', newsletter = '" . (isset($data['newsletter']) ? (int)$data['newsletter'] : 0) . "', customer_group_id = '" . (int)$customer_group_id . "', ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', status = '1', approved = '" . (int)!$customer_group_info['approval'] . "', date_added = NOW()");
-      	
-		$customer_id = $this->db->getLastId();
-			
-      	$this->db->query("INSERT INTO " . DB_PREFIX . "address SET customer_id = '" . (int)$customer_id . "', firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', company = '" . $this->db->escape($data['company']) . "', company_id = '" . $this->db->escape($data['company_id']) . "', tax_id = '" . $this->db->escape($data['tax_id']) . "', address_1 = '" . $this->db->escape($data['address_1']) . "', address_2 = '" . $this->db->escape($data['address_2']) . "', city = '" . $this->db->escape($data['city']) . "', postcode = '" . $this->db->escape($data['postcode']) . "', country_id = '" . (int)$data['country_id'] . "', zone_id = '" . (int)$data['zone_id'] . "'");
-		
-		$address_id = $this->db->getLastId();
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET address_id = '" . (int)$address_id . "' WHERE customer_id = '" . (int)$customer_id . "'");
+		$background = new Background();
+		$background->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
 		
-		$this->language->load('mail/customer');
+		$meta = new Meta();
+		$meta->setFirstname( $data['firstname'] );
+		$meta->setLastname( $data['lastname'] );
+
+		$email = new Email();
+		$email->setEmail( $data['email'] );
+		$email->setPrimary( true );
+
+      	$user = new User();
+      	$user->setMeta( $meta );
+      	$user->addEmail( $email );
+      	$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+
 		
-		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+		// $this->language->load('mail/customer');
+		
+		/*$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
 		
 		$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
 		
@@ -67,7 +81,9 @@ class ModelAccountCustomer extends Model {
 					$mail->send();
 				}
 			}
-		}
+		}*/
+
+		exit;
 	}
 	
 	public function editCustomer($data) {

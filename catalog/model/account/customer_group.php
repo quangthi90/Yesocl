@@ -1,5 +1,5 @@
 <?php
-class ModelAccountCustomerGroup extends Model {
+class ModelAccountCustomerGroup extends Doctrine {
 	public function getCustomerGroup($customer_group_id) {
 		$query = $this->db->query("SELECT DISTINCT * FROM " . DB_PREFIX . "customer_group WHERE customer_group_id = '" . (int)$customer_group_id . "'");
 		
