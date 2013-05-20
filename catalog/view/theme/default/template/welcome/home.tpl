@@ -59,9 +59,9 @@
                 	<span class="add-on" style= "height: 18px;width: 48px;">Sex</span>
 	                <select name="sex" id="reg-sex" style="width: 312px;">
 	                    <option>-- Select sex --</option>
-	                    <option>Male</option>
-	                    <option>Female</option>
-	                    <option>Unknow</option>
+	                    <option value="1">Male</option>
+	                    <option value="2">Female</option>
+	                    <option value="0">Unknow</option>
 	                </select>
             	</div>
             </div>

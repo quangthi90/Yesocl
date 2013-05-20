@@ -1,8 +1,7 @@
 <?php
 use Document\User\User,
 	Document\User\Meta,
-	Document\User\Meta\Email,
-	Document\User\Meta\Background;
+	Document\User\Meta\Email;
 
 class ModelAccountCustomer extends Doctrine {
 	public function addCustomer($data) {
@@ -17,13 +16,12 @@ class ModelAccountCustomer extends Doctrine {
 		$customer_group_info = $this->dm->getRepository('Document\User\Group')->findOneByName( $user_config['default']['group_name']);
 		
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-
-		$background = new Background();
-		$background->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
 		
 		$meta = new Meta();
 		$meta->setFirstname( $data['firstname'] );
 		$meta->setLastname( $data['lastname'] );
+		$meta->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
+		$meta->setSex( $data['sex'] );
 
 		$email = new Email();
 		$email->setEmail( $data['email'] );
@@ -34,7 +32,8 @@ class ModelAccountCustomer extends Doctrine {
       	$user->addEmail( $email );
       	$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 
-		
+      	$this->dm->persist( $user );
+		$this->dm->flush();
 		// $this->language->load('mail/customer');
 		
 		/*$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
@@ -82,8 +81,6 @@ class ModelAccountCustomer extends Doctrine {
 				}
 			}
 		}*/
-
-		exit;
 	}
 	
 	public function editCustomer($data) {
@@ -105,9 +102,12 @@ class ModelAccountCustomer extends Doctrine {
 	}
 	
 	public function getCustomerByEmail($email) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE email = '" . $this->db->escape($email) . "'");
-		
-		return $query->row;
+		$query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+			'status' => true,
+			'emails.email' => $email
+		));
+
+		return $query;
 	}
 		
 	public function getCustomerByToken($token) {
