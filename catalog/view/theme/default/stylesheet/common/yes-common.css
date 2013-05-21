@@ -85,6 +85,7 @@ textarea, input[type="text"], input[type="password"] {
 .left { text-align: left;}
 .right { text-align: right;}
 .center { text-align: center;}
+.fixed {position: fixed;}
 
 select 
 {
@@ -199,6 +200,14 @@ i.icon-2x{
   font-size: 16px;
 }
 
+.nicescroll-rails > div {
+  background-color: #424242;
+}
+
+.nicescroll-rails:hover > div {
+  background-color: #6CB13C;
+}
+
 /*FORM*/
 .y-frm
 {
@@ -305,7 +314,7 @@ label.in-line{
     right:0px;
     bottom: 40px;    
     background: #ffffff url(../../image/content_bg.png) repeat-x top left;
-    overflow-y: hidden;
+    overflow-y: auto;
     overflow-x: auto;
 }
 
@@ -671,4 +680,51 @@ label.in-line{
 .nav > li > a:focus > i{
   background-color: #fff;
   color: #3b8f39;
+}
+
+/*Header of group*/
+.group-header {
+  height: 30px;
+  border: 1px solid #6CB13C;
+  -webkit-box-shadow: 1px 1px 1px #ddd;
+  -moz-box-shadow: 1px 1px 1px #ddd;
+  box-shadow: 1px 1px 1px #ddd;
+  margin-bottom: 15px;
+  background: #f9fcf7; /* Old browsers */
+  background: -moz-linear-gradient(top,  #f9fcf7 0%, #f5f9f0 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9fcf7), color-stop(100%,#f5f9f0)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #f9fcf7 0%,#f5f9f0 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #f9fcf7 0%,#f5f9f0 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #f9fcf7 0%,#f5f9f0 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #f9fcf7 0%,#f5f9f0 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9fcf7', endColorstr='#f5f9f0',GradientType=0 ); /* IE6-9 */
+}
+
+.group-header > div > div{
+  padding: 5px;
+  font-weight: bold;  
+}
+
+.group-header .link-btn {
+  background-color: #6CB13C;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 15px;
+}
+
+.group-header .link-btn a {
+  color: #fff;
+}
+
+.group-header .post-category {
+  text-transform: uppercase;
+}
+
+.group-header .post-action {
+  text-align: right;
+}
+
+.group-header .post-action a {
+  margin-left: 10px;
+  font-size: 11px;
 }

@@ -43,3 +43,11 @@ function makeScroll(item) {
 	//Scroll:
 	$('#' + item).niceScroll();	
 }
+
+function makeScrollWithoutCalResize(item) {
+	$('#' + item).niceScroll();	
+}
+
+function makeVerticalCommentBox() {
+	$('#comment-box .y-box-content').niceScroll();		
+}

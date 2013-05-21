@@ -50,7 +50,7 @@
       cursoropacitymin:0,
       cursoropacitymax:1,
       cursorcolor:"#424242",
-      cursorwidth:"8px",
+      cursorwidth:"10px",
       cursorborder:"1px solid #fff",
       cursorborderradius:"1px",
       scrollspeed:60,
@@ -681,7 +681,6 @@
         var cursor = $(document.createElement('div'));
         cursor.css({
           position:"relative",top:0,"float":"right",width:self.opt.cursorwidth,height:"0px",
-          'background-color':self.opt.cursorcolor,
           border:self.opt.cursorborder,
           'background-clip':'padding-box',
           '-webkit-border-radius':self.opt.cursorborderradius,
@@ -745,7 +744,6 @@
           var cursor = $(document.createElement('div'));
           cursor.css({
             position:"relative",top:0,height:self.opt.cursorwidth,width:"0px",
-            'background-color':self.opt.cursorcolor,
             border:self.opt.cursorborder,
             'background-clip':'padding-box',
             '-webkit-border-radius':self.opt.cursorborderradius,
