@@ -241,10 +241,10 @@ if ( $customer->isLogged() ) {
 	if (isset($request->get['route'])) {
 		$action = new Action($request->get['route']);
 	} else {
-		$action = new Action('welcome/home');
+		$action = new Action('common/home');
 	}
 }else{
-	if (isset($request->get['route']) && $request->get['route'] == 'account/login') {
+	if (isset($request->get['route']) && ($request->get['route'] == 'account/login' || $request->get['route'] == 'account/register/register')) {
 		$action = new Action($request->get['route']);
 	}else{
 		$action = new Action('welcome/home');

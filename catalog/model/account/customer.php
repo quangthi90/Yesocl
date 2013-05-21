@@ -30,6 +30,9 @@ class ModelAccountCustomer extends Doctrine {
       	$user = new User();
       	$user->setMeta( $meta );
       	$user->addEmail( $email );
+      	$user->setSalt( $salt );
+      	$user->setStatus( true );
+      	$user->setGroupUser( $customer_group_info );
       	$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 
       	$this->dm->persist( $user );

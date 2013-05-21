@@ -16,7 +16,7 @@ class ControllerWelcomeHome extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 
-		$this->data['action'] = $this->url->link('account/register', '', 'SSL');
+		$this->data['action'] = $this->url->link('account/register/register', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/welcome/home.tpl';

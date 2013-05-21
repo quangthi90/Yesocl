@@ -23,16 +23,18 @@
 	Register.prototype.attachEvents = function(){
 		var that = this;
 
-		this.$el.find('.warning').hide();
-
 		this.$reg_btn.click(function(e) {
+			that.$el.find('.warning').addClass('hidden');
+
 			if(that.$reg_btn.hasClass('disabled')) {
 				e.preventDefault();
 
 				return false;
 			}
 			
-			that.validate();
+			if(that.validate() == false){
+				return false;
+			}
 			
 			that.data = {
 				firstname 	: that.$firstname.val(),
@@ -49,59 +51,80 @@
 		});
 	};
 
+	Register.prototype.submit = function($button){
+		that = this;
+
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: this.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if(data.success == 'ok'){
+				window.location.reload();
+			}else{
+				$('.top-warning').removeClass("hidden");
+			}
+		});
+	};
+
 	Register.prototype.validate = function($button){
 		if (this.$firstname.val() == ''){
-			this.$firstname.parent().find('.warning').show();
+			this.$firstname.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$lastname.val() == ''){
-			this.$lastname.parent().find('.warning').show();
+			this.$lastname.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$email.val() == ''){
-			this.$email.parent().find('.warning').show();
+			this.$email.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$password.val() == ''){
-			this.$password.parent().find('.warning').show();
+			this.$password.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$confirm.val() == ''){
-			this.$confirm.parent().find('.warning').show();
+			this.$confirm.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$password.val() != this.$confirm.val()){
-			this.$password.parent().find('.warning').show();
+			this.$password.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$day.val() == 0){
-			this.$day.parent().find('.warning').show();
+			this.$day.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$month.val() == 0){
-			this.$month.parent().find('.warning').show();
+			this.$month.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$year.val() == 0){
-			this.$year.parent().find('.warning').show();
+			this.$year.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$sex.val() == 0){
-			this.$sex.parent().find('.warning').show();
+			this.$sex.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 	};
 
-	/*AddToCartBtn.prototype.triggerProgress = function($el, promise)
+	Register.prototype.triggerProgress = function($el, promise)
 	{
 		var $spinner = $('<i class="icon-refresh icon-spin">');
 		var f        = function() {
@@ -112,7 +135,7 @@
 		$el.addClass('disabled').prepend($spinner);
 
 		promise.then(f, f);
-	};*/
+	};
 
 	$(function(){
 		$('.reg-form').each(function(){

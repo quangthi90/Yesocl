@@ -19,22 +19,22 @@
     </div>
     <div class="frm-content">
     	<form class="reg-form" action="{{ action }}" method="post">
+    		<div class="top-warning warning hidden">Warning!!</div>
     		<div class="controls controls-row">
     			<input name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" />
     			<input name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" />
-    			<div class="warning">warning</div>
+    			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls">
     			<input name="email" type="text" class="input-block-level" id="reg-email" placeholder="E-mail" />
-    			<div class="warning">warning</div>
+    			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls controls-row">
     			<input name="password" type="password" class="span2"  id="password" placeholder="Password" />
     			<input name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" />
-    			<div class="warning">warning</div>
+    			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls" style="margin-bottom: 10px;">
-                <input type="hidden" id="reg-birthay" />
                 <div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;">Birthday</span>
                 	<select name="day" class="birthday" id="reg-birthay-day">
@@ -55,7 +55,7 @@
 	                    <option>2012</option>
 	                    <option>2013</option>
 	                </select>
-	                <div class="warning">warning</div>
+	                <div class="warning hidden">warning</div>
                 </div>                
             </div>
             <div class="controls">
@@ -67,7 +67,7 @@
 	                    <option value="2">Female</option>
 	                    <option value="3">Unknow</option>
 	                </select>
-	                <div class="warning">warning</div>
+	                <div class="warning hidden">warning</div>
             	</div>
             </div>
             <div class="controls">

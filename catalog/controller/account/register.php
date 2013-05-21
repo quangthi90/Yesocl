@@ -13,25 +13,14 @@ class ControllerAccountRegister extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_customer->addCustomer($this->request->post);
-			exit;
+			
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
 			
 			unset($this->session->data['guest']);
-			
-			// Default Shipping Address
-			if ($this->config->get('config_tax_customer') == 'shipping') {
-				$this->session->data['shipping_country_id'] = $this->request->post['country_id'];
-				$this->session->data['shipping_zone_id'] = $this->request->post['zone_id'];
-				$this->session->data['shipping_postcode'] = $this->request->post['postcode'];				
-			}
-			
-			// Default Payment Address
-			if ($this->config->get('config_tax_customer') == 'payment') {
-				$this->session->data['payment_country_id'] = $this->request->post['country_id'];
-				$this->session->data['payment_zone_id'] = $this->request->post['zone_id'];			
-			}
-							  	  
-	  		$this->redirect($this->url->link('account/success'));
+
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
     	}
     	
     	if (isset($this->error['warning'])) {
@@ -58,12 +47,6 @@ class ControllerAccountRegister extends Controller {
 			$this->data['error_email'] = '';
 		}
 		
-		if (isset($this->error['telephone'])) {
-			$this->data['error_telephone'] = $this->error['telephone'];
-		} else {
-			$this->data['error_telephone'] = '';
-		}
-		
 		if (isset($this->error['password'])) {
 			$this->data['error_password'] = $this->error['password'];
 		} else {
@@ -75,26 +58,11 @@ class ControllerAccountRegister extends Controller {
 		} else {
 			$this->data['error_confirm'] = '';
 		}
-
-    	exit;
-		$this->document->setTitle($this->config->get('config_title'));
-		$this->document->setDescription($this->config->get('config_meta_description'));
-
-		$this->data['heading_title'] = $this->config->get('config_title');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
-		} else {
-			$this->template = 'default/template/account/register/register.tpl';
-		}
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
 		
-		$this->children = array(
-			'common/column_left',
-			'common/footer',
-			'common/header'
-		);
-										
-		$this->response->setOutput($this->twig_render());
 	}
 	      
   	/*public function index() {
@@ -473,10 +441,6 @@ class ControllerAccountRegister extends Controller {
   //   	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
   //     		$this->error['password'] = $this->language->get('error_password');
   //   	}
-
-    	if ($this->request->post['confirm'] != $this->request->post['password']) {
-      		$this->error['confirm'] = $this->language->get('error_confirm');
-    	}
 		
 		// if ($this->config->get('config_account_id')) {
 		// 	$this->load->model('catalog/information');
