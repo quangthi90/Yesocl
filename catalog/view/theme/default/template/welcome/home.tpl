@@ -18,51 +18,56 @@
         Join <strong>YESOCL.com</strong>
     </div>
     <div class="frm-content">
-    	<form action="{{ action }}" method="post">
+    	<form class="reg-form" action="{{ action }}" method="post">
     		<div class="controls controls-row">
     			<input name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" />
     			<input name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" />
+    			<div class="warning">warning</div>
     		</div>
     		<div class="controls">
     			<input name="email" type="text" class="input-block-level" id="reg-email" placeholder="E-mail" />
+    			<div class="warning">warning</div>
     		</div>
     		<div class="controls controls-row">
     			<input name="password" type="password" class="span2"  id="password" placeholder="Password" />
     			<input name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" />
+    			<div class="warning">warning</div>
     		</div>
     		<div class="controls" style="margin-bottom: 10px;">
                 <input type="hidden" id="reg-birthay" />
                 <div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;">Birthday</span>
                 	<select name="day" class="birthday" id="reg-birthay-day">
-	                    <option>-- Day --</option>
+	                    <option value="0">-- Day --</option>
 	                    {% for i in 1..31 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
 	                <select name="month" class="birthday" id="reg-birthay-month">
-	                    <option>-- Month --</option>
+	                    <option value="0">-- Month --</option>
 	                    {% for i in 1..12 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
 	                <select name="year" class="birthday" id="reg-birthay-year">
-	                    <option>-- Year --</option>
+	                    <option value="0">-- Year --</option>
 	                    <option>2011</option>
 	                    <option>2012</option>
 	                    <option>2013</option>
 	                </select>
+	                <div class="warning">warning</div>
                 </div>                
             </div>
             <div class="controls">
             	<div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;width: 48px;">Sex</span>
 	                <select name="sex" id="reg-sex" style="width: 312px;">
-	                    <option>-- Select sex --</option>
+	                    <option value="0">-- Select sex --</option>
 	                    <option value="1">Male</option>
 	                    <option value="2">Female</option>
-	                    <option value="0">Unknow</option>
+	                    <option value="3">Unknow</option>
 	                </select>
+	                <div class="warning">warning</div>
             	</div>
             </div>
             <div class="controls">
