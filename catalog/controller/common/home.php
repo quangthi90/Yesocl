@@ -9,7 +9,7 @@ class ControllerCommonHome extends Controller {
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
-
+		
 		$this->data['heading_title'] = $this->config->get('config_title');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
@@ -20,8 +20,8 @@ class ControllerCommonHome extends Controller {
 		
 		$this->children = array(
 			'common/sidebar_control',			
-			'common/content_top',
-			'common/content_bottom',
+			// 'common/content_top',
+			// 'common/content_bottom',
 			'common/footer',
 			'common/header'
 		);

@@ -40,7 +40,7 @@ class ControllerAccountLogin extends Controller {
 			}
 		}		
 		
-		if ($this->customer->isLogged()) {  
+		if ($this->customer->isLogged()) {
       		$this->redirect($this->url->link('account/account', '', 'SSL'));
     	}
 	
@@ -50,36 +50,12 @@ class ControllerAccountLogin extends Controller {
 								
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			unset($this->session->data['guest']);
-			
-			// Default Shipping Address
-			$this->load->model('account/address');
-				
-			$address_info = $this->model_account_address->getAddress($this->customer->getAddressId());
-									
-			if ($address_info) {
-				if ($this->config->get('config_tax_customer') == 'shipping') {
-					$this->session->data['shipping_country_id'] = $address_info['country_id'];
-					$this->session->data['shipping_zone_id'] = $address_info['zone_id'];
-					$this->session->data['shipping_postcode'] = $address_info['postcode'];	
-				}
-				
-				if ($this->config->get('config_tax_customer') == 'payment') {
-					$this->session->data['payment_country_id'] = $address_info['country_id'];
-					$this->session->data['payment_zone_id'] = $address_info['zone_id'];
-				}
-			} else {
-				unset($this->session->data['shipping_country_id']);	
-				unset($this->session->data['shipping_zone_id']);	
-				unset($this->session->data['shipping_postcode']);
-				unset($this->session->data['payment_country_id']);	
-				unset($this->session->data['payment_zone_id']);	
-			}
 							
 			// Added strpos check to pass McAfee PCI compliance test (http://forum.opencart.com/viewtopic.php?f=10&t=12043&p=151494#p151295)
 			if (isset($this->request->post['redirect']) && (strpos($this->request->post['redirect'], $this->config->get('config_url')) !== false || strpos($this->request->post['redirect'], $this->config->get('config_ssl')) !== false)) {
 				$this->redirect(str_replace('&amp;', '&', $this->request->post['redirect']));
 			} else {
-				$this->redirect($this->url->link('account/account', '', 'SSL')); 
+				$this->redirect($this->url->link('common/home', '', 'SSL')); 
 			}
     	}  
 		
@@ -166,27 +142,45 @@ class ControllerAccountLogin extends Controller {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
+			// 'common/column_left',
+			// 'common/column_right',
+			// 'common/content_top',
+			// 'common/content_bottom',
 			'common/footer',
 			'common/header'	
 		);
 						
 		$this->response->setOutput($this->render());
   	}
+
+  	public function login() {
+		$this->load->model('account/customer');
+	
+    	$this->language->load('account/login');
+								
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			unset($this->session->data['guest']);
+							
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}  
+		
+      	if (isset($this->error['warning'])) {
+			$this->data['error_warning'] = $this->error['warning'];
+		} else {
+			$this->data['error_warning'] = '';
+		}
+						
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+  	}
   
   	private function validate() {
     	if (!$this->customer->login($this->request->post['email'], $this->request->post['password'])) {
       		$this->error['warning'] = $this->language->get('error_login');
-    	}
-	
-		$customer_info = $this->model_account_customer->getCustomerByEmail($this->request->post['email']);
-		
-    	if ($customer_info && !$customer_info['approved']) {
-      		$this->error['warning'] = $this->language->get('error_approved');
-    	}		
+    	}	
 		
     	if (!$this->error) {
       		return true;
