@@ -27,6 +27,9 @@ Class Post {
 	
 	/** @MongoDB\Date */
 	private $created;
+
+	/** @MongoDB\String */
+	private $author;
 	
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="posts") */
     private $user;
@@ -117,8 +120,17 @@ Class Post {
 		$this->created = new \DateTime();
 	}
 
+	public function setAuthor( $author ){
+		$this->author = $author;
+	}
+
+	public function getAuthor(){
+		return $this->author;
+	}
+
 	public function setUser( $user ){
 		$this->user = $user;
+		$this->author = $user->getUsername();
 	}
 
 	public function getUser(){

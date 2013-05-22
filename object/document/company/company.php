@@ -52,6 +52,11 @@ Class Company {
 	 */
 	private $status;
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $slug;
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -80,6 +85,14 @@ Class Company {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setLogo( $logo ){

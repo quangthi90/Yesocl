@@ -35,8 +35,8 @@ class Url {
 
 	/* Call this function to create a slug from $string */
 	public function create_slug($string){
-		$string = remove_accents($string);
-		$string = symbols_to_words($string);
+		$string = $this->remove_accents($string);
+		$string = $this->symbols_to_words($string);
 		$string = strtolower($string); // Force lowercase
 		$space_chars = array(
 		 	" ", // space
@@ -80,7 +80,7 @@ class Url {
 	 * @param string $string Text that might have accent characters
 	 * @return string Filtered string with replaced "nice" characters.
 	 */
-	function remove_accents($string) {
+	private function remove_accents($string) {
  		if(!preg_match('/[\x80-\xff]/', $string)){
   			return $string;
  		}
@@ -206,7 +206,7 @@ class Url {
  		return $string;
 	}
 
-	function symbols_to_words($output){
+	private function symbols_to_words($output){
 	 	$output = str_replace('@', ' at ', $output);
 	 	$output = str_replace('%', ' percent ', $output);
 	 	$output = str_replace('&', ' and ', $output);

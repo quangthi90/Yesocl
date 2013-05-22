@@ -46,6 +46,9 @@ foreach ($configs as $setting) {
 	}
 }
 $config->load( 'title' );
+$config->load( 'user' );
+$config->load( 'company' );
+
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 // Url
