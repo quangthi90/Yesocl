@@ -1,0 +1,95 @@
+#y-content {
+	
+}
+
+#y-content .profiles-box {
+	
+}
+
+#y-content .profiles-box-header {
+	line-height: 45px;
+	border: 1px solid #6db23b;
+}
+
+#y-content .profiles-box-header-title {
+	background: #6db23b;
+	text-align: center;
+	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+#y-content .profiles-box-header-next {
+	padding: 0px 8px;
+	margin-right: 10px;
+	float: right;
+}
+
+#y-content .profiles-box-header-next i {
+	line-height: 28px;
+	font-size: 18px;
+}
+
+#y-content .profiles-box-content {
+	min-height: 100%;
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid #c0c0c0;
+}
+
+#y-content .profiles-box-content-title {
+	margin-left: 10px;
+	padding: 0px 8px;
+	margin-right: 10px;
+	line-height: 28px;
+	color: #6db23b;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#y-content .profiles-btn-edit {
+	padding: 0px 8px;
+	margin-right: 10px;
+	float: right;
+}
+
+#y-content .profiles-btn-edit i {
+	line-height: 28px;
+	font-size: 18px;
+}
+
+#y-content .profiles-box-content-main {
+	padding-top: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+#y-content .profiles-line {
+	border-top: 1px solid #c0c0c0;
+	height: 10px;
+}
+
+#y-content .profiles-label {
+	color: #6db23b;
+}
+
+#y-content .profile-box-item {
+
+}
+
+#y-content .profile-box-item-label {
+	color: #6db23b;
+	margin-bottom: 10px;
+}
+
+#y-content .profile-box-item-content {
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #c0c0c0;
+}
+
+#y-content .profiles-box-item2 {
+	margin-top: 10px;
+	margin-right: 10px;
+}

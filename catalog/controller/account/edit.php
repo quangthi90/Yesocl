@@ -3,6 +3,22 @@ class ControllerAccountEdit extends Controller {
 	private $error = array();
 
 	public function index() {
+
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/profiles/profiles.tpl';
+		} else {
+			$this->template = 'default/template/account/profiles/profiles.tpl';
+		}
+		
+		$this->children = array(
+			'common/sidebar_control',
+			'common/footer',
+			'common/header'	
+		);
+				
+		$this->response->setOutput($this->twig_render());
+
+		/*
 		if (!$this->customer->isLogged()) {
 			$this->session->data['redirect'] = $this->url->link('account/edit', '', 'SSL');
 
@@ -149,7 +165,8 @@ class ControllerAccountEdit extends Controller {
 			'common/header'	
 		);
 						
-		$this->response->setOutput($this->render());	
+		$this->response->setOutput($this->render());
+		*/	
 	}
 
 	private function validate() {
