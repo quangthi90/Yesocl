@@ -8,10 +8,10 @@
 		<div class="row-fluid sidebar-user sidebar-box">
 			<div class="sidebar-user-info">
 				<div class="sidebar-user-avatar">
-					<a href="/"><img src="image/template/user-avatar.png" /></a>
+					<a href="/"><img src="{{ user_info.avatar }}" /></a>
 				</div>
 				<div class="sidebar-user-name">
-					<a href="/">User Name</a>
+					<a href="/">{{ user_info.username }}</a>
 				</div>
 			</div>			
 		</div>
