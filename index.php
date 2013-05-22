@@ -176,7 +176,7 @@ if (isset($session->data['language']) && array_key_exists($session->data['langua
 } elseif ($detect) {
 	$code = $detect;
 } else {
-	$code = $config->get('config_language');
+	$code = "en";
 }
 
 if (!isset($session->data['language']) || $session->data['language'] != $code) {
