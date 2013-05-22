@@ -234,6 +234,7 @@ a:hover, a.active
 
 #y-content{
 	overflow: auto;
+	left: 0 !important;
 }
 
 #y-main-content{    
@@ -327,7 +328,6 @@ a:hover, a.active
 					#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-avatar > a > img{
 						max-width: 98%;
 						max-height: 98%;
-						margin: 15px;
 					}
 
 				#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name{

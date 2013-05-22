@@ -15,16 +15,17 @@
 
 		<!-- Common css -->
 		<link href="catalog/view/theme/default/stylesheet/common/yes.css" rel="stylesheet" media="screen" />
+		<link href="catalog/view/theme/default/stylesheet/common/yes-common.css" rel="stylesheet" media="screen" />
 
 		<!-- Custom css -->		
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
 	<body class="row-fluid">
-		<div id="y-sidebar" class="span2">	
-			{{ include(template_from_string( column_left )) }}
+		<div id="y-sidebar">	
+			{{ include(template_from_string( sidebar_control )) }}
 		</div>
-		<div id="y-container" class="span10">
+		<div id="y-container">
 			{{ include(template_from_string( header )) }}
 
 			{% block body %}
