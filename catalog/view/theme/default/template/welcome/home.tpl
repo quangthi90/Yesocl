@@ -73,7 +73,7 @@
             <div class="controls">
                 <label class="checkbox"><input type="checkbox" name="lg-remember" />I agree Yesocl's policy</label>
                 <br>
-                <button type="button" class="btn btn-ystandard">Sign up</button>
+                <button type="button" class="btn btn-ystandard btn-reg">Sign up</button>
             </div>
     	</form>
     </div>
@@ -82,6 +82,7 @@
 
 {% block javascript %}
 	<script type="text/javascript" src="catalog/view/javascript/register.js"></script>
+	<script type="text/javascript" src="catalog/view/javascript/account.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
         	//Join clicked:
