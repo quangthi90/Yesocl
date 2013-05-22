@@ -15,7 +15,7 @@
 
 		this.url		= $el.attr('action');
 
-		this.$reg_btn	= $el.find('.btn-ystandard');
+		this.$reg_btn	= $el.find('.btn-reg');
 
 		this.attachEvents();
 	}

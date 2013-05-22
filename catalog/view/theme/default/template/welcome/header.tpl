@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="span5 y-welcome-login">
-            <form action="{{ action }}" method="post" class="row-fluid">
+            <form action="{{ action }}" method="post" class="row-fluid login-form">
                 <div class="span5">
                     <div class="row-fluid">
                         <input name="email" type="text" placeholder="Email"  class="span12 input-welcome" />
@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="span2 button-login-welcome">
-                    <button type="submit" class="btn btn-success">Sign in</button>
+                    <button type="button" class="btn btn-success btn-login">Sign in</button>
                 </div>
             </form>
         </div> 

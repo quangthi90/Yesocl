@@ -176,7 +176,7 @@ if (isset($session->data['language']) && array_key_exists($session->data['langua
 } elseif ($detect) {
 	$code = $detect;
 } else {
-	$code = $config->get('config_language');
+	$code = "en";
 }
 
 if (!isset($session->data['language']) || $session->data['language'] != $code) {
@@ -244,7 +244,7 @@ if ( $customer->isLogged() ) {
 		$action = new Action('common/home');
 	}
 }else{
-	if (isset($request->get['route']) && ($request->get['route'] == 'account/login' || $request->get['route'] == 'account/register/register')) {
+	if (isset($request->get['route']) && ($request->get['route'] == 'account/login/login' || $request->get['route'] == 'account/register/register')) {
 		$action = new Action($request->get['route']);
 	}else{
 		$action = new Action('welcome/home');
