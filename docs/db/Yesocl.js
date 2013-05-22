@@ -2218,7 +2218,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("518f5ddb471deeb40900001d"),
+      "_id": ObjectId("519a556e471dee480b000009"),
       "email": "user1@test.com",
       "primary": true
     }
@@ -2229,12 +2229,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("518f5ddb471deeb409000014"),
+    "_id": ObjectId("519a556e471dee480b000000"),
     "firstname": "user1",
     "lastname": "yesocl",
+    "birthday": ISODate("2013-05-20T16:55:09.0Z"),
+    "sex": NumberInt(1),
     "headingLine": "",
     "location": {
-      "_id": ObjectId("518f5ddb471deeb409000015"),
+      "_id": ObjectId("519a556e471dee480b000001"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -2244,7 +2246,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("518f5ddb471deeb409000016"),
+        "_id": ObjectId("519a556e471dee480b000002"),
         "im": "user1",
         "type": "skype",
         "visible": "myfollow"
@@ -2252,7 +2254,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("518f5ddb471deeb409000017"),
+        "_id": ObjectId("519a556e471dee480b000003"),
         "phone": "0903000333",
         "type": "mobile",
         "visible": "myfollow"
@@ -2260,52 +2262,52 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("518f5ddb471deeb409000018"),
+        "_id": ObjectId("519a556e471dee480b000004"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("518f5ddb471deeb409000019"),
+      "_id": ObjectId("519a556e471dee480b000005"),
       "experiencies": [
         {
-          "_id": ObjectId("518f5ddb471deeb40900001a"),
+          "_id": ObjectId("519a556e471dee480b000006"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("518f5ddb471deeb40900001b"),
+            "_id": ObjectId("519a556e471dee480b000007"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T10:16:11.0Z"),
-          "ended": ISODate("2013-01-01T10:16:11.0Z"),
+          "started": ISODate("2013-01-01T17:55:09.0Z"),
+          "ended": ISODate("2013-01-01T17:55:09.0Z"),
           "current": false,
           "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("518f5ddb471deeb40900001c"),
+          "_id": ObjectId("519a556e471dee480b000008"),
           "school": "Vietnam National University - Ho Chi Minh City",
-          "school_id": "514af827913db48c05000014",
+          "school_id": "",
           "started": "2008",
           "ended": "2012",
           "degree": "Master Of Technology",
-          "degree_id": "514af917913db48c05000018",
+          "degree_id": "",
           "fieldOfStudy": "Information Technology",
-          "fieldOfStudy_id": "514af970913db48c0500001a",
+          "fieldOfStudy_id": "",
           "grace": "",
           "societies": "",
           "description": ""
         }
       ],
       "interest": "",
-      "birthday": ISODate("2013-05-14T22:00:00.0Z"),
       "maritalStatus": false,
       "adviceForContact": ""
     }
   },
-  "password": "8aeb538456e9fc680883f24c93bc7ca33175f91e",
+  "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
+  "salt": "09b2a07c9",
   "status": true,
   "username": "user1"
 });
@@ -2314,7 +2316,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
-      "_id": ObjectId("518f5f43471deeb409000029"),
+      "_id": ObjectId("519a557a471dee480b000013"),
       "email": "user2@test.com",
       "primary": true
     }
@@ -2325,12 +2327,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("518f5f43471deeb409000020"),
+    "_id": ObjectId("519a557a471dee480b00000a"),
     "firstname": "user2",
     "lastname": "yesocl",
+    "birthday": ISODate("2013-05-20T16:55:22.0Z"),
+    "sex": NumberInt(1),
     "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
     "location": {
-      "_id": ObjectId("518f5f43471deeb409000021"),
+      "_id": ObjectId("519a557a471dee480b00000b"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -2340,7 +2344,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("518f5f43471deeb409000022"),
+        "_id": ObjectId("519a557a471dee480b00000c"),
         "im": "user2",
         "type": "skype",
         "visible": "myfollow"
@@ -2348,7 +2352,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("518f5f43471deeb409000023"),
+        "_id": ObjectId("519a557a471dee480b00000d"),
         "phone": "0904000444",
         "type": "mobile",
         "visible": "myfollow"
@@ -2356,52 +2360,52 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("518f5f43471deeb409000024"),
+        "_id": ObjectId("519a557a471dee480b00000e"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("518f5f43471deeb409000025"),
+      "_id": ObjectId("519a557a471dee480b00000f"),
       "experiencies": [
         {
-          "_id": ObjectId("518f5f43471deeb409000026"),
+          "_id": ObjectId("519a557a471dee480b000010"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("518f5f43471deeb409000027"),
+            "_id": ObjectId("519a557a471dee480b000011"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T10:22:11.0Z"),
-          "ended": ISODate("2013-01-01T10:22:11.0Z"),
+          "started": ISODate("2013-01-01T17:55:22.0Z"),
+          "ended": ISODate("2013-01-01T17:55:22.0Z"),
           "current": false,
           "description": "Sed et utamur argumentum. Eum an habeo ubique efficiantur. Eu sea oporteat vituperatoribus, eos in graecis delicata persecuti. Mel an summo dicit eleifend. Copiosae quaestio mandamus vim et."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("518f5f43471deeb409000028"),
+          "_id": ObjectId("519a557a471dee480b000012"),
           "school": "University of Economics Ho Chi Minh City",
-          "school_id": "514af84e913db48c05000015",
+          "school_id": "",
           "started": "2009",
           "ended": "2013",
           "degree": "Master Of Technology",
-          "degree_id": "514af917913db48c05000018",
+          "degree_id": "",
           "fieldOfStudy": "Accounting",
-          "fieldOfStudy_id": "514af9b3913db48c0500001c",
+          "fieldOfStudy_id": "",
           "grace": "Oratio recusabo",
           "societies": "Amet inciderint ex nam, ei vide tota instructior mel. Ut dictas ancillae vix. Posidonium argumentum te sit, ea eius bonorum sea",
           "description": "Elitr regione an his, ad eirmod propriae quo, vel ut unum putant ancillae. Pri omnesque definiebas ex, an omnium reprehendunt sea. An iusto ludus iriure eos, omnes postea id eum. Has pertinacia inciderint ex. Et qui postea vidisse pertinacia. Ne sea probo voluptatibus, an aperiri sadipscing consectetuer eam, ex detraxit adipiscing vix."
         }
       ],
       "interest": "Eu nam eius consul aliquando, choro integre iuvaret no nec, ut pericula scripserit per. Nam eu alii idque, suas patrioque vituperata ex est.",
-      "birthday": ISODate("2013-05-12T22:00:00.0Z"),
       "maritalStatus": true,
       "adviceForContact": "Et vim quando vocent theophrastus, cetero ullamcorper ne his"
     }
   },
-  "password": "c79e61c5f29893efeef9265bf06ea18f8b61604c",
+  "password": "225d31b59e3e1de2d6d7c581e7e74e2cde897552",
+  "salt": "dc1668c45",
   "status": true,
   "username": "user2"
 });

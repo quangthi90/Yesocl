@@ -2,31 +2,67 @@
 class ControllerAccountRegister extends Controller {
 	private $error = array();
 
-	public function index(){
+	public function register(){
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
 			$this->data['base'] = $this->config->get('config_url');
 		}
 
-		$this->document->setTitle($this->config->get('config_title'));
-		$this->document->setDescription($this->config->get('config_meta_description'));
+		$this->load->model('account/customer');
 
-		$this->data['heading_title'] = $this->config->get('config_title');
-		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$this->model_account_customer->addCustomer($this->request->post);
+			
+			$this->customer->login($this->request->post['email'], $this->request->post['password']);
+			
+			unset($this->session->data['guest']);
+
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}
+    	
+    	if (isset($this->error['warning'])) {
+			$this->data['error_warning'] = $this->error['warning'];
 		} else {
-			$this->template = 'default/template/account/register/register.tpl';
+			$this->data['error_warning'] = '';
 		}
 		
-		$this->children = array(
-			'common/column_left',
-			'common/footer',
-			'common/header'
-		);
-										
-		$this->response->setOutput($this->twig_render());
+		if (isset($this->error['firstname'])) {
+			$this->data['error_firstname'] = $this->error['firstname'];
+		} else {
+			$this->data['error_firstname'] = '';
+		}	
+		
+		if (isset($this->error['lastname'])) {
+			$this->data['error_lastname'] = $this->error['lastname'];
+		} else {
+			$this->data['error_lastname'] = '';
+		}		
+	
+		if (isset($this->error['email'])) {
+			$this->data['error_email'] = $this->error['email'];
+		} else {
+			$this->data['error_email'] = '';
+		}
+		
+		if (isset($this->error['password'])) {
+			$this->data['error_password'] = $this->error['password'];
+		} else {
+			$this->data['error_password'] = '';
+		}
+		
+ 		if (isset($this->error['confirm'])) {
+			$this->data['error_confirm'] = $this->error['confirm'];
+		} else {
+			$this->data['error_confirm'] = '';
+		}
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+		
 	}
 	      
   	/*public function index() {
@@ -374,7 +410,7 @@ class ControllerAccountRegister extends Controller {
 		$this->response->setOutput($this->render());	
   	}*/
 
-  	/*private function validate() {
+  	private function validate() {
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['firstname'] = $this->language->get('error_firstname');
     	}
@@ -387,94 +423,41 @@ class ControllerAccountRegister extends Controller {
       		$this->error['email'] = $this->language->get('error_email');
     	}
 
-    	if ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
+    	if ($this->model_account_customer->getCustomerByEmail($this->request->post['email'])) {
       		$this->error['warning'] = $this->language->get('error_exists');
     	}
 		
-    	if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-      		$this->error['telephone'] = $this->language->get('error_telephone');
-    	}
-		
 		// Customer Group
-		$this->load->model('account/customer_group');
+		// $this->load->model('account/customer_group');
 		
-		if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-			$customer_group_id = $this->request->post['customer_group_id'];
-		} else {
-			$customer_group_id = $this->config->get('config_customer_group_id');
-		}
+		// if (isset($this->request->post['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->post['customer_group_id'], $this->config->get('config_customer_group_display'))) {
+		// 	$customer_group_id = $this->request->post['customer_group_id'];
+		// } else {
+		// 	$customer_group_id = $this->config->get('config_customer_group_id');
+		// }
 
-		$customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
-			
-		if ($customer_group) {	
-			// Company ID
-			if ($customer_group['company_id_display'] && $customer_group['company_id_required'] && !$this->request->post['company_id']) {
-				$this->error['company_id'] = $this->language->get('error_company_id');
-			}
-			
-			// Tax ID 
-			if ($customer_group['tax_id_display'] && $customer_group['tax_id_required'] && !$this->request->post['tax_id']) {
-				$this->error['tax_id'] = $this->language->get('error_tax_id');
-			}						
-		}
+		// $customer_group = $this->model_account_customer_group->getCustomerGroup($customer_group_id);
 		
-    	if ((utf8_strlen($this->request->post['address_1']) < 3) || (utf8_strlen($this->request->post['address_1']) > 128)) {
-      		$this->error['address_1'] = $this->language->get('error_address_1');
-    	}
-
-    	if ((utf8_strlen($this->request->post['city']) < 2) || (utf8_strlen($this->request->post['city']) > 128)) {
-      		$this->error['city'] = $this->language->get('error_city');
-    	}
-
-		$this->load->model('localisation/country');
+  //   	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
+  //     		$this->error['password'] = $this->language->get('error_password');
+  //   	}
 		
-		$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
-		
-		if ($country_info) {
-			if ($country_info['postcode_required'] && (utf8_strlen($this->request->post['postcode']) < 2) || (utf8_strlen($this->request->post['postcode']) > 10)) {
-				$this->error['postcode'] = $this->language->get('error_postcode');
-			}
+		// if ($this->config->get('config_account_id')) {
+		// 	$this->load->model('catalog/information');
 			
-			// VAT Validation
-			$this->load->helper('vat');
+		// 	$information_info = $this->model_catalog_information->getInformation($this->config->get('config_account_id'));
 			
-			if ($this->config->get('config_vat') && $this->request->post['tax_id'] && (vat_validation($country_info['iso_code_2'], $this->request->post['tax_id']) != 'invalid')) {
-				$this->error['tax_id'] = $this->language->get('error_vat');
-			}
-		}
-
-    	if ($this->request->post['country_id'] == '') {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-		
-    	if ($this->request->post['zone_id'] == '') {
-      		$this->error['zone'] = $this->language->get('error_zone');
-    	}
-
-    	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
-      		$this->error['password'] = $this->language->get('error_password');
-    	}
-
-    	if ($this->request->post['confirm'] != $this->request->post['password']) {
-      		$this->error['confirm'] = $this->language->get('error_confirm');
-    	}
-		
-		if ($this->config->get('config_account_id')) {
-			$this->load->model('catalog/information');
-			
-			$information_info = $this->model_catalog_information->getInformation($this->config->get('config_account_id'));
-			
-			if ($information_info && !isset($this->request->post['agree'])) {
-      			$this->error['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
-			}
-		}
+		// 	if ($information_info && !isset($this->request->post['agree'])) {
+  //     			$this->error['warning'] = sprintf($this->language->get('error_agree'), $information_info['title']);
+		// 	}
+		// }
 		
     	if (!$this->error) {
       		return true;
     	} else {
       		return false;
     	}
-  	}*/
+  	}
 	
 	/*public function country() {
 		$json = array();

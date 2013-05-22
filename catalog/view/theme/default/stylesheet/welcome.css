@@ -327,7 +327,8 @@ a:hover, a.active
     margin-top: 23px;
     margin-bottom: 2px;
     height: 22px;
-    min-height: 22px
+    min-height: 22px;
+    padding: 2px 6px;
 }
 
 #y-form-login
