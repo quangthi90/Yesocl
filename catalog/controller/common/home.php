@@ -22,7 +22,8 @@ class ControllerCommonHome extends Controller {
 		$this->data['posts'] = array();
 		foreach ( $company_posts as $post ) {
 			$this->data['posts'][] = array(
-				''
+				'author' => $post->getAuthor(),
+				
 			);
 		}
 		
