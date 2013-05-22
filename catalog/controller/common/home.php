@@ -13,6 +13,8 @@ class ControllerCommonHome extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->load->model( 'company/company' );
+		$this->load->model('tool/image');
+
 		$company = $this->model_company_company->getCompanyBySlug( $this->config->get('company')['default']['slug'] );
 
 		if ( $company ){
@@ -21,9 +23,17 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['posts'] = array();
 		foreach ( $company_posts as $post ) {
+			if ( $post->getUser() && $this->customer->getAvatar() ){
+				$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+			}else{
+				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
+			}
+
 			$this->data['posts'][] = array(
 				'author' => $post->getAuthor(),
-				
+				'avatar' => $avatar,
+				'title' => $post->getTitle(),
+				'content' => html_entity_decode($post->getContent())
 			);
 		}
 		

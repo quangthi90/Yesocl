@@ -1,7 +1,7 @@
 <?php
 class ModelCompanyCompany extends Doctrine {	
-	public function getCompanyBySlug( $slug, $sort='created', $order = 'desc' ){
-		$query = $this->dm->getRepository('Documnet\Company\Company')->findOneBySlug( $slug )->sort( $sort, $order );
+	public function getCompanyBySlug( $slug ){
+		$query = $this->dm->getRepository('Document\Company\Company')->findOneBySlug( $slug );
 
 		return $query;
 	}
