@@ -20,8 +20,8 @@ class ControllerPostDetail extends Controller {
 		
 		$this->children = array(
 			'common/sidebar_control',			
-			'common/content_top',
-			'common/content_bottom',
+			// 'common/content_top',
+			// 'common/content_bottom',
 			'common/footer',
 			'common/header'
 		);
