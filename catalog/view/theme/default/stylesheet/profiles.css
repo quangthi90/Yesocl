@@ -48,9 +48,9 @@
 }
 
 #y-content .profiles-tabs-list {
-    -webkit-column-width: 672px;    
-    -moz-column-width: 672px;
-    column-width: 672px;
+    -webkit-column-width: 670px;    
+    -moz-column-width: 670px;
+    column-width: 670px;
     -moz-column-gap: 15px;    
     -webkit-column-gap: 15px;
     column-gap: 15px;

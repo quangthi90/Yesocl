@@ -81,7 +81,7 @@
 				<li class="profiles-tabs-list-item">
 					<div class="profiles-tabs-main span7">
 						<div class="profiles-tabs-list-item-header row-fluid">
-							<a href="#" class="btn span3">Sumary</a>
+							<a href="#" class="btn span3" onclick="alert($('#y-content').height());alert($('#profiles-tabs-background .profiles-tabs-list').height());">Sumary</a>
 							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 						</div>
 
@@ -158,52 +158,22 @@
 
 {% block javascript %}
 <script type="text/javascript">
-	var mainContent;
-	var bgHeader;
-	var bgContent;
-	var endFeed;
-	//Script Yesocl:
-	function reautosizeMaincontent() {
-		mainContent = $('#y-main-content');
-		bgHeader = $('#profiles-tabs-background .profiles-tabs-header');
-		bgContent = $('#profiles-tabs-background .profiles-tabs-list');
-		endFeed = $('#feed-end');
-
-		if(typeof mainContent == "undefined" ||  typeof endFeed == "undefined") {
-			return;
-		}
-		//get width of main-content:
-		var widthContent = $('#y-content').outerWidth();
-		var endLeftPosition = endFeed.position() != null ? endFeed.position().left : 0;
-		if(endLeftPosition > widthContent) {
-			bgHeader.width(endLeftPosition);
-			bgContent.width(endLeftPosition);
-			mainContent.width(endLeftPosition);
-		}
-	}
-
 	function remakeScroll(item) {
+		var backgroundWidth = $('#feed-end').position().left + $('#profiles-tabs-background .profiles-tabs-list-item').width()*parseInt($('#profiles-tabs-background').height()/$('#y-main-content').height()) + 10;
+		var mainWidth = backgroundWidth + 730;
 		//Auto-size:
-		//reautosizeMaincontent();
-		//alert($('#feed-end').position().left);
-		//alert($('#profiles-tabs-background .profiles-tabs-list').attr('columnCount');
-		$('#y-main-content').width(2776);
-		//$('#profiles-tabs-background .profiles-tabs-list').height($('#y-content').height() - 51);
-		$('#profiles-tabs-background .profiles-tabs-list').width(2046);
+		$('#profiles-tabs-background .profiles-tabs-list').width(backgroundWidth);
+		$('#y-main-content').width(mainWidth);
 		//Scroll:
 		$('#' + item).niceScroll();	
 	}
 
 	$(document).ready(function() {
 		//MakeScroll:
-		remakeScroll('y-content');
-		//$('#y-main-content').height($('#y-main-content').height());
-		//$('#y-main-content').width(4100);
-		//$('#profiles-tabs-background .profiles-tabs-list').width(2600);
-		//$('#profiles-tabs-background .profiles-tabs-list').height(600);	
+		remakeScroll('y-content');	
 	});	
 	window.onresize=function() {
-		//remakeScroll('y-content');	
+		remakeScroll('y-content');	
 	};
 </script>
 {% endblock %}
