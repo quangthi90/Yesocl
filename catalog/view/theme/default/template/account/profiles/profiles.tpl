@@ -187,7 +187,7 @@
 		//reautosizeMaincontent();
 		//alert($('#feed-end').position().left);
 		//alert($('#profiles-tabs-background .profiles-tabs-list').attr('columnCount');
-		$('#y-main-content').width(3600);
+		$('#y-main-content').width(2776);
 		//$('#profiles-tabs-background .profiles-tabs-list').height($('#y-content').height() - 51);
 		$('#profiles-tabs-background .profiles-tabs-list').width(2046);
 		//Scroll:
