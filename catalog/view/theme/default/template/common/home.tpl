@@ -18,7 +18,7 @@
 					<div class="row-fluid"> 
 						<div class="span10 post_new_control">
 							<a href="#" title="Chèn hình">
-								<i class="icon-camera-retro big-icon"></i>
+								<i class="icon-camera-retro big-icon"></i>								
 							</a>
 						</div>
 						<div class="span2">
