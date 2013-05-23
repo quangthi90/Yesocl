@@ -1,19 +1,13 @@
 #y-content {
-	overflow-x: auto;
-	overflow-y: hidden;
+
 }
 
 #y-main-content {
-	-webkit-column-width: 670px;    
-    -moz-column-width: 670px;
-    column-width: 670px;
-    -moz-column-gap: 15px;    
-    -webkit-column-gap: 15px;
-    column-gap: 15px;
+	overflow-y: hidden;
 }
 
 #profiles-tabs-basic-infor {
-	height: 100%;
+	
 }
 
 #profiles-tabs-background {
@@ -22,6 +16,7 @@
 
 #y-content .profiles-tabs {
 	float: left;
+	margin-right: 15px;
 }
 
 #y-content .profiles-tabs-header {
@@ -53,10 +48,9 @@
 }
 
 #y-content .profiles-tabs-list {
-
-    -webkit-column-width: 670px;    
-    -moz-column-width: 670px;
-    column-width: 670px;
+    -webkit-column-width: 672px;    
+    -moz-column-width: 672px;
+    column-width: 672px;
     -moz-column-gap: 15px;    
     -webkit-column-gap: 15px;
     column-gap: 15px;
@@ -70,6 +64,7 @@
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
+    margin: 0px 0px 25px 0px;
     white-space: nowrap;
 }
 
@@ -95,7 +90,7 @@
 }
 
 #y-content .profiles-tabs-list-item-content p {
-	padding-right: 30px;
+
 }
 
 #y-content .profiles-line {

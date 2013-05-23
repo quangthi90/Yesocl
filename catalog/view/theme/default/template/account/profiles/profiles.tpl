@@ -85,12 +85,13 @@
 							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 						</div>
 
-						<div class="row-fluid profiles-tabs-list-item-content">
-							<p>Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.</p>
-							<p>Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.</p>
-							<p>Hinc porro movet ex mei, ut everti explicari patrioque sit. Summo consetetur et quo. Eu dicat fastidii his, eam eius delenit id. Ut nostro detraxit qui, libris postulant nam ei, lorem definiebas reprimique mea ad.</p>
-							<p>Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</p>
-							<p>Mea cu admodum verterem, vis an timeam accusam omittam. Labore indoctum hendrerit est at, consul partem appellantur est id. Vel commodo aperiri ut, in cum utroque vocibus vituperata, adhuc bonorum te vix. Ignota delectus volutpat vis an, pro assum tibique rationibus eu, vix atomorum forensibus reformidans ad. Docendi deseruisse contentiones per ei, duo ad alii persecuti necessitatibus. Vix id unum persius.</p>
+						<div class="row-fluid">
+							<div class="profiles-tabs-list-item-content">
+								<p>Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.</p>
+								<p>Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.</p>
+								<p>Hinc porro movet ex mei, ut everti explicari patrioque sit. Summo consetetur et quo. Eu dicat fastidii his, eam eius delenit id. Ut nostro detraxit qui, libris postulant nam ei, lorem definiebas reprimique mea ad.</p>
+								<p>Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</p>
+							</div>
 						</div>
 					</div>
 				</li>
@@ -102,34 +103,27 @@
 							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 						</div>
 
-						<ul class="profiles-tabs-list-item-content row-fluid">
-							<li class="profile-tabslist-item-content-item">
-								<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
-								<div class="profile-tabslist-item-content-item-content">
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</div>
-							</li>
+						<div class="row-fluid">
+							<ul class="profiles-tabs-list-item-content">
+								<li class="profile-tabslist-item-content-item">
+									<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
+									<div class="profile-tabslist-item-content-item-content">
+										<p>PG</p>
+										<p>NTT Data VN</p>
+										<p>Information Technology</p>
+									</div>
+								</li>
 
-							<li class="profile-tabslist-item-content-item">
-								<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
-								<div class="profile-tabslist-item-content-item-content">
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</div>
-							</li>
-
-							<li class="profile-tabslist-item-content-item">
-								<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
-								<div class="profile-tabslist-item-content-item-content">
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</div>
-							</li>
-						</ul>
+								<li class="profile-tabslist-item-content-item">
+									<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
+									<div class="profile-tabslist-item-content-item-content">
+										<p>PG</p>
+										<p>NTT Data VN</p>
+										<p>Information Technology</p>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</li>
 
@@ -164,9 +158,16 @@
 
 {% block javascript %}
 <script type="text/javascript">
-	function autosizeBackgroundcontent() {
-		var mainContent = $('#profiles-tabs-background');
-		var endFeed = $('#feed-end');
+	var mainContent;
+	var bgHeader;
+	var bgContent;
+	var endFeed;
+	//Script Yesocl:
+	function reautosizeMaincontent() {
+		mainContent = $('#y-main-content');
+		bgHeader = $('#profiles-tabs-background .profiles-tabs-header');
+		bgContent = $('#profiles-tabs-background .profiles-tabs-list');
+		endFeed = $('#feed-end');
 
 		if(typeof mainContent == "undefined" ||  typeof endFeed == "undefined") {
 			return;
@@ -175,18 +176,34 @@
 		var widthContent = $('#y-content').outerWidth();
 		var endLeftPosition = endFeed.position() != null ? endFeed.position().left : 0;
 		if(endLeftPosition > widthContent) {
+			bgHeader.width(endLeftPosition);
+			bgContent.width(endLeftPosition);
 			mainContent.width(endLeftPosition);
 		}
 	}
 
+	function remakeScroll(item) {
+		//Auto-size:
+		//reautosizeMaincontent();
+		//alert($('#feed-end').position().left);
+		//alert($('#profiles-tabs-background .profiles-tabs-list').attr('columnCount');
+		$('#y-main-content').width(3600);
+		//$('#profiles-tabs-background .profiles-tabs-list').height($('#y-content').height() - 51);
+		$('#profiles-tabs-background .profiles-tabs-list').width(2046);
+		//Scroll:
+		$('#' + item).niceScroll();	
+	}
+
 	$(document).ready(function() {
 		//MakeScroll:
-		//autosizeBackgroundcontent();
-		makeScroll('y-content');	
+		remakeScroll('y-content');
+		//$('#y-main-content').height($('#y-main-content').height());
+		//$('#y-main-content').width(4100);
+		//$('#profiles-tabs-background .profiles-tabs-list').width(2600);
+		//$('#profiles-tabs-background .profiles-tabs-list').height(600);	
 	});	
 	window.onresize=function() {
-		//autosizeBackgroundcontent();
-		makeScroll('y-content');	
+		//remakeScroll('y-content');	
 	};
 </script>
 {% endblock %}
