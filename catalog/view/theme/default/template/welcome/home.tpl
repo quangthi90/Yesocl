@@ -15,7 +15,7 @@
 <div id="y-frm-login" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">
-        Join <strong>YESOCL.com</strong>
+        Join <strong>YESOCL.com</strong>         
     </div>
     <div class="frm-content">
     	<form class="reg-form" action="{{ action }}" method="post">

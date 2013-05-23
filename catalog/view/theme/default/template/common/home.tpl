@@ -1,4 +1,4 @@
-{% extends '@template/default/template/common/layout_feed.tpl' %}
+{% extends '@template/default/template/common/layout.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
