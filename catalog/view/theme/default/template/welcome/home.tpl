@@ -15,7 +15,7 @@
 <div id="y-frm-login" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">
-        Join <strong>YESOCL.com</strong>
+        Join <strong>YESOCL.com</strong>         
     </div>
     <div class="frm-content">
     	<form class="reg-form" action="{{ action }}" method="post">
@@ -73,7 +73,7 @@
             <div class="controls">
                 <label class="checkbox"><input type="checkbox" name="lg-remember" />I agree Yesocl's policy</label>
                 <br>
-                <button type="button" class="btn btn-ystandard btn-reg">Sign up</button>
+                <button type="button" class="btn btn-success btn-reg">Sign up</button>
             </div>
     	</form>
     </div>

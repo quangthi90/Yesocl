@@ -1,4 +1,4 @@
-{% extends '@template/default/template/common/layout_feed.tpl' %}
+{% extends '@template/default/template/common/layout.tpl' %}
 
 {% use '@template/default/template/post/common/form_status.tpl' %}
 {% use '@template/default/template/post/common/post_block.tpl' %}

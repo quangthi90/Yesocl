@@ -13,12 +13,14 @@
 				    <label class="control-label span2 offset1" for="inputLocation">I live in</label>
 				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputLocation" placeholder="Input Text">
+				    	<span class="yes-warning">Field is required</span>
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputPostal">Postal code</label>
 				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputPostal" placeholder="Input Text">
+				    	<span class="yes-warning">Field is required</span>
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
@@ -39,6 +41,7 @@
 				    <label class="control-label span2 offset1" for="inputJob">Job title</label>
 				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputJob" placeholder="Input Text">
+				    	<span class="yes-warning">Field is required</span>
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
@@ -52,6 +55,7 @@
 				    <label class="control-label span2 offset1" for="inputCompany">Company</label>
 				    <div class="controls span9">
 				    	<input class="span11" type="text" id="inputCompany" placeholder="Input Text">
+				    	<span class="yes-warning">Field is required</span>
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
