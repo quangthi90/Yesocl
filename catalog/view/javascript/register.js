@@ -72,7 +72,7 @@
 		});
 	};
 
-	Register.prototype.validate = function($button){
+	Register.prototype.validate = function(){
 		if (this.$firstname.val() == ''){
 			this.$firstname.parent().find('.warning').removeClass("hidden");
 			return false;	

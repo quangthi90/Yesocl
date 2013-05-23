@@ -36,6 +36,8 @@ class ControllerCommonHome extends Controller {
 				'content' => html_entity_decode($post->getContent())
 			);
 		}
+
+		$this->data['status_action'] = $this->url->link('post/post/status', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';
