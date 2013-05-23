@@ -3,7 +3,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/reprofiles.css" rel="stylesheet" media="screen" />
+    <link href="catalog/view/theme/default/stylesheet/profiles.css" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -164,11 +164,28 @@
 
 {% block javascript %}
 <script type="text/javascript">
+	function autosizeBackgroundcontent() {
+		var mainContent = $('#profiles-tabs-background');
+		var endFeed = $('#feed-end');
+
+		if(typeof mainContent == "undefined" ||  typeof endFeed == "undefined") {
+			return;
+		}
+		//get width of main-content:
+		var widthContent = $('#y-content').outerWidth();
+		var endLeftPosition = endFeed.position() != null ? endFeed.position().left : 0;
+		if(endLeftPosition > widthContent) {
+			mainContent.width(endLeftPosition);
+		}
+	}
+
 	$(document).ready(function() {
 		//MakeScroll:
+		//autosizeBackgroundcontent();
 		makeScroll('y-content');	
 	});	
 	window.onresize=function() {
+		//autosizeBackgroundcontent();
 		makeScroll('y-content');	
 	};
 </script>
