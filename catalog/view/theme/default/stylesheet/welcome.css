@@ -118,6 +118,17 @@ a:hover, a.active
     text-decoration: none;
 }
 
+.warning {
+    color: #ea1f00;
+    display: block;
+    font-size: 12px; 
+}
+
+.hidden {
+    display: none;
+    height: 0px;
+}
+
 .y-frm
 {
     width: 500px;
@@ -321,6 +332,7 @@ a:hover, a.active
     line-height: 12px;
     padding: 4px 7px;
     margin-top: -3px;
+    cursor: pointer;
 }
 
 #y-header .y-welcome-login .input-welcome{

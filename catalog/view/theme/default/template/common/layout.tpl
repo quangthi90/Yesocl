@@ -14,7 +14,7 @@
 		<link href="catalog/view/theme/default/stylesheet/libs/uniform.default.css" rel="stylesheet" media="screen" />
 
 		<!-- Common css -->
-		<link href="catalog/view/theme/default/stylesheet/common/yes-common.css" rel="stylesheet" media="screen" />
+		<link href="catalog/view/theme/default/stylesheet/common/yes.css" rel="stylesheet" media="screen" />
 
 		<!-- Custom css -->		
 		{% block stylesheet %}
