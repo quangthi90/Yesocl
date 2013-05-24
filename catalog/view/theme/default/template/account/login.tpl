@@ -43,7 +43,7 @@
                     <label for="remember">Remember me</label>
                 </div>                
                 <div class="btns">
-                     <button class="btn btn-yes">Sign In</button>   
+                     <button class="btn btn-success">Sign In</button>   
                 </div>
             </form>     
         </div>
