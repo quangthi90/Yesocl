@@ -3,7 +3,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/demo.css" rel="stylesheet" media="screen" />
+    <link href="catalog/view/theme/default/stylesheet/profiles.css" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -173,6 +173,102 @@
 				</div>
 
 				<div class="profiles-tabs-main-body">
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving</div>
+					<div class="profiles-tabs-item2 btn">Problem Development</div>
+					<div class="profiles-tabs-item2 btn">Teamwork</div>
+					<div class="profiles-tabs-item2 btn">Pressure</div>
 				</div>
 			</div>
 
@@ -257,27 +353,21 @@
 
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
-
-		//$('#profiles-tabs-background-sumary').outerWidth(columnWidth);
-		//$('#profiles-tabs-background-experience').outerWidth(columnWidth);
-		//$('#profiles-tabs-background-skill').outerWidth(columnWidth);
-		//$('#profiles-tabs-background-education').outerWidth(columnWidth);
-		//var sumaryColumns = parseInt($('#profiles-tabs-background-sumary').height()/contentHeight) + 1;
-		//var experienceColumns = parseInt($('#profiles-tabs-background-experience').height()/contentHeight) + 1;
-		//var skillColumns = parseInt($('#profiles-tabs-background-skill').height()/contentHeight) + 1;
-		//var educationceColumns = parseInt($('#profiles-tabs-background-education').height()/contentHeight) + 1;
-		//$('#profiles-tabs-background-sumary').width(sumaryColumns*(columnWidth + 15) - 15);
-		//$('#profiles-tabs-background-experience').width(experienceColumns*(columnWidth + 15) - 15);
-		//$('#profiles-tabs-background-skill').width(skillColumns*(columnWidth + 15) - 15);
-		//$('#profiles-tabs-background-education').width(educationceColumns*(columnWidth + 15) - 15);
-		//$('#profiles-tabs-background-sumary .profiles-tabs-main-body').outerWidth($('#profiles-tabs-background-sumary').width() - 20);
-		//$('#profiles-tabs-background-experience .profiles-tabs-main-body').width($('#profiles-tabs-background-experience').width() - 20);
-		//$('#profiles-tabs-background-skill .profiles-tabs-main-body').width($('#profiles-tabs-background-skill').width() - 20);
-		//$('#profiles-tabs-background-education .profiles-tabs-main-body').width($('#profiles-tabs-background-education').width() - 20);
-		//$('#profiles-tabs-background-sumary .profiles-tabs-main-body').addClass('column-' + sumaryColumns);
-		//$('#profiles-tabs-background-experience .profiles-tabs-main-body').addClass('column-' + experienceColumns);
-		//$('#profiles-tabs-background-skill .profiles-tabs-main-body').addClass('column-' + skillColumns);
-		//$('#profiles-tabs-background-education .profiles-tabs-main-body').addClass('column-' + educationceColumns);
+		$('#y-content').niceScroll();
 	} );
+
+	window.onresize=function() {
+		var columnWidth = $('#profiles-tabs-basic-infor').width();
+		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 15;
+
+		transformToColumn('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		transformToColumn('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		transformToColumn('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		transformToColumn('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
+
+		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
+		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
+		$('#y-content').niceScroll();	
+	};
 </script>
 {% endblock %}
