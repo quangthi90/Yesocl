@@ -3,15 +3,7 @@ body {
 }
 
 #y-frm-login {
-  display: block;
-  margin: 70px auto;
-  width: 500px;
-  background: #fff;
-  padding: 10px;
-  border: 1px solid #ddd;
-  -moz-box-shadow: 0px 0px 40px #ddd;
-  -webkit-box-shadow: 0px 0px 40px #ddd;
-  box-shadow: 0px 0px 40px #ddd;
+  margin: 70px auto; 
 }
 
 #y-login-header {
@@ -40,75 +32,13 @@ body {
 }
 
 #y-frm-login .frm-title {
-  padding: 5px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  font-size: 18px;
 }
 
 #y-frm-login .frm-title strong{
-  color: #2d8806;
+
 }
 
 #y-frm-login .frm-content {
     padding: 10px 0px 25px 90px;
     border-bottom: 1px solid #ddd;
-}
-
-#y-frm-login .frm-content .checkbox-container {
-  padding: 0px 0px 5px 50px;
-}
-
-#y-frm-login .frm-content .btns {
-  padding: 5px 0px 0px 50px;
-}
-
-#y-frm-login .frm-content .input-prepend {
-  margin-bottom: 15px;
-}
-
-#y-frm-login .frm-footer {
-  padding: 10px 0px 0px 90px;
-}
-
-#y-frm-login .frm-footer ul {
-  list-style: circle;
-  padding-left: 18px;
-}
-
-#y-frm-login .frm-footer ul li{
-  font-size: 12px;
-}
-
-#y-frm-login .frm-footer  ul li a {
-  font-weight: bold;
-  color: #2d8806;
-}
-
-#y-frm-login .frm-footer  ul li a:hover {
-  color: #000;
-}
-
-.checkbox-container label{
-  display: inline;
-  font-size: 12px;
-  margin-left: 5px;
-}
-
-.checkbox-container input {
-  margin: 0px;
-  padding: 0px;
-}
-
-.frm-content .input-prepend span.add-on {
-  padding: 6px 15px;
-}
-
-.frm-content .input-prepend span.add-on i {
-  color: #000;
-  font-weight: bold;
-}
-
-.frm-content .input-prepend input {
-  height: 24px;
 }

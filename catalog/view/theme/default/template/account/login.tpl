@@ -22,7 +22,7 @@
             <h3 class="welcome">Welcome to Yesocl.com !</h3>
         </div>        
     </div>    
-    <div id="y-frm-login">
+    <div class="y-frm" id="y-frm-login">
         <div class="frm-title"> Sign In <strong>YESOCL.com</strong>
         </div>
         <div class="frm-content">            

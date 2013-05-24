@@ -1,35 +1,54 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
+{% extends '@template/default/template/common/layout.tpl' %}
+
+{% block title %}Change Password - Yesocl Network{% endblock %}
+
+{% block stylesheet %}
+    <link href="catalog/view/theme/default/stylesheet/password.css" rel="stylesheet" media="screen" />
+{% endblock %}
+
+{% block body %}
+<div id="y-content" class="y-sub-container-1">
+  <div id="y-main-content">
+    <div class="y-frm" id="y-frm-password">
+        <div class="frm-title"> Sign In <strong>YESOCL.com</strong>
+        </div>
+        <div class="frm-content">            
+            <form action="#">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user icon-2x"></i></span>
+                    <input class="span3" id="username" type="text" placeholder="Email">
+                    <div class="yes-warning">Field is required</div>
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-lock icon-2x"></i></span>
+                    <input class="span3" id="password" type="text" placeholder="Password">
+                    <div class="yes-warning"></div>
+                </div>
+                <div class="checkbox-container">
+                    <input id="remember" name="remember" type="checkbox" /> 
+                    <label for="remember">Remember me</label>
+                </div>                
+                <div class="btns">
+                     <button class="btn btn-yes">Sign In</button>   
+                </div>
+            </form>     
+        </div>
+        <div class="frm-footer">
+            <ul>
+                <li>Don't have an account ? <a href="#">Sign Up</a><br></li>
+                <li>Remind ! <a href="#">Password</a></li>
+            </ul>
+        </div>
+    </div>
   </div>
-  <h1><?php echo $heading_title; ?></h1>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <h2><?php echo $text_password; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_password; ?></td>
-          <td><input type="password" name="password" value="<?php echo $password; ?>" />
-            <?php if ($error_password) { ?>
-            <span class="error"><?php echo $error_password; ?></span>
-            <?php } ?></td>
-        </tr>
-        <tr>
-          <td><span class="required">*</span> <?php echo $entry_confirm; ?></td>
-          <td><input type="password" name="confirm" value="<?php echo $confirm; ?>" />
-            <?php if ($error_confirm) { ?>
-            <span class="error"><?php echo $error_confirm; ?></span>
-            <?php } ?></td>
-        </tr>
-      </table>
-    </div>
-    <div class="buttons">
-      <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
-      <div class="right"><input type="submit" value="<?php echo $button_continue; ?>" class="button" /></div>
-    </div>
-  </form>
-  <?php echo $content_bottom; ?></div>
-<?php echo $footer; ?>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+jQuery(document).ready(function (){
+  
+});
+</script>
+{% endblock %}
