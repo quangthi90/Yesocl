@@ -75,6 +75,7 @@ foreach ($configs as $setting) {
 $config->load( 'title' );
 $config->load( 'user' );
 $config->load( 'company' );
+$config->load( 'url' );
 
 /*if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
