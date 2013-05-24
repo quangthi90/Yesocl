@@ -13,7 +13,7 @@
     <link href="catalog/view/theme/default/stylesheet/libs/fortAwesome/css/font-awesome.css" rel="stylesheet" media="screen" />
     <!-- Common css -->
     <link href="catalog/view/theme/default/stylesheet/common/yes.css" rel="stylesheet" media="screen" />
-    <link href="catalog/view/theme/default/stylesheet/login.css" rel="stylesheet" media="screen" />
+    <link href="catalog/view/theme/default/stylesheet/account.css" rel="stylesheet" media="screen" />
   </head>
   <body>
       <div id="y-login-header">

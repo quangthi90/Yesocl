@@ -2,10 +2,6 @@ body {
   background: #000 url(../image/b-bg.png) repeat top left;
 }
 
-#y-frm-login {
-  margin: 70px auto; 
-}
-
 #y-login-header {
   margin: 0px auto;
   max-height: 100px;
@@ -31,14 +27,19 @@ body {
   margin: 23px 0px 0px 10px;  
 }
 
-#y-frm-login .frm-title {
+#y-frm-password .frm-content {
+  border-bottom: none;
+  padding-left: 70px;
 }
 
-#y-frm-login .frm-title strong{
-
+#y-frm-password .input-prepend span.add-on {
+  width: 60px;
 }
 
-#y-frm-login .frm-content {
-    padding: 10px 0px 25px 90px;
-    border-bottom: 1px solid #ddd;
+#y-frm-password .input-prepend span.add-on i {
+  margin-right: 4px;
+}
+
+#y-frm-password .frm-content .btns {
+  padding-left: 90px;
 }

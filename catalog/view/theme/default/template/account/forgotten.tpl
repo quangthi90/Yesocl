@@ -13,7 +13,7 @@
     <link href="catalog/view/theme/default/stylesheet/libs/fortAwesome/css/font-awesome.css" rel="stylesheet" media="screen" />
     <!-- Common css -->
     <link href="catalog/view/theme/default/stylesheet/common/yes.css" rel="stylesheet" media="screen" />
-    <link href="catalog/view/theme/default/stylesheet/login.css" rel="stylesheet" media="screen" />
+    <link href="catalog/view/theme/default/stylesheet/account.css" rel="stylesheet" media="screen" />
   </head>
   <body>
       <div id="y-login-header">
@@ -22,7 +22,7 @@
             <h3 class="welcome">Welcome to Yesocl.com !</h3>
         </div>        
     </div>    
-    <div id="y-frm-login">
+    <div class="y-frm" id="y-frm-login">
         <div class="frm-title">Remind password - <strong>YESOCL.com</strong>
         </div>
         <div class="frm-content">            
