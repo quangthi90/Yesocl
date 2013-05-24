@@ -656,7 +656,10 @@ label.in-line{
   font-size: 18px;
   background-color: #3b8f39;
   color: #fff;
-  border-radius: 2px;
+  padding: 3px;
+  text-align: center;
+  vertical-align: middle;
+  width: 10px;
 }
 
 .sidebar-controls .nav-list .nav-header { 
@@ -667,6 +670,7 @@ label.in-line{
 .sidebar-controls .nav-list .divider {
   border-bottom: 1px solid #054105;
   background-color: #000;
+  margin: 10px 0px 5px 0px;
 }
 
 .sidebar-controls .nav-list > .active > a, 
