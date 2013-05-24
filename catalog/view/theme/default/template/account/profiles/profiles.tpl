@@ -79,12 +79,16 @@
 
 			<ul class="profiles-tabs-list">
 				<li class="profiles-tabs-list-item">
-					<div class="profiles-tabs-main span7">
+					<div class="span7">
 						<div class="profiles-tabs-list-item-header row-fluid">
 							<a href="#" class="btn span3" onclick="alert($('#y-content').height());alert($('#profiles-tabs-background .profiles-tabs-list').height());">Sumary</a>
 							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 						</div>
+					</div>
+				</li>
 
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
 						<div class="row-fluid">
 							<div class="profiles-tabs-list-item-content">
 								<p>Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.</p>
@@ -97,55 +101,120 @@
 				</li>
 
 				<li class="profiles-tabs-list-item">
-					<div class="profiles-tabs-main span7">
+					<div class="span7">
 						<div class="profiles-tabs-list-item-header row-fluid">
-							<a href="#" class="btn">Experience</a>
+							<a href="#" class="btn span3">Experience</a>
 							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 						</div>
+					</div>
+				</li>
 
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
 						<div class="row-fluid">
-							<ul class="profiles-tabs-list-item-content">
-								<li class="profile-tabslist-item-content-item">
-									<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
-									<div class="profile-tabslist-item-content-item-content">
-										<p>PG</p>
-										<p>NTT Data VN</p>
-										<p>Information Technology</p>
-									</div>
-								</li>
-
-								<li class="profile-tabslist-item-content-item">
-									<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
-									<div class="profile-tabslist-item-content-item-content">
-										<p>PG</p>
-										<p>NTT Data VN</p>
-										<p>Information Technology</p>
-									</div>
-								</li>
-							</ul>
+							<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>PG</p>
+								<p>NTT Data VN</p>
+								<p>Information Technology</p>
+							</div>
 						</div>
 					</div>
 				</li>
 
 				<li class="profiles-tabs-list-item">
-					<div class="profiles-tabs-main span7">
-						<div class="profiles-tabs-list-item-header row-fluid">
-							<a href="#" class="btn">Skills & Expertise</a>
-							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>PG</p>
+								<p>NTT Data VN</p>
+								<p>Information Technology</p>
+							</div>
 						</div>
-
-						<div class="row-fluid"></div>
 					</div>
 				</li>
 
 				<li class="profiles-tabs-list-item">
-					<div class="profiles-tabs-main span7">
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>PG</p>
+								<p>NTT Data VN</p>
+								<p>Information Technology</p>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="profile-tabslist-item-content-item-label">From Junly 13th to now</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>PG</p>
+								<p>NTT Data VN</p>
+								<p>Information Technology</p>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
 						<div class="profiles-tabs-list-item-header row-fluid">
-							<a href="#" class="btn">Education</a>
+							<a href="#" class="btn span3">Skills & Expertise</a>
 							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 						</div>
+					</div>
+				</li>
 
-						<div class="row-fluid"></div>
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
+						<div class="profiles-tabs-list-item-header row-fluid">
+							<a href="#" class="btn span3">Education</a>
+							<a href="#" class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+						</div>
+					</div>
+				</li>
+
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="profile-tabslist-item-content-item-label">From 2008 to 2012</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>HCM City University of Science</p>
+								<p>Bachelor</p>
+								<p>Information Technology</p>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="profile-tabslist-item-content-item-label">From 2008 to 2012</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>HCM City University of Science</p>
+								<p>Bachelor</p>
+								<p>Information Technology</p>
+							</div>
+						</div>
+					</div>
+				</li>
+
+				<li class="profiles-tabs-list-item">
+					<div class="span7">
+						<div class="row-fluid">
+							<div class="profile-tabslist-item-content-item-label">From 2008 to 2012</div>
+							<div class="profile-tabslist-item-content-item-content">
+								<p>HCM City University of Science</p>
+								<p>Bachelor</p>
+								<p>Information Technology</p>
+							</div>
+						</div>
 					</div>
 				</li>
 
@@ -159,13 +228,13 @@
 {% block javascript %}
 <script type="text/javascript">
 	function remakeScroll(item) {
-		var backgroundWidth = $('#feed-end').position().left + $('#profiles-tabs-background .profiles-tabs-list-item').width()*parseInt($('#profiles-tabs-background').height()/$('#y-main-content').height()) + 10;
+		var backgroundWidth = ($('#profiles-tabs-background .profiles-tabs-list-item').width() + 15)*(parseInt($('#profiles-tabs-background .profiles-tabs-list').height()/$('#y-main-content').height()) + 1);
 		var mainWidth = backgroundWidth + 730;
 		//Auto-size:
 		$('#profiles-tabs-background .profiles-tabs-list').width(backgroundWidth);
 		$('#y-main-content').width(mainWidth);
 		//Scroll:
-		$('#' + item).niceScroll();	
+		$('#' + item).niceScroll();
 	}
 
 	$(document).ready(function() {

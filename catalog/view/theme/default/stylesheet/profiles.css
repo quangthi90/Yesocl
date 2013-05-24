@@ -1,17 +1,5 @@
-#y-content {
-
-}
-
 #y-main-content {
 	overflow-y: hidden;
-}
-
-#profiles-tabs-basic-infor {
-	
-}
-
-#profiles-tabs-background {
-
 }
 
 #y-content .profiles-tabs {
@@ -19,12 +7,13 @@
 	margin-right: 15px;
 }
 
+/** tab header **/
 #y-content .profiles-tabs-header {
 	line-height: 45px;
 	border: 1px solid #6db23b;
 }
 
-#y-content #profiles-tabs-background .profiles-tabs-header div {
+#y-content #profiles-tabs-background .profiles-tabs-header .span7 {
 	margin-left: 0px;
 }
 
@@ -35,7 +24,9 @@
 	font-size: 16px;
 	font-weight: bold;
 }
+/** end tab header **/
 
+/** btn edit **/
 #y-content .profiles-btn-edit {
 	padding: 0px 8px;
 	margin-right: 10px;
@@ -46,7 +37,9 @@
 	line-height: 28px;
 	font-size: 18px;
 }
+/** end btn edit **/
 
+/** background list item **/
 #y-content .profiles-tabs-list {
     -webkit-column-width: 670px;    
     -moz-column-width: 670px;
@@ -59,47 +52,29 @@
 
 #y-content .profiles-tabs-list-item { 
 	height: auto;
-    min-height: 200px;
     display:inline-block;
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
-    margin: 0px 0px 25px 0px;
+    margin: 10px 0px 0px 0px;
     white-space: nowrap;
+}
+
+#y-content .profiles-tabs-list-item .span7 { 
+    margin-left: 0px;
+}
+
+#y-content .profiles-tabs-list-item p { 
+    white-space: normal;
+	word-wrap:break-word;
 }
 
 #y-content .profiles-tabs-list-item-header a:first-child {
 	margin-left: 10px;
 }
 
-#y-content .profiles-tabs-main {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	margin-top: 10px;
-	border: 1px solid #c0c0c0;
-	white-space: normal;
-	word-wrap:break-word;
-}
-
-#y-content #profiles-tabs-background .profiles-tabs-main {
-	margin-left: 0px;
-}
-
 #y-content .profiles-tabs-list-item-content {
 	padding: 10px 20px;
-}
-
-#y-content .profiles-tabs-list-item-content p {
-
-}
-
-#y-content .profiles-line {
-	border-top: 1px solid #c0c0c0;
-	height: 10px;
-}
-
-#y-content .profile-tabslist-item-content-item {
-
 }
 
 #y-content .profile-tabslist-item-content-item-label {
@@ -111,4 +86,22 @@
 	margin-bottom: 10px;
 	padding: 10px;
 	border: 1px solid #c0c0c0;
+}
+/** end background list item **/
+
+/** profiles line **/
+#y-content .profiles-line {
+	border-top: 1px solid #c0c0c0;
+	height: 10px;
+}
+/** end profiles line **/
+
+#y-content .profiles-tabs-main {
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid #c0c0c0;
+}
+
+#y-content .break-item {
 }
