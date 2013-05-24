@@ -1,6 +1,5 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/form_status.tpl' %}
 {% use '@template/default/template/post/common/post_block.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
@@ -13,9 +12,6 @@
 <div id="y-content" class="y-sub-container-1">
 	<div id="y-main-content"> 		           
         <ul class="list-content columns">
-        	<li class="feed-item">
-				{{ block('post_common_form_status') }}
-			</li>
         	{% for post in posts %}
         	<li class="feed-item">
 				{{ block('post_common_post_block') }}
@@ -28,7 +24,6 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="catalog/view/javascript/post.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		//MakeScroll:

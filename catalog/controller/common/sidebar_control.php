@@ -14,6 +14,10 @@ class ControllerCommonSidebarControl extends Controller {
 			'avatar' => $avatar,
 			'username' => $this->customer->getUsername()
 		);
+
+		$this->data['action'] = array(
+			'home' => $this->url->link('common/home', '', 'SSL')
+		);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/sidebar_control.tpl';

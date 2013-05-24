@@ -1,7 +1,7 @@
 <div id="y-sidebar">
 	<div class="sidebar-border-right">
 		<div class="row-fluid logo sidebar-box" id="logo">
-			<a href="{{ base }}" title="Yesocl">
+			<a href="{{ action.home }}" title="Yesocl">
 				<img src="image/template/logo.png" />
 			</a>
 		</div>
@@ -19,7 +19,7 @@
 	<div class="sidebar-controls">
 		<ul class="nav nav-list">
 		  <li class="nav-header">Post</li>
-		  <li class="active"><a href="#"> <i class="icon-refresh"></i> What's new</a></li>
+		  <li class="active"><a href="{{ action.home }}"> <i class="icon-refresh"></i> What's new</a></li>
 		  <li><a href="#"><i class="icon-umbrella"></i> Follower's post</a></li>	
 		  <li class="divider"></li>	 
 		  <li class="nav-header">Personal</li> 
