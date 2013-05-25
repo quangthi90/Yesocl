@@ -17,10 +17,10 @@
             </div>
         </div>
         <div class="span5 y-welcome-login">
-            <form action="{{ action.login }}" method="post" class="row-fluid login-form">
+            <form action="{{ action.login }}" method="post" class="row-fluid login-form" data-url="{{ action.login_page }}">
                 <div class="span5">
                     <div class="row-fluid">
-                        <input name="email" type="text" placeholder="Email"  class="span12 input-welcome" />
+                        <input required="required" name="email" type="email" placeholder="Email"  class="span12 input-welcome" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <label>
@@ -30,14 +30,14 @@
                 </div>
                 <div class="span5">
                     <div class="row-fluid">
-                        <input name="password" type="password" placeholder="Password" class="span12 input-welcome" />
+                        <input required="required" name="password" type="password" placeholder="Password" class="span12 input-welcome" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <a href="#">Forgot password!</a>
                     </div>
                 </div>
                 <div class="span2 button-login-welcome">
-                    <button type="button" class="btn btn-success btn-login">Sign in</button>
+                    <button type="submit" class="btn btn-success btn-login">Sign in</button>
                 </div>
             </form>
         </div> 

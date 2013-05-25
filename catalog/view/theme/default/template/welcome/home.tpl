@@ -3,7 +3,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/welcome.css" rel="stylesheet" media="screen" />    
+       
 {% endblock %}
 
 {% block body %}
@@ -83,7 +83,6 @@
 
 {% block javascript %}
 	<script type="text/javascript" src="catalog/view/javascript/register.js"></script>
-	<script type="text/javascript" src="catalog/view/javascript/account.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
         	//Join clicked:

@@ -7,6 +7,7 @@
 		this.$password	= $el.find('input[name=\'password\']');
 
 		this.url		= $el.attr('action');
+		this.direct_url = $el.data('url');
 
 		this.$login_btn	= $el.find('.btn-login');
 
@@ -23,16 +24,16 @@
 				return false;
 			}
 			
-			if(that.validate() == false){
+			if(that.validate() != false){
+				that.data = {
+					email		: that.$email.val(),
+					password	: that.$password.val()
+				};
+
+				that.submit(that.$login_btn);
+
 				return false;
 			}
-			
-			that.data = {
-				email		: that.$email.val(),
-				password	: that.$password.val()
-			};
-
-			that.submit(that.$login_btn);
 		});
 	};
 
@@ -52,19 +53,17 @@
 			if(data.success == 'ok'){
 				window.location.reload();
 			}else{
-				// To do: show error login is fail
+				window.location.href = that.direct_url;
 			}
 		});
 	};
 
 	Login.prototype.validate = function($button){
 		if (this.$email.val() == ''){
-			this.$email.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$password.val() == ''){
-			this.$password.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 	};

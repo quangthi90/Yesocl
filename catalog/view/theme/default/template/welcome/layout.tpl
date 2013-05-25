@@ -8,6 +8,7 @@
 		<link href="catalog/view/theme/default/stylesheet/libs/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
 		<link href="catalog/view/theme/default/stylesheet/libs/uniform.default.css" rel="stylesheet" media="screen" />
 		<link href="catalog/view/theme/default/stylesheet/libs/fortAwesome/css/font-awesome.css" rel="stylesheet" media="screen" />
+		<link href="catalog/view/theme/default/stylesheet/welcome.css" rel="stylesheet" media="screen" /> 
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
@@ -25,6 +26,8 @@
 		<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.uniform.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/yes.js"></script>
+		<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+		<script type="text/javascript" src="catalog/view/javascript/account.js"></script>
     	{% block javascript %}
 		{% endblock %}
 	</body>

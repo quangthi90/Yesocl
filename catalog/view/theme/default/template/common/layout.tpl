@@ -35,6 +35,7 @@
     	<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
     	<script type="text/javascript" src="catalog/view/javascript/libs/jquery.nicescroll.js"></script>
     	<script type="text/javascript" src="catalog/view/javascript/libs/jquery.uniform.min.js"></script>
+    	<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/common.js"></script
 		<!-- Common Script -->
 		<script type="text/javascript" src="catalog/view/javascript/yes.js"></script>
