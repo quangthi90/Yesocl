@@ -82,6 +82,7 @@
 				<div class="span7">
 					<div class="row-fluid">
 						<div class="profiles-tabs-title span5">Background</div>
+						<div class="pull-right profiles-btn-next"><a href="#"><i class="icon-chevron-right"></i></a></div>
 					</div>
 				</div>
 				<div class="clear"></div>
