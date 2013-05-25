@@ -21,17 +21,17 @@
     	<form class="reg-form" action="{{ action }}" method="post">
     		<div class="top-warning warning hidden">Warning!!</div>
     		<div class="controls controls-row">
-    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" />
-    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" />
+    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" value="Bommer" />
+    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" value="Luu" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls">
-    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" placeholder="E-mail" />
+    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" value="user1@test.com" placeholder="E-mail" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls controls-row">
     			<input required="required" pattern=".{6,20}" title="6 to 20 characters" name="password" type="password" class="span2"  id="password" placeholder="Password" />
-    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" />
+    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" value="123456" />
     			<div class="warning hidden">Confirm not match!</div>
     		</div>
     		<div class="controls" style="margin-bottom: 10px;">

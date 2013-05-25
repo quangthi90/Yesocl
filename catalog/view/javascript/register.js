@@ -122,6 +122,11 @@
 		if (!this.$agree.parent().hasClass('checked')){
 			return false;	
 		}
+
+		if (this.$day.val() == 31 && this.$month.val() == (4 || 6 || 9 || 11)){
+			this.$day.val() = "";
+			return false;
+		}
 	};
 
 	Register.prototype.triggerProgress = function($el, promise)
