@@ -1,3 +1,8 @@
+#y-main-content {
+	overflow-y: hidden;
+    overflow-x: auto;
+}
+
 #y-content {
 	overflow-y: hidden;
     overflow-x: auto;
@@ -6,10 +11,6 @@
 #y-content .profiles-tabs {
 	float: left;
 	margin-right: 15px;
-}
-
-#profiles-tabs-basic-infor, #profiles-tabs-background {
-	height: 100%;
 }
 
 #y-content .profiles-tabs-header {
@@ -55,6 +56,10 @@
 	padding: 0px 8px;
 	margin-right: 10px;
 	float: right;
+}
+
+#y-content .profiles-tabs-main-body .profiles-btn-edit {
+	margin-right: 0px;
 }
 
 #y-content .profiles-btn-edit i {

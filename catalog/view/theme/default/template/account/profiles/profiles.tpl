@@ -113,7 +113,6 @@
 			<div id="profiles-tabs-background-experience" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Experience</a>
-					<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 					<div class="clear"></div>
 				</div>
 
@@ -121,6 +120,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
@@ -130,6 +130,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
@@ -139,6 +140,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
@@ -148,6 +150,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
@@ -157,6 +160,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
@@ -275,7 +279,6 @@
 			<div id="profiles-tabs-background-education" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Education</a>
-					<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 					<div class="clear"></div>
 				</div>
 
@@ -283,6 +286,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>HCM City University of Science</p>
 							<p>Bachelor</p>
 							<p>Information Technology</p>
@@ -292,6 +296,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>HCM City University of Science</p>
 							<p>Bachelor</p>
 							<p>Information Technology</p>
@@ -301,6 +306,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>HCM City University of Science</p>
 							<p>Bachelor</p>
 							<p>Information Technology</p>
@@ -310,6 +316,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>HCM City University of Science</p>
 							<p>Bachelor</p>
 							<p>Information Technology</p>
@@ -319,6 +326,7 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
 							<p>HCM City University of Science</p>
 							<p>Bachelor</p>
 							<p>Information Technology</p>
@@ -352,14 +360,15 @@
 	$(document).ready( function () {
 		$('#y-content').niceScroll();
 		var columnWidth = $('#profiles-tabs-basic-infor').width();
-		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 45;
+		var contentHeight = $('#y-main-content').height()*9/10 - $('#profiles-tabs-background .profiles-tabs-header').height() - 45;
 
 		//transformToColumn('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight, 152, 5);
 		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
 		addScroll('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
 		addScroll('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
 		addScroll('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('.description-content', '', $('description-content').width(), $('#y-main-content').height()*30/100);
+		addScroll('.description-content', '', $('description-content').width(), $('#y-main-content').height()*3/10);
+		$('#profiles-tabs-basic-infor .profiles-tabs-main-body').outerHeight(contentHeight);
 
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
@@ -367,7 +376,8 @@
 	} );
 
 	window.onresize=function() {
-		var columnWidth = $('#profiles-tabs-basic-infor').width();
+		window.setTimeout('location.reload()', 1);
+		/*var columnWidth = $('#profiles-tabs-basic-infor').width();
 		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 15;
 
 		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
@@ -378,7 +388,7 @@
 
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
-		$('#y-content').niceScroll();
+		$('#y-content').niceScroll();*/
 	};
 </script>
 {% endblock %}
