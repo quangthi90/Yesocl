@@ -1,4 +1,4 @@
-{% extends '@template/default/template/common/layout_feed.tpl' %}
+{% extends '@template/default/template/common/layout.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
@@ -68,7 +68,7 @@
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Descripntion</div>
-								<div class="span9">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
+								<div class="span9 description-content">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
 							</div>
 						</div>
 					</div>		
@@ -333,23 +333,33 @@
 
 {% block javascript %}
 <script type="text/javascript">
-	function transformToColumn(warper, column, width, height) {
+	function transformToColumn(warper, column, width, height, itemheight, numofitem) {
 		$(warper).outerWidth(width);
-		var numofcol = parseInt($(warper).height()/height) + 1;
+		//var numofcol = parseInt($(warper).height()/height) + 1;
+		var numofcol = (parseInt(numofitem/parseInt(height/itemheight)) < numofitem/parseInt(height/itemheight)) ? parseInt(numofitem/parseInt(height/itemheight)) + 1 : parseInt(numofitem/parseInt(height/itemheight));
 		$(warper).width((width + 15)*numofcol - 15);
 		$(warper + ' ' + column).outerWidth($(warper).width());
 		$(warper + ' ' + column).addClass('column-' + numofcol);
 	}
 
+	function addScroll(warper, column, width, height) {
+		$(warper).outerWidth(width);
+		$(warper + ' ' + column).outerHeight(height);
+		$(warper + ' ' + column).css('overflow-y', 'auto');
+		$(warper + ' ' + column).niceScroll({bouncescroll : false});
+	}
+
 	$(document).ready( function () {
 		$('#y-content').niceScroll();
 		var columnWidth = $('#profiles-tabs-basic-infor').width();
-		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 15;
+		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 45;
 
-		transformToColumn('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		transformToColumn('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		transformToColumn('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		transformToColumn('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		//transformToColumn('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight, 152, 5);
+		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('.description-content', '', $('description-content').width(), $('#y-main-content').height()*30/100);
 
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
@@ -360,10 +370,11 @@
 		var columnWidth = $('#profiles-tabs-basic-infor').width();
 		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 15;
 
-		transformToColumn('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		transformToColumn('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		transformToColumn('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		transformToColumn('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
+		addScroll('.description-content', '', $('description-content').width(), $('#y-main-content').height()*30/100);
 
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);

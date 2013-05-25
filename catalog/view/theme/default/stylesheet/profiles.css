@@ -190,7 +190,9 @@
 }
 
 .profiles-tabs-item1 {
-
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
 }
 
 .profiles-tabs-item1-label {
@@ -208,7 +210,6 @@
 	float: left;
 	margin-right: 10px;
 }
-
 /*
 #y-content .profiles-tabs {
 	height: auto;
