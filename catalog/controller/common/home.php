@@ -30,10 +30,11 @@ class ControllerCommonHome extends Controller {
 			}
 
 			$this->data['posts'][] = array(
-				'author' => $post->getAuthor(),
-				'avatar' => $avatar,
-				'title' => $post->getTitle(),
-				'content' => html_entity_decode($post->getContent())
+				'author' 	=> $post->getAuthor(),
+				'avatar' 	=> $avatar,
+				'title' 	=> $post->getTitle(),
+				'content' 	=> html_entity_decode($post->getContent()),
+				'href'		=> $this->url->link('account/edit', $post->getUser()->getId(), 'SSL')
 			);
 		}
 

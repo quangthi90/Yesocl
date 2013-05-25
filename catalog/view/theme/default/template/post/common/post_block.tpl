@@ -2,20 +2,20 @@
 	<div class="post">
 		<div class="row-fluid post_header">
 			<div class="span2 avatar_thumb">
-				<a href="#">
+				<a href="{{ post.href }}">
 					<img src="{{ post.avatar }}" alt="user">
 				</a>
 			</div>
 			<div class="span10">
 				<div class="row-fluid">
 					<div class="span8 post_user">
-						<a href="#">{{ post.author }}</a>
+						<a href="{{ post.href }}">{{ post.author }}</a>
 					</div>
 					<div class="span4 post_time">
-						<i class="icon-time icon-2x"></i> 1 minute ago
+						<i class="icon-time icon-2x"></i> {{ post.created|date('d/m/Y') }}
 					</div>
 				</div>
-				<h6 class="post_title">{{ post.title }}</h4>
+				<h6 class="post_title"><a href="#">{{ post.title }}</a></h6>
 			</div>
 		</div>
 		<div class="post_body">{{ post.content|raw }}</div>
