@@ -14,7 +14,7 @@
 				<div class="span7">
 					<div class="row-fluid">
 						<div class="span5 profiles-tabs-title">BASIC INFORMATION</div>
-						<a href="#"><i class="icon-chevon-sign-right"></i></a>
+						<div class="pull-right profiles-btn-next"><a href="#"><i class="icon-chevron-right"></i></a></div>
 					</div>
 				</div>
 				<div class="clear"></div>
@@ -31,39 +31,39 @@
 						<div class="profiles-tabs-main-body">
 							<div class="row-fluid">
 								<div class="span2 offset1">Fullname</div>
-								<div class="span9">Le Van Bap</div>
+								<div class="span9 profiles-tabs-value">Le Van Bap</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Email</div>
-								<div class="span9">abcd@gmail.com</div>
+								<div class="span9 profiles-tabs-value">abcd@gmail.com</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Phone</div>
-								<div class="span9">0123456789</div>
+								<div class="span9 profiles-tabs-value">0123456789</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Sex</div>
-								<div class="span9">Male</div>
+								<div class="span9 profiles-tabs-value">Male</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Birthday</div>
-								<div class="span9">June, 26</div>
+								<div class="span9 profiles-tabs-value">June, 26</div>
 							</div>
 
 							<div class="row-fluid profiles-line"></div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Living</div>
-								<div class="span9">Ho Chi Minh City</div>
+								<div class="span9 profiles-tabs-value">Ho Chi Minh City</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Interest</div>
-								<div class="span9">Footbal/TV</div>
+								<div class="span9 profiles-tabs-value">Footbal/TV</div>
 							</div>
 
 							<div class="row-fluid">
@@ -341,15 +341,6 @@
 
 {% block javascript %}
 <script type="text/javascript">
-	function transformToColumn(warper, column, width, height, itemheight, numofitem) {
-		$(warper).outerWidth(width);
-		//var numofcol = parseInt($(warper).height()/height) + 1;
-		var numofcol = (parseInt(numofitem/parseInt(height/itemheight)) < numofitem/parseInt(height/itemheight)) ? parseInt(numofitem/parseInt(height/itemheight)) + 1 : parseInt(numofitem/parseInt(height/itemheight));
-		$(warper).width((width + 15)*numofcol - 15);
-		$(warper + ' ' + column).outerWidth($(warper).width());
-		$(warper + ' ' + column).addClass('column-' + numofcol);
-	}
-
 	function addScroll(warper, column, width, height) {
 		$(warper).outerWidth(width);
 		$(warper + ' ' + column).outerHeight(height);
@@ -362,7 +353,6 @@
 		var columnWidth = $('#profiles-tabs-basic-infor').width();
 		var contentHeight = $('#y-main-content').height()*9/10 - $('#profiles-tabs-background .profiles-tabs-header').height() - 45;
 
-		//transformToColumn('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight, 152, 5);
 		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
 		addScroll('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
 		addScroll('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
@@ -377,18 +367,6 @@
 
 	window.onresize=function() {
 		window.setTimeout('location.reload()', 1);
-		/*var columnWidth = $('#profiles-tabs-basic-infor').width();
-		var contentHeight = $('#y-main-content').height() - $('#profiles-tabs-background .profiles-tabs-header').height() - 15;
-
-		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('.description-content', '', $('description-content').width(), $('#y-main-content').height()*30/100);
-
-		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
-		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
-		$('#y-content').niceScroll();*/
 	};
 </script>
 {% endblock %}
