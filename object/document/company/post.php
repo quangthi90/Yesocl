@@ -40,6 +40,9 @@ Class Post {
 	/** @MongoDB\EmbedMany(targetDocument="Comment") */
 	private $comments = array();
 
+	/** @MongoDB\String */
+	private $slug;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -159,5 +162,13 @@ Class Post {
 
 	public function getComments(){
 		return $this->comments;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 }

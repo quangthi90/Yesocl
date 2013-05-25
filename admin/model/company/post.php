@@ -59,7 +59,19 @@ class ModelCompanyPost extends Doctrine {
 			$data['status'] = 0;
 		}
 
+		$slug = $this->url->create_slug( $data['title'] );
+		
+		$posts = $this->dm->getRepository( 'Document\Company\Post' )->findBy( array(
+			'slug' => new MongoRegex("/^$slug/i")
+		));
+
+		$expend = '';
+		if ( count($posts) > 0 ){
+			$expend = '-' . count($posts);
+		}
+
 		$post = new Post();
+		$post->setSlug( $slug . $expend );
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setCategory( $category );
@@ -141,6 +153,30 @@ class ModelCompanyPost extends Doctrine {
 		}
 
 		$post = $company->getPostById( $post_id );
+
+		$count = 0;
+		$posts = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array(
+			'posts.slug' => new MongoRegex("/^$slug/i")
+		)).exec(function ($err, $doc) {
+	      	$count += $doc->getPosts()->count();
+	      	print("hello " . $count); exit;
+	   	});
+
+	   	print($count); exit; 
+
+		// Check slug
+		if ( $data['title'] != $post->getTitle() ){
+			$slug = $this->url->create_slug( $data['title'] );
+			$posts = $this->dm->getRepository( 'Document\Company\Post' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$expend = '';
+			if ( count($posts) > 0 ){
+				$expend = '-' . count($posts);
+			}
+
+			$post->setSlug( $slug . $expend );
+		}
+
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setCategory( $category );
