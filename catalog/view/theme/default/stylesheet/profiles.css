@@ -141,6 +141,14 @@
 	margin-right: 6px;
 }
 
+.profiles-btn-next:hover {
+	background: #9AEF6B;
+}
+
+.profiles-btn-next:hover a {
+	color: #91AAA0;
+}
+
 .profiles-btn-next i {
 	color: #fff;
 }
