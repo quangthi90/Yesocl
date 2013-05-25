@@ -1,0 +1,163 @@
+#y-main-content {
+	overflow-y: hidden;
+    overflow-x: auto;
+}
+
+#y-content {
+	overflow-y: hidden;
+    overflow-x: auto;
+}
+
+#y-content .profiles-tabs {
+	float: left;
+	margin-right: 15px;
+}
+
+#y-content .profiles-tabs-header {
+	line-height: 45px;
+	border: 1px solid #6db23b;
+	-moz-box-shadow: 1px 1px 2px 1px #cecece;
+	-webkit-box-shadow: 1px 1px 2px 1px #cecece;
+	box-shadow: 1px 1px 2px 1px #cecece;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #edf7f9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#edf7f9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffffff 0%,#edf7f9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#edf7f9',GradientType=0 ); /* IE6-9 */
+}
+
+#y-content .profiles-tabs-header .span7, #y-content .profiles-tabs-main .span7 {
+	margin-left: 0px;
+}
+
+#y-content .profiles-tabs-title {
+	text-align: center;
+	color: #fff;
+	font-size: 22px;
+	text-transform: uppercase;
+	font-weight: bold;
+	background: #74b93c; /* Old browsers */
+	background: -moz-linear-gradient(top,  #74b93c 0%, #519839 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#74b93c), color-stop(100%,#519839)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #74b93c 0%,#519839 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #74b93c 0%,#519839 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #74b93c 0%,#519839 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #74b93c 0%,#519839 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b93c', endColorstr='#519839',GradientType=0 ); /* IE6-9 */
+}
+
+#y-content .profiles-tabs-main {
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border: 1px solid #c0c0c0;
+	background: #fff;
+}
+
+#profiles-tabs-background .profiles-tabs-main {
+	float: left;
+}
+
+#profiles-tabs-background-experience, #profiles-tabs-background-skill, #profiles-tabs-background-education {
+	margin-left: 15px;
+}
+
+#profiles-tabs-background-sumary .profiles-tabs-main-body, #profiles-tabs-basic-infor .profiles-tabs-main-body {
+	font-size: 12px;
+}
+
+#y-content .profiles-tabs-main-header {
+}
+
+#y-content .profiles-tabs-main-header a:first-child {
+	margin-left: 10px;
+	color: #71b73c;
+	text-transform: uppercase;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+#y-content .profiles-btn-edit {
+	padding: 0px 8px;
+	margin-right: 10px;
+	float: right;
+}
+
+#y-content .profiles-tabs-main-body .profiles-btn-edit {
+	margin-right: 0px;
+}
+
+#y-content .profiles-btn-edit i {
+	line-height: 28px;
+	font-size: 18px;
+}
+
+#y-content .profiles-tabs-main-body {
+	margin-top: 10px;
+}
+
+#profiles-tabs-background .profiles-tabs-main-body {
+    height: 100%;
+	padding: 10px;
+	word-wrap:break-word;
+}
+
+#profiles-tabs-background .profiles-tabs-main-body p {
+	word-spacing: normal;
+}
+
+.profiles-tabs-item1-label {
+	font-size: 16px;
+	color: #71b73c;
+	margin-bottom: 10px;
+}
+
+.profiles-tabs-item1-content {
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #c0c0c0;
+	font-size: 14px;
+}
+
+.profiles-tabs-item2 {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	font-size: 13px;
+}
+
+.profiles-btn-next {
+	width: 35px;
+	height: 35px;
+	background: #69b538;
+	border-radius: 25px;
+	line-height: 35px;
+	vertical-align: center;
+	text-align: center;
+	margin-top: 5px;
+	margin-right: 6px;
+}
+
+.profiles-btn-next:hover {
+	background: #9AEF6B;
+}
+
+.profiles-btn-next:hover a {
+	color: #91AAA0;
+}
+
+.profiles-btn-next i {
+	color: #fff;
+}
+
+#profiles-tabs-basic-infor .profiles-tabs-value {
+	color: #6eb33b;
+}
+
+#profiles-tabs-basic-infor .profiles-line {
+	border-top: 1px solid #c0c0c0;
+	padding-bottom: 10px;
+}
