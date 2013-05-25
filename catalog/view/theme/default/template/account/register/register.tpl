@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="y-sub-container-1 row-fluid">
+<div id="y-content" class="y-sub-container-1">
 	<div id="y-main-content">
 		<div id="myCarousel" class="carousel slide">
 		  	<!-- Carousel items -->
@@ -45,22 +45,7 @@
 {% block javascript %}
 <script type="text/javascript">
 jQuery(document).ready(function (){
-	updateContentSize();
-
-	function updateContentSize(){
-		var wid = $(window).height();
-		var hwid = $('#y-header').innerHeight();
-		var fwid = $('#y-footer').innerHeight();
-
-		// Main content height
-		var mwid = wid - hwid - fwid - 10;
-		$('#y-main-content').height( mwid );
-	} 
 	
-	$(window).resize(function() {
-		updateContentSize();
-	});
-
 	$('#myCarousel').on('slid', function(){
 		$(this).carousel('pause');
 	});

@@ -12,10 +12,11 @@
 		this.$month		= $el.find('select[name=\'month\']');
 		this.$year		= $el.find('select[name=\'year\']');
 		this.$sex		= $el.find('select[name=\'sex\']');
+		this.$agree		= $el.find('input[name=\'agree\']');
 
 		this.url		= $el.attr('action');
 
-		this.$reg_btn	= $el.find('.btn-ystandard');
+		this.$reg_btn	= $el.find('.btn-reg');
 
 		this.attachEvents();
 	}
@@ -32,22 +33,26 @@
 				return false;
 			}
 			
-			if(that.validate() == false){
+			var validate = that.validate();
+			if(validate == false){
+			}else if(validate == "confirm"){
+				return false;
+			}else{
+				that.data = {
+					firstname 	: that.$firstname.val(),
+					lastname 	: that.$lastname.val(),
+					email		: that.$email.val(),
+					password	: that.$password.val(),
+					day			: that.$day.val(),
+					month		: that.$month.val(),
+					year		: that.$year.val(),
+					sex			: that.$sex.val()
+				};
+
+				that.submit(that.$reg_btn);
+
 				return false;
 			}
-			
-			that.data = {
-				firstname 	: that.$firstname.val(),
-				lastname 	: that.$lastname.val(),
-				email		: that.$email.val(),
-				password	: that.$password.val(),
-				day			: that.$day.val(),
-				month		: that.$month.val(),
-				year		: that.$year.val(),
-				sex			: that.$sex.val()
-			};
-
-			that.submit(that.$reg_btn);
 		});
 	};
 
@@ -67,59 +72,54 @@
 			if(data.success == 'ok'){
 				window.location.reload();
 			}else{
-				$('.top-warning').removeClass("hidden");
+				$('.top-warning').html(data.warning).removeClass("hidden");
 			}
 		});
 	};
 
-	Register.prototype.validate = function($button){
+	Register.prototype.validate = function(){
 		if (this.$firstname.val() == ''){
-			this.$firstname.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$lastname.val() == ''){
-			this.$lastname.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$email.val() == ''){
-			this.$email.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$password.val() == ''){
-			this.$password.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$confirm.val() == ''){
-			this.$confirm.parent().find('.warning').removeClass("hidden");
 			return false;	
 		}
 
 		if (this.$password.val() != this.$confirm.val()){
-			this.$password.parent().find('.warning').removeClass("hidden");
+			that.$confirm.parent().find('.warning').removeClass('hidden');
+			return "confirm";	
+		}
+
+		if (this.$day.val() == ""){
 			return false;	
 		}
 
-		if (this.$day.val() == 0){
-			this.$day.parent().find('.warning').removeClass("hidden");
+		if (this.$month.val() == ""){
 			return false;	
 		}
 
-		if (this.$month.val() == 0){
-			this.$month.parent().find('.warning').removeClass("hidden");
+		if (this.$year.val() == ""){
 			return false;	
 		}
 
-		if (this.$year.val() == 0){
-			this.$year.parent().find('.warning').removeClass("hidden");
+		if (this.$sex.val() == ""){
 			return false;	
 		}
-
-		if (this.$sex.val() == 0){
-			this.$sex.parent().find('.warning').removeClass("hidden");
+		
+		if (!this.$agree.parent().hasClass('checked')){
 			return false;	
 		}
 	};

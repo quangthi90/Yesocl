@@ -27,6 +27,12 @@ Class Post {
 	
 	/** @MongoDB\Date */
 	private $created;
+
+	/** @MongoDB\String */
+	private $author;
+
+	/** @MongoDB\String */
+	private $email;
 	
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="posts") */
     private $user;
@@ -117,8 +123,26 @@ Class Post {
 		$this->created = new \DateTime();
 	}
 
+	public function setAuthor( $author ){
+		$this->author = $author;
+	}
+
+	public function getAuthor(){
+		return $this->author;
+	}
+
+	public function setEmail( $email ){
+		$this->email = $email;
+	}
+
+	public function getEmail(){
+		return $this->email;
+	}
+
 	public function setUser( $user ){
 		$this->user = $user;
+		$this->author = $user->getUsername();
+		$this->email = $user->getPrimaryEmail()->getEmail();
 	}
 
 	public function getUser(){

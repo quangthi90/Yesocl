@@ -15,45 +15,46 @@
 <div id="y-frm-login" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">
-        Join <strong>YESOCL.com</strong>
+        Join <strong>YESOCL.com</strong>         
     </div>
     <div class="frm-content">
     	<form class="reg-form" action="{{ action }}" method="post">
     		<div class="top-warning warning hidden">Warning!!</div>
     		<div class="controls controls-row">
-    			<input name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" />
-    			<input name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" />
+    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" />
+    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls">
-    			<input name="email" type="text" class="input-block-level" id="reg-email" placeholder="E-mail" />
+    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" placeholder="E-mail" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls controls-row">
-    			<input name="password" type="password" class="span2"  id="password" placeholder="Password" />
-    			<input name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" />
-    			<div class="warning hidden">warning</div>
+    			<input required="required" pattern=".{6,20}" title="6 to 20 characters" name="password" type="password" class="span2"  id="password" placeholder="Password" />
+    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" />
+    			<div class="warning hidden">Confirm not match!</div>
     		</div>
     		<div class="controls" style="margin-bottom: 10px;">
                 <div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;">Birthday</span>
-                	<select name="day" class="birthday" id="reg-birthay-day">
-	                    <option value="0">-- Day --</option>
+                	<select required="required" name="day" class="birthday" id="reg-birthay-day">
+	                    <option value="">-- Day --</option>
 	                    {% for i in 1..31 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
-	                <select name="month" class="birthday" id="reg-birthay-month">
-	                    <option value="0">-- Month --</option>
+	                <select required="required" name="month" class="birthday" id="reg-birthay-month">
+	                    <option value="">-- Month --</option>
 	                    {% for i in 1..12 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
-	                <select name="year" class="birthday" id="reg-birthay-year">
-	                    <option value="0">-- Year --</option>
-	                    <option>2011</option>
-	                    <option>2012</option>
-	                    <option>2013</option>
+	                <select required="required" name="year" class="birthday" id="reg-birthay-year">
+	                	{% set now = "now"|date("Y") %}
+	                    <option value="">-- Year --</option>
+	                    {% for i in now..(now - 100) %}
+	                    <option>{{ i }}</option>
+	                    {% endfor %}
 	                </select>
 	                <div class="warning hidden">warning</div>
                 </div>                
@@ -61,8 +62,8 @@
             <div class="controls">
             	<div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;width: 48px;">Sex</span>
-	                <select name="sex" id="reg-sex" style="width: 312px;">
-	                    <option value="0">-- Select sex --</option>
+	                <select required="required" name="sex" id="reg-sex" style="width: 312px;">
+	                    <option value="">-- Select sex --</option>
 	                    <option value="1">Male</option>
 	                    <option value="2">Female</option>
 	                    <option value="3">Unknow</option>
@@ -71,9 +72,9 @@
             	</div>
             </div>
             <div class="controls">
-                <label class="checkbox"><input type="checkbox" name="lg-remember" />I agree Yesocl's policy</label>
+                <label class="checkbox"><input type="checkbox" name="agree" required="required" />I agree Yesocl's policy</label>
                 <br>
-                <button type="button" class="btn btn-ystandard">Sign up</button>
+                <button type="submit" class="btn btn-success btn-reg">Sign up</button>
             </div>
     	</form>
     </div>
@@ -82,6 +83,7 @@
 
 {% block javascript %}
 	<script type="text/javascript" src="catalog/view/javascript/register.js"></script>
+	<script type="text/javascript" src="catalog/view/javascript/account.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
         	//Join clicked:

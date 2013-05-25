@@ -19,10 +19,12 @@
 						    <div class="controls">
 						    	<input type="text" id="inputLocation" placeholder="Input Text">
 						    	<button class="inline"><i class="icon-plus"></i></button>
+						    	<span class="yes-warning">Field is required</span>
 						    </div>
 					    </div>
 					</div>
 			    </form>
+			    <div class="space-line-20"></div>
 			    <div class="row-fluid">
 			    	<div class="span11 offset1">
 			    		<a href="#myCarousel" data-slide="next"><button class="btn btn-success">Continue</button></a>

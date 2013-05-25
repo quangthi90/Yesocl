@@ -11,6 +11,33 @@ class ControllerCommonHome extends Controller {
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		
 		$this->data['heading_title'] = $this->config->get('config_title');
+
+		$this->load->model( 'company/company' );
+		$this->load->model('tool/image');
+
+		$company = $this->model_company_company->getCompanyBySlug( $this->config->get('company')['default']['slug'] );
+
+		if ( $company ){
+			$company_posts = $company->getPosts();
+		}
+
+		$this->data['posts'] = array();
+		foreach ( $company_posts as $post ) {
+			if ( $post->getUser() && $this->customer->getAvatar() ){
+				$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+			}else{
+				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
+			}
+
+			$this->data['posts'][] = array(
+				'author' => $post->getAuthor(),
+				'avatar' => $avatar,
+				'title' => $post->getTitle(),
+				'content' => html_entity_decode($post->getContent())
+			);
+		}
+
+		$this->data['status_action'] = $this->url->link('post/post/status', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';

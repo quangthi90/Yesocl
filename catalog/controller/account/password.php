@@ -3,11 +3,11 @@ class ControllerAccountPassword extends Controller {
 	private $error = array();
 	     
   	public function index() {	
-    	if (!$this->customer->isLogged()) {
-      		$this->session->data['redirect'] = $this->url->link('account/password', '', 'SSL');
+    	//if (!$this->customer->isLogged()) {
+      	//	$this->session->data['redirect'] = $this->url->link('account/password', '', 'SSL');
 
-      		$this->redirect($this->url->link('account/login', '', 'SSL'));
-    	}
+      	//	$this->redirect($this->url->link('account/login', '', 'SSL'));
+    	//}
 
 		$this->language->load('account/password');
 
@@ -88,15 +88,12 @@ class ControllerAccountPassword extends Controller {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
+			'common/sidebar_control',
 			'common/footer',
 			'common/header'	
 		);
-						
-		$this->response->setOutput($this->render());			
+				
+		$this->response->setOutput($this->twig_render());			
   	}
   
   	private function validate() {

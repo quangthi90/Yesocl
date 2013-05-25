@@ -74,6 +74,8 @@ foreach ($configs as $setting) {
 }
 $config->load( 'title' );
 $config->load( 'user' );
+$config->load( 'company' );
+$config->load( 'url' );
 
 /*if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
@@ -244,7 +246,7 @@ if ( $customer->isLogged() ) {
 		$action = new Action('common/home');
 	}
 }else{
-	if (isset($request->get['route']) && ($request->get['route'] == 'account/login' || $request->get['route'] == 'account/register/register')) {
+	if (isset($request->get['route']) && ($request->get['route'] == 'account/login/login' || $request->get['route'] == 'account/register/register')) {
 		$action = new Action($request->get['route']);
 	}else{
 		$action = new Action('welcome/home');

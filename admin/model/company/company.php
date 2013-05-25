@@ -1,6 +1,8 @@
 <?php
 use Document\Company\Company;
 
+use MongoRegex;
+
 class ModelCompanyCompany extends Doctrine {
 	public function addCompany( $data = array(), $logo = array() ) {
 		// name is required & isn't exist
@@ -57,7 +59,16 @@ class ModelCompanyCompany extends Doctrine {
 			$data['status'] = 0;
 		}
 
+		$slug = $this->url->create_slug( $data['name'] );
+		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+		$expend = '';
+		if ( count($companies) > 0 ){
+			$expend = '-' . count($companies);
+		}
+
 		$company = new Company();
+		$company->setSlug( $slug . $expend );
 		$company->setName( $data['name'] );
 		$company->setOwner( $user );
 		$company->setGroup( $group );
@@ -143,6 +154,19 @@ class ModelCompanyCompany extends Doctrine {
 		// name is exist
 		if ( $company->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
 			return false;
+		}
+
+		// Check slug
+		if ( $data['name'] != $company->getName() ){
+			$slug = $this->url->create_slug( $data['name'] );
+			$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$expend = '';
+			if ( count($companies) > 0 ){
+				$expend = '-' . count($companies);
+			}
+
+			$company->setSlug( $slug . $expend );
 		}
 
 		$company->setName( $data['name'] );

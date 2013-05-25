@@ -4,6 +4,8 @@ class Customer {
 	private $firstname;
 	private $lastname;
 	private $email;
+	private $avatar;
+	private $username;
 	private $customer_group_id;
 	
   	public function __construct($registry) {
@@ -23,6 +25,7 @@ class Customer {
 				$this->firstname = $customer_query->getMeta()->getFirstName();
 				$this->lastname = $customer_query->getMeta()->getLastName();
 				$this->email = $customer_query->getPrimaryEmail()->getEmail();
+				$this->username = $customer_query->getUsername();
 				$this->customer_group_id = $customer_query->getGroupUser()->getId();
 			
 				// $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
@@ -87,6 +90,10 @@ class Customer {
   	public function getId() {
     	return $this->customer_id;
   	}
+
+  	public function getUsername(){
+  		return $this->username;
+  	}
       
   	public function getFirstName() {
 		return $this->firstname;
@@ -98,6 +105,10 @@ class Customer {
   
   	public function getEmail() {
 		return $this->email;
+  	}
+
+  	public function getAvatar() {
+		return $this->avatar;
   	}
 
   	public function getCustomerGroupId() {
