@@ -367,7 +367,7 @@
 
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
-		$('#y-content').niceScroll();	
+		$('#y-content').niceScroll();
 	};
 </script>
 {% endblock %}
