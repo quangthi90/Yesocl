@@ -57,6 +57,18 @@
 
 		this.$month.change(function(e){
 			e.preventDefault();
+
+			that.validateDate();
+
+			return false;
+		});
+
+		this.$year.change(function(e){
+			e.preventDefault();
+
+			that.validateDate();
+
+			return false;
 		});
 	};
 
@@ -126,15 +138,6 @@
 		if (!this.$agree.parent().hasClass('checked')){
 			return false;	
 		}
-
-		if (this.$day.val() == 31 && this.$month.val() == (4 || 6 || 9 || 11)){
-			var options = '<option value="">-- Day --</option>';
-			for (var i = 1; i < 31; i++) {
-				options += '<option>' + i + '</option>';
-			};
-			this.$day.html(options);
-			return false;
-		}
 	};
 
 	Register.prototype.triggerProgress = function($el, promise)
@@ -149,6 +152,34 @@
 
 		promise.then(f, f);
 	};
+
+	Register.prototype.validateDate = function(){
+		var day = this.$day.val();
+		if (this.$month.val() == 4 || this.$month.val() == 6 || this.$month.val() == 9 || this.$month.val() == 11){
+			this.renderDate(this.$day, 'Day', 31);
+		
+		}else if (this.$month.val() == 2){
+			if ((this.$year.val() % 4 == 0 && this.$year.val() % 100 != 0) || this.$year.val() % 400 == 0){
+				this.renderDate(this.$day, 'Day', 30);
+			}else{
+				this.renderDate(this.$day, 'Day', 29);
+			}
+		
+		}else{
+			this.renderDate(this.$day, 'Day', 32);
+		}
+
+		this.$day.val(day);
+		return false;
+	}
+
+	Register.prototype.renderDate = function($el, text, limit){
+		var options = '<option value="">-- ' + text + ' --</option>';
+		for (var i = 1; i < limit; i++) {
+			options += '<option>' + i + '</option>';
+		};
+		$el.html(options);
+	}
 
 	$(function(){
 		$('.reg-form').each(function(){
