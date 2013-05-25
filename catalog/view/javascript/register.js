@@ -54,6 +54,10 @@
 				return false;
 			}
 		});
+
+		this.$month.change(function(e){
+			e.preventDefault();
+		});
 	};
 
 	Register.prototype.submit = function($button){
@@ -124,7 +128,11 @@
 		}
 
 		if (this.$day.val() == 31 && this.$month.val() == (4 || 6 || 9 || 11)){
-			this.$day.val() = "";
+			var options = '<option value="">-- Day --</option>';
+			for (var i = 1; i < 31; i++) {
+				options += '<option>' + i + '</option>';
+			};
+			this.$day.html(options);
 			return false;
 		}
 	};

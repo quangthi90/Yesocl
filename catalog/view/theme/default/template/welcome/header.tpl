@@ -1,7 +1,7 @@
 <div id="y-header" class="outer-30">
     <div class="row-fluid">
         <div id="y-logo" class="span3">
-            <a href="{{ base }}"><img src="image/template/logo.png" /></a>
+            <a href="{{ action.home }}"><img src="image/template/logo.png" /></a>
         </div>
         <div class="span4">
             <div class="row-fluid" id="y-welcome-menu">
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="span5 y-welcome-login">
-            <form action="{{ action }}" method="post" class="row-fluid login-form">
+            <form action="{{ action.login }}" method="post" class="row-fluid login-form">
                 <div class="span5">
                     <div class="row-fluid">
                         <input name="email" type="text" placeholder="Email"  class="span12 input-welcome" />

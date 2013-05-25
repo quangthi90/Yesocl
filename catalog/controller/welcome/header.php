@@ -9,7 +9,10 @@ class ControllerWelcomeHeader extends Controller {
 			$this->data['base'] = $this->config->get('config_url');
 		}
 
-		$this->data['action'] = $this->url->link('account/login/login', '', 'SSL');
+		$this->data['action'] = array(
+			'login' => $this->url->link('account/login/login', '', 'SSL'),
+			'home'	=> $this->url->link('common/home', '', 'SSL')
+		);
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/welcome/header.tpl';
