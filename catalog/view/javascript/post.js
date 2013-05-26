@@ -125,9 +125,12 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				var html = $.tmpl( $('#item-template').html(), {comments: data.post.comments} );
-				console.log(html);
-				$('.comment-body').html(html.html()).val();
+				var htmlOutput = '';
+				for (var i = 0; i < data.post.comments.length; i++) {
+					htmlOutput += $.tmpl( $('#item-template'), data.post.comments[i] ).html();
+				}
+				// console.log(data.post.comments);
+				$('.comment-body').html(htmlOutput);
 		
 				$('#comment-box').animate({"right": "0px"}, "slow", function(){
 					makeVerticalCommentBox();

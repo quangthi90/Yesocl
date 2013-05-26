@@ -180,7 +180,22 @@ Class Post {
 		return $this->slug;
 	}
 
-	public function formatToCache( $image_tool, $url_lib, $have_comment = true ){
+	/**
+	* Format array to save to Cache
+	* 05/26/2013
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @param:
+	*	- image tool: catalog/model/tool/image
+	*	- url lib: class url in library
+	*	- bool include comment: cache all comments of post
+	* @return: array Post & Comments
+	*	Ex:
+	*		array = {"id", "author", "avatar", "title", "content", "created", "comment_count", "href_user", "href_post", "href_status", 
+	*			"comments" => array{"author", "avatar", "content", "created", "href_user"
+	*			}
+	*		}
+	*/
+	public function formatToCache( $image_tool, $url_lib, $include_comment = true ){
 		if ( $this->getUser() && $this->getUser()->getAvatar() ){
 			$avatar = $image_tool->resize( $this->getUser()->getAvatar(), 180, 180 );
 		}else{
@@ -202,7 +217,7 @@ Class Post {
 			'href_status'	=> $url_lib->link('post/post/getCommentByPost', '', 'SSL')
 		);
 
-		if ( $have_comment == true ){
+		if ( $include_comment == true ){
 			$post_data['comments'] = array();
 
 			foreach ( $this->getComments() as $comment ) {

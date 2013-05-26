@@ -26,21 +26,20 @@
 	</div>
 	{% raw %}
 	<div id="item-template" class="hidden">
-		{{each(i, comment) comments}}
 		<div>
 			<div class="comment-item">
 				<div class="row-fluid">
 					<div class="span2 avatar_thumb">
 						<a href="#">
-							<img src="${comment.avatar}" alt="user">
+							<img src="${avatar}" alt="user">
 						</a>
 					</div>
 					<div class="span10">
 						<div class="comment-info">
-							<a href="${comment.user_href}">${comment.author}</a> - <span class="comment-time">${comment.created}</span>
+							<a href="${user_href}">${author}</a> - <span class="comment-time">${created}</span>
 						</div>
 						<div class="comment-content">
-							{{html comment.content}}
+							{{html content}}
 						</div>
 					</div>
 				</div>
@@ -49,7 +48,6 @@
 				</div>
 			</div>
 		</div>
-		{{/each}}
 	</div>
 	{% endraw %}
 {% endblock %}
