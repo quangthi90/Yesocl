@@ -34,7 +34,7 @@ class ControllerCommonHome extends Controller {
 				'avatar' 	=> $avatar,
 				'title' 	=> $post->getTitle(),
 				'content' 	=> html_entity_decode($post->getContent()),
-				'href'		=> $this->url->link('account/edit', $post->getUser()->getId(), 'SSL')
+				'href'		=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL')
 			);
 		}
 

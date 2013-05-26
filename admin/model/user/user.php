@@ -303,10 +303,24 @@ class ModelUserUser extends Doctrine {
 		$meta->setPhones( $phones );
 		$meta->setWebsites( $websites );
 		$meta->setFormers( $formers );
+
+		// Slug
+		$slug = $this->url->create_slug( $data['user']['username'] );
 		
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+		$arr_slugs = array_map(function($user){
+			return $user->getSlug();
+		}, $users->toArray());
+
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+		print($slug); exit;
+
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user = new User();
+		$user->setSlug( $slug );
 		$user->setUsername( $data['user']['username'] );
 		$user->setEmails( $emails );
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
@@ -623,6 +637,22 @@ class ModelUserUser extends Doctrine {
 		$meta->setPhones( $phones );
 		$meta->setWebsites( $websites );
 		$meta->setFormers( $formers );
+
+		// Slug
+		if ( $data['user']['username'] != $user->getUsername() ){
+			$slug = $this->url->create_slug( $data['user']['username'] );
+		
+			$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$arr_slugs = array_map(function($user){
+				return $user->getSlug();
+			}, $users->toArray());
+
+			$this->load->model( 'tool/slug' );
+			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+			
+			$user->setSlug( $slug );
+		}
 		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);

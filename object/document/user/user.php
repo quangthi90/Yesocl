@@ -26,6 +26,9 @@ Class User {
 	/** @MongoDB\String */
 	private $salt;
 
+	/** @MongoDB\String */
+	private $slug;
+
 	/** 
 	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Email") 
 	 */
@@ -171,6 +174,14 @@ Class User {
 
 	public function getCreated(){
 		return $this->created;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	/**

@@ -93,13 +93,13 @@ class ControllerCompanyCompany extends Controller {
 			if ( !isset( $this->request->files['logo'] ) ) {
 				$this->request->files['logo'] = array();
 			}
-
+			
 			if ( $this->model_company_company->editCompany( $this->request->get['company_id'], $this->request->post, $this->request->files['logo'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
-
+			
 			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
@@ -774,7 +774,7 @@ class ControllerCompanyCompany extends Controller {
 		$this->load->model( 'company/company' );
 		if ( !isset( $this->request->post['name']) || strlen( trim( $this->request->post['name'] ) ) < 1 || strlen( trim( $this->request->post['name'] ) ) > 128  ) {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}else {
+		}/*else {
 			if ( isset( $this->request->get['company_id'] ) ) {
 				$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 				if ( !empty( $company ) ) {
@@ -783,14 +783,14 @@ class ControllerCompanyCompany extends Controller {
 					}
 				}
 			}
-		}
-
+		}*/
+		
 		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) && $this->request->files['logo']['size'] > 0 ) {
 			if ( !$this->model_company_company->isValidLogo( $this->request->files['logo'] ) ) {
 				$this->error['error_logo'] = $this->language->get( 'error_logo');
 			}
 		}
-
+		
 		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 50 || strlen( trim( $this->request->post['description'] ) ) > 256 ) {
 			$this->error['error_description'] = $this->language->get( 'error_description' );
 		}

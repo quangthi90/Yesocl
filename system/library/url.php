@@ -33,8 +33,48 @@ class Url {
 		return $url;
 	}
 
+	public function removeSign($str)
+	{
+		$coDau=array("à","á","ạ","ả","ã","â","ầ","ấ","ậ","ẩ","ẫ","ă","ằ","ắ"
+		,"ặ","ẳ","ẵ","è","é","ẹ","ẻ","ẽ","ê","ề","ế","ệ","ể","ễ","ì","í","ị","ỉ","ĩ",
+		"ò","ó","ọ","ỏ","õ","ô","ồ","ố","ộ","ổ","ỗ","ơ"
+		,"ờ","ớ","ợ","ở","ỡ",
+		"ù","ú","ụ","ủ","ũ","ư","ừ","ứ","ự","ử","ữ",
+		"ỳ","ý","ỵ","ỷ","ỹ",
+		"đ",
+		"À","Á","Ạ","Ả","Ã","Â","Ầ","Ấ","Ậ","Ẩ","Ẫ","Ă"
+		,"Ằ","Ắ","Ặ","Ẳ","Ẵ",
+		"È","É","Ẹ","Ẻ","Ẽ","Ê","Ề","Ế","Ệ","Ể","Ễ",
+		"Ì","Í","Ị","Ỉ","Ĩ",
+		"Ò","Ó","Ọ","Ỏ","Õ","Ô","Ồ","Ố","Ộ","Ổ","Ỗ","Ơ"
+		,"Ờ","Ớ","Ợ","Ở","Ỡ",
+		"Ù","Ú","Ụ","Ủ","Ũ","Ư","Ừ","Ứ","Ự","Ử","Ữ",
+		"Ỳ","Ý","Ỵ","Ỷ","Ỹ",
+		"Đ","ê","ù","à", " ", "/", ".", ",", ":", "&", "+", "'");
+		$khongDau=array("a","a","a","a","a","a","a","a","a","a","a"
+		,"a","a","a","a","a","a",
+		"e","e","e","e","e","e","e","e","e","e","e",
+		"i","i","i","i","i",
+		"o","o","o","o","o","o","o","o","o","o","o","o"
+		,"o","o","o","o","o",
+		"u","u","u","u","u","u","u","u","u","u","u",
+		"y","y","y","y","y",
+		"d",
+		"A","A","A","A","A","A","A","A","A","A","A","A"
+		,"A","A","A","A","A",
+		"E","E","E","E","E","E","E","E","E","E","E",
+		"I","I","I","I","I",
+		"O","O","O","O","O","O","O","O","O","O","O","O"
+		,"O","O","O","O","O",
+		"U","U","U","U","U","U","U","U","U","U","U",
+		"Y","Y","Y","Y","Y",
+		"D","e","u","a", "-", "", "", "", "", "", "", "");
+		return str_replace($coDau,$khongDau,$str);
+	}
+
 	/* Call this function to create a slug from $string */
 	public function create_slug($string){
+		$string = $this->removeSign($string);
 		$string = $this->remove_accents($string);
 		$string = $this->symbols_to_words($string);
 		$string = strtolower($string); // Force lowercase
@@ -211,6 +251,25 @@ class Url {
 	 	$output = str_replace('%', ' percent ', $output);
 	 	$output = str_replace('&', ' and ', $output);
 	 	return $output;
+	}
+
+	function seems_utf8($str) {
+	    $length = strlen($str);
+	    for ($i=0; $i < $length; $i++) {
+	        $c = ord($str[$i]);
+	        if ($c < 0x80) $n = 0; # 0bbbbbbb
+	        elseif (($c & 0xE0) == 0xC0) $n=1; # 110bbbbb
+	        elseif (($c & 0xF0) == 0xE0) $n=2; # 1110bbbb
+	        elseif (($c & 0xF8) == 0xF0) $n=3; # 11110bbb
+	        elseif (($c & 0xFC) == 0xF8) $n=4; # 111110bb
+	        elseif (($c & 0xFE) == 0xFC) $n=5; # 1111110b
+	        else return false; # Does not match any model
+	        for ($j=0; $j<$n; $j++) { # n bytes matching 10bbbbbb follow ?
+	            if ((++$i == $length) || ((ord($str[$i]) & 0xC0) != 0x80))
+	                return false;
+	        }
+	    }
+	    return true;
 	}
 }
 ?>
