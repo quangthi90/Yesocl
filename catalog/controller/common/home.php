@@ -22,6 +22,7 @@ class ControllerCommonHome extends Controller {
 		}
 
 		$this->data['posts'] = array();
+		$i = 0;
 		foreach ( $company_posts as $post ) {
 			if ( $post->getUser() && $this->customer->getAvatar() ){
 				$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
@@ -29,14 +30,30 @@ class ControllerCommonHome extends Controller {
 				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
 			}
 
-			$this->data['posts'][] = array(
+			$post_data = array(
 				'author' 	=> $post->getAuthor(),
 				'avatar' 	=> $avatar,
 				'title' 	=> $post->getTitle(),
 				'content' 	=> html_entity_decode($post->getContent()),
 				'href_user'	=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL'),
-				'href_post'	=> $this->url->link('post/detail', $post->getSlug(), 'SSL')
+				'href_post'	=> $this->url->link('post/detail', $post->getSlug(), 'SSL'),
+				'href_status' => $this->url->link('post/post/getStatusByPost', $post->getSlug(), 'SSL')
 			);
+
+			$this->data['posts'][] = $post_data;
+
+			$post_data['comments'] = array();
+
+			foreach ( $post->getComments() as $comment ) {
+				# code...
+			}
+
+			// Limit 20 post each load company
+			if ( $i == 20 ){
+				break;
+			}
+
+			$i++;
 		}
 
 		$this->data['status_action'] = $this->url->link('post/post/status', '', 'SSL');

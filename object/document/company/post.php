@@ -28,6 +28,9 @@ Class Post {
 	/** @MongoDB\Date */
 	private $created;
 
+	/** @MongoDB\Date */
+	private $updated;
+
 	/** @MongoDB\String */
 	private $author;
 
@@ -124,6 +127,11 @@ Class Post {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+	}
+
+	/** @MongoDB\PreUpdate */
+	public function prePersist(){
+		$this->updated = new \DateTime();
 	}
 
 	public function setAuthor( $author ){

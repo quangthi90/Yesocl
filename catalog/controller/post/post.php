@@ -2,7 +2,7 @@
 class ControllerPostPost extends Controller {
 	private $error = array();
 
-	public function status(){
+	public function postStatus(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateStatus()) {
 			$this->load->model('post/post');
 
@@ -14,7 +14,6 @@ class ControllerPostPost extends Controller {
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok'
         )));
-		
 	}
 
   	private function validateStatus() {
@@ -28,5 +27,9 @@ class ControllerPostPost extends Controller {
       		return false;
     	}
   	}
+
+    public function getStatusByPost($post_slug){
+        
+    }
 }
 ?>

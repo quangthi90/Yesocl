@@ -4,8 +4,6 @@ class ModelPostPost extends Doctrine {
 		if ( !isset($data['content']) || empty($data['content']) ){
 			return false;
 		}
-
-		
 	}
 }
 ?>
