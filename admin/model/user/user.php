@@ -315,7 +315,6 @@ class ModelUserUser extends Doctrine {
 
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
-		print($slug); exit;
 
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);

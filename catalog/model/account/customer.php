@@ -27,7 +27,20 @@ class ModelAccountCustomer extends Doctrine {
 		$email->setEmail( $data['email'] );
 		$email->setPrimary( true );
 
+		// Slug
+		$slug = $this->url->create_slug( 'user temp' );
+		
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+		$arr_slugs = array_map(function($user){
+			return $user->getSlug();
+		}, $users->toArray());
+
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+
       	$user = new User();
+      	$user->setSlug( $slug );
       	$user->setMeta( $meta );
       	$user->addEmail( $email );
       	$user->setSalt( $salt );
