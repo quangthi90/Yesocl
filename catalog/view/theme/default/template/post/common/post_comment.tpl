@@ -2,110 +2,10 @@
 	<div id="comment-box" class="y-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				Comment box (100)
+				Comment box (<span>0</span>)
 				<a href="#" class="close">X</a>
 			</div>
-			<div class="y-box-content">				
-				<div class="comment-item">
-					<div class="row-fluid">
-						<div class="span2 avatar_thumb">
-							<a href="#">
-								<img src="image/template/user-avatar.png" alt="user">
-							</a>
-						</div>
-						<div class="span10">
-							<div class="comment-info">
-								<a href="#">Username</a> - <span class="comment-time">20:35 10/10/2013</span>
-							</div>
-							<div class="comment-content">
-								chỉ có tính chất khuyến nghị để nhà đầu tư tham khảo, tác giả mail sẽ hoàn toàn không chịu trách nhiệm !!
-							</div>
-						</div>
-					</div>
-					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
-					</div>
-				</div>	
-				<div class="comment-item">
-					<div class="row-fluid">
-						<div class="span2 avatar_thumb">
-							<a href="#">
-								<img src="image/template/user-avatar.png" alt="user">
-							</a>
-						</div>
-						<div class="span10">
-							<div class="comment-info">
-								<a href="#">Username</a> - <span class="comment-time">20:35 10/10/2013</span>
-							</div>
-							<div class="comment-content">
-								chỉ có tính chất khuyến nghị để nhà đầu tư tham khảo, tác giả mail sẽ hoàn toàn không chịu trách nhiệm !!
-							</div>
-						</div>
-					</div>
-					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
-					</div>
-				</div>	
-				<div class="comment-item">
-					<div class="row-fluid">
-						<div class="span2 avatar_thumb">
-							<a href="#">
-								<img src="image/template/user-avatar.png" alt="user">
-							</a>
-						</div>
-						<div class="span10">
-							<div class="comment-info">
-								<a href="#">Username</a> - <span class="comment-time">20:35 10/10/2013</span>
-							</div>
-							<div class="comment-content">
-								chỉ có tính chất khuyến nghị để nhà đầu tư tham khảo, tác giả mail sẽ hoàn toàn không chịu trách nhiệm !!
-							</div>
-						</div>
-					</div>
-					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
-					</div>
-				</div>	
-				<div class="comment-item">
-					<div class="row-fluid">
-						<div class="span2 avatar_thumb">
-							<a href="#">
-								<img src="image/template/user-avatar.png" alt="user">
-							</a>
-						</div>
-						<div class="span10">
-							<div class="comment-info">
-								<a href="#">Username</a> - <span class="comment-time">20:35 10/10/2013</span>
-							</div>
-							<div class="comment-content">
-								chỉ có tính chất khuyến nghị để nhà đầu tư tham khảo, tác giả mail sẽ hoàn toàn không chịu trách nhiệm !!
-							</div>
-						</div>
-					</div>
-					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
-					</div>
-				</div>	
-				<div class="comment-item">
-					<div class="row-fluid">
-						<div class="span2 avatar_thumb">
-							<a href="#">
-								<img src="image/template/user-avatar.png" alt="user">
-							</a>
-						</div>
-						<div class="span10">
-							<div class="comment-info">
-								<a href="#">Username</a> - <span class="comment-time">20:35 10/10/2013</span>
-							</div>
-							<div class="comment-content">
-								chỉ có tính chất khuyến nghị để nhà đầu tư tham khảo, tác giả mail sẽ hoàn toàn không chịu trách nhiệm !!
-							</div>
-						</div>
-					</div>
-					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
-					</div>
-				</div>				
+			<div class="y-box-content comment-body">		
 			</div>	
 			<div class="y-comment-reply post post_new">
 				<div class="row-fluid txt_editor">
@@ -124,12 +24,38 @@
 			</div>		
 		</div>			
 	</div>
+	{% raw %}
+	<div id="item-template" class="hidden">
+		{{each(i, comment) comments}}
+		<div class="comment-item">
+			<div class="row-fluid">
+				<div class="span2 avatar_thumb">
+					<a href="#">
+						<img src="${comment.avatar}" alt="user">
+					</a>
+				</div>
+				<div class="span10">
+					<div class="comment-info">
+						<a href="${comment.user_href}">${comment.author}</a> - <span class="comment-time">${comment.created}</span>
+					</div>
+					<div class="comment-content">
+						{{html comment.content}}
+					</div>
+				</div>
+			</div>
+			<div class="comment-footer">
+				<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
+			</div>
+		</div>
+		{{/each}}
+	</div>
+	{% endraw %}
 {% endblock %}
 
 {% block post_common_post_comment_javascript %}
 <script type="text/javascript">
 	$(document).ready(function() {
-		makeScrollWithoutCalResize('y-content');
+		// makeScrollWithoutCalResize('y-content');
 		
 		//Open comment box:
 		$('.open-comment').click(function(e){
