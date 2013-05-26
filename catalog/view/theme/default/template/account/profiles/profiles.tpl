@@ -31,7 +31,9 @@
 						<div class="profiles-tabs-main-body">
 							<div class="row-fluid">
 								<div class="span2 offset1">Fullname</div>
-								<div class="span9 profiles-tabs-value">Le Van Bap</div>
+								<div class="span9 profiles-tabs-value">
+									<input type="text" placeholder="Input Text" value="Le Van Bap" />
+								</div>
 							</div>
 
 							<div class="row-fluid">
