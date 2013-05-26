@@ -28,8 +28,15 @@ class ControllerPostPost extends Controller {
     	}
   	}
 
-    public function getStatusByPost($post_slug){
+    public function getCommentByPost(){
+        $post_id = $this->request->post['post_id'];
         
+        $post = $this->cache->get( $post_id );
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'post' => $post
+        )));
     }
 }
 ?>

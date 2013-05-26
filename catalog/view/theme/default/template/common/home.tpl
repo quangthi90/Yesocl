@@ -27,6 +27,7 @@
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript" src="catalog/view/javascript/post.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		//MakeScroll:

@@ -33,15 +33,16 @@ class ControllerCommonHome extends Controller {
 			$comment_count = count( $post->getComments() );
 
 			$post_data = array(
+				'id'			=> $post->getId(),
 				'author' 		=> $post->getAuthor(),
 				'avatar' 		=> $avatar,
 				'title' 		=> $post->getTitle(),
 				'content' 		=> html_entity_decode($post->getContent()),
 				'created'		=> $post->getCreated(),
 				'comment_count' => $comment_count,
-				'href_user'		=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL'),
-				'href_post'		=> $this->url->link('post/detail', $post->getSlug(), 'SSL'),
-				'href_status'	=> $this->url->link('post/post/getStatusByPost', $post->getSlug(), 'SSL')
+				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
+				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
+				'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
 			);
 
 			$this->data['posts'][] = $post_data;
@@ -60,7 +61,7 @@ class ControllerCommonHome extends Controller {
 						'author' 		=> $post->getAuthor(),
 						'avatar' 		=> $avatar,
 						'content' 		=> html_entity_decode($comment->getContent()),
-						'created'		=> $comment->getCreated(),
+						'created'		=> $comment->getCreated()->format('h:i d/m/Y'),
 						'href_user'		=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL')
 					);
 				}
