@@ -130,7 +130,7 @@ Class Post {
 	}
 
 	/** @MongoDB\PreUpdate */
-	public function prePersist(){
+	public function preUpdate(){
 		$this->updated = new \DateTime();
 	}
 

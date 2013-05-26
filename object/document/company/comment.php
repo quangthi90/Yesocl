@@ -62,7 +62,7 @@ Class Comment {
 	}
 
 	/** @MongoDB\PreUpdate */
-	public function prePersist(){
+	public function preUpdate(){
 		$this->updated = new \DateTime();
 	}
 
@@ -75,7 +75,7 @@ Class Comment {
 	public function getUser(){
 		return $this->user;
 	}
-	
+
 	public function setAuthor( $author ){
 		$this->author = $author;
 	}

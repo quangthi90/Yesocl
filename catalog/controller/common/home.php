@@ -30,22 +30,42 @@ class ControllerCommonHome extends Controller {
 				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
 			}
 
+			$comment_count = count( $post->getComments() );
+
 			$post_data = array(
-				'author' 	=> $post->getAuthor(),
-				'avatar' 	=> $avatar,
-				'title' 	=> $post->getTitle(),
-				'content' 	=> html_entity_decode($post->getContent()),
-				'href_user'	=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL'),
-				'href_post'	=> $this->url->link('post/detail', $post->getSlug(), 'SSL'),
-				'href_status' => $this->url->link('post/post/getStatusByPost', $post->getSlug(), 'SSL')
+				'author' 		=> $post->getAuthor(),
+				'avatar' 		=> $avatar,
+				'title' 		=> $post->getTitle(),
+				'content' 		=> html_entity_decode($post->getContent()),
+				'created'		=> $post->getCreated(),
+				'comment_count' => $comment_count,
+				'href_user'		=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL'),
+				'href_post'		=> $this->url->link('post/detail', $post->getSlug(), 'SSL'),
+				'href_status'	=> $this->url->link('post/post/getStatusByPost', $post->getSlug(), 'SSL')
 			);
 
 			$this->data['posts'][] = $post_data;
 
 			$post_data['comments'] = array();
 
-			foreach ( $post->getComments() as $comment ) {
-				# code...
+			if ( $comment_count > 0 && !$this->cache->get($post->getId()) ){
+				foreach ( $post->getComments() as $comment ) {
+					if ( $comment->getUser() && $this->customer->getAvatar() ){
+						$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+					}else{
+						$avatar = $this->model_tool_image->getGavatar( $comment->getEmail(), 180 );
+					}
+
+					$post_data['comments'][] = array(
+						'author' 		=> $post->getAuthor(),
+						'avatar' 		=> $avatar,
+						'content' 		=> html_entity_decode($comment->getContent()),
+						'created'		=> $comment->getCreated(),
+						'href_user'		=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL')
+					);
+				}
+
+				$this->cache->set( $post->getId(), $post_data );
 			}
 
 			// Limit 20 post each load company

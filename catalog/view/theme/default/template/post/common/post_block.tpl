@@ -22,7 +22,7 @@
 		<div class="row-fluid post_footer">
 			<div class="span10 post_action">
 				<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like</a>
-				<a href="#" class="open-comment" data-url="{{ post.href_status }}"><i class="icon-comments medium-icon"></i> Comment</a>
+				<a href="#" class="open-comment" data-url="{{ post.href_status }}"><i class="icon-comments medium-icon"></i> Comment ({{ post.comment_count }})</a>
 			</div>
 			<div class="span2">
 				<a href="{{ post.href_post }}"><i class="icon-eye-open medium-icon"></i> More</a>
