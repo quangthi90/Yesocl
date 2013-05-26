@@ -126,7 +126,7 @@
 		promise.then(function(data) {
 			if(data.success == 'ok'){
 				var html = $.tmpl( $('#item-template').html(), {comments: data.post.comments} );
-				
+				console.log(html);
 				$('.comment-body').html(html.html()).val();
 		
 				$('#comment-box').animate({"right": "0px"}, "slow", function(){

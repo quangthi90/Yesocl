@@ -179,4 +179,49 @@ Class Post {
 	public function getSlug(){
 		return $this->slug;
 	}
+
+	public function formatToCache( $image_tool, $url_lib, $have_comment = true ){
+		if ( $this->getUser() && $this->getUser()->getAvatar() ){
+			$avatar = $image_tool->resize( $this->getUser()->getAvatar(), 180, 180 );
+		}else{
+			$avatar = $image_tool->getGavatar( $this->getEmail(), 180 );
+		}
+
+		$comment_count = count( $this->getComments() );
+
+		$post_data = array(
+			'id'			=> $this->getId(),
+			'author' 		=> $this->getAuthor(),
+			'avatar' 		=> $avatar,
+			'title' 		=> $this->getTitle(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated(),
+			'comment_count' => $comment_count,
+			'href_user'		=> $url_lib->link('account/edit', 'user_slug=' . $this->getUser()->getSlug(), 'SSL'),
+			'href_post'		=> $url_lib->link('post/detail', 'post_slug=' . $this->getSlug(), 'SSL'),
+			'href_status'	=> $url_lib->link('post/post/getCommentByPost', '', 'SSL')
+		);
+
+		if ( $have_comment == true ){
+			$post_data['comments'] = array();
+
+			foreach ( $this->getComments() as $comment ) {
+				if ( $comment->getUser() && $comment->getUser()->getAvatar() ){
+					$avatar = $image_tool->resize( $this->customer->getAvatar(), 180, 180 );
+				}else{
+					$avatar = $image_tool->getGavatar( $comment->getEmail(), 180 );
+				}
+
+				$post_data['comments'][] = array(
+					'author' 		=> $this->getAuthor(),
+					'avatar' 		=> $avatar,
+					'content' 		=> html_entity_decode($comment->getContent()),
+					'created'		=> $comment->getCreated()->format('h:i d/m/Y'),
+					'href_user'		=> $url_lib->link('account/edit', $this->getUser()->getSlug(), 'SSL')
+				);
+			}
+		}
+
+		return $post_data;
+	}
 }

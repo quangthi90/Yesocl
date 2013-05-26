@@ -54,6 +54,9 @@ Class User {
 	/** @MongoDB\Date */
 	private $created;
 
+	/** @MongoDB\String */
+	private $avatar;
+
 	public function getId() {
 		return $this->id;
 	}
@@ -182,6 +185,14 @@ Class User {
 
 	public function getSlug(){
 		return $this->slug;
+	}
+
+	public function setAvatar( $avatar ){
+		$this->avatar = $avatar;
+	}
+
+	public function getAvatar(){
+		return $this->avatar;
 	}
 
 	/**

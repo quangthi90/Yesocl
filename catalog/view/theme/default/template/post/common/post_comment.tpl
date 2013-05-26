@@ -27,24 +27,26 @@
 	{% raw %}
 	<div id="item-template" class="hidden">
 		{{each(i, comment) comments}}
-		<div class="comment-item">
-			<div class="row-fluid">
-				<div class="span2 avatar_thumb">
-					<a href="#">
-						<img src="${comment.avatar}" alt="user">
-					</a>
-				</div>
-				<div class="span10">
-					<div class="comment-info">
-						<a href="${comment.user_href}">${comment.author}</a> - <span class="comment-time">${comment.created}</span>
+		<div>
+			<div class="comment-item">
+				<div class="row-fluid">
+					<div class="span2 avatar_thumb">
+						<a href="#">
+							<img src="${comment.avatar}" alt="user">
+						</a>
 					</div>
-					<div class="comment-content">
-						{{html comment.content}}
+					<div class="span10">
+						<div class="comment-info">
+							<a href="${comment.user_href}">${comment.author}</a> - <span class="comment-time">${comment.created}</span>
+						</div>
+						<div class="comment-content">
+							{{html comment.content}}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="comment-footer">
-				<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
+				<div class="comment-footer">
+					<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
+				</div>
 			</div>
 		</div>
 		{{/each}}

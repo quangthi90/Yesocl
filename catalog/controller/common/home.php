@@ -24,48 +24,11 @@ class ControllerCommonHome extends Controller {
 		$this->data['posts'] = array();
 		$i = 0;
 		foreach ( $company_posts as $post ) {
-			if ( $post->getUser() && $this->customer->getAvatar() ){
-				$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
-			}else{
-				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
-			}
-
-			$comment_count = count( $post->getComments() );
-
-			$post_data = array(
-				'id'			=> $post->getId(),
-				'author' 		=> $post->getAuthor(),
-				'avatar' 		=> $avatar,
-				'title' 		=> $post->getTitle(),
-				'content' 		=> html_entity_decode($post->getContent()),
-				'created'		=> $post->getCreated(),
-				'comment_count' => $comment_count,
-				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
-				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
-				'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
-			);
+			$post_data = $post->formatToCache( $this->model_tool_image, $this->url );
 
 			$this->data['posts'][] = $post_data;
 
-			$post_data['comments'] = array();
-
-			if ( $comment_count > 0 && !$this->cache->get($post->getId()) ){
-				foreach ( $post->getComments() as $comment ) {
-					if ( $comment->getUser() && $this->customer->getAvatar() ){
-						$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
-					}else{
-						$avatar = $this->model_tool_image->getGavatar( $comment->getEmail(), 180 );
-					}
-
-					$post_data['comments'][] = array(
-						'author' 		=> $post->getAuthor(),
-						'avatar' 		=> $avatar,
-						'content' 		=> html_entity_decode($comment->getContent()),
-						'created'		=> $comment->getCreated()->format('h:i d/m/Y'),
-						'href_user'		=> $this->url->link('account/edit', $post->getUser()->getSlug(), 'SSL')
-					);
-				}
-
+			if ( !$this->cache->get($post->getId()) ){
 				$this->cache->set( $post->getId(), $post_data );
 			}
 
