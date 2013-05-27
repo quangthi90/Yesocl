@@ -136,7 +136,7 @@
 					<p>Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</p>
 					<p>Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</p>
 				</div>
-				<div class="">
+				<div class="profiles-tabs-input">
 					<textarea class="profiles-tabs-input profiles-tabs-main-body">Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
 Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
 Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.
@@ -155,106 +155,102 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			<div id="profiles-tabs-background-experience" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Experience</a>
+					<a class="btn profiles-btn-add"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 
 				<div class="profiles-tabs-main-body">
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
+								<div>PG</div>
+								<div>NTT Data VN</div>
+								<div>Information Technology</div>
 							</div>
 							<div class="profiles-tabs-input">
-								<textarea>
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</textarea>
+								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
+								<div>PG</div>
+								<div>NTT Data VN</div>
+								<div>Information Technology</div>
 							</div>
 							<div class="profiles-tabs-input">
-								<textarea>
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</textarea>
+								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
+								<div>PG</div>
+								<div>NTT Data VN</div>
+								<div>Information Technology</div>
 							</div>
 							<div class="profiles-tabs-input">
-								<textarea>
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</textarea>
+								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
+								<div>PG</div>
+								<div>NTT Data VN</div>
+								<div>Information Technology</div>
 							</div>
 							<div class="profiles-tabs-input">
-								<textarea>
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</textarea>
+								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
+								<div>PG</div>
+								<div>NTT Data VN</div>
+								<div>Information Technology</div>
 							</div>
 							<div class="profiles-tabs-input">
-								<textarea>
-									<p>PG</p>
-									<p>NTT Data VN</p>
-									<p>Information Technology</p>
-								</textarea>
+								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
 							</div>
 						</div>
 					</div>
@@ -264,165 +260,138 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Skill & Expertise</a>
-					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+					<a class="btn profiles-btn-add"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 
 				<div class="profiles-tabs-main-body">
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
-					<div class="profiles-tabs-item2 btn">Problem Solving</div>
-					<div class="profiles-tabs-item2 btn">Problem Development</div>
-					<div class="profiles-tabs-item2 btn">Teamwork</div>
-					<div class="profiles-tabs-item2 btn">Pressure</div>
+					<div class="profiles-tabs-item2 btn">Problem Solving<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Development<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Teamwork<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Pressure<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Solving<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Development<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Teamwork<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Pressure<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Solving<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Development<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Teamwork<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Pressure<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Solving<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Development<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Teamwork<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Pressure<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Solving<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Development<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Teamwork<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Pressure<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Solving<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Problem Development<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Teamwork<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn">Pressure<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
 				</div>
 			</div>
 
 			<div id="profiles-tabs-background-education" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Education</a>
+					<a class="btn profiles-btn-add"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 
 				<div class="profiles-tabs-main-body">
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
-							<p>HCM City University of Science</p>
-							<p>Bachelor</p>
-							<p>Information Technology</p>
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div>HCM City University of Science</div>
+								<div>Bachelor</div>
+								<div>Information Technology</div>
+							</div>
+							<div class="profiles-tabs-input">
+								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+							</div>
 						</div>
 					</div>
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
-							<p>HCM City University of Science</p>
-							<p>Bachelor</p>
-							<p>Information Technology</p>
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div>HCM City University of Science</div>
+								<div>Bachelor</div>
+								<div>Information Technology</div>
+							</div>
+							<div class="profiles-tabs-input">
+								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+							</div>
 						</div>
 					</div>
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
-							<p>HCM City University of Science</p>
-							<p>Bachelor</p>
-							<p>Information Technology</p>
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div>HCM City University of Science</div>
+								<div>Bachelor</div>
+								<div>Information Technology</div>
+							</div>
+							<div class="profiles-tabs-input">
+								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+							</div>
 						</div>
 					</div>
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
-							<p>HCM City University of Science</p>
-							<p>Bachelor</p>
-							<p>Information Technology</p>
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div>HCM City University of Science</div>
+								<div>Bachelor</div>
+								<div>Information Technology</div>
+							</div>
+							<div class="profiles-tabs-input">
+								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+							</div>
 						</div>
 					</div>
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
-							<p>HCM City University of Science</p>
-							<p>Bachelor</p>
-							<p>Information Technology</p>
+							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div>HCM City University of Science</div>
+								<div>Bachelor</div>
+								<div>Information Technology</div>
+							</div>
+							<div class="profiles-tabs-input">
+								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
+								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+							</div>
 						</div>
 					</div>
 				</div>

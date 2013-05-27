@@ -80,13 +80,13 @@
 	line-height: 24px;
 }
 
-#y-content .profiles-btn-edit, #y-content .profiles-btn-save {
+#y-content .profiles-btn-edit, #y-content .profiles-btn-save, #y-content .profiles-tabs-item1 .profiles-btn-remove, #y-content .profiles-btn-add {
 	padding: 0px 8px;
 	margin-right: 10px;
 	float: right;
 }
 
-#y-content .profiles-btn-edit i, #y-content .profiles-btn-save i {
+#y-content .profiles-btn-edit i, #y-content .profiles-btn-save i, #y-content .profiles-tabs-item1 .profiles-btn-remove i, #y-content .profiles-btn-add i {
 	line-height: 28px;
 	font-size: 18px;
 }
@@ -131,6 +131,10 @@
 	margin-right: 10px;
 	margin-bottom: 10px;
 	font-size: 13px;
+}
+
+.profiles-tabs-item2 .profiles-btn-remove {
+	padding-left: 10px;
 }
 
 .profiles-btn-next {
