@@ -25,6 +25,7 @@
 					<div class="row-fluid">
 						<div class="profiles-tabs-main-header">
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="clear"></div>
 						</div>
@@ -118,6 +119,7 @@
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Sumary</a>
 					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+					<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 					<div class="clear"></div>
 				</div>
@@ -165,6 +167,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
@@ -184,6 +187,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
@@ -203,6 +207,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
@@ -222,6 +227,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
@@ -241,6 +247,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
@@ -261,6 +268,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Skill & Expertise</a>
 					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-plus"></i></a>
+					<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 					<div class="pull-right"><input class="profiles-tabs-input" type="text" placeholder="Text here..." /></div>
 					<div class="clear"></div>
@@ -307,6 +315,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
@@ -326,6 +335,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
@@ -345,6 +355,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
@@ -364,6 +375,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
@@ -383,6 +395,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						<div class="profiles-tabs-item1-content">
 							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
 							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
