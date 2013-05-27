@@ -29,9 +29,40 @@ class ControllerPostPost extends Controller {
   	}
 
     public function getCommentByPost(){
-        $post_id = $this->request->post['post_id'];
+        if ( isset($this->request->post['post_id']) && !empty($this->request->post['post_id']) ){
+            $post_id = $this->request->post['post_id'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
+        }
+
+        if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
+            $post_type = $this->request->post['post_type'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
+        }
+
+        $paging = 1;
+        if ( isset($this->request->post['paging']) && !empty($this->request->post['paging']) ){
+          $paging = $this->request->post['paging'];
+        }
         
-        $post = $this->cache->get( $post_id );
+        switch ($post_type) {
+            case 'company':
+                $this->load->model('company/post');
+                $post = $this->model_company_post->getPost( $post_id, $paging );
+                break;
+            
+            default:
+                $post = null;
+                break;
+        }
+
+        // To do:
+        // Get User & create cache User
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

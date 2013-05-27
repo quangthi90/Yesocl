@@ -197,6 +197,8 @@ Class Post {
 	public function formatToCache(){
 		$limit = 50;
 
+		$comment_count = $this->getComments()->count();
+
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
@@ -205,28 +207,29 @@ Class Post {
 			'created'		=> $this->getCreated(),
 			'comment_count' => $comment_count
 		);
-
+		
 		$list_post_data = array();
 
 		$post_data['comments'] = array();
 		$count_paging = 1;
-		$i = 0;
-		foreach ( $this->getComments() as $comment ) {
-			if ( ($i / $count_paging) == $limit ){
-				$list_post_data[] = array(
-					'post' 	=> $post_data,
-					'page'	=> $count_paging
-				);
-				$post_data['comments'] = array();
-				$count_paging++;
-				continue;
-			}
+		$i = 1;
 
+		foreach ( $this->getComments() as $comment ) {
 			$post_data['comments'][$comment->getId()] = array(
 				'author' 		=> $this->getAuthor(),
 				'content' 		=> html_entity_decode($comment->getContent()),
 				'created'		=> $comment->getCreated()->format('h:i d/m/Y')
 			);
+
+			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
+				$list_post_data[] = array(
+					'object' 	=> $post_data,
+					'page'		=> $count_paging
+				);
+				$post_data['comments'] = array();
+				$count_paging++;
+			}
+
 			$i++;
 		}
 

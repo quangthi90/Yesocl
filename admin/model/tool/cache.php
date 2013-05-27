@@ -1,11 +1,12 @@
 <?php
 class ModelToolCache extends Model {
-	public function updateCache($object) {
-		$this->load->model('tool/image');
-		$data = $object->formatToCache( $this->model_tool_image, $this->url );
+	public function updateCachePost($object) {
+		$list_post_data = $object->formatToCache();
 
-		$this->cache->delete( $object->getId() );
-		$this->cache->set( $object->getId(), $data );
+		foreach ( $list_post_data as $post_data ) {
+			$this->cache->delete( $object->getId() . '.' . $post_data['page'] );
+			$this->cache->set( $object->getId() . '.' . $post_data['page'], $post_data['object'] );
+		}
 
 		return $data;
 	}

@@ -1,5 +1,7 @@
 <?php  
 class ControllerCommonHome extends Controller {
+	private $limit = 20;
+
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
@@ -24,16 +26,30 @@ class ControllerCommonHome extends Controller {
 		$this->data['posts'] = array();
 		$i = 0;
 		foreach ( $company_posts as $post ) {
-			$post_data = $post->formatToCache( $this->model_tool_image, $this->url );
-
-			$this->data['posts'][] = $post_data;
-
-			if ( !$this->cache->get($post->getId()) ){
-				$this->cache->set( $post->getId(), $post_data );
+			if ( $post->getUser() && $post->getUser()->getAvatar() ){
+				$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
+			}else{
+				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
 			}
 
+			$comment_count = count( $post->getComments() );
+
+			$this->data['posts'][] = array(
+				'id'			=> $post->getId(),
+				'author' 		=> $post->getAuthor(),
+				'avatar' 		=> $avatar,
+				'title' 		=> $post->getTitle(),
+				'content' 		=> html_entity_decode($post->getContent()),
+				'created'		=> $post->getCreated(),
+				'comment_count' => $comment_count,
+				'type'			=> 'company',
+				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
+				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
+				'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
+			);
+
 			// Limit 20 post each load company
-			if ( $i == 20 ){
+			if ( $i == $this->limit ){
 				break;
 			}
 

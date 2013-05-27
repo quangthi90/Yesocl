@@ -86,7 +86,7 @@ class ModelCompanyPost extends Doctrine {
 		}
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateCache( $post );
+		$this->model_tool_cache->updateCachePost( $post );
 
 		return true;
 	}
@@ -176,7 +176,7 @@ class ModelCompanyPost extends Doctrine {
 		}
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateCache( $post );
+		$this->model_tool_cache->updateCachePost( $post );
 
 		return true;
 	}

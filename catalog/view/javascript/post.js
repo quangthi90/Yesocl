@@ -80,6 +80,7 @@
 		this.$el			= $el;
 		this.comment_count	= $el.data('comment-count');
 		this.post_id		= $el.data('post-id');
+		this.post_type		= $el.data('post-type');
 		this.url			= $el.data('url');
 
 		this.attachEvents();
@@ -99,7 +100,8 @@
 
 			if (that.comment_count > 0){
 				that.data = {
-					post_id 	: that.post_id
+					post_id 	: that.post_id,
+					post_type	: that.post_type
 				};
 
 				that.submit(that.$el);
