@@ -190,53 +190,46 @@ Class Post {
 	*	- bool include comment: cache all comments of post
 	* @return: array Post & Comments
 	*	Ex:
-	*		array = {"id", "author", "avatar", "title", "content", "created", "comment_count", "href_user", "href_post", "href_status", 
-	*			"comments" => array{"author", "avatar", "content", "created", "href_user"
-	*			}
+	*		array = {
+	*
 	*		}
 	*/
-	public function formatToCache( $image_tool, $url_lib, $include_comment = true ){
-		if ( $this->getUser() && $this->getUser()->getAvatar() ){
-			$avatar = $image_tool->resize( $this->getUser()->getAvatar(), 180, 180 );
-		}else{
-			$avatar = $image_tool->getGavatar( $this->getEmail(), 180 );
-		}
-
-		$comment_count = count( $this->getComments() );
+	public function formatToCache(){
+		$limit = 50;
 
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
-			'avatar' 		=> $avatar,
 			'title' 		=> $this->getTitle(),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
-			'comment_count' => $comment_count,
-			'href_user'		=> $url_lib->link('account/edit', 'user_slug=' . $this->getUser()->getSlug(), 'SSL'),
-			'href_post'		=> $url_lib->link('post/detail', 'post_slug=' . $this->getSlug(), 'SSL'),
-			'href_status'	=> $url_lib->link('post/post/getCommentByPost', '', 'SSL')
+			'comment_count' => $comment_count
 		);
 
-		if ( $include_comment == true ){
-			$post_data['comments'] = array();
+		$list_post_data = array();
 
-			foreach ( $this->getComments() as $comment ) {
-				if ( $comment->getUser() && $comment->getUser()->getAvatar() ){
-					$avatar = $image_tool->resize( $this->customer->getAvatar(), 180, 180 );
-				}else{
-					$avatar = $image_tool->getGavatar( $comment->getEmail(), 180 );
-				}
-
-				$post_data['comments'][] = array(
-					'author' 		=> $this->getAuthor(),
-					'avatar' 		=> $avatar,
-					'content' 		=> html_entity_decode($comment->getContent()),
-					'created'		=> $comment->getCreated()->format('h:i d/m/Y'),
-					'href_user'		=> $url_lib->link('account/edit', $this->getUser()->getSlug(), 'SSL')
+		$post_data['comments'] = array();
+		$count_paging = 1;
+		$i = 0;
+		foreach ( $this->getComments() as $comment ) {
+			if ( ($i / $count_paging) == $limit ){
+				$list_post_data[] = array(
+					'post' 	=> $post_data,
+					'page'	=> $count_paging
 				);
+				$post_data['comments'] = array();
+				$count_paging++;
+				continue;
 			}
+
+			$post_data['comments'][$comment->getId()] = array(
+				'author' 		=> $this->getAuthor(),
+				'content' 		=> html_entity_decode($comment->getContent()),
+				'created'		=> $comment->getCreated()->format('h:i d/m/Y')
+			);
+			$i++;
 		}
 
-		return $post_data;
+		return $list_post_data;
 	}
 }
