@@ -448,8 +448,8 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			return confirm('Do you want to remove this education?');
 		});
 		$('#profiles-tabs-background-experience .profiles-btn-add').click(function () {
-			var html = '<div class="profiles-tabs-item1 profiles-tabs-input">';
-				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input class="profiles-tabs-input" type="text" value="now" /></div>';
+			var html = '<div class="profiles-tabs-item1">';
+				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input type="text" value="" /></div>';
 				html += '<div class="profiles-tabs-item1-content">';
 				html += '<a class="btn profiles-btn-remove"><i class="icon-trash"></i></a>';
 				html += '<a class="btn profiles-btn-save"><i class="icon-save"></i></a>';
@@ -463,8 +463,8 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			$(this).parent().parent().find('.profiles-tabs-main-body').prepend(html);
 		});
 		$('#profiles-tabs-background-education .profiles-btn-add').click(function () {
-			var html = '<div class="profiles-tabs-item1 profiles-tabs-input">';
-				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input class="profiles-tabs-input" type="text" value="now" /></div>';
+			var html = '<div class="profiles-tabs-item1">';
+				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input type="text" value="" /></div>';
 				html += '<div class="profiles-tabs-item1-content">';
 				html += '<a class="btn profiles-btn-remove"><i class="icon-trash"></i></a>';
 				html += '<a class="btn profiles-btn-save"><i class="icon-save"></i></a>';

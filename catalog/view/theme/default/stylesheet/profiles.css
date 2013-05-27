@@ -131,6 +131,10 @@
 	font-size: 14px;
 }
 
+.profiles-tabs-item1-content input {
+	margin-bottom: 0px;
+}
+
 .profiles-tabs-item2 {
 	float: left;
 	margin-right: 10px;
