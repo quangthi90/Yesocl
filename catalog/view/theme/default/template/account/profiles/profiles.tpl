@@ -24,53 +24,77 @@
 				<div class="span7">
 					<div class="row-fluid">
 						<div class="profiles-tabs-main-header">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 							<div class="clear"></div>
 						</div>
 
 						<div class="profiles-tabs-main-body">
 							<div class="row-fluid">
 								<div class="span2 offset1">Fullname</div>
-								<div class="span9 profiles-tabs-value">
-									<input type="text" placeholder="Input Text" value="Le Van Bap" />
+								<div class="span9">
+									<span class="profiles-tabs-value">Le Van Bap</span>
+									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="Le Van Bap" />
 								</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Email</div>
-								<div class="span9 profiles-tabs-value">abcd@gmail.com</div>
+								<div class="span9">
+									<span class="profiles-tabs-value">abcd@gmail.com</span>
+									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="abcd@gmail.com" />
+								</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Phone</div>
-								<div class="span9 profiles-tabs-value">0123456789</div>
+								<div class="span9">
+									<span class="profiles-tabs-value">0123456789</span>
+									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="0123456789" />
+								</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Sex</div>
-								<div class="span9 profiles-tabs-value">Male</div>
+								<div class="span9">
+									<span class="profiles-tabs-value">Male</span>
+									<select class="profiles-tabs-input">
+										<option selected="selected">Male</option>
+										<option>Female</option>
+									</select>
+								</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Birthday</div>
-								<div class="span9 profiles-tabs-value">June, 26</div>
+								<div class="span9">
+									<span class="profiles-tabs-value">June, 26</span>
+									<input class="profiles-tabs-input" type="text" value="June, 26" />
+								</div>
 							</div>
 
 							<div class="row-fluid profiles-line"></div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Living</div>
-								<div class="span9 profiles-tabs-value">Ho Chi Minh City</div>
+								<div class="span9">
+									<span class="profiles-tabs-value">Ho Chi Minh City</span>
+									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="Ho Chi Minh City" />
+								</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Interest</div>
-								<div class="span9 profiles-tabs-value">Footbal/TV</div>
+								<div class="span9">
+									<span class="profiles-tabs-value">Footbal/TV</span>
+									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="Footbal/TV" />
+								</div>
 							</div>
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Descripntion</div>
-								<div class="span9 description-content">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
+								<div class="span9 profiles-tabs-value description-content">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
+								<textarea class="span9 description-content profiles-tabs-input">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</textarea>
 							</div>
 						</div>
 					</div>		
@@ -93,11 +117,12 @@
 			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Sumary</a>
-					<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 					<div class="clear"></div>
 				</div>
 
-				<div class="profiles-tabs-main-body">
+				<div class="profiles-tabs-main-body profiles-tabs-value">
 					<p>Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.</p>
 					<p>Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.</p>
 					<p>Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.</p>
@@ -111,6 +136,20 @@
 					<p>Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</p>
 					<p>Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</p>
 				</div>
+				<div class="">
+					<textarea class="profiles-tabs-input profiles-tabs-main-body">Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
+Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
+Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.
+Hinc porro movet ex mei, ut everti explicari patrioque sit. Summo consetetur et quo. Eu dicat fastidii his, eam eius delenit id. Ut nostro detraxit qui, libris postulant nam ei, lorem definiebas reprimique mea ad.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
+Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</textarea>
+				</div>
 			</div>
 
 			<div id="profiles-tabs-background-experience" class="profiles-tabs-main">
@@ -123,50 +162,100 @@
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
+							</div>
+							<div class="profiles-tabs-input">
+								<textarea>
+									<p>PG</p>
+									<p>NTT Data VN</p>
+									<p>Information Technology</p>
+								</textarea>
+							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
+							</div>
+							<div class="profiles-tabs-input">
+								<textarea>
+									<p>PG</p>
+									<p>NTT Data VN</p>
+									<p>Information Technology</p>
+								</textarea>
+							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
+							</div>
+							<div class="profiles-tabs-input">
+								<textarea>
+									<p>PG</p>
+									<p>NTT Data VN</p>
+									<p>Information Technology</p>
+								</textarea>
+							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
+							</div>
+							<div class="profiles-tabs-input">
+								<textarea>
+									<p>PG</p>
+									<p>NTT Data VN</p>
+									<p>Information Technology</p>
+								</textarea>
+							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From Junly 13th to now</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
 							<p>PG</p>
 							<p>NTT Data VN</p>
 							<p>Information Technology</p>
+							</div>
+							<div class="profiles-tabs-input">
+								<textarea>
+									<p>PG</p>
+									<p>NTT Data VN</p>
+									<p>Information Technology</p>
+								</textarea>
+							</div>
 						</div>
 					</div>
 				</div>	
@@ -175,7 +264,8 @@
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Skill & Expertise</a>
-					<a class="btn profiles-btn-edit"><i class="icon-pencil"></i></a>
+					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
+					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
 					<div class="clear"></div>
 				</div>
 
@@ -366,6 +456,17 @@
 		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
 		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
 		$('#y-content').niceScroll();
+
+		$('.profiles-btn-edit').click(function () {
+			$('.profiles-btn-edit').css('disabled', 'disabled');
+			$(this).parent().parent().find('.profiles-tabs-value').toggle();
+			$(this).parent().parent().find('.profiles-tabs-input').toggle();
+		});
+		$('.profiles-btn-save').click(function () {
+			$(this).parent().parent().find('.profiles-tabs-input').toggle();
+			$(this).parent().parent().find('.profiles-tabs-value').toggle();
+			$('.profiles-btn-edit').css('disabled', 'none');
+		});
 	} );
 
 	window.onresize=function() {

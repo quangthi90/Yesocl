@@ -80,29 +80,33 @@
 	line-height: 24px;
 }
 
-#y-content .profiles-btn-edit {
+#y-content .profiles-btn-edit, #y-content .profiles-btn-save {
 	padding: 0px 8px;
 	margin-right: 10px;
 	float: right;
 }
 
-#y-content .profiles-tabs-main-body .profiles-btn-edit {
-	margin-right: 0px;
-}
-
-#y-content .profiles-btn-edit i {
+#y-content .profiles-btn-edit i, #y-content .profiles-btn-save i {
 	line-height: 28px;
 	font-size: 18px;
 }
 
 #y-content .profiles-tabs-main-body {
 	margin-top: 10px;
+	line-height: 30px;
 }
 
 #profiles-tabs-background .profiles-tabs-main-body {
     height: 100%;
 	padding: 10px;
 	word-wrap:break-word;
+	line-height: 14px;
+}
+
+#profiles-tabs-background textarea.profiles-tabs-main-body {
+	margin-right: 10px;
+	margin-left: 10px;
+	width: 93.566%;
 }
 
 #profiles-tabs-background .profiles-tabs-main-body p {
@@ -158,7 +162,21 @@
 	color: #6eb33b;
 }
 
+#profiles-tabs-basic-infor .description-content {
+	color: #000;
+}
+
+#profiles-tabs-basic-infor .description-content {
+	margin-left: 2.564102564102564%;
+}
+
 #profiles-tabs-basic-infor .profiles-line {
 	border-top: 1px solid #c0c0c0;
-	padding-bottom: 10px;
+	padding-top: 5px;
+	margin-top: 5px;
+}
+
+#y-content .profiles-tabs-input {
+	display: none;
+	margin-bottom: 0px;
 }
