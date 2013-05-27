@@ -436,6 +436,9 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			$(this).parent().parent().find('.profiles-tabs-value').toggle();
 			$('.profiles-btn-edit').css('disabled', 'none');
 		});
+		$('.profiles-btn-remove').click(function () {
+			return confirm('Do you want to remove this item?');
+		});
 	} );
 
 	window.onresize=function() {
