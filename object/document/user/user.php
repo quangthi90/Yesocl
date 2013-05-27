@@ -26,6 +26,9 @@ Class User {
 	/** @MongoDB\String */
 	private $salt;
 
+	/** @MongoDB\String */
+	private $slug;
+
 	/** 
 	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Email") 
 	 */
@@ -50,6 +53,9 @@ Class User {
 	
 	/** @MongoDB\Date */
 	private $created;
+
+	/** @MongoDB\String */
+	private $avatar;
 
 	public function getId() {
 		return $this->id;
@@ -171,6 +177,22 @@ Class User {
 
 	public function getCreated(){
 		return $this->created;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
+	}
+
+	public function setAvatar( $avatar ){
+		$this->avatar = $avatar;
+	}
+
+	public function getAvatar(){
+		return $this->avatar;
 	}
 
 	/**

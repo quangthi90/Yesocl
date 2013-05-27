@@ -15,9 +15,18 @@ Class Comment {
 	
 	/** @MongoDB\Date */
 	private $created;
+
+	/** @MongoDB\Date */
+	private $updated;
 	
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="comment") */
     private $user;
+
+    /** @MongoDB\String */
+	private $author;
+
+	/** @MongoDB\String */
+	private $email;
 
 	public function getId(){
 		return $this->id;
@@ -52,11 +61,34 @@ Class Comment {
 		$this->created = new \DateTime();
 	}
 
+	/** @MongoDB\PreUpdate */
+	public function preUpdate(){
+		$this->updated = new \DateTime();
+	}
+
 	public function setUser( $user ){
 		$this->user = $user;
+		$this->author = $user->getUsername();
+		$this->email = $user->getPrimaryEmail()->getEmail();
 	}
 
 	public function getUser(){
 		return $this->user;
+	}
+
+	public function setAuthor( $author ){
+		$this->author = $author;
+	}
+
+	public function getAuthor(){
+		return $this->author;
+	}
+
+	public function setEmail( $email ){
+		$this->email = $email;
+	}
+
+	public function getEmail(){
+		return $this->email;
 	}
 }

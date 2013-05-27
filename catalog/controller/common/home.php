@@ -22,20 +22,22 @@ class ControllerCommonHome extends Controller {
 		}
 
 		$this->data['posts'] = array();
+		$i = 0;
 		foreach ( $company_posts as $post ) {
-			if ( $post->getUser() && $this->customer->getAvatar() ){
-				$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
-			}else{
-				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
+			$post_data = $post->formatToCache( $this->model_tool_image, $this->url );
+
+			$this->data['posts'][] = $post_data;
+
+			if ( !$this->cache->get($post->getId()) ){
+				$this->cache->set( $post->getId(), $post_data );
 			}
 
-			$this->data['posts'][] = array(
-				'author' 	=> $post->getAuthor(),
-				'avatar' 	=> $avatar,
-				'title' 	=> $post->getTitle(),
-				'content' 	=> html_entity_decode($post->getContent()),
-				'href'		=> $this->url->link('account/edit', $post->getUser()->getId(), 'SSL')
-			);
+			// Limit 20 post each load company
+			if ( $i == 20 ){
+				break;
+			}
+
+			$i++;
 		}
 
 		$this->data['status_action'] = $this->url->link('post/post/status', '', 'SSL');

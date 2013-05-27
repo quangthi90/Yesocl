@@ -530,9 +530,12 @@ label.in-line{
     padding-top: 4px;
 }
     .post .post_header .post_user a {
-        color: #082902;
+        color: #3d9915;
         font-weight: bold;
         font-size: 14px;
+    }
+    .post .post_header .post_user a:hover{
+      color: #99ca8d;
     }
 .post .post_header .avatar_thumb {
 
@@ -550,6 +553,12 @@ label.in-line{
     padding: 0px 5px 5px 0px;
     white-space: normal;
     line-height: 1.3em;
+}
+.post .post_header .post_title a {
+  color: #3d9915;
+}
+.post .post_header .post_title a:hover{
+  color: #99ca8d;
 }
         
 .post .post_body {

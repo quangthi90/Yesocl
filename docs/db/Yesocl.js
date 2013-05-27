@@ -1086,7 +1086,7 @@ db.getCollection("city").insert({
 /** company records **/
 db.getCollection("company").insert({
   "_id": ObjectId("519d1163471deee40b000000"),
-  "created": ISODate("2013-05-22T22:00:00.0Z"),
+  "created": ISODate("2013-05-25T22:00:00.0Z"),
   "description": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, enim corrumpit eos in, usu ex dicant pertinax, primis latine ad nam. Soleat delectus euripidis cum in, quo lorem feugiat mandamus eu.&lt;\/p&gt;\r\n",
   "group": {
     "$ref": "company_group",
@@ -1109,16 +1109,39 @@ db.getCollection("company").insert({
         "$id": ObjectId("516c9640976982b00c000000"),
         "$db": "yesocl"
       },
-      "content": "&lt;p&gt;\r\n\tEu vocibus facilisis cum. At dico aeterno instructior mea. Vix adhuc aeterno partiendo cu, sit te iudico constituam, appareat similique theophrastus his cu. Facete aliquam expetendis eu pri, mei labores inermis ei, ea est enim solet deterruisset. Paulo placerat suavitate mel cu, sea nisl nonumes ea.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tEa per iisque recusabo, debet lucilius est in, id debet molestie per. Ex mei scripta menandri cotidieque. Mea sint possim deserunt in, in sit odio sumo. Cu qui eros nobis. Accusam dolores detraxit per ut, mei no ridens graeci cotidieque.&lt;\/p&gt;\r\n",
+      "content": "&lt;p&gt;\r\n\tEu vocibus facilisis cum. At dico aeterno instructior mea. Vix adhuc aeterno partiendo cu, sit te iudico constituam, appareat similique theophrastus his cu. Facete aliquam expetendis eu pri, mei labores inermis ei, ea est enim solet deterruisset. Paulo placerat suavitate mel cu, sea nisl nonumes ea.&lt;\/p&gt;\r\n",
       "created": ISODate("2013-05-22T19:22:39.0Z"),
       "description": "&lt;p&gt;\r\n\tCopiosae constituam id pri, admodum percipit consequat his ea, vel timeam fastidii at. Has posse graece aperiri in.&lt;\/p&gt;\r\n",
       "email": "user1@test.com",
+      "slug": "lorem-ipsum-dolor-sit-amet-at-nam-stet-delicata-iracundia-51a19f6b471dee7c08000000",
       "status": true,
       "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/519d1aff471deed00b000000\/thumb.jpg",
-      "title": "Lorem ipsum dolor sit amet, ea pro ferri principes sententiae.",
+      "title": "Lorem ipsum dolor sit amet, at nam stet delicata iracundia.",
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("51a0fa8e471dee340a000000"),
+      "author": "user2",
+      "category": {
+        "$ref": "company_post_category",
+        "$id": ObjectId("516c9640976982b00c000000"),
+        "$db": "yesocl"
+      },
+      "content": "&lt;p&gt;\r\n\tDicunt eleifend et vis. Mea brute tamquam tincidunt at. Iracundia prodesset no mel, duo augue nulla eripuit id, ex brute errem euismod eos. Ne duo putant admodum&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-05-25T17:53:18.0Z"),
+      "description": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, dico causae temporibus id his&lt;\/p&gt;\r\n",
+      "email": "user2@test.com",
+      "slug": "nec-no-tantas-noster-homero-appetere-perfecto-usu-at-ea-vim-dictas-liberaviss-51a19f81471dee7c08000001",
+      "status": true,
+      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a0fa8e471dee340a000000\/thumb.jpg",
+      "title": "Nec no tantas noster. Homero appetere perfecto usu at, ea vim dictas liberaviss",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
       }
     }
@@ -2157,7 +2180,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("519a556e471dee480b000009"),
+      "_id": ObjectId("51a1cc2b471dee1c0c00001d"),
       "email": "user1@test.com",
       "primary": true
     }
@@ -2168,14 +2191,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("519a556e471dee480b000000"),
+    "_id": ObjectId("51a1cc2b471dee1c0c000014"),
     "firstname": "user1",
     "lastname": "yesocl",
-    "birthday": ISODate("2013-05-20T16:55:09.0Z"),
+    "birthday": ISODate("2013-05-26T08:47:39.0Z"),
     "sex": NumberInt(1),
     "headingLine": "",
     "location": {
-      "_id": ObjectId("519a556e471dee480b000001"),
+      "_id": ObjectId("51a1cc2b471dee1c0c000015"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -2185,7 +2208,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("519a556e471dee480b000002"),
+        "_id": ObjectId("51a1cc2b471dee1c0c000016"),
         "im": "user1",
         "type": "skype",
         "visible": "myfollow"
@@ -2193,7 +2216,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("519a556e471dee480b000003"),
+        "_id": ObjectId("51a1cc2b471dee1c0c000017"),
         "phone": "0903000333",
         "type": "mobile",
         "visible": "myfollow"
@@ -2201,32 +2224,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("519a556e471dee480b000004"),
+        "_id": ObjectId("51a1cc2b471dee1c0c000018"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("519a556e471dee480b000005"),
+      "_id": ObjectId("51a1cc2b471dee1c0c000019"),
       "experiencies": [
         {
-          "_id": ObjectId("519a556e471dee480b000006"),
+          "_id": ObjectId("51a1cc2b471dee1c0c00001a"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("519a556e471dee480b000007"),
+            "_id": ObjectId("51a1cc2b471dee1c0c00001b"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T17:55:09.0Z"),
-          "ended": ISODate("2013-01-01T17:55:09.0Z"),
+          "started": ISODate("2013-01-01T09:47:39.0Z"),
+          "ended": ISODate("2013-01-01T09:47:39.0Z"),
           "current": false,
           "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("519a556e471dee480b000008"),
+          "_id": ObjectId("51a1cc2b471dee1c0c00001c"),
           "school": "Vietnam National University - Ho Chi Minh City",
           "school_id": "",
           "started": "2008",
@@ -2247,6 +2270,7 @@ db.getCollection("user").insert({
   },
   "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
   "salt": "09b2a07c9",
+  "slug": "user1",
   "status": true,
   "username": "user1"
 });
@@ -2255,7 +2279,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
-      "_id": ObjectId("519a557a471dee480b000013"),
+      "_id": ObjectId("51a1cc1f471dee1c0c000009"),
       "email": "user2@test.com",
       "primary": true
     }
@@ -2266,14 +2290,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("519a557a471dee480b00000a"),
+    "_id": ObjectId("51a1cc1f471dee1c0c000000"),
     "firstname": "user2",
     "lastname": "yesocl",
-    "birthday": ISODate("2013-05-20T16:55:22.0Z"),
+    "birthday": ISODate("2013-05-26T08:47:27.0Z"),
     "sex": NumberInt(1),
     "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
     "location": {
-      "_id": ObjectId("519a557a471dee480b00000b"),
+      "_id": ObjectId("51a1cc1f471dee1c0c000001"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -2283,7 +2307,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("519a557a471dee480b00000c"),
+        "_id": ObjectId("51a1cc1f471dee1c0c000002"),
         "im": "user2",
         "type": "skype",
         "visible": "myfollow"
@@ -2291,7 +2315,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("519a557a471dee480b00000d"),
+        "_id": ObjectId("51a1cc1f471dee1c0c000003"),
         "phone": "0904000444",
         "type": "mobile",
         "visible": "myfollow"
@@ -2299,32 +2323,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("519a557a471dee480b00000e"),
+        "_id": ObjectId("51a1cc1f471dee1c0c000004"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("519a557a471dee480b00000f"),
+      "_id": ObjectId("51a1cc1f471dee1c0c000005"),
       "experiencies": [
         {
-          "_id": ObjectId("519a557a471dee480b000010"),
+          "_id": ObjectId("51a1cc1f471dee1c0c000006"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("519a557a471dee480b000011"),
+            "_id": ObjectId("51a1cc1f471dee1c0c000007"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T17:55:22.0Z"),
-          "ended": ISODate("2013-01-01T17:55:22.0Z"),
+          "started": ISODate("2013-01-01T09:47:27.0Z"),
+          "ended": ISODate("2013-01-01T09:47:27.0Z"),
           "current": false,
           "description": "Sed et utamur argumentum. Eum an habeo ubique efficiantur. Eu sea oporteat vituperatoribus, eos in graecis delicata persecuti. Mel an summo dicit eleifend. Copiosae quaestio mandamus vim et."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("519a557a471dee480b000012"),
+          "_id": ObjectId("51a1cc1f471dee1c0c000008"),
           "school": "University of Economics Ho Chi Minh City",
           "school_id": "",
           "started": "2009",
@@ -2345,6 +2369,7 @@ db.getCollection("user").insert({
   },
   "password": "225d31b59e3e1de2d6d7c581e7e74e2cde897552",
   "salt": "dc1668c45",
+  "slug": "user2",
   "status": true,
   "username": "user2"
 });

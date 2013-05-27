@@ -59,14 +59,19 @@ class ModelCompanyCompany extends Doctrine {
 			$data['status'] = 0;
 		}
 
+		// Slug
 		$slug = $this->url->create_slug( $data['name'] );
 		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-		$expend = '';
-		if ( count($companies) > 0 ){
-			$expend = '-' . count($companies);
-		}
+		$arr_slugs = array_map(function($company){
+			return $company->getSlug();
+		}, $companies->toArray());
 
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+		
+		$company->setSlug( $slug );
+		
 		$company = new Company();
 		$company->setSlug( $slug . $expend );
 		$company->setName( $data['name'] );
@@ -152,21 +157,23 @@ class ModelCompanyCompany extends Doctrine {
 		}
 
 		// name is exist
-		if ( $company->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		/*if ( $company->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
 			return false;
-		}
+		}*/
 
-		// Check slug
+		// Slug
 		if ( $data['name'] != $company->getName() ){
 			$slug = $this->url->create_slug( $data['name'] );
 			$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-			$expend = '';
-			if ( count($companies) > 0 ){
-				$expend = '-' . count($companies);
-			}
+			$arr_slugs = array_map(function($company){
+				return $company->getSlug();
+			}, $companies->toArray());
 
-			$company->setSlug( $slug . $expend );
+			$this->load->model( 'tool/slug' );
+			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+			
+			$company->setSlug( $slug );
 		}
 
 		$company->setName( $data['name'] );

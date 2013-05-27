@@ -26,6 +26,8 @@ class Cache {
 			
 			return unserialize($cache);
 		}
+
+		return null;
 	}
 
   	public function set($key, $value) {
