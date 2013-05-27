@@ -70,6 +70,11 @@
 }
 
 #y-content .profiles-tabs-main-header {
+	line-height: 30px;
+}
+
+#y-content .profiles-tabs-main-header input {
+	margin-right: 10px;
 }
 
 #y-content .profiles-tabs-main-header a:first-child {

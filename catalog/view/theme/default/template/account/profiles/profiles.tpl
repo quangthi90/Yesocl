@@ -260,7 +260,9 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Skill & Expertise</a>
-					<a class="btn profiles-btn-add"><i class="icon-plus"></i></a>
+					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-plus"></i></a>
+					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+					<div class="pull-right"><input class="profiles-tabs-input" type="text" placeholder="Text here..." /></div>
 					<div class="clear"></div>
 				</div>
 
@@ -436,8 +438,44 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			$(this).parent().parent().find('.profiles-tabs-value').toggle();
 			$('.profiles-btn-edit').css('disabled', 'none');
 		});
-		$('.profiles-btn-remove').click(function () {
-			return confirm('Do you want to remove this item?');
+		$('.profiles-tabs-item2 .profiles-btn-remove').click(function () {
+			return confirm('Do you want to remove this skill?');
+		});
+		$('#profiles-tabs-background-experience .profiles-tabs-item1 .profiles-btn-remove').click(function () {
+			return confirm('Do you want to remove this experience?');
+		});
+		$('#profiles-tabs-background-education .profiles-tabs-item1 .profiles-btn-remove').click(function () {
+			return confirm('Do you want to remove this education?');
+		});
+		$('#profiles-tabs-background-experience .profiles-btn-add').click(function () {
+			var html = '<div class="profiles-tabs-item1 profiles-tabs-input">';
+				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input class="profiles-tabs-input" type="text" value="now" /></div>';
+				html += '<div class="profiles-tabs-item1-content">';
+				html += '<a class="btn profiles-btn-remove"><i class="icon-trash"></i></a>';
+				html += '<a class="btn profiles-btn-save"><i class="icon-save"></i></a>';
+				html += '<div>';
+				html += '<div><input type="text" value="" /></div>';
+				html += '<div><input type="text" value="" /></div>';
+				html += '<div><input type="text" value="" /></div>';
+				html += '</div>';
+				html += '</div>';
+				html += '</div>';
+			$(this).parent().parent().find('.profiles-tabs-main-body').prepend(html);
+		});
+		$('#profiles-tabs-background-education .profiles-btn-add').click(function () {
+			var html = '<div class="profiles-tabs-item1 profiles-tabs-input">';
+				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input class="profiles-tabs-input" type="text" value="now" /></div>';
+				html += '<div class="profiles-tabs-item1-content">';
+				html += '<a class="btn profiles-btn-remove"><i class="icon-trash"></i></a>';
+				html += '<a class="btn profiles-btn-save"><i class="icon-save"></i></a>';
+				html += '<div>';
+				html += '<div><input type="text" value="" /></div>';
+				html += '<div><input type="text" value="" /></div>';
+				html += '<div><input type="text" value="" /></div>';
+				html += '</div>';
+				html += '</div>';
+				html += '</div>';
+			$(this).parent().parent().find('.profiles-tabs-main-body').prepend(html);
 		});
 	} );
 
