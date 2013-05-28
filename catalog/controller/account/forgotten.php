@@ -93,9 +93,11 @@ class ControllerAccountForgotten extends Controller {
 		}
 		
 		$this->children = array(
+			'welcome/footer',
+			'welcome/header'
 		);
-								
-		$this->response->setOutput($this->render());		
+					
+		$this->response->setOutput($this->twig_render());
 	}
 
 	private function validate() {

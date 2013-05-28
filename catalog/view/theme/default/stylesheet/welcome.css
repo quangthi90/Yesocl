@@ -135,10 +135,13 @@ a:hover, a.active
     height:auto;
     padding: 15px;
     position: fixed;
-    font-size:14px;
+    font-size:13px;
     z-index:101;
     display:none;
     background:#fff;
+    -webkit-box-shadow: 0px 0px 15px #ddd;
+    -moz-box-shadow: 0px 0px 15px #ddd;
+    box-shadow: 0px 0px 15px #ddd;
 }
 
 .y-frm .frm-title
@@ -206,14 +209,14 @@ a:hover, a.active
 
 .y-sub-container-1
 {
-    background: #b0afaf; /* Old browsers */
-    background: -moz-linear-gradient(top,  #b0afaf 0%, #ffffff 45%, #ffffff 88%, #ffffff 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b0afaf), color-stop(45%,#ffffff), color-stop(88%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #b0afaf 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b0afaf', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    background: #e2e0e0; /* Old browsers */
+    background: -moz-linear-gradient(top,  #e2e0e0 0%, #ffffff 45%, #ffffff 88%, #ffffff 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e0e0), color-stop(45%,#ffffff), color-stop(88%,#ffffff), color-stop(100%,#ffffff)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #e2e0e0 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #e2e0e0 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #e2e0e0 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #e2e0e0 0%,#ffffff 45%,#ffffff 88%,#ffffff 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e0e0', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
 #y-header{
@@ -228,7 +231,7 @@ a:hover, a.active
 {   
     position: absolute;
     top: 70px;
-    bottom: 80px;
+    bottom: 55px;
     left: 0px;
     right: 0px;
 }
@@ -242,7 +245,7 @@ a:hover, a.active
     border-top: 3px solid #000;
     background:#fff;   
     z-index:1; 
-	height: 80px;
+	height: 55px;
 }
 
 /*--------------------------------------------------------------------
@@ -251,15 +254,6 @@ a:hover, a.active
 */
 #y-header #y-logo{
     line-height: 70px;
-}
-
-#y-header #y-logo > a > img
-{
-    /*display: block;
-    text-indent: -99999px;
-    width: 125px;
-    height: 72px;
-    background: transparent url(../img/logo.png) no-repeat 50% 50%;*/
 }
 
 #y-header #y-welcome-menu{
@@ -343,75 +337,13 @@ a:hover, a.active
     padding: 2px 6px;
 }
 
-#y-form-login
-{
-    overflow:hidden;
-}
-
-#y-form-login .control-group
-{
-    margin: 0px 5px 0px 0px;
-}
-
-#y-form-login .control-group label
-{
-    color: #BABABA;
-    margin:2px;
-    font-size:12px;
-}
-
-#y-form-login .control-group label.checkbox
-{
-    font-size:10px;
-    font-weight:bold;
-}
-
-#y-form-login .control-group label.checkbox:hover
-{
-    cursor:pointer;
-}
-
-#y-form-login input[type="text"]
-{
-    margin:0px;
-}
-
-#y-form-login input[type="password"]
-{   
-    margin:0px;
-}
-
-#y-form-login a.small-link
-{
-    color: #BABABA;
-    font-weight:bold;
-    font-size: 10px;
-    display:block;
-}
-
-#y-form-login a.small-link:hover
-{
-    text-decoration: underline;
-}
-
-#y-form-login .list-controls
-{
-    padding: 24px 0px 20px 0px;
-}
-
-#y-form-login .list-controls .btn
-{
-    height: 22px;
-    line-height:14px;
-    font-size:12px;
-}
 
 /*--------------------------------------------------------------------
     CONTENT
 ----------------------------------------------------------------------
 */
 #y-content #intro-bg {
-    width: 80%;
+    height: 100%;
     margin: 0px auto;
     text-align: center;
     vertical-align: middle;
@@ -419,13 +351,12 @@ a:hover, a.active
 
 #y-content #intro-bg > img
 {
-    /*background: url('../image/welcome-center-big-logo.png') no-repeat;*/
     height: 100%;
     width: auto;   
     cursor: pointer; 
 }
 
-#y-frm-login
+#y-frm-register
 {
     width:390px;
 	top: 100px;
@@ -435,25 +366,25 @@ a:hover, a.active
 	box-shadow: 2px 1px 1px #ddd;
 }
 
-#y-frm-login a.close {
+#y-frm-register a.close {
     color: #000;
     font-weight: bold;
     font-size: 14px;
 }
 
-#y-frm-login button  {
+#y-frm-register button  {
     width: 100%;
 }
 
-#y-frm-login .controls {
+#y-frm-register .controls {
     margin-bottom: 8px;
 }
 
-#y-frm-login  select {
+#y-frm-register  select {
     height: 28px;
 }
 
-#y-frm-login  select.birthday {
+#y-frm-register  select.birthday {
     width: 28%;
 }
 
@@ -463,7 +394,7 @@ a:hover, a.active
 */
 #y-footer .y-footer-container
 {
-    padding: 10px 0;
+    padding: 5px 0;
 }
 
 #y-footer .y-footer-container:nth-child(2){
@@ -485,17 +416,17 @@ a:hover, a.active
 
 #y-footer a:hover
 {
-    border-bottom:1px solid #3f981a;
+    border-bottom: 1px solid #3f981a;
 }
 
 #y-footer .language-selection
 {
-    margin-bottom:10px;
+    margin-bottom: 3px;
 }
 
 #y-footer .links-footer
 {
-    margin-bottom:10px;
+    margin-bottom: 3px;
 }
 
 #y-footer .footer-help

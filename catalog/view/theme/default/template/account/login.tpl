@@ -14,15 +14,15 @@
         <div class="frm-content">            
             <form action="#">
                 <div class="input-prepend">
-                    <span class="add-on"><i class="icon-user icon-2x"></i></span>
+                    <span class="add-on"><i class="icon-user"></i></span>
                     <input class="span3" id="username" type="text" placeholder="Email">
-                    <div class="yes-warning">Field is required</div>
+                    <div class="warning">Field is required</div>
                 </div>
                 <br />
                 <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock icon-2x"></i></span>
+                    <span class="add-on"><i class="icon-lock"></i></span>
                     <input class="span3" id="password" type="text" placeholder="Password">
-                    <div class="yes-warning"></div>
+                    <div class="warning"></div>
                 </div>
                 <div class="checkbox-container">
                     <input id="remember" name="remember" type="checkbox" /> 

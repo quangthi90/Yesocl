@@ -12,7 +12,7 @@
 		<img src="image/template/intro-2-bg.png" />  
     </div>    
 </div>
-<div id="y-frm-login" class="y-frm">
+<div id="y-frm-register" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">
         Join <strong>YESOCL.com</strong>         
@@ -89,7 +89,7 @@
 			$('#intro-bg img').click(function(e){
 				$('#overlay').fadeIn(function(){					
 					$('#intro-bg').css('text-align','left');					
-					$('#y-frm-login').animate(
+					$('#y-frm-register').animate(
 						{
 							right : '50px'
 						},600
@@ -107,7 +107,7 @@
         });		
 		//Close Form:
 		function closeLoginForm(){				
-			$('#y-frm-login').animate(
+			$('#y-frm-register').animate(
 				{
 					right : '-9990px'
 				},500,	
