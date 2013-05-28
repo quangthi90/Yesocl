@@ -135,7 +135,8 @@
 				}
 
 				// console.log(data.post.comments);
-				$('.comment-body').html(htmlOutput);
+				comment_box.find('.comment-body').html(htmlOutput);
+				comment_box.find('.y-box-header span').html(that.comment_count);
 
 				comment_box.animate({"right": "0px"}, "slow", function(){
 					makeVerticalCommentBox();
@@ -170,6 +171,7 @@
 			comment_box.animate({"right": "-500px"}, "slow");
 
 			$('.comment-body').html('');
+			comment_box.find('.y-box-header span').html('0');
 		});
 	});
 }(jQuery, document));
