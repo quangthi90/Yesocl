@@ -79,8 +79,13 @@ class ControllerPostPost extends Controller {
                 $avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
             }
 
+            if ( $user && $user['username'] ){
+                $post['comments'][$key]['author'] = $user['username'];
+            }else{
+                $post['comments'][$key]['author'] = $comment['author'];
+            }
+
             $post['comments'][$key]['avatar'] = $avatar;
-            $post['comments'][$key]['username'] = $user['username'];
             $post['comments'][$key]['user_href'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
         }
 

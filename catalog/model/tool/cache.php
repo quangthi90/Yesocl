@@ -15,7 +15,7 @@ class ModelToolCache extends Model {
 		$object_data = $object->formatToCache();
 
 		$this->cache->delete( $object->getId() );
-		$this->cache->set( $object->getId(), $object_data['object'] );
+		$this->cache->set( $object->getId(), $object_data );
 
 		return $list_object_data;
 	}

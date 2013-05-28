@@ -217,10 +217,10 @@ Class Post {
 
 		foreach ( $this->getComments() as $comment ) {
 			$post_data['comments'][$comment->getId()] = array(
-				'author' 		=> $this->getAuthor(),
+				'author' 		=> $comment->getAuthor(),
 				'content' 		=> html_entity_decode($comment->getContent()),
-				'created'		=> $comment->getCreated()->format('h:i d/m/Y'),
-				'user_id'		=> $this->getUser()->getId()
+				'created'		=> $comment->getCreated()->format('h:i A d/m/Y'),
+				'user_id'		=> $comment->getUser()->getId()
 			);
 
 			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
