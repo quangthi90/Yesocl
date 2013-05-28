@@ -249,7 +249,10 @@ if ( $customer->isLogged() ) {
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
 		$request->get['route'] == 'account/login' ||
-		$request->get['route'] == 'account/register/register')) {
+		$request->get['route'] == 'account/register/register' ||
+		$request->get['route'] == 'account/forgotten'
+	)) 
+	{
 		$action = new Action($request->get['route']);
 	}else{
 		$action = new Action('welcome/home');
