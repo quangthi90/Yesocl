@@ -19,7 +19,7 @@
     </div>
     <div class="frm-content">
     	<form class="reg-form" action="{{ action }}" method="post">
-    		<div class="top-warning warning hidden">Warning!!</div>
+    		<div class="alert alert-error top-warning hidden">Warning!!</div>
     		<div class="controls controls-row">
     			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" value="Bommer" />
     			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" value="Luu" />

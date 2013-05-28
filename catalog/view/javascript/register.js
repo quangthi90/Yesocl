@@ -25,7 +25,7 @@
 		var that = this;
 
 		this.$reg_btn.click(function(e) {
-			that.$el.find('.warning').addClass('hidden');
+			that.$el.find('.top-warning').addClass('hidden');
 
 			if(that.$reg_btn.hasClass('disabled')) {
 				e.preventDefault();

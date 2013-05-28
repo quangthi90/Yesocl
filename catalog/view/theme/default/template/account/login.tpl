@@ -11,12 +11,12 @@
     <div class="y-frm" id="y-frm-login">
         <div class="frm-title"> Sign In <strong>YESOCL.com</strong>
         </div>
-        <div class="frm-content">            
+        <div class="frm-content">
+            <div class="alert alert-error">{{ warning }}</div>         
             <form action="#">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-user"></i></span>
                     <input class="span3" id="username" type="text" placeholder="Email">
-                    <div class="warning">Field is required</div>
                 </div>
                 <br />
                 <div class="input-prepend">

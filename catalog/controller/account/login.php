@@ -3,7 +3,12 @@ class ControllerAccountLogin extends Controller {
 	private $error = array();
 	
 	public function index() {
-		$this->load->model('account/customer');		
+		$this->load->model('account/customer');	
+
+		if ( isset($this->session->data['warning']) ){
+			$this->data['warning'] = $this->session->data['warning'];
+			unset($this->session->data['warning']);
+		}	
 		
 		if ($this->customer->isLogged()) {
       		$this->redirect($this->url->link('common/home', '', 'SSL'));
@@ -37,9 +42,7 @@ class ControllerAccountLogin extends Controller {
     	}  
 		
       	if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
-		} else {
-			$this->data['error_warning'] = '';
+			$this->session->data['warning'] = $this->error['warning'];
 		}
 						
 		return $this->response->setOutput(json_encode(array(
