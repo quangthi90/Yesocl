@@ -11,8 +11,8 @@
     <div class="y-frm" id="y-frm-login">
         <div class="frm-title"> Sign In <strong>YESOCL.com</strong>
         </div>
+        <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">
-            <div class="alert alert-error">{{ warning }}</div>         
             <form action="#">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-user"></i></span>
