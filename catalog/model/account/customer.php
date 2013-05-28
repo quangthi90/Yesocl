@@ -112,9 +112,22 @@ class ModelAccountCustomer extends Doctrine {
 	}
 					
 	public function getCustomer($customer_id) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE customer_id = '" . (int)$customer_id . "'");
-		
-		return $query->row;
+		$customer = $this->cache->get($customer_id);
+
+		if ( !$customer ){
+			$customer = $this->dm->getRepository('Document\User\User')->find( $customer_id );
+
+			if ( !$customer ){
+				return null;
+			}
+
+			$this->load->model('tool/cache');
+			$this->model_tool_cache->updateCacheUser( $customer );
+
+			$customer = $this->cache->get( $customer_id );
+		}
+
+		return $customer;
 	}
 	
 	public function getCustomerByEmail($email) {

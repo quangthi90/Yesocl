@@ -128,9 +128,10 @@
 		promise.then(function(data) {
 			if(data.success == 'ok'){
 				var htmlOutput = '';
-				for (var i = 0; i < data.post.comments.length; i++) {
-					htmlOutput += $.tmpl( $('#item-template'), data.post.comments[i] ).html();
+				for (key in data.post.comments) {
+					htmlOutput += $.tmpl( $('#item-template'), data.post.comments[key] ).html();
 				}
+
 				// console.log(data.post.comments);
 				$('.comment-body').html(htmlOutput);
 		

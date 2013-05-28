@@ -8,7 +8,16 @@ class ModelToolCache extends Model {
 			$this->cache->set( $object->getId() . '.' . $object_data['page'], $object_data['object'] );
 		}
 
-		return $data;
+		return $list_object_data;
+	}
+
+	public function updateCacheUser($object) {
+		$object_data = $object->formatToCache();
+
+		$this->cache->delete( $object->getId() );
+		$this->cache->set( $object->getId(), $object_data['object'] );
+
+		return $list_object_data;
 	}
 }
 ?>

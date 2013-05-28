@@ -311,4 +311,16 @@ Class User {
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
     }
+
+    public function formatToCache(){
+		$data = array(
+			'id'			=> $this->getId(),
+			'username' 		=> $this->getUsername(),
+			'avatar' 		=> $this->getAvatar(),
+			'slug'			=> $this->getSlug(),
+			'email' 		=> $this->getPrimaryEmail()->getEmail()
+		);
+
+		return $data;
+	}
 }
