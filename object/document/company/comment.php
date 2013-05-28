@@ -91,4 +91,15 @@ Class Comment {
 	public function getEmail(){
 		return $this->email;
 	}
+
+	public function formatToCache(){
+		$data_format = array(
+			'author' 		=> $this->getAuthor(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated()->format('h:i A d/m/Y'),
+			'user_id'		=> $this->getUser()->getId()
+		);
+
+		return $data_format;
+	}
 }

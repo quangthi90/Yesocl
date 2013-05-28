@@ -8,7 +8,7 @@
 		<div class="row-fluid sidebar-user sidebar-box">
 			<div class="sidebar-user-info">
 				<div class="sidebar-user-avatar">
-					<a href="/"><img src="{{ user_info.avatar }}" /></a>
+					<a href="{{ user_info.href }}"><img src="{{ user_info.avatar }}" /></a>
 				</div>
 				<div class="sidebar-user-name">
 					<a href="/">{{ user_info.username }}</a>

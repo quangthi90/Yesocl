@@ -12,7 +12,8 @@ class ControllerCommonSidebarControl extends Controller {
 
 		$this->data['user_info'] = array(
 			'avatar' => $avatar,
-			'username' => $this->customer->getUsername()
+			'username' => $this->customer->getUsername(),
+			'href' => $this->url->link('account/edit', 'user_slug=' . $this->customer->getSlug(), 'SSL')
 		);
 
 		$this->data['action'] = array(

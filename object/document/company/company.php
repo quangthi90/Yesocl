@@ -67,7 +67,7 @@ Class Company {
 	 */
 	public function getPostById( $post_id ){
 		foreach ( $this->posts as $post ){
-			if ( $post->getId() === $post_id ){
+			if ( $post->getId() == $post_id ){
 				return  $post;
 			}
 		}

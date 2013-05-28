@@ -216,12 +216,7 @@ Class Post {
 		$i = 1;
 
 		foreach ( $this->getComments() as $comment ) {
-			$post_data['comments'][$comment->getId()] = array(
-				'author' 		=> $comment->getAuthor(),
-				'content' 		=> html_entity_decode($comment->getContent()),
-				'created'		=> $comment->getCreated()->format('h:i A d/m/Y'),
-				'user_id'		=> $comment->getUser()->getId()
-			);
+			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
 
 			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
 				$list_post_data[] = array(

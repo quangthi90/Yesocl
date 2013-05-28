@@ -7,7 +7,7 @@
 			</div>
 			<div class="y-box-content comment-body">		
 			</div>	
-			<div class="y-comment-reply post post_new">
+			<form class="y-comment-reply post post_new comment-form" data-post-id="0" data-url="{{ action.comment }}">
 				<div class="row-fluid txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>
@@ -18,10 +18,10 @@
 						</a>
 					</div>
 					<div class="span3 btn-container">
-						<a href="#" class="btn  btn-success">Post</a>
+						<button type="button" href="#" class="btn btn-success btn-comment">Post</button>
 					</div>
 				</div>
-			</div>		
+			</form>		
 		</div>			
 	</div>
 	{% raw %}

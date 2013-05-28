@@ -3,7 +3,7 @@ class ControllerPostPost extends Controller {
 	private $error = array();
 
 	public function postStatus(){
-		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateStatus()) {
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('post/post');
 
 			return $this->response->setOutput(json_encode(array(
@@ -16,7 +16,33 @@ class ControllerPostPost extends Controller {
         )));
 	}
 
-  	private function validateStatus() {
+    public function addComment(){
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate() && isset($this->request->post['post_id']) ) {
+            $this->load->model('company/comment');
+
+            $comment = $this->model_company_comment->addComment( $this->request->post );
+
+            if ( $comment == null ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok'
+                )));
+            }
+
+            $comment = $comment->formatToCache();
+            $comment['author'] = $this->customer->getUsername();
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok',
+                'comment' => $comment
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+    }
+
+  	private function validate() {
     	if ((utf8_strlen($this->request->post['content']) < 1)) {
       		$this->error['content'] = $this->language->get('error_content');
     	}

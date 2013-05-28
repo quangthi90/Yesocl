@@ -7,6 +7,7 @@ class Customer {
 	private $avatar;
 	private $username;
 	private $customer_group_id;
+	private $slug;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -27,6 +28,7 @@ class Customer {
 				$this->email = $customer_query->getPrimaryEmail()->getEmail();
 				$this->username = $customer_query->getUsername();
 				$this->customer_group_id = $customer_query->getGroupUser()->getId();
+				$this->slug = $customer_query->getSlug();
 			
 				// $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
 				
@@ -113,6 +115,10 @@ class Customer {
 
   	public function getCustomerGroupId() {
 		return $this->customer_group_id;	
+  	}
+
+  	public function getSlug(){
+  		return $this->slug;
   	}
 	
   	public function getBalance() {

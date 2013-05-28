@@ -1,5 +1,4 @@
 <?php
-use MongoId;
 class ModelCompanyPost extends Doctrine {
 	public function getPost( $post_id, $paging ){
 		$post = $this->cache->get( "$post_id.$paging" );
