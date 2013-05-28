@@ -58,7 +58,7 @@
 		// makeScrollWithoutCalResize('y-content');
 		
 		//Open comment box:
-		$('.open-comment').click(function(e){
+		/*$('.open-comment').click(function(e){
 			e.preventDefault();
 			$('#comment-box').animate({"right": "0px"}, "slow", function(){
 				makeVerticalCommentBox();
@@ -69,7 +69,7 @@
 		$('.y-box-header a.close').click(function(e){
 			e.preventDefault();
 			$('#comment-box').animate({"right": "-500px"}, "slow");
-		});
+		});*/
 	});
 </script>
 {% endblock %}

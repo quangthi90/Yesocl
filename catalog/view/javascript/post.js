@@ -1,4 +1,6 @@
 (function($, document, undefined) {
+	var comment_box = $('#comment-box');
+
 	function Status( $el ){
 		var that = this;
 
@@ -74,7 +76,7 @@
 		promise.then(f, f);
 	};
 
-	function Comment( $el ){
+	function CommentBtn( $el ){
 		var that = this;
 
 		this.$el			= $el;
@@ -86,17 +88,17 @@
 		this.attachEvents();
 	}
 
-	Comment.prototype.attachEvents = function(){
+	CommentBtn.prototype.attachEvents = function(){
 		var that = this;
 
 		this.$el.click(function(e) {
-			$('.comment-body').html('');
-
 			if(that.$el.hasClass('disabled')) {
 				e.preventDefault();
 
 				return false;
 			}
+
+			$('#comment-box').find('.y-box-header .close').trigger('click');
 
 			if (that.comment_count > 0){
 				that.data = {
@@ -113,7 +115,7 @@
 		});
 	};
 
-	Comment.prototype.submit = function($button){
+	CommentBtn.prototype.submit = function($button){
 		that = this;
 
 		var promise = $.ajax({
@@ -134,19 +136,18 @@
 
 				// console.log(data.post.comments);
 				$('.comment-body').html(htmlOutput);
-		
-				$('#comment-box').animate({"right": "0px"}, "slow", function(){
+
+				comment_box.animate({"right": "0px"}, "slow", function(){
 					makeVerticalCommentBox();
 				});
 			}
 		});
 	};
 
-	Comment.prototype.triggerProgress = function($el, promise)
+	CommentBtn.prototype.triggerProgress = function($el, promise)
 	{
 		var $spinner = $('<i class="icon-refresh icon-spin">');
 		var f        = function() {
-			$el.removeClass('disabled');
 			$spinner.remove();
 		};
 
@@ -161,7 +162,14 @@
 		});
 
 		$('.open-comment').each(function(){
-			new Comment($(this));
+			new CommentBtn($(this));
+		});
+
+		$('.comment-container').on('click', '.y-box-header .close', function(){
+			$('.open-comment').removeClass('disabled');
+			comment_box.animate({"right": "-500px"}, "slow");
+
+			$('.comment-body').html('');
 		});
 	});
 }(jQuery, document));
