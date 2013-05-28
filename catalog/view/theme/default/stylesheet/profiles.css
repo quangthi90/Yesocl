@@ -1,19 +1,19 @@
 #y-main-content {
-	overflow-y: hidden;
-    overflow-x: auto;
+	/*overflow-y: hidden;
+    overflow-x: auto;*/
 }
 
 #y-content {
-	overflow-y: hidden;
-    overflow-x: auto;
+	/*overflow-y: hidden;
+    overflow-x: auto;*/
 }
 
-#y-content .profiles-tabs {
+.profiles-tabs {
 	float: left;
 	margin-right: 15px;
 }
 
-#y-content .profiles-tabs-header {
+.profiles-tabs-header {
 	line-height: 45px;
 	border: 1px solid #6db23b;
 	-moz-box-shadow: 1px 1px 2px 1px #cecece;
@@ -29,11 +29,11 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#edf7f9',GradientType=0 ); /* IE6-9 */
 }
 
-#y-content .profiles-tabs-header .span7, #y-content .profiles-tabs-main .span7 {
+.profiles-tabs-header .span7, .profiles-tabs-main .span7 {
 	margin-left: 0px;
 }
 
-#y-content .profiles-tabs-title {
+.profiles-tabs-title {
 	text-align: center;
 	color: #fff;
 	font-size: 22px;
@@ -49,7 +49,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b93c', endColorstr='#519839',GradientType=0 ); /* IE6-9 */
 }
 
-#y-content .profiles-tabs-main {
+.profiles-tabs-main {
 	margin-top: 10px;
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -57,46 +57,15 @@
 	background: #fff;
 }
 
-#profiles-tabs-background .profiles-tabs-main {
-	float: left;
-}
-
 #profiles-tabs-background-experience, #profiles-tabs-background-skill, #profiles-tabs-background-education {
 	margin-left: 15px;
 }
 
-#profiles-tabs-background-sumary .profiles-tabs-main-body, #profiles-tabs-basic-infor .profiles-tabs-main-body {
-	font-size: 12px;
-}
-
-#y-content .profiles-tabs-main-header {
+.profiles-tabs-main-header {
 	line-height: 30px;
 }
 
-#y-content .profiles-tabs-main-header input {
-	margin-right: 10px;
-}
-
-#y-content .profiles-tabs-main-header a:first-child {
-	margin-left: 10px;
-	color: #71b73c;
-	text-transform: uppercase;
-	font-size: 18px;
-	line-height: 24px;
-}
-
-#y-content .profiles-btn-edit, #y-content .profiles-btn-save, #y-content .profiles-tabs-item1 .profiles-btn-remove, #y-content .profiles-btn-add, #y-content .profiles-btn-cancel {
-	padding: 0px 8px;
-	margin-right: 10px;
-	float: right;
-}
-
-#y-content .profiles-btn-edit i, #y-content .profiles-btn-save i, #y-content .profiles-tabs-item1 .profiles-btn-remove i, #y-content .profiles-btn-add i, #y-content .profiles-btn-cancel i {
-	line-height: 28px;
-	font-size: 18px;
-}
-
-#y-content .profiles-tabs-main-body {
+.profiles-tabs-main-body {
 	margin-top: 10px;
 	line-height: 30px;
 }
@@ -106,6 +75,32 @@
 	padding: 10px;
 	word-wrap:break-word;
 	line-height: 14px;
+}
+
+#profiles-tabs-background-sumary .profiles-tabs-main-body, #profiles-tabs-basic-infor .profiles-tabs-main-body {
+	font-size: 12px;
+}
+
+.profiles-tabs-main-header input {
+	margin-right: 10px;
+}
+
+.profiles-tabs-main-header a:first-child {
+	margin-left: 10px;
+	color: #71b73c;
+	text-transform: uppercase;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+.profiles-btn {
+	padding: 0px 8px;
+	margin-right: 10px;
+}
+
+.profiles-btn i {
+	line-height: 28px;
+	font-size: 18px;
 }
 
 #profiles-tabs-background textarea.profiles-tabs-main-body {
@@ -175,12 +170,8 @@
 	color: #6eb33b;
 }
 
-#profiles-tabs-basic-infor .description-content {
+#profiles-tabs-basic-infor .input-description {
 	color: #000;
-}
-
-#profiles-tabs-basic-infor .description-content {
-	margin-left: 2.564102564102564%;
 }
 
 #profiles-tabs-basic-infor .profiles-line {

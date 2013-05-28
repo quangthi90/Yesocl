@@ -9,7 +9,7 @@
 {% block body %}
 <div id="y-content" class="y-sub-container-1">
 	<div id="y-main-content">
-		<div id="profiles-tabs-basic-infor" class="profiles-tabs">
+		<div id="profiles-tabs-information" class="profiles-tabs">
 			<div class="profiles-tabs-header">
 				<div class="span7">
 					<div class="row-fluid">
@@ -24,9 +24,9 @@
 				<div class="span7">
 					<div class="row-fluid">
 						<div class="profiles-tabs-main-header">
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="clear"></div>
 						</div>
 
@@ -94,8 +94,10 @@
 
 							<div class="row-fluid">
 								<div class="span2 offset1">Descripntion</div>
-								<div class="span9 profiles-tabs-value description-content">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
-								<textarea class="span9 description-content profiles-tabs-input">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</textarea>
+								<div class="span9 input-description profiles-tabs-value">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
+								<div class="profiles-tabs-input span9">
+								<textarea class="input-description span12">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</textarea>
+								</div>
 							</div>
 						</div>
 					</div>		
@@ -115,12 +117,12 @@
 				<div class="clear"></div>
 			</div>
 
-			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main">
+			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main pull-left">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Sumary</a>
-					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-					<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+					<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+					<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+					<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="clear"></div>
 				</div>
 
@@ -154,10 +156,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 				</div>
 			</div>
 
-			<div id="profiles-tabs-background-experience" class="profiles-tabs-main">
+			<div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Experience</a>
-					<a class="btn profiles-btn-add"><i class="icon-plus"></i></a>
+					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 
@@ -165,10 +167,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
 								<div>NTT Data VN</div>
@@ -185,10 +187,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
 								<div>NTT Data VN</div>
@@ -205,10 +207,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
 								<div>NTT Data VN</div>
@@ -225,10 +227,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
 								<div>NTT Data VN</div>
@@ -245,10 +247,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>PG</div>
 								<div>NTT Data VN</div>
@@ -264,12 +266,12 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 				</div>	
 			</div>
 
-			<div id="profiles-tabs-background-skill" class="profiles-tabs-main">
+			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Skill & Expertise</a>
-					<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-plus"></i></a>
-					<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-					<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+					<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-plus"></i></a>
+					<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+					<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="pull-right"><input class="profiles-tabs-input" type="text" placeholder="Text here..." /></div>
 					<div class="clear"></div>
 				</div>
@@ -302,10 +304,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 				</div>
 			</div>
 
-			<div id="profiles-tabs-background-education" class="profiles-tabs-main">
+			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn span3">Education</a>
-					<a class="btn profiles-btn-add"><i class="icon-plus"></i></a>
+					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 
@@ -313,10 +315,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
 								<div>Bachelor</div>
@@ -333,10 +335,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
 								<div>Bachelor</div>
@@ -353,10 +355,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
 								<div>Bachelor</div>
@@ -373,10 +375,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
 								<div>Bachelor</div>
@@ -393,10 +395,10 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="btn profiles-btn-remove profiles-tabs-value"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn-edit profiles-tabs-value"><i class="icon-pencil"></i></a>
-							<a class="btn profiles-btn-cancel profiles-tabs-input"><i class="icon-mail-forward"></i></a>
-							<a class="btn profiles-btn-save profiles-tabs-input"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div>HCM City University of Science</div>
 								<div>Bachelor</div>
@@ -417,31 +419,19 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript" src="catalog/view/javascript/profiles.js"></script>
 <script type="text/javascript">
 	function addScroll(warper, column, width, height) {
 		$(warper).outerWidth(width);
 		$(warper + ' ' + column).outerHeight(height);
-		$(warper + ' ' + column).css('overflow-y', 'auto');
-		$(warper + ' ' + column).niceScroll({bouncescroll : false});
+		$(warper + ' ' + column).niceScroll();
 	}
 
 	$(document).ready( function () {
 		$('#y-content').niceScroll();
-		var columnWidth = $('#profiles-tabs-basic-infor').width();
-		var contentHeight = $('#y-main-content').height()*9/10 - $('#profiles-tabs-background .profiles-tabs-header').height() - 45;
+		var profiles = new Profiles($('#y-main-content'));
 
-		addScroll('#profiles-tabs-background-sumary', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('#profiles-tabs-background-experience', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('#profiles-tabs-background-skill', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('#profiles-tabs-background-education', '.profiles-tabs-main-body', columnWidth, contentHeight);
-		addScroll('.description-content', '', $('description-content').width(), $('#y-main-content').height()*3/10);
-		$('#profiles-tabs-basic-infor .profiles-tabs-main-body').outerHeight(contentHeight);
-
-		$('#profiles-tabs-background').width($('#profiles-tabs-background-sumary').width() + $('#profiles-tabs-background-experience').width() + $('#profiles-tabs-background-skill').width() + $('#profiles-tabs-background-education').width() + 15*(4 - 1) + 2*4);
-		$('#y-main-content').width($('#profiles-tabs-basic-infor').width() + $('#profiles-tabs-background').width() + 15*2);
-		$('#y-content').niceScroll();
-
-		$('.profiles-btn-edit').click(function () {
+		/*$('.profiles-btn-edit').click(function () {
 			$('.profiles-btn-edit').css('disabled', 'disabled');
 			$(this).parent().parent().find('.profiles-tabs-value').toggle();
 			$(this).parent().parent().find('.profiles-tabs-input').toggle();
@@ -464,8 +454,8 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			var html = '<div class="profiles-tabs-item1">';
 				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input type="text" value="" /></div>';
 				html += '<div class="profiles-tabs-item1-content">';
-				html += '<a class="btn profiles-btn-remove"><i class="icon-trash"></i></a>';
-				html += '<a class="btn profiles-btn-save"><i class="icon-save"></i></a>';
+				html += '<a class="profiles-btn-remove btn profiles-btn pull-right"><i class="icon-trash"></i></a>';
+				html += '<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>';
 				html += '<div>';
 				html += '<div><input type="text" value="" /></div>';
 				html += '<div><input type="text" value="" /></div>';
@@ -479,8 +469,8 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 			var html = '<div class="profiles-tabs-item1">';
 				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input type="text" value="" /></div>';
 				html += '<div class="profiles-tabs-item1-content">';
-				html += '<a class="btn profiles-btn-remove"><i class="icon-trash"></i></a>';
-				html += '<a class="btn profiles-btn-save"><i class="icon-save"></i></a>';
+				html += '<a class="profiles-btn-remove btn profiles-btn pull-right"><i class="icon-trash"></i></a>';
+				html += '<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>';
 				html += '<div>';
 				html += '<div><input type="text" value="" /></div>';
 				html += '<div><input type="text" value="" /></div>';
@@ -489,7 +479,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 				html += '</div>';
 				html += '</div>';
 			$(this).parent().parent().find('.profiles-tabs-main-body').prepend(html);
-		});
+		});*/
 	} );
 
 	window.onresize=function() {
