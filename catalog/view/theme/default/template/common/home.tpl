@@ -12,15 +12,10 @@
 
 {% block body %}
 <div id="y-content" class="y-sub-container-1">
-	<div id="y-main-content" class="has-horizontal"> 		           
-        <ul class="list-content columns">
-        	{% for post in posts %}
-        	<li class="feed-item">
-				{{ block('post_common_post_block') }}
-			</li>
-			{% endfor %}
-			<li class="feed-item" id="feed-end"></li>							
-		</ul>
+	<div id="y-main-content" class="has-horizontal">
+    	{% for post in posts %}        	
+			{{ block('post_common_post_block') }}			
+		{% endfor %}
 		{{ block('post_common_post_comment') }}
 	</div>
 </div>
@@ -29,12 +24,8 @@
 {% block javascript %}
 <script type="text/javascript">
 	$(document).ready(function() {
-		//MakeScroll:
-		makeScroll('y-content');	
+		$('#y-content').makeScroll();	
 	});	
-	window.onresize=function() {
-		makeScroll('y-content');	
-	};
 </script>
 {{ block('post_common_post_comment_javascript') }}
 {% endblock %}

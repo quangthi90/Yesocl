@@ -287,13 +287,13 @@ label.in-line{
     bottom: 40px;    
     /*background: #ffffff url(../../image/content_bg.png) repeat-x middle left;*/
     background: #ffffff url(../../image/b-bg.png) repeat top left;
-    overflow-y: auto;
-    overflow-x: auto;
 }
 
 #y-main-content{    
     width: auto;
     height: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 
@@ -506,6 +506,7 @@ label.in-line{
 .post {
     width: 420px;
     height: auto;
+    margin-bottom: 20px;
     padding: 0px;
     background: #fff;
     border: 1px solid #ddd;

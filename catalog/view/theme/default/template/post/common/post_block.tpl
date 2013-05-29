@@ -1,5 +1,5 @@
 {% block post_common_post_block %}
-	<div class="post">
+	<div class="feed post">
 		<div class="row-fluid post_header">
 			<div class="span2 avatar_thumb">
 				<a href="{{ post.href_user|raw }}">
