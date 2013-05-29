@@ -10,5 +10,14 @@ class ModelToolCache extends Model {
 
 		return $data;
 	}
+
+	public function updateCacheUser($object) {
+		$object_data = $object->formatToCache();
+
+		$this->cache->delete( $object->getId() );
+		$this->cache->set( $object->getId(), $object_data );
+
+		return $list_object_data;
+	}
 }
 ?>
