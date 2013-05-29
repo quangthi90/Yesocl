@@ -13,15 +13,15 @@
         </div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">
-            <form action="#">
+            <form action="{{ action.login }}" class="login-form" data-url="{{ action.login_page }}">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-user"></i></span>
-                    <input class="span3" id="username" type="text" placeholder="Email">
+                    <input class="span3" id="username" required="required" name="email" type="email" placeholder="Email">
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-lock"></i></span>
-                    <input class="span3" id="password" type="text" placeholder="Password">
+                    <input class="span3" id="password" required="required" name="password" type="password" placeholder="Password">
                     <div class="warning"></div>
                 </div>
                 <div class="checkbox-container">
@@ -29,7 +29,7 @@
                     <label for="remember">Remember me</label>
                 </div>                
                 <div class="btns">
-                     <button class="btn btn-success">Sign In</button>   
+                     <button class="btn btn-success btn-login">Sign In</button>   
                 </div>
             </form>     
         </div>
