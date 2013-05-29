@@ -66,7 +66,7 @@
 
 	Status.prototype.triggerProgress = function($el, promise)
 	{
-		var $spinner = $('<i class="icon-refresh icon-spin">');
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
 		var f        = function() {
 			$el.removeClass('disabled');
 			$spinner.remove();
@@ -130,11 +130,13 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
+				$('.comment-body').html('');
+
 				var htmlOutput = '';
 				for (key in data.post.comments) {
 					htmlOutput += $.tmpl( $('#item-template'), data.post.comments[key] ).html();
 				}
-				htmlOutput += '<div id="add-more-item"></div>'
+				htmlOutput += '<div id="add-more-item"></div>';
 				
 				comment_box.find('.comment-body').html(htmlOutput);
 				comment_box.find('.y-box-header span').html(that.comment_count);
@@ -149,7 +151,7 @@
 
 	CommentBtn.prototype.triggerProgress = function($el, promise)
 	{
-		var $spinner = $('<i class="icon-refresh icon-spin">');
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
 		var f        = function() {
 			$spinner.remove();
 		};
@@ -214,7 +216,7 @@
 		promise.then(function(data) {
 			if(data.success == 'ok'){
 				data.comment['avatar'] = $('.sidebar-user-avatar').find('img').attr('src');
-				data.comment['user_href'] = $('.sidebar-user-avatar').find('a').attr('href');
+				data.comment['href_user'] = $('.sidebar-user-avatar').find('a').attr('href');
 				htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
 				$('#add-more-item').before(htmlOutput);
 
@@ -231,7 +233,7 @@
 
 	CommentForm.prototype.triggerProgress = function($el, promise)
 	{
-		var $spinner = $('<i class="icon-refresh icon-spin">');
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
 		var f        = function() {
 			$el.removeClass('disabled');
 			$spinner.remove();
@@ -258,9 +260,6 @@
 		$('.comment-container').on('click', '.y-box-header .close', function(){
 			$('.open-comment').removeClass('disabled');
 			comment_box.animate({"right": "-500px"}, "slow");
-
-			$('.comment-body').html('');
-			comment_box.find('.y-box-header span').html('0');
 		});
 	});
 }(jQuery, document));

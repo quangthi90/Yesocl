@@ -47,7 +47,7 @@ class ControllerCommonHome extends Controller {
 				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
 				'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
 			);
-
+			
 			// Limit 20 post each load company
 			if ( $i == $this->limit ){
 				break;
