@@ -41,6 +41,8 @@ jQuery(document).ready(function (){
 			part = route.split('/');
 
 			part = part[1].split('#');
+
+			part = part[0].split('&');
 			
 			url = part[0];
 			

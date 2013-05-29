@@ -102,7 +102,7 @@ class ControllerPostPost extends Controller {
             if ( $user && $user['avatar'] ){
                 $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
             }else{
-                $avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
+                $avatar = $this->model_tool_image->getGavatar( $comment['email'], 180 );
             }
 
             if ( $user && $user['username'] ){
@@ -112,7 +112,7 @@ class ControllerPostPost extends Controller {
             }
 
             $post['comments'][$key]['avatar'] = $avatar;
-            $post['comments'][$key]['user_href'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+            $post['comments'][$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
         }
 
         return $this->response->setOutput(json_encode(array(

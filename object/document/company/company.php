@@ -75,6 +75,16 @@ Class Company {
 		return null;
 	}
 
+	public function getPostBySlug( $post_slug ){
+		foreach ( $this->posts as $post ){
+			if ( $post->getSlug() == $post_slug ){
+				return  $post;
+			}
+		}
+		
+		return null;
+	}
+
 	public function getId(){
 		return $this->id;
 	}

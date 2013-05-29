@@ -26,5 +26,23 @@ class ModelCompanyPost extends Doctrine {
 		
 		return $post;
 	}
+
+	public function getPostBySlug( $post_slug ){
+		$company = $this->dm->getRepository('Document\Company\Company')->findOneBy(array(
+			'posts.slug' => $post_slug
+		));
+
+		if ( !$company ){
+			return null;
+		}
+
+		$post = $company->getPostBySlug( $post_slug );
+
+		if ( !$post ){
+			return null;
+		}
+
+		return $post;
+	}
 }
 ?>
