@@ -17,7 +17,8 @@ class ControllerCommonSidebarControl extends Controller {
 		);
 
 		$this->data['action'] = array(
-			'home' => $this->url->link('common/home', '', 'SSL')
+			'home' => $this->url->link('common/home', '', 'SSL'),
+			'profile' => $this->url->link('account/edit', '', 'SSL')
 		);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {

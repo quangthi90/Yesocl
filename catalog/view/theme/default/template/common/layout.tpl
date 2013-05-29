@@ -15,7 +15,7 @@
 		<!-- Common css -->
 		<link href="catalog/view/theme/default/stylesheet/common/yes.css" rel="stylesheet" media="screen" />
 
-		<!-- Custom css -->		
+		<!-- Custom css -->
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
