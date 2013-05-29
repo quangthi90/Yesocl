@@ -197,6 +197,9 @@ class ModelCompanyPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model( 'tool/cache' );
+		$this->model_tool_cache->updateCachePost( $post );
 	}
 
 	public function isValidThumb( $file ) {
