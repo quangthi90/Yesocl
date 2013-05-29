@@ -20,16 +20,30 @@
 		<ul class="nav nav-list left-menu">
 			{% block sidebar_control %}
 		  	<li class="nav-header">Post</li>
-		  	<li class="menu-item" id="home-menu"><a href="{{ action.home }}"> <i class="icon-refresh"></i>What's new</a></li>
-		  	<li class="menu-item" id="follower-menu"><a href="#"><i class="icon-umbrella"></i> Follower's post</a></li>
+		  	<li class="menu-item" id="home-menu">
+		  		<a href="{{ action.home }}"> 
+		  			<i class="icon-refresh"></i> <span>What's new</span>
+		  		</a>
+		  	</li>
+		  	<li class="menu-item" id="follower-menu">
+		  		<a href="#"><i class="icon-umbrella"></i> <span>Follower's post </span></a>
+		  	</li>
 		  	<li class="divider"></li>
 		  	<li class="nav-header">Personal</li>
-		  	<li class="menu-item" id="wall-menu"><a href="#"><i class="icon-bookmark"></i> My wall</a></li>	
-		  	<li class="menu-item" id="edit-menu"><a href="{{ action.profile }}"><i class="icon-user-md"></i> My Profile</a></li>
+		  	<li class="menu-item" id="wall-menu">
+		  		<a href="#"><i class="icon-bookmark"></i> <span> My wall </span></a>
+		  	</li>	
+		  	<li class="menu-item" id="edit-menu">
+		  		<a href="{{ action.profile }}"><i class="icon-user-md"></i> <span>My Profile </span></a>
+		  	</li>
 		  	<li class="divider"></li>
 		  	<li class="nav-header">Groups</li>
-		  	<li class="menu-item" id="stockin-menu"><a href="#"><i class="icon-bar-chart"></i> Stock</a></li>
-		  	<li class="menu-item" id="tech-menu"><a href="#"><i class="icon-certificate"></i> Technology</a></li>
+		  	<li class="menu-item" id="stockin-menu">
+		  		<a href="#"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
+		  	</li>
+		  	<li class="menu-item" id="tech-menu">
+		  		<a href="#"><i class="icon-certificate"></i> <span>Technology </span></a>
+		  	</li>
 		  	{% endblock %}
 		</ul>
 	</div>

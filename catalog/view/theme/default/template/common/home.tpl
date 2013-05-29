@@ -12,7 +12,7 @@
 
 {% block body %}
 <div id="y-content" class="y-sub-container-1">
-	<div id="y-main-content"> 		           
+	<div id="y-main-content" class="has-horizontal"> 		           
         <ul class="list-content columns">
         	{% for post in posts %}
         	<li class="feed-item">
