@@ -169,10 +169,6 @@
 	};
 
 	$(function(){
-		$('.form-status').each(function(){
-			new Status($(this));
-		});
-
 		$('.open-comment').each(function(){
 			new CommentBtn($(this));			
 		});
