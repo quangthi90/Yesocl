@@ -1087,7 +1087,7 @@ db.getCollection("city").insert({
 db.getCollection("company").insert({
   "_id": ObjectId("519d1163471deee40b000000"),
   "created": ISODate("2013-05-25T22:00:00.0Z"),
-  "description": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, enim corrumpit eos in, usu ex dicant pertinax, primis latine ad nam. Soleat delectus euripidis cum in, quo lorem feugiat mandamus eu.&lt;\/p&gt;\r\n",
+  "description": "<p>\r\n\tLorem ipsum dolor sit amet, enim corrumpit eos in, usu ex dicant pertinax, primis latine ad nam. Soleat delectus euripidis cum in, quo lorem feugiat mandamus eu.<\/p>\r\n",
   "group": {
     "$ref": "company_group",
     "$id": ObjectId("516b9417913db47809000003"),
@@ -1102,43 +1102,37 @@ db.getCollection("company").insert({
   },
   "posts": [
     {
-      "_id": ObjectId("519d1aff471deed00b000000"),
-      "author": "user1",
-      "category": {
-        "$ref": "company_post_category",
-        "$id": ObjectId("516c9640976982b00c000000"),
-        "$db": "yesocl"
-      },
-      "content": "&lt;p&gt;\r\n\tEu vocibus facilisis cum. At dico aeterno instructior mea. Vix adhuc aeterno partiendo cu, sit te iudico constituam, appareat similique theophrastus his cu. Facete aliquam expetendis eu pri, mei labores inermis ei, ea est enim solet deterruisset. Paulo placerat suavitate mel cu, sea nisl nonumes ea.&lt;\/p&gt;\r\n",
-      "created": ISODate("2013-05-22T19:22:39.0Z"),
-      "description": "&lt;p&gt;\r\n\tCopiosae constituam id pri, admodum percipit consequat his ea, vel timeam fastidii at. Has posse graece aperiri in.&lt;\/p&gt;\r\n",
-      "email": "user1@test.com",
-      "slug": "lorem-ipsum-dolor-sit-amet-at-nam-stet-delicata-iracundia-51a19f6b471dee7c08000000",
-      "status": true,
-      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/519d1aff471deed00b000000\/thumb.jpg",
-      "title": "Lorem ipsum dolor sit amet, at nam stet delicata iracundia.",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51a0fa8e471dee340a000000"),
+      "_id": ObjectId("51a79d10471dee9c09000005"),
       "author": "user2",
       "category": {
         "$ref": "company_post_category",
         "$id": ObjectId("516c9640976982b00c000000"),
         "$db": "yesocl"
       },
-      "content": "&lt;p&gt;\r\n\tDicunt eleifend et vis. Mea brute tamquam tincidunt at. Iracundia prodesset no mel, duo augue nulla eripuit id, ex brute errem euismod eos. Ne duo putant admodum&lt;\/p&gt;\r\n",
-      "created": ISODate("2013-05-25T17:53:18.0Z"),
-      "description": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, dico causae temporibus id his&lt;\/p&gt;\r\n",
+      "comments": [
+        {
+          "_id": ObjectId("51a79e5f471dee9c09000006"),
+          "content": "&lt;p&gt;\r\n\tBài viết rất hay, cố gắng phát huy nha ^^&lt;\/p&gt;\r\n",
+          "status": true,
+          "created": ISODate("2013-05-30T18:45:51.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "user1@test.com"
+        }
+      ],
+      "content": "&lt;p&gt;\r\n\tDòng tiền đầu cơ tiếp tục đổ vào thị trường sau những diễn biến tích cực, cùng với đó tâm lý của nhà đầu tư cũng ổn định hơn tại một số thời điểm thị trường điều chỉnh khi không xuất hiện áp lực bán tháo. Tuy nhiên,&amp;nbsp;áp lực chốt lời đã nhanh chóng gia tăng trở lại khiến thị trường mất dần sự hưng phấn. Lực bán &amp;nbsp;tập trung chủ yếu ở nhóm cổ phiếu lớn và &amp;nbsp;đầu cơ, những cổ phiếu đã có mức tăng trưởng mạnh trong thời gian qua như REE, PPC, DRC, VNM, GAS…&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm ngắn hạn (5-10 ngày):&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVề mặt kỹ thuật, Vnindex hình thành hai cây nến gần đây luôn tạo bóng trên ở ngưỡng 518 cho thấy lực bán khá mạnh tập trung &amp;nbsp;ở vùng này và theo đó, nhịp điều chỉnh sắp tới có thể xảy ra đưa VNIndex về vùng hỗ trợ 500-505 điểm. Trong khi đó, chỉ số&amp;nbsp;HNXIndex cũng yếu dần về cuối phiên cho thấy dấu hiệu tiêu cực với việc hình thành mô hình nến Shooting Star cùng khối lượng giao dịch lớn.&amp;nbsp;Tương ứng với mức 500 điểm của VNIndex, mục tiêu của HNX là vùng hỗ trợ &amp;nbsp;63-62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnindex11.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2718&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnindex11-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/hnxindfex.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2719&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/hnxindfex-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;hnxindfex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tỞ vị thế mua, chúng&amp;nbsp;tôi không ủng hộ việc mua đuổi trong phiên (đặc việt là nhóm cổ phiếu đã tăng mạnh)&amp;nbsp;&amp;nbsp;mà nên cân nhắc mua vào ở các nhịp điều chỉnh về vùng hỗ trợ trong phiên cuối tuần.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục giải ngân có thể tập trung vào các cổ phiếu đang tích lũy hoặc chưa tăng mạnh trong thời gian qua.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+      "created": ISODate("2013-05-30T18:40:16.0Z"),
+      "description": "&lt;p&gt;\r\n\tDòng tiền đầu cơ tiếp tục đổ vào thị trường sau những diễn biến tích cực&lt;\/p&gt;\r\n",
       "email": "user2@test.com",
-      "slug": "nec-no-tantas-noster-homero-appetere-perfecto-usu-at-ea-vim-dictas-liberaviss-51a19f81471dee7c08000001",
+      "slug": "lang-kinh-yestoc-phien-3005-ap-luc-ban-co-the-se-gia-tang-51a79d10471dee9c09000004",
       "status": true,
-      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a0fa8e471dee340a000000\/thumb.jpg",
-      "title": "Nec no tantas noster. Homero appetere perfecto usu at, ea vim dictas liberaviss",
+      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a79d10471dee9c09000005\/thumb.jpg",
+      "title": "Lăng kính Yestoc phiên 30\/05: “áp lực bán có thể sẽ gia tăng”",
+      "updated": ISODate("2013-05-30T18:45:51.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5f43471deeb40900001f"),
@@ -1161,7 +1155,7 @@ db.getCollection("company_group").insert({
 /** company_post_category records **/
 db.getCollection("company_post_category").insert({
   "_id": ObjectId("516c9640976982b00c000000"),
-  "name": "Default",
+  "name": "Nhận định thị trường",
   "order": NumberInt(1),
   "status": true
 });

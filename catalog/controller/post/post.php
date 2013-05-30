@@ -2,7 +2,7 @@
 class ControllerPostPost extends Controller {
 	private $error = array();
 
-	public function postStatus(){
+	public function addStatus(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('post/post');
 

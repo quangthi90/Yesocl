@@ -371,7 +371,9 @@ class ControllerCompanyCategory extends Controller {
 	private function isValidateForm() {
 		if ( !isset( $this->request->post['name']) || strlen( trim( $this->request->post['name'] ) ) < 1 || strlen( trim( $this->request->post['name'] ) ) > 128  ) {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}else {
+		}
+
+		/*else {
 			if ( isset( $this->request->get['category_id'] ) ) {
 				$this->load->model( 'company/category' );
 
@@ -382,7 +384,7 @@ class ControllerCompanyCategory extends Controller {
 					}
 				}
 			}
-		}
+		}*/
 
 		if ( $this->error ) {
 			return false;

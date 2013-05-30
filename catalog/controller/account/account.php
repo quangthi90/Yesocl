@@ -39,7 +39,7 @@ class ControllerAccountAccount extends Controller {
 				'author' 		=> $post->getAuthor(),
 				'avatar' 		=> $avatar,
 				'title' 		=> $post->getTitle(),
-				'content' 		=> html_entity_decode($post->getContent()),
+				'content' 		=> html_entity_decode($post->getDescription()),
 				'created'		=> $post->getCreated(),
 				'comment_count' => $comment_count,
 				'type'			=> 'company',
@@ -56,7 +56,18 @@ class ControllerAccountAccount extends Controller {
 			$i++;
 		}
 
-		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
+		if ( $this->customer->getAvatar() ){
+			$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+		}else{
+			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
+		}
+
+		$this->data['user_info'] = array(
+			'avatar'	=> $avatar,
+			'username'	=> $this->customer->getUsername()
+		);
+
+		$this->data['action']['status'] = $this->url->link('post/post/addStatus', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
