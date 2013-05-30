@@ -76,9 +76,9 @@ class ModelCompanyCategory extends Doctrine {
 		}
 
 		// name is exist
-		if ( $category->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		/*if ( $category->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
 			return false;
-		}
+		}*/
 
 		$category->setName( $data['name'] );
 		$category->setOrder( $data['order'] );

@@ -39,7 +39,7 @@ class ControllerAccountAccount extends Controller {
 				'author' 		=> $post->getAuthor(),
 				'avatar' 		=> $avatar,
 				'title' 		=> $post->getTitle(),
-				'content' 		=> html_entity_decode($post->getContent()),
+				'content' 		=> html_entity_decode($post->getDescription()),
 				'created'		=> $post->getCreated(),
 				'comment_count' => $comment_count,
 				'type'			=> 'company',
