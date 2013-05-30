@@ -30,8 +30,8 @@
 		  	</li>
 		  	<li class="divider"></li>
 		  	<li class="nav-header">Personal</li>
-		  	<li class="menu-item" id="wall-menu">
-		  		<a href="#"><i class="icon-bookmark"></i> <span> My wall </span></a>
+		  	<li class="menu-item" id="account-menu">
+		  		<a href="{{ action.account }}"><i class="icon-bookmark"></i> <span> My wall </span></a>
 		  	</li>	
 		  	<li class="menu-item" id="edit-menu">
 		  		<a href="{{ action.profile }}"><i class="icon-user-md"></i> <span>My Profile </span></a>

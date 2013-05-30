@@ -18,6 +18,7 @@ class ControllerCommonSidebarControl extends Controller {
 
 		$this->data['action'] = array(
 			'home' => $this->url->link('common/home', '', 'SSL'),
+			'account' => $this->url->link('account/account', '', 'SSL'),
 			'profile' => $this->url->link('account/edit', '', 'SSL')
 		);
 		
