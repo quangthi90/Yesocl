@@ -4,7 +4,7 @@
 {% use '@template/default/template/post/common/post_block.tpl' %}
 {% use '@template/default/template/post/common/post_comment.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}{{ user_info.username }}{% endblock %}
 
 {% block stylesheet %}
     <link href="catalog/view/theme/default/stylesheet/home.css" rel="stylesheet" media="screen" />

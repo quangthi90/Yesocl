@@ -56,6 +56,17 @@ class ControllerAccountAccount extends Controller {
 			$i++;
 		}
 
+		if ( $this->customer->getAvatar() ){
+			$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+		}else{
+			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
+		}
+
+		$this->data['user_info'] = array(
+			'avatar'	=> $avatar,
+			'username'	=> $this->customer->getUsername()
+		);
+
 		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
