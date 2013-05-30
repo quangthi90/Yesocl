@@ -67,7 +67,7 @@ class ControllerAccountAccount extends Controller {
 			'username'	=> $this->customer->getUsername()
 		);
 
-		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
+		$this->data['action']['status'] = $this->url->link('post/post/addStatus', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';

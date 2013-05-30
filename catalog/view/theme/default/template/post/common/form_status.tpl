@@ -1,5 +1,5 @@
 {% block post_common_form_status %}
-	<form class="post post_new form-status" data-url="{{ status_action }}">
+	<form class="post post_new form-status" data-url="{{ action.status }}">
 		<div class="row-fluid txt_editor">
 			<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 		</div>
@@ -10,7 +10,7 @@
 				</a>
 			</div>
 			<div class="span3 text-right">
-				<button type="submit" class="btn btn-success btn-status">Post</button>
+				<button type="button" class="btn btn-success btn-status">Post</button>
 			</div>
 		</div>
 	</form>
