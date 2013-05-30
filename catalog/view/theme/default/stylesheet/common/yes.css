@@ -636,7 +636,8 @@ label.in-line{
   background-color: transparent;
   font-size: 12px;
   font-weight: bold;
-  padding: 5px 15px;
+  padding: 2px 15px;
+  height: 24px;
 }
 
 .sidebar-controls .nav-list > li > a > i {
