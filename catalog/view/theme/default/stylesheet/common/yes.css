@@ -636,16 +636,16 @@ label.in-line{
   background-color: transparent;
   font-size: 12px;
   font-weight: bold;
+  padding: 5px 15px;
 }
 
 .sidebar-controls .nav-list > li > a > i {
-  font-size: 18px;
+  font-size: 20px;
   background-color: #3b8f39;
   color: #fff;
   text-align: center;
   vertical-align: middle;
   width: 25px;
-  height: 18px;
   display: block;
   float: left;
 }
