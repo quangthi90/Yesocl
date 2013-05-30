@@ -79,7 +79,6 @@
 
 	function CommentBtn( $el ){
 		var that = this;
-
 		this.$el			= $el;
 		this.comment_count	= $el.data('comment-count');
 		this.post_id		= $el.data('post-id');
@@ -109,7 +108,7 @@
 
 				that.submit(that.$el);
 			}else{
-
+				alert('No comment found');
 			}
 
 			return false;
@@ -234,7 +233,7 @@
 	CommentForm.prototype.triggerProgress = function($el, promise)
 	{
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
-		var f        = function() {
+		var f = function() {
 			$el.removeClass('disabled');
 			$spinner.remove();
 		};
@@ -250,7 +249,7 @@
 		});
 
 		$('.open-comment').each(function(){
-			new CommentBtn($(this));
+			new CommentBtn($(this));			
 		});
 
 		$('.comment-form').each(function(){

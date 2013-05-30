@@ -38,13 +38,13 @@
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>
 				<div class="row-fluid"> 
-					<div class="span9 post_new_control">
+					<div class="span8 post_new_control">
 						<a href="#" title="Chèn hình">
 							<i class="icon-camera-retro big-icon"></i>
 						</a>
 					</div>
-					<div class="span3 btn-container">
-						<button type="button" href="#" class="btn btn-success btn-comment">Post</button>
+					<div class="span4 btn-container">
+						<a href="#" class="btn btn-success btn-comment">Post</a>
 					</div>
 				</div>
 			</form>		

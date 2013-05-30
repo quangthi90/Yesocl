@@ -107,10 +107,6 @@ ul
     padding: 0px;
 }
 
-i{
-  color: #a5acb3;
-}
-
 /*END OVERLOAD BOOTSTRAP*/
 
 /*Start Y-CSS*/
@@ -505,8 +501,7 @@ label.in-line{
 /*POST*/
 .post {
     width: 420px;
-    height: auto;
-    margin-bottom: 20px;
+    height: auto;    
     padding: 0px;
     background: #fff;
     border: 1px solid #ddd;
@@ -514,6 +509,17 @@ label.in-line{
     -moz-box-shadow: 0 0 5px #ccc;
     -webkit-box-shadow: 0 0 5px#ccc;
     box-shadow: 0 0 5px #ccc;
+}
+
+.post:hover {
+  border-top-color: #3B8F39;
+  -moz-box-shadow: 0 0 5px #75E944;
+  -webkit-box-shadow: 0 0 5px#75E944;
+  box-shadow: 0 0 5px #75E944;
+}
+
+.feed {
+  margin-bottom: 20px;
 }
 
 .post .post_header {
@@ -536,7 +542,7 @@ label.in-line{
         font-size: 14px;
     }
     .post .post_header .post_user a:hover{
-      color: #99ca8d;
+      color: #000;
     }
 .post .post_header .avatar_thumb {
 
@@ -559,7 +565,7 @@ label.in-line{
   color: #3d9915;
 }
 .post .post_header .post_title a:hover{
-  color: #99ca8d;
+  color: #000;
 }
         
 .post .post_body {

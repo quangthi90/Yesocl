@@ -7,7 +7,7 @@
 
 {% block stylesheet %}
     <link href="catalog/view/theme/default/stylesheet/home.css" rel="stylesheet" media="screen" />
-    <link href="catalog/view/theme/default/stylesheet/post-detail.css" rel="stylesheet" media="screen" />
+    <link href="catalog/view/theme/default/stylesheet/comment.css" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
