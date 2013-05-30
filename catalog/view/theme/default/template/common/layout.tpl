@@ -30,6 +30,7 @@
 			{% endblock %}
 
 			{{ include(template_from_string( footer )) }}
+			<div id="overlay"></div>
 		</div>
     	<!-- Library Script -->
     	<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>

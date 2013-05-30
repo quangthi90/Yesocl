@@ -54,6 +54,7 @@
 #post-detail-header .post-metadata .post-info h4 {
 	margin: 0px;
 	padding: 3px 3px 3px 0px;
+	text-overflow: ellipsis;
 }
 
 #post-detail-header .post-metadata .post-info .post-user-time span.post-time {
@@ -80,11 +81,13 @@
     position: absolute;
     top: 90px;
     bottom: 0px;
-    left: 0px;    
+    left: 0px;  
+    text-align: justify;  
 }
 
 #post-content p {
 	white-space: normal;
+	text-align: justify;
 }
 
 #post-content img {

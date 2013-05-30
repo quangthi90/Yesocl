@@ -1,6 +1,7 @@
 (function($, document, undefined) {
 	var comment_box = $('#comment-box');
 	var comment_form = $('.comment-form');
+	var list_comment = $('#comment-box .y-box-content');
 
 	function Status( $el ){
 		var that = this;
@@ -100,16 +101,12 @@
 
 			$('#comment-box').find('.y-box-header .close').trigger('click');
 
-			if (that.comment_count > 0){
-				that.data = {
-					post_id 	: that.post_id,
-					post_type	: that.post_type
-				};
+			that.data = {
+				post_id 	: that.post_id,
+				post_type	: that.post_type
+			};
 
-				that.submit(that.$el);
-			}else{
-				alert('No comment found');
-			}
+			that.submit(that.$el);
 
 			return false;
 		});
@@ -127,7 +124,7 @@
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) {
+		promise.then(function(data) { 
 			if(data.success == 'ok'){
 				$('.comment-body').html('');
 
@@ -139,12 +136,10 @@
 				
 				comment_box.find('.comment-body').html(htmlOutput);
 				comment_box.find('.y-box-header span').html(that.comment_count);
-				comment_form.attr('data-post-id', data.post.id);
-
-				comment_box.animate({"right": "0px"}, "slow", function(){
-					makeVerticalCommentBox();
-				});
+				comment_form.attr('data-post-id', data.post.id);				
 			}
+
+			showCommentForCurrentPost($button.parents('.post'));
 		});
 	};
 
@@ -218,8 +213,11 @@
 				data.comment['href_user'] = $('.sidebar-user-avatar').find('a').attr('href');
 				htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
 				$('#add-more-item').before(htmlOutput);
-
 				that.$content.val('');
+				//Scroll to last post which have just been added
+				list_comment.animate({ 
+					scrollTop: $('#add-more-item').offset().top
+				}, 1000);
 			}
 		});
 	};
@@ -243,6 +241,23 @@
 		promise.then(f, f);
 	};
 
+	function showCommentForCurrentPost ($post) {
+		
+		$('.post').removeClass('post-selecting');
+		$post.addClass('post-selecting');
+
+		//Show comment box:
+		comment_box.animate({"right": "2px"}, "slow", function(){
+			$('#overlay').show('fast');
+			list_comment.makeScrollWithoutCalResize();
+		});
+	}
+
+	function hideCommentBox () {
+		$('#overlay').hide();
+		$('.post').removeClass('post-selecting');
+	}
+
 	$(function(){
 		$('.form-status').each(function(){
 			new Status($(this));
@@ -259,6 +274,7 @@
 		$('.comment-container').on('click', '.y-box-header .close', function(){
 			$('.open-comment').removeClass('disabled');
 			comment_box.animate({"right": "-500px"}, "slow");
+			hideCommentBox();
 		});
 	});
 }(jQuery, document));

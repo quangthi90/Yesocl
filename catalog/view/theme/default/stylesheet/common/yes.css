@@ -245,8 +245,8 @@ i.icon-2x{
     top:0px;
     left:0px;
     z-index:100;
-    background-color:#000;
-    opacity: 0.1;
+    background-color: #5BA23A;
+    opacity: 0.2;
     display:none;
     width:100%;
     height:100%;
@@ -517,13 +517,20 @@ label.in-line{
     -moz-box-shadow: 0 0 5px #ccc;
     -webkit-box-shadow: 0 0 5px#ccc;
     box-shadow: 0 0 5px #ccc;
+    position: relative;
 }
 
 .post:hover {
-  border-top-color: #3B8F39;
+   border-top-color: #3B8F39;
   -moz-box-shadow: 0 0 5px #75E944;
   -webkit-box-shadow: 0 0 5px#75E944;
-  box-shadow: 0 0 5px #75E944;
+  box-shadow: 0 0 5px #75E944;  
+}
+
+.post-selecting {
+  border-top-color: #3B8F39;
+  position: absolute;
+  z-index: 101;
 }
 
 .feed {
@@ -546,7 +553,7 @@ label.in-line{
 }
     .post .post_header .post_user a {
         /*color: #3d9915;*/
-        /*font-weight: bold;*/
+        font-weight: bold;
         font-size: 14px;
     }
     .post .post_header .post_user a:hover{
@@ -558,11 +565,10 @@ label.in-line{
 .post .post_header .post_time {
     padding-top: 4px;
     padding-right: 10px;
-    font-size: 12px;
+    font-size: 11px;
     text-align: right;
 }
 .post .post_header .post_title {
-    /*font-size: 14px;*/
     color: #3e9314;
     margin: 3px 0px 0px 0px;
     padding: 0px 5px 5px 0px;

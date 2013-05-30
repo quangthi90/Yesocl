@@ -39,7 +39,7 @@
 							<a href="{{ post.href_user|raw }}">{{ post.author }}</a> - <span class="post-time">{{ post.created|date('h:i A d/m/Y') }}</span>
 						</div>
 						<h4 class="post_title">
-							<a>{{ post.title }}</a>
+							{{ post.title }}
 						</h4>
 					</div>					
 				</div>
@@ -54,13 +54,13 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-	makeScrollWithoutCalResize('y-content');
+	$('y-content').makeScrollWithoutCalResize();
 
 	//Open comment box
 	$('.open-comment-detail').click(function(e){
 		e.preventDefault();
 		$('#comment-box').animate({"right": "0px"}, "slow", function(){
-			makeVerticalCommentBox();
+			$('#comment-box .y-box-content').makeScrollWithoutCalResize();
 		});
 	});
 });
