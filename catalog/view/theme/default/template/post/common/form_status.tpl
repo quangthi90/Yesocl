@@ -17,4 +17,5 @@
 {% endblock %}
 
 {% block post_common_form_status_javascript %}
+<script type="text/javascript" src="catalog/view/javascript/status.js"></script>
 {% endblock %}
