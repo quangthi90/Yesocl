@@ -191,6 +191,13 @@ Abstract Class Post {
 		$count_paging = 1;
 		$i = 1;
 
+		if ( $comment_count == 0 ){
+			$list_post_data[] = array(
+				'object' 	=> $post_data,
+				'page'		=> $count_paging
+			);
+		}
+
 		foreach ( $this->getComments() as $comment ) {
 			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
 
