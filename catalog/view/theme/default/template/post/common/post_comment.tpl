@@ -1,3 +1,7 @@
+{% block post_common_post_comment_style %}
+<link href="catalog/view/theme/default/stylesheet/comment.css" rel="stylesheet" media="screen" />
+{% endblock %}
+
 {% block post_common_post_comment %}
 	<div id="comment-box" class="y-box">
 		<div class="comment-container"> 

@@ -6,6 +6,7 @@
 
 {% block stylesheet %}
     <link href="catalog/view/theme/default/stylesheet/post-detail.css" rel="stylesheet" media="screen" />
+    {{ block('post_common_post_comment_style') }}
 {% endblock %}
 
 {% block body %}
