@@ -1,5 +1,5 @@
 <?php
-use Document\Company\Comment;
+use Document\AbsObject\Comment;
 
 class ModelCompanyComment extends Doctrine {
 	public function addComment( $data ){
