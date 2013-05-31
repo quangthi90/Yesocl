@@ -265,9 +265,9 @@ class ControllerCompanyPost extends Controller {
 				'title' => $post->getTitle(),
 				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
 				'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
-				'status' => $post->getStatus(),
+				'status' => $post->getStatus() == true ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 				'action' => $action,
-				);
+			);
 		}
 
 		// pagination
