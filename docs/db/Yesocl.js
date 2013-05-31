@@ -1161,6 +1161,29 @@ db.getCollection("company").insert({
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       }
+    },
+    {
+      "_id": ObjectId("51a8b787471dee1009000001"),
+      "author": "user2",
+      "category": {
+        "$ref": "company_post_category",
+        "$id": ObjectId("516c9640976982b00c000000"),
+        "$db": "yesocl"
+      },
+      "content": "&lt;p&gt;\r\n\tDiễn biến các chỉ số qua tiếp tục cho thấy sự tích cực trong xu hướng trung hạn, nhóm chứng khoán dậy sóng giúp thị trường có phiên tăng điểm mạnh mẽ. Tuy nhiên trong ngắn hạn, áp lực bán có thể gia tăng do VNIndex đang tiệm cận đỉnh đầu năm ở 518 trong khi &amp;nbsp;chỉ số HNX đóng cửa trên kháng cự 63,3 nhưng mức vượt qua khá nhỏ nên sự phá vỡ chưa rõ ràng&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm ngắn hạn (5-10 ngày)&lt;\/strong&gt;:&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi tiếp tục giữ quan điểm thị trường vẫn có thể có vài phiên điều chỉnh nhẹ về gần các mức hỗ trợ 500 trên Vnindex và 61 trên HNX trong tuần sau. Hai chỉ số vẫn hoạt động trong kênh tăng giá hẹp ngắn hạn với mức mục tiêu của nhịp tăng lần này là 520 của VN-Index và 65 của HNX. Do đó, các nhà đầu tư có thể tận dụng các nhịp điều chỉnh nhẹ về gần các mức hỗ trợ mới để tham gia giải ngân vào các mã vẫn đang ở trạng thái tích lũy hoặc chưa tăng mạnh, nhưng hạn chế giải ngân vào các cổ phiếu đã có mức tăng nóng như BTP, REE, PPC, HSG… trong thời gian qua vì chúng tôi quan ngại khả năng áp lực chốt lời có thể sẽ gia tăng mạnh lên nhóm cổ phiếu này trong các phiên tới.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnidex.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2704&quot; height=&quot;0&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnidex-1024x583.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnidex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược trade ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tRủi ro đang dần gia tăng khi mà cả hai chỉ số đều tiệm cận ngưỡng kháng cự nên nhà đầu tư tránh việc mua đuổi ở những phiên tăng mạnh.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư có thể duy việc giải ngân khi thị trường điều chỉnh và tránh việc lướt sóng ngắn hạn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục mã cổ phiếu đã được chúng tôi cập nhật trong &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-27-3105-tam-thoi-di-ngang-va-dieu-chinh-trong-tuan\/&quot;&gt;bản tin tuần 27-31\/5&lt;\/a&gt;&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+      "created": ISODate("2013-05-31T14:45:27.0Z"),
+      "description": "&lt;p&gt;\r\n\tDiễn biến các chỉ số qua tiếp tục cho thấy sự tích cực trong xu hướng trung hạn, nhóm chứng khoán dậy sóng giúp thị trường có phiên tăng điểm&lt;\/p&gt;\r\n",
+      "email": "user2@test.com",
+      "slug": "lang-kinh-yestoc-2805-han-che-mua-duoi-51a8b787471dee1009000000",
+      "status": true,
+      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a8b787471dee1009000001\/thumb.jpg",
+      "title": "Lăng kính Yestoc 28\/05: “hạn chế mua đuổi”",
+      "updated": ISODate("2013-05-31T14:45:27.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
     }
   ],
   "slug": "yesocl",

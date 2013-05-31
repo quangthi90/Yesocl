@@ -18,7 +18,14 @@
 				<h6 class="post_title"><a href="{{ post.href_post|raw }}">{{ post.title }}</a></h6>
 			</div>
 		</div>
-		<div class="post_body">{{ post.content|raw }}</div>
+		<div class="post_body">
+			{% if post.image != null %}
+			<div class="row-fluid text-center">
+				<img src="{{ post.image }}" />
+			</div>
+			{% endif %}
+			{{ post.content|raw }}
+		</div>
 		<div class="row-fluid post_footer">
 			<div class="span10 post_action">
 				<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like</a>
