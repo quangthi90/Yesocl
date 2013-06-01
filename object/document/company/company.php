@@ -174,11 +174,7 @@ Class Company {
 	}
 
 	public function addPost( Post $post ){
-		// print(get_class($post));
-		// print($post->getSlug()); exit;
-		// print("<pre>"); var_dump($post); 
-		// exit;
-		$this->posts[] = $post;
+		$this->posts = array_merge( array($post), $this->posts->toArray() );
 	}
 
 	public function setPosts( $posts ){

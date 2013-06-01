@@ -26,6 +26,10 @@ class ControllerAccountAccount extends Controller {
 		$this->data['posts'] = array();
 		$i = 0;
 		foreach ( $company_posts as $post ) {
+			if ( $post->getUser()->getId() != $this->customer->getId() ){
+				continue;
+			}
+
 			if ( $post->getUser() && $post->getUser()->getAvatar() ){
 				$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
 			}else{
@@ -34,10 +38,17 @@ class ControllerAccountAccount extends Controller {
 
 			$comment_count = count( $post->getComments() );
 
+			if ( $post->getThumb() ){
+				$image = $this->model_tool_image->resize( $post->getThumb(), 400, 250 );
+			}else{
+				$image = null;
+			}
+
 			$this->data['posts'][] = array(
 				'id'			=> $post->getId(),
 				'author' 		=> $post->getAuthor(),
 				'avatar' 		=> $avatar,
+				'image'			=> $image,
 				'title' 		=> $post->getTitle(),
 				'content' 		=> html_entity_decode($post->getDescription()),
 				'created'		=> $post->getCreated(),

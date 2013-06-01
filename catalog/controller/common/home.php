@@ -35,10 +35,10 @@ class ControllerCommonHome extends Controller {
 			$comment_count = count( $post->getComments() );
 
 			if ( $post->getThumb() ){
-				$image = $this->model_tool_image->resize( $post->getThumb(), 400, 300 );
+				$image = $this->model_tool_image->resize( $post->getThumb(), 400, 250 );
 			}else{
 				$image = null;
-			}			
+			}	
 
 			$this->data['posts'][] = array(
 				'id'			=> $post->getId(),

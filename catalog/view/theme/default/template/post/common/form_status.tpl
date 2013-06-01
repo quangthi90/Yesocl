@@ -1,7 +1,7 @@
 {% block post_common_form_status %}
-	<form class="post post_new form-status" data-url="{{ action.status }}">
+	<form class="feed post post_new form-status" data-url="{{ action.status }}">
 		<div class="row-fluid txt_editor">
-			<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
+			<textarea class="post_input" style="resize: none;" placeholder="What's in your mind ..."></textarea>
 		</div>
 		<div class="row-fluid"> 
 			<div class="span9 post_new_control">
