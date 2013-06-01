@@ -74,21 +74,17 @@ class ModelCompanyPost extends Doctrine {
 
 		$company->addPost( $post );
 
-		$this->dm->flush();
+		$this->dm->persist( $post );
 
 		if ( !empty( $thumb ) ) {
 			if ( $data['thumb'] = $this->uploadThumb( $company->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
-			}else {
-				$post->setThumb( '' );
 			}
-			$this->dm->flush();
 		}
 
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateCachePost( $post );
+		$this->dm->flush();
 
-		return true;
+		return $post;
 	}
 
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
@@ -164,21 +160,22 @@ class ModelCompanyPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		$this->dm->flush();
-
 		if ( !empty( $thumb ) ) {
 			if ( $data['thumb'] = $this->uploadThumb( $company->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}else {
 				$post->setThumb( '' );
 			}
-			$this->dm->flush();
+		}else{
+			$post->setThumb('');
 		}
 
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateCachePost( $post );
+		$this->dm->flush();
 
-		return true;
+		$this->load->model( 'tool/cache' );
+		$post = $this->model_tool_cache->setPost( $post );
+
+		return $post;
 	}
 
 	public function deletePost( $data = array() ) {
@@ -199,7 +196,9 @@ class ModelCompanyPost extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateCachePost( $post );
+		$this->model_tool_cache->deletePost( $post );
+
+		return true;
 	}
 
 	public function isValidThumb( $file ) {

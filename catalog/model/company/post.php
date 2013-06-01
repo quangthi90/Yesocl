@@ -1,7 +1,8 @@
 <?php
 class ModelCompanyPost extends Doctrine {
 	public function getPost( $post_id, $paging ){
-		$post = $this->cache->get( "$post_id.$paging" );
+		$this->load->model('tool/cache');
+		$post = $this->model_tool_cache->getPost( $post_id, $paging );
 
 		if ( !$post ){
 			$company = $this->dm->getRepository('Document\Company\Company')->findOneBy( array(
@@ -18,10 +19,7 @@ class ModelCompanyPost extends Doctrine {
 				return null;
 			}
 
-			$this->load->model('tool/cache');
-			$this->model_tool_cache->updateCachePost( $post );
-
-			$post = $this->cache->get( "$post_id.$paging" );
+			$post = $this->model_tool_cache->setPost( $post );
 		}
 		
 		return $post;

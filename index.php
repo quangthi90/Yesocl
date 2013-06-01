@@ -65,9 +65,9 @@ $registry->set('db', $db);
 }*/
 		
 // Settings
-$configs = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();
+$settings = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();
 
-foreach ($configs as $setting) {
+foreach ($settings as $setting) {
 	if ( $setting ) {
 		$config->set( $setting->getKey(), $setting->getValue() );
 	}

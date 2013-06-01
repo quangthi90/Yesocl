@@ -111,23 +111,21 @@ class ModelAccountCustomer extends Doctrine {
 		$this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter = '" . (int)$newsletter . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 					
-	public function getCustomer($customer_id) {
-		$customer = $this->cache->get($customer_id);
+	public function getCustomer($user_id) {
+		$this->load->model('tool/cache');
+		$user = $this->model_tool_cache->getUser($user_id);
 
-		if ( !$customer ){
-			$customer = $this->dm->getRepository('Document\User\User')->find( $customer_id );
+		if ( !$user ){
+			$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
-			if ( !$customer ){
+			if ( !$user ){
 				return null;
 			}
 
-			$this->load->model('tool/cache');
-			$this->model_tool_cache->updateCacheUser( $customer );
-
-			$customer = $this->cache->get( $customer_id );
+			$user = $this->model_tool_cache->setUser( $user );
 		}
 
-		return $customer;
+		return $user;
 	}
 	
 	public function getCustomerByEmail($email) {

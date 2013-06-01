@@ -44,7 +44,7 @@ class ModelCompanyComment extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateCachePost( $post );
+		$this->model_tool_cache->setPost( $post );
 		
 		return $comment;
 	}

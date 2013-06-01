@@ -59,7 +59,7 @@ class ControllerPostPost extends Controller {
             $post_id = $this->request->post['post_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok'
+                'success' => 'not ok: post id empty'
             )));
         }
 
@@ -67,10 +67,10 @@ class ControllerPostPost extends Controller {
             $post_type = $this->request->post['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok'
+                'success' => 'not ok: post type empty'
             )));
         }
-
+        
         $paging = 1;
         if ( isset($this->request->post['paging']) && !empty($this->request->post['paging']) ){
           $paging = $this->request->post['paging'];
@@ -89,7 +89,7 @@ class ControllerPostPost extends Controller {
 
         if ( !isset($post['user_id']) || empty($post['user_id']) ){
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok'
+                'success' => 'not ok: user id empty'
             )));
         }
 
