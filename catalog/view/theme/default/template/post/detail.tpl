@@ -10,18 +10,20 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="y-sub-container-1">
+<div id="y-content" class="no-header-fixed">
 	<div id="y-main-content"> 
 		<div id="post-detail">
 			<div id="post-detail-header">
 				<div class="group-header">
 					<div class="row-fluid">
 						<a class="span2 link-btn" onclick="history.go(-1); return false;" href="#" title="Go back"> 
-							<i class="icon-chevron-sign-left icon-2x"></i> Back</a>
-						<div class="span4 post-category">
+							<i class="icon-chevron-sign-left icon-2x fl"></i> 
+							<span class="fr">Back</span>
+						</a>
+						<div class="span6 post-category">
 							<a href="#" title="View post in this category">{{ post.category }}</a>
 						</div>
-						<div class="span6 post-action">
+						<div class="span4 post-action">
 							<a href="#"><i class="icon-eye-open medium-icon"></i> View (1000)</a>
 							<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
 							<a href="#" class="open-comment-detail"><i class="icon-comments medium-icon"></i> Comment ({{ post.comment_count }})</a>

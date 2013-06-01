@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="y-sub-container-1">
+<div id="y-content" class="no-header-fixed">
     <div id="y-main-content" class="has-horizontal">
         {{ block('post_common_form_status') }}
 

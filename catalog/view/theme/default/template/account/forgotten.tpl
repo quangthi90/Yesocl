@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="y-sub-container-1">
+<div id="y-content" class="no-header-fixed">
     <div class="y-frm" id="y-frm-login">
         <div class="frm-title">Remind password - <strong>YESOCL.com</strong>
         </div>
