@@ -16,9 +16,8 @@
 			<div id="post-detail-header">
 				<div class="group-header">
 					<div class="row-fluid">
-						<div class="span2 link-btn" onclick="history.go(-1);">
-							<a href="#" title="Go back">Back</a>
-						</div>
+						<a class="span2 link-btn" onclick="history.go(-1); return false;" href="#" title="Go back"> 
+							<i class="icon-chevron-sign-left icon-2x"></i> Back</a>
 						<div class="span4 post-category">
 							<a href="#" title="View post in this category">{{ post.category }}</a>
 						</div>
@@ -30,19 +29,21 @@
 					</div>
 				</div>
 				<div class="post-metadata">
-					<div class="avatar-thumb">
-						<a href="{{ post.href_user|raw }}">
-							<img src="{{ post.avatar }}" alt="user">
-						</a>
-					</div>
-					<div class="post-info">
-						<div class="post-user-time">
-							<a href="{{ post.href_user|raw }}">{{ post.author }}</a> - <span class="post-time">{{ post.created|date('h:i A d/m/Y') }}</span>
+					<div class="row-fluid">
+						<div class="span1 avatar-thumb">
+							<a href="{{ post.href_user|raw }}">
+								<img src="{{ post.avatar }}" alt="user">
+							</a>
 						</div>
-						<h4 class="post_title">
-							{{ post.title }}
-						</h4>
-					</div>					
+						<div class="span11 post-info">
+							<div class="post-user-time">
+								<a href="{{ post.href_user|raw }}">{{ post.author }}</a> - <span class="post-time">{{ post.created|date('h:i A d/m/Y') }}</span>
+							</div>
+							<h4 class="post_title">
+								{{ post.title }}
+							</h4>
+						</div>	
+					</div>									
 				</div>
 			</div>			
 			<div id="post-content">{{ post.content|raw }}</div>
@@ -55,7 +56,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-	$('y-content').makeScrollWithoutCalResize();
+	$('#y-content #y-main-content').makeScrollWithoutCalResize();
 
 	//Open comment box
 	$('.open-comment-detail').click(function(e){

@@ -170,10 +170,14 @@
 		
 		$('.post').removeClass('post-selecting');
 		$post.addClass('post-selecting');
+		$('#overlay').show('fast');
+
+		if($post.attr('class').indexOf('last-feed')){ 
+			$('#y-main-content').scrollLeft($('#y-main-content').width());
+		}
 
 		//Show comment box:
-		comment_box.animate({"right": "2px"}, "slow", function(){
-			$('#overlay').show('fast');
+		comment_box.animate({"right": "2px"}, "slow", function(){			
 			list_comment.makeScrollWithoutCalResize();
 		});
 	}

@@ -44,17 +44,19 @@
 }
 
 #post-detail-header .post-metadata .post-info {
-	float: left;
 	margin-left: 10px;
 	font-weight: bold;
 	font-size: 12px;
 	padding: 0px;
+	text-overflow: ellipsis;
 }
 
 #post-detail-header .post-metadata .post-info h4 {
 	margin: 0px;
 	padding: 3px 3px 3px 0px;
 	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 #post-detail-header .post-metadata .post-info .post-user-time span.post-time {

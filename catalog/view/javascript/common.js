@@ -48,6 +48,10 @@ function calSizeForFeedItem () {
 		height = $(feed[i]).outerHeight();
 		$(feed[i]).attr('data-width', width);
 		$(feed[i]).attr('data-height', height);
+
+		if(i == feed.length - 1) {
+			$(feed[i]).addClass('last-feed');
+		}
 	};	
 }	
 
@@ -75,6 +79,7 @@ function putFeeds () {
 			columnId = 'column-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
 			newColoumn.width(width);
+			newColoumn.height('100%');
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px');
 			listFeed.append(newColoumn);
@@ -86,6 +91,7 @@ function putFeeds () {
 			columnId = 'column-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
 			newColoumn.width(width);
+			newColoumn.height('100%');
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px');
 			listFeed.append(newColoumn);
@@ -97,5 +103,5 @@ function putFeeds () {
 		}
 	}
 
-	$('.has-horizontal').width(totalWidth);
+	$('.has-horizontal').width(totalWidth + 330);
 }

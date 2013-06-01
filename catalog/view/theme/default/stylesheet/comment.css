@@ -45,8 +45,11 @@
 	margin-bottom: 3px;
 }
 
-.comment-item  .avatar_thumb{
-
+.comment-item  .avatar_thumb img{
+	width: 80%;
+	height: 80%;
+	vertical-align: middle;
+	text-align: center;
 }
 
 .comment-item  .comment-info{
@@ -79,6 +82,9 @@
 	background: -ms-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+	font-size: 10px;
+	font-weight: bold;
+	padding: 2px 2px 2px 5px;
 }
 
 #comment-box .post_new {
