@@ -6,13 +6,13 @@
 
 #post-detail  #post-detail-header {
 	position: fixed;
-	top: 55px;
-	left: 170px;
-	right: 20px;	
+	top: 39px;
+	left: 152px;
+	right: 0px;	
 }
 
 #post-detail-header .group-header {
-	margin-bottom: 5px;
+	margin-bottom: 0px;
 }
 
 #post-detail-header .post-metadata {
@@ -21,14 +21,14 @@
 	-webkit-box-shadow: 0px 1px 3px #847e02;
 	 -moz-box-shadow: 0px 1px 3px #847e02;
 	box-shadow: 0px 1px 3px #847e02;
-	background: #fcfff4; /* Old browsers */
-	background: -moz-linear-gradient(top,  #fcfff4 0%, #e9e9ce 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fcfff4), color-stop(100%,#e9e9ce)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #fcfff4 0%,#e9e9ce 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #fcfff4 0%,#e9e9ce 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #fcfff4 0%,#e9e9ce 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #fcfff4 0%,#e9e9ce 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#e9e9ce',GradientType=0 ); /* IE6-9 */
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 0%, #edf7f9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#edf7f9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffffff 0%,#edf7f9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#edf7f9',GradientType=0 ); /* IE6-9 */
 }
 
 #post-detail-header .post-metadata .avatar-thumb{
@@ -81,8 +81,8 @@
     -webkit-column-gap: 20px;  
     column-gap: 20px;  
     position: absolute;
-    top: 90px;
-    bottom: 0px;
+    top: 75px;
+    bottom: 3px;
     left: 0px;  
     text-align: justify;  
 }

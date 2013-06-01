@@ -1,0 +1,21 @@
+.category-list {
+	line-height: 30px;
+	padding: 0px 20px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.category-list  a.btn-category-link {
+	margin-left: 10px;
+	color: #fff;
+	font-size: 12px;
+	float: right;
+	display: block;
+	padding: 2px 8px;
+	background-color: #60A63B;
+}
+
+.category-list  a.btn-category-link:hover {
+	color: #000;
+	background-color: #b5ea98;
+}
