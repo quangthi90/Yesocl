@@ -178,7 +178,7 @@
 
 		//Show comment box:
 		comment_box.animate({"right": "2px"}, "slow", function(){			
-			list_comment.makeScrollWithoutCalResize();
+			//list_comment.makeScrollWithoutCalResize();
 		});
 	}
 

@@ -62,7 +62,7 @@ $(document).ready(function() {
 	$('.open-comment-detail').click(function(e){
 		e.preventDefault();
 		$('#comment-box').animate({"right": "0px"}, "slow", function(){
-			$('#comment-box .y-box-content').makeScrollWithoutCalResize();
+			//$('#comment-box .y-box-content').makeScrollWithoutCalResize();
 		});
 	});
 });
