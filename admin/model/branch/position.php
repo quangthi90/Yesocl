@@ -1,11 +1,11 @@
 <?php
-use Document\Company\Position;
+use Document\Branch\Position;
 
-class ModelCompanyPosition extends Doctrine {
+class ModelBranchPosition extends Doctrine {
 	public function addPosition( $data = array() ) {
 		// name is required & isn't exist
-		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
+		if ( isset($data['name']) && !empty($data['name']) ) {
+			$this->data['name'] = strtolower( trim($data['name']) );
 		}else {
 			return false;
 		}
@@ -31,7 +31,7 @@ class ModelCompanyPosition extends Doctrine {
 
 		// branchs
 		foreach ($branchs as $branch_data) {
-			$branch = $this->dm->getRepository( 'Document\Company\Branch' )->find( $branch_data );
+			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_data );
 			if ( !empty( $branch ) ) {
 				$position->addBranch( $branch );
 			}
@@ -66,15 +66,15 @@ class ModelCompanyPosition extends Doctrine {
 			$data['status'] = 0;
 		}
 
-		$position = $this->dm->getRepository( 'Document\Company\Position' )->find( $position_id );
+		$position = $this->dm->getRepository( 'Document\Branch\Position' )->find( $position_id );
 		if ( empty( $position ) ) {
 			return false;
 		}
 
 		// name is exist
-		if ( $position->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		/*if ( $position->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
 			return false;
-		}
+		}*/
 
 		$position->setName( $data['name'] );
 		$position->setStatus( $data['status'] );
@@ -82,7 +82,7 @@ class ModelCompanyPosition extends Doctrine {
 		// branchs
 		$position->setBranchs( array() );
 		foreach ($branchs as $branch_data) {
-			$branch = $this->dm->getRepository( 'Document\Company\Branch' )->find( $branch_data );
+			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_data );
 			if ( !empty( $branch ) ) {
 				$position->addBranch( $branch );
 			}
@@ -96,7 +96,7 @@ class ModelCompanyPosition extends Doctrine {
 	public function deletePositions( $data ) {
 		if ( isset( $data['id'] ) ) {
 			foreach ($data['id'] as $id) {
-				$position = $this->dm->getRepository( 'Document\Company\Position' )->find( $id );
+				$position = $this->dm->getRepository( 'Document\Branch\Position' )->find( $id );
 
 				if ( !empty( $position ) ) {
 					$this->dm->remove( $position );
@@ -108,7 +108,7 @@ class ModelCompanyPosition extends Doctrine {
 	}
 
 	public function getPosition( $position_id ) {
-		return $this->dm->getRepository( 'Document\Company\Position' )->find( $position_id );
+		return $this->dm->getRepository( 'Document\Branch\Position' )->find( $position_id );
 	}
 
 	public function getPositions( $data = array() ) {
@@ -124,19 +124,19 @@ class ModelCompanyPosition extends Doctrine {
 			$data['limit'] = 10;
 		}
 
-		return $this->dm->getRepository( 'Document\Company\Position' )->findAll()->limit( $this->data['limit'] )->skip( $this->data['start'] );
+		return $this->dm->getRepository( 'Document\Branch\Position' )->findAll()->limit( $this->data['limit'] )->skip( $this->data['start'] );
 	}
 
 	public function getAllPositions( $data = array() ) {
-		return $this->dm->getRepository( 'Document\Company\Position' )->findAll();
+		return $this->dm->getRepository( 'Document\Branch\Position' )->findAll();
 	}
 
 	public function getTotalPositions( $data = array() ) {
-		return count( $this->dm->getRepository( 'Document\Company\Position' )->findAll() );
+		return count( $this->dm->getRepository( 'Document\Branch\Position' )->findAll() );
 	}
 
 	public function isExistName( $name ) {
-		$position = $this->dm->getRepository( 'Document\Company\Position' )->findOneBy( array( 'name' => strtolower( trim( $name ) ) ) );
+		$position = $this->dm->getRepository( 'Document\Branch\Position' )->findOneBy( array( 'name' => strtolower( trim( $name ) ) ) );
 
 		if ( !empty( $position ) ) {
 			return true;

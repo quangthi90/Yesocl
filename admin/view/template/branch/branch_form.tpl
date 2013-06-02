@@ -10,7 +10,7 @@
   <?php } ?>
   <div class="box">    
     <div class="heading">
-      <span><img src="view/image/company_branch.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/branch.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
       	<a onclick="$('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
       	<a onclick="location = '<?php echo $cancel; ?>';" class="btn btn-danger"><?php echo $button_cancel; ?></a>

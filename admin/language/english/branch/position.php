@@ -1,6 +1,6 @@
 <?php
 // heading title
-$_['heading_title'] = 'Company Branch';
+$_['heading_title'] = 'Branch Position';
 
 // text
 $_['text_edit'] = 'Edit';
@@ -14,19 +14,20 @@ $_['button_save'] = 'Save';
 $_['button_cancel'] = 'Cancel';
 
 // column
-$_['column_branch'] = 'Branch';
+$_['column_position'] = 'Position';
 $_['column_status'] = 'Status';
 $_['column_action'] = 'Action';
 
 // entry
-$_['entry_name'] = 'Branch Name:';
+$_['entry_name'] = 'Position Name:';
 $_['entry_order'] = 'Order:';
+$_['entry_branch'] = 'Branch:';
 $_['entry_status'] = 'Status:';
 
 // error
-$_['error_name'] = 'Warning: Branch Name must be more than 1 characters and less than 128 characters!';
-$_['error_name_exist'] = 'Warning: Branch Name is exist!';
+$_['error_name'] = 'Warning: Position Name must be more than 1 characters and less than 128 characters!';
+$_['error_name_exist'] = 'Warning: Position Name is exist!';
 $_['error_warning'] = 'Warning: Error!';
-$_['success'] = 'Success: You have modified Branch!';
+$_['success'] = 'Success: You have modified Position!';
 
 ?>

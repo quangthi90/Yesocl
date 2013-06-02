@@ -1,9 +1,9 @@
 <?php
-namespace Document\Company;
+namespace Document\Branch;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** @MongoDB\Document(collection="company_position") */
-Class Position {
+/** @MongoDB\Document(collection="branch") */
+Class Branch {
 	/** @MongoDB\Id */
 	private $id;
 
@@ -12,8 +12,8 @@ Class Position {
 	 */
 	private $name; 
 
-	/** @MongoDB\ReferenceMany(targetDocument="Branch", inversedBy="positions") */
-	private $branchs = array();
+	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branchs") */
+	private $positions = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -30,16 +30,16 @@ Class Position {
 		return $this->name;
 	}
 
-	public function addBranch( $branch ){
-		$this->branchs[] = $branch;
+	public function addPosition( $position ){
+		$this->positions[] = $position;
 	}
 
-	public function setBranchs( $branchs ){
-		$this->branchs = $branchs;
+	public function setPositions( $positions ){
+		$this->positions = $positions;
 	}
 
-	public function getBranchs(){
-		return $this->branchs;
+	public function getPositions(){
+		return $this->positions;
 	}
 
 	public function setStatus( $status ){

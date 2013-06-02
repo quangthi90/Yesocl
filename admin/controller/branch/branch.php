@@ -1,19 +1,19 @@
 <?php
-class ControllerCompanyBranch extends Controller {
+class ControllerBranchBranch extends Controller {
 	private $limit = 10;
 	private $error = array();
-	private $route = 'company/branch';
+	private $route = 'branch/branch';
 
 	public function index() {
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/branch' );
+		$this->load->language( 'branch/branch' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		$this->load->model( 'company/branch' );
+		$this->load->model( 'branch/branch' );
 
 		$this->getList();
 	}
@@ -23,11 +23,11 @@ class ControllerCompanyBranch extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/branch' );
+		$this->load->language( 'branch/branch' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		$this->load->model( 'company/branch' );
+		$this->load->model( 'branch/branch' );
 
 		// page
 		if (isset($this->request->get['page'])) {
@@ -41,17 +41,17 @@ class ControllerCompanyBranch extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_branch->addBranch( $this->request->post ) ) {
+			if ( $this->model_branch_branch->addBranch( $this->request->post ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/branch/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['action'] = $this->url->link( 'branch/branch/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		$this->getForm();
 	}
@@ -61,11 +61,11 @@ class ControllerCompanyBranch extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/branch' );
+		$this->load->language( 'branch/branch' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		$this->load->model( 'company/branch' );
+		$this->load->model( 'branch/branch' );
 
 		// page
 		if (isset($this->request->get['page'])) {
@@ -80,22 +80,22 @@ class ControllerCompanyBranch extends Controller {
 		if ( !isset( $this->request->get['branch_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_company_branch->editBranch( $this->request->get['branch_id'], $this->request->post ) ) {
+			if ( $this->model_branch_branch->editBranch( $this->request->get['branch_id'], $this->request->post ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 			}
 
-			$this->redirect( $this->url->link( 'company/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/branch/update', 'token=' . $this->session->data['token'] . $url . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
+		$this->data['action'] = $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . $url . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
 
 		$this->getForm();
 	}
@@ -105,18 +105,18 @@ class ControllerCompanyBranch extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/branch' );
+		$this->load->language( 'branch/branch' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		$this->load->model( 'company/branch' );
+		$this->load->model( 'branch/branch' );
 
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateDelete() ) {
-			$this->model_company_branch->deleteBranchs( $this->request->post );
+			$this->model_branch_branch->deleteBranchs( $this->request->post );
 
 			$this->session->data['success'] = $this->language->get( 'success' );
 
-			$this->redirect( $this->url->link( 'company/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->getList();
@@ -160,7 +160,7 @@ class ControllerCompanyBranch extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/branch', 'token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -182,8 +182,8 @@ class ControllerCompanyBranch extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'company/branch/insert', 'token=' . $this->session->data['token'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'company/branch/delete', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'branch/branch/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'branch/branch/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		$data = array(
 			'start' => ($page - 1) * $this->limit,
@@ -191,8 +191,8 @@ class ControllerCompanyBranch extends Controller {
 			);
 
 		// branch
-		$branchs = $this->model_company_branch->getBranchs( $data );
-		$total_branchs = $this->model_company_branch->getTotalBranchs( $data );
+		$branchs = $this->model_branch_branch->getBranchs( $data );
+		$total_branchs = $this->model_branch_branch->getTotalBranchs( $data );
 
 		$this->data['branchs'] = array();
 		foreach ($branchs as $branch) {
@@ -200,7 +200,7 @@ class ControllerCompanyBranch extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'company/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+				'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
 				);
 
@@ -218,12 +218,12 @@ class ControllerCompanyBranch extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'company/branch', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
+		$pagination->url = $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
 
 		// template
-		$this->template = 'company/branch_list.tpl';
+		$this->template = 'branch/branch_list.tpl';
 
 		// childs
 		$this->children = array(
@@ -271,7 +271,7 @@ class ControllerCompanyBranch extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ),
+			'href'      => $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -291,11 +291,11 @@ class ControllerCompanyBranch extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'company/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['cancel'] = $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		// branch
 		if ( isset( $this->request->get['branch_id'] ) ) {
-			$branch = $this->model_company_branch->getBranch( $this->request->get['branch_id'] );
+			$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
 
 			if ( empty( $branch ) ) {
 				$this->redirect( $this->data['cancel'] );
@@ -321,7 +321,7 @@ class ControllerCompanyBranch extends Controller {
 		}
 
 		// template
-		$this->template = 'company/branch_form.tpl';
+		$this->template = 'branch/branch_form.tpl';
 
 		// childs
 		$this->children = array(
@@ -338,11 +338,11 @@ class ControllerCompanyBranch extends Controller {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}else {
 			if ( isset( $this->request->get['branch_id'] ) ) {
-				$this->load->model( 'company/branch' );
+				$this->load->model( 'branch/branch' );
 
-				$branch = $this->model_company_branch->getBranch( $this->request->get['branch_id'] );
+				$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
 				if ( !empty( $branch ) ) {
-					if ( $this->model_company_branch->isExistName( $this->request->post['name'] ) && $branch->getName() != strtolower( trim( $this->request->post['name'] ) ) ) {
+					if ( $this->model_branch_branch->isExistName( $this->request->post['name'] ) && $branch->getName() != strtolower( trim( $this->request->post['name'] ) ) ) {
 						$this->error['error_name'] = $this->language->get( 'error_name_exist' );
 					}
 				}
@@ -375,8 +375,8 @@ class ControllerCompanyBranch extends Controller {
 			'filter_name' => $filter_name,
 			);
 
-		$this->load->model( 'company/branch' );
-		$branchs = $this->model_company_branch->getBranchs( $data );
+		$this->load->model( 'branch/branch' );
+		$branchs = $this->model_branch_branch->getBranchs( $data );
 
 		$json = array();
 		foreach ($branchs as $branch) {

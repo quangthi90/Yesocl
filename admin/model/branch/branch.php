@@ -1,7 +1,7 @@
 <?php
-use Document\Company\Branch;
+use Document\Branch\Branch;
 
-class ModelCompanyBranch extends Doctrine {
+class ModelBranchBranch extends Doctrine {
 	public function addBranch( $data = array() ) {
 		// name is required & isn't exist
 		if ( isset($data['name']) && !empty($data['name']) ) {
@@ -38,15 +38,15 @@ class ModelCompanyBranch extends Doctrine {
 			$data['status'] = 0;
 		}
 
-		$branch = $this->dm->getRepository( 'Document\Company\Branch' )->find( $branch_id );
+		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
 		if ( empty( $branch ) ) {
 			return false;
 		}
 
 		// name is exist
-		if ( $branch->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		/*if ( $branch->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
 			return false;
-		}
+		}*/
 
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
@@ -59,9 +59,9 @@ class ModelCompanyBranch extends Doctrine {
 	public function deleteBranchs( $data ) {
 		if ( isset( $data['id'] ) ) {
 			foreach ($data['id'] as $id) {
-				$branch = $this->dm->getRepository( 'Document\Company\Branch' )->find( $id );
+				$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
 				if ( !empty( $branch ) ) {
-					$this->dm->createQueryBuilder( 'Document\Company\Position' )->remove()->field( 'branchs.id' )->equals( $branch->getId() )->getQuery()->execute();
+					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branchs.id' )->equals( $branch->getId() )->getQuery()->execute();
 				
 					$this->dm->remove( $branch );
 				}
@@ -72,7 +72,7 @@ class ModelCompanyBranch extends Doctrine {
 	}
 
 	public function getBranch( $branch_id ) {
-		return $this->dm->getRepository( 'Document\Company\Branch' )->find( $branch_id );
+		return $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
 	}
 
 	public function getBranchs( $data = array() ) {
@@ -88,7 +88,7 @@ class ModelCompanyBranch extends Doctrine {
 			$data['limit'] = 10;
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Company\Branch' )->skip( $data['start'] )->limit( $data['limit'] );
+		$query = $this->dm->createQueryBuilder( 'Document\Branch\Branch' )->skip( $data['start'] )->limit( $data['limit'] );
 
 		if ( isset( $data['filter_name'] ) ) {
 			$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i' ) );
@@ -98,11 +98,11 @@ class ModelCompanyBranch extends Doctrine {
 	}
 
 	public function getTotalBranchs( $data = array() ) {
-		return count( $this->dm->getRepository( 'Document\Company\Branch' )->findAll() );
+		return count( $this->dm->getRepository( 'Document\Branch\Branch' )->findAll() );
 	}
 
 	public function isExistName( $name ) {
-		$branch = $this->dm->getRepository( 'Document\Company\Branch' )->findOneBy( array( 'name' => strtolower( trim( $name ) ) ) );
+		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array( 'name' => strtolower( trim( $name ) ) ) );
 
 		if ( !empty( $branch ) ) {
 			return true;

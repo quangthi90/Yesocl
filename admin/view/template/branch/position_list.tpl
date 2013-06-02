@@ -13,7 +13,7 @@
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <span><img src="view/image/company_branch.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/branch_position.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
 	      <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-success"><?php echo $button_insert; ?> <i class="icon-plus"></i></a>
 	      <a onclick="$('form').submit();" class="btn btn-danger"><?php echo $button_delete; ?> <i class="icon-trash"></i></a>
@@ -25,25 +25,25 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $column_branch; ?></td>
+              <td><?php echo $column_position; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
-            <?php if ( $branchs ) { ?>
-            <?php foreach ( $branchs as $branch ) { ?>
+            <?php if ( $positions ) { ?>
+            <?php foreach ( $positions as $position ) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $branch['id']; ?>"/></td>
-              <td><?php echo $branch['name']; ?></td>
-              <td><?php echo ( $branch['status'] ) ? $text_enable : $text_disable; ?></td>
-              <td class="right"><?php foreach ( $branch['action'] as $action ) { ?>
+              <td><input name="id[]" type="checkbox" value="<?php echo $position['id']; ?>"/></td>
+              <td><?php echo $position['name']; ?></td>
+              <td><?php echo ( $position['status'] ) ? $text_enable : $text_disable; ?></td>
+              <td class="right"><?php foreach ( $position['action'] as $action ) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php }?>
-            <?php if ( !$branchs ) { ?>
+            <?php if ( !$positions ) { ?>
             <tr class="center">
               <td colspan="4"><?php echo $text_no_results; ?></td>
             </tr>

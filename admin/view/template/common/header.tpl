@@ -94,6 +94,12 @@ $(document).ready(function(){
           <li><a href="<?php echo $company_post_category; ?>"><?php echo $text_company_post_category; ?></a></li>
         </ul>
       </li>
+      <li id="company"><a class="top"><?php echo $text_branchs; ?></a>
+        <ul>
+          <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>
+          <li><a href="<?php echo $branch_position; ?>"><?php echo $text_position; ?></a></li>
+        </ul>
+      </li>
       <li id="datalist"><a class="top"><?php echo $text_data_list; ?></a>
         <ul>
           <li><a href="<?php echo $type; ?>"><?php echo $text_type; ?></a></li>

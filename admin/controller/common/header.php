@@ -40,10 +40,14 @@ class ControllerCommonHeader extends Controller {
 		
 		// Company
 		$this->data['text_companies'] = $this->language->get('text_companies');
-		
 		$this->data['text_company'] = $this->language->get('text_company');
 		$this->data['text_company_group'] = $this->language->get('text_company_group');
 		$this->data['text_company_post_category'] = $this->language->get('text_company_post_category');
+
+		// Branch
+		$this->data['text_branchs'] = $this->language->get('text_branchs');
+		$this->data['text_branch'] = $this->language->get('text_branch');
+		$this->data['text_position'] = $this->language->get('text_position');
 		
 		// Attribute
 		$this->data['text_attributes'] = $this->language->get('text_attributes');
@@ -114,6 +118,10 @@ class ControllerCommonHeader extends Controller {
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['company'] = $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['company_post_category'] = $this->url->link('company/category', 'token=' . $this->session->data['token'], 'SSL');
+
+			// Branch
+			$this->data['branch'] = $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['branch_position'] = $this->url->link('branch/position', 'token=' . $this->session->data['token'], 'SSL');
 
 			// system
 			$this->data['admin_group'] = $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL');
