@@ -4,8 +4,8 @@ use Document\Company\Branch;
 class ModelCompanyBranch extends Doctrine {
 	public function addBranch( $data = array() ) {
 		// name is required & isn't exist
-		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
+		if ( isset($data['name']) && !empty($data['name']) ) {
+			$this->data['name'] = strtolower( trim($data['name']) );
 		}else {
 			return false;
 		}
@@ -18,7 +18,7 @@ class ModelCompanyBranch extends Doctrine {
 		$branch = new Branch();
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
-
+		
 		$this->dm->persist( $branch );
 		$this->dm->flush();
 
