@@ -21,8 +21,7 @@ function getURLVar(urlVarName) {
 
 //Script Yesocl:
 jQuery.fn.makeScroll = function () {
-	//Calculate size of post:
-	 calSizeForFeedItem();
+
 	 //Put feeds:
 	 putFeeds();
 	 //Scroll:
@@ -38,34 +37,18 @@ jQuery.fn.makeScrollWithoutCalResize = function() {
 	$(this).niceScroll();	
 }
 
-function calSizeForFeedItem () {
-	var feed = $('.feed');
-	if(typeof feed == "undefined" || feed.length == 0)
-		return;
-	var width=0, height=0;
-	for (var i = 0; i < feed.length; i++) {
-		width = $(feed[i]).outerWidth();
-		height = $(feed[i]).outerHeight();
-		$(feed[i]).attr('data-width', width);
-		$(feed[i]).attr('data-height', height);
-
-		if(i == feed.length - 1) {
-			$(feed[i]).addClass('last-feed');
-		}
-	};	
-}	
-
 function putFeeds () {		
 	var listFeed = $('.has-horizontal').first();
 	if(typeof listFeed == "undefined" || listFeed.length == 0){
 		return;
 	}
 
-	var feed = $('.feed');
+	var feed = $('.feed'); 
 	if(typeof feed == "undefined" || feed.length == 0)
 	{
 		return;
 	}
+
 	var heightMain = $('#y-main-content').height();		
 	var width=0, height=0, totalHeight = 0, totalWidth=0,columnIndex=0, columnId, newColoumn;
 
@@ -73,8 +56,8 @@ function putFeeds () {
 	$('.column').remove();
 
 	for (var i = 0; i < feed.length; i++) {
-		width = parseInt($(feed[i]).attr('data-width'), 10);
-		height = parseInt($(feed[i]).attr('data-height'), 10);
+		width = $(feed[i]).outerWidth();
+		height = $(feed[i]).outerHeight();
 		if(totalHeight == 0){
 			columnId = 'column-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
