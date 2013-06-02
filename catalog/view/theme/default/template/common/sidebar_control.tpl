@@ -48,8 +48,8 @@
 	  	</li>
 	  	<li class="divider"></li>
 	  	<li class="nav-header">Groups</li>
-	  	<li class="menu-item" id="stockin-menu">
-	  		<a href="#"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
+	  	<li class="menu-item" id="categories-menu">
+	  		<a href="{{ action.categories }}"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
 	  	</li>
 	  	<li class="menu-item" id="tech-menu">
 	  		<a href="#"><i class="icon-certificate"></i> <span>Technology </span></a>
