@@ -11,6 +11,11 @@ class ControllerPostCategories extends Controller {
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
 		$this->data['heading_title'] = $this->config->get('config_title');
+
+		$this->load->model( 'company/company' );
+		$this->load->model('tool/image');
+
+		$company = $this->model_company_company->getCompanyBySlug( $this->config->get('company')['default']['slug'] );
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/categories.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/categories.tpl';
