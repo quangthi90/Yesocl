@@ -19,6 +19,7 @@ function getURLVar(urlVarName) {
 	return urlVarValue;
 } 
 
+var feedSet;
 //Script Yesocl:
 jQuery.fn.makeScroll = function () {
 
@@ -38,26 +39,21 @@ jQuery.fn.makeScrollWithoutCalResize = function() {
 }
 
 function putFeeds () {		
-	var listFeed = $('.has-horizontal').first();
-	if(typeof listFeed == "undefined" || listFeed.length == 0){
+	var listColumns = $('.has-horizontal').first();
+	if(typeof listColumns == "undefined" || listColumns.length == 0){
 		return;
 	}
 
-	var feed = $('.feed'); 
-	if(typeof feed == "undefined" || feed.length == 0)
-	{
-		return;
-	}
-
+	feedSet = $('.feed'); 
 	var heightMain = $('#y-main-content').height();		
 	var width=0, height=0, totalHeight = 0, totalWidth=0,columnIndex=0, columnId, newColoumn;
 
 	//Remove all columns:
-	$('.column').remove();
+	$('#y-main-content .column').remove(); 
 
-	for (var i = 0; i < feed.length; i++) {
-		width = $(feed[i]).outerWidth();
-		height = $(feed[i]).outerHeight();
+	for (var i = 0; i < feedSet.length; i++) {
+		width = $(feedSet[i]).outerWidth();
+		height = $(feedSet[i]).outerHeight() + parseInt($(feedSet[i]).css('margin-bottom'));
 		if(totalHeight == 0){
 			columnId = 'column-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
@@ -65,7 +61,7 @@ function putFeeds () {
 			newColoumn.height('100%');
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px');
-			listFeed.append(newColoumn);
+			listColumns.append(newColoumn);
 			totalWidth += width + 27;
 		}
 		if(totalHeight + height >= heightMain) {
@@ -77,12 +73,12 @@ function putFeeds () {
 			newColoumn.height('100%');
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px');
-			listFeed.append(newColoumn);
+			listColumns.append(newColoumn);
 			totalWidth += width + 27;
-			$('#' + columnId).append(feed[i]);
+			$('#' + columnId).append(feedSet[i]);
 		}else{
 			totalHeight += height;			
-			$('#' + columnId).append(feed[i]);
+			$('#' + columnId).append(feedSet[i]);
 		}
 	}
 
