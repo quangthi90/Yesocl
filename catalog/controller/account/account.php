@@ -32,7 +32,9 @@ class ControllerAccountAccount extends Controller {
 
 			if ( $post->getUser() && $post->getUser()->getAvatar() ){
 				$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
-			}else{
+			}elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
+                $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
+            }else{
 				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
 			}
 

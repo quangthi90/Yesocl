@@ -453,8 +453,8 @@ class ControllerCompanyPost extends Controller {
 		}
 		if ( isset( $this->request->post['category'] ) ) {
 			$this->data['category'] = $this->request->post['category'];
-		}elseif ( isset( $post ) ) {
-			$this->data['category'] = $post->getCategory()->getId();
+		// }elseif ( isset( $post ) ) {
+		// 	$this->data['category'] = $post->getCategory()->getId();
 		}else {
 			$this->data['category'] = '';
 		}

@@ -101,6 +101,8 @@ class ControllerPostPost extends Controller {
 
             if ( $user && $user['avatar'] ){
                 $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+            }elseif ( $user && $user['email'] ){
+                $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
             }else{
                 $avatar = $this->model_tool_image->getGavatar( $comment['email'], 180 );
             }
