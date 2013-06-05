@@ -8,13 +8,13 @@ $_['text_group'] 			  = 'Group';
 $_['text_type']			  	  = 'Type';
 $_['text_status']			  = 'Status';
 $_['text_posts']			  = 'Posts';
-$_['text_author']			  = 'Author';
+$_['text_author']			  = 'Owner';
 $_['text_email']			  = 'Email';
 $_['text_created']			  = 'Created';
 $_['text_action']			  = 'Action';
 
 // Entry
-$_['entry_author']            = 'Author:';
+$_['entry_author']            = 'Owner:';
 $_['entry_fullname']          = 'Fullname:';
 $_['entry_name']              = 'Name:';
 $_['entry_sumary']            = 'Sumary:';
@@ -36,6 +36,6 @@ $_['error_default']           = 'Warning: This Group cannot be deleted as it is 
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';
 $_['error_sumary']            = 'Group sumary must be more than 50 characters!';
 $_['error_description']       = 'Group description must be more than 50 characters!';
-$_['error_author']         	  = 'Warning: Author is required!';
+$_['error_author']         	  = 'Warning: Owner is required!';
 $_['error_description']       = 'Group Description must be more than 50 characters! ';
 ?>
