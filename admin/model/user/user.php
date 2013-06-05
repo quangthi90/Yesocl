@@ -816,11 +816,9 @@ class ModelUserUser extends Doctrine {
 				)
     	);
  
-		$query_datas = array(
-			'solrEmail_t:*"' . $data['filter'] . '"*',
-			'solrFullname_t:*"' . $data['filter'] . '"*',
-			'username_t:*"' . $data['filter'] . '"*',
-		);
+		$query_data = 'solrEmail_t:*' . $data['filter'] . '* OR ';
+		$query_data .= 'solrFullname_t:*' . $data['filter'] . '* OR ';
+		$query_data .= 'username_t:*' . $data['filter'] . '* ';
 
 		if ( isset( $data['start'] ) ) {
 			$data['start'] = (int)$data['start'];
@@ -833,10 +831,10 @@ class ModelUserUser extends Doctrine {
 		}else {
 			$data['limit'] = 10;
 		}
- 
-		foreach ( $query_datas as $query_data ) {
-			$query->setQuery( $query_data );
-		}
+
+		$query->setQuery( $query_data );
+		$query->setRows( $data['limit'] );
+		$query->setStart( $data['start'] );
  
 		return $this->client->execute( $query );
 	}
