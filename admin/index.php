@@ -45,7 +45,10 @@ foreach ($configs as $setting) {
 		$config->set( $setting->getKey(), $setting->getValue() );
 	}
 }
-$config->load( 'action' );
+$config->load( 'title' );
+$config->load( 'user' );
+$config->load( 'company' );
+
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 
 // Url

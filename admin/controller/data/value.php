@@ -55,7 +55,12 @@ class ControllerDataValue extends Controller {
 			$this->model_data_value->editValue( $this->request->get['value_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL') );
+
+			if ( isset( $this->session->data['redirect'] ) ) {
+				$this->redirect( $this->session->data['redirect'] );
+			}else {
+				$this->redirect( $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL') );
+			}
 		}
 		
 		$this->getForm();
@@ -212,6 +217,9 @@ class ControllerDataValue extends Controller {
 		$this->data['autocomplete_type'] = html_entity_decode( $this->url->link( 'data/type/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
 		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
 		
+		// session
+		$this->session->data['redirect'] = $this->url->link( 'data/value', 'page=' . $page . $url . '&token=' . $this->session->data['token'], 'SSL' );
+		
 		$data = array(
 			'filter_type' => $filter_type,
 			'filter_name' => $filter_name,
@@ -234,7 +242,7 @@ class ControllerDataValue extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'data/value/update', 'value_id=' . $value->getId() . '&token=' . $this->session->data['token'], 'SSL' . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'data/value/update', 'value_id=' . $value->getId() .'&page=' . $page . $url . '&token=' . $this->session->data['token'], 'SSL' . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -310,6 +318,8 @@ class ControllerDataValue extends Controller {
 		$this->data['sort'] = $sort;
 		$this->data['order'] = $order;
 
+		$this->data['token'] = $this->session->data['token'];
+
 		$this->template = 'data/value_list.tpl';
 		$this->children = array(
 			'common/header',
@@ -347,6 +357,70 @@ class ControllerDataValue extends Controller {
 			$this->data['error_value'] = '';
 		}
 
+		if (isset($this->request->get['filter_type_name'])) {
+			$filter_type_name = $this->request->get['filter_type_name'];
+		} else {
+			$filter_type_name = null;
+		}
+
+		if (isset($this->request->get['filter_type'])) {
+			$filter_type = $this->request->get['filter_type'];
+		} else {
+			$filter_type = null;
+		}
+
+		if (isset($this->request->get['filter_name'])) {
+			$filter_name = $this->request->get['filter_name'];
+		} else {
+			$filter_name = null;
+		}
+
+		if (isset($this->request->get['filter_value'])) {
+			$filter_value = $this->request->get['filter_value'];
+		} else {
+			$filter_value = null;
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$sort = $this->request->get['sort'];
+		} else {
+			$sort = 'name';
+		}
+		
+		if (isset($this->request->get['order'])) {
+			$order = $this->request->get['order'];
+		} else {
+			$order = 'asc';
+		}
+		
+		if (isset($this->request->get['page'])) {
+			$page = $this->request->get['page'];
+		} else {
+			$page = 1;
+		}
+
+		$url = '';
+
+		if (isset($this->request->get['filter_type'])) {
+			$url .= '&filter_type=' . $this->request->get['filter_type'];
+		}
+
+		if (isset($this->request->get['filter_name'])) {
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+		}
+
+		if (isset($this->request->get['filter_value'])) {
+			$url .= '&filter_value=' . $this->request->get['filter_value'];
+		}
+
+		if (isset($this->request->get['sort'])) {
+			$url .= '&sort=' . $this->request->get['sort'];
+		}
+
+		if (isset($this->request->get['order'])) {
+			$url .= '&order=' . $this->request->get['order'];
+		}
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -355,7 +429,7 @@ class ControllerDataValue extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'data/value', 'token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'data/value', 'token=' . $this->session->data['token'] . '&page=' . $page . $url, 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -517,6 +591,47 @@ class ControllerDataValue extends Controller {
 			$json[] = array(
 				'name' => html_entity_decode( $value->getName() ),
 				'type' => $value->getType()->getName(),
+				'value' => html_entity_decode( $value->getValue() ),
+				'id' => $value->getId(),
+				);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function searchValue() {
+		$this->load->model( 'data/value' );
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		if ( isset( $this->request->get['filter_type_code'] ) ) {
+			$filter_type_code = $this->request->get['filter_type_code'];
+		}else {
+			$filter_type_code = null;
+		}
+
+		if ( isset( $this->request->get['filter_value'] ) ) {
+			$filter_value = $this->request->get['filter_value'];
+		}else {
+			$filter_value = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'filter_type_code' => $filter_type_code,
+			'filter_value' => $filter_value,
+			);
+
+		$value_data = $this->model_data_value->searchValueByKeyword( $data );
+
+		$json = array();
+		foreach ($value_data as $value) {
+			$json[] = array(
+				'name' => html_entity_decode( $value->getName() ),
 				'value' => html_entity_decode( $value->getValue() ),
 				'id' => $value->getId(),
 				);

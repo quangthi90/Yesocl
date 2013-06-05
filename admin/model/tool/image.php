@@ -35,5 +35,9 @@ class ModelToolImage extends Model {
 			return HTTP_IMAGE . $new_image;
 		}	
 	}
+
+	public function getGavatar( $email, $size = 100 ){
+		return "http://www.gravatar.com/avatar/" . md5( $email ) . "?s=" . $size;
+	}
 }
 ?>

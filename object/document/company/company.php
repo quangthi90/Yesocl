@@ -52,6 +52,11 @@ Class Company {
 	 */
 	private $status;
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $slug;
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -62,7 +67,17 @@ Class Company {
 	 */
 	public function getPostById( $post_id ){
 		foreach ( $this->posts as $post ){
-			if ( $post->getId() === $post_id ){
+			if ( $post->getId() == $post_id ){
+				return  $post;
+			}
+		}
+		
+		return null;
+	}
+
+	public function getPostBySlug( $post_slug ){
+		foreach ( $this->posts as $post ){
+			if ( $post->getSlug() == $post_slug ){
 				return  $post;
 			}
 		}
@@ -98,6 +113,14 @@ Class Company {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setLogo( $logo ){
@@ -169,7 +192,7 @@ Class Company {
 	}
 
 	public function addPost( Post $post ){
-		$this->posts[] = $post;
+		$this->posts = array_merge( array($post), $this->posts->toArray() );
 	}
 
 	public function setPosts( $posts ){
@@ -186,11 +209,6 @@ Class Company {
 
 	public function getCreated(){
 		return $this->created;
-	}
-
-	/** @MongoDB\PrePersist */
-	public function prePersist(){
-		$this->created = new \DateTime();
 	}
 
 	public function setStatus( $status ){

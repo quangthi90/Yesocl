@@ -1,5 +1,5 @@
 <?php
-use Document\Company\Comment;
+use Document\AbsObject\Comment;
 
 class ModelCompanyComment extends Doctrine {
 	public function addComment( $post_id, $data = array() ) {
@@ -45,7 +45,10 @@ class ModelCompanyComment extends Doctrine {
 
 		$this->dm->flush();
 
-		return true;
+		$this->load->model( 'tool/cache' );
+		$post = $this->model_tool_cache->setPost( $post );
+
+		return $post;
 	}
 
 	public function editComment( $post_id, $comment_id, $data = array() ) {
@@ -89,7 +92,10 @@ class ModelCompanyComment extends Doctrine {
 
 		$this->dm->flush();
 
-		return true;
+		$this->load->model( 'tool/cache' );
+		$post = $this->model_tool_cache->setPost( $post );
+
+		return $post;
 	}
 
 	public function deleteComments( $post_id, $data = array() ) {
@@ -104,6 +110,11 @@ class ModelCompanyComment extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model( 'tool/cache' );
+		$post = $this->model_tool_cache->setPost( $post )
+
+		return $post;
 	}
 }
 ?>

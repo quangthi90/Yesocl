@@ -1,6 +1,8 @@
 <?php
 use Document\Company\Post;
 
+use MongoId;
+
 class ModelCompanyPost extends Doctrine {
 	public function addPost( $company_id, $data = array(), $thumb = array() ) {
 		// Company is required
@@ -43,7 +45,7 @@ class ModelCompanyPost extends Doctrine {
 		} 
 
 		// thumb
-		if ( isset( $thumb ) ) {
+		if ( isset( $thumb ) && $thumb['size'] > 0 ) {
   			if ( !$this->isValidThumb( $thumb ) ) {
   				return false;
   			}
@@ -59,7 +61,10 @@ class ModelCompanyPost extends Doctrine {
 			$data['status'] = 0;
 		}
 
+		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
+
 		$post = new Post();
+		$post->setSlug( $slug );
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setCategory( $category );
@@ -69,18 +74,17 @@ class ModelCompanyPost extends Doctrine {
 
 		$company->addPost( $post );
 
-		$this->dm->flush();
+		$this->dm->persist( $post );
 
 		if ( !empty( $thumb ) ) {
 			if ( $data['thumb'] = $this->uploadThumb( $company->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
-			}else {
-				$post->setThumb( '' );
 			}
-			$this->dm->flush();
 		}
 
-		return true;
+		$this->dm->flush();
+
+		return $post;
 	}
 
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
@@ -141,6 +145,14 @@ class ModelCompanyPost extends Doctrine {
 		}
 
 		$post = $company->getPostById( $post_id );
+
+		// Check slug
+		if ( $data['title'] != $post->getTitle() ){
+			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
+
+			$post->setSlug( $slug );
+		}
+
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setCategory( $category );
@@ -148,18 +160,22 @@ class ModelCompanyPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		$this->dm->flush();
-
 		if ( !empty( $thumb ) ) {
 			if ( $data['thumb'] = $this->uploadThumb( $company->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}else {
 				$post->setThumb( '' );
 			}
-			$this->dm->flush();
+		}else{
+			$post->setThumb('');
 		}
 
-		return true;
+		$this->dm->flush();
+
+		$this->load->model( 'tool/cache' );
+		$post = $this->model_tool_cache->setPost( $post );
+
+		return $post;
 	}
 
 	public function deletePost( $data = array() ) {
@@ -178,6 +194,11 @@ class ModelCompanyPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model( 'tool/cache' );
+		$this->model_tool_cache->deletePost( $post );
+
+		return true;
 	}
 
 	public function isValidThumb( $file ) {

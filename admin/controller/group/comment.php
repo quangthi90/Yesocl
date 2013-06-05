@@ -151,13 +151,28 @@ class ControllerGroupComment extends Controller {
 		} else {
 			$page = 1;
 		}
-		
-		$this->load->model( 'group/post' );
-		$post = $this->model_group_post->getPost( $this->request->get['post_id'] );
-		if ( empty( $post ) ) {
+
+		// Get Post ID
+		$post_id = 0;
+		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
+			$post_id = $this->request->get['post_id'];
+		}
+
+		// Check Post exist
+		if ( $post_id == 0 ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
+		
+		$this->load->model( 'group/group' );
+		$group = $this->model_group_group->getGroupByPostId( $post_id );
+
+		if ( !$group ){
+			$this->session->data['error_warning'] = $this->language->get('error_post');
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
+		}
+
+		$post = $group->getPostById( $post_id );
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -172,7 +187,7 @@ class ControllerGroupComment extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') ),
+			'href'      => $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
@@ -206,7 +221,7 @@ class ControllerGroupComment extends Controller {
 		// Link
 		$this->data['insert'] = $this->url->link( 'group/comment/insert', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'group/comment/delete', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'group/post', 'group_id=' . $this->model_group_post->getGroupId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') );
+		$this->data['back'] = $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 
 		// Comment
 		$comments = $post->getComments();
@@ -381,6 +396,8 @@ class ControllerGroupComment extends Controller {
 			$this->data['user_id'] = '';
 		}
 
+		$this->data['token'] = $this->session->data['token'];
+
 		$this->template = 'group/comment_form.tpl';
 		$this->children = array(
 			'common/header',
@@ -391,10 +408,6 @@ class ControllerGroupComment extends Controller {
 	}
 
 	private function isValidateForm(){
-		if ( !isset($this->request->post['content']) || strlen($this->request->post['content']) < 1 || strlen($this->request->post['content']) > 50 ){
-			$this->error['error_content'] = $this->language->get( 'error_content' );
-		}
-
 		if ( !isset($this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ){
 			$this->error['error_author'] = $this->language->get( 'error_author' );
 		}

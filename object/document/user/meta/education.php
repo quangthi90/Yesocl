@@ -11,6 +11,9 @@ Class Education {
 	private $school;
 
 	/** @MongoDB\String */
+	private $school_id;
+
+	/** @MongoDB\String */
 	private $started;
 
 	/** @MongoDB\String */
@@ -20,7 +23,13 @@ Class Education {
 	private $degree;
 
 	/** @MongoDB\String */
+	private $degree_id;
+
+	/** @MongoDB\String */
 	private $fieldOfStudy;
+
+	/** @MongoDB\String */
+	private $fieldOfStudy_id;
 
 	/** @MongoDB\String */
 	private $grace;
@@ -41,6 +50,14 @@ Class Education {
 
 	public function getSchool() {
 		return $this->school;
+	}
+
+	public function setSchoolId( $school_id ) {
+		$this->school_id = $school_id;
+	}
+
+	public function getSchoolId() {
+		return $this->school_id;
 	}
 
 	public function setStarted( $started ){
@@ -67,12 +84,28 @@ Class Education {
 		return $this->degree;
 	}
 
+	public function setDegreeId( $degree_id ) {
+		$this->degree_id = $degree_id;
+	}
+
+	public function getDegreeId() {
+		return $this->degree_id;
+	}
+
 	public function setFieldOfStudy( $fieldOfStudy ) {
 		$this->fieldOfStudy = $fieldOfStudy;
 	}
 
 	public function getFieldOfStudy() {
 		return $this->fieldOfStudy;
+	}
+
+	public function setFieldOfStudyId( $fieldOfStudy_id ) {
+		$this->fieldOfStudy_id = $fieldOfStudy_id;
+	}
+
+	public function getFieldOfStudyId() {
+		return $this->fieldOfStudy_id;
 	}
 
 	public function setGrace( $grace ) {

@@ -15,12 +15,19 @@ Class User {
 	private $id; 
 
 	/** 
-	 * @MongoDB\String 
+	 * @MongoDB\String
+	 * @SOLR\Field(type="text")
 	 */
 	private $username;
 
 	/** @MongoDB\String */
 	private $password;
+
+	/** @MongoDB\String */
+	private $salt;
+
+	/** @MongoDB\String */
+	private $slug;
 
 	/** 
 	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Email") 
@@ -47,6 +54,9 @@ Class User {
 	/** @MongoDB\Date */
 	private $created;
 
+	/** @MongoDB\String */
+	private $avatar;
+
 	public function getId() {
 		return $this->id;
 	}
@@ -69,6 +79,14 @@ Class User {
 
 	public function getPassword(){
 		return $this->password;
+	}
+
+	public function setSalt( $salt ){
+		$this->salt = $salt;
+	}
+
+	public function getSalt(){
+		return $this->salt;
 	}
 
 	public function addEmail( Meta\Email $email ){
@@ -161,9 +179,20 @@ Class User {
 		return $this->created;
 	}
 
-	/** @MongoDB\PrePersist */
-	public function prePersist(){
-		$this->created = new \DateTime();
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
+	}
+
+	public function setAvatar( $avatar ){
+		$this->avatar = $avatar;
+	}
+
+	public function getAvatar(){
+		return $this->avatar;
 	}
 
 	/**
@@ -192,5 +221,106 @@ Class User {
 
 		$this->solrContent = $solrContent;
 		return $solrContent;
+	}
+
+    // ----------------- Solr Data cache for Embed & Reference Data -------------------
+    /**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrEmail;
+
+	public function setSolrEmail( $solr_email ){
+		$this->solrEmail = $solr_email;
+	}
+
+	public function getSolrEmail(){
+		return $this->solrEmail;
+	}
+
+	public function getDataSolrEmail(){
+		try{
+			$this->solrEmail = '';
+
+			foreach ( $this->emails as $email) {
+				$this->solrEmail .= $email->getEmail() . ' ';
+			}
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Email!<br>See User Document <b>Function getDataSolrEmail()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrFullname;
+
+	public function setSolrFullname( $solr_fullname ){
+		$this->solrFullname = $solr_fullname;
+	}
+
+	public function getSolrFullname(){
+		return $this->solrFullname;
+	}
+
+	public function getDataSolrFullname(){
+		try{
+			$this->solrFullname .= $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Fullname!<br>See User Document <b>Function getDataSolrFullname()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrPrimaryEmail;
+
+	public function setSolrPrimaryEmail( $solr_primary_email ){
+		$this->solrPrimaryEmail = $solr_primary_email;
+	}
+
+	public function getSolrPrimaryEmail(){
+		return $this->solrPrimaryEmail;
+	}
+
+	public function getDataSolrPrimaryEmail(){
+		try{
+			$this->solrPrimaryEmail .= $this->getPrimaryEmail()->getEmail();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
+		}
+	}
+	//---------------------------------- end Solr Data Cache --------------------------
+
+	/** @MongoDB\PrePersist */
+    public function prePersist()
+    {
+    	$this->created = new \DateTime();
+        $this->getDataSolrEmail();
+        $this->getDataSolrFullname();
+        $this->getDataSolrPrimaryEmail();
+    }
+
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+        $this->getDataSolrEmail();
+        $this->getDataSolrFullname();
+        $this->getDataSolrPrimaryEmail();
+    }
+
+    public function formatToCache(){
+		$data = array(
+			'id'			=> $this->getId(),
+			'username' 		=> $this->getUsername(),
+			'avatar' 		=> $this->getAvatar(),
+			'slug'			=> $this->getSlug(),
+			'email' 		=> $this->getPrimaryEmail()->getEmail()
+		);
+
+		return $data;
 	}
 }

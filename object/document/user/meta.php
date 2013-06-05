@@ -23,6 +23,12 @@ Class Meta {
 	 */
 	private $lastname;
 
+    /** @MongoDB\Date */
+	private $birthday;
+
+    /** @MongoDB\Int */
+	private $sex;
+
 	/** 
 	 * @MongoDB\String 
 	 */
@@ -40,6 +46,11 @@ Class Meta {
 	 * @MongoDB\String 
 	 */
 	private $industry;
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $industry_id;
 
 	/** @MongoDB\String */
 	private $address;
@@ -83,6 +94,22 @@ Class Meta {
 		return $this->lastname;
 	}
 
+	public function setBirthday( $birthday ){
+		$this->birthday = $birthday;
+	}
+
+	public function getSex(){
+		return $this->sex;
+	}
+
+	public function setSex( $sex ){
+		$this->sex = $sex;
+	}
+
+	public function getBirthday(){
+		return $this->birthday;
+	}
+
 	public function setHeadingLine( $headingLine ){
 		$this->headingLine = $headingLine;
 	}
@@ -113,6 +140,14 @@ Class Meta {
 
 	public function getIndustry(){
 		return $this->industry;
+	}
+
+	public function setIndustryId( $industry_id ){
+		$this->industry_id = $industry_id;
+	}
+
+	public function getIndustryId(){
+		return $this->industry_id;
 	}
 
 	public function setAddress( $address ){

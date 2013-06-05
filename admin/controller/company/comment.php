@@ -278,15 +278,15 @@ class ControllerCompanyComment extends Controller {
 				'text' => $this->language->get( 'text_edit' ),
 				'href' => $this->url->link( 'company/comment/update', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId() . '&post_id=' . $post->getId() . '&comment_id=' . $comment->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
-				);
+			);
 
 			$this->data['comments'][] = array(
 				'id' => $comment->getId(),
 				'author' => $comment->getUser()->getPrimaryEmail()->getEmail(),
 				'created' => $comment->getCreated()->format( 'd/m/Y - h:i:s' ),
-				'status' => $comment->getStatus(),
+				'status' => $comment->getStatus() == true ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 				'action' => $action,
-				);
+			);
 		}
 
 		// pagination
@@ -465,10 +465,6 @@ class ControllerCompanyComment extends Controller {
 	}
 
 	private function isValidateForm() {
-		if ( !isset( $this->request->post['comment_content']) || strlen( trim( $this->request->post['comment_content'] ) ) < 1 || strlen( trim( $this->request->post['comment_content'] ) ) > 255 ) {
-			$this->error['error_content'] = $this->language->get( 'error_content' );
-		}
-
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {
 			$this->error['error_author'] = $this->language->get( 'error_author' );
 		}

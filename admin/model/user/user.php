@@ -61,8 +61,15 @@ class ModelUserUser extends Doctrine {
 			return false;
 		}
 
+		// sex is required
+		if ( isset($data['meta']['sex']) || empty($data['meta']['sex']) || $data['meta']['sex'] < 0 || $data['meta']['sex'] > 2 ){
+			$data['meta']['sex'] = 1;
+		}else {
+			$data['meta']['sex'] = (int)$data['meta']['sex'];
+		}
+
 		// Birthday is required
-		if ( !isset($data['background']['birthday']) || empty($data['background']['birthday']) ){
+		if ( !isset($data['meta']['birthday']) || empty($data['meta']['birthday']) ){
 			return false;
 		}
 
@@ -70,20 +77,9 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['background']['maritalstatus']) || empty($data['background']['maritalstatus']) ){
 			$data['background']['maritalstatus'] = false;
 		}
-
-		// Country is required
-		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
-			return false; 
-		}
-		if ( !isset($data['meta']['location']['country_id']) || empty($data['meta']['location']['country_id']) ){
-			return false; 
-		}
 		
 		// City is required
-		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
-			return false;
-		}
-		if ( !isset($data['meta']['location']['city_id']) || empty($data['meta']['location']['city_id']) ){
+		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
 			return false;
 		}
 		
@@ -105,6 +101,9 @@ class ModelUserUser extends Doctrine {
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
+		}
+		if ( !isset($data['meta']['industry_id']) ){
+			$data['meta']['industry_id'] = 0;
 		}
 
 		// Heading Line
@@ -146,13 +145,6 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['user']['formers']) || empty($data['user']['formers']) ){
 			$data['user']['formers'] = array();
 		}
-
-		// Create Location
-		$location = new Location();
-		$location->setCountry( trim( $data['meta']['location']['country'] ) );
-		$location->setCountryId( trim( $data['meta']['location']['country_id'] ) );
-		$location->setCity( trim( $data['meta']['location']['city'] ) );
-		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
 		// Get primary email
@@ -196,7 +188,13 @@ class ModelUserUser extends Doctrine {
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
-			$experience->setLocation( trim( $experience_data['location'] ) );
+
+			// Create Location
+			$location = new Location();
+			$location->setLocation( trim( $experience_data['location'] ) );
+			$location->setCityId( trim( $experience_data['city_id'] ) );
+			$experience->setLocation( $location );
+
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
@@ -211,9 +209,12 @@ class ModelUserUser extends Doctrine {
 			}
 			$education = new Education();
 			$education->setSchool( trim( $education_data['school'] ) );
+			$education->setSchoolId( trim( $education_data['school_id'] ) );
 			$education->setDegree( trim( $education_data['degree'] ) );
+			$education->setDegreeId( trim( $education_data['degree_id'] ) );
 			$education->setGrace( trim( $education_data['grace'] ) );
 			$education->setFieldOfStudy( trim( $education_data['fieldofstudy'] ) );
+			$education->setFieldOfStudyId( trim( $education_data['fieldofstudy_id'] ) );
 			$education->setEnded( trim( $education_data['ended'] ) );
 			$education->setStarted( trim( $education_data['started'] ) );
 			$education->setSocieties( trim( $education_data['societies'] ) );
@@ -223,7 +224,6 @@ class ModelUserUser extends Doctrine {
 
 		// Create Background
 		$background = new Background();
-		$background->setBirthday( new \Datetime( $data['background']['birthday'] ) );
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
@@ -281,31 +281,51 @@ class ModelUserUser extends Doctrine {
 			$formers[] = $former;
 		}
 
-		
+		// Create Location
+		$location = new Location();
+		$location->setLocation( trim( $data['meta']['location']['location'] ) );
+		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Create Meta
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setBirthday( new \Datetime( $data['background']['birthday'] ) );
+		$meta->setSex( $data['meta']['sex'] );
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
 		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setIndustryId( trim( $data['meta']['industry_id'] ) );
 		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
 		$meta->setBackground( $background );
 		$meta->setIms( $ims );
 		$meta->setPhones( $phones );
 		$meta->setWebsites( $websites );
 		$meta->setFormers( $formers );
+
+		// Slug
+		$slug = $this->url->create_slug( $data['user']['username'] );
 		
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+		$arr_slugs = array_map(function($user){
+			return $user->getSlug();
+		}, $users->toArray());
+
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		$user = new User();
+		$user->setSlug( $slug );
 		$user->setUsername( $data['user']['username'] );
 		$user->setEmails( $emails );
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
 		$user->setGroupUser( $group );
 		$user->setMeta( $meta );
+		$user->setSalt( $salt );
 		
 		// Add status
 		if ( isset($data['user']['status']) ){
@@ -315,6 +335,9 @@ class ModelUserUser extends Doctrine {
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateCacheUser( $user );
 		
 		return true;
 	}
@@ -374,8 +397,15 @@ class ModelUserUser extends Doctrine {
 			return false;
 		}
 
+		// sex is required
+		if ( isset($data['meta']['sex']) || empty($data['meta']['sex']) || $data['meta']['sex'] < 0 || $data['meta']['sex'] > 2 ){
+			$data['meta']['sex'] = 1;
+		}else {
+			$data['meta']['sex'] = (int)$data['meta']['sex'];
+		}
+
 		// Birthday is required
-		if ( !isset($data['background']['birthday']) || empty($data['background']['birthday']) ){
+		if ( !isset($data['meta']['birthday']) || empty($data['meta']['birthday']) ){
 			return false;
 		}
 
@@ -383,20 +413,9 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['background']['maritalstatus']) || empty($data['background']['maritalstatus']) ){
 			$data['background']['maritalstatus'] = false;
 		}
-
-		// Country is required
-		if ( !isset($data['meta']['location']['country']) || empty($data['meta']['location']['country']) ){
-			return false; 
-		}
-		if ( !isset($data['meta']['location']['country_id']) || empty($data['meta']['location']['country_id']) ){
-			return false; 
-		}
 		
 		// City is required
-		if ( !isset($data['meta']['location']['city']) || empty($data['meta']['location']['city']) ){
-			return false;
-		}
-		if ( !isset($data['meta']['location']['city_id']) || empty($data['meta']['location']['city_id']) ){
+		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
 			return false;
 		}
 		
@@ -418,6 +437,9 @@ class ModelUserUser extends Doctrine {
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
+		}
+		if ( !isset($data['meta']['industry_id']) ){
+			$data['meta']['industry_id'] = 0;
 		}
 
 		// Heading Line
@@ -459,13 +481,6 @@ class ModelUserUser extends Doctrine {
 		if ( !isset($data['user']['formers']) || empty($data['user']['formers']) ){
 			$data['user']['formers'] = array();
 		}
-
-		// Create Location
-		$location = new Location();
-		$location->setCountry( trim( $data['meta']['location']['country'] ) );
-		$location->setCountryId( trim( $data['meta']['location']['country_id'] ) );
-		$location->setCity( trim( $data['meta']['location']['city'] ) );
-		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Check email
 		// Get primary email
@@ -509,7 +524,13 @@ class ModelUserUser extends Doctrine {
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
-			$experience->setLocation( trim( $experience_data['location'] ) );
+
+			// Create Location
+			$location = new Location();
+			$location->setLocation( trim( $experience_data['location'] ) );
+			$location->setCityId( trim( $experience_data['city_id'] ) );
+			$experience->setLocation( $location );
+			
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
@@ -524,9 +545,12 @@ class ModelUserUser extends Doctrine {
 			}
 			$education = new Education();
 			$education->setSchool( trim( $education_data['school'] ) );
+			$education->setSchoolId( trim( $education_data['school_id'] ) );
 			$education->setDegree( trim( $education_data['degree'] ) );
+			$education->setDegreeId( trim( $education_data['degree_id'] ) );
 			$education->setGrace( trim( $education_data['grace'] ) );
 			$education->setFieldOfStudy( trim( $education_data['fieldofstudy'] ) );
+			$education->setFieldOfStudyId( trim( $education_data['fieldofstudy_id'] ) );
 			$education->setEnded( trim( $education_data['ended'] ) );
 			$education->setStarted( trim( $education_data['started'] ) );
 			$education->setSocieties( trim( $education_data['societies'] ) );
@@ -536,7 +560,6 @@ class ModelUserUser extends Doctrine {
 
 		// Create Background
 		$background = new Background();
-		$background->setBirthday(new \Datetime( $data['background']['birthday'] ));
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
@@ -593,21 +616,45 @@ class ModelUserUser extends Doctrine {
 			$former->setVisible( trim( $former_data['visible'] ) );
 			$formers[] = $former;
 		}
+
+		// Create Location
+		$location = new Location();
+		$location->setLocation( trim( $data['meta']['location']['location'] ) );
+		$location->setCityId( trim( $data['meta']['location']['city_id'] ) );
 		
 		// Create Meta
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
+		$meta->setSex( $data['meta']['sex'] );
+		$meta->setBirthday(new \Datetime( $data['background']['birthday'] ));
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
 		$meta->setIndustry( trim( $data['meta']['industry'] ) );
+		$meta->setIndustryId( trim( $data['meta']['industry_id'] ) );
 		$meta->setHeadingLine( trim( $data['meta']['headingline'] ) );
 		$meta->setBackground( $background );
 		$meta->setIms( $ims );
 		$meta->setPhones( $phones );
 		$meta->setWebsites( $websites );
 		$meta->setFormers( $formers );
+
+		// Slug
+		if ( $data['user']['username'] != $user->getUsername() ){
+			$slug = $this->url->create_slug( $data['user']['username'] );
+		
+			$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$arr_slugs = array_map(function($user){
+				return $user->getSlug();
+			}, $users->toArray());
+
+			$this->load->model( 'tool/slug' );
+			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+			
+			$user->setSlug( $slug );
+		}
 		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
@@ -640,11 +687,18 @@ class ModelUserUser extends Doctrine {
 			return false;
 		}
 
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$user->setSalt( $salt );
 		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateCacheUser( $user );
+
+		return true;
 	}
 
 	/**
@@ -664,6 +718,11 @@ class ModelUserUser extends Doctrine {
 			}
 		}
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateCacheUser( $user );
+
+		return true;
 	}
 	
 	/**
@@ -746,7 +805,7 @@ class ModelUserUser extends Doctrine {
 		return false;
 	}
 
-	public function search( $data = array() ) {
+	public function searchUserByKeyword( $data = array() ) {
 		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
 			return array();
 		}
@@ -757,7 +816,11 @@ class ModelUserUser extends Doctrine {
 				)
     	);
  
-		$query_data = 'solrUserContent_t:*' . $data['filter'] . '*';
+		$query_datas = array(
+			'solrEmail_t:*"' . $data['filter'] . '"*',
+			'solrFullname_t:*"' . $data['filter'] . '"*',
+			'username_t:*"' . $data['filter'] . '"*',
+		);
 
 		if ( isset( $data['start'] ) ) {
 			$data['start'] = (int)$data['start'];
@@ -770,23 +833,12 @@ class ModelUserUser extends Doctrine {
 		}else {
 			$data['limit'] = 10;
 		}
-
-		//$query_data .= '&start=' . $data['start'];
-		//$query_data .= '&rows' . $data['limit'];
  
-		$query->setQuery( $query_data );
- 
-		$results = $this->client->execute( $query );
-
-		$users = array();
-
-		foreach ($results as $result) {
-			if ( $user = $this->getUser( array( 'user_id' => $result->getId() ) ) ) {
-				$users[] = $user;
-			}
+		foreach ( $query_datas as $query_data ) {
+			$query->setQuery( $query_data );
 		}
-
-		return $users;
+ 
+		return $this->client->execute( $query );
 	}
 }
 ?>

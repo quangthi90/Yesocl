@@ -1,49 +1,24 @@
-<div id="footer">
-  <?php if ($informations) { ?>
-  <div class="column">
-    <h3><?php echo $text_information; ?></h3>
-    <ul>
-      <?php foreach ($informations as $information) { ?>
-      <li><a href="<?php echo $information['href']; ?>"><?php echo $information['title']; ?></a></li>
-      <?php } ?>
-    </ul>
-  </div>
-  <?php } ?>
-  <div class="column">
-    <h3><?php echo $text_service; ?></h3>
-    <ul>
-      <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-      <li><a href="<?php echo $return; ?>"><?php echo $text_return; ?></a></li>
-      <li><a href="<?php echo $sitemap; ?>"><?php echo $text_sitemap; ?></a></li>
-    </ul>
-  </div>
-  <div class="column">
-    <h3><?php echo $text_extra; ?></h3>
-    <ul>
-      <li><a href="<?php echo $manufacturer; ?>"><?php echo $text_manufacturer; ?></a></li>
-      <li><a href="<?php echo $voucher; ?>"><?php echo $text_voucher; ?></a></li>
-      <li><a href="<?php echo $affiliate; ?>"><?php echo $text_affiliate; ?></a></li>
-      <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
-    </ul>
-  </div>
-  <div class="column">
-    <h3><?php echo $text_account; ?></h3>
-    <ul>
-      <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
-      <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-      <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-      <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
-    </ul>
-  </div>
+<div id="y-footer">
+    <div class="row-fluid">
+        <div class="copyright span4">
+            Copyright &copy; 2012 - <strong>YESOCL.com</strong>
+        </div>
+        <div class="links-footer span5">
+                <a href="#">Mobile Version</a> - <a href="#">Create Group</a> - <a href="#">Create Profiles</a>
+                - <a href="#">Careers</a> - <a href="#">User privacy</a> - <a href="#">Term</a>
+                - <a href="#">Help</a>
+            </div>
+        <div class="language-selection span3">                    
+            <form action="#" class="form-inline">
+                <div class="input-prepend">
+                    <span class="add-on">Language </span>
+                    <select name="lang-code" id="select1">
+                        <option>English</option>
+                        <option>Viet Nam</option>
+                        <option>Japanese</option>
+                    </select>
+                </div>
+            </form>
+        </div>   
+    </div>    
 </div>
-<!--
-OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
-Please donate via PayPal to donate@opencart.com
-//-->
-<div id="powered"><?php echo $powered; ?></div>
-<!--
-OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
-Please donate via PayPal to donate@opencart.com
-//-->
-</div>
-</body></html>

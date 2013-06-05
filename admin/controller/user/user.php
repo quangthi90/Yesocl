@@ -52,28 +52,31 @@ class ControllerUserUser extends Controller {
 		$this->data['text_delete'] = $this->language->get( 'text_delete' );
 		$this->data['text_yes'] = $this->language->get( 'text_yes' );
 		$this->data['text_no'] = $this->language->get( 'text_no' );
-		$this->data['text_title'] = 'Title';//$this->language->get( 'text_no' );
-		$this->data['text_url'] = 'Url';//$this->language->get( 'text_no' );
-		$this->data['text_to'] = 'to';//$this->language->get( 'text_no' );
-		$this->data['text_month'] = 'Month: ';//$this->language->get( 'text_no' );
-		$this->data['text_year'] = 'Year: ';//$this->language->get( 'text_no' );
-		$this->data['text_name'] = 'Name';//$this->language->get( 'text_no' );
-		$this->data['text_value'] = 'Value';//$this->language->get( 'text_no' );
-		$this->data['text_visible'] = 'Visible';//$this->language->get( 'text_no' );
-		$this->data['text_type'] = 'Type';//$this->language->get( 'text_no' );
-		$this->data['text_im'] = 'Im';//$this->language->get( 'text_no' );
-		$this->data['text_phone'] = 'Phone';//$this->language->get( 'text_no' );
+		$this->data['text_title'] = $this->language->get( 'text_title' );
+		$this->data['text_url'] = $this->language->get( 'text_url' );
+		$this->data['text_to'] = $this->language->get( 'text_to' );
+		$this->data['text_month'] = $this->language->get( 'text_month' );
+		$this->data['text_year'] = $this->language->get( 'text_year' );
+		$this->data['text_name'] = $this->language->get( 'text_name' );
+		$this->data['text_value'] = $this->language->get( 'text_value' );
+		$this->data['text_visible'] = $this->language->get( 'text_visible' );
+		$this->data['text_type'] = $this->language->get( 'text_type' );
+		$this->data['text_im'] = $this->language->get( 'text_im' );
+		$this->data['text_phone'] = $this->language->get( 'text_phone' );
+		$this->data['text_male'] = $this->language->get( 'text_male' );
+		$this->data['text_female'] = $this->language->get( 'text_female' );
+		$this->data['text_other'] = $this->language->get( 'text_other' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 		$this->data['button_add_email'] = $this->language->get( 'button_add_email' );
-		$this->data['button_add_phone'] = 'Add Phone';//$this->language->get( 'button_add_email' );
-		$this->data['button_add_im'] = 'Add Im';//$this->language->get( 'button_add_email' );
-		$this->data['button_add_website'] = 'Add Website';//$this->language->get( 'button_save' );
-		$this->data['button_add_experience'] = 'Add Experience';//$this->language->get( 'button_save' );
-		$this->data['button_add_education'] = 'Add Education';//$this->language->get( 'button_add_email' );
-		$this->data['button_add_former'] = 'Add Former';//$this->language->get( 'button_save' );
+		$this->data['button_add_phone'] = $this->language->get( 'button_add_phone' );
+		$this->data['button_add_im'] = $this->language->get( 'button_add_im' );
+		$this->data['button_add_website'] = $this->language->get( 'button_add_website' );
+		$this->data['button_add_experience'] = $this->language->get( 'button_add_experience' );
+		$this->data['button_add_education'] = $this->language->get( 'button_add_education' );
+		$this->data['button_add_former'] = $this->language->get( 'button_add_former' );
 
 		// Entry
 		$this->data['entry_username'] = $this->language->get( 'entry_username' );
@@ -87,49 +90,50 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_firstname'] = $this->language->get( 'entry_firstname' );
 		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
-		$this->data['entry_marital_status'] = 'Marital Status:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_country'] = 'Country:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_city'] = 'City:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_postal_code'] = 'Postal Code:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_industry'] = 'Industry:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_headingline'] = 'Headingline:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_interest'] = 'Interest:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_sex'] = $this->language->get( 'entry_sex' );
+		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
+		$this->data['entry_country'] = $this->language->get( 'entry_country' );
+		$this->data['entry_city'] = $this->language->get( 'entry_city' );
+		$this->data['entry_postal_code'] = $this->language->get( 'entry_postal_code' );
+		$this->data['entry_industry'] = $this->language->get( 'entry_industry' );
+		$this->data['entry_headingline'] = $this->language->get( 'entry_headingline' );
+		$this->data['entry_interest'] = $this->language->get( 'entry_interest' );
 		
-		$this->data['entry_im'] = 'IM:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_phone'] = 'Phone:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_address'] = 'Address:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_advice_for_contact'] = 'Advice For Contact:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_im'] = $this->language->get( 'entry_im' );
+		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
+		$this->data['entry_address'] = $this->language->get( 'entry_address' );
+		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
 
-		$this->data['entry_company'] = 'Company:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_current'] = 'Current:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_title'] = 'Title:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_location'] = 'Location:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_time_period'] = 'Time Period:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_description'] = 'Description:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_current'] = $this->language->get( 'entry_current' );
+		$this->data['entry_title'] = $this->language->get( 'entry_title' );
+		$this->data['entry_location'] = $this->language->get( 'entry_location' );
+		$this->data['entry_time_period'] = $this->language->get( 'entry_time_period' );
+		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 
-		$this->data['entry_school'] = 'School:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_date_attended'] = 'Date Attended:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_degree'] = 'Degree:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_field_of_study'] = 'Field Of Study:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_grace'] = 'Grace:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_societies'] = 'Societies:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_school'] = $this->language->get( 'entry_school' );
+		$this->data['entry_date_attended'] = $this->language->get( 'entry_date_attended' );
+		$this->data['entry_degree'] = $this->language->get( 'entry_degree' );
+		$this->data['entry_field_of_study'] = $this->language->get( 'entry_field_of_study' );
+		$this->data['entry_grace'] = $this->language->get( 'entry_grace' );
+		$this->data['entry_societies'] = $this->language->get( 'entry_societies' );
 
 		// Warning
 		$this->data['error_primary_email'] = $this->language->get( 'error_primary_email' );
 		$this->data['error_email_empty'] = $this->language->get( 'error_email_empty' );
 		$this->data['error_exist_email'] = $this->language->get( 'error_exist_email' );
-		$this->data['error_experience_empty'] = 'Error Empty Experience';//$this->language->get( 'error_email_empty' );
+		$this->data['error_experience_empty'] = $this->language->get( 'error_experience_empty' );
 		
 		// Tab
 		$this->data['tab_general'] = $this->language->get( 'tab_general' );
 		$this->data['tab_information'] = $this->language->get( 'tab_information' );
 		$this->data['tab_email'] = $this->language->get( 'tab_email' );
-		$this->data['tab_im'] = 'Im';//$this->language->get( 'tab_email' );
-		$this->data['tab_phone'] = 'Phone';//$this->language->get( 'tab_email' );
-		$this->data['tab_website'] = 'Website';//$this->language->get( 'tab_email' );
-		$this->data['tab_experience'] = 'Experience';//$this->language->get( 'tab_email' );
-		$this->data['tab_education'] = 'Education';//$this->language->get( 'tab_email' );
-		$this->data['tab_former'] = 'Former';//$this->language->get( 'tab_email' );
+		$this->data['tab_im'] = $this->language->get( 'tab_im' );
+		$this->data['tab_phone'] = $this->language->get( 'tab_phone' );
+		$this->data['tab_website'] = $this->language->get( 'tab_website' );
+		$this->data['tab_experience'] = $this->language->get( 'tab_experience' );
+		$this->data['tab_education'] = $this->language->get( 'tab_education' );
+		$this->data['tab_former'] = $this->language->get( 'tab_former' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
@@ -192,9 +196,16 @@ class ControllerUserUser extends Controller {
 			$this->data['lastname'] = '';
 		}
 
+		// Entry sex
+		if ( $user->getMeta() ){
+			$this->data['sex'] = $user->getMeta()->getSex();
+		}else {
+			$this->data['sex'] = '';
+		}
+
 		// Entry birthday
-		if ( $user->getMeta()->getBackground() ){
-			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('d-m-Y');
+		if ( $user->getMeta() ){
+			$this->data['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');
 		}else {
 			$this->data['birthday'] = '';
 		}
@@ -251,6 +262,11 @@ class ControllerUserUser extends Controller {
 		}else {
 			$this->data['industry'] = '';
 		}
+		if ( $user->getMeta() ){
+			$this->data['industry_id'] = $user->getMeta()->getIndustryId();
+		}else {
+			$this->data['industry_id'] = 0;
+		}
 
 		// Entry heading line
 		if ( $user->getMeta() ){
@@ -267,16 +283,6 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry im
-		$this->data['im_types'] = array();
-		$this->data['im_types'][] = array(
-			'text' => 'Skype',
-			'code' => 'skype',
-			);
-		$this->data['im_types'][] = array(
-			'text' => 'Yahoo',
-			'code' => 'yahoo',
-			);
-
 		$this->data['ims'] = array();
 		foreach ($user->getMeta()->getIms() as $key => $im) {
 			$this->data['ims'][$key] = array(
@@ -287,16 +293,6 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry phone
-		$this->data['phone_types'] = array();
-		$this->data['phone_types'][] = array(
-			'text' => 'Mobile',
-			'code' => 'mobile',
-			);
-		$this->data['phone_types'][] = array(
-			'text' => 'Telephone',
-			'code' => 'telephone',
-			);
-
 		$this->data['phones'] = array();
 		foreach ($user->getMeta()->getPhones() as $key => $phone) {
 			$this->data['phones'][$key] = array(
@@ -306,21 +302,7 @@ class ControllerUserUser extends Controller {
 				);
 		}
 
-		// Entry website title
-		$this->data['title_types'] = array();
-		$this->data['title_types'][] = array(
-			'text' => 'Personal Website',
-			'code' => 'personal',
-			);
-		$this->data['title_types'][] = array(
-			'text' => 'Company Website',
-			'code' => 'company',
-			);
-		$this->data['title_types'][] = array(
-			'text' => 'Other...',
-			'code' => 'other',
-			);
-
+		// Entry website
 		$this->data['websites'] = array();
 		foreach ($user->getMeta()->getWebsites() as $key => $website) {
 			$this->data['websites'][$key] = array(
@@ -334,11 +316,13 @@ class ControllerUserUser extends Controller {
 		foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 			$started = $experience->getStarted();
 			$ended = $experience->getEnded();
+			$location = $experience->getLocation();
 			$this->data['experiencies'][$key] = array(
 				'company' => $experience->getCompany(),
 				'current' => $experience->getCurrent(),
 				'title' => $experience->getTitle(),
-				'location' => $experience->getLocation(),
+				'location' => ( $location ) ? $location->getLocation() : '',
+				'city_id' => ( $location ) ? $location->getCityId() : '',
 				'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
 				'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 				'description' => $experience->getDescription(),
@@ -350,9 +334,12 @@ class ControllerUserUser extends Controller {
 		foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 			$this->data['educations'][$key] = array(
 				'school' => $education->getSchool(),
+				'school_id' => $education->getSchoolId(),
 				'degree' => $education->getDegree(),
+				'degree_id' => $education->getDegreeId(),
 				'grace' => $education->getGrace(),
 				'fieldofstudy' => $education->getFieldOfStudy(),
+				'fieldofstudy_id' => $education->getFieldOfStudyId(),
 				'societies' => $education->getSocieties(),
 				'ended' => $education->getEnded(),
 				'started' => $education->getStarted(),
@@ -370,20 +357,49 @@ class ControllerUserUser extends Controller {
 				);
 		}
 
+		$this->load->model( 'data/value' );
+		$this->load->model( 'setting/config' );
+		$this->load->config( 'datatype' );
+		$this->model_setting_config->load( 'datatype_title' );
+		// Im type
+		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );
+		$this->data['im_types'] = array();
+		foreach ($im_types as $im_type) {
+			$this->data['im_types'][] = array(
+				'text' => $im_type->getName(),
+				'code' => $im_type->getCode(),
+				);
+		}
+
+		// Entry phone type
+		$phone_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_phone_type' ) ) );
+		$this->data['phone_types'] = array();
+		foreach ($phone_types as $phone_type) {
+			$this->data['phone_types'][] = array(
+				'text' => $phone_type->getName(),
+				'code' => $phone_type->getCode(),
+				);
+		}
+
+		// Entry website title
+		$title_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_title_type' ) ) );
+		$this->data['title_types'] = array();
+		foreach ($title_types as $title_type) {
+			$this->data['title_types'][] = array(
+				'text' => $title_type->getName(),
+				'code' => $title_type->getCode(),
+				);
+		}
+
 		// Entry former visible
+		$visible_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_title_type' ) ) );
 		$this->data['visible_types'] = array();
-		$this->data['visible_types'][] = array(
-			'text' => 'My Follow',
-			'code' => 'myfollow',
-			);
-		$this->data['visible_types'][] = array(
-			'text' => 'My Network',
-			'code' => 'mynetwork',
-			);
-		$this->data['visible_types'][] = array(
-			'text' => 'Every One',
-			'code' => 'everyone',
-			);
+		foreach ($visible_types as $visible_type) {
+			$this->data['visible_types'][] = array(
+				'text' => $visible_type->getName(),
+				'code' => $visible_type->getCode(),
+				);
+		}
 
 		$this->template = 'user/user_view.tpl';
 		$this->children = array(
@@ -403,12 +419,15 @@ class ControllerUserUser extends Controller {
 		$this->load->model( 'user/user' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-
+		
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateInsert() ){
-			$this->model_user_user->addUser( $this->request->post );
+			if ( $this->model_user_user->addUser( $this->request->post ) == true ) {
+				$this->session->data['success'] = $this->language->get( 'text_success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			}
 			
-			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
@@ -429,9 +448,12 @@ class ControllerUserUser extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateUpdate() ){
-			$this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post );
+			if ( $this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post ) ) {
+				$this->session->data['success'] = $this->language->get( 'text_success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			}
 			
-			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
@@ -450,9 +472,12 @@ class ControllerUserUser extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_user_user->deleteUser( $this->request->post );
+			if ( $this->model_user_user->deleteUser( $this->request->post ) ) {
+				$this->session->data['success'] = $this->language->get( 'text_success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			}
 			
-			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
@@ -471,9 +496,12 @@ class ControllerUserUser extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateChangePassword() ){
-			$this->model_user_user->changePassword( $this->request->get['user_id'], $this->request->post );
+			if ( $this->model_user_user->changePassword( $this->request->get['user_id'], $this->request->post ) ) {
+				$this->session->data['success'] = $this->language->get( 'text_success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			}
 			
-			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
@@ -572,8 +600,6 @@ class ControllerUserUser extends Controller {
 		// catch error
 		if ( isset($this->error['warning']) ){
 			$this->data['error_warning'] = $this->error['warning'];
-
-			unset( $this->session->data['error_warning'] );
 		} elseif ( isset($this->session->data['error_warning']) ) {
 			$this->data['error_warning'] = $this->session->data['error_warning'];
 			
@@ -648,13 +674,13 @@ class ControllerUserUser extends Controller {
 				$action = array();
 
 				$action[] = array(
-					'text' => 'View',//$this->language->get( 'text_view' )
+					'text' => $this->language->get( 'text_view' ),
 					'href' => $this->url->link( 'user/user/view', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 
 				$action[] = array(
-					'text' => 'Change Password',//$this->language->get( 'text_change_password' )
+					'text' => $this->language->get( 'text_change_password' ),
 					'href' => $this->url->link( 'user/user/changepassword', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
@@ -744,18 +770,11 @@ class ControllerUserUser extends Controller {
 			$this->data['error_confirm'] = '';
 		}
 
-		// Error Country
-		if ( isset($this->error['country']) ) {
-			$this->data['error_country'] = $this->error['country'];
+		// Error Location
+		if ( isset($this->error['location']) ) {
+			$this->data['error_location'] = $this->error['location'];
 		} else {
-			$this->data['error_country'] = '';
-		}
-
-		// Error City
-		if ( isset($this->error['city']) ) {
-			$this->data['error_city'] = $this->error['city'];
-		} else {
-			$this->data['error_city'] = '';
+			$this->data['error_location'] = '';
 		}
 
 		// Error Industry
@@ -832,28 +851,31 @@ class ControllerUserUser extends Controller {
 		$this->data['text_delete'] = $this->language->get( 'text_delete' );
 		$this->data['text_yes'] = $this->language->get( 'text_yes' );
 		$this->data['text_no'] = $this->language->get( 'text_no' );
-		$this->data['text_title'] = 'Title';//$this->language->get( 'text_no' );
-		$this->data['text_url'] = 'Url';//$this->language->get( 'text_no' );
-		$this->data['text_to'] = ' to ';//$this->language->get( 'text_no' );
-		$this->data['text_month'] = 'Month: ';//$this->language->get( 'text_no' );
-		$this->data['text_year'] = 'Year: ';//$this->language->get( 'text_no' );
-		$this->data['text_name'] = 'Name';//$this->language->get( 'text_no' );
-		$this->data['text_value'] = 'Value';//$this->language->get( 'text_no' );
-		$this->data['text_visible'] = 'Visible';//$this->language->get( 'text_no' );
-		$this->data['text_type'] = 'Type';//$this->language->get( 'text_no' );
-		$this->data['text_im'] = 'Im';//$this->language->get( 'text_no' );
-		$this->data['text_phone'] = 'Phone';//$this->language->get( 'text_no' );
+		$this->data['text_title'] = $this->language->get( 'text_title' );
+		$this->data['text_url'] = $this->language->get( 'text_url' );
+		$this->data['text_to'] = $this->language->get( 'text_to' );
+		$this->data['text_month'] = $this->language->get( 'text_month' );
+		$this->data['text_year'] = $this->language->get( 'text_year' );
+		$this->data['text_name'] = $this->language->get( 'text_name' );
+		$this->data['text_value'] = $this->language->get( 'text_value' );
+		$this->data['text_visible'] = $this->language->get( 'text_visible' );
+		$this->data['text_type'] = $this->language->get( 'text_type' );
+		$this->data['text_im'] = $this->language->get( 'text_im' );
+		$this->data['text_phone'] = $this->language->get( 'text_phone' );
+		$this->data['text_male'] = $this->language->get( 'text_male' );
+		$this->data['text_female'] = $this->language->get( 'text_female' );
+		$this->data['text_other'] = $this->language->get( 'text_other' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 		$this->data['button_add_email'] = $this->language->get( 'button_add_email' );
-		$this->data['button_add_phone'] = 'Add Phone';//$this->language->get( 'button_add_email' );
-		$this->data['button_add_im'] = 'Add Im';//$this->language->get( 'button_add_email' );
-		$this->data['button_add_website'] = 'Add Website';//$this->language->get( 'button_save' );
-		$this->data['button_add_experience'] = 'Add Experience';//$this->language->get( 'button_save' );
-		$this->data['button_add_education'] = 'Add Education';//$this->language->get( 'button_add_email' );
-		$this->data['button_add_former'] = 'Add Former';//$this->language->get( 'button_save' );
+		$this->data['button_add_phone'] = $this->language->get( 'button_add_phone' );
+		$this->data['button_add_im'] = $this->language->get( 'button_add_im' );
+		$this->data['button_add_website'] = $this->language->get( 'button_add_website' );
+		$this->data['button_add_experience'] = $this->language->get( 'button_add_experience' );
+		$this->data['button_add_education'] = $this->language->get( 'button_add_education' );
+		$this->data['button_add_former'] = $this->language->get( 'button_add_former' );
 
 		// Entry
 		$this->data['entry_email'] = $this->language->get( 'entry_email' );
@@ -867,38 +889,38 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_firstname'] = $this->language->get( 'entry_firstname' );
 		$this->data['entry_lastname'] = $this->language->get( 'entry_lastname' );
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
-		$this->data['entry_marital_status'] = 'Marital Status:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_country'] = 'Country:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_city'] = 'City:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_postal_code'] = 'Postal Code:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_industry'] = 'Industry:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_headingline'] = 'Headingline:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_interest'] = 'Interest:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_sex'] = $this->language->get( 'entry_sex' );
+		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
+		$this->data['entry_location'] = $this->language->get( 'entry_location' );
+		$this->data['entry_postal_code'] = $this->language->get( 'entry_postal_code' );
+		$this->data['entry_industry'] = $this->language->get( 'entry_industry' );
+		$this->data['entry_headingline'] = $this->language->get( 'entry_headingline' );
+		$this->data['entry_interest'] = $this->language->get( 'entry_interest' );
 		
-		$this->data['entry_im'] = 'IM:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_phone'] = 'Phone:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_address'] = 'Address:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_advice_for_contact'] = 'Advice For Contact:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_im'] = $this->language->get( 'entry_im' );
+		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
+		$this->data['entry_address'] = $this->language->get( 'entry_address' );
+		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
 
-		$this->data['entry_company'] = 'Company:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_current'] = 'Current:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_title'] = 'Title:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_location'] = 'Location:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_time_period'] = 'Time Period:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_description'] = 'Description:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_current'] = $this->language->get( 'entry_current' );
+		$this->data['entry_title'] = $this->language->get( 'entry_title' );
+		$this->data['entry_location'] = $this->language->get( 'entry_location' );
+		$this->data['entry_time_period'] = $this->language->get( 'entry_time_period' );
+		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 
-		$this->data['entry_school'] = 'School:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_date_attended'] = 'Date Attended:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_degree'] = 'Degree:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_field_of_study'] = 'Field Of Study:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_grace'] = 'Grace:';//$this->language->get( 'entry_birthday' );
-		$this->data['entry_societies'] = 'Activities and Societies:';//$this->language->get( 'entry_birthday' );
+		$this->data['entry_school'] = $this->language->get( 'entry_school' );
+		$this->data['entry_date_attended'] = $this->language->get( 'entry_date_attended' );
+		$this->data['entry_degree'] = $this->language->get( 'entry_degree' );
+		$this->data['entry_field_of_study'] = $this->language->get( 'entry_field_of_study' );
+		$this->data['entry_grace'] = $this->language->get( 'entry_grace' );
+		$this->data['entry_societies'] = $this->language->get( 'entry_societies' );
 
 		// Warning
 		$this->data['error_primary_email'] = $this->language->get( 'error_primary_email' );
 		$this->data['error_email_empty'] = $this->language->get( 'error_email_empty' );
 		$this->data['error_exist_email'] = $this->language->get( 'error_exist_email' );
-		$this->data['error_experience_empty'] = 'Error Empty Experience';//$this->language->get( 'error_email_empty' );
+		$this->data['error_experience_empty'] = $this->language->get( 'error_email_empty' );
 		$this->data['error_school'] = $this->language->get( 'error_school' );
 		$this->data['error_company'] = $this->language->get( 'error_company' );
 		$this->data['text_error_former'] = $this->language->get( 'error_former' );
@@ -910,20 +932,28 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_general'] = $this->language->get( 'tab_general' );
 		$this->data['tab_information'] = $this->language->get( 'tab_information' );
 		$this->data['tab_email'] = $this->language->get( 'tab_email' );
-		$this->data['tab_im'] = 'Im';//$this->language->get( 'tab_email' );
-		$this->data['tab_phone'] = 'Phone';//$this->language->get( 'tab_email' );
-		$this->data['tab_website'] = 'Website';//$this->language->get( 'tab_email' );
-		$this->data['tab_experience'] = 'Experience';//$this->language->get( 'tab_email' );
-		$this->data['tab_education'] = 'Education';//$this->language->get( 'tab_email' );
-		$this->data['tab_former'] = 'Former';//$this->language->get( 'tab_email' );
+		$this->data['tab_im'] = $this->language->get( 'tab_im' );
+		$this->data['tab_phone'] = $this->language->get( 'tab_phone' );
+		$this->data['tab_website'] = $this->language->get( 'tab_website' );
+		$this->data['tab_experience'] = $this->language->get( 'tab_experience' );
+		$this->data['tab_education'] = $this->language->get( 'tab_education' );
+		$this->data['tab_former'] = $this->language->get( 'tab_former' );
+
+		// code
+		$this->load->model( 'setting/config' );
+		$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
+
+		$this->data['code_industry'] = $this->config->get( 'datatype_industry' );
+		$this->data['code_school'] = $this->config->get( 'datatype_school' );
+		$this->data['code_degree'] = $this->config->get( 'datatype_degree' );
+		$this->data['code_fieldofstudy'] = $this->config->get( 'datatype_fieldofstudy' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['emailValidate'] = html_entity_decode( $this->url->link( 'user/user/emailValidate', 'token=' . $this->session->data['token'], 'SSL' ) );
 		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link( 'company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL' ) );
-		$this->data['autocomplete_country'] = html_entity_decode( $this->url->link( 'user/user/autocompleteCountry', 'token=' . $this->session->data['token'], 'SSL' ) );
-		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
-		$this->data['autocomplete_city'] = html_entity_decode( $this->url->link( 'user/user/autocompleteCity', 'token=' . $this->session->data['token'], 'SSL') );
+		$this->data['autocomplete_value'] = html_entity_decode( $this->url->link( 'data/value/searchValue', 'token=' . $this->session->data['token'], 'SSL') );
+		$this->data['autocomplete_location'] = html_entity_decode( $this->url->link( 'user/user/autocompleteLocation', 'token=' . $this->session->data['token'], 'SSL') );
 		
 		// user
 		if ( isset($this->request->get['user_id']) ){
@@ -1020,11 +1050,20 @@ class ControllerUserUser extends Controller {
 			$this->data['lastname'] = '';
 		}
 
+		// Entry sex
+		if ( isset($this->request->post['meta']['sex']) ){
+			$this->data['sex'] = $this->request->post['meta']['sex'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['sex'] = $user->getMeta()->getSex();
+		}else {
+			$this->data['sex'] = 1;
+		}
+
 		// Entry birthday
-		if ( isset($this->request->post['background']['birthday']) ){
-			$this->data['birthday'] = $this->request->post['background']['birthday'];
-		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
-			$this->data['birthday'] = $user->getMeta()->getBackground()->getBirthday()->format('d-m-Y');
+		if ( isset($this->request->post['meta']['birthday']) ){
+			$this->data['birthday'] = $this->request->post['meta']['birthday'];
+		}elseif ( isset($user) && $user->getMeta() ){
+			$this->data['birthday'] = $user->getMeta()->getBirthday()->format('m/d/Y');
 		}else {
 			$this->data['birthday'] = '';
 		}
@@ -1038,27 +1077,15 @@ class ControllerUserUser extends Controller {
 			$this->data['marital_status'] = 0;
 		}
 
-		// Entry localtion country
-		if ( isset($this->request->post['meta']['location']['country']) ){
-			$this->data['country'] = $this->request->post['meta']['location']['country'];
-			$this->data['country_id'] = $this->request->post['meta']['location']['country_id'];
-		}elseif ( isset($user) && $user->getMeta() ){
-			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
-			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
-		}else {
-			$this->data['country'] = '';
-			$this->data['country_id'] = 0;
-		}
-
 		// Entry localtion city
-		if ( isset($this->request->post['meta']['location']['city']) ){
-			$this->data['city'] = $this->request->post['meta']['location']['city'];
+		if ( isset($this->request->post['meta']['location']['location']) ){
+			$this->data['location'] = $this->request->post['meta']['location']['location'];
 			$this->data['city_id'] = $this->request->post['meta']['location']['city_id'];
 		}elseif ( isset($user) && $user->getMeta() ){
-			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
+			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
 		}else {
-			$this->data['city'] = '';
+			$this->data['location'] = '';
 			$this->data['city_id'] = 0;
 		}
 
@@ -1092,10 +1119,13 @@ class ControllerUserUser extends Controller {
 		// Entry industry
 		if ( isset($this->request->post['meta']['industry']) ){
 			$this->data['industry'] = $this->request->post['meta']['industry'];
+			$this->data['industry_id'] = $this->request->post['meta']['industry'];
 		}elseif ( isset($user) && $user->getMeta() ){
 			$this->data['industry'] = $user->getMeta()->getIndustry();
+			$this->data['industry_id'] = $user->getMeta()->getIndustryId();
 		}else {
 			$this->data['industry'] = '';
+			$this->data['industry_id'] = 0;
 		}
 
 		// Entry heading line
@@ -1117,16 +1147,6 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry im
-		$this->data['im_types'] = array();
-		$this->data['im_types'][] = array(
-			'text' => 'Skype',
-			'code' => 'skype',
-			);
-		$this->data['im_types'][] = array(
-			'text' => 'Yahoo',
-			'code' => 'yahoo',
-			);
-
 		$this->data['ims'] = array();
 		if ( isset($this->request->post['user']['ims']) ){
 			$this->data['ims'] = $this->request->post['user']['ims'];
@@ -1141,16 +1161,6 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry phone
-		$this->data['phone_types'] = array();
-		$this->data['phone_types'][] = array(
-			'text' => 'Mobile',
-			'code' => 'mobile',
-			);
-		$this->data['phone_types'][] = array(
-			'text' => 'Telephone',
-			'code' => 'telephone',
-			);
-
 		$this->data['phones'] = array();
 		if ( isset($this->request->post['user']['phones']) ){
 			$this->data['phones'] = $this->request->post['user']['phones'];
@@ -1164,21 +1174,7 @@ class ControllerUserUser extends Controller {
 			}
 		}
 
-		// Entry website title
-		$this->data['title_types'] = array();
-		$this->data['title_types'][] = array(
-			'text' => 'Personal Website',
-			'code' => 'personal',
-			);
-		$this->data['title_types'][] = array(
-			'text' => 'Company Website',
-			'code' => 'company',
-			);
-		$this->data['title_types'][] = array(
-			'text' => 'Other...',
-			'code' => 'other',
-			);
-
+		// Entry website
 		$this->data['websites'] = array();
 		if ( isset($this->request->post['user']['websites']) ){
 			$this->data['websites'] = $this->request->post['user']['websites'];
@@ -1199,11 +1195,13 @@ class ControllerUserUser extends Controller {
 			foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
+				$location = $experience->getLocation();
 				$this->data['experiencies'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
-					'location' => $experience->getLocation(),
+					'location' => ( $location ) ? $location->getLocation() : '',
+					'city_id' => ( $location ) ? $location->getCityId() : '',
 					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
@@ -1219,9 +1217,12 @@ class ControllerUserUser extends Controller {
 			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),
+					'school_id' => $education->getSchoolId(),
 					'degree' => $education->getDegree(),
+					'degree_id' => $education->getDegreeId(),
 					'grace' => $education->getGrace(),
 					'fieldofstudy' => $education->getFieldOfStudy(),
+					'fieldofstudy_id' => $education->getFieldOfStudyId(),
 					'societies' => $education->getSocieties(),
 					'ended' => $education->getEnded(),
 					'started' => $education->getStarted(),
@@ -1244,20 +1245,47 @@ class ControllerUserUser extends Controller {
 			}
 		}
 
+		$this->load->model( 'data/value' );
+		
+		// Im type
+		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );
+		$this->data['im_types'] = array();
+		foreach ($im_types as $im_type) {
+			$this->data['im_types'][] = array(
+				'text' => $im_type->getName(),
+				'code' => $im_type->getValue(),
+				);
+		}
+
+		// Entry phone type
+		$phone_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_phone_type' ) ) );
+		$this->data['phone_types'] = array();
+		foreach ($phone_types as $phone_type) {
+			$this->data['phone_types'][] = array(
+				'text' => $phone_type->getName(),
+				'code' => $phone_type->getValue(),
+				);
+		}
+
+		// Entry website title
+		$title_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_website_type' ) ) );
+		$this->data['title_types'] = array();
+		foreach ($title_types as $title_type) {
+			$this->data['title_types'][] = array(
+				'text' => $title_type->getName(),
+				'code' => $title_type->getValue(),
+				);
+		}
+
 		// Entry former visible
+		$visible_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_visible_type' ) ) );
 		$this->data['visible_types'] = array();
-		$this->data['visible_types'][] = array(
-			'text' => 'My Follow',
-			'code' => 'myfollow',
-			);
-		$this->data['visible_types'][] = array(
-			'text' => 'My Network',
-			'code' => 'mynetwork',
-			);
-		$this->data['visible_types'][] = array(
-			'text' => 'Every One',
-			'code' => 'everyone',
-			);
+		foreach ($visible_types as $visible_type) {
+			$this->data['visible_types'][] = array(
+				'text' => $visible_type->getName(),
+				'code' => $visible_type->getValue(),
+				);
+		}
 
 		$this->template = 'user/user_form.tpl';
 		$this->children = array(
@@ -1307,12 +1335,8 @@ class ControllerUserUser extends Controller {
 	  		}
     	}
 
-    	if ((utf8_strlen($this->request->post['meta']['location']['country']) < 1) || (utf8_strlen($this->request->post['meta']['location']['country_id']) < 1)) {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-
-    	if ((utf8_strlen($this->request->post['meta']['location']['city']) < 1) || (utf8_strlen($this->request->post['meta']['location']['city_id']) < 1)) {
-      		$this->error['city'] = $this->language->get('error_city');
+    	if ( utf8_strlen($this->request->post['meta']['location']['location']) < 1 ) {
+      		$this->error['location'] = $this->language->get('error_location');
     	}
 
     	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
@@ -1421,12 +1445,8 @@ class ControllerUserUser extends Controller {
 			}
 		}
 
-    	if ((utf8_strlen($this->request->post['meta']['location']['country']) < 1) || (utf8_strlen($this->request->post['meta']['location']['country_id']) < 1)) {
-      		$this->error['country'] = $this->language->get('error_country');
-    	}
-
-    	if ((utf8_strlen($this->request->post['meta']['location']['city']) < 1) || (utf8_strlen($this->request->post['meta']['location']['city_id']) < 1)) {
-      		$this->error['city'] = $this->language->get('error_city');
+    	if ( utf8_strlen($this->request->post['meta']['location']['location']) < 1 ) {
+      		$this->error['location'] = $this->language->get('error_location');
     	}
 
     	if ( (utf8_strlen($this->request->post['meta']['industry']) < 1) ) {
@@ -1569,67 +1589,31 @@ class ControllerUserUser extends Controller {
 		$this->response->setOutput('true');
 		return;
 	}
-	
-	public function autocompleteCountry(){
-		$this->load->model( 'localisation/country' );
 
-		$sort = 'name';
-
-		if ( isset( $this->request->get['filter_name'] ) ) {
-			$filter_name = $this->request->get['filter_name'];
-		}else {
-			$filter_name = null;
-		}
-
-		$data = array(
-			'filter_name' => $filter_name,
-			'sort' => $sort,
-			);
-
-		$country_data = $this->model_localisation_country->getCountries( $data );
-
-		$json = array();
-		foreach ($country_data as $country) {
-			$json[] = array(
-				'name' => $country->getName(),
-				'id' => $country->getId(),
-				);
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function autocompleteCity(){
+	public function autocompleteLocation(){
 		$this->load->model( 'localisation/city' );
 
 		$sort = 'name';
 
-		if ( isset( $this->request->get['filter_name'] ) ) {
-			$filter_name = $this->request->get['filter_name'];
+		if ( isset( $this->request->get['filter_location'] ) ) {
+			$filter_location = $this->request->get['filter_location'];
 		}else {
-			$filter_name = null;
-		}
-
-		if ( isset( $this->request->get['filter_country'] ) ) {
-			$filter_country = $this->request->get['filter_country'];
-		}else {
-			$filter_country = null;
+			$filter_location = null;
 		}
 
 		$data = array(
-			'filter_name' => $filter_name,
-			'filter_country' => $filter_country,
-			'sort' => $sort,
-			);
+			'filter_location' => $filter_location,
+			// 'sort' => $sort,
+		);
 
-		$city_data = $this->model_localisation_city->getCities( $data );
-
+		$cities = $this->model_localisation_city->searchLocationByKeyword( $data );
+		// print("<pre>"); var_dump($cities); exit;
 		$json = array();
-		foreach ($city_data as $city) {
+		foreach ( $cities as $city ) {
 			$json[] = array(
-				'name' => $city->getName(),
+				'name' => $city->getLocation(),
 				'id' => $city->getId(),
-				);
+			);
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
@@ -1648,17 +1632,17 @@ class ControllerUserUser extends Controller {
 			'filter' => $filter,
 			);
 
-		$users = $this->model_user_user->search( $data );
+		$users = $this->model_user_user->searchUserByKeyword( $data );
 
 		$json = array();
 
 		foreach ($users as $user) {
 			$primary = ( $user->getUsername()) ? $user->getUsername() : $user->getFullname();
-			$primary .= '(' . $user->getPrimaryEmail()->getEmail() . ')';
+			$primary .= '(' . $user->getSolrPrimaryEmail() . ')';
 			$json[] = array(
 				'id' => $user->getId(),
 				'primary' => $primary,
-				);
+			);
 		}
 
 		$this->response->setOutput( json_encode( $json ) );

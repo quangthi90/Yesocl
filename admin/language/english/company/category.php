@@ -6,6 +6,7 @@ $_['heading_title'] = 'Post Category';
 $_['text_edit'] = 'Edit';
 $_['text_enable'] = 'Enable';
 $_['text_disable'] = 'Disable';
+$_['text_root'] = 'Root';
 
 // button
 $_['button_insert'] = 'Insert';
@@ -22,6 +23,7 @@ $_['column_action'] = 'Action';
 // entry
 $_['entry_name'] = 'Category Name:';
 $_['entry_order'] = 'Order:';
+$_['entry_parent'] = 'Parent:';
 $_['entry_status'] = 'Status:';
 
 // error

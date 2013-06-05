@@ -265,9 +265,9 @@ class ControllerCompanyPost extends Controller {
 				'title' => $post->getTitle(),
 				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
 				'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
-				'status' => $post->getStatus(),
+				'status' => $post->getStatus() == true ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 				'action' => $action,
-				);
+			);
 		}
 
 		// pagination
@@ -453,8 +453,8 @@ class ControllerCompanyPost extends Controller {
 		}
 		if ( isset( $this->request->post['category'] ) ) {
 			$this->data['category'] = $this->request->post['category'];
-		}elseif ( isset( $post ) ) {
-			$this->data['category'] = $post->getCategory()->getId();
+		// }elseif ( isset( $post ) ) {
+		// 	$this->data['category'] = $post->getCategory()->getId();
 		}else {
 			$this->data['category'] = '';
 		}
@@ -529,7 +529,7 @@ class ControllerCompanyPost extends Controller {
 			$this->error['error_author'] = $this->language->get( 'error_author' );
 		}
 
-		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) ) {
+		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
 			if ( !$this->model_company_post->isValidThumb( $this->request->files['thumb'] ) ) {
 				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
 			}
