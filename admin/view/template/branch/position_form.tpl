@@ -32,13 +32,22 @@
             <td><?php echo $entry_branch; ?></td>
             <td>
               <div><input class="autocomplete_branch" type="text" value="" /></div>
-              <ul>
+              <table class="table table-hover">
                 <?php $i = 0; ?>
                 <?php foreach ($branchs as $key => $branch) { ?>
-                  <li><input type="hidden" name="branchs[<?php echo $i; ?>][id]" value="<?php echo $branch['id']; ?>" /><input type="hidden" name="branchs[<?php echo $i; ?>][name]" value="<?php echo $branch['name']; ?>" /><span><?php echo $branch['name']; ?></span><a class="btn-remove-branch btn btn-danger"><i class="icon-trash"></i></a></li>
+                  <tr>
+                    <td>
+                      <input type="hidden" name="branchs[<?php echo $i; ?>][id]" value="<?php echo $branch['id']; ?>" />
+                      <input type="hidden" name="branchs[<?php echo $i; ?>][name]" value="<?php echo $branch['name']; ?>" />
+                      <span><?php echo $branch['name']; ?></span>
+                    </td>
+                    <td>
+                      <a class="btn-remove-branch btn btn-danger"><i class="icon-trash"></i></a>
+                    </td>
+                  </tr>
                   <?php $i++; ?>
                 <?php } ?>
-              </ul>
+              </table>
             </td>
           </tr>
           <tr>
