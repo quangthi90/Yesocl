@@ -48,5 +48,25 @@ class ControllerErrorNotFound extends Controller {
 		
 		$this->response->setOutput($this->render());
   	}
+
+  	public function test(){
+  		$mail = new Mail();
+
+  		$mail->protocol = 'smtp';
+  		$mail->hostname = 'ssl://smtp.gmail.com';
+  		$mail->username = 'bommerdesign@gmail.com';
+  		$mail->port = '465';
+  		$mail->password = '13081990';
+
+  		$mail->setFrom('admin@yesocl.com');
+  		$mail->setTo('quangthi_90@yahoo.com.vn');
+  		$mail->setSender('Bommer Luu');
+  		$mail->setSubject('Test send mail via Gmail');
+  		$mail->setText('Hello Bommer, how are u?');
+  		// print("hello"); exit;
+  		$mail->send();
+
+  		print("send mail success!"); exit;
+  	}
 }
 ?>
