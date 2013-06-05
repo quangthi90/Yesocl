@@ -278,6 +278,7 @@ class ControllerGroupGroup extends Controller {
 		$this->data['entry_website'] = $this->language->get( 'entry_website' );
 		$this->data['entry_type'] = $this->language->get( 'entry_type' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' );
@@ -356,6 +357,25 @@ class ControllerGroupGroup extends Controller {
 			$this->data['status'] = $group->getstatus();
 		}else {
 			$this->data['status'] = 1;
+		}
+
+		// Entry branch
+		$this->load->model( 'branch/branch' );
+		$branchs = $this->model_branch_branch->getAllBranchs();
+
+		foreach ( $branchs as $branch ) {
+			$this->data['branchs'][] = array(
+				'id'	=> $branch->getId(),
+				'name'	=> $branch->getName()
+			);
+		}
+
+		if ( isset($this->request->post['branch_id']) ){
+			$this->data['branch_id'] = $this->request->post['branch_id'];
+		}elseif ( isset($group) && $group->getBranch() ){
+			$this->data['branch_id'] = $group->getBranch()->getId();
+		}else {
+			$this->data['branch_id'] = 1;
 		}
 		
 		// Entry type

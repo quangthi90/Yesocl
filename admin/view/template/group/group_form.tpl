@@ -60,6 +60,14 @@
             <td><input class="input-xxlarge" type="text" name="website" value="<?php echo $website; ?>" /></td>
           </tr>
           <tr>
+            <td><?php echo $entry_branch; ?></td>
+            <td><select name="branch_id">
+                <?php foreach ( $branchs as $branch ){ ?>
+                <option <?php if ( $branch['id'] == $branch_id){ ?>selected="selected"<?php } ?> value="<?php echo $branch['id']; ?>"><?php echo $branch['name']; ?></option>
+                <?php } ?>
+              </select></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_type; ?></td>
             <td><select name="type">
                 <?php foreach ( $types as $type ){ ?>

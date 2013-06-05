@@ -55,6 +55,12 @@ class ModelGroupGroup extends Doctrine {
 		$group->setStatus( $data['status'] );
 		$group->setWebsite( $data['website'] );
 
+		// Branch
+		if ( isset( $data['branch_id'] ) ) {
+			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+			$group->setBranch( $branch );
+		}
+
 		$this->dm->persist( $group );
 		$this->dm->flush();
 	}
@@ -107,6 +113,12 @@ class ModelGroupGroup extends Doctrine {
 		
 		if ( !$group ){
 			return false;
+		}
+
+		// Branch
+		if ( isset( $data['branch_id'] ) ) {
+			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+			$group->setBranch( $branch );
 		}
 
 		$group->setAuthor( $user );

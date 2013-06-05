@@ -33,6 +33,9 @@ Class Group {
 
 	/** @MongoDB\EmbedMany(targetDocument="Post") */
 	private $posts = array();
+
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Branch", inversedBy="groups") */
+    private $branch;
 	
     /**
 	 * Get Post By ID
@@ -135,5 +138,13 @@ Class Group {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function setBranch( $branch ){
+		$this->branch = $branch;
+	}
+
+	public function getBranch(){
+		return $this->branch;
 	}
 }

@@ -97,6 +97,12 @@ class ModelBranchBranch extends Doctrine {
 		return $query->getQuery()->execute();
 	}
 
+	public function getAllBranchs(){
+		$query = $this->dm->getRepository('Document\Branch\Branch')->findAll();
+
+		return $query;
+	}
+
 	public function getTotalBranchs( $data = array() ) {
 		return count( $this->dm->getRepository( 'Document\Branch\Branch' )->findAll() );
 	}

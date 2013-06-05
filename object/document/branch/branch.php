@@ -18,6 +18,9 @@ Class Branch {
 	/** @MongoDB\Boolean */
 	private $status;
 
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="branch") */
+	private $groups = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -48,5 +51,17 @@ Class Branch {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function addGroup( \Document\Group\Group $group ){
+		$this->groups[] = $group;
+	}
+
+	public function setGroups( $groups ){
+		$this->groups = $groups;
+	}
+
+	public function getGroups(){
+		return $this->groups;
 	}
 }

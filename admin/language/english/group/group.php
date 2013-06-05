@@ -22,6 +22,7 @@ $_['entry_description']       = 'Description:';
 $_['entry_website']           = 'Website:';
 $_['entry_status']            = 'Status:';
 $_['entry_type']              = 'Type:';
+$_['entry_branch']            = 'Branch:';
 
 // error
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';
