@@ -84,25 +84,6 @@
     </div>
   </div>
 </div>
-<script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
-<script type="text/javascript"><!--
-CKEDITOR.replace('description', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
-});
-CKEDITOR.replace('sumary', {
-	filebrowserBrowseUrl: 'index.php?route=common/filemanager',
-	filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',
-	filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager',
-	filebrowserUploadUrl: 'index.php?route=common/filemanager',
-	filebrowserImageUploadUrl: 'index.php?route=common/filemanager',
-	filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
-});
-//--></script> 
 <script type="text/javascript"><!--//
 $('input[name=\'author\']').autocomplete({
 	delay: 0,
