@@ -38,10 +38,16 @@ class ControllerAccountLogin extends Controller {
 		$this->load->model('account/customer');
 	
     	$this->language->load('account/login');
+
+    	if ( $this->customer->isLogged() ){
+    		return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}
 								
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			unset($this->session->data['guest']);
-							
+
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok'
 	        )));

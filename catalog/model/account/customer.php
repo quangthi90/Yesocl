@@ -104,7 +104,22 @@ class ModelAccountCustomer extends Doctrine {
 	}
 
 	public function editPassword($email, $password) {
-      	$this->db->query("UPDATE " . DB_PREFIX . "customer SET password = '" . $this->db->escape(md5($password)) . "' WHERE email = '" . $this->db->escape($email) . "'");
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'emails.email' => $email
+		));
+
+		if ( !$user ){
+			return false;
+		}
+
+		$salt = $user->getSalt();
+		$password = sha1($salt . sha1($salt . sha1($password)));
+		
+		$user->setPassword( $password );
+
+		$this->dm->flush();
+
+		return true;
 	}
 
 	public function editNewsletter($newsletter) {
@@ -221,9 +236,11 @@ class ModelAccountCustomer extends Doctrine {
 	}
 		
 	public function getTotalCustomersByEmail($email) {
-		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "customer WHERE LOWER(email) = '" . $this->db->escape(strtolower($email)) . "'");
-		
-		return $query->row['total'];
+		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
+			'emails.email' => $email
+		));
+
+		return $query;
 	}
 	
 	public function getIps($customer_id) {

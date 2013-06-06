@@ -12,14 +12,14 @@
         <div class="frm-title">Remind password - <strong>YESOCL.com</strong>
         </div>
         <div class="frm-content">            
-            <form action="#">
+            <form action="{{ action }}" method="post">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-user"></i></span>
-                    <input class="span3" id="username" type="text" placeholder="Email">
+                    <input class="span3" id="username" name="email" type="text" placeholder="Email">
                     <div class="warning">Field is required</div>
                 </div>                
                 <div class="btns">
-                     <button class="btn btn-success">Reset password</button>   
+                     <button class="btn btn-success" type="submit">Reset password</button>   
                      <button class="btn">Cancel</button>  
                 </div>
             </form>     

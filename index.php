@@ -240,7 +240,7 @@ $controller->addPreAction(new Action('common/seo_url'));
 	
 // Router
 if ( $customer->isLogged() ) {
-	if (isset($request->get['route'])) {
+	if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
 		$action = new Action($request->get['route']);
 	} else {
 		$action = new Action('common/home');

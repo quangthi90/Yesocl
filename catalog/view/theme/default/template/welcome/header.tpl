@@ -33,7 +33,7 @@
                         <input required="required" name="password" type="password" placeholder="Password" class="span12 input-welcome" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
-                        <a href="#">Forgot password!</a>
+                        <a href="{{ action.forgot_pass }}">Forgot password!</a>
                     </div>
                 </div>
                 <div class="span2 button-login-welcome">

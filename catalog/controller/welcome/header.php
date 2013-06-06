@@ -12,7 +12,8 @@ class ControllerWelcomeHeader extends Controller {
 		$this->data['action'] = array(
 			'login' 		=> $this->url->link('account/login/login', '', 'SSL'),
 			'home'			=> $this->url->link('common/home', '', 'SSL'),
-			'login_page' 	=> $this->url->link('account/login', '', 'SSL')
+			'login_page' 	=> $this->url->link('account/login', '', 'SSL'),
+			'forgot_pass'	=> $this->url->link('account/forgotten', '', 'SSL')
 		);
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/header.tpl')) {

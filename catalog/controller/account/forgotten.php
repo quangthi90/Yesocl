@@ -20,30 +20,30 @@ class ControllerAccountForgotten extends Controller {
 			
 			$this->model_account_customer->editPassword($this->request->post['email'], $password);
 			
-			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+			$subject = sprintf($this->language->get('text_subject'), 'Admin');
 			
-			$message  = sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
+			$message  = sprintf($this->language->get('text_greeting'), 'Admin') . "\n\n";
 			$message .= $this->language->get('text_password') . "\n\n";
 			$message .= $password;
 
 			$mail = new Mail();
-			$mail->protocol = $this->config->get('config_mail_protocol');
-			$mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->hostname = $this->config->get('config_smtp_host');
-			$mail->username = $this->config->get('config_smtp_username');
-			$mail->password = $this->config->get('config_smtp_password');
-			$mail->port = $this->config->get('config_smtp_port');
-			$mail->timeout = $this->config->get('config_smtp_timeout');				
+			$mail->protocol = 'smtp';
+			// $mail->parameter = $this->config->get('config_mail_parameter');
+			$mail->hostname = 'ssl://smtp.gmail.com';
+			$mail->username = 'bommerdesign@gmail.com';
+			$mail->password = '13081990';
+			$mail->port = '465';
+			// $mail->timeout = $this->config->get('config_smtp_timeout');				
 			$mail->setTo($this->request->post['email']);
-			$mail->setFrom($this->config->get('config_email'));
-			$mail->setSender($this->config->get('config_name'));
+			$mail->setFrom('admin@yesocl.com');
+			$mail->setSender('Admin Yesocl');
 			$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('account/login', '', 'SSL'));
+			$this->redirect($this->url->link('welcome/home', '', 'SSL'));
 		}
 
       	$this->data['breadcrumbs'] = array();
