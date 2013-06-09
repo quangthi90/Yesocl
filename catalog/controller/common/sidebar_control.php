@@ -17,11 +17,12 @@ class ControllerCommonSidebarControl extends Controller {
 		);
 
 		$this->data['action'] = array(
-			'home' => $this->url->link('common/home', '', 'SSL'),
-			'account' => $this->url->link('account/account', '', 'SSL'),
-			'profile' => $this->url->link('account/edit', '', 'SSL'),
-			'categories' => $this->url->link('post/categories', '', 'SSL'),
-			'logout' => $this->url->link('account/logout', '', 'SSL')
+			'home' 			=> $this->url->link('common/home', '', 'SSL'),
+			'account' 		=> $this->url->link('account/account', '', 'SSL'),
+			'profile' 		=> $this->url->link('account/edit', '', 'SSL'),
+			'categories' 	=> $this->url->link('post/categories', '', 'SSL'),
+			'logout' 		=> $this->url->link('account/logout', '', 'SSL'),
+			'password' 		=> $this->url->link('account/password', '', 'SSL')
 		);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {

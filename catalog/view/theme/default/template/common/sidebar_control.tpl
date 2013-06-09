@@ -18,7 +18,7 @@
 			    </div>
 			    <ul class="dropdown-menu">
 			      <li><a href="#">Privacy settings</a></li>
-			      <li><a href="#">Edit profile</a></li>
+			      <li><a href="{{ action.password }}">Change password</a></li>
 			      <li class="divider"></li>
 			      <li><a href="{{ action.logout }}">Log out</a></li>				      
 			    </ul>

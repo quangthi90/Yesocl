@@ -20,10 +20,10 @@ class ControllerAccountPassword extends Controller {
  
       		$this->session->data['success'] = $this->language->get('text_success');
 	  
-	  		$this->redirect($this->url->link('account/account', '', 'SSL'));
+	  		$this->redirect($this->url->link('account/password', '', 'SSL'));
     	}
 
-      	$this->data['breadcrumbs'] = array();
+      	/*$this->data['breadcrumbs'] = array();
 
       	$this->data['breadcrumbs'][] = array(
         	'text'      => $this->language->get('text_home'),
@@ -41,7 +41,7 @@ class ControllerAccountPassword extends Controller {
         	'text'      => $this->language->get('heading_title'),
 			'href'      => $this->url->link('account/password', '', 'SSL'),
         	'separator' => $this->language->get('text_separator')
-      	);
+      	);*/
 			
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
@@ -51,21 +51,18 @@ class ControllerAccountPassword extends Controller {
     	$this->data['entry_confirm'] = $this->language->get('entry_confirm');
 
     	$this->data['button_continue'] = $this->language->get('button_continue');
-    	$this->data['button_back'] = $this->language->get('button_back');
-    	
-		if (isset($this->error['password'])) { 
-			$this->data['error_password'] = $this->error['password'];
-		} else {
-			$this->data['error_password'] = '';
-		}
 
-		if (isset($this->error['confirm'])) { 
-			$this->data['error_confirm'] = $this->error['confirm'];
-		} else {
-			$this->data['error_confirm'] = '';
+    	if (isset($this->session->data['success'])){
+    		$this->data['success'] = $this->session->data['success'];
+    		unset($this->session->data['success']);
+    	}elseif (isset($this->error['password'])) { 
+			$this->data['warning'] = $this->error['password'];
+		} elseif (isset($this->error['confirm'])) { 
+			$this->data['warning'] = $this->error['confirm'];
 		}
 	
-    	$this->data['action'] = $this->url->link('account/password', '', 'SSL');
+    	$this->data['action']['password'] = $this->url->link('account/password', '', 'SSL');
+    	$this->data['action']['home'] = $this->url->link('common/home', '', 'SSL');
 		
 		if (isset($this->request->post['password'])) {
     		$this->data['password'] = $this->request->post['password'];
@@ -78,8 +75,6 @@ class ControllerAccountPassword extends Controller {
 		} else {
 			$this->data['confirm'] = '';
 		}
-
-    	$this->data['back'] = $this->url->link('account/account', '', 'SSL');
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/password.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/password.tpl';
@@ -103,7 +98,7 @@ class ControllerAccountPassword extends Controller {
 
     	if ($this->request->post['confirm'] != $this->request->post['password']) {
       		$this->error['confirm'] = $this->language->get('error_confirm');
-    	}  
+    	}
 	
 		if (!$this->error) {
 	  		return true;
