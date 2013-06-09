@@ -55,10 +55,8 @@ class ControllerAccountPassword extends Controller {
     	if (isset($this->session->data['success'])){
     		$this->data['success'] = $this->session->data['success'];
     		unset($this->session->data['success']);
-    	}elseif (isset($this->error['password'])) { 
-			$this->data['warning'] = $this->error['password'];
-		} elseif (isset($this->error['confirm'])) { 
-			$this->data['warning'] = $this->error['confirm'];
+    	}elseif (isset($this->error['warning'])) { 
+			$this->data['warning'] = $this->error['warning'];
 		}
 	
     	$this->data['action']['password'] = $this->url->link('account/password', '', 'SSL');
@@ -93,11 +91,9 @@ class ControllerAccountPassword extends Controller {
   
   	private function validate() {
     	if ((utf8_strlen($this->request->post['password']) < 4) || (utf8_strlen($this->request->post['password']) > 20)) {
-      		$this->error['password'] = $this->language->get('error_password');
-    	}
-
-    	if ($this->request->post['confirm'] != $this->request->post['password']) {
-      		$this->error['confirm'] = $this->language->get('error_confirm');
+      		$this->error['warning'] = $this->language->get('error_password');
+    	}elseif ($this->request->post['confirm'] != $this->request->post['password']) {
+      		$this->error['warning'] = $this->language->get('error_confirm');
     	}
 	
 		if (!$this->error) {
