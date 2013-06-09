@@ -240,7 +240,7 @@ class ModelAccountCustomer extends Doctrine {
 			'emails.email' => $email
 		));
 
-		return $query;
+		return $query->count();
 	}
 	
 	public function getIps($customer_id) {
