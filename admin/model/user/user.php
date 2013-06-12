@@ -337,7 +337,7 @@ class ModelUserUser extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateCacheUser( $user );
+		$this->model_tool_cache->setUser( $user );
 		
 		return true;
 	}
@@ -695,9 +695,6 @@ class ModelUserUser extends Doctrine {
 		$this->dm->persist( $user );
 		$this->dm->flush();
 
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateCacheUser( $user );
-
 		return true;
 	}
 
@@ -720,7 +717,7 @@ class ModelUserUser extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateCacheUser( $user );
+		$this->model_tool_cache->setUser( $user );
 
 		return true;
 	}
