@@ -19,68 +19,105 @@ function getURLVar(urlVarName) {
 	return urlVarValue;
 } 
 
-var feedSet;
-//Script Yesocl:
-jQuery.fn.makeScroll = function () {
-
-	 //Put feeds:
-	 putFeeds();
-	 //Scroll:
-	$(this).niceScroll();	
-
-	//Windows resize:
-	$(window).resize(function() {
-		 putFeeds();		
-	});
-}
-
 jQuery.fn.makeScrollWithoutCalResize = function() {
 	$(this).niceScroll();	
 }
 
-function putFeeds () {		
-	var listColumns = $('.has-horizontal').first();
-	if(typeof listColumns == "undefined" || listColumns.length == 0){
-		return;
-	}
+jQuery.fn.makeContentHorizontalScroll = function() {
+	$('#y-content').niceScroll();	
+}
 
-	feedSet = $('.feed'); 
-	var heightMain = $('#y-main-content').height();		
+function HorizontalBlock(el) {
+
+	this.root = el;
+	this.blocks = el.find('.feed-block');	
+
+	this.initializeBlock();
+}
+HorizontalBlock.prototype.initializeBlock = function() {
+	var widthTotal = 0;
+	this.blocks.each(function(index) {
+		var block = new BlockFeed($(this), index);
+		block.putFeeds();
+		widthTotal += block.actualWidth + 37;
+	});
+	this.root.width(widthTotal);
+	
+	this.root.makeContentHorizontalScroll();
+	this.resizeBlock();
+}
+
+HorizontalBlock.prototype.resizeBlock = function() {
+	var that = this;
+	$(window).resize(function() {
+    if(this.resizeTO) 
+    	clearTimeout(this.resizeTO);
+	    this.resizeTO = setTimeout(function() {
+	        $(this).trigger('resizeEnd');
+	    }, 1000);
+	});
+
+	$(window).bind('resizeEnd', function() {
+		//that.initializeBlock();
+		var widthTotal = 0; 
+		that.blocks.each(function(index) { 
+			var block = new BlockFeed($(this), index);
+			block.putFeeds();
+			widthTotal += block.actualWidth + 37;
+		});
+		that.root.width(widthTotal);
+		that.root.makeContentHorizontalScroll();
+		that.resizeBlock();
+	});
+
+}
+
+function BlockFeed(el, id) { 
+	this.block = el;
+	this.blockContent = el.find('.block-content'); 
+	this.feeds = el.find('.feed');
+	this.actualWidth = el.outerWidth();
+	this.height = el.height();
+	this.index = id;
+}
+
+BlockFeed.prototype.putFeeds = function() { 
+	var feedTem = this.blockContent.find('.column');
 	var width=0, height=0, totalHeight = 0, totalWidth=0,columnIndex=0, columnId, newColoumn;
-
-	//Remove all columns:
-	$('#y-main-content .column').remove(); 
-
-	for (var i = 0; i < feedSet.length; i++) {
-		width = $(feedSet[i]).outerWidth();
-		height = $(feedSet[i]).outerHeight() + parseInt($(feedSet[i]).css('margin-bottom'));
+	var that = this.blockContent; 
+	var max_height = this.height; 
+	var id = this.index; 		
+	this.feeds.each(function() {
+		var feed = $(this);     
+		width = feed.outerWidth();
+		height = feed.outerHeight() + 20; console.log('Feed: ' + id + ' -' + width + ' - ' + height);
 		if(totalHeight == 0){
-			columnId = 'column-' + columnIndex;
+			columnId = 'column-' + id + '-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
 			newColoumn.width(width);
 			newColoumn.height('100%');
 			newColoumn.css('float','left');
-			newColoumn.css('margin-right','25px');
-			listColumns.append(newColoumn);
+			newColoumn.css('margin-right','25px'); 
+			that.append(newColoumn);
 			totalWidth += width + 27;
 		}
-		if(totalHeight + height >= heightMain) {
+		if(totalHeight + height >= max_height) {
 			columnIndex ++;
 			totalHeight = height;
-			columnId = 'column-' + columnIndex;
+			columnId = 'column-' + id + '-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
 			newColoumn.width(width);
 			newColoumn.height('100%');
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px');
-			listColumns.append(newColoumn);
+			that.append(newColoumn);
 			totalWidth += width + 27;
-			$('#' + columnId).append(feedSet[i]);
+			$('#' + columnId).append(feed);
 		}else{
 			totalHeight += height;			
-			$('#' + columnId).append(feedSet[i]);
+			$('#' + columnId).append(feed);
 		}
-	}
-
-	$('.has-horizontal').width(totalWidth + 330);
+	});
+	this.actualWidth = totalWidth;
+	this.block.width(totalWidth);
 }
