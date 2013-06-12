@@ -11,26 +11,21 @@
   <div id="y-main-content">
     <div class="y-frm" id="y-frm-password">
         <div class="frm-title"> Change password</div>
+        <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
+        <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            
-            <form action="#">
-                <div class="input-prepend">
-                    <span class="add-on"><i class="icon-lock icon-2x"></i> Old</span>
-                    <input class="span3" id="current-password" type="text" placeholder="Old password">
-                    <div class="yes-warning">Required</div>
-                </div>
+            <form action="{{ action.password }}" method="post">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-lock icon-2x"></i> New</span>
-                    <input class="span3" id="new-password" type="text" placeholder="New password">
-                    <div class="yes-warning"></div>
+                    <input name="password" class="span3" id="new-password" type="password" placeholder="New password">
                 </div>
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-lock icon-2x"></i>Re-New</span>
-                    <input class="span3" id="re-new-password" type="text" placeholder="Re-type new password">
-                    <div class="yes-warning"></div>
+                    <input name="confirm" class="span3" id="re-new-password" type="password" placeholder="Re-type new password">
                 </div>         
                 <div class="btns">
-                     <button class="btn btn-success">Change</button>   
-                     <button class="btn">Cancel</button>   
+                     <button type="submit" class="btn btn-success">Change</button>   
+                     <a class="btn" href="{{ action.home }}">Cancel</a>   
                 </div>
             </form>     
         </div>

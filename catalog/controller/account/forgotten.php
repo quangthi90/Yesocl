@@ -43,7 +43,7 @@ class ControllerAccountForgotten extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('welcome/home', '', 'SSL'));
+			$this->redirect($this->url->link('account/forgotten', '', 'SSL'));
 		}
 
       	$this->data['breadcrumbs'] = array();
@@ -76,15 +76,15 @@ class ControllerAccountForgotten extends Controller {
 		$this->data['button_continue'] = $this->language->get('button_continue');
 		$this->data['button_back'] = $this->language->get('button_back');
 
-		if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
-		} else {
-			$this->data['error_warning'] = '';
+		if (isset($this->session->data['success'])){
+			$this->data['success'] = $this->session->data['success'];
+			unset($this->session->data['success']);
+		}elseif (isset($this->error['warning'])) {
+			$this->data['warning'] = $this->error['warning'];
 		}
 		
-		$this->data['action'] = $this->url->link('account/forgotten', '', 'SSL');
- 
-		$this->data['back'] = $this->url->link('account/login', '', 'SSL');
+		$this->data['action']['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
+		$this->data['action']['home'] = $this->url->link('welcome/home', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/forgotten.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/forgotten.tpl';
@@ -103,7 +103,7 @@ class ControllerAccountForgotten extends Controller {
 	private function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
-		} elseif (!$this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
+		} elseif ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email']) == 0) {
 			$this->error['warning'] = $this->language->get('error_email');
 		}
 
