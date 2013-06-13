@@ -50,24 +50,15 @@ HorizontalBlock.prototype.initializeBlock = function() {
 HorizontalBlock.prototype.resizeBlock = function() {
 	var that = this;
 	$(window).resize(function() {
-    if(this.resizeTO) 
-    	clearTimeout(this.resizeTO);
+	    if(this.resizeTO) 
+	    	clearTimeout(this.resizeTO);
 	    this.resizeTO = setTimeout(function() {
 	        $(this).trigger('resizeEnd');
 	    }, 1000);
 	});
 
 	$(window).bind('resizeEnd', function() {
-		//that.initializeBlock();
-		var widthTotal = 0; 
-		that.blocks.each(function(index) { 
-			var block = new BlockFeed($(this), index);
-			block.putFeeds();
-			widthTotal += block.actualWidth + 37;
-		});
-		that.root.width(widthTotal);
-		that.root.makeContentHorizontalScroll();
-		that.resizeBlock();
+		//that.initializeBlock();		
 	});
 
 }
@@ -82,7 +73,7 @@ function BlockFeed(el, id) {
 }
 
 BlockFeed.prototype.putFeeds = function() { 
-	var feedTem = this.blockContent.find('.column');
+	this.blockContent.find('.column').addClass('column-backup');
 	var width=0, height=0, totalHeight = 0, totalWidth=0,columnIndex=0, columnId, newColoumn;
 	var that = this.blockContent; 
 	var max_height = this.height - 60; 
@@ -90,7 +81,10 @@ BlockFeed.prototype.putFeeds = function() {
 	this.feeds.each(function() {
 		var feed = $(this);     
 		width = feed.outerWidth();
-		height = feed.outerHeight() + 20; //console.log('Feed: ' + id + ' -' + width + ' - ' + height);
+		height = feed.outerHeight() + 20;
+		feed.attr('data-width', width);	
+		feed.attr('data-height', height); 
+		
 		if(totalHeight == 0){
 			columnId = 'column-' + id + '-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
