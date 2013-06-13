@@ -42,7 +42,49 @@
 	margin-right: 35px;
 }
 
+.feed-block .block-header {
+	overflow: hidden;
+	padding: 3px 10px;
+	background: #60A63B;
+	margin-bottom: 10px;
+}
+
+.feed-block .block-header  a {
+	display: block;
+	color: #fff;
+	font-weight: bold;
+}
+
+.feed-block .block-header  a  i {
+	color: #fff;
+}
+
+.feed-block .block-header  a:hover  i  {
+	color: #fff;
+}
+
 .feed-block .block-content {
 	overflow: hidden;
 	height: 100%;
+}
+
+.category .block-content .post {
+	width: 300px;
+}
+
+.category .block-content .post .post_header{
+	padding: 2px 3px;
+}
+
+.category .block-content .post .post_body {
+	max-height: 200px;
+	overflow: hidden;
+}
+
+.category .block-content .post .post_header .post_user a {
+	font-size: 12px;
+}
+
+.category .block-content .post .post_body img {
+	width: 100%;
 }

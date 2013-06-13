@@ -85,17 +85,17 @@ BlockFeed.prototype.putFeeds = function() {
 	var feedTem = this.blockContent.find('.column');
 	var width=0, height=0, totalHeight = 0, totalWidth=0,columnIndex=0, columnId, newColoumn;
 	var that = this.blockContent; 
-	var max_height = this.height; 
+	var max_height = this.height - 60; 
 	var id = this.index; 		
 	this.feeds.each(function() {
 		var feed = $(this);     
 		width = feed.outerWidth();
-		height = feed.outerHeight() + 20; console.log('Feed: ' + id + ' -' + width + ' - ' + height);
+		height = feed.outerHeight() + 20; //console.log('Feed: ' + id + ' -' + width + ' - ' + height);
 		if(totalHeight == 0){
 			columnId = 'column-' + id + '-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
 			newColoumn.width(width);
-			newColoumn.height('100%');
+			newColoumn.height(max_height);
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px'); 
 			that.append(newColoumn);
@@ -107,7 +107,7 @@ BlockFeed.prototype.putFeeds = function() {
 			columnId = 'column-' + id + '-' + columnIndex;
 			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
 			newColoumn.width(width);
-			newColoumn.height('100%');
+			newColoumn.height(max_height);
 			newColoumn.css('float','left');
 			newColoumn.css('margin-right','25px');
 			that.append(newColoumn);
