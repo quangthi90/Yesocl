@@ -17,20 +17,14 @@
 			</div>
             <div class="span7">
                 <div class="category-list fr">
-                    <a href="#" class="btn-category-link">
-                        Category 1
+                    <a href="#block-abc" class="btn-category-link">
+                        ABC
                     </a>
-                    <a href="#" class="btn-category-link">
-                        Category 2
+                    <a href="#block-def" class="btn-category-link">
+                        DEF
                     </a>
-                    <a href="#" class="btn-category-link">
-                        Category 3
-                    </a>
-                    <a href="#" class="btn-category-link">
-                        Category 4
-                    </a>
-                    <a href="#" class="btn-category-link">
-                        Category 5
+                    <a href="#block-ghi" class="btn-category-link">
+                        GHI
                     </a>
                 </div>                
             </div>
@@ -42,7 +36,7 @@
 		</div>
 	</div>
     <div id="y-main-content" class="has-horizontal">
-        <div class="feed-block category">
+        <div class="feed-block category" id="block-abc">
             <div class="block-header">
                 <a class="fl" href="#">ABC</a>
                 <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
@@ -98,15 +92,7 @@
                             <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
                         </div>
                     </div>
-                </div>  
-            </div>
-        </div> 
-        <div class="feed-block category">
-            <div class="block-header">
-                <a class="fl" href="#">CDE</a>
-                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
-            </div>
-            <div class="block-content">
+                </div> 
                 <div class="post feed">
                     <div class="post_header">
                         <div class="row-fluid">
@@ -122,7 +108,34 @@
                         </h6>
                     </div>
                     <div class="post_body">
-                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466 ...
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
+                        HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, 
                     </div>
                     <div class="row-fluid post_footer">
                         <div class="span12 post_action">
@@ -146,7 +159,33 @@
                         </h6>
                     </div>
                     <div class="post_body">
-                        <a href="#" class="post_img">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
                             <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
                         </a>
                     </div>
@@ -159,9 +198,9 @@
                 </div>  
             </div>
         </div>
-        <div class="feed-block category">
+        <div class="feed-block category" id="block-def">
             <div class="block-header">
-                <a class="fl" href="#">EDF</a>
+                <a class="fl" href="#">DEF</a>
                 <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
             </div>
             <div class="block-content">
@@ -180,7 +219,8 @@
                         </h6>
                     </div>
                     <div class="post_body">
-                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446
+                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
+                        HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, 
                     </div>
                     <div class="row-fluid post_footer">
                         <div class="span12 post_action">
@@ -204,7 +244,7 @@
                         </h6>
                     </div>
                     <div class="post_body">
-                        <a href="#" class="post_img">
+                        <a href="#"  class="post_img">
                             <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
                         </a>
                     </div>
@@ -214,7 +254,272 @@
                             <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
                         </div>
                     </div>
-                </div>                                                                
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
+                        HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, 
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div> 
+        <div class="feed-block category" id="block-ghi">
+            <div class="block-header">
+                <a class="fl" href="#">GHI</a>
+                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="block-content">
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
+                        HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, 
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
+                        HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, 
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div> 
+                <div class="post feed">
+                    <div class="post_header">
+                        <div class="row-fluid">
+                            <div class="span8 post_user">
+                                <a href="#">Username</a>
+                            </div>
+                            <div class="span4 post_time">
+                                <i class="icon-time icon-2x"></i>1 minute ago
+                            </div>
+                        </div>
+                        <h6 class="post_title">
+                            <a href="#">Title of this post</a>
+                        </h6>
+                    </div>
+                    <div class="post_body">
+                        <a href="#"  class="post_img">
+                            <img src="http://yestoc.com/wp-content/uploads/2013/06/images.jpg" width="290px" height="193px" alt="Title of this post">
+                        </a>
+                    </div>
+                    <div class="row-fluid post_footer">
+                        <div class="span12 post_action">
+                            <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
+                            <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
+                        </div>
+                    </div>
+                </div>  
             </div>
         </div>  
 	</div>
@@ -225,6 +530,14 @@
 <script type="text/javascript">
 	$(window).load(function(){
         new HorizontalBlock($('.has-horizontal'));  
+    });
+    $(document).ready(function() {
+        $('.btn-category-link').click(function(e){  
+            var currentElement = $($(this).attr('href')); 
+            var scrollDiv = $('#y-content');            
+            scrollDiv.stop().animate({ scrollLeft: $(currentElement).offset().left - 180}, 2000);
+            return false;
+        });
     });
 </script>
 {% endblock %}
