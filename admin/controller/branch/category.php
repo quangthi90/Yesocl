@@ -4,8 +4,8 @@ class ControllerBranchCategory extends Controller {
 	private $limit = 10;
 	private $route = 'branch/category';
  
-	public function index(){exit;
-		if ( !$this->user->hasPermission($this->route, $this->config->get('category_view')) ) {
+	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
 		}
 
@@ -18,7 +18,7 @@ class ControllerBranchCategory extends Controller {
 	}
 
 	public function insert(){
-		if ( !$this->user->hasPermission($this->route, $this->config->get('category_insert')) ) {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
 			return $this->forward('error/permission');
 		}
 
@@ -41,7 +41,7 @@ class ControllerBranchCategory extends Controller {
 	}
 
 	public function update(){
-		if ( !$this->user->hasPermission($this->route, $this->config->get('category_edit')) ) {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
 		
@@ -62,7 +62,7 @@ class ControllerBranchCategory extends Controller {
 	}
  
 	public function delete(){
-		if ( !$this->user->hasPermission($this->route, $this->config->get('category_delete')) ) {
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
 			return $this->forward('error/permission');
 		}
 		
