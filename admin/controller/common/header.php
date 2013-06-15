@@ -48,6 +48,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_branchs'] = $this->language->get('text_branchs');
 		$this->data['text_branch'] = $this->language->get('text_branch');
 		$this->data['text_position'] = $this->language->get('text_position');
+		$this->data['text_category'] = $this->language->get('text_category');
 		
 		// Attribute
 		$this->data['text_attributes'] = $this->language->get('text_attributes');
@@ -122,6 +123,7 @@ class ControllerCommonHeader extends Controller {
 			// Branch
 			$this->data['branch'] = $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['branch_position'] = $this->url->link('branch/position', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['branch_category'] = $this->url->link('branch/category', 'token=' . $this->session->data['token'], 'SSL');
 
 			// system
 			$this->data['admin_group'] = $this->url->link('admin/group', 'token=' . $this->session->data['token'], 'SSL');

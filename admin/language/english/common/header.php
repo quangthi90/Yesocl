@@ -25,6 +25,7 @@ $_['text_company_post_category']        = 'Post Category';
 $_['text_branchs']                    	= 'Branchs';
 $_['text_branch']                      	= 'Branch';
 $_['text_position']              		= 'Position';
+$_['text_category']              		= 'Category';
 
 // Attribute
 $_['text_attributes']                  = 'Attributes Manage';
