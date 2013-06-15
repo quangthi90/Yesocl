@@ -252,6 +252,21 @@ ul.dropdown-menu li.divider {
   margin: 1px 0px;
 }
 
+.dropdown-menu > li > a {
+  text-align: left;
+  font-size: 12px;
+  padding: 3px 10px;
+}
+
+.dropdown-menu > li > a > i {
+    margin-right: 5px;
+    color: #6CB13C;
+}
+
+.dropdown-menu > li > a:hover > i{
+    color: #fff;
+}
+
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
@@ -265,7 +280,7 @@ ul.dropdown-menu li.divider {
   background: -o-linear-gradient(top,  #6CB13C 0%,#6CB13C 100%); /* Opera 11.10+ */
   background: -ms-linear-gradient(top,  #6CB13C 0%,#6CB13C 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #6CB13C 0%,#6CB13C 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6CB13C', endColorstr='#6CB13C',GradientType=0 ); /* IE6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6CB13C', endColorstr='#6CB13C',GradientType=0 ); /* IE6-9 */  
 }
 
 #overlay 
@@ -451,17 +466,21 @@ label.in-line{
 					}
 
           .sidebar-user-name .user-can-do {
-            display: none;
-            float: right;
-          }
-
-          .sidebar-user-name:hover .user-can-do {
             display: block;
+            float: right;
           }
 
           .sidebar-user-name .user-can-do a {
             display: block;
-            padding: 10px 5px;
+            padding: 0px 4px;
+          }
+
+          .sidebar-user-name .user-can-do a i {
+            color: #fff;
+          }
+
+          .sidebar-user-name .user-can-do a i:hover {
+            color: #000;
           }
 
 		#y-sidebar .sidebar-border-right .sidebar-welcome{

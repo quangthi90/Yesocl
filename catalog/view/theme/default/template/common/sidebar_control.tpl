@@ -14,13 +14,13 @@
 			      {{ user_info.username }}			      
 			    </a>
 			    <div class="user-can-do dropdown-toggle" data-toggle="dropdown">
-			    	<a href="#"><i class="caret icon-2x"></i></a>
+			    	<a href="#"><i class="icon-level-down icon-2x"></i></a>
 			    </div>
 			    <ul class="dropdown-menu">
-			      <li><a href="#">Privacy settings</a></li>
-			      <li><a href="{{ action.password }}">Change password</a></li>
+			      <li><a href="#"><i class="icon-cogs"></i> Privacy settings</a></li>
+			      <li><a href="{{ action.password }}"><i class="icon-unlock-alt"></i> Change password</a></li>
 			      <li class="divider"></li>
-			      <li><a href="{{ action.logout }}">Log out</a></li>				      
+			      <li><a href="{{ action.logout }}"><i class="icon-signout"></i> Log out</a></li>				      
 			    </ul>
 			</div>
 		</div>			
