@@ -129,9 +129,10 @@ class ControllerBranchCategory extends Controller {
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
 		$this->data['text_category'] = $this->language->get( 'text_category' );
 		$this->data['column_name'] = $this->language->get( 'column_name' );	
-		$this->data['column_code'] = $this->language->get( 'column_code' );
+		$this->data['column_parent'] = $this->language->get( 'column_parent' );
 		$this->data['column_order'] = $this->language->get( 'column_order' );
 		$this->data['column_category'] = $this->language->get( 'column_category' );
+		$this->data['column_action'] = $this->language->get( 'column_action' );
 		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
