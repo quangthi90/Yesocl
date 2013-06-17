@@ -1,10 +1,10 @@
 <?php
-use Document\Design\Action,
-	Document\Design\Layout,
+use Document\Branch\Category,
+	Document\Branch\Layout,
 	Document\Setting\Config;
 
-class ModelDesignAction extends Doctrine {
-	public function addAction( $data = array() ) {
+class ModelBranchCategory extends Doctrine {
+	public function addCategory( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
@@ -15,84 +15,84 @@ class ModelDesignAction extends Doctrine {
 		}
 		$data['code'] = strtolower(trim($data['code']));
 		
-		$action = new Action();
-		$action->setName( $data['name'] );
-		$action->setCode( $data['code'] );
+		$category = new Category();
+		$category->setName( $data['name'] );
+		$category->setCode( $data['code'] );
 		if ( isset($data['order']) && !empty($data['order']) ){
-			$action->setOrder( $data['order'] );
+			$category->setOrder( $data['order'] );
 		}
 
 		$config = new Config();
-		$this->config->load( 'action' );
+		$this->config->load( 'Category' );
 		$config->setKey( $this->config->get( 'action_title' ) . $data['code'] );
 		$config->setValue( $data['code'] );
 		$this->dm->persist( $config );		
 
-		$this->dm->persist( $action );
+		$this->dm->persist( $category );
 		$this->dm->flush();
 	}
 
-	public function editAction( $id, $data = array() ) {
+	public function editCategory( $id, $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
 		
-		$action = $this->dm->getRepository('Document\Design\Action')->find( $id );
+		$category = $this->dm->getRepository('Document\Branch\Category')->find( $id );
 		
-		if ( !$action ){
+		if ( !$category ){
 			return false;
 		}
 
-		$action->setName( $data['name'] ); 
+		$category->setName( $data['name'] ); 
 		if ( isset($data['order']) && !empty($data['order']) ){
-			$action->setOrder( $data['order'] );
+			$category->setOrder( $data['order'] );
 		}
 
 		$this->dm->flush();
 	}
 
-	public function deleteAction( $data = array() ) {
+	public function deleteCategory( $data = array() ) {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
-				$action = $this->dm->getRepository( 'Document\Design\Action' )->find( $id );
+				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
 				
-				// if action = 'view' ==> not del
-				if ( $action->getCode() == $this->config->get('action_view') ){
+				// if Category = 'view' ==> not del
+				if ( $category->getCode() == $this->config->get('action_view') ){
 					continue;
 				}
 
-				$layouts = $this->dm->getRepository( 'Document\Design\Layout' )->findBy( array('actions.id' => $id) );
+				$layouts = $this->dm->getRepository( 'Document\Branch\Layout' )->findBy( array('Categorys.id' => $id) );
 				foreach ( $layouts as $layout ) {
-					$layout->removeAction( $id );
+					$layout->removeCategory( $id );
 				}
 
-				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permissions.actions.id' => $id) );
+				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permissions.Categorys.id' => $id) );
 				foreach ( $groups as $group ) {
-					$permissions = $group->getPermissionByActionId( $id );
+					$permissions = $group->getPermissionByCategoryId( $id );
 					foreach ( $permissions as $permission ) {
 						$group->getPermissions()->removeElement( $permission );
 					}
 				}
 
-				$config = $this->dm->getRepository('Document\Setting\Config')->findOneByKey( $this->config->get( 'action_title' ) . $action->getCode() );
+				$config = $this->dm->getRepository('Document\Setting\Config')->findOneByKey( $this->config->get( 'action_title' ) . $category->getCode() );
 				if ( $config ){
 					$this->dm->remove( $config );
 				}
 
-				$this->dm->remove( $action );
+				$this->dm->remove( $category );
 			}
 		}
 		
 		$this->dm->flush();
 	}
 	
-	public function getAction( $action_id ) {
-		$action = $this->dm->getRepository( 'Document\Design\Action' )->find( $action_id );
-		return $action;
+	public function getCategory( $action_id ) {
+		$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $action_id );
+		return $category;
 	}
 
-	public function getActions( $data = array() ) {
+	public function getCategorys( $data = array() ) {
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
 		}
@@ -100,7 +100,7 @@ class ModelDesignAction extends Doctrine {
 			$data['start'] = 0;
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )
+		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )
     		->limit( $data['limit'] )
     		->skip( $data['start'] )
     		->sort( 'order' );
@@ -108,22 +108,22 @@ class ModelDesignAction extends Doctrine {
     	return $query->getQuery()->execute();
 	}
 
-	public function getAllActions() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )->sort( 'order' );
+	public function getAllCategorys() {
+		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )->sort( 'order' );
     		
     	return $query->getQuery()->execute();
 	}
 	
-	public function getTotalActions() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' );
+	public function getTotalCategorys() {
+		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' );
 
-		$actions = $query->getQuery()->execute();
+		$categorys = $query->getQuery()->execute();
 
-		return count($actions);
+		return count($categorys);
 	}
 
-	public function getActionByCode( $code ){
-		return $this->dm->getRepository( 'Document\Design\Action' )->findBy( array('code' => $code) );
+	public function getCategoryByCode( $code ){
+		return $this->dm->getRepository( 'Document\Branch\Category' )->findBy( array('code' => $code) );
 	}
 }
 ?>
