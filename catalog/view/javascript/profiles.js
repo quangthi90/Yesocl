@@ -1,13 +1,8 @@
 function Profiles($element) {
 	this.self = $element;
-	this.beforeCreate();
 	this.information = new ProfilesTabsInformation($element.find('#profiles-tabs-information'), $element.height()*9/10);
 	this.background = new ProfilesTabsBackground($element.find('#profiles-tabs-background'), this.information.self.width(), $element.height()*9/10);
 	this.afterCreate();
-}
-
-Profiles.prototype.beforeCreate = function () {
-	//this.self.niceScroll();
 }
 
 Profiles.prototype.afterCreate = function () {
