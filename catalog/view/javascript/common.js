@@ -194,3 +194,39 @@ BlockFeed.prototype.putFeeds = function() {
 	this.actualWidth = totalWidth;
 	this.block.width(totalWidth);
 }
+
+function FlexibleElement(el) {
+	this.sidebar = el.find('#y-sidebar');
+	this.header = el.find('#y-header');
+	this.main = el.find('#y-content');
+	this.closeSidebar = this.sidebar.find('#close-bottom-sidebar');
+	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
+	this.attachEvents();
+}
+
+FlexibleElement.prototype.attachEvents = function() { 
+	var sb = this.sidebar;
+	var hd = this.header;
+	var m = this.main;
+	var os = this.openSidebar;
+	this.closeSidebar.show();
+	this.openSidebar.hide();
+
+	this.closeSidebar.click(function(e) {
+		e.preventDefault();
+		hd.animate({"left": "0px"},  200);
+		m.animate({"left": "0px"}, 200, function() {
+			sb.animate({"left": "-300px"}, 500, function(){
+				os.show();		
+			});	
+		});		
+	});
+	this.openSidebar.click(function(e) {
+		e.preventDefault();
+		$(this).hide();	
+		sb.animate({"left": "0px"}, 200, function() {
+			hd.animate({"left": "152px"}, 500);
+			m.animate({"left": "152px"}, 500); 	
+		});		
+	});
+}

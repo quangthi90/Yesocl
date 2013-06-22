@@ -45,8 +45,11 @@
 {% block javascript %}
 <script type="text/javascript">
 	$(window).load(function(){
-        new HorizontalBlock($('.has-horizontal'));  
+        new HorizontalBlock($('.has-horizontal'));          
     });	
+    $(document).ready(function() {
+    	new FlexibleElement($(this));	
+    });
 </script>
 {{ block('post_common_post_comment_javascript') }}
 {% endblock %}

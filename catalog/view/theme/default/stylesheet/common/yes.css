@@ -380,11 +380,18 @@ label.in-line{
     position: fixed;
     top: 0px;
     bottom: 40px;
-    z-index: 1;
+    z-index: 10;
     color: #fff;
     text-align: center;     
     border-right: 2px solid #001000;
 }
+  
+  #y-sidebar .sidebar-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
     #y-sidebar .sidebar-border-right{
 		border-right: 1px solid #032d03;
 	}
@@ -688,6 +695,7 @@ label.in-line{
 /*NAV SIDEBAR*/
 .sidebar-controls {
   color: #fff;
+  position: relative;
 }
 
 .sidebar-controls .nav-list > li {
@@ -996,4 +1004,47 @@ label.in-line{
 .feed-block .block-content {
   overflow: hidden;
   height: 100%;
+}
+
+/*Close*/
+.btn-container {
+  position: absolute;  
+}
+
+.btn-container a {
+  display: block;
+}
+
+.btn-container a  i{
+  color: #fff;
+}
+
+.btn-container a:hover  i{
+  color: #66c666;
+}
+
+#y-sidebar #close-bottom-sidebar {
+  bottom: 3px;
+  right: 3px;
+}
+
+#y-sidebar #open-bottom-sidebar {
+  bottom: 20px;
+  right: 3px;
+  left: 300px;
+  width: 50px;
+  background: #ddd;
+}
+
+#y-sidebar #open-bottom-sidebar:hover {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+#y-sidebar #open-bottom-sidebar a i {
+  color: #000;
+}
+
+#y-sidebar #open-bottom-sidebar a:hover i {
+  color: #66c666;
 }
