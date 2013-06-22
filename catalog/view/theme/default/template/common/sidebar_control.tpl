@@ -59,9 +59,9 @@
 		</ul>		
 	</div>
 	<div class="btn-container" id="close-bottom-sidebar">
-		<a href="#" class="btn-close"><i class="icon-indent-left"></i></a>
+		<a href="#" class="btn-close"><i class="icon-hand-left"></i></a>
 	</div>
 	<div class="btn-container" id="open-bottom-sidebar">
-		<a href="#" class="btn-close"><i class="icon-indent-right"></i></a>
+		<a href="#" class="btn-close"><i class="icon-hand-right"></i></a>
 	</div> 
 </div>

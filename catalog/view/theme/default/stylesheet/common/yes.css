@@ -307,8 +307,12 @@ label.in-line{
     right: 0px;
     left: 152px;
     padding: 5px;  
-    overflow: hidden; 
     box-shadow: 0 -3px 5px -1px gray inset; 
+}
+
+.header-wrapper {
+  position: relative;
+  height: 100%;  
 }
 
 #y-content {
@@ -1047,4 +1051,22 @@ label.in-line{
 
 #y-sidebar #open-bottom-sidebar a:hover i {
   color: #66c666;
+}
+
+#y-header #close-header {
+  bottom: 5px;
+  left: 0px;
+}
+
+#y-header .btn-container a i {
+  color: #000;
+}
+
+#y-header .btn-container a:hover i {
+  color: green;
+}
+
+#y-header #open-header {
+  top: 95px;
+  right: 10px;
 }
