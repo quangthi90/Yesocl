@@ -11,18 +11,54 @@ Profiles.prototype.afterCreate = function () {
 
 function ProfilesTabsInformation($element, contentHeight) {
 	this.self = $element;
+
 	this.contentHeight = contentHeight;
 	this.header = $element.find('.profiles-tabs-header');
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.inputDescription = $element.find('.input-description');
-	this.afterCreate();
+
+	this.deployed();
+
+	this.btnEdit = $element.find('.profiles-btn-edit');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+	this.btnSave = $element.find('.profiles-btn-save');
+
+	this.inputGroups = new ProfilesTabsInputGroups($element.find('.input-group'));
+
+	this.attachEvents();
 }
 
-ProfilesTabsInformation.prototype.afterCreate = function () {
+ProfilesTabsInformation.prototype.deployed = function () {
 	this.inputDescription.outerHeight(this.contentHeight*3/10);
 	this.inputDescription.niceScroll();
 	this.mainBody.height(this.contentHeight - this.header.height() - 45);
 	this.mainBody.niceScroll();
+}
+
+ProfilesTabsInformation.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnEdit.click(function () {
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.inputGroups.changeMode();
+	});
+
+	this.btnCancel.click(function () {
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.inputGroups.changeMode();
+	})
+
+	this.btnSave.click(function () {
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.inputGroups.save();
+		self.inputGroups.changeMode();
+	})
 }
 
 function ProfilesTabsBackground($element, contentWidth, contentHeight) {
@@ -79,4 +115,34 @@ ProfilesTabsBackgroundSkill.prototype.afterCreate = function () {
 	this.self.outerWidth(this.contentWidth);
 	this.mainBody.outerHeight(this.contentHeight);
 	this.mainBody.niceScroll();
+}
+
+function ProfilesTabsInputGroups($element) {
+	this.self = $element;
+}
+
+ProfilesTabsInputGroups.prototype.changeMode = function () {
+	if (this.self.find('.viewers').is(':hidden')) {
+		this.self.find('.editors').toggle();
+		this.self.find('.viewers').toggle();
+	}else {
+		this.self.each(function () {
+			var self = $(this);
+			if (self.find('.editors').is('input')) {
+				self.find('.input').val(self.find('viewers').html());
+			}else if (self.find('.editors').is('select')) {
+				self.find("select option").filter(function() {
+    				return $(this).text() == self.find('viewers').html(); 
+				}).prop('selected', true);
+			}else {
+				self.find('textarea').text(self.find('viewers').html());
+			}
+		});
+		this.self.find('.viewers').toggle();
+		this.self.find('.editors').toggle();
+	}
+}
+
+ProfilesTabsInputGroups.prototype.save = function () {
+
 }

@@ -24,78 +24,78 @@
 				<div class="span7">
 					<div class="row-fluid">
 						<div class="profiles-tabs-main-header">
-							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<a class="profiles-btn-edit viewers btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="clear"></div>
 						</div>
 
 						<div class="profiles-tabs-main-body">
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Fullname</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">Le Van Bap</span>
-									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="Le Van Bap" />
+									<span class="profiles-tabs-value viewers">Le Van Bap</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="Le Van Bap" />
 								</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Email</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">abcd@gmail.com</span>
-									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="abcd@gmail.com" />
+									<span class="profiles-tabs-value viewers">abcd@gmail.com</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="abcd@gmail.com" />
 								</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Phone</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">0123456789</span>
-									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="0123456789" />
+									<span class="profiles-tabs-value viewers">0123456789</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="0123456789" />
 								</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Sex</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">Male</span>
-									<select class="profiles-tabs-input">
+									<span class="profiles-tabs-value viewers">Male</span>
+									<select class="profiles-tabs-input editors">
 										<option selected="selected">Male</option>
 										<option>Female</option>
 									</select>
 								</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Birthday</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">June, 26</span>
-									<input class="profiles-tabs-input" type="text" value="June, 26" />
+									<span class="profiles-tabs-value viewers">June, 26</span>
+									<input class="profiles-tabs-input editors" type="text" value="June, 26" />
 								</div>
 							</div>
 
 							<div class="row-fluid profiles-line"></div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Living</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">Ho Chi Minh City</span>
-									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="Ho Chi Minh City" />
+									<span class="profiles-tabs-value viewers">Ho Chi Minh City</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="Ho Chi Minh City" />
 								</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Interest</div>
 								<div class="span9">
-									<span class="profiles-tabs-value">Footbal/TV</span>
-									<input class="profiles-tabs-input" type="text" placeholder="Input Text" value="Footbal/TV" />
+									<span class="profiles-tabs-value viewers">Footbal/TV</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="Footbal/TV" />
 								</div>
 							</div>
 
-							<div class="row-fluid">
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Descripntion</div>
-								<div class="span9 input-description profiles-tabs-value">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
-								<div class="profiles-tabs-input span9">
+								<div class="span9 input-description profiles-tabs-value viewers">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
+								<div class="editors span9">
 								<textarea class="input-description span12">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</textarea>
 								</div>
 							</div>
