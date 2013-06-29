@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="y-sub-container-1">
+<div id="y-content" class="no-header-fixed">
   <div id="y-main-content">
     <div class="y-frm" id="y-frm-password">
         <div class="frm-title"> Change password</div>

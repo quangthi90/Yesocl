@@ -14,7 +14,7 @@
 			      {{ user_info.username }}			      
 			    </a>
 			    <div class="user-can-do dropdown-toggle" data-toggle="dropdown">
-			    	<a href="#"><i class="icon-level-down icon-2x"></i></a>
+			    	<a href="#"><i class="icon-double-angle-down icon-2x"></i></a>
 			    </div>
 			    <ul class="dropdown-menu">
 			      <li><a href="#"><i class="icon-cogs"></i> Privacy settings</a></li>
