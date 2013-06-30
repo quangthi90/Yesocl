@@ -322,8 +322,12 @@ label.in-line{
     right: 0px;
     left: 152px;
     padding: 5px;  
-    overflow: hidden; 
     box-shadow: 0 -3px 5px -1px gray inset; 
+}
+
+.header-wrapper {
+  position: relative;
+  height: 100%;  
 }
 
 #y-content {
@@ -395,11 +399,18 @@ label.in-line{
     position: fixed;
     top: 0px;
     bottom: 40px;
-    z-index: 1;
+    z-index: 10;
     color: #fff;
     text-align: center;     
     border-right: 2px solid #001000;
 }
+  
+  #y-sidebar .sidebar-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
     #y-sidebar .sidebar-border-right{
 		border-right: 1px solid #032d03;
 	}
@@ -712,6 +723,7 @@ label.in-line{
 /*NAV SIDEBAR*/
 .sidebar-controls {
   color: #fff;
+  position: relative;
 }
 
 .sidebar-controls .nav-list > li {
@@ -965,4 +977,120 @@ label.in-line{
   white-space: nowrap;
   text-overflow: "...";
   overflow: hidden;  
+}
+
+/*CATEGORY*/
+.category-list {
+  line-height: 30px;
+  padding: 0px 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.category-list  a.btn-category-link {
+  margin-left: 10px;
+  color: #fff;
+  font-size: 12px;
+  float: right;
+  display: block;
+  padding: 2px 8px;
+  background-color: #60A63B;
+}
+
+.category-list  a.btn-category-link:hover {
+  color: #000;
+  background-color: #b5ea98;
+}
+
+.feed-block {
+  height: 100%;
+  float: left;
+  margin-right: 35px;
+}
+
+.feed-block .block-header {
+  overflow: hidden;
+  padding: 3px 10px;
+  background: #60A63B;
+  margin-bottom: 10px;
+}
+
+.feed-block .block-header  a {
+  display: block;
+  color: #fff;
+  font-weight: bold;
+}
+
+.feed-block .block-header  a  i {
+  color: #fff;
+}
+
+.feed-block .block-header  a:hover  i  {
+  color: #fff;
+}
+
+.feed-block .block-content {
+  overflow: hidden;
+  height: 100%;
+}
+
+/*Close*/
+.btn-container {
+  position: absolute;  
+}
+
+.btn-container a {
+  display: block;
+}
+
+.btn-container a  i{
+  color: #fff;
+}
+
+.btn-container a:hover  i{
+  color: #66c666;
+}
+
+#y-sidebar #close-bottom-sidebar {
+  bottom: 3px;
+  right: 3px;
+}
+
+#y-sidebar #open-bottom-sidebar {
+  bottom: 20px;
+  right: 3px;
+  left: 300px;
+  width: 50px;
+  background: #ddd;
+}
+
+#y-sidebar #open-bottom-sidebar:hover {
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+#y-sidebar #open-bottom-sidebar a i {
+  color: #000;
+}
+
+#y-sidebar #open-bottom-sidebar a:hover i {
+  color: #66c666;
+}
+
+#y-header #close-header {
+  bottom: 5px;
+  left: 0px;
+}
+
+#y-header .btn-container a i {
+  color: #000;
+}
+
+#y-header .btn-container a:hover i {
+  color: green;
+}
+
+#y-header #open-header {
+  top: 95px;
+  right: 10px;
 }

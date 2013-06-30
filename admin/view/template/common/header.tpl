@@ -98,6 +98,7 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>
           <li><a href="<?php echo $branch_position; ?>"><?php echo $text_position; ?></a></li>
+          <li><a href="<?php echo $branch_category; ?>"><?php echo $text_category; ?></a></li>
         </ul>
       </li>
       <li id="datalist"><a class="top"><?php echo $text_data_list; ?></a>

@@ -21,6 +21,9 @@ Class Branch {
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="branch") */
 	private $groups = array();
 
+	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="branch") */
+	private $categories = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -63,5 +66,17 @@ Class Branch {
 
 	public function getGroups(){
 		return $this->groups;
+	}
+
+	public function addCategory( $category ){
+		$this->categories[] = $category;
+	}
+
+	public function setCategorys( $categories ){
+		$this->categories = $categories;
+	}
+
+	public function getCategorys(){
+		return $this->categories;
 	}
 }

@@ -13,19 +13,43 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
 	<div id="y-main-content" class="has-horizontal">
-    	{% for post in posts %}        	
-			{{ block('post_common_post_block') }}			
-		{% endfor %}
-		{{ block('post_common_post_comment') }}
+		<div class="feed-block">
+            <div class="block-header">
+                <a class="fl" href="#">Yestoc</a>
+                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="block-content">
+		    	{% for post in posts %}        	
+					{{ block('post_common_post_block') }}			
+				{% endfor %}
+				
+			</div>
+		</div>
+		<div class="feed-block">
+            <div class="block-header">
+                <a class="fl" href="#">Follower</a>
+                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="block-content">
+		    	{% for post in posts %}        	
+					{{ block('post_common_post_block') }}			
+				{% endfor %}
+				
+			</div>
+		</div>
 	</div>
 </div>
+{{ block('post_common_post_comment') }}
 {% endblock %}
 
 {% block javascript %}
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#y-content').makeScroll();	
-	});	
+	$(window).load(function(){
+        new HorizontalBlock($('.has-horizontal'));          
+    });	
+    $(document).ready(function() {
+    	new FlexibleElement($(this));	
+    });
 </script>
 {{ block('post_common_post_comment_javascript') }}
 {% endblock %}
