@@ -1,32 +1,40 @@
-<?php echo $header; ?>
-<?php if ($error_warning) { ?>
-<div class="warning"><?php echo $error_warning; ?></div>
-<?php } ?>
-<?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-  <div class="breadcrumb">
-    <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-    <?php echo $breadcrumb['separator']; ?><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a>
-    <?php } ?>
-  </div>
-  <h1><?php echo $heading_title; ?></h1>
-  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
-    <p><?php echo $text_email; ?></p>
-    <h2><?php echo $text_your_email; ?></h2>
-    <div class="content">
-      <table class="form">
-        <tr>
-          <td><?php echo $entry_email; ?></td>
-          <td><input type="text" name="email" value="" /></td>
-        </tr>
-      </table>
+{% extends '@template/default/template/welcome/layout.tpl' %}
+
+{% block title %}Login for Yesocl{% endblock %}
+
+{% block stylesheet %}
+<link href="catalog/view/theme/default/stylesheet/account.css" rel="stylesheet" media="screen" />
+{% endblock %}
+
+{% block body %}
+<div id="y-content" class="no-header-fixed">
+    <div class="y-frm" id="y-frm-login">
+        <div class="frm-title">Remind password - <strong>YESOCL.com</strong>
+        </div>
+        <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
+        <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
+        <div class="frm-content">            
+            <form action="{{ action.forgotten }}" method="post">
+                <div class="input-prepend">
+                    <span class="add-on"><i class="icon-user"></i></span>
+                    <input class="span3" id="username" name="email" type="text" placeholder="Email">
+                </div>                
+                <div class="btns">
+                     <button class="btn btn-success" type="submit">Reset password</button>   
+                     <a class="btn" href="{{ action.home }}">Cancel</a>  
+                </div>
+            </form>     
+        </div>
+        <div class="frm-footer">
+            <ul>
+                <li>Try login again ! <a href="#">Sign In</a></li>
+                <li>Create another account ? <a href="#">Sign Up</a></li>
+                <li>Not received remind email. <a href="#">Send again !</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="buttons">
-      <div class="left"><a href="<?php echo $back; ?>" class="button"><?php echo $button_back; ?></a></div>
-      <div class="right">
-        <input type="submit" value="<?php echo $button_continue; ?>" class="button" />
-      </div>
-    </div>
-  </form>
-  <?php echo $content_bottom; ?></div>
-<?php echo $footer; ?>
+</div>
+{% endblock %}
+
+{% block javascript %}
+{% endblock %}   

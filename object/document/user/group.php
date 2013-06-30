@@ -2,21 +2,27 @@
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** @MongoDB\Document(db="yesocl", collection="user_group") */
+/** 
+ * @MongoDB\Document(db="yesocl", collection="user_group")
+ */
 Class Group {
-	/** @MongoDB\Id */
+	/** 
+	 * @MongoDB\Id 
+	 */
 	private $id; 
 
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 */
 	private $name;
+
+    /** @MongoDB\ReferenceMany(targetDocument="User", mappedBy="groupUser") */
+	private $users = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
-	
-	/** @MongoDB\ReferenceMany(targetDocument="User", mappedBy="group") */
-	private $users = array();
 
-	public function getId(){
+	public function getId() {
 		return $this->id;
 	}
 
@@ -26,14 +32,6 @@ Class Group {
 
 	public function getName(){
 		return $this->name;
-	}
-
-	public function setStatus( $status ){
-		$this->status = $status;
-	}
-
-	public function getStatus(){
-		return $this->status;
 	}
 
 	public function addUser( User $user ){
@@ -46,5 +44,13 @@ Class Group {
 
 	public function getUsers(){
 		return $this->users;
+	}
+
+	public function setStatus( $status ){
+		$this->status = $status;
+	}
+
+	public function getStatus(){
+		return $this->status;
 	}
 }

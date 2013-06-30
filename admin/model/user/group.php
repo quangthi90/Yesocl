@@ -65,6 +65,10 @@ class ModelUserGroup extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$group = $this->dm->getRepository( 'Document\User\Group' )->find( $id );
 
+				foreach ($group->getUsers() as $user) {
+					$this->dm->remove( $user );
+				}
+
 				$this->dm->remove($group);
 			}
 		}

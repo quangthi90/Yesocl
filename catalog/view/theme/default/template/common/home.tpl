@@ -1,5 +1,55 @@
-<?php echo $header; ?><?php echo $column_left; ?><?php echo $column_right; ?>
-<div id="content"><?php echo $content_top; ?>
-<h1 style="display: none;"><?php echo $heading_title; ?></h1>
-<?php echo $content_bottom; ?></div>
-<?php echo $footer; ?>
+{% extends '@template/default/template/common/layout.tpl' %}
+
+{% use '@template/default/template/post/common/post_block.tpl' %}
+{% use '@template/default/template/post/common/post_comment.tpl' %}
+
+{% block title %}Yesocl - Social Network{% endblock %}
+
+{% block stylesheet %}
+    <link href="catalog/view/theme/default/stylesheet/home.css" rel="stylesheet" media="screen" />
+    {{ block('post_common_post_comment_style') }}
+{% endblock %}
+
+{% block body %}
+<div id="y-content" class="no-header-fixed">
+	<div id="y-main-content" class="has-horizontal">
+		<div class="feed-block">
+            <div class="block-header">
+                <a class="fl" href="#">Yestoc</a>
+                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="block-content">
+		    	{% for post in posts %}        	
+					{{ block('post_common_post_block') }}			
+				{% endfor %}
+				
+			</div>
+		</div>
+		<div class="feed-block">
+            <div class="block-header">
+                <a class="fl" href="#">Follower</a>
+                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
+            </div>
+            <div class="block-content">
+		    	{% for post in posts %}        	
+					{{ block('post_common_post_block') }}			
+				{% endfor %}
+				
+			</div>
+		</div>
+	</div>
+</div>
+{{ block('post_common_post_comment') }}
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+	$(window).load(function(){
+        new HorizontalBlock($('.has-horizontal'));          
+    });	
+    $(document).ready(function() {
+    	new FlexibleElement($(this));	
+    });
+</script>
+{{ block('post_common_post_comment_javascript') }}
+{% endblock %}

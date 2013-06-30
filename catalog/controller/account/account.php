@@ -1,69 +1,86 @@
 <?php 
 class ControllerAccountAccount extends Controller { 
+	private $limit = 20;
+
 	public function index() {
-		if (!$this->customer->isLogged()) {
-	  		$this->session->data['redirect'] = $this->url->link('account/account', '', 'SSL');
-	  
-	  		$this->redirect($this->url->link('account/login', '', 'SSL'));
-    	} 
-	
-		$this->language->load('account/account');
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = $this->config->get('config_url');
+		}
 
-		$this->document->setTitle($this->language->get('heading_title'));
-
-      	$this->data['breadcrumbs'] = array();
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),
-        	'separator' => false
-      	); 
-
-      	$this->data['breadcrumbs'][] = array(       	
-        	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),
-        	'separator' => $this->language->get('text_separator')
-      	);
+		$this->document->setTitle($this->config->get('config_title'));
+		$this->document->setDescription($this->config->get('config_meta_description'));
 		
-		if (isset($this->session->data['success'])) {
-    		$this->data['success'] = $this->session->data['success'];
+		$this->data['heading_title'] = $this->config->get('config_title');
+
+		$this->load->model( 'company/company' );
+		$this->load->model('tool/image');
+
+		$company = $this->model_company_company->getCompanyBySlug( $this->config->get('company')['default']['slug'] );
+
+		if ( $company ){
+			$company_posts = $company->getPosts();
+		}
+
+		$this->data['posts'] = array();
+		$i = 0;
+		foreach ( $company_posts as $post ) {
+			if ( $post->getUser()->getId() != $this->customer->getId() ){
+				continue;
+			}
+
+			if ( $post->getUser() && $post->getUser()->getAvatar() ){
+				$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
+			}elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
+                $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
+            }else{
+				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
+			}
+
+			$comment_count = count( $post->getComments() );
+
+			if ( $post->getThumb() ){
+				$image = $this->model_tool_image->resize( $post->getThumb(), 400, 250 );
+			}else{
+				$image = null;
+			}
+
+			$this->data['posts'][] = array(
+				'id'			=> $post->getId(),
+				'author' 		=> $post->getAuthor(),
+				'avatar' 		=> $avatar,
+				'image'			=> $image,
+				'title' 		=> $post->getTitle(),
+				'content' 		=> html_entity_decode($post->getDescription()),
+				'created'		=> $post->getCreated(),
+				'comment_count' => $comment_count,
+				'type'			=> 'company',
+				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
+				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
+				'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
+			);
 			
-			unset($this->session->data['success']);
-		} else {
-			$this->data['success'] = '';
-		}
-		
-    	$this->data['heading_title'] = $this->language->get('heading_title');
+			// Limit 20 post each load company
+			if ( $i == $this->limit ){
+				break;
+			}
 
-    	$this->data['text_my_account'] = $this->language->get('text_my_account');
-		$this->data['text_my_orders'] = $this->language->get('text_my_orders');
-		$this->data['text_my_newsletter'] = $this->language->get('text_my_newsletter');
-    	$this->data['text_edit'] = $this->language->get('text_edit');
-    	$this->data['text_password'] = $this->language->get('text_password');
-    	$this->data['text_address'] = $this->language->get('text_address');
-		$this->data['text_wishlist'] = $this->language->get('text_wishlist');
-    	$this->data['text_order'] = $this->language->get('text_order');
-    	$this->data['text_download'] = $this->language->get('text_download');
-		$this->data['text_reward'] = $this->language->get('text_reward');
-		$this->data['text_return'] = $this->language->get('text_return');
-		$this->data['text_transaction'] = $this->language->get('text_transaction');
-		$this->data['text_newsletter'] = $this->language->get('text_newsletter');
-
-    	$this->data['edit'] = $this->url->link('account/edit', '', 'SSL');
-    	$this->data['password'] = $this->url->link('account/password', '', 'SSL');
-		$this->data['address'] = $this->url->link('account/address', '', 'SSL');
-		$this->data['wishlist'] = $this->url->link('account/wishlist');
-    	$this->data['order'] = $this->url->link('account/order', '', 'SSL');
-    	$this->data['download'] = $this->url->link('account/download', '', 'SSL');
-		$this->data['return'] = $this->url->link('account/return', '', 'SSL');
-		$this->data['transaction'] = $this->url->link('account/transaction', '', 'SSL');
-		$this->data['newsletter'] = $this->url->link('account/newsletter', '', 'SSL');
-		
-		if ($this->config->get('reward_status')) {
-			$this->data['reward'] = $this->url->link('account/reward', '', 'SSL');
-		} else {
-			$this->data['reward'] = '';
+			$i++;
 		}
+
+		if ( $this->customer->getAvatar() ){
+			$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+		}else{
+			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
+		}
+
+		$this->data['user_info'] = array(
+			'avatar'	=> $avatar,
+			'username'	=> $this->customer->getUsername()
+		);
+
+		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
@@ -72,15 +89,14 @@ class ControllerAccountAccount extends Controller {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
+			'common/sidebar_control',			
+			// 'common/content_top',
+			// 'common/content_bottom',
 			'common/footer',
-			'common/header'		
+			'common/header'
 		);
-				
-		$this->response->setOutput($this->render());
-  	}
+										
+		$this->response->setOutput($this->twig_render());
+	}
 }
 ?>

@@ -19,20 +19,31 @@ class ModelGroupGroup extends Doctrine {
 		}
 		
 		// email is required
-		if ( !isset($data['author']) || empty($data['author']) ){
+		if ( !isset($data['user_id']) || empty($data['user_id']) ){
 			return false;
 		}
-		$this->load->model( 'user/user' );
-		$user = $this->model_user_user->getUser( array('email' => $data['author']) );
+		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( !$user ){
 			return false;
 		}
 		
 		// type is required
+		if ( !isset($data['type']) || empty($data['type']) ){
+			return false;
+		}
 		$type = $this->dm->getRepository('Document\group\Type')->find( $data['type'] );
-		
 		if ( !$type ){
 			return false;
+		}
+
+		// Status
+		if ( !isset( $data['status'] ) ) {
+			$data['status'] = 0;
+		}
+
+		// Website
+		if ( !isset( $data['website'] ) ) {
+			$data['website'] = '';
 		}
 		
 		$group = new group();
@@ -41,15 +52,13 @@ class ModelGroupGroup extends Doctrine {
 		$group->setSumary( $data['sumary'] );
 		$group->setDescription( $data['description'] );
 		$group->setType( $type );
+		$group->setStatus( $data['status'] );
+		$group->setWebsite( $data['website'] );
 
-		// Add status
-		if ( isset($data['status']) ){
-			$group->setStatus( $data['status'] );
-		}
-		
-		// Add website
-		if ( isset($data['website']) ){
-			$group->setWebsite( $data['website'] );
+		// Branch
+		if ( isset( $data['branch_id'] ) ) {
+			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+			$group->setBranch( $branch );
 		}
 
 		$this->dm->persist( $group );
@@ -73,13 +82,31 @@ class ModelGroupGroup extends Doctrine {
 		}
 		
 		// email is required
-		if ( !isset($data['author']) || empty($data['author']) ){
+		if ( !isset($data['user_id']) || empty($data['user_id']) ){
 			return false;
 		}
-		$this->load->model( 'user/user' );
-		$user = $this->model_user_user->getUser( array('email' => $data['author']) );
+		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( !$user ){
 			return false;
+		}
+		
+		// type is required
+		if ( !isset($data['type']) || empty($data['type']) ){
+			return false;
+		}
+		$type = $this->dm->getRepository('Document\group\Type')->find( $data['type'] );
+		if ( !$type ){
+			return false;
+		}
+
+		// Status
+		if ( !isset( $data['status'] ) ) {
+			$data['status'] = 0;
+		}
+
+		// Website
+		if ( !isset( $data['website'] ) ) {
+			$data['website'] = '';
 		}
 		
 		$group = $this->dm->getRepository('Document\Group\Group')->find( $id );
@@ -88,31 +115,19 @@ class ModelGroupGroup extends Doctrine {
 			return false;
 		}
 
+		// Branch
+		if ( isset( $data['branch_id'] ) ) {
+			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+			$group->setBranch( $branch );
+		}
+
 		$group->setAuthor( $user );
 		$group->setName( $data['name'] );
 		$group->setSumary( $data['sumary'] );
 		$group->setDescription( $data['description'] );
-		
-		// Add type
-		if ( !$group->getType() || $group->getType()->getId() != $data['type'] ){
-			$type = $this->dm->getRepository('Document\Group\Type')->find( $data['type'] );
-			
-			if ( !$type ){
-				return false;
-			}
-		
-			$group->setType( $type );
-		} 
-		
-		// Add status
-		if ( isset($data['status']) ){
-			$group->setStatus( $data['status'] );
-		}
-		
-		// Add website
-		if ( isset($data['website']) ){
-			$group->setWebsite( $data['website'] );
-		}
+		$group->setType( $type );
+		$group->setStatus( $data['status'] );
+		$group->setWebsite( $data['website'] );
 
 		$this->dm->flush();
 	}
@@ -140,8 +155,12 @@ class ModelGroupGroup extends Doctrine {
 		if (!isset($data['start']) || ((int)$data['start'] < 0)) {
 			$data['start'] = 0;
 		}
-
+		
 		return $this->dm->getRepository( 'Document\Group\Group' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+	}
+
+	public function getGroupByPostId( $post_id ){
+		return $this->dm->getRepository( 'Document\Group\Group' )->findOneBy( array('posts.id' => $post_id) );
 	}
 	
 	public function getTotalGroups() {

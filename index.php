@@ -1,6 +1,6 @@
 <?php
 // Version
-define('VERSION', '1.5.3.1');
+define('VERSION', '1.5.3');
 
 // Configuration
 require_once('config.php');
@@ -16,12 +16,14 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
-require_once(DIR_SYSTEM . 'library/affiliate.php');
-require_once(DIR_SYSTEM . 'library/currency.php');
-require_once(DIR_SYSTEM . 'library/tax.php');
-require_once(DIR_SYSTEM . 'library/weight.php');
-require_once(DIR_SYSTEM . 'library/length.php');
-require_once(DIR_SYSTEM . 'library/cart.php');
+// require_once(DIR_SYSTEM . 'library/affiliate.php');
+// require_once(DIR_SYSTEM . 'library/currency.php');
+// require_once(DIR_SYSTEM . 'library/tax.php');
+// require_once(DIR_SYSTEM . 'library/weight.php');
+// require_once(DIR_SYSTEM . 'library/length.php');
+// require_once(DIR_SYSTEM . 'library/cart.php');
+
+require_once(DIR_DATABASE . 'doctrine.php');
 
 // Registry
 $registry = new Registry();
@@ -30,47 +32,55 @@ $registry = new Registry();
 $loader = new Loader($registry);
 $registry->set('load', $loader);
 
+// Twig
+require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
+Twig_Autoloader::register();
+$twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
+$twig_loader->addPath(DIR_TEMPLATE, 'template');	
+$twig = new Twig_Environment($twig_loader, array(
+    // 'cache' => DIR_SYSTEM . '/cache/twig',
+	));
+$twig->addExtension(new Twig_Extension_StringLoader());
+$registry->set('twig', $twig);
+
 // Config
 $config = new Config();
 $registry->set('config', $config);
 
 // Database 
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
+$db = new Doctrine($registry);
 $registry->set('db', $db);
 
-// Doctrine
-//$doctrine = new Doctrine();
-//$registry->set('doctrine', $doctrine);
-//define('LIB_ANNOTATIONS', DIR_SYSTEM . 'library/Doctrine/ODM/MongoDB/Mapping/Annotations/');
-
 // Store
-if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
+/*if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
 	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`ssl`, 'www.', '') = '" . $db->escape('https://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
 } else {
 	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`url`, 'www.', '') = '" . $db->escape('http://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
-}
+}*/
 
-if ($store_query->num_rows) {
+/*if ($store_query->num_rows) {
 	$config->set('config_store_id', $store_query->row['store_id']);
 } else {
 	$config->set('config_store_id', 0);
-}
+}*/
 		
 // Settings
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '0' OR store_id = '" . (int)$config->get('config_store_id') . "' ORDER BY store_id ASC");
+$settings = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();
 
-foreach ($query->rows as $setting) {
-	if (!$setting['serialized']) {
-		$config->set($setting['key'], $setting['value']);
-	} else {
-		$config->set($setting['key'], unserialize($setting['value']));
+foreach ($settings as $setting) {
+	if ( $setting ) {
+		$config->set( $setting->getKey(), $setting->getValue() );
 	}
 }
+$config->load( 'title' );
+$config->load( 'user' );
+$config->load( 'company' );
+$config->load( 'url' );
 
-if (!$store_query->num_rows) {
+/*if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
 	$config->set('config_ssl', HTTPS_SERVER);	
-}
+}*/
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -136,6 +146,7 @@ $registry->set('session', $session);
 // Language Detection
 $languages = array();
 
+$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 $query = $db->query("SELECT * FROM " . DB_PREFIX . "language WHERE status = '1'"); 
 
 foreach ($query->rows as $result) {
@@ -167,7 +178,7 @@ if (isset($session->data['language']) && array_key_exists($session->data['langua
 } elseif ($detect) {
 	$code = $detect;
 } else {
-	$code = $config->get('config_language');
+	$code = "en";
 }
 
 if (!isset($session->data['language']) || $session->data['language'] != $code) {
@@ -190,29 +201,30 @@ $registry->set('language', $language);
 $registry->set('document', new Document()); 		
 
 // Customer
-$registry->set('customer', new Customer($registry));
+$customer = new Customer($registry);
+$registry->set('customer', $customer);
 
 // Affiliate
-$registry->set('affiliate', new Affiliate($registry));
+// $registry->set('affiliate', new Affiliate($registry));
 
-if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
-	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
-}
+// if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
+// 	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
+// }
 		
 // Currency
-$registry->set('currency', new Currency($registry));
+// $registry->set('currency', new Currency($registry));
 
 // Tax
-$registry->set('tax', new Tax($registry));
+// $registry->set('tax', new Tax($registry));
 
 // Weight
-$registry->set('weight', new Weight($registry));
+// $registry->set('weight', new Weight($registry));
 
 // Length
-$registry->set('length', new Length($registry));
+// $registry->set('length', new Length($registry));
 
 // Cart
-$registry->set('cart', new Cart($registry));
+// $registry->set('cart', new Cart($registry));
 
 //  Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
@@ -227,10 +239,24 @@ $controller->addPreAction(new Action('common/maintenance'));
 $controller->addPreAction(new Action('common/seo_url'));	
 	
 // Router
-if (isset($request->get['route'])) {
-	$action = new Action($request->get['route']);
-} else {
-	$action = new Action('common/home');
+if ( $customer->isLogged() ) {
+	if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
+		$action = new Action($request->get['route']);
+	} else {
+		$action = new Action('common/home');
+	}
+}else{
+	if (isset($request->get['route']) && (
+		$request->get['route'] == 'account/login/login' || 
+		$request->get['route'] == 'account/login' ||
+		$request->get['route'] == 'account/register/register' ||
+		$request->get['route'] == 'account/forgotten'
+	)) 
+	{
+		$action = new Action($request->get['route']);
+	}else{
+		$action = new Action('welcome/home');
+	}
 }
 
 // Dispatch

@@ -49,10 +49,10 @@ class AnnotationDriver extends DoctrineAnnotationDriver implements Driver
         }
 
         if (!$documentAnnots) {
-            throw new \InvalidArgumentException(
-                "Class " . $class->getName() . " must have DocumentSolr annotation."
-            );
-        }
+            //throw new \InvalidArgumentException(
+            //    "Class " . $class->getName() . " must have DocumentSolr annotation."
+            //);
+        }else {
 
         ksort($documentAnnots);
         $documentAnnot = reset($documentAnnots);
@@ -92,6 +92,7 @@ class AnnotationDriver extends DoctrineAnnotationDriver implements Driver
                 $class->addField($mapping);
             }
         }
+		}
     }
 
     /** @override */

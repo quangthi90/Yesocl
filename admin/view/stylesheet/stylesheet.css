@@ -115,6 +115,7 @@ label {
 #menu > ul li {
 	float: left;
 	list-style: none;
+	line-height: 15px;
 }
 #menu > ul li ul {
 	position: absolute;
@@ -250,6 +251,7 @@ body > #container {
 	color: #003A88;
 	font-size: 16px;
 	float: left;
+	line-height: 16px;
 }
 .box > .heading h1 img {
 	float: left;

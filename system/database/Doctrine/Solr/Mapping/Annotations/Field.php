@@ -20,7 +20,7 @@ class Field extends PropertyAnnotation
      */
     public function __construct(array $options)
     {
-        $obligatory = ['type'];
+        $obligatory = array('type');
 
         parent::__construct($options, $obligatory);
     }

@@ -2,8 +2,13 @@
 class ControllerGroupGroup extends Controller {
 	private $error = array( );
 	private $limit = 10;
+	private $route = 'group/group';
  
 	public function index(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'group/group' );
 		$this->load->model( 'group/group' );
 
@@ -13,6 +18,10 @@ class ControllerGroupGroup extends Controller {
 	}
 
 	public function insert(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_insert')) ) {
+			return $this->forward('error/permission');
+		}
+
 		$this->load->language( 'group/group' );
 		$this->load->model( 'group/group' );
 
@@ -22,19 +31,23 @@ class ControllerGroupGroup extends Controller {
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			if ( $this->model_group_group->addGroup( $this->request->post ) === false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
-				$this->redirect( $this->url->link('group/group') );
+				$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->data['action'] = $this->url->link( 'group/group/insert' );
+		$this->data['action'] = $this->url->link( 'group/group/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
 
 	public function update(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'group/group' );
 		$this->load->model( 'group/group' );
 
@@ -45,13 +58,17 @@ class ControllerGroupGroup extends Controller {
 			$this->model_group_group->editgroup( $this->request->get['group_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
 	}
  
 	public function delete(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
+			return $this->forward('error/permission');
+		}
+		
 		$this->load->language( 'group/group' );
 		$this->load->model( 'group/group' );
 
@@ -62,7 +79,7 @@ class ControllerGroupGroup extends Controller {
 			$this->model_group_group->deletegroup( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/group') );
+			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -99,12 +116,12 @@ class ControllerGroupGroup extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/group' ),
+			'href'      => $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -133,11 +150,11 @@ class ControllerGroupGroup extends Controller {
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'group/group/insert' );
-		$this->data['delete'] = $this->url->link( 'group/group/delete' );
+		$this->data['insert'] = $this->url->link( 'group/group/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'group/group/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// Group
-		$groups = $this->model_group_group->getGroups( );
+		$groups = $this->model_group_group->getGroups();
 		
 		$group_total = $this->model_group_group->getTotalGroups();
 		
@@ -148,13 +165,13 @@ class ControllerGroupGroup extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/group/update', 'group_id=' . $group->getId() ),
+					'href' => $this->url->link( 'group/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_posts' ),
-					'href' => $this->url->link( 'group/post', 'group_id=' . $group->getId() ),
+					'href' => $this->url->link( 'group/post', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-list',
 				);
 			
@@ -176,7 +193,7 @@ class ControllerGroupGroup extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('group/group', '&page={page}', 'SSL');
+		$pagination->url = $this->url->link('group/group', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -232,12 +249,12 @@ class ControllerGroupGroup extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
-			'href'      => $this->url->link( 'common/home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/group' ),
+			'href'      => $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -261,35 +278,40 @@ class ControllerGroupGroup extends Controller {
 		$this->data['entry_website'] = $this->language->get( 'entry_website' );
 		$this->data['entry_type'] = $this->language->get( 'entry_type' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/group' );
+		$this->data['cancel'] = $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// Group
 		if ( isset($this->request->get['group_id']) ){
 			$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
 			
 			if ( $group ){
-				$this->data['action'] = $this->url->link( 'group/group/update', 'group_id=' . $group->getId() );	
+				$this->data['action'] = $this->url->link( 'group/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
 		
 		// Entry author
+		if ( isset( $group ) ) {
+			$user = $group->getAuthor();
+		}
 		if ( isset($this->request->post['author']) ){
 			$this->data['author'] = $this->request->post['author'];
-		}elseif ( isset($group) ){
-			$this->data['author'] = $group->getAuthor()->getPrimaryEmail()->getEmail();
+		}elseif ( isset($user) ){
+			$this->data['author'] = $user->getUsername() . '(' . $user->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['author'] = '';
 		}
-		
-		// Entry fullname
-		if ( isset($group) ){
-			$this->data['fullname'] = $group->getAuthor()->getFullname();
+
+		if ( isset($this->request->post['user_id']) ){
+			$this->data['user_id'] = $this->request->post['user_id'];
+		}elseif ( isset($group) ){
+			$this->data['user_id'] = $group->getAuthor()->getId();
 		}else {
-			$this->data['fullname'] = '';
+			$this->data['user_id'] = '';
 		}
 
 		// Entry name
@@ -334,7 +356,26 @@ class ControllerGroupGroup extends Controller {
 		}elseif ( isset($group) ){
 			$this->data['status'] = $group->getstatus();
 		}else {
-			$this->data['status'] = '';
+			$this->data['status'] = 1;
+		}
+
+		// Entry branch
+		$this->load->model( 'branch/branch' );
+		$branchs = $this->model_branch_branch->getAllBranchs();
+
+		foreach ( $branchs as $branch ) {
+			$this->data['branchs'][] = array(
+				'id'	=> $branch->getId(),
+				'name'	=> $branch->getName()
+			);
+		}
+
+		if ( isset($this->request->post['branch_id']) ){
+			$this->data['branch_id'] = $this->request->post['branch_id'];
+		}elseif ( isset($group) && $group->getBranch() ){
+			$this->data['branch_id'] = $group->getBranch()->getId();
+		}else {
+			$this->data['branch_id'] = 1;
 		}
 		
 		// Entry type
@@ -359,6 +400,8 @@ class ControllerGroupGroup extends Controller {
 			$this->data['type_id'] = 0;
 		}
 
+		$this->data['token'] = $this->session->data['token'];
+
 		$this->template = 'group/group_form.tpl';
 		$this->children = array(
 			'common/header',
@@ -369,6 +412,10 @@ class ControllerGroupGroup extends Controller {
 	}
 
 	private function isValidateForm(){
+		if ( !isset( $this->request->post['user_id'] ) || empty( $this->request->post['user_id'] ) ){
+			$this->error['error_author'] = $this->language->get( 'error_author' );
+		}
+
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}

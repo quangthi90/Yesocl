@@ -19,8 +19,29 @@ Class Post {
 	/** @MongoDB\Date */
 	private $created;
 	
-	/** @MongoDB\ReferenceOne(targetDocument="User\User", inversedBy="posts") */
+	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="posts") */
     private $user;
+
+	/** @MongoDB\EmbedMany(targetDocument="Comment") */
+	private $comments = array();
+
+	/**
+	 * Get Comment By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Comment
+	 * 		- null if not found
+	 */
+	public function getCommentById( $comment_id ){
+		foreach ( $this->comments as $comment ){
+			if ( $comment->getId() === $comment_id ){
+				return  $comment;
+			}
+		}
+		
+		return null;
+	}
 
 	public function getId(){
 		return $this->id;
@@ -69,5 +90,17 @@ Class Post {
 
 	public function getUser(){
 		return $this->user;
+	}
+
+	public function addComment( Comment $comment ){
+		$this->comments[] = $comment;
+	}
+
+	public function setComments( $comments ){
+		$this->comments = $comments;
+	}
+
+	public function getComments(){
+		return $this->comments;
 	}
 }

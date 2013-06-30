@@ -2,7 +2,7 @@
 namespace Doctrine\Solr\QueryType\Update;
 
 use Solarium\QueryType\Update\Query\Command\Delete;
-
+use Doctrine\Solr\Configuration;
 use Doctrine\Solr\Converter\Converter;
 
 use Solarium\QueryType\Update\Query\Query as UpdateQuery;
@@ -15,8 +15,20 @@ class Query extends UpdateQuery
     protected function init()
     {
         parent::init();
-        $this->config = $this->options['config'];
-        $this->converter = $this->config->getConverterImpl();
+		if (isset($this->options['config'])) {
+			$this->config = $this->options['config'];
+		}else {
+			$this->config = Configuration::fromConfig( 
+				array( 
+					'solarium_client_config' => array(
+						'host' => '127.0.0.1',
+						'port' => 8983,
+						'path' => '/solr/',
+						), 
+					)
+				);
+		}
+        $this->converter = $this->config->getConverter();
     }
 
     /**
@@ -29,7 +41,8 @@ class Query extends UpdateQuery
      */
     public function addDocuments($documents, $overwrite = null, $commitWithin = null)
     {
-        $convertedDocs = [];
+
+        $convertedDocs = array();
         foreach ($documents as $document) {
             $convertedDocs[] = $this->converter->toSolrDocument($document);
         }
@@ -44,7 +57,7 @@ class Query extends UpdateQuery
      */
     public function removeDocument($document)
     {
-        return $this->removeDocuments([$document]);
+        return $this->removeDocuments(array($document));
     }
 
     /**
@@ -54,7 +67,7 @@ class Query extends UpdateQuery
      */
     public function removeDocuments(array $documents)
     {
-        $queries = [];
+        $queries = array();
         foreach ($documents as $document) {
             $queries[] = $this->converter->toQuery($document);
         }

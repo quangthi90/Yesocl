@@ -20,30 +20,30 @@ class ControllerAccountForgotten extends Controller {
 			
 			$this->model_account_customer->editPassword($this->request->post['email'], $password);
 			
-			$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+			$subject = sprintf($this->language->get('text_subject'), 'Admin');
 			
-			$message  = sprintf($this->language->get('text_greeting'), $this->config->get('config_name')) . "\n\n";
+			$message  = sprintf($this->language->get('text_greeting'), 'Admin') . "\n\n";
 			$message .= $this->language->get('text_password') . "\n\n";
 			$message .= $password;
 
 			$mail = new Mail();
-			$mail->protocol = $this->config->get('config_mail_protocol');
-			$mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->hostname = $this->config->get('config_smtp_host');
-			$mail->username = $this->config->get('config_smtp_username');
-			$mail->password = $this->config->get('config_smtp_password');
-			$mail->port = $this->config->get('config_smtp_port');
-			$mail->timeout = $this->config->get('config_smtp_timeout');				
+			$mail->protocol = 'smtp';
+			// $mail->parameter = $this->config->get('config_mail_parameter');
+			$mail->hostname = 'ssl://smtp.gmail.com';
+			$mail->username = 'bommerdesign@gmail.com';
+			$mail->password = '13081990';
+			$mail->port = '465';
+			// $mail->timeout = $this->config->get('config_smtp_timeout');				
 			$mail->setTo($this->request->post['email']);
-			$mail->setFrom($this->config->get('config_email'));
-			$mail->setSender($this->config->get('config_name'));
+			$mail->setFrom('admin@yesocl.com');
+			$mail->setSender('Admin Yesocl');
 			$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 			$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 			$mail->send();
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('account/login', '', 'SSL'));
+			$this->redirect($this->url->link('account/forgotten', '', 'SSL'));
 		}
 
       	$this->data['breadcrumbs'] = array();
@@ -76,15 +76,15 @@ class ControllerAccountForgotten extends Controller {
 		$this->data['button_continue'] = $this->language->get('button_continue');
 		$this->data['button_back'] = $this->language->get('button_back');
 
-		if (isset($this->error['warning'])) {
-			$this->data['error_warning'] = $this->error['warning'];
-		} else {
-			$this->data['error_warning'] = '';
+		if (isset($this->session->data['success'])){
+			$this->data['success'] = $this->session->data['success'];
+			unset($this->session->data['success']);
+		}elseif (isset($this->error['warning'])) {
+			$this->data['warning'] = $this->error['warning'];
 		}
 		
-		$this->data['action'] = $this->url->link('account/forgotten', '', 'SSL');
- 
-		$this->data['back'] = $this->url->link('account/login', '', 'SSL');
+		$this->data['action']['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
+		$this->data['action']['home'] = $this->url->link('welcome/home', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/forgotten.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/forgotten.tpl';
@@ -93,21 +93,17 @@ class ControllerAccountForgotten extends Controller {
 		}
 		
 		$this->children = array(
-			'common/column_left',
-			'common/column_right',
-			'common/content_top',
-			'common/content_bottom',
-			'common/footer',
-			'common/header'	
+			'welcome/footer',
+			'welcome/header'
 		);
-								
-		$this->response->setOutput($this->render());		
+					
+		$this->response->setOutput($this->twig_render());
 	}
 
 	private function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
-		} elseif (!$this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
+		} elseif ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email']) == 0) {
 			$this->error['warning'] = $this->language->get('error_email');
 		}
 

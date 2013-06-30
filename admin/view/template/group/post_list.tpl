@@ -28,8 +28,8 @@
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $text_title; ?></td>
               <td><?php echo $text_author; ?></td>
-              <td><?php echo $text_status; ?></td>
               <td><?php echo $text_created; ?></td>
+              <td><?php echo $text_status; ?></td>
               <td><?php echo $text_action; ?></td>
             </tr>
           </thead>
@@ -40,8 +40,8 @@
               <td><input name="id[]" type="checkbox" value="<?php echo $post['id']; ?>"/></td>
               <td><?php echo $post['title']; ?></td>
               <td><?php echo $post['author']; ?></td>
-              <td><?php echo $post['status']; ?></td>
               <td><?php echo $post['created']; ?></td>
+              <td><?php echo $post['status']; ?></td>
               <td class="right"><?php foreach ($post['action'] as $action) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>

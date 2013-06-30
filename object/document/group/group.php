@@ -30,6 +30,12 @@ Class Group {
     
     /** @MongoDB\Boolean */
 	private $status;
+
+	/** @MongoDB\EmbedMany(targetDocument="Post") */
+	private $posts = array();
+
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Branch", inversedBy="groups") */
+    private $branch;
 	
     /**
 	 * Get Post By ID
@@ -114,11 +120,31 @@ Class Group {
 		return $this->type;
 	}
 
+	public function addPost( Post $post ){
+		$this->posts[] = $post;
+	}
+
+	public function setPosts( $posts ){
+		$this->posts = $posts;
+	}
+
+	public function getPosts(){
+		return $this->posts;
+	}
+
 	public function setStatus( $status ){
 		$this->status = $status;
 	}
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function setBranch( $branch ){
+		$this->branch = $branch;
+	}
+
+	public function getBranch(){
+		return $this->branch;
 	}
 }

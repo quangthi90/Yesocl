@@ -1,0 +1,16 @@
+﻿id,name_t,location_t,solrFullname_t,value_t,username_t,solrPrimaryEmail_t,solrUserContent_t,dataCode_t,solrEmail_t
+5143bfca913db4a408000012,,"HCM, Việt Nam",,,,,,,
+516b9398913db43009000001,,,fdsfdfdsf cxvcxsdf,,tester,testemail@gmail.com,"tester  testemail@gmail.com  fdsfdfdsf  cxvcxsdf  ",,"testemail@gmail.com "
+516c9acb976982140f000000,,,hyujikmnhj gtfhyvbg,,abcdef,hughnjt@gmail.com,"abcdef  hughnjt@gmail.com  hyujikmnhj  gtfhyvbg  ",,"hughnjt@gmail.com "
+514af8f4913db48c05000017,Master Of Library &amp; Information Science,,,Master Of Library &amp; Information Science,,,,degree,
+514af952913db48c05000019,Bachelor Of Engineering,,,Bachelor Of Engineering,,,,degree,
+514af970913db48c0500001a,Information Technology,,,Information Technology,,,,fieldofstudy,
+514af9b3913db48c0500001c,Accounting,,,Accounting,,,,fieldofstudy,
+514af992913db48c0500001b,Economics,,,Economics,,,,fieldofstudy,
+514b0970913db4ac08000020,Chemicals,,,Chemicals,,,,industry,
+514b094d913db4ac0800001f,Banking,,,Banking,,,,industry,
+514af84e913db48c05000015,University of Economics Ho Chi Minh City,,,University of Economics Ho Chi Minh City,,,,school,
+514af88b913db48c05000016,Vietnam National University - Ha Noi,,,Vietnam National University - Ha Noi,,,,school,
+514af827913db48c05000014,Vietnam National University - Ho Chi Minh City,,,Vietnam National University - Ho Chi Minh City,,,,school,
+514b0983913db4ac08000021,Design,,,Design,,,,industry,
+514af917913db48c05000018,Master Of Technology,,,Master Of Technology,,,,degree,

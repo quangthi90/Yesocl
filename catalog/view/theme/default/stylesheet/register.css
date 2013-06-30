@@ -1,0 +1,192 @@
+#y-content .register-box{
+    padding-bottom: 40px;
+}
+    #y-content .register-box .register-box-step{
+        border: 1px solid #c0c0c0;
+        margin-left: 0;
+        box-shadow: 0px 10px 20px #949494;
+        height: 485px;
+    }
+    #y-content .register-box .register-box-extend{
+        width: 3%;
+        height: 485px;
+        padding: 10px 0;
+    }
+    #y-content .register-box .register-box-right{
+        margin-left: 0;
+    }
+        #y-content .register-box .register-box-background{
+            background-color: #3d9915;
+            height: 100%;
+            width: 100%;
+            box-shadow: 0px 10px 20px #949494;
+            height: 465px;
+        }
+        #y-content .register-box .register-box-step .register-box-title{
+            color: #3d9915;
+        }
+            #y-content .register-box .register-box-step .form-horizontal > .control-group > label{
+                /*width: 30%;*/
+            }
+            #y-content .register-step1 .register-box-step .form-horizontal > .control-group > .controls{
+                /*margin-left: 35%;*/
+            }
+            #y-content .register-step1 .register-box-step .form-horizontal > .control-group > .controls input[type="text"]{
+                /*width: 80%;*/
+            }
+        #y-content .register-box .register-box-step .register-box-recommend{
+            border: 1px solid #3d9915;
+            border-radius: 5px;
+            padding: 10px;
+        }
+            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-heading{
+                height: 50px;
+                line-height: 32px;
+            }
+            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-heading,
+            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-content{
+                width: 90%;
+                margin: auto;
+            }
+            #y-content .register-box .register-box-step .register-box-recommend .regisert-recommend-icon{
+                background: url("../image/register-recommend-heading-icon.png") no-repeat;
+                height: 32px;
+                width: 20px;
+                margin-right: 5px;
+                margin-left: 5px;
+                float: left;
+            }
+        #y-content .register-box .register-box-step .register-note{
+            font-weight: normal;
+        }
+        #y-content .register-step2 .register-box-step .register-step2-content{
+            margin-top: 80px;
+        }
+        #y-content .register-box .register-box-step .register-add-email{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            background-color: #8acd6d;
+            border-radius: 5px;
+        }
+            #y-content .register-box .register-box-step .register-add-email .control-group{
+                margin-bottom: 0;
+            }
+                #y-content .register-step2 .register-box-step .register-add-email .control-group > label{
+                    width: 100px;
+                }
+                    #y-content .register-step2 .register-box-step .register-add-email .control-group > label > span{
+                        color: #fff;
+                    }
+                #y-content .register-step2 .register-box-step .register-add-email .control-group > .controls{
+                    margin-left: 120px;
+                }
+                    #y-content .register-step2 .register-box-step .register-add-email .control-group > .controls button{
+                        height: 32px;
+                        font-size: 15px;
+                        color: #6cb04f;
+                    }
+                #y-content .register-step2 .register-box-step .register-add-email .control-group input[type="text"]{
+                    width: 80%;
+                }
+            #y-content .register-box .register-box-step .register-table-heading{
+                background: #ffffff; /* Old browsers */
+                background: -moz-linear-gradient(top,  #ffffff 0%, #eaeaea 100%); /* FF3.6+ */
+                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
+                background: -webkit-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
+                background: -o-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Opera 11.10+ */
+                background: -ms-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* IE10+ */
+                background: linear-gradient(to bottom,  #ffffff 0%,#eaeaea 100%); /* W3C */
+                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 ); /* IE6-9 */
+                height: 30px;
+                line-height: 30px;
+            }
+        #y-content .register-box .register-box-step .register-skip{
+            color: #64ad44;
+        }
+#y-content .register-table{
+    border: 1px solid #cfcfcf;
+}
+    #y-content .register-table .register-table-heading > .pull-left{
+        margin-left: 10px;
+    }
+    #y-content .register-table .register-table-heading > .pull-right{
+        margin-right: 10px;
+    }
+    #y-content .register-table .register-table-content{
+        height: 287px;
+        overflow: auto;
+    }
+    #y-content .register-table .register-user-list{
+        border-top: 1px solid #cfcfcf;
+    }
+        #y-content .register-table .register-user-box .register-user-info .pull-left:first-child{
+            margin-left: 5px;
+            margin-top: 15px;
+        }
+        #y-content .register-table .register-user-box .register-user-info > div{
+            padding: 10px 5px;
+        }
+        #y-content .register-table .register-user-box .register-user-avatar{
+            border: 3px solid #b5c1c2;
+        }
+        #y-content .register-table .register-user-box .register-user-name{
+            font-weight: bold;
+            margin-top: 5px;
+        }
+#y-content .register-current-user-info{
+    border: 1px solid #ececec;
+    background: #fbfbfb; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fbfbfb 0%, #f4f4f4 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f4f4f4)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #fbfbfb 0%,#f4f4f4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #fbfbfb 0%,#f4f4f4 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #fbfbfb 0%,#f4f4f4 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #fbfbfb 0%,#f4f4f4 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
+}
+    #y-content .register-current-user-info > div{
+        padding: 20px;
+    }
+    #y-content .register-current-user-info .register-current-user-heading{
+        font-size: 17px;
+    }
+    #y-content .register-current-user-info .register-current-user-support-info{
+        color: #959595;
+    }
+#y-content .register-invite-friend{
+    background-color: #8acd6d;
+    border-radius: 0 0 5px 5px;
+}
+    #y-content .register-invite-friend > div{
+        padding: 20px;
+    }
+    #y-content .register-invite-friend .register-invite-input > textarea{
+        height: 100px;
+        width: 100%;
+        padding: 0;
+        resize: none;
+    }
+    #y-content .register-box .btn-facebook,
+    #y-content .register-box .btn-twitter{
+        height: 25px;
+        line-height: 15px;
+        padding-left: 35px;
+    }
+    #y-content .register-box .btn-facebook > i,
+    #y-content .register-box .btn-twitter > i{
+        position: absolute;
+        margin-left: -30px;
+        margin-top: -10px;
+    }
+    #y-content .register-box .btn-twitter{
+        margin-left: 5px;
+    }
+.space-top-10px{
+    margin-top: 10px;
+}
+.space-top-20px{
+    margin-top: 20px;
+}
+.border-top-none{
+    border-top: none !important;
+}

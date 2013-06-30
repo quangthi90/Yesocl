@@ -627,7 +627,7 @@ class Collection
 
     public function setSlaveOkay($ok = true)
     {
-        return $this->getMongoCollection()->setSlaveOkay($ok);
+    //    return $this->getMongoCollection()->setSlaveOkay($ok);
     }
 
     public function getSlaveOkay()

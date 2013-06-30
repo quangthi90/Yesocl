@@ -72,5 +72,19 @@ abstract class Controller {
 			exit();				
     	}
 	}
+
+	protected function twig_render() {
+		foreach ($this->children as $child) {
+			$this->data[basename($child)] = $this->getChild($child);
+		}
+
+		if (file_exists(DIR_TEMPLATE . $this->template)) {
+			$this->output = $this->twig->render($this->template, $this->data);
+			return $this->output;
+    	} else {
+			trigger_error('Error: Could not load template ' . DIR_TEMPLATE . $this->template . '!');
+			exit();				
+    	}
+	}
 }
 ?>
