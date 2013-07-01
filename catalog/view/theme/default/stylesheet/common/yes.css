@@ -337,8 +337,9 @@ label.in-line{
     left: 150px;
     right:0px;
     bottom: 42px;    
+    background: #ffffff;
     /*background: #ffffff url(../../image/content_bg.png) repeat-x middle left;*/
-    background: #ffffff url(../../image/b-bg.png) repeat top left;
+    /*background: #ffffff url(../../image/b-bg.png) repeat top left;*/
 }
 
 .no-header-fixed {
