@@ -174,6 +174,7 @@ class ControllerBranchBranch extends Controller {
 
 		// column
 		$this->data['column_branch'] = $this->language->get( 'column_branch' );
+		$this->data['column_company'] = $this->language->get( 'column_company' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 
@@ -202,14 +203,15 @@ class ControllerBranchBranch extends Controller {
 				'text' => $this->language->get( 'text_edit' ),
 				'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
-				);
+			);
 
 			$this->data['branchs'][] = array(
-				'id' => $branch->getId(),
-				'name' => $branch->getName(),
-				'status' => $branch->getStatus(),
-				'action' => $action,
-				);
+				'id' 		=> $branch->getId(),
+				'name' 		=> $branch->getName(),
+				'company' 	=> $branch->getCompany()->getName(),
+				'status' 	=> $branch->getStatus(),
+				'action' 	=> $action,
+			);
 		}
 
 		// pagination

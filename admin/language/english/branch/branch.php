@@ -15,6 +15,7 @@ $_['button_cancel'] 	= 'Cancel';
 
 // column
 $_['column_branch'] 	= 'Branch';
+$_['column_company'] 	= 'Company Owner';
 $_['column_status'] 	= 'Status';
 $_['column_action'] 	= 'Action';
 
