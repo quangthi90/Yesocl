@@ -9,9 +9,9 @@ class ModelBranchBranch extends Doctrine {
 		}else {
 			return false;
 		}
-
+		
 		// Company
-		if ( !isset($data['company_id']) ){
+		if ( isset($data['company_id']) ){
 			$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
 			if ( !$company ){
 				return false;
@@ -19,7 +19,7 @@ class ModelBranchBranch extends Doctrine {
 		}else{
 			return false;
 		}
-
+		
 		// status
 		if ( !isset( $data['status'] ) ) {
 			$data['status'] = 0;
@@ -43,7 +43,7 @@ class ModelBranchBranch extends Doctrine {
 		}else {
 			return false;
 		}
-
+		
 		// status
 		if ( !isset( $data['status'] ) ) {
 			$data['status'] = 0;

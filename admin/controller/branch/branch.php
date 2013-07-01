@@ -44,7 +44,7 @@ class ControllerBranchBranch extends Controller {
 			if ( $this->model_branch_branch->addBranch( $this->request->post ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
-				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );
 			}
 
 			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
@@ -78,7 +78,7 @@ class ControllerBranchBranch extends Controller {
 		$url .= '&page=' . $page;
 
 		if ( !isset( $this->request->get['branch_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			$this->session->data['error_warning'] = $this->language->get( 'error_update' );
 
 			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}

@@ -29,5 +29,7 @@ $_['error_company']		= 'Warning: Branch Company must be more than 1 characters a
 $_['error_name_exist'] 	= 'Warning: Branch Name is exist!';
 $_['error_warning'] 	= 'Warning: Error!';
 $_['success'] 			= 'Success: You have modified Branch!';
+$_['error_insert'] 		= 'Warning: Insert not success!';
+$_['error_update'] 		= 'Warning: Update not success!';
 
 ?>
