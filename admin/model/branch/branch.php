@@ -10,6 +10,16 @@ class ModelBranchBranch extends Doctrine {
 			return false;
 		}
 
+		// Company
+		if ( !isset($data['company_id']) ){
+			$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
+			if ( !$company ){
+				return false;
+			}
+		}else{
+			return false;
+		}
+
 		// status
 		if ( !isset( $data['status'] ) ) {
 			$data['status'] = 0;
@@ -18,6 +28,7 @@ class ModelBranchBranch extends Doctrine {
 		$branch = new Branch();
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
+		$branch->setCompany( $company );
 		
 		$this->dm->persist( $branch );
 		$this->dm->flush();
@@ -43,13 +54,23 @@ class ModelBranchBranch extends Doctrine {
 			return false;
 		}
 
-		// name is exist
-		/*if ( $branch->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		// Company
+		if ( isset($data['company_id']) ){
+			if ( !$branch->getCompany() || $data['company_id'] != $branch->getCompany()->getId() ){
+				$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
+				if ( !$company ){
+					return false;
+				}
+			}else{
+				$company = $branch->getCompany();
+			}
+		}else{
 			return false;
-		}*/
+		}
 
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
+		$branch->setCompany( $company );
 		
 		$this->dm->flush();
 
