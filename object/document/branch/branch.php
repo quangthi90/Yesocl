@@ -24,6 +24,9 @@ Class Branch {
 	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="branch") */
 	private $categories = array();
 
+	/** @MongoDB\ReferenceOne(targetDocument="\Document\Company\Company") */
+	private $company;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -72,11 +75,19 @@ Class Branch {
 		$this->categories[] = $category;
 	}
 
-	public function setCategorys( $categories ){
+	public function setCategories( $categories ){
 		$this->categories = $categories;
 	}
 
-	public function getCategorys(){
+	public function getCategories(){
 		return $this->categories;
+	}
+
+	public function setCompany( $company ){
+		$this->company = $company;
+	}
+
+	public function getCompany(){
+		return $this->company;
 	}
 }
