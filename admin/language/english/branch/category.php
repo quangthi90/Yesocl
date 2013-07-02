@@ -12,6 +12,7 @@ $_['text_category']			  = 'Category';
 $_['entry_name']              = 'Category Name:';
 $_['entry_parent']            = 'Category Parent:';
 $_['entry_order']             = 'Order:';
+$_['entry_branch']            = 'Branch:';
 
 // error
 $_['error_name']              = 'Category Name must be between 3 and 128 characters!';

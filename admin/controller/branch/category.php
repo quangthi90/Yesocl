@@ -255,7 +255,7 @@ class ControllerBranchCategory extends Controller {
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
-		$this->data['entry_code'] = $this->language->get( 'entry_code' );
+		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
 		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 		
 		// Link
@@ -280,13 +280,24 @@ class ControllerBranchCategory extends Controller {
 			$this->data['name'] = '';
 		}
 
-		// Entry code
-		if ( isset($this->request->post['code']) ){
-			$this->data['code'] = $this->request->post['code'];
-		}elseif ( isset($category) ){
-			$this->data['code'] = $category->getcode();
+		// Entry branch
+		if ( isset($this->request->post['branch_id']) ){
+			$this->data['branch_id'] = $this->request->post['branch_id'];
+		}elseif ( isset($category) && $category->getBranch() ){
+			$this->data['branch_id'] = $category->getBranch()->getId();
 		}else {
-			$this->data['code'] = '';
+			$this->data['branch_id'] = 0;
+		}
+
+		$this->load->model('branch/branch');
+		$branchs = $this->model_branch_branch->getAllBranchs();
+
+		$this->data['branchs'] = array();
+		foreach ( $branchs as $branch ) {
+			$this->data['branchs'][] = array(
+				'id' => $branch->getId(),
+				'name' => $branch->getName()
+			);
 		}
 
 		// Entry order
@@ -295,14 +306,11 @@ class ControllerBranchCategory extends Controller {
 		}elseif ( isset($category) ){
 			$this->data['order'] = $category->getOrder();
 		}else {
-			$this->data['order'] = '';
+			$this->data['order'] = 0;
 		}
 
-		if ( isset($this->request->get['category_id']) ){
-			$this->template = 'branch/category_form_edit.tpl';
-		}else{
-			$this->template = 'branch/category_form_view.tpl';
-		}
+		$this->template = 'branch/category_form.tpl';
+
 		$this->children = array(
 			'common/header',
 			'common/footer'

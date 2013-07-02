@@ -32,6 +32,16 @@
             <td><?php echo $entry_order; ?></td>
             <td><input class="input-xxlarge" required="required" type="text" name="order" value="<?php echo $order; ?>" /></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_branch; ?></td>
+            <td>
+              <select name="branch_id">
+                <?php foreach ( $branchs as $branch ) { ?>
+                <option <?php if ($branch['id'] == $branch_id){ ?>selected="selected"<?php } ?> value="<?php echo $branch['id'] ?>"><?php echo $branch['name'] ?></option>
+                <?php } ?>
+              </select>
+            </td>
+          </tr>
         </table>
       </form>
     </div>
