@@ -65,29 +65,39 @@ input[type="tel"],
 input[type="color"], .uneditable-input
 {
     font-size: 13px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    border-radius: 2px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
     height: 16px;
 }
 
 .input-prepend .add-on:first-child, .input-prepend .btn:first-child
 {
-    -webkit-border-radius: 2px 0px 0px 2px;
-    -moz-border-radius: 2px 0px 0px 2px;
-    border-radius: 2px 0px 0px 2px;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    -moz-border-radius: 0px 0px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
 }
 
 .input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input
 {
-    -webkit-border-radius: 0px 2px 2px 0px;
-    -moz-border-radius:  0px 2px 2px 0px;
-    border-radius:  0px 2px 2px 0px;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    -moz-border-radius:  0px 0px 0px 0px;
+    border-radius:  0px 0px 0px 0px;
+}
+
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
+  -webkit-border-radius: 0px 0px 0px 0px;
+  -moz-border-radius:  0px 0px 0px 0px;
+  border-radius:  0px 0px 0px 0px;
 }
 
 .input-append .add-on, .input-prepend .add-on
 {
     font-size:13px;
+}
+
+.input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input, .input-append .dropdown-menu, .input-prepend .dropdown-menu, .input-append .popover, .input-prepend .popover {
+  font-size: 12px;
 }
 
 form
@@ -177,7 +187,9 @@ a:focus > i{
 .btn {
   padding: 2px 15px;
   font-size: 13px;
-  border-radius: 1px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
 }
 
 i.big-icon {
@@ -215,10 +227,14 @@ i.icon-2x{
 
 .box-round {
     padding: 10px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
     border: 2px solid #3d9915;
+}
+
+.auto-hide {
+  display: none;
 }
 
 .current {
@@ -331,23 +347,15 @@ label.in-line{
 }
 
 #y-content {
-    padding: 20px;
-    padding-bottom: 0px;
+    padding: 20px 20px 0px 172px;    
     position: absolute;    
-    left: 150px;
+    top: 0px;
+    left: 0px;
     right:0px;
-    bottom: 42px;    
+    bottom: 68px;    
     background: #ffffff;
     /*background: #ffffff url(../../image/content_bg.png) repeat-x middle left;*/
     /*background: #ffffff url(../../image/b-bg.png) repeat top left;*/
-}
-
-.no-header-fixed {
-  top: 40px;
-}
-
-.has-header-fixed {
-  top: 80px;
 }
 
 #y-main-content{    
@@ -357,49 +365,26 @@ label.in-line{
     overflow-x: auto;
 }
 
-
 #y-footer
 {
     position:fixed;
     bottom: 0px;
     left: 0px;
-    right: 0px;
-    border-top: 3px solid #000;
-    background:#fff url(../../image/footer_bg.png) repeat-x bottom left;   
+    right: 0px;     
     z-index:10; 
-    height: 30px;
-    padding: 6px 20px 4px 20px;
-    font-size: 12px;
-}
-
-#y-footer .copyright {
-    text-shadow: 1px 1px 1px #ddd;
+    font-size: 10px;
 }
 
 #y-footer .copyright strong {
     color: #53A753;
-    font-size: 15px;
-}
-
-#y-footer .links-footer {
-    font-weight: bold;
-    text-align: center;
-}
-
-#y-footer .language-selection {
-  text-align: right;
-}
-
-#y-footer .language-selection select {
-    height: 30px;
+    font-size: 12px;
 }
 
 #y-sidebar {
     width: 150px;
     background: #265607 url(../../image/sidebar_bg.png) repeat top left;
     position: fixed;
-    top: 0px;
-    bottom: 40px;
+    top: 0px;    
     z-index: 10;
     color: #fff;
     text-align: center;     
@@ -1078,20 +1063,56 @@ label.in-line{
   color: #66c666;
 }
 
-#y-header #close-header {
-  bottom: 5px;
-  left: 0px;
+/*FOOTER BAR*/
+#yes-info {
+  text-align: center;
+  vertical-align: middle;
+  height: 20px;
+  width: 100%;
+  background: #ddd;
+  border-top: 1px solid #ccc;
 }
 
-#y-header .btn-container a i {
-  color: #000;
+#yes-info  .copyright {
+  margin-left: 10px;
 }
 
-#y-header .btn-container a:hover i {
-  color: green;
+#yes-footer-bar {
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  -webkit-box-shadow: -5px 1px 1px #ccc;
+  -moz-box-shadow: -5px 1px 1px #ccc;
+  box-shadow: -5px 1px 1px #ccc;
+  background-color: #033511; 
+  height: 47px;
 }
 
-#y-header #open-header {
-  top: 95px;
-  right: 10px;
+#yes-footer-bar .bar-wrapper {
+  margin: 5px 10px;
+  padding: 5px 5px;
+  -moz-box-shadow:    inset 0 0 15px #011402;
+  -webkit-box-shadow: inset 0 0 15px #011402;
+  box-shadow:         inset 0 0 15px #011402;
+}
+
+.bar-wrapper .language-box .input-append .add-on, .input-prepend .add-on {
+  padding: 2px 5px;
+  height: 19px;
+}
+
+.bar-wrapper .language-box .input-append select{
+  font-size: 12px;
+}
+
+#yes-footer-bar .bar-wrapper .input-prepend .auto-hide, 
+#yes-footer-bar .bar-wrapper .input-append .auto-hide {
+  display: none;
+}
+
+#yes-footer-bar .bar-wrapper .language-box .input-prepend:hover .auto-hide{
+  display: inline-block;
+}
+
+#yes-footer-bar .bar-wrapper .search .input-append:hover .auto-hide{
+  display: inline-block;
 }
