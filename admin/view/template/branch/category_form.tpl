@@ -35,11 +35,23 @@
           <tr>
             <td><?php echo $entry_branch; ?></td>
             <td>
-              <select name="branch_id">
+              <select name="branch_id" class="branch">
                 <?php foreach ( $branchs as $branch ) { ?>
                 <option <?php if ($branch['id'] == $branch_id){ ?>selected="selected"<?php } ?> value="<?php echo $branch['id'] ?>"><?php echo $branch['name'] ?></option>
                 <?php } ?>
               </select>
+            </td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_parent; ?></td>
+            <td>
+              <select name="parent_id" class="parent">
+                <option value="0">Root</option>
+                <?php foreach ( $parents as $parent ) { ?>
+                <option <?php if ($parent['id'] == $parent_id){ ?>selected="selected"<?php } ?> value="<?php echo $parent['id'] ?>"><?php echo $parent['name'] ?></option>
+                <?php } ?>
+              </select>
+              <input id="old-parent-id" type="hidden" value="<?php echo $parent_id; ?>" />
             </td>
           </tr>
         </table>
@@ -47,4 +59,29 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$(function(){
+  $('.branch').on('change', function(){
+    var branch_id = $(this).val();
+    $.ajax({
+      url: '<?php echo $get_categories_link; ?>',
+      dataType: 'json',
+      type: 'post',
+      data: {branch_id: branch_id},
+      success: function(items) {
+        var old_parent_id = $('#old-parent-id').val();
+        var options = '';
+        for (var i = 0; i < items.length; i++) {
+          var selected = '';
+          if ( items[i].id == old_parent_id ){
+            selected = 'selected="selected"';
+          }
+          options += '<option value="' + items[i].id + '" ' + selected + '>' + items[i].name + '</option>';
+        };
+        $('.parent').html(options);
+      }
+    });
+  });
+});
+</script>
 <?php echo $footer; ?>

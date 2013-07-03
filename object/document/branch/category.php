@@ -15,11 +15,11 @@ Class Category {
 	/** @MongoDB\ReferenceOne(targetDocument="Branch", inversedBy="categories") */
 	private $branch;
 
-	/** @MongoDB\ReferenceOne(targetDocument="Category", inversedBy="parent") */
-	private $children;
-
-	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="children") */
+	/** @MongoDB\ReferenceOne(targetDocument="Category", inversedBy="children") */
 	private $parent;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="parent") */
+	private $children;
 	
 	/** @MongoDB\Boolean */
 	private $status;

@@ -23,11 +23,17 @@ class ModelBranchCategory extends Doctrine {
 		if ( isset($data['order']) && !empty($data['order']) ){
 			$order = $data['order'];
 		}
+
+		$parent = null;
+		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
+			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		}		
 		
 		$category = new Category();
 		$category->setName( $data['name'] );
 		$category->setBranch( $branch );
 		$category->setOrder( $order );
+		$category->setParent( $parent );
 
 		$this->dm->persist( $category );
 		$this->dm->flush();
@@ -59,9 +65,15 @@ class ModelBranchCategory extends Doctrine {
 			$order = $data['order'];
 		}
 
+		$parent = null;
+		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
+			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		}
+
 		$category->setName( $data['name'] );
 		$category->setBranch( $branch );
 		$category->setOrder( $order );
+		$category->setParent( $parent );
 
 		$this->dm->flush();
 	}
@@ -90,19 +102,28 @@ class ModelBranchCategory extends Doctrine {
 		if (!isset($data['start']) || ((int)$data['start'] < 0)) {
 			$data['start'] = 0;
 		}
+		if (!isset($data['sort']) || empty($data['sort']) ){
+			$data['sort'] = 'order';
+		}
 
 		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )
     		->limit( $data['limit'] )
     		->skip( $data['start'] )
-    		->sort( 'order' );
+    		->sort( $data['sort'] );
     	
     	return $query->getQuery()->execute();
 	}
 
-	public function getAllCategories() {
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )->sort( 'order' );
-    		
-    	return $query->getQuery()->execute();
+	public function getAllCategories( $data = array() ) {
+		$query = array();
+		if ( isset($data['branch_id']) && !empty($data['branch_id']) ){
+			$query['branch.id'] = $data['branch_id'];
+		}
+		if (!isset($data['sort']) || empty($data['sort']) ){
+			$data['sort'] = 'order';
+		}
+
+		return $this->dm->getRepository( 'Document\Branch\Category' )->findBy($query)->sort(array($data['sort'] => 1));
 	}
 	
 	public function getTotalCategories() {
