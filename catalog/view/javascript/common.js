@@ -197,31 +197,22 @@ BlockFeed.prototype.putFeeds = function() {
 
 function FlexibleElement(el) {
 	this.sidebar = el.find('#y-sidebar');
-	this.header = el.find('#y-header');
 	this.main = el.find('#y-content');
 	this.closeSidebar = this.sidebar.find('#close-bottom-sidebar');
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
-	this.closeHeader = this.header.find('#close-header');
-	this.openHeader = this.header.find('#open-header');
 	this.attachEvents();
 }
 
 FlexibleElement.prototype.attachEvents = function() { 
 	var sb = this.sidebar;
-	var hd = this.header;
 	var m = this.main;
 	var os = this.openSidebar;
-	var hs = this.openHeader;
 	this.closeSidebar.show();
 	this.openSidebar.hide();
-	this.closeHeader.show();
-	this.openHeader.hide();
-	var topMain = m.offset().top;
 
 	this.closeSidebar.click(function(e) {
 		e.preventDefault();
-		hd.animate({"left": "0px"}, 300);
-		m.animate({"left": "0px"}, 200, function() {
+		m.animate({"paddingLeft": "20px"}, 200, function() {
 			sb.animate({"left": "-300px"}, 500, function(){
 				os.show();		
 			});	
@@ -231,23 +222,7 @@ FlexibleElement.prototype.attachEvents = function() {
 		e.preventDefault();
 		$(this).hide();	
 		sb.animate({"left": "0px"}, 300, function() {
-			hd.animate({"left": "152px"}, 500);
-			m.animate({"left": "152px"}, 500); 	
+			m.animate({"paddingLeft": "172px"}, 500); 	
 		});		
-	});
-	this.closeHeader.click(function(e) {
-		e.preventDefault();
-		m.animate({"top": "0px"}, 300, function() {
-			hd.animate({"top": "-100px"}, 500, function() {
-				hs.show();
-			});
-		});	
-	});
-	this.openHeader.click(function(e) {
-		e.preventDefault();
-		hs.hide();
-		hd.animate({"top": "0px"}, 300, function() {
-			m.animate({"top": topMain }, 500);
-		});	
 	});
 }

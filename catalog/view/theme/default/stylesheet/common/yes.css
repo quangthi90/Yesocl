@@ -45,6 +45,23 @@ div.radio.active, div.checker.active{
   height: 27px;
 }
 
+.language-box .icon-yes-flag {
+  display: inline-block;
+  height: 11px;
+  width: 16px;
+}
+
+.language-box a:hover .icon-yes-flag { 
+  
+}
+
+.language-box .icon-lang-vn {
+  background: url('../../image/flags/vn.png');
+}
+.language-box .icon-lang-eng {
+  background: url('../../image/flags/eng.png');
+}
+
 /*end Format Yes Style*/
 /*OVERLOAD BOOTSTRAP*/
 
@@ -65,30 +82,7 @@ input[type="tel"],
 input[type="color"], .uneditable-input
 {
     font-size: 13px;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
     height: 16px;
-}
-
-.input-prepend .add-on:first-child, .input-prepend .btn:first-child
-{
-    -webkit-border-radius: 0px 0px 0px 0px;
-    -moz-border-radius: 0px 0px 0px 0px;
-    border-radius: 0px 0px 0px 0px;
-}
-
-.input-append input, .input-prepend input, .input-append select, .input-prepend select, .input-append .uneditable-input, .input-prepend .uneditable-input
-{
-    -webkit-border-radius: 0px 0px 0px 0px;
-    -moz-border-radius:  0px 0px 0px 0px;
-    border-radius:  0px 0px 0px 0px;
-}
-
-.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
-  -webkit-border-radius: 0px 0px 0px 0px;
-  -moz-border-radius:  0px 0px 0px 0px;
-  border-radius:  0px 0px 0px 0px;
 }
 
 .input-append .add-on, .input-prepend .add-on
@@ -163,7 +157,6 @@ ul{
 }
 
 a {
-  color: #232323;
   text-decoration: none;
 }
 
@@ -174,7 +167,6 @@ i{
 
 a:hover,
 a:focus {
-  color: #54AA54;
   text-decoration: none;
 }
 
@@ -182,7 +174,6 @@ a:hover > i,
 a:focus > i{
   color: #66c666;
 }
-
 
 .btn {
   padding: 2px 15px;
@@ -710,11 +701,12 @@ label.in-line{
 .sidebar-controls {
   color: #fff;
   position: relative;
+  padding-bottom: 20px;
 }
 
 .sidebar-controls .nav-list > li {
   text-align: left;
-  margin-top: 1px;
+  margin-top: 0px;
 }
 
 .sidebar-controls .nav-list .nav-header {
@@ -748,13 +740,14 @@ label.in-line{
 
 .sidebar-controls .nav-list .nav-header { 
   color: #fff;
-  font-size: 13px;
+  font-size: 12px;
+  display: none;
 }
 
 .sidebar-controls .nav-list .divider {
   border-bottom: 1px solid #054105;
   background-color: #000;
-  margin: 10px 0px 5px 0px;
+  margin: 5px 0px 5px 0px;
 }
 
 .sidebar-controls .nav-list > .active > a, 
@@ -774,7 +767,6 @@ label.in-line{
   background-color: #fff;
   color: #3b8f39;
 }
-
 
 /*FORM*/
 .y-frm
@@ -943,6 +935,8 @@ label.in-line{
   width: 30px;
   height: 30px;
   background: #69b538;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
   border-radius: 25px;
   line-height: 32px;
   text-align: center;
@@ -1078,21 +1072,20 @@ label.in-line{
 }
 
 #yes-footer-bar {
-  overflow: hidden;
+  padding: 5px 10px;
   border-bottom: 1px solid #ddd;
   -webkit-box-shadow: -5px 1px 1px #ccc;
   -moz-box-shadow: -5px 1px 1px #ccc;
   box-shadow: -5px 1px 1px #ccc;
   background-color: #033511; 
-  height: 47px;
 }
 
-#yes-footer-bar .bar-wrapper {
-  margin: 5px 10px;
+#yes-footer-bar .bar-wrapper {  
   padding: 5px 5px;
   -moz-box-shadow:    inset 0 0 15px #011402;
   -webkit-box-shadow: inset 0 0 15px #011402;
   box-shadow:         inset 0 0 15px #011402;
+  height: 25px;
 }
 
 .bar-wrapper .language-box .input-append .add-on, .input-prepend .add-on {
@@ -1109,10 +1102,6 @@ label.in-line{
   display: none;
 }
 
-#yes-footer-bar .bar-wrapper .language-box .input-prepend:hover .auto-hide{
-  display: inline-block;
-}
-
-#yes-footer-bar .bar-wrapper .search .input-append:hover .auto-hide{
+#yes-footer-bar .bar-wrapper .search:hover .auto-hide{
   display: inline-block;
 }
