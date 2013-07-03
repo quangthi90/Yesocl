@@ -24,6 +24,9 @@ Class Category {
 	/** @MongoDB\Boolean */
 	private $status;
 
+	/** @MongoDB\Int */
+	private $order;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -70,5 +73,13 @@ Class Category {
 
 	public function getChildren(){
 		return $this->children;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 }

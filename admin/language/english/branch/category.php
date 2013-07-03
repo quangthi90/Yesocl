@@ -21,6 +21,7 @@ $_['error_permission']        = 'Warning: You do not have permission to modify C
 // Column
 $_['column_name']             = 'Category Name';
 $_['column_parent']           = 'Category Parent';
+$_['column_branch']           = 'Branch';
 $_['column_order']            = 'Order';
 $_['column_category']         = 'Category';
 $_['column_action'] 		  = 'Action';

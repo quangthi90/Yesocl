@@ -29,7 +29,7 @@ class ControllerBranchCategory extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_branch_category->addcategory( $this->request->post );
+			$this->model_branch_category->addCategory( $this->request->post );
 			
 			$this->session->branch['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'branch/category', 'token=' . $this->session->data['token'], 'SSL' ) );
@@ -130,11 +130,11 @@ class ControllerBranchCategory extends Controller {
 		$this->data['text_category'] = $this->language->get( 'text_category' );
 		$this->data['column_name'] = $this->language->get( 'column_name' );	
 		$this->data['column_parent'] = $this->language->get( 'column_parent' );
+		$this->data['column_branch'] = $this->language->get( 'column_branch' );
 		$this->data['column_order'] = $this->language->get( 'column_order' );
 		$this->data['column_category'] = $this->language->get( 'column_category' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
-		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
-		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
 		
 		// Confirm
@@ -154,32 +154,28 @@ class ControllerBranchCategory extends Controller {
 			'start' => $this->limit * ($page - 1)
 		);
 
-		$categorys = $this->model_branch_category->getcategorys( $data );
+		$categories = $this->model_branch_category->getCategories( $data );
 		
-		$category_total = $this->model_branch_category->getTotalcategorys();
+		$category_total = $this->model_branch_category->getTotalCategories();
 		
-		$this->data['categorys'] = array();
+		$this->data['categories'] = array();
 		
-		if ( $categorys ){
-			foreach ( $categorys as $category ){
-				$data = array();
-				
-				if ( $category->getCode() == $this->config->get('category_view') ){
-					continue;
-				}
+		if ( $categories ){
+			foreach ( $categories as $category ){
+				$action = array();
 
-				$data[] = array(
+				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'branch/category/update', 'category_id=' . $category->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
-				$this->data['categorys'][] = array(
+				$this->data['categories'][] = array(
 					'id' => $category->getId(),
 					'name' => $category->getName(),
-					'code' => $category->getCode(),
+					'branch' => $category->getBranch()->getName(),
 					'order' => $category->getOrder(),
-					'category' => $data,
+					'action' => $action
 				);
 			}
 		}
@@ -322,16 +318,6 @@ class ControllerBranchCategory extends Controller {
 	private function isValidateForm(){
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}
-
-		if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 20 ){
-			$this->error['error_code'] = $this->language->get( 'error_code' );
-		}
-
-		$categorys = $this->model_branch_category->getcategoryByCode( strtolower(trim($this->request->post['code'])) );
-		// print("<pre>"); var_dump($categorys); exit;
-		if ( count($categorys) > 1 || (count($categorys) == 1 && (!isset($this->request->get['category_id']) || !array_key_exists($this->request->get['category_id'], $categorys->toArray()))) ){
-			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
 		}
 
 		if ( $this->error){
