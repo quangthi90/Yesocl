@@ -70,29 +70,6 @@ class ModelBranchCategory extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
-				
-				// if Category = 'view' ==> not del
-				if ( $category->getCode() == $this->config->get('action_view') ){
-					continue;
-				}
-
-				$layouts = $this->dm->getRepository( 'Document\Branch\Layout' )->findBy( array('Categories.id' => $id) );
-				foreach ( $layouts as $layout ) {
-					$layout->removeCategory( $id );
-				}
-
-				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permissions.Categories.id' => $id) );
-				foreach ( $groups as $group ) {
-					$permissions = $group->getPermissionByCategoryId( $id );
-					foreach ( $permissions as $permission ) {
-						$group->getPermissions()->removeElement( $permission );
-					}
-				}
-
-				$config = $this->dm->getRepository('Document\Setting\Config')->findOneByKey( $this->config->get( 'action_title' ) . $category->getCode() );
-				if ( $config ){
-					$this->dm->remove( $config );
-				}
 
 				$this->dm->remove( $category );
 			}
