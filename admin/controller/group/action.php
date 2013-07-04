@@ -127,12 +127,14 @@ class ControllerGroupAction extends Controller {
 		
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
-		$this->data['text_status'] = $this->language->get( 'text_status' );
-		$this->data['text_action'] = $this->language->get( 'text_action' );	
-		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
+
+		$this->data['column_name'] = $this->language->get( 'column_name' );
+		$this->data['column_code'] = $this->language->get( 'column_code' );
+		$this->data['column_order'] = $this->language->get( 'column_order' );
+		$this->data['column_action'] = $this->language->get( 'column_action' );
 		
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get( 'confirm_del' );
@@ -164,6 +166,8 @@ class ControllerGroupAction extends Controller {
 				$this->data['actions'][] = array(
 					'id' => $action->getId(),
 					'name' => $action->getName(),
+					'code' => $action->getCode(),
+					'order' => $action->getOrder(), 
 					'action' => $data,
 				);
 			}
