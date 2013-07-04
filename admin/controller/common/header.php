@@ -66,6 +66,8 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_design'] = $this->language->get('text_design');
 		$this->data['text_layout'] = $this->language->get('text_layout');
 		$this->data['text_action'] = $this->language->get('text_action');
+
+		$this->data['text_setting'] = $this->language->get('text_setting');
 		
 		$this->data['text_localisation'] = $this->language->get('text_localisation');
 		$this->data['text_country'] = $this->language->get('text_country');
@@ -130,6 +132,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['admin'] = $this->url->link('admin/admin', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['action'] = $this->url->link('design/action', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['group_action'] = $this->url->link('group/action', 'token=' . $this->session->data['token'], 'SSL');
 
 			$this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 		}
