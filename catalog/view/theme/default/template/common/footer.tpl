@@ -5,7 +5,7 @@
               <form>
                   <div class="input-prepend">                    
                     <button class="btn btn-success" type="button" >Search</button>
-                    <input class="auto-hide" id="searchText" type="text">
+                    <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
                 </div>          
               </form> 
             </div> 

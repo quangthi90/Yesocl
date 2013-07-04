@@ -199,6 +199,7 @@ function FlexibleElement(el) {
 	this.sidebar = el.find('#y-sidebar');
 	this.main = el.find('#y-content');
 	this.footerBar = el.find('#yes-footer-bar');
+	this.sidebarControl = this.sidebar.find('.sidebar-controls');
 	this.closeSidebar = this.sidebar.find('#close-bottom-sidebar');
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
 	this.openSearch = this.footerBar.find('.search');
@@ -209,28 +210,37 @@ function FlexibleElement(el) {
 FlexibleElement.prototype.attachEvents = function() { 
 	var sb = this.sidebar;
 	var m = this.main;
+	var sc = this.sidebarControl;
 	var os = this.openSidebar;
+	var cl = this.closeSidebar;
 	var sT = this.searchTxt;
 	this.closeSidebar.show();
 	this.openSidebar.hide();
 
 	this.closeSidebar.click(function(e) {
 		e.preventDefault();
-		m.animate({"paddingLeft": "20px"}, 200, function() {
-			sb.animate({"left": "-300px"}, 500, function(){
-				os.show();		
-			});	
+		$(this).hide();	
+		m.animate({"paddingLeft": "147px","left" : "0px"}, 200, function() {
+			sc.slideUp(300, function() {
+				sb.animate({ "width" : "120px"}, 200, function() {
+					sb.css("bottom","auto");
+					os.show();
+				});				
+			});
 		});		
 	});
 	this.openSidebar.click(function(e) {
 		e.preventDefault();
 		$(this).hide();	
-		sb.animate({"left": "0px"}, 300, function() {
-			m.animate({"paddingLeft": "172px"}, 500); 	
-		});		
+		sc.slideDown(200, function() {
+			sb.animate({ "bottom" : "68px", "width" : "150px"}, 200, function() {
+				m.animate({"left": "152px" , "paddingLeft": "25px"}, 500); 	
+				cl.show();
+			});			
+		});			
 	});
 	this.openSearch.hover(function() {
-		sT.slideDown(200); 
+		sT.slideDown(100); 		
 	}, function() {
 		if(sT.is(":focus") && sT.val().trim().length > 0) {
 			return;

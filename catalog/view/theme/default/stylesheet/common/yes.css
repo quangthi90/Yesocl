@@ -145,8 +145,6 @@ select
 body
 {
     height: 100%;
-    font-size: 14px;
-    /*color: #000;*/
     width:auto;
 }
 
@@ -338,10 +336,10 @@ label.in-line{
 }
 
 #y-content {
-    padding: 20px 20px 0px 172px;    
+    padding: 25px 25px 25px 25px;    
     position: absolute;    
     top: 0px;
-    left: 0px;
+    left: 152px;
     right:0px;
     bottom: 68px;    
     background: #ffffff;
@@ -373,19 +371,22 @@ label.in-line{
 
 #y-sidebar {
     width: 150px;
-    background: #265607 url(../../image/sidebar_bg.png) repeat top left;
+    /*background: #265607 url(../../image/sidebar_bg.png) repeat top left;*/
+    background: rgb(0, 77, 21);
     position: fixed;
     top: 0px;    
+    bottom: 67px;
     z-index: 10;
     color: #fff;
     text-align: center;     
     border-right: 2px solid #001000;
+    padding-bottom: 20px;
 }
   
   #y-sidebar .sidebar-wrapper {
     position: relative;
     height: 100%;
-    width: 100%;
+    width: 100%;    
   }
 
     #y-sidebar .sidebar-border-right{
@@ -393,7 +394,8 @@ label.in-line{
 	}
 
 		#y-sidebar .sidebar-border-right .sidebar-box{
-			border-bottom: 1px solid #054105;
+			/*border-bottom: 1px solid #054105;*/
+      border-bottom: 1px solid rgb(41, 136, 41);
 			border-top: 1px solid #000b00;
 		}
 
@@ -407,8 +409,8 @@ label.in-line{
 		}
 
 			#y-sidebar .sidebar-border-right .logo > a > img{
-				max-height: 80%;
-				margin: 10px;
+				width: 80%;
+				margin: 10px 0px;
 			}
 
 		#y-sidebar .sidebar-border-right .sidebar-user{
@@ -745,7 +747,8 @@ label.in-line{
 }
 
 .sidebar-controls .nav-list .divider {
-  border-bottom: 1px solid #054105;
+  /*border-bottom: 1px solid #054105;*/
+  border-bottom: 1px solid rgb(48, 122, 48);
   background-color: #000;
   margin: 5px 0px 5px 0px;
 }
@@ -1017,6 +1020,15 @@ label.in-line{
 /*Close*/
 .btn-container {
   position: absolute;  
+  bottom: -20px;
+  left: 0px;
+  right: -2px;
+  background: #000;
+  border-top: 1px inset #3B8F39;
+}
+
+.btn-container:hover {
+  border-top: 1px inset #1ece18; 
 }
 
 .btn-container a {
@@ -1031,31 +1043,7 @@ label.in-line{
   color: #66c666;
 }
 
-#y-sidebar #close-bottom-sidebar {
-  bottom: 3px;
-  right: 3px;
-}
 
-#y-sidebar #open-bottom-sidebar {
-  bottom: 20px;
-  right: 3px;
-  left: 300px;
-  width: 50px;
-  background: #ddd;
-}
-
-#y-sidebar #open-bottom-sidebar:hover {
-  background: #fff;
-  border: 1px solid #ccc;
-}
-
-#y-sidebar #open-bottom-sidebar a i {
-  color: #000;
-}
-
-#y-sidebar #open-bottom-sidebar a:hover i {
-  color: #66c666;
-}
 
 /*FOOTER BAR*/
 #yes-info {
