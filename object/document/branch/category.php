@@ -10,13 +10,22 @@ Class Category {
 	/** 
 	 * @MongoDB\String 
 	 */
-	private $name; 
+	private $name;
 
-	/** @MongoDB\ReferenceMany(targetDocument="Branch", inversedBy="categories") */
+	/** @MongoDB\ReferenceOne(targetDocument="Branch", inversedBy="categories") */
 	private $branch;
+
+	/** @MongoDB\ReferenceOne(targetDocument="Category", inversedBy="children") */
+	private $parent;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="parent") */
+	private $children;
 	
 	/** @MongoDB\Boolean */
 	private $status;
+
+	/** @MongoDB\Int */
+	private $order;
 
 	public function getId(){
 		return $this->id;
@@ -44,5 +53,33 @@ Class Category {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function setParent( $parent ){
+		$this->parent = $parent;
+	}
+
+	public function getParent(){
+		return $this->parent;
+	}
+
+	public function addChild( $child ){
+		$this->children[] = $child;
+	}
+
+	public function setChildren( $children ){
+		$this->children = $children;
+	}
+
+	public function getChildren(){
+		return $this->children;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 }

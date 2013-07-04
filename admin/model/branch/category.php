@@ -5,28 +5,35 @@ use Document\Branch\Category,
 
 class ModelBranchCategory extends Doctrine {
 	public function addCategory( $data = array() ) {
-		// Name is require
+		// Name is required
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
 
-		if ( !isset($data['code']) || empty($data['code']) ){
+		// Branch is requied
+		if ( !isset($data['branch_id']) || empty($data['branch_id']) ){
 			return false;
 		}
-		$data['code'] = strtolower(trim($data['code']));
+		$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+		if ( !$branch ){
+			return false;
+		}
+
+		$order = 0;
+		if ( isset($data['order']) && !empty($data['order']) ){
+			$order = $data['order'];
+		}
+
+		$parent = null;
+		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
+			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		}		
 		
 		$category = new Category();
 		$category->setName( $data['name'] );
-		$category->setCode( $data['code'] );
-		if ( isset($data['order']) && !empty($data['order']) ){
-			$category->setOrder( $data['order'] );
-		}
-
-		$config = new Config();
-		$this->config->load( 'Category' );
-		$config->setKey( $this->config->get( 'action_title' ) . $data['code'] );
-		$config->setValue( $data['code'] );
-		$this->dm->persist( $config );		
+		$category->setBranch( $branch );
+		$category->setOrder( $order );
+		$category->setParent( $parent );
 
 		$this->dm->persist( $category );
 		$this->dm->flush();
@@ -37,17 +44,36 @@ class ModelBranchCategory extends Doctrine {
 		if ( !isset($data['name']) || empty($data['name']) ){
 			return false;
 		}
+
+		// Branch is requied
+		if ( !isset($data['branch_id']) || empty($data['branch_id']) ){
+			return false;
+		}
+		$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+		if ( !$branch ){
+			return false;
+		}
 		
+		// Check category
 		$category = $this->dm->getRepository('Document\Branch\Category')->find( $id );
-		
 		if ( !$category ){
 			return false;
 		}
 
-		$category->setName( $data['name'] ); 
+		$order = 0;
 		if ( isset($data['order']) && !empty($data['order']) ){
-			$category->setOrder( $data['order'] );
+			$order = $data['order'];
 		}
+
+		$parent = null;
+		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
+			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		}
+
+		$category->setName( $data['name'] );
+		$category->setBranch( $branch );
+		$category->setOrder( $order );
+		$category->setParent( $parent );
 
 		$this->dm->flush();
 	}
@@ -56,29 +82,6 @@ class ModelBranchCategory extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
-				
-				// if Category = 'view' ==> not del
-				if ( $category->getCode() == $this->config->get('action_view') ){
-					continue;
-				}
-
-				$layouts = $this->dm->getRepository( 'Document\Branch\Layout' )->findBy( array('Categorys.id' => $id) );
-				foreach ( $layouts as $layout ) {
-					$layout->removeCategory( $id );
-				}
-
-				$groups = $this->dm->getRepository( 'Document\Admin\Group' )->findBy( array('permissions.Categorys.id' => $id) );
-				foreach ( $groups as $group ) {
-					$permissions = $group->getPermissionByCategoryId( $id );
-					foreach ( $permissions as $permission ) {
-						$group->getPermissions()->removeElement( $permission );
-					}
-				}
-
-				$config = $this->dm->getRepository('Document\Setting\Config')->findOneByKey( $this->config->get( 'action_title' ) . $category->getCode() );
-				if ( $config ){
-					$this->dm->remove( $config );
-				}
 
 				$this->dm->remove( $category );
 			}
@@ -92,34 +95,43 @@ class ModelBranchCategory extends Doctrine {
 		return $category;
 	}
 
-	public function getCategorys( $data = array() ) {
+	public function getCategories( $data = array() ) {
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
 		}
 		if (!isset($data['start']) || ((int)$data['start'] < 0)) {
 			$data['start'] = 0;
 		}
+		if (!isset($data['sort']) || empty($data['sort']) ){
+			$data['sort'] = 'order';
+		}
 
 		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )
     		->limit( $data['limit'] )
     		->skip( $data['start'] )
-    		->sort( 'order' );
+    		->sort( $data['sort'] );
     	
     	return $query->getQuery()->execute();
 	}
 
-	public function getAllCategorys() {
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )->sort( 'order' );
-    		
-    	return $query->getQuery()->execute();
+	public function getAllCategories( $data = array() ) {
+		$query = array();
+		if ( isset($data['branch_id']) && !empty($data['branch_id']) ){
+			$query['branch.id'] = $data['branch_id'];
+		}
+		if (!isset($data['sort']) || empty($data['sort']) ){
+			$data['sort'] = 'order';
+		}
+
+		return $this->dm->getRepository( 'Document\Branch\Category' )->findBy($query)->sort(array($data['sort'] => 1));
 	}
 	
-	public function getTotalCategorys() {
+	public function getTotalCategories() {
 		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' );
 
-		$categorys = $query->getQuery()->execute();
+		$categories = $query->getQuery()->execute();
 
-		return count($categorys);
+		return count($categories);
 	}
 
 	public function getCategoryByCode( $code ){
