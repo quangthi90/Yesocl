@@ -1,5 +1,5 @@
 <?php 
-class ControllerGrouptype extends Controller {
+class ControllerGroupType extends Controller {
 	private $error = array( );
 	private $limit = 10;
 	private $route = 'group/type';
@@ -29,7 +29,7 @@ class ControllerGrouptype extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_group_type->addtype( $this->request->post );
+			$this->model_group_type->addType( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL') );
@@ -52,7 +52,7 @@ class ControllerGrouptype extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_group_type->edittype( $this->request->get['type_id'], $this->request->post );
+			$this->model_group_type->editType( $this->request->get['type_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL') );
@@ -73,7 +73,7 @@ class ControllerGrouptype extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_group_type->deletetype( $this->request->post );
+			$this->model_group_type->deleteType( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('group/type', 'token=' . $this->session->data['token'], 'SSL') );

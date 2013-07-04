@@ -23,10 +23,9 @@ class ModelDesignAction extends Doctrine {
 		}
 
 		$config = new Config();
-		$this->config->load( 'action' );
 		$config->setKey( $this->config->get( 'action_title' ) . $data['code'] );
 		$config->setValue( $data['code'] );
-		$this->dm->persist( $config );		
+		$this->dm->persist( $config );
 
 		$this->dm->persist( $action );
 		$this->dm->flush();
