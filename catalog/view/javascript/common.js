@@ -198,8 +198,11 @@ BlockFeed.prototype.putFeeds = function() {
 function FlexibleElement(el) {
 	this.sidebar = el.find('#y-sidebar');
 	this.main = el.find('#y-content');
+	this.footerBar = el.find('#yes-footer-bar');
 	this.closeSidebar = this.sidebar.find('#close-bottom-sidebar');
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
+	this.openSearch = this.footerBar.find('.search');
+	this.searchTxt = this.openSearch.find('#searchText'); 
 	this.attachEvents();
 }
 
@@ -207,6 +210,7 @@ FlexibleElement.prototype.attachEvents = function() {
 	var sb = this.sidebar;
 	var m = this.main;
 	var os = this.openSidebar;
+	var sT = this.searchTxt;
 	this.closeSidebar.show();
 	this.openSidebar.hide();
 
@@ -225,4 +229,13 @@ FlexibleElement.prototype.attachEvents = function() {
 			m.animate({"paddingLeft": "172px"}, 500); 	
 		});		
 	});
+	this.openSearch.hover(function() {
+		sT.slideDown(200); 
+	}, function() {
+		if(sT.is(":focus") && sT.val().trim().length > 0) {
+			return;
+		}
+		sT.slideUp(100);
+	});
 }
+

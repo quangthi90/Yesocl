@@ -1101,7 +1101,3 @@ label.in-line{
 #yes-footer-bar .bar-wrapper .input-append .auto-hide {
   display: none;
 }
-
-#yes-footer-bar .bar-wrapper .search:hover .auto-hide{
-  display: inline-block;
-}
