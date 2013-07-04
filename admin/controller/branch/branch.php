@@ -44,7 +44,7 @@ class ControllerBranchBranch extends Controller {
 			if ( $this->model_branch_branch->addBranch( $this->request->post ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
-				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );
 			}
 
 			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
@@ -78,7 +78,7 @@ class ControllerBranchBranch extends Controller {
 		$url .= '&page=' . $page;
 
 		if ( !isset( $this->request->get['branch_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			$this->session->data['error_warning'] = $this->language->get( 'error_update' );
 
 			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
@@ -174,6 +174,7 @@ class ControllerBranchBranch extends Controller {
 
 		// column
 		$this->data['column_branch'] = $this->language->get( 'column_branch' );
+		$this->data['column_company'] = $this->language->get( 'column_company' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 
@@ -202,14 +203,15 @@ class ControllerBranchBranch extends Controller {
 				'text' => $this->language->get( 'text_edit' ),
 				'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
-				);
+			);
 
 			$this->data['branchs'][] = array(
-				'id' => $branch->getId(),
-				'name' => $branch->getName(),
-				'status' => $branch->getStatus(),
-				'action' => $action,
-				);
+				'id' 		=> $branch->getId(),
+				'name' 		=> $branch->getName(),
+				'company' 	=> $branch->getCompany()->getName(),
+				'status' 	=> $branch->getStatus(),
+				'action' 	=> $action,
+			);
 		}
 
 		// pagination
@@ -253,6 +255,12 @@ class ControllerBranchBranch extends Controller {
 			$this->data['error_name'] = '';
 		}
 
+		if ( isset( $this->error['error_company'] ) ) {
+			$this->data['error_company'] = $this->error['error_company'];
+		}else {
+			$this->data['error_company'] = '';
+		}
+
 		// page
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -285,6 +293,7 @@ class ControllerBranchBranch extends Controller {
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -320,6 +329,19 @@ class ControllerBranchBranch extends Controller {
 			$this->data['status'] = 1;
 		}
 
+		// company
+		if ( isset( $this->request->post['company'] ) ) {
+			$this->data['company'] = $this->request->post['company'];
+		}elseif ( isset( $branch ) && $branch->getCompany() ) {
+			$this->data['company'] = $branch->getCompany()->getName();
+			$this->data['company_id'] = $branch->getCompany()->getId();
+		}else {
+			$this->data['company'] = '';
+			$this->data['company_id'] = 0;
+		}
+
+		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link('company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
+
 		// template
 		$this->template = 'branch/branch_form.tpl';
 
@@ -336,17 +358,8 @@ class ControllerBranchBranch extends Controller {
 	private function isValidateForm() {
 		if ( !isset( $this->request->post['name']) || strlen( trim( $this->request->post['name'] ) ) < 1 || strlen( trim( $this->request->post['name'] ) ) > 128  ) {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}else {
-			if ( isset( $this->request->get['branch_id'] ) ) {
-				$this->load->model( 'branch/branch' );
-
-				$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
-				if ( !empty( $branch ) ) {
-					if ( $this->model_branch_branch->isExistName( $this->request->post['name'] ) && $branch->getName() != strtolower( trim( $this->request->post['name'] ) ) ) {
-						$this->error['error_name'] = $this->language->get( 'error_name_exist' );
-					}
-				}
-			}
+		}elseif ( !isset( $this->request->post['company_id']) || $this->request->post['company_id'] == 0 ) {
+			$this->error['error_company'] = $this->language->get( 'error_company' );
 		}
 
 		if ( $this->error ) {

@@ -12,6 +12,7 @@ $_['text_category']			  = 'Category';
 $_['entry_name']              = 'Category Name:';
 $_['entry_parent']            = 'Category Parent:';
 $_['entry_order']             = 'Order:';
+$_['entry_branch']            = 'Branch:';
 
 // error
 $_['error_name']              = 'Category Name must be between 3 and 128 characters!';
@@ -20,6 +21,7 @@ $_['error_permission']        = 'Warning: You do not have permission to modify C
 // Column
 $_['column_name']             = 'Category Name';
 $_['column_parent']           = 'Category Parent';
+$_['column_branch']           = 'Branch';
 $_['column_order']            = 'Order';
 $_['column_category']         = 'Category';
 $_['column_action'] 		  = 'Action';

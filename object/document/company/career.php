@@ -57,7 +57,7 @@ Class Career {
 	}
 
 	/** @MongoDB\PreUpdate */
-	public function prePersist(){
+	public function preUpdate(){
 		$this->updated = new \DateTime();
 	}
 

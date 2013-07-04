@@ -137,6 +137,15 @@ $(document).ready(function(){
               <li><a href="<?php echo $street; ?>"><?php echo $text_street; ?></a></li>
             </ul>
           </li>
+          <li><a class="parent"><?php echo $text_setting; ?></a>
+            <ul>
+              <li><a class="parent"><?php echo $text_group; ?></a>
+                <ul>
+                  <li><a href="<?php echo $group_action; ?>"><?php echo $text_action; ?></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
         </ul>
       </li>
     </ul>
