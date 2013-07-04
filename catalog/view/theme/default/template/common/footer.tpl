@@ -1,24 +1,36 @@
 <div id="y-footer">
-    <div class="row-fluid">
-        <div class="copyright span4">
-            Copyright &copy; 2012 - <strong>YESOCL.com</strong>
-        </div>
-        <div class="links-footer span5">
-                <a href="#">Mobile Version</a> - <a href="#">Create Group</a> - <a href="#">Create Profiles</a>
-                - <a href="#">Careers</a> - <a href="#">User privacy</a> - <a href="#">Term</a>
-                - <a href="#">Help</a>
+    <div id="yes-footer-bar">
+        <div class="bar-wrapper">
+            <div class="search fl">
+              <form>
+                  <div class="input-prepend">                    
+                    <button class="btn btn-success" type="button" >Search</button>
+                    <input class="auto-hide" id="searchText" type="text">
+                </div>          
+              </form> 
+            </div> 
+            <div class="language-box fr">                    
+                <form action="#">
+                    <div class="btn-group dropup">
+                      <button class="btn btn-success">Language</button>
+                      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><a href="#"> <i class="icon-yes-flag icon-lang-eng"></i> English</a></li>
+                        <li><a href="#"> <i class="icon-yes-flag icon-lang-vn"></i> Việt Nam</a></li>
+                      </ul>
+                    </div>
+                </form>
             </div>
-        <div class="language-selection span3">                    
-            <form action="#" class="form-inline">
-                <div class="input-prepend">
-                    <span class="add-on">Language </span>
-                    <select name="lang-code" id="select1">
-                        <option>English</option>
-                        <option>Viet Nam</option>
-                        <option>Japanese</option>
-                    </select>
-                </div>
-            </form>
-        </div>   
-    </div>    
+        </div>        
+    </div>
+    <div id="yes-info">
+        <span class="links-footer">
+            <a href="#">Create Group</a> - <a href="#">User privacy</a> - <a href="#">Term</a> - <a href="#">Help</a>
+        </span>  
+        <span class="copyright">
+            Copyright &copy; 2012 - <strong>YESOCL.com</strong>
+        </span>  
+    </div>       
 </div>
