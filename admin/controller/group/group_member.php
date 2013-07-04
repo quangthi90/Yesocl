@@ -18,7 +18,6 @@ class ControllerGroupGroupMember extends Controller {
 			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		
 		$this->load->model( 'group/group_member' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
@@ -145,15 +144,25 @@ class ControllerGroupGroupMember extends Controller {
 			$this->data['success'] = '';
 		}
 		
-		if (isset($this->request->get['page'])) {
+		if ( isset($this->request->get['page']) ) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
 		}
 		
+		$group_id = 0;
+		if ( isset($this->request->get['group_id']) ){
+			$group_id = $this->request->get['group_id'];
+		}
+		
 		$this->load->model( 'group/group' );
-		$group = $this->model_group_group->getgroup( $this->request->get['group_id'] );
+		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
 
+		if ( !$group ){
+			$this->session->data['error_warning'] = $this->language->get( 'error_not_found_group' );
+			$this->redirect( $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ) );
+		}
+		
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -171,12 +180,13 @@ class ControllerGroupGroupMember extends Controller {
 		
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
-		$this->data['text_status'] = $this->language->get( 'text_status' );
-		$this->data['text_group_member'] = $this->language->get( 'text_group_member' );	
-		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
+
+		$this->data['column_status'] = $this->language->get( 'column_status' );
+		$this->data['column_group'] = $this->language->get( 'column_group' );	
+		$this->data['column_action'] = $this->language->get( 'column_action' );
 		
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get( 'confirm_del' );
@@ -286,13 +296,16 @@ class ControllerGroupGroupMember extends Controller {
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
-		// Load model
-		$this->load->model( 'group/group' );
+		$group_id = 0;
+		if ( isset($this->request->get['group_id']) ){
+			$group_id = $this->request->get['group_id'];
+		}
 		
-		$group = $this->model_group_group->getgroup( $this->request->get['group_id'] );
+		$this->load->model( 'group/group' );
+		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
 		
 		// group_member
-		$group_member = new group_member();
+		$group_member = new GroupMember();
 		if ( isset($this->request->get['group_member_id']) ){
 			if ( $group ){
 				foreach ( $group->getGroupMembers() as $group_member ){
@@ -308,35 +321,21 @@ class ControllerGroupGroupMember extends Controller {
 		}
 
 		// Entry name
-		if ( isset($this->request->post['group_member']['name']) ){
-			$this->data['name'] = $this->request->post['group_member']['name'];
+		if ( isset($this->request->post['name']) ){
+			$this->data['name'] = $this->request->post['name'];
 		}elseif ( isset($group_member) ){
 			$this->data['name'] = $group_member->getName();
 		}else {
 			$this->data['name'] = '';
 		}
-		
-		// group reference
-		$results = $this->model_group_group->getgroups( array('group_id' => $group->getGroup()->getId()) );
-		
-		$this->data['groups'] = array();
-		
-		foreach ( $results as $result ){
-			if ( $result->getId() === $group->getId() ){
-				continue;
-			}
-			
-			$checked = '';
-			
-			if ( $group_member->getReferencegroupById($result->getId()) !== null ){
-				$checked = 'checked="checked"';
-			}
-			
-			$this->data['groups'][] = array(
-				'id' => $result->getId(),
-				'name' => $result->getName(),
-				'checked' => $checked
-			);
+
+		// Entry status
+		if ( isset($this->request->post['status']) ){
+			$this->data['status'] = $this->request->post['status'];
+		}elseif ( isset($group_member) ){
+			$this->data['status'] = $group_member->getStatus();
+		}else {
+			$this->data['status'] = '';
 		}
 
 		$this->template = 'group/group_member_form.tpl';
@@ -349,7 +348,7 @@ class ControllerGroupGroupMember extends Controller {
 	}
 
 	private function isValidateForm(){
-		if ( !isset($this->request->post['group_member']['name']) || strlen($this->request->post['group_member']['name']) < 3 || strlen($this->request->post['group_member']['name']) > 128 ){
+		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}
 

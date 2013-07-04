@@ -162,11 +162,17 @@ class ControllerGroupGroup extends Controller {
 		if ( $groups ){
 			foreach ( $groups as $group ){
 				$action = array();
-			
+
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
 					'href' => $this->url->link( 'group/group/update', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
+				);
+			
+				$action[] = array(
+					'text' => $this->language->get( 'text_group_member' ),
+					'href' => $this->url->link( 'group/group_member', 'group_id=' . $group->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'icon' => 'icon-list',
 				);
 				
 				$action[] = array(

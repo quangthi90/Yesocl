@@ -24,6 +24,7 @@ $_['column_action']           = 'Action';
 // Error
 $_['error_default']           = 'Warning: This Group cannot be deleted as it is currently assigned as the default store Group!';
 $_['error_name']              = 'Warning: Group Name must be between 3 and 128 characters!';
+$_['error_not_found_group']   = 'Warning: Group Not Found!';
 $_['error_insert']         	  = 'Warning: Insert not success!';
 $_['error_update']            = 'Warning: Update not success!';
 ?>
