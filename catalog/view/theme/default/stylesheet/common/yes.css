@@ -650,7 +650,8 @@ label.in-line{
 .post .post_body {
     white-space: normal;
     padding: 10px 5px;
-    font-size: 12px;
+    font-size: 14px;
+    text-align: justify;
 }
 .post .post_body img {
     width: 90%;
@@ -1124,6 +1125,10 @@ label.in-line{
 
 .feed-block .block-content .post .post_footer .post_date {
   font-weight: bold;
+}
+
+.feed-block .block-content .post .post_body .post_text_raw{
+  padding: 3px 10px;
 }
 
 .feed-block .block-content .post .post_body .post_image {
