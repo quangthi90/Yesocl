@@ -317,3 +317,6 @@ BlockFeed.prototype.putFeeds = function() {
 /*
 End Custom List Post
 */
+$(document).ready(function() {
+	new FlexibleElement($(this));	
+});

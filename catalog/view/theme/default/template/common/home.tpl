@@ -44,8 +44,7 @@
 
 {% block javascript %}
 <script type="text/javascript">
-    $(document).ready(function() {
-    	new FlexibleElement($(this));	
+    $(document).ready(function() {	
     	new HorizontalBlock($('.has-horizontal'));  
     });
 </script>
