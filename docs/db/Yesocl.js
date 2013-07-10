@@ -1,175 +1,175 @@
 
 /** admin indexes **/
 db.getCollection("admin").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** admin_group indexes **/
 db.getCollection("admin_group").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** attribute indexes **/
 db.getCollection("attribute").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** attribute_group indexes **/
 db.getCollection("attribute_group").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** attribute_type indexes **/
 db.getCollection("attribute_type").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** branch indexes **/
 db.getCollection("branch").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** branch_category indexes **/
 db.getCollection("branch_category").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** city indexes **/
 db.getCollection("city").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** company indexes **/
 db.getCollection("company").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** company_group indexes **/
 db.getCollection("company_group").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** company_post_category indexes **/
 db.getCollection("company_post_category").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** country indexes **/
 db.getCollection("country").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** data_type indexes **/
 db.getCollection("data_type").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** data_value indexes **/
 db.getCollection("data_value").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** design_action indexes **/
 db.getCollection("design_action").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** design_layout indexes **/
 db.getCollection("design_layout").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** district indexes **/
 db.getCollection("district").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** group indexes **/
 db.getCollection("group").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** group_action indexes **/
 db.getCollection("group_action").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** group_type indexes **/
 db.getCollection("group_type").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** setting_config indexes **/
 db.getCollection("setting_config").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** street indexes **/
 db.getCollection("street").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** user indexes **/
 db.getCollection("user").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** user_group indexes **/
 db.getCollection("user_group").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
 
 /** ward indexes **/
 db.getCollection("ward").ensureIndex({
-  "_id": 1
+  "_id": NumberInt(1)
 },[
   
 ]);
@@ -194,7 +194,7 @@ db.getCollection("admin_group").insert({
   "name": "Supper Admin",
   "permissions": [
     {
-      "_id": ObjectId("51d4fd44d874592009000018"),
+      "_id": ObjectId("51dd790a471dee6c09000001"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ef471deeac1f000000"),
@@ -224,7 +224,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000019"),
+      "_id": ObjectId("51dd790a471dee6c09000002"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -254,7 +254,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900001a"),
+      "_id": ObjectId("51dd790a471dee6c09000003"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d38f3cd874592c09000000"),
@@ -284,7 +284,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900001b"),
+      "_id": ObjectId("51dd790a471dee6c09000004"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d39389d874590803000000"),
@@ -314,7 +314,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900001c"),
+      "_id": ObjectId("51dd790a471dee6c09000005"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d3942dd874597808000000"),
@@ -344,7 +344,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900001d"),
+      "_id": ObjectId("51dd790a471dee6c09000006"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516aac38913db4a004000000"),
@@ -374,7 +374,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900001e"),
+      "_id": ObjectId("51dd790a471dee6c09000007"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51828041471dee0808000000"),
@@ -404,7 +404,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900001f"),
+      "_id": ObjectId("51dd790a471dee6c09000008"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab55f913db42c12000000"),
@@ -434,7 +434,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000020"),
+      "_id": ObjectId("51dd790a471dee6c09000009"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab59e913db47809000002"),
@@ -464,7 +464,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000021"),
+      "_id": ObjectId("51dd790a471dee6c0900000a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516c974b976982740a000000"),
@@ -494,7 +494,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000022"),
+      "_id": ObjectId("51dd790a471dee6c0900000b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a683d471dee480b00001a"),
@@ -524,7 +524,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000023"),
+      "_id": ObjectId("51dd790a471dee6c0900000c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a684f471dee480b00001b"),
@@ -554,7 +554,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000024"),
+      "_id": ObjectId("51dd790a471dee6c0900000d"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -584,7 +584,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000025"),
+      "_id": ObjectId("51dd790a471dee6c0900000e"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -614,7 +614,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000026"),
+      "_id": ObjectId("51dd790a471dee6c0900000f"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d4fab6d874593009000000"),
@@ -644,7 +644,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000027"),
+      "_id": ObjectId("51dd790a471dee6c09000010"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a680e471dee480b000018"),
@@ -674,7 +674,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000028"),
+      "_id": ObjectId("51dd790a471dee6c09000011"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67a8471dee480b000016"),
@@ -704,7 +704,37 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d874592009000029"),
+      "_id": ObjectId("51dd790a471dee6c09000012"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51dd78fb471dee6c09000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("51dd790a471dee6c09000013"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6823471dee480b000019"),
@@ -734,7 +764,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900002a"),
+      "_id": ObjectId("51dd790a471dee6c09000014"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67d6471dee480b000017"),
@@ -764,7 +794,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900002b"),
+      "_id": ObjectId("51dd790a471dee6c09000015"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6882471dee480b00001d"),
@@ -794,7 +824,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900002c"),
+      "_id": ObjectId("51dd790a471dee6c09000016"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6871471dee480b00001c"),
@@ -824,7 +854,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900002d"),
+      "_id": ObjectId("51dd790a471dee6c09000017"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516df1eb976982440f000000"),
@@ -854,7 +884,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900002e"),
+      "_id": ObjectId("51dd790a471dee6c09000018"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -884,7 +914,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51d4fd44d87459200900002f"),
+      "_id": ObjectId("51dd790a471dee6c09000019"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -2503,6 +2533,33 @@ db.getCollection("design_layout").insert({
   ],
   "name": "Action of Group",
   "path": "group\/action"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("51dd78fb471dee6c09000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Group Member Of Group",
+  "path": "group\/group_member"
 });
 
 /** district records **/
