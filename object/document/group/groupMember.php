@@ -13,6 +13,27 @@ Class GroupMember {
 	/** @MongoDB\Boolean */
 	private $status;
 
+	/** @MongoDB\ReferenceMany(targetDocument="Action") */
+	private $actions = array();
+
+	/**
+	 * Get Action By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Action
+	 * 		- null if not found
+	 */
+	public function getActionById( $action_id ){
+		foreach ( $this->actions as $action ){
+			if ( $action->getId() === $action_id ){
+				return $action;
+			}
+		}
+		
+		return null;
+	}
+
 	public function getId(){
 		return $this->id;
 	}
@@ -31,5 +52,17 @@ Class GroupMember {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function addAction( Action $action ){
+		$this->actions[] = $action;
+	}
+
+	public function setActions( $actions ){
+		$this->actions = $actions;
+	}
+
+	public function getActions(){
+		return $this->actions;
 	}
 }

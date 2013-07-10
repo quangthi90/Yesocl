@@ -40,6 +40,28 @@
                 <?php } ?>
               </select></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_action; ?></td>
+            <td>
+              <table class="table table-striped">
+                <tr>
+                  <th><?php echo $column_action; ?></th>
+                </tr>
+                <?php foreach ( $actions as $action ) { ?>
+                <tr>
+                  <td>
+                    <div class="controls">
+                      <label class="checkbox inline">
+                        <input type="checkbox" name="actions[]" value="<?php echo $action['id']; ?>" <?php if ($action['checked'] == true){ ?>checked="checked"<?php } ?> />
+                        <?php echo $action['name']; ?>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <?php } ?>
+              </table>
+            </td>
+          </tr>
         </table>
       </form>
     </div>

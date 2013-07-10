@@ -289,10 +289,14 @@ class ControllerGroupGroupMember extends Controller {
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+
+		// Column
+		$this->data['column_action'] = $this->language->get( 'column_action' );
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
+		$this->data['entry_action'] = $this->language->get( 'entry_action' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
@@ -336,6 +340,23 @@ class ControllerGroupGroupMember extends Controller {
 			$this->data['status'] = $group_member->getStatus();
 		}else {
 			$this->data['status'] = 1;
+		}
+
+		$this->load->model('group/action');
+		$actions = $this->model_group_action->getAllActions();
+
+		$this->data['actions'] = array();
+		foreach ( $actions as $action ) {
+			$checked = false;
+			if ( isset($group_member) && $group_member->getActionById($action->getId()) ){
+				$checked = true;
+			}
+
+			$this->data['actions'][] = array(
+				'id'	=> $action->getId(),
+				'name'	=> $action->getName(),
+				'checked' => $checked
+			);
 		}
 		
 		$this->template = 'group/group_member_form.tpl';

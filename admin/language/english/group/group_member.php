@@ -12,6 +12,7 @@ $_['column_action']			  = 'Action';
 // Entry
 $_['entry_name']              = 'Group Name:';
 $_['entry_status']            = 'Status:';
+$_['entry_action']            = 'Action:';
 
 // error
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';

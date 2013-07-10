@@ -20,6 +20,14 @@ class ModelGroupGroupMember extends Doctrine {
 		if ( isset($data['status']) || !empty($data['status']) ){
 			$group_member->setStatus( $data['status'] );
 		}
+
+		if ( isset($data['actions']) || !empty($data['actions']) ){
+			$group_member->setActions( array() );
+			foreach ( $data['actions'] as $action_id ) {
+				$action = $this->dm->getRepository('Document\Group\Action')->find( $action_id );
+				$group_member->addAction( $action );
+			}
+		}
 		
 		$this->dm->persist( $group_member );
 		
@@ -51,6 +59,14 @@ class ModelGroupGroupMember extends Doctrine {
 
 				if ( isset($data['status']) || !empty($data['status']) ){
 					$group_member->setStatus( $data['status'] );
+				}
+
+				if ( isset($data['actions']) || !empty($data['actions']) ){
+					$group_member->setActions( array() );
+					foreach ( $data['actions'] as $action_id ) {
+						$action = $this->dm->getRepository('Document\Group\Action')->find( $action_id );
+						$group_member->addAction( $action );
+					}
 				}
 
 				$group_members[$key] = $group_member;
