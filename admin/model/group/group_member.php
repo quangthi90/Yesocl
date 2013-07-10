@@ -17,10 +17,10 @@ class ModelGroupGroupMember extends Doctrine {
 		$group_member = new GroupMember();
 		$group_member->setName( $data['name'] );
 
-		if ( !isset($data['status']) || empty($data['status']) ){
+		if ( isset($data['status']) || !empty($data['status']) ){
 			$group_member->setStatus( $data['status'] );
 		}
-
+		
 		$this->dm->persist( $group_member );
 		
 		$group->addGroupMember( $group_member );
@@ -44,15 +44,19 @@ class ModelGroupGroupMember extends Doctrine {
 			return false;
 		}
 
-		foreach ( $group->groupMembers as $key => $group_member ) {
+		$group_members = $group->getGroupMembers();
+		foreach ( $group_members as $key => $group_member ) {
 			if ( $group_member->getId() == $id ){
-				$group[$key]->setName( $data['name'] );
+				$group_member->setName( $data['name'] );
 
-				if ( !isset($data['status']) || empty($data['status']) ){
-					$group[$key]->setStatus( $data['status'] );
+				if ( isset($data['status']) || !empty($data['status']) ){
+					$group_member->setStatus( $data['status'] );
 				}
+
+				$group_members[$key] = $group_member;
 			}
 		}
+		$group->setGroupMembers( $group_members );
 		
 		$this->dm->flush();
 		

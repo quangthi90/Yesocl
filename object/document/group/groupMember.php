@@ -9,6 +9,9 @@ Class GroupMember {
 
 	/** @MongoDB\String */
 	private $name;
+	
+	/** @MongoDB\Boolean */
+	private $status;
 
 	public function getId(){
 		return $this->id;
@@ -20,5 +23,13 @@ Class GroupMember {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setStatus( $status ){
+		$this->status = $status;
+	}
+
+	public function getStatus(){
+		return $this->status;
 	}
 }

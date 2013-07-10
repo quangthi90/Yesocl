@@ -44,7 +44,7 @@ class ControllerGroupGroupMember extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_group_member->addGroupMember( $this->request->post, $this->request->get['group_id'] ) == false ){
+			if ( $this->model_group_group_member->addGroupMember( $this->request->get['group_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
 				$this->redirect( $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
@@ -221,6 +221,7 @@ class ControllerGroupGroupMember extends Controller {
 				$this->data['group_members'][] = array(
 					'id' => $group_members[$i]->getId(),
 					'name' => $group_members[$i]->getName(),
+					'status' => $group_members[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}
@@ -291,7 +292,7 @@ class ControllerGroupGroupMember extends Controller {
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
-		$this->data['entry_groups'] = $this->language->get( 'entry_groups' );
+		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
@@ -305,7 +306,6 @@ class ControllerGroupGroupMember extends Controller {
 		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
 		
 		// group_member
-		$group_member = new GroupMember();
 		if ( isset($this->request->get['group_member_id']) ){
 			if ( $group ){
 				foreach ( $group->getGroupMembers() as $group_member ){
@@ -335,9 +335,9 @@ class ControllerGroupGroupMember extends Controller {
 		}elseif ( isset($group_member) ){
 			$this->data['status'] = $group_member->getStatus();
 		}else {
-			$this->data['status'] = '';
+			$this->data['status'] = 1;
 		}
-
+		
 		$this->template = 'group/group_member_form.tpl';
 		$this->children = array(
 			'common/header',
