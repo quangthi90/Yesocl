@@ -26,11 +26,6 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript">
-  $(document).ready(function() {
-    new SingleListFeed($('#y-content'));
-  }); 
-</script>
 {{ block('post_common_post_comment_javascript') }}
 {#{ block('post_common_form_status_javascript') }#}
 {% endblock %}

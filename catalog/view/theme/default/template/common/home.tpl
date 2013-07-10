@@ -43,10 +43,5 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript">
-    $(document).ready(function() {	
-    	new HorizontalBlock($('.has-horizontal'));  
-    });
-</script>
 {{ block('post_common_post_comment_javascript') }}
 {% endblock %}

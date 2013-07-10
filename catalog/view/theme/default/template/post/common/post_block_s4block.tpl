@@ -1,5 +1,5 @@
 {% block post_common_post_block_s4block %}
-	<div class="feed post">
+	<div class="feed post post_in_block">
 		<div class="post_header">
 			<h4 class="post_title"><a href="{{ post.href_post|raw }}">{{ post.title }}</a></h4>				
 		</div>

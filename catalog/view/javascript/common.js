@@ -30,91 +30,6 @@ jQuery.fn.makeContentHorizontalScroll = function() {
 /*
 End quick access functions
 */
-
-/*
-Single List Post
-*/
-function SingleListFeed(el) {
-	this.horizontalElement = el.find('.has-horizontal');
-	this.mainContent = el.find('#y-main-content');
-	this.maxHeight = this.mainContent.height();
-	this.rootElement = el;
-	this.setSize();
-	this.makeScroll();
-}
-
-SingleListFeed.prototype.setSize = function() {
-	var feeds = this.mainContent.find('.feed');
-	feeds.each(function() {
-		$(this).attr('data-width', $(this).outerWidth()); 
-		$(this).attr('data-height', $(this).outerHeight() + parseInt($(this).css('margin-bottom'))); 
-	});
-}
-
-SingleListFeed.prototype.makeScroll = function(){
-	if(typeof this.horizontalElement == "undefined" || this.horizontalElement.length == 0){
-		return;
-	}
-	var firstEl = this.horizontalElement.first();
-	var feedSet = firstEl.find('.feed'); 
-	var width=0, height=0, totalHeight = 0, totalWidth=0,columnIndex=0, columnId, newColoumn;
-
-	//Remove all columns:
-	firstEl.find('.column').attr('id','').css('display','none'); 
-
-	for (var i = 0; i < feedSet.length; i++) {
-		width = parseInt($(feedSet[i]).attr('data-width'), 10);
-		height = parseInt($(feedSet[i]).attr('data-height'), 10);
-		if(totalHeight == 0){
-			columnId = 'column-' + columnIndex;
-			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
-			newColoumn.width(width);
-			newColoumn.height('100%');
-			newColoumn.css('float','left');
-			newColoumn.css('margin-right','25px');
-			firstEl.append(newColoumn);
-			totalWidth += width + 27;
-		}
-		if(totalHeight + height >=this.maxHeight) { 
-			columnIndex ++;
-			totalHeight = height;
-			columnId = 'column-' + columnIndex;
-			newColoumn = $("<div class='column' id='" + columnId + "'></div>");
-			newColoumn.width(width);
-			newColoumn.height('100%');
-			newColoumn.css('float','left');
-			newColoumn.css('margin-right','25px');
-			firstEl.append(newColoumn);
-			totalWidth += width + 27;
-			$('#' + columnId).append(feedSet[i]);
-		}else{
-			totalHeight += height;			
-			$('#' + columnId).append(feedSet[i]);
-		}
-	}
-	this.mainContent.width(totalWidth);
-	this.rootElement.niceScroll();
-	this.resizeListFeed();
-}
-
-SingleListFeed.prototype.resizeListFeed = function() {
-	var that = this;
-	$(window).resize(function() {
-	    if(this.resizeTO) 
-	    	clearTimeout(this.resizeTO);
-	    this.resizeTO = setTimeout(function() {
-	        $(this).trigger('resizeEnd');
-	    }, 800);
-	});
-
-	$(window).bind('resizeEnd', function() {
-		that.makeScroll();		
-	});
-}
-/*
-End Single List Post
-*/
-
 /*
 Jquery effects
 */
@@ -178,11 +93,10 @@ function HorizontalBlock(el) {
 	this.root = el;
 	this.feeds = el.find('.feed');
 	this.heightMain =  el.height();
-	this.widthMain = el.width();
+	this.widthMain = el.width();	
 	if(this.root.hasClass('has-block')) {
 		this.blocks = el.find('.feed-block');
-		this.blockContent = el.find('.block-content');		
-		this.heightBlockHeader = this.blocks.find('.block-header').first().outerHeight() + 10;
+		this.blockContent = el.find('.block-content');				
 		this.hasBlock = true;
 	}else {
 		this.hasBlock = false;
@@ -190,9 +104,9 @@ function HorizontalBlock(el) {
 	
 	this.initializeBlock();
 }
-HorizontalBlock.prototype.initializeBlock = function() {
-	if(this.hasBlock) {
-		var heightBlockContent = this.heightMain - this.heightBlockHeader;
+HorizontalBlock.prototype.initializeBlock = function() {	
+	if(this.hasBlock) {		
+		var heightBlockContent = this.heightMain - 36;
 		var heightPost = (heightBlockContent - 2*20)/2;
 		var widthPost = this.widthMain*5/18 - 20;
 		this.blockContent.height(heightBlockContent);		
@@ -209,7 +123,26 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			blockFeed.putFeeds();
 		});
 		this.root.width(this.blocks.length*((5/6)*this.widthMain + 35));
-	}else {		
+	}else {	
+		var heightMax = this.heightMain - 2;
+		var widthM = this.widthMain;
+		var totalWidth = 0;
+		this.feeds.each(function() {
+			$(this).height(heightMax);
+			$(this).css('float','left');
+			$(this).css('margin-right','30px');
+			var image = $(this).find('.post_image img');
+			if(image.length > 0) {
+				$(this).width(1.1*image.outerWidth());
+			}else {
+				$(this).width(widthM/3);
+			}
+			var headerPost = $(this).children('.post_header').first().outerHeight();
+			var footerPost = $(this).children('.post_footer').first().outerHeight();
+			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
+			totalWidth += $(this).outerWidth() + 30;
+		});
+		this.root.width(totalWidth);
 	}
 	this.root.makeContentHorizontalScroll();	
 }
@@ -318,5 +251,6 @@ BlockFeed.prototype.putFeeds = function() {
 End Custom List Post
 */
 $(document).ready(function() {
-	new FlexibleElement($(this));	
+	new FlexibleElement($(this));
+	new HorizontalBlock($('.has-horizontal')); 	
 });
