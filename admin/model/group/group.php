@@ -1,5 +1,6 @@
 <?php
-use Document\Group\Group;
+use Document\Group\Group,
+	Document\Group\GroupMember;
 
 class ModelGroupGroup extends Doctrine {
 	public function addGroup( $data = array() ) {
@@ -60,6 +61,9 @@ class ModelGroupGroup extends Doctrine {
 			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
 			$group->setBranch( $branch );
 		}
+
+		$group_member = new GroupMember();
+		$group_member->setName( 'Default' );
 
 		$this->dm->persist( $group );
 		$this->dm->flush();

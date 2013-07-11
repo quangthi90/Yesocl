@@ -19,6 +19,9 @@ Class GroupMember {
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Category") */
 	private $categories = array();
 
+	/** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
+	private $members = array();
+
 	/**
 	 * Get Action By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -97,5 +100,17 @@ Class GroupMember {
 
 	public function getCategories(){
 		return $this->categories;
+	}
+
+	public function addMember( \Document\User\User $member ){
+		$this->members[] = $member;
+	}
+
+	public function setMembers( $members ){
+		$this->members = $members;
+	}
+
+	public function getMembers(){
+		return $this->members;
 	}
 }
