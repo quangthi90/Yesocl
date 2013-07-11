@@ -221,6 +221,7 @@ class ControllerGroupGroupMember extends Controller {
 				$this->data['group_members'][] = array(
 					'id' => $group_members[$i]->getId(),
 					'name' => $group_members[$i]->getName(),
+					'canDel' => $group_members[$i]->getCanDel(),
 					'status' => $group_members[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);

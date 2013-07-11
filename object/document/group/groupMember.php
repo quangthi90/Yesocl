@@ -13,6 +13,9 @@ Class GroupMember {
 	/** @MongoDB\Boolean */
 	private $status;
 
+	/** @MongoDB\Boolean */
+	private $canDel = true;
+
 	/** @MongoDB\ReferenceMany(targetDocument="Action") */
 	private $actions = array();
 
@@ -76,6 +79,14 @@ Class GroupMember {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function setCanDel( $canDel ){
+		$this->canDel = $canDel;
+	}
+
+	public function getCanDel(){
+		return $this->canDel;
 	}
 
 	public function addAction( Action $action ){

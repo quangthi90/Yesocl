@@ -65,8 +65,9 @@ class ModelGroupGroup extends Doctrine {
 		$group_member = new GroupMember();
 		$group_member->setName( $this->config->get('group')['default']['group_member_name'] );
 		$group_member->setStatus( true );
+		$group_member->setCanDel( false );
 		$this->dm->persist( $group_member );
-		$group->addGroupMembers( $group_member );
+		$group->addGroupMember( $group_member );
 
 		$this->dm->persist( $group );
 		$this->dm->flush();

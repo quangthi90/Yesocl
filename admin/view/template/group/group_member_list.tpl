@@ -15,6 +15,7 @@
     <div class="heading">
       <span><img src="view/image/group_group_member.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
+        <a onclick="location = '<?php echo $back; ?>'" class="btn"><i class="icon-arrow-left"></i> <?php echo $button_back; ?></a>
 	      <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-success"><?php echo $button_insert; ?> <i class="icon-plus"></i></a>
 	      <a onclick="$('form').submit();" class="btn btn-danger"><?php echo $button_delete; ?> <i class="icon-trash"></i></a>
 	  </div>
@@ -34,7 +35,7 @@
             <?php if ($group_members) { ?>
             <?php foreach ($group_members as $group_member) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $group_member['id']; ?>"/></td>
+              <td><?php if ($group_member['canDel']){ ?><input name="id[]" type="checkbox" value="<?php echo $group_member['id']; ?>"/><?php } ?></td>
               <td><?php echo $group_member['name']; ?></td>
               <td><?php echo $group_member['status']; ?></td>
               <td class="right"><?php foreach ($group_member['action'] as $action) { ?>
