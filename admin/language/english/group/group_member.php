@@ -15,6 +15,7 @@ $_['entry_name']              = 'Group Name:';
 $_['entry_status']            = 'Status:';
 $_['entry_action']            = 'Action:';
 $_['entry_category']          = 'Categories:';
+$_['entry_find_member']       = 'Find Member:';
 
 // error
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';
@@ -23,6 +24,9 @@ $_['error_permission']        = 'Warning: You do not have permission to modify G
 // Column
 $_['column_name']             = 'Group Name';
 $_['column_action']           = 'Action';
+$_['column_username']         = 'Username';
+$_['column_fullname']         = 'Fullname';
+$_['column_email']            = 'Email';
 
 // Error
 $_['error_default']           = 'Warning: This Group cannot be deleted as it is currently assigned as the default store Group!';

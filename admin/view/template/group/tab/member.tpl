@@ -1,67 +1,81 @@
-<table class="form">
+<table class="table table-hover" id="table-member">
   <tr>
-    <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-    <td><input class="input-xxlarge" required="required" type="text" name="name" value="<?php echo $name; ?>" />
-    <?php if ($error_name) { ?>
-    	<div class="alert alert-error">
-			  <strong>Error!</strong> <?php echo $error_name; ?>
-			</div>
-    <?php } ?></td>
+    <td><?php echo $entry_find_member; ?></td>
+    <td colspan="3">
+      <div class="input-append">
+        <input type="text" id="appendedInput" class="find-member" />
+        <span class="add-on btn" id="add-member"><i class="icon-plus"></i></span>
+        <input type="hidden" id="member-id" />
+      </div>
   </tr>
   <tr>
-    <td><?php echo $entry_status; ?></td>
-    <td><select name="status">
-        <?php if ($status) { ?>
-        <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-        <option value="0"><?php echo $text_disabled; ?></option>
-        <?php } else { ?>
-        <option value="1"><?php echo $text_enabled; ?></option>
-        <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-        <?php } ?>
-      </select></td>
+    <th><?php echo $column_username; ?></th>
+    <th><?php echo $column_fullname; ?></th>
+    <th><?php echo $column_email; ?></th>
+    <th><?php echo $column_action; ?></th>
   </tr>
+  <?php foreach ($members as $member) { ?>
   <tr>
-    <td><?php echo $entry_action; ?></td>
-    <td>
-      <table class="table table-striped">
-        <tr>
-          <th><?php echo $column_action; ?></th>
-        </tr>
-        <?php foreach ( $actions as $action ) { ?>
-        <tr>
-          <td>
-            <div class="controls">
-              <label class="checkbox inline">
-                <input type="checkbox" name="actions[]" value="<?php echo $action['id']; ?>" <?php if ($action['checked'] == true){ ?>checked="checked"<?php } ?> />
-                <?php echo $action['name']; ?>
-              </label>
-            </div>
-          </td>
-        </tr>
-        <?php } ?>
-      </table>
-    </td>
+    <td><?php echo $member['username']; ?></td>
+    <td><?php echo $member['fullname']; ?></td>
+    <td><?php echo $member['email']; ?></td>
+    <td><a class="btn btn-danger btn-del-member"><?php echo $button_delete; ?></a></td>
   </tr>
-  <tr>
-    <td><?php echo $entry_category; ?></td>
-    <td>
-      <table class="table table-striped">
-        <tr>
-          <th><?php echo $column_category; ?></th>
-        </tr>
-        <?php foreach ( $categories as $category ) { ?>
-        <tr>
-          <td>
-            <div class="controls">
-              <label class="checkbox inline">
-                <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>" <?php if ($category['checked'] == true){ ?>checked="checked"<?php } ?> />
-                <?php echo $category['name']; ?>
-              </label>
-            </div>
-          </td>
-        </tr>
-        <?php } ?>
-      </table>
-    </td>
-  </tr>
-</table>  
+  <?php } ?>
+</table>
+<script type="text/javascript">
+$('.find-member').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term) + '&token=<?php echo $token; ?>',
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.primary,
+            value: item.id,
+            username: item.username,
+            fullname: item.fullname
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('.find-member').val(ui.item.label);
+    $('#member-id').val(ui.item.value);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+</script>
+<script type="text/javascript">
+$('#add-member').on('click', function(){
+  $.ajax({
+    url: 'index.php?route=user/user/getUser&token=<?php echo $token; ?>',
+    dataType: 'json',
+    type: 'post',
+    data: {user_id: $('#member-id').val()},
+    success: function(json) {   
+      var trHtml = '<tr>';
+      trHtml += '<td>' + json.username + '</td>';
+      trHtml += '<td>' + json.fullname + '</td>';
+      trHtml += '<td>' + json.email + '</td>';
+      trHtml += '<td><a class="btn btn-danger btn-del-member"><?php echo $button_delete; ?></a><input name="members[' + json.id + ']" type="hidden" value="' + json.id + '" /></td>';
+      trHtml += '</tr>';
+      $('#table-member').append(trHtml);
+
+      $('.find-member').val('');
+    }
+  });
+});
+</script>
+<script type="text/javascript">
+$('#table-member').on('click', '.btn-del-member', function(){
+  $(this).parent().parent().remove();
+});
+</script>

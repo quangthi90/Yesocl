@@ -290,16 +290,21 @@ class ControllerGroupGroupMember extends Controller {
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 
 		// Column
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		$this->data['column_category'] = $this->language->get( 'column_category' );
+		$this->data['column_username'] = $this->language->get( 'column_username' );
+		$this->data['column_fullname'] = $this->language->get( 'column_fullname' );
+		$this->data['column_email'] = $this->language->get( 'column_email' );
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_action'] = $this->language->get( 'entry_action' );
 		$this->data['entry_category'] = $this->language->get( 'entry_category' );
+		$this->data['entry_find_member'] = $this->language->get( 'entry_find_member' );
 
 		// Tab
 		$this->data['tab_general'] = $this->language->get( 'tab_general' );
@@ -386,6 +391,19 @@ class ControllerGroupGroupMember extends Controller {
 				'checked' => $checked
 			);
 		}
+
+		// Entry Member
+		$this->data['members'] = array();
+		foreach ( $group_member->getMembers as $member ) {
+			$this->data['members'] = array(
+				'id' => $member->getId(),
+				'username' => $member->getUsername(),
+				'fullname' => $member->getFullname(),
+				'email' => $member->getPrimaryEmail()->getEmail()
+			);
+		}
+
+		$this->data['token'] = $this->session->data['token'];
 		
 		$this->template = 'group/group_member_form.tpl';
 		$this->children = array(
