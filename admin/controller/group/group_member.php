@@ -300,6 +300,10 @@ class ControllerGroupGroupMember extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_action'] = $this->language->get( 'entry_action' );
 		$this->data['entry_category'] = $this->language->get( 'entry_category' );
+
+		// Tab
+		$this->data['tab_general'] = $this->language->get( 'tab_general' );
+		$this->data['tab_member'] = $this->language->get( 'tab_member' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
