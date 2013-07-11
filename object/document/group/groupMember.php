@@ -16,6 +16,9 @@ Class GroupMember {
 	/** @MongoDB\ReferenceMany(targetDocument="Action") */
 	private $actions = array();
 
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Category") */
+	private $categories = array();
+
 	/**
 	 * Get Action By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -28,6 +31,24 @@ Class GroupMember {
 		foreach ( $this->actions as $action ){
 			if ( $action->getId() === $action_id ){
 				return $action;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Get Category By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Category
+	 * 		- null if not found
+	 */
+	public function getCategoryById( $category_id ){
+		foreach ( $this->categories as $category ){
+			if ( $category->getId() === $category_id ){
+				return $category;
 			}
 		}
 		
@@ -64,5 +85,17 @@ Class GroupMember {
 
 	public function getActions(){
 		return $this->actions;
+	}
+
+	public function addCategory( \Document\Branch\Category $category ){
+		$this->categories[] = $category;
+	}
+
+	public function setCategories( $categories ){
+		$this->categories = $categories;
+	}
+
+	public function getCategories(){
+		return $this->categories;
 	}
 }

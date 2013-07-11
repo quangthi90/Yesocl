@@ -62,6 +62,28 @@
               </table>
             </td>
           </tr>
+          <tr>
+            <td><?php echo $entry_category; ?></td>
+            <td>
+              <table class="table table-striped">
+                <tr>
+                  <th><?php echo $column_category; ?></th>
+                </tr>
+                <?php foreach ( $categories as $category ) { ?>
+                <tr>
+                  <td>
+                    <div class="controls">
+                      <label class="checkbox inline">
+                        <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>" <?php if ($category['checked'] == true){ ?>checked="checked"<?php } ?> />
+                        <?php echo $category['name']; ?>
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <?php } ?>
+              </table>
+            </td>
+          </tr>
         </table>
       </form>
     </div>

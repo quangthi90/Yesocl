@@ -292,11 +292,13 @@ class ControllerGroupGroupMember extends Controller {
 
 		// Column
 		$this->data['column_action'] = $this->language->get( 'column_action' );
+		$this->data['column_category'] = $this->language->get( 'column_category' );
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_action'] = $this->language->get( 'entry_action' );
+		$this->data['entry_category'] = $this->language->get( 'entry_category' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
@@ -342,6 +344,7 @@ class ControllerGroupGroupMember extends Controller {
 			$this->data['status'] = 1;
 		}
 
+		// Entry action
 		$this->load->model('group/action');
 		$actions = $this->model_group_action->getAllActions();
 
@@ -355,6 +358,26 @@ class ControllerGroupGroupMember extends Controller {
 			$this->data['actions'][] = array(
 				'id'	=> $action->getId(),
 				'name'	=> $action->getName(),
+				'checked' => $checked
+			);
+		}
+
+		// Entry Category
+		$this->load->model('branch/category');
+		$categories = $this->model_branch_category->getAllCategories(array(
+			'branch_id' => $group->getBranch()->getId()
+		));
+
+		$this->data['categories'] = array();
+		foreach ( $categories as $category ) {
+			$checked = false;
+			if ( isset($group_member) && $group_member->getCategoryById($category->getId()) ){
+				$checked = true;
+			}
+
+			$this->data['categories'][] = array(
+				'id'	=> $category->getId(),
+				'name'	=> $category->getName(),
 				'checked' => $checked
 			);
 		}

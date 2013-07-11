@@ -8,11 +8,13 @@ $_['text_success']            = 'Success: You have modified Groups!';
 $_['column_group'] 			  = 'Group Name';
 $_['column_status']			  = 'Status';
 $_['column_action']			  = 'Action';
+$_['column_category']		  = 'Category';
 
 // Entry
 $_['entry_name']              = 'Group Name:';
 $_['entry_status']            = 'Status:';
 $_['entry_action']            = 'Action:';
+$_['entry_category']          = 'Categories:';
 
 // error
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';
