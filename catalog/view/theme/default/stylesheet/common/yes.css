@@ -336,13 +336,13 @@ label.in-line{
 }
 
 #y-content {
-    padding: 25px 25px 25px 25px;    
+    padding: 25px 0px 0px 25px;    
     position: absolute;    
     top: 0px;
     left: 152px;
     right:0px;
     bottom: 68px;    
-    background: #ffffff;
+    background: #f4f4f4;
     /*background: #ffffff url(../../image/content_bg.png) repeat-x middle left;*/
     /*background: #ffffff url(../../image/b-bg.png) repeat top left;*/
 }
@@ -711,7 +711,7 @@ label.in-line{
 
 .sidebar-controls .nav-list > li {
   text-align: left;
-  margin-top: 0px;
+  margin-top: 1px;
 }
 
 .sidebar-controls .nav-list .nav-header {
