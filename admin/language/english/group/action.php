@@ -4,9 +4,6 @@ $_['heading_title']           = 'Group Action';
 
 // Text
 $_['text_success']            = 'Success: You have modified Actions!';
-$_['text_action'] 			  = 'Group Action';
-$_['text_status']			  = 'Status';
-$_['text_action']			  = 'Action';
 
 // Entry
 $_['entry_name']              = 'Action Name:';
@@ -18,7 +15,8 @@ $_['error_name']              = 'Group Action Name must be between 3 and 128 cha
 $_['error_permission']        = 'Warning: You do not have permission to modify Actions!';
 
 // Column
-$_['column_name']             = 'Group Action Name';
+$_['column_name']             = 'Action Name';
+$_['column_order']            = 'Order';
 $_['column_action']           = 'Action';
 
 // Error

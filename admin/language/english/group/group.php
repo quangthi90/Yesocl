@@ -7,6 +7,7 @@ $_['text_success']            = 'Success: You have modified Groups!';
 $_['text_group'] 			  = 'Group';
 $_['text_type']			  	  = 'Type';
 $_['text_status']			  = 'Status';
+$_['text_group_member']		  = 'Member Groups';
 $_['text_posts']			  = 'Posts';
 $_['text_author']			  = 'Owner';
 $_['text_email']			  = 'Email';
