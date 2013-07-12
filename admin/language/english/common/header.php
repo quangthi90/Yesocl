@@ -19,7 +19,6 @@ $_['text_admin_manage']            		= 'Admin Manage';
 $_['text_companies']                    = 'Companies';
 $_['text_company']                      = 'Company';
 $_['text_company_group']              	= 'Company Group';
-$_['text_company_post_category']        = 'Post Category';
 
 // Branch
 $_['text_branchs']                    	= 'Branchs';

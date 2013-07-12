@@ -381,36 +381,6 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51e018c8471dee280a000006"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516aac38913db4a004000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
       "_id": ObjectId("51e018c8471dee280a000007"),
       "layout": {
         "$ref": "design_layout",
@@ -2326,33 +2296,6 @@ db.getCollection("design_layout").insert({
   ],
   "name": "City Manage",
   "path": "localisation\/city"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("516aac38913db4a004000000"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Company Category",
-  "path": "company\/category"
 });
 db.getCollection("design_layout").insert({
   "_id": ObjectId("516ab55f913db42c12000000"),

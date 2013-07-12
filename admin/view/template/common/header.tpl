@@ -91,7 +91,6 @@ $(document).ready(function(){
         <ul>
           <li><a href="<?php echo $company; ?>"><?php echo $text_company; ?></a></li>
           <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
-          <li><a href="<?php echo $company_post_category; ?>"><?php echo $text_company_post_category; ?></a></li>
         </ul>
       </li>
       <li id="company"><a class="top"><?php echo $text_branchs; ?></a>
