@@ -39,6 +39,16 @@
           </td>
         </tr>
         <?php } ?>
+        <tr>
+          <td>
+            <div class="controls">
+              <label class="checkbox inline">
+                <input type="checkbox" onclick="$('input[name*=\'actions\']').attr('checked', this.checked);" />
+                <?php echo $text_select_all_action; ?>
+              </label>
+            </div>
+          </td>
+        </tr>
       </table>
     </td>
   </tr>
@@ -61,6 +71,16 @@
           </td>
         </tr>
         <?php } ?>
+        <tr>
+          <td>
+            <div class="controls">
+              <label class="checkbox inline">
+                <input type="checkbox" onclick="$('input[name*=\'categories\']').attr('checked', this.checked);" />
+                <?php echo $text_select_all_category; ?>
+              </label>
+            </div>
+          </td>
+        </tr>
       </table>
     </td>
   </tr>
