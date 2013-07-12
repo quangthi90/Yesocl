@@ -19,7 +19,7 @@
     <td><?php echo $member['username']; ?></td>
     <td><?php echo $member['fullname']; ?></td>
     <td><?php echo $member['email']; ?></td>
-    <td><a class="btn btn-danger btn-del-member"><?php echo $button_delete; ?></a></td>
+    <td><a class="btn btn-danger btn-del-member"><?php echo $button_delete; ?></a><input name="members[<?php echo $member['id']; ?>]" type="hidden" value="<?php echo $member['id']; ?>" /></td>
   </tr>
   <?php } ?>
 </table>

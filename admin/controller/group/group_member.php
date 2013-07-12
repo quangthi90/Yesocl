@@ -394,13 +394,15 @@ class ControllerGroupGroupMember extends Controller {
 
 		// Entry Member
 		$this->data['members'] = array();
-		foreach ( $group_member->getMembers as $member ) {
-			$this->data['members'] = array(
-				'id' => $member->getId(),
-				'username' => $member->getUsername(),
-				'fullname' => $member->getFullname(),
-				'email' => $member->getPrimaryEmail()->getEmail()
-			);
+		if ( isset( $group_member ) ) {
+			foreach ( $group_member->getMembers() as $member ) {
+				$this->data['members'][] = array(
+					'id' => $member->getId(),
+					'username' => $member->getUsername(),
+					'fullname' => $member->getFullname(),
+					'email' => $member->getPrimaryEmail()->getEmail()
+				);
+			}
 		}
 
 		$this->data['token'] = $this->session->data['token'];
