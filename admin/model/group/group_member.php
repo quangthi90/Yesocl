@@ -32,7 +32,7 @@ class ModelGroupGroupMember extends Doctrine {
 		if ( isset($data['categories']) || !empty($data['categories']) ){
 			$group_member->setCategories( array() );
 			foreach ( $data['categories'] as $category_id ) {
-				$category = $this->dm->getRepository('Document\Group\Action')->find( $category_id );
+				$category = $this->dm->getRepository('Document\Branch\Category')->find( $category_id );
 				$group_member->addCategory( $category );
 			}
 		}
