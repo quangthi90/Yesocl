@@ -74,7 +74,12 @@ class ModelGroupAction extends Doctrine {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\Group\Action' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+		return $this->dm->getRepository( 'Document\Group\Action' )->findAll()
+			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('order' => 1) );
+	}
+
+	public function getAllActions( $data = array() ) {
+		return $this->dm->getRepository( 'Document\Group\Action' )->findAll()->sort( array('order' => 1) );
 	}
 	
 	public function getTotalActions() {

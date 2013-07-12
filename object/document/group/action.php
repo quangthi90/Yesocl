@@ -16,6 +16,9 @@ Class Action {
 	/** @MongoDB\Int */
 	private $order;
 
+	/** @MongoDB\ReferenceOne(targetDocument="GroupMember", inversedBy="actions") */
+    private $groupMember;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -42,5 +45,13 @@ Class Action {
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function setGroupMember( $groupMember ){
+		$this->groupMember = $groupMember;
+	}
+
+	public function getGroupMember(){
+		return $this->groupMember;
 	}
 }
