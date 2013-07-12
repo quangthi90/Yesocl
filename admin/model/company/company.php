@@ -81,6 +81,13 @@ class ModelCompanyCompany extends Doctrine {
 		$company->setCreated( new \Datetime( $data['created'] ) );
 		$company->setStatus( $data['status'] );
 
+		$group_member = new GroupMember();
+		$group_member->setName( $this->config->get('company')['default']['group_member_name'] );
+		$group_member->setStatus( true );
+		$group_member->setCanDel( false );
+		$this->dm->persist( $group_member );
+		$company->addGroupMember( $group_member );
+
 		$this->dm->persist( $company );
 		$this->dm->flush();
 

@@ -508,6 +508,12 @@ class ControllerCompanyCompany extends Controller {
 				$action = array();
 
 				$action[] = array(
+					'text' => $this->language->get( 'text_group_member' ),
+					'href' => $this->url->link( 'company/group_member', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'icon' => 'icon-list',
+				);
+
+				$action[] = array(
 					'text' => $this->language->get( 'text_post' ),
 					'href' => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
 					'icon' => 'icon-list',
