@@ -24,11 +24,8 @@
 			{{ include(template_from_string( sidebar_control )) }}
 		</div>
 		<div id="y-container">
-			{{ include(template_from_string( header )) }}
-
 			{% block body %}
 			{% endblock %}
-
 			{{ include(template_from_string( footer )) }}
 			<div id="overlay"></div>
 		</div>

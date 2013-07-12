@@ -47,7 +47,7 @@
 							<i class="icon-camera-retro big-icon"></i>
 						</a>
 					</div>
-					<div class="span4 btn-container">
+					<div class="span4 btn-wrapper">
 						<a href="#" class="btn btn-success btn-comment">Post</a>
 					</div>
 				</div>
