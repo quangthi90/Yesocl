@@ -194,7 +194,7 @@ db.getCollection("admin_group").insert({
   "name": "Supper Admin",
   "permissions": [
     {
-      "_id": ObjectId("51dd790a471dee6c09000001"),
+      "_id": ObjectId("51e018c8471dee280a000000"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ef471deeac1f000000"),
@@ -224,7 +224,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000002"),
+      "_id": ObjectId("51e018c8471dee280a000001"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -254,7 +254,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000003"),
+      "_id": ObjectId("51e018c8471dee280a000002"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d38f3cd874592c09000000"),
@@ -284,7 +284,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000004"),
+      "_id": ObjectId("51e018c8471dee280a000003"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d39389d874590803000000"),
@@ -314,7 +314,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000005"),
+      "_id": ObjectId("51e018c8471dee280a000004"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d3942dd874597808000000"),
@@ -344,7 +344,37 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000006"),
+      "_id": ObjectId("51e018c8471dee280a000005"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51e018be471dee1c0a000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("51e018c8471dee280a000006"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516aac38913db4a004000000"),
@@ -374,7 +404,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000007"),
+      "_id": ObjectId("51e018c8471dee280a000007"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51828041471dee0808000000"),
@@ -404,7 +434,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000008"),
+      "_id": ObjectId("51e018c8471dee280a000008"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab55f913db42c12000000"),
@@ -434,7 +464,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000009"),
+      "_id": ObjectId("51e018c8471dee280a000009"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab59e913db47809000002"),
@@ -464,7 +494,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c0900000a"),
+      "_id": ObjectId("51e018c8471dee280a00000a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516c974b976982740a000000"),
@@ -494,7 +524,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c0900000b"),
+      "_id": ObjectId("51e018c8471dee280a00000b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a683d471dee480b00001a"),
@@ -524,7 +554,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c0900000c"),
+      "_id": ObjectId("51e018c8471dee280a00000c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a684f471dee480b00001b"),
@@ -554,7 +584,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c0900000d"),
+      "_id": ObjectId("51e018c8471dee280a00000d"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -584,7 +614,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c0900000e"),
+      "_id": ObjectId("51e018c8471dee280a00000e"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -614,7 +644,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c0900000f"),
+      "_id": ObjectId("51e018c8471dee280a00000f"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d4fab6d874593009000000"),
@@ -644,7 +674,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000010"),
+      "_id": ObjectId("51e018c8471dee280a000010"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a680e471dee480b000018"),
@@ -674,7 +704,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000011"),
+      "_id": ObjectId("51e018c8471dee280a000011"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67a8471dee480b000016"),
@@ -704,7 +734,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000012"),
+      "_id": ObjectId("51e018c8471dee280a000012"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51dd78fb471dee6c09000000"),
@@ -734,7 +764,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000013"),
+      "_id": ObjectId("51e018c8471dee280a000013"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6823471dee480b000019"),
@@ -764,7 +794,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000014"),
+      "_id": ObjectId("51e018c8471dee280a000014"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67d6471dee480b000017"),
@@ -794,7 +824,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000015"),
+      "_id": ObjectId("51e018c8471dee280a000015"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6882471dee480b00001d"),
@@ -824,7 +854,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000016"),
+      "_id": ObjectId("51e018c8471dee280a000016"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6871471dee480b00001c"),
@@ -854,7 +884,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000017"),
+      "_id": ObjectId("51e018c8471dee280a000017"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516df1eb976982440f000000"),
@@ -884,7 +914,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000018"),
+      "_id": ObjectId("51e018c8471dee280a000018"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -914,7 +944,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51dd790a471dee6c09000019"),
+      "_id": ObjectId("51e018c8471dee280a000019"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -2561,6 +2591,33 @@ db.getCollection("design_layout").insert({
   "name": "Group Member Of Group",
   "path": "group\/group_member"
 });
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("51e018be471dee1c0a000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Action of Company",
+  "path": "company\/action"
+});
 
 /** district records **/
 db.getCollection("district").insert({
@@ -2576,7 +2633,48 @@ db.getCollection("district").insert({
 
 /** group records **/
 db.getCollection("group").insert({
-  "_id": ObjectId("518f5e6d471dee140a000000"),
+  "_id": ObjectId("51deafed471deed009000000"),
+  "author": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
+    "$db": "yesocl"
+  },
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "created": ISODate("2013-07-11T13:15:25.0Z"),
+  "description": "Tamquam accommodare pro ne. Sea natum labores lobortis et, elit novum albucius at pri, feugiat gubergren scribentur vis id.",
+  "groupMembers": [
+    {
+      "_id": ObjectId("51deafed471deed009000001"),
+      "name": "Default",
+      "status": true,
+      "canDel": false,
+      "actions": [
+        
+      ],
+      "categories": [
+        
+      ],
+      "members": [
+        
+      ]
+    }
+  ],
+  "name": "Group 1",
+  "status": true,
+  "sumary": "Partem fastidii ei ius. No illud nonumy cum. Eu vide copiosae comprehensam sit",
+  "type": {
+    "$ref": "group_type",
+    "$id": ObjectId("518f5e39471deeb40900001e"),
+    "$db": "yesocl"
+  },
+  "website": ""
+});
+db.getCollection("group").insert({
+  "_id": ObjectId("51deaf34471deec009000002"),
   "author": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2587,44 +2685,38 @@ db.getCollection("group").insert({
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "created": ISODate("2013-05-12T09:18:36.0Z"),
-  "description": "Eu nobis prompta menandri nam, aliquando reprimique pri eu, omnis legere cu vix. Ex pro liber postea, ad verear omnesque accusamus eam. Eam an inciderint consectetuer. Recusabo assueverit ad pri, nec alia facilisi ea. Minimum convenire est no, has eu case probo incorrupte. Ut nec wisi paulo efficiantur.\r\n",
-  "name": "Yesocl Group",
-  "posts": [
+  "created": ISODate("2013-07-11T13:12:20.0Z"),
+  "description": "Saepe veniam homero ei sed, etiam nominavi conceptam ei mei. Dicat mucius temporibus mei ea, et mel vero error virtute. Ut nam quando euismod molestiae, elitr persecuti ea vim. ",
+  "groupMembers": [
     {
-      "_id": ObjectId("518f5f67471deeb40900002a"),
-      "comments": [
+      "_id": ObjectId("51deaf34471deec009000003"),
+      "actions": [
+        
+      ],
+      "canDel": false,
+      "categories": [
+        
+      ],
+      "members": [
         {
-          "_id": ObjectId("518f600c471dee240a000001"),
-          "content": "Dolorem scribentur concludaturque id mel, consequuntur voluptatibus vis no. Ei habemus atomorum imperdiet mel.\r\n",
-          "status": true,
-          "created": ISODate("2013-05-12T09:25:32.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          }
+          "$ref": "user",
+          "$id": ObjectId("518f5555471deea409000000"),
+          "$db": "yesocl"
         }
       ],
-      "content": "&lt;p&gt;\r\n\tNe pri mazim dolore debitis. Nihil signiferumque mei id. Cu diam nemore repudiandae sit, eu ius dolor assueverit. Pertinacia constituam ei vis, dolorem contentiones eam no. Ne quot nemore his, nusquam persecuti ut vim.&lt;\/p&gt;\r\n",
-      "created": ISODate("2013-05-12T09:22:47.0Z"),
-      "status": true,
-      "title": "Tollit oportere usu ex, mea doming vidisse necessitatibus eu",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
+      "name": "Default",
+      "status": true
     }
   ],
+  "name": "Group 2",
   "status": true,
-  "sumary": "Ei timeam dissentias consectetuer has. Meis impetus abhorreant ad quo, id indoctum liberavisse vim. Vis copiosae singulis ut. Est solum dissentias cu, per labitur meliore scribentur ne, debitis detraxit cu est. Docendi gubergren referrentur sit te, at sale ignota habemus vel.\r\n",
+  "sumary": "Aliquid accusamus sit ne. Pro an quem libris, te nec porro laudem impetus, sale adolescens pro cu.",
   "type": {
     "$ref": "group_type",
     "$id": ObjectId("518f5e39471deeb40900001e"),
     "$db": "yesocl"
   },
-  "website": "www.yesocl.com"
+  "website": ""
 });
 
 /** group_action records **/

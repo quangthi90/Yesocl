@@ -144,6 +144,11 @@ $(document).ready(function(){
                   <li><a href="<?php echo $group_action; ?>"><?php echo $text_action; ?></a></li>
                 </ul>
               </li>
+              <li><a class="parent"><?php echo $text_company; ?></a>
+                <ul>
+                  <li><a href="<?php echo $company_action; ?>"><?php echo $text_action; ?></a></li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>

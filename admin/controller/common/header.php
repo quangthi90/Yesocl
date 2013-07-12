@@ -133,6 +133,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['action'] = $this->url->link('design/action', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['group_action'] = $this->url->link('group/action', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company_action'] = $this->url->link('company/action', 'token=' . $this->session->data['token'], 'SSL');
 
 			$this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 		}
