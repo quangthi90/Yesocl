@@ -62,6 +62,13 @@ db.getCollection("company").ensureIndex({
   
 ]);
 
+/** company_action indexes **/
+db.getCollection("company_action").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** company_group indexes **/
 db.getCollection("company_group").ensureIndex({
   "_id": NumberInt(1)
@@ -1578,6 +1585,32 @@ db.getCollection("company").insert({
   "status": true
 });
 
+/** company_action records **/
+db.getCollection("company_action").insert({
+  "_id": ObjectId("51e01a09471dee0c09000000"),
+  "name": "Add Member",
+  "code": "add_member",
+  "order": NumberInt(1)
+});
+db.getCollection("company_action").insert({
+  "_id": ObjectId("51e01a24471dee0c09000002"),
+  "name": "Remove Member",
+  "code": "remove_member",
+  "order": NumberInt(2)
+});
+db.getCollection("company_action").insert({
+  "_id": ObjectId("51e01a32471dee5c09000000"),
+  "name": "Add Category",
+  "code": "add_category",
+  "order": NumberInt(3)
+});
+db.getCollection("company_action").insert({
+  "_id": ObjectId("51e01a45471dee0c09000004"),
+  "name": "Remove Category",
+  "code": "remove_category",
+  "order": NumberInt(4)
+});
+
 /** company_group records **/
 db.getCollection("company_group").insert({
   "_id": ObjectId("516b9417913db47809000003"),
@@ -2836,6 +2869,26 @@ db.getCollection("setting_config").insert({
   "_id": ObjectId("51d51aabd874592009000033"),
   "key": "group_action_remove_member",
   "value": "remove_member"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("51e01a0a471dee0c09000001"),
+  "key": "company_action_add_member",
+  "value": "add_member"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("51e01a24471dee0c09000003"),
+  "key": "company_action_remove_member",
+  "value": "remove_member"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("51e01a32471dee5c09000001"),
+  "key": "company_action_add_category",
+  "value": "add_category"
+});
+db.getCollection("setting_config").insert({
+  "_id": ObjectId("51e01a45471dee0c09000005"),
+  "key": "company_action_remove_category",
+  "value": "remove_category"
 });
 
 /** street records **/
