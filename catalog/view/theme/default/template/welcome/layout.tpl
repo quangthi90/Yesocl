@@ -26,7 +26,6 @@
 		<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.uniform.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/yes.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/account.js"></script>
     	{% block javascript %}
 		{% endblock %}

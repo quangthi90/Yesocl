@@ -528,9 +528,6 @@
 
 {% block javascript %}
 <script type="text/javascript">
-	$(window).load(function(){
-        new HorizontalBlock($('.has-horizontal'));  
-    });
     $(document).ready(function() {
         $('.btn-category-link').click(function(e){  
             var currentElement = $($(this).attr('href')); 

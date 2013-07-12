@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="no-header-fixed">
+<div id="y-content">
 	<div id="y-main-content"> 
 		<div id="post-detail">
 			<div id="post-detail-header">
@@ -58,7 +58,7 @@
 {% block javascript %}
 <script type="text/javascript">
 $(document).ready(function() {
-	$('#y-content #y-main-content').makeScrollWithoutCalResize();
+	$('#y-main-content').makeScrollWithoutCalResize();
 
 	//Open comment box
 	$('.open-comment-detail').click(function(e){

@@ -15,7 +15,7 @@
 			      {{ user_info.username }}			      
 			    </a>
 			    <div class="user-can-do dropdown-toggle" data-toggle="dropdown">
-			    	<a href="#"><i class="icon-double-angle-down icon-2x"></i></a>
+			    	<a href="#"><i class="icon-caret-down icon-2x"></i></a>
 			    </div>
 			    <ul class="dropdown-menu">
 			      <li><a href="#"><i class="icon-cogs"></i> Privacy settings</a></li>
@@ -58,10 +58,8 @@
 		  	{% endblock %}
 		</ul>		
 	</div>
-	<div class="btn-container" id="close-bottom-sidebar">
-		<a href="#" class="btn-close"><i class="icon-hand-left"></i></a>
+	<div class="btn-container">
+		<a href="#" id="close-bottom-sidebar"><i class="icon-double-angle-up"></i></a>
+		<a href="#" id="open-bottom-sidebar"><i class="icon-double-angle-down"></i></a>
 	</div>
-	<div class="btn-container" id="open-bottom-sidebar">
-		<a href="#" class="btn-close"><i class="icon-hand-right"></i></a>
-	</div> 
 </div>
