@@ -57,6 +57,9 @@ Class Company {
 	 */
 	private $slug;
 
+	/** @MongoDB\EmbedMany(targetDocument="GroupMember") */
+	private $groupMembers = array();
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -97,6 +100,24 @@ Class Company {
 		foreach ( $this->careers as $career ){
 			if ( $career->getId() === $career_id ){
 				return  $career;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Get Group of Member By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Group of Member
+	 * 		- null if not found
+	 */
+	public function getGroupMemberById( $group_id ){
+		foreach ( $this->groupMembers as $group ){
+			if ( $group->getId() === $group_id ){
+				return $group;
 			}
 		}
 		
@@ -217,5 +238,17 @@ Class Company {
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function addGroupMember( GroupMember $groupMember ){
+		$this->groupMembers[] = $groupMember;
+	}
+
+	public function setGroupMembers( $groupMembers ){
+		$this->groupMembers = $groupMembers;
+	}
+
+	public function getGroupMembers(){
+		return $this->groupMembers;
 	}
 }
