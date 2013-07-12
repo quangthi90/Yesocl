@@ -1643,13 +1643,37 @@ class ControllerUserUser extends Controller {
 		$json = array();
 
 		foreach ($users as $user) {
-			$primary = ( $user->getUsername()) ? $user->getUsername() : $user->getFullname();
+			$primary = ( $user->getUsername()) ? $user->getUsername() : '';
 			$primary .= '(' . $user->getSolrPrimaryEmail() . ')';
 			$json[] = array(
 				'id' => $user->getId(),
-				'primary' => $primary,
+				'primary' => $primary
 			);
 		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function getUser(){
+		if ( !isset($this->request->post['user_id']) ){
+			return false;
+		}
+
+		$user_id = $this->request->post['user_id'];
+
+		$this->load->model('user/user');
+		$user = $this->model_user_user->getUser( array('user_id' => $user_id) );
+
+		if ( !$user ){
+			return false;
+		}
+
+		$json = array(
+			'id' => $user->getId(),
+			'username' => $user->getUsername(),
+			'fullname' => $user->getFullname(),
+			'email' => $user->getPrimaryEmail()->getEmail()
+		);
 
 		$this->response->setOutput( json_encode( $json ) );
 	}

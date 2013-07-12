@@ -15,7 +15,7 @@ body, td, th, input, select, textarea, option, optgroup {
 	color: #000000;
 }
 input[type='text'], input[type='password'] {
-	padding: 2px;
+	/*padding: 2px;*/
 }
 select {
 	padding: 1px;

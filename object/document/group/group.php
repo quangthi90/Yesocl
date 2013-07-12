@@ -36,6 +36,9 @@ Class Group {
 
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Branch", inversedBy="groups") */
     private $branch;
+
+    /** @MongoDB\EmbedMany(targetDocument="GroupMember") */
+	private $groupMembers = array();
 	
     /**
 	 * Get Post By ID
@@ -48,7 +51,25 @@ Class Group {
 	public function getPostById( $post_id ){
 		foreach ( $this->posts as $post ){
 			if ( $post->getId() === $post_id ){
-				return  $post;
+				return $post;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Get Group of Member By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Group of Member
+	 * 		- null if not found
+	 */
+	public function getGroupMemberById( $group_id ){
+		foreach ( $this->groupMembers as $group ){
+			if ( $group->getId() === $group_id ){
+				return $group;
 			}
 		}
 		
@@ -146,5 +167,17 @@ Class Group {
 
 	public function getBranch(){
 		return $this->branch;
+	}
+
+	public function addGroupMember( GroupMember $groupMember ){
+		$this->groupMembers[] = $groupMember;
+	}
+
+	public function setGroupMembers( $groupMembers ){
+		$this->groupMembers = $groupMembers;
+	}
+
+	public function getGroupMembers(){
+		return $this->groupMembers;
 	}
 }
