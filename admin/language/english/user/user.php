@@ -15,6 +15,7 @@ $_['text_male']			  			= 'Male';
 $_['text_month']			  		= 'Month:';
 $_['text_other']		  			= 'Other';
 $_['text_phone']		  			= 'Phone';
+$_['text_post']		  				= 'Post';
 $_['text_primary']		  			= 'Primary';
 $_['text_success']            		= 'Success: You have modified Users!';
 $_['text_status']			  		= 'Status';
