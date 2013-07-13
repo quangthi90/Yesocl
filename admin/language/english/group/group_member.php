@@ -4,8 +4,10 @@ $_['heading_title']           = 'Group';
 
 // Text
 $_['text_success']            = 'Success: You have modified Groups!';
-$_['text_select_all_action']  = 'Select all actions';
-$_['text_select_all_category']= 'Select all categories';
+
+// Button
+$_['button_select_all_action']  = 'Select all actions';
+$_['button_select_all_category']= 'Select all categories';
 
 $_['column_group'] 			  = 'Group Name';
 $_['column_status']			  = 'Status';

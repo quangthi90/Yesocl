@@ -22,6 +22,7 @@ $_['button_delete'] 		= 'Delete';
 $_['button_save'] 			= 'Save';
 $_['button_cancel'] 		= 'Cancel';
 $_['button_back'] 			= 'Back';
+$_['button_select_all_branch']	= 'Select all Branchs';
 
 // column
 $_['column_company'] 		= 'Company';
@@ -33,15 +34,16 @@ $_['column_action'] 		= 'Action';
 $_['column_fullname'] 		= 'Fullname';
 $_['column_email'] 			= 'Email';
 $_['column_logo'] 			= 'Logo';
+$_['column_branch']			= 'Branch Name';
 
 // entry
-$_['entry_created'] 		= 'Created:';
 $_['entry_name'] 			= 'Company Name:';
 $_['entry_status'] 			= 'Status:';
 $_['entry_owner'] 			= 'Owner:';
 $_['entry_group'] 			= 'Group:';
 $_['entry_description'] 	= 'Description:';
 $_['entry_logo'] 			= 'Logo:';
+$_['entry_branch'] 			= 'Branch:';
 
 // error
 $_['error_name'] 			= 'Warning: Company Name must be more than 1 characters and less than 128 characters!';

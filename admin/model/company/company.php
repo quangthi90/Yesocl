@@ -1,5 +1,6 @@
 <?php
-use Document\Company\Company;
+use Document\Company\Company,
+	Document\Company\GroupMember;
 
 use MongoRegex;
 
@@ -34,11 +35,6 @@ class ModelCompanyCompany extends Doctrine {
 			return false;
 		}
 
-		// created is required
-		if ( !isset($data['created']) || empty($data['created']) ){
-			return false;
-		}
-
 		// logo
 		if ( isset( $logo ) ) {
   			if ( !$this->isValidLogo( $logo ) ) {
@@ -70,9 +66,8 @@ class ModelCompanyCompany extends Doctrine {
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
 		
-		$company->setSlug( $slug );
-		
 		$company = new Company();
+		$company->setSlug( $slug );
 		$company->setSlug( $slug . $expend );
 		$company->setName( $data['name'] );
 		$company->setOwner( $user );
@@ -80,6 +75,14 @@ class ModelCompanyCompany extends Doctrine {
 		$company->setDescription( $data['description'] );
 		$company->setCreated( new \Datetime( $data['created'] ) );
 		$company->setStatus( $data['status'] );
+
+		if ( isset($data['branchs']) || !empty($data['branchs']) ){
+			$company->setBranchs( array() );
+			foreach ( $data['branchs'] as $branch_id ) {
+				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $branch_id );
+				$company->addBranch( $branch );
+			}
+		}
 
 		$group_member = new GroupMember();
 		$group_member->setName( $this->config->get('company')['default']['group_member_name'] );
@@ -89,16 +92,14 @@ class ModelCompanyCompany extends Doctrine {
 		$company->addGroupMember( $group_member );
 
 		$this->dm->persist( $company );
-		$this->dm->flush();
 
 		if ( !empty( $logo ) ) {
 			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
 				$company->setLogo( $data['logo'] );
-			}else {
-				$company->setLogo( '' );
 			}
-			$this->dm->flush();
 		}
+
+		$this->dm->flush();
 
 		return true;
 	}
@@ -119,11 +120,6 @@ class ModelCompanyCompany extends Doctrine {
 				return false;
 			}
 		}else {
-			return false;
-		}
-
-		// created is required
-		if ( !isset($data['created']) || empty($data['created']) ){
 			return false;
 		}
 
@@ -189,19 +185,22 @@ class ModelCompanyCompany extends Doctrine {
 		$company->setDescription( $data['description'] );
 		$company->setCreated( new \Datetime( $data['created'] ) );
 		$company->setStatus( $data['status'] );
-		
-		$this->dm->flush();
 
-		if ( !empty( $logo ) ) {
-			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
-				$company->setLogo( $data['logo'] );
-			}else {
-				$company->setLogo( '' );
+		if ( isset($data['branchs']) || !empty($data['branchs']) ){
+			$company->setBranchs( array() );
+			foreach ( $data['branchs'] as $branch_id ) {
+				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $branch_id );
+				$company->addBranch( $branch );
 			}
-			$this->dm->flush();
 		}
 
-		return true;
+		if ( !empty( $logo ) ) {exit;
+			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
+				$company->setLogo( $data['logo'] );
+			}
+		}
+		
+		$this->dm->flush();
 
 		return true;
 	}

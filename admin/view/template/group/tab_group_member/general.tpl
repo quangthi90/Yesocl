@@ -42,7 +42,7 @@
         <tr>
           <td>
             <div class="controls">
-              <a class="btn inline btn-warning" onclick="$('.check-all-action').click();"><?php echo $text_select_all_action; ?></a>
+              <a class="btn inline btn-warning" onclick="$('.check-all-action').click();"><?php echo $button_select_all_action; ?></a>
               <input class="hidden check-all-action" type="checkbox" onclick="$('input[name*=\'actions\']').attr('checked', this.checked);" />
             </div>
           </td>
@@ -72,7 +72,7 @@
         <tr>
           <td>
             <div class="controls">
-              <a class="btn inline btn-warning" onclick="$('.check-all-category').click();"><?php echo $text_select_all_category; ?></a>
+              <a class="btn inline btn-warning" onclick="$('.check-all-category').click();"><?php echo $button_select_all_category; ?></a>
               <input class="hidden check-all-category" type="checkbox" onclick="$('input[name*=\'categories\']').attr('checked', this.checked);" />
             </div>
           </td>

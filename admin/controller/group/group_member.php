@@ -286,8 +286,8 @@ class ControllerGroupGroupMember extends Controller {
 		// Text	
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
-		$this->data['text_select_all_category'] = $this->language->get( 'text_select_all_category' );
-		$this->data['text_select_all_action'] = $this->language->get( 'text_select_all_action' );
+		$this->data['button_select_all_category'] = $this->language->get( 'button_select_all_category' );
+		$this->data['button_select_all_action'] = $this->language->get( 'button_select_all_action' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );

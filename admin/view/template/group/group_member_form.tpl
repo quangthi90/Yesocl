@@ -25,12 +25,12 @@
         <div class="tab-content">
           <!-- General tab -->
           <div class="tab-pane active" id="tab-general">
-            <?php include 'tab/general.tpl'; ?>
+            <?php include 'tab_group_member/general.tpl'; ?>
           </div>
         
           <!-- Member tab -->
           <div class="tab-pane" id="tab-email">
-            <?php include 'tab/member.tpl'; ?>
+            <?php include 'tab_group_member/member.tpl'; ?>
           </div>
         </div>
       </form>
