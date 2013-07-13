@@ -57,6 +57,27 @@ Class User {
 	/** @MongoDB\String */
 	private $avatar;
 
+	/** @MongoDB\EmbedMany(targetDocument="Post") */
+	private $posts = array();
+
+	/**
+	 * Get Post By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Post
+	 * 		- null if not found
+	 */
+	public function getPostById( $post_id ){
+		foreach ( $this->posts as $post ){
+			if ( $post->getId() === $post_id ){
+				return $post;
+			}
+		}
+		
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}
@@ -193,6 +214,18 @@ Class User {
 
 	public function getAvatar(){
 		return $this->avatar;
+	}
+
+	public function addPost( Post $post ){
+		$this->posts[] = $post;
+	}
+
+	public function setPosts( $posts ){
+		$this->posts = $posts;
+	}
+
+	public function getPosts(){
+		return $this->posts;
 	}
 
 	/**
