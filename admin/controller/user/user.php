@@ -691,6 +691,12 @@ class ControllerUserUser extends Controller {
 					'icon' => 'icon-edit',
 				);
 			
+				$action[] = array(
+					'text' => $this->language->get( 'text_post' ),
+					'href' => $this->url->link( 'user/post', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'icon' => 'icon-list',
+				);
+			
 				$this->data['users'][] = array(
 					'id' => $user->getId(),
 					'email' => $user->getPrimaryEmail()->getEmail(),
