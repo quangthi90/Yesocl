@@ -99,7 +99,7 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		});
 		this.root.width(this.blocks.length*((5/6)*this.widthMain + 35));
 	}else {	
-		var heightMax = this.heightMain - 2;
+		var heightMax = this.heightMain - 25;
 		var widthM = this.widthMain;
 		var totalWidth = 0;
 		this.feeds.each(function() {
@@ -117,7 +117,7 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
 			totalWidth += $(this).outerWidth() + 30;
 		});
-		this.root.width(totalWidth);
+		this.root.width(totalWidth + 30);
 	}
 	this.root.makeContentHorizontalScroll();	
 }

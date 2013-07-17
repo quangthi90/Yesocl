@@ -587,9 +587,9 @@ label.in-line{
 }
 
 .post:hover {
-  -moz-box-shadow: 0 0 2px #75E944;
-  -webkit-box-shadow: 0 0 2px#75E944;
-  box-shadow: 0 0 2px #75E944;  
+  -moz-box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;  
 }
 
 .post-selecting {
@@ -598,26 +598,16 @@ label.in-line{
   z-index: 101;
 }
 
-.post .post_header {
-    background: #e2eeee; /* Old browsers */
-    background: -moz-linear-gradient(top,  #e2eeee 0%, #eff9fb 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2eeee), color-stop(100%,#eff9fb)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #e2eeee 0%,#eff9fb 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #e2eeee 0%,#eff9fb 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #e2eeee 0%,#eff9fb 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #e2eeee 0%,#eff9fb 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2eeee', endColorstr='#eff9fb',GradientType=0 ); /* IE6-9 */
-}
 .post .post_header .post_user {
     padding-top: 4px;
 }
     .post .post_header .post_user a {
-        /*color: #3d9915;*/
+        color: #3d9915;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 13px;
     }
     .post .post_header .post_user a:hover{
-      color: #3d9915;
+      color: #000;
     }
 .post .post_header .avatar_thumb {
 
@@ -659,6 +649,8 @@ label.in-line{
 .post_footer {
     position: absolute;
     bottom: 0px;
+    left: 0px;
+    right: 0px;
     border-top: 1px solid #e0eeef;
     height: 23px;    
     font-size: 12px;
@@ -1103,7 +1095,7 @@ label.in-line{
   background: #fff;
   margin-bottom: 20px;
   overflow: hidden;
-  border: 1px solid #ccc;   
+  border: 1px solid #A6D3A5;   
 }
 
 .column .feed-container:last-child {
@@ -1117,7 +1109,7 @@ label.in-line{
 .post_in_block .post_header{
   padding: 3px 8px;
   background: #fff;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #ddd;
 }
 
 .post_in_block .post_header a {
@@ -1143,6 +1135,26 @@ label.in-line{
 
 .post_in_singleblock {
   margin-bottom: 0px;
+  border: 1px solid #A6D3A5;
+  padding: 2px 2px 0px 2px;
+}
+
+.post_in_singleblock .post_header {
+  background: #D1F8BE;
+}
+
+.post_in_singleblock .post_header .avatar_thumb {
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.post_in_singleblock .post_body {
+    padding: 10px 20px 40px 20px;
+    font-size: 15px;
+}
+
+.post_in_singleblock .post_image {
+    margin-bottom: 10px;
 }
 
 .post_in_singleblock .post_body img {
