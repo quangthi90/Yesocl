@@ -619,17 +619,15 @@ label.in-line{
     text-align: right;
 }
 .post .post_header .post_title {
-    color: #3e9314;
     margin: 3px 0px 0px 0px;
-    padding: 0px 5px 5px 0px;
     white-space: normal;
     line-height: 1.4em;
 }
 .post .post_header .post_title a {
-  color: #000;
+  color: #31790E;
 }
 .post .post_header .post_title a:hover{
-  color: #3d9915;
+  color: #004D15;
 }
         
 .post .post_body {
@@ -1107,7 +1105,7 @@ label.in-line{
 }
 
 .post_in_block .post_header{
-  padding: 3px 8px;
+  padding: 5px 15px;
   background: #fff;
   border-top: 1px solid #ddd;
 }
@@ -1123,10 +1121,8 @@ label.in-line{
 .post_in_block .post_date{
   text-align: right;
   padding-right: 8px;
-}
-
-.post_in_block .post_footer .post_date {
   font-weight: bold;
+  font-size: 10px;
 }
 
 .post_in_block .post_body .post_text_raw{
