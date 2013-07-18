@@ -12,11 +12,13 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="no-header-fixed">
+<div id="y-content">
     <div id="y-main-content" class="has-horizontal">
         {#{ block('post_common_form_status') }#}
 
         {% for post in posts %}
+            {{ block('post_common_post_block') }}
+            {{ block('post_common_post_block') }}
             {{ block('post_common_post_block') }}
         {% endfor %}        
         
