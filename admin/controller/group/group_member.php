@@ -295,7 +295,6 @@ class ControllerGroupGroupMember extends Controller {
 
 		// Column
 		$this->data['column_action'] = $this->language->get( 'column_action' );
-		$this->data['column_category'] = $this->language->get( 'column_category' );
 		$this->data['column_username'] = $this->language->get( 'column_username' );
 		$this->data['column_fullname'] = $this->language->get( 'column_fullname' );
 		$this->data['column_email'] = $this->language->get( 'column_email' );
@@ -304,7 +303,6 @@ class ControllerGroupGroupMember extends Controller {
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_action'] = $this->language->get( 'entry_action' );
-		$this->data['entry_category'] = $this->language->get( 'entry_category' );
 		$this->data['entry_find_member'] = $this->language->get( 'entry_find_member' );
 
 		// Tab

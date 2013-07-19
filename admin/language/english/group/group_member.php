@@ -5,9 +5,6 @@ $_['heading_title']           = 'Group Member of Group Post';
 // Text
 $_['text_success']            = 'Success: You have modified Groups!';
 
-// Button
-$_['button_select_all_action']  = 'Select all actions';
-
 $_['column_group'] 			  = 'Group Name';
 $_['column_status']			  = 'Status';
 $_['column_action']			  = 'Action';
@@ -17,8 +14,10 @@ $_['column_category']		  = 'Category';
 $_['entry_name']              = 'Group Name:';
 $_['entry_status']            = 'Status:';
 $_['entry_action']            = 'Action:';
-$_['entry_category']          = 'Categories:';
 $_['entry_find_member']       = 'Find Member:';
+
+// Button
+$_['button_select_all_action']  = 'Select all actions';
 
 // error
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';

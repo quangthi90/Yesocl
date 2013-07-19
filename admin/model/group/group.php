@@ -56,6 +56,15 @@ class ModelGroupGroup extends Doctrine {
 		$group->setStatus( $data['status'] );
 		$group->setWebsite( $data['website'] );
 
+		// Category
+		if ( isset($data['categories']) || !empty($data['categories']) ){
+			$group->setCategories( array() );
+			foreach ( $data['categories'] as $category_id ) {
+				$category = $this->dm->getRepository('Document\Branch\Category')->find( $category_id );
+				$group->addCategory( $category );
+			}
+		}
+
 		// Branch
 		if ( isset( $data['branch_id'] ) ) {
 			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
@@ -127,6 +136,15 @@ class ModelGroupGroup extends Doctrine {
 		if ( isset( $data['branch_id'] ) ) {
 			$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
 			$group->setBranch( $branch );
+		}
+
+		// Category
+		if ( isset($data['categories']) || !empty($data['categories']) ){
+			$group->setCategories( array() );
+			foreach ( $data['categories'] as $category_id ) {
+				$category = $this->dm->getRepository('Document\Branch\Category')->find( $category_id );
+				$group->addCategory( $category );
+			}
 		}
 
 		$group->setAuthor( $user );
