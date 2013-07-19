@@ -182,7 +182,7 @@ class ModelGroupGroup extends Doctrine {
 			$data['start'] = 0;
 		}
 		
-		return $this->dm->getRepository( 'Document\Group\Group' )->findAll()->limit( $data['limit'] )->skip( $data['start'] );
+		return $this->dm->getRepository( 'Document\Group\Group' )->findAll()->limit( $data['limit'] )->skip( $data['start'] )->sort(array('created' => -1));
 	}
 
 	public function getGroupByPostId( $post_id ){

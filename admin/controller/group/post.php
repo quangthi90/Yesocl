@@ -348,6 +348,7 @@ class ControllerGroupPost extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
+		$this->data['entry_category'] = $this->language->get( 'entry_category' );
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
@@ -390,6 +391,7 @@ class ControllerGroupPost extends Controller {
 		// Entry author
 		if ( isset( $post ) ) {
 			$user = $post->getUser();
+			$category = $post->getCategory();
 		}
 		if ( isset($this->request->post['author']) ){
 			$this->data['author'] = $this->request->post['author'];
@@ -407,6 +409,24 @@ class ControllerGroupPost extends Controller {
 			$this->data['user_id'] = '';
 		}
 
+		// Category
+		if ( isset($this->request->post['category_id']) ){
+			$this->data['category_id'] = $this->request->post['category_id'];
+		}elseif ( isset( $category ) ){
+			$this->data['category_id'] = $category->getId();
+		}else {
+			$this->data['category_id'] = '';
+		}
+
+		$categories = $group->getCategories();
+		$this->data['categories'] = array();
+		foreach ( $categories as $category ) {
+			$this->data['categories'][] = array(
+				'id' => $category->getId(),
+				'name' => $category->getName()
+			);
+		}
+
 		$this->data['token'] = $this->session->data['token'];
 
 		$this->template = 'group/post_form.tpl';
@@ -419,7 +439,7 @@ class ControllerGroupPost extends Controller {
 	}
 
 	private function isValidateForm(){
-		if ( !isset($this->request->post['title']) || strlen($this->request->post['title']) < 3 || strlen($this->request->post['title']) > 128 ){
+		if ( !isset($this->request->post['title']) || strlen($this->request->post['title']) < 3 ){
 			$this->error['error_title'] = $this->language->get( 'error_title' );
 		}
 		
