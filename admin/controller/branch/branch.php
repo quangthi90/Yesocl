@@ -401,5 +401,26 @@ class ControllerBranchBranch extends Controller {
 
 		$this->response->setOutput( json_encode( $json ) );
 	}
+
+	public function getCategory() {
+		if ( isset( $this->request->get['branch_id'] ) ) {
+			$branch_id = $this->request->get['branch_id'];
+		}else {
+			return null;
+		}
+
+		$this->load->model( 'branch/branch' );
+		$branch = $this->model_branch_branch->getBranch( $branch_id );
+		
+		$json = array();
+		foreach ($branch->getCategories() as $category) {
+			$json[] = array(
+				'name' => $category->getName(),
+				'id' => $category->getId(),
+			);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
 }
 ?>

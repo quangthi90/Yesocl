@@ -274,6 +274,10 @@ class ControllerGroupGroup extends Controller {
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_select_all_categories'] = $this->language->get( 'button_select_all_categories' );
+
+		// Column
+		$this->data['column_category'] = $this->language->get( 'column_category' );
 		
 		// Entry
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
@@ -285,6 +289,11 @@ class ControllerGroupGroup extends Controller {
 		$this->data['entry_type'] = $this->language->get( 'entry_type' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
+		$this->data['entry_categories'] = $this->language->get( 'entry_categories' );
+
+		// Tab
+		$this->data['tab_general'] = $this->language->get( 'tab_general' );
+		$this->data['tab_category'] = $this->language->get( 'tab_category' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' );
@@ -369,11 +378,16 @@ class ControllerGroupGroup extends Controller {
 		$this->load->model( 'branch/branch' );
 		$branchs = $this->model_branch_branch->getAllBranchs();
 
+		$index = 1;
 		foreach ( $branchs as $branch ) {
+			if ( $index == 1 ){
+				$branch_id = $branch->getId();
+			}
 			$this->data['branchs'][] = array(
 				'id'	=> $branch->getId(),
 				'name'	=> $branch->getName()
 			);
+			$index++;
 		}
 
 		if ( isset($this->request->post['branch_id']) ){
@@ -382,6 +396,33 @@ class ControllerGroupGroup extends Controller {
 			$this->data['branch_id'] = $group->getBranch()->getId();
 		}else {
 			$this->data['branch_id'] = 1;
+		}
+
+		// Entry Category
+		if ( isset($group) ){
+			$brand_id = $group->getBranch()->getId();
+		}elseif ( !isset($branch_id) ) {
+			$branch_id = 0;
+		}
+		$branchs = $branchs->toArray();
+		if ( isset($branchs[$branch_id]) ){
+			$categories = $branchs[$branch_id]->getCategories();
+		}else{
+			$categories = array();
+		}
+		
+		$this->data['categories'] = array();
+		foreach ( $categories as $key => $category ) {
+			if ( $group->getCategoryById($category->getId()) ){
+				$checked = true;
+			}else{
+				$checked = false;
+			}
+			$this->data['categories'][] = array(
+				'id' => $category->getId(),
+				'name' => $category->getName(),
+				'checked' => $checked
+			);
 		}
 		
 		// Entry type

@@ -14,6 +14,12 @@ $_['text_email']			  = 'Email';
 $_['text_created']			  = 'Created';
 $_['text_action']			  = 'Action';
 
+// Column
+$_['column_category']		  = 'Category';
+
+// Button
+$_['button_select_all_categories']  = 'Select all categories';
+
 // Entry
 $_['entry_author']            = 'Owner:';
 $_['entry_fullname']          = 'Fullname:';
@@ -24,6 +30,7 @@ $_['entry_website']           = 'Website:';
 $_['entry_status']            = 'Status:';
 $_['entry_type']              = 'Type:';
 $_['entry_branch']            = 'Branch:';
+$_['entry_categories']        = 'Categories:';
 
 // error
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';

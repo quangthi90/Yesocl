@@ -39,6 +39,9 @@ Class Group {
 
     /** @MongoDB\EmbedMany(targetDocument="GroupMember") */
 	private $groupMembers = array();
+
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Category") */
+	private $categories = array();
 	
     /**
 	 * Get Post By ID
@@ -70,6 +73,24 @@ Class Group {
 		foreach ( $this->groupMembers as $group ){
 			if ( $group->getId() === $group_id ){
 				return $group;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Get Category By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Category
+	 * 		- null if not found
+	 */
+	public function getCategoryById( $category_id ){
+		foreach ( $this->categories as $category ){
+			if ( $category->getId() === $category_id ){
+				return $category;
 			}
 		}
 		
@@ -179,5 +200,17 @@ Class Group {
 
 	public function getGroupMembers(){
 		return $this->groupMembers;
+	}
+
+	public function addCategory( \Document\Branch\Category $category ){
+		$this->categories[] = $category;
+	}
+
+	public function setCategories( $categories ){
+		$this->categories = $categories;
+	}
+
+	public function getCategories(){
+		return $this->categories;
 	}
 }

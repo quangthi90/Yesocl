@@ -18,10 +18,11 @@ $_['entry_title']             = 'Title:';
 $_['entry_content']           = 'Content:';
 $_['entry_author']        	  = 'Author:';
 $_['entry_status']        	  = 'Status:';
-$_['entry_fullname']             = 'Fullname:';
+$_['entry_fullname']          = 'Fullname:';
+$_['entry_category']          = 'Category:';
 
 // error
-$_['error_name']              = 'Post Name must be between 3 and 128 characters!';
+$_['error_name']              = 'Post Name must be between 3 characters!';
 $_['error_permission']        = 'Warning: You do not have permission to modify Posts!';
 
 // Column
