@@ -1392,197 +1392,49 @@ db.getCollection("city").insert({
 
 /** company records **/
 db.getCollection("company").insert({
-  "_id": ObjectId("519d1163471deee40b000000"),
-  "created": ISODate("2013-05-25T22:00:00.0Z"),
-  "description": "<p>\r\n\tLorem ipsum dolor sit amet, enim corrumpit eos in, usu ex dicant pertinax, primis latine ad nam. Soleat delectus euripidis cum in, quo lorem feugiat mandamus eu.<\/p>\r\n",
+  "_id": ObjectId("51e97c88471dee180a000000"),
+  "branchs": [
+    {
+      "$ref": "branch",
+      "$id": ObjectId("51d39ba5d87459c40a000017"),
+      "$db": "yesocl"
+    }
+  ],
+  "created": ISODate("2013-07-19T17:51:04.0Z"),
+  "description": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, paulo congue conceptam ex eum, vim at timeam liberavisse, everti ancillae vivendum sed ad. Te vim deseruisse intellegebat,&lt;\/p&gt;\r\n",
   "group": {
     "$ref": "company_group",
     "$id": ObjectId("516b9417913db47809000003"),
     "$db": "yesocl"
   },
-  "logo": "data\/catalog\/company\/519d1163471deee40b000000\/logo.png",
-  "name": "Yesocl",
+  "groupMembers": [
+    {
+      "_id": ObjectId("51e97c88471dee180a000001"),
+      "actions": [
+        
+      ],
+      "canDel": false,
+      "members": [
+        {
+          "$ref": "user",
+          "$id": ObjectId("518f5555471deea409000000"),
+          "$db": "yesocl"
+        }
+      ],
+      "name": "Default",
+      "status": true
+    }
+  ],
+  "logo": "data\/catalog\/company\/\/logo.png",
+  "name": "Yestoc",
   "owner": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
     "$db": "yesocl"
   },
-  "posts": [
-    {
-      "_id": ObjectId("51aa52c2471dee980a00001d"),
-      "title": "Lăng kính Yestoc 31\/05: “chúng tôi vẫn duy trì quan điểm thận trọng”",
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tin Nhanh Thế Giới&lt;\/strong&gt;&lt;strong&gt;-&lt;\/strong&gt;Tăng trưởng kinh tế Mỹ đạt 2.4%, thấp hơn so với dự báo ban đầu do xây dựng và hàng tồn kho vẫn ở mức cao. Bên cạnh đó, các chính sách thắt chặt chi tiêu của chính phủ đã cản trở sự tăng trưởng tiêu dùng đang ở mức cao nhất từ 2010.-Dự báo tăng trưởng kinh tế Anh từ đến năm 2015 có khả năng nhanh hơn dự báo ban đầu. Các số liệu cho thấy niềm tin tiêu dùng có sự gia tăng lên mức cao nhất sáu tháng trong tháng năm.- Thị trường chứng khoán Châu Á nói chung cũng như Chứng khoán Nhật Bản nói riêng đã có phiên gia tăng tích cực sau phiên sụt giảm mạnh trước đó cùng &amp;nbsp;nỗ lực cải cách các chính sách kinh doanh cũng như duy trì niềm tin tăng trưởng.&lt;strong&gt;Tin Nhanh Trong Nước &lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;- &lt;\/strong&gt;Tại phiên thảo luận của Quốc hội chiều 30\/5, Thống đốc Ngân hàng Nhà nước (NHNN) cho biết, dự kiến trong năm nay sẽ giải ngân được khoảng 15-20 nghìn tỷ đồng gói 30 nghìn tỷ đồng hỗ trợ cho thị trường bất động sản.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t- Bộ Kế hoạch Đầu tư đang dự thảo Chỉ thị của Thủ tướng về xây dựng Kế hoạch phát triển kinh tế-xã hội và Dự toán ngân sách Nhà nước 2014. Theo đó sẽ&amp;nbsp; Bộ sẽ đề xuất mục tiêu tăng trưởng GDP 2014 khoảng 6%&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;- &lt;\/strong&gt;Petrolimex chính thức phản hồi thông tin thua lỗ lớn&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t- Sáng nay, giá cà phê nhân xô các tỉnh Tây Nguyên đồng loạt giảm 100 nghìn đồng xuống 40,3-40,5 triệu đồng tấn&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Tin Nhanh Cổ Phiếu :&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t- KAC: Thành viên thứ 2 của HĐQT từ nhiệm trong vòng 1 tháng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t- 6 tháng đầu năm 2013, PVD ước đạt hơn 800 tỷ đồng LNST.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t- REE : TMP mở đường cho REE nhận chuyển nhượng 16 triệu CP từ EVN Finance&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t- DHG: Hai quỹ ngoại chuyển quyền sở hữu hơn 430 nghìn cổ phiếu cho 2 quỹ ngoại khác&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Diễn Biến Thị Trường :&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trưởng tiếp tục có một phiên gia tăng khá tích cực. Mặc dù quá trình điều chỉnh đầu phiên khá mạnh mẽ tạo tâm lý hoang mang khá lớn tới thị trường. Tuy nhiên sau đó, các lệnh mua vào xuất hiện khá lớn đã nâng đỡ thị trường gia tăng trở lại. Cổ phiếu REE có sự gia tăng mạnh mẽ 6.4%, đóng cửa ở mức 28,400 đ\/cp. PVD cũng gia tăng mạnh mẽ 1,600 lên 49,500 đ\/cp. SHB tiếp tục biến động ở biên độ hẹp, gia tăng nhẹ 100 đ\/cp lên7,600 đ\/cp, tương ứng mức tăng 1.3%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Lăng Kính&amp;nbsp; Phân Tích Kỹ Thuật :&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điềm phân tích ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVề mặt phân tích kỹ thuật, hai chỉ số VNIndex và HNX đều vượt các ngưỡng kháng cự quan trọng là 518 và 65 . Tuy nhiên, mức vượt qua khá nhỏ và thanh khoản sụt giảm khá mạnh so với phiên trước nên chúng tôi vẫn duy trì quan điểm thận trọng. Trong ngắn hạn, chỉ báo xung lượng RSI 14 ngày cũng đã đi vào vùng quá mua, cho thấy khả năng thị trường điều chỉnh giảm. Ở tình huống &amp;nbsp;tích cực, nếu đà tăng được giữ vững, VN-Index sẽ tăng 1 nhịp vùng kháng cự 530, trong khi đó HNX-Index có thể quay về đỉnh 67. Trường hợp ngược lại, Vnidnex sẽ điều chinh về vùng 500-505, và HNX điều chỉnh về 61.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnindex12.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2725&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnindex12-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/hnxindex6.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2726&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/hnxindex6-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;hnxindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẩn bảo lưu quan điểm thận trọng, nhà đầu tư lướt sóng có thể chủ động chốt lời một phần danh mục cổ phiếu để&amp;nbsp;hiện thực hóa lợi nhuận và tái cơ cấu danh mục đầu tư.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tVới nhà đầu tư đang cầm tiền, việc mua đuổi trong giai đoạn này là không cần thiết, có thể canh các nhịp điều chỉnh trong phiên và chỉ nên giải ngân với một tỉ lệ thấp, và chờ đợi nhịp điều chỉnh lớn hơn để cơ cấu toàn bộ danh mục.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐịnh dạng .pdf&amp;nbsp;&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/YS_daily_report_31.05.2013.pdf&quot;&gt;YS_daily_report_31.05.2013&lt;\/a&gt;&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-06-01T20:00:02.0Z"),
-      "author": "user1",
-      "email": "user1@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "lang-kinh-yestoc-3105-chung-toi-van-duy-tri-quan-diem-than-trong-51aa52c2471dee980a00001c",
-      "category": {
-        "$ref": "company_post_category",
-        "$id": ObjectId("516c9640976982b00c000000"),
-        "$db": "yesocl"
-      },
-      "description": "&lt;p&gt;\r\n\tTin Nhanh Thế Giới-Tăng trưởng kinh tế Mỹ đạt 2.4%, thấp hơn so với dự báo ban đầu do xây dựng và hàng tồn kho vẫn ở mức cao.&lt;\/p&gt;\r\n"
-    },
-    {
-      "_id": ObjectId("51a79d10471dee9c09000005"),
-      "title": "Lăng kính Yestoc phiên 30\/05: “áp lực bán có thể sẽ gia tăng”",
-      "content": "&lt;p&gt;\r\n\tDòng tiền đầu cơ tiếp tục đổ vào thị trường sau những diễn biến tích cực, cùng với đó tâm lý của nhà đầu tư cũng ổn định hơn tại một số thời điểm thị trường điều chỉnh khi không xuất hiện áp lực bán tháo. Tuy nhiên,&amp;nbsp;áp lực chốt lời đã nhanh chóng gia tăng trở lại khiến thị trường mất dần sự hưng phấn. Lực bán &amp;nbsp;tập trung chủ yếu ở nhóm cổ phiếu lớn và &amp;nbsp;đầu cơ, những cổ phiếu đã có mức tăng trưởng mạnh trong thời gian qua như REE, PPC, DRC, VNM, GAS…&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm ngắn hạn (5-10 ngày):&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVề mặt kỹ thuật, Vnindex hình thành hai cây nến gần đây luôn tạo bóng trên ở ngưỡng 518 cho thấy lực bán khá mạnh tập trung &amp;nbsp;ở vùng này và theo đó, nhịp điều chỉnh sắp tới có thể xảy ra đưa VNIndex về vùng hỗ trợ 500-505 điểm. Trong khi đó, chỉ số&amp;nbsp;HNXIndex cũng yếu dần về cuối phiên cho thấy dấu hiệu tiêu cực với việc hình thành mô hình nến Shooting Star cùng khối lượng giao dịch lớn.&amp;nbsp;Tương ứng với mức 500 điểm của VNIndex, mục tiêu của HNX là vùng hỗ trợ &amp;nbsp;63-62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnindex11.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2718&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnindex11-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/hnxindfex.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2719&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/hnxindfex-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;hnxindfex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tỞ vị thế mua, chúng&amp;nbsp;tôi không ủng hộ việc mua đuổi trong phiên (đặc việt là nhóm cổ phiếu đã tăng mạnh)&amp;nbsp;&amp;nbsp;mà nên cân nhắc mua vào ở các nhịp điều chỉnh về vùng hỗ trợ trong phiên cuối tuần.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục giải ngân có thể tập trung vào các cổ phiếu đang tích lũy hoặc chưa tăng mạnh trong thời gian qua.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-05-30T18:40:16.0Z"),
-      "updated": ISODate("2013-05-31T16:22:11.0Z"),
-      "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "comments": [
-        {
-          "_id": ObjectId("51a79e5f471dee9c09000006"),
-          "content": "&lt;p&gt;\r\n\tBài viết rất hay, cố gắng phát huy nha ^^&lt;\/p&gt;\r\n",
-          "status": true,
-          "created": ISODate("2013-05-30T18:45:51.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "user1@test.com"
-        },
-        {
-          "_id": ObjectId("51a8bdb8471dee0c09000000"),
-          "content": "Bài viết này cũng bình thường thôi... hehe...",
-          "status": true,
-          "created": ISODate("2013-05-31T15:11:52.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "user1@test.com"
-        },
-        {
-          "_id": ObjectId("51a8ce33471dee0c09000001"),
-          "content": "Bài viết này thấy cũng bình thường mà... có j` đâu mà hay nhẩy @_@",
-          "status": true,
-          "created": ISODate("2013-05-31T16:22:11.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "user1@test.com"
-        }
-      ],
-      "slug": "lang-kinh-yestoc-phien-3005-ap-luc-ban-co-the-se-gia-tang-51a79d10471dee9c09000004",
-      "category": {
-        "$ref": "company_post_category",
-        "$id": ObjectId("516c9640976982b00c000000"),
-        "$db": "yesocl"
-      },
-      "description": "&lt;p&gt;\r\n\tDòng tiền đầu cơ tiếp tục đổ vào thị trường sau những diễn biến tích cực&lt;\/p&gt;\r\n",
-      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a79d10471dee9c09000005\/thumb.jpg"
-    },
-    {
-      "_id": ObjectId("51a8b58d471dee2809000001"),
-      "title": "Lăng kính Yestoc tuần 27-31\/05: ” Tạm thời đi ngang và điều chỉnh trong tuần”",
-      "content": "&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\tHiện tại, 2 chỉ số đang tiếp cận các vùng kháng cự 505-510 và 62,5-63 , điều này được thể hiện rõ nét trong các phiên cuối tuần, tuy nhiên, thanh khoản giao dịch vẫn duy trì được ở mức cao.&amp;nbsp;Nhìn chung, diễn&amp;nbsp;biến trong thị trường trong tuần vừa qua rất tích cực khi VNIndex vượt vùng cản 490 , HNX vượt vùng cản 61 như chúng tôi đã dự đoán.&amp;nbsp;Các cổ phiếu midcap vẫn đang là điểm đến của dòng tiền thông minh, cùng với đó là một bộ phận nhà đầu tư đã bắt đầu mua vào nhóm cổ phiếu đầu cơ với kỳ vọng về một nhịp tăng trưởng mới của chỉ số.&lt;\/p&gt;\r\n&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;Quan điểm ngắn hạn ( 5-10 ngày):&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\tNhững cây nến xanh biên độ lớn xuất hiện ngày càng nhiều cho thấy tâm lý nhà đầu tư được cải thiện theo chiều hướng tích cực khi giá đã phá vỡ hoàn toàn vùng kháng cự mạnh 490. Tuy nhiên, về cuối tuần áp lực chốt lời càng mạnh khiến thị trường điều chỉnh nhẹ. Việc rung lắc trong phiên dự đoán sẽ còn xuất hiện trong thời gian tới khi cả hai chỉ số vừa phá vỡ ngưỡng kháng cự quan trọng.&amp;nbsp;Kịch bản nhiều khả năng nhất là thị trường sẽ tạm thời dao động trong khung 491-510 trên Vnindex và 61-63 trên Hnx. Với kịch bản dao động như vậy thì nhà đầu tư vẫn có thể cân nhắc mua vào tại các thời điểm điều chỉnh của thị trường.&lt;\/p&gt;\r\n&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;Quan điểm trung hạn (1 – 3 tháng):&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\tTheo đồ thị tuần, xu hướng trung hạn đang trong giai đoạn xác nhận xu hướng tăng và cần phải quan sát thêm. Nếu mức độ điều chỉnh không quá mạnh dưới mức 491 của chỉ số VNIndex và mức 61.0 của chỉ số HNX trong những phiên tới cũng như thanh khoản tiếp tục duy trì tăng ồn định thì việc mua tích lũy có thể được cân nhắc.&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;Chiến lược trade ngắn hạn:&lt;\/strong&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;ul&gt;\r\n\t\t&lt;li&gt;\r\n\t\t\tNhà đầu tư tránh mua đuổi giá cao (nếu có) trong phiên đầu tuần, đặc biệt là trong các phiên hồi phục mạnh khi chỉ số tiệm cận các ngưỡng cản trung và dài hạn.&lt;\/li&gt;\r\n\t\t&lt;li&gt;\r\n\t\t\tThị trường sẽ sớm chịu áp lực điều chỉnh tại vùng 500-510 và 62.5, do đó&amp;nbsp;nhà đầu tư có thể xem xét gia tăng tỷ lệ nắm giữ cổ phiếu khi thị trường điều chỉnh giảm tại mốc hỗ trợ.&lt;\/li&gt;\r\n\t\t&lt;li&gt;\r\n\t\t\tĐiểm cắt lỗ có thể cân nhắc đặt tại vùng 491 và 59, tương ứng cho VNIndex và HNX nếu thị trường giảm mạnh.&lt;\/li&gt;\r\n\t\t&lt;li&gt;\r\n\t\t\tDanh mục tập trung vào các mã lực cầu mạnh như :&lt;\/li&gt;\r\n\t&lt;\/ul&gt;\r\n\t&lt;ol&gt;\r\n\t\t&lt;li&gt;\r\n\t\t\tCổ&amp;nbsp;phiếu cơ bản : PVC, CSM, PVD, FPT,&amp;nbsp;REE, DRC, PET, VSH, GAS, VNM&lt;\/li&gt;\r\n\t\t&lt;li&gt;\r\n\t\t\tCổ&amp;nbsp;phiếu đầu cơ: SHB, KLS, SCR, SSI, VND, TPP, IJC, TDC&lt;\/li&gt;\r\n\t&lt;\/ol&gt;\r\n\t&lt;p&gt;\r\n\t\t&lt;strong&gt;Một vài mã tiêu biểu:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;CSM__Mua: 35-37__Bán: 40__Cutloss: &amp;lt;34&lt;\/strong&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/csm.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2660&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/csm-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;csm&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;PVD__Mua: 43-45__Bán:&amp;nbsp;&lt;strong&gt;50__Cutloss: &amp;lt;43&lt;\/strong&gt;&lt;\/strong&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/pvd.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2663&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/pvd-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;pvd&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;VIC__Mua: 64-65__Bán: 7&lt;\/strong&gt;&lt;strong&gt;0__Cutloss: &amp;lt;63&lt;\/strong&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/VIC.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2665&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/VIC-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;VIC&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/strong&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;strong&gt;SHB__Mua: 7.0-7.2__Bán: 7.7-8__Cutloss: &amp;lt;7&lt;\/strong&gt;&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/shb.jpg&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;wp-image-2664&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/shb-1024x453.jpg&quot; style=&quot;border: 1px solid black;&quot; title=&quot;shb&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/div&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-05-29T14:37:01.0Z"),
-      "updated": ISODate("2013-06-01T18:20:12.0Z"),
-      "author": "user1",
-      "email": "user1@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "comments": [
-        {
-          "_id": ObjectId("51a8c668471dee2809000002"),
-          "content": "Bài viết này rất hay, thông tin rất bổ ích, đúng những thứ mình đang cần, thanks chủ topic phát nha :x",
-          "status": true,
-          "created": ISODate("2013-05-31T15:48:56.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "user1@test.com"
-        },
-        {
-          "_id": ObjectId("51aa3b20471dee540a000000"),
-          "content": "Hay quá... ủng hộ bài viết mới nào ;)",
-          "status": true,
-          "created": ISODate("2013-06-01T18:19:12.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "user1@test.com"
-        },
-        {
-          "_id": ObjectId("51aa3b5c471dee540a000001"),
-          "content": "Hay quá... ủng hộ bài viết mới nào ;)",
-          "status": true,
-          "created": ISODate("2013-06-01T18:20:12.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "user1@test.com"
-        }
-      ],
-      "slug": "lang-kinh-yestoc-tuan-27-3105-tam-thoi-di-ngang-va-dieu-chinh-trong-tuan-51a8b58d471dee2809000000",
-      "category": {
-        "$ref": "company_post_category",
-        "$id": ObjectId("516c9640976982b00c000000"),
-        "$db": "yesocl"
-      },
-      "description": "&lt;p&gt;\r\n\tHiện tại, 2 chỉ số đang tiếp cận các vùng kháng cự 505-510 và 62,5-63 , điều này được thể hiện rõ nét trong các phiên cuối tuần&lt;\/p&gt;\r\n",
-      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a8b58d471dee2809000001\/thumb.jpg"
-    },
-    {
-      "_id": ObjectId("51a8b787471dee1009000001"),
-      "title": "Lăng kính Yestoc 28\/05: “hạn chế mua đuổi”",
-      "content": "&lt;p&gt;\r\n\tDiễn biến các chỉ số qua tiếp tục cho thấy sự tích cực trong xu hướng trung hạn, nhóm chứng khoán dậy sóng giúp thị trường có phiên tăng điểm mạnh mẽ. Tuy nhiên trong ngắn hạn, áp lực bán có thể gia tăng do VNIndex đang tiệm cận đỉnh đầu năm ở 518 trong khi &amp;nbsp;chỉ số HNX đóng cửa trên kháng cự 63,3 nhưng mức vượt qua khá nhỏ nên sự phá vỡ chưa rõ ràng&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm ngắn hạn (5-10 ngày)&lt;\/strong&gt;:&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi tiếp tục giữ quan điểm thị trường vẫn có thể có vài phiên điều chỉnh nhẹ về gần các mức hỗ trợ 500 trên Vnindex và 61 trên HNX trong tuần sau. Hai chỉ số vẫn hoạt động trong kênh tăng giá hẹp ngắn hạn với mức mục tiêu của nhịp tăng lần này là 520 của VN-Index và 65 của HNX. Do đó, các nhà đầu tư có thể tận dụng các nhịp điều chỉnh nhẹ về gần các mức hỗ trợ mới để tham gia giải ngân vào các mã vẫn đang ở trạng thái tích lũy hoặc chưa tăng mạnh, nhưng hạn chế giải ngân vào các cổ phiếu đã có mức tăng nóng như BTP, REE, PPC, HSG… trong thời gian qua vì chúng tôi quan ngại khả năng áp lực chốt lời có thể sẽ gia tăng mạnh lên nhóm cổ phiếu này trong các phiên tới.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnidex.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-2704&quot; height=&quot;0&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/05\/vnidex-1024x583.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnidex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược trade ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tRủi ro đang dần gia tăng khi mà cả hai chỉ số đều tiệm cận ngưỡng kháng cự nên nhà đầu tư tránh việc mua đuổi ở những phiên tăng mạnh.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư có thể duy việc giải ngân khi thị trường điều chỉnh và tránh việc lướt sóng ngắn hạn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục mã cổ phiếu đã được chúng tôi cập nhật trong &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-27-3105-tam-thoi-di-ngang-va-dieu-chinh-trong-tuan\/&quot;&gt;bản tin tuần 27-31\/5&lt;\/a&gt;&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-05-28T14:45:27.0Z"),
-      "updated": ISODate("2013-05-31T14:45:27.0Z"),
-      "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "slug": "lang-kinh-yestoc-2805-han-che-mua-duoi-51a8b787471dee1009000000",
-      "category": {
-        "$ref": "company_post_category",
-        "$id": ObjectId("516c9640976982b00c000000"),
-        "$db": "yesocl"
-      },
-      "description": "&lt;p&gt;\r\n\tDiễn biến các chỉ số qua tiếp tục cho thấy sự tích cực trong xu hướng trung hạn, nhóm chứng khoán dậy sóng giúp thị trường có phiên tăng điểm&lt;\/p&gt;\r\n",
-      "thumb": "data\/catalog\/company\/519d1163471deee40b000000\/post\/51a8b787471dee1009000001\/thumb.jpg"
-    }
-  ],
-  "slug": "yesocl",
-  "status": true
+  "slug": "yestoc",
+  "status": true,
+  "updated": ISODate("2013-07-19T17:51:31.0Z")
 });
 
 /** company_action records **/
