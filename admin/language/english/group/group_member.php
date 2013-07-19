@@ -7,7 +7,6 @@ $_['text_success']            = 'Success: You have modified Groups!';
 
 // Button
 $_['button_select_all_action']  = 'Select all actions';
-$_['button_select_all_category']= 'Select all categories';
 
 $_['column_group'] 			  = 'Group Name';
 $_['column_status']			  = 'Status';

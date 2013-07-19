@@ -29,14 +29,6 @@ class ModelGroupGroupMember extends Doctrine {
 			}
 		}
 
-		if ( isset($data['categories']) || !empty($data['categories']) ){
-			$group_member->setCategories( array() );
-			foreach ( $data['categories'] as $category_id ) {
-				$category = $this->dm->getRepository('Document\Branch\Category')->find( $category_id );
-				$group_member->addCategory( $category );
-			}
-		}
-
 		if ( isset($data['members']) || !empty($data['members']) ){
 			$group_member->setMembers( array() );
 			foreach ( $data['members'] as $member_id ) {
@@ -82,14 +74,6 @@ class ModelGroupGroupMember extends Doctrine {
 					foreach ( $data['actions'] as $action_id ) {
 						$action = $this->dm->getRepository('Document\Group\Action')->find( $action_id );
 						$group_member->addAction( $action );
-					}
-				}
-
-				if ( isset($data['categories']) || !empty($data['categories']) ){
-					$group_member->setCategories( array() );
-					foreach ( $data['categories'] as $category_id ) {
-						$category = $this->dm->getRepository('Document\Branch\Category')->find( $category_id );
-						$group_member->addCategory( $category );
 					}
 				}
 

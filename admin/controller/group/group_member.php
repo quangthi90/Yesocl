@@ -286,7 +286,6 @@ class ControllerGroupGroupMember extends Controller {
 		// Text	
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
-		$this->data['button_select_all_category'] = $this->language->get( 'button_select_all_category' );
 		$this->data['button_select_all_action'] = $this->language->get( 'button_select_all_action' );
 		
 		// Button
@@ -370,26 +369,6 @@ class ControllerGroupGroupMember extends Controller {
 			$this->data['actions'][] = array(
 				'id'	=> $action->getId(),
 				'name'	=> $action->getName(),
-				'checked' => $checked
-			);
-		}
-
-		// Entry Category
-		$this->load->model('branch/category');
-		$categories = $this->model_branch_category->getAllCategories(array(
-			'branch_id' => $group->getBranch()->getId()
-		));
-
-		$this->data['categories'] = array();
-		foreach ( $categories as $category ) {
-			$checked = false;
-			if ( isset($group_member) && $group_member->getCategoryById($category->getId()) ){
-				$checked = true;
-			}
-
-			$this->data['categories'][] = array(
-				'id'	=> $category->getId(),
-				'name'	=> $category->getName(),
 				'checked' => $checked
 			);
 		}
