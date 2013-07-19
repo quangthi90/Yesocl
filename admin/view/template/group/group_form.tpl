@@ -18,76 +18,21 @@
     </div>
     <div class="content">
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
-        <table class="form">
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_author; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="author" value="<?php echo $author; ?>" /><input name="user_id" type="hidden" value="<?php echo $user_id; ?>" />
-            <?php if ($error_author) { ?>
-              	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_author; ?>
-				</div>
-            <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_name; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="name" value="<?php echo $name; ?>" />
-            <?php if ($error_name) { ?>
-              	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_name; ?>
-				</div>
-            <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_sumary; ?></td>
-            <td><textarea class="input-xxlarge" type="text" name="sumary"><?php echo $sumary; ?></textarea>
-            <?php if ($error_sumary) { ?>
-              	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_sumary; ?>
-				</div>
-            <?php } ?></td>
-          </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_description; ?></td>
-            <td><textarea class="input-xxlarge" type="text" name="description"><?php echo $description; ?></textarea>
-            <?php if ($error_description) { ?>
-              	<div class="alert alert-error">
-				  <strong>Error!</strong> <?php echo $error_description; ?>
-				</div>
-            <?php } ?></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_website; ?></td>
-            <td><input class="input-xxlarge" type="text" name="website" value="<?php echo $website; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_branch; ?></td>
-            <td><select name="branch_id">
-                <?php foreach ( $branchs as $branch ){ ?>
-                <option <?php if ( $branch['id'] == $branch_id){ ?>selected="selected"<?php } ?> value="<?php echo $branch['id']; ?>"><?php echo $branch['name']; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_type; ?></td>
-            <td><select name="type">
-                <?php foreach ( $types as $type ){ ?>
-                <option <?php if ( $type['id'] == $type_id){ ?>selected="selected"<?php } ?> value="<?php echo $type['id']; ?>"><?php echo $type['name']; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select name="status">
-                <?php if ($status) { ?>
-                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
-                <option value="0"><?php echo $text_disabled; ?></option>
-                <?php } else { ?>
-                <option value="1"><?php echo $text_enabled; ?></option>
-                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
-                <?php } ?>
-              </select></td>
-          </tr>
-        </table>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
+          <li><a href="#tab-category" data-toggle="tab"><?php echo $tab_category; ?></a></li>
+        </ul>
+        <div class="tab-content">
+          <!-- General tab -->
+          <div class="tab-pane active" id="tab-general">
+            <?php include 'tab_group/general.tpl'; ?>
+          </div>
+        
+          <!-- Member tab -->
+          <div class="tab-pane" id="tab-category">
+            <?php include 'tab_group/category.tpl'; ?>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -120,4 +65,29 @@ $('input[name=\'author\']').autocomplete({
    	}
 });
 //--></script>
+<script type="text/javascript">
+$('select[name=\'branch_id\']').on('change', function(){
+  $.ajax({
+    url: 'index.php?route=branch/branch/getCategory&branch_id=' +  $(this).val() + '&token=<?php echo $token; ?>',
+    dataType: 'json',
+    success: function(items) {   
+      $('.category-info').remove();
+
+      var catHtml = '';
+      for ( var i = 0; i < items.length; i++ ){
+        catHtml += '<tr class="category-info">';
+        catHtml +=   '<td>';
+        catHtml +=     '<div class="controls">';
+        catHtml +=       '<label class="checkbox inline">';
+        catHtml +=       '<input type="checkbox" name="categories[]" value="' + items[i].id + '" />' + items[i].name + '</label>';
+        catHtml +=     '</div>';
+        catHtml +=   '</td>';
+        catHtml += '</tr>';
+      }
+
+      $('.btn-select-all').before(catHtml);
+    }
+  });
+});
+</script>
 <?php echo $footer; ?>

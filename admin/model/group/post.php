@@ -43,6 +43,11 @@ class ModelGroupPost extends Doctrine {
 		$post->setContent( $data['postcontent'] );
 		$post->setUser( $user );
 		$post->setStatus( $data['status'] );
+
+		if ( isset($data['category_id']) && !empty($data['category_id']) ){
+			$category = $this->dm->getRepository('Document\Branch\Category')->find( $data['category_id'] );
+			$post->setCategory( $category );
+		}
 		
 		$group->addPost( $post );
 		
@@ -86,6 +91,12 @@ class ModelGroupPost extends Doctrine {
 				$post->setContent( $data['postcontent'] );
 				$post->setUser( $user );
 				$post->setStatus( $data['status'] );
+
+				if ( isset($data['category_id']) && !empty($data['category_id']) ){
+					$category = $this->dm->getRepository('Document\Branch\Category')->find( $data['category_id'] );
+					$post->setCategory( $category );
+				}
+		
 				break;
 			}
 		}

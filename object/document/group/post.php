@@ -25,6 +25,9 @@ Class Post {
 	/** @MongoDB\EmbedMany(targetDocument="Comment") */
 	private $comments = array();
 
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Category") */
+	private $category;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -102,5 +105,13 @@ Class Post {
 
 	public function getComments(){
 		return $this->comments;
+	}
+
+	public function setCategory( $category ){
+		$this->category = $category;
+	}
+
+	public function getCategory(){
+		return $this->category;
 	}
 }

@@ -91,6 +91,7 @@ $_['tab_branch']              = 'Branch';
 $_['tab_fraud']               = 'Fraud';
 $_['tab_information']         = 'Information';
 $_['tab_email']        		  = 'Email';
+$_['tab_category']      	  = 'Category';
 $_['tab_ip']                  = 'IP Addresses';
 $_['tab_links']               = 'Links';
 $_['tab_image']               = 'Image';
