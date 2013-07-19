@@ -16,10 +16,12 @@
 			<div id="post-detail-header">
 				<div class="group-header">
 					<div class="row-fluid">
-						<a class="span2 link-btn" onclick="history.go(-1); return false;" href="#" title="Go back"> 
-							<i class="icon-chevron-sign-left icon-2x fl"></i> 
-							<span class="fr">Back</span>
-						</a>
+						<div class="span2">
+							<a class="link-btn" onclick="history.go(-1); return false;" href="#" title="Go back"> 
+								<i class="icon-chevron-sign-left icon-2x fl"></i> 
+								<span>Back</span>
+							</a>
+						</div>						
 						<div class="span6 post-category">
 							<a href="#" title="View post in this category">{{ post.category }}</a>
 						</div>

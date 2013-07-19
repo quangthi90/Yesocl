@@ -336,7 +336,7 @@ label.in-line{
 }
 
 #y-content {
-    padding: 25px 0px 0px 25px;    
+    padding: 25px 0px 10px 25px;    
     position: absolute;    
     top: 0px;
     left: 152px;
@@ -577,19 +577,19 @@ label.in-line{
     height: auto;    
     padding: 0px;
     background: #fff;
-    border: 1px solid #ddd;
+    /*
     border-top: 1px solid #ccc;
     -moz-box-shadow: 0 0 5px #ccc;
     -webkit-box-shadow: 0 0 5px#ccc;
     box-shadow: 0 0 5px #ccc;
+    */
     position: relative;
 }
 
 .post:hover {
-   border-top-color: #3B8F39;
-  -moz-box-shadow: 0 0 5px #75E944;
-  -webkit-box-shadow: 0 0 5px#75E944;
-  box-shadow: 0 0 5px #75E944;  
+  -moz-box-shadow: 0 0 5px #ccc;
+  -webkit-box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 5px #ccc;  
 }
 
 .post-selecting {
@@ -598,30 +598,16 @@ label.in-line{
   z-index: 101;
 }
 
-.feed {
-  margin-bottom: 20px;
-}
-
-.post .post_header {
-    background: #e2eeee; /* Old browsers */
-    background: -moz-linear-gradient(top,  #e2eeee 0%, #eff9fb 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2eeee), color-stop(100%,#eff9fb)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #e2eeee 0%,#eff9fb 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #e2eeee 0%,#eff9fb 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #e2eeee 0%,#eff9fb 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #e2eeee 0%,#eff9fb 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2eeee', endColorstr='#eff9fb',GradientType=0 ); /* IE6-9 */
-}
 .post .post_header .post_user {
     padding-top: 4px;
 }
     .post .post_header .post_user a {
-        /*color: #3d9915;*/
+        color: #3d9915;
         font-weight: bold;
-        font-size: 14px;
+        font-size: 13px;
     }
     .post .post_header .post_user a:hover{
-      color: #3d9915;
+      color: #000;
     }
 .post .post_header .avatar_thumb {
 
@@ -633,23 +619,21 @@ label.in-line{
     text-align: right;
 }
 .post .post_header .post_title {
-    color: #3e9314;
     margin: 3px 0px 0px 0px;
-    padding: 0px 5px 5px 0px;
     white-space: normal;
     line-height: 1.4em;
 }
 .post .post_header .post_title a {
-  color: #3d9915;
+  color: #31790E;
 }
 .post .post_header .post_title a:hover{
-  color: #000;
+  color: #004D15;
 }
         
 .post .post_body {
     overflow: hidden;
     white-space: normal;
-    padding: 10px 5px;
+    padding: 3px 5px 35px 5px;
     font-size: 14px;
     text-align: justify;
 }
@@ -663,6 +647,8 @@ label.in-line{
 .post_footer {
     position: absolute;
     bottom: 0px;
+    left: 0px;
+    right: 0px;
     border-top: 1px solid #e0eeef;
     height: 23px;    
     font-size: 12px;
@@ -907,7 +893,7 @@ label.in-line{
   font-weight: bold;
   color: #fff;
   display: block;
-  padding: 3px 10px;
+  padding: 2px 40px;
 }
 
 .group-header .link-btn span {
@@ -921,15 +907,17 @@ label.in-line{
 .group-header .link-btn  i {
   color: #fff;
   font-size: 22px;
-  padding-right: 15px;
+  padding-right: 10px;
 }
 
 .group-header .post-category {
   text-transform: uppercase;
+  padding: 9px 0px;
 }
 
 .group-header .post-action {
   text-align: right;
+  padding: 9px 0px;
 }
 
 .group-header .post-action a {
@@ -1096,15 +1084,32 @@ label.in-line{
 }
 
 /*CUSTOM for POST*/
+.column {
+  height: 100%;
+  float: left;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.column .feed-container{
+  background: #fff;
+  margin-bottom: 10px;
+  overflow: hidden;
+  border: 1px solid #A6D3A5;   
+}
+
+.column .feed-container:last-child {
+  margin-bottom: 0px;
+}
+
 .has-block .feed-block {
   overflow: hidden;
 }
 
 .post_in_block .post_header{
-  padding: 3px 8px;
+  padding: 5px 15px;
   background: #fff;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #025f04;
+  border-top: 1px solid #ddd;
 }
 
 .post_in_block .post_header a {
@@ -1118,28 +1123,60 @@ label.in-line{
 .post_in_block .post_date{
   text-align: right;
   padding-right: 8px;
-}
-
-.post_in_block .post_footer .post_date {
   font-weight: bold;
+  font-size: 10px;
 }
 
 .post_in_block .post_body .post_text_raw{
   padding: 3px 10px;
 }
 
-.post_in_block .post_body .post_image {
-  height: 100%;
-}
-
-.post_in_block .post_body .post_image img {
-  height: 100%;
-}
-
 .post_in_singleblock {
   margin-bottom: 0px;
+  border: 1px solid #A6D3A5;
+  padding: 2px 2px 0px 2px;
+}
+
+.post_in_singleblock .post_header {
+  background: #D1F8BE;
+}
+
+.post_in_singleblock .post_header .avatar_thumb {
+    border-right: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+}
+
+.post_in_singleblock .post_body {
+    padding: 10px 20px 40px 20px;
+    font-size: 15px;
+}
+
+.post_in_singleblock .post_image {
+    margin-bottom: 10px;
 }
 
 .post_in_singleblock .post_body img {
   max-width: 500px;
+}
+
+.feed-container .post {
+  width: 100%;
+  height: 100%;
+}
+
+.post-special .post_title{
+  font-size: 20px;
+}
+
+.column-special .post-special .post_title {
+  font-size: 18px;
+}
+
+.column-special .post-weak .post_title{
+  font-size: 15px; 
+}
+
+.column-special .post-weak .post_body {
+  padding: 0px 5px 35px 5px;
+  font-size: 12px;
 }
