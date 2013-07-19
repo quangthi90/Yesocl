@@ -42,7 +42,6 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_companies'] = $this->language->get('text_companies');
 		$this->data['text_company'] = $this->language->get('text_company');
 		$this->data['text_company_group'] = $this->language->get('text_company_group');
-		$this->data['text_company_post_category'] = $this->language->get('text_company_post_category');
 
 		// Branch
 		$this->data['text_branchs'] = $this->language->get('text_branchs');
@@ -120,7 +119,6 @@ class ControllerCommonHeader extends Controller {
 			// Company
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['company'] = $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['company_post_category'] = $this->url->link('company/category', 'token=' . $this->session->data['token'], 'SSL');
 
 			// Branch
 			$this->data['branch'] = $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL');
@@ -133,6 +131,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['layout'] = $this->url->link('design/layout', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['action'] = $this->url->link('design/action', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['group_action'] = $this->url->link('group/action', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['company_action'] = $this->url->link('company/action', 'token=' . $this->session->data['token'], 'SSL');
 
 			$this->data['logout'] = $this->url->link('common/logout', 'token=' . $this->session->data['token'], 'SSL');
 		}

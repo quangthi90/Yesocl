@@ -47,6 +47,9 @@ Class Company {
 	/** @MongoDB\Date */
 	private $created;
 
+	/** @MongoDB\Date */
+	private $updated;
+
 	/** 
 	 * @MongoDB\Boolean 
 	 */
@@ -56,6 +59,12 @@ Class Company {
 	 * @MongoDB\String 
 	 */
 	private $slug;
+
+	/** @MongoDB\EmbedMany(targetDocument="GroupMember") */
+	private $groupMembers = array();
+
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch") */
+	private $branchs = array();
 
 	/**
 	 * Get Post By ID
@@ -101,6 +110,52 @@ Class Company {
 		}
 		
 		return null;
+	}
+
+	/**
+	 * Get Group of Member By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Group of Member
+	 * 		- null if not found
+	 */
+	public function getGroupMemberById( $group_id ){
+		foreach ( $this->groupMembers as $group ){
+			if ( $group->getId() === $group_id ){
+				return $group;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Get Branch By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object branch
+	 * 		- null if not found
+	 */
+	public function getBranchById( $branch_id ){
+		foreach ( $this->branchs as $branch ){
+			if ( $branch->getId() === $branch_id ){
+				return $branch;
+			}
+		}
+		
+		return null;
+	}
+
+	/** @MongoDB\PrePersist */
+	public function prePersist(){
+		$this->created = new \DateTime();
+	}
+
+	/** @MongoDB\PreUpdate */
+	public function preUpdate(){
+		$this->updated = new \DateTime();
 	}
 
 	public function getId(){
@@ -211,11 +266,43 @@ Class Company {
 		return $this->created;
 	}
 
+	public function setUpdated( $updated ){
+		$this->updated = $updated;
+	}
+
+	public function getUpdated(){
+		return $this->updated;
+	}
+
 	public function setStatus( $status ){
 		$this->status = $status;
 	}
 
 	public function getStatus(){
 		return $this->status;
+	}
+
+	public function addGroupMember( GroupMember $groupMember ){
+		$this->groupMembers[] = $groupMember;
+	}
+
+	public function setGroupMembers( $groupMembers ){
+		$this->groupMembers = $groupMembers;
+	}
+
+	public function getGroupMembers(){
+		return $this->groupMembers;
+	}
+
+	public function addBranch( \Document\Branch\Branch $branch ){
+		$this->branchs[] = $branch;
+	}
+
+	public function setBranchs( $branchs ){
+		$this->branchs = $branchs;
+	}
+
+	public function getBranchs(){
+		return $this->branchs;
 	}
 }

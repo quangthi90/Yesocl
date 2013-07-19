@@ -1,24 +1,24 @@
 <?php 
-use Document\Group\GroupMember;
+use Document\Company\GroupMember;
 
-class ControllerGroupGroupMember extends Controller {
+class ControllercompanyGroupMember extends Controller {
 	private $error = array( );
-	private $route = 'group/group_member';
+	private $route = 'company/group_member';
  
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'group/group_member' );
+		$this->load->language( 'company/group_member' );
 		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
+		if ( !isset($this->request->get['company_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
-			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->load->model( 'group/group_member' );
+		$this->load->model( 'company/group_member' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 		
@@ -30,31 +30,31 @@ class ControllerGroupGroupMember extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'group/group_member' );
+		$this->load->language( 'company/group_member' );
 		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
+		if ( !isset($this->request->get['company_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
-			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->load->model( 'group/group_member' );
+		$this->load->model( 'company/group_member' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_group_member->addGroupMember( $this->request->get['group_id'], $this->request->post ) == false ){
+			if ( $this->model_company_group_member->addGroupMember( $this->request->get['company_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
-				$this->redirect( $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+				$this->redirect( $this->url->link( 'company/group_member', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'company/group_member', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->data['action'] = $this->url->link( 'group/group_member/insert', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['action'] = $this->url->link( 'company/group_member/insert', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm( );
 	}
@@ -64,28 +64,28 @@ class ControllerGroupGroupMember extends Controller {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'group/group_member' );
+		$this->load->language( 'company/group_member' );
 		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
+		if ( !isset($this->request->get['company_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
-			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->load->model( 'group/group_member' );
+		$this->load->model( 'company/group_member' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_group_member->editGroupMember( $this->request->get['group_member_id'], $this->request->post ) == false ){
+			if ( $this->model_company_group_member->editGroupMember( $this->request->get['group_member_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
-				$this->redirect( $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+				$this->redirect( $this->url->link( 'company/group_member', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'company/group_member', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
 		$this->getForm();
@@ -96,24 +96,24 @@ class ControllerGroupGroupMember extends Controller {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'group/group_member' );
+		$this->load->language( 'company/group_member' );
 		
-		if ( !isset($this->request->get['group_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_group');
+		if ( !isset($this->request->get['company_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_company');
 			
-			$this->redirect( $this->url->link('group/group', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('company/company', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->load->model( 'group/group_member' );
+		$this->load->model( 'company/group_member' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_group_group_member->deleteGroupMember( $this->request->post );
+			$this->model_company_group_member->deleteGroupMember( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'company/group_member', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -150,17 +150,17 @@ class ControllerGroupGroupMember extends Controller {
 			$page = 1;
 		}
 		
-		$group_id = 0;
-		if ( isset($this->request->get['group_id']) ){
-			$group_id = $this->request->get['group_id'];
+		$company_id = 0;
+		if ( isset($this->request->get['company_id']) ){
+			$company_id = $this->request->get['company_id'];
 		}
 		
-		$this->load->model( 'group/group' );
-		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
+		$this->load->model( 'company/company' );
+		$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
 
-		if ( !$group ){
-			$this->session->data['error_warning'] = $this->language->get( 'error_not_found_group' );
-			$this->redirect( $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' ) );
+		if ( !$company ){
+			$this->session->data['error_warning'] = $this->language->get( 'error_not_found_company' );
+			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
 		// breadcrumbs
@@ -171,7 +171,7 @@ class ControllerGroupGroupMember extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/group_member', 'token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'company/group_member', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -185,7 +185,7 @@ class ControllerGroupGroupMember extends Controller {
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
 
 		$this->data['column_status'] = $this->language->get( 'column_status' );
-		$this->data['column_group'] = $this->language->get( 'column_group' );	
+		$this->data['column_company'] = $this->language->get( 'column_company' );	
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		
 		// Confirm
@@ -197,12 +197,12 @@ class ControllerGroupGroupMember extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'group/group_member/insert', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'group/group_member/delete', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'group/group', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'company/group_member/insert', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'company/group_member/delete', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// group_member
-		$group_members = $group->getGroupMembers();
+		$group_members = $company->getGroupMembers();
 		
 		$group_member_total = 0;
 		
@@ -214,7 +214,7 @@ class ControllerGroupGroupMember extends Controller {
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/group_member/update', 'group_member_id=' . $group_members[$i]->getId() . '&group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'company/group_member/update', 'group_member_id=' . $group_members[$i]->getId() . '&company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -237,7 +237,7 @@ class ControllerGroupGroupMember extends Controller {
 			
 		$this->data['pagination'] = $pagination->render();
 
-		$this->template = 'group/group_member_list.tpl';
+		$this->template = 'company/group_member_list.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -276,7 +276,7 @@ class ControllerGroupGroupMember extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'group/group_member', 'token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'company/group_member', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -286,7 +286,6 @@ class ControllerGroupGroupMember extends Controller {
 		// Text	
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
-		$this->data['button_select_all_category'] = $this->language->get( 'button_select_all_category' );
 		$this->data['button_select_all_action'] = $this->language->get( 'button_select_all_action' );
 		
 		// Button
@@ -313,26 +312,26 @@ class ControllerGroupGroupMember extends Controller {
 		$this->data['tab_member'] = $this->language->get( 'tab_member' );
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'group/group_member', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['cancel'] = $this->url->link( 'company/group_member', 'company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		
-		$group_id = 0;
-		if ( isset($this->request->get['group_id']) ){
-			$group_id = $this->request->get['group_id'];
+		$company_id = 0;
+		if ( isset($this->request->get['company_id']) ){
+			$company_id = $this->request->get['company_id'];
 		}
 		
-		$this->load->model( 'group/group' );
-		$group = $this->model_group_group->getGroup( $this->request->get['group_id'] );
+		$this->load->model( 'company/company' );
+		$company = $this->model_company_company->getcompany( $this->request->get['company_id'] );
 		
 		// group_member
 		if ( isset($this->request->get['group_member_id']) ){
-			if ( $group ){
-				foreach ( $group->getGroupMembers() as $group_member ){
+			if ( $company ){
+				foreach ( $company->getGroupMembers() as $group_member ){
 					if ( $group_member->getId() == $this->request->get['group_member_id'] ){
 						break;
 					}
 				}
 				
-				$this->data['action'] = $this->url->link( 'group/group_member/update', 'group_member_id=' . $this->request->get['group_member_id'] . '&group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+				$this->data['action'] = $this->url->link( 'company/group_member/update', 'group_member_id=' . $this->request->get['group_member_id'] . '&company_id=' . $this->request->get['company_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -357,8 +356,8 @@ class ControllerGroupGroupMember extends Controller {
 		}
 
 		// Entry action
-		$this->load->model('group/action');
-		$actions = $this->model_group_action->getAllActions();
+		$this->load->model('company/action');
+		$actions = $this->model_company_action->getAllActions();
 
 		$this->data['actions'] = array();
 		foreach ( $actions as $action ) {
@@ -370,26 +369,6 @@ class ControllerGroupGroupMember extends Controller {
 			$this->data['actions'][] = array(
 				'id'	=> $action->getId(),
 				'name'	=> $action->getName(),
-				'checked' => $checked
-			);
-		}
-
-		// Entry Category
-		$this->load->model('branch/category');
-		$categories = $this->model_branch_category->getAllCategories(array(
-			'branch_id' => $group->getBranch()->getId()
-		));
-
-		$this->data['categories'] = array();
-		foreach ( $categories as $category ) {
-			$checked = false;
-			if ( isset($group_member) && $group_member->getCategoryById($category->getId()) ){
-				$checked = true;
-			}
-
-			$this->data['categories'][] = array(
-				'id'	=> $category->getId(),
-				'name'	=> $category->getName(),
 				'checked' => $checked
 			);
 		}
@@ -409,7 +388,7 @@ class ControllerGroupGroupMember extends Controller {
 
 		$this->data['token'] = $this->session->data['token'];
 		
-		$this->template = 'group/group_member_form.tpl';
+		$this->template = 'company/group_member_form.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'

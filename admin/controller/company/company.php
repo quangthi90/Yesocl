@@ -508,6 +508,12 @@ class ControllerCompanyCompany extends Controller {
 				$action = array();
 
 				$action[] = array(
+					'text' => $this->language->get( 'text_group_member' ),
+					'href' => $this->url->link( 'company/group_member', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'icon' => 'icon-list',
+				);
+
+				$action[] = array(
 					'text' => $this->language->get( 'text_post' ),
 					'href' => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
 					'icon' => 'icon-list',
@@ -615,12 +621,6 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['error_description'] = '';
 		}
 
-		if ( isset( $this->error['error_created'] ) ) {
-			$this->data['error_created'] = $this->error['error_created'];
-		}else {
-			$this->data['error_created'] = '';
-		}
-
 		// page
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -656,12 +656,20 @@ class ControllerCompanyCompany extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_group'] = $this->language->get( 'entry_group' );
 		$this->data['entry_owner'] = $this->language->get( 'entry_owner' );
-		$this->data['entry_created'] = $this->language->get( 'entry_created' );
+		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
+
+		// column
+		$this->data['column_branch'] = $this->language->get( 'column_branch' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_select_all_branch'] = $this->language->get( 'button_select_all_branch' );
+
+		// Tab
+		$this->data['tab_general'] = $this->language->get( 'tab_general' );
+		$this->data['tab_branch'] = $this->language->get( 'tab_branch' );
 
 		// link
 		$this->data['cancel'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'] . $url, 'SSL' );
@@ -720,7 +728,7 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['groups'][] = array(
 				'id' => $group->getId(),
 				'name' => $group->getName(),
-				);
+			);
 		}
 		if ( isset( $this->request->post['group'] ) ) {
 			$this->data['group'] = $this->request->post['group'];
@@ -739,15 +747,6 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['description'] = '';
 		}
 
-		// created
-		if ( isset( $this->request->post['created'] ) ) {
-			$this->data['created'] = $this->request->post['created'];
-		}elseif ( isset( $company ) ) {
-			$this->data['created'] = $company->getCreated()->format( 'd/m/Y' );
-		}else {
-			$this->data['created'] = '';
-		}
-
 		// status
 		if ( isset( $this->request->post['status'] ) ) {
 			$this->data['status'] = $this->request->post['status'];
@@ -757,6 +756,23 @@ class ControllerCompanyCompany extends Controller {
 			$this->data['status'] = 1;
 		}
 
+		// branch
+		$this->load->model('branch/branch');
+		$branchs = $this->model_branch_branch->getAllBranchs();
+
+		$this->data['branchs'] = array();
+		foreach ( $branchs as $branch ) {
+			$checked = false;
+			if ( isset($company) && $company->getBranchById($branch->getId()) ){
+				$checked = true;
+			}
+			$this->data['branchs'][] = array(
+				'id' => $branch->getId(),
+				'name' => $branch->getName(),
+				'checked' => $checked
+			);
+		}
+
 		// template
 		$this->template = 'company/company_form.tpl';
 
@@ -764,7 +780,7 @@ class ControllerCompanyCompany extends Controller {
 		$this->children = array(
 			'common/header',
 			'common/footer'
-			);
+		);
 
 		// render
 		$this->response->setOutput( $this->render() );
@@ -801,10 +817,6 @@ class ControllerCompanyCompany extends Controller {
 
 		if ( !isset( $this->request->post['group']) || empty( $this->request->post['group'] ) ) {
 			$this->error['error_group'] = $this->language->get( 'error_group' );
-		}
-
-		if ( !isset( $this->request->post['created']) || empty( $this->request->post['created'] ) ) {
-			$this->error['error_created'] = $this->language->get( 'error_created' );
 		}
 
 		if ( $this->error ) {

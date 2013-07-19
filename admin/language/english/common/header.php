@@ -5,8 +5,8 @@ $_['heading_title']                    = 'Administration';
 //---------------------------- Text ----------------------------
 // User
 $_['text_users']                       	= 'Users';
-$_['text_group']                        = 'Group';
-$_['text_group_type']	              	= 'Group Type';
+$_['text_group']                        = 'Group Post';
+$_['text_group_type']	              	= 'Group Post Type';
 $_['text_group_manage']             	= 'Group Manage';
 $_['text_user']                        	= 'User Account';
 $_['text_user_group']              		= 'User Group';
@@ -19,7 +19,6 @@ $_['text_admin_manage']            		= 'Admin Manage';
 $_['text_companies']                    = 'Companies';
 $_['text_company']                      = 'Company';
 $_['text_company_group']              	= 'Company Group';
-$_['text_company_post_category']        = 'Post Category';
 
 // Branch
 $_['text_branchs']                    	= 'Branchs';
