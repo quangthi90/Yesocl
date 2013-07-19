@@ -42,38 +42,8 @@
         <tr>
           <td>
             <div class="controls">
-              <a class="btn inline btn-warning" onclick="$('.check-all-action').click();"><?php echo $text_select_all_action; ?></a>
+              <a class="btn inline btn-warning" onclick="$('.check-all-action').click();"><?php echo $button_select_all_action; ?></a>
               <input class="hidden check-all-action" type="checkbox" onclick="$('input[name*=\'actions\']').attr('checked', this.checked);" />
-            </div>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td><?php echo $entry_category; ?></td>
-    <td>
-      <table class="table table-striped">
-        <tr>
-          <th><?php echo $column_category; ?></th>
-        </tr>
-        <?php foreach ( $categories as $category ) { ?>
-        <tr>
-          <td>
-            <div class="controls">
-              <label class="checkbox inline">
-                <input type="checkbox" name="categories[]" value="<?php echo $category['id']; ?>" <?php if ($category['checked'] == true){ ?>checked="checked"<?php } ?> />
-                <?php echo $category['name']; ?>
-              </label>
-            </div>
-          </td>
-        </tr>
-        <?php } ?>
-        <tr>
-          <td>
-            <div class="controls">
-              <a class="btn inline btn-warning" onclick="$('.check-all-category').click();"><?php echo $text_select_all_category; ?></a>
-              <input class="hidden check-all-category" type="checkbox" onclick="$('input[name*=\'categories\']').attr('checked', this.checked);" />
             </div>
           </td>
         </tr>

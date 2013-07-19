@@ -13,7 +13,7 @@
   <?php } ?>
   <div class="box">
     <div class="heading">
-      <span><img src="view/image/company.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
+      <span><img src="view/image/company_action.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
 	      <a onclick="location = '<?php echo $insert; ?>'" class="btn btn-success"><?php echo $button_insert; ?> <i class="icon-plus"></i></a>
 	      <a onclick="$('form').submit();" class="btn btn-danger"><?php echo $button_delete; ?> <i class="icon-trash"></i></a>
@@ -25,29 +25,29 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $column_category; ?></td>
+              <td><?php echo $column_name; ?></td>
+              <td><?php echo $column_code; ?></td>
               <td><?php echo $column_order; ?></td>
-              <td><?php echo $column_status; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
           </thead>
           <tbody>
-            <?php if ( $categories ) { ?>
-            <?php foreach ( $categories as $category ) { ?>
+            <?php if ($actions) { ?>
+            <?php foreach ($actions as $action) { ?>
             <tr>
-              <td><input name="id[]" type="checkbox" value="<?php echo $category['id']; ?>"/></td>
-              <td><?php echo $category['name']; ?></td>
-              <td><?php echo $category['order']; ?></td>
-              <td><?php echo ( $category['status'] ) ? $text_enable : $text_disable; ?></td>
-              <td class="right"><?php foreach ( $category['action'] as $action ) { ?>
+              <td><input name="id[]" type="checkbox" value="<?php echo $action['id']; ?>"/></td>
+              <td><?php echo $action['name']; ?></td>
+              <td><?php echo $action['code']; ?></td>
+              <td><?php echo $action['order']; ?></td>
+              <td class="right"><?php foreach ($action['action'] as $action) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
             </tr>
             <?php } ?>
             <?php }?>
-            <?php if ( !$categories ) { ?>
+            <?php if (!$actions) { ?>
             <tr class="center">
-              <td colspan="5"><?php echo $text_no_results; ?></td>
+              <td colspan="10"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

@@ -5,22 +5,11 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
 
 /** @MongoDB\EmbeddedDocument */
 Class Post extends AbstractPost {
-	/** @MongoDB\ReferenceOne(targetDocument="Category", inversedBy="posts") */
-	private $category;
-
 	/** @MongoDB\String */
 	private $description;
 
 	/** @MongoDB\String */
 	private $thumb;
-	
-	public function setCategory( $category ){
-		$this->category = $category;
-	}
-
-	public function getCategory(){
-		return $this->category;
-	}
 
 	public function setDescription( $description ){
 		$this->description = $description;
