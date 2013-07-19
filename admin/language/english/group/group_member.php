@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']           = 'Group';
+$_['heading_title']           = 'Group Member of Group Post';
 
 // Text
 $_['text_success']            = 'Success: You have modified Groups!';

@@ -19,9 +19,6 @@ Class GroupMember {
 	/** @MongoDB\ReferenceMany(targetDocument="Action") */
 	private $actions = array();
 
-	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Category") */
-	private $categories = array();
-
 	/** @MongoDB\ReferenceMany(targetDocument="Document\User\User") */
 	private $members = array();
 
@@ -99,18 +96,6 @@ Class GroupMember {
 
 	public function getActions(){
 		return $this->actions;
-	}
-
-	public function addCategory( \Document\Branch\Category $category ){
-		$this->categories[] = $category;
-	}
-
-	public function setCategories( $categories ){
-		$this->categories = $categories;
-	}
-
-	public function getCategories(){
-		return $this->categories;
 	}
 
 	public function addMember( \Document\User\User $member ){

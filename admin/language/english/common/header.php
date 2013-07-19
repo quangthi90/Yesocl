@@ -5,8 +5,8 @@ $_['heading_title']                    = 'Administration';
 //---------------------------- Text ----------------------------
 // User
 $_['text_users']                       	= 'Users';
-$_['text_group']                        = 'Group';
-$_['text_group_type']	              	= 'Group Type';
+$_['text_group']                        = 'Group Post';
+$_['text_group_type']	              	= 'Group Post Type';
 $_['text_group_manage']             	= 'Group Manage';
 $_['text_user']                        	= 'User Account';
 $_['text_user_group']              		= 'User Group';

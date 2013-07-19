@@ -1,11 +1,10 @@
 <?php
 // Heading
-$_['heading_title']           = 'Group';
+$_['heading_title']           = 'Group Member of Company';
 
 // Text
 $_['text_success']            = 'Success: You have modified Groups!';
-$_['text_select_all_action']  = 'Select all actions';
-$_['text_select_all_category']= 'Select all categories';
+$_['button_select_all_action']= 'Select all actions';
 
 $_['column_group'] 			  = 'Group Name';
 $_['column_status']			  = 'Status';
