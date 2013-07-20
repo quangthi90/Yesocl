@@ -1,5 +1,5 @@
 <?php
-use Document\Company\Post;
+use Document\Branch\Post;
 
 use MongoId;
 

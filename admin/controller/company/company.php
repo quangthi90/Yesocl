@@ -514,12 +514,6 @@ class ControllerCompanyCompany extends Controller {
 				);
 
 				$action[] = array(
-					'text' => $this->language->get( 'text_post' ),
-					'href' => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
-					'icon' => 'icon-list',
-					);
-
-				$action[] = array(
 					'text' => $this->language->get( 'text_career' ),
 					'href' => $this->url->link( 'company/career', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId(), 'SSL' ),
 					'icon' => 'icon-list',

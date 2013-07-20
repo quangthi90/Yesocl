@@ -205,6 +205,12 @@ class ControllerBranchBranch extends Controller {
 				'icon' => 'icon-edit',
 			);
 
+			$action[] = array(
+				'text' => $this->language->get( 'button_post' ),
+				'href' => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+				'icon' => 'icon-list',
+			);
+
 			$this->data['branchs'][] = array(
 				'id' 		=> $branch->getId(),
 				'name' 		=> $branch->getName(),
