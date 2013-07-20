@@ -2543,98 +2543,6 @@ db.getCollection("district").insert({
 
 /** group records **/
 db.getCollection("group").insert({
-  "_id": ObjectId("51deafed471deed009000000"),
-  "author": {
-    "$ref": "user",
-    "$id": ObjectId("518f5f43471deeb40900001f"),
-    "$db": "yesocl"
-  },
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "categories": [
-    {
-      "$ref": "branch_category",
-      "$id": ObjectId("51d3a0cad87459c40a000019"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "branch_category",
-      "$id": ObjectId("51d3ceced874596804000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "branch_category",
-      "$id": ObjectId("51d3d07fd874591406000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "branch_category",
-      "$id": ObjectId("51d3d0c0d874591406000001"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "branch_category",
-      "$id": ObjectId("51d3d0d6d874591406000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "branch_category",
-      "$id": ObjectId("51d3d112d874591406000003"),
-      "$db": "yesocl"
-    }
-  ],
-  "created": ISODate("2013-07-11T13:15:25.0Z"),
-  "description": "Tamquam accommodare pro ne. Sea natum labores lobortis et, elit novum albucius at pri, feugiat gubergren scribentur vis id.",
-  "groupMembers": [
-    {
-      "_id": ObjectId("51deafed471deed009000001"),
-      "name": "Default",
-      "status": true,
-      "canDel": false,
-      "actions": [
-        
-      ],
-      "categories": [
-        
-      ],
-      "members": [
-        
-      ]
-    }
-  ],
-  "name": "Group 1",
-  "posts": [
-    {
-      "_id": ObjectId("51ea5b37471dee2c0a000000"),
-      "title": "dfafdas",
-      "content": "&lt;p&gt;\r\n\tfas fasdf asdf asf asdf asf asdf asdf asdf asdfd asf adsfa s&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-20T09:41:11.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3a0cad87459c40a000019"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "status": true,
-  "sumary": "Partem fastidii ei ius. No illud nonumy cum. Eu vide copiosae comprehensam sit",
-  "type": {
-    "$ref": "group_type",
-    "$id": ObjectId("518f5e39471deeb40900001e"),
-    "$db": "yesocl"
-  },
-  "website": ""
-});
-db.getCollection("group").insert({
   "_id": ObjectId("51deaf34471deec009000002"),
   "author": {
     "$ref": "user",
@@ -2723,6 +2631,102 @@ db.getCollection("group").insert({
   ],
   "status": true,
   "sumary": "Aliquid accusamus sit ne. Pro an quem libris, te nec porro laudem impetus, sale adolescens pro cu.",
+  "type": {
+    "$ref": "group_type",
+    "$id": ObjectId("518f5e39471deeb40900001e"),
+    "$db": "yesocl"
+  },
+  "website": ""
+});
+db.getCollection("group").insert({
+  "_id": ObjectId("51deafed471deed009000000"),
+  "author": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
+    "$db": "yesocl"
+  },
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "categories": [
+    {
+      "$ref": "branch_category",
+      "$id": ObjectId("51d3a0cad87459c40a000019"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "branch_category",
+      "$id": ObjectId("51d3ceced874596804000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "branch_category",
+      "$id": ObjectId("51d3d07fd874591406000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "branch_category",
+      "$id": ObjectId("51d3d0c0d874591406000001"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "branch_category",
+      "$id": ObjectId("51d3d0d6d874591406000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "branch_category",
+      "$id": ObjectId("51d3d112d874591406000003"),
+      "$db": "yesocl"
+    }
+  ],
+  "created": ISODate("2013-07-11T13:15:25.0Z"),
+  "description": "Tamquam accommodare pro ne. Sea natum labores lobortis et, elit novum albucius at pri, feugiat gubergren scribentur vis id.",
+  "groupMembers": [
+    {
+      "_id": ObjectId("51deafed471deed009000001"),
+      "name": "Default",
+      "status": true,
+      "canDel": false,
+      "actions": [
+        
+      ],
+      "categories": [
+        
+      ],
+      "members": [
+        
+      ]
+    }
+  ],
+  "name": "Group 1",
+  "posts": [
+    {
+      "_id": ObjectId("51ea64b3471dee1c0a000006"),
+      "author": "user1",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51d3ceced874596804000000"),
+        "$db": "yesocl"
+      },
+      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Vùng hỗ trợ để tiếp tục xu hướng tăng ngắn hạn: 490. &amp;nbsp;Thủng vùng này không mua thêm, chờ xác định rõ xu hướng , nếu kéo lên lại vượt 498 mới mua, chỉ mua ngắn hạn, ưu tiên cổ phiếu có sẵn, mua thấp bán cao, lên chạm kháng cự &amp;nbsp;512.5 \/ 530thấy yếu nên bán ra chốt lãi phần mua thêm sau. Vùng 530 thấy phân phối vol mạnh cao đột biến nên bán chốt danh mục giữ tiền mặt; nếu duy trì vol tốt ổn định có nhiều thông tin tốt hỗ trợ nên giữ chờ vượt 530 có thể tăng thêm lượng cổ phiếu, kỳ vọng 550.&lt;\/strong&gt;&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-07-20T10:21:39.0Z"),
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "thumb": "data\/catalog\/group\/51deafed471deed009000000\/post\/51ea64b3471dee1c0a000006\/thumb.png",
+      "title": "fasf dasf das",
+      "updated": ISODate("2013-07-20T16:47:52.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "status": true,
+  "sumary": "Partem fastidii ei ius. No illud nonumy cum. Eu vide copiosae comprehensam sit",
   "type": {
     "$ref": "group_type",
     "$id": ObjectId("518f5e39471deeb40900001e"),
