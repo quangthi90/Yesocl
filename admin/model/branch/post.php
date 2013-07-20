@@ -3,11 +3,11 @@ use Document\Branch\Post;
 
 use MongoId;
 
-class ModelCompanyPost extends Doctrine {
-	public function addPost( $company_id, $data = array(), $thumb = array() ) {
-		// Company is required
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
-		if ( empty( $company ) ) {
+class ModelBranchPost extends Doctrine {
+	public function addPost( $branch_id, $data = array(), $thumb = array() ) {
+		// Branch is required
+		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
+		if ( empty( $branch ) ) {
 			return false;
 		}
 
@@ -26,10 +26,11 @@ class ModelCompanyPost extends Doctrine {
 		}
 
 		// Category is required
-		if ( !isset( $data['category'] ) ) {
+		if ( !isset( $data['category_id'] ) ) {
 			return false;
 		}
-		$category = $this->dm->getRepository( 'Document\Company\Category' )->find( $data['category'] );
+		
+		$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $data['category_id'] );
 		if ( empty( $category ) ) {
 			return false;
 		}
@@ -72,12 +73,12 @@ class ModelCompanyPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		$company->addPost( $post );
+		$branch->addPost( $post );
 
 		$this->dm->persist( $post );
 
 		if ( !empty( $thumb ) ) {
-			if ( $data['thumb'] = $this->uploadThumb( $company->getId(), $post->getId(), $thumb ) ) {
+			if ( $data['thumb'] = $this->uploadThumb( $branch->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}
 		}
@@ -88,9 +89,9 @@ class ModelCompanyPost extends Doctrine {
 	}
 
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
-		// Company is required
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->findOneBy( array( 'posts.id' => $post_id ) );
-		if ( empty( $company ) ) {
+		// Branch is required
+		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array( 'posts.id' => $post_id ) );
+		if ( empty( $branch ) ) {
 			return false;
 		}
 
@@ -109,10 +110,10 @@ class ModelCompanyPost extends Doctrine {
 		}
 
 		// Category is required
-		if ( !isset( $data['category'] ) ) {
+		if ( !isset( $data['category_id'] ) ) {
 			return false;
 		}
-		$category = $this->dm->getRepository( 'Document\Company\Category' )->find( $data['category'] );
+		$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $data['category_id'] );
 		if ( empty( $category ) ) {
 			return false;
 		}
@@ -136,7 +137,7 @@ class ModelCompanyPost extends Doctrine {
 		else {
 			$thumb = array();
   		}
-
+  		
 		// Status
 		if ( isset( $data['status'] ) ) {
 			$data['status'] = (int)$data['status'];
@@ -144,7 +145,7 @@ class ModelCompanyPost extends Doctrine {
 			$data['status'] = 0;
 		}
 
-		$post = $company->getPostById( $post_id );
+		$post = $branch->getPostById( $post_id );
 
 		// Check slug
 		if ( $data['title'] != $post->getTitle() ){
@@ -161,7 +162,7 @@ class ModelCompanyPost extends Doctrine {
 		$post->setStatus( $data['status'] );
 
 		if ( !empty( $thumb ) ) {
-			if ( $data['thumb'] = $this->uploadThumb( $company->getId(), $post->getId(), $thumb ) ) {
+			if ( $data['thumb'] = $this->uploadThumb( $branch->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}else {
 				$post->setThumb( '' );
@@ -174,21 +175,21 @@ class ModelCompanyPost extends Doctrine {
 
 		$this->load->model( 'tool/cache' );
 		$post = $this->model_tool_cache->setPost( $post );
-
+		// print('hello'); exit;
 		return $post;
 	}
 
 	public function deletePost( $data = array() ) {
 		if ( isset($data['id']) ) {
 			if ( count($data['id']) > 0 ){
-				$company = $this->dm->getRepository('Document\Company\Company')->findOneBy( array('posts.id' => $data['id'][0]) );
+				$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBy( array('posts.id' => $data['id'][0]) );
 			}
 			
 			foreach ( $data['id'] as $id ) {
-				$post = $company->getPostById( $id );
+				$post = $branch->getPostById( $id );
 				if ( !empty( $post ) ) {
-					$this->delete_directory( DIR_IMAGE . '/data/catalog/company/' . $company->getId() . '/post/' . $post->getId() );
-					$company->getPosts()->removeElement( $post );
+					$this->delete_directory( DIR_IMAGE . '/data/catalog/Branch/' . $branch->getId() . '/post/' . $post->getId() );
+					$branch->getPosts()->removeElement( $post );
 				}
 			}
 		}
@@ -204,6 +205,7 @@ class ModelCompanyPost extends Doctrine {
 	public function isValidThumb( $file ) {
 		$allowedExts = array("gif", "jpeg", "jpg", "png");
 		$extension = end(explode(".", $file["name"]));
+
 		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
   			if ($file["error"] > 0) {
     			return false;
@@ -217,9 +219,9 @@ class ModelCompanyPost extends Doctrine {
   		}
 	}
 
-	public function uploadThumb( $company_id, $post_id, $thumb ) {
+	public function uploadThumb( $branch_id, $post_id, $thumb ) {
 		$ext = end(explode(".", $thumb["name"]));
-		$path = 'data/catalog/company/' . $company_id . '/post/' . $post_id . '/thumb.';
+		$path = 'data/catalog/branch/' . $branch_id . '/post/' . $post_id . '/thumb.';
 		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
 			unlink($path . '.jpg');
 		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
@@ -230,16 +232,19 @@ class ModelCompanyPost extends Doctrine {
 			unlink($path . '.png' );
 		}
 
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $company_id ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/company/' . $company_id );
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/branch/' ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/branch/' );
+		}
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/branch/' . $branch_id ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/branch/' . $branch_id );
+		}
+		
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post' ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post' );
 		}
 
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $company_id . '/post' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/company/' . $company_id . '/post' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $company_id . '/post/' . $post_id ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/company/' . $company_id . '/post/' . $post_id );
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post/' . $post_id ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post/' . $post_id );
 		}
 
 		if ( move_uploaded_file( $thumb['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
