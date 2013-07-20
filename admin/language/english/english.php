@@ -29,6 +29,9 @@ $_['text_separator']          = ' &gt; ';
 $_['text_edit']               = 'Edit';
 $_['text_view']               = 'View';
 $_['text_home']               = 'Home';
+$_['text_select_image'] 	  = 'Select image';
+$_['text_change'] 			  = 'Change';
+$_['text_remove'] 			  = 'Remove';
 
 // Confirm
 $_['confirm_del']             = 'Do you want to delete?';

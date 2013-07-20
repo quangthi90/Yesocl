@@ -73,15 +73,13 @@ class ModelBranchPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		$branch->addPost( $post );
-
-		$this->dm->persist( $post );
-
 		if ( !empty( $thumb ) ) {
 			if ( $data['thumb'] = $this->uploadThumb( $branch->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}
 		}
+
+		$branch->addPost( $post );
 
 		$this->dm->flush();
 
@@ -175,7 +173,7 @@ class ModelBranchPost extends Doctrine {
 
 		$this->load->model( 'tool/cache' );
 		$post = $this->model_tool_cache->setPost( $post );
-		// print('hello'); exit;
+		
 		return $post;
 	}
 

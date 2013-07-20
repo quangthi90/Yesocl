@@ -8,9 +8,6 @@ $_['text_enable'] 		= 'Enable';
 $_['text_disable'] 		= 'Disable';
 $_['text_branch'] 		= 'Branch';
 $_['text_comment'] 		= 'Comment';
-$_['text_select_image'] = 'Select image';
-$_['text_change'] 		= 'Change';
-$_['text_remove'] 		= 'Remove';
 
 // button
 $_['button_insert'] 	= 'Insert';
