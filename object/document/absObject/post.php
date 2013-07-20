@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 * @MongoDB\MappedSuperclass
 * @MongoDB\InheritanceType("COLLECTION_PER_CLASS")
 * @MongoDB\DiscriminatorMap({
-*     "CompanyPost"="Document\Company\Post"
+*     "CompanyPost"="Document\Branch\Post"
 * })
 */
 Abstract Class Post {

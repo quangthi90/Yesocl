@@ -7,7 +7,6 @@ $_['text_edit'] 			= 'Edit';
 $_['text_enable'] 			= 'Enable';
 $_['text_disable'] 			= 'Disable';
 $_['text_career'] 			= 'Careers';
-$_['text_post'] 			= 'Posts';
 $_['text_logo'] 			= 'Logo';
 $_['text_follower'] 		= 'Followers';
 $_['text_relative_company'] = 'Relative Companies';

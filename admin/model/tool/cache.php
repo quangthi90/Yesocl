@@ -7,8 +7,8 @@ class ModelToolCache extends Model {
 			$this->cache->delete( $object->getId() . '.' . $post_data['page'], $this->config->get('cache')['folder']['post'] );
 			$this->cache->set( $object->getId() . '.' . $post_data['page'], $post_data['object'], $this->config->get('cache')['folder']['post'] );
 		}
-
-		return $data;
+		
+		return $list_post_data;
 	}
 
 	public function getPost($post_id, $paging = 1){

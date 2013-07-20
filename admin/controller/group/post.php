@@ -43,13 +43,12 @@ class ControllerGroupPost extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_post->addPost( $this->request->post, $this->request->get['group_id'] ) == false ){
-				$this->session->data['error_warning'] = $this->language->get('error_insert');
-			
-				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+			if ( $this->model_group_post->addPost( $this->request->get['branch_id'], $this->request->post, $this->request->files['thumb'] ) ) {
+				$this->session->data['success'] = $this->language->get( 'success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );
 			}
-			
-			$this->session->data['success'] = $this->language->get( 'text_success' );
+
 			$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
@@ -77,10 +76,12 @@ class ControllerGroupPost extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_post->editPost( $this->request->get['post_id'], $this->request->post ) == false ){
-				$this->session->data['error_warning'] = $this->language->get('error_update');
-			
-				$this->redirect( $this->url->link( 'group/post', 'group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+			$return = $this->model_group_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] );
+
+			if ( $return ) {
+				$this->session->data['success'] = $this->language->get( 'success' );
+			}else {
+				$this->session->data['error_warning'] = $this->language->get( 'error_edit' );
 			}
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
@@ -185,6 +186,9 @@ class ControllerGroupPost extends Controller {
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
+
+		// Column
+		$this->data['column_thumb'] = $this->language->get( 'column_thumb' );
 		
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get( 'confirm_del' );
@@ -207,36 +211,30 @@ class ControllerGroupPost extends Controller {
 		$this->data['posts'] = array();
 		if ( $posts ){
 			$post_total = count($posts);
-			for ( $i = (($page - 1) * $limit); $i < ($post_total - (($page - 1) * $limit)); $i++ ){
+			foreach ($posts as $post) {
 				$action = array();
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'group/post/update', 'post_id=' . $posts[$i]->getId() . '&group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'group/post/update', 'post_id=' . $post->getId() . '&group_id=' . $this->request->get['group_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_comments' ),
-					'href' => $this->url->link( 'group/comment', 'post_id=' . $posts[$i]->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'group/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-list',
 				);
 				
 				
-				$user = $posts[$i]->getUser();
-				
-				$author = '';
-				
-				if ( $user ){
-					$author = $user->getFullname();
-				}
-			
 				$this->data['posts'][] = array(
-					'id' => $posts[$i]->getId(),
-					'title' => $posts[$i]->getTitle(),
-					'author' => $author,
-					'created' => $posts[$i]->getCreated()->format( $this->language->get('date_time_format') ),
-					'status' => $posts[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
+					'id' => $post->getId(),
+					'thumb' => HTTP_IMAGE . $post->getThumb(),
+					'title' => $post->getTitle(),
+					'category' => $post->getCategory()->getName(),
+					'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
+					'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
+					'status' => $post->getStatus() == true ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}
@@ -297,6 +295,20 @@ class ControllerGroupPost extends Controller {
 			$this->data['error_author'] = '';
 		}
 
+		// thumb
+		if ( isset( $this->error['error_thumb'] ) ) {
+			$this->data['error_thumb'] = $this->error['error_thumb'];
+		}else {
+			$this->data['error_thumb'] = '';
+		}
+
+		// category
+		if ( isset( $this->error['error_category'] ) ) {
+			$this->data['error_category'] = $this->error['error_category'];
+		}else {
+			$this->data['error_category'] = '';
+		}
+
 		$group_id = 0;
 		if ( isset($this->request->get['group_id']) && !empty($this->request->get['group_id']) ){
 			$group_id = $this->request->get['group_id'];
@@ -309,6 +321,9 @@ class ControllerGroupPost extends Controller {
 
 		// Link
 		$this->data['cancel'] = $this->url->link( 'group/post', 'group_id=' . $group_id . '&token=' . $this->session->data['token'], 'SSL' );
+
+		// image
+		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 
 		// Load model
 		$this->load->model( 'group/group' );
@@ -337,6 +352,9 @@ class ControllerGroupPost extends Controller {
 		// Text	
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
+		$this->data['text_change'] = $this->language->get( 'text_change' );
+		$this->data['text_remove'] = $this->language->get( 'text_remove' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -349,6 +367,7 @@ class ControllerGroupPost extends Controller {
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
 		$this->data['entry_category'] = $this->language->get( 'entry_category' );
+		$this->data['entry_thumb'] = $this->language->get( 'entry_thumb' );
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
@@ -377,6 +396,13 @@ class ControllerGroupPost extends Controller {
 			$this->data['content'] = $post->getContent();
 		}else {
 			$this->data['content'] = '';
+		}
+
+		// logo
+		if ( isset( $post ) && trim( $post->getThumb() ) != '' ) {
+			$this->data['img_thumb'] = HTTP_IMAGE . $post->getThumb();
+		}else {
+			$this->data['img_thumb'] = $this->data['img_default'];
 		}
 		
 		// Entry status

@@ -1,25 +1,25 @@
 <?php
-class ControllerCompanyPost extends Controller {
+class ControllerBranchPost extends Controller {
 	private $limit = 10;
 	private $error = array();
-	private $route = 'company/post';
+	private $route = 'branch/post';
 
 	public function index() {
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/post' );
+		$this->load->language( 'branch/post' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		if ( !isset( $this->request->get['company_id'] ) ) {
+		if ( !isset( $this->request->get['branch_id'] ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->load->model( 'company/post' );
+		$this->load->model( 'branch/post' );
 
 		$this->getList();
 	}
@@ -29,17 +29,17 @@ class ControllerCompanyPost extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/post' );
+		$this->load->language( 'branch/post' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		if ( !isset( $this->request->get['company_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+		if ( !isset( $this->request->get['branch_id'] ) ) {
+			$this->session->data['error_warning'] = $this->language->get( 'error_branch' );
 
-			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->load->model( 'company/post' );
+		$this->load->model( 'branch/post' );
 
 		// page
 		if (isset($this->request->get['page'])) {
@@ -57,17 +57,17 @@ class ControllerCompanyPost extends Controller {
 				$this->request->files['thumb'] = array();
 			}
 
-			if ( $this->model_company_post->addPost( $this->request->get['company_id'], $this->request->post, $this->request->files['thumb'] ) ) {
+			if ( $this->model_branch_post->addPost( $this->request->get['branch_id'], $this->request->post, $this->request->files['thumb'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
-				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );
 			}
 
-			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/post/insert', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
+		$this->data['action'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
 
 		$this->getForm();
 	}
@@ -77,17 +77,17 @@ class ControllerCompanyPost extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/post' );
+		$this->load->language( 'branch/post' );
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		if ( !isset($this->request->get['company_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_company');
+		if ( !isset($this->request->get['branch_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_branch');
 			
-			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
-		$this->load->model( 'company/post' );
+		$this->load->model( 'branch/post' );
 
 		// page
 		if (isset($this->request->get['page'])) {
@@ -100,9 +100,9 @@ class ControllerCompanyPost extends Controller {
 		$url .= 'page=' . $page;
 
 		if ( !isset( $this->request->get['post_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+			$this->session->data['error_warning'] = $this->language->get( 'error_post' );
 
-			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
 		}
 
 		// request
@@ -110,18 +110,20 @@ class ControllerCompanyPost extends Controller {
 			if ( !isset( $this->request->files['thumb'] ) ) {
 				$this->request->files['thumb'] = array();
 			}
+			
+			$return = $this->model_branch_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] );
 
-			if ( $this->model_company_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] ) ) {
+			if ( $return ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
-				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
+				$this->session->data['error_warning'] = $this->language->get( 'error_edit' );
 			}
 
-			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'company/post/update', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'] . '&post_id=' . $this->request->get['post_id'], 'SSL' );
+		$this->data['action'] = $this->url->link( 'branch/post/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'] . '&post_id=' . $this->request->get['post_id'], 'SSL' );
 
 		$this->getForm();
 	}
@@ -131,23 +133,23 @@ class ControllerCompanyPost extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'company/post' );
+		$this->load->language( 'branch/post' );
 		
-		if ( !isset($this->request->get['company_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_company');
+		if ( !isset($this->request->get['branch_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_branch');
 			
-			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 		
-		$this->load->model( 'company/post' );
+		$this->load->model( 'branch/post' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_company_post->deletePost( $this->request->post );
+			$this->model_branch_post->deletePost( $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'success' );
-			$this->redirect( $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -190,13 +192,13 @@ class ControllerCompanyPost extends Controller {
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get( 'text_company' ),
-			'href'      => $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ),
+       		'text'      => $this->language->get( 'text_branch' ),
+			'href'      => $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -215,6 +217,7 @@ class ControllerCompanyPost extends Controller {
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		$this->data['column_thumb'] = $this->language->get( 'column_thumb' );
+		$this->data['column_category'] = $this->language->get( 'column_category' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -222,17 +225,17 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'company/post/insert', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'company/post/delete', 'token=' . $this->session->data['token'] . '&company_id=' . $this->request->get['company_id'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'branch/post/delete', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' );
 
-		//company
-		$this->load->model( 'company/company' );
-		$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
-		if ( empty( $company ) ) {
+		//branch
+		$this->load->model( 'branch/branch' );
+		$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
+		if ( empty( $branch ) ) {
 			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
 
-			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		$data = array(
@@ -241,7 +244,7 @@ class ControllerCompanyPost extends Controller {
 			);
 
 		// post
-		$posts = $company->getPosts();
+		$posts = $branch->getPosts();
 
 		$this->data['posts'] = array();
 		foreach ($posts as $post) {
@@ -249,13 +252,13 @@ class ControllerCompanyPost extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_comment' ),
-				'href' => $this->url->link( 'company/comment', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId() . '&post_id=' . $post->getId(), 'SSL' ),
+				'href' => $this->url->link( 'branch/comment', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId() . '&post_id=' . $post->getId(), 'SSL' ),
 				'icon' => 'icon-list',
 				);
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'company/post/update', 'token=' . $this->session->data['token'] . '&company_id=' . $company->getId() . '&post_id=' . $post->getId(), 'SSL' ),
+				'href' => $this->url->link( 'branch/post/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId() . '&post_id=' . $post->getId(), 'SSL' ),
 				'icon' => 'icon-edit',
 				);
 
@@ -263,6 +266,7 @@ class ControllerCompanyPost extends Controller {
 				'id' => $post->getId(),
 				'thumb' => HTTP_IMAGE . $post->getThumb(),
 				'title' => $post->getTitle(),
+				'category' => $post->getCategory()->getName(),
 				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
 				'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
 				'status' => $post->getStatus() == true ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
@@ -276,12 +280,12 @@ class ControllerCompanyPost extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
+		$pagination->url = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
 
 		// template
-		$this->template = 'company/post_list.tpl';
+		$this->template = 'branch/post_list.tpl';
 
 		// childs
 		$this->children = array(
@@ -358,13 +362,13 @@ class ControllerCompanyPost extends Controller {
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get( 'text_company' ),
-			'href'      => $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ),
+       		'text'      => $this->language->get( 'text_branch' ),
+			'href'      => $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . $url . '&company_id=' . $this->request->get['company_id'], 'SSl' ),
+			'href'      => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url . '&branch_id=' . $this->request->get['branch_id'], 'SSl' ),
       		'separator' => ' :: '
    		);
 
@@ -392,21 +396,21 @@ class ControllerCompanyPost extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'company/post', 'token=' . $this->session->data['token'] . $url . '&company_id=' . $this->request->get['company_id'], 'SSL' );
+		$this->data['cancel'] = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
 		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
 		// image
 		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 
-		// company
-		$this->load->model( 'company/company' );
-		$company = $this->model_company_company->getCompany( $this->request->get['company_id'] );
+		// branch
+		$this->load->model( 'branch/branch' );
+		$branch = $this->model_branch_branch->getbranch( $this->request->get['branch_id'] );
 
-		if ( empty( $company ) ) {
-			$this->redirect( $this->url->link( 'company/company', 'token=' . $this->session->data['token'], 'SSL' ) );
+		if ( empty( $branch ) ) {
+			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
 		}
 
 		if ( isset( $this->request->get['post_id'] ) ) {
-			$post = $company->getPostById( $this->request->get['post_id'] );
+			$post = $branch->getPostById( $this->request->get['post_id'] );
 			if ( empty( $post ) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -424,6 +428,7 @@ class ControllerCompanyPost extends Controller {
 		// author
 		if ( isset( $post ) ) {
 			$user = $post->getUser();
+			$category = $post->getCategory();
 		}
 		if ( isset( $this->request->post['author'] ) ) {
 			$this->data['author'] = $this->request->post['author'];
@@ -441,22 +446,22 @@ class ControllerCompanyPost extends Controller {
 			$this->data['user_id'] = '';
 		}
 
-		// category
-		$this->load->model( 'company/category' );
-		$categories = $this->model_company_category->getCategories();
+		// Category
+		if ( isset($this->request->post['category_id']) ){
+			$this->data['category_id'] = $this->request->post['category_id'];
+		}elseif ( isset( $category ) ){
+			$this->data['category_id'] = $category->getId();
+		}else {
+			$this->data['category_id'] = '';
+		}
+		
+		$categories = $branch->getCategories();
 		$this->data['categories'] = array();
-		foreach ($categories as $category) {
+		foreach ( $categories as $category ) {
 			$this->data['categories'][] = array(
 				'id' => $category->getId(),
-				'name' => $category->getName(),
-				);
-		}
-		if ( isset( $this->request->post['category'] ) ) {
-			$this->data['category'] = $this->request->post['category'];
-		// }elseif ( isset( $post ) ) {
-		// 	$this->data['category'] = $post->getCategory()->getId();
-		}else {
-			$this->data['category'] = '';
+				'name' => $category->getName()
+			);
 		}
 
 		// description
@@ -494,7 +499,7 @@ class ControllerCompanyPost extends Controller {
 		}
 
 		// template
-		$this->template = 'company/post_form.tpl';
+		$this->template = 'branch/post_form.tpl';
 
 		// childs
 		$this->children = array(
@@ -507,7 +512,7 @@ class ControllerCompanyPost extends Controller {
 	}
 
 	private function isValidateForm() {
-		$this->load->model( 'company/post' );
+		$this->load->model( 'branch/post' );
 
 		if ( !isset( $this->request->post['title']) || strlen( trim( $this->request->post['title'] ) ) < 1 || strlen( trim( $this->request->post['title'] ) ) > 256  ) {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
@@ -521,7 +526,7 @@ class ControllerCompanyPost extends Controller {
 			$this->error['error_content'] = $this->language->get( 'error_content' );
 		}
 
-		if ( !isset( $this->request->post['category']) || empty( $this->request->post['category'] ) ) {
+		if ( !isset( $this->request->post['category_id']) || empty( $this->request->post['category_id'] ) ) {
 			$this->error['error_category'] = $this->language->get( 'error_category' );
 		}
 
@@ -530,7 +535,7 @@ class ControllerCompanyPost extends Controller {
 		}
 
 		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
-			if ( !$this->model_company_post->isValidThumb( $this->request->files['thumb'] ) ) {
+			if ( !$this->model_branch_post->isValidThumb( $this->request->files['thumb'] ) ) {
 				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
 			}
 		}

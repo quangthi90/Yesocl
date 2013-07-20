@@ -55,6 +55,24 @@
               </select></td>
           </tr>
           <tr>
+            <td><?php echo $entry_thumb; ?></td>
+            <td>
+              <div class="thumb fileupload fileupload-new" data-provides="fileupload">
+                <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<?php echo $img_thumb; ?>" style="width: 150px; height: 150px;" /></div>
+                <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+                <div>
+                  <span class="btn btn-file"><span class="fileupload-new"><?php echo $text_select_image; ?></span><span class="fileupload-exists"><?php echo $text_change; ?></span><input name="thumb" type="file" /></span>
+                  <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" onclick="$('.thumb img').attr('src', '<?php echo $img_default; ?>');"><?php echo $text_remove; ?></a>
+                </div>
+              </div>
+              <?php if ( $error_thumb ) { ?>
+                <div class="alert alert-error">
+                  <strong>Error!</strong> <?php echo $error_thumb; ?>
+                </div>
+              <?php } ?>
+            </td>
+          </tr>
+          <tr>
             <td><?php echo $entry_status; ?></td>
             <td><select name="status">
                 <?php if ($status) { ?>

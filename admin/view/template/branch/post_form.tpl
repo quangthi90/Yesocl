@@ -24,8 +24,8 @@
             <td><input class="input-xxlarge" required="required" type="text" name="title" value="<?php echo $title; ?>" />
             <?php if ($error_title) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_title; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_title; ?>
+                </div>
             <?php } ?></td>
           </tr>
           <tr>
@@ -33,8 +33,8 @@
             <td><input class="input-xxlarge" required="required" type="text" name="author" value="<?php echo $author; ?>" /><input name="user_id" type="hidden" value="<?php echo $user_id; ?>" />
             <?php if ($error_author) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_author; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_author; ?>
+                </div>
             <?php } ?></td>
           </tr>
           <tr>
@@ -42,8 +42,8 @@
             <td><textarea class="input-xxlarge" type="text" name="description"><?php echo $description; ?></textarea>
             <?php if ($error_description) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_description; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_description; ?>
+                </div>
             <?php } ?></td>
           </tr>
           <tr>
@@ -51,22 +51,17 @@
             <td><textarea class="input-xxlarge" type="text" name="post_content"><?php echo $content; ?></textarea>
             <?php if ($error_content) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_content; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_content; ?>
+                </div>
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_category; ?></td>
-            <td><select class="input-xxlarge" name="category">
-              <?php foreach ($categories as $category_info) { ?>
-                <option value="<?php echo $category_info['id']; ?>" <?php if ( $category_info['id'] == $category ) { ?>selected="selected"<?php } ?>><?php echo $category_info['name']; ?></option>
+            <td><?php echo $entry_category; ?></td>
+            <td><select name="category_id">
+              <?php foreach ( $categories as $category ) { ?>
+                <option value="<?php echo $category['id']; ?>" <?php if ($category['id'] == $category_id){ ?>selected="selected"<?php } ?>><?php echo $category['name']; ?></option>
               <?php } ?>
-            </select>
-            <?php if ($error_category) { ?>
-                <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_category; ?>
-        </div>
-            <?php } ?></td>
+              </select></td>
           </tr>
           <tr>
             <td><?php echo $entry_thumb; ?></td>
@@ -81,8 +76,8 @@
               </div>
               <?php if ( $error_thumb ) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_thumb; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_thumb; ?>
+                </div>
               <?php } ?>
             </td>
           </tr>

@@ -29,6 +29,9 @@ $_['text_separator']          = ' &gt; ';
 $_['text_edit']               = 'Edit';
 $_['text_view']               = 'View';
 $_['text_home']               = 'Home';
+$_['text_select_image'] 	  = 'Select image';
+$_['text_change'] 			  = 'Change';
+$_['text_remove'] 			  = 'Remove';
 
 // Confirm
 $_['confirm_del']             = 'Do you want to delete?';
@@ -124,4 +127,6 @@ $_['error_upload_6']          = 'Warning: Missing a temporary folder!';
 $_['error_upload_7']          = 'Warning: Failed to write file to disk!';
 $_['error_upload_8']          = 'Warning: File upload stopped by extension!';
 $_['error_upload_999']        = 'Warning: No error code available!';
+$_['error_insert']        	  = 'Warning: Insert not success!';
+$_['error_edit']        	  = 'Warning: Edit not success!';
 ?>
