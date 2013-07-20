@@ -41,9 +41,6 @@ Class Company {
 	/** @MongoDB\ReferenceMany(targetDocument="Company", inversedBy="relativeCompanies") */
 	private $relativeCompanies = array();
 
-	/** @MongoDB\EmbedMany(targetDocument="Post") */
-	private $posts = array();
-
 	/** @MongoDB\Date */
 	private $created;
 
@@ -65,34 +62,6 @@ Class Company {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch") */
 	private $branchs = array();
-
-	/**
-	 * Get Post By ID
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: MongoDB ID
-	 * @return:
-	 * 		- Object Post
-	 * 		- null if not found
-	 */
-	public function getPostById( $post_id ){
-		foreach ( $this->posts as $post ){
-			if ( $post->getId() == $post_id ){
-				return  $post;
-			}
-		}
-		
-		return null;
-	}
-
-	public function getPostBySlug( $post_slug ){
-		foreach ( $this->posts as $post ){
-			if ( $post->getSlug() == $post_slug ){
-				return  $post;
-			}
-		}
-		
-		return null;
-	}
 
 	/**
 	 * Get Group of Member By ID
@@ -226,18 +195,6 @@ Class Company {
 
 	public function getRelativeCompanies(){
 		return $this->relativeCompanies;
-	}
-
-	public function addPost( Post $post ){
-		$this->posts = array_merge( array($post), $this->posts->toArray() );
-	}
-
-	public function setPosts( $posts ){
-		$this->posts = $posts;
-	}
-
-	public function getPosts(){
-		return $this->posts;
 	}
 
 	public function setCreated( $created ){
