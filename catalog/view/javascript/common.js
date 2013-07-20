@@ -38,7 +38,7 @@ FlexibleElement.prototype.attachEvents = function() {
 	this.closeSidebar.click(function(e) {
 		e.preventDefault();
 		$(this).hide();	
-		m.animate({"paddingLeft": "147px","left" : "0px"}, 200, function() {
+		m.animate({"paddingLeft": "142px","left" : "0px"}, 200, function() {
 			sc.slideUp(300, function() {
 				sb.animate({ "width" : "120px"}, 200, function() {
 					sb.css("bottom","auto");
@@ -52,7 +52,7 @@ FlexibleElement.prototype.attachEvents = function() {
 		$(this).hide();	
 		sc.slideDown(200, function() {
 			sb.animate({ "bottom" : "68px", "width" : "150px"}, 200, function() {
-				m.animate({"left": "152px" , "paddingLeft": "25px"}, 500); 	
+				m.animate({"left": "152px" , "paddingLeft": "20px"}, 500); 	
 				cl.show();
 			});			
 		});			
