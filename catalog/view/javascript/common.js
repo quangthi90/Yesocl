@@ -131,11 +131,11 @@ function BlockFeed(block, heightAverPost, widthAverPost) {
 BlockFeed.prototype.putFeed = function() {
 	this.listFeed.height(this.heightAverPost);
 	if(this.numberFeed == 5) {
-		this.blockEle.find('.feed3').width((this.widthAverPost - 1)*2 + 10);
-		this.blockEle.find('.feed3').addClass('post-special');
-		this.blockEle.find('.feed4').width(this.widthAverPost - 2).css( {'float': 'left', 'margin-right':'10px'});
-		this.blockEle.find('.feed5').width(this.widthAverPost - 2).css('float', 'left');
-		this.blockEle.find('.feed5').parent('.column').width(this.widthAverPost*2 + 10);
+		this.blockEle.find('.column-special .feed-container:nth-child(1)').width((this.widthAverPost - 1)*2 + 10);
+		this.blockEle.find('.column-special .feed-container:nth-child(1)').addClass('post-special');
+		this.blockEle.find('.column-special .feed-container:nth-child(1)').parent('.column').width(this.widthAverPost*2 + 10);
+		this.blockEle.find('.column-special .feed-container:nth-child(2)').width(this.widthAverPost - 2).css( {'float': 'left', 'margin-right':'10px'});
+		this.blockEle.find('.column-special .feed-container:nth-child(3)').width(this.widthAverPost - 2).css('float', 'left');		
 	}else {
 		var specialColumn = this.blockEle.find('.column-special'); 
 		var heightFirst = this.heightAverPost*4/3;
