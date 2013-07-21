@@ -336,7 +336,7 @@ label.in-line{
 }
 
 #y-content {
-    padding: 25px 0px 10px 25px;    
+    padding: 20px 0px 20px 20px;    
     position: absolute;    
     top: 0px;
     left: 152px;
@@ -577,12 +577,6 @@ label.in-line{
     height: auto;    
     padding: 0px;
     background: #fff;
-    /*
-    border-top: 1px solid #ccc;
-    -moz-box-shadow: 0 0 5px #ccc;
-    -webkit-box-shadow: 0 0 5px#ccc;
-    box-shadow: 0 0 5px #ccc;
-    */
     position: relative;
 }
 
@@ -594,7 +588,6 @@ label.in-line{
 
 .post-selecting {
   border-top-color: #3B8F39;
-  position: absolute;
   z-index: 101;
 }
 
@@ -736,7 +729,6 @@ label.in-line{
 }
 
 .sidebar-controls .nav-list .divider {
-  /*border-bottom: 1px solid #054105;*/
   border-bottom: 1px solid rgb(48, 122, 48);
   background-color: #000;
   margin: 5px 0px 5px 0px;
@@ -984,9 +976,19 @@ label.in-line{
 
 .feed-block .block-header {
   overflow: hidden;
-  padding: 3px 10px;
-  background: #60A63B;
   margin-bottom: 10px;
+  border: 1px solid #6db23b;
+  -moz-box-shadow: 1px 1px 2px 1px #cecece;
+  -webkit-box-shadow: 1px 1px 2px 1px #cecece;
+  box-shadow: 1px 1px 2px 1px #cecece;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #edf7f9 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#edf7f9)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffffff 0%,#edf7f9 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ffffff 0%,#edf7f9 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#edf7f9',GradientType=0 ); /* IE6-9 */
 }
 
 .feed-block .block-header  a {
@@ -995,7 +997,13 @@ label.in-line{
   font-weight: bold;
   text-transform: uppercase;
   font-size: 14px;
-  vertical-align: middle;
+  vertical-align: middle;  
+  padding: 6px 10px;
+  background-color: #579E3A;
+}
+
+.feed-block .block-header  a:hover {
+  color: #004D15;
 }
 
 .feed-block .block-header  a  i {
