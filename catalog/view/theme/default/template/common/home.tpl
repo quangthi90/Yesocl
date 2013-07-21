@@ -12,9 +12,6 @@
     {{ block('post_common_post_comment_style') }}
 {% endblock %}
 
-{% set style = random([1, 2]) %}
-{% set style = 1 %}
-
 {% block body %}
 <div id="y-content" class="no-header-fixed">
 	<div id="y-main-content" class="has-horizontal has-block">
@@ -26,41 +23,14 @@
                 <a class="fl" href="#">{{ branch.name }}</a>
                 <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
             </div>
-            {% if style == 1 %}
-            {{ block('post_common_post_block_ex1') }}
-            {% elseif style == 2 %}
-            {{ block('post_common_post_block_ex2') }}
+            {% if length == 5 %}
+            	{{ block('post_common_post_block_ex1') }}
+            {% else %}
+            	{{ block('post_common_post_block_ex2') }}
             {% endif %}
 		</div>
 		{% endif %}
-		{% endfor %}
-		{#<div class="feed-block">
-            <div class="block-header">
-                <a class="fl" href="#">Yestoc Template 3</a>
-                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
-            </div>
-            <div class="block-content">
-            	<div class="column">
-		    		<div class="feed-container feed1">	
-		    			{{ block('post_common_post_block_ex1') }}	 	    			
-		    		</div>
-		    		<div class="feed-container feed2">
-		    			{{ block('post_common_post_block_ex2') }}			    			
-		    		</div>
-		    	</div>					
-		    	<div class="column">
-		    		<div class="feed-container feed3">	
-		    			{{ block('post_common_post_block_ex2') }}		    			
-		    		</div>
-		    		<div class="feed-container feed4">
-		    			{{ block('post_common_post_block_ex1') }}			    			
-		    		</div>		    	
-		    		<div class="feed-container feed5">
-		    			{{ block('post_common_post_block_ex1') }}			    			
-		    		</div>
-		    	</div>	
-			</div>
-		</div>#}
+		{% endfor %}		
 	</div>
 </div>
 {{ block('post_common_post_comment') }}

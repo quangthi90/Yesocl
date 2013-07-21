@@ -141,10 +141,15 @@ BlockFeed.prototype.putFeed = function() {
 		var heightFirst = this.heightAverPost*4/3;
 		var heightLast = this.heightAverPost*3/4 - 20;
 		specialColumn.each(function(index) {
-			$(this).children('.feed-container:first-child').height(heightFirst);
-			$(this).children('.feed-container:first-child').addClass('post-special');
-			$(this).children('.feed-container:last-child').height(heightLast);
-			$(this).children('.feed-container:last-child').addClass('post-weak');
+			if($(this).children('.feed-container').length ==1)  { 
+				$(this).children('.feed-container').height(heightFirst);
+				$(this).children('.feed-container').addClass('post-special');	
+			}else {
+				$(this).children('.feed-container:first-child').height(heightFirst);
+				$(this).children('.feed-container:first-child').addClass('post-special');
+				$(this).children('.feed-container:last-child').height(heightLast);
+				$(this).children('.feed-container:last-child').addClass('post-weak');
+			}			
 		});
 	}
 }
