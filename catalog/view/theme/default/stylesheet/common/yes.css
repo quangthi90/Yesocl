@@ -1103,7 +1103,15 @@ label.in-line{
 }
 
 .column .feed-container:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 0;
+}
+
+.bommer-column-special .feed-container:nth-child(2){
+  /*
+  Bommer fix for block have 5 posts
+  Update again when change js to fix this bug
+  */
+  margin-right: 9px !important;
 }
 
 .has-block .feed-block {

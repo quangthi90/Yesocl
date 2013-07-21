@@ -12,13 +12,12 @@
     {{ block('post_common_post_comment_style') }}
 {% endblock %}
 
-{% set style = 1 %}
-
 {% block body %}
 <div id="y-content" class="no-header-fixed">
 	<div id="y-main-content" class="has-horizontal has-block">
 		{#% for branch in branchs %#}
 		{% for branch in 1..3 %}
+        {% set style = random([1, 2]) %}
 		{% set posts = all_posts[branch.id] %}
 		{#% if posts|length > 0 %#}
 		<div class="feed-block">

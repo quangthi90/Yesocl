@@ -1,7 +1,7 @@
 {% block post_common_post_block_ex1 %}
 	{% set special = random([2, 3]) %}
 	<div class="block-content">
-    	<div class="column {% if special == 3 %}column-speical{% endif %}">
+    	<div class="column {% if special == 3 %}column-special bommer-column-special{% endif %}">
     		{#% for post in posts|slice(0, 4) %#}
     		{% for post in 1..5 %}
 			<div class="feed-container feed{{ loop.index }}">
@@ -31,9 +31,14 @@
 				</div>   			
 			</div>
 			{% if loop.index % special == 0 and loop.index != 5 %}
-			{% set special = 6 %}
+			{% if special == 2 %}
+				{% set special = 3 %}
+			{% else %}
+				{% set special = 6 %}
+			{% endif %}
 		</div>
-		<div class="column">
+		<div class="column {% if special == 3 %}column-special bommer-column-special{% endif %}">
+			{% set special = 6 %}
 			{% endif %}
 			{% endfor %}
 		</div>
