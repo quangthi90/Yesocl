@@ -31,7 +31,7 @@ function ProfilesTabsInformation($element, contentHeight) {
 ProfilesTabsInformation.prototype.deployed = function () {
 	this.inputDescription.outerHeight(this.contentHeight*3/10);
 	this.inputDescription.niceScroll();
-	this.mainBody.height(this.contentHeight - this.header.height() - 15);
+	this.mainBody.height(this.contentHeight - this.header.height() - 30);
 	this.mainBody.niceScroll();
 }
 
@@ -64,10 +64,10 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 function ProfilesTabsBackground($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.header = $element.find('.profiles-tabs-header');
-	this.sumary = new ProfilesTabsBackgroundSumary($element.find('#profiles-tabs-background-sumary'), contentWidth, contentHeight - this.header.height() - 15);
-	this.experience = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-experience'), contentWidth, contentHeight - this.header.height() - 15);
-	this.skill = new ProfilesTabsBackgroundSkill($element.find('#profiles-tabs-background-skill'), contentWidth, contentHeight - this.header.height() - 15);
-	this.education = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 15);
+	this.sumary = new ProfilesTabsBackgroundSumary($element.find('#profiles-tabs-background-sumary'), contentWidth, contentHeight - this.header.height() - 30);
+	this.experience = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-experience'), contentWidth, contentHeight - this.header.height() - 30);
+	this.skill = new ProfilesTabsBackgroundSkill($element.find('#profiles-tabs-background-skill'), contentWidth, contentHeight - this.header.height() - 30);
+	this.education = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 30);
 	this.afterCreate();
 }
 

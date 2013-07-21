@@ -577,12 +577,6 @@ label.in-line{
     height: auto;    
     padding: 0px;
     background: #fff;
-    /*
-    border-top: 1px solid #ccc;
-    -moz-box-shadow: 0 0 5px #ccc;
-    -webkit-box-shadow: 0 0 5px#ccc;
-    box-shadow: 0 0 5px #ccc;
-    */
     position: relative;
 }
 
@@ -594,7 +588,6 @@ label.in-line{
 
 .post-selecting {
   border-top-color: #3B8F39;
-  position: absolute;
   z-index: 101;
 }
 
@@ -736,7 +729,6 @@ label.in-line{
 }
 
 .sidebar-controls .nav-list .divider {
-  /*border-bottom: 1px solid #054105;*/
   border-bottom: 1px solid rgb(48, 122, 48);
   background-color: #000;
   margin: 5px 0px 5px 0px;
@@ -1107,6 +1099,10 @@ label.in-line{
   margin-right: 10px;
 }
 
+.column:last-child{
+  margin-right: 0;
+}
+
 .column .feed-container{
   background: #fff;
   margin-bottom: 10px;
@@ -1115,7 +1111,15 @@ label.in-line{
 }
 
 .column .feed-container:last-child {
-  margin-bottom: 0px;
+  margin-bottom: 0;
+}
+
+.bommer-column-special .feed-container:nth-child(2){
+  /*
+  Bommer fix for block have 5 posts
+  Update again when change js to fix this bug
+  */
+  margin-right: 9px !important;
 }
 
 .has-block .feed-block {

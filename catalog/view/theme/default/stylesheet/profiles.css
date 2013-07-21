@@ -49,12 +49,25 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b93c', endColorstr='#519839',GradientType=0 ); /* IE6-9 */
 }
 
+.profiles-tabs-title i {
+	color: #fff;
+	margin-right: 10px;
+}
+
 .profiles-tabs-main {
 	margin-top: 10px;
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding: 15px;
 	border: 1px solid #c0c0c0;
 	background: #fff;
+	border-top: 2px solid #5AA13A;
+	-moz-box-shadow: 0px 2px 10px #ccc;
+	-webkit-box-shadow: 0px 2px 10px #ccc;
+	box-shadow: 0px 2px 10px #ccc;
+}
+
+#profiles-tabs-information .profiles-tabs-main  {
+	padding-right: 0px;
+	padding-left: 0px;
 }
 
 #profiles-tabs-background-experience, #profiles-tabs-background-skill, #profiles-tabs-background-education {
@@ -86,12 +99,19 @@
 	margin-right: 10px;
 }
 
-.profiles-tabs-main-header a:first-child {
+.profiles-tabs-main-header .sub-profile-header {
 	margin-left: 10px;
-	color: #71b73c;
+	padding: 3px 25px 3px 15px;
+	color: #295509;
 	text-transform: uppercase;
-	font-size: 18px;
+	font-weight: bold;
+	font-size: 15px;
 	line-height: 24px;
+}
+
+.profiles-tabs-main-header .sub-profile-header i {
+	color: #000;
+	margin-right: 6px;
 }
 
 .profiles-btn {
@@ -115,16 +135,28 @@
 }
 
 .profiles-tabs-item1-label {
-	font-size: 16px;
-	color: #71b73c;
+	font-weight: bold;
+	color: #0C660F;
 	margin-bottom: 10px;
+}
+
+.profiles-tabs-value {
+	color: #000;
+}
+
+.profiles-tabs-value  .profiles-tabs-value-item {
+	padding: 2px 0px;	
+}
+
+.profiles-tabs-value  .profiles-tabs-value-item:first-child {
+	font-weight: bold;
+	font-style: italic;
 }
 
 .profiles-tabs-item1-content {
 	margin-bottom: 10px;
 	padding: 10px;
-	border: 1px solid #c0c0c0;
-	font-size: 14px;
+	border: 1px solid #c0c0c0;	
 }
 
 .profiles-tabs-item1-content input {
@@ -134,8 +166,8 @@
 .profiles-tabs-item2 {
 	float: left;
 	margin-right: 10px;
-	margin-bottom: 10px;
-	font-size: 13px;
+	margin-bottom: 10px;	
+	border: 1px solid #9CD49C;
 }
 
 .profiles-tabs-item2 .profiles-btn-remove {
@@ -182,12 +214,6 @@
 
 #profiles-tabs-information .input-group div:first-child {
 	font-weight: bold;
-}
-
-#profiles-tabs-information .profiles-line {
-	border-top: 1px solid #c0c0c0;
-	padding-top: 5px;
-	margin-top: 5px;
 }
 
 #y-content .profiles-tabs-input {
