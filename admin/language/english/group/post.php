@@ -12,6 +12,7 @@ $_['text_created']			  = 'Created';
 $_['text_title']			  = 'Title';
 $_['text_status']			  = 'Status';
 $_['text_action']			  = 'Action';
+$_['column_thumb'] 			  = 'Image';
 
 // Entry
 $_['entry_title']             = 'Title:';
@@ -20,6 +21,7 @@ $_['entry_author']        	  = 'Author:';
 $_['entry_status']        	  = 'Status:';
 $_['entry_fullname']          = 'Fullname:';
 $_['entry_category']          = 'Category:';
+$_['entry_thumb'] 			  = 'Image:';
 
 // error
 $_['error_name']              = 'Post Name must be between 3 characters!';
