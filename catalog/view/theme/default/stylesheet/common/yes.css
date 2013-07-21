@@ -1091,6 +1091,10 @@ label.in-line{
   margin-right: 10px;
 }
 
+.column:last-child{
+  margin-right: 0;
+}
+
 .column .feed-container{
   background: #fff;
   margin-bottom: 10px;
