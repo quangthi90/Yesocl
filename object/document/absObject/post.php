@@ -157,10 +157,6 @@ Abstract Class Post {
 	* Format array to save to Cache
 	* 05/26/2013
 	* @author: Bommer <bommer@bommerdesign.com>
-	* @param:
-	*	- image tool: catalog/model/tool/image
-	*	- url lib: class url in library
-	*	- bool include comment: cache all comments of post
 	* @return: array Post & Comments
 	*	Ex:
 	*		array = {
