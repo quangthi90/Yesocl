@@ -1,23 +1,20 @@
-{% block post_common_post_block_ex1 %}
+{#% block post_common_post_block_ex1 %}
 	{% set special = random([2, 3]) %}
 	<div class="block-content">
     	<div class="column {% if special == 3 %}column-special bommer-column-special{% endif %}">
-    		{#% for post in posts|slice(0, 4) %#}
-    		{% for post in 1..5 %}
+    		{% for post in posts|slice(0, 5) %}
 			<div class="feed-container feed{{ loop.index }}">
 				<div class="feed post post_in_block">
 					<div class="post_header">
-						<h4 class="post_title"><a href="#">
-						Lăng kính Yestoc 31/05: “chúng tôi vẫn duy trì quan điểm thận trọng”</a></h4>				
+						<h4 class="post_title"><a href="#">{{ post.title }}</a></h4>	
 					</div>
 					<div class="post_body">
 						<div class="post_text_raw">
-							<p>
-								Tin Nhanh Thế Giới-Tăng trưởng kinh tế Mỹ đạt 2.4%, 
-								thấp hơn so với dự báo ban đầu do xây dựng 
-								và hàng tồn kho vẫn ở mức cao.
-							</p>
-						</div>	
+							<p>{{ post.content|raw }}</p>
+						</div>
+						<div class="post_image text-center">
+							<img src="{{ post.image }}">
+						</div>
 					</div>
 					<div class="row-fluid post_footer">
 						<div class="span8 post_action">
@@ -43,4 +40,4 @@
 			{% endfor %}
 		</div>
 	</div>
-{% endblock %}
+{% endblock %#}

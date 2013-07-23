@@ -127,14 +127,12 @@ class ModelGroupPost extends Doctrine {
 			$post->setCategory( $category );
 		}
 		
-		if ( !empty( $thumb ) ) {
+		if ( count($thumb) > 0 ) {
 			if ( $data['thumb'] = $this->uploadThumb( $group->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}else {
 				$post->setThumb( '' );
 			}
-		}else{
-			$post->setThumb('');
 		}
 		
 		$this->dm->flush();

@@ -518,7 +518,7 @@ class ControllerBranchPost extends Controller {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
 		}
 
-		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 50 || strlen( trim( $this->request->post['description'] ) ) > 256 ) {
+		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 10 || strlen( trim( $this->request->post['description'] ) ) > 150 ) {
 			$this->error['error_description'] = $this->language->get( 'error_description' );
 		}
 

@@ -2,22 +2,29 @@
 	<div class="block-content">
 		{% set special = random(['column-special', '']) %}
     	<div class="column {{ special }}">
-    		{#% for post in posts|slice(0, 5) %#}
-    		{% for post in 1..6 %}
+    		{% for post in posts|slice(0, 6) %}
 			<div class="feed-container feed{{ loop.index }}">
 				<div class="feed post post_in_block">
 					<div class="post_header">
-						<h4 class="post_title"><a href="#">
-						Lăng kính Yestoc 31/05: “chúng tôi vẫn duy trì quan điểm thận trọng”</a></h4>				
+						<h4 class="post_title"><a href="#">{{ post.title }}</a></h4>
 					</div>
 					<div class="post_body">
+						{% if special != '' and loop.index % 2 != 0 %}
+						<div class="post_image text-center">
+							<img src="{{ post.image }}">
+						</div>
 						<div class="post_text_raw">
-							<p>
-								Tin Nhanh Thế Giới-Tăng trưởng kinh tế Mỹ đạt 2.4%, 
-								thấp hơn so với dự báo ban đầu do xây dựng 
-								và hàng tồn kho vẫn ở mức cao.
-							</p>
-						</div>	
+							<p>{{ post.content|raw }}</p>
+						</div>
+						{% elseif special != '' and loop.index % 2 == 0 %}
+						<div class="post_text_raw">
+							<p>{{ post.content|raw }}</p>
+						</div>
+						{% else %}
+						<div class="post_image text-center">
+							<img src="{{ post.image }}">
+						</div>
+						{% endif %}
 					</div>
 					<div class="row-fluid post_footer">
 						<div class="span8 post_action">

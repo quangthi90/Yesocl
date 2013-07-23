@@ -127,7 +127,7 @@ class ModelBranchPost extends Doctrine {
 		} 
 
 		// thumb
-		if ( isset( $thumb ) ) {
+		if ( isset($thumb) && $thumb['name'] != '' ) {
   			if ( !$this->isValidThumb( $thumb ) ) {
   				return false;
   			}
@@ -159,14 +159,12 @@ class ModelBranchPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		if ( !empty( $thumb ) ) {
+		if ( count($thumb) > 0 ) {
 			if ( $data['thumb'] = $this->uploadThumb( $branch->getId(), $post->getId(), $thumb ) ) {
 				$post->setThumb( $data['thumb'] );
 			}else {
 				$post->setThumb( '' );
 			}
-		}else{
-			$post->setThumb('');
 		}
 
 		$this->dm->flush();
