@@ -57,7 +57,7 @@ class ModelToolImage extends Model {
   		}
 	}
 
-	public function uploadThumb( $folder, $filename, $thumb ) {
+	public function uploadImage( $folder, $filename, $thumb ) {
 		$ext = end(explode(".", $thumb["name"]));
 
 		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
@@ -72,31 +72,32 @@ class ModelToolImage extends Model {
 
 		$folder_names = explode('/', $folder);
 		$path = DIR_IMAGE;
-
+		
 		foreach ( $folder_names as $folder_name ) {
 			$path .= $folder_name . '/';
 			if ( !is_dir( $path ) ) {
 				mkdir( $path );
 			}
-		}exit;
-
-		$image_path = $path . $filename . $ext;
-
-		if ( move_uploaded_file( $thumb['tmp_name'], $image_path ) ) {
+		}
+		
+		$image_path = $folder . '/' . $filename . '.' . $ext;
+		
+		if ( move_uploaded_file( $thumb['tmp_name'], DIR_IMAGE . $image_path ) ) {
 			return $image_path;
 		}else {
 			return false;
 		}
 	}
 
-	public function delete_directory( $dirname ) {
+	public function deleteDirectoryImage( $dirname ) {
   		if(is_dir($dirname)){
     		$files = glob( $dirname . '*', GLOB_MARK );
     		foreach( $files as $file )
-      			$this->delete_directory( $file );
+      			$this->deleteDirectoryImage( $file );
     		rmdir( $dirname );
-  		}else
+  		}else{
     		unlink( $dirname );
+    	}
 	}
 }
 ?>

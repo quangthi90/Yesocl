@@ -15,7 +15,7 @@ class ControllerUserPost extends Controller {
 			
 			$this->redirect( $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
-		
+
 		$this->load->model( 'user/post' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
@@ -447,7 +447,8 @@ class ControllerUserPost extends Controller {
 		}
 
 		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
-			if ( !$this->model_user_post->isValidThumb( $this->request->files['thumb'] ) ) {
+			$this->load->model('tool/image');
+			if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
 				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
 			}
 		}
