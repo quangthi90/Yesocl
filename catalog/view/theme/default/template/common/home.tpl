@@ -17,7 +17,6 @@
 	<div id="y-main-content" class="has-horizontal has-block">
 		{% for branch in branchs %}
         {% set style = random([1, 2]) %}
-        {% set style = 2 %}
 		{% set posts = all_posts[branch.id] %}
 		{% if posts|length > 0 %}
 		<div class="feed-block">

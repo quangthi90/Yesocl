@@ -1,5 +1,11 @@
-{#% block post_common_post_block_ex1 %}
+{% block post_common_post_block_ex1 %}
 	{% set special = random([2, 3]) %}
+	{% set column_special = random(['column-special', '']) %}
+	{% if special == 3 %}
+		{% set first = true %}
+	{% else %}
+		{% set first = false %}
+	{% endif %}
 	<div class="block-content">
     	<div class="column {% if special == 3 %}column-special bommer-column-special{% endif %}">
     		{% for post in posts|slice(0, 5) %}
@@ -9,12 +15,22 @@
 						<h4 class="post_title"><a href="#">{{ post.title }}</a></h4>	
 					</div>
 					<div class="post_body">
-						<div class="post_text_raw">
-							<p>{{ post.content|raw }}</p>
-						</div>
+						{% if (special == 3 and first == true and loop.index == 1) or (first == false and loop.index == 3 and special == 6) %}
 						<div class="post_image text-center">
 							<img src="{{ post.image }}">
 						</div>
+						{% else %}
+							{% set random = random([1, 2]) %}
+							{% if random % 2 == 0 %}
+						<div class="post_text_raw">
+							<p>{{ post.content|raw }}</p>
+						</div>
+							{% else %}
+						<div class="post_image text-center">
+							<img src="{{ post.image }}">
+						</div>
+							{% endif %}
+						{% endif %}
 					</div>
 					<div class="row-fluid post_footer">
 						<div class="span8 post_action">
@@ -40,4 +56,4 @@
 			{% endfor %}
 		</div>
 	</div>
-{% endblock %#}
+{% endblock %}
