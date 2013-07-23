@@ -42,7 +42,11 @@ class ControllerUserPost extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_user_post->addPost( $this->request->post, $this->request->get['user_id'] ) == false ){
+			if ( !isset( $this->request->files['thumb'] ) ) {
+				$this->request->files['thumb'] = array();
+			}
+
+			if ( $this->model_user_post->addPost( $this->request->post, $this->request->get['user_id'], $this->request->files['thumb'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
 				$this->redirect( $this->url->link( 'user/post', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
@@ -76,7 +80,11 @@ class ControllerUserPost extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_user_post->editPost( $this->request->get['post_id'], $this->request->post ) == false ){
+			if ( !isset( $this->request->files['thumb'] ) ) {
+				$this->request->files['thumb'] = array();
+			}
+
+			if ( $this->model_user_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
 				$this->redirect( $this->url->link( 'user/post', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
@@ -192,6 +200,9 @@ class ControllerUserPost extends Controller {
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		$this->data['button_back'] = $this->language->get( 'button_back' );
+
+		// Column
+		$this->data['column_thumb'] = $this->language->get( 'column_thumb' );
 		
 		// Link
 		$this->data['insert'] = $this->url->link( 'user/post/insert', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' );
@@ -226,6 +237,7 @@ class ControllerUserPost extends Controller {
 				$this->data['posts'][] = array(
 					'id' => $posts[$i]->getId(),
 					'title' => $posts[$i]->getTitle(),
+					'thumb' => HTTP_IMAGE . $posts[$i]->getThumb(),
 					'author' => $author->getFullname(),
 					'created' => $posts[$i]->getCreated()->format( $this->language->get('date_time_format') ),
 					'status' => $posts[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
@@ -329,6 +341,9 @@ class ControllerUserPost extends Controller {
 		// Text	
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
+		$this->data['text_change'] = $this->language->get( 'text_change' );
+		$this->data['text_remove'] = $this->language->get( 'text_remove' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -340,6 +355,7 @@ class ControllerUserPost extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
+		$this->data['entry_thumb'] = $this->language->get( 'entry_thumb' );
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
@@ -368,6 +384,13 @@ class ControllerUserPost extends Controller {
 			$this->data['content'] = $post->getContent();
 		}else {
 			$this->data['content'] = '';
+		}
+
+		// logo
+		if ( isset( $post ) && trim( $post->getThumb() ) != '' ) {
+			$this->data['img_thumb'] = HTTP_IMAGE . $post->getThumb();
+		}else {
+			$this->data['img_thumb'] = $this->data['img_default'];
 		}
 		
 		// Entry status
@@ -421,6 +444,12 @@ class ControllerUserPost extends Controller {
 
 		if ( !isset($this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ){
 			$this->error['error_author'] = $this->language->get( 'error_author' );
+		}
+
+		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
+			if ( !$this->model_user_post->isValidThumb( $this->request->files['thumb'] ) ) {
+				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
+			}
 		}
 
 		if ( $this->error){
