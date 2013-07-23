@@ -3040,105 +3040,6 @@ db.getCollection("street").insert({
 
 /** user records **/
 db.getCollection("user").insert({
-  "_id": ObjectId("518f5555471deea409000000"),
-  "created": ISODate("2013-05-12T08:39:48.0Z"),
-  "emails": [
-    {
-      "_id": ObjectId("51ada7d1d874597c0900000b"),
-      "email": "quangthi_90@yahoo.com.vn",
-      "primary": true
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "meta": {
-    "_id": ObjectId("51ada7d1d874597c09000002"),
-    "firstname": "user1",
-    "lastname": "yesocl",
-    "birthday": ISODate("2013-06-04T08:39:44.0Z"),
-    "sex": 1,
-    "headingLine": "",
-    "location": {
-      "_id": ObjectId("51ada7d1d874597c09000003"),
-      "location": "HCM, Việt Nam",
-      "cityId": "5143bfca913db4a408000012"
-    },
-    "postalCode": "84",
-    "industry": "Chemicals",
-    "industry_id": "514b0970913db4ac08000020",
-    "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
-    "ims": [
-      {
-        "_id": ObjectId("51ada7d1d874597c09000004"),
-        "im": "user1",
-        "type": "skype",
-        "visible": "myfollow"
-      }
-    ],
-    "phones": [
-      {
-        "_id": ObjectId("51ada7d1d874597c09000005"),
-        "phone": "0903000333",
-        "type": "mobile",
-        "visible": "myfollow"
-      }
-    ],
-    "websites": [
-      {
-        "_id": ObjectId("51ada7d1d874597c09000006"),
-        "url": "www.yesocl.com",
-        "title": ""
-      }
-    ],
-    "background": {
-      "_id": ObjectId("51ada7d1d874597c09000007"),
-      "experiencies": [
-        {
-          "_id": ObjectId("51ada7d1d874597c09000008"),
-          "company": "Yesocl",
-          "title": "My Company",
-          "location": {
-            "_id": ObjectId("51ada7d1d874597c09000009"),
-            "location": "HCM, Việt Nam",
-            "cityId": "5143bfca913db4a408000012"
-          },
-          "started": ISODate("2013-01-01T09:39:44.0Z"),
-          "ended": ISODate("2013-01-01T09:39:44.0Z"),
-          "current": false,
-          "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
-        }
-      ],
-      "educations": [
-        {
-          "_id": ObjectId("51ada7d1d874597c0900000a"),
-          "school": "Vietnam National University - Ho Chi Minh City",
-          "school_id": "",
-          "started": "2008",
-          "ended": "2012",
-          "degree": "Master Of Technology",
-          "degree_id": "",
-          "fieldOfStudy": "Information Technology",
-          "fieldOfStudy_id": "",
-          "grace": "",
-          "societies": "",
-          "description": ""
-        }
-      ],
-      "interest": "",
-      "maritalStatus": false,
-      "adviceForContact": ""
-    }
-  },
-  "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
-  "salt": "09b2a07c9",
-  "slug": "user1",
-  "status": true,
-  "username": "user1"
-});
-db.getCollection("user").insert({
   "_id": ObjectId("518f5f43471deeb40900001f"),
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
@@ -3239,6 +3140,123 @@ db.getCollection("user").insert({
   "slug": "user2",
   "status": true,
   "username": "user2"
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("518f5555471deea409000000"),
+  "created": ISODate("2013-05-12T08:39:48.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("51ada7d1d874597c0900000b"),
+      "email": "quangthi_90@yahoo.com.vn",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("51ada7d1d874597c09000002"),
+    "firstname": "user1",
+    "lastname": "yesocl",
+    "birthday": ISODate("2013-06-04T08:39:44.0Z"),
+    "sex": 1,
+    "headingLine": "",
+    "location": {
+      "_id": ObjectId("51ada7d1d874597c09000003"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
+    },
+    "postalCode": "84",
+    "industry": "Chemicals",
+    "industry_id": "514b0970913db4ac08000020",
+    "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
+    "ims": [
+      {
+        "_id": ObjectId("51ada7d1d874597c09000004"),
+        "im": "user1",
+        "type": "skype",
+        "visible": "myfollow"
+      }
+    ],
+    "phones": [
+      {
+        "_id": ObjectId("51ada7d1d874597c09000005"),
+        "phone": "0903000333",
+        "type": "mobile",
+        "visible": "myfollow"
+      }
+    ],
+    "websites": [
+      {
+        "_id": ObjectId("51ada7d1d874597c09000006"),
+        "url": "www.yesocl.com",
+        "title": ""
+      }
+    ],
+    "background": {
+      "_id": ObjectId("51ada7d1d874597c09000007"),
+      "experiencies": [
+        {
+          "_id": ObjectId("51ada7d1d874597c09000008"),
+          "company": "Yesocl",
+          "title": "My Company",
+          "location": {
+            "_id": ObjectId("51ada7d1d874597c09000009"),
+            "location": "HCM, Việt Nam",
+            "cityId": "5143bfca913db4a408000012"
+          },
+          "started": ISODate("2013-01-01T09:39:44.0Z"),
+          "ended": ISODate("2013-01-01T09:39:44.0Z"),
+          "current": false,
+          "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
+        }
+      ],
+      "educations": [
+        {
+          "_id": ObjectId("51ada7d1d874597c0900000a"),
+          "school": "Vietnam National University - Ho Chi Minh City",
+          "school_id": "",
+          "started": "2008",
+          "ended": "2012",
+          "degree": "Master Of Technology",
+          "degree_id": "",
+          "fieldOfStudy": "Information Technology",
+          "fieldOfStudy_id": "",
+          "grace": "",
+          "societies": "",
+          "description": ""
+        }
+      ],
+      "interest": "",
+      "maritalStatus": false,
+      "adviceForContact": ""
+    }
+  },
+  "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
+  "posts": [
+    {
+      "_id": ObjectId("51eeb4aa471dee2c0b000004"),
+      "author": "user1",
+      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Vnindex:&lt;\/span&gt;&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Phiên 18\/6 đóng cửa hồi phục nhẹ=&amp;gt; tín hiệu tích cực trong ngắn hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Vùng hỗ trợ: trendlin 485-490 đ. Thủng vùng này, ngưỡng hỗ trợ gần nhất là 462-468.5 đ&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Trường hợp không thủng 485-490. Để xác nhận lại xu hướng tăng, thị trường cần vượt qua ngưỡng cản 515 – 517.5 đ.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;strong&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Chiến lược:&lt;\/span&gt;&lt;\/strong&gt; dừng bán đuổi ( trừ trường hợp thủng 485 =&amp;gt; bắt buộc bán cắt lỗ). Những phiên tới thị trường hồi phục lên vùng 505-511 đ canh bán bớt giãm tỷ trọng cổ phiếu về mức an toàn đặc biệt đối với những mã tăng nóng thời gian qua cần bán hết thanh lý danh mục, nếu thị trường vượt 515-517.5 đ có thể cơ cấu sang những mã tốt chưa tăng nhiều.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;strong&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Danh mục:&lt;\/span&gt;&lt;\/strong&gt; VNM, BMP, PVD, KHP, HLD, GAS, LIX&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/06\/vnindex-19.png&quot; rel=&quot;attachment wp-att-2937&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignnone  wp-image-2937&quot; height=&quot;377&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/06\/vnindex-19.png&quot; title=&quot;huynh khac  minh - vnindex - yestoc - smart_money&quot; width=&quot;605&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t———————————-&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHuỳnh Khắc Minh&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tYahoo: business_hkm&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tEmail: minh.hk83@gmail.com&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tSkype: minh.trang02&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHp: 0916 31 8868&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-07-23T16:51:54.0Z"),
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/51eeb4aa471dee2c0b000004\/avatar.jpg",
+      "title": "Phân tích, nhận định thị trường trước phiên giao dịch 19\/06\/2013",
+      "updated": ISODate("2013-07-23T16:52:07.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "salt": "09b2a07c9",
+  "slug": "user1",
+  "status": true,
+  "username": "user1"
 });
 
 /** user_group records **/
