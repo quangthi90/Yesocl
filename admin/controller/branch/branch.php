@@ -177,6 +177,7 @@ class ControllerBranchBranch extends Controller {
 		$this->data['column_company'] = $this->language->get( 'column_company' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
+		$this->data['column_order'] = $this->language->get( 'column_order' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -193,36 +194,38 @@ class ControllerBranchBranch extends Controller {
 
 		// branch
 		$branchs = $this->model_branch_branch->getBranchs( $data );
-		$total_branchs = $this->model_branch_branch->getTotalBranchs( $data );
 
 		$this->data['branchs'] = array();
-		foreach ($branchs as $branch) {
-			$action = array();
+		if ( $branchs ){
+			foreach ($branchs as $branch) {
+				$action = array();
 
-			$action[] = array(
-				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
-				'icon' => 'icon-edit',
-			);
+				$action[] = array(
+					'text' => $this->language->get( 'text_edit' ),
+					'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+					'icon' => 'icon-edit',
+				);
 
-			$action[] = array(
-				'text' => $this->language->get( 'button_post' ),
-				'href' => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
-				'icon' => 'icon-list',
-			);
+				$action[] = array(
+					'text' => $this->language->get( 'button_post' ),
+					'href' => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+					'icon' => 'icon-list',
+				);
 
-			$this->data['branchs'][] = array(
-				'id' 		=> $branch->getId(),
-				'name' 		=> $branch->getName(),
-				'company' 	=> $branch->getCompany()->getName(),
-				'status' 	=> $branch->getStatus(),
-				'action' 	=> $action,
-			);
+				$this->data['branchs'][] = array(
+					'id' 		=> $branch->getId(),
+					'name' 		=> $branch->getName(),
+					'company' 	=> $branch->getCompany()->getName(),
+					'status' 	=> $branch->getStatus(),
+					'order' 	=> $branch->getOrder(),
+					'action' 	=> $action,
+				);
+			}
 		}
 
 		// pagination
 		$pagination = new Pagination();
-		$pagination->total = $total_branchs;
+		$pagination->total = $branchs->count();
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
@@ -300,6 +303,7 @@ class ControllerBranchBranch extends Controller {
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -346,6 +350,15 @@ class ControllerBranchBranch extends Controller {
 			$this->data['company_id'] = 0;
 		}
 
+		// order
+		if ( isset($this->request->post['order']) ){
+			$this->data['order'] = $this->request->post['order'];
+		}elseif ( isset($branch) ){
+			$this->data['order'] = $branch->getOrder();
+		}else {
+			$this->data['order'] = 0;
+		}
+
 		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link('company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
 
 		// template
@@ -355,7 +368,7 @@ class ControllerBranchBranch extends Controller {
 		$this->children = array(
 			'common/header',
 			'common/footer'
-			);
+		);
 
 		// render
 		$this->response->setOutput( $this->render() );

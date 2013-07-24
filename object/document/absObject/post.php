@@ -43,6 +43,9 @@ Abstract Class Post {
 	/** @MongoDB\String */
 	private $slug;
 
+	/** @MongoDB\String */
+	private $thumb;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -59,6 +62,62 @@ Abstract Class Post {
 		}
 		
 		return null;
+	}
+
+	/**
+	* Format array to save to Cache
+	* 05/26/2013
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Post & Comments
+	*/
+	public function formatToCache(){
+		$limit = 50;
+
+		$comment_count = 0;
+		if ( $this->comments ){
+			$comment_count = count($this->comments);
+		}
+
+		$post_data = array(
+			'id'			=> $this->getId(),
+			'author' 		=> $this->getAuthor(),
+			'title' 		=> $this->getTitle(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated(),
+			'comment_count' => $comment_count,
+			'user_id'		=> $this->getUser()->getId(),
+			'thumb'			=> $this->getThumb()
+		);
+		
+		$list_post_data = array();
+
+		$post_data['comments'] = array();
+		$count_paging = 1;
+		$i = 1;
+
+		if ( $comment_count == 0 ){
+			$list_post_data[] = array(
+				'object' 	=> $post_data,
+				'page'		=> $count_paging
+			);
+		}
+
+		foreach ( $this->getComments() as $comment ) {
+			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
+
+			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
+				$list_post_data[] = array(
+					'object' 	=> $post_data,
+					'page'		=> $count_paging
+				);
+				$post_data['comments'] = array();
+				$count_paging++;
+			}
+
+			$i++;
+		}
+
+		return $list_post_data;
 	}
 
 	public function getId(){
@@ -153,62 +212,11 @@ Abstract Class Post {
 		return $this->slug;
 	}
 
-	/**
-	* Format array to save to Cache
-	* 05/26/2013
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Post & Comments
-	*	Ex:
-	*		array = {
-	*
-	*		}
-	*/
-	public function formatToCache(){
-		$limit = 50;
+	public function setThumb( $thumb ){
+		$this->thumb = $thumb;
+	}
 
-		$comment_count = 0;
-		if ( $this->comments ){
-			$comment_count = count($this->comments);
-		}
-
-		$post_data = array(
-			'id'			=> $this->getId(),
-			'author' 		=> $this->getAuthor(),
-			'title' 		=> $this->getTitle(),
-			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
-			'comment_count' => $comment_count,
-			'user_id'		=> $this->getUser()->getId()
-		);
-		
-		$list_post_data = array();
-
-		$post_data['comments'] = array();
-		$count_paging = 1;
-		$i = 1;
-
-		if ( $comment_count == 0 ){
-			$list_post_data[] = array(
-				'object' 	=> $post_data,
-				'page'		=> $count_paging
-			);
-		}
-
-		foreach ( $this->getComments() as $comment ) {
-			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
-
-			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
-				$list_post_data[] = array(
-					'object' 	=> $post_data,
-					'page'		=> $count_paging
-				);
-				$post_data['comments'] = array();
-				$count_paging++;
-			}
-
-			$i++;
-		}
-
-		return $list_post_data;
+	public function getThumb(){
+		return $this->thumb;
 	}
 }

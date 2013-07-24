@@ -233,7 +233,7 @@ class ControllerUserPost extends Controller {
 				);
 				
 				$author = $posts[$i]->getUser();
-			
+				
 				$this->data['posts'][] = array(
 					'id' => $posts[$i]->getId(),
 					'title' => $posts[$i]->getTitle(),

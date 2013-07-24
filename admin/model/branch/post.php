@@ -80,6 +80,13 @@ class ModelBranchPost extends Doctrine {
 
 		$this->dm->flush();
 
+		$this->load->model('tool/cache');
+		$folder_link = $this->config->get('branch')['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+
+		$this->model_tool_cache->setPost( $post, $path );
+
 		return $post;
 	}
 
@@ -181,15 +188,18 @@ class ModelBranchPost extends Doctrine {
 					$this->load->model('tool/image');
 					$this->model_tool_image->deleteDirectoryImage( $path );
 
+					// remove cache
+					$this->load->model('tool/cache');
+					$folder_link = $this->config->get('branch')['default']['cache_link'];
+					$folder_name = $this->config->get('post')['default']['cache_folder'];
+					$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+
 					$branch->getPosts()->removeElement( $post );
 				}
 			}
 		}
 		
 		$this->dm->flush();
-
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->deletePost( $post );
 
 		return true;
 	}

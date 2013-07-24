@@ -65,6 +65,13 @@ class ModelGroupPost extends Doctrine {
 		}
 
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$folder_link = $this->config->get('group')['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
+
+		$this->model_tool_cache->setPost( $post, $path );
 		
 		return true;
 	}
@@ -126,6 +133,13 @@ class ModelGroupPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$folder_link = $this->config->get('group')['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
+
+		$this->model_tool_cache->setPost( $post, $path );
 		
 		return true;
 	}
@@ -146,6 +160,14 @@ class ModelGroupPost extends Doctrine {
 					
 					$this->load->model('tool/image');
 					$this->model_tool_image->deleteDirectoryImage( $path );
+
+					// remove cache
+					$this->load->model('tool/cache');
+					$folder_link = $this->config->get('group')['default']['cache_link'];
+					$folder_name = $this->config->get('post')['default']['cache_folder'];
+					$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
+
+					$this->model_tool_cache->deletePost( $path );
 
 					$group->getPosts()->removeElement( $post );
 				}

@@ -60,6 +60,13 @@ class ModelUserPost extends Doctrine {
 		}
 
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$folder_link = $this->config->get('user')['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+
+		$this->model_tool_cache->setPost( $post, $path );
 		
 		return true;
 	}
@@ -112,6 +119,20 @@ class ModelUserPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$folder_link = $this->config->get('user')['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+
+		$this->model_tool_cache->setPost( $post, $path );
+
+		$this->load->model('tool/cache');
+		$folder_link = $this->config->get('user')['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+
+		$this->model_tool_cache->setPost( $post, $path );
 		
 		return true;
 	}
@@ -123,18 +144,26 @@ class ModelUserPost extends Doctrine {
 			}
 			
 			foreach ( $data['id'] as $id ) {
-				foreach ( $user->getPosts() as $post ){
-					if ( $post->getId() == $id ){
-						$folder_link = $this->config->get('user')['default']['image_link'];
-						$folder_name = $this->config->get('post')['default']['image_folder'];
-						$path = DIR_IMAGE . $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-						
-						$this->load->model('tool/image');
-						$this->model_tool_image->deleteDirectoryImage( $path );
+				$post = $user->getPostById( $id );
+				if ( $post ){
+					$folder_link = $this->config->get('user')['default']['image_link'];
+					$folder_name = $this->config->get('post')['default']['image_folder'];
+					$path = DIR_IMAGE . $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+					
+					// remove Image
+					$this->load->model('tool/image');
+					$this->model_tool_image->deleteDirectoryImage( $path );
 
-						$user->getPosts()->removeElement( $post );
-						break;
-					}
+					// remove cache
+					$this->load->model('tool/cache');
+					$folder_link = $this->config->get('user')['default']['cache_link'];
+					$folder_name = $this->config->get('post')['default']['cache_folder'];
+					$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+
+					$this->model_tool_cache->deletePost( $path );
+
+					$user->getPosts()->removeElement( $post );
+					break;
 				}
 			}
 		}

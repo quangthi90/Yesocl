@@ -19,11 +19,13 @@ $_['column_branch'] 	= 'Branch';
 $_['column_company'] 	= 'Company Owner';
 $_['column_status'] 	= 'Status';
 $_['column_action'] 	= 'Action';
+$_['column_order']      = 'Order';
 
 // entry
 $_['entry_name'] 		= 'Branch Name:';
 $_['entry_status'] 		= 'Status:';
 $_['entry_company'] 	= 'Company Owner:';
+$_['entry_order']       = 'Order:';
 
 // error
 $_['error_name'] 		= 'Warning: Branch Name must be more than 1 characters and less than 128 characters!';

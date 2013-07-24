@@ -1,30 +1,22 @@
 <?php
 class ModelToolCache extends Model {
-	public function setPost($object) {
+	public function setPost($object, $folder) {
 		$list_post_data = $object->formatToCache();
-		
+
 		foreach ( $list_post_data as $post_data ) {
-			$this->cache->delete( $object->getId() . '.' . $post_data['page'], $this->config->get('cache')['folder']['post'] );
-			$this->cache->set( $object->getId() . '.' . $post_data['page'], $post_data['object'], $this->config->get('cache')['folder']['post'] );
+			$this->cache->set( $post_data['page'], $post_data['object'], $folder );
 		}
-
-		return $list_post_data[0]['object'];
+		
+		return $list_post_data;
 	}
 
-	public function getPost($post_id, $paging = 1){
-		return $this->cache->get("$post_id.$paging", $this->config->get('cache')['folder']['post']);
+	public function getPost($paging = 1, $folder){
+		return $this->cache->get($paging, $folder);
 	}
 
-	public function deletePost($post_id){
-		$stop = false;
-		$i = 1;
-		while ( $stop == false ) {
-			if ( $this->cache->get("$post_id.$i", $this->config->get('cache')['folder']['post']) ){
-				$this->cache->delete("$post_id.$i", $this->config->get('cache')['folder']['post']);
-			}else{
-				$stop = true;
-			}
-		}
+	public function deletePost($folder){
+		$this->load->model('tool/image');
+		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $folder);
 	}
 
 	public function setUser($object) {
@@ -38,6 +30,10 @@ class ModelToolCache extends Model {
 
 	public function getUser($user_id){
 		return $this->cache->get($user_id, $this->config->get('cache')['folder']['user']);
+	}
+
+	public function setBranch( $branch ){
+		
 	}
 }
 ?>
