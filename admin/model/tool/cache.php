@@ -66,10 +66,10 @@ class ModelToolCache extends Model {
 		//-- link of cache Folder of Branch --
 		$cache_link = $this->config->get('branch')['default']['cache_link'];
 		//-- path of cache Folder of Branch --
-		$cache_path = $cache_link . $branch->getId() . '/';
+		$cache_path = $cache_link . $branch_id . '/';
 
 		$this->load->model('tool/image');
-		$this->model_tool_image->deleteDirectoryImage( $cache_path );
+		$this->model_tool_image->deleteDirectoryImage( DIR_CACHE . $cache_path );
 	}
 }
 ?>
