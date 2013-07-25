@@ -1,10 +1,25 @@
 <?php
 class ModelToolCache extends Model {
-	public function setPost($object, $folder) {
+	public function setPost($type_obj, $object) {
 		$list_post_data = $object->formatToCache();
+		print("<pre>"); var_dump($list_post_data); exit;
+		switch ($type_obj) {
+			case 'branch':
+				$folder_link = $this->config->get('branch')['default']['cache_link'];
+				$folder_name = $this->config->get('post')['default']['cache_folder'];
+				$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId() . '/';
+				foreach ( $list_post_data as $post_data ) {
+					
+				}
+				break;
 
-		foreach ( $list_post_data as $post_data ) {
-			$this->cache->set( $post_data['page'], $post_data['object'], $folder );
+			case 'group':
+				# code...
+				break;
+
+			case 'user':
+				# code...
+				break;
 		}
 		
 		return $list_post_data;

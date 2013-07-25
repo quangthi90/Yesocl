@@ -4,6 +4,27 @@ use Document\Branch\Post;
 use MongoId;
 
 class ModelBranchPost extends Doctrine {
+	/**
+	* Add new Post of Branch to Database
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @param: 
+	*	- string Branch ID
+	*	- array Thumb
+	*	- array data
+	* 	{
+	*		string Title 		-- required
+	*		string Company ID 	-- required
+	*		string User ID 		-- required
+	*		string Category ID 	-- required
+	*		string Description 	-- required
+	*		string Content 		-- required
+	*		bool Status
+	* 	}
+	* @return: bool
+	*	- true: success
+	*	- false: not success
+	*/
 	public function addPost( $branch_id, $data = array(), $thumb = array() ) {
 		// Branch is required
 		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
@@ -78,15 +99,12 @@ class ModelBranchPost extends Doctrine {
 			}
 		}
 
-		$this->dm->flush();
+		// $this->dm->flush();
 
+		//-- Update 50 last posts
 		$this->load->model('tool/cache');
-		$folder_link = $this->config->get('branch')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );
-
+		$this->model_tool_cache->setPost( 'branch', $post );
+		exit;
 		return $post;
 	}
 
