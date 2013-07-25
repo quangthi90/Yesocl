@@ -9,7 +9,7 @@ class ModelToolCache extends Model {
 				$folder_name = $this->config->get('post')['default']['cache_folder'];
 				$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId() . '/';
 				foreach ( $list_post_data as $post_data ) {
-					
+					$this->cache->set( $post_data['page'], $post_data['object'])
 				}
 				break;
 
