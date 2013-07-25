@@ -1318,6 +1318,7 @@ db.getCollection("branch").insert({
     "$db": "yesocl"
   },
   "name": "Food",
+  "order": NumberInt(2),
   "status": true
 });
 db.getCollection("branch").insert({
@@ -1328,27 +1329,49 @@ db.getCollection("branch").insert({
     "$db": "yesocl"
   },
   "name": "Stockin",
+  "order": NumberInt(1),
   "posts": [
     {
-      "_id": ObjectId("51ee432d471dee580a000001"),
-      "author": "user2",
+      "_id": ObjectId("51f00821471dee241e000001"),
+      "title": "abc",
+      "content": "&lt;p&gt;\r\n\tfj kaljf ljaslfkj ksla,fjk lasjfkl jsakdlfj lkajfslkasfklj saklfj,k sdjmfkldsjakl fjklasj fls&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-24T17:00:17.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "abc-51f00821471dee241e000000",
+      "description": "fk jalkfjl kjflaj lfj lajflkajs lkfja",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3a0cad87459c40a000019"),
         "$db": "yesocl"
-      },
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tóm tắt view nhận định tuần 15-19\/07&lt;\/strong&gt;: &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&quot;&gt;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&lt;\/a&gt;&lt;br \/&gt;\r\n\t…theo phân tích của chúng tôi thì mục tiêu ngắn hạn của đợt tăng lần này nằm ở vùng 505-507 đối với Vnindex và vùng 64-65-4 đối với Hnxindex, do đó nhà đầu tư nên thận trọng khi cả hai chỉ số tiếp cận vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChỉ số VNIndex tăng khá mạnh trong phiên cuối tuần và bức phá ngưỡng kháng cự 498-500, khối lượng duy trì ở mức trung bình cho thấy áp lực bán ra đã được hấp thụ khá tốt trong những phiên trước. Theo quan sát của chúng tôi, thị trường vẫn trong giai đoạn phân hóa mạnh, dòng tiền chỉ tập trung vào các mã largecap như MSN, VNM, GAS, BVH… Trong khi đó, HNXIndex vẫn tiếp tục đi ngang và chưa thể bức phá được vùng 63.5. Chúng tôi cho rằng chỉ số Vnindex sẽ test lại vùng 500( tương đương đường MA50) trong phiên đầu tuần, nếu thanh khoản vẫn tiếp tục duy trì ổn định, thì xu hướng tăng sẽ rõ ràng hơn. Tuy nhiên, như các bản tin trước, chúng tôi đặc biệt lưu ý ngưỡng kháng cự 507, nhà đầu tư cần thận trọng khi Vnindex đi vào vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTheo đồ thị tuần, hai chỉ số đã hình thành các cây nến tích cực, và khối lượng có sự cải thiện rõ rệt. Vnindex đã bức phá thành công đường MA20 với thanh khoản cao cho thấy xu hướng trung hạn đang có chuyển biến tích cực. Chúng tôi tiếp tục chờ sự cộng hưởng từ chỉ số HNxindex để có thể xác nhận xu hướng trung hạn được bền vững. Do đó, nhà đầu tư trung hạn chỉ nên tiếp tục duy trì mức độ giải ngân thăm dò trong những nhịp điều chỉnh sắp tới trước khi thị trường xác nhận xu thế tăng bền vững.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẫn giữ quan điểm như trong các bản tin trước, nhà đầu tư có thể tiếp tục gia tăng tỉ trọng trong những nhịp điều chỉnh của thị trường, tuy nhiên nên cân nhắc tránh mua đuổi khi Vnindex tiệm cận vùng cản 507.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã cơ bản đang được tích lũy tốt .&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "created": ISODate("2013-07-23T08:47:41.0Z"),
-      "description": "Tóm tắt view nhận định tuần 15-19\/07...\r\n",
-      "email": "user2@test.com",
-      "slug": "lang-kinh-yestoc-tuan-22-2607-da-tang-tiep-tuc-duoc-cung-co-51ee432d471dee580a000000",
-      "status": true,
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee432d471dee580a000001\/avatar.jpg",
+      }
+    },
+    {
+      "_id": ObjectId("51ee432d471dee580a000001"),
       "title": "Lăng kính Yestoc tuần 22-26\/07: “đà tăng tiếp tục được củng cố”",
+      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tóm tắt view nhận định tuần 15-19\/07&lt;\/strong&gt;: &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&quot;&gt;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&lt;\/a&gt;&lt;br \/&gt;\r\n\t…theo phân tích của chúng tôi thì mục tiêu ngắn hạn của đợt tăng lần này nằm ở vùng 505-507 đối với Vnindex và vùng 64-65-4 đối với Hnxindex, do đó nhà đầu tư nên thận trọng khi cả hai chỉ số tiếp cận vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChỉ số VNIndex tăng khá mạnh trong phiên cuối tuần và bức phá ngưỡng kháng cự 498-500, khối lượng duy trì ở mức trung bình cho thấy áp lực bán ra đã được hấp thụ khá tốt trong những phiên trước. Theo quan sát của chúng tôi, thị trường vẫn trong giai đoạn phân hóa mạnh, dòng tiền chỉ tập trung vào các mã largecap như MSN, VNM, GAS, BVH… Trong khi đó, HNXIndex vẫn tiếp tục đi ngang và chưa thể bức phá được vùng 63.5. Chúng tôi cho rằng chỉ số Vnindex sẽ test lại vùng 500( tương đương đường MA50) trong phiên đầu tuần, nếu thanh khoản vẫn tiếp tục duy trì ổn định, thì xu hướng tăng sẽ rõ ràng hơn. Tuy nhiên, như các bản tin trước, chúng tôi đặc biệt lưu ý ngưỡng kháng cự 507, nhà đầu tư cần thận trọng khi Vnindex đi vào vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTheo đồ thị tuần, hai chỉ số đã hình thành các cây nến tích cực, và khối lượng có sự cải thiện rõ rệt. Vnindex đã bức phá thành công đường MA20 với thanh khoản cao cho thấy xu hướng trung hạn đang có chuyển biến tích cực. Chúng tôi tiếp tục chờ sự cộng hưởng từ chỉ số HNxindex để có thể xác nhận xu hướng trung hạn được bền vững. Do đó, nhà đầu tư trung hạn chỉ nên tiếp tục duy trì mức độ giải ngân thăm dò trong những nhịp điều chỉnh sắp tới trước khi thị trường xác nhận xu thế tăng bền vững.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẫn giữ quan điểm như trong các bản tin trước, nhà đầu tư có thể tiếp tục gia tăng tỉ trọng trong những nhịp điều chỉnh của thị trường, tuy nhiên nên cân nhắc tránh mua đuổi khi Vnindex tiệm cận vùng cản 507.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã cơ bản đang được tích lũy tốt .&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-23T08:47:41.0Z"),
       "updated": ISODate("2013-07-23T16:33:23.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "lang-kinh-yestoc-tuan-22-2607-da-tang-tiep-tuc-duoc-cung-co-51ee432d471dee580a000000",
+      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee432d471dee580a000001\/avatar.jpg",
+      "description": "Tóm tắt view nhận định tuần 15-19\/07...\r\n",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51d3a0cad87459c40a000019"),
         "$db": "yesocl"
       }
     },
@@ -1367,8 +1390,8 @@ db.getCollection("branch").insert({
         "$db": "yesocl"
       },
       "slug": "lai-suat-omo-ve-7-percent-ngan-hang-nha-nuoc-don-dap-bom-von-51ee4233471dee640a000000",
-      "description": "Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước...\r\n",
       "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee4233471dee640a000001\/thumb.jpg",
+      "description": "Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước...\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3a0cad87459c40a000019"),
@@ -1390,8 +1413,8 @@ db.getCollection("branch").insert({
         "$db": "yesocl"
       },
       "slug": "du-doan-dien-bien-tai-cau-truc-he-thong-ngan-hang-rat-cham-51ee41d0471dee300b000000",
-      "description": "Chúng tôi tin rằng, dù phát biểu thế nào trước công chúng đi nữa...\r\n",
       "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee41d0471dee300b000001\/thumb.jpg",
+      "description": "Chúng tôi tin rằng, dù phát biểu thế nào trước công chúng đi nữa...\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3d0c0d874591406000001"),
@@ -1413,8 +1436,8 @@ db.getCollection("branch").insert({
         "$db": "yesocl"
       },
       "slug": "marc-faber-viet-nam-se-la-mot-trong-nhung-ttck-tot-nhat-2013-51ee410b471dee200b000000",
-      "description": "Marc Faber, người dự báo chính xác sự sụp đổ của thị trường chứng khoán.\r\n",
       "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee410b471dee200b000001\/thumb.jpg",
+      "description": "Marc Faber, người dự báo chính xác sự sụp đổ của thị trường chứng khoán.\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3d0d6d874591406000002"),
@@ -1436,8 +1459,8 @@ db.getCollection("branch").insert({
         "$db": "yesocl"
       },
       "slug": "lang-kinh-yestoc-phien-2207-han-che-mua-duoi-51ee3492471dee400b000000",
-      "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường tiếp tục diễn biến phân hóa rõ rệt.\r\n",
       "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee3492471dee400b000001\/thumb.jpg",
+      "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường tiếp tục diễn biến phân hóa rõ rệt.\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3ceced874596804000000"),
@@ -1459,8 +1482,8 @@ db.getCollection("branch").insert({
         "$db": "yesocl"
       },
       "slug": "lang-kinh-yestoc-3105-chung-toi-van-duy-tri-quan-diem-than-trong-51ea5a44471dee1c0a000004",
-      "description": "Vượt 498 khả năng tăng ngắn hạn lên 512.5. kháng cự cao hơn là 530.\r\n",
       "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ea5a44471dee1c0a000005\/thumb.png",
+      "description": "Vượt 498 khả năng tăng ngắn hạn lên 512.5. kháng cự cao hơn là 530.\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3ceced874596804000000"),
@@ -3245,7 +3268,7 @@ db.getCollection("user").insert({
       "status": true,
       "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/51eeb4aa471dee2c0b000004\/avatar.jpg",
       "title": "Phân tích, nhận định thị trường trước phiên giao dịch 19\/06\/2013",
-      "updated": ISODate("2013-07-23T16:52:07.0Z"),
+      "updated": ISODate("2013-07-24T08:24:07.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
