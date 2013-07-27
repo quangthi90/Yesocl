@@ -1,35 +1,85 @@
 <?php
 class ModelToolCache extends Model {
-	public function setPost($type_obj, $object) {
-		$list_post_data = $object->formatToCache();
-		print("<pre>"); var_dump($list_post_data); exit;
-		switch ($type_obj) {
-			case 'branch':
-				$folder_link = $this->config->get('branch')['default']['cache_link'];
-				$folder_name = $this->config->get('post')['default']['cache_folder'];
-				$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId() . '/';
-				foreach ( $list_post_data as $post_data ) {
-					$this->cache->set( $post_data['page'], $post_data['object'])
-				}
-				break;
+	/**
+	 * Create cache for Post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Post
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string type ID
+	 * @return: Array Object Post
+	 */
+	public function setPost($post, $type_post = 'branch', $type_id) {
+		$list_post_data = $post->formatToCache();
 
-			case 'group':
-				# code...
-				break;
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post->getId() . '/';
 
-			case 'user':
-				# code...
-				break;
+		foreach ( $list_post_data as $post_data ) {
+			$this->cache->set( $post_data['page'], $post_data['object'], $path );
 		}
 		
 		return $list_post_data;
 	}
 
-	public function getPost($paging = 1, $folder){
-		return $this->cache->get($paging, $folder);
+	/**
+	 * Set 60 last post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- object type
+	 * @return: Array Object Post
+	 */
+	public function updateLastPosts($type_post = 'branch', $type, $post_id = 0) {
+		$limit = 60;
+
+		$posts = $type->getPosts();
+		$post_length = count($posts);
+
+		for ( $i = 0; $i < 60 && $i < $post_length; $i++ ){
+			$post = $posts[$i];
+
+			if ( $post->getId() == $post_id || $this->getPost(1, $post->getId(), $type_post, $type->getId()) == null ){
+				$this->setPost( $post, $type_post, $type->getId() );
+			}
+		}
+
+		return true;
 	}
 
-	public function deletePost($folder){
+	/**
+	 * Get post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * By ID
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- int page of comment (50 comments / page)
+	 *	- string Post ID
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string Type ID
+	 * @return: Array Object Post
+	 */
+	public function getPost($paging = 1, $post_id, $type_post, $type_id){
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post->getId() . '/';
+
+		return $this->cache->get($paging, $path);
+	}
+
+	public function deletePost($post_id, $type_post, type_id){
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $folder);
 	}
@@ -48,12 +98,12 @@ class ModelToolCache extends Model {
 	}
 
 	/**
-	* Create cache for Branch
-	* 2013/07/24
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @param: Object Branch
-	* @return: Array Object Branch
-	*/
+	 * Create cache for Branch
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: Object Branch
+	 * @return: Array Object Branch
+	 */
 	public function setBranch( $branch ){
 		$object_data = $branch->formatToCache();
 		
@@ -70,13 +120,13 @@ class ModelToolCache extends Model {
 	}
 
 	/**
-	* Delete cache of Branch
-	* Include all cache follow Branch such as posts, comments...
-	* 2013/07/24
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @param: Object Branch
-	* @return: Array Object Branch
-	*/
+	 * Delete cache of Branch
+	 * Include all cache follow Branch such as posts, comments...
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: Object Branch
+	 * @return: Array Object Branch
+	 */
 	public function deleteBranch( $branch_id ){
 		//-- link of cache Folder of Branch --
 		$cache_link = $this->config->get('branch')['default']['cache_link'];

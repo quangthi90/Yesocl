@@ -5,26 +5,26 @@ use MongoId;
 
 class ModelBranchPost extends Doctrine {
 	/**
-	* Add new Post of Branch to Database
-	* 2013/07/24
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @param: 
-	*	- string Branch ID
-	*	- array Thumb
-	*	- array data
-	* 	{
-	*		string Title 		-- required
-	*		string Company ID 	-- required
-	*		string User ID 		-- required
-	*		string Category ID 	-- required
-	*		string Description 	-- required
-	*		string Content 		-- required
-	*		bool Status
-	* 	}
-	* @return: bool
-	*	- true: success
-	*	- false: not success
-	*/
+	 * Add new Post of Branch to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Branch ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function addPost( $branch_id, $data = array(), $thumb = array() ) {
 		// Branch is required
 		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
@@ -99,15 +99,36 @@ class ModelBranchPost extends Doctrine {
 			}
 		}
 
-		// $this->dm->flush();
+		$this->dm->flush();
 
 		//-- Update 50 last posts
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setPost( 'branch', $post );
-		exit;
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post_id );
+		
 		return $post;
 	}
 
+	/**
+	 * Edit Post of Branch to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
 		// Branch is required
 		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array( 'posts.id' => $post_id ) );
@@ -185,9 +206,9 @@ class ModelBranchPost extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$post = $this->model_tool_cache->setPost( $post );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post_id );
 		
-		return $post;
+		return true;
 	}
 
 	public function deletePost( $data = array() ) {

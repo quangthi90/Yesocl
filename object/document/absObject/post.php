@@ -71,7 +71,8 @@ Abstract Class Post {
 	* @return: array Post & Comments
 	*/
 	public function formatToCache(){
-		$limit = 50;
+		$limit_paging = 50;
+		$limit_comment = 200;
 
 		$comment_count = 0;
 		if ( $this->comments ){
@@ -102,10 +103,14 @@ Abstract Class Post {
 			);
 		}
 
-		foreach ( $this->getComments() as $comment ) {
+		$comments = $this->getComments();
+
+		for ( $i = 0; $i < $limit_comment; $i++ ) {
+			$comment = $comments[$i];
+
 			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
 
-			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
+			if ( ($i / $count_paging) == $limit_paging || $i == $comment_count ){
 				$list_post_data[] = array(
 					'object' 	=> $post_data,
 					'page'		=> $count_paging
