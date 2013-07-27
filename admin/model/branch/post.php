@@ -229,9 +229,7 @@ class ModelBranchPost extends Doctrine {
 
 					// remove cache
 					$this->load->model('tool/cache');
-					$folder_link = $this->config->get('branch')['default']['cache_link'];
-					$folder_name = $this->config->get('post')['default']['cache_folder'];
-					$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+					$this->model_tool_cache->deletePost( $id, $this->config->get('post')['type']['branch'], $branch->getId() );
 
 					$branch->getPosts()->removeElement( $post );
 				}

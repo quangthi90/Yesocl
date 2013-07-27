@@ -105,7 +105,7 @@ Abstract Class Post {
 
 		$comments = $this->getComments();
 
-		for ( $i = 0; $i < $limit_comment; $i++ ) {
+		for ( $i = 0; $i < $limit_comment && $i < $comment_count; $i++ ) {
 			$comment = $comments[$i];
 
 			$post_data['comments'][$comment->getId()] = $comment->formatToCache();

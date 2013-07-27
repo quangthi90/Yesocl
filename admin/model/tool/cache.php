@@ -74,14 +74,27 @@ class ModelToolCache extends Model {
 	public function getPost($paging = 1, $post_id, $type_post, $type_id){
 		$folder_link = $this->config->get($type_post)['default']['cache_link'];
 		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post->getId() . '/';
+		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post_id . '/';
 
 		return $this->cache->get($paging, $path);
 	}
 
-	public function deletePost($post_id, $type_post, type_id){
+	/**
+	 * Delete Post
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string Type ID
+	 */
+	public function deletePost($post_id, $type_post, $type_id){
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post_id . '/';
+		
 		$this->load->model('tool/image');
-		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $folder);
+		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);
 	}
 
 	public function setUser($object) {
