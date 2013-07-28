@@ -2,6 +2,27 @@
 use Document\Group\Post;
 
 class ModelGroupPost extends Doctrine {
+	/**
+	 * Add new Post of Group to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Group ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function addPost( $group_id, $data = array(), $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
@@ -66,16 +87,34 @@ class ModelGroupPost extends Doctrine {
 
 		$this->dm->flush();
 
+		//-- Update 60 last posts
 		$this->load->model('tool/cache');
-		$folder_link = $this->config->get('group')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post_id );
 		
 		return true;
 	}
 
+	/**
+	 * Edit Post of Group to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
@@ -134,12 +173,8 @@ class ModelGroupPost extends Doctrine {
 		
 		$this->dm->flush();
 
-		$this->load->model('tool/cache');
-		$folder_link = $this->config->get('group')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );
+		$this->load->model( 'tool/cache' );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post_id );
 		
 		return true;
 	}
@@ -163,11 +198,7 @@ class ModelGroupPost extends Doctrine {
 
 					// remove cache
 					$this->load->model('tool/cache');
-					$folder_link = $this->config->get('group')['default']['cache_link'];
-					$folder_name = $this->config->get('post')['default']['cache_folder'];
-					$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
-
-					$this->model_tool_cache->deletePost( $path );
+					$this->model_tool_cache->deletePost( $id, $this->config->get('post')['type']['group'], $group->getId() );
 
 					$group->getPosts()->removeElement( $post );
 				}
