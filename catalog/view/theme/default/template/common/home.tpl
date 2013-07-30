@@ -21,10 +21,9 @@
 		{% set posts = all_posts[branch.id] %}
 		{#% if posts|length > 0 %#}
 		<div class="feed-block">
-            <div class="block-header">
-                <a class="fl" href="#">{{ branch.name }}</a>
-                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
-            </div>
+            <h3 class="block-title">
+                <a href="#"><i class="icon-th-large"></i> Test{{ branch.name }}</a>
+            </h3>
             {% if style == 1 %}
             	{{ block('post_common_post_block_ex1') }}
             {% else %}
