@@ -38,7 +38,6 @@
 
 {% block post_common_form_status_javascript %}
 <script type="text/javascript" src="catalog/view/javascript/status.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/libs/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
 	$('#post_new').click(function() {
 		$('#post_advance').bPopup( 
