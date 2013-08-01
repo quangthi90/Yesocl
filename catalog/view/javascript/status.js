@@ -76,8 +76,8 @@
 	function initToolbarBootstrapBindings() {
         $('a[title]').tooltip({ container: 'body' });
         $('.dropdown-menu input').click(function () { 
-			return false; }
-		).change(function () { 
+			return false; 
+		}).change(function () { 
 			$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle'); 
 		}).keydown('esc', function () {
 			this.value = ''; 
@@ -85,7 +85,8 @@
 		});
         $('[data-role=magic-overlay]').each(function () {
             var overlay = $(this), target = $(overlay.data('target'));
-            overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+            overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset())
+            .width(target.outerWidth()).height(target.outerHeight());
         });
     };
 

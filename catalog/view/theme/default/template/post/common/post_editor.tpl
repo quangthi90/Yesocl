@@ -46,11 +46,10 @@
         </a><a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="icon-repeat">
         </i></a>
     </div>
-    <!--<div class="btn-group">
+    <div class="btn-group">
         <a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn"><i class="icon-picture">
         </i></a>
-        <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
+        <input type="file" data-no-uniform="true" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" />
     </div>
-    -->
 </div>
 {% endblock %}

@@ -16,42 +16,47 @@
 						<button type="button" id="post_new" class="btn btn-success btn-status">Post</button>
 					</div>
  			</div>	
-		</div>		
-		<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 50px; left: 100px;background-color: #fff;display:none;">
-			<a href="#" class="b-close" title="Close"><i class="icon-remove"></i></a>
-			<div class="y-dlg">
-				<form>
-					<div class="dlg-title">
-				        <i class="icon-yes"></i> Compose your post  
-				    </div>
-				    <div class="dlg-content">
-				    	<div class="alert alert-error top-warning hidden">Warning!!</div>
-				    	<div class="control-group">
-				    		<label for="title" class="control-label">Title</label>
-				    		<div class="controls">
-				    			<input style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
-				    		</div>
+		</div>	
+	</form>		
+	<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 50px; left: 100px;background-color: #fff;display:none;">
+		<a href="#" class="b-close" title="Close"><i class="icon-remove"></i></a>
+		<div class="y-dlg">
+			<form autocomplete="off">
+				<div class="dlg-title">
+			        <i class="icon-yes"></i> Compose your post  
+			    </div>
+			    <div class="dlg-content">
+			    	<div class="alert alert-error top-warning hidden">Warning!!</div>
+			    	<div class="control-group">
+			    		<label for="title" class="control-label">Title</label>
+			    		<div class="controls">
+			    			<input style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
 			    		</div>
-			    		<div class="control-group">
-			    			<label class="control-label">Content</label>
-					    	{{block('post_common_post_editor')}}
-					    	<div class="y-editor">
-					    	</div>
+		    		</div>
+		    		<div class="control-group">
+		    			<label class="control-label">Content</label>
+				    	{{block('post_common_post_editor')}}
+				    	<div class="y-editor" id="post-adv-editor">
+				    		Your content ...
 				    	</div>
-				    	<div class="control-group">
-				    		<label for="captcha" class="control-label">Captcha check</label><div class="controls">
-				    			<input class="captchainput" placeholder="Insert captcha..." type="text" name="captcha" id="captcha">
-			    			</div>
+			    	</div>
+			    	<div class="control-group captcha">
+			    		<label for="captcha" class="control-label">Captcha check</label><div class="controls">
+			    		<img class="captcha-img" src="http://www.captcha.net/duo_logo.png" 
+			    			width="150px" height="80px" />
+		    			<input class="captchainput" placeholder="Insert captcha..." type="text" name="captcha" id="captcha" >
 		    			</div>
-				    </div>
-				    <div class="dlg-footer">
-				    	<div class="controls">
-			                <button type="submit" class="btn btn-success btn-reg">Post</button>
-			            </div>
-				    </div>
-				</form>			    
-			</div>
-	</form>	
+	    			</div>
+			    </div>
+			    <div class="dlg-footer">
+			    	<div class="controls">
+			    		<button type="reset" class="btn btn-success btn-reset">Reset</button>
+		                <button type="submit" class="btn btn-success">Post</button>
+		            </div>
+			    </div>
+			</form>			    
+		</div>
+	</div>
 {% endblock %}
 
 {% block post_common_form_status_javascript %}
@@ -64,12 +69,20 @@
 			{
 				follow: [false, false],
 				modalClose: false,
-				speed: 500,
+				speed: 100,
             	transition: 'slideDown',
-            	modalColor : '#55ef13',
-            	opacity: '0.3'
+            	modalColor : '#000',
+            	opacity: '0.5'
 			}
 		);		
 	});	
+	$('button.btn-reset').click(function() {
+		var form = $(this).parents('form').first(); 
+		if(form.length > 0) {
+			var editor = form.find('.y-editor');console.log(form.html());
+			editor.html('');
+			editor.focus();
+		}
+	});
 </script>
 {% endblock %}
