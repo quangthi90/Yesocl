@@ -8,12 +8,16 @@
 			<div class="post_tool">
 				<div class="row-fluid">
 					<div class="span8 post_new_control">
-						<a href="#" title="Chèn hình">
-							<i class="icon-camera"></i>
+						<a href="#" title="Insert images" id="insert-new-img">
+							<i class="icon-camera icon-2x"></i>
+							<input type="file" data-no-uniform="true" name="img-attach" class="img-attach" 	/>
+						</a>
+						<a href="#" title="Advance post" id="post_new_adv">
+							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<button type="button" id="post_new" class="btn btn-success btn-status">Post</button>
+						<button type="button" class="btn btn-success btn-status">Post</button>
 					</div>
  			</div>	
 		</div>	
@@ -64,7 +68,7 @@
 <script type="text/javascript" src="catalog/view/javascript/libs/bootstrap-wysiwyg.js"></script>
 <script type="text/javascript" src="catalog/view/javascript/status.js"></script>
 <script type="text/javascript">	    
-	$('#post_new').click(function() {
+	$('#post_new_adv').click(function() {
 		$('#post_advance').bPopup( 
 			{
 				follow: [false, false],
