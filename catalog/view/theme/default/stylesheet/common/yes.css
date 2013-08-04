@@ -342,9 +342,18 @@ label.in-line{
     left: 152px;
     right:0px;
     bottom: 68px;    
-    background: #f4f4f4;
+    /*background: #f4f4f4;*/
     /*background: #ffffff url(../../image/content_bg.png) repeat-x middle left;*/
     /*background: #ffffff url(../../image/b-bg.png) repeat top left;*/
+    background: #f0f3fa; /* Old browsers */
+background: -moz-linear-gradient(top,  #f0f3fa 0%, #c6d7e1 49%, #748fba 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f0f3fa), color-stop(49%,#c6d7e1), color-stop(100%,#748fba)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #f0f3fa 0%,#c6d7e1 49%,#748fba 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #f0f3fa 0%,#c6d7e1 49%,#748fba 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #f0f3fa 0%,#c6d7e1 49%,#748fba 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #f0f3fa 0%,#c6d7e1 49%,#748fba 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f3fa', endColorstr='#748fba',GradientType=0 ); /* IE6-9 */
+
 }
 
 #y-main-content{    
@@ -372,15 +381,16 @@ label.in-line{
 #y-sidebar {
     width: 150px;
     /*background: #265607 url(../../image/sidebar_bg.png) repeat top left;*/
-    background: rgb(0, 77, 21);
+    /*background: rgb(0, 77, 21);*/
     position: fixed;
     top: 0px;    
     bottom: 67px;
     z-index: 10;
     color: #fff;
     text-align: center;     
-    border-right: 2px solid #001000;
+    border-right: 2px solid #33CC66;
     padding-bottom: 20px;
+    background: #41506F;
 }
   
   #y-sidebar .sidebar-wrapper {
@@ -440,14 +450,7 @@ label.in-line{
 					max-height: 50px;
 					line-height: 30px;
 					border-top: 1px solid #629843;
-					background: #74b93c; /* Old browsers */
-					background: -moz-linear-gradient(top,  #74b93c 0%, #519839 100%); /* FF3.6+ */
-					background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#74b93c), color-stop(100%,#519839)); /* Chrome,Safari4+ */
-					background: -webkit-linear-gradient(top,  #74b93c 0%,#519839 100%); /* Chrome10+,Safari5.1+ */
-					background: -o-linear-gradient(top,  #74b93c 0%,#519839 100%); /* Opera 11.10+ */
-					background: -ms-linear-gradient(top,  #74b93c 0%,#519839 100%); /* IE10+ */
-					background: linear-gradient(to bottom,  #74b93c 0%,#519839 100%); /* W3C */
-					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b93c', endColorstr='#519839',GradientType=0 ); /* IE6-9 */
+          background: #33CC66;
 				}
 
 					#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name > a{
@@ -584,6 +587,15 @@ label.in-line{
     box-shadow: 0 0 5px #ccc;
     */
     position: relative;
+    cursor: pointer;
+}
+
+.post:hover,
+.post:hover .post_footer,
+.post:hover a,
+.post:hover i {
+  background: #33CC66 !important;
+  color: #fff !important;
 }
 
 .post:hover {
@@ -624,10 +636,10 @@ label.in-line{
     line-height: 1.4em;
 }
 .post .post_header .post_title a {
-  color: #31790E;
+  color: #41506F;
 }
 .post .post_header .post_title a:hover{
-  color: #004D15;
+  color: #fff;
 }
         
 .post .post_body {
@@ -706,7 +718,7 @@ label.in-line{
 
 .sidebar-controls .nav-list > li > a {
   text-shadow: 0px 0px 0px #fff;
-  color: #cdf4d7;
+  color: #33CC66;
   background-color: transparent;
   font-size: 12px;
   font-weight: bold;
@@ -716,7 +728,7 @@ label.in-line{
 
 .sidebar-controls .nav-list > li > a > i {
   font-size: 20px;
-  background-color: #3b8f39;
+  background-color: #33CC66;
   color: #fff;
   text-align: center;
   vertical-align: middle;
@@ -738,7 +750,7 @@ label.in-line{
 .sidebar-controls .nav-list .divider {
   /*border-bottom: 1px solid #054105;*/
   border-bottom: 1px solid rgb(48, 122, 48);
-  background-color: #000;
+  background-color: #33CC66;
   margin: 5px 0px 5px 0px;
 }
 
@@ -748,7 +760,7 @@ label.in-line{
 .sidebar-controls .nav > li > a:hover, 
 .nav > li > a:focus {
   color: #fff;
-  background-color: #3b8f39;
+  background-color: #33CC66;
 }
 
 .sidebar-controls .nav-list > .active > a > i,
@@ -757,7 +769,7 @@ label.in-line{
 .sidebar-controls .nav > li > a:hover > i, 
 .nav > li > a:focus > i{
   background-color: #fff;
-  color: #3b8f39;
+  color: #33CC66;
 }
 
 /*FORM*/
@@ -985,25 +997,29 @@ label.in-line{
 .feed-block .block-header {
   overflow: hidden;
   padding: 3px 10px;
-  background: #60A63B;
+  /*background: #33CC66;*/
   margin-bottom: 10px;
+  border: 1px solid #33CC66;
 }
 
 .feed-block .block-header  a {
   display: block;
-  color: #fff;
+  color: #33CC66;
   font-weight: bold;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 20px;
   vertical-align: middle;
 }
 
-.feed-block .block-header  a  i {
-  color: #fff;
+.feed-block .block-header a.fr {
+  border: 2px solid;
+  border-radius: 25px 25px 25px 25px;
+  text-align: center;
+  width: 25px;
 }
 
-.feed-block .block-header  a:hover  i  {
-  color: #fff;
+.feed-block .block-header  a  i {
+  color: #33CC66;
 }
 
 .feed-block .block-content {
@@ -1016,12 +1032,16 @@ label.in-line{
   bottom: -20px;
   left: 0px;
   right: -2px;
-  background: #000;
+  background: #33CC66;
   border-top: 1px inset #3B8F39;
 }
 
 .btn-container:hover {
   border-top: 1px inset #1ece18; 
+}
+
+.btn-container a:hover{
+  color: #fff !important;
 }
 
 .btn-container a {
@@ -1099,7 +1119,7 @@ label.in-line{
   background: #fff;
   margin-bottom: 10px;
   overflow: hidden;
-  border: 1px solid #A6D3A5;   
+  border: 1px solid #33CC66;   
 }
 
 .column .feed-container:last-child {
@@ -1120,7 +1140,7 @@ label.in-line{
 
 .post_in_block .post_header{
   padding: 5px 15px;
-  background: #fff;
+  /*background: #fff;*/
   border-top: 1px solid #ddd;
 }
 
