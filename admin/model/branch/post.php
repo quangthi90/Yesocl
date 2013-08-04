@@ -68,9 +68,9 @@ class ModelBranchPost extends Doctrine {
 
 		// Status
 		if ( isset( $data['status'] ) ) {
-			$data['status'] = (int)$data['status'];
+			$data['status'] = $data['status'];
 		}else {
-			$data['status'] = 0;
+			$data['status'] = false;
 		}
 
 		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
@@ -171,9 +171,9 @@ class ModelBranchPost extends Doctrine {
   		
 		// Status
 		if ( isset( $data['status'] ) ) {
-			$data['status'] = (int)$data['status'];
+			$data['status'] = $data['status'];
 		}else {
-			$data['status'] = 0;
+			$data['status'] = false;
 		}
 
 		$post = $branch->getPostById( $post_id );
