@@ -71,8 +71,7 @@ Abstract Class Post {
 	* @return: array Post & Comments
 	*/
 	public function formatToCache(){
-		$limit_paging = 50;
-		$limit_comment = 200;
+		$limit = 200;
 
 		$comment_count = 0;
 		if ( $this->comments ){
@@ -89,40 +88,8 @@ Abstract Class Post {
 			'user_id'		=> $this->getUser()->getId(),
 			'thumb'			=> $this->getThumb()
 		);
-		
-		$list_post_data = array();
 
-		$post_data['comments'] = array();
-		$count_paging = 1;
-		$i = 1;
-
-		if ( $comment_count == 0 ){
-			$list_post_data[] = array(
-				'object' 	=> $post_data,
-				'page'		=> $count_paging
-			);
-		}
-
-		$comments = $this->getComments();
-
-		for ( $i = 0; $i < $limit_comment && $i < $comment_count; $i++ ) {
-			$comment = $comments[$i];
-
-			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
-
-			if ( ($i / $count_paging) == $limit_paging || $i == $comment_count ){
-				$list_post_data[] = array(
-					'object' 	=> $post_data,
-					'page'		=> $count_paging
-				);
-				$post_data['comments'] = array();
-				$count_paging++;
-			}
-
-			$i++;
-		}
-
-		return $list_post_data;
+		return $post_data;
 	}
 
 	public function getId(){

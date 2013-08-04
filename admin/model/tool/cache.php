@@ -20,9 +20,8 @@ class ModelToolCache extends Model {
 		$folder_name = $this->config->get('post')['default']['cache_folder'];
 		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post->getId() . '/';
 
-		foreach ( $list_post_data as $post_data ) {
-			$this->cache->set( $post_data['page'], $post_data['object'], $path );
-		}
+		$file_name = $this->config->get('common')['default']['main_object_post'];
+		$this->cache->set( $file_name, $post_data, $path );
 		
 		return $list_post_data;
 	}
