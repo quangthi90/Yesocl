@@ -14,7 +14,7 @@ class ControllerBranchComment extends Controller {
 		if ( !isset($this->request->get['post_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			
-			$this->redirect( $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		
@@ -35,7 +35,7 @@ class ControllerBranchComment extends Controller {
 		if ( !isset($this->request->get['post_id']) ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			
-			$this->redirect( $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->load->model( 'branch/comment' );
@@ -44,7 +44,7 @@ class ControllerBranchComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_Branch_comment->addComment( $this->request->post, $this->request->get['post_id'] ) == false ){
+			if ( $this->model_branch_comment->addComment( $this->request->post, $this->request->get['post_id'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
 				$this->redirect( $this->url->link( 'branch/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
@@ -69,11 +69,11 @@ class ControllerBranchComment extends Controller {
 		if ( isset($this->request->get['post_id']) ){
 			$cancel = $this->url->link( 'branch/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		}else {
-			$cancel = $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL');
+			$cancel = $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL');
 		}
 
 		if ( !isset($this->request->get['comment_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_Branch');
+			$this->session->data['error_warning'] = $this->language->get('error_branch');
 			
 			$this->redirect( $cancel );
 		}
@@ -84,7 +84,7 @@ class ControllerBranchComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_Branch_comment->editComment( $this->request->get['comment_id'], $this->request->post ) == false ){
+			if ( $this->model_branch_comment->editComment( $this->request->get['comment_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
 				$this->redirect( $cancel );
@@ -107,7 +107,7 @@ class ControllerBranchComment extends Controller {
 		if ( isset($this->request->get['post_id']) ){
 			$cancel = $this->url->link( 'branch/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 		}else {
-			$cancel = $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL');
+			$cancel = $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL');
 		}
 		
 		$this->load->model( 'branch/comment' );
@@ -116,7 +116,7 @@ class ControllerBranchComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_Branch_comment->deletePost( $this->request->post );
+			$this->model_branch_comment->deletePost( $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $cancel );
 		}
@@ -152,6 +152,18 @@ class ControllerBranchComment extends Controller {
 			$page = 1;
 		}
 
+		// Get branch ID
+		$branch_id = 0;
+		if ( isset($this->request->get['branch_id']) && !empty($this->request->get['branch_id']) ){
+			$branch_id = $this->request->get['branch_id'];
+		}
+
+		// Check branch exist
+		if ( $branch_id == 0 ){
+			$this->session->data['error_warning'] = $this->language->get('error_branch');
+			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
+		}
+
 		// Get Post ID
 		$post_id = 0;
 		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
@@ -161,18 +173,23 @@ class ControllerBranchComment extends Controller {
 		// Check Post exist
 		if ( $post_id == 0 ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('branch/post', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->load->model( 'branch/Branch' );
-		$Branch = $this->model_Branch_Branch->getBranchByPostId( $post_id );
+		$this->load->model( 'branch/branch' );
+		$branch = $this->model_branch_branch->getBranch( $branch_id );
 
-		if ( !$Branch ){
+		if ( !$branch ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$post = $Branch->getPostById( $post_id );
+		$post = $branch->getPostById( $post_id );
+
+		if ( !$post ){
+			$this->session->data['error_warning'] = $this->language->get('error_post');
+			$this->redirect( $this->url->link('post/post', 'token=' . $this->session->data['token'], 'SSL') );
+		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -181,13 +198,13 @@ class ControllerBranchComment extends Controller {
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get( 'text_Branch' ),
-			'href'      => $this->url->link( 'branch/Branch', 'token=' . $this->session->data['token'], 'SSL' ),
+       		'text'      => $this->language->get( 'text_branch' ),
+			'href'      => $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'branch/post', 'branch_id=' . $Branch->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/post', 'branch_id=' . $branch->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
@@ -219,9 +236,9 @@ class ControllerBranchComment extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'branch/comment/insert', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'branch/comment/delete', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'branch/post', 'branch_id=' . $Branch->getId() . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'branch/comment/insert', 'post_id=' . $post_id . '&branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'branch/comment/delete', 'post_id=' . $post_id . '&branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'branch/post', 'branch_id=' . $branch->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 
 		// Comment
 		$comments = $post->getComments();
@@ -236,7 +253,7 @@ class ControllerBranchComment extends Controller {
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'branch/comment/update', 'comment_id=' . $comments[$i]->getId() . '&post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'branch/comment/update', 'comment_id=' . $comments[$i]->getId() . '&branch_id=' . $branch_id . '&post_id=' . $post_id . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -255,7 +272,7 @@ class ControllerBranchComment extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('branch/comment', '&post_id=' . $post->getId() . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
+		$pagination->url = $this->url->link('branch/comment', 'branch_id=' . $branch_id . '&post_id=' . $post_id . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -298,11 +315,37 @@ class ControllerBranchComment extends Controller {
 			$this->data['error_author'] = '';
 		}
 
-		$this->load->model( 'branch/post' );
-		$post = $this->model_Branch_post->getPost( $this->request->get['post_id'] );
-		if ( empty( $post ) ) {
+		$branch_id = 0;
+		if ( isset($this->request->get['branch_id']) ){
+			$branch_id = $this->request->get['branch_id'];
+		}
+
+		$post_id = 0;
+		if ( isset($this->request->get['post_id']) ){
+			$post_id = $this->request->get['post_id'];
+		}
+
+		if ( $branch_id == 0 ){
+			$this->session->data['error_warning'] = $this->language->get('error_branch');
+			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
+		}
+
+		if ( $post_id == 0 ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('branch/Branch', 'token=' . $this->session->data['token'], 'SSL') );
+			$this->redirect( $this->url->link('branch/post', 'branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL') );
+		}
+
+		$this->load->model( 'branch/branch' );
+		$branch = $this->model_branch_branch->getBranch( $branch_id );
+		if ( !$branch ){
+			$this->session->data['error_warning'] = $this->language->get('error_branch');
+			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
+		}
+
+		$post = $branch->getPostById( $post_id );
+		if ( !$post ){
+			$this->session->data['error_warning'] = $this->language->get('error_post');
+			$this->redirect( $this->url->link('branch/post', 'branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL') );	
 		}
 
 		// breadcrumbs
@@ -312,18 +355,18 @@ class ControllerBranchComment extends Controller {
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get( 'text_Branch' ),
-			'href'      => $this->url->link( 'branch/Branch', 'token=' . $this->session->data['token'], 'SSL' ),
+       		'text'      => $this->language->get( 'text_branch' ),
+			'href'      => $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'branch/post', 'branch_id=' . $this->model_Branch_post->getBranchId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') ),
+			'href'      => $this->url->link( 'branch/post', 'branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL'),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'branch/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/comment', 'branch_id=' . $branch_id . '&post_id=' . $post_id . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
