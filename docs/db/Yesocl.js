@@ -201,7 +201,7 @@ db.getCollection("admin_group").insert({
   "name": "Supper Admin",
   "permissions": [
     {
-      "_id": ObjectId("51ebd212471deec80a000001"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000001"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ef471deeac1f000000"),
@@ -231,7 +231,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000002"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000002"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -261,7 +261,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000003"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000003"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d38f3cd874592c09000000"),
@@ -291,7 +291,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000004"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000004"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d39389d874590803000000"),
@@ -321,7 +321,37 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000005"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000005"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51fe1a9b471dee0c0b000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("51fe1aa6471dee0c0b000006"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d3942dd874597808000000"),
@@ -351,7 +381,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000006"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000007"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51ea5392471dee1c0a000000"),
@@ -381,7 +411,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000007"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000008"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51e018be471dee1c0a000000"),
@@ -411,7 +441,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000008"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000009"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51828041471dee0808000000"),
@@ -441,7 +471,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000009"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00000a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab55f913db42c12000000"),
@@ -471,7 +501,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00000a"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00000b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516ab59e913db47809000002"),
@@ -501,7 +531,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00000b"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00000c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51e01fe9471dee1c0a000001"),
@@ -531,7 +561,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00000c"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00000d"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a683d471dee480b00001a"),
@@ -561,7 +591,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00000d"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00000e"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a684f471dee480b00001b"),
@@ -591,7 +621,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00000e"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00000f"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -621,7 +651,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00000f"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000010"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -651,7 +681,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000010"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000011"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51d4fab6d874593009000000"),
@@ -681,7 +711,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000011"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000012"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a680e471dee480b000018"),
@@ -711,7 +741,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000012"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000013"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67a8471dee480b000016"),
@@ -741,7 +771,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000013"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000014"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51dd78fb471dee6c09000000"),
@@ -771,7 +801,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000014"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000015"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6823471dee480b000019"),
@@ -801,7 +831,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000015"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000016"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a67d6471dee480b000017"),
@@ -831,7 +861,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000016"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000017"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6882471dee480b00001d"),
@@ -861,7 +891,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000017"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000018"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516a6871471dee480b00001c"),
@@ -891,7 +921,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000018"),
+      "_id": ObjectId("51fe1aa6471dee0c0b000019"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("516df1eb976982440f000000"),
@@ -921,7 +951,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a000019"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00001a"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -951,7 +981,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00001a"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00001b"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("51ebd206471deec80a000000"),
@@ -981,7 +1011,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("51ebd212471deec80a00001b"),
+      "_id": ObjectId("51fe1aa6471dee0c0b00001c"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -1317,8 +1347,148 @@ db.getCollection("branch").insert({
     "$id": ObjectId("51e97c88471dee180a000000"),
     "$db": "yesocl"
   },
-  "name": "Food",
+  "name": "Follower",
   "order": NumberInt(2),
+  "posts": [
+    {
+      "_id": ObjectId("51f655bc471deed40c000001"),
+      "author": "user1",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51f654df471deeb40c000000"),
+        "$db": "yesocl"
+      },
+      "content": "&lt;p&gt;\r\n\tmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-07-29T11:45:00.0Z"),
+      "description": "mmmmmmmmmmmmmmmmmmmmmm",
+      "email": "quangthi_90@yahoo.com.vn",
+      "slug": "mmmmmmmmmmm-51f655bc471deed40c000000",
+      "status": true,
+      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f655bc471deed40c000001\/avatar.jpg",
+      "title": "mmmmmmmmmmm",
+      "updated": ISODate("2013-07-29T11:45:00.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("51f6559a471deee00c000003"),
+      "title": "eeeeeeeee",
+      "content": "&lt;p&gt;\r\n\teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-29T11:44:26.0Z"),
+      "updated": ISODate("2013-07-29T11:44:26.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "eeeeeeeee-51f6559a471deee00c000002",
+      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f6559a471deee00c000003\/avatar.jpg",
+      "description": "eeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51f654df471deeb40c000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("51f65584471deee00c000001"),
+      "title": "dddddddddd",
+      "content": "&lt;p&gt;\r\n\tdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-29T11:44:04.0Z"),
+      "updated": ISODate("2013-07-29T11:44:04.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "dddddddddd-51f65584471deee00c000000",
+      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f65584471deee00c000001\/avatar.jpg",
+      "description": "dddddddddddddddddddd",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51f654df471deeb40c000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("51f65566471deec00c000005"),
+      "title": "cccccccccc",
+      "content": "&lt;p&gt;\r\n\tcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-29T11:43:34.0Z"),
+      "updated": ISODate("2013-07-29T11:43:34.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "cccccccccc-51f65566471deec00c000004",
+      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f65566471deec00c000005\/avatar.jpg",
+      "description": "cccccccccccccccccccc",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51f654df471deeb40c000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("51f6554c471deec00c000003"),
+      "title": "bbbbbbbbbb",
+      "content": "&lt;p&gt;\r\n\tbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-29T11:43:08.0Z"),
+      "updated": ISODate("2013-07-29T11:43:08.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "bbbbbbbbbb-51f6554c471deec00c000002",
+      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f6554c471deec00c000003\/avatar.jpg",
+      "description": "bbbbbbbbbbbbbbbbbbbb",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51f654df471deeb40c000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("51f65533471deec00c000001"),
+      "title": "aaaaa",
+      "content": "&lt;p&gt;\r\n\taaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2013-07-29T11:42:43.0Z"),
+      "updated": ISODate("2013-07-29T11:42:44.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "aaaaa-51f65533471deec00c000000",
+      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f65533471deec00c000001\/avatar.jpg",
+      "description": "aaaaaaaaaaaaaaaaa",
+      "category": {
+        "$ref": "branch_category",
+        "$id": ObjectId("51f654df471deeb40c000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
   "status": true
 });
 db.getCollection("branch").insert({
@@ -1328,30 +1498,9 @@ db.getCollection("branch").insert({
     "$id": ObjectId("51e97c88471dee180a000000"),
     "$db": "yesocl"
   },
-  "name": "Stockin",
+  "name": "Yestoc",
   "order": NumberInt(1),
   "posts": [
-    {
-      "_id": ObjectId("51f00821471dee241e000001"),
-      "title": "abc",
-      "content": "&lt;p&gt;\r\n\tfj kaljf ljaslfkj ksla,fjk lasjfkl jsakdlfj lkajfslkasfklj saklfj,k sdjmfkldsjakl fjklasj fls&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-24T17:00:17.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "abc-51f00821471dee241e000000",
-      "description": "fk jalkfjl kjflaj lfj lajflkajs lkfja",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3a0cad87459c40a000019"),
-        "$db": "yesocl"
-      }
-    },
     {
       "_id": ObjectId("51ee432d471dee580a000001"),
       "title": "Lăng kính Yestoc tuần 22-26\/07: “đà tăng tiếp tục được củng cố”",
@@ -1569,6 +1718,16 @@ db.getCollection("branch_category").insert({
     "$db": "yesocl"
   },
   "order": 13
+});
+db.getCollection("branch_category").insert({
+  "_id": ObjectId("51f654df471deeb40c000000"),
+  "name": "abc",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39bb1d87459c40a000018"),
+    "$db": "yesocl"
+  },
+  "order": NumberInt(0)
 });
 
 /** city records **/
@@ -2723,6 +2882,33 @@ db.getCollection("design_layout").insert({
   "name": "Post of User",
   "path": "user\/post"
 });
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("51fe1a9b471dee0c0b000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Comment of Branch",
+  "path": "branch\/comment"
+});
 
 /** district records **/
 db.getCollection("district").insert({
@@ -3062,6 +3248,33 @@ db.getCollection("street").insert({
 });
 
 /** user records **/
+db.getCollection("user").insert({
+  "_id": ObjectId("51fd28e0471dee8c09000000"),
+  "created": ISODate("2013-08-03T15:59:28.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("51fd28e0471dee8c09000002"),
+      "email": "user10@test.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("51fd28e0471dee8c09000001"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("2010-02-02T23:00:00.0Z"),
+    "sex": NumberInt(2)
+  },
+  "password": "2506f7b2e174d2ab3c62b52cbfed080ca89510b3",
+  "salt": "d95e517f4",
+  "slug": "user-temp",
+  "status": true
+});
 db.getCollection("user").insert({
   "_id": ObjectId("518f5f43471deeb40900001f"),
   "created": ISODate("2013-05-12T09:22:11.0Z"),
