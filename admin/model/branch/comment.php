@@ -1,5 +1,5 @@
 <?php
-use Document\Branch\Comment;
+use Document\AbsObject\Comment;
 
 use MongoId;
 
@@ -64,12 +64,12 @@ class ModelBranchComment extends Doctrine {
 		$post->addComment( $comment );
 
 		$this->dm->flush();
-
+		
 		//-- Update 50 last Comments
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch_id, $post, $comment_id );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getId(), $post, $comment->getId() );
 		
-		return $comment;
+		return true;
 	}
 
 	/**
@@ -138,7 +138,7 @@ class ModelBranchComment extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch_id, $post, $comment_id );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getId(), $post, $comment_id );
 		
 		return true;
 	}

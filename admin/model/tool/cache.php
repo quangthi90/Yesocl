@@ -36,6 +36,7 @@ class ModelToolCache extends Model {
 	 * @param: 
 	 *	- string type post ['branch', 'group', 'user']
 	 *	- object type
+	 *	- string Post ID
 	 * @return: Array Object Post
 	 */
 	public function updateLastPosts($type_post = 'branch', $type, $post_id = 0) {
@@ -47,7 +48,7 @@ class ModelToolCache extends Model {
 		for ( $i = 0; $i < 60 && $i < $post_length; $i++ ){
 			$post = $posts[$i];
 
-			if ( $post->getId() == $post_id || $this->getPost(1, $post->getId(), $type_post, $type->getId()) == null ){
+			if ( $post->getId() == $post_id || $this->getPost($post->getId(), $type_post, $type->getId()) == null ){
 				$this->setPost( $post, $type_post, $type->getId() );
 			}
 		}
@@ -64,18 +65,18 @@ class ModelToolCache extends Model {
 	 * 2013/07/26
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
-	 *	- int page of comment (50 comments / page)
 	 *	- string Post ID
 	 *	- string type post ['branch', 'group', 'user']
 	 *	- string Type ID
 	 * @return: Array Object Post
 	 */
-	public function getPost($paging = 1, $post_id, $type_post, $type_id){
+	public function getPost($post_id, $type_post, $type_id){
 		$folder_link = $this->config->get($type_post)['default']['cache_link'];
 		$folder_name = $this->config->get('post')['default']['cache_folder'];
 		$path = $folder_link . $type_id . '/' . $folder_name . '/' . $post_id . '/';
 
-		return $this->cache->get($paging, $path);
+		$file_name = $this->config->get('common')['default']['main_object_post'];
+		return $this->cache->get($file_name, $path);
 	}
 
 	/**
@@ -94,6 +95,107 @@ class ModelToolCache extends Model {
 		
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);
+	}
+
+	/**
+	 * Create cache for Comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/08/05
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Comment
+	 *	- string Post ID
+	 *	- string type Comment ['branch', 'group', 'user']
+	 *	- string type ID
+	 * @return: Array Object comment
+	 */
+	public function setComment($comment, $post_id, $type_comment = 'branch', $type_id) {
+		$list_comment_data = $comment->formatToCache();
+		
+		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
+		$post_folder = $this->config->get('post')['default']['cache_folder'];
+		$folder_name = $this->config->get('comment')['default']['cache_folder'];
+		$path = $folder_link.$type_id.'/'.$post_folder.'/'.$post_id.'/'.$folder_name.'/';
+		
+		$this->cache->set( $comment->getId(), $comment_data, $path );
+		
+		return $list_comment_data;
+	}
+
+	/**
+	 * Set 50 last comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/08/05
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string type comment ['branch', 'group', 'user']
+	 *	- string type ID
+	 *	- object Post
+	 *	- string Comment ID
+	 * @return: Array Object comment
+	 */
+	public function updateLastComments($type_comment = 'branch', $type_id, $post, $comment_id = 0) {
+		$limit = 50;
+
+		$comments = $post->getComments();
+		$comment_length = count($comments);
+		
+		for ( $i = 0; $i < 60 && $i < $comment_length; $i++ ){
+			$comment = $comments[$i];
+			
+			if ( $comment->getId() == $comment_id || $this->getComment($comment->getId(), $post->getId(), $type_comment, $type_id) == null ){
+				$this->setComment( $comment, $post->getId(), $type_comment, $type_id );
+			}
+		}
+
+		return true;
+	}
+
+	/**
+	 * Get comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * By ID
+	 * 2013/08/05
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string comment ID
+	 *	- string Post ID
+	 *	- string type comment ['branch', 'group', 'user']
+	 *	- string Type ID
+	 * @return: Array Object comment
+	 */
+	public function getComment($comment_id, $post_id, $type_comment, $type_id){
+		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
+		$post_folder = $this->config->get('post')['default']['cache_folder'];
+		$folder_name = $this->config->get('comment')['default']['cache_folder'];
+		$path = $folder_link.$type_id.'/'.$post_folder.'/'.$post_id.'/'.$folder_name.'/';
+		
+		return $this->cache->get($comment_id, $path);
+	}
+
+	/**
+	 * Delete comment
+	 * 2013/08/05
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string comment ID
+	 *	- string post ID
+	 *	- string type comment ['branch', 'group', 'user']
+	 *	- string Type ID
+	 */
+	public function deleteComment($comment_id, $post_id, $type_comment, $type_id){
+		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
+		$post_folder = $this->config->get('post')['default']['cache_folder'];
+		$folder_name = $this->config->get('comment')['default']['cache_folder'];
+		$path = $folder_link.$type_id.'/'.$post_folder.'/'.$post_id.'/'.$folder_name.'/';
+		
+		$this->cache->delete( $comment_id, $path );
 	}
 
 	public function setUser($object) {

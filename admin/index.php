@@ -50,6 +50,7 @@ $config->load( 'user' );
 $config->load( 'company' );
 $config->load( 'group' );
 $config->load( 'post' );
+$config->load( 'comment' );
 $config->load( 'branch' );
 $config->load( 'common' );
 
