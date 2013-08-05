@@ -54,7 +54,7 @@ FlexibleElement.prototype.attachEvents = function() {
 		var scrollbarsNice = m.find('.nicescroll-rails');
 		$(this).hide();	
 		sc.slideDown(200, function() {
-			sb.animate({ "bottom" : "68px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
+			sb.animate({ "bottom" : "67px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
 				m.animate({"left": "152px" , "paddingLeft": "20px"}, 500); 	
 				scrollbarsNice.animate({ left: '-=132' }, 100);
 				cl.show();
@@ -163,5 +163,5 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
-	new HorizontalBlock($('.has-horizontal')); 	
+	new HorizontalBlock($('.has-horizontal')); 		
 });
