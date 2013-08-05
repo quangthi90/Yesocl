@@ -10,7 +10,7 @@
 					<div class="span8 post_new_control">
 						<a href="#" title="Insert images" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" name="img-attach" class="img-attach" 	/>
+							<input type="file" data-no-uniform="true" name="img-attach" class="img-attach" data-role="magic-overlay" data-target="#insert-new-img" />
 						</a>
 						<a href="#" title="Advance post" id="post_new_adv">
 							<i class="icon-external-link-sign icon-2x"></i>
@@ -47,7 +47,7 @@
 			    	<div class="control-group captcha">
 			    		<label for="captcha" class="control-label">Captcha check</label><div class="controls">
 			    		<img class="captcha-img" src="http://www.captcha.net/duo_logo.png" 
-			    			width="150px" height="80px" />
+			    			/>
 		    			<input class="captchainput" placeholder="Insert captcha..." type="text" name="captcha" id="captcha" >
 		    			</div>
 	    			</div>
