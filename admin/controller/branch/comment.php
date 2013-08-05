@@ -118,7 +118,7 @@ class ControllerBranchComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_branch_comment->deletePost( $this->request->post );
+			$this->model_branch_comment->deleteComment( $this->request->get['post_id'], $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link( 'branch/comment', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
@@ -239,7 +239,7 @@ class ControllerBranchComment extends Controller {
 		if ( $comments ){
 			$comment_total = count( $comments );
 			
-			for ( $i = (($page - 1) * $this->limit); $i < ($page * $this->limit) && $i < $comment_total; $i++ ){
+			for ( $i = $comment_total - (($page - 1) * $this->limit) - 1; $i >= $comment_total - ($page * $this->limit) && $i >= 0; $i-- ){
 				$action = array();
 				
 				$action[] = array(
