@@ -160,7 +160,6 @@ class ControllerBranchComment extends Controller {
 		$branch_id = 0;
 		if ( isset($this->request->get['branch_id']) && !empty($this->request->get['branch_id']) ){
 			$branch_id = $this->request->get['branch_id'];
-		}else{
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
 		$this->load->model( 'branch/branch' );
@@ -174,7 +173,6 @@ class ControllerBranchComment extends Controller {
 		$post_id = 0;
 		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
 			$post_id = $this->request->get['post_id'];
-		}else{
 			$url .= '&post_id=' . $this->request->get['post_id'];
 		}
 		$post = $branch->getPostById( $post_id );
@@ -182,7 +180,7 @@ class ControllerBranchComment extends Controller {
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('post/post', 'token=' . $this->session->data['token'] . $url, 'SSL') );
 		}
-
+		
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -240,7 +238,8 @@ class ControllerBranchComment extends Controller {
 		$this->data['comments'] = array();
 		if ( $comments ){
 			$comment_total = count( $comments );
-			for ( $i = (($page - 1) * $this->limit); $i < ($comment_total - (($page - 1) * $this->limit)); $i++ ){
+			
+			for ( $i = (($page - 1) * $this->limit); $i < ($page * $this->limit) && $i < $comment_total; $i++ ){
 				$action = array();
 				
 				$action[] = array(
@@ -262,7 +261,7 @@ class ControllerBranchComment extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $comment_total;
 		$pagination->page = $page;
-		$pagination->limit = $this->config->get('config_admin_limit');
+		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('branch/comment', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
 			
@@ -313,7 +312,6 @@ class ControllerBranchComment extends Controller {
 		$branch_id = 0;
 		if ( isset($this->request->get['branch_id']) && !empty($this->request->get['branch_id']) ){
 			$branch_id = $this->request->get['branch_id'];
-		}else{
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
 		$this->load->model( 'branch/branch' );
@@ -327,7 +325,6 @@ class ControllerBranchComment extends Controller {
 		$post_id = 0;
 		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
 			$post_id = $this->request->get['post_id'];
-		}else{
 			$url .= '&post_id=' . $this->request->get['post_id'];
 		}
 		$post = $branch->getPostById( $post_id );
