@@ -162,7 +162,7 @@ class ModelBranchComment extends Doctrine {
 				if ( !empty( $comment ) ) {
 					// remove cache
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteComment( $id, $this->config->get('comment')['type']['branch'], $branch->getId(), $post->getId() );
+					$this->model_tool_cache->deleteComment( $id, $post->getId(), $this->config->get('comment')['type']['branch'], $branch->getId() );
 
 					$post->getComments()->removeElement( $comment );
 				}
