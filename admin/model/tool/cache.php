@@ -221,14 +221,27 @@ class ModelToolCache extends Model {
 	public function setBranch( $branch ){
 		$object_data = $branch->formatToCache();
 		
-		//-- link of cache Folder of Branch --
+		//-- link of cache Folder of Branch
 		$cache_link = $this->config->get('branch')['default']['cache_link'];
-		//-- path of cache Folder of Branch --
+		//-- path of cache Folder of Branch
 		$cache_path = $cache_link . $branch->getId() . '/';
 		//-- name of cache file of Branch
 		$file_name = $this->config->get('common')['default']['main_object_cache'];
 		//-- call cache function in library
 		$this->cache->set( $file_name, $object_data, $cache_path );
+
+		//-- update cache list branch id
+		$cache_all_branch_name = $this->config->get('common')['default']['all_branch'];
+		$branch_ids = $this->cache->get($cache_all_branch_name, $cache_link);
+
+		if ( $branch_ids == null || (is_array($branch_ids) && !in_array($branch->getId(), $branch_ids)) ){
+			if ( !is_array($branch_ids) ){
+				$branch_ids = array();
+			}
+			$branch_ids[$branch->getId()] = $branch->getId();
+			$this->cache->set( $cache_all_branch_name, $branch_ids, $cache_link );
+		}
+		//-- end update cache list branch id
 
 		return $object_data;
 	}
@@ -249,6 +262,16 @@ class ModelToolCache extends Model {
 
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage( DIR_CACHE . $cache_path );
+
+		//-- remove branch from list cache branch id
+		$cache_all_branch_name = $this->config->get('common')['default']['all_branch'];
+		$branch_ids = $this->cache->get($cache_all_branch_name, $cache_link);
+
+		if ( is_array($branch_ids) && in_array($branch_id, $branch_ids) ){
+			unset($branch_ids[$branch_id]);
+			$this->cache->set( $cache_all_branch_name, $branch_ids, $cache_link );
+		}
+		//-- end remove
 	}
 }
 ?>

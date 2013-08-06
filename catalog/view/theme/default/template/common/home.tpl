@@ -21,7 +21,7 @@
 		{% if posts|length > 0 %}
 		<div class="feed-block">
             <h3 class="block-title">
-                <a href="#"><i class="icon-th-large"></i> Test{{ branch.name }}</a>
+                <a href="#"><i class="icon-th-large"></i> {{ branch.name }}</a>
             </h3>
             {% if style == 1 %}
             	{{ block('post_common_post_block_ex1') }}
