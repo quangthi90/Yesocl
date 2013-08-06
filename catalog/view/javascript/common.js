@@ -22,7 +22,7 @@ function FlexibleElement(el) {
 	this.closeSidebar = this.sidebar.find('#close-bottom-sidebar');
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
 	this.openSearch = this.footerBar.find('.search');
-	this.searchTxt = this.openSearch.find('#searchText'); 
+	this.searchTxt = this.openSearch.find('#searchText'); 	
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
@@ -37,10 +37,12 @@ FlexibleElement.prototype.attachEvents = function() {
 
 	this.closeSidebar.click(function(e) {
 		e.preventDefault();
+		var scrollbarsNice = m.find('.nicescroll-rails');
 		$(this).hide();	
-		m.animate({"paddingLeft": "147px","left" : "0px"}, 200, function() {
+		m.animate({"paddingLeft": "142px","left" : "0px"}, 200, function() { 
+			scrollbarsNice.animate({ left: '+=132'}, 100);
 			sc.slideUp(300, function() {
-				sb.animate({ "width" : "120px"}, 200, function() {
+				sb.animate({ "width" : "120px", "top":"20px", "left" : "10px", "opacity" : "0.85"}, 200, function() {
 					sb.css("bottom","auto");
 					os.show();
 				});				
@@ -49,10 +51,12 @@ FlexibleElement.prototype.attachEvents = function() {
 	});
 	this.openSidebar.click(function(e) {
 		e.preventDefault();
+		var scrollbarsNice = m.find('.nicescroll-rails');
 		$(this).hide();	
 		sc.slideDown(200, function() {
-			sb.animate({ "bottom" : "68px", "width" : "150px"}, 200, function() {
-				m.animate({"left": "152px" , "paddingLeft": "25px"}, 500); 	
+			sb.animate({ "bottom" : "67px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
+				m.animate({"left": "152px" , "paddingLeft": "20px"}, 500); 	
+				scrollbarsNice.animate({ left: '-=132' }, 100);
 				cl.show();
 			});			
 		});			
@@ -159,5 +163,5 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
-	new HorizontalBlock($('.has-horizontal')); 	
+	new HorizontalBlock($('.has-horizontal')); 		
 });
