@@ -57,7 +57,7 @@ class ModelBranchComment extends Doctrine {
 
 		$comment = new Comment();
 		$comment->setUser( $user );
-		$comment->setContent( $data['Comment_content'] );
+		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
 		$post = $branch->getPostById( $post_id );
@@ -132,7 +132,7 @@ class ModelBranchComment extends Doctrine {
 		$comment = $post->getCommentById( $comment_id );
 
 		$comment->setUser( $user );
-		$comment->setContent( $data['comment_content'] );
+		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
 		$this->dm->flush();

@@ -383,7 +383,7 @@ class ControllerBranchComment extends Controller {
 				$this->redirect( $this->data['cancel'] );
 			}
 
-			$url .= '$comment_id=' . $this->request->get['comment_id'];
+			$url .= '&comment_id=' . $this->request->get['comment_id'];
 				
 			$this->data['action'] = $this->url->link( 'branch/comment/update', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		}
