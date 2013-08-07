@@ -57,7 +57,7 @@ class ModelBranchBranch extends Doctrine {
 
 		//-- create cache for branch
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setBranch( $branch );
+		$this->model_tool_cache->setObject( $branch );
 
 		return true;
 	}
@@ -125,7 +125,7 @@ class ModelBranchBranch extends Doctrine {
 
 		//-- create cache for branch
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setBranch( $branch );
+		$this->model_tool_cache->setObject( $branch );
 
 		return true;
 	}
@@ -145,7 +145,7 @@ class ModelBranchBranch extends Doctrine {
 					
 					//-- remove cache of Branch
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteBranch( $id );
+					$this->model_tool_cache->deleteObject( $id );
 
 					$this->dm->remove( $branch );
 				}

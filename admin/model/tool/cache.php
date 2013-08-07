@@ -198,33 +198,23 @@ class ModelToolCache extends Model {
 		$this->cache->delete( $comment_id, $path );
 	}
 
-	public function setUser($object) {
-		$object_data = $object->formatToCache();
-
-		$this->cache->delete( $object->getId(), $this->config->get('cache')['folder']['user'] );
-		$this->cache->set( $object->getId(), $object_data, $this->config->get('cache')['folder']['user'] );
-
-		return $object_data;
-	}
-
-	public function getUser($user_id){
-		return $this->cache->get($user_id, $this->config->get('cache')['folder']['user']);
-	}
-
 	/**
-	 * Create cache for Branch
+	 * Create cache for
+	 *	- Branch
+	 *	- Group
+	 *	- User
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: Object Branch
 	 * @return: Array Object Branch
 	 */
-	public function setBranch( $branch ){
-		$object_data = $branch->formatToCache();
+	public function setObject( $object, $object_type = 'branch' ){
+		$object_data = $object->formatToCache();
 		
 		//-- link of cache Folder of Branch
-		$cache_link = $this->config->get('branch')['default']['cache_link'];
+		$cache_link = $this->config->get($object_type)['default']['cache_link'];
 		//-- path of cache Folder of Branch
-		$cache_path = $cache_link . $branch->getId() . '/';
+		$cache_path = $cache_link . $object->getId() . '/';
 		//-- name of cache file of Branch
 		$file_name = $this->config->get('common')['default']['main_object_cache'];
 		//-- call cache function in library
@@ -234,18 +224,21 @@ class ModelToolCache extends Model {
 	}
 
 	/**
-	 * Delete cache of Branch
+	 * Delete cache of 
+	 *	- Branch
+	 *	- Group
+	 *	- User
 	 * Include all cache follow Branch such as posts, comments...
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: Object Branch
 	 * @return: Array Object Branch
 	 */
-	public function deleteBranch( $branch_id ){
+	public function deleteObject( $object_id, $object_type = 'branch' ){
 		//-- link of cache Folder of Branch --
-		$cache_link = $this->config->get('branch')['default']['cache_link'];
+		$cache_link = $this->config->get($object_type)['default']['cache_link'];
 		//-- path of cache Folder of Branch --
-		$cache_path = $cache_link . $branch_id . '/';
+		$cache_path = $cache_link . $object_id . '/';
 
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage( DIR_CACHE . $cache_path );
