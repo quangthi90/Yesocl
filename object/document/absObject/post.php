@@ -86,7 +86,9 @@ Abstract Class Post {
 			'created'		=> $this->getCreated(),
 			'comment_count' => $comment_count,
 			'user_id'		=> $this->getUser()->getId(),
-			'thumb'			=> $this->getThumb()
+			'thumb'			=> $this->getThumb(),
+			'slug'			=> $this->getSlug(),
+			'status'		=> $this->getStatus()
 		);
 
 		return $post_data;

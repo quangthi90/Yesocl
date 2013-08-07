@@ -14,7 +14,7 @@ class ModelToolCache extends Model {
 	 * @return: Array Object Post
 	 */
 	public function setPost($post, $type_post = 'branch', $type_id) {
-		$list_post_data = $post->formatToCache();
+		$post_data = $post->formatToCache();
 
 		$folder_link = $this->config->get($type_post)['default']['cache_link'];
 		$folder_name = $this->config->get('post')['default']['cache_folder'];
@@ -23,11 +23,11 @@ class ModelToolCache extends Model {
 		$file_name = $this->config->get('common')['default']['main_object_post'];
 		$this->cache->set( $file_name, $post_data, $path );
 		
-		return $list_post_data;
+		return $post_data;
 	}
 
 	/**
-	 * Set 60 last post of
+	 * Set last post of
 	 *	- Branch
 	 *	- Group
 	 *	- User
@@ -125,7 +125,7 @@ class ModelToolCache extends Model {
 	}
 
 	/**
-	 * Set 50 last comment of
+	 * Set last comment of
 	 *	- Branch
 	 *	- Group
 	 *	- User
@@ -230,19 +230,6 @@ class ModelToolCache extends Model {
 		//-- call cache function in library
 		$this->cache->set( $file_name, $object_data, $cache_path );
 
-		//-- update cache list branch id
-		$cache_all_branch_name = $this->config->get('common')['default']['all_branch'];
-		$branch_ids = $this->cache->get($cache_all_branch_name, $cache_link);
-
-		if ( $branch_ids == null || (is_array($branch_ids) && !in_array($branch->getId(), $branch_ids)) ){
-			if ( !is_array($branch_ids) ){
-				$branch_ids = array();
-			}
-			$branch_ids[$branch->getId()] = $branch->getId();
-			$this->cache->set( $cache_all_branch_name, $branch_ids, $cache_link );
-		}
-		//-- end update cache list branch id
-
 		return $object_data;
 	}
 
@@ -262,16 +249,6 @@ class ModelToolCache extends Model {
 
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage( DIR_CACHE . $cache_path );
-
-		//-- remove branch from list cache branch id
-		$cache_all_branch_name = $this->config->get('common')['default']['all_branch'];
-		$branch_ids = $this->cache->get($cache_all_branch_name, $cache_link);
-
-		if ( is_array($branch_ids) && in_array($branch_id, $branch_ids) ){
-			unset($branch_ids[$branch_id]);
-			$this->cache->set( $cache_all_branch_name, $branch_ids, $cache_link );
-		}
-		//-- end remove
 	}
 }
 ?>
