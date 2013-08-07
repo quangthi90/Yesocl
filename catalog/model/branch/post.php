@@ -22,6 +22,9 @@ class ModelBranchPost extends Doctrine {
 				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_id'] );
 			}
 
+			$this->load->model('user/user');
+			$users = array();
+
 			$posts = array();
 			foreach ( $results as $key => $post ) {
 				if ( !$post ){
@@ -36,6 +39,21 @@ class ModelBranchPost extends Doctrine {
 					continue;
 				}elseif ( count($posts) == $data['limit'] ){
 					break;
+				}
+
+				if ( !array_key_exists($post['user_id'], $users) ){
+					$users[$post['user_id']] = $this->model_user_user->getUser( $post['user_id'] );
+				}
+
+				$user = $users[$post['user_id']];
+
+				if ( $user ){
+					$post['user'] = array(
+						'slug' => $user['slug'],
+						'avatar' => $user['avatar'],
+						'email' => $user['email']
+					);
+					$post['author'] = $user['username'] != null ? $user['username'] : $post['author'];
 				}
 
 				$posts[$post['id']] = $post;

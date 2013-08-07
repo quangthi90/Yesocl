@@ -88,7 +88,8 @@ Abstract Class Post {
 			'user_id'		=> $this->getUser()->getId(),
 			'thumb'			=> $this->getThumb(),
 			'slug'			=> $this->getSlug(),
-			'status'		=> $this->getStatus()
+			'status'		=> $this->getStatus(),
+			'email'			=> $this->getEmail()
 		);
 
 		return $post_data;

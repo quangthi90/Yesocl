@@ -38,7 +38,7 @@ class ModelToolCache extends Model {
 		
 		$branchs = array();
 		foreach ( $branch_ids as $branch_id ) {
-			$branch = $this->getBranch( $branch_id );
+			$branch = $this->getObject( $branch_id );
 			if ( $branch['status'] == true ){
 				$branchs[$branch_id] = $branch;
 			}
@@ -48,21 +48,49 @@ class ModelToolCache extends Model {
 	}
 
 	/**
-	 * Create cache for Branch
+	 * Create cache for 
+	 *	- Branch
+	 *	- Group
+	 *	- User
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: Object Branch
 	 * @return: Array Object Branch
 	 */
-	public function getBranch( $branch_id ){
+	public function getObject( $object_id, $object_type = 'branch' ){
 		//-- link of cache Folder of Branch
-		$cache_link = $this->config->get('branch')['default']['cache_link'];
+		$cache_link = $this->config->get($object_type)['default']['cache_link'];
 		//-- path of cache Folder of Branch
-		$cache_path = $cache_link . $branch_id;
+		$cache_path = $cache_link . $object_id;
 		//-- name of cache file of Branch
 		$file_name = $this->config->get('common')['default']['main_object_cache'];
 		//-- call cache function in library
 		return $this->cache->get( $file_name, $cache_path );
+	}
+
+	/**
+	 * Create cache for
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: Object Branch
+	 * @return: Array Object Branch
+	 */
+	public function setObject( $object, $object_type = 'branch' ){
+		$object_data = $object->formatToCache();
+		
+		//-- link of cache Folder of Branch
+		$cache_link = $this->config->get($object_type)['default']['cache_link'];
+		//-- path of cache Folder of Branch
+		$cache_path = $cache_link . $object->getId() . '/';
+		//-- name of cache file of Branch
+		$file_name = $this->config->get('common')['default']['main_object_cache'];
+		//-- call cache function in library
+		$this->cache->set( $file_name, $object_data, $cache_path );
+
+		return $object_data;
 	}
 
 	/**

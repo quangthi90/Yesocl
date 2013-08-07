@@ -28,14 +28,16 @@ class ControllerCommonHome extends Controller {
 			));
 			
 			foreach ($posts as $i => $post) {
-				// if ( $post->getUser() && $post->getUser()->getAvatar() ){
-				// 	$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
-				// }elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
-	   //              $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
-	   //          }else{
-				// 	$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
-				// }
+				// avatar
+				if ( isset($post['user']) && isset($post['user']['avatar']) ){
+					$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
+				}elseif ( isset($post['user']) && isset($post['user']['email']) ){
+	                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
+	            }else{
+					$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
+				}
 
+				// thumb
 				if ( isset($post['thumb']) && !empty($post['thumb']) ){
 					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
 				}else{
@@ -43,6 +45,7 @@ class ControllerCommonHome extends Controller {
 				}
 
 				$posts[$i]['image'] = $image;
+				$posts[$i]['avatar'] = $avatar;
 
 				$this->data['all_posts'][$branch_id] = $posts;
 				// $posts[$i]['avatar'] = $avatar;
