@@ -20,6 +20,10 @@ $_['error_permission']        = 'Warning: You do not have permission to modify G
 $_['column_name']             = 'User Group Name';
 $_['column_action']           = 'Action';
 $_['column_layout']           = 'Layout';
+$_['column_checkall']         = 'Check All';
+
+// Button
+$_['button_select_all_action']= 'Select All Actions';
 
 // Error
 $_['error_default']           = 'Warning: This User Group cannot be deleted as it is currently assigned as the default store User Group!';
