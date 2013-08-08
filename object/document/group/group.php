@@ -97,6 +97,25 @@ Class Group {
 		return null;
 	}
 
+	/**
+	* Format array to save to Cache
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Group
+	*/
+    public function formatToCache(){
+		$data = array(
+			'id'		=> $this->getId(),
+			'name' 		=> $this->getName(),
+			'author' 	=> $this->getAuthor()->getFullname(),
+			'email' 	=> $this->getAuthor()->getPrimaryEmail()->getEmail(),
+			'created' 	=> $this->getCreated()->format('m/d/Y'),
+			'status'	=> $this->getStatus()
+		);
+
+		return $data;
+	}
+
 	public function getId(){
 		return $this->id;
 	}
