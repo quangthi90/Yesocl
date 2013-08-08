@@ -13,9 +13,9 @@ class ModelUserUser extends Doctrine {
 				return null;
 			}
 
-			$user = $user->formatToCache();
-
 			$this->model_tool_cache->setObject( $user, $user_type );
+
+			$user = $user->formatToCache();
 		}
 
 		return $user;
