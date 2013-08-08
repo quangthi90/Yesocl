@@ -62,5 +62,9 @@ class ModelBranchPost extends Doctrine {
 			return $posts;
 		}
 	}
+
+	public function getPost( $post_id ){
+
+	}
 }
 ?>

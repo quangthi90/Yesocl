@@ -17,6 +17,9 @@ Abstract Class Post {
 	private $title;
 
 	/** @MongoDB\String */
+	private $description;
+
+	/** @MongoDB\String */
 	private $content;
 	
 	/** @MongoDB\Boolean */
@@ -82,6 +85,7 @@ Abstract Class Post {
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'title' 		=> $this->getTitle(),
+			'description'	=> $this->getDescription(),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'comment_count' => $comment_count,
@@ -105,6 +109,14 @@ Abstract Class Post {
 
 	public function getTitle(){
 		return $this->title;
+	}
+
+	public function setDescription( $description ){
+		$this->description = $description;
+	}
+
+	public function getDescription(){
+		return $this->description;
 	}
 
 	public function setContent( $content ){

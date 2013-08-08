@@ -77,9 +77,9 @@ class ControllerPostPost extends Controller {
         }
         
         switch ($post_type) {
-            case 'company':
-                $this->load->model('company/post');
-                $post = $this->model_company_post->getPost( $post_id, $paging );
+            case 'branch':
+                $this->load->model('branch/post');
+                $post = $this->model_branch_post->getPost( $post_id, $paging );
                 break;
             
             default:
