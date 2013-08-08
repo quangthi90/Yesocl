@@ -59,4 +59,15 @@ Class Comment {
 	public function getUser(){
 		return $this->user;
 	}
+
+	public function formatToCache(){
+		$data_format = array(
+			'author' 		=> $this->getUser(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated()->format('h:i A d/m/Y'),
+			'user_id'		=> $this->getUser()->getId()
+		);
+
+		return $data_format;
+	}
 }
