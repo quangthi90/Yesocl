@@ -104,11 +104,22 @@ Class Group {
 	* @return: array Group
 	*/
     public function formatToCache(){
+    	$category_id = array();
+
+    	foreach ( $this->getCategories() as $category ) {
+    		$category_id[] = $category->getId();
+    	}
+
 		$data = array(
 			'id'		=> $this->getId(),
 			'name' 		=> $this->getName(),
 			'author' 	=> $this->getAuthor()->getFullname(),
 			'email' 	=> $this->getAuthor()->getPrimaryEmail()->getEmail(),
+			'sumary'	=> $this->getSumary(),
+			'description' => $this->getDescription(),
+			'website' 	=> $this->getWebsite(),
+			'type_id' 	=> $this->getType()->getId(),
+			'category_id' => $category_id,
 			'created' 	=> $this->getCreated()->format('m/d/Y'),
 			'status'	=> $this->getStatus()
 		);
