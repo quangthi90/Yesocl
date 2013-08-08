@@ -1,30 +1,6 @@
 <?php
 class ModelToolCache extends Model {
 	/**
-	 * Get cache Post of
-	 *	- Branch
-	 *	- Group
-	 *	- User
-	 * 2013/07/26
-	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
-	 *	- object Post
-	 *	- string type post ['branch', 'group', 'user']
-	 *	- string type ID
-	 * @return: Array Object Post
-	 */
-	public function getPost($post_id, $type_post = 'branch', $type_id) {
-		$folder_link = $this->config->get($type_post)['default']['cache_link'];
-		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $type_id . '/' . $folder_post_name . '/' . $post_id;
-		
-		$file_name = $this->config->get('common')['default']['main_object_post'];
-		$post = $this->cache->get( $file_name, $path, true );
-		
-		return $post;
-	}
-
-	/**
 	 * Get All Branch
 	 * 2013/08/06
 	 * @author: Bommer <bommer@bommerdesign.com>
@@ -94,6 +70,30 @@ class ModelToolCache extends Model {
 	}
 
 	/**
+	 * Get cache Post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string type ID
+	 * @return: Array Object Post
+	 */
+	public function getPost($post_id, $type_post = 'branch', $type_id) {
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $type_id . '/' . $folder_post_name . '/' . $post_id;
+		
+		$file_name = $this->config->get('common')['default']['main_object_post'];
+		$post = $this->cache->get( $file_name, $path );
+		
+		return $post;
+	}
+
+	/**
 	 * Get last post of
 	 *	- Branch
 	 *	- Group
@@ -102,8 +102,7 @@ class ModelToolCache extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- string type post ['branch', 'group', 'user']
-	 *	- object type
-	 *	- string Post ID
+	 *	- string Type ID
 	 * @return: Array Object Post
 	 */
 	public function getLastPosts($type_post = 'branch', $type_id) {
@@ -122,6 +121,64 @@ class ModelToolCache extends Model {
 		}
 
 		return $posts;
+	}
+
+	/**
+	 * Get cache Comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Comment ID
+	 *	- string Post ID
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string type ID
+	 * @return: Array Object Post
+	 */
+	public function getComment($comment_id, $post_id, $type_post = 'branch', $type_id) {
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
+		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
+		$path = $folder_link . $type_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name;
+		
+		$post = $this->cache->get( $comment_id, $path );
+		
+		return $post;
+	}
+
+	/**
+	 * Get last comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/08/09
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string Type ID
+	 *	- string Post ID
+	 * @return: Array Object Post
+	 */
+	public function getLastComments($post_id, $type_post = 'branch', $type_id) {
+		//-- link of cache Folder of Branch
+		$cache_link = $this->config->get($type_post)['default']['cache_link'];
+		//-- cache post folder name
+		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
+		//-- cache comment folder name
+		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
+		//-- path of cache Folder of Branch
+		$cache_path = DIR_CACHE . $cache_link . $type_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name . '/';
+
+		$comment_ids = $this->getFolderNames( $cache_path );
+
+		$comments = array();
+		foreach ( $comment_ids as $comment_id ) {
+			$comments[$comment_id] = $this->getComment( $comment_id, $post_id, $type_post, $type_id );
+		}
+
+		return $comments;
 	}
 
 	public function getFolderNames( $path ){

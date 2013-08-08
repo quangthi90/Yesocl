@@ -36,7 +36,7 @@ class ControllerCommonHome extends Controller {
 	            }else{
 					$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
 				}*/
-				
+
 				// thumb
 				if ( isset($post['thumb']) && !empty($post['thumb']) ){
 					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
@@ -49,7 +49,7 @@ class ControllerCommonHome extends Controller {
 				
 				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
 				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
-				$posts[$i]['href_status'] = $this->url->link('post/post/getCommentByPost', 'branch_id=' . $branch_id, 'SSL');
+				$posts[$i]['href_status'] = $this->url->link('post/post/getCommentByPost', 'type_id=' . $branch_id, 'SSL');
 			}
 
 			$this->data['all_posts'][$branch_id] = $posts;

@@ -55,8 +55,10 @@ class ControllerPostPost extends Controller {
   	}
 
     public function getCommentByPost(){
+        $data = array();
+
         if ( isset($this->request->post['post_id']) && !empty($this->request->post['post_id']) ){
-            $post_id = $this->request->post['post_id'];
+            $data['post_id'] = $this->request->post['post_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post id empty'
@@ -64,11 +66,27 @@ class ControllerPostPost extends Controller {
         }
 
         if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
-            $post_type = $this->request->post['post_type'];
+            $data['post_type'] = $this->request->post['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
             )));
+        }
+
+        if ( isset($this->request->get['type_id']) && !empty($this->request->get['type_id']) ){
+            $data['type_id'] = $this->request->get['type_id'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: type id empty'
+            )));
+        }
+
+        if ( isset($this->request->post['start']) && !empty($this->request->post['start']) ){
+            $data['start'] = $this->request->post['start'];
+        }
+
+        if ( isset($this->request->post['limit']) && !empty($this->request->post['limit']) ){
+            $data['limit'] = $this->request->post['limit'];
         }
         
         $paging = 1;
@@ -76,10 +94,11 @@ class ControllerPostPost extends Controller {
           $paging = $this->request->post['paging'];
         }
         
-        switch ($post_type) {
+        switch ($data['post_type']) {
             case 'branch':
-                $this->load->model('branch/post');
-                $post = $this->model_branch_post->getPost( $post_id, $paging );
+                $this->load->model('branch/comment');
+                $data['branch_id'] = $data['type_id'];
+                $post = $this->model_branch_comment->getComments( $data );
                 break;
             
             default:
