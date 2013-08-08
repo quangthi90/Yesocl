@@ -218,6 +218,7 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry localtion country
+		/*
 		if ( $user->getMeta() ){
 			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
 			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
@@ -225,8 +226,10 @@ class ControllerUserUser extends Controller {
 			$this->data['country'] = '';
 			$this->data['country_id'] = 0;
 		}
+		*/
 
 		// Entry localtion city
+		/*
 		if ( $user->getMeta() ){
 			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
@@ -234,6 +237,7 @@ class ControllerUserUser extends Controller {
 			$this->data['city'] = '';
 			$this->data['city_id'] = 0;
 		}
+		*/
 
 		// Entry postal code
 		if ( $user->getMeta() ){
