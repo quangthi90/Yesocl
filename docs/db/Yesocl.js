@@ -1489,7 +1489,7 @@ db.getCollection("branch").insert({
       }
     }
   ],
-  "status": true
+  "status": false
 });
 db.getCollection("branch").insert({
   "_id": ObjectId("51d39ba5d87459c40a000017"),
@@ -1503,24 +1503,27 @@ db.getCollection("branch").insert({
   "posts": [
     {
       "_id": ObjectId("51ee432d471dee580a000001"),
-      "title": "Lăng kính Yestoc tuần 22-26\/07: “đà tăng tiếp tục được củng cố”",
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tóm tắt view nhận định tuần 15-19\/07&lt;\/strong&gt;: &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&quot;&gt;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&lt;\/a&gt;&lt;br \/&gt;\r\n\t…theo phân tích của chúng tôi thì mục tiêu ngắn hạn của đợt tăng lần này nằm ở vùng 505-507 đối với Vnindex và vùng 64-65-4 đối với Hnxindex, do đó nhà đầu tư nên thận trọng khi cả hai chỉ số tiếp cận vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChỉ số VNIndex tăng khá mạnh trong phiên cuối tuần và bức phá ngưỡng kháng cự 498-500, khối lượng duy trì ở mức trung bình cho thấy áp lực bán ra đã được hấp thụ khá tốt trong những phiên trước. Theo quan sát của chúng tôi, thị trường vẫn trong giai đoạn phân hóa mạnh, dòng tiền chỉ tập trung vào các mã largecap như MSN, VNM, GAS, BVH… Trong khi đó, HNXIndex vẫn tiếp tục đi ngang và chưa thể bức phá được vùng 63.5. Chúng tôi cho rằng chỉ số Vnindex sẽ test lại vùng 500( tương đương đường MA50) trong phiên đầu tuần, nếu thanh khoản vẫn tiếp tục duy trì ổn định, thì xu hướng tăng sẽ rõ ràng hơn. Tuy nhiên, như các bản tin trước, chúng tôi đặc biệt lưu ý ngưỡng kháng cự 507, nhà đầu tư cần thận trọng khi Vnindex đi vào vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTheo đồ thị tuần, hai chỉ số đã hình thành các cây nến tích cực, và khối lượng có sự cải thiện rõ rệt. Vnindex đã bức phá thành công đường MA20 với thanh khoản cao cho thấy xu hướng trung hạn đang có chuyển biến tích cực. Chúng tôi tiếp tục chờ sự cộng hưởng từ chỉ số HNxindex để có thể xác nhận xu hướng trung hạn được bền vững. Do đó, nhà đầu tư trung hạn chỉ nên tiếp tục duy trì mức độ giải ngân thăm dò trong những nhịp điều chỉnh sắp tới trước khi thị trường xác nhận xu thế tăng bền vững.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẫn giữ quan điểm như trong các bản tin trước, nhà đầu tư có thể tiếp tục gia tăng tỉ trọng trong những nhịp điều chỉnh của thị trường, tuy nhiên nên cân nhắc tránh mua đuổi khi Vnindex tiệm cận vùng cản 507.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã cơ bản đang được tích lũy tốt .&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-23T08:47:41.0Z"),
-      "updated": ISODate("2013-07-23T16:33:23.0Z"),
       "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "slug": "lang-kinh-yestoc-tuan-22-2607-da-tang-tiep-tuc-duoc-cung-co-51ee432d471dee580a000000",
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee432d471dee580a000001\/avatar.jpg",
-      "description": "Tóm tắt view nhận định tuần 15-19\/07...\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3a0cad87459c40a000019"),
+        "$db": "yesocl"
+      },
+      "comments": [
+        
+      ],
+      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tóm tắt view nhận định tuần 15-19\/07&lt;\/strong&gt;: &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&quot;&gt;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&lt;\/a&gt;&lt;br \/&gt;\r\n\t…theo phân tích của chúng tôi thì mục tiêu ngắn hạn của đợt tăng lần này nằm ở vùng 505-507 đối với Vnindex và vùng 64-65-4 đối với Hnxindex, do đó nhà đầu tư nên thận trọng khi cả hai chỉ số tiếp cận vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChỉ số VNIndex tăng khá mạnh trong phiên cuối tuần và bức phá ngưỡng kháng cự 498-500, khối lượng duy trì ở mức trung bình cho thấy áp lực bán ra đã được hấp thụ khá tốt trong những phiên trước. Theo quan sát của chúng tôi, thị trường vẫn trong giai đoạn phân hóa mạnh, dòng tiền chỉ tập trung vào các mã largecap như MSN, VNM, GAS, BVH… Trong khi đó, HNXIndex vẫn tiếp tục đi ngang và chưa thể bức phá được vùng 63.5. Chúng tôi cho rằng chỉ số Vnindex sẽ test lại vùng 500( tương đương đường MA50) trong phiên đầu tuần, nếu thanh khoản vẫn tiếp tục duy trì ổn định, thì xu hướng tăng sẽ rõ ràng hơn. Tuy nhiên, như các bản tin trước, chúng tôi đặc biệt lưu ý ngưỡng kháng cự 507, nhà đầu tư cần thận trọng khi Vnindex đi vào vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTheo đồ thị tuần, hai chỉ số đã hình thành các cây nến tích cực, và khối lượng có sự cải thiện rõ rệt. Vnindex đã bức phá thành công đường MA20 với thanh khoản cao cho thấy xu hướng trung hạn đang có chuyển biến tích cực. Chúng tôi tiếp tục chờ sự cộng hưởng từ chỉ số HNxindex để có thể xác nhận xu hướng trung hạn được bền vững. Do đó, nhà đầu tư trung hạn chỉ nên tiếp tục duy trì mức độ giải ngân thăm dò trong những nhịp điều chỉnh sắp tới trước khi thị trường xác nhận xu thế tăng bền vững.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẫn giữ quan điểm như trong các bản tin trước, nhà đầu tư có thể tiếp tục gia tăng tỉ trọng trong những nhịp điều chỉnh của thị trường, tuy nhiên nên cân nhắc tránh mua đuổi khi Vnindex tiệm cận vùng cản 507.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã cơ bản đang được tích lũy tốt .&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+      "created": ISODate("2013-07-23T08:47:41.0Z"),
+      "description": "Tóm tắt view nhận định tuần 15-19\/07...\r\n",
+      "email": "user2@test.com",
+      "slug": "lang-kinh-yestoc-tuan-22-2607-da-tang-tiep-tuc-duoc-cung-co-51ee432d471dee580a000000",
+      "status": true,
+      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee432d471dee580a000001\/avatar.jpg",
+      "title": "Lăng kính Yestoc tuần 22-26\/07: “đà tăng tiếp tục được củng cố”",
+      "updated": ISODate("2013-08-08T17:02:28.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
       }
     },
@@ -1530,7 +1533,7 @@ db.getCollection("branch").insert({
       "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước đã bơm ra thị trường mở (OMO) 5.000 tỷ đồng, kỳ hạn 7 ngày, với lãi suất 7%\/năm.&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCùng ngày, Ngân hàng Nhà nước hút về 242 tỷ đồng, đưa mức bơm ròng vốn trong ngày đạt 4.758 tỷ đồng. Như vậy, khối lượng vốn trên OMO còn lưu hành khoảng 7.500 tỷ đồng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tViệc khối lượng vốn bơm qua thị trường OMO tăng mạnh trong hai ngày đầu tuần diễn ra trong bối cảnh lãi suất giảm 1% về 7%\/năm. Cụ thể, trong hai ngày thứ Hai và thứ Ba, Ngân hàng Nhà nước đã bơm ròng gần 6.300 tỷ đồng trên OMO.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrước đó, khi lãi suất ở mức 8%\/năm, giao dịch qua nghiệp vụ repo trên thị trường OMO chỉ quanh mức vài trăm tỷ đồng mỗi phiên.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCũng trong ngày 25\/12, Ngân hàng Nhà nước tiếp tục không phát hành tín phiếu. Tính từ 15\/3 đến nay, Ngân hàng Nhà nước đã phát hành tổng cộng gần 170 nghìn tỷ đồng tín phiếu, đã đáo hạn trên 114 nghìn tỷ đồng và còn trên 55.600 tỷ đồng tín phiếu chưa đáo hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrên thị trường liên ngân hàng hôm 25\/12, lãi suất không có nhiều thay đổi so với các phiên trước, trong đó lãi suất qua đêm được chào ở mức 2,5-3%\/năm, lãi suất kỳ hạn 1 tuần ở mức 3,5-4%\/năm, lãi suất kỳ hạn 1 tháng ở mức 5-6%\/năm và lãi suất kỳ hạn 3 tháng ở mức 6-7%\/năm.&lt;\/p&gt;\r\n&lt;address&gt;\r\n\tNguồn&amp;nbsp;vneconomy&lt;\/address&gt;\r\n",
       "status": true,
       "created": ISODate("2013-07-23T08:43:31.0Z"),
-      "updated": ISODate("2013-07-23T09:10:31.0Z"),
+      "updated": ISODate("2013-08-08T17:02:31.0Z"),
       "author": "user2",
       "email": "user2@test.com",
       "user": {
@@ -1553,7 +1556,7 @@ db.getCollection("branch").insert({
       "content": "&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\tChúng tôi tin rằng, dù phát biểu thế nào trước công chúng đi nữa, thì việc tái cấu trúc ngân hang sẽ vẫn diễn ra rất chậm chạp. Chúng tôi xin dẫn ra 5 lí do sau:&lt;\/p&gt;\r\n&lt;ul style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;strong&gt;Đ&lt;\/strong&gt;&lt;strong&gt;ầ&lt;\/strong&gt;&lt;strong&gt;u tiên, ch&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;t lư&lt;\/strong&gt;&lt;strong&gt;ợ&lt;\/strong&gt;&lt;strong&gt;ng thông tin v&lt;\/strong&gt;&lt;strong&gt;ề&lt;\/strong&gt;&lt;strong&gt; mức độ của n&lt;\/strong&gt;&lt;strong&gt;ợ&lt;\/strong&gt;&lt;strong&gt; x&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;u v&lt;\/strong&gt;&lt;strong&gt;ẫ&lt;\/strong&gt;&lt;strong&gt;n còn th&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;p&lt;\/strong&gt;. Mặc dù NHNN đã công bố tỉ lệ nợ xấu khoảng 8.6%-10%, cao hơn so với con số 4.5%-4.7% được các ngân hang đưa ra, chúng tôi cho rằng con số đó vẫn chưa đánh giá đúng tình hình nợ xấu bởi các tài sản đảm bảo chưa được định giá theo giá thị trường. Một số khu vực tư thống nhất trong việc ước tính tỉ lệ nợ xấu hiện vào khoảng 15%-20%, tuy nhiên các số liệu trên cũng chỉ dựa vào các nguồn thông tin giới hạn. Bản báo cáo kết quả của Chương trình Đánh giá Tài chính của IMF-WB (dự báo sẽ được công bố vào nửa đầu năm 2013 và có thể trùng với Báo cáo thường niên do IMF xuất bản) có thể cung cấp một chút minh bạch về sự yếu ớt của toàn bộ hệ thống tài chính, tuy nhiên chúng tôi tin rằng các thông tin đầu vào quan trọng từ bài nghiên cứu này cũng được cung cấp từ chính phủ, và do đó chất lượng của thông tin vẫn còn chưa rõ ràng.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;strong&gt;Việc dựa vào “tính t&lt;\/strong&gt;&lt;strong&gt;ự&lt;\/strong&gt;&lt;strong&gt; giác” trong quá trình tái cơ cấu là không hi&lt;\/strong&gt;&lt;strong&gt;ệ&lt;\/strong&gt;&lt;strong&gt;u qu&lt;\/strong&gt;&lt;strong&gt;ả&lt;\/strong&gt;. Lộ trình dự kiến của việc tái cấu trúc ngân hàng là bắt đầu gom nhóm các ngân hàng, cắt giảm hoạt động cho vay của những ngân hàng yếu (nhóm 4) và buộc các ngân hang này phải tái cấu trúc, nhưng phần lớn lại dựa trên “cơ sở tự giác” mà không cần bơm thêm vốn từ Chính phủ. Trên thực tế đúng là có sự hợp nhất của vài ngân hàng yếu kém, nhưng nếu không bơm vốn mới thì các ngân hàng hợp nhất đó vẫn sẽ còn yếu kém, tuy vậy chúng tôi vẫn chưa thấy ngân hàng nào đóng cửa. Sự tồn tại của các ngân hàng yếu tiếp tục làm tăng chi phí vay vốn ở các ngân hàng khác xuất phát từ sự cạnh tranh trong lãi suất tiền gửi.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot;&gt;\r\n\t\t\t&lt;tbody&gt;\r\n\t\t\t\t&lt;tr&gt;\r\n\t\t\t\t\t&lt;td&gt;\r\n\t\t\t\t\t\t&lt;div&gt;\r\n\t\t\t\t\t\t\t&lt;div&gt;\r\n\t\t\t\t\t\t\t\t&lt;p align=&quot;right&quot;&gt;\r\n\t\t\t\t\t\t\t\t\t&lt;strong&gt;&lt;em&gt;Vi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ệ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;c tái c&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ấ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u trúc ngân hàng v&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ẫ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;n di&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ễ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;n ra ch&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ậ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;m ch&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;p do vi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ệ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;c thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u thông tin minh b&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ch, thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u khung pháp lý m&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;nh m&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ẽ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;, thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u s&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ự&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt; lãnh đ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;o và thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u nhận thức về tính “cấp thiết” của vấn đề&lt;\/em&gt;&lt;\/strong&gt;&lt;\/p&gt;\r\n\t\t\t\t\t\t\t&lt;\/div&gt;\r\n\t\t\t\t\t\t&lt;\/div&gt;\r\n\t\t\t\t\t&lt;\/td&gt;\r\n\t\t\t\t&lt;\/tr&gt;\r\n\t\t\t&lt;\/tbody&gt;\r\n\t\t&lt;\/table&gt;\r\n\t\t&lt;p&gt;\r\n\t\t\t&lt;strong&gt;Khung pháp lý v&lt;\/strong&gt;&lt;strong&gt;ề&lt;\/strong&gt;&lt;strong&gt; vi&lt;\/strong&gt;&lt;strong&gt;ệ&lt;\/strong&gt;&lt;strong&gt;c x&lt;\/strong&gt;&lt;strong&gt;ử&lt;\/strong&gt;&lt;strong&gt; lý tài s&lt;\/strong&gt;&lt;strong&gt;ả&lt;\/strong&gt;&lt;strong&gt;n x&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;u v&lt;\/strong&gt;&lt;strong&gt;ẫ&lt;\/strong&gt;&lt;strong&gt;n chưa có. &lt;\/strong&gt;Việc xử lý tài sản xấu ở các nước Đông Á được quản lý bởi các Cơ quan quản lý tài sản của Chính phủ, trong đó một số cơ quan có đủ quyền lực pháp lý đặc biệt để giải quyết tài sản. Ở Việt Nam, đó là Công ty mua bán nợ và tài sản tồn động của doanh nghiệp (DATC) trực thuộc Bộ Tài chính, nhưng DATC không chỉ thiếu vốn, mà khung pháp lý cơ bản cho phép các công ty quản lý tài sản được chuyển nhượng và giải quyết tài sản cũng thiếu trầm trọng (chưa nói đến vấn đề chuyển nhượng cho nước ngoài). Không có cả thị trường thứ cấp cho việc mua bán khoản vay và cơ sở pháp lý cho việc chuyển nhượng tài sản thế chấp, đặc biệt là thế chấp bất động sản. Nhiều người cũng quan ngại rằng DATC thiếu một cơ cấu quản lý để đảm bảo việc lựa chọn tài sản thích hợp, thẩm định theo giá thị trường và hình thức giải quyết tài sản hợp lý để tối đa hóa giá trị thu hồi.&lt;\/p&gt;\r\n\t&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n&lt;ul style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;strong&gt;Đ&lt;\/strong&gt;&lt;strong&gt;ị&lt;\/strong&gt;&lt;strong&gt;nh hư&lt;\/strong&gt;&lt;strong&gt;ớ&lt;\/strong&gt;&lt;strong&gt;ng lãnh đ&lt;\/strong&gt;&lt;strong&gt;ạ&lt;\/strong&gt;&lt;strong&gt;o trong vi&lt;\/strong&gt;&lt;strong&gt;ệ&lt;\/strong&gt;&lt;strong&gt;c c&lt;\/strong&gt;&lt;strong&gt;ả&lt;\/strong&gt;&lt;strong&gt;i t&lt;\/strong&gt;&lt;strong&gt;ổ&lt;\/strong&gt;&lt;strong&gt; và nh&lt;\/strong&gt;&lt;strong&gt;ữ&lt;\/strong&gt;&lt;strong&gt;ng chính sách quan tr&lt;\/strong&gt;&lt;strong&gt;ọ&lt;\/strong&gt;&lt;strong&gt;ng v&lt;\/strong&gt;&lt;strong&gt;ẫ&lt;\/strong&gt;&lt;strong&gt;n chưa rõ ràng&lt;\/strong&gt;. Với những cái tên nổi tiếng bị bắt trong cơn bão ngân hàng như Nguyễn Đức Kiên hay gần đây là việc chủ tịch Sacombank Đặng Văn Thành từ chức, có một sự bất ổn chung trong môi trường chính trị dẫn đến những cuộc điều tra cũng như lo ngại về khả năng của tầng lớp lãnh đạo trong việc đưa ra các chính sách cứng rắn về vấn đề tái cơ cấu ngân hàng.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n&lt;ul style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;li&gt;\r\n\t\tCuối cùng, nhưng không kém phần quan trọng, những người chúng tôi gặp cũng tin là &lt;strong&gt;không có d&lt;\/strong&gt;&lt;strong&gt;ấu hiệu nào về “một cuộc khủng hoảng” để buộc các ngân hang phải tăng tốc cải tổ.&lt;\/strong&gt; Không giống như năm 1997\/98 khi cuộc khoảng hoảng về cán cân thanh toán cùng với khủng khoảng ngân hàng buộc các quốc gia Châu Á phải hành động quyết liệt hơn với các ngân hàng yếu kém của họ để phục hồi niềm tin (đồng thời tuân theo các chương trình của IMF), “khủng hoảng ngân hàng” ở Việt Nam chủ yếu là một cuộc khủng hoảng mang tính nội địa. Tín dụng ngân hàng ở Việt Nam phần lớn được xây dựng từ nguồn tiền gửi trong nước, với rất ít sự cầu viện vào các dòng vốn bên ngoài, đồng thời cũng có rất ít dòng vốn nóng (hot money) để có thể tạo ra tình trạng lượng lớn vốn đổ ra ngoài làm mất cân bằng tài chính đối ngoại và dẫn tới sự can thiệp của các chính sách. Với sự hỗ trợ của Bảo hiểm tiền gửi toàn bộ cũng như tầm quan trọng của Chính phủ đằng sau các ngân hàng, niềm tin của người gửi vào hệ thống ngân hàng vẫn ở mức cao và dường như không quan tâm đến những tin tức xấu của giới ngân hàng, kể cả vấn đề tỉ lệ nợ xấu đang gia tăng hay vấn đề thanh khoản của ACB sau khi bầu Kiên bị bắt.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/01\/Untitled2.png&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-1326&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/01\/Untitled2-1024x877.png&quot; title=&quot;Untitled&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;span style=&quot;text-align: right;&quot;&gt;&amp;nbsp;&lt;\/span&gt;&lt;\/p&gt;\r\n&lt;p style=&quot;text-align: right;&quot;&gt;\r\n\t&lt;strong&gt;Nguồn&lt;\/strong&gt;: Citi research, VCBS&lt;\/p&gt;\r\n",
       "status": true,
       "created": ISODate("2013-07-23T08:41:52.0Z"),
-      "updated": ISODate("2013-07-23T09:10:50.0Z"),
+      "updated": ISODate("2013-08-08T17:02:33.0Z"),
       "author": "user1",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -1576,7 +1579,7 @@ db.getCollection("branch").insert({
       "content": "&lt;p&gt;\r\n\tMarc Faber, người dự báo chính xác sự sụp đổ của thị trường chứng khoán 1987, cho rằng dòng tiền sẽ đổ mạnh vào Việt Nam, Trung Quốc, Nhật Bản trong 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrong cuộc phỏng vấn hôm 9\/1 vừa qua với hãng tin CNBC, chuyên gia phân tích tài chính Marc Faber (người đã dự báo chính xác về sự sụp đổ tất yếu của thị trường chứng khoán năm 1987) cho rằng, Việt Nam, Trung Quốc, Nhật Bản và Ukraine sẽ là các thị trường chứng khoán tốt nhất năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrong khi đó, ông nhấn mạnh, năm 2013 lại không phải là năm thuận lợi cho các thị trường vốn tăng trưởng khá tốt sau tháng 3\/2009 như Malaysia, Indonesia, Philippines và Thái Lan.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tFaber cho rằng, nhà đầu tư sẽ hướng đến các thị trường nhiều biến động thời gian qua như Việt Nam, Trung Quốc và Nhật Bản. Hay nói cách khác, dòng tiền sẽ dịch chuyển từ các thị trường từng được đánh giá cao sang các thị trường trước đó tồi tệ, đặc biệt là Nhật Bản và Ukraine.&lt;\/p&gt;\r\n&lt;div&gt;\r\n\tThời gian gần đây, thị trường chứng khoán Việt Nam luôn nhận được sự đánh giá cao của chuyên gia. Thời báo phố Wall nhận định, thị trường chứng khoán Việt Nam là ngôi sao châu Á năm 2012, trong khi theo Bloomberg, Việt Nam sẽ là thị trường tăng trưởng tốt nhất thế giới năm 2013.\r\n\t&lt;p&gt;\r\n\t\tTổng giám đốc kiêm Giám đốc điều hành công ty quản lý quỹ Manulife tại TPHCM, bà Nguyễn Vũ Ngọc Trinh nhận định: “Chúng tôi rất vui khi Chính phủ cam kết ổn định kinh tế, đó là điều chúng tôi sẽ tiếp tục chứng kiến trong năm 2013”. Manulife hiện đang quản lý số tài sản lên đến 300 triệu USD tại Việt Nam. Quỹ này đã tăng nắm giữ cổ phiếu Việt Nam trong những tuần gần đây.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tTrưởng bộ phận nghiên cứu tại Công ty Chứng khoán TPHCM (HSC), ông Fiachra Mac Cana, cho biết, những tuần gần đây, các nhà đầu tư đã “đổ xô gom cổ phiếu” Việt Nam. Lượng giao dịch trung bình mỗi ngày kể từ đầu năm nay khoảng 100 triệu USD, gần gấp 3 lần nửa sau năm 2012. Tuy nhiên, ông MacCana cũng cho rằng, chứng khoán Việt Nam có thể giảm trong một thời gian ngắn sau khi tăng 20%.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tĐến nay, nhà đầu tư nước ngoài mua ròng trên sàn chứng khoán Việt Nam 6 tháng liên tiếp. Kể từ đầu năm, khối ngoại mua ròng 51 triệu USD cổ phiếu, cao hơn 2 lần so với cùng kỳ 2012, trong đó riêng sàn HSX là 42 triệu USD. Hiện có 314 mã cổ phiếu niêm yết trên HSX với tổng giá trị vốn hóa khoảng 34 tỷ USD.&lt;\/p&gt;\r\n&lt;\/div&gt;\r\n&lt;address&gt;\r\n\tNguồn Gafin&lt;\/address&gt;\r\n",
       "status": true,
       "created": ISODate("2013-07-23T08:38:35.0Z"),
-      "updated": ISODate("2013-07-23T09:11:05.0Z"),
+      "updated": ISODate("2013-08-08T17:02:35.0Z"),
       "author": "user1",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -1599,7 +1602,7 @@ db.getCollection("branch").insert({
       "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường tiếp tục diễn biến phân hóa rõ rệt khi mà dòng tiền chưa có sự lan tỏa rộng, diễn biến tích cực của nhóm cổ phiếu largecap trong phiên đầu tuần vẫn đang là động lực chính giúp chỉ số Vnindex vận động tích cực hơn. Trong khi đó, chỉ số Hnxindex vẫn đang trong giai đoạn tích lũy dưới ngưỡng cản 63.5 với thanh khoản thấp, cho thấy những phiên tăng vừa qua trên Vnindex chưa thật sự bền vững. Như trong các bản tin trước, chúng tôi đánh giá ngưỡng 507-510 sẽ đóng vai trò kháng cự mạnh khi Vnindex tiếp tục tăng trong những phiên tới, do đó nhà đầu tư cần thận trọng khi Vnindex tiến về vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/07\/vnindex2.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3151&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/07\/vnindex2-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược trade ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tTheo quan điểm của chúng tôi, nhà đầu tư có thể tiếp tục duy trì&amp;nbsp;trạng thái nắm giữ với danh mục đã mua trong những phiên trước.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mua đuổi khi Vnindex tăng lên vùng kháng cự 507-510. Chúng tôi sẽ cập nhật tín hiệu bán nếu Vnindex tạo đỉnh ở vùng này.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
       "status": true,
       "created": ISODate("2013-07-23T07:45:22.0Z"),
-      "updated": ISODate("2013-07-23T09:11:23.0Z"),
+      "updated": ISODate("2013-08-08T17:02:38.0Z"),
       "author": "user1",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -1622,7 +1625,7 @@ db.getCollection("branch").insert({
       "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Vùng hỗ trợ để tiếp tục xu hướng tăng ngắn hạn: 490. &amp;nbsp;Thủng vùng này không mua thêm, chờ xác định rõ xu hướng , nếu kéo lên lại vượt 498 mới mua, chỉ mua ngắn hạn, ưu tiên cổ phiếu có sẵn, mua thấp bán cao, lên chạm kháng cự &amp;nbsp;512.5 \/ 530thấy yếu nên bán ra chốt lãi phần mua thêm sau. Vùng 530 thấy phân phối vol mạnh cao đột biến nên bán chốt danh mục giữ tiền mặt; nếu duy trì vol tốt ổn định có nhiều thông tin tốt hỗ trợ nên giữ chờ vượt 530 có thể tăng thêm lượng cổ phiếu, kỳ vọng 550.&lt;\/strong&gt;&lt;\/p&gt;\r\n",
       "status": true,
       "created": ISODate("2013-07-20T09:37:08.0Z"),
-      "updated": ISODate("2013-07-23T09:11:37.0Z"),
+      "updated": ISODate("2013-08-08T17:02:26.0Z"),
       "author": "user1",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -3280,7 +3283,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
-      "_id": ObjectId("51a1cc1f471dee1c0c000009"),
+      "_id": ObjectId("51ffcbc8471deeb009000013"),
       "email": "user2@test.com",
       "primary": true
     }
@@ -3291,14 +3294,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("51a1cc1f471dee1c0c000000"),
+    "_id": ObjectId("51ffcbc8471deeb00900000a"),
     "firstname": "user2",
     "lastname": "yesocl",
-    "birthday": ISODate("2013-05-26T08:47:27.0Z"),
-    "sex": 1,
+    "birthday": ISODate("2013-08-05T15:59:04.0Z"),
+    "sex": NumberInt(1),
     "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
     "location": {
-      "_id": ObjectId("51a1cc1f471dee1c0c000001"),
+      "_id": ObjectId("51ffcbc8471deeb00900000b"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -3308,7 +3311,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("51a1cc1f471dee1c0c000002"),
+        "_id": ObjectId("51ffcbc8471deeb00900000c"),
         "im": "user2",
         "type": "skype",
         "visible": "myfollow"
@@ -3316,7 +3319,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("51a1cc1f471dee1c0c000003"),
+        "_id": ObjectId("51ffcbc8471deeb00900000d"),
         "phone": "0904000444",
         "type": "mobile",
         "visible": "myfollow"
@@ -3324,32 +3327,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("51a1cc1f471dee1c0c000004"),
+        "_id": ObjectId("51ffcbc8471deeb00900000e"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("51a1cc1f471dee1c0c000005"),
+      "_id": ObjectId("51ffcbc8471deeb00900000f"),
       "experiencies": [
         {
-          "_id": ObjectId("51a1cc1f471dee1c0c000006"),
+          "_id": ObjectId("51ffcbc8471deeb009000010"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("51a1cc1f471dee1c0c000007"),
+            "_id": ObjectId("51ffcbc8471deeb009000011"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T09:47:27.0Z"),
-          "ended": ISODate("2013-01-01T09:47:27.0Z"),
+          "started": ISODate("2013-01-01T16:59:04.0Z"),
+          "ended": ISODate("2013-01-01T16:59:04.0Z"),
           "current": false,
           "description": "Sed et utamur argumentum. Eum an habeo ubique efficiantur. Eu sea oporteat vituperatoribus, eos in graecis delicata persecuti. Mel an summo dicit eleifend. Copiosae quaestio mandamus vim et."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("51a1cc1f471dee1c0c000008"),
+          "_id": ObjectId("51ffcbc8471deeb009000012"),
           "school": "University of Economics Ho Chi Minh City",
           "school_id": "",
           "started": "2009",
@@ -3382,7 +3385,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("51ada7d1d874597c0900000b"),
+      "_id": ObjectId("520122e6471dee380a000009"),
       "email": "quangthi_90@yahoo.com.vn",
       "primary": true
     }
@@ -3393,14 +3396,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("51ada7d1d874597c09000002"),
-    "firstname": "user1",
-    "lastname": "yesocl",
-    "birthday": ISODate("2013-06-04T08:39:44.0Z"),
-    "sex": 1,
+    "_id": ObjectId("520122e5471dee380a000000"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("2013-08-06T16:23:01.0Z"),
+    "sex": NumberInt(1),
     "headingLine": "",
     "location": {
-      "_id": ObjectId("51ada7d1d874597c09000003"),
+      "_id": ObjectId("520122e5471dee380a000001"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -3410,7 +3413,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("51ada7d1d874597c09000004"),
+        "_id": ObjectId("520122e5471dee380a000002"),
         "im": "user1",
         "type": "skype",
         "visible": "myfollow"
@@ -3418,7 +3421,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("51ada7d1d874597c09000005"),
+        "_id": ObjectId("520122e5471dee380a000003"),
         "phone": "0903000333",
         "type": "mobile",
         "visible": "myfollow"
@@ -3426,32 +3429,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("51ada7d1d874597c09000006"),
+        "_id": ObjectId("520122e5471dee380a000004"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("51ada7d1d874597c09000007"),
+      "_id": ObjectId("520122e5471dee380a000005"),
       "experiencies": [
         {
-          "_id": ObjectId("51ada7d1d874597c09000008"),
+          "_id": ObjectId("520122e5471dee380a000006"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("51ada7d1d874597c09000009"),
+            "_id": ObjectId("520122e5471dee380a000007"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T09:39:44.0Z"),
-          "ended": ISODate("2013-01-01T09:39:44.0Z"),
+          "started": ISODate("2013-01-01T17:23:01.0Z"),
+          "ended": ISODate("2013-01-01T17:23:01.0Z"),
           "current": false,
           "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("51ada7d1d874597c0900000a"),
+          "_id": ObjectId("520122e5471dee380a000008"),
           "school": "Vietnam National University - Ho Chi Minh City",
           "school_id": "",
           "started": "2008",
