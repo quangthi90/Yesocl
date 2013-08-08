@@ -413,7 +413,7 @@ class ControllerGroupGroup extends Controller {
 		
 		$this->data['categories'] = array();
 		foreach ( $categories as $key => $category ) {
-			if ( $group->getCategoryById($category->getId()) ){
+			if ( isset($group) && $group->getCategoryById($category->getId()) ){
 				$checked = true;
 			}else{
 				$checked = false;
