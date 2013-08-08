@@ -28,7 +28,7 @@
           				<div class="span9"><input class="location input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][location]" value="<?php echo $experience['location']; ?>" /><input required="required" type="hidden" name="background[experiencies][<?php echo $key; ?>][city_id]" value="<?php echo $experience['city_id']; ?>" /></div>
           			</div>
           		</div>
-          		<div class="row-fluid">
+          		<div class="row-fluid wr-time">
           			<div class="span1">
           				<div class="span12"><?php echo $entry_time_period; ?></div>
           			</div>
@@ -64,7 +64,7 @@
           		<div class="row-fluid">
           			<div class="span4">
           				<div class="span3"><?php echo $entry_description; ?></div>
-          				<div class="span9"><input class="description input-xxlarge" type="text" name="background[experiencies][<?php echo $key; ?>][description]" value="<?php echo $experience['description']; ?>" /></div>
+          				<div class="span9"><textarea class="description input-xxlarge" type="text" name="background[experiencies][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
           			</div>
           		</div>
 				</td>

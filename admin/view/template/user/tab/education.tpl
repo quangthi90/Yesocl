@@ -4,7 +4,7 @@
                     <td>
                     <div class="row-fluid">
                          <div class="span2"><strong><?php echo $entry_school; ?></strong></div>
-                         <div class="span9"><input datalist="school" class="datalist school input-medium" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" />
+                         <div class="span9"><input datalist="school" class="datalist school input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" />
                           <?php if ( isset( $error_education[$key]['school'] ) ) { ?>
                           <div class="warning"><?php echo $error_education[$key]['school']; ?></div>
                           <?php } ?>
@@ -29,23 +29,23 @@
                           </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_degree; ?></div>
-                         <div class="span10"><input datalist="degree" class="datalist degree input-medium" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
+                         <div class="span10"><input datalist="degree" class="datalist degree input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_field_of_study; ?></div>
-                         <div class="span10"><input datalist="fieldofstudy" class="datalist fieldofstudy input-medium" type="text" name="background[educations][<?php echo $key; ?>][fieldofstudy]" value="<?php echo $education['fieldofstudy']; ?>" /></div>
+                         <div class="span10"><input datalist="fieldofstudy" class="datalist fieldofstudy input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][fieldofstudy]" value="<?php echo $education['fieldofstudy']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_grace; ?></div>
-                         <div class="span10"><input class="grace input-medium" type="text" name="background[educations][<?php echo $key; ?>][grace]" value="<?php echo $education['grace']; ?>" /></div>
+                         <div class="span10"><input class="grace input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][grace]" value="<?php echo $education['grace']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_societies; ?></div>
-                         <div class="span10"><input class="societies input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][societies]" value="<?php echo $education['societies']; ?>" /></div>
+                         <div class="span10"><textarea class="societies input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][societies]"><?php echo $education['societies']; ?></textarea></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_description; ?></div>
-                         <div class="span10"><input class="description input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][description]" value="<?php echo $education['description']; ?>" /></div>
+                         <div class="span10"><textarea class="description input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][description]"><?php echo $education['description']; ?></textarea></div>
                     </div>
                     </td>
                </tr>
