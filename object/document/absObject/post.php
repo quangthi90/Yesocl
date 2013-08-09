@@ -76,11 +76,6 @@ Abstract Class Post {
 	public function formatToCache(){
 		$limit = 200;
 
-		$comment_count = 0;
-		if ( $this->comments ){
-			$comment_count = count($this->comments);
-		}
-
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
@@ -88,7 +83,6 @@ Abstract Class Post {
 			'description'	=> $this->getDescription(),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
-			'comment_count' => $comment_count,
 			'user_id'		=> $this->getUser()->getId(),
 			'thumb'			=> $this->getThumb(),
 			'slug'			=> $this->getSlug(),
