@@ -47,6 +47,10 @@ class ModelUserComment extends Doctrine {
 		
 		$this->dm->flush();
 		
+		//-- Update 50 last Comments
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getId(), $post, $comment->getId() );
+		
 		return true;
 	}
 
@@ -88,6 +92,9 @@ class ModelUserComment extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model( 'tool/cache' );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getId(), $post, $comment_id );
 		
 		return true;
 	}
@@ -96,17 +103,28 @@ class ModelUserComment extends Doctrine {
 		if ( isset($data['id']) ) {
 			if ( count($data['id']) > 0 ){
 				$user = $this->dm->getRepository('Document\User\User')->findOneBy( array('posts.comments.id' => $data['id'][0]) );
+				
+				if ( !$user ){
+					return false;
+				}
+
+				$post = $this->dm->getRepository('Document\User\Post')->findOneBy( array('comments.id' => $data['id'][0]) );
+				
+				if ( !$post ){
+					return false;
+				}
 			}else {
 				return false;
 			}
 			
 			foreach ( $data['id'] as $id ) {
-				foreach ( $user->getPosts() as $post ){
-					$comment = $post->getCommentById( $id );
-					if ( !empty( $comment ) ) {
-						$post->getComments()->removeElement( $comment );
-						break;
-					}
+				$comment = $post->getCommentById( $id );
+				if ( !empty( $comment ) ) {
+					// remove cache
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deleteComment( $id, $post->getId(), $this->config->get('comment')['type']['user'], $user->getId() );
+
+					$post->getComments()->removeElement( $comment );
 				}
 			}
 		}else {
@@ -114,6 +132,8 @@ class ModelUserComment extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>

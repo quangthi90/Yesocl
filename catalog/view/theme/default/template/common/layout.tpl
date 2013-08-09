@@ -39,6 +39,7 @@
 		<!-- Common Script -->
 		<script type="text/javascript" src="catalog/view/javascript/yes.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
+		<script type="text/javascript" src="catalog/view/javascript/post.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.bpopup.min.js"></script>
 		<!-- Custom Script -->
     	{% block javascript %}

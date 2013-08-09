@@ -2,7 +2,28 @@
 use Document\Group\Post;
 
 class ModelGroupPost extends Doctrine {
-	public function addPost( $branch_id, $data = array(), $thumb = array() ) {
+	/**
+	 * Add new Post of Group to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Group ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
+	public function addPost( $group_id, $data = array(), $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
 			return false;
@@ -29,16 +50,6 @@ class ModelGroupPost extends Doctrine {
 			$data['status'] = false;
 		}
 
-		// thumb
-		if ( isset( $thumb ) && $thumb['size'] > 0 ) {
-  			if ( !$this->isValidThumb( $thumb ) ) {
-  				return false;
-  			}
-  		}
-		else {
-			$thumb = array();
-  		}
-
 		// Group is required
 		if ( !isset( $group_id ) ) {
 			return false;
@@ -58,20 +69,52 @@ class ModelGroupPost extends Doctrine {
 			$category = $this->dm->getRepository('Document\Branch\Category')->find( $data['category_id'] );
 			$post->setCategory( $category );
 		}
-
-		if ( !empty( $thumb ) ) {
-			if ( $data['thumb'] = $this->uploadThumb( $group->getId(), $post->getId(), $thumb ) ) {
-				$post->setThumb( $data['thumb'] );
-			}
-		}
 		
 		$group->addPost( $post );
 		
 		$this->dm->flush();
+
+		$this->load->model('tool/image');
+		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
+			$folder_link = $this->config->get('group')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
+			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
+				$post->setThumb( $data['thumb'] );
+			}
+		}
+
+		$this->dm->flush();
+
+		//-- Update 60 last posts
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post_id );
 		
 		return true;
 	}
 
+	/**
+	 * Edit Post of Group to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
@@ -98,16 +141,6 @@ class ModelGroupPost extends Doctrine {
 		}else {
 			$data['status'] = false;
 		}
-
-		// thumb
-		if ( isset( $thumb ) ) {
-  			if ( !$this->isValidThumb( $thumb ) ) {
-  				return false;
-  			}
-  		}
-		else {
-			$thumb = array();
-  		}
 		
 		$group = $this->dm->getRepository('Document\Group\Group')->findOneBy( array( 'posts.id' => $post_id ) );
 		
@@ -126,18 +159,22 @@ class ModelGroupPost extends Doctrine {
 			$category = $this->dm->getRepository('Document\Branch\Category')->find( $data['category_id'] );
 			$post->setCategory( $category );
 		}
-		
-		if ( !empty( $thumb ) ) {
-			if ( $data['thumb'] = $this->uploadThumb( $group->getId(), $post->getId(), $thumb ) ) {
+
+		$this->load->model('tool/image');
+		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
+			$folder_link = $this->config->get('group')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
+			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
 				$post->setThumb( $data['thumb'] );
-			}else {
-				$post->setThumb( '' );
 			}
-		}else{
-			$post->setThumb('');
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model( 'tool/cache' );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post_id );
 		
 		return true;
 	}
@@ -149,11 +186,21 @@ class ModelGroupPost extends Doctrine {
 			}
 			
 			foreach ( $data['id'] as $id ) {
-				foreach ( $group->getPosts() as $post ){
-					if ( $post->getId() == $id ){
-						$group->getPosts()->removeElement( $post );
-						break;
-					}
+				$post = $group->getPostById( $id );
+
+				if ( !empty( $post ) ) {
+					$folder_link = $this->config->get('group')['default']['image_link'];
+					$folder_name = $this->config->get('post')['default']['image_folder'];
+					$path = DIR_IMAGE . $folder_link . $group->getId() . '/' . $folder_name . '/' . $post->getId();
+					
+					$this->load->model('tool/image');
+					$this->model_tool_image->deleteDirectoryImage( $path );
+
+					// remove cache
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deletePost( $id, $this->config->get('post')['type']['group'], $group->getId() );
+
+					$group->getPosts()->removeElement( $post );
 				}
 			}
 		}
