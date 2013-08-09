@@ -1,7 +1,8 @@
 <?php
 class ModelBranchBranch extends Doctrine {
 	public function getAllBranchs(){
-		return $this->dm->getRepository('Document\Branch\Branch')->findAll();
+		$this->load->model( 'tool/cache' );
+		return $this->model_tool_cache->getAllBranchIds();
 	}
 }
 ?>

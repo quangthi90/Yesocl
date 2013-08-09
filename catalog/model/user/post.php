@@ -1,19 +1,19 @@
 <?php
-class ModelCompanyPost extends Doctrine {
+class ModelUserPost extends Doctrine {
 	public function getPost( $post_id, $paging ){
 		$this->load->model('tool/cache');
 		$post = $this->model_tool_cache->getPost( $post_id, $paging );
 
 		if ( !$post ){
-			$company = $this->dm->getRepository('Document\Company\Company')->findOneBy( array(
+			$user = $this->dm->getRepository('Document\User\User')->findOneBy( array(
 				'posts.id' => $post_id
 			));
 		
-			if ( !$company ){
+			if ( !$user ){
 				return null;
 			}
 
-			$post = $company->getPostById( $post_id );
+			$post = $user->getPostById( $post_id );
 
 			if ( !$post ){
 				return null;
@@ -26,15 +26,15 @@ class ModelCompanyPost extends Doctrine {
 	}
 
 	public function getPostBySlug( $post_slug ){
-		$company = $this->dm->getRepository('Document\Company\Company')->findOneBy(array(
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
 			'posts.slug' => $post_slug
 		));
 
-		if ( !$company ){
+		if ( !$user ){
 			return null;
 		}
 
-		$post = $company->getPostBySlug( $post_slug );
+		$post = $user->getPostBySlug( $post_slug );
 
 		if ( !$post ){
 			return null;

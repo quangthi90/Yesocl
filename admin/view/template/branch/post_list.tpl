@@ -54,7 +54,7 @@
             <?php }?>
             <?php if (!$posts) { ?>
             <tr class="center">
-              <td colspan="7"><?php echo $text_no_results; ?></td>
+              <td colspan="8"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

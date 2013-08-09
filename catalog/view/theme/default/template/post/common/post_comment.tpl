@@ -6,7 +6,7 @@
 	<div id="comment-box" class="y-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				Comment box (<span>{% if post.comment_count is defined %}{{ post.comment_count }}{% endif %}</span>)
+				Comment box (<span class="counter">{% if post.comment_count is defined %}{{ post.comment_count }}{% endif %}</span>)
 				<a href="#" class="close">X</a>
 			</div>
 			<div class="y-box-content comment-body">
@@ -37,7 +37,7 @@
 			{% endif %}
 			</div>		
 			</div>	
-			<form class="y-comment-reply post post_new comment-form" data-post-id="{% if post.id is defined %}{{ post.id }}{% endif %}" data-url="{{ action.comment }}">
+			<form class="y-comment-reply post post_new comment-form" data-post-id="{% if post.id is defined %}{{ post.id }}{% endif %}" data-url="{{ action.comment }}" data-post-type="{% if post.type is defined %}{{ post.type }}{% endif %}" data-type-id="{% if type.id is defined %}{{ type.id }}{% endif %}">
 				<div class="row-fluid txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>
