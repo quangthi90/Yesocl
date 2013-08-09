@@ -1,5 +1,5 @@
 <?php
-use Document\User\Comment;
+use Document\AbsObject\Comment;
 
 class ModelUserComment extends Doctrine {
 	public function addComment( $data = array(), $post_id ) {
