@@ -113,8 +113,9 @@ class ControllerPostPost extends Controller {
         $this->load->model('account/customer');
         $this->load->model('tool/image');
 
-        foreach ( $comments as $key => $comment ) {echo '<pre>';var_dump($comments);exit();
-            $user = $this->model_account_customer->getCustomer( $comment['user_id'] );
+        foreach ( $comments as $key => $comment ) {
+            //$user = $this->model_account_customer->getCustomer( $comment['user_id'] );
+            $user = $this->model_tool_cache->getObject( $comment['user_id'], $this->config->get('common')['type']['user'] );
 
             if ( $user && $user['avatar'] ){
                 $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
