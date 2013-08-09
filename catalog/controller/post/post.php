@@ -137,7 +137,8 @@ class ControllerPostPost extends Controller {
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'post' => $comments
+            'comments' => $comments,
+            'postid'   => $data['post_id']
         )));
     }
 }

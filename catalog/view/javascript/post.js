@@ -54,14 +54,14 @@
 				$('.comment-body').html('');
 
 				var htmlOutput = '';
-				for (key in data.post.comments) {
-					htmlOutput += $.tmpl( $('#item-template'), data.post.comments[key] ).html();
+				for (key in data.comments) {
+					htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
 				}
 				htmlOutput += '<div id="add-more-item"></div>';
 				
 				comment_box.find('.comment-body').html(htmlOutput);
 				comment_box.find('.y-box-header span').html(that.comment_count);
-				comment_form.attr('data-post-id', data.post.id);				
+				comment_form.attr('data-post-id', data.postid);				
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
