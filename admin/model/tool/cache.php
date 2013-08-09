@@ -112,7 +112,7 @@ class ModelToolCache extends Model {
 	 * @return: Array Object comment
 	 */
 	public function setComment($comment, $post_id, $type_comment = 'branch', $type_id) {
-		$list_comment_data = $comment->formatToCache();
+		$comment_data = $comment->formatToCache();
 		
 		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
 		$post_folder = $this->config->get('post')['default']['cache_folder'];
@@ -121,7 +121,7 @@ class ModelToolCache extends Model {
 		
 		$this->cache->set( $comment->getId(), $comment_data, $path );
 		
-		return $list_comment_data;
+		return $comment_data;
 	}
 
 	/**

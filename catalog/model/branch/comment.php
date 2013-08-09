@@ -17,7 +17,7 @@ class ModelBranchComment extends Doctrine {
 			return array();
 		}
 
-		$comments = $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
+		return $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
 	}
 
 	public function getComment( $Comment_id ){

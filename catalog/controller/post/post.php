@@ -59,6 +59,8 @@ class ControllerPostPost extends Controller {
 
         if ( isset($this->request->post['post_id']) && !empty($this->request->post['post_id']) ){
             $data['post_id'] = $this->request->post['post_id'];
+        }elseif ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
+            $data['post_id'] = $this->request->get['post_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post id empty'
@@ -67,6 +69,8 @@ class ControllerPostPost extends Controller {
 
         if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
             $data['post_type'] = $this->request->post['post_type'];
+        }elseif ( isset($this->request->get['post_type']) && !empty($this->request->get['post_type']) ){
+            $data['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
@@ -98,24 +102,18 @@ class ControllerPostPost extends Controller {
             case 'branch':
                 $this->load->model('branch/comment');
                 $data['branch_id'] = $data['type_id'];
-                $post = $this->model_branch_comment->getComments( $data );
+                $comments = $this->model_branch_comment->getComments( $data );
                 break;
             
             default:
-                $post = null;
+                $comments = array();
                 break;
-        }
-
-        if ( !isset($post['user_id']) || empty($post['user_id']) ){
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: user id empty'
-            )));
         }
 
         $this->load->model('account/customer');
         $this->load->model('tool/image');
 
-        foreach ( $post['comments'] as $key => $comment ) {
+        foreach ( $comments as $key => $comment ) {echo '<pre>';var_dump($comments);exit();
             $user = $this->model_account_customer->getCustomer( $comment['user_id'] );
 
             if ( $user && $user['avatar'] ){
@@ -127,18 +125,18 @@ class ControllerPostPost extends Controller {
             }
 
             if ( $user && $user['username'] ){
-                $post['comments'][$key]['author'] = $user['username'];
+                $comments[$key]['author'] = $user['username'];
             }else{
-                $post['comments'][$key]['author'] = $comment['author'];
+                $comments[$key]['author'] = $comment['author'];
             }
 
-            $post['comments'][$key]['avatar'] = $avatar;
-            $post['comments'][$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+            $comments[$key]['avatar'] = $avatar;
+            $comments[$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
         }
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'post' => $post
+            'post' => $comments
         )));
     }
 }

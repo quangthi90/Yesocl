@@ -143,9 +143,8 @@ class ModelToolCache extends Model {
 		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
 		$path = $folder_link . $type_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name;
 		
-		$post = $this->cache->get( $comment_id, $path );
-		
-		return $post;
+		$comment = $this->cache->get( $comment_id, $path );
+		return $comment;
 	}
 
 	/**
@@ -171,11 +170,12 @@ class ModelToolCache extends Model {
 		//-- path of cache Folder of Branch
 		$cache_path = DIR_CACHE . $cache_link . $type_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name . '/';
 
-		$comment_ids = $this->getFolderNames( $cache_path );
+		$comment_caches = $this->getFilesNames( $cache_path );
 
 		$comments = array();
-		foreach ( $comment_ids as $comment_id ) {
-			$comments[$comment_id] = $this->getComment( $comment_id, $post_id, $type_post, $type_id );
+		foreach ( $comment_caches as $filename ) {
+			$comment_id = explode('.', $filename);
+			$comments[$comment_id[1]] = $this->getComment( $comment_id[1], $post_id, $type_post, $type_id );
 		}
 
 		return $comments;
@@ -191,6 +191,18 @@ class ModelToolCache extends Model {
 			$folders[] = $file;
 		}
 		return $folders;
+	}
+
+	public function getFilesNames( $path ){
+		$mix_files = scandir( $path );
+		$files = array();
+		foreach ( $mix_files as $file ) {
+			if ( $file == '.' || $file == '..' || !is_file($path . $file) ){
+				continue;
+			}
+			$files[] = $file;
+		}
+		return $files;
 	}
 }
 ?>
