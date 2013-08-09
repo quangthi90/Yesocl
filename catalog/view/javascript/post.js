@@ -147,6 +147,8 @@
 				list_comment.animate({ 
 					scrollTop: $('#add-more-item').offset().top
 				}, 1000);
+				that.$el.parent().find('.counter').html( parseInt(that.$el.parent().find('.counter').html()) + 1);
+				$('.counter' + that.$el.attr('data-post-id')).html( parseInt(that.$el.parent().find('.counter').html()));
 			}
 		});
 	};

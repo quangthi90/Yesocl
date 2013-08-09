@@ -6,7 +6,7 @@
 	<div id="comment-box" class="y-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				Comment box (<span>{% if post.comment_count is defined %}{{ post.comment_count }}{% endif %}</span>)
+				Comment box (<span class="counter">{% if post.comment_count is defined %}{{ post.comment_count }}{% endif %}</span>)
 				<a href="#" class="close">X</a>
 			</div>
 			<div class="y-box-content comment-body">
