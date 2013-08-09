@@ -80,6 +80,12 @@ class ModelGroupGroup extends Doctrine {
 
 		$this->dm->persist( $group );
 		$this->dm->flush();
+
+		//-- create cache for branch
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->setObject( $group, $this->config->get('post')['type']['group'] );
+
+		return true;
 	}
 
 	public function editGroup( $id, $data = array() ) {
@@ -156,6 +162,12 @@ class ModelGroupGroup extends Doctrine {
 		$group->setWebsite( $data['website'] );
 
 		$this->dm->flush();
+
+		//-- create cache for branch
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->setObject( $group, $this->config->get('post')['type']['group'] );
+
+		return true;
 	}
 
 	public function deleteGroup( $data = array() ) {
@@ -163,7 +175,13 @@ class ModelGroupGroup extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$group = $this->dm->getRepository( 'Document\Group\Group' )->find( $id );
 
-				$this->dm->remove($group);
+				if ( !empty( $group ) ) {
+					//-- remove cache of Branch
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deleteObject( $id, $this->config->get('post')['type']['group'] );
+
+					$this->dm->remove($group);
+				}
 			}
 		}
 		

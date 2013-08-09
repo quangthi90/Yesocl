@@ -43,7 +43,7 @@ class ControllerGroupPost extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_post->addPost( $this->request->get['branch_id'], $this->request->post, $this->request->files['thumb'] ) ) {
+			if ( $this->model_group_post->addPost( $this->request->get['group_id'], $this->request->post, $this->request->files['thumb'] ) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );

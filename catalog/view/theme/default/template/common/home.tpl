@@ -15,14 +15,13 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
 	<div id="y-main-content" class="has-horizontal has-block">
-		{#% for branch in branchs %#}
-		{% for branch in 1..3 %}
+		{% for branch in branchs %}
         {% set style = random([1, 2]) %}
 		{% set posts = all_posts[branch.id] %}
-		{#% if posts|length > 0 %#}
+		{% if posts|length > 0 %}
 		<div class="feed-block">
             <h3 class="block-title">
-                <a href="#"><i class="icon-th-large"></i> Test{{ branch.name }}</a>
+                <a href="#"><i class="icon-th-large"></i> {{ branch.name }}</a>
             </h3>
             {% if style == 1 %}
             	{{ block('post_common_post_block_ex1') }}
@@ -30,7 +29,7 @@
             	{{ block('post_common_post_block_ex2') }}
             {% endif %}
 		</div>
-		{#% endif %#}
+		{% endif %}
 		{% endfor %}		
 	</div>
 </div>

@@ -49,6 +49,10 @@ $config->load( 'title' );
 $config->load( 'user' );
 $config->load( 'company' );
 $config->load( 'group' );
+$config->load( 'post' );
+$config->load( 'comment' );
+$config->load( 'branch' );
+$config->load( 'common' );
 
 $db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
 

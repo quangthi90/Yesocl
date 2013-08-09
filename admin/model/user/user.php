@@ -337,7 +337,7 @@ class ModelUserUser extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setUser( $user );
+		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
 		
 		return true;
 	}
@@ -672,6 +672,9 @@ class ModelUserUser extends Doctrine {
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
 		
 		return true;
 	}
@@ -711,13 +714,16 @@ class ModelUserUser extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
-				$this->dm->remove($user);
+
+				if ( $user ){
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deleteObject( $id, $this->config->get('common')['type']['user'] );
+					
+					$this->dm->remove($user);
+				}
 			}
 		}
 		$this->dm->flush();
-
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->setUser( $user );
 
 		return true;
 	}

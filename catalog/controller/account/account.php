@@ -14,14 +14,7 @@ class ControllerAccountAccount extends Controller {
 		
 		$this->data['heading_title'] = $this->config->get('config_title');
 
-		$this->load->model( 'company/company' );
-		$this->load->model('tool/image');
-
-		$company = $this->model_company_company->getCompanyBySlug( $this->config->get('company')['default']['slug'] );
-
-		if ( $company ){
-			$company_posts = $company->getPosts();
-		}
+		print($this->customer->getId()); exit;
 
 		$this->data['posts'] = array();
 		$i = 0;

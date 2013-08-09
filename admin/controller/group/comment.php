@@ -44,7 +44,7 @@ class ControllerGroupComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_comment->addComment( $this->request->post, $this->request->get['post_id'] ) == false ){
+			if ( $this->model_group_comment->addComment( $this->request->get['post_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
 				$this->redirect( $this->url->link( 'group/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
@@ -84,7 +84,7 @@ class ControllerGroupComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_group_comment->editComment( $this->request->get['comment_id'], $this->request->post ) == false ){
+			if ( $this->model_group_comment->editComment( $this->request->get['post_id'], $this->request->get['comment_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
 				$this->redirect( $cancel );
@@ -116,7 +116,7 @@ class ControllerGroupComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_group_comment->deletePost( $this->request->post );
+			$this->model_group_comment->deleteComment( $this->request->get['post_id'], $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $cancel );
 		}
