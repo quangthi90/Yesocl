@@ -123,6 +123,7 @@
             <?php } ?>
             </select></td>
           </tr>
+          <!--
           <tr>
             <td><span class="required">*</span> <?php echo $entry_country; ?></td>
             <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[location][country]" value="<?php echo $country; ?>" /></td>
@@ -130,6 +131,11 @@
           <tr>
             <td><span disabled="disabled" class="required">*</span> <?php echo $entry_city; ?></td>
             <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[location][city]" value="<?php echo $city; ?>" /></td>
+          </tr>
+          -->
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_location; ?></td>
+            <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[location][location]" value="<?php echo $location; ?>" /></td>
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_postal_code; ?></td>
@@ -168,9 +174,13 @@
           </tr>
           <?php foreach ($ims as $key => $im) { ?>
           <tr>
-            <td><select disabled="disabled" class="input-small" name="user[ims][<?php echo $key; ?>][type]" ><?php foreach ($im_types as $im_type) { ?><option value="<?php echo $im_type['code']; ?>" <?php if($im['type'] == $im_type['code']) { ?>selected="selected"<?php } ?>><?php echo $im_type['text']; ?></option><?php } ?></select></td>
-            <td><input disabled="disabled" class="input-medium" type="text" name="user[ims][<?php echo $key; ?>][im]" value="<?php echo $im['im']; ?>" /></td>
-            <td><select disabled="disabled" class="visible input-medium" name="user[ims][<?php echo $key; ?>][visible]"><?php foreach ($visible_types as $visible_type) { ?><option value="<?php echo $visible_type['code']; ?>" <?php if($im['visible'] == $visible_type['code']) { ?>selected="selected"<?php } ?>><?php echo $visible_type['text']; ?></option><?php } ?></select></td>
+            <td>
+              <input disabled="disabled" class="input-medium" type="text" value="<?php foreach ($im_types as $im_type) { if($im['type'] == $im_type['code']) echo $im_type['text']; } ?>" />
+            </td>
+            <td><input disabled="disabled" class="input-medium" type="text" value="<?php echo $im['im']; ?>" /></td>
+            <td><input disabled="disabled" class="input-medium" type="text" value="
+              <?php foreach ($visible_types as $visible_type) { if($im['visible'] == $visible_type['code'] ) echo $visible_type['text']; } ?>" />
+            </td>
           </tr>
           <?php } ?>
           </table>
@@ -203,7 +213,7 @@
           </tr>
           <?php foreach ($websites as $website) { ?>
           <tr>
-            <td><input disabled="disabled" class="title input-medium" type="text" name="user[websites][<?php echo $key; ?>][title]" value="<?php echo $website['title']; ?>" /></td>
+            <td><input disabled="disabled" class="title input-medium" type="text" name="user[websites][<?php echo $key; ?>][title]" value="<?php foreach($title_types as $title_type){ if ($website['title'] == $title_type['code']) echo $website['title']; } ?>" /></td>
             <td><input disabled="disabled" class="url input-large" type="text" name="user[websites][<?php echo $key; ?>][url]" value="<?php echo $website['url']; ?>" /></td>
           </tr>
           <?php } ?>

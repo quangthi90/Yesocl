@@ -26,7 +26,7 @@ class ControllerUserUser extends Controller {
 		$this->load->model( 'user/user' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-		
+	
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -134,7 +134,7 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_experience'] = $this->language->get( 'tab_experience' );
 		$this->data['tab_education'] = $this->language->get( 'tab_education' );
 		$this->data['tab_former'] = $this->language->get( 'tab_former' );
-		
+	
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		
@@ -226,10 +226,10 @@ class ControllerUserUser extends Controller {
 			$this->data['country'] = '';
 			$this->data['country_id'] = 0;
 		}
-		*/
+		
 
 		// Entry localtion city
-		/*
+		
 		if ( $user->getMeta() ){
 			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
@@ -238,6 +238,11 @@ class ControllerUserUser extends Controller {
 			$this->data['city_id'] = 0;
 		}
 		*/
+		if ( $user->getMeta() ) {
+			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
+		} else {
+			$this->data['location'] = '';
+		}
 
 		// Entry postal code
 		if ( $user->getMeta() ){
@@ -289,6 +294,7 @@ class ControllerUserUser extends Controller {
 		// Entry im
 		$this->data['ims'] = array();
 		foreach ($user->getMeta()->getIms() as $key => $im) {
+			//var_dump($im);die;
 			$this->data['ims'][$key] = array(
 				'type' => $im->getType(),
 				'im' => $im->getIm(),
@@ -362,16 +368,17 @@ class ControllerUserUser extends Controller {
 		}
 
 		$this->load->model( 'data/value' );
-		$this->load->model( 'setting/config' );
-		$this->load->config( 'datatype' );
-		$this->model_setting_config->load( 'datatype_title' );
+		//$this->load->model( 'setting/config' );
+		//$this->load->config( 'datatype' );
+		//$this->model_setting_config->load( 'datatype_title' );
 		// Im type
 		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );
 		$this->data['im_types'] = array();
+		
 		foreach ($im_types as $im_type) {
 			$this->data['im_types'][] = array(
 				'text' => $im_type->getName(),
-				'code' => $im_type->getCode(),
+				'code' => $im_type->getValue(),
 				);
 		}
 
@@ -381,7 +388,7 @@ class ControllerUserUser extends Controller {
 		foreach ($phone_types as $phone_type) {
 			$this->data['phone_types'][] = array(
 				'text' => $phone_type->getName(),
-				'code' => $phone_type->getCode(),
+				'code' => $phone_type->getValue(),
 				);
 		}
 
@@ -391,26 +398,27 @@ class ControllerUserUser extends Controller {
 		foreach ($title_types as $title_type) {
 			$this->data['title_types'][] = array(
 				'text' => $title_type->getName(),
-				'code' => $title_type->getCode(),
+				'code' => $title_type->getValue(),
 				);
 		}
 
 		// Entry former visible
+		
 		$visible_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_title_type' ) ) );
 		$this->data['visible_types'] = array();
 		foreach ($visible_types as $visible_type) {
 			$this->data['visible_types'][] = array(
 				'text' => $visible_type->getName(),
-				'code' => $visible_type->getCode(),
+				'code' => $visible_type->getValue(),
 				);
 		}
-
+		
 		$this->template = 'user/user_view.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
 		);
-				
+			
 		$this->response->setOutput( $this->render() );
 	}
 
