@@ -35,7 +35,7 @@
 					<div class="row-fluid post_footer">
 						<div class="span8 post_action">
 							<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like</a>
-							<a href="#" class="open-comment" data-url="{{ post.href_status|raw }}" data-comment-count="{{ post.comment_count }}" data-post-id="{{ post.id }}" data-post-type="{{ post_type }}"><i class="icon-comments medium-icon"></i> Comment ({{ post.comment_count }})</a>
+							<a href="#" class="open-comment" data-url="{{ post.href_status|raw }}" data-comment-count="{{ post.comment_count }}" data-post-id="{{ post.id }}" data-post-type="{{ post_type }}"><i class="icon-comments medium-icon"></i> Comment (<span class="counter{{ post.id }}">{{ post.comment_count }}</span>)</a>
 						</div>
 						<div class="span4 post_date">
 							{{ post.created|date(date_format) }}
