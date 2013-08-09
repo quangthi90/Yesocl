@@ -61,7 +61,9 @@
 				
 				comment_box.find('.comment-body').html(htmlOutput);
 				comment_box.find('.y-box-header span').html(that.comment_count);
-				comment_form.attr('data-post-id', data.postid);				
+				comment_form.attr('data-post-id', data.post_id);
+				comment_form.attr('data-post-type', data.post_type);
+				comment_form.attr('data-type-id', data.type_id);				
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -85,7 +87,9 @@
 
 		this.$el		= $el;
 		this.$content	= $el.find('textarea');
-
+		this.post_id	= $el.data('post-id');
+		this.post_type	= $el.data('post-type');
+		this.type_id	= $el.data('type-id');
 		this.url		= $el.data('url');
 
 		this.$comment_btn	= $el.find('.btn-comment');
@@ -107,11 +111,11 @@
 				return false;
 			}
 
-			that.post_id	= that.$el.data('post-id');
-			
 			that.data = {
 				content 	: that.$content.val(),
-				post_id		: that.post_id
+				post_id		: that.$el.attr('data-post-id'),
+				post_type	: that.$el.attr('data-post-type'),
+				type_id		: that.$el.attr('data-type-id')
 			};
 
 			that.submit(that.$comment_btn);
@@ -126,7 +130,7 @@
 		var promise = $.ajax({
 			type: 'POST',
 			url:  this.url,
-			data: this.data,
+			data: that.data,
 			dataType: 'json'
 		});
 

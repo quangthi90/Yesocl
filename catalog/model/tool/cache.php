@@ -124,6 +124,37 @@ class ModelToolCache extends Model {
 	}
 
 	/**
+	 * Set last comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/08/05
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string type comment ['branch', 'group', 'user']
+	 *	- string type ID
+	 *	- object Post
+	 *	- string Comment ID
+	 * @return: Array Object comment
+	 */
+	public function updateLastComments($type_comment = 'branch', $type_id, $post, $comment_id = 0) {
+		$limit = 50;
+
+		$comments = $post->getComments();
+		$comment_length = count($comments);
+		
+		for ( $i = 0; $i < 60 && $i < $comment_length; $i++ ){
+			$comment = $comments[$i];
+			
+			if ( $comment->getId() == $comment_id || $this->getComment($comment->getId(), $post->getId(), $type_comment, $type_id) == null ){
+				$this->setComment( $comment, $post->getId(), $type_comment, $type_id );
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Get cache Comment of
 	 *	- Branch
 	 *	- Group
@@ -145,6 +176,33 @@ class ModelToolCache extends Model {
 		
 		$comment = $this->cache->get( $comment_id, $path );
 		return $comment;
+	}
+
+	/**
+	 * Create cache for Comment of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/08/05
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Comment
+	 *	- string Post ID
+	 *	- string type Comment ['branch', 'group', 'user']
+	 *	- string type ID
+	 * @return: Array Object comment
+	 */
+	public function setComment($comment, $post_id, $type_comment = 'branch', $type_id) {
+		$comment_data = $comment->formatToCache();
+		
+		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
+		$post_folder = $this->config->get('post')['default']['cache_folder'];
+		$folder_name = $this->config->get('comment')['default']['cache_folder'];
+		$path = $folder_link.$type_id.'/'.$post_folder.'/'.$post_id.'/'.$folder_name.'/';
+		
+		$this->cache->set( $comment->getId(), $comment_data, $path );
+		
+		return $comment_data;
 	}
 
 	/**

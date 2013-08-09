@@ -37,7 +37,7 @@
 			{% endif %}
 			</div>		
 			</div>	
-			<form class="y-comment-reply post post_new comment-form" data-post-id="{% if post.id is defined %}{{ post.id }}{% endif %}" data-url="{{ action.comment }}">
+			<form class="y-comment-reply post post_new comment-form" data-post-id="{% if post.id is defined %}{{ post.id }}{% endif %}" data-url="{{ action.comment }}" data-post-type="{% if post.type is defined %}{{ post.type }}{% endif %}" data-type-id="{% if type.id is defined %}{{ type.id }}{% endif %}">
 				<div class="row-fluid txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>

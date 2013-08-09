@@ -1,4 +1,8 @@
 <?php
+use Document\AbsObject\Comment;
+
+use MongoId;
+
 class ModelBranchComment extends Doctrine {
 	public function getComments( $data = array() ){
 		$this->load->model( 'tool/cache' );
@@ -22,6 +26,47 @@ class ModelBranchComment extends Doctrine {
 
 	public function getComment( $Comment_id ){
 
+	}
+
+	public function addComment( $data = array() ){
+		// Branch is required
+		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $data['type_id'] );
+		if ( empty( $branch ) ) {
+			return false;
+		}
+
+		// Author is required
+		if ( !isset( $data['user_id'] ) ) {
+			return false;
+		}
+		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
+		if ( empty( $user ) ) {
+			return false;
+		}
+
+		// Content is required
+		if ( !isset( $data['content'] ) || empty( $data['content'] ) ) {
+			return false;
+		}
+
+		// Status
+		$data['status'] = true;
+
+		$comment = new Comment();
+		$comment->setUser( $user );
+		$comment->setContent( $data['content'] );
+		$comment->setStatus( $data['status'] );
+
+		$post = $branch->getPostById( $data['post_id'] );
+		$post->addComment( $comment );
+
+		$this->dm->flush();
+		
+		//-- Update 50 last Comments
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getId(), $post, $comment->getId() );
+
+		return $comment->formatToCache();
 	}
 }
 ?>

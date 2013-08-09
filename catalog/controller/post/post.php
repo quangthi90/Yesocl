@@ -17,28 +17,53 @@ class ControllerPostPost extends Controller {
 	}
 
     public function addComment(){
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate() && isset($this->request->post['post_id']) ) {
-            $this->load->model('company/comment');
-
-            $comment = $this->model_company_comment->addComment( $this->request->post );
-
-            if ( $comment == null ){
-                return $this->response->setOutput(json_encode(array(
-                    'success' => 'not ok'
-                )));
-            }
-
-            $comment = $comment->formatToCache();
-            $comment['author'] = $this->customer->getUsername();
-
+        if ( $this->customer->isLogged() ) {
+            $data['user_id'] = $this->customer->getId();
+        }else {
             return $this->response->setOutput(json_encode(array(
-                'success' => 'ok',
-                'comment' => $comment
+                'success' => 'not ok1'
             )));
         }
-        
+
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate() && isset($this->request->post['post_id']) ) {
+            $data['post_id'] = $this->request->post['post_id'];
+            $data['content'] = $this->request->post['content'];
+        }else {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
+        }
+
+        if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
+            $data['post_type'] = $this->request->post['post_type'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok3'
+            )));
+        }
+
+        if ( isset($this->request->post['type_id']) && !empty($this->request->post['type_id']) ){
+            $data['type_id'] = $this->request->post['type_id'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok4'
+            )));
+        }
+
+        switch ($data['post_type']) {
+            case 'branch':
+                $this->load->model('branch/comment');
+                $comment = $this->model_branch_comment->addComment( $data );
+                break;
+            
+            default:
+                $comment = array();
+                break;
+        }
+
         return $this->response->setOutput(json_encode(array(
-            'success' => 'not ok'
+            'success' => 'ok',
+            'comment' => $comment
         )));
     }
 
@@ -59,8 +84,6 @@ class ControllerPostPost extends Controller {
 
         if ( isset($this->request->post['post_id']) && !empty($this->request->post['post_id']) ){
             $data['post_id'] = $this->request->post['post_id'];
-        }elseif ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
-            $data['post_id'] = $this->request->get['post_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post id empty'
@@ -69,8 +92,6 @@ class ControllerPostPost extends Controller {
 
         if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
             $data['post_type'] = $this->request->post['post_type'];
-        }elseif ( isset($this->request->get['post_type']) && !empty($this->request->get['post_type']) ){
-            $data['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
@@ -138,7 +159,9 @@ class ControllerPostPost extends Controller {
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'comments' => $comments,
-            'postid'   => $data['post_id']
+            'post_id'   => $data['post_id'],
+            'post_type' => $data['post_type'],
+            'type_id' => $data['type_id']
         )));
     }
 }
