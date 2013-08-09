@@ -60,7 +60,7 @@
 				htmlOutput += '<div id="add-more-item"></div>';
 				
 				comment_box.find('.comment-body').html(htmlOutput);
-				comment_box.find('.y-box-header span').html(that.comment_count);
+				comment_box.find('.y-box-header span').html(that.$el.attr('data-comment-count'));
 				comment_form.attr('data-post-id', data.post_id);
 				comment_form.attr('data-post-type', data.post_type);
 				comment_form.attr('data-type-id', data.type_id);				
@@ -148,7 +148,8 @@
 					scrollTop: $('#add-more-item').offset().top
 				}, 1000);
 				that.$el.parent().find('.counter').html( parseInt(that.$el.parent().find('.counter').html()) + 1);
-				$('.counter' + that.$el.attr('data-post-id')).html( parseInt(that.$el.parent().find('.counter').html()));
+				$('.counter' + that.$el.attr('data-post-id')).html( parseInt(that.$el.parent().find('.counter').html()) );
+				$('.open-comment[data-post-id=\'' + that.$el.attr('data-post-id') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
 			}
 		});
 	};
