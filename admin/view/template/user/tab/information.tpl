@@ -87,11 +87,11 @@
     </tr>
     <tr>
         <td><?php echo $entry_headingline; ?></td>
-        <td><input class="input-xxlarge" type="text" name="meta[headingline]" value="<?php echo $heading_line; ?>" /></td>
+        <td><textarea class="input-xxlarge" type="text" name="meta[headingline]"><?php echo $heading_line; ?></textarea></td>
     </tr>
     <tr>
         <td><?php echo $entry_interest; ?></td>
-        <td><input class="input-xxlarge" type="text" name="background[interest]" value="<?php echo $interest; ?>" /></td>
+        <td><textarea class="input-xxlarge" type="text" name="background[interest]"><?php echo $interest; ?></textarea></td>
     </tr>
 </table>
 <script type="text/javascript"><!--//
