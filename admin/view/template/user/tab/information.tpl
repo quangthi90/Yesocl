@@ -53,6 +53,26 @@
             <?php } ?>
         </select></td>
     </tr>
+
+    <tr>
+      <td><?php echo $entry_avatar; ?></td>
+      <td>
+        <div class="thumb fileupload fileupload-new" data-provides="fileupload">
+          <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="<?php echo $img_avatar; ?>" style="width: 150px; height: 150px;" /></div>
+          <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+          <div>
+            <span class="btn btn-file"><span class="fileupload-new"><?php echo $text_select_image; ?></span><span class="fileupload-exists"><?php echo $text_change; ?></span><input name="avatar" type="file" /></span>
+            <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" onclick="$('.thumb img').attr('src', '<?php echo $img_default; ?>');"><?php echo $text_remove; ?></a>
+          </div>
+        </div>
+        <?php if ( $error_thumb ) { ?>
+          <div class="alert alert-error">
+            <strong>Error!</strong> <?php echo $error_thumb; ?>
+          </div>
+        <?php } ?>
+      </td>
+    </tr>
+
     <tr>
         <td><span class="required">*</span> <?php echo $entry_location; ?></td>
         <td><input required="required" class="input-medium" type="text" name="meta[location][location]" value="<?php echo $location; ?>" /><input required="required" type="hidden" name="meta[location][city_id]" value="<?php echo $city_id; ?>" />

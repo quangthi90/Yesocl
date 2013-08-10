@@ -434,6 +434,7 @@ class ControllerUserUser extends Controller {
 		
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateInsert() ){
+
 			if ( $this->model_user_user->addUser( $this->request->post ) == true ) {
 				$this->session->data['success'] = $this->language->get( 'text_success' );
 			}else {
@@ -883,6 +884,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_male'] = $this->language->get( 'text_male' );
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
+		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -909,6 +911,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
 		$this->data['entry_sex'] = $this->language->get( 'entry_sex' );
 		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
+		$this->data['entry_avatar'] = $this->language->get( 'entry_avatar' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
 		$this->data['entry_postal_code'] = $this->language->get( 'entry_postal_code' );
 		$this->data['entry_industry'] = $this->language->get( 'entry_industry' );
@@ -965,6 +968,15 @@ class ControllerUserUser extends Controller {
 		$this->data['code_school'] = $this->config->get( 'datatype_school' );
 		$this->data['code_degree'] = $this->config->get( 'datatype_degree' );
 		$this->data['code_fieldofstudy'] = $this->config->get( 'datatype_fieldofstudy' );
+
+		// avatar
+		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
+
+		if ( isset( $user ) && trim( $user->getAvatar() ) != '' ) {
+			$this->data['img_avatar'] = HTTP_IMAGE . $user->getAvatar();
+		}else {
+			$this->data['img_avatar'] = $this->data['img_default'];
+		}
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
