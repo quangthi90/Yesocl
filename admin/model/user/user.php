@@ -331,16 +331,20 @@ class ModelUserUser extends Doctrine {
 		if ( isset($data['user']['status']) ){
 			$user->setStatus( $data['user']['status'] );
 		}
-		
-		// Save to DB
-		$this->dm->persist( $user );
 
-		// avatar
-		if ( !empty( $avatar ) ) {
-			if ( $data['avatar'] = $this->uploadLogo( $user->getId(), $avatar ) ) {
+		// Avatar
+		$this->load->model('tool/image');
+		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId();
+			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
 				$user->setAvatar( $data['avatar'] );
 			}
 		}
+		
+		// Save to DB
+		$this->dm->persist( $user );
 
 		$this->dm->flush();
 
@@ -677,6 +681,17 @@ class ModelUserUser extends Doctrine {
 			$user->setStatus( $data['user']['status'] );
 		}
 
+		// Avatar
+		$this->load->model('tool/image');
+		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId();
+			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
+				$user->setAvatar( $data['avatar'] );
+			}
+		}
+
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
@@ -848,42 +863,6 @@ class ModelUserUser extends Doctrine {
 		$query->setStart( $data['start'] );
  
 		return $this->client->execute( $query );
-	}
-
-	public function uploadAvatar( $user_id, $avatar ) {
-		$ext = end(explode(".", $avatar["name"]));
-		$path = 'data/catalog/user/' . $user_id . '/avatar.';
-		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
-			unlink($path . '.jpg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
-			unlink($path . '.jpeg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.gif' ) ) {
-			unlink($path . '.gif');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.png' ) ) {
-			unlink($path . '.png' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data' ) ) {
-			mkdir( DIR_IMAGE . 'data' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/user' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/user' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/user/' . $user_id ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/user/' . $user_id );
-		}
-
-		if ( move_uploaded_file( $avatar['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
-			return $path . $ext;
-		}else {
-			return false;
-		}
 	}
 }
 ?>

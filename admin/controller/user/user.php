@@ -459,6 +459,10 @@ class ControllerUserUser extends Controller {
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
+		if ( isset($this->request->files['avatar']) ){
+			$this->request->post['avatar'] = $this->request->files['avatar'];
+		}
+
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateUpdate() ){
 			if ( $this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post ) ) {
@@ -885,6 +889,8 @@ class ControllerUserUser extends Controller {
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
 		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
+		$this->data['text_change'] = $this->language->get( 'text_change' );
+		$this->data['text_remove'] = $this->language->get( 'text_remove' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -1098,8 +1104,15 @@ class ControllerUserUser extends Controller {
 			$this->data['birthday'] = '';
 		}
 
+		// logo
+		if ( isset( $user ) && trim( $user->getAvatar() ) != '' ) {
+			$this->data['img_avatar'] = HTTP_IMAGE . $user->getAvatar();
+		}else {
+			$this->data['img_avatar'] = $this->data['img_default'];
+		}
+
 		// Entry marital status
-		if ( isset($this->request->post['background']['maritalstatus']) ){
+		if ( isset($this->request->file['background']['maritalstatus']) ){
 			$this->data['marital_status'] = $this->request->post['background']['maritalstatus'];
 		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
 			$this->data['marital_status'] = $user->getMeta()->getBackground()->getMaritalStatus();
