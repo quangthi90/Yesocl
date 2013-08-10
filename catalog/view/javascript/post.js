@@ -187,6 +187,9 @@
 		comment_box.animate({"right": "2px"}, "slow", function(){			
 			//list_comment.makeScrollWithoutCalResize();
 		});
+		list_comment.animate({ 
+			scrollTop: $('#add-more-item').offset().top
+		}, 1000);
 	}
 
 	function hideCommentBox () {
@@ -207,6 +210,10 @@
 			$('.open-comment').removeClass('disabled');
 			comment_box.animate({"right": "-500px"}, "slow");
 			hideCommentBox();
+		});
+
+		list_comment.on('scroll', function () {
+			
 		});
 	});
 }(jQuery, document));

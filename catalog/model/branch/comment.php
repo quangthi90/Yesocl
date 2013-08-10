@@ -6,11 +6,21 @@ use MongoId;
 class ModelBranchComment extends Doctrine {
 	public function getComments( $data = array() ){
 		$this->load->model( 'tool/cache' );
+
 		if ( !isset($data['start']) || empty($data['start']) ){
 			$data['start'] = 0;
 		}
+
 		if ( !isset($data['limit']) || empty($data['limit']) ){
 			$data['limit'] = 10;
+		}
+
+		if ( !isset($data['sort']) || empty($data['sort']) ){
+			$data['sort'] = 'created';
+		}
+
+		if ( !isset($data['order']) || empty($data['order']) ){
+			$data['order'] = 'ASC';
 		}
 
 		if ( !isset($data['branch_id']) || empty($data['branch_id']) ){
@@ -21,7 +31,13 @@ class ModelBranchComment extends Doctrine {
 			return array();
 		}
 
-		return $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
+		$comments = $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
+		
+		if ( $data['order'] != 'ASC' ) {
+			$comments = krsort( $comments );
+		} 
+
+		return array_slice( $comments, count( $comments ) - $data['limit']*$data['start'] - $data['limit'], $data['limit']);
 	}
 
 	public function getComment( $Comment_id ){
