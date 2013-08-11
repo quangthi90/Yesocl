@@ -109,6 +109,7 @@ class ModelUserPost extends Doctrine {
 		$post->setStatus( $data['status'] );
 
 		$this->load->model('tool/image');
+		
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
@@ -125,15 +126,6 @@ class ModelUserPost extends Doctrine {
 		$folder_link = $this->config->get('user')['default']['cache_link'];
 		$folder_name = $this->config->get('post')['default']['cache_folder'];
 		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );
-
-		$this->load->model('tool/cache');
-		/*$folder_link = $this->config->get('user')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );*/
 		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post_id );
 		
 		return true;
