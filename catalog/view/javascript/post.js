@@ -2,6 +2,8 @@
 	var comment_box = $('#comment-box');
 	var comment_form = $('.comment-form');
 	var list_comment = $('#comment-box .y-box-content');
+	var scroll_loading = false;
+	var page = 1;
 
 	function CommentBtn( $el ){
 		var that = this;
@@ -63,7 +65,8 @@
 				comment_box.find('.y-box-header span').html(that.$el.attr('data-comment-count'));
 				comment_form.attr('data-post-id', data.post_id);
 				comment_form.attr('data-post-type', data.post_type);
-				comment_form.attr('data-type-id', data.type_id);				
+				comment_form.attr('data-type-id', data.type_id);	
+				page = 2;			
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -213,7 +216,35 @@
 		});
 
 		list_comment.on('scroll', function () {
-			
+			if(list_comment.scrollTop() == list_comment.height() - list_comment.height() && !scroll_loading && page*10 < $('.open-comment.disabled').attr('data-comment-count')) {
+				scroll_loading = true;
+				page++;
+				var data = {
+					'post_id'	: comment_form.attr('data-post-id'),
+					'post_type' : comment_form.attr('data-post-type'),
+					'page'		: page
+				}
+				$.ajax({
+					type: 'POST',
+					url:  $('.open-comment.disabled').data('url'),
+					data: data,
+					dataType: 'json',
+					progress: function () {
+						$('.comment-body').prepend('<span class="loading">Loading...</span>');
+					},
+					success: function (data) {
+						if(data.success == 'ok') {
+							var htmlOutput = '';
+							for (key in data.comments) {
+								htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
+							}
+							$('.comment-body').find('.loading').remove();
+							$('.comment-body').prepend(htmlOutput);
+							scroll_loading = false;
+						}
+					}
+				});
+    		}
 		});
 	});
 }(jQuery, document));

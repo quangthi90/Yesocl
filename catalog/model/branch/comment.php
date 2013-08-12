@@ -31,13 +31,43 @@ class ModelBranchComment extends Doctrine {
 			return array();
 		}
 
-		$comments = $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
-		
-		if ( $data['order'] != 'ASC' ) {
-			$comments = krsort( $comments );
-		} 
+		if ( !isset($data['page']) || empty($data['page']) ) {
+			$data['page'] = 1;
+		}else {
+			$data['page'] = (int)$data['page'];
+		}
 
-		return array_slice( $comments, count( $comments ) - $data['limit']*$data['start'] - $data['limit'], $data['limit']);
+		if ( $data['page'] > 5 ) {
+			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $data['branch_id'] );
+			$post = $branch->getPostById( $data['post_id'] );
+			$data = $post->getComments();
+			$index = $data['page']*$data['limit'] - 1;
+			$comments = array();
+			if ( $index < count( $data ) ) {
+				for ($i=0; $i < 10; $i++) { 
+					$comments[] = array(
+						'author' 		=> $data[$index]->getAuthor(),
+						'content' 		=> html_entity_decode($data[$index]->getContent()),
+						'created'		=> $data[$index]->getCreated()->format('h:i A d/m/Y'),
+						'user_id'		=> $data[$index]->getUser()->getId(),
+						'status'		=> $data[$index]->getStatus()
+						);
+				}
+			}
+			return $comments;
+		}else {
+			$comments = $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
+			
+			if ( $data['order'] != 'ASC' ) {
+				$comments = krsort( $comments );
+			} 
+
+			if ( $data['page']*10 < count($comments) ) {
+				return array_slice( $comments, count( $comments ) - $data['limit']*$data['page'], $data['limit']);
+			}else {
+				return array();
+			}
+		}
 	}
 
 	public function getComment( $Comment_id ){

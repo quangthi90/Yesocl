@@ -118,6 +118,10 @@ class ControllerPostPost extends Controller {
         if ( isset($this->request->post['paging']) && !empty($this->request->post['paging']) ){
           $paging = $this->request->post['paging'];
         }
+
+        if ( isset($this->request->post['page']) && !empty($this->request->post['page']) ){
+            $data['page'] = $this->request->post['page'];
+        }
         
         switch ($data['post_type']) {
             case 'branch':
