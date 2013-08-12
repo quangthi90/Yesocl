@@ -68,7 +68,7 @@ FlexibleElement.prototype.attachEvents = function() {
 			return;
 		}
 		sT.slideUp(100);
-	});
+	});	
 }
 
 /*
@@ -110,12 +110,6 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			$(this).height(heightMax);
 			$(this).css('float','left');
 			$(this).css('margin-right','30px');
-			var image = $(this).find('.post_image img');
-			if(image.length > 0) {
-				$(this).width(1.1*image.outerWidth());
-			}else {
-				$(this).width(widthM/3);
-			}
 			var headerPost = $(this).children('.post_header').first().outerHeight();
 			var footerPost = $(this).children('.post_footer').first().outerHeight();
 			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);

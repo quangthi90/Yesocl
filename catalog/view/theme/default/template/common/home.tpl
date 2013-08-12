@@ -2,7 +2,6 @@
 
 {% use '@template/default/template/post/common/post_block_ex1.tpl' %}
 {% use '@template/default/template/post/common/post_block_ex2.tpl' %}
-{#% use '@template/default/template/post/common/post_block_ex3.tpl' %#}
 {% use '@template/default/template/post/common/post_comment.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
@@ -22,7 +21,7 @@
 		{#% if posts|length > 0 %#}
 		<div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="#">{{ branch.name }}</a>
+                <a class="fl" href="#">{{ branch.name }}Branch {{loop.index}}</a>
                 <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
             </div>
             {% if style == 1 %}
@@ -40,4 +39,13 @@
 
 {% block javascript %}
 {{ block('post_common_post_comment_javascript') }}
+<script type="text/javascript" src="catalog/view/javascript/libs/modernizr.custom.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/libs/jquery.hoverdir.js"></script>
+<script type="text/javascript">
+    $(function() {    
+        $('.feed-block .feed').each( function() {
+            $(this).hoverdir(); 
+        });
+    });
+</script>
 {% endblock %}

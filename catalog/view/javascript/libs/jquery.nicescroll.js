@@ -49,7 +49,7 @@
       zindex:"auto",
       cursoropacitymin:0,
       cursoropacitymax:1,
-      cursorcolor:"#424242",
+      cursorcolor:"#5bb75b",
       cursorwidth:"10px",
       cursorborder:"1px solid #fff",
       cursorborderradius:"1px",
