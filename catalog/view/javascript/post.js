@@ -216,7 +216,10 @@
 		});
 
 		list_comment.on('scroll', function () {
-			if(list_comment.scrollTop() == list_comment.height() - list_comment.height() && !scroll_loading && page*10 < $('.open-comment.disabled').attr('data-comment-count')) {
+			if(list_comment.scrollTop() == list_comment.height() - list_comment.height() && page*10 < $('.open-comment.disabled').attr('data-comment-count')) {
+				if (scroll_loading) {
+					return false;
+				}
 				scroll_loading = true;
 				page++;
 				var data = {
@@ -230,7 +233,7 @@
 					data: data,
 					dataType: 'json',
 					progress: function () {
-						$('.comment-body').prepend('<span class="loading">Loading...</span>');
+						$('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-refresh"></i>Loading...</span>');
 					},
 					success: function (data) {
 						if(data.success == 'ok') {

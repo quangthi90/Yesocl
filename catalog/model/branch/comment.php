@@ -62,10 +62,10 @@ class ModelBranchComment extends Doctrine {
 				$comments = krsort( $comments );
 			} 
 
-			if ( $data['page']*10 < count($comments) ) {
-				return array_slice( $comments, count( $comments ) - $data['limit']*$data['page'], $data['limit']);
-			}else {
+			if ( $data['page']*10 < count($comments) && ( count( $comments ) - $data['page']) > 10 ) ) {
 				return array();
+			}else {
+				return array_slice( $comments, count( $comments ) - $data['limit']*$data['page'], $data['limit']);
 			}
 		}
 	}
