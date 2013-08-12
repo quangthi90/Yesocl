@@ -66,7 +66,7 @@
 				comment_form.attr('data-post-id', data.post_id);
 				comment_form.attr('data-post-type', data.post_type);
 				comment_form.attr('data-type-id', data.type_id);	
-				page = 2;			
+				page = 1;			
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -216,7 +216,7 @@
 		});
 
 		list_comment.on('scroll', function () {
-			if(list_comment.scrollTop() == list_comment.height() - list_comment.height() && !scroll_loading && page*10 < $('.open-comment.disabled').attr('data-comment-count')) {
+			if(list_comment.scrollTop() == list_comment.height() - list_comment.height() && !scroll_loading && ((page*10 < $('.open-comment.disabled').attr('data-comment-count')) || (page*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
 				scroll_loading = true;
 				page++;
 				var data = {
