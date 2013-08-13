@@ -22,7 +22,7 @@
 		<div class="feed-block">
             <div class="block-header">
                 <a class="fl" href="#">{{ branch.name }}Branch {{loop.index}}</a>
-                <a class="fr" href="#"><i class="icon-chevron-right"></i></a>
+                <a class="fl" href="#"><i class="icon-chevron-right"></i></a>
             </div>
             {% if style == 1 %}
             	{{ block('post_common_post_block_ex1') }}

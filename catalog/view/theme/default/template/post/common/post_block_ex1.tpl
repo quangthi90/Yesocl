@@ -10,7 +10,10 @@
 							<a href="#">
 								Lăng kính Yestoc 31/05: “chúng tôi vẫn duy trì quan điểm thận trọng”
 							</a>
-						</h4>				
+						</h4>
+						<div class="post_date">
+							01/06/2013
+						</div>					
 					</div>
 					<div class="post_body">
 						<div class="post_image">
@@ -30,10 +33,7 @@
 								<a href="#" title="Like"><i class="icon-thumbs-up medium-icon"></i></a>
 								<a href="#" title="Comment (0)" class="open-comment" data-url="index.php?route=post/post/getCommentByPost" data-comment-count="0" data-post-id="51aa52c2471dee980a00001d" data-post-type="company"><i class="icon-comments medium-icon"></i></a>
 								<a href="#" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
-							</div>	
-							<div class="post_date">
-								01/06/2013
-							</div>						
+							</div>													
 						</div>						
 					</div>
 				</div>   			
