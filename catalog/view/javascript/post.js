@@ -65,7 +65,7 @@
 				comment_form.attr('data-post-id', data.post_id);
 				comment_form.attr('data-post-type', data.post_type);
 				comment_form.attr('data-type-id', data.type_id);	
-				page = 1;			
+				page = 1;	
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -197,6 +197,7 @@
 	function hideCommentBox () {
 		$('#overlay').hide();
 		$('.post').removeClass('post-selecting');
+		page = 1;
 	}
 
 	$(function(){
@@ -247,7 +248,7 @@
 				getComments();
 			});
 		}
-		list_comment.on('scroll', function ( event ) {
+		list_comment.on('scroll', function () {
 			getComments();
 		});
 	});
