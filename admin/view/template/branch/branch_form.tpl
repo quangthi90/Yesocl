@@ -24,8 +24,8 @@
             <td><input class="input-xxlarge" required="required" type="text" name="name" value="<?php echo $name; ?>" />
             <?php if ($error_name) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_name; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_name; ?>
+                </div>
             <?php } ?></td>
           </tr>
           <tr>
@@ -35,9 +35,13 @@
               <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
             <?php if ($error_company) { ?>
                 <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_company; ?>
-        </div>
+                  <strong>Error!</strong> <?php echo $error_company; ?>
+                </div>
             <?php } ?></td>
+          </tr>
+          <tr>
+            <td><?php echo $entry_order; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="order" value="<?php echo $order; ?>" /></td>
           </tr>
           <tr>
             <td><?php echo $entry_status; ?></td>

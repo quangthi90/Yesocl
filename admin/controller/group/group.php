@@ -400,7 +400,7 @@ class ControllerGroupGroup extends Controller {
 
 		// Entry Category
 		if ( isset($group) ){
-			$brand_id = $group->getBranch()->getId();
+			$branch_id = $group->getBranch()->getId();
 		}elseif ( !isset($branch_id) ) {
 			$branch_id = 0;
 		}
@@ -413,7 +413,7 @@ class ControllerGroupGroup extends Controller {
 		
 		$this->data['categories'] = array();
 		foreach ( $categories as $key => $category ) {
-			if ( $group->getCategoryById($category->getId()) ){
+			if ( isset($group) && $group->getCategoryById($category->getId()) ){
 				$checked = true;
 			}else{
 				$checked = false;
