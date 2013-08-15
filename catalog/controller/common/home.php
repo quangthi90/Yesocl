@@ -22,10 +22,12 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['all_posts'] = array();
 		$this->data['branchs'] = $branchs;
+
 		foreach ( $branchs as $branch_id => $branch ) {
 			$posts = $this->model_branch_post->getPosts(array(
-				'branch_id' => $branch_id
+				'branch_id' => $branch['slug']
 			));
+			// print($branch['slug']); exit;
 			
 			foreach ($posts as $i => $post) {
 				// avatar

@@ -17,6 +17,7 @@
 		{% for branch in branchs %}
         {% set style = random([1, 2]) %}
 		{% set posts = all_posts[branch.id] %}
+        {{posts|length}}
 		{% if posts|length > 0 %}
 		<div class="feed-block">
             <div class="block-header">

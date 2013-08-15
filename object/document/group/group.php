@@ -124,6 +124,7 @@ Class Group {
 			'type_id' 	=> $this->getType()->getId(),
 			'category_id' => $category_id,
 			'created' 	=> $this->getCreated()->format('m/d/Y'),
+			'slug'		=> $this->getSlug(),
 			'status'	=> $this->getStatus()
 		);
 

@@ -85,6 +85,7 @@ Class Branch {
 			'id'		=> $this->getId(),
 			'company' 	=> $this->getCompany()->getId(),
 			'name' 		=> $this->getName(),
+			'slug'		=> $this->getSlug(),
 			'status'	=> $this->getStatus()
 		);
 

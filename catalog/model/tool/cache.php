@@ -16,7 +16,7 @@ class ModelToolCache extends Model {
 		foreach ( $branch_ids as $branch_id ) {
 			$branch = $this->getObject( $branch_id );
 			if ( $branch['status'] == true ){
-				$branchs[$branch_id] = $branch;
+				$branchs[$branch['id']] = $branch;
 			}
 		}
 
