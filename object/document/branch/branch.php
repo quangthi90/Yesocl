@@ -12,6 +12,11 @@ Class Branch {
 	 */
 	private $name; 
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $slug; 
+
 	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branchs") */
 	private $positions = array();
 	
@@ -96,6 +101,14 @@ Class Branch {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function addPosition( $position ){

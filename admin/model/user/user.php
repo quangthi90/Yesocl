@@ -717,7 +717,7 @@ class ModelUserUser extends Doctrine {
 
 				if ( $user ){
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteObject( $id, $this->config->get('common')['type']['user'] );
+					$this->model_tool_cache->deleteObject( $user->getSlug(), $this->config->get('common')['type']['user'] );
 					
 					$this->dm->remove($user);
 				}

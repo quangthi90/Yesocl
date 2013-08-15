@@ -2,6 +2,8 @@
 use Document\Group\Group,
 	Document\Group\GroupMember;
 
+use MongoId;
+
 class ModelGroupGroup extends Doctrine {
 	public function addGroup( $data = array() ) {
 		// Name is required
@@ -46,6 +48,8 @@ class ModelGroupGroup extends Doctrine {
 		if ( !isset( $data['website'] ) ) {
 			$data['website'] = '';
 		}
+
+		$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
 		
 		$group = new group();
 		$group->setAuthor( $user );
@@ -55,6 +59,7 @@ class ModelGroupGroup extends Doctrine {
 		$group->setType( $type );
 		$group->setStatus( $data['status'] );
 		$group->setWebsite( $data['website'] );
+		$group->setSlug( $slug );
 
 		// Category
 		if ( isset($data['categories']) || !empty($data['categories']) ){
@@ -153,6 +158,12 @@ class ModelGroupGroup extends Doctrine {
 			}
 		}
 
+		// if ( $data['name'] != $group->getName() ){
+			$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
+
+			$group->setSlug( $slug );
+		// }
+
 		$group->setAuthor( $user );
 		$group->setName( $data['name'] );
 		$group->setSumary( $data['sumary'] );
@@ -163,7 +174,7 @@ class ModelGroupGroup extends Doctrine {
 
 		$this->dm->flush();
 
-		//-- create cache for branch
+		//-- create cache for group
 		$this->load->model('tool/cache');
 		$this->model_tool_cache->setObject( $group, $this->config->get('post')['type']['group'] );
 
@@ -178,7 +189,7 @@ class ModelGroupGroup extends Doctrine {
 				if ( !empty( $group ) ) {
 					//-- remove cache of Branch
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteObject( $id, $this->config->get('post')['type']['group'] );
+					$this->model_tool_cache->deleteObject( $group->getSlug(), $this->config->get('post')['type']['group'] );
 
 					$this->dm->remove($group);
 				}

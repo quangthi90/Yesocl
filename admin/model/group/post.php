@@ -58,8 +58,11 @@ class ModelGroupPost extends Doctrine {
 		if ( empty( $group ) ) {
 			return false;
 		}
+
+		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 		
 		$post = new Post();
+		$post->setSlug( $slug );
 		$post->setTitle( $data['title'] );
 		$post->setContent( $data['postcontent'] );
 		$post->setUser( $user );
@@ -89,7 +92,7 @@ class ModelGroupPost extends Doctrine {
 
 		//-- Update 60 last posts
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post_id );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post->getSlug() );
 		
 		return true;
 	}
@@ -150,6 +153,13 @@ class ModelGroupPost extends Doctrine {
 			return false;
 		}
 
+		// Check slug
+		if ( $data['title'] != $post->getTitle() ){
+			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
+
+			$post->setSlug( $slug );
+		}
+
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
 		$post->setContent( $data['postcontent'] );
@@ -174,7 +184,7 @@ class ModelGroupPost extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post_id );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['group'], $group, $post->getSlug() );
 		
 		return true;
 	}
@@ -198,7 +208,7 @@ class ModelGroupPost extends Doctrine {
 
 					// remove cache
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deletePost( $id, $this->config->get('post')['type']['group'], $group->getId() );
+					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['group'], $group->getSlug() );
 
 					$group->getPosts()->removeElement( $post );
 				}

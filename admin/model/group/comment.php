@@ -67,7 +67,7 @@ class ModelGroupComment extends Doctrine {
 		
 		//-- Update 50 last Comments
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['group'], $group->getId(), $post, $comment->getId() );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['group'], $group->getSlug(), $post, $comment->getId() );
 		
 		return true;
 	}
@@ -138,7 +138,7 @@ class ModelGroupComment extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['group'], $group->getId(), $post, $comment_id );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['group'], $group->getSlug(), $post, $comment_id );
 		
 		return true;
 	}
@@ -162,7 +162,7 @@ class ModelGroupComment extends Doctrine {
 				if ( !empty( $comment ) ) {
 					// remove cache
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteComment( $id, $post->getId(), $this->config->get('comment')['type']['group'], $group->getId() );
+					$this->model_tool_cache->deleteComment( $id, $post->getSlug(), $this->config->get('comment')['type']['group'], $group->getSlug() );
 
 					$post->getComments()->removeElement( $comment );
 				}

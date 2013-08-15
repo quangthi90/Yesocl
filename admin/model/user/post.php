@@ -37,8 +37,11 @@ class ModelUserPost extends Doctrine {
 		if ( empty( $user ) ) {
 			return false;
 		}
+
+		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 		
 		$post = new Post();
+		$post->setSlug( $slug );
 		$post->setTitle( $data['title'] );
 		$post->setContent( $data['postcontent'] );
 		$post->setUser( $author );
@@ -62,12 +65,7 @@ class ModelUserPost extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		/*$folder_link = $this->config->get('user')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );*/
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $user_id );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post->getSlug() );
 		
 		return true;
 	}
@@ -103,6 +101,17 @@ class ModelUserPost extends Doctrine {
 		
 		$post = $user->getPostById( $post_id );
 
+		if ( !$post ){
+			return false;
+		}
+
+		// Check slug
+		// if ( $data['title'] != $post->getTitle() ){
+			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
+
+			$post->setSlug( $slug );
+		// }
+
 		$post->setTitle( $data['title'] );
 		$post->setContent( $data['postcontent'] );
 		$post->setUser( $author );
@@ -122,19 +131,7 @@ class ModelUserPost extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$folder_link = $this->config->get('user')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );
-
-		$this->load->model('tool/cache');
-		/*$folder_link = $this->config->get('user')['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-
-		$this->model_tool_cache->setPost( $post, $path );*/
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post_id );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post->getSlug() );
 		
 		return true;
 	}
@@ -158,12 +155,7 @@ class ModelUserPost extends Doctrine {
 
 					// remove cache
 					$this->load->model('tool/cache');
-					/*$folder_link = $this->config->get('user')['default']['cache_link'];
-					$folder_name = $this->config->get('post')['default']['cache_folder'];
-					$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
-					
-					$this->model_tool_cache->deletePost( $path );*/
-					$this->model_tool_cache->deletePost( $id, $this->config->get('post')['type']['user'], $user->getId() );
+					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['user'], $user->getSlug() );
 
 					$user->getPosts()->removeElement( $post );
 					break;

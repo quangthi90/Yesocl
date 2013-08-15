@@ -9,6 +9,9 @@ Class Group {
 
 	/** @MongoDB\String */
 	private $name;
+
+	/** @MongoDB\String */
+	private $slug;
 	
 	/** @MongoDB\String */
 	private $sumary;
@@ -137,6 +140,14 @@ Class Group {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setSumary( $sumary ){
