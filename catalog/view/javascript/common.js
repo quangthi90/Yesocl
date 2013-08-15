@@ -96,12 +96,17 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		var widthPost = this.widthMain*5/18 - 10;
 		this.columns.width(widthPost);
 		this.blockContent.height(heightBlockContent);		
-		this.blocks.width((5/6)*this.widthMain);
+		this.blocks.width((5/6)*this.widthMain);		
 		this.blocks.each(function(index) {
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
 			blockFeed.putFeed();
 		});
 		this.root.width(this.blocks.length*((5/6)*this.widthMain + 35));
+		this.feeds.each(function() {
+			var hp = $(this).children('.post_header').first().outerHeight();
+			var heightUpdated = $(this).height();
+			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
+		});
 	}else {	
 		var heightMax = this.heightMain - 25;
 		var widthM = this.widthMain;

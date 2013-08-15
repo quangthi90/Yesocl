@@ -10,10 +10,10 @@
 							<a href="#">
 								Lăng kính Yestoc 31/05: “chúng tôi vẫn duy trì quan điểm thận trọng”
 							</a>
-						</h4>
-						<div class="post_date">
-							01/06/2013
-						</div>					
+							<div class="post_time">
+								<i class="icon-calendar"></i> 01/06/2013
+							</div>
+						</h4>					
 					</div>
 					<div class="post_body">
 						<div class="post_image">

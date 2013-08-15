@@ -11,10 +11,10 @@
 							<a href="#">
 								Lăng kính Yestoc phiên 30/07: “Thị trường có thể tăng nhẹ khi chạm hỗ trợ”
 							</a>
-						</h4>	
-						<div class="post_date">
-							<i class="icon-calendar"></i> 01/06/2013
-						</div>			
+							<div class="post_time">
+								<i class="icon-calendar"></i> 01/06/2013
+							</div>
+						</h4>		
 					</div>
 					<div class="post_body">
 						<div class="post_image">
