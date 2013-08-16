@@ -25,7 +25,15 @@
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
 								<a href="#" title="Like"><i class="icon-thumbs-up medium-icon"></i></a>
-								<a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" data-url="{{ post.href_status }}" data-comment-count="0" data-post-id="{{ post.id }}" data-post-type="company"><i class="icon-comments medium-icon"></i></a>
+								<a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
+									data-url="{{ post.href_status|raw }}" 
+									data-comment-count="{{ post.comment_count }}" 
+									data-post-id="{{ post.id }}" 
+									data-post-type="{{ post_type }}"
+									data-type-slug="{{ branch.slug }}"
+								>
+									<i class="icon-comments medium-icon"></i>
+								</a>
 								<a href="#" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
 							</div>														
 						</div>						

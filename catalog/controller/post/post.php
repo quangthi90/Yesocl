@@ -25,8 +25,8 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate() && isset($this->request->post['post_id']) ) {
-            $data['post_id'] = $this->request->post['post_id'];
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate() && isset($this->request->post['post_slug']) ) {
+            $data['post_slug'] = $this->request->post['post_slug'];
             $data['content'] = $this->request->post['content'];
         }else {
             return $this->response->setOutput(json_encode(array(
@@ -42,8 +42,9 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        if ( isset($this->request->post['type_id']) && !empty($this->request->post['type_id']) ){
-            $data['type_id'] = $this->request->post['type_id'];
+        if ( isset($this->request->post['type_slug']) && !empty($this->request->post['type_slug']) ){
+            $data['type_slug'] = $this->request->post['type_slug'];
+            $data['branch_slug'] = $this->request->post['type_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok4'
@@ -82,8 +83,8 @@ class ControllerPostPost extends Controller {
     public function getCommentByPost(){
         $data = array();
 
-        if ( isset($this->request->post['post_id']) && !empty($this->request->post['post_id']) ){
-            $data['post_id'] = $this->request->post['post_id'];
+        if ( isset($this->request->post['post_slug']) && !empty($this->request->post['post_slug']) ){
+            $data['post_slug'] = $this->request->post['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post id empty'
@@ -98,8 +99,8 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        if ( isset($this->request->get['type_id']) && !empty($this->request->get['type_id']) ){
-            $data['type_id'] = $this->request->get['type_id'];
+        if ( isset($this->request->get['type_slug']) && !empty($this->request->get['type_slug']) ){
+            $data['type_slug'] = $this->request->get['type_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: type id empty'
@@ -126,7 +127,7 @@ class ControllerPostPost extends Controller {
         switch ($data['post_type']) {
             case 'branch':
                 $this->load->model('branch/comment');
-                $data['branch_id'] = $data['type_id'];
+                $data['branch_id'] = $data['type_slug'];
                 $comments = $this->model_branch_comment->getComments( $data );
                 break;
             
@@ -163,9 +164,9 @@ class ControllerPostPost extends Controller {
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'comments' => $comments,
-            'post_id'   => $data['post_id'],
+            'post_slug'   => $data['post_slug'],
             'post_type' => $data['post_type'],
-            'type_id' => $data['type_id']
+            'type_slug' => $data['type_slug']
         )));
     }
 }

@@ -8,8 +8,9 @@
 		var that = this;
 		this.$el			= $el;
 		this.comment_count	= $el.data('comment-count');
-		this.post_id		= $el.data('post-id');
+		this.post_slug		= $el.data('post-slug');
 		this.post_type		= $el.data('post-type');
+		this.type_slug		= $el.data('type-slug');
 		this.url			= $el.data('url');
 
 		this.attachEvents();
@@ -28,7 +29,7 @@
 			$('#comment-box').find('.y-box-header .close').trigger('click');
 
 			that.data = {
-				post_id 	: that.post_id,
+				post_slug 	: that.post_slug,
 				post_type	: that.post_type
 			};
 
@@ -59,12 +60,12 @@
 					htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
 				}
 				htmlOutput += '<div id="add-more-item"></div>';
-				
+				console.log(that.$el.attr('data-comment-count'));
 				comment_box.find('.comment-body').html(htmlOutput);
 				comment_box.find('.y-box-header span').html(that.$el.attr('data-comment-count'));
-				comment_form.attr('data-post-id', data.post_id);
-				comment_form.attr('data-post-type', data.post_type);
-				comment_form.attr('data-type-id', data.type_id);	
+				comment_form.attr('data-post-slug', that.post_slug);
+				comment_form.attr('data-post-type', that.post_type);
+				comment_form.attr('data-type-slug', that.type_slug);	
 				page = 1;	
 			}
 
@@ -89,9 +90,9 @@
 
 		this.$el		= $el;
 		this.$content	= $el.find('textarea');
-		this.post_id	= $el.data('post-id');
+		this.post_slug	= $el.data('post-slug');
 		this.post_type	= $el.data('post-type');
-		this.type_id	= $el.data('type-id');
+		this.type_slug	= $el.data('type-slug');
 		this.url		= $el.data('url');
 
 		this.$comment_btn	= $el.find('.btn-comment');
@@ -115,9 +116,9 @@
 
 			that.data = {
 				content 	: that.$content.val(),
-				post_id		: that.$el.attr('data-post-id'),
+				post_slug		: that.$el.attr('data-post-id'),
 				post_type	: that.$el.attr('data-post-type'),
-				type_id		: that.$el.attr('data-type-id')
+				type_slug		: that.$el.attr('data-type-slug')
 			};
 
 			that.submit(that.$comment_btn);
@@ -220,7 +221,7 @@
 			if(list_comment.scrollTop() == (list_comment.height() - list_comment.height()) && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
 				page++;
 				var data = {
-					'post_id'	: comment_form.attr('data-post-id'),
+					'post_slug'	: comment_form.attr('data-post-id'),
 					'post_type' : comment_form.attr('data-post-type'),
 					'page'		: page
 				}

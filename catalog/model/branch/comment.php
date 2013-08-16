@@ -80,13 +80,17 @@ class ModelBranchComment extends Doctrine {
 
 	public function addComment( $data = array() ){
 		// Branch is required
-		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $data['type_id'] );
+		if ( empty($data['branch_slug']) ){
+			return false;
+		}
+
+		$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $data['branch_slug'] );
 		if ( empty( $branch ) ) {
 			return false;
 		}
 
 		// Author is required
-		if ( !isset( $data['user_id'] ) ) {
+		if ( empty($data['user_id']) ) {
 			return false;
 		}
 		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
