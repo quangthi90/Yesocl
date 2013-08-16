@@ -9,9 +9,9 @@ class ModelBranchPost extends Doctrine {
 			$data['limit'] = 20;
 		}
 
-		if ( isset($data['branch_id']) && !empty($data['branch_id']) ){
+		if ( isset($data['branch_slug']) && !empty($data['branch_slug']) ){
 			if ( $data['start'] >= 60 ){
-				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+				$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $data['branch_slug'] );
 
 				if ( !$branch ){
 					return null;
@@ -19,7 +19,7 @@ class ModelBranchPost extends Doctrine {
 
 				$results = $branch->getPosts()->toArray();
 			}else{
-				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_id'] );
+				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_slug'] );
 			}
 
 			$this->load->model('user/user');
@@ -41,11 +41,11 @@ class ModelBranchPost extends Doctrine {
 					break;
 				}
 
-				if ( !array_key_exists($post['user_id'], $users) ){
-					$users[$post['user_id']] = $this->model_user_user->getUser( $post['user_id'] );
+				if ( !array_key_exists($post['user_slug'], $users) ){
+					$users[$post['user_slug']] = $this->model_user_user->getUser( $post['user_slug'] );
 				}
 
-				$user = $users[$post['user_id']];
+				$user = $users[$post['user_slug']];
 
 				if ( $user ){
 					$post['user'] = array(
@@ -67,7 +67,7 @@ class ModelBranchPost extends Doctrine {
 
 	}
 
-	public function getTotalComments( $post_id, $branch_id ) {
+	public function getTotalComments( $post_id, $branch_slug ) {
 		$this->load->model( 'tool/cache' );
 
 		//-- link of cache Folder of Branch
@@ -77,7 +77,7 @@ class ModelBranchPost extends Doctrine {
 		//-- cache comment folder name
 		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
 		//-- path of cache Folder of Branch
-		$cache_path = DIR_CACHE . $cache_link . $branch_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name . '/';
+		$cache_path = DIR_CACHE . $cache_link . $branch_slug . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name . '/';
 //echo '<pre>';var_dump($cache_path);exit();
 		return count( $this->model_tool_cache->getFilesNames( $cache_path ) );
 	}

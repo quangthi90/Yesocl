@@ -23,11 +23,11 @@ class ControllerCommonHome extends Controller {
 		$this->data['all_posts'] = array();
 		$this->data['branchs'] = $branchs;
 
-		foreach ( $branchs as $branch_id => $branch ) {
+		foreach ( $branchs as $branch_slug => $branch ) {
 			$posts = $this->model_branch_post->getPosts(array(
-				'branch_id' => $branch['slug']
+				'branch_slug' => $branch['slug']
 			));
-			// print($branch['slug']); exit;
+			print(count($posts)); exit;
 			
 			foreach ($posts as $i => $post) {
 				// avatar
@@ -51,11 +51,11 @@ class ControllerCommonHome extends Controller {
 				
 				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
 				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
-				$posts[$i]['href_status'] = $this->url->link('post/post/getCommentByPost', 'type_id=' . $branch_id, 'SSL');
-				$posts[$i]['comment_count'] = $this->model_branch_post->getTotalComments( $posts[$i]['id'], $branch_id );
+				$posts[$i]['href_status'] = $this->url->link('post/post/getCommentByPost', 'type_id=' . $branch_slug, 'SSL');
+				$posts[$i]['comment_count'] = $this->model_branch_post->getTotalComments( $posts[$i]['id'], $branch_slug );
 			}
 
-			$this->data['all_posts'][$branch_id] = $posts;
+			$this->data['all_posts'][$branch_slug] = $posts;
 		}
 
 		$this->data['date_format'] = $this->language->get('date_format_short');

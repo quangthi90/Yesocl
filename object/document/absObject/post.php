@@ -84,6 +84,7 @@ Abstract Class Post {
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),
+			'user_slug'		=> $this->getUser()->getSlug(),
 			'thumb'			=> $this->getThumb(),
 			'slug'			=> $this->getSlug(),
 			'status'		=> $this->getStatus(),

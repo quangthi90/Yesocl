@@ -117,7 +117,7 @@ class ModelToolCache extends Model {
 		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
 		$post_folder = $this->config->get('post')['default']['cache_folder'];
 		$folder_name = $this->config->get('comment')['default']['cache_folder'];
-		$path = $folder_link.$type_slug.'/'.$post_folder.'/'.$post_slug.'/'.$folder_name.'/';
+		$path = $folder_link.$type_slug.'/'.$post_folder.'/'.$post_slug.'/'.$folder_name;
 		
 		$this->cache->set( $comment->getId(), $comment_data, $path );
 		

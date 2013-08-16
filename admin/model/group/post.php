@@ -169,7 +169,7 @@ class ModelGroupPost extends Doctrine {
 			$category = $this->dm->getRepository('Document\Branch\Category')->find( $data['category_id'] );
 			$post->setCategory( $category );
 		}
-
+		
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('group')['default']['image_link'];

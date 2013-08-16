@@ -136,7 +136,7 @@ class ModelGroupComment extends Doctrine {
 		$comment->setStatus( $data['status'] );
 
 		$this->dm->flush();
-
+		
 		$this->load->model( 'tool/cache' );
 		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['group'], $group->getSlug(), $post, $comment_id );
 		
