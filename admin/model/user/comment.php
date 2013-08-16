@@ -49,7 +49,7 @@ class ModelUserComment extends Doctrine {
 		
 		//-- Update 50 last Comments
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getId(), $post, $comment->getId() );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getSlug(), $post, $comment->getId() );
 		
 		return true;
 	}
@@ -94,7 +94,7 @@ class ModelUserComment extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getId(), $post, $comment_id );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getSlug(), $post, $comment_id );
 		
 		return true;
 	}
@@ -122,7 +122,7 @@ class ModelUserComment extends Doctrine {
 				if ( !empty( $comment ) ) {
 					// remove cache
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteComment( $id, $post->getId(), $this->config->get('comment')['type']['user'], $user->getId() );
+					$this->model_tool_cache->deleteComment( $id, $post->getSlug(), $this->config->get('comment')['type']['user'], $user->getSlug() );
 
 					$post->getComments()->removeElement( $comment );
 				}

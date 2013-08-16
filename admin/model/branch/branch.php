@@ -1,5 +1,6 @@
 <?php
 use Document\Branch\Branch;
+use MongoId;
 
 class ModelBranchBranch extends Doctrine {
 	/**
@@ -46,11 +47,14 @@ class ModelBranchBranch extends Doctrine {
 			$data['status'] = 0;
 		}
 
+		$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
+
 		$branch = new Branch();
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
 		$branch->setOrder( $data['order'] );
 		$branch->setCompany( $company );
+		$branch->setSlug( $slug );
 		
 		$this->dm->persist( $branch );
 		$this->dm->flush();
@@ -120,6 +124,12 @@ class ModelBranchBranch extends Doctrine {
 		$branch->setStatus( $data['status'] );
 		$branch->setOrder( $data['order'] );
 		$branch->setCompany( $company );
+
+		if ( $data['name'] != $branch->getName() ){
+			$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
+
+			$branch->setSlug( $slug );
+		}
 		
 		$this->dm->flush();
 
@@ -145,7 +155,7 @@ class ModelBranchBranch extends Doctrine {
 					
 					//-- remove cache of Branch
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteObject( $id );
+					$this->model_tool_cache->deleteObject( $branch->getSlug() );
 
 					$this->dm->remove( $branch );
 				}

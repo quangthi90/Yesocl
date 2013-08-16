@@ -6,17 +6,17 @@ class ModelToolCache extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @return: Array Object Branch
 	 */
-	public function getAllBranchIds(){
+	public function getAllBranchs(){
 		//-- link of cache Folder of Branch --
 		$cache_link = $this->config->get('branch')['default']['cache_link'];
 		
-		$branch_ids = $this->getFolderNames( DIR_CACHE . $cache_link );
+		$branch_slugs = $this->getFolderNames( DIR_CACHE . $cache_link );
 		
 		$branchs = array();
-		foreach ( $branch_ids as $branch_id ) {
-			$branch = $this->getObject( $branch_id );
+		foreach ( $branch_slugs as $branch_slug ) {
+			$branch = $this->getObject( $branch_slug );
 			if ( $branch['status'] == true ){
-				$branchs[$branch_id] = $branch;
+				$branchs[$branch_slug] = $branch;
 			}
 		}
 
@@ -24,20 +24,22 @@ class ModelToolCache extends Model {
 	}
 
 	/**
-	 * Create cache for 
+	 * Get cache of
 	 *	- Branch
 	 *	- Group
 	 *	- User
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: Object Branch
+	 * @param: 
+	 *	- stringObject Slug
+	 *	- string Object type
 	 * @return: Array Object Branch
 	 */
-	public function getObject( $object_id, $object_type = 'branch' ){
+	public function getObject( $object_slug, $object_type = 'branch' ){
 		//-- link of cache Folder of Branch
 		$cache_link = $this->config->get($object_type)['default']['cache_link'];
 		//-- path of cache Folder of Branch
-		$cache_path = $cache_link . $object_id;
+		$cache_path = $cache_link . $object_slug;
 		//-- name of cache file of Branch
 		$file_name = $this->config->get('common')['default']['main_object_cache'];
 		//-- call cache function in library
@@ -51,7 +53,9 @@ class ModelToolCache extends Model {
 	 *	- User
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: Object Branch
+	 * @param: 
+	 *	- Object Branch
+	 *	- String Object type
 	 * @return: Array Object Branch
 	 */
 	public function setObject( $object, $object_type = 'branch' ){
@@ -60,7 +64,7 @@ class ModelToolCache extends Model {
 		//-- link of cache Folder of Branch
 		$cache_link = $this->config->get($object_type)['default']['cache_link'];
 		//-- path of cache Folder of Branch
-		$cache_path = $cache_link . $object->getId() . '/';
+		$cache_path = $cache_link . $object->getSlug() . '/';
 		//-- name of cache file of Branch
 		$file_name = $this->config->get('common')['default']['main_object_cache'];
 		//-- call cache function in library
@@ -77,15 +81,15 @@ class ModelToolCache extends Model {
 	 * 2013/07/26
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
-	 *	- string Post ID
+	 *	- string Post Slug
 	 *	- string type post ['branch', 'group', 'user']
-	 *	- string type ID
+	 *	- string type Slug
 	 * @return: Array Object Post
 	 */
-	public function getPost($post_id, $type_post = 'branch', $type_id) {
+	public function getPost($post_slug, $type_post = 'branch', $type_slug) {
 		$folder_link = $this->config->get($type_post)['default']['cache_link'];
 		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $type_id . '/' . $folder_post_name . '/' . $post_id;
+		$path = $folder_link . $type_slug . '/' . $folder_post_name . '/' . $post_slug;
 		
 		$file_name = $this->config->get('common')['default']['main_object_post'];
 		$post = $this->cache->get( $file_name, $path );
@@ -102,22 +106,22 @@ class ModelToolCache extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- string type post ['branch', 'group', 'user']
-	 *	- string Type ID
+	 *	- string Type Slug
 	 * @return: Array Object Post
 	 */
-	public function getLastPosts($type_post = 'branch', $type_id) {
+	public function getLastPosts($type_post = 'branch', $type_slug) {
 		//-- link of cache Folder of Branch
 		$cache_link = $this->config->get($type_post)['default']['cache_link'];
 		//-- cache post folder name
 		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
 		//-- path of cache Folder of Branch
-		$cache_path = DIR_CACHE . $cache_link . $type_id . '/' . $folder_post_name . '/';
+		$cache_path = DIR_CACHE . $cache_link . $type_slug . '/' . $folder_post_name . '/';
 
-		$post_ids = $this->getFolderNames( $cache_path );
+		$post_slugs = $this->getFolderNames( $cache_path );
 
 		$posts = array();
-		foreach ( $post_ids as $post_id ) {
-			$posts[$post_id] = $this->getPost( $post_id, $type_post, $type_id );
+		foreach ( $post_slugs as $post_slug ) {
+			$posts[$post_slug] = $this->getPost( $post_slug, $type_post, $type_slug );
 		}
 
 		return $posts;
@@ -132,12 +136,12 @@ class ModelToolCache extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- string type comment ['branch', 'group', 'user']
-	 *	- string type ID
+	 *	- string type Slug
 	 *	- object Post
-	 *	- string Comment ID
+	 *	- string Comment Slug
 	 * @return: Array Object comment
 	 */
-	public function updateLastComments($type_comment = 'branch', $type_id, $post, $comment_id = 0) {
+	public function updateLastComments($type_comment = 'branch', $type_slug, $post, $comment_id = 0) {
 		$limit = 50;
 
 		$comments = $post->getComments();
@@ -146,8 +150,8 @@ class ModelToolCache extends Model {
 		for ( $i = 0; $i < 60 && $i < $comment_length; $i++ ){
 			$comment = $comments[$i];
 			
-			if ( $comment->getId() == $comment_id || $this->getComment($comment->getId(), $post->getId(), $type_comment, $type_id) == null ){
-				$this->setComment( $comment, $post->getId(), $type_comment, $type_id );
+			if ( $comment->getId() == $comment_id || $this->getComment($comment->getId(), $post->getSlug(), $type_comment, $type_slug) == null ){
+				$this->setComment( $comment, $post->getSlug(), $type_comment, $type_slug );
 			}
 		}
 
@@ -162,17 +166,17 @@ class ModelToolCache extends Model {
 	 * 2013/07/26
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
-	 *	- string Comment ID
-	 *	- string Post ID
+	 *	- string Comment Slug
+	 *	- string Post Slug
 	 *	- string type post ['branch', 'group', 'user']
-	 *	- string type ID
+	 *	- string type Slug
 	 * @return: Array Object Post
 	 */
-	public function getComment($comment_id, $post_id, $type_post = 'branch', $type_id) {
+	public function getComment($comment_id, $post_slug, $type_post = 'branch', $type_slug) {
 		$folder_link = $this->config->get($type_post)['default']['cache_link'];
 		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
 		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
-		$path = $folder_link . $type_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name;
+		$path = $folder_link . $type_slug . '/' . $folder_post_name . '/' . $post_slug . '/' . $folder_comment_name;
 		
 		$comment = $this->cache->get( $comment_id, $path );
 		return $comment;
@@ -187,18 +191,18 @@ class ModelToolCache extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- object Comment
-	 *	- string Post ID
+	 *	- string Post Slug
 	 *	- string type Comment ['branch', 'group', 'user']
-	 *	- string type ID
+	 *	- string type Slug
 	 * @return: Array Object comment
 	 */
-	public function setComment($comment, $post_id, $type_comment = 'branch', $type_id) {
+	public function setComment($comment, $post_slug, $type_comment = 'branch', $type_slug) {
 		$comment_data = $comment->formatToCache();
 		
 		$folder_link = $this->config->get($type_comment)['default']['cache_link'];
 		$post_folder = $this->config->get('post')['default']['cache_folder'];
 		$folder_name = $this->config->get('comment')['default']['cache_folder'];
-		$path = $folder_link.$type_id.'/'.$post_folder.'/'.$post_id.'/'.$folder_name.'/';
+		$path = $folder_link.$type_slug.'/'.$post_folder.'/'.$post_slug.'/'.$folder_name.'/';
 		
 		$this->cache->set( $comment->getId(), $comment_data, $path );
 		
@@ -214,11 +218,11 @@ class ModelToolCache extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- string type post ['branch', 'group', 'user']
-	 *	- string Type ID
-	 *	- string Post ID
+	 *	- string Type Slug
+	 *	- string Post Slug
 	 * @return: Array Object Post
 	 */
-	public function getLastComments($post_id, $type_post = 'branch', $type_id) {
+	public function getLastComments($post_slug, $type_post = 'branch', $type_slug) {
 		//-- link of cache Folder of Branch
 		$cache_link = $this->config->get($type_post)['default']['cache_link'];
 		//-- cache post folder name
@@ -226,14 +230,14 @@ class ModelToolCache extends Model {
 		//-- cache comment folder name
 		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
 		//-- path of cache Folder of Branch
-		$cache_path = DIR_CACHE . $cache_link . $type_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name . '/';
+		$cache_path = DIR_CACHE . $cache_link . $type_slug . '/' . $folder_post_name . '/' . $post_slug . '/' . $folder_comment_name . '/';
 
 		$comment_caches = $this->getFilesNames( $cache_path );
 
 		$comments = array();
 		foreach ( $comment_caches as $filename ) {
 			$comment_id = explode('.', $filename);
-			$comments[$comment_id[1]] = $this->getComment( $comment_id[1], $post_id, $type_post, $type_id );
+			$comments[$comment_id[1]] = $this->getComment( $comment_id[1], $post_slug, $type_post, $type_slug );
 		}
 
 		return $comments;

@@ -103,7 +103,7 @@ class ModelBranchPost extends Doctrine {
 
 		//-- Update 60 last posts
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post_id );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
 		
 		return $post;
 	}
@@ -178,6 +178,10 @@ class ModelBranchPost extends Doctrine {
 
 		$post = $branch->getPostById( $post_id );
 
+		if ( !$post ){
+			return false;
+		}
+
 		// Check slug
 		if ( $data['title'] != $post->getTitle() ){
 			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
@@ -206,7 +210,7 @@ class ModelBranchPost extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post_id );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
 		
 		return true;
 	}
@@ -229,7 +233,7 @@ class ModelBranchPost extends Doctrine {
 
 					// remove cache
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deletePost( $id, $this->config->get('post')['type']['branch'], $branch->getId() );
+					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['branch'], $branch->getSlug() );
 
 					$branch->getPosts()->removeElement( $post );
 				}
