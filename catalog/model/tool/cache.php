@@ -147,7 +147,7 @@ class ModelToolCache extends Model {
 		$comments = $post->getComments();
 		$comment_length = count($comments);
 		
-		for ( $i = 0; $i < 60 && $i < $comment_length; $i++ ){
+		for ( $i = 0; $i < 50 && $i < $comment_length; $i++ ){
 			$comment = $comments[$i];
 			
 			if ( $comment->getId() == $comment_id || $this->getComment($comment->getId(), $post->getSlug(), $type_comment, $type_slug) == null ){
