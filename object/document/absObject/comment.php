@@ -98,6 +98,7 @@ Class Comment {
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated()->format('h:i A d/m/Y'),
 			'user_id'		=> $this->getUser()->getId(),
+			'user_slug'		=> $this->getUser()->getSlug(),
 			'status'		=> $this->getStatus()
 		);
 

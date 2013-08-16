@@ -16,11 +16,11 @@
 	<div id="y-main-content" class="has-horizontal has-block">
 		{% for branch in branchs %}
         {% set style = random([1, 2]) %}
-		{% set posts = all_posts[branch.id] %}
+		{% set posts = all_posts[branch.slug] %}
 		{% if posts|length > 0 %}
 		<div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="#">{{ branch.name }} Branch {{loop.index}}</a>
+                <a class="fl" href="#">{{ branch.name }}</a>
                 <a class="fl" href="#"><i class="icon-chevron-right"></i></a>
             </div>
             {% if style == 1 %}
