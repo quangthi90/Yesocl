@@ -27,7 +27,6 @@ class ControllerCommonHome extends Controller {
 			$posts = $this->model_branch_post->getPosts(array(
 				'branch_slug' => $branch['slug']
 			));
-			print(count($posts)); exit;
 			
 			foreach ($posts as $i => $post) {
 				// avatar

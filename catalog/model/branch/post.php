@@ -41,11 +41,11 @@ class ModelBranchPost extends Doctrine {
 					break;
 				}
 
-				if ( !array_key_exists($post['user_slug'], $users) ){
-					$users[$post['user_slug']] = $this->model_user_user->getUser( $post['user_slug'] );
+				if ( !array_key_exists($post['user_id'], $users) ){
+					$users[$post['user_id']] = $this->model_user_user->getUser( $post['user_id'] );
 				}
 
-				$user = $users[$post['user_slug']];
+				$user = $users[$post['user_id']];
 
 				if ( $user ){
 					$post['user'] = array(
