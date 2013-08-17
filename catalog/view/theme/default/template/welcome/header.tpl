@@ -1,7 +1,7 @@
 <div id="y-header" class="outer-30">
     <div class="row-fluid">
         <div id="y-logo" class="span3">
-            <a href="{{ action.home }}"><img src="image/template/logo.png" /></a>
+            <a href="{{ action.home }}"><img src="image/template/logo.png" style="width:160px;" /></a>
         </div>
         <div class="span4">
             <div class="row-fluid" id="y-welcome-menu">

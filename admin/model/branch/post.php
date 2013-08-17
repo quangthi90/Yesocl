@@ -4,6 +4,27 @@ use Document\Branch\Post;
 use MongoId;
 
 class ModelBranchPost extends Doctrine {
+	/**
+	 * Add new Post of Branch to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Branch ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function addPost( $branch_id, $data = array(), $thumb = array() ) {
 		// Branch is required
 		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
@@ -43,23 +64,13 @@ class ModelBranchPost extends Doctrine {
 		// Content is required
 		if ( !isset( $data['post_content'] ) || empty( $data['post_content'] ) ) {
 			return false;
-		} 
-
-		// thumb
-		if ( isset( $thumb ) && $thumb['size'] > 0 ) {
-  			if ( !$this->isValidThumb( $thumb ) ) {
-  				return false;
-  			}
-  		}
-		else {
-			$thumb = array();
-  		}
+		}
 
 		// Status
 		if ( isset( $data['status'] ) ) {
-			$data['status'] = (int)$data['status'];
+			$data['status'] = $data['status'];
 		}else {
-			$data['status'] = 0;
+			$data['status'] = false;
 		}
 
 		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
@@ -73,19 +84,51 @@ class ModelBranchPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		if ( !empty( $thumb ) ) {
-			if ( $data['thumb'] = $this->uploadThumb( $branch->getId(), $post->getId(), $thumb ) ) {
-				$post->setThumb( $data['thumb'] );
-			}
-		}
-
 		$branch->addPost( $post );
 
 		$this->dm->flush();
 
+		$this->load->model('tool/image');
+		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
+				$post->setThumb( $data['thumb'] );
+			}
+		}
+
+		$this->dm->flush();
+
+		//-- Update 60 last posts
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
+		
 		return $post;
 	}
 
+	/**
+	 * Edit Post of Branch to Database
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Title 		-- required
+	 *		string Company ID 	-- required
+	 *		string User ID 		-- required
+	 *		string Category ID 	-- required
+	 *		string Description 	-- required
+	 *		string Content 		-- required
+	 *		bool Status
+	 * 	}
+	 * @return: bool
+	 *	- true: success
+	 * 	- false: not success
+	 */
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
 		// Branch is required
 		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array( 'posts.id' => $post_id ) );
@@ -124,26 +167,20 @@ class ModelBranchPost extends Doctrine {
 		// Content is required
 		if ( !isset( $data['post_content'] ) || empty( $data['post_content'] ) ) {
 			return false;
-		} 
-
-		// thumb
-		if ( isset( $thumb ) ) {
-  			if ( !$this->isValidThumb( $thumb ) ) {
-  				return false;
-  			}
-  		}
-		else {
-			$thumb = array();
-  		}
+		}
   		
 		// Status
 		if ( isset( $data['status'] ) ) {
-			$data['status'] = (int)$data['status'];
+			$data['status'] = $data['status'];
 		}else {
-			$data['status'] = 0;
+			$data['status'] = false;
 		}
 
 		$post = $branch->getPostById( $post_id );
+
+		if ( !$post ){
+			return false;
+		}
 
 		// Check slug
 		if ( $data['title'] != $post->getTitle() ){
@@ -159,22 +196,23 @@ class ModelBranchPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
-		if ( !empty( $thumb ) ) {
-			if ( $data['thumb'] = $this->uploadThumb( $branch->getId(), $post->getId(), $thumb ) ) {
+		$this->load->model('tool/image');
+		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
 				$post->setThumb( $data['thumb'] );
-			}else {
-				$post->setThumb( '' );
 			}
-		}else{
-			$post->setThumb('');
 		}
 
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$post = $this->model_tool_cache->setPost( $post );
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
 		
-		return $post;
+		return true;
 	}
 
 	public function deletePost( $data = array() ) {
@@ -186,7 +224,17 @@ class ModelBranchPost extends Doctrine {
 			foreach ( $data['id'] as $id ) {
 				$post = $branch->getPostById( $id );
 				if ( !empty( $post ) ) {
-					$this->delete_directory( DIR_IMAGE . '/data/catalog/Branch/' . $branch->getId() . '/post/' . $post->getId() );
+					$folder_link = $this->config->get('branch')['default']['image_link'];
+					$folder_name = $this->config->get('post')['default']['image_folder'];
+					$path = DIR_IMAGE . $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+					
+					$this->load->model('tool/image');
+					$this->model_tool_image->deleteDirectoryImage( $path );
+
+					// remove cache
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['branch'], $branch->getSlug() );
+
 					$branch->getPosts()->removeElement( $post );
 				}
 			}
@@ -194,72 +242,7 @@ class ModelBranchPost extends Doctrine {
 		
 		$this->dm->flush();
 
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->deletePost( $post );
-
 		return true;
-	}
-
-	public function isValidThumb( $file ) {
-		$allowedExts = array("gif", "jpeg", "jpg", "png");
-		$extension = end(explode(".", $file["name"]));
-
-		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
-  			if ($file["error"] > 0) {
-    			return false;
-    		}
-  			else {
-	    		return true;
-    		}
-  		}
-		else {
-  			return false;
-  		}
-	}
-
-	public function uploadThumb( $branch_id, $post_id, $thumb ) {
-		$ext = end(explode(".", $thumb["name"]));
-		$path = 'data/catalog/branch/' . $branch_id . '/post/' . $post_id . '/thumb.';
-		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
-			unlink($path . '.jpg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
-			unlink($path . '.jpeg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.gif' ) ) {
-			unlink($path . '.gif');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.png' ) ) {
-			unlink($path . '.png' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/branch/' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/branch/' );
-		}
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/branch/' . $branch_id ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/branch/' . $branch_id );
-		}
-		
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post/' . $post_id ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/Branch/' . $branch_id . '/post/' . $post_id );
-		}
-
-		if ( move_uploaded_file( $thumb['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
-			return $path . $ext;
-		}else {
-			return false;
-		}
-	}
-
-	public function delete_directory( $dirname ) {
-  		if(is_dir($dirname)){
-    		$files = glob( $dirname . '*', GLOB_MARK );
-    		foreach( $files as $file )
-      			$this->delete_directory( $file );
-    		rmdir( $dirname );
-  		}else
-    		unlink( $dirname );
 	}
 }
 ?>

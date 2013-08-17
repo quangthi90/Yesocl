@@ -331,13 +331,25 @@ class ModelUserUser extends Doctrine {
 		if ( isset($data['user']['status']) ){
 			$user->setStatus( $data['user']['status'] );
 		}
+
+		// Avatar
+		$this->load->model('tool/image');
+		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId();
+			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
+				$user->setAvatar( $data['avatar'] );
+			}
+		}
 		
 		// Save to DB
 		$this->dm->persist( $user );
+
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setUser( $user );
+		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
 		
 		return true;
 	}
@@ -669,9 +681,23 @@ class ModelUserUser extends Doctrine {
 			$user->setStatus( $data['user']['status'] );
 		}
 
+		// Avatar
+		$this->load->model('tool/image');
+		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId();
+			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
+				$user->setAvatar( $data['avatar'] );
+			}
+		}
+
 		// Save to DB
 		$this->dm->persist( $user );
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
 		
 		return true;
 	}
@@ -711,13 +737,16 @@ class ModelUserUser extends Doctrine {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
-				$this->dm->remove($user);
+
+				if ( $user ){
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deleteObject( $user->getSlug(), $this->config->get('common')['type']['user'] );
+					
+					$this->dm->remove($user);
+				}
 			}
 		}
 		$this->dm->flush();
-
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->setUser( $user );
 
 		return true;
 	}

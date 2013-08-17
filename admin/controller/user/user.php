@@ -26,7 +26,7 @@ class ControllerUserUser extends Controller {
 		$this->load->model( 'user/user' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-		
+	
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_home' ),
@@ -134,7 +134,7 @@ class ControllerUserUser extends Controller {
 		$this->data['tab_experience'] = $this->language->get( 'tab_experience' );
 		$this->data['tab_education'] = $this->language->get( 'tab_education' );
 		$this->data['tab_former'] = $this->language->get( 'tab_former' );
-		
+	
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 		
@@ -218,6 +218,7 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry localtion country
+		/*
 		if ( $user->getMeta() ){
 			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
 			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
@@ -225,14 +226,22 @@ class ControllerUserUser extends Controller {
 			$this->data['country'] = '';
 			$this->data['country_id'] = 0;
 		}
+		
 
 		// Entry localtion city
+		
 		if ( $user->getMeta() ){
 			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
 		}else {
 			$this->data['city'] = '';
 			$this->data['city_id'] = 0;
+		}
+		*/
+		if ( $user->getMeta() ) {
+			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
+		} else {
+			$this->data['location'] = '';
 		}
 
 		// Entry postal code
@@ -285,6 +294,7 @@ class ControllerUserUser extends Controller {
 		// Entry im
 		$this->data['ims'] = array();
 		foreach ($user->getMeta()->getIms() as $key => $im) {
+			//var_dump($im);die;
 			$this->data['ims'][$key] = array(
 				'type' => $im->getType(),
 				'im' => $im->getIm(),
@@ -358,16 +368,17 @@ class ControllerUserUser extends Controller {
 		}
 
 		$this->load->model( 'data/value' );
-		$this->load->model( 'setting/config' );
-		$this->load->config( 'datatype' );
-		$this->model_setting_config->load( 'datatype_title' );
+		//$this->load->model( 'setting/config' );
+		//$this->load->config( 'datatype' );
+		//$this->model_setting_config->load( 'datatype_title' );
 		// Im type
 		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );
 		$this->data['im_types'] = array();
+		
 		foreach ($im_types as $im_type) {
 			$this->data['im_types'][] = array(
 				'text' => $im_type->getName(),
-				'code' => $im_type->getCode(),
+				'code' => $im_type->getValue(),
 				);
 		}
 
@@ -377,7 +388,7 @@ class ControllerUserUser extends Controller {
 		foreach ($phone_types as $phone_type) {
 			$this->data['phone_types'][] = array(
 				'text' => $phone_type->getName(),
-				'code' => $phone_type->getCode(),
+				'code' => $phone_type->getValue(),
 				);
 		}
 
@@ -387,26 +398,27 @@ class ControllerUserUser extends Controller {
 		foreach ($title_types as $title_type) {
 			$this->data['title_types'][] = array(
 				'text' => $title_type->getName(),
-				'code' => $title_type->getCode(),
+				'code' => $title_type->getValue(),
 				);
 		}
 
 		// Entry former visible
+		
 		$visible_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_title_type' ) ) );
 		$this->data['visible_types'] = array();
 		foreach ($visible_types as $visible_type) {
 			$this->data['visible_types'][] = array(
 				'text' => $visible_type->getName(),
-				'code' => $visible_type->getCode(),
+				'code' => $visible_type->getValue(),
 				);
 		}
-
+		
 		$this->template = 'user/user_view.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
 		);
-				
+			
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -422,6 +434,7 @@ class ControllerUserUser extends Controller {
 		
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateInsert() ){
+
 			if ( $this->model_user_user->addUser( $this->request->post ) == true ) {
 				$this->session->data['success'] = $this->language->get( 'text_success' );
 			}else {
@@ -445,6 +458,10 @@ class ControllerUserUser extends Controller {
 		$this->load->model( 'user/user' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
+
+		if ( isset($this->request->files['avatar']) ){
+			$this->request->post['avatar'] = $this->request->files['avatar'];
+		}
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateUpdate() ){
@@ -871,6 +888,9 @@ class ControllerUserUser extends Controller {
 		$this->data['text_male'] = $this->language->get( 'text_male' );
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
+		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
+		$this->data['text_change'] = $this->language->get( 'text_change' );
+		$this->data['text_remove'] = $this->language->get( 'text_remove' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -897,6 +917,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_birthday'] = $this->language->get( 'entry_birthday' );
 		$this->data['entry_sex'] = $this->language->get( 'entry_sex' );
 		$this->data['entry_marital_status'] = $this->language->get( 'entry_marital_status' );
+		$this->data['entry_avatar'] = $this->language->get( 'entry_avatar' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
 		$this->data['entry_postal_code'] = $this->language->get( 'entry_postal_code' );
 		$this->data['entry_industry'] = $this->language->get( 'entry_industry' );
@@ -953,6 +974,15 @@ class ControllerUserUser extends Controller {
 		$this->data['code_school'] = $this->config->get( 'datatype_school' );
 		$this->data['code_degree'] = $this->config->get( 'datatype_degree' );
 		$this->data['code_fieldofstudy'] = $this->config->get( 'datatype_fieldofstudy' );
+
+		// avatar
+		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
+
+		if ( isset( $user ) && trim( $user->getAvatar() ) != '' ) {
+			$this->data['img_avatar'] = HTTP_IMAGE . $user->getAvatar();
+		}else {
+			$this->data['img_avatar'] = $this->data['img_default'];
+		}
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
@@ -1074,8 +1104,15 @@ class ControllerUserUser extends Controller {
 			$this->data['birthday'] = '';
 		}
 
+		// logo
+		if ( isset( $user ) && trim( $user->getAvatar() ) != '' ) {
+			$this->data['img_avatar'] = HTTP_IMAGE . $user->getAvatar();
+		}else {
+			$this->data['img_avatar'] = $this->data['img_default'];
+		}
+
 		// Entry marital status
-		if ( isset($this->request->post['background']['maritalstatus']) ){
+		if ( isset($this->request->file['background']['maritalstatus']) ){
 			$this->data['marital_status'] = $this->request->post['background']['maritalstatus'];
 		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
 			$this->data['marital_status'] = $user->getMeta()->getBackground()->getMaritalStatus();

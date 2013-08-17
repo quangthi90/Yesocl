@@ -12,6 +12,11 @@ Class Branch {
 	 */
 	private $name; 
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $slug; 
+
 	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branchs") */
 	private $positions = array();
 	
@@ -29,6 +34,9 @@ Class Branch {
 
 	/** @MongoDB\EmbedMany(targetDocument="Post") */
 	private $posts = array();
+
+	/** @MongoDB\Int */
+	private $order;
 
 	/**
 	 * Get Post By ID
@@ -48,6 +56,14 @@ Class Branch {
 		return null;
 	}
 
+	/**
+	 * Get Post By Slug
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object Post
+	 * 		- null if not found
+	 */
 	public function getPostBySlug( $post_slug ){
 		foreach ( $this->posts as $post ){
 			if ( $post->getSlug() == $post_slug ){
@@ -56,6 +72,24 @@ Class Branch {
 		}
 		
 		return null;
+	}
+
+	/**
+	* Format array to save to Cache
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Branch
+	*/
+    public function formatToCache(){
+		$data = array(
+			'id'		=> $this->getId(),
+			'company' 	=> $this->getCompany()->getId(),
+			'name' 		=> $this->getName(),
+			'slug'		=> $this->getSlug(),
+			'status'	=> $this->getStatus()
+		);
+
+		return $data;
 	}
 
 	public function getId(){
@@ -68,6 +102,14 @@ Class Branch {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function addPosition( $position ){
@@ -132,5 +174,13 @@ Class Branch {
 
 	public function getPosts(){
 		return $this->posts;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 }

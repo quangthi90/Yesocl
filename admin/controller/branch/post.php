@@ -518,7 +518,7 @@ class ControllerBranchPost extends Controller {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
 		}
 
-		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 50 || strlen( trim( $this->request->post['description'] ) ) > 256 ) {
+		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 10 || strlen( trim( $this->request->post['description'] ) ) > 150 ) {
 			$this->error['error_description'] = $this->language->get( 'error_description' );
 		}
 
@@ -535,7 +535,8 @@ class ControllerBranchPost extends Controller {
 		}
 
 		if ( isset( $this->request->files['thumb'] ) && !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
-			if ( !$this->model_branch_post->isValidThumb( $this->request->files['thumb'] ) ) {
+			$this->load->model('tool/image');
+			if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
 				$this->error['error_thumb'] = $this->language->get( 'error_thumb');
 			}
 		}
