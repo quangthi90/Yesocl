@@ -143,6 +143,10 @@ class ModelToolCache extends Model {
 
 		$comments = $post->getComments();
 		$comment_length = count($comments);
+
+		$post_data = $post->formatToCache();
+
+		$this->setPost( $post, $type_comment, $type_slug );
 		
 		for ( $i = 0; $i < $limit && $i < $comment_length; $i++ ){
 			$comment = $comments[$i];

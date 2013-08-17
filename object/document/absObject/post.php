@@ -88,7 +88,8 @@ Abstract Class Post {
 			'thumb'			=> $this->getThumb(),
 			'slug'			=> $this->getSlug(),
 			'status'		=> $this->getStatus(),
-			'email'			=> $this->getEmail()
+			'email'			=> $this->getEmail(),
+			'comment_count' => $this->getComments()->count()
 		);
 
 		return $post_data;

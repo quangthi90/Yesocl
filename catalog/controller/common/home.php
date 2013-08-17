@@ -51,7 +51,6 @@ class ControllerCommonHome extends Controller {
 				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
 				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
 				$posts[$i]['href_status'] = $this->url->link('post/post/getCommentByPost', 'type_id=' . $branch_slug, 'SSL');
-				$posts[$i]['comment_count'] = $this->model_branch_post->getTotalComments( $posts[$i]['id'], $branch_slug );
 			}
 
 			$this->data['all_posts'][$branch_slug] = $posts;
