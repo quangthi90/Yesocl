@@ -29,6 +29,7 @@ class Customer {
 				$this->username = $customer_query->getUsername();
 				$this->customer_group_id = $customer_query->getGroupUser()->getId();
 				$this->slug = $customer_query->getSlug();
+				$this->avatar = $customer_query->getAvatar();
 			
 				// $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
 				
