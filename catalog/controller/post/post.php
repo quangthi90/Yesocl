@@ -21,39 +21,49 @@ class ControllerPostPost extends Controller {
             $data['user_id'] = $this->customer->getId();
         }else {
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok1'
+                'success' => 'not ok: user not login'
             )));
         }
 
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate() && isset($this->request->post['post_slug']) ) {
+        if ( empty($this->request->post['post_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug is empty'
+            )));
+        }
+
+        if ( empty($this->request->post['post_type']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type is empty'
+            )));
+        }
+
+        if ( empty($this->request->post['type_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: type slug is empty'
+            )));
+        }
+
+        if ( empty($this->request->post['content']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: content is empty'
+            )));
+        }
+
+        if ( $this->validate() ) {
             $data['post_slug'] = $this->request->post['post_slug'];
             $data['content'] = $this->request->post['content'];
+            $data['post_type'] = $this->request->post['post_type'];
+            $data['type_slug'] = $this->request->post['type_slug'];
         }else {
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok'
+                'success' => 'not ok: validate false'
             )));
         }
-
-        if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
-            $data['post_type'] = $this->request->post['post_type'];
-        }else{
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok3'
-            )));
-        }
-
-        if ( isset($this->request->post['type_slug']) && !empty($this->request->post['type_slug']) ){
-            $data['type_slug'] = $this->request->post['type_slug'];
-            $data['branch_slug'] = $this->request->post['type_slug'];
-        }else{
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok4'
-            )));
-        }
-
+        
         switch ($data['post_type']) {
-            case 'branch':
+            case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
+                $data['branch_slug'] = $data['type_slug'];
                 $comment = $this->model_branch_comment->addComment( $data );
                 break;
             
@@ -61,6 +71,14 @@ class ControllerPostPost extends Controller {
                 $comment = array();
                 break;
         }
+        
+        if ( $comment == false ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: add comment have error'
+            )));
+        }
+
+        $comment['created'] = $comment['created']->format( $this->language->get('date_format_long') );
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
@@ -80,14 +98,14 @@ class ControllerPostPost extends Controller {
     	}
   	}
 
-    public function getCommentByPost(){
+    public function getComments(){
         $data = array();
 
         if ( isset($this->request->post['post_slug']) && !empty($this->request->post['post_slug']) ){
             $data['post_slug'] = $this->request->post['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: post id empty'
+                'success' => 'not ok: post slug empty'
             )));
         }
 
@@ -103,7 +121,7 @@ class ControllerPostPost extends Controller {
             $data['type_slug'] = $this->request->get['type_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: type id empty'
+                'success' => 'not ok: type slug empty'
             )));
         }
 
@@ -125,9 +143,9 @@ class ControllerPostPost extends Controller {
         }
         
         switch ($data['post_type']) {
-            case 'branch':
+            case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $data['branch_id'] = $data['type_slug'];
+                $data['branch_slug'] = $data['type_slug'];
                 $comments = $this->model_branch_comment->getComments( $data );
                 break;
             
@@ -140,8 +158,7 @@ class ControllerPostPost extends Controller {
         $this->load->model('tool/image');
 
         foreach ( $comments as $key => $comment ) {
-            //$user = $this->model_account_customer->getCustomer( $comment['user_id'] );
-            $user = $this->model_tool_cache->getObject( $comment['user_id'], $this->config->get('common')['type']['user'] );
+            $user = $this->model_tool_cache->getObject( $comment['user_slug'], $this->config->get('common')['type']['user'] );
 
             if ( $user && $user['avatar'] ){
                 $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
@@ -159,14 +176,12 @@ class ControllerPostPost extends Controller {
 
             $comments[$key]['avatar'] = $avatar;
             $comments[$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+            $comments[$key]['created'] = $comment['created']->format( $this->language->get('date_format_long') );
         }
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'comments' => $comments,
-            'post_slug'   => $data['post_slug'],
-            'post_type' => $data['post_type'],
-            'type_slug' => $data['type_slug']
+            'comments' => empty($comments) ? array() : $comments
         )));
     }
 }

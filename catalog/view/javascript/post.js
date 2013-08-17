@@ -59,14 +59,18 @@
 				for (key in data.comments) {
 					htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
 				}
+				
 				htmlOutput += '<div id="add-more-item"></div>';
-				console.log(that.$el.attr('data-comment-count'));
 				comment_box.find('.comment-body').html(htmlOutput);
-				comment_box.find('.y-box-header span').html(that.$el.attr('data-comment-count'));
+				comment_box.find('.y-box-header span').html(that.comment_count);
 				comment_form.attr('data-post-slug', that.post_slug);
 				comment_form.attr('data-post-type', that.post_type);
-				comment_form.attr('data-type-slug', that.type_slug);	
-				page = 1;	
+				comment_form.attr('data-type-slug', that.type_slug);
+				page = 1;
+
+				$('.comment-form').each(function(){
+					new CommentForm($(this));
+				});
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -116,9 +120,9 @@
 
 			that.data = {
 				content 	: that.$content.val(),
-				post_slug		: that.$el.attr('data-post-id'),
-				post_type	: that.$el.attr('data-post-type'),
-				type_slug		: that.$el.attr('data-type-slug')
+				post_slug	: that.post_slug,
+				post_type	: that.post_type,
+				type_slug	: that.type_slug
 			};
 
 			that.submit(that.$comment_btn);
@@ -190,9 +194,9 @@
 		comment_box.animate({"right": "2px"}, "slow", function(){			
 			//list_comment.makeScrollWithoutCalResize();
 		});
-		list_comment.animate({ 
-			scrollTop: $('#add-more-item').offset().top
-		}, 1000);
+		// list_comment.animate({ 
+		// 	scrollTop: $('#add-more-item').offset().top
+		// }, 1000);
 	}
 
 	function hideCommentBox () {
@@ -204,10 +208,6 @@
 	$(function(){
 		$('.open-comment').each(function(){
 			new CommentBtn($(this));			
-		});
-
-		$('.comment-form').each(function(){
-			new CommentForm($(this));
 		});
 
 		$('.comment-container').on('click', '.y-box-header .close', function(){

@@ -28,7 +28,7 @@
 								<a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
 									data-url="{{ post.href_status|raw }}" 
 									data-comment-count="{{ post.comment_count }}" 
-									data-post-id="{{ post.id }}" 
+									data-post-slug="{{ post.slug }}" 
 									data-post-type="{{ post_type }}"
 									data-type-slug="{{ branch.slug }}"
 								>

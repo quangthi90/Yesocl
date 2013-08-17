@@ -23,11 +23,11 @@ class ModelBranchComment extends Doctrine {
 			$data['order'] = 'ASC';
 		}
 
-		if ( !isset($data['branch_id']) || empty($data['branch_id']) ){
+		if ( !isset($data['branch_slug']) || empty($data['branch_slug']) ){
 			return array();
 		}
 
-		if ( !isset($data['post_id']) || empty($data['post_id']) ){
+		if ( !isset($data['post_slug']) || empty($data['post_slug']) ){
 			return array();
 		}
 
@@ -56,11 +56,11 @@ class ModelBranchComment extends Doctrine {
 			}
 			return $comments;
 		}else {
-			$comments = $this->model_tool_cache->getLastComments( $data['post_id'], $this->config->get('common')['type']['branch'], $data['branch_id'] );
+			$comments = $this->model_tool_cache->getLastComments( $data['post_slug'], $this->config->get('common')['type']['branch'], $data['branch_slug'] );
 			
 			if ( $data['order'] != 'ASC' ) {
 				$comments = krsort( $comments );
-			} 
+			}
 
 			if ( $data['page']*10 <= count($comments) ) {
 				return array_slice( $comments, count( $comments ) - $data['limit']*$data['page'], $data['limit']);
@@ -111,14 +111,19 @@ class ModelBranchComment extends Doctrine {
 		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
-		$post = $branch->getPostById( $data['post_id'] );
+		$post = $branch->getPostBySlug( $data['post_slug'] );
+
+		if ( !$post ){
+			return false;
+		}
+
 		$post->addComment( $comment );
 
 		$this->dm->flush();
 		
 		//-- Update 50 last Comments
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getId(), $post, $comment->getId() );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment->getId() );
 
 		return $comment->formatToCache();
 	}

@@ -74,6 +74,32 @@ class ModelToolCache extends Model {
 	}
 
 	/**
+	 * Create cache for Post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Post
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- string type Slug
+	 * @return: Array Object Post
+	 */
+	public function setPost($post, $type_post = 'branch', $type_slug) {
+		$post_data = $post->formatToCache();
+
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_name = $this->config->get('post')['default']['cache_folder'];
+		$path = $folder_link . $type_slug . '/' . $folder_name . '/' . $post->getSlug() . '/';
+
+		$file_name = $this->config->get('common')['default']['main_object_post'];
+		$this->cache->set( $file_name, $post_data, $path );
+		
+		return $post_data;
+	}
+
+	/**
 	 * Get cache Post of
 	 *	- Branch
 	 *	- Group
@@ -146,6 +172,10 @@ class ModelToolCache extends Model {
 
 		$comments = $post->getComments();
 		$comment_length = count($comments);
+
+		$post_data = $post->formatToCache();
+
+		$this->setPost( $post, $type_comment, $type_slug );
 		
 		for ( $i = 0; $i < 50 && $i < $comment_length; $i++ ){
 			$comment = $comments[$i];
