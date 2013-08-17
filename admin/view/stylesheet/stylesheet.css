@@ -591,3 +591,13 @@ table.list  tr:hover td{
 table.list  tr:hover td:first-child {
     font-weight: bold;
 }
+
+.wr-time .span8 select {
+	margin-bottom: 0;
+}
+.wr-time {
+	margin-bottom: 10px;
+}
+textarea.input-xxlarge {
+	width: 539px;
+}

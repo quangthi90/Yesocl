@@ -27,6 +27,7 @@ $_['text_value']		  			= 'Value';
 $_['text_view']		  				= 'View';
 $_['text_visible']		  			= 'Visible';
 $_['text_year']		  				= 'Year:';
+$_['text_select_image']		  		= 'Select image:';
 
 // Button
 $_['button_add_education']		  	= 'Add Education';
@@ -58,6 +59,7 @@ $_['entry_interest']          		= 'Interest:';
 $_['entry_im']          			= 'IM:';
 $_['entry_lastname']          		= 'Lastname:';
 $_['entry_location']          		= 'Location:';
+$_['entry_avatar']          		= 'Avatar:';
 $_['entry_marital_status']          = 'Marital Status:';
 $_['entry_password']            	= 'Password:';
 $_['entry_phone']            		= 'Phone:';

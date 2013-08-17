@@ -81,7 +81,7 @@ class ModelToolImage extends Model {
 		}
 		
 		$image_path = $folder . '/' . $filename . '.' . $ext;
-		
+		// var_dump($image_path); exit;
 		if ( move_uploaded_file( $thumb['tmp_name'], DIR_IMAGE . $image_path ) ) {
 			return $image_path;
 		}else {

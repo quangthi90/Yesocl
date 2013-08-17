@@ -123,6 +123,7 @@
             <?php } ?>
             </select></td>
           </tr>
+          <!--
           <tr>
             <td><span class="required">*</span> <?php echo $entry_country; ?></td>
             <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[location][country]" value="<?php echo $country; ?>" /></td>
@@ -131,13 +132,18 @@
             <td><span disabled="disabled" class="required">*</span> <?php echo $entry_city; ?></td>
             <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[location][city]" value="<?php echo $city; ?>" /></td>
           </tr>
+          -->
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_location; ?></td>
+            <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[location][location]" value="<?php echo $location; ?>" /></td>
+          </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_postal_code; ?></td>
             <td><input disabled="disabled" required="required" class="input-medium" type="text" name="meta[postalcode]" value="<?php echo $postal_code; ?>" /></td>
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_address; ?></td>
-            <td><input disabled="disabled" required="required" class="input-large" type="text" name="meta[address]" value="<?php echo $address; ?>" /></td>
+            <td><input disabled="disabled" required="required" class="input-xxlarge" type="text" name="meta[address]" value="<?php echo $address; ?>" /></td>
           </tr>
           <tr>
             <td><?php echo $entry_advice_for_contact; ?></td>
@@ -149,11 +155,11 @@
           </tr>
           <tr>
             <td><?php echo $entry_headingline; ?></td>
-            <td><input disabled="disabled" class="input-xxlarge" type="text" name="meta[headingline]" value="<?php echo $heading_line; ?>" /></td>
+            <td><textarea class="input-xxlarge" disabled="disabled" type="text" name="meta[headingline]"><?php echo $heading_line; ?></textarea></td>
           </tr>
           <tr>
             <td><?php echo $entry_interest; ?></td>
-            <td><input disabled="disabled" class="input-xxlarge" type="text" name="background[interest]" value="<?php echo $interest; ?>" /></td>
+            <td><textarea disabled="disabled" class="input-xxlarge" type="text" name="background[interest]"><?php echo $interest; ?></textarea></td>
           </tr>
           </table>
 	    	</div>
@@ -168,9 +174,13 @@
           </tr>
           <?php foreach ($ims as $key => $im) { ?>
           <tr>
-            <td><select disabled="disabled" class="input-small" name="user[ims][<?php echo $key; ?>][type]" ><?php foreach ($im_types as $im_type) { ?><option value="<?php echo $im_type['code']; ?>" <?php if($im['type'] == $im_type['code']) { ?>selected="selected"<?php } ?>><?php echo $im_type['text']; ?></option><?php } ?></select></td>
-            <td><input disabled="disabled" class="input-medium" type="text" name="user[ims][<?php echo $key; ?>][im]" value="<?php echo $im['im']; ?>" /></td>
-            <td><select disabled="disabled" class="visible input-medium" name="user[ims][<?php echo $key; ?>][visible]"><?php foreach ($visible_types as $visible_type) { ?><option value="<?php echo $visible_type['code']; ?>" <?php if($im['visible'] == $visible_type['code']) { ?>selected="selected"<?php } ?>><?php echo $visible_type['text']; ?></option><?php } ?></select></td>
+            <td>
+              <input disabled="disabled" class="input-medium" type="text" value="<?php foreach ($im_types as $im_type) { if($im['type'] == $im_type['code']) echo $im_type['text']; } ?>" />
+            </td>
+            <td><input disabled="disabled" class="input-medium" type="text" value="<?php echo $im['im']; ?>" /></td>
+            <td><input disabled="disabled" class="input-medium" type="text" value="
+              <?php foreach ($visible_types as $visible_type) { if($im['visible'] == $visible_type['code'] ) echo $visible_type['text']; } ?>" />
+            </td>
           </tr>
           <?php } ?>
           </table>
@@ -203,7 +213,7 @@
           </tr>
           <?php foreach ($websites as $website) { ?>
           <tr>
-            <td><input disabled="disabled" class="title input-medium" type="text" name="user[websites][<?php echo $key; ?>][title]" value="<?php echo $website['title']; ?>" /></td>
+            <td><input disabled="disabled" class="title input-medium" type="text" name="user[websites][<?php echo $key; ?>][title]" value="<?php foreach($title_types as $title_type){ if ($website['title'] == $title_type['code']) echo $website['title']; } ?>" /></td>
             <td><input disabled="disabled" class="url input-large" type="text" name="user[websites][<?php echo $key; ?>][url]" value="<?php echo $website['url']; ?>" /></td>
           </tr>
           <?php } ?>
@@ -242,26 +252,26 @@
                   <div class="span9">
                     <?php $cur_year = date('Y'); ?>
                     <?php echo $text_month; ?>
-                    <select class="started-month input-small" name="background[experiencies][<?php echo $key; ?>][started][month]" >
+                    <select disabled="disabled" class="started-month input-small" name="background[experiencies][<?php echo $key; ?>][started][month]" >
                     <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['started']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_year; ?>
-                          <select class="started-year input-small" name="background[experiencies][<?php echo $key; ?>][started][year]" >
+                          <select disabled="disabled" class="started-year input-small" name="background[experiencies][<?php echo $key; ?>][started][year]" >
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['started']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_to; ?>
                           <?php echo $text_month; ?>
-                          <select class="ended-month input-small" name="background[experiencies][<?php echo $key; ?>][ended][month]" >
+                          <select disabled="disabled" class="ended-month input-small" name="background[experiencies][<?php echo $key; ?>][ended][month]" >
                     <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_year; ?>
-                          <select class="ended-year input-small" name="background[experiencies][<?php echo $key; ?>][ended][year]" >
+                          <select disabled="disabled" class="ended-year input-small" name="background[experiencies][<?php echo $key; ?>][ended][year]" >
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
@@ -272,7 +282,7 @@
               <div class="row-fluid">
                 <div class="span4">
                   <div class="span3"><?php echo $entry_description; ?></div>
-                  <div class="span9"><input disabled="disabled" class="description input-xxlarge" type="text" name="background[experiencies][<?php echo $key; ?>][description]" value="<?php echo $experience['description']; ?>" /></div>
+                  <div class="span9"><textarea disabled="disabled" class="description input-xxlarge" type="text" name="background[experiencies][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
                 </div>
               </div>
             </td>
@@ -295,13 +305,13 @@
                          <div class="span2"><?php echo $entry_date_attended; ?></div>
                          <div class="span10">
                           <?php $cur_year = date('Y'); ?>
-                          <select class="started input-small" name="background[educations][<?php echo $key; ?>][started]" >
+                          <select disabled="disabled" class="started input-small" name="background[educations][<?php echo $key; ?>][started]" >
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                             <option value="<?php echo $i; ?>" <?php if ($i == $education['started']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select> 
                           <?php echo $text_to; ?> 
-                          <select class="ended input-small" name="background[educations][<?php echo $key; ?>][ended]" >
+                          <select disabled="disabled" class="ended input-small" name="background[educations][<?php echo $key; ?>][ended]" >
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                             <option value="<?php echo $i; ?>" <?php if ($i == $education['ended']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
@@ -322,11 +332,11 @@
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_societies; ?></div>
-                         <div class="span10"><input disabled="disabled" class="societies input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][societies]" value="<?php echo $education['societies']; ?>" /></div>
+                         <div class="span10"><textarea disabled="disabled" class="societies input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][societies]"><?php echo $education['societies']; ?></textarea></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_description; ?></div>
-                         <div class="span10"><input disabled="disabled" class="description input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][description]" value="<?php echo $education['description']; ?>" /></div>
+                         <div class="span10"><textarea disabled="disabled" class="description input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][description]"><?php echo $education['description']; ?></textarea></div>
                     </div>
                     </td>
                </tr>
