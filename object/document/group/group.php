@@ -9,6 +9,9 @@ Class Group {
 
 	/** @MongoDB\String */
 	private $name;
+
+	/** @MongoDB\String */
+	private $slug;
 	
 	/** @MongoDB\String */
 	private $sumary;
@@ -97,6 +100,37 @@ Class Group {
 		return null;
 	}
 
+	/**
+	* Format array to save to Cache
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Group
+	*/
+    public function formatToCache(){
+    	$category_id = array();
+
+    	foreach ( $this->getCategories() as $category ) {
+    		$category_id[] = $category->getId();
+    	}
+
+		$data = array(
+			'id'		=> $this->getId(),
+			'name' 		=> $this->getName(),
+			'author' 	=> $this->getAuthor()->getFullname(),
+			'email' 	=> $this->getAuthor()->getPrimaryEmail()->getEmail(),
+			'sumary'	=> $this->getSumary(),
+			'description' => $this->getDescription(),
+			'website' 	=> $this->getWebsite(),
+			'type_id' 	=> $this->getType()->getId(),
+			'category_id' => $category_id,
+			'created' 	=> $this->getCreated()->format('m/d/Y'),
+			'slug'		=> $this->getSlug(),
+			'status'	=> $this->getStatus()
+		);
+
+		return $data;
+	}
+
 	public function getId(){
 		return $this->id;
 	}
@@ -107,6 +141,14 @@ Class Group {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setSumary( $sumary ){

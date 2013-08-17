@@ -54,7 +54,7 @@ FlexibleElement.prototype.attachEvents = function() {
 		var scrollbarsNice = m.find('.nicescroll-rails');
 		$(this).hide();	
 		sc.slideDown(200, function() {
-			sb.animate({ "bottom" : "68px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
+			sb.animate({ "bottom" : "67px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
 				m.animate({"left": "152px" , "paddingLeft": "20px"}, 500); 	
 				scrollbarsNice.animate({ left: '-=132' }, 100);
 				cl.show();
@@ -68,7 +68,7 @@ FlexibleElement.prototype.attachEvents = function() {
 			return;
 		}
 		sT.slideUp(100);
-	});
+	});	
 }
 
 /*
@@ -96,12 +96,17 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		var widthPost = this.widthMain*5/18 - 10;
 		this.columns.width(widthPost);
 		this.blockContent.height(heightBlockContent);		
-		this.blocks.width((5/6)*this.widthMain);
+		this.blocks.width((5/6)*this.widthMain);		
 		this.blocks.each(function(index) {
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
 			blockFeed.putFeed();
 		});
 		this.root.width(this.blocks.length*((5/6)*this.widthMain + 35));
+		this.feeds.each(function() {
+			var hp = $(this).children('.post_header').first().outerHeight();
+			var heightUpdated = $(this).height();
+			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
+		});
 	}else {	
 		var heightMax = this.heightMain - 25;
 		var widthM = this.widthMain;
@@ -110,12 +115,6 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			$(this).height(heightMax);
 			$(this).css('float','left');
 			$(this).css('margin-right','30px');
-			var image = $(this).find('.post_image img');
-			if(image.length > 0) {
-				$(this).width(1.1*image.outerWidth());
-			}else {
-				$(this).width(widthM/3);
-			}
 			var headerPost = $(this).children('.post_header').first().outerHeight();
 			var footerPost = $(this).children('.post_footer').first().outerHeight();
 			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
@@ -163,5 +162,5 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
-	new HorizontalBlock($('.has-horizontal')); 	
+	new HorizontalBlock($('.has-horizontal')); 		
 });

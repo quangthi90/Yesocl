@@ -60,6 +60,23 @@ Class User {
 	/** @MongoDB\EmbedMany(targetDocument="Post") */
 	private $posts = array();
 
+	/** @MongoDB\PrePersist */
+    public function prePersist()
+    {
+    	$this->created = new \DateTime();
+        $this->getDataSolrEmail();
+        $this->getDataSolrFullname();
+        $this->getDataSolrPrimaryEmail();
+    }
+
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+        $this->getDataSolrEmail();
+        $this->getDataSolrFullname();
+        $this->getDataSolrPrimaryEmail();
+    }
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -76,6 +93,57 @@ Class User {
 		}
 		
 		return null;
+	}
+
+    /**
+	* Format array to save to Cache
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Branch
+	*/
+    public function formatToCache(){
+		$data = array(
+			'id'			=> $this->getId(),
+			'username' 		=> $this->getUsername(),
+			'avatar' 		=> $this->getAvatar(),
+			'slug'			=> $this->getSlug(),
+			'email' 		=> $this->getPrimaryEmail()->getEmail()
+		);
+
+		return $data;
+	}
+
+	/**
+	* Get Primary Email
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: Object Email
+	*/
+	public function getPrimaryEmail() {
+		foreach ($this->emails as $email) {
+			if ($email->getPrimary()) {
+				return $email;
+			}
+		}
+	}
+
+	/**
+	* Check Email is exist
+	* 2013/07/24
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @param: string email
+	* @return: bool
+	*	- true: exist
+	*	- false: not exist
+	*/
+	public function isExistEmail( $email ) {
+		foreach ( $this->emails as $email_data ) {
+			if ( strtolower( trim( $email ) ) == $email_data->getEmail() ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public function getId() {
@@ -120,24 +188,6 @@ Class User {
 
 	public function getEmails(){
 		return $this->emails;
-	}
-	
-	public function getPrimaryEmail() {
-		foreach ($this->emails as $email) {
-			if ($email->getPrimary()) {
-				return $email;
-			}
-		}
-	}
-
-	public function isExistEmail( $email ) {
-		foreach ( $this->emails as $email_data ) {
-			if ( strtolower( trim( $email ) ) == $email_data->getEmail() ) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	public function setMeta( $meta ){
@@ -327,33 +377,4 @@ Class User {
 		}
 	}
 	//---------------------------------- end Solr Data Cache --------------------------
-
-	/** @MongoDB\PrePersist */
-    public function prePersist()
-    {
-    	$this->created = new \DateTime();
-        $this->getDataSolrEmail();
-        $this->getDataSolrFullname();
-        $this->getDataSolrPrimaryEmail();
-    }
-
-    /** @MongoDB\PreUpdate */
-    public function preUpdate()
-    {
-        $this->getDataSolrEmail();
-        $this->getDataSolrFullname();
-        $this->getDataSolrPrimaryEmail();
-    }
-
-    public function formatToCache(){
-		$data = array(
-			'id'			=> $this->getId(),
-			'username' 		=> $this->getUsername(),
-			'avatar' 		=> $this->getAvatar(),
-			'slug'			=> $this->getSlug(),
-			'email' 		=> $this->getPrimaryEmail()->getEmail()
-		);
-
-		return $data;
-	}
 }

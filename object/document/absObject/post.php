@@ -17,6 +17,9 @@ Abstract Class Post {
 	private $title;
 
 	/** @MongoDB\String */
+	private $description;
+
+	/** @MongoDB\String */
 	private $content;
 	
 	/** @MongoDB\Boolean */
@@ -43,6 +46,9 @@ Abstract Class Post {
 	/** @MongoDB\String */
 	private $slug;
 
+	/** @MongoDB\String */
+	private $thumb;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -61,6 +67,34 @@ Abstract Class Post {
 		return null;
 	}
 
+	/**
+	* Format array to save to Cache
+	* 05/26/2013
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Post & Comments
+	*/
+	public function formatToCache(){
+		$limit = 200;
+
+		$post_data = array(
+			'id'			=> $this->getId(),
+			'author' 		=> $this->getAuthor(),
+			'title' 		=> $this->getTitle(),
+			'description'	=> $this->getDescription(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated(),
+			'user_id'		=> $this->getUser()->getId(),
+			'user_slug'		=> $this->getUser()->getSlug(),
+			'thumb'			=> $this->getThumb(),
+			'slug'			=> $this->getSlug(),
+			'status'		=> $this->getStatus(),
+			'email'			=> $this->getEmail(),
+			'comment_count' => $this->getComments()->count()
+		);
+
+		return $post_data;
+	}
+
 	public function getId(){
 		return $this->id;
 	}
@@ -71,6 +105,14 @@ Abstract Class Post {
 
 	public function getTitle(){
 		return $this->title;
+	}
+
+	public function setDescription( $description ){
+		$this->description = $description;
+	}
+
+	public function getDescription(){
+		return $this->description;
 	}
 
 	public function setContent( $content ){
@@ -153,66 +195,11 @@ Abstract Class Post {
 		return $this->slug;
 	}
 
-	/**
-	* Format array to save to Cache
-	* 05/26/2013
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @param:
-	*	- image tool: catalog/model/tool/image
-	*	- url lib: class url in library
-	*	- bool include comment: cache all comments of post
-	* @return: array Post & Comments
-	*	Ex:
-	*		array = {
-	*
-	*		}
-	*/
-	public function formatToCache(){
-		$limit = 50;
+	public function setThumb( $thumb ){
+		$this->thumb = $thumb;
+	}
 
-		$comment_count = 0;
-		if ( $this->comments ){
-			$comment_count = count($this->comments);
-		}
-
-		$post_data = array(
-			'id'			=> $this->getId(),
-			'author' 		=> $this->getAuthor(),
-			'title' 		=> $this->getTitle(),
-			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
-			'comment_count' => $comment_count,
-			'user_id'		=> $this->getUser()->getId()
-		);
-		
-		$list_post_data = array();
-
-		$post_data['comments'] = array();
-		$count_paging = 1;
-		$i = 1;
-
-		if ( $comment_count == 0 ){
-			$list_post_data[] = array(
-				'object' 	=> $post_data,
-				'page'		=> $count_paging
-			);
-		}
-
-		foreach ( $this->getComments() as $comment ) {
-			$post_data['comments'][$comment->getId()] = $comment->formatToCache();
-
-			if ( ($i / $count_paging) == $limit || $i == $comment_count ){
-				$list_post_data[] = array(
-					'object' 	=> $post_data,
-					'page'		=> $count_paging
-				);
-				$post_data['comments'] = array();
-				$count_paging++;
-			}
-
-			$i++;
-		}
-
-		return $list_post_data;
+	public function getThumb(){
+		return $this->thumb;
 	}
 }

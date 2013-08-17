@@ -231,6 +231,7 @@ class ControllerAdminGroup extends Controller {
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_select_all_action'] = $this->language->get( 'button_select_all_action' );
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
@@ -239,6 +240,7 @@ class ControllerAdminGroup extends Controller {
 		// Column
 		$this->data['column_layout'] = $this->language->get( 'column_layout' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
+		$this->data['column_checkall'] = $this->language->get( 'column_checkall' );
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'admin/group', 'token=' . $this->session->data['token'], 'SSL' );

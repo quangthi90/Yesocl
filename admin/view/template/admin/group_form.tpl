@@ -35,6 +35,7 @@
                 <tr>
                   <th><?php echo $column_layout; ?></th>
                   <th><?php echo $column_action; ?></th>
+                  <th><?php echo $column_checkall; ?></th>
                 </tr>
                 <?php foreach ( $layouts as $layout ) { ?>
                 <tr>
@@ -49,8 +50,16 @@
                     <?php } ?>
                     </div>
                   </td>
+                  <td><input type="checkbox" onclick="$(this).parent().parent().find('input[name*=\'layouts\']').attr('checked', this.checked);" /></td>
                 </tr>
                 <?php } ?>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="controls"><a class="btn inline btn-warning" onclick="$('.check-all-action').click();"><?php echo $button_select_all_action; ?></a><input class="hidden check-all-action" type="checkbox" onclick="$('input[type*=\'checkbox\']').attr('checked', this.checked);" /></div>
+                  </td>
+                </tr>
               </table>
             </td>
           </tr>

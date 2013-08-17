@@ -2,7 +2,7 @@
 use Document\User\Post;
 
 class ModelUserPost extends Doctrine {
-	public function addPost( $data = array(), $user_id ) {
+	public function addPost( $data = array(), $user_id, $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
 			return false;
@@ -37,8 +37,11 @@ class ModelUserPost extends Doctrine {
 		if ( empty( $user ) ) {
 			return false;
 		}
+
+		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 		
 		$post = new Post();
+		$post->setSlug( $slug );
 		$post->setTitle( $data['title'] );
 		$post->setContent( $data['postcontent'] );
 		$post->setUser( $author );
@@ -47,11 +50,27 @@ class ModelUserPost extends Doctrine {
 		$user->addPost( $post );
 		
 		$this->dm->flush();
+
+		$this->load->model('tool/image');
+		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
+				$post->setThumb( $data['thumb'] );
+			}
+		}
+
+		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post->getSlug() );
 		
 		return true;
 	}
 
-	public function editPost( $post_id, $data = array() ) {
+	public function editPost( $post_id, $data = array(), $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){
 			return false;
@@ -80,17 +99,40 @@ class ModelUserPost extends Doctrine {
 		
 		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
 		
-		foreach ( $user->getPosts() as $post ){
-			if ( $post->getId() == $post_id ){
-				$post->setTitle( $data['title'] );
-				$post->setContent( $data['postcontent'] );
-				$post->setUser( $author );
-				$post->setStatus( $data['status'] );
-				break;
+		$post = $user->getPostById( $post_id );
+
+		if ( !$post ){
+			return false;
+		}
+
+		// Check slug
+		// if ( $data['title'] != $post->getTitle() ){
+			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
+
+			$post->setSlug( $slug );
+		// }
+
+		$post->setTitle( $data['title'] );
+		$post->setContent( $data['postcontent'] );
+		$post->setUser( $author );
+		$post->setStatus( $data['status'] );
+
+		$this->load->model('tool/image');
+		
+		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
+				$post->setThumb( $data['thumb'] );
 			}
 		}
 		
 		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post->getSlug() );
 		
 		return true;
 	}
@@ -102,11 +144,22 @@ class ModelUserPost extends Doctrine {
 			}
 			
 			foreach ( $data['id'] as $id ) {
-				foreach ( $user->getPosts() as $post ){
-					if ( $post->getId() == $id ){
-						$user->getPosts()->removeElement( $post );
-						break;
-					}
+				$post = $user->getPostById( $id );
+				if ( $post ){
+					$folder_link = $this->config->get('user')['default']['image_link'];
+					$folder_name = $this->config->get('post')['default']['image_folder'];
+					$path = DIR_IMAGE . $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+					
+					// remove Image
+					$this->load->model('tool/image');
+					$this->model_tool_image->deleteDirectoryImage( $path );
+
+					// remove cache
+					$this->load->model('tool/cache');
+					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['user'], $user->getSlug() );
+
+					$user->getPosts()->removeElement( $post );
+					break;
 				}
 			}
 		}

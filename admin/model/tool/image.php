@@ -39,5 +39,65 @@ class ModelToolImage extends Model {
 	public function getGavatar( $email, $size = 100 ){
 		return "http://www.gravatar.com/avatar/" . md5( $email ) . "?s=" . $size;
 	}
+
+	public function isValidImage( $file ) {
+		$allowedExts = array("gif", "jpeg", "jpg", "png");
+		$extension = end(explode(".", $file["name"]));
+
+		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
+  			if ($file["error"] > 0) {
+    			return false;
+    		}
+  			else {
+	    		return true;
+    		}
+  		}
+		else {
+  			return false;
+  		}
+	}
+
+	public function uploadImage( $folder, $filename, $thumb ) {
+		$ext = end(explode(".", $thumb["name"]));
+
+		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
+			unlink($path . '.jpg');
+		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
+			unlink($path . '.jpeg');
+		}elseif ( file_exists( DIR_IMAGE . $path . '.gif' ) ) {
+			unlink($path . '.gif');
+		}elseif ( file_exists( DIR_IMAGE . $path . '.png' ) ) {
+			unlink($path . '.png' );
+		}
+
+		$folder_names = explode('/', $folder);
+		$path = DIR_IMAGE;
+		
+		foreach ( $folder_names as $folder_name ) {
+			$path .= $folder_name . '/';
+			if ( !is_dir( $path ) ) {
+				mkdir( $path );
+			}
+		}
+		
+		$image_path = $folder . '/' . $filename . '.' . $ext;
+		// var_dump($image_path); exit;
+		if ( move_uploaded_file( $thumb['tmp_name'], DIR_IMAGE . $image_path ) ) {
+			return $image_path;
+		}else {
+			return false;
+		}
+	}
+
+	public function deleteDirectoryImage( $dirname ) {
+  		if(is_dir($dirname)){
+    		$files = glob( $dirname . '*', GLOB_MARK );
+    		foreach( $files as $file )
+      			$this->deleteDirectoryImage( $file );
+    		rmdir( $dirname );
+  		}else{
+    		unlink( $dirname );
+    	}
+	}
 }
 ?>
