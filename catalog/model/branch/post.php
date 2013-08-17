@@ -20,6 +20,14 @@ class ModelBranchPost extends Doctrine {
 				$results = $branch->getPosts()->toArray();
 			}else{
 				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_slug'] );
+
+				if ( count($results) < 60 ){
+					$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $data['branch_slug'] );
+
+					$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch );
+
+					$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_slug'] );
+				}
 			}
 
 			$this->load->model('user/user');

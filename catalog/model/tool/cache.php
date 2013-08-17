@@ -74,6 +74,36 @@ class ModelToolCache extends Model {
 	}
 
 	/**
+	 * Set last post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string type post ['branch', 'group', 'user']
+	 *	- object type
+	 *	- string Post Slug
+	 * @return: Array Object Post
+	 */
+	public function updateLastPosts($type_post = 'branch', $type, $post_slug = '') {
+		$limit = 60;
+
+		$posts = $type->getPosts();
+		$post_length = count($posts);
+
+		for ( $i = 0; $i < 60 && $i < $post_length; $i++ ){
+			$post = $posts[$i];
+
+			if ( $post->getSlug() == $post_slug || $this->getPost($post->getSlug(), $type_post, $type->getSlug()) == null ){
+				$this->setPost( $post, $type_post, $type->getSlug() );
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Create cache for Post of
 	 *	- Branch
 	 *	- Group
