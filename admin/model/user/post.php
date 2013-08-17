@@ -118,6 +118,7 @@ class ModelUserPost extends Doctrine {
 		$post->setStatus( $data['status'] );
 
 		$this->load->model('tool/image');
+		
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
