@@ -38,7 +38,7 @@ class ModelBranchComment extends Doctrine {
 		}
 
 		if ( $data['page'] > 5 ) {
-			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $data['branch_id'] );
+			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBySlug( $data['branch_slug'] );
 			$post = $branch->getPostById( $data['post_id'] );
 			$data = $post->getComments();
 			$index = $data['page']*$data['limit'] - 1;
@@ -57,6 +57,24 @@ class ModelBranchComment extends Doctrine {
 			return $comments;
 		}else {
 			$comments = $this->model_tool_cache->getLastComments( $data['post_slug'], $this->config->get('common')['type']['branch'], $data['branch_slug'] );
+
+			if ( count($comments) < 50 ){
+				$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBySlug( $data['branch_slug'] );
+				
+				if ( !$branch ){
+					return array();
+				}
+
+				$post = $branch->getPostBySlug( $data['post_slug'] );
+
+				if ( !$post ){
+					return array();
+				}
+
+				$this->model_tool_cache->updateLastComments( $this->config->get('post')['type']['branch'], $data['branch_slug'], $post );
+
+				$comments = $this->model_tool_cache->getLastComments( $data['post_slug'], $this->config->get('common')['type']['branch'], $data['branch_slug'] );
+			}
 			
 			if ( $data['order'] != 'ASC' ) {
 				$comments = krsort( $comments );
