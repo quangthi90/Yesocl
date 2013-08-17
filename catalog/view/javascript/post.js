@@ -2,13 +2,15 @@
 	var comment_box = $('#comment-box');
 	var comment_form = $('.comment-form');
 	var list_comment = $('#comment-box .y-box-content');
+	var page = 1;
 
 	function CommentBtn( $el ){
 		var that = this;
 		this.$el			= $el;
 		this.comment_count	= $el.data('comment-count');
-		this.post_id		= $el.data('post-id');
+		this.post_slug		= $el.data('post-slug');
 		this.post_type		= $el.data('post-type');
+		this.type_slug		= $el.data('type-slug');
 		this.url			= $el.data('url');
 
 		this.attachEvents();
@@ -27,7 +29,7 @@
 			$('#comment-box').find('.y-box-header .close').trigger('click');
 
 			that.data = {
-				post_id 	: that.post_id,
+				post_slug 	: that.post_slug,
 				post_type	: that.post_type
 			};
 
@@ -57,13 +59,18 @@
 				for (key in data.comments) {
 					htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
 				}
-				htmlOutput += '<div id="add-more-item"></div>';
 				
+				htmlOutput += '<div id="add-more-item"></div>';
 				comment_box.find('.comment-body').html(htmlOutput);
-				comment_box.find('.y-box-header span').html(that.$el.attr('data-comment-count'));
-				comment_form.attr('data-post-id', data.post_id);
-				comment_form.attr('data-post-type', data.post_type);
-				comment_form.attr('data-type-id', data.type_id);				
+				comment_box.find('.y-box-header span').html(that.comment_count);
+				comment_form.attr('data-post-slug', that.post_slug);
+				comment_form.attr('data-post-type', that.post_type);
+				comment_form.attr('data-type-slug', that.type_slug);
+				page = 1;
+
+				$('.comment-form').each(function(){
+					new CommentForm($(this));
+				});
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -87,9 +94,9 @@
 
 		this.$el		= $el;
 		this.$content	= $el.find('textarea');
-		this.post_id	= $el.data('post-id');
+		this.post_slug	= $el.data('post-slug');
 		this.post_type	= $el.data('post-type');
-		this.type_id	= $el.data('type-id');
+		this.type_slug	= $el.data('type-slug');
 		this.url		= $el.data('url');
 
 		this.$comment_btn	= $el.find('.btn-comment');
@@ -113,9 +120,9 @@
 
 			that.data = {
 				content 	: that.$content.val(),
-				post_id		: that.$el.attr('data-post-id'),
-				post_type	: that.$el.attr('data-post-type'),
-				type_id		: that.$el.attr('data-type-id')
+				post_slug	: that.post_slug,
+				post_type	: that.post_type,
+				type_slug	: that.type_slug
 			};
 
 			that.submit(that.$comment_btn);
@@ -138,8 +145,6 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				data.comment['avatar'] = $('.sidebar-user-avatar').find('img').attr('src');
-				data.comment['href_user'] = $('.sidebar-user-avatar').find('a').attr('href');
 				htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
 				$('#add-more-item').before(htmlOutput);
 				that.$content.val('');
@@ -187,11 +192,15 @@
 		comment_box.animate({"right": "2px"}, "slow", function(){			
 			//list_comment.makeScrollWithoutCalResize();
 		});
+		// list_comment.animate({ 
+		// 	scrollTop: $('#add-more-item').offset().top
+		// }, 1000);
 	}
 
 	function hideCommentBox () {
 		$('#overlay').hide();
 		$('.post').removeClass('post-selecting');
+		page = 1;
 	}
 
 	$(function(){
@@ -199,14 +208,47 @@
 			new CommentBtn($(this));			
 		});
 
-		$('.comment-form').each(function(){
-			new CommentForm($(this));
-		});
-
 		$('.comment-container').on('click', '.y-box-header .close', function(){
 			$('.open-comment').removeClass('disabled');
 			comment_box.animate({"right": "-500px"}, "slow");
 			hideCommentBox();
+		});
+
+		var getComments = function () {
+			list_comment.off('scroll');
+			if(list_comment.scrollTop() == (list_comment.height() - list_comment.height()) && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
+				page++;
+				var data = {
+					'post_slug'	: comment_form.attr('data-post-id'),
+					'post_type' : comment_form.attr('data-post-type'),
+					'page'		: page
+				}
+				$.ajax({
+					type: 'POST',
+					url:  $('.open-comment.disabled').data('url'),
+					data: data,
+					dataType: 'json',
+					progress: function () {
+						$('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-refresh"></i>Loading...</span>');
+					},
+					success: function (data) {
+						if(data.success == 'ok') {
+							var htmlOutput = '';
+							for (key in data.comments) {
+								htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
+							}
+							$('.comment-body').find('.loading').remove();
+							$('.comment-body').prepend(htmlOutput);
+						}
+					}
+				});
+    		} 
+			list_comment.on('scroll', function () {
+				getComments();
+			});
+		}
+		list_comment.on('scroll', function () {
+			getComments();
 		});
 	});
 }(jQuery, document));

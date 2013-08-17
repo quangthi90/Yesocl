@@ -9,6 +9,9 @@ Class Group {
 
 	/** @MongoDB\String */
 	private $name;
+
+	/** @MongoDB\String */
+	private $slug;
 	
 	/** @MongoDB\String */
 	private $sumary;
@@ -121,6 +124,7 @@ Class Group {
 			'type_id' 	=> $this->getType()->getId(),
 			'category_id' => $category_id,
 			'created' 	=> $this->getCreated()->format('m/d/Y'),
+			'slug'		=> $this->getSlug(),
 			'status'	=> $this->getStatus()
 		);
 
@@ -137,6 +141,14 @@ Class Group {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setSumary( $sumary ){

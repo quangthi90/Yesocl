@@ -2,7 +2,6 @@
 
 {% use '@template/default/template/post/common/post_block_ex1.tpl' %}
 {% use '@template/default/template/post/common/post_block_ex2.tpl' %}
-{#% use '@template/default/template/post/common/post_block_ex3.tpl' %#}
 {% use '@template/default/template/post/common/post_comment.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
@@ -17,12 +16,13 @@
 	<div id="y-main-content" class="has-horizontal has-block">
 		{% for branch in branchs %}
         {% set style = random([1, 2]) %}
-		{% set posts = all_posts[branch.id] %}
+		{% set posts = all_posts[branch.slug] %}
 		{% if posts|length > 0 %}
 		<div class="feed-block">
-            <h3 class="block-title">
-                <a href="#"><i class="icon-th-large"></i> {{ branch.name }}</a>
-            </h3>
+            <div class="block-header">
+                <a class="fl" href="#">{{ branch.name }}</a>
+                <a class="fl" href="#"><i class="icon-chevron-right"></i></a>
+            </div>
             {% if style == 1 %}
             	{{ block('post_common_post_block_ex1') }}
             {% else %}
@@ -38,4 +38,13 @@
 
 {% block javascript %}
 {{ block('post_common_post_comment_javascript') }}
+<script type="text/javascript" src="catalog/view/javascript/libs/modernizr.custom.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/libs/jquery.hoverdir.js"></script>
+<script type="text/javascript">
+    $(function() {    
+        $('.feed-block .feed').each( function() {
+            $(this).hoverdir(); 
+        });
+    });
+</script>
 {% endblock %}

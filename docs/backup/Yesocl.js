@@ -194,6 +194,18 @@ db.getCollection("admin").insert({
   "status": true,
   "username": "superadmin"
 });
+db.getCollection("admin").insert({
+  "_id": ObjectId("52073699471dee9809000000"),
+  "username": "tester",
+  "password": "272082619d1140aa87cc46be9aba00831f55a938",
+  "group": {
+    "$ref": "admin_group",
+    "$id": ObjectId("515f0c69471dee8c1f000000"),
+    "$db": "yesocl"
+  },
+  "status": true,
+  "salt": "e48657078"
+});
 
 /** admin_group records **/
 db.getCollection("admin_group").insert({
@@ -1380,145 +1392,9 @@ db.getCollection("branch").insert({
   "name": "Follower",
   "order": NumberInt(2),
   "posts": [
-    {
-      "_id": ObjectId("51f655bc471deed40c000001"),
-      "author": "user1",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51f654df471deeb40c000000"),
-        "$db": "yesocl"
-      },
-      "content": "&lt;p&gt;\r\n\tmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm&lt;\/p&gt;\r\n",
-      "created": ISODate("2013-07-29T11:45:00.0Z"),
-      "description": "mmmmmmmmmmmmmmmmmmmmmm",
-      "email": "quangthi_90@yahoo.com.vn",
-      "slug": "mmmmmmmmmmm-51f655bc471deed40c000000",
-      "status": true,
-      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f655bc471deed40c000001\/avatar.jpg",
-      "title": "mmmmmmmmmmm",
-      "updated": ISODate("2013-07-29T11:45:00.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51f6559a471deee00c000003"),
-      "title": "eeeeeeeee",
-      "content": "&lt;p&gt;\r\n\teeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-29T11:44:26.0Z"),
-      "updated": ISODate("2013-07-29T11:44:26.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "eeeeeeeee-51f6559a471deee00c000002",
-      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f6559a471deee00c000003\/avatar.jpg",
-      "description": "eeeeeeeeeeeeeeeeeeeeeeeeeee",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51f654df471deeb40c000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51f65584471deee00c000001"),
-      "title": "dddddddddd",
-      "content": "&lt;p&gt;\r\n\tdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-29T11:44:04.0Z"),
-      "updated": ISODate("2013-07-29T11:44:04.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "dddddddddd-51f65584471deee00c000000",
-      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f65584471deee00c000001\/avatar.jpg",
-      "description": "dddddddddddddddddddd",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51f654df471deeb40c000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51f65566471deec00c000005"),
-      "title": "cccccccccc",
-      "content": "&lt;p&gt;\r\n\tcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-29T11:43:34.0Z"),
-      "updated": ISODate("2013-07-29T11:43:34.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "cccccccccc-51f65566471deec00c000004",
-      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f65566471deec00c000005\/avatar.jpg",
-      "description": "cccccccccccccccccccc",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51f654df471deeb40c000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51f6554c471deec00c000003"),
-      "title": "bbbbbbbbbb",
-      "content": "&lt;p&gt;\r\n\tbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-29T11:43:08.0Z"),
-      "updated": ISODate("2013-07-29T11:43:08.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "bbbbbbbbbb-51f6554c471deec00c000002",
-      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f6554c471deec00c000003\/avatar.jpg",
-      "description": "bbbbbbbbbbbbbbbbbbbb",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51f654df471deeb40c000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51f65533471deec00c000001"),
-      "title": "aaaaa",
-      "content": "&lt;p&gt;\r\n\taaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-29T11:42:43.0Z"),
-      "updated": ISODate("2013-07-29T11:42:44.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "aaaaa-51f65533471deec00c000000",
-      "thumb": "data\/catalog\/branch\/51d39bb1d87459c40a000018\/post\/51f65533471deec00c000001\/avatar.jpg",
-      "description": "aaaaaaaaaaaaaaaaa",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51f654df471deeb40c000000"),
-        "$db": "yesocl"
-      }
-    }
+    
   ],
+  "slug": "follower-520ce9a2471dee9c09000001",
   "status": false
 });
 db.getCollection("branch").insert({
@@ -1540,7 +1416,73 @@ db.getCollection("branch").insert({
         "$db": "yesocl"
       },
       "comments": [
-        
+        {
+          "_id": ObjectId("520cebe7471deeec08000000"),
+          "content": "aaaaaaaaa",
+          "status": true,
+          "created": ISODate("2013-08-15T14:55:35.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520cec05471deeec08000001"),
+          "content": "aaaaaaaaa",
+          "status": true,
+          "created": ISODate("2013-08-15T14:56:05.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520cec25471deeec08000002"),
+          "content": "aaaaaaaaa",
+          "status": true,
+          "created": ISODate("2013-08-15T14:56:37.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520cec3b471deeec08000003"),
+          "author": "user1",
+          "content": "aaaaaaaaa",
+          "created": ISODate("2013-08-15T14:56:59.0Z"),
+          "email": "quangthi_90@yahoo.com.vn",
+          "status": true,
+          "updated": ISODate("2013-08-16T17:11:34.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        },
+        {
+          "_id": ObjectId("520e6631471deea00b000010"),
+          "author": "user1",
+          "content": "aaaaaaa",
+          "created": ISODate("2013-08-16T17:49:37.0Z"),
+          "email": "quangthi_90@yahoo.com.vn",
+          "status": true,
+          "updated": ISODate("2013-08-17T08:41:50.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
       ],
       "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tóm tắt view nhận định tuần 15-19\/07&lt;\/strong&gt;: &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&quot;&gt;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&lt;\/a&gt;&lt;br \/&gt;\r\n\t…theo phân tích của chúng tôi thì mục tiêu ngắn hạn của đợt tăng lần này nằm ở vùng 505-507 đối với Vnindex và vùng 64-65-4 đối với Hnxindex, do đó nhà đầu tư nên thận trọng khi cả hai chỉ số tiếp cận vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChỉ số VNIndex tăng khá mạnh trong phiên cuối tuần và bức phá ngưỡng kháng cự 498-500, khối lượng duy trì ở mức trung bình cho thấy áp lực bán ra đã được hấp thụ khá tốt trong những phiên trước. Theo quan sát của chúng tôi, thị trường vẫn trong giai đoạn phân hóa mạnh, dòng tiền chỉ tập trung vào các mã largecap như MSN, VNM, GAS, BVH… Trong khi đó, HNXIndex vẫn tiếp tục đi ngang và chưa thể bức phá được vùng 63.5. Chúng tôi cho rằng chỉ số Vnindex sẽ test lại vùng 500( tương đương đường MA50) trong phiên đầu tuần, nếu thanh khoản vẫn tiếp tục duy trì ổn định, thì xu hướng tăng sẽ rõ ràng hơn. Tuy nhiên, như các bản tin trước, chúng tôi đặc biệt lưu ý ngưỡng kháng cự 507, nhà đầu tư cần thận trọng khi Vnindex đi vào vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTheo đồ thị tuần, hai chỉ số đã hình thành các cây nến tích cực, và khối lượng có sự cải thiện rõ rệt. Vnindex đã bức phá thành công đường MA20 với thanh khoản cao cho thấy xu hướng trung hạn đang có chuyển biến tích cực. Chúng tôi tiếp tục chờ sự cộng hưởng từ chỉ số HNxindex để có thể xác nhận xu hướng trung hạn được bền vững. Do đó, nhà đầu tư trung hạn chỉ nên tiếp tục duy trì mức độ giải ngân thăm dò trong những nhịp điều chỉnh sắp tới trước khi thị trường xác nhận xu thế tăng bền vững.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẫn giữ quan điểm như trong các bản tin trước, nhà đầu tư có thể tiếp tục gia tăng tỉ trọng trong những nhịp điều chỉnh của thị trường, tuy nhiên nên cân nhắc tránh mua đuổi khi Vnindex tiệm cận vùng cản 507.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã cơ bản đang được tích lũy tốt .&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
       "created": ISODate("2013-07-23T08:47:41.0Z"),
@@ -1550,7 +1492,7 @@ db.getCollection("branch").insert({
       "status": true,
       "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee432d471dee580a000001\/avatar.jpg",
       "title": "Lăng kính Yestoc tuần 22-26\/07: “đà tăng tiếp tục được củng cố”",
-      "updated": ISODate("2013-08-08T17:02:28.0Z"),
+      "updated": ISODate("2013-08-17T08:43:58.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5f43471deeb40900001f"),
@@ -1559,24 +1501,208 @@ db.getCollection("branch").insert({
     },
     {
       "_id": ObjectId("51ee4233471dee640a000001"),
-      "title": "Lãi suất OMO về 7%, Ngân hàng Nhà nước “dồn dập” bơm vốn",
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước đã bơm ra thị trường mở (OMO) 5.000 tỷ đồng, kỳ hạn 7 ngày, với lãi suất 7%\/năm.&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCùng ngày, Ngân hàng Nhà nước hút về 242 tỷ đồng, đưa mức bơm ròng vốn trong ngày đạt 4.758 tỷ đồng. Như vậy, khối lượng vốn trên OMO còn lưu hành khoảng 7.500 tỷ đồng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tViệc khối lượng vốn bơm qua thị trường OMO tăng mạnh trong hai ngày đầu tuần diễn ra trong bối cảnh lãi suất giảm 1% về 7%\/năm. Cụ thể, trong hai ngày thứ Hai và thứ Ba, Ngân hàng Nhà nước đã bơm ròng gần 6.300 tỷ đồng trên OMO.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrước đó, khi lãi suất ở mức 8%\/năm, giao dịch qua nghiệp vụ repo trên thị trường OMO chỉ quanh mức vài trăm tỷ đồng mỗi phiên.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCũng trong ngày 25\/12, Ngân hàng Nhà nước tiếp tục không phát hành tín phiếu. Tính từ 15\/3 đến nay, Ngân hàng Nhà nước đã phát hành tổng cộng gần 170 nghìn tỷ đồng tín phiếu, đã đáo hạn trên 114 nghìn tỷ đồng và còn trên 55.600 tỷ đồng tín phiếu chưa đáo hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrên thị trường liên ngân hàng hôm 25\/12, lãi suất không có nhiều thay đổi so với các phiên trước, trong đó lãi suất qua đêm được chào ở mức 2,5-3%\/năm, lãi suất kỳ hạn 1 tuần ở mức 3,5-4%\/năm, lãi suất kỳ hạn 1 tháng ở mức 5-6%\/năm và lãi suất kỳ hạn 3 tháng ở mức 6-7%\/năm.&lt;\/p&gt;\r\n&lt;address&gt;\r\n\tNguồn&amp;nbsp;vneconomy&lt;\/address&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-23T08:43:31.0Z"),
-      "updated": ISODate("2013-08-08T17:02:31.0Z"),
       "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "slug": "lai-suat-omo-ve-7-percent-ngan-hang-nha-nuoc-don-dap-bom-von-51ee4233471dee640a000000",
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee4233471dee640a000001\/thumb.jpg",
-      "description": "Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước...\r\n",
       "category": {
         "$ref": "branch_category",
         "$id": ObjectId("51d3a0cad87459c40a000019"),
+        "$db": "yesocl"
+      },
+      "comments": [
+        {
+          "_id": ObjectId("5205e109471dee340a000008"),
+          "content": "uuuuuuuu",
+          "status": true,
+          "created": ISODate("2013-08-10T06:43:21.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e65f6471deea00b000003"),
+          "content": "aaaaaaa",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:38.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e65f8471deea00b000004"),
+          "content": "bbbbbbbbb",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:40.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e65fa471deea00b000005"),
+          "content": "ccccccc",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:42.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e65fc471deea00b000006"),
+          "content": "ddddddddd",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:44.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e65fe471deea00b000007"),
+          "content": "eeeeeeeeee",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:46.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e6600471deea00b000008"),
+          "content": "11111111",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:48.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e6602471deea00b000009"),
+          "content": "222222222",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:50.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e6603471deea00b00000a"),
+          "content": "333333333",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:51.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e6605471deea00b00000b"),
+          "content": "444444444",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:53.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e6607471deea00b00000c"),
+          "content": "555555555",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:55.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e6609471deea00b00000d"),
+          "content": "666666666",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:57.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e660b471deea00b00000e"),
+          "content": "777777777",
+          "status": true,
+          "created": ISODate("2013-08-16T17:48:59.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        },
+        {
+          "_id": ObjectId("520e660d471deea00b00000f"),
+          "content": "88888888",
+          "status": true,
+          "created": ISODate("2013-08-16T17:49:01.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          },
+          "author": "user1",
+          "email": "quangthi_90@yahoo.com.vn"
+        }
+      ],
+      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước đã bơm ra thị trường mở (OMO) 5.000 tỷ đồng, kỳ hạn 7 ngày, với lãi suất 7%\/năm.&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCùng ngày, Ngân hàng Nhà nước hút về 242 tỷ đồng, đưa mức bơm ròng vốn trong ngày đạt 4.758 tỷ đồng. Như vậy, khối lượng vốn trên OMO còn lưu hành khoảng 7.500 tỷ đồng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tViệc khối lượng vốn bơm qua thị trường OMO tăng mạnh trong hai ngày đầu tuần diễn ra trong bối cảnh lãi suất giảm 1% về 7%\/năm. Cụ thể, trong hai ngày thứ Hai và thứ Ba, Ngân hàng Nhà nước đã bơm ròng gần 6.300 tỷ đồng trên OMO.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrước đó, khi lãi suất ở mức 8%\/năm, giao dịch qua nghiệp vụ repo trên thị trường OMO chỉ quanh mức vài trăm tỷ đồng mỗi phiên.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCũng trong ngày 25\/12, Ngân hàng Nhà nước tiếp tục không phát hành tín phiếu. Tính từ 15\/3 đến nay, Ngân hàng Nhà nước đã phát hành tổng cộng gần 170 nghìn tỷ đồng tín phiếu, đã đáo hạn trên 114 nghìn tỷ đồng và còn trên 55.600 tỷ đồng tín phiếu chưa đáo hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrên thị trường liên ngân hàng hôm 25\/12, lãi suất không có nhiều thay đổi so với các phiên trước, trong đó lãi suất qua đêm được chào ở mức 2,5-3%\/năm, lãi suất kỳ hạn 1 tuần ở mức 3,5-4%\/năm, lãi suất kỳ hạn 1 tháng ở mức 5-6%\/năm và lãi suất kỳ hạn 3 tháng ở mức 6-7%\/năm.&lt;\/p&gt;\r\n&lt;address&gt;\r\n\tNguồn&amp;nbsp;vneconomy&lt;\/address&gt;\r\n",
+      "created": ISODate("2013-07-23T08:43:31.0Z"),
+      "description": "Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước...\r\n",
+      "email": "user2@test.com",
+      "slug": "lai-suat-omo-ve-7-percent-ngan-hang-nha-nuoc-don-dap-bom-von-51ee4233471dee640a000000",
+      "status": true,
+      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee4233471dee640a000001\/thumb.jpg",
+      "title": "Lãi suất OMO về 7%, Ngân hàng Nhà nước “dồn dập” bơm vốn",
+      "updated": ISODate("2013-08-16T17:49:01.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
       }
     },
@@ -1655,7 +1781,7 @@ db.getCollection("branch").insert({
       "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Vùng hỗ trợ để tiếp tục xu hướng tăng ngắn hạn: 490. &amp;nbsp;Thủng vùng này không mua thêm, chờ xác định rõ xu hướng , nếu kéo lên lại vượt 498 mới mua, chỉ mua ngắn hạn, ưu tiên cổ phiếu có sẵn, mua thấp bán cao, lên chạm kháng cự &amp;nbsp;512.5 \/ 530thấy yếu nên bán ra chốt lãi phần mua thêm sau. Vùng 530 thấy phân phối vol mạnh cao đột biến nên bán chốt danh mục giữ tiền mặt; nếu duy trì vol tốt ổn định có nhiều thông tin tốt hỗ trợ nên giữ chờ vượt 530 có thể tăng thêm lượng cổ phiếu, kỳ vọng 550.&lt;\/strong&gt;&lt;\/p&gt;\r\n",
       "status": true,
       "created": ISODate("2013-07-20T09:37:08.0Z"),
-      "updated": ISODate("2013-08-08T17:02:26.0Z"),
+      "updated": ISODate("2013-08-15T14:50:30.0Z"),
       "author": "user1",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -1673,6 +1799,7 @@ db.getCollection("branch").insert({
       }
     }
   ],
+  "slug": "yestoc-520ce99c471dee9c09000000",
   "status": true
 });
 
@@ -3050,6 +3177,7 @@ db.getCollection("group").insert({
   "posts": [
     
   ],
+  "slug": "group-1-520cef1a471deeec08000004",
   "status": true,
   "sumary": "Partem fastidii ei ius. No illud nonumy cum. Eu vide copiosae comprehensam sit",
   "type": {
@@ -3138,13 +3266,13 @@ db.getCollection("group").insert({
       },
       "comments": [
         {
-          "_id": ObjectId("52051c17471dee780a000001"),
+          "_id": ObjectId("520cef52471deef808000001"),
           "author": "user1",
-          "content": "bbbbbbbbbbbbbbb",
-          "created": ISODate("2013-08-09T16:43:03.0Z"),
+          "content": "bbbbbbbbbbb",
+          "created": ISODate("2013-08-15T15:10:10.0Z"),
           "email": "quangthi_90@yahoo.com.vn",
           "status": true,
-          "updated": ISODate("2013-08-09T16:47:43.0Z"),
+          "updated": ISODate("2013-08-16T17:11:20.0Z"),
           "user": {
             "$ref": "user",
             "$id": ObjectId("518f5555471deea409000000"),
@@ -3155,10 +3283,11 @@ db.getCollection("group").insert({
       "content": "&lt;p&gt;\r\n\t&lt;em&gt;Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng tin tưởng VNM có thể duy trì được tốc độ tăng trưởng doanh thu trên 20%\/năm nhờ giành thêm được thị phần.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi kỳ vọng tăng trưởng trong tương lai của VNM sẽ dựa trên 4 nhóm sản phẩm chính.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Xuất khẩu cũng sẽ là động lực tăng trưởng vững của VNM nhưng chúng tôi cho rằng sẽ không có sự đột biến thần kỳ trong hoạt động này.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng kỳ vọng VNM sẽ có hoạt động M&amp;amp;A quy mô nhỏ tại Việt Nam và nước ngoài.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận gộp nhiều khả năng đã đạt cao nhất là 36,5% vào 2009 và năm nay sẽ giảm do chi phí đầu vào tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận sẽ ổn định những năm sau đó và chủ yếu chịu ảnh hưởng của biến động của chi phí đầu vào.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tiền mặt sẽ tăng lên kể từ năm nay vì các hoạt động đầu tư của công ty hiện đã gần như hoàn tất.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Và chúng tôi kỳ vọng tỷ lệ chi trả cổ tức trên lợi nhuận sẽ tăng dần lên 50%.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện room dành cho NĐTNN của cổ phiếu VNM đã hết nhưng có thể sẽ được nới vào năm 2014.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Định giá cổ phiếu VNM vẫn hợp lý và nếu so với bình quân các doanh nghiệp cùng ngành thì giá cổ phiếu VNM vẫn còn tiềm năng tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện P\/E dự phóng 2013 của cổ phiếu VNM là 17,4 lần và P\/B là 6,1 lần. Chúng tôi tiếp tục duy trì đánh giá Khả quan đối với cổ phiếu VNM.&lt;\/em&gt;&lt;\/p&gt;\r\n",
       "created": ISODate("2013-07-19T19:20:07.0Z"),
       "email": "quangthi_90@yahoo.com.vn",
+      "slug": "ctcp-sua-viet-nam-vnm-hsx-uoc-kqkd-6-thang-va-trien-vong-kqkd-2013amp-2014-tiep-tuc-duy-tri-danh-gia-kha-quan-520e59ef471deea00b000000",
       "status": true,
       "thumb": "data\/catalog\/group\/51deaf34471deec009000002\/post\/51e99167471dee280a000002\/avatar.jpg",
       "title": "CTCP sữa Việt Nam (VNM – HSX): Ước KQKD 6 tháng và triển vọng KQKD 2013&amp;2014. Tiếp tục duy trì đánh giá Khả quan",
-      "updated": ISODate("2013-08-09T16:47:43.0Z"),
+      "updated": ISODate("2013-08-16T17:11:20.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
@@ -3166,6 +3295,7 @@ db.getCollection("group").insert({
       }
     }
   ],
+  "slug": "group-2-520cef21471deeec08000005",
   "status": true,
   "sumary": "Aliquid accusamus sit ne. Pro an quem libris, te nec porro laudem impetus, sale adolescens pro cu.",
   "type": {
@@ -3329,11 +3459,38 @@ db.getCollection("street").insert({
 
 /** user records **/
 db.getCollection("user").insert({
+  "_id": ObjectId("52051e42471dee780a000002"),
+  "created": ISODate("2013-08-09T16:52:18.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("52051e42471dee780a000004"),
+      "email": "user3@test.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("52051e42471dee780a000003"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("1990-08-12T22:00:00.0Z"),
+    "sex": NumberInt(1)
+  },
+  "password": "40f4046cac30a61c1d0e541dbb27bd8dcadf70b1",
+  "salt": "6f940b082",
+  "slug": "user-temp",
+  "status": true
+});
+db.getCollection("user").insert({
   "_id": ObjectId("518f5f43471deeb40900001f"),
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
-      "_id": ObjectId("51ffcbc8471deeb009000013"),
+      "_id": ObjectId("520677de471dee880b000013"),
       "email": "user2@test.com",
       "primary": true
     }
@@ -3344,14 +3501,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("51ffcbc8471deeb00900000a"),
+    "_id": ObjectId("520677de471dee880b00000a"),
     "firstname": "user2",
     "lastname": "yesocl",
-    "birthday": ISODate("2013-08-05T15:59:04.0Z"),
+    "birthday": ISODate("2013-08-10T17:26:54.0Z"),
     "sex": NumberInt(1),
     "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
     "location": {
-      "_id": ObjectId("51ffcbc8471deeb00900000b"),
+      "_id": ObjectId("520677de471dee880b00000b"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -3361,7 +3518,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("51ffcbc8471deeb00900000c"),
+        "_id": ObjectId("520677de471dee880b00000c"),
         "im": "user2",
         "type": "skype",
         "visible": "myfollow"
@@ -3369,7 +3526,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("51ffcbc8471deeb00900000d"),
+        "_id": ObjectId("520677de471dee880b00000d"),
         "phone": "0904000444",
         "type": "mobile",
         "visible": "myfollow"
@@ -3377,32 +3534,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("51ffcbc8471deeb00900000e"),
+        "_id": ObjectId("520677de471dee880b00000e"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("51ffcbc8471deeb00900000f"),
+      "_id": ObjectId("520677de471dee880b00000f"),
       "experiencies": [
         {
-          "_id": ObjectId("51ffcbc8471deeb009000010"),
+          "_id": ObjectId("520677de471dee880b000010"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("51ffcbc8471deeb009000011"),
+            "_id": ObjectId("520677de471dee880b000011"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T16:59:04.0Z"),
-          "ended": ISODate("2013-01-01T16:59:04.0Z"),
+          "started": ISODate("2013-01-01T18:26:54.0Z"),
+          "ended": ISODate("2013-01-01T18:26:54.0Z"),
           "current": false,
           "description": "Sed et utamur argumentum. Eum an habeo ubique efficiantur. Eu sea oporteat vituperatoribus, eos in graecis delicata persecuti. Mel an summo dicit eleifend. Copiosae quaestio mandamus vim et."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("51ffcbc8471deeb009000012"),
+          "_id": ObjectId("520677de471dee880b000012"),
           "school": "University of Economics Ho Chi Minh City",
           "school_id": "",
           "started": "2009",
@@ -3447,10 +3604,11 @@ db.getCollection("user").insert({
 });
 db.getCollection("user").insert({
   "_id": ObjectId("518f5555471deea409000000"),
+  "avatar": "data\/catalog\/user\/518f5555471deea409000000\/avatar.jpg",
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("520122e6471dee380a000009"),
+      "_id": ObjectId("520cf0bc471deeac09000009"),
       "email": "quangthi_90@yahoo.com.vn",
       "primary": true
     }
@@ -3461,14 +3619,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("520122e5471dee380a000000"),
+    "_id": ObjectId("520cf0bc471deeac09000000"),
     "firstname": "Bommer",
     "lastname": "Luu",
-    "birthday": ISODate("2013-08-06T16:23:01.0Z"),
+    "birthday": ISODate("2013-08-15T15:16:12.0Z"),
     "sex": NumberInt(1),
     "headingLine": "",
     "location": {
-      "_id": ObjectId("520122e5471dee380a000001"),
+      "_id": ObjectId("520cf0bc471deeac09000001"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -3478,7 +3636,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("520122e5471dee380a000002"),
+        "_id": ObjectId("520cf0bc471deeac09000002"),
         "im": "user1",
         "type": "skype",
         "visible": "myfollow"
@@ -3486,7 +3644,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("520122e5471dee380a000003"),
+        "_id": ObjectId("520cf0bc471deeac09000003"),
         "phone": "0903000333",
         "type": "mobile",
         "visible": "myfollow"
@@ -3494,32 +3652,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("520122e5471dee380a000004"),
+        "_id": ObjectId("520cf0bc471deeac09000004"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("520122e5471dee380a000005"),
+      "_id": ObjectId("520cf0bc471deeac09000005"),
       "experiencies": [
         {
-          "_id": ObjectId("520122e5471dee380a000006"),
+          "_id": ObjectId("520cf0bc471deeac09000006"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("520122e5471dee380a000007"),
+            "_id": ObjectId("520cf0bc471deeac09000007"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T17:23:01.0Z"),
-          "ended": ISODate("2013-01-01T17:23:01.0Z"),
+          "started": ISODate("2013-01-01T16:16:12.0Z"),
+          "ended": ISODate("2013-01-01T16:16:12.0Z"),
           "current": false,
           "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("520122e5471dee380a000008"),
+          "_id": ObjectId("520cf0bc471deeac09000008"),
           "school": "Vietnam National University - Ho Chi Minh City",
           "school_id": "",
           "started": "2008",
@@ -3546,25 +3704,27 @@ db.getCollection("user").insert({
       "comments": [
         {
           "_id": ObjectId("52051af7471dee680a000001"),
+          "author": "user1",
           "content": "aaaaaaaaaaa",
-          "status": true,
           "created": ISODate("2013-08-09T16:38:15.0Z"),
+          "email": "quangthi_90@yahoo.com.vn",
+          "status": true,
+          "updated": ISODate("2013-08-16T17:13:37.0Z"),
           "user": {
             "$ref": "user",
             "$id": ObjectId("518f5555471deea409000000"),
             "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
+          }
         }
       ],
       "content": "&lt;p&gt;\r\n\t&lt;strong&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Vnindex:&lt;\/span&gt;&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Phiên 18\/6 đóng cửa hồi phục nhẹ=&amp;gt; tín hiệu tích cực trong ngắn hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Vùng hỗ trợ: trendlin 485-490 đ. Thủng vùng này, ngưỡng hỗ trợ gần nhất là 462-468.5 đ&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Trường hợp không thủng 485-490. Để xác nhận lại xu hướng tăng, thị trường cần vượt qua ngưỡng cản 515 – 517.5 đ.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;strong&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Chiến lược:&lt;\/span&gt;&lt;\/strong&gt; dừng bán đuổi ( trừ trường hợp thủng 485 =&amp;gt; bắt buộc bán cắt lỗ). Những phiên tới thị trường hồi phục lên vùng 505-511 đ canh bán bớt giãm tỷ trọng cổ phiếu về mức an toàn đặc biệt đối với những mã tăng nóng thời gian qua cần bán hết thanh lý danh mục, nếu thị trường vượt 515-517.5 đ có thể cơ cấu sang những mã tốt chưa tăng nhiều.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;strong&gt;&lt;span style=&quot;text-decoration: underline;&quot;&gt;Danh mục:&lt;\/span&gt;&lt;\/strong&gt; VNM, BMP, PVD, KHP, HLD, GAS, LIX&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/06\/vnindex-19.png&quot; rel=&quot;attachment wp-att-2937&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignnone  wp-image-2937&quot; height=&quot;377&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/06\/vnindex-19.png&quot; title=&quot;huynh khac  minh - vnindex - yestoc - smart_money&quot; width=&quot;605&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t———————————-&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHuỳnh Khắc Minh&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tYahoo: business_hkm&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tEmail: minh.hk83@gmail.com&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tSkype: minh.trang02&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHp: 0916 31 8868&lt;\/p&gt;\r\n",
       "created": ISODate("2013-07-23T16:51:54.0Z"),
       "email": "quangthi_90@yahoo.com.vn",
+      "slug": "phan-tich-nhan-dinh-thi-truong-truoc-phien-giao-dich-19062013-520e5db7471dee900b000007",
       "status": true,
       "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/51eeb4aa471dee2c0b000004\/avatar.jpg",
       "title": "Phân tích, nhận định thị trường trước phiên giao dịch 19\/06\/2013",
-      "updated": ISODate("2013-08-09T16:38:15.0Z"),
+      "updated": ISODate("2013-08-16T17:13:37.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),

@@ -9,9 +9,9 @@ class ModelBranchPost extends Doctrine {
 			$data['limit'] = 20;
 		}
 
-		if ( isset($data['branch_id']) && !empty($data['branch_id']) ){
+		if ( isset($data['branch_slug']) && !empty($data['branch_slug']) ){
 			if ( $data['start'] >= 60 ){
-				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $data['branch_id'] );
+				$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $data['branch_slug'] );
 
 				if ( !$branch ){
 					return null;
@@ -19,7 +19,7 @@ class ModelBranchPost extends Doctrine {
 
 				$results = $branch->getPosts()->toArray();
 			}else{
-				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_id'] );
+				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_slug'] );
 			}
 
 			$this->load->model('user/user');
@@ -65,21 +65,6 @@ class ModelBranchPost extends Doctrine {
 
 	public function getPost( $post_id ){
 
-	}
-
-	public function getTotalComments( $post_id, $branch_id ) {
-		$this->load->model( 'tool/cache' );
-
-		//-- link of cache Folder of Branch
-		$cache_link = $this->config->get( $this->config->get('common')['type']['branch'] )['default']['cache_link'];
-		//-- cache post folder name
-		$folder_post_name = $this->config->get('post')['default']['cache_folder'];
-		//-- cache comment folder name
-		$folder_comment_name = $this->config->get('comment')['default']['cache_folder'];
-		//-- path of cache Folder of Branch
-		$cache_path = DIR_CACHE . $cache_link . $branch_id . '/' . $folder_post_name . '/' . $post_id . '/' . $folder_comment_name . '/';
-//echo '<pre>';var_dump($cache_path);exit();
-		return count( $this->model_tool_cache->getFilesNames( $cache_path ) );
 	}
 }
 ?>

@@ -67,7 +67,7 @@ class ModelBranchComment extends Doctrine {
 		
 		//-- Update 50 last Comments
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getId(), $post, $comment->getId() );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment->getId() );
 		
 		return true;
 	}
@@ -138,7 +138,7 @@ class ModelBranchComment extends Doctrine {
 		$this->dm->flush();
 
 		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getId(), $post, $comment_id );
+		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment_id );
 		
 		return true;
 	}
@@ -162,7 +162,7 @@ class ModelBranchComment extends Doctrine {
 				if ( !empty( $comment ) ) {
 					// remove cache
 					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteComment( $id, $post->getId(), $this->config->get('comment')['type']['branch'], $branch->getId() );
+					$this->model_tool_cache->deleteComment( $id, $post->getSlug(), $this->config->get('comment')['type']['branch'], $branch->getSlug() );
 
 					$post->getComments()->removeElement( $comment );
 				}
