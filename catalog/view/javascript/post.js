@@ -145,8 +145,6 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				data.comment['avatar'] = $('.sidebar-user-avatar').find('img').attr('src');
-				data.comment['href_user'] = $('.sidebar-user-avatar').find('a').attr('href');
 				htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
 				$('#add-more-item').before(htmlOutput);
 				that.$content.val('');

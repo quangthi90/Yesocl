@@ -78,6 +78,24 @@ class ControllerPostPost extends Controller {
             )));
         }
 
+        $user = $this->model_tool_cache->getObject( $comment['user_slug'], $this->config->get('common')['type']['user'] );
+
+        $this->load->model('tool/image');
+
+        if ( $user && $user['avatar'] ){
+            $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+        }elseif ( $user && $user['email'] ){
+            $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
+        }else{
+            $avatar = $this->model_tool_image->getGavatar( $comment['email'], 180 );
+        }
+
+        if ( $user && $user['username'] ){
+            $comment['author'] = $user['username'];
+        }
+
+        $comment['avatar'] = $avatar;
+        $comment['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_long') );
 
         return $this->response->setOutput(json_encode(array(
