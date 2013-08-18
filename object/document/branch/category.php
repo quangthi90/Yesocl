@@ -12,6 +12,11 @@ Class Category {
 	 */
 	private $name;
 
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $slug;
+
 	/** @MongoDB\ReferenceOne(targetDocument="Branch", inversedBy="categories") */
 	private $branch;
 
@@ -37,6 +42,14 @@ Class Category {
 
 	public function getName(){
 		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setBranch( $branch ){

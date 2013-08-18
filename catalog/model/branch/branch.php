@@ -19,7 +19,7 @@ class ModelBranchBranch extends Doctrine {
 	public function getBranch( $branch_slug ){
 		$this->load->model('tool/cache');
 		$branch = $this->model_tool_cache->getObject( $branch_slug, $this->config->get('post')['type']['branch'] );
-
+		
 		if ( empty($branch) ){
 			$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $branch_slug );
 

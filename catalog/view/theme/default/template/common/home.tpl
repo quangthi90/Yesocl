@@ -20,7 +20,7 @@
 		{% if posts|length > 0 %}
 		<div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="{{ branch.href_categories }}">{{ branch.name }}</a>
+                <a class="fl" href="{{ branch.href_categories|raw }}">{{ branch.name }}</a>
                 <a class="fl" href="#"><i class="icon-chevron-right"></i></a>
             </div>
             {% if style == 1 %}
