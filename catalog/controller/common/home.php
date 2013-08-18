@@ -21,12 +21,14 @@ class ControllerCommonHome extends Controller {
 		$branchs = $this->model_branch_branch->getAllBranchs();
 
 		$this->data['all_posts'] = array();
-		$this->data['branchs'] = $branchs;
 
 		foreach ( $branchs as $branch_slug => $branch ) {
 			$posts = $this->model_branch_post->getPosts(array(
-				'branch_slug' => $branch['slug']
+				'branch_slug' => $branch['slug'],
+				'limit' => 6
 			));
+
+			$branchs[$branch_slug]['href_categories'] = $this->url->link('branch/categories', 'branch_slug=' . $branch_slug, 'SSL');
 			
 			foreach ($posts as $i => $post) {
 				// avatar
@@ -55,6 +57,8 @@ class ControllerCommonHome extends Controller {
 
 			$this->data['all_posts'][$branch_slug] = $posts;
 		}
+
+		$this->data['branchs'] = $branchs;
 
 		$this->data['date_format'] = $this->language->get('date_format_short');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];

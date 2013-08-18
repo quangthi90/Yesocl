@@ -1,5 +1,5 @@
 <?php  
-class ControllerPostCategories extends Controller {
+class ControllerBranchCategories extends Controller {
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
@@ -13,45 +13,45 @@ class ControllerPostCategories extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->load->model( 'branch/branch' );
+		$this->load->model( 'branch/category' );
 		$this->load->model( 'branch/post' );
 		$this->load->model('tool/image');
 
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_slug'] );
 
-		$this->data['all_posts'] = array();
-		$this->data['branchs'] = $branchs;
+		if ( !$branch ){
+			return false;
+		}
 
-		foreach ( $branchs as $branch_slug => $branch ) {
-			$posts = $this->model_branch_post->getPosts(array(
-				'branch_slug' => $branch['slug']
-			));
+		$categories = $this->model_branch_category->getAllCategories();
+
+		$posts = $this->model_branch_post->getPosts(array(
+			'branch_slug' => $branch['slug']
+		));
 			
-			foreach ($posts as $i => $post) {
-				// avatar
-				/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
-					$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
-				}elseif ( isset($post['user']) && isset($post['user']['email']) ){
-	                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
-	            }else{
-					$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
-				}*/
+		foreach ($posts as $i => $post) {
+			// avatar
+			/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
+				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
+			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
+                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
+            }else{
+				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
+			}*/
 
-				// thumb
-				if ( isset($post['thumb']) && !empty($post['thumb']) ){
-					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
-				}else{
-					$image = null;
-				}
-
-				$posts[$i]['image'] = $image;
-				// $posts[$i]['avatar'] = $avatar;
-				
-				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
-				$posts[$i]['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
+			// thumb
+			if ( isset($post['thumb']) && !empty($post['thumb']) ){
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+			}else{
+				$image = null;
 			}
 
-			$this->data['all_posts'][$branch_slug] = $posts;
+			$posts[$i]['image'] = $image;
+			// $posts[$i]['avatar'] = $avatar;
+			
+			$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
+			$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
+			$posts[$i]['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
 		}
 
 		$this->data['date_format'] = $this->language->get('date_format_short');

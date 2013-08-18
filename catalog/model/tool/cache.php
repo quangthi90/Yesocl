@@ -1,6 +1,86 @@
 <?php
 class ModelToolCache extends Model {
 	/**
+	 * Get All Categories by
+	 *	- Branch
+	 *	- Group
+	 * 2013/08/18
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param:
+	 *	- string type of Object
+	 *	- string type slug
+	 * @return: List Array Object Categories
+	 */
+	public function getAllCategories( $type, $type_slug ){
+		//-- link of cache Folder of Object --
+		$cache_link = $this->config->get($type)['default']['cache_link'];
+		//-- category folder name
+		$category_name = $this->config->get('category')['cache']['folder'];
+
+		$path = $cache_link . $type_slug . '/' . $category_name . '/';
+		
+		$category_slugs = $this->getFolderNames( DIR_CACHE . $path );
+		
+		$categories = array();
+		foreach ( $category_slugs as $category_slug ) {
+			$category = $this->getCategory( $category_slug );
+			if ( $category['status'] == true ){
+				$categories[$category_slug] = $category;
+			}
+		}
+
+		return $branchs;
+	}
+
+	/**
+	 * Create cache for Category of
+	 *	- Branch
+	 *	- Group
+	 * 2013/08/18
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Category
+	 *	- string type object
+	 *	- string type Slug
+	 * @return: Array Object Category
+	 */
+	public function setCategory($category, $type_post = 'branch', $type_slug) {
+		$category_data = $category->formatToCache();
+
+		$folder_link = $this->config->get($type_post)['default']['cache_link'];
+		$folder_name = $this->config->get('category')['cache']['folder'];
+		$path = $folder_link . $type_slug . '/' . $folder_name . '/' . $category->getSlug() . '/';
+
+		$file_name = $this->config->get('common')['default']['main_object_cache'];
+		$this->cache->set( $file_name, $category_data, $path );
+		
+		return $category_data;
+	}
+
+	/**
+	 * Get cache Category of
+	 *	- Branch
+	 *	- Group
+	 * 2013/08/18
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Category Slug
+	 *	- string type category
+	 *	- string type Slug
+	 * @return: Array Object Category
+	 */
+	public function getCategory($category_slug, $type = 'branch', $type_slug) {
+		$folder_link = $this->config->get($type)['default']['cache_link'];
+		$folder_name = $this->config->get('category')['cache']['folder'];
+		$path = $folder_link . $type_slug . '/' . $folder_name . '/' . $category_slug;
+		
+		$file_name = $this->config->get('common')['default']['main_object_cache'];
+		$category = $this->cache->get( $file_name, $path );
+		
+		return $category;
+	}
+
+	/**
 	 * Get All Branch
 	 * 2013/08/06
 	 * @author: Bommer <bommer@bommerdesign.com>
