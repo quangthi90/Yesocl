@@ -136,7 +136,7 @@ class ModelBranchComment extends Doctrine {
 		}
 
 		$post->addComment( $comment );
-
+		
 		$this->dm->flush();
 		
 		//-- Update 50 last Comments
