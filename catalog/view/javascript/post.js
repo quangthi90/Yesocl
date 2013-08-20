@@ -200,6 +200,8 @@
 	function hideCommentBox () {
 		$('#overlay').hide();
 		$('.post').removeClass('post-selecting');
+		$('.open-comment').removeClass('disabled');
+		comment_box.animate({"right": "-500px"}, "slow");
 		page = 1;
 	}
 
@@ -209,9 +211,16 @@
 		});
 
 		$('.comment-container').on('click', '.y-box-header .close', function(){
-			$('.open-comment').removeClass('disabled');
-			comment_box.animate({"right": "-500px"}, "slow");
 			hideCommentBox();
+		});
+		
+		$('#overlay').click(function() {
+			hideCommentBox ();
+		});
+		$(document).keyup(function(e) {
+		  if (e.keyCode == 27) { 
+		  	hideCommentBox ();
+		  }
 		});
 
 		var getComments = function () {

@@ -4,7 +4,7 @@
             <div class="search fl">
               <form>
                   <div class="input-prepend">                    
-                    <button class="btn btn-success" type="button" >Search</button>
+                    <button class="btn btn-yes" type="button" >Search</button>
                     <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
                 </div>          
               </form> 
@@ -12,8 +12,8 @@
             <div class="language-box fr">                    
                 <form action="#">
                     <div class="btn-group dropup">
-                      <button class="btn btn-success">Language</button>
-                      <button class="btn btn-success dropdown-toggle" data-toggle="dropdown">
+                      <button class="btn btn-yes">Language</button>
+                      <button class="btn btn-yes dropdown-toggle" data-toggle="dropdown">
                         <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu">
