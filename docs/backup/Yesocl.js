@@ -1535,7 +1535,65 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5215fc09471dee100d000003\/avatar.jpg",
   "title": "1 Lorem ipsum dolor sit amet, habeo tempor delicatissimi cu eam",
-  "updated": ISODate("2013-08-22T17:37:29.0Z"),
+  "updated": ISODate("2013-08-22T18:31:46.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52165952471dee900b000004"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, ne diam vero petentium usu. Alterum invenire cu cum, tempor adipisci eloquentiam ei vix, eirmod dolorem accusata in vix. No suas bonorum pericula sit. Omnis porro indoctum an has.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tCu nostrum constituto adipiscing has, prompta maluisset quaerendum ius et, cu magna dolorum consequuntur pro. Copiosae accusata cum ad. Sit ei illud euismod honestatis, minimum necessitatibus pri ex. Porro definitionem nam no, usu in quas recteque. Pro cetero civibus eu, choro definitiones te est, has id cibo tempor mollis. Inimicus aliquando duo et, mea et zril decore.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tNoluisse comprehensam eum ne. At eos putant repudiare argumentum, vix duis assueverit ex. Elit probo omnis qui eu. Sit similique efficiendi no. An eos viderer denique. Ne dictas intellegam sea, quem dolor vix ex, quo ea dico platonem.&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-22T18:32:50.0Z"),
+  "deleted": false,
+  "description": "Cum alterum nonumes molestiae te, in fabellas indoctum liberavisse eam. No admodum evertitur definitionem mea, cum ne quando ignota eligendi.",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "3-harum-doctus-scripta-id-sea-mel-ea-solet-detraxit-enim-persius-his-ne-ea-aeque-iisque-sit-52165952471dee900b000003",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52165952471dee900b000004\/avatar.jpg",
+  "title": "3 Harum doctus scripta id sea. Mel ea solet detraxit. Enim persius his ne, ea aeque iisque sit.",
+  "updated": ISODate("2013-08-22T18:32:50.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216567d471dee7c0b000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\tHarum doctus scripta id sea. Mel ea solet detraxit. Enim persius his ne, ea aeque iisque sit. Cum alterum nonumes molestiae te, in fabellas indoctum liberavisse eam. No admodum evertitur definitionem mea, cum ne quando ignota eligendi.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tFabulas scriptorem liberavisse pro ut. Eius debet disputationi ne sea, cum no populo laoreet adversarium, vim an idque sonet prompta. Id nam recteque qualisque, veniam quaerendum ea has. His ne integre inciderint, doming malorum ea nam. Est ne posse facer eligendi, pri et sapientem contentiones.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tAn sed altera democritum, vim quas sanctus consequat ne. Choro voluptaria ne sed, per cu iriure propriae recteque, ea semper verterem est. Cu vim solet essent omittantur, his te libris efficiantur. Omnis reque gloriatur an has.&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-22T18:20:45.0Z"),
+  "deleted": false,
+  "description": "Ea quo unum eruditi tractatos, at idque quaeque eruditi ius, in sumo habeo singulis usu. Usu ne quod lorem cetero, his utinam invenire an. Ius inani viris cu, ex quo lorem intellegebat.",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "2-eu-mei-amet-scripta-sanctus-qualisque-expetendis-per-te-usu-ne-quod-lorem-cetero-his-utinam-invenire-an-ius-inani-viris-cu-ex-quo-lorem-intellegebat-521658ff471dee900b000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216567d471dee7c0b000001\/avatar.gif",
+  "title": "2 Eu mei amet scripta sanctus, qualisque expetendis per te. Usu ne quod lorem cetero, his utinam invenire an. Ius inani viris cu, ex quo lorem intellegebat.",
+  "updated": ISODate("2013-08-22T18:31:27.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),

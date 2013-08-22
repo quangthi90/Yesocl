@@ -103,7 +103,18 @@ class ModelBranchPost extends Doctrine {
 		
 		//-- Update 6 last posts
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch->getSlug(), $post->getSlug() );
+
+		$posts = $this->getPosts( array(
+			'branch_id' => $branch_id,
+			'category_id' => $data['category_id'],
+			'limit' => 6
+		));
+		$this->model_tool_cache->updateLastCategoryPosts( 
+			$this->config->get('post')['type']['branch'], 
+			$branch->getId(), 
+			$category->getId(), 
+			$posts 
+		);
 		
 		return $post;
 	}
@@ -190,6 +201,8 @@ class ModelBranchPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
+		$branch = $post->getBranch();
+
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
@@ -203,8 +216,21 @@ class ModelBranchPost extends Doctrine {
 
 		$this->dm->flush();
 
-		// $this->load->model( 'tool/cache' );
-		// $this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+
+		$posts = $this->getPosts( array(
+			'branch_id' => $branch_id,
+			'category_id' => $data['category_id'],
+			'limit' => 6
+		));
+		
+		$this->model_tool_cache->updateLastCategoryPosts( 
+			$this->config->get('post')['type']['branch'], 
+			$branch->getId(), 
+			$category->getId(), 
+			$posts 
+		);
 		
 		return true;
 	}
@@ -265,6 +291,10 @@ class ModelBranchPost extends Doctrine {
 		$query = array();
 		if ( !empty($data['branch_id']) ){
 			$query['branch.id'] = $data['branch_id'];
+		}
+
+		if ( !empty($data['category_id']) ){
+			$query['category.id'] = $data['category_id'];
 		}
 
 		$results = $this->dm->getRepository('Document\Branch\Post')->findBy( $query )->sort(array(

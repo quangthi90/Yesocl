@@ -3,6 +3,7 @@
 $_['common']['default']['main_object_cache'] 	= 'info';
 $_['common']['default']['main_object_post'] 	= 'info';
 $_['common']['default']['all_branch'] 			= 'allBranch';
+$_['common']['default']['category'] 			= 'category';
 
 $_['common']['type']['branch'] 					= 'branch';
 $_['common']['type']['group'] 					= 'group';
