@@ -107,16 +107,17 @@ class ModelBranchCategory extends Doctrine {
 
 		//-- Update 6 last posts
 		$this->load->model('tool/cache');
+		$this->load->model('branch/post');
 
-		$posts = $this->getPosts( array(
-			'branch_id' => $branch_id,
-			'category_id' => $data['category_id'],
+		$posts = $this->model_branch_post->getPosts( array(
+			'branch_id' => $category->getBranch()->getId(),
+			'category_id' => $id,
 			'limit' => 6
 		));
 		$this->model_tool_cache->updateLastCategoryPosts( 
 			$this->config->get('post')['type']['branch'], 
-			$branch->getId(), 
-			$category->getId(), 
+			$category->getBranch()->getId(), 
+			$id, 
 			$posts 
 		);
 	}

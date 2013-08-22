@@ -57,9 +57,21 @@ class ModelBranchComment extends Doctrine {
 
 		$this->dm->flush();
 		
-		//-- Update 50 last Comments
-		// $this->load->model('tool/cache');
-		// $this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment->getId() );
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+		$this->load->model('branch/post');
+
+		$posts = $this->model_branch_post->getPosts( array(
+			'branch_id' => $post->getBranch()->getId(),
+			'category_id' => $post->getCategory()->getId(),
+			'limit' => 6
+		));
+		$this->model_tool_cache->updateLastCategoryPosts( 
+			$this->config->get('post')['type']['branch'], 
+			$post->getBranch()->getId(), 
+			$post->getCategory()->getId(), 
+			$posts 
+		);
 		
 		return true;
 	}
@@ -149,6 +161,24 @@ class ModelBranchComment extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		if ( $post ){
+			//-- Update 6 last posts
+			$this->load->model('tool/cache');
+			$this->load->model('branch/post');
+
+			$posts = $this->model_branch_post->getPosts( array(
+				'branch_id' => $post->getBranch()->getId(),
+				'category_id' => $post->getCategory()->getId(),
+				'limit' => 6
+			));
+			$this->model_tool_cache->updateLastCategoryPosts( 
+				$this->config->get('post')['type']['branch'], 
+				$post->getBranch()->getId(), 
+				$post->getCategory()->getId(), 
+				$posts 
+			);
+		}
 
 		return true;
 	}
