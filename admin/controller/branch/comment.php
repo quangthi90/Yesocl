@@ -9,14 +9,7 @@ class ControllerBranchComment extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'branch/comment' );
-		
-		if ( !isset($this->request->get['post_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_post');
-			
-			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
-		}
-		
+		$this->load->language( 'branch/comment' );		
 		
 		$this->load->model( 'branch/comment' );
 
@@ -34,12 +27,16 @@ class ControllerBranchComment extends Controller {
 
 		$url = '';
 		
-		if ( isset($this->request->get['post_id']) ){
+		if ( !empty($this->request->get['post_id']) ){
 			$url .= '&post_id=' . $this->request->get['post_id'];
 		}
 
-		if ( isset($this->request->get['branch_id']) ){
+		if ( !empty($this->request->get['branch_id']) ){
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
+		if ( !empty($this->request->get['page']) ){
+			$url .= '&page=' . $this->request->get['page'];
 		}
 		
 		$this->load->model( 'branch/comment' );
@@ -77,6 +74,10 @@ class ControllerBranchComment extends Controller {
 		if ( isset($this->request->get['branch_id']) ){
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
+
+		if ( !empty($this->request->get['page']) ){
+			$url .= '&page=' . $this->request->get['page'];
+		}
 		
 		$this->load->model( 'branch/comment' );
 
@@ -110,6 +111,10 @@ class ControllerBranchComment extends Controller {
 
 		if ( isset($this->request->get['branch_id']) ){
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
+		if ( !empty($this->request->get['page']) ){
+			$url .= '&page=' . $this->request->get['page'];
 		}
 		
 		$this->load->model( 'branch/comment' );
@@ -147,6 +152,16 @@ class ControllerBranchComment extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
+
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
+		if ( !empty($this->request->get['post_id']) ){
+			$url .= '&post_id=' . $this->request->get['post_id'];
+		}
 		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -154,28 +169,11 @@ class ControllerBranchComment extends Controller {
 			$page = 1;
 		}
 
-		$url = '';
-
-		// Get branch ID
-		$branch_id = 0;
-		if ( isset($this->request->get['branch_id']) && !empty($this->request->get['branch_id']) ){
-			$branch_id = $this->request->get['branch_id'];
-			$url .= '&branch_id=' . $this->request->get['branch_id'];
-		}
-		$this->load->model( 'branch/branch' );
-		$branch = $this->model_branch_branch->getBranch( $branch_id );
-		if ( !$branch ){
-			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
-		}
+		$url .= '&page=' . $this->request->get['page'];
 
 		// Get Post ID
-		$post_id = 0;
-		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
-			$post_id = $this->request->get['post_id'];
-			$url .= '&post_id=' . $this->request->get['post_id'];
-		}
-		$post = $branch->getPostById( $post_id );
+		$this->load->model('branch/post');
+		$post = $this->model_branch_post->getPost( $this->request->get['post_id'] );
 		if ( !$post ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('post/post', 'token=' . $this->session->data['token'] . $url, 'SSL') );
@@ -194,7 +192,7 @@ class ControllerBranchComment extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'branch/post', 'branch_id=' . $branch->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/post', 'branch_id=' . $this->request->get['branch_id'] . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
@@ -226,14 +224,12 @@ class ControllerBranchComment extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'branch/comment/insert', 'post_id=' . $post_id . '&branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'branch/comment/delete', 'post_id=' . $post_id . '&branch_id=' . $branch_id . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'branch/post', 'branch_id=' . $branch->getId() . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'branch/comment/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['delete'] = $this->url->link( 'branch/comment/delete', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['back'] = $this->url->link( 'branch/post', 'branch_id=' . $this->request->get['branch_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 
 		// Comment
 		$comments = $post->getComments();
-		
-		$post_total = 0;
 		
 		$this->data['comments'] = array();
 		if ( $comments ){
@@ -308,29 +304,24 @@ class ControllerBranchComment extends Controller {
 
 		$url = '';
 
-		// Get branch ID
-		$branch_id = 0;
-		if ( isset($this->request->get['branch_id']) && !empty($this->request->get['branch_id']) ){
-			$branch_id = $this->request->get['branch_id'];
+		if ( !empty($this->request->get['branch_id']) ){
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
-		$this->load->model( 'branch/branch' );
-		$branch = $this->model_branch_branch->getBranch( $branch_id );
-		if ( !$branch ){
-			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('branch/branch', 'token=' . $this->session->data['token'], 'SSL') );
+
+		if ( !empty($this->request->get['post_id']) ){
+			$url .= '&post_id=' . $this->request->get['post_id'];
+		}
+		
+		if ( !empty($this->request->get['page']) ) {
+			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		// Get Post ID
-		$post_id = 0;
-		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
-			$post_id = $this->request->get['post_id'];
-			$url .= '&post_id=' . $this->request->get['post_id'];
-		}
-		$post = $branch->getPostById( $post_id );
+		$this->load->model('branch/post');
+		$post = $this->model_branch_post->getPost( $this->request->get['post_id'] );
 		if ( !$post ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('post/post', 'token=' . $this->session->data['token'] . $url, 'SSL') );
+			$this->redirect( $this->url->link('branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL') );
 		}
 
 		// breadcrumbs
