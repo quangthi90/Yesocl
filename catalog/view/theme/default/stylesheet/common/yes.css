@@ -385,7 +385,7 @@ label.in-line{
     padding: 15px 0px 20px 20px;    
     position: absolute;    
     top: 0px;
-    left: 150px;
+    left: 120px;
     right:0px;
     bottom: 51px;    
     background: #ECEBEB;
@@ -415,7 +415,7 @@ label.in-line{
 }
 
 #y-sidebar {
-    width: 150px;
+    width: 120px;
     background: #0A4B3E;
     position: fixed;
     top: 0px;    
@@ -779,8 +779,11 @@ label.in-line{
 }
 
 .sidebar-controls .nav-list > li {
-  text-align: left;
-  margin-top: 1px;
+  display: block;
+  height: 40px;
+  width: 40px;
+  float: left;
+  margin: 8px 2px;
 }
 
 .sidebar-controls .nav-list .nav-header {
@@ -791,27 +794,38 @@ label.in-line{
   text-shadow: 0px 0px 0px #fff;
   color: #FFF;
   background-color: transparent;
-  font-size: 12px;
-  font-weight: bold;
-  padding: 2px 15px;
-  height: 24px;
+  padding: 3px;
+  display: block;
+  margin: 3px auto;  
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 29px;
+  border-radius: 50%;
+  border: solid 1px #FFFFFF;
+  position: relative;
 }
 
 .sidebar-controls .nav-list > li > a > i {
-  font-size: 20px;
-  background-color: #009B77;
-  color: #fff;
-  text-align: center;
-  vertical-align: middle;
-  width: 25px;
-  display: block;
-  float: left;
+ color: #fff; 
+ font-size: 19px;
 }
 
 .sidebar-controls .nav-list > li > a > span {
-  margin-left: 5px;
-  font-weight: bold;
-  font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 35px;
+    white-space: nowrap;
+    text-align: left;
+    background: #009B77;
+    padding: 0px 15px 0px 5px;
+    border-radius: 2px;
+    display:none;
+    z-index: 10;
+}
+.sidebar-controls .nav-list > li > a:hover span {
+    display:block;
 }
 
 .sidebar-controls .nav-list .nav-header { 
@@ -831,15 +845,14 @@ label.in-line{
 .nav > li > a:focus {
   color: #fff;
   background-color: #009B77;
+  border: none;
 }
 
 .sidebar-controls .nav-list > .active > a > i,
 .nav-list > .active > a:hover > i, 
 .nav-list > .active > a:focus > i,
 .sidebar-controls .nav > li > a:hover > i, 
-.nav > li > a:focus > i{
-  background-color: #fff;
-  color: #009B77;
+.nav > li > a:focus > i{    
 }
 
 /*FORM*/
