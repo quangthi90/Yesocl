@@ -3,6 +3,8 @@ use Document\Branch\Category,
 	Document\Branch\Layout,
 	Document\Setting\Config;
 
+use MongoRegex;
+
 class ModelBranchCategory extends Doctrine {
 	public function addCategory( $data = array() ) {
 		// Name is required
@@ -27,10 +29,20 @@ class ModelBranchCategory extends Doctrine {
 		$parent = null;
 		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
 			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
-		}		
+		}
+
+		// Slug
+		$slug = $this->url->create_slug( $data['name'] );
+		$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
+		$arr_slugs = array_map(function($category){
+			return $category->getSlug();
+		}, $categories->toArray());
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );	
 		
 		$category = new Category();
 		$category->setName( $data['name'] );
+		$category->setSlug( $slug );
 		$category->setBranch( $branch );
 		$category->setOrder( $order );
 		$category->setParent( $parent );
@@ -68,6 +80,22 @@ class ModelBranchCategory extends Doctrine {
 		$parent = null;
 		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
 			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
+		}
+
+		// Slug
+		if ( $data['name'] != $category->getName() ){
+			$slug = $this->url->create_slug( $data['name'] );
+		
+			$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$arr_slugs = array_map(function($category){
+				return $category->getSlug();
+			}, $categories->toArray());
+
+			$this->load->model( 'tool/slug' );
+			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+			
+			$category->setSlug( $slug );
 		}
 
 		$category->setName( $data['name'] );
