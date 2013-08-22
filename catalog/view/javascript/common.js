@@ -39,8 +39,8 @@ FlexibleElement.prototype.attachEvents = function() {
 		e.preventDefault();
 		var scrollbarsNice = m.find('.nicescroll-rails');
 		$(this).hide();	
-		m.animate({"paddingLeft": "142px","left" : "0px"}, 200, function() { 
-			scrollbarsNice.animate({ left: '+=132'}, 100);
+		m.animate({"paddingLeft": "140px","left" : "0px"}, 200, function() { 
+			scrollbarsNice.animate({ left: '+=130'}, 100);
 			sc.slideUp(300, function() {
 				sb.animate({ "width" : "120px", "top":"20px", "left" : "10px", "opacity" : "0.85"}, 200, function() {
 					sb.css("bottom","auto");
@@ -54,9 +54,9 @@ FlexibleElement.prototype.attachEvents = function() {
 		var scrollbarsNice = m.find('.nicescroll-rails');
 		$(this).hide();	
 		sc.slideDown(200, function() {
-			sb.animate({ "bottom" : "67px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
-				m.animate({"left": "152px" , "paddingLeft": "20px"}, 500); 	
-				scrollbarsNice.animate({ left: '-=132' }, 100);
+			sb.animate({ "bottom" : "51px", "width" : "150px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
+				m.animate({"left": "150px" , "paddingLeft": "20px"}, 500); 	
+				scrollbarsNice.animate({ left: '-=130' }, 100);
 				cl.show();
 			});			
 		});			
@@ -74,7 +74,9 @@ FlexibleElement.prototype.attachEvents = function() {
 /*
 Custom List Post
 */
-function HorizontalBlock(el) {
+var marginPost = 5;
+var marginBlock = 50;
+function HorizontalBlock(el) {	
 	this.root = el;
 	this.columns = el.find('.column');
 	this.feeds = el.find('.feed');	
@@ -91,18 +93,22 @@ function HorizontalBlock(el) {
 }
 HorizontalBlock.prototype.initializeBlock = function() {	
 	if(this.hasBlock) {		
-		var heightBlockContent = this.heightMain - 36;
-		var heightPost = (heightBlockContent - 2*(10 + 2))/2;
-		var widthPost = this.widthMain*5/18 - 10;
+		var heightBlockContent = this.heightMain - 42;
+		var heightPost = (heightBlockContent - 2*marginPost)/2;
+		var widthPost = this.widthMain*5/18 - 3*marginPost;
 		this.columns.width(widthPost);
+		this.columns.css('margin-right', marginPost + 'px');
+		this.columns.children('.feed-container').width(widthPost - 5);
 		this.blockContent.height(heightBlockContent);		
-		this.blocks.width((5/6)*this.widthMain);		
+		this.blocks.width((5/6)*this.widthMain);
+		this.blocks.css('margin-right', marginBlock + 'px');		
 		this.blocks.each(function(index) {
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
-			blockFeed.putFeed();
+			blockFeed.putFeed();			
 		});
-		this.root.width(this.blocks.length*((5/6)*this.widthMain + 35));
+		this.root.width(this.blocks.length*((5/6)*this.widthMain + 60));
 		this.feeds.each(function() {
+			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
 			var heightUpdated = $(this).height();
 			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
@@ -132,17 +138,17 @@ function BlockFeed(block, heightAverPost, widthAverPost) {
 	this.widthAverPost = widthAverPost;
 }
 BlockFeed.prototype.putFeed = function() {
-	this.listFeed.height(this.heightAverPost);
+	this.listFeed.height(this.heightAverPost - 2);
 	if(this.numberFeed == 5) {
-		this.blockEle.find('.column-special .feed-container:nth-child(1)').width((this.widthAverPost - 1)*2 + 10);
-		this.blockEle.find('.column-special .feed-container:nth-child(1)').addClass('post-special');
-		this.blockEle.find('.column-special .feed-container:nth-child(1)').parent('.column').width(this.widthAverPost*2 + 10);
-		this.blockEle.find('.column-special .feed-container:nth-child(2)').width(this.widthAverPost - 2).css( {'float': 'left', 'margin-right':'10px'});
-		this.blockEle.find('.column-special .feed-container:nth-child(3)').width(this.widthAverPost - 2).css('float', 'left');		
+		this.blockEle.find('.column-special .feed-container:nth-child(1)').width(2*(this.widthAverPost) + marginPost - 5);
+		this.blockEle.find('.column-special .feed-container:nth-child(1)').addClass('post-bigger');
+		this.blockEle.find('.column-special .feed-container:nth-child(1)').parent('.column').width(2*(this.widthAverPost) + marginPost);
+		this.blockEle.find('.column-special .feed-container:nth-child(2)').width(this.widthAverPost - 2).css( {'float': 'left', 'margin-right': '5px'});
+		this.blockEle.find('.column-special .feed-container:nth-child(3)').width(this.widthAverPost - 5).css('float', 'left');	
 	}else {
 		var specialColumn = this.blockEle.find('.column-special'); 
 		var heightFirst = this.heightAverPost*4/3;
-		var heightLast = this.heightAverPost*3/4 - 20;
+		var heightLast = this.heightAverPost*2 - heightFirst - 4;
 		specialColumn.each(function(index) {
 			if($(this).children('.feed-container').length ==1)  { 
 				$(this).children('.feed-container').height(heightFirst);
@@ -162,5 +168,5 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
-	new HorizontalBlock($('.has-horizontal')); 		
+	new HorizontalBlock($('.has-horizontal')); 	
 });

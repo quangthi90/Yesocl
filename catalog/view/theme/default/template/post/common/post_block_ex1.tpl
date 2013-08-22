@@ -8,10 +8,18 @@
 					<div class="post_header">
 						<h4 class="post_title">
 							<a href="#">{{ post.title }}</a>
-							<div class="post_time">
+						</h4>
+						<div class="post_meta">
+							<span class="post_time fl">
 								<i class="icon-calendar"></i> {{ post.created|date(date_format) }}
-							</div>
-						</h4>					
+							</span>
+							<span class="post_cm fr">
+								<i class="icon-comments-alt"></i>  10
+							</span>
+							<span class="post_like fr">
+								<i class="icon-thumbs-up"></i> 100
+							</span>
+						</div>
 					</div>
 					<div class="post_body">
 						<div class="post_image">
