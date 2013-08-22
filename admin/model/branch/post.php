@@ -244,27 +244,45 @@ class ModelBranchPost extends Doctrine {
 	 * @return: boolean
 	 */
 	public function deletePost( $branch_id, $data = array() ) {
+		$category_ids = array();
+
 		if ( isset($data['id']) ) {			
 			foreach ( $data['id'] as $id ) {
 				$post = $this->dm->getRepository('Document\Branch\Post')->find( $id );
 				if ( !empty( $post ) ) {
+					$category_id = $post->getCategory()->getId();
+					$category_ids[$category_id] = $category_id;
+
 					$folder_link = $this->config->get('branch')['default']['image_link'];
 					$folder_name = $this->config->get('post')['default']['image_folder'];
 					$path = DIR_IMAGE . $folder_link . $branch_id . '/' . $folder_name . '/' . $post->getId();
 					
 					$this->load->model('tool/image');
 					$this->model_tool_image->deleteDirectoryImage( $path );
-
-					// remove cache
-					// $this->load->model('tool/cache');
-					// $this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['branch'], $branch->getSlug() );
-
+					
 					$this->dm->remove( $post );
 				}
 			}
 		}
 		
 		$this->dm->flush();
+
+		foreach ( $category_ids as $category_id ) {
+			//-- Update 6 last posts
+			$this->load->model('tool/cache');
+
+			$posts = $this->getPosts( array(
+				'branch_id' => $branch_id,
+				'category_id' => $category_id,
+				'limit' => 6
+			));
+			$this->model_tool_cache->updateLastCategoryPosts( 
+				$this->config->get('post')['type']['branch'], 
+				$branch_id, 
+				$category_id, 
+				$posts 
+			);
+		}
 
 		return true;
 	}

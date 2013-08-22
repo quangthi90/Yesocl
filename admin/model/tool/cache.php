@@ -51,7 +51,7 @@ class ModelToolCache extends Model {
 		
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);
-
+		
 		foreach ( $posts as $post ){
 			$this->setPost( $post, $type_object, $object_id, $category_id );
 		}
