@@ -74,7 +74,7 @@ Abstract Class Post {
 	* Format array to save to Cache
 	* 05/26/2013
 	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Post & Comments
+	* @return: array Post
 	*/
 	public function formatToCache(){
 		$limit = 200;

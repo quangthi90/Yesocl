@@ -1,19 +1,11 @@
 <?php
 class ModelBranchBranch extends Doctrine {
-	public function getAllBranchs(){
-		$this->load->model( 'tool/cache' );
-		$branchs = $this->model_tool_cache->getAllBranchs();
+	public function getAllBranchs( $data = array() ){
+		$query = array('deleted' => false);
 
-		if ( count($branchs) == 0 ){
-			$results = $this->dm->getRepository('Document\Branch\Branch')->findByStatus( true );
-
-			$branchs = array();
-			foreach ( $results as $branch ) {
-				$branchs[] = $this->model_tool_cache->setObject( $branch, $this->config->get('post')['type']['branch'] );
-			}
-		}
-
-		return $branchs;
+		$results = $this->dm->getRepository('Document\Branch\Branch')->findBy( $query );
+		
+		return $results;
 	}
 
 	public function getBranch( $branch_slug ){
