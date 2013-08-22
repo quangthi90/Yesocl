@@ -19,9 +19,15 @@ class ModelBranchPost extends Doctrine {
 					return null;
 				}
 
-				$results = $branch->getPosts()->toArray();
+				if ( empty($data['category_id']) ){
+					$results = $branch->getPosts()->toArray();
+				}else{
+					$results = $branch->getPostByCategory( $data['category_id'] );
+				}
 			}else{
-				$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_slug'] );
+				if ( empty($data['category_id']) ){
+					$results = $this->model_tool_cache->getLastPosts( $this->config->get('post')['type']['branch'], $data['branch_slug'] );
+				}
 
 				if ( count($results) < 60 ){
 					$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $data['branch_slug'] );

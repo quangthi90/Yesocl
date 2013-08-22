@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 * @MongoDB\MappedSuperclass
 * @MongoDB\InheritanceType("COLLECTION_PER_CLASS")
 * @MongoDB\DiscriminatorMap({
-*     "CompanyPost"="Document\Branch\Post"
+*     "BranchPost"="\Document\Branch\Post"
 * })
 */
 Abstract Class Post {
@@ -48,6 +48,9 @@ Abstract Class Post {
 
 	/** @MongoDB\String */
 	private $thumb;
+
+	/** @MongoDB\Boolean */
+	private $deleted;
 
 	/**
 	 * Get Comment By ID
@@ -142,6 +145,7 @@ Abstract Class Post {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+		$this->deleted = false;
 	}
 
 	/** @MongoDB\PreUpdate */
@@ -201,5 +205,13 @@ Abstract Class Post {
 
 	public function getThumb(){
 		return $this->thumb;
+	}
+
+	public function setDeleted( $deleted ){
+		$this->deleted = $deleted;
+	}
+
+	public function getDeleted(){
+		return $this->deleted;
 	}
 }
