@@ -20,9 +20,7 @@
 		{% if posts|length > 0 %}
 		<div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="{{ branch.href_categories|raw }}">{{ branch.name }}</a>
-                <a class="fl" href="#"><i class="icon-chevron-right"></i></a>
-            </div>
+                <a class="fl" href="{{ branch.href_categories|raw }}">{{ branch.name }}  <i class="icon-angle-right"></i></a>            </div>
             {% if style == 1 %}
             	{{ block('post_common_post_block_ex1') }}
             {% else %}
