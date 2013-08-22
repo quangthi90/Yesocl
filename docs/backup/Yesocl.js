@@ -1417,88 +1417,84 @@ db.getCollection("branch").insert({
 /** branch_category records **/
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3a0cad87459c40a000019"),
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
   "name": "Phân tích chuyên sâu",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "order": 10
-});
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3ceced874596804000000"),
-  "name": "Nhận định thị trường",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "order": 20
+  "order": NumberInt(10),
+  "slug": "phan-tich-chuyen-sau"
 });
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3d07fd874591406000000"),
-  "name": "Cổ Phiếu Đầu Cơ",
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "order": 30
+  "name": "Cổ Phiếu Đầu Cơ",
+  "order": NumberInt(30),
+  "slug": "co-phieu-dau-co"
 });
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3d0c0d874591406000001"),
-  "name": "Tài chính ngân hàng",
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
+  "name": "Tài chính ngân hàng",
+  "order": NumberInt(11),
   "parent": {
     "$ref": "branch_category",
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "order": 11
+  "slug": "tai-chinh-ngan-hang"
 });
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3d0d6d874591406000002"),
-  "name": "Kinh tế vĩ mô",
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
+  "name": "Kinh tế vĩ mô",
+  "order": NumberInt(12),
   "parent": {
     "$ref": "branch_category",
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "order": 12
+  "slug": "kinh-te-vi-mo"
 });
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3d112d874591406000003"),
-  "name": "Doanh Nghiệp",
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
+  "name": "Doanh Nghiệp",
+  "order": NumberInt(13),
   "parent": {
     "$ref": "branch_category",
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "order": 13
+  "slug": "doanh-nghiep"
 });
 db.getCollection("branch_category").insert({
-  "_id": ObjectId("51f654df471deeb40c000000"),
-  "name": "abc",
+  "_id": ObjectId("51d3ceced874596804000000"),
   "branch": {
     "$ref": "branch",
-    "$id": ObjectId("51d39bb1d87459c40a000018"),
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "order": NumberInt(0)
+  "name": "Nhận định thị trường",
+  "order": NumberInt(20),
+  "slug": "nhan-dinh-thi-truong"
 });
 
 /** branch_post records **/
@@ -1515,6 +1511,21 @@ db.getCollection("branch_post").insert({
     "$id": ObjectId("51d3ceced874596804000000"),
     "$db": "yesocl"
   },
+  "comments": [
+    {
+      "_id": ObjectId("52164c59471dee900b000000"),
+      "content": "Lorem ipsum dolor sit amet, cu vide putent voluptaria usu. Ei iudicabit necessitatibus eos. Id prompta sanctus his, nam ipsum molestie interpretaris id.",
+      "status": true,
+      "created": ISODate("2013-08-22T17:37:29.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn"
+    }
+  ],
   "content": "&lt;p&gt;\r\n\tDuo ut audire intellegam. Id duis harum definitiones his. Cum ei veri ullum officiis, has accusamus prodesset an. Et melius facilisi incorrupte nam.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tDicat falli mel id, postea deserunt pri id. Ei pericula quaerendum nam, in pro malis nobis, mutat sententiae vis ex. Pri suas ornatus adipisci an, ad pri diceret eligendi necessitatibus. Qui quidam civibus intellegat at. In ocurreret percipitur eam, ut sit affert verterem. Est ea legimus voluptatum interpretaris, te adhuc admodum adipiscing vix.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tHas quot evertitur contentiones at, eum ei tincidunt deseruisse, pro ei vide rebum scripta. Ad soluta percipitur intellegebat has. Ut stet veritus lobortis nec, pro eirmod persequeris ne, sed cetero omittam voluptatum in. Decore maiestatis incorrupte eos an, est ne quodsi latine fuisset. Ei liber sadipscing per.Nam natum ipsum salutandi te. Dictas sadipscing ut sed. Qui recusabo evertitur ad. His stet euismod dolorum ad, nam tincidunt ullamcorper at, mutat molestie appetere nec ex. Ut ullum latine eam, prima solum recteque ne vix, idque intellegat quo ne.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tAd mel purto aliquid definitionem. Graece volumus mei id, ut quo justo lucilius adipisci. Ne vel eligendi adipisci convenire, mundi praesent assueverit id quo. Sed veniam assueverit appellantur ad, cum cu perpetua iracundia consetetur, commodo aperiri philosophia duo no. His at aliquip sanctus accusamus, in tota novum soluta est. Vim iriure delicatissimi eu, aliquip laboramus eu pro, ius ut paulo latine facilis.&lt;\/p&gt;\r\n",
   "created": ISODate("2013-08-22T11:54:49.0Z"),
   "deleted": false,
@@ -1524,7 +1535,7 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5215fc09471dee100d000003\/avatar.jpg",
   "title": "1 Lorem ipsum dolor sit amet, habeo tempor delicatissimi cu eam",
-  "updated": ISODate("2013-08-22T11:54:49.0Z"),
+  "updated": ISODate("2013-08-22T17:37:29.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),

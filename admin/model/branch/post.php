@@ -101,9 +101,9 @@ class ModelBranchPost extends Doctrine {
 
 		$this->dm->flush();
 		
-		//-- Update 60 last posts
-		// $this->load->model('tool/cache');
-		// $this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch->getSlug(), $post->getSlug() );
 		
 		return $post;
 	}
