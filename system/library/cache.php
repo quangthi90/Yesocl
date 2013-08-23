@@ -38,6 +38,11 @@ class Cache {
       			if ($time < time()) {
 					if (file_exists($file)) {
 						unlink($file);
+
+						$parent = dirname($file);
+						if ( count($this->scanFiles($parent)) == 0 ){
+							unlink($parent);
+						}
 					}
       			}
     		}
