@@ -37,12 +37,6 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        if ( empty($this->request->post['type_slug']) ){
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: type slug is empty'
-            )));
-        }
-
         if ( empty($this->request->post['content']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: content is empty'
@@ -53,7 +47,6 @@ class ControllerPostPost extends Controller {
             $data['post_slug'] = $this->request->post['post_slug'];
             $data['content'] = $this->request->post['content'];
             $data['post_type'] = $this->request->post['post_type'];
-            $data['type_slug'] = $this->request->post['type_slug'];
         }else {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: validate false'
@@ -63,7 +56,6 @@ class ControllerPostPost extends Controller {
         switch ($data['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $data['branch_slug'] = $data['type_slug'];
                 $comment = $this->model_branch_comment->addComment( $data );
                 break;
             
@@ -135,14 +127,6 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        if ( isset($this->request->get['type_slug']) && !empty($this->request->get['type_slug']) ){
-            $data['type_slug'] = $this->request->get['type_slug'];
-        }else{
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: type slug empty'
-            )));
-        }
-
         if ( isset($this->request->post['start']) && !empty($this->request->post['start']) ){
             $data['start'] = $this->request->post['start'];
         }
@@ -151,19 +135,9 @@ class ControllerPostPost extends Controller {
             $data['limit'] = $this->request->post['limit'];
         }
         
-        $paging = 1;
-        if ( isset($this->request->post['paging']) && !empty($this->request->post['paging']) ){
-          $paging = $this->request->post['paging'];
-        }
-
-        if ( isset($this->request->post['page']) && !empty($this->request->post['page']) ){
-            $data['page'] = $this->request->post['page'];
-        }
-        
         switch ($data['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $data['branch_slug'] = $data['type_slug'];
                 $comments = $this->model_branch_comment->getComments( $data );
                 break;
             

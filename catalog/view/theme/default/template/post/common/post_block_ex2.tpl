@@ -14,7 +14,7 @@
 								<i class="icon-calendar"></i> {{ post.created|date(date_format) }}
 							</span>
 							<span class="post_cm fr">
-								<i class="icon-comments-alt"></i>  10
+								<i class="icon-comments-alt"></i> {{ post.comment_count }}
 							</span>
 							<span class="post_like fr">
 								<i class="icon-thumbs-up"></i> 100
