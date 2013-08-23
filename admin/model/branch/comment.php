@@ -66,12 +66,17 @@ class ModelBranchComment extends Doctrine {
 			'category_id' => $post->getCategory()->getId(),
 			'limit' => 6
 		));
-		$this->model_tool_cache->updateLastCategoryPosts( 
-			$this->config->get('post')['type']['branch'], 
-			$post->getBranch()->getId(), 
-			$post->getCategory()->getId(), 
-			$posts 
-		);
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$post->getBranch()->getId(), 
+					$post->getCategory()->getId(), 
+					$posts 
+				);
+				break;
+			}
+		}
 		
 		return true;
 	}
