@@ -1,11 +1,15 @@
 <?php
 class ModelBranchCategory extends Doctrine {
-	public function getCategories( $branch_id ){
-		$categories = $this->dm->getRepository("Document\Branch\Category")->findBy(array(
-			'branch.id' => $branch_id
-		));
+	public function getAllCategories( $data = array() ){
+		$query = array();
 
-		return $categories;
+		if ( !empty($data['branch_id']) ){
+			$query['branch.id'] = $data['branch_id'];
+		}
+
+		$results = $this->dm->getRepository("Document\Branch\Category")->findBy( $query );
+
+		return $results;
 	}
 }
 ?>

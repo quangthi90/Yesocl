@@ -8,21 +8,14 @@ class ModelBranchBranch extends Doctrine {
 		return $results;
 	}
 
-	public function getBranch( $branch_slug ){
-		$this->load->model('tool/cache');
-		$branch = $this->model_tool_cache->getObject( $branch_slug, $this->config->get('post')['type']['branch'] );
-		
-		if ( empty($branch) ){
-			$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $branch_slug );
-
-			if ( !$branch ){
-				return null;
-			}
-
-			$branch = $this->model_tool_cache->setObject( $branch, $this->config->get('post')['type']['branch'] );
+	public function getBranch( $data = array() ){
+		if ( !empty($data['branch_id']) ){
+			return $this->dm->getRepository('Document\Branch\Branch')->find($data['branch_id']);
+		}elseif ( !empty($data['branch_slug']) ){
+			return $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug($data['branch_slug']);
 		}
 
-		return $branch;
+		return null;
 	}
 }
 ?>

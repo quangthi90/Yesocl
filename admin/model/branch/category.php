@@ -160,14 +160,16 @@ class ModelBranchCategory extends Doctrine {
 
 	public function getAllCategories( $data = array() ) {
 		$query = array();
-		if ( isset($data['branch_id']) && !empty($data['branch_id']) ){
+		if ( !empty($data['branch_id']) ){
 			$query['branch.id'] = $data['branch_id'];
 		}
-		if (!isset($data['sort']) || empty($data['sort']) ){
+		if ( empty($data['sort']) ){
 			$data['sort'] = 'order';
 		}
 
-		return $this->dm->getRepository( 'Document\Branch\Category' )->findBy($query)->sort(array($data['sort'] => 1));
+		return $this->dm->getRepository( 'Document\Branch\Category' )
+			->findBy($query)
+			->sort(array($data['sort'] => 1));
 	}
 	
 	public function getTotalCategories() {

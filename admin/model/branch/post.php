@@ -315,9 +315,11 @@ class ModelBranchPost extends Doctrine {
 			$query['category.id'] = $data['category_id'];
 		}
 
-		$results = $this->dm->getRepository('Document\Branch\Post')->findBy( $query )->sort(array(
-			'created' => -1
-		));
+		$results = $this->dm->getRepository('Document\Branch\Post')
+			->findBy( $query )
+			->skip( $data['start'] )
+			->limit( $data['limit'] )
+			->sort( array('created' => -1) );
 
 		return $results;
 	}

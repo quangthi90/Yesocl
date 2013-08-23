@@ -15,13 +15,47 @@ class ModelBranchPost extends Doctrine {
 			$query['branch.id'] = $data['branch_id'];
 		}
 
-		$results = $this->dm->getRepository('Document\Branch\Post')->findBy( $query );
+		if ( !empty($data['category_id']) ){
+			$query['category.id'] = $data['category_id'];
+		}
+
+		$results = $this->dm->getRepository('Document\Branch\Post')
+			->findBy( $query )
+			->skip($data['start'])
+			->limit($data['limit']);
 
 		return $results;
 	}
 
 	public function getPost( $post_id ){
 
+	}
+
+	public function getLastPostByCategory( $branch_id, $category_id ){
+		$this->load->model('tool/cache');
+
+		$results = $this->model_tool_cache->getLastCategoryPosts(
+			$this->config->get('post')['type']['branch'],
+			$branch_id,
+			$category_id
+		);
+		
+		if ( count($results) == 0 ){
+			$this->load->model('branch/post');
+			$posts = $this->getPosts(array(
+				'branch_id' => $branch_id,
+				'category_id' => $category_id,
+				'limit' => $this->config->get('common')['block']['limit']
+			));
+			$results = $this->model_tool_cache->updateLastCategoryPosts(
+				$this->config->get('post')['type']['branch'],
+				$branch_id,
+				$category_id,
+				$posts
+			);
+		}
+		
+		return $results;
 	}
 }
 ?>

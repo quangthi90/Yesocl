@@ -1412,7 +1412,7 @@ db.getCollection("branch_category").insert({
     "$db": "yesocl"
   },
   "name": "Phân tích chuyên sâu",
-  "order": NumberInt(10),
+  "order": NumberInt(1),
   "slug": "phan-tich-chuyen-sau"
 });
 db.getCollection("branch_category").insert({
@@ -1423,56 +1423,8 @@ db.getCollection("branch_category").insert({
     "$db": "yesocl"
   },
   "name": "Cổ Phiếu Đầu Cơ",
-  "order": NumberInt(30),
+  "order": NumberInt(3),
   "slug": "co-phieu-dau-co"
-});
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3d0c0d874591406000001"),
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "name": "Tài chính ngân hàng",
-  "order": NumberInt(11),
-  "parent": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3a0cad87459c40a000019"),
-    "$db": "yesocl"
-  },
-  "slug": "tai-chinh-ngan-hang"
-});
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3d0d6d874591406000002"),
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "name": "Kinh tế vĩ mô",
-  "order": NumberInt(12),
-  "parent": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3a0cad87459c40a000019"),
-    "$db": "yesocl"
-  },
-  "slug": "kinh-te-vi-mo"
-});
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3d112d874591406000003"),
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "name": "Doanh Nghiệp",
-  "order": NumberInt(13),
-  "parent": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3a0cad87459c40a000019"),
-    "$db": "yesocl"
-  },
-  "slug": "doanh-nghiep"
 });
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3ceced874596804000000"),
@@ -1482,11 +1434,40 @@ db.getCollection("branch_category").insert({
     "$db": "yesocl"
   },
   "name": "Nhận định thị trường",
-  "order": NumberInt(20),
+  "order": NumberInt(2),
   "slug": "nhan-dinh-thi-truong"
 });
 
 /** branch_post records **/
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5217929f471dee3c08000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường tiếp tục phiên tăng điểm thứ 2 liên tiếp, cả hai chỉ số đều hình thành các cây nến trắng lớn, đặc biệt là thanh khoản trên sàn Hose đã tăng đột biến. Thị trường cho thấy sự phân hóa tập trung ở các cổ phiếu penny mang tính đầu cơ khiến những mã này có khối lượng dư trần khá lớn, điển hình là ITA, KBC, DIG, PVT, OGC, DQC…, trong khi các mã bluechip có phần yếu hơn và chỉ xanh nhẹ. Nhìn chung, thị trường có diễn biến khá tốt trong phiên hôm nay, tuy nhiên chúng tôi vẫn giữ quan điểm trong bài phân tích trước, &amp;nbsp;khả năng Vnindex sẽ gặp khó khăn khi tiệm cận vùng cản mạnh 507-510, cũng như vùng 63-63.5 trên Hnxindex.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3306&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư có thể chốt lời một phần danh mục như chúng tôi khuyến nghị trong các phiên tăng&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mua đuổi cổ phiếu khi Vnindex tiệm cận ngưỡng kháng cự mạnh&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi sẽ cập nhật điểm mua mới khi Vnindex bức phá được ngưỡng kháng cự 507-510&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:49:35.0Z"),
+  "deleted": false,
+  "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường tiếp tục phiên tăng điểm thứ 2 liên tiếp, cả hai chỉ số đều hình thành các cây nến trắng lớn, đặc [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "lang-kinh-yestoc-phien-1608-can-trong-vung-khang-cu-manh-5217929f471dee3c08000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5217929f471dee3c08000001\/avatar.png",
+  "title": "Lăng kính Yestoc phiên 16\/08: “cẩn trọng vùng kháng cự mạnh”",
+  "updated": ISODate("2013-08-23T16:49:35.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
 db.getCollection("branch_post").insert({
   "_id": ObjectId("5216d059471dee740b000001"),
   "author": "user1",
@@ -1633,6 +1614,35 @@ db.getCollection("branch_post").insert({
   }
 });
 db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179345471deefc0b000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVnindex hôm nay tiếp tục một phiên tăng điểm mạnh lên vùng kháng cự 492, diễn biến của nhóm cổ phiếu trụ cột vẫn đang là tác nhân chủ yếu tác động đà tăng trong phiên. Thanh khoản trên Vnindex sụt giảm mạnh và độ rộng thị trường giảm không ủng hộ cho đà tăng điểm hiện tại. Chúng tôi tiếp tục giữ quan điểm thận trọng ở xu hướng ngắn hạn và khả năng thị trường có thể sẽ xuất hiện các nhịp giảm điểm mạnh trong những phiên tới khi tiếp cận ngưỡng kháng cự 492-4-5 của Vnindex và 61.7-62 của Hnxindex.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư lướt sóng nên cân nhắc mở vị thế bán ở thời điểm hiện tại và hạ tỉ trọng cổ phiếu xuống ngưỡng an toàn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế bắt đáy khi thị trường chưa giảm về vùng hỗ trợ mạnh 466-470 trên Vnindex và 59 trên Hnxindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:52:21.0Z"),
+  "deleted": false,
+  "description": "Quan điểm kĩ thuật ngắn hạn: Vnindex hôm nay tiếp tục một phiên tăng điểm mạnh lên vùng kháng cự 492, diễn biến của nhóm cổ phiếu trụ cột vẫn [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "lang-kinh-yestoc-phien-0108-cho-mua-tai-muc-ho-tro-manh-52179345471deefc0b000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179345471deefc0b000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc phiên 01\/08: “Chờ mua tại mức hỗ trợ mạnh”",
+  "updated": ISODate("2013-08-23T16:52:21.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
   "_id": ObjectId("5216d192471dee840a000001"),
   "author": "user1",
   "branch": {
@@ -1684,6 +1694,122 @@ db.getCollection("branch_post").insert({
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d281471dee840a000005\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Đầu tư Phát triển Đô thị và Khu Công nghiệp Sông Đà (SJS)",
   "updated": ISODate("2013-08-23T03:09:53.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179237471deeb408000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&amp;nbsp;Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 497 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex. Tuy nhiên, vùng 507-510 là ngưỡng cản khá mạnh của Vnindex (đây là điểm nối các đỉnh của mẫu hình vai đầu vai trung dài hạn) do đó hoạt động chốt lời mạnh có thể sẽ tiếp tục diễn ra vào đầu tuần sau. Chúng tôi cho rằng nếu thanh khoản tiếp tục duy trì trên 50tr\/ phiên thì có thể Vnindex sẽ chỉ điều chỉnh nhẹ ( nếu có) về vùng 502-503. Ngược lại, nếu phá vỡ ngưỡng cản 507-510, Vnindex sẽ hướng về vùng kháng cự kế tiếp là 525-530.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tPhân tích đồ thị Hnxindex có thể thấy mẫu hình cái nêm hướng xuống đang được hình thành, nếu vùng cản 63-63.5 được phá vỡ, khả năng Hnxindex sẽ hình thành 1 xu hướng tăng mạnh với taget ở vùng 66-67.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3346&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tỞ chart tuần Vnindex, chỉ số này vẫn chưa xuất hiện điểm mua trung hạn do vùng kháng cự 510-525 tập trung khá nhiều lực bán mạnh, chúng tôi đánh giá xu hướng trung hạn hiện tại ở mức trung tính và cần thời gian để xác nhận.&amp;nbsp;Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư lướt sóng sau khi chốt lời ở vùng 508 như khuyến nghị của chúng tôi&amp;nbsp;có thể tiếp tục giải ngân khi Vnindex tích lũy trong các phiên đầu tuần.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro thấp, có thể chờ mua khi Vnindex phá vỡ vùng 507-510 .&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã midcap cơ bản tốt và có dòng tiền mạnh.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:47:51.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước: Chúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "lang-kinh-yestoc-tuan-1908-2308-tang-ti-trong-co-phieu-khi-vnindex-pha-vo-vung-can-507-510-52179237471deeb408000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179237471deeb408000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 19\/08-23\/08: ” tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510″",
+  "updated": ISODate("2013-08-23T16:48:02.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("521792d9471deeb408000003"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước :&lt;\/strong&gt; …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều, &amp;nbsp;cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tThanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:50:33.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
+  "updated": ISODate("2013-08-23T16:50:33.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179310471deec003000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:51:28.0Z"),
+  "deleted": false,
+  "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
+  "updated": ISODate("2013-08-23T16:51:28.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179382471deeb408000005"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng điểm, tuy nhiên khối lượng giao dịch chỉ đạt 10 triệu cp, sụt giảm mạnh so với phiên trước cho thấy mức độ tin cậy của mẫu hình khá thấp. &amp;nbsp;Trong ngắn hạn, chúng tôi vẫn duy trì quan điểm xu hướng giảm và các chỉ số sẽ gặp áp lực bán mạnh khi tiếp cận ngưỡng kháng cự trong các phiên tới. Vùng kháng cự hiện tại tập trung ở vùng giá 490-492 của chỉ số VNIndex và 61.7-62 của chỉ số HNXIndex. Do đó, nhà đầu tư cần thận trọng với quyết định giải ngân trong giai đoạn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tTiếp tục ưu tiên chiến lược hạ tỉ trọng cổ phiếu khi thị trường xuất hiện nhịp tăng ngắn hạn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mở vị thế mua trong giai đoạn này đến khi chúng tôi đưa ra điểm mua mới.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:53:22.0Z"),
+  "deleted": false,
+  "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179382471deeb408000005\/avatar.jpg",
+  "title": "Lăng kính Yestoc phiên 31\/07: ” Thị trường tiệm cận ngưỡng kháng cự mạnh”",
+  "updated": ISODate("2013-08-23T16:53:22.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),

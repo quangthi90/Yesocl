@@ -9,4 +9,6 @@ $_['common']['type']['branch'] 					= 'branch';
 $_['common']['type']['group'] 					= 'group';
 $_['common']['type']['user'] 					= 'user';
 
+$_['common']['block']['limit']					= 6;
+
 ?>

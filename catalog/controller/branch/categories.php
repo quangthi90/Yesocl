@@ -16,21 +16,40 @@ class ControllerBranchCategories extends Controller {
 		$this->load->model( 'branch/category' );
 		$this->load->model( 'branch/post' );
 		$this->load->model('tool/image');
+		$this->load->model('tool/cache');
 
-		$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_slug'] );
+		$branch = $this->model_branch_branch->getBranch( array('branch_slug' => $this->request->get['branch_slug']) );
 
 		if ( !$branch ){
 			return false;
 		}
 
-		$categories = $this->model_branch_category->getCategories( $branch['id'] );
+		$categories = $this->model_branch_category->getAllCategories( $branch->getId() );
+		
+		$this->data['categories'] = array();
+		$this->data['all_posts'] = array();
+		foreach ( $categories as $category ) {
+			$posts = $this->model_branch_post->getLastPostByCategory( 
+				$branch->getId(),
+				$category->getId()
+			);
+			
+			if ( count($posts) == 0 ){
+				continue;
+			}
 
-		foreach ( $categories as $category_slug => $category ) {
-			$posts = $this->model_branch_post->getPosts(array(
-				'branch_slug' => $branch['slug'],
-				'category_slug' => $category_slug
-			));
-				
+			if ( $category->getChildren()->count() > 0 ){
+				$href = $this->url->link('branch/categories', 'category_slug=' . $category->getSlug(), 'SSL');
+			}else{
+				$href = $this->url->link('branch/category', 'category_slug=' . $category->getSlug(), 'SSL');
+			}
+
+			$this->data['categories'][$category->getId()] = array(
+				'id' => $category->getId(),
+				'name' => $category->getName(),
+				'href' => $href
+			);
+			
 			foreach ($posts as $i => $post) {
 				// avatar
 				/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
@@ -55,6 +74,7 @@ class ControllerBranchCategories extends Controller {
 				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
 				$posts[$i]['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
 			}
+			$this->data['all_posts'][$category->getId()] = $posts;
 		}
 
 		$this->data['date_format'] = $this->language->get('date_format_short');
