@@ -8,4 +8,6 @@ $_['post']['type']['branch']				= 'branch';
 $_['post']['type']['group']					= 'group';
 $_['post']['type']['user']					= 'user';
 
+$_['category']['cache']['folder']			= 'category';
+
 ?>
