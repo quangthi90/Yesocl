@@ -3,6 +3,8 @@ use Document\Branch\Category,
 	Document\Branch\Layout,
 	Document\Setting\Config;
 
+use MongoRegex;
+
 class ModelBranchCategory extends Doctrine {
 	public function addCategory( $data = array() ) {
 		// Name is required
@@ -27,10 +29,20 @@ class ModelBranchCategory extends Doctrine {
 		$parent = null;
 		if ( isset($data['parent_id']) && !empty($data['parent_id']) ){
 			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
-		}		
+		}
+
+		// Slug
+		$slug = $this->url->create_slug( $data['name'] );
+		$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
+		$arr_slugs = array_map(function($category){
+			return $category->getSlug();
+		}, $categories->toArray());
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );	
 		
 		$category = new Category();
 		$category->setName( $data['name'] );
+		$category->setSlug( $slug );
 		$category->setBranch( $branch );
 		$category->setOrder( $order );
 		$category->setParent( $parent );
@@ -70,12 +82,44 @@ class ModelBranchCategory extends Doctrine {
 			$parent = $this->dm->getRepository('Document\Branch\Category')->find( $data['parent_id'] );
 		}
 
+		// Slug
+		if ( $data['name'] != $category->getName() ){
+			$slug = $this->url->create_slug( $data['name'] );
+		
+			$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+			$arr_slugs = array_map(function($category){
+				return $category->getSlug();
+			}, $categories->toArray());
+
+			$this->load->model( 'tool/slug' );
+			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+			
+			$category->setSlug( $slug );
+		}
+
 		$category->setName( $data['name'] );
 		$category->setBranch( $branch );
 		$category->setOrder( $order );
 		$category->setParent( $parent );
 
 		$this->dm->flush();
+
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+		$this->load->model('branch/post');
+
+		$posts = $this->model_branch_post->getPosts( array(
+			'branch_id' => $category->getBranch()->getId(),
+			'category_id' => $id,
+			'limit' => 6
+		));
+		$this->model_tool_cache->updateLastCategoryPosts( 
+			$this->config->get('post')['type']['branch'], 
+			$category->getBranch()->getId(), 
+			$id, 
+			$posts 
+		);
 	}
 
 	public function deleteCategory( $data = array() ) {
@@ -116,14 +160,16 @@ class ModelBranchCategory extends Doctrine {
 
 	public function getAllCategories( $data = array() ) {
 		$query = array();
-		if ( isset($data['branch_id']) && !empty($data['branch_id']) ){
+		if ( !empty($data['branch_id']) ){
 			$query['branch.id'] = $data['branch_id'];
 		}
-		if (!isset($data['sort']) || empty($data['sort']) ){
+		if ( empty($data['sort']) ){
 			$data['sort'] = 'order';
 		}
 
-		return $this->dm->getRepository( 'Document\Branch\Category' )->findBy($query)->sort(array($data['sort'] => 1));
+		return $this->dm->getRepository( 'Document\Branch\Category' )
+			->findBy($query)
+			->sort(array($data['sort'] => 1));
 	}
 	
 	public function getTotalCategories() {

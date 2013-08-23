@@ -59,10 +59,6 @@ class ModelBranchBranch extends Doctrine {
 		$this->dm->persist( $branch );
 		$this->dm->flush();
 
-		//-- create cache for branch
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $branch );
-
 		return true;
 	}
 
@@ -133,10 +129,6 @@ class ModelBranchBranch extends Doctrine {
 		
 		$this->dm->flush();
 
-		//-- create cache for branch
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $branch );
-
 		return true;
 	}
 
@@ -153,10 +145,6 @@ class ModelBranchBranch extends Doctrine {
 				if ( !empty( $branch ) ) {
 					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branchs.id' )->equals( $branch->getId() )->getQuery()->execute();
 					
-					//-- remove cache of Branch
-					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteObject( $branch->getSlug() );
-
 					$this->dm->remove( $branch );
 				}
 			}
