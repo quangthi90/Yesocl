@@ -1390,24 +1390,13 @@ db.getCollection("attribute_type").insert({
 
 /** branch records **/
 db.getCollection("branch").insert({
-  "_id": ObjectId("51d39bb1d87459c40a000018"),
-  "company": {
-    "$ref": "company",
-    "$id": ObjectId("51e97c88471dee180a000000"),
-    "$db": "yesocl"
-  },
-  "name": "Follower",
-  "order": NumberInt(2),
-  "slug": "follower-520ce9a2471dee9c09000001",
-  "status": false
-});
-db.getCollection("branch").insert({
   "_id": ObjectId("51d39ba5d87459c40a000017"),
   "company": {
     "$ref": "company",
     "$id": ObjectId("51e97c88471dee180a000000"),
     "$db": "yesocl"
   },
+  "deleted": false,
   "name": "Yestoc",
   "order": NumberInt(1),
   "slug": "yestoc-520ce99c471dee9c09000000",
@@ -1499,51 +1488,7 @@ db.getCollection("branch_category").insert({
 
 /** branch_post records **/
 db.getCollection("branch_post").insert({
-  "_id": ObjectId("5215fc09471dee100d000003"),
-  "author": "user1",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3ceced874596804000000"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("52164c59471dee900b000000"),
-      "content": "Lorem ipsum dolor sit amet, cu vide putent voluptaria usu. Ei iudicabit necessitatibus eos. Id prompta sanctus his, nam ipsum molestie interpretaris id.",
-      "status": true,
-      "created": ISODate("2013-08-22T17:37:29.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn"
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\tDuo ut audire intellegam. Id duis harum definitiones his. Cum ei veri ullum officiis, has accusamus prodesset an. Et melius facilisi incorrupte nam.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tDicat falli mel id, postea deserunt pri id. Ei pericula quaerendum nam, in pro malis nobis, mutat sententiae vis ex. Pri suas ornatus adipisci an, ad pri diceret eligendi necessitatibus. Qui quidam civibus intellegat at. In ocurreret percipitur eam, ut sit affert verterem. Est ea legimus voluptatum interpretaris, te adhuc admodum adipiscing vix.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tHas quot evertitur contentiones at, eum ei tincidunt deseruisse, pro ei vide rebum scripta. Ad soluta percipitur intellegebat has. Ut stet veritus lobortis nec, pro eirmod persequeris ne, sed cetero omittam voluptatum in. Decore maiestatis incorrupte eos an, est ne quodsi latine fuisset. Ei liber sadipscing per.Nam natum ipsum salutandi te. Dictas sadipscing ut sed. Qui recusabo evertitur ad. His stet euismod dolorum ad, nam tincidunt ullamcorper at, mutat molestie appetere nec ex. Ut ullum latine eam, prima solum recteque ne vix, idque intellegat quo ne.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tAd mel purto aliquid definitionem. Graece volumus mei id, ut quo justo lucilius adipisci. Ne vel eligendi adipisci convenire, mundi praesent assueverit id quo. Sed veniam assueverit appellantur ad, cum cu perpetua iracundia consetetur, commodo aperiri philosophia duo no. His at aliquip sanctus accusamus, in tota novum soluta est. Vim iriure delicatissimi eu, aliquip laboramus eu pro, ius ut paulo latine facilis.&lt;\/p&gt;\r\n",
-  "created": ISODate("2013-08-22T11:54:49.0Z"),
-  "deleted": false,
-  "description": "Tritani quaeque vim in, enim vitae adolescens an eam. Vim in ceteros erroribus, his minim populo patrioque et. Pri at unum latine persecuti, cetero invenire forensibus at pri.",
-  "email": "quangthi_90@yahoo.com.vn",
-  "slug": "1-lorem-ipsum-dolor-sit-amet-habeo-tempor-delicatissimi-cu-eam-5215fc09471dee100d000002",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5215fc09471dee100d000003\/avatar.jpg",
-  "title": "1 Lorem ipsum dolor sit amet, habeo tempor delicatissimi cu eam",
-  "updated": ISODate("2013-08-22T18:31:46.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
-  "_id": ObjectId("52165952471dee900b000004"),
+  "_id": ObjectId("5216d059471dee740b000001"),
   "author": "user1",
   "branch": {
     "$ref": "branch",
@@ -1555,31 +1500,190 @@ db.getCollection("branch_post").insert({
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "comments": [
-    {
-      "_id": ObjectId("52165f58471dee900b000005"),
-      "content": "1111111111111",
-      "status": true,
-      "created": ISODate("2013-08-22T18:58:32.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn"
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, ne diam vero petentium usu. Alterum invenire cu cum, tempor adipisci eloquentiam ei vix, eirmod dolorem accusata in vix. No suas bonorum pericula sit. Omnis porro indoctum an has.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tCu nostrum constituto adipiscing has, prompta maluisset quaerendum ius et, cu magna dolorum consequuntur pro. Copiosae accusata cum ad. Sit ei illud euismod honestatis, minimum necessitatibus pri ex. Porro definitionem nam no, usu in quas recteque. Pro cetero civibus eu, choro definitiones te est, has id cibo tempor mollis. Inimicus aliquando duo et, mea et zril decore.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tNoluisse comprehensam eum ne. At eos putant repudiare argumentum, vix duis assueverit ex. Elit probo omnis qui eu. Sit similique efficiendi no. An eos viderer denique. Ne dictas intellegam sea, quem dolor vix ex, quo ea dico platonem.&lt;\/p&gt;\r\n",
-  "created": ISODate("2013-08-22T18:32:50.0Z"),
+  "content": "&lt;p&gt;\r\n\t&lt;em&gt;Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng tin tưởng VNM có thể duy trì được tốc độ tăng trưởng doanh thu trên 20%\/năm nhờ giành thêm được thị phần.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi kỳ vọng tăng trưởng trong tương lai của VNM sẽ dựa trên 4 nhóm sản phẩm chính.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Xuất khẩu cũng sẽ là động lực tăng trưởng vững của VNM nhưng chúng tôi cho rằng sẽ không có sự đột biến thần kỳ trong hoạt động này.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng kỳ vọng VNM sẽ có hoạt động M&amp;amp;A quy mô nhỏ tại Việt Nam và nước ngoài.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận gộp nhiều khả năng đã đạt cao nhất là 36,5% vào 2009 và năm nay sẽ giảm do chi phí đầu vào tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận sẽ ổn định những năm sau đó và chủ yếu chịu ảnh hưởng của biến động của chi phí đầu vào.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tiền mặt sẽ tăng lên kể từ năm nay vì các hoạt động đầu tư của công ty hiện đã gần như hoàn tất.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Và chúng tôi kỳ vọng tỷ lệ chi trả cổ tức trên lợi nhuận sẽ tăng dần lên 50%.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện room dành cho NĐTNN của cổ phiếu VNM đã hết nhưng có thể sẽ được nới vào năm 2014.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Định giá cổ phiếu VNM vẫn hợp lý và nếu so với bình quân các doanh nghiệp cùng ngành thì giá cổ phiếu VNM vẫn còn tiềm năng tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện P\/E dự phóng 2013 của cổ phiếu VNM là 17,4 lần và P\/B là 6,1 lần. Chúng tôi tiếp tục duy trì đánh giá Khả quan đối với cổ phiếu VNM.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;nguồn HSC&lt;\/em&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:00:41.0Z"),
   "deleted": false,
-  "description": "Cum alterum nonumes molestiae te, in fabellas indoctum liberavisse eam. No admodum evertitur definitionem mea, cum ne quando ignota eligendi.",
+  "description": "Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.",
   "email": "quangthi_90@yahoo.com.vn",
-  "slug": "3-harum-doctus-scripta-id-sea-mel-ea-solet-detraxit-enim-persius-his-ne-ea-aeque-iisque-sit-52165952471dee900b000003",
+  "slug": "ctcp-sua-viet-nam-vnm-hsx-uoc-kqkd-6-thang-va-trien-vong-kqkd-2013amp-2014-tiep-tuc-duy-tri-danh-gia-kha-quan-5216d059471dee740b000000",
   "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52165952471dee900b000004\/avatar.jpg",
-  "title": "3 Harum doctus scripta id sea. Mel ea solet detraxit. Enim persius his ne, ea aeque iisque sit.",
-  "updated": ISODate("2013-08-22T18:58:32.0Z"),
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d059471dee740b000001\/avatar.jpg",
+  "title": "CTCP sữa Việt Nam (VNM – HSX): Ước KQKD 6 tháng và triển vọng KQKD 2013&amp;2014. Tiếp tục duy trì đánh giá Khả quan",
+  "updated": ISODate("2013-08-23T03:00:41.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d0e6471dee700b000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;div align=&quot;justify&quot; style=&quot;text-align: justify;&quot;&gt;\r\n\tNgày 1\/6, Ngân hàng Thế giới (WB) tại Hà Nội cho biết: Ban Giám đốc WB đã thông qua hai khoản tín dụng từ Hiệp hội Phát triển Quốc tế (IDA) với tổng trị giá 250 triệu USD cho Dự án hỗ trợ y tế khu vực đồng bằng Sông Hồng và Dự án thúc đẩy sáng tạo thông qua nghiên cứu, khoa học và công nghệ.&lt;a href=&quot;http:\/\/yestoc.com\/wb-phe-duyet-250-trieu-usd-tin-dung-cho-viet-nam\/images-10\/&quot; rel=&quot;attachment wp-att-2741&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;aligncenter size-full wp-image-2741&quot; height=&quot;183&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/06\/images.jpg&quot; title=&quot;images&quot; width=&quot;275&quot; \/&gt;&lt;\/a&gt;\r\n\t&lt;p&gt;\r\n\t\tTrong tổng số tiền được phê duyệt, sẽ dành cho Dự án hỗ trợ y tế khu vực đồng bằng Sông Hồng 150 triệu USD, với mục đích cung cấp các dịch vụ y tế tốt hơn cho 15 triệu người, đặc biệt là trẻ em và phụ nữ, nâng cao hiệu quả và công bằng trong sử dụng dịch vụ bệnh viện tại 13 tỉnh vùng Đông Bắc và đồng bằng Bắc Bộ.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tDự án sẽ tăng cường năng lực cho các bệnh viên tỉnh và huyện để cung cấp dịch vụ tốt hơn để bệnh nhân không phải lên Hà Nội và giảm các rào cản tài chính bằng việc mở rộng đối đượng được nhận Thẻ Bảo hiểm y tế cho các hộ gia đình cận nghèo.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tDự án thúc đẩy sáng tạo thông qua nghiên cứu, khoa học và công nghệ sẽ được phê duyệt 100 triệu USD nhằm hỗ trợ hoạt động sáng tạo khoa học và công nghệ tại Việt Nam bằng cách thiết kế và thí điểm các chính sách khuyến khích sáng tạo khoa học và công nghệ, tăng cường hiệu quả của các Viện Nghiên cứu và Phát triển (R&amp;amp;D), khuyến khích sự phát triển của các doanh nghiệp công nghệ sáng tạo.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tNhững đối tượng chính thụ hưởng Dự án là các Viện Nghiên cứu và Phát triển và các doanh nghiệp công nghệ sáng tạo có đầu tư vào nghiên cứu và phát triển.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tCác doanh nghiệp tách ra hoặc mới thành lập được hỗ trở bởi các Viện Nghiên cứu và Phát triển và Trường đại học cũng sẽ là những đối tượng được hưởng lợi trực tiếp. Dự án cũng sẽ hỗ trợ thành lập các phòng nghiên cứu đối tác công-tư trong khu Khu công nghệ cao Hòa Lạc.\/.&lt;\/p&gt;\r\n&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\tNguyễn Hồng Điệp (TTXVN)&lt;\/div&gt;\r\n",
+  "created": ISODate("2013-08-23T03:03:02.0Z"),
+  "deleted": false,
+  "description": "Ngày 1\/6, Ngân hàng Thế giới (WB) tại Hà Nội cho biết: Ban Giám đốc WB đã thông qua hai khoản tín dụng từ Hiệp hội Phát triển Quốc tế",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "wb-phe-duyet-250-trieu-usd-tin-dung-cho-viet-nam-5216d0e6471dee700b000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d0e6471dee700b000001\/avatar.jpeg",
+  "title": "WB phê duyệt 250 triệu USD tín dụng cho Việt Nam",
+  "updated": ISODate("2013-08-23T03:03:02.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d154471dee800a000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\tTheo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng (76,19 triệu USD) từ mức hiện tại là 1,43 nghìn tỷ đồng. DIG sẽ trình kế hoạch tăng vốn tại ĐHCĐTN diễn ra vào ngày 15\/4.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVẫn chưa có thời gian cụ thể cho kế hoạch tăng vốn nhưng nhiều khả năng sẽ là trước cuối Q3 và có thể dưới hình thức phát hành quyền cho cổ đông hiện hữu. DIG đang cần thêm vốn để đầu tư cho các dự án của mình.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHSC dự báo doanh thu năm 2013 đạt 968 tỷ đồng (tăng trưởng 23%) và lợi nhuận thuần đạt 62,6 tỷ đồng (tăng trưởng 169%). Dự báo này dựa trên giả định là DIG có thể ghi nhận doanh thu từ dự án Nam Vĩnh Yên và An Sơn. Chúng tôi tiếp tục duy trì đánh giá Mua vào đối với cổ phiếu DIG. Hiện DIG là một trong những cổ phiếu niêm yết tốt trong ngành BĐS chuyên về phát triển nhà ở giá thấp; tuy nhiên, sắp tới Tập đoàn Nam Long (đứng đầu về nhà ở giá thấp) sẽ chào sàn với giá tham chiếu 27.000đ theo đó các NĐT có thể sẽ chuyển bớt sự chú ý sang cổ phiếu sắp chào sàn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tNam Long là thương hiệu hàng đầu và có bề dày trong lĩnh vực BĐS giá thấp với 20 năm kinh nghiệm; có quỹ đất 567 ha mà phần lớn được mua cách đây hơn 13 năm và chủ yếu nằm trong và xung quanh TP HCM; có sản phẩm E-home rất thành công với căn hộ 9 tầng tập trung vào người mua sơ cấp với giá hấp dẫn là 1 tỷ đồng trở xuống; tại giá chào sàn, giá cổ phiếu của Tập đoàn Nam Long thấp hơn 38% so với NAV. Theo đó, các NĐT nên chờ và xem xét đầu tư vào cổ phiếu Tập đoàn Nam Long.&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:04:52.0Z"),
+  "deleted": false,
+  "description": "Theo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "bao-cao-ngan-ve-tong-cong-ty-co-phan-dau-tu-phat-trien-xay-dung-dig-5216d154471dee800a000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d154471dee800a000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Tổng Công ty Cổ phần Đầu tư Phát triển Xây dựng (DIG)",
+  "updated": ISODate("2013-08-23T03:04:52.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d1f7471dee840a000003"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; REE sẽ tổ chức ĐHCĐTN vào ngày 29\/3\/2013, trong đó có nội dung tăng vốn điều lệ lên 2.700 tỷ đồng từ chuyển đổi trái phiếu chuyển đổi thành 25,36 triệu cổ phiếu.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Công ty công bố KQKD năm 2012 vô cùng ấn tượng nhờ tăng trưởng ổn định từ các mảng kinh doanh và lợi nhuận đáng kể từ bán cổ phiếu STB.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Năm nay REE tiếp tục sự mở rộng chiến lược vào lĩnh vực dịch vụ tiện ích.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; HSC dự báo doanh thu năm 2013 của REE tăng trưởng 12% và lợi nhuận thuần tăng trưởng 2%, theo đó EPS dự phóng là 2.745đ.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Dự báo về EPS của HSC chưa tính đến rủi ro pha loãng, có thể sẽ là 10% nếu các trái phiếu trên được chuyển đổi toàn bộ.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Tại mức giá hiện nay là 18.900 đ\/cp, cổ phiếu REE hiện đang có P\/E dự phóng là 6,9 và P\/B dự phóng là 1,0 lần.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi tiếp tục duy trì đánh giá Khả quan đối với cổ phiếu REE dựa trên: ban lãnh đạo tốt và triển vọng tăng trưởng khá.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về CTCP Cơ điện lạnh_Mã chứng khoán: REE – HSX (cập nhật ngày 15\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=174851&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;174851&lt;\/a&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:07:35.0Z"),
+  "deleted": false,
+  "description": "REE sẽ tổ chức ĐHCĐTN vào ngày 29\/3\/2013, trong đó có nội dung tăng vốn điều lệ lên 2.700 tỷ đồng từ chuyển đổi trái phiếu chuyển đổi thành [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "bao-cao-ngan-ve-cong-ty-cong-ty-co-phan-co-dien-lanh-ree-5216d1f7471dee840a000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d1f7471dee840a000003\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Cơ điện lạnh (REE)",
+  "updated": ISODate("2013-08-23T03:07:35.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d23b471dee600b000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; PVFC đã trình bản đề xuất kiến nghị hỗ trợ từ phía PVN và NHNN trước, trong và sau quá trình hợp nhất với Western Bank.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; PVF đề xuất xin hỗ trợ dưới hình thức cấp vốn vay trung và dài hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Thông qua bản đề xuất với kỳ vọng nhận được cam kết hỗ trợ tài chính chắc chắn trước khi quá trình hợp nhất diễn ra sẽ làm tăng cơ hội thành công cuối cùng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Ít có khả năng toàn bộ nội dung kiến nghị và đề xuất sẽ được chấp nhận. Tuy nhiên, bản đề xuất sẽ khiến các cơ quan chức năng phải ngồi lại và suy ngẫm về những gì nên làm và theo đó có thể sẽ có thêm những hướng dẫn và thủ tục giúp hỗ trợ cho quá trình tái cơ cấu trong ngành ngân hàng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Theo đó, cho dù kết quả cuối cùng có thế nào đi chăng nữa thì PVF và Western Bank sẽ đóng góp đáng kể vào quá trình tái cơ cấu trong ngành ngân hàng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về Tổng Công ty Tài chính cổ phần Dầu khí Việt Nam_Mã chứng khoán: PVF – HSX (cập nhật ngày 13\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=174688&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;174688&lt;\/a&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:08:43.0Z"),
+  "deleted": false,
+  "description": "PVFC đã trình bản đề xuất kiến nghị hỗ trợ từ phía PVN và NHNN trước, trong và sau quá trình hợp nhất với Western Bank.",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "bao-cao-ngan-ve-tong-cong-ty-tai-chinh-co-phan-dau-khi-viet-nam-pvf-5216d23b471dee600b000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d23b471dee600b000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Tổng Công ty Tài Chính Cổ phần Dầu khí Việt Nam (PVF)",
+  "updated": ISODate("2013-08-23T03:08:43.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d192471dee840a000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\tVSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận trước thuế là 214 tỷ đồng, giảm 26%. Công ty sẽ trả cổ tức bằng cả cổ phiếu (tỷ lệ 1:5) và tiền mặt (4.000đ\/cp). Chúng tôi cho rằng tiền mặt sẽ được trả sau khi trả bằng cổ phiếu nên tỷ lệ cổ tức\/giá tổng cộng sẽ là 10,3% ở mức giá hiện tại.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tKế hoạch kinh doanh năm 2013 của VSC có vẻ khá thận trọng và đây là điều thường thấy ở công ty này. Chúng tôi thấy rằng trong 5 năm liền (từ 2008-2012), công ty đã vượt kế hoạch lợi nhuận trước thuế đề ra là 46%. Tốc độ tăng trưởng CAGR trong 5 năm của doanh thu là 25% còn của lợi nhuận thuần là 21%. Trong năm nay, VSC đã lý giải việc đặt kế hoạch kinh doanh thấp là do doanh thu từ dịch vụ lưu kho lạnh sẽ giảm do trong năm ngoái doanh thu này đạt cao trong điều kiện đặc biệt. Trong năm 2012, công ty đạt 80 tỷ đồng doanh thu từ dịch vụ lưu kho lạnh, tăng mạnh 43% do chính phủ Trung Quốc đã bất ngờ đóng cửa biên giới trong 3 tháng trong năm 2012 khiến các công ty phải lưu hàng trong kho lạnh trong nhiều tháng. Chúng tôi cũng đã có đề cập đến điều này trong báo cáo trước về VSC.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC hiện đang chạy hết công suất nên sẽ không còn nhiều dư địa để tăng trưởng. Trong năm nay, VSC đặt kế hoạch hàng hóa qua cảng là 350.000 TEU, chỉ tăng 1%. Và chúng tôi cũng dự báo phí dịch vụ sẽ giữ nguyên. VSC đã giữ nguyên phí dịch vụ trong 2 năm và chúng tôi cũng lưu ý là hầu hết phí dịch vụ được tính bằng USD.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi dự báo doanh thu từ hoạt động kinh doanh cảng sẽ đạt 706 tỷ đồng, tăng trưởng 1%; cao hơn kế hoạch của công ty 9%; và dự báo doanh thu từ dịch vụ lưu kho lạnh giảm 30% và đạt 56 tỷ đồng trong năm 2013. Dự báo này dựa trên giả định là hàng thực phẩm đông lạnh sẽ được lưu thông thông suốt qua biên giới Việt – Trung trong năm nay. Tóm lại, chúng tôi dự báo tổng doanh thu là 762 tỷ đồng, giảm nhẹ 2%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cũng dự báo lợi nhuận thuần sẽ đạt 228 tỷ đồng, không thay đổi so với năm 2012 và cao hơn 33% so với kế hoạch của công ty. Dự báo lợi nhuận thuần của chúng tôi dựa trên giả định chi phí giảm nhờ công ty giảm sự phụ thuộc vào bên cho thuê bãi container. Năm nay, công ty sẽ xây dựng bãi container của riêng mình với diện tích 7,5ha. Bãi container này sẽ được hoàn thành và đưa vào hoạt động vào Q2 năm nay và sẽ giúp giảm 7% giá vốn hàng bán xuống còn 474 tỷ đồng trong năm 2013. Điều này sẽ giúp tỷ suất lợi nhuận gộp tăng từ mức 34,4% lên 37,8%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC có kế hoạch tăng vốn điều lệ trong năm nay thông qua phát hành cổ phiếu thưởng nói trên, theo đó sẽ tăng vốn điều lệ từ 240 tỷ đồng lên 288 tỷ đồng từ giữa năm nay. EPS điều chỉnh pha loãng 2013 sẽ là 8.620đ, giảm 10%. Theo mức giá hôm nay, VSC hiện đang giao dịch với P\/E dự phóng là 4,9 lần và P\/B dự phóng là 1,5 lần. VSC có tình hình tài chính tốt với tỷ lệ nợ\/tổng tài sản chỉ ở mức 0,25 lần và tỷ lệ cổ tức\/giá tương đối cao. Tuy nhiên, trước mắt thì công ty dường như không có kế hoạch tăng công suất và do đó khó giữ được tiềm năng tăng trưởng dài hạn. Theo kế hoạch đầu tư mở rộng năm 2013, chúng tôi thấy rằng công ty có vẻ chú trọng vào việc mở rộng bãi container để giảm sự phụ thuộc vào bên thứ ba. Vì vậy, cổ phiếu có nguy cơ mất đi khả năng tăng trưởng nếu công ty không có kế hoạch tăng công suất hoạt động kinh doanh cảng. Cổ phiếu VSC hiện có tỷ lệ cổ tức\/giá khá tốt và định giá thấp theo quan điểm của chúng tôi.&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:05:54.0Z"),
+  "deleted": false,
+  "description": "VSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "bao-cao-ngan-ve-cong-ty-co-phan-tap-doan-container-viet-nam-vsc-5216d192471dee840a000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
+  "updated": ISODate("2013-08-23T03:05:54.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d281471dee840a000005"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Gần đây đã có bài báo viết về việc SJS (đánh giá Kém khả quan) phải đối mặt với nguy cơ hủy niêm yết trong năm sau nếu công ty tiếp tục lỗ trong năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Hiện tại, chúng tôi cho rằng khả năng hủy niêm yết là khá thấp.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi cho rằng trong năm 2013, SJS sẽ lãi nhẹ nhờ ghi nhận lợi nhuận từ đất tại dự án Nam An Khánh đã bán trong năm 2011.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Và để có thể ghi nhận lợi nhuận, SJS chỉ cần hoàn thành phần nền móng của phần diện tích đã bán.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Tuy nhiên, công ty vẫn nợ nhiều với khoảng 1 nghìn tỷ đồng nợ gốc và lãi đến hạn thanh toán trong năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi cho rằng SJS sẽ xin giãn nợ để không phải gán nợ khoảng 10ha đất.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Dựa trên dự báo của chúng tôi, giá cổ phiếu SJS thấp hơn 30% so với NAV; P\/E dự phóng là 42,4 lần và P\/B 1,3 lần.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi tiếp tục duy trì đánh giá Kém khả quan.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về CTCP Đầu tư Phát triển Đô thị và KCN Sông Đà_Mã chứng khoán: SJS – HSX (cập nhật ngày 11\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=173987&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;173987&lt;\/a&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:09:53.0Z"),
+  "deleted": false,
+  "description": "Gần đây đã có bài báo viết về việc SJS (đánh giá Kém khả quan) phải đối mặt với nguy cơ hủy niêm yết trong năm sau nếu công [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "slug": "bao-cao-ngan-ve-cong-ty-cong-ty-co-phan-dau-tu-phat-trien-do-thi-va-khu-cong-nghiep-song-da-sjs-5216d281471dee840a000004",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d281471dee840a000005\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Đầu tư Phát triển Đô thị và Khu Công nghiệp Sông Đà (SJS)",
+  "updated": ISODate("2013-08-23T03:09:53.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
