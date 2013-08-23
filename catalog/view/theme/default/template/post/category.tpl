@@ -1,246 +1,48 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/post/common/post_block_ex1.tpl' %}
+{% use '@template/default/template/post/common/post_block_ex2.tpl' %}
+{% use '@template/default/template/post/common/post_comment.tpl' %}
+
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/post-category.css" rel="stylesheet" media="screen" />
+    <link href="catalog/view/theme/default/stylesheet/home.css" rel="stylesheet" media="screen" />
+    {{ block('post_common_post_comment_style') }}
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="has-header-fixed">	 
-	<div class="group-header header-fixed">
-		<div class="row-fluid">
-			<div class="span11">
-				<h1 class="header-title">
-					Category
-				</h1>
-			</div>
-			<div class="span1">
-				<a href="#" class="btn-next">
-					<i class="icon-chevron-right"></i>
-				</a>
-			</div>						
-		</div>
-	</div>
-	<div id="y-main-content" class="has-horizontal">		
-        <div class="post feed">
-            <div class="row-fluid post_header">
-                <div class="span2 avatar_thumb">
-                    <a href="#">
-                        <img src="image/no_user_avatar.png" alt="user">
-                    </a>
-                </div>
-                <div class="span10">
-                    <div class="row-fluid">
-                        <div class="span8 post_user">
-                            <a href="#">Username</a>
-                        </div>
-                        <div class="span4 post_time">
-                            <i class="icon-time icon-2x"></i>1 minute ago
-                        </div>
-                    </div>
-                    <h6 class="post_title">
-                        Title of this post</h6>
-                </div>
+<div id="y-content" class="no-header-fixed">
+    <div id="y-main-content" class="has-horizontal has-block">
+        {% for posts in all_posts %}
+        {% set style = random([1, 2]) %}
+        {% if posts|length > 0 %}
+        <div class="feed-block">
+            <div class="block-header">
+                <a class="fl" href="{{ category.href|raw }}">{{ category.name }}  <i class="icon-angle-right"></i></a>
             </div>
-            <div class="post_body">
-                Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
-                HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, khi phá ngưỡng này sẽ có hỗ trợ thấp
-                hơn là vùng 56.7
-            </div>
-            <div class="row-fluid post_footer">
-                <div class="span10 post_action">
-                    <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
-                    <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
-                </div>
-                <div class="span2">
-                    <a href="#"><i class="icon-eye-open medium-icon"></i>More</a>
-                </div>
-            </div>
-        </div>        
-        <div class="post feed">
-            <div class="row-fluid post_header">
-                <div class="span2 avatar_thumb">
-                    <a href="#">
-                        <img src="image/no_user_avatar.png" alt="user">
-                    </a>
-                </div>
-                <div class="span10">
-                    <div class="row-fluid">
-                        <div class="span8 post_user">
-                            <a href="#">Username</a>
-                        </div>
-                        <div class="span4 post_time">
-                            <i class="icon-time icon-2x"></i>1 minute ago
-                        </div>
-                    </div>
-                    <h6 class="post_title">
-                        Title of this post</h6>
-                </div>
-            </div>
-            <div class="post_body">
-                Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
-                HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, khi phá ngưỡng này sẽ có hỗ trợ thấp
-                hơn là vùng 56.7
-            </div>
-            <div class="row-fluid post_footer">
-                <div class="span10 post_action">
-                    <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
-                    <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
-                </div>
-                <div class="span2">
-                    <a href="#"><i class="icon-eye-open medium-icon"></i>More</a>
-                </div>
-            </div>
+            {% if style == 1 %}
+                {{ block('post_common_post_block_ex1') }}
+            {% else %}
+                {{ block('post_common_post_block_ex2') }}
+            {% endif %}
         </div>
-        <div class="post feed">
-            <div class="row-fluid post_header">
-                <div class="span2 avatar_thumb">
-                    <a href="#">
-                        <img src="image/no_user_avatar.png" alt="user">
-                    </a>
-                </div>
-                <div class="span10">
-                    <div class="row-fluid">
-                        <div class="span8 post_user">
-                            <a href="#">Username</a>
-                        </div>
-                        <div class="span4 post_time">
-                            <i class="icon-time icon-2x"></i>1 minute ago
-                        </div>
-                    </div>
-                    <h6 class="post_title">
-                        Title of this post</h6>
-                </div>
-            </div>
-            <div class="post_body">
-                Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
-                HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, khi phá ngưỡng này sẽ có hỗ trợ thấp
-                hơn là vùng 56.7
-            </div>
-            <div class="row-fluid post_footer">
-                <div class="span10 post_action">
-                    <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
-                    <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
-                </div>
-                <div class="span2">
-                    <a href="#"><i class="icon-eye-open medium-icon"></i>More</a>
-                </div>
-            </div>
-        </div>
-        <div class="post feed">
-            <div class="row-fluid post_header">
-                <div class="span2 avatar_thumb">
-                    <a href="#">
-                        <img src="image/no_user_avatar.png" alt="user">
-                    </a>
-                </div>
-                <div class="span10">
-                    <div class="row-fluid">
-                        <div class="span8 post_user">
-                            <a href="#">Username</a>
-                        </div>
-                        <div class="span4 post_time">
-                            <i class="icon-time icon-2x"></i>1 minute ago
-                        </div>
-                    </div>
-                    <h6 class="post_title">
-                        Title of this post</h6>
-                </div>
-            </div>
-            <div class="post_body">
-                Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
-                HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, khi phá ngưỡng này sẽ có hỗ trợ thấp
-                hơn là vùng 56.7
-            </div>
-            <div class="row-fluid post_footer">
-                <div class="span10 post_action">
-                    <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
-                    <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
-                </div>
-                <div class="span2">
-                    <a href="#"><i class="icon-eye-open medium-icon"></i>More</a>
-                </div>
-            </div>
-        </div>
-        <div class="post feed">
-            <div class="row-fluid post_header">
-                <div class="span2 avatar_thumb">
-                    <a href="#">
-                        <img src="image/no_user_avatar.png" alt="user">
-                    </a>
-                </div>
-                <div class="span10">
-                    <div class="row-fluid">
-                        <div class="span8 post_user">
-                            <a href="#">Username</a>
-                        </div>
-                        <div class="span4 post_time">
-                            <i class="icon-time icon-2x"></i>1 minute ago
-                        </div>
-                    </div>
-                    <h6 class="post_title">
-                        Title of this post</h6>
-                </div>
-            </div>
-            <div class="post_body">
-                Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
-                HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, khi phá ngưỡng này sẽ có hỗ trợ thấp
-                hơn là vùng 56.7
-            </div>
-            <div class="row-fluid post_footer">
-                <div class="span10 post_action">
-                    <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
-                    <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
-                </div>
-                <div class="span2">
-                    <a href="#"><i class="icon-eye-open medium-icon"></i>More</a>
-                </div>
-            </div>
-        </div>
-        <div class="post feed">
-            <div class="row-fluid post_header">
-                <div class="span2 avatar_thumb">
-                    <a href="#">
-                        <img src="image/no_user_avatar.png" alt="user">
-                    </a>
-                </div>
-                <div class="span10">
-                    <div class="row-fluid">
-                        <div class="span8 post_user">
-                            <a href="#">Username</a>
-                        </div>
-                        <div class="span4 post_time">
-                            <i class="icon-time icon-2x"></i>1 minute ago
-                        </div>
-                    </div>
-                    <h6 class="post_title">
-                        Title of this post</h6>
-                </div>
-            </div>
-            <div class="post_body">
-                Vùng hỗ trợ cho HSX gần nhất là vùng 460-466, tiêu cực hơn là vùng 440 -446; còn
-                HNX có hỗ trợ gần nhất là vùng 57.5- 57.8, khi phá ngưỡng này sẽ có hỗ trợ thấp
-                hơn là vùng 56.7
-            </div>
-            <div class="row-fluid post_footer">
-                <div class="span10 post_action">
-                    <a href="#"><i class="icon-thumbs-up medium-icon"></i>Like</a> 
-                    <a href="#"><i class="icon-comments medium-icon"> </i>Comment</a>
-                </div>
-                <div class="span2">
-                    <a href="#"><i class="icon-eye-open medium-icon"></i>More</a>
-                </div>
-            </div>
-        </div>
-	</div>
+        {% endif %}
+        {% endfor %}
+    </div>
 </div>
+{{ block('post_common_post_comment') }}
 {% endblock %}
 
 {% block javascript %}
+{{ block('post_common_post_comment_javascript') }}
+<script type="text/javascript" src="catalog/view/javascript/libs/modernizr.custom.js"></script>
+<script type="text/javascript" src="catalog/view/javascript/libs/jquery.hoverdir.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		$('#y-content').makeScroll();	
-	});
+    $(function() {
+        $('.feed-block .feed').each( function() {
+            $(this).hoverdir(); 
+        });
+    });
 </script>
 {% endblock %}

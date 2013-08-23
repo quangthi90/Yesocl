@@ -16,7 +16,6 @@ class ControllerBranchCategories extends Controller {
 		$this->load->model( 'branch/category' );
 		$this->load->model( 'branch/post' );
 		$this->load->model('tool/image');
-		$this->load->model('tool/cache');
 
 		$branch = $this->model_branch_branch->getBranch( array('branch_slug' => $this->request->get['branch_slug']) );
 
