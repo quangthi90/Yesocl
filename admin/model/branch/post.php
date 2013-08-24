@@ -109,12 +109,17 @@ class ModelBranchPost extends Doctrine {
 			'category_id' => $data['category_id'],
 			'limit' => 6
 		));
-		$this->model_tool_cache->updateLastCategoryPosts( 
-			$this->config->get('post')['type']['branch'], 
-			$branch->getId(), 
-			$category->getId(), 
-			$posts 
-		);
+
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$branch->getId(), 
+					$category->getId(), 
+					$posts 
+				);
+			}
+		}
 		
 		return $post;
 	}
@@ -225,12 +230,16 @@ class ModelBranchPost extends Doctrine {
 			'limit' => 6
 		));
 		
-		$this->model_tool_cache->updateLastCategoryPosts( 
-			$this->config->get('post')['type']['branch'], 
-			$branch->getId(), 
-			$category->getId(), 
-			$posts 
-		);
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$branch->getId(), 
+					$category->getId(), 
+					$posts 
+				);
+			}
+		}
 		
 		return true;
 	}
