@@ -12,14 +12,24 @@ class ControllerPostDetail extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 
-		if ( isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug']) ){
-			$post_slug = $this->request->get['post_slug'];
-		}else{
-			print("not found post!"); exit;
+		if ( empty($this->request->get['post_type']) ){
+			print("post type is empty!"); exit;
 		}
 
-		$this->load->model('company/post');
-		$post = $this->model_company_post->getPostBySlug( $post_slug );
+		if ( empty($this->request->get['post_slug']) ){
+			print("post slug is empty!"); exit;
+		}
+
+		switch ($this->request->get['post_type']) {
+			case 'branch':
+				$this->load->model('branch/post');
+				$post = $this->model_branch_post->getPost( $this->request->get );
+				break;
+			
+			default:
+				$post = null;
+				break;
+		}
 
 		if ( !$post ){
 			print("not found post!"); exit;

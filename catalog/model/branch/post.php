@@ -27,8 +27,12 @@ class ModelBranchPost extends Doctrine {
 		return $results;
 	}
 
-	public function getPost( $post_id ){
-
+	public function getPost( $data = array() ){
+		if ( !empty($data['post_id']) ){
+			return $this->dm->getRepository('Document\Branch\Post')->find( $data['post_id'] );
+		}else{
+			return $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		}
 	}
 
 	public function getLastPostByCategory( $branch_id, $category_id ){

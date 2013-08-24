@@ -70,13 +70,13 @@ class ControllerBranchCategories extends Controller {
 				// $posts[$i]['avatar'] = $avatar;
 				
 				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
+				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
 				$posts[$i]['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
 			}
 			$this->data['all_posts'][$category->getId()] = $posts;
 		}
 
-		$this->data['date_format'] = $this->language->get('date_format_short');
+		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
 		

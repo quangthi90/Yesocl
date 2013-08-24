@@ -104,22 +104,6 @@ class ModelBranchCategory extends Doctrine {
 		$category->setParent( $parent );
 
 		$this->dm->flush();
-
-		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-		$this->load->model('branch/post');
-
-		$posts = $this->model_branch_post->getPosts( array(
-			'branch_id' => $category->getBranch()->getId(),
-			'category_id' => $id,
-			'limit' => 6
-		));
-		$this->model_tool_cache->updateLastCategoryPosts( 
-			$this->config->get('post')['type']['branch'], 
-			$category->getBranch()->getId(), 
-			$id, 
-			$posts 
-		);
 	}
 
 	public function deleteCategory( $data = array() ) {
