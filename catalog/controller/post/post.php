@@ -70,7 +70,8 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        $user = $this->model_tool_cache->getObject( $comment['user_slug'], $this->config->get('common')['type']['user'] );
+        $this->load->model('user/user');
+        $user = $this->model_user_user->getUser( $comment['user_slug'] );
 
         $this->load->model('tool/image');
 
