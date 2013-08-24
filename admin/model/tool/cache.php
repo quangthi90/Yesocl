@@ -1,32 +1,6 @@
 <?php
 class ModelToolCache extends Model {
 	/**
-	 * Create cache for Post of
-	 *	- Branch
-	 *	- Group
-	 *	- User
-	 * 2013/07/26
-	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
-	 *	- object Post
-	 *	- string type post ['branch', 'group', 'user']
-	 *	- string type Slug
-	 * @return: Array Object Post
-	 */
-	public function setPost($post, $type_post = 'branch', $type_slug) {
-		$post_data = $post->formatToCache();
-
-		$folder_link = $this->config->get($type_post)['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $type_slug . '/' . $folder_name . '/' . $post->getSlug() . '/';
-
-		$file_name = $this->config->get('common')['default']['main_object_post'];
-		$this->cache->set( $file_name, $post_data, $path );
-		
-		return $post_data;
-	}
-
-	/**
 	 * Set last post of
 	 *	- Branch
 	 *	- Group
@@ -57,6 +31,68 @@ class ModelToolCache extends Model {
 	}
 
 	/**
+	 * Set last post of
+	 *	- Branch
+	 *	- Group
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string type object
+	 *	- string object ID
+	 *	- string category ID
+	 *	- array object posts
+	 * @return: Array Object Post
+	 */
+	public function updateLastCategoryPosts($type_object = 'branch', $object_id, $category_id, $posts) {
+		$fd_ob_link = $this->config->get($type_object)['default']['cache_link'];
+		$fd_category_name = $this->config->get('common')['default']['category'];
+		
+		$path = $fd_ob_link . $object_id . '/' . $fd_category_name . '/' . $category_id . '/';
+		
+		$this->load->model('tool/image');
+		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);
+		
+		foreach ( $posts as $post ){
+			$this->setPost( $post, $type_object, $object_id, $category_id );
+		}
+
+		return true;
+	}
+
+	/**
+	 * Create cache for Post of
+	 *	- Branch
+	 *	- Group
+	 *	- User
+	 * 2013/07/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Post
+	 *	- string type object ['branch', 'group', 'user']
+	 *	- string object ID
+	 *	- string category ID
+	 * @return: Array Object Post
+	 */
+	public function setPost($post, $type_object = 'branch', $object_id, $category_id = '') {
+		$post_data = $post->formatToCache();
+
+		$fd_ob_link = $this->config->get($type_object)['default']['cache_link'];
+		$fd_post_name = $this->config->get('post')['default']['cache_folder'];
+		$fd_category_name = $this->config->get('common')['default']['category'];
+		
+		$path = $fd_ob_link . $object_id . '/';
+		if ( $category_id != '' ){
+			$path .= $fd_category_name . '/' . $category_id . '/';
+		}
+		$path .= $fd_post_name . '/' . $post->getId() . '/';
+		
+		$file_name = $this->config->get('common')['default']['main_object_post'];
+		$this->cache->set( $file_name, $post_data, $path );
+		
+		return $post_data;
+	}
+
+	/**
 	 * Get post of
 	 *	- Branch
 	 *	- Group
@@ -68,12 +104,19 @@ class ModelToolCache extends Model {
 	 *	- string Post Slug
 	 *	- string type post ['branch', 'group', 'user']
 	 *	- string Type Slug
+	 *	- string category slug
 	 * @return: Array Object Post
 	 */
-	public function getPost($post_slug, $type_post, $type_slug){
-		$folder_link = $this->config->get($type_post)['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $type_slug . '/' . $folder_name . '/' . $post_slug . '/';
+	public function getPost($post_slug, $type_object, $object_slug, $category_slug = ''){
+		$fd_ob_link = $this->config->get($type_object)['default']['cache_link'];
+		$fd_post_name = $this->config->get('post')['default']['cache_folder'];
+		$fd_category_name = $this->config->get('common')['default']['category'];
+		
+		$path = $fd_ob_link . $object_slug . '/';
+		if ( $category_slug != '' ){
+			$path .= $fd_category_name . '/' . $category_slug . '/';
+		}
+		$path .= $fd_post_name . '/' . $post_slug . '/';
 
 		$file_name = $this->config->get('common')['default']['main_object_post'];
 		return $this->cache->get($file_name, $path);
@@ -88,10 +131,16 @@ class ModelToolCache extends Model {
 	 *	- string type post ['branch', 'group', 'user']
 	 *	- string Type Slug
 	 */
-	public function deletePost($post_slug, $type_post, $type_slug){
-		$folder_link = $this->config->get($type_post)['default']['cache_link'];
-		$folder_name = $this->config->get('post')['default']['cache_folder'];
-		$path = $folder_link . $type_slug . '/' . $folder_name . '/' . $post_slug . '/';
+	public function deletePost($post_slug, $type_post, $type_slug, $category_slug = ''){
+		$fd_ob_link = $this->config->get($type_object)['default']['cache_link'];
+		$fd_post_name = $this->config->get('post')['default']['cache_folder'];
+		$fd_category_name = $this->config->get('common')['default']['category'];
+		
+		$path = $fd_ob_link . $object_slug . '/';
+		if ( $category_slug != '' ){
+			$path .= $fd_category_name . '/' . $category_slug . '/';
+		}
+		$path .= $fd_post_name . '/' . $post_slug . '/';
 		
 		$this->load->model('tool/image');
 		$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);

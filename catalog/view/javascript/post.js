@@ -71,6 +71,8 @@
 				$('.comment-form').each(function(){
 					new CommentForm($(this));
 				});
+
+				jQuery(".timeago").timeago();
 			}
 
 			showCommentForCurrentPost($button.parents('.post'));
@@ -155,6 +157,8 @@
 				that.$el.parent().find('.counter').html( parseInt(that.$el.parent().find('.counter').html()) + 1);
 				$('.counter' + that.$el.attr('data-post-id')).html( parseInt(that.$el.parent().find('.counter').html()) );
 				$('.open-comment[data-post-id=\'' + that.$el.attr('data-post-id') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
+
+				jQuery(".timeago").timeago();
 			}
 		});
 	};

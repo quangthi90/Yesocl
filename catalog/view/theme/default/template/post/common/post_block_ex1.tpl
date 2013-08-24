@@ -7,14 +7,14 @@
 				<div class="feed post post_in_block">
 					<div class="post_header">
 						<h4 class="post_title">
-							<a href="#">{{ post.title }}</a>
+							<a href="{{ post.href_post|raw }}">{{ post.title }}</a>
 						</h4>
 						<div class="post_meta">
 							<span class="post_time fl">
-								<i class="icon-calendar"></i> {{ post.created|date(date_format) }}
+								<i class="icon-calendar"></i> <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 							</span>
 							<span class="post_cm fr">
-								<i class="icon-comments-alt"></i>  10
+								<i class="icon-comments-alt"></i> {{ post.comment_count }}
 							</span>
 							<span class="post_like fr">
 								<i class="icon-thumbs-up"></i> 100
@@ -42,7 +42,7 @@
 								>
 									<i class="icon-comments medium-icon"></i>
 								</a>
-								<a href="#" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
+								<a href="{{ post.href_post|raw }}" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
 							</div>													
 						</div>						
 					</div>

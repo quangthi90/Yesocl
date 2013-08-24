@@ -325,7 +325,7 @@ class ControllerBranchCategory extends Controller {
 			$branch_id = 0;
 		}
 
-		if ( $branch_id != 0 ){
+		/*if ( $branch_id != 0 ){
 			$category_id = isset($category) ? $category->getId() : 0;
 			$this->load->model('branch/category');
 			$parents = $this->model_branch_category->getAllCategories( array('branch_id' => $this->data['branch_id']) );
@@ -338,7 +338,7 @@ class ControllerBranchCategory extends Controller {
 					'name' => $parent->getName()
 				);
 			}
-		}
+		}*/
 
 		$this->data['get_categories_link'] = html_entity_decode( $this->url->link('branch/category/getCategories', 'token=' . $this->session->data['token'], 'SSL') );
 

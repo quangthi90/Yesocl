@@ -13,12 +13,6 @@ class ControllerBranchPost extends Controller {
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		if ( !isset( $this->request->get['branch_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
-
-			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
-		}
-
 		$this->load->model( 'branch/post' );
 
 		$this->getList();
@@ -33,23 +27,17 @@ class ControllerBranchPost extends Controller {
 
 		$this->document->setTitle( $this->language->get( 'heading_title' ) );
 
-		if ( !isset( $this->request->get['branch_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_branch' );
-
-			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
-		}
-
 		$this->load->model( 'branch/post' );
 
-		// page
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
 
-		$url = '';
-		$url .= 'page=' . $page;
+		if ( !empty($this->request->get['page']) ) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
@@ -63,11 +51,11 @@ class ControllerBranchPost extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );
 			}
 
-			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
+		$this->data['action'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		$this->getForm();
 	}
@@ -89,20 +77,14 @@ class ControllerBranchPost extends Controller {
 
 		$this->load->model( 'branch/post' );
 
-		// page
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
 
-		$url = '';
-		$url .= 'page=' . $page;
-
-		if ( !isset( $this->request->get['post_id'] ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_post' );
-
-			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
+		if ( !empty($this->request->get['page']) ) {
+			$url .= '&page=' . $this->request->get['page'];
 		}
 
 		// request
@@ -119,11 +101,15 @@ class ControllerBranchPost extends Controller {
 				$this->session->data['error_warning'] = $this->language->get( 'error_edit' );
 			}
 
-			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
+		}
+
+		if ( !empty($this->request->get['post_id']) ) {
+			$url .= '&post_id=' . $this->request->get['post_id'];
 		}
 
 		// action
-		$this->data['action'] = $this->url->link( 'branch/post/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'] . '&post_id=' . $this->request->get['post_id'], 'SSL' );
+		$this->data['action'] = $this->url->link( 'branch/post/update', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
 		$this->getForm();
 	}
@@ -135,21 +121,25 @@ class ControllerBranchPost extends Controller {
 
 		$this->load->language( 'branch/post' );
 		
-		if ( !isset($this->request->get['branch_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_branch');
-			
-			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
-		}
-		
 		$this->load->model( 'branch/post' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
+		if ( !empty($this->request->get['page']) ) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
+
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_branch_post->deletePost( $this->request->post );
+			$this->model_branch_post->deletePost( $this->request->get['branch_id'], $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'success' );
-			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		$this->getList( );
@@ -175,15 +165,19 @@ class ControllerBranchPost extends Controller {
 			$this->data['error_warning'] = '';
 		}
 
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
 		// page
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
-		}
-
-		$url = '';
-		$url .= 'page=' . $page;
+		}		
+		$url .= '&page=' . $page;
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -198,7 +192,7 @@ class ControllerBranchPost extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -225,26 +219,18 @@ class ControllerBranchPost extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 
 		// link
-		$this->data['insert'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'branch/post/delete', 'token=' . $this->session->data['token'] . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['delete'] = $this->url->link( 'branch/post/delete', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		$this->data['back'] = $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' );
 
-		//branch
-		$this->load->model( 'branch/branch' );
-		$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
-		if ( empty( $branch ) ) {
-			$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
-
-			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
-		}
-
 		$data = array(
+			'branch_id' => $this->request->get['branch_id'],
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit,
-			);
+		);
 
 		// post
-		$posts = $branch->getPosts();
+		$posts = $this->model_branch_post->getPosts( $data );
 
 		$this->data['posts'] = array();
 		foreach ($posts as $post) {
@@ -252,13 +238,13 @@ class ControllerBranchPost extends Controller {
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_comment' ),
-				'href' => $this->url->link( 'branch/comment', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId() . '&post_id=' . $post->getId(), 'SSL' ),
+				'href' => $this->url->link( 'branch/comment', 'token=' . $this->session->data['token'] . '&post_id=' . $post->getId() . $url, 'SSL' ),
 				'icon' => 'icon-list',
 				);
 
 			$action[] = array(
 				'text' => $this->language->get( 'text_edit' ),
-				'href' => $this->url->link( 'branch/post/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId() . '&post_id=' . $post->getId(), 'SSL' ),
+				'href' => $this->url->link( 'branch/post/update', 'token=' . $this->session->data['token'] . '&post_id=' . $post->getId() . $url, 'SSL' ),
 				'icon' => 'icon-edit',
 				);
 
@@ -274,13 +260,19 @@ class ControllerBranchPost extends Controller {
 			);
 		}
 
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
 		// pagination
 		$pagination = new Pagination();
 		$pagination->total = count( $posts );
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
-		$pagination->url = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&page={page}', 'SSL' );
+		$pagination->url = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
 
@@ -291,7 +283,7 @@ class ControllerBranchPost extends Controller {
 		$this->children = array(
 			'common/header',
 			'common/footer'
-			);
+		);
 
 		// render
 		$this->response->setOutput( $this->render() );
@@ -345,15 +337,16 @@ class ControllerBranchPost extends Controller {
 			$this->data['error_thumb'] = '';
 		}
 
-		// page
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
+		$url = '';
+
+		if ( !empty($this->request->get['branch_id']) ){
+			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
 
-		$url = '';
-		$url .= '&page=' . $page;
+		// page
+		if ( !empty($this->request->get['page']) ) {
+			$url .= '&page=' . $this->request->get['page'];
+		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -396,22 +389,16 @@ class ControllerBranchPost extends Controller {
 		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
 
 		// link
-		$this->data['cancel'] = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url . '&branch_id=' . $this->request->get['branch_id'], 'SSL' );
+		$this->data['cancel'] = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
+		
 		// image
 		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 
-		// branch
-		$this->load->model( 'branch/branch' );
-		$branch = $this->model_branch_branch->getbranch( $this->request->get['branch_id'] );
-
-		if ( empty( $branch ) ) {
-			$this->redirect( $this->url->link( 'branch/branch', 'token=' . $this->session->data['token'], 'SSL' ) );
-		}
-
 		if ( isset( $this->request->get['post_id'] ) ) {
-			$post = $branch->getPostById( $this->request->get['post_id'] );
-			if ( empty( $post ) ) {
+			$post = $this->model_branch_post->getPost( $this->request->get['post_id'] );
+
+			if ( empty($post) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
@@ -454,8 +441,16 @@ class ControllerBranchPost extends Controller {
 		}else {
 			$this->data['category_id'] = '';
 		}
+
+		$this->load->model( 'branch/branch' );
+		$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
 		
-		$categories = $branch->getCategories();
+		if ( $branch ){
+			$categories = $branch->getCategories();
+		}else{
+			$categories = array();
+		}
+
 		$this->data['categories'] = array();
 		foreach ( $categories as $category ) {
 			$this->data['categories'][] = array(
@@ -518,7 +513,7 @@ class ControllerBranchPost extends Controller {
 			$this->error['error_title'] = $this->language->get( 'error_title' );
 		}
 
-		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 10 || strlen( trim( $this->request->post['description'] ) ) > 150 ) {
+		if ( !isset( $this->request->post['description']) || strlen( trim( $this->request->post['description'] ) ) < 10 || strlen( trim( $this->request->post['description'] ) ) > 256 ) {
 			$this->error['error_description'] = $this->language->get( 'error_description' );
 		}
 

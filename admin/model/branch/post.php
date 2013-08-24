@@ -83,11 +83,11 @@ class ModelBranchPost extends Doctrine {
 		$post->setDescription( $data['description'] );
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
+		$post->setBranch( $branch );
 
-		$branch->addPost( $post );
-
+		$this->dm->persist( $post );
 		$this->dm->flush();
-
+		
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
@@ -100,10 +100,26 @@ class ModelBranchPost extends Doctrine {
 		}
 
 		$this->dm->flush();
-
-		//-- Update 60 last posts
+		
+		//-- Update 6 last posts
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
+
+		$posts = $this->getPosts( array(
+			'branch_id' => $branch_id,
+			'category_id' => $data['category_id'],
+			'limit' => 6
+		));
+
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$branch->getId(), 
+					$category->getId(), 
+					$posts 
+				);
+			}
+		}
 		
 		return $post;
 	}
@@ -130,12 +146,6 @@ class ModelBranchPost extends Doctrine {
 	 * 	- false: not success
 	 */
 	public function editPost( $post_id, $data = array(), $thumb = array() ) {
-		// Branch is required
-		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array( 'posts.id' => $post_id ) );
-		if ( empty( $branch ) ) {
-			return false;
-		}
-
 		// Title is required
 		if ( !isset( $data['title'] ) || empty( $data['title'] ) ) {
 			return false;
@@ -176,7 +186,7 @@ class ModelBranchPost extends Doctrine {
 			$data['status'] = false;
 		}
 
-		$post = $branch->getPostById( $post_id );
+		$post = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
 
 		if ( !$post ){
 			return false;
@@ -196,6 +206,8 @@ class ModelBranchPost extends Doctrine {
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
 
+		$branch = $post->getBranch();
+
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
@@ -209,40 +221,130 @@ class ModelBranchPost extends Doctrine {
 
 		$this->dm->flush();
 
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['branch'], $branch, $post->getSlug() );
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+
+		$posts = $this->getPosts( array(
+			'branch_id' => $branch_id,
+			'category_id' => $data['category_id'],
+			'limit' => 6
+		));
+		
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$branch->getId(), 
+					$category->getId(), 
+					$posts 
+				);
+			}
+		}
 		
 		return true;
 	}
 
-	public function deletePost( $data = array() ) {
-		if ( isset($data['id']) ) {
-			if ( count($data['id']) > 0 ){
-				$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBy( array('posts.id' => $data['id'][0]) );
-			}
-			
+	/**
+	 * Delete Post by ID
+	 * 2013/07/24
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- array string Post ID
+	 * @return: boolean
+	 */
+	public function deletePost( $branch_id, $data = array() ) {
+		$category_ids = array();
+
+		if ( isset($data['id']) ) {			
 			foreach ( $data['id'] as $id ) {
-				$post = $branch->getPostById( $id );
+				$post = $this->dm->getRepository('Document\Branch\Post')->find( $id );
 				if ( !empty( $post ) ) {
+					$category_id = $post->getCategory()->getId();
+					$category_ids[$category_id] = $category_id;
+
 					$folder_link = $this->config->get('branch')['default']['image_link'];
 					$folder_name = $this->config->get('post')['default']['image_folder'];
-					$path = DIR_IMAGE . $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+					$path = DIR_IMAGE . $folder_link . $branch_id . '/' . $folder_name . '/' . $post->getId();
 					
 					$this->load->model('tool/image');
 					$this->model_tool_image->deleteDirectoryImage( $path );
-
-					// remove cache
-					$this->load->model('tool/cache');
-					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['branch'], $branch->getSlug() );
-
-					$branch->getPosts()->removeElement( $post );
+					
+					$this->dm->remove( $post );
 				}
 			}
 		}
 		
 		$this->dm->flush();
 
+		foreach ( $category_ids as $category_id ) {
+			//-- Update 6 last posts
+			$this->load->model('tool/cache');
+
+			$posts = $this->getPosts( array(
+				'branch_id' => $branch_id,
+				'category_id' => $category_id,
+				'limit' => 6
+			));
+			$this->model_tool_cache->updateLastCategoryPosts( 
+				$this->config->get('post')['type']['branch'], 
+				$branch_id, 
+				$category_id, 
+				$posts 
+			);
+		}
+
 		return true;
+	}
+
+	/**
+	 * Get Posts
+	 * 2013/08/22
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: array data
+	 *	- int limit
+	 *	- int start
+	 *	- string Branch ID
+	 * @return: array object Posts
+	 */
+	public function getPosts( $data = array() ){
+		if ( empty($data['limit']) ){
+			$data['limit'] = 10;
+		}
+
+		if ( empty($data['start']) ){
+			$data['start'] = 0;
+		}
+
+		$query = array();
+		if ( !empty($data['branch_id']) ){
+			$query['branch.id'] = $data['branch_id'];
+		}
+
+		if ( !empty($data['category_id']) ){
+			$query['category.id'] = $data['category_id'];
+		}
+
+		$results = $this->dm->getRepository('Document\Branch\Post')
+			->findBy( $query )
+			->skip( $data['start'] )
+			->limit( $data['limit'] )
+			->sort( array('created' => -1) );
+
+		return $results;
+	}
+
+	/**
+	 * Get Post by ID
+	 * 2013/08/22
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 * @return: array object Posts
+	 */
+	public function getPost( $post_id ){
+		$result = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
+
+		return $result;
 	}
 }
 ?>

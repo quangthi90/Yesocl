@@ -39,5 +39,16 @@ class ModelToolImage extends Model {
 	public function getGavatar( $email, $size = 100 ){
 		return "http://www.gravatar.com/avatar/" . md5( $email ) . "?s=" . $size;
 	}
+
+	public function deleteDirectoryImage( $dirname ) {
+  		if(is_dir($dirname)){
+    		$files = glob( $dirname . '*', GLOB_MARK );
+    		foreach( $files as $file )
+      			$this->deleteDirectoryImage( $file );
+    		rmdir( $dirname );
+  		}else{
+    		unlink( $dirname );
+    	}
+	}
 }
 ?>

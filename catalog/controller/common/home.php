@@ -21,14 +21,22 @@ class ControllerCommonHome extends Controller {
 		$branchs = $this->model_branch_branch->getAllBranchs();
 
 		$this->data['all_posts'] = array();
-		$this->data['branchs'] = $branchs;
+		$this->data['branchs'] = array();
 
-		foreach ( $branchs as $branch_slug => $branch ) {
+		foreach ( $branchs as $key => $branch ) {
+			$branch = $branch->formatToCache();
+			$branch_slug = $branch['slug'];
+
 			$posts = $this->model_branch_post->getPosts(array(
-				'branch_slug' => $branch['slug']
+				'branch_id' => $branch['id'],
+				'limit' => 6
 			));
+
+			$branch['href_categories'] = $this->url->link('branch/categories', 'branch_slug=' . $branch_slug, 'SSL');
 			
 			foreach ($posts as $i => $post) {
+				$post = $post->formatToCache();
+
 				// avatar
 				/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
 					$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
@@ -45,18 +53,20 @@ class ControllerCommonHome extends Controller {
 					$image = null;
 				}
 
-				$posts[$i]['image'] = $image;
+				$post['image'] = $image;
 				// $posts[$i]['avatar'] = $avatar;
 				
-				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
-				$posts[$i]['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
+				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
+				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
+				$post['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
+
+				$this->data['all_posts'][$branch_slug][] = $post;
 			}
 
-			$this->data['all_posts'][$branch_slug] = $posts;
+			$this->data['branchs'][] = $branch;
 		}
 
-		$this->data['date_format'] = $this->language->get('date_format_short');
+		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
 		

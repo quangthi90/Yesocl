@@ -171,3 +171,7 @@ $(document).ready(function() {
 	new FlexibleElement($(this));
 	new HorizontalBlock($('.has-horizontal')); 	
 });
+
+$(document).ready(function() {
+	jQuery(".timeago").timeago();
+});
