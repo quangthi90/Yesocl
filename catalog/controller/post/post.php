@@ -88,7 +88,7 @@ class ControllerPostPost extends Controller {
 
         $comment['avatar'] = $avatar;
         $comment['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
-        $comment['created'] = $comment['created']->format( $this->language->get('date_format_long') );
+        $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
@@ -146,12 +146,12 @@ class ControllerPostPost extends Controller {
                 break;
         }
 
-        $this->load->model('account/customer');
+        $this->load->model('user/user');
         $this->load->model('tool/image');
 
         foreach ( $comments as $key => $comment ) {
-            $user = $this->model_tool_cache->getObject( $comment['user_slug'], $this->config->get('common')['type']['user'] );
-
+            $user = $this->model_user_user->getUser( $comment['user_slug'] );
+            
             if ( $user && $user['avatar'] ){
                 $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
             }elseif ( $user && $user['email'] ){
@@ -168,7 +168,7 @@ class ControllerPostPost extends Controller {
 
             $comments[$key]['avatar'] = $avatar;
             $comments[$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
-            $comments[$key]['created'] = $comment['created']->format( $this->language->get('date_format_long') );
+            $comments[$key]['created'] = $comment['created']->format( $this->language->get('date_format_full') );
         }
 
         return $this->response->setOutput(json_encode(array(

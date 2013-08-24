@@ -66,7 +66,7 @@ class ControllerCommonHome extends Controller {
 			$this->data['branchs'][] = $branch;
 		}
 
-		$this->data['date_format'] = $this->language->get('date_format_short');
+		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
 		

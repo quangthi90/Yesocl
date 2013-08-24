@@ -21,7 +21,7 @@
 						</div>
 						<div class="span10">
 							<div class="comment-info">
-								<a href="{{ comment.href_user|raw }}">{{ comment.author}}</a> - <span class="comment-time">{{ comment.created|date('h:i A d/m/Y') }}</span>
+								<a href="{{ comment.href_user|raw }}">{{ comment.author}}</a> - <span class="comment-time"><d class="timeago" title="{{ comment.created|date('c') }}"></d></span>
 							</div>
 							<div class="comment-content">
 								{{ comment.content|raw }}
@@ -66,7 +66,7 @@
 					</div>
 					<div class="span10">
 						<div class="comment-info">
-							<a href="${href_user}">${author}</a> - <span class="comment-time">${created}</span>
+							<a href="${href_user}">${author}</a> - <span class="comment-time"><d class="timeago" title="${created}"></d></span>
 						</div>
 						<div class="comment-content">
 							{{html content}}

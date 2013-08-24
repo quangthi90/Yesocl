@@ -36,6 +36,7 @@
     	<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap.min.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.tmpl.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.tmplPlus.js"></script>
+		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.timeago.js"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="catalog/view/javascript/yes.js"></script>
 		<script type="text/javascript" src="catalog/view/javascript/common.js"></script>

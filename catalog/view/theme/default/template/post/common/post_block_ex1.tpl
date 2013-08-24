@@ -11,7 +11,7 @@
 						</h4>
 						<div class="post_meta">
 							<span class="post_time fl">
-								<i class="icon-calendar"></i> {{ post.created|date(date_format) }}
+								<i class="icon-calendar"></i> <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 							</span>
 							<span class="post_cm fr">
 								<i class="icon-comments-alt"></i> {{ post.comment_count }}
