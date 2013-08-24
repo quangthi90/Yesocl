@@ -56,7 +56,7 @@ class ControllerBranchCategory extends Controller {
 			// $post['avatar'] = $avatar;
 			
 			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'], 'SSL');
+			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
 			$post['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 			$list_posts[] = $post;
