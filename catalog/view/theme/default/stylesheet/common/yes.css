@@ -848,11 +848,12 @@ label.in-line{
   border: none;
 }
 
-.sidebar-controls .nav-list > .active > a > i,
-.nav-list > .active > a:hover > i, 
-.nav-list > .active > a:focus > i,
-.sidebar-controls .nav > li > a:hover > i, 
-.nav > li > a:focus > i{    
+.sidebar-controls .nav-list > li > a:hover,
+.sidebar-controls .nav-list > li > a:focus,
+.sidebar-controls .nav-list > li > a:active {
+  color: #fff;
+  background-color: #009B77;
+  border: none;
 }
 
 /*FORM*/
@@ -1447,4 +1448,21 @@ div[data-role="editor-toolbar"] {
 .btn-toolbar .btn-info {
   background: transparent;
   text-shadow: 0px 0px 0px transparent;
+}
+
+/*TOOLTIP*/
+.tooltip-inner {
+  background-color: #009B77;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: #009B77;
+}
+.tooltip.right .tooltip-arrow {
+  border-top-color: #009B77;
+}
+.tooltip.left .tooltip-arrow {
+  border-top-color: #009B77;
+}
+.tooltip.bottom .tooltip-arrow {
+  border-top-color: #009B77;
 }

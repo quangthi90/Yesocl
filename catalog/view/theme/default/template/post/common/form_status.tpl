@@ -10,7 +10,7 @@
 					<div class="span8 post_new_control">
 						<a href="#" title="Insert images" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" name="img-attach" class="img-attach" data-role="magic-overlay" data-target="#insert-new-img" />
+							<input type="file" data-no-uniform="true" name="img-attach" class="img-attach" data-role="magic-overlay" data-target="#insert-new-img" title="Choose image to upload" />
 						</a>
 						<a href="#" title="Advance post" id="post_new_adv">
 							<i class="icon-external-link-sign icon-2x"></i>

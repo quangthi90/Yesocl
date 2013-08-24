@@ -7,7 +7,6 @@
 {% block title %}{{ user_info.username }}{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/home.css" rel="stylesheet" media="screen" />
     {{ block('post_common_post_comment_style') }}
 {% endblock %}
 
