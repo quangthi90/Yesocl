@@ -126,6 +126,7 @@ class ModelBranchPost extends Doctrine {
 		$data = array(
 			'post_id' => $post->getId(),
 			'type' => $type,
+			'type_id' => $branch->getId(),
 			'view' => 0,
 			'created' => $post->getCreated()
 		);

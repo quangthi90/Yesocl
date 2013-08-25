@@ -19,6 +19,9 @@ Class Post {
 	/** @MongoDB\String */
 	private $type;
 
+	/** @MongoDB\String */
+	private $typeId;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -53,5 +56,13 @@ Class Post {
 
 	public function getType(){
 		return $this->type;
+	}
+
+	public function setTypeId( $type_id ){
+		$this->typeId = $type_id;
+	}
+
+	public function getTypeId(){
+		return $this->typeId;
 	}
 }

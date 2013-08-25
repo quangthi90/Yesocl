@@ -98,6 +98,42 @@ class ModelToolCache extends Model {
 	}
 
 	/**
+	 * Create cache for Cache Post
+	 * 2013/08/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- object Post
+	 * @return: Array Object Post
+	 */
+	public function setCachePost($post) {
+		$post_data = $post->formatToCache();
+
+		$path = $this->config->get('post')['default']['cache_link'];
+		
+		$file_name = $post->getId();
+
+		$this->cache->set( $file_name, $post_data, $path );
+		
+		return $post_data;
+	}
+
+	/**
+	 * Get cache post
+	 * 2013/08/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 * @return: Array Object Post
+	 */
+	public function getCachePost($post_id){
+		$path = $this->config->get('post')['default']['cache_link'];
+		
+		$file_name = $post['id'];
+		
+		return $this->cache->get($file_name, $path);
+	}
+
+	/**
 	 * Create cache for Post of
 	 *	- Branch
 	 *	- Group

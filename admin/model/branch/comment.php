@@ -83,6 +83,7 @@ class ModelBranchComment extends Doctrine {
 		$data = array(
 			'post_id' => $post->getId(),
 			'type' => $type,
+			'type_id' => $post->getBranch()->getId(),
 			'view' => 0,
 			'created' => $comment->getCreated()
 		);

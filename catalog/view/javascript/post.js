@@ -96,11 +96,11 @@
 
 		this.$el		= $el;
 		this.$content	= $el.find('textarea');
-		this.post_slug	= $el.data('post-slug');
-		this.post_type	= $el.data('post-type');
-		this.type_slug	= $el.data('type-slug');
+		this.post_slug	= $el.attr('data-post-slug');
+		this.post_type	= $el.attr('data-post-type');
+		this.type_slug	= $el.attr('data-type-slug');
 		this.url		= $el.data('url');
-
+		console.log(this.post_slug);
 		this.$comment_btn	= $el.find('.btn-comment');
 
 		this.attachEvents();

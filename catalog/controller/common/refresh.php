@@ -15,57 +15,58 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->load->model( 'branch/branch' );
-		$this->load->model( 'branch/post' );
+		$this->load->model( 'cache/post' );
 		$this->load->model('tool/image');
 
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$branchs = $this->model_branch_branch->getAllBranchs()->toArray();
 
 		$this->data['all_posts'] = array();
-		$this->data['branchs'] = array();
 
-		foreach ( $branchs as $key => $branch ) {
-			$branch = $branch->formatToCache();
-			$branch_slug = $branch['slug'];
+		$branch_ids = array_keys($branchs);
 
-			$posts = $this->model_branch_post->getPosts(array(
-				'branch_id' => $branch['id'],
-				'limit' => 6
-			));
+		$posts = $this->model_cache_post->getPosts(array(
+			'sort' => 'created',
+			'type_ids' => $branch_ids,
+		));
 
-			$branch['href_categories'] = $this->url->link('branch/categories', 'branch_slug=' . $branch_slug, 'SSL');
-			
-			foreach ($posts as $i => $post) {
-				$post = $post->formatToCache();
+		$post_count = count($posts);
+		$count = 1;
+		$list_posts = array();
 
-				// avatar
-				/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
-					$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
-				}elseif ( isset($post['user']) && isset($post['user']['email']) ){
-	                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
-	            }else{
-					$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
-				}*/
+		foreach ($posts as $i => $post) {
+			// avatar
+			/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
+				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
+			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
+                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
+            }else{
+				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
+			}*/
 
-				// thumb
-				if ( isset($post['thumb']) && !empty($post['thumb']) ){
-					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
-				}else{
-					$image = null;
-				}
-
-				$post['image'] = $image;
-				// $posts[$i]['avatar'] = $avatar;
-				
-				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-				$post['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
-
-				$this->data['all_posts'][$branch_slug][] = $post;
+			// thumb
+			if ( isset($post['thumb']) && !empty($post['thumb']) ){
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+			}else{
+				$image = null;
 			}
 
-			$this->data['branchs'][] = $branch;
-		}
+			$post['image'] = $image;
+			// $post['avatar'] = $avatar;
+			
+			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
+			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
+			$post['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
+			$list_posts[] = $post;
+			
+			if ( $count % 6 == 0 || $count == $post_count ){
+				$this->data['all_posts'][] = $list_posts;
+				$list_posts = array();
+			}
+
+			$count++;
+		}
+		
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');

@@ -132,5 +132,64 @@ class ModelCachePost extends Doctrine {
 
 		return true;
 	}
+
+	/**
+	 * Get Last Posts
+	 * 2013/08/26
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: array data
+	 *	- array string type IDs
+	 *	- string order
+	 * @return: list array Object Posts
+	 */
+	public function getPosts( $data = array() ){
+		if ( empty($data['start']) ){
+			$data['start'] = 0;
+		}
+
+		if ( empty($data['limit']) ){
+			$data['limit'] = 20;
+		}
+
+		if ( empty($data['type_ids']) ){
+			return null;
+		}
+
+		if ( empty($data['sort']) ){
+			return null;
+		}
+
+		if ( empty($data['order']) ){
+			$data['order'] = -1;
+		}
+
+		$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy(array(
+			'typeId' => array('$in' => $data['type_ids'])
+		))
+			->skip( $data['start'] )
+			->limit( $data['limit'] )
+			->sort( array($data['sort'] => $data['order']) );
+
+		$posts = array();
+
+		$this->load->model('tool/cache');
+		foreach ( $cache_posts as $cache_post ) {
+			$post = $this->model_tool_cache->getCachePost( $cache_post->getPostId() );
+
+			if ( !$post ){
+				$type = $cache_post->getType();
+				$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
+				
+				if ( !$post ){exit;
+					continue;
+				}
+				$post = $this->model_tool_cache->setCachePost( $post );
+			}
+
+			$posts[] = $post;
+		}
+
+		return $posts;
+	}
 }
 ?>

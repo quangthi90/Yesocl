@@ -2,6 +2,7 @@
 
 $_['post']['default']['image_folder'] 		= 'post';
 $_['post']['default']['cache_folder'] 		= 'post';
+$_['post']['default']['cache_link'] 		= 'post';
 $_['post']['default']['avatar_name'] 		= 'avatar';
 
 $_['post']['type']['branch']				= 'branch';
