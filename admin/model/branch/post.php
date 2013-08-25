@@ -120,6 +120,16 @@ class ModelBranchPost extends Doctrine {
 				);
 			}
 		}
+
+		$type = $this->config->get('post')['cache']['branch'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'view' => 0,
+			'created' => $post->getCreated()
+		);
+		$this->model_cache_post->addPost( $data );
 		
 		return $post;
 	}
@@ -255,6 +265,11 @@ class ModelBranchPost extends Doctrine {
 	public function deletePost( $branch_id, $data = array() ) {
 		$category_ids = array();
 
+		$this->load->model('tool/image');
+		$this->load->model('cache/post');
+
+		$this->model_cache_post->deletePost( $data );
+
 		if ( isset($data['id']) ) {			
 			foreach ( $data['id'] as $id ) {
 				$post = $this->dm->getRepository('Document\Branch\Post')->find( $id );
@@ -266,7 +281,6 @@ class ModelBranchPost extends Doctrine {
 					$folder_name = $this->config->get('post')['default']['image_folder'];
 					$path = DIR_IMAGE . $folder_link . $branch_id . '/' . $folder_name . '/' . $post->getId();
 					
-					$this->load->model('tool/image');
 					$this->model_tool_image->deleteDirectoryImage( $path );
 					
 					$this->dm->remove( $post );
