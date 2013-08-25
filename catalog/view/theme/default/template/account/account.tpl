@@ -12,15 +12,24 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" class="has-horizontal">
-        {{ block('post_common_form_status') }}
-
-        {% for post in posts %}
-            {{ block('post_common_post_block') }}
-            {{ block('post_common_post_block') }}
-            {{ block('post_common_post_block') }}
-        {% endfor %}        
-        
+    <div id="y-main-content" class="has-horizontal account-mywall">
+        <div class="feed-block block-post-new">
+            <div class="block-header">
+                <a class="fl" href="#"> Post 
+                    <i class="icon-angle-right"></i>
+                </a>            
+            </div>
+            <div class="block-content">
+                <div class="column">
+                    {{ block('post_common_form_status') }}
+                    {{ block('post_common_post_block') }}
+                </div>
+                <div class="column">
+                    {{ block('post_common_post_block') }}
+                    {{ block('post_common_post_block') }}
+                </div>
+            </div>
+        </div>
         {{ block('post_common_post_comment') }}
     </div>
 </div>
