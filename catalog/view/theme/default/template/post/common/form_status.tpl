@@ -24,7 +24,7 @@
 		</div>
 	</form>		
 	<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 40px; left: 100px;background-color: #fff;display:none;">
-		<a href="#" class="b-close" title="Close"><i class="icon-remove"></i></a>
+		<a href="#" class="b-close"><i class="icon-remove"></i></a>
 		<div class="y-dlg">
 			<form autocomplete="off">
 				<div class="dlg-title">
@@ -55,8 +55,8 @@
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
-			    		<button type="reset" class="btn btn-success btn-reset">Reset</button>
-		                <button type="submit" class="btn btn-success">Post</button>
+			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
+		                <button type="submit" class="btn btn-yes">Post</button>
 		            </div>
 			    </div>
 			</form>			    
@@ -72,9 +72,8 @@
 	$('#post_new_adv').click(function() {
 		$('#post_advance').bPopup( 
 			{
-				follow: [false, false],
-				modalClose: false,
-				speed: 100,
+				follow: [false, false],				
+				speed: 300,
             	transition: 'slideDown',
             	modalColor : '#000',
             	opacity: '0.5'

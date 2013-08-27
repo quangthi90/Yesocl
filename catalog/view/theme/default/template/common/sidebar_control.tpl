@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper">
 	<div class="sidebar-border-right">
 		<div class="row-fluid logo sidebar-box" id="logo">
-			<a href="{{ action.home }}" title="Yesocl">
+			<a href="{{ action.home }}">
 				<img src="image/template/logo.png" />
 			</a>
 		</div>
@@ -31,24 +31,40 @@
 		<ul class="nav-list left-menu">
 			{% block sidebar_control %}
 		  	<li class="menu-item" id="home-menu">
-		  		<a href="{{ action.home }}" title="What's new"> 
+		  		<a href="{{ action.home }}">
 		  			<i class="icon-refresh"></i>
+		  			<span>What's new</span>
 		  		</a>
 		  	</li>
 		  	<li class="menu-item" id="follower-menu">
-		  		<a href="#" title="Follower's post"><i class="icon-umbrella"></i></a>
+		  		<a href="#">
+		  			<i class="icon-umbrella"></i>
+		  			<span>Follower</span>
+		  		</a>
 		  	</li>
 		  	<li class="menu-item" id="account-menu">
-		  		<a href="{{ action.account }}" title="My wall"><i class="icon-bookmark"></i></a>
+		  		<a href="{{ action.account }}">
+		  			<i class="icon-bookmark"></i>
+		  			<span>My wall</span>
+	  			</a>
 		  	</li>	
 		  	<li class="menu-item" id="edit-menu">
-		  		<a href="{{ action.profile }}" title="My Profile"><i class="icon-user-md"></i></a>
+		  		<a href="{{ action.profile }}">
+		  			<i class="icon-user-md"></i>
+		  			<span>My Profile</span>
+	  			</a>
 		  	</li>
 		  	<li class="menu-item" id="categories-menu">
-		  		<a href="{{ action.categories }}" title="Stock"><i class="icon-bar-chart"></i></a>
+		  		<a href="{{ action.categories }}">
+		  			<i class="icon-bar-chart"></i>
+		  			<span>Stock</span>
+	  			</a>
 		  	</li>
 		  	<li class="menu-item" id="tech-menu">
-		  		<a href="#" title="Technology"><i class="icon-certificate"></i></a>
+		  		<a href="#">
+		  			<i class="icon-certificate"></i>
+		  			<span>Technology</span>
+	  			</a>
 		  	</li>
 		  	{% endblock %}
 		</ul>		
