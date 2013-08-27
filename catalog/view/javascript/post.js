@@ -100,7 +100,6 @@
 		this.post_type	= $el.attr('data-post-type');
 		this.type_slug	= $el.attr('data-type-slug');
 		this.url		= $el.data('url');
-		console.log(this.post_slug);
 		this.$comment_btn	= $el.find('.btn-comment');
 
 		this.attachEvents();
@@ -119,6 +118,10 @@
 			if(that.validate() == false){
 				return false;
 			}
+
+			that.post_slug	= that.$el.attr('data-post-slug');
+			that.post_type	= that.$el.attr('data-post-type');
+			that.type_slug	= that.$el.attr('data-type-slug');
 
 			that.data = {
 				content 	: that.$content.val(),
