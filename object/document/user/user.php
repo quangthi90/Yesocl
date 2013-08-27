@@ -57,6 +57,9 @@ Class User {
 	/** @MongoDB\String */
 	private $avatar;
 
+	/** @MongoDB\Collection */
+	private $refreshIds = array();
+
 	/** @MongoDB\EmbedMany(targetDocument="Post") */
 	private $posts = array();
 
@@ -276,6 +279,18 @@ Class User {
 
 	public function getPosts(){
 		return $this->posts;
+	}
+
+	public function addRefreshId( $refreshId ){
+		$this->refreshIds[] = $refreshId;
+	}
+
+	public function setRefreshIds( $refreshIds ){
+		$this->refreshIds = $refreshIds;
+	}
+
+	public function getRefreshIds(){
+		return $this->refreshIds;
 	}
 
 	/**

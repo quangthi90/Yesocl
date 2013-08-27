@@ -4,8 +4,8 @@ class ControllerCommonSidebarControl extends Controller {
 		$this->load->model('tool/image');
 
 		$avatar = $this->customer->getAvatar();
-
-		if( !empty($avatar) && is_dir(DIR_IMAGE . $avatar) ){
+		
+		if( !empty($avatar) && file_exists(DIR_IMAGE . $avatar) ){
 			$avatar = $this->model_tool_image->resize( $avatar, 180, 180 );
 		}else{
 			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
@@ -18,6 +18,7 @@ class ControllerCommonSidebarControl extends Controller {
 		);
 
 		$this->data['action'] = array(
+			'refresh'		=> $this->url->link('common/refresh', '', 'SSL'),
 			'home' 			=> $this->url->link('common/home', '', 'SSL'),
 			'account' 		=> $this->url->link('account/account', '', 'SSL'),
 			'profile' 		=> $this->url->link('account/edit', '', 'SSL'),

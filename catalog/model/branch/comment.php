@@ -103,6 +103,17 @@ class ModelBranchComment extends Doctrine {
 			}
 		}
 
+		$type = $this->config->get('post')['cache']['branch'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'type_id' => $post->getBranch()->getId(),
+			'view' => 0,
+			'created' => $comment->getCreated()
+		);
+		$this->model_cache_post->editPost( $data );
+
 		return $comment->formatToCache();
 	}
 }

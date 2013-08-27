@@ -96,11 +96,10 @@
 
 		this.$el		= $el;
 		this.$content	= $el.find('textarea');
-		this.post_slug	= $el.data('post-slug');
-		this.post_type	= $el.data('post-type');
-		this.type_slug	= $el.data('type-slug');
+		this.post_slug	= $el.attr('data-post-slug');
+		this.post_type	= $el.attr('data-post-type');
+		this.type_slug	= $el.attr('data-type-slug');
 		this.url		= $el.data('url');
-
 		this.$comment_btn	= $el.find('.btn-comment');
 
 		this.attachEvents();
@@ -119,6 +118,10 @@
 			if(that.validate() == false){
 				return false;
 			}
+
+			that.post_slug	= that.$el.attr('data-post-slug');
+			that.post_type	= that.$el.attr('data-post-type');
+			that.type_slug	= that.$el.attr('data-type-slug');
 
 			that.data = {
 				content 	: that.$content.val(),
