@@ -22,7 +22,8 @@ class ModelBranchPost extends Doctrine {
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
 			->skip($data['start'])
-			->limit($data['limit']);
+			->limit($data['limit'])
+			->sort(array('created' => -1));
 
 		return $results;
 	}
