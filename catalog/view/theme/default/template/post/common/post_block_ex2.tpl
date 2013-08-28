@@ -14,7 +14,7 @@
 								<i class="icon-calendar"></i> <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 							</span>
 							<span class="post_cm fr">
-								<i class="icon-comments-alt"></i> {{ post.comment_count }}
+								<i class="icon-comments-alt"></i> <d>{{ post.comment_count }}</d>
 							</span>
 							<span class="post_like fr">
 								<i class="icon-thumbs-up"></i> 100

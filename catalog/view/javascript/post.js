@@ -160,8 +160,10 @@
 
 				var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
 				that.$el.parent().find('.counter').html( comment_count );
-				$('.counter' + that.$el.attr('data-post-slug')).html( comment_count );
-				$('.open-comment[data-post-slug=\'' + that.$el.attr('data-post-slug') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
+
+				var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent();
+				$curr_item.find('.open-comment').attr('data-comment-count', comment_count);
+				$curr_item.find('.post_header .post_cm d').html( comment_count );
 
 				jQuery(".timeago").timeago();
 			}
