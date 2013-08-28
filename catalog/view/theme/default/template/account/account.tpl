@@ -15,9 +15,12 @@
     <div id="y-main-content" class="has-horizontal account-mywall">
         <div class="feed-block block-post-new">
             <div class="block-header">
-                <a class="fl" href="#"> Post 
+                <a class="block-title fl" href="#">
+                    Post                    
+                </a>  
+                <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
-                </a>            
+                </a>           
             </div>
             <div class="block-content">
                 <div class="column">

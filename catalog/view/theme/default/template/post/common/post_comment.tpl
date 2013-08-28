@@ -38,18 +38,14 @@
 			</div>		
 			</div>	
 			<form class="y-comment-reply post post_new comment-form" data-post-slug="" data-url="{{ action.comment }}" data-post-type="" data-type-slug="">
-				<div class="row-fluid txt_editor">
+				<div class="txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>
-				<div class="row-fluid"> 
-					<div class="span8 post_new_control">
-						<a href="#" title="Chèn hình">
-							<i class="icon-camera-retro big-icon"></i>
-						</a>
-					</div>
-					<div class="span4 btn-wrapper">
-						<a href="#" class="btn btn-success btn-comment">Post</a>
-					</div>
+				<div class="comment-action"> 
+					<a class="fl comment-tool" href="#" title="Chèn hình">
+						<i class="icon-camera icon-2x"></i>
+					</a>
+					<a href="#" class="btn btn-yes fr">Post</a>					
 				</div>
 			</form>		
 		</div>			

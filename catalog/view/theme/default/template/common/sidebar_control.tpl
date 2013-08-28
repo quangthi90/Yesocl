@@ -29,19 +29,18 @@
 	</div>
 	<div class="sidebar-controls">
 		<ul class="nav-list left-menu">
-		  	<li class="nav-header">Post</li>
-		  	<li class="menu-item" id="refresh-menu">
-		  		<a href="{{ action.refresh }}"> 
-		  			<i class="icon-refresh"></i> 
-		  			<span>What's new</span>
-		  		</a>
-		  	</li>
 		  	<li class="menu-item" id="home-menu">
 		  		<a href="{{ action.home }}"> 
 		  			<i class="icon-home"></i> 
 		  			<span>Home feed</span>
 		  		</a>
 		  	</li>
+		  	<li class="menu-item" id="refresh-menu">
+		  		<a href="{{ action.refresh }}"> 
+		  			<i class="icon-refresh"></i> 
+		  			<span>What's new</span>
+		  		</a>
+		  	</li>		  	
 		  	<li class="menu-item" id="follower-menu">
 		  		<a href="#">
 		  			<i class="icon-umbrella"></i>

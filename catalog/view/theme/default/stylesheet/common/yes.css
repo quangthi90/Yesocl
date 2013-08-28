@@ -168,9 +168,8 @@ a {
   text-decoration: none;
 }
 
-a > i,
-i{
-  color: #bcc4c9;  
+a > i,i{
+  color: #858585;  
 }
 
 a:hover,
@@ -180,7 +179,7 @@ a:focus {
 
 a:hover > i,
 a:focus > i{
-  color: #66c666;
+  color: #108B55;
 }
 
 .btn {
@@ -767,7 +766,7 @@ label.in-line{
   background-color: #fff;
 }
 .post .post_overlay .post_action a:hover > i {
-  color: #6CB13C;
+  color: #108B55;
 }
 /*END POST_HOVER*/
 
@@ -845,7 +844,7 @@ label.in-line{
 
 .sidebar-controls .nav-list > li > a > i {
  color: #fff; 
- font-size: 22px;
+ font-size: 20px;
 }
 
 .sidebar-controls .nav-list > li > a > span {
@@ -987,7 +986,7 @@ label.in-line{
 
 /*Header of group*/
 .group-header {
-  border: 1px solid #6CB13C;
+  border: 1px solid #009A76;
   -webkit-box-shadow: 1px 1px 1px #ddd;
   -moz-box-shadow: 1px 1px 1px #ddd;
   box-shadow: 1px 1px 1px #ddd;
@@ -1016,7 +1015,7 @@ label.in-line{
 }
 
 .group-header .link-btn {
-  background-color: #6CB13C;
+  background-color: #009A76;
   text-transform: uppercase;
   font-size: 15px;
   font-weight: bold;
@@ -1306,15 +1305,20 @@ label.in-line{
   width: 100%;
   height: 100%;
 }
-
 .post-bigger .post_header .post_title {
   font-size: 26px;
   line-height: 30px;
 }
-
 .column-special .post-special .post_title {
   font-size: 21px;
   line-height: 26px;
+}
+.column-special .post-special .post_body {
+  font-size: 15px;
+  line-height: 22px;
+}
+.column-special .post-special .post_image {
+  width: 60%;
 }
 
 .column-special .post-weak .post_title{
@@ -1323,6 +1327,10 @@ label.in-line{
 }
 .column-special .post-weak .post_body {
   font-size: 12px;
+  line-height: 16px;
+}
+.column-special .post-weak .post_image {
+  display: none;
 }
 
 /*POPUP*/
