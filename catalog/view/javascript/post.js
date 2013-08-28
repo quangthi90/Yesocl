@@ -96,11 +96,10 @@
 
 		this.$el		= $el;
 		this.$content	= $el.find('textarea');
-		this.post_slug	= $el.data('post-slug');
-		this.post_type	= $el.data('post-type');
-		this.type_slug	= $el.data('type-slug');
+		this.post_slug	= $el.attr('data-post-slug');
+		this.post_type	= $el.attr('data-post-type');
+		this.type_slug	= $el.attr('data-type-slug');
 		this.url		= $el.data('url');
-
 		this.$comment_btn	= $el.find('.btn-comment');
 
 		this.attachEvents();
@@ -119,6 +118,10 @@
 			if(that.validate() == false){
 				return false;
 			}
+
+			that.post_slug	= that.$el.attr('data-post-slug');
+			that.post_type	= that.$el.attr('data-post-type');
+			that.type_slug	= that.$el.attr('data-type-slug');
 
 			that.data = {
 				content 	: that.$content.val(),
@@ -154,9 +157,11 @@
 				list_comment.animate({ 
 					scrollTop: $('#add-more-item').offset().top
 				}, 1000);
-				that.$el.parent().find('.counter').html( parseInt(that.$el.parent().find('.counter').html()) + 1);
-				$('.counter' + that.$el.attr('data-post-id')).html( parseInt(that.$el.parent().find('.counter').html()) );
-				$('.open-comment[data-post-id=\'' + that.$el.attr('data-post-id') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
+
+				var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
+				that.$el.parent().find('.counter').html( comment_count );
+				$('.counter' + that.$el.attr('data-post-slug')).html( comment_count );
+				$('.open-comment[data-post-slug=\'' + that.$el.attr('data-post-slug') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
 
 				jQuery(".timeago").timeago();
 			}

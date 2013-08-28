@@ -12,7 +12,7 @@
 				</div>
 			<div class="sidebar-user-name dropdown">
 				<a href="#">
-			      {{ user_info.username }}			      
+			      {{ user_info.username }}
 			    </a>
 			    <div class="user-can-do dropdown-toggle" data-toggle="dropdown">
 			    	<a href="#"><i class="icon-caret-down icon-2x"></i></a>
@@ -29,11 +29,17 @@
 	</div>
 	<div class="sidebar-controls">
 		<ul class="nav-list left-menu">
-			{% block sidebar_control %}
-		  	<li class="menu-item" id="home-menu">
-		  		<a href="{{ action.home }}">
-		  			<i class="icon-refresh"></i>
+		  	<li class="nav-header">Post</li>
+		  	<li class="menu-item" id="refresh-menu">
+		  		<a href="{{ action.refresh }}"> 
+		  			<i class="icon-refresh"></i> 
 		  			<span>What's new</span>
+		  		</a>
+		  	</li>
+		  	<li class="menu-item" id="home-menu">
+		  		<a href="{{ action.home }}"> 
+		  			<i class="icon-home"></i> 
+		  			<span>Home feed</span>
 		  		</a>
 		  	</li>
 		  	<li class="menu-item" id="follower-menu">
@@ -60,13 +66,6 @@
 		  			<span>Stock</span>
 	  			</a>
 		  	</li>
-		  	<li class="menu-item" id="tech-menu">
-		  		<a href="#">
-		  			<i class="icon-certificate"></i>
-		  			<span>Technology</span>
-	  			</a>
-		  	</li>
-		  	{% endblock %}
 		</ul>		
 	</div>
 	<div class="btn-container">
