@@ -177,5 +177,42 @@ class ControllerPostPost extends Controller {
             'comments' => empty($comments) ? array() : $comments
         )));
     }
+
+    public function like(){
+        $data = array();
+
+        if ( !empty($this->request->post['post_slug']) ){
+            $data['post_slug'] = $this->request->post['post_slug'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug empty'
+            )));
+        }
+
+        if ( !empty($this->request->post['post_type']) ){
+            $data['post_type'] = $this->request->post['post_type'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type empty'
+            )));
+        }
+
+        $data['likerId'] = $this->customer->getId();
+        
+        switch ($data['post_type']) {
+            case $this->config->get('post')['type']['branch']:
+                $this->load->model('branch/post');
+                $post = $this->model_branch_post->editPost( $data['post_slug'], $data );
+                break;
+            
+            default:
+                break;
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'like_count' => count($post->getLikerIds())
+        )));
+    }
 }
 ?>
