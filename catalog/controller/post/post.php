@@ -74,8 +74,8 @@ class ControllerPostPost extends Controller {
         $user = $this->model_user_user->getUser( $comment['user_slug'] );
 
         $this->load->model('tool/image');
-
-        if ( $user && $user['avatar'] && file_exists($user['avatar']) ){
+        
+        if ( $user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar']) ){
             $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
         }elseif ( $user && $user['email'] ){
             $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
@@ -153,7 +153,7 @@ class ControllerPostPost extends Controller {
         foreach ( $comments as $key => $comment ) {
             $user = $this->model_user_user->getUser( $comment['user_slug'] );
             
-            if ( $user && $user['avatar'] && file_exists($user['avatar']) ){
+            if ( $user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar']) ){
                 $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
             }elseif ( $user && $user['email'] ){
                 $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
