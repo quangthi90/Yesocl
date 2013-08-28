@@ -157,9 +157,11 @@
 				list_comment.animate({ 
 					scrollTop: $('#add-more-item').offset().top
 				}, 1000);
-				that.$el.parent().find('.counter').html( parseInt(that.$el.parent().find('.counter').html()) + 1);
-				$('.counter' + that.$el.attr('data-post-id')).html( parseInt(that.$el.parent().find('.counter').html()) );
-				$('.open-comment[data-post-id=\'' + that.$el.attr('data-post-id') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
+
+				var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
+				that.$el.parent().find('.counter').html( comment_count );
+				$('.counter' + that.$el.attr('data-post-slug')).html( comment_count );
+				$('.open-comment[data-post-slug=\'' + that.$el.attr('data-post-slug') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
 
 				jQuery(".timeago").timeago();
 			}
