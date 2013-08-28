@@ -32,12 +32,12 @@
 			{% block sidebar_control %}
 		  	<li class="nav-header">Post</li>
 		  	<li class="menu-item" id="refresh-menu">
-		  		<a href="{{ action.refresh }}"> 
+		  		<a href="{{ action.refresh|raw }}"> 
 		  			<i class="icon-refresh"></i> <span>What's new</span>
 		  		</a>
 		  	</li>
 		  	<li class="menu-item" id="home-menu">
-		  		<a href="{{ action.home }}"> 
+		  		<a href="{{ action.home|raw }}"> 
 		  			<i class="icon-home"></i> <span>Home feed</span>
 		  		</a>
 		  	</li>
@@ -47,15 +47,15 @@
 		  	<li class="divider"></li>
 		  	<li class="nav-header">Personal</li>
 		  	<li class="menu-item" id="account-menu">
-		  		<a href="{{ action.account }}"><i class="icon-bookmark"></i> <span> My wall </span></a>
+		  		<a href="{{ action.account|raw }}"><i class="icon-bookmark"></i> <span> My wall </span></a>
 		  	</li>	
 		  	<li class="menu-item" id="edit-menu">
-		  		<a href="{{ action.profile }}"><i class="icon-user-md"></i> <span>My Profile </span></a>
+		  		<a href="{{ action.profile|raw }}"><i class="icon-user-md"></i> <span>My Profile </span></a>
 		  	</li>
 		  	<li class="divider"></li>
 		  	<li class="nav-header">Groups</li>
 		  	<li class="menu-item" id="categories-menu">
-		  		<a href="{{ action.categories }}"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
+		  		<a href="{{ action.categories|raw }}"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
 		  	</li>
 		  	<li class="menu-item" id="tech-menu">
 		  		<a href="#"><i class="icon-certificate"></i> <span>Technology </span></a>
@@ -66,5 +66,8 @@
 	<div class="btn-container">
 		<a href="#" id="close-bottom-sidebar"><i class="icon-double-angle-up"></i></a>
 		<a href="#" id="open-bottom-sidebar"><i class="icon-double-angle-down"></i></a>
+	</div>
+	<div class="hidden common-link">
+		<input class="like-post" value="{{ action.like_post|raw }}" />
 	</div>
 </div>

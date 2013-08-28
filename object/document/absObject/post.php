@@ -52,6 +52,9 @@ Abstract Class Post {
 	/** @MongoDB\Boolean */
 	private $deleted;
 
+	/** @MongoDB\Collection */
+    private $likerIds;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -92,7 +95,8 @@ Abstract Class Post {
 			'slug'			=> $this->getSlug(),
 			'status'		=> $this->getStatus(),
 			'email'			=> $this->getEmail(),
-			'comment_count' => $this->getComments()->count()
+			'comment_count' => $this->getComments()->count(),
+			'like_count'	=> count($this->getLikerIds())
 		);
 
 		return $post_data;
@@ -213,5 +217,17 @@ Abstract Class Post {
 
 	public function getDeleted(){
 		return $this->deleted;
+	}
+
+	public function getLikerIds(){
+		return $this->likerIds;
+	}
+
+	public function addLikerId( $likerId ){
+		$this->likerIds[] = (string)$likerId;
+	}
+
+	public function setLikerIds( $likerIds ){
+		$this->likerIds = $likerIds;
 	}
 }
