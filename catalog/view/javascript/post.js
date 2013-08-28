@@ -4,6 +4,69 @@
 	var list_comment = $('#comment-box .y-box-content');
 	var page = 1;
 
+	function LikeBtn( $el ){
+		var that = this;
+		this.$el			= $el;
+		this.post_slug		= $el.data('post-slug');
+		this.post_type		= $el.data('post-type');
+		this.url			= $('.common-link .like-post').val();
+
+		this.attachEvents();
+	}
+
+	LikeBtn.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$el.click(function(e) {
+			if(that.$el.hasClass('disabled')) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.data = {
+				post_slug 	: that.post_slug,
+				post_type	: that.post_type
+			};
+
+			that.submit(that.$el);
+
+			return false;
+		});
+	};
+		
+	LikeBtn.prototype.submit = function($button){
+		var that = this;
+
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) { 
+			if(data.success == 'ok'){
+				var $curr_item = that.$el.parent().parent().parent().parent();
+				$curr_item.find('.post_meta .post_like d').html( data.like_count );
+			}
+		});
+	};
+		
+	LikeBtn.prototype.triggerProgress = function($el, promise)
+	{
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var f        = function() {
+			$spinner.remove();
+		};
+
+		$el.addClass('disabled').prepend($spinner);
+
+		promise.then(f, f);
+	};
+
 	function CommentBtn( $el ){
 		var that = this;
 		this.$el			= $el;
@@ -217,6 +280,10 @@
 	}
 
 	$(function(){
+		$('.post_action .like-post').each(function(){
+			new LikeBtn($(this));			
+		});
+
 		$('.open-comment').each(function(){
 			new CommentBtn($(this));			
 		});
