@@ -41,7 +41,7 @@
 									data-comment-count="{{ post.comment_count }}" 
 									data-post-slug="{{ post.slug }}" 
 									data-post-type="{{ post_type }}"
-									data-type-slug="{{ branch.slug }}"
+									data-type-slug="{{ post.branch_slug }}"
 								>
 									<i class="icon-comments medium-icon"></i>
 								</a>
