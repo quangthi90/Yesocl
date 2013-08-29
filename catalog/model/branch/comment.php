@@ -116,5 +116,25 @@ class ModelBranchComment extends Doctrine {
 
 		return $comment->formatToCache();
 	}
+
+	public function editComment( $comment_id, $data = array() ){
+		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+			'comments.id' => $comment_id
+		));
+
+		if ( !$post ){
+			return false;
+		}
+
+		$comment = $post->getCommentById( $comment_id );
+		
+		if ( !empty($data['likerId']) && !in_array($data['likerId'], $comment->getLikerIds()) ){
+			$comment->addLikerId( $data['likerId'] );
+		}
+
+		$this->dm->flush();
+
+		return $comment;
+	}
 }
 ?>

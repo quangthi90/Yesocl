@@ -42,12 +42,14 @@ Class Comment {
 	*/
 	public function formatToCache(){
 		$data_format = array(
+			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
-			'status'		=> $this->getStatus()
+			'status'		=> $this->getStatus(),
+			'like_count'	=> count($this->getLikerIds())
 		);
 
 		return $data_format;

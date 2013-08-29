@@ -167,6 +167,14 @@ class ControllerPostComment extends Controller {
     public function like(){
         $data = array();
 
+        if ( !empty($this->request->post['comment_id']) ){
+            $data['comment_id'] = $this->request->post['comment_id'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: comment id empty'
+            )));
+        }
+
         if ( !empty($this->request->post['post_slug']) ){
             $data['post_slug'] = $this->request->post['post_slug'];
         }else{
@@ -187,8 +195,8 @@ class ControllerPostComment extends Controller {
         
         switch ($data['post_type']) {
             case $this->config->get('post')['type']['branch']:
-                $this->load->model('branch/post');
-                $post = $this->model_branch_post->editPost( $data['post_slug'], $data );
+                $this->load->model('branch/comment');
+                $comment = $this->model_branch_comment->editComment( $data['comment_id'], $data );
                 break;
             
             default:
@@ -197,7 +205,7 @@ class ControllerPostComment extends Controller {
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'like_count' => count($post->getLikerIds())
+            'like_count' => count($comment->getLikerIds())
         )));
     }
 }
