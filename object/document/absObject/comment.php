@@ -31,6 +31,9 @@ Class Comment {
 	/** @MongoDB\Boolean */
 	private $deleted;
 
+	/** @MongoDB\Collection */
+    private $likerIds;
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
@@ -121,5 +124,17 @@ Class Comment {
 
 	public function getDeleted(){
 		return $this->deleted;
+	}
+
+	public function getLikerIds(){
+		return $this->likerIds;
+	}
+
+	public function addLikerId( $likerId ){
+		$this->likerIds[] = (string)$likerId;
+	}
+
+	public function setLikerIds( $likerIds ){
+		$this->likerIds = $likerIds;
 	}
 }
