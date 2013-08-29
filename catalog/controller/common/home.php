@@ -58,7 +58,7 @@ class ControllerCommonHome extends Controller {
 				
 				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
 				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-				$post['href_status'] = $this->url->link('post/post/getComments', 'type_slug=' . $branch_slug, 'SSL');
+				$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 				$this->data['all_posts'][$branch_slug][] = $post;
 			}
@@ -68,7 +68,7 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
+		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';

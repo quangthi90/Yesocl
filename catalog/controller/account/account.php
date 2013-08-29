@@ -51,7 +51,7 @@ class ControllerAccountAccount extends Controller {
 				'type'			=> 'company',
 				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
 				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
-				'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
+				'href_status'	=> $this->url->link('post/comment/getCommentByPost', '', 'SSL')
 			);
 			
 			// Limit 20 post each load company
@@ -73,7 +73,7 @@ class ControllerAccountAccount extends Controller {
 			'username'	=> $this->customer->getUsername()
 		);
 
-		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
+		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';

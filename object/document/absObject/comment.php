@@ -31,6 +31,9 @@ Class Comment {
 	/** @MongoDB\Boolean */
 	private $deleted;
 
+	/** @MongoDB\Collection */
+    private $likerIds;
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
@@ -39,12 +42,14 @@ Class Comment {
 	*/
 	public function formatToCache(){
 		$data_format = array(
+			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
-			'status'		=> $this->getStatus()
+			'status'		=> $this->getStatus(),
+			'like_count'	=> count($this->getLikerIds())
 		);
 
 		return $data_format;
@@ -121,5 +126,17 @@ Class Comment {
 
 	public function getDeleted(){
 		return $this->deleted;
+	}
+
+	public function getLikerIds(){
+		return $this->likerIds;
+	}
+
+	public function addLikerId( $likerId ){
+		$this->likerIds[] = (string)$likerId;
+	}
+
+	public function setLikerIds( $likerIds ){
+		$this->likerIds = $likerIds;
 	}
 }
