@@ -7,7 +7,7 @@
 				<div class="feed post post_in_block">
 					<div class="post_header">
 						<h4 class="post_title">
-							<a href="{{ post.href_post|raw }}">{{ post.title }}</a>
+							<a href="#">{{ post.title }}</a>
 						</h4>
 						<div class="post_meta">
 							<span class="post_time fl">
