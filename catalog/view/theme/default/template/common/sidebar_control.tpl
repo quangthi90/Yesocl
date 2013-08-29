@@ -69,5 +69,6 @@
 	</div>
 	<div class="hidden common-link">
 		<input class="like-post" value="{{ action.like_post|raw }}" />
+		<input class="like-comment" value="{{ action.like_comment|raw }}" />
 	</div>
 </div>

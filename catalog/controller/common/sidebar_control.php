@@ -25,7 +25,8 @@ class ControllerCommonSidebarControl extends Controller {
 			'categories' 	=> $this->url->link('post/categories', '', 'SSL'),
 			'logout' 		=> $this->url->link('account/logout', '', 'SSL'),
 			'password' 		=> $this->url->link('account/password', '', 'SSL'),
-			'like_post'		=> $this->url->link('post/post/like', '', 'SSL')
+			'like_post'		=> $this->url->link('post/post/like', '', 'SSL'),
+			'like_comment'	=> $this->url->link('post/comment/like', '', 'SSL')
 		);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {
