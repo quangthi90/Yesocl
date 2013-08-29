@@ -14,10 +14,10 @@
 								<i class="icon-calendar"></i> <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 							</span>
 							<span class="post_cm fr">
-								<i class="icon-comments-alt"></i> {{ post.comment_count }}
+								<i class="icon-comments-alt"></i> <d>{{ post.comment_count }}</d>
 							</span>
 							<span class="post_like fr">
-								<i class="icon-thumbs-up"></i> 100
+								<i class="icon-thumbs-up"></i> <d>{{ post.like_count }}</d>
 							</span>
 						</div>
 					</div>
@@ -32,9 +32,13 @@
 						</div>
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
-								<a href="#" title="Like"><i class="icon-thumbs-up medium-icon"></i></a>
-								<a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
-									data-url="{{ post.href_status|raw }}" 
+								<a class="like-post" href="#" title="Like"
+									data-post-slug="{{ post.slug }}" 
+									data-post-type="{{ post_type }}"
+								><i class="icon-thumbs-up medium-icon"></i></a>
+								<a href="#" class="open-comment"
+									title="Comment ({{ post.comment_count }})"
+									data-url="{{ post.href_status|raw }}"
 									data-comment-count="{{ post.comment_count }}" 
 									data-post-slug="{{ post.slug }}" 
 									data-post-type="{{ post_type }}"

@@ -29,7 +29,7 @@
 						</div>
 					</div>
 					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
+						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (<d>{{ comment.like_count }}</d>)</a>
 					</div>
 				</div>
 				{% endfor %}
@@ -70,7 +70,9 @@
 					</div>
 				</div>
 				<div class="comment-footer">
-					<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (10)</a>
+					<a href="#" class="like-comment"
+						data-comment-id="${id}"
+					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
 				</div>
 			</div>
 		</div>

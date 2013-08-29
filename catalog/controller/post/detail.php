@@ -58,7 +58,7 @@ class ControllerPostDetail extends Controller {
 			'category'		=> $post->getCategory()->getName(),
 			'type'			=> 'company',
 			'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
-			'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
+			'href_status'	=> $this->url->link('post/comment/getComments', '', 'SSL')
 		);
 
 		$this->data['post']['comments'] = array();

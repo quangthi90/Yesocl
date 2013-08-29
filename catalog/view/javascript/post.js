@@ -4,8 +4,137 @@
 	var list_comment = $('#comment-box .y-box-content');
 	var page = 1;
 
+	function LikePostBtn( $el ){
+		var that = this;
+		this.$el			= $el;
+		this.post_slug		= $el.data('post-slug');
+		this.post_type		= $el.data('post-type');
+		this.url			= $('.common-link .like-post').val();
+
+		this.attachEvents();
+	}
+
+	LikePostBtn.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$el.click(function(e) {
+			if(that.$el.hasClass('disabled')) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.data = {
+				post_slug 	: that.post_slug,
+				post_type	: that.post_type
+			};
+
+			that.submit(that.$el);
+
+			return false;
+		});
+	};
+		
+	LikePostBtn.prototype.submit = function($button){
+		var that = this;
+
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) { 
+			if(data.success == 'ok'){
+				var $curr_item = that.$el.parent().parent().parent().parent();
+				$curr_item.find('.post_meta .post_like d').html( data.like_count );
+			}
+		});
+	};
+		
+	LikePostBtn.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var f        = function() {
+			$spinner.remove();
+		};
+
+		$el.addClass('disabled').prepend($spinner);
+
+		promise.then(f, f);
+	};
+
+	function LikeCommentBtn( $el ){
+		var that = this;
+
+		var $curr_item = $el.parent().parent().parent().parent().parent();
+
+		this.$el			= $el;
+		this.id				= $el.data('comment-id');
+		this.post_slug		= $curr_item.find('.comment-form').attr('data-post-slug');
+		this.post_type		= $curr_item.find('.comment-form').attr('data-post-type');
+		this.url			= $('.common-link .like-comment').val();
+
+		this.attachEvents();
+	}
+
+	LikeCommentBtn.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$el.click(function(e) {
+			if(that.$el.hasClass('disabled')) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.data = {
+				comment_id	: that.id,
+				post_slug 	: that.post_slug,
+				post_type	: that.post_type
+			};
+
+			that.submit(that.$el);
+
+			return false;
+		});
+	};
+		
+	LikeCommentBtn.prototype.submit = function($button){
+		var that = this;
+
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) { 
+			if(data.success == 'ok'){
+				that.$el.find('d').html( data.like_count );
+			}
+		});
+	};
+		
+	LikeCommentBtn.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var f        = function() {
+			$spinner.remove();
+		};
+
+		$el.addClass('disabled').prepend($spinner);
+
+		promise.then(f, f);
+	};
+
 	function CommentBtn( $el ){
 		var that = this;
+
 		this.$el			= $el;
 		this.comment_count	= $el.data('comment-count');
 		this.post_slug		= $el.data('post-slug');
@@ -70,6 +199,10 @@
 
 				$('.comment-form').each(function(){
 					new CommentForm($(this));
+				});
+
+				$('.comment-item .like-comment').each(function(){
+					new LikeCommentBtn($(this));			
 				});
 
 				jQuery(".timeago").timeago();
@@ -160,8 +293,14 @@
 
 				var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
 				that.$el.parent().find('.counter').html( comment_count );
-				$('.counter' + that.$el.attr('data-post-slug')).html( comment_count );
-				$('.open-comment[data-post-slug=\'' + that.$el.attr('data-post-slug') + '\']').attr('data-comment-count', parseInt(that.$el.parent().find('.counter').html()) )
+
+				var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent();
+				$curr_item.find('.open-comment').attr('data-comment-count', comment_count);
+				$curr_item.find('.post_header .post_cm d').html( comment_count );
+
+				$('.comment-item .like-comment').each(function(){
+					new LikeCommentBtn($(this));			
+				});
 
 				jQuery(".timeago").timeago();
 			}
@@ -215,6 +354,10 @@
 	}
 
 	$(function(){
+		$('.post_action .like-post').each(function(){
+			new LikePostBtn($(this));			
+		});
+
 		$('.open-comment').each(function(){
 			new CommentBtn($(this));			
 		});
