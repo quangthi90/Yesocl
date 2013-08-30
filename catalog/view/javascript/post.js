@@ -51,6 +51,7 @@
 			if(data.success == 'ok'){
 				var $curr_item = that.$el.parent().parent().parent().parent();
 				$curr_item.find('.post_meta .post_like d').html( data.like_count );
+				$button.find('d').html( data.like_count );
 			}
 		});
 	};
@@ -208,7 +209,9 @@
 				jQuery(".timeago").timeago();
 			}
 
-			showCommentForCurrentPost($button.parents('.post'));
+			if ( $button.parents('.post').attr('class') != undefined ){
+				showCommentForCurrentPost($button.parents('.post'));
+			}
 		});
 	};
 
@@ -295,7 +298,7 @@
 				that.$el.parent().find('.counter').html( comment_count );
 
 				var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent();
-				$curr_item.find('.open-comment').attr('data-comment-count', comment_count);
+				$curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
 				$curr_item.find('.post_header .post_cm d').html( comment_count );
 
 				$('.comment-item .like-comment').each(function(){

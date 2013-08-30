@@ -7,7 +7,7 @@
 				<div class="feed post post_in_block">
 					<div class="post_header">
 						<h4 class="post_title">
-							<a href="{{ post.href_post|raw }}">{{ post.title }}</a>
+							<a href="#">{{ post.title }}</a>
 						</h4>
 						<div class="post_meta">
 							<span class="post_time fl">
@@ -41,7 +41,7 @@
 									data-comment-count="{{ post.comment_count }}" 
 									data-post-slug="{{ post.slug }}" 
 									data-post-type="{{ post_type }}"
-									data-type-slug="{{ branch.slug }}"
+									data-type-slug="{{ post.branch_slug }}"
 								>
 									<i class="icon-comments medium-icon"></i>
 								</a>
