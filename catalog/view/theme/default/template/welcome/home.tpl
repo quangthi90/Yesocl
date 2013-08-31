@@ -82,7 +82,7 @@
 {% endblock %}
 
 {% block javascript %}
-	<script type="text/javascript" src="catalog/view/javascript/register.js"></script>
+	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
         	//Join clicked:

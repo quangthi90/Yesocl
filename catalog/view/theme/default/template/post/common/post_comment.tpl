@@ -1,5 +1,5 @@
 {% block post_common_post_comment_style %}
-<link href="catalog/view/theme/default/stylesheet/comment.css" rel="stylesheet" media="screen" />
+<link href="{{ asset_css('comment.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block post_common_post_comment %}
@@ -85,5 +85,5 @@
 {% endblock %}
 
 {% block post_common_post_comment_javascript %}
-<script type="text/javascript" src="catalog/view/javascript/post.js"></script>
+<script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
 {% endblock %}

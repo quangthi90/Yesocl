@@ -1,5 +1,5 @@
 <?php
 
-$_['routing']['BranchPage'] 	= 'branch/{slug}/';
+$_['routing']['BranchPage'] 	= 'branch/{branch_slug}/';
 
 ?>

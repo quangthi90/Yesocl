@@ -9,7 +9,7 @@
 {% block title %}Sign up for Yesocl{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/register.css" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css('register.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}

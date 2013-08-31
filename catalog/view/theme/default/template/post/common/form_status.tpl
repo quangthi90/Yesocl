@@ -64,9 +64,9 @@
 {% endblock %}
 
 {% block post_common_form_status_javascript %}
-<script type="text/javascript" src="catalog/view/javascript/libs/jquery.hotkeys.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap-wysiwyg.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/status.js"></script>
+<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-wysiwyg.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
 <script type="text/javascript">	    
 	$('#post_new_adv').click(function() {
 		$('#post_advance').bPopup( 

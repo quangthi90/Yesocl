@@ -8,12 +8,12 @@
 		<link rel="shortcut icon" href="image/template/favicon.png">
 		
 		<!-- Library css -->
-		<link href="catalog/view/theme/default/stylesheet/libs/bootstrap.css" rel="stylesheet" media="screen" />
-		<link href="catalog/view/theme/default/stylesheet/libs/bootstrap-responsive.min.css" rel="stylesheet" media="screen" />
-		<link href="catalog/view/theme/default/stylesheet/libs/fortAwesome/css/font-awesome.css" rel="stylesheet" media="screen" />
-		<link href="catalog/view/theme/default/stylesheet/libs/uniform.default.css" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/bootstrap.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/bootstrap-responsive.min.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/fortAwesome/css/font-awesome.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/uniform.default.css') }}" rel="stylesheet" media="screen" />
 		<!-- Common css -->
-		<link href="catalog/view/theme/default/stylesheet/common/yes.css" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('common/yes.css') }}" rel="stylesheet" media="screen" />
 
 		<!-- Custom css -->
 		{% block stylesheet %}
@@ -30,18 +30,18 @@
 			<div id="overlay"></div>
 		</div>
     	<!-- Library Script -->
-    	<script type="text/javascript" src="catalog/view/javascript/jquery/jquery-1.8.3.min.js"></script>
-    	<script type="text/javascript" src="catalog/view/javascript/libs/jquery.nicescroll.js"></script>
-    	<script type="text/javascript" src="catalog/view/javascript/libs/jquery.uniform.min.js"></script>
-    	<script type="text/javascript" src="catalog/view/javascript/libs/bootstrap.min.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.tmpl.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.tmplPlus.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.timeago.js"></script>
+    	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('libs/jquery.nicescroll.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('libs/jquery.uniform.min.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('libs/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.tmpl.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.tmplPlus.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.timeago.js') }}"></script>
 		<!-- Common Script -->
-		<script type="text/javascript" src="catalog/view/javascript/yes.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/common.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/post.js"></script>
-		<script type="text/javascript" src="catalog/view/javascript/libs/jquery.bpopup.min.js"></script>
+		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.bpopup.min.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}

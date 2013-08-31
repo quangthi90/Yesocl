@@ -24,11 +24,14 @@ class ExtensionLoader
     {
         return array(
             new Twig_SimpleFunction('path', array($this, 'path')),
+            new Twig_SimpleFunction('asset_css', array($this, 'assetCss')),
+            new Twig_SimpleFunction('asset_js', array($this, 'assetJs')),
         );
     }
 
     public function getFilters()
     {
+        return array();
     }
 
     public function path( $path, $params = array() ){
@@ -41,6 +44,14 @@ class ExtensionLoader
             }
         }
 
-        return implode('/', $parts);
+        return HTTPS_SERVER . implode('/', $parts);
+    }
+
+    public function assetCss( $path ){
+        return HTTP_CATALOG . 'catalog/view/theme/default/stylesheet/' . $path;
+    }
+
+    public function assetJs( $path ){
+        return HTTP_CATALOG . 'catalog/view/javascript/' . $path;
     }
 }

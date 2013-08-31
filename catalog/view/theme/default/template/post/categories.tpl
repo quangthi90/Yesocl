@@ -7,7 +7,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/home.css" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css('home.css') }}" rel="stylesheet" media="screen" />
     {{ block('post_common_post_comment_style') }}
 {% endblock %}
 
@@ -37,8 +37,8 @@
 
 {% block javascript %}
 {{ block('post_common_post_comment_javascript') }}
-<script type="text/javascript" src="catalog/view/javascript/libs/modernizr.custom.js"></script>
-<script type="text/javascript" src="catalog/view/javascript/libs/jquery.hoverdir.js"></script>
+<script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/jquery.hoverdir.js') }}"></script>
 <script type="text/javascript">
     $(function() {
         $('.feed-block .feed').each( function() {

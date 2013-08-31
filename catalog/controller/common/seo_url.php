@@ -1,74 +1,38 @@
 <?php
 class ControllerCommonSeoUrl extends Controller {
 	public function index() {
-		// Add rewrite to url class
-		if ($this->config->get('config_seo_url')) {
-			$this->url->addRewrite($this);
-		}
-		$route = 'branch/slug';
-		$parts = array_filter(explode('/', $route));
-		$_route = $this->request->get['_route_'];
-		$_parts = array_filter(explode('/', $_route));
-
-		// print("<pre>");
-		// print(var_dump($_parts));
-		// To do: create twig function
-		/*if ( count($parts) == count($_parts) ){
-			foreach ( $parts as $key => $part ) {
-				if ( $_parts[$key] != $part ){
-					if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
-						$param = substr(substr($part, 1), 0, -1);
-						print($param);
-					}else{
-						print("lele");
-					}
-				}
-			}
-		}*/
-		
-		// exit;
 		// Decode URL
-		if (isset($this->request->get['_route_'])) {
-			$parts = explode('/', $this->request->get['_route_']);
-			
-			foreach ($parts as $part) {
-				$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE keyword = '" . $this->db->escape($part) . "'");
-				
-				if ($query->num_rows) {
-					$url = explode('=', $query->row['query']);
-					
-					if ($url[0] == 'product_id') {
-						$this->request->get['product_id'] = $url[1];
-					}
-					
-					if ($url[0] == 'category_id') {
-						if (!isset($this->request->get['path'])) {
-							$this->request->get['path'] = $url[1];
-						} else {
-							$this->request->get['path'] .= '_' . $url[1];
+		if ( !empty($this->request->get['_route_']) ){
+			$_route = $this->request->get['_route_'];
+			$_parts = array_filter(explode('/', $_route));
+
+			$routings = $this->config->get('routing');
+			foreach ( $routings as $routing ) {
+				$request_gets = array();
+				$parts = array_filter(explode('/', $routing));
+				$is_url = false;
+				if ( count($parts) == count($_parts) ){
+					$is_url = true;
+					foreach ( $parts as $key => $part ) {
+						if ( $_parts[$key] != $part ){
+							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
+								$param = substr(substr($part, 1), 0, -1);
+								$request_gets[$param] = $_parts[$key];
+							}else{
+								$is_url = false;
+								break;
+							}
 						}
-					}	
-					
-					if ($url[0] == 'manufacturer_id') {
-						$this->request->get['manufacturer_id'] = $url[1];
 					}
-					
-					if ($url[0] == 'information_id') {
-						$this->request->get['information_id'] = $url[1];
-					}	
-				} else {
-					$this->request->get['route'] = 'error/not_found';	
+				}
+				if ( $is_url ){
+					$this->request->get = $request_gets;
+					break;
 				}
 			}
-			
-			if (isset($this->request->get['product_id'])) {
-				$this->request->get['route'] = 'product/product';
-			} elseif (isset($this->request->get['path'])) {
-				$this->request->get['route'] = 'product/category';
-			} elseif (isset($this->request->get['manufacturer_id'])) {
-				$this->request->get['route'] = 'product/manufacturer/product';
-			} elseif (isset($this->request->get['information_id'])) {
-				$this->request->get['route'] = 'information/information';
+
+			if (isset($this->request->get['branch_slug'])) {
+				$this->request->get['route'] = 'branch/categories';
 			}
 			
 			if (isset($this->request->get['route'])) {
