@@ -32,17 +32,6 @@ $registry = new Registry();
 $loader = new Loader($registry);
 $registry->set('load', $loader);
 
-// Twig
-require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
-Twig_Autoloader::register();
-$twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
-$twig_loader->addPath(DIR_TEMPLATE, 'template');	
-$twig = new Twig_Environment($twig_loader, array(
-    // 'cache' => DIR_SYSTEM . '/cache/twig',
-	));
-$twig->addExtension(new Twig_Extension_StringLoader());
-$registry->set('twig', $twig);
-
 // Config
 $config = new Config();
 $registry->set('config', $config);
@@ -82,10 +71,21 @@ $config->load( 'branch' );
 $config->load( 'common' );
 $config->load( 'routing' );
 
-/*if (!$store_query->num_rows) {
-	$config->set('config_url', HTTP_SERVER);
-	$config->set('config_ssl', HTTPS_SERVER);	
-}*/
+// Twig
+require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
+Twig_Autoloader::register();
+$twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
+$twig_loader->addPath(DIR_TEMPLATE, 'template');
+$twig = new Twig_Environment($twig_loader, array(
+    // 'cache' => DIR_SYSTEM . '/cache/twig',
+	));
+$twig->addExtension(new Twig_Extension_StringLoader());
+require_once DIR_APPLICATION . 'extension/loader.php';
+new ExtensionLoader( $twig, $config );
+// foreach ( $twig_loader->getFunctions() as $key => $function ) {
+// 	$twig->addFunction(new Twig_SimpleFunction('function_name', $function));
+// }
+$registry->set('twig', $twig);
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
