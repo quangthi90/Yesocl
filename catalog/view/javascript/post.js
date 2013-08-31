@@ -9,6 +9,8 @@
 		this.$el			= $el;
 		this.post_slug		= $el.data('post-slug');
 		this.post_type		= $el.data('post-type');
+		this.isLiked 		= $el.data('post-liked');
+		this.iconLike 		= $el.find('i');
 		this.url			= $('.common-link .like-post').val();
 
 		this.attachEvents();
@@ -36,7 +38,7 @@
 	};
 		
 	LikePostBtn.prototype.submit = function($button){
-		var that = this;
+		var that = this;		
 
 		var promise = $.ajax({
 			type: 'POST',
@@ -48,11 +50,25 @@
 		this.triggerProgress($button, promise);
 
 		promise.then(function(data) { 
-			if(data.success == 'ok'){
-				var $curr_item = that.$el.parents('.post');
+			if(data.success == 'ok'){ 
+				var $curr_item = that.$el.parents('.post'); 
 				$curr_item.find('.post_meta .post_like d').html( data.like_count );
 				$button.find('d').html( data.like_count );
+
+				var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
+				var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
+				//Unlike
+				if(that.isLiked == 1) {
+					that.iconLike.replaceWith($likeIcon);
+					that.iconLike = $likeIcon;
+					that.isLiked = 0;
+				}else { //Like
+					that.iconLike.replaceWith($unLikeIcon);
+					that.iconLike = $unLikeIcon;
+					that.isLiked = 1;
+				}
 			}
+
 		});		
 	};
 		
@@ -60,9 +76,10 @@
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
 		var f        = function() {
 			$spinner.remove();
+			$el.delay(1000).removeClass('disabled');
 		};
 
-		$el.addClass('disabled').prepend($spinner);
+		$el.addClass('disabled').parent().prepend($spinner);
 
 		promise.then(f, f);
 	};
@@ -77,7 +94,8 @@
 		this.post_slug		= $curr_item.find('.comment-form').attr('data-post-slug');
 		this.post_type		= $curr_item.find('.comment-form').attr('data-post-type');
 		this.url			= $('.common-link .like-comment').val();
-
+		this.isLiked 		= $el.data('comment-liked');
+		this.iconLike 		= $el.find('i');
 		this.attachEvents();
 	}
 
@@ -115,9 +133,22 @@
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { 
+		promise.then(function(data) { alert(data.success);
 			if(data.success == 'ok'){
-				that.$el.find('d').html( data.like_count );
+				that.$el.find('d').html( data.like_count ); 
+
+				var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
+				var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
+				//Unlike
+				if(that.isLiked == 1) {
+					that.iconLike.replaceWith($likeIcon);
+					that.iconLike = $likeIcon;
+					that.isLiked = 0;
+				}else { //Like
+					that.iconLike.replaceWith($unLikeIcon);
+					that.iconLike = $unLikeIcon;
+					that.isLiked = 1;
+				}
 			}
 		});
 	};
@@ -126,9 +157,10 @@
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
 		var f        = function() {
 			$spinner.remove();
+			$el.removeClass('disabled');
 		};
 
-		$el.addClass('disabled').prepend($spinner);
+		$el.addClass('disabled').parent().append($spinner);
 
 		promise.then(f, f);
 	};
@@ -222,7 +254,7 @@
 			$spinner.remove();
 		};
 
-		$el.addClass('disabled').prepend($spinner);
+		$el.addClass('disabled').parent().prepend($spinner);
 
 		promise.then(f, f);
 	};

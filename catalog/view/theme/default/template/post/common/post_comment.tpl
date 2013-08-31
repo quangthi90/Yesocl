@@ -21,7 +21,7 @@
 						</div>
 						<div class="span10">
 							<div class="comment-info">
-								<a href="{{ comment.href_user|raw }}">{{ comment.author}}</a> - <span class="comment-time"><d class="timeago" title="{{ comment.created|date('c') }}"></d></span>
+								<a href="{{ comment.href_user|raw }}">{{ comment.author}} </a> - <span class="comment-time"><d class="timeago" title="{{ comment.created|date('c') }}"></d></span>
 							</div>
 							<div class="comment-content">
 								{{ comment.content|raw }}
@@ -29,7 +29,8 @@
 						</div>
 					</div>
 					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like (<d>{{ comment.like_count }}</d>)</a>
+						<a href="#"><i class="icon-thumbs-up medium-icon"></i>(<d>{{ comment.like_count }}</d>)
+						</a>
 					</div>
 				</div>
 				{% endfor %}
@@ -70,9 +71,9 @@
 					</div>
 				</div>
 				<div class="comment-footer">
-					<a href="#" class="like-comment"
-						data-comment-id="${id}"
-					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
+					<a href="#" class="like-comment" data-comment-id="${id}" data-comment-liked="0">
+						<i class="icon-thumbs-up medium-icon"></i> (<d>${like_count}</d>)
+					</a>					
 				</div>
 			</div>
 		</div>
