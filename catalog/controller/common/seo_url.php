@@ -5,7 +5,28 @@ class ControllerCommonSeoUrl extends Controller {
 		if ($this->config->get('config_seo_url')) {
 			$this->url->addRewrite($this);
 		}
+		$route = 'branch/slug';
+		$parts = array_filter(explode('/', $route));
+		$_route = $this->request->get['_route_'];
+		$_parts = array_filter(explode('/', $_route));
+
+		// print("<pre>");
+		// print(var_dump($_parts));
+		// To do: create twig function
+		/*if ( count($parts) == count($_parts) ){
+			foreach ( $parts as $key => $part ) {
+				if ( $_parts[$key] != $part ){
+					if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
+						$param = substr(substr($part, 1), 0, -1);
+						print($param);
+					}else{
+						print("lele");
+					}
+				}
+			}
+		}*/
 		
+		// exit;
 		// Decode URL
 		if (isset($this->request->get['_route_'])) {
 			$parts = explode('/', $this->request->get['_route_']);

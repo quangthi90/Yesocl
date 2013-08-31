@@ -80,6 +80,7 @@ $config->load( 'post' );
 $config->load( 'comment' );
 $config->load( 'branch' );
 $config->load( 'common' );
+$config->load( 'routing' );
 
 /*if (!$store_query->num_rows) {
 	$config->set('config_url', HTTP_SERVER);
