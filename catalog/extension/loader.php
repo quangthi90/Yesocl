@@ -6,20 +6,12 @@ class ExtensionLoader
     public function __construct(Twig_Environment $twig, $config){
         $this->config = $config;
         // filters
-        // foreach ($extension->getFilters() as $name => $filter) {
-        //     if ($name instanceof Twig_SimpleFilter) {
-        //         $filter = $name;
-        //         $name = $filter->getName();
-        //     } elseif ($filter instanceof Twig_SimpleFilter) {
-        //         $name = $filter->getName();
-        //     }
-
-        //     $this->filters[$name] = $filter;
-        // }
+        foreach ($this->getFilters() as $filter) {
+            $twig->addFunction( $function );
+        }
 
         // functions
         foreach ($this->getFunctions() as $function) {
-            // print($function->getName()); exit;
             $twig->addFunction( $function );
         }
     }
@@ -39,8 +31,16 @@ class ExtensionLoader
     {
     }
 
-    public function path(  ){
-        return $this->config->get('routing')['BranchPage'];
-        // exit;
+    public function path( $path, $params = array() ){
+        $routing = $this->config->get('routing')[$path];
+        $parts = explode( '/', $routing );
+
+        foreach ( $params as $key => $param ) {
+            if ( $index = array_search("{".$key."}", $parts) !== false ){
+                $parts[$index] = $param;
+            }
+        }
+
+        return implode('/', $parts);
     }
 }

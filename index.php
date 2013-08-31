@@ -80,11 +80,9 @@ $twig = new Twig_Environment($twig_loader, array(
     // 'cache' => DIR_SYSTEM . '/cache/twig',
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
+// Custom twig extension
 require_once DIR_APPLICATION . 'extension/loader.php';
 new ExtensionLoader( $twig, $config );
-// foreach ( $twig_loader->getFunctions() as $key => $function ) {
-// 	$twig->addFunction(new Twig_SimpleFunction('function_name', $function));
-// }
 $registry->set('twig', $twig);
 
 // Url
