@@ -60,8 +60,7 @@ div.radio.active, div.checker.active{
   width: 16px;
 }
 
-.language-box a:hover .icon-yes-flag { 
-  
+.language-box a:hover .icon-yes-flag {   
 }
 
 .language-box .icon-lang-vn {
@@ -70,7 +69,6 @@ div.radio.active, div.checker.active{
 .language-box .icon-lang-eng {
   background: url('../../image/flags/eng.png');
 }
-
 /*end Format Yes Style*/
 /*OVERLOAD BOOTSTRAP*/
 

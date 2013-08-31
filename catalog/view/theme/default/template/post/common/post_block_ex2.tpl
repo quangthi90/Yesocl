@@ -32,10 +32,17 @@
 						</div>
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
-								<a class="like-post" href="#" title="Like"
+								{% set isUserLiked = random([0, 1]) %}
+								<a class="like-post" href="#" title="Like/Unlike"
 									data-post-slug="{{ post.slug }}" 
 									data-post-type="{{ post_type }}"
-								><i class="icon-thumbs-up medium-icon"></i></a>
+									data-post-liked="{{ isUserLiked }}">
+									{% if isUserLiked == 0 %}
+										<i class="icon-thumbs-up medium-icon"></i>
+									{% else %}
+										<i class="icon-thumbs-down medium-icon"></i>
+									{% endif %}									
+								</a>
 								<a href="#" class="open-comment"
 									title="Comment ({{ post.comment_count }})"
 									data-url="{{ post.href_status|raw }}"
@@ -46,7 +53,7 @@
 								>
 									<i class="icon-comments medium-icon"></i>
 								</a>
-								<a href="{{ post.href_post|raw }}" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
+								<a href="{{ post.href_post|raw }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
 							</div>														
 						</div>						
 					</div>

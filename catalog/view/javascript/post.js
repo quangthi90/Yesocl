@@ -49,11 +49,11 @@
 
 		promise.then(function(data) { 
 			if(data.success == 'ok'){
-				var $curr_item = that.$el.parent().parent().parent().parent();
+				var $curr_item = that.$el.parents('.post');
 				$curr_item.find('.post_meta .post_like d').html( data.like_count );
 				$button.find('d').html( data.like_count );
 			}
-		});
+		});		
 	};
 		
 	LikePostBtn.prototype.triggerProgress = function($el, promise){
@@ -70,7 +70,7 @@
 	function LikeCommentBtn( $el ){
 		var that = this;
 
-		var $curr_item = $el.parent().parent().parent().parent().parent();
+		var $curr_item = $el.parents('.post');
 
 		this.$el			= $el;
 		this.id				= $el.data('comment-id');
