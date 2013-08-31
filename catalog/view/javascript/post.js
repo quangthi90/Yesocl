@@ -4,6 +4,109 @@
 	var list_comment = $('#comment-box .y-box-content');
 	var page = 1;
 
+	function UserInfo(user_name, user_img, user_url, number_friend, is_friend, is_follow) {
+		this.userName = user_name;
+		this.userUrl = user_url;
+		this.userImg = user_img;
+		this.numberFriend = number_friend;
+		this.isFriend = is_friend;
+		this.isFollow = is_follow;
+	}
+	function UserListViewer(el) {
+		this.element 		= el;
+		this.viewTitle 		= el.data('view-title');
+		this.viewType 		= el.data('view-title');
+		this.postSlug		= el.data('post-slug');
+		this.postType		= el.data('post-type');
+		this.typeSlug 		= el.data('type-slug');
+		this.addEvents();
+	}
+	UserListViewer.prototype.addEvents = function() {
+		var that = this;
+		this.element.click(function(e){
+			e.preventDefault();
+			if($(this).hasClass('disabled')) {
+				return false;
+			}
+			that.showViewer();
+		});
+	}
+	UserListViewer.prototype.showViewer = function() {
+		var that = this;
+
+		var spinner = $('<i class="icon-refresh icon-spin"></i>');
+		that.element.addClass('disabled').parent().prepend(spinner);
+
+		//Biến chứa danh sách các User sẽ hiển thị
+		var data;
+
+		//Lấy dữ liệu danh sách người dùng dựa vào loại action và các thông số của bài post (slug,type)
+		if(that.viewType == 'like'){
+
+		}
+		else if (that.viewType == 'comment') {
+
+		}
+		else if (that.viewType == 'view') {
+
+		}
+		
+		//Dữ liệu test demo:
+		data = new Array();
+		var user1 = new UserInfo('User 1', 'image/template/user-avatar.png', '#', 10, 0, 1);
+		var user2 = new UserInfo('User 2', 'image/template/user-avatar.png', '#', 10, 0, 1);
+		var user3 = new UserInfo('User 3', 'image/template/user-avatar.png', '#', 10, 0, 0);
+		var user4 = new UserInfo('User 4', 'image/template/user-avatar.png', '#', 10, 1, 1);
+		var user5 = new UserInfo('User 5', 'image/template/user-avatar.png', '#', 10, 1, 0);
+		var user6 = new UserInfo('User 6', 'image/template/user-avatar.png', '#', 10, 0, 1);
+		var user7 = new UserInfo('User 7', 'image/template/user-avatar.png', '#', 10, 0, 0);
+		var user8 = new UserInfo('User 8', 'image/template/user-avatar.png', '#', 10, 1, 1);
+		var user9 = new UserInfo('User 9', 'image/template/user-avatar.png', '#', 10, 0, 1);
+		var user10 = new UserInfo('User 10', 'image/template/user-avatar.png', '#', 10, 1, 0);
+		data.push(user1);
+		data.push(user2);
+		data.push(user3);
+		data.push(user4);
+		data.push(user5);
+		data.push(user6);
+		data.push(user7);
+		data.push(user8);
+		data.push(user9);
+		data.push(user10);
+
+		var templateUserInfo = $('#user-info-template');
+		var userViewerContainer = $('#user-viewer-container').html('');
+		var htmlContent = '';
+
+		for (var i = 0; i < data.length; i++) {
+			var user = data[i];
+			var html = templateUserInfo.html().replace('USER_URL', user.userUrl);
+			html = html.replace('USER_NAME', user.userName);
+			html = html.replace('USER_IMG', user.userImg);
+			html = html.replace('NUMBER_OF_FRIEND', user.numberFriend);
+			var actionFriend = '<i class="icon-ok"></i>Friend';
+			if(user.isFriend == 0) {
+				actionFriend = '<i class="icon-plus"></i>Add as Friend';
+			}
+			html = html.replace('USER_ACTIONS', actionFriend);
+			htmlContent += html;
+		};
+		userViewerContainer.html(htmlContent);
+		userViewerContainer.bPopup( 
+			{
+				follow: [false, false],				
+				speed: 300,
+            	transition: 'slideDown',
+            	modalColor : '#000',
+            	opacity: '0.5'
+			}
+		);		
+
+		//Complete
+		that.element.removeClass('disabled');
+		spinner.remove();
+	}
+
 	function LikePostBtn( $el ){
 		var that = this;
 		this.$el			= $el;
@@ -389,6 +492,10 @@
 	}
 
 	$(function(){
+		$('.who-action .view-list-user').each(function(){
+			new UserListViewer($(this));
+		});
+
 		$('.post_action .like-post').each(function(){
 			new LikePostBtn($(this));			
 		});

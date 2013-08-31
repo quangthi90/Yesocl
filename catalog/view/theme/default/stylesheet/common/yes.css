@@ -743,18 +743,25 @@ label.in-line{
   position:absolute;
   left: 50px;
   right: 50px;
-  top: 40%;
-  bottom: 40%;
-  max-height: 35px;
-  /* border: 2px solid #10B991; */
+  top: 30%;
+  bottom: 30%;
+  max-height: 100px;
   text-align: center;
   overflow: hidden;
 }
 .post .post_overlay .post_action a {
   display: inline-block;
-  padding: 7px;
+  height: 35px;
+  width: 45px;
+  text-align: center;
+  vertical-align: middle;
   font-size: 15px;
+  line-height: 35px;
   background-color: #fff;  
+  border-bottom: 1px solid #ccc;
+}
+.post .post_overlay .post_action .who-action a{
+  border-bottom: none; 
 }
 .post .post_overlay .post_action a > i {
   font-size: 20px;
@@ -1478,4 +1485,44 @@ div[data-role="editor-toolbar"] {
 }
 .tooltip.bottom .tooltip-arrow {
   border-top-color: #009B77;
+}
+
+/*USER LIST VIEWER*/
+#user-viewer-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #fff;
+  padding: 20px;
+}
+.user-item {
+  overflow: hidden;  
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ddd;
+  width: 500px;
+}
+.user-item .user-item-info{
+  overflow: hidden;
+  width: 320px;
+}
+.user-item .user-actions{
+  margin-right: 20px;
+}
+.user-item .user-item-avatar{
+  height: 50px;
+  width: 50px;  
+}
+.user-item .user-item-overview {
+  margin-left: 10px;
+}
+.user-item .user-item-overview span {
+  display: block;
+}
+.user-item .user-item-name{
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+}
+.user-item .btn-user-actions i {
+  margin-right: 15px;
 }

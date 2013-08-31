@@ -63,4 +63,24 @@
 		<input class="like-post" value="{{ action.like_post|raw }}" />
 		<input class="like-comment" value="{{ action.like_comment|raw }}" />
 	</div>
+	<div style="width: 500px; height: 500px; top: 40px; left: 100px; display: none;" id="user-viewer-container">		
+	</div>
+	<div style="display: none;" id="user-info-template">
+		<div class="user-item fl">
+			<div class="user-item-info fl">
+				<a href="USER_URL" class="user-item-avatar fl">
+					<img src="USER_IMG" alt="USER_NAME" />
+				</a>
+				<div class="user-item-overview fl">
+					<a href="USER_URL" class="user-item-name">USER_NAME</a>
+					<span><strong>NUMBER_OF_FRIEND</strong> friend(s)</span>
+				</div>
+			</div>
+			<div class="user-actions fr">
+				<a href="#" class="btn-user-actions">
+					USER_ACTIONS
+				</a>
+			</div>
+		</div>
+	</div>
 </div>
