@@ -20,7 +20,7 @@
         {% if posts|length > 0 %}
         <div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="{{ category.href|raw }}">{{ category.name }}  <i class="icon-angle-right"></i></a>
+                <a class="fl" href="{{ path('CategoryPage', {category_slug: category.slug}) }}">{{ category.name }}  <i class="icon-angle-right"></i></a>
             </div>
             {% if style == 1 %}
                 {{ block('post_common_post_block_ex1') }}

@@ -55,8 +55,6 @@ class ControllerCommonHome extends Controller {
 				// $posts[$i]['avatar'] = $avatar;
 				
 				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-				$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 				$this->data['all_posts'][$branch_slug][] = $post;
 			}
