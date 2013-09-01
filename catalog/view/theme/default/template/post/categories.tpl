@@ -20,7 +20,7 @@
         {% if posts|length > 0 %}
         <div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="{{ path('CategoryPage', {category_slug: category.slug}) }}">{{ category.name }}  <i class="icon-angle-right"></i></a>
+                <a class="block-title fl" href="{{ path('CategoryPage', {category_slug: category.slug}) }}">{{ category.name }}</a>
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
                 </a>           

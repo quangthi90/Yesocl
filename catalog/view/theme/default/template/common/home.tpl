@@ -20,7 +20,7 @@
 		{% if posts|length > 0 %}
 		<div class="feed-block">
             <div class="block-header">
-                <a class="fl" href="{{ path('BranchPage', {branch_slug: branch.slug}) }}">{{ branch.name }}  <i class="icon-angle-right"></i></a>
+                <a class="block-title fl" href="{{ path('BranchPage', {branch_slug: branch.slug}) }}">{{ branch.name }}</a>
                 <a class="block-seemore fl" href="{{ branch.href_categories|raw }}"> 
                     <i class="icon-angle-right"></i>
                 </a>           
