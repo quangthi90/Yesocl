@@ -7,9 +7,7 @@
 	function LikePostBtn( $el ){
 		var that = this;
 		this.$el			= $el;
-		this.post_slug		= $el.data('post-slug');
-		this.post_type		= $el.data('post-type');
-		this.url			= $('.common-link .like-post').val();
+		this.url			= $el.data('url');
 
 		this.attachEvents();
 	}
@@ -24,11 +22,6 @@
 				return false;
 			}
 
-			that.data = {
-				post_slug 	: that.post_slug,
-				post_type	: that.post_type
-			};
-
 			that.submit(that.$el);
 
 			return false;
@@ -41,7 +34,6 @@
 		var promise = $.ajax({
 			type: 'POST',
 			url:  this.url,
-			data: that.data,
 			dataType: 'json'
 		});
 
@@ -73,10 +65,7 @@
 		var $curr_item = $el.parent().parent().parent().parent().parent();
 
 		this.$el			= $el;
-		this.id				= $el.data('comment-id');
-		this.post_slug		= $curr_item.find('.comment-form').attr('data-post-slug');
-		this.post_type		= $curr_item.find('.comment-form').attr('data-post-type');
-		this.url			= $('.common-link .like-comment').val();
+		this.url			= $el.data('url');
 
 		this.attachEvents();
 	}
@@ -91,12 +80,6 @@
 				return false;
 			}
 
-			that.data = {
-				comment_id	: that.id,
-				post_slug 	: that.post_slug,
-				post_type	: that.post_type
-			};
-
 			that.submit(that.$el);
 
 			return false;
@@ -109,7 +92,6 @@
 		var promise = $.ajax({
 			type: 'POST',
 			url:  this.url,
-			data: that.data,
 			dataType: 'json'
 		});
 
@@ -138,9 +120,7 @@
 
 		this.$el			= $el;
 		this.comment_count	= $el.data('comment-count');
-		this.post_slug		= $el.data('post-slug');
-		this.post_type		= $el.data('post-type');
-		this.type_slug		= $el.data('type-slug');
+		this.comment_url	= $el.data('comment-url');
 		this.url			= $el.data('url');
 
 		this.attachEvents();
@@ -158,11 +138,6 @@
 
 			$('#comment-box').find('.y-box-header .close').trigger('click');
 
-			that.data = {
-				post_slug 	: that.post_slug,
-				post_type	: that.post_type
-			};
-
 			that.submit(that.$el);
 
 			return false;
@@ -175,7 +150,6 @@
 		var promise = $.ajax({
 			type: 'POST',
 			url:  this.url,
-			data: that.data,
 			dataType: 'json'
 		});
 
@@ -193,14 +167,10 @@
 				htmlOutput += '<div id="add-more-item"></div>';
 				comment_box.find('.comment-body').html(htmlOutput);
 				comment_box.find('.y-box-header span').html(that.comment_count);
-				comment_form.attr('data-post-slug', that.post_slug);
-				comment_form.attr('data-post-type', that.post_type);
-				comment_form.attr('data-type-slug', that.type_slug);
+				comment_form.attr('data-url', that.comment_url);
 				page = 1;
 
-				$('.comment-form').each(function(){
-					new CommentForm($(this));
-				});
+				new CommentForm(comment_form);
 
 				$('.comment-item .like-comment').each(function(){
 					new LikeCommentBtn($(this));			
@@ -230,12 +200,8 @@
 	function CommentForm( $el ){
 		var that = this;
 
-		this.$el		= $el;
-		this.$content	= $el.find('textarea');
-		this.post_slug	= $el.attr('data-post-slug');
-		this.post_type	= $el.attr('data-post-type');
-		this.type_slug	= $el.attr('data-type-slug');
-		this.url		= $el.data('url');
+		this.$el			= $el;
+		this.$content		= $el.find('textarea');
 		this.$comment_btn	= $el.find('.btn-comment');
 
 		this.attachEvents();
@@ -255,15 +221,10 @@
 				return false;
 			}
 
-			that.post_slug	= that.$el.attr('data-post-slug');
-			that.post_type	= that.$el.attr('data-post-type');
-			that.type_slug	= that.$el.attr('data-type-slug');
+			that.url	= that.$el.attr('data-url');
 
 			that.data = {
-				content 	: that.$content.val(),
-				post_slug	: that.post_slug,
-				post_type	: that.post_type,
-				type_slug	: that.type_slug
+				content 	: that.$content.val()
 			};
 
 			that.submit(that.$comment_btn);

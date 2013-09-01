@@ -3,7 +3,7 @@
 {% block title %}Change Password - Yesocl Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/account.css" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css('account.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
