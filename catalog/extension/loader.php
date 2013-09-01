@@ -26,6 +26,7 @@ class ExtensionLoader
             new Twig_SimpleFunction('path', array($this, 'path')),
             new Twig_SimpleFunction('asset_css', array($this, 'assetCss')),
             new Twig_SimpleFunction('asset_js', array($this, 'assetJs')),
+            new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
         );
     }
 
@@ -39,11 +40,11 @@ class ExtensionLoader
         $parts = explode( '/', $routing );
 
         foreach ( $params as $key => $param ) {
-            if ( $index = array_search("{".$key."}", $parts) !== false ){
+            $index = array_search( "{".$key."}", $parts );
+            if ( $index !== false ){
                 $parts[$index] = $param;
             }
         }
-
         return HTTPS_SERVER . implode('/', $parts);
     }
 
@@ -53,5 +54,9 @@ class ExtensionLoader
 
     public function assetJs( $path ){
         return HTTP_CATALOG . 'catalog/view/javascript/' . $path;
+    }
+
+    public function assetImg( $path ){
+        return HTTP_IMAGE . $path;
     }
 }

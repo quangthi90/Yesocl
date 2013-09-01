@@ -28,7 +28,7 @@
 						<div class="post_text_raw">{{ post.description }}</div>	
 					</div>
 					<div class="hover post_overlay">
-						<div class="post_virtual_overlay">							
+						<div class="post_virtual_overlay">
 						</div>
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
@@ -38,11 +38,8 @@
 								><i class="icon-thumbs-up medium-icon"></i></a>
 								<a href="#" class="open-comment"
 									title="Comment ({{ post.comment_count }})"
-									data-url="{{ post.href_status|raw }}"
-									data-comment-count="{{ post.comment_count }}" 
-									data-post-slug="{{ post.slug }}" 
-									data-post-type="{{ post_type }}"
-									data-type-slug="{{ branch.slug }}"
+									data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+									data-comment-count="{{ post.comment_count }}"
 								>
 									<i class="icon-comments medium-icon"></i>
 								</a>

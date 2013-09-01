@@ -31,8 +31,6 @@ class ControllerCommonHome extends Controller {
 				'branch_id' => $branch['id'],
 				'limit' => 6
 			));
-
-			$branch['href_categories'] = $this->url->link('branch/categories', 'branch_slug=' . $branch_slug, 'SSL');
 			
 			foreach ($posts as $i => $post) {
 				$post = $post->formatToCache();

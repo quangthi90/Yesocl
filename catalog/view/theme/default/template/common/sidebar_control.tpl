@@ -2,7 +2,7 @@
 	<div class="sidebar-border-right">
 		<div class="row-fluid logo sidebar-box" id="logo">
 			<a href="{{ action.home }}" title="Yesocl">
-				<img src="image/template/logo.png" />
+				<img src="{{ asset_img('template/logo.png') }}" />
 			</a>
 		</div>
 		<div class="row-fluid sidebar-user sidebar-box">

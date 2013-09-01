@@ -98,16 +98,16 @@ class ControllerPostComment extends Controller {
     public function getComments(){
         $data = array();
 
-        if ( isset($this->request->post['post_slug']) && !empty($this->request->post['post_slug']) ){
-            $data['post_slug'] = $this->request->post['post_slug'];
+        if ( isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug']) ){
+            $data['post_slug'] = $this->request->get['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
             )));
         }
 
-        if ( isset($this->request->post['post_type']) && !empty($this->request->post['post_type']) ){
-            $data['post_type'] = $this->request->post['post_type'];
+        if ( isset($this->request->get['post_type']) && !empty($this->request->get['post_type']) ){
+            $data['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'

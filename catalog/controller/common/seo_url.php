@@ -7,7 +7,7 @@ class ControllerCommonSeoUrl extends Controller {
 			$_parts = array_filter(explode('/', $_route));
 
 			$routings = $this->config->get('routing');
-			foreach ( $routings as $routing ) {
+			foreach ( $routings as $route => $routing ) {
 				$request_gets = array();
 				$parts = array_filter(explode('/', $routing));
 				$is_url = false;
@@ -27,12 +27,9 @@ class ControllerCommonSeoUrl extends Controller {
 				}
 				if ( $is_url ){
 					$this->request->get = $request_gets;
+					$this->request->get['route'] = $this->config->get('route')[$route];
 					break;
 				}
-			}
-
-			if (isset($this->request->get['branch_slug'])) {
-				$this->request->get['route'] = 'branch/categories';
 			}
 			
 			if (isset($this->request->get['route'])) {
