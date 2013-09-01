@@ -16,18 +16,6 @@ class ControllerCommonSidebarControl extends Controller {
 			'username' => $this->customer->getUsername(),
 			'href' => $this->url->link('account/edit', 'user_slug=' . $this->customer->getSlug(), 'SSL')
 		);
-
-		$this->data['action'] = array(
-			'refresh'		=> $this->url->link('common/refresh', '', 'SSL'),
-			'home' 			=> $this->url->link('common/home', '', 'SSL'),
-			'account' 		=> $this->url->link('account/account', '', 'SSL'),
-			'profile' 		=> $this->url->link('account/edit', '', 'SSL'),
-			'categories' 	=> $this->url->link('post/categories', '', 'SSL'),
-			'logout' 		=> $this->url->link('account/logout', '', 'SSL'),
-			'password' 		=> $this->url->link('account/password', '', 'SSL'),
-			'like_post'		=> $this->url->link('post/post/like', '', 'SSL'),
-			'like_comment'	=> $this->url->link('post/comment/like', '', 'SSL')
-		);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/sidebar_control.tpl';

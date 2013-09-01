@@ -70,6 +70,7 @@ $config->load( 'comment' );
 $config->load( 'branch' );
 $config->load( 'common' );
 $config->load( 'routing' );
+$config->load( 'route' );
 
 // Twig
 require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
