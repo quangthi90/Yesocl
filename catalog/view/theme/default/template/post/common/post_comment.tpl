@@ -37,7 +37,7 @@
 			{% endif %}
 			</div>		
 			</div>	
-			<form class="y-comment-reply post post_new comment-form" data-post-slug="" data-url="{{ action.comment }}" data-post-type="" data-type-slug="">
+			<form class="y-comment-reply post post_new comment-form">
 				<div class="row-fluid txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>
@@ -75,7 +75,7 @@
 				</div>
 				<div class="comment-footer">
 					<a href="#" class="like-comment"
-						data-comment-id="${id}"
+						data-url="${href_like}"
 					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
 				</div>
 			</div>

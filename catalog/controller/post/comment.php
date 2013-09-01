@@ -11,13 +11,13 @@ class ControllerPostComment extends Controller {
             )));
         }
 
-        if ( empty($this->request->post['post_slug']) ){
+        if ( empty($this->request->get['post_slug']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug is empty'
             )));
         }
 
-        if ( empty($this->request->post['post_type']) ){
+        if ( empty($this->request->get['post_type']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type is empty'
             )));
@@ -30,9 +30,9 @@ class ControllerPostComment extends Controller {
         }
 
         if ( $this->validate() ) {
-            $data['post_slug'] = $this->request->post['post_slug'];
+            $data['post_slug'] = $this->request->get['post_slug'];
+            $data['post_type'] = $this->request->get['post_type'];
             $data['content'] = $this->request->post['content'];
-            $data['post_type'] = $this->request->post['post_type'];
         }else {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: validate false'
@@ -75,6 +75,11 @@ class ControllerPostComment extends Controller {
 
         $comment['avatar'] = $avatar;
         $comment['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+        $comment['href_like'] = $this->extension->path('CommentLike', array(
+            'post_slug' => $data['post_slug'],
+            'post_type' => $data['post_type'],
+            'comment_id' => $comment['id']
+        ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
 
         return $this->response->setOutput(json_encode(array(
@@ -155,6 +160,11 @@ class ControllerPostComment extends Controller {
 
             $comments[$key]['avatar'] = $avatar;
             $comments[$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+            $comments[$key]['href_like'] = $this->extension->path('CommentLike', array(
+                'post_slug' => $data['post_slug'],
+                'post_type' => $data['post_type'],
+                'comment_id' => $comments[$key]['id']
+            ));
             $comments[$key]['created'] = $comment['created']->format( $this->language->get('date_format_full') );
         }
 
@@ -167,24 +177,24 @@ class ControllerPostComment extends Controller {
     public function like(){
         $data = array();
 
-        if ( !empty($this->request->post['comment_id']) ){
-            $data['comment_id'] = $this->request->post['comment_id'];
+        if ( !empty($this->request->get['comment_id']) ){
+            $data['comment_id'] = $this->request->get['comment_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: comment id empty'
             )));
         }
 
-        if ( !empty($this->request->post['post_slug']) ){
-            $data['post_slug'] = $this->request->post['post_slug'];
+        if ( !empty($this->request->get['post_slug']) ){
+            $data['post_slug'] = $this->request->get['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
             )));
         }
 
-        if ( !empty($this->request->post['post_type']) ){
-            $data['post_type'] = $this->request->post['post_type'];
+        if ( !empty($this->request->get['post_type']) ){
+            $data['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'

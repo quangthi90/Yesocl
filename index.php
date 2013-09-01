@@ -82,7 +82,8 @@ $twig = new Twig_Environment($twig_loader, array(
 $twig->addExtension(new Twig_Extension_StringLoader());
 // Custom twig extension
 require_once DIR_APPLICATION . 'extension/loader.php';
-new ExtensionLoader( $twig, $config );
+$extension = new ExtensionLoader( $twig, $config );
+$registry->set('extension', $extension);
 $registry->set('twig', $twig);
 
 // Url
