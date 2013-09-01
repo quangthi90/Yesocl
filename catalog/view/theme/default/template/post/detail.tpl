@@ -5,7 +5,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/post-detail.css" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
     {{ block('post_common_post_comment_style') }}
 {% endblock %}
 

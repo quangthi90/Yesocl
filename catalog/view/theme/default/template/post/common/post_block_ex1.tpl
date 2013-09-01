@@ -28,10 +28,21 @@
 						<div class="post_text_raw">{{ post.description }}</div>	
 					</div>
 					<div class="hover post_overlay">
-						<div class="post_virtual_overlay">							
+						<div class="post_virtual_overlay">
 						</div>
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
+								<a class="like-post" href="#" title="Like"
+									data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+								><i class="icon-thumbs-up medium-icon"></i></a>
+								<a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
+									data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+									data-comment-count="{{ post.comment_count }}"
+									data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
+								>
+									<i class="icon-comments medium-icon"></i>
+								</a>
+								<a href="{{ post.href_post|raw }}" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
 								<div class="action_tool">
 									{% set isUserLiked = random([0, 1]) %}
 									<a class="like-post" href="#" title="Like/Unlike"

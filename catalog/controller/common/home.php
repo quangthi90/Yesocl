@@ -31,8 +31,6 @@ class ControllerCommonHome extends Controller {
 				'branch_id' => $branch['id'],
 				'limit' => 6
 			));
-
-			$branch['href_categories'] = $this->url->link('branch/categories', 'branch_slug=' . $branch_slug, 'SSL');
 			
 			foreach ($posts as $i => $post) {
 				$post = $post->formatToCache();
@@ -57,8 +55,6 @@ class ControllerCommonHome extends Controller {
 				// $posts[$i]['avatar'] = $avatar;
 				
 				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-				$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 				$this->data['all_posts'][$branch_slug][] = $post;
 			}

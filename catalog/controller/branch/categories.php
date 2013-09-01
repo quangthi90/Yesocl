@@ -37,16 +37,11 @@ class ControllerBranchCategories extends Controller {
 				continue;
 			}
 
-			if ( $category->getChildren()->count() > 0 ){
-				$href = $this->url->link('branch/categories', 'category_slug=' . $category->getSlug(), 'SSL');
-			}else{
-				$href = $this->url->link('branch/category', 'category_slug=' . $category->getSlug(), 'SSL');
-			}
-
 			$this->data['categories'][$category->getId()] = array(
 				'id' => $category->getId(),
 				'name' => $category->getName(),
-				'href' => $href
+				'href' => $href,
+				'slug' => $category->getSlug()
 			);
 			
 			foreach ($posts as $i => $post) {
@@ -70,8 +65,6 @@ class ControllerBranchCategories extends Controller {
 				// $posts[$i]['avatar'] = $avatar;
 				
 				$posts[$i]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-				$posts[$i]['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-				$posts[$i]['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 			}
 			$this->data['all_posts'][$category->getId()] = $posts;
 		}
