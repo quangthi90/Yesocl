@@ -28,20 +28,17 @@
 						<div class="post_text_raw">{{ post.description }}</div>	
 					</div>
 					<div class="hover post_overlay">
-						<div class="post_virtual_overlay">							
+						<div class="post_virtual_overlay">
 						</div>
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
 								<a class="like-post" href="#" title="Like"
-									data-post-slug="{{ post.slug }}" 
-									data-post-type="{{ post_type }}"
+									data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
 								><i class="icon-thumbs-up medium-icon"></i></a>
 								<a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
-									data-url="{{ post.href_status|raw }}" 
-									data-comment-count="{{ post.comment_count }}" 
-									data-post-slug="{{ post.slug }}" 
-									data-post-type="{{ post_type }}"
-									data-type-slug="{{ post.branch_slug }}"
+									data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+									data-comment-count="{{ post.comment_count }}"
+									data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
 								>
 									<i class="icon-comments medium-icon"></i>
 								</a>

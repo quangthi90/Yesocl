@@ -3,7 +3,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-    <link href="catalog/view/theme/default/stylesheet/profiles.css" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css('profiles.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -403,7 +403,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="catalog/view/javascript/profiles.js"></script>
+<script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script type="text/javascript">
 	function addScroll(warper, column, width, height) {
 		$(warper).outerWidth(width);

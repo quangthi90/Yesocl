@@ -1,5 +1,5 @@
 {% block post_common_post_comment_style %}
-<link href="catalog/view/theme/default/stylesheet/comment.css" rel="stylesheet" media="screen" />
+<link href="{{ asset_css('comment.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block post_common_post_comment %}
@@ -37,7 +37,7 @@
 			{% endif %}
 			</div>		
 			</div>	
-			<form class="y-comment-reply post post_new comment-form" data-post-slug="" data-url="{{ action.comment }}" data-post-type="" data-type-slug="">
+			<form class="y-comment-reply post post_new comment-form">
 				<div class="row-fluid txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 				</div>
@@ -75,7 +75,7 @@
 				</div>
 				<div class="comment-footer">
 					<a href="#" class="like-comment"
-						data-comment-id="${id}"
+						data-url="${href_like}"
 					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
 				</div>
 			</div>
@@ -85,5 +85,5 @@
 {% endblock %}
 
 {% block post_common_post_comment_javascript %}
-<script type="text/javascript" src="catalog/view/javascript/post.js"></script>
+<script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
 {% endblock %}
