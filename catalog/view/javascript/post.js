@@ -169,12 +169,13 @@
 		
 	LikePostBtn.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $el.find('i');
 		var f        = function() {
 			$spinner.remove();
-			$el.delay(1000).removeClass('disabled');
+			$el.html($old_icon);
 		};
 
-		$el.addClass('disabled').parent().prepend($spinner);
+		$el.addClass('disabled').html($spinner);
 
 		promise.then(f, f);
 	};
@@ -323,11 +324,13 @@
 	CommentBtn.prototype.triggerProgress = function($el, promise)
 	{
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $el.find('i');
 		var f        = function() {
 			$spinner.remove();
+			$el.html($old_icon);
 		};
 
-		$el.addClass('disabled').parent().prepend($spinner);
+		$el.addClass('disabled').html($spinner);
 
 		promise.then(f, f);
 	};
