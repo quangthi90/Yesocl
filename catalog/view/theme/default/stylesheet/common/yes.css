@@ -1139,19 +1139,18 @@ label.in-line{
   display: inline-block;
   text-align: center;
   margin-left: 10px;
-  background-color: transparent;
+  background-color: #009281;
 }
 .feed-block .block-header a.block-seemore i {
-  color: #009281;
+  color: #fff;
 }
 .feed-block .block-header:hover a{
   color: #000;
 }
 .feed-block .block-header:hover a.block-seemore {
-  background-color: #009281;
 }
 .feed-block .block-header:hover a.block-seemore i {
-  color: #fff;
+  color: #000;
 }
 .feed-block .block-content {
   overflow: hidden;
