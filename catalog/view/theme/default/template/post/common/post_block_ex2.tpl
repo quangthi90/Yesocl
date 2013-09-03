@@ -32,12 +32,12 @@
 						</div>
 						<div class="post_overlay_wrapper">
 							<div class="post_action">
-								{% set isUserLiked = random([0, 1]) %}
 								<div class="action_tool">
-									<a class="like-post" href="#" title="Like"
+									<a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
 										data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+										data-post-like="{{ post.isUserLiked }}"
 									>
-										{% if isUserLiked == 0 %}
+										{% if post.isUserLiked == 0 %}
 											<i class="icon-thumbs-up medium-icon"></i>
 										{% else %}
 											<i class="icon-thumbs-down medium-icon"></i>

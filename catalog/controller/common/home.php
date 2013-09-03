@@ -33,6 +33,12 @@ class ControllerCommonHome extends Controller {
 			));
 			
 			foreach ($posts as $i => $post) {
+				if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
+					$liked = true;
+				}else{
+					$liked = false;
+				}
+
 				$post = $post->formatToCache();
 
 				// avatar
@@ -54,7 +60,9 @@ class ControllerCommonHome extends Controller {
 				$post['image'] = $image;
 				// $posts[$i]['avatar'] = $avatar;
 				
+
 				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
+				$post['isUserLiked'] = $liked;
 
 				$this->data['all_posts'][$branch_slug][] = $post;
 			}

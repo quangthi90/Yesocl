@@ -6,36 +6,11 @@
 	<div id="comment-box" class="y-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				Comment box (<span class="counter">{% if post.comment_count is defined %}{{ post.comment_count }}{% endif %}</span>)
+				Comment box (<span class="counter"></span>)
 				<a href="#" class="close">X</a>
 			</div>
 			<div class="y-box-content comment-body">
-			{% if post.comments is defined %}
-				{% for comment in post.comments %}
-				<div class="comment-item">
-					<div class="row-fluid">
-						<div class="span2 avatar_thumb">
-							<a href="{{ comment.href_user|raw }}">
-								<img src="{{ comment.avatar }}" alt="user">
-							</a>
-						</div>
-						<div class="span10">
-							<div class="comment-info">
-								<a href="{{ comment.href_user|raw }}">{{ comment.author}} </a> - <span class="comment-time"><d class="timeago" title="{{ comment.created|date('c') }}"></d></span>
-							</div>
-							<div class="comment-content">
-								{{ comment.content|raw }}
-							</div>
-						</div>
-					</div>
-					<div class="comment-footer">
-						<a href="#"><i class="icon-thumbs-up medium-icon"></i>(<d>{{ comment.like_count }}</d>)
-						</a>
-					</div>
-				</div>
-				{% endfor %}
 				<div id="add-more-item"></div>
-			{% endif %}
 			</div>		
 			</div>	
 			<form class="y-comment-reply post post_new comment-form">
@@ -73,7 +48,7 @@
 				<div class="comment-footer">
 					<a href="#" class="like-comment"
 						data-url="${href_like}"
-						data-comment-liked="0"
+						data-comment-liked="${is_liked}"
 					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
 				</div>
 			</div>

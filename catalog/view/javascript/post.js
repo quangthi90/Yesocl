@@ -149,9 +149,11 @@
 				var $curr_item = that.$el.parents('.post'); 
 				$curr_item.find('.post_meta .post_like d').html( data.like_count );
 				$button.find('d').html( data.like_count );
+				$curr_item.find('.view-list-liker d').html( data.like_count );
 
 				var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
 				var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
+				
 				//Unlike
 				if(that.isLiked == 1) {
 					that.iconLike.replaceWith($likeIcon);
@@ -162,6 +164,8 @@
 					that.iconLike = $unLikeIcon;
 					that.isLiked = 1;
 				}
+
+				that.$el.removeClass('disabled');
 			}
 
 		});		
