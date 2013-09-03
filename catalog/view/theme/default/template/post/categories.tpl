@@ -19,7 +19,7 @@
         {% set posts = all_posts[category.id] %}
         {% if posts|length > 0 %}
         <div class="feed-block">
-            <div class="block-header">
+            <div class="block-header">                
                 <a class="block-title fl" href="{{ path('CategoryPage', {category_slug: category.slug}) }}">{{ category.name }}</a>
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>

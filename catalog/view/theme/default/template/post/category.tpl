@@ -19,6 +19,9 @@
         {% if posts|length > 0 %}
         <div class="feed-block">
             <div class="block-header">
+                <a class="block-back fl" href="#"> 
+                    <i class="icon-angle-left"></i>
+                </a> 
                 <a class="block-title fl" href="{{ category.href|raw }}">
                     {{ category.name }}                     
                 </a>  
