@@ -1,6 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/post_block.tpl' %}
+{% use '@template/default/template/post/common/post_block_list.tpl' %}
 {% use '@template/default/template/post/common/post_comment.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
@@ -19,7 +19,7 @@
 		{% if posts|length > 0 %}
             {% set block_info = branch %}
             {% set block_href = path('BranchPage', {branch_slug: branch.slug}) %}
-            {{ block('post_common_post_block') }}
+            {{ block('post_common_post_block_list') }}
 		{% endif %}
 	{% endfor %}		
 	</div>
