@@ -24,8 +24,13 @@ class ModelBranchPost extends Doctrine {
 
 		if ( !empty($data['likerId']) ){
 			$likerIds = $post->getLikerIds();
-			if ( !in_array($data['likerId'], $likerIds) ){
+			$key = array_search( $data['likerId'], $likerIds );
+			
+			if ( $key === false ){
 				$post->addLikerId( $data['likerId'] );
+			}else{
+				unset($likerIds[$key]);
+				$post->setLikerIds( $likerIds );
 			}
 		}
 
