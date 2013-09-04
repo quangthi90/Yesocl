@@ -114,7 +114,8 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		});
 	}
 	else if(this.root.hasClass(df_ACCOUNT_MYWALL)) {
-		this.blocks = this.root.find('.feed-block');			
+		this.blocks = this.root.find('.feed-block');	
+		this.freeBlock = this.root.find('.free-block');
 		var heightBlockContent = this.heightMain - 42;
 		var widthColumnOfFirstBlock = this.widthMain/2 - marginBlock - 10;
 		var totalWidth = 0;
@@ -144,9 +145,10 @@ HorizontalBlock.prototype.initializeBlock = function() {
 				$(this).width((5/6)*widthMainParent);
 			}			
 			columns.css('margin-right', marginPostOnWall + 'px');
-			totalWidth += $(this).outerWidth();
+			totalWidth += $(this).outerWidth() + marginBlock;
 		});
-		this.root.width(totalWidth == 0 ? this.widthMain : totalWidth);
+		this.freeBlock.css('margin-right', marginBlock);
+		this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
 	}
 	else{
 		var heightMax = this.heightMain - 25;
