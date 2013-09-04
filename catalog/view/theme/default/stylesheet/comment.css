@@ -7,7 +7,6 @@
 	background-color: #fff;
 	width: 330px;
 	z-index: 200;
-	border: 1px solid #ddd;
 	-webkit-box-shadow: -2px -2px 3px #ddd;
 	 -moz-box-shadow: -2px -2px 3px #ddd;
 	box-shadow: -2px -2px 3px #ddd;	
@@ -22,11 +21,11 @@
 }
 
 .y-box-header {
-	padding: 5px;
-	border-bottom: 1px solid #ccc;
+	padding: 5px 5px 5px 3px;
 	font-weight: bold;
 	padding-left: 20px;
-	background: #6CB13C; 
+	background: #009A76; 
+	color: #fff;
 }
 
 .y-box-content {
@@ -57,7 +56,7 @@
 }
 
 .comment-item  .comment-info  a {
-	color: #6CB13C;
+	color: #009A76;
 }
 
 .comment-item  .comment-info  a:hover {
@@ -74,14 +73,7 @@
 }
 
 .comment-item .comment-footer {
-	background: #f2f5f6; /* Old browsers */
-	background: -moz-linear-gradient(top,  #f2f5f6 0%, #e3eaed 37%, #c8d7dc 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2f5f6), color-stop(37%,#e3eaed), color-stop(100%,#c8d7dc)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* IE10+ */
-	background: linear-gradient(to bottom,  #f2f5f6 0%,#e3eaed 37%,#c8d7dc 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f5f6', endColorstr='#c8d7dc',GradientType=0 ); /* IE6-9 */
+	background: #f2f5f6;
 	font-size: 10px;
 	font-weight: bold;
 	padding: 2px 2px 2px 5px;
@@ -91,19 +83,15 @@
 	position: absolute;
 	left: 0px;
 	right: 0px;
-	bottom: 0px;
-	width: 310px;	
+	bottom: 0px;	
+	background-color: #f4f4f4;
+	overflow: hidden;
+	margin-bottom: 0px;
+}
+#comment-box .post_new .comment-action{
+	overflow: hidden;
+}
+#comment-box .post_new .comment-action a.fl {
+	padding: 5px;
 }
 
-#comment-box .post_new .txt_editor .post_input {
-	width: 295px;
-	height: 30px;
-}
-
-#comment-box .btn-wrapper {
-	text-align: right;
-}
-
-#comment-box .btn-container .btn-comment {
-	
-}

@@ -8,13 +8,11 @@ class ControllerAccountAccount extends Controller {
 		} else {
 			$this->data['base'] = $this->config->get('config_url');
 		}
-
+		$this->load->model('tool/image');
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		
 		$this->data['heading_title'] = $this->config->get('config_title');
-
-		print($this->customer->getId()); exit;
 
 		$this->data['posts'] = array();
 		$i = 0;
