@@ -3,8 +3,11 @@
 class ExtensionLoader
 {
     private $config;
-    public function __construct(Twig_Environment $twig, $config){
-        $this->config = $config;
+    private $customer;
+    public function __construct(Twig_Environment $twig, $registry){
+        $this->config = $registry->get('config');
+        $this->customer = $registry->get('customer');
+
         // filters
         foreach ($this->getFilters() as $filter) {
             $twig->addFunction( $function );
@@ -27,6 +30,7 @@ class ExtensionLoader
             new Twig_SimpleFunction('asset_css', array($this, 'assetCss')),
             new Twig_SimpleFunction('asset_js', array($this, 'assetJs')),
             new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
+            new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser'))
         );
     }
 
@@ -58,5 +62,9 @@ class ExtensionLoader
 
     public function assetImg( $path ){
         return HTTP_IMAGE . $path;
+    }
+
+    public function getCurrentUser(){
+        return $this->customer;
     }
 }

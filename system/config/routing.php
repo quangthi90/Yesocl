@@ -16,7 +16,7 @@ $_['routing']['CommentLike']	= '{post_type}/post/{post_slug}/comment/{comment_id
 // Page
 $_['routing']['RefreshPage'] 	= 'what-s-new';
 $_['routing']['HomePage']	 	= 'home';
-$_['routing']['WallPage']	 	= 'wall-page';
+$_['routing']['WallPage']	 	= 'wall-page/{user_slug}';
 $_['routing']['ChangePassword']	= 'change-password';
 $_['routing']['Logout']			= 'logout';
 
