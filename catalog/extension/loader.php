@@ -49,6 +49,7 @@ class ExtensionLoader
                 $parts[$index] = $param;
             }
         }
+        
         return HTTPS_SERVER . implode('/', $parts);
     }
 

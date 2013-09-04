@@ -74,7 +74,7 @@ class ControllerPostComment extends Controller {
         }
 
         $comment['avatar'] = $avatar;
-        $comment['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+        $comment['href_user'] = $this->extension->path('WallPage', array('user_slug' => $user['slug']));
         $comment['href_like'] = $this->extension->path('CommentLike', array(
             'post_slug' => $data['post_slug'],
             'post_type' => $data['post_type'],
