@@ -78,8 +78,9 @@ Custom List Post
 var marginPost = 5;
 var marginPostOnWall = 15;
 var marginBlock = 50;
-var df_HOME_FEED = 'has-block';
+var df_INVIDUAL_BLOCK = 'has-block';
 var df_ACCOUNT_MYWALL = 'account-mywall';
+var df_CATEGORY_SINGLE = 'post-category';
 function HorizontalBlock(el) {	
 	this.root = el;
 	this.columns = el.find('.column');
@@ -89,7 +90,7 @@ function HorizontalBlock(el) {
 	this.initializeBlock();
 }
 HorizontalBlock.prototype.initializeBlock = function() {	
-	if(this.root.hasClass(df_HOME_FEED)) {
+	if(this.root.hasClass(df_INVIDUAL_BLOCK)) {
 		this.blocks = this.root.find('.feed-block');
 		this.blockContent = this.root.find('.block-content');				
 		var heightBlockContent = this.heightMain - 42;
@@ -105,7 +106,7 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
 			blockFeed.putFeed();			
 		});
-		this.root.width(this.blocks.length*((5/6)*this.widthMain + 60));
+		this.root.width(this.blocks.length*((5/6)*this.widthMain + marginBlock));
 		this.feeds.each(function() {
 			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
@@ -149,6 +150,32 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		});
 		this.freeBlock.css('margin-right', marginBlock);
 		this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
+	}
+	else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
+		this.blocks = this.root.find('.feed-block');		
+		this.blockContent = this.root.find('.block-content');				
+		var heightBlockContent = this.heightMain - 42;
+		var heightPost = (heightBlockContent - 2*marginPost)/2;
+		var widthPost = this.widthMain*5/18 - 3*marginPost;
+		this.columns.width(widthPost);
+		this.columns.css('margin-right', marginPost + 'px');
+		this.columns.children('.feed-container').width(widthPost - 5);
+		this.blockContent.height(heightBlockContent);		
+		this.blocks.width((5/6)*this.widthMain);	
+		this.blocks.each(function(index) {
+			if(index != 0) {
+				$(this).find('.block-header').css('visibility','hidden');
+			}
+			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
+			blockFeed.putFeed();			
+		});
+		this.root.width(this.blocks.length*((5/6)*this.widthMain));
+		this.feeds.each(function() {
+			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
+			var hp = $(this).children('.post_header').first().outerHeight();
+			var heightUpdated = $(this).height();
+			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
+		});
 	}
 	else{
 		var heightMax = this.heightMain - 25;
