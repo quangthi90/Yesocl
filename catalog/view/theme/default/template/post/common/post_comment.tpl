@@ -21,7 +21,7 @@
 					<a class="fl comment-tool" href="#" title="Chèn hình">
 						<i class="icon-camera icon-2x"></i>
 					</a>
-					<a href="#" class="btn btn-yes fr">Post</a>					
+					<a href="#" class="btn btn-yes fr btn-comment">Post</a>					
 				</div>
 			</form>		
 		</div>			

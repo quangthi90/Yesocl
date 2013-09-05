@@ -37,10 +37,10 @@
 		var spinner = $('<i class="icon-refresh icon-spin"></i>');
 		that.element.addClass('disabled').parent().prepend(spinner);
 
-		//Bi?n ch?a danh sách các User s? hi?n th?
+		//Bi?n ch?a danh sï¿½ch cï¿½c User s? hi?n th?
 		var data;
 
-		//L?y d? li?u danh sách ngu?i dùng d?a vào lo?i action và các thông s? c?a bài post (slug,type)
+		//L?y d? li?u danh sï¿½ch ngu?i dï¿½ng d?a vï¿½o lo?i action vï¿½ cï¿½c thï¿½ng s? c?a bï¿½i post (slug,type)
 		if(that.viewType == 'like'){
 
 		}
@@ -341,7 +341,6 @@
 
 	function CommentForm( $el ){
 		var that = this;
-
 		this.$el			= $el;
 		this.$content		= $el.find('textarea');
 		this.$comment_btn	= $el.find('.btn-comment');
@@ -377,7 +376,6 @@
 
 	CommentForm.prototype.submit = function($button){
 		var that = this;
-
 		var promise = $.ajax({
 			type: 'POST',
 			url:  this.url,
