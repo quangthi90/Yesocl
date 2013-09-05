@@ -30,7 +30,7 @@
 				that.data = {
 					email		: that.$email.val(),
 					password	: that.$password.val(),
-					remember	: that.$remember.val()
+					remember	: (that.$remember.attr('checked') == 'checked')?'1':'0'
 				};
 
 				that.submit(that.$login_btn);

@@ -14,7 +14,7 @@ class Customer {
 		$this->db = $registry->get('db');
 		$this->request = $registry->get('request');
 		$this->session = $registry->get('session');
-				
+		//var_dump($this->session->data['customer_id']); exit;		
 		if (isset($this->session->data['customer_id'])) { 
 			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
 				'status' => true,
@@ -70,8 +70,8 @@ class Customer {
 
 			// remember
 			if ($remember) {
-				setcookie('yid', $this->request->post['email'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
-	    		setcookie('ypass', $this->request->post['password'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+				setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
 	        }
 
 			// $this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
@@ -92,8 +92,8 @@ class Customer {
 		$this->customer_group_id = '';
 
 		// delete cookie
-		setcookie('yid', $this->request->post['email'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
-	    setcookie('ypass', $this->request->post['password'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+		setcookie('yid', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
+	    setcookie('ypass', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
   	}
   
   	public function isLogged() {

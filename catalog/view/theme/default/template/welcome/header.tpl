@@ -24,7 +24,7 @@
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <label>
-                            <input type="checkbox" name="remember"> Remember me
+                            <input type="checkbox" name="remember" value="true"> Remember me
                         </label>
                     </div>
                 </div>
