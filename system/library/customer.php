@@ -42,7 +42,7 @@ class Customer {
   		}
 	}
 		
-  	public function login($email, $password, $override = false) {
+  	public function login($email, $password, $override = false, $remember = false) {
 		if ($override) {
 			$customer_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer where LOWER(email) = '" . $this->db->escape(strtolower($email)) . "' AND status = '1'");
 		} else {
@@ -67,7 +67,13 @@ class Customer {
 			$this->lastname = $customer_query->getMeta()->getLastName();
 			$this->email = $customer_query->getPrimaryEmail()->getEmail();
 			$this->customer_group_id = $customer_query->getGroupUser()->getId();
-          	
+
+			// remember
+			if ($remember) {
+				setcookie('yid', $this->request->post['email'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+	    		setcookie('ypass', $this->request->post['password'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+	        }
+
 			// $this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
 			
 	  		return true;
@@ -84,6 +90,10 @@ class Customer {
 		$this->lastname = '';
 		$this->email = '';
 		$this->customer_group_id = '';
+
+		// delete cookie
+		setcookie('yid', $this->request->post['email'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+	    setcookie('ypass', $this->request->post['password'], time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
   	}
   
   	public function isLogged() {

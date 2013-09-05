@@ -241,14 +241,41 @@ $controller = new Front($registry);
 $controller->addPreAction(new Action('common/maintenance'));
 
 // SEO URL's
-$controller->addPreAction(new Action('common/seo_url'));	
-	
+$controller->addPreAction(new Action('common/seo_url'));
+
 // Router
 if ( $customer->isLogged() ) {
 	if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
 		$action = new Action($request->get['route']);
 	} else {
 		$action = new Action('common/home');
+	}
+}elseif (!isset($request->cookie['yid']) && !empty($request->cookie['yid'])) {
+	if ($this->customer->login($request->cookie['yid'], $request->cookie['ypass'])) {
+		if (isset($request->get['route']) && (
+			$request->get['route'] == 'account/login/login' || 
+			$request->get['route'] == 'account/login' ||
+			$request->get['route'] == 'account/register/register' ||
+			$request->get['route'] == 'account/forgotten' ||
+			$request->get['route'] == 'welcome/home'
+		)) 
+		{
+			$action = new Action('common/home');
+		}else{
+			$action = new Action($request->get['route']);
+		}
+	}else {
+		if (isset($request->get['route']) && (
+			$request->get['route'] == 'account/login/login' || 
+			$request->get['route'] == 'account/login' ||
+			$request->get['route'] == 'account/register/register' ||
+			$request->get['route'] == 'account/forgotten'
+		)) 
+		{
+			$action = new Action($request->get['route']);
+		}else{
+			$action = new Action('welcome/home');
+		}
 	}
 }else{
 	if (isset($request->get['route']) && (
