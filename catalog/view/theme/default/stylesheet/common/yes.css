@@ -711,7 +711,7 @@ label.in-line{
 }
 
 /*POST_HOVER*/
-.hover {
+.post.post_in_block .hover {
   display: none;
   position: absolute;
   top: 0px;

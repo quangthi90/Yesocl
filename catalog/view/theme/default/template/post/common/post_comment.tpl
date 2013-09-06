@@ -22,7 +22,7 @@
 						<i class="icon-camera icon-2x"></i>
 					</a>
 					<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
-                                        <div class="fr comment-press-enter"><span>Press Enter to send</span><input type="checkbox" class="cb-press-enter" /></div>				
+                                        <div class="fr comment-press-enter">Press Enter to send  <input type="checkbox" class="cb-press-enter" /></div>				
 				</div>
 			</form>		
 		</div>			
