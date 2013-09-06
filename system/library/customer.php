@@ -70,8 +70,10 @@ class Customer {
 
 			// remember
 			if ($remember) {
-				setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
-	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+				//setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+	    		//setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
+	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30);
+	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30);
 	        }
 
 			// $this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
@@ -92,8 +94,10 @@ class Customer {
 		$this->customer_group_id = '';
 
 		// delete cookie
-		setcookie('yid', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
-	    setcookie('ypass', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
+		//setcookie('yid', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
+	    //setcookie('ypass', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
+		setcookie('yid', '', time() - 3600);
+	    setcookie('ypass', '', time() - 3600);
   	}
   
   	public function isLogged() {
