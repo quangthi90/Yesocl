@@ -13,7 +13,7 @@
 
 {% block body %}
 <div id="y-content" class="no-header-fixed">
-    <div id="y-main-content" class="has-horizontal has-block">
+    <div id="y-main-content" class="has-horizontal post-category">
         {% for posts in all_posts %}
         {% set style = random([1, 2]) %}
         {% if posts|length > 0 %}
@@ -24,9 +24,6 @@
                 </a> 
                 <a class="block-title fl" href="{{ category.href|raw }}">
                     {{ category.name }}                     
-                </a>  
-                <a class="block-seemore fl" href="#"> 
-                    <i class="icon-angle-right"></i>
                 </a>           
             </div>
             {% if style == 1 %}
