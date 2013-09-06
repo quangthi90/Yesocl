@@ -65,7 +65,7 @@
                                         >
                                             <i class="icon-comments medium-icon"></i>
                                         </a>
-                                        <a href="{{ post.href_post|raw }}" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
+                                        <a href="{{ post.href_post|raw }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
                                     </div>
                                     <div class="who-action">
                                         <a href="#" class="view-list-liker" 
