@@ -31,9 +31,20 @@ class ControllerAccountAccount extends Controller {
 
 		$this->data['posts'] = array();
 		$posts = $user->getPosts();
+		$start = 0;
+		$count_post = 1;
 
-		foreach ( $posts as $post ) {
+		foreach ( $posts as $key => $post ) {
+			if ( $key < $start ){
+				continue;
+			}
+
+			if ( $count_post > $this->limit ){
+				break;
+			}
+			
 			$post = $post->formatToCache();
+
 			if ( isset($post['user']) && isset($post['user']['avatar']) ){
 				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
 			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
@@ -41,6 +52,19 @@ class ControllerAccountAccount extends Controller {
             }else{
 				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
 			}
+
+			if ( isset($post['thumb']) && !empty($post['thumb']) ){
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+			}else{
+				$image = null;
+			}
+
+			$post['image'] = $image;
+			$post['avatar'] = $avatar;
+
+			$this->data['posts'][] = $post;
+
+			$count_post++;
 		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {

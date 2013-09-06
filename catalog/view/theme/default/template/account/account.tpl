@@ -62,12 +62,16 @@
             </div>
             <div class="block-content">
                 <div class="column">
+                {% for post in posts %}
+                    {% if loop.index == 1 %}
                     {{ block('post_common_form_status') }}
+                    {% endif %}
                     {{ block('post_common_post_block') }}
+                    {% if loop.index % 2 == 1 and loop.index != posts|length %}
                 </div>
                 <div class="column">
-                    {{ block('post_common_post_block') }}
-                    {{ block('post_common_post_block') }}
+                    {% endif %}
+                {% endfor %}
                 </div>
             </div>
         </div>
