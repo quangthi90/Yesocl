@@ -244,14 +244,7 @@ $controller->addPreAction(new Action('common/maintenance'));
 $controller->addPreAction(new Action('common/seo_url'));
 
 // Router
-if ( $controller->registry->data['customer']->isLogged() ) {
-	if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
-		$action = new Action($request->get['route']);
-	} else {
-		$action = new Action('common/home');
-	}
-/*}elseif (isset($request->cookie['yid']) && !empty($request->cookie['yid'])) {
-	if ($controller->registry->data['customer']->login($request->cookie['yid'], $request->cookie['ypass'])) {
+if ( $customer->isLogged() ) {
 		if (!isset($request->get['route']) || (
 			$request->get['route'] == 'account/login/login' || 
 			$request->get['route'] == 'account/login' ||
@@ -264,6 +257,15 @@ if ( $controller->registry->data['customer']->isLogged() ) {
 		}else{
 			$action = new Action($request->get['route']);
 		}
+	/*if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
+		$action = new Action($request->get['route']);
+	} else {
+		$action = new Action('common/home');
+	}*/
+}elseif (isset($request->cookie['yid']) && !empty($request->cookie['yid'])) {
+	if ($customer->login($request->cookie['yid'], $request->cookie['ypass'])) {
+		header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
+		exit;
 	}else {
 		if (isset($request->get['route']) && (
 			$request->get['route'] == 'account/login/login' || 
@@ -276,7 +278,7 @@ if ( $controller->registry->data['customer']->isLogged() ) {
 		}else{
 			$action = new Action('welcome/home');
 		}
-	}*/
+	}
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
