@@ -14,23 +14,34 @@ class ControllerAccountAccount extends Controller {
 		
 		$this->data['heading_title'] = $this->config->get('config_title');
 
-		$this->data['posts'] = array();
-		$i = 0;
-		
-		
-
-		if ( $this->customer->getAvatar() ){
-			$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
+		if ( !empty($this->request->get['user_slug']) ){
+			$user_slug = $this->request->get['user_slug'];
+		}elseif ( $this->customer->isLogged() ){
+			$user_slug = $this->customer->getSlug();
 		}else{
-			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
+			$this->redirect( $this->extension->path('HomePage') );
 		}
 
-		$this->data['user_info'] = array(
-			'avatar'	=> $avatar,
-			'username'	=> $this->customer->getUsername()
-		);
+		$this->load->model('user/user');
+		$user = $this->model_user_user->getUserFull( $this->request->get );
 
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
+		if ( !$user ){
+			return false;
+		}
+
+		$this->data['posts'] = array();
+		$posts = $user->getPosts();
+
+		foreach ( $posts as $post ) {
+			$post = $post->formatToCache();
+			if ( isset($post['user']) && isset($post['user']['avatar']) ){
+				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
+			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
+                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
+            }else{
+				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
+			}
+		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
@@ -39,9 +50,7 @@ class ControllerAccountAccount extends Controller {
 		}
 		
 		$this->children = array(
-			'common/sidebar_control',			
-			// 'common/content_top',
-			// 'common/content_bottom',
+			'common/sidebar_control',
 			'common/footer',
 			'common/header'
 		);
