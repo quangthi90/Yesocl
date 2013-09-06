@@ -427,8 +427,8 @@
                 var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent().parent();
                 $curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
                 $curr_item.find('.post_header .post_meta .post_cm d').html( comment_count );
-                $curr_item.find(".view-list-commenter").html(comment_count);
-                $curr_item.find(".view-list-commenter").html(comment_count);
+                $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
+                $curr_item.find(".view-list-commenter[data-view-type='comment']").html(comment_count);
 
                 $('.comment-item .like-comment').each(function(){
                     new LikeCommentBtn($(this));			
