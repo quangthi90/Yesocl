@@ -7,89 +7,39 @@ class ModelBranchComment extends Doctrine {
 	public function getComments( $data = array() ){
 		$this->load->model( 'tool/cache' );
 
-		if ( !isset($data['start']) || empty($data['start']) ){
+		$query = array();
+
+		if ( empty($data['start']) ){
 			$data['start'] = 0;
 		}
 
-		if ( !isset($data['limit']) || empty($data['limit']) ){
+		if ( empty($data['limit']) ){
 			$data['limit'] = 10;
 		}
 
-		if ( !isset($data['sort']) || empty($data['sort']) ){
-			$data['sort'] = 'created';
-		}
-
-		if ( !isset($data['order']) || empty($data['order']) ){
-			$data['order'] = 'ASC';
-		}
-
-		if ( !isset($data['branch_slug']) || empty($data['branch_slug']) ){
+		if ( empty($data['post_slug']) ){
 			return array();
 		}
 
-		if ( !isset($data['post_slug']) || empty($data['post_slug']) ){
-			return array();
-		}
+		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
 
-		if ( !isset($data['page']) || empty($data['page']) ) {
-			$data['page'] = 1;
-		}else {
-			$data['page'] = (int)$data['page'];
-		}
+		$comments = array();
 
-		if ( $data['page'] > 5 ) {
-			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBySlug( $data['branch_slug'] );
-			$post = $branch->getPostById( $data['post_id'] );
-			$data = $post->getComments();
-			$index = $data['page']*$data['limit'] - 1;
-			$comments = array();
-			if ( $index < count( $data ) ) {
-				for ($i=0; $i < 10; $i++) { 
-					$comments[] = array(
-						'author' 		=> $data[$index]->getAuthor(),
-						'content' 		=> html_entity_decode($data[$index]->getContent()),
-						'created'		=> $data[$index]->getCreated()->format('h:i A d/m/Y'),
-						'user_id'		=> $data[$index]->getUser()->getId(),
-						'status'		=> $data[$index]->getStatus()
-						);
-				}
-			}
-			return $comments;
-		}else {
-			$comments = $this->model_tool_cache->getLastComments( $data['post_slug'], $this->config->get('common')['type']['branch'], $data['branch_slug'] );
-
-			if ( count($comments) < 50 ){
-				$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBySlug( $data['branch_slug'] );
-				
-				if ( !$branch ){
-					return array();
+		if ( $post ){
+			foreach ( $post->getComments() as $key => $comment ) {
+				if ( $key < $data['start'] ){
+					continue;
 				}
 
-				$post = $branch->getPostBySlug( $data['post_slug'] );
-
-				if ( !$post ){
-					return array();
+				if ( count($comments) == $data['limit'] ){
+					break;
 				}
 
-				$this->model_tool_cache->updateLastComments( $this->config->get('post')['type']['branch'], $data['branch_slug'], $post );
-
-				$comments = $this->model_tool_cache->getLastComments( $data['post_slug'], $this->config->get('common')['type']['branch'], $data['branch_slug'] );
-			}
-			
-			if ( $data['order'] != 'ASC' ) {
-				$comments = krsort( $comments );
-			}
-
-			if ( $data['page']*10 <= count($comments) ) {
-				return array_slice( $comments, count( $comments ) - $data['limit']*$data['page'], $data['limit']);
-			}else {
-				if ( ($data['page']*10 - count($comments)) > 10 ) {
-					return array();
-				}else {
-					return array_slice( $comments, 0, $data['limit'] + count( $comments ) - $data['limit']*$data['page'] );
-				}
+				$comments[] = $comment->formatToCache();
 			}
 		}
+
+		return $comments;
 	}
 
 	public function getComment( $Comment_id ){
@@ -97,22 +47,21 @@ class ModelBranchComment extends Doctrine {
 	}
 
 	public function addComment( $data = array() ){
-		// Branch is required
-		if ( empty($data['branch_slug']) ){
-			return false;
-		}
-
-		$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug( $data['branch_slug'] );
-		if ( empty( $branch ) ) {
-			return false;
-		}
-
 		// Author is required
 		if ( empty($data['user_id']) ) {
 			return false;
 		}
 		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( empty( $user ) ) {
+			return false;
+		}
+
+		// Post is required
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		if ( !$post ){
 			return false;
 		}
 
@@ -129,21 +78,63 @@ class ModelBranchComment extends Doctrine {
 		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
-		$post = $branch->getPostBySlug( $data['post_slug'] );
+		$post->addComment( $comment );
+		
+		$this->dm->flush();
+		
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+		$this->load->model('branch/post');
+
+		$posts = $this->model_branch_post->getPosts( array(
+			'branch_id' => $post->getBranch()->getId(),
+			'category_id' => $post->getCategory()->getId(),
+			'limit' => 6
+		));
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$post->getBranch()->getId(), 
+					$post->getCategory()->getId(), 
+					$posts 
+				);
+				break;
+			}
+		}
+
+		$type = $this->config->get('post')['cache']['branch'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'type_id' => $post->getBranch()->getId(),
+			'view' => 0,
+			'created' => $comment->getCreated()
+		);
+		$this->model_cache_post->editPost( $data );
+
+		return $comment->formatToCache();
+	}
+
+	public function editComment( $comment_id, $data = array() ){
+		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+			'comments.id' => $comment_id
+		));
 
 		if ( !$post ){
 			return false;
 		}
 
-		$post->addComment( $comment );
+		$comment = $post->getCommentById( $comment_id );
 		
-		$this->dm->flush();
-		
-		//-- Update 50 last Comments
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment->getId() );
+		if ( !empty($data['likerId']) && !in_array($data['likerId'], $comment->getLikerIds()) ){
+			$comment->addLikerId( $data['likerId'] );
+		}
 
-		return $comment->formatToCache();
+		$this->dm->flush();
+
+		return $comment;
 	}
 }
 ?>

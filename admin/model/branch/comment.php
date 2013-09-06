@@ -26,14 +26,6 @@ class ModelBranchComment extends Doctrine {
 	 * 	- false: not success
 	 */
 	public function addComment( $post_id, $data = array() ) {
-		// Branch is required
-		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array(
-			'posts.id' => $post_id
-		));
-		if ( empty( $branch ) ) {
-			return false;
-		}
-
 		// Author is required
 		if ( !isset( $data['user_id'] ) ) {
 			return false;
@@ -60,14 +52,42 @@ class ModelBranchComment extends Doctrine {
 		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
-		$post = $branch->getPostById( $post_id );
+		$post = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
 		$post->addComment( $comment );
 
 		$this->dm->flush();
 		
-		//-- Update 50 last Comments
+		//-- Update 6 last posts
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment->getId() );
+		$this->load->model('branch/post');
+
+		$posts = $this->model_branch_post->getPosts( array(
+			'branch_id' => $post->getBranch()->getId(),
+			'category_id' => $post->getCategory()->getId(),
+			'limit' => 6
+		));
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$post->getBranch()->getId(), 
+					$post->getCategory()->getId(), 
+					$posts 
+				);
+				break;
+			}
+		}
+
+		$type = $this->config->get('post')['cache']['branch'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'type_id' => $post->getBranch()->getId(),
+			'view' => 0,
+			'created' => $comment->getCreated()
+		);
+		$this->model_cache_post->editPost( $data );
 		
 		return true;
 	}
@@ -94,16 +114,8 @@ class ModelBranchComment extends Doctrine {
 	 * 	- false: not success
 	 */
 	public function editComment( $post_id, $comment_id, $data = array() ) {
-		// Branch is required
-		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( array( 
-			'posts.comments.id' => $comment_id
-		));
-		if ( empty( $branch ) ) {
-			return false;
-		}
-
 		// Post is required
-		$post = $branch->getPostById( $post_id );
+		$post = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
 		if ( !$post ){
 			return false;
 		}
@@ -137,8 +149,8 @@ class ModelBranchComment extends Doctrine {
 
 		$this->dm->flush();
 
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment_id );
+		// $this->load->model( 'tool/cache' );
+		// $this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['branch'], $branch->getSlug(), $post, $comment_id );
 		
 		return true;
 	}
@@ -146,12 +158,7 @@ class ModelBranchComment extends Doctrine {
 	public function deleteComment( $post_id, $data = array() ) {
 		if ( isset($data['id']) ) {
 			if ( count($data['id']) > 0 ){
-				$branch = $this->dm->getRepository('Document\Branch\Branch')->findOneBy( array('posts.comments.id' => $data['id'][0]) );
-				if ( !$branch ){
-					return false;
-				}
-
-				$post = $branch->getPostById( $post_id );
+				$post = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
 				if ( !$post ){
 					return false;
 				}
@@ -161,8 +168,8 @@ class ModelBranchComment extends Doctrine {
 				$comment = $post->getCommentById( $id );
 				if ( !empty( $comment ) ) {
 					// remove cache
-					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteComment( $id, $post->getSlug(), $this->config->get('comment')['type']['branch'], $branch->getSlug() );
+					// $this->load->model('tool/cache');
+					// $this->model_tool_cache->deleteComment( $id, $post->getSlug(), $this->config->get('comment')['type']['branch'], $branch->getSlug() );
 
 					$post->getComments()->removeElement( $comment );
 				}
@@ -170,6 +177,24 @@ class ModelBranchComment extends Doctrine {
 		}
 		
 		$this->dm->flush();
+
+		if ( $post ){
+			//-- Update 6 last posts
+			$this->load->model('tool/cache');
+			$this->load->model('branch/post');
+
+			$posts = $this->model_branch_post->getPosts( array(
+				'branch_id' => $post->getBranch()->getId(),
+				'category_id' => $post->getCategory()->getId(),
+				'limit' => 6
+			));
+			$this->model_tool_cache->updateLastCategoryPosts( 
+				$this->config->get('post')['type']['branch'], 
+				$post->getBranch()->getId(), 
+				$post->getCategory()->getId(), 
+				$posts 
+			);
+		}
 
 		return true;
 	}

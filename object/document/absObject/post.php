@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 * @MongoDB\MappedSuperclass
 * @MongoDB\InheritanceType("COLLECTION_PER_CLASS")
 * @MongoDB\DiscriminatorMap({
-*     "CompanyPost"="Document\Branch\Post"
+*     "BranchPost"="\Document\Branch\Post"
 * })
 */
 Abstract Class Post {
@@ -49,6 +49,12 @@ Abstract Class Post {
 	/** @MongoDB\String */
 	private $thumb;
 
+	/** @MongoDB\Boolean */
+	private $deleted;
+
+	/** @MongoDB\Collection */
+    private $likerIds;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -71,7 +77,7 @@ Abstract Class Post {
 	* Format array to save to Cache
 	* 05/26/2013
 	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Post & Comments
+	* @return: array Post
 	*/
 	public function formatToCache(){
 		$limit = 200;
@@ -89,7 +95,8 @@ Abstract Class Post {
 			'slug'			=> $this->getSlug(),
 			'status'		=> $this->getStatus(),
 			'email'			=> $this->getEmail(),
-			'comment_count' => $this->getComments()->count()
+			'comment_count' => $this->getComments()->count(),
+			'like_count'	=> count($this->getLikerIds())
 		);
 
 		return $post_data;
@@ -142,6 +149,7 @@ Abstract Class Post {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+		$this->deleted = false;
 	}
 
 	/** @MongoDB\PreUpdate */
@@ -201,5 +209,25 @@ Abstract Class Post {
 
 	public function getThumb(){
 		return $this->thumb;
+	}
+
+	public function setDeleted( $deleted ){
+		$this->deleted = $deleted;
+	}
+
+	public function getDeleted(){
+		return $this->deleted;
+	}
+
+	public function getLikerIds(){
+		return $this->likerIds;
+	}
+
+	public function addLikerId( $likerId ){
+		$this->likerIds[] = (string)$likerId;
+	}
+
+	public function setLikerIds( $likerIds ){
+		$this->likerIds = $likerIds;
 	}
 }

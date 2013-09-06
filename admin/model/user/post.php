@@ -64,8 +64,16 @@ class ModelUserPost extends Doctrine {
 
 		$this->dm->flush();
 
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post->getSlug() );
+		$type = $this->config->get('post')['cache']['user'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'type_id' => $user_id,
+			'view' => 0,
+			'created' => $post->getCreated()
+		);
+		$this->model_cache_post->addPost( $data );
 		
 		return true;
 	}
@@ -130,9 +138,6 @@ class ModelUserPost extends Doctrine {
 		}
 		
 		$this->dm->flush();
-
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastPosts( $this->config->get('post')['type']['user'], $user, $post->getSlug() );
 		
 		return true;
 	}
@@ -142,6 +147,11 @@ class ModelUserPost extends Doctrine {
 			if ( count($data['id']) > 0 ){
 				$user = $this->dm->getRepository('Document\User\User')->findOneBy( array('posts.id' => $data['id'][0]) );
 			}
+
+			$this->load->model('tool/image');
+			$this->load->model('cache/post');
+
+			$this->model_cache_post->deletePost( $data );
 			
 			foreach ( $data['id'] as $id ) {
 				$post = $user->getPostById( $id );
@@ -151,15 +161,7 @@ class ModelUserPost extends Doctrine {
 					$path = DIR_IMAGE . $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
 					
 					// remove Image
-					$this->load->model('tool/image');
 					$this->model_tool_image->deleteDirectoryImage( $path );
-
-					// remove cache
-					$this->load->model('tool/cache');
-					$this->model_tool_cache->deletePost( $post->getSlug(), $this->config->get('post')['type']['user'], $user->getSlug() );
-
-					$user->getPosts()->removeElement( $post );
-					break;
 				}
 			}
 		}

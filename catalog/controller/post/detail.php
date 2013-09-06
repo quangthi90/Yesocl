@@ -12,14 +12,24 @@ class ControllerPostDetail extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 
-		if ( isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug']) ){
-			$post_slug = $this->request->get['post_slug'];
-		}else{
-			print("not found post!"); exit;
+		if ( empty($this->request->get['post_type']) ){
+			print("post type is empty!"); exit;
 		}
 
-		$this->load->model('company/post');
-		$post = $this->model_company_post->getPostBySlug( $post_slug );
+		if ( empty($this->request->get['post_slug']) ){
+			print("post slug is empty!"); exit;
+		}
+
+		switch ($this->request->get['post_type']) {
+			case 'branch':
+				$this->load->model('branch/post');
+				$post = $this->model_branch_post->getPost( $this->request->get );
+				break;
+			
+			default:
+				$post = null;
+				break;
+		}
 
 		if ( !$post ){
 			print("not found post!"); exit;
@@ -27,7 +37,7 @@ class ControllerPostDetail extends Controller {
 
 		$this->load->model('tool/image');
 
-		if ( $post->getUser() && $post->getUser()->getAvatar() ){
+		if ( $post->getUser() && $post->getUser()->getAvatar() && file_exists(DIR_IMAGE . $post->getUser()->getAvatar()) ){
 			$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
 		}elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
             $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
@@ -47,38 +57,16 @@ class ControllerPostDetail extends Controller {
 			'comment_count' => $comment_count,
 			'category'		=> $post->getCategory()->getName(),
 			'type'			=> 'company',
+			'slug'			=> $post->getSlug(),
+			'branch_slug'	=> $post->getBranch()->getSlug(),
+			'like_count'	=> count($post->getLikerIds()),
 			'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
-			'href_status'	=> $this->url->link('post/post/getCommentByPost', '', 'SSL')
+			'href_status'	=> $this->url->link('post/comment/getComments', '', 'SSL')
 		);
 
-		$this->data['post']['comments'] = array();
-
-		foreach ( $post->getComments() as $comment ) {
-			if ( $comment->getUser() && $comment->getUser()->getAvatar() ){
-                $avatar = $this->model_tool_image->resize( $comment->getUser()->getAvatar(), 180, 180 );
-            }elseif ( $comment->getUser() && $comment->getUser()->getPrimaryEmail()->getEmail() ){
-                $avatar = $this->model_tool_image->getGavatar( $comment->getUser()->getPrimaryEmail()->getEmail(), 180 );
-            }else{
-                $avatar = $this->model_tool_image->getGavatar( $comment->getEmail(), 180 );
-            }
-
-            if ( $comment->getUser() && $comment->getUser()->getUsername() ){
-                $author = $comment->getUser()->getUsername();
-            }else{
-                $author = $comment->getAuthor();
-            }
-
-			$this->data['post']['comments'][$comment->getId()] = array(
-				'id'			=> $comment->getId(),
-				'author' 		=> $author,
-				'avatar' 		=> $avatar,
-				'content' 		=> html_entity_decode($comment->getContent()),
-				'created'		=> $comment->getCreated(),
-				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $comment->getUser()->getSlug(), 'SSL')
-			);
-		}
-
-		$this->data['action']['comment'] = $this->url->link('post/post/addComment', '', 'SSL');
+		$this->data['date_format'] = $this->language->get('date_format_full');
+		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
+		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/detail.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/detail.tpl';

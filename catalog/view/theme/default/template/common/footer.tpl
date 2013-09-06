@@ -3,8 +3,8 @@
         <div class="bar-wrapper">
             <div class="search fl">
               <form>
-                  <div class="input-prepend">                    
-                    <button class="btn btn-yes" type="button" >Search</button>
+                  <div class="input-prepend">      
+                    <button class="btn btn-yes" type="button" style="width: 120px;">Search</button>
                     <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
                 </div>          
               </form> 

@@ -28,6 +28,33 @@ Class Comment {
 	/** @MongoDB\String */
 	private $email;
 
+	/** @MongoDB\Boolean */
+	private $deleted;
+
+	/** @MongoDB\Collection */
+    private $likerIds;
+
+	/**
+	* Format array to save to Cache
+	* 05/26/2013
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array Comments
+	*/
+	public function formatToCache(){
+		$data_format = array(
+			'id'			=> $this->getId(),
+			'author' 		=> $this->getAuthor(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated(),
+			'user_id'		=> $this->getUser()->getId(),
+			'user_slug'		=> $this->getUser()->getSlug(),
+			'status'		=> $this->getStatus(),
+			'like_count'	=> count($this->getLikerIds())
+		);
+
+		return $data_format;
+	}
+
 	public function getId(){
 		return $this->id;
 	}
@@ -59,6 +86,7 @@ Class Comment {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+		$this->deleted = false;
 	}
 
 	/** @MongoDB\PreUpdate */
@@ -92,16 +120,23 @@ Class Comment {
 		return $this->email;
 	}
 
-	public function formatToCache(){
-		$data_format = array(
-			'author' 		=> $this->getAuthor(),
-			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
-			'user_id'		=> $this->getUser()->getId(),
-			'user_slug'		=> $this->getUser()->getSlug(),
-			'status'		=> $this->getStatus()
-		);
+	public function setDeleted( $deleted ){
+		$this->deleted = $deleted;
+	}
 
-		return $data_format;
+	public function getDeleted(){
+		return $this->deleted;
+	}
+
+	public function getLikerIds(){
+		return $this->likerIds;
+	}
+
+	public function addLikerId( $likerId ){
+		$this->likerIds[] = (string)$likerId;
+	}
+
+	public function setLikerIds( $likerIds ){
+		$this->likerIds = $likerIds;
 	}
 }
