@@ -100,13 +100,15 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		this.columns.css('margin-right', marginPost + 'px');
 		this.columns.children('.feed-container').width(widthPost - 5);
 		this.blockContent.height(heightBlockContent);		
-		this.blocks.width((5/6)*this.widthMain);
-		this.blocks.css('margin-right', marginBlock + 'px');		
+		this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+		this.blocks.css('margin-right', marginBlock + 'px');	
+		var totalWithContent = 0;	
 		this.blocks.each(function(index) {
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
-			blockFeed.putFeed();			
+			blockFeed.putFeed();	
+			totalWithContent += ($(this).outerWidth() + marginBlock);			
 		});
-		this.root.width(this.blocks.length*((5/6)*this.widthMain + marginBlock));
+		this.root.width(totalWithContent);
 		this.feeds.each(function() {
 			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
@@ -161,15 +163,17 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		this.columns.css('margin-right', marginPost + 'px');
 		this.columns.children('.feed-container').width(widthPost - 5);
 		this.blockContent.height(heightBlockContent);		
-		this.blocks.width((5/6)*this.widthMain);	
+		this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+		var totalWithContent = 0;
 		this.blocks.each(function(index) {
 			if(index != 0) {
 				$(this).find('.block-header').css('visibility','hidden');
 			}
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
-			blockFeed.putFeed();			
+			blockFeed.putFeed();	
+			totalWithContent += $(this).outerWidth();	
 		});
-		this.root.width(this.blocks.length*((5/6)*this.widthMain));
+		this.root.width(totalWithContent);
 		this.feeds.each(function() {
 			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
