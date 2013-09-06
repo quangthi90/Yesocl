@@ -104,6 +104,14 @@ class Customer {
     	return $this->customer_id;
   	}
 
+  	public function hasRemember() {
+  		if ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) && $this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'] ) ) {
+  			return true;
+  		}else {
+  			return false;
+  		}
+  	}
+
   	public function getId() {
     	return $this->customer_id;
   	}

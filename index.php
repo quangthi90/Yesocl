@@ -262,23 +262,9 @@ if ( $customer->isLogged() ) {
 	} else {
 		$action = new Action('common/home');
 	}*/
-}elseif (isset($request->cookie['yid']) && !empty($request->cookie['yid'])) {
-	if ($customer->login($request->cookie['yid'], $request->cookie['ypass'])) {
-		header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
-		exit;
-	}else {
-		if (isset($request->get['route']) && (
-			$request->get['route'] == 'account/login/login' || 
-			$request->get['route'] == 'account/login' ||
-			$request->get['route'] == 'account/register/register' ||
-			$request->get['route'] == 'account/forgotten'
-		)) 
-		{
-			$action = new Action($request->get['route']);
-		}else{
-			$action = new Action('welcome/home');
-		}
-	}
+}elseif ( $customer->hasRemember() ) {
+	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
+	exit;
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
