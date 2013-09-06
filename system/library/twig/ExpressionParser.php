@@ -18,8 +18,7 @@
  * @see http://www.engr.mun.ca/~theo/Misc/exp_parsing.htm
  * @see http://en.wikipedia.org/wiki/Operator-precedence_parser
  *
- * @package    twig
- * @author     Fabien Potencier <fabien@symfony.com>
+ * @author Fabien Potencier <fabien@symfony.com>
  */
 class Twig_ExpressionParser
 {
@@ -317,22 +316,22 @@ class Twig_ExpressionParser
                     throw new Twig_Error_Syntax('The "attribute" function takes at least two arguments (the variable and the attributes)', $line, $this->parser->getFilename());
                 }
 
-                return new Twig_Node_Expression_GetAttr($args->getNode(0), $args->getNode(1), count($args) > 2 ? $args->getNode(2) : new Twig_Node_Expression_Array(array(), $line), Twig_TemplateInterface::ANY_CALL, $line);
+                return new Twig_Node_Expression_GetAttr($args->getNode(0), $args->getNode(1), count($args) > 2 ? $args->getNode(2) : new Twig_Node_Expression_Array(array(), $line), Twig_Template::ANY_CALL, $line);
             default:
-                if (null !== $alias = $this->parser->getImportedSymbol('function', $name)) {
-                    $arguments = new Twig_Node_Expression_Array(array(), $line);
-                    foreach ($this->parseArguments() as $n) {
-                        $arguments->addElement($n);
-                    }
-
-                    $node = new Twig_Node_Expression_MethodCall($alias['node'], $alias['name'], $arguments, $line);
-                    $node->setAttribute('safe', true);
-
-                    return $node;
+                $args = $this->parseArguments(true);
+                if (null !== $alias = $this->parser->getImportedSymbol('macro', $name)) {
+                    return new Twig_Node_Expression_MacroCall($alias['node'], $alias['name'], $this->createArrayFromArguments($args), $line);
                 }
 
-                $args = $this->parseArguments(true);
-                $class = $this->getFunctionNodeClass($name, $line);
+                try {
+                    $class = $this->getFunctionNodeClass($name, $line);
+                } catch (Twig_Error_Syntax $e) {
+                    if (!$this->parser->hasMacro($name)) {
+                        throw $e;
+                    }
+
+                    return new Twig_Node_Expression_MacroCall(new Twig_Node_Expression_Name('_self', $line), $name, $this->createArrayFromArguments($args), $line);
+                }
 
                 return new $class($name, $args, $line);
         }
@@ -344,7 +343,7 @@ class Twig_ExpressionParser
         $token = $stream->next();
         $lineno = $token->getLine();
         $arguments = new Twig_Node_Expression_Array(array(), $lineno);
-        $type = Twig_TemplateInterface::ANY_CALL;
+        $type = Twig_Template::ANY_CALL;
         if ($token->getValue() == '.') {
             $token = $stream->next();
             if (
@@ -355,36 +354,42 @@ class Twig_ExpressionParser
                 ($token->getType() == Twig_Token::OPERATOR_TYPE && preg_match(Twig_Lexer::REGEX_NAME, $token->getValue()))
             ) {
                 $arg = new Twig_Node_Expression_Constant($token->getValue(), $lineno);
-
-                if ($stream->test(Twig_Token::PUNCTUATION_TYPE, '(')) {
-                    $type = Twig_TemplateInterface::METHOD_CALL;
-                    foreach ($this->parseArguments() as $n) {
-                        $arguments->addElement($n);
-                    }
-                }
             } else {
                 throw new Twig_Error_Syntax('Expected name or number', $lineno, $this->parser->getFilename());
             }
 
-            if ($node instanceof Twig_Node_Expression_Name && null !== $alias = $this->parser->getImportedSymbol('template', $node->getAttribute('name'))) {
+            if ($node instanceof Twig_Node_Expression_Name && null !== $this->parser->getImportedSymbol('template', $node->getAttribute('name'))) {
                 if (!$arg instanceof Twig_Node_Expression_Constant) {
                     throw new Twig_Error_Syntax(sprintf('Dynamic macro names are not supported (called on "%s")', $node->getAttribute('name')), $token->getLine(), $this->parser->getFilename());
                 }
 
-                $node = new Twig_Node_Expression_MethodCall($node, 'get'.$arg->getAttribute('value'), $arguments, $lineno);
-                $node->setAttribute('safe', true);
+                $arguments = $this->createArrayFromArguments($this->parseArguments(true));
 
-                return $node;
+                return new Twig_Node_Expression_MacroCall($node, $arg->getAttribute('value'), $arguments, $lineno);
+            }
+
+            if ($stream->test(Twig_Token::PUNCTUATION_TYPE, '(')) {
+                $type = Twig_Template::METHOD_CALL;
+                $arguments = $this->createArrayFromArguments($this->parseArguments());
             }
         } else {
-            $type = Twig_TemplateInterface::ARRAY_CALL;
-
-            $arg = $this->parseExpression();
+            $type = Twig_Template::ARRAY_CALL;
 
             // slice?
+            $slice = false;
             if ($stream->test(Twig_Token::PUNCTUATION_TYPE, ':')) {
-                $stream->next();
+                $slice = true;
+                $arg = new Twig_Node_Expression_Constant(0, $token->getLine());
+            } else {
+                $arg = $this->parseExpression();
+            }
 
+            if ($stream->test(Twig_Token::PUNCTUATION_TYPE, ':')) {
+                $slice = true;
+                $stream->next();
+            }
+
+            if ($slice) {
                 if ($stream->test(Twig_Token::PUNCTUATION_TYPE, ']')) {
                     $length = new Twig_Node_Expression_Constant(null, $token->getLine());
                 } else {
@@ -444,6 +449,8 @@ class Twig_ExpressionParser
      *
      * @param Boolean $namedArguments Whether to allow named arguments or not
      * @param Boolean $definition     Whether we are parsing arguments for a function definition
+     *
+     * @return Twig_Node
      */
     public function parseArguments($namedArguments = false, $definition = false)
     {
@@ -475,25 +482,26 @@ class Twig_ExpressionParser
                     $value = $this->parsePrimaryExpression();
 
                     if (!$this->checkConstantExpression($value)) {
-                        throw new Twig_Error_Syntax(sprintf('A default value for an argument must be a constant (a boolean, a string, a number, or an array).'), $token->getLine(), $this->parser->getFilename());
+                        throw new Twig_Error_Syntax('A default value for an argument must be a constant (a boolean, a string, a number, or an array).', $token->getLine(), $this->parser->getFilename());
                     }
                 } else {
                     $value = $this->parseExpression();
                 }
             }
 
-            if ($definition) {
-                if (null === $name) {
-                    $name = $value->getAttribute('name');
-                    $value = new Twig_Node_Expression_Constant(null, $this->parser->getCurrentToken()->getLine());
-                }
-                $args[$name] = $value;
+            if ($definition && null === $name) {
+                $name = $value->getAttribute('name');
+                $value = new Twig_Node_Expression_Constant(null, $this->parser->getCurrentToken()->getLine());
+            }
+
+            if (null === $name) {
+                $args[] = $value;
             } else {
-                if (null === $name) {
-                    $args[] = $value;
-                } else {
-                    $args[$name] = $value;
+                if ($definition && isset($args[$name])) {
+                    throw new Twig_Error_Syntax(sprintf('Arguments cannot contain the same argument name more than once ("%s" is defined twice).', $name), $token->getLine(), $this->parser->getFilename());
                 }
+
+                $args[$name] = $value;
             }
         }
         $stream->expect(Twig_Token::PUNCTUATION_TYPE, ')', 'A list of arguments must be closed by a parenthesis');
@@ -588,5 +596,16 @@ class Twig_ExpressionParser
         }
 
         return true;
+    }
+
+    private function createArrayFromArguments(Twig_Node $arguments, $line = null)
+    {
+        $line = null === $line ? $arguments->getLine() : $line;
+        $array = new Twig_Node_Expression_Array(array(), $line);
+        foreach ($arguments as $key => $value) {
+            $array->addElement($value, new Twig_Node_Expression_Constant($key, $value->getLine()));
+        }
+
+        return $array;
     }
 }

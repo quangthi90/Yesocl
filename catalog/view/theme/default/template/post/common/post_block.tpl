@@ -1,37 +1,40 @@
 {% block post_common_post_block %}
-	<div class="feed post post_in_singleblock">
-		<div class="row-fluid post_header">
-			<div class="span2 avatar_thumb">
-				<a href="{{ post.href_user|raw }}">
-					<img src="{{ post.avatar }}" alt="user">
+	<div class="feed post post_status">
+		<div class="post_header">
+			<div class="avatar_thumb">
+				<a href="#">
+					<img src="image/template/user-avatar.png" alt="user" />
 				</a>
-			</div>
-			<div class="span10">
-				<div class="row-fluid">
-					<div class="span8 post_user">
-						<a href="{{ post.href_user|raw }}">{{ post.author }}</a>
-					</div>
-					<div class="span4 post_time">
-						<i class="icon-time icon-2x"></i> {{ post.created|date('d/m/Y') }}
-					</div>
+			</div>			
+			<div class="post_meta_info">
+				<div class="post_user">
+					<a href="#">WMThiet</a>
 				</div>
-				<h4 class="post_title"><a href="{{ post.href_post|raw }}">{{ post.title }}</a></h4>
-			</div>
+				<div class="post_meta">
+					<span class="post_time fl">
+						<i class="icon-calendar"></i> 
+						<d class="timeago" title="2013-08-23T05:04:52+02:00"></d>
+					</span>
+					<span class="post_cm fr">
+						<i class="icon-comments-alt"></i> 10
+					</span>
+					<span class="post_like fr">
+						<i class="icon-thumbs-up"></i> 100
+					</span>
+				</div>
+			</div>			
 		</div>
 		<div class="post_body">
-			{% if post.image != null %}
-			<div class="post_image text-center">
-				<img src="{{ post.image }}" />
+			<h4 class="post_title">
+				<a href="#">Lăng kính Yestoc tuần 19/08-23/08: tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510 </a>
+			</h4>
+			<div class="post_image">
+				<img src="image/template/img.jpg" />
 			</div>
-			{% endif %}
-			{{ post.content|raw }}
-		</div>
-		<div class="row-fluid post_footer">
-			<div class="span11 post_action">
-				<a href="#"><i class="icon-thumbs-up medium-icon"></i> Like</a>
-				<a href="#" class="open-comment" data-url="{{ post.href_status|raw }}" data-comment-count="{{ post.comment_count }}" data-post-id="{{ post.id }}" data-post-type="{{ post.type }}"><i class="icon-comments medium-icon"></i> Comment (<span class="counter{{ post.id }}">{{ post.comment_count }}</span>)</a>
+			<div class="post_text_raw">
+				Đóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex. Đóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex [...]
 			</div>
-		</div>
+		</div>		
 	</div>
 {% endblock %}
 

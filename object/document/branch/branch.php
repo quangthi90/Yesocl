@@ -32,7 +32,7 @@ Class Branch {
 	/** @MongoDB\ReferenceOne(targetDocument="\Document\Company\Company") */
 	private $company;
 
-	/** @MongoDB\EmbedMany(targetDocument="Post") */
+	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="branch") */
 	private $posts = array();
 
 	/** @MongoDB\Int */
@@ -41,7 +41,7 @@ Class Branch {
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: MongoDB ID
+	 * @param: string Post ID
 	 * @return:
 	 * 		- Object Post
 	 * 		- null if not found
@@ -59,7 +59,7 @@ Class Branch {
 	/**
 	 * Get Post By Slug
 	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: MongoDB ID
+	 * @param: string post Slug
 	 * @return:
 	 * 		- Object Post
 	 * 		- null if not found
@@ -90,6 +90,24 @@ Class Branch {
 		);
 
 		return $data;
+	}
+
+	/**
+	 * Get Post By Category ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: string Category ID
+	 * @return:
+	 * 		- list Object Posts
+	 */
+	public function getPostsByCategory( $category_id ){
+		$posts = array();
+		foreach ( $this->posts as $post ){
+			if ( $post->getCategory()->getId() == $category_id ){
+				$posts[$post->getId()] = $post;
+			}
+		}
+		
+		return posts;
 	}
 
 	public function getId(){
@@ -162,10 +180,6 @@ Class Branch {
 
 	public function getCompany(){
 		return $this->company;
-	}
-
-	public function addPost( Post $post ){
-		$this->posts = array_merge( array($post), $this->posts->toArray() );
 	}
 
 	public function setPosts( $posts ){

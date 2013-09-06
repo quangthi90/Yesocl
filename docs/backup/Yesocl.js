@@ -48,6 +48,20 @@ db.getCollection("branch_category").ensureIndex({
   
 ]);
 
+/** branch_post indexes **/
+db.getCollection("branch_post").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
+/** cache_post indexes **/
+db.getCollection("cache_post").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** city indexes **/
 db.getCollection("city").ensureIndex({
   "_id": NumberInt(1)
@@ -1383,551 +1397,15 @@ db.getCollection("attribute_type").insert({
 
 /** branch records **/
 db.getCollection("branch").insert({
-  "_id": ObjectId("51d39bb1d87459c40a000018"),
-  "company": {
-    "$ref": "company",
-    "$id": ObjectId("51e97c88471dee180a000000"),
-    "$db": "yesocl"
-  },
-  "name": "Follower",
-  "order": NumberInt(2),
-  "posts": [
-    
-  ],
-  "slug": "follower-520ce9a2471dee9c09000001",
-  "status": false
-});
-db.getCollection("branch").insert({
   "_id": ObjectId("51d39ba5d87459c40a000017"),
   "company": {
     "$ref": "company",
     "$id": ObjectId("51e97c88471dee180a000000"),
     "$db": "yesocl"
   },
+  "deleted": false,
   "name": "Yestoc",
   "order": NumberInt(1),
-  "posts": [
-    {
-      "_id": ObjectId("51ee432d471dee580a000001"),
-      "author": "user2",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3a0cad87459c40a000019"),
-        "$db": "yesocl"
-      },
-      "comments": [
-        {
-          "_id": ObjectId("520f3bc4471dee3c0a000000"),
-          "content": "11111111111",
-          "status": true,
-          "created": ISODate("2013-08-17T09:00:52.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f3bcc471dee3c0a000001"),
-          "content": "22222222222222",
-          "status": true,
-          "created": ISODate("2013-08-17T09:01:00.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f3bd5471dee3c0a000002"),
-          "content": "333333333333333",
-          "status": true,
-          "created": ISODate("2013-08-17T09:01:09.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f3bea471dee400a000000"),
-          "author": "user1",
-          "content": "44444444",
-          "created": ISODate("2013-08-17T09:01:30.0Z"),
-          "email": "quangthi_90@yahoo.com.vn",
-          "status": true,
-          "updated": ISODate("2013-08-17T09:11:22.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          }
-        },
-        {
-          "_id": ObjectId("520f9846471dee3c0a000003"),
-          "content": "55555555",
-          "status": true,
-          "created": ISODate("2013-08-17T15:35:34.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f98bd471dee100a000000"),
-          "content": "66666666",
-          "status": true,
-          "created": ISODate("2013-08-17T15:37:33.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f9920471dee100a000002"),
-          "content": "777777777",
-          "status": true,
-          "created": ISODate("2013-08-17T15:39:12.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f9923471dee100a000003"),
-          "content": "8888888",
-          "status": true,
-          "created": ISODate("2013-08-17T15:39:15.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f9925471dee100a000004"),
-          "content": "9999999999",
-          "status": true,
-          "created": ISODate("2013-08-17T15:39:17.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f9baa471dee100a000005"),
-          "content": "100000000000000",
-          "status": true,
-          "created": ISODate("2013-08-17T15:50:02.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520f9bb2471dee100a000006"),
-          "content": "110000000000",
-          "status": true,
-          "created": ISODate("2013-08-17T15:50:10.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520fa8cd471dee100a000007"),
-          "content": "1200000000",
-          "status": true,
-          "created": ISODate("2013-08-17T16:46:05.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520fa910471dee100a000008"),
-          "content": "13000000000",
-          "status": true,
-          "created": ISODate("2013-08-17T16:47:12.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520fa93c471dee100a000009"),
-          "content": "1400000000",
-          "status": true,
-          "created": ISODate("2013-08-17T16:47:56.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520fa994471dee100a00000a"),
-          "content": "150000000000000",
-          "status": true,
-          "created": ISODate("2013-08-17T16:49:24.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        }
-      ],
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Tóm tắt view nhận định tuần 15-19\/07&lt;\/strong&gt;: &lt;a href=&quot;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&quot;&gt;http:\/\/yestoc.com\/lang-kinh-yestoc-tuan-15-1907-tan-dung-cac-nhip-dieu-chinh-de-tang-ti-trong-co-phieu\/&lt;\/a&gt;&lt;br \/&gt;\r\n\t…theo phân tích của chúng tôi thì mục tiêu ngắn hạn của đợt tăng lần này nằm ở vùng 505-507 đối với Vnindex và vùng 64-65-4 đối với Hnxindex, do đó nhà đầu tư nên thận trọng khi cả hai chỉ số tiếp cận vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChỉ số VNIndex tăng khá mạnh trong phiên cuối tuần và bức phá ngưỡng kháng cự 498-500, khối lượng duy trì ở mức trung bình cho thấy áp lực bán ra đã được hấp thụ khá tốt trong những phiên trước. Theo quan sát của chúng tôi, thị trường vẫn trong giai đoạn phân hóa mạnh, dòng tiền chỉ tập trung vào các mã largecap như MSN, VNM, GAS, BVH… Trong khi đó, HNXIndex vẫn tiếp tục đi ngang và chưa thể bức phá được vùng 63.5. Chúng tôi cho rằng chỉ số Vnindex sẽ test lại vùng 500( tương đương đường MA50) trong phiên đầu tuần, nếu thanh khoản vẫn tiếp tục duy trì ổn định, thì xu hướng tăng sẽ rõ ràng hơn. Tuy nhiên, như các bản tin trước, chúng tôi đặc biệt lưu ý ngưỡng kháng cự 507, nhà đầu tư cần thận trọng khi Vnindex đi vào vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTheo đồ thị tuần, hai chỉ số đã hình thành các cây nến tích cực, và khối lượng có sự cải thiện rõ rệt. Vnindex đã bức phá thành công đường MA20 với thanh khoản cao cho thấy xu hướng trung hạn đang có chuyển biến tích cực. Chúng tôi tiếp tục chờ sự cộng hưởng từ chỉ số HNxindex để có thể xác nhận xu hướng trung hạn được bền vững. Do đó, nhà đầu tư trung hạn chỉ nên tiếp tục duy trì mức độ giải ngân thăm dò trong những nhịp điều chỉnh sắp tới trước khi thị trường xác nhận xu thế tăng bền vững.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi vẫn giữ quan điểm như trong các bản tin trước, nhà đầu tư có thể tiếp tục gia tăng tỉ trọng trong những nhịp điều chỉnh của thị trường, tuy nhiên nên cân nhắc tránh mua đuổi khi Vnindex tiệm cận vùng cản 507.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã cơ bản đang được tích lũy tốt .&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "created": ISODate("2013-07-23T08:47:41.0Z"),
-      "description": "Tóm tắt view nhận định tuần 15-19\/07...\r\n",
-      "email": "user2@test.com",
-      "slug": "lang-kinh-yestoc-tuan-22-2607-da-tang-tiep-tuc-duoc-cung-co-51ee432d471dee580a000000",
-      "status": true,
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee432d471dee580a000001\/avatar.jpg",
-      "title": "Lăng kính Yestoc tuần 22-26\/07: “đà tăng tiếp tục được củng cố”",
-      "updated": ISODate("2013-08-17T16:49:24.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51ee4233471dee640a000001"),
-      "author": "user2",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3a0cad87459c40a000019"),
-        "$db": "yesocl"
-      },
-      "comments": [
-        {
-          "_id": ObjectId("5205e109471dee340a000008"),
-          "content": "uuuuuuuu",
-          "status": true,
-          "created": ISODate("2013-08-10T06:43:21.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e65f6471deea00b000003"),
-          "content": "aaaaaaa",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:38.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e65f8471deea00b000004"),
-          "content": "bbbbbbbbb",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:40.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e65fa471deea00b000005"),
-          "content": "ccccccc",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:42.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e65fc471deea00b000006"),
-          "content": "ddddddddd",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:44.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e65fe471deea00b000007"),
-          "content": "eeeeeeeeee",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:46.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e6600471deea00b000008"),
-          "content": "11111111",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:48.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e6602471deea00b000009"),
-          "content": "222222222",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:50.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e6603471deea00b00000a"),
-          "content": "333333333",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:51.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e6605471deea00b00000b"),
-          "content": "444444444",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:53.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e6607471deea00b00000c"),
-          "content": "555555555",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:55.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e6609471deea00b00000d"),
-          "content": "666666666",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:57.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e660b471deea00b00000e"),
-          "content": "777777777",
-          "status": true,
-          "created": ISODate("2013-08-16T17:48:59.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        },
-        {
-          "_id": ObjectId("520e660d471deea00b00000f"),
-          "content": "88888888",
-          "status": true,
-          "created": ISODate("2013-08-16T17:49:01.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("518f5555471deea409000000"),
-            "$db": "yesocl"
-          },
-          "author": "user1",
-          "email": "quangthi_90@yahoo.com.vn"
-        }
-      ],
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước đã bơm ra thị trường mở (OMO) 5.000 tỷ đồng, kỳ hạn 7 ngày, với lãi suất 7%\/năm.&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCùng ngày, Ngân hàng Nhà nước hút về 242 tỷ đồng, đưa mức bơm ròng vốn trong ngày đạt 4.758 tỷ đồng. Như vậy, khối lượng vốn trên OMO còn lưu hành khoảng 7.500 tỷ đồng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tViệc khối lượng vốn bơm qua thị trường OMO tăng mạnh trong hai ngày đầu tuần diễn ra trong bối cảnh lãi suất giảm 1% về 7%\/năm. Cụ thể, trong hai ngày thứ Hai và thứ Ba, Ngân hàng Nhà nước đã bơm ròng gần 6.300 tỷ đồng trên OMO.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrước đó, khi lãi suất ở mức 8%\/năm, giao dịch qua nghiệp vụ repo trên thị trường OMO chỉ quanh mức vài trăm tỷ đồng mỗi phiên.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tCũng trong ngày 25\/12, Ngân hàng Nhà nước tiếp tục không phát hành tín phiếu. Tính từ 15\/3 đến nay, Ngân hàng Nhà nước đã phát hành tổng cộng gần 170 nghìn tỷ đồng tín phiếu, đã đáo hạn trên 114 nghìn tỷ đồng và còn trên 55.600 tỷ đồng tín phiếu chưa đáo hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrên thị trường liên ngân hàng hôm 25\/12, lãi suất không có nhiều thay đổi so với các phiên trước, trong đó lãi suất qua đêm được chào ở mức 2,5-3%\/năm, lãi suất kỳ hạn 1 tuần ở mức 3,5-4%\/năm, lãi suất kỳ hạn 1 tháng ở mức 5-6%\/năm và lãi suất kỳ hạn 3 tháng ở mức 6-7%\/năm.&lt;\/p&gt;\r\n&lt;address&gt;\r\n\tNguồn&amp;nbsp;vneconomy&lt;\/address&gt;\r\n",
-      "created": ISODate("2013-07-23T08:43:31.0Z"),
-      "description": "Ngày 25\/12, theo dữ liệu của Reuters, Ngân hàng Nhà nước...\r\n",
-      "email": "user2@test.com",
-      "slug": "lai-suat-omo-ve-7-percent-ngan-hang-nha-nuoc-don-dap-bom-von-51ee4233471dee640a000000",
-      "status": true,
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee4233471dee640a000001\/thumb.jpg",
-      "title": "Lãi suất OMO về 7%, Ngân hàng Nhà nước “dồn dập” bơm vốn",
-      "updated": ISODate("2013-08-17T10:15:15.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51ee41d0471dee300b000001"),
-      "title": "Dự đoán diễn biến tái cấu trúc hệ thống ngân hàng: “rất chậm”",
-      "content": "&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\tChúng tôi tin rằng, dù phát biểu thế nào trước công chúng đi nữa, thì việc tái cấu trúc ngân hang sẽ vẫn diễn ra rất chậm chạp. Chúng tôi xin dẫn ra 5 lí do sau:&lt;\/p&gt;\r\n&lt;ul style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;strong&gt;Đ&lt;\/strong&gt;&lt;strong&gt;ầ&lt;\/strong&gt;&lt;strong&gt;u tiên, ch&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;t lư&lt;\/strong&gt;&lt;strong&gt;ợ&lt;\/strong&gt;&lt;strong&gt;ng thông tin v&lt;\/strong&gt;&lt;strong&gt;ề&lt;\/strong&gt;&lt;strong&gt; mức độ của n&lt;\/strong&gt;&lt;strong&gt;ợ&lt;\/strong&gt;&lt;strong&gt; x&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;u v&lt;\/strong&gt;&lt;strong&gt;ẫ&lt;\/strong&gt;&lt;strong&gt;n còn th&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;p&lt;\/strong&gt;. Mặc dù NHNN đã công bố tỉ lệ nợ xấu khoảng 8.6%-10%, cao hơn so với con số 4.5%-4.7% được các ngân hang đưa ra, chúng tôi cho rằng con số đó vẫn chưa đánh giá đúng tình hình nợ xấu bởi các tài sản đảm bảo chưa được định giá theo giá thị trường. Một số khu vực tư thống nhất trong việc ước tính tỉ lệ nợ xấu hiện vào khoảng 15%-20%, tuy nhiên các số liệu trên cũng chỉ dựa vào các nguồn thông tin giới hạn. Bản báo cáo kết quả của Chương trình Đánh giá Tài chính của IMF-WB (dự báo sẽ được công bố vào nửa đầu năm 2013 và có thể trùng với Báo cáo thường niên do IMF xuất bản) có thể cung cấp một chút minh bạch về sự yếu ớt của toàn bộ hệ thống tài chính, tuy nhiên chúng tôi tin rằng các thông tin đầu vào quan trọng từ bài nghiên cứu này cũng được cung cấp từ chính phủ, và do đó chất lượng của thông tin vẫn còn chưa rõ ràng.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;strong&gt;Việc dựa vào “tính t&lt;\/strong&gt;&lt;strong&gt;ự&lt;\/strong&gt;&lt;strong&gt; giác” trong quá trình tái cơ cấu là không hi&lt;\/strong&gt;&lt;strong&gt;ệ&lt;\/strong&gt;&lt;strong&gt;u qu&lt;\/strong&gt;&lt;strong&gt;ả&lt;\/strong&gt;. Lộ trình dự kiến của việc tái cấu trúc ngân hàng là bắt đầu gom nhóm các ngân hàng, cắt giảm hoạt động cho vay của những ngân hàng yếu (nhóm 4) và buộc các ngân hang này phải tái cấu trúc, nhưng phần lớn lại dựa trên “cơ sở tự giác” mà không cần bơm thêm vốn từ Chính phủ. Trên thực tế đúng là có sự hợp nhất của vài ngân hàng yếu kém, nhưng nếu không bơm vốn mới thì các ngân hàng hợp nhất đó vẫn sẽ còn yếu kém, tuy vậy chúng tôi vẫn chưa thấy ngân hàng nào đóng cửa. Sự tồn tại của các ngân hàng yếu tiếp tục làm tăng chi phí vay vốn ở các ngân hàng khác xuất phát từ sự cạnh tranh trong lãi suất tiền gửi.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; width=&quot;100%&quot;&gt;\r\n\t\t\t&lt;tbody&gt;\r\n\t\t\t\t&lt;tr&gt;\r\n\t\t\t\t\t&lt;td&gt;\r\n\t\t\t\t\t\t&lt;div&gt;\r\n\t\t\t\t\t\t\t&lt;div&gt;\r\n\t\t\t\t\t\t\t\t&lt;p align=&quot;right&quot;&gt;\r\n\t\t\t\t\t\t\t\t\t&lt;strong&gt;&lt;em&gt;Vi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ệ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;c tái c&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ấ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u trúc ngân hàng v&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ẫ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;n di&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ễ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;n ra ch&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ậ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;m ch&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;p do vi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ệ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;c thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u thông tin minh b&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ch, thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u khung pháp lý m&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;nh m&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ẽ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;, thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u s&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ự&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt; lãnh đ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ạ&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;o và thi&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;ế&lt;\/em&gt;&lt;\/strong&gt;&lt;strong&gt;&lt;em&gt;u nhận thức về tính “cấp thiết” của vấn đề&lt;\/em&gt;&lt;\/strong&gt;&lt;\/p&gt;\r\n\t\t\t\t\t\t\t&lt;\/div&gt;\r\n\t\t\t\t\t\t&lt;\/div&gt;\r\n\t\t\t\t\t&lt;\/td&gt;\r\n\t\t\t\t&lt;\/tr&gt;\r\n\t\t\t&lt;\/tbody&gt;\r\n\t\t&lt;\/table&gt;\r\n\t\t&lt;p&gt;\r\n\t\t\t&lt;strong&gt;Khung pháp lý v&lt;\/strong&gt;&lt;strong&gt;ề&lt;\/strong&gt;&lt;strong&gt; vi&lt;\/strong&gt;&lt;strong&gt;ệ&lt;\/strong&gt;&lt;strong&gt;c x&lt;\/strong&gt;&lt;strong&gt;ử&lt;\/strong&gt;&lt;strong&gt; lý tài s&lt;\/strong&gt;&lt;strong&gt;ả&lt;\/strong&gt;&lt;strong&gt;n x&lt;\/strong&gt;&lt;strong&gt;ấ&lt;\/strong&gt;&lt;strong&gt;u v&lt;\/strong&gt;&lt;strong&gt;ẫ&lt;\/strong&gt;&lt;strong&gt;n chưa có. &lt;\/strong&gt;Việc xử lý tài sản xấu ở các nước Đông Á được quản lý bởi các Cơ quan quản lý tài sản của Chính phủ, trong đó một số cơ quan có đủ quyền lực pháp lý đặc biệt để giải quyết tài sản. Ở Việt Nam, đó là Công ty mua bán nợ và tài sản tồn động của doanh nghiệp (DATC) trực thuộc Bộ Tài chính, nhưng DATC không chỉ thiếu vốn, mà khung pháp lý cơ bản cho phép các công ty quản lý tài sản được chuyển nhượng và giải quyết tài sản cũng thiếu trầm trọng (chưa nói đến vấn đề chuyển nhượng cho nước ngoài). Không có cả thị trường thứ cấp cho việc mua bán khoản vay và cơ sở pháp lý cho việc chuyển nhượng tài sản thế chấp, đặc biệt là thế chấp bất động sản. Nhiều người cũng quan ngại rằng DATC thiếu một cơ cấu quản lý để đảm bảo việc lựa chọn tài sản thích hợp, thẩm định theo giá thị trường và hình thức giải quyết tài sản hợp lý để tối đa hóa giá trị thu hồi.&lt;\/p&gt;\r\n\t&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n&lt;ul style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;li&gt;\r\n\t\t&lt;strong&gt;Đ&lt;\/strong&gt;&lt;strong&gt;ị&lt;\/strong&gt;&lt;strong&gt;nh hư&lt;\/strong&gt;&lt;strong&gt;ớ&lt;\/strong&gt;&lt;strong&gt;ng lãnh đ&lt;\/strong&gt;&lt;strong&gt;ạ&lt;\/strong&gt;&lt;strong&gt;o trong vi&lt;\/strong&gt;&lt;strong&gt;ệ&lt;\/strong&gt;&lt;strong&gt;c c&lt;\/strong&gt;&lt;strong&gt;ả&lt;\/strong&gt;&lt;strong&gt;i t&lt;\/strong&gt;&lt;strong&gt;ổ&lt;\/strong&gt;&lt;strong&gt; và nh&lt;\/strong&gt;&lt;strong&gt;ữ&lt;\/strong&gt;&lt;strong&gt;ng chính sách quan tr&lt;\/strong&gt;&lt;strong&gt;ọ&lt;\/strong&gt;&lt;strong&gt;ng v&lt;\/strong&gt;&lt;strong&gt;ẫ&lt;\/strong&gt;&lt;strong&gt;n chưa rõ ràng&lt;\/strong&gt;. Với những cái tên nổi tiếng bị bắt trong cơn bão ngân hàng như Nguyễn Đức Kiên hay gần đây là việc chủ tịch Sacombank Đặng Văn Thành từ chức, có một sự bất ổn chung trong môi trường chính trị dẫn đến những cuộc điều tra cũng như lo ngại về khả năng của tầng lớp lãnh đạo trong việc đưa ra các chính sách cứng rắn về vấn đề tái cơ cấu ngân hàng.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n&lt;ul style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;li&gt;\r\n\t\tCuối cùng, nhưng không kém phần quan trọng, những người chúng tôi gặp cũng tin là &lt;strong&gt;không có d&lt;\/strong&gt;&lt;strong&gt;ấu hiệu nào về “một cuộc khủng hoảng” để buộc các ngân hang phải tăng tốc cải tổ.&lt;\/strong&gt; Không giống như năm 1997\/98 khi cuộc khoảng hoảng về cán cân thanh toán cùng với khủng khoảng ngân hàng buộc các quốc gia Châu Á phải hành động quyết liệt hơn với các ngân hàng yếu kém của họ để phục hồi niềm tin (đồng thời tuân theo các chương trình của IMF), “khủng hoảng ngân hàng” ở Việt Nam chủ yếu là một cuộc khủng hoảng mang tính nội địa. Tín dụng ngân hàng ở Việt Nam phần lớn được xây dựng từ nguồn tiền gửi trong nước, với rất ít sự cầu viện vào các dòng vốn bên ngoài, đồng thời cũng có rất ít dòng vốn nóng (hot money) để có thể tạo ra tình trạng lượng lớn vốn đổ ra ngoài làm mất cân bằng tài chính đối ngoại và dẫn tới sự can thiệp của các chính sách. Với sự hỗ trợ của Bảo hiểm tiền gửi toàn bộ cũng như tầm quan trọng của Chính phủ đằng sau các ngân hàng, niềm tin của người gửi vào hệ thống ngân hàng vẫn ở mức cao và dường như không quan tâm đến những tin tức xấu của giới ngân hàng, kể cả vấn đề tỉ lệ nợ xấu đang gia tăng hay vấn đề thanh khoản của ACB sau khi bầu Kiên bị bắt.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n&lt;p style=&quot;text-align: justify;&quot;&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/01\/Untitled2.png&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-1326&quot; height=&quot;400&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/01\/Untitled2-1024x877.png&quot; title=&quot;Untitled&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;span style=&quot;text-align: right;&quot;&gt;&amp;nbsp;&lt;\/span&gt;&lt;\/p&gt;\r\n&lt;p style=&quot;text-align: right;&quot;&gt;\r\n\t&lt;strong&gt;Nguồn&lt;\/strong&gt;: Citi research, VCBS&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-23T08:41:52.0Z"),
-      "updated": ISODate("2013-08-08T17:02:33.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "du-doan-dien-bien-tai-cau-truc-he-thong-ngan-hang-rat-cham-51ee41d0471dee300b000000",
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee41d0471dee300b000001\/thumb.jpg",
-      "description": "Chúng tôi tin rằng, dù phát biểu thế nào trước công chúng đi nữa...\r\n",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3d0c0d874591406000001"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51ee410b471dee200b000001"),
-      "title": "Marc Faber: Việt Nam sẽ là một trong những TTCK tốt nhất 2013",
-      "content": "&lt;p&gt;\r\n\tMarc Faber, người dự báo chính xác sự sụp đổ của thị trường chứng khoán 1987, cho rằng dòng tiền sẽ đổ mạnh vào Việt Nam, Trung Quốc, Nhật Bản trong 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrong cuộc phỏng vấn hôm 9\/1 vừa qua với hãng tin CNBC, chuyên gia phân tích tài chính Marc Faber (người đã dự báo chính xác về sự sụp đổ tất yếu của thị trường chứng khoán năm 1987) cho rằng, Việt Nam, Trung Quốc, Nhật Bản và Ukraine sẽ là các thị trường chứng khoán tốt nhất năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tTrong khi đó, ông nhấn mạnh, năm 2013 lại không phải là năm thuận lợi cho các thị trường vốn tăng trưởng khá tốt sau tháng 3\/2009 như Malaysia, Indonesia, Philippines và Thái Lan.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tFaber cho rằng, nhà đầu tư sẽ hướng đến các thị trường nhiều biến động thời gian qua như Việt Nam, Trung Quốc và Nhật Bản. Hay nói cách khác, dòng tiền sẽ dịch chuyển từ các thị trường từng được đánh giá cao sang các thị trường trước đó tồi tệ, đặc biệt là Nhật Bản và Ukraine.&lt;\/p&gt;\r\n&lt;div&gt;\r\n\tThời gian gần đây, thị trường chứng khoán Việt Nam luôn nhận được sự đánh giá cao của chuyên gia. Thời báo phố Wall nhận định, thị trường chứng khoán Việt Nam là ngôi sao châu Á năm 2012, trong khi theo Bloomberg, Việt Nam sẽ là thị trường tăng trưởng tốt nhất thế giới năm 2013.\r\n\t&lt;p&gt;\r\n\t\tTổng giám đốc kiêm Giám đốc điều hành công ty quản lý quỹ Manulife tại TPHCM, bà Nguyễn Vũ Ngọc Trinh nhận định: “Chúng tôi rất vui khi Chính phủ cam kết ổn định kinh tế, đó là điều chúng tôi sẽ tiếp tục chứng kiến trong năm 2013”. Manulife hiện đang quản lý số tài sản lên đến 300 triệu USD tại Việt Nam. Quỹ này đã tăng nắm giữ cổ phiếu Việt Nam trong những tuần gần đây.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tTrưởng bộ phận nghiên cứu tại Công ty Chứng khoán TPHCM (HSC), ông Fiachra Mac Cana, cho biết, những tuần gần đây, các nhà đầu tư đã “đổ xô gom cổ phiếu” Việt Nam. Lượng giao dịch trung bình mỗi ngày kể từ đầu năm nay khoảng 100 triệu USD, gần gấp 3 lần nửa sau năm 2012. Tuy nhiên, ông MacCana cũng cho rằng, chứng khoán Việt Nam có thể giảm trong một thời gian ngắn sau khi tăng 20%.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tĐến nay, nhà đầu tư nước ngoài mua ròng trên sàn chứng khoán Việt Nam 6 tháng liên tiếp. Kể từ đầu năm, khối ngoại mua ròng 51 triệu USD cổ phiếu, cao hơn 2 lần so với cùng kỳ 2012, trong đó riêng sàn HSX là 42 triệu USD. Hiện có 314 mã cổ phiếu niêm yết trên HSX với tổng giá trị vốn hóa khoảng 34 tỷ USD.&lt;\/p&gt;\r\n&lt;\/div&gt;\r\n&lt;address&gt;\r\n\tNguồn Gafin&lt;\/address&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-23T08:38:35.0Z"),
-      "updated": ISODate("2013-08-08T17:02:35.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "marc-faber-viet-nam-se-la-mot-trong-nhung-ttck-tot-nhat-2013-51ee410b471dee200b000000",
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee410b471dee200b000001\/thumb.jpg",
-      "description": "Marc Faber, người dự báo chính xác sự sụp đổ của thị trường chứng khoán.\r\n",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3d0d6d874591406000002"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51ee3492471dee400b000001"),
-      "title": "Lăng kính Yestoc phiên 22\/07: ” Hạn chế mua đuổi”",
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường tiếp tục diễn biến phân hóa rõ rệt khi mà dòng tiền chưa có sự lan tỏa rộng, diễn biến tích cực của nhóm cổ phiếu largecap trong phiên đầu tuần vẫn đang là động lực chính giúp chỉ số Vnindex vận động tích cực hơn. Trong khi đó, chỉ số Hnxindex vẫn đang trong giai đoạn tích lũy dưới ngưỡng cản 63.5 với thanh khoản thấp, cho thấy những phiên tăng vừa qua trên Vnindex chưa thật sự bền vững. Như trong các bản tin trước, chúng tôi đánh giá ngưỡng 507-510 sẽ đóng vai trò kháng cự mạnh khi Vnindex tiếp tục tăng trong những phiên tới, do đó nhà đầu tư cần thận trọng khi Vnindex tiến về vùng này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/07\/vnindex2.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3151&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/07\/vnindex2-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược trade ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tTheo quan điểm của chúng tôi, nhà đầu tư có thể tiếp tục duy trì&amp;nbsp;trạng thái nắm giữ với danh mục đã mua trong những phiên trước.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mua đuổi khi Vnindex tăng lên vùng kháng cự 507-510. Chúng tôi sẽ cập nhật tín hiệu bán nếu Vnindex tạo đỉnh ở vùng này.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-23T07:45:22.0Z"),
-      "updated": ISODate("2013-08-08T17:02:38.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "lang-kinh-yestoc-phien-2207-han-che-mua-duoi-51ee3492471dee400b000000",
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ee3492471dee400b000001\/thumb.jpg",
-      "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường tiếp tục diễn biến phân hóa rõ rệt.\r\n",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3ceced874596804000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("51ea5a44471dee1c0a000005"),
-      "title": "Lăng kính Yestoc 31\/05: “chúng tôi vẫn duy trì quan điểm thận trọng”",
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Vùng hỗ trợ để tiếp tục xu hướng tăng ngắn hạn: 490. &amp;nbsp;Thủng vùng này không mua thêm, chờ xác định rõ xu hướng , nếu kéo lên lại vượt 498 mới mua, chỉ mua ngắn hạn, ưu tiên cổ phiếu có sẵn, mua thấp bán cao, lên chạm kháng cự &amp;nbsp;512.5 \/ 530thấy yếu nên bán ra chốt lãi phần mua thêm sau. Vùng 530 thấy phân phối vol mạnh cao đột biến nên bán chốt danh mục giữ tiền mặt; nếu duy trì vol tốt ổn định có nhiều thông tin tốt hỗ trợ nên giữ chờ vượt 530 có thể tăng thêm lượng cổ phiếu, kỳ vọng 550.&lt;\/strong&gt;&lt;\/p&gt;\r\n",
-      "status": true,
-      "created": ISODate("2013-07-20T09:37:08.0Z"),
-      "updated": ISODate("2013-08-15T14:50:30.0Z"),
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "lang-kinh-yestoc-3105-chung-toi-van-duy-tri-quan-diem-than-trong-51ea5a44471dee1c0a000004",
-      "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/51ea5a44471dee1c0a000005\/thumb.png",
-      "description": "Vượt 498 khả năng tăng ngắn hạn lên 512.5. kháng cự cao hơn là 530.\r\n",
-      "category": {
-        "$ref": "branch_category",
-        "$id": ObjectId("51d3ceced874596804000000"),
-        "$db": "yesocl"
-      }
-    }
-  ],
   "slug": "yestoc-520ce99c471dee9c09000000",
   "status": true
 });
@@ -1935,88 +1413,1508 @@ db.getCollection("branch").insert({
 /** branch_category records **/
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3a0cad87459c40a000019"),
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
   "name": "Phân tích chuyên sâu",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "order": 10
-});
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3ceced874596804000000"),
-  "name": "Nhận định thị trường",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "order": 20
+  "order": NumberInt(1),
+  "slug": "phan-tich-chuyen-sau"
 });
 db.getCollection("branch_category").insert({
   "_id": ObjectId("51d3d07fd874591406000000"),
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
   "name": "Cổ Phiếu Đầu Cơ",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "order": 30
+  "order": NumberInt(3),
+  "slug": "co-phieu-dau-co"
 });
 db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3d0c0d874591406000001"),
-  "name": "Tài chính ngân hàng",
+  "_id": ObjectId("51d3ceced874596804000000"),
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "parent": {
+  "name": "Nhận định thị trường",
+  "order": NumberInt(2),
+  "slug": "nhan-dinh-thi-truong"
+});
+
+/** branch_post records **/
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d1f7471dee840a000003"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
     "$ref": "branch_category",
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "order": 11
+  "comments": [
+    {
+      "_id": ObjectId("521c4ab2471dee200b000000"),
+      "content": "1111111111",
+      "status": true,
+      "created": ISODate("2013-08-27T06:44:02.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521c4af5471dee200b000002"),
+      "author": "user1",
+      "content": "1111111111111",
+      "created": ISODate("2013-08-27T06:45:09.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T17:37:54.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52234696471dee300d000000"),
+      "author": "user1",
+      "content": "222222222",
+      "created": ISODate("2013-09-01T13:52:22.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T13:52:36.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; REE sẽ tổ chức ĐHCĐTN vào ngày 29\/3\/2013, trong đó có nội dung tăng vốn điều lệ lên 2.700 tỷ đồng từ chuyển đổi trái phiếu chuyển đổi thành 25,36 triệu cổ phiếu.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Công ty công bố KQKD năm 2012 vô cùng ấn tượng nhờ tăng trưởng ổn định từ các mảng kinh doanh và lợi nhuận đáng kể từ bán cổ phiếu STB.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Năm nay REE tiếp tục sự mở rộng chiến lược vào lĩnh vực dịch vụ tiện ích.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; HSC dự báo doanh thu năm 2013 của REE tăng trưởng 12% và lợi nhuận thuần tăng trưởng 2%, theo đó EPS dự phóng là 2.745đ.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Dự báo về EPS của HSC chưa tính đến rủi ro pha loãng, có thể sẽ là 10% nếu các trái phiếu trên được chuyển đổi toàn bộ.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Tại mức giá hiện nay là 18.900 đ\/cp, cổ phiếu REE hiện đang có P\/E dự phóng là 6,9 và P\/B dự phóng là 1,0 lần.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi tiếp tục duy trì đánh giá Khả quan đối với cổ phiếu REE dựa trên: ban lãnh đạo tốt và triển vọng tăng trưởng khá.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về CTCP Cơ điện lạnh_Mã chứng khoán: REE – HSX (cập nhật ngày 15\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=174851&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;174851&lt;\/a&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:07:35.0Z"),
+  "deleted": false,
+  "description": "REE sẽ tổ chức ĐHCĐTN vào ngày 29\/3\/2013, trong đó có nội dung tăng vốn điều lệ lên 2.700 tỷ đồng từ chuyển đổi trái phiếu chuyển đổi thành [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000",
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "bao-cao-ngan-ve-cong-ty-cong-ty-co-phan-co-dien-lanh-ree-5216d1f7471dee840a000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d1f7471dee840a000003\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Cơ điện lạnh (REE)",
+  "updated": ISODate("2013-09-01T17:37:54.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
 });
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3d0d6d874591406000002"),
-  "name": "Kinh tế vĩ mô",
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d154471dee800a000001"),
+  "author": "user1",
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "parent": {
+  "category": {
     "$ref": "branch_category",
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "order": 12
+  "comments": [
+    {
+      "_id": ObjectId("521a4fba471deeb809000010"),
+      "author": "user1",
+      "content": "aaaaaaaaa",
+      "created": ISODate("2013-08-25T18:40:58.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T13:52:43.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521a4fc3471deeb809000012"),
+      "content": "bbbbbbbbbbb",
+      "status": true,
+      "created": ISODate("2013-08-25T18:41:07.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\tTheo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng (76,19 triệu USD) từ mức hiện tại là 1,43 nghìn tỷ đồng. DIG sẽ trình kế hoạch tăng vốn tại ĐHCĐTN diễn ra vào ngày 15\/4.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVẫn chưa có thời gian cụ thể cho kế hoạch tăng vốn nhưng nhiều khả năng sẽ là trước cuối Q3 và có thể dưới hình thức phát hành quyền cho cổ đông hiện hữu. DIG đang cần thêm vốn để đầu tư cho các dự án của mình.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHSC dự báo doanh thu năm 2013 đạt 968 tỷ đồng (tăng trưởng 23%) và lợi nhuận thuần đạt 62,6 tỷ đồng (tăng trưởng 169%). Dự báo này dựa trên giả định là DIG có thể ghi nhận doanh thu từ dự án Nam Vĩnh Yên và An Sơn. Chúng tôi tiếp tục duy trì đánh giá Mua vào đối với cổ phiếu DIG. Hiện DIG là một trong những cổ phiếu niêm yết tốt trong ngành BĐS chuyên về phát triển nhà ở giá thấp; tuy nhiên, sắp tới Tập đoàn Nam Long (đứng đầu về nhà ở giá thấp) sẽ chào sàn với giá tham chiếu 27.000đ theo đó các NĐT có thể sẽ chuyển bớt sự chú ý sang cổ phiếu sắp chào sàn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tNam Long là thương hiệu hàng đầu và có bề dày trong lĩnh vực BĐS giá thấp với 20 năm kinh nghiệm; có quỹ đất 567 ha mà phần lớn được mua cách đây hơn 13 năm và chủ yếu nằm trong và xung quanh TP HCM; có sản phẩm E-home rất thành công với căn hộ 9 tầng tập trung vào người mua sơ cấp với giá hấp dẫn là 1 tỷ đồng trở xuống; tại giá chào sàn, giá cổ phiếu của Tập đoàn Nam Long thấp hơn 38% so với NAV. Theo đó, các NĐT nên chờ và xem xét đầu tư vào cổ phiếu Tập đoàn Nam Long.&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:04:52.0Z"),
+  "deleted": false,
+  "description": "Theo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000"
+  ],
+  "slug": "bao-cao-ngan-ve-tong-cong-ty-co-phan-dau-tu-phat-trien-xay-dung-dig-5216d154471dee800a000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d154471dee800a000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Tổng Công ty Cổ phần Đầu tư Phát triển Xây dựng (DIG)",
+  "updated": ISODate("2013-09-01T13:52:43.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
 });
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51d3d112d874591406000003"),
-  "name": "Doanh Nghiệp",
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d23b471dee600b000001"),
+  "author": "user1",
   "branch": {
     "$ref": "branch",
     "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "parent": {
+  "category": {
     "$ref": "branch_category",
     "$id": ObjectId("51d3a0cad87459c40a000019"),
     "$db": "yesocl"
   },
-  "order": 13
+  "comments": [
+    {
+      "_id": ObjectId("52179df7471dee3c08000002"),
+      "content": "11111111111",
+      "status": true,
+      "created": ISODate("2013-08-23T17:37:59.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52179edc471dee3c08000003"),
+      "content": "11111111111",
+      "status": true,
+      "created": ISODate("2013-08-23T17:41:48.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52179f28471dee3c08000004"),
+      "content": "11111111111",
+      "status": true,
+      "created": ISODate("2013-08-23T17:43:04.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521878ae471dee900b000000"),
+      "content": "3333333",
+      "status": true,
+      "created": ISODate("2013-08-24T09:11:10.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52187e00471dee9c0b000000"),
+      "content": "2222222",
+      "status": true,
+      "created": ISODate("2013-08-24T09:33:51.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52187ece471dee9c0b000001"),
+      "content": "4444444",
+      "status": true,
+      "created": ISODate("2013-08-24T09:37:18.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4280471deed809000006"),
+      "author": "user1",
+      "content": "5555555555555",
+      "created": ISODate("2013-08-25T17:44:32.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:28:18.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521a4c7b471deed809000008"),
+      "content": "66666666666",
+      "status": true,
+      "created": ISODate("2013-08-25T18:27:07.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4c92471deed809000009"),
+      "content": "777777777777",
+      "status": true,
+      "created": ISODate("2013-08-25T18:27:30.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4cef471deed80900000a"),
+      "content": "888888888888",
+      "status": true,
+      "created": ISODate("2013-08-25T18:29:03.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4cf9471deed80900000b"),
+      "content": "9999999999999999",
+      "status": true,
+      "created": ISODate("2013-08-25T18:29:13.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4d38471deed80900000c"),
+      "content": "100000000000",
+      "status": true,
+      "created": ISODate("2013-08-25T18:30:16.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521c4c1c471dee100b000001"),
+      "content": "99999999999",
+      "status": true,
+      "created": ISODate("2013-08-27T06:50:04.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; PVFC đã trình bản đề xuất kiến nghị hỗ trợ từ phía PVN và NHNN trước, trong và sau quá trình hợp nhất với Western Bank.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; PVF đề xuất xin hỗ trợ dưới hình thức cấp vốn vay trung và dài hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Thông qua bản đề xuất với kỳ vọng nhận được cam kết hỗ trợ tài chính chắc chắn trước khi quá trình hợp nhất diễn ra sẽ làm tăng cơ hội thành công cuối cùng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Ít có khả năng toàn bộ nội dung kiến nghị và đề xuất sẽ được chấp nhận. Tuy nhiên, bản đề xuất sẽ khiến các cơ quan chức năng phải ngồi lại và suy ngẫm về những gì nên làm và theo đó có thể sẽ có thêm những hướng dẫn và thủ tục giúp hỗ trợ cho quá trình tái cơ cấu trong ngành ngân hàng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Theo đó, cho dù kết quả cuối cùng có thế nào đi chăng nữa thì PVF và Western Bank sẽ đóng góp đáng kể vào quá trình tái cơ cấu trong ngành ngân hàng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về Tổng Công ty Tài chính cổ phần Dầu khí Việt Nam_Mã chứng khoán: PVF – HSX (cập nhật ngày 13\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=174688&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;174688&lt;\/a&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:08:43.0Z"),
+  "deleted": false,
+  "description": "PVFC đã trình bản đề xuất kiến nghị hỗ trợ từ phía PVN và NHNN trước, trong và sau quá trình hợp nhất với Western Bank.",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000",
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "bao-cao-ngan-ve-tong-cong-ty-tai-chinh-co-phan-dau-khi-viet-nam-pvf-5216d23b471dee600b000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d23b471dee600b000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Tổng Công ty Tài Chính Cổ phần Dầu khí Việt Nam (PVF)",
+  "updated": ISODate("2013-09-01T06:28:18.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
 });
-db.getCollection("branch_category").insert({
-  "_id": ObjectId("51f654df471deeb40c000000"),
-  "name": "abc",
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d0e6471dee700b000001"),
+  "author": "user1",
   "branch": {
     "$ref": "branch",
-    "$id": ObjectId("51d39bb1d87459c40a000018"),
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
     "$db": "yesocl"
   },
-  "order": NumberInt(0)
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("52179c2d471deeb408000006"),
+      "content": "1111111111",
+      "status": true,
+      "created": ISODate("2013-08-23T17:30:21.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521e062e471deea009000000"),
+      "content": "ouyh,.",
+      "status": true,
+      "created": ISODate("2013-08-28T14:16:14.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;div align=&quot;justify&quot; style=&quot;text-align: justify;&quot;&gt;\r\n\tNgày 1\/6, Ngân hàng Thế giới (WB) tại Hà Nội cho biết: Ban Giám đốc WB đã thông qua hai khoản tín dụng từ Hiệp hội Phát triển Quốc tế (IDA) với tổng trị giá 250 triệu USD cho Dự án hỗ trợ y tế khu vực đồng bằng Sông Hồng và Dự án thúc đẩy sáng tạo thông qua nghiên cứu, khoa học và công nghệ.&lt;a href=&quot;http:\/\/yestoc.com\/wb-phe-duyet-250-trieu-usd-tin-dung-cho-viet-nam\/images-10\/&quot; rel=&quot;attachment wp-att-2741&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;aligncenter size-full wp-image-2741&quot; height=&quot;183&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/06\/images.jpg&quot; title=&quot;images&quot; width=&quot;275&quot; \/&gt;&lt;\/a&gt;\r\n\t&lt;p&gt;\r\n\t\tTrong tổng số tiền được phê duyệt, sẽ dành cho Dự án hỗ trợ y tế khu vực đồng bằng Sông Hồng 150 triệu USD, với mục đích cung cấp các dịch vụ y tế tốt hơn cho 15 triệu người, đặc biệt là trẻ em và phụ nữ, nâng cao hiệu quả và công bằng trong sử dụng dịch vụ bệnh viện tại 13 tỉnh vùng Đông Bắc và đồng bằng Bắc Bộ.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tDự án sẽ tăng cường năng lực cho các bệnh viên tỉnh và huyện để cung cấp dịch vụ tốt hơn để bệnh nhân không phải lên Hà Nội và giảm các rào cản tài chính bằng việc mở rộng đối đượng được nhận Thẻ Bảo hiểm y tế cho các hộ gia đình cận nghèo.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tDự án thúc đẩy sáng tạo thông qua nghiên cứu, khoa học và công nghệ sẽ được phê duyệt 100 triệu USD nhằm hỗ trợ hoạt động sáng tạo khoa học và công nghệ tại Việt Nam bằng cách thiết kế và thí điểm các chính sách khuyến khích sáng tạo khoa học và công nghệ, tăng cường hiệu quả của các Viện Nghiên cứu và Phát triển (R&amp;amp;D), khuyến khích sự phát triển của các doanh nghiệp công nghệ sáng tạo.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tNhững đối tượng chính thụ hưởng Dự án là các Viện Nghiên cứu và Phát triển và các doanh nghiệp công nghệ sáng tạo có đầu tư vào nghiên cứu và phát triển.&lt;\/p&gt;\r\n\t&lt;p&gt;\r\n\t\tCác doanh nghiệp tách ra hoặc mới thành lập được hỗ trở bởi các Viện Nghiên cứu và Phát triển và Trường đại học cũng sẽ là những đối tượng được hưởng lợi trực tiếp. Dự án cũng sẽ hỗ trợ thành lập các phòng nghiên cứu đối tác công-tư trong khu Khu công nghệ cao Hòa Lạc.\/.&lt;\/p&gt;\r\n&lt;\/div&gt;\r\n&lt;div style=&quot;text-align: justify;&quot;&gt;\r\n\tNguyễn Hồng Điệp (TTXVN)&lt;\/div&gt;\r\n",
+  "created": ISODate("2013-08-23T03:03:02.0Z"),
+  "deleted": false,
+  "description": "Ngày 1\/6, Ngân hàng Thế giới (WB) tại Hà Nội cho biết: Ban Giám đốc WB đã thông qua hai khoản tín dụng từ Hiệp hội Phát triển Quốc tế",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000",
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "wb-phe-duyet-250-trieu-usd-tin-dung-cho-viet-nam-5216d0e6471dee700b000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d0e6471dee700b000001\/avatar.jpeg",
+  "title": "WB phê duyệt 250 triệu USD tín dụng cho Việt Nam",
+  "updated": ISODate("2013-08-30T18:29:59.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d281471dee840a000005"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521e064a471deea009000001"),
+      "content": "koi0ol",
+      "status": true,
+      "created": ISODate("2013-08-28T14:16:42.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f2aec471dee200a000001"),
+      "content": "111111111111",
+      "status": true,
+      "created": ISODate("2013-08-29T11:05:16.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Gần đây đã có bài báo viết về việc SJS (đánh giá Kém khả quan) phải đối mặt với nguy cơ hủy niêm yết trong năm sau nếu công ty tiếp tục lỗ trong năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Hiện tại, chúng tôi cho rằng khả năng hủy niêm yết là khá thấp.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi cho rằng trong năm 2013, SJS sẽ lãi nhẹ nhờ ghi nhận lợi nhuận từ đất tại dự án Nam An Khánh đã bán trong năm 2011.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Và để có thể ghi nhận lợi nhuận, SJS chỉ cần hoàn thành phần nền móng của phần diện tích đã bán.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Tuy nhiên, công ty vẫn nợ nhiều với khoảng 1 nghìn tỷ đồng nợ gốc và lãi đến hạn thanh toán trong năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi cho rằng SJS sẽ xin giãn nợ để không phải gán nợ khoảng 10ha đất.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Dựa trên dự báo của chúng tôi, giá cổ phiếu SJS thấp hơn 30% so với NAV; P\/E dự phóng là 42,4 lần và P\/B 1,3 lần.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi tiếp tục duy trì đánh giá Kém khả quan.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về CTCP Đầu tư Phát triển Đô thị và KCN Sông Đà_Mã chứng khoán: SJS – HSX (cập nhật ngày 11\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=173987&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;173987&lt;\/a&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:09:53.0Z"),
+  "deleted": false,
+  "description": "Gần đây đã có bài báo viết về việc SJS (đánh giá Kém khả quan) phải đối mặt với nguy cơ hủy niêm yết trong năm sau nếu công [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000"
+  ],
+  "slug": "bao-cao-ngan-ve-cong-ty-cong-ty-co-phan-dau-tu-phat-trien-do-thi-va-khu-cong-nghiep-song-da-sjs-5216d281471dee840a000004",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d281471dee840a000005\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Đầu tư Phát triển Đô thị và Khu Công nghiệp Sông Đà (SJS)",
+  "updated": ISODate("2013-08-29T11:05:16.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5217929f471dee3c08000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521c4b6b471dee200b000003"),
+      "author": "user1",
+      "content": "111111111111",
+      "created": ISODate("2013-08-27T06:47:07.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-03T05:27:14.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e101c471dee5c09000005"),
+      "content": "222222222",
+      "status": true,
+      "created": ISODate("2013-08-28T14:58:36.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521e2b61471dee1409000003"),
+      "content": "333333333333",
+      "status": true,
+      "created": ISODate("2013-08-28T16:54:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường tiếp tục phiên tăng điểm thứ 2 liên tiếp, cả hai chỉ số đều hình thành các cây nến trắng lớn, đặc biệt là thanh khoản trên sàn Hose đã tăng đột biến. Thị trường cho thấy sự phân hóa tập trung ở các cổ phiếu penny mang tính đầu cơ khiến những mã này có khối lượng dư trần khá lớn, điển hình là ITA, KBC, DIG, PVT, OGC, DQC…, trong khi các mã bluechip có phần yếu hơn và chỉ xanh nhẹ. Nhìn chung, thị trường có diễn biến khá tốt trong phiên hôm nay, tuy nhiên chúng tôi vẫn giữ quan điểm trong bài phân tích trước, &amp;nbsp;khả năng Vnindex sẽ gặp khó khăn khi tiệm cận vùng cản mạnh 507-510, cũng như vùng 63-63.5 trên Hnxindex.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3306&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư có thể chốt lời một phần danh mục như chúng tôi khuyến nghị trong các phiên tăng&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mua đuổi cổ phiếu khi Vnindex tiệm cận ngưỡng kháng cự mạnh&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi sẽ cập nhật điểm mua mới khi Vnindex bức phá được ngưỡng kháng cự 507-510&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:49:35.0Z"),
+  "deleted": false,
+  "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường tiếp tục phiên tăng điểm thứ 2 liên tiếp, cả hai chỉ số đều hình thành các cây nến trắng lớn, đặc [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    
+  ],
+  "slug": "lang-kinh-yestoc-phien-1608-can-trong-vung-khang-cu-manh-5217929f471dee3c08000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5217929f471dee3c08000001\/avatar.png",
+  "title": "Lăng kính Yestoc phiên 16\/08: “cẩn trọng vùng kháng cự mạnh”",
+  "updated": ISODate("2013-09-03T05:27:14.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179310471deec003000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:51:28.0Z"),
+  "deleted": false,
+  "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f",
+    "518f5555471deea409000000"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
+  "updated": ISODate("2013-09-02T10:57:16.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179237471deeb408000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&amp;nbsp;Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 497 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex. Tuy nhiên, vùng 507-510 là ngưỡng cản khá mạnh của Vnindex (đây là điểm nối các đỉnh của mẫu hình vai đầu vai trung dài hạn) do đó hoạt động chốt lời mạnh có thể sẽ tiếp tục diễn ra vào đầu tuần sau. Chúng tôi cho rằng nếu thanh khoản tiếp tục duy trì trên 50tr\/ phiên thì có thể Vnindex sẽ chỉ điều chỉnh nhẹ ( nếu có) về vùng 502-503. Ngược lại, nếu phá vỡ ngưỡng cản 507-510, Vnindex sẽ hướng về vùng kháng cự kế tiếp là 525-530.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tPhân tích đồ thị Hnxindex có thể thấy mẫu hình cái nêm hướng xuống đang được hình thành, nếu vùng cản 63-63.5 được phá vỡ, khả năng Hnxindex sẽ hình thành 1 xu hướng tăng mạnh với taget ở vùng 66-67.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3346&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tỞ chart tuần Vnindex, chỉ số này vẫn chưa xuất hiện điểm mua trung hạn do vùng kháng cự 510-525 tập trung khá nhiều lực bán mạnh, chúng tôi đánh giá xu hướng trung hạn hiện tại ở mức trung tính và cần thời gian để xác nhận.&amp;nbsp;Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư lướt sóng sau khi chốt lời ở vùng 508 như khuyến nghị của chúng tôi&amp;nbsp;có thể tiếp tục giải ngân khi Vnindex tích lũy trong các phiên đầu tuần.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro thấp, có thể chờ mua khi Vnindex phá vỡ vùng 507-510 .&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã midcap cơ bản tốt và có dòng tiền mạnh.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:47:51.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước: Chúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-1908-2308-tang-ti-trong-co-phieu-khi-vnindex-pha-vo-vung-can-507-510-52179237471deeb408000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179237471deeb408000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 19\/08-23\/08: ” tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510″",
+  "updated": ISODate("2013-08-29T17:35:44.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d059471dee740b000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521f8b51471dee5c11000004"),
+      "content": "1111111111111111",
+      "status": true,
+      "created": ISODate("2013-08-29T17:56:33.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f8b56471dee5c11000006"),
+      "content": "222222222222",
+      "status": true,
+      "created": ISODate("2013-08-29T17:56:38.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f8b6c471dee5c11000007"),
+      "content": "33333333333333333",
+      "status": true,
+      "created": ISODate("2013-08-29T17:57:00.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;em&gt;Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng tin tưởng VNM có thể duy trì được tốc độ tăng trưởng doanh thu trên 20%\/năm nhờ giành thêm được thị phần.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi kỳ vọng tăng trưởng trong tương lai của VNM sẽ dựa trên 4 nhóm sản phẩm chính.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Xuất khẩu cũng sẽ là động lực tăng trưởng vững của VNM nhưng chúng tôi cho rằng sẽ không có sự đột biến thần kỳ trong hoạt động này.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng kỳ vọng VNM sẽ có hoạt động M&amp;amp;A quy mô nhỏ tại Việt Nam và nước ngoài.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận gộp nhiều khả năng đã đạt cao nhất là 36,5% vào 2009 và năm nay sẽ giảm do chi phí đầu vào tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận sẽ ổn định những năm sau đó và chủ yếu chịu ảnh hưởng của biến động của chi phí đầu vào.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tiền mặt sẽ tăng lên kể từ năm nay vì các hoạt động đầu tư của công ty hiện đã gần như hoàn tất.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Và chúng tôi kỳ vọng tỷ lệ chi trả cổ tức trên lợi nhuận sẽ tăng dần lên 50%.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện room dành cho NĐTNN của cổ phiếu VNM đã hết nhưng có thể sẽ được nới vào năm 2014.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Định giá cổ phiếu VNM vẫn hợp lý và nếu so với bình quân các doanh nghiệp cùng ngành thì giá cổ phiếu VNM vẫn còn tiềm năng tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện P\/E dự phóng 2013 của cổ phiếu VNM là 17,4 lần và P\/B là 6,1 lần. Chúng tôi tiếp tục duy trì đánh giá Khả quan đối với cổ phiếu VNM.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;nguồn HSC&lt;\/em&gt;&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:00:41.0Z"),
+  "deleted": false,
+  "description": "Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000"
+  ],
+  "slug": "ctcp-sua-viet-nam-vnm-hsx-uoc-kqkd-6-thang-va-trien-vong-kqkd-2013-va-2014-tiep-tuc-duy-tri-danh-gia-kha-quan-521887e7471dee9c0b000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d059471dee740b000001\/avatar.jpg",
+  "title": "CTCP sữa Việt Nam (VNM – HSX): Ước KQKD 6 tháng và triển vọng KQKD 2013 và 2014. Tiếp tục duy trì đánh giá Khả quan",
+  "updated": ISODate("2013-08-29T17:57:00.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179345471deefc0b000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521e2abb471dee1409000000"),
+      "author": "user1",
+      "content": "11111111111111",
+      "created": ISODate("2013-08-28T16:52:11.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-08-29T14:05:34.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e2b31471dee1409000002"),
+      "author": "user1",
+      "content": "22222222222",
+      "created": ISODate("2013-08-28T16:54:09.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-02T10:20:06.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e2b7a471dee1409000004"),
+      "author": "user1",
+      "content": "33333333333333",
+      "created": ISODate("2013-08-28T16:55:22.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-08-29T16:27:52.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521f2acc471dee200a000000"),
+      "content": "44444444444",
+      "status": true,
+      "created": ISODate("2013-08-29T11:04:44.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f7682471dee5c11000000"),
+      "content": "55555555555",
+      "status": true,
+      "created": ISODate("2013-08-29T16:27:46.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5222d7e4471dee180a000000"),
+      "content": "66666666666",
+      "status": true,
+      "created": ISODate("2013-09-01T06:00:03.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVnindex hôm nay tiếp tục một phiên tăng điểm mạnh lên vùng kháng cự 492, diễn biến của nhóm cổ phiếu trụ cột vẫn đang là tác nhân chủ yếu tác động đà tăng trong phiên. Thanh khoản trên Vnindex sụt giảm mạnh và độ rộng thị trường giảm không ủng hộ cho đà tăng điểm hiện tại. Chúng tôi tiếp tục giữ quan điểm thận trọng ở xu hướng ngắn hạn và khả năng thị trường có thể sẽ xuất hiện các nhịp giảm điểm mạnh trong những phiên tới khi tiếp cận ngưỡng kháng cự 492-4-5 của Vnindex và 61.7-62 của Hnxindex.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư lướt sóng nên cân nhắc mở vị thế bán ở thời điểm hiện tại và hạ tỉ trọng cổ phiếu xuống ngưỡng an toàn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế bắt đáy khi thị trường chưa giảm về vùng hỗ trợ mạnh 466-470 trên Vnindex và 59 trên Hnxindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:52:21.0Z"),
+  "deleted": false,
+  "description": "Quan điểm kĩ thuật ngắn hạn: Vnindex hôm nay tiếp tục một phiên tăng điểm mạnh lên vùng kháng cự 492, diễn biến của nhóm cổ phiếu trụ cột vẫn [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f",
+    "518f5555471deea409000000"
+  ],
+  "slug": "lang-kinh-yestoc-phien-0108-cho-mua-tai-muc-ho-tro-manh-52179345471deefc0b000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179345471deefc0b000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc phiên 01\/08: “Chờ mua tại mức hỗ trợ mạnh”",
+  "updated": ISODate("2013-09-02T10:55:16.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("521792d9471deeb408000003"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521e0893471dee8c09000000"),
+      "author": "user1",
+      "content": "1111111111111111",
+      "created": ISODate("2013-08-28T14:26:27.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-02T10:20:38.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0d36471dee5c09000000"),
+      "content": "2222222222222",
+      "status": true,
+      "created": ISODate("2013-08-28T14:46:14.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521e0db9471dee5c09000001"),
+      "author": "user1",
+      "content": "3333333333",
+      "created": ISODate("2013-08-28T14:48:25.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:27:09.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0f9f471dee5c09000002"),
+      "author": "user1",
+      "content": "444444444444",
+      "created": ISODate("2013-08-28T14:56:31.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:26:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0fd1471dee5c09000003"),
+      "content": "55555555555555",
+      "status": true,
+      "created": ISODate("2013-08-28T14:57:21.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521e1012471dee5c09000004"),
+      "author": "user1",
+      "content": "6666666666666",
+      "created": ISODate("2013-08-28T14:58:26.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:26:49.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5222d7f7471dee0c0a000000"),
+      "content": "777777777777",
+      "status": true,
+      "created": ISODate("2013-09-01T06:00:23.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước :&lt;\/strong&gt; …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều, &amp;nbsp;cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tThanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:50:33.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
+  "updated": ISODate("2013-09-02T10:56:50.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d192471dee840a000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521c4b78471dee200b000005"),
+      "content": "2222222222",
+      "status": true,
+      "created": ISODate("2013-08-27T06:47:20.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521c4e58471dee100b000002"),
+      "content": "33333333333",
+      "status": true,
+      "created": ISODate("2013-08-27T06:59:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f8a34471dee5c11000003"),
+      "content": "4444444444444",
+      "status": true,
+      "created": ISODate("2013-08-29T17:51:48.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\tVSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận trước thuế là 214 tỷ đồng, giảm 26%. Công ty sẽ trả cổ tức bằng cả cổ phiếu (tỷ lệ 1:5) và tiền mặt (4.000đ\/cp). Chúng tôi cho rằng tiền mặt sẽ được trả sau khi trả bằng cổ phiếu nên tỷ lệ cổ tức\/giá tổng cộng sẽ là 10,3% ở mức giá hiện tại.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tKế hoạch kinh doanh năm 2013 của VSC có vẻ khá thận trọng và đây là điều thường thấy ở công ty này. Chúng tôi thấy rằng trong 5 năm liền (từ 2008-2012), công ty đã vượt kế hoạch lợi nhuận trước thuế đề ra là 46%. Tốc độ tăng trưởng CAGR trong 5 năm của doanh thu là 25% còn của lợi nhuận thuần là 21%. Trong năm nay, VSC đã lý giải việc đặt kế hoạch kinh doanh thấp là do doanh thu từ dịch vụ lưu kho lạnh sẽ giảm do trong năm ngoái doanh thu này đạt cao trong điều kiện đặc biệt. Trong năm 2012, công ty đạt 80 tỷ đồng doanh thu từ dịch vụ lưu kho lạnh, tăng mạnh 43% do chính phủ Trung Quốc đã bất ngờ đóng cửa biên giới trong 3 tháng trong năm 2012 khiến các công ty phải lưu hàng trong kho lạnh trong nhiều tháng. Chúng tôi cũng đã có đề cập đến điều này trong báo cáo trước về VSC.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC hiện đang chạy hết công suất nên sẽ không còn nhiều dư địa để tăng trưởng. Trong năm nay, VSC đặt kế hoạch hàng hóa qua cảng là 350.000 TEU, chỉ tăng 1%. Và chúng tôi cũng dự báo phí dịch vụ sẽ giữ nguyên. VSC đã giữ nguyên phí dịch vụ trong 2 năm và chúng tôi cũng lưu ý là hầu hết phí dịch vụ được tính bằng USD.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi dự báo doanh thu từ hoạt động kinh doanh cảng sẽ đạt 706 tỷ đồng, tăng trưởng 1%; cao hơn kế hoạch của công ty 9%; và dự báo doanh thu từ dịch vụ lưu kho lạnh giảm 30% và đạt 56 tỷ đồng trong năm 2013. Dự báo này dựa trên giả định là hàng thực phẩm đông lạnh sẽ được lưu thông thông suốt qua biên giới Việt – Trung trong năm nay. Tóm lại, chúng tôi dự báo tổng doanh thu là 762 tỷ đồng, giảm nhẹ 2%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cũng dự báo lợi nhuận thuần sẽ đạt 228 tỷ đồng, không thay đổi so với năm 2012 và cao hơn 33% so với kế hoạch của công ty. Dự báo lợi nhuận thuần của chúng tôi dựa trên giả định chi phí giảm nhờ công ty giảm sự phụ thuộc vào bên cho thuê bãi container. Năm nay, công ty sẽ xây dựng bãi container của riêng mình với diện tích 7,5ha. Bãi container này sẽ được hoàn thành và đưa vào hoạt động vào Q2 năm nay và sẽ giúp giảm 7% giá vốn hàng bán xuống còn 474 tỷ đồng trong năm 2013. Điều này sẽ giúp tỷ suất lợi nhuận gộp tăng từ mức 34,4% lên 37,8%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC có kế hoạch tăng vốn điều lệ trong năm nay thông qua phát hành cổ phiếu thưởng nói trên, theo đó sẽ tăng vốn điều lệ từ 240 tỷ đồng lên 288 tỷ đồng từ giữa năm nay. EPS điều chỉnh pha loãng 2013 sẽ là 8.620đ, giảm 10%. Theo mức giá hôm nay, VSC hiện đang giao dịch với P\/E dự phóng là 4,9 lần và P\/B dự phóng là 1,5 lần. VSC có tình hình tài chính tốt với tỷ lệ nợ\/tổng tài sản chỉ ở mức 0,25 lần và tỷ lệ cổ tức\/giá tương đối cao. Tuy nhiên, trước mắt thì công ty dường như không có kế hoạch tăng công suất và do đó khó giữ được tiềm năng tăng trưởng dài hạn. Theo kế hoạch đầu tư mở rộng năm 2013, chúng tôi thấy rằng công ty có vẻ chú trọng vào việc mở rộng bãi container để giảm sự phụ thuộc vào bên thứ ba. Vì vậy, cổ phiếu có nguy cơ mất đi khả năng tăng trưởng nếu công ty không có kế hoạch tăng công suất hoạt động kinh doanh cảng. Cổ phiếu VSC hiện có tỷ lệ cổ tức\/giá khá tốt và định giá thấp theo quan điểm của chúng tôi.&lt;\/p&gt;\r\n",
+  "created": ISODate("2013-08-23T03:05:54.0Z"),
+  "deleted": false,
+  "description": "VSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000"
+  ],
+  "slug": "bao-cao-ngan-ve-cong-ty-co-phan-tap-doan-container-viet-nam-vsc-5216d192471dee840a000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
+  "updated": ISODate("2013-08-29T17:51:48.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179382471deeb408000005"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521a0241471deed409000000"),
+      "content": "aaaaaaaaaaaaaaaa",
+      "status": true,
+      "created": ISODate("2013-08-25T13:10:25.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a026f471deed409000001"),
+      "content": "11111111111111",
+      "status": true,
+      "created": ISODate("2013-08-25T13:11:11.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a0291471deed409000002"),
+      "content": "222222222222222",
+      "status": true,
+      "created": ISODate("2013-08-25T13:11:45.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a02c7471deed409000003"),
+      "content": "222222222222222",
+      "status": true,
+      "created": ISODate("2013-08-25T13:12:39.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a02e4471dee000900000c"),
+      "content": "333333333333333333",
+      "status": true,
+      "created": ISODate("2013-08-25T13:13:08.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a0453471dee2408000000"),
+      "content": "44444444444",
+      "status": true,
+      "created": ISODate("2013-08-25T13:19:15.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a0585471dee2408000001"),
+      "content": "555555555555",
+      "status": true,
+      "created": ISODate("2013-08-25T13:24:21.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4d61471deed80900000d"),
+      "content": "666666666",
+      "status": true,
+      "created": ISODate("2013-08-25T18:30:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4d7a471deed80900000e"),
+      "content": "99999999999999",
+      "status": true,
+      "created": ISODate("2013-08-25T18:31:22.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4e68471deed80900000f"),
+      "content": "7777777777777",
+      "status": true,
+      "created": ISODate("2013-08-25T18:35:20.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4e6f471deed809000010"),
+      "content": "999999999",
+      "status": true,
+      "created": ISODate("2013-08-25T18:35:27.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4f26471deeb80900000a"),
+      "content": "aaaaaaaaa",
+      "status": true,
+      "created": ISODate("2013-08-25T18:38:30.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4f30471deeb80900000b"),
+      "content": "bbbbbb",
+      "status": true,
+      "created": ISODate("2013-08-25T18:38:40.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4f43471deeb80900000c"),
+      "content": "aaaaaaa",
+      "status": true,
+      "created": ISODate("2013-08-25T18:38:59.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4f4a471deeb80900000d"),
+      "content": "bbbbbbbbb",
+      "status": true,
+      "created": ISODate("2013-08-25T18:39:06.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4fa2471deeb80900000e"),
+      "content": "aaaaaaaaaaa",
+      "status": true,
+      "created": ISODate("2013-08-25T18:40:34.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521a4faa471deeb80900000f"),
+      "content": "bbbbbbbbbb",
+      "status": true,
+      "created": ISODate("2013-08-25T18:40:42.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521c4c12471dee100b000000"),
+      "content": "999999999",
+      "status": true,
+      "created": ISODate("2013-08-27T06:49:54.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f77eb471dee5c11000001"),
+      "content": "8888888888",
+      "status": true,
+      "created": ISODate("2013-08-29T16:33:47.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f77f7471dee5c11000002"),
+      "content": "999999999999",
+      "status": true,
+      "created": ISODate("2013-08-29T16:33:59.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng điểm, tuy nhiên khối lượng giao dịch chỉ đạt 10 triệu cp, sụt giảm mạnh so với phiên trước cho thấy mức độ tin cậy của mẫu hình khá thấp. &amp;nbsp;Trong ngắn hạn, chúng tôi vẫn duy trì quan điểm xu hướng giảm và các chỉ số sẽ gặp áp lực bán mạnh khi tiếp cận ngưỡng kháng cự trong các phiên tới. Vùng kháng cự hiện tại tập trung ở vùng giá 490-492 của chỉ số VNIndex và 61.7-62 của chỉ số HNXIndex. Do đó, nhà đầu tư cần thận trọng với quyết định giải ngân trong giai đoạn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tTiếp tục ưu tiên chiến lược hạ tỉ trọng cổ phiếu khi thị trường xuất hiện nhịp tăng ngắn hạn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mở vị thế mua trong giai đoạn này đến khi chúng tôi đưa ra điểm mua mới.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:53:22.0Z"),
+  "deleted": false,
+  "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f",
+    "518f5555471deea409000000"
+  ],
+  "slug": "lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179382471deeb408000005\/avatar.jpg",
+  "title": "Lăng kính Yestoc phiên 31\/07: ” Thị trường tiệm cận ngưỡng kháng cự mạnh”",
+  "updated": ISODate("2013-09-02T10:55:54.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+
+/** cache_post records **/
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521a02c7471deed409000004"),
+  "created": ISODate("2013-08-29T16:33:59.0Z"),
+  "postId": "52179382471deeb408000005",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017",
+  "view": NumberInt(0)
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521a4280471deed809000007"),
+  "created": ISODate("2013-08-27T06:50:04.0Z"),
+  "view": NumberInt(0),
+  "postId": "5216d23b471dee600b000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521a4fba471deeb809000011"),
+  "created": ISODate("2013-08-25T18:41:07.0Z"),
+  "view": NumberInt(0),
+  "postId": "5216d154471dee800a000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521c4ab6471dee200b000001"),
+  "created": ISODate("2013-09-01T13:52:22.0Z"),
+  "view": NumberInt(0),
+  "postId": "5216d1f7471dee840a000003",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521c4b6b471dee200b000004"),
+  "created": ISODate("2013-08-28T16:54:57.0Z"),
+  "view": NumberInt(0),
+  "postId": "5217929f471dee3c08000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521c4b78471dee200b000006"),
+  "created": ISODate("2013-08-29T17:51:48.0Z"),
+  "view": NumberInt(0),
+  "postId": "5216d192471dee840a000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521e0893471dee8c09000001"),
+  "created": ISODate("2013-09-01T06:00:23.0Z"),
+  "view": NumberInt(0),
+  "postId": "521792d9471deeb408000003",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521e2abb471dee1409000001"),
+  "created": ISODate("2013-09-01T06:00:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "52179345471deefc0b000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521f2aec471dee200a000002"),
+  "created": ISODate("2013-08-29T11:05:16.0Z"),
+  "view": NumberInt(0),
+  "postId": "5216d281471dee840a000005",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("521f8b51471dee5c11000005"),
+  "created": ISODate("2013-08-29T17:57:00.0Z"),
+  "view": NumberInt(0),
+  "postId": "5216d059471dee740b000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
 });
 
 /** city records **/
@@ -3737,7 +4635,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("520cf0bc471deeac09000009"),
+      "_id": ObjectId("521a25d4471dee240800000b"),
       "email": "quangthi_90@yahoo.com.vn",
       "primary": true
     }
@@ -3748,14 +4646,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("520cf0bc471deeac09000000"),
+    "_id": ObjectId("521a25d4471dee2408000002"),
     "firstname": "Bommer",
     "lastname": "Luu",
-    "birthday": ISODate("2013-08-15T15:16:12.0Z"),
+    "birthday": ISODate("2013-08-25T15:42:12.0Z"),
     "sex": NumberInt(1),
     "headingLine": "",
     "location": {
-      "_id": ObjectId("520cf0bc471deeac09000001"),
+      "_id": ObjectId("521a25d4471dee2408000003"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
@@ -3765,7 +4663,7 @@ db.getCollection("user").insert({
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "ims": [
       {
-        "_id": ObjectId("520cf0bc471deeac09000002"),
+        "_id": ObjectId("521a25d4471dee2408000004"),
         "im": "user1",
         "type": "skype",
         "visible": "myfollow"
@@ -3773,7 +4671,7 @@ db.getCollection("user").insert({
     ],
     "phones": [
       {
-        "_id": ObjectId("520cf0bc471deeac09000003"),
+        "_id": ObjectId("521a25d4471dee2408000005"),
         "phone": "0903000333",
         "type": "mobile",
         "visible": "myfollow"
@@ -3781,32 +4679,32 @@ db.getCollection("user").insert({
     ],
     "websites": [
       {
-        "_id": ObjectId("520cf0bc471deeac09000004"),
+        "_id": ObjectId("521a25d4471dee2408000006"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ],
     "background": {
-      "_id": ObjectId("520cf0bc471deeac09000005"),
+      "_id": ObjectId("521a25d4471dee2408000007"),
       "experiencies": [
         {
-          "_id": ObjectId("520cf0bc471deeac09000006"),
+          "_id": ObjectId("521a25d4471dee2408000008"),
           "company": "Yesocl",
           "title": "My Company",
           "location": {
-            "_id": ObjectId("520cf0bc471deeac09000007"),
+            "_id": ObjectId("521a25d4471dee2408000009"),
             "location": "HCM, Việt Nam",
             "cityId": "5143bfca913db4a408000012"
           },
-          "started": ISODate("2013-01-01T16:16:12.0Z"),
-          "ended": ISODate("2013-01-01T16:16:12.0Z"),
+          "started": ISODate("2013-01-01T16:42:12.0Z"),
+          "ended": ISODate("2013-01-01T16:42:12.0Z"),
           "current": false,
           "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
         }
       ],
       "educations": [
         {
-          "_id": ObjectId("520cf0bc471deeac09000008"),
+          "_id": ObjectId("521a25d4471dee240800000a"),
           "school": "Vietnam National University - Ho Chi Minh City",
           "school_id": "",
           "started": "2008",
@@ -3860,6 +4758,9 @@ db.getCollection("user").insert({
         "$db": "yesocl"
       }
     }
+  ],
+  "refreshIds": [
+    
   ],
   "salt": "09b2a07c9",
   "slug": "user1",
