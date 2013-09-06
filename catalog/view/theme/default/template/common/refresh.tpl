@@ -13,7 +13,7 @@
 
 {% block body %}
 <div id="y-content" class="no-header-fixed">
-    <div id="y-main-content" class="has-horizontal has-block">
+    <div id="y-main-content" class="has-horizontal post-category">
         {% for posts in all_posts %}
         {% set style = random([1, 2]) %}
         {% if posts|length > 0 %}
