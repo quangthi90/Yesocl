@@ -347,11 +347,13 @@
         this.$comment_btn	= $el.find('.btn-comment');
         this.$press_enter_cb  = $el.find('.cb-press-enter');
         this.attachEvents();
+        if(that.$press_enter_cb.parent().hasClass('checked')){
+            that.$comment_btn.hide();
+        }
     }
 
     CommentForm.prototype.attachEvents = function(){
         var that = this;
-
         this.$comment_btn.click(function(e) {
             if(that.$comment_btn.hasClass('disabled')) {
                 e.preventDefault();
@@ -376,9 +378,9 @@
                 
         this.$press_enter_cb.click(function(e) {
             if(that.$press_enter_cb.parent().hasClass('checked')){
-                that.$comment_btn.toggle("slow");
+                that.$comment_btn.hide("slow");
             }else{
-                that.$comment_btn.toggle("slow");
+                that.$comment_btn.show("slow");
             }
         });
                 
@@ -454,7 +456,6 @@
         };
 
         $el.addClass('disabled').prepend($spinner);
-
         promise.then(f, f);
     };
 
