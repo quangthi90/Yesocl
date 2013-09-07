@@ -66,6 +66,7 @@
                     {% if loop.index == 1 %}
                     {{ block('post_common_form_status') }}
                     {% endif %}
+                    {% set user = users[post.user_id] %}
                     {{ block('post_common_post_block') }}
                     {% if loop.index % 2 == 1 and loop.index != posts|length %}
                 </div>

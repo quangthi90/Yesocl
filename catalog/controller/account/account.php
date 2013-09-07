@@ -8,7 +8,7 @@ class ControllerAccountAccount extends Controller {
 		} else {
 			$this->data['base'] = $this->config->get('config_url');
 		}
-		$this->load->model('tool/image');
+		
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		
@@ -23,6 +23,8 @@ class ControllerAccountAccount extends Controller {
 		}
 
 		$this->load->model('user/user');
+		$this->load->model('tool/image');
+
 		$user = $this->model_user_user->getUserFull( $this->request->get );
 
 		if ( !$user ){
@@ -33,6 +35,7 @@ class ControllerAccountAccount extends Controller {
 		$posts = $user->getPosts();
 		$start = 0;
 		$count_post = 1;
+		$this->data['users'] = array();
 
 		foreach ( $posts as $key => $post ) {
 			if ( $key < $start ){
@@ -42,16 +45,14 @@ class ControllerAccountAccount extends Controller {
 			if ( $count_post > $this->limit ){
 				break;
 			}
+
+			if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
+				$liked = true;
+			}else{
+				$liked = false;
+			}
 			
 			$post = $post->formatToCache();
-
-			if ( isset($post['user']) && isset($post['user']['avatar']) ){
-				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
-			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
-                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
-            }else{
-				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
-			}
 
 			if ( isset($post['thumb']) && !empty($post['thumb']) ){
 				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
@@ -60,12 +61,18 @@ class ControllerAccountAccount extends Controller {
 			}
 
 			$post['image'] = $image;
-			$post['avatar'] = $avatar;
+			$post['isUserLiked'] = $liked;
 
 			$this->data['posts'][] = $post;
 
+			if ( !array_key_exists($post['user_id'], $users) ){
+				$this->data['users'][$post['user_id']] = $this->model_user_user->getUser( $post['user_slug'] );
+			}
+			
 			$count_post++;
 		}
+
+		$this->data['date_format'] = $this->language->get('date_format_full');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
