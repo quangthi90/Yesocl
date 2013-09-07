@@ -9,7 +9,12 @@ function renameAllInFolder($path_folder){
     while ($file = readdir($handler)) {
         if ($file != "." && $file != "..") {
             $newName = ucfirst($file);
-            $path = $path_folder.$file;
+            if ( is_dir($path_folder . '/' . $file) ){
+                $path = $path_folder . '/' .$file;
+            }else{
+                $path = $path_folder.$file;
+            }
+            
             if(is_dir($path)){
                 renameAllInFolder($path."/");
             }
@@ -19,5 +24,5 @@ function renameAllInFolder($path_folder){
     closedir($handler);
 }
 
-renameAllInFolder("../object/Document/");
+renameAllInFolder(DIR_ROOT . "object/Document/");
 ?>
