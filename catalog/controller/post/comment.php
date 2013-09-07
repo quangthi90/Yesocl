@@ -44,6 +44,11 @@ class ControllerPostComment extends Controller {
                 $this->load->model('branch/comment');
                 $comment = $this->model_branch_comment->addComment( $data );
                 break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $comment = $this->model_user_comment->addComment( $data );
+                break;
             
             default:
                 $comment = array();

@@ -21,7 +21,7 @@
 							data-comment-count="{{ post.comment_count }}"
 							data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
 						>
-							<i class="icon-comments-alt"></i> 
+							<i class="icon-comments-alt"></i>
 						</a>
 						<d>{{ post.comment_count }}</d>
 					</span>

@@ -47,26 +47,28 @@ class ModelUserComment extends Doctrine {
 		return $comments;
 	}
 
-	public function getComment( $Comment_id ){
-
-	}
-
 	public function addComment( $data = array() ){
+		// Post is required
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array(
+			'posts.slug' => $data['post_slug']
+		));
+		if ( !$user ){
+			return false;
+		}
+		$post = $user->getPostBySlug( $data['post_slug'] );
+		if ( !$post ){
+			return false;
+		}
+
 		// Author is required
 		if ( empty($data['user_id']) ) {
 			return false;
 		}
 		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( empty( $user ) ) {
-			return false;
-		}
-
-		// Post is required
-		if ( empty($data['post_slug']) ){
-			return false;
-		}
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
-		if ( !$post ){
 			return false;
 		}
 
@@ -86,38 +88,6 @@ class ModelUserComment extends Doctrine {
 		$post->addComment( $comment );
 		
 		$this->dm->flush();
-		
-		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-		$this->load->model('branch/post');
-
-		$posts = $this->model_branch_post->getPosts( array(
-			'branch_id' => $post->getBranch()->getId(),
-			'category_id' => $post->getCategory()->getId(),
-			'limit' => 6
-		));
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['branch'], 
-					$post->getBranch()->getId(), 
-					$post->getCategory()->getId(), 
-					$posts 
-				);
-				break;
-			}
-		}
-
-		$type = $this->config->get('post')['cache']['branch'];
-		$this->load->model('cache/post');
-		$data = array(
-			'post_id' => $post->getId(),
-			'type' => $type,
-			'type_id' => $post->getBranch()->getId(),
-			'view' => 0,
-			'created' => $comment->getCreated()
-		);
-		$this->model_cache_post->editPost( $data );
 
 		return $comment->formatToCache();
 	}
