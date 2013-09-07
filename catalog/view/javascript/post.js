@@ -541,6 +541,7 @@
                             }
                             $('.comment-body').find('.loading').remove();
                             $('.comment-body').prepend(htmlOutput);
+                            jQuery(".timeago").timeago();
                         }
                     }
                 });
