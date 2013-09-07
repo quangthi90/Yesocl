@@ -98,6 +98,24 @@ Class User {
 		return null;
 	}
 
+	/**
+	 * Get Post By Slug
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: string post Slug
+	 * @return:
+	 * 		- Object Post
+	 * 		- null if not found
+	 */
+	public function getPostBySlug( $post_slug ){
+		foreach ( $this->posts as $post ){
+			if ( $post->getSlug() == $post_slug ){
+				return  $post;
+			}
+		}
+		
+		return null;
+	}
+
     /**
 	* Format array to save to Cache
 	* 2013/07/24

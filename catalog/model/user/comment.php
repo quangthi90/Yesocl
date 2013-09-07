@@ -3,7 +3,7 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelBranchComment extends Doctrine {
+class ModelUserComment extends Doctrine {
 	public function getComments( $data = array() ){
 		$query = array();
 
@@ -19,7 +19,14 @@ class ModelBranchComment extends Doctrine {
 			return array();
 		}
 
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'posts.slug' => $data['post_slug']
+		));
+
+		$post = null;
+		if ( $user ){
+			$post = $user->getPostBySlug( $data['post_slug'] );
+		}
 
 		$comments = array();
 
@@ -36,7 +43,7 @@ class ModelBranchComment extends Doctrine {
 				$comments[] = $comment->formatToCache();
 			}
 		}
-
+		
 		return $comments;
 	}
 

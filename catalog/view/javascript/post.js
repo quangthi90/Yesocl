@@ -353,6 +353,7 @@
 		var that = this;
 
 		this.$comment_btn.click(function(e) {
+			console.log('helel');
 			if(that.$comment_btn.hasClass('disabled')) {
 				e.preventDefault();
 

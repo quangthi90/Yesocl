@@ -72,6 +72,7 @@ class ControllerAccountAccount extends Controller {
 			$count_post++;
 		}
 
+		$this->data['post_type'] = $this->config->get('common')['type']['user'];
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {

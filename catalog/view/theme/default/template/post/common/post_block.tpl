@@ -16,7 +16,14 @@
 						<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 					</span>
 					<span class="post_cm fr">
-						<i class="icon-comments-alt"></i> {{ post.comment_count }}
+						<a href="#" class="open-comment"
+							data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+							data-comment-count="{{ post.comment_count }}"
+							data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
+						>
+							<i class="icon-comments-alt"></i> 
+						</a>
+						<d>{{ post.comment_count }}</d>
 					</span>
 					<span class="post_like fr">
 						<i class="icon-thumbs-up"></i> {{ post.like_count }}
