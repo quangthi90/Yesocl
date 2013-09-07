@@ -83,7 +83,7 @@ class ControllerPostComment extends Controller {
             'comment_id' => $comment['id']
                 ));
         $comment['created'] = $comment['created']->format($this->language->get('date_format_full'));
-
+        $comment['content'] = str_replace("\n", "<br />", $comment['content']);
         return $this->response->setOutput(json_encode(array(
                             'success' => 'ok',
                             'comment' => $comment
@@ -168,6 +168,8 @@ class ControllerPostComment extends Controller {
                 'comment_id' => $comments[$key]['id']
                     ));
             $comments[$key]['created'] = $comment['created']->format($this->language->get('date_format_full'));
+            $comments[$key]['content'] = str_replace("\n", "<br />", $comments[$key]['content']);       
+            
         }
 
         return $this->response->setOutput(json_encode(array(
