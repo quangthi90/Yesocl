@@ -5,7 +5,7 @@
 				<a href="#">
 					<img src="{{ user.avatar }}" alt="user" />
 				</a>
-			</div>			
+			</div>
 			<div class="post_meta_info">
 				<div class="post_user">
 					<a href="#">{{ user.username }}</a>
@@ -29,7 +29,7 @@
 						<i class="icon-thumbs-up"></i> {{ post.like_count }}
 					</span>
 				</div>
-			</div>			
+			</div>
 		</div>
 		<div class="post_body">
 			<h4 class="post_title">
@@ -48,7 +48,7 @@
 			{% endif %}
 				{{ content|raw }}
 			</div>
-		</div>		
+		</div>
 	</div>
 {% endblock %}
 
