@@ -23,6 +23,7 @@ function FlexibleElement(el) {
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
 	this.openSearch = this.footerBar.find('.search');
 	this.searchTxt = this.openSearch.find('#searchText'); 	
+	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');	
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
@@ -70,6 +71,26 @@ FlexibleElement.prototype.attachEvents = function() {
 		sT.slideUp(100);
 	});	
 	$('a[title]').tooltip({ container: 'body' });
+
+	//For show/hide GoLeft
+	var goLeftBtn = this.goLeftBtn;
+	goLeftBtn.hide();		
+	m.scroll(function(e) { 
+    	var leftOffset = 0;
+    	var freeBlockFirst = $(this).find(".free-block:first-child");
+    	if(freeBlockFirst.length != 0 ){
+    		leftOffset = freeBlockFirst.width();
+    	}
+        if($(this).scrollLeft() > leftOffset){
+        	goLeftBtn.fadeIn();	
+        }
+        else {
+            goLeftBtn.fadeOut();	
+        }
+    });
+    goLeftBtn.click(function(){
+    	m.animate({scrollLeft: 0}, 1000);
+    });
 }
 
 /*
@@ -132,15 +153,15 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			columnPerBlock.each(function() {
 				if($(this).children('.post').length == 2) {
 					var firstPost = $(this).children('.post:first-child');
-					var lastPost = $(this).children('.post:last-child');
-					$(this).width(minPostStatusWidth);
+					var lastPost = $(this).children('.post:last-child');					
 					$(this).css('margin-right', marginPostOnWall + 'px');
 					firstPost.css('margin-bottom', marginPostOnWall + 'px');
 					if(lastPost.outerHeight() > (heightBlockContent - firstPost.outerHeight() - marginPostOnWall)) {
 						lastPost.find('.post_image').hide();	
 					}
 					lastPost.height(heightBlockContent - firstPost.outerHeight() - marginPostOnWall);					
-				}				
+				}	
+				$(this).width(minPostStatusWidth);			
 				totalWidthOfColumns += $(this).outerWidth() + marginPostOnWall;
 			});
 			firstColumn.css('min-width', minPostEditorWidth + 'px');
@@ -235,8 +256,5 @@ End Custom List Post
 $(document).ready(function() {
 	new FlexibleElement($(this));
 	new HorizontalBlock($('.has-horizontal')); 	
-});
-
-$(document).ready(function() {
-	jQuery(".timeago").timeago();
+	$(".timeago").timeago();	
 });
