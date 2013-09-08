@@ -353,7 +353,6 @@
 		var that = this;
 
 		this.$comment_btn.click(function(e) {
-			console.log('helel');
 			if(that.$comment_btn.hasClass('disabled')) {
 				e.preventDefault();
 
@@ -401,7 +400,9 @@
 				var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
 				that.$el.parent().find('.counter').html( comment_count );
 
-				var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent();
+				var $curr_item = $('.open-comment.disabled').parents('.post');
+				
+				$('.open-comment.disabled').parent().find('d').html( comment_count );
 				$curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
 				$curr_item.find('.post_header .post_cm d').html( comment_count );
 
