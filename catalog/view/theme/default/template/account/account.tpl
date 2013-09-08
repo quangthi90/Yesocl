@@ -34,19 +34,19 @@
                 </div>
                 <ul class="user_actions">
                     <li>
-                        <a href="#"><i class="icon-list-alt"></i> Profile</a>
+                        <i class="icon-list-alt"></i><a href="#">Profile</a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-fire"></i> Friends</a>
+                        <i class="icon-fire"></i><a href="#">Friends</a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-file-alt"></i> Posts</a>
+                        <i class="icon-file-alt"></i><a href="#">Posts</a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-group"></i> Groups</a>
+                        <i class="icon-group"></i><a href="#">Groups</a>
                     </li>
                     <li>
-                        <a href="#"><i class="icon-tasks"></i>  Activities</a>
+                        <i class="icon-tasks"></i><a href="#">Activities</a>
                     </li> 
                 </ul>
             </div>

@@ -78,6 +78,8 @@ Custom List Post
 var marginPost = 5;
 var marginPostOnWall = 15;
 var marginBlock = 50;
+var minPostEditorWidth = 450;
+var minPostStatusWidth = 350;
 var df_INVIDUAL_BLOCK = 'has-block';
 var df_ACCOUNT_MYWALL = 'account-mywall';
 var df_CATEGORY_SINGLE = 'post-category';
@@ -120,35 +122,31 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		this.blocks = this.root.find('.feed-block');	
 		this.freeBlock = this.root.find('.free-block');
 		var heightBlockContent = this.heightMain - 42;
-		var widthColumnOfFirstBlock = this.widthMain/2 - marginBlock - 10;
 		var totalWidth = 0;
-		var blockWidth = (5/6)*this.widthMain;
-		this.blocks.each(function(index) {
-			$(this).css('margin-right', marginBlock + 'px');
-			$(this).children('.block-content').height(heightBlockContent);
-			var columns = $(this).children('.block-content').children('.column');
-			if($(this).hasClass('block-post-new')) {
-				//Block containing new post
-				$(this).width(blockWidth);
-				columns.width((blockWidth - 2*marginPostOnWall)/2) - 4;
-				columns.children('.post_status').css('margin-bottom',marginPostOnWall + 'px');
-				columns.children('.post_status:last-child').css('margin-bottom','0px');				
-				columns.each(function(){
-					var firstPost = $(this).children('.post_status:first-child');
-					var lastPost = $(this).children('.post_status:last-child');
-					var restHeight = heightBlockContent - firstPost.outerHeight() - 30;
-					if(restHeight <= 0) {
-						lastPost.hide();
-					}else if(restHeight < lastPost.outerHeight()) {
-						lastPost.find('.post_image').hide();
-						lastPost.height(restHeight);						
+		this.blocks.each(function(index) {			
+			$(this).find('.block-content').height(heightBlockContent);
+			var firstColumn = $(this).find('.column:first-child');
+			var columnPerBlock = $(this).find('.column').not(':first-child');
+			firstColumn.width(minPostEditorWidth);					
+			var totalWidthOfColumns = firstColumn.outerWidth() + marginPostOnWall;
+			columnPerBlock.each(function() {
+				if($(this).children('.post').length == 2) {
+					var firstPost = $(this).children('.post:first-child');
+					var lastPost = $(this).children('.post:last-child');
+					$(this).width(minPostStatusWidth);
+					$(this).css('margin-right', marginPostOnWall + 'px');
+					firstPost.css('margin-bottom', marginPostOnWall + 'px');
+					if(lastPost.outerHeight() > (heightBlockContent - firstPost.outerHeight() - marginPostOnWall)) {
+						lastPost.find('.post_image').hide();	
 					}
-				});				
-			}else{
-				$(this).width((5/6)*widthMainParent);
-			}			
-			columns.css('margin-right', marginPostOnWall + 'px');
-			totalWidth += $(this).outerWidth() + marginBlock;
+					lastPost.height(heightBlockContent - firstPost.outerHeight() - marginPostOnWall);					
+				}				
+				totalWidthOfColumns += $(this).outerWidth() + marginPostOnWall;
+			});
+			firstColumn.css('min-width', minPostEditorWidth + 'px');
+			columnPerBlock.css('min-width', minPostStatusWidth + 'px');	
+			firstColumn.css('margin-right', marginPostOnWall + 'px');
+			totalWidth += totalWidthOfColumns;
 		});
 		this.freeBlock.css('margin-right', marginBlock);
 		this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));

@@ -35,9 +35,11 @@
 			<h4 class="post_title">
 				<a href="#">{{ post.title }}</a>
 			</h4>
-			<div class="post_image">
-				<img src="{{ post.image }}" />
-			</div>
+			{% if post.image != null %}
+				<div class="post_image">
+					<img src="{{ post.image }}" />
+				</div>
+			{% endif %}
 			<div class="post_text_raw">
 			{% if post.content|length > 200 %}
 				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
