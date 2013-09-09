@@ -45,13 +45,13 @@
 		  		<a href="#"><i class="icon-umbrella"></i> <span>Follower's post </span></a>
 		  	</li>
 		  	<li class="menu-item" id="account-menu">
-		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My wall </span></a>
+		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My post </span></a>
 		  	</li>	
 		  	<li class="menu-item" id="edit-menu">
-		  		<a href="#"><i class="icon-user-md"></i> <span>My Profile </span></a>
+		  		<a href="#"><i class="icon-user-md"></i> <span>My profile </span></a>
 		  	</li>
 		  	<li class="menu-item" id="categories-menu">
-		  		<a href="#"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
+		  		<a href="#"><i class="icon-fire"></i> <span>My friend</span> </a>
 		  	</li>
 		  	{% endblock %}
 		</ul>	
