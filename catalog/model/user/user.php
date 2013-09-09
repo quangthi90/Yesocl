@@ -17,16 +17,6 @@ class ModelUserUser extends Doctrine {
 
 			$user = $user->formatToCache();
 		}
-		
-		$this->load->model('tool/image');
-
-		if ( !empty($user['avatar']) ){
-			$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
-		}elseif ( !empty($user['email']) ){
-            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
-        }else{
-        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-		}
 
 		return $user;
 	}

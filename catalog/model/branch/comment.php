@@ -79,6 +79,39 @@ class ModelBranchComment extends Doctrine {
 		$post->addComment( $comment );
 		
 		$this->dm->flush();
+		
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+		$this->load->model('branch/post');
+
+		$posts = $this->model_branch_post->getPosts( array(
+			'branch_id' => $post->getBranch()->getId(),
+			'category_id' => $post->getCategory()->getId(),
+			'limit' => 6
+		));
+		foreach ( $posts as $p ) {
+			if ( $post->getId() == $p->getId() ){
+				$this->model_tool_cache->updateLastCategoryPosts( 
+					$this->config->get('post')['type']['branch'], 
+					$post->getBranch()->getId(), 
+					$post->getCategory()->getId(), 
+					$posts 
+				);
+				break;
+			}
+		}
+
+		// Update cache post for what's new
+		$type = $this->config->get('post')['cache']['branch'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'type_id' => $post->getBranch()->getId(),
+			'view' => 0,
+			'created' => $comment->getCreated()
+		);
+		$this->model_cache_post->editPost( $data );
 
 		return $comment->formatToCache();
 	}

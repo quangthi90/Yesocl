@@ -65,8 +65,18 @@ class ControllerAccountAccount extends Controller {
 
 			$this->data['posts'][] = $post;
 
-			if ( !array_key_exists($post['user_id'], $users) ){
-				$this->data['users'][$post['user_id']] = $this->model_user_user->getUser( $post['user_slug'] );
+			if ( !array_key_exists($post['user_id'], $this->data['users']) ){
+				$user = $this->model_user_user->getUser( $post['user_slug'] );
+
+				if ( !empty($user['avatar']) ){
+					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+				}elseif ( !empty($user['email']) ){
+		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
+		        }else{
+		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+				}
+
+				$this->data['users'][$post['user_id']] = $user;
 			}
 			
 			$count_post++;

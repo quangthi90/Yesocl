@@ -26,7 +26,10 @@
 						<d>{{ post.comment_count }}</d>
 					</span>
 					<span class="post_like fr">
-						<i class="icon-thumbs-up"></i> {{ post.like_count }}
+						<a>
+							<i class="icon-thumbs-up"></i>
+						</a>
+						<d>{{ post.like_count }}</d>
 					</span>
 				</div>
 			</div>

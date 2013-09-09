@@ -52,13 +52,13 @@ class ModelUserComment extends Doctrine {
 		if ( empty($data['post_slug']) ){
 			return false;
 		}
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array(
+		$user_info = $this->dm->getRepository('Document\User\User')->findOneBy( array(
 			'posts.slug' => $data['post_slug']
 		));
-		if ( !$user ){
+		if ( !$user_info ){
 			return false;
 		}
-		$post = $user->getPostBySlug( $data['post_slug'] );
+		$post = $user_info->getPostBySlug( $data['post_slug'] );
 		if ( !$post ){
 			return false;
 		}
@@ -88,6 +88,18 @@ class ModelUserComment extends Doctrine {
 		$post->addComment( $comment );
 		
 		$this->dm->flush();
+
+		// Update cache post for what's new
+		$type = $this->config->get('post')['cache']['user'];
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $type,
+			'type_id' => $user_info->getId(),
+			'view' => 0,
+			'created' => $comment->getCreated()
+		);
+		$this->model_cache_post->editPost( $data );
 
 		return $comment->formatToCache();
 	}
