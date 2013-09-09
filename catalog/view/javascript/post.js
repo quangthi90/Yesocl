@@ -466,7 +466,7 @@
 			new UserListViewer($(this));
 		});
 
-		$('.post_action .like-post').each(function(){
+		$('.like-post').each(function(){
 			new LikePostBtn($(this));			
 		});
 

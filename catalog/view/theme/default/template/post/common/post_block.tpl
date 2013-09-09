@@ -26,8 +26,15 @@
 						<d>{{ post.comment_count }}</d>
 					</span>
 					<span class="post_like fr">
-						<a>
-							<i class="icon-thumbs-up"></i>
+						<a class="like-post" href="#"
+                            data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+                            data-post-like="{{ post.isUserLiked }}"
+                        >
+							{% if post.isUserLiked == 0 %}
+                                <i class="icon-thumbs-up medium-icon"></i>
+                            {% else %}
+                                <i class="icon-thumbs-down medium-icon"></i>
+                            {% endif %}
 						</a>
 						<d>{{ post.like_count }}</d>
 					</span>

@@ -42,6 +42,11 @@ class ControllerPostPost extends Controller {
                 $this->load->model('branch/post');
                 $post = $this->model_branch_post->editPost( $data['post_slug'], $data );
                 break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/post');
+                $post = $this->model_user_post->editPost( $data['post_slug'], $data );
+                break;
             
             default:
                 break;
