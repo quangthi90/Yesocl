@@ -49,11 +49,11 @@ class ExtensionLoader
     }
 
     public function assetCss( $path ){
-        return HTTP_CATALOG . 'catalog/view/theme/default/stylesheet/' . $path;
+        return HTTPS_SERVER . 'catalog/view/theme/default/stylesheet/' . $path;
     }
 
     public function assetJs( $path ){
-        return HTTP_CATALOG . 'catalog/view/javascript/' . $path;
+        return HTTPS_SERVER . 'catalog/view/javascript/' . $path;
     }
 
     public function assetImg( $path ){
