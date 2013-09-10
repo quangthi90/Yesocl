@@ -4,7 +4,15 @@ class ControllerPostPost extends Controller {
 
 	public function addStatus(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->load->model('post/post');
+			$this->load->model('user/post');
+
+            $data = array(
+                'content' => $this->request->post['content'],
+                'user_id' => $this->customer->getId(),
+                'author_slug' => $this->request->get['user_slug']
+            );
+
+            $post = $this->model_user_post->addPost( $data );
 
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok'
@@ -15,6 +23,25 @@ class ControllerPostPost extends Controller {
             'success' => 'not ok'
         )));
 	}
+
+    public function validate(){
+        if ( empty( $this->request->post['content']) ) {
+            $this->error['error_content'] = $this->language->get( 'error_content' );
+        }
+
+        if ( !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
+            $this->load->model('tool/image');
+            if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
+                $this->error['error_thumb'] = $this->language->get( 'error_thumb');
+            }
+        }
+
+        if ( $this->error ) {
+            return false;
+        }else {
+            return true;
+        }
+    }
 
     public function like(){
         $data = array();

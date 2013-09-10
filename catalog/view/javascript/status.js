@@ -50,7 +50,8 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				window.location.reload();
+				// console.log('ok');
+				// window.location.reload();
 			}
 		});
 	};

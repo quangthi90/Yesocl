@@ -7,6 +7,7 @@ $_['routing']['CategoryPage'] 	= 'category/{category_slug}/';
 // Post
 $_['routing']['PostPage'] 		= '{post_type}/post/{post_slug}/';
 $_['routing']['PostLike'] 		= '{post_type}/post/{post_slug}/like';
+$_['routing']['PostAdd'] 		= '{post_type}/{user_slug}/post/add';
 
 // Comment
 $_['routing']['CommentList'] 	= '{post_type}/post/{post_slug}/comments/';

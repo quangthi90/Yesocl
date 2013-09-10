@@ -31,6 +31,7 @@
                 <div class="column">
                 {% for post in posts %}
                     {% if loop.index == 1 %}
+                    {% set user = users[current_user_id] %}
                     {{ block('post_common_form_status') }}
                     {% endif %}
                     {% set user = users[post.user_id] %}

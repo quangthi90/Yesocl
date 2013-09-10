@@ -1,5 +1,55 @@
 <?php
+use Document\User\Post;
+
 class ModelUserPost extends Doctrine {
+	/**
+	 * Add Post of User to Database
+	 * 2013/08/29
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Liker ID (User ID)
+	 * 	}
+	 * @return: bool
+	 *	- object post: success
+	 * 	- false: not success
+	 */
+	public function addPost( $data = array(), $thumb = array() ) {
+		if ( empty($data['user_id']) ){
+			return false;
+		}
+		$user = $this->dm->getRepository('Document\User\User')->find( $data['user_id'] );
+		if ( !$user ){
+			return false;
+		}
+
+		if ( empty($data['author_slug']) ){
+			return false;
+		}
+		$author = $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['author_slug'] );
+		if ( !$author ){
+			return false;
+		}
+
+		if ( empty($data['content']) ){
+			return false;
+		}
+		
+		$post = new Post();
+		$post->setContent( $data['content'] );
+		$post->setUser( $author );
+		$post->setStatus( true );
+
+		$user->addPost( $post );
+		
+		$this->dm->flush();
+		
+		return $post;
+	}
+
 	/**
 	 * Edit Post of User to Database
 	 * 2013/08/29

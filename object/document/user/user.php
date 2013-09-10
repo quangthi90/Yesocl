@@ -296,7 +296,8 @@ Class User {
 	}
 
 	public function getPosts(){
-		return $this->posts;
+		$posts = $this->posts->toArray();
+		return array_reverse($posts);
 	}
 
 	public function addRefreshId( $refreshId ){
