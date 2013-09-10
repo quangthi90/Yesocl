@@ -50,7 +50,7 @@
                                     <div class="action_tool">
                                         <a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
                                             data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
-                                            data-post-like="{{ post.isUserLiked }}"
+                                            data-post-liked="{{ post.isUserLiked }}"
                                         >
                                             {% if post.isUserLiked == 0 %}
                                                 <i class="icon-thumbs-up medium-icon"></i>

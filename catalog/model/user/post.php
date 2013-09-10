@@ -21,25 +21,26 @@ class ModelUserPost extends Doctrine {
 		if ( !$user ){
 			return false;
 		}
-
-		$post = $user->getPostById();
+		
+		$post = $user->getPostBySlug( $data['post_slug'] );
 
 		if ( !$post ){
 			return false;
 		}
-
+		
 		if ( !empty($data['likerId']) ){
 			$likerIds = $post->getLikerIds();
+
 			$key = array_search( $data['likerId'], $likerIds );
 			
-			if ( $key === false ){
+			if ( !$likerIds || $key === false ){
 				$post->addLikerId( $data['likerId'] );
 			}else{
 				unset($likerIds[$key]);
 				$post->setLikerIds( $likerIds );
 			}
 		}
-
+		
 		$this->dm->flush();
 		
 		return $post;

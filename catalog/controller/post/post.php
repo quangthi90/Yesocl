@@ -51,7 +51,7 @@ class ControllerPostPost extends Controller {
             default:
                 break;
         }
-
+        
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'like_count' => count($post->getLikerIds())
