@@ -27,30 +27,40 @@
 						</div>
 						<div class="span4 post-action post_action">
 							<a href="#"><i class="icon-eye-open medium-icon"></i> View (1000)</a>
-							<a class="like-post" href="#"
-								data-post-slug="{{ post.slug }}" 
-								data-post-type="{{ post_type }}"
-							><i class="icon-thumbs-up medium-icon"></i> Like (<d>{{ post.like_count }}</d>)</a>
-							<a href="#" class="open-comment"
-								data-url="{{ post.href_status|raw }}" 
-								data-comment-count="{{ post.comment_count }}" 
-								data-post-slug="{{ post.slug }}" 
-								data-post-type="{{ post_type }}"
-								data-type-slug="{{ branch.slug }}"
-							><i class="icon-comments medium-icon"></i> Comment (<d>{{ post.comment_count }}</d>)</a>
+							<span>
+								<a class="like-post" href="#"
+									data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+	                                data-post-liked="{{ post.isUserLiked }}"
+								>
+									{% if post.isUserLiked == 0 %}
+	                                    <i class="icon-thumbs-up medium-icon"></i>
+	                                {% else %}
+	                                    <i class="icon-thumbs-down medium-icon"></i>
+	                                {% endif %}
+								</a>
+								Like (<d>{{ post.like_count }}</d>)
+							</span>
+							<span>
+								<a href="#" class="open-comment"
+									data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+	                                data-comment-count="{{ post.comment_count }}"
+	                                data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
+								><i class="icon-comments medium-icon"></i></a>
+								Comment (<d>{{ post.comment_count }}</d>)
+							</span>
 						</div>
 					</div>
 				</div>
 				<div class="post-metadata">
 					<div class="row-fluid">
 						<div class="span1 avatar-thumb">
-							<a href="{{ post.href_user|raw }}">
+							<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 								<img src="{{ post.avatar }}" alt="user">
 							</a>
 						</div>
 						<div class="span11 post-info">
 							<div class="post-user-time">
-								<a href="{{ post.href_user|raw }}">{{ post.author }}</a> - <span class="post-time timeago" title="{{ post.created|date(date_format) }}"></span>
+								<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">{{ post.author }}</a> - <span class="post-time timeago" title="{{ post.created|date(date_format) }}"></span>
 							</div>
 							<h4 class="post_title">
 								{{ post.title }}

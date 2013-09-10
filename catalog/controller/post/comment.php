@@ -90,6 +90,7 @@ class ControllerPostComment extends Controller {
             'comment_id' => $comment['id']
         ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+        $comment['is_liked'] = false;
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

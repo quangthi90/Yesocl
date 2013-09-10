@@ -43,7 +43,7 @@
 		</div>
 		<div class="post_body">
 			<h4 class="post_title">
-				<a href="#">{{ post.title }}</a>
+				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
 			{% if post.image != null %}
 				<div class="post_image">

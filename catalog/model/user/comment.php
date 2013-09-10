@@ -101,7 +101,7 @@ class ModelUserComment extends Doctrine {
 		);
 		$this->model_cache_post->editPost( $data );
 
-		return $comment->formatToCache();
+		return $comment;
 	}
 
 	public function editComment( $comment_id, $data = array() ){
