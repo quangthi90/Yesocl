@@ -30,6 +30,7 @@ class ControllerAccountAccount extends Controller {
 		if ( !$user ){
 			return false;
 		}
+		$this->data['current_user_id'] = $user->getId();
 
 		$this->data['posts'] = array();
 		$posts = $user->getPosts();

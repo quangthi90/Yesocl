@@ -3,6 +3,7 @@
 {% use '@template/default/template/post/common/form_status.tpl' %}
 {% use '@template/default/template/post/common/post_block.tpl' %}
 {% use '@template/default/template/post/common/post_comment.tpl' %}
+{% use '@template/default/template/account/common/profile_column.tpl' %}
 
 {% block title %}{{ user_info.username }}{% endblock %}
 
@@ -13,44 +14,10 @@
 {% block body %}
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal account-mywall">
-        <div class="free-block fl" style="width: 180px;">
-            <div class="free-block-content">
-                <div class="user_info_overview">
-                    <a href="#" class="user_info_avatar">
-                        <img src="http://www.gravatar.com/avatar/cc00a8c917457e6e7259900fc25ac879?s=180" alt="Name" />
-                    </a>
-                    <a href="#" class="user_info_name"><i class="icon-male"></i> WMThiet</a>
-                    <div class="user_relationship">
-                        <a href="#" class="btn btn-yes">
-                            <i class="icon-plus-sign"></i> Add friend
-                        </a>
-                        <a href="#" class="btn btn-yes">
-                            <i class="icon-random"></i> Follow
-                        </a>
-                        <a href="#" class="btn btn-yes">
-                            <i class="icon-share-alt"></i> Message
-                        </a>
-                    </div>                    
-                </div>
-                <ul class="user_actions">
-                    <li>
-                        <i class="icon-list-alt"></i><a href="#">Profile</a>
-                    </li>
-                    <li>
-                        <i class="icon-fire"></i><a href="#">Friends</a>
-                    </li>
-                    <li>
-                        <i class="icon-file-alt"></i><a href="#">Posts</a>
-                    </li>
-                    <li>
-                        <i class="icon-group"></i><a href="#">Groups</a>
-                    </li>
-                    <li>
-                        <i class="icon-tasks"></i><a href="#">Activities</a>
-                    </li> 
-                </ul>
-            </div>
-        </div>
+        {% if current_user_id != get_current_user().id %}
+            {% set user = users[current_user_id] %}
+            {{ block('common_profile_column') }}
+        {% endif %}
         <div class="feed-block block-post-new">
             <div class="block-header">
                 <a class="block-title fl" href="#">
