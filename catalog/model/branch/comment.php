@@ -33,7 +33,7 @@ class ModelBranchComment extends Doctrine {
 					break;
 				}
 
-				$comments[] = $comment->formatToCache();
+				$comments[] = $comment;
 			}
 		}
 
@@ -113,7 +113,7 @@ class ModelBranchComment extends Doctrine {
 		);
 		$this->model_cache_post->editPost( $data );
 
-		return $comment->formatToCache();
+		return $comment;
 	}
 
 	public function editComment( $comment_id, $data = array() ){
@@ -127,8 +127,17 @@ class ModelBranchComment extends Doctrine {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		if ( !empty($data['likerId']) && !in_array($data['likerId'], $comment->getLikerIds()) ){
+		$comment = $post->getCommentById( $comment_id );
+		
+		$likerIds = $comment->getLikerIds();
+
+		$key = array_search( $data['likerId'], $likerIds );
+		
+		if ( !$likerIds || $key === false ){
 			$comment->addLikerId( $data['likerId'] );
+		}else{
+			unset($likerIds[$key]);
+			$comment->setLikerIds( $likerIds );
 		}
 
 		$this->dm->flush();

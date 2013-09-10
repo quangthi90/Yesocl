@@ -223,7 +223,7 @@
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { alert(data.success);
+		promise.then(function(data) {
 			if(data.success == 'ok'){
 				that.$el.find('d').html( data.like_count ); 
 

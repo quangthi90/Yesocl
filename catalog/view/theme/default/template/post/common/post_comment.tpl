@@ -49,7 +49,14 @@
 					<a href="#" class="like-comment"
 						data-url="${href_like}"
 						data-comment-liked="${is_liked}"
-					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
+					>
+					{{if is_liked == true}}
+						<i class="icon-thumbs-down medium-icon"></i> 
+					{{else}}
+						<i class="icon-thumbs-up medium-icon"></i> 
+					{{/if}}
+						Like (<d>${like_count}</d>)
+					</a>
 				</div>
 			</div>
 		</div>

@@ -40,7 +40,7 @@ class ModelUserComment extends Doctrine {
 					break;
 				}
 
-				$comments[] = $comment->formatToCache();
+				$comments[] = $comment;
 			}
 		}
 		
@@ -105,9 +105,19 @@ class ModelUserComment extends Doctrine {
 	}
 
 	public function editComment( $comment_id, $data = array() ){
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
-			'comments.id' => $comment_id
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'posts.comments.id' => $comment_id
 		));
+
+		if ( !$user ){
+			return false;
+		}
+
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+
+		$post = $user->getPostBySlug( $data['post_slug'] );
 
 		if ( !$post ){
 			return false;
@@ -115,8 +125,15 @@ class ModelUserComment extends Doctrine {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		if ( !empty($data['likerId']) && !in_array($data['likerId'], $comment->getLikerIds()) ){
+		$likerIds = $comment->getLikerIds();
+
+		$key = array_search( $data['likerId'], $likerIds );
+		
+		if ( !$likerIds || $key === false ){
 			$comment->addLikerId( $data['likerId'] );
+		}else{
+			unset($likerIds[$key]);
+			$comment->setLikerIds( $likerIds );
 		}
 
 		$this->dm->flush();

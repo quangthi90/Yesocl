@@ -61,6 +61,8 @@ class ControllerPostComment extends Controller {
             )));
         }
 
+        $comment = $comment->formatToCache();
+
         $this->load->model('user/user');
         $user = $this->model_user_user->getUser( $comment['user_slug'] );
 
@@ -79,7 +81,9 @@ class ControllerPostComment extends Controller {
         }
 
         $comment['avatar'] = $avatar;
-        $comment['href_user'] = $this->extension->path('WallPage', array('user_slug' => $user['slug']));
+        $comment['href_user'] = $this->extension->path('WallPage', array(
+            'user_slug' => $user['slug']
+        ));
         $comment['href_like'] = $this->extension->path('CommentLike', array(
             'post_slug' => $data['post_slug'],
             'post_type' => $data['post_type'],
@@ -152,6 +156,14 @@ class ControllerPostComment extends Controller {
         $this->load->model('tool/image');
 
         foreach ( $comments as $key => $comment ) {
+            if ( in_array($this->customer->getId(), $comment->getLikerIds()) ){
+                $liked = true;
+            }else{
+                $liked = false;
+            }
+
+            $comment = $comment->formatToCache();
+
             $user = $this->model_user_user->getUser( $comment['user_slug'] );
             
             if ( $user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar']) ){
@@ -163,19 +175,24 @@ class ControllerPostComment extends Controller {
             }
 
             if ( $user && $user['username'] ){
-                $comments[$key]['author'] = $user['username'];
+                $comment['author'] = $user['username'];
             }else{
-                $comments[$key]['author'] = $comment['author'];
+                $comment['author'] = $comment['author'];
             }
 
-            $comments[$key]['avatar'] = $avatar;
-            $comments[$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
-            $comments[$key]['href_like'] = $this->extension->path('CommentLike', array(
+            $comment['avatar'] = $avatar;
+            $comment['href_user'] = $this->extension->path('WallPage', array(
+                'user_slug' => $user['slug']
+            ));
+            $comment['href_like'] = $this->extension->path('CommentLike', array(
                 'post_slug' => $data['post_slug'],
                 'post_type' => $data['post_type'],
-                'comment_id' => $comments[$key]['id']
+                'comment_id' => $comment['id']
             ));
-            $comments[$key]['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+            $comment['is_liked'] = $liked;
+
+            $comments[$key] = $comment;
         }
 
         return $this->response->setOutput(json_encode(array(
@@ -217,6 +234,11 @@ class ControllerPostComment extends Controller {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
                 $comment = $this->model_branch_comment->editComment( $data['comment_id'], $data );
+                break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $comment = $this->model_user_comment->editComment( $data['comment_id'], $data );
                 break;
             
             default:
