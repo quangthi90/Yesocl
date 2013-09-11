@@ -310,7 +310,9 @@
                 comment_box.find('.y-box-header span').html(that.comment_count);
                 comment_form.attr('data-url', that.comment_url);
                 page = 1;
-
+                $('.comment-body').animate({
+                    scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
+                }, 1000);
                 new CommentForm(comment_form);
 
                 $('.comment-item .like-comment').each(function(){
@@ -529,7 +531,7 @@
                     url:  $('.open-comment.disabled').data('url'),
                     data: data,
                     dataType: 'json',
-                    progress: function () {
+                    beforeSend: function () {
                         $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-refresh"></i>Loading...</span>');
                     },
                     success: function (data) {
@@ -538,8 +540,12 @@
                             for (key in data.comments) {
                                 htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                             }
+                            var topCurrent = $('.comment-body').find('.loading').first().offset().top;
                             $('.comment-body').find('.loading').remove();
                             $('.comment-body').prepend(htmlOutput);
+                            $('.comment-body').animate({
+                                scrollTop: topCurrent
+                            }, 100);
                             jQuery(".timeago").timeago();
                         }
                     }
