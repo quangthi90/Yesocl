@@ -3,7 +3,7 @@
 	<form class="form-status" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new">
 			<div class="row-fluid txt_editor">
-				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..."></textarea>
+				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
 			</div>			 
 			<div class="post_tool">
 				<div class="row-fluid">

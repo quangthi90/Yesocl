@@ -51,7 +51,15 @@
 				</div>
 			{% endif %}
 			<div class="post_text_raw">
+			{% if post.content|length > 200 %}
+				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
+				{{ content|raw }}
+				<br />
+				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more</a>
+			{% else %}
 				{{ post.content|raw }}
+			{% endif %}
+				
 			</div>
 		</div>
 	</div>
