@@ -34,6 +34,8 @@ class ControllerPostPost extends Controller {
                 $image = null;
             }
 
+            $post_type = $this->config->get('post')['type']['user'];
+
             // href
             $data_post_info = array(
                 'post_type' => $post_type,
@@ -45,8 +47,6 @@ class ControllerPostPost extends Controller {
                 'post_like' => $this->extension->path( "PostLike", $data_post_info ),
                 'post_detail' => $this->extension->path( "PostPage", $data_post_info )
             );
-
-            $post_type = $this->config->get('post')['cache']['user'];
 
             $return_data = array(
                 'post' => array(

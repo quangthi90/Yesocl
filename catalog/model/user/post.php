@@ -44,6 +44,7 @@ class ModelUserPost extends Doctrine {
 		$post->setContent( $data['content'] );
 		$post->setUser( $author );
 		$post->setStatus( true );
+		$post->setSlug( $slug );
 
 		$user->addPost( $post );
 		
