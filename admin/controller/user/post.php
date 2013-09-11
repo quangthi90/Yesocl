@@ -126,7 +126,8 @@ class ControllerUserPost extends Controller {
 
 	private function getList( ){
 		// Limit
-		$limit = $this->config->get('config_admin_limit');
+		// $limit = $this->config->get('config_admin_limit');
+		$limit = 10;
 		
 		// catch error
 		if ( isset($this->error['warning']) ){
@@ -148,11 +149,19 @@ class ControllerUserPost extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
+
+		$url = '';
 		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
 			$page = 1;
+		}
+
+		$url .= '&page=' . $page;
+
+		if ( isset($this->request->get['user_id']) ){
+			$url .= '&user_id=' . $this->request->get['user_id'];
 		}
 		
 		$this->load->model( 'user/user' );
@@ -174,7 +183,7 @@ class ControllerUserPost extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'user/post', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'user/post', 'token=' . $this->session->data['token'] . $url, 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -205,8 +214,8 @@ class ControllerUserPost extends Controller {
 		$this->data['column_thumb'] = $this->language->get( 'column_thumb' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'user/post/insert', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'user/post/delete', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'user/post/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['delete'] = $this->url->link( 'user/post/delete', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		$this->data['back'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// post
@@ -217,7 +226,7 @@ class ControllerUserPost extends Controller {
 		$this->data['posts'] = array();
 		if ( $posts ){
 			$post_total = count($posts);
-			for ( $i = (($page - 1) * $limit); $i < ($post_total - (($page - 1) * $limit)); $i++ ){
+			for ( $i = (($page - 1) * $limit); $i < $page * $limit && $i < $post_total; $i++ ){
 				$action = array();
 				
 				$action[] = array(
@@ -251,7 +260,7 @@ class ControllerUserPost extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('user/post', '&user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
+		$pagination->url = $this->url->link('user/post', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
