@@ -162,6 +162,8 @@ class ModelUserPost extends Doctrine {
 					
 					// remove Image
 					$this->model_tool_image->deleteDirectoryImage( $path );
+
+					$user->getPosts(false)->removeElement( $post );
 				}
 			}
 		}

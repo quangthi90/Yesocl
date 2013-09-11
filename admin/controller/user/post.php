@@ -103,11 +103,15 @@ class ControllerUserPost extends Controller {
 		}
 		
 		$this->load->language( 'user/post' );
+
+		$url = '';
+
+		if ( !empty($this->request->get['page']) ){
+			$url .= '&page=' . $this->request->get['page'];
+		}
 		
-		if ( !isset($this->request->get['user_id']) ){
-			$this->session->data['error_warning'] = $this->language->get('error_user');
-			
-			$this->redirect( $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL') );
+		if ( !empty($this->request->get['user_id']) ){
+			$url .= '&user_id=' . $this->request->get['user_id'];
 		}
 		
 		$this->load->model( 'user/post' );
@@ -118,7 +122,7 @@ class ControllerUserPost extends Controller {
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
 			$this->model_user_post->deletePost( $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link( 'user/post', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
+			$this->redirect( $this->url->link( 'user/post', 'token=' . $this->session->data['token'] . $url, 'SSL' ) );
 		}
 
 		$this->getList( );
