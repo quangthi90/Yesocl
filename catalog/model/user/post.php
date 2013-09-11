@@ -18,18 +18,18 @@ class ModelUserPost extends Doctrine {
 	 * 	- false: not success
 	 */
 	public function addPost( $data = array(), $thumb = array() ) {
-		if ( empty($data['user_id']) ){
+		if ( empty($data['user_slug']) ){
 			return false;
 		}
-		$user = $this->dm->getRepository('Document\User\User')->find( $data['user_id'] );
+		$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['user_slug'] );
 		if ( !$user ){
 			return false;
 		}
 
-		if ( empty($data['author_slug']) ){
+		if ( empty($data['author_id']) ){
 			return false;
 		}
-		$author = $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['author_slug'] );
+		$author = $this->dm->getRepository('Document\User\User')->find( $data['author_id'] );
 		if ( !$author ){
 			return false;
 		}

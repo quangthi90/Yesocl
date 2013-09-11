@@ -9,8 +9,8 @@ class ControllerPostPost extends Controller {
 
             $data = array(
                 'content' => $this->request->post['content'],
-                'user_id' => $this->customer->getId(),
-                'author_slug' => $this->request->get['user_slug']
+                'user_slug' => $this->request->get['user_slug'],
+                'author_id' => $this->customer->getId()
             );
 
             $post = $this->model_user_post->addPost( $data );

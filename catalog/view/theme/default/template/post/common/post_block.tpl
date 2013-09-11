@@ -2,13 +2,13 @@
 	<div class="feed post post_status">
 		<div class="post_header">
 			<div class="avatar_thumb">
-				<a href="#">
+				<a href="{{ path('WallPage', {user_slug: user.slug}) }}">
 					<img src="{{ user.avatar }}" alt="user" />
 				</a>
 			</div>
 			<div class="post_meta_info">
 				<div class="post_user">
-					<a href="#">{{ user.username }}</a>
+					<a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a>
 				</div>
 				<div class="post_meta">
 					<span class="post_time fl">
