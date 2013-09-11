@@ -3,7 +3,7 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelBranchComment extends Doctrine {
+class ModelUserComment extends Doctrine {
 	public function getComments( $data = array() ){
 		$query = array();
 
@@ -19,7 +19,14 @@ class ModelBranchComment extends Doctrine {
 			return array();
 		}
 
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'posts.slug' => $data['post_slug']
+		));
+
+		$post = null;
+		if ( $user ){
+			$post = $user->getPostBySlug( $data['post_slug'] );
+		}
 
 		$comments = array();
 
@@ -36,30 +43,32 @@ class ModelBranchComment extends Doctrine {
 				$comments[] = $comment;
 			}
 		}
-
+		
 		return $comments;
 	}
 
-	public function getComment( $Comment_id ){
-
-	}
-
 	public function addComment( $data = array() ){
+		// Post is required
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+		$user_info = $this->dm->getRepository('Document\User\User')->findOneBy( array(
+			'posts.slug' => $data['post_slug']
+		));
+		if ( !$user_info ){
+			return false;
+		}
+		$post = $user_info->getPostBySlug( $data['post_slug'] );
+		if ( !$post ){
+			return false;
+		}
+
 		// Author is required
 		if ( empty($data['user_id']) ) {
 			return false;
 		}
 		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( empty( $user ) ) {
-			return false;
-		}
-
-		// Post is required
-		if ( empty($data['post_slug']) ){
-			return false;
-		}
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
-		if ( !$post ){
 			return false;
 		}
 
@@ -79,35 +88,14 @@ class ModelBranchComment extends Doctrine {
 		$post->addComment( $comment );
 		
 		$this->dm->flush();
-		
-		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-		$this->load->model('branch/post');
-
-		$posts = $this->model_branch_post->getPosts( array(
-			'branch_id' => $post->getBranch()->getId(),
-			'category_id' => $post->getCategory()->getId(),
-			'limit' => 6
-		));
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['branch'], 
-					$post->getBranch()->getId(), 
-					$post->getCategory()->getId(), 
-					$posts 
-				);
-				break;
-			}
-		}
 
 		// Update cache post for what's new
-		$type = $this->config->get('post')['cache']['branch'];
+		$type = $this->config->get('post')['cache']['user'];
 		$this->load->model('cache/post');
 		$data = array(
 			'post_id' => $post->getId(),
 			'type' => $type,
-			'type_id' => $post->getBranch()->getId(),
+			'type_id' => $user_info->getId(),
 			'view' => 0,
 			'created' => $comment->getCreated()
 		);
@@ -117,16 +105,24 @@ class ModelBranchComment extends Doctrine {
 	}
 
 	public function editComment( $comment_id, $data = array() ){
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
-			'comments.id' => $comment_id
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'posts.comments.id' => $comment_id
 		));
+
+		if ( !$user ){
+			return false;
+		}
+
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+
+		$post = $user->getPostBySlug( $data['post_slug'] );
 
 		if ( !$post ){
 			return false;
 		}
 
-		$comment = $post->getCommentById( $comment_id );
-		
 		$comment = $post->getCommentById( $comment_id );
 		
 		$likerIds = $comment->getLikerIds();

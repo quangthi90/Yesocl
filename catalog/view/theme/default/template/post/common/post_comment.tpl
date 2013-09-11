@@ -21,7 +21,7 @@
 					<a class="fl comment-tool" href="#" title="Chèn hình">
 						<i class="icon-camera icon-2x"></i>
 					</a>
-					<a href="#" class="btn btn-yes fr">Post</a>					
+					<a href="#" class="btn btn-yes fr btn-comment">Post</a>					
 				</div>
 			</form>		
 		</div>			
@@ -49,7 +49,14 @@
 					<a href="#" class="like-comment"
 						data-url="${href_like}"
 						data-comment-liked="${is_liked}"
-					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
+					>
+					{{if is_liked == true}}
+						<i class="icon-thumbs-down medium-icon"></i> 
+					{{else}}
+						<i class="icon-thumbs-up medium-icon"></i> 
+					{{/if}}
+						Like (<d>${like_count}</d>)
+					</a>
 				</div>
 			</div>
 		</div>

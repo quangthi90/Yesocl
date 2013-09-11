@@ -23,12 +23,13 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['all_posts'] = array();
 
 		$branch_ids = array_keys($branchs);
+		$user_ids = array( $this->customer->getId() );
 
 		$posts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
-			'type_ids' => $branch_ids,
+			'type_ids' => array_merge($branch_ids, $user_ids),
 		));
-
+		
 		$post_count = count($posts);
 		$count = 1;
 		$list_posts = array();
