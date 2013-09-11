@@ -1327,6 +1327,16 @@ label.in-line{
   padding: 0px 10px;
 }
 
+.post_body .post_text_raw p,
+.post_body .post_text_raw div,
+.post_body .post_text_raw span,
+.post_body .post_text_raw a,
+.post_body .post_text_raw ul,
+.post_in_block .post_body .post_text_raw li {
+  padding: 0px;
+  margin: 0px;
+}
+
 .feed-container .post {
   width: 100%;
   height: 100%;
@@ -1602,15 +1612,15 @@ ul.user_actions li {
     padding: 5px;  
     border-bottom: 1px solid #f4f4f4;
 }
-ul.user_actions li  a{
-    display: block;  
+ul.user_actions li  a{  
+    display:inline-block;
     font-weight: bold;
     text-align: left;
 }
-ul.user_actions li  a > i{
-    margin-right: 15px;  
+ul.user_actions li  i{
+    width: 25px;
+    display: inline-block;
 }
-ul.user_actions li  a:hover{  
-}
-ul.user_actions li  a:hover i{  
+ul.user_actions li:hover i{
+    color: #54aa54;
 }

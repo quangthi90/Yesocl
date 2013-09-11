@@ -41,15 +41,6 @@ class ControllerCommonHome extends Controller {
 
 				$post = $post->formatToCache();
 
-				// avatar
-				/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
-					$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
-				}elseif ( isset($post['user']) && isset($post['user']['email']) ){
-	                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
-	            }else{
-					$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
-				}*/
-
 				// thumb
 				if ( isset($post['thumb']) && !empty($post['thumb']) ){
 					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
@@ -58,7 +49,6 @@ class ControllerCommonHome extends Controller {
 				}
 
 				$post['image'] = $image;
-				// $posts[$i]['avatar'] = $avatar;
 				
 
 				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');

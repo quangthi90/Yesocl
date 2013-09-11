@@ -150,6 +150,7 @@
 				$curr_item.find('.post_meta .post_like d').html( data.like_count );
 				$button.find('d').html( data.like_count );
 				$curr_item.find('.view-list-liker d').html( data.like_count );
+				that.$el.parent().find('d').html( data.like_count );
 
 				var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
 				var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
@@ -223,7 +224,7 @@
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { alert(data.success);
+		promise.then(function(data) {
 			if(data.success == 'ok'){
 				that.$el.find('d').html( data.like_count ); 
 
@@ -400,7 +401,9 @@
 				var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
 				that.$el.parent().find('.counter').html( comment_count );
 
-				var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent();
+				var $curr_item = $('.open-comment.disabled').parents('.post');
+				
+				$('.open-comment.disabled').parent().find('d').html( comment_count );
 				$curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
 				$curr_item.find('.post_header .post_cm d').html( comment_count );
 
@@ -464,7 +467,7 @@
 			new UserListViewer($(this));
 		});
 
-		$('.post_action .like-post').each(function(){
+		$('.like-post').each(function(){
 			new LikePostBtn($(this));			
 		});
 
@@ -520,6 +523,16 @@
 		}
 		list_comment.on('scroll', function () {
 			getComments();
+		});
+
+		$(document).bind('POST_BUTTON', function(e) {
+		    $('.like-post').each(function(){
+				new LikePostBtn($(this));			
+			});
+
+			$('.open-comment').each(function(){
+				new CommentBtn($(this));			
+			});
 		});
 	});
 }(jQuery, document));

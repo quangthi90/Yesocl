@@ -20,5 +20,27 @@ class ModelUserUser extends Doctrine {
 
 		return $user;
 	}
+
+	public function getUserFull( $data = array() ){
+		if ( !empty($data['user_id']) ){
+			return $this->dm->getRepository('Document\User\User')->find( $data['user_id'] );
+		}
+
+		if ( !empty($data['user_slug']) ){
+			return $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['user_slug'] );
+		}
+
+		return null;
+	}
+
+	public function getUsers( $data = array() ){
+		if ( !empty($data['user_ids']) ){
+			return $this->dm->getRepository('Document\User\User')->findBy(array(
+				'id' => array('$in' => $data['user_ids'])
+			));
+		}
+
+		return null;
+	}
 }
 ?>

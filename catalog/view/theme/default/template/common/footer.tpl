@@ -8,7 +8,7 @@
                     <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
                 </div>          
               </form> 
-            </div> 
+            </div>             
             <div class="language-box fr">                    
                 <form action="#">
                     <div class="btn-group dropup">
@@ -22,6 +22,9 @@
                       </ul>
                     </div>
                 </form>
+            </div>
+            <div id="auto-scroll-left" class="fr" style="margin-right: 1px;">
+              <a class="btn btn-yes"><i class="icon-fast-backward" style="margin-right: 10px; color: #fff;"></i> Go Left</a>
             </div>
         </div>        
     </div>

@@ -22,7 +22,7 @@
                     <div class="feed post post_in_block">
                         <div class="post_header">
                             <h4 class="post_title">
-                                <a href="#">{{ post.title }}</a>
+                                <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
                             </h4>
                             <div class="post_meta">
                                 <span class="post_time fl">
@@ -50,7 +50,7 @@
                                     <div class="action_tool">
                                         <a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
                                             data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
-                                            data-post-like="{{ post.isUserLiked }}"
+                                            data-post-liked="{{ post.isUserLiked }}"
                                         >
                                             {% if post.isUserLiked == 0 %}
                                                 <i class="icon-thumbs-up medium-icon"></i>
@@ -65,7 +65,7 @@
                                         >
                                             <i class="icon-comments medium-icon"></i>
                                         </a>
-                                        <a href="{{ post.href_post|raw }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
+                                        <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
                                     </div>
                                     <div class="who-action">
                                         <a href="#" class="view-list-liker" 
