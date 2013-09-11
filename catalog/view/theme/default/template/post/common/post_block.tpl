@@ -51,12 +51,7 @@
 				</div>
 			{% endif %}
 			<div class="post_text_raw">
-			{% if post.content|length > 200 %}
-				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
-			{% else %}
-				{% set content = post.content %}
-			{% endif %}
-				{{ content|raw }}
+				{{ post.content|raw }}
 			</div>
 		</div>
 	</div>

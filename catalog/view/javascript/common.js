@@ -255,6 +255,9 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
-	new HorizontalBlock($('.has-horizontal')); 	
-	$(".timeago").timeago();	
+	new HorizontalBlock($('.has-horizontal'));
+	$(".timeago").timeago();
+	$(document).bind('HORIZONTAL_POST', function(e) {
+	    new HorizontalBlock($('.has-horizontal'));
+	});
 });

@@ -37,6 +37,8 @@ class ModelUserPost extends Doctrine {
 		if ( empty($data['content']) ){
 			return false;
 		}
+
+		$slug = (!empty($data['title']) ? $this->url->create_slug( $data['title'] ) . '-' : '') . new MongoId();
 		
 		$post = new Post();
 		$post->setContent( $data['content'] );

@@ -524,5 +524,15 @@
 		list_comment.on('scroll', function () {
 			getComments();
 		});
+
+		$(document).bind('POST_BUTTON', function(e) {
+		    $('.like-post').each(function(){
+				new LikePostBtn($(this));			
+			});
+
+			$('.open-comment').each(function(){
+				new CommentBtn($(this));			
+			});
+		});
 	});
 }(jQuery, document));

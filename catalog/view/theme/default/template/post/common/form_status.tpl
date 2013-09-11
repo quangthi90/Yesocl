@@ -62,53 +62,55 @@
 		</div>
 	</div>
 	{% raw %}
-	<div class="feed post hidden" id="post-item-template">
-		<div class="post_header">
-			<div class="avatar_thumb">
-				<a href="#">
-					<img src="${post.user.avatar}" alt="user" />
-				</a>
-			</div>
-			<div class="post_meta_info">
-				<div class="post_user">
-					<a href="#">${post.user.username}</a>
+	<div class="hidden" id="post-item-template">
+		<div class="feed post post_status">
+			<div class="post_header">
+				<div class="avatar_thumb">
+					<a href="#">
+						<img src="${post.user.avatar}" alt="user" />
+					</a>
 				</div>
-				<div class="post_meta">
-					<span class="post_time fl">
-						<i class="icon-calendar"></i> 
-						<d class="timeago" title="${post.created}"></d>
-					</span>
-					<span class="post_cm fr">
-						<a href="#" class="open-comment"
-							data-url="${href.comment_list}"
-							data-comment-count="0"
-							data-comment-url="${href.comment_add}"
-						>
-							<i class="icon-comments-alt"></i>
-						</a>
-						<d>0</d>
-					</span>
-					<span class="post_like fr">
-						<a class="like-post" href="#"
-                            data-url="${href.post_like}"
-                            data-post-liked="false"
-                        >
-                            <i class="icon-thumbs-up medium-icon"></i>
-						</a>
-						<d>0</d>
-					</span>
+				<div class="post_meta_info">
+					<div class="post_user">
+						<a href="#">${post.user.username}</a>
+					</div>
+					<div class="post_meta">
+						<span class="post_time fl">
+							<i class="icon-calendar"></i> 
+							<d class="timeago" title="${post.created}"></d>
+						</span>
+						<span class="post_cm fr">
+							<a href="#" class="open-comment"
+								data-url="${href.comment_list}"
+								data-comment-count="0"
+								data-comment-url="${href.comment_add}"
+							>
+								<i class="icon-comments-alt"></i>
+							</a>
+							<d>0</d>
+						</span>
+						<span class="post_like fr">
+							<a class="like-post" href="#"
+	                            data-url="${href.post_like}"
+	                            data-post-liked="false"
+	                        >
+	                            <i class="icon-thumbs-up medium-icon"></i>
+							</a>
+							<d>0</d>
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="post_body">
-			<h4 class="post_title">
-				<a href="${href.post_detail}">${post.title}</a>
-			</h4>
-			<div class="post_image">
-				<img src="${post.image}" />
-			</div>
-			<div class="post_text_raw">
-				${post.content}
+			<div class="post_body">
+				<h4 class="post_title">
+					<a href="${href.post_detail}">${post.title}</a>
+				</h4>
+				<div class="post_image">
+					<img src="${post.image}" />
+				</div>
+				<div class="post_text_raw">
+					${post.content}
+				</div>
 			</div>
 		</div>
 	</div>
