@@ -9,8 +9,8 @@ class ModelBranchComment extends Doctrine {
 
 		$query = array();
 
-		if ( empty($data['start']) ){
-			$data['start'] = 0;
+		if ( empty($data['page']) ){
+			$data['page'] = 1;
 		}
 
 		if ( empty($data['limit']) ){
@@ -26,16 +26,15 @@ class ModelBranchComment extends Doctrine {
 		$comments = array();
 
 		if ( $post ){
-			foreach ( $post->getComments() as $key => $comment ) {
-				if ( $key < $data['start'] ){
-					continue;
-				}
-
+			$query_comments = $post->getComments();
+			$total = $query_comments->count();
+			$start = $total - ( $data['page'] * $data['limit'] );
+			for ( $i = $start; $i < $total; $i++ ) {
 				if ( count($comments) == $data['limit'] ){
 					break;
 				}
 
-				$comments[] = $comment->formatToCache();
+				$comments[] = $query_comments[$i]->formatToCache();
 			}
 		}
 
