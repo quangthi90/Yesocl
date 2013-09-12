@@ -3,7 +3,8 @@
 		var that = this;
 
 		this.$el		= $el;
-		this.$content	= $el.find('textarea');
+		this.$title		= $el.find('.status-title')
+		this.$content	= $el.find('.status-content');
 
 		this.url		= $el.data('url');
 
@@ -25,10 +26,17 @@
 			if(that.validate() == false){
 				return false;
 			}
-			
-			that.data = {
-				content 	: that.$content.val()
-			};
+
+			if ( that.$el.hasClass('full-post') ){
+				that.data = {
+					title 		: that.$title.val(),
+					content 	: that.$content.html()
+				};
+			}else{
+				that.data = {
+					content 	: that.$content.val()
+				};
+			}
 
 			that.submit(that.$status_btn);
 
@@ -73,7 +81,7 @@
 	};
 
 	Status.prototype.validate = function(){
-		if(this.$content.val().length == 0){
+		if ( this.$el.hasClass('full-post') && this.$content.html().length == 0 || !this.$el.hasClass('full-post') && this.$content.val().length == 0 ){
 			return false;
 		}
 	};
