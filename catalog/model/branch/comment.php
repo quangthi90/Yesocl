@@ -29,6 +29,9 @@ class ModelBranchComment extends Doctrine {
 			$query_comments = $post->getComments();
 			$total = $query_comments->count();
 			$start = $total - ( $data['page'] * $data['limit'] );
+			if ( $start < 0 ){
+				$start = 0;
+			}
 			for ( $i = $start; $i < $total; $i++ ) {
 				if ( count($comments) == $data['limit'] ){
 					break;
