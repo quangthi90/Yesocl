@@ -26,9 +26,11 @@ class ModelBranchComment extends Doctrine {
 		$comments = array();
 
 		if ( $post ){
-			$query_comments = $post->getComments();
-			$total = $query_comments->count();
-			$start = $total - ( $data['page'] * $data['limit'] );
+			$query_comments = $post->getComments( true );
+			$total = $post->getComments()->count();
+
+			$start = ($data['page'] - 1) * $data['limit'];
+
 			for ( $i = $start; $i < $total; $i++ ) {
 				if ( count($comments) == $data['limit'] ){
 					break;
@@ -38,7 +40,7 @@ class ModelBranchComment extends Doctrine {
 			}
 		}
 
-		return $comments;
+		return array_reverse($comments);
 	}
 
 	public function getComment( $Comment_id ){
