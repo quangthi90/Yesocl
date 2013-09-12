@@ -46,6 +46,10 @@ class ModelUserPost extends Doctrine {
 		$post->setStatus( true );
 		$post->setSlug( $slug );
 
+		if ( !empty($data['title']) ){
+			$post->setTitle( $data['title'] );
+		}
+
 		$user->addPost( $post );
 		
 		$this->dm->flush();

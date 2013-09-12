@@ -54,8 +54,10 @@
 			{% if post.content|length > 200 %}
 				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
 				{{ content|raw }}
+				{% if post.title == null %}
 				<br />
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more</a>
+				{% endif %}
 			{% else %}
 				{{ post.content|raw }}
 			{% endif %}
