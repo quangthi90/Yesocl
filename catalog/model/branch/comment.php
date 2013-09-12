@@ -27,7 +27,7 @@ class ModelBranchComment extends Doctrine {
 
 		if ( $post ){
 			$query_comments = $post->getComments( true );
-			$total = $post->getComments()->count();
+			$total = count( $query_comments );
 
 			$start = ($data['page'] - 1) * $data['limit'];
 
