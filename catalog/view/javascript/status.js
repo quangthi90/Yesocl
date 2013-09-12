@@ -74,8 +74,11 @@
 
 				$(document).trigger('POST_BUTTON');
 				$(document).trigger('HORIZONTAL_POST');
-				that.$content.val('');
 				jQuery(".timeago").timeago();
+
+				that.$content.val('');
+				that.$content.html('');
+				that.$title.val('');
 			}
 		});
 	};
