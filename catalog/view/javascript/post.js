@@ -543,9 +543,9 @@
                             var topCurrent = $('.comment-body').find('.loading').first().offset().top;
                             $('.comment-body').find('.loading').remove();
                             $('.comment-body').prepend(htmlOutput);
-                            $('.comment-body').animate({
-                                scrollTop: topCurrent
-                            }, 100);
+//                            $('.comment-body').animate({
+//                                scrollTop: topCurrent
+//                            }, 100);
                             jQuery(".timeago").timeago();
                         }
                     }
