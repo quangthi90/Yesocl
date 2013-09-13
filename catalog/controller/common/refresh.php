@@ -72,6 +72,9 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
+		// set selected menu
+		$this->session->setFlash( 'menu', 'refresh' );
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/refresh.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/refresh.tpl';
 		} else {

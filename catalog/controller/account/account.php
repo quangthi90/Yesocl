@@ -85,6 +85,9 @@ class ControllerAccountAccount extends Controller {
 
 		$this->data['post_type'] = $this->config->get('common')['type']['user'];
 		$this->data['date_format'] = $this->language->get('date_format_full');
+
+		// set selected menu
+		$this->session->setFlash( 'menu', 'wall' );
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';

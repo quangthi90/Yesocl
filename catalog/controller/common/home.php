@@ -64,6 +64,9 @@ class ControllerCommonHome extends Controller {
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
+		// set selected menu
+		$this->session->setFlash( 'menu', 'home' );
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';
 		} else {

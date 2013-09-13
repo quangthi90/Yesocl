@@ -13,5 +13,19 @@ class Session {
 	
 		$this->data =& $_SESSION;
 	}
+
+	public function setFlash( $key, $value ){
+		$this->data[$key] = $value;
+	}
+
+	public function getFlash( $key ){
+		if ( empty($this->data[$key]) ){
+			return null;
+		}
+
+		$value = $this->data[$key];
+		unset( $this->data[$key] );
+		return $value;
+	}
 }
 ?>
