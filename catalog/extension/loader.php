@@ -4,9 +4,12 @@ class ExtensionLoader
 {
     private $config;
     private $customer;
+    private $session;
+
     public function __construct(Twig_Environment $twig, $registry){
         $this->config = $registry->get('config');
         $this->customer = $registry->get('customer');
+        $this->session = $registry->get('session');
 
         // filters
         foreach ($this->getFilters() as $filter) {
@@ -30,7 +33,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('asset_css', array($this, 'assetCss')),
             new Twig_SimpleFunction('asset_js', array($this, 'assetJs')),
             new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
-            new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser'))
+            new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser')),
+            new Twig_SimpleFunction('get_flash', array($this, 'getFlash'))
         );
     }
 
@@ -67,5 +71,9 @@ class ExtensionLoader
 
     public function getCurrentUser(){
         return $this->customer;
+    }
+
+    public function getFlash( $key ){
+        return $this->session->getFlash( $key );
     }
 }

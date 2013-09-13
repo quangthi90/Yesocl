@@ -31,26 +31,27 @@
 	<div class="sidebar-controls">
 		<ul class="nav nav-list left-menu">
 			{% block sidebar_control %}
-		  	<li class="menu-item" id="refresh-menu">
+			{% set menu = get_flash('menu') %}
+		  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
 		  		<a href="{{ path('RefreshPage') }}"> 
 		  			<i class="icon-refresh"></i> <span>What's new</span>
 		  		</a>
 		  	</li>
-		  	<li class="menu-item" id="home-menu">
+		  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
 		  		<a href="{{ path('HomePage') }}"> 
 		  			<i class="icon-home"></i> <span>Home feed</span>
 		  		</a>
 		  	</li>
-		  	<li class="menu-item" id="follower-menu">
+		  	<li class="menu-item">
 		  		<a href="#"><i class="icon-umbrella"></i> <span>Follower's post </span></a>
 		  	</li>
-		  	<li class="menu-item" id="account-menu">
+		  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
 		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My post </span></a>
 		  	</li>	
-		  	<li class="menu-item" id="edit-menu">
+		  	<li class="menu-item">
 		  		<a href="#"><i class="icon-user-md"></i> <span>My profile </span></a>
 		  	</li>
-		  	<li class="menu-item" id="categories-menu">
+		  	<li class="menu-item">
 		  		<a href="#"><i class="icon-fire"></i> <span>My friend</span> </a>
 		  	</li>
 		  	{% endblock %}
