@@ -1,10 +1,17 @@
 {% block post_common_post_block_list %}
 	<div class="feed-block">
         <div class="block-header">
+        {% if is_back_btn is defined and is_back_btn == true %}
+            <a class="block-seemore fl" href="#" onclick="history.go(-1); return false;"> 
+                <i class="icon-angle-left"></i>
+            </a>
+            <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
+        {% else %}
             <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
             <a class="block-seemore fl" href="{{ block_href }}"> 
                 <i class="icon-angle-right"></i>
-            </a>           
+            </a>
+        {% endif %}
         </div>
         <div class="block-content">
             {% if style == 1 %}
@@ -93,9 +100,9 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>                      
+                            </div>
                         </div>
-                    </div>              
+                    </div>
                 </div>
                 {% if style == 1 and loop.index % special == 0 and loop.index != 5 %}
                     {% if special == 2 %}
