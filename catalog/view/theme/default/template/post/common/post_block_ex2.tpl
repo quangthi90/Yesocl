@@ -28,9 +28,12 @@
 						<div class="post_text_raw">{{ post.description }}</div>	
 					</div>
 					<div class="hover post_overlay">
-						<div class="post_virtual_overlay">
+						<div class="post_virtual_overlay">							
 						</div>
 						<div class="post_overlay_wrapper">
+							<div class="post_remove">
+								<a href="#" title="Delete"><i class="icon-remove"></i></a>
+							</div>
 							<div class="post_action">
 								<div class="action_tool">
 									<a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"

@@ -40,8 +40,16 @@
 }
 
 .y-box-content .comment-item {
-	overflow: hidden;
 	margin-bottom: 3px;
+	position: relative;
+}
+
+.y-box-content .comment-item .yes-dropdown{
+	display: none;
+}
+
+.y-box-content .comment-item:hover .yes-dropdown{
+	display: block;
 }
 
 .comment-item  .avatar_thumb img{

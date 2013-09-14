@@ -1,6 +1,9 @@
 {% block post_common_post_block %}
 	<div class="feed post post_status">
-		<div class="post_header">
+		<div class="post_remove">
+			<a href="#" title="Delete"><i class="icon-remove"></i></a>
+		</div>
+		<div class="post_header">			
 			<div class="avatar_thumb">
 				<a href="{{ path('WallPage', {user_slug: user.slug}) }}">
 					<img src="{{ user.avatar }}" alt="user" />
