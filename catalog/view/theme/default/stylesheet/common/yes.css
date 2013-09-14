@@ -664,6 +664,7 @@ label.in-line{
     position: absolute;
     right: 2px;
     top: 2px;
+    display: none;
 }
 .post_remove a {
     display: block;
@@ -671,7 +672,16 @@ label.in-line{
     background-color: #fff;      
 }
 .post_remove a i {
-    font-size: 16px;
+    font-size: 16px;    
+}
+.post:hover .post_remove {
+  display: block;
+}
+.post_status  a i {
+  color: #ccc;
+}
+.post_status  a:hover i {
+  color: #0E0E0E;
 }
 
 /*POST is STATUS*/
