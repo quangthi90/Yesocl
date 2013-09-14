@@ -15,10 +15,17 @@ $_['routing']['CommentAdd']		= '{post_type}/post/{post_slug}/comment/add/';
 $_['routing']['CommentLike']	= '{post_type}/post/{post_slug}/comment/{comment_id}/like';
 
 // Page
+$_['routing']['WelcomePage']	= '';
 $_['routing']['RefreshPage'] 	= 'what-s-new';
 $_['routing']['HomePage']	 	= 'home';
 $_['routing']['WallPage']	 	= 'wall-page/{user_slug}';
 $_['routing']['ChangePassword']	= 'change-password';
 $_['routing']['Logout']			= 'logout';
+$_['routing']['Login']			= 'login';
+$_['routing']['LostPass']		= 'lost_password';
+
+// Ajax
+$_['routing']['AjaxLogin']		= 'login/ajax';
+$_['routing']['AjaxRegister']	= 'register/ajax';
 
 ?>

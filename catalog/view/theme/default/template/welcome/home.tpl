@@ -18,7 +18,7 @@
         Join <strong>YESOCL.com</strong>         
     </div>
     <div class="frm-content">
-    	<form class="reg-form" action="{{ action }}" method="post">
+    	<form class="reg-form" action="{{ path('AjaxRegister') }}" method="post">
     		<div class="alert alert-error top-warning hidden">Warning!!</div>
     		<div class="controls controls-row">
     			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" value="Bommer" />
