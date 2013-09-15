@@ -43,12 +43,6 @@
 				    	{{ block('post_common_post_editor') }}
 				    	<div class="y-editor status-content" id="post-adv-editor"></div>
 			    	</div>
-			    	<div class="control-group captcha">
-			    		<label for="captcha" class="control-label">Captcha check</label><div class="controls">
-			    		<img class="captcha-img" src="http://www.captcha.net/duo_logo.png"/>
-		    			<input class="captchainput" placeholder="Insert captcha..." type="text" name="captcha" id="captcha" >
-		    			</div>
-	    			</div>
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">

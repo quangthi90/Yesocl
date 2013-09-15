@@ -1,6 +1,9 @@
 {% block post_common_post_block %}
 	<div class="feed post post_status">
-		<div class="post_header">
+		<div class="post_remove">
+			<a href="#" title="Delete"><i class="icon-remove"></i></a>
+		</div>
+		<div class="post_header">			
 			<div class="avatar_thumb">
 				<a href="{{ path('WallPage', {user_slug: user.slug}) }}">
 					<img src="{{ user.avatar }}" alt="user" />
@@ -53,17 +56,15 @@
 			<div class="post_text_raw">
 			{% if post.content|length > 200 %}
 				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
-				{{ content|raw }}
-				{% if post.title == null %}
-				<br />
-				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more</a>
-				{% endif %}
+				{{ content|raw }}	
 			{% else %}
 				{{ post.content|raw }}
-			{% endif %}
-				
+			{% endif %}				
 			</div>
 		</div>
+		{% if post.content|length > 200 %}
+			<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a> 
+		{% endif %}	
 	</div>
 {% endblock %}
 
