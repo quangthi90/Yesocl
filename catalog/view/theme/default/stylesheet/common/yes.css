@@ -690,6 +690,9 @@ label.in-line{
     -moz-box-shadow: 0px 0px 5px #ccc;  
     box-shadow: 0px 0px 5px #ccc;  
     padding: 10px;
+    overflow: hidden;
+    cursor: default;
+    position: relative;
 }
 .post_status .post_header {
     overflow: hidden;
@@ -732,6 +735,28 @@ label.in-line{
 .post_status .post_body .post_image img {
   height: auto;
   width: auto;
+}
+.post_status .yes-see-more {
+  position: absolute;
+  display: block;
+  right: 0px;
+  bottom: 0px;
+  font-weight: bold;
+  padding: 1px 10px;
+  background-color: #FFFFFF;
+  color: #009B77;
+  font-size: 11px;
+}
+.post_status .yes-see-more i {
+  color: #0E0E0E;
+  margin-left: 3px;
+}
+.post_status .yes-see-more:hover {
+  background-color: #009B77;
+  color: #fff;
+}
+.post_status .yes-see-more:hover i {
+  color: #fff;
 }
 
 /*POST_HOVER*/

@@ -56,15 +56,15 @@
 			<div class="post_text_raw">
 			{% if post.content|length > 200 %}
 				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
-				{{ content|raw }}
-				<br />
-				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more</a>
+				{{ content|raw }}				
 			{% else %}
 				{{ post.content|raw }}
-			{% endif %}
-				
+			{% endif %}				
 			</div>
 		</div>
+		{% if post.content|length > 200 %}
+			<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a> 
+		{% endif %}	
 	</div>
 {% endblock %}
 
