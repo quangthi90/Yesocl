@@ -21,7 +21,7 @@
             {% set block_href = path('BranchPage', {branch_slug: branch.slug}) %}
             {{ block('post_common_post_block_list') }}
 		{% endif %}
-	{% endfor %}		
+	{% endfor %}
 	</div>
 </div>
 {{ block('post_common_post_comment') }}

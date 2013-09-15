@@ -1,10 +1,10 @@
 {% use '@template/default/template/post/common/post_editor.tpl' %}
 {% block post_common_form_status %}
-	<form class="form-status" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+	<div class="form-status" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new">
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
-			</div>			 
+			</div>
 			<div class="post_tool">
 				<div class="row-fluid">
 					<div class="span8 post_new_control">
@@ -20,13 +20,13 @@
 						<button type="button" class="btn btn-yes btn-status">Post</button>
 					</div>
 				</div>
- 			</div>	
+ 			</div>
 		</div>
-	</form>		
+	</div>
 	<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 40px; left: 100px;background-color: #fff;display:none;">
 		<a href="#" class="b-close"><i class="icon-remove"></i></a>
 		<div class="y-dlg">
-			<form autocomplete="off">
+			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 				<div class="dlg-title">
 			        <i class="icon-yes"></i> Compose your post  
 			    </div>
@@ -35,24 +35,22 @@
 			    	<div class="control-group">
 			    		<label for="title" class="control-label">Title</label>
 			    		<div class="controls">
-			    			<input style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
+			    			<input class="status-title" style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
 			    		</div>
 		    		</div>
 		    		<div class="control-group">
 		    			<label class="control-label">Content</label>
-				    	{{block('post_common_post_editor')}}
-				    	<div class="y-editor" id="post-adv-editor">
-				    		Your content ...
-				    	</div>
+				    	{{ block('post_common_post_editor') }}
+				    	<div class="y-editor status-content" id="post-adv-editor"></div>
 			    	</div>
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
-		                <button type="submit" class="btn btn-yes">Post</button>
+		                <button type="submit" class="btn btn-yes btn-status">Post</button>
 		            </div>
 			    </div>
-			</form>			    
+			</form>
 		</div>
 	</div>
 	{% raw %}
@@ -103,7 +101,7 @@
 					<img src="${post.image}" />
 				</div>
 				<div class="post_text_raw">
-					${post.content}
+					{{html post.content}}
 				</div>
 			</div>
 		</div>
@@ -119,7 +117,7 @@
 	$('#post_new_adv').click(function() {
 		$('#post_advance').bPopup( 
 			{
-				follow: [false, false],				
+				follow: [false, false],
 				speed: 300,
             	transition: 'slideDown',
             	modalColor : '#000',

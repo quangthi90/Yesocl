@@ -9,6 +9,7 @@ class ControllerPostPost extends Controller {
 
             $data = array(
                 'content' => $this->request->post['content'],
+                'title' => $this->request->post['title'],
                 'user_slug' => $this->request->get['user_slug'],
                 'author_id' => $this->customer->getId()
             );
@@ -48,6 +49,12 @@ class ControllerPostPost extends Controller {
                 'post_detail' => $this->extension->path( "PostPage", $data_post_info )
             );
 
+            $content = html_entity_decode($post->getContent());
+
+            if ( strlen($content) > 200 ){
+                $content = substr($content, 0, 200) . '[...]';
+            }
+
             $return_data = array(
                 'post' => array(
                     'user' => array(
@@ -57,7 +64,7 @@ class ControllerPostPost extends Controller {
                     'created' => $post->getCreated()->format( $this->language->get('date_format_full') ),
                     'image' => $image,
                     'title' => $post->getTitle(),
-                    'content' => $post->getContent(),
+                    'content' => $content
                 ),
                 'href' => $href
             );

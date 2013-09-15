@@ -249,7 +249,7 @@ class ControllerUserPost extends Controller {
 				
 				$this->data['posts'][] = array(
 					'id' => $posts[$i]->getId(),
-					'title' => $posts[$i]->getTitle(),
+					'title' => $posts[$i]->getTitle() == null ? substr($posts[$i]->getContent(), 0, 50) : $posts[$i]->getTitle(),
 					'thumb' => HTTP_IMAGE . $posts[$i]->getThumb(),
 					'author' => $author->getFullname(),
 					'created' => $posts[$i]->getCreated()->format( $this->language->get('date_time_format') ),
