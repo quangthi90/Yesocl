@@ -838,6 +838,9 @@ label.in-line{
   box-shadow: 0px 1px 1px 0px #ddd;
   background-color: #f4f4f4;
 }
+.y-editor .dropdown-menu {
+
+}
 
 /*NAV SIDEBAR*/
 .sidebar-controls {
@@ -1475,7 +1478,7 @@ label.in-line{
 
 .y-editor {
   max-height: 250px;
-  height: 200px;
+  height: 250px;
   background-color: white;
   border-collapse: separate; 
   border: 1px solid rgb(204, 204, 204); 
