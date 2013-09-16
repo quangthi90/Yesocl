@@ -35,8 +35,7 @@
         </i></a>
         <div class="dropdown-menu input-append">
             <input class="span2" placeholder="URL" type="text" data-edit="createLink" />
-            <button class="btn" type="button">
-                Add</button>
+            <button class="btn" type="button">Add</button>
         </div>
         <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="icon-cut"></i>
         </a>
