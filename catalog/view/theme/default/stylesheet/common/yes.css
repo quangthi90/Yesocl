@@ -582,6 +582,10 @@ label.in-line{
     white-space: nowrap ;
 }
 
+.block-content-item {
+  overflow: hidden;
+}
+
 #feed-end {
     visibility: visible;
     -webkit-column-break-before: always;
@@ -1695,4 +1699,88 @@ ul.user_actions li:hover i{
 .yes-dropdown .dropdown .dropdown-menu a {
   cursor: pointer;
   padding-right: 15px;
+}
+
+/*FRIEND*/
+#friend-filter {
+  position: absolute;
+  right: 0px;
+  width: 180px;
+  top: 30px;
+  bottom: 30px;
+  background-color: #FFF;
+  padding: 15px;
+  cursor: default;
+}
+#friend-filter .friend-search {
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #f0f0f0;
+}
+#friend-filter .friend-search #friend-key{
+    width: 145px;
+    padding-right: 25px;
+    border: 1px solid #ddd;
+    display: block;
+    height: 20px;
+}
+#friend-filter .friend-search .friend-search-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+#friend-filter .friend-conditions {
+}
+#friend-filter .friend-conditions li {
+    margin-bottom: 5px;
+    padding: 3px 0px;
+    border-bottom: 1px solid #f0f0f0;
+}
+#friend-filter .friend-conditions li:last-child {
+    border-bottom: none;
+}
+#friend-filter .friend-conditions li i {
+    margin-right: 10px;    
+}
+#friend-filter .friend-conditions li a {
+    font-size: 12px;
+    font-weight: bold;
+}
+#friend-filter .friend-conditions li:hover a {  
+}
+#friend-filter .friend-conditions li:hover i {
+  color: #009B77;
+}
+
+.friend-item {
+  float: left;  
+  overflow: hidden;
+  background-color: #FFF;
+  padding: 10px;
+  margin: 0px 10px 10px 0px;
+  min-height: 65px;
+  width: 250px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+}
+.friend-item .friend-img {
+  display: block;
+  height: 65px;
+  width: 65px;
+}
+.friend-item .friend-info {
+  margin-left: 10px;
+  width: 170px;
+}
+.friend-item .friend-info .friend-name {
+    font-size: 15px;
+    font-weight: bold;  
+    white-space: nowrap;
+}
+.friend-item .friend-infolist {
+    margin-top: 5px;
+}
+.friend-item .friend-infolist li {
+    font-size: 13px;
+    color: #515151;        
 }
