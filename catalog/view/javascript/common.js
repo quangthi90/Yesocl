@@ -200,20 +200,7 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 		});
 	}
-	else{
-		var heightMax = this.heightMain - 25;
-		var widthM = this.widthMain;
-		var totalWidth = 0;
-		this.feeds.each(function() {
-			$(this).height(heightMax);
-			$(this).css('float','left');
-			$(this).css('margin-right','30px');
-			var headerPost = $(this).children('.post_header').first().outerHeight();
-			var footerPost = $(this).children('.post_footer').first().outerHeight();
-			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
-			totalWidth += $(this).outerWidth() + 30;
-		});
-		this.root.width(totalWidth + 30);
+	else{		
 	}	
 	this.root.makeContentHorizontalScroll();	
 }

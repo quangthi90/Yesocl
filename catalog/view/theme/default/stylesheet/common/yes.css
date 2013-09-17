@@ -1701,14 +1701,13 @@ ul.user_actions li:hover i{
   padding-right: 15px;
 }
 
-/*FRIEND*/
-#friend-filter {
-  position: absolute;
+/*FRIEND*/#friend-filter {
+  position: fixed;
   right: 0px;
   width: 180px;
-  top: 30px;
-  bottom: 30px;
-  background-color: #FFF;
+  top: 25px;
+  bottom: 75px;
+  background-color: #363636;
   padding: 15px;
   cursor: default;
 }
@@ -1735,17 +1734,26 @@ ul.user_actions li:hover i{
 #friend-filter .friend-conditions li {
     margin-bottom: 5px;
     padding: 3px 0px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px dotted #f0f0f0;
+    overflow: hidden;
 }
 #friend-filter .friend-conditions li:last-child {
     border-bottom: none;
 }
 #friend-filter .friend-conditions li i {
-    margin-right: 10px;    
+    margin-right: 10px;  
+    margin-top: 2px;  
+    color: #fff;
+    display: block;
+    float: left;
+    width: 15px;
 }
 #friend-filter .friend-conditions li a {
     font-size: 12px;
     font-weight: bold;
+    color: #fff;
+    display: block;
+    float: left;
 }
 #friend-filter .friend-conditions li:hover a {  
 }
@@ -1755,12 +1763,13 @@ ul.user_actions li:hover i{
 
 .friend-item {
   float: left;  
+  position: relative;
   overflow: hidden;
   background-color: #FFF;
   padding: 10px;
   margin: 0px 10px 10px 0px;
   min-height: 65px;
-  width: 250px;
+  width: 300px;
   box-shadow: 1px 2px 4px -1px #ccc;
 }
 .friend-item .friend-img {
@@ -1770,7 +1779,7 @@ ul.user_actions li:hover i{
 }
 .friend-item .friend-info {
   margin-left: 10px;
-  width: 170px;
+  width: 222px;
 }
 .friend-item .friend-info .friend-name {
     font-size: 15px;
@@ -1783,4 +1792,26 @@ ul.user_actions li:hover i{
 .friend-item .friend-infolist li {
     font-size: 13px;
     color: #515151;        
+}
+.friend-item .friend-actions {
+  position: absolute;
+  top: 17px;
+  bottom: 10px;
+  right: 10px;
+  display: none;
+}
+.friend-item:hover .friend-actions {
+  display: block;
+}
+.friend-item .friend-actions .btn {  
+  font-size: 11px; 
+  padding: 3px 8px;
+  display: block;
+  text-align: left;
+}
+.friend-item .friend-actions .btn i {  
+  color: #FFF; 
+  float: left;
+  margin: 3px 10px 4px 0px;
+  font-size: 14px;
 }
