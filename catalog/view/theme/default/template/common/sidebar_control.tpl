@@ -49,7 +49,7 @@
 		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My post </span></a>
 		  	</li>	
 		  	<li class="menu-item">
-		  		<a href="#"><i class="icon-user-md"></i> <span>My profile </span></a>
+		  		<a href="{{ path('ProfilePage') }}"><i class="icon-user-md"></i> <span>My profile </span></a>
 		  	</li>
 		  	<li class="menu-item">
 		  		<a href="#"><i class="icon-fire"></i> <span>My friend</span> </a>
