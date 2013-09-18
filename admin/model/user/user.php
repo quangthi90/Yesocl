@@ -290,7 +290,7 @@ class ModelUserUser extends Doctrine {
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
-		$meta->setBirthday( new \Datetime( $data['background']['birthday'] ) );
+		$meta->setBirthday( new \Datetime( $data['meta']['birthday'] ) );
 		$meta->setSex( $data['meta']['sex'] );
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
@@ -639,7 +639,7 @@ class ModelUserUser extends Doctrine {
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
 		$meta->setSex( $data['meta']['sex'] );
-		$meta->setBirthday(new \Datetime( $data['background']['birthday'] ));
+		$meta->setBirthday(new \Datetime( $data['meta']['birthday'] ));
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
