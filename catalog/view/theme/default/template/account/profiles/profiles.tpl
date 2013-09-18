@@ -33,15 +33,15 @@
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Fullname</div>
 								<div class="span9">
-									<span class="profiles-tabs-value viewers">Le Van Bap</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="Le Van Bap" />
+									<span class="profiles-tabs-value viewers">{{ user.fullname }}</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.fullname }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Email</div>
 								<div class="span9">
-									<span class="profiles-tabs-value viewers">abcd@gmail.com</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="abcd@gmail.com" />
+									<span class="profiles-tabs-value viewers">{{ user.email }}</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.email }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
@@ -54,18 +54,18 @@
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Sex</div>
 								<div class="span9">
-									<span class="profiles-tabs-value viewers">Male</span>
+									<span class="profiles-tabs-value viewers">{{ user.sex }}</span>
 									<select class="profiles-tabs-input editors">
-										<option selected="selected">Male</option>
-										<option>Female</option>
+										<option value="1" {% if user.sex_num == 1 %}selected="selected"{% endif %}>Male</option>
+										<option value="2" {% if user.sex_num != 1 %}selected="selected"{% endif %}>Female</option>
 									</select>
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Birthday</div>
 								<div class="span9">
-									<span class="profiles-tabs-value viewers">June, 26</span>
-									<input class="profiles-tabs-input editors" type="text" value="June, 26" />
+									<span class="profiles-tabs-value viewers">{{ user.birthday|date('d/m/Y') }}</span>
+									<input class="profiles-tabs-input editors" type="text" value="{{ user.birthday|date('d/m/Y') }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
