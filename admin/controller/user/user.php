@@ -321,13 +321,13 @@ class ControllerUserUser extends Controller {
 				);
 		}
 
-		// Entry experiencies
-		$this->data['experiencies'] = array();
-		foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
+		// Entry experiences
+		$this->data['experiences'] = array();
+		foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
 			$started = $experience->getStarted();
 			$ended = $experience->getEnded();
 			$location = $experience->getLocation();
-			$this->data['experiencies'][$key] = array(
+			$this->data['experiences'][$key] = array(
 				'company' => $experience->getCompany(),
 				'current' => $experience->getCurrent(),
 				'title' => $experience->getTitle(),
@@ -1230,16 +1230,16 @@ class ControllerUserUser extends Controller {
 			}
 		}
 
-		// Entry experiencies
-		$this->data['experiencies'] = array();
-		if ( isset($this->request->post['background']['experiencies']) ){
-			$this->data['experiencies'] = $this->request->post['background']['experiencies'];
+		// Entry experiences
+		$this->data['experiences'] = array();
+		if ( isset($this->request->post['background']['experiences']) ){
+			$this->data['experiences'] = $this->request->post['background']['experiences'];
 		}elseif ( isset( $user ) ){
-			foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
+			foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
 				$location = $experience->getLocation();
-				$this->data['experiencies'][$key] = array(
+				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
@@ -1399,7 +1399,7 @@ class ControllerUserUser extends Controller {
 
     	// Experience
     	$experience_error = array();
-    	foreach ($this->request->post['background']['experiencies'] as $key => $experience) {
+    	foreach ($this->request->post['background']['experiences'] as $key => $experience) {
     		if ( !trim( $experience['company'] ) ) {
     			$experience_error[$key]['company'] = $this->language->get( 'error_company' );
     		}
@@ -1511,8 +1511,8 @@ class ControllerUserUser extends Controller {
 
     	// Experience
     	$experience_error = array();
-    	if ( isset( $this->request->post['background']['experiencies'] ) ) {
-    		foreach ($this->request->post['background']['experiencies'] as $key => $experience) {
+    	if ( isset( $this->request->post['background']['experiences'] ) ) {
+    		foreach ($this->request->post['background']['experiences'] as $key => $experience) {
     			if ( !trim( $experience['company'] ) ) {
     				$experience_error[$key]['company'] = $this->language->get( 'error_company' );
     			}

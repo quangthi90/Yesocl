@@ -131,9 +131,9 @@ class ModelUserUser extends Doctrine {
 			$data['user']['websites'] = array();
 		}
 
-		// Experiencies
-		if ( !isset($data['background']['experiencies']) || empty($data['background']['experiencies']) ){
-			$data['background']['experiencies'] = array();
+		// Experiences
+		if ( !isset($data['background']['experiences']) || empty($data['background']['experiences']) ){
+			$data['background']['experiences'] = array();
 		}
 
 		// Educations
@@ -174,9 +174,9 @@ class ModelUserUser extends Doctrine {
 			$emails[$email_data['email']] = $email;
 		}
 
-		// Create Experiencies
-		$experiencies = array();
-		foreach ($data['background']['experiencies'] as $experience_data) {
+		// Create Experiences
+		$experiences = array();
+		foreach ($data['background']['experiences'] as $experience_data) {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
@@ -198,7 +198,7 @@ class ModelUserUser extends Doctrine {
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
-			$experiencies[] = $experience;
+			$experiences[] = $experience;
 		}
 
 		// Create Educations
@@ -227,7 +227,7 @@ class ModelUserUser extends Doctrine {
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
-		$background->setExperiencies( $experiencies );
+		$background->setExperiences( $experiences );
 		$background->setEducations( $educations );
 
 		// Create Ims
@@ -479,9 +479,9 @@ class ModelUserUser extends Doctrine {
 			$data['user']['websites'] = array();
 		}
 
-		// Experiencies
-		if ( !isset($data['background']['experiencies']) || empty($data['background']['experiencies']) ){
-			$data['background']['experiencies'] = array();
+		// Experiences
+		if ( !isset($data['background']['experiences']) || empty($data['background']['experiences']) ){
+			$data['background']['experiences'] = array();
 		}
 
 		// Educations
@@ -522,9 +522,9 @@ class ModelUserUser extends Doctrine {
 			$emails[$email_data['email']] = $email;
 		}
 
-		// Create Experiencies
-		$experiencies = array();
-		foreach ($data['background']['experiencies'] as $experience_data) {
+		// Create Experiences
+		$experiences = array();
+		foreach ($data['background']['experiences'] as $experience_data) {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
@@ -546,7 +546,7 @@ class ModelUserUser extends Doctrine {
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
-			$experiencies[] = $experience;
+			$experiences[] = $experience;
 		}
 
 		// Create Educations
@@ -575,7 +575,7 @@ class ModelUserUser extends Doctrine {
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
-		$background->setExperiencies( $experiencies );
+		$background->setExperiences( $experiences );
 		$background->setEducations( $educations );
 
 		// Create Ims

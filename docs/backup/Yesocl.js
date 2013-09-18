@@ -4568,7 +4568,7 @@ db.getCollection("user").insert({
     ],
     "background": {
       "_id": ObjectId("520677de471dee880b00000f"),
-      "experiencies": [
+      "experiences": [
         {
           "_id": ObjectId("520677de471dee880b000010"),
           "company": "Yesocl",
@@ -4686,7 +4686,7 @@ db.getCollection("user").insert({
     ],
     "background": {
       "_id": ObjectId("521a25d4471dee2408000007"),
-      "experiencies": [
+      "experiences": [
         {
           "_id": ObjectId("521a25d4471dee2408000008"),
           "company": "Yesocl",

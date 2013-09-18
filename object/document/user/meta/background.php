@@ -12,7 +12,7 @@ Class Background {
 	private $id; 
 
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Experience") */
-    private $experiencies = array();
+    private $experiences = array();
 
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Education") */
     private $educations = array();
@@ -31,15 +31,15 @@ Class Background {
 	}
 
 	public function addExperience( Experience $experience ){
-		$this->experiencies[] = $experience;
+		$this->experiences[] = $experience;
 	}
 
-	public function setExperiencies( $experiencies ){
-		$this->experiencies = $experiencies;
+	public function setExperiences( $experiences ){
+		$this->experiences = $experiences;
 	}
 
-	public function getExperiencies(){
-		return $this->experiencies;
+	public function getExperiences(){
+		return $this->experiences;
 	}
 
 	public function addEducation( Education $education ){
