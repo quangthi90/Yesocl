@@ -23,6 +23,9 @@ class ControllerAccountEdit extends Controller {
 			'sex' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
 			'sex_num' => $user->getMeta()->getSex(),
 			'birthday' => $user->getMeta()->getBirthday(),
+			'location' => $user->getMeta()->getLocation()->getLocation(),
+			'address' => $user->getMeta()->getAddress(),
+			'industry' => $user->getMeta()->getIndustry()
 		);
 
 		// print($user->getUsername());

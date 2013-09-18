@@ -69,24 +69,24 @@
 								</div>
 							</div>
 							<div class="row-fluid input-group">
+								<div class="span2 offset1">Address</div>
+								<div class="span9">
+									<span class="profiles-tabs-value viewers">{{ user.address }}</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.address }}" />
+								</div>
+							</div>
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Living</div>
 								<div class="span9">
-									<span class="profiles-tabs-value viewers">Ho Chi Minh City</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="Ho Chi Minh City" />
+									<span class="profiles-tabs-value viewers">{{ user.location }}</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.location }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
-								<div class="span2 offset1">Interest</div>
+								<div class="span2 offset1">Industry</div>
 								<div class="span9">
-									<span class="profiles-tabs-value viewers">Footbal/TV</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="Footbal/TV" />
-								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Descripntion</div>
-								<div class="span9 input-description profiles-tabs-value viewers">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</div>
-								<div class="editors span9">
-								<textarea class="input-description span12">Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.Lorem ipsum dolor sit amet, ne tale atqui similique mel. Quo no nullam tibique albucius, duo alterum convenire gubergren ex. Errem legendos eu nam, vis ei graeci commodo intellegam. Te quo omnes malorum, duo adolescens abhorreant intellegam ne. Modus dicam reprimique ne vix. In altera referrentur voluptatibus nec.</textarea>
+									<span class="profiles-tabs-value viewers">{{ user.industry }}</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.industry }}" />
 								</div>
 							</div>
 						</div>
