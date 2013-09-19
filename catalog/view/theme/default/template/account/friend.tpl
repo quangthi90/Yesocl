@@ -7,7 +7,7 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" class="has-horizontal account-friend" style="width: 2000px; padding-right: 200px;">
+    <div id="y-main-content" class="has-horizontal account-friend" style="width: 9999px; padding-right: 250px;">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}

@@ -1771,6 +1771,7 @@ ul.user_actions li:hover i{
   min-height: 65px;
   width: 300px;
   box-shadow: 1px 2px 4px -1px #ccc;
+  cursor: default;
 }
 .friend-item .friend-img {
   display: block;
