@@ -1,7 +1,7 @@
 <?php
 use Document\Group\Post;
 
-class ModelGroupPost extends Doctrine {
+class ModelGroupPost extends Model {
 	/**
 	 * Add new Post of Group to Database
 	 * 2013/07/24

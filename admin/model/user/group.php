@@ -1,7 +1,7 @@
 <?php
 use Document\User\Group;
 
-class ModelUserGroup extends Doctrine {
+class ModelUserGroup extends Model {
 	/**
 	 * Create new Group
 	 * @author: Bommer <lqthi.khtn@gmail.com>

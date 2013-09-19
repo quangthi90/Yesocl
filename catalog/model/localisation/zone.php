@@ -1,7 +1,7 @@
 <?php
 use Document\Zone;
 
-class ModelLocalisationZone extends Doctrine {
+class ModelLocalisationZone extends Model {
 	public function addZone($name, $data = array(), $status = false) {
 		$zone = new Zone($name, $status);
 

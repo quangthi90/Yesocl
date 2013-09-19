@@ -3,7 +3,7 @@ use Document\Design\Action,
 	Document\Design\Layout,
 	Document\Setting\Config;
 
-class ModelDesignAction extends Doctrine {
+class ModelDesignAction extends Model {
 	public function addAction( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

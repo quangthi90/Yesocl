@@ -2,7 +2,7 @@
 use Document\Branch\Branch;
 use MongoId;
 
-class ModelBranchBranch extends Doctrine {
+class ModelBranchBranch extends Model {
 	/**
 	* Add new Branch to Database
 	* 2013/07/24

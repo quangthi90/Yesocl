@@ -2,7 +2,7 @@
 use Document\Admin\Group,
 	Document\Admin\Permission;
 
-class ModelAdminGroup extends Doctrine {
+class ModelAdminGroup extends Model {
 	/**
 	 * Create new Group
 	 * @author: Bommer <lqthi.khtn@gmail.com>

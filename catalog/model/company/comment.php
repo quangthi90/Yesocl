@@ -1,7 +1,7 @@
 <?php
 use Document\AbsObject\Comment;
 
-class ModelCompanyComment extends Doctrine {
+class ModelCompanyComment extends Model {
 	public function addComment( $data ){
 		if ( !isset($data['content']) || empty($data['content']) ){
 			return null;

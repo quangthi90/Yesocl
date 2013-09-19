@@ -36,6 +36,7 @@ $registry->set('config', $config);
 // Database
 $db = new Doctrine($registry);
 $registry->set('db', $db);
+$registry->set('dm', $db->getDm());
 		
 // Settings
 $configs = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();

@@ -1,7 +1,7 @@
 <?php
 use Document\User\Post;
 
-class ModelUserPost extends Doctrine {
+class ModelUserPost extends Model {
 	/**
 	 * Add Post of User to Database
 	 * 2013/08/29

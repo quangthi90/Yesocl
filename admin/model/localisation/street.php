@@ -1,7 +1,7 @@
 <?php
 use Document\Localisation\Street;
 
-class ModelLocalisationStreet extends Doctrine {
+class ModelLocalisationStreet extends Model {
 	public function addStreet( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

@@ -1,7 +1,7 @@
 <?php
 use Document\Post;
 
-Class ModelTestSolr extends Doctrine {
+Class ModelTestSolr extends Model {
 	public function getPosts( $data = array() ) {
 		return $this->dm->getRepository( 'Document\Post' )->findAll();
 	}

@@ -1,7 +1,7 @@
 <?php
 use Document\Company\Group;
 
-class ModelCompanyGroup extends Doctrine {
+class ModelCompanyGroup extends Model {
 	public function addGroup( $data = array() ) {
 		// name is required & isn't exist
 		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
