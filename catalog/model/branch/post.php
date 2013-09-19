@@ -1,5 +1,5 @@
 <?php
-class ModelBranchPost extends Doctrine {
+class ModelBranchPost extends Model {
 	/**
 	 * Edit Post of Branch to Database
 	 * 2013/08/29

@@ -1,7 +1,7 @@
 <?php
 use Document\Localisation\District;
 
-class ModelLocalisationDistrict extends Doctrine {
+class ModelLocalisationDistrict extends Model {
 	public function addDistrict( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

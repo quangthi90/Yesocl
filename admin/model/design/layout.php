@@ -1,7 +1,7 @@
 <?php
 use Document\Design\Layout;
 
-class ModelDesignLayout extends Doctrine {
+class ModelDesignLayout extends Model {
 	public function addLayout( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

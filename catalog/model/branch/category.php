@@ -1,5 +1,5 @@
 <?php
-class ModelBranchCategory extends Doctrine {
+class ModelBranchCategory extends Model {
 	public function getAllCategories( $data = array() ){
 		$query = array();
 

@@ -1,7 +1,7 @@
 <?php
 use Document\User\Post;
 
-class ModelUserPost extends Doctrine {
+class ModelUserPost extends Model {
 	public function addPost( $data = array(), $user_id, $thumb = array() ) {
 		// title is require
 		if ( !isset($data['title']) || empty($data['title']) ){

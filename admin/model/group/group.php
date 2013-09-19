@@ -4,7 +4,7 @@ use Document\Group\Group,
 
 use MongoId;
 
-class ModelGroupGroup extends Doctrine {
+class ModelGroupGroup extends Model {
 	public function addGroup( $data = array() ) {
 		// Name is required
 		if ( !isset($data['name']) || empty($data['name']) ){

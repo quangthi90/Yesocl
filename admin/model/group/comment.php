@@ -3,7 +3,7 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelGroupComment extends Doctrine {
+class ModelGroupComment extends Model {
 	/**
 	 * Add new Comment of Post in Group to Database
 	 * 2013/07/24

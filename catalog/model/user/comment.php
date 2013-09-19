@@ -3,7 +3,7 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelUserComment extends Doctrine {
+class ModelUserComment extends Model {
 	public function getComments( $data = array() ){
 		$query = array();
 

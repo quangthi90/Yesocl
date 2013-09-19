@@ -1,7 +1,7 @@
 <?php
 use Document\AbsObject\Comment;
 
-class ModelUserComment extends Doctrine {
+class ModelUserComment extends Model {
 	public function addComment( $data = array(), $post_id ) {
 		// content is require
 		if ( !isset($data['content']) || empty($data['content']) ){
