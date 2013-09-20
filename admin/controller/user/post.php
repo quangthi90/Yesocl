@@ -223,7 +223,7 @@ class ControllerUserPost extends Controller {
 		$this->data['back'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// post
-		$posts = $user->getPosts();
+		$posts = $user->getPostData()->getPosts();
 		
 		$post_total = 0;
 		
@@ -372,7 +372,7 @@ class ControllerUserPost extends Controller {
 		
 		// post
 		if ( isset($this->request->get['post_id']) ){
-			$post = $user->getPostById( $this->request->get['post_id'] );
+			$post = $user->getPostData()->getPostById( $this->request->get['post_id'] );
 
 			if ( empty( $post ) ) {
 				$this->redirect( $this->data['cancel'] );

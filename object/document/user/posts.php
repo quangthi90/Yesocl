@@ -5,8 +5,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /** @MongoDB\Document(db="yesocl", collection="user_post") */
 Class Posts {
 	/** 
-	 * @MongoDB\Id 
-	 * @SOLR\Field(type="id")
+	 * @MongoDB\Id
 	 */
 	private $id;
 
