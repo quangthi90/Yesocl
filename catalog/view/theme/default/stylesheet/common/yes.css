@@ -1792,7 +1792,8 @@ ul.user_actions li:hover i{
 }
 .friend-item .friend-infolist li {
     font-size: 13px;
-    color: #515151;        
+    color: #515151; 
+    white-space: nowrap;       
 }
 .friend-item .friend-actions {
   position: absolute;
