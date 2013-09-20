@@ -33,7 +33,7 @@ class ControllerAccountAccount extends Controller {
 		$this->data['current_user_id'] = $user->getId();
 
 		$this->data['posts'] = array();
-		$posts = $user->getPosts();
+		$posts = $user->getPostData()->getPosts();
 		$start = 0;
 		$count_post = 1;
 		$this->data['users'] = array();
