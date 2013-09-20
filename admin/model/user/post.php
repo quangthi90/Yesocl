@@ -181,27 +181,27 @@ class ModelUserPost extends Model {
 	}
 
 	public function getPost( $post_id ) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 
+			'posts.id' => $post_id 
+		));
 
-		if ( empty( $user ) ) {
-			return false;
+		if ( !$posts ) {
+			return null;
 		}
 
-		foreach ( $user->getPosts() as $post ){
-			if ( $post->getId() == $post_id ){
-				return $post;
-			}
-		}
+		return $posts->getPostById( $post_id );
 	}
 
-	public function getUserId( $post_id ) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
+	public function getOwner( $post_id ) {
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 
+			'posts.id' => $post_id 
+		));
 
-		if ( !empty( $user ) ) {
-			return $user->getId();
+		if ( !$posts ) {
+			return null;
 		}
 
-		return false;
+		return $posts->getUser();
 	}
 }
 ?>
