@@ -246,6 +246,12 @@ class ControllerPostComment extends Controller {
                 break;
         }
 
+        if ( $comment == false ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
+        }
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'like_count' => count($comment->getLikerIds())

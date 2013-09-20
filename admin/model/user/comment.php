@@ -2,7 +2,7 @@
 use Document\AbsObject\Comment;
 
 class ModelUserComment extends Model {
-	public function addComment( $data = array(), $post_id ) {
+	public function addComment( $post_id, $data = array() ) {
 		// content is require
 		if ( !isset($data['content']) || empty($data['content']) ){
 			return false;
@@ -28,12 +28,14 @@ class ModelUserComment extends Model {
 		if ( !isset( $post_id ) ) {
 			return false;
 		}
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
-		if ( empty( $user ) ) {
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 
+			'posts.id' => $post_id 
+		));
+		if ( !$posts ) {
 			return false;
 		}
 
-		$post = $user->getPostById( $post_id );
+		$post = $posts->getPostById( $post_id );
 		if ( empty( $post ) ) {
 			return false;
 		}
@@ -47,14 +49,10 @@ class ModelUserComment extends Model {
 		
 		$this->dm->flush();
 		
-		//-- Update 50 last Comments
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getSlug(), $post, $comment->getId() );
-		
 		return true;
 	}
 
-	public function editComment( $comment_id, $data = array() ) {
+	public function editComment( $post_id, $comment_id, $data = array() ) {
 		// content is require
 		if ( !isset($data['content']) || empty($data['content']) ){
 			return false;
@@ -76,59 +74,60 @@ class ModelUserComment extends Model {
 			$data['status'] = false;
 		}
 		
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.comments.id' => $comment_id ) );
-		if ( empty( $user ) ) {
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 
+			'posts.id' => $post_id
+		));
+		if ( !$posts ) {
 			return false;
 		}
 
-		foreach ( $user->getPosts() as $post ){
-			$comment = $post->getCommentById( $comment_id );
-			if ( !empty( $comment ) ) {
-				$comment->setContent( $data['content'] );
-				$comment->setUser( $author );
-				$comment->setStatus( $data['status'] );
-				break;
-			}
+		$post = $posts->getPostById( $post_id );
+		if ( !$post ){
+			return false;
 		}
+
+		$comment = $post->getCommentById( $comment_id );
+		if ( !$comment ){
+			return false;
+		}
+
+		$comment->setContent( $data['content'] );
+		$comment->setUser( $author );
+		$comment->setStatus( $data['status'] );
 		
 		$this->dm->flush();
-
-		$this->load->model( 'tool/cache' );
-		$this->model_tool_cache->updateLastComments( $this->config->get('comment')['type']['user'], $user->getSlug(), $post, $comment_id );
 		
 		return true;
 	}
 
-	public function deletePost( $data = array() ) {
-		if ( isset($data['id']) ) {
-			if ( count($data['id']) > 0 ){
-				$user = $this->dm->getRepository('Document\User\User')->findOneBy( array('posts.comments.id' => $data['id'][0]) );
-				
-				if ( !$user ){
-					return false;
-				}
-
-				$post = $this->dm->getRepository('Document\User\Post')->findOneBy( array('comments.id' => $data['id'][0]) );
-				
-				if ( !$post ){
-					return false;
-				}
-			}else {
-				return false;
-			}
-			
-			foreach ( $data['id'] as $id ) {
-				$comment = $post->getCommentById( $id );
-				if ( !empty( $comment ) ) {
-					// remove cache
-					$this->load->model('tool/cache');
-					$this->model_tool_cache->deleteComment( $id, $post->getSlug(), $this->config->get('comment')['type']['user'], $user->getSlug() );
-
-					$post->getComments()->removeElement( $comment );
-				}
-			}
-		}else {
+	public function deletePost( $post_id, $data = array() ) {
+		if ( empty($data['id']) ){
 			return false;
+		}
+
+		if ( empty($post_id) ){
+			return false;
+		}
+
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
+			'posts.id' => $post_id
+		));
+
+		if ( !$posts ){
+			return false;
+		}
+
+		$post = $posts->getPostById( $post_id );
+
+		if ( !$post ){
+			return false;
+		}
+		
+		foreach ( $data['id'] as $id ) {
+			$comment = $post->getCommentById( $id );
+			if ( $comment ) {
+				$post->getComments()->removeElement( $comment );
+			}
 		}
 		
 		$this->dm->flush();
