@@ -29,11 +29,9 @@
             </div>
             <div class="block-content">
                 <div class="column">
-                {% for post in posts %}
-                    {% if loop.index == 1 %}
                     {% set user = users[current_user_id] %}
                     {{ block('post_common_form_status') }}
-                    {% endif %}
+                {% for post in posts %}
                     {% set user = users[post.user_id] %}
                     {{ block('post_common_post_block') }}
                     {% if loop.index % 2 == 1 and loop.index != posts|length %}
