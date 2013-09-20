@@ -60,8 +60,8 @@ Class User {
 	/** @MongoDB\Collection */
 	private $refreshIds = array();
 
-	/** @MongoDB\EmbedMany(targetDocument="Post") */
-	private $posts = array();
+	/** @MongoDB\ReferenceOne(targetDocument="Posts", mappedBy="user") */
+	private $posts;
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
@@ -287,20 +287,11 @@ Class User {
 		return $this->avatar;
 	}
 
-	public function addPost( Post $post ){
-		$this->posts[] = $post;
-	}
-
 	public function setPosts( $posts ){
 		$this->posts = $posts;
 	}
 
-	public function getPosts( $is_array = true ){
-		if ( $is_array ){
-			$posts = $this->posts->toArray();
-			return array_reverse($posts);
-		}
-
+	public function getPosts(){
 		return $this->posts;
 	}
 
