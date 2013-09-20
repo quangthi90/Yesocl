@@ -1,5 +1,6 @@
 <?php
-use Document\User\Post;
+use Document\User\Post,
+	Document\User\Posts;
 
 class ModelUserPost extends Model {
 	public function addPost( $data = array(), $user_id, $thumb = array() ) {
@@ -46,8 +47,16 @@ class ModelUserPost extends Model {
 		$post->setContent( $data['postcontent'] );
 		$post->setUser( $author );
 		$post->setStatus( $data['status'] );
-		
-		$user->addPost( $post );
+
+		$posts = $user->getPostData();
+
+		if ( !$posts ){
+			$posts = new Posts();
+			$this->dm->persist( $posts );
+			$posts->setUser( $user );
+		}
+
+		$posts->addPost( $post );
 		
 		$this->dm->flush();
 
@@ -105,20 +114,20 @@ class ModelUserPost extends Model {
 			$data['status'] = false;
 		}
 		
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 'posts.id' => $post_id ) );
 		
-		$post = $user->getPostById( $post_id );
+		$post = $posts->getPostById( $post_id );
 
 		if ( !$post ){
 			return false;
 		}
 
 		// Check slug
-		// if ( $data['title'] != $post->getTitle() ){
+		if ( $data['title'] != $post->getTitle() ){
 			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 
 			$post->setSlug( $slug );
-		// }
+		}
 
 		$post->setTitle( $data['title'] );
 		$post->setContent( $data['postcontent'] );
@@ -145,7 +154,7 @@ class ModelUserPost extends Model {
 	public function deletePost( $data = array() ) {
 		if ( isset($data['id']) ) {
 			if ( count($data['id']) > 0 ){
-				$user = $this->dm->getRepository('Document\User\User')->findOneBy( array('posts.id' => $data['id'][0]) );
+				$user = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.id' => $data['id'][0]) );
 			}
 
 			$this->load->model('tool/image');
@@ -172,27 +181,27 @@ class ModelUserPost extends Model {
 	}
 
 	public function getPost( $post_id ) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 
+			'posts.id' => $post_id 
+		));
 
-		if ( empty( $user ) ) {
-			return false;
+		if ( !$posts ) {
+			return null;
 		}
 
-		foreach ( $user->getPosts() as $post ){
-			if ( $post->getId() == $post_id ){
-				return $post;
-			}
-		}
+		return $posts->getPostById( $post_id );
 	}
 
-	public function getUserId( $post_id ) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'posts.id' => $post_id ) );
+	public function getOwner( $post_id ) {
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array( 
+			'posts.id' => $post_id 
+		));
 
-		if ( !empty( $user ) ) {
-			return $user->getId();
+		if ( !$posts ) {
+			return null;
 		}
 
-		return false;
+		return $posts->getUser();
 	}
 }
 ?>

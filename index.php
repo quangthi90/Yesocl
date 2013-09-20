@@ -40,6 +40,7 @@ $registry->set('config', $config);
 $db = new Doctrine($registry);
 $registry->set('db', $db);
 $registry->set('dm', $db->getDm());
+$registry->set('client', $db->getClient());
 
 // Store
 /*if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
