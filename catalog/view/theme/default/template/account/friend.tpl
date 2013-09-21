@@ -456,15 +456,18 @@
             </div>
         </div>  
         <div id="friend-filter">
+            <div class="friend-header">
+                <strong>50 </strong> friends
+            </div>
             <div class="friend-search">
-                <input type="text" placeholder="quick search ..." size="50" name="friend-key" id="friend-key" />
+                <input type="text" placeholder="quick search ..." size="50" name="friend-key" id="search-input" />
                 <a href="#" class="friend-search-btn"><i class="icon-search"></i></a>
             </div>
             <ul class="friend-conditions">
                 <li>
                     <i class="icon-list"></i><a href="#">All Friends</a>
                 </li>                
-                <li>
+                <li class="active">
                     <i class="icon-star"></i><a href="#">Recently Added</a>
                 </li>
                 <li>
@@ -472,7 +475,9 @@
                 </li>
                 <li>
                     <i class="icon-female"></i><a href="#">Female Friends</a>
-                </li>
+                </li>  
+            </ul>
+            <ul class="friend-conditions mutual-friend-block">
                 <li>
                     <i class="icon-ok"></i><a href="#">Mutual Friends</a>
                 </li>
@@ -487,12 +492,62 @@
                 </li>
                 <li>
                     <i class="icon-ok"></i><a href="#">Same City</a>
-                </li>                
-            </ul>
+                </li> 
+            </ul> 
         </div>
     </div>
 </div>
 {% endblock %}
 
 {% block javascript %}
+    <script type="text/javascript">
+        $('#search-input').typeahead({
+            source: function (query, process) {
+
+                //Lấy dữ liệu = ajax
+                //..................
+
+                friendList = [];
+                map = {};    
+                var tempImg = "http://scienceseeker.org/images/icons/default-avatar.jpg";         
+                var data = [
+                {"id":"1", "image": tempImg, "name": "Nguyễn Văn A", "url":"#", "numFriend":"10 friends"},
+                {"id":"2", "image": tempImg, "name": "Trần Văn B", "url":"#", "numFriend":"10 friends"},
+                {"id":"3", "image": tempImg, "name": "Nguyễn Thị C", "url":"#", "numFriend":"10 friends"},
+                {"id":"4", "image": tempImg, "name": "Võ Văn D", "url":"#", "numFriend":"10 friends"},
+                {"id":"5", "image": tempImg, "name": "Lê Thị E", "url":"#", "numFriend":"10 friends"}
+                ];             
+                $.each(data, function (i, item) {
+                    friendList.push(item.id + '-' + item.name);
+                    map[item.id + '-' + item.name] = item;
+                });            
+                process(friendList);
+            },
+            updater: function (item) {
+                var selectedFriend = map[item];
+                return selectedFriend.name;
+            },
+            matcher: function (item) {
+                if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1) {
+                    return true;
+                }
+            },
+            sorter: function (items) {
+                return items.sort();
+            },
+            highlighter: function (item) {
+                var selectedFriend = map[item];
+                var regex = new RegExp( '(' + this.query + ')', 'gi' );
+                var boldItem = selectedFriend.name.replace( regex, "<strong>$1</strong>" );
+                var htmlContent = '<div class="friend-dropdown-info">'
+                                + '<img src="' + selectedFriend.image + '" alt="" />'
+                                + '<div class="friend-meta-info">'
+                                + '<span class="friend-name">' + boldItem + '</span>' 
+                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
+                                + '</div>'
+                                + '</div>';
+                return htmlContent;
+            }
+        });
+    </script>
 {% endblock %}

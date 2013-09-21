@@ -214,7 +214,6 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			console.log('No friend found !');
 		}
 		var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
-		console.log(numberRow + ' - ' + numberCol);
 		this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
 	}
 	else{		

@@ -1707,18 +1707,31 @@ ul.user_actions li:hover i{
   width: 180px;
   top: 25px;
   bottom: 75px;
-  background-color: #363636;
+  background-color: #5F5F5F;
   padding: 15px;
   cursor: default;
 }
-#friend-filter .friend-search {
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 10px;
-    border-bottom: 1px solid #f0f0f0;
+.friend-header {
+  background-color: #F0F0F0;
+  padding: 3px 0px 3px 10px;
+  margin-bottom: 20px;
 }
-#friend-filter .friend-search #friend-key{
-    width: 145px;
+.friend-header strong {
+  font-size: 20px;
+}
+#friend-filter:hover .friend-search {
+  display: block;
+}
+#friend-filter:hover .friend-header {
+  display: none;
+}
+#friend-filter .friend-search {
+    position: relative;
+    margin-bottom: 20px;
+    display: none;
+}
+#friend-filter .friend-search input{
+    width: 147px;
     padding-right: 25px;
     border: 1px solid #ddd;
     display: block;
@@ -1729,7 +1742,53 @@ ul.user_actions li:hover i{
     top: 5px;
     right: 10px;
 }
+#friend-filter .friend-search .dropdown-menu > li > a {
+  padding: 0px;
+  background-color: #FFF;
+  margin-bottom: 1px;
+  overflow: hidden;
+  clear: both;
+}
+#friend-filter .friend-search .dropdown-menu > li:hover > a,
+#friend-filter .friend-search .dropdown-menu > li.active > a {
+  background: #09E0AE;
+}
+#friend-filter .friend-search .dropdown-menu > li:last-child > a {
+  margin-bottom: 0px;
+}
+#friend-filter .friend-dropdown-info {  
+  width: 178px;
+  overflow: hidden;
+  float: left;
+}
+#friend-filter .friend-dropdown-info img {
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+#friend-filter .friend-dropdown-info .friend-meta-info {
+  margin-left: 45px;
+}
+#friend-filter .friend-dropdown-info .friend-meta-info span {
+  display: block;
+  white-space: nowrap;
+}
+#friend-filter .friend-dropdown-info .friend-name {
+  color: #000;
+  font-size: 12px;
+}
+#friend-filter .friend-dropdown-info .num-friend {
+  font-size: 11px;
+  color: #0E0E0E;
+}
+
 #friend-filter .friend-conditions {
+  margin-bottom: 15px;
+}
+#friend-filter .friend-conditions.mutual-friend-block {
+  margin-bottom: 0px;
+  padding-top: 15px;
+  border-top: 1px solid #fff;
 }
 #friend-filter .friend-conditions li {
     margin-bottom: 5px;
@@ -1756,9 +1815,22 @@ ul.user_actions li:hover i{
     float: left;
 }
 #friend-filter .friend-conditions li:hover a {  
+  color: #B1FCED;
 }
 #friend-filter .friend-conditions li:hover i {
-  color: #009B77;
+  color: #01EBB4;
+}
+#friend-filter .friend-conditions li.active {
+    background-color: #fff;  
+    border-left: 5px solid #009B77;
+    margin-left: 0px;
+}
+#friend-filter .friend-conditions li.active a {
+    color: #009B77;
+}
+#friend-filter .friend-conditions li.active i {
+    color: #000;
+    margin-left: 5px;
 }
 
 .friend-item {
