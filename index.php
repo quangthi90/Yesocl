@@ -16,6 +16,7 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
+require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 // require_once(DIR_SYSTEM . 'library/affiliate.php');
 // require_once(DIR_SYSTEM . 'library/currency.php');
 // require_once(DIR_SYSTEM . 'library/tax.php');
@@ -209,6 +210,15 @@ $registry->set('document', new Document());
 $customer = new Customer($registry);
 $registry->set('customer', $customer);
 
+// facebook
+$fb_setting = array(
+	'appId' => '',
+	'secret' => '',
+	'cookie' => true
+	);
+$facebook = new Facebook( $fb_setting );
+$registry->set( 'facebook', $facebook );
+
 // Affiliate
 // $registry->set('affiliate', new Affiliate($registry));
 
@@ -265,6 +275,8 @@ if ( $customer->isLogged() ) {
 }elseif ( $customer->hasRemember() ) {
 	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
 	exit;
+}elseif ( $facebook->getUser() ) {
+	// nap du lieu customer cua facebook user tuong ung
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
