@@ -1,5 +1,5 @@
 <?php
-class ModelUserUser extends Doctrine {
+class ModelUserUser extends Model {
 	public function getUser( $user_slug ){
 		$this->load->model('tool/cache');
 		$user_type = $this->config->get('common')['type']['user'];

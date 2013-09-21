@@ -1,5 +1,5 @@
 <?php
-class ModelCompanyCompany extends Doctrine {	
+class ModelCompanyCompany extends Model {	
 	public function getCompanyBySlug( $slug ){
 		$query = $this->dm->getRepository('Document\Company\Company')->findOneBySlug( $slug );
 

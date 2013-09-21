@@ -2,7 +2,7 @@
 use Document\Group\Action,
 	Document\Setting\Config;
 
-class ModelGroupAction extends Doctrine {
+class ModelGroupAction extends Model {
 	public function addAction( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

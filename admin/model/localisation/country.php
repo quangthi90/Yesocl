@@ -1,7 +1,7 @@
 <?php
 use Document\Localisation\Country;
 
-class ModelLocalisationCountry extends Doctrine {
+class ModelLocalisationCountry extends Model {
 	public function addCountry( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

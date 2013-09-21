@@ -3,7 +3,7 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelUserComment extends Doctrine {
+class ModelUserComment extends Model {
 	public function getComments( $data = array() ){
 		$query = array();
 
@@ -25,7 +25,7 @@ class ModelUserComment extends Doctrine {
 
 		$post = null;
 		if ( $user ){
-			$post = $user->getPostBySlug( $data['post_slug'] );
+			$post = $user->getPostData()->getPostBySlug( $data['post_slug'] );
 		}
 
 		$comments = array();
@@ -58,7 +58,7 @@ class ModelUserComment extends Doctrine {
 		if ( !$user_info ){
 			return false;
 		}
-		$post = $user_info->getPostBySlug( $data['post_slug'] );
+		$post = $user_info->getPostData()->getPostBySlug( $data['post_slug'] );
 		if ( !$post ){
 			return false;
 		}
@@ -105,11 +105,11 @@ class ModelUserComment extends Doctrine {
 	}
 
 	public function editComment( $comment_id, $data = array() ){
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
 			'posts.comments.id' => $comment_id
 		));
 
-		if ( !$user ){
+		if ( !$posts ){
 			return false;
 		}
 
@@ -117,13 +117,17 @@ class ModelUserComment extends Doctrine {
 			return false;
 		}
 
-		$post = $user->getPostBySlug( $data['post_slug'] );
+		$post = $posts->getPostBySlug( $data['post_slug'] );
 
 		if ( !$post ){
 			return false;
 		}
 
 		$comment = $post->getCommentById( $comment_id );
+
+		if ( !$comment ){
+			return false;
+		}
 		
 		$likerIds = $comment->getLikerIds();
 

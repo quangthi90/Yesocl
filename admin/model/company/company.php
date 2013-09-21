@@ -4,7 +4,7 @@ use Document\Company\Company,
 
 use MongoRegex;
 
-class ModelCompanyCompany extends Doctrine {
+class ModelCompanyCompany extends Model {
 	public function addCompany( $data = array(), $logo = array() ) {
 		// name is required & isn't exist
 		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {

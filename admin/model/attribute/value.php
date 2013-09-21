@@ -1,7 +1,7 @@
 <?php
 use Document\Attribute\value;
 
-class ModelAttributeValue extends Doctrine {
+class ModelAttributeValue extends Model {
 	public function addValue( $data = array(), $attribute_id ) {
 		if ( !isset($data['value']) ){
 			return false;

@@ -27,6 +27,7 @@
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $text_author; ?></td>
+              <td><?php echo $text_content; ?></td>
               <td><?php echo $text_created; ?></td>
               <td><?php echo $text_status; ?></td>
               <td><?php echo $text_action; ?></td>
@@ -38,6 +39,7 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $comment['id']; ?>"/></td>
               <td><?php echo $comment['author']; ?></td>
+              <td><?php echo $comment['content']; ?></td>
               <td><?php echo $comment['created']; ?></td>
               <td><?php echo $comment['status']; ?></td>
               <td class="right"><?php foreach ($comment['action'] as $action) { ?>

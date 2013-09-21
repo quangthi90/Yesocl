@@ -3,7 +3,7 @@ use Document\Cache\Post;
 
 use MongoId;
 
-class ModelCachePost extends Doctrine {
+class ModelCachePost extends Model {
 	/**
 	 * Add new cache Post
 	 * 2013/08/25
@@ -181,7 +181,7 @@ class ModelCachePost extends Doctrine {
 				if ( $type == $this->config->get('post')['cache']['branch'] ){
 					$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
 				}else{
-					$object = $this->dm->getRepository('Document\\' . $type . '\\' . $type)->findOneBy( array('posts.id' => $cache_post->getPostId()) );
+					$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
 					if ( !$object ){
 						$post = null;
 					}else{

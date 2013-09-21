@@ -1,7 +1,7 @@
 <?php
 use Document\customer\group;
 
-class ModelCustomerGroup extends Doctrine {
+class ModelCustomerGroup extends Model {
 	public function addgroup( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){
