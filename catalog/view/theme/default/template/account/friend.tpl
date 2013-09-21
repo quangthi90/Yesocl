@@ -33,8 +33,14 @@
                         </ul>
                     </div>
                     <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
+                        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" id="drop1" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop1">
+                            <li><a href="#">Unfriend</a></li>
+                        </ul>
+                        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" id="drop2" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="drop2">
+                            <li><a href="#">Unfollow</a></li>
+                        </ul>                       
                     </div>
                 </div>
                 <div class="block-content-item friend-item">

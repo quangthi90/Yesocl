@@ -583,7 +583,7 @@ label.in-line{
 }
 
 .block-content-item {
-  overflow: hidden;
+  
 }
 
 #feed-end {
@@ -1751,7 +1751,11 @@ ul.user_actions li:hover i{
 }
 #friend-filter .friend-search .dropdown-menu > li:hover > a,
 #friend-filter .friend-search .dropdown-menu > li.active > a {
-  background: #09E0AE;
+  background: #009B77;
+}
+#friend-filter .friend-search .dropdown-menu > li:hover > a span,
+#friend-filter .friend-search .dropdown-menu > li.active > a span{
+  color: #FFF;
 }
 #friend-filter .friend-search .dropdown-menu > li:last-child > a {
   margin-bottom: 0px;
@@ -1836,7 +1840,6 @@ ul.user_actions li:hover i{
 .friend-item {
   float: left;  
   position: relative;
-  overflow: hidden;
   background-color: #FFF;
   padding: 10px;
   margin: 0px 10px 10px 0px;
