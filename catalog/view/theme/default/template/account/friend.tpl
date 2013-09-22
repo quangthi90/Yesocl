@@ -33,13 +33,13 @@
                         </ul>
                     </div>
                     <div class="friend-actions">
-                        <div>
+                        <div class="dropdown">
                             <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Unfriend</a></li>
                             </ul>
                         </div>
-                        <div>
+                        <div class="dropdown">
                             <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Unfollow</a></li>
