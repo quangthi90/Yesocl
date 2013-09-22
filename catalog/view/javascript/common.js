@@ -101,9 +101,14 @@ var marginPostOnWall = 15;
 var marginBlock = 50;
 var minPostEditorWidth = 450;
 var minPostStatusWidth = 350;
+var marginFriendBlockItem = 10;
+var widthFriendBlockItem = 320;
+var heightFriendBlockItem = 85;
 var df_INVIDUAL_BLOCK = 'has-block';
 var df_ACCOUNT_MYWALL = 'account-mywall';
 var df_CATEGORY_SINGLE = 'post-category';
+var df_FRIEND_ACCOUNT = 'account-friend';
+
 function HorizontalBlock(el) {	
 	this.root = el;
 	this.columns = el.find('.column');
@@ -200,20 +205,18 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 		});
 	}
-	else{
-		var heightMax = this.heightMain - 25;
-		var widthM = this.widthMain;
+	else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
+		var heightBlockContent = this.heightMain - 42;
 		var totalWidth = 0;
-		this.feeds.each(function() {
-			$(this).height(heightMax);
-			$(this).css('float','left');
-			$(this).css('margin-right','30px');
-			var headerPost = $(this).children('.post_header').first().outerHeight();
-			var footerPost = $(this).children('.post_footer').first().outerHeight();
-			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
-			totalWidth += $(this).outerWidth() + 30;
-		});
-		this.root.width(totalWidth + 30);
+		var numberRow = Math.floor(heightBlockContent/(heightFriendBlockItem + marginFriendBlockItem));
+		var listBlockItem = this.root.find('.block-content-item');
+		if(listBlockItem.length == 0) {
+			console.log('No friend found !');
+		}
+		var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
+		this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+	}
+	else{		
 	}	
 	this.root.makeContentHorizontalScroll();	
 }
