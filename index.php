@@ -204,11 +204,7 @@ $language->load($languages[$code]['filename']);
 $registry->set('language', $language); 
 
 // Document
-$registry->set('document', new Document()); 		
-
-// Customer
-$customer = new Customer($registry);
-$registry->set('customer', $customer);
+$registry->set('document', new Document()); 
 
 // facebook
 $fb_setting = array(
@@ -217,7 +213,11 @@ $fb_setting = array(
 	'cookie' => true
 	);
 $facebook = new Facebook( $fb_setting );
-$registry->set( 'facebook', $facebook );
+$registry->set( 'facebook', $facebook );		
+
+// Customer
+$customer = new Customer($registry);
+$registry->set('customer', $customer);
 
 // Affiliate
 // $registry->set('affiliate', new Affiliate($registry));
@@ -275,8 +275,9 @@ if ( $customer->isLogged() ) {
 }elseif ( $customer->hasRemember() ) {
 	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
 	exit;
-}elseif ( $facebook->getUser() ) {
-	// nap du lieu customer cua facebook user tuong ung
+}elseif ( $customer->facebookConnect() ) {
+	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
+	exit;
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 

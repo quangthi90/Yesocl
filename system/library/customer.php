@@ -8,12 +8,14 @@ class Customer {
 	private $username;
 	private $customer_group_id;
 	private $slug;
+	private $facebook;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
 		$this->db = $registry->get('db');
 		$this->request = $registry->get('request');
 		$this->session = $registry->get('session');
+		$this->facebook = $registry->get('facebook');
 		//var_dump($this->session->data['customer_id']); exit;		
 		if (isset($this->session->data['customer_id'])) { 
 			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
@@ -155,5 +157,18 @@ class Customer {
 	
 		return $query->row['total'];	
   	}	
+
+  	// facebook connect
+  	public function facebookConnect() {
+  		if ( $this->facebook->getUser() ) {
+  			// kiem tra co tai khoan tuong ung hay chua
+  			// neu chua thi tao moi
+  			// neu co thi nap vao session
+  		}else {
+  			return false;
+  		}
+
+  		return true;
+  	}
 }
 ?>
