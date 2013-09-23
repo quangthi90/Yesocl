@@ -205,8 +205,8 @@ $registry->set('document', new Document());
 
 // facebook
 $fb_setting = array(
-	'appId' => '',
-	'secret' => '',
+	'appId' => '1417585645119646',
+	'secret' => 'cb6ad77f5cf54b9178cdfc15ee458e95',
 	'cookie' => true
 	);
 $facebook = new Facebook( $fb_setting );
