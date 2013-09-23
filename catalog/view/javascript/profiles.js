@@ -17,7 +17,7 @@ function ProfilesTabsInformation($element, contentHeight) {
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.inputDescription = $element.find('.input-description');
 
-	this.deployed();
+	this.afterCreate();
 
 	this.btnEdit = $element.find('.profiles-btn-edit');
 	this.btnCancel = $element.find('.profiles-btn-cancel');
@@ -28,7 +28,7 @@ function ProfilesTabsInformation($element, contentHeight) {
 	this.attachEvents();
 }
 
-ProfilesTabsInformation.prototype.deployed = function () {
+ProfilesTabsInformation.prototype.afterCreate = function () {
 	this.inputDescription.outerHeight(this.contentHeight*3/10);
 	this.inputDescription.niceScroll();
 	this.mainBody.height(this.contentHeight - this.header.height() - 30);
@@ -99,6 +99,12 @@ function ProfilesTabsBackgroundSumary($element, contentWidth, contentHeight) {
 	this.contentHeight = contentHeight;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.afterCreate();
+
+	this.btnEdit = $element.find('.profiles-btn-edit');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+	this.btnSave = $element.find('.profiles-btn-save');
+
+	this.inputGroups = new ProfilesTabsInputGroups($element.find('.input-group'));
 	this.attachEvents();
 }
 
@@ -109,7 +115,47 @@ ProfilesTabsBackgroundSumary.prototype.afterCreate = function () {
 }
 
 ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
+	var self = this;
 
+	this.btnEdit.click(function () {
+		if ( self.btnEdit.hasClass( 'disabled' ) ) {
+			return false;
+		}
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.inputGroups.changeMode();
+	});
+
+	this.btnCancel.click(function () {
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.inputGroups.changeMode();
+	})
+
+	this.btnSave.click(function () {
+		/*$.ajax({
+			type: 'POST',
+			url: self.self.data('url'),
+			data: self.inputGroups.getData(),
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					self.inputGroups.save();
+					self.inputGroups.changeMode();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					self.btnEdit.toggle();
+					self.btnCancel.toggle();
+					self.btnSave.toggle();
+				}else {
+					alert('Error!');
+				}
+			}
+		});*/
+	})
 }
 
 function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
@@ -190,6 +236,23 @@ ProfilesTabsInputGroups.prototype.save = function () {
 }
 
 ProfilesTabsInputGroups.prototype.getData = function () {
+	/*var data;
+	var i = 0;
+	this.self.each(function () {
+		var self = $(this);
+		if (self.find('.editors').is('input')) {
+			data[i].name = self.find('.editors').attr('name');
+			data[i].value = self.find('.editors').val();
+		}else if (self.find('input').is('select')) {
+			data[i].name = self.find('select').attr('name');
+			data[i].value = self.find('select').val();
+		}else {
+			data[i].name = self.find('textarea').attr('name');
+			data[i].value = self.find('textarea').text();
+		}
+		i++;
+	});
+	return data;*/
 	return {
 		'fullname': this.self.find('input[name=\"fullname\"]').val(),
 		'email': this.self.find('input[name=\"email\"]').val(),
