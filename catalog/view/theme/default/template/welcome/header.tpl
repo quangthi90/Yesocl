@@ -34,6 +34,7 @@
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <a href="{{ action.forgot_pass }}">Forgot password!</a>
+                        <a href="{{ action.connect_face }}" class="btn btn-success">Connect facebook</a>
                     </div>
                 </div>
                 <div class="span2 button-login-welcome">
