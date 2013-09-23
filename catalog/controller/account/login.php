@@ -76,10 +76,8 @@ class ControllerAccountLogin extends Controller {
 
   	public function facebookConnect() {
   		if ( $this->facebook->getUser() ) {
-  			// kiem tra co tai khoan tuong ung hay chua
-  			// $customer_data = $this->facebook->api('/me');
-  			// $email = $customer_data['email'];
-  			$email = ''
+  			$customer_data = $this->facebook->api('/me');
+  			$email = $customer_data['email'];
 
   			$this->load->model('account/customer');
   			$customer = $this->model_account_customer->getCustomerByEmail( $email );
@@ -87,6 +85,16 @@ class ControllerAccountLogin extends Controller {
 			if ( !$customer->getId() || empty( $customer ) ) {
 				$data = array();
 				$data['email'] = $email;
+				if ( isset( $customer_data['first_name'] ) ) {
+					$data['firstname'] = $customer_data['first_name'];
+				}
+				if ( isset( $customer_data['last_name'] ) ) {
+					$data['lastname'] = $customer_data['last_name'];
+				}
+				if ( isset( $customer_data['gender'] ) ) {
+					$data['sex'] = ($customer_data['gender'] == 'male') ? 1 : 0;
+				}
+
 	  			$this->model_account_customer->addCustomer( $data );
 			}
   		}
@@ -97,6 +105,7 @@ class ControllerAccountLogin extends Controller {
   		}else {
   			$redirect_url = $this->url->link( 'common/home' );
   		}
+  		
   		$this->redirect( $redirect_url );
   	}
 }

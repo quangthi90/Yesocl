@@ -163,16 +163,14 @@ class Customer {
   	// facebook connect
   	public function facebookConnect() {
   		if ( $this->facebook->getUser() ) {
-  			// kiem tra co tai khoan tuong ung hay chua
-  			// $customer_data = $this->facebook->api('/me');
-  			// $email = $customer_data['email'];
-  			$email = ''
+  			$customer_data = $this->facebook->api('/me');
+  			$email = $customer_data['email'];
   			$customer = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
 				'status' => true,
 				'emails.email' => $email
 			));
 			if ( $customer->getId() && !empty( $customer ) ) {
-  			// neu co thi nap vao session
+  			// da co tai khoan ket noi
 				$this->session->data['customer_id'] = $customer->getId();
 										
 				$this->customer_id = $customer->getId();
@@ -181,7 +179,7 @@ class Customer {
 				$this->email = $customer->getPrimaryEmail()->getEmail();
 				$this->customer_group_id = $customer->getGroupUser()->getId();
 			}else {
-  			// neu chua thi tao moi
+  			// chua co tai khoan ket noi
   				$this->session->data['redirect'] = $this->request->get['route'];
 				header( 'Location: ' . $this->url->link( 'account/login/facebookConnect' ) );
 				exit;
