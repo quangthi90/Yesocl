@@ -1,7 +1,7 @@
 <?php
 use Document\Localisation\Ward;
 
-class ModelLocalisationWard extends Doctrine {
+class ModelLocalisationWard extends Model {
 	public function addWard( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

@@ -1,3 +1,4 @@
+{% set user_slug = get_current_user().slug %}
 <div class="sidebar-wrapper">
 	<div class="sidebar-border-right">
 		<div class="row-fluid logo sidebar-box" id="logo">
@@ -8,10 +9,10 @@
 		<div class="row-fluid sidebar-user sidebar-box">
 			<div class="sidebar-user-info">
 				<div class="sidebar-user-avatar">
-					<a href="{{ user_info.href }}"><img src="{{ user_info.avatar }}" /></a>
+					<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><img src="{{ user_info.avatar }}" /></a>
 				</div>
 			<div class="sidebar-user-name dropdown">
-				<a href="#">
+				<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
 			      {{ user_info.username }}
 			    </a>
 			    <div class="user-can-do dropdown-toggle" data-toggle="dropdown">
@@ -30,27 +31,28 @@
 	<div class="sidebar-controls">
 		<ul class="nav nav-list left-menu">
 			{% block sidebar_control %}
-		  	<li class="menu-item" id="refresh-menu">
+			{% set menu = get_flash('menu') %}
+		  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
 		  		<a href="{{ path('RefreshPage') }}"> 
 		  			<i class="icon-refresh"></i> <span>What's new</span>
 		  		</a>
 		  	</li>
-		  	<li class="menu-item" id="home-menu">
+		  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
 		  		<a href="{{ path('HomePage') }}"> 
 		  			<i class="icon-home"></i> <span>Home feed</span>
 		  		</a>
 		  	</li>
-		  	<li class="menu-item" id="follower-menu">
+		  	<li class="menu-item">
 		  		<a href="#"><i class="icon-umbrella"></i> <span>Follower's post </span></a>
 		  	</li>
-		  	<li class="menu-item" id="account-menu">
-		  		<a href="{{ path('WallPage') }}"><i class="icon-bookmark"></i> <span> My wall </span></a>
+		  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
+		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My post </span></a>
 		  	</li>	
-		  	<li class="menu-item" id="edit-menu">
-		  		<a href="#"><i class="icon-user-md"></i> <span>My Profile </span></a>
+		  	<li class="menu-item">
+		  		<a href="#"><i class="icon-user-md"></i> <span>My profile </span></a>
 		  	</li>
-		  	<li class="menu-item" id="categories-menu">
-		  		<a href="#"><i class="icon-bar-chart"></i> <span>Stock</span> </a>
+		  	<li class="menu-item">
+		  		<a href="#"><i class="icon-fire"></i> <span>My friend</span> </a>
 		  	</li>
 		  	{% endblock %}
 		</ul>	

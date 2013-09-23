@@ -43,7 +43,7 @@ class ControllerUserComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_user_comment->addComment( $this->request->post, $this->request->get['post_id'] ) == false ){
+			if ( $this->model_user_comment->addComment( $this->request->get['post_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
 			
 				$this->redirect( $this->url->link( 'user/comment', 'post_id=' . $this->request->get['post_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
@@ -83,7 +83,7 @@ class ControllerUserComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_user_comment->editComment( $this->request->get['comment_id'], $this->request->post ) == false ){
+			if ( $this->model_user_comment->editComment( $this->request->get['post_id'], $this->request->get['comment_id'], $this->request->post ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_update');
 			
 				$this->redirect( $cancel );
@@ -115,7 +115,7 @@ class ControllerUserComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_user_comment->deletePost( $this->request->post );
+			$this->model_user_comment->deletePost( $this->request->get['post_id'], $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $cancel );
 		}
@@ -165,14 +165,14 @@ class ControllerUserComment extends Controller {
 		
 		$this->load->model( 'user/user' );
 		$this->load->model( 'user/post' );
-		$user = $this->model_user_user->getUser( array( 'user_id' => $this->model_user_post->getUserId( $post_id ) ) );
+		$user = $this->model_user_post->getOwner( $post_id );
 
 		if ( !$user ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$post = $user->getPostById( $post_id );
+		$post = $user->getPostData()->getPostById( $post_id );
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -202,6 +202,7 @@ class ControllerUserComment extends Controller {
 		// Text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
 		$this->data['text_author'] = $this->language->get( 'text_author' );
+		$this->data['text_content'] = $this->language->get( 'text_content' );
 		$this->data['text_created'] = $this->language->get( 'text_created' );
 		$this->data['text_status'] = $this->language->get( 'text_status' );
 		$this->data['text_post'] = $this->language->get( 'text_post' );	
@@ -225,13 +226,17 @@ class ControllerUserComment extends Controller {
 
 		// Comment
 		$comments = $post->getComments();
+		$comments = array_reverse($comments->toArray());
 		
-		$post_total = 0;
+		$comment_total = 0;
 		
 		$this->data['comments'] = array();
 		if ( $comments ){
 			$comment_total = count( $comments );
-			for ( $i = (($page - 1) * $this->limit); $i < ($comment_total - (($page - 1) * $this->limit)); $i++ ){
+			// print($this->limit); exit;
+			for ( $i = (($page - 1) * $this->limit); $i < $page * $this->limit && $i < $comment_total; $i++ ){
+				$comment = $comments[$i];
+
 				$action = array();
 				
 				$action[] = array(
@@ -241,10 +246,11 @@ class ControllerUserComment extends Controller {
 				);
 			
 				$this->data['comments'][] = array(
-					'id' => $comments[$i]->getId(),
-					'author' => $comments[$i]->getUser()->getFullname(),
-					'created' => $comments[$i]->getCreated()->format( $this->language->get( 'date_time_format' ) ),
-					'status' => $comments[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
+					'id' => $comment->getId(),
+					'author' => $comment->getUser()->getFullname(),
+					'created' => $comment->getCreated()->format( $this->language->get( 'date_time_format' ) ),
+					'content' => strlen($comment->getContent()) < 50 ? $comment->getContent() : substr($comment->getContent(), 0, 50) . '...',
+					'status' => $comment->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}
@@ -299,7 +305,9 @@ class ControllerUserComment extends Controller {
 		}
 
 		$this->load->model( 'user/post' );
-		$post = $this->model_user_post->getPost( $this->request->get['post_id'] );
+		$user = $this->model_user_post->getOwner( $this->request->get['post_id'] );
+		$post = $user->getPostData()->getPostById( $this->request->get['post_id'] );
+
 		if ( empty( $post ) ) {
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL') );
@@ -318,7 +326,7 @@ class ControllerUserComment extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'user/post', 'user_id=' . $this->model_user_post->getUserId($post->getId() . '&token=' . $this->session->data['token'], 'SSL') ),
+			'href'      => $this->url->link( 'user/post', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(

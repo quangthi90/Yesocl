@@ -63,8 +63,8 @@ Class User {
 	/** @MongoDB\Collection */
 	private $refreshIds = array();
 
-	/** @MongoDB\EmbedMany(targetDocument="Post") */
-	private $posts = array();
+	/** @MongoDB\ReferenceOne(targetDocument="Posts", mappedBy="user") */
+	private $postData;
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
@@ -82,24 +82,6 @@ Class User {
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
     }
-
-	/**
-	 * Get Post By ID
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: MongoDB ID
-	 * @return:
-	 * 		- Object Post
-	 * 		- null if not found
-	 */
-	public function getPostById( $post_id ){
-		foreach ( $this->posts as $post ){
-			if ( $post->getId() === $post_id ){
-				return $post;
-			}
-		}
-		
-		return null;
-	}
 
     /**
 	* Format array to save to Cache
@@ -280,16 +262,12 @@ Class User {
 		return $this->avatar;
 	}
 
-	public function addPost( Post $post ){
-		$this->posts[] = $post;
+	public function setPostData( $postData ){
+		$this->posts = $postData;
 	}
 
-	public function setPosts( $posts ){
-		$this->posts = $posts;
-	}
-
-	public function getPosts(){
-		return $this->posts;
+	public function getPostData(){
+		return $this->postData;
 	}
 
 	public function addRefreshId( $refreshId ){

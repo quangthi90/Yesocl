@@ -3,7 +3,8 @@
 		var that = this;
 
 		this.$el		= $el;
-		this.$content	= $el.find('textarea');
+		this.$title		= $el.find('.status-title')
+		this.$content	= $el.find('.status-content');
 
 		this.url		= $el.data('url');
 
@@ -25,10 +26,17 @@
 			if(that.validate() == false){
 				return false;
 			}
-			
-			that.data = {
-				content 	: that.$content.val()
-			};
+
+			if ( that.$el.hasClass('full-post') ){
+				that.data = {
+					title 		: that.$title.val(),
+					content 	: that.$content.html()
+				};
+			}else{
+				that.data = {
+					content 	: that.$content.val()
+				};
+			}
 
 			that.submit(that.$status_btn);
 
@@ -50,13 +58,33 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				window.location.reload();
+				var $htmlOutput = $.tmpl( $('#post-item-template'), data.post );
+				
+				var $column_first = $('.column').first();
+				var $first_post = $column_first.children('.post_status');
+				
+				if ( $first_post.length == 0 ){
+					$column_first.append( $htmlOutput );
+				}else{
+					$htmlOutput = $htmlOutput.after( $first_post );
+					$htmlOutput = $('<div class="column">').append($htmlOutput);
+					// $first_post.remove();
+					$('.column').first().after( $htmlOutput );
+				}
+
+				$(document).trigger('POST_BUTTON');
+				$(document).trigger('HORIZONTAL_POST');
+				jQuery(".timeago").timeago();
+
+				that.$content.val('');
+				that.$content.html('');
+				that.$title.val('');
 			}
 		});
 	};
 
 	Status.prototype.validate = function(){
-		if(this.$content.val().length == 0){
+		if ( this.$el.hasClass('full-post') && this.$content.html().length == 0 || !this.$el.hasClass('full-post') && this.$content.val().length == 0 ){
 			return false;
 		}
 	};
@@ -83,11 +111,10 @@
 			this.value = ''; 
 			$(this).change(); 
 		});
-        $('[data-role=magic-overlay]').each(function () {
-            var overlay = $(this), target = $(overlay.data('target'));
-            overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset())
-            .width(target.outerWidth()).height(target.outerHeight());            
-        });
+        $('[data-role=magic-overlay]').each(function () { 
+	        var overlay = $(this), target = $(overlay.data('target')); 
+	        overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
+      });
     };
 
 	$(function(){

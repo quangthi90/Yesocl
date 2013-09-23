@@ -1,7 +1,7 @@
 <?php
 use Document\Admin\Admin;
 
-class ModelAdminAdmin extends Doctrine {
+class ModelAdminAdmin extends Model {
 	/**
 	 * Create new Admin
 	 * @author: Bommer <lqthi.khtn@gmail.com>

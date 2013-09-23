@@ -8,70 +8,86 @@ class ControllerAccountAccount extends Controller {
 		} else {
 			$this->data['base'] = $this->config->get('config_url');
 		}
-		$this->load->model('tool/image');
+		
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		
 		$this->data['heading_title'] = $this->config->get('config_title');
 
+		if ( !empty($this->request->get['user_slug']) ){
+			$user_slug = $this->request->get['user_slug'];
+		}elseif ( $this->customer->isLogged() ){
+			$user_slug = $this->customer->getSlug();
+		}else{
+			$this->redirect( $this->extension->path('HomePage') );
+		}
+
+		$this->load->model('user/user');
+		$this->load->model('tool/image');
+
+		$user = $this->model_user_user->getUserFull( $this->request->get );
+
+		if ( !$user ){
+			return false;
+		}
+		$this->data['current_user_id'] = $user->getId();
+
 		$this->data['posts'] = array();
-		$i = 0;
-		foreach ( $company_posts as $post ) {
-			if ( $post->getUser()->getId() != $this->customer->getId() ){
+		$posts = $user->getPostData()->getPosts();
+		$start = 0;
+		$count_post = 1;
+		$this->data['users'] = array();
+
+		foreach ( $posts as $key => $post ) {
+			if ( $key < $start ){
 				continue;
 			}
 
-			if ( $post->getUser() && $post->getUser()->getAvatar() ){
-				$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
-			}elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
-                $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
-            }else{
-				$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
+			if ( $count_post > $this->limit ){
+				break;
 			}
 
-			$comment_count = count( $post->getComments() );
+			if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
+				$liked = true;
+			}else{
+				$liked = false;
+			}
+			
+			$post = $post->formatToCache();
 
-			if ( $post->getThumb() ){
-				$image = $this->model_tool_image->resize( $post->getThumb(), 400, 250 );
+			if ( isset($post['thumb']) && !empty($post['thumb']) ){
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
 			}else{
 				$image = null;
 			}
 
-			$this->data['posts'][] = array(
-				'id'			=> $post->getId(),
-				'author' 		=> $post->getAuthor(),
-				'avatar' 		=> $avatar,
-				'image'			=> $image,
-				'title' 		=> $post->getTitle(),
-				'content' 		=> html_entity_decode($post->getDescription()),
-				'created'		=> $post->getCreated(),
-				'comment_count' => $comment_count,
-				'type'			=> 'company',
-				'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
-				'href_post'		=> $this->url->link('post/detail', 'post_slug=' . $post->getSlug(), 'SSL'),
-				'href_status'	=> $this->url->link('post/comment/getCommentByPost', '', 'SSL')
-			);
-			
-			// Limit 20 post each load company
-			if ( $i == $this->limit ){
-				break;
+			$post['image'] = $image;
+			$post['isUserLiked'] = $liked;
+
+			$this->data['posts'][] = $post;
+
+			if ( !array_key_exists($post['user_id'], $this->data['users']) ){
+				$user = $this->model_user_user->getUser( $post['user_slug'] );
+
+				if ( !empty($user['avatar']) ){
+					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+				}elseif ( !empty($user['email']) ){
+		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
+		        }else{
+		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+				}
+
+				$this->data['users'][$post['user_id']] = $user;
 			}
-
-			$i++;
+			
+			$count_post++;
 		}
 
-		if ( $this->customer->getAvatar() ){
-			$avatar = $this->model_tool_image->resize( $this->customer->getAvatar(), 180, 180 );
-		}else{
-			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
-		}
+		$this->data['post_type'] = $this->config->get('common')['type']['user'];
+		$this->data['date_format'] = $this->language->get('date_format_full');
 
-		$this->data['user_info'] = array(
-			'avatar'	=> $avatar,
-			'username'	=> $this->customer->getUsername()
-		);
-
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
+		// set selected menu
+		$this->session->setFlash( 'menu', 'wall' );
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
@@ -80,9 +96,7 @@ class ControllerAccountAccount extends Controller {
 		}
 		
 		$this->children = array(
-			'common/sidebar_control',			
-			// 'common/content_top',
-			// 'common/content_bottom',
+			'common/sidebar_control',
 			'common/footer',
 			'common/header'
 		);

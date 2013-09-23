@@ -1,7 +1,7 @@
 <?php
 use Document\Attribute\Group;
 
-class ModelAttributeGroup extends Doctrine {
+class ModelAttributeGroup extends Model {
 	public function addGroup( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

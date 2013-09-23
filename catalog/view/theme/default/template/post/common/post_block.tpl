@@ -1,40 +1,70 @@
 {% block post_common_post_block %}
 	<div class="feed post post_status">
-		<div class="post_header">
+		<div class="post_remove">
+			<a href="#" title="Delete"><i class="icon-remove"></i></a>
+		</div>
+		<div class="post_header">			
 			<div class="avatar_thumb">
-				<a href="#">
-					<img src="image/template/user-avatar.png" alt="user" />
+				<a href="{{ path('WallPage', {user_slug: user.slug}) }}">
+					<img src="{{ user.avatar }}" alt="user" />
 				</a>
-			</div>			
+			</div>
 			<div class="post_meta_info">
 				<div class="post_user">
-					<a href="#">WMThiet</a>
+					<a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a>
 				</div>
 				<div class="post_meta">
 					<span class="post_time fl">
 						<i class="icon-calendar"></i> 
-						<d class="timeago" title="2013-08-23T05:04:52+02:00"></d>
+						<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 					</span>
 					<span class="post_cm fr">
-						<i class="icon-comments-alt"></i> 10
+						<a href="#" class="open-comment"
+							data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+							data-comment-count="{{ post.comment_count }}"
+							data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
+						>
+							<i class="icon-comments-alt"></i>
+						</a>
+						<d>{{ post.comment_count }}</d>
 					</span>
 					<span class="post_like fr">
-						<i class="icon-thumbs-up"></i> 100
+						<a class="like-post" href="#"
+                            data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+                            data-post-liked="{{ post.isUserLiked }}"
+                        >
+							{% if post.isUserLiked == 0 %}
+                                <i class="icon-thumbs-up medium-icon"></i>
+                            {% else %}
+                                <i class="icon-thumbs-down medium-icon"></i>
+                            {% endif %}
+						</a>
+						<d>{{ post.like_count }}</d>
 					</span>
 				</div>
-			</div>			
+			</div>
 		</div>
 		<div class="post_body">
 			<h4 class="post_title">
-				<a href="#">Lăng kính Yestoc tuần 19/08-23/08: tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510 </a>
+				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
-			<div class="post_image">
-				<img src="image/template/img.jpg" />
-			</div>
+			{% if post.image != null %}
+				<div class="post_image">
+					<img src="{{ post.image }}" />
+				</div>
+			{% endif %}
 			<div class="post_text_raw">
-				Đóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex. Đóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex [...]
+			{% if post.content|length > 200 %}
+				{% set content = post.content|slice(0, 200) ~ ' [...]' %}
+				{{ content|raw }}	
+			{% else %}
+				{{ post.content|raw }}
+			{% endif %}				
 			</div>
-		</div>		
+		</div>
+		{% if post.content|length > 200 %}
+			<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a> 
+		{% endif %}	
 	</div>
 {% endblock %}
 

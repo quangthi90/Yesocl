@@ -3,7 +3,7 @@ use Document\User\User,
 	Document\User\Meta,
 	Document\User\Meta\Email;
 
-class ModelAccountCustomer extends Doctrine {
+class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
 		$user_config = $this->config->get('user');
 

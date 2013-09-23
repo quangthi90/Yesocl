@@ -2,7 +2,7 @@
 use Document\Data\Type;
 use Document\Setting\Config;
 
-class ModelDataType extends Doctrine {
+class ModelDataType extends Model {
 	public function addType( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

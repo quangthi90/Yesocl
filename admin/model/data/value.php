@@ -1,7 +1,7 @@
 <?php
 use Document\Data\Value;
 
-class ModelDataValue extends Doctrine {
+class ModelDataValue extends Model {
 	public function addValue( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

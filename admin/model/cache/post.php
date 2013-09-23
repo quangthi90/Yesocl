@@ -3,7 +3,7 @@ use Document\Cache\Post;
 
 use MongoId;
 
-class ModelCachePost extends Doctrine {
+class ModelCachePost extends Model {
 	/**
 	 * Add new cache Post
 	 * 2013/08/25

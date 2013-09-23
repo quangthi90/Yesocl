@@ -1,7 +1,7 @@
 <?php
 use Document\Company\Career;
 
-class ModelCompanyCareer extends Doctrine {
+class ModelCompanyCareer extends Model {
 	public function addCareer( $company_id, $data = array() ) {
 		// Company is required
 		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );

@@ -8,6 +8,7 @@ $_['text_post'] 			  = 'Post';
 $_['text_user'] 			  = 'User';
 $_['text_comments']			  = 'Comments';
 $_['text_author']			  = 'Author';
+$_['text_content']			  = 'Content';
 $_['text_created']			  = 'Created';
 $_['text_title']			  = 'Title';
 $_['text_status']			  = 'Status';

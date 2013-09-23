@@ -1,7 +1,7 @@
 <?php
 use Document\AbsObject\Comment;
 
-class ModelCompanyComment extends Doctrine {
+class ModelCompanyComment extends Model {
 	public function addComment( $post_id, $data = array() ) {
 		// Company is required
 		$company = $this->dm->getRepository( 'Document\Company\Company' )->findOneBy( array( 'posts.id' => $post_id ) );

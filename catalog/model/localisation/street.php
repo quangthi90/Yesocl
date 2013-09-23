@@ -1,7 +1,7 @@
 <?php
 use Document\Street;
 
-Class ModelLocalisationStreet extends Doctrine {
+Class ModelLocalisationStreet extends Model {
 	public function addStreet($name, $status = false) {
 		$street = new Street($name, $status);
 
