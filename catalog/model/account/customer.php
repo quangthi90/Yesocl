@@ -18,11 +18,22 @@ class ModelAccountCustomer extends Doctrine {
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
 		
 		$meta = new Meta();
-		$meta->setFirstname( $data['firstname'] );
-		$meta->setLastname( $data['lastname'] );
-		$meta->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
-		$meta->setSex( $data['sex'] );
+		if ( isset( $data['firstname'] ) ) {
+			$meta->setFirstname( $data['firstname'] );
+		}
+		if ( isset( $data['lastname'] ) ) {
+			$meta->setLastname( $data['lastname'] );
+		}
+		if ( isset( $data['month'] ) && isset( $data['day'] ) && isset( $data['year'] ) ) {
+			$meta->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
+		}
+		if ( isset( $data['sex'] ) ) {
+			$meta->setSex( $data['sex'] );
+		}
 
+		if ( !isset( $data['email'] ) || empty( $data['email'] ) ) {
+			return false;
+		}
 		$email = new Email();
 		$email->setEmail( $data['email'] );
 		$email->setPrimary( true );
@@ -46,7 +57,9 @@ class ModelAccountCustomer extends Doctrine {
       	$user->setSalt( $salt );
       	$user->setStatus( true );
       	$user->setGroupUser( $customer_group_info );
-      	$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+      	if ( isset( $data['password'] ) ) {
+      		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+      	}
 
       	$this->dm->persist( $user );
 		$this->dm->flush();

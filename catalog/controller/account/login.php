@@ -73,5 +73,31 @@ class ControllerAccountLogin extends Controller {
       		return false;
     	}  	
   	}
+
+  	public function facebookConnect() {
+  		if ( $this->facebook->getUser() ) {
+  			// kiem tra co tai khoan tuong ung hay chua
+  			// $customer_data = $this->facebook->api('/me');
+  			// $email = $customer_data['email'];
+  			$email = ''
+
+  			$this->load->model('account/customer');
+  			$customer = $this->model_account_customer->getCustomerByEmail( $email );
+
+			if ( !$customer->getId() || empty( $customer ) ) {
+				$data = array();
+				$data['email'] = $email;
+	  			$this->model_account_customer->addCustomer( $data );
+			}
+  		}
+
+  		if ( isset( $this->session->data['redirect'] ) ) {
+  			$redirect_url = $this->url->link( $this->session->data['redirect'] );
+  			unset( $this->session->data['redirect'] );
+  		}else {
+  			$redirect_url = $this->url->link( 'common/home' );
+  		}
+  		$this->redirect( $redirect_url );
+  	}
 }
 ?>

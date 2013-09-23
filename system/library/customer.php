@@ -9,6 +9,7 @@ class Customer {
 	private $customer_group_id;
 	private $slug;
 	private $facebook;
+	private $url;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -16,6 +17,7 @@ class Customer {
 		$this->request = $registry->get('request');
 		$this->session = $registry->get('session');
 		$this->facebook = $registry->get('facebook');
+		$this->url = $registry->get('url');
 		//var_dump($this->session->data['customer_id']); exit;		
 		if (isset($this->session->data['customer_id'])) { 
 			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
@@ -162,8 +164,28 @@ class Customer {
   	public function facebookConnect() {
   		if ( $this->facebook->getUser() ) {
   			// kiem tra co tai khoan tuong ung hay chua
-  			// neu chua thi tao moi
+  			// $customer_data = $this->facebook->api('/me');
+  			// $email = $customer_data['email'];
+  			$email = ''
+  			$customer = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+				'status' => true,
+				'emails.email' => $email
+			));
+			if ( $customer->getId() && !empty( $customer ) ) {
   			// neu co thi nap vao session
+				$this->session->data['customer_id'] = $customer->getId();
+										
+				$this->customer_id = $customer->getId();
+				$this->firstname = $customer->getMeta()->getFirstName();
+				$this->lastname = $customer->getMeta()->getLastName();
+				$this->email = $customer->getPrimaryEmail()->getEmail();
+				$this->customer_group_id = $customer->getGroupUser()->getId();
+			}else {
+  			// neu chua thi tao moi
+  				$this->session->data['redirect'] = $this->request->get['route'];
+				header( 'Location: ' . $this->url->link( 'account/login/facebookConnect' ) );
+				exit;
+			}
   		}else {
   			return false;
   		}
