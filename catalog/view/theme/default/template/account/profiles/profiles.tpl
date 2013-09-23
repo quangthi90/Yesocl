@@ -9,7 +9,7 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
 	<div id="y-main-content">
-		<div id="profiles-tabs-information" class="profiles-tabs">
+		<div id="profiles-tabs-information" class="profiles-tabs" data-url="{{ link_update_profiles }}">
 			<div class="profiles-tabs-header">
 				<div class="span7">
 					<div class="row-fluid">
@@ -34,28 +34,28 @@
 								<div class="span2 offset1">Fullname</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.fullname }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.fullname }}" />
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="fullname" value="{{ user.fullname }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Email</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.email }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.email }}" />
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="email" value="{{ user.email }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Phone</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">0123456789</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="0123456789" />
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="phone" value="0123456789" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Sex</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.sex }}</span>
-									<select class="profiles-tabs-input editors">
+									<select class="profiles-tabs-input editors" name="gender">
 										<option value="1" {% if user.sex_num == 1 %}selected="selected"{% endif %}>Male</option>
 										<option value="2" {% if user.sex_num != 1 %}selected="selected"{% endif %}>Female</option>
 									</select>
@@ -65,28 +65,28 @@
 								<div class="span2 offset1">Birthday</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.birthday|date('d/m/Y') }}</span>
-									<input class="profiles-tabs-input editors" type="text" value="{{ user.birthday|date('d/m/Y') }}" />
+									<input class="profiles-tabs-input editors" type="text" name="birthday" value="{{ user.birthday|date('d/m/Y') }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Address</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.address }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.address }}" />
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="address" value="{{ user.address }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Living</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.location }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.location }}" />
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="location" value="{{ user.location }}" />
 								</div>
 							</div>
 							<div class="row-fluid input-group">
 								<div class="span2 offset1">Industry</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.industry }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" value="{{ user.industry }}" />
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="industry" value="{{ user.industry }}" />
 								</div>
 							</div>
 						</div>

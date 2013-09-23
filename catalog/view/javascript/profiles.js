@@ -39,6 +39,10 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnEdit.click(function () {
+		if ( self.btnEdit.hasClass( 'disabled' ) ) {
+			return false;
+		}
+		$('.profiles-btn-edit').addClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -46,6 +50,7 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 	});
 
 	this.btnCancel.click(function () {
+		$('.profiles-btn-edit').removeClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -53,11 +58,24 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 	})
 
 	this.btnSave.click(function () {
-		self.btnEdit.toggle();
-		self.btnCancel.toggle();
-		self.btnSave.toggle();
-		self.inputGroups.save();
-		self.inputGroups.changeMode();
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('url'),
+			data: self.inputGroups.getData(),
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					self.inputGroups.save();
+					self.inputGroups.changeMode();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					self.btnEdit.toggle();
+					self.btnCancel.toggle();
+					self.btnSave.toggle();
+				}else {
+					alert('Error!');
+				}
+			}
+		});
 	})
 }
 
@@ -81,6 +99,7 @@ function ProfilesTabsBackgroundSumary($element, contentWidth, contentHeight) {
 	this.contentHeight = contentHeight;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.afterCreate();
+	this.attachEvents();
 }
 
 ProfilesTabsBackgroundSumary.prototype.afterCreate = function () {
@@ -89,12 +108,17 @@ ProfilesTabsBackgroundSumary.prototype.afterCreate = function () {
 	this.mainBody.niceScroll();
 }
 
+ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
+
+}
+
 function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.contentWidth = contentWidth;
 	this.contentHeight = contentHeight;
 	this.afterCreate();
+	this.attachEvents();
 }
 
 ProfilesTabsBackgroundExperience.prototype.afterCreate = function () {
@@ -103,18 +127,27 @@ ProfilesTabsBackgroundExperience.prototype.afterCreate = function () {
 	this.mainBody.niceScroll();
 }
 
+ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
+
+}
+
 function ProfilesTabsBackgroundSkill($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.contentWidth = contentWidth;
 	this.contentHeight = contentHeight;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.afterCreate();
+	this.attachEvents();
 }
 
 ProfilesTabsBackgroundSkill.prototype.afterCreate = function () {
 	this.self.outerWidth(this.contentWidth);
 	this.mainBody.outerHeight(this.contentHeight);
 	this.mainBody.niceScroll();
+}
+
+ProfilesTabsBackgroundSkill.prototype.attachEvents = function () {
+
 }
 
 function ProfilesTabsInputGroups($element) {
@@ -129,13 +162,13 @@ ProfilesTabsInputGroups.prototype.changeMode = function () {
 		this.self.each(function () {
 			var self = $(this);
 			if (self.find('.editors').is('input')) {
-				self.find('.input').val(self.find('viewers').html());
+				self.find('input').val(self.find('.viewers').html());
 			}else if (self.find('.editors').is('select')) {
 				self.find("select option").filter(function() {
-    				return $(this).text() == self.find('viewers').html(); 
+    				return $(this).text() == self.find('.viewers').html(); 
 				}).prop('selected', true);
 			}else {
-				self.find('textarea').text(self.find('viewers').html());
+				self.find('textarea').text(self.find('.viewers').html());
 			}
 		});
 		this.self.find('.viewers').toggle();
@@ -144,5 +177,27 @@ ProfilesTabsInputGroups.prototype.changeMode = function () {
 }
 
 ProfilesTabsInputGroups.prototype.save = function () {
+	this.self.each(function () {
+		var self = $(this);
+		if (self.find('.editors').is('input')) {
+			self.find('.viewers').html(self.find('input').val());
+		}else if (self.find('.editors').is('select')) {
+			self.find('.viewers').html(self.find('select').text());
+		}else {
+			self.find('.viewers').html(self.find('textarea').text());
+		}
+	});
+}
 
+ProfilesTabsInputGroups.prototype.getData = function () {
+	return {
+		'fullname': this.self.find('input[name=\"fullname\"]').val(),
+		'email': this.self.find('input[name=\"email\"]').val(),
+		'phone': this.self.find('input[name=\"phone\"]').val(),
+		'gender': this.self.find('select[name=\"gender\"]').val(),
+		'birthday': this.self.find('input[name=\"birthday\"]').val(),
+		'address': this.self.find('input[name=\"address\"]').val(),
+		'location': this.self.find('input[name=\"location\"]').val(),
+		'industry': this.self.find('input[name=\"industry\"]').val()
+	}
 }

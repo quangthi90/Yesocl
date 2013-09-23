@@ -9,17 +9,28 @@ class ControllerAccountEdit extends Controller {
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
+		$this->data['link_update_profiles'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
+
 		$this->load->model('user/user');
 
 		$user_id = $this->customer->getId();
 		$user = $this->model_user_user->getUserFull( array('user_id' => $user_id) );
+
+		// phone
+		$phone_data = '';
+		foreach ($user->getMeta()->getPhones() as $phone) {
+			if ( $phone && !empty( $phone ) ) {
+				$phone_data = $phone->getPhone();
+				break;
+			}
+		}
 
 		$this->data['user'] = array(
 			'id' => $user->getId(),
 			'username' => $user->getUsername(),
 			'fullname' => $user->getFullName(),
 			'email' => $user->getPrimaryEmail()->getEmail(),
-			// 'phone' => $user->getMeta()->getPhones(),
+			'phone' => $phone_data,
 			'sex' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
 			'sex_num' => $user->getMeta()->getSex(),
 			'birthday' => $user->getMeta()->getBirthday(),
@@ -73,6 +84,39 @@ class ControllerAccountEdit extends Controller {
 		} else {
 			return false;
 		}
+	}
+
+	private function validateProfiles() {
+		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
+			$this->error['fullname'] = $this->language->get('error_fullname');
+		}
+
+		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
+			$this->error['email'] = $this->language->get('error_email');
+		}
+		
+		$this->load->model('account/customer');
+		if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
+			$this->error['warning'] = $this->language->get('error_exists');
+		}
+
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function updateProfiles() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() || !$this->validateProfiles() ) {
+			$json['message'] = 'failed';
+		}else {
+			$json['message'] = 'success';
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
