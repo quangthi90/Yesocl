@@ -867,8 +867,24 @@ label.in-line{
   box-shadow: 0px 1px 1px 0px #ddd;
   background-color: #f4f4f4;
 }
-.y-editor .dropdown-menu {
 
+#post_image_previewer {
+  overflow: hidden;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
+#post_image_previewer .post_image_item {
+  display: block;
+  float: left;
+  margin: 2px;
+  padding: 5px;
+  border: 1px solid #F0F0F0;
+}
+#post_image_previewer .post_image_item img {
+  width: 200px;
+}
+
+.y-editor .dropdown-menu {
 }
 
 /*NAV SIDEBAR*/
