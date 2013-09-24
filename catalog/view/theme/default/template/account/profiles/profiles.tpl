@@ -106,7 +106,7 @@
 				<div class="clear"></div>
 			</div>
 
-			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main pull-left">
+			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_sumary }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Sumary</a>
 					<a class="profiles-btn-edit viewers btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
@@ -130,7 +130,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
 				</div>
 				<div>
-					<textarea class="profiles-tabs-main-body editors">Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
+					<textarea class="profiles-tabs-main-body editors" name="sumary">Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
 Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
 Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.
 Hinc porro movet ex mei, ut everti explicari patrioque sit. Summo consetetur et quo. Eu dicat fastidii his, eam eius delenit id. Ut nostro detraxit qui, libris postulant nam ei, lorem definiebas reprimique mea ad.
@@ -145,13 +145,26 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 				</div>
 				</div>
 			</div>
-			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left">
+			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_education }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Education</a>
 					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
+					<div class="profiles-tabs-item1 profiles-form-add editors">
+						<div class="profiles-tabs-item1-label">From <input type="text" value="" /> to <input type="text" value="" /></div>
+						<div class="profiles-tabs-item1-content">
+							<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div class="row-fluid"><div class="span4">Degree: </div><input type="text" name="degree" value="" /></div>
+								<div class="row-fluid"><div class="span4">Shool: </div><input type="text"  name="school" value="" /></div>
+								<div class="row-fluid"><div class="span4">Field Of Study: </div><input type="text" name="fieldofstudy" value="" /></div>
+							</div>
+						</div>
+					</div>
+
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">

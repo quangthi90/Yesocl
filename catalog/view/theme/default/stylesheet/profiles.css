@@ -163,6 +163,12 @@
 	margin-bottom: 0px;
 }
 
+.profiles-form-add {
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #c0c0c0;	
+}
+
 .profiles-tabs-item2 {
 	float: left;
 	margin-right: 10px;

@@ -58,10 +58,20 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 	})
 
 	this.btnSave.click(function () {
+		var data = {
+			'fullname': self.inputGroups.self.find('input[name=\"fullname\"]').val(),
+			'email': self.inputGroups.self.find('input[name=\"email\"]').val(),
+			'phone': self.inputGroups.self.find('input[name=\"phone\"]').val(),
+			'gender': self.inputGroups.self.find('select[name=\"gender\"]').val(),
+			'birthday': self.inputGroups.self.find('input[name=\"birthday\"]').val(),
+			'address': self.inputGroups.self.find('input[name=\"address\"]').val(),
+			'location': self.inputGroups.self.find('input[name=\"location\"]').val(),
+			'industry': self.inputGroups.self.find('input[name=\"industry\"]').val()
+		};
 		$.ajax({
 			type: 'POST',
 			url: self.self.data('url'),
-			data: self.inputGroups.getData(),
+			data: data,
 			dataType: 'json',
 			success: function (json) {
 				if ( json.message == 'success' ) {
@@ -137,10 +147,80 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 	})
 
 	this.btnSave.click(function () {
-		/*$.ajax({
+		var data = {
+			'sumary': self.inputGroups.self.find('textarea[name=\"sumary\"]').text()
+		};
+		$.ajax({
 			type: 'POST',
 			url: self.self.data('url'),
-			data: self.inputGroups.getData(),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					self.inputGroups.save();
+					self.inputGroups.changeMode();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					self.btnEdit.toggle();
+					self.btnCancel.toggle();
+					self.btnSave.toggle();
+				}else {
+					alert('Error!');
+				}
+			}
+		});
+	})
+}
+
+function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
+	this.self = $element;
+	this.mainBody = $element.find('.profiles-tabs-main-body');
+	this.contentWidth = contentWidth;
+	this.contentHeight = contentHeight;
+	this.afterCreate();
+
+	this.btnAdd = $element.find('.profiles-btn-add');
+	this.formAdd = $element.find('.profiles-form-add');
+
+	this.attachEvents();
+}
+
+ProfilesTabsBackgroundExperience.prototype.afterCreate = function () {
+	this.self.outerWidth(this.contentWidth);
+	this.mainBody.outerHeight(this.contentHeight);
+	this.mainBody.niceScroll();
+}
+
+ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnAdd.click(function () {
+		if ( self.btnAdd.hasClass( 'disabled' ) ) {
+			return false;
+		}
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
+		self.btnAdd.toggle();
+		self.formAdd.toggle();
+		//self.inputGroups.changeMode();
+	});
+
+	this.formAdd.find('.profiles-btn-cancel').click(function () {
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
+		self.btnAdd.toggle();
+		self.formAdd.toggle();
+		//self.inputGroups.changeMode();
+	})
+
+	this.formAdd.find('.profiles-btn-save').click(function () {
+		alert('save');
+		/*var data = {
+			'sumary': self.inputGroups.self.find('textarea[name=\"sumary\"]').text()
+		};
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('url'),
+			data: data,
 			dataType: 'json',
 			success: function (json) {
 				if ( json.message == 'success' ) {
@@ -156,25 +236,6 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 			}
 		});*/
 	})
-}
-
-function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
-	this.self = $element;
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.contentWidth = contentWidth;
-	this.contentHeight = contentHeight;
-	this.afterCreate();
-	this.attachEvents();
-}
-
-ProfilesTabsBackgroundExperience.prototype.afterCreate = function () {
-	this.self.outerWidth(this.contentWidth);
-	this.mainBody.outerHeight(this.contentHeight);
-	this.mainBody.niceScroll();
-}
-
-ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
-
 }
 
 function ProfilesTabsBackgroundSkill($element, contentWidth, contentHeight) {
@@ -236,23 +297,6 @@ ProfilesTabsInputGroups.prototype.save = function () {
 }
 
 ProfilesTabsInputGroups.prototype.getData = function () {
-	/*var data;
-	var i = 0;
-	this.self.each(function () {
-		var self = $(this);
-		if (self.find('.editors').is('input')) {
-			data[i].name = self.find('.editors').attr('name');
-			data[i].value = self.find('.editors').val();
-		}else if (self.find('input').is('select')) {
-			data[i].name = self.find('select').attr('name');
-			data[i].value = self.find('select').val();
-		}else {
-			data[i].name = self.find('textarea').attr('name');
-			data[i].value = self.find('textarea').text();
-		}
-		i++;
-	});
-	return data;*/
 	return {
 		'fullname': this.self.find('input[name=\"fullname\"]').val(),
 		'email': this.self.find('input[name=\"email\"]').val(),
