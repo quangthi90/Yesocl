@@ -21,4 +21,7 @@ $_['route']['WallPage']			= 'account/account';
 $_['route']['ChangePassword']	= 'account/password';
 $_['route']['Logout']			= 'account/logout';
 
+// Friend
+$_['route']['FriendPage']		= 'friend/friend';
+
 ?>
