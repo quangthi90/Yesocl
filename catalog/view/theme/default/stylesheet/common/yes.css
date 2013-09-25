@@ -582,6 +582,10 @@ label.in-line{
     white-space: nowrap ;
 }
 
+.block-content-item {
+  
+}
+
 #feed-end {
     visibility: visible;
     -webkit-column-break-before: always;
@@ -1695,4 +1699,196 @@ ul.user_actions li:hover i{
 .yes-dropdown .dropdown .dropdown-menu a {
   cursor: pointer;
   padding-right: 15px;
+}
+
+/*FRIEND*/#friend-filter {
+  position: fixed;
+  right: 0px;
+  width: 180px;
+  top: 25px;
+  bottom: 75px;
+  background-color: #5F5F5F;
+  padding: 15px;
+  cursor: default;
+}
+.friend-header {
+  background-color: #F0F0F0;
+  padding: 3px 0px 3px 10px;
+  margin-bottom: 20px;
+}
+.friend-header strong {
+  font-size: 20px;
+}
+#friend-filter:hover .friend-search {
+  display: block;
+}
+#friend-filter:hover .friend-header {
+  display: none;
+}
+#friend-filter .friend-search {
+    position: relative;
+    margin-bottom: 20px;
+    display: none;
+}
+#friend-filter .friend-search input{
+    width: 147px;
+    padding-right: 25px;
+    border: 1px solid #ddd;
+    display: block;
+    height: 20px;
+}
+#friend-filter .friend-search .friend-search-btn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+#friend-filter .friend-search .dropdown-menu > li > a {
+  padding: 0px;
+  background-color: #FFF;
+  margin-bottom: 1px;
+  overflow: hidden;
+  clear: both;
+}
+#friend-filter .friend-search .dropdown-menu > li:hover > a,
+#friend-filter .friend-search .dropdown-menu > li.active > a {
+  background: #009B77;
+}
+#friend-filter .friend-search .dropdown-menu > li:hover > a span,
+#friend-filter .friend-search .dropdown-menu > li.active > a span{
+  color: #FFF;
+}
+#friend-filter .friend-search .dropdown-menu > li:last-child > a {
+  margin-bottom: 0px;
+}
+#friend-filter .friend-dropdown-info {  
+  width: 178px;
+  overflow: hidden;
+  float: left;
+}
+#friend-filter .friend-dropdown-info img {
+  width: 40px;
+  height: 40px;
+  float: left;
+}
+#friend-filter .friend-dropdown-info .friend-meta-info {
+  margin-left: 45px;
+}
+#friend-filter .friend-dropdown-info .friend-meta-info span {
+  display: block;
+  white-space: nowrap;
+}
+#friend-filter .friend-dropdown-info .friend-name {
+  color: #000;
+  font-size: 12px;
+}
+#friend-filter .friend-dropdown-info .num-friend {
+  font-size: 11px;
+  color: #0E0E0E;
+}
+
+#friend-filter .friend-conditions {
+  margin-bottom: 15px;
+}
+#friend-filter .friend-conditions.mutual-friend-block {
+  margin-bottom: 0px;
+  padding-top: 15px;
+  border-top: 1px solid #fff;
+}
+#friend-filter .friend-conditions li {
+    margin-bottom: 5px;
+    padding: 3px 0px;
+    border-bottom: 1px dotted #f0f0f0;
+    overflow: hidden;
+}
+#friend-filter .friend-conditions li:last-child {
+    border-bottom: none;
+}
+#friend-filter .friend-conditions li i {
+    margin-right: 10px;  
+    margin-top: 2px;  
+    color: #fff;
+    display: block;
+    float: left;
+    width: 15px;
+}
+#friend-filter .friend-conditions li a {
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    display: block;
+    float: left;
+}
+#friend-filter .friend-conditions li:hover a {  
+  color: #B1FCED;
+}
+#friend-filter .friend-conditions li:hover i {
+  color: #01EBB4;
+}
+#friend-filter .friend-conditions li.active {
+    background-color: #fff;  
+    border-left: 5px solid #009B77;
+    margin-left: 0px;
+}
+#friend-filter .friend-conditions li.active a {
+    color: #009B77;
+}
+#friend-filter .friend-conditions li.active i {
+    color: #000;
+    margin-left: 5px;
+}
+
+.friend-item {
+  float: left;  
+  position: relative;
+  background-color: #FFF;
+  padding: 10px;
+  margin: 0px 10px 10px 0px;
+  min-height: 65px;
+  width: 300px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+  cursor: default;
+}
+.friend-item .friend-img {
+  display: block;
+  height: 65px;
+  width: 65px;
+}
+.friend-item .friend-info {
+  margin-left: 10px;
+  width: 222px;
+}
+.friend-item .friend-info .friend-name {
+    font-size: 15px;
+    font-weight: bold;  
+    white-space: nowrap;
+}
+.friend-item .friend-infolist {
+    margin-top: 5px;
+}
+.friend-item .friend-infolist li {
+    font-size: 13px;
+    color: #515151; 
+    white-space: nowrap;       
+}
+.friend-item .friend-actions {
+  position: absolute;
+  top: 17px;
+  bottom: 10px;
+  right: 10px;
+  display: none;
+}
+.friend-item:hover .friend-actions {
+  display: block;
+}
+.friend-item .friend-actions .btn {  
+  font-size: 11px; 
+  padding: 3px 8px;
+  display: block;
+  text-align: left;
+}
+.friend-item .friend-actions .btn i {  
+  color: #FFF; 
+  float: left;
+  margin: 3px 10px 4px 0px;
+  font-size: 14px;
 }

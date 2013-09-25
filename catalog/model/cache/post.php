@@ -181,7 +181,7 @@ class ModelCachePost extends Model {
 				if ( $type == $this->config->get('post')['cache']['branch'] ){
 					$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
 				}else{
-					$object = $this->dm->getRepository('Document\\' . $type . '\\' . $type)->findOneBy( array('posts.id' => $cache_post->getPostId()) );
+					$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
 					if ( !$object ){
 						$post = null;
 					}else{
