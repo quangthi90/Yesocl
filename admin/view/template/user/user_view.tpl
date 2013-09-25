@@ -150,6 +150,10 @@
             <td><input disabled="disabled" class="input-xxlarge" type="text" name="background[adviceforcontact]" value="<?php echo $advice_for_contact; ?>" /></td>
           </tr>
           <tr>
+            <td><?php echo $entry_sumary; ?></td>
+            <td><textarea disabled="disabled" class="input-xxlarge" rows="8" name="background[sumary]"><?php echo $sumary; ?></textarea></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
             <td><input disabled="disabled" required="required" datalist="industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
           </tr>

@@ -186,7 +186,14 @@ function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight)
 
 	this.btnAdd = $element.find('.profiles-btn-add');
 	this.formAdd = $element.find('.profiles-form-add');
-	this.items = $element.find('.profiles-tabs-item1');
+	this.items = new Array();
+
+	var self = this;
+	var i = 0;
+	$element.find('.profiles-tabs-item1').each(function () {
+		self.items[i] = new ProfilesTabsItem1($(this));
+		i++;
+	});
 
 	this.attachEvents();
 }
@@ -240,18 +247,6 @@ ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
 				}
 			}
 		});*/
-	});
-
-	this.items.find('.profiles-btn-edit').click(function () {
-
-	});
-
-	this.items.find('.profiles-btn-cancel').click(function () {
-
-	});
-
-	this.items.find('.profiles-btn-save').click(function () {
-
 	});
 }
 
@@ -329,9 +324,12 @@ ProfilesTabsInputGroups.prototype.getData = function () {
 function ProfilesTabsItem1($element) {
 	this.self = $element;
 
-	this.btnEdit = $element.find('profiles-btn-edit');
-	this.btnCancel = $element.find('profiles-btn-cancel');
-	this.btnSave = $element.find('profiles-btn-save');
+	this.btnEdit = $element.find('.profiles-btn-edit');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnRemove = $element.find('.profiles-btn-remove');
+
+	this.inputGroups = $element.find('.input-group');
 
 	this.attachEvents();
 }
@@ -339,22 +337,26 @@ function ProfilesTabsItem1($element) {
 ProfilesTabsItem1.prototype.attachEvents = function () {
 	var self = this;
 
-	this.btnEdit.click(function () {
+	this.btnEdit.click(function () {alert('edit');
 		if (self.btnEdit.hasClass('disabled')) {
 			return false;
 		}
-		$('profiles-btn-edit').addClass('disabled');
-		$('profiles-btn-add').addClass('disabled');
+		$('.profiles-btn-edit').addClass('disabled');
+		$('.profiles-btn-add').addClass('disabled');
+		$('.profiles-btn-remove').addClass('disabled');
 		self.btnEdit.toggle();
+		self.btnRemove.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
 		self.changeMode();
 	});
 
 	this.btnCancel.click(function () {
-		$('profiles-btn-edit').removeClass('disabled');
-		$('profiles-btn-add').removeClass('disabled');
+		$('.profiles-btn-edit').removeClass('disabled');
+		$('.profiles-btn-add').removeClass('disabled');
+		$('.profiles-btn-remove').removeClass('disabled');
 		self.btnEdit.toggle();
+		self.btnRemove.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
 		self.changeMode();
@@ -377,14 +379,32 @@ ProfilesTabsItem1.prototype.attachEvents = function () {
 		});
 		*/
 	});
+
+	this.btnRemove.click(function () {
+		alert('delete');
+		/*var data = {
+	
+		};
+		
+		$.ajax({
+			type: 'POST',
+			url: ,
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+	
+			}
+		});
+		*/
+	});
 }
 
 ProfilesTabsItem1.prototype.changeMode = function () {
-	if (this.self.find('.viewers').is(':hidden')) {
-		this.self.find('.editors').toggle();
-		this.self.find('.viewers').toggle();
+	if (this.self.inputGroups.find('.viewers').is(':hidden')) {
+		this.self.inputGroups.find('.editors').toggle();
+		this.self.inputGroups.find('.viewers').toggle();
 	}else {
-		this.self.each(function () {
+		this.self.inputGroups.each(function () {
 			var self = $(this);
 			if (self.find('.editors').is('input')) {
 				self.find('input').val(self.find('.viewers').html());
@@ -396,8 +416,8 @@ ProfilesTabsItem1.prototype.changeMode = function () {
 				self.find('textarea').text(self.find('.viewers').html());
 			}
 		});
-		this.self.find('.viewers').toggle();
-		this.self.find('.editors').toggle();
+		this.self.inputGroups.find('.viewers').toggle();
+		this.self.inputGroups.find('.editors').toggle();
 	}
 }
 

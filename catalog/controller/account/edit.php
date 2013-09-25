@@ -29,6 +29,21 @@ class ControllerAccountEdit extends Controller {
 			}
 		}
 
+		$educations_data = array();
+		foreach ($user->getMeta()->getBackground()->getEducations() as $education) {
+			$educations_data[] = array(
+				'id' => $education->getId(),
+				'school' => $education->getSchool(),
+				'school_id' => $education->getSchoolId(),
+				'degree' => $education->getDegree(),
+				'degree_id' => $education->getDegreeId(),
+				'fieldofstudy' => $education->getFieldOfStudy(),
+				'fieldofstudy_id' => $education->getFieldOfStudyId(),
+				'started' => $education->getStarted(),
+				'ended' => $education->getEnded()
+				);
+		}
+
 		$this->data['user'] = array(
 			'id' => $user->getId(),
 			'username' => $user->getUsername(),
@@ -40,7 +55,9 @@ class ControllerAccountEdit extends Controller {
 			'birthday' => $user->getMeta()->getBirthday(),
 			'location' => $user->getMeta()->getLocation()->getLocation(),
 			'address' => $user->getMeta()->getAddress(),
-			'industry' => $user->getMeta()->getIndustry()
+			'industry' => $user->getMeta()->getIndustry(),
+			'sumary' => $user->getMeta()->getBackground()->getSumary(),
+			'educations' => $education_data
 		);
 
 		// print($user->getUsername());

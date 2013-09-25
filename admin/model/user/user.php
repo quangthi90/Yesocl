@@ -98,6 +98,11 @@ class ModelUserUser extends Model {
 			$data['background']['adviceforcontact'] = '';
 		}
 
+		// Sumary
+		if ( !isset($data['background']['sumary']) || empty($data['background']['sumary']) ){
+			$data['background']['sumary'] = '';
+		}
+
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
@@ -226,6 +231,7 @@ class ModelUserUser extends Model {
 		$background = new Background();
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
+		$background->setSumary( trim( $data['background']['sumary'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
 		$background->setExperiences( $experiences );
 		$background->setEducations( $educations );
@@ -446,6 +452,11 @@ class ModelUserUser extends Model {
 			$data['background']['adviceforcontact'] = '';
 		}
 
+		// Sumary
+		if ( !isset($data['background']['sumary']) || empty($data['background']['sumary']) ){
+			$data['background']['sumary'] = '';
+		}
+
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
@@ -574,6 +585,7 @@ class ModelUserUser extends Model {
 		$background = new Background();
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
+		$background->setSumary( trim( $data['background']['sumary'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
 		$background->setExperiences( $experiences );
 		$background->setEducations( $educations );

@@ -26,6 +26,9 @@ Class Background {
     /** @MongoDB\String */
 	private $adviceForContact;
 
+    /** @MongoDB\String */
+	private $sumary;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -76,5 +79,13 @@ Class Background {
 
 	public function getAdviceForContact(){
 		return $this->adviceForContact;
+	}
+
+	public function setSumary( $sumary ) {
+		$this->sumary = $sumary;
+	}
+
+	public function getSumary() {
+		return $this->sumary;
 	}
 }

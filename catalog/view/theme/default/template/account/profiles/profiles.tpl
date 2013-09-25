@@ -116,32 +116,9 @@
 				</div>
 
 				<div class="input-group">
-				<div class="profiles-tabs-main-body viewers">Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
-Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
-Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.
-Hinc porro movet ex mei, ut everti explicari patrioque sit. Summo consetetur et quo. Eu dicat fastidii his, eam eius delenit id. Ut nostro detraxit qui, libris postulant nam ei, lorem definiebas reprimique mea ad.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-				</div>
+				<div class="profiles-tabs-main-body viewers">{{ user.sumary}}</div>
 				<div>
-					<textarea class="profiles-tabs-main-body editors" name="sumary">Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
-Lorem ipsum dolor sit amet, graeco mentitum eu usu. Ad eos wisi illud maiestatis, ad pro suscipit intellegebat, nibh albucius mandamus eam cu. Et eam putent menandri, duo magna essent indoctum ei, vim possim delicata ea. Ei esse dolor perfecto usu, ex ius timeam utamur. Et duis semper detracto his, commodo molestiae eum ad. At tota solet quo, has cu utinam graece accommodare.
-Soleat recusabo at pri. Ad sed possim contentiones. In eam posse efficiendi. Case abhorreant te usu, sanctus salutatus id vix. Fabellas deserunt definitiones ne usu, mel reque equidem no.
-Hinc porro movet ex mei, ut everti explicari patrioque sit. Summo consetetur et quo. Eu dicat fastidii his, eam eius delenit id. Ut nostro detraxit qui, libris postulant nam ei, lorem definiebas reprimique mea ad.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.
-Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qualisque an mel. Lorem dolore quo cu. Eu populo albucius sensibus vis, nam magna vitae officiis id. Mea no altera probatus, solum detracto ex ius. Quo te quodsi oportere posidonium, ei vim illud omnesque percipitur.</textarea>
+					<textarea class="profiles-tabs-main-body editors" name="sumary">{{ user.sumary }}</textarea>
 				</div>
 				</div>
 			</div>
@@ -165,8 +142,9 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 						</div>
 					</div>
 
+					{% for education in user.educations %}
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span><input class="profiles-tabs-input" type="text" value="{{ education.started }}" /> to <span class="profiles-tabs-value">{{ education.ended }}</span><input class="profiles-tabs-input" type="text" value="{{ education.ended }}" /></div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
@@ -184,6 +162,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 							</div>
 						</div>
 					</div>
+					{% endfor %}
 					
 					<div class="profiles-tabs-item1">
 						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
@@ -193,14 +172,18 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">Bachelor</div>
-								<div class="profiles-tabs-value-item">HCM City University of Science</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Bachelor</div>
+								<div><input class="editors" type="text" value="HCM City University of Science" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">HCM City University of Science</div>
+								<div><input class="editors" type="text" value="Bachelor" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Information Technology</div>
+								<div><input class="editors" type="text" value="Information Technology" /></div>
+								</div>
 							</div>
 						</div>
 					</div>
