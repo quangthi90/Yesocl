@@ -22,6 +22,10 @@
                 </a>
             </div>
             <div class="block-content">
+            {% if current_user_id != get_current_user().id %}
+                {% set current_friends = get_friend_list(true) %}
+                {% for friend in friends %}
+                    {% if in_array(friend.id, current_friends) %}
                 <div class="block-content-item friend-item">
                     <a href="#" class="fl friend-img">
                         <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
@@ -48,6 +52,7 @@
                         </div>
                     </div>
                 </div>
+                    {% else %}
                 <div class="block-content-item friend-item">
                     <a href="#" class="fl friend-img">
                         <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
@@ -64,6 +69,10 @@
                         <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
                     </div>
                 </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                {% for friend in friends %}
                 <div class="block-content-item friend-item">
                     <a href="#" class="fl friend-img">
                         <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
@@ -76,399 +85,27 @@
                         </ul>
                     </div>
                     <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
+                        <div class="dropdown">
+                            <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Unfriend</a></li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Unfollow</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>
-                <div class="block-content-item friend-item">
-                    <a href="#" class="fl friend-img">
-                        <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
-                    </a>
-                    <div class="fl friend-info">
-                        <a href="#" class="friend-name">WMThiet</a>
-                        <ul class="friend-infolist">
-                            <li>IT Engineer</li>
-                            <li>100 friends</li>
-                        </ul>
-                    </div>
-                    <div class="friend-actions">
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                        <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                    </div>
-                </div>                                
+                {% endfor %}
+            {% endif %}                             
             </div>
         </div>  
         <div id="friend-filter">
             <div class="friend-header">
-                <strong>50 </strong> friends
+                <strong>{{ friends|length }} </strong> friends
             </div>
             <div class="friend-search">
                 <input type="text" placeholder="quick search ..." size="50" name="friend-key" id="search-input" />

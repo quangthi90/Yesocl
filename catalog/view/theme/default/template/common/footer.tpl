@@ -2,14 +2,14 @@
     <div id="yes-footer-bar">
         <div class="bar-wrapper">
             <div class="search fl">
-              <form>
+              <form action="{{ path('SearchPage') }}" method="get">
                   <div class="input-prepend">      
-                    <button class="btn btn-yes" type="button" style="width: 120px;">Search</button>
+                    <button class="btn btn-yes" type="submit" style="width: 120px;">Search</button>
                     <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
                 </div>          
               </form> 
             </div>             
-            <div class="language-box fr">                    
+            <div class="language-box fr">                   
                 <form action="#">
                     <div class="btn-group dropup">
                       <button class="btn btn-yes">Language</button>
