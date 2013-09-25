@@ -15,6 +15,9 @@ Class Friend {
 	 */
 	private $group_id;
 
+	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
+    private $user;
+
 	public function getId() {
 		return $this->id;
 	}
@@ -25,5 +28,13 @@ Class Friend {
 
 	public function getGroupId(){
 		return $this->group_id;
+	}
+
+	public function setUser( $user ){
+		$this->user = $user;
+	}
+
+	public function getUser(){
+		return $this->user;
 	}
 }

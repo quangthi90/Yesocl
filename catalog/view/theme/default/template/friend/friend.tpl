@@ -1,6 +1,8 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% block title %}{{ user_info.username }} | Friends {% endblock %}
+{% use '@template/default/template/account/common/profile_column.tpl' %}
+
+{% block title %}{{ users[current_user_id].username }} | Friends {% endblock %}
 
 {% block stylesheet %}
 {% endblock %}
@@ -8,17 +10,16 @@
 {% block body %}
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal account-friend" style="width: 9999px; padding-right: 250px;">
-        {% if current_user_id != get_current_user().id %}
+        {#% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}
-        {% endif %}
+        {% endif %#}
         <div class="feed-block">
             <div class="block-header">
-                <a class="block-title fl" href="#">Friend                                      
-                </a>  
+                <a class="block-title fl" href="#">Friend</a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
-                </a>           
+                </a>
             </div>
             <div class="block-content">
                 <div class="block-content-item friend-item">
@@ -44,7 +45,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="#">Unfollow</a></li>
                             </ul>
-                        </div>                     
+                        </div>
                     </div>
                 </div>
                 <div class="block-content-item friend-item">
