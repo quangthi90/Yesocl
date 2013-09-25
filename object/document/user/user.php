@@ -63,6 +63,12 @@ Class User {
 	/** @MongoDB\ReferenceOne(targetDocument="Posts", mappedBy="user") */
 	private $postData;
 
+	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Friend") */
+	private $friends = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Group") */
+	private $friendGroups = array();
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -269,6 +275,30 @@ Class User {
 
 	public function getRefreshIds(){
 		return $this->refreshIds;
+	}
+
+	public function addFriend( \Document\Friend\Friend $friend ){
+		$this->friends[] = $friend;
+	}
+
+	public function setFriends( $friends ){
+		$this->friends = $friends;
+	}
+
+	public function getFriends(){
+		return $this->friends;
+	}
+
+	public function addFriendGroup( \Document\Friend\Group $friendGroup ){
+		$this->friendGroups[] = $friendGroup;
+	}
+
+	public function setFriendGroups( $friendGroups ){
+		$this->friendGroups = $friendGroups;
+	}
+
+	public function getFriendGroups(){
+		return $this->friendGroups;
 	}
 
 	/**
