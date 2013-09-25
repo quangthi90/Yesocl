@@ -129,7 +129,7 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateBackgroundSumary() {
-		if ((utf8_strlen($this->request->post['sumary']) < 1) || (utf8_strlen($this->request->post['sumary']) > 255)) {
+		if ((utf8_strlen($this->request->post['sumary']) < 1)) {
 			$this->error['sumary'] = $this->language->get('error_sumary');
 		}
 
@@ -174,7 +174,13 @@ class ControllerAccountEdit extends Controller {
 		if ( !$this->customer->isLogged() || !$this->validateBackgroundSumary() ) {
 			$json['message'] = 'failed';
 		}else {
-			$json['message'] = 'success';
+			$this->load->model('account/customer');
+
+			if ( !$this->model_account_customer->updateBackground( $this->request->post ) ) {
+				$json['message'] = 'failed'; 
+			}else {
+				$json['message'] = 'success';
+			}
 		}
 
 		$this->response->setOutput( json_encode( $json ) );

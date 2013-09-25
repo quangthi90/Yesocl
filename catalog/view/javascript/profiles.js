@@ -153,7 +153,7 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 
 	this.btnSave.click(function () {
 		var data = {
-			'sumary': self.inputGroups.self.find('textarea[name=\"sumary\"]').text()
+			'sumary': self.inputGroups.self.find('textarea[name=\"sumary\"]').val()
 		};
 		$.ajax({
 			type: 'POST',
@@ -172,7 +172,10 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 				}else {
 					alert('Error!');
 				}
-			}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	},
 		});
 	})
 }
@@ -303,7 +306,7 @@ ProfilesTabsInputGroups.prototype.save = function () {
 		}else if (self.find('.editors').is('select')) {
 			self.find('.viewers').html(self.find('select').text());
 		}else {
-			self.find('.viewers').html(self.find('textarea').text());
+			self.find('.viewers').html(self.find('textarea').val());
 		}
 	});
 }
@@ -413,7 +416,7 @@ ProfilesTabsItem1.prototype.changeMode = function () {
     				return $(this).text() == self.find('.viewers').html(); 
 				}).prop('selected', true);
 			}else {
-				self.find('textarea').text(self.find('.viewers').html());
+				self.find('textarea').val(self.find('.viewers').html());
 			}
 		});
 		this.self.inputGroups.find('.viewers').toggle();

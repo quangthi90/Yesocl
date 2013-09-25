@@ -116,10 +116,8 @@
 				</div>
 
 				<div class="input-group">
-				<div class="profiles-tabs-main-body viewers">{{ user.sumary}}</div>
-				<div>
-					<textarea class="profiles-tabs-main-body editors" name="sumary">{{ user.sumary }}</textarea>
-				</div>
+					<div class="profiles-tabs-main-body viewers">{{ user.sumary}}</div>
+					<div><textarea class="profiles-tabs-main-body editors" name="sumary">{{ user.sumary }}</textarea></div>
 				</div>
 			</div>
 			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_education }}">
@@ -165,7 +163,35 @@
 					{% endfor %}
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div class="input-group">
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></div>
+						</div>
+						<div class="profiles-tabs-item1-content">
+							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<div class="profiles-tabs-value">
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Bachelor</div>
+								<div><input class="editors" type="text" value="HCM City University of Science" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">HCM City University of Science</div>
+								<div><input class="editors" type="text" value="Bachelor" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Information Technology</div>
+								<div><input class="editors" type="text" value="Information Technology" /></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="profiles-tabs-item1">
+						<div class="input-group">
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></div>
+						</div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
@@ -189,61 +215,53 @@
 					</div>
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div class="input-group">
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></div>
+						</div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">Bachelor</div>
-								<div class="profiles-tabs-value-item">HCM City University of Science</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Bachelor</div>
+								<div><input class="editors" type="text" value="HCM City University of Science" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">HCM City University of Science</div>
+								<div><input class="editors" type="text" value="Bachelor" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Information Technology</div>
+								<div><input class="editors" type="text" value="Information Technology" /></div>
+								</div>
 							</div>
 						</div>
 					</div>
 					
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
-						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
-							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">Bachelor</div>
-								<div class="profiles-tabs-value-item">HCM City University of Science</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
-							</div>
+						<div class="input-group">
+						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></div>
 						</div>
-					</div>
-					
-					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">Bachelor</div>
-								<div class="profiles-tabs-value-item">HCM City University of Science</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="HCM City University of Science" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Bachelor" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Bachelor</div>
+								<div><input class="editors" type="text" value="HCM City University of Science" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">HCM City University of Science</div>
+								<div><input class="editors" type="text" value="Bachelor" /></div>
+								</div>
+								<div class="input-group">
+								<div class="profiles-tabs-value-item viewers">Information Technology</div>
+								<div><input class="editors" type="text" value="Information Technology" /></div>
+								</div>
 							</div>
 						</div>
 					</div>
