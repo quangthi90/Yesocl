@@ -152,7 +152,7 @@ Ex his rebum summo probatus. Mel magna graeci reprimique cu, probo ancillae qual
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
-					<div class="profiles-tabs-item1 profiles-form-add editors">
+					<div class="profiles-form-add editors" data-url="{{ link_add_education }}">
 						<div class="profiles-tabs-item1-label">From <input type="text" value="" /> to <input type="text" value="" /></div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>

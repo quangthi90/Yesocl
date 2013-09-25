@@ -12,6 +12,7 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_update_profiles'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
 		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
+		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
 		$this->data['link_update_background_experience'] = $this->url->link('account/edit/updateBackgroundExperience', '', 'SSL');
 
 		$this->load->model('user/user');
@@ -122,6 +123,14 @@ class ControllerAccountEdit extends Controller {
 		}
 	}
 
+	private function validateAddEducation() {
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	private function validateBackgroundEducation() {
 		if (!$this->error) {
 			return true;
@@ -146,6 +155,18 @@ class ControllerAccountEdit extends Controller {
 		$json = array();
 
 		if ( !$this->customer->isLogged() || !$this->validateBackgroundSumary() ) {
+			$json['message'] = 'failed';
+		}else {
+			$json['message'] = 'success';
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function updateAddEducation() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() || !$this->validateAddEducation() ) {
 			$json['message'] = 'failed';
 		}else {
 			$json['message'] = 'success';

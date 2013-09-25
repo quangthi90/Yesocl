@@ -43,6 +43,7 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 			return false;
 		}
 		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -51,6 +52,7 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 
 	this.btnCancel.click(function () {
 		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -78,6 +80,7 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 					self.inputGroups.save();
 					self.inputGroups.changeMode();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
 					self.btnEdit.toggle();
 					self.btnCancel.toggle();
 					self.btnSave.toggle();
@@ -132,6 +135,7 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 			return false;
 		}
 		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -140,6 +144,7 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 
 	this.btnCancel.click(function () {
 		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -160,6 +165,7 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 					self.inputGroups.save();
 					self.inputGroups.changeMode();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
 					self.btnEdit.toggle();
 					self.btnCancel.toggle();
 					self.btnSave.toggle();
@@ -180,6 +186,7 @@ function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight)
 
 	this.btnAdd = $element.find('.profiles-btn-add');
 	this.formAdd = $element.find('.profiles-form-add');
+	this.items = $element.find('.profiles-tabs-item1');
 
 	this.attachEvents();
 }
@@ -201,7 +208,6 @@ ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
 		$('.profiles-btn-add').addClass( 'disabled' );
 		self.btnAdd.toggle();
 		self.formAdd.toggle();
-		//self.inputGroups.changeMode();
 	});
 
 	this.formAdd.find('.profiles-btn-cancel').click(function () {
@@ -209,33 +215,44 @@ ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
 		$('.profiles-btn-add').removeClass( 'disabled' );
 		self.btnAdd.toggle();
 		self.formAdd.toggle();
-		//self.inputGroups.changeMode();
-	})
+	});
 
 	this.formAdd.find('.profiles-btn-save').click(function () {
 		alert('save');
 		/*var data = {
-			'sumary': self.inputGroups.self.find('textarea[name=\"sumary\"]').text()
+			'degree': self.self.formAdd.find('input[name=\"degree\"]').val(),
+			'school': self.self.formAdd.find('input[name=\"school\"]').val(),
+			'fieldofstudy': self.self.formAdd.find('input[name=\"fieldofstudy\"]').val(),
 		};
 		$.ajax({
 			type: 'POST',
-			url: self.self.data('url'),
+			url: self.self.formAdd.data('url'),
 			data: data,
 			dataType: 'json',
 			success: function (json) {
 				if ( json.message == 'success' ) {
-					self.inputGroups.save();
-					self.inputGroups.changeMode();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
-					self.btnEdit.toggle();
-					self.btnCancel.toggle();
-					self.btnSave.toggle();
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					self.btnAdd.toggle();
+					self.formAdd.toggle();
 				}else {
 					alert('Error!');
 				}
 			}
 		});*/
-	})
+	});
+
+	this.items.find('.profiles-btn-edit').click(function () {
+
+	});
+
+	this.items.find('.profiles-btn-cancel').click(function () {
+
+	});
+
+	this.items.find('.profiles-btn-save').click(function () {
+
+	});
 }
 
 function ProfilesTabsBackgroundSkill($element, contentWidth, contentHeight) {
@@ -307,4 +324,92 @@ ProfilesTabsInputGroups.prototype.getData = function () {
 		'location': this.self.find('input[name=\"location\"]').val(),
 		'industry': this.self.find('input[name=\"industry\"]').val()
 	}
+}
+
+function ProfilesTabsItem1($element) {
+	this.self = $element;
+
+	this.btnEdit = $element.find('profiles-btn-edit');
+	this.btnCancel = $element.find('profiles-btn-cancel');
+	this.btnSave = $element.find('profiles-btn-save');
+
+	this.attachEvents();
+}
+
+ProfilesTabsItem1.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnEdit.click(function () {
+		if (self.btnEdit.hasClass('disabled')) {
+			return false;
+		}
+		$('profiles-btn-edit').addClass('disabled');
+		$('profiles-btn-add').addClass('disabled');
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.changeMode();
+	});
+
+	this.btnCancel.click(function () {
+		$('profiles-btn-edit').removeClass('disabled');
+		$('profiles-btn-add').removeClass('disabled');
+		self.btnEdit.toggle();
+		self.btnCancel.toggle();
+		self.btnSave.toggle();
+		self.changeMode();
+	});
+
+	this.btnSave.click(function () {
+		alert('save');
+		/*var data = {
+	
+		};
+		
+		$.ajax({
+			type: 'POST',
+			url: ,
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+	
+			}
+		});
+		*/
+	});
+}
+
+ProfilesTabsItem1.prototype.changeMode = function () {
+	if (this.self.find('.viewers').is(':hidden')) {
+		this.self.find('.editors').toggle();
+		this.self.find('.viewers').toggle();
+	}else {
+		this.self.each(function () {
+			var self = $(this);
+			if (self.find('.editors').is('input')) {
+				self.find('input').val(self.find('.viewers').html());
+			}else if (self.find('.editors').is('select')) {
+				self.find("select option").filter(function() {
+    				return $(this).text() == self.find('.viewers').html(); 
+				}).prop('selected', true);
+			}else {
+				self.find('textarea').text(self.find('.viewers').html());
+			}
+		});
+		this.self.find('.viewers').toggle();
+		this.self.find('.editors').toggle();
+	}
+}
+
+ProfilesTabsItem1.prototype.save = function () {
+	this.self.each(function () {
+		var self = $(this);
+		if (self.find('.editors').is('input')) {
+			self.find('.viewers').html(self.find('input').val());
+		}else if (self.find('.editors').is('select')) {
+			self.find('.viewers').html(self.find('select').text());
+		}else {
+			self.find('.viewers').html(self.find('textarea').text());
+		}
+	});
 }
