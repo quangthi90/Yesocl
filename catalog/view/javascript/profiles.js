@@ -340,7 +340,7 @@ function ProfilesTabsItem1($element) {
 ProfilesTabsItem1.prototype.attachEvents = function () {
 	var self = this;
 
-	this.btnEdit.click(function () {alert('edit');
+	this.btnEdit.click(function () {
 		if (self.btnEdit.hasClass('disabled')) {
 			return false;
 		}
@@ -403,11 +403,11 @@ ProfilesTabsItem1.prototype.attachEvents = function () {
 }
 
 ProfilesTabsItem1.prototype.changeMode = function () {
-	if (this.self.inputGroups.find('.viewers').is(':hidden')) {
-		this.self.inputGroups.find('.editors').toggle();
-		this.self.inputGroups.find('.viewers').toggle();
+	if (this.inputGroups.find('.viewers').is(':hidden')) {
+		this.inputGroups.find('.editors').toggle();
+		this.inputGroups.find('.viewers').toggle();
 	}else {
-		this.self.inputGroups.each(function () {
+		this.inputGroups.each(function () {
 			var self = $(this);
 			if (self.find('.editors').is('input')) {
 				self.find('input').val(self.find('.viewers').html());
@@ -419,8 +419,8 @@ ProfilesTabsItem1.prototype.changeMode = function () {
 				self.find('textarea').val(self.find('.viewers').html());
 			}
 		});
-		this.self.inputGroups.find('.viewers').toggle();
-		this.self.inputGroups.find('.editors').toggle();
+		this.inputGroups.find('.viewers').toggle();
+		this.inputGroups.find('.editors').toggle();
 	}
 }
 
