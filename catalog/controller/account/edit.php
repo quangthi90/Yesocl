@@ -52,8 +52,8 @@ class ControllerAccountEdit extends Controller {
 				'company' => $experience->getCompany(),
 				'location' => $experience->getLocation()->getLocation(),
 				'location_id' => $experience->getLocation()->getId(),
-				'started' => $experience->getStarted(),
-				'ended' => $experience->getEnded()
+				'started' => $experience->getStarted()->format('F Y'),
+				'ended' => $experience->getEnded()->format('F Y')
 				);
 		}
 
