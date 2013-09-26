@@ -70,7 +70,7 @@ class ControllerAccountEdit extends Controller {
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
 			'sumary' => $user->getMeta()->getBackground()->getSumary(),
-			'educations' => $education_data,
+			'educations' => $educations_data,
 			'experiences' => $experiences_data
 		);
 
