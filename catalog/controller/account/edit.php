@@ -29,6 +29,14 @@ class ControllerAccountEdit extends Controller {
 			}
 		}
 
+		// sort by started function
+		function sortByStarted($a, $b) {
+			if ( $a['started'] == $b['started'] ) {
+				return 0;
+			}
+			return $a['started'] > $b['started'] ? -1 : 1;
+		}
+
 		// educations
 		$educations_data = array();
 		foreach ($user->getMeta()->getBackground()->getEducations() as $education) {
@@ -44,6 +52,8 @@ class ControllerAccountEdit extends Controller {
 				'ended' => $education->getEnded()
 				);
 		}
+
+		usort( $educations_data, 'sortBystarted');
 
 		// experiences
 		$experiences_data = array();
