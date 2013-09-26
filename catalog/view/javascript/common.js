@@ -23,6 +23,7 @@ function FlexibleElement(el) {
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
 	this.openSearch = this.footerBar.find('.search');
 	this.searchTxt = this.openSearch.find('#searchText'); 	
+	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');	
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
@@ -70,6 +71,26 @@ FlexibleElement.prototype.attachEvents = function() {
 		sT.slideUp(100);
 	});	
 	$('a[title]').tooltip({ container: 'body' });
+
+	//For show/hide GoLeft
+	var goLeftBtn = this.goLeftBtn;
+	goLeftBtn.hide();		
+	m.scroll(function(e) { 
+    	var leftOffset = 0;
+    	var freeBlockFirst = $(this).find(".free-block:first-child");
+    	if(freeBlockFirst.length != 0 ){
+    		leftOffset = freeBlockFirst.width();
+    	}
+        if($(this).scrollLeft() > leftOffset){
+        	goLeftBtn.fadeIn();	
+        }
+        else {
+            goLeftBtn.fadeOut();	
+        }
+    });
+    goLeftBtn.click(function(){
+    	m.animate({scrollLeft: 0}, 1000);
+    });
 }
 
 /*
@@ -78,8 +99,16 @@ Custom List Post
 var marginPost = 5;
 var marginPostOnWall = 15;
 var marginBlock = 50;
-var df_HOME_FEED = 'has-block';
+var minPostEditorWidth = 450;
+var minPostStatusWidth = 350;
+var marginFriendBlockItem = 10;
+var widthFriendBlockItem = 320;
+var heightFriendBlockItem = 85;
+var df_INVIDUAL_BLOCK = 'has-block';
 var df_ACCOUNT_MYWALL = 'account-mywall';
+var df_CATEGORY_SINGLE = 'post-category';
+var df_FRIEND_ACCOUNT = 'account-friend';
+
 function HorizontalBlock(el) {	
 	this.root = el;
 	this.columns = el.find('.column');
@@ -89,7 +118,7 @@ function HorizontalBlock(el) {
 	this.initializeBlock();
 }
 HorizontalBlock.prototype.initializeBlock = function() {	
-	if(this.root.hasClass(df_HOME_FEED)) {
+	if(this.root.hasClass(df_INVIDUAL_BLOCK)) {
 		this.blocks = this.root.find('.feed-block');
 		this.blockContent = this.root.find('.block-content');				
 		var heightBlockContent = this.heightMain - 42;
@@ -99,13 +128,15 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		this.columns.css('margin-right', marginPost + 'px');
 		this.columns.children('.feed-container').width(widthPost - 5);
 		this.blockContent.height(heightBlockContent);		
-		this.blocks.width((5/6)*this.widthMain);
-		this.blocks.css('margin-right', marginBlock + 'px');		
+		this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+		this.blocks.css('margin-right', marginBlock + 'px');	
+		var totalWithContent = 0;	
 		this.blocks.each(function(index) {
 			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
-			blockFeed.putFeed();			
+			blockFeed.putFeed();	
+			totalWithContent += ($(this).outerWidth() + marginBlock);			
 		});
-		this.root.width(this.blocks.length*((5/6)*this.widthMain + 60));
+		this.root.width(totalWithContent);
 		this.feeds.each(function() {
 			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
@@ -114,54 +145,78 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		});
 	}
 	else if(this.root.hasClass(df_ACCOUNT_MYWALL)) {
-		this.blocks = this.root.find('.feed-block');			
+		this.blocks = this.root.find('.feed-block');	
+		this.freeBlock = this.root.find('.free-block');
 		var heightBlockContent = this.heightMain - 42;
-		var widthColumnOfFirstBlock = this.widthMain/2 - marginBlock - 10;
 		var totalWidth = 0;
-		var blockWidth = (5/6)*this.widthMain;
-		this.blocks.each(function(index) {
-			$(this).css('margin-right', marginBlock + 'px');
-			$(this).children('.block-content').height(heightBlockContent);
-			var columns = $(this).children('.block-content').children('.column');
-			if($(this).hasClass('block-post-new')) {
-				//Block containing new post
-				$(this).width(blockWidth);
-				columns.width((blockWidth - 2*marginPostOnWall)/2) - 4;
-				columns.children('.post_status').css('margin-bottom',marginPostOnWall + 'px');
-				columns.children('.post_status:last-child').css('margin-bottom','0px');				
-				columns.each(function(){
-					var firstPost = $(this).children('.post_status:first-child');
-					var lastPost = $(this).children('.post_status:last-child');
-					var restHeight = heightBlockContent - firstPost.outerHeight() - 30;
-					if(restHeight <= 0) {
-						lastPost.hide();
-					}else if(restHeight < lastPost.outerHeight()) {
-						lastPost.find('.post_image').hide();
-						lastPost.height(restHeight);						
+		this.blocks.each(function(index) {			
+			$(this).find('.block-content').height(heightBlockContent);
+			var firstColumn = $(this).find('.column:first-child');
+			var columnPerBlock = $(this).find('.column').not(':first-child');
+			firstColumn.width(minPostEditorWidth);					
+			var totalWidthOfColumns = firstColumn.outerWidth() + marginPostOnWall;
+			columnPerBlock.each(function() {
+				if($(this).children('.post').length == 2) {
+					var firstPost = $(this).children('.post:first-child');
+					var lastPost = $(this).children('.post:last-child');					
+					$(this).css('margin-right', marginPostOnWall + 'px');
+					firstPost.css('margin-bottom', marginPostOnWall + 'px');
+					if(lastPost.outerHeight() > (heightBlockContent - firstPost.outerHeight() - marginPostOnWall)) {
+						lastPost.find('.post_image').hide();	
 					}
-				});				
-			}else{
-				$(this).width((5/6)*widthMainParent);
-			}			
-			columns.css('margin-right', marginPostOnWall + 'px');
-			totalWidth += $(this).outerWidth();
+					lastPost.height(heightBlockContent - firstPost.outerHeight() - marginPostOnWall);					
+				}	
+				$(this).width(minPostStatusWidth);			
+				totalWidthOfColumns += $(this).outerWidth() + marginPostOnWall;
+			});
+			firstColumn.css('min-width', minPostEditorWidth + 'px');
+			columnPerBlock.css('min-width', minPostStatusWidth + 'px');	
+			firstColumn.css('margin-right', marginPostOnWall + 'px');
+			totalWidth += totalWidthOfColumns;
 		});
-		this.root.width(totalWidth == 0 ? this.widthMain : totalWidth);
+		this.freeBlock.css('margin-right', marginBlock);
+		this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
 	}
-	else{
-		var heightMax = this.heightMain - 25;
-		var widthM = this.widthMain;
-		var totalWidth = 0;
-		this.feeds.each(function() {
-			$(this).height(heightMax);
-			$(this).css('float','left');
-			$(this).css('margin-right','30px');
-			var headerPost = $(this).children('.post_header').first().outerHeight();
-			var footerPost = $(this).children('.post_footer').first().outerHeight();
-			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
-			totalWidth += $(this).outerWidth() + 30;
+	else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
+		this.blocks = this.root.find('.feed-block');		
+		this.blockContent = this.root.find('.block-content');				
+		var heightBlockContent = this.heightMain - 42;
+		var heightPost = (heightBlockContent - 2*marginPost)/2;
+		var widthPost = this.widthMain*5/18 - 3*marginPost;
+		this.columns.width(widthPost);
+		this.columns.css('margin-right', marginPost + 'px');
+		this.columns.children('.feed-container').width(widthPost - 5);
+		this.blockContent.height(heightBlockContent);		
+		this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+		var totalWithContent = 0;
+		this.blocks.each(function(index) {
+			if(index != 0) {
+				$(this).find('.block-header').css('visibility','hidden');
+			}
+			var blockFeed = new BlockFeed($(this), heightPost,widthPost);
+			blockFeed.putFeed();	
+			totalWithContent += $(this).outerWidth();	
 		});
-		this.root.width(totalWidth + 30);
+		this.root.width(totalWithContent);
+		this.feeds.each(function() {
+			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
+			var hp = $(this).children('.post_header').first().outerHeight();
+			var heightUpdated = $(this).height();
+			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
+		});
+	}
+	else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
+		var heightBlockContent = this.heightMain - 42;
+		var totalWidth = 0;
+		var numberRow = Math.floor(heightBlockContent/(heightFriendBlockItem + marginFriendBlockItem));
+		var listBlockItem = this.root.find('.block-content-item');
+		if(listBlockItem.length == 0) {
+			console.log('No friend found !');
+		}
+		var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
+		this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+	}
+	else{		
 	}	
 	this.root.makeContentHorizontalScroll();	
 }
@@ -203,9 +258,9 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
-	new HorizontalBlock($('.has-horizontal')); 	
-});
-
-$(document).ready(function() {
-	jQuery(".timeago").timeago();
+	new HorizontalBlock($('.has-horizontal'));
+	$(".timeago").timeago();
+	$(document).bind('HORIZONTAL_POST', function(e) {
+	    new HorizontalBlock($('.has-horizontal'));
+	});
 });

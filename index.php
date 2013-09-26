@@ -42,6 +42,8 @@ $registry->set('config', $config);
 // Database 
 $db = new Doctrine($registry);
 $registry->set('db', $db);
+$registry->set('dm', $db->getDm());
+$registry->set('client', $db->getClient());
 
 // Store
 /*if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
@@ -84,11 +86,6 @@ $twig = new Twig_Environment($twig_loader, array(
     // 'cache' => DIR_SYSTEM . '/cache/twig',
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
-// Custom twig extension
-require_once DIR_APPLICATION . 'extension/loader.php';
-$extension = new ExtensionLoader( $twig, $config );
-$registry->set('extension', $extension);
-$registry->set('twig', $twig);
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -236,6 +233,12 @@ $registry->set('customer', $customer);
 
 //  Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
+
+// Custom twig extension
+require_once DIR_APPLICATION . 'extension/loader.php';
+$extension = new ExtensionLoader( $twig, $registry );
+$registry->set('extension', $extension);
+$registry->set('twig', $twig);
 		
 // Front Controller 
 $controller = new Front($registry);

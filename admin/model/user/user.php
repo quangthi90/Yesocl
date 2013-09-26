@@ -11,7 +11,7 @@ use Document\User\Meta\Education;
 use Document\User\Meta\Experience;
 use Document\User\Meta\Former;
 
-class ModelUserUser extends Doctrine {
+class ModelUserUser extends Model {
 	/**
 	 * Create new User
 	 * @author: Bommer <lqthi.khtn@gmail.com>

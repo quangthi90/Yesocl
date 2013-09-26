@@ -2,7 +2,7 @@
 use Document\Customer\Customer;
 use Document\Information\User\Meta;
 
-class ModelCustomerCustomer extends Doctrine {
+class ModelCustomerCustomer extends Model {
 	public function addCustomer( $customer = array() ) {
 		// Email is require
 		if ( !isset($customer['email']) || empty($customer['email']) ){

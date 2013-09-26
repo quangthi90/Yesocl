@@ -52,23 +52,6 @@ jQuery(document).ready(function (){
 	}
 
 	$(function(){
-		// check again when apply SEO url
-		route = getURLVar('route');
-	
-		if (!route) {
-			$('#home-menu').addClass('active');
-		} else {
-			part = route.split('/');
-
-			part = part[1].split('#');
-
-			part = part[0].split('&');
-			
-			url = part[0];
-			
-			$('#' + url + '-menu').addClass('active');
-		}
-
 		$('.left-menu').each(function(){
 			new leftMenu($(this));
 		});

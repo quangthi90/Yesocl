@@ -1,10 +1,10 @@
 {% use '@template/default/template/post/common/post_editor.tpl' %}
 {% block post_common_form_status %}
-	<form class="form-status" data-url="{{ action.status }}">
+	<div class="form-status" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new">
 			<div class="row-fluid txt_editor">
-				<textarea class="post_input" style="resize: none;" placeholder="What's in your mind ..."></textarea>
-			</div>			 
+				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
+			</div>
 			<div class="post_tool">
 				<div class="row-fluid">
 					<div class="span8 post_new_control">
@@ -20,13 +20,13 @@
 						<button type="button" class="btn btn-yes btn-status">Post</button>
 					</div>
 				</div>
- 			</div>	
+ 			</div>
 		</div>
-	</form>		
+	</div>
 	<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 40px; left: 100px;background-color: #fff;display:none;">
 		<a href="#" class="b-close"><i class="icon-remove"></i></a>
 		<div class="y-dlg">
-			<form autocomplete="off">
+			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 				<div class="dlg-title">
 			        <i class="icon-yes"></i> Compose your post  
 			    </div>
@@ -35,33 +35,78 @@
 			    	<div class="control-group">
 			    		<label for="title" class="control-label">Title</label>
 			    		<div class="controls">
-			    			<input style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
+			    			<input class="status-title" style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
 			    		</div>
 		    		</div>
 		    		<div class="control-group">
 		    			<label class="control-label">Content</label>
-				    	{{block('post_common_post_editor')}}
-				    	<div class="y-editor" id="post-adv-editor">
-				    		Your content ...
-				    	</div>
+				    	{{ block('post_common_post_editor') }}
+				    	<div class="y-editor status-content" id="post-adv-editor"></div>
 			    	</div>
-			    	<div class="control-group captcha">
-			    		<label for="captcha" class="control-label">Captcha check</label><div class="controls">
-			    		<img class="captcha-img" src="http://www.captcha.net/duo_logo.png" 
-			    			/>
-		    			<input class="captchainput" placeholder="Insert captcha..." type="text" name="captcha" id="captcha" >
-		    			</div>
-	    			</div>
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
-		                <button type="submit" class="btn btn-yes">Post</button>
+		                <button type="submit" class="btn btn-yes btn-status">Post</button>
 		            </div>
 			    </div>
-			</form>			    
+			</form>
 		</div>
 	</div>
+	{% raw %}
+	<div class="hidden" id="post-item-template">
+		<div class="feed post post_status">
+			<div class="post_header">
+				<div class="avatar_thumb">
+					<a href="#">
+						<img src="${post.user.avatar}" alt="user" />
+					</a>
+				</div>
+				<div class="post_meta_info">
+					<div class="post_user">
+						<a href="#">${post.user.username}</a>
+					</div>
+					<div class="post_meta">
+						<span class="post_time fl">
+							<i class="icon-calendar"></i> 
+							<d class="timeago" title="${post.created}"></d>
+						</span>
+						<span class="post_cm fr">
+							<a href="#" class="open-comment"
+								data-url="${href.comment_list}"
+								data-comment-count="0"
+								data-comment-url="${href.comment_add}"
+							>
+								<i class="icon-comments-alt"></i>
+							</a>
+							<d>0</d>
+						</span>
+						<span class="post_like fr">
+							<a class="like-post" href="#"
+	                            data-url="${href.post_like}"
+	                            data-post-liked="false"
+	                        >
+	                            <i class="icon-thumbs-up medium-icon"></i>
+							</a>
+							<d>0</d>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="post_body">
+				<h4 class="post_title">
+					<a href="${href.post_detail}">${post.title}</a>
+				</h4>
+				<div class="post_image">
+					<img src="${post.image}" />
+				</div>
+				<div class="post_text_raw">
+					{{html post.content}}
+				</div>
+			</div>
+		</div>
+	</div>
+	{% endraw %}
 {% endblock %}
 
 {% block post_common_form_status_javascript %}
@@ -72,7 +117,7 @@
 	$('#post_new_adv').click(function() {
 		$('#post_advance').bPopup( 
 			{
-				follow: [false, false],				
+				follow: [false, false],
 				speed: 300,
             	transition: 'slideDown',
             	modalColor : '#000',

@@ -20,10 +20,20 @@ class ControllerPostDetail extends Controller {
 			print("post slug is empty!"); exit;
 		}
 
+		$is_user = false;
+
 		switch ($this->request->get['post_type']) {
-			case 'branch':
+			case $this->config->get('post')['type']['branch']:
 				$this->load->model('branch/post');
 				$post = $this->model_branch_post->getPost( $this->request->get );
+				$this->data['post_type'] = $this->config->get('common')['type']['branch'];
+				break;
+
+			case $this->config->get('post')['type']['user']:
+				$is_user = true;
+				$this->load->model('user/post');
+				$post = $this->model_user_post->getPost( $this->request->get );
+				$this->data['post_type'] = $this->config->get('common')['type']['user'];
 				break;
 			
 			default:
@@ -47,6 +57,12 @@ class ControllerPostDetail extends Controller {
 
 		$comment_count = $post->getComments()->count();
 
+		if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
+			$liked = true;
+		}else{
+			$liked = false;
+		}
+
 		$this->data['post'] = array(
 			'id'			=> $post->getId(),
 			'author' 		=> $post->getAuthor(),
@@ -55,18 +71,15 @@ class ControllerPostDetail extends Controller {
 			'content' 		=> html_entity_decode($post->getContent()),
 			'created'		=> $post->getCreated(),
 			'comment_count' => $comment_count,
-			'category'		=> $post->getCategory()->getName(),
-			'type'			=> 'company',
+			'category'		=> !$is_user ? $post->getCategory()->getName() : null,
 			'slug'			=> $post->getSlug(),
-			'branch_slug'	=> $post->getBranch()->getSlug(),
 			'like_count'	=> count($post->getLikerIds()),
-			'href_user'		=> $this->url->link('account/edit', 'user_slug=' . $post->getUser()->getSlug(), 'SSL'),
-			'href_status'	=> $this->url->link('post/comment/getComments', '', 'SSL')
+			'isUserLiked'	=> $liked,
+			'user_slug'		=> $post->getUser()->getSlug()
 		);
 
 		$this->data['date_format'] = $this->language->get('date_format_full');
-		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
+		$this->data['is_user'] = $is_user;
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/detail.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/detail.tpl';

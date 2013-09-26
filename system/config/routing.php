@@ -7,6 +7,7 @@ $_['routing']['CategoryPage'] 	= 'category/{category_slug}/';
 // Post
 $_['routing']['PostPage'] 		= '{post_type}/post/{post_slug}/';
 $_['routing']['PostLike'] 		= '{post_type}/post/{post_slug}/like';
+$_['routing']['PostAdd'] 		= '{post_type}/{user_slug}/post/add';
 
 // Comment
 $_['routing']['CommentList'] 	= '{post_type}/post/{post_slug}/comments/';
@@ -16,7 +17,7 @@ $_['routing']['CommentLike']	= '{post_type}/post/{post_slug}/comment/{comment_id
 // Page
 $_['routing']['RefreshPage'] 	= 'what-s-new';
 $_['routing']['HomePage']	 	= 'home';
-$_['routing']['WallPage']	 	= 'wall-page';
+$_['routing']['WallPage']	 	= 'wall-page/{user_slug}';
 $_['routing']['ChangePassword']	= 'change-password';
 $_['routing']['Logout']			= 'logout';
 

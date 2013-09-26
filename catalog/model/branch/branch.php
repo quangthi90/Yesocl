@@ -1,5 +1,5 @@
 <?php
-class ModelBranchBranch extends Doctrine {
+class ModelBranchBranch extends Model {
 	public function getAllBranchs( $data = array() ){
 		$query = array('deleted' => false);
 

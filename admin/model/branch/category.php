@@ -5,7 +5,7 @@ use Document\Branch\Category,
 
 use MongoRegex;
 
-class ModelBranchCategory extends Doctrine {
+class ModelBranchCategory extends Model {
 	public function addCategory( $data = array() ) {
 		// Name is required
 		if ( !isset($data['name']) || empty($data['name']) ){

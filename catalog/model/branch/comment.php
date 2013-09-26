@@ -3,10 +3,8 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelBranchComment extends Doctrine {
+class ModelBranchComment extends Model {
 	public function getComments( $data = array() ){
-		$this->load->model( 'tool/cache' );
-
 		$query = array();
 
 		if ( empty($data['page']) ){
@@ -107,6 +105,7 @@ class ModelBranchComment extends Doctrine {
 			}
 		}
 
+		// Update cache post for what's new
 		$type = $this->config->get('post')['cache']['branch'];
 		$this->load->model('cache/post');
 		$data = array(
@@ -118,7 +117,7 @@ class ModelBranchComment extends Doctrine {
 		);
 		$this->model_cache_post->editPost( $data );
 
-		return $comment->formatToCache();
+		return $comment;
 	}
 
 	public function editComment( $comment_id, $data = array() ){
@@ -132,8 +131,17 @@ class ModelBranchComment extends Doctrine {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		if ( !empty($data['likerId']) && !in_array($data['likerId'], $comment->getLikerIds()) ){
+		$comment = $post->getCommentById( $comment_id );
+		
+		$likerIds = $comment->getLikerIds();
+
+		$key = array_search( $data['likerId'], $likerIds );
+		
+		if ( !$likerIds || $key === false ){
 			$comment->addLikerId( $data['likerId'] );
+		}else{
+			unset($likerIds[$key]);
+			$comment->setLikerIds( $likerIds );
 		}
 
 		$this->dm->flush();

@@ -1,7 +1,7 @@
 <?php
 use Document\Group\Type;
 
-class ModelGroupType extends Doctrine {
+class ModelGroupType extends Model {
 	public function addType( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

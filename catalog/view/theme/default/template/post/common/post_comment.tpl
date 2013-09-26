@@ -42,15 +42,38 @@
 							<a href="${href_user}">${author}</a> - <span class="comment-time"><d class="timeago" title="${created}"></d></span>
 						</div>
 						<div class="comment-content">
-{{html content}}
-						</div>
+							{{html content}}							
+						</div>												
 					</div>
 				</div>
 				<div class="comment-footer">
 					<a href="#" class="like-comment"
 						data-url="${href_like}"
 						data-comment-liked="${is_liked}"
-					><i class="icon-thumbs-up medium-icon"></i> Like (<d>${like_count}</d>)</a>
+					>
+					{{if is_liked == true}}
+						<i class="icon-thumbs-down medium-icon"></i> 
+					{{else}}
+						<i class="icon-thumbs-up medium-icon"></i> 
+					{{/if}}
+						Like (<d>${like_count}</d>)
+					</a>
+				</div>
+				<div class="yes-dropdown">
+					<div class="dropdown">
+					   <a class="dropdown-toggle" data-toggle="dropdown" title="Action">
+					    	<i class="icon-reorder"></i>
+					   </a>
+					   <ul class="dropdown-menu">
+						    <li>
+						     	<a href="#"><i class="icon-edit"></i>Edit</a>
+					     	</li>
+					     	<li class="divider"></li>
+						    <li>
+						    	<a href="#"><i class="icon-trash"></i>Delete</a>
+						    </li>
+					    </ul>
+					</div>
 				</div>
 			</div>
 		</div>

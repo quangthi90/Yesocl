@@ -1,7 +1,7 @@
 <?php
 use Document\City;
 
-Class ModelLocalisationCity extends Doctrine {
+Class ModelLocalisationCity extends Model {
 	public function addCity($name, $data = array(), $status = false) {
 		$city = new City($name, $status);
 

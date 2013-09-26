@@ -1,10 +1,17 @@
 {% block post_common_post_block_list %}
 	<div class="feed-block">
         <div class="block-header">
+        {% if is_back_btn is defined and is_back_btn == true %}
+            <a class="block-seemore fl" href="#" onclick="history.go(-1); return false;"> 
+                <i class="icon-angle-left"></i>
+            </a>
+            <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
+        {% else %}
             <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
             <a class="block-seemore fl" href="{{ block_href }}"> 
                 <i class="icon-angle-right"></i>
-            </a>           
+            </a>
+        {% endif %}
         </div>
         <div class="block-content">
             {% if style == 1 %}
@@ -22,7 +29,7 @@
                     <div class="feed post post_in_block">
                         <div class="post_header">
                             <h4 class="post_title">
-                                <a href="#">{{ post.title }}</a>
+                                <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
                             </h4>
                             <div class="post_meta">
                                 <span class="post_time fl">
@@ -46,11 +53,14 @@
                             <div class="post_virtual_overlay">
                             </div>
                             <div class="post_overlay_wrapper">
+                                <div class="post_remove">
+                                    <a href="#" title="Delete"><i class="icon-remove"></i></a>
+                                </div>
                                 <div class="post_action">
                                     <div class="action_tool">
                                         <a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
                                             data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
-                                            data-post-like="{{ post.isUserLiked }}"
+                                            data-post-liked="{{ post.isUserLiked }}"
                                         >
                                             {% if post.isUserLiked == 0 %}
                                                 <i class="icon-thumbs-up medium-icon"></i>
@@ -65,7 +75,7 @@
                                         >
                                             <i class="icon-comments medium-icon"></i>
                                         </a>
-                                        <a href="{{ post.href_post|raw }}" title="View (1k)"><i class="icon-eye-open medium-icon"></i></a>
+                                        <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
                                     </div>
                                     <div class="who-action">
                                         <a href="#" class="view-list-liker" 
@@ -93,9 +103,9 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>                      
+                            </div>
                         </div>
-                    </div>              
+                    </div>
                 </div>
                 {% if style == 1 and loop.index % special == 0 and loop.index != 5 %}
                     {% if special == 2 %}

@@ -132,7 +132,7 @@
             return false;
         });
     };
-		
+
     LikePostBtn.prototype.submit = function($button){
         var that = this;		
 
@@ -153,7 +153,6 @@
 
                 var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
                 var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
-				
                 //Unlike
                 if(that.isLiked == 1) {
                     that.iconLike.replaceWith($likeIcon);
@@ -377,35 +376,11 @@
 
             return false;
         });
-                
-        this.$press_enter_cb.click(function(e) {
-            if(that.$press_enter_cb.parent().hasClass('checked')){
-                that.$comment_btn.hide("slow");
-            }else{
-                that.$comment_btn.show("slow");
-            }
-        });
-                
-        this.$content.keypress(function(e){
-            if(that.$press_enter_cb.parent().hasClass('checked') && e.which == 13){
-                if(that.validate() == false){
-                    return false;
-                }
-
-                that.url	= that.$el.attr('data-url');
-
-                that.data = {
-                    content 	: that.$content.val()
-                };
-
-                that.submit(that.$comment_btn);
-                return false;
-            }
-        });
     };
 
     CommentForm.prototype.submit = function($button){
         var that = this;
+
         var promise = $.ajax({
             type: 'POST',
             url:  this.url,
@@ -428,10 +403,11 @@
                 var comment_count = parseInt(that.$el.parent().find('.counter').html()) + 1;
                 that.$el.parent().find('.counter').html( comment_count );
 
-                var $curr_item = $('.open-comment.disabled').parent().parent().parent().parent().parent();
+                var $curr_item = $('.open-comment.disabled').parents('.post');
+				
+                $('.open-comment.disabled').parent().find('d').html( comment_count );
                 $curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
-                $curr_item.find('.post_header .post_meta .post_cm d').html( comment_count );
-                $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
+                $curr_item.find('.post_header .post_cm d').html( comment_count );
 
                 $('.comment-item .like-comment').each(function(){
                     new LikeCommentBtn($(this));			
@@ -457,6 +433,7 @@
         };
 
         $el.addClass('disabled').prepend($spinner);
+
         promise.then(f, f);
     };
 
@@ -496,7 +473,7 @@
             new UserListViewer($(this));
         });
 
-        $('.post_action .like-post').each(function(){
+        $('.like-post').each(function(){
             new LikePostBtn($(this));			
         });
 
@@ -531,7 +508,7 @@
                     url:  $('.open-comment.disabled').data('url'),
                     data: data,
                     dataType: 'json',
-                    beforeSend: function () {
+                    progress: function () {
                         $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-refresh"></i>Loading...</span>');
                     },
                     success: function (data) {
@@ -540,13 +517,8 @@
                             for (key in data.comments) {
                                 htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                             }
-                            var topCurrent = $('.comment-body').find('.loading').first().offset().top;
                             $('.comment-body').find('.loading').remove();
                             $('.comment-body').prepend(htmlOutput);
-//                            $('.comment-body').animate({
-//                                scrollTop: topCurrent
-//                            }, 100);
-                            jQuery(".timeago").timeago();
                         }
                     }
                 });
@@ -557,6 +529,16 @@
         }
         list_comment.on('scroll', function () {
             getComments();
+        });
+
+        $(document).bind('POST_BUTTON', function(e) {
+            $('.like-post').each(function(){
+                new LikePostBtn($(this));			
+            });
+
+            $('.open-comment').each(function(){
+                new CommentBtn($(this));			
+            });
         });
     });
 }(jQuery, document));

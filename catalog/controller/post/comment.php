@@ -47,6 +47,10 @@ class ControllerPostComment extends Controller {
                 $comment = $this->model_branch_comment->addComment($data);
                 break;
 
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $comment = $this->model_user_comment->addComment( $data );
+                break;
             default:
                 $comment = array();
                 break;
@@ -57,6 +61,8 @@ class ControllerPostComment extends Controller {
                                 'success' => 'not ok: add comment have error'
                             )));
         }
+
+        $comment = $comment->formatToCache();
 
         $this->load->model('user/user');
         $user = $this->model_user_user->getUser($comment['user_slug']);
@@ -76,14 +82,17 @@ class ControllerPostComment extends Controller {
         }
 
         $comment['avatar'] = $avatar;
-        $comment['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
+        $comment['href_user'] = $this->extension->path('WallPage', array(
+            'user_slug' => $user['slug']
+        ));
         $comment['href_like'] = $this->extension->path('CommentLike', array(
             'post_slug' => $data['post_slug'],
             'post_type' => $data['post_type'],
             'comment_id' => $comment['id']
                 ));
-        $comment['created'] = $comment['created']->format($this->language->get('date_format_full'));
-        $comment['content'] = str_replace("\n", "<br />", $comment['content']);
+        $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+        $comment['is_liked'] = false;
+            
         return $this->response->setOutput(json_encode(array(
                             'success' => 'ok',
                             'comment' => $comment
@@ -135,6 +144,11 @@ class ControllerPostComment extends Controller {
                 $comments = $this->model_branch_comment->getComments($data);
                 break;
 
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $comments = $this->model_user_comment->getComments( $data );
+                break;
+
             default:
                 $comments = array();
                 break;
@@ -143,33 +157,44 @@ class ControllerPostComment extends Controller {
         $this->load->model('user/user');
         $this->load->model('tool/image');
 
-        foreach ($comments as $key => $comment) {
-            $user = $this->model_user_user->getUser($comment['user_slug']);
-
-            if ($user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar'])) {
-                $avatar = $this->model_tool_image->resize($user['avatar'], 180, 180);
-            } elseif ($user && $user['email']) {
-                $avatar = $this->model_tool_image->getGavatar($user['email'], 180);
-            } else {
-                $avatar = $this->model_tool_image->getGavatar($comment['email'], 180);
+        foreach ( $comments as $key => $comment ) {
+            if ( in_array($this->customer->getId(), $comment->getLikerIds()) ){
+                $liked = true;
+            }else{
+                $liked = false;
             }
 
-            if ($user && $user['username']) {
-                $comments[$key]['author'] = $user['username'];
-            } else {
-                $comments[$key]['author'] = $comment['author'];
+            $comment = $comment->formatToCache();
+
+            $user = $this->model_user_user->getUser( $comment['user_slug'] );
+            
+            if ( $user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar']) ){
+                $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+            }elseif ( $user && $user['email'] ){
+                $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
+            }else{
+                $avatar = $this->model_tool_image->getGavatar( $comment['email'], 180 );
             }
 
-            $comments[$key]['avatar'] = $avatar;
-            $comments[$key]['href_user'] = $this->url->link('account/edit', 'user_slug=' . $user['slug'], 'SSL');
-            $comments[$key]['href_like'] = $this->extension->path('CommentLike', array(
+            if ( $user && $user['username'] ){
+                $comment['author'] = $user['username'];
+            }else{
+                $comment['author'] = $comment['author'];
+            }
+
+            $comment['avatar'] = $avatar;
+            $comment['href_user'] = $this->extension->path('WallPage', array(
+                'user_slug' => $user['slug']
+            ));
+            $comment['href_like'] = $this->extension->path('CommentLike', array(
                 'post_slug' => $data['post_slug'],
                 'post_type' => $data['post_type'],
-                'comment_id' => $comments[$key]['id']
-                    ));
-            $comments[$key]['created'] = $comment['created']->format($this->language->get('date_format_full'));
-            $comments[$key]['content'] = str_replace("\n", "<br />", $comments[$key]['content']);       
-            
+                'comment_id' => $comment['id']
+            ));
+            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+            $comment['is_liked'] = $liked;
+
+            $comments[$key] = $comment;
         }
 
         return $this->response->setOutput(json_encode(array(
@@ -213,8 +238,19 @@ class ControllerPostComment extends Controller {
                 $comment = $this->model_branch_comment->editComment($data['comment_id'], $data);
                 break;
 
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $comment = $this->model_user_comment->editComment( $data['comment_id'], $data );
+                break;
+            
             default:
                 break;
+        }
+
+        if ( $comment == false ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
         }
 
         return $this->response->setOutput(json_encode(array(

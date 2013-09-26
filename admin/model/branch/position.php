@@ -1,7 +1,7 @@
 <?php
 use Document\Branch\Position;
 
-class ModelBranchPosition extends Doctrine {
+class ModelBranchPosition extends Model {
 	public function addPosition( $data = array() ) {
 		// name is required & isn't exist
 		if ( isset($data['name']) && !empty($data['name']) ) {

@@ -7,6 +7,7 @@ $_['route']['CategoryPage']		= 'branch/category';
 // Post
 $_['route']['PostPage'] 		= 'post/detail';
 $_['route']['PostLike']			= 'post/post/like';
+$_['route']['PostAdd']			= 'post/post/addStatus';
 
 // Branch
 $_['route']['CommentList'] 		= 'post/comment/getComments';
