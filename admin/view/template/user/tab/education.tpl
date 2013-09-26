@@ -4,7 +4,7 @@
                     <td>
                     <div class="row-fluid">
                          <div class="span2"><strong><?php echo $entry_school; ?></strong></div>
-                         <div class="span9"><input datalist="school" class="datalist school input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" />
+                         <div class="span9"><input data-type="school" class="datalist school input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][school]" value="<?php echo $education['school']; ?>" />
                           <?php if ( isset( $error_education[$key]['school'] ) ) { ?>
                           <div class="warning"><?php echo $error_education[$key]['school']; ?></div>
                           <?php } ?>
@@ -29,11 +29,11 @@
                           </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_degree; ?></div>
-                         <div class="span10"><input datalist="degree" class="datalist degree input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
+                         <div class="span10"><input data-type="degree" class="datalist degree input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][degree]" value="<?php echo $education['degree']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_field_of_study; ?></div>
-                         <div class="span10"><input datalist="fieldofstudy" class="datalist fieldofstudy input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][fieldofstudy]" value="<?php echo $education['fieldofstudy']; ?>" /></div>
+                         <div class="span10"><input data-type="fieldofstudy" class="datalist fieldofstudy input-xxlarge" type="text" name="background[educations][<?php echo $key; ?>][fieldofstudy]" value="<?php echo $education['fieldofstudy']; ?>" /></div>
                     </div>
                     <div class="row-fluid">
                          <div class="span2"><?php echo $entry_grace; ?></div>
@@ -63,7 +63,7 @@
 			html +=	'<td>';
 			html +=	'<div class="row-fluid">';
 			html +=		'<div class="span2"><strong><?php echo $entry_school; ?></strong></div>';
-			html +=		'<div class="span9"><input datalist="<?php echo $code_school; ?>" class="datalist school input-medium" type="text" name="background[educations][' + education_length + '][school]" value="" /><input name="background[educations][' + education_length + '][school_id]" value="0" type="hidden" /></div>';
+			html +=		'<div class="span9"><input data-type="<?php echo $code_school; ?>" class="datalist school input-medium" type="text" name="background[educations][' + education_length + '][school]" value="" /><input name="background[educations][' + education_length + '][school_id]" value="0" type="hidden" /></div>';
 			html +=		'<div class="span1"><a class="btn-remove-education btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html +=	'</div>';
           	html +=	'<div class="row-fluid">';
@@ -85,11 +85,11 @@
           	html +=	'</div>';
 			html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_degree; ?></div>';
-          	html +=		'<div class="span10"><input datalist="<?php echo $code_degree; ?>" class="datalist degree input-medium" type="text" name="background[educations][' + education_length + '][degree]" value="" /><input name="background[educations][' + education_length + '][degree_id]" value="0" type="hidden" /></div>';
+          	html +=		'<div class="span10"><input data-type="<?php echo $code_degree; ?>" class="datalist degree input-medium" type="text" name="background[educations][' + education_length + '][degree]" value="" /><input name="background[educations][' + education_length + '][degree_id]" value="0" type="hidden" /></div>';
           	html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_field_of_study; ?></div>';
-          	html +=		'<div class="span10"><input datalist="<?php echo $code_fieldofstudy; ?>" class="datalist fieldofstudy input-medium" type="text" name="background[educations][' + education_length + '][fieldofstudy]" value="" /><input name="background[educations][' + education_length + '][fieldofstudy_id]" value="0" type="hidden" /></div>';
+          	html +=		'<div class="span10"><input data-type="<?php echo $code_fieldofstudy; ?>" class="datalist fieldofstudy input-medium" type="text" name="background[educations][' + education_length + '][fieldofstudy]" value="" /><input name="background[educations][' + education_length + '][fieldofstudy_id]" value="0" type="hidden" /></div>';
           	html +=	'</div>';
           	html +=	'<div class="row-fluid">';
           	html +=		'<div class="span2"><?php echo $entry_grace; ?></div>';
@@ -114,7 +114,7 @@
 $('input.datalist').autocomplete({
    delay: 0,
    search: function( event, ui ) {
-    type = $(this).attr('datalist');
+    type = $(this).data('type');
    },
    source: function(request, response) {
      $.ajax({
@@ -127,7 +127,10 @@ $('input.datalist').autocomplete({
              value: item.id
            }
          }));
-       }
+       },
+      error: function(xhr, error){
+          alert(xhr.responseText);
+      }
      });
    }, 
    select: function(event, ui) {

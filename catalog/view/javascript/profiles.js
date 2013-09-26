@@ -175,7 +175,7 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 			},
 			error: function(xhr, error){
 		    	alert(xhr.responseText);
-		 	},
+		 	}
 		});
 	})
 }
