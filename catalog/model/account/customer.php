@@ -1,7 +1,8 @@
 <?php
 use Document\User\User,
 	Document\User\Meta,
-	Document\User\Meta\Email;
+	Document\User\Meta\Email,
+	Document\User\Meta\Education;
 
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
@@ -266,6 +267,52 @@ class ModelAccountCustomer extends Model {
 			if ( isset( $data['sumary'] ) && !empty( $data['sumary'] ) ) {
 				$customer->getMeta()->getBackground()->setSumary( $data['sumary'] );
 			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function addEducation( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['started'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['degree'] ) || empty( $data['degree'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['school'] ) || empty( $data['school'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['fieldofstudy'] ) || empty( $data['fieldofstudy'] ) ) {
+				return false;
+			}
+
+			$education = new Education();
+			$education->setStarted( (int) $data['started'] );
+			$education->setEnded( (int) $data['ended'] );
+			$education->setDegree( $data['degree'] );
+			$education->setSchool( $data['school'] );
+			$education->setFieldOfStudy( $data['fieldofstudy'] );
+
+			$this->dm->persist( $education );
+			$customer->getMeta()->getBackground()->addEducation( $education );
 		}else {
 			return false;
 		}

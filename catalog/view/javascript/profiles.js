@@ -98,7 +98,7 @@ function ProfilesTabsBackground($element, contentWidth, contentHeight) {
 	this.sumary = new ProfilesTabsBackgroundSumary($element.find('#profiles-tabs-background-sumary'), contentWidth, contentHeight - this.header.height() - 30);
 	this.experience = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-experience'), contentWidth, contentHeight - this.header.height() - 30);
 	this.skill = new ProfilesTabsBackgroundSkill($element.find('#profiles-tabs-background-skill'), contentWidth, contentHeight - this.header.height() - 30);
-	this.education = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 30);
+	this.education = new ProfilesTabsBackgroundEducation($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 30);
 	this.afterCreate();
 }
 
@@ -178,6 +178,109 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 		 	}
 		});
 	})
+}
+
+function ProfilesTabsBackgroundEducation($element, contentWidth, contentHeight) {
+	this.self = $element;
+	this.mainBody = $element.find('.profiles-tabs-main-body');
+	this.contentWidth = contentWidth;
+	this.contentHeight = contentHeight;
+	this.afterCreate();
+
+	this.btnAdd = $element.find('.profiles-btn-add');
+	this.formAdd = $element.find('.profiles-form-add');
+	this.items = new Array();
+
+	var self = this;
+	var i = 0;
+	$element.find('.profiles-tabs-item1').each(function () {
+		self.items[i] = new ProfilesTabsItem1($(this));
+		i++;
+	});
+
+	this.attachEvents();
+}
+
+ProfilesTabsBackgroundEducation.prototype.afterCreate = function () {
+	this.self.outerWidth(this.contentWidth);
+	this.mainBody.outerHeight(this.contentHeight);
+	this.mainBody.niceScroll();
+}
+
+ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnAdd.click(function () {
+		if ( self.btnAdd.hasClass( 'disabled' ) ) {
+			return false;
+		}
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
+		self.btnAdd.toggle();
+		self.formAdd.toggle();
+	});
+
+	this.formAdd.find('.profiles-btn-cancel').click(function () {
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
+		self.btnAdd.toggle();
+		self.formAdd.toggle();
+	});
+
+	this.formAdd.find('.profiles-btn-save').click(function () {
+		var data = {
+			'started': self.formAdd.find('[name=\"started\"]').val(),
+			'ended': self.formAdd.find('[name=\"ended\"]').val(),
+			'degree': self.formAdd.find('input[name=\"degree\"]').val(),
+			'school': self.formAdd.find('input[name=\"school\"]').val(),
+			'fieldofstudy': self.formAdd.find('input[name=\"fieldofstudy\"]').val()
+		};
+		var html = '<div class="profiles-tabs-item1">';
+		html 	+= '<div>';
+		html 	+= '<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.started) + '</span><input class="editors" type="text" value="' + parseInt(data.started) + '" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.ended) + '</span><input class="editors" type="text" value="' + parseInt(data.ended) + '" /></span></div>';
+		html	+= '</div>'
+		html	+= '<div class="profiles-tabs-item1-content">';
+		html	+= '<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>';
+		html	+= '<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>';
+		html	+= '<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>';
+		html	+= '<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>';
+		html	+= '<div class="profiles-tabs-value">';
+		html	+= '<div class="input-group">';
+		html	+= '<div class="profiles-tabs-value-item viewers">' + data.degree + '</div>';
+		html	+= '<span class="row-fluid editors"><span class="span4">Degree: </span><input type="text" value="' + data.degree + '" /></span>';
+		html	+= '</div>';
+		html	+= '<div class="input-group">';
+		html	+= '<div class="profiles-tabs-value-item viewers">' + data.school + '</div>';
+		html	+= '<span class="row-fluid editors"><span class="span4">School: </span><input type="text" value="' + data.school + '" /></span>';
+		html	+= '</div>';
+		html	+= '<div class="input-group">';
+		html	+= '<div class="profiles-tabs-value-item viewers">' + data.fieldofstudy + '</div>';
+		html	+= '<span class="row-fluid editors"><span class="span4">Field Of Study: </span><input type="text" value="' + data.fieldofstudy + '" /></span>';
+		html	+= '</div>';
+		html	+= '</div>';
+		html	+= '</div>';
+		html	+= '</div>';
+		$.ajax({
+			type: 'POST',
+			url: self.formAdd.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					self.btnAdd.toggle();
+					self.formAdd.after(html);
+					self.formAdd.toggle();
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
+	});
 }
 
 function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {

@@ -29,6 +29,7 @@ class ControllerAccountEdit extends Controller {
 			}
 		}
 
+		// educations
 		$educations_data = array();
 		foreach ($user->getMeta()->getBackground()->getEducations() as $education) {
 			$educations_data[] = array(
@@ -44,6 +45,7 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
+		// experiences
 		$experiences_data = array();
 		foreach ($user->getMeta()->getBackground()->getExperiences() as $experience) {
 			$experiences_data[] = array(
@@ -57,6 +59,7 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
+		// user data
 		$this->data['user'] = array(
 			'id' => $user->getId(),
 			'username' => $user->getUsername(),
@@ -74,6 +77,9 @@ class ControllerAccountEdit extends Controller {
 			'experiences' => $experiences_data
 		);
 
+		// orther const
+		$this->data['current_year'] = date('Y');
+		$this->data['before_year'] = $this->data['current_year'] - 100;
 		// print($user->getUsername());
 		// print($user ? 'not null' : 'null');
 		// exit;
@@ -155,6 +161,26 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateAddEducation() {
+		if ( !isset( $this->request->post['started'] ) ) {
+			$this->error['error_education_started'] = $this->language->get('error_education_started');
+		}
+
+		if ( !isset( $this->request->post['ended'] ) ) {
+			$this->error['error_education_ended'] = $this->language->get('error_education_ended');
+		}
+
+		if ( !isset( $this->request->post['degree'] ) || empty( $this->request->post['degree'] ) ) {
+			$this->error['error_education_degree'] = $this->language->get('error_education_degree');
+		}
+
+		if ( !isset( $this->request->post['school'] ) || empty( $this->request->post['school'] ) ) {
+			$this->error['error_education_school'] = $this->language->get('error_education_school');
+		}
+
+		if ( !isset( $this->request->post['fieldofstudy'] ) || empty( $this->request->post['fieldofstudy'] ) ) {
+			$this->error['error_education_fieldofstudy'] = $this->language->get('error_education_fieldofstudy');
+		}
+
 		if (!$this->error) {
 			return true;
 		} else {
@@ -200,13 +226,19 @@ class ControllerAccountEdit extends Controller {
 		$this->response->setOutput( json_encode( $json ) );
 	}
 
-	public function updateAddEducation() {
+	public function addEducation() {
 		$json = array();
 
 		if ( !$this->customer->isLogged() || !$this->validateAddEducation() ) {
 			$json['message'] = 'failed';
 		}else {
-			$json['message'] = 'success';
+			$this->load->model('account/customer');
+
+			if ( !$this->model_account_customer->addEducation( $this->request->post ) ) {
+				$json['message'] = 'failed';
+			}else {
+				$json['message'] = 'success';
+			}
 		}
 
 		$this->response->setOutput( json_encode( $json ) );

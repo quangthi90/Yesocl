@@ -128,7 +128,7 @@
 				</div>
 				<div class="profiles-tabs-main-body">
 					<div class="profiles-form-add editors" data-url="{{ link_add_education }}">
-						<div class="profiles-tabs-item1-label">From <input type="text" value="" /> to <input type="text" value="" /></div>
+						<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
