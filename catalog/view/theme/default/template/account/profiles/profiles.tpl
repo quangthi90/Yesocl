@@ -167,6 +167,7 @@
 						</div>
 					</div>
 					{% endfor %}
+
 				</div>
 			</div>
 			<div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left">
@@ -176,102 +177,119 @@
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
-					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+					<div class="profiles-form-add editors" data-url="{{ link_add_experience }}">
+						<div class="profiles-tabs-item1-label">From <input type="text" value="" /> to <input type="text" value="" /></div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">PG</div>
-								<div class="profiles-tabs-value-item">NTT Data VN</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="row-fluid"><div class="span4">Title: </div><input type="text" name="title" value="" /></div>
+								<div class="row-fluid"><div class="span4">Company: </div><input type="text"  name="company" value="" /></div>
+								<div class="row-fluid"><div class="span4">Location: </div><input type="text" name="location" value="" /></div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div>
+							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
+						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">PG</div>
-								<div class="profiles-tabs-value-item">NTT Data VN</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">PG</div>
+									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
+									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">Information Technology</div>
+									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div>
+							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
+						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">PG</div>
-								<div class="profiles-tabs-value-item">NTT Data VN</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">PG</div>
+									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
+									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">Information Technology</div>
+									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div>
+							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
+						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">PG</div>
-								<div class="profiles-tabs-value-item">NTT Data VN</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">PG</div>
+									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
+									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">Information Technology</div>
+									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
+								</div>
 							</div>
 						</div>
 					</div>
 
 					<div class="profiles-tabs-item1">
-						<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">Junly 13th</span><input class="profiles-tabs-input" type="text" value="Junly 13th" /> to <span class="profiles-tabs-value">now</span><input class="profiles-tabs-input" type="text" value="now" /></div>
+						<div>
+							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
+						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
+							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="profiles-tabs-value-item">PG</div>
-								<div class="profiles-tabs-value-item">NTT Data VN</div>
-								<div class="profiles-tabs-value-item">Information Technology</div>
-							</div>
-							<div class="profiles-tabs-input">
-								<div><input class="profiles-tabs-input" type="text" value="PG" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="NTT Data VN" /></div>
-								<div><input class="profiles-tabs-input" type="text" value="Information Technology" /></div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">PG</div>
+									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
+									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
+								</div>
+								<div class="input-group">
+									<div class="profiles-tabs-value-item viewers">Information Technology</div>
+									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
+								</div>
 							</div>
 						</div>
 					</div>
