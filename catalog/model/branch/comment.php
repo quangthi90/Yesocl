@@ -37,7 +37,7 @@ class ModelBranchComment extends Model {
 					break;
 				}
 
-				$comments[] = $query_comments[$i]->formatToCache();
+				$comments[] = $query_comments[$i];
 			}
 		}
 
