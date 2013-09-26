@@ -190,9 +190,10 @@
 						</div>
 					</div>
 
+					{% for experience in user.experiences %}
 					<div class="profiles-tabs-item1">
 						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
+							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">{{ experience.started }}</span><input class="editors" type="text" value="{{ experience.started }}" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">{{ experience.ended }}</span><input class="editors" type="text" value="{{ experience.ended }}" /></span></div>
 						</div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
@@ -201,98 +202,21 @@
 							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
 								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">PG</div>
-									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
+									<div class="profiles-tabs-value-item viewers">{{ experience.title }}</div>
+									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="{{ experience.title }}" /></span>
 								</div>
 								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
-									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
+									<div class="profiles-tabs-value-item viewers">{{ experience.company }}</div>
+									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="{{ experience.company }}" /></span>
 								</div>
 								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">Information Technology</div>
-									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
+									<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
+									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="{{ experience.location }}" /></span>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="profiles-tabs-item1">
-						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
-						</div>
-						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-							<div class="profiles-tabs-value">
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">PG</div>
-									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
-									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">Information Technology</div>
-									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="profiles-tabs-item1">
-						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
-						</div>
-						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-							<div class="profiles-tabs-value">
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">PG</div>
-									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
-									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">Information Technology</div>
-									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="profiles-tabs-item1">
-						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">Junly 13th</span><input class="editors" type="text" value="Junly 13th" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">now</span><input class="editors" type="text" value="now" /></span></div>
-						</div>
-						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-							<div class="profiles-tabs-value">
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">PG</div>
-									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="PG" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">NTT Data VN</div>
-									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="NTT Data VN" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">Information Technology</div>
-									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="Information Technology" /></span>
-								</div>
-							</div>
-						</div>
-					</div>
+					{% endfor %}
 				</div>	
 			</div>
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left">

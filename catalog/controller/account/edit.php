@@ -44,6 +44,19 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
+		$experiences_data = array();
+		foreach ($user->getMeta()->getBackground()->getExperiences() as $experience) {
+			$experiences_data[] = array(
+				'id' => $experience->getId(),
+				'title' => $experience->getTitle(),
+				'company' => $experience->getCompany(),
+				'location' => $experience->getLocation()->getLocation(),
+				'location_id' => $experience->getLocation()->getId(),
+				'started' => $experience->getStarted(),
+				'ended' => $experience->getEnded()
+				);
+		}
+
 		$this->data['user'] = array(
 			'id' => $user->getId(),
 			'username' => $user->getUsername(),
@@ -57,7 +70,8 @@ class ControllerAccountEdit extends Controller {
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
 			'sumary' => $user->getMeta()->getBackground()->getSumary(),
-			'educations' => $education_data
+			'educations' => $education_data,
+			'experiences' => $experiences_data
 		);
 
 		// print($user->getUsername());
