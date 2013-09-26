@@ -42,5 +42,39 @@ class ModelUserUser extends Model {
 
 		return null;
 	}
+
+	public function searchUserByKeyword( $data = array() ) {
+		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\User\User',
+				)
+    	);
+ 
+		$query_data = 'solrEmail_t:*' . $data['filter'] . '* OR ';
+		$query_data .= 'solrFullname_t:*' . $data['filter'] . '* OR ';
+		$query_data .= 'username_t:*' . $data['filter'] . '* ';
+
+		if ( isset( $data['start'] ) ) {
+			$data['start'] = (int)$data['start'];
+		}else {
+			$data['start'] = 0;
+		}
+
+		if ( isset( $data['limit'] ) ) {
+			$data['limit'] = (int)$data['limit'];
+		}else {
+			$data['limit'] = 10;
+		}
+
+		$query->setQuery( $query_data );
+		$query->setRows( $data['limit'] );
+		$query->setStart( $data['start'] );
+ 
+		return $this->client->execute( $query );
+	}
 }
 ?>

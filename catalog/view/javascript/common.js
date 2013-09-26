@@ -253,6 +253,50 @@ BlockFeed.prototype.putFeed = function() {
 	}
 }
 
+function SearchBtn( $el ){
+	var that = this;
+	this.$el			= $el;
+	this.url			= $el.data('url');
+	this.$keyword 		= $el.find('input[name=\'keyword\']');
+	this.$btn 			= $el.find('.search-btn');
+
+	// console.log(this.$btn.attr('class'));
+
+	this.attachEvents();
+}
+
+SearchBtn.prototype.attachEvents = function(){
+	var that = this;
+
+	this.$btn.click(function(e) {
+		e.preventDefault();
+		// console.log('hello');
+		if(that.$el.hasClass('disabled')) {
+			return false;
+		}
+
+		url = that.generateUrl();
+
+		if ( url ){
+			location = url;
+		}
+
+		return false;
+	});
+};
+	
+SearchBtn.prototype.generateUrl = function(){
+	var url = this.url;
+			 
+	var search = this.$keyword.val();
+	
+	if (search) {
+		url += encodeURIComponent(search);
+	}
+	
+	return url;
+};
+
 /*
 End Custom List Post
 */
@@ -262,5 +306,9 @@ $(document).ready(function() {
 	$(".timeago").timeago();
 	$(document).bind('HORIZONTAL_POST', function(e) {
 	    new HorizontalBlock($('.has-horizontal'));
+	});
+
+	$('.search-form').each(function(){
+		new SearchBtn( $(this) );
 	});
 });

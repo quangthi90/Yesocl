@@ -20,7 +20,8 @@ $_['routing']['HomePage']	 	= 'home/';
 $_['routing']['WallPage']	 	= 'wall-page/{user_slug}/';
 $_['routing']['ChangePassword']	= 'change-password/';
 $_['routing']['Logout']			= 'logout/';
-$_['routing']['SearchPage']		= 'search/{keyword}/';
+$_['routing']['SearchPage']		= 'search/';
+$_['routing']['Search']			= 'search/{keyword}/';
 
 // Friend
 $_['routing']['FriendPage']		= 'friend/{user_slug}/';
