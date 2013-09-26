@@ -130,8 +130,8 @@ class ControllerPostComment extends Controller {
                             )));
         }
 
-        if (isset($this->request->post['start']) && !empty($this->request->post['start'])) {
-            $data['start'] = $this->request->post['start'];
+        if ( !empty($this->request->post['page']) ) {
+            $data['page'] = $this->request->post['page'];
         }
 
         if (isset($this->request->post['limit']) && !empty($this->request->post['limit'])) {

@@ -496,7 +496,7 @@
 
         var getComments = function () {
             list_comment.off('scroll');
-            if(list_comment.scrollTop() == (list_comment.height() - list_comment.height()) && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
+            if(list_comment.scrollTop() == 0 && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
                 page++;
                 var data = {
                     'post_slug'	: comment_form.attr('data-post-id'),
