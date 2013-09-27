@@ -34,7 +34,15 @@ class ControllerCommonSearch extends Controller {
 				continue;
 			}
 
+			if ( $user->getMeta() ){
+				$meta = $user->getMeta()->formatToCache();
+			}else{
+				$meta = array();
+			}
+
 			$user = $user->formatToCache();
+
+			$user['meta'] = $meta;
 
 			if ( !array_key_exists($user['id'], $this->data['users']) ){
 				if ( !empty($user['avatar']) ){

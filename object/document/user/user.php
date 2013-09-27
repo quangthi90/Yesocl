@@ -90,7 +90,7 @@ Class User {
 	* Format array to save to Cache
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Branch
+	* @return: array User
 	*/
     public function formatToCache(){
 		$data = array(
