@@ -235,7 +235,32 @@ ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
 			'school': self.formAdd.find('input[name=\"school\"]').val(),
 			'fieldofstudy': self.formAdd.find('input[name=\"fieldofstudy\"]').val()
 		};
-		var html = '<div class="profiles-tabs-item1">';
+		$.ajax({
+			type: 'POST',
+			url: self.formAdd.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					self.addItem( json );
+					self.formAdd.toggle();
+					self.btnAdd.toggle();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
+	});
+}
+
+ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
+	var self = this;
+	var html = '<div class="profiles-tabs-item1">';
 		html 	+= '<div>';
 		html 	+= '<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.started) + '</span><input class="editors" type="text" value="' + parseInt(data.started) + '" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.ended) + '</span><input class="editors" type="text" value="' + parseInt(data.ended) + '" /></span></div>';
 		html	+= '</div>'
@@ -259,28 +284,12 @@ ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
 		html	+= '</div>';
 		html	+= '</div>';
 		html	+= '</div>';
-		html	+= '</div>';
-		$.ajax({
-			type: 'POST',
-			url: self.formAdd.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					self.btnAdd.toggle();
-					self.formAdd.after(html);
-					self.formAdd.toggle();
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
-		});
-	});
+		html	+= '</div>';alert('alo');
+	/*this.items.each( function () {alert($(this).find('[name=\"started\"]').val());
+		if ( $(this).find('[name=\"started\"]').val() < json.started || ($(this).find('[name=\"started\"]').val() == json.started && $(this).find('[name=\"ended\"]').val() < json.ended) ) {
+			$(this).before(html);
+		}
+	});*/
 }
 
 function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
@@ -487,21 +496,32 @@ ProfilesTabsItem1.prototype.attachEvents = function () {
 	});
 
 	this.btnRemove.click(function () {
-		alert('delete');
-		/*var data = {
-	
+		if ( self.btnRemove.hasClass('disabled') ) {
+			return false;
+		}
+
+		var data = {
+			'id': self.self.data('id')
 		};
 		
 		$.ajax({
 			type: 'POST',
-			url: ,
+			url: self.self.data('url'),
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-	
-			}
+				if ( json.message == 'success' ) {
+					if ( confirm('Are you want to remove it?') ) {
+						self.self.remove();
+					}
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
 		});
-		*/
 	});
 }
 

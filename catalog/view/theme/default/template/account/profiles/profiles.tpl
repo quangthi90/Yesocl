@@ -141,7 +141,7 @@
 					</div>
 
 					{% for education in user.educations %}
-					<div class="profiles-tabs-item1">
+					<div class="profiles-tabs-item1" data-id="{{ education.id }}" data-url="{{ link_remove_education }}">
 						<div>
 							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.started }}</span><input class="editors" type="text" value="{{ education.started }}" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.ended }}</span><input class="editors" type="text" value="{{ education.ended }}" /></span></div>
 						</div>

@@ -321,5 +321,31 @@ class ModelAccountCustomer extends Model {
 
 		return true;
 	}
+
+	public function removeEducation( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+				return false;
+			}
+
+			foreach ($customer->getMeta()->getBackground()->getEducations() as $education) {
+				if ( $education->getId() == $data['id'] ) {
+					$customer->getMeta()->getBackground()->getEducations()->removeElement( $education );
+				}
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
 }
 ?>

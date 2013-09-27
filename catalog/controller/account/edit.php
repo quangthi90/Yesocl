@@ -13,6 +13,7 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
 		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
+		$this->data['link_remove_education'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
 		$this->data['link_update_background_experience'] = $this->url->link('account/edit/updateBackgroundExperience', '', 'SSL');
 
 		$this->load->model('user/user');
@@ -29,10 +30,13 @@ class ControllerAccountEdit extends Controller {
 			}
 		}
 
-		// sort by started function
-		function sortByStarted($a, $b) {
+		// sort education function
+		function sortEducation($a, $b) {
 			if ( $a['started'] == $b['started'] ) {
-				return 0;
+				if ( $a['ended'] == $b['ended'] ) {
+					return 0;
+				}
+				return $a['ended'] > $b['ended'] ? -1 : 1;
 			}
 			return $a['started'] > $b['started'] ? -1 : 1;
 		}
@@ -53,7 +57,20 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
-		usort( $educations_data, 'sortBystarted');
+		usort( $educations_data, 'sortEducation');
+
+		// sort experience function
+		function sortExperience($a, $b) {
+			$c = strtotime( $a['started'] );
+			$d = strtotime( $b['ended'] );
+			if ( $c == $d ) {
+				if ( $c == $d ) {
+					return 0;
+				}
+				return $c > $d ? -1 : 1;
+			}
+			return $c > $d ? -1 : 1;
+		}
 
 		// experiences
 		$experiences_data = array();
@@ -68,6 +85,8 @@ class ControllerAccountEdit extends Controller {
 				'ended' => $experience->getEnded()->format('F Y')
 				);
 		}
+
+		usort( $experiences_data, 'sortExperience');
 
 		// user data
 		$this->data['user'] = array(
@@ -198,6 +217,18 @@ class ControllerAccountEdit extends Controller {
 		}
 	}
 
+	private function validateRemoveEducation() {
+		if ( !isset( $this->request->post['id'] ) || empty( $this->request->post['id'] ) ) {
+			$this->error['error_background_education_id'] = $this->language->get( 'error_background_education_id' );
+		}
+
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	private function validateBackgroundEducation() {
 		if (!$this->error) {
 			return true;
@@ -245,6 +276,29 @@ class ControllerAccountEdit extends Controller {
 			$this->load->model('account/customer');
 
 			if ( !$this->model_account_customer->addEducation( $this->request->post ) ) {
+				$json['message'] = 'failed';
+			}else {
+				$json['message'] = 'success';
+				$json['started'] = (int)$this->request->post['started'];
+				$json['ended'] = (int)$this->request->post['ended'];
+				$json['degree'] = $this->request->post['degree'];
+				$json['school'] = $this->request->post['school'];
+				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
+			}
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function removeEducation() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() || !$this->validateRemoveEducation() ) {
+			$json['message'] = 'failed';
+		}else {
+			$this->load->model('account/customer');
+
+			if ( !$this->model_account_customer->removeEducation( $this->request->post ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
