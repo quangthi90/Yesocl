@@ -13,35 +13,28 @@ class ControllerCommonSearch extends Controller {
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
-		$user = $this->model_user_user->getUserFull( $this->request->get );
+		$keyword = $this->request->get['keyword'];
 
-		if ( !$user ){
+		if ( empty($keyword) ){
 			return false;
 		}
 
-		$user_temp = $user->formatToCache();
+		$users = $this->model_user_user->searchUserByKeyword( array('keyword' => $keyword) );
 
-		if ( !empty($user_temp['avatar']) ){
-			$user_temp['avatar'] = $this->model_tool_image->resize( $user_temp['avatar'], 180, 180 );
-		}elseif ( !empty($user_temp['email']) ){
-            $user_temp['avatar'] = $this->model_tool_image->getGavatar( $user_temp['email'], 180 );
-        }else{
-        	$user_temp['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+		foreach ($users as $user) {
+			$user_ids[$user->getId()] = $user->getId();
 		}
 
-		$this->data['users'] = array( $user_temp['id'] => $user_temp );
+		$users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
 
-		$this->data['current_user_id'] = $user->getId();
+		$this->data['users'] = array();
 
-		$this->data['friends'] = array();
+		foreach ( $users as $user ) {
+			if ( $user->getId() == $this->customer->getId() ){
+				continue;
+			}
 
-		foreach ( $user->getFriends() as $friend ) {
-			$this->data['friends'][] = array(
-				'id' => $friend->getId(),
-				'group_id' => $friend->getGroupId() 
-			);
-
-			$user = $friend->getUser()->formatToCache();
+			$user = $user->formatToCache();
 
 			if ( !array_key_exists($user['id'], $this->data['users']) ){
 				if ( !empty($user['avatar']) ){
@@ -55,22 +48,11 @@ class ControllerCommonSearch extends Controller {
 				$this->data['users'][$user['id']] = $user;
 			}
 		}
-
-		$this->data['group'] = array();
-
-		foreach ( $user->getFriendGroups() as $group ) {
-			$this->data['group'][$group->getId()] = array(
-				'id' => $group->getId(),
-				'name' => $group->getName()
-			);
-		}
-
-		$this->data['current_user_id'] = $user->getId();
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/search.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/common/search.tpl';
 		} else {
-			$this->template = 'default/template/friend/friend.tpl';
+			$this->template = 'default/template/common/search.tpl';
 		}
 		
 		$this->children = array(

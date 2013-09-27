@@ -99,6 +99,6 @@ class ExtensionLoader
     }
 
     public function inArray( $el, $array ){
-        return array_key_exists($el, $array);
+        return in_array($el, $array);
     }
 }

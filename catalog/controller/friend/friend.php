@@ -64,8 +64,6 @@ class ControllerFriendFriend extends Controller {
 				'name' => $group->getName()
 			);
 		}
-
-		$this->data['current_user_id'] = $user->getId();
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';

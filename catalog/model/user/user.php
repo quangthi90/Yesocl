@@ -44,7 +44,7 @@ class ModelUserUser extends Model {
 	}
 
 	public function searchUserByKeyword( $data = array() ) {
-		if ( !isset( $data['filter'] ) || empty( $data['filter'] ) ) {
+		if ( !isset( $data['keyword'] ) || empty( $data['keyword'] ) ) {
 			return array();
 		}
 
@@ -54,9 +54,9 @@ class ModelUserUser extends Model {
 				)
     	);
  
-		$query_data = 'solrEmail_t:*' . $data['filter'] . '* OR ';
-		$query_data .= 'solrFullname_t:*' . $data['filter'] . '* OR ';
-		$query_data .= 'username_t:*' . $data['filter'] . '* ';
+		$query_data = 'solrEmail_t:*' . $data['keyword'] . '* OR ';
+		$query_data .= 'solrFullname_t:*' . $data['keyword'] . '* OR ';
+		$query_data .= 'username_t:*' . $data['keyword'] . '* ';
 
 		if ( isset( $data['start'] ) ) {
 			$data['start'] = (int)$data['start'];
