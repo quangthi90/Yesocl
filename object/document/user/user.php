@@ -69,6 +69,9 @@ Class User {
 	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Group") */
 	private $friendGroups = array();
 
+	/** @MongoDB\Collection */
+	private $friendRequests;
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -299,6 +302,18 @@ Class User {
 
 	public function getFriendGroups(){
 		return $this->friendGroups;
+	}
+
+	public function addFriendRequest( $friendRequest ){
+		$this->friendRequests[] = $friendRequest;
+	}
+
+	public function setFriendRequests( $friendRequests ){
+		$this->friendRequests = $friendRequests;
+	}
+
+	public function getFriendRequests(){
+		return $this->friendRequests;
 	}
 
 	/**

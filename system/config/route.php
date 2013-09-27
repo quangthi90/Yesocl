@@ -25,6 +25,7 @@ $_['route']['Search']			= 'common/search';
 
 // Friend
 $_['route']['FriendPage']		= 'friend/friend';
-$_['route']['FriendRequest']	= 'friend/request';
+$_['route']['RequestPage']		= 'friend/request';
+$_['route']['MakeFriend']		= 'friend/request/makeFriend';
 
 ?>

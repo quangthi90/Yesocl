@@ -34,6 +34,14 @@ class ControllerCommonSearch extends Controller {
 				continue;
 			}
 
+			if ( $user->getFriendRequests() && in_array($this->customer->getId(), $user->getFriendRequests()) ){
+				$friend_status = 2;
+			}elseif ( in_array($user->getId(), $this->customer->getFriendList()) ){
+				$friend_status = 1;
+			}else{
+				$friend_status = 0;
+			}
+
 			if ( $user->getMeta() ){
 				$meta = $user->getMeta()->formatToCache();
 			}else{
@@ -43,6 +51,7 @@ class ControllerCommonSearch extends Controller {
 			$user = $user->formatToCache();
 
 			$user['meta'] = $meta;
+			$user['fr_status'] = $friend_status;
 
 			if ( !array_key_exists($user['id'], $this->data['users']) ){
 				if ( !empty($user['avatar']) ){

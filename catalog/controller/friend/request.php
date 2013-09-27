@@ -79,5 +79,37 @@ class ControllerFriendRequest extends Controller {
 										
 		$this->response->setOutput($this->twig_render());
 	}
+
+	public function makeFriend(){
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+			$this->load->model('user/user');
+
+           	if ( empty($this->request->get['user_slug']) ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'user slug is empty'
+		        )));
+           	}
+
+           	$user_slug = $this->request->get['user_slug'];
+
+           	$result = $this->model_user_user->editUser( $user_slug, array('request_friend' => $this->customer->getId()) );
+
+           	if ( !$result ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'send request have error'
+		        )));
+           	}
+
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+	}
 }
 ?>

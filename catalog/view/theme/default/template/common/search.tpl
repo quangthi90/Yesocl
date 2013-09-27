@@ -18,7 +18,6 @@
                 </a>
             </div>
             <div class="block-content">
-                {% set friends = get_friend_list(true) %}
                 {{ block('friend_common_friend_list') }}
             </div>
         </div>

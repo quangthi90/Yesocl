@@ -25,6 +25,7 @@ $_['routing']['Search']			= 'search/{keyword}/';
 
 // Friend
 $_['routing']['FriendPage']		= 'friend/{user_slug}/';
-$_['routing']['FriendRequest']	= 'friend/{user_slug}/request';
+$_['routing']['RequestPage']	= 'friend/request/';
+$_['routing']['MakeFriend']		= 'friend/request/{user_slug}/';
 
 ?>

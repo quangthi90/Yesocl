@@ -1,5 +1,30 @@
 <?php
 class ModelUserUser extends Model {
+	public function editUser( $user_slug, $data = array() ){
+		$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user_slug );
+
+		if ( !$user ){
+			return false;
+		}
+
+		if ( !empty($data['request_friend']) ){
+			$requests = $user->getFriendRequests();
+
+			$key = array_search( $data['request_friend'], $requests );
+
+			if ( !$requests || $key === false ){
+				$user->addFriendRequest( $data['request_friend'] );
+			}else{
+				unset($requests[$key]);
+				$user->setFriendRequests( $requests );
+			}
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
 	public function getUser( $user_slug ){
 		$this->load->model('tool/cache');
 		$user_type = $this->config->get('common')['type']['user'];

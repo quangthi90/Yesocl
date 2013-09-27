@@ -276,7 +276,7 @@ SearchBtn.prototype.attachEvents = function(){
 
 	this.$btn.click(function(e) {
 		e.preventDefault();
-		// console.log('hello');
+		
 		if(that.$el.hasClass('disabled')) {
 			return false;
 		}

@@ -1,5 +1,5 @@
 <?php
-namespace Document\User;
+namespace Document\Friend;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** @MongoDB\EmbeddedDocument */

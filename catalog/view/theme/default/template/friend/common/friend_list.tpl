@@ -2,84 +2,50 @@
     {% if users is not defined %}
         {% set users = [] %}
     {% endif %}
-    {% if friends is defined %}
-        {% for user in users %}
-            {% if friends[user.id] is defined %}
-            <div class="block-content-item friend-item">
-                <a href="#" class="fl friend-img">
-                    <img src="{{ user.avatar }}">
-                </a>
-                <div class="fl friend-info">
-                    <a href="#" class="friend-name">{{ user.username }}</a>
-                    <ul class="friend-infolist">
-                        <li>{{ user.meta.industry }}</li>
-                        <li>100 friends</li>
-                    </ul>
-                </div>
-                <div class="friend-actions">
-                    <div class="dropdown">
-                        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Unfriend</a></li>
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Unfollow</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {% else %}
-            <div class="block-content-item friend-item">
-                <a href="#" class="fl friend-img">
-                    <img src="{{ user.avatar }}">
-                </a>
-                <div class="fl friend-info">
-                    <a href="#" class="friend-name">{{ user.username }}</a>
-                    <ul class="friend-infolist">
-                        <li>{{ user.meta.industry }}</li>
-                        <li>100 friends</li>
-                    </ul>
-                </div>
-                <div class="friend-actions">
-                    <a href="#" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</a>
-                    <a href="#" class="btn btn-yes btn-friend"><i class="icon-rss"></i> Follow</a>
-                </div>
-            </div>
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        {% for user in users %}
+    {% for user in users %}
         <div class="block-content-item friend-item">
             <a href="#" class="fl friend-img">
-                <img src="http://scienceseeker.org/images/icons/default-avatar.jpg">
+                <img src="{{ user.avatar }}">
             </a>
             <div class="fl friend-info">
-                <a href="#" class="friend-name">WMThiet</a>
+                <a href="#" class="friend-name">{{ user.username }}</a>
                 <ul class="friend-infolist">
-                    <li>IT Engineer</li>
+                    <li>{{ user.meta.industry }}</li>
                     <li>100 friends</li>
                 </ul>
             </div>
             <div class="friend-actions">
+                {% if user.fr_status == 0 %}
+                <button data-url="{{ path('MakeFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-friend"><i class="icon-plus-sign"></i> Make Friend</button>
+                {% elseif user.fr_status == 1 %}
                 <div class="dropdown">
-                    <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
+                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Unfriend</a></li>
+                        <li>
+                            <a >Unfriend</a>
+                        </li>
                     </ul>
                 </div>
+                {% else %}
                 <div class="dropdown">
+                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a class="btn-friend" href="#" data-url="{{ path('MakeFriend', {user_slug: user.slug}) }}">Cancel Request</a>
+                        </li>
+                    </ul>
+                </div>
+                {% endif %}
+                <!--div class="dropdown">
                     <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Unfollow</a></li>
                     </ul>
-                </div>
+                </div-->
+                <!--a href="#" class="btn btn-yes btn-follow"><i class="icon-rss"></i> Follow</a-->
             </div>
         </div>
-        {% endfor %}
-    {% endif %}
+    {% endfor %}
 {% endblock %}
 
 {% block friend_common_friend_list_javascript %}
