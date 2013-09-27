@@ -258,7 +258,7 @@ function SearchBtn( $el ){
 	this.$el			= $el;
 	this.url			= $el.data('url');
 	this.$keyword 		= $el.find('input[name=\'keyword\']');
-	this.$btn 			= $el.find('.search-btn');
+	this.$btn 			= $el.find('.btn-search');
 
 	// console.log(this.$btn.attr('class'));
 
@@ -267,6 +267,12 @@ function SearchBtn( $el ){
 
 SearchBtn.prototype.attachEvents = function(){
 	var that = this;
+
+	this.$keyword.keydown(function(e){
+		if (e.which == 13){
+			that.$btn.trigger('click');
+		}
+	});
 
 	this.$btn.click(function(e) {
 		e.preventDefault();

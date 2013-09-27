@@ -4,7 +4,7 @@
             <div class="search fl">
               <div class="search-form" data-url="{{ path('SearchPage') }}">
                   <div class="input-prepend">
-                    <button class="btn btn-yes search-btn" type="button" style="width: 120px;">Search</button>
+                    <button class="btn btn-yes btn-search" type="button" style="width: 120px;">Search</button>
                     <input name="keyword" class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
                 </div>
               </div>

@@ -83,6 +83,7 @@
 {% endblock %}
 
 {% block friend_common_friend_list_javascript %}
+    <script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
     <script type="text/javascript">
         $('#search-input').typeahead({
             source: function (query, process) {
