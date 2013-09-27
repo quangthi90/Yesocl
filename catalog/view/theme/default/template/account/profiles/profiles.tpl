@@ -143,7 +143,7 @@
 					{% for education in user.educations %}
 					<div class="profiles-tabs-item1" data-id="{{ education.id }}" data-url="{{ link_remove_education }}">
 						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.started }}</span><input class="editors" type="text" value="{{ education.started }}" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.ended }}</span><input class="editors" type="text" value="{{ education.ended }}" /></span></div>
+							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.started }}</span><input class="editors" type="text" name="started" value="{{ education.started }}" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.ended }}</span><input class="editors" type="text" name="ended" value="{{ education.ended }}" /></span></div>
 						</div>
 						<div class="profiles-tabs-item1-content">
 							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
@@ -153,15 +153,15 @@
 							<div class="profiles-tabs-value">
 								<div class="input-group">
 									<div class="profiles-tabs-value-item viewers">{{ education.degree }}</div>
-									<span class="row-fluid editors"><span class="span4">Degree: </span><input type="text" value="{{ education.degree }}" /></span>
+									<span class="row-fluid editors"><span class="span4">Degree: </span><input type="text" name="degree" value="{{ education.degree }}" /></span>
 								</div>
 								<div class="input-group">
 									<div class="profiles-tabs-value-item viewers">{{ education.school }}</div>
-									<span class="row-fluid editors"><span class="span4">School: </span><input type="text" value="{{ education.school }}" /></span>
+									<span class="row-fluid editors"><span class="span4">School: </span><input type="text" name="school" value="{{ education.school }}" /></span>
 								</div>
 								<div class="input-group">
 									<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
-									<span class="row-fluid editors"><span class="span4">Field Of Study: </span><input type="text" value="{{ education.fieldofstudy }}" /></span>
+									<span class="row-fluid editors"><span class="span4">Field Of Study: </span><input type="text" name="fieldofstudy" value="{{ education.fieldofstudy }}" /></span>
 								</div>
 							</div>
 						</div>

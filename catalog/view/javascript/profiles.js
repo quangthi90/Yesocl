@@ -235,6 +235,7 @@ ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
 			'school': self.formAdd.find('input[name=\"school\"]').val(),
 			'fieldofstudy': self.formAdd.find('input[name=\"fieldofstudy\"]').val()
 		};
+
 		$.ajax({
 			type: 'POST',
 			url: self.formAdd.data('url'),
@@ -284,12 +285,33 @@ ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
 		html	+= '</div>';
 		html	+= '</div>';
 		html	+= '</div>';
-		html	+= '</div>';alert('alo');
-	/*this.items.each( function () {alert($(this).find('[name=\"started\"]').val());
-		if ( $(this).find('[name=\"started\"]').val() < json.started || ($(this).find('[name=\"started\"]').val() == json.started && $(this).find('[name=\"ended\"]').val() < json.ended) ) {
+		html	+= '</div>';
+	for (var i = 0; i < this.items.length; i++) {
+		var started = parseInt(this.items[i].inputGroups.find('[name=\"started\"]').val());
+		var ended = parseInt(this.items[i].inputGroups.find('[name=\"ended\"]').val());
+		if ( started < parseInt(data.started) || ( started == parseInt(data.started) && ended < parseInt(data.ended) ) ) {
+			this.items[i].self.before(html);
+			break;
+		}else if( i == this.items.length - 1 ) {
+			this.items[i].self.after(html);
+		}
+	}
+	/*this.items.each( function () {alert('alo');
+		if ( this.inputGroups.find('[name=\"started\"]').val() < json.started || (this.inputGroups.find('[name=\"started\"]').val() == json.started && this.inputGroups.find('[name=\"ended\"]').val() < json.ended) ) {
 			$(this).before(html);
 		}
 	});*/
+}
+
+ProfilesTabsBackgroundEducation.prototype.refreshItems = function () {
+	this.items = new Array();
+
+	var self = this;
+	var i = 0;
+	$element.find('.profiles-tabs-item1').each(function () {
+		self.items[i] = new ProfilesTabsItem1($(this));
+		i++;
+	});
 }
 
 function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
@@ -503,6 +525,10 @@ ProfilesTabsItem1.prototype.attachEvents = function () {
 		var data = {
 			'id': self.self.data('id')
 		};
+
+		$('.profiles-btn-edit').addClass('disabled');
+		$('.profiles-btn-add').addClass('disabled');
+		$('.profiles-btn-remove').addClass('disabled');
 		
 		$.ajax({
 			type: 'POST',
@@ -522,6 +548,10 @@ ProfilesTabsItem1.prototype.attachEvents = function () {
 		    	alert(xhr.responseText);
 		 	}
 		});
+
+		$('.profiles-btn-edit').removeClass('disabled');
+		$('.profiles-btn-add').removeClass('disabled');
+		$('.profiles-btn-remove').removeClass('disabled');
 	});
 }
 
