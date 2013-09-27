@@ -1,9 +1,8 @@
 <?php
-class ModelToolUpload extends Model 
-{
+
+class ControllerFileUpload extends Controller{
+    
     protected $options;
-    // PHP File Upload error message codes:
-    // http://php.net/manual/en/features.file-upload.errors.php
     protected $error_messages = array(
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
@@ -23,11 +22,11 @@ class ModelToolUpload extends Model
         'min_height' => 'Image requires a minimum height'
     );
 
-    function __construct($options = null, $initialize = true, $error_messages = null) {
+    function index() {
         $this->options = array(
-            'script_url' => $this->get_full_url().'/',
-            'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/files/',
-            'upload_url' => $this->get_full_url().'/files/',
+            'script_url' => $this->get_full_url(),
+            'upload_dir' => DIR_IMAGE.'/data/upload/',
+            'upload_url' => $this->get_full_url().'image/data/upload/',
             'user_dirs' => false,
             'mkdir_mode' => 0755,
             'param_name' => 'files',
@@ -108,20 +107,12 @@ class ModelToolUpload extends Model
                     // Uncomment the following to force the max
                     // dimensions and e.g. create square thumbnails:
                     //'crop' => true,
-                    'max_width' => 80,
-                    'max_height' => 80
+                    'max_width' => 200,
+                    'max_height' => 150
                 )
             )
-        );
-        if ($options) {
-            $this->options = array_merge($this->options, $options);
-        }
-        if ($error_messages) {
-            $this->error_messages = array_merge($this->error_messages, $error_messages);
-        }
-        if ($initialize) {
-            $this->initialize();
-        }
+        );       
+        $this->initialize();
     }
 
     protected function initialize() {
@@ -148,13 +139,7 @@ class ModelToolUpload extends Model
 
     protected function get_full_url() {
         $https = !empty($_SERVER['HTTPS']) && strcasecmp($_SERVER['HTTPS'], 'on') === 0;
-        return
-            ($https ? 'https://' : 'http://').
-            (!empty($_SERVER['REMOTE_USER']) ? $_SERVER['REMOTE_USER'].'@' : '').
-            (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : ($_SERVER['SERVER_NAME'].
-            ($https && $_SERVER['SERVER_PORT'] === 443 ||
-            $_SERVER['SERVER_PORT'] === 80 ? '' : ':'.$_SERVER['SERVER_PORT']))).
-            substr($_SERVER['SCRIPT_NAME'],0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
+        return ($https ? HTTPS_SERVER : HTTP_SERVER);
     }
 
     protected function get_user_id() {
@@ -917,6 +902,7 @@ class ModelToolUpload extends Model
             preg_split('/[^0-9]+/', $this->get_server_var('HTTP_CONTENT_RANGE')) : null;
         $size =  $content_range ? $content_range[3] : null;
         $files = array();
+        
         if ($upload && is_array($upload['tmp_name'])) {
             // param_name is an array identifier like "files[]",
             // $_FILES is a multi-dimensional array:
@@ -930,7 +916,7 @@ class ModelToolUpload extends Model
                     $index,
                     $content_range
                 );
-            }
+            }            
         } else {
             // param_name is a single object identifier like "file",
             // $_FILES is a one-dimensional array:
@@ -947,6 +933,7 @@ class ModelToolUpload extends Model
                 $content_range
             );
         }
+        
         return $this->generate_response(
             array($this->options['param_name'] => $files),
             $print_response
@@ -976,5 +963,5 @@ class ModelToolUpload extends Model
         }
         return $this->generate_response($response, $print_response);
     }
-
 }
+?>

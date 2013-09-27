@@ -5,13 +5,7 @@
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
 			</div>
-			<div id="post_image_previewer">
-				<a href="#" class="post_image_item">
-					<img src="http://yestoc.com/wp-content/uploads/2013/08/hinh-anh-TTCK-tang-hay-giam.jpg" />
-				</a>
-				<a href="#" class="post_image_item">
-					<img src="http://yestoc.com/wp-content/uploads/2013/08/hinh-anh-TTCK-tang-hay-giam.jpg" />
-				</a>
+			<div id="post_image_previewer">				
 			</div>
 			<div id="progress">
 				<div class="bar" style="width: 0%;"></div>
@@ -21,7 +15,7 @@
 					<div class="span8 post_new_control">
 						<a href="#" title="Insert images" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" class="img-attach" title="Choose image to upload" name="files[]" data-url="index.php?route=upload/upload" multiple id="img-upload" />
+							<input type="file" data-no-uniform="true" class="img-attach" title="Choose image to upload" name="files[]" data-url="http://localhost/yesocl1/index.php?route=file/upload" multiple id="img-upload" />
 						</a>
 						<a href="#" title="Advance post" id="post_new_adv">
 							<i class="icon-external-link-sign icon-2x"></i>
@@ -149,8 +143,7 @@
 	});
 	$('#img-upload').fileupload({
         dataType: 'json',
-        done: function (e, data) {
-        	
+        done: function (e, data) {        	
             $.each(data.result.files, function (index, file) {
                 var html = '<a href="#" class="post_image_item"><img src="' + file.thumbnailUrl + '" /></a>';
 				$('#post_image_previewer').append($(html));
