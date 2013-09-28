@@ -235,13 +235,6 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		$('#add-background-education').after(form.self);
 	});
 /*
-	this.formAdd.find('.profiles-btn-cancel').click(function () {
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		self.btnAdd.toggle();
-		self.formAdd.toggle();
-	});
-
 	this.formAdd.find('.profiles-btn-save').click(function () {
 		var data = {
 			'started': self.formAdd.find('[name=\"started\"]').val(),
