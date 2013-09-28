@@ -63,7 +63,7 @@
 										data-post-type="{{ post_type }}">
 										<d>{{ post.like_count }}</d>
 									</a>
-									<a href="#" class="view-list-commenter" 
+									<a href="#" class="view-list-user" 
 										data-view-title="People comment on this post"  
 										data-view-type="comment" 
 										data-post-slug="{{ post.slug }}" 

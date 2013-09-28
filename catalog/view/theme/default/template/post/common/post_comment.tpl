@@ -21,12 +21,13 @@
 					<a class="fl comment-tool" href="#" title="Chèn hình">
 						<i class="icon-camera icon-2x"></i>
 					</a>
-					<a href="#" class="btn btn-yes fr btn-comment">Post</a>					
+					<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
+                                        <div class="fr comment-press-enter">Press Enter to send  <input type="checkbox" class="cb-press-enter" /></div>				
 				</div>
 			</form>		
 		</div>			
 	</div>
-	{% raw %}
+{% raw %}
 	<div id="item-template" class="hidden">
 		<div>
 			<div class="comment-item">
@@ -77,7 +78,7 @@
 			</div>
 		</div>
 	</div>
-	{% endraw %}
+{% endraw %}
 {% endblock %}
 
 {% block post_common_post_comment_javascript %}
