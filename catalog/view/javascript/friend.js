@@ -4,6 +4,7 @@
 		this.$el			= $el;
 		this.$friend_btn	= $el.find('.btn-friend');
 		this.friend_url		= this.$friend_btn.data('url');
+		this.is_cancel		= this.$friend_btn.data('cancel')
 
 		this.attachEvents();
 	}
@@ -37,7 +38,16 @@
 
 		promise.then(function(data) { 
 			if(data.success == 'ok'){
-				
+				var $htmlOutput = '';
+				if ( that.is_cancel == 0 ){
+					$htmlOutput = $.tmpl( $('#cancel-request'), {href: that.friend_url} );
+				}else{
+					$htmlOutput = $.tmpl( $('#send-request'), {href: that.friend_url} );
+				}
+
+				that.$el.find('.friend-group').remove();
+				that.$el.prepend( $htmlOutput );
+				new FriendAction( that.$el );
 			}
 
 		});		
@@ -48,10 +58,11 @@
 		var $old_icon = $el.find('i');
 		var f        = function() {
 			$spinner.remove();
-			$el.html($old_icon);
+			$el.prepend($old_icon);
 		};
 
-		$el.addClass('disabled').html($spinner);
+		$old_icon.remove();
+		$el.addClass('disabled').prepend($spinner);
 
 		promise.then(f, f);
 	};

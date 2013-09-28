@@ -102,6 +102,10 @@ class ControllerFriendRequest extends Controller {
 		        )));
            	}
 
+           	$data = array(
+           		
+           	);
+
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok'
 	        )));
