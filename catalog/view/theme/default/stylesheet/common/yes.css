@@ -1304,6 +1304,15 @@ label.in-line{
   padding: 2px 5px;
   height: 19px;
 }
+#yes-footer-bar .bar-wrapper .input-prepend .auto-hide, 
+#yes-footer-bar .bar-wrapper .input-append .auto-hide {
+  display: none;
+}
+#yes-footer-bar .bar-wrapper input[type='text'] {
+  height: 20px;
+  font-size: 15px;
+  width: 300px;
+}
 
 .bar-wrapper .language-box .input-append select{
   font-size: 12px;

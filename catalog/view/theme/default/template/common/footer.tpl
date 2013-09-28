@@ -3,7 +3,14 @@
         <div class="bar-wrapper">
           <div class="footer-toolbar fl">
               <div class="footer-toolbar-item search">
-                <a class="btn btn-yes" href="#"><i class="icon-search"></i> Search</a> 
+                <form>
+                  <div class="input-prepend">      
+                      <button class="btn btn-yes" type="button" style="width: 120px;">
+                        <i class="icon-search"></i>Search
+                      </button>
+                      <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
+                  </div>         
+                </form> 
               </div>       
               <div class="footer-toolbar-item notification-group">
                 <div class="dropup notification-item common">
