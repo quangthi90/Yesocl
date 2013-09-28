@@ -258,6 +258,10 @@ class ControllerPostComment extends Controller {
                             'like_count' => count($comment->getLikerIds())
                         )));
     }
+
+    public function getLikers(){
+        
+    }
     
     
 

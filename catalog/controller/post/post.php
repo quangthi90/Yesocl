@@ -139,6 +139,10 @@ class ControllerPostPost extends Controller {
             'like_count' => count($post->getLikerIds())
         )));
     }
+
+    public function getLikers(){
+        
+    }
     
 }
 ?>
