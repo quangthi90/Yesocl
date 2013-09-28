@@ -20,5 +20,6 @@ $_['routing']['HomePage']	 	= 'home';
 $_['routing']['WallPage']	 	= 'wall-page/{user_slug}';
 $_['routing']['ChangePassword']	= 'change-password';
 $_['routing']['Logout']			= 'logout';
+$_['routing']['ChangeAvatar']	= 'change-avatar';
 
 ?>

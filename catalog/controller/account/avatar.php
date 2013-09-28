@@ -2,7 +2,7 @@
 class ControllerAccountAvatar extends Controller {
 	private $error = array();
 	     
-  	public function index() {	
+  	public function index() {
     	//if (!$this->customer->isLogged()) {
       	//	$this->session->data['redirect'] = $this->url->link('account/avatar', '', 'SSL');
 
