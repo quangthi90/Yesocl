@@ -275,15 +275,17 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->addEducation( $this->request->post ) ) {
-				$json['message'] = 'failed';
-			}else {
+			if ( $id = $this->model_account_customer->addEducation( $this->request->post ) ) {
 				$json['message'] = 'success';
+				$json['id'] = $id;
 				$json['started'] = (int)$this->request->post['started'];
 				$json['ended'] = (int)$this->request->post['ended'];
 				$json['degree'] = $this->request->post['degree'];
 				$json['school'] = $this->request->post['school'];
 				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
+				$json['url'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
+			}else {
+				$json['message'] = 'failed';
 			}
 		}
 

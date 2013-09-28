@@ -192,11 +192,7 @@ function ProfilesTabsBackgroundEducation($element, contentWidth, contentHeight) 
 	this.items = new Array();
 
 	var self = this;
-	var i = 0;
-	$element.find('.profiles-tabs-item1').each(function () {
-		self.items[i] = new ProfilesTabsItem1($(this));
-		i++;
-	});
+	this.refreshItems();
 
 	this.attachEvents();
 }
@@ -244,6 +240,8 @@ ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
 			success: function (json) {
 				if ( json.message == 'success' ) {
 					self.addItem( json );
+					//self.refreshItems();
+					self.refreshFormAdd();
 					self.formAdd.toggle();
 					self.btnAdd.toggle();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
@@ -261,7 +259,7 @@ ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
 
 ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
 	var self = this;
-	var html = '<div class="profiles-tabs-item1">';
+	var html = '<div class="profiles-tabs-item1" data-id="' + data.id + '" data-url="' + data.url + '">';
 		html 	+= '<div>';
 		html 	+= '<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.started) + '</span><input class="editors" type="text" value="' + parseInt(data.started) + '" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.ended) + '</span><input class="editors" type="text" value="' + parseInt(data.ended) + '" /></span></div>';
 		html	+= '</div>'
@@ -286,7 +284,8 @@ ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
 		html	+= '</div>';
 		html	+= '</div>';
 		html	+= '</div>';
-	for (var i = 0; i < this.items.length; i++) {
+	this.formAdd.after(html);
+	/*for (var i = 0; i < this.items.length; i++) {
 		var started = parseInt(this.items[i].inputGroups.find('[name=\"started\"]').val());
 		var ended = parseInt(this.items[i].inputGroups.find('[name=\"ended\"]').val());
 		if ( started < parseInt(data.started) || ( started == parseInt(data.started) && ended < parseInt(data.ended) ) ) {
@@ -295,12 +294,7 @@ ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
 		}else if( i == this.items.length - 1 ) {
 			this.items[i].self.after(html);
 		}
-	}
-	/*this.items.each( function () {alert('alo');
-		if ( this.inputGroups.find('[name=\"started\"]').val() < json.started || (this.inputGroups.find('[name=\"started\"]').val() == json.started && this.inputGroups.find('[name=\"ended\"]').val() < json.ended) ) {
-			$(this).before(html);
-		}
-	});*/
+	}*/
 }
 
 ProfilesTabsBackgroundEducation.prototype.refreshItems = function () {
@@ -308,10 +302,17 @@ ProfilesTabsBackgroundEducation.prototype.refreshItems = function () {
 
 	var self = this;
 	var i = 0;
-	$element.find('.profiles-tabs-item1').each(function () {
+	this.self.find('.profiles-tabs-item1').each(function () {
 		self.items[i] = new ProfilesTabsItem1($(this));
 		i++;
 	});
+}
+
+ProfilesTabsBackgroundEducation.prototype.refreshFormAdd = function () {
+	this.formAdd.find('option[value=\"' + (new Date()).getFullYear() + '\"]').attr('selected', 'selected');
+	this.formAdd.find('[name=\"degree\"]').val("");
+	this.formAdd.find('[name=\"school\"]').val("");
+	this.formAdd.find('[name=\"fieldofstudy\"]').val("");
 }
 
 function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
@@ -489,13 +490,13 @@ ProfilesTabsItem1.prototype.attachEvents = function () {
 	});
 
 	this.btnCancel.click(function () {
-		$('.profiles-btn-edit').removeClass('disabled');
-		$('.profiles-btn-add').removeClass('disabled');
-		$('.profiles-btn-remove').removeClass('disabled');
 		self.btnEdit.toggle();
 		self.btnRemove.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
+		$('.profiles-btn-edit').removeClass('disabled');
+		$('.profiles-btn-add').removeClass('disabled');
+		$('.profiles-btn-remove').removeClass('disabled');
 		self.changeMode();
 	});
 

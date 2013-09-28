@@ -313,13 +313,13 @@ class ModelAccountCustomer extends Model {
 
 			$this->dm->persist( $education );
 			$customer->getMeta()->getBackground()->addEducation( $education );
+
+			$this->dm->flush();
+
+			return $education->getId();
 		}else {
 			return false;
 		}
-
-		$this->dm->flush();
-
-		return true;
 	}
 
 	public function removeEducation( $data = array() ) {
