@@ -21,6 +21,7 @@
 			    <ul class="dropdown-menu">
 			      <li><a href="#"><i class="icon-cogs"></i> Privacy settings</a></li>
 			      <li><a href="{{ path('ChangePassword') }}"><i class="icon-unlock-alt"></i> Change password</a></li>
+			      <li><a href="{{ path('ChangeAvatar') }}"><i class="icon-user"></i> Change avatar</a></li>
 			      <li class="divider"></li>
 			      <li><a href="{{ path('Logout') }}"><i class="icon-signout"></i> Log out</a></li>				      
 			    </ul>
