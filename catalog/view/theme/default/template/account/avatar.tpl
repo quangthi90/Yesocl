@@ -15,7 +15,7 @@
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            
             <form action="{{ action.avatar }}" method="post">
-                <!--<div class="thumb fileupload fileupload-new" data-provides="fileupload">
+                <div class="thumb fileupload fileupload-new" data-provides="fileupload">
                     <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="{{ img_avatar }}" style="width: 150px; height: 150px;" /></div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
                     <div>
@@ -26,7 +26,11 @@
                         </span>
                         <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" onclick="$('.thumb img').attr('src', '{{ img_default }}');">{{ text_remove}}</a>
                     </div>
-                </div>-->
+                </div>
+                <div class="btns">
+                     <button type="submit" class="btn btn-success">Save</button>   
+                     <a class="btn" href="{{ action.home }}">Cancel</a>   
+                </div>
             </form>     
         </div>
         <div class="frm-footer">            
@@ -37,6 +41,7 @@
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-fileupload.js') }}"></script>
 <script type="text/javascript">
 /*
 Changing the image at runtime by using JavaScript.

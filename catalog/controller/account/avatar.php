@@ -2,7 +2,7 @@
 class ControllerAccountAvatar extends Controller {
 	private $error = array();
 	     
-  	public function index() {
+  	public function index() {	
     	//if (!$this->customer->isLogged()) {
       	//	$this->session->data['redirect'] = $this->url->link('account/avatar', '', 'SSL');
 
@@ -57,7 +57,7 @@ class ControllerAccountAvatar extends Controller {
 		}
 	
     	$this->data['action']['avatar'] = $this->url->link('account/avatar', '', 'SSL');
-    	//$this->data['action']['home'] = $this->url->link('common/home', '', 'SSL');
+    	$this->data['action']['home'] = $this->url->link('common/home', '', 'SSL');
 
 		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 
