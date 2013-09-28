@@ -238,13 +238,6 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		
 	});
 /*
-	this.formAdd.find('.profiles-btn-cancel').click(function () {
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		self.btnAdd.toggle();
-		self.formAdd.toggle();
-	});
-
 	this.formAdd.find('.profiles-btn-save').click(function () {
 		var data = {
 			'started': self.formAdd.find('[name=\"started\"]').val(),
