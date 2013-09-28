@@ -270,6 +270,8 @@ class ModelAccountCustomer extends Model {
 			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
 				$user->setAvatar( $data['avatar'] );
 			}
+		}else {
+			return false;
 		}
 
 		// Save to DB
@@ -278,6 +280,8 @@ class ModelAccountCustomer extends Model {
 
 		$this->load->model('tool/cache');
 		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
+
+		return true;
 	}
 }
 ?>
