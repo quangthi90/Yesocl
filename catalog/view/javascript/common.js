@@ -302,6 +302,73 @@ SearchBtn.prototype.generateUrl = function(){
 	return url;
 };
 
+function NotifyFriendBtn( $el ){
+	this.$el			= $el;
+	this.$accept_btn	= $el.find('.btn-accept');
+	this.accept_url		= this.$accept_btn.data('url');
+	this.$ignore_btn	= $el.find('.btn-ignore');
+	this.ignore_url		= this.$ignore_btn.data('url');
+
+	this.attachEvents();
+}
+
+NotifyFriendBtn.prototype.attachEvents = function(){
+	var that = this;
+
+	this.$accept_btn.click(function(e) {
+		e.preventDefault();
+		
+		if(that.$el.hasClass('disabled')) {
+			return false;
+		}
+
+		that.submit( that.$accept_btn, that.accept_url );
+
+		return false;
+	});
+
+	this.$ignore_btn.click(function(e) {
+		e.preventDefault();
+		
+		if(that.$el.hasClass('disabled')) {
+			return false;
+		}
+
+		that.submit( that.$ignore_btn, that.ignore_url );
+
+		return false;
+	});
+};
+	
+NotifyFriendBtn.prototype.submit = function($button, url){
+	var promise = $.ajax({
+		type: 'POST',
+		url: url,
+		dataType: 'json'
+	});
+
+	this.triggerProgress($button, promise);
+
+	promise.then(function(data) { 
+		if(data.success == 'ok'){ 
+			that.$el.remove();
+		}
+	});	
+};
+
+NotifyFriendBtn.prototype.triggerProgress = function($el, promise){
+	var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+	var $old_icon = $el.find('i');
+	var f        = function() {
+		$spinner.remove();
+		$el.html($old_icon);
+	};
+
+	$el.addClass('disabled').html($spinner);
+
+	promise.then(f, f);
+};
+
 /*
 End Custom List Post
 */
@@ -315,5 +382,9 @@ $(document).ready(function() {
 
 	$('.search-form').each(function(){
 		new SearchBtn( $(this) );
+	});
+
+	$('.notify-actions').each(function(){
+		new NotifyFriendBtn( $(this) );
 	});
 });

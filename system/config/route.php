@@ -27,5 +27,7 @@ $_['route']['Search']			= 'common/search';
 $_['route']['FriendPage']		= 'friend/friend';
 $_['route']['RequestPage']		= 'friend/request';
 $_['route']['MakeFriend']		= 'friend/request/makeFriend';
+$_['route']['ConfirmFriend']	= 'friend/request/confirm';
+$_['route']['IgnoreFriend']		= 'friend/request/ignore';
 
 ?>

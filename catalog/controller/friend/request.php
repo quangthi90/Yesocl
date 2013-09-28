@@ -102,9 +102,98 @@ class ControllerFriendRequest extends Controller {
 		        )));
            	}
 
-           	$data = array(
-           		
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+	}
+
+	public function confirmFriend(){
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+			$this->load->model('user/user');
+
+           	if ( empty($this->request->get['user_slug']) ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'user slug is empty'
+		        )));
+           	}
+
+           	$friend = $this->model_user_user->getUserFull( $this->request->get );
+
+           	if ( !$friend ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'friend is empty'
+		        )));
+           	}
+
+           	$user_slug = $this->customer->getSlug();
+
+           	$result = $this->model_user_user->editUser( 
+           		$user_slug,
+           		array(
+           			'request_friend' => $friend->getId(),
+           			'friend' => $friend
+           		) 
            	);
+
+           	if ( !$result ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'send request have error'
+		        )));
+           	}
+
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+	}
+
+	public function ignoreFriend(){
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+			$this->load->model('user/user');
+
+           	if ( empty($this->request->get['user_slug']) ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'user slug is empty'
+		        )));
+           	}
+
+           	$friend = $this->model_user_user->getUserFull( $this->request->get );
+
+           	if ( !$friend ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'friend is empty'
+		        )));
+           	}
+
+           	$user_slug = $this->customer->getSlug();
+
+           	$result = $this->model_user_user->editUser( 
+           		$user_slug,
+           		array(
+           			'request_friend' => $friend->getId()
+           		) 
+           	);
+
+           	if ( !$result ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'send request have error'
+		        )));
+           	}
 
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok'

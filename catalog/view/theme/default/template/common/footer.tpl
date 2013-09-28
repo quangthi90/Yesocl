@@ -137,8 +137,8 @@
                   </a>
                   <ul class="dropdown-menu notification-content-list">
                     {% for user in requests %}
-                    <li class="notification-content-item">
-                      <a href="#" class="notification-content-item-img">
+                    <li class="notification-content-item notify-actions">
+                      <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="notification-content-item-img">
                         <img src="{{ user.avatar }}" alt="{{ user.username }}">
                       </a>
                       <div class="notification-content-item-detail">
@@ -146,8 +146,8 @@
                           <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
                         </div>
                         <div>
-                          <a href="#" class="btn btn-yes">Accept</a>
-                          <a href="#" class="btn btn-yes">Irnoge </a>
+                          <a href="#" data-url="{{ path('ConfirmFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-accept">Accept</a>
+                          <a href="#" data-url="{{ path('IgnoreFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-ignore">Ignore </a>
                         </div>
                       </div>
                     </li>

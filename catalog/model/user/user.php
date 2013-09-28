@@ -1,4 +1,6 @@
 <?php
+use Document\Friend\Friend;
+
 class ModelUserUser extends Model {
 	public function editUser( $user_slug, $data = array() ){
 		$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user_slug );
@@ -18,6 +20,12 @@ class ModelUserUser extends Model {
 				unset($requests[$key]);
 				$user->setFriendRequests( $requests );
 			}
+		}
+
+		if ( !empty($data['friend']) ){
+			$friend = new Friend();
+			$friend->setUser( $data['friend'] );
+			$user->addFriend( $friend );
 		}
 
 		$this->dm->flush();
