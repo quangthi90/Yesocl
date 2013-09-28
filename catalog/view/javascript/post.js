@@ -2,6 +2,7 @@
     var comment_box = $('#comment-box');
     var comment_form = $('.comment-form');
     var list_comment = $('#comment-box .y-box-content');
+    var posts = []; 
     var page = 1;
 
     function UserInfo(user_name, user_img, user_url, number_friend, is_friend, is_follow) {
@@ -52,6 +53,11 @@
         }
 		
         //D? li?u test demo:
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.url,
+            dataType: 'json'
+        });
         data = new Array();
         var user1 = new UserInfo('User 1', 'image/template/user-avatar.png', '#', 10, 0, 1);
         var user2 = new UserInfo('User 2', 'image/template/user-avatar.png', '#', 10, 0, 1);
@@ -169,6 +175,8 @@
 
         });		
     };
+    
+    
 		
     LikePostBtn.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-refresh icon-spin"></i>');
@@ -223,7 +231,6 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
-            alert(data.success);
             if(data.success == 'ok'){
                 that.$el.find('d').html( data.like_count ); 
 
@@ -262,7 +269,7 @@
         this.comment_count	= $el.data('comment-count');
         this.comment_url	= $el.data('comment-url');
         this.url			= $el.data('url');
-
+        this.comments = [];
         this.attachEvents();
     }
 
@@ -286,45 +293,80 @@
 
     CommentBtn.prototype.submit = function($button){
         var that = this;
+        if (that.comments.length == 0){
+            var promise = $.ajax({
+                type: 'POST',
+                url:  this.url,
+                dataType: 'json'
+            });
+            this.triggerProgress($button, promise);
+            promise.then(function(data) { 
+                if(data.success == 'ok'){
+                    $('.comment-body').html('');
 
-        var promise = $.ajax({
-            type: 'POST',
-            url:  this.url,
-            dataType: 'json'
-        });
-
-        this.triggerProgress($button, promise);
-
-        promise.then(function(data) { 
-            if(data.success == 'ok'){
-                $('.comment-body').html('');
-
-                var htmlOutput = '';
-                for (key in data.comments) {
-                    htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
-                }
+                    var htmlOutput = '';
+                    for (key in data.comments) {
+                        that.comments.push(data.comments[key]);
+                        htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
+                    }
 				
-                htmlOutput += '<div id="add-more-item"></div>';
-                comment_box.find('.comment-body').html(htmlOutput);
-                comment_box.find('.y-box-header span').html(that.comment_count);
-                comment_form.attr('data-url', that.comment_url);
-                page = 1;
-                $('.comment-body').animate({
-                    scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-                }, 1000);
-                new CommentForm(comment_form);
+                    htmlOutput += '<div id="add-more-item"></div>';
+                    comment_box.find('.comment-body').html(htmlOutput);
+                    comment_box.find('.y-box-header span').html(that.comment_count);
+                    comment_form.attr('data-url', that.comment_url);
+                    page = 1;
+                    $('.comment-body').animate({
+                        scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
+                    }, 1000);
+                    new CommentForm(comment_form);
 
-                $('.comment-item .like-comment').each(function(){
-                    new LikeCommentBtn($(this));			
-                });
+                    $('.comment-item .like-comment').each(function(){
+                        new LikeCommentBtn($(this));			
+                    });
 
-                jQuery(".timeago").timeago();
+                    jQuery(".timeago").timeago();
+                }
+
+                if ( $button.parents('.post').attr('class') != undefined ){
+                    showCommentForCurrentPost($button.parents('.post'));
+                }
+            });
+        }else{
+            var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+            var $old_icon = that.$el.find('i');
+            var f        = function() {
+                $spinner.remove();
+                that.$el.html($old_icon);
+            };
+
+            that.$el.addClass('disabled').html($spinner);
+            $('.comment-body').html('');
+
+            var htmlOutput = '';
+            for (key in that.comments) {
+                htmlOutput += $.tmpl( $('#item-template'), that.comments[key] ).html();
             }
+				
+            htmlOutput += '<div id="add-more-item"></div>';
+            comment_box.find('.comment-body').html(htmlOutput);
+            comment_box.find('.y-box-header span').html(that.comment_count);
+            comment_form.attr('data-url', that.comment_url);
+            page = 1;
+            $('.comment-body').animate({
+                scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
+            }, 1000);
+            new CommentForm(comment_form);
 
+            $('.comment-item .like-comment').each(function(){
+                new LikeCommentBtn($(this));			
+            });
+
+            jQuery(".timeago").timeago();
             if ( $button.parents('.post').attr('class') != undefined ){
                 showCommentForCurrentPost($button.parents('.post'));
             }
-        });
+            f();
+        }
     };
 
     CommentBtn.prototype.triggerProgress = function($el, promise)
@@ -340,12 +382,14 @@
 
         promise.then(f, f);
     };
+    
 
     function CommentForm( $el ){
         var that = this;
         this.$el			= $el;
         this.$content		= $el.find('textarea');
         this.$comment_btn	= $el.find('.btn-comment');
+        this.$comments = [];
         this.$press_enter_cb  = $el.find('.cb-press-enter');
         this.attachEvents();
         if(that.$press_enter_cb.parent().hasClass('checked')){
@@ -376,6 +420,31 @@
 
             return false;
         });
+        
+        this.$press_enter_cb.click(function(e) {
+            if(that.$press_enter_cb.parent().hasClass('checked')){
+                that.$comment_btn.hide("slow");
+            }else{
+                that.$comment_btn.show("slow");
+            }
+        });
+                
+        this.$content.keypress(function(e){
+            if(that.$press_enter_cb.parent().hasClass('checked') && e.which == 13){
+                if(that.validate() == false){
+                    return false;
+                }
+
+                that.url  = that.$el.attr('data-url');
+
+                that.data = {
+                    content   : that.$content.val()
+                };
+
+                that.submit(that.$comment_btn);
+                return false;
+            }
+        });
     };
 
     CommentForm.prototype.submit = function($button){
@@ -392,6 +461,10 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
+                that.comments.push(data.comment);
+                if(that.comments.length > 10){
+                    that.comments.pop();
+                }
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
                 $('#add-more-item').before(htmlOutput);
                 that.$content.val('');
@@ -408,7 +481,7 @@
                 $('.open-comment.disabled').parent().find('d').html( comment_count );
                 $curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
-
+                $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 $('.comment-item .like-comment').each(function(){
                     new LikeCommentBtn($(this));			
                 });
@@ -469,7 +542,7 @@
     }
 
     $(function(){
-        $('.who-action .view-list-user').each(function(){
+        $('.who-action .view-list-liker').each(function(){
             new UserListViewer($(this));
         });
 
@@ -478,7 +551,7 @@
         });
 
         $('.open-comment').each(function(){
-            new CommentBtn($(this));			
+            posts.push(new CommentBtn($(this)));			
         });
 
         $('.comment-container').on('click', '.y-box-header .close', function(){
@@ -519,6 +592,7 @@
                             }
                             $('.comment-body').find('.loading').remove();
                             $('.comment-body').prepend(htmlOutput);
+                            jQuery(".timeago").timeago();
                         }
                     }
                 });
@@ -537,8 +611,10 @@
             });
 
             $('.open-comment').each(function(){
-                new CommentBtn($(this));			
+                new CommentBtn($(this));
             });
+            
         });
     });
+    
 }(jQuery, document));

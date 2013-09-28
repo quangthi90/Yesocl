@@ -91,6 +91,7 @@ class ControllerPostComment extends Controller {
             'comment_id' => $comment['id']
                 ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+        $comment['content'] = str_replace("\n", "<br />", $comment['content']);
         $comment['is_liked'] = false;
             
         return $this->response->setOutput(json_encode(array(
@@ -156,7 +157,6 @@ class ControllerPostComment extends Controller {
 
         $this->load->model('user/user');
         $this->load->model('tool/image');
-
         foreach ( $comments as $key => $comment ) {
             if ( in_array($this->customer->getId(), $comment->getLikerIds()) ){
                 $liked = true;
@@ -258,6 +258,8 @@ class ControllerPostComment extends Controller {
                             'like_count' => count($comment->getLikerIds())
                         )));
     }
+    
+    
 
 }
 
