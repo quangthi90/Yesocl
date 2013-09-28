@@ -16,6 +16,8 @@ class ControllerCommonSidebarControl extends Controller {
 			'username' => $this->customer->getUsername(),
 			'href' => $this->url->link('account/edit', 'user_slug=' . $this->customer->getSlug(), 'SSL')
 		);
+
+		$this->data['link_change_avatar'] = $this->url->link('account/avatar', 'user_slug=' . $this->customer->getSlug(), 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/sidebar_control.tpl';
