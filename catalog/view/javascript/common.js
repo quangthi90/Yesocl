@@ -254,7 +254,6 @@ BlockFeed.prototype.putFeed = function() {
 }
 
 function SearchBtn( $el ){
-	var that = this;
 	this.$el			= $el;
 	this.url			= $el.data('url');
 	this.$keyword 		= $el.find('input[name=\'keyword\']');

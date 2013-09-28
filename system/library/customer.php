@@ -9,6 +9,7 @@ class Customer {
 	private $customer_group_id;
 	private $slug;
 	private $friend_list;
+	private $friend_requests;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -32,6 +33,7 @@ class Customer {
 				$this->slug = $customer_query->getSlug();
 				$this->avatar = $customer_query->getAvatar();
 				$this->friend_list = $customer_query->getFriends();
+				$this->friend_requests = $customer_query->getFriendRequests();
 			
 				// $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer_ip WHERE customer_id = '" . (int)$this->session->data['customer_id'] . "' AND ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "'");
 				
@@ -126,6 +128,10 @@ class Customer {
 
   	public function getFriendList(){
   		return $this->friend_list;
+  	}
+
+  	public function getFriendRequests(){
+  		return $this->friend_requests;
   	}
 	
   	public function getBalance() {
