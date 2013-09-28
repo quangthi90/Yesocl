@@ -12,12 +12,13 @@
     <div id="y-main-content" class="has-horizontal account-friend" style="width: 9999px; padding-right: 250px;">
         <div class="feed-block">
             <div class="block-header">
-                <a class="block-title fl" href="#">Friend</a>  
+                <a class="block-title fl" href="#">Search</a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
                 </a>
             </div>
             <div class="block-content">
+                {% set friends = users %}
                 {{ block('friend_common_friend_list') }}
             </div>
         </div>

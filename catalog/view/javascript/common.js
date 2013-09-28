@@ -341,6 +341,8 @@ NotifyFriendBtn.prototype.attachEvents = function(){
 };
 	
 NotifyFriendBtn.prototype.submit = function($button, url){
+	var that = this;
+
 	var promise = $.ajax({
 		type: 'POST',
 		url: url,
@@ -350,7 +352,15 @@ NotifyFriendBtn.prototype.submit = function($button, url){
 	this.triggerProgress($button, promise);
 
 	promise.then(function(data) { 
-		if(data.success == 'ok'){ 
+		if(data.success == 'ok'){			
+			var $group = that.$el.parents('.notification-item').find('.notification-item-count');
+			
+			var count_request = parseInt($group.data('count'), 10) - 1;
+			
+			$group.data('count', count_request);
+
+			$group.html(count_request).addClass('hidden');
+			
 			that.$el.remove();
 		}
 	});	

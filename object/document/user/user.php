@@ -140,6 +140,26 @@ Class User {
 		return false;
 	}
 
+	public function getFriendById( $friend_id ){
+		foreach ( $this->friends as $friend ) {
+			if ( $friend->getUser() && $friend->getUser()->getId() == $friend_id ){
+				return $friend;
+			}
+		}
+
+		return null;
+	}
+
+	public function getFriendBySlug( $friend_slug ){
+		foreach ( $this->friends as $friend ) {
+			if ( $friend->getUser() && $friend->getUser()->getSlug() == $friend_slug){
+				return $friend;
+			}
+		}
+
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}

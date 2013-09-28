@@ -132,7 +132,7 @@
                     <i class="icon-user"></i>
                     <span class="notification-item-name">Friend</span>
                     {% if requests|length > 0 %}
-                    <span class="notification-item-count">{{ requests|length }}</span>
+                    <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>
                     {% endif %}
                   </a>
                   <ul class="dropdown-menu notification-content-list">

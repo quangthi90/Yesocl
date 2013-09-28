@@ -112,7 +112,7 @@ class ControllerFriendRequest extends Controller {
         )));
 	}
 
-	public function confirmFriend(){
+	public function confirm(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			$this->load->model('user/user');
 
@@ -134,13 +134,22 @@ class ControllerFriendRequest extends Controller {
 
            	$user_slug = $this->customer->getSlug();
 
-           	$result = $this->model_user_user->editUser( 
+           	$result1 = $this->model_user_user->editUser( 
            		$user_slug,
            		array(
            			'request_friend' => $friend->getId(),
            			'friend' => $friend
            		) 
            	);
+
+           	$result2 = $this->model_user_user->editUser( 
+           		$friend->getSlug(),
+           		array(
+           			'friend' => $this->customer->getUser()
+           		) 
+           	);
+
+           	$result = $result1 * $result2;
 
            	if ( !$result ){
            		return $this->response->setOutput(json_encode(array(
@@ -159,7 +168,7 @@ class ControllerFriendRequest extends Controller {
         )));
 	}
 
-	public function ignoreFriend(){
+	public function ignore(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			$this->load->model('user/user');
 

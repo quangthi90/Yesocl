@@ -36,12 +36,12 @@ class ControllerCommonSearch extends Controller {
 
 			if ( $user->getFriendRequests() && in_array($this->customer->getId(), $user->getFriendRequests()) ){
 				$friend_status = 2;
-			}elseif ( in_array($user->getId(), $this->customer->getFriendList()) ){
+			}elseif ( $this->customer->getUser()->getFriendById($user->getId()) ){
 				$friend_status = 1;
 			}else{
 				$friend_status = 0;
 			}
-
+			
 			if ( $user->getMeta() ){
 				$meta = $user->getMeta()->formatToCache();
 			}else{

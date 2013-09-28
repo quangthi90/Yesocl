@@ -24,7 +24,6 @@
                 </a>
             </div>
             <div class="block-content">
-                {% set users = friends %}
                 {{ block('friend_common_friend_list') }}
             </div>
         </div>  

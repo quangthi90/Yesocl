@@ -13,7 +13,11 @@ class ControllerFriendFriend extends Controller {
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
-		$user = $this->model_user_user->getUserFull( $this->request->get );
+		if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
+			$user = $this->model_user_user->getUserFull( $this->request->get );
+		}else{
+			$user = $this->customer->getUser();
+		}
 
 		if ( !$user ){
 			return false;
@@ -36,23 +40,38 @@ class ControllerFriendFriend extends Controller {
 		$this->data['friends'] = array();
 
 		foreach ( $user->getFriends() as $friend ) {
-			$this->data['friends'][] = array(
-				'id' => $friend->getId(),
-				'group_id' => $friend->getGroupId() 
-			);
+			$friend = $friend->getUser();
 
-			$user = $friend->getUser()->formatToCache();
+			if ( $friend->getFriendRequests() && in_array($this->customer->getId(), $friend->getFriendRequests()) ){
+				$friend_status = 2;
+			}elseif ( $this->customer->getUser()->getFriendById($friend->getId()) ){
+				$friend_status = 1;
+			}else{
+				$friend_status = 0;
+			}
 
-			if ( !array_key_exists($user['id'], $this->data['users']) ){
-				if ( !empty($user['avatar']) ){
-					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
-				}elseif ( !empty($user['email']) ){
-		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
+			if ( $friend->getMeta() ){
+				$meta = $friend->getMeta()->formatToCache();
+			}else{
+				$meta = array();
+			}
+
+			$friend = $friend->formatToCache();
+
+			$friend['meta'] = $meta;
+			$friend['fr_status'] = $friend_status;
+
+			if ( !array_key_exists($friend['id'], $this->data['users']) ){
+				if ( !empty($friend['avatar']) ){
+					$friend['avatar'] = $this->model_tool_image->resize( $friend['avatar'], 180, 180 );
+				}elseif ( !empty($friend['email']) ){
+		            $friend['avatar'] = $this->model_tool_image->getGavatar( $friend['email'], 180 );
 		        }else{
-		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+		        	$friend['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
 				}
 
-				$this->data['users'][$user['id']] = $user;
+				$this->data['users'][$friend['id']] = $friend;
+				$this->data['friends'][$friend['id']] = $friend;
 			}
 		}
 
