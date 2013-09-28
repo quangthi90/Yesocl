@@ -110,11 +110,13 @@
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Sumary</a>
 					<a class="profiles-btn-edit btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-					<a class="profiles-btn-cancel hidden btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-					<a class="profiles-btn-save hidden btn profiles-btn pull-right"><i class="icon-save"></i></a>
+					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="clear"></div>
 				</div>
-				<div class="profiles-tabs-main-body" data-sumary="{{ user.sumary }}">{{ user.sumary}}</div>
+				<div class="profiles-tabs-main-body">
+					<div class="background-input-sumary"  data-sumary="{{ user.sumary }}">{{ user.sumary}}</div>
+				</div>
 			</div>
 			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_education }}">
 				<div class="profiles-tabs-main-header">

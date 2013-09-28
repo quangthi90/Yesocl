@@ -81,6 +81,7 @@
 .profiles-tabs-main-body {
 	margin-top: 10px;
 	line-height: 30px;
+	overflow-y: hidden;
 }
 
 #profiles-tabs-background .profiles-tabs-main-body {
@@ -224,4 +225,10 @@
 
 #y-content .editors {
 	display: none;
+}
+
+textarea[name="sumary"] {
+	width: 100%;
+	height: 100%;
+	overflow-y: hidden;
 }

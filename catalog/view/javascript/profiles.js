@@ -118,6 +118,7 @@ function TabsBackgroundSumary($element, contentWidth, contentHeight) {
 	this.btnEdit = $element.find('.profiles-btn-edit');
 	this.btnCancel = $element.find('.profiles-btn-cancel');
 	this.btnSave = $element.find('.profiles-btn-save');
+	this.inputSumary = $element.find('.background-input-sumary');
 
 	this.attachEvents();
 }
@@ -140,25 +141,27 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
-		self.mainBody.toggle();
-		var data = {
-			'sumary': this.mainBody.data('sumary')
-		}
-		$('#background-sumary-form').tmpl(data).appendTo(self.mainBody);
+		self.inputSumary.toggle();
+		var data = { 
+			'sumary': self.inputSumary.data('sumary') 
+		};
+		self.mainBody.append($.tmpl($('#background-sumary-form'), data));
+		$('textarea[name=\"sumary\"]').niceScroll();
 	});
 
 	this.btnCancel.click(function () {
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
-		self.inputGroups.changeMode();
+		self.btnEdit.toggle();
+		$('textarea[name=\"sumary\"]').remove();
+		self.inputSumary.toggle();
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
 	})
 
 	this.btnSave.click(function () {
 		var data = {
-			'sumary': self.inputGroups.self.find('textarea[name=\"sumary\"]').val()
+			'sumary': self.mainBody.find('[name=\"sumary\"]').val()
 		};
 		$.ajax({
 			type: 'POST',
@@ -167,13 +170,14 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 			dataType: 'json',
 			success: function (json) {
 				if ( json.message == 'success' ) {
-					self.inputGroups.save();
-					self.inputGroups.changeMode();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					self.btnEdit.toggle();
 					self.btnCancel.toggle();
 					self.btnSave.toggle();
+					self.btnEdit.toggle();
+					$('textarea[name=\"sumary\"]').remove();
+					self.inputSumary.html(data.sumary);
+					self.inputSumary.toggle();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
 				}else {
 					alert('Error!');
 				}
