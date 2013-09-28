@@ -13,19 +13,18 @@ class ControllerAccountAvatar extends Controller {
 
     	$this->document->setTitle($this->language->get('heading_title'));
 		
-		if ( isset($this->request->files['avatar']) ){
-			$this->request->post['avatar'] = $this->request->files['avatar'];
-		}
-
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('account/customer');
-			if ( $this->model_account_customer->editAvatar($this->request->post) ) {
+
+			if ( $this->model_account_customer->editAvatar( $this->request->files ) ) {
 	      		$this->session->data['success'] = $this->language->get('text_success');
 		  
 		  		$this->redirect($this->url->link('account/avatar', '', 'SSL'));
 			}
 			
  			$this->session->data['warning'] = $this->language->get('text_warning');
+    	}else {
+    		$this->session->data['warning'] = $this->language->get('text_warning');
     	}
 
       	/*$this->data['breadcrumbs'] = array();
@@ -88,6 +87,10 @@ class ControllerAccountAvatar extends Controller {
   	}
   
   	private function validate() {
+		if ( !isset( $this->request->files['avatar'] ) ){
+			$this->error['avatar'] = $this->language->get('error_avatar');
+		}
+
 		if (!$this->error) {
 	  		return true;
 		} else {

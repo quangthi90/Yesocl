@@ -269,6 +269,8 @@ class ModelAccountCustomer extends Model {
 			$path = $folder_link . $user->getId();
 			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
 				$user->setAvatar( $data['avatar'] );
+			}else {
+				return false;
 			}
 		}else {
 			return false;
