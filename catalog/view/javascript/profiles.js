@@ -230,9 +230,12 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 			'school': '',
 			'fieldofstudy': '',
 		}
-		//var form = $.tmpl($('#background-education-form'), data)
-		var form = new FormAddEducation($.tmpl($('#background-education-form'), data))
-		$('#add-background-education').after(form.self);
+		var $form = $.tmpl($('#background-education-form'), data);
+		
+		new FormAddEducation($form);
+
+		self.self.find('.profiles-tabs-main-body').prepend($form);
+		
 	});
 /*
 	this.formAdd.find('.profiles-btn-cancel').click(function () {
@@ -332,6 +335,8 @@ function FormAddEducation(element) {
 	this.self = element;
 	this.btnSave = element.find('.profiles-btn-save');
 	this.btnCancel = element.find('.profiles-btn-cancel');
+
+	this.attachEvents();
 }
 
 FormAddEducation.prototype.attachEvents = function () {
