@@ -118,7 +118,7 @@
 					<div class="background-input-sumary"  data-sumary="{{ user.sumary }}">{{ user.sumary}}</div>
 				</div>
 			</div>
-			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_education }}">
+			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_add_education }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Education</a>
 					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
@@ -138,29 +138,22 @@
 						</div>
 					</div>
 
+					<div id="add-background-education"></div>
+
 					{% for education in user.educations %}
-					<div class="profiles-tabs-item1" data-id="{{ education.id }}" data-url="{{ link_remove_education }}">
+					<div class="profiles-tabs-item1" data-id="{{ education.id }}" data-url="{{ link_remove_education }}" data-started="{{ education.started }}" data-ended="{{ education.ended }}" data-degree="{{ education.degree }}" data-school="{{ education.school }}" data-fieldofstudy="{{ education.fieldofstudy }}">
 						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.started }}</span><input class="editors" type="text" name="started" value="{{ education.started }}" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">{{ education.ended }}</span><input class="editors" type="text" name="ended" value="{{ education.ended }}" /></span></div>
+							<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span> to <span class="profiles-tabs-value">{{ education.ended }}</span></div>
 						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">{{ education.degree }}</div>
-									<span class="row-fluid editors"><span class="span4">Degree: </span><input type="text" name="degree" value="{{ education.degree }}" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">{{ education.school }}</div>
-									<span class="row-fluid editors"><span class="span4">School: </span><input type="text" name="school" value="{{ education.school }}" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
-									<span class="row-fluid editors"><span class="span4">Field Of Study: </span><input type="text" name="fieldofstudy" value="{{ education.fieldofstudy }}" /></span>
-								</div>
+								<div class="profiles-tabs-value-item">{{ education.degree }}</div>
+								<div class="profiles-tabs-value-item">{{ education.school }}</div>
+								<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
 							</div>
 						</div>
 					</div>
@@ -263,6 +256,20 @@
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="background-sumary-form" type="text/x-jquery-tmpl">
     <textarea name="sumary">${ sumary }</textarea>
+</script>
+<script id="background-education-form" type="text/x-jquery-tmpl">
+	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }">
+		<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
+		<div class="profiles-tabs-item1-content">
+			<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+			<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
+			<div class="profiles-tabs-value">
+				<div class="row-fluid"><div class="span4">Degree: </div><input type="text" name="degree" value="${ degree }" /></div>
+				<div class="row-fluid"><div class="span4">Shool: </div><input type="text"  name="school" value="${ school }" /></div>
+				<div class="row-fluid"><div class="span4">Field Of Study: </div><input type="text" name="fieldofstudy" value="${ fieldofstudy }" /></div>
+			</div>
+		</div>
+	</div>
 </script>
 <script type="text/javascript">
 	function addScroll(warper, column, width, height) {

@@ -197,11 +197,10 @@ function TabsBackgroundEducation($element, contentWidth, contentHeight) {
 	this.afterCreate();
 
 	this.btnAdd = $element.find('.profiles-btn-add');
-	this.formAdd = $element.find('.profiles-form-add');
-	this.items = new Array();
+	//this.items = new Array();
 
-	var self = this;
-	this.refreshItems();
+	//var self = this;
+	//this.refreshItems();
 
 	this.attachEvents();
 }
@@ -221,10 +220,21 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		}
 		$('.profiles-btn-edit').addClass( 'disabled' );
 		$('.profiles-btn-add').addClass( 'disabled' );
-		self.btnAdd.toggle();
-		self.formAdd.toggle();
+		$('.profiles-btn-remove').addClass( 'disabled' );
+		var data = {
+			'url': self.self.data('url'),
+			'id': 0,
+			'started': (new Date()).getFullYear(),
+			'ended': (new Date()).getFullYear(),
+			'degree': '',
+			'school': '',
+			'fieldofstudy': '',
+		}
+		//var form = $.tmpl($('#background-education-form'), data)
+		var form = new FormAddEducation($.tmpl($('#background-education-form'), data))
+		$('#add-background-education').after(form.self);
 	});
-
+/*
 	this.formAdd.find('.profiles-btn-cancel').click(function () {
 		$('.profiles-btn-edit').removeClass( 'disabled' );
 		$('.profiles-btn-add').removeClass( 'disabled' );
@@ -264,6 +274,7 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		 	}
 		});
 	});
+*/
 }
 
 TabsBackgroundEducation.prototype.addItem = function ( data ) {
@@ -317,11 +328,25 @@ TabsBackgroundEducation.prototype.refreshItems = function () {
 	});
 }
 
-TabsBackgroundEducation.prototype.refreshFormAdd = function () {
-	this.formAdd.find('option[value=\"' + (new Date()).getFullYear() + '\"]').attr('selected', 'selected');
-	this.formAdd.find('[name=\"degree\"]').val("");
-	this.formAdd.find('[name=\"school\"]').val("");
-	this.formAdd.find('[name=\"fieldofstudy\"]').val("");
+function FormAddEducation(element) {
+	this.self = element;
+	this.btnSave = element.find('.profiles-btn-save');
+	this.btnCancel = element.find('.profiles-btn-cancel');
+}
+
+FormAddEducation.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnSave.click( function () {
+		alert('save');
+	} );
+
+	this.btnCancel.click( function () {
+		this.self.remove();
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
+		$('.profiles-btn-remove').removeClass( 'disabled' );
+	} );
 }
 
 function TabsBackgroundExperience($element, contentWidth, contentHeight) {
