@@ -1,7 +1,8 @@
 function Profiles($element) {
 	this.self = $element;
-	this.information = new ProfilesTabsInformation($element.find('#profiles-tabs-information'), $element.height()*9/10);
-	this.background = new ProfilesTabsBackground($element.find('#profiles-tabs-background'), this.information.self.width(), $element.height()*9/10);
+	this.information = new TabsInformation($element.find('#profiles-tabs-information'), $element.height()*9/10);
+	this.background = new TabsBackground($element.find('#profiles-tabs-background'), this.information.self.width(), $element.height()*9/10);
+
 	this.afterCreate();
 }
 
@@ -9,7 +10,7 @@ Profiles.prototype.afterCreate = function () {
 	this.self.width(this.information.self.outerWidth() + this.background.self.outerWidth() + 25*2);
 }
 
-function ProfilesTabsInformation($element, contentHeight) {
+function TabsInformation($element, contentHeight) {
 	this.self = $element;
 
 	this.contentHeight = contentHeight;
@@ -28,14 +29,14 @@ function ProfilesTabsInformation($element, contentHeight) {
 	this.attachEvents();
 }
 
-ProfilesTabsInformation.prototype.afterCreate = function () {
+TabsInformation.prototype.afterCreate = function () {
 	this.inputDescription.outerHeight(this.contentHeight*3/10);
 	this.inputDescription.niceScroll();
 	this.mainBody.height(this.contentHeight - this.header.height() - 30);
 	this.mainBody.niceScroll();
 }
 
-ProfilesTabsInformation.prototype.attachEvents = function () {
+TabsInformation.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnEdit.click(function () {
@@ -92,21 +93,22 @@ ProfilesTabsInformation.prototype.attachEvents = function () {
 	})
 }
 
-function ProfilesTabsBackground($element, contentWidth, contentHeight) {
+function TabsBackground($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.header = $element.find('.profiles-tabs-header');
-	this.sumary = new ProfilesTabsBackgroundSumary($element.find('#profiles-tabs-background-sumary'), contentWidth, contentHeight - this.header.height() - 30);
-	this.experience = new ProfilesTabsBackgroundExperience($element.find('#profiles-tabs-background-experience'), contentWidth, contentHeight - this.header.height() - 30);
-	this.skill = new ProfilesTabsBackgroundSkill($element.find('#profiles-tabs-background-skill'), contentWidth, contentHeight - this.header.height() - 30);
-	this.education = new ProfilesTabsBackgroundEducation($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 30);
+	this.sumary = new TabsBackgroundSumary($element.find('#profiles-tabs-background-sumary'), contentWidth, contentHeight - this.header.height() - 30);
+	this.experience = new TabsBackgroundExperience($element.find('#profiles-tabs-background-experience'), contentWidth, contentHeight - this.header.height() - 30);
+	this.skill = new TabsBackgroundSkill($element.find('#profiles-tabs-background-skill'), contentWidth, contentHeight - this.header.height() - 30);
+	this.education = new TabsBackgroundEducation($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 30);
+
 	this.afterCreate();
 }
 
-ProfilesTabsBackground.prototype.afterCreate = function () {
+TabsBackground.prototype.afterCreate = function () {
 	this.self.width((this.sumary.self.outerWidth() + 25)*4 - 25);
 }
 
-function ProfilesTabsBackgroundSumary($element, contentWidth, contentHeight) {
+function TabsBackgroundSumary($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.contentWidth = contentWidth;
 	this.contentHeight = contentHeight;
@@ -117,17 +119,16 @@ function ProfilesTabsBackgroundSumary($element, contentWidth, contentHeight) {
 	this.btnCancel = $element.find('.profiles-btn-cancel');
 	this.btnSave = $element.find('.profiles-btn-save');
 
-	this.inputGroups = new ProfilesTabsInputGroups($element.find('.input-group'));
 	this.attachEvents();
 }
 
-ProfilesTabsBackgroundSumary.prototype.afterCreate = function () {
+TabsBackgroundSumary.prototype.afterCreate = function () {
 	this.self.outerWidth(this.contentWidth);
 	this.mainBody.outerHeight(this.contentHeight);
 	this.mainBody.niceScroll();
 }
 
-ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
+TabsBackgroundSumary.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnEdit.click(function () {
@@ -139,7 +140,11 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
-		self.inputGroups.changeMode();
+		self.mainBody.toggle();
+		var data = {
+			'sumary': this.mainBody.data('sumary')
+		}
+		$('#background-sumary-form').tmpl(data).appendTo(self.mainBody);
 	});
 
 	this.btnCancel.click(function () {
@@ -180,7 +185,7 @@ ProfilesTabsBackgroundSumary.prototype.attachEvents = function () {
 	})
 }
 
-function ProfilesTabsBackgroundEducation($element, contentWidth, contentHeight) {
+function TabsBackgroundEducation($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.contentWidth = contentWidth;
@@ -197,13 +202,13 @@ function ProfilesTabsBackgroundEducation($element, contentWidth, contentHeight) 
 	this.attachEvents();
 }
 
-ProfilesTabsBackgroundEducation.prototype.afterCreate = function () {
+TabsBackgroundEducation.prototype.afterCreate = function () {
 	this.self.outerWidth(this.contentWidth);
 	this.mainBody.outerHeight(this.contentHeight);
 	this.mainBody.niceScroll();
 }
 
-ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
+TabsBackgroundEducation.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnAdd.click(function () {
@@ -257,7 +262,7 @@ ProfilesTabsBackgroundEducation.prototype.attachEvents = function () {
 	});
 }
 
-ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
+TabsBackgroundEducation.prototype.addItem = function ( data ) {
 	var self = this;
 	var html = '<div class="profiles-tabs-item1" data-id="' + data.id + '" data-url="' + data.url + '">';
 		html 	+= '<div>';
@@ -297,7 +302,7 @@ ProfilesTabsBackgroundEducation.prototype.addItem = function ( data ) {
 	}*/
 }
 
-ProfilesTabsBackgroundEducation.prototype.refreshItems = function () {
+TabsBackgroundEducation.prototype.refreshItems = function () {
 	this.items = new Array();
 
 	var self = this;
@@ -308,14 +313,14 @@ ProfilesTabsBackgroundEducation.prototype.refreshItems = function () {
 	});
 }
 
-ProfilesTabsBackgroundEducation.prototype.refreshFormAdd = function () {
+TabsBackgroundEducation.prototype.refreshFormAdd = function () {
 	this.formAdd.find('option[value=\"' + (new Date()).getFullYear() + '\"]').attr('selected', 'selected');
 	this.formAdd.find('[name=\"degree\"]').val("");
 	this.formAdd.find('[name=\"school\"]').val("");
 	this.formAdd.find('[name=\"fieldofstudy\"]').val("");
 }
 
-function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight) {
+function TabsBackgroundExperience($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.contentWidth = contentWidth;
@@ -336,13 +341,13 @@ function ProfilesTabsBackgroundExperience($element, contentWidth, contentHeight)
 	this.attachEvents();
 }
 
-ProfilesTabsBackgroundExperience.prototype.afterCreate = function () {
+TabsBackgroundExperience.prototype.afterCreate = function () {
 	this.self.outerWidth(this.contentWidth);
 	this.mainBody.outerHeight(this.contentHeight);
 	this.mainBody.niceScroll();
 }
 
-ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
+TabsBackgroundExperience.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnAdd.click(function () {
@@ -388,7 +393,7 @@ ProfilesTabsBackgroundExperience.prototype.attachEvents = function () {
 	});
 }
 
-function ProfilesTabsBackgroundSkill($element, contentWidth, contentHeight) {
+function TabsBackgroundSkill($element, contentWidth, contentHeight) {
 	this.self = $element;
 	this.contentWidth = contentWidth;
 	this.contentHeight = contentHeight;
@@ -397,13 +402,13 @@ function ProfilesTabsBackgroundSkill($element, contentWidth, contentHeight) {
 	this.attachEvents();
 }
 
-ProfilesTabsBackgroundSkill.prototype.afterCreate = function () {
+TabsBackgroundSkill.prototype.afterCreate = function () {
 	this.self.outerWidth(this.contentWidth);
 	this.mainBody.outerHeight(this.contentHeight);
 	this.mainBody.niceScroll();
 }
 
-ProfilesTabsBackgroundSkill.prototype.attachEvents = function () {
+TabsBackgroundSkill.prototype.attachEvents = function () {
 
 }
 

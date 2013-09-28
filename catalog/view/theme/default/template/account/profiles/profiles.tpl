@@ -109,16 +109,12 @@
 			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_sumary }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Sumary</a>
-					<a class="profiles-btn-edit viewers btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+					<a class="profiles-btn-edit btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+					<a class="profiles-btn-cancel hidden btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+					<a class="profiles-btn-save hidden btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="clear"></div>
 				</div>
-
-				<div class="input-group">
-					<div class="profiles-tabs-main-body viewers">{{ user.sumary}}</div>
-					<div><textarea class="profiles-tabs-main-body editors" name="sumary">{{ user.sumary }}</textarea></div>
-				</div>
+				<div class="profiles-tabs-main-body" data-sumary="{{ user.sumary }}">{{ user.sumary}}</div>
 			</div>
 			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_education }}">
 				<div class="profiles-tabs-main-header">
@@ -263,6 +259,9 @@
 
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
+<script id="background-sumary-form" type="text/x-jquery-tmpl">
+    <textarea name="sumary">${ sumary }</textarea>
+</script>
 <script type="text/javascript">
 	function addScroll(warper, column, width, height) {
 		$(warper).outerWidth(width);
@@ -273,60 +272,10 @@
 	$(document).ready( function () {
 		$('#y-content').niceScroll();
 		var profiles = new Profiles($('#y-main-content'));
-
-		/*$('.profiles-btn-edit').click(function () {
-			$('.profiles-btn-edit').css('disabled', 'disabled');
-			$(this).parent().parent().find('.profiles-tabs-value').toggle();
-			$(this).parent().parent().find('.profiles-tabs-input').toggle();
-		});
-		$('.profiles-btn-save').click(function () {
-			$(this).parent().parent().find('.profiles-tabs-input').toggle();
-			$(this).parent().parent().find('.profiles-tabs-value').toggle();
-			$('.profiles-btn-edit').css('disabled', 'none');
-		});
-		$('.profiles-tabs-item2 .profiles-btn-remove').click(function () {
-			return confirm('Do you want to remove this skill?');
-		});
-		$('#profiles-tabs-background-experience .profiles-tabs-item1 .profiles-btn-remove').click(function () {
-			return confirm('Do you want to remove this experience?');
-		});
-		$('#profiles-tabs-background-education .profiles-tabs-item1 .profiles-btn-remove').click(function () {
-			return confirm('Do you want to remove this education?');
-		});
-		$('#profiles-tabs-background-experience .profiles-btn-add').click(function () {
-			var html = '<div class="profiles-tabs-item1">';
-				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input type="text" value="" /></div>';
-				html += '<div class="profiles-tabs-item1-content">';
-				html += '<a class="profiles-btn-remove btn profiles-btn pull-right"><i class="icon-trash"></i></a>';
-				html += '<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>';
-				html += '<div>';
-				html += '<div><input type="text" value="" /></div>';
-				html += '<div><input type="text" value="" /></div>';
-				html += '<div><input type="text" value="" /></div>';
-				html += '</div>';
-				html += '</div>';
-				html += '</div>';
-			$(this).parent().parent().find('.profiles-tabs-main-body').prepend(html);
-		});
-		$('#profiles-tabs-background-education .profiles-btn-add').click(function () {
-			var html = '<div class="profiles-tabs-item1">';
-				html += '<div class="profiles-tabs-item1-label">From <input class="" type="text" value="Junly 13th" /> to <input type="text" value="" /></div>';
-				html += '<div class="profiles-tabs-item1-content">';
-				html += '<a class="profiles-btn-remove btn profiles-btn pull-right"><i class="icon-trash"></i></a>';
-				html += '<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>';
-				html += '<div>';
-				html += '<div><input type="text" value="" /></div>';
-				html += '<div><input type="text" value="" /></div>';
-				html += '<div><input type="text" value="" /></div>';
-				html += '</div>';
-				html += '</div>';
-				html += '</div>';
-			$(this).parent().parent().find('.profiles-tabs-main-body').prepend(html);
-		});*/
 	} );
 
 	window.onresize=function() {
-		//window.setTimeout('location.reload()', 1);
+		window.setTimeout('location.reload()', 1);
 	};
 </script>
 {% endblock %}
