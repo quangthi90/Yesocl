@@ -22,5 +22,6 @@ $_['route']['HomePage']			= 'common/home';
 $_['route']['WallPage']			= 'account/account';
 $_['route']['ChangePassword']	= 'account/password';
 $_['route']['Logout']			= 'account/logout';
+$_['route']['ChangeAvatar']		= 'account/avatar';
 
 ?>

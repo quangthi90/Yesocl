@@ -254,5 +254,36 @@ class ModelAccountCustomer extends Model {
 		
 		return $query->num_rows;
 	}	
+
+	public function editAvatar($data) {
+		$user = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+		if ( !$user ) {
+			return false;
+		}
+
+		// Avatar
+		$this->load->model('tool/image');
+		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId();
+			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
+				$user->setAvatar( $data['avatar'] );
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+
+		// Save to DB
+		$this->dm->persist( $user );
+		$this->dm->flush();
+
+		$this->load->model('tool/cache');
+		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
+
+		return true;
+	}
 }
 ?>
