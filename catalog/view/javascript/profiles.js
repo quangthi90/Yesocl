@@ -214,6 +214,10 @@ TabsBackgroundEducation.prototype.afterCreate = function () {
 TabsBackgroundEducation.prototype.attachEvents = function () {
 	var self = this;
 
+	this.items.each( function () {
+		new EducationItem($(this));
+	})
+
 	this.btnAdd.click(function () {
 		if ( self.btnAdd.hasClass( 'disabled' ) ) {
 			return false;
@@ -223,7 +227,7 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		$('.profiles-btn-remove').addClass( 'disabled' );
 		var data = {
 			'url': self.self.data('url'),
-			'id': 0,
+			'id': '',
 			'started': (new Date()).getFullYear(),
 			'ended': (new Date()).getFullYear(),
 			'degree': '',
@@ -234,21 +238,6 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		new FormAddEducation($form);
 		self.mainBody.prepend($form);
 		
-	});
-
-	this.items.each( function () {
-		new EducationItem($(this));
-	})
-}
-
-TabsBackgroundEducation.prototype.refreshItems = function () {
-	this.items = new Array();
-
-	var self = this;
-	var i = 0;
-	this.self.find('.profiles-tabs-item1').each(function () {
-		self.items[i] = new ProfilesTabsItem1($(this));
-		i++;
 	});
 }
 
@@ -317,11 +306,13 @@ FormAddEducation.prototype.attachEvents = function () {
 			'fieldofstudy': self.self.data('fieldofstudy')
 		}
 
-		var $item = $.tmpl($('#background-education-item'), data);
-		new EducationItem($item);
+		if ( self.self.data('id') != '' ) {
+			var $item = $.tmpl($('#background-education-item'), data);
+			new EducationItem($item);
+			self.self.toggle();
+			self.self.after($item);
+		}
 
-		self.self.toggle();
-		self.self.after($item);
 		self.self.remove();
 
 		$('.profiles-btn-edit').removeClass( 'disabled' );
@@ -414,15 +405,7 @@ function TabsBackgroundExperience($element, contentWidth, contentHeight) {
 	this.afterCreate();
 
 	this.btnAdd = $element.find('.profiles-btn-add');
-	this.formAdd = $element.find('.profiles-form-add');
-	this.items = new Array();
-
-	var self = this;
-	var i = 0;
-	$element.find('.profiles-tabs-item1').each(function () {
-		self.items[i] = new ProfilesTabsItem1($(this));
-		i++;
-	});
+	this.items = $element.find('.profiles-tabs-item1');
 
 	this.attachEvents();
 }
@@ -436,46 +419,204 @@ TabsBackgroundExperience.prototype.afterCreate = function () {
 TabsBackgroundExperience.prototype.attachEvents = function () {
 	var self = this;
 
+	this.items.each( function () {
+		new ExperienceItem($(this));
+	})
+
 	this.btnAdd.click(function () {
 		if ( self.btnAdd.hasClass( 'disabled' ) ) {
 			return false;
 		}
 		$('.profiles-btn-edit').addClass( 'disabled' );
 		$('.profiles-btn-add').addClass( 'disabled' );
-		self.btnAdd.toggle();
-		self.formAdd.toggle();
-	});
+		$('.profiles-btn-remove').addClass( 'disabled' );
 
-	this.formAdd.find('.profiles-btn-cancel').click(function () {
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		self.btnAdd.toggle();
-		self.formAdd.toggle();
-	});
+		var data = {
+			'url': self.self.data('url'),
+			'id': '',
+			'started_month': 1,
+			'ended_month': 1,
+			'started_year': (new Date()).getFullYear(),
+			'ended_year': (new Date()).getFullYear(),
+			'started_text': 'January ' + (new Date()).getFullYear(),
+			'ended_text': 'January ' + (new Date()).getFullYear(),
+			'title': '',
+			'company': '',
+			'location': '',
+		}
 
-	this.formAdd.find('.profiles-btn-save').click(function () {
-		alert('save');
-		/*var data = {
-			'degree': self.self.formAdd.find('input[name=\"degree\"]').val(),
-			'school': self.self.formAdd.find('input[name=\"school\"]').val(),
-			'fieldofstudy': self.self.formAdd.find('input[name=\"fieldofstudy\"]').val(),
+		var $form = $.tmpl($('#background-experience-form'), data);
+		new FormAddExperience($form);
+
+		self.mainBody.prepend($form);
+	});
+}
+
+function FormAddExperience($element) {
+	this.self = $element;
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+
+	this.attachEvents();
+}
+
+FormAddExperience.prototype.attachEvents = function () {
+	var self = this;
+
+	this.self.find('select[name=\"started_month\"]').val( this.self.data('startedm') ).prop('selected',true);
+	this.self.find('select[name=\"ended_month\"]').val( this.self.data('endedm') ).prop('selected',true);
+	this.self.find('select[name=\"started_year\"]').val( this.self.data('startedy') ).prop('selected',true);
+	this.self.find('select[name=\"ended_year\"]').val( this.self.data('endedy') ).prop('selected',true);
+
+	this.btnSave.click( function () {
+		if ( self.btnSave.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		var data = {
+			'id': self.self.data('id'),
+			'started_month': self.self.find('[name=\"started_month\"]').val(),
+			'ended_month': self.self.find('[name=\"ended_month\"]').val(),
+			'started_year': self.self.find('[name=\"started_year\"]').val(),
+			'ended_year': self.self.find('[name=\"ended_year\"]').val(),
+			'title': self.self.find('input[name=\"title\"]').val(),
+			'company': self.self.find('input[name=\"company\"]').val(),
+			'location': self.self.find('input[name=\"location\"]').val()
 		};
+
 		$.ajax({
 			type: 'POST',
-			url: self.self.formAdd.data('url'),
+			url: self.self.data('url'),
 			data: data,
 			dataType: 'json',
 			success: function (json) {
 				if ( json.message == 'success' ) {
+					var $item = $.tmpl($('#background-experience-item'), json);
+					new ExperienceItem($item);
+					self.self.toggle();
+					self.self.after($item);
+					self.self.remove();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
-					self.btnAdd.toggle();
-					self.formAdd.toggle();
+					$('.profiles-btn-remove').removeClass( 'disabled' );
 				}else {
 					alert('Error!');
 				}
-			}
-		});*/
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
+	} );
+
+	this.btnCancel.click( function () {
+		var data = {
+			'id': self.self.data('id'),
+			'url': self.self.data('url'),
+			'remove': self.self.data('remove'),
+			'started_text': self.self.data('startedt'),
+			'ended_text': self.self.data('endedt'),
+			'started_month': self.self.data('startedm'),
+			'ended_month': self.self.data('endedm'),
+			'started_year': self.self.data('startedy'),
+			'ended_year': self.self.data('endedy'),
+			'title': self.self.data('title'),
+			'company': self.self.data('company'),
+			'location': self.self.data('location')
+		}
+
+		if ( self.self.data('id') != '' ) {
+			var $item = $.tmpl($('#background-experience-item'), data);
+			new ExperienceItem($item);
+			self.self.toggle();
+			self.self.after($item);
+		}
+
+		self.self.remove();
+
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
+		$('.profiles-btn-remove').removeClass( 'disabled' );
+	} );
+}
+
+function ExperienceItem($element) {
+	this.self = $element;
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+	this.btnEdit = $element.find('.profiles-btn-edit');
+	this.btnRemove = $element.find('.profiles-btn-remove');
+
+	this.attachEvents();
+}
+
+ExperienceItem.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnEdit.click( function () {
+		if ( self.btnEdit.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
+
+		var data = {
+			'id': self.self.data('id'),
+			'url': self.self.data('url'),
+			'remove': self.self.data('remove'),
+			'started_text': self.self.data('startedt'),
+			'ended_text': self.self.data('endedt'),
+			'started_month': self.self.data('startedm'),
+			'ended_month': self.self.data('endedm'),
+			'started_year': self.self.data('startedy'),
+			'ended_year': self.self.data('endedy'),
+			'title': self.self.data('title'),
+			'company': self.self.data('company'),
+			'location': self.self.data('location')
+		}
+
+		var $form = $.tmpl($('#background-experience-form'), data);
+		new FormAddExperience($form);
+
+		self.self.toggle();
+		self.self.after($form);
+		self.self.remove();
+	});
+
+	this.btnRemove.click( function () {
+		if ( self.btnRemove.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
+
+		var data = {
+			'id': self.self.data('id')
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('remove'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					self.self.remove();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
 	});
 }
 

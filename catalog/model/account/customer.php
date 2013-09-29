@@ -2,7 +2,9 @@
 use Document\User\User,
 	Document\User\Meta,
 	Document\User\Meta\Email,
-	Document\User\Meta\Education;
+	Document\User\Meta\Education,
+	Document\User\Meta\Experience,
+	Document\User\Meta\Location;
 
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
@@ -394,6 +396,163 @@ class ModelAccountCustomer extends Model {
 			$this->dm->flush();
 
 			return $education->getId();
+		}else {
+			return false;
+		}
+	}
+
+	public function addExperience( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['title'] ) || empty( $data['title'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['company'] ) || empty( $data['company'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['location'] ) || empty( $data['location'] ) ) {
+				return false;
+			}
+
+			$experience = new Experience();
+			$started = new \Datetime();
+			$started->setDate( $data['started_year'], $data['started_month'], 1 );
+			$experience->setStarted( $started );
+
+			$ended = new \Datetime();
+			$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+			$experience->setEnded( $ended );
+
+			$experience->setTitle( $data['title'] );
+			$experience->setCompany( $data['company'] );
+
+			$location = new Location();
+			$location->setLocation( trim( $data['location'] ) );
+			$experience->setLocation( $location );
+
+			$this->dm->persist( $experience );
+			$customer->getMeta()->getBackground()->addExperience( $experience );
+
+			$this->dm->flush();
+
+			return $experience->getId();
+		}else {
+			return false;
+		}
+	}
+
+	public function removeExperience( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+				return false;
+			}
+
+			foreach ($customer->getMeta()->getBackground()->getExperiences() as $experience) {
+				if ( $experience->getId() == $data['id'] ) {
+					$customer->getMeta()->getBackground()->getExperiences()->removeElement( $experience );
+				}
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function editExperience( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['title'] ) || empty( $data['title'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['company'] ) || empty( $data['company'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['location'] ) || empty( $data['location'] ) ) {
+				return false;
+			}
+
+			foreach ( $customer->getMeta()->getBackground()->getExperiences() as $experience ) {
+				if ( $experience->getId() == $data['id'] ) {
+					$started = new \Datetime();
+					$started->setDate( $data['started_year'], $data['started_month'], 1 );
+					$experience->setStarted( $started );
+
+					$ended = new \Datetime();
+					$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+					$experience->setEnded( $ended );
+
+					$experience->setTitle( $data['title'] );
+					$experience->setCompany( $data['company'] );
+
+					$location = new Location();
+					$location->setLocation( trim( $data['location'] ) );
+					$experience->setLocation( $location );
+					break;
+				}
+			}
+
+			$this->dm->flush();
+
+			return $experience->getId();
 		}else {
 			return false;
 		}

@@ -146,49 +146,27 @@
 
 				</div>
 			</div>
-			<div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left">
+			<div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left" data-url="{{ link_add_experience }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Experience</a>
 					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
-					<div class="profiles-form-add editors" data-url="{{ link_add_experience }}">
-						<div class="profiles-tabs-item1-label">From <input type="text" value="" /> to <input type="text" value="" /></div>
-						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
-							<div class="profiles-tabs-value">
-								<div class="row-fluid"><div class="span4">Title: </div><input type="text" name="title" value="" /></div>
-								<div class="row-fluid"><div class="span4">Company: </div><input type="text"  name="company" value="" /></div>
-								<div class="row-fluid"><div class="span4">Location: </div><input type="text" name="location" value="" /></div>
-							</div>
-						</div>
-					</div>
-
 					{% for experience in user.experiences %}
-					<div class="profiles-tabs-item1">
+					<div class="profiles-tabs-item1" data-id="{{ experience.id }}" data-url="{{ link_edit_experience }}" data-startedt="{{ experience.started_text }}" data-endedt="{{ experience.ended_text }}" data-startedy="{{ experience.started_year }}" data-endedy="{{ experience.ended_year }}" data-startedm="{{ experience.started_month }}" data-endedm="{{ experience.ended_month }}" data-title="{{ experience.title }}" data-company="{{ experience.company }}" data-location="{{ experience.location }}" data-remove="{{ link_remove_experience }}">
 						<div>
-							<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">{{ experience.started }}</span><input class="editors" type="text" value="{{ experience.started }}" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">{{ experience.ended }}</span><input class="editors" type="text" value="{{ experience.ended }}" /></span></div>
+							<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ experience.started_text }}</span> to <span class="profiles-tabs-value">{{ experience.ended_text }}</span></div>
 						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
-							<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="profiles-tabs-value">
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">{{ experience.title }}</div>
-									<span class="row-fluid editors"><span class="span4">Title: </span><input type="text" value="{{ experience.title }}" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">{{ experience.company }}</div>
-									<span class="row-fluid editors"><span class="span4">Company: </span><input type="text" value="{{ experience.company }}" /></span>
-								</div>
-								<div class="input-group">
-									<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
-									<span class="row-fluid editors"><span class="span4">Location: </span><input type="text" value="{{ experience.location }}" /></span>
-								</div>
+								<div class="profiles-tabs-value-item">{{ experience.title }}</div>
+								<div class="profiles-tabs-value-item">{{ experience.company }}</div>
+								<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
 							</div>
 						</div>
 					</div>
@@ -270,6 +248,38 @@
 				<div class="profiles-tabs-value-item">${ degree }</div>
 				<div class="profiles-tabs-value-item">${ school }</div>
 				<div class="profiles-tabs-value-item viewers">${ fieldofstudy }</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script id="background-experience-form" type="text/x-jquery-tmpl">
+	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }">
+		<div class="profiles-tabs-item1-label">From <select class="span1" name="started_month">{% for i in 1..12 %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> <select class="span1" name="started_year">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select class="span1" name="ended_month">{% for i in 1..12 %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> <select class="span1" name="ended_year">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
+		<div class="profiles-tabs-item1-content">
+			<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+			<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
+			<div class="profiles-tabs-value">
+				<div class="row-fluid"><div class="span4">Title: </div><input type="text" name="title" value="${ title }" /></div>
+				<div class="row-fluid"><div class="span4">Company: </div><input type="text"  name="company" value="${ company }" /></div>
+				<div class="row-fluid"><div class="span4">Location: </div><input type="text" name="location" value="${ location }" /></div>
+			</div>
+		</div>
+	</div>
+</script>
+<script id="background-experience-item" type="text/x-jquery-tmpl">
+	<div class="profiles-tabs-item1" data-id="${ id }" data-url="${ url }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-remove="${ remove }">
+		<div>
+			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started_text }</span> to <span class="profiles-tabs-value">${ ended_text }</span></div>
+		</div>
+		<div class="profiles-tabs-item1-content">
+			<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+			<div class="profiles-tabs-value">
+				<div class="profiles-tabs-value-item">${ title }</div>
+				<div class="profiles-tabs-value-item">${ company }</div>
+				<div class="profiles-tabs-value-item viewers">${ location }</div>
 			</div>
 		</div>
 	</div>
