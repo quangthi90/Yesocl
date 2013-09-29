@@ -483,9 +483,9 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                that.comments.push(data.comment);
-                if(that.comments.length > 10){
-                    that.comments.pop();
+                that.$comments.push(data.comment);
+                if(that.$comments.length > 10){
+                    that.$comments.pop();
                 }
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
                 $('#add-more-item').before(htmlOutput);
