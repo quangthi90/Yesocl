@@ -230,7 +230,31 @@ class ControllerAccountEdit extends Controller {
 		}
 	}
 
-	private function validateBackgroundEducation() {
+	private function validateEditEducation() {
+		if ( !isset( $this->request->post['id'] ) ) {
+			$this->error['error_education'] = $this->language->get('error_education');
+		}
+
+		if ( !isset( $this->request->post['started'] ) ) {
+			$this->error['error_education_started'] = $this->language->get('error_education_started');
+		}
+
+		if ( !isset( $this->request->post['ended'] ) ) {
+			$this->error['error_education_ended'] = $this->language->get('error_education_ended');
+		}
+
+		if ( !isset( $this->request->post['degree'] ) || empty( $this->request->post['degree'] ) ) {
+			$this->error['error_education_degree'] = $this->language->get('error_education_degree');
+		}
+
+		if ( !isset( $this->request->post['school'] ) || empty( $this->request->post['school'] ) ) {
+			$this->error['error_education_school'] = $this->language->get('error_education_school');
+		}
+
+		if ( !isset( $this->request->post['fieldofstudy'] ) || empty( $this->request->post['fieldofstudy'] ) ) {
+			$this->error['error_education_fieldofstudy'] = $this->language->get('error_education_fieldofstudy');
+		}
+
 		if (!$this->error) {
 			return true;
 		} else {
@@ -312,13 +336,27 @@ class ControllerAccountEdit extends Controller {
 		$this->response->setOutput( json_encode( $json ) );
 	}
 
-	public function updateBackgroundEducation() {
+	public function editEducation() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validateBackgroundEducation() ) {
+		if ( !$this->customer->isLogged() || !$this->validateEditEducation() ) {
 			$json['message'] = 'failed';
 		}else {
-			$json['message'] = 'success';
+			$this->load->model('account/customer');
+
+			if ( $id = $this->model_account_customer->editEducation( $this->request->post ) ) {
+				$json['message'] = 'success';
+				$json['id'] = $id;
+				$json['started'] = (int)$this->request->post['started'];
+				$json['ended'] = (int)$this->request->post['ended'];
+				$json['degree'] = $this->request->post['degree'];
+				$json['school'] = $this->request->post['school'];
+				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
+				$json['url'] = $this->url->link('account/edit/editEducation', '', 'SSL');
+				$json['remove'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
+			}else {
+				$json['message'] = 'failed';
+			}
 		}
 
 		$this->response->setOutput( json_encode( $json ) );

@@ -243,8 +243,8 @@
     <textarea name="sumary">${ sumary }</textarea>
 </script>
 <script id="background-education-form" type="text/x-jquery-tmpl">
-	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }">
-		<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}"></option>{% endfor %}</select></div>
+	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-school="${ school }" data-fieldofstudy="${ fieldofstudy }">
+		<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
 		<div class="profiles-tabs-item1-content">
 			<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 			<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>

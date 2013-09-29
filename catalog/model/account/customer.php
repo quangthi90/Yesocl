@@ -347,5 +347,56 @@ class ModelAccountCustomer extends Model {
 
 		return true;
 	}
+
+	public function editEducation( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['degree'] ) || empty( $data['degree'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['school'] ) || empty( $data['school'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['fieldofstudy'] ) || empty( $data['fieldofstudy'] ) ) {
+				return false;
+			}
+
+			foreach ( $customer->getMeta()->getBackground()->getEducations() as $education ) {
+				if ( $education->getId() == $data['id'] ) {
+					$education->setStarted( (int) $data['started'] );
+					$education->setEnded( (int) $data['ended'] );
+					$education->setDegree( $data['degree'] );
+					$education->setSchool( $data['school'] );
+					$education->setFieldOfStudy( $data['fieldofstudy'] );
+					break;
+				}
+			}
+
+			$this->dm->flush();
+
+			return $education->getId();
+		}else {
+			return false;
+		}
+	}
 }
 ?>
