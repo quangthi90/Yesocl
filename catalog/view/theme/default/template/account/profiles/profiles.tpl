@@ -125,23 +125,8 @@
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
-					{#<div class="profiles-form-add editors" data-url="{{ link_add_education }}">
-						<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
-						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
-							<div class="profiles-tabs-value">
-								<div class="row-fluid"><div class="span4">Degree: </div><input type="text" name="degree" value="" /></div>
-								<div class="row-fluid"><div class="span4">Shool: </div><input type="text"  name="school" value="" /></div>
-								<div class="row-fluid"><div class="span4">Field Of Study: </div><input type="text" name="fieldofstudy" value="" /></div>
-							</div>
-						</div>
-					</div>
-
-					<div id="add-background-education"></div>#}
-
 					{% for education in user.educations %}
-					<div class="profiles-tabs-item1" data-id="{{ education.id }}" data-url="{{ link_remove_education }}" data-started="{{ education.started }}" data-ended="{{ education.ended }}" data-degree="{{ education.degree }}" data-school="{{ education.school }}" data-fieldofstudy="{{ education.fieldofstudy }}">
+					<div class="profiles-tabs-item1" data-id="{{ education.id }}" data-url="{{ link_edit_education }}" data-started="{{ education.started }}" data-ended="{{ education.ended }}" data-degree="{{ education.degree }}" data-school="{{ education.school }}" data-fieldofstudy="{{ education.fieldofstudy }}" data-remove="{{ link_remove_education }}">
 						<div>
 							<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span> to <span class="profiles-tabs-value">{{ education.ended }}</span></div>
 						</div>
@@ -259,7 +244,7 @@
 </script>
 <script id="background-education-form" type="text/x-jquery-tmpl">
 	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }">
-		<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
+		<div class="profiles-tabs-item1-label">From <select name="started">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select name="ended">{% for i in current_year..before_year %}<option value="{{ i }}"></option>{% endfor %}</select></div>
 		<div class="profiles-tabs-item1-content">
 			<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 			<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
@@ -267,6 +252,24 @@
 				<div class="row-fluid"><div class="span4">Degree: </div><input type="text" name="degree" value="${ degree }" /></div>
 				<div class="row-fluid"><div class="span4">Shool: </div><input type="text"  name="school" value="${ school }" /></div>
 				<div class="row-fluid"><div class="span4">Field Of Study: </div><input type="text" name="fieldofstudy" value="${ fieldofstudy }" /></div>
+			</div>
+		</div>
+	</div>
+</script>
+<script id="background-education-item" type="text/x-jquery-tmpl">
+	<div class="profiles-tabs-item1" data-id="${ id }" data-url="${ url }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-school="${ school }" data-fieldofstudy="${ fieldofstudy }" data-remove="${ remove }">
+		<div>
+			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started }</span> to <span class="profiles-tabs-value">${ ended }</span></div>
+		</div>
+		<div class="profiles-tabs-item1-content">
+			<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+			<div class="profiles-tabs-value">
+				<div class="profiles-tabs-value-item">${ degree }</div>
+				<div class="profiles-tabs-value-item">${ school }</div>
+				<div class="profiles-tabs-value-item viewers">${ fieldofstudy }</div>
 			</div>
 		</div>
 	</div>

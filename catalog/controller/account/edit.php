@@ -14,6 +14,7 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
 		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
 		$this->data['link_remove_education'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
+		$this->data['link_edit_education'] = $this->url->link('account/edit/editEducation', '', 'SSL');
 		$this->data['link_update_background_experience'] = $this->url->link('account/edit/updateBackgroundExperience', '', 'SSL');
 
 		$this->load->model('user/user');
@@ -57,7 +58,7 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
-		usort( $educations_data, 'sortEducation');
+		//usort( $educations_data, 'sortEducation');
 
 		// sort experience function
 		function sortExperience($a, $b) {
@@ -86,7 +87,7 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
-		usort( $experiences_data, 'sortExperience');
+		//usort( $experiences_data, 'sortExperience');
 
 		// user data
 		$this->data['user'] = array(
@@ -283,7 +284,8 @@ class ControllerAccountEdit extends Controller {
 				$json['degree'] = $this->request->post['degree'];
 				$json['school'] = $this->request->post['school'];
 				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
-				$json['url'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
+				$json['url'] = $this->url->link('account/edit/editEducation', '', 'SSL');
+				$json['remove'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
 			}else {
 				$json['message'] = 'failed';
 			}

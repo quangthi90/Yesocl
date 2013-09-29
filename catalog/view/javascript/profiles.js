@@ -138,6 +138,7 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 		}
 		$('.profiles-btn-edit').addClass( 'disabled' );
 		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
@@ -157,6 +158,7 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 		self.inputSumary.toggle();
 		$('.profiles-btn-edit').removeClass( 'disabled' );
 		$('.profiles-btn-add').removeClass( 'disabled' );
+		$('.profiles-btn-remove').removeClass( 'disabled' );
 	})
 
 	this.btnSave.click(function () {
@@ -178,6 +180,7 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 					self.inputSumary.toggle();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
 				}else {
 					alert('Error!');
 				}
@@ -197,10 +200,7 @@ function TabsBackgroundEducation($element, contentWidth, contentHeight) {
 	this.afterCreate();
 
 	this.btnAdd = $element.find('.profiles-btn-add');
-	//this.items = new Array();
-
-	//var self = this;
-	//this.refreshItems();
+	this.items = $element.find('.profiles-tabs-item1');
 
 	this.attachEvents();
 }
@@ -231,86 +231,14 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 			'fieldofstudy': '',
 		}
 		var $form = $.tmpl($('#background-education-form'), data);
-		
 		new FormAddEducation($form);
-
-		self.self.find('.profiles-tabs-main-body').prepend($form);
+		self.mainBody.prepend($form);
 		
 	});
-/*
-	this.formAdd.find('.profiles-btn-save').click(function () {
-		var data = {
-			'started': self.formAdd.find('[name=\"started\"]').val(),
-			'ended': self.formAdd.find('[name=\"ended\"]').val(),
-			'degree': self.formAdd.find('input[name=\"degree\"]').val(),
-			'school': self.formAdd.find('input[name=\"school\"]').val(),
-			'fieldofstudy': self.formAdd.find('input[name=\"fieldofstudy\"]').val()
-		};
 
-		$.ajax({
-			type: 'POST',
-			url: self.formAdd.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					self.addItem( json );
-					//self.refreshItems();
-					self.refreshFormAdd();
-					self.formAdd.toggle();
-					self.btnAdd.toggle();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
-		});
-	});
-*/
-}
-
-TabsBackgroundEducation.prototype.addItem = function ( data ) {
-	var self = this;
-	var html = '<div class="profiles-tabs-item1" data-id="' + data.id + '" data-url="' + data.url + '">';
-		html 	+= '<div>';
-		html 	+= '<div class="profiles-tabs-item1-label">From <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.started) + '</span><input class="editors" type="text" value="' + parseInt(data.started) + '" /></span> to <span class="input-group"><span class="profiles-tabs-value viewers">' + parseInt(data.ended) + '</span><input class="editors" type="text" value="' + parseInt(data.ended) + '" /></span></div>';
-		html	+= '</div>'
-		html	+= '<div class="profiles-tabs-item1-content">';
-		html	+= '<a class="profiles-btn-remove viewers profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>';
-		html	+= '<a class="btn profiles-btn viewers profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>';
-		html	+= '<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>';
-		html	+= '<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>';
-		html	+= '<div class="profiles-tabs-value">';
-		html	+= '<div class="input-group">';
-		html	+= '<div class="profiles-tabs-value-item viewers">' + data.degree + '</div>';
-		html	+= '<span class="row-fluid editors"><span class="span4">Degree: </span><input type="text" value="' + data.degree + '" /></span>';
-		html	+= '</div>';
-		html	+= '<div class="input-group">';
-		html	+= '<div class="profiles-tabs-value-item viewers">' + data.school + '</div>';
-		html	+= '<span class="row-fluid editors"><span class="span4">School: </span><input type="text" value="' + data.school + '" /></span>';
-		html	+= '</div>';
-		html	+= '<div class="input-group">';
-		html	+= '<div class="profiles-tabs-value-item viewers">' + data.fieldofstudy + '</div>';
-		html	+= '<span class="row-fluid editors"><span class="span4">Field Of Study: </span><input type="text" value="' + data.fieldofstudy + '" /></span>';
-		html	+= '</div>';
-		html	+= '</div>';
-		html	+= '</div>';
-		html	+= '</div>';
-	this.formAdd.after(html);
-	/*for (var i = 0; i < this.items.length; i++) {
-		var started = parseInt(this.items[i].inputGroups.find('[name=\"started\"]').val());
-		var ended = parseInt(this.items[i].inputGroups.find('[name=\"ended\"]').val());
-		if ( started < parseInt(data.started) || ( started == parseInt(data.started) && ended < parseInt(data.ended) ) ) {
-			this.items[i].self.before(html);
-			break;
-		}else if( i == this.items.length - 1 ) {
-			this.items[i].self.after(html);
-		}
-	}*/
+	this.items.each( function () {
+		new EducationItem($(this));
+	})
 }
 
 TabsBackgroundEducation.prototype.refreshItems = function () {
@@ -324,10 +252,10 @@ TabsBackgroundEducation.prototype.refreshItems = function () {
 	});
 }
 
-function FormAddEducation(element) {
-	this.self = element;
-	this.btnSave = element.find('.profiles-btn-save');
-	this.btnCancel = element.find('.profiles-btn-cancel');
+function FormAddEducation($element) {
+	this.self = $element;
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
 
 	this.attachEvents();
 }
@@ -336,15 +264,130 @@ FormAddEducation.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnSave.click( function () {
-		alert('save');
+		if ( self.btnSave.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		var data = {
+			'started': self.self.find('[name=\"started\"]').val(),
+			'ended': self.self.find('[name=\"ended\"]').val(),
+			'degree': self.self.find('input[name=\"degree\"]').val(),
+			'school': self.self.find('input[name=\"school\"]').val(),
+			'fieldofstudy': self.self.find('input[name=\"fieldofstudy\"]').val()
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					var $item = $.tmpl($('#background-education-item'), json);
+					new EducationItem($item);
+					self.self.after($item);
+					self.self.remove();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
 	} );
 
 	this.btnCancel.click( function () {
-		this.self.remove();
+		self.self.remove();
 		$('.profiles-btn-edit').removeClass( 'disabled' );
 		$('.profiles-btn-add').removeClass( 'disabled' );
 		$('.profiles-btn-remove').removeClass( 'disabled' );
 	} );
+}
+
+function EducationItem($element) {
+	this.self = $element;
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+	this.btnEdit = $element.find('.profiles-btn-edit');
+	this.btnRemove = $element.find('.profiles-btn-remove');
+
+	this.attachEvents();
+}
+
+EducationItem.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnSave.click( function () {
+		alert('save');
+	});
+
+	this.btnCancel.click( function () {
+		alert('cancel');
+	});
+
+	this.btnEdit.click( function () {
+		if ( self.btnEdit.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
+
+		var data = {
+			'id': self.self.data('id'),
+			'url': self.self.data('url'),
+			'started': self.self.data('started'),
+			'ended': self.self.data('ended'),
+			'degree': self.self.data('degree'),
+			'school': self.self.data('school'),
+			'fieldofstudy': self.self.data('fieldofstudy')
+		}
+
+		var $form = $.tmpl($('#background-education-form'), data);
+		new FormAddEducation($form);
+		
+		self.self.toggle();
+		self.self.after($form);
+	});
+
+	this.btnRemove.click( function () {
+		if ( self.btnRemove.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
+
+		var data = {
+			'id': self.self.data('id')
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('remove'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					self.self.remove();
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
+	});
 }
 
 function TabsBackgroundExperience($element, contentWidth, contentHeight) {
