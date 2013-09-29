@@ -3,23 +3,23 @@
         <div class="bar-wrapper">
           <div class="footer-toolbar fl">
               <div class="footer-toolbar-item search">
-                <form>
-                  <div class="input-prepend">      
-                      <button class="btn btn-yes" type="button" style="width: 120px;">
+                <div class="search-form" data-url="{{ path('SearchPage') }}">
+                  <div class="input-prepend">
+                      <button class="btn btn-yes btn-search" type="button" style="width: 120px;">
                         <i class="icon-search"></i>Search
                       </button>
-                      <input class="auto-hide" id="searchText" placeholder="Enter your key ..." type="text">
-                  </div>         
-                </form> 
-              </div>       
+                      <input class="auto-hide" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
+                  </div>
+                </div> 
+              </div>
               <div class="footer-toolbar-item notification-group">
                 <div class="dropup notification-item common">
                   <a href="#" class="btn-notification" data-toggle="dropdown">
                     <i class="icon-bell"></i>
                     <span class="notification-item-name">Notification</span>
-                    <span class="notification-item-count">3</span>
+                    <!--span class="notification-item-count">3</span-->
                   </a>
-                  <ul class="dropdown-menu notification-content-list">
+                  <!--ul class="dropdown-menu notification-content-list">
                     <li class="notification-content-item">
                       <a href="#" class="notification-content-item-img">
                         <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
@@ -50,15 +50,15 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
+                  </ul-->
                 </div>
                 <div class="dropup notification-item message">
                   <a href="#" class="btn-notification" data-toggle="dropdown">
                     <i class="icon-envelope"></i>
                     <span class="notification-item-name">Message</span>
-                    <span class="notification-item-count">5</span>
+                    <!--span class="notification-item-count">5</span-->
                   </a>
-                  <ul class="dropdown-menu notification-content-list">
+                  <!--ul class="dropdown-menu notification-content-list">
                     <li class="notification-content-item">
                       <a href="#" class="notification-content-item-img">
                         <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
@@ -124,57 +124,34 @@
                         </div>
                       </div>
                     </li>
-                  </ul>
+                  </ul-->
                 </div>
+                {% set requests = get_request_friend() %}
                 <div class="dropup notification-item friend">
                   <a href="#" class="btn-notification" data-toggle="dropdown">
                     <i class="icon-user"></i>
                     <span class="notification-item-name">Friend</span>
-                    <span class="notification-item-count">3</span>
+                    {% if requests|length > 0 %}
+                    <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>
+                    {% endif %}
                   </a>
                   <ul class="dropdown-menu notification-content-list">
-                    <li class="notification-content-item">
-                      <a href="#" class="notification-content-item-img">
-                        <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    {% for user in requests %}
+                    <li class="notification-content-item notify-actions">
+                      <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="notification-content-item-img">
+                        <img src="{{ user.avatar }}" alt="{{ user.username }}">
                       </a>
                       <div class="notification-content-item-detail">
                         <div class="notification-text">
-                          <a href="#">WMThiet</a> added you as friend
+                          <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
                         </div>
                         <div>
-                          <a href="#" class="btn btn-yes">Accept</a>
-                          <a href="#" class="btn btn-yes">Irnoge </a>
+                          <a href="#" data-url="{{ path('ConfirmFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-accept">Accept</a>
+                          <a href="#" data-url="{{ path('IgnoreFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-ignore">Ignore </a>
                         </div>
                       </div>
                     </li>
-                    <li class="notification-content-item">
-                      <a href="#" class="notification-content-item-img">
-                        <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                      </a>
-                      <div class="notification-content-item-detail">
-                        <div class="notification-text">
-                          <a href="#">WMThiet</a> added you as friend
-                        </div>
-                        <div>
-                          <a href="#" class="btn btn-yes">Accept</a>
-                          <a href="#" class="btn btn-yes">Irnoge </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="notification-content-item">
-                      <a href="#" class="notification-content-item-img">
-                        <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                      </a>
-                      <div class="notification-content-item-detail">
-                        <div class="notification-text">
-                          <a href="#">WMThiet</a> added you as friend
-                        </div>
-                        <div>
-                          <a href="#" class="btn btn-yes">Accept</a>
-                          <a href="#" class="btn btn-yes">Irnoge </a>
-                        </div>
-                      </div>
-                    </li>
+                    {% endfor %}
                   </ul>
                 </div>  
               </div>
