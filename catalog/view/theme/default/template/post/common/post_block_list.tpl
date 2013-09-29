@@ -79,6 +79,7 @@
                                     </div>
                                     <div class="who-action">
                                         <a href="#" class="view-list-liker" 
+                                            data-url="{{ path('PostGetLiker', {post_slug: post.slug, post_type: post_type}) }}"
                                             data-view-title="People like this post" 
                                             data-view-type="like" 
                                             data-post-slug="{{ post.slug }}" 

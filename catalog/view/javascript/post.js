@@ -20,7 +20,9 @@
         this.postSlug		= el.data('post-slug');
         this.postType		= el.data('post-type');
         this.typeSlug 		= el.data('type-slug');
+        this.url	        = el.data('url');
         this.addEvents();
+        this.users = [];
     }
     UserListViewer.prototype.addEvents = function() {
         var that = this;
@@ -51,67 +53,104 @@
         else if (that.viewType == 'view') {
 
         }
-		
-        //D? li?u test demo:
-        var promise = $.ajax({
-            type: 'POST',
-            url:  this.url,
-            dataType: 'json'
-        });
-        data = new Array();
-        var user1 = new UserInfo('User 1', 'image/template/user-avatar.png', '#', 10, 0, 1);
-        var user2 = new UserInfo('User 2', 'image/template/user-avatar.png', '#', 10, 0, 1);
-        var user3 = new UserInfo('User 3', 'image/template/user-avatar.png', '#', 10, 0, 0);
-        var user4 = new UserInfo('User 4', 'image/template/user-avatar.png', '#', 10, 1, 1);
-        var user5 = new UserInfo('User 5', 'image/template/user-avatar.png', '#', 10, 1, 0);
-        var user6 = new UserInfo('User 6', 'image/template/user-avatar.png', '#', 10, 0, 1);
-        var user7 = new UserInfo('User 7', 'image/template/user-avatar.png', '#', 10, 0, 0);
-        var user8 = new UserInfo('User 8', 'image/template/user-avatar.png', '#', 10, 1, 1);
-        var user9 = new UserInfo('User 9', 'image/template/user-avatar.png', '#', 10, 0, 1);
-        var user10 = new UserInfo('User 10', 'image/template/user-avatar.png', '#', 10, 1, 0);
-        data.push(user1);
-        data.push(user2);
-        data.push(user3);
-        data.push(user4);
-        data.push(user5);
-        data.push(user6);
-        data.push(user7);
-        data.push(user8);
-        data.push(user9);
-        data.push(user10);
+        if(that.users.length == 0){	
+            //D? li?u test demo:
+            var promise = $.ajax({
+                type: 'POST',
+                url:  this.url,
+                dataType: 'json'
+            });
+        
+            this.triggerProgress(that.element, promise);
+            promise.then(function(data) { 
+                if(data.success == 'ok'){ 
+                    for (key in data.users) {
+                        var user = new UserInfo(data.users[key].username, data.users[key].avatar, data.users[key].href_user, 10, 0, 1);
+                        that.users.push(user);
+                    }
+                    var templateUserInfo = $('#user-info-template');
+                    $('#user-viewer-container').html('');
+                    var userViewerContainer = $('#user-viewer-container');
+                    var htmlContent = '';
 
-        var templateUserInfo = $('#user-info-template');
-        var userViewerContainer = $('#user-viewer-container').html('');
-        var htmlContent = '';
+                    for (var i = 0; i < that.users.length; i++) {
+                        var user = that.users[i];
+                        var html = templateUserInfo.html().replace(/USER_URL/gi, user.userUrl);
+                        html = html.replace(/USER_NAME/gi, user.userName);
+                        html = html.replace(/USER_IMG/gi, user.userImg);
+                        html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
+                        var actionFriend = '<i class="icon-ok"></i>Friend';
+                        if(user.isFriend == 0) {
+                            actionFriend = '<i class="icon-plus"></i>Add as Friend';
+                        }
+                        html = html.replace(/USER_ACTIONS/gi, actionFriend);
+                        htmlContent += html;
+                    };
+                    userViewerContainer.html(htmlContent);
+                    userViewerContainer.bPopup( 
+                    {
+                        follow: [false, false],				
+                        speed: 300,
+                        transition: 'slideDown',
+                        modalColor : '#000',
+                        opacity: '0.5'
+                    }
+                    );		
 
-        for (var i = 0; i < data.length; i++) {
-            var user = data[i];
-            var html = templateUserInfo.html().replace('USER_URL', user.userUrl);
-            html = html.replace('USER_NAME', user.userName);
-            html = html.replace('USER_IMG', user.userImg);
-            html = html.replace('NUMBER_OF_FRIEND', user.numberFriend);
-            var actionFriend = '<i class="icon-ok"></i>Friend';
-            if(user.isFriend == 0) {
-                actionFriend = '<i class="icon-plus"></i>Add as Friend';
+                    //Complete
+                    that.element.removeClass('disabled');
+                    spinner.remove();
+                }
+
+            });
+        }else{
+            var templateUserInfo = $('#user-info-template');
+            $('#user-viewer-container').html('');
+            var userViewerContainer = $('#user-viewer-container');
+            var htmlContent = '';
+
+            for (var i = 0; i < that.users.length; i++) {
+                var user = that.users[i];
+                var html = templateUserInfo.html();
+                html = html.replace(/USER_URL/gi, user.userUrl);
+                html = html.replace(/USER_NAME/gi, user.userName);
+                html = html.replace(/USER_IMG/gi, user.userImg);
+                html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
+                var actionFriend = '<i class="icon-ok"></i>Friend';
+                if(user.isFriend == 0) {
+                    actionFriend = '<i class="icon-plus"></i>Add as Friend';
+                }
+                html = html.replace(/USER_ACTIONS/gi, actionFriend);
+                htmlContent += html;
+            };
+            userViewerContainer.html(htmlContent);
+            userViewerContainer.bPopup( 
+            {
+                follow: [false, false],				
+                speed: 300,
+                transition: 'slideDown',
+                modalColor : '#000',
+                opacity: '0.5'
             }
-            html = html.replace('USER_ACTIONS', actionFriend);
-            htmlContent += html;
-        };
-        userViewerContainer.html(htmlContent);
-        userViewerContainer.bPopup( 
-        {
-            follow: [false, false],				
-            speed: 300,
-            transition: 'slideDown',
-            modalColor : '#000',
-            opacity: '0.5'
-        }
-        );		
+            );		
 
-        //Complete
-        that.element.removeClass('disabled');
-        spinner.remove();
+            //Complete
+            that.element.removeClass('disabled');
+            spinner.remove();
+        }	
     }
+    
+    UserListViewer.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('d');
+        var f        = function() {
+            $spinner.remove();
+            $el.html($old_icon);
+        };
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+    };
 
     function LikePostBtn( $el ){
         var that = this;
