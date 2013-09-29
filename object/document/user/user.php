@@ -173,6 +173,9 @@ Class User {
 	}
 
 	public function getUsername(){
+		if ( !$this->username ){
+			return $this->getFullname();
+		}
 		return $this->username;
 	}
 
