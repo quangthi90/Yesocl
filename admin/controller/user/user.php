@@ -1124,7 +1124,7 @@ class ControllerUserUser extends Controller {
 		if ( isset($this->request->post['meta']['location']['location']) ){
 			$this->data['location'] = $this->request->post['meta']['location']['location'];
 			$this->data['city_id'] = $this->request->post['meta']['location']['city_id'];
-		}elseif ( isset($user) && $user->getMeta() ){
+		}elseif ( isset($user) && $user->getMeta() && $user->getMeta()->getLocation() ){
 			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
 		}else {
@@ -1183,7 +1183,7 @@ class ControllerUserUser extends Controller {
 		// Entry interest
 		if ( isset($this->request->post['background']['interest']) ){
 			$this->data['interest'] = $this->request->post['background']['interest'];
-		}elseif ( isset($user) ){
+		}elseif ( isset($user) && $user->getMeta() && $user->getMeta()->getBackground() ){
 			$this->data['interest'] = $user->getMeta()->getBackground()->getInterest();
 		}else {
 			$this->data['interest'] = '';
@@ -1234,7 +1234,7 @@ class ControllerUserUser extends Controller {
 		$this->data['experiencies'] = array();
 		if ( isset($this->request->post['background']['experiencies']) ){
 			$this->data['experiencies'] = $this->request->post['background']['experiencies'];
-		}elseif ( isset( $user ) ){
+		}elseif ( isset( $user ) && $user->getMeta() && $user->getMeta()->getBackground() ){
 			foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
@@ -1256,7 +1256,7 @@ class ControllerUserUser extends Controller {
 		$this->data['educations'] = array();
 		if ( isset($this->request->post['background']['educations']) ){
 			$this->data['educations'] = $this->request->post['background']['educations'];
-		}elseif ( isset( $user ) ){
+		}elseif ( isset( $user ) && $user->getMeta() && $user->getMeta()->getBackground() ){
 			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),

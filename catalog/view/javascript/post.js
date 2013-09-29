@@ -37,13 +37,7 @@
     UserListViewer.prototype.showViewer = function() {
         var that = this;
 
-        var spinner = $('<i class="icon-refresh icon-spin"></i>');
-        that.element.addClass('disabled').parent().prepend(spinner);
-
-        //Bi?n ch?a danh s�ch c�c User s? hi?n th?
         var data;
-
-        //L?y d? li?u danh s�ch ngu?i d�ng d?a v�o lo?i action v� c�c th�ng s? c?a b�i post (slug,type)
         if(that.viewType == 'like'){
 
         }
@@ -87,19 +81,13 @@
                         htmlContent += html;
                     };
                     userViewerContainer.html(htmlContent);
-                    userViewerContainer.bPopup( 
-                    {
+                    userViewerContainer.bPopup({
                         follow: [false, false],				
                         speed: 300,
                         transition: 'slideDown',
                         modalColor : '#000',
                         opacity: '0.5'
-                    }
-                    );		
-
-                    //Complete
-                    that.element.removeClass('disabled');
-                    spinner.remove();
+                    });
                 }
 
             });
@@ -124,19 +112,13 @@
                 htmlContent += html;
             };
             userViewerContainer.html(htmlContent);
-            userViewerContainer.bPopup( 
-            {
+            userViewerContainer.bPopup({
                 follow: [false, false],				
                 speed: 300,
                 transition: 'slideDown',
                 modalColor : '#000',
                 opacity: '0.5'
-            }
-            );		
-
-            //Complete
-            that.element.removeClass('disabled');
-            spinner.remove();
+            });
         }	
     }
     
@@ -147,6 +129,7 @@
             $spinner.remove();
             $el.html($old_icon);
         };
+        
         $el.addClass('disabled').html($spinner);
 
         promise.then(f, f);

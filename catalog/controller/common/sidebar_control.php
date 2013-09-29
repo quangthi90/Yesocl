@@ -13,7 +13,7 @@ class ControllerCommonSidebarControl extends Controller {
 		
 		$this->data['user_info'] = array(
 			'avatar' => $avatar,
-			'username' => $this->customer->getUsername()
+			'username' => $this->customer->getUsername() ? $this->customer->getUsername() : $this->customer->getUser()->getFullname()
 		);
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/sidebar_control.tpl')) {
