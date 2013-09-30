@@ -176,10 +176,10 @@
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>
-					<a class="profiles-btn-edit profiles-tabs-value btn profiles-btn pull-right"><i class="icon-plus"></i></a>
-					<a class="profiles-btn-cancel profiles-tabs-input btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-					<a class="profiles-btn-save profiles-tabs-input btn profiles-btn pull-right"><i class="icon-save"></i></a>
-					<div class="pull-right"><input class="profiles-tabs-input" type="text" placeholder="Text here..." /></div>
+					<a class="profiles-btn-edit btn profiles-btn pull-right"><i class="icon-plus"></i></a>
+					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+					<div class="pull-right"><input class="editors" type="text" placeholder="Text here..." /></div>
 					<div class="clear"></div>
 				</div>
 

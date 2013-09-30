@@ -279,7 +279,11 @@ FormAddEducation.prototype.attachEvents = function () {
 					var $item = $.tmpl($('#background-education-item'), json);
 					new EducationItem($item);
 					self.self.toggle();
-					self.self.after($item);
+					if ( self.self.data('id') == '' ) {
+						self.self.parent().append($item);
+					}else {
+						self.self.after($item);
+					}
 					self.self.remove();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
@@ -494,7 +498,11 @@ FormAddExperience.prototype.attachEvents = function () {
 					var $item = $.tmpl($('#background-experience-item'), json);
 					new ExperienceItem($item);
 					self.self.toggle();
-					self.self.after($item);
+					if ( self.self.data('id') == '' ) {
+						self.self.parent().append($item);
+					}else {
+						self.self.after($item);
+					}
 					self.self.remove();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
@@ -626,6 +634,8 @@ function TabsBackgroundSkill($element, contentWidth, contentHeight) {
 	this.contentHeight = contentHeight;
 	this.mainBody = $element.find('.profiles-tabs-main-body');
 	this.afterCreate();
+
+	this.btnAdd = $element.find('.profiles-btn-add');
 	this.attachEvents();
 }
 
