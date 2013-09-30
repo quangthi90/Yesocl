@@ -15,7 +15,7 @@
 					<div class="span8 post_new_control">
 						<a href="#" title="Insert images" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" class="img-attach" title="Choose image to upload" name="files[]" data-url="http://localhost/yesocl1/index.php?route=file/upload" multiple id="img-upload" />
+							<input type="file" data-no-uniform="true" class="img-attach" title="Choose image to upload" name="files[]" data-url="http://localhost/yesocl1/index.php?route=file/upload" id="img-upload" />
 						</a>
 						<a href="#" title="Advance post" id="post_new_adv">
 							<i class="icon-external-link-sign icon-2x"></i>
@@ -111,13 +111,23 @@
 			</div>
 		</div>
 	</div>
+	<div class="hidden" id="uploaded-image-template">
+		<div class="post_image_item">
+			<a href="#" class="image"><img src="${thumbnailUrl}"/></a>
+			<a href="#" class="close"><i class="icon-remove"></i></a>
+		</div>
+	</div>
 	{% endraw %}
 {% endblock %}
 
 {% block post_common_form_status_javascript %}
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.ui.widget.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.load-image.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.canvas-to-blob.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.iframe-transport.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-wysiwyg.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
@@ -143,18 +153,32 @@
 	});
 	$('#img-upload').fileupload({
         dataType: 'json',
-        done: function (e, data) {        	
-            $.each(data.result.files, function (index, file) {
-                var html = '<a href="#" class="post_image_item"><img src="' + file.thumbnailUrl + '" /></a>';
-				$('#post_image_previewer').append($(html));
-            });
+        disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator && navigator.userAgent),
+	    imageMaxWidth: 800,
+	    imageMaxHeight: 800,
+	    imageCrop: true,
+        add: function (e, data) {
+        	$('.tooltip').remove();
+            data.submit();
+        },
+        done: function (e, data) {   
+        	if(data.result){
+        		$("#post_image_previewer").empty();
+	            $("#uploaded-image-template").tmpl(data.result.files).appendTo("#post_image_previewer"); 
+	            $('#post_image_previewer .close').click(function(e){
+	            	e.preventDefault();
+	            	$(this).parent().fadeOut(1000, function() {
+	            		$(this).remove();
+	            	});
+	            });
+        	}            
         },
 		progressall: function (e, data) {
 			var progress = parseInt(data.loaded / data.total * 100, 10);
-			$('#progress .bar').css(
-				'width',
-				progress + '%'
-			);
+			$('#progress .bar').css('width', progress + '%');
+			if(progress == 100){
+				$('#progress .bar').fadeOut(1000);
+			}
 		}
     });
 </script>

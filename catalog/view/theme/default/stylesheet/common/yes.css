@@ -874,14 +874,25 @@ label.in-line{
   text-align: center;
 }
 #post_image_previewer .post_image_item {
-  display: block;
-  float: left;
   margin: 2px;
   padding: 5px;
-  border: 1px solid #F0F0F0;
+  position: relative;
+}
+#post_image_previewer .post_image_item .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+#post_image_previewer .post_image_item:hover .close {
+  display: inline-block;
+}
+#post_image_previewer .post_image_item .close:hover i{
+  color: #000;
 }
 #post_image_previewer .post_image_item img {
-  width: 200px;
+  min-width: 200px;
+  max-width: 435px;
 }
 #progress .bar{
   height: 3px;
