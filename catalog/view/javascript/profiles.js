@@ -646,7 +646,19 @@ TabsBackgroundSkill.prototype.afterCreate = function () {
 }
 
 TabsBackgroundSkill.prototype.attachEvents = function () {
+	var self = this;
 
+	this.btnAdd.click( function () {
+		if ( self.btnAdd.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
+
+		self.btnAdd.toggle();
+	});
 }
 
 function ProfilesTabsInputGroups($element) {
