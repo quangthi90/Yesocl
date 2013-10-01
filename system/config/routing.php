@@ -33,4 +33,7 @@ $_['routing']['MakeFriend']		= 'friend/request/{user_slug}/';
 $_['routing']['ConfirmFriend']	= 'friend/confirm/{user_slug}/';
 $_['routing']['IgnoreFriend']	= 'friend/ignore/{user_slug}/';
 
+//Upload
+$_['routing']['UploadFile'] 	= 'upload/';
+
 ?>

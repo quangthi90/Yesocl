@@ -33,4 +33,7 @@ $_['route']['MakeFriend']		= 'friend/request/makeFriend';
 $_['route']['ConfirmFriend']	= 'friend/request/confirm';
 $_['route']['IgnoreFriend']		= 'friend/request/ignore';
 
+//Upload
+$_['route']['UploadFile'] 		= 'file/upload';
+
 ?>
