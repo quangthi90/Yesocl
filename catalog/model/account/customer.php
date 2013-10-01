@@ -258,6 +258,74 @@ class ModelAccountCustomer extends Model {
 		return $query->num_rows;
 	}	
 
+	public function updateProfiles( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['username']) < 5) || (utf8_strlen($data['username']) > 32)) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['fullname']) < 1) || (utf8_strlen($data['fullname']) > 32)) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $data['email'])) {
+				return false;
+			}
+			
+			if (($this->customer->getEmail() != $data['email']) && $this->getTotalCustomersByEmail($data['email'])) {
+				return false;
+			}
+
+			if ( isset( $data['username'] ) && !empty( $data['username'] ) ) {
+				$customer->setUsername( $data['username'] );
+			}
+
+			if ( isset( $data['fullname'] ) && !empty( $data['fullname'] ) ) {
+				$names = explode(" ", $data['fullname']);
+				$lastname = end($names);
+				$firstname = $names[0];
+				for ($i=1; $i < count($names) - 1 ; $i++) { 
+					$firstname += ' ' . $names[i];
+				}
+
+				$customer->getMeta()->setFirstname( $firstname );
+				$customer->getMeta()->setLastname( $lastname );
+			}
+
+			if ( isset( $data['sex'] ) && !empty( $data['sex'] ) ) {
+				$customer->setSex( (int) $data['sex'] );
+			}
+
+			if ( isset( $data['birthday'] ) && !empty( $data['birthday'] ) ) {
+				
+			}
+
+			if ( isset( $data['address'] ) && !empty( $data['address'] ) ) {
+				
+			}
+
+			if ( isset( $data['location'] ) && !empty( $data['location'] ) ) {
+				
+			}
+
+			if ( isset( $data['industry'] ) && !empty( $data['industry'] ) ) {
+				
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
 	public function updateBackground( $data = array() ) {
 		if ( $this->customer->isLogged() ) {
 			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );

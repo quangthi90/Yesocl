@@ -385,7 +385,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $id = $this->model_account_customer->updateProfiles( $this->request->post ) ) {
+			if ( $this->model_account_customer->updateProfiles( $this->request->post ) ) {
 				$json['message'] = 'success';
 			}else {
 				$json['message'] = 'failed';
