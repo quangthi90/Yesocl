@@ -31,6 +31,14 @@
 						</div>
 						<div class="profiles-tabs-main-body">
 							<div class="row-fluid input-group">
+								<div class="span2 offset1">Username</div>
+								<div class="span9">
+									<span class="profiles-tabs-value viewers">{{ user.username }}</span>
+									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="username" value="{{ user.username }}" />
+								</div>
+							</div>
+
+							<div class="row-fluid input-group">
 								<div class="span2 offset1">Fullname</div>
 								<div class="span9">
 									<span class="profiles-tabs-value viewers">{{ user.fullname }}</span>
@@ -176,10 +184,10 @@
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>
-					<a class="profiles-btn-edit btn profiles-btn pull-right"><i class="icon-plus"></i></a>
+					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
 					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-					<div class="pull-right"><input class="editors" type="text" placeholder="Text here..." /></div>
+					<div class="pull-right"><input class="profiles-input editors" type="text" name="skill" placeholder="Text here..." /></div>
 					<div class="clear"></div>
 				</div>
 

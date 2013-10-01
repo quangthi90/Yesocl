@@ -165,6 +165,10 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateProfiles() {
+		if ((utf8_strlen($this->request->post['username']) < 5) || (utf8_strlen($this->request->post['username']) > 32)) {
+			$this->error['username'] = $this->language->get('error_username');
+		}
+
 		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
 			$this->error['fullname'] = $this->language->get('error_fullname');
 		}
@@ -357,13 +361,35 @@ class ControllerAccountEdit extends Controller {
 		}
 	}
 
+	private function validateAddSkill() {
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private function validateRemoveSkill() {
+		if (!$this->error) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function updateProfiles() {
 		$json = array();
 
 		if ( !$this->customer->isLogged() || !$this->validateProfiles() ) {
 			$json['message'] = 'failed';
 		}else {
-			$json['message'] = 'success';
+			$this->load->model('account/customer');
+
+			if ( $id = $this->model_account_customer->updateProfiles( $this->request->post ) ) {
+				$json['message'] = 'success';
+			}else {
+				$json['message'] = 'failed';
+			}
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
@@ -530,6 +556,42 @@ class ControllerAccountEdit extends Controller {
 			}else {
 				$json['message'] = 'failed';
 			}
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function addSkill() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() || !$this->validateRemoveExperience() ) {
+			$json['message'] = 'failed';
+		}else {
+			/*$this->load->model('account/customer');
+
+			if ( !$this->model_account_customer->removeExperience( $this->request->post ) ) {
+				$json['message'] = 'failed';
+			}else {
+				$json['message'] = 'success';
+			}*/
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function removeSkill() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() || !$this->validateRemoveExperience() ) {
+			$json['message'] = 'failed';
+		}else {
+			/*$this->load->model('account/customer');
+
+			if ( !$this->model_account_customer->removeExperience( $this->request->post ) ) {
+				$json['message'] = 'failed';
+			}else {
+				$json['message'] = 'success';
+			}*/
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
