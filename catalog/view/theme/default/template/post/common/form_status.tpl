@@ -4,6 +4,7 @@
 		<div class="post_new">
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
+				<input type="hidden" name="img-url" id="img-url" value="" />
 			</div>
 			<div id="post_image_previewer">				
 			</div>

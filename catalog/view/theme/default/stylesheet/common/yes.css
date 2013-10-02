@@ -886,7 +886,6 @@ label.in-line{
 }
 #post_image_previewer .post_image_item:hover .close {
   display: inline-block;
-  background-color: #FFF;
   opacity: 0.8;
   padding: 2px;
 }

@@ -3,6 +3,7 @@
 $(function () {
     'use strict';
     var jqXHR = null;
+    var listImgUrl = '';
     $('#img-upload').fileupload({
         dataType: 'json',
         autoUpload: true,
@@ -19,9 +20,14 @@ $(function () {
         data.context = $('<div/>').addClass('post_image_item').appendTo('#post_image_previewer');
         $.each(data.files, function (index, file) {
             var closeBtn = $('<span class="close"><i class="icon-remove"></i></span>');
-            closeBtn.click(function(){
+            closeBtn.click(function(){                
                 $(this).parent().fadeOut(300, function(){
+                    if(!jqXHR) {                 
+                        jqXHR.abort();   
+                    }
                     $(this).remove();
+                    $('#img-url').val('');
+                    listImgUrl = '';
                 });
             }).appendTo(data.context);   
             var spinIcon = $('<span class="loadding-icon"><i class="icon-spinner icon-spin icon-large"></i></span>') ;
@@ -57,14 +63,20 @@ $(function () {
             if (file.url) {
                 var link = $('<a>')
                     .attr('target', '_blank')
-                    .prop('href', file.url);                
-                $(data.context[index]).children('canvas').css('opacity','1').wrap(link);                 
+                    .prop('href', file.url);           
+                $(data.context[index]).children('canvas').css('opacity','1').wrap(link);
+                if(listImgUrl.length == 0){
+                    listImgUrl = file.url;
+                }else {                    
+                    listImgUrl += ('*' + file.url);
+                }
             } else if (file.error) {
                 var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> ' + file.error);
                 $(data.context[index]).append(error);
             }
             $(data.context[index]).children('.loadding-icon').remove();
         });
+        $('#img-url').val(listImgUrl);
     }).on('fileuploadfail', function (e, data) {
         $.each(data.files, function (index, file) {
             var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> File upload failed');            
