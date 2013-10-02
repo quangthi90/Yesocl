@@ -886,6 +886,9 @@ label.in-line{
 }
 #post_image_previewer .post_image_item:hover .close {
   display: inline-block;
+  background-color: #FFF;
+  opacity: 0.8;
+  padding: 2px;
 }
 #post_image_previewer .post_image_item .close:hover i{
   color: #000;
@@ -894,8 +897,25 @@ label.in-line{
   min-width: 200px;
   max-width: 435px;
 }
-#progress .bar{
-  height: 3px;
+#post_image_previewer .alert strong {
+  font-weight: bold;
+  font-size: 11px;
+  padding: 2px 5px;
+  margin-right: 10px;  
+  color: #FFF;
+}
+#post_image_previewer .alert-error strong {
+  background-color: red;
+}
+#post_image_previewer .alert-success strong {
+  background-color: green;
+}
+.y-progress {
+  min-height: 6px;
+  width: 100%;
+}
+.y-progress .bar{
+  height: 5px;
   background-color: #009B77;
   -webkit-transition: width 0.5s ease-in-out;
   -moz-transition: width 0.5s ease-in-out;

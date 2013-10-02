@@ -2,23 +2,7 @@
 /*global window, $ */
 $(function () {
     'use strict';
-    var uploadButton = $('<button/>')
-        .addClass('btn btn-primary')
-        .prop('disabled', true)
-        .text('Processing...')
-        .on('click', function () {
-            var $this = $(this),
-                data = $this.data();
-            $this.off('click')
-                .text('Abort')
-                .on('click', function () {
-                    $this.remove();
-                    data.abort();
-                });
-            data.submit().always(function () {
-                $this.remove();
-            });
-        });
+    var jqXHR = null;
     $('#img-upload').fileupload({
         dataType: 'json',
         autoUpload: true,
@@ -26,64 +10,67 @@ $(function () {
         maxFileSize: 5000000, // 5 MB
         disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
         previewThumbnail: false,
-        previewMaxWidth: 450,
-        previewMaxHeight: 400,
-        previewCrop: false
+        previewMaxWidth: 430,
+        previewMaxHeight: 200,
+        previewCrop: true
     }).on('fileuploadadd', function (e, data) {
-        data.context = $('<div/>').appendTo('#post_image_previewer');
+        $('.tooltip').remove();
+        $('#post_image_previewer').empty();
+        data.context = $('<div/>').addClass('post_image_item').appendTo('#post_image_previewer');
         $.each(data.files, function (index, file) {
-            var node = $('<p/>');
-            if (!index) {
-                node.append(uploadButton.clone(true).data(data));
-            }
-            node.appendTo(data.context);
+            var closeBtn = $('<span class="close"><i class="icon-remove"></i></span>');
+            closeBtn.click(function(){
+                $(this).parent().fadeOut(300, function(){
+                    $(this).remove();
+                });
+            }).appendTo(data.context);   
+            var spinIcon = $('<span class="loadding-icon"><i class="icon-spinner icon-spin icon-large"></i></span>') ;
+            spinIcon.appendTo(data.context);
+            jqXHR = data.submit();
         });
     }).on('fileuploadprocessalways', function (e, data) {
         var index = data.index,
             file = data.files[index],
-            node = $(data.context.children()[index]);
+            node = $(data.context[index]);
         if (file.preview) {
-            node
-                .prepend('<br>')
-                .prepend(file.preview);
+            node.prepend(file.preview);
+            node.children('canvas').css('opacity','0.1');
         }
         if (file.error) {
-            node
-                .append('<br>')
-                .append($('<span class="text-danger"/>').text(file.error));
+            var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> ' + file.error);
+            node.append(error);
         }
-        if (index + 1 === data.files.length) {
-            data.context.find('button')
-                .text('Upload')
-                .prop('disabled', !!data.files.error);
-        }
+    }).on('fileuploadprogress', function (e, data) {
+        var node = $(data.context[data.index]);
+        var progress = data.loaded / data.total;
+        node.children('canvas').css('opacity', progress);        
     }).on('fileuploadprogressall', function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
-        $('#progress .bar').css('width', progress + '%');
+        $('#progress .bar').show().css('width', progress + '%');
+        if(progress == 100) {
+            $('#progress .bar').slideUp(500, function(){
+                $(this).css('width','0%');
+            });
+        }
     }).on('fileuploaddone', function (e, data) {
         $.each(data.result.files, function (index, file) {
             if (file.url) {
                 var link = $('<a>')
                     .attr('target', '_blank')
-                    .prop('href', file.url);
-                $(data.context.children()[index])
-                    .wrap(link);
+                    .prop('href', file.url);                
+                $(data.context[index]).children('canvas').css('opacity','1').wrap(link);                 
             } else if (file.error) {
-                var error = $('<span class="text-danger"/>').text(file.error);
-                alert(file.error);
-                $(data.context.children()[index])
-                    .append('<br>')
-                    .append(error);
+                var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> ' + file.error);
+                $(data.context[index]).append(error);
             }
+            $(data.context[index]).children('.loadding-icon').remove();
         });
     }).on('fileuploadfail', function (e, data) {
-        console.log(data);
         $.each(data.files, function (index, file) {
-            var error = $('<span class="text-danger"/>').text('File upload failed.');
-            $(data.context.children()[index])
-                .append('<br>')
-                .append(error);
+            var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> File upload failed');            
+            $(data.context[index]).append(error);
         });
+        $('#progress .bar').css('width', '0%');
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
 });

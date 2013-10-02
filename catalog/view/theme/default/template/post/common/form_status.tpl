@@ -7,7 +7,7 @@
 			</div>
 			<div id="post_image_previewer">				
 			</div>
-			<div id="progress">
+			<div id="progress" class="y-progress">
 				<div class="bar" style="width: 0%;"></div>
 			</div>
 			<div class="post_tool">
@@ -122,11 +122,17 @@
 
 {% block post_common_form_status_javascript %}
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.ui.widget.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.load-image.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.canvas-to-blob.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.iframe-transport.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-wysiwyg.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
 <script type="text/javascript">	    
 	$('#post_new_adv').click(function() {
 		$('#post_advance').bPopup( 
@@ -146,36 +152,6 @@
 			editor.html('');
 			editor.focus();
 		}
-	});
-	$('#img-upload').fileupload({
-        dataType: 'json',
-        disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator && navigator.userAgent),
-	    imageMaxWidth: 800,
-	    imageMaxHeight: 800,
-	    imageCrop: true,
-        add: function (e, data) {
-        	$('.tooltip').remove();
-            data.submit();
-        },
-        done: function (e, data) {   
-        	if(data.result){
-        		$("#post_image_previewer").empty();
-	            $("#uploaded-image-template").tmpl(data.result.files).appendTo("#post_image_previewer"); 
-	            $('#post_image_previewer .close').click(function(e){
-	            	e.preventDefault();
-	            	$(this).parent().fadeOut(1000, function() {
-	            		$(this).remove();
-	            	});
-	            });
-        	}            
-        },
-		progressall: function (e, data) {
-			var progress = parseInt(data.loaded / data.total * 100, 10);
-			$('#progress .bar').css('width', progress + '%');
-			if(progress == 100){
-				$('#progress .bar').fadeOut(1000);
-			}
-		}
-    });
+	});	
 </script>
 {% endblock %}

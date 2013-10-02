@@ -487,26 +487,33 @@ class ControllerFileUpload extends Controller{
 
     protected function trim_file_name($name,
             $type = null, $index = null, $content_range = null) {
+
         // Remove path information and dots around the filename, to prevent uploading
         // into different directories or replacing hidden system files.
         // Also remove control characters and spaces (\x00..\x20) around the filename:
-        $name = trim(basename(stripslashes($name)), ".\x00..\x20");
+        $name = trim(basename(stripslashes($name)), ".\x00..\x20");        
         // Use a timestamp for empty filenames:
         if (!$name) {
             $name = str_replace('.', '-', microtime(true));
-        }
+        }        
         // Add missing file extension for known image types:
         if (strpos($name, '.') === false &&
             preg_match('/^image\/(gif|jpe?g|png)/', $type, $matches)) {
             $name .= '.'.$matches[1];
-        }
+        }        
+        return $name;
+    }
+
+    protected function trim_file_name_random($name,
+            $type = null, $index = null, $content_range = null) {
+        $name = $this->trim_file_name(md5(date('Y-m-d H:i:s:u')), $type, $index);
         return $name;
     }
 
     protected function get_file_name($name,
             $type = null, $index = null, $content_range = null) {
         return $this->get_unique_filename(
-            $this->trim_file_name($name, $type, $index, $content_range),
+            $this->trim_file_name_random($name, $type, $index, $content_range),
             $type,
             $index,
             $content_range
