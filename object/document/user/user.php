@@ -216,7 +216,11 @@ Class User {
 	}
 
 	public function getFullname(){
-		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		if ( $this->meta ){
+			return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		}
+
+		return '';
 	}
 
 	public function setGroupUser( $groupUser ){

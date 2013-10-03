@@ -48,7 +48,7 @@ class ControllerUserPost extends Controller {
 
 			if ( $this->model_user_post->addPost( $this->request->post, $this->request->get['user_id'], $this->request->files['thumb'] ) == false ){
 				$this->session->data['error_warning'] = $this->language->get('error_insert');
-			
+				exit;
 				$this->redirect( $this->url->link( 'user/post', 'user_id=' . $this->request->get['user_id'] . '&token=' . $this->session->data['token'], 'SSL' ) );
 			}
 			
