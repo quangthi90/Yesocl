@@ -82,7 +82,7 @@ class ControllerAccountAccount extends Controller {
 		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
 				}
 
-				$this->data['users'][$post['user_id']] = $user;
+				$this->data['users'][$user['id']] = $user;
 			}
 			
 			$post = $post->formatToCache();

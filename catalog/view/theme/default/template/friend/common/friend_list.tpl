@@ -4,11 +4,11 @@
     {% endif %}
     {% for friend in friends %}
         <div class="block-content-item friend-item">
-            <a href="#" class="fl friend-img">
+            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
                 <img src="{{ friend.avatar }}">
             </a>
             <div class="fl friend-info">
-                <a href="#" class="friend-name">{{ friend.username }}</a>
+                <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
                 <ul class="friend-infolist">
                     <li>{{ friend.meta.industry }}</li>
                     <li>100 friends</li>
