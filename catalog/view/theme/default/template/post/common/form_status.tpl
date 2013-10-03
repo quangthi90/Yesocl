@@ -1,14 +1,14 @@
 {% use '@template/default/template/post/common/post_editor.tpl' %}
 {% block post_common_form_status %}
-	<div class="form-status" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new">
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
-				<input type="hidden" name="img-url" id="img-url" value="" />
+				<input type="hidden" name="img-url" class="img-url" value="" />
 			</div>
-			<div id="post_image_previewer">				
+			<div class="img-previewer-container">				
 			</div>
-			<div id="progress" class="y-progress">
+			<div class="y-progress">
 				<div class="bar" style="width: 0%;"></div>
 			</div>
 			<div class="post_tool">
@@ -16,7 +16,7 @@
 					<div class="span8 post_new_control">
 						<a href="#" title="Insert images" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" class="img-attach" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
+							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						</a>
 						<a href="#" title="Advance post" id="post_new_adv">
 							<i class="icon-external-link-sign icon-2x"></i>
@@ -153,6 +153,6 @@
 			editor.html('');
 			editor.focus();
 		}
-	});	
+	});		
 </script>
 {% endblock %}

@@ -853,7 +853,7 @@ label.in-line{
   overflow: hidden;
   position: relative;
 }
-.post_new .post_new_control .img-attach {
+.post_new .post_new_control .img-upload {
   opacity: 0;
   position: absolute;
   top: 0px;
@@ -868,54 +868,54 @@ label.in-line{
   background-color: #f4f4f4;
 }
 
-#post_image_previewer {
+.img-previewer-container {
   overflow: hidden;
   border-top: 1px solid #ddd;
   text-align: center;
 }
-#post_image_previewer .post_image_item {
+.img-previewer-container .post_image_item {
   margin: 2px;
   padding: 5px;
   position: relative;
 }
-#post_image_previewer .post_image_item .close {
+.img-previewer-container .post_image_item .close {
   position: absolute;
   top: 10px;
   right: 10px;
   display: none;
 }
-#post_image_previewer .post_image_item:hover .close {
+.img-previewer-container .post_image_item:hover .close {
   display: inline-block;
   opacity: 0.8;
   padding: 2px;
 }
-#post_image_previewer .post_image_item .close:hover i{
+.img-previewer-container .post_image_item .close:hover i{
   color: #000;
 }
-#post_image_previewer .post_image_item img {
+.img-previewer-container .post_image_item img {
   min-width: 200px;
   max-width: 435px;
 }
-#post_image_previewer .alert strong {
+.img-previewer-container .alert strong {
   font-weight: bold;
   font-size: 11px;
   padding: 2px 5px;
   margin-right: 10px;  
   color: #FFF;
 }
-#post_image_previewer .alert-error strong {
+.img-previewer-container .alert-error strong {
   background-color: red;
 }
-#post_image_previewer .alert-success strong {
+.img-previewer-container .alert-success strong {
   background-color: green;
 }
 .y-progress {
-  min-height: 6px;
   width: 100%;
 }
 .y-progress .bar{
   height: 5px;
   background-color: #009B77;
+  display: none;
   -webkit-transition: width 0.5s ease-in-out;
   -moz-transition: width 0.5s ease-in-out;
   -o-transition: width 0.5s ease-in-out;
