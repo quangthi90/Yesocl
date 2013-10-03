@@ -302,12 +302,12 @@ class ModelAccountCustomer extends Model {
 
 			// phone
 
-			if ( isset( $data['sex'] ) && !empty( $data['sex'] ) ) {
+			if ( isset( $data['sex'] ) ) {
 				$customer->getMeta()->setSex( (int) $data['sex'] );
 			}
 
 			if ( isset( $data['birthday'] ) && !empty( $data['birthday'] ) ) {
-				
+				$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
 			}
 
 			if ( isset( $data['address'] ) && !empty( $data['address'] ) ) {
