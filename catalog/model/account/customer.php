@@ -278,6 +278,10 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}
 
+			if ( !isset($data['birthday']) ) {
+				return false;
+			}
+
 			if ((utf8_strlen($data['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $data['email'])) {
 				return false;
 			}
