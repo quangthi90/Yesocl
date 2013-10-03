@@ -30,71 +30,42 @@
 							<div class="clear"></div>
 						</div>
 						<div class="profiles-tabs-main-body">
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Username</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.username }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="username" value="{{ user.username }}" />
+							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-email="{{ user.email }}" data-phone="{{ user.phone }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-industry="{{ user.industry }}">
+								<div class="row-fluid">
+									<div class="span2 offset1">Username</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.username }}</span></div>
 								</div>
-							</div>
-
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Fullname</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.fullname }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="fullname" value="{{ user.fullname }}" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Fullname</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.fullname }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Email</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.email }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="email" value="{{ user.email }}" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Email</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.email }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Phone</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">0123456789</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="phone" value="0123456789" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Phone</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.phone }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Sex</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.sex }}</span>
-									<select class="profiles-tabs-input editors" name="gender">
-										<option value="1" {% if user.sex_num == 1 %}selected="selected"{% endif %}>Male</option>
-										<option value="2" {% if user.sex_num != 1 %}selected="selected"{% endif %}>Female</option>
-									</select>
+								<div class="row-fluid">
+									<div class="span2 offset1">Sex</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.sext }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Birthday</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.birthday|date('d/m/Y') }}</span>
-									<input class="profiles-tabs-input editors" type="text" name="birthday" value="{{ user.birthday|date('d/m/Y') }}" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Birthday</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.birthdayt }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Address</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.address }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="address" value="{{ user.address }}" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Address</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.address }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Living</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.location }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="location" value="{{ user.location }}" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Living</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.location }}</span></div>
 								</div>
-							</div>
-							<div class="row-fluid input-group">
-								<div class="span2 offset1">Industry</div>
-								<div class="span9">
-									<span class="profiles-tabs-value viewers">{{ user.industry }}</span>
-									<input class="profiles-tabs-input editors" type="text" placeholder="Input Text" name="industry" value="{{ user.industry }}" />
+								<div class="row-fluid">
+									<div class="span2 offset1">Industry</div>
+									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.industry }}</span></div>
 								</div>
 							</div>
 						</div>
@@ -181,7 +152,7 @@
 					{% endfor %}
 				</div>	
 			</div>
-			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left">
+			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left" data-url="{{ link_add_skill }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>
 					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
@@ -225,6 +196,89 @@
 
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
+<script id="profiles-form" type="text/x-jquery-tmpl">
+	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phone="${ phone }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+		<div class="row-fluid">
+			<div class="span2 offset1">Username</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Fullname</div>
+			<div class="span9"><input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" /> <input class="span2" type="text" placeholder="Input Text" name="lastname" value="${ lastname }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Email</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="email" value="${ email }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Phone</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="phone" value="${ phone }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Sex</div>
+			<div class="span9"><select name="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Birthday</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="birthday" value="${ birthday }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Address</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="address" value="${ address }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Living</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="location" value="${ location }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Industry</div>
+			<div class="span9"><input type="text" placeholder="Input Text" name="industry" value="${ industry }" /></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span9 offset3"><a href="#" class="btn btn-success profiles-btn-save">Save</a>   <a href="#" class="btn profiles-btn-cancel">Cancel</a></div>
+		</div>
+	</div>
+</script>
+<script id="profiles-item" type="text/x-jquery-tmpl">
+	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phone="${ phone }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+		<div class="row-fluid">
+			<div class="span2 offset1">Username</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ username }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Fullname</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ fullname }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Email</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ email }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Phone</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ phone }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Sex</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ sext }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Birthday</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ birthdayt }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Address</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ address }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Living</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ location }</span></div>
+		</div>
+		<div class="row-fluid">
+			<div class="span2 offset1">Industry</div>
+			<div class="span9"><span class="profiles-tabs-value viewers">${ industry }</span></div>
+		</div>
+	</div>
+</script>
 <script id="background-sumary-form" type="text/x-jquery-tmpl">
     <textarea name="sumary">${ sumary }</textarea>
 </script>

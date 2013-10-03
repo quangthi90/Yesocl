@@ -18,6 +18,8 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_add_experience'] = $this->url->link('account/edit/addExperience', '', 'SSL');
 		$this->data['link_remove_experience'] = $this->url->link('account/edit/removeExperience', '', 'SSL');
 		$this->data['link_edit_experience'] = $this->url->link('account/edit/editExperience', '', 'SSL');
+		$this->data['link_add_skill'] = $this->url->link('account/edit/addSkill', '', 'SSL');
+		$this->data['link_remove_skill'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
 		
 
 		$this->load->model('user/user');
@@ -100,12 +102,15 @@ class ControllerAccountEdit extends Controller {
 		$this->data['user'] = array(
 			'id' => $user->getId(),
 			'username' => $user->getUsername(),
+			'firstname' => $user->getMeta()->getFirstname(),
+			'lastname' => $user->getMeta()->getLastname(),
 			'fullname' => $user->getFullName(),
 			'email' => $user->getPrimaryEmail()->getEmail(),
-			'phone' => $phone_data,
-			'sex' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
-			'sex_num' => $user->getMeta()->getSex(),
-			'birthday' => $user->getMeta()->getBirthday(),
+			'phone' => '0123456789',//$phone_data,
+			'sex' => $user->getMeta()->getSex() ? 1 : 0,
+			'sext' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
+			'birthday' => $user->getMeta()->getBirthday()->format('d/m/Y'),
+			'birthdayt' => $user->getMeta()->getBirthday()->format('d/m/Y'),
 			'location' => $user->getMeta()->getLocation()->getLocation(),
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
@@ -169,8 +174,12 @@ class ControllerAccountEdit extends Controller {
 			$this->error['username'] = $this->language->get('error_username');
 		}
 
-		if ((utf8_strlen($this->request->post['fullname']) < 1) || (utf8_strlen($this->request->post['fullname']) > 32)) {
-			$this->error['fullname'] = $this->language->get('error_fullname');
+		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
+			$this->error['firstname'] = $this->language->get('error_firstname');
+		}
+
+		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
+			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
 		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
@@ -385,8 +394,23 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $this->model_account_customer->updateProfiles( $this->request->post ) ) {
+			if ( $user = $this->model_account_customer->updateProfiles( $this->request->post ) ) {
 				$json['message'] = 'success';
+
+				$json['url'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
+				$json['username'] = $user->getUsername();
+				$json['firstname'] = $user->getMeta()->getFirstname();
+				$json['lastname'] = $user->getMeta()->getLastname();
+				$json['fullname'] = $user->getFullName();
+				$json['email'] = $user->getPrimaryEmail()->getEmail();
+				$json['phone'] = '0123456789';//$phone_data,
+				$json['sex'] = $user->getMeta()->getSex() ? 1 : 0;
+				$json['sext'] = $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female');
+				$json['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');
+				$json['birthdayt'] = $user->getMeta()->getBirthday()->format('d/m/Y');
+				$json['location'] = $user->getMeta()->getLocation()->getLocation();
+				$json['address'] = $user->getMeta()->getAddress();
+				$json['industry'] = $user->getMeta()->getIndustry();
 			}else {
 				$json['message'] = 'failed';
 			}

@@ -270,7 +270,11 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}
 
-			if ((utf8_strlen($data['fullname']) < 1) || (utf8_strlen($data['fullname']) > 32)) {
+			if ((utf8_strlen($data['firstname']) < 1) || (utf8_strlen($data['firstname']) > 32)) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['lastname']) < 1) || (utf8_strlen($data['lastname']) > 32)) {
 				return false;
 			}
 
@@ -286,20 +290,20 @@ class ModelAccountCustomer extends Model {
 				$customer->setUsername( $data['username'] );
 			}
 
-			if ( isset( $data['fullname'] ) && !empty( $data['fullname'] ) ) {
-				$names = explode(" ", $data['fullname']);
-				$lastname = end($names);
-				$firstname = $names[0];
-				for ($i=1; $i < count($names) - 1 ; $i++) { 
-					$firstname += ' ' . $names[i];
-				}
-
-				$customer->getMeta()->setFirstname( $firstname );
-				$customer->getMeta()->setLastname( $lastname );
+			if ( isset( $data['firstname'] ) && !empty( $data['firstname'] ) ) {
+				$customer->getMeta()->setFirstname( $data['firstname'] );
 			}
 
+			if ( isset( $data['lastname'] ) && !empty( $data['lastname'] ) ) {
+				$customer->getMeta()->setLastname( $data['lastname'] );
+			}
+
+			// email
+
+			// phone
+
 			if ( isset( $data['sex'] ) && !empty( $data['sex'] ) ) {
-				$customer->setSex( (int) $data['sex'] );
+				$customer->getMeta()->setSex( (int) $data['sex'] );
 			}
 
 			if ( isset( $data['birthday'] ) && !empty( $data['birthday'] ) ) {
@@ -307,23 +311,24 @@ class ModelAccountCustomer extends Model {
 			}
 
 			if ( isset( $data['address'] ) && !empty( $data['address'] ) ) {
-				
+				$customer->getMeta()->setAddress( $data['address'] );
 			}
 
 			if ( isset( $data['location'] ) && !empty( $data['location'] ) ) {
-				
+				$customer->getMeta()->getLocation()->setLocation( $data['location'] );
 			}
 
 			if ( isset( $data['industry'] ) && !empty( $data['industry'] ) ) {
-				
+				$customer->getMeta()->setIndustry( $data['industry'] );
 			}
+
+			$this->dm->flush();
+
+			return $customer;
+
 		}else {
 			return false;
 		}
-
-		$this->dm->flush();
-
-		return true;
 	}
 
 	public function updateBackground( $data = array() ) {

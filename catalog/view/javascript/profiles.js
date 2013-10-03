@@ -16,22 +16,17 @@ function TabsInformation($element, contentHeight) {
 	this.contentHeight = contentHeight;
 	this.header = $element.find('.profiles-tabs-header');
 	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.inputDescription = $element.find('.input-description');
-
+	//this.inputDescription = $element.find('.input-description');
 	this.afterCreate();
 
 	this.btnEdit = $element.find('.profiles-btn-edit');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-	this.btnSave = $element.find('.profiles-btn-save');
-
-	this.inputGroups = new ProfilesTabsInputGroups($element.find('.input-group'));
 
 	this.attachEvents();
 }
 
 TabsInformation.prototype.afterCreate = function () {
-	this.inputDescription.outerHeight(this.contentHeight*3/10);
-	this.inputDescription.niceScroll();
+	//this.inputDescription.outerHeight(this.contentHeight*3/10);
+	//this.inputDescription.niceScroll();
 	this.mainBody.height(this.contentHeight - this.header.height() - 30);
 	this.mainBody.niceScroll();
 }
@@ -43,34 +38,70 @@ TabsInformation.prototype.attachEvents = function () {
 		if ( self.btnEdit.hasClass( 'disabled' ) ) {
 			return false;
 		}
+
 		$('.profiles-btn-edit').addClass( 'disabled' );
 		$('.profiles-btn-add').addClass( 'disabled' );
-		self.btnEdit.toggle();
-		self.btnCancel.toggle();
-		self.btnSave.toggle();
-		self.inputGroups.changeMode();
-	});
+		$('.profiles-btn-remove').addClass( 'disabled' );
+		
+		var item = self.self.find( '.basic-profiles-item' );
 
-	this.btnCancel.click(function () {
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		self.btnEdit.toggle();
-		self.btnCancel.toggle();
-		self.btnSave.toggle();
-		self.inputGroups.changeMode();
-	})
-
-	this.btnSave.click(function () {
 		var data = {
-			'fullname': self.inputGroups.self.find('input[name=\"fullname\"]').val(),
-			'email': self.inputGroups.self.find('input[name=\"email\"]').val(),
-			'phone': self.inputGroups.self.find('input[name=\"phone\"]').val(),
-			'gender': self.inputGroups.self.find('select[name=\"gender\"]').val(),
-			'birthday': self.inputGroups.self.find('input[name=\"birthday\"]').val(),
-			'address': self.inputGroups.self.find('input[name=\"address\"]').val(),
-			'location': self.inputGroups.self.find('input[name=\"location\"]').val(),
-			'industry': self.inputGroups.self.find('input[name=\"industry\"]').val()
+			'url': item.data('url'),
+			'username': item.data('username'),
+			'firstname': item.data('firstname'),
+			'lastname': item.data('lastname'),
+			'fullname': item.data('fullname'),
+			'email': item.data('email'),
+			'phone': item.data('phone'),
+			'sex': item.data('sex'),
+			'sext': item.data('sext'),
+			'birthday': item.data('birthday'),
+			'birthdayt': item.data('birthdayt'),
+			'address': item.data('address'),
+			'location': item.data('location'),
+			'industry': item.data('industry')
+		}
+		
+		var $form = $.tmpl( $('#profiles-form'), data );
+		new ProfilesForm( $form );
+
+		item.toggle();
+		item.after( $form );
+		item.remove();
+	});
+}
+
+function ProfilesForm( $element ) {
+	this.self = $element;
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+
+	this.attachEvents();
+}
+
+ProfilesForm.prototype.attachEvents = function () {
+	var self = this;
+
+	this.self.find('select[name=\"sex\"]').val( this.self.data('sex') ).prop('selected',true);
+
+	this.btnSave.click( function () {
+		if ( self.btnSave.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		var data = {
+			'username': self.self.find('[name=\"username\"]').val(),
+			'firstname': self.self.find('[name=\"firstname\"]').val(),
+			'lastname': self.self.find('[name=\"lastname\"]').val(),
+			'email': self.self.find('[name=\"email\"]').val(),
+			'phone': self.self.find('[name=\"phone\"]').val(),
+			'sex': self.self.find('[name=\"sex\"]').val(),
+			'birthday': self.self.find('[name=\"birthday\"]').val(),
+			'address': self.self.find('[name=\"address\"]').val(),
+			'location': self.self.find('[name=\"location\"]').val(),
+			'industry': self.self.find('[name=\"industry\"]').val()
 		};
+
 		$.ajax({
 			type: 'POST',
 			url: self.self.data('url'),
@@ -78,19 +109,60 @@ TabsInformation.prototype.attachEvents = function () {
 			dataType: 'json',
 			success: function (json) {
 				if ( json.message == 'success' ) {
-					self.inputGroups.save();
-					self.inputGroups.changeMode();
+					var $item = $.tmpl($('#profiles-item'), json);
+					new ProfilesItem($item);
+
+					self.self.toggle();
+					self.self.after($item);
+					self.self.remove();
+
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
-					self.btnEdit.toggle();
-					self.btnCancel.toggle();
-					self.btnSave.toggle();
+					$('.profiles-btn-remove').removeClass( 'disabled' );
 				}else {
 					alert('Error!');
 				}
-			}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
 		});
-	})
+
+	} );
+
+	this.btnCancel.click( function () {
+		var data = {
+			'url': self.self.data('url'),
+			'username': self.self.data('username'),
+			'firstname': self.self.data('firstname'),
+			'lastname': self.self.data('lastname'),
+			'fullname': self.self.data('fullname'),
+			'email': self.self.data('email'),
+			'phone': self.self.data('phone'),
+			'sex': self.self.data('sex'),
+			'sext': self.self.data('sext'),
+			'birthday': self.self.data('birthday'),
+			'birthdayt': self.self.data('birthdayt'),
+			'address': self.self.data('address'),
+			'location': self.self.data('location'),
+			'industry': self.self.data('industry')
+		}
+
+		var $item = $.tmpl($('#profiles-item'), data);
+		new ProfilesItem($item);
+
+		self.self.toggle();
+		self.self.after($item);
+		self.self.remove();
+
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
+		$('.profiles-btn-remove').removeClass( 'disabled' );
+	} );
+}
+
+function ProfilesItem( $element ) {
+	this.self = this;
 }
 
 function TabsBackground($element, contentWidth, contentHeight) {
@@ -139,13 +211,16 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 		$('.profiles-btn-edit').addClass( 'disabled' );
 		$('.profiles-btn-add').addClass( 'disabled' );
 		$('.profiles-btn-remove').addClass( 'disabled' );
+
 		self.btnEdit.toggle();
 		self.btnCancel.toggle();
 		self.btnSave.toggle();
 		self.inputSumary.toggle();
+
 		var data = { 
 			'sumary': self.inputSumary.data('sumary') 
 		};
+
 		self.mainBody.append($.tmpl($('#background-sumary-form'), data));
 		$('textarea[name=\"sumary\"]').niceScroll();
 	});
@@ -222,9 +297,11 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		if ( self.btnAdd.hasClass( 'disabled' ) ) {
 			return false;
 		}
+
 		$('.profiles-btn-edit').addClass( 'disabled' );
 		$('.profiles-btn-add').addClass( 'disabled' );
 		$('.profiles-btn-remove').addClass( 'disabled' );
+
 		var data = {
 			'url': self.self.data('url'),
 			'id': '',
@@ -234,10 +311,11 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 			'school': '',
 			'fieldofstudy': '',
 		}
+
 		var $form = $.tmpl($('#background-education-form'), data);
 		new FormAddEducation($form);
+
 		self.mainBody.prepend($form);
-		
 	});
 }
 
@@ -678,58 +756,25 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 	});
 
 	this.btnSave.click( function () {
+		if ( self.btnSave.hasClass( 'disabled' ) ) {
+			return false;
+		}
 
-	});
-}
+		var data = {
+			'skill': self.inputSkill.val()
+		}
 
-function ProfilesTabsInputGroups($element) {
-	this.self = $element;
-}
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function ( json ) {
 
-ProfilesTabsInputGroups.prototype.changeMode = function () {
-	if (this.self.find('.viewers').is(':hidden')) {
-		this.self.find('.editors').toggle();
-		this.self.find('.viewers').toggle();
-	}else {
-		this.self.each(function () {
-			var self = $(this);
-			if (self.find('.editors').is('input')) {
-				self.find('input').val(self.find('.viewers').html());
-			}else if (self.find('.editors').is('select')) {
-				self.find("select option").filter(function() {
-    				return $(this).text() == self.find('.viewers').html(); 
-				}).prop('selected', true);
-			}else {
-				self.find('textarea').text(self.find('.viewers').html());
+			},
+			error: function ( xhr, error ) {
+				alert( xhr.responseText );
 			}
 		});
-		this.self.find('.viewers').toggle();
-		this.self.find('.editors').toggle();
-	}
-}
-
-ProfilesTabsInputGroups.prototype.save = function () {
-	this.self.each(function () {
-		var self = $(this);
-		if (self.find('.editors').is('input')) {
-			self.find('.viewers').html(self.find('input').val());
-		}else if (self.find('.editors').is('select')) {
-			self.find('.viewers').html(self.find('select').text());
-		}else {
-			self.find('.viewers').html(self.find('textarea').val());
-		}
 	});
-}
-
-ProfilesTabsInputGroups.prototype.getData = function () {
-	return {
-		'fullname': this.self.find('input[name=\"fullname\"]').val(),
-		'email': this.self.find('input[name=\"email\"]').val(),
-		'phone': this.self.find('input[name=\"phone\"]').val(),
-		'gender': this.self.find('select[name=\"gender\"]').val(),
-		'birthday': this.self.find('input[name=\"birthday\"]').val(),
-		'address': this.self.find('input[name=\"address\"]').val(),
-		'location': this.self.find('input[name=\"location\"]').val(),
-		'industry': this.self.find('input[name=\"industry\"]').val()
-	}
 }
