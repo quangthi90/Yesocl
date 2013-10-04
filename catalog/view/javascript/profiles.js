@@ -16,7 +16,6 @@ function TabsInformation($element, contentHeight) {
 	this.contentHeight = contentHeight;
 	this.header = $element.find('.profiles-tabs-header');
 	this.mainBody = $element.find('.profiles-tabs-main-body');
-	//this.inputDescription = $element.find('.input-description');
 	this.afterCreate();
 
 	this.btnEdit = $element.find('.profiles-btn-edit');
@@ -25,8 +24,6 @@ function TabsInformation($element, contentHeight) {
 }
 
 TabsInformation.prototype.afterCreate = function () {
-	//this.inputDescription.outerHeight(this.contentHeight*3/10);
-	//this.inputDescription.niceScroll();
 	this.mainBody.height(this.contentHeight - this.header.height() - 30);
 	this.mainBody.niceScroll();
 }
@@ -52,7 +49,8 @@ TabsInformation.prototype.attachEvents = function () {
 			'lastname': item.data('lastname'),
 			'fullname': item.data('fullname'),
 			'email': item.data('email'),
-			'phone': item.data('phone'),
+			'phones': item.data('phones'),
+			'phones_js': JSON.stringify(item.data('phones')),
 			'sex': item.data('sex'),
 			'sext': item.data('sext'),
 			'birthday': item.data('birthday'),
@@ -94,7 +92,7 @@ ProfilesForm.prototype.attachEvents = function () {
 			'firstname': self.self.find('[name=\"firstname\"]').val(),
 			'lastname': self.self.find('[name=\"lastname\"]').val(),
 			'email': self.self.find('[name=\"email\"]').val(),
-			'phone': self.self.find('[name=\"phone\"]').val(),
+			'phones': self.self.find('[name=\"phones\"]').val(),
 			'sex': self.self.find('[name=\"sex\"]').val(),
 			'birthday': self.self.find('[name=\"birthday\"]').val(),
 			'address': self.self.find('[name=\"address\"]').val(),
@@ -127,7 +125,6 @@ ProfilesForm.prototype.attachEvents = function () {
 		    	alert(xhr.responseText);
 		 	}
 		});
-
 	} );
 
 	this.btnCancel.click( function () {
@@ -138,7 +135,8 @@ ProfilesForm.prototype.attachEvents = function () {
 			'lastname': self.self.data('lastname'),
 			'fullname': self.self.data('fullname'),
 			'email': self.self.data('email'),
-			'phone': self.self.data('phone'),
+			'phones': self.self.data('phones'),
+			'phones_js': JSON.stringify(self.self.data('phones')),
 			'sex': self.self.data('sex'),
 			'sext': self.self.data('sext'),
 			'birthday': self.self.data('birthday'),
@@ -159,6 +157,14 @@ ProfilesForm.prototype.attachEvents = function () {
 		$('.profiles-btn-add').removeClass( 'disabled' );
 		$('.profiles-btn-remove').removeClass( 'disabled' );
 	} );
+
+	self.self.find('.phones-form').each( function () {
+		new PhonesForm( $(this) );
+	});
+}
+
+function PhonesForm( $element ) {
+	this.self = this;
 }
 
 function ProfilesItem( $element ) {

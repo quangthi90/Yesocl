@@ -21,18 +21,33 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_add_skill'] = $this->url->link('account/edit/addSkill', '', 'SSL');
 		$this->data['link_remove_skill'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
 		
-
 		$this->load->model('user/user');
+		$this->load->model('data/value');
 
 		$user_id = $this->customer->getId();
 		$user = $this->model_user_user->getUserFull( array('user_id' => $user_id) );
 
+		// Entry phone type
+		$phone_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_phone_type' ) ) );
+		$this->data['phone_types'] = array();
+		foreach ($phone_types as $phone_type) {
+			$this->data['phone_types'][] = array(
+				'text' => $phone_type->getName(),
+				'code' => $phone_type->getValue(),
+				);
+
+		}
+
 		// phone
-		$phone_data = '';
+		$phones_data = array();
 		foreach ($user->getMeta()->getPhones() as $phone) {
 			if ( $phone && !empty( $phone ) ) {
-				$phone_data = $phone->getPhone();
-				break;
+				$phones_data[] = array(
+					'id' => $phone->getId(),
+					'type' => $phone->getType(),
+					'phone' => $phone->getPhone(),
+					'visible' => $phone->getVisible(),
+					);
 			}
 		}
 
@@ -106,7 +121,8 @@ class ControllerAccountEdit extends Controller {
 			'lastname' => $user->getMeta()->getLastname(),
 			'fullname' => $user->getFullName(),
 			'email' => $user->getPrimaryEmail()->getEmail(),
-			'phone' => '0123456789',//$phone_data,
+			'phones' => $phones_data,
+			'phones_js' => json_encode( $phones_data ),
 			'sex' => $user->getMeta()->getSex() ? 1 : 0,
 			'sext' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
 			'birthday' => $user->getMeta()->getBirthday()->format('d/m/Y'),
@@ -407,7 +423,16 @@ class ControllerAccountEdit extends Controller {
 				$json['lastname'] = $user->getMeta()->getLastname();
 				$json['fullname'] = $user->getFullName();
 				$json['email'] = $user->getPrimaryEmail()->getEmail();
-				$json['phone'] = '0123456789';//$phone_data,
+				$json['phones'] = array();
+				foreach ($user->getMeta()->getPhones() as $phone) {
+					$json['phones'][] = array(
+						'id' => $phone->getId(),
+						'type' => $phone->getType(),
+						'phone' => $phone->getPhone(),
+						'visible' => $phone->getVisible()
+						);
+				}
+				$json['phones_js'] = json_encode( $json['phones'] );
 				$json['sex'] = $user->getMeta()->getSex() ? 1 : 0;
 				$json['sext'] = $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female');
 				$json['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');

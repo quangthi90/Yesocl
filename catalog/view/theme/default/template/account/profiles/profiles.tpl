@@ -30,7 +30,7 @@
 							<div class="clear"></div>
 						</div>
 						<div class="profiles-tabs-main-body">
-							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-email="{{ user.email }}" data-phone="{{ user.phone }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-industry="{{ user.industry }}">
+							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-email="{{ user.email }}" data-phones="{{ user.phones_js }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-industry="{{ user.industry }}">
 								<div class="row-fluid">
 									<div class="span2 offset1">Username</div>
 									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.username }}</span></div>
@@ -45,7 +45,13 @@
 								</div>
 								<div class="row-fluid">
 									<div class="span2 offset1">Phone</div>
-									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.phone }}</span></div>
+									<div class="span9">
+										<div class="row-fluid">
+											{% for phone in user.phones %}
+											<div class="phones-item">{{ phone.phone }}</div>
+						        			{% endfor %}
+										</div>
+									</div>
 								</div>
 								<div class="row-fluid">
 									<div class="span2 offset1">Sex</div>
@@ -197,10 +203,10 @@
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="profiles-form" type="text/x-jquery-tmpl">
-	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phone="${ phone }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
+			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Fullname</div>
@@ -208,31 +214,40 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Email</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="email" value="${ email }" /></div>
+			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="email" value="${ email }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Phone</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="phone" value="${ phone }" /></div>
+			<div class="span9">
+				<div class="row-fluid">
+					{% set phone_loop = '{{each phones}}' %}
+					{% set phone_loop_end = '{{/each}}' %}
+					{{ phone_loop }}
+					<div class="phones-form" data-id="${ $value.id }"><input class="span5" type="text" placeholder="Input Text" name="phones[number][${ $index }]" value="${ $value.phone }" /> <select class="span3" name="phones[type][${ $index }]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					{{ phone_loop_end }}
+				</div>
+				<div class="row-fluid"><a class="btn btn-success offset5" href="#">Add phone</a></div>
+			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Sex</div>
-			<div class="span9"><select name="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
+			<div class="span9"><select class="span5" name="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Birthday</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="birthday" value="${ birthday }" /></div>
+			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="birthday" value="${ birthday }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Address</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="address" value="${ address }" /></div>
+			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="address" value="${ address }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Living</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="location" value="${ location }" /></div>
+			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="location" value="${ location }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Industry</div>
-			<div class="span9"><input type="text" placeholder="Input Text" name="industry" value="${ industry }" /></div>
+			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="industry" value="${ industry }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span9 offset3"><a href="#" class="btn btn-success profiles-btn-save">Save</a>   <a href="#" class="btn profiles-btn-cancel">Cancel</a></div>
@@ -240,7 +255,7 @@
 	</div>
 </script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
-	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phone="${ phone }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
 			<div class="span9"><span class="profiles-tabs-value viewers">${ username }</span></div>
@@ -255,7 +270,15 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Phone</div>
-			<div class="span9"><span class="profiles-tabs-value viewers">${ phone }</span></div>
+			<div class="span9">
+				<div class="row-fluid">
+					{% set phone_loop = '{{each phones}}' %}
+					{% set phone_loop_end = '{{/each}}' %}
+					{{ phone_loop }}
+					<div class="phones-item">${ $value.phone }</div>
+					{{ phone_loop_end }}
+				</div>
+			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Sex</div>
@@ -359,7 +382,7 @@
 	} );
 
 	window.onresize=function() {
-		window.setTimeout('location.reload()', 1);
+		//window.setTimeout('location.reload()', 1);
 	};
 </script>
 {% endblock %}
