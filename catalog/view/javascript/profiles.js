@@ -791,6 +791,8 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 		self.inputSkill.toggle();
 		self.btnCancel.toggle();
 
+		self.inputSkill.val('');
+
 		$('.profiles-btn-add').removeClass( 'disabled' );
 		$('.profiles-btn-edit').removeClass( 'disabled' );
 		$('.profiles-btn-remove').removeClass( 'disabled' );
@@ -811,7 +813,75 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function ( json ) {
+				if ( json.message == 'success' ) {
+					var $item = $.tmpl( $('#background-skill-item'), json );
+					new SkillItem( $item );
 
+					self.mainBody.append( $item );
+
+					self.btnAdd.toggle();
+					self.btnSave.toggle();
+					self.inputSkill.toggle();
+					self.btnCancel.toggle();
+
+					self.inputSkill.val('');
+
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function ( xhr, error ) {
+				alert( xhr.responseText );
+			}
+		});
+	});
+
+	this.self.find( '.profiles-tabs-item2' ).each( function () {
+		new SkillItem( $(this) );
+	});
+}
+
+function SkillItem( $element ) {
+	this.self = $element;
+	this.btnRemove = $element.find('.profiles-btn-remove');
+
+	this.attachEvents();
+}
+
+SkillItem.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnRemove.click( function () {
+		if ( self.btnRemove.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-add').addClass( 'disabled' );
+		$('.profiles-btn-edit').addClass( 'disabled' );
+		$('.profiles-btn-remove').addClass( 'disabled' );
+
+		var data = {
+			'id': self.self.data('id'),
+		}
+
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('remove'),
+			data: data,
+			dataType: 'json',
+			success: function ( json ) {
+				if ( json.message == 'success' ) {
+					self.self.remove();
+
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
 			},
 			error: function ( xhr, error ) {
 				alert( xhr.responseText );

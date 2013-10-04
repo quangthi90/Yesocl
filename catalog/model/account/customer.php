@@ -5,7 +5,8 @@ use Document\User\User,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
 	Document\User\Meta\Location,
-	Document\User\Meta\Phone;
+	Document\User\Meta\Phone,
+	Document\User\Meta\Skill;
 
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
@@ -653,6 +654,58 @@ class ModelAccountCustomer extends Model {
 		}else {
 			return false;
 		}
+	}
+
+	public function addSkill( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['skill'] ) || empty( $data['skill'] ) ) {
+				return false;
+			}
+
+			$skill = new Skill();
+			$skill->setSkill( $data['skill'] );
+
+			$this->dm->persist( $skill );
+			$customer->getMeta()->getBackground()->addSkill( $skill );
+
+			$this->dm->flush();
+
+			return $skill;
+		}else {
+			return false;
+		}
+	}
+
+	public function removeSkill( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+				return false;
+			}
+
+			foreach ($customer->getMeta()->getBackground()->getSkills() as $skill) {
+				if ( $skill->getId() == $data['id'] ) {
+					$customer->getMeta()->getBackground()->getSkills()->removeElement( $skill );
+				}
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>

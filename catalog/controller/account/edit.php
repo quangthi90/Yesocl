@@ -113,6 +113,15 @@ class ControllerAccountEdit extends Controller {
 
 		//usort( $experiences_data, 'sortExperience');
 
+		// skills
+		$skills_data = array();
+		foreach ($user->getMeta()->getBackground()->getSkills() as $skill) {
+			$skills_data[] = array(
+				'id' => $skill->getId(),
+				'skill' => $skill->getSkill()
+				);
+		}
+
 		// user data
 		$this->data['user'] = array(
 			'id' => $user->getId(),
@@ -132,7 +141,8 @@ class ControllerAccountEdit extends Controller {
 			'industry' => $user->getMeta()->getIndustry(),
 			'sumary' => $user->getMeta()->getBackground()->getSumary(),
 			'educations' => $educations_data,
-			'experiences' => $experiences_data
+			'experiences' => $experiences_data,
+			'skills' => $skills_data
 		);
 
 		// orther const
@@ -391,6 +401,10 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateAddSkill() {
+		if ( !isset( $this->request->post['skill'] ) || empty( $this->request->post['skill'] ) ) {
+			$this->error['skill'] = $this->language->get('error_skill');
+		}
+
 		if (!$this->error) {
 			return true;
 		} else {
@@ -399,6 +413,10 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateRemoveSkill() {
+		if ( !isset( $this->request->post['id'] ) || empty( $this->request->post['id'] ) ) {
+			$this->error['error_background_skill'] = $this->language->get( 'error_background_skill' );
+		}
+
 		if (!$this->error) {
 			return true;
 		} else {
@@ -617,16 +635,20 @@ class ControllerAccountEdit extends Controller {
 	public function addSkill() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validateRemoveExperience() ) {
+		if ( !$this->customer->isLogged() || !$this->validateAddSkill() ) {
 			$json['message'] = 'failed';
 		}else {
-			/*$this->load->model('account/customer');
+			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->removeExperience( $this->request->post ) ) {
-				$json['message'] = 'failed';
-			}else {
+			if ( $skill = $this->model_account_customer->addSkill( $this->request->post ) ) {
+				$json['id'] = $skill->getId();
+				$json['skill'] = $skill->getSkill();
+				$json['remove'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
+
 				$json['message'] = 'success';
-			}*/
+			}else {
+				$json['message'] = 'failed';
+			}
 		}
 
 		$this->response->setOutput( json_encode( $json ) );
@@ -635,16 +657,16 @@ class ControllerAccountEdit extends Controller {
 	public function removeSkill() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validateRemoveExperience() ) {
+		if ( !$this->customer->isLogged() || !$this->validateRemoveSkill() ) {
 			$json['message'] = 'failed';
 		}else {
-			/*$this->load->model('account/customer');
+			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->removeExperience( $this->request->post ) ) {
+			if ( !$this->model_account_customer->removeSkill( $this->request->post ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
-			}*/
+			}
 		}
 
 		$this->response->setOutput( json_encode( $json ) );

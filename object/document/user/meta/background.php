@@ -29,6 +29,9 @@ Class Background {
     /** @MongoDB\String */
 	private $sumary;
 
+    /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Skill") */
+    private $skills = array();
+
 	public function getId(){
 		return $this->id;
 	}
@@ -87,5 +90,17 @@ Class Background {
 
 	public function getSumary() {
 		return $this->sumary;
+	}
+
+	public function addSkill( Education $skill ){
+		$this->skills[] = $skill;
+	}
+
+	public function setSkills( $skills ){
+		$this->skills = $skills;
+	}
+
+	public function getSkills(){
+		return $this->skills;
 	}
 }
