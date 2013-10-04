@@ -73,6 +73,7 @@ function ProfilesForm( $element ) {
 	this.self = $element;
 	this.btnSave = $element.find('.profiles-btn-save');
 	this.btnCancel = $element.find('.profiles-btn-cancel');
+	this.btnAddPhone = $element.find('.phones-btn-add');
 
 	this.attachEvents();
 }
@@ -87,12 +88,21 @@ ProfilesForm.prototype.attachEvents = function () {
 			return false;
 		}
 
+		var phones_arr = {};
+		var i = 0;
+		self.self.find('.phones-form').each( function () {
+			phones_arr.i = {};
+			phones_arr.i.phone = $(this).find('input').val();
+			phones_arr.i.type = $(this).find('select').val();
+			i++;
+		});
+
 		var data = {
 			'username': self.self.find('[name=\"username\"]').val(),
 			'firstname': self.self.find('[name=\"firstname\"]').val(),
 			'lastname': self.self.find('[name=\"lastname\"]').val(),
 			'email': self.self.find('[name=\"email\"]').val(),
-			'phones': self.self.find('[name=\"phones\"]').val(),
+			'phones': phones_arr,
 			'sex': self.self.find('[name=\"sex\"]').val(),
 			'birthday': self.self.find('[name=\"birthday\"]').val(),
 			'address': self.self.find('[name=\"address\"]').val(),
@@ -158,13 +168,37 @@ ProfilesForm.prototype.attachEvents = function () {
 		$('.profiles-btn-remove').removeClass( 'disabled' );
 	} );
 
+	this.btnAddPhone.click( function () {
+		var data = {
+			'index': $(this).data('index')
+		}
+
+		var $form = $.tmpl( $('#profiles-phone-form'), data);
+		new PhonesForm( $form );
+
+		$(this).before( $form );
+	});
+
 	self.self.find('.phones-form').each( function () {
 		new PhonesForm( $(this) );
 	});
 }
 
 function PhonesForm( $element ) {
-	this.self = this;
+	this.self = $element;
+	this.btnRemove = $element.find('.phones-btn-remove');
+
+	this.attachEvents();
+}
+
+PhonesForm.prototype.attachEvents = function () {
+	var self = this;
+
+	this.self.find('select').val( self.self.data('type') ).prop('selected',true);
+
+	this.btnRemove.click( function () {
+		self.self.remove();
+	});
 }
 
 function ProfilesItem( $element ) {

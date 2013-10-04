@@ -4,7 +4,8 @@ use Document\User\User,
 	Document\User\Meta\Email,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
-	Document\User\Meta\Location;
+	Document\User\Meta\Location,
+	Document\User\Meta\Phone;
 
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
@@ -305,6 +306,25 @@ class ModelAccountCustomer extends Model {
 			// email
 
 			// phone
+			$phones_data = array();
+			if ( isset( $data['phones'] ) && is_array( $data['phones'] ) ) {
+				foreach ($data['phones'] as $phone_data) {
+					if ( !isset( $phone_data['phone'] ) ) {
+						continue;
+					}
+					if ( !isset( $phone_data['type'] ) ) {
+						continue;
+					}
+					if ( !isset( $phone_data['visible'] ) ) {
+						
+					}
+					$phone = new Phone();
+					$phone->setPhone( $phone_data['phone'] );
+					$phone->setType( $phone_data['type'] );
+					$phones_data[] = $phone;
+				}
+			}
+			$customer->getMeta()->setPhones( $phones_data );
 
 			if ( isset( $data['sex'] ) ) {
 				$customer->getMeta()->setSex( (int) $data['sex'] );

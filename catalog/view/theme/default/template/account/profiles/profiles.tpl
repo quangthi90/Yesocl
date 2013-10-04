@@ -223,10 +223,11 @@
 					{% set phone_loop = '{{each phones}}' %}
 					{% set phone_loop_end = '{{/each}}' %}
 					{{ phone_loop }}
-					<div class="phones-form" data-id="${ $value.id }"><input class="span5" type="text" placeholder="Input Text" name="phones[number][${ $index }]" value="${ $value.phone }" /> <select class="span3" name="phones[type][${ $index }]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					<div class="phones-form" data-id="${ $value.id }" data-type="${ $value.type }"><input class="span5" type="text" placeholder="Input Text" name="phones[${ $index }][phone]" value="${ $value.phone }" /> <select class="span3" name="phones[${ $index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 					{{ phone_loop_end }}
+
+					<div class="row-fluid"><a class="phones-btn-add btn btn-success offset5" href="#" data-index="${ Object.keys(phones).length }">Add phone</a></div>
 				</div>
-				<div class="row-fluid"><a class="btn btn-success offset5" href="#">Add phone</a></div>
 			</div>
 		</div>
 		<div class="row-fluid">
@@ -253,6 +254,9 @@
 			<div class="span9 offset3"><a href="#" class="btn btn-success profiles-btn-save">Save</a>   <a href="#" class="btn profiles-btn-cancel">Cancel</a></div>
 		</div>
 	</div>
+</script>
+<script id="profiles-phone-form" type="text/x-jquery-tmpl">
+    <div class="phones-form"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
 	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
@@ -382,7 +386,7 @@
 	} );
 
 	window.onresize=function() {
-		//window.setTimeout('location.reload()', 1);
+		window.setTimeout('location.reload()', 1);
 	};
 </script>
 {% endblock %}
