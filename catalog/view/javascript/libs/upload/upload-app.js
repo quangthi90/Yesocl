@@ -69,8 +69,9 @@
             $.each(data.result.files, function (index, file) {
                 if (file.url) {
                     var link = $('<a>')
-                        .attr('target', '_blank')
-                        .prop('href', file.url);           
+                        .prop('href', file.url)
+                        .addClass('img-link-popup')
+                        .magnificPopup({type:'image'});           
                     $(data.context[index]).children('canvas').css('opacity','1').wrap(link);
                     if(that.listImgUrl.length == 0){
                         that.listImgUrl = file.url;

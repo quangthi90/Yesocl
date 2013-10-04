@@ -18,7 +18,7 @@
 							<i class="icon-camera icon-2x"></i>
 							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						</a>
-						<a href="#" title="Advance post" id="post_new_adv">
+						<a href="#" title="Advance post" data-mfp-src="#post-advance-popup" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
@@ -29,8 +29,7 @@
  			</div>
 		</div>
 	</div>
-	<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 40px; left: 100px;background-color: #fff;display:none;">
-		<a href="#" class="b-close"><i class="icon-remove"></i></a>
+	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
 		<div class="y-dlg">
 			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 				<div class="dlg-title">
@@ -41,7 +40,7 @@
 			    	<div class="control-group">
 			    		<label for="title" class="control-label">Title</label>
 			    		<div class="controls">
-			    			<input class="status-title" style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
+			    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title">
 			    		</div>
 		    		</div>
 		    		<div class="control-group">
@@ -135,17 +134,6 @@
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
 <script type="text/javascript">	    
-	$('#post_new_adv').click(function() {
-		$('#post_advance').bPopup( 
-			{
-				follow: [false, false],
-				speed: 300,
-            	transition: 'slideDown',
-            	modalColor : '#000',
-            	opacity: '0.5'
-			}
-		);		
-	});	
 	$('button.btn-reset').click(function() {
 		var form = $(this).parents('form').first(); 
 		if(form.length > 0) {
@@ -153,6 +141,6 @@
 			editor.html('');
 			editor.focus();
 		}
-	});		
+	});	   
 </script>
 {% endblock %}

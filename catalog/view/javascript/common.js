@@ -23,7 +23,7 @@ function FlexibleElement(el) {
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
 	this.openSearch = this.footerBar.find('.search');
 	this.searchTxt = this.openSearch.find('#searchText'); 	
-	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');	
+	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
@@ -90,6 +90,15 @@ FlexibleElement.prototype.attachEvents = function() {
     });
     goLeftBtn.click(function(){
     	m.animate({scrollLeft: 0}, 1000);
+    });
+
+    //Popup link of image:
+    $('.img-link-popup').magnificPopup({type:'image'});
+    $('.link-popup').magnificPopup({
+    	type:'inline',
+    	midClick: true,
+    	removalDelay: 300,
+    	mainClass: 'mfp-fade'
     });
 }
 
