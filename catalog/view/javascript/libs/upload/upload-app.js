@@ -7,12 +7,15 @@
         this.previewerImgContainer = el.find('.img-previewer-container');
         this.resultContainer = el.find('.img-url');
         this.progressBar = el.find('.y-progress');
+        this.dropZone = el;
+        this.dropZoneShow = el.find('.drop-zone-show');
         this.initUploadPlugin();
     }
     SingleUpload.prototype.initUploadPlugin = function() {
         var that = this;
         that.uploadInvoke.fileupload({
             dataType: 'json',
+            dropZone: that.dropZone,
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
             maxFileSize: 5000000, // 5 MB
@@ -23,7 +26,8 @@
             previewCrop: true
         }).on('fileuploadadd', function (e, data) {
             $('.tooltip').remove();
-            that.previewerImgContainer.empty();
+            that.previewerImgContainer.children('.post_image_item').remove();
+            that.dropZoneShow.hide();
             data.context = $('<div/>').addClass('post_image_item').appendTo(that.previewerImgContainer);
             $.each(data.files, function (index, file) {
                 var closeBtn = $('<span class="close"><i class="icon-remove"></i></span>');
@@ -35,6 +39,7 @@
                         $(this).remove();
                         that.resultContainer.val('');
                         that.listImgUrl = '';
+                        that.dropZoneShow.show();
                     });
                 }).appendTo(data.context);   
                 var spinIcon = $('<span class="loadding-icon"><i class="icon-spinner icon-spin icon-large"></i></span>') ;
@@ -89,8 +94,9 @@
             $.each(data.files, function (index, file) {
                 var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> File upload failed');            
                 $(data.context[index]).append(error);
+                $(data.context[index]).children('.loadding-icon').remove();
             });
-            that.progressBar.children('.bar').css('width', '0%');
+            that.progressBar.children('.bar').css('width', '0%');            
         }).prop('disabled', !$.support.fileInput)
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
     }

@@ -1,7 +1,7 @@
 {% use '@template/default/template/post/common/post_editor.tpl' %}
 {% block post_common_form_status %}
 	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
-		<div class="post_new">
+		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
 				<input type="hidden" name="img-url" class="img-url" value="" />
@@ -31,30 +31,48 @@
 	</div>
 	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
 		<div class="y-dlg">
-			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">	
 				<div class="dlg-title">
-			        <i class="icon-yes"></i> Compose your post  
+			        <i class="icon-yes"></i> New post  
 			    </div>
 			    <div class="dlg-content">
-			    	<div class="alert alert-error top-warning hidden">Warning!!</div>
-			    	<div class="control-group">
-			    		<label for="title" class="control-label">Title</label>
-			    		<div class="controls">
-			    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title">
+			    	<div class="dlg-column upload-container fl" style="width:28%;">
+			    		<label class="control-label">Choose an image for new post</label>
+			    		<input type="hidden" name="img-url" class="img-url" value="" />
+			    		<div class="img-previewer-container" placeholder="Drag an photo here">
+			    			<p class="drop-zone-show">Drag an image here</p>
 			    		</div>
-		    		</div>
-		    		<div class="control-group">
-		    			<label class="control-label">Content</label>
-				    	{{ block('post_common_post_editor') }}
-				    	<div class="y-editor status-content" id="post-adv-editor"></div>
-			    	</div>
+			    		<div class="y-progress">
+							<div class="bar" style="width: 0%;"></div>
+						</div>
+			    		<div class="drag-img-upload">			    			
+			    			<a href="#" class="btn btn-yes">
+			    				<span><i class="icon-upload"></i> Choose image</span>
+			    				<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
+			    			</a>
+			    		</div>
+					</div>
+					<div class="dlg-column fr" style="width:70%;">
+						<div class="alert alert-error top-warning hidden">Warning!!</div>
+				    	<div class="control-group">
+				    		<label for="title" class="control-label">Title</label>
+				    		<div class="controls">
+				    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title">
+				    		</div>
+			    		</div>
+			    		<div class="control-group">
+			    			<label class="control-label">Content</label>
+					    	{{ block('post_common_post_editor') }}
+					    	<div class="y-editor status-content" id="post-adv-editor"></div>
+				    	</div>
+					</div>				    	
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
 		                <button type="submit" class="btn btn-yes btn-status">Post</button>
 		            </div>
-			    </div>
+			    </div>		
 			</form>
 		</div>
 	</div>

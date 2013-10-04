@@ -1623,7 +1623,8 @@ label.in-line{
   line-height: 35px;
 }
 .y-dlg .dlg-content {
-  padding: 20px;  
+  padding: 20px; 
+  overflow: hidden; 
 }
 
 .y-dlg .dlg-content  label {
@@ -1635,16 +1636,55 @@ label.in-line{
   height: 30px;
   border-top: 1px solid #009B77;
 }
-
 .y-dlg .dlg-footer .controls {
   text-align: right;
+}
+.dlg-column {
+}
+.dlg-column .img-previewer-container {  
+  min-height: 200px;
+  padding: 10px 0px;
+}
+.dlg-column .img-previewer-container .post_image_item {
+  margin: 0px;
+  padding: 0px;
+  z-index: 2;
+}
+.dlg-column .drag-img-upload{  
+}
+.dlg-column .drag-img-upload a {
+  display: block;
+  position: relative;  
+  font-size: 14px;
+}
+.dlg-column .drag-img-upload a i{
+  margin-right: 15px;
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+}
+.dlg-column .drag-img-upload .img-upload {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  opacity: 0;
+}
+.dlg-column .drop-zone-show {
+  border: 2px dotted #E2E1E1;
+  height: 175px;
+  line-height: 160px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #ccc;
 }
 
 /*EDITOR*/
 
 .y-editor {
   max-height: 250px;
-  height: 250px;
+  min-height: 200px;
   background-color: white;
   border-collapse: separate; 
   border: 1px solid rgb(204, 204, 204); 
