@@ -88,12 +88,12 @@ ProfilesForm.prototype.attachEvents = function () {
 			return false;
 		}
 
-		var phones_arr = {};
+		var phones_arr = [];
 		var i = 0;
 		self.self.find('.phones-form').each( function () {
-			phones_arr.i = {};
-			phones_arr.i.phone = $(this).find('input').val();
-			phones_arr.i.type = $(this).find('select').val();
+			phones_arr[i] = {};
+			phones_arr[i].phone = $(this).find('input').val();
+			phones_arr[i].type = $(this).find('select').val();
 			i++;
 		});
 
@@ -176,7 +176,8 @@ ProfilesForm.prototype.attachEvents = function () {
 		var $form = $.tmpl( $('#profiles-phone-form'), data);
 		new PhonesForm( $form );
 
-		$(this).before( $form );
+		//$(this).attr('data-index', data.index + 1);
+		$(this).parent().before( $form );
 	});
 
 	self.self.find('.phones-form').each( function () {

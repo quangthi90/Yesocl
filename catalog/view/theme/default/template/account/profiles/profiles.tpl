@@ -386,7 +386,7 @@
 	} );
 
 	window.onresize=function() {
-		window.setTimeout('location.reload()', 1);
+		//window.setTimeout('location.reload()', 1);
 	};
 </script>
 {% endblock %}
