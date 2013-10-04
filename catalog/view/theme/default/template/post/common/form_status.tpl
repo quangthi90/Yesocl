@@ -1,4 +1,7 @@
-{% use '@template/default/template/post/common/post_editor.tpl' %}
+{% block post_common_post_form_status_style %}
+<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
+{% endblock %}
+
 {% block post_common_form_status %}
 	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new drop-zone">
@@ -57,12 +60,12 @@
 				    	<div class="control-group">
 				    		<label for="title" class="control-label">Title</label>
 				    		<div class="controls">
-				    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title">
+				    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title"
+				    				style="width: 98%;" />
 				    		</div>
 			    		</div>
 			    		<div class="control-group">
 			    			<label class="control-label">Content</label>
-					    	{{ block('post_common_post_editor') }}
 					    	<div class="y-editor status-content" id="post-adv-editor"></div>
 				    	</div>
 					</div>				    	
@@ -148,17 +151,11 @@
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/bootstrap-wysiwyg.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
-<script type="text/javascript">	    
+<script type="text/javascript">	
 	$('button.btn-reset').click(function() {
-		var form = $(this).parents('form').first(); 
-		if(form.length > 0) {
-			var editor = form.find('.y-editor');
-			editor.html('');
-			editor.focus();
-		}
 	});	   
 </script>
 {% endblock %}

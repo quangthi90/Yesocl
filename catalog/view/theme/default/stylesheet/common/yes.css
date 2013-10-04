@@ -358,6 +358,12 @@ label.in-line{
     margin-bottom: 10px;
 }
 
+.modal { 
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+
 /*COMMON LAYOUT*/
 #y-container
 {
