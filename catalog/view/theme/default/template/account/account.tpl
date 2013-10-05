@@ -9,6 +9,7 @@
 
 {% block stylesheet %}
     {{ block('post_common_post_comment_style') }}
+    {{ block('post_common_post_form_status_style') }}
 {% endblock %}
 
 {% block body %}

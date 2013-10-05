@@ -1,7 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/post_block_ex1.tpl' %}
-{% use '@template/default/template/post/common/post_block_ex2.tpl' %}
+{% use '@template/default/template/post/common/post_block_list.tpl' %}
 {% use '@template/default/template/post/common/post_comment.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
@@ -15,19 +14,10 @@
 <div id="y-content" class="no-header-fixed">
     <div id="y-main-content" class="has-horizontal post-category">
         {% for posts in all_posts %}
-        {% set style = random([1, 2]) %}
-        {% if posts|length > 0 %}
-        <div class="feed-block">
-            <div class="block-header">
-                {#<a class="fl" href=""> <i class="icon-angle-right"></i></a>#}
-            </div>
-            {% if style == 1 %}
-                {{ block('post_common_post_block_ex1') }}
-            {% else %}
-                {{ block('post_common_post_block_ex2') }}
+            {% set style = random([1, 2]) %}
+            {% if posts|length > 0 %}
+                {{ block('post_common_post_block_list') }}
             {% endif %}
-        </div>
-        {% endif %}
         {% endfor %}
     </div>
 </div>
