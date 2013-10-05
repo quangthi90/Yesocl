@@ -1,7 +1,12 @@
 <?php
 use Document\User\User,
 	Document\User\Meta,
-	Document\User\Meta\Email;
+	Document\User\Meta\Email,
+	Document\User\Meta\Education,
+	Document\User\Meta\Experience,
+	Document\User\Meta\Location,
+	Document\User\Meta\Phone,
+	Document\User\Meta\Skill;
 
 class ModelAccountCustomer extends Model {
 	public function addCustomer($data) {
@@ -255,35 +260,493 @@ class ModelAccountCustomer extends Model {
 		return $query->num_rows;
 	}	
 
-	public function editAvatar($data) {
-		$user = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
-		if ( !$user ) {
+	public function updateProfiles( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['username']) < 5) || (utf8_strlen($data['username']) > 32)) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['firstname']) < 1) || (utf8_strlen($data['firstname']) > 32)) {
+				return false;
+			}
+
+			if ((utf8_strlen($data['lastname']) < 1) || (utf8_strlen($data['lastname']) > 32)) {
+				return false;
+			}
+
+			if ( !isset($data['birthday']) ) {
+				return false;
+			}
+
+			// Email is required
+			if ( !isset($data['emails']) || count($data['emails']) < 0 ){
+				return false;
+			}
+
+			if ( isset( $data['username'] ) && !empty( $data['username'] ) ) {
+				$customer->setUsername( $data['username'] );
+			}
+
+			if ( isset( $data['firstname'] ) && !empty( $data['firstname'] ) ) {
+				$customer->getMeta()->setFirstname( $data['firstname'] );
+			}
+
+			if ( isset( $data['lastname'] ) && !empty( $data['lastname'] ) ) {
+				$customer->getMeta()->setLastname( $data['lastname'] );
+			}
+
+			// email
+			// Get primary email
+			$primary_email = '';
+			foreach ( $data['emails'] as $email_data ){
+				if ( $email_data['primary'] ){
+					$primary_email = strtolower( trim( $email_data['email'] ) );
+					break;
+				}
+			}
+			// Get list email 
+			$emails = array();
+			$email = new Email();
+			$email->setEmail( $primary_email );
+			$email->setPrimary( true );
+			$emails[] = $email;
+
+			foreach ( $data['emails'] as $email_data ){
+				$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+				if ( $email_data['email'] === $primary_email ){
+					continue;
+				}elseif ( !$email_data['email'] ) {
+					continue;
+				}
+				$email = new Email();
+				$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
+				$email->setPrimary( false );
+				$emails[$email_data['email']] = $email;
+			}
+			$customer->setEmails( $emails );
+
+			// phone
+			$phones_data = array();
+			if ( isset( $data['phones'] ) && is_array( $data['phones'] ) ) {
+				foreach ($data['phones'] as $phone_data) {
+					if ( !isset( $phone_data['phone'] ) ) {
+						continue;
+					}
+					if ( !isset( $phone_data['type'] ) ) {
+						continue;
+					}
+					if ( !isset( $phone_data['visible'] ) ) {
+						
+					}
+					$phone = new Phone();
+					$phone->setPhone( $phone_data['phone'] );
+					$phone->setType( $phone_data['type'] );
+					$phones_data[] = $phone;
+				}
+			}
+			$customer->getMeta()->setPhones( $phones_data );
+
+			if ( isset( $data['sex'] ) ) {
+				$customer->getMeta()->setSex( (int) $data['sex'] );
+			}
+
+			if ( isset( $data['birthday'] ) && !empty( $data['birthday'] ) ) {
+				$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
+			}
+
+			if ( isset( $data['address'] ) && !empty( $data['address'] ) ) {
+				$customer->getMeta()->setAddress( $data['address'] );
+			}
+
+			if ( isset( $data['location'] ) && !empty( $data['location'] ) ) {
+				$customer->getMeta()->getLocation()->setLocation( $data['location'] );
+			}
+
+			if ( isset( $data['industry'] ) && !empty( $data['industry'] ) ) {
+				$customer->getMeta()->setIndustry( $data['industry'] );
+			}
+
+			$this->dm->flush();
+
+			return $customer;
+
+		}else {
 			return false;
 		}
+	}
 
-		// Avatar
-		$this->load->model('tool/image');
-		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
-			$folder_link = $this->config->get('user')['default']['image_link'];
-			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
-			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
-			}else {
+	public function updateBackground( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
 				return false;
+			}
+
+			if ( isset( $data['sumary'] ) && !empty( $data['sumary'] ) ) {
+				$customer->getMeta()->getBackground()->setSumary( $data['sumary'] );
 			}
 		}else {
 			return false;
 		}
 
-		// Save to DB
-		$this->dm->persist( $user );
 		$this->dm->flush();
 
-		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
+		return true;
+	}
+
+	public function addEducation( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['started'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['degree'] ) || empty( $data['degree'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['school'] ) || empty( $data['school'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['fieldofstudy'] ) || empty( $data['fieldofstudy'] ) ) {
+				return false;
+			}
+
+			$education = new Education();
+			$education->setStarted( (int) $data['started'] );
+			$education->setEnded( (int) $data['ended'] );
+			$education->setDegree( $data['degree'] );
+			$education->setSchool( $data['school'] );
+			$education->setFieldOfStudy( $data['fieldofstudy'] );
+
+			$this->dm->persist( $education );
+			$customer->getMeta()->getBackground()->addEducation( $education );
+
+			$this->dm->flush();
+
+			return $education->getId();
+		}else {
+			return false;
+		}
+	}
+
+	public function removeEducation( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+				return false;
+			}
+
+			foreach ($customer->getMeta()->getBackground()->getEducations() as $education) {
+				if ( $education->getId() == $data['id'] ) {
+					$customer->getMeta()->getBackground()->getEducations()->removeElement( $education );
+				}
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
 
 		return true;
+	}
+
+	public function editEducation( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['degree'] ) || empty( $data['degree'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['school'] ) || empty( $data['school'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['fieldofstudy'] ) || empty( $data['fieldofstudy'] ) ) {
+				return false;
+			}
+
+			foreach ( $customer->getMeta()->getBackground()->getEducations() as $education ) {
+				if ( $education->getId() == $data['id'] ) {
+					$education->setStarted( (int) $data['started'] );
+					$education->setEnded( (int) $data['ended'] );
+					$education->setDegree( $data['degree'] );
+					$education->setSchool( $data['school'] );
+					$education->setFieldOfStudy( $data['fieldofstudy'] );
+					break;
+				}
+			}
+
+			$this->dm->flush();
+
+			return $education->getId();
+		}else {
+			return false;
+		}
+	}
+
+	public function addExperience( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['title'] ) || empty( $data['title'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['company'] ) || empty( $data['company'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['location'] ) || empty( $data['location'] ) ) {
+				return false;
+			}
+
+			$experience = new Experience();
+			$started = new \Datetime();
+			$started->setDate( $data['started_year'], $data['started_month'], 1 );
+			$experience->setStarted( $started );
+
+			$ended = new \Datetime();
+			$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+			$experience->setEnded( $ended );
+
+			$experience->setTitle( $data['title'] );
+			$experience->setCompany( $data['company'] );
+
+			$location = new Location();
+			$location->setLocation( trim( $data['location'] ) );
+			$experience->setLocation( $location );
+
+			$this->dm->persist( $experience );
+			$customer->getMeta()->getBackground()->addExperience( $experience );
+
+			$this->dm->flush();
+
+			return $experience->getId();
+		}else {
+			return false;
+		}
+	}
+
+	public function removeExperience( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+				return false;
+			}
+
+			foreach ($customer->getMeta()->getBackground()->getExperiences() as $experience) {
+				if ( $experience->getId() == $data['id'] ) {
+					$customer->getMeta()->getBackground()->getExperiences()->removeElement( $experience );
+				}
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function editExperience( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_month'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['started_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['ended_year'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['title'] ) || empty( $data['title'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['company'] ) || empty( $data['company'] ) ) {
+				return false;
+			}
+
+			if ( !isset( $data['location'] ) || empty( $data['location'] ) ) {
+				return false;
+			}
+
+			foreach ( $customer->getMeta()->getBackground()->getExperiences() as $experience ) {
+				if ( $experience->getId() == $data['id'] ) {
+					$started = new \Datetime();
+					$started->setDate( $data['started_year'], $data['started_month'], 1 );
+					$experience->setStarted( $started );
+
+					$ended = new \Datetime();
+					$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+					$experience->setEnded( $ended );
+
+					$experience->setTitle( $data['title'] );
+					$experience->setCompany( $data['company'] );
+
+					$location = new Location();
+					$location->setLocation( trim( $data['location'] ) );
+					$experience->setLocation( $location );
+					break;
+				}
+			}
+
+			$this->dm->flush();
+
+			return $experience->getId();
+		}else {
+			return false;
+		}
+	}
+
+	public function addSkill( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['skill'] ) || empty( $data['skill'] ) ) {
+				return false;
+			}
+
+			$skill = new Skill();
+			$skill->setSkill( $data['skill'] );
+
+			$this->dm->persist( $skill );
+			$customer->getMeta()->getBackground()->addSkill( $skill );
+
+			$this->dm->flush();
+
+			return $skill;
+		}else {
+			return false;
+		}
+	}
+
+	public function removeSkill( $data = array() ) {
+		if ( $this->customer->isLogged() ) {
+			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
+
+			if ( !$customer ) {
+				return false;
+			}
+
+			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+				return false;
+			}
+
+			foreach ($customer->getMeta()->getBackground()->getSkills() as $skill) {
+				if ( $skill->getId() == $data['id'] ) {
+					$customer->getMeta()->getBackground()->getSkills()->removeElement( $skill );
+				}
+			}
+		}else {
+			return false;
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function isExistEmail( $curr_user_id, $email ) {
+		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
+		
+		foreach ( $users as $user ) {
+			if ( $user->getId() == $curr_user_id ){
+				continue;
+			}
+			
+			if ( $user->isExistEmail( $email ) ){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
 ?>

@@ -78,29 +78,6 @@ Class Meta {
 		return $this->id;
 	}
 
-	/**
-	* Format array to save to Cache
-	* 2013/07/24
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array meta
-	*/
-    public function formatToCache(){
-		$data = array(
-			'id'			=> $this->getId(),
-			'firstname'		=> $this->getFirstname(),
-			'lastname' 		=> $this->getLastname(),
-			'birthday'		=> $this->getBirthday(),
-			'sex'			=> $this->getSex(),
-			'headingLine'	=> $this->getHeadingLine(),
-			'postalCode'	=> $this->getPostalCode(),
-			'industry'		=> $this->getIndustry(),
-			'industry_id'	=> $this->getIndustryId(),
-			'address'		=> $this->getAddress()
-		);
-
-		return $data;
-	}
-
 	public function setFirstname( $firstname ){
 		$this->firstname = $firstname;
 	}

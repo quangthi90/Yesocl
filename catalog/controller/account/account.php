@@ -30,29 +30,13 @@ class ControllerAccountAccount extends Controller {
 		if ( !$user ){
 			return false;
 		}
-
-		$user_temp = $user->formatToCache();
-
-		if ( !empty($user_temp['avatar']) ){
-			$user_temp['avatar'] = $this->model_tool_image->resize( $user_temp['avatar'], 180, 180 );
-		}elseif ( !empty($user_temp['email']) ){
-            $user_temp['avatar'] = $this->model_tool_image->getGavatar( $user_temp['email'], 180 );
-        }else{
-        	$user_temp['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-		}
-
-		$this->data['users'] = array( $user_temp['id'] => $user_temp );
-
 		$this->data['current_user_id'] = $user->getId();
 
 		$this->data['posts'] = array();
-		if ( $user->getPostData() ){
-			$posts = $user->getPostData()->getPosts();
-		}else{
-			$posts = array();
-		}
+		$posts = $user->getPostData()->getPosts();
 		$start = 0;
 		$count_post = 1;
+		$this->data['users'] = array();
 
 		foreach ( $posts as $key => $post ) {
 			if ( $key < $start ){
@@ -68,22 +52,6 @@ class ControllerAccountAccount extends Controller {
 			}else{
 				$liked = false;
 			}
-
-			$user = $post->getUser();
-
-			if ( !array_key_exists($user->getId(), $this->data['users']) ){
-				$user = $user->formatToCache();
-
-				if ( !empty($user['avatar']) ){
-					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
-				}elseif ( !empty($user['email']) ){
-		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
-		        }else{
-		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-				}
-
-				$this->data['users'][$user['id']] = $user;
-			}
 			
 			$post = $post->formatToCache();
 
@@ -97,6 +65,20 @@ class ControllerAccountAccount extends Controller {
 			$post['isUserLiked'] = $liked;
 
 			$this->data['posts'][] = $post;
+
+			if ( !array_key_exists($post['user_id'], $this->data['users']) ){
+				$user = $this->model_user_user->getUser( $post['user_slug'] );
+
+				if ( !empty($user['avatar']) ){
+					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+				}elseif ( !empty($user['email']) ){
+		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
+		        }else{
+		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+				}
+
+				$this->data['users'][$post['user_id']] = $user;
+			}
 			
 			$count_post++;
 		}

@@ -21,7 +21,6 @@
 			    <ul class="dropdown-menu">
 			      <li><a href="#"><i class="icon-cogs"></i> Privacy settings</a></li>
 			      <li><a href="{{ path('ChangePassword') }}"><i class="icon-unlock-alt"></i> Change password</a></li>
-			      <li><a href="{{ path('ChangeAvatar') }}"><i class="icon-user"></i> Change avatar</a></li>
 			      <li class="divider"></li>
 			      <li><a href="{{ path('Logout') }}"><i class="icon-signout"></i> Log out</a></li>				      
 			    </ul>
@@ -50,10 +49,10 @@
 		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My post </span></a>
 		  	</li>	
 		  	<li class="menu-item">
-		  		<a href="#"><i class="icon-user-md"></i> <span>My profile </span></a>
+		  		<a href="{{ path('ProfilePage') }}"><i class="icon-user-md"></i> <span>My profile </span></a>
 		  	</li>
 		  	<li class="menu-item">
-		  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}"><i class="icon-fire"></i> <span>My friend</span> </a>
+		  		<a href="#"><i class="icon-fire"></i> <span>My friend</span> </a>
 		  	</li>
 		  	{% endblock %}
 		</ul>	

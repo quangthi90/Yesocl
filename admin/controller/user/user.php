@@ -103,6 +103,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
 		$this->data['entry_address'] = $this->language->get( 'entry_address' );
 		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
+		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
@@ -265,6 +266,13 @@ class ControllerUserUser extends Controller {
 			$this->data['advice_for_contact'] = '';
 		}
 
+		// Entry sumary
+		if ( $user->getMeta()->getBackground() ){
+			$this->data['sumary'] = $user->getMeta()->getBackground()->getSumary();
+		}else {
+			$this->data['sumary'] = '';
+		}
+
 		// Entry industry
 		if ( $user->getMeta() ){
 			$this->data['industry'] = $user->getMeta()->getIndustry();
@@ -321,13 +329,13 @@ class ControllerUserUser extends Controller {
 				);
 		}
 
-		// Entry experiencies
-		$this->data['experiencies'] = array();
-		foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
+		// Entry experiences
+		$this->data['experiences'] = array();
+		foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
 			$started = $experience->getStarted();
 			$ended = $experience->getEnded();
 			$location = $experience->getLocation();
-			$this->data['experiencies'][$key] = array(
+			$this->data['experiences'][$key] = array(
 				'company' => $experience->getCompany(),
 				'current' => $experience->getCurrent(),
 				'title' => $experience->getTitle(),
@@ -928,6 +936,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
 		$this->data['entry_address'] = $this->language->get( 'entry_address' );
 		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
+		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
@@ -1124,7 +1133,7 @@ class ControllerUserUser extends Controller {
 		if ( isset($this->request->post['meta']['location']['location']) ){
 			$this->data['location'] = $this->request->post['meta']['location']['location'];
 			$this->data['city_id'] = $this->request->post['meta']['location']['city_id'];
-		}elseif ( isset($user) && $user->getMeta() && $user->getMeta()->getLocation() ){
+		}elseif ( isset($user) && $user->getMeta() ){
 			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
 		}else {
@@ -1159,6 +1168,15 @@ class ControllerUserUser extends Controller {
 			$this->data['advice_for_contact'] = '';
 		}
 
+		// Entry advice for contact
+		if ( isset($this->request->post['background']['sumary']) ){
+			$this->data['sumary'] = $this->request->post['background']['sumary'];
+		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
+			$this->data['sumary'] = $user->getMeta()->getBackground()->getSumary();
+		}else {
+			$this->data['sumary'] = '';
+		}
+
 		// Entry industry
 		if ( isset($this->request->post['meta']['industry']) ){
 			$this->data['industry'] = $this->request->post['meta']['industry'];
@@ -1183,7 +1201,7 @@ class ControllerUserUser extends Controller {
 		// Entry interest
 		if ( isset($this->request->post['background']['interest']) ){
 			$this->data['interest'] = $this->request->post['background']['interest'];
-		}elseif ( isset($user) && $user->getMeta() && $user->getMeta()->getBackground() ){
+		}elseif ( isset($user) ){
 			$this->data['interest'] = $user->getMeta()->getBackground()->getInterest();
 		}else {
 			$this->data['interest'] = '';
@@ -1230,16 +1248,16 @@ class ControllerUserUser extends Controller {
 			}
 		}
 
-		// Entry experiencies
-		$this->data['experiencies'] = array();
-		if ( isset($this->request->post['background']['experiencies']) ){
-			$this->data['experiencies'] = $this->request->post['background']['experiencies'];
-		}elseif ( isset( $user ) && $user->getMeta() && $user->getMeta()->getBackground() ){
-			foreach ($user->getMeta()->getBackground()->getExperiencies() as $key => $experience) {
+		// Entry experiences
+		$this->data['experiences'] = array();
+		if ( isset($this->request->post['background']['experiences']) ){
+			$this->data['experiences'] = $this->request->post['background']['experiences'];
+		}elseif ( isset( $user ) ){
+			foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
 				$location = $experience->getLocation();
-				$this->data['experiencies'][$key] = array(
+				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
@@ -1256,7 +1274,7 @@ class ControllerUserUser extends Controller {
 		$this->data['educations'] = array();
 		if ( isset($this->request->post['background']['educations']) ){
 			$this->data['educations'] = $this->request->post['background']['educations'];
-		}elseif ( isset( $user ) && $user->getMeta() && $user->getMeta()->getBackground() ){
+		}elseif ( isset( $user ) ){
 			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),
@@ -1399,7 +1417,7 @@ class ControllerUserUser extends Controller {
 
     	// Experience
     	$experience_error = array();
-    	foreach ($this->request->post['background']['experiencies'] as $key => $experience) {
+    	foreach ($this->request->post['background']['experiences'] as $key => $experience) {
     		if ( !trim( $experience['company'] ) ) {
     			$experience_error[$key]['company'] = $this->language->get( 'error_company' );
     		}
@@ -1511,8 +1529,8 @@ class ControllerUserUser extends Controller {
 
     	// Experience
     	$experience_error = array();
-    	if ( isset( $this->request->post['background']['experiencies'] ) ) {
-    		foreach ($this->request->post['background']['experiencies'] as $key => $experience) {
+    	if ( isset( $this->request->post['background']['experiences'] ) ) {
+    		foreach ($this->request->post['background']['experiences'] as $key => $experience) {
     			if ( !trim( $experience['company'] ) ) {
     				$experience_error[$key]['company'] = $this->language->get( 'error_company' );
     			}

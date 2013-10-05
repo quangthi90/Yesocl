@@ -764,7 +764,7 @@ label.in-line{
 }
 
 /*POST_HOVER*/
-.post.post_in_block .hover {
+.hover {
   display: none;
   position: absolute;
   top: 0px;
@@ -1304,134 +1304,23 @@ label.in-line{
   padding: 2px 5px;
   height: 19px;
 }
+
+.bar-wrapper .language-box .input-append select{
+  font-size: 12px;
+}
+
 #yes-footer-bar .bar-wrapper .input-prepend .auto-hide, 
 #yes-footer-bar .bar-wrapper .input-append .auto-hide {
   display: none;
+}
+
+#yes-footer-bar .bar-wrapper .btn-success {
+  height: 30px;
 }
 #yes-footer-bar .bar-wrapper input[type='text'] {
   height: 20px;
   font-size: 15px;
   width: 300px;
-}
-
-.bar-wrapper .language-box .input-append select{
-  font-size: 12px;
-}
-.footer-toolbar {
-}
-.footer-toolbar .footer-toolbar-item{
-  vertical-align: top;
-  display: block;
-}
-.footer-toolbar.fl .footer-toolbar-item{
-  margin-right: 1px ;
-  float: left;
-}
-.footer-toolbar.fr .footer-toolbar-item{
-  margin-left: 1px ;
-  float: right;
-}
-.footer-toolbar .footer-toolbar-item.search .btn {
-  width: 90px;
-}
-.footer-toolbar .footer-toolbar-item.search .btn i {
-  font-size: 18px;
-  color: #fff;
-  margin-right: 10px;
-}
-.footer-toolbar-item.notification-group {
-
-}
-.notification-group .notification-item {
-  display: block;
-  position: relative;
-  float: left;
-  background-color: #FFF;
-  padding: 4px 20px 5px 10px;
-  border-top: 1px solid #009B77;    
-  border-left: 1px solid #009B77; 
-  border-right: none;
-  border-bottom: none;
-}
-.notification-group .notification-item:hover {
-  background-color: #009B77;
-}
-.notification-group .notification-item:first-child {
-  border-left: none;
-}
-.notification-group .notification-item i {
-  margin-right: 5px;
-}
-.notification-group .notification-item:hover i {
-  color: #FFF;
-}
-.notification-item .notification-item-name {
-  color: #000;
-  font-weight: bold;
-}
-.notification-group .notification-item:hover .notification-item-name {
-  color: #FFF;
-}
-.notification-item .notification-item-count {
-  position: absolute;
-  right: 2px;
-  top: -3px;
-  font-weight: bold;
-  font-size: 11px;
-  color: #fff;
-  line-height: 6px;
-  z-index: 2;
-  background-color: red;
-  padding: 3px;
-}
-.notification-content-list {
-  max-height: 500px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.notification-content-list .notification-content-item {
-  overflow: hidden;
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
-}
-.notification-content-list .notification-content-item:last-child {
-  border-bottom: none;
-}
-.notification-content-item .notification-content-item-img {
-  display: block;  
-  float: left; 
-  padding: 0px;
-  margin-right: 10px;
-  height: 50px;
-  width: 50px;
-}
-.notification-content-item .notification-content-item-img  img {
-  height: 50px;
-  width: 50px;
-}
-.notification-content-item .notification-content-item-detail {
-  font-size: 12px;
-  min-width: 250px;
-  max-width: 300px;
-}
-.notification-content-item .notification-content-item-detail  .notification-text {
-  line-height: 18px;
-  margin-bottom: 10px;
-}
-.notification-content-item .notification-content-item-detail  .notification-text a {
-  font-weight: bold;
-  font-size: 12px;
-}
-.notification-content-item .notification-content-item-detail a.btn-yes {
-  padding: 1px 10px;
-  font-size: 11px;
-  font-weight: normal;
-}
-.notification-content-item .message-content {
-  color: #0E0E0E;
-  font-style: italic;
-  font-size: 12px;
-  white-space: nowrap;
 }
 
 /*CUSTOM for POST*/
