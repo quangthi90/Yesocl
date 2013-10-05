@@ -2075,3 +2075,63 @@ ul.user_actions li:hover i{
   margin: 3px 10px 4px 0px;
   font-size: 14px;
 }
+
+/*SEARCH RESULT*/
+.suggestion-container {
+  position: absolute;
+  overflow: hidden;
+  bottom: 51px;
+  left: 121px;
+  z-index: 500000;
+  background-color: #FFF;
+  border: 1px solid #ccc;
+  padding: 10px 20px;
+}
+.suggestion-container .suggest-title {
+    margin: 0px;
+    padding: 5px;
+    font-size: 12px;
+    background-color: #f0f0f0;
+}
+.suggestion-container .suggest-title span i {
+  font-size: 18px;
+}
+.suggestion-container .suggest-content {
+    overflow: hidden;
+}
+.suggestion-container .suggest-field {
+    display: inline-block;
+    margin-right: 25px;
+    vertical-align: top;
+}
+.suggestion-container .suggest-field-list{
+}
+.suggest-field-list .suggest-field-item {
+  margin-bottom: 5px;
+}
+.suggest-field-list .suggest-field-item a {
+  display: block;
+}
+.suggest-field-item .data-detail {  
+  min-width: 150px;
+  overflow: hidden;  
+}
+.data-detail img{
+  width: 40px;
+  height: 40px;
+  float: left;
+  margin-right: 10px;
+}
+.data-detail .data-meta-info {
+  float: left;
+  max-width: 200px;
+}
+.data-detail .data-meta-info .data-name {
+  font-size: 12px;
+  font-weight: bold;
+}
+.data-detail .data-meta-info .data-more {
+  white-space: nowrap;  
+  font-size: 10px;
+}
+/*END SEARCH RESULT*/

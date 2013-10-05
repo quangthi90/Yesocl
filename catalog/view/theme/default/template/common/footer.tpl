@@ -9,6 +9,135 @@
                         <i class="icon-search"></i>Search
                       </button>
                       <input class="auto-hide" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
+                      <div class="suggestion-container hidden">      
+                        <ul class="suggest-content">
+                            <li class="suggest-field">
+                                <h4 class="suggest-field-name">Friend</h4>
+                                <ul class="suggest-field-list">
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Nguyễn Văn A</div>
+                                          <div class="data-more">10 friends</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Nguyễn Văn A</div>
+                                          <div class="data-more">10 friends</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Nguyễn Văn A</div>
+                                          <div class="data-more">10 friends</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <br class="clr">
+                            </li>
+                            <li class="suggest-field">
+                                <h4 class="suggest-field-name">Post</h4>
+                                <ul class="suggest-field-list">
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Title of post</div>
+                                          <div class="data-more">100 likes - 30 comments - 1k views</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Title of post</div>
+                                          <div class="data-more">100 likes - 30 comments - 1k views</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Title of post</div>
+                                          <div class="data-more">100 likes - 30 comments - 1k views</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <br class="clr">
+                            </li>
+                            <li class="suggest-field">
+                                <h4 class="suggest-field-name">Group</h4>
+                                <ul class="suggest-field-list">
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Title of group</div>
+                                          <div class="data-more">100 members</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Title of group</div>
+                                          <div class="data-more">100 members</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                  <li class="suggest-field-item">
+                                    <a href="#">
+                                      <div class="data-detail">
+                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
+                                        <div class="data-meta-info">
+                                          <div class="data-name">Title of group</div>
+                                          <div class="data-more">100 members</div>
+                                        </div>
+                                      </div>
+                                    </a>
+                                  </li>
+                                </ul>
+                                <br class="clr">
+                            </li>
+                        </ul>
+                        <p class="suggest-title">
+                          <span class="loadding-icon">
+                            <i class="icon-spinner icon-spin icon-large"></i>
+                          </span> 
+                          <span>
+                             Tìm kiếm với từ khóa <strong>key search</strong>
+                          </span>
+                        </p>
+                    </div> 
                   </div>
                 </div> 
               </div>
@@ -184,5 +313,5 @@
         <span class="copyright">
             Copyright &copy; 2012 - <strong>YESOCL.com</strong>
         </span>  
-    </div>       
+    </div>    
 </div>
