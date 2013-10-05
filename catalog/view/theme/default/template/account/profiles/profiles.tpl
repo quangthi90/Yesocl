@@ -30,7 +30,7 @@
 							<div class="clear"></div>
 						</div>
 						<div class="profiles-tabs-main-body">
-							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-email="{{ user.email }}" data-phones="{{ user.phones_js }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-industry="{{ user.industry }}">
+							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-emails="{{ user.emails_js }}" data-phones="{{ user.phones_js }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-industry="{{ user.industry }}">
 								<div class="row-fluid">
 									<div class="span2 offset1">Username</div>
 									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.username }}</span></div>
@@ -41,7 +41,13 @@
 								</div>
 								<div class="row-fluid">
 									<div class="span2 offset1">Email</div>
-									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.email }}</span></div>
+									<div class="span9">
+										<div class="row-fluid">
+											{% for email in user.emails %}
+											<div class="email-item"><span class="profiles-tabs-value viewers">{{ email.email }}</span>  <span class="label {% if (email.primary) %}label-success{% endif %}">primary</span></div>
+						        			{% endfor %}
+										</div>
+									</div>
 								</div>
 								<div class="row-fluid">
 									<div class="span2 offset1">Phone</div>
@@ -182,7 +188,7 @@
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="profiles-form" type="text/x-jquery-tmpl">
-	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
 			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
@@ -193,7 +199,19 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Email</div>
-			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="email" value="${ email }" /></div>
+			<div class="span9">
+				<div class="row-fluid">
+					{% set email_loop = '{{each emails}}' %}
+					{% set email_loop_end = '{{/each}}' %}
+					{% set primary_if = '{{if $value.primary == 1}}' %}
+					{% set primary_if_end = '{{/if}}' %}
+					{{ email_loop }}
+					<div class="emails-form" data-primary="${ $value.primary }"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					{{ email_loop_end }}
+
+					<div class="row-fluid"><a class="emails-btn-add btn btn-success offset5" href="#" data-index="${ Object.keys(emails).length }">Add email</a></div>
+				</div>
+			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Phone</div>
@@ -237,8 +255,11 @@
 <script id="profiles-phone-form" type="text/x-jquery-tmpl">
     <div class="phones-form"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
+<script id="profiles-email-form" type="text/x-jquery-tmpl">
+    <div class="emails-form"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]"/>  <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+</script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
-	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-email="${ email }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
 			<div class="span9"><span class="profiles-tabs-value viewers">${ username }</span></div>
@@ -249,7 +270,17 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Email</div>
-			<div class="span9"><span class="profiles-tabs-value viewers">${ email }</span></div>
+			<div class="span9">
+				<div class="row-fluid">
+					{% set email_loop = '{{each emails}}' %}
+					{% set email_loop_end = '{{/each}}' %}
+					{% set primary_if = '{{if $value.primary == 1}}' %}
+					{% set primary_if_end = '{{/if}}' %}
+					{{ email_loop }}
+					<div class="email-item"><span class="profiles-tabs-value viewers">${ $value.email }</span>  <span class="label {{primary_if}}label-success{{primary_if_end}}">primary</span></div>
+					{{ email_loop_end }}
+				</div>
+			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Phone</div>
@@ -368,7 +399,7 @@
 	} );
 
 	window.onresize=function() {
-		//window.setTimeout('location.reload()', 1);
+		window.setTimeout('location.reload()', 1);
 	};
 </script>
 {% endblock %}

@@ -122,6 +122,15 @@ class ControllerAccountEdit extends Controller {
 				);
 		}
 
+		// email
+		$emails_data = array();
+		foreach ($user->getEmails() as $key => $email) {
+			$emails_data[$key] = array(
+				'email' => $email->getEmail(),
+				'primary' => $email->getPrimary() ? 1 : 0,
+				);
+		}
+
 		// user data
 		$this->data['user'] = array(
 			'id' => $user->getId(),
@@ -129,7 +138,8 @@ class ControllerAccountEdit extends Controller {
 			'firstname' => $user->getMeta()->getFirstname(),
 			'lastname' => $user->getMeta()->getLastname(),
 			'fullname' => $user->getFullName(),
-			'email' => $user->getPrimaryEmail()->getEmail(),
+			'emails' => $emails_data,
+			'emails_js' => json_encode( $emails_data ),
 			'phones' => $phones_data,
 			'phones_js' => json_encode( $phones_data ),
 			'sex' => $user->getMeta()->getSex() ? 1 : 0,
