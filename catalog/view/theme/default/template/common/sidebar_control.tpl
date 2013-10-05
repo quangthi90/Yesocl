@@ -47,7 +47,7 @@
 		  		<a href="#"><i class="icon-umbrella"></i> <span>Follower's post </span></a>
 		  	</li>
 		  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
-		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> My post </span></a>
+		  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}"><i class="icon-bookmark"></i> <span> Wall Page </span></a>
 		  	</li>	
 		  	<li class="menu-item">
 		  		<a href="#"><i class="icon-user-md"></i> <span>My profile </span></a>
