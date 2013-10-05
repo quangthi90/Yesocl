@@ -17,7 +17,7 @@
 			<div class="post_tool">
 				<div class="row-fluid">
 					<div class="span8 post_new_control">
-						<a href="#" title="Insert images" id="insert-new-img">
+						<a href="#" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
 							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						</a>
