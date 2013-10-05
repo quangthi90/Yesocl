@@ -22,14 +22,14 @@ class ModelUserPost extends Model {
 		if ( empty( $author ) ) {
 			return false;
 		}
-		
+
 		// status
 		if ( isset( $data['status'] ) ) {
 			$data['status'] = (int)$data['status'];
 		}else {
 			$data['status'] = false;
 		}
-		
+
 		// Group is required
 		if ( !isset( $user_id ) ) {
 			return false;
@@ -38,7 +38,7 @@ class ModelUserPost extends Model {
 		if ( empty( $user ) ) {
 			return false;
 		}
-		
+
 		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 		
 		$post = new Post();
@@ -65,7 +65,7 @@ class ModelUserPost extends Model {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user_id . '/' . $folder_name . '/' . $post->getId();
+			$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
 			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
 				$post->setThumb( $data['thumb'] );
 			}
@@ -140,7 +140,7 @@ class ModelUserPost extends Model {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $posts->getUser()->getId() . '/' . $folder_name . '/' . $post->getId();
+			$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
 			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
 				$post->setThumb( $data['thumb'] );
 			}

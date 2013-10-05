@@ -4,7 +4,7 @@ class ControllerAccountLogout extends Controller {
     	if ($this->customer->isLogged()) {
       		$this->customer->logout();
 			
-      		$this->redirect($this->extension->path('WelcomePage'));
+      		$this->redirect($this->url->link('common/home', '', 'SSL'));
     	}
  
     	$this->language->load('account/logout');

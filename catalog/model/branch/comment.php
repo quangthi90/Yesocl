@@ -7,8 +7,8 @@ class ModelBranchComment extends Model {
 	public function getComments( $data = array() ){
 		$query = array();
 
-		if ( empty($data['page']) ){
-			$data['page'] = 1;
+		if ( empty($data['start']) ){
+			$data['start'] = 0;
 		}
 
 		if ( empty($data['limit']) ){
@@ -24,24 +24,20 @@ class ModelBranchComment extends Model {
 		$comments = array();
 
 		if ( $post ){
-			$query_comments = $post->getComments( true );
-			$total = count( $query_comments );
+			foreach ( $post->getComments() as $key => $comment ) {
+				if ( $key < $data['start'] ){
+					continue;
+				}
 
-			$start = ($data['page'] - 1) * $data['limit'];
-
-			if ( $start < 0 ){
-				$start = 0;
-			}
-			for ( $i = $start; $i < $total; $i++ ) {
 				if ( count($comments) == $data['limit'] ){
 					break;
 				}
 
-				$comments[] = $query_comments[$i];
+				$comments[] = $comment;
 			}
 		}
 
-		return array_reverse($comments);
+		return $comments;
 	}
 
 	public function getComment( $Comment_id ){

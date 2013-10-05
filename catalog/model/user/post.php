@@ -1,6 +1,5 @@
 <?php
-use Document\User\Post,
-	Document\User\Posts;
+use Document\User\Post;
 
 class ModelUserPost extends Model {
 	/**
@@ -51,15 +50,7 @@ class ModelUserPost extends Model {
 			$post->setTitle( $data['title'] );
 		}
 
-		$posts = $user->getPostData();
-
-		if ( !$posts ){
-			$posts = new Posts();
-			$this->dm->persist( $posts );
-			$posts->setUser( $user );
-		}
-
-		$posts->addPost( $post );
+		$user->addPost( $post );
 		
 		$this->dm->flush();
 		
