@@ -7,8 +7,8 @@ class ModelUserComment extends Model {
 	public function getComments( $data = array() ){
 		$query = array();
 
-		if ( empty($data['start']) ){
-			$data['start'] = 0;
+		if ( empty($data['page']) ){
+			$data['page'] = 0;
 		}
 
 		if ( empty($data['limit']) ){
@@ -19,28 +19,32 @@ class ModelUserComment extends Model {
 			return array();
 		}
 
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
 			'posts.slug' => $data['post_slug']
 		));
 
 		$post = null;
-		if ( $user ){
-			$post = $user->getPostData()->getPostBySlug( $data['post_slug'] );
+		if ( $posts ){
+			$post = $posts->getPostBySlug( $data['post_slug'] );
 		}
 
 		$comments = array();
 
 		if ( $post ){
-			foreach ( $post->getComments() as $key => $comment ) {
-				if ( $key < $data['start'] ){
-					continue;
-				}
+			$query_comments = $post->getComments( true );
+			$total = count( $query_comments );
 
+			$start = ($data['page'] - 1) * $data['limit'];
+
+			if ( $start < 0 ){
+				$start = 0;
+			}
+			for ( $i = $start; $i < $total; $i++ ) {
 				if ( count($comments) == $data['limit'] ){
 					break;
 				}
 
-				$comments[] = $comment;
+				$comments[] = $query_comments[$i];
 			}
 		}
 		
@@ -52,13 +56,13 @@ class ModelUserComment extends Model {
 		if ( empty($data['post_slug']) ){
 			return false;
 		}
-		$user_info = $this->dm->getRepository('Document\User\User')->findOneBy( array(
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
 			'posts.slug' => $data['post_slug']
 		));
-		if ( !$user_info ){
+		if ( !$posts ){
 			return false;
 		}
-		$post = $user_info->getPostData()->getPostBySlug( $data['post_slug'] );
+		$post = $posts->getPostBySlug( $data['post_slug'] );
 		if ( !$post ){
 			return false;
 		}
@@ -95,7 +99,7 @@ class ModelUserComment extends Model {
 		$data = array(
 			'post_id' => $post->getId(),
 			'type' => $type,
-			'type_id' => $user_info->getId(),
+			'type_id' => $posts->getUser()->getId(),
 			'view' => 0,
 			'created' => $comment->getCreated()
 		);
