@@ -44,7 +44,7 @@
 									<div class="span9">
 										<div class="row-fluid">
 											{% for email in user.emails %}
-											<div class="email-item"><span class="profiles-tabs-value viewers">{{ email.email }}</span>  <span class="label {% if (email.primary) %}label-success{% endif %}">primary</span></div>
+											<div class="email-item {% if (email.primary) %}email-primary{% endif %}"><span class="profiles-tabs-value viewers">{{ email.email }}</span>  <span class="label {% if (email.primary) %}label-success{% endif %}">primary</span></div>
 						        			{% endfor %}
 										</div>
 									</div>
@@ -206,7 +206,7 @@
 					{% set primary_if = '{{if $value.primary == 1}}' %}
 					{% set primary_if_end = '{{/if}}' %}
 					{{ email_loop }}
-					<div class="emails-form" data-primary="${ $value.primary }"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					<div class="emails-form {{ primary_if }}email-primary{{ primary_if_end }}" data-primary="${ $value.primary }"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 					{{ email_loop_end }}
 
 					<div class="row-fluid"><a class="emails-btn-add btn btn-success offset5" href="#" data-index="${ Object.keys(emails).length }">Add email</a></div>

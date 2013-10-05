@@ -182,30 +182,30 @@ ProfilesForm.prototype.attachEvents = function () {
 
 	this.btnAddPhone.click( function () {
 		var data = {
-			'index': $(this).data('index')
+			'index': self.btnAddPhone.attr('data-index')
 		}
 
 		var $form = $.tmpl( $('#profiles-phone-form'), data);
 		new PhonesForm( $form );
 
-		//$(this).attr('data-index', data.index + 1);
+		self.btnAddPhone.attr('data-index', parseInt(data.index) + 1);
 		$(this).parent().before( $form );
-	});
-
-	self.self.find('.phones-form').each( function () {
-		new PhonesForm( $(this) );
 	});
 
 	this.btnAddEmail.click( function () {
 		var data = {
-			'index': $(this).data('index')
+			'index': self.btnAddEmail.attr('data-index')
 		}
 
 		var $form = $.tmpl( $('#profiles-email-form'), data);
 		new EmailsForm( $form );
 
-		//$(this).attr('data-index', data.index + 1);
+		self.btnAddEmail.attr('data-index', parseInt(data.index) + 1);
 		$(this).parent().before( $form );
+	});
+
+	self.self.find('.phones-form').each( function () {
+		new PhonesForm( $(this) );
 	});
 
 	self.self.find('.emails-form').each( function () {
@@ -233,6 +233,8 @@ PhonesForm.prototype.attachEvents = function () {
 function EmailsForm( $element ) {
 	this.self = $element;
 	this.btnRemove = $element.find('.emails-btn-remove');
+	this.btnPrimary = $element.find('span.label');
+	this.inputPrimary = $element.find('[name*=\"[primary]\"]');
 
 	this.attachEvents();
 }
@@ -242,6 +244,22 @@ EmailsForm.prototype.attachEvents = function () {
 
 	this.btnRemove.click( function () {
 		self.self.remove();
+	});
+
+	this.btnPrimary.click( function () {
+		if ( self.self.hasClass('email-primary') ) {
+			return false;
+		}
+
+		$('.email-primary [name*=\"[primary]\"]').val(0);
+		$('.email-primary .label-success').removeClass('label-success');
+		$('.email-primary').attr('data-primary', 0);
+		$('.email-primary').removeClass('email-primary');
+
+		self.self.attr('data-primary', 1);
+		self.inputPrimary.val(1);
+		self.self.addClass('email-primary');
+		self.btnPrimary.addClass('label-success');
 	});
 }
 
