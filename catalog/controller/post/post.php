@@ -1,12 +1,10 @@
-<?php
-
+<?php 
 class ControllerPostPost extends Controller {
+	private $error = array();
 
-    private $error = array();
-
-    public function addStatus() {
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            $this->load->model('user/post');
+	public function addStatus(){
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+			$this->load->model('user/post');
             $this->load->model('tool/image');
 
             $data = array(
@@ -16,24 +14,24 @@ class ControllerPostPost extends Controller {
                 'author_id' => $this->customer->getId()
             );
 
-            $post = $this->model_user_post->addPost($data);
+            $post = $this->model_user_post->addPost( $data );
 
             $user = $post->getUser()->formatToCache();
 
             // avatar
-            if ($user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar'])) {
-                $avatar = $this->model_tool_image->resize($user['avatar'], 180, 180);
-            } elseif ($user && $user['email']) {
-                $avatar = $this->model_tool_image->getGavatar($user['email'], 180);
-            } else {
-                $avatar = $this->model_tool_image->getGavatar($comment['email'], 180);
+            if ( $user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar']) ){
+                $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+            }elseif ( $user && $user['email'] ){
+                $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
+            }else{
+                $avatar = $this->model_tool_image->getGavatar( $comment['email'], 180 );
             }
 
             // thumb
             $thumb = $post->getThumb();
-            if (!empty($thumb)) {
-                $image = $this->model_tool_image->resize($thumb, 400, 250);
-            } else {
+            if ( !empty($thumb) ){
+                $image = $this->model_tool_image->resize( $thumb, 400, 250 );
+            }else{
                 $image = null;
             }
 
@@ -45,15 +43,15 @@ class ControllerPostPost extends Controller {
                 'post_slug' => $post->getSlug()
             );
             $href = array(
-                'comment_list' => $this->extension->path("CommentList", $data_post_info),
-                'comment_add' => $this->extension->path("CommentAdd", $data_post_info),
-                'post_like' => $this->extension->path("PostLike", $data_post_info),
-                'post_detail' => $this->extension->path("PostPage", $data_post_info)
+                'comment_list' => $this->extension->path( "CommentList", $data_post_info ),
+                'comment_add' => $this->extension->path( "CommentAdd", $data_post_info ),
+                'post_like' => $this->extension->path( "PostLike", $data_post_info ),
+                'post_detail' => $this->extension->path( "PostPage", $data_post_info )
             );
 
             $content = html_entity_decode($post->getContent());
 
-            if (strlen($content) > 200) {
+            if ( strlen($content) > 200 ){
                 $content = substr($content, 0, 200) . '[...]';
             }
 
@@ -63,7 +61,7 @@ class ControllerPostPost extends Controller {
                         'avatar' => $avatar,
                         'username' => $post->getAuthor()
                     ),
-                    'created' => $post->getCreated()->format($this->language->get('date_format_full')),
+                    'created' => $post->getCreated()->format( $this->language->get('date_format_full') ),
                     'image' => $image,
                     'title' => $post->getTitle(),
                     'content' => $content
@@ -71,75 +69,75 @@ class ControllerPostPost extends Controller {
                 'href' => $href
             );
 
-            return $this->response->setOutput(json_encode(array(
-                                'success' => 'ok',
-                                'post' => $return_data
-                            )));
-        }
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok',
+                'post' => $return_data
+	        )));
+    	}
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok',
+            'error' => $this->error['warning']
+        )));
+	}
 
-        return $this->response->setOutput(json_encode(array(
-                            'success' => 'not ok',
-                            'error' => $this->error['warning']
-                        )));
-    }
-
-    public function validate() {
-        if (empty($this->request->post['content'])) {
-            $this->error['warning'] = $this->language->get('error_content');
-        } elseif (!empty($this->request->files['thumb']) && $this->request->files['thumb']['size'] > 0) {
+    public function validate(){
+        if ( empty( $this->request->post['content']) ) {
+            $this->error['warning'] = $this->language->get( 'error_content' );
+        }elseif ( !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
             $this->load->model('tool/image');
-            if (!$this->model_tool_image->isValidImage($this->request->files['thumb'])) {
-                $this->error['warning'] = $this->language->get('error_thumb');
+            if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
+                $this->error['warning'] = $this->language->get( 'error_thumb');
             }
         }
 
-        if ($this->error) {
+        if ( $this->error ) {
             return false;
-        } else {
+        }else {
             return true;
         }
     }
 
-    public function like() {
+    public function like(){
         $data = array();
 
-        if (!empty($this->request->get['post_slug'])) {
+        if ( !empty($this->request->get['post_slug']) ){
             $data['post_slug'] = $this->request->get['post_slug'];
-        } else {
+        }else{
             return $this->response->setOutput(json_encode(array(
-                                'success' => 'not ok: post slug empty'
-                            )));
+                'success' => 'not ok: post slug empty'
+            )));
         }
 
-        if (!empty($this->request->get['post_type'])) {
+        if ( !empty($this->request->get['post_type']) ){
             $data['post_type'] = $this->request->get['post_type'];
-        } else {
+        }else{
             return $this->response->setOutput(json_encode(array(
-                                'success' => 'not ok: post type empty'
-                            )));
+                'success' => 'not ok: post type empty'
+            )));
         }
 
         $data['likerId'] = $this->customer->getId();
-
+        
         switch ($data['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/post');
-                $post = $this->model_branch_post->editPost($data['post_slug'], $data);
+                $post = $this->model_branch_post->editPost( $data['post_slug'], $data );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/post');
-                $post = $this->model_user_post->editPost($data['post_slug'], $data);
+                $post = $this->model_user_post->editPost( $data['post_slug'], $data );
                 break;
-
+            
             default:
                 break;
         }
-
+        
         return $this->response->setOutput(json_encode(array(
-                            'success' => 'ok',
-                            'like_count' => count($post->getLikerIds())
-                        )));
+            'success' => 'ok',
+            'like_count' => count($post->getLikerIds())
+        )));
     }
 
     public function getLikers() {
@@ -149,16 +147,16 @@ class ControllerPostPost extends Controller {
             $data['post_slug'] = $this->request->get['post_slug'];
         } else {
             return $this->response->setOutput(json_encode(array(
-                                'success' => 'not ok: post slug empty'
-                            )));
+                'success' => 'not ok: post slug empty'
+            )));
         }
 
         if (isset($this->request->get['post_type']) && !empty($this->request->get['post_type'])) {
             $data['post_type'] = $this->request->get['post_type'];
         } else {
             return $this->response->setOutput(json_encode(array(
-                                'success' => 'not ok: post type empty'
-                            )));
+                'success' => 'not ok: post type empty'
+            )));
         }
 
         if (!empty($this->request->post['page'])) {
@@ -172,8 +170,8 @@ class ControllerPostPost extends Controller {
         $post = $this->model_branch_post->getPost($data);
         if (!$post) {
             return $this->response->setOutput(json_encode(array(
-                                'success' => 'not ok: post not exsisted'
-                            )));
+                'success' => 'not ok: post not exsisted'
+            )));
         }
         $this->load->model('user/user');
         $users = $this->model_user_user->getUsers(array('user_ids' => $post->getLikerIds()));
@@ -189,15 +187,13 @@ class ControllerPostPost extends Controller {
             $user['avatar'] = $avatar;
             $user['href_user'] = $this->extension->path('WallPage', array(
                 'user_slug' => $user['slug']
-                    ));
+            ));
             $likers[] = $user;
         }
         return $this->response->setOutput(json_encode(array(
-                            'success' => 'ok',
-                            'users' => empty($likers) ? array() : $likers
-                        )));
+            'success' => 'ok',
+            'users' => empty($likers) ? array() : $likers
+        )));
     }
-
 }
-
 ?>

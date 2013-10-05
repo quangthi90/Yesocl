@@ -25,6 +25,7 @@ $_['route']['Logout']			= 'account/logout';
 $_['route']['SearchPage']		= 'common/search';
 $_['route']['Search']			= 'common/search';
 $_['route']['ChangeAvatar']		= 'account/avatar';
+$_['route']['ProfilePage']		= 'account/edit';
 
 // Friend
 $_['route']['FriendPage']		= 'friend/friend';

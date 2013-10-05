@@ -12,7 +12,7 @@ Class Background {
 	private $id; 
 
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Experience") */
-    private $experiencies = array();
+    private $experiences = array();
 
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Education") */
     private $educations = array();
@@ -26,20 +26,26 @@ Class Background {
     /** @MongoDB\String */
 	private $adviceForContact;
 
+    /** @MongoDB\String */
+	private $sumary;
+
+    /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Skill") */
+    private $skills = array();
+
 	public function getId(){
 		return $this->id;
 	}
 
 	public function addExperience( Experience $experience ){
-		$this->experiencies[] = $experience;
+		$this->experiences[] = $experience;
 	}
 
-	public function setExperiencies( $experiencies ){
-		$this->experiencies = $experiencies;
+	public function setExperiences( $experiences ){
+		$this->experiences = $experiences;
 	}
 
-	public function getExperiencies(){
-		return $this->experiencies;
+	public function getExperiences(){
+		return $this->experiences;
 	}
 
 	public function addEducation( Education $education ){
@@ -76,5 +82,25 @@ Class Background {
 
 	public function getAdviceForContact(){
 		return $this->adviceForContact;
+	}
+
+	public function setSumary( $sumary ) {
+		$this->sumary = $sumary;
+	}
+
+	public function getSumary() {
+		return $this->sumary;
+	}
+
+	public function addSkill( Education $skill ){
+		$this->skills[] = $skill;
+	}
+
+	public function setSkills( $skills ){
+		$this->skills = $skills;
+	}
+
+	public function getSkills(){
+		return $this->skills;
 	}
 }

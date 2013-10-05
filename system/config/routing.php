@@ -24,7 +24,8 @@ $_['routing']['ChangePassword']	= 'change-password/';
 $_['routing']['Logout']			= 'logout/';
 $_['routing']['SearchPage']		= 'search/';
 $_['routing']['Search']			= 'search/{keyword}/';
-$_['routing']['ChangeAvatar']	= 'change-avatar';
+$_['routing']['ChangeAvatar']	= 'change-avatar/';
+$_['routing']['ProfilePage']	= 'profile/edit/';
 
 // Friend
 $_['routing']['FriendPage']		= 'friend/{user_slug}/';

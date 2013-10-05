@@ -32,7 +32,7 @@ class ExtensionLoader
         return 'catalog_extension';
     }
 
-	public function getFunctions()
+    public function getFunctions()
     {
         return array(
             new Twig_SimpleFunction('path', array($this, 'path')),

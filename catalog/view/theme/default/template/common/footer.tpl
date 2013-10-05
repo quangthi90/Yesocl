@@ -299,11 +299,10 @@
                       </ul>
                     </div>
                 </form>
-              </div>
-              <div class="footer-toolbar-item" id="auto-scroll-left" style="margin-right: 1px;">
-                <a class="btn btn-yes"><i class="icon-fast-backward" style="margin-right: 10px; color: #fff;"></i> Go Left</a>
-              </div>
-          </div>                           
+            </div>
+            <div id="auto-scroll-left" class="fr" style="margin-right: 1px;">
+              <a class="btn btn-yes"><i class="icon-fast-backward" style="margin-right: 10px; color: #fff;"></i> Go Left</a>
+            </div>
         </div>        
     </div>
     <div id="yes-info">

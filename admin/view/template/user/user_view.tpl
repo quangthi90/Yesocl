@@ -150,6 +150,10 @@
             <td><input disabled="disabled" class="input-xxlarge" type="text" name="background[adviceforcontact]" value="<?php echo $advice_for_contact; ?>" /></td>
           </tr>
           <tr>
+            <td><?php echo $entry_sumary; ?></td>
+            <td><textarea disabled="disabled" class="input-xxlarge" rows="8" name="background[sumary]"><?php echo $sumary; ?></textarea></td>
+          </tr>
+          <tr>
             <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
             <td><input disabled="disabled" required="required" datalist="industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /></td>
           </tr>
@@ -223,13 +227,13 @@
         <!-- Experience tab -->
         <div class="tab-pane" id="tab-experience">
           <table class="form">
-          <?php foreach ($experiencies as $key => $experience) { ?>
+          <?php foreach ($experiences as $key => $experience) { ?>
           <tr>
             <td>
             <div class="row-fluid">
               <div class="span4">
                 <div class="span3"><strong><?php echo $entry_company; ?></strong></div>
-                <div class="span9"><input disabled="disabled" class="company input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /></div>
+                <div class="span9"><input disabled="disabled" class="company input-medium" type="text" name="background[experiences][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /></div>
               </div>
               <div class="span4">
                 <div class="span3"><?php echo $entry_current; ?></div>
@@ -239,11 +243,11 @@
             <div class="row-fluid">
                 <div class="span4">
                   <div class="span3"><?php echo $entry_title; ?></div>
-                  <div class="span9"><input disabled="disabled" class="title input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][title]" value="<?php echo $experience['title']; ?>" /></div>
+                  <div class="span9"><input disabled="disabled" class="title input-medium" type="text" name="background[experiences][<?php echo $key; ?>][title]" value="<?php echo $experience['title']; ?>" /></div>
                 </div>
                 <div class="span4">
                   <div class="span3"><?php echo $entry_location; ?></div>
-                  <div class="span9"><input disabled="disabled" class="localtion input-medium" type="text" name="background[experiencies][<?php echo $key; ?>][localtion]" value="<?php echo $experience['location']; ?>" /></div>
+                  <div class="span9"><input disabled="disabled" class="localtion input-medium" type="text" name="background[experiences][<?php echo $key; ?>][localtion]" value="<?php echo $experience['location']; ?>" /></div>
                 </div>
               </div>
               <div class="row-fluid">
@@ -252,26 +256,26 @@
                   <div class="span9">
                     <?php $cur_year = date('Y'); ?>
                     <?php echo $text_month; ?>
-                    <select disabled="disabled" class="started-month input-small" name="background[experiencies][<?php echo $key; ?>][started][month]" >
+                    <select disabled="disabled" class="started-month input-small" name="background[experiences][<?php echo $key; ?>][started][month]" >
                     <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['started']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_year; ?>
-                          <select disabled="disabled" class="started-year input-small" name="background[experiencies][<?php echo $key; ?>][started][year]" >
+                          <select disabled="disabled" class="started-year input-small" name="background[experiences][<?php echo $key; ?>][started][year]" >
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['started']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_to; ?>
                           <?php echo $text_month; ?>
-                          <select disabled="disabled" class="ended-month input-small" name="background[experiencies][<?php echo $key; ?>][ended][month]" >
+                          <select disabled="disabled" class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" >
                     <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_year; ?>
-                          <select disabled="disabled" class="ended-year input-small" name="background[experiencies][<?php echo $key; ?>][ended][year]" >
+                          <select disabled="disabled" class="ended-year input-small" name="background[experiences][<?php echo $key; ?>][ended][year]" >
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
@@ -282,7 +286,7 @@
               <div class="row-fluid">
                 <div class="span4">
                   <div class="span3"><?php echo $entry_description; ?></div>
-                  <div class="span9"><textarea disabled="disabled" class="description input-xxlarge" type="text" name="background[experiencies][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
+                  <div class="span9"><textarea disabled="disabled" class="description input-xxlarge" type="text" name="background[experiences][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
                 </div>
               </div>
             </td>
