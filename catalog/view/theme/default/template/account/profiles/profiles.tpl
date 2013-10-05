@@ -256,7 +256,7 @@
     <div class="phones-form"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-email-form" type="text/x-jquery-tmpl">
-    <div class="emails-form"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]"/>  <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+    <div class="emails-form"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" /><input type="hidden" name="emails[${ index }][primary]" value="0" /> <span class="label">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
 	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">

@@ -222,13 +222,19 @@ class ControllerAccountEdit extends Controller {
 			$this->error['birthday'] = $this->language->get('error_birthday');
 		}
 
-		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
-			$this->error['email'] = $this->language->get('error_email');
-		}
-		
-		$this->load->model('account/customer');
-		if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
-			$this->error['warning'] = $this->language->get('error_exists');
+		$this->load->model( 'account/customer' );
+		if ( isset($this->request->post['emails']) ){
+			foreach ( $this->request->post['emails'] as $email ) {
+				if ((utf8_strlen($email['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email'])) {
+		      		$this->error['email'] = $this->language->get('error_email');
+		      		break;
+		    	}
+		    	
+		    	if ( $this->model_account_customer->isExistEmail($this->customer->getId(), $email['email']) ){
+		    		$this->error['email'] = $this->language->get('error_exist_email');
+		      		break;
+		    	}
+			}
 		}
 
 		if (!$this->error) {
@@ -461,6 +467,14 @@ class ControllerAccountEdit extends Controller {
 						);
 				}
 				$json['phones_js'] = json_encode( $json['phones'] );
+				$json['emails'] = array();
+				foreach ($user->getEmails() as $key => $email) {
+					$json['emails'][$key] = array(
+						'email' => $email->getEmail(),
+						'primary' => $email->getPrimary() ? 1 : 0,
+						);
+				}
+				$json['emails_js'] = json_encode( $json['emails'] );
 				$json['sex'] = $user->getMeta()->getSex() ? 1 : 0;
 				$json['sext'] = $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female');
 				$json['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');

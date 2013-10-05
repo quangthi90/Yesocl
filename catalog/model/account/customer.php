@@ -284,11 +284,8 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}
 
-			if ((utf8_strlen($data['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $data['email'])) {
-				return false;
-			}
-			
-			if (($this->customer->getEmail() != $data['email']) && $this->getTotalCustomersByEmail($data['email'])) {
+			// Email is required
+			if ( !isset($data['emails']) || count($data['emails']) < 0 ){
 				return false;
 			}
 
@@ -305,6 +302,34 @@ class ModelAccountCustomer extends Model {
 			}
 
 			// email
+			// Get primary email
+			$primary_email = '';
+			foreach ( $data['emails'] as $email_data ){
+				if ( $email_data['primary'] ){
+					$primary_email = strtolower( trim( $email_data['email'] ) );
+					break;
+				}
+			}
+			// Get list email 
+			$emails = array();
+			$email = new Email();
+			$email->setEmail( $primary_email );
+			$email->setPrimary( true );
+			$emails[] = $email;
+
+			foreach ( $data['emails'] as $email_data ){
+				$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+				if ( $email_data['email'] === $primary_email ){
+					continue;
+				}elseif ( !$email_data['email'] ) {
+					continue;
+				}
+				$email = new Email();
+				$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
+				$email->setPrimary( false );
+				$emails[$email_data['email']] = $email;
+			}
+			$customer->setEmails( $emails );
 
 			// phone
 			$phones_data = array();
@@ -706,6 +731,22 @@ class ModelAccountCustomer extends Model {
 		$this->dm->flush();
 
 		return true;
+	}
+
+	public function isExistEmail( $curr_user_id, $email ) {
+		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
+		
+		foreach ( $users as $user ) {
+			if ( $user->getId() == $curr_user_id ){
+				continue;
+			}
+			
+			if ( $user->isExistEmail( $email ) ){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
 ?>

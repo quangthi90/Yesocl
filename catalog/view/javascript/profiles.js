@@ -75,6 +75,7 @@ function ProfilesForm( $element ) {
 	this.btnSave = $element.find('.profiles-btn-save');
 	this.btnCancel = $element.find('.profiles-btn-cancel');
 	this.btnAddPhone = $element.find('.phones-btn-add');
+	this.btnAddEmail = $element.find('.emails-btn-add');
 
 	this.attachEvents();
 }
@@ -98,11 +99,20 @@ ProfilesForm.prototype.attachEvents = function () {
 			i++;
 		});
 
+		var emails_arr = [];
+		var j = 0;
+		self.self.find('.emails-form').each( function () {
+			emails_arr[j] = {};
+			emails_arr[j].email = $(this).find('[name*=\"[email]\"]').val();
+			emails_arr[j].primary = $(this).find('[name*=\"[primary]\"]').val();
+			j++;
+		});
+
 		var data = {
 			'username': self.self.find('[name=\"username\"]').val(),
 			'firstname': self.self.find('[name=\"firstname\"]').val(),
 			'lastname': self.self.find('[name=\"lastname\"]').val(),
-			'email': self.self.find('[name=\"email\"]').val(),
+			'emails': emails_arr,
 			'phones': phones_arr,
 			'sex': self.self.find('[name=\"sex\"]').val(),
 			'birthday': self.self.find('[name=\"birthday\"]').val(),
@@ -185,6 +195,22 @@ ProfilesForm.prototype.attachEvents = function () {
 	self.self.find('.phones-form').each( function () {
 		new PhonesForm( $(this) );
 	});
+
+	this.btnAddEmail.click( function () {
+		var data = {
+			'index': $(this).data('index')
+		}
+
+		var $form = $.tmpl( $('#profiles-email-form'), data);
+		new EmailsForm( $form );
+
+		//$(this).attr('data-index', data.index + 1);
+		$(this).parent().before( $form );
+	});
+
+	self.self.find('.emails-form').each( function () {
+		new EmailsForm( $(this) );
+	});
 }
 
 function PhonesForm( $element ) {
@@ -198,6 +224,21 @@ PhonesForm.prototype.attachEvents = function () {
 	var self = this;
 
 	this.self.find('select').val( self.self.data('type') ).prop('selected',true);
+
+	this.btnRemove.click( function () {
+		self.self.remove();
+	});
+}
+
+function EmailsForm( $element ) {
+	this.self = $element;
+	this.btnRemove = $element.find('.emails-btn-remove');
+
+	this.attachEvents();
+}
+
+EmailsForm.prototype.attachEvents = function () {
+	var self = this;
 
 	this.btnRemove.click( function () {
 		self.self.remove();
