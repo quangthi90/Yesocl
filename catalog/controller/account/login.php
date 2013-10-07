@@ -48,31 +48,7 @@ class ControllerAccountLogin extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			unset($this->session->data['guest']);
 
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'ok'
-	        )));
-    	}  
-		
-      	if (isset($this->error['warning'])) {
-			$this->session->data['warning'] = $this->error['warning'];
-		}
-						
-		return $this->response->setOutput(json_encode(array(
-            'success' => 'not ok'
-        )));
-  	}
-  
-  	private function validate() {
-    	if (!$this->customer->login($this->request->post['email'], $this->request->post['password'], false, (isset($this->request->post['remember']) && $this->request->post['remember'])?true:false)) {
-      		$this->error['warning'] = $this->language->get('error_login');
-    	}	
-		
-    	if (!$this->error) {
-      		return true;
-    	} else {
-      		return false;
-    	}  	
-  	}
+
 
   	public function facebookConnect() {
   		if ( $this->facebook->getUser() ) {

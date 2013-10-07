@@ -66,6 +66,15 @@ Class User {
 	/** @MongoDB\ReferenceOne(targetDocument="Posts", mappedBy="user") */
 	private $postData;
 
+	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Friend") */
+	private $friends = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Group") */
+	private $friendGroups = array();
+
+	/** @MongoDB\Collection */
+	private $friendRequests;
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -87,7 +96,7 @@ Class User {
 	* Format array to save to Cache
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Branch
+	* @return: array User
 	*/
     public function formatToCache(){
 		$data = array(
@@ -134,6 +143,26 @@ Class User {
 		return false;
 	}
 
+	public function getFriendById( $friend_id ){
+		foreach ( $this->friends as $friend ) {
+			if ( $friend->getUser() && $friend->getUser()->getId() == $friend_id ){
+				return $friend;
+			}
+		}
+
+		return null;
+	}
+
+	public function getFriendBySlug( $friend_slug ){
+		foreach ( $this->friends as $friend ) {
+			if ( $friend->getUser() && $friend->getUser()->getSlug() == $friend_slug){
+				return $friend;
+			}
+		}
+
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}
@@ -147,6 +176,9 @@ Class User {
 	}
 
 	public function getUsername(){
+		if ( !$this->username ){
+			return $this->getFullname();
+		}
 		return $this->username;
 	}
 
@@ -187,7 +219,11 @@ Class User {
 	}
 
 	public function getFullname(){
-		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		if ( $this->meta ){
+			return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		}
+
+		return '';
 	}
 
 	public function setGroupUser( $groupUser ){
@@ -280,6 +316,42 @@ Class User {
 
 	public function getRefreshIds(){
 		return $this->refreshIds;
+	}
+
+	public function addFriend( \Document\Friend\Friend $friend ){
+		$this->friends[] = $friend;
+	}
+
+	public function setFriends( $friends ){
+		$this->friends = $friends;
+	}
+
+	public function getFriends(){
+		return $this->friends;
+	}
+
+	public function addFriendGroup( \Document\Friend\Group $friendGroup ){
+		$this->friendGroups[] = $friendGroup;
+	}
+
+	public function setFriendGroups( $friendGroups ){
+		$this->friendGroups = $friendGroups;
+	}
+
+	public function getFriendGroups(){
+		return $this->friendGroups;
+	}
+
+	public function addFriendRequest( $friendRequest ){
+		$this->friendRequests[] = $friendRequest;
+	}
+
+	public function setFriendRequests( $friendRequests ){
+		$this->friendRequests = $friendRequests;
+	}
+
+	public function getFriendRequests(){
+		return $this->friendRequests;
 	}
 
 	/**

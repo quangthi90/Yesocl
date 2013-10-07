@@ -81,6 +81,7 @@
 .profiles-tabs-main-body {
 	margin-top: 10px;
 	line-height: 30px;
+	overflow-y: hidden;
 }
 
 #profiles-tabs-background .profiles-tabs-main-body {
@@ -148,10 +149,10 @@
 	padding: 2px 0px;	
 }
 
-.profiles-tabs-value  .profiles-tabs-value-item:first-child {
+/*.profiles-tabs-value  .profiles-tabs-value-item:first-child {
 	font-weight: bold;
 	font-style: italic;
-}
+}*/
 
 .profiles-tabs-item1-content {
 	margin-bottom: 10px;
@@ -161,6 +162,12 @@
 
 .profiles-tabs-item1-content input {
 	margin-bottom: 0px;
+}
+
+.profiles-form-add {
+	margin-bottom: 10px;
+	padding: 10px;
+	border: 1px solid #c0c0c0;	
 }
 
 .profiles-tabs-item2 {
@@ -216,11 +223,12 @@
 	font-weight: bold;
 }
 
-#y-content .profiles-tabs-input {
-	display: none;
-	margin-bottom: 0px;
-}
-
 #y-content .editors {
 	display: none;
+}
+
+textarea[name="sumary"] {
+	width: 98%;
+	height: 95%;
+	overflow-y: hidden;
 }

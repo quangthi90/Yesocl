@@ -24,6 +24,9 @@ require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 // require_once(DIR_SYSTEM . 'library/length.php');
 // require_once(DIR_SYSTEM . 'library/cart.php');
 
+// Rename Document for linux
+// include ('libs/renameFolder.php');
+
 require_once(DIR_DATABASE . 'doctrine.php');
 
 // Registry
