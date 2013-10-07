@@ -33,6 +33,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_user'] = $this->language->get('text_user');
 		$this->data['text_user_group'] = $this->language->get('text_user_group');
 		$this->data['text_user_manage'] = $this->language->get('text_user_manage');
+		$this->data['text_social_network'] = $this->language->get('text_social_network');
 		
 		$this->data['text_admin'] = $this->language->get('text_admin');
 		$this->data['text_admin_group'] = $this->language->get('text_admin_group');
@@ -99,6 +100,7 @@ class ControllerCommonHeader extends Controller {
 			// User
 			$this->data['user_group'] = $this->url->link('user/group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['user'] = $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['social_network'] = $this->url->link('social/network', 'token=' . $this->session->data['token'], 'SSL');
 			
 			// Attribute
 			$this->data['attribute_type'] = $this->url->link('attribute/type', 'token=' . $this->session->data['token'], 'SSL');
