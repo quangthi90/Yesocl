@@ -62,18 +62,21 @@ TabsInformation.prototype.attachEvents = function () {
 		}
 		
 		var $form = $.tmpl( $('#profiles-form'), data );
-		new ProfilesForm( $form );
+		var form = new ProfilesForm( $form );
+
+		var $control = $.tmpl( $('#profiles-form-control'));
+		new ProfilesFormControl( $control, form);
 
 		item.toggle();
 		item.after( $form );
 		item.remove();
+		self.btnEdit.toggle();
+		self.self.find('.profiles-tabs-main-header').append($control);
 	});
 }
 
 function ProfilesForm( $element ) {
 	this.self = $element;
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
 	this.btnAddPhone = $element.find('.phones-btn-add');
 	this.btnAddEmail = $element.find('.emails-btn-add');
 
@@ -84,101 +87,6 @@ ProfilesForm.prototype.attachEvents = function () {
 	var self = this;
 
 	this.self.find('select[name=\"sex\"]').val( this.self.data('sex') ).prop('selected',true);
-
-	this.btnSave.click( function () {
-		if ( self.btnSave.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		var phones_arr = [];
-		var i = 0;
-		self.self.find('.phones-form').each( function () {
-			phones_arr[i] = {};
-			phones_arr[i].phone = $(this).find('input').val();
-			phones_arr[i].type = $(this).find('select').val();
-			i++;
-		});
-
-		var emails_arr = [];
-		var j = 0;
-		self.self.find('.emails-form').each( function () {
-			emails_arr[j] = {};
-			emails_arr[j].email = $(this).find('[name*=\"[email]\"]').val();
-			emails_arr[j].primary = $(this).find('[name*=\"[primary]\"]').val();
-			j++;
-		});
-
-		var data = {
-			'username': self.self.find('[name=\"username\"]').val(),
-			'firstname': self.self.find('[name=\"firstname\"]').val(),
-			'lastname': self.self.find('[name=\"lastname\"]').val(),
-			'emails': emails_arr,
-			'phones': phones_arr,
-			'sex': self.self.find('[name=\"sex\"]').val(),
-			'birthday': self.self.find('[name=\"birthday\"]').val(),
-			'address': self.self.find('[name=\"address\"]').val(),
-			'location': self.self.find('[name=\"location\"]').val(),
-			'industry': self.self.find('[name=\"industry\"]').val()
-		};
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					var $item = $.tmpl($('#profiles-item'), json);
-					new ProfilesItem($item);
-
-					self.self.toggle();
-					self.self.after($item);
-					self.self.remove();
-
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
-		});
-	} );
-
-	this.btnCancel.click( function () {
-		var data = {
-			'url': self.self.data('url'),
-			'username': self.self.data('username'),
-			'firstname': self.self.data('firstname'),
-			'lastname': self.self.data('lastname'),
-			'fullname': self.self.data('fullname'),
-			'emails': self.self.data('emails'),
-			'emails_js': JSON.stringify(self.self.data('emails')),
-			'phones': self.self.data('phones'),
-			'phones_js': JSON.stringify(self.self.data('phones')),
-			'sex': self.self.data('sex'),
-			'sext': self.self.data('sext'),
-			'birthday': self.self.data('birthday'),
-			'birthdayt': self.self.data('birthdayt'),
-			'address': self.self.data('address'),
-			'location': self.self.data('location'),
-			'industry': self.self.data('industry')
-		}
-
-		var $item = $.tmpl($('#profiles-item'), data);
-		new ProfilesItem($item);
-
-		self.self.toggle();
-		self.self.after($item);
-		self.self.remove();
-
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		$('.profiles-btn-remove').removeClass( 'disabled' );
-	} );
 
 	this.btnAddPhone.click( function () {
 		var data = {
@@ -211,6 +119,126 @@ ProfilesForm.prototype.attachEvents = function () {
 	self.self.find('.emails-form').each( function () {
 		new EmailsForm( $(this) );
 	});
+}
+
+function ProfilesFormControl( $element, form ) {
+	this.self = $element;
+	this.form = form;
+	this.btnSave = $element.find('.profiles-btn-save');
+	this.btnCancel = $element.find('.profiles-btn-cancel');
+
+	this.attachEvents();
+}
+
+ProfilesFormControl.prototype.attachEvents = function () {
+	var self = this;
+
+	this.btnSave.click( function () {
+		if ( self.btnSave.hasClass( 'disabled' ) ) {
+			return false;
+		}
+
+		$('.profiles-btn-save').addClass( 'disabled' );
+		$('.profiles-btn-cancel').addClass( 'disabled' );
+
+		var phones_arr = [];
+		var i = 0;
+		self.form.self.find('.phones-form').each( function () {
+			phones_arr[i] = {};
+			phones_arr[i].phone = $(this).find('input').val();
+			phones_arr[i].type = $(this).find('select').val();
+			i++;
+		});
+
+		var emails_arr = [];
+		var j = 0;
+		self.form.self.find('.emails-form').each( function () {
+			emails_arr[j] = {};
+			emails_arr[j].email = $(this).find('[name*=\"[email]\"]').val();
+			emails_arr[j].primary = $(this).find('[name*=\"[primary]\"]').val();
+			j++;
+		});
+
+		var data = {
+			'username': self.form.self.find('[name=\"username\"]').val(),
+			'firstname': self.form.self.find('[name=\"firstname\"]').val(),
+			'lastname': self.form.self.find('[name=\"lastname\"]').val(),
+			'emails': emails_arr,
+			'phones': phones_arr,
+			'sex': self.form.self.find('[name=\"sex\"]').val(),
+			'birthday': self.form.self.find('[name=\"birthday\"]').val(),
+			'address': self.form.self.find('[name=\"address\"]').val(),
+			'location': self.form.self.find('[name=\"location\"]').val(),
+			'industry': self.form.self.find('[name=\"industry\"]').val()
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: self.form.self.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message == 'success' ) {
+					var $item = $.tmpl($('#profiles-item'), json);
+					new ProfilesItem($item);
+
+					self.form.self.toggle();
+					self.form.self.after($item);
+					self.form.self.remove();
+
+					self.self.toggle();
+					self.self.parent().find('.profiles-btn-edit').toggle();
+					self.self.remove();
+
+					$('.profiles-btn-edit').removeClass( 'disabled' );
+					$('.profiles-btn-add').removeClass( 'disabled' );
+					$('.profiles-btn-remove').removeClass( 'disabled' );
+					$('.profiles-btn-save').removeClass( 'disabled' );
+					$('.profiles-btn-cancel').removeClass( 'disabled' );
+				}else {
+					alert('Error!');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
+	} );
+
+	this.btnCancel.click( function () {
+		var data = {
+			'url': self.form.self.data('url'),
+			'username': self.form.self.data('username'),
+			'firstname': self.form.self.data('firstname'),
+			'lastname': self.form.self.data('lastname'),
+			'fullname': self.form.self.data('fullname'),
+			'emails': self.form.self.data('emails'),
+			'emails_js': JSON.stringify(self.form.self.data('emails')),
+			'phones': self.form.self.data('phones'),
+			'phones_js': JSON.stringify(self.form.self.data('phones')),
+			'sex': self.form.self.data('sex'),
+			'sext': self.form.self.data('sext'),
+			'birthday': self.form.self.data('birthday'),
+			'birthdayt': self.form.self.data('birthdayt'),
+			'address': self.form.self.data('address'),
+			'location': self.form.self.data('location'),
+			'industry': self.form.self.data('industry')
+		}
+
+		var $item = $.tmpl($('#profiles-item'), data);
+		new ProfilesItem($item);
+
+		self.form.self.toggle();
+		self.form.self.after($item);
+		self.form.self.remove();
+		self.self.toggle();
+		self.self.parent().find('.profiles-btn-edit').toggle();
+		self.self.remove();
+
+		$('.profiles-btn-edit').removeClass( 'disabled' );
+		$('.profiles-btn-add').removeClass( 'disabled' );
+		$('.profiles-btn-remove').removeClass( 'disabled' );
+	} );
 }
 
 function PhonesForm( $element ) {

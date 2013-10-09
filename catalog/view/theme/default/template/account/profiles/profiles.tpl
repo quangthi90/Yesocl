@@ -25,8 +25,6 @@
 					<div class="row-fluid">
 						<div class="profiles-tabs-main-header">
 							<a class="profiles-btn-edit viewers btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
-							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 							<div class="clear"></div>
 						</div>
 						<div class="profiles-tabs-main-body">
@@ -247,10 +245,10 @@
 			<div class="span2 offset1">Industry</div>
 			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="industry" value="${ industry }" /></div>
 		</div>
-		<div class="row-fluid">
-			<div class="span9 offset3"><a href="#" class="btn btn-success profiles-btn-save">Save</a>   <a href="#" class="btn profiles-btn-cancel">Cancel</a></div>
-		</div>
 	</div>
+</script>
+<script id="profiles-form-control" type="text/x-jquery-tmpl">
+	<span class="basic-profiles-form-control"><a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a><a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a><div class="clear"></div></span>
 </script>
 <script id="profiles-phone-form" type="text/x-jquery-tmpl">
     <div class="phones-form"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
