@@ -3,6 +3,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
+    <link href="{{ asset_css('libs/bootstrap-formhelpers.css') }}" rel="stylesheet" media="screen" />
     <link href="{{ asset_css('profiles.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
@@ -184,6 +185,8 @@
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.en_US.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="profiles-form" type="text/x-jquery-tmpl">
 	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
@@ -231,7 +234,34 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Birthday</div>
-			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="birthday" value="${ birthday }" /></div>
+			<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="${ birthday }">
+			  <div class="input-prepend bfh-datepicker-toggle" data-toggle="bfh-datepicker">
+			    <span class="add-on"><i class="icon-calendar"></i></span>
+			    <input type="text" name="birthday" class="input-medium" value="${ birthday }" readonly/>
+			  </div>
+			  <div class="bfh-datepicker-calendar">
+			    <table class="calendar table table-bordered">
+			      <thead>
+			        <tr class="months-header">
+			          <th class="month" colspan="4">
+			            <a class="previous" href="#"><i class="icon-chevron-left"></i></a>
+			            <span></span>
+			            <a class="next" href="#"><i class="icon-chevron-right"></i></a>
+			          </th>
+			          <th class="year" colspan="3">
+			            <a class="previous" href="#"><i class="icon-chevron-left"></i></a>
+			            <span></span>
+			            <a class="next" href="#"><i class="icon-chevron-right"></i></a>
+			          </th>
+			        </tr>
+			        <tr class="days-header">
+			        </tr>
+			      </thead>
+			      <tbody>
+			      </tbody>
+			    </table>
+			  </div>
+			</div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Address</div>
