@@ -260,7 +260,7 @@ class ControllerAccountEdit extends Controller {
 			$this->error['location'] = $this->language->get('error_location');
 		}
 
-		if ( isset( $this->request->post['industry'] ) && is_string( $this->request->post['industry'] && (utf8_strlen($this->request->post['industry']) > 1) )  ) {
+		if ( isset( $this->request->post['industry'] ) && is_string( $this->request->post['industry'] ) && (utf8_strlen($this->request->post['industry']) > 1) ) {
 			if ( utf8_strlen($this->request->post['industry']) > 64 ) {
 				$this->error['industry'] = $this->language->get('error_industry');
 			}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
