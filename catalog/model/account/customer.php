@@ -272,13 +272,12 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}elseif ((strlen($data['username']) < 5) || (strlen($data['username']) > 32)) {
 				return false;
-			}elseif ( !preg_match( '/^[A-z]{1,32}[0-9]{0,31}$/', $data['username']) ) {
+			}elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $data['username']) ) {
 				return false;
 			}elseif ( $this->isExistUsername( $data['username'], $customer->getId() ) ) {
 				return false;
 			}else {
 				$data['username'] = strtolower( $data['username'] );
-				$customer->setUsername( $data['username'] );
 			}
 
 			if ( !isset( $data['firstname'] ) || !is_string( $data['firstname'] ) ) {
@@ -287,7 +286,6 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}else {
 				$data['firstname'] = trim(strtolower( $data['firstname'] ));
-				$customer->getMeta()->setFirstname( $data['firstname'] );
 			}
 
 			if ( !isset( $data['lastname'] ) || !is_string( $data['lastname'] ) ) {
@@ -296,7 +294,6 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}else {
 				$data['lastname'] = trim(strtolower( $data['lastname'] ));
-				$customer->getMeta()->setLastname( $data['lastname'] );
 			}
 
 			if ( !isset($data['birthday']) ) {
@@ -306,6 +303,33 @@ class ModelAccountCustomer extends Model {
 			// Email is required
 			if ( !isset($data['emails']) || count($data['emails']) < 0 ){
 				return false;
+			}
+
+			if ( !isset( $data['address'] ) || !is_string( $data['address'] ) ) {
+				return false;
+			}elseif ((utf8_strlen($data['address']) < 1) || (utf8_strlen($data['address']) > 255)) {
+				return false;
+			}else {
+				$data['address'] = trim( $data['address'] );
+			}
+
+			if ( !isset( $data['location'] ) || !is_string( $data['location'] ) ) {
+				return false;
+			}elseif ((utf8_strlen($data['location']) < 1) || (utf8_strlen($data['location']) > 255)) {
+				return false;
+			}else {
+				$data['location'] = trim( $data['location'] );
+			}
+
+			if ( isset( $data['industry'] ) && is_string( $data['industry'] ) && (utf8_strlen($data['industry']) > 1) ) {
+				if ( utf8_strlen($data['industry']) > 64 ) {
+					return false;
+				}elseif ( !preg_match('/^[A-z]+$/', $data['industry']) ) {
+					return false;
+				}
+				$data['industry'] = trim(strtolower( $data['industry'] ));
+			}else {
+				$data['industry'] = '';
 			}
 
 			// email
@@ -366,18 +390,13 @@ class ModelAccountCustomer extends Model {
 			if ( isset( $data['birthday'] ) && !empty( $data['birthday'] ) ) {
 				$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
 			}
-
-			if ( isset( $data['address'] ) && !empty( $data['address'] ) ) {
-				$customer->getMeta()->setAddress( $data['address'] );
-			}
-
-			if ( isset( $data['location'] ) && !empty( $data['location'] ) ) {
-				$customer->getMeta()->getLocation()->setLocation( $data['location'] );
-			}
-
-			if ( isset( $data['industry'] ) && !empty( $data['industry'] ) ) {
-				$customer->getMeta()->setIndustry( $data['industry'] );
-			}
+			
+			$customer->setUsername( $data['username'] );
+			$customer->getMeta()->setFirstname( $data['firstname'] );
+			$customer->getMeta()->setLastname( $data['lastname'] );
+			$customer->getMeta()->setAddress( $data['address'] );
+			$customer->getMeta()->getLocation()->setLocation( $data['location'] );
+			$customer->getMeta()->setIndustry( $data['industry'] );
 
 			$this->dm->flush();
 

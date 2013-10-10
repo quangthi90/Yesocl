@@ -212,7 +212,7 @@ class ControllerAccountEdit extends Controller {
 			$this->error['username'] = $this->language->get('error_username');
 		}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
 			$this->error['username'] = $this->language->get('error_username');
-		}elseif ( !preg_match( '/^[A-z]{1,32}[0-9]{0,31}$/', $this->request->post['username']) ) {
+		}elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $this->request->post['username']) ) {
 			$this->error['username'] = $this->language->get('error_username');
 		}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
 			$this->error['username'] = $this->language->get('error_exist_username');
@@ -245,6 +245,26 @@ class ControllerAccountEdit extends Controller {
 		    		$this->error['email'] = $this->language->get('error_exist_email');
 		      		break;
 		    	}
+			}
+		}
+
+		if ( !isset( $this->request->post['address'] ) || !is_string( $this->request->post['address'] ) ) {
+			$this->error['address'] = $this->language->get('error_address');
+		}elseif ((utf8_strlen($this->request->post['address']) < 1) || (utf8_strlen($this->request->post['address']) > 255)) {
+			$this->error['address'] = $this->language->get('error_address');
+		}
+
+		if ( !isset( $this->request->post['location'] ) || !is_string( $this->request->post['location'] ) ) {
+			$this->error['location'] = $this->language->get('error_location');
+		}elseif ((utf8_strlen($this->request->post['location']) < 1) || (utf8_strlen($this->request->post['location']) > 255)) {
+			$this->error['location'] = $this->language->get('error_location');
+		}
+
+		if ( isset( $this->request->post['industry'] ) && is_string( $this->request->post['industry'] && (utf8_strlen($this->request->post['industry']) > 1) )  ) {
+			if ( utf8_strlen($this->request->post['industry']) > 64 ) {
+				$this->error['industry'] = $this->language->get('error_industry');
+			}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
+				$this->error['industry'] = $this->language->get('error_industry');
 			}
 		}
 

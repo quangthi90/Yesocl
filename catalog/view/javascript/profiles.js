@@ -244,6 +244,54 @@ ProfilesFormControl.prototype.attachEvents = function () {
 						self.form.self.find('[name=\"lastname\"]').parent().addClass('success');
 					}
 
+					if ( json.address != null ) {
+						self.form.self.find('[name=\"address\"]').parent().addClass('error');
+						self.form.self.find('[name=\"address\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.address,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"address\"]').parent().addClass('success');
+					}
+
+					if ( json.location != null ) {
+						self.form.self.find('[name=\"location\"]').parent().addClass('error');
+						self.form.self.find('[name=\"location\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.location,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"location\"]').parent().addClass('success');
+					}
+
+					if ( json.industry != null ) {
+						self.form.self.find('[name=\"industry\"]').parent().addClass('error');
+						self.form.self.find('[name=\"industry\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.industry,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"industry\"]').parent().addClass('success');
+					}
+
 					$('.profiles-btn-save').removeClass( 'disabled' );
 					$('.profiles-btn-cancel').removeClass( 'disabled' );
 				}
