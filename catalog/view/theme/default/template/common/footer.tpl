@@ -3,143 +3,14 @@
         <div class="bar-wrapper">
           <div class="footer-toolbar fl">
               <div class="footer-toolbar-item search">
-                <div class="search-form" data-url="{{ path('SearchPage') }}">
-                  <div class="input-prepend">
-                      <button class="btn btn-yes btn-search" type="button" style="width: 120px;">
-                        <i class="icon-search"></i>Search
-                      </button>
-                      <input class="auto-hide" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
-                      <div class="suggestion-container hidden">      
-                        <ul class="suggest-content">
-                            <li class="suggest-field">
-                                <h4 class="suggest-field-name">Friend</h4>
-                                <ul class="suggest-field-list">
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Nguyễn Văn A</div>
-                                          <div class="data-more">10 friends</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Nguyễn Văn A</div>
-                                          <div class="data-more">10 friends</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Nguyễn Văn A</div>
-                                          <div class="data-more">10 friends</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                </ul>
-                                <br class="clr">
-                            </li>
-                            <li class="suggest-field">
-                                <h4 class="suggest-field-name">Post</h4>
-                                <ul class="suggest-field-list">
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Title of post</div>
-                                          <div class="data-more">100 likes - 30 comments - 1k views</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Title of post</div>
-                                          <div class="data-more">100 likes - 30 comments - 1k views</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Title of post</div>
-                                          <div class="data-more">100 likes - 30 comments - 1k views</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                </ul>
-                                <br class="clr">
-                            </li>
-                            <li class="suggest-field">
-                                <h4 class="suggest-field-name">Group</h4>
-                                <ul class="suggest-field-list">
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Title of group</div>
-                                          <div class="data-more">100 members</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Title of group</div>
-                                          <div class="data-more">100 members</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                  <li class="suggest-field-item">
-                                    <a href="#">
-                                      <div class="data-detail">
-                                        <img src="https://cdn1.iconfinder.com/data/icons/metro-ui-icon-set/128/Image_-_Google_Docs.png" alt="">
-                                        <div class="data-meta-info">
-                                          <div class="data-name">Title of group</div>
-                                          <div class="data-more">100 members</div>
-                                        </div>
-                                      </div>
-                                    </a>
-                                  </li>
-                                </ul>
-                                <br class="clr">
-                            </li>
-                        </ul>
-                        <p class="suggest-title">
-                          <span class="loadding-icon">
-                            <i class="icon-spinner icon-spin icon-large"></i>
-                          </span> 
-                          <span>
-                             Tìm kiếm với từ khóa <strong>key search</strong>
-                          </span>
-                        </p>
-                    </div> 
-                  </div>
-                </div> 
+                <a class="btn btn-yes" id="btn-search-invoke-on" style="width: 89px;">
+                  Search
+                  <i class="icon-caret-up"></i>
+                </a>
+                <a class="btn btn-yes" id="btn-search-invoke-off" style="width: 89px; display: none;">
+                  Search
+                  <i class="icon-caret-down"></i>
+                </a>
               </div>
               <div class="footer-toolbar-item notification-group">
                 <div class="dropup notification-item common">
@@ -299,6 +170,7 @@
                       </ul>
                     </div>
                 </form>
+                </div>
             </div>
             <div id="auto-scroll-left" class="fr" style="margin-right: 1px;">
               <a class="btn btn-yes"><i class="icon-fast-backward" style="margin-right: 10px; color: #fff;"></i> Go Left</a>
@@ -313,4 +185,24 @@
             Copyright &copy; 2012 - <strong>YESOCL.com</strong>
         </span>  
     </div>    
+</div>
+<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" 
+      data-close-search="#btn-search-invoke-off" 
+      data-url="{{ path('SearchPage') }}">
+  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
+  <div class="suggestion-container">                         
+  </div>
+  {% raw %}
+  <div class="hidden search-result-item-template">
+    <a href="${url}">
+      <div class="data-detail">
+        <img src="${image}" alt="" />
+        <div class="data-meta-info">
+          <div class="data-name">${value}</div>
+          <div class="data-more">${metaInfo}</div>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% endraw %}
 </div>

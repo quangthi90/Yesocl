@@ -13,3 +13,8 @@
 /object/hydrator
 /object/proxy
 /.htaccess
+/catalog/view/theme/default/template/post/common/form_status2.tpl
+
+/catalog/view/theme/default/template/common/footer-1.tpl
+
+/catalog/view/javascript/common1.js

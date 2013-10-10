@@ -1406,7 +1406,7 @@ label.in-line{
 .footer-toolbar .footer-toolbar-item.search .btn i {
   font-size: 18px;
   color: #fff;
-  margin-right: 10px;
+  margin-left: 15px;
 }
 .footer-toolbar-item.notification-group {
 
@@ -1415,7 +1415,7 @@ label.in-line{
   display: block;
   position: relative;
   float: left;
-  background-color: #FFF;
+  background-color: #ECEBEB;
   padding: 4px 20px 5px 10px;
   border-top: 1px solid #009B77;    
   border-left: 1px solid #009B77; 
@@ -2082,44 +2082,39 @@ ul.user_actions li:hover i{
 }
 
 /*SEARCH RESULT*/
-.suggestion-container {
-  position: absolute;
-  overflow: hidden;
-  bottom: 51px;
-  left: 121px;
-  z-index: 500000;
+.tt-dropdown-menu {
   background-color: #FFF;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
+  padding: 15px;
 }
-.suggestion-container .suggest-title {
-    margin: 0px;
-    padding: 5px;
-    font-size: 12px;
-    background-color: #f0f0f0;
+.tt-dropdown-menu  .tt-dataset-dataset-category {
+  overflow: hidden;
+  float: left;
+  margin-right: 30px;
+  min-width: 200px;
 }
-.suggestion-container .suggest-title span i {
-  font-size: 18px;
+.tt-dropdown-menu  .tt-dataset-dataset-category:last-child {
+  margin-right: 10px;
 }
-.suggestion-container .suggest-content {
-    overflow: hidden;
+.tt-dataset-dataset-category .tt-suggestions {
+  overflow: hidden;
 }
-.suggestion-container .suggest-field {
-    display: inline-block;
-    margin-right: 25px;
-    vertical-align: top;
-}
-.suggestion-container .suggest-field-list{
-}
-.suggest-field-list .suggest-field-item {
-  margin-bottom: 5px;
-}
-.suggest-field-list .suggest-field-item a {
+.tt-suggestions .tt-suggestion {
   display: block;
+  clear: left;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 5px 5px;
 }
-.suggest-field-item .data-detail {  
-  min-width: 150px;
-  overflow: hidden;  
+.tt-suggestions .tt-suggestion:last-child {
+  border-bottom: none;
+}
+.tt-suggestions .tt-is-under-cursor {
+  background-color: #f0f0f0;
+}
+.tt-is-under-cursor .data-detail .data-meta-info .data-name {
+  color: #009B77;
+}
+.data-detail{
+  overflow: hidden;
 }
 .data-detail img{
   width: 40px;
@@ -2132,11 +2127,43 @@ ul.user_actions li:hover i{
   max-width: 200px;
 }
 .data-detail .data-meta-info .data-name {
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 14px;
+}
+.data-detail .data-meta-info .data-name strong {
+  color: #009B77;
 }
 .data-detail .data-meta-info .data-more {
   white-space: nowrap;  
-  font-size: 10px;
+  font-size: 11px;
+}
+
+#search-panel {
+  position: absolute;
+  left: 120px;
+  bottom: 52px;
+  right: 0px;
+  top: 0px;
+  padding: 25px;
+  background-color: #f0f0f0;
+  z-index: 100;
+  overflow: hidden;
+  display: none;
+}
+
+#search-panel .search-ctrl {
+  width: 97%;
+  padding: 15px;  
+  font-size: 18px;
+  outline: none;
+}
+#search-panel .tt-hint {
+  width: 97%;
+  padding: 15px;
+  font-size: 18px;
+  color:#ccc;
+}
+#search-panel  .twitter-typeahead {
+  display: block;
+  width: 100%;
 }
 /*END SEARCH RESULT*/

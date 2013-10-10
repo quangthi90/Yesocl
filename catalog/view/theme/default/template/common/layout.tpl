@@ -28,7 +28,7 @@
 			<div id="overlay"></div>
 		</div>
     	<!-- Library Script -->
-    	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.9.1.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.nicescroll.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.uniform.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/bootstrap.min.js') }}"></script>
@@ -36,6 +36,7 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.tmplPlus.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.timeago.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.magnific-popup.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.typeahead.js') }}"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>

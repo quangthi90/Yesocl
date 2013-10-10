@@ -62,14 +62,14 @@ FlexibleElement.prototype.attachEvents = function() {
 			});			
 		});			
 	});
-	this.openSearch.hover(function() {
-		sT.slideDown(100); 		
-	}, function() {
-		if(sT.is(":focus") && sT.val().trim().length > 0) {
-			return;
-		}
-		sT.slideUp(100);
-	});	
+	//this.openSearch.hover(function() {
+	//	sT.slideDown(100); 		
+	//}, function() {
+	//	if(sT.is(":focus") && sT.val().trim().length > 0) {
+	//		return;
+	//	}
+	//	sT.slideUp(100);
+	//});	
 	$('a[title]').tooltip({ container: 'body' });
 
 	//For show/hide GoLeft
@@ -388,9 +388,125 @@ NotifyFriendBtn.prototype.triggerProgress = function($el, promise){
 	promise.then(f, f);
 };
 
-/*
-End Custom List Post
-*/
+/*START AUTOCOMPLETE */
+function SearchAutoComplete(el) {
+	this.root = el;
+	this.autoCtrl = el.find('.search-ctrl');
+	this.invokeCtrl = el.data('invoke-search');
+	this.closeCtrl = el.data('close-search');
+	this.template = el.find('.search-result-item-template');	
+	this.suggestContainer = el.find('.suggestion-container');
+	this.attachEvents();
+	this.initAutoComplete();
+}
+
+SearchAutoComplete.prototype.attachEvents = function() {
+	var that = this;
+	$(this.invokeCtrl).click(function() {
+		that.root.slideDown(200, function(){
+			that.autoCtrl.focus();
+			$(that.invokeCtrl).hide();
+			$(that.closeCtrl).show();
+		});		
+	});
+	$(this.closeCtrl).click(function() {
+		that.closeSearchPanel();
+	});
+	$(document).keyup(function(e) {
+	    if (e.keyCode == 27) { 
+	        that.closeSearchPanel();
+	    }
+	});
+}
+
+SearchAutoComplete.prototype.initAutoComplete = function() {
+	var that = this;
+
+	//Get datasource:
+	var tempImg = "http://findicons.com/icon/download/51187/clipping_picture/48/png";
+	var dbFriend = [
+		{id:"1", category:"Friend", image: tempImg, value: "Nguyễn Văn A", url:"#", metaInfo:"10 friends"},
+		{id:"2", category:"Friend", image: tempImg, value: "Trần Văn B", url:"#", metaInfo:"10 friends"},
+		{id:"3", category:"Friend", image: tempImg, value: "Nguyễn Thị C", url:"#", metaInfo:"10 friends"},
+		{id:"4", category:"Friend", image: tempImg, value: "Võ Văn D", url:"#", metaInfo:"10 friends"},
+		{id:"5", category:"Friend", image: tempImg, value: "Lê Thị E", url:"#", metaInfo:"10 friends"}
+	]; 
+	var dbPost = [
+		{id:"6", category:"Post", image: tempImg, value: "Abc def dfdd", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
+		{id:"7", category:"Post", image: tempImg, value: "Lang kinh thi truong hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
+		{id:"8", category:"Post", image: tempImg, value: "Chi so VN-Index hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"}
+	];
+	var dbGroup = [
+		{id:"9", category:"Group", image: tempImg, value: "Tai Chinh Chung Khoan", url:"#", metaInfo:"100 members"},
+		{id:"10", category:"Group", image: tempImg, value: "Dau Tu Bat Dong San", url:"#", metaInfo:"200 members"},
+		{id:"11", category:"Group", image: tempImg, value: "Cong Nghe Thong Tin", url:"#", metaInfo:"1k members"}
+	];
+	that.autoCtrl.typeahead([
+	  {
+	    name: 'dataset-category category-friend',
+	    local: dbFriend,
+	    template: function(data){
+            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
+            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
+            var htmlContent = '<div class="data-detail">'
+                            + '<img src="' + data.image + '" alt="" />'
+                            + '<div class="data-meta-info">'
+                            + '<div class="data-name">' + boldItem + '</div>' 
+                            + '<div class="data-more">' + data.metaInfo + '</div>'   
+                            + '</div>'
+                            + '</div>';
+            return htmlContent;
+	    },
+	    header: '<h3 class="category-name">Friend</h3>'
+	  },
+	  {
+	    name: 'dataset-category category-post',
+	    local: dbPost,
+	    template: function(data){
+            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
+            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
+            var htmlContent = '<div class="data-detail">'
+                            + '<img src="' + data.image + '" alt="" />'
+                            + '<div class="data-meta-info">'
+                            + '<div class="data-name">' + boldItem + '</div>' 
+                            + '<div class="data-more">' + data.metaInfo + '</div>'   
+                            + '</div>'
+                            + '</div>';
+            return htmlContent;
+	    },
+	    header: '<h3 class="category-name">Post</h3>'
+	  },
+	  {
+	    name: 'dataset-category category-group',
+	    local: dbGroup,
+	    template: function(data){
+            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
+            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
+            var htmlContent = '<div class="data-detail">'
+                            + '<img src="' + data.image + '" alt="" />'
+                            + '<div class="data-meta-info">'
+                            + '<div class="data-name">' + boldItem + '</div>' 
+                            + '<div class="data-more">' + data.metaInfo + '</div>'   
+                            + '</div>'
+                            + '</div>';
+            return htmlContent;
+	    },
+	    header: '<h3 class="category-name">Group</h3>'
+	  }
+  	]);
+}
+
+SearchAutoComplete.prototype.closeSearchPanel = function() {
+	var that = this;
+	this.root.slideUp(200, function(){
+		that.autoCtrl.typeahead('setQuery', '');
+		$(that.closeCtrl).hide();
+		$(that.invokeCtrl).show();
+	})
+}
+
+/*END AUTOCOMPLETE*/
+
 $(document).ready(function() {
 	new FlexibleElement($(this));
 	new HorizontalBlock($('.has-horizontal'));
@@ -399,11 +515,15 @@ $(document).ready(function() {
 	    new HorizontalBlock($('.has-horizontal'));
 	});
 
-	$('.search-form').each(function(){
-		new SearchBtn( $(this) );
-	});
+	//$('.search-form').each(function(){
+	//	new SearchBtn( $(this) );
+	//});
 
 	$('.notify-actions').each(function(){
 		new NotifyFriendBtn( $(this) );
+	});
+
+	$('.search-form').each(function(){
+		new SearchAutoComplete( $(this) );
 	});
 });
