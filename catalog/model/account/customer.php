@@ -268,16 +268,35 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}
 
-			if ((utf8_strlen($data['username']) < 5) || (utf8_strlen($data['username']) > 32)) {
+			if ( !isset( $data['username'] ) || !is_string( $data['username'] ) ) {
 				return false;
+			}elseif ((strlen($data['username']) < 5) || (strlen($data['username']) > 32)) {
+				return false;
+			}elseif ( !preg_match( '/^[A-z]{1,32}[0-9]{0,31}$/', $data['username']) ) {
+				return false;
+			}elseif ( $this->isExistUsername( $data['username'], $customer->getId() ) ) {
+				return false;
+			}else {
+				$data['username'] = strtolower( $data['username'] );
+				$customer->setUsername( $data['username'] );
 			}
 
-			if ((utf8_strlen($data['firstname']) < 1) || (utf8_strlen($data['firstname']) > 32)) {
+			if ( !isset( $data['firstname'] ) || !is_string( $data['firstname'] ) ) {
 				return false;
+			}elseif ((utf8_strlen($data['firstname']) < 1) || (utf8_strlen($data['firstname']) > 32)) {
+				return false;
+			}else {
+				$data['firstname'] = trim(strtolower( $data['firstname'] ));
+				$customer->getMeta()->setFirstname( $data['firstname'] );
 			}
 
-			if ((utf8_strlen($data['lastname']) < 1) || (utf8_strlen($data['lastname']) > 32)) {
+			if ( !isset( $data['lastname'] ) || !is_string( $data['lastname'] ) ) {
 				return false;
+			}elseif ((utf8_strlen($data['lastname']) < 1) || (utf8_strlen($data['lastname']) > 32)) {
+				return false;
+			}else {
+				$data['lastname'] = trim(strtolower( $data['lastname'] ));
+				$customer->getMeta()->setLastname( $data['lastname'] );
 			}
 
 			if ( !isset($data['birthday']) ) {
@@ -287,18 +306,6 @@ class ModelAccountCustomer extends Model {
 			// Email is required
 			if ( !isset($data['emails']) || count($data['emails']) < 0 ){
 				return false;
-			}
-
-			if ( isset( $data['username'] ) && !empty( $data['username'] ) ) {
-				$customer->setUsername( $data['username'] );
-			}
-
-			if ( isset( $data['firstname'] ) && !empty( $data['firstname'] ) ) {
-				$customer->getMeta()->setFirstname( $data['firstname'] );
-			}
-
-			if ( isset( $data['lastname'] ) && !empty( $data['lastname'] ) ) {
-				$customer->getMeta()->setLastname( $data['lastname'] );
 			}
 
 			// email
@@ -747,6 +754,20 @@ class ModelAccountCustomer extends Model {
 		}
 		
 		return false;
+	}
+
+	public function isExistUsername( $username, $user_id = '' ) {
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array( 'username' => $username ) );
+
+		if ( $user ) {
+			if ( $user->getId() == $user_id ) {
+				return false;
+			}
+		}else {
+			return false;
+		}
+
+		return true;
 	}
 }
 ?>

@@ -189,11 +189,11 @@
 	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
-			<div class="span9"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
+			<div class="span9 control-group"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Fullname</div>
-			<div class="span9"><input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" /> <input class="span2" type="text" placeholder="Input Text" name="lastname" value="${ lastname }" /></div>
+			<div class="span9"><span class="control-group"><input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" /></span> <span class="control-group"><input class="span2" type="text" placeholder="Input Text" name="lastname" value="${ lastname }" /></span></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Email</div>
@@ -397,7 +397,7 @@
 	} );
 
 	window.onresize=function() {
-		window.setTimeout('location.reload()', 1);
+		//window.setTimeout('location.reload()', 1);
 	};
 </script>
 {% endblock %}

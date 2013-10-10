@@ -206,15 +206,27 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateProfiles() {
-		if ((utf8_strlen($this->request->post['username']) < 5) || (utf8_strlen($this->request->post['username']) > 32)) {
+		$this->load->model( 'account/customer' );
+
+		if ( !isset( $this->request->post['username'] ) || !is_string( $this->request->post['username'] ) ) {
 			$this->error['username'] = $this->language->get('error_username');
+		}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
+			$this->error['username'] = $this->language->get('error_username');
+		}elseif ( !preg_match( '/^[A-z]{1,32}[0-9]{0,31}$/', $this->request->post['username']) ) {
+			$this->error['username'] = $this->language->get('error_username');
+		}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
+			$this->error['username'] = $this->language->get('error_exist_username');
 		}
 
-		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
+		if ( !isset( $this->request->post['firstname'] ) || !is_string( $this->request->post['firstname'] ) ) {
+			$this->error['firstname'] = $this->language->get('error_firstname');
+		}elseif ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
 
-		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
+		if ( !isset( $this->request->post['lastname'] ) || !is_string( $this->request->post['lastname'] ) ) {
+			$this->error['lastname'] = $this->language->get('error_lastname');
+		}elseif ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
 			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
@@ -222,7 +234,6 @@ class ControllerAccountEdit extends Controller {
 			$this->error['birthday'] = $this->language->get('error_birthday');
 		}
 
-		$this->load->model( 'account/customer' );
 		if ( isset($this->request->post['emails']) ){
 			foreach ( $this->request->post['emails'] as $email ) {
 				if ((utf8_strlen($email['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email'])) {
@@ -445,6 +456,7 @@ class ControllerAccountEdit extends Controller {
 
 		if ( !$this->customer->isLogged() || !$this->validateProfiles() ) {
 			$json['message'] = 'failed';
+			$json = $this->error;
 		}else {
 			$this->load->model('account/customer');
 
@@ -483,7 +495,8 @@ class ControllerAccountEdit extends Controller {
 				$json['address'] = $user->getMeta()->getAddress();
 				$json['industry'] = $user->getMeta()->getIndustry();
 			}else {
-				$json['message'] = 'failed';
+				//$json['message'] = 'failed';
+				$json = $this->error;
 			}
 		}
 

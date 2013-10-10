@@ -178,7 +178,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-				if ( json.message == 'success' ) {
+				if ( json.message != null & json.message == 'success' ) {
 					var $item = $.tmpl($('#profiles-item'), json);
 					new ProfilesItem($item);
 
@@ -196,7 +196,56 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					$('.profiles-btn-save').removeClass( 'disabled' );
 					$('.profiles-btn-cancel').removeClass( 'disabled' );
 				}else {
-					alert('Error!');
+					if ( json.username != null ) {
+						self.form.self.find('[name=\"username\"]').parent().addClass('error');
+						self.form.self.find('[name=\"username\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.username,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"username\"]').parent().addClass('success');
+					}
+
+					if ( json.firstname != null ) {
+						self.form.self.find('[name=\"firstname\"]').parent().addClass('error');
+						self.form.self.find('[name=\"firstname\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.firstname,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"firstname\"]').parent().addClass('success');
+					}
+
+					if ( json.lastname != null ) {
+						self.form.self.find('[name=\"lastname\"]').parent().addClass('error');
+						self.form.self.find('[name=\"lastname\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.lastname,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"lastname\"]').parent().addClass('success');
+					}
+
+					$('.profiles-btn-save').removeClass( 'disabled' );
+					$('.profiles-btn-cancel').removeClass( 'disabled' );
 				}
 			},
 			error: function(xhr, error){
