@@ -2145,11 +2145,10 @@ ul.user_actions li:hover i{
   top: 0px;
   padding: 25px;
   background-color: #f0f0f0;
-  z-index: 100;
+  z-index: 2;
   overflow: hidden;
   display: none;
 }
-
 #search-panel .search-ctrl {
   width: 97%;
   padding: 15px;  
@@ -2162,7 +2161,7 @@ ul.user_actions li:hover i{
   font-size: 18px;
   color:#ccc;
 }
-#search-panel  .twitter-typeahead {
+#search-panel .twitter-typeahead {
   display: block;
   width: 100%;
 }

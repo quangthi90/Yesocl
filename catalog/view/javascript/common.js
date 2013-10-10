@@ -402,16 +402,24 @@ function SearchAutoComplete(el) {
 
 SearchAutoComplete.prototype.attachEvents = function() {
 	var that = this;
-	$(this.invokeCtrl).click(function() {
+	$(that.invokeCtrl).click(function() {
 		that.root.slideDown(200, function(){
 			that.autoCtrl.focus();
 			$(that.invokeCtrl).hide();
 			$(that.closeCtrl).show();
 		});		
 	});
-	$(this.closeCtrl).click(function() {
+	$(that.closeCtrl).click(function() {
 		that.closeSearchPanel();
 	});
+	that.root.hover(function(){
+			that.autoCtrl.focus();
+		}
+	);
+	that.root.click(function(){
+			that.autoCtrl.focus();
+		}
+	);
 	$(document).keyup(function(e) {
 	    if (e.keyCode == 27) { 
 	        that.closeSearchPanel();
