@@ -234,19 +234,47 @@ class ControllerAccountEdit extends Controller {
 			$this->error['birthday'] = $this->language->get('error_birthday');
 		}elseif ( !(\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday'])) ) {
 			$this->error['birthday'] = $this->language->get('error_birthday');
+		}elseif ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
+			$this->error['birthday'] = $this->language->get('error_birthday');
 		}
 
-		if ( isset($this->request->post['emails']) ){
-			foreach ( $this->request->post['emails'] as $email ) {
-				if ((utf8_strlen($email['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email'])) {
-		      		$this->error['email'] = $this->language->get('error_email');
-		      		break;
+		if ( !isset($this->request->post['emails']) || !is_array( $this->request->post['emails'] ) ){
+			$this->error['emails'] = $this->language->get('error_emails');
+		}elseif ( count( $this->request->post['emails'] ) < 1 ) {
+			$this->error['emails'] = $this->language->get('error_emails');
+		}else {
+			$hasPrimary = false;
+			foreach ( $this->request->post['emails'] as $key => $email ) {
+				if ( !isset( $email['email'] ) || !is_string( $email['email'] ) ) {
+					if ( !isset( $this->error['email'] ) ) {
+						$this->error['email'] = array();
+					}
+					$this->error['email'][$key] = $this->language->get('error_email');
+				}elseif ( (utf8_strlen($email['email']) < 6) || (utf8_strlen($email['email']) > 96)) {
+					if ( !isset( $this->error['email'] ) ) {
+						$this->error['email'] = array();
+					}
+		      		$this->error['email'][$key] = $this->language->get('error_email');
+		    	}elseif ( !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email']) ) {
+		    		if ( !isset( $this->error['email'] ) ) {
+						$this->error['email'] = array();
+					}
+		      		$this->error['email'][$key] = $this->language->get('error_email');
+		    	}elseif ( $this->model_account_customer->isExistEmail( $email['email'], $this->customer->getId() ) ){
+		    		if ( !isset( $this->error['email'] ) ) {
+						$this->error['email'] = array();
+					}
+		    		$this->error['email'][$key] = $this->language->get('error_exist_email');
 		    	}
-		    	
-		    	if ( $this->model_account_customer->isExistEmail($this->customer->getId(), $email['email']) ){
-		    		$this->error['email'] = $this->language->get('error_exist_email');
-		      		break;
+		    	if ( $email['primary'] ) {
+		    		$hasPrimary = true;
 		    	}
+			}
+			if ( !$hasPrimary ) {
+				if ( isset( $this->error['email']) ) {
+					unset( $this->error['email'] );
+				}
+				$this->error['emails'] = $this->language->get('error_exist_primary_email');
 			}
 		}
 

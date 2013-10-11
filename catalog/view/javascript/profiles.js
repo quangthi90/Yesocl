@@ -257,6 +257,52 @@ ProfilesFormControl.prototype.attachEvents = function () {
 						self.form.self.find('[name=\"lastname\"]').parent().addClass('success');
 					}
 
+					if ( json.emails != null ) {
+						self.form.self.find('.emails-form').each( function () {
+							$(this).removeClass('success');
+							$(this).addClass('error');
+							$(this).find('[name*=\"[email]\"]').tooltip({
+								animation: true,
+								html: false,
+								placement: 'top',
+								selector: true,
+								title: json.emails,
+								trigger:'hover focus',
+								delay:0,
+								container: false
+							});
+						});
+					}
+
+					if ( json.email != null ) {
+						self.form.self.find('.emails-form').each( function (i, item) {
+							if ( json.email[i] != null ) {
+								$(this).removeClass('success');
+								$(this).addClass('error');
+								$(this).find('[name*=\"[email]\"]').tooltip({
+									animation: true,
+									html: false,
+									placement: 'top',
+									selector: true,
+									title: json.email[i],
+									trigger:'hover focus',
+									delay:0,
+									container: false
+								});
+							}else {
+								$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+								$(this).removeClass('error');
+								$(this).addClass('success');
+							}
+						});
+					}else {
+						self.form.self.find('.emails-form').each( function (i, item) {
+							$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+							$(this).removeClass('error');
+							$(this).addClass('success');
+						});
+					}
+
 					if ( json.phone != null ) {
 						self.form.self.find('.phones-form').each( function (i, item) {
 							if ( json.phone[i] != null ) {
@@ -278,6 +324,10 @@ ProfilesFormControl.prototype.attachEvents = function () {
 								$(this).addClass('success');
 							}
 						});
+					}else {
+						$(this).find('[name*=\"[phone]\"]').tooltip('destroy');
+						$(this).removeClass('error');
+						$(this).addClass('success');
 					}
 
 					if ( json.sex != null ) {

@@ -320,6 +320,52 @@ class ModelAccountCustomer extends Model {
 				}
 			}
 
+			// Email is required
+			if ( !isset($data['emails']) || !is_array( $data['emails']) ){
+				return false;
+			}elseif ( count( $data['emails'] ) < 1 ) {
+				return false;
+			}
+
+			// Primary email is required
+			$primary_email = '';
+			foreach ( $data['emails'] as $email_data ){
+				if ( $email_data['primary'] ){
+					$primary_email = strtolower( trim( $email_data['email'] ) );
+					break;
+				}
+			}
+
+			if ( $primary_email == '') {
+				return false;
+			}
+
+			// Get list email 
+			$emails_data = array();
+			$email = new Email();
+			$email->setEmail( $primary_email );
+			$email->setPrimary( true );
+			$emails_data[] = $email;
+
+			foreach ( $data['emails'] as $email_data ){
+				$email_data['email'] = strtolower( trim( $email_data['email'] ) );
+				if ( $email_data['email'] === $primary_email ){
+					continue;
+				}elseif ( !isset( $email_data['email'] ) || !is_string( $email_data['email'] ) ) {
+					continue;
+				}elseif ( (utf8_strlen($email_data['email']) < 6) || (utf8_strlen($email_data['email']) > 96)) {
+					continue;
+		    	}elseif ( !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email_data['email']) ) {
+		    		continue;
+		    	}elseif ( $this->isExistEmail( $email_data['email'], $customer->getId() ) ){
+		    		continue;
+		    	}
+				$email = new Email();
+				$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
+				$email->setPrimary( false );
+				$emails_data[$email_data['email']] = $email;
+			}
+
 			if ( !isset( $data['sex'] ) || !is_string( $data['sex'] ) ) {
 				$data['sex'] = 1;
 			}else {
@@ -330,10 +376,7 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}elseif ( !\Datetime::createFromFormat('d/m/Y', $data['birthday']) ) {
 				return false;
-			}
-
-			// Email is required
-			if ( !isset($data['emails']) || count($data['emails']) < 0 ){
+			}elseif ( \Datetime::createFromFormat('d/m/Y', $data['birthday']) > new Datetime() ) {
 				return false;
 			}
 
@@ -364,39 +407,10 @@ class ModelAccountCustomer extends Model {
 				$data['industry'] = '';
 			}
 
-			// email
-			// Get primary email
-			$primary_email = '';
-			foreach ( $data['emails'] as $email_data ){
-				if ( $email_data['primary'] ){
-					$primary_email = strtolower( trim( $email_data['email'] ) );
-					break;
-				}
-			}
-			// Get list email 
-			$emails = array();
-			$email = new Email();
-			$email->setEmail( $primary_email );
-			$email->setPrimary( true );
-			$emails[] = $email;
-
-			foreach ( $data['emails'] as $email_data ){
-				$email_data['email'] = strtolower( trim( $email_data['email'] ) );
-				if ( $email_data['email'] === $primary_email ){
-					continue;
-				}elseif ( !$email_data['email'] ) {
-					continue;
-				}
-				$email = new Email();
-				$email->setEmail( strtolower( trim( $email_data['email'] ) ) );
-				$email->setPrimary( false );
-				$emails[$email_data['email']] = $email;
-			}
-			$customer->setEmails( $emails );
-
 			$customer->setUsername( $data['username'] );
 			$customer->getMeta()->setFirstname( $data['firstname'] );
 			$customer->getMeta()->setLastname( $data['lastname'] );
+			$customer->setEmails( $emails_data );
 			$customer->getMeta()->setPhones( $phones_data );
 			$customer->getMeta()->setSex( (int) $data['sex'] );
 			$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
@@ -765,15 +779,13 @@ class ModelAccountCustomer extends Model {
 		return true;
 	}
 
-	public function isExistEmail( $curr_user_id, $email ) {
-		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
+	public function isExistEmail( $email, $user_id = '' ) {
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 'emails.email' => $email ) );
 		
 		foreach ( $users as $user ) {
-			if ( $user->getId() == $curr_user_id ){
+			if ( $user->getId() == $user_id ){
 				continue;
-			}
-			
-			if ( $user->isExistEmail( $email ) ){
+			}else {
 				return true;
 			}
 		}

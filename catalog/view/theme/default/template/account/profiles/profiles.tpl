@@ -207,7 +207,7 @@
 					{% set primary_if = '{{if $value.primary == 1}}' %}
 					{% set primary_if_end = '{{/if}}' %}
 					{{ email_loop }}
-					<div class="emails-form {{ primary_if }}email-primary{{ primary_if_end }}" data-primary="${ $value.primary }"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					<div class="emails-form control-group {{ primary_if }}email-primary{{ primary_if_end }}" data-primary="${ $value.primary }"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 					{{ email_loop_end }}
 
 					<div class="row-fluid"><a class="emails-btn-add btn btn-success offset5" href="#" data-index="${ Object.keys(emails).length }">Add email</a></div>
@@ -236,7 +236,7 @@
 			<div class="span2 offset1">Birthday</div>
 			<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="${ birthday }">
 			  <div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker">
-			    <span class="add-on"><i class="icon-calendar"></i></span>
+			    <span class="add-on btn"><i class="icon-calendar"></i></span>
 			    <input type="text" name="birthday" class="input-medium" value="${ birthday }" readonly/>
 			  </div>
 			  <div class="bfh-datepicker-calendar">
@@ -284,7 +284,7 @@
     <div class="phones-form control-group"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-email-form" type="text/x-jquery-tmpl">
-    <div class="emails-form"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" /><input type="hidden" name="emails[${ index }][primary]" value="0" /> <span class="label">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+    <div class="emails-form control-group"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" /><input type="hidden" name="emails[${ index }][primary]" value="0" /> <span class="label">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
 	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
