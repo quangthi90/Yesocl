@@ -587,6 +587,7 @@ EmailsForm.prototype.attachEvents = function () {
 			return false;
 		}
 		self.self.remove();
+		self.validate();
 	});
 
 	this.btnPrimary.click( function () {
@@ -603,7 +604,95 @@ EmailsForm.prototype.attachEvents = function () {
 		self.inputPrimary.val(1);
 		self.self.addClass('email-primary');
 		self.btnPrimary.addClass('label-success');
+
+		self.validate();
 	});
+
+	this.self.find('[name*=\"[email]\"]').blur( function () {
+		self.validate();
+	});
+}
+
+EmailsForm.prototype.validate = function () {
+		var emails_arr = [];
+		var j = 0;
+		$('.basic-profiles-form .emails-form').each( function () {
+			emails_arr[j] = {};
+			emails_arr[j].email = $(this).find('[name*=\"[email]\"]').val();
+			emails_arr[j].primary = $(this).find('[name*=\"[primary]\"]').val();
+			j++;
+		});
+
+		var data = {
+			'emails': emails_arr
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: this.self.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					$('.basic-profiles-form .emails-form').each( function (i, item) {
+						$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+						$(this).removeClass('error');
+						$(this).addClass('success');
+					});
+				}else {
+					if ( json.emails != null ) {
+						$('.basic-profiles-form .emails-form').each( function () {
+							$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+							$(this).removeClass('success');
+							$(this).addClass('error');
+							$(this).find('[name*=\"[email]\"]').tooltip({
+								animation: true,
+								html: false,
+								placement: 'top',
+								selector: true,
+								title: json.emails,
+								trigger:'hover focus',
+								delay:0,
+								container: false
+							});
+						});
+					}
+
+					if ( json.email != null ) {
+						$('.basic-profiles-form .emails-form').each( function (i, item) {
+							if ( json.email[i] != null ) {
+								$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+								$(this).removeClass('success');
+								$(this).addClass('error');
+								$(this).find('[name*=\"[email]\"]').tooltip({
+									animation: true,
+									html: false,
+									placement: 'top',
+									selector: true,
+									title: json.email[i],
+									trigger:'hover focus',
+									delay:0,
+									container: false
+								});
+							}else {
+								$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+								$(this).removeClass('error');
+								$(this).addClass('success');
+							}
+						});
+					}else if( json.emails == null ) {
+						$('.basic-profiles-form .emails-form').each( function (i, item) {
+							$(this).find('[name*=\"[email]\"]').tooltip('destroy');
+							$(this).removeClass('error');
+							$(this).addClass('success');
+						});
+					}
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
 }
 
 function ProfilesItem( $element ) {
