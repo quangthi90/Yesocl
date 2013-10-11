@@ -10,6 +10,7 @@ class ControllerAccountEdit extends Controller {
 		}
 
 		$this->data['link_update_profiles'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
+		$this->data['link_validate_phone'] = $this->url->link('account/edit/validatePhone', '', 'SSL');
 		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
 		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
@@ -324,6 +325,23 @@ class ControllerAccountEdit extends Controller {
 		} else {
 			return false;
 		}
+	}
+
+	public function validatePhone() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			//$this->load->language('account/customer');
+			if ( !isset( $this->request->post['phone'] ) || !is_string( $this->request->post['phone'] ) ) {
+				$json['message'] = $this->language->get('error_phone');
+			}elseif ( (strlen( $this->request->post['phone'] ) < 6) || (strlen( $this->request->post['phone'] ) > 20) ) {
+				$json['message'] = $this->language->get('error_phone');
+			}elseif ( !preg_match( '/^[0-9]+$/', $this->request->post['phone'] ) ) {
+				$json['message'] = $this->language->get('error_phone');
+			}else {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
 	}
 
 	private function validateBackgroundSumary() {

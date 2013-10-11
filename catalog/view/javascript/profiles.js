@@ -90,6 +90,16 @@ ProfilesForm.prototype.attachEvents = function () {
 
 	this.self.find('select[name=\"sex\"]').val( this.self.data('sex') ).prop('selected',true);
 
+	this.inputBirthday.bfhdatepicker(this.inputBirthday.data());
+
+	self.self.find('.phones-form').each( function () {
+		new PhonesForm( $(this) );
+	});
+
+	self.self.find('.emails-form').each( function () {
+		new EmailsForm( $(this) );
+	});
+
 	this.btnAddPhone.click( function () {
 		var data = {
 			'index': self.btnAddPhone.attr('data-index')
@@ -114,15 +124,37 @@ ProfilesForm.prototype.attachEvents = function () {
 		$(this).parent().before( $form );
 	});
 
-	self.self.find('.phones-form').each( function () {
-		new PhonesForm( $(this) );
+	this.self.find('input[name=\"username\"]').blur( function () {
+
 	});
 
-	self.self.find('.emails-form').each( function () {
-		new EmailsForm( $(this) );
+	this.self.find('input[name=\"firstname\"]').blur( function () {
+
 	});
 
-	this.inputBirthday.bfhdatepicker(this.inputBirthday.data());
+	this.self.find('input[name=\"lastname\"]').blur( function () {
+
+	});
+
+	this.self.find('input[name=\"sex\"]').blur( function () {
+
+	});
+
+	this.self.find('input[name=\"birthday\"]').blur( function () {
+
+	});
+
+	this.self.find('input[name=\"address\"]').blur( function () {
+
+	});
+
+	this.self.find('input[name=\"location\"]').blur( function () {
+
+	});
+
+	this.self.find('input[name=\"industry\"]').blur( function () {
+
+	});
 }
 
 function ProfilesFormControl( $element, form ) {
@@ -201,6 +233,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					$('.profiles-btn-cancel').removeClass( 'disabled' );
 				}else {
 					if ( json.username != null ) {
+						self.form.self.find('[name=\"username\"]').tooltip('destroy');
 						self.form.self.find('[name=\"username\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"username\"]').parent().addClass('error');
 						self.form.self.find('[name=\"username\"]').tooltip({
@@ -220,6 +253,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.firstname != null ) {
+						self.form.self.find('[name=\"firstname\"]').tooltip('destroy');
 						self.form.self.find('[name=\"firstname\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"firstname\"]').parent().addClass('error');
 						self.form.self.find('[name=\"firstname\"]').tooltip({
@@ -239,6 +273,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.lastname != null ) {
+						self.form.self.find('[name=\"lastname\"]').tooltip('destroy');
 						self.form.self.find('[name=\"lastname\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"lastname\"]').parent().addClass('error');
 						self.form.self.find('[name=\"lastname\"]').tooltip({
@@ -259,6 +294,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 
 					if ( json.emails != null ) {
 						self.form.self.find('.emails-form').each( function () {
+							$(this).find('[name*=\"[email]\"]').tooltip('destroy');
 							$(this).removeClass('success');
 							$(this).addClass('error');
 							$(this).find('[name*=\"[email]\"]').tooltip({
@@ -277,6 +313,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					if ( json.email != null ) {
 						self.form.self.find('.emails-form').each( function (i, item) {
 							if ( json.email[i] != null ) {
+								$(this).find('[name*=\"[email]\"]').tooltip('destroy');
 								$(this).removeClass('success');
 								$(this).addClass('error');
 								$(this).find('[name*=\"[email]\"]').tooltip({
@@ -306,6 +343,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					if ( json.phone != null ) {
 						self.form.self.find('.phones-form').each( function (i, item) {
 							if ( json.phone[i] != null ) {
+								$(this).find('[name*=\"[phone]\"]').tooltip('destroy');
 								$(this).removeClass('success');
 								$(this).addClass('error');
 								$(this).find('[name*=\"[phone]\"]').tooltip({
@@ -333,6 +371,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.sex != null ) {
+						self.form.self.find('[name=\"sex\"]').tooltip('destroy');
 						self.form.self.find('[name=\"sex\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"sex\"]').parent().addClass('error');
 						self.form.self.find('[name=\"sex\"]').tooltip({
@@ -352,6 +391,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.birthday != null ) {
+						self.form.self.find('[name=\"birthday\"]').tooltip('destroy');
 						self.form.self.find('[name=\"birthday\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"birthday\"]').parent().addClass('error');
 						self.form.self.find('[name=\"birthday\"]').tooltip({
@@ -371,6 +411,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.address != null ) {
+						self.form.self.find('[name=\"address\"]').tooltip('destroy');
 						self.form.self.find('[name=\"address\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"address\"]').parent().addClass('error');
 						self.form.self.find('[name=\"address\"]').tooltip({
@@ -390,6 +431,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.location != null ) {
+						self.form.self.find('[name=\"location\"]').tooltip('destroy');
 						self.form.self.find('[name=\"location\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"location\"]').parent().addClass('error');
 						self.form.self.find('[name=\"location\"]').tooltip({
@@ -409,6 +451,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					}
 
 					if ( json.industry != null ) {
+						self.form.self.find('[name=\"industry\"]').tooltip('destroy');
 						self.form.self.find('[name=\"industry\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"industry\"]').parent().addClass('error');
 						self.form.self.find('[name=\"industry\"]').tooltip({
@@ -488,6 +531,43 @@ PhonesForm.prototype.attachEvents = function () {
 	this.btnRemove.click( function () {
 		self.self.remove();
 	});
+
+	this.self.find('input').blur( function () {
+		var data = {
+			'phone': $(this).val()
+		};
+
+		$.ajax({
+			type: 'POST',
+			url: self.self.data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name*=\"[phone]\"]').tooltip('destroy');
+					self.self.removeClass('success');
+					self.self.addClass('error');
+					self.self.find('[name*=\"[phone]\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name*=\"[phone]\"]').tooltip('destroy');
+					self.self.removeClass('error');
+					self.self.addClass('success');
+				}
+			},
+			error: function(xhr, error){
+		    	alert(xhr.responseText);
+		 	}
+		});
+	});
 }
 
 function EmailsForm( $element ) {
@@ -503,6 +583,9 @@ EmailsForm.prototype.attachEvents = function () {
 	var self = this;
 
 	this.btnRemove.click( function () {
+		if ( $('.basic-profiles-form .emails-form').length == 1 ) {
+			return false;
+		}
 		self.self.remove();
 	});
 
