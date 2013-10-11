@@ -296,6 +296,36 @@ class ModelAccountCustomer extends Model {
 				$data['lastname'] = trim(strtolower( $data['lastname'] ));
 			}
 
+			// phone
+			$phones_data = array();
+			if ( isset( $data['phones'] ) && is_array( $data['phones'] ) ) {
+				foreach ($data['phones'] as $phone_data) {
+					if ( !isset( $phone_data['phone'] ) || !is_string( $phone_data['phone'] ) ) {
+						continue;
+					}elseif ( (strlen( $phone_data['phone'] ) < 6) || (strlen( $phone_data['phone'] ) > 20) ) {
+						continue;
+					}elseif ( !preg_match( '/^[0-9]+$/', $phone_data['phone'] ) ) {
+						continue;
+					}
+					if ( !isset( $phone_data['type'] ) || !is_string( $phone_data['type'] ) ) {
+						continue;
+					}
+					if ( !isset( $phone_data['visible'] ) ) {
+						
+					}
+					$phone = new Phone();
+					$phone->setPhone( $phone_data['phone'] );
+					$phone->setType( $phone_data['type'] );
+					$phones_data[$phone_data['phone']] = $phone;
+				}
+			}
+
+			if ( !isset( $data['sex'] ) || !is_string( $data['sex'] ) ) {
+				$data['sex'] = 1;
+			}else {
+				$data['sex'] = (int) $data['sex'];
+			}
+
 			if ( !isset($data['birthday']) || !is_string( $data['birthday'] ) ) {
 				return false;
 			}elseif ( !\Datetime::createFromFormat('d/m/Y', $data['birthday']) ) {
@@ -364,34 +394,11 @@ class ModelAccountCustomer extends Model {
 			}
 			$customer->setEmails( $emails );
 
-			// phone
-			$phones_data = array();
-			if ( isset( $data['phones'] ) && is_array( $data['phones'] ) ) {
-				foreach ($data['phones'] as $phone_data) {
-					if ( !isset( $phone_data['phone'] ) ) {
-						continue;
-					}
-					if ( !isset( $phone_data['type'] ) ) {
-						continue;
-					}
-					if ( !isset( $phone_data['visible'] ) ) {
-						
-					}
-					$phone = new Phone();
-					$phone->setPhone( $phone_data['phone'] );
-					$phone->setType( $phone_data['type'] );
-					$phones_data[] = $phone;
-				}
-			}
-			$customer->getMeta()->setPhones( $phones_data );
-
-			if ( isset( $data['sex'] ) ) {
-				$customer->getMeta()->setSex( (int) $data['sex'] );
-			}
-
 			$customer->setUsername( $data['username'] );
 			$customer->getMeta()->setFirstname( $data['firstname'] );
 			$customer->getMeta()->setLastname( $data['lastname'] );
+			$customer->getMeta()->setPhones( $phones_data );
+			$customer->getMeta()->setSex( (int) $data['sex'] );
 			$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
 			$customer->getMeta()->setAddress( $data['address'] );
 			$customer->getMeta()->getLocation()->setLocation( $data['location'] );

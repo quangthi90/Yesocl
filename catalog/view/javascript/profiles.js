@@ -257,6 +257,48 @@ ProfilesFormControl.prototype.attachEvents = function () {
 						self.form.self.find('[name=\"lastname\"]').parent().addClass('success');
 					}
 
+					if ( json.phone != null ) {
+						self.form.self.find('.phones-form').each( function (i, item) {
+							if ( json.phone[i] != null ) {
+								$(this).removeClass('success');
+								$(this).addClass('error');
+								$(this).find('[name*=\"[phone]\"]').tooltip({
+									animation: true,
+									html: false,
+									placement: 'top',
+									selector: true,
+									title: json.phone[i],
+									trigger:'hover focus',
+									delay:0,
+									container: false
+								});
+							}else {
+								$(this).find('[name*=\"[phone]\"]').tooltip('destroy');
+								$(this).removeClass('error');
+								$(this).addClass('success');
+							}
+						});
+					}
+
+					if ( json.sex != null ) {
+						self.form.self.find('[name=\"sex\"]').parent().removeClass('success');
+						self.form.self.find('[name=\"sex\"]').parent().addClass('error');
+						self.form.self.find('[name=\"sex\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.sex,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"sex\"]').tooltip('destroy');
+						self.form.self.find('[name=\"sex\"]').parent().removeClass('error');
+						self.form.self.find('[name=\"sex\"]').parent().addClass('success');
+					}
+
 					if ( json.birthday != null ) {
 						self.form.self.find('[name=\"birthday\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"birthday\"]').parent().addClass('error');

@@ -250,6 +250,27 @@ class ControllerAccountEdit extends Controller {
 			}
 		}
 
+		if ( isset( $this->request->post['phones'] ) && is_array( $this->request->post['phones'] ) ) {
+			foreach ($this->request->post['phones'] as $key => $phone) {
+				if ( !isset( $phone['phone'] ) || !is_string( $phone['phone'] ) ) {
+					if ( !isset( $this->error['phone'] ) ) {
+						$this->error['phone'] = array();
+					}
+					$this->error['phone'][$key] = $this->language->get('error_phone');
+				}elseif ( (strlen( $phone['phone'] ) < 6) || (strlen( $phone['phone'] ) > 20) ) {
+					if ( !isset( $this->error['phone'] ) ) {
+						$this->error['phone'] = array();
+					}
+					$this->error['phone'][$key] = $this->language->get('error_phone');
+				}elseif ( !preg_match( '/^[0-9]+$/', $phone['phone'] ) ) {
+					if ( !isset( $this->error['phone'] ) ) {
+						$this->error['phone'] = array();
+					}
+					$this->error['phone'][$key] = $this->language->get('error_phone');
+				}
+			}
+		}
+
 		if ( !isset( $this->request->post['address'] ) || !is_string( $this->request->post['address'] ) ) {
 			$this->error['address'] = $this->language->get('error_address');
 		}elseif ((utf8_strlen($this->request->post['address']) < 1) || (utf8_strlen($this->request->post['address']) > 255)) {
