@@ -295,7 +295,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 								$(this).addClass('success');
 							}
 						});
-					}else {
+					}else if( json.emails == null ) {
 						self.form.self.find('.emails-form').each( function (i, item) {
 							$(this).find('[name*=\"[email]\"]').tooltip('destroy');
 							$(this).removeClass('error');
@@ -325,9 +325,11 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							}
 						});
 					}else {
-						$(this).find('[name*=\"[phone]\"]').tooltip('destroy');
-						$(this).removeClass('error');
-						$(this).addClass('success');
+						self.form.self.find('.phones-form').each( function (i, item) {
+							$(this).find('[name*=\"[phone]\"]').tooltip('destroy');
+							$(this).removeClass('error');
+							$(this).addClass('success');
+						});
 					}
 
 					if ( json.sex != null ) {
