@@ -80,6 +80,8 @@ function ProfilesForm( $element ) {
 	this.btnAddPhone = $element.find('.phones-btn-add');
 	this.btnAddEmail = $element.find('.emails-btn-add');
 
+	this.inputBirthday = $element.find('.inputBirthday .bfh-datepicker');
+
 	this.attachEvents();
 }
 
@@ -119,6 +121,8 @@ ProfilesForm.prototype.attachEvents = function () {
 	self.self.find('.emails-form').each( function () {
 		new EmailsForm( $(this) );
 	});
+
+	this.inputBirthday.bfhdatepicker(this.inputBirthday.data());
 }
 
 function ProfilesFormControl( $element, form ) {

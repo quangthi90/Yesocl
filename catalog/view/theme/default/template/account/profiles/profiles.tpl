@@ -185,8 +185,8 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.en_US.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="profiles-form" type="text/x-jquery-tmpl">
 	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
@@ -232,7 +232,7 @@
 			<div class="span2 offset1">Sex</div>
 			<div class="span9"><select class="span5" name="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
 		</div>
-		<div class="row-fluid">
+		<div class="row-fluid inputBirthday">
 			<div class="span2 offset1">Birthday</div>
 			<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="${ birthday }">
 			  <div class="input-prepend bfh-datepicker-toggle" data-toggle="bfh-datepicker">
