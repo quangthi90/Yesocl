@@ -201,6 +201,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					$('.profiles-btn-cancel').removeClass( 'disabled' );
 				}else {
 					if ( json.username != null ) {
+						self.form.self.find('[name=\"username\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"username\"]').parent().addClass('error');
 						self.form.self.find('[name=\"username\"]').tooltip({
 							animation: true,
@@ -213,10 +214,13 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							container: false
 						});
 					}else {
+						self.form.self.find('[name=\"username\"]').tooltip('destroy');
+						self.form.self.find('[name=\"username\"]').parent().removeClass('error');
 						self.form.self.find('[name=\"username\"]').parent().addClass('success');
 					}
 
 					if ( json.firstname != null ) {
+						self.form.self.find('[name=\"firstname\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"firstname\"]').parent().addClass('error');
 						self.form.self.find('[name=\"firstname\"]').tooltip({
 							animation: true,
@@ -229,10 +233,13 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							container: false
 						});
 					}else {
+						self.form.self.find('[name=\"firstname\"]').tooltip('destroy');
+						self.form.self.find('[name=\"firstname\"]').parent().removeClass('error');
 						self.form.self.find('[name=\"firstname\"]').parent().addClass('success');
 					}
 
 					if ( json.lastname != null ) {
+						self.form.self.find('[name=\"lastname\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"lastname\"]').parent().addClass('error');
 						self.form.self.find('[name=\"lastname\"]').tooltip({
 							animation: true,
@@ -245,10 +252,32 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							container: false
 						});
 					}else {
+						self.form.self.find('[name=\"lastname\"]').tooltip('destroy');
+						self.form.self.find('[name=\"lastname\"]').parent().removeClass('error');
 						self.form.self.find('[name=\"lastname\"]').parent().addClass('success');
 					}
 
+					if ( json.birthday != null ) {
+						self.form.self.find('[name=\"birthday\"]').parent().removeClass('success');
+						self.form.self.find('[name=\"birthday\"]').parent().addClass('error');
+						self.form.self.find('[name=\"birthday\"]').tooltip({
+							animation: true,
+							html: false,
+							placement: 'top',
+							selector: true,
+							title: json.birthday,
+							trigger:'hover focus',
+							delay:0,
+							container: false
+						});
+					}else {
+						self.form.self.find('[name=\"birthday\"]').tooltip('destroy');
+						self.form.self.find('[name=\"birthday\"]').parent().removeClass('error');
+						self.form.self.find('[name=\"birthday\"]').parent().addClass('success');
+					}
+
 					if ( json.address != null ) {
+						self.form.self.find('[name=\"address\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"address\"]').parent().addClass('error');
 						self.form.self.find('[name=\"address\"]').tooltip({
 							animation: true,
@@ -261,10 +290,13 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							container: false
 						});
 					}else {
+						self.form.self.find('[name=\"address\"]').tooltip('destroy');
+						self.form.self.find('[name=\"address\"]').parent().removeClass('error');
 						self.form.self.find('[name=\"address\"]').parent().addClass('success');
 					}
 
 					if ( json.location != null ) {
+						self.form.self.find('[name=\"location\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"location\"]').parent().addClass('error');
 						self.form.self.find('[name=\"location\"]').tooltip({
 							animation: true,
@@ -277,10 +309,13 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							container: false
 						});
 					}else {
+						self.form.self.find('[name=\"location\"]').tooltip('destroy');
+						self.form.self.find('[name=\"location\"]').parent().removeClass('error');
 						self.form.self.find('[name=\"location\"]').parent().addClass('success');
 					}
 
 					if ( json.industry != null ) {
+						self.form.self.find('[name=\"industry\"]').parent().removeClass('success');
 						self.form.self.find('[name=\"industry\"]').parent().addClass('error');
 						self.form.self.find('[name=\"industry\"]').tooltip({
 							animation: true,
@@ -293,6 +328,8 @@ ProfilesFormControl.prototype.attachEvents = function () {
 							container: false
 						});
 					}else {
+						self.form.self.find('[name=\"industry\"]').tooltip('destroy');
+						self.form.self.find('[name=\"industry\"]').parent().removeClass('error');
 						self.form.self.find('[name=\"industry\"]').parent().addClass('success');
 					}
 

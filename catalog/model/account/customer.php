@@ -296,7 +296,9 @@ class ModelAccountCustomer extends Model {
 				$data['lastname'] = trim(strtolower( $data['lastname'] ));
 			}
 
-			if ( !isset($data['birthday']) ) {
+			if ( !isset($data['birthday']) || !is_string( $data['birthday'] ) ) {
+				return false;
+			}elseif ( !\Datetime::createFromFormat('d/m/Y', $data['birthday']) ) {
 				return false;
 			}
 
@@ -387,13 +389,10 @@ class ModelAccountCustomer extends Model {
 				$customer->getMeta()->setSex( (int) $data['sex'] );
 			}
 
-			if ( isset( $data['birthday'] ) && !empty( $data['birthday'] ) ) {
-				$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
-			}
-			
 			$customer->setUsername( $data['username'] );
 			$customer->getMeta()->setFirstname( $data['firstname'] );
 			$customer->getMeta()->setLastname( $data['lastname'] );
+			$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
 			$customer->getMeta()->setAddress( $data['address'] );
 			$customer->getMeta()->getLocation()->setLocation( $data['location'] );
 			$customer->getMeta()->setIndustry( $data['industry'] );

@@ -230,7 +230,9 @@ class ControllerAccountEdit extends Controller {
 			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
-		if ( !isset($this->request->post['birthday']) ) {
+		if ( !isset($this->request->post['birthday']) || !is_string( $this->request->post['birthday']) ) {
+			$this->error['birthday'] = $this->language->get('error_birthday');
+		}elseif ( !(\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday'])) ) {
 			$this->error['birthday'] = $this->language->get('error_birthday');
 		}
 

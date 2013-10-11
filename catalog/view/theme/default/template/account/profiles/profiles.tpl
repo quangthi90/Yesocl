@@ -235,7 +235,7 @@
 		<div class="row-fluid inputBirthday">
 			<div class="span2 offset1">Birthday</div>
 			<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="${ birthday }">
-			  <div class="input-prepend bfh-datepicker-toggle" data-toggle="bfh-datepicker">
+			  <div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker">
 			    <span class="add-on"><i class="icon-calendar"></i></span>
 			    <input type="text" name="birthday" class="input-medium" value="${ birthday }" readonly/>
 			  </div>
