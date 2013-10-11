@@ -125,23 +125,188 @@ ProfilesForm.prototype.attachEvents = function () {
 	});
 
 	this.self.find('input[name=\"username\"]').blur( function () {
+		var data = {
+			'username': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"username\"]').tooltip('destroy');
+					self.self.find('[name=\"username\"]').parent().removeClass('success');
+					self.self.find('[name=\"username\"]').parent().addClass('error');
+					self.self.find('[name=\"username\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"username\"]').tooltip('destroy');
+					self.self.find('[name=\"username\"]').parent().removeClass('error');
+					self.self.find('[name=\"username\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
 	this.self.find('input[name=\"firstname\"]').blur( function () {
+		var data = {
+			'firstname': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"firstname\"]').tooltip('destroy');
+					self.self.find('[name=\"firstname\"]').parent().removeClass('success');
+					self.self.find('[name=\"firstname\"]').parent().addClass('error');
+					self.self.find('[name=\"firstname\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"firstname\"]').tooltip('destroy');
+					self.self.find('[name=\"firstname\"]').parent().removeClass('error');
+					self.self.find('[name=\"firstname\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
 	this.self.find('input[name=\"lastname\"]').blur( function () {
+		var data = {
+			'lastname': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"lastname\"]').tooltip('destroy');
+					self.self.find('[name=\"lastname\"]').parent().removeClass('success');
+					self.self.find('[name=\"lastname\"]').parent().addClass('error');
+					self.self.find('[name=\"lastname\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"lastname\"]').tooltip('destroy');
+					self.self.find('[name=\"lastname\"]').parent().removeClass('error');
+					self.self.find('[name=\"lastname\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
-	this.self.find('input[name=\"sex\"]').blur( function () {
+	this.self.find('select[name=\"sex\"]').blur( function () {
+		var data = {
+			'sex': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"sex\"]').tooltip('destroy');
+					self.self.find('[name=\"sex\"]').parent().removeClass('success');
+					self.self.find('[name=\"sex\"]').parent().addClass('error');
+					self.self.find('[name=\"sex\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"sex\"]').tooltip('destroy');
+					self.self.find('[name=\"sex\"]').parent().removeClass('error');
+					self.self.find('[name=\"sex\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
-	this.self.find('input[name=\"birthday\"]').blur( function () {
+	this.self.find('input[name=\"birthday\"]').change( function () {
+		var data = {
+			'birthday': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: self.self.find('[name=\"birthday\"]').parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"birthday\"]').tooltip('destroy');
+					self.self.find('[name=\"birthday\"]').parent().removeClass('success');
+					self.self.find('[name=\"birthday\"]').parent().addClass('error');
+					self.self.find('[name=\"birthday\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"sex\"]').tooltip('destroy');
+					self.self.find('[name=\"birthday\"]').parent().removeClass('error');
+					self.self.find('[name=\"birthday\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
 	this.self.find('input[name=\"address\"]').blur( function () {
@@ -780,7 +945,9 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					self.btnCancel.toggle();
 					self.btnSave.toggle();
 					self.btnEdit.toggle();
@@ -790,8 +957,6 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function(xhr, error){
@@ -887,7 +1052,9 @@ FormAddEducation.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					var $item = $.tmpl($('#background-education-item'), json);
 					new EducationItem($item);
 					self.self.toggle();
@@ -900,8 +1067,6 @@ FormAddEducation.prototype.attachEvents = function () {
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function(xhr, error){
@@ -997,13 +1162,13 @@ EducationItem.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					self.self.remove();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function(xhr, error){
@@ -1106,7 +1271,9 @@ FormAddExperience.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					var $item = $.tmpl($('#background-experience-item'), json);
 					new ExperienceItem($item);
 					self.self.toggle();
@@ -1119,8 +1286,6 @@ FormAddExperience.prototype.attachEvents = function () {
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function(xhr, error){
@@ -1224,13 +1389,13 @@ ExperienceItem.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function (json) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					self.self.remove();
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function(xhr, error){
@@ -1306,7 +1471,9 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function ( json ) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					var $item = $.tmpl( $('#background-skill-item'), json );
 					new SkillItem( $item );
 
@@ -1322,8 +1489,6 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function ( xhr, error ) {
@@ -1366,14 +1531,14 @@ SkillItem.prototype.attachEvents = function () {
 			data: data,
 			dataType: 'json',
 			success: function ( json ) {
-				if ( json.message == 'success' ) {
+				if ( json.message != 'success' ) {
+					alert('Error!');
+				}else {
 					self.self.remove();
 
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
 				}
 			},
 			error: function ( xhr, error ) {

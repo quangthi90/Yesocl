@@ -192,11 +192,11 @@
 	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
-			<div class="span9 control-group"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
+			<div class="span9 control-group" data-url="{{ link_validate_username }}"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Fullname</div>
-			<div class="span9"><span class="control-group"><input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" /></span> <span class="control-group"><input class="span2" type="text" placeholder="Input Text" name="lastname" value="${ lastname }" /></span></div>
+			<div class="span9"><span class="control-group" data-url="{{ link_validate_firstname }}"><input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" /></span> <span class="control-group" data-url="{{ link_validate_lastname }}"><input class="span2" type="text" placeholder="Input Text" name="lastname" value="${ lastname }" /></span></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Email</div>
@@ -230,12 +230,12 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Sex</div>
-			<div class="span9 control-group"><select class="span5" name="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
+			<div class="span9 control-group" data-url="{{ link_validate_sex }}"><select class="span5" name="sex"><option value="1">Male</option><option value="0">Female</option></select></div>
 		</div>
 		<div class="row-fluid inputBirthday">
 			<div class="span2 offset1">Birthday</div>
 			<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="${ birthday }">
-			  <div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker">
+			  <div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker" data-url="{{ link_validate_birthday }}">
 			    <span class="add-on btn"><i class="icon-calendar"></i></span>
 			    <input type="text" name="birthday" class="input-medium" value="${ birthday }" readonly/>
 			  </div>

@@ -12,6 +12,11 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_update_profiles'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
 		$this->data['link_validate_phone'] = $this->url->link('account/edit/validatePhone', '', 'SSL');
 		$this->data['link_validate_email'] = $this->url->link('account/edit/validateEmail', '', 'SSL');
+		$this->data['link_validate_username'] = $this->url->link('account/edit/validateUsername', '', 'SSL');
+		$this->data['link_validate_firstname'] = $this->url->link('account/edit/validateFirstname', '', 'SSL');
+		$this->data['link_validate_lastname'] = $this->url->link('account/edit/validateLastname', '', 'SSL');
+		$this->data['link_validate_sex'] = $this->url->link('account/edit/validateSex', '', 'SSL');
+		$this->data['link_validate_birthday'] = $this->url->link('account/edit/validateBirthday', '', 'SSL');
 		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
 		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
@@ -390,6 +395,92 @@ class ControllerAccountEdit extends Controller {
 				if ( !isset( $json['email'] ) && !isset( $json['emails'] ) ) {
 					$json['message'] = 'success';
 				}
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateUsername() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			$this->load->model( 'account/customer' );
+
+			if ( !isset( $this->request->post['username'] ) || !is_string( $this->request->post['username'] ) ) {
+				$json['message'] = $this->language->get('error_username');
+			}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
+				$json['message'] = $this->language->get('error_username');
+			}elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $this->request->post['username']) ) {
+				$json['message'] = $this->language->get('error_username');
+			}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
+				$json['message'] = $this->language->get('error_exist_username');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateFirstname() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset( $this->request->post['firstname'] ) || !is_string( $this->request->post['firstname'] ) ) {
+				$json['message'] = $this->language->get('error_firstname');
+			}elseif ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
+				$json['message'] = $this->language->get('error_firstname');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateLastname() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset( $this->request->post['lastname'] ) || !is_string( $this->request->post['lastname'] ) ) {
+				$json['message'] = $this->language->get('error_lastname');
+			}elseif ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
+				$json['message'] = $this->language->get('error_lastname');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateSex() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset( $this->request->post['sex'] ) || !is_string( $this->request->post['sex'] ) ) {
+				$json['message'] = $this->language->get('error_sex');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateBirthday() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset($this->request->post['birthday']) || !is_string( $this->request->post['birthday']) ) {
+				$json['message'] = $this->language->get('error_birthday');
+			}elseif ( !(\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday'])) ) {
+				$json['message'] = $this->language->get('error_birthday');
+			}elseif ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
+				$json['message'] = $this->language->get('error_birthday');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
 			}
 		}
 		$this->response->setOutput( json_encode( $json ) );
