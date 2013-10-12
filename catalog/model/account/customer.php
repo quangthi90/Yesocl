@@ -396,15 +396,14 @@ class ModelAccountCustomer extends Model {
 				$data['location'] = trim( $data['location'] );
 			}
 
-			if ( isset( $data['industry'] ) && is_string( $data['industry'] ) && (utf8_strlen($data['industry']) > 1) ) {
-				if ( utf8_strlen($data['industry']) > 64 ) {
-					return false;
-				}elseif ( !preg_match('/^[A-z]+$/', $data['industry']) ) {
-					return false;
-				}
-				$data['industry'] = trim(strtolower( $data['industry'] ));
+			if ( !isset( $data['industry'] ) || !is_string( $data['industry'] ) ) {
+				return false;
+			}elseif ( (utf8_strlen($data['industry']) < 1) || utf8_strlen($data['industry']) > 64 ) {
+				return false;
+			}elseif ( !preg_match('/^[A-z]+$/', $data['industry']) ) {
+				return false;
 			}else {
-				$data['industry'] = '';
+				$data['industry'] = trim( strtolower( $data['industry'] ) );
 			}
 
 			$customer->setUsername( $data['username'] );

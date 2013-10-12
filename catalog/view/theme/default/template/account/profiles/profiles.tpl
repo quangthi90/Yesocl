@@ -265,15 +265,15 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Address</div>
-			<div class="span9 control-group"><input class="span5" type="text" placeholder="Input Text" name="address" value="${ address }" /></div>
+			<div class="span9 control-group" data-url="{{ link_validate_address }}"><input class="span5" type="text" placeholder="Input Text" name="address" value="${ address }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Living</div>
-			<div class="span9 control-group"><input class="span5" type="text" placeholder="Input Text" name="location" value="${ location }" /></div>
+			<div class="span9 control-group" data-url="{{ link_validate_location }}"><input class="span5" type="text" placeholder="Input Text" name="location" value="${ location }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Industry</div>
-			<div class="span9 control-group"><input class="span5" type="text" placeholder="Input Text" name="industry" value="${ industry }" /></div>
+			<div class="span9 control-group" data-url="{{ link_validate_industry }}"><input class="span5" type="text" placeholder="Input Text" name="industry" value="${ industry }" /></div>
 		</div>
 	</div>
 </script>

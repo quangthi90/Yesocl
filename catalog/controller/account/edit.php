@@ -17,6 +17,9 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_validate_lastname'] = $this->url->link('account/edit/validateLastname', '', 'SSL');
 		$this->data['link_validate_sex'] = $this->url->link('account/edit/validateSex', '', 'SSL');
 		$this->data['link_validate_birthday'] = $this->url->link('account/edit/validateBirthday', '', 'SSL');
+		$this->data['link_validate_address'] = $this->url->link('account/edit/validateAddress', '', 'SSL');
+		$this->data['link_validate_location'] = $this->url->link('account/edit/validateLocation', '', 'SSL');
+		$this->data['link_validate_industry'] = $this->url->link('account/edit/validateIndustry', '', 'SSL');
 		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
 		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
@@ -318,12 +321,12 @@ class ControllerAccountEdit extends Controller {
 			$this->error['location'] = $this->language->get('error_location');
 		}
 
-		if ( isset( $this->request->post['industry'] ) && is_string( $this->request->post['industry'] ) && (utf8_strlen($this->request->post['industry']) > 1) ) {
-			if ( utf8_strlen($this->request->post['industry']) > 64 ) {
-				$this->error['industry'] = $this->language->get('error_industry');
-			}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
-				$this->error['industry'] = $this->language->get('error_industry');
-			}
+		if ( !isset( $this->request->post['industry'] ) || !is_string( $this->request->post['industry'] ) ) {
+			$this->error['industry'] = $this->language->get('error_industry');
+		}elseif ( (utf8_strlen($this->request->post['industry']) < 1) || utf8_strlen($this->request->post['industry']) > 64 ) {
+			$this->error['industry'] = $this->language->get('error_industry');
+		}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
+			$this->error['industry'] = $this->language->get('error_industry');
 		}
 
 		if (!$this->error) {
@@ -477,6 +480,56 @@ class ControllerAccountEdit extends Controller {
 				$json['message'] = $this->language->get('error_birthday');
 			}elseif ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
 				$json['message'] = $this->language->get('error_birthday');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateAddress() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset( $this->request->post['address'] ) || !is_string( $this->request->post['address'] ) ) {
+				$json['message'] = $this->language->get('error_address');
+			}elseif ((utf8_strlen($this->request->post['address']) < 1) || (utf8_strlen($this->request->post['address']) > 255)) {
+				$json['message'] = $this->language->get('error_address');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateLocation() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset( $this->request->post['location'] ) || !is_string( $this->request->post['location'] ) ) {
+				$json['message'] = $this->language->get('error_location');
+			}elseif ((utf8_strlen($this->request->post['location']) < 1) || (utf8_strlen($this->request->post['location']) > 255)) {
+				$json['message'] = $this->language->get('error_location');
+			}
+
+			if ( !isset( $json['message'] ) ) {
+				$json['message'] = 'success';
+			}
+		}
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function validateIndustry() {
+		$json = array();
+		if ( $this->customer->isLogged() ) {
+			if ( !isset( $this->request->post['industry'] ) || !is_string( $this->request->post['industry'] ) ) {
+				$json['message'] = $this->language->get('error_industry');
+			}elseif ((utf8_strlen($this->request->post['industry']) < 1) || (utf8_strlen($this->request->post['industry']) > 255)) {
+				$json['message'] = $this->language->get('error_industry');
+			}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
+				$json['message'] = $this->language->get('error_industry');
 			}
 
 			if ( !isset( $json['message'] ) ) {

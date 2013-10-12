@@ -310,15 +310,114 @@ ProfilesForm.prototype.attachEvents = function () {
 	});
 
 	this.self.find('input[name=\"address\"]').blur( function () {
+		var data = {
+			'address': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"address\"]').tooltip('destroy');
+					self.self.find('[name=\"address\"]').parent().removeClass('success');
+					self.self.find('[name=\"address\"]').parent().addClass('error');
+					self.self.find('[name=\"address\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"address\"]').tooltip('destroy');
+					self.self.find('[name=\"address\"]').parent().removeClass('error');
+					self.self.find('[name=\"address\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
 	this.self.find('input[name=\"location\"]').blur( function () {
+		var data = {
+			'location': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"location\"]').tooltip('destroy');
+					self.self.find('[name=\"location\"]').parent().removeClass('success');
+					self.self.find('[name=\"location\"]').parent().addClass('error');
+					self.self.find('[name=\"location\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"location\"]').tooltip('destroy');
+					self.self.find('[name=\"location\"]').parent().removeClass('error');
+					self.self.find('[name=\"location\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 
 	this.self.find('input[name=\"industry\"]').blur( function () {
+		var data = {
+			'industry': $(this).val()
+		}
 
+		$.ajax({
+			type: 'POST',
+			url: $(this).parent().data('url'),
+			data: data,
+			dataType: 'json',
+			success: function (json) {
+				if ( json.message != 'success' ) {
+					self.self.find('[name=\"industry\"]').tooltip('destroy');
+					self.self.find('[name=\"industry\"]').parent().removeClass('success');
+					self.self.find('[name=\"industry\"]').parent().addClass('error');
+					self.self.find('[name=\"industry\"]').tooltip({
+						animation: true,
+						html: false,
+						placement: 'top',
+						selector: true,
+						title: json.message,
+						trigger:'hover focus',
+						delay:0,
+						container: false
+					});
+				}else {
+					self.self.find('[name=\"industry\"]').tooltip('destroy');
+					self.self.find('[name=\"industry\"]').parent().removeClass('error');
+					self.self.find('[name=\"industry\"]').parent().addClass('success');
+				}
+			},
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			},
+		});
 	});
 }
 
