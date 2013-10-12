@@ -420,6 +420,16 @@ class ModelAccountCustomer extends Model {
 				$data['industry'] = trim( strtolower( $data['industry'] ) );
 			}
 
+			if ( !isset( $data['industryid'] ) || !is_string( $data['industryid'] ) ) {
+				$data['industryid'] = '';
+			}elseif ( (utf8_strlen($data['industryid']) < 1) ) {
+				$data['industryid'] = '';
+			}elseif ( !preg_match('/^[A-z0-9]+$/', $data['industryid']) ) {
+				$data['industryid'] = '';
+			}else {
+				$data['industryid'] = trim( strtolower( $data['industryid'] ) );
+			}
+
 			$customer->setUsername( $data['username'] );
 			$customer->getMeta()->setFirstname( $data['firstname'] );
 			$customer->getMeta()->setLastname( $data['lastname'] );
@@ -430,6 +440,7 @@ class ModelAccountCustomer extends Model {
 			$customer->getMeta()->setAddress( $data['address'] );
 			$customer->getMeta()->setLocation( $location );
 			$customer->getMeta()->setIndustry( $data['industry'] );
+			$customer->getMeta()->setIndustryId( $data['industryid'] );
 
 			$this->dm->flush();
 

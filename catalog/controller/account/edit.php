@@ -31,6 +31,7 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_add_skill'] = $this->url->link('account/edit/addSkill', '', 'SSL');
 		$this->data['link_remove_skill'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
 		$this->data['link_autocomplete_location'] = html_entity_decode( $this->url->link( 'account/edit/autocompleteLocation', '', 'SSL'));
+		$this->data['link_autocomplete_industry'] = html_entity_decode( $this->url->link( 'account/edit/autocompleteIndustry', '', 'SSL'));
 		
 		$this->load->model('user/user');
 		$this->load->model('data/value');
@@ -161,6 +162,7 @@ class ControllerAccountEdit extends Controller {
 			'cityid' => $user->getMeta()->getLocation()->getCityId(),
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
+			'industryid' => $user->getMeta()->getIndustryId(),
 			'sumary' => $user->getMeta()->getBackground()->getSumary(),
 			'educations' => $educations_data,
 			'experiences' => $experiences_data,
@@ -781,6 +783,7 @@ class ControllerAccountEdit extends Controller {
 				$json['cityid'] = $user->getMeta()->getLocation()->getCityId();
 				$json['address'] = $user->getMeta()->getAddress();
 				$json['industry'] = $user->getMeta()->getIndustry();
+				$json['industryid'] = $user->getMeta()->getIndustryId();
 			}else {
 				//$json['message'] = 'failed';
 				$json = $this->error;
@@ -1021,6 +1024,46 @@ class ControllerAccountEdit extends Controller {
 				$json[] = array(
 					'name' => $city->getLocation(),
 					'id' => $city->getId(),
+				);
+			}
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function autocompleteIndustry() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() ) {
+			
+		}elseif ( !isset( $this->request->get['filter_industry'] ) || !is_string( $this->request->get['filter_industry'] ) ) {
+
+		}elseif ( (utf8_strlen( $this->request->get['filter_industry'] ) < 1) || (utf8_strlen( $this->request->get['filter_industry'] ) > 32) ) {
+
+		}else {
+			$this->load->model( 'data/value' );
+			$this->load->model( 'setting/config' );
+			$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
+
+			$sort = 'name';
+
+			$data = array(
+				'filter_name' => trim( strtolower( $this->request->get['filter_industry'] ) ),
+				//'filter_type_name' => $filter_type_name,
+				'filter_type_code' => $this->config->get( 'datatype_industry' ),
+				//'filter_type' => $filter_type,
+				//'filter_value' => $filter_value,
+				'sort' => $sort,
+				);
+
+			$industries = $this->model_data_value->getValues( $data );
+			
+			foreach ( $industries as $industry ) {
+				$json[] = array(
+					'name' => html_entity_decode( $industry->getName() ),
+					//'type' => $value->getType()->getName(),
+					//'value' => html_entity_decode( $value->getValue() ),
+					'id' => $industry->getId(),
 				);
 			}
 		}

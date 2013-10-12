@@ -59,7 +59,8 @@ TabsInformation.prototype.attachEvents = function () {
 			'address': item.data('address'),
 			'location': item.data('location'),
 			'cityid': item.data('cityid'),
-			'industry': item.data('industry')
+			'industry': item.data('industry'),
+			'industryid': item.data('industryid')
 		}
 		
 		var $form = $.tmpl( $('#profiles-form'), data );
@@ -127,6 +128,37 @@ ProfilesForm.prototype.attachEvents = function () {
 			self.self.find('[name=\"location\"]').tooltip('destroy');
 			self.self.find('[name=\"location\"]').parent().removeClass('error');
 			self.self.find('[name=\"location\"]').parent().addClass('success');
+    		return item;
+		},
+	});
+
+	this.self.find('input[name=\"industry\"]').typeahead({
+		source: function (query, process) {
+			self.self.find('input[name=\"industryid\"]').val('');
+			return $.ajax({
+				type: 'GET',
+				url: self.self.find('input[name=\"industry\"]').parent().data('autocomplete'),
+				data: { 'filter_industry': query },
+				success: function (json) {
+					alert('alo');
+					var parJSON = JSON.parse(json);
+					var suggestions = [];
+					locations = {};
+					$.each(parJSON, function (i, suggestTerm) {
+						locations[suggestTerm.name] = suggestTerm;
+						suggestions.push(suggestTerm.name);
+					});
+					process(suggestions);
+				},
+			});
+		},
+		items: 5,
+		minLength: 1,
+		updater: function (item) {
+			self.self.find('input[name=\"industryid\"]').val(locations[item].id);
+			self.self.find('[name=\"industry\"]').tooltip('destroy');
+			self.self.find('[name=\"industry\"]').parent().removeClass('error');
+			self.self.find('[name=\"industry\"]').parent().addClass('success');
     		return item;
 		},
 	});
@@ -500,7 +532,9 @@ ProfilesFormControl.prototype.attachEvents = function () {
 			'birthday': self.form.self.find('[name=\"birthday\"]').val(),
 			'address': self.form.self.find('[name=\"address\"]').val(),
 			'location': self.form.self.find('[name=\"location\"]').val(),
-			'industry': self.form.self.find('[name=\"industry\"]').val()
+			'cityid': self.form.self.find('[name=\"cityid\"]').val(),
+			'industry': self.form.self.find('[name=\"industry\"]').val(),
+			'industryid': self.form.self.find('[name=\"industryid\"]').val()
 		};
 
 		$.ajax({
@@ -793,7 +827,8 @@ ProfilesFormControl.prototype.attachEvents = function () {
 			'address': self.form.self.data('address'),
 			'location': self.form.self.data('location'),
 			'cityid': self.form.self.data('cityid'),
-			'industry': self.form.self.data('industry')
+			'industry': self.form.self.data('industry'),
+			'industryid': self.form.self.data('industryid')
 		}
 
 		var $item = $.tmpl($('#profiles-item'), data);
