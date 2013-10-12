@@ -396,6 +396,20 @@ class ModelAccountCustomer extends Model {
 				$data['location'] = trim( $data['location'] );
 			}
 
+			if ( !isset( $data['cityid'] ) || !is_string( $data['cityid'] ) ) {
+				$data['cityid'] = '';
+			}elseif ( strlen( $data['cityid'] ) < 1 ) {
+				$data['cityid'] = '';
+			}elseif ( !preg_match( '/^[A-z0-9]+$/', subject)) {
+				$data['cityid'] = '';
+			}else {
+				$data['cityid'] = trim( strtolower( $data['cityid'] ) );
+			}
+
+			$location = new Location();
+			$location->setLocation( $data['location'] );
+			$location->setCityId( $data['cityid'] );
+
 			if ( !isset( $data['industry'] ) || !is_string( $data['industry'] ) ) {
 				return false;
 			}elseif ( (utf8_strlen($data['industry']) < 1) || utf8_strlen($data['industry']) > 64 ) {
@@ -414,7 +428,7 @@ class ModelAccountCustomer extends Model {
 			$customer->getMeta()->setSex( (int) $data['sex'] );
 			$customer->getMeta()->setBirthday( \Datetime::createFromFormat( 'd/m/Y', $data['birthday'] ) );
 			$customer->getMeta()->setAddress( $data['address'] );
-			$customer->getMeta()->getLocation()->setLocation( $data['location'] );
+			$customer->getMeta()->setLocation( $location );
 			$customer->getMeta()->setIndustry( $data['industry'] );
 
 			$this->dm->flush();

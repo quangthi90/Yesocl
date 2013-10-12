@@ -100,4 +100,22 @@ Class ModelLocalisationCity extends Model {
 
 		$this->dm->remove($city);
 	}
+
+	public function searchLocationByKeyword( $data = array() ) {
+		if ( !isset( $data['filter_location'] ) || empty( $data['filter_location'] ) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\Localisation\City',
+				)
+    	);
+ 		
+		$query_data = 'location_t:*"' . $data['filter_location'] . '"*';
+ 
+		$query->setQuery( $query_data );
+ 
+		return $this->client->execute( $query );
+	}
 }

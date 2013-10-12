@@ -29,7 +29,7 @@
 							<div class="clear"></div>
 						</div>
 						<div class="profiles-tabs-main-body">
-							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-emails="{{ user.emails_js }}" data-phones="{{ user.phones_js }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-industry="{{ user.industry }}">
+							<div class="basic-profiles-item" data-url="{{ link_update_profiles }}" data-username="{{ user.username }}" data-firstname="{{ user.firstname }}" data-lastname="{{ user.lastname }}" data-fullname="{{ user.fullname }}" data-emails="{{ user.emails_js }}" data-phones="{{ user.phones_js }}" data-sex="{{ user.sex }}" data-sext="{{ user.sext }}" data-birthday="{{ user.birthday }}" data-birthdayt="{{ user.birthdayt }}" data-address="{{ user.address }}" data-location="{{ user.location }}" data-cityid="{{ user.cityid }}" data-industry="{{ user.industry }}">
 								<div class="row-fluid">
 									<div class="span2 offset1">Username</div>
 									<div class="span9"><span class="profiles-tabs-value viewers">{{ user.username }}</span></div>
@@ -189,7 +189,7 @@
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="profiles-form" type="text/x-jquery-tmpl">
-	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+	<div class="basic-profiles-form" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-cityid="${ cityid }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
 			<div class="span9 control-group" data-url="{{ link_validate_username }}"><input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" /></div>
@@ -269,7 +269,7 @@
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Living</div>
-			<div class="span9 control-group" data-url="{{ link_validate_location }}"><input class="span5" type="text" placeholder="Input Text" name="location" value="${ location }" /></div>
+			<div class="span9 control-group" data-url="{{ link_validate_location }}" data-autocomplete="{{ link_autocomplete_location }}"><input class="span5" type="text" placeholder="Input Text" name="location" value="${ location }" /><input type="hidden" name="cityid" value="${ cityid }" /></div>
 		</div>
 		<div class="row-fluid">
 			<div class="span2 offset1">Industry</div>
@@ -287,7 +287,7 @@
     <div class="emails-form control-group" data-url="{{ link_validate_email }}"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" /><input type="hidden" name="emails[${ index }][primary]" value="0" /> <span class="label">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
-	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-industry="${ industry }">
+	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-cityid="${ cityid }" data-industry="${ industry }">
 		<div class="row-fluid">
 			<div class="span2 offset1">Username</div>
 			<div class="span9"><span class="profiles-tabs-value viewers">${ username }</span></div>

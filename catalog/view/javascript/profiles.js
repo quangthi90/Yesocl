@@ -58,6 +58,7 @@ TabsInformation.prototype.attachEvents = function () {
 			'birthdayt': item.data('birthdayt'),
 			'address': item.data('address'),
 			'location': item.data('location'),
+			'cityid': item.data('cityid'),
 			'industry': item.data('industry')
 		}
 		
@@ -98,6 +99,36 @@ ProfilesForm.prototype.attachEvents = function () {
 
 	self.self.find('.emails-form').each( function () {
 		new EmailsForm( $(this) );
+	});
+
+	this.self.find('input[name=\"location\"]').typeahead({
+		source: function (query, process) {
+			self.self.find('input[name=\"cityid\"]').val('');
+			return $.ajax({
+				type: 'GET',
+				url: self.self.find('input[name=\"location\"]').parent().data('autocomplete'),
+				data: { 'filter_location': query },
+				success: function (json) {
+					var parJSON = JSON.parse(json);
+					var suggestions = [];
+					locations = {};
+					$.each(parJSON, function (i, suggestTerm) {
+						locations[suggestTerm.name] = suggestTerm;
+						suggestions.push(suggestTerm.name);
+					});
+					process(suggestions);
+				},
+			});
+		},
+		items: 5,
+		minLength: 1,
+		updater: function (item) {
+			self.self.find('input[name=\"cityid\"]').val(locations[item].id);
+			self.self.find('[name=\"location\"]').tooltip('destroy');
+			self.self.find('[name=\"location\"]').parent().removeClass('error');
+			self.self.find('[name=\"location\"]').parent().addClass('success');
+    		return item;
+		},
 	});
 
 	this.btnAddPhone.click( function () {
@@ -761,6 +792,7 @@ ProfilesFormControl.prototype.attachEvents = function () {
 			'birthdayt': self.form.self.data('birthdayt'),
 			'address': self.form.self.data('address'),
 			'location': self.form.self.data('location'),
+			'cityid': self.form.self.data('cityid'),
 			'industry': self.form.self.data('industry')
 		}
 

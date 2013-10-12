@@ -30,6 +30,7 @@ class ControllerAccountEdit extends Controller {
 		$this->data['link_edit_experience'] = $this->url->link('account/edit/editExperience', '', 'SSL');
 		$this->data['link_add_skill'] = $this->url->link('account/edit/addSkill', '', 'SSL');
 		$this->data['link_remove_skill'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
+		$this->data['link_autocomplete_location'] = html_entity_decode( $this->url->link( 'account/edit/autocompleteLocation', '', 'SSL'));
 		
 		$this->load->model('user/user');
 		$this->load->model('data/value');
@@ -157,6 +158,7 @@ class ControllerAccountEdit extends Controller {
 			'birthday' => $user->getMeta()->getBirthday()->format('d/m/Y'),
 			'birthdayt' => $user->getMeta()->getBirthday()->format('d/m/Y'),
 			'location' => $user->getMeta()->getLocation()->getLocation(),
+			'cityid' => $user->getMeta()->getLocation()->getCityId(),
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
 			'sumary' => $user->getMeta()->getBackground()->getSumary(),
@@ -776,6 +778,7 @@ class ControllerAccountEdit extends Controller {
 				$json['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');
 				$json['birthdayt'] = $user->getMeta()->getBirthday()->format('d/m/Y');
 				$json['location'] = $user->getMeta()->getLocation()->getLocation();
+				$json['cityid'] = $user->getMeta()->getLocation()->getCityId();
 				$json['address'] = $user->getMeta()->getAddress();
 				$json['industry'] = $user->getMeta()->getIndustry();
 			}else {
@@ -987,6 +990,38 @@ class ControllerAccountEdit extends Controller {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
+			}
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
+
+	public function autocompleteLocation() {
+		$json = array();
+
+		if ( !$this->customer->isLogged() ) {
+			
+		}elseif ( !isset( $this->request->get['filter_location'] ) || !is_string( $this->request->get['filter_location'] ) ) {
+
+		}elseif ( (utf8_strlen( $this->request->get['filter_location'] ) < 1) || (utf8_strlen( $this->request->get['filter_location'] ) > 32) ) {
+
+		}else {
+			$this->load->model( 'localisation/city' );
+
+			$sort = 'name';
+
+			$data = array(
+				'filter_location' => trim( strtolower( $this->request->get['filter_location'] ) ),
+				// 'sort' => $sort,
+			);
+
+			$cities = $this->model_localisation_city->searchLocationByKeyword( $data );
+			
+			foreach ( $cities as $city ) {
+				$json[] = array(
+					'name' => $city->getLocation(),
+					'id' => $city->getId(),
+				);
 			}
 		}
 
