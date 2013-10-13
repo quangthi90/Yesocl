@@ -81,7 +81,6 @@
 .profiles-tabs-main-body {
 	margin-top: 10px;
 	line-height: 30px;
-	overflow-y: hidden;
 }
 
 #profiles-tabs-background .profiles-tabs-main-body {
@@ -178,7 +177,7 @@
 }
 
 .profiles-tabs-item2 .profiles-btn-remove {
-	padding-left: 10px;
+	padding-left: 2px 10px;
 }
 
 .profiles-btn-next {
@@ -231,4 +230,44 @@ textarea[name="sumary"] {
 	width: 98%;
 	height: 95%;
 	overflow-y: hidden;
+}
+
+.profiles-tabs .btn-remove {
+	padding: 2px 10px;
+	vertical-align: top;
+	float: right;
+	margin-right: 55px;
+}
+.profiles-tabs .btn-remove:hover i {
+	color: #FFF;
+	font-weight: normal;
+}
+
+.profiles-tabs .btn-add {
+	padding: 3px 10px;
+}
+
+.profiles-tabs .btn-add i:first-child {
+	font-size: 10px;
+	margin-right: 5px;
+}
+
+.profiles-tabs .btn-add i:last-child {
+	font-size: 15px;
+}
+
+.profiles-tabs .btn-add:hover i {
+	color: #FFF;
+	font-weight: normal;
+}
+
+.profile-content-set {
+	margin: 15px 0px;	
+	padding: 10px 0px;
+	border-top: 1px solid #f0f0f0;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-content-set .emails-form, .profile-content-set .phones-form {
+	margin-bottom: 0px;
 }

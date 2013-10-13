@@ -111,7 +111,7 @@
 			<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_add_education }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Education</a>
-					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
+					<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
@@ -121,7 +121,7 @@
 							<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span> to <span class="profiles-tabs-value">{{ education.ended }}</span></div>
 						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
@@ -139,7 +139,7 @@
 			<div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left" data-url="{{ link_add_experience }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Experience</a>
-					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
+					<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
 					<div class="clear"></div>
 				</div>
 				<div class="profiles-tabs-main-body">
@@ -149,7 +149,7 @@
 							<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ experience.started_text }}</span> to <span class="profiles-tabs-value">{{ experience.ended_text }}</span></div>
 						</div>
 						<div class="profiles-tabs-item1-content">
-							<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+							<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove  profiles-btn-remove"><i class="icon-trash"></i></a>
 							<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 							<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 							<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
@@ -166,7 +166,7 @@
 			<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left" data-url="{{ link_add_skill }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>
-					<a class="profiles-btn-add btn profiles-btn pull-right"><i class="icon-plus"></i></a>
+					<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
 					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="pull-right"><input class="profiles-input editors" type="text" name="skill" placeholder="Text here..." /></div>
@@ -175,7 +175,7 @@
 
 				<div class="profiles-tabs-main-body">
 					{% for skill in user.skills %}
-					<div class="profiles-tabs-item2 btn" data-id="{{ skill.id }}" data-remove="{{ link_remove_skill }}">{{ skill.skill }}<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+					<div class="profiles-tabs-item2 btn" data-id="{{ skill.id }}" data-remove="{{ link_remove_skill }}">{{ skill.skill }}<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
 					{% endfor %}
 				</div>
 			</div>
@@ -198,7 +198,7 @@
 			<div class="span2 offset1">Fullname</div>
 			<div class="span9"><span class="control-group" data-url="{{ link_validate_firstname }}"><input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" /></span> <span class="control-group" data-url="{{ link_validate_lastname }}"><input class="span2" type="text" placeholder="Input Text" name="lastname" value="${ lastname }" /></span></div>
 		</div>
-		<div class="row-fluid">
+		<div class="row-fluid profile-content-set">
 			<div class="span2 offset1">Email</div>
 			<div class="span9">
 				<div class="row-fluid">
@@ -207,24 +207,26 @@
 					{% set primary_if = '{{if $value.primary == 1}}' %}
 					{% set primary_if_end = '{{/if}}' %}
 					{{ email_loop }}
-					<div class="emails-form control-group {{ primary_if }}email-primary{{ primary_if_end }}" data-primary="${ $value.primary }" data-url="{{ link_validate_email }}"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					<div class="emails-form control-group {{ primary_if }}email-primary{{ primary_if_end }}" data-primary="${ $value.primary }" data-url="{{ link_validate_email }}"><input class="span5" type="text" placeholder="Input Text" name="emails[${ $index }][email]" value="${ $value.email }" /><input type="hidden" name="emails[${ $index }][primary]" value="${ $value.primary }" /> <span class="label {{ primary_if }}label-success{{ primary_if_end }}">primary</span> <a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a></div>
 					{{ email_loop_end }}
-
-					<div class="row-fluid"><a class="emails-btn-add btn btn-success offset5" href="#" data-index="${ Object.keys(emails).length }">Add email</a></div>
+					<a class="btn btn-success btn-add emails-btn-add " href="#" data-index="${ Object.keys(emails).length }">
+						<i class="icon-plus"></i> <i class="icon-envelope"></i>
+					</a>
 				</div>
 			</div>
 		</div>
-		<div class="row-fluid">
+		<div class="row-fluid profile-content-set">
 			<div class="span2 offset1">Phone</div>
 			<div class="span9">
 				<div class="row-fluid">
 					{% set phone_loop = '{{each phones}}' %}
 					{% set phone_loop_end = '{{/each}}' %}
 					{{ phone_loop }}
-					<div class="phones-form control-group" data-id="${ $value.id }" data-type="${ $value.type }" data-url="{{ link_validate_phone }}"><input class="span5" type="text" placeholder="Input Text" name="phones[${ $index }][phone]" value="${ $value.phone }" /> <select class="span3" name="phones[${ $index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+					<div class="phones-form control-group" data-id="${ $value.id }" data-type="${ $value.type }" data-url="{{ link_validate_phone }}"><input class="span5" type="text" placeholder="Input Text" name="phones[${ $index }][phone]" value="${ $value.phone }" /> <select class="span3" name="phones[${ $index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="btn btn-danger btn-remove phones-btn-remove" href="#"><i class="icon-trash"></i></a></div>
 					{{ phone_loop_end }}
-
-					<div class="row-fluid"><a class="phones-btn-add btn btn-success offset5" href="#" data-index="${ Object.keys(phones).length }">Add phone</a></div>
+					<a class="btn btn-success btn-add phones-btn-add" href="#" data-index="${ Object.keys(phones).length }">
+						<i class="icon-plus"></i> <i class="icon-phone"></i>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -281,10 +283,10 @@
 	<span class="basic-profiles-form-control"><a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a><a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a><div class="clear"></div></span>
 </script>
 <script id="profiles-phone-form" type="text/x-jquery-tmpl">
-    <div class="phones-form control-group" data-url="{{ link_validate_phone }}"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="phones-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+    <div class="phones-form control-group" data-url="{{ link_validate_phone }}"><input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> <select class="span3" name="phones[${ index }][type]">{% for phonetype in phone_types %}<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>{% endfor %}</select> <a class="btn btn-danger btn-remove phones-btn-remove" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-email-form" type="text/x-jquery-tmpl">
-    <div class="emails-form control-group" data-url="{{ link_validate_email }}"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" /><input type="hidden" name="emails[${ index }][primary]" value="0" /> <span class="label">primary</span> <a class="emails-btn-remove btn btn-danger" href="#"><i class="icon-trash"></i></a></div>
+    <div class="emails-form control-group" data-url="{{ link_validate_email }}"><input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" /><input type="hidden" name="emails[${ index }][primary]" value="0" /> <span class="label">primary</span> <a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a></div>
 </script>
 <script id="profiles-item" type="text/x-jquery-tmpl">
 	<div class="basic-profiles-item" data-url="${ url }" data-username="${ username }" data-firstname="${ firstname }" data-lastname="${ lastname }" data-fullname="${ fullname }" data-emails="${ emails_js }" data-phones="${ phones_js }" data-sex="${ sex }" data-sext="${ sext }" data-birthday="${ birthday }" data-birthdayt="${ birthdayt }" data-address="${ address }" data-location="${ location }" data-cityid="${ cityid }" data-industry="${ industry }" data-industryid="${ industryid }">
@@ -367,7 +369,7 @@
 			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started }</span> to <span class="profiles-tabs-value">${ ended }</span></div>
 		</div>
 		<div class="profiles-tabs-item1-content">
-			<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+			<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
 			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
@@ -399,7 +401,7 @@
 			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started_text }</span> to <span class="profiles-tabs-value">${ ended_text }</span></div>
 		</div>
 		<div class="profiles-tabs-item1-content">
-			<a class="profiles-btn-remove profiles-tabs-value btn profiles-btn pull-right"><i class="icon-trash"></i></a>
+			<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
 			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
 			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
@@ -412,7 +414,7 @@
 	</div>
 </script>
 <script id="background-skill-item" type="text/x-jquery-tmpl">
-    <div class="profiles-tabs-item2 btn" data-id="${ id }" data-remove="${ remove }">${ skill }<a class="profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+    <div class="profiles-tabs-item2 btn" data-id="${ id }" data-remove="${ remove }">${ skill }<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
 </script>
 <script type="text/javascript">
 	function addScroll(warper, column, width, height) {
