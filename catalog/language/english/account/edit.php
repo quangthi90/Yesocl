@@ -22,6 +22,8 @@ $_['error_lastname']   = 'Last Name must be between 1 and 32 characters!';
 $_['error_email']      = 'E-Mail Address does not appear to be valid!';
 $_['error_telephone']  = 'Telephone must be between 3 and 32 characters!';
 
-$_['error_exist_email']   = 'Email is not avalible!';
+$_['error_username']   = 'Username must be between 3 and 32 characters!';
+$_['error_username_empty']	= 'Username is empty!';
+$_['error_exist_email']	  	= 'Email is not avalible!';
 $_['error_exist_username']  = 'Username is not avalible!';
 ?>

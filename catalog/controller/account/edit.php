@@ -392,132 +392,16 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	public function validateUsername() {
+		$this->load->language('account/edit');
+
 		$json = array();
 		if ( $this->customer->isLogged() ) {
 			$this->load->model( 'account/customer' );
 
-			if ( !isset( $this->request->post['username'] ) || !is_string( $this->request->post['username'] ) ) {
-				$json['message'] = $this->language->get('error_username');
-			}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
-				$json['message'] = $this->language->get('error_username');
-			}elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $this->request->post['username']) ) {
+			if ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
 				$json['message'] = $this->language->get('error_username');
 			}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
 				$json['message'] = $this->language->get('error_exist_username');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateFirstname() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset( $this->request->post['firstname'] ) || !is_string( $this->request->post['firstname'] ) ) {
-				$json['message'] = $this->language->get('error_firstname');
-			}elseif ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-				$json['message'] = $this->language->get('error_firstname');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateLastname() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset( $this->request->post['lastname'] ) || !is_string( $this->request->post['lastname'] ) ) {
-				$json['message'] = $this->language->get('error_lastname');
-			}elseif ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-				$json['message'] = $this->language->get('error_lastname');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateSex() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset( $this->request->post['sex'] ) || !is_string( $this->request->post['sex'] ) ) {
-				$json['message'] = $this->language->get('error_sex');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateBirthday() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset($this->request->post['birthday']) || !is_string( $this->request->post['birthday']) ) {
-				$json['message'] = $this->language->get('error_birthday');
-			}elseif ( !(\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday'])) ) {
-				$json['message'] = $this->language->get('error_birthday');
-			}elseif ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
-				$json['message'] = $this->language->get('error_birthday');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateAddress() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset( $this->request->post['address'] ) || !is_string( $this->request->post['address'] ) ) {
-				$json['message'] = $this->language->get('error_address');
-			}elseif ((utf8_strlen($this->request->post['address']) < 1) || (utf8_strlen($this->request->post['address']) > 255)) {
-				$json['message'] = $this->language->get('error_address');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateLocation() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset( $this->request->post['location'] ) || !is_string( $this->request->post['location'] ) ) {
-				$json['message'] = $this->language->get('error_location');
-			}elseif ((utf8_strlen($this->request->post['location']) < 1) || (utf8_strlen($this->request->post['location']) > 255)) {
-				$json['message'] = $this->language->get('error_location');
-			}
-
-			if ( !isset( $json['message'] ) ) {
-				$json['message'] = 'success';
-			}
-		}
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function validateIndustry() {
-		$json = array();
-		if ( $this->customer->isLogged() ) {
-			if ( !isset( $this->request->post['industry'] ) || !is_string( $this->request->post['industry'] ) ) {
-				$json['message'] = $this->language->get('error_industry');
-			}elseif ((utf8_strlen($this->request->post['industry']) < 1) || (utf8_strlen($this->request->post['industry']) > 255)) {
-				$json['message'] = $this->language->get('error_industry');
-			}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
-				$json['message'] = $this->language->get('error_industry');
 			}
 
 			if ( !isset( $json['message'] ) ) {
