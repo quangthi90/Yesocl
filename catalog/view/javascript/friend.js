@@ -3,7 +3,9 @@
 		var that = this;
 		this.$el			= $el;
 		this.$friend_btn	= $el.find('.btn-friend');
+		this.$unfriend_btn	= $el.find('.btn-unfriend');
 		this.friend_url		= this.$friend_btn.data('url');
+		this.unfriend_url	= this.$unfriend_btn.data('url');
 		this.is_cancel		= this.$friend_btn.data('cancel')
 
 		this.attachEvents();
@@ -20,6 +22,18 @@
 			}
 
 			that.submit(that.$friend_btn);
+
+			return false;
+		});
+
+		this.$unfriend_btn.click( function (e) {
+			if (that.$unfriend_btn.hasClass('disabled')) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.remove(that.$unfriend_btn);
 
 			return false;
 		});
@@ -50,6 +64,27 @@
 				new FriendAction( that.$el );
 			}
 
+		});		
+	};
+		
+	FriendAction.prototype.remove = function($button){
+		var that = this;		
+
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.unfriend_url,
+			dataType: 'json',
+			error: function (xhr, error) {
+				alert(xhr.responseText);
+			}
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) { 
+			if(data.success == 'ok'){
+				that.$el.parent().remove();
+			}
 		});		
 	};
 		

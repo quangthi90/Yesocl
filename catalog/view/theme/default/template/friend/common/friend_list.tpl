@@ -22,7 +22,7 @@
                     <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a >Unfriend</a>
+                            <a class="btn-unfriend" data-url="{{ path('UnFriend', {user_slug: friend.slug}) }}">Unfriend</a>
                         </li>
                     </ul>
                 </div>

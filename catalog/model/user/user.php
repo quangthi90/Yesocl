@@ -28,6 +28,12 @@ class ModelUserUser extends Model {
 			$user->addFriend( $friend );
 		}
 
+		if ( !empty($data['unfriend']) ){
+			$user->getFriends()->removeElement( $user->getFriendById( $data['unfriend'] ) );
+			$user2 = $this->dm->getRepository('Document\User\User')->find( $data['unfriend'] );
+			$user2->getFriends()->removeElement( $user2->getFriendBySlug( $user_slug ) );
+		}
+
 		$this->dm->flush();
 
 		return true;
