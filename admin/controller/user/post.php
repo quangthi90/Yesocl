@@ -223,7 +223,9 @@ class ControllerUserPost extends Controller {
 		$this->data['back'] = $this->url->link( 'user/user', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// post
-		$posts = $user->getPostData()->getPosts();
+		if ( $user->getPostData() ){
+			$posts = $user->getPostData()->getPosts();
+		}
 		
 		$post_total = 0;
 		
