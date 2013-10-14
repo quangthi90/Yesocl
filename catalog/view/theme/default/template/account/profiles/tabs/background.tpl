@@ -1,3 +1,8 @@
+{% use '@template/default/template/account/profiles/tabs/sumary.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/education.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/experience.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/skill.tpl' %}
+
 {% block profiles_tabs_background %}
 <div class="row-fluid profiles-box profiles-step2">
 	<div class="span10 offset1">

@@ -41,23 +41,23 @@ TabsInformation.prototype.attachEvents = function () {
 
 		var data = {
 			'url': item.data('url'),
-			'username': item.data('username'),
-			'firstname': item.data('firstname'),
-			'lastname': item.data('lastname'),
-			'fullname': item.data('fullname'),
-			'emails': item.data('emails'),
-			'emails_js': JSON.stringify(item.data('emails')),
-			'phones': item.data('phones'),
-			'phones_js': JSON.stringify(item.data('phones')),
-			'sex': item.data('sex'),
-			'sext': item.data('sext'),
-			'birthday': item.data('birthday'),
-			'birthdayt': item.data('birthdayt'),
-			'address': item.data('address'),
-			'location': item.data('location'),
-			'cityid': item.data('cityid'),
-			'industry': item.data('industry'),
-			'industryid': item.data('industryid')
+			'username'		: item.data('username'),
+			'firstname'		: item.data('firstname'),
+			'lastname'		: item.data('lastname'),
+			'fullname'		: item.data('fullname'),
+			'emails'		: item.data('emails'),
+			'emails_js'		: JSON.stringify(item.data('emails')),
+			'phones'		: item.data('phones'),
+			'phones_js'		: JSON.stringify(item.data('phones')),
+			'sex'			: item.data('sex'),
+			'sext'			: item.data('sext'),
+			'birthday'		: item.data('birthday'),
+			'birthdayt'		: item.data('birthdayt'),
+			'address'		: item.data('address'),
+			'location'		: item.data('location'),
+			'cityid'		: item.data('cityid'),
+			'industry'		: item.data('industry'),
+			'industryid'	: item.data('industryid')
 		}
 		
 		var $form = $.tmpl( $('#profiles-form'), data );

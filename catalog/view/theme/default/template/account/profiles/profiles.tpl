@@ -1,5 +1,8 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/account/profiles/tabs/information.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/background.tpl' %}
+
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
