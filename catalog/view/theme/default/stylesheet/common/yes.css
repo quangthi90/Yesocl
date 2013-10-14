@@ -1116,7 +1116,6 @@ label.in-line{
 
 /*Header of group*/
 .group-header {
-  border: 1px solid #009A76;
   -webkit-box-shadow: 1px 1px 1px #ddd;
   -moz-box-shadow: 1px 1px 1px #ddd;
   box-shadow: 1px 1px 1px #ddd;
@@ -1134,7 +1133,7 @@ label.in-line{
 .header-fixed {
   position: fixed;
   top: 39px;
-  left: 151px;
+  left: 120px;
   right: 0px;
   margin-bottom: 0px;
 }
@@ -1207,7 +1206,6 @@ label.in-line{
   line-height: 30px;
   margin-left: 25px;
   white-space: nowrap;
-  text-overflow: "...";
   overflow: hidden;  
 }
 

@@ -14,7 +14,7 @@
 	<div id="y-main-content"> 
 		<div id="post-detail">
 			<div id="post-detail-header" class="post">
-				<div class="group-header">
+				<div class="group-header" style="display: none;">
 					<div class="row-fluid">
 						<div class="span2">
 							<a class="link-btn" onclick="history.go(-1); return false;" href="#" title="Go back"> 
@@ -51,7 +51,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="post-metadata">
+				<div class="post-metadata" style="display: none;">
 					<div class="row-fluid">
 						<div class="span1 avatar-thumb">
 							<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
@@ -68,7 +68,7 @@
 						</div>	
 					</div>									
 				</div>
-			</div>			
+			</div>		
 			<div id="post-content">{{ post.content|raw }}</div>
 		</div>
 		{{ block('post_common_post_comment') }}
