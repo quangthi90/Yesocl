@@ -417,7 +417,7 @@ class ModelAccountCustomer extends Model {
 			}elseif ( !preg_match('/^[A-z]+$/', $data['industry']) ) {
 				return false;
 			}else {
-				$data['industry'] = trim( strtolower( $data['industry'] ) );
+				$data['industry'] = trim( $data['industry'] );
 			}
 
 			if ( !isset( $data['industryid'] ) || !is_string( $data['industryid'] ) ) {

@@ -12,15 +12,12 @@ Profiles.prototype.afterCreate = function () {
 
 function TabsInformation($element, contentHeight) {
 	this.self = $element;
-
 	this.contentHeight = contentHeight;
 	this.header = $element.find('.profiles-tabs-header');
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.afterCreate();
-
+	this.mainBody = $element.find('.profiles-tabs-main-body');	
 	this.btnEdit = $element.find('.profiles-btn-edit');
-
 	this.attachEvents();
+	this.afterCreate();
 }
 
 TabsInformation.prototype.afterCreate = function () {
@@ -74,6 +71,7 @@ TabsInformation.prototype.attachEvents = function () {
 		item.remove();
 		self.btnEdit.toggle();
 		self.self.find('.profiles-tabs-main-header').append($control);
+		self.mainBody.getNiceScroll().resize();
 	});
 }
 
@@ -81,9 +79,7 @@ function ProfilesForm( $element ) {
 	this.self = $element;
 	this.btnAddPhone = $element.find('.phones-btn-add');
 	this.btnAddEmail = $element.find('.emails-btn-add');
-
 	this.inputBirthday = $element.find('.inputBirthday .bfh-datepicker');
-
 	this.attachEvents();
 }
 
@@ -140,7 +136,6 @@ ProfilesForm.prototype.attachEvents = function () {
 				url: self.self.find('input[name=\"industry\"]').parent().data('autocomplete'),
 				data: { 'filter_industry': query },
 				success: function (json) {
-					alert('alo');
 					var parJSON = JSON.parse(json);
 					var suggestions = [];
 					locations = {};
@@ -1142,6 +1137,7 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
+					self.mainBody.getNiceScroll().resize();
 				}
 			},
 			error: function(xhr, error){
@@ -1205,6 +1201,7 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		new FormAddEducation($form);
 
 		self.mainBody.prepend($form);
+		self.mainBody.getNiceScroll().resize();
 	});
 }
 
@@ -1432,6 +1429,7 @@ TabsBackgroundExperience.prototype.attachEvents = function () {
 		new FormAddExperience($form);
 
 		self.mainBody.prepend($form);
+		self.mainBody.getNiceScroll().resize();
 	});
 }
 
@@ -1699,6 +1697,7 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 					new SkillItem( $item );
 
 					self.mainBody.append( $item );
+					self.mainBody.getNiceScroll().resize();
 
 					self.btnAdd.toggle();
 					self.btnSave.toggle();
