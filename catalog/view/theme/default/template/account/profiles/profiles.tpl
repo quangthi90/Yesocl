@@ -327,7 +327,12 @@
 					{% set primary_if = '{{if $value.primary == 1}}' %}
 					{% set primary_if_end = '{{/if}}' %}
 					{{ email_loop }}
-					<div class="email-item"><span class="profiles-tabs-value viewers">${ $value.email }</span>  <span class="label {{primary_if}}label-success{{primary_if_end}}">primary</span></div>
+					<div class="email-item {{primary_if}}email-primary{{primary_if_end}}">
+						<span class="label {{primary_if}}label-success{{primary_if_end}}">
+							<i class="icon-envelope"></i>
+						</span>
+						<span class="profiles-tabs-value viewers">${ $value.email }</span>
+					</div>
 					{{ email_loop_end }}
 				</div>
 			</div>
@@ -338,8 +343,11 @@
 				<div class="row-fluid">
 					{% set phone_loop = '{{each phones}}' %}
 					{% set phone_loop_end = '{{/each}}' %}
-					{{ phone_loop }}
-					<div class="phones-item">${ $value.phone }</div>
+					{{ phone_loop }}					
+					<div class="phones-item">
+						<span><i class="icon-phone"></i></span>
+						<span>${ $value.phone }</span>
+					</div>
 					{{ phone_loop_end }}
 				</div>
 			</div>
