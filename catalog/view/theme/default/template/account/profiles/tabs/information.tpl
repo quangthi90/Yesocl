@@ -1,4 +1,4 @@
-{% block profiles_tabs_step1 %}
+{% block profiles_tabs_information %}
 <div class="row-fluid profiles-box profiles-step1">
 	<div class="span10 offset1">
 		<div class="row-fluid profiles-box-header">
@@ -58,5 +58,5 @@
 </div>
 {% endblock %}
 
-{% block profiles_tabs_step1_javascript %}
+{% block profiles_tabs_information_javascript %}
 {% endblock %}

@@ -25,7 +25,10 @@ $_['routing']['Logout']			= 'logout/';
 $_['routing']['SearchPage']		= 'search/';
 $_['routing']['Search']			= 'search/{keyword}/';
 $_['routing']['ChangeAvatar']	= 'change-avatar/';
+
+// Profile
 $_['routing']['ProfilePage']	= 'profile/edit/';
+$_['routing']['ProfileEditInfo']= 'profile/edit/update-information';
 
 // Friend
 $_['routing']['FriendPage']		= 'friend/{user_slug}/';

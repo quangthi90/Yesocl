@@ -9,7 +9,6 @@ class ControllerAccountEdit extends Controller {
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
-		$this->data['link_update_profiles'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
 		$this->data['link_validate_phone'] = $this->url->link('account/edit/validatePhone', '', 'SSL');
 		$this->data['link_validate_email'] = $this->url->link('account/edit/validateEmail', '', 'SSL');
 		$this->data['link_validate_username'] = $this->url->link('account/edit/validateUsername', '', 'SSL');
@@ -46,8 +45,7 @@ class ControllerAccountEdit extends Controller {
 			$this->data['phone_types'][] = array(
 				'text' => $phone_type->getName(),
 				'code' => $phone_type->getValue(),
-				);
-
+			);
 		}
 
 		// phone
@@ -59,7 +57,7 @@ class ControllerAccountEdit extends Controller {
 					'type' => $phone->getType(),
 					'phone' => $phone->getPhone(),
 					'visible' => $phone->getVisible(),
-					);
+				);
 			}
 		}
 
@@ -76,62 +74,51 @@ class ControllerAccountEdit extends Controller {
 
 		// educations
 		$educations_data = array();
-		foreach ($user->getMeta()->getBackground()->getEducations() as $education) {
-			$educations_data[] = array(
-				'id' => $education->getId(),
-				'school' => $education->getSchool(),
-				'school_id' => $education->getSchoolId(),
-				'degree' => $education->getDegree(),
-				'degree_id' => $education->getDegreeId(),
-				'fieldofstudy' => $education->getFieldOfStudy(),
-				'fieldofstudy_id' => $education->getFieldOfStudyId(),
-				'started' => $education->getStarted(),
-				'ended' => $education->getEnded()
+		if ( $user->getMeta()->getBackground() ){
+			foreach ($user->getMeta()->getBackground()->getEducations() as $education) {
+				$educations_data[] = array(
+					'id' => $education->getId(),
+					'school' => $education->getSchool(),
+					'school_id' => $education->getSchoolId(),
+					'degree' => $education->getDegree(),
+					'degree_id' => $education->getDegreeId(),
+					'fieldofstudy' => $education->getFieldOfStudy(),
+					'fieldofstudy_id' => $education->getFieldOfStudyId(),
+					'started' => $education->getStarted(),
+					'ended' => $education->getEnded()
 				);
-		}
-
-		//usort( $educations_data, 'sortEducation');
-
-		// sort experience function
-		/*function sortExperience($a, $b) {
-			$c = strtotime( $a['started'] );
-			$d = strtotime( $b['ended'] );
-			if ( $c == $d ) {
-				if ( $c == $d ) {
-					return 0;
-				}
-				return $c > $d ? -1 : 1;
 			}
-			return $c > $d ? -1 : 1;
-		}*/
+		}
 
 		// experiences
 		$experiences_data = array();
-		foreach ($user->getMeta()->getBackground()->getExperiences() as $experience) {
-			$experiences_data[] = array(
-				'id' => $experience->getId(),
-				'title' => $experience->getTitle(),
-				'company' => $experience->getCompany(),
-				'location' => $experience->getLocation()->getLocation(),
-				'location_id' => $experience->getLocation()->getId(),
-				'started_month' => $experience->getStarted()->format('n'),
-				'ended_month' => $experience->getEnded()->format('n'),
-				'started_year' => $experience->getStarted()->format('Y'),
-				'ended_year' => $experience->getEnded()->format('Y'),
-				'started_text' => $experience->getStarted()->format('F Y'),
-				'ended_text' => $experience->getEnded()->format('F Y')
+		if ( $user->getMeta()->getBackground() ){
+			foreach ($user->getMeta()->getBackground()->getExperiences() as $experience) {
+				$experiences_data[] = array(
+					'id' => $experience->getId(),
+					'title' => $experience->getTitle(),
+					'company' => $experience->getCompany(),
+					'location' => $experience->getLocation()->getLocation(),
+					'location_id' => $experience->getLocation()->getId(),
+					'started_month' => $experience->getStarted()->format('n'),
+					'ended_month' => $experience->getEnded()->format('n'),
+					'started_year' => $experience->getStarted()->format('Y'),
+					'ended_year' => $experience->getEnded()->format('Y'),
+					'started_text' => $experience->getStarted()->format('F Y'),
+					'ended_text' => $experience->getEnded()->format('F Y')
 				);
+			}
 		}
-
-		//usort( $experiences_data, 'sortExperience');
 
 		// skills
 		$skills_data = array();
-		foreach ($user->getMeta()->getBackground()->getSkills() as $skill) {
-			$skills_data[] = array(
-				'id' => $skill->getId(),
-				'skill' => $skill->getSkill()
+		if ( $user->getMeta()->getBackground() ){
+			foreach ($user->getMeta()->getBackground()->getSkills() as $skill) {
+				$skills_data[] = array(
+					'id' => $skill->getId(),
+					'skill' => $skill->getSkill()
 				);
+			}
 		}
 
 		// email
@@ -140,7 +127,7 @@ class ControllerAccountEdit extends Controller {
 			$emails_data[$key] = array(
 				'email' => $email->getEmail(),
 				'primary' => $email->getPrimary() ? 1 : 0,
-				);
+			);
 		}
 
 		// user data
@@ -158,12 +145,12 @@ class ControllerAccountEdit extends Controller {
 			'sext' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
 			'birthday' => $user->getMeta()->getBirthday()->format('d/m/Y'),
 			'birthdayt' => $user->getMeta()->getBirthday()->format('d/m/Y'),
-			'location' => $user->getMeta()->getLocation()->getLocation(),
-			'cityid' => $user->getMeta()->getLocation()->getCityId(),
+			'location' => $user->getMeta()->getLocation() ? $user->getMeta()->getLocation()->getLocation() : '',
+			'cityid' => $user->getMeta()->getLocation() ? $user->getMeta()->getLocation()->getCityId() : '',
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
 			'industryid' => $user->getMeta()->getIndustryId(),
-			'sumary' => $user->getMeta()->getBackground()->getSumary(),
+			'sumary' => $user->getMeta()->getBackground() ? $user->getMeta()->getBackground()->getSumary() : '',
 			'educations' => $educations_data,
 			'experiences' => $experiences_data,
 			'skills' => $skills_data
@@ -172,9 +159,6 @@ class ControllerAccountEdit extends Controller {
 		// orther const
 		$this->data['current_year'] = date('Y');
 		$this->data['before_year'] = $this->data['current_year'] - 100;
-		// print($user->getUsername());
-		// print($user ? 'not null' : 'null');
-		// exit;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/profiles/profiles.tpl';
@@ -226,8 +210,8 @@ class ControllerAccountEdit extends Controller {
 			$this->error['username'] = $this->language->get('error_username');
 		}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
 			$this->error['username'] = $this->language->get('error_username');
-		}elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $this->request->post['username']) ) {
-			$this->error['username'] = $this->language->get('error_username');
+		// }elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $this->request->post['username']) ) {
+		// 	$this->error['username'] = $this->language->get('error_username');
 		}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
 			$this->error['username'] = $this->language->get('error_exist_username');
 		}
@@ -740,6 +724,8 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	public function updateProfiles() {
+		$this->load->language('account/edit');
+
 		$json = array();
 
 		if ( !$this->customer->isLogged() || !$this->validateProfiles() ) {
@@ -764,7 +750,7 @@ class ControllerAccountEdit extends Controller {
 						'type' => $phone->getType(),
 						'phone' => $phone->getPhone(),
 						'visible' => $phone->getVisible()
-						);
+					);
 				}
 				$json['phones_js'] = json_encode( $json['phones'] );
 				$json['emails'] = array();
@@ -772,7 +758,7 @@ class ControllerAccountEdit extends Controller {
 					$json['emails'][$key] = array(
 						'email' => $email->getEmail(),
 						'primary' => $email->getPrimary() ? 1 : 0,
-						);
+					);
 				}
 				$json['emails_js'] = json_encode( $json['emails'] );
 				$json['sex'] = $user->getMeta()->getSex() ? 1 : 0;
