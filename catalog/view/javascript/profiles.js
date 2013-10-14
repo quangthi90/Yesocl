@@ -503,6 +503,10 @@ ProfilesFormControl.prototype.attachEvents = function () {
 
 		$('.profiles-btn-save').addClass( 'disabled' );
 		$('.profiles-btn-cancel').addClass( 'disabled' );
+		var $spin = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $(this).find('i');
+		$old_icon.remove();
+		$(this).prepend($spin);
 
 		var phones_arr = [];
 		var i = 0;
@@ -558,8 +562,6 @@ ProfilesFormControl.prototype.attachEvents = function () {
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
-					$('.profiles-btn-save').removeClass( 'disabled' );
-					$('.profiles-btn-cancel').removeClass( 'disabled' );
 				}else {
 					if ( json.username != null ) {
 						self.form.self.find('[name=\"username\"]').tooltip('destroy');
@@ -807,6 +809,11 @@ ProfilesFormControl.prototype.attachEvents = function () {
 		    	alert(xhr.responseText);
 		 	}
 		});
+
+		$('.profiles-btn-save').removeClass( 'disabled' );
+		$('.profiles-btn-cancel').removeClass( 'disabled' );
+		$spin.remove();
+		$(this).prepend($old_icon);
 	} );
 
 	this.btnCancel.click( function () {
@@ -1102,9 +1109,21 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 	})
 
 	this.btnSave.click(function () {
+		if ( self.btnSave.hasClass('disabled') ) {
+			return false;
+		}
+
+		$('.profiles-btn-save').addClass( 'disabled' );
+		$('.profiles-btn-cancel').addClass( 'disabled' );
+		var $spin = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $(this).find('i');
+		$old_icon.remove();
+		$(this).prepend($spin);
+
 		var data = {
 			'sumary': self.mainBody.find('[name=\"sumary\"]').val()
 		};
+
 		$.ajax({
 			type: 'POST',
 			url: self.self.data('url'),
@@ -1129,6 +1148,11 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 		    	alert(xhr.responseText);
 		 	}
 		});
+
+		$('.profiles-btn-save').removeClass( 'disabled' );
+		$('.profiles-btn-cancel').removeClass( 'disabled' );
+		$spin.remove();
+		$(this).prepend($old_icon);
 	})
 }
 
@@ -1203,6 +1227,13 @@ FormAddEducation.prototype.attachEvents = function () {
 			return false;
 		}
 
+		$('.profiles-btn-save').addClass( 'disabled' );
+		$('.profiles-btn-cancel').addClass( 'disabled' );
+		var $spin = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $(this).find('i');
+		$old_icon.remove();
+		$(this).prepend($spin);
+
 		var data = {
 			'id': self.self.data('id'),
 			'started': self.self.find('[name=\"started\"]').val(),
@@ -1239,6 +1270,11 @@ FormAddEducation.prototype.attachEvents = function () {
 		    	alert(xhr.responseText);
 		 	}
 		});
+
+		$('.profiles-btn-save').removeClass( 'disabled' );
+		$('.profiles-btn-cancel').removeClass( 'disabled' );
+		$spin.remove();
+		$(this).prepend($old_icon);
 	} );
 
 	this.btnCancel.click( function () {
@@ -1420,6 +1456,13 @@ FormAddExperience.prototype.attachEvents = function () {
 			return false;
 		}
 
+		$('.profiles-btn-save').addClass( 'disabled' );
+		$('.profiles-btn-cancel').addClass( 'disabled' );
+		var $spin = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $(this).find('i');
+		$old_icon.remove();
+		$(this).prepend($spin);
+
 		var data = {
 			'id': self.self.data('id'),
 			'started_month': self.self.find('[name=\"started_month\"]').val(),
@@ -1458,6 +1501,11 @@ FormAddExperience.prototype.attachEvents = function () {
 		    	alert(xhr.responseText);
 		 	}
 		});
+
+		$('.profiles-btn-save').removeClass( 'disabled' );
+		$('.profiles-btn-cancel').removeClass( 'disabled' );
+		$spin.remove();
+		$(this).prepend($old_icon);
 	} );
 
 	this.btnCancel.click( function () {
@@ -1627,6 +1675,13 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 			return false;
 		}
 
+		$('.profiles-btn-save').addClass( 'disabled' );
+		$('.profiles-btn-cancel').addClass( 'disabled' );
+		var $spin = $('<i class="icon-refresh icon-spin"></i>');
+		var $old_icon = $(this).find('i');
+		$old_icon.remove();
+		$(this).prepend($spin);
+
 		var data = {
 			'skill': self.inputSkill.val()
 		}
@@ -1661,6 +1716,11 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 				alert( xhr.responseText );
 			}
 		});
+
+		$('.profiles-btn-save').removeClass( 'disabled' );
+		$('.profiles-btn-cancel').removeClass( 'disabled' );
+		$spin.remove();
+		$(this).prepend($old_icon);
 	});
 
 	this.self.find( '.profiles-tabs-item2' ).each( function () {
