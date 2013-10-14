@@ -1240,14 +1240,14 @@ label.in-line{
   margin-right: 0px;
 }
 
-.feed-block .block-header {
+.block-header {
   overflow: hidden;
   margin-bottom: 10px;  
   color: #009281;
   font-weight: bold;
   display: inline-block;
 }
-.feed-block .block-header a.block-title {
+.block-header a.block-title {
   display: block;
   color: #009281;
   text-transform: uppercase;
@@ -1256,7 +1256,7 @@ label.in-line{
   padding: 5px 0px;
   margin-right: 1px;  
 }
-.feed-block .block-header a.block-seemore{
+.block-header a.block-seemore{
   font-size: 22px;
   border-radius: 50%;
   border: 2px solid #009281;
@@ -1267,7 +1267,7 @@ label.in-line{
   margin-left: 15px;
   background-color: #009281;
 }
-.feed-block .block-header a.block-back{
+.block-header a.block-back{
   font-size: 22px;
   border-radius: 50%;
   border: 2px solid #009281;
@@ -1280,22 +1280,22 @@ label.in-line{
   padding: 2px;
   background-color: #009281;
 }
-.feed-block .block-header a.block-seemore i {
+.block-header a.block-seemore i {
   color: #fff;
 }
-.feed-block .block-header a.block-back i {
+.block-header a.block-back i {
   color: #fff;
   padding-left: 5px;
 }
-.feed-block .block-header:hover a{
+.block-header:hover a{
   color: #000;
 }
-.feed-block .block-header:hover a.block-seemore {
+.block-header:hover a.block-seemore {
 }
-.feed-block .block-header:hover a.block-seemore i {
+.block-header:hover a.block-seemore i {
   color: #000;
 }
-.feed-block .block-header:hover a.block-back i {
+.block-header:hover a.block-back i {
   color: #000;
 }
 

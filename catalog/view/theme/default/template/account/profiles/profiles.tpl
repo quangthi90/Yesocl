@@ -20,7 +20,6 @@
 				</div>
 				<div class="clear"></div>
 			</div>
-
 			<div class="profiles-tabs-main">
 				<div class="span7">
 					<div class="row-fluid">
@@ -95,7 +94,6 @@
 				<div class="pull-right profiles-btn-next"><a href="#"><i class="icon-chevron-right"></i></a></div>
 				<div class="clear"></div>
 			</div>
-
 			<div id="profiles-tabs-background-sumary" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_sumary }}">
 				<div class="profiles-tabs-main-header">
 					<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Sumary</a>
