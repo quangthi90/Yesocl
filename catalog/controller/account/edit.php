@@ -207,11 +207,9 @@ class ControllerAccountEdit extends Controller {
 		$this->load->model( 'account/customer' );
 
 		if ( !isset( $this->request->post['username'] ) || !is_string( $this->request->post['username'] ) ) {
-			$this->error['username'] = $this->language->get('error_username');
+			$this->error['username'] = $this->language->get('error_username_empty');
 		}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
 			$this->error['username'] = $this->language->get('error_username');
-		// }elseif ( !preg_match( '/^[A-z]+[0-9]*$/', $this->request->post['username']) ) {
-		// 	$this->error['username'] = $this->language->get('error_username');
 		}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
 			$this->error['username'] = $this->language->get('error_exist_username');
 		}
