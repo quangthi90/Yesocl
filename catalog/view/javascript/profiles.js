@@ -1119,6 +1119,7 @@ TabsBackgroundSumary.prototype.attachEvents = function () {
 					$('.profiles-btn-edit').removeClass( 'disabled' );
 					$('.profiles-btn-add').removeClass( 'disabled' );
 					$('.profiles-btn-remove').removeClass( 'disabled' );
+					self.mainBody.getNiceScroll().resize();
 				}
 			},
 			error: function(xhr, error){
@@ -1177,6 +1178,7 @@ TabsBackgroundEducation.prototype.attachEvents = function () {
 		new FormAddEducation($form);
 
 		self.mainBody.prepend($form);
+		self.mainBody.getNiceScroll().resize();
 	});
 }
 
@@ -1392,6 +1394,7 @@ TabsBackgroundExperience.prototype.attachEvents = function () {
 		new FormAddExperience($form);
 
 		self.mainBody.prepend($form);
+		self.mainBody.getNiceScroll().resize();
 	});
 }
 
@@ -1640,6 +1643,7 @@ TabsBackgroundSkill.prototype.attachEvents = function () {
 					new SkillItem( $item );
 
 					self.mainBody.append( $item );
+					self.mainBody.getNiceScroll().resize();
 
 					self.btnAdd.toggle();
 					self.btnSave.toggle();
