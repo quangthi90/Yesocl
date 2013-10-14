@@ -11,7 +11,6 @@
 .profiles-tabs {
 	float: left;
 	margin-right: 25px;
-	cursor: default !important;
 }
 
 .profiles-tabs-header {
@@ -50,7 +49,42 @@
 	border-top: 2px solid #009B77;
 	-moz-box-shadow: 0px 2px 10px #ccc;
 	-webkit-box-shadow: 0px 2px 10px #ccc;
-	box-shadow: 0px 2px 10px #ccc;
+	box-shadow: 0px 2px 10px #ccc;	
+	cursor: default !important;
+}
+
+.basic-profiles-item {
+	cursor: default !important;
+}
+
+.basic-profiles-item > div {
+	padding: 5px 0px 3px 0px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.basic-profiles-item > div > div:first-child {
+	font-weight: bold;
+}
+.basic-profiles-item .email-item {
+	padding: 3px 0px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #0E0E0E;
+}
+.basic-profiles-item .email-item span{
+	margin-right: 4px;
+}
+.basic-profiles-item .email-item.email-primary i{
+	color: #FFF;
+}
+.basic-profiles-item .phones-item {
+	padding: 3px 0px;
+	font-weight: bold;
+	font-size: 11px;
+	color: #0E0E0E;
+}
+.basic-profiles-item .phones-item span{
+	margin-right: 4px;
 }
 
 #profiles-tabs-information .profiles-tabs-main  {
@@ -145,6 +179,7 @@
 	margin-bottom: 10px;
 	padding: 10px;
 	border: 1px solid #c0c0c0;	
+	cursor: default !important;
 }
 
 .profiles-tabs-item1-content input {
@@ -162,6 +197,7 @@
 	margin-right: 10px;
 	margin-bottom: 10px;	
 	border: 1px solid #9CD49C;
+	cursor: default !important;
 }
 
 .profiles-tabs-item2 .profiles-btn-remove {

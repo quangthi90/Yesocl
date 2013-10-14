@@ -42,7 +42,10 @@
 									<div class="span9">
 										<div class="row-fluid">
 											{% for email in user.emails %}
-											<div class="email-item {% if (email.primary) %}email-primary{% endif %}"><span class="profiles-tabs-value viewers">{{ email.email }}</span>  <span class="label {% if (email.primary) %}label-success{% endif %}">primary</span></div>
+											<div class="email-item {% if (email.primary) %}email-primary{% endif %}">
+											<span class="label {% if (email.primary) %}label-success{% endif %}"><i class="icon-envelope"></i></span>
+											<span class="profiles-tabs-value viewers">{{ email.email }}</span> 
+											</div>
 						        			{% endfor %}
 										</div>
 									</div>
@@ -52,7 +55,10 @@
 									<div class="span9">
 										<div class="row-fluid">
 											{% for phone in user.phones %}
-											<div class="phones-item">{{ phone.phone }}</div>
+											<div class="phones-item">
+												<span><i class="icon-phone"></i></span>
+												<span>{{ phone.phone }}</span>
+											</div>
 						        			{% endfor %}
 										</div>
 									</div>
