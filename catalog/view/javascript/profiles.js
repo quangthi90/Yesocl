@@ -12,15 +12,12 @@ Profiles.prototype.afterCreate = function () {
 
 function TabsInformation($element, contentHeight) {
 	this.self = $element;
-
 	this.contentHeight = contentHeight;
 	this.header = $element.find('.profiles-tabs-header');
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.afterCreate();
-
+	this.mainBody = $element.find('.profiles-tabs-main-body');	
 	this.btnEdit = $element.find('.profiles-btn-edit');
-
 	this.attachEvents();
+	this.afterCreate();
 }
 
 TabsInformation.prototype.afterCreate = function () {
@@ -74,6 +71,7 @@ TabsInformation.prototype.attachEvents = function () {
 		item.remove();
 		self.btnEdit.toggle();
 		self.self.find('.profiles-tabs-main-header').append($control);
+		self.mainBody.getNiceScroll().resize();
 	});
 }
 
@@ -81,9 +79,7 @@ function ProfilesForm( $element ) {
 	this.self = $element;
 	this.btnAddPhone = $element.find('.phones-btn-add');
 	this.btnAddEmail = $element.find('.emails-btn-add');
-
 	this.inputBirthday = $element.find('.inputBirthday .bfh-datepicker');
-
 	this.attachEvents();
 }
 
