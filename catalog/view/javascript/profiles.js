@@ -136,7 +136,6 @@ ProfilesForm.prototype.attachEvents = function () {
 				url: self.self.find('input[name=\"industry\"]').parent().data('autocomplete'),
 				data: { 'filter_industry': query },
 				success: function (json) {
-					alert('alo');
 					var parJSON = JSON.parse(json);
 					var suggestions = [];
 					locations = {};
