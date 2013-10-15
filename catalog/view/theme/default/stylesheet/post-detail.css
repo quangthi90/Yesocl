@@ -1,19 +1,21 @@
 #y-content {
-	padding: 25px 0px 0px 25px;
-	background: #ffffff;
+    padding: 25px 0px 0px 25px;
+    background: #ffffff;
 }
 #post-detail {
-	width: 100%;
-	height: 100%;
-	position: relative;
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 #post-detail  #post-detail-header {
-	position: fixed;
-	top: 0px;
-	left: 120px;
-	right: 0px;	
-	padding: 15px 25px;
-	cursor: default !important;
+    position: fixed;
+    top: 0px;
+    left: 120px;
+    right: 0px; 
+    padding: 15px 25px 10px 25px;
+    cursor: default !important;
+    border-bottom: 1px solid #ddd;
+    background-color: #f0f0f0;
 }
  .post-detail-meta {
     overflow: hidden;
@@ -26,9 +28,19 @@
     background-color: #F3F3F3;
     cursor: default !important;
 }
-.post-detail-meta .post-user-time {    
+#post-detail-header .post-user-time {        
+}
+.post-user-time a {
+    font-weight: bold;
+    font-size: 14px;    
+}
+.post-user-time i {
+    font-size: 16px;
+    margin-right: 5px;
 }
 .post-user-time .post-time {
+    font-style: italic;
+    font-size: 12px;
 }
 .post-detail-meta .post-actions {    
 }
@@ -44,14 +56,18 @@
     -moz-border-radius: 50%;
     border-radius: 50%;
     border: 1px solid #009B77;
+    background-color: #FFF;
     padding: 5px;
     text-align: center;
 }
+.post-actions a.btn-link-round i {
+    color: #009B77;
+}
 .post-actions a.btn-link-round:hover {
-    border: 1px solid #000;
+    background-color: #009B77;
 }
 .post-actions a.btn-link-round:hover i {
-	color: #000;
+    color: #FFF;
 }
 .post-actions .action-text {
     font-weight: normal;
@@ -60,8 +76,8 @@
     line-height: 15px;
 }
 .post-actions .action-text d {
-	font-weight: bold;
-	font-size: 10px;
+    font-weight: bold;
+    font-size: 10px;
 }
 .post-actions .number-viewer {
     position: relative;
@@ -80,38 +96,38 @@
     bottom: 0px;
 }
 .post-actions .number-viewer i {
-	color: #009B77;
-	text-align: center;
-	vertical-align: top;
+    color: #009B77;
+    text-align: center;
+    vertical-align: top;
 }
 .post-detail-meta .post-actions.left {
-	position: absolute;
-	left: 25px;
-	top: 15px;
+    position: absolute;
+    left: 25px;
+    top: 15px;
 }
 .post-detail-meta .post-actions.right {
-	position: absolute;
-	right: 25px;
-	top: 15px;
+    position: absolute;
+    right: 25px;
+    top: 15px;
 }
 .post-detail-meta .post-actions.left a.btn-link-round i {
 }
 .post-actions.left a:hover .action-text,
 .post-actions.right a:hover .action-text{
-	color: #009B77;
+    color: #009B77;
 }
 .post-detail-meta .post-actions.left .action-text {
-	display: inline-block;
-	font-weight: bold;
-	font-size: 13px;
-	margin-left: 5px;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 13px;
+    margin-left: 5px;
 }
 .post-detail-meta .post-actions.right .action-text {
-	display: inline-block;
-	font-weight: bold;  font-size: 13px;
-	margin-right: 5px;
+    display: inline-block;
+    font-weight: bold;  font-size: 13px;
+    margin-right: 5px;
 }
-.post-detail-meta .post-actions.right a.btn-link-round i {	
+.post-detail-meta .post-actions.right a.btn-link-round i {  
 }
 #post-detail-header .post-title-container {
     clear: both;
@@ -119,33 +135,36 @@
 #post-detail-header .post-title {
     padding: 0px;
     margin: 0px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 #post-content {
-	padding: 10px;
-	-webkit-column-width: 500px;    
+    padding: 10px;
+    -webkit-column-width: 500px;    
     -moz-column-width: 500px;
     column-width: 500px;
     -moz-column-gap: 35px;    
     -webkit-column-gap: 35px;  
     column-gap: 35px;  
     position: absolute;    
-	top: 60px;    
-	bottom: 45px;
+    top: 60px;    
+    bottom: 60px;
     left: 0px;  
     text-align: justify;  
     font-size: 15px;
     line-height: 22px;
 }
 #post-content * {
-	line-height: 22px;
+    line-height: 22px;
 }
 #post-content p {
-	white-space: normal;
-	text-align: justify;
+    white-space: normal;
+    text-align: justify;
 }
 #post-content img {
-	-webkit-column-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
     white-space: nowrap;

@@ -17,6 +17,7 @@
 				<div class="post-title-container">
 					<h2 class="post-title">{{ post.title }}</h2>
 					<div class="post-user-time">
+						<i class="icon-bookmark"></i>
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 							{{ post.author }}
 						</a> - 
