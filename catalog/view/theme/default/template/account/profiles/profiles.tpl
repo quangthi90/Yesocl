@@ -102,7 +102,6 @@
 
 	$(document).ready( function () {
 		$('#y-content').niceScroll();
-		var profiles = new Profiles($('#y-main-content'));
 	} );
 
 	window.onresize=function() {

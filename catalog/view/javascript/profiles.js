@@ -1,81 +1,117 @@
-function Profiles($element) {
-	this.self = $element;
-	this.information = new TabsInformation($element.find('#profiles-tabs-information'), $element.height()*9/10);
-	this.background = new TabsBackground($element.find('#profiles-tabs-background'), this.information.self.width(), $element.height()*9/10);
+(function($, document, undefined) {
+	function ProfilesLayout($el) {
+		this.$el = $el;
+		this.$information = $el.find('#profiles-tabs-information');
+		this.$background = $el.find('#profiles-tabs-background');
+		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
+	}
 
-	this.afterCreate();
-}
+	function InfoLabel($el) {
+		this.$el = $el;
+		this.$btn = $el.find('.profiles-btn-edit');
 
-Profiles.prototype.afterCreate = function () {
-	this.self.width(this.information.self.outerWidth() + this.background.self.outerWidth() + 25*2);
-}
+		this.attachEvents();
+	}
 
-function TabsInformation($element, contentHeight) {
-	this.self = $element;
-	this.contentHeight = contentHeight;
-	this.header = $element.find('.profiles-tabs-header');
-	this.mainBody = $element.find('.profiles-tabs-main-body');	
-	this.btnEdit = $element.find('.profiles-btn-edit');
-	this.attachEvents();
-	this.afterCreate();
-}
+	InfoLabel.prototype.attachEvents = function () {
+		var that = this;
 
-TabsInformation.prototype.afterCreate = function () {
-	this.mainBody.height(this.contentHeight - this.header.height() - 30);
-	this.mainBody.niceScroll();
-}
+		this.$btn.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.profile-form').removeClass('hidden');
+		});
+	}
 
-TabsInformation.prototype.attachEvents = function () {
-	var self = this;
+	function InfoForm($el){
+		this.$el = $el;
+		this.url = $el.data('url');
+		this.$btnCancel = $el.find('.profiles-btn-cancel');
+		this.$btnSave = $el.find('.profiles-btn-save');
 
-	this.btnEdit.click(function () {
-		if ( self.btnEdit.hasClass( 'disabled' ) ) {
+		this.attachEvents();
+	}
+
+	InfoForm.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$btnCancel.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.profile-label').removeClass('hidden');
+		});
+
+		this.$btnSave.click(function () {
+			if ( $(this).hasClass( 'disabled' ) ) {
+				return false;
+			}
+			
+			that.data = {
+				'username'		: that.$el.find('[name=\'username\']'),
+				'firstname'		: that.$el.find('[name=\'firstname\']'),
+				'lastname'		: that.$el.find('[name=\'lastname\']'),
+				'emails'		: that.$el.find('[name=\'emails\']'),
+				'phones'		: that.$el.find('[name=\'phones\']'),
+				'sex'			: that.$el.find('[name=\'gender\']'),
+				'birthday'		: that.$el.find('[name=\'birthday\']'),
+				'address'		: that.$el.find('[name=\'address\']'),
+				'location'		: that.$el.find('[name=\'location\']'),
+				'cityid'		: that.$el.find('[name=\'cityid\']'),
+				'industry'		: that.$el.find('[name=\'industry\']'),
+				'industryid'	: that.$el.find('[name=\'industryid\']'),
+			};
+			
+			that.submit(that.$btnSave);
+
 			return false;
-		}
+		});
+	}
 
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
+	InfoForm.prototype.submit = function($button){
+		that = this;
 		
-		var item = self.self.find( '.basic-profiles-item' );
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: this.data,
+			dataType: 'json'
+		});
 
-		var data = {
-			'url': item.data('url'),
-			'username'		: item.data('username'),
-			'firstname'		: item.data('firstname'),
-			'lastname'		: item.data('lastname'),
-			'fullname'		: item.data('fullname'),
-			'emails'		: item.data('emails'),
-			'emails_js'		: JSON.stringify(item.data('emails')),
-			'phones'		: item.data('phones'),
-			'phones_js'		: JSON.stringify(item.data('phones')),
-			'sex'			: item.data('sex'),
-			'sext'			: item.data('sext'),
-			'birthday'		: item.data('birthday'),
-			'birthdayt'		: item.data('birthdayt'),
-			'address'		: item.data('address'),
-			'location'		: item.data('location'),
-			'cityid'		: item.data('cityid'),
-			'industry'		: item.data('industry'),
-			'industryid'	: item.data('industryid')
-		}
-		
-		var $form = $.tmpl( $('#profiles-form'), data );
-		var form = new ProfilesForm( $form );
+		this.triggerProgress($button, promise);
 
-		var $control = $.tmpl( $('#profiles-form-control'));
-		new ProfilesFormControl( $control, form);
+		promise.then(function(data) {
+			if(data.success == 'ok'){
+			}
+		});
+	};
 
-		item.toggle();
-		item.after( $form );
-		item.remove();
-		self.btnEdit.toggle();
-		self.self.find('.profiles-tabs-main-header').append($control);
-		self.mainBody.getNiceScroll().resize();
+	InfoForm.prototype.triggerProgress = function($el, promise)
+	{
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.html($old_icon);
+        };
+        console.log('hehe');
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		new ProfilesLayout($('#y-main-content'));
+
+		// Information
+		$('.profile-label').each(function(){
+			new InfoLabel( $(this) );
+		});
+
+		$('.profile-form').each(function(){
+			new InfoForm( $(this) );
+		});
 	});
-}
+}(jQuery, document));
 
-function ProfilesForm( $element ) {
+/*function ProfilesForm( $element ) {
 	this.self = $element;
 	this.btnAddPhone = $element.find('.phones-btn-add');
 	this.btnAddEmail = $element.find('.emails-btn-add');
@@ -1512,4 +1548,4 @@ SkillItem.prototype.attachEvents = function () {
 			}
 		});
 	});
-}
+}*/

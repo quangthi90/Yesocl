@@ -126,7 +126,7 @@ class ControllerAccountEdit extends Controller {
 		foreach ($user->getEmails() as $key => $email) {
 			$emails_data[$key] = array(
 				'email' => $email->getEmail(),
-				'primary' => $email->getPrimary() ? 1 : 0,
+				'primary' => $email->getPrimary(),
 			);
 		}
 
@@ -138,10 +138,8 @@ class ControllerAccountEdit extends Controller {
 			'lastname' => $user->getMeta()->getLastname(),
 			'fullname' => $user->getFullName(),
 			'emails' => $emails_data,
-			'emails_js' => json_encode( $emails_data ),
 			'phones' => $phones_data,
-			'phones_js' => json_encode( $phones_data ),
-			'sex' => $user->getMeta()->getSex() ? 1 : 0,
+			'sex' => $user->getMeta()->getSex(),
 			'sext' => $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
 			'birthday' => $user->getMeta()->getBirthday()->format('d/m/Y'),
 			'birthdayt' => $user->getMeta()->getBirthday()->format('d/m/Y'),
