@@ -22,6 +22,8 @@
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.en_US.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-datepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.format.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script id="background-sumary-form" type="text/x-jquery-tmpl">
     <textarea name="sumary">${ sumary }</textarea>

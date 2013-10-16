@@ -9,16 +9,6 @@ class ControllerAccountEdit extends Controller {
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
-		$this->data['link_validate_phone'] = $this->url->link('account/edit/validatePhone', '', 'SSL');
-		$this->data['link_validate_email'] = $this->url->link('account/edit/validateEmail', '', 'SSL');
-		$this->data['link_validate_username'] = $this->url->link('account/edit/validateUsername', '', 'SSL');
-		$this->data['link_validate_firstname'] = $this->url->link('account/edit/validateFirstname', '', 'SSL');
-		$this->data['link_validate_lastname'] = $this->url->link('account/edit/validateLastname', '', 'SSL');
-		$this->data['link_validate_sex'] = $this->url->link('account/edit/validateSex', '', 'SSL');
-		$this->data['link_validate_birthday'] = $this->url->link('account/edit/validateBirthday', '', 'SSL');
-		$this->data['link_validate_address'] = $this->url->link('account/edit/validateAddress', '', 'SSL');
-		$this->data['link_validate_location'] = $this->url->link('account/edit/validateLocation', '', 'SSL');
-		$this->data['link_validate_industry'] = $this->url->link('account/edit/validateIndustry', '', 'SSL');
 		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
 		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
 		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
@@ -859,78 +849,6 @@ class ControllerAccountEdit extends Controller {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function autocompleteLocation() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() ) {
-			
-		}elseif ( !isset( $this->request->get['filter_location'] ) || !is_string( $this->request->get['filter_location'] ) ) {
-
-		}elseif ( (utf8_strlen( $this->request->get['filter_location'] ) < 1) || (utf8_strlen( $this->request->get['filter_location'] ) > 32) ) {
-
-		}else {
-			$this->load->model( 'localisation/city' );
-
-			$sort = 'name';
-
-			$data = array(
-				'filter_location' => trim( strtolower( $this->request->get['filter_location'] ) ),
-				// 'sort' => $sort,
-			);
-
-			$cities = $this->model_localisation_city->searchLocationByKeyword( $data );
-			
-			foreach ( $cities as $city ) {
-				$json[] = array(
-					'name' => $city->getLocation(),
-					'id' => $city->getId(),
-				);
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function autocompleteIndustry() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() ) {
-			
-		}elseif ( !isset( $this->request->get['filter_industry'] ) || !is_string( $this->request->get['filter_industry'] ) ) {
-
-		}elseif ( (utf8_strlen( $this->request->get['filter_industry'] ) < 1) || (utf8_strlen( $this->request->get['filter_industry'] ) > 32) ) {
-
-		}else {
-			$this->load->model( 'data/value' );
-			$this->load->model( 'setting/config' );
-			$this->model_setting_config->load( $this->config->get( 'datatype_title' ) );
-
-			$sort = 'name';
-
-			$data = array(
-				'filter_name' => trim( strtolower( $this->request->get['filter_industry'] ) ),
-				//'filter_type_name' => $filter_type_name,
-				'filter_type_code' => $this->config->get( 'datatype_industry' ),
-				//'filter_type' => $filter_type,
-				//'filter_value' => $filter_value,
-				'sort' => $sort,
-				);
-
-			$industries = $this->model_data_value->getValues( $data );
-			
-			foreach ( $industries as $industry ) {
-				$json[] = array(
-					'name' => html_entity_decode( $industry->getName() ),
-					//'type' => $value->getType()->getName(),
-					//'value' => html_entity_decode( $value->getValue() ),
-					'id' => $industry->getId(),
-				);
 			}
 		}
 

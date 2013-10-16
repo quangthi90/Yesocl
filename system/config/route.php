@@ -37,7 +37,10 @@ $_['route']['MakeFriend']		= 'friend/request/makeFriend';
 $_['route']['ConfirmFriend']	= 'friend/request/confirm';
 $_['route']['IgnoreFriend']		= 'friend/request/ignore';
 
-//Upload
+// Upload
 $_['route']['UploadFile'] 		= 'file/upload';
 
+// Data Value
+$_['route']['LocationAutoCompleteRoute']	= 'data/value/locationAutoComplete';
+$_['route']['IndustryAutoCompleteRoute']	= 'data/value/industryAutoComplete';
 ?>

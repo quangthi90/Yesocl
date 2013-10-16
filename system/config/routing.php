@@ -40,4 +40,10 @@ $_['routing']['IgnoreFriend']	= 'friend/ignore/{user_slug}/';
 //Upload
 $_['routing']['UploadFile'] 	= 'upload/';
 
+// Data Value
+$_['routing']['LocationAutoComplete']		= 'data/location/';
+$_['routing']['LocationAutoCompleteRoute']	= 'data/location/{keyword}/';
+$_['routing']['IndustryAutoComplete']		= 'data/industry/';
+$_['routing']['IndustryAutoCompleteRoute']	= 'data/industry/{keyword}/';
+
 ?>

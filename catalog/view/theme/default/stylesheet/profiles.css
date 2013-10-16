@@ -11,6 +11,8 @@
 .profiles-tabs {
 	float: left;
 	margin-right: 25px;
+	height: 100%;
+	overflow: hidden;
 }
 
 .profiles-tabs-header {
@@ -90,6 +92,9 @@
 #profiles-tabs-information .profiles-tabs-main  {
 	padding-right: 0px;
 	padding-left: 0px;
+	height: 90%;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 #profiles-tabs-background-experience, #profiles-tabs-background-skill, #profiles-tabs-background-education {
