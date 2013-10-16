@@ -1,7 +1,7 @@
 <?php
 use Document\District;
 
-Class ModelLocalisationDistrict extends Doctrine {
+Class ModelLocalisationDistrict extends Model {
 	public function addDistrict($name, $data = array(), $status = false) {
 		$district = new District($name, $status);
 

@@ -1,7 +1,8 @@
 <?php
-use Document\User\Post;
+use Document\User\Post,
+	Document\User\Posts;
 
-class ModelUserPost extends Doctrine {
+class ModelUserPost extends Model {
 	/**
 	 * Add Post of User to Database
 	 * 2013/08/29
@@ -50,7 +51,15 @@ class ModelUserPost extends Doctrine {
 			$post->setTitle( $data['title'] );
 		}
 
-		$user->addPost( $post );
+		$posts = $user->getPostData();
+
+		if ( !$posts ){
+			$posts = new Posts();
+			$this->dm->persist( $posts );
+			$posts->setUser( $user );
+		}
+
+		$posts->addPost( $post );
 		
 		$this->dm->flush();
 		
@@ -73,13 +82,13 @@ class ModelUserPost extends Doctrine {
 	 * 	- false: not success
 	 */
 	public function editPost( $post_slug, $data = array(), $thumb = array() ) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array('posts.slug' => $post_slug) );
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $post_slug) );
 
-		if ( !$user ){
+		if ( !$posts ){
 			return false;
 		}
 		
-		$post = $user->getPostBySlug( $data['post_slug'] );
+		$post = $posts->getPostBySlug( $data['post_slug'] );
 
 		if ( !$post ){
 			return false;
@@ -111,18 +120,18 @@ class ModelUserPost extends Doctrine {
 			$query['posts.slug'] = $data['post_slug'];
 		}
 
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( $query );
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( $query );
 
-		if ( !$user ){
+		if ( !$posts ){
 			return null;
 		}
 
 		if ( !empty($data['post_id']) ){
-			return $user->getPostById( $data['post_id'] );
+			return $posts->getPostById( $data['post_id'] );
 		}
 
 		if ( !empty($data['post_slug']) ){
-			return $user->getPostBySlug( $data['post_slug'] );
+			return $posts->getPostBySlug( $data['post_slug'] );
 		}
 
 		return null;

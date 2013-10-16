@@ -139,5 +139,61 @@ class ControllerPostPost extends Controller {
             'like_count' => count($post->getLikerIds())
         )));
     }
+
+    public function getLikers() {
+        $data = array();
+
+        if (isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug'])) {
+            $data['post_slug'] = $this->request->get['post_slug'];
+        } else {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug empty'
+            )));
+        }
+
+        if (isset($this->request->get['post_type']) && !empty($this->request->get['post_type'])) {
+            $data['post_type'] = $this->request->get['post_type'];
+        } else {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type empty'
+            )));
+        }
+
+        if (!empty($this->request->post['page'])) {
+            $data['page'] = $this->request->post['page'];
+        }
+
+        if (isset($this->request->post['limit']) && !empty($this->request->post['limit'])) {
+            $data['limit'] = $this->request->post['limit'];
+        }
+        $this->load->model('branch/post');
+        $post = $this->model_branch_post->getPost($data);
+        if (!$post) {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post not exsisted'
+            )));
+        }
+        $this->load->model('user/user');
+        $users = $this->model_user_user->getUsers(array('user_ids' => $post->getLikerIds()));
+        $this->load->model('tool/image');
+        $likers = array();
+        foreach ($users as $key => $user) {
+            $user = $user->formatToCache();
+            if ($user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar'])) {
+                $avatar = $this->model_tool_image->resize($user['avatar'], 180, 180);
+            } else {
+                $avatar = $this->model_tool_image->getGavatar($user['email'], 180);
+            }
+            $user['avatar'] = $avatar;
+            $user['href_user'] = $this->extension->path('WallPage', array(
+                'user_slug' => $user['slug']
+            ));
+            $likers[] = $user;
+        }
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'users' => empty($likers) ? array() : $likers
+        )));
+    }
 }
 ?>

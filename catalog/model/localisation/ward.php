@@ -1,7 +1,7 @@
 <?php
 use Document\Ward;
 
-Class ModelLocalisationWard extends Doctrine {
+Class ModelLocalisationWard extends Model {
 	public function addWard($name, $status = false) {
 		$ward = new Ward($name, $status);
 

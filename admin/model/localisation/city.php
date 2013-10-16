@@ -1,7 +1,7 @@
 <?php
 use Document\Localisation\City;
 
-class ModelLocalisationCity extends Doctrine {
+class ModelLocalisationCity extends Model {
 	public function addCity( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

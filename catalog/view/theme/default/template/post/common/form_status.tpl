@@ -1,18 +1,27 @@
-{% use '@template/default/template/post/common/post_editor.tpl' %}
+{% block post_common_post_form_status_style %}
+<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
+{% endblock %}
+
 {% block post_common_form_status %}
-	<div class="form-status" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
-		<div class="post_new">
+	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
+				<input type="hidden" name="img-url" class="img-url" value="" />
+			</div>
+			<div class="img-previewer-container">				
+			</div>
+			<div class="y-progress">
+				<div class="bar" style="width: 0%;"></div>
 			</div>
 			<div class="post_tool">
 				<div class="row-fluid">
 					<div class="span8 post_new_control">
-						<a href="#" title="Insert images" id="insert-new-img">
+						<a href="#" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" name="img-attach" class="img-attach" title="Choose image to upload" />
+							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						</a>
-						<a href="#" title="Advance post" id="post_new_adv">
+						<a href="#" title="Advance post" data-mfp-src="#post-advance-popup" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
@@ -23,39 +32,50 @@
  			</div>
 		</div>
 	</div>
-	<div class="popupable" id="post_advance" style="width: 900px; height: 550px; top: 40px; left: 100px;background-color: #fff;display:none;">
-		<a href="#" class="b-close"><i class="icon-remove"></i></a>
+	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
 		<div class="y-dlg">
-			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">	
 				<div class="dlg-title">
-			        <i class="icon-yes"></i> Compose your post  
+			        <i class="icon-yes"></i> New post  
 			    </div>
 			    <div class="dlg-content">
-			    	<div class="alert alert-error top-warning hidden">Warning!!</div>
-			    	<div class="control-group">
-			    		<label for="title" class="control-label">Title</label>
-			    		<div class="controls">
-			    			<input class="status-title" style="width: 845px;" placeholder="Your title" type="text" name="title" id="title">
+			    	<div class="dlg-column upload-container fl" style="width:28%;">
+			    		<label class="control-label">Choose an image for new post</label>
+			    		<input type="hidden" name="img-url" class="img-url" value="" />
+			    		<div class="img-previewer-container" placeholder="Drag an photo here">
+			    			<p class="drop-zone-show">Drag an image here</p>
 			    		</div>
-		    		</div>
-		    		<div class="control-group">
-		    			<label class="control-label">Content</label>
-				    	{{ block('post_common_post_editor') }}
-				    	<div class="y-editor status-content" id="post-adv-editor"></div>
-			    	</div>
-			    	<div class="control-group captcha">
-			    		<label for="captcha" class="control-label">Captcha check</label><div class="controls">
-			    		<img class="captcha-img" src="http://www.captcha.net/duo_logo.png"/>
-		    			<input class="captchainput" placeholder="Insert captcha..." type="text" name="captcha" id="captcha" >
-		    			</div>
-	    			</div>
+			    		<div class="y-progress">
+							<div class="bar" style="width: 0%;"></div>
+						</div>
+			    		<div class="drag-img-upload">			    			
+			    			<a href="#" class="btn btn-yes">
+			    				<span><i class="icon-upload"></i> Choose image</span>
+			    				<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
+			    			</a>
+			    		</div>
+					</div>
+					<div class="dlg-column fr" style="width:70%;">
+						<div class="alert alert-error top-warning hidden">Warning!!</div>
+				    	<div class="control-group">
+				    		<label for="title" class="control-label">Title</label>
+				    		<div class="controls">
+				    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title"
+				    				style="width: 98%;" />
+				    		</div>
+			    		</div>
+			    		<div class="control-group">
+			    			<label class="control-label">Content</label>
+					    	<div class="y-editor status-content" id="post-adv-editor"></div>
+				    	</div>
+					</div>				    	
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
 		                <button type="submit" class="btn btn-yes btn-status">Post</button>
 		            </div>
-			    </div>
+			    </div>		
 			</form>
 		</div>
 	</div>
@@ -112,32 +132,30 @@
 			</div>
 		</div>
 	</div>
+	<div class="hidden" id="uploaded-image-template">
+		<div class="post_image_item">
+			<a href="#" class="image"><img src="${thumbnailUrl}"/></a>
+			<a href="#" class="close"><i class="icon-remove"></i></a>
+		</div>
+	</div>
 	{% endraw %}
 {% endblock %}
 
 {% block post_common_form_status_javascript %}
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.ui.widget.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.load-image.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.canvas-to-blob.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.iframe-transport.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/bootstrap-wysiwyg.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
-<script type="text/javascript">	    
-	$('#post_new_adv').click(function() {
-		$('#post_advance').bPopup( 
-			{
-				follow: [false, false],
-				speed: 300,
-            	transition: 'slideDown',
-            	modalColor : '#000',
-            	opacity: '0.5'
-			}
-		);		
-	});	
+<script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
+<script type="text/javascript">	
 	$('button.btn-reset').click(function() {
-		var form = $(this).parents('form').first(); 
-		if(form.length > 0) {
-			var editor = form.find('.y-editor');
-			editor.html('');
-			editor.focus();
-		}
-	});
+	});	   
 </script>
 {% endblock %}

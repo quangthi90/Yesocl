@@ -1,10 +1,19 @@
 {% block post_common_post_block_list %}
 	<div class="feed-block">
         <div class="block-header">
+        {% if block_info is defined %}
+        {% if is_back_btn is defined and is_back_btn == true %}
+            <a class="block-seemore fl" href="#" onclick="history.go(-1); return false;"> 
+                <i class="icon-angle-left"></i>
+            </a>
+            <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
+        {% else %}
             <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
             <a class="block-seemore fl" href="{{ block_href }}"> 
                 <i class="icon-angle-right"></i>
-            </a>           
+            </a>
+        {% endif %}
+        {% endif %}
         </div>
         <div class="block-content">
             {% if style == 1 %}
@@ -46,6 +55,9 @@
                             <div class="post_virtual_overlay">
                             </div>
                             <div class="post_overlay_wrapper">
+                                <!--div class="post_remove">
+                                    <a href="#" title="Delete"><i class="icon-remove"></i></a>
+                                </div-->
                                 <div class="post_action">
                                     <div class="action_tool">
                                         <a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
@@ -69,13 +81,14 @@
                                     </div>
                                     <div class="who-action">
                                         <a href="#" class="view-list-liker" 
+                                            data-url="{{ path('PostGetLiker', {post_slug: post.slug, post_type: post_type}) }}"
                                             data-view-title="People like this post" 
                                             data-view-type="like" 
                                             data-post-slug="{{ post.slug }}" 
                                             data-post-type="{{ post_type }}">
                                             <d>{{ post.like_count }}</d>
                                         </a>
-                                        <a href="#" class="view-list-commenter" 
+                                        <a href="#" class="view-list-user" 
                                             data-view-title="People comment on this post"  
                                             data-view-type="comment" 
                                             data-post-slug="{{ post.slug }}" 
@@ -93,9 +106,9 @@
                                         </a>
                                     </div>
                                 </div>
-                            </div>                      
+                            </div>
                         </div>
-                    </div>              
+                    </div>
                 </div>
                 {% if style == 1 and loop.index % special == 0 and loop.index != 5 %}
                     {% if special == 2 %}

@@ -1,7 +1,7 @@
 <?php
 use Document\Setting\Config;
 
-class ModelSettingConfig extends Doctrine {
+class ModelSettingConfig extends Model {
 	public function addConfig( $data = array() ) {
 		// Key is required && doesn't exist
 		if ( !isset($data['key']) || empty($data['key']) || $this->isExistKey( $data['key'] ) ){

@@ -1,8 +1,8 @@
 <?php 
 class ControllerPostComment extends Controller {
-	private $error = array();
+    private $error = array();
 
-	public function addComment(){
+    public function addComment(){
         if ( $this->customer->isLogged() ) {
             $data['user_id'] = $this->customer->getId();
         }else {
@@ -98,17 +98,17 @@ class ControllerPostComment extends Controller {
         )));
     }
 
-  	private function validate() {
-    	if ((utf8_strlen($this->request->post['content']) < 1)) {
-      		$this->error['content'] = $this->language->get('error_content');
-    	}
-		
-    	if (!$this->error) {
-      		return true;
-    	} else {
-      		return false;
-    	}
-  	}
+    private function validate() {
+        if ((utf8_strlen($this->request->post['content']) < 1)) {
+            $this->error['content'] = $this->language->get('error_content');
+        }
+        
+        if (!$this->error) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function getComments(){
         $data = array();
@@ -244,6 +244,12 @@ class ControllerPostComment extends Controller {
             
             default:
                 break;
+        }
+
+        if ( $comment == false ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
         }
 
         return $this->response->setOutput(json_encode(array(

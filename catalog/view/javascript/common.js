@@ -23,7 +23,7 @@ function FlexibleElement(el) {
 	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
 	this.openSearch = this.footerBar.find('.search');
 	this.searchTxt = this.openSearch.find('#searchText'); 	
-	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');	
+	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
@@ -91,6 +91,15 @@ FlexibleElement.prototype.attachEvents = function() {
     goLeftBtn.click(function(){
     	m.animate({scrollLeft: 0}, 1000);
     });
+
+    //Popup link of image:
+    $('.img-link-popup').magnificPopup({type:'image'});
+    $('.link-popup').magnificPopup({
+    	type:'inline',
+    	midClick: true,
+    	removalDelay: 300,
+    	mainClass: 'mfp-fade'
+    });
 }
 
 /*
@@ -101,9 +110,14 @@ var marginPostOnWall = 15;
 var marginBlock = 50;
 var minPostEditorWidth = 450;
 var minPostStatusWidth = 350;
+var marginFriendBlockItem = 10;
+var widthFriendBlockItem = 320;
+var heightFriendBlockItem = 85;
 var df_INVIDUAL_BLOCK = 'has-block';
 var df_ACCOUNT_MYWALL = 'account-mywall';
 var df_CATEGORY_SINGLE = 'post-category';
+var df_FRIEND_ACCOUNT = 'account-friend';
+
 function HorizontalBlock(el) {	
 	this.root = el;
 	this.columns = el.find('.column');
@@ -200,20 +214,18 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 		});
 	}
-	else{
-		var heightMax = this.heightMain - 25;
-		var widthM = this.widthMain;
+	else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
+		var heightBlockContent = this.heightMain - 42;
 		var totalWidth = 0;
-		this.feeds.each(function() {
-			$(this).height(heightMax);
-			$(this).css('float','left');
-			$(this).css('margin-right','30px');
-			var headerPost = $(this).children('.post_header').first().outerHeight();
-			var footerPost = $(this).children('.post_footer').first().outerHeight();
-			$(this).children('.post_body').height(heightMax - headerPost - footerPost - 20);
-			totalWidth += $(this).outerWidth() + 30;
-		});
-		this.root.width(totalWidth + 30);
+		var numberRow = Math.floor(heightBlockContent/(heightFriendBlockItem + marginFriendBlockItem));
+		var listBlockItem = this.root.find('.block-content-item');
+		if(listBlockItem.length == 0) {
+			console.log('No friend found !');
+		}
+		var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
+		this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+	}
+	else{		
 	}	
 	this.root.makeContentHorizontalScroll();	
 }
@@ -250,6 +262,132 @@ BlockFeed.prototype.putFeed = function() {
 	}
 }
 
+function SearchBtn( $el ){
+	this.$el			= $el;
+	this.url			= $el.data('url');
+	this.$keyword 		= $el.find('input[name=\'keyword\']');
+	this.$btn 			= $el.find('.btn-search');
+
+	// console.log(this.$btn.attr('class'));
+
+	this.attachEvents();
+}
+
+SearchBtn.prototype.attachEvents = function(){
+	var that = this;
+
+	this.$keyword.keydown(function(e){
+		if (e.which == 13){
+			that.$btn.trigger('click');
+		}
+	});
+
+	this.$btn.click(function(e) {
+		e.preventDefault();
+		
+		if(that.$el.hasClass('disabled')) {
+			return false;
+		}
+
+		url = that.generateUrl();
+
+		if ( url ){
+			location = url;
+		}
+
+		return false;
+	});
+};
+	
+SearchBtn.prototype.generateUrl = function(){
+	var url = this.url;
+			 
+	var search = this.$keyword.val();
+	
+	if (search) {
+		url += encodeURIComponent(search);
+	}
+	
+	return url;
+};
+
+function NotifyFriendBtn( $el ){
+	this.$el			= $el;
+	this.$accept_btn	= $el.find('.btn-accept');
+	this.accept_url		= this.$accept_btn.data('url');
+	this.$ignore_btn	= $el.find('.btn-ignore');
+	this.ignore_url		= this.$ignore_btn.data('url');
+
+	this.attachEvents();
+}
+
+NotifyFriendBtn.prototype.attachEvents = function(){
+	var that = this;
+
+	this.$accept_btn.click(function(e) {
+		e.preventDefault();
+		
+		if(that.$el.hasClass('disabled')) {
+			return false;
+		}
+
+		that.submit( that.$accept_btn, that.accept_url );
+
+		return false;
+	});
+
+	this.$ignore_btn.click(function(e) {
+		e.preventDefault();
+		
+		if(that.$el.hasClass('disabled')) {
+			return false;
+		}
+
+		that.submit( that.$ignore_btn, that.ignore_url );
+
+		return false;
+	});
+};
+	
+NotifyFriendBtn.prototype.submit = function($button, url){
+	var that = this;
+
+	var promise = $.ajax({
+		type: 'POST',
+		url: url,
+		dataType: 'json'
+	});
+
+	this.triggerProgress($button, promise);
+
+	promise.then(function(data) { 
+		if(data.success == 'ok'){			
+			var $group = that.$el.parents('.notification-item').find('.notification-item-count');
+			
+			var count_request = parseInt($group.data('count'), 10) - 1;
+			
+			$group.data('count', count_request);
+
+			$group.html(count_request).addClass('hidden');
+			
+			that.$el.remove();
+		}
+	});	
+};
+
+NotifyFriendBtn.prototype.triggerProgress = function($el, promise){
+	var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+	var $old_icon = $el.find('i');
+	var f        = function() {
+		$spinner.remove();
+		$el.html($old_icon);
+	};
+
+	$el.addClass('disabled').html($spinner);
+
+	promise.then(f, f);
+};
+
 /*
 End Custom List Post
 */
@@ -259,5 +397,13 @@ $(document).ready(function() {
 	$(".timeago").timeago();
 	$(document).bind('HORIZONTAL_POST', function(e) {
 	    new HorizontalBlock($('.has-horizontal'));
+	});
+
+	$('.search-form').each(function(){
+		new SearchBtn( $(this) );
+	});
+
+	$('.notify-actions').each(function(){
+		new NotifyFriendBtn( $(this) );
 	});
 });

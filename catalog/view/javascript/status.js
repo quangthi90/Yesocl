@@ -1,15 +1,11 @@
 (function($, document, undefined) {
 	function Status( $el ){
 		var that = this;
-
 		this.$el		= $el;
 		this.$title		= $el.find('.status-title')
 		this.$content	= $el.find('.status-content');
-
 		this.url		= $el.data('url');
-
 		this.$status_btn	= $el.find('.btn-status');
-
 		this.attachEvents();
 	}
 
@@ -101,29 +97,41 @@
 		promise.then(f, f);
 	};
 
-	function initToolbarBootstrapBindings() {
-        $('a[title]').tooltip({ container: 'body' });
-        $('.dropdown-menu input').click(function () { 
-			return false; 
-		}).change(function () { 
-			$(this).parent('.dropdown-menu').siblings('.dropdown-toggle').dropdown('toggle'); 
-		}).keydown('esc', function () {
-			this.value = ''; 
-			$(this).change(); 
-		});
-        $('[data-role=magic-overlay]').each(function () {
-            var overlay = $(this), target = $(overlay.data('target'));
-            overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset())
-            .width(target.outerWidth()).height(target.outerHeight());            
-        });
-    };
-
 	$(function(){
 		$('.form-status').each(function(){
 			new Status($(this));
-		});
-
-		initToolbarBootstrapBindings();		
-		$('.y-editor').wysiwyg();		
+		});	
+		var firstLoad = 0;
+		$('.y-editor').summernote({
+			height: 250,  
+			focus: true,
+  			toolbar: [
+		    //['style', ['style']], // no style button
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['fontsize', ['fontsize']],
+		    //['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['table', ['table']],
+		    ['height', ['height']],
+		    ['insert', ['picture', 'link']],		    
+		    ['fullscreen', ['fullscreen']],
+		    //['help', ['help']] //no help button
+		  	],
+		  	onfocus: function(e) {
+		  		if(firstLoad != 0){
+		  			$('.dlg-column').eq(0).hide();
+		  			$('.dlg-column').eq(1).width('100%');
+				}
+				firstLoad = 1;  		
+		  	},
+		  	onblur: function(e) {
+		  		var noteEditor = $(this).parent('.note-editor').find('.note-dialog .modal');
+		  		if(noteEditor.length > 0 && noteEditor.hasClass('in')) {
+		  			return;
+		  		}	
+		  		$('.dlg-column').eq(0).width('28%').show();
+	  			$('.dlg-column').eq(1).width('70%');	  		
+		  	}
+		});		
 	});
 }(jQuery, document));

@@ -3,7 +3,7 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelBranchComment extends Doctrine {
+class ModelBranchComment extends Model {
 	/**
 	 * Add new Comment of Post in Branch to Database
 	 * 2013/07/24

@@ -68,6 +68,7 @@ $_['entry_school']          		= 'School:';
 $_['entry_sex']          			= 'Sex:';
 $_['entry_societies']          		= 'Activities and Societies:';
 $_['entry_status']          		= 'Status:';
+$_['entry_sumary']             		= 'Sumary:';
 $_['entry_time_period']          	= 'Time Period:';
 $_['entry_title']          			= 'Title:';
 $_['entry_username']            	= 'Usename:';
