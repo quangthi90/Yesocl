@@ -112,8 +112,8 @@
 									{% for email in user.emails %}
 									<div class="emails-form control-group {% if email.primary == 1 %}email-primary{% endif %}" 
 										data-primary="{{ email.primary }}">
-										<input class="span5" type="text" placeholder="Email" name="emails[{{ loop.index0 }}][email]" value="{{ email.email }}" />
-										<input type="hidden" name="emails[{{ loop.index0 }}][primary]" value="{{ email.primary }}" required="required" /> 
+										<input class="span5 email" type="text" placeholder="Email" name="emails[{{ loop.index0 }}][email]" value="{{ email.email }}" />
+										<input type="hidden" name="emails[{{ loop.index0 }}][primary]" value="{{ email.primary }}" class="primary" /> 
 										<span class="label {% if email.primary == 1 %}label-success{% endif %}">primary</span> 
 										<a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a>
 									</div>
@@ -132,8 +132,8 @@
 									<div class="phones-form control-group" 
 										data-id="{{ phone.id }}" 
 										data-type="{{ phone.type }}">
-										<input class="span5" type="text" placeholder="Input Text" name="phones[{{ loop.index0 }}][phone]" value="{{ phone.phone }}" required="required" /> 
-										<select class="span3" name="phones[{{ loop.index0 }}][type]">
+										<input class="span5 phone" type="text" placeholder="Input Text" name="phones[{{ loop.index0 }}][phone]" value="{{ phone.phone }}" required="required" /> 
+										<select class="span3 type" name="phones[{{ loop.index0 }}][type]">
 										{% for phonetype in phone_types %}
 											<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>
 										{% endfor %}

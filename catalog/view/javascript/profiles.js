@@ -43,20 +43,38 @@
 			if ( $(this).hasClass( 'disabled' ) ) {
 				return false;
 			}
-			
+
+			var emails = [];
+			that.$el.find('.emails-form').each(function(){
+				emails.push({
+					email 	: $(this).find('.email').val(),
+					primary : $(this).find('.primary').val()
+				});
+			})
+
+			var phones = [];
+			that.$el.find('.phones-form').each(function(){
+				phones.push({
+					phone: $(this).find('.phone').val(),
+					type: $(this).find('.type').val()
+				});
+			});
+
+			// console.log(that.$el.attr('class'));
+			// console.log(that.$el.find('.emails-form').val());
 			that.data = {
-				'username'		: that.$el.find('[name=\'username\']'),
-				'firstname'		: that.$el.find('[name=\'firstname\']'),
-				'lastname'		: that.$el.find('[name=\'lastname\']'),
-				'emails'		: that.$el.find('[name=\'emails\']'),
-				'phones'		: that.$el.find('[name=\'phones\']'),
-				'sex'			: that.$el.find('[name=\'gender\']'),
-				'birthday'		: that.$el.find('[name=\'birthday\']'),
-				'address'		: that.$el.find('[name=\'address\']'),
-				'location'		: that.$el.find('[name=\'location\']'),
-				'cityid'		: that.$el.find('[name=\'cityid\']'),
-				'industry'		: that.$el.find('[name=\'industry\']'),
-				'industryid'	: that.$el.find('[name=\'industryid\']'),
+				'username'		: that.$el.find('[name=\'username\']').val(),
+				'firstname'		: that.$el.find('[name=\'firstname\']').val(),
+				'lastname'		: that.$el.find('[name=\'lastname\']').val(),
+				'emails'		: emails,
+				'phones'		: phones,
+				'sex'			: that.$el.find('[name=\'gender\']').val(),
+				'birthday'		: that.$el.find('[name=\'birthday\']').val(),
+				'address'		: that.$el.find('[name=\'address\']').val(),
+				'location'		: that.$el.find('[name=\'location\']').val(),
+				'cityid'		: that.$el.find('[name=\'cityid\']').val(),
+				'industry'		: that.$el.find('[name=\'industry\']').val(),
+				'industryid'	: that.$el.find('[name=\'industryid\']').val(),
 			};
 			
 			that.submit(that.$btnSave);
@@ -91,7 +109,7 @@
             $spinner.remove();
             $el.html($old_icon);
         };
-        console.log('hehe');
+        
         $el.addClass('disabled').html($spinner);
 
         promise.then(f, f);
