@@ -38,8 +38,8 @@ class ControllerAccountRegister extends Controller {
 		
 	}
 	      
-  	public function index() {
-  		
+  	public function index() {  		
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
 		} else {
@@ -69,6 +69,16 @@ class ControllerAccountRegister extends Controller {
       		$this->error['warning'] = $this->language->get('error_exists');
     	}
 		
+		//Check captcha:
+		$this->load->library('recaptcha');
+		$captcha = new Recaptcha();
+		$resp = $captcha->recaptcha_check_answer($_SERVER["REMOTE_ADDR"], 
+											$this->request->post['recaptcha_challenge_field'],
+											$this->request->post['recaptcha_response_field']);											
+        if (!$resp->is_valid) {
+        	$this->error['warning'] = "Security code wasn't entered correctly";
+        }                        
+
     	if (!$this->error) {
       		return true;
     	} else {
