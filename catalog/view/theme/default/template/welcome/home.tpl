@@ -25,7 +25,7 @@
     			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" value="" />
     			<div class="warning hidden">warning</div>
     		</div>
-    		<div class="controls">
+    		<div class="controls controls-row ">
     			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" value="" placeholder="E-mail" />
     			<div class="warning hidden">warning</div>
     		</div>
@@ -34,22 +34,23 @@
     			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" value="" />
     			<div class="warning hidden">Confirm not match!</div>
     		</div>
-    		<div class="controls" style="margin-bottom: 10px;">
+    		<div class="controls controls-row ">
                 <div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;">Birthday</span>
-                	<select required="required" name="day" class="birthday" id="reg-birthay-day">
+                	<select required="required" name="day" class="birthday" id="reg-birthay-day" style="width:100px;">
 	                    <option value="">-- Day --</option>
 	                    {% for i in 1..31 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
-	                <select required="required" name="month" class="birthday" id="reg-birthay-month">
+	                <select required="required" name="month" class="birthday" id="reg-birthay-month"  style="width:100px;">
 	                    <option value="">-- Month --</option>
 	                    {% for i in 1..12 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
-	                <select required="required" name="year" class="birthday" id="reg-birthay-year">
+	                <select required="required" name="year" class="birthday" id="reg-birthay-year"
+	                 style="width:111px;">
 	                	{% set now = "now"|date("Y") %}
 	                    <option value="">-- Year --</option>
 	                    {% for i in now..(now - 100) %}
@@ -59,7 +60,7 @@
 	                <div class="warning hidden">warning</div>
                 </div>                
             </div>
-            <div class="controls">
+            <div class="controls controls-row ">
             	<div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;width: 48px;">Sex</span>
 	                <select required="required" name="sex" id="reg-sex" style="width: 312px;">
@@ -78,9 +79,8 @@
             	</div>    			
     			<div class="warning hidden">Captcha not match!</div>
     		</div>
-            <div class="controls">
-                <label class="checkbox"><input type="checkbox" name="agree" required="required" />I agree Yesocl's policy</label>
-                <br>
+            <div class="controls controls-row ">
+                <label class="checkbox" style="margin-bottom:10px;"><input type="checkbox" name="agree" required="required" />I agree Yesocl's policy</label>
                 <button type="submit" class="btn btn-success btn-reg">Sign up</button>
             </div>
     	</form>
