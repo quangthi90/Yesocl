@@ -20,7 +20,7 @@
             <form action="{{ path('AjaxLogin') }}" method="post" class="row-fluid login-form" data-url="{{ path('Login') }}">
                 <div class="span5">
                     <div class="row-fluid">
-                        <input required="required" name="email" type="email" placeholder="Email"  class="span12 input-welcome" tabindex="1" />
+                        <input required="required" name="email" type="email" placeholder="Email"  class="span12 input-welcome" tabindex="1" autocomplete="off" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <label>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="span5">
                     <div class="row-fluid">
-                        <input required="required" name="password" type="password" placeholder="Password" class="span12 input-welcome" tabindex="2" />
+                        <input required="required" name="password" type="password" placeholder="Password" class="span12 input-welcome" tabindex="2" autocomplete="off" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <a href="{{ path('LostPass') }}">Forgot password!</a>

@@ -70,23 +70,19 @@ class ControllerAccountRegister extends Controller {
     	}else{
     		$this->load->library('recaptcha');
 			$captcha = new Recaptcha();
-
 			$resp = $captcha->recaptcha_check_answer($_SERVER["REMOTE_ADDR"], 
 				$this->request->post['recaptcha_challenge_field'],
 				$this->request->post['recaptcha_response_field']
 			);
-
+			//file_put_contents("D:\\a.txt", $resp->error);
 			if (!$resp->is_valid) {
 	        	$this->error['warning'] = "Security code wasn't entered correctly";
 	        }
 	    }
-        
-
     	if (!$this->error) {
       		return true;
-    	} else {
-      		return false;
-    	}
+    	} 
+    	return false;
   	}	
 }
 ?>

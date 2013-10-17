@@ -21,17 +21,17 @@
     	<form class="reg-form" action="{{ path('AjaxRegister') }}" method="post">
     		<div class="alert alert-error top-warning hidden">Warning!!</div>
     		<div class="controls controls-row">
-    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" value="" />
-    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" value="" />
+    			<input required="required" pattern=".{2,10}" title="2 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" autocomplete="off" />
+    			<input required="required" pattern=".{2,10}" title="2 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" autocomplete="off" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls controls-row ">
-    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" value="" placeholder="E-mail" />
+    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" value="" placeholder="E-mail" autocomplete="off" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls controls-row">
-    			<input required="required" pattern=".{6,20}" title="6 to 20 characters" name="password" type="password" class="span2"  id="password" placeholder="Password" />
-    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" value="" />
+    			<input required="required" pattern=".{6,20}" title="6 to 20 characters" name="password" type="password" class="span2"  id="password" placeholder="Password" autocomplete="off" />
+    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" autocomplete="off" />
     			<div class="warning hidden">Confirm not match!</div>
     		</div>
     		<div class="controls controls-row ">
