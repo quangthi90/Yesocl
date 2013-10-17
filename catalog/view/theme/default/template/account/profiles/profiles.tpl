@@ -25,8 +25,8 @@
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.format.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
-<script id="background-sumary-form" type="text/x-jquery-tmpl">
-    <textarea name="sumary">${ sumary }</textarea>
+<script id="background-summary-form" type="text/x-jquery-tmpl">
+    <textarea name="summary">${ summary }</textarea>
 </script>
 <script id="background-education-form" type="text/x-jquery-tmpl">
 	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-school="${ school }" data-fieldofstudy="${ fieldofstudy }">

@@ -1,4 +1,4 @@
-{% use '@template/default/template/account/profiles/tabs/sumary.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/summary.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/education.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/experience.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/skill.tpl' %}
@@ -14,16 +14,16 @@
 		<div class="pull-right profiles-btn-next"><a href="#"><i class="icon-chevron-right"></i></a></div>
 		<div class="clear"></div>
 	</div>
-	<div id="profiles-tabs-background-sumary" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_sumary }}">
+	<div id="profiles-tabs-background-summary" class="profiles-tabs-main pull-left" data-url="{{ link_update_background_summary }}">
 		<div class="profiles-tabs-main-header">
-			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Sumary</a>
+			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Summary</a>
 			<a class="profiles-btn-edit btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
 			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<div class="background-input-sumary"  data-sumary="{{ user.sumary }}">{{ user.sumary}}</div>
+			<div class="background-input-summary"  data-summary="{{ user.summary }}">{{ user.summary}}</div>
 		</div>
 	</div>
 	<div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_add_education }}">

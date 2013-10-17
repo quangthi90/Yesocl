@@ -3,6 +3,21 @@
 		this.$el = $el;
 		this.$information = $el.find('#profiles-tabs-information');
 		this.$background = $el.find('#profiles-tabs-background');
+		this.$summary = $el.find('#profiles-tabs-background-summary');
+		this.$header = this.$background.find('.profiles-tabs-header');
+
+		var contentHeight = this.$el.height()*9/10;
+		var contentWidth = this.$information.width();
+
+		// Summary
+		var summary_main_body = this.$summary.find('.profiles-tabs-main-body');
+		this.$summary.outerWidth(contentWidth);
+		summary_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		summary_main_body.niceScroll();
+
+		// Background
+		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
+
 		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
 	}
 
@@ -73,7 +88,7 @@
 					type: $(this).find('.type').val()
 				});
 			});
-
+			console.log(phones);
 			that.data = {
 				'username'		: that.$el.find('[name=\'username\']').val(),
 				'firstname'		: that.$el.find('[name=\'firstname\']').val(),
@@ -248,8 +263,7 @@
 		});
 	};
 
-	InfoForm.prototype.triggerProgress = function($el, promise)
-	{
+	InfoForm.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
         var $old_icon = $el.find('i');
         var f        = function() {

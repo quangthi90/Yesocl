@@ -287,7 +287,7 @@
 								<input class="span5 phone" type="text" placeholder="Input Text" name="phones[${ $index }][phone]" value="${ $value.phone }" required="required" /> 
 								<select class="span3 type" name="phones[${ $index }][type]">
 								{% for phonetype in phone_types %}
-									<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>
+									<option value="{{ phonetype.code }}" {% raw %}{{if $value.type == '{% endraw %}{{ phonetype.code }}{% raw %}'}}{% endraw %}selected="selected"{% raw %}{{/if}}{% endraw %}>{{ phonetype.text }}</option>
 								{% endfor %}
 								</select> 
 								<a class="btn btn-danger btn-remove phones-btn-remove" href="#"><i class="icon-trash"></i></a>
@@ -365,8 +365,8 @@
 </script>
 <script id="profiles-phone-form" type="text/x-jquery-tmpl">
     <div class="phones-form control-group" data-url="{{ link_validate_phone }}">
-    	<input class="span5" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> 
-    	<select class="span3" name="phones[${ index }][type]">
+    	<input class="span5 phone" type="text" placeholder="Input Text" name="phones[${ index }][phone]"/> 
+    	<select class="span3 type" name="phones[${ index }][type]">
     	{% for phonetype in phone_types %}
     		<option value="{{ phonetype.code }}">{{ phonetype.text }}</option>
     	{% endfor %}
@@ -376,8 +376,8 @@
 </script>
 <script id="profiles-email-form" type="text/x-jquery-tmpl">
     <div class="emails-form control-group" data-url="{{ link_validate_email }}">
-    	<input class="span5" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" />
-    	<input type="hidden" name="emails[${ index }][primary]" value="0" /> 
+    	<input class="span5 email" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" />
+    	<input class="primary" type="hidden" name="emails[${ index }][primary]" value="0" /> 
     	<span class="label primary-email-btn">primary</span> 
     	<a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a>
     </div>
@@ -437,7 +437,7 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Sex</div>
+					<div class="span2 offset1">Gender</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ sext }</span>
 					</div>
