@@ -18,38 +18,39 @@
         Join <strong>YESOCL.com</strong>         
     </div>
     <div class="frm-content">
-    	<form class="reg-form" action="{{ action }}" method="post">
+    	<form class="reg-form" action="{{ path('AjaxRegister') }}" method="post">
     		<div class="alert alert-error top-warning hidden">Warning!!</div>
     		<div class="controls controls-row">
-    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" value="Bommer" />
-    			<input required="required" pattern=".{3,10}" title="3 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" value="Luu" />
+    			<input required="required" pattern=".{2,10}" title="2 to 10 characters" name="firstname" type="text" class="span2" id="reg-first-name" placeholder="First Name" autocomplete="off" />
+    			<input required="required" pattern=".{2,10}" title="2 to 10 characters" name="lastname" type="text" class="span2"  id="reg-last-name" placeholder="Last Name" autocomplete="off" />
     			<div class="warning hidden">warning</div>
     		</div>
-    		<div class="controls">
-    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" value="user1@test.com" placeholder="E-mail" />
+    		<div class="controls controls-row ">
+    			<input required="required" name="email" type="email" class="input-block-level" id="reg-email" value="" placeholder="E-mail" autocomplete="off" />
     			<div class="warning hidden">warning</div>
     		</div>
     		<div class="controls controls-row">
-    			<input required="required" pattern=".{6,20}" title="6 to 20 characters" name="password" type="password" class="span2"  id="password" placeholder="Password" />
-    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" value="123456" />
+    			<input required="required" pattern=".{6,20}" title="6 to 20 characters" name="password" type="password" class="span2"  id="password" placeholder="Password" autocomplete="off" />
+    			<input required="required" name="confirm" type="password" class="span2"  id="reg-password" placeholder="Re-type Password" autocomplete="off" />
     			<div class="warning hidden">Confirm not match!</div>
     		</div>
-    		<div class="controls" style="margin-bottom: 10px;">
+    		<div class="controls controls-row ">
                 <div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;">Birthday</span>
-                	<select required="required" name="day" class="birthday" id="reg-birthay-day">
+                	<select required="required" name="day" class="birthday" id="reg-birthay-day" style="width:100px;">
 	                    <option value="">-- Day --</option>
 	                    {% for i in 1..31 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
-	                <select required="required" name="month" class="birthday" id="reg-birthay-month">
+	                <select required="required" name="month" class="birthday" id="reg-birthay-month"  style="width:100px;">
 	                    <option value="">-- Month --</option>
 	                    {% for i in 1..12 %}
 	                    <option>{{ i }}</option>
 	                    {% endfor %}
 	                </select>
-	                <select required="required" name="year" class="birthday" id="reg-birthay-year">
+	                <select required="required" name="year" class="birthday" id="reg-birthay-year"
+	                 style="width:111px;">
 	                	{% set now = "now"|date("Y") %}
 	                    <option value="">-- Year --</option>
 	                    {% for i in now..(now - 100) %}
@@ -59,7 +60,7 @@
 	                <div class="warning hidden">warning</div>
                 </div>                
             </div>
-            <div class="controls">
+            <div class="controls controls-row ">
             	<div class="input-prepend">
                 	<span class="add-on" style= "height: 18px;width: 48px;">Sex</span>
 	                <select required="required" name="sex" id="reg-sex" style="width: 312px;">
@@ -71,9 +72,15 @@
 	                <div class="warning hidden">warning</div>
             	</div>
             </div>
-            <div class="controls">
-                <label class="checkbox"><input type="checkbox" name="agree" required="required" />I agree Yesocl's policy</label>
-                <br>
+            <div class="controls controls-row captcha-row">
+            	<label style="font-weight: bold;font-size: 14px;">Security Check</label>
+            	<div class="captcha-container">
+            		{{ recaptcha_html | raw }}	
+            	</div>    			
+    			<div class="warning hidden">Captcha not match!</div>
+    		</div>
+            <div class="controls controls-row ">
+                <label class="checkbox" style="margin-bottom:10px;"><input type="checkbox" name="agree" required="required" />I agree Yesocl's policy</label>
                 <button type="submit" class="btn btn-success btn-reg">Sign up</button>
             </div>
     	</form>
