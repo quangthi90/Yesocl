@@ -1,7 +1,7 @@
 <div id="y-header" class="outer-30">
     <div class="row-fluid">
         <div id="y-logo" class="span3">
-            <a href="{{ action.home }}"><img src="image/template/logo.png" style="width:160px;" /></a>
+            <a href="{{ path('WelcomePage') }}"><img src="{{ asset_img('template/logo.png') }}" style="width:160px;" /></a>
         </div>
         <div class="span4">
             <div class="row-fluid" id="y-welcome-menu">
@@ -17,10 +17,10 @@
             </div>
         </div>
         <div class="span5 y-welcome-login">
-            <form action="{{ action.login }}" method="post" class="row-fluid login-form" data-url="{{ action.login_page }}">
+            <form action="{{ path('AjaxLogin') }}" method="post" class="row-fluid login-form" data-url="{{ path('Login') }}">
                 <div class="span5">
                     <div class="row-fluid">
-                        <input required="required" name="email" type="email" placeholder="Email"  class="span12 input-welcome" tabindex="1" />
+                        <input required="required" name="email" type="email" placeholder="Email"  class="span12 input-welcome" tabindex="1" autocomplete="off" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
                         <label>
@@ -30,10 +30,10 @@
                 </div>
                 <div class="span5">
                     <div class="row-fluid">
-                        <input required="required" name="password" type="password" placeholder="Password" class="span12 input-welcome" tabindex="2" />
+                        <input required="required" name="password" type="password" placeholder="Password" class="span12 input-welcome" tabindex="2" autocomplete="off" />
                     </div>
                     <div class="row-fluid text-welcome-login-bottom">
-                        <a href="{{ action.forgot_pass }}">Forgot password!</a>
+                        <a href="{{ path('LostPass') }}">Forgot password!</a>
                     </div>
                 </div>
                 <div class="span2 button-login-welcome">
