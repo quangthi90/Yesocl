@@ -7,7 +7,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<div class="background-input-summary">{{ user.summary}}</div>
+			<div class="background-input-summary">{{ user.summary }}</div>
 		</div>
 	</div>
 	<div class="summary-form hidden">
@@ -18,7 +18,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<textarea style="height: 100%; width: 98%;" name="summary">{{ user.summary}}</textarea>
+			<textarea style="height: 100%; width: 98%;" name="summary">{{ user.summary }}</textarea>
 		</div>
 	</div>
 </div>

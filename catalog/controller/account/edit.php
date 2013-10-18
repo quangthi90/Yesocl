@@ -138,7 +138,7 @@ class ControllerAccountEdit extends Controller {
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
 			'industryid' => $user->getMeta()->getIndustryId(),
-			'sumary' => $user->getMeta()->getBackground() ? $user->getMeta()->getBackground()->getSumary() : '',
+			'summary' => $user->getMeta()->getBackground() ? $user->getMeta()->getBackground()->getSumary() : '',
 			'educations' => $educations_data,
 			'experiences' => $experiences_data,
 			'skills' => $skills_data

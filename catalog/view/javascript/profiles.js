@@ -343,20 +343,6 @@
 				that.$input.val(that.data.sumary);
 				that.$el.parent().find('.background-input-summary').html(that.data.sumary);
 				that.$btnCancel.trigger('click');
-			}else{
-				that.$input.tooltip('destroy');
-				that.$input.parent().removeClass('success');
-				that.$input.parent().addClass('error');
-				that.$input.tooltip({
-					animation: true,
-					html: false,
-					placement: 'top',
-					selector: true,
-					title: data.message,
-					trigger:'hover focus',
-					delay:0,
-					container: false
-				});
 			}
 		});
 	};
