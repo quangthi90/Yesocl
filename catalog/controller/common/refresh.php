@@ -15,6 +15,7 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->load->model( 'branch/branch' );
+		$this->load->model( 'friend/friend' );
 		$this->load->model( 'cache/post' );
 		$this->load->model('tool/image');
 
@@ -24,10 +25,11 @@ class ControllerCommonRefresh extends Controller {
 
 		$branch_ids = array_keys($branchs);
 		$user_ids = array( $this->customer->getId() );
+		$friend_ids = array_keys($this->model_friend_friend->getListFriendIds());
 
 		$posts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
-			'type_ids' => array_merge($branch_ids, $user_ids),
+			'type_ids' => array_merge($branch_ids, $user_ids, $friend_ids),
 		));
 		
 		$post_count = count($posts);
