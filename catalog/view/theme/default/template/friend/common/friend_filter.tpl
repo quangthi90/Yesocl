@@ -4,7 +4,7 @@
             <strong>{{ friends|length }} </strong> friends
         </div>
         <div class="friend-search">
-            <input type="text" placeholder="quick search ..." size="50" name="friend-key" id="search-input" />
+            <input type="text" placeholder="quick search ..." size="50" name="friend-key" id="search-input" data-url="{{ link_filter_friends }}" />
             <a href="#" class="friend-search-btn"><i class="icon-search"></i></a>
         </div>
         <ul class="friend-conditions">
@@ -42,5 +42,5 @@
 {% endblock %}
 
 {% block friend_common_friend_filter_javascript %}
-    
+    <script type="text/javascript" src="{{ asset_js('friend_filter.js') }}"></script>
 {% endblock %}

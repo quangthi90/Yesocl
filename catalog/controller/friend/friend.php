@@ -23,6 +23,8 @@ class ControllerFriendFriend extends Controller {
 			return false;
 		}
 
+		$this->data['link_filter_friends'] = $this->url->link( 'friend/friend/getListFriends', '', 'SSL' );
+
 		$user_temp = $user->formatToCache();
 
 		if ( !empty($user_temp['avatar']) ){
@@ -97,6 +99,27 @@ class ControllerFriendFriend extends Controller {
 		);
 										
 		$this->response->setOutput($this->twig_render());
+	}
+
+	public function getListFriends() {
+		$json = array();
+
+		if ( $this->customer->isLogged() ) {
+			$data = array();
+
+			if ( isset( $this->request->post['filter_name'] ) && (strlen( $this->request->post['filter_name'] ) > 0) ) {
+				$data['filter_name'] = $this->request->post['filter_name'];
+			}
+
+			if ( count( $data ) > 0 ) {
+				$this->load->model( 'friend/friend' );
+
+				$json['success'] = 'ok';
+				$json['friends'] = $this->model_friend_friend->getListFriends( $data );
+			} 
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
