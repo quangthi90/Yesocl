@@ -1,54 +1,28 @@
-{% block profiles_tabs_step3 %}
-<div class="row-fluid profiles-box profiles-step3">
-	<div class="span10 offset1">
-		<div class="row-fluid profiles-box-header">
-			<div class="span5 profiles-box-header-title">BACKGROUND</div>
-			<div class="span7">
-				<a href="#myCarousel" data-slide="next" class="btn profiles-box-header-next"><i class="icon-chevron-sign-right"></i></a>
-				<a href="#myCarousel" data-slide="prev" class="btn profiles-box-header-next"><i class="icon-chevron-sign-left"></i></a>
-			</div>
+{% block profiles_tabs_summary %}
+<div id="profiles-tabs-background-summary" class="profiles-tabs-main pull-left" data-url="{{ path('ProfileEditSummary') }}">
+	<div class="summary-label">
+		<div class="profiles-tabs-main-header">
+			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Summary</a>
+			<a class="profiles-btn-edit btn profiles-btn pull-right"><i class="icon-pencil"></i></a>
+			<div class="clear"></div>
 		</div>
-
-		<div class="row-fluid profiles-box-content">
-			<div class="row-fluid">
-				<a href="#" class="btn profiles-box-content-title span3">Experiences</a>
-				<a class="btn profiles-btn-edit" href="#"><i class="icon-pencil"></i></a>
-			</div>
-
-			<div class="row-fluid">
-				<div class="profiles-box-content-main">
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="profiles-tabs-main-body">
+			<div class="background-input-summary">{{ user.summary}}</div>
+		</div>
+	</div>
+	<div class="summary-form hidden">
+		<div class="profiles-tabs-main-header">
+			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i>  Summary</a>
+			<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+			<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
+			<div class="clear"></div>
+		</div>
+		<div class="profiles-tabs-main-body">
+			<textarea style="height: 100%; width: 98%;" name="summary">{{ user.summary}}</textarea>
 		</div>
 	</div>
 </div>
 {% endblock %}
 
-{% block profiles_tabs_step3_javascript %}
+{% block profiles_tabs_summary_javascript %}
 {% endblock %}

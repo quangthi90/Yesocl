@@ -398,7 +398,9 @@ class ControllerAccountEdit extends Controller {
 	}
 
 	private function validateBackgroundSumary() {
-		if ((utf8_strlen($this->request->post['sumary']) < 1)) {
+		$this->load->language('account/edit');
+
+		if ((utf8_strlen($this->request->post['sumary']) < 50)) {
 			$this->error['sumary'] = $this->language->get('error_sumary');
 		}
 

@@ -250,7 +250,7 @@
 		this.triggerProgress($button, promise);
 
 		promise.then(function(data) {
-			if ( data.message != null & data.message == 'success' ) {
+			if ( data.message != null && data.message == 'success' ) {
 				var $profile_label = $.tmpl($('#profiles-label'), data);
 
 				var $profile_form = $.tmpl($('#profiles-form'), data);
@@ -276,6 +276,104 @@
         promise.then(f, f);
 	};
 
+	function SummaryLabel($el){
+		this.$el = $el;
+		this.$btn = $el.find('.profiles-btn-edit');
+
+		this.attachEvents();
+	}
+
+	SummaryLabel.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$btn.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.summary-form').removeClass('hidden');
+		});
+	}
+
+	function SummaryForm($el){
+		this.$el = $el;
+		this.$input = $el.find('[name=\"summary\"]');
+		this.$btnCancel = $el.find('.profiles-btn-cancel');
+		this.$btnSave = $el.find('.profiles-btn-save');
+		
+		this.url = $el.parent().data('url');
+
+		this.attachEvents();
+	}
+
+	SummaryForm.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$btnCancel.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.summary-label').removeClass('hidden');
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass('disabled') || that.$input.val().length < 50 ) {
+				return false;
+			}
+
+			that.data = {
+				'sumary': that.$input.val()
+			};
+
+			that.submit(that.$btnSave);
+
+			return false;
+		});
+	}
+
+	SummaryForm.prototype.submit = function($button){
+		that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: this.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				that.$input.val(that.data.sumary);
+				that.$el.parent().find('.background-input-summary').html(that.data.sumary);
+				that.$btnCancel.trigger('click');
+			}else{
+				that.$input.tooltip('destroy');
+				that.$input.parent().removeClass('success');
+				that.$input.parent().addClass('error');
+				that.$input.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.message,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+			}
+		});
+	};
+
+	SummaryForm.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
 	$(function(){
 		new ProfilesLayout($('#y-main-content'));
 
@@ -286,6 +384,15 @@
 
 		$('.profile-form').each(function(){
 			new InfoForm( $(this) );
+		});
+
+		// Summary
+		$('.summary-label').each(function(){
+			new SummaryLabel( $(this) );
+		});
+
+		$('.summary-form').each(function(){
+			new SummaryForm( $(this) );
 		});
 	});
 }(jQuery, document));
