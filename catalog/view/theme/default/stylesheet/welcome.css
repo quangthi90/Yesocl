@@ -288,40 +288,40 @@ a:hover, a.active
 #y-header #y-welcome-menu .menu-active > a{
     color: #000;
 }
-
+/*
 #y-header .y-welcome-login,
-#y-header .y-welcome-login .text-welcome-login-bottom > a{
+.y-welcome-login .text-welcome-login-bottom > a{
     color: #fff;
 }
 
-#y-header .y-welcome-login .text-welcome-login-top,
-#y-header .y-welcome-login .text-welcome-login-bottom,
-#y-header .y-welcome-login .text-welcome-login-bottom > a{
+.y-welcome-login .text-welcome-login-top,
+.y-welcome-login .text-welcome-login-bottom,
+.y-welcome-login .text-welcome-login-bottom > a{
     color: #BABABA;
 }
 
-#y-header .y-welcome-login .text-welcome-login-top{
+.y-welcome-login .text-welcome-login-top{
     font-size: 12px;
 }
 
-#y-header .y-welcome-login .text-welcome-login-bottom,
-#y-header .y-welcome-login .text-welcome-login-bottom > label{
+.y-welcome-login .text-welcome-login-bottom,
+.y-welcome-login .text-welcome-login-bottom > label{
     font-size: 11px;
 }
 
-#y-header .y-welcome-login .text-welcome-login-bottom > label{
+.y-welcome-login .text-welcome-login-bottom > label{
     cursor: pointer;
 }
 
-#y-header .y-welcome-login .text-welcome-login-bottom > a:hover{
+.y-welcome-login .text-welcome-login-bottom > a:hover{
     text-decoration: underline;
 }
 
-#y-header .y-welcome-login .button-login-welcome{
+.y-welcome-login .button-login-welcome{
     line-height: 70px;
 }
 
-#y-header .y-welcome-login .button-login-welcome > button{
+.y-welcome-login .button-login-welcome > button{
     height: 22px;
     line-height: 12px;
     padding: 4px 7px;
@@ -329,14 +329,68 @@ a:hover, a.active
     cursor: pointer;
 }
 
-#y-header .y-welcome-login .input-welcome{
+.y-welcome-login .input-welcome{
     margin-top: 23px;
     margin-bottom: 2px;
     height: 22px;
     min-height: 22px;
     padding: 2px 6px;
 }
+*/
 
+.y-welcome-login  {
+    line-height: 70px;
+    text-align: right;
+}
+.y-welcome-login a.btn {
+    color: #FFF;
+}
+.y-welcome-login a.btn i {
+    margin-right: 5px;
+}
+.y-welcome-login a.btn:hover i{
+    color: #000;
+}
+
+#login-form-container {
+    z-index: 10000;
+    position: absolute;
+    right: 5px;
+    background: #1A1919;
+    padding: 20px;
+}
+
+#login-form-container label {
+    display: inline-block;
+    color: #fff;
+}
+#login-form-container a.link-login {
+    float: right;
+    color: #fff;
+    font-weight: bold;  
+    font-size: 11px; 
+}
+#login-form-container a.link-login:hover {
+    text-decoration: underline;
+}
+#login-form-container input.input-welcome {
+    height: 25px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
+#login-form-container span.add-on {
+    line-height: 25px;
+    height: 25px;
+}
+#login-form-container .row-fluid {
+    padding: 5px 0px;
+}
+#login-form-container .btn-container {
+    text-align: center;
+    margin: 10px 0px 0px 0px;
+    padding-bottom: 0px;
+}
 
 /*--------------------------------------------------------------------
     CONTENT
