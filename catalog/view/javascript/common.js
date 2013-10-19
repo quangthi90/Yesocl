@@ -519,9 +519,6 @@ $(document).ready(function() {
 	new FlexibleElement($(this));
 	new HorizontalBlock($('.has-horizontal'));
 	$(".timeago").timeago();
-	$(document).bind('HORIZONTAL_POST', function(e) {
-	    new HorizontalBlock($('.has-horizontal'));
-	});
 
 	//$('.search-form').each(function(){
 	//	new SearchBtn( $(this) );

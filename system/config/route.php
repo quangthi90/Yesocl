@@ -17,11 +17,20 @@ $_['route']['CommentLike']		= 'post/comment/like';
 $_['route']['CommentGetLiker']	= 'post/comment/getLikers';
 
 // Page
+$_['route']['WelcomePage']		= '';
 $_['route']['RefreshPage']		= 'common/refresh';
 $_['route']['HomePage']			= 'common/home';
 $_['route']['WallPage']			= 'account/account';
 $_['route']['ChangePassword']	= 'account/password';
 $_['route']['Logout']			= 'account/logout';
+
+$_['route']['Login']			= 'account/login';
+$_['route']['LostPass']			= 'account/forgotten';
+
+// Ajax
+$_['route']['AjaxLogin']		= 'account/login/login';
+$_['route']['AjaxRegister']		= 'account/register/register';
+
 $_['route']['SearchPage']		= 'common/search';
 $_['route']['Search']			= 'common/search';
 $_['route']['ChangeAvatar']		= 'account/avatar';
