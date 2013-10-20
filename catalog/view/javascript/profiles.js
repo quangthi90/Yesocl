@@ -3,7 +3,10 @@
 		this.$el = $el;
 		this.$information = $el.find('#profiles-tabs-information');
 		this.$background = $el.find('#profiles-tabs-background');
+		
 		this.$summary = $el.find('#profiles-tabs-background-summary');
+		this.$education = $el.find('#profiles-tabs-background-education');
+		
 		this.$header = this.$background.find('.profiles-tabs-header');
 
 		var contentHeight = this.$el.height()*9/10;
@@ -14,6 +17,12 @@
 		this.$summary.outerWidth(contentWidth);
 		summary_main_body.outerHeight(contentHeight - this.$header.height() - 30);
 		summary_main_body.niceScroll();
+
+		// Education
+		var education_main_body = this.$education.find('.profiles-tabs-main-body');
+		this.$education.outerWidth(contentWidth);
+		education_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		education_main_body.niceScroll();
 
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
@@ -360,6 +369,57 @@
         promise.then(f, f);
 	};
 
+	function Education($el){
+		this.$el 			= $el;
+		this.$formAdd 		= $el.find('.background-education-form-add');
+		
+		this.$btnAdd 		= $el.find('.profiles-btn-add');
+		this.$btnSave 		= $el.find('.profiles-btn-save');
+		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
+		this.$btnEdit 		= $el.find('.profiles-btn-edit');
+		this.$btnRemove 	= $el.find('.profiles-btn-remove');
+
+		this.$started 		= this.$formAdd.find('[name=\"started\"]');
+		this.$ended 		= this.$formAdd.find('[name=\"ended\"]');
+		this.$degree 		= this.$formAdd.find('[name=\"degree\"]');
+		this.$school 		= this.$formAdd.find('[name=\"school\"]');
+		this.$fieldofstudy 	= this.$formAdd.find('[name=\"fieldofstudy\"]');
+
+		this.attachEvents();
+	}
+
+	Education.prototype.attachEvents = function(){
+		that = this;
+
+		this.$btnAdd.click(function(){
+			that.$formAdd.removeClass('hidden');
+		});
+
+		this.$btnCancel.click(function(){
+			that.$formAdd.addClass('hidden').find('input').each(function(){
+				$(this).val('');
+			});
+
+			that.$started.val('0');
+			that.$ended.val('0');
+
+			that.$el.find('.education-item').removeClass('hidden');
+		});
+
+		this.$btnEdit.click(function(){
+			var $item = $(this).parents('.education-item');
+
+			that.$started.val( $item.data('started') );
+			that.$ended.val( $item.data('ended') );
+			that.$degree.val( $item.data('degree') );
+			that.$school.val( $item.data('school') );
+			that.$fieldofstudy.val( $item.data('fieldofstudy') );
+
+			$item.addClass('hidden');
+			that.$formAdd.removeClass('hidden');
+		});
+	}
+
 	$(function(){
 		new ProfilesLayout($('#y-main-content'));
 
@@ -379,6 +439,11 @@
 
 		$('.summary-form').each(function(){
 			new SummaryForm( $(this) );
+		});
+
+		// Education
+		$('.education-label').each(function(){
+			new Education( $(this) );
 		});
 	});
 }(jQuery, document));
