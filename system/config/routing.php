@@ -18,30 +18,20 @@ $_['routing']['CommentGetLiker']			= '{post_type}/post/{post_slug}/comment/{comm
 
 // Page
 $_['routing']['RefreshPage'] 				= 'what-s-new/';
-$_['routing']['WelcomePage']	= '';
+$_['routing']['WelcomePage']				= '';
 $_['routing']['HomePage']	 				= 'home/';
 $_['routing']['WallPage']	 				= 'wall-page/{user_slug}/';
 $_['routing']['ChangePassword']				= 'change-password/';
 $_['routing']['Logout']						= 'logout/';
 $_['routing']['SearchPage']					= 'search/';
 $_['routing']['Search']						= 'search/{keyword}/';
-$_['routing']['Login']			= 'login';
+$_['routing']['Login']						= 'login';
 $_['routing']['ChangeAvatar']				= 'change-avatar/';
-$_['routing']['LostPass']		= 'lost_password';
+$_['routing']['LostPass']					= 'lost_password';
 
 // Ajax
-$_['routing']['AjaxLogin']		= 'login/ajax';
-$_['routing']['AjaxRegister']	= 'register/ajax';
-
-$_['routing']['RefreshPage'] 	= 'what-s-new/';
-$_['routing']['HomePage']	 	= 'home/';
-$_['routing']['WallPage']	 	= 'wall-page/{user_slug}/';
-$_['routing']['ChangePassword']	= 'change-password/';
-$_['routing']['Logout']			= 'logout/';
-$_['routing']['SearchPage']		= 'search/';
-$_['routing']['Search']			= 'search/{keyword}/';
-$_['routing']['ChangeAvatar']	= 'change-avatar/';
-$_['routing']['ProfilePage']	= 'profile/edit/';
+$_['routing']['AjaxLogin']					= 'login/ajax';
+$_['routing']['AjaxRegister']				= 'register/ajax';
 
 // Profile
 $_['routing']['ProfilePage']				= 'profile/edit/';
