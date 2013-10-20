@@ -13,7 +13,8 @@
 		this.$year		= $el.find('select[name=\'year\']');
 		this.$sex		= $el.find('select[name=\'sex\']');
 		this.$agree		= $el.find('input[name=\'agree\']');
-
+		this.$recaptcha_challenge_field = $el.find('input#recaptcha_challenge_field');
+		this.$recaptcha_response_field  = $el.find('input#recaptcha_response_field');
 		this.url		= $el.attr('action');
 
 		this.$reg_btn	= $el.find('.btn-reg');
@@ -26,16 +27,15 @@
 
 		this.$reg_btn.click(function(e) {
 			that.$el.find('.top-warning').addClass('hidden');
-
+			
 			if(that.$reg_btn.hasClass('disabled')) {
 				e.preventDefault();
-
 				return false;
 			}
 			
 			var validate = that.validate();
 			if(validate == false){
-			}else if(validate == "confirm"){
+			}else if(validate == "confirm"){				
 				return false;
 			}else{
 				that.data = {
@@ -46,11 +46,11 @@
 					day			: that.$day.val(),
 					month		: that.$month.val(),
 					year		: that.$year.val(),
-					sex			: that.$sex.val()
+					sex			: that.$sex.val(),
+					recaptcha_challenge_field : that.$recaptcha_challenge_field.val(),
+					recaptcha_response_field  : that.$recaptcha_response_field.val()
 				};
-
 				that.submit(that.$reg_btn);
-
 				return false;
 			}
 		});
@@ -88,7 +88,9 @@
 			if(data.success == 'ok'){
 				window.location.reload();
 			}else{
-				$('.top-warning').html(data.warning).removeClass("hidden");
+				$('.top-warning').html(data.warning).removeClass("hidden").show().delay(2000).fadeOut(300);
+				//Reset captcha:
+				Recaptcha.reload();
 			}
 		});
 	};

@@ -83,9 +83,6 @@ class ControllerAccountForgotten extends Controller {
 			$this->data['warning'] = $this->error['warning'];
 		}
 		
-		$this->data['action']['forgotten'] = $this->url->link('account/forgotten', '', 'SSL');
-		$this->data['action']['home'] = $this->url->link('welcome/home', '', 'SSL');
-		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/forgotten.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/forgotten.tpl';
 		} else {
