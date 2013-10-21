@@ -1,25 +1,23 @@
 <div id="y-header">  
 	{% set user_slug = get_current_user().slug %}
 	<div class="header-wrapper">
-		<div class="fl" id="header-logo">
+		<div id="header-logo">
 			<a href="{{ path('HomePage') }}" title="Yesocl">
 				<img src="{{ asset_img('template/logo.png') }}" />
 			</a>
 		</div>
 		<div id="header-user">
-			<div id="user-info-wrapper">
-				<div class="user-info">
-					<div class="user-avatar">
-						<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-							<img src="{{ user_info.avatar }}" />
-						</a>
-					</div>
-				</div>
-				<div class="user-name dropdown">
+			<div class="user-info-wrapper">
+				<div class="fr user-avatar">
 					<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
+						<img src="{{ user_info.avatar }}" />
+					</a>
+				</div>
+				<div class="fr dropdown user-menu">
+					<a class="user-name" href="{{ path('WallPage', {user_slug: user_slug}) }}">
 				      {{ user_info.username }}
 				    </a>
-				    <div class="user-can-do dropdown-toggle" data-toggle="dropdown">
+				    <div class="dropdown-toggle toggle-user-menu" data-toggle="dropdown">
 				    	<a href="#">
 				    		<i class="icon-caret-down icon-2x"></i>
 			    		</a>
@@ -67,27 +65,7 @@
 	                        <a href="#">WMThiet</a> commented on your post
 	                      </div>
 	                    </div>
-	                  </li>
-	                  <li class="notification-content-item">
-	                    <a href="#" class="notification-content-item-img">
-	                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-	                    </a>
-	                    <div class="notification-content-item-detail">
-	                      <div class="notification-text">
-	                        <a href="#">WMThiet</a> commented on your post
-	                      </div>
-	                    </div>
-	                  </li>
-	                  <li class="notification-content-item">
-	                    <a href="#" class="notification-content-item-img">
-	                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-	                    </a>
-	                    <div class="notification-content-item-detail">
-	                      <div class="notification-text">
-	                        <a href="#">WMThiet</a> commented on your post
-	                      </div>
-	                    </div>
-	                  </li>
+	                  </li>	                  
 	                </ul-->
 	              </div>
 	              <div class="dropup notification-item message">
@@ -109,59 +87,7 @@
 	                        hello everyone
 	                      </div>
 	                    </div>
-	                  </li>
-	                  <li class="notification-content-item">
-	                    <a href="#" class="notification-content-item-img">
-	                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-	                    </a>
-	                    <div class="notification-content-item-detail">
-	                      <div class="notification-text">
-	                        <a href="#">WMThiet</a> sent a message to you
-	                      </div>
-	                      <div class="message-content">
-	                        hello everyone
-	                      </div>
-	                    </div>
-	                  </li>
-	                  <li class="notification-content-item">
-	                    <a href="#" class="notification-content-item-img">
-	                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-	                    </a>
-	                    <div class="notification-content-item-detail">
-	                      <div class="notification-text">
-	                        <a href="#">WMThiet</a> sent a message to you
-	                      </div>
-	                      <div class="message-content">
-	                        hello everyone
-	                      </div>
-	                    </div>
-	                  </li>
-	                  <li class="notification-content-item">
-	                    <a href="#" class="notification-content-item-img">
-	                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-	                    </a>
-	                    <div class="notification-content-item-detail">
-	                      <div class="notification-text">
-	                        <a href="#">WMThiet</a> sent a message to you
-	                      </div>
-	                      <div class="message-content">
-	                        hello everyone
-	                      </div>
-	                    </div>
-	                  </li>
-	                  <li class="notification-content-item">
-	                    <a href="#" class="notification-content-item-img">
-	                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-	                    </a>
-	                    <div class="notification-content-item-detail">
-	                      <div class="notification-text">
-	                        <a href="#">WMThiet</a> sent a message to you
-	                      </div>
-	                      <div class="message-content">
-	                        hello everyone
-	                      </div>
-	                    </div>
-	                  </li>
+	                  </li>	                  
 	                </ul-->
 	              </div>
 	              {% set requests = get_request_friend() %}
