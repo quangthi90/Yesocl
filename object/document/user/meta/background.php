@@ -32,6 +32,16 @@ Class Background {
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Skill") */
     private $skills = array();
 
+    public function getEducationById( $id ){
+    	foreach ( $this->educations as $education ) {
+    		if ( $education->getId() == $id ){
+    			return $education;
+    		}
+    	}
+
+    	return null;
+    }
+
 	public function getId(){
 		return $this->id;
 	}

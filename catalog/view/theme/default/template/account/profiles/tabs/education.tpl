@@ -9,7 +9,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<div class="background-education-form-add hidden">
+			<div class="background-education-form-add hidden" data-add="{{ path('ProfileAddEducation') }}">
 				<div class="profiles-tabs-item1-label">
 					From 
 					<select name="started">
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			{% for education in user.educations %}
-			<div class="profiles-tabs-item1 education-item" data-id="{{ education.id }}" data-url="{{ link_edit_education }}" data-started="{{ education.started }}" data-ended="{{ education.ended }}" data-degree="{{ education.degree }}" data-school="{{ education.school }}" data-fieldofstudy="{{ education.fieldofstudy }}" data-remove="{{ link_remove_education }}">
+			<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" data-ended="{{ education.ended }}" data-degree="{{ education.degree }}" data-school="{{ education.school }}" data-fieldofstudy="{{ education.fieldofstudy }}" data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
 				<div>
 					<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span> to <span class="profiles-tabs-value">{{ education.ended }}</span></div>
 				</div>
@@ -66,6 +66,24 @@
 		</div>
 	</div>
 </div>
+<script id="background-education-item" type="text/x-jquery-tmpl">
+	<div class="profiles-tabs-item1 education-item" id="${ id }" data-edit="${ edit }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-school="${ school }" data-fieldofstudy="${ fieldofstudy }" data-remove="${ remove }">
+		<div>
+			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started }</span> to <span class="profiles-tabs-value">${ ended }</span></div>
+		</div>
+		<div class="profiles-tabs-item1-content">
+			<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
+			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+			<div class="profiles-tabs-value">
+				<div class="profiles-tabs-value-item">${ degree }</div>
+				<div class="profiles-tabs-value-item">${ school }</div>
+				<div class="profiles-tabs-value-item viewers">${ fieldofstudy }</div>
+			</div>
+		</div>
+	</div>
+</script>
 {% endblock %}
 
 {% block profiles_tabs_education_javascript %}

@@ -329,7 +329,7 @@
 				'sumary': that.$input.val()
 			};
 
-			that.submit(that.$btnSave);
+			that.submit( $(this) );
 
 			return false;
 		});
@@ -392,11 +392,11 @@
 		that = this;
 
 		this.$btnAdd.click(function(){
-			that.$formAdd.removeClass('hidden');
+			that.$formAdd.removeClass('hidden').addClass('add-form');
 		});
 
 		this.$btnCancel.click(function(){
-			that.$formAdd.addClass('hidden').find('input').each(function(){
+			that.$formAdd.addClass('hidden').removeClass('add-form').find('input').each(function(){
 				$(this).val('');
 			});
 
@@ -416,9 +416,105 @@
 			that.$fieldofstudy.val( $item.data('fieldofstudy') );
 
 			$item.addClass('hidden');
-			that.$formAdd.removeClass('hidden');
+			that.$formAdd.removeClass('hidden').removeClass('add-form').data('edit', $item.data('edit'));
+		});
+
+		this.$btnRemove.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			if ( confirm("You sure delete this ?") == false ){
+				return false;
+			}
+
+			that.url = $(this).parents('.education-item').data('remove');
+
+			that.submit( $(this), 'remove' );
+
+			return false;
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			that.data = {
+				'started': that.$started.val(),
+				'ended': that.$ended.val(),
+				'degree': that.$degree.val(),
+				'school': that.$school.val(),
+				'fieldofstudy': that.$fieldofstudy.val(),
+			};
+
+			if ( that.$formAdd.hasClass('add-form') ){
+				that.url = that.$formAdd.data('add');
+
+				that.submit( $(this), 'add' );
+			}else{
+				that.url = that.$formAdd.data('edit');
+
+				that.submit( $(this), 'edit' );
+			}
+
+			return false;
 		});
 	}
+
+	Education.prototype.submit = function($button, method){
+		that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				if ( method == 'remove' ){
+					$button.parents('.education-item').remove();
+				}else if ( method == 'edit' ){
+					var $item = $.tmpl($('#background-education-item'), data);
+
+					$('#' + data.id).before($item).remove();
+
+					that.$btnCancel.trigger('click');
+
+					$('.education-label').each(function(){
+						new Education( $(this) );
+					});
+				}else if ( method == 'add' ){
+					that.$btnCancel.trigger('click');
+
+					var $item = $.tmpl($('#background-education-item'), data);
+
+					that.$formAdd.parent().append($item);
+
+					$('.education-label').each(function(){
+						new Education( $(this) );
+					});
+				}
+			}
+		});
+	}
+
+	Education.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
 
 	$(function(){
 		new ProfilesLayout($('#y-main-content'));

@@ -439,23 +439,7 @@ class ControllerAccountEdit extends Controller {
 		}
 	}
 
-	private function validateRemoveEducation() {
-		if ( !isset( $this->request->post['id'] ) || empty( $this->request->post['id'] ) ) {
-			$this->error['error_background_education_id'] = $this->language->get( 'error_background_education_id' );
-		}
-
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	private function validateEditEducation() {
-		if ( !isset( $this->request->post['id'] ) ) {
-			$this->error['error_education'] = $this->language->get('error_education');
-		}
-
 		if ( !isset( $this->request->post['started'] ) ) {
 			$this->error['error_education_started'] = $this->language->get('error_education_started');
 		}
@@ -685,8 +669,12 @@ class ControllerAccountEdit extends Controller {
 				$json['degree'] = $this->request->post['degree'];
 				$json['school'] = $this->request->post['school'];
 				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
-				$json['url'] = $this->url->link('account/edit/editEducation', '', 'SSL');
-				$json['remove'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
+				$json['edit'] = $this->extension->path('ProfileEditEducation', array(
+					'education_id' => $id
+				));
+				$json['remove'] = $this->extension->path('ProfileRemoveEducation', array(
+					'education_id' => $id
+				));
 			}else {
 				$json['message'] = 'failed';
 			}
@@ -698,12 +686,14 @@ class ControllerAccountEdit extends Controller {
 	public function removeEducation() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validateRemoveEducation() ) {
+		if ( !$this->customer->isLogged() ) {
 			$json['message'] = 'failed';
+		}elseif ( empty($this->request->get['education_id']) ){
+			$json['message'] = 'education id is empty';
 		}else {
 			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->removeEducation( $this->request->post ) ) {
+			if ( !$this->model_account_customer->removeEducation( $this->request->get['education_id'] ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
@@ -718,10 +708,12 @@ class ControllerAccountEdit extends Controller {
 
 		if ( !$this->customer->isLogged() || !$this->validateEditEducation() ) {
 			$json['message'] = 'failed';
+		}elseif ( empty($this->request->get['education_id']) ){
+			$json['message'] = 'education id is empty';
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $id = $this->model_account_customer->editEducation( $this->request->post ) ) {
+			if ( $id = $this->model_account_customer->editEducation( $this->request->get['education_id'], $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started'] = (int)$this->request->post['started'];
@@ -729,8 +721,12 @@ class ControllerAccountEdit extends Controller {
 				$json['degree'] = $this->request->post['degree'];
 				$json['school'] = $this->request->post['school'];
 				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
-				$json['url'] = $this->url->link('account/edit/editEducation', '', 'SSL');
-				$json['remove'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
+				$json['edit'] = $this->extension->path('ProfileEditEducation', array(
+					'education_id' => $id
+				));
+				$json['remove'] = $this->extension->path('ProfileRemoveEducation', array(
+					'education_id' => $id
+				));
 			}else {
 				$json['message'] = 'failed';
 			}

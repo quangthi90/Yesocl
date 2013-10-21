@@ -500,8 +500,8 @@ class ModelAccountCustomer extends Model {
 			}
 
 			$education = new Education();
-			$education->setStarted( (int) $data['started'] );
-			$education->setEnded( (int) $data['ended'] );
+			$education->setStarted( (string) $data['started'] );
+			$education->setEnded( (string) $data['ended'] );
 			$education->setDegree( $data['degree'] );
 			$education->setSchool( $data['school'] );
 			$education->setFieldOfStudy( $data['fieldofstudy'] );
@@ -517,7 +517,7 @@ class ModelAccountCustomer extends Model {
 		}
 	}
 
-	public function removeEducation( $data = array() ) {
+	public function removeEducation( $id ) {
 		if ( $this->customer->isLogged() ) {
 			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
 
@@ -525,15 +525,13 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}
 
-			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
+			$education = $customer->getMeta()->getBackground()->getEducationById( $id );
+			
+			if ( !$education ){
 				return false;
 			}
 
-			foreach ($customer->getMeta()->getBackground()->getEducations() as $education) {
-				if ( $education->getId() == $data['id'] ) {
-					$customer->getMeta()->getBackground()->getEducations()->removeElement( $education );
-				}
-			}
+			$customer->getMeta()->getBackground()->getEducations()->removeElement( $education );
 		}else {
 			return false;
 		}
@@ -543,15 +541,11 @@ class ModelAccountCustomer extends Model {
 		return true;
 	}
 
-	public function editEducation( $data = array() ) {
+	public function editEducation( $id, $data = array() ) {
 		if ( $this->customer->isLogged() ) {
 			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
 
 			if ( !$customer ) {
-				return false;
-			}
-
-			if ( !isset( $data['id'] ) ) {
 				return false;
 			}
 
@@ -575,16 +569,13 @@ class ModelAccountCustomer extends Model {
 				return false;
 			}
 
-			foreach ( $customer->getMeta()->getBackground()->getEducations() as $education ) {
-				if ( $education->getId() == $data['id'] ) {
-					$education->setStarted( (int) $data['started'] );
-					$education->setEnded( (int) $data['ended'] );
-					$education->setDegree( $data['degree'] );
-					$education->setSchool( $data['school'] );
-					$education->setFieldOfStudy( $data['fieldofstudy'] );
-					break;
-				}
-			}
+			$education = $customer->getMeta()->getBackground()->getEducationById( $id );
+
+			$education->setStarted( (string) $data['started'] );
+			$education->setEnded( (string) $data['ended'] );
+			$education->setDegree( $data['degree'] );
+			$education->setSchool( $data['school'] );
+			$education->setFieldOfStudy( $data['fieldofstudy'] );
 
 			$this->dm->flush();
 
