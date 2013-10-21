@@ -372,15 +372,14 @@ label.in-line{
 
 #y-header
 {
-    height:30px;  
     z-index:1;
-    background: #daecef url(../../image/main-header-bg.jpg) bottom left;
+    background: #daecef;
     position: fixed;
     top:0px;
     right: 0px;
-    left: 152px;
-    padding: 5px;  
-    box-shadow: 0 -3px 5px -1px gray inset; 
+    left: 0px;
+    padding: 5px;
+    height: 40px;
 }
 
 .header-wrapper {
@@ -392,9 +391,9 @@ label.in-line{
     padding: 20px 0px 20px 20px;    
     position: absolute;    
     top: 0px;
-    left: 120px;
+    left: 0px;
     right:0px;
-    bottom: 51px;    
+    bottom: 21px;    
     background: #ECEBEB;
 }
 
@@ -422,11 +421,11 @@ label.in-line{
 }
 
 #y-sidebar {
-    width: 120px;
+    width: 220px;
     background: #0A4B3E;
     position: fixed;
-    top: 0px;    
-    bottom: 51px;
+    top: 50px;    
+    bottom: 21px;
     z-index: 11;
     color: #fff;
     text-align: center;     
@@ -437,90 +436,6 @@ label.in-line{
   position: relative;
   height: 100%;
   width: 100%;    
-}
-
-#y-sidebar .sidebar-border-right {    
-}
-
-#y-sidebar .sidebar-border-right > .sidebar-box:first-child{
-}
-
-#y-sidebar .sidebar-border-right .logo{
-  height: 10%;
-  line-height: 10%;
-  background-color: transparent;
-}
-
-#y-sidebar .sidebar-border-right .logo > a > img{
-  width: 80%;
-  margin: 10px 0px;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-user{
-  height: 30%;
-  line-height: 30%;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info{
-  height: 80%;
-  width: 80%;
-  margin: 20px auto;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-avatar{
-  height: 70%;
-  line-height: 70%;
-  border: 2px solid #b5c1c2;
-  background-color: #fff;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-avatar > a > img{
-  max-width: 98%;
-  max-height: 98%;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name{
-  max-height: 50px;
-  line-height: 30px;  
-  background:#f4f4f4;     
-}
-
-#y-sidebar .sidebar-border-right .sidebar-user .sidebar-user-info .sidebar-user-name > a{
-  font-size: 15px;
-  color: #000;
-}
-
-.sidebar-user-name .user-can-do {
-  display: block;
-  float: right;
-}
-
-.sidebar-user-name .user-can-do a {
-  display: block;
-  padding: 0px 4px;
-}
-
-.sidebar-user-name .user-can-do a:hover {
-  background-color: #009975;
-  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, .25);
-}
-
-.sidebar-user-name .user-can-do a i {
-  color: #000;
-}
-
-.sidebar-user-name .user-can-do a:hover i {
-  color: #fff;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-welcome{
-  padding: 10px 0 10px 5px;
-  text-align: left;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-welcome > p{
-  margin-bottom: 0;
-  font-size: 13px;
 }
 
 #y-sidebar .sidebar-border-right .sidebar-menus{
@@ -1215,32 +1130,6 @@ label.in-line{
 }
 .block-title a:hover i {
   color: #3B8F39;
-}
-
-/*Close*/
-.btn-container {
-  position: absolute;  
-  bottom: -20px;
-  left: 0px;
-  right: 0px;
-  background: #000;
-  border-top: 1px solid #fff;
-}
-
-.btn-container:hover {
-  border-top: 1px inset #fff; 
-}
-
-.btn-container a {
-  display: block;
-}
-
-.btn-container a  i{
-  color: #fff;
-}
-
-.btn-container a:hover  i{
-  color: #66c666;
 }
 
 /*FOOTER BAR*/

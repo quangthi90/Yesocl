@@ -15,61 +15,15 @@ End quick access functions
 Jquery effects
 */
 function FlexibleElement(el) {
-	this.sidebar = el.find('#y-sidebar');
 	this.main = el.find('#y-content');
 	this.footerBar = el.find('#yes-footer-bar');
-	this.sidebarControl = this.sidebar.find('.sidebar-controls');
-	this.closeSidebar = this.sidebar.find('#close-bottom-sidebar');
-	this.openSidebar = this.sidebar.find('#open-bottom-sidebar');
-	this.openSearch = this.footerBar.find('.search');
-	this.searchTxt = this.openSearch.find('#searchText'); 	
 	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
-	var sb = this.sidebar;
 	var m = this.main;
-	var sc = this.sidebarControl;
-	var os = this.openSidebar;
-	var cl = this.closeSidebar;
-	var sT = this.searchTxt;
-	this.closeSidebar.show();
-	this.openSidebar.hide();
-
-	this.closeSidebar.click(function(e) {
-		e.preventDefault();
-		var scrollbarsNice = m.find('.nicescroll-rails');
-		$(this).hide();	
-		m.animate({"paddingLeft": "140px","left" : "0px"}, 200, function() { 
-			scrollbarsNice.animate({ left: '+=100'}, 100);
-			sc.slideUp(300, function() {
-				sb.animate({ "width" : "120px", "top":"20px", "left" : "10px", "opacity" : "0.85"}, 200, function() {
-					sb.css("bottom","auto");
-					os.show();
-				});				
-			});
-		});		
-	});
-	this.openSidebar.click(function(e) {
-		e.preventDefault();
-		var scrollbarsNice = m.find('.nicescroll-rails');
-		$(this).hide();	
-		sc.slideDown(200, function() {
-			sb.animate({ "bottom" : "51px", "width" : "120px", "top":"0px", "left" : "0px", "opacity" : "1"}, 200, function() {
-				m.animate({"left": "120px" , "paddingLeft": "20px"}, 500); 	
-				scrollbarsNice.animate({ left: '-=100' }, 100);
-				cl.show();
-			});			
-		});			
-	});
-	this.openSearch.hover(function() {
-		sT.slideDown(100); 		
-	}, function() {
-		if(sT.is(":focus") && sT.val().trim().length > 0) {
-			return;
-		}
-		sT.slideUp(100);
-	});	
+	
+	//Tooltip:
 	$('a[title]').tooltip({ container: 'body' });
 
 	//For show/hide GoLeft
@@ -89,7 +43,7 @@ FlexibleElement.prototype.attachEvents = function() {
         }
     });
     goLeftBtn.click(function(){
-    	m.animate({scrollLeft: 0}, 1000);
+		m.animate({scrollLeft: 0}, 1000);
     });
 
     //Popup link of image:
@@ -97,8 +51,7 @@ FlexibleElement.prototype.attachEvents = function() {
     $('.link-popup').magnificPopup({
     	type:'inline',
     	midClick: true,
-    	removalDelay: 300,
-    	mainClass: 'mfp-fade'
+    	removalDelay: 300
     });
 }
 

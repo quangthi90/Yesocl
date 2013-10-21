@@ -18,15 +18,14 @@
 		{% endblock %}
 	</head>
 	<body>
-		<div id="y-sidebar">	
-			{{ include(template_from_string( sidebar_control )) }}
-		</div>
+		{{ include(template_from_string( header )) }}
+		{{ include(template_from_string( sidebar_control )) }}
 		<div id="y-container">
 			{% block body %}
-			{% endblock %}
-			{{ include(template_from_string( footer )) }}
-			<div id="overlay"></div>
+			{% endblock %}			
 		</div>
+		{{ include(template_from_string( footer )) }}
+		<div id="overlay"></div>
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.nicescroll.js') }}"></script>
