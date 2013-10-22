@@ -8,9 +8,34 @@ jQuery.fn.makeScrollWithoutCalResize = function() {
 jQuery.fn.makeContentHorizontalScroll = function() {
 	$('#y-content').niceScroll();	
 }
+
 /*
 End quick access functions
 */
+
+/*
+	Left sidebar
+*/
+function Sidebar(el){
+	this.sidebarRoot = el.find("#y-sidebar");
+	this.sidebarToggle = el.find("#sidebar-toggle");
+	this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
+	this.attachEvents();
+}
+
+Sidebar.prototype.attachEvents = function(){
+	var that = this;
+	this.menuContainer.niceScroll({
+		cursorwidth:"6px",
+      	cursorborder:"none",
+      	cursorcolor : "#000000",
+      	touchbehavior: false,
+      	autohidemode: true,
+      	background: "#FFFFFF"
+	});
+}
+/* End Left Sidebar */
+
 /*
 Jquery effects
 */
@@ -346,6 +371,7 @@ End Custom List Post
 */
 $(document).ready(function() {
 	new FlexibleElement($(this));
+	new Sidebar($(this));
 	new HorizontalBlock($('.has-horizontal'));
 	$(".timeago").timeago();
 

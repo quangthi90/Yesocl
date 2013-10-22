@@ -1,8 +1,12 @@
 {% set user_slug = get_current_user().slug %}
 <div id="y-sidebar">
-	<div class="sidebar-wrapper">		
+	<div class="sidebar-wrapper">
+		<div class="search-box">
+			<input type="text" name="keyword" id="keyword" placeholder="Search" />
+			<a href="#" class="btn-search"><i class="icon-search"></i></a>
+		</div>
 		<div class="sidebar-controls">
-			<ul class="nav nav-list left-menu">
+			<ul class="yes-menu-list left-menu">
 				{% block sidebar_control %}
 				{% set menu = get_flash('menu') %}
 			  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
@@ -35,29 +39,65 @@
 			  			<i class="icon-fire"></i> <span>My friend</span>
 		  			</a>
 			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
+			  	<li class="menu-item">
+			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>My friend</span>
+		  			</a>
+			  	</li>
 			  	{% endblock %}
 			</ul>	
 		</div>
-		<div style="width: 500px; height: 500px; top: 40px; left: 100px; display: none;" 
-			id="user-viewer-container">		
-		</div>
-		<div style="display: none;" id="user-info-template">
-			<div class="user-item fl">
-				<div class="user-item-info fl">
-					<a href="USER_URL" class="user-item-avatar fl">
-						<img src="USER_IMG" alt="USER_NAME" />
-					</a>
-					<div class="user-item-overview fl">
-						<a href="USER_URL" class="user-item-name">USER_NAME</a>
-						<span><strong>NUMBER_OF_FRIEND</strong> friend(s)</span>
-					</div>
-				</div>
-				<div class="user-actions fr">
-					<a href="#" class="btn-user-actions">
-						USER_ACTIONS
-					</a>
-				</div>
-			</div>
-		</div>
 	</div>
+</div>
+<div id="sidebar-toggle">
 </div>

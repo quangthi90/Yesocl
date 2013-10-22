@@ -230,7 +230,7 @@ i.icon-2x{
   font-size: 16px;
 }
 .nicescroll-rails > div {
-  background-color: #424242;
+  background-color: #10B991;
 }
 .nicescroll-rails:hover > div {
   background-color: #10B991;
@@ -346,7 +346,7 @@ label.in-line{
 #y-content {
   padding: 20px 0px 20px 20px;    
   position: absolute;    
-  top: 0px;
+  top: 58px;
   left: 0px;
   right:0px;
   bottom: 21px;    
@@ -373,174 +373,291 @@ label.in-line{
   font-size: 12px;
 }
 #y-sidebar {
-  width: 220px;
+  width: 270px;
   background: #0A4B3E;
   position: fixed;
-  top: 50px;    
-  bottom: 21px;
+  top: 0px;    
+  bottom: 0px;
   z-index: 11;
   color: #fff;
   text-align: center;     
   padding-bottom: 20px;
-  display: none;
 }  
-#y-sidebar .sidebar-wrapper {
-  position: relative;
-  height: 100%;
-  width: 100%;    
-}
 /* --------------------------- END COMMON LAYOUT -------------------------------------------- */
-
 /* ------------------------------------ START HEADER ---------------------------------------- */
 #header-logo {
-    float: left;
+  float: left;
+  padding-left: 15px;
 }
 #header-logo img {
-    height: 58px;
+  height: 58px;
 }
 #header-user {
-    float: right;
+  float: right;
 }
-#header-user .user-info-wrapper{
-
+#user-info-wrapper{  
+  padding: 1px 15px;
 }
-.user-info-wrapper .user-avatar {
-
+#user-info-wrapper .user-avatar {
 }
-.user-info-wrapper .user-avatar img {
-  
+#user-info-wrapper .user-avatar img {
+  height: 50px;  
+  width: 50px;
+  border: 1px solid #fff;
+  border-radius: 50%;
 }
-.user-info-wrapper .user-menu {
-
+#user-info-wrapper .user-menu {
+  margin-right: 10px;
+  min-width: 100px;
+  height: 52px;
+  text-align: right;
 }
-.user-menu .user-name{
-
+#user-info-wrapper .user-info{
+  margin-right: 15px;  
+  text-align: right;
+  vertical-align: middle;
+  padding: 5px 0px;
+  height: 45px;
+}
+.user-info .user-name {
+  color: #fff;
+  font-weight: bold;
+  display: block;
+  white-space: nowrap;
+  font-size: 16px;
+}
+.user-info .user-name:hover {
+  color: #009B77;
+}
+.user-info .user-more-info {
+  color: #fff;
+  font-size: 12px;
 }
 .user-menu .toggle-user-menu {
-
 }
-#header-user .user-notification {
-
+#user-notification {
+  margin-right: 10px;
+  padding: 0px 10px;
+  border-right: 1px solid #666666;
 }
-
-/* -------------------------------------- END HEADER ---------------------------------------- */
-
-/* ----------------------------------- START SIDEBAR ---------------------------------------- */
-#y-sidebar .sidebar-border-right .sidebar-menus{
-  height: 50%;
+#user-quick-menu {
+  margin-right: 15px;
+  padding-right: 10px;
+  border-right: 1px solid #666666;
 }
-
-#y-sidebar .sidebar-border-right .sidebar-menu{
-  padding: 10px 0 10px 0;
-  text-align: left;
-  cursor: pointer;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-menu-active,
-#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child > div,
-#y-sidebar .sidebar-border-right .sidebar-menu:hover{
-  background-color: #3d9915;
-}
-
-#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child{
+#user-quick-menu > a {
+  display: inline-block;
   text-align: center;
-  line-height: 40px;
+  height: 50px;
+  padding: 8px 15px 0px 15px;
 }
-
-#y-sidebar .sidebar-border-right .sidebar-menu > div:first-child > div{
-  margin-left: 5px;
+#user-quick-menu > a > span {
+  color: #ddd;
+  display: block;
 }
-
-#y-sidebar .sidebar-border-right .sidebar-menu > div > div > i{
-  font-size: 25px;
+#user-quick-menu > a > i {
+  color: #ddd;
+  font-size: 13px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+#user-quick-menu > a:hover {
+  background-color: #009B77;
+}
+#user-quick-menu > a:hover > span {
   color: #fff;
 }
-
-#y-sidebar .sidebar-border-right .sidebar-menu > div > span{
+#user-quick-menu > a:hover > i {
+  color: #fff;
+  font-size: 18px;
+}
+#user-quick-menu > .dropdown-menu {
+  left: 89px;
+}
+/* -------------------------------------- END HEADER ---------------------------------------- */
+/* ------------------------------------ START NOTIFICATION ----------------------------------- */
+.notification-group .notification-item {
+  display: block;
+  position: relative;
+  float: left;  
+}
+.notification-group .notification-item:hover {
+  background-color: #009B77;
+}
+.notification-group .notification-item:first-child {
+  border-left: none;
+}
+.notification-item a {
+  display: block;
+  height: 50px;
+  padding: 8px 15px 0px 15px;
+  text-align: center;
+}
+.notification-item a i {
+  color: #ddd;
+  font-size: 13px;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.notification-item .notification-item-name {
+  color: #ddd;
+  display: block;
   font-size: 12px;
-}         
-
-#y-sidebar .sidebar-border-right .sidebar-menu > div > a{
+}
+.notification-item:hover i {
+  color: #FFF;
+  font-size: 18px;
+}
+.notification-item:hover .notification-item-name {
+  color: #FFF;
+}
+.notification-item .notification-item-count {
+  position: absolute;
+  right: 2px;
+  top: -3px;
+  font-weight: bold;
+  font-size: 11px;
   color: #fff;
+  line-height: 6px;
+  z-index: 2;
+  background-color: red;
+  padding: 3px;
+}
+.notification-content-list {
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.notification-content-list .notification-content-item {
+  overflow: hidden;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+.notification-content-list .notification-content-item:last-child {
+  border-bottom: none;
+}
+.notification-content-item .notification-content-item-img {
+  display: block;  
+  float: left; 
+  padding: 0px;
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+}
+.notification-content-item .notification-content-item-img  img {
+  height: 50px;
+  width: 50px;
+}
+.notification-content-item .notification-content-item-detail {
+  font-size: 12px;
+  min-width: 250px;
+  max-width: 300px;
+}
+.notification-content-item .notification-content-item-detail  .notification-text {
+  line-height: 18px;
+  margin-bottom: 10px;
+}
+.notification-content-item .notification-content-item-detail  .notification-text a {
+  font-weight: bold;
+  font-size: 12px;
+}
+.notification-content-item .notification-content-item-detail a.btn-yes {
+  padding: 1px 10px;
+  font-size: 11px;
+  font-weight: normal;
+}
+.notification-content-item .message-content {
+  color: #0E0E0E;
+  font-style: italic;
+  font-size: 12px;
+  white-space: nowrap;
+}
+/* ------------------------------------ END NOTIFICATION ----------------------------------- */
+/* ----------------------------------- START SIDEBAR ---------------------------------------- */
+.sidebar-wrapper {
+  position: relative;
+  height: 100%;
+  padding: 15px;  
+}
+.sidebar-wrapper .search-box {
+  position: relative;
+}
+.search-box input[type="text"] {
+  padding-right: 25px;
+  height: 22px;
+  width: 205px;
+}
+.search-box a.btn-search {
+  display: block;  
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  height: 31px;
+  width: 26px;
+  line-height: 31px;
 }
 /* -------------------------------------- END SIDEBAR ---------------------------------------- */
 
 /* ------------------------------------- START NAV SIDEBAR ------------------------------------- */
 .sidebar-controls {
   color: #fff;
-  position: relative;
-  padding-bottom: 20px;
-}
-
-.sidebar-controls .nav-list > li {
-  display: block;
-  height: 50px;
-}
-
-.sidebar-controls .nav-list .nav-header {
-  text-shadow: 0px 0px 0px #fff;
-}
-
-.sidebar-controls .nav-list > li > a {
-  text-shadow: 0px 0px 0px #fff;
-  color: #FFF;
-  background-color: transparent;
-  padding: 3px;
-  display: block;
-  margin: 3px auto;  
-  width: 35px;
-  height: 35px;
-  vertical-align: middle;
-  line-height: 40px;
-  border-radius: 50%;
-  border: solid 1px #FFFFFF;
-  position: relative;
-}
-
-.sidebar-controls .nav-list > li > a > i {
- color: #fff; 
- font-size: 20px;
-}
-
-.sidebar-controls .nav-list > li > a > span {
   position: absolute;
-  top: 0;
-  left: 20px;
-  white-space: nowrap;
-  text-align: left;
-  background: #009B77;
-  padding: 0px 10px 1px 20px;
-  display:none;
-  z-index: -1;  
+  top: 70px;
+  left: 15px;
+  right: 15px;
+  bottom: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+.sidebar-controls .yes-menu-list {
 
-.sidebar-controls .nav-list .nav-header { 
-  color: #fff;
-  font-size: 12px;
-  display: none;
 }
-
-.sidebar-controls .nav-list > .active > a, 
-.nav-list > .active > a:hover, 
-.nav-list > .active > a:focus,
-.sidebar-controls .nav > li > a:hover, 
-.nav > li > a:focus {
-  color: #fff;
-  background-color: #009B77;    
+.yes-menu-list .menu-item {
+  margin-bottom: 3px;
 }
-
-.sidebar-controls .nav-list > li > a:hover,
-.sidebar-controls .nav-list > li > a:focus,
-.sidebar-controls .nav-list > li > a:active {
-  color: #fff;
-  background-color: #009B77;  
-  border: none;  
-}
-
-.sidebar-controls .nav-list > li > a:hover span{
+.yes-menu-list .menu-item > a {
   display: block;
-  width: auto;
-  -webkit-transition: 0.25s;
+  text-align: left;
+  white-space: nowrap;    
+  background-color: transparent;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.yes-menu-list .menu-item > a.active,
+.yes-menu-list .menu-item > a:hover,
+.yes-menu-list .menu-item > a:focus {
+  background-color: #009B77;
+}
+.yes-menu-list .menu-item > a > span {
+  color: #fff;
+  font-size: 14px;
+  margin-left: 5px;
+}
+.yes-menu-list .menu-item > a > i {
+  color: #fff;  
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #009B77;
+  text-align: center;
+  line-height: 40px;
+  font-size: 15px;
+}
+.yes-menu-list .menu-item > a.active > span,
+.yes-menu-list .menu-item > a:hover > span,
+.yes-menu-list .menu-item > a:focus > span {
+  
+}
+.yes-menu-list .menu-item > a.active > i,
+.yes-menu-list .menu-item > a:hover > i,
+.yes-menu-list .menu-item > a:focus > i {
+  font-size: 18px;
 }
 /* ------------------------------------- END NAV SIDEBAR ------------------------------------- */
 
@@ -1184,99 +1301,7 @@ label.in-line{
 .footer-toolbar-item.notification-group {
 }
 /* ----------------------------------- END FOOTER BAR ---------------------------------------- */
-/* ------------------------------------ START NOTIFICATION ----------------------------------- */
-.notification-group .notification-item {
-  display: block;
-  position: relative;
-  float: left;
-  background-color: #FFF;
-  padding: 4px 20px 5px 10px;
-  border-top: 1px solid #009B77;    
-  border-left: 1px solid #009B77; 
-  border-right: none;
-  border-bottom: none;
-}
-.notification-group .notification-item:hover {
-  background-color: #009B77;
-}
-.notification-group .notification-item:first-child {
-  border-left: none;
-}
-.notification-group .notification-item i {
-  margin-right: 5px;
-}
-.notification-group .notification-item:hover i {
-  color: #FFF;
-}
-.notification-item .notification-item-name {
-  color: #000;
-  font-weight: bold;
-}
-.notification-group .notification-item:hover .notification-item-name {
-  color: #FFF;
-}
-.notification-item .notification-item-count {
-  position: absolute;
-  right: 2px;
-  top: -3px;
-  font-weight: bold;
-  font-size: 11px;
-  color: #fff;
-  line-height: 6px;
-  z-index: 2;
-  background-color: red;
-  padding: 3px;
-}
-.notification-content-list {
-  max-height: 500px;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.notification-content-list .notification-content-item {
-  overflow: hidden;
-  padding: 5px;
-  border-bottom: 1px solid #ddd;
-}
-.notification-content-list .notification-content-item:last-child {
-  border-bottom: none;
-}
-.notification-content-item .notification-content-item-img {
-  display: block;  
-  float: left; 
-  padding: 0px;
-  margin-right: 10px;
-  height: 50px;
-  width: 50px;
-}
-.notification-content-item .notification-content-item-img  img {
-  height: 50px;
-  width: 50px;
-}
-.notification-content-item .notification-content-item-detail {
-  font-size: 12px;
-  min-width: 250px;
-  max-width: 300px;
-}
-.notification-content-item .notification-content-item-detail  .notification-text {
-  line-height: 18px;
-  margin-bottom: 10px;
-}
-.notification-content-item .notification-content-item-detail  .notification-text a {
-  font-weight: bold;
-  font-size: 12px;
-}
-.notification-content-item .notification-content-item-detail a.btn-yes {
-  padding: 1px 10px;
-  font-size: 11px;
-  font-weight: normal;
-}
-.notification-content-item .message-content {
-  color: #0E0E0E;
-  font-style: italic;
-  font-size: 12px;
-  white-space: nowrap;
-}
-/* ------------------------------------ END NOTIFICATION ----------------------------------- */
+
 /* -------------------------------- START CUSTOM for POST ------------------------------------ */
 .column {
   height: 100%;
