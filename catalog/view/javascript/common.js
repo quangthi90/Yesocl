@@ -18,21 +18,57 @@ End quick access functions
 */
 function Sidebar(el){
 	this.sidebarRoot = el.find("#y-sidebar");
-	this.sidebarToggle = el.find("#sidebar-toggle");
+	this.sidebarToggle = this.sidebarRoot.find("#sidebar-toggle");
 	this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
+	this.listMenuItem  = this.menuContainer.find('li');
+	this.isMadeScroll  = false;
+	this.makeScroll();
 	this.attachEvents();
 }
 
 Sidebar.prototype.attachEvents = function(){
+	var that = this;	
+
+	//Hide/show sidebar:
+	that.sidebarRoot.hover(
+		function() {
+			that.sidebarToggle.stop().fadeOut(110);
+			$(this).stop().animate( { left:'0px' }, 400, 'easeOutQuart', function() {
+				that.makeScroll();
+			});			
+			setTimeout(function(){ 
+				that.menuContainer.show(); 
+			}, 50);			
+		},
+		function() {
+			that.hideScroll();
+			$(this).stop().animate( { left:'-270px'}, 300, 'easeOutQuart', function(){
+				that.sidebarToggle.stop().fadeIn(110);
+				that.menuContainer.hide();
+			});
+		}
+	);	
+}
+Sidebar.prototype.makeScroll = function() {
 	var that = this;
-	this.menuContainer.niceScroll({
-		cursorwidth:"6px",
-      	cursorborder:"none",
-      	cursorcolor : "#000000",
-      	touchbehavior: false,
-      	autohidemode: true,
-      	background: "#FFFFFF"
-	});
+	if(!that.isMadeScroll){
+		//Scroll with NiceScroll:
+		that.menuContainer.niceScroll({
+			cursorwidth:"6px",
+	      	cursorborder:"none",
+	      	cursorcolor : "#000000",
+	      	touchbehavior: false,
+	      	autohidemode: true,
+	      	background: "#FFFFFF"
+		});
+		that.isMadeScroll = true;
+	}else{
+		that.menuContainer.getNiceScroll().resize();
+		that.menuContainer.getNiceScroll().show();
+	}
+}
+Sidebar.prototype.hideScroll = function() {
+	this.menuContainer.getNiceScroll().hide();
 }
 /* End Left Sidebar */
 

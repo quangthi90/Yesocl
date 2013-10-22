@@ -49,6 +49,7 @@
 		</div>
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
+    	<script type="text/javascript" src="{{ asset_js('libs/jquery.easing.1.3.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.nicescroll.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.uniform.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/bootstrap.min.js') }}"></script>

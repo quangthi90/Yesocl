@@ -347,7 +347,7 @@ label.in-line{
   padding: 20px 0px 20px 20px;    
   position: absolute;    
   top: 58px;
-  left: 0px;
+  left: 15px;
   right:0px;
   bottom: 21px;    
   background: #ECEBEB;
@@ -376,7 +376,8 @@ label.in-line{
   width: 270px;
   background: #0A4B3E;
   position: fixed;
-  top: 0px;    
+  top: 0px; 
+  left: -270px;   
   bottom: 0px;
   z-index: 11;
   color: #fff;
@@ -578,6 +579,24 @@ label.in-line{
 }
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
+#sidebar-toggle {
+  position: fixed;
+  top:58px;
+  left: 0px;
+  bottom: 21px;
+  width: 15px;
+  background-color: #ccc;
+}
+#sidebar-toggle .symbol {
+  position: absolute;
+  top: 47%;
+  left: 3px;
+  line-height: 1em;
+}
+#sidebar-toggle .symbol i {
+  color: #009B77;
+  font-size: 9px;
+}
 .sidebar-wrapper {
   position: relative;
   height: 100%;
@@ -601,7 +620,6 @@ label.in-line{
   line-height: 31px;
 }
 /* -------------------------------------- END SIDEBAR ---------------------------------------- */
-
 /* ------------------------------------- START NAV SIDEBAR ------------------------------------- */
 .sidebar-controls {
   color: #fff;
@@ -614,7 +632,6 @@ label.in-line{
   overflow-x: hidden;
 }
 .sidebar-controls .yes-menu-list {
-
 }
 .yes-menu-list .menu-item {
   margin-bottom: 3px;
@@ -660,7 +677,6 @@ label.in-line{
   font-size: 18px;
 }
 /* ------------------------------------- END NAV SIDEBAR ------------------------------------- */
-
 /* -------------------------------------- FEED STYLE ----------------------------------------- */
 .content-part{
     margin-right: 40px;

@@ -98,6 +98,11 @@
 			</ul>	
 		</div>
 	</div>
-</div>
-<div id="sidebar-toggle">
+	<div id="sidebar-toggle">
+		<span class="symbol">
+			<i class="icon-circle"></i><br/>
+			<i class="icon-circle"></i><br/>
+			<i class="icon-circle"></i>
+		</span>		
+	</div>
 </div>
