@@ -452,11 +452,11 @@ label.in-line{
   height: 50px;
   padding: 8px 15px 0px 15px;
 }
-#user-quick-menu > a > span {
+.user-menu > a > span {
   color: #ddd;
   display: block;
 }
-#user-quick-menu > a > i {
+.user-menu > a > i {
   color: #ddd;
   font-size: 13px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -464,18 +464,28 @@ label.in-line{
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-#user-quick-menu > a:hover {
+.user-menu > a:hover {
   background-color: #009B77;
 }
-#user-quick-menu > a:hover > span {
+.user-menu > a:hover > span {
   color: #fff;
 }
-#user-quick-menu > a:hover > i {
+.user-menu > a:hover > i {
   color: #fff;
   font-size: 18px;
 }
-#user-quick-menu > .dropdown-menu {
+.user-menu > .dropdown-menu {
   left: 89px;
+}
+.user-menu.open a.toggle-user-menu {
+  background-color: #009B77;
+}
+.user-menu.open a.toggle-user-menu > span {
+  color: #fff;
+}
+.user-menu.open a.toggle-user-menu > i {
+  color: #fff;
+  font-size: 18px;
 }
 /* -------------------------------------- END HEADER ---------------------------------------- */
 /* ------------------------------------ START NOTIFICATION ----------------------------------- */
@@ -674,7 +684,7 @@ label.in-line{
 .yes-menu-list .menu-item > a.active > i,
 .yes-menu-list .menu-item > a:hover > i,
 .yes-menu-list .menu-item > a:focus > i {
-  font-size: 18px;
+  
 }
 /* ------------------------------------- END NAV SIDEBAR ------------------------------------- */
 /* -------------------------------------- FEED STYLE ----------------------------------------- */

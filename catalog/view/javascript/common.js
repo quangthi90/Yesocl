@@ -69,6 +69,7 @@ Sidebar.prototype.attachEvents = function(){
 	});
 }
 Sidebar.prototype.hideSidebar = function() {
+	var that = this;
 	if(parseInt(that.sidebarRoot.css('left')) == 0 ) {
 		that.sidebarRoot.mouseleave();
 		that.searchCtrl.val('');
