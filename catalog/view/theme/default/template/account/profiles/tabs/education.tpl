@@ -1,6 +1,6 @@
 {% block profiles_tabs_education %}
 <div id="profiles-tabs-background-education" class="profiles-tabs-main pull-left" data-url="{{ link_add_education }}">
-	<div class="education-label">
+	<div class="education-label" data-degree="{{ path('DegreeAutoComplete') }}" data-school="{{ path('SchoolAutoComplete') }}" data-fieldofstudy="{{ path('FieldOfStudyAutoComplete') }}">
 		<div class="profiles-tabs-main-header">
 			<a href="#" class="btn sub-profile-header">
 				<i class="icon-paper-clip"></i> Education</a>
@@ -32,15 +32,18 @@
 					<div class="profiles-tabs-value">
 						<div class="row-fluid">
 							<div class="span4">Degree: </div>
-							<input type="text" name="degree" value="" />
+							<input type="text" name="degree" />
+							<input type="hidden" name="degree_id" />
 						</div>
 						<div class="row-fluid">
 							<div class="span4">School: </div>
-							<input type="text"  name="school" value="" />
+							<input type="text"  name="school" />
+							<input type="hidden"  name="school_id" />
 						</div>
 						<div class="row-fluid">
 							<div class="span4">Field Of Study: </div>
-							<input type="text" name="fieldofstudy" value="" />
+							<input type="text" name="fieldofstudy" />
+							<input type="hidden" name="fieldofstudy_id" />
 						</div>
 					</div>
 				</div>

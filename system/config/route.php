@@ -54,4 +54,7 @@ $_['route']['UploadFile'] 					= 'file/upload';
 // Data Value
 $_['route']['LocationAutoCompleteRoute']	= 'data/value/locationAutoComplete';
 $_['route']['IndustryAutoCompleteRoute']	= 'data/value/industryAutoComplete';
+$_['route']['DegreeAutoCompleteRoute']		= 'data/value/degreeAutoComplete';
+$_['route']['SchoolAutoCompleteRoute']		= 'data/value/schoolAutoComplete';
+$_['route']['FieldOfStudyAutoCompleteRoute']= 'data/value/fieldOfStudyAutoComplete';
 ?>

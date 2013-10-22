@@ -97,7 +97,7 @@
 					type: $(this).find('.type').val()
 				});
 			});
-			console.log(phones);
+			
 			that.data = {
 				'username'		: that.$el.find('[name=\'username\']').val(),
 				'firstname'		: that.$el.find('[name=\'firstname\']').val(),
@@ -207,13 +207,6 @@
 			},
 			items: 5,
 			minLength: 1,
-			updater: function (item) {
-				that.$el.find('input[name=\"cityid\"]').val(locations[item].id);
-				that.$locationAutoComplete.tooltip('destroy');
-				that.$locationAutoComplete.parent().removeClass('error');
-				that.$locationAutoComplete.parent().addClass('success');
-	    		return item;
-			},
 		});
 
 		this.$industryAutoComplete.typeahead({
@@ -225,9 +218,9 @@
 					success: function (json) {
 						var parJSON = JSON.parse(json);
 						var suggestions = [];
-						locations = {};
+						industries = {};
 						$.each(parJSON, function (i, suggestTerm) {
-							locations[suggestTerm.name] = suggestTerm;
+							industries[suggestTerm.name] = suggestTerm;
 							suggestions.push(suggestTerm.name);
 						});
 						process(suggestions);
@@ -236,13 +229,6 @@
 			},
 			items: 5,
 			minLength: 1,
-			updater: function (item) {
-				that.$el.find('input[name=\"industryid\"]').val(locations[item].id);
-				that.$industryAutoComplete.tooltip('destroy');
-				that.$industryAutoComplete.parent().removeClass('error');
-				that.$industryAutoComplete.parent().addClass('success');
-	    		return item;
-			},
 		});
 	}
 
@@ -381,9 +367,13 @@
 
 		this.$started 		= this.$formAdd.find('[name=\"started\"]');
 		this.$ended 		= this.$formAdd.find('[name=\"ended\"]');
+
 		this.$degree 		= this.$formAdd.find('[name=\"degree\"]');
+		this.$degree_id 	= this.$formAdd.find('[name=\"degree_id\"]');
 		this.$school 		= this.$formAdd.find('[name=\"school\"]');
+		this.$school_id 	= this.$formAdd.find('[name=\"school_id\"]');
 		this.$fieldofstudy 	= this.$formAdd.find('[name=\"fieldofstudy\"]');
+		this.$fieldofstudy_id 	= this.$formAdd.find('[name=\"fieldofstudy_id\"]');
 
 		this.attachEvents();
 	}
@@ -441,11 +431,14 @@
 			}
 
 			that.data = {
-				'started': that.$started.val(),
-				'ended': that.$ended.val(),
-				'degree': that.$degree.val(),
-				'school': that.$school.val(),
-				'fieldofstudy': that.$fieldofstudy.val(),
+				'started'			: that.$started.val(),
+				'ended'				: that.$ended.val(),
+				'degree'			: that.$degree.val(),
+				'degree_id'			: that.$degree_id.val(),
+				'school'			: that.$school.val(),
+				'school_id'			: that.$school_id.val(),
+				'fieldofstudy'		: that.$fieldofstudy.val(),
+				'fieldofstudy_id'	: that.$fieldofstudy_id.val(),
 			};
 
 			if ( that.$formAdd.hasClass('add-form') ){
@@ -459,6 +452,84 @@
 			}
 
 			return false;
+		});
+
+		this.$degree.typeahead({
+			source: function (query, process) {
+				that.$degree_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$el.data('degree') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						degrees = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							degrees[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$degree.parent().find('ul.typeahead').css('left', '1631px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+		});
+
+		this.$school.typeahead({
+			source: function (query, process) {
+				that.$school_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$el.data('school') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						schools = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							schools[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$school.parent().find('ul.typeahead').css('left', '1631px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+		});
+
+		this.$fieldofstudy.typeahead({
+			source: function (query, process) {
+				that.$fieldofstudy_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$el.data('fieldofstudy') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						fieldofstudies = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							fieldofstudies[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$fieldofstudy.parent().find('ul.typeahead').css('left', '1631px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
 		});
 	}
 
