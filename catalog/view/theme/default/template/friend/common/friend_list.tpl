@@ -67,5 +67,4 @@
 
 {% block friend_common_friend_list_javascript %}
     <script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
-    {{ block('friend_common_friend_filter_javascript') }}
 {% endblock %}

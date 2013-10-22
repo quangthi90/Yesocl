@@ -40,7 +40,3 @@
         </ul> 
     </div>
 {% endblock %}
-
-{% block friend_common_friend_filter_javascript %}
-    <script type="text/javascript" src="{{ asset_js('friend_filter.js') }}"></script>
-{% endblock %}

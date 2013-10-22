@@ -28,18 +28,21 @@ class ModelFriendFriend extends Model {
 		$results = array();
 
 		if ( $this->customer->isLogged() ) {
-			if ( isset( $data['filter_name'] ) ) {
-				$data['filter_name'] = trim( $data['filter_name'] );
-			}
-
 			$query = $this->client->createSelect(
 	    		array(
 					'mappedDocument' => 'Document\User\User',
 					)
 	    	);
 	 
-			$query_data = 'solrFriendList_t:*' . $this->customer->getId() . '* & ';
-			$query_data .= 'solrUserContent_t:*' . $data['filter_name'] . '*';
+			$query_data = 'solrFriendList_t:*' . $this->customer->getId() . '*';
+
+			if ( isset( $data['filter_name'] ) && is_string( $data['filter_name'] ) ) {
+				$query_data .= ' & solrUserContent_t:*' . trim( $data['filter_name'] ) . '*';
+			}
+
+			if ( isset( $data['filter_gender'] ) && is_string( $data['filter_gender'] ) ) {
+				$query_data .= ' & gender_t:' . (int) $data['filter_gender'];
+			}
 
 			if ( isset( $data['start'] ) ) {
 				$data['start'] = (int)$data['start'];
