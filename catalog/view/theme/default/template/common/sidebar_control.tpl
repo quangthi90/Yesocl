@@ -2,7 +2,7 @@
 <div id="y-sidebar">
 	<div class="sidebar-wrapper">
 		<div class="search-box">
-			<input type="text" name="keyword" id="keyword" placeholder="Search" />
+			<input type="text" name="ss-keyword" id="ss-keyword" placeholder="Search" />
 			<a href="#" class="btn-search"><i class="icon-search"></i></a>
 		</div>
 		<div class="sidebar-controls">

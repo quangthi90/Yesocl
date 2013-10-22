@@ -21,6 +21,7 @@ function Sidebar(el){
 	this.sidebarToggle = this.sidebarRoot.find("#sidebar-toggle");
 	this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
 	this.listMenuItem  = this.menuContainer.find('li');
+	this.searchCtrl	   = this.sidebarRoot.find("input#ss-keyword");
 	this.isMadeScroll  = false;
 	this.makeScroll();
 	this.attachEvents();
@@ -48,6 +49,30 @@ Sidebar.prototype.attachEvents = function(){
 			});
 		}
 	);	
+	//Auto invoke search:
+	$(document).keypress(function(e){ 
+		//Check if any input is focused, if so, don't continue:
+		var isFocus = false;
+		$('input,textarea').each(function(){
+			if ($(this).is(":focus")) isFocus = true;
+		});
+		if (isFocus) return;
+		var key = e.which;		
+		key = String.fromCharCode((96 <= key && key <= 105) ? (key - 48) : key);
+		if(parseInt(that.sidebarRoot.css('left')) != 0 ) {
+			that.sidebarRoot.mouseenter();
+			that.searchCtrl.focus();
+		}
+	});
+	$("#y-header, #y-content, #y-footer").click(function(){
+		that.hideSidebar();
+	});
+}
+Sidebar.prototype.hideSidebar = function() {
+	if(parseInt(that.sidebarRoot.css('left')) == 0 ) {
+		that.sidebarRoot.mouseleave();
+		that.searchCtrl.val('');
+	}
 }
 Sidebar.prototype.makeScroll = function() {
 	var that = this;
@@ -159,7 +184,7 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			blockFeed.putFeed();	
 			totalWithContent += ($(this).outerWidth() + marginBlock);			
 		});
-		this.root.width(totalWithContent);
+		this.root.width(totalWithContent + 2);
 		this.feeds.each(function() {
 			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
@@ -220,7 +245,7 @@ HorizontalBlock.prototype.initializeBlock = function() {
 			blockFeed.putFeed();	
 			totalWithContent += $(this).outerWidth();	
 		});
-		this.root.width(totalWithContent);
+		this.root.width(totalWithContent + 2);
 		this.feeds.each(function() {
 			$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 			var hp = $(this).children('.post_header').first().outerHeight();
