@@ -111,6 +111,9 @@ class ControllerFriendFriend extends Controller {
 				$data['filter_name'] = $this->request->post['filter_name'];
 			}
 
+			$data['limit'] = 20;
+			$data['start'] = 0;
+
 			if ( count( $data ) > 0 ) {
 				$this->load->model( 'friend/friend' );
 

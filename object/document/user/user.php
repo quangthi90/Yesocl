@@ -79,6 +79,8 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
+        $this->getDataGender();
+        $this->getDataSolrFriendList();
     }
 
     /** @MongoDB\PreUpdate */
@@ -87,6 +89,8 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
+        $this->getDataGender();
+        $this->getDataSolrFriendList();
     }
 
     /**
@@ -439,6 +443,52 @@ Class User {
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrFriendList;
+
+	public function setSolrFriendList( $solrFriendList ){
+		$this->solrFriendList = $solrFriendList;
+	}
+
+	public function getSolrFriendList(){
+		return $this->solrFriendList;
+	}
+
+	public function getDataSolrFriendList(){
+		try{
+			foreach ($this->getFriends() as $friend) {
+				$this->solrFriendList .= ' ' . $friend->getId();
+			}
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $gender;
+
+	public function setGender( $gender ){
+		$this->gender = $gender;
+	}
+
+	public function getGender(){
+		return $this->gender;
+	}
+
+	public function getDataGender(){
+		try{
+			$this->gender = (int) $this->getMeta()->getSex();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
 		}
 	}
 	//---------------------------------- end Solr Data Cache --------------------------
