@@ -1,3 +1,4 @@
+// Create layout
 (function($, document, undefined) {
 	function ProfilesLayout($el) {
 		this.$el = $el;
@@ -6,6 +7,7 @@
 		
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
+		this.$experience = $el.find('#profiles-tabs-background-experience');
 		
 		this.$header = this.$background.find('.profiles-tabs-header');
 
@@ -24,12 +26,25 @@
 		education_main_body.outerHeight(contentHeight - this.$header.height() - 30);
 		education_main_body.niceScroll();
 
+		// Experience
+		var experience_main_body = this.$experience.find('.profiles-tabs-main-body');
+		this.$experience.outerWidth(contentWidth);
+		experience_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		experience_main_body.niceScroll();
+
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
 
 		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
 	}
 
+	$(function(){
+		new ProfilesLayout($('#y-main-content'));
+	});
+}(jQuery, document));
+
+// Information
+(function($, document, undefined) {
 	function InfoLabel($el) {
 		this.$el = $el;
 		this.$btn = $el.find('.profiles-btn-edit');
@@ -271,6 +286,19 @@
         promise.then(f, f);
 	};
 
+	$(function(){
+		$('.profile-label').each(function(){
+			new InfoLabel( $(this) );
+		});
+
+		$('.profile-form').each(function(){
+			new InfoForm( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Summary
+(function($, document, undefined) {
 	function SummaryLabel($el){
 		this.$el = $el;
 		this.$btn = $el.find('.profiles-btn-edit');
@@ -355,6 +383,19 @@
         promise.then(f, f);
 	};
 
+	$(function(){
+		$('.summary-label').each(function(){
+			new SummaryLabel( $(this) );
+		});
+
+		$('.summary-form').each(function(){
+			new SummaryForm( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Education
+(function($, document, undefined) {
 	function Education($el){
 		this.$el 			= $el;
 		this.$formAdd 		= $el.find('.background-education-form-add');
@@ -588,29 +629,12 @@
 	};
 
 	$(function(){
-		new ProfilesLayout($('#y-main-content'));
-
-		// Information
-		$('.profile-label').each(function(){
-			new InfoLabel( $(this) );
-		});
-
-		$('.profile-form').each(function(){
-			new InfoForm( $(this) );
-		});
-
-		// Summary
-		$('.summary-label').each(function(){
-			new SummaryLabel( $(this) );
-		});
-
-		$('.summary-form').each(function(){
-			new SummaryForm( $(this) );
-		});
-
-		// Education
 		$('.education-label').each(function(){
 			new Education( $(this) );
 		});
 	});
+}(jQuery, document));
+
+// Experience
+(function($, document, undefined) {
 }(jQuery, document));
