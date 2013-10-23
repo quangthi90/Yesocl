@@ -80,8 +80,6 @@ class Customer {
 
 			// remember
 			if ($remember) {
-				//setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
-	    		//setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $this->$request->server['HTTP_HOST']);
 	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30);
 	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30);
 	        }
@@ -104,10 +102,12 @@ class Customer {
 		$this->customer_group_id = '';
 
 		// delete cookie
-		//setcookie('yid', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
-	    //setcookie('ypass', '', time() - 3600, '/', $this->request->server['HTTP_HOST']);
-		setcookie('yid', '', time() - 3600);
-	    setcookie('ypass', '', time() - 3600);
+		if ( isset( $this->request->cookie['yid'] ) ) {
+			setcookie('yid', '', time() - 3600);
+		}
+		if ( isset( $this->request->cookie['ypass'] ) ) {
+			setcookie('ypass', '', time() - 3600);
+		}
   	}
   
   	public function isLogged() {
@@ -117,9 +117,8 @@ class Customer {
   	public function hasRemember() {
   		if ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) && $this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'] ) ) {
   			return true;
-  		}else {
-  			return false;
   		}
+  		return false;
   	}
 
   	public function getId() {
