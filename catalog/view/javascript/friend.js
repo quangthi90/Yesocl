@@ -105,6 +105,7 @@
 	function FriendFilter( $element ){
 		this.$element			= $element;
 		this.$inputSearch		= $element.find('#search-input');
+		this.$btnSearch			= $element.find('.friend-search-btn');
 
 		this.attachEvents();
 	}
@@ -164,15 +165,44 @@
                 return htmlContent;
             }
         });
+
+		this.$btnSearch.click( function () {
+			if ( that.$inputSearch.val() == '' ) {
+				return false;
+			}
+
+			$.ajax({
+            	type: 'POST',
+            	url: that.$inputSearch.data('url'),
+            	data: { 'filter_name': that.$inputSearch.val() },
+            	dataType: 'json',
+            	success: function ( json ) {
+            		if ( json.success != 'ok' ) {
+            				
+            		}else {   
+            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+            			$friends.each(function(){
+				            new FriendAction( $(this) );
+				        });
+            			var $htmlParent = $('#y-content .friend-item').parent();
+            		    $('#y-content .friend-item').remove();
+            		    $htmlParent.append( $friends );
+            		}
+            	},
+            	error: function (xhr, error) {
+            		alert(xhr.responseText);
+            	},
+            });
+		});
 	}
 
 	$(function(){
-		$('.friend-actions').each(function(){
-			new FriendAction( $(this) );
-		});
+        $('.friend-actions').each(function(){
+            new FriendAction( $(this) );
+        });
 
-		$('#friend-filter').each(function(){
-			new FriendFilter( $(this) );
-		});
-	});
+        $('#friend-filter').each(function(){
+            new FriendFilter( $(this) );
+        });
+    });
 }(jQuery, document));

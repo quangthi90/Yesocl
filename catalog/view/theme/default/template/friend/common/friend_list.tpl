@@ -66,5 +66,29 @@
 {% endblock %}
 
 {% block friend_common_friend_list_javascript %}
+    <script id="friend-item" type="text/x-jquery-tmpl">
+        <div class="block-content-item friend-item">
+            <a href="${ url }" class="fl friend-img">
+                <img src="${ image }">
+            </a>
+            <div class="fl friend-info">
+                <a href="${ url }" class="friend-name">${ username }</a>
+                <ul class="friend-infolist">
+                    <li>${ industry }</li>
+                    <li>${ numFriend }</li>
+                </ul>
+            </div>
+            <div class="friend-actions">
+                <div class="dropdown friend-group">
+                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a class="btn-unfriend" data-url="${ unFriend }">Unfriend</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </script>
     <script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 {% endblock %}

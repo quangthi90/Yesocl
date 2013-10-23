@@ -65,19 +65,22 @@ class ModelFriendFriend extends Model {
 				$friend = $this->dm->getRepository('Document\User\User')->find( $friend->getId() );
 
 				if ( strlen( $friend->getAvatar() ) > 0 ){
-					$avatar = $this->model_tool_image->resize( $friend->getAvatar(), 40, 40 );
+					$avatar = $this->model_tool_image->resize( $friend->getAvatar(), 65, 65 );
 				}elseif ( strlen( $friend->getPrimaryEmail()->getEmail() ) > 0 ){
-			        $avatar = $this->model_tool_image->getGavatar( $friend->getPrimaryEmail()->getEmail(), 40 );
+			        $avatar = $this->model_tool_image->getGavatar( $friend->getPrimaryEmail()->getEmail(), 65 );
 			    }else{
-			        $avatar = $this->model_tool_image->resize( 'no_user_avatar.png', 40, 40 );
+			        $avatar = $this->model_tool_image->resize( 'no_user_avatar.png', 65, 65 );
 				}
 
 				$results[] = array(
 					'id' => $friend->getId(),
+					'username' => $friend->getUsername(),
 					'image' => $avatar,
 					'name' => $friend->getFullname(),
+					'industry' => $friend->getMeta()->getIndustry(),
 					'url' => $this->url->link( 'wall-page/' . $friend->getSlug(), '', 'SSL' ),
-						'numFriend' => count( $friend->getFriends() ),
+					'unFriend' => $this->url->link( 'friend/remove/' . $friend->getSlug(), '', 'SSL' ),
+					'numFriend' => count( $friend->getFriends() ),
 					);
 			}
 		}
