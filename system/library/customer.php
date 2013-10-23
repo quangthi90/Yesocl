@@ -80,8 +80,8 @@ class Customer {
 
 			// remember
 			if ($remember) {
-	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30);
-	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30);
+	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
+	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	        }
 
 			// $this->db->query("UPDATE " . DB_PREFIX . "customer SET ip = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "' WHERE customer_id = '" . (int)$this->customer_id . "'");
@@ -103,10 +103,10 @@ class Customer {
 
 		// delete cookie
 		if ( isset( $this->request->cookie['yid'] ) ) {
-			setcookie('yid', '', time() - 3600);
+			setcookie('yid', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
 		if ( isset( $this->request->cookie['ypass'] ) ) {
-			setcookie('ypass', '', time() - 3600);
+			setcookie('ypass', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
   	}
   

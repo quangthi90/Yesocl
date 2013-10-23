@@ -16,7 +16,7 @@ class ControllerWelcomeHeader extends Controller {
 			'forgot_pass'	=> $this->url->link('account/forgotten', '', 'SSL'),
 			'connect_face'	=> $this->facebook->getLoginUrl( array( 
 				'scope' => 'publish_stream, email',
-				'redirect_uri' => $this->url->link( $this->request->get['route'], '', 'SSL')
+				'redirect_uri' => $this->url->link( $this->request->get['route'], '', 'SSL'),
 				) 
 			)
 		);
