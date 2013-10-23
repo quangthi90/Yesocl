@@ -459,6 +459,8 @@ label.in-line{
 .user-menu > a > i {
   color: #ddd;
   font-size: 13px;
+  height: 20px;
+  display: block;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
@@ -510,6 +512,8 @@ label.in-line{
 .notification-item a.btn-notification i {
   color: #ddd;
   font-size: 13px;
+  height: 20px;
+  display: block;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;

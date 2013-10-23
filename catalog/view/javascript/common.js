@@ -105,7 +105,7 @@ function FlexibleElement(el) {
 	this.main = el.find('#y-content');
 	this.footerBar = el.find('#yes-footer-bar');
 	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');
-	this.notificationList = el.find('.notification-item');	
+	this.notificationList = el.find('.notification-content-list');	
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
@@ -135,17 +135,11 @@ FlexibleElement.prototype.attachEvents = function() {
 
     //Apply scroll for notification:
     this.notificationList.each(function(){
-    	if($(this).find('.notification-content-item').length > 0){
-    		var scrollView = $(this).find('.notification-content-list').first();
-    		scrollView.niceScroll({
-				cursorwidth:"6px",
-		      	cursorborder:"none",
-		      	cursorcolor : "#000000",
-		      	touchbehavior: false,
-		      	autohidemode: true,
-		      	background: "#FFFFFF"
-			});		
-    	}
+    	$(this).niceScroll({
+			cursorwidth:"6px",
+	      	cursorborder:"none",
+	      	touchbehavior: false
+		});	
     });
 
     //Popup link of image:

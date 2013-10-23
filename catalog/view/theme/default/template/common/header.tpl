@@ -60,8 +60,6 @@
                   <span class="notification-item-name">Notification</span>
                   <span class="notification-item-count">3</span>
                 </a>
-                <div class="scroll-wrapper">          	
-                </div>
                 <ul class="dropdown-menu notification-content-list">
                   <li class="notification-content-item">
                     <a href="#" class="notification-content-item-img">
