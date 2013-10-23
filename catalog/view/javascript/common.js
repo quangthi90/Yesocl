@@ -103,43 +103,51 @@ Jquery effects
 */
 function FlexibleElement(el) {
 	this.main = el.find('#y-content');
-	this.footerBar = el.find('#yes-footer-bar');
-	this.goLeftBtn = this.footerBar.find('#auto-scroll-left');
+	this.mainContent = el.find("#y-main-content");
+	this.goLeftBtn = el.find('#auto-scroll-left');
+	this.goRightBtn = el.find('#auto-scroll-right');
 	this.notificationList = el.find('.notification-content-list');	
 	this.attachEvents();
 }
 FlexibleElement.prototype.attachEvents = function() { 
-	var m = this.main;	
+	var that = this;
 	//Tooltip:
 	$('a[title]').tooltip({ container: 'body' });
 
 	//For show/hide GoLeft
-	var goLeftBtn = this.goLeftBtn;
-	goLeftBtn.hide();		
-	m.scroll(function(e) { 
+	var maxScroll = that.mainContent.width() - that.main.width();
+	that.goLeftBtn.addClass('disabled');		
+	that.main.scroll(function(e) { 
     	var leftOffset = 0;
     	var freeBlockFirst = $(this).find(".free-block:first-child");
     	if(freeBlockFirst.length != 0 ){
     		leftOffset = freeBlockFirst.width();
     	}
         if($(this).scrollLeft() > leftOffset){
-        	goLeftBtn.fadeIn();	
+        	that.goLeftBtn.removeClass('disabled');	
         }
         else {
-            goLeftBtn.fadeOut();	
+            that.goLeftBtn.addClass('disabled');	
+        }
+        console.log('s: ' + $(this).scrollLeft() + ' ->  ' + maxScroll);
+        if($(this).scrollLeft() > maxScroll) {
+        	that.goRightBtn.addClass('disabled');	
+        }else {
+        	that.goRightBtn.removeClass('disabled');	
         }
     });
-    goLeftBtn.click(function(){
-		m.animate({scrollLeft: 0}, 1000);
+    that.goLeftBtn.click(function(){
+    	if($(this).hasClass('disabled')) return;
+		that.main.animate({scrollLeft: 0}, 1000);
+    });
+    that.goRightBtn.click(function() {
+		if($(this).hasClass('disabled')) return;
+		that.main.animate({scrollLeft: maxScroll }, 1000);
     });
 
     //Apply scroll for notification:
     this.notificationList.each(function(){
-    	$(this).niceScroll({
-			cursorwidth:"6px",
-	      	cursorborder:"none",
-	      	touchbehavior: false
-		});	
+    	
     });
 
     //Popup link of image:
@@ -440,16 +448,14 @@ NotifyFriendBtn.prototype.triggerProgress = function($el, promise){
 /*
 End Custom List Post
 */
-$(document).ready(function() {
+$(document).ready(function() {	
+	new HorizontalBlock($('.has-horizontal'));
 	new FlexibleElement($(this));
 	new Sidebar($(this));
-	new HorizontalBlock($('.has-horizontal'));
 	$(".timeago").timeago();
-
 	$('.search-form').each(function(){
 		new SearchBtn( $(this) );
 	});
-
 	$('.notify-actions').each(function(){
 		new NotifyFriendBtn( $(this) );
 	});

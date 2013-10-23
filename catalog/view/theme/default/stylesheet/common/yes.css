@@ -1280,66 +1280,55 @@ label.in-line{
 /* ------------------------------------- END CATEGORY -------------------------------------- */
 /* ----------------------------------- START FOOTER BAR ---------------------------------------- */
 #yes-info {
-  text-align: center;
-  vertical-align: middle;
   height: 20px;
   width: 100%;
   background: #ddd;
   border-top: 1px solid #ccc;
 }
-#yes-info  .copyright {
-  margin-left: 10px;
-}
-#yes-footer-bar {
-  padding: 0px 0px;
-  -webkit-box-shadow: -5px 1px 1px #ccc;
-  -moz-box-shadow: -5px 1px 1px #ccc;
-  box-shadow: -5px 1px 1px #ccc;
-  background-color: #0E0E0E; 
-}
-#yes-footer-bar .bar-wrapper {  
-  padding: 0px;
-  height: 30px;
-}
-.bar-wrapper .language-box .input-append .add-on, .input-prepend .add-on {
-  padding: 2px 5px;
-  height: 19px;
-}
-#yes-footer-bar .bar-wrapper .input-prepend .auto-hide, 
-#yes-footer-bar .bar-wrapper .input-append .auto-hide {
-  display: none;
-}
-#yes-footer-bar .bar-wrapper input[type='text'] {
-  height: 20px;
-  font-size: 15px;
-  width: 300px;
-}
-.bar-wrapper .language-box .input-append select{
-  font-size: 12px;
-}
-.footer-toolbar {
-}
-.footer-toolbar .footer-toolbar-item{
-  vertical-align: top;
-  display: block;
-}
-.footer-toolbar.fl .footer-toolbar-item{
-  margin-right: 1px ;
+#yes-info .copyright {
+  padding: 0px 15px;
+  font-size: 11px;
+  font-weight: bold;
   float: left;
 }
-.footer-toolbar.fr .footer-toolbar-item{
-  margin-left: 1px ;
+#y-footer .copyright strong {
+  color: #05AA48;
+  font-size: 12px;
+}
+#yes-info .links-footer {
   float: right;
+  padding-right: 15px;
 }
-.footer-toolbar .footer-toolbar-item.search .btn {
-  width: 90px;
+.links-footer ul > li{
+  float: left;  
+  padding: 0px 10px;
+  border-left: 1px solid #ccc;
 }
-.footer-toolbar .footer-toolbar-item.search .btn i {
-  font-size: 18px;
-  color: #fff;
-  margin-right: 10px;
+.links-footer ul > li > a{
+  font-size: 11px;  
 }
-.footer-toolbar-item.notification-group {
+.links-footer ul > li > a:hover {
+  border-bottom: 1px solid #009B77;
+}
+#yes-footer-bar {
+  position: absolute;
+  top: 3px;
+  left: 48%;
+  overflow: hidden;
+}
+.footer-toolbar-ctrl {
+  float: left;
+  margin-right: 15px;
+}
+.footer-toolbar-ctrl  > a {
+  display: block;
+}
+.footer-toolbar-ctrl  > a > i {
+  font-size: 16px;
+  color: #363636;
+}
+.footer-toolbar-ctrl.disabled  > a > i {
+  color: #b4b4b4;
 }
 /* ----------------------------------- END FOOTER BAR ---------------------------------------- */
 
