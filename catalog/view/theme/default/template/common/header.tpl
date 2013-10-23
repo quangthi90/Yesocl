@@ -60,7 +60,100 @@
                   <span class="notification-item-name">Notification</span>
                   <span class="notification-item-count">3</span>
                 </a>
+                <div class="scroll-wrapper">          	
+                </div>
                 <ul class="dropdown-menu notification-content-list">
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
                   <li class="notification-content-item">
                     <a href="#" class="notification-content-item-img">
                       <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">

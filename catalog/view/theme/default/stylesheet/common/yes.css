@@ -331,7 +331,7 @@ label.in-line{
 
 #y-header
 {
-  z-index:1;
+  z-index: 3;
   background: #414141;
   position: fixed;
   top:0px;
@@ -571,6 +571,7 @@ label.in-line{
   font-size: 12px;
   min-width: 250px;
   max-width: 300px;
+  padding-right: 15px;
 }
 .notification-content-item .notification-content-item-detail  .notification-text {
   line-height: 18px;
