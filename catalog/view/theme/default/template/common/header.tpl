@@ -54,13 +54,13 @@
 			    </ul>				
 			</div>
 			<div id="user-notification" class="fr notification-group">				
-              <div class="dropup notification-item common">
+              <div class="dropdown notification-item common">
                 <a href="#" class="btn-notification" data-toggle="dropdown">
                   <i class="icon-bell"></i>
                   <span class="notification-item-name">Notification</span>
-                  <!--span class="notification-item-count">3</span-->
+                  <span class="notification-item-count">3</span>
                 </a>
-                <!--ul class="dropdown-menu notification-content-list">
+                <ul class="dropdown-menu notification-content-list">
                   <li class="notification-content-item">
                     <a href="#" class="notification-content-item-img">
                       <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
@@ -69,17 +69,62 @@
                       <div class="notification-text">
                         <a href="#">WMThiet</a> commented on your post
                       </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
                     </div>
-                  </li>	                  
-                </ul-->
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> commented on your post
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
-              <div class="dropup notification-item message">
+              <div class="dropdown notification-item message">
                 <a href="#" class="btn-notification" data-toggle="dropdown">
                   <i class="icon-envelope"></i>
                   <span class="notification-item-name">Message</span>
-                  <!--span class="notification-item-count">5</span-->
+                  <span class="notification-item-count">5</span>
                 </a>
-                <!--ul class="dropdown-menu notification-content-list">
+                <ul class="dropdown-menu notification-content-list">
+                  <li class="notification-content-item">
+                    <a href="#" class="notification-content-item-img">
+                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+                    </a>
+                    <div class="notification-content-item-detail">
+                      <div class="notification-text">
+                        <a href="#">WMThiet</a> sent a message to you
+                      </div>
+                      <div class="message-content">
+                        hello everyone
+                      </div>
+                      <div class="notification-time">
+                      	1 hour ago
+                      </div>
+                    </div>
+                  </li>
                   <li class="notification-content-item">
                     <a href="#" class="notification-content-item-img">
                       <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
@@ -93,10 +138,10 @@
                       </div>
                     </div>
                   </li>	                  
-                </ul-->
+                </ul>
               </div>
               {% set requests = get_request_friend() %}
-              <div class="dropup notification-item friend">
+              <div class="dropdown notification-item friend">
                 <a href="#" class="btn-notification" data-toggle="dropdown">
                   <i class="icon-user"></i>
                   <span class="notification-item-name">Friend</span>
