@@ -32,50 +32,60 @@ class ControllerAccountLogin extends Controller {
 		);
 					
 		$this->response->setOutput($this->twig_render());
-  	}
+  }
 
-  	public function login() {
+  public function login() {
 		$this->load->model('account/customer');
 	
-    	$this->language->load('account/login');
+    $this->language->load('account/login');
 
-    	if ( $this->customer->isLogged() ){
-    		return $this->response->setOutput(json_encode(array(
-	            'success' => 'ok'
-	        )));
-    	}
-
-        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            unset($this->session->data['guest']);
-
-            return $this->response->setOutput(json_encode(array(
-                                'success' => 'ok'
-                            )));
-        }
-
-        if (isset($this->error['warning'])) {
-            $this->session->data['warning'] = $this->error['warning'];
-        }
-
-        return $this->response->setOutput(json_encode(array(
-                            'success' => 'not ok'
-                        )));
+    if ( $this->customer->isLogged() ){
+    	return $this->response->setOutput(json_encode(array(
+        'success' => 'ok'
+        )));
     }
 
-    private function validate() {
-        if (!$this->customer->login($this->request->post['email'], $this->request->post['password'])) {
-            $this->error['warning'] = $this->language->get('error_login');
-        }
+    if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+      unset($this->session->data['guest']);
 
-        if (!$this->error) {
-            return true;
-        } else {
-            return false;
-        }
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'ok'
+        )));
     }
 
+    if (isset($this->error['warning'])) {
+        $this->session->data['warning'] = $this->error['warning'];
+    }
 
-  	public function facebookConnect() {
+    return $this->response->setOutput(json_encode(array(
+      'success' => 'not ok'
+    )));
+  }
+
+  private function validate() {
+    if ( !isset( $this->request->post['email'] ) ) {
+      $this->error['warning'] = $this->language->get('error_login');
+    }
+
+    if ( !isset( $this->request->post['password'] ) ) {
+      $this->error['warning'] = $this->language->get('error_login');
+    }
+
+    if ( !isset( $this->request->post['remember'] ) ) {
+      $this->request->post['remember'] = false;
+    }
+
+    if (!$this->error) {   
+      if (!$this->customer->login($this->request->post['email'], $this->request->post['password'], false, $this->request->post['remember'])) {
+        $this->error['warning'] = $this->language->get('error_login');
+      }
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public function facebookConnect() {
   		if ( $this->facebook->getUser() ) {
   			$customer_data = $this->facebook->api('/me');
   			$email = $customer_data['email'];
@@ -108,6 +118,6 @@ class ControllerAccountLogin extends Controller {
   		}
   		
   		$this->redirect( $redirect_url );
-  	}
+  }
 }
 ?>
