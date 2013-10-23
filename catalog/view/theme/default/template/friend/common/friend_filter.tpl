@@ -15,10 +15,10 @@
                 <i class="icon-star"></i><a href="#">Recently Added</a>
             </li>
             <li>
-                <i class="icon-male"></i><a href="#">Male Friends</a>
+                <i class="icon-male"></i><a href="#" class="filter-male-friends">Male Friends</a>
             </li>
             <li>
-                <i class="icon-female"></i><a href="#">Female Friends</a>
+                <i class="icon-female"></i><a href="#" class="filter-female-friends">Female Friends</a>
             </li>  
         </ul>
         <ul class="friend-conditions mutual-friend-block">

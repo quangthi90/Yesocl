@@ -111,6 +111,10 @@ class ControllerFriendFriend extends Controller {
 				$data['filter_name'] = $this->request->post['filter_name'];
 			}
 
+			if ( isset( $this->request->post['filter_gender'] ) ) {
+				$data['filter_gender'] = $this->request->post['filter_gender'];
+			}
+
 			$data['limit'] = 20;
 			$data['start'] = 0;
 

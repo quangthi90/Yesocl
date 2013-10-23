@@ -106,6 +106,8 @@
 		this.$element			= $element;
 		this.$inputSearch		= $element.find('#search-input');
 		this.$btnSearch			= $element.find('.friend-search-btn');
+		this.$linkFitlerMaleFr	= $element.find('.friend-conditions .filter-male-friends');
+		this.$linkFitlerFemaleFr= $element.find('.friend-conditions .filter-female-friends');
 
 		this.attachEvents();
 	}
@@ -175,6 +177,56 @@
             	type: 'POST',
             	url: that.$inputSearch.data('url'),
             	data: { 'filter_name': that.$inputSearch.val() },
+            	dataType: 'json',
+            	success: function ( json ) {
+            		if ( json.success != 'ok' ) {
+            				
+            		}else {   
+            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+            			$friends.each(function(){
+				            new FriendAction( $(this) );
+				        });
+            			var $htmlParent = $('#y-content .friend-item').parent();
+            		    $('#y-content .friend-item').remove();
+            		    $htmlParent.append( $friends );
+            		}
+            	},
+            	error: function (xhr, error) {
+            		alert(xhr.responseText);
+            	},
+            });
+		});
+
+		this.$linkFitlerMaleFr.click( function () {
+			$.ajax({
+            	type: 'POST',
+            	url: that.$inputSearch.data('url'),
+            	data: { 'filter_gender': 1 },
+            	dataType: 'json',
+            	success: function ( json ) {
+            		if ( json.success != 'ok' ) {
+            				
+            		}else {   
+            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+            			$friends.each(function(){
+				            new FriendAction( $(this) );
+				        });
+            			var $htmlParent = $('#y-content .friend-item').parent();
+            		    $('#y-content .friend-item').remove();
+            		    $htmlParent.append( $friends );
+            		}
+            	},
+            	error: function (xhr, error) {
+            		alert(xhr.responseText);
+            	},
+            });
+		});
+
+		this.$linkFitlerFemaleFr.click( function () {
+			$.ajax({
+            	type: 'POST',
+            	url: that.$inputSearch.data('url'),
+            	data: { 'filter_gender': 0 },
             	dataType: 'json',
             	success: function ( json ) {
             		if ( json.success != 'ok' ) {

@@ -462,7 +462,7 @@ Class User {
 	public function getDataSolrFriendList(){
 		try{
 			foreach ($this->getFriends() as $friend) {
-				$this->solrFriendList .= ' ' . $friend->getId();
+				$this->solrFriendList .= ' ' . $friend->getUser()->getId();
 			}
 		}
 		catch(Exception $e){

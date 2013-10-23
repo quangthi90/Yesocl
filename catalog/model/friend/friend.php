@@ -37,11 +37,11 @@ class ModelFriendFriend extends Model {
 			$query_data = 'solrFriendList_t:*' . $this->customer->getId() . '*';
 
 			if ( isset( $data['filter_name'] ) && is_string( $data['filter_name'] ) ) {
-				$query_data .= ' & solrUserContent_t:*' . trim( $data['filter_name'] ) . '*';
+				$query_data .= ' AND solrUserContent_t:*' . trim( $data['filter_name'] ) . '*';
 			}
 
 			if ( isset( $data['filter_gender'] ) && is_string( $data['filter_gender'] ) ) {
-				$query_data .= ' & gender_t:' . (int) $data['filter_gender'];
+				$query_data .= ' AND gender_t:' . (int) $data['filter_gender'];
 			}
 
 			if ( isset( $data['start'] ) ) {
