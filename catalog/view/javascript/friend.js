@@ -181,14 +181,18 @@
             	success: function ( json ) {
             		if ( json.success != 'ok' ) {
             				
-            		}else {   
-            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-            			$friends.each(function(){
-				            new FriendAction( $(this) );
-				        });
-            			var $htmlParent = $('#y-content .friend-item').parent();
-            		    $('#y-content .friend-item').remove();
-            		    $htmlParent.append( $friends );
+            		}else {  
+            			if ( json.friends.length > 0 ) {
+	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+	            			$friends.each(function(){
+					            new FriendAction( $(this) );
+					        });
+	            			var $htmlParent = $('#y-content .block-content');
+	            		    $('#y-content .friend-item').remove();
+	            		    $htmlParent.prepend( $friends );
+            		    }else {
+            		    	$('#y-content .friend-item').remove();
+            		    }
             		}
             	},
             	error: function (xhr, error) {
@@ -207,13 +211,17 @@
             		if ( json.success != 'ok' ) {
             				
             		}else {   
-            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-            			$friends.each(function(){
-				            new FriendAction( $(this) );
-				        });
-            			var $htmlParent = $('#y-content .friend-item').parent();
-            		    $('#y-content .friend-item').remove();
-            		    $htmlParent.append( $friends );
+            			if ( json.friends.length > 0 ) {
+	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+	            			$friends.each(function(){
+					            new FriendAction( $(this) );
+					        });
+	            			var $htmlParent = $('#y-content .block-content');
+	            		    $('#y-content .friend-item').remove();
+	            		    $htmlParent.prepend( $friends );
+            		    }else {
+            		    	$('#y-content .friend-item').remove();
+            		    }
             		}
             	},
             	error: function (xhr, error) {
@@ -232,13 +240,17 @@
             		if ( json.success != 'ok' ) {
             				
             		}else {   
-            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-            			$friends.each(function(){
-				            new FriendAction( $(this) );
-				        });
-            			var $htmlParent = $('#y-content .friend-item').parent();
-            		    $('#y-content .friend-item').remove();
-            		    $htmlParent.append( $friends );
+            			if ( json.friends.length > 0 ) {
+	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+	            			$friends.each(function(){
+					            new FriendAction( $(this) );
+					        });
+	            			var $htmlParent = $('#y-content .block-content');
+	            		    $('#y-content .friend-item').remove();
+	            		    $htmlParent.prepend( $friends );
+            		    }else {
+            		    	$('#y-content .friend-item').remove();
+            		    }
             		}
             	},
             	error: function (xhr, error) {
