@@ -50,10 +50,53 @@ jQuery(document).ready(function (){
 			return false;
 		});
 	}
-
-	$(function(){
-		$('.left-menu').each(function(){
-			new leftMenu($(this));
-		});
+	
+	$('.left-menu').each(function(){
+		new leftMenu($(this));
 	});
+
+	//Close Form:
+	function closeLoginForm(){				
+		$('#y-frm-register').animate(
+			{
+				right : '-9990px'
+			},500,	
+			function(){
+				$('#overlay').fadeOut(300, function(){
+					$('#intro-bg').css('text-align','center');	
+				});												
+			}					
+		);
+	}
+	//Join clicked:
+	$('#intro-bg img').click(function(e){
+		$('#login-form-container').stop().hide();
+		$('#overlay').fadeIn(function(){					
+			$('#intro-bg').css('text-align','left');					
+			$('#y-frm-register').animate(
+				{
+					right : '50px'
+				},600
+			);					
+		});
+	});	
+	$('#intro-bg').click(function() {
+		$('#login-form-container').stop().slideUp();
+	});
+	//Login button clicked:
+	$('#login-invoke').click(function(e) {
+		$('#login-form-container').stop().slideDown(500, function() {
+			$(this).find('input[name="email"]').focus();
+		}).mouseleave(function(){
+			$(this).stop().slideUp();
+		});		
+	});	
+	//if close button is clicked
+	$('.y-frm .close').click(function (e) {
+		closeLoginForm();
+	});					
+	//if overlay is clicked
+	$('#overlay').click(function () {
+		closeLoginForm();
+	});	
 });

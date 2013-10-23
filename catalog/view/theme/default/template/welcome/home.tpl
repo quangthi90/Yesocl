@@ -83,40 +83,4 @@
 
 {% block javascript %}
 	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>
-    <script type="text/javascript">
-        jQuery(document).ready(function () {
-        	//Join clicked:
-			$('#intro-bg img').click(function(e){
-				$('#overlay').fadeIn(function(){					
-					$('#intro-bg').css('text-align','left');					
-					$('#y-frm-register').animate(
-						{
-							right : '50px'
-						},600
-					);					
-				});
-			});			
-			//if close button is clicked
-			$('.y-frm .close').click(function (e) {
-				closeLoginForm();
-			});					
-			//if overlay is clicked
-			$('#overlay').click(function () {
-				closeLoginForm();
-			});		
-        });		
-		//Close Form:
-		function closeLoginForm(){				
-			$('#y-frm-register').animate(
-				{
-					right : '-9990px'
-				},500,	
-				function(){
-					$('#overlay').fadeOut(300, function(){
-						$('#intro-bg').css('text-align','center');	
-					});												
-				}					
-			);
-		}		
-    </script>
 {% endblock %}
