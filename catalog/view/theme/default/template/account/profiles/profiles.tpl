@@ -25,38 +25,6 @@
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.format.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
-<script id="background-experience-form" type="text/x-jquery-tmpl">
-	<div class="background-education-form-add" data-url="${ url }" data-id="${ id }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }">
-		<div class="profiles-tabs-item1-label">From <select class="span1" name="started_month">{% for i in 1..12 %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> <select class="span1" name="started_year">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> to <select class="span1" name="ended_month">{% for i in 1..12 %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select> <select class="span1" name="ended_year">{% for i in current_year..before_year %}<option value="{{ i }}">{{ i }}</option>{% endfor %}</select></div>
-		<div class="profiles-tabs-item1-content">
-			<a class="profiles-btn-cancel btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-			<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
-			<div class="profiles-tabs-value">
-				<div class="row-fluid"><div class="span4">Title: </div><input type="text" name="title" value="${ title }" /></div>
-				<div class="row-fluid"><div class="span4">Company: </div><input type="text"  name="company" value="${ company }" /></div>
-				<div class="row-fluid"><div class="span4">Location: </div><input type="text" name="location" value="${ location }" /></div>
-			</div>
-		</div>
-	</div>
-</script>
-<script id="background-experience-item" type="text/x-jquery-tmpl">
-	<div class="profiles-tabs-item1" data-id="${ id }" data-url="${ url }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-remove="${ remove }">
-		<div>
-			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started_text }</span> to <span class="profiles-tabs-value">${ ended_text }</span></div>
-		</div>
-		<div class="profiles-tabs-item1-content">
-			<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
-			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-			<div class="profiles-tabs-value">
-				<div class="profiles-tabs-value-item">${ title }</div>
-				<div class="profiles-tabs-value-item">${ company }</div>
-				<div class="profiles-tabs-value-item viewers">${ location }</div>
-			</div>
-		</div>
-	</div>
-</script>
 <script id="background-skill-item" type="text/x-jquery-tmpl">
     <div class="profiles-tabs-item2 btn" data-id="${ id }" data-remove="${ remove }">${ skill }<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
 </script>

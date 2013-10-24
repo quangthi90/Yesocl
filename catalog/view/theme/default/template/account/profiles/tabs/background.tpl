@@ -16,33 +16,7 @@
 	</div>
 	{{ block('profiles_tabs_summary') }}
 	{{ block('profiles_tabs_education') }}
-	<div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left" data-url="{{ link_add_experience }}">
-		<div class="profiles-tabs-main-header">
-			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Experience</a>
-			<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
-			<div class="clear"></div>
-		</div>
-		<div class="profiles-tabs-main-body">
-			{% for experience in user.experiences %}
-			<div class="profiles-tabs-item1" data-id="{{ experience.id }}" data-url="{{ link_edit_experience }}" data-startedt="{{ experience.started_text }}" data-endedt="{{ experience.ended_text }}" data-startedy="{{ experience.started_year }}" data-endedy="{{ experience.ended_year }}" data-startedm="{{ experience.started_month }}" data-endedm="{{ experience.ended_month }}" data-title="{{ experience.title }}" data-company="{{ experience.company }}" data-location="{{ experience.location }}" data-remove="{{ link_remove_experience }}">
-				<div>
-					<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ experience.started_text }}</span> to <span class="profiles-tabs-value">{{ experience.ended_text }}</span></div>
-				</div>
-				<div class="profiles-tabs-item1-content">
-					<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove  profiles-btn-remove"><i class="icon-trash"></i></a>
-					<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-					<div class="profiles-tabs-value">
-						<div class="profiles-tabs-value-item">{{ experience.title }}</div>
-						<div class="profiles-tabs-value-item">{{ experience.company }}</div>
-						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-		</div>	
-	</div>
+	{{ block('profiles_tabs_experience') }}
 	<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left" data-url="{{ link_add_skill }}">
 		<div class="profiles-tabs-main-header">
 			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>

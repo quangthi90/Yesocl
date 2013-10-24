@@ -637,4 +637,55 @@
 
 // Experience
 (function($, document, undefined) {
+	function Experience($el){
+		this.$el 			= $el;
+		this.$formAdd 		= $el.find('.background-education-form-add');
+
+		this.$btnAdd 		= $el.find('.profiles-btn-add');
+		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
+		this.$btnEdit 		= $el.find('.profiles-btn-edit');
+
+		this.$strMonth		= this.$formAdd.find('[name=\"started_month\"]');
+		this.$strYear		= this.$formAdd.find('[name=\"started_year\"]');
+		this.$endMonth		= this.$formAdd.find('[name=\"ended_month\"]');
+		this.$endYear		= this.$formAdd.find('[name=\"ended_year\"]');
+		this.$title			= this.$formAdd.find('[name=\"title\"]');
+		this.$company		= this.$formAdd.find('[name=\"company\"]');
+		this.$location		= this.$formAdd.find('[name=\"location\"]');
+
+		this.attachEvents();
+	}
+
+	Experience.prototype.attachEvents = function(){
+		that = this;
+
+		this.$btnAdd.click(function(){
+			that.$formAdd.removeClass('hidden');
+		});
+
+		this.$btnCancel.click(function(){
+			that.$formAdd.addClass('hidden').find('input').val('');
+			that.$formAdd.find('select').val('0');
+		});
+
+		this.$btnEdit.click(function(){
+			var $item = $(this).parents('.experience-item');
+
+			that.$formAdd.removeClass('hidden');
+
+			that.$strMonth.val( $item.data('startedm') );
+			that.$strYear.val( $item.data('startedy') );
+			that.$endMonth.val( $item.data('endedm') );
+			that.$endYear.val( $item.data('endedy') );
+			that.$title.val( $item.data('startedm') );
+			that.$company.val( $item.data('startedm') );
+			that.$location.val( $item.data('startedm') );
+		});
+	}
+
+	$(function(){
+		$('.experience-label').each(function(){
+			new Experience( $(this) );
+		});
+	});
 }(jQuery, document));
