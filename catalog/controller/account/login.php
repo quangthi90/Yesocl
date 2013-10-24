@@ -86,12 +86,12 @@ class ControllerAccountLogin extends Controller {
   }
 
   public function facebookConnect() {
-  		if ( $this->facebook->getUser() ) {
-  			$customer_data = $this->facebook->api('/me');
-  			$email = $customer_data['email'];
+  	if ( $this->facebook->getUser() ) {
+  		$customer_data = $this->facebook->api('/me');
+  		$email = $customer_data['email'];
 
-  			$this->load->model('account/customer');
-  			$customer = $this->model_account_customer->getCustomerByEmail( $email );
+  		$this->load->model('account/customer');
+  		$customer = $this->model_account_customer->getCustomerByEmail( $email );
 
 			if ( !$customer->getId() || empty( $customer ) ) {
 				$data = array();
@@ -108,16 +108,16 @@ class ControllerAccountLogin extends Controller {
 
 	  			$this->model_account_customer->addCustomer( $data );
 			}
-  		}
+  	}
 
-  		if ( isset( $this->session->data['redirect'] ) ) {
-  			$redirect_url = $this->url->link( $this->session->data['redirect'] );
-  			unset( $this->session->data['redirect'] );
-  		}else {
-  			$redirect_url = $this->url->link( 'common/home' );
-  		}
+  	if ( isset( $this->session->data['redirect'] ) ) {
+  		$redirect_url = $this->url->link( $this->session->data['redirect'] );
+  		unset( $this->session->data['redirect'] );
+  	}else {
+  		$redirect_url = $this->url->link( 'common/home' );
+  	}
   		
-  		$this->redirect( $redirect_url );
+  	$this->redirect( $redirect_url );
   }
 }
 ?>

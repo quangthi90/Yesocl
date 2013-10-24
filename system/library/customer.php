@@ -186,7 +186,7 @@ class Customer {
 				'status' => true,
 				'emails.email' => $email
 			));
-			if ( $customer->getId() && !empty( $customer ) ) {
+			if ( !empty( $customer ) && $customer->getId() ) ) {
   			// da co tai khoan ket noi
 				$this->session->data['customer_id'] = $customer->getId();
 										
