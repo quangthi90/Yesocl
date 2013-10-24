@@ -175,37 +175,6 @@ class Customer {
 		$query = $this->db->query("SELECT SUM(points) AS total FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer_id . "'");
 	
 		return $query->row['total'];	
-  	}	
-
-  	// facebook connect
-  	public function facebookConnect() {
-  		if ( $this->facebook->getUser() ) {
-  			$customer_data = $this->facebook->api('/me');
-  			$email = $customer_data['email'];
-  			$customer = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
-				'status' => true,
-				'emails.email' => $email
-			));
-			if ( !empty( $customer ) && $customer->getId() ) ) {
-  			// da co tai khoan ket noi
-				$this->session->data['customer_id'] = $customer->getId();
-										
-				$this->customer_id = $customer->getId();
-				$this->firstname = $customer->getMeta()->getFirstName();
-				$this->lastname = $customer->getMeta()->getLastName();
-				$this->email = $customer->getPrimaryEmail()->getEmail();
-				$this->customer_group_id = $customer->getGroupUser()->getId();
-			}else {
-  			// chua co tai khoan ket noi
-  				$this->session->data['redirect'] = $this->request->get['route'];
-				header( 'Location: ' . $this->url->link( 'account/login/facebookConnect' ) );
-				exit;
-			}
-  		}else {
-  			return false;
-  		}
-
-  		return true;
   	}
 }
 ?>

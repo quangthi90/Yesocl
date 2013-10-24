@@ -86,38 +86,78 @@ class ControllerAccountLogin extends Controller {
   }
 
   public function facebookConnect() {
-  	if ( $this->facebook->getUser() ) {
-  		$customer_data = $this->facebook->api('/me');
-  		$email = $customer_data['email'];
+    if ( isset($_GET['code']) ) {
+      $code = $_GET['code'];
+      $facebook_access_token_uri = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->facebook->getAppId() . '&redirect_uri=' . HTTP_SERVER . 'facebookcnt/' . '&client_secret=' . $this->facebook->getAppSecret() . '&code=' . $code;
 
-  		$this->load->model('account/customer');
-  		$customer = $this->model_account_customer->getCustomerByEmail( $email );
+      $ch = curl_init(); 
+      curl_setopt($ch, CURLOPT_URL, $facebook_access_token_uri);
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
+      $response = curl_exec($ch); 
+      curl_close($ch);
+   
+      // Get access token
+      $access_token = str_replace('access_token=', '', explode("&", $response)[0]);
+    }
 
-			if ( !$customer->getId() || empty( $customer ) ) {
-				$data = array();
-				$data['email'] = $email;
-				if ( isset( $customer_data['first_name'] ) ) {
-					$data['firstname'] = $customer_data['first_name'];
-				}
-				if ( isset( $customer_data['last_name'] ) ) {
-					$data['lastname'] = $customer_data['last_name'];
-				}
-				if ( isset( $customer_data['gender'] ) ) {
-					$data['sex'] = ($customer_data['gender'] == 'male') ? 1 : 0;
-				}
+    if ( isset( $access_token ) ) {
+      // Get user infomation
+      $ch = curl_init(); 
+      curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/me?access_token=$access_token");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
+      $response = curl_exec($ch); 
+      curl_close($ch);
+   
+      $customer_data = json_decode($response);
+    }
 
-	  			$this->model_account_customer->addCustomer( $data );
-			}
-  	}
+    if ( isset( $this->session->data['redirect'] ) ) {
+      $redirect_url = $this->url->link( $this->session->data['redirect'] );
+      unset( $this->session->data['redirect'] );
+    }else {
+      $redirect_url = $this->url->link( 'common/home', '', 'SSL' );
+    }
 
-  	if ( isset( $this->session->data['redirect'] ) ) {
-  		$redirect_url = $this->url->link( $this->session->data['redirect'] );
-  		unset( $this->session->data['redirect'] );
-  	}else {
-  		$redirect_url = $this->url->link( 'common/home' );
-  	}
-  		
-  	$this->redirect( $redirect_url );
+    if ( isset( $customer_data ) ) {
+      $this->load->model('account/customer');
+
+      $customer = $this->model_account_customer->getCustomerByEmail( $customer_data->email );
+
+      if ( $customer && $customer->getId() ) {
+        if ( !$this->customer->login( $customer_data->email, $customer_data->id ) ) {
+          echo '<script language="javascript" type="text/javascript">
+            alert("This email have already used!");
+          </script>';
+          exit();
+        }
+      }else {
+        $data = array();
+
+        $data['email'] = $customer_data->email;
+
+        if ( isset( $customer_data->first_name ) ) {
+          $data['firstname'] = $customer_data->first_name;
+        }
+
+        if ( isset( $customer_data->last_name ) ) {
+          $data['lastname'] = $customer_data->last_name;
+        }
+
+        if ( isset( $customer_data->gender ) ) {
+          $data['sex'] = ($customer_data->gender == 'male') ? 1 : 0;
+        }
+
+        $data['password'] = $customer_data->id;
+
+        $this->model_account_customer->addCustomer( $data );
+
+        $this->customer->login( $data['email'], $data['password'] );
+      }
+      
+      $this->redirect( HTTP_SERVER . $redirect_url );
+    }
   }
 }
 ?>

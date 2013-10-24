@@ -26,6 +26,7 @@ $_['routing']['SearchPage']		= 'search/';
 $_['routing']['Search']			= 'search/{keyword}/';
 $_['routing']['ChangeAvatar']	= 'change-avatar/';
 $_['routing']['ProfilePage']	= 'profile/edit/';
+$_['routing']['FaceBookConnect']= 'facebookcnt/';
 
 // Friend
 $_['routing']['FriendPage']		= 'friend/{user_slug}/';

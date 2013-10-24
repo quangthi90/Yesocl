@@ -210,7 +210,7 @@ $registry->set('document', new Document());
 $fb_setting = array(
 	'appId' => '1417585645119646',
 	'secret' => 'cb6ad77f5cf54b9178cdfc15ee458e95',
-	'cookie' => true
+	'cookie' => false,
 	);
 $facebook = new Facebook( $fb_setting );
 $registry->set( 'facebook', $facebook );		
@@ -281,15 +281,13 @@ if ( $customer->isLogged() ) {
 }elseif ( $customer->hasRemember() ) {
 	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
 	exit;
-}elseif ( $customer->facebookConnect() ) {
-	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
-	exit;
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
 		$request->get['route'] == 'account/login' ||
 		$request->get['route'] == 'account/register/register' ||
-		$request->get['route'] == 'account/forgotten'
+		$request->get['route'] == 'account/forgotten' ||
+		$request->get['route'] == 'account/login/facebookConnect'
 	)) 
 	{
 		$action = new Action($request->get['route']);
