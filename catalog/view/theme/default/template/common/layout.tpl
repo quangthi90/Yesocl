@@ -11,6 +11,7 @@
 		<link href="{{ asset_css('libs/fortAwesome/css/font-awesome.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/uniform.default.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/magnific-popup.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/mcustomscrollbar.css') }}" rel="stylesheet" media="screen" />
 		<!-- Common css -->
 		<link href="{{ asset_css('common/yes.css') }}" rel="stylesheet" media="screen" />
 		<!-- Custom css -->
@@ -56,7 +57,10 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.tmpl.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.tmplPlus.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.timeago.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/jquery.magnific-popup.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.magnific-popup.min.js') }}">
+		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.mcustomscrollbar.min.js') }}">
+		</script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>

@@ -13,7 +13,7 @@
     </div>
     <div id="yes-footer-bar">
         <div class="footer-toolbar-ctrl" id="auto-scroll-left">
-          <a href="#" title="Go Firt">
+          <a href="#" title="Go First">
             <i class="icon-fast-backward"></i>
           </a>
         </div>
