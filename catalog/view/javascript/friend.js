@@ -130,8 +130,10 @@
             				
             			}else {
 				            $.each(json.friends, function (i, item) {
-				                friendList.push(item.id + '-' + item.name);
-				                map[item.id + '-' + item.name] = item;
+				            	if ( friendList.indexOf(item.id + '-' + item.name) == -1 ) {
+					                friendList.push(item.id + '-' + item.name);
+					                map[item.id + '-' + item.name] = item;
+				            	}
 				            });            
                 			process(friendList);
             			}
@@ -146,9 +148,7 @@
                 return selectedFriend.name;
             },
             matcher: function (item) {
-                if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) != -1) {
-                    return true;
-                }
+                return true;
             },
             sorter: function (items) {
                 return items.sort();
