@@ -68,30 +68,42 @@ Sidebar.prototype.attachEvents = function(){
 			$(this).stop().animate( { left:'0px' }, 400, 'easeOutQuart');			
 			setTimeout(function(){ 
 				that.menuContainer.show(); 
-			}, 50);			
+			}, 50);
 		},
 		function() {
-			$(this).stop().animate( { left:'-270px'}, 300, 'easeOutQuart', function(){
+			$(this).stop().animate( { left:'-270px'}, 400, 'easeOutQuart', function(){
 				that.sidebarToggle.stop().fadeIn(110);
 				that.menuContainer.hide();
 			});
 		}
 	);	
 	//Auto invoke search:
-	$(document).keypress(function(e){ 
+	$(document).keypress(function(e){ 	
+		alert(e.keyCode);
 		//Check if any input is focused, if so, don't continue:
-		var isFocus = false;
+		var isFocus = false;		
 		$('input,textarea').each(function(){
 			if ($(this).is(":focus")) isFocus = true;
 		});
 		if (isFocus) return;
-		var key = e.which;		
-		key = String.fromCharCode((96 <= key && key <= 105) ? (key - 48) : key);
-		if(parseInt(that.sidebarRoot.css('left')) != 0 ) {
+		if(parseInt(that.sidebarRoot.css('left')) != 0 && 
+			((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122))) {
 			that.sidebarRoot.mouseenter();
 			that.searchCtrl.focus();
+			if($.browser.mozilla) {
+				that.searchCtrl.val(String.fromCharCode(e.which));
+			}
 		}
 	});
+	//ESC to hide sidebar:
+	that.searchCtrl.keypress(function() {
+		if(e.keyCode  == 27) {
+			that.hideSidebar();
+			return;
+		}
+	});
+
+	//Click content to hide sidebar:
 	$("#y-header, #y-content, #y-footer").click(function(){
 		that.hideSidebar();
 	});
@@ -101,6 +113,7 @@ Sidebar.prototype.hideSidebar = function() {
 	if(parseInt(that.sidebarRoot.css('left')) == 0 ) {
 		that.sidebarRoot.mouseleave();
 		that.searchCtrl.val('');
+		that.searchCtrl.blur();
 	}
 }
 Sidebar.prototype.makeCustomVerticalScroll = function() {
@@ -157,7 +170,7 @@ FlexibleElement.prototype.attachEvents = function() {
 
     //Apply scroll for notification:
     this.notificationList.each(function(){
-    	$(this).makeCustomScroll(false);
+    	//$(this).makeCustomScroll(false);
     });
 
     //Popup link of image:

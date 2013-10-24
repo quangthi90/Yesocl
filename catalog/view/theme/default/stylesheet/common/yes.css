@@ -145,6 +145,7 @@ body
 {
   height: 100%;
   width:auto;
+  overflow:hidden;
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
 }
 ul{
