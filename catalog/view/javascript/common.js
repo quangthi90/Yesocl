@@ -78,8 +78,7 @@ Sidebar.prototype.attachEvents = function(){
 		}
 	);	
 	//Auto invoke search:
-	$(document).keypress(function(e){ 	
-		alert(e.keyCode);
+	$(document).keypress(function(e){ 			
 		//Check if any input is focused, if so, don't continue:
 		var isFocus = false;		
 		$('input,textarea').each(function(){
@@ -96,13 +95,11 @@ Sidebar.prototype.attachEvents = function(){
 		}
 	});
 	//ESC to hide sidebar:
-	that.searchCtrl.keypress(function() {
-		if(e.keyCode  == 27) {
+	that.sidebarRoot.keydown(function(e){
+		if(e.which == 27){
 			that.hideSidebar();
-			return;
 		}
 	});
-
 	//Click content to hide sidebar:
 	$("#y-header, #y-content, #y-footer").click(function(){
 		that.hideSidebar();
