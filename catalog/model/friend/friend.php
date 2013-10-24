@@ -80,7 +80,7 @@ class ModelFriendFriend extends Model {
 					'industry' => $friend->getMeta()->getIndustry(),
 					'url' => $this->url->link( 'wall-page/' . $friend->getSlug(), '', 'SSL' ),
 					'unFriend' => $this->url->link( 'friend/remove/' . $friend->getSlug(), '', 'SSL' ),
-					'numFriend' => count( $friend->getFriends() ),
+					'numFriend' => count( $friend->getFriends() ) - 1,
 					);
 			}
 		}
