@@ -108,6 +108,7 @@
 		this.$btnSearch			= $element.find('.friend-search-btn');
 		this.$linkFitlerMaleFr	= $element.find('.friend-conditions .filter-male-friends');
 		this.$linkFitlerFemaleFr= $element.find('.friend-conditions .filter-female-friends');
+		this.$linkFitlerAddedFr= $element.find('.friend-conditions .filter-added-friends');
 
 		this.attachEvents();
 	}
@@ -235,6 +236,34 @@
             	type: 'POST',
             	url: that.$inputSearch.data('url'),
             	data: { 'filter_gender': 0 },
+            	dataType: 'json',
+            	success: function ( json ) {
+            		if ( json.success != 'ok' ) {
+            				
+            		}else {   
+            			if ( json.friends.length > 0 ) {
+	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
+	            			$friends.each(function(){
+					            new FriendAction( $(this) );
+					        });
+	            			var $htmlParent = $('#y-content .block-content');
+	            		    $('#y-content .friend-item').remove();
+	            		    $htmlParent.prepend( $friends );
+            		    }else {
+            		    	$('#y-content .friend-item').remove();
+            		    }
+            		}
+            	},
+            	error: function (xhr, error) {
+            		alert(xhr.responseText);
+            	},
+            });
+		});
+
+		this.$linkFitlerAddedFr.click( function () {
+			$.ajax({
+            	type: 'POST',
+            	url: that.$inputSearch.data('url'),
             	dataType: 'json',
             	success: function ( json ) {
             		if ( json.success != 'ok' ) {

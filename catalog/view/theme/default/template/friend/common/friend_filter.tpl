@@ -12,7 +12,7 @@
                 <i class="icon-list"></i><a href="#">All Friends</a>
             </li>                
             <li class="active">
-                <i class="icon-star"></i><a href="#">Recently Added</a>
+                <i class="icon-star"></i><a href="#" class="filter-added-friends">Recently Added</a>
             </li>
             <li>
                 <i class="icon-male"></i><a href="#" class="filter-male-friends">Male Friends</a>
