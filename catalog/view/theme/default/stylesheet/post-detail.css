@@ -9,10 +9,10 @@
 }
 #post-detail  #post-detail-header {
     position: fixed;
-    top: 0px;
-    left: 120px;
+    top: 58px;
+    left: 15px;
     right: 0px; 
-    padding: 15px 25px 10px 25px;
+    padding: 10px 25px 5px 25px;
     cursor: default !important;
     border-bottom: 1px solid #ddd;
     background-color: #f0f0f0;
@@ -20,8 +20,8 @@
  .post-detail-meta {
     overflow: hidden;
     position: fixed;
-    bottom: 50px;
-    left: 120px;
+    bottom: 22px;
+    left: 15px;
     right: 0px;
     text-align: center;
     z-index: 100;
@@ -56,18 +56,18 @@
     -moz-border-radius: 50%;
     border-radius: 50%;
     border: 1px solid #009B77;
-    background-color: #FFF;
+    background-color: #009B77;
     padding: 5px;
     text-align: center;
 }
 .post-actions a.btn-link-round i {
-    color: #009B77;
+    color: #fff;
 }
 .post-actions a.btn-link-round:hover {
-    background-color: #009B77;
+    background-color: #fff;
 }
 .post-actions a.btn-link-round:hover i {
-    color: #FFF;
+    color: #000;
 }
 .post-actions .action-text {
     font-weight: normal;

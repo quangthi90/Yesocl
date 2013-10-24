@@ -150,7 +150,7 @@ FlexibleElement.prototype.attachEvents = function() {
         else {
             that.goLeftBtn.addClass('disabled');	
         }
-        if($(this).scrollLeft() > maxScroll) {
+        if($(this).scrollLeft() >= maxScroll) {
         	that.goRightBtn.addClass('disabled');	
         }else {
         	that.goRightBtn.removeClass('disabled');	
@@ -303,7 +303,12 @@ HorizontalBlock.prototype.initializeBlock = function() {
 		var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
 		this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
 	}
-	else{		
+	else{				
+	}
+	if(this.root.length == 0) { 
+		this.rootContent.attr('data-totalScroll', this.rootContent.width());
+	}else{ 
+		this.rootContent.attr('data-totalScroll', this.root.width());
 	}	
 	this.rootContent.niceScroll();
 }
