@@ -106,9 +106,7 @@
 		this.$element			= $element;
 		this.$inputSearch		= $element.find('#search-input');
 		this.$btnSearch			= $element.find('.friend-search-btn');
-		this.$linkFitlerMaleFr	= $element.find('.friend-conditions .filter-male-friends');
-		this.$linkFitlerFemaleFr= $element.find('.friend-conditions .filter-female-friends');
-		this.$linkFitlerAddedFr= $element.find('.friend-conditions .filter-added-friends');
+		this.$friendConditions		= $element.find('.friend-condition');
 
 		this.attachEvents();
 	}
@@ -202,68 +200,35 @@
             });
 		});
 
-		this.$linkFitlerMaleFr.click( function () {
-			$.ajax({
-            	type: 'POST',
-            	url: that.$inputSearch.data('url'),
-            	data: { 'filter_gender': 1 },
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {   
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
-		});
+		this.$friendConditions.each( function () {
+			new FriendCondition( $(this) );
+		})
+	}
 
-		this.$linkFitlerFemaleFr.click( function () {
-			$.ajax({
-            	type: 'POST',
-            	url: that.$inputSearch.data('url'),
-            	data: { 'filter_gender': 2 },
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {   
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
-		});
+	function FriendCondition( $element ) {
+		this.$element = $element;
+		this.$action = $element.find('a');
 
-		this.$linkFitlerAddedFr.click( function () {
+		this.attachEvents();
+	}
+
+	FriendCondition.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$action.click( function () {
+			if ( that.$element.hasClass('active') ) {
+				return false;
+			}else {
+				$('#friend-filter .friend-conditions .active').removeClass('active');
+				that.$element.addClass('active');
+			}
+
+			var data = that.$element.data('filter');
+
 			$.ajax({
             	type: 'POST',
-            	url: that.$inputSearch.data('url'),
+            	url: that.$element.data('url'),
+            	data: data,
             	dataType: 'json',
             	success: function ( json ) {
             		if ( json.success != 'ok' ) {

@@ -87,6 +87,10 @@ class ControllerFriendFriend extends Controller {
 				'name' => $group->getName()
 			);
 		}
+
+		$this->data['data_filter_recent_added'] = '{}';
+		$this->data['data_filter_male'] = '{ "filter_gender": "1" }';
+		$this->data['data_filter_female'] = '{ "filter_gender": "2" }';
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';
