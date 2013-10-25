@@ -235,7 +235,7 @@
 			$.ajax({
             	type: 'POST',
             	url: that.$inputSearch.data('url'),
-            	data: { 'filter_gender': 0 },
+            	data: { 'filter_gender': 2 },
             	dataType: 'json',
             	success: function ( json ) {
             		if ( json.success != 'ok' ) {
