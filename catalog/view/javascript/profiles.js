@@ -644,6 +644,8 @@
 		this.$btnAdd 		= $el.find('.profiles-btn-add');
 		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
 		this.$btnEdit 		= $el.find('.profiles-btn-edit');
+		this.$btnRemove		= $el.find('.profiles-btn-remove');
+		this.$btnSave 		= $el.find('.profiles-btn-save');
 
 		this.$strMonth		= this.$formAdd.find('[name=\"started_month\"]');
 		this.$strYear		= this.$formAdd.find('[name=\"started_year\"]');
@@ -680,6 +682,10 @@
 			that.$title.val( $item.data('startedm') );
 			that.$company.val( $item.data('startedm') );
 			that.$location.val( $item.data('startedm') );
+		});
+
+		this.$btnSave.click(function(){
+
 		});
 	}
 
