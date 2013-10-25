@@ -80,8 +80,8 @@ class ModelFriendFriend extends Model {
 					'image' => $avatar,
 					'name' => $friend->getFullname(),
 					'industry' => $friend->getMeta()->getIndustry(),
-					'url' => $this->url->link( 'wall-page/' . $friend->getSlug(), '', 'SSL' ),
-					'unFriend' => $this->url->link( 'friend/remove/' . $friend->getSlug(), '', 'SSL' ),
+					'url' => HTTP_SERVER . 'wall-page/' . $friend->getSlug(),
+					'unFriend' => HTTP_SERVER . 'friend/remove/' . $friend->getSlug(),
 					'numFriend' => ( $multiFriend == 0 ) ? 'Not have multi friend' : $multiFriend,
 					);
 			}
