@@ -114,10 +114,10 @@ class ControllerAccountLogin extends Controller {
     }
 
     if ( isset( $this->session->data['redirect'] ) ) {
-      $redirect_url = HTTP_SERVER . $this->url->link( $this->session->data['redirect'] );
+      $redirect_url = $this->session->data['redirect'];
       unset( $this->session->data['redirect'] );
     }else {
-      $redirect_url = HTTP_SERVER . $this->url->link( 'common/home', '', 'SSL' );
+      $redirect_url = HTTP_SERVER;
     }
 
     if ( isset( $customer_data ) && isset( $customer_data->id ) ) {
