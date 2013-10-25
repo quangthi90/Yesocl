@@ -9,6 +9,7 @@ class ControllerFriendFriend extends Controller {
 		
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
+		$this->load->model('friend/friend');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -62,6 +63,7 @@ class ControllerFriendFriend extends Controller {
 
 			$friend['meta'] = $meta;
 			$friend['fr_status'] = $friend_status;
+			$friend['numFriend'] = ( $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) ) == 0 ) ? 'Not have multi friend' : $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) );
 
 			if ( !array_key_exists($friend['id'], $this->data['users']) ){
 				if ( !empty($friend['avatar']) ){

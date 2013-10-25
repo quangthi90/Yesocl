@@ -11,7 +11,7 @@
                 <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
                 <ul class="friend-infolist">
                     <li>{{ friend.meta.industry }}</li>
-                    <li>100 friends</li>
+                    <li>{{ friend.numFriend }}</li>
                 </ul>
             </div>
             <div class="friend-actions">
