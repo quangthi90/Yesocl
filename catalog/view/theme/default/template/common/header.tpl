@@ -53,218 +53,249 @@
 		      		</li>				      
 			    </ul>				
 			</div>
-			<div id="user-notification" class="fr notification-group">				
-              <div class="dropdown notification-item common">
-                <a href="#" class="btn-notification" data-toggle="dropdown">
-                  <i class="icon-bell"></i>
-                  <span class="notification-item-name">
-                  	Notification <i class="icon-caret-down"></i>
-              	  </span>
-                  <span class="notification-item-count">3</span>
-                </a>
-                <ul class="dropdown-menu notification-content-list">
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> commented on your post
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                </ul>
+			<div id="user-notification" class="fr notification-group">        		
+        <div class="dropdown notification-item message">
+          <a href="#" class="btn-notification" data-toggle="dropdown">
+            <i class="icon-external-link"></i>
+            <span class="notification-item-name">
+              Confirm <i class="icon-caret-down"></i>
+            </span>          
+            <span class="notification-item-count">5</span>
+          </a>
+          <ul class="dropdown-menu notification-content-list">
+            <li class="notification-content-item">
+              <a href="#" class="y-alert">
+                Demo Alert
+              </a>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="y-confirm">
+                Demo Confirm
+              </a>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="y-prompt">
+                Demo prompt
+              </a>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="y-dialog">
+                Demo Dialog
+              </a>
+            </li>                 
+          </ul>
+        </div>	
+        <div class="dropdown notification-item common">
+          <a href="#" class="btn-notification" data-toggle="dropdown">
+            <i class="icon-bell"></i>
+            <span class="notification-item-name">
+            	Notification <i class="icon-caret-down"></i>
+        	  </span>
+            <span class="notification-item-count">3</span>
+          </a>
+          <ul class="dropdown-menu notification-content-list">
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
               </div>
-              <div class="dropdown notification-item message">
-                <a href="#" class="btn-notification" data-toggle="dropdown">
-                  <i class="icon-envelope"></i>
-                  <span class="notification-item-name">
-                  	Message <i class="icon-caret-down"></i>
-              	   </span>
-                  <span class="notification-item-count">5</span>
-                </a>
-                <ul class="dropdown-menu notification-content-list">
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> sent a message to you
-                      </div>
-                      <div class="message-content">
-                        hello everyone
-                      </div>
-                      <div class="notification-time">
-                      	1 hour ago
-                      </div>
-                    </div>
-                  </li>
-                  <li class="notification-content-item">
-                    <a href="#" class="notification-content-item-img">
-                      <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="#">WMThiet</a> sent a message to you
-                      </div>
-                      <div class="message-content">
-                        hello everyone
-                      </div>
-                    </div>
-                  </li>	                  
-                </ul>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
               </div>
-              {% set requests = get_request_friend() %}
-              <div class="dropdown notification-item friend">
-                <a href="#" class="btn-notification" data-toggle="dropdown">
-                  <i class="icon-user"></i>
-                  <span class="notification-item-name">
-                  	Friend <i class="icon-caret-down"></i>
-                  </span>
-                  {% if requests|length > 0 %}
-                  <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>
-                  {% endif %}
-                </a>
-                <ul class="dropdown-menu notification-content-list">
-                  {% for user in requests %}
-                  <li class="notification-content-item notify-actions">
-                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="notification-content-item-img">
-                      <img src="{{ user.avatar }}" alt="{{ user.username }}">
-                    </a>
-                    <div class="notification-content-item-detail">
-                      <div class="notification-text">
-                        <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
-                      </div>
-                      <div>
-                        <a href="#" data-url="{{ path('ConfirmFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-accept">Accept</a>
-                        <a href="#" data-url="{{ path('IgnoreFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-ignore">Ignore </a>
-                      </div>
-                    </div>
-                  </li>
-                  {% endfor %}
-                </ul>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
               </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> commented on your post
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="dropdown notification-item message">
+          <a href="#" class="btn-notification" data-toggle="dropdown">
+            <i class="icon-envelope"></i>
+            <span class="notification-item-name">
+            	Message <i class="icon-caret-down"></i>
+        	   </span>
+            <span class="notification-item-count">5</span>
+          </a>
+          <ul class="dropdown-menu notification-content-list">
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> sent a message to you
+                </div>
+                <div class="message-content">
+                  hello everyone
+                </div>
+                <div class="notification-time">
+                	1 hour ago
+                </div>
+              </div>
+            </li>
+            <li class="notification-content-item">
+              <a href="#" class="notification-content-item-img">
+                <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="#">WMThiet</a> sent a message to you
+                </div>
+                <div class="message-content">
+                  hello everyone
+                </div>
+              </div>
+            </li>	                  
+          </ul>
+        </div>
+        {% set requests = get_request_friend() %}
+        <div class="dropdown notification-item friend">
+          <a href="#" class="btn-notification" data-toggle="dropdown">
+            <i class="icon-user"></i>
+            <span class="notification-item-name">
+            	Friend <i class="icon-caret-down"></i>
+            </span>
+            {% if requests|length > 0 %}
+            <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>
+            {% endif %}
+          </a>
+          <ul class="dropdown-menu notification-content-list">
+            {% for user in requests %}
+            <li class="notification-content-item notify-actions">
+              <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="notification-content-item-img">
+                <img src="{{ user.avatar }}" alt="{{ user.username }}">
+              </a>
+              <div class="notification-content-item-detail">
+                <div class="notification-text">
+                  <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
+                </div>
+                <div>
+                  <a href="#" data-url="{{ path('ConfirmFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-accept">Accept</a>
+                  <a href="#" data-url="{{ path('IgnoreFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-ignore">Ignore </a>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
 			</div>
 		</div>
 	</div>                               

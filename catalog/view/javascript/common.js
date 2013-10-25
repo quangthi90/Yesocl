@@ -170,6 +170,68 @@ FlexibleElement.prototype.attachEvents = function() {
     	//$(this).makeCustomScroll(false);
     });
 
+    //Demo alert, confirm, prompt, dialog:
+    var msgCallback = $("<div></div>").css(
+    	{
+    		'position': 'absolute',
+    		'right': '15px',
+    		'top': '60px',
+    		'background-color' : '#ddd',
+    		'color' : '#009B77',
+    		'padding' : '15px',
+    		'font-weight' : 'bold'
+    	}).hide().appendTo('body');
+    $(".y-alert").click(function(e) {
+        bootbox.alert("The post was delete successfully !", function() {
+        	msgCallback.html('Alert: ' + 'Alert callback').fadeIn(1000).delay(2000).fadeOut(300);
+        });
+    });
+    $(".y-confirm").click(function(e) {
+        bootbox.confirm("Are you sure you want to delete this post ?", function(result) {
+        	var text = "OK";
+        	if(!result){ text = "Cancel" }
+        	msgCallback.html('Confirm: ' + text).fadeIn(1000).delay(2000).fadeOut(300);
+        });
+    });
+    $(".y-prompt").click(function(e) {
+        bootbox.prompt("What is your name ?", function(result) { 
+          var text = "Prompt dismissed";
+		  if (result !== null) {                                             
+		    text = "Hi <b>"+result+"</b>";                       
+		  }
+		  msgCallback.html(text).fadeIn(1000).delay(2000).fadeOut(300);
+		});
+    });
+    $(".y-dialog").click(function(e) {
+        bootbox.dialog({
+			message: "I am a custom dialog",
+			title: "Custom title",
+			buttons: {
+				danger: {
+					  label: "Warning",
+					  className: "btn-danger",
+					  callback: function() {
+					    msgCallback.html("Result: Warning").fadeIn(1000).delay(2000).fadeOut(300);
+					  }
+				},
+				success: {
+					  label: "Continute",
+					  className: "btn-success",
+					  callback: function() {
+					    msgCallback.html("Result: Continute").fadeIn(1000).delay(2000).fadeOut(300);
+					  }
+				},				
+				main: {
+					  label: "Cancel",
+					  className: "btn-primary",
+					  callback: function() {
+					    msgCallback.html("Result: Cancel").fadeIn(1000).delay(2000).fadeOut(300);
+					  }
+					}
+				}
+			});
+    });
+
     //Popup link of image:
     $('.img-link-popup').magnificPopup({type:'image'});
     $('.link-popup').magnificPopup({

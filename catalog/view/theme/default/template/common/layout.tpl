@@ -61,6 +61,8 @@
 		</script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.mcustomscrollbar.min.js') }}">
 		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.bootbox.js') }}">
+		</script>		
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
