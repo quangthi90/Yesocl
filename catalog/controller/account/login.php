@@ -120,6 +120,7 @@ class ControllerAccountLogin extends Controller {
       $redirect_url = HTTP_SERVER;
     }
 
+    $this->load->language('account/login');
     if ( isset( $customer_data ) && isset( $customer_data->id ) ) {
       $this->load->model('account/customer');
       $user_config = $this->config->get('user');
@@ -128,7 +129,7 @@ class ControllerAccountLogin extends Controller {
 
       if ( $customer && $customer->getId() ) {
         if ( !$customer->getSocialNetwork() || $customer->getSocialNetwork()->getCode() == $user_config['network']['default'] ) {
-          $this->session->data['error'] = 'Error';
+          $this->session->data['error'] = $this->language->get('error_exist_connect');
           $this->redirect( $redirect_url );
         }else {
           if ( !$this->customer->loginNetwork( array(
@@ -136,7 +137,7 @@ class ControllerAccountLogin extends Controller {
             'network' => $customer->getSocialNetwork()->getCode(),
             )
           ) ) {
-            $this->session->data['error'] = 'Error';
+            $this->session->data['error'] = $this->language->get('error_unable_connect');
             $this->redirect( $redirect_url );
           }
         }
@@ -180,17 +181,20 @@ class ControllerAccountLogin extends Controller {
         $data['network'] = $user_config['network']['facebook'];
 
         if ( !$this->model_account_customer->addCustomer( $data ) ) {
-          $this->session->data['error'] = 'Error';
+          $this->session->data['error'] = $this->language->get('error_unable_connect');
           $this->redirect( $redirect_url );
         }
 
         // login
         if ( !$this->customer->loginNetwork( $data ) ) {
-          $this->session->data['error'] = 'Error';
+          $this->session->data['error'] = $this->language->get('error_unable_connect');
           $this->redirect( $redirect_url );
         }
       }
 
+      $this->redirect( $redirect_url );
+    }else {
+      $this->session->data['error'] = $this->language->get('error_unable_connect');
       $this->redirect( $redirect_url );
     }
   }
