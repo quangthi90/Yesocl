@@ -17,6 +17,11 @@ class ControllerWelcomeHome extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->data['action'] = $this->url->link('account/register/register', '', 'SSL');
+
+		//Load captcha:
+		$this->load->library('recaptcha');
+		$captcha = new Recaptcha();
+		$this->data['recaptcha_html'] = $captcha->recaptcha_get_html();
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/welcome/home.tpl';

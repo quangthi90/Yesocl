@@ -9,6 +9,10 @@
     padding: 4px 16px;
 }
 
+.btn i {
+    margin-right: 5px;
+}
+
 .btn-ystandard {
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
@@ -413,7 +417,7 @@ a:hover, a.active
 #y-frm-register
 {
     width:390px;
-	top: 100px;
+	top: 75px;
 	right: -9990px;
 	display: block;
 	border: 2px solid #ddd;
@@ -431,7 +435,7 @@ a:hover, a.active
 }
 
 #y-frm-register .controls {
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 #y-frm-register  select {
@@ -507,5 +511,17 @@ a:hover, a.active
     padding:5px 0px 5px 35px;
     background:transparent url(../img/help-email.png) no-repeat 0px 50%;
 }
+
+/* CAPTCHA */
+.captcha-row {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0px;
+}
+.captcha-row #recaptcha_response_field {
+    height: 28px;
+    padding: 0px 5px;
+}
+/* RECAPTCHA */
 
 /*End Y-CSS*/
