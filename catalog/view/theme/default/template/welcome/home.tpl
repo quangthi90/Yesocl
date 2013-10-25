@@ -66,8 +66,7 @@
 	                <select required="required" name="sex" id="reg-sex" style="width: 312px;">
 	                    <option value="">-- Select sex --</option>
 	                    <option value="1">Male</option>
-	                    <option value="2">Female</option>
-	                    <option value="3">Unknow</option>
+	                    <option value="0">Female</option>
 	                </select>
 	                <div class="warning hidden">warning</div>
             	</div>
