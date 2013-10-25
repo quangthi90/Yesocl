@@ -66,6 +66,33 @@ class ModelAccountCustomer extends Model {
 			}
 
 	      	$this->dm->persist( $user );
+	      	$this->dm->flush();
+
+			if ( isset( $data['avatar'] ) && $data['avatar'] ) {
+				$folder_link = $this->config->get('user')['default']['image_link'] . $user->getId();
+				$image_path = $folder_link . '/' . $this->config->get('post')['default']['avatar_name'] . '.jpg';
+
+				$path = DIR_IMAGE;	
+				$folder_names = explode('/', $folder_link);
+				foreach ( $folder_names as $folder_name ) {
+					$path .= $folder_name . '/';
+					if ( !is_dir( $path ) ) {
+						mkdir( $path );
+					}
+				}
+
+				$ch = curl_init(); 
+		        curl_setopt($ch, CURLOPT_URL, $data['avatar']);
+		        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
+		        $response = curl_exec($ch); 
+		        curl_close($ch);
+
+		        $file = $path . '/' . $this->config->get('post')['default']['avatar_name'] . '.jpg';
+				file_put_contents($file, $response);
+				$user->setAvatar( $image_path );
+			}
+
 			$this->dm->flush();
 
 			return true;

@@ -144,6 +144,26 @@ class ControllerAccountLogin extends Controller {
       }else {
         $data = array();
 
+        // id
+        if ( isset( $customer_data->id ) && $customer_data->email ) {
+          $data['id'] = $customer_data->id;
+
+          $ch = curl_init(); 
+          curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/' . $data['id'] .'/picture?type=large&redirect=false');
+          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
+          $response = curl_exec($ch); 
+          curl_close($ch);
+       
+          $avatar = json_decode($response);
+          if ( isset( $avatar->data->url ) ) {
+            $data['avatar'] = $avatar->data->url;
+          }
+        }else {
+          $this->session->data['error'] = 'Error';
+          $this->redirect( $redirect_url );
+        }
+
         // email
         if ( isset( $customer_data->email ) && $customer_data->email ) {
           $data['email'] = $customer_data->email;
