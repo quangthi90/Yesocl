@@ -234,7 +234,7 @@ Class User {
 		return $this->groupUser;
 	}
 
-	public function setSocialNetwork( $socialNetwork ){
+	public function setSocialNetwork( \Document\Social\Network $socialNetwork ){
 		$this->socialNetwork = $socialNetwork;
 	}
 

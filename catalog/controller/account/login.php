@@ -114,49 +114,84 @@ class ControllerAccountLogin extends Controller {
     }
 
     if ( isset( $this->session->data['redirect'] ) ) {
-      $redirect_url = $this->url->link( $this->session->data['redirect'] );
+      $redirect_url = HTTP_SERVER . $this->url->link( $this->session->data['redirect'] );
       unset( $this->session->data['redirect'] );
     }else {
-      $redirect_url = $this->url->link( 'common/home', '', 'SSL' );
+      $redirect_url = HTTP_SERVER . $this->url->link( 'common/home', '', 'SSL' );
     }
 
-    if ( isset( $customer_data ) ) {
+    if ( isset( $customer_data ) && isset( $customer_data->id ) ) {
       $this->load->model('account/customer');
+      $user_config = $this->config->get('user');
 
       $customer = $this->model_account_customer->getCustomerByEmail( $customer_data->email );
 
       if ( $customer && $customer->getId() ) {
-        if ( !$this->customer->login( $customer_data->email, $customer_data->id ) ) {
-          echo '<script language="javascript" type="text/javascript">
-            alert("This email have already used!");
-          </script>';
-          exit();
+        if ( !$customer->getSocialNetwork() || $customer->getSocialNetwork()->getCode() == $user_config['network']['default'] ) {
+          $this->session->data['error'] = 'Error';
+          $this->redirect( $redirect_url );
+        }else {
+          if ( !$this->customer->loginNetwork( array(
+            'email' => $customer->getPrimaryEmail()->getEmail(),
+            'network' => $customer->getSocialNetwork()->getCode(),
+            )
+          ) ) {
+            $this->session->data['error'] = 'Error';
+            $this->redirect( $redirect_url );
+          }
         }
       }else {
         $data = array();
 
-        $data['email'] = $customer_data->email;
+        // email
+        if ( isset( $customer_data->email ) && $customer_data->email ) {
+          $data['email'] = $customer_data->email;
+        }else {
+          $this->session->data['error'] = 'Error';
+          $this->redirect( $redirect_url );
+        }
 
+        // username
+        if ( isset( $customer_data->username ) ) {
+          $data['username'] = $customer_data->username;
+        }
+
+        // firstname
         if ( isset( $customer_data->first_name ) ) {
           $data['firstname'] = $customer_data->first_name;
         }
 
+        // lastname
         if ( isset( $customer_data->last_name ) ) {
           $data['lastname'] = $customer_data->last_name;
         }
 
+        // gender
         if ( isset( $customer_data->gender ) ) {
-          $data['sex'] = ($customer_data->gender == 'male') ? 1 : 0;
+          $data['gender'] = ($customer_data->gender == 'male') ? 1 : 0;
         }
 
-        $data['password'] = $customer_data->id;
+        // location
+        if ( isset( $customer_data->location ) ) {
+          $data['location'] = $customer_data->location->name;
+        }
 
-        $this->model_account_customer->addCustomer( $data );
+        // network type
+        $data['network'] = $user_config['network']['facebook'];
 
-        $this->customer->login( $data['email'], $data['password'] );
+        if ( !$this->model_account_customer->addCustomer( $data ) ) {
+          $this->session->data['error'] = 'Error';
+          $this->redirect( $redirect_url );
+        }
+
+        // login
+        if ( !$this->customer->loginNetwork( $data ) ) {
+          $this->session->data['error'] = 'Error';
+          $this->redirect( $redirect_url );
+        }
       }
-      
-      $this->redirect( HTTP_SERVER . $redirect_url );
+
+      $this->redirect( $redirect_url );
     }
   }
 }

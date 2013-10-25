@@ -176,5 +176,34 @@ class Customer {
 	
 		return $query->row['total'];	
   	}
+
+  	public function loginNetwork( $data = array() ) {
+  		if ( !isset( $data['email'] ) ) {
+  			return false;
+  		}
+
+  		$user_config = $this->config->get('user');
+
+  		if ( isset( $data['network'] ) && $data['network'] == $user_config['network']['facebook'] ) {
+  			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+				'status' => true,
+				'emails.email' => $data['email'],
+			));
+
+			if ( $customer_query ) {
+	  			$this->session->data['customer_id'] = $customer_query->getId();
+										
+				$this->customer_id = $customer_query->getId();
+				$this->firstname = $customer_query->getMeta()->getFirstName();
+				$this->lastname = $customer_query->getMeta()->getLastName();
+				$this->email = $customer_query->getPrimaryEmail()->getEmail();
+				$this->customer_group_id = $customer_query->getGroupUser()->getId();
+
+				return true;
+			}
+  		}
+
+  		return false;
+  	}
 }
 ?>

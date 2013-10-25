@@ -47,7 +47,7 @@ Class Network {
 		return $this->code;
 	}
 
-	public function addUser( User $user ){
+	public function addUser( \Document\User\User $user ){
 		$this->users[] = $user;
 	}
 
