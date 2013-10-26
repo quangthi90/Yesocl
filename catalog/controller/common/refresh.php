@@ -29,7 +29,7 @@ class ControllerCommonRefresh extends Controller {
 
 
 		$posts = $this->model_cache_post->getPosts(array(
-			'sort' => 'created',
+			'sort' => 'updated',
 			'type_ids' => array_merge($branch_ids, $user_ids),
 		));
 		
