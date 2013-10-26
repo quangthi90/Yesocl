@@ -79,11 +79,11 @@
                 </ul>
             </div>
             <div class="friend-actions">
-                {% set status_if = '{{if status == 1}}' %}
-                {% set status_else_if = '{{if status == 2}}' %}
-                {% set status_else = '{{else}}' %}
+                {% set status_if_added = '{{if status == 1}}' %}
+                {% set status_if_request = '{{if status == 2}}' %}
+                {% set status_else = '{{if status == 0}}' %}
                 {% set status_if_end = '{{/if}}' %}
-                {{ status_if }}
+                {{ status_if_added }}
                 <div class="dropdown friend-group">
                     <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
                     <ul class="dropdown-menu" role="menu">
@@ -93,7 +93,10 @@
                     </ul>
                 </div>
                 {{ status_if_end }}
-                {{ status_else_if }}
+                {{ status_else }}
+                <button data-url="${ url }" class="btn btn-yes btn-friend friend-group" data-cancel="0"><i class="icon-plus-sign"></i> Make Friend</button>
+                {{ status_if_end }}
+                {{ status_if_request }}
                 <div class="dropdown friend-group">
                     <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
                     <ul class="dropdown-menu" role="menu">
@@ -102,8 +105,6 @@
                         </li>
                     </ul>
                 </div>
-                {{ status_else }}
-                <button data-url="${ url }" class="btn btn-yes btn-friend friend-group" data-cancel="0"><i class="icon-plus-sign"></i> Make Friend</button>
                 {{ status_if_end }}
             </div>
         </div>
