@@ -6,9 +6,8 @@ class ControllerWelcomeHome extends Controller {
     	}*/
 
     	if ( isset( $this->session->data['error'] ) ) {
-    		echo $this->session->data['error']; 
+    		$this->data['error'] = $this->session->data['error'];
     		unset( $this->session->data['error'] );
-    		exit();
     	}
 
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {

@@ -12,6 +12,13 @@
 		<img src="image/template/intro-2-bg.png" />  
     </div>    
 </div>
+{% if error != null %}
+<div id="y-message-info" data-title="Login failed" 
+                        data-message="{{ error }}" 
+                        data-class="anim error"
+                        style="display: none;">      
+</div>
+{% endif %}
 <div id="y-frm-register" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">
@@ -88,5 +95,8 @@
 {% endblock %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>
+	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>  
+    <script type="text/javascript">
+        $('#y-message-info').showMessageDialog();
+    </script>  
 {% endblock %}
