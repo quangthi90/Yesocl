@@ -17,6 +17,19 @@ $_['routing']['CommentLike']	= '{post_type}/post/{post_slug}/comment/{comment_id
 $_['routing']['CommentGetLiker']= '{post_type}/post/{post_slug}/comment/{comment_id}/get-liker';
 
 // Page
+$_['routing']['WelcomePage']	= '';
+$_['routing']['RefreshPage'] 	= 'what-s-new';
+$_['routing']['HomePage']	 	= 'home';
+$_['routing']['WallPage']	 	= 'wall-page/{user_slug}';
+$_['routing']['ChangePassword']	= 'change-password';
+$_['routing']['Logout']			= 'logout';
+$_['routing']['Login']			= 'login';
+$_['routing']['LostPass']		= 'lost_password';
+
+// Ajax
+$_['routing']['AjaxLogin']		= 'login/ajax';
+$_['routing']['AjaxRegister']	= 'register/ajax';
+
 $_['routing']['RefreshPage'] 	= 'what-s-new/';
 $_['routing']['HomePage']	 	= 'home/';
 $_['routing']['WallPage']	 	= 'wall-page/{user_slug}/';

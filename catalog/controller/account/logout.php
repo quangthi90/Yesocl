@@ -3,8 +3,7 @@ class ControllerAccountLogout extends Controller {
 	public function index() {
     	if ($this->customer->isLogged()) {
       		$this->customer->logout();
-			
-      		$this->redirect($this->extension->path('WelcomePage'));
+  			$this->redirect($this->extension->path('WelcomePage') );
     	}
  
     	$this->language->load('account/logout');
