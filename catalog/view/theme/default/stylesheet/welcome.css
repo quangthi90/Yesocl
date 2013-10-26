@@ -292,55 +292,6 @@ a:hover, a.active
 #y-header #y-welcome-menu .menu-active > a{
     color: #000;
 }
-/*
-#y-header .y-welcome-login,
-.y-welcome-login .text-welcome-login-bottom > a{
-    color: #fff;
-}
-
-.y-welcome-login .text-welcome-login-top,
-.y-welcome-login .text-welcome-login-bottom,
-.y-welcome-login .text-welcome-login-bottom > a{
-    color: #BABABA;
-}
-
-.y-welcome-login .text-welcome-login-top{
-    font-size: 12px;
-}
-
-.y-welcome-login .text-welcome-login-bottom,
-.y-welcome-login .text-welcome-login-bottom > label{
-    font-size: 11px;
-}
-
-.y-welcome-login .text-welcome-login-bottom > label{
-    cursor: pointer;
-}
-
-.y-welcome-login .text-welcome-login-bottom > a:hover{
-    text-decoration: underline;
-}
-
-.y-welcome-login .button-login-welcome{
-    line-height: 70px;
-}
-
-.y-welcome-login .button-login-welcome > button{
-    height: 22px;
-    line-height: 12px;
-    padding: 4px 7px;
-    margin-top: -3px;
-    cursor: pointer;
-}
-
-.y-welcome-login .input-welcome{
-    margin-top: 23px;
-    margin-bottom: 2px;
-    height: 22px;
-    min-height: 22px;
-    padding: 2px 6px;
-}
-*/
 
 .y-welcome-login  {
     line-height: 70px;
@@ -354,6 +305,31 @@ a:hover, a.active
 }
 .y-welcome-login a.btn:hover i{
     color: #000;
+}
+
+.login-social ul > li {
+    display: inline-block;
+    margin-left: 7px;
+}
+.login-social ul > li > a {
+    display: block;
+    padding: 5px;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+.login-social ul > li > a > i{
+    color: #ccc;
+    font-size: 18px; 
+    line-height: 25px;
+}
+.login-social ul > li > a:hover {
+    background-color: #fff;
+}
+.login-social ul > li > a:hover > i{
+    color: #5bb75b;
 }
 
 #login-form-container {

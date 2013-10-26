@@ -17,8 +17,37 @@
             </div>
         </div>
         <div class="span5 y-welcome-login">
-            <a href="#" class="btn btn-success" id="login-invoke"><i class="icon-unlock-alt"></i> Login</a>            
-            <a href="{{ action.connect_face }}" class="btn btn-success btn-connect-fb"><i class="icon-facebook"></i> Connect facebook</a>
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="login-social">
+                        <ul>
+                            <li>
+                                <a href="{{ action.connect_face }}">
+                                    <i class="icon-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-linkedin"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="icon-google-plus"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="span4">
+                    <a href="#" class="btn btn-success" id="login-invoke"><i class="icon-unlock-alt"></i> Login</a>  
+                </div>
+            </div>
         </div> 
     </div>             
 </div>
