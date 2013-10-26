@@ -662,11 +662,11 @@
 		that = this;
 
 		this.$btnAdd.click(function(){
-			that.$formAdd.removeClass('hidden');
+			that.$formAdd.removeClass('hidden').addClass('add-form');
 		});
 
 		this.$btnCancel.click(function(){
-			that.$formAdd.addClass('hidden').find('input').val('');
+			that.$formAdd.addClass('hidden').removeClass('add-form').find('input').val('');
 			that.$formAdd.find('select').val('0');
 		});
 
