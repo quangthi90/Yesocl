@@ -8,7 +8,7 @@
             <a href="#" class="friend-search-btn"><i class="icon-search"></i></a>
         </div>
         <ul class="friend-conditions">
-            <li class="friend-condition active" data-url="{{ link_filter_friends }}" data-filter="{{ data_filter_recent_added }}">
+            <li class="friend-condition active" data-url="{{ link_filter_friends }}" data-filter="{{ data_filter_all }}">
                 <i class="icon-list"></i><a href="#">All Friends</a>
             </li>                
             <li class="friend-condition" data-url="{{ link_filter_friends }}" data-filter="{{ data_filter_recent_added }}">

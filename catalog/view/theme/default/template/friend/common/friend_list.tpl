@@ -10,14 +10,14 @@
             <div class="fl friend-info">
                 <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
                 <ul class="friend-infolist">
-                    <li>{{ friend.meta.industry }}</li>
+                    <li>{{ friend.industry }}</li>
                     <li>{{ friend.numFriend }}</li>
                 </ul>
             </div>
             <div class="friend-actions">
-                {% if friend.fr_status == 0 %}
+                {% if friend.status == 0 %}
                 <button data-url="{{ path('MakeFriend', {user_slug: friend.slug}) }}" class="btn btn-yes btn-friend friend-group" data-cancel="0"><i class="icon-plus-sign"></i> Make Friend</button>
-                {% elseif friend.fr_status == 1 %}
+                {% elseif friend.status == 1 %}
                 <div class="dropdown friend-group">
                     <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
                     <ul class="dropdown-menu" role="menu">
@@ -69,7 +69,7 @@
     <script id="friend-item" type="text/x-jquery-tmpl">
         <div class="block-content-item friend-item">
             <a href="${ url }" class="fl friend-img">
-                <img src="${ image }">
+                <img src="${ avatar }">
             </a>
             <div class="fl friend-info">
                 <a href="${ url }" class="friend-name">${ username }</a>
@@ -79,6 +79,11 @@
                 </ul>
             </div>
             <div class="friend-actions">
+                {% set status_if = '{{if status == 1}}' %}
+                {% set status_else_if = '{{if status == 2}}' %}
+                {% set status_else = '{{else}}' %}
+                {% set status_if_end = '{{/if}}' %}
+                {{ status_if }}
                 <div class="dropdown friend-group">
                     <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
                     <ul class="dropdown-menu" role="menu">
@@ -87,6 +92,19 @@
                         </li>
                     </ul>
                 </div>
+                {{ status_if_end }}
+                {{ status_else_if }}
+                <div class="dropdown friend-group">
+                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a class="btn-friend" href="#" data-url="${ url }" data-cancel="1">Cancel Request</a>
+                        </li>
+                    </ul>
+                </div>
+                {{ status_else }}
+                <button data-url="${ url }" class="btn btn-yes btn-friend friend-group" data-cancel="0"><i class="icon-plus-sign"></i> Make Friend</button>
+                {{ status_if_end }}
             </div>
         </div>
     </script>

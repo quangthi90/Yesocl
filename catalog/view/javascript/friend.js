@@ -157,7 +157,7 @@
                 var regex = new RegExp( '(' + this.query + ')', 'gi' );
                 var boldItem = selectedFriend.name.replace( regex, "<strong>$1</strong>" );
                 var htmlContent = '<div class="friend-dropdown-info">'
-                                + '<img src="' + selectedFriend.image + '" alt="" />'
+                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
                                 + '<div class="friend-meta-info">'
                                 + '<span class="friend-name">' + boldItem + '</span>' 
                                 + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   

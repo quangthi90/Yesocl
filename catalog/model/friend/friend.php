@@ -34,7 +34,11 @@ class ModelFriendFriend extends Model {
 					)
 	    	);
 	 
-			$query_data = 'solrFriendList_t:*' . $this->customer->getId() . '*';
+	 		if ( isset( $data['filter_request'] ) && $data['filter_request'] ) {
+				$query_data = '(solrFriendList_t:*' . $this->customer->getId() . '* OR solrRequestList_t:*' . $this->customer->getId() . '*)';;
+	 		}else {
+	 			$query_data = 'solrFriendList_t:*' . $this->customer->getId() . '*';
+	 		}
 
 			if ( isset( $data['filter_name'] ) && is_string( $data['filter_name'] ) ) {
 				$query_data .= ' AND solrUserContent_t:*' . trim( $data['filter_name'] ) . '*';
@@ -77,12 +81,14 @@ class ModelFriendFriend extends Model {
 				$results[] = array(
 					'id' => $friend->getId(),
 					'username' => $friend->getUsername(),
-					'image' => $avatar,
+					'slug'	=> $friend->getSlug(),
+					'avatar' => $avatar,
 					'name' => $friend->getFullname(),
 					'industry' => $friend->getMeta()->getIndustry(),
 					'url' => HTTP_SERVER . 'wall-page/' . $friend->getSlug(),
 					'unFriend' => HTTP_SERVER . 'friend/remove/' . $friend->getSlug(),
 					'numFriend' => ( $multiFriend == 0 ) ? 'Not have multi friend' : $multiFriend,
+					'status' => (in_array( $this->customer->getId(), $friend->getFriendRequests())) ? 2 : 1,
 					);
 			}
 		}
