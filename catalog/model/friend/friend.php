@@ -12,13 +12,7 @@ class ModelFriendFriend extends Model {
 		foreach ($user->getFriends() as $friend) {
 			$friend = $friend->getUser();
 
-			if ( $friend->getFriendRequests() && in_array($this->customer->getId(), $friend->getFriendRequests()) ){
-				continue;
-			}elseif ( $this->customer->getUser()->getFriendById($friend->getId()) ){
-				$listfriendids[$friend->getId()] = $friend->getId();
-			}else{
-				continue;
-			}
+			$listfriendids[$friend->getId()] = $friend->getId();
 		}
 		
 		return $listfriendids;

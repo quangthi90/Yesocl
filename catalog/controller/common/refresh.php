@@ -25,7 +25,7 @@ class ControllerCommonRefresh extends Controller {
 
 		$branch_ids = array_keys($branchs);
 		$user_ids = array( $this->customer->getId() );
-		$friend_ids = array_keys($this->model_friend_friend->getListFriendIds());
+		$friend_ids = $this->model_friend_friend->getListFriendIds();
 
 		$posts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
