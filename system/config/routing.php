@@ -34,12 +34,12 @@ $_['routing']['AjaxLogin']						= 'login/ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 
 // Profile
-$_['routing']['ProfilePage']					= 'profile/edit/';
-$_['routing']['ProfileEditInfo']				= 'profile/edit/update-information/';
-$_['routing']['ProfileEditSummary']				= 'profile/edit/update-summary/';
-$_['routing']['ProfileRemoveEducation']			= 'profile/edit/remove-education/{education_id}/';
-$_['routing']['ProfileEditEducation']			= 'profile/edit/edit-education/{education_id}/';
-$_['routing']['ProfileAddEducation']			= 'profile/edit/add-education/';
+$_['routing']['ProfilePage']					= 'profile/';
+$_['routing']['ProfileEditInfo']				= 'profile/update-information/';
+$_['routing']['ProfileEditSummary']				= 'profile/update-summary/';
+$_['routing']['ProfileRemoveEducation']			= 'profile/remove-education/{education_id}/';
+$_['routing']['ProfileEditEducation']			= 'profile/update-education/{education_id}/';
+$_['routing']['ProfileAddEducation']			= 'profile/add-education/';
 
 // Friend
 $_['routing']['FriendPage']						= 'friend/{user_slug}/';

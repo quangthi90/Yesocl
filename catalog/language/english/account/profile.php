@@ -19,15 +19,24 @@ $_['entry_fax']        			= 'Fax:';
 $_['error_exists']     			= 'Warning: E-Mail address is already registered!';
 $_['error_firstname']  			= 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']   			= 'Last Name must be between 1 and 32 characters!';
-$_['error_email']      			= 'E-Mail Address does not appear to be valid!';
-$_['error_telephone']  			= 'Telephone must be between 3 and 32 characters!';
 $_['error_address']	   			= 'Address must be between 3 and 32 characters!';
 $_['error_location']   			= 'Location must be between 3 and 32 characters!';
 $_['error_industry']   			= 'Industry must be between 3 and 32 characters!';
-$_['error_username']   			= 'Username must be between 3 and 32 characters!';
-$_['error_username_empty']		= 'Username is empty!';
-$_['error_exist_email']	  		= 'Email is not avalible!';
-$_['error_exist_username']  	= 'Username is not avalible!';
+$_['error_birthday']   			= 'Birthday must more than today!';
+
+// Username
+$_['error_username_length']		= 'Username must be between 3 and 32 characters!';
+$_['error_username_exist']  	= 'Username is not avalible!';
+
+// Email
+$_['error_email_empty']	  		= 'Email is empty!';
+$_['error_email_length']  		= 'Email must be between 6 and 96 characters!';
+$_['error_email_format']  		= 'Email\'s format is wrong!';
+$_['error_email_exist']	  		= 'Email is not avalible!';
+
+// Phone
+$_['error_phone_length']  		= 'Phone must be between 6 and 20 characters!';
+$_['error_phone_format']  		= 'Phone must be include only number!';
 
 $_['error_summary']  			= 'Summary must be more 50 characters!';
 ?>

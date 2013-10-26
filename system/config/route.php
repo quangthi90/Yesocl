@@ -34,7 +34,7 @@ $_['route']['AjaxLogin']					= 'account/login/login';
 $_['route']['AjaxRegister']					= 'account/register/register';
 
 // Profile
-$_['route']['ProfilePage']					= 'account/edit';
+$_['route']['ProfilePage']					= 'account/profile';
 $_['route']['ProfileEditInfo']				= 'account/edit/updateProfiles';
 $_['route']['ProfileEditSummary']			= 'account/edit/updateBackgroundSumary';
 $_['route']['ProfileRemoveEducation']		= 'account/edit/removeEducation';

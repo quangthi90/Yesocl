@@ -674,6 +674,7 @@
 			var $item = $(this).parents('.experience-item');
 
 			that.$formAdd.removeClass('hidden');
+			that.$formAdd.data('edit', $(this).data('edit'));
 
 			that.$strMonth.val( $item.data('startedm') );
 			that.$strYear.val( $item.data('startedy') );
@@ -685,7 +686,23 @@
 		});
 
 		this.$btnSave.click(function(){
+			if ( this.$formAdd.hasClass('add-form') ){
+				that.url = that.$formAdd.data('add');
+			}else{
+				that.url = that.$formAdd.data('edit');
+			}
 
+			that.data = {
+				'started_month'		: that.$strMonth.val(),
+				'ended_month'		: that.$endMonth.val(),
+				'started_year'		: that.$strYear.val(),
+				'ended_year'		: that.$endYear.val(),
+				'title'				: that.$title.val(),
+				'company'			: that.$company.val(),
+				'location'			: that.$location.val(),
+			};
+
+			this.submit( $(this) );
 		});
 	}
 

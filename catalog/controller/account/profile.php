@@ -1,5 +1,5 @@
 <?php
-class ControllerAccountEdit extends Controller {
+class ControllerAccountProfile extends Controller {
 	private $error = array();
 
 	public function index() {
@@ -163,7 +163,19 @@ class ControllerAccountEdit extends Controller {
 		$this->response->setOutput($this->twig_render());
 	}
 
-	private function validate() {
+	
+
+	private function validateProfiles() {
+		$this->load->language('account/profile');
+
+		$this->load->model( 'user/user' );
+
+		if ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
+			$this->error['username'] = $this->language->get('error_username_length');
+		}elseif ( $this->model_user_user->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
+			$this->error['username'] = $this->language->get('error_username_exist');
+		}
+
 		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
 			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
@@ -172,113 +184,49 @@ class ControllerAccountEdit extends Controller {
 			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
-		if ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
-			$this->error['email'] = $this->language->get('error_email');
-		}
-		
-		if (($this->customer->getEmail() != $this->request->post['email']) && $this->model_account_customer->getTotalCustomersByEmail($this->request->post['email'])) {
-			$this->error['warning'] = $this->language->get('error_exists');
-		}
-
-		if ((utf8_strlen($this->request->post['telephone']) < 3) || (utf8_strlen($this->request->post['telephone']) > 32)) {
-			$this->error['telephone'] = $this->language->get('error_telephone');
-		}
-
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private function validateProfiles() {
-		$this->load->model( 'account/customer' );
-
-		if ( !isset( $this->request->post['username'] ) || !is_string( $this->request->post['username'] ) ) {
-			$this->error['username'] = $this->language->get('error_username_empty');
-		}elseif ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
-			$this->error['username'] = $this->language->get('error_username');
-		}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
-			$this->error['username'] = $this->language->get('error_exist_username');
-		}
-
-		if ( !isset( $this->request->post['firstname'] ) || !is_string( $this->request->post['firstname'] ) ) {
-			$this->error['firstname'] = $this->language->get('error_firstname');
-		}elseif ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-			$this->error['firstname'] = $this->language->get('error_firstname');
-		}
-
-		if ( !isset( $this->request->post['lastname'] ) || !is_string( $this->request->post['lastname'] ) ) {
-			$this->error['lastname'] = $this->language->get('error_lastname');
-		}elseif ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-			$this->error['lastname'] = $this->language->get('error_lastname');
-		}
-
-		if ( !isset($this->request->post['birthday']) || !is_string( $this->request->post['birthday']) ) {
-			$this->error['birthday'] = $this->language->get('error_birthday');
-		}elseif ( !(\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday'])) ) {
-			$this->error['birthday'] = $this->language->get('error_birthday');
-		}elseif ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
+		if ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
 			$this->error['birthday'] = $this->language->get('error_birthday');
 		}
 
-		if ( !isset($this->request->post['emails']) || !is_array( $this->request->post['emails'] ) ){
-			$this->error['emails'] = $this->language->get('error_emails');
-		}elseif ( count( $this->request->post['emails'] ) < 1 ) {
-			$this->error['emails'] = $this->language->get('error_emails');
+		if ( count( $this->request->post['emails'] ) < 1 ) {
+			$this->error['emails'] = $this->language->get('error_email_empty');
 		}else {
 			$hasPrimary = false;
 			foreach ( $this->request->post['emails'] as $key => $email ) {
-				if ( !isset( $email['email'] ) || !is_string( $email['email'] ) ) {
+				if ( (utf8_strlen($email['email']) < 6) || (utf8_strlen($email['email']) > 100) ) {
 					if ( !isset( $this->error['email'] ) ) {
 						$this->error['email'] = array();
 					}
-					$this->error['email'][$key] = $this->language->get('error_email');
-				}elseif ( (utf8_strlen($email['email']) < 6) || (utf8_strlen($email['email']) > 96)) {
-					if ( !isset( $this->error['email'] ) ) {
-						$this->error['email'] = array();
-					}
-		      		$this->error['email'][$key] = $this->language->get('error_email');
+		      		$this->error['email'][$key] = $this->language->get('error_email_length');
 		    	}elseif ( !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email']) ) {
 		    		if ( !isset( $this->error['email'] ) ) {
 						$this->error['email'] = array();
 					}
-		      		$this->error['email'][$key] = $this->language->get('error_email');
-		    	}elseif ( $this->model_account_customer->isExistEmail( $email['email'], $this->customer->getId() ) ){
+		      		$this->error['email'][$key] = $this->language->get('error_email_format');
+		    	}elseif ( $this->model_user_user->isExistEmail( $email['email'], $this->customer->getId() ) ){
 		    		if ( !isset( $this->error['email'] ) ) {
 						$this->error['email'] = array();
 					}
-		    		$this->error['email'][$key] = $this->language->get('error_exist_email');
+		    		$this->error['email'][$key] = $this->language->get('error_email_exist');
 		    	}
 		    	if ( $email['primary'] ) {
 		    		$hasPrimary = true;
 		    	}
 			}
-			if ( !$hasPrimary ) {
-				if ( isset( $this->error['email']) ) {
-					unset( $this->error['email'] );
-				}
-				$this->error['emails'] = $this->language->get('error_exist_primary_email');
-			}
 		}
 
 		if ( isset( $this->request->post['phones'] ) && is_array( $this->request->post['phones'] ) ) {
 			foreach ($this->request->post['phones'] as $key => $phone) {
-				if ( !isset( $phone['phone'] ) || !is_string( $phone['phone'] ) ) {
+				if ( (strlen( $phone['phone'] ) < 6) || (strlen( $phone['phone'] ) > 20) ) {
 					if ( !isset( $this->error['phone'] ) ) {
 						$this->error['phone'] = array();
 					}
-					$this->error['phone'][$key] = $this->language->get('error_phone');
-				}elseif ( (strlen( $phone['phone'] ) < 6) || (strlen( $phone['phone'] ) > 20) ) {
-					if ( !isset( $this->error['phone'] ) ) {
-						$this->error['phone'] = array();
-					}
-					$this->error['phone'][$key] = $this->language->get('error_phone');
+					$this->error['phone'][$key] = $this->language->get('error_phone_length');
 				}elseif ( !preg_match( '/^[0-9]+$/', $phone['phone'] ) ) {
 					if ( !isset( $this->error['phone'] ) ) {
 						$this->error['phone'] = array();
 					}
-					$this->error['phone'][$key] = $this->language->get('error_phone');
+					$this->error['phone'][$key] = $this->language->get('error_phone_format');
 				}
 			}
 		}
@@ -353,7 +301,7 @@ class ControllerAccountEdit extends Controller {
 							$json['email'] = array();
 						}
 			      		$json['email'][$key] = $this->language->get('error_email');
-			    	}elseif ( $this->model_account_customer->isExistEmail( $email['email'], $this->customer->getId() ) ){
+			    	}elseif ( $this->model_user_user->isExistEmail( $email['email'], $this->customer->getId() ) ){
 			    		if ( !isset( $json['email'] ) ) {
 							$json['email'] = array();
 						}
@@ -382,11 +330,11 @@ class ControllerAccountEdit extends Controller {
 
 		$json = array();
 		if ( $this->customer->isLogged() ) {
-			$this->load->model( 'account/customer' );
+			$this->load->model( 'user/user' );
 
 			if ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
 				$json['message'] = $this->language->get('error_username');
-			}elseif ( $this->model_account_customer->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
+			}elseif ( $this->model_user_user->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
 				$json['message'] = $this->language->get('error_exist_username');
 			}
 
@@ -590,7 +538,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $user = $this->model_account_customer->updateProfiles( $this->request->post ) ) {
+			if ( $user = $this->model_user_user->updateProfiles( $this->request->post ) ) {
 				$json['message'] = 'success';
 
 				$json['url'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
@@ -643,7 +591,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->updateBackground( $this->request->post ) ) {
+			if ( !$this->model_user_user->updateBackground( $this->request->post ) ) {
 				$json['message'] = 'failed'; 
 			}else {
 				$json['message'] = 'success';
@@ -661,7 +609,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $id = $this->model_account_customer->addEducation( $this->request->post ) ) {
+			if ( $id = $this->model_user_user->addEducation( $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started'] = (int)$this->request->post['started'];
@@ -693,7 +641,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->removeEducation( $this->request->get['education_id'] ) ) {
+			if ( !$this->model_user_user->removeEducation( $this->request->get['education_id'] ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
@@ -713,7 +661,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $id = $this->model_account_customer->editEducation( $this->request->get['education_id'], $this->request->post ) ) {
+			if ( $id = $this->model_user_user->editEducation( $this->request->get['education_id'], $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started'] = (int)$this->request->post['started'];
@@ -743,7 +691,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $id = $this->model_account_customer->addExperience( $this->request->post ) ) {
+			if ( $id = $this->model_user_user->addExperience( $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started_month'] = (int)$this->request->post['started_month'];
@@ -773,7 +721,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->removeExperience( $this->request->post ) ) {
+			if ( !$this->model_user_user->removeExperience( $this->request->post ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
@@ -791,7 +739,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $id = $this->model_account_customer->editExperience( $this->request->post ) ) {
+			if ( $id = $this->model_user_user->editExperience( $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started_month'] = (int)$this->request->post['started_month'];
@@ -821,7 +769,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( $skill = $this->model_account_customer->addSkill( $this->request->post ) ) {
+			if ( $skill = $this->model_user_user->addSkill( $this->request->post ) ) {
 				$json['id'] = $skill->getId();
 				$json['skill'] = $skill->getSkill();
 				$json['remove'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
@@ -843,7 +791,7 @@ class ControllerAccountEdit extends Controller {
 		}else {
 			$this->load->model('account/customer');
 
-			if ( !$this->model_account_customer->removeSkill( $this->request->post ) ) {
+			if ( !$this->model_user_user->removeSkill( $this->request->post ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
