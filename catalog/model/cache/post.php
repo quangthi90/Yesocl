@@ -193,9 +193,9 @@ class ModelCachePost extends Model {
 					continue;
 				}
 				$post = $this->model_tool_cache->setCachePost( $post );
-			}
 
-			$posts[] = $post;
+				$posts[] = $post;
+			}
 		}
 
 		return $posts;

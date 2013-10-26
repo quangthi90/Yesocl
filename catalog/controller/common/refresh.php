@@ -24,12 +24,13 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['all_posts'] = array();
 
 		$branch_ids = array_keys($branchs);
-		$user_ids = array( $this->customer->getId() );
-		$friend_ids = $this->model_friend_friend->getListFriendIds();
+		$user_ids = $this->model_friend_friend->getListFriendIds();
+		$user_ids[] = $this->customer->getId();
+
 
 		$posts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
-			'type_ids' => array_merge($branch_ids, $user_ids, $friend_ids),
+			'type_ids' => array_merge($branch_ids, $user_ids),
 		));
 		
 		$post_count = count($posts);
@@ -57,7 +58,7 @@ class ControllerCommonRefresh extends Controller {
 			// $post['avatar'] = $avatar;
 			
 			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
+			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('post')['cache']['branch'], 'SSL');
 			$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 			$list_posts[] = $post;
