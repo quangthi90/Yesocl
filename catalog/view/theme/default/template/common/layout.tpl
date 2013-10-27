@@ -48,6 +48,13 @@
 				</div>
 			</div>
 		</div>
+		<div id="y-loader">
+			<div id="y-loader-bg"></div>
+			<div id="spinner-wrapper">
+				<i class="icon-spinner icon-spin"></i>
+				<span>Loading ...</span>
+			</div>
+		</div>			
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.easing.1.3.js') }}"></script>
