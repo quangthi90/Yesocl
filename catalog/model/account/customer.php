@@ -260,26 +260,6 @@ class ModelAccountCustomer extends Model {
 		return $query->num_rows;
 	}
 
-	public function updateBackground( $data = array() ) {
-		if ( $this->customer->isLogged() ) {
-			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
-
-			if ( !$customer ) {
-				return false;
-			}
-
-			if ( isset( $data['sumary'] ) && !empty( $data['sumary'] ) ) {
-				$customer->getMeta()->getBackground()->setSumary( $data['sumary'] );
-			}
-		}else {
-			return false;
-		}
-
-		$this->dm->flush();
-
-		return true;
-	}
-
 	public function addEducation( $data = array() ) {
 		if ( $this->customer->isLogged() ) {
 			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );

@@ -4,10 +4,11 @@ use Document\User\User,
 	Document\User\Meta\Email,
 	Document\User\Meta\Location,
 	Document\User\Meta\Phone,
-	Document\User\Meta\Skill;
+	Document\User\Meta\Skill,
+	Document\User\Meta\Background;
 
 class ModelUserMeta extends Model {
-	public function update( $user_id, $data = array() ) {
+	public function updateInformation( $user_id, $data = array() ) {
 		$this->load->model('user/user');
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
@@ -163,6 +164,29 @@ class ModelUserMeta extends Model {
 		$this->dm->flush();
 
 		return $user;
+	}
+
+	public function updateSummary( $user_id, $data = array() ) {
+		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+
+		if ( !$user ) {
+			return false;
+		}
+
+		if ( empty($data['summary']) ) {
+			return false;
+		}
+
+		if ( !$user->getMeta()->getBackground() ){
+			$background = new Background();
+			$background->setSumary( $data['summary'] );
+		}else{
+			$user->getMeta()->getBackground()->setSumary( $data['summary'] );
+		}
+		
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>

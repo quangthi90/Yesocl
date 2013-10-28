@@ -353,7 +353,7 @@
 			}
 
 			that.data = {
-				'sumary': that.$input.val()
+				'summary': that.$input.val()
 			};
 
 			that.submit( $(this) );
@@ -376,8 +376,8 @@
 
 		promise.then(function(data) {
 			if ( data.message == 'success' ) {
-				that.$input.val(that.data.sumary);
-				that.$el.parent().find('.background-input-summary').html(that.data.sumary);
+				that.$input.val(that.data.summary);
+				that.$el.parent().find('.background-input-summary').html(that.data.summary);
 				that.$btnCancel.trigger('click');
 			}
 		});

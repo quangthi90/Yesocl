@@ -237,20 +237,6 @@ class ControllerAccountProfile extends Controller {
 		$this->response->setOutput( json_encode( $json ) );
 	}
 
-	private function validateBackgroundSumary() {
-		$this->load->language('account/edit');
-
-		if ((utf8_strlen($this->request->post['sumary']) < 50)) {
-			$this->error['sumary'] = $this->language->get('error_sumary');
-		}
-
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	private function validateAddEducation() {
 		if ( !isset( $this->request->post['started'] ) ) {
 			$this->error['error_education_started'] = $this->language->get('error_education_started');
@@ -417,24 +403,6 @@ class ControllerAccountProfile extends Controller {
 		} else {
 			return false;
 		}
-	}
-
-	public function updateBackgroundSumary() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() || !$this->validateBackgroundSumary() ) {
-			$json['message'] = 'failed';
-		}else {
-			$this->load->model('account/customer');
-
-			if ( !$this->model_user_user->updateBackground( $this->request->post ) ) {
-				$json['message'] = 'failed'; 
-			}else {
-				$json['message'] = 'success';
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
 	}
 
 	public function addEducation() {
