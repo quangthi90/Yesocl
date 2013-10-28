@@ -352,14 +352,14 @@ label.in-line{
   left: 15px;
   right:0px;
   bottom: 21px;    
-  background: #ECEBEB;
+  background: #ECEBEB url('../../image/y-bg.png') repeat-x scroll;
 }
 #y-main-content{    
   width: auto;
   height: 100%;
   overflow-y: hidden;
   overflow-x: auto;
-  min-width: 90%;
+  min-width: 90%;  
 }
 #y-footer
 {

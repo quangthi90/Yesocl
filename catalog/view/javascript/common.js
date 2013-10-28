@@ -138,24 +138,28 @@
 
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();
+		var maxView = 2400 - that.main.width();
 		that.goLeftBtn.addClass('disabled');
 		that.main.scroll(function(e) { 
+			var x = $(this).scrollLeft();
 	    	var leftOffset = 0;
 	    	var freeBlockFirst = $(this).find(".free-block:first-child");
 	    	if(freeBlockFirst.length != 0 ){
 	    		leftOffset = freeBlockFirst.width();
 	    	}
-	        if($(this).scrollLeft() > leftOffset){
+	        if(x > leftOffset){
 	        	that.goLeftBtn.removeClass('disabled');	
 	        }
 	        else {
 	            that.goLeftBtn.addClass('disabled');	
 	        }
-	        if($(this).scrollLeft() >= maxScroll) {
+	        if(x >= maxScroll) {
 	        	that.goRightBtn.addClass('disabled');	
 	        }else {
 	        	that.goRightBtn.removeClass('disabled');	
 	        }
+	        //Background move when scroll:	        
+    		$(this).css('background-position', parseInt((-1)*x*maxView/maxScroll/10) + 'px 0px');
 	    });
 	    that.goLeftBtn.click(function(){
 	    	if($(this).hasClass('disabled')) return;
@@ -275,7 +279,7 @@
 		this.widthMain = el.width();		
 		this.initializeBlock();
 	}
-	HorizontalBlock.prototype.initializeBlock = function() {	
+	HorizontalBlock.prototype.initializeBlock = function() {
 		if(this.root.hasClass(df_INVIDUAL_BLOCK)) {
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');				
