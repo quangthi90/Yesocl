@@ -96,8 +96,8 @@
         <td><input class="input-xxlarge" type="text" name="background[adviceforcontact]" value="<?php echo $advice_for_contact; ?>" /></td>
     </tr>
     <tr>
-        <td><?php echo $entry_sumary; ?></td>
-        <td><textarea class="input-xxlarge" rows="8" name="background[sumary]"><?php echo $sumary; ?></textarea></td>
+        <td><?php echo $entry_summary; ?></td>
+        <td><textarea class="input-xxlarge" rows="8" name="background[summary]"><?php echo $summary; ?></textarea></td>
     </tr>
     <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>

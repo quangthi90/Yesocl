@@ -18,11 +18,11 @@
     <?php } ?></td>
   </tr>
   <tr>
-    <td><span class="required">*</span> <?php echo $entry_sumary; ?></td>
-    <td><textarea class="input-xxlarge" type="text" name="sumary"><?php echo $sumary; ?></textarea>
-    <?php if ($error_sumary) { ?>
+    <td><span class="required">*</span> <?php echo $entry_summary; ?></td>
+    <td><textarea class="input-xxlarge" type="text" name="summary"><?php echo $summary; ?></textarea>
+    <?php if ($error_summary) { ?>
         <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_sumary; ?>
+          <strong>Error!</strong> <?php echo $error_summary; ?>
         </div>
     <?php } ?></td>
   </tr>

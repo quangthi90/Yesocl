@@ -103,7 +103,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
 		$this->data['entry_address'] = $this->language->get( 'entry_address' );
 		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
-		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
+		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
@@ -246,11 +246,11 @@ class ControllerUserUser extends Controller {
 			$this->data['advice_for_contact'] = '';
 		}
 
-		// Entry sumary
+		// Entry summary
 		if ( $user->getMeta()->getBackground() ){
-			$this->data['sumary'] = $user->getMeta()->getBackground()->getSumary();
+			$this->data['summary'] = $user->getMeta()->getBackground()->getSummary();
 		}else {
-			$this->data['sumary'] = '';
+			$this->data['summary'] = '';
 		}
 
 		// Entry industry
@@ -921,7 +921,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
 		$this->data['entry_address'] = $this->language->get( 'entry_address' );
 		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
-		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
+		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
@@ -1154,12 +1154,12 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry advice for contact
-		if ( isset($this->request->post['background']['sumary']) ){
-			$this->data['sumary'] = $this->request->post['background']['sumary'];
+		if ( isset($this->request->post['background']['summary']) ){
+			$this->data['summary'] = $this->request->post['background']['summary'];
 		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
-			$this->data['sumary'] = $user->getMeta()->getBackground()->getSumary();
+			$this->data['summary'] = $user->getMeta()->getBackground()->getSummary();
 		}else {
-			$this->data['sumary'] = '';
+			$this->data['summary'] = '';
 		}
 
 		// Entry industry

@@ -125,7 +125,7 @@ class ControllerAccountProfile extends Controller {
 			'address' => $user->getMeta()->getAddress(),
 			'industry' => $user->getMeta()->getIndustry(),
 			'industryid' => $user->getMeta()->getIndustryId(),
-			'summary' => $user->getMeta()->getBackground() ? $user->getMeta()->getBackground()->getSumary() : '',
+			'summary' => $user->getMeta()->getBackground() ? $user->getMeta()->getBackground()->getSummary() : '',
 			'educations' => $educations_data,
 			'experiences' => $experiences_data,
 			'skills' => $skills_data
@@ -235,62 +235,6 @@ class ControllerAccountProfile extends Controller {
 			}
 		}
 		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	private function validateAddEducation() {
-		if ( !isset( $this->request->post['started'] ) ) {
-			$this->error['error_education_started'] = $this->language->get('error_education_started');
-		}
-
-		if ( !isset( $this->request->post['ended'] ) ) {
-			$this->error['error_education_ended'] = $this->language->get('error_education_ended');
-		}
-
-		if ( !isset( $this->request->post['degree'] ) || empty( $this->request->post['degree'] ) ) {
-			$this->error['error_education_degree'] = $this->language->get('error_education_degree');
-		}
-
-		if ( !isset( $this->request->post['school'] ) || empty( $this->request->post['school'] ) ) {
-			$this->error['error_education_school'] = $this->language->get('error_education_school');
-		}
-
-		if ( !isset( $this->request->post['fieldofstudy'] ) || empty( $this->request->post['fieldofstudy'] ) ) {
-			$this->error['error_education_fieldofstudy'] = $this->language->get('error_education_fieldofstudy');
-		}
-
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	private function validateEditEducation() {
-		if ( !isset( $this->request->post['started'] ) ) {
-			$this->error['error_education_started'] = $this->language->get('error_education_started');
-		}
-
-		if ( !isset( $this->request->post['ended'] ) ) {
-			$this->error['error_education_ended'] = $this->language->get('error_education_ended');
-		}
-
-		if ( !isset( $this->request->post['degree'] ) || empty( $this->request->post['degree'] ) ) {
-			$this->error['error_education_degree'] = $this->language->get('error_education_degree');
-		}
-
-		if ( !isset( $this->request->post['school'] ) || empty( $this->request->post['school'] ) ) {
-			$this->error['error_education_school'] = $this->language->get('error_education_school');
-		}
-
-		if ( !isset( $this->request->post['fieldofstudy'] ) || empty( $this->request->post['fieldofstudy'] ) ) {
-			$this->error['error_education_fieldofstudy'] = $this->language->get('error_education_fieldofstudy');
-		}
-
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	private function validateAddExperience() {
@@ -403,88 +347,6 @@ class ControllerAccountProfile extends Controller {
 		} else {
 			return false;
 		}
-	}
-
-	public function addEducation() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() || !$this->validateAddEducation() ) {
-			$json['message'] = 'failed';
-		}else {
-			$this->load->model('account/customer');
-
-			if ( $id = $this->model_user_user->addEducation( $this->request->post ) ) {
-				$json['message'] = 'success';
-				$json['id'] = $id;
-				$json['started'] = (int)$this->request->post['started'];
-				$json['ended'] = (int)$this->request->post['ended'];
-				$json['degree'] = $this->request->post['degree'];
-				$json['school'] = $this->request->post['school'];
-				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
-				$json['edit'] = $this->extension->path('ProfileEditEducation', array(
-					'education_id' => $id
-				));
-				$json['remove'] = $this->extension->path('ProfileRemoveEducation', array(
-					'education_id' => $id
-				));
-			}else {
-				$json['message'] = 'failed';
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function removeEducation() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() ) {
-			$json['message'] = 'failed';
-		}elseif ( empty($this->request->get['education_id']) ){
-			$json['message'] = 'education id is empty';
-		}else {
-			$this->load->model('account/customer');
-
-			if ( !$this->model_user_user->removeEducation( $this->request->get['education_id'] ) ) {
-				$json['message'] = 'failed';
-			}else {
-				$json['message'] = 'success';
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function editEducation() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() || !$this->validateEditEducation() ) {
-			$json['message'] = 'failed';
-		}elseif ( empty($this->request->get['education_id']) ){
-			$json['message'] = 'education id is empty';
-		}else {
-			$this->load->model('account/customer');
-
-			if ( $id = $this->model_user_user->editEducation( $this->request->get['education_id'], $this->request->post ) ) {
-				$json['message'] = 'success';
-				$json['id'] = $id;
-				$json['started'] = (int)$this->request->post['started'];
-				$json['ended'] = (int)$this->request->post['ended'];
-				$json['degree'] = $this->request->post['degree'];
-				$json['school'] = $this->request->post['school'];
-				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
-				$json['edit'] = $this->extension->path('ProfileEditEducation', array(
-					'education_id' => $id
-				));
-				$json['remove'] = $this->extension->path('ProfileRemoveEducation', array(
-					'education_id' => $id
-				));
-			}else {
-				$json['message'] = 'failed';
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
 	}
 
 	public function addExperience() {

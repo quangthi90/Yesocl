@@ -11,8 +11,8 @@ class ModelGroupGroup extends Model {
 			return false;
 		}
 		
-		// sumary is required
-		if ( !isset($data['sumary']) || empty($data['sumary']) ){
+		// summary is required
+		if ( !isset($data['summary']) || empty($data['summary']) ){
 			return false;
 		}
 		
@@ -54,7 +54,7 @@ class ModelGroupGroup extends Model {
 		$group = new group();
 		$group->setAuthor( $user );
 		$group->setName( $data['name'] );
-		$group->setSumary( $data['sumary'] );
+		$group->setSummary( $data['summary'] );
 		$group->setDescription( $data['description'] );
 		$group->setType( $type );
 		$group->setStatus( $data['status'] );
@@ -99,8 +99,8 @@ class ModelGroupGroup extends Model {
 			return false;
 		}
 		
-		// sumary is required
-		if ( !isset($data['sumary']) || empty($data['sumary']) ){
+		// summary is required
+		if ( !isset($data['summary']) || empty($data['summary']) ){
 			return false;
 		}
 		
@@ -166,7 +166,7 @@ class ModelGroupGroup extends Model {
 
 		$group->setAuthor( $user );
 		$group->setName( $data['name'] );
-		$group->setSumary( $data['sumary'] );
+		$group->setSummary( $data['summary'] );
 		$group->setDescription( $data['description'] );
 		$group->setType( $type );
 		$group->setStatus( $data['status'] );

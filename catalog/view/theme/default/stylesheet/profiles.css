@@ -117,7 +117,7 @@
 	line-height: 14px;
 }
 
-#profiles-tabs-background-sumary .profiles-tabs-main-body, #profiles-tabs-information .profiles-tabs-main-body {
+#profiles-tabs-background-summary .profiles-tabs-main-body, #profiles-tabs-information .profiles-tabs-main-body {
 	font-size: 13px;
 	line-height: 20px;
 }
@@ -255,7 +255,7 @@
 	display: none;
 }
 
-textarea[name="sumary"] {
+textarea[name="summary"] {
 	width: 98%;
 	height: 95%;
 	overflow-y: hidden;
