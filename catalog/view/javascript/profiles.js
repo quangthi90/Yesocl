@@ -62,23 +62,21 @@
 	}
 
 	function InfoForm($el){
-		this.$el = $el;
-		this.url = $el.data('url');
-		this.$btnCancel = $el.find('.profiles-btn-cancel');
-		this.$btnSave = $el.find('.profiles-btn-save');
+		this.$el 					= $el;
+		this.url 					= $el.data('url');
 
-		this.$btnAddPhone = $el.find('.phones-btn-add');
-		this.$btnAddEmail = $el.find('.emails-btn-add');
+		this.$btnCancel 			= $el.find('.profiles-btn-cancel');
+		this.$btnSave 				= $el.find('.profiles-btn-save');
+		this.$btnAddPhone 			= $el.find('.phones-btn-add');
+		this.$btnAddEmail 			= $el.find('.emails-btn-add');
+		this.$btnRemovePhone 		= $el.find('.phones-btn-remove');
+		this.$btnRemoveEmail 		= $el.find('.emails-btn-remove');
+		this.$btnPrimaryEmail 		= $el.find('.primary-email-btn');
 
-		this.$btnRemovePhone = $el.find('.phones-btn-remove');
-		this.$btnRemoveEmail = $el.find('.emails-btn-remove');
+		this.$locationAutoComplete 	= $el.find('input[name=\"location\"]');
+		this.$industryAutoComplete 	= $el.find('input[name=\"industry\"]');
 
-		this.$btnPrimaryEmail = $el.find('.primary-email-btn');
-
-		this.$locationAutoComplete = $el.find('input[name=\"location\"]');
-		this.$industryAutoComplete = $el.find('input[name=\"industry\"]');
-
-		var $inputBirthday = this.$el.find('.inputBirthday .bfh-datepicker');
+		var $inputBirthday 			= this.$el.find('.inputBirthday .bfh-datepicker');
 		$inputBirthday.bfhdatepicker($inputBirthday.data());
 
 		this.attachEvents();
@@ -260,7 +258,7 @@
 		this.triggerProgress($button, promise);
 
 		promise.then(function(data) {
-			if ( data.message != null && data.message == 'success' ) {
+			if ( data.message == 'success' ) {
 				var $profile_label = $.tmpl($('#profiles-label'), data);
 
 				var $profile_form = $.tmpl($('#profiles-form'), data);
@@ -269,6 +267,21 @@
 
 				new InfoLabel($profile_label);
 				new InfoForm($profile_form);
+			}else if ( data.birthday != null ){
+				var $input = that.$el.find('[name=\"birthday\"]');
+				$input.tooltip('destroy');
+				$input.parent().removeClass('success');
+				$input.parent().addClass('error');
+				$input.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.birthday,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
 			}
 		});
 	};

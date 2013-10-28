@@ -20,9 +20,9 @@ $_['error_exists']     			= 'Warning: E-Mail address is already registered!';
 $_['error_firstname']  			= 'First Name must be between 1 and 32 characters!';
 $_['error_lastname']   			= 'Last Name must be between 1 and 32 characters!';
 $_['error_address']	   			= 'Address must be between 3 and 32 characters!';
-$_['error_location']   			= 'Location must be between 3 and 32 characters!';
-$_['error_industry']   			= 'Industry must be between 3 and 32 characters!';
-$_['error_birthday']   			= 'Birthday must more than today!';
+$_['error_location']   			= 'Location must be between 1 and 32 characters!';
+$_['error_industry']   			= 'Industry must be between 3 and 64 characters!';
+$_['error_birthday']   			= 'Birthday must be before today!';
 
 // Username
 $_['error_username_length']		= 'Username must be between 3 and 32 characters!';

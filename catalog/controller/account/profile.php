@@ -9,19 +9,6 @@ class ControllerAccountProfile extends Controller {
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
-		$this->data['link_update_background_sumary'] = $this->url->link('account/edit/updateBackgroundSumary', '', 'SSL');
-		$this->data['link_update_background_education'] = $this->url->link('account/edit/updateBackgroundEducation', '', 'SSL');
-		$this->data['link_add_education'] = $this->url->link('account/edit/addEducation', '', 'SSL');
-		$this->data['link_remove_education'] = $this->url->link('account/edit/removeEducation', '', 'SSL');
-		$this->data['link_edit_education'] = $this->url->link('account/edit/editEducation', '', 'SSL');
-		$this->data['link_add_experience'] = $this->url->link('account/edit/addExperience', '', 'SSL');
-		$this->data['link_remove_experience'] = $this->url->link('account/edit/removeExperience', '', 'SSL');
-		$this->data['link_edit_experience'] = $this->url->link('account/edit/editExperience', '', 'SSL');
-		$this->data['link_add_skill'] = $this->url->link('account/edit/addSkill', '', 'SSL');
-		$this->data['link_remove_skill'] = $this->url->link('account/edit/removeSkill', '', 'SSL');
-		$this->data['link_autocomplete_location'] = html_entity_decode( $this->url->link( 'account/edit/autocompleteLocation', '', 'SSL'));
-		$this->data['link_autocomplete_industry'] = html_entity_decode( $this->url->link( 'account/edit/autocompleteIndustry', '', 'SSL'));
-		
 		$this->load->model('user/user');
 		$this->load->model('data/value');
 
@@ -161,101 +148,6 @@ class ControllerAccountProfile extends Controller {
 		);
 				
 		$this->response->setOutput($this->twig_render());
-	}
-
-	
-
-	private function validateProfiles() {
-		$this->load->language('account/profile');
-
-		$this->load->model( 'user/user' );
-
-		if ((strlen($this->request->post['username']) < 5) || (strlen($this->request->post['username']) > 32)) {
-			$this->error['username'] = $this->language->get('error_username_length');
-		}elseif ( $this->model_user_user->isExistUsername( $this->request->post['username'], $this->customer->getId() ) ) {
-			$this->error['username'] = $this->language->get('error_username_exist');
-		}
-
-		if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
-			$this->error['firstname'] = $this->language->get('error_firstname');
-		}
-
-		if ((utf8_strlen($this->request->post['lastname']) < 1) || (utf8_strlen($this->request->post['lastname']) > 32)) {
-			$this->error['lastname'] = $this->language->get('error_lastname');
-		}
-
-		if ( (\Datetime::createFromFormat('d/m/Y', $this->request->post['birthday']) > (new Datetime()) ) ) {
-			$this->error['birthday'] = $this->language->get('error_birthday');
-		}
-
-		if ( count( $this->request->post['emails'] ) < 1 ) {
-			$this->error['emails'] = $this->language->get('error_email_empty');
-		}else {
-			$hasPrimary = false;
-			foreach ( $this->request->post['emails'] as $key => $email ) {
-				if ( (utf8_strlen($email['email']) < 6) || (utf8_strlen($email['email']) > 100) ) {
-					if ( !isset( $this->error['email'] ) ) {
-						$this->error['email'] = array();
-					}
-		      		$this->error['email'][$key] = $this->language->get('error_email_length');
-		    	}elseif ( !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email['email']) ) {
-		    		if ( !isset( $this->error['email'] ) ) {
-						$this->error['email'] = array();
-					}
-		      		$this->error['email'][$key] = $this->language->get('error_email_format');
-		    	}elseif ( $this->model_user_user->isExistEmail( $email['email'], $this->customer->getId() ) ){
-		    		if ( !isset( $this->error['email'] ) ) {
-						$this->error['email'] = array();
-					}
-		    		$this->error['email'][$key] = $this->language->get('error_email_exist');
-		    	}
-		    	if ( $email['primary'] ) {
-		    		$hasPrimary = true;
-		    	}
-			}
-		}
-
-		if ( isset( $this->request->post['phones'] ) && is_array( $this->request->post['phones'] ) ) {
-			foreach ($this->request->post['phones'] as $key => $phone) {
-				if ( (strlen( $phone['phone'] ) < 6) || (strlen( $phone['phone'] ) > 20) ) {
-					if ( !isset( $this->error['phone'] ) ) {
-						$this->error['phone'] = array();
-					}
-					$this->error['phone'][$key] = $this->language->get('error_phone_length');
-				}elseif ( !preg_match( '/^[0-9]+$/', $phone['phone'] ) ) {
-					if ( !isset( $this->error['phone'] ) ) {
-						$this->error['phone'] = array();
-					}
-					$this->error['phone'][$key] = $this->language->get('error_phone_format');
-				}
-			}
-		}
-
-		if ( !isset( $this->request->post['address'] ) || !is_string( $this->request->post['address'] ) ) {
-			$this->error['address'] = $this->language->get('error_address');
-		}elseif ((utf8_strlen($this->request->post['address']) < 1) || (utf8_strlen($this->request->post['address']) > 255)) {
-			$this->error['address'] = $this->language->get('error_address');
-		}
-
-		if ( !isset( $this->request->post['location'] ) || !is_string( $this->request->post['location'] ) ) {
-			$this->error['location'] = $this->language->get('error_location');
-		}elseif ((utf8_strlen($this->request->post['location']) < 1) || (utf8_strlen($this->request->post['location']) > 255)) {
-			$this->error['location'] = $this->language->get('error_location');
-		}
-
-		if ( !isset( $this->request->post['industry'] ) || !is_string( $this->request->post['industry'] ) ) {
-			$this->error['industry'] = $this->language->get('error_industry');
-		}elseif ( (utf8_strlen($this->request->post['industry']) < 1) || utf8_strlen($this->request->post['industry']) > 64 ) {
-			$this->error['industry'] = $this->language->get('error_industry');
-		}elseif ( !preg_match('/^[A-z]+$/', $this->request->post['industry']) ) {
-			$this->error['industry'] = $this->language->get('error_industry');
-		}
-
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 	public function validatePhone() {
@@ -525,62 +417,6 @@ class ControllerAccountProfile extends Controller {
 		} else {
 			return false;
 		}
-	}
-
-	public function updateProfiles() {
-		$this->load->language('account/edit');
-
-		$json = array();
-
-		if ( !$this->customer->isLogged() || !$this->validateProfiles() ) {
-			$json['message'] = 'failed';
-			$json = $this->error;
-		}else {
-			$this->load->model('account/customer');
-
-			if ( $user = $this->model_user_user->updateProfiles( $this->request->post ) ) {
-				$json['message'] = 'success';
-
-				$json['url'] = $this->url->link('account/edit/updateProfiles', '', 'SSL');
-				$json['username'] = $user->getUsername();
-				$json['firstname'] = $user->getMeta()->getFirstname();
-				$json['lastname'] = $user->getMeta()->getLastname();
-				$json['fullname'] = $user->getFullName();
-				$json['email'] = $user->getPrimaryEmail()->getEmail();
-				$json['phones'] = array();
-				foreach ($user->getMeta()->getPhones() as $phone) {
-					$json['phones'][] = array(
-						'id' => $phone->getId(),
-						'type' => $phone->getType(),
-						'phone' => $phone->getPhone(),
-						'visible' => $phone->getVisible()
-					);
-				}
-				$json['phones_js'] = json_encode( $json['phones'] );
-				$json['emails'] = array();
-				foreach ($user->getEmails() as $key => $email) {
-					$json['emails'][$key] = array(
-						'email' => $email->getEmail(),
-						'primary' => $email->getPrimary() ? 1 : 0,
-					);
-				}
-				$json['emails_js'] = json_encode( $json['emails'] );
-				$json['sex'] = $user->getMeta()->getSex() ? 1 : 0;
-				$json['sext'] = $user->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female');
-				$json['birthday'] = $user->getMeta()->getBirthday()->format('d/m/Y');
-				$json['birthdayt'] = $user->getMeta()->getBirthday()->format('d/m/Y');
-				$json['location'] = $user->getMeta()->getLocation()->getLocation();
-				$json['cityid'] = $user->getMeta()->getLocation()->getCityId();
-				$json['address'] = $user->getMeta()->getAddress();
-				$json['industry'] = $user->getMeta()->getIndustry();
-				$json['industryid'] = $user->getMeta()->getIndustryId();
-			}else {
-				//$json['message'] = 'failed';
-				$json = $this->error;
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
 	}
 
 	public function updateBackgroundSumary() {
