@@ -54,8 +54,8 @@
 		this.sidebarRoot = el.find("#y-sidebar");
 		this.sidebarToggle = this.sidebarRoot.find("#sidebar-toggle");
 		this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
-		this.listMenuItem  = this.menuContainer.find('li');
 		this.searchCtrl	   = this.sidebarRoot.find("input#ss-keyword");
+		this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");
 		this.makeCustomVerticalScroll();
 		this.attachEvents();
 	}
@@ -70,11 +70,13 @@
 					that.menuContainer.show(); 
 				}, 50);
 			},
-			function() {
-				$(this).stop().animate( { left:'-270px'}, 400, 'easeOutQuart', function(){
-					that.sidebarToggle.stop().fadeIn(110);
+			function() {				
+				$(this).stop().animate( { left:'-370px'}, 400, 'easeOutQuart', function(){					
 					that.menuContainer.hide();
 				});
+				setTimeout(function(){
+					that.sidebarToggle.stop().fadeIn();
+				}, 200);
 			}
 		);	
 		//Auto invoke search:
@@ -99,6 +101,10 @@
 			if(e.which == 27){
 				that.hideSidebar();
 			}
+		});
+		//Close sidebar btn clicked:
+		that.closeSidebar.click(function(){
+			that.hideSidebar();
 		});
 		//Click content to hide sidebar:
 		$("#y-header, #y-content, #y-footer").click(function(){

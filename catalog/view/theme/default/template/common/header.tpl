@@ -23,11 +23,9 @@
 			<div id="user-quick-menu" class="fr dropdown user-menu">							
 			    <a href="#">
 			    	<i class="icon-edit"></i>
-		    		<span>New post</span>
 			    </a>
 			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
-		    		<span>Quick menu <i class="icon-caret-down"></i></span>
 	    		</a>
 			    <ul class="dropdown-menu">
 			      	<li>
@@ -57,9 +55,6 @@
         <div class="dropdown notification-item message">
           <a href="#" class="btn-notification" data-toggle="dropdown">
             <i class="icon-external-link"></i>
-            <span class="notification-item-name">
-              Confirm <i class="icon-caret-down"></i>
-            </span>          
             <span class="notification-item-count">5</span>
           </a>
           <ul class="dropdown-menu notification-content-list">
@@ -88,9 +83,6 @@
         <div class="dropdown notification-item common">
           <a href="#" class="btn-notification" data-toggle="dropdown">
             <i class="icon-bell"></i>
-            <span class="notification-item-name">
-            	Notification <i class="icon-caret-down"></i>
-        	  </span>
             <span class="notification-item-count">3</span>
           </a>
           <ul class="dropdown-menu notification-content-list">
@@ -229,9 +221,6 @@
         <div class="dropdown notification-item message">
           <a href="#" class="btn-notification" data-toggle="dropdown">
             <i class="icon-envelope"></i>
-            <span class="notification-item-name">
-            	Message <i class="icon-caret-down"></i>
-        	   </span>
             <span class="notification-item-count">5</span>
           </a>
           <ul class="dropdown-menu notification-content-list">
@@ -270,13 +259,11 @@
         <div class="dropdown notification-item friend">
           <a href="#" class="btn-notification" data-toggle="dropdown">
             <i class="icon-user"></i>
-            <span class="notification-item-name">
-            	Friend <i class="icon-caret-down"></i>
-            </span>
             {% if requests|length > 0 %}
             <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>
             {% endif %}
           </a>
+          {% if requests|length > 0 %}
           <ul class="dropdown-menu notification-content-list">
             {% for user in requests %}
             <li class="notification-content-item notify-actions">
@@ -295,6 +282,7 @@
             </li>
             {% endfor %}
           </ul>
+          {% endif %}
         </div>
 			</div>
 		</div>

@@ -1,6 +1,12 @@
 {% set user_slug = get_current_user().slug %}
 <div id="y-sidebar">
 	<div class="sidebar-wrapper">
+		<div class="sidebar-header">
+			<h3>
+				<span id="sidebar-close"><i class="icon-hand-left"></i></span> 
+				Main Menu
+			</h3>
+		</div>
 		<div class="search-box">
 			<input type="text" name="ss-keyword" id="ss-keyword" placeholder="Search" />
 			<a href="#" class="btn-search"><i class="icon-search"></i></a>
