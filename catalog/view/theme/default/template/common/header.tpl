@@ -21,7 +21,7 @@
 				</div>						
 			</div>
 			<div id="user-quick-menu" class="fr dropdown user-menu">							
-			    <a href="#">
+			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
           <a href="#">

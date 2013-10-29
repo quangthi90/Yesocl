@@ -54,7 +54,25 @@
 				<i class="icon-spinner icon-spin"></i>
 				<span>Loading ...</span>
 			</div>
-		</div>			
+		</div>
+		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-close-search="#btn-search-invoke-off" data-url="{{ path('SearchPage') }}">
+		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
+		  <div class="suggestion-container"></div>
+		  {% raw %}
+		  <div class="hidden search-result-item-template">
+		    <a href="${url}">
+		      <div class="data-detail">
+		        <img src="${image}" alt="" />
+		        <div class="data-meta-info">
+		          <div class="data-name">${value}</div>
+		          <div class="data-more">${metaInfo}</div>
+		        </div>
+		      </div>
+		    </a>
+		  </div>
+		  {% endraw %}
+		</div>		
+
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.easing.1.3.js') }}"></script>
@@ -69,7 +87,9 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.mcustomscrollbar.min.js') }}">
 		</script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.bootbox.js') }}">
-		</script>		
+		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.typeahead.js') }}">
+		</script>	
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
