@@ -404,8 +404,8 @@ label.in-line{
 #user-info-wrapper .user-avatar {
 }
 #user-info-wrapper .user-avatar img {
-  height: 50px;  
-  width: 50px;
+  height: 55px;  
+  width: 55px;
   border: 1px solid #fff;
   border-radius: 50%;
 }
@@ -472,13 +472,16 @@ label.in-line{
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.user-menu > a:hover {
+.user-menu > a:hover,
+.user-menu > a.active {
   background: transparent;
 }
-.user-menu > a:hover > span {
+.user-menu > a:hover > span,
+.user-menu > a.active > span {
   color: #fff;
 }
-.user-menu > a:hover > i {
+.user-menu > a:hover > i,
+.user-menu > a.active > i {
   color: #fff;
   font-size: 18px;
   background-color: #009B77;
@@ -1955,44 +1958,39 @@ ul.user_actions li:hover i{
 /* ------------------------------------- END FRIEND ------------------------------------------ */
 
 /* ------------------------------------ START SEARCH RESULT ------------------------------------ */
-.suggestion-container {
-  position: absolute;
-  overflow: hidden;
-  bottom: 51px;
-  left: 121px;
-  z-index: 500000;
+.tt-dropdown-menu {
   background-color: #FFF;
-  border: 1px solid #ccc;
-  padding: 10px 20px;
+  padding: 15px;
 }
-.suggestion-container .suggest-title {
-  margin: 0px;
-  padding: 5px;
-  font-size: 12px;
+.tt-dropdown-menu  .tt-dataset-dataset-category {
+  overflow: hidden;
+  float: left;
+  margin-right: 30px;
+  min-width: 200px;
+}
+.tt-dropdown-menu  .tt-dataset-dataset-category:last-child {
+  margin-right: 10px;
+}
+.tt-dataset-dataset-category .tt-suggestions {
+  overflow: hidden;
+}
+.tt-suggestions .tt-suggestion {
+  display: block;
+  clear: left;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 5px 5px;
+}
+.tt-suggestions .tt-suggestion:last-child {
+  border-bottom: none;
+}
+.tt-suggestions .tt-is-under-cursor {
   background-color: #f0f0f0;
 }
-.suggestion-container .suggest-title span i {
-  font-size: 18px;
+.tt-is-under-cursor .data-detail .data-meta-info .data-name {
+  color: #009B77;
 }
-.suggestion-container .suggest-content {
+.data-detail{
   overflow: hidden;
-}
-.suggestion-container .suggest-field {
-  display: inline-block;
-  margin-right: 25px;
-  vertical-align: top;
-}
-.suggestion-container .suggest-field-list{
-}
-.suggest-field-list .suggest-field-item {
-  margin-bottom: 5px;
-}
-.suggest-field-list .suggest-field-item a {
-  display: block;
-}
-.suggest-field-item .data-detail {  
-  min-width: 150px;
-  overflow: hidden;  
 }
 .data-detail img{
   width: 40px;
@@ -2005,12 +2003,43 @@ ul.user_actions li:hover i{
   max-width: 200px;
 }
 .data-detail .data-meta-info .data-name {
-  font-size: 12px;
-  font-weight: bold;
+  font-size: 14px;
+}
+.data-detail .data-meta-info .data-name strong {
+  color: #009B77;
 }
 .data-detail .data-meta-info .data-more {
   white-space: nowrap;  
-  font-size: 10px;
+  font-size: 11px;
+}
+
+#search-panel {
+  position: absolute;
+  left: 15px;
+  bottom: 21px;
+  right: 0px;
+  top: 58px;
+  padding: 30px 25px;
+  background-color: #9B9B9B;
+  z-index: 2;
+  overflow: hidden;
+  display: none;
+}
+#search-panel .search-ctrl {
+  width: 97%;
+  padding: 15px;  
+  font-size: 18px;
+  outline: none;
+}
+#search-panel .tt-hint {
+  width: 97%;
+  padding: 15px;
+  font-size: 18px;
+  color:#ccc;
+}
+#search-panel .twitter-typeahead {
+  display: block;
+  width: 100%;
 }
 /* ------------------------------------- END SEARCH RESULT -----------------------------------------*/
 /* ------------------------------------- START MODAL  ----------------------------------------------*/

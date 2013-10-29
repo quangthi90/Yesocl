@@ -55,7 +55,7 @@
 				<span>Loading ...</span>
 			</div>
 		</div>
-		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-close-search="#btn-search-invoke-off" data-url="{{ path('SearchPage') }}">
+		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}">
 		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
 		  <div class="suggestion-container"></div>
 		  {% raw %}

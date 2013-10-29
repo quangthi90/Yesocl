@@ -78,24 +78,7 @@
 					that.sidebarToggle.stop().fadeIn();
 				}, 200);
 			}
-		);	
-		//Auto invoke search:
-		$(document).keypress(function(e){ 			
-			//Check if any input is focused, if so, don't continue:
-			var isFocus = false;		
-			$('input,textarea').each(function(){
-				if ($(this).is(":focus")) isFocus = true;
-			});
-			if (isFocus) return;
-			if(parseInt(that.sidebarRoot.css('left')) != 0 && 
-				((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122))) {
-				that.sidebarRoot.mouseenter();
-				that.searchCtrl.focus();
-				if($.browser.mozilla) {
-					that.searchCtrl.val(String.fromCharCode(e.which));
-				}
-			}
-		});
+		);		
 		//ESC to hide sidebar:
 		that.sidebarRoot.keydown(function(e){
 			if(e.which == 27){
@@ -129,7 +112,6 @@
 		this.root = el;
 		this.autoCtrl = el.find('.search-ctrl');
 		this.invokeCtrl = el.data('invoke-search');
-		this.closeCtrl = el.data('close-search');
 		this.template = el.find('.search-result-item-template');	
 		this.suggestContainer = el.find('.suggestion-container');
 		this.attachEvents();
@@ -139,14 +121,12 @@
 	SearchAutoComplete.prototype.attachEvents = function() {
 		var that = this;
 		$(that.invokeCtrl).click(function() {
-			that.root.slideDown(200, function(){
-				that.autoCtrl.focus();
-				$(that.invokeCtrl).hide();
-				$(that.closeCtrl).show();
-			});		
-		});
-		$(that.closeCtrl).click(function() {
-			that.closeSearchPanel();
+			if($(this).hasClass('active')) {
+				that.closeSearchPanel();
+				$(this).removeClass('active');
+			}else{
+				that.openSearchPanel();
+			}				
 		});
 		that.root.hover(function(){
 				that.autoCtrl.focus();
@@ -156,6 +136,21 @@
 				that.autoCtrl.focus();
 			}
 		);
+		//Auto invoke search:
+		$(document).keypress(function(e){ 			
+			//Check if any input is focused, if so, don't continue:
+			var isFocus = false;		
+			$('input,textarea').each(function(){
+				if ($(this).is(":focus")) isFocus = true;
+			});
+			if (isFocus) return;
+			if((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122)) {
+				that.openSearchPanel();	
+				if($.browser.mozilla) {
+					that.autoCtrl.val(String.fromCharCode(e.which));
+				}			
+			}
+		});
 		$(document).keyup(function(e) {
 		    if (e.keyCode == 27) { 
 		        that.closeSearchPanel();
@@ -238,12 +233,18 @@
 		  }
 	  	]);
 	}
+	SearchAutoComplete.prototype.openSearchPanel = function() {
+		var that = this;
+		that.root.slideDown(200, function(){			
+			$(that.invokeCtrl).addClass('active');
+			that.autoCtrl.focus();			
+		});	
+	}
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
 		var that = this;
 		this.root.slideUp(200, function(){
 			that.autoCtrl.typeahead('setQuery', '');
-			$(that.closeCtrl).hide();
-			$(that.invokeCtrl).show();
+			$(that.invokeCtrl).removeClass('active');
 		})
 	}
 	/* End Search AutoComplete */
@@ -683,6 +684,9 @@
 		});
 		$('.notify-actions').each(function(){
 			new NotifyFriendBtn( $(this) );
+		});
+		$('.search-form').each(function(){
+			new SearchAutoComplete($(this));
 		});
 	});
 }(jQuery, document));
