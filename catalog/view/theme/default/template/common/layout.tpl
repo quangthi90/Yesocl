@@ -51,8 +51,7 @@
 		<div id="y-loader">
 			<div id="y-loader-bg"></div>
 			<div id="spinner-wrapper">
-				<i class="icon-spinner icon-spin"></i>
-				<span>Loading ...</span>
+				<img src="{{ asset_img('template/loader-white.gif') }}">
 			</div>
 		</div>
 		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}">
