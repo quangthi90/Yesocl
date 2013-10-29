@@ -22,6 +22,9 @@
 			</div>
 			<div id="user-quick-menu" class="fr dropdown user-menu">							
 			    <a href="#">
+            <i class="icon-search"></i>
+          </a>
+          <a href="#">
 			    	<i class="icon-edit"></i>
 			    </a>
 			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
