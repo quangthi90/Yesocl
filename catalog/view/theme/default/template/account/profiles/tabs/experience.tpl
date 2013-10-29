@@ -7,7 +7,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<div class="background-education-form-add hidden">
+			<div class="background-experience-form-add hidden">
 				<div class="profiles-tabs-item1-label">
 					From 
 					<select class="span1" name="started_month">

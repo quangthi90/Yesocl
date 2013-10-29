@@ -436,6 +436,7 @@
 		that = this;
 
 		this.$btnAdd.click(function(){
+			console.log(that.$formAdd.attr('class'));
 			that.$formAdd.removeClass('hidden').addClass('add-form');
 		});
 
@@ -652,7 +653,7 @@
 (function($, document, undefined) {
 	function Experience($el){
 		this.$el 			= $el;
-		this.$formAdd 		= $el.find('.background-education-form-add');
+		this.$formAdd 		= $el.find('.background-experience-form-add');
 
 		this.$btnAdd 		= $el.find('.profiles-btn-add');
 		this.$btnCancel 	= $el.find('.profiles-btn-cancel');

@@ -181,7 +181,7 @@ class ModelUserMeta extends Model {
 			$background = new Background();
 			$background->setSumary( $data['summary'] );
 		}else{
-			$user->getMeta()->getBackground()->setSumary( $data['summary'] );
+			$user->getMeta()->getBackground()->setSummary( $data['summary'] );
 		}
 		
 		$this->dm->flush();

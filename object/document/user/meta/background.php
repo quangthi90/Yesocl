@@ -27,7 +27,7 @@ Class Background {
 	private $adviceForContact;
 
     /** @MongoDB\String */
-	private $sumary;
+	private $summary;
 
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Skill") */
     private $skills = array();
@@ -94,12 +94,12 @@ Class Background {
 		return $this->adviceForContact;
 	}
 
-	public function setSumary( $sumary ) {
-		$this->sumary = $sumary;
+	public function setSummary( $summary ) {
+		$this->summary = $summary;
 	}
 
-	public function getSumary() {
-		return $this->sumary;
+	public function getSummary() {
+		return $this->summary;
 	}
 
 	public function addSkill( Education $skill ){
