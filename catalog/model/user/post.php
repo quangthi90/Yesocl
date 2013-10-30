@@ -67,7 +67,7 @@ class ModelUserPost extends Model {
 		$data = array(
 			'post_id' => $post->getId(),
 			'type' => $this->config->get('post')['cache']['user'],
-			'type_id' => $author->getId(),
+			'type_id' => $user->getId(),
 			'view' => 0,
 			'created' => $post->getCreated()
 		);
