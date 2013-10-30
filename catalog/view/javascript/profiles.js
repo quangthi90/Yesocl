@@ -246,7 +246,7 @@
 	}
 
 	InfoForm.prototype.submit = function($button){
-		that = this;
+		var that = this;
 		
 		var promise = $.ajax({
 			type: 'POST',
@@ -363,7 +363,7 @@
 	}
 
 	SummaryForm.prototype.submit = function($button){
-		that = this;
+		var that = this;
 		
 		var promise = $.ajax({
 			type: 'POST',
@@ -433,7 +433,7 @@
 	}
 
 	Education.prototype.attachEvents = function(){
-		that = this;
+		var that = this;
 
 		this.$btnAdd.click(function(){
 			console.log(that.$formAdd.attr('class'));
@@ -589,7 +589,7 @@
 	}
 
 	Education.prototype.submit = function($button, method){
-		that = this;
+		var that = this;
 		
 		var promise = $.ajax({
 			type: 'POST',
@@ -673,7 +673,7 @@
 	}
 
 	Experience.prototype.attachEvents = function(){
-		that = this;
+		var that = this;
 
 		this.$btnAdd.click(function(){
 			that.$formAdd.removeClass('hidden').addClass('add-form');
