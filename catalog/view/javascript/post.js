@@ -404,7 +404,7 @@
             post.addClass('post-selecting');
         }       
         $('#overlay').show(100);        
-        //list_comment.makeScrollWithoutCalResize();
+        list_comment.makeCustomScroll(false);
         //Show comment box:
         comment_box.animate({ "right": "2px" }, 200);
     }
