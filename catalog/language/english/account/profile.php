@@ -38,5 +38,14 @@ $_['error_email_exist']	  		= 'Email is not avalible!';
 $_['error_phone_length']  		= 'Phone must be between 6 and 20 characters!';
 $_['error_phone_format']  		= 'Phone must be include only number!';
 
+// Summary
 $_['error_summary']  			= 'Summary must be more 50 characters!';
+
+// Education
+$_['error_education_started_empty']		= 'Start time is empty!';
+$_['error_education_ended_empty']		= 'End time is empty!';
+$_['error_education_started_ended']		= 'Start time must be before End time!';
+$_['error_education_degree']			= 'Degree is empty!';
+$_['error_education_school']			= 'School is empty!';
+$_['error_education_fieldofstudy']		= 'Field of Study is empty!';
 ?>

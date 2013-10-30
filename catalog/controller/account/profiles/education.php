@@ -5,8 +5,10 @@ class ControllerAccountProfilesEducation extends Controller {
 	public function add() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validate() ) {
+		if ( !$this->customer->isLogged() ) {
 			$json['message'] = 'failed';
+		}elseif ( !$this->validate() ){
+			$json = $this->error;
 		}else {
 			$this->load->model('user/background');
 
@@ -55,8 +57,10 @@ class ControllerAccountProfilesEducation extends Controller {
 	public function edit() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validate() ) {
+		if ( !$this->customer->isLogged() ) {
 			$json['message'] = 'failed';
+		}elseif ( !$this->validate() ){
+			$json = $this->error;
 		}elseif ( empty($this->request->get['education_id']) ){
 			$json['message'] = 'education id is empty';
 		}else {
@@ -85,13 +89,15 @@ class ControllerAccountProfilesEducation extends Controller {
 	}
 
 	private function validate() {
+		$this->load->language('account/profile');
+		
 		if ( empty( $this->request->post['started'] ) ) {
 			$this->error['education_started'] = $this->language->get('error_education_started_empty');
 		
 		}elseif ( empty( $this->request->post['ended'] ) ) {
 			$this->error['education_ended'] = $this->language->get('error_education_ended_empty');
 		
-		}elseif ( \Datetime::createFromFormat('d/m/Y', $this->request->post['started']) > \Datetime::createFromFormat('d/m/Y', $this->request->post['ended']) ) {
+		}elseif ( $this->request->post['started'] > $this->request->post['ended'] ) {
 			$this->error['education_started_ended'] = $this->language->get('error_education_started_ended');
 		
 		}elseif ( empty( $this->request->post['degree'] ) ) {

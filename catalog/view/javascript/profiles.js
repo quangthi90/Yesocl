@@ -436,7 +436,6 @@
 		var that = this;
 
 		this.$btnAdd.click(function(){
-			console.log(that.$formAdd.attr('class'));
 			that.$formAdd.removeClass('hidden').addClass('add-form');
 		});
 
@@ -625,6 +624,36 @@
 						new Education( $(this) );
 					});
 				}
+			}else if ( data.education_started_ended != null ){
+				var $started = that.$formAdd.find('[name=\"started\"]');
+				$started.tooltip('destroy');
+				$started.parent().removeClass('success');
+				$started.parent().addClass('error');
+				$started.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+
+				var $ended = that.$formAdd.find('[name=\"ended\"]');
+				$ended.tooltip('destroy');
+				$ended.parent().removeClass('success');
+				$ended.parent().addClass('error');
+				$ended.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
 			}
 		});
 	}
