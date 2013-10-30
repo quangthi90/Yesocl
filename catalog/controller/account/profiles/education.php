@@ -1,5 +1,5 @@
 <?php
-class ControllerAccountProfilesEducationy extends Controller {
+class ControllerAccountProfilesEducation extends Controller {
 	private $error;
 
 	public function add() {
@@ -40,9 +40,9 @@ class ControllerAccountProfilesEducationy extends Controller {
 		}elseif ( empty($this->request->get['education_id']) ){
 			$json['message'] = 'education id is empty';
 		}else {
-			$this->load->model('account/customer');
+			$this->load->model('user/background');
 
-			if ( !$this->model_user_user->removeEducation( $this->request->get['education_id'] ) ) {
+			if ( !$this->model_user_background->removeEducation( $this->customer->getId(), $this->request->get['education_id'] ) ) {
 				$json['message'] = 'failed';
 			}else {
 				$json['message'] = 'success';
@@ -55,14 +55,14 @@ class ControllerAccountProfilesEducationy extends Controller {
 	public function edit() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() || !$this->validateEditEducation() ) {
+		if ( !$this->customer->isLogged() || !$this->validate() ) {
 			$json['message'] = 'failed';
 		}elseif ( empty($this->request->get['education_id']) ){
 			$json['message'] = 'education id is empty';
 		}else {
-			$this->load->model('account/customer');
+			$this->load->model('user/background');
 
-			if ( $id = $this->model_user_user->editEducation( $this->request->get['education_id'], $this->request->post ) ) {
+			if ( $id = $this->model_user_background->editEducation( $this->customer->getId(), $this->request->get['education_id'], $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started'] = (int)$this->request->post['started'];
