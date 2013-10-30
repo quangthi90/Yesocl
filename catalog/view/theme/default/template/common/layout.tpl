@@ -91,8 +91,7 @@
 		</script>	
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('post.js') }}"></script>		
+		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>	
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}
