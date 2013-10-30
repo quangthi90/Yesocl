@@ -13,7 +13,7 @@ class ControllerAccountProfilesInformation extends Controller {
 		}else {
 			$this->load->model('user/meta');
 
-			if ( $user = $this->model_user_meta->update( $this->customer->getId(), $this->request->post ) ) {
+			if ( $user = $this->model_user_meta->updateInformation( $this->customer->getId(), $this->request->post ) ) {
 				$json['message'] = 'success';
 				$json['username'] = $user->getUsername();
 				$json['firstname'] = $user->getMeta()->getFirstname();
