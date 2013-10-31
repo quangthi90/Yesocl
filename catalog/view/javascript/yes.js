@@ -117,8 +117,6 @@ jQuery(document).ready(function (){
 	$('#login-invoke').click(function(e) {
 		$('#login-form-container').stop().slideDown(500, function() {
 			$(this).find('input[name="email"]').focus();
-		}).mouseleave(function(){
-			$(this).stop().slideUp();
 		});		
 	});	
 	//if close button is clicked
