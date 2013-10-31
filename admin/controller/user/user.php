@@ -103,7 +103,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
 		$this->data['entry_address'] = $this->language->get( 'entry_address' );
 		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
-		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
+		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
@@ -219,27 +219,7 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry localtion country
-		/*
-		if ( $user->getMeta() ){
-			$this->data['country'] = $user->getMeta()->getLocation()->getCountry();
-			$this->data['country_id'] = $user->getMeta()->getLocation()->getCountryId();
-		}else {
-			$this->data['country'] = '';
-			$this->data['country_id'] = 0;
-		}
-		
-
-		// Entry localtion city
-		
-		if ( $user->getMeta() ){
-			$this->data['city'] = $user->getMeta()->getLocation()->getCity();
-			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
-		}else {
-			$this->data['city'] = '';
-			$this->data['city_id'] = 0;
-		}
-		*/
-		if ( $user->getMeta() ) {
+		if ( $user->getMeta() && $user->getMeta()->getLocation() ) {
 			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
 		} else {
 			$this->data['location'] = '';
@@ -266,11 +246,11 @@ class ControllerUserUser extends Controller {
 			$this->data['advice_for_contact'] = '';
 		}
 
-		// Entry sumary
+		// Entry summary
 		if ( $user->getMeta()->getBackground() ){
-			$this->data['sumary'] = $user->getMeta()->getBackground()->getSumary();
+			$this->data['summary'] = $user->getMeta()->getBackground()->getSummary();
 		}else {
-			$this->data['sumary'] = '';
+			$this->data['summary'] = '';
 		}
 
 		// Entry industry
@@ -331,38 +311,42 @@ class ControllerUserUser extends Controller {
 
 		// Entry experiences
 		$this->data['experiences'] = array();
-		foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
-			$started = $experience->getStarted();
-			$ended = $experience->getEnded();
-			$location = $experience->getLocation();
-			$this->data['experiences'][$key] = array(
-				'company' => $experience->getCompany(),
-				'current' => $experience->getCurrent(),
-				'title' => $experience->getTitle(),
-				'location' => ( $location ) ? $location->getLocation() : '',
-				'city_id' => ( $location ) ? $location->getCityId() : '',
-				'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
-				'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
-				'description' => $experience->getDescription(),
+		if ( $user->getMeta()->getBackground() ){
+			foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
+				$started = $experience->getStarted();
+				$ended = $experience->getEnded();
+				$location = $experience->getLocation();
+				$this->data['experiences'][$key] = array(
+					'company' => $experience->getCompany(),
+					'current' => $experience->getCurrent(),
+					'title' => $experience->getTitle(),
+					'location' => ( $location ) ? $location->getLocation() : '',
+					'city_id' => ( $location ) ? $location->getCityId() : '',
+					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
+					'description' => $experience->getDescription(),
 				);
+			}
 		}
 
 		// Entry educations
 		$this->data['educations'] = array();
-		foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
-			$this->data['educations'][$key] = array(
-				'school' => $education->getSchool(),
-				'school_id' => $education->getSchoolId(),
-				'degree' => $education->getDegree(),
-				'degree_id' => $education->getDegreeId(),
-				'grace' => $education->getGrace(),
-				'fieldofstudy' => $education->getFieldOfStudy(),
-				'fieldofstudy_id' => $education->getFieldOfStudyId(),
-				'societies' => $education->getSocieties(),
-				'ended' => $education->getEnded(),
-				'started' => $education->getStarted(),
-				'description' => $education->getDescription(),
+		if ( $user->getMeta()->getBackground() ){
+			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
+				$this->data['educations'][$key] = array(
+					'school' => $education->getSchool(),
+					'school_id' => $education->getSchoolId(),
+					'degree' => $education->getDegree(),
+					'degree_id' => $education->getDegreeId(),
+					'grace' => $education->getGrace(),
+					'fieldofstudy' => $education->getFieldOfStudy(),
+					'fieldofstudy_id' => $education->getFieldOfStudyId(),
+					'societies' => $education->getSocieties(),
+					'ended' => $education->getEnded(),
+					'started' => $education->getStarted(),
+					'description' => $education->getDescription(),
 				);
+			}
 		}
 
 		// Entry Formers
@@ -379,6 +363,7 @@ class ControllerUserUser extends Controller {
 		//$this->load->model( 'setting/config' );
 		//$this->load->config( 'datatype' );
 		//$this->model_setting_config->load( 'datatype_title' );
+		
 		// Im type
 		$im_types = $this->model_data_value->getAllValues( array( 'filter_type_code' => $this->config->get( 'datatype_im_type' ) ) );
 		$this->data['im_types'] = array();
@@ -936,7 +921,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_phone'] = $this->language->get( 'entry_phone' );
 		$this->data['entry_address'] = $this->language->get( 'entry_address' );
 		$this->data['entry_advice_for_contact'] = $this->language->get( 'entry_advice_for_contact' );
-		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
+		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
@@ -1169,12 +1154,12 @@ class ControllerUserUser extends Controller {
 		}
 
 		// Entry advice for contact
-		if ( isset($this->request->post['background']['sumary']) ){
-			$this->data['sumary'] = $this->request->post['background']['sumary'];
+		if ( isset($this->request->post['background']['summary']) ){
+			$this->data['summary'] = $this->request->post['background']['summary'];
 		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
-			$this->data['sumary'] = $user->getMeta()->getBackground()->getSumary();
+			$this->data['summary'] = $user->getMeta()->getBackground()->getSummary();
 		}else {
-			$this->data['sumary'] = '';
+			$this->data['summary'] = '';
 		}
 
 		// Entry industry

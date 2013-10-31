@@ -1,952 +1,1043 @@
-function Profiles($element) {
-	this.self = $element;
-	this.information = new TabsInformation($element.find('#profiles-tabs-information'), $element.height()*9/10);
-	this.background = new TabsBackground($element.find('#profiles-tabs-background'), this.information.self.width(), $element.height()*9/10);
-
-	this.afterCreate();
-}
-
-Profiles.prototype.afterCreate = function () {
-	this.self.width(this.information.self.outerWidth() + this.background.self.outerWidth() + 25*2);
-}
-
-function TabsInformation($element, contentHeight) {
-	this.self = $element;
-
-	this.contentHeight = contentHeight;
-	this.header = $element.find('.profiles-tabs-header');
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.afterCreate();
-
-	this.btnEdit = $element.find('.profiles-btn-edit');
-
-	this.attachEvents();
-}
-
-TabsInformation.prototype.afterCreate = function () {
-	this.mainBody.height(this.contentHeight - this.header.height() - 30);
-	this.mainBody.niceScroll();
-}
-
-TabsInformation.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnEdit.click(function () {
-		if ( self.btnEdit.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
+// Create layout
+(function($, document, undefined) {
+	function ProfilesLayout($el) {
+		this.$el = $el;
+		this.$information = $el.find('#profiles-tabs-information');
+		this.$background = $el.find('#profiles-tabs-background');
 		
-		var item = self.self.find( '.basic-profiles-item' );
-
-		var data = {
-			'url': item.data('url'),
-			'username': item.data('username'),
-			'firstname': item.data('firstname'),
-			'lastname': item.data('lastname'),
-			'fullname': item.data('fullname'),
-			'emails': item.data('emails'),
-			'emails_js': JSON.stringify(item.data('emails')),
-			'phones': item.data('phones'),
-			'phones_js': JSON.stringify(item.data('phones')),
-			'sex': item.data('sex'),
-			'sext': item.data('sext'),
-			'birthday': item.data('birthday'),
-			'birthdayt': item.data('birthdayt'),
-			'address': item.data('address'),
-			'location': item.data('location'),
-			'industry': item.data('industry')
-		}
+		this.$summary = $el.find('#profiles-tabs-background-summary');
+		this.$education = $el.find('#profiles-tabs-background-education');
+		this.$experience = $el.find('#profiles-tabs-background-experience');
+		this.$skill = $el.find('#profiles-tabs-background-skill');
 		
-		var $form = $.tmpl( $('#profiles-form'), data );
-		new ProfilesForm( $form );
+		this.$header = this.$background.find('.profiles-tabs-header');
 
-		item.toggle();
-		item.after( $form );
-		item.remove();
+		var contentHeight = this.$el.height()*9/10;
+		var contentWidth = this.$information.width();
+
+		// Summary
+		var summary_main_body = this.$summary.find('.profiles-tabs-main-body');
+		this.$summary.outerWidth(contentWidth);
+		summary_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		summary_main_body.niceScroll();
+
+		// Education
+		var education_main_body = this.$education.find('.profiles-tabs-main-body');
+		this.$education.outerWidth(contentWidth);
+		education_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		education_main_body.niceScroll();
+
+		// Experience
+		var experience_main_body = this.$experience.find('.profiles-tabs-main-body');
+		this.$experience.outerWidth(contentWidth);
+		experience_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		experience_main_body.niceScroll();
+
+		// Skill
+		var skill_main_body = this.$skill.find('.profiles-tabs-main-body');
+		this.$skill.outerWidth(contentWidth);
+		skill_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		skill_main_body.niceScroll();
+
+		// Background
+		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
+
+		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
+	}
+
+	$(function(){
+		new ProfilesLayout($('#y-main-content'));
 	});
-}
+}(jQuery, document));
 
-function ProfilesForm( $element ) {
-	this.self = $element;
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-	this.btnAddPhone = $element.find('.phones-btn-add');
-	this.btnAddEmail = $element.find('.emails-btn-add');
+// Information
+(function($, document, undefined) {
+	function InfoLabel($el) {
+		this.$el = $el;
+		this.$btn = $el.find('.profiles-btn-edit');
 
-	this.attachEvents();
-}
+		this.attachEvents();
+	}
 
-ProfilesForm.prototype.attachEvents = function () {
-	var self = this;
+	InfoLabel.prototype.attachEvents = function () {
+		var that = this;
 
-	this.self.find('select[name=\"sex\"]').val( this.self.data('sex') ).prop('selected',true);
+		this.$btn.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.profile-form').removeClass('hidden');
+		});
+	}
 
-	this.btnSave.click( function () {
-		if ( self.btnSave.hasClass( 'disabled' ) ) {
-			return false;
-		}
+	function InfoForm($el){
+		this.$el 					= $el;
+		this.url 					= $el.data('url');
 
-		var phones_arr = [];
-		var i = 0;
-		self.self.find('.phones-form').each( function () {
-			phones_arr[i] = {};
-			phones_arr[i].phone = $(this).find('input').val();
-			phones_arr[i].type = $(this).find('select').val();
-			i++;
+		this.$btnCancel 			= $el.find('.profiles-btn-cancel');
+		this.$btnSave 				= $el.find('.profiles-btn-save');
+		this.$btnAddPhone 			= $el.find('.phones-btn-add');
+		this.$btnAddEmail 			= $el.find('.emails-btn-add');
+		this.$btnRemovePhone 		= $el.find('.phones-btn-remove');
+		this.$btnRemoveEmail 		= $el.find('.emails-btn-remove');
+		this.$btnPrimaryEmail 		= $el.find('.primary-email-btn');
+
+		this.$locationAutoComplete 	= $el.find('input[name=\"location\"]');
+		this.$industryAutoComplete 	= $el.find('input[name=\"industry\"]');
+
+		var $inputBirthday 			= this.$el.find('.inputBirthday .bfh-datepicker');
+		$inputBirthday.bfhdatepicker($inputBirthday.data());
+
+		this.attachEvents();
+	}
+
+	InfoForm.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$btnCancel.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.profile-label').removeClass('hidden');
 		});
 
-		var emails_arr = [];
-		var j = 0;
-		self.self.find('.emails-form').each( function () {
-			emails_arr[j] = {};
-			emails_arr[j].email = $(this).find('[name*=\"[email]\"]').val();
-			emails_arr[j].primary = $(this).find('[name*=\"[primary]\"]').val();
-			j++;
+		this.$btnSave.click(function () {
+			if ( $(this).hasClass( 'disabled' ) ) {
+				return false;
+			}
+
+			var emails = [];
+			that.$el.find('.emails-form').each(function(){
+				emails.push({
+					email 	: $(this).find('.email').val(),
+					primary : $(this).find('.primary').val()
+				});
+			})
+
+			var phones = [];
+			that.$el.find('.phones-form').each(function(){
+				phones.push({
+					phone: $(this).find('.phone').val(),
+					type: $(this).find('.type').val()
+				});
+			});
+			
+			that.data = {
+				'username'		: that.$el.find('[name=\'username\']').val(),
+				'firstname'		: that.$el.find('[name=\'firstname\']').val(),
+				'lastname'		: that.$el.find('[name=\'lastname\']').val(),
+				'emails'		: emails,
+				'phones'		: phones,
+				'sex'			: that.$el.find('[name=\'gender\']').val(),
+				'birthday'		: that.$el.find('[name=\'birthday\']').val(),
+				'address'		: that.$el.find('[name=\'address\']').val(),
+				'location'		: that.$el.find('[name=\'location\']').val(),
+				'cityid'		: that.$el.find('[name=\'cityid\']').val(),
+				'industry'		: that.$el.find('[name=\'industry\']').val(),
+				'industryid'	: that.$el.find('[name=\'industryid\']').val(),
+			};
+			
+			that.submit(that.$btnSave);
+
+			return false;
 		});
 
-		var data = {
-			'username': self.self.find('[name=\"username\"]').val(),
-			'firstname': self.self.find('[name=\"firstname\"]').val(),
-			'lastname': self.self.find('[name=\"lastname\"]').val(),
-			'emails': emails_arr,
-			'phones': phones_arr,
-			'sex': self.self.find('[name=\"sex\"]').val(),
-			'birthday': self.self.find('[name=\"birthday\"]').val(),
-			'address': self.self.find('[name=\"address\"]').val(),
-			'location': self.self.find('[name=\"location\"]').val(),
-			'industry': self.self.find('[name=\"industry\"]').val()
-		};
+		this.$btnAddPhone.click(function () {
+			var data = {
+				'index': $(this).attr('data-index')
+			}
 
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					var $item = $.tmpl($('#profiles-item'), json);
-					new ProfilesItem($item);
+			var $form = $.tmpl( $('#profiles-phone-form'), data);
 
-					self.self.toggle();
-					self.self.after($item);
-					self.self.remove();
+			$(this).attr('data-index', parseInt(data.index) + 1);
+			$(this).before( $form );
 
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
+			$form.find('.phones-btn-remove').click(function(){
+				$form.remove();
+			});
 		});
-	} );
 
-	this.btnCancel.click( function () {
-		var data = {
-			'url': self.self.data('url'),
-			'username': self.self.data('username'),
-			'firstname': self.self.data('firstname'),
-			'lastname': self.self.data('lastname'),
-			'fullname': self.self.data('fullname'),
-			'emails': self.self.data('emails'),
-			'emails_js': JSON.stringify(self.self.data('emails')),
-			'phones': self.self.data('phones'),
-			'phones_js': JSON.stringify(self.self.data('phones')),
-			'sex': self.self.data('sex'),
-			'sext': self.self.data('sext'),
-			'birthday': self.self.data('birthday'),
-			'birthdayt': self.self.data('birthdayt'),
-			'address': self.self.data('address'),
-			'location': self.self.data('location'),
-			'industry': self.self.data('industry')
-		}
-
-		var $item = $.tmpl($('#profiles-item'), data);
-		new ProfilesItem($item);
-
-		self.self.toggle();
-		self.self.after($item);
-		self.self.remove();
-
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		$('.profiles-btn-remove').removeClass( 'disabled' );
-	} );
-
-	this.btnAddPhone.click( function () {
-		var data = {
-			'index': self.btnAddPhone.attr('data-index')
-		}
-
-		var $form = $.tmpl( $('#profiles-phone-form'), data);
-		new PhonesForm( $form );
-
-		self.btnAddPhone.attr('data-index', parseInt(data.index) + 1);
-		$(this).parent().before( $form );
-	});
-
-	this.btnAddEmail.click( function () {
-		var data = {
-			'index': self.btnAddEmail.attr('data-index')
-		}
-
-		var $form = $.tmpl( $('#profiles-email-form'), data);
-		new EmailsForm( $form );
-
-		self.btnAddEmail.attr('data-index', parseInt(data.index) + 1);
-		$(this).parent().before( $form );
-	});
-
-	self.self.find('.phones-form').each( function () {
-		new PhonesForm( $(this) );
-	});
-
-	self.self.find('.emails-form').each( function () {
-		new EmailsForm( $(this) );
-	});
-}
-
-function PhonesForm( $element ) {
-	this.self = $element;
-	this.btnRemove = $element.find('.phones-btn-remove');
-
-	this.attachEvents();
-}
-
-PhonesForm.prototype.attachEvents = function () {
-	var self = this;
-
-	this.self.find('select').val( self.self.data('type') ).prop('selected',true);
-
-	this.btnRemove.click( function () {
-		self.self.remove();
-	});
-}
-
-function EmailsForm( $element ) {
-	this.self = $element;
-	this.btnRemove = $element.find('.emails-btn-remove');
-	this.btnPrimary = $element.find('span.label');
-	this.inputPrimary = $element.find('[name*=\"[primary]\"]');
-
-	this.attachEvents();
-}
-
-EmailsForm.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnRemove.click( function () {
-		self.self.remove();
-	});
-
-	this.btnPrimary.click( function () {
-		if ( self.self.hasClass('email-primary') ) {
-			return false;
-		}
-
-		$('.email-primary [name*=\"[primary]\"]').val(0);
-		$('.email-primary .label-success').removeClass('label-success');
-		$('.email-primary').attr('data-primary', 0);
-		$('.email-primary').removeClass('email-primary');
-
-		self.self.attr('data-primary', 1);
-		self.inputPrimary.val(1);
-		self.self.addClass('email-primary');
-		self.btnPrimary.addClass('label-success');
-	});
-}
-
-function ProfilesItem( $element ) {
-	this.self = this;
-}
-
-function TabsBackground($element, contentWidth, contentHeight) {
-	this.self = $element;
-	this.header = $element.find('.profiles-tabs-header');
-	this.sumary = new TabsBackgroundSumary($element.find('#profiles-tabs-background-sumary'), contentWidth, contentHeight - this.header.height() - 30);
-	this.experience = new TabsBackgroundExperience($element.find('#profiles-tabs-background-experience'), contentWidth, contentHeight - this.header.height() - 30);
-	this.skill = new TabsBackgroundSkill($element.find('#profiles-tabs-background-skill'), contentWidth, contentHeight - this.header.height() - 30);
-	this.education = new TabsBackgroundEducation($element.find('#profiles-tabs-background-education'), contentWidth, contentHeight - this.header.height() - 30);
-
-	this.afterCreate();
-}
-
-TabsBackground.prototype.afterCreate = function () {
-	this.self.width((this.sumary.self.outerWidth() + 25)*4 - 25);
-}
-
-function TabsBackgroundSumary($element, contentWidth, contentHeight) {
-	this.self = $element;
-	this.contentWidth = contentWidth;
-	this.contentHeight = contentHeight;
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.afterCreate();
-
-	this.btnEdit = $element.find('.profiles-btn-edit');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.inputSumary = $element.find('.background-input-sumary');
-
-	this.attachEvents();
-}
-
-TabsBackgroundSumary.prototype.afterCreate = function () {
-	this.self.outerWidth(this.contentWidth);
-	this.mainBody.outerHeight(this.contentHeight);
-	this.mainBody.niceScroll();
-}
-
-TabsBackgroundSumary.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnEdit.click(function () {
-		if ( self.btnEdit.hasClass( 'disabled' ) ) {
-			return false;
-		}
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		self.btnEdit.toggle();
-		self.btnCancel.toggle();
-		self.btnSave.toggle();
-		self.inputSumary.toggle();
-
-		var data = { 
-			'sumary': self.inputSumary.data('sumary') 
-		};
-
-		self.mainBody.append($.tmpl($('#background-sumary-form'), data));
-		$('textarea[name=\"sumary\"]').niceScroll();
-	});
-
-	this.btnCancel.click(function () {
-		self.btnCancel.toggle();
-		self.btnSave.toggle();
-		self.btnEdit.toggle();
-		$('textarea[name=\"sumary\"]').remove();
-		self.inputSumary.toggle();
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		$('.profiles-btn-remove').removeClass( 'disabled' );
-	})
-
-	this.btnSave.click(function () {
-		var data = {
-			'sumary': self.mainBody.find('[name=\"sumary\"]').val()
-		};
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					self.btnCancel.toggle();
-					self.btnSave.toggle();
-					self.btnEdit.toggle();
-					$('textarea[name=\"sumary\"]').remove();
-					self.inputSumary.html(data.sumary);
-					self.inputSumary.toggle();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
+		this.$btnRemovePhone.click(function(){
+			$(this).parents('.phones-form').remove();
 		});
-	})
-}
 
-function TabsBackgroundEducation($element, contentWidth, contentHeight) {
-	this.self = $element;
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.contentWidth = contentWidth;
-	this.contentHeight = contentHeight;
-	this.afterCreate();
+		this.$btnAddEmail.click(function () {
+			var data = {
+				'index': $(this).attr('data-index')
+			}
 
-	this.btnAdd = $element.find('.profiles-btn-add');
-	this.items = $element.find('.profiles-tabs-item1');
+			var $form = $.tmpl( $('#profiles-email-form'), data);
 
-	this.attachEvents();
-}
+			$(this).attr('data-index', parseInt(data.index) + 1);
+			$(this).before( $form );
 
-TabsBackgroundEducation.prototype.afterCreate = function () {
-	this.self.outerWidth(this.contentWidth);
-	this.mainBody.outerHeight(this.contentHeight);
-	this.mainBody.niceScroll();
-}
+			// Remove Email
+			$form.find('.emails-btn-remove').click(function(){
+				$form.remove();
+			});
 
-TabsBackgroundEducation.prototype.attachEvents = function () {
-	var self = this;
+			// Set primary email
+			$form.find('.primary-email-btn').click(function(){
+				that.$el.find('input.primary').each(function(){
+					$(this).val('0');
+				});
 
-	this.items.each( function () {
-		new EducationItem($(this));
-	})
+				that.$el.find('.primary-email-btn').each(function(){
+					$(this).removeClass('label-success');
+				});
 
-	this.btnAdd.click(function () {
-		if ( self.btnAdd.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'url': self.self.data('url'),
-			'id': '',
-			'started': (new Date()).getFullYear(),
-			'ended': (new Date()).getFullYear(),
-			'degree': '',
-			'school': '',
-			'fieldofstudy': '',
-		}
-
-		var $form = $.tmpl($('#background-education-form'), data);
-		new FormAddEducation($form);
-
-		self.mainBody.prepend($form);
-	});
-}
-
-function FormAddEducation($element) {
-	this.self = $element;
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-
-	this.attachEvents();
-}
-
-FormAddEducation.prototype.attachEvents = function () {
-	var self = this;
-
-	this.self.find('select[name=\"started\"]').val( this.self.data('started') ).prop('selected',true);
-	this.self.find('select[name=\"ended\"]').val( this.self.data('ended') ).prop('selected',true);
-
-	this.btnSave.click( function () {
-		if ( self.btnSave.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		var data = {
-			'id': self.self.data('id'),
-			'started': self.self.find('[name=\"started\"]').val(),
-			'ended': self.self.find('[name=\"ended\"]').val(),
-			'degree': self.self.find('input[name=\"degree\"]').val(),
-			'school': self.self.find('input[name=\"school\"]').val(),
-			'fieldofstudy': self.self.find('input[name=\"fieldofstudy\"]').val()
-		};
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					var $item = $.tmpl($('#background-education-item'), json);
-					new EducationItem($item);
-					self.self.toggle();
-					if ( self.self.data('id') == '' ) {
-						self.self.parent().append($item);
-					}else {
-						self.self.after($item);
-					}
-					self.self.remove();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
+				$(this).addClass('label-success').parent().find('input.primary').val('1');
+			});
 		});
-	} );
 
-	this.btnCancel.click( function () {
-		var data = {
-			'id': self.self.data('id'),
-			'url': self.self.data('url'),
-			'remove': self.self.data('remove'),
-			'started': self.self.data('started'),
-			'ended': self.self.data('ended'),
-			'degree': self.self.data('degree'),
-			'school': self.self.data('school'),
-			'fieldofstudy': self.self.data('fieldofstudy')
-		}
-
-		if ( self.self.data('id') != '' ) {
-			var $item = $.tmpl($('#background-education-item'), data);
-			new EducationItem($item);
-			self.self.toggle();
-			self.self.after($item);
-		}
-
-		self.self.remove();
-
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		$('.profiles-btn-remove').removeClass( 'disabled' );
-	} );
-}
-
-function EducationItem($element) {
-	this.self = $element;
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-	this.btnEdit = $element.find('.profiles-btn-edit');
-	this.btnRemove = $element.find('.profiles-btn-remove');
-
-	this.attachEvents();
-}
-
-EducationItem.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnEdit.click( function () {
-		if ( self.btnEdit.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'id': self.self.data('id'),
-			'url': self.self.data('url'),
-			'remove': self.self.data('remove'),
-			'started': self.self.data('started'),
-			'ended': self.self.data('ended'),
-			'degree': self.self.data('degree'),
-			'school': self.self.data('school'),
-			'fieldofstudy': self.self.data('fieldofstudy')
-		}
-
-		var $form = $.tmpl($('#background-education-form'), data);
-		new FormAddEducation($form);
-
-		self.self.toggle();
-		self.self.after($form);
-		self.self.remove();
-	});
-
-	this.btnRemove.click( function () {
-		if ( self.btnRemove.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'id': self.self.data('id')
-		};
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('remove'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					self.self.remove();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
-		});
-	});
-}
-
-function TabsBackgroundExperience($element, contentWidth, contentHeight) {
-	this.self = $element;
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.contentWidth = contentWidth;
-	this.contentHeight = contentHeight;
-	this.afterCreate();
-
-	this.btnAdd = $element.find('.profiles-btn-add');
-	this.items = $element.find('.profiles-tabs-item1');
-
-	this.attachEvents();
-}
-
-TabsBackgroundExperience.prototype.afterCreate = function () {
-	this.self.outerWidth(this.contentWidth);
-	this.mainBody.outerHeight(this.contentHeight);
-	this.mainBody.niceScroll();
-}
-
-TabsBackgroundExperience.prototype.attachEvents = function () {
-	var self = this;
-
-	this.items.each( function () {
-		new ExperienceItem($(this));
-	})
-
-	this.btnAdd.click(function () {
-		if ( self.btnAdd.hasClass( 'disabled' ) ) {
-			return false;
-		}
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'url': self.self.data('url'),
-			'id': '',
-			'started_month': 1,
-			'ended_month': 1,
-			'started_year': (new Date()).getFullYear(),
-			'ended_year': (new Date()).getFullYear(),
-			'started_text': 'January ' + (new Date()).getFullYear(),
-			'ended_text': 'January ' + (new Date()).getFullYear(),
-			'title': '',
-			'company': '',
-			'location': '',
-		}
-
-		var $form = $.tmpl($('#background-experience-form'), data);
-		new FormAddExperience($form);
-
-		self.mainBody.prepend($form);
-	});
-}
-
-function FormAddExperience($element) {
-	this.self = $element;
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-
-	this.attachEvents();
-}
-
-FormAddExperience.prototype.attachEvents = function () {
-	var self = this;
-
-	this.self.find('select[name=\"started_month\"]').val( this.self.data('startedm') ).prop('selected',true);
-	this.self.find('select[name=\"ended_month\"]').val( this.self.data('endedm') ).prop('selected',true);
-	this.self.find('select[name=\"started_year\"]').val( this.self.data('startedy') ).prop('selected',true);
-	this.self.find('select[name=\"ended_year\"]').val( this.self.data('endedy') ).prop('selected',true);
-
-	this.btnSave.click( function () {
-		if ( self.btnSave.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		var data = {
-			'id': self.self.data('id'),
-			'started_month': self.self.find('[name=\"started_month\"]').val(),
-			'ended_month': self.self.find('[name=\"ended_month\"]').val(),
-			'started_year': self.self.find('[name=\"started_year\"]').val(),
-			'ended_year': self.self.find('[name=\"ended_year\"]').val(),
-			'title': self.self.find('input[name=\"title\"]').val(),
-			'company': self.self.find('input[name=\"company\"]').val(),
-			'location': self.self.find('input[name=\"location\"]').val()
-		};
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					var $item = $.tmpl($('#background-experience-item'), json);
-					new ExperienceItem($item);
-					self.self.toggle();
-					if ( self.self.data('id') == '' ) {
-						self.self.parent().append($item);
-					}else {
-						self.self.after($item);
-					}
-					self.self.remove();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
-		});
-	} );
-
-	this.btnCancel.click( function () {
-		var data = {
-			'id': self.self.data('id'),
-			'url': self.self.data('url'),
-			'remove': self.self.data('remove'),
-			'started_text': self.self.data('startedt'),
-			'ended_text': self.self.data('endedt'),
-			'started_month': self.self.data('startedm'),
-			'ended_month': self.self.data('endedm'),
-			'started_year': self.self.data('startedy'),
-			'ended_year': self.self.data('endedy'),
-			'title': self.self.data('title'),
-			'company': self.self.data('company'),
-			'location': self.self.data('location')
-		}
-
-		if ( self.self.data('id') != '' ) {
-			var $item = $.tmpl($('#background-experience-item'), data);
-			new ExperienceItem($item);
-			self.self.toggle();
-			self.self.after($item);
-		}
-
-		self.self.remove();
-
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		$('.profiles-btn-remove').removeClass( 'disabled' );
-	} );
-}
-
-function ExperienceItem($element) {
-	this.self = $element;
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-	this.btnEdit = $element.find('.profiles-btn-edit');
-	this.btnRemove = $element.find('.profiles-btn-remove');
-
-	this.attachEvents();
-}
-
-ExperienceItem.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnEdit.click( function () {
-		if ( self.btnEdit.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'id': self.self.data('id'),
-			'url': self.self.data('url'),
-			'remove': self.self.data('remove'),
-			'started_text': self.self.data('startedt'),
-			'ended_text': self.self.data('endedt'),
-			'started_month': self.self.data('startedm'),
-			'ended_month': self.self.data('endedm'),
-			'started_year': self.self.data('startedy'),
-			'ended_year': self.self.data('endedy'),
-			'title': self.self.data('title'),
-			'company': self.self.data('company'),
-			'location': self.self.data('location')
-		}
-
-		var $form = $.tmpl($('#background-experience-form'), data);
-		new FormAddExperience($form);
-
-		self.self.toggle();
-		self.self.after($form);
-		self.self.remove();
-	});
-
-	this.btnRemove.click( function () {
-		if ( self.btnRemove.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'id': self.self.data('id')
-		};
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('remove'),
-			data: data,
-			dataType: 'json',
-			success: function (json) {
-				if ( json.message == 'success' ) {
-					self.self.remove();
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function(xhr, error){
-		    	alert(xhr.responseText);
-		 	}
-		});
-	});
-}
-
-function TabsBackgroundSkill($element, contentWidth, contentHeight) {
-	this.self = $element;
-	this.contentWidth = contentWidth;
-	this.contentHeight = contentHeight;
-	this.mainBody = $element.find('.profiles-tabs-main-body');
-	this.afterCreate();
-
-	this.btnAdd = $element.find('.profiles-btn-add');
-	this.btnSave = $element.find('.profiles-btn-save');
-	this.btnCancel = $element.find('.profiles-btn-cancel');
-	this.inputSkill = $element.find('.profiles-input');
-	this.attachEvents();
-}
-
-TabsBackgroundSkill.prototype.afterCreate = function () {
-	this.self.outerWidth(this.contentWidth);
-	this.mainBody.outerHeight(this.contentHeight);
-	this.mainBody.niceScroll();
-}
-
-TabsBackgroundSkill.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnAdd.click( function () {
-		if ( self.btnAdd.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		self.btnAdd.toggle();
-		self.btnSave.toggle();
-		self.btnCancel.toggle();
-		self.inputSkill.toggle();
-	});
-
-	this.btnCancel.click( function () {
-		self.btnAdd.toggle();
-		self.btnSave.toggle();
-		self.inputSkill.toggle();
-		self.btnCancel.toggle();
-
-		self.inputSkill.val('');
-
-		$('.profiles-btn-add').removeClass( 'disabled' );
-		$('.profiles-btn-edit').removeClass( 'disabled' );
-		$('.profiles-btn-remove').removeClass( 'disabled' );
-	});
-
-	this.btnSave.click( function () {
-		if ( self.btnSave.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		var data = {
-			'skill': self.inputSkill.val()
-		}
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('url'),
-			data: data,
-			dataType: 'json',
-			success: function ( json ) {
-				if ( json.message == 'success' ) {
-					var $item = $.tmpl( $('#background-skill-item'), json );
-					new SkillItem( $item );
-
-					self.mainBody.append( $item );
-
-					self.btnAdd.toggle();
-					self.btnSave.toggle();
-					self.inputSkill.toggle();
-					self.btnCancel.toggle();
-
-					self.inputSkill.val('');
-
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
-			},
-			error: function ( xhr, error ) {
-				alert( xhr.responseText );
+		this.$btnRemoveEmail.click(function(){
+			var $emails_form = $(this).parents('.emails-form');
+			if ( $emails_form.find('input.primary').val() == 1 ){
+				alert('not delete primary email!');
+			}else{
+				$emails_form.remove();
 			}
 		});
-	});
 
-	this.self.find( '.profiles-tabs-item2' ).each( function () {
-		new SkillItem( $(this) );
-	});
-}
+		this.$btnPrimaryEmail.click(function(){
+			that.$el.find('input.primary').each(function(){
+				$(this).val('0');
+			});
 
-function SkillItem( $element ) {
-	this.self = $element;
-	this.btnRemove = $element.find('.profiles-btn-remove');
+			that.$el.find('.primary-email-btn').each(function(){
+				$(this).removeClass('label-success');
+			});
 
-	this.attachEvents();
-}
+			$(this).addClass('label-success').parent().find('input.primary').val('1');
+		});
 
-SkillItem.prototype.attachEvents = function () {
-	var self = this;
-
-	this.btnRemove.click( function () {
-		if ( self.btnRemove.hasClass( 'disabled' ) ) {
-			return false;
-		}
-
-		$('.profiles-btn-add').addClass( 'disabled' );
-		$('.profiles-btn-edit').addClass( 'disabled' );
-		$('.profiles-btn-remove').addClass( 'disabled' );
-
-		var data = {
-			'id': self.self.data('id'),
-		}
-
-		$.ajax({
-			type: 'POST',
-			url: self.self.data('remove'),
-			data: data,
-			dataType: 'json',
-			success: function ( json ) {
-				if ( json.message == 'success' ) {
-					self.self.remove();
-
-					$('.profiles-btn-add').removeClass( 'disabled' );
-					$('.profiles-btn-edit').removeClass( 'disabled' );
-					$('.profiles-btn-remove').removeClass( 'disabled' );
-				}else {
-					alert('Error!');
-				}
+		this.$locationAutoComplete.typeahead({
+			source: function (query, process) {
+				that.$el.find('input[name=\"cityid\"]').val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$locationAutoComplete.parent().data('autocomplete') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						locations = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							locations[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+					},
+				});
 			},
-			error: function ( xhr, error ) {
-				alert( xhr.responseText );
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$el.find('input[name=\"cityid\"]').val(locations[item].id);
+	    		return item;
 			}
 		});
+
+		this.$industryAutoComplete.typeahead({
+			source: function (query, process) {
+				that.$el.find('input[name=\"industryid\"]').val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$industryAutoComplete.parent().data('autocomplete') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						industries = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							industries[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$el.find('input[name=\"industryid\"]').val(industries[item].id);
+	    		return item;
+			}
+		});
+	}
+
+	InfoForm.prototype.submit = function($button){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: this.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				var $profile_label = $.tmpl($('#profiles-label'), data);
+
+				var $profile_form = $.tmpl($('#profiles-form'), data);
+
+				that.$el.parent().html('').append($profile_label).append($profile_form);
+
+				new InfoLabel($profile_label);
+				new InfoForm($profile_form);
+			}else if ( data.birthday != null ){
+				var $input = that.$el.find('[name=\"birthday\"]');
+				$input.tooltip('destroy');
+				$input.parent().removeClass('success');
+				$input.parent().addClass('error');
+				$input.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.birthday,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+			}
+		});
+	};
+
+	InfoForm.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		$('.profile-label').each(function(){
+			new InfoLabel( $(this) );
+		});
+
+		$('.profile-form').each(function(){
+			new InfoForm( $(this) );
+		});
 	});
-}
+}(jQuery, document));
+
+// Summary
+(function($, document, undefined) {
+	function SummaryLabel($el){
+		this.$el = $el;
+		this.$btn = $el.find('.profiles-btn-edit');
+
+		this.attachEvents();
+	}
+
+	SummaryLabel.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$btn.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.summary-form').removeClass('hidden');
+		});
+	}
+
+	function SummaryForm($el){
+		this.$el = $el;
+		this.$input = $el.find('[name=\"summary\"]');
+		this.$btnCancel = $el.find('.profiles-btn-cancel');
+		this.$btnSave = $el.find('.profiles-btn-save');
+		
+		this.url = $el.parent().data('url');
+
+		this.attachEvents();
+	}
+
+	SummaryForm.prototype.attachEvents = function () {
+		var that = this;
+
+		this.$btnCancel.click(function () {
+			that.$el.addClass('hidden');
+			that.$el.parent().find('.summary-label').removeClass('hidden');
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass('disabled') || that.$input.val().length < 50 ) {
+				return false;
+			}
+
+			that.data = {
+				'summary': that.$input.val()
+			};
+
+			that.submit( $(this) );
+
+			return false;
+		});
+	}
+
+	SummaryForm.prototype.submit = function($button){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: this.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				that.$input.val(that.data.summary);
+				that.$el.parent().find('.background-input-summary').html(that.data.summary);
+				that.$btnCancel.trigger('click');
+			}
+		});
+	};
+
+	SummaryForm.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		$('.summary-label').each(function(){
+			new SummaryLabel( $(this) );
+		});
+
+		$('.summary-form').each(function(){
+			new SummaryForm( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Education
+(function($, document, undefined) {
+	function Education($el){
+		this.$el 			= $el;
+		this.$formAdd 		= $el.find('.background-education-form-add');
+		
+		this.$btnAdd 		= $el.find('.profiles-btn-add');
+		this.$btnSave 		= $el.find('.profiles-btn-save');
+		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
+		this.$btnEdit 		= $el.find('.profiles-btn-edit');
+		this.$btnRemove 	= $el.find('.profiles-btn-remove');
+
+		this.$started 		= this.$formAdd.find('[name=\"started\"]');
+		this.$ended 		= this.$formAdd.find('[name=\"ended\"]');
+
+		this.$degree 		= this.$formAdd.find('[name=\"degree\"]');
+		this.$degree_id 	= this.$formAdd.find('[name=\"degree_id\"]');
+		this.$school 		= this.$formAdd.find('[name=\"school\"]');
+		this.$school_id 	= this.$formAdd.find('[name=\"school_id\"]');
+		this.$fieldofstudy 	= this.$formAdd.find('[name=\"fieldofstudy\"]');
+		this.$fieldofstudy_id 	= this.$formAdd.find('[name=\"fieldofstudy_id\"]');
+
+		this.attachEvents();
+	}
+
+	Education.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$btnAdd.click(function(){
+			that.$formAdd.removeClass('hidden').addClass('add-form');
+		});
+
+		this.$btnCancel.click(function(){
+			that.$formAdd.addClass('hidden').removeClass('add-form').find('input').each(function(){
+				$(this).val('');
+			});
+
+			that.$started.val('0');
+			that.$ended.val('0');
+
+			that.$el.find('.education-item').removeClass('hidden');
+		});
+
+		this.$btnEdit.click(function(){
+			var $item = $(this).parents('.education-item');
+
+			that.$started.val( $item.data('started') );
+			that.$ended.val( $item.data('ended') );
+			that.$degree.val( $item.data('degree') );
+			that.$school.val( $item.data('school') );
+			that.$fieldofstudy.val( $item.data('fieldofstudy') );
+			that.$degree_id.val( $item.data('degree-id') );
+			that.$school_id.val( $item.data('school-id') );
+			that.$fieldofstudy_id.val( $item.data('fieldofstudy-id') );
+
+			$item.addClass('hidden');
+			that.$formAdd.removeClass('hidden').removeClass('add-form').data('edit', $item.data('edit'));
+		});
+
+		this.$btnRemove.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			if ( confirm("You sure delete this ?") == false ){
+				return false;
+			}
+
+			that.url = $(this).parents('.education-item').data('remove');
+
+			that.submit( $(this), 'remove' );
+
+			return false;
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			that.data = {
+				'started'			: that.$started.val(),
+				'ended'				: that.$ended.val(),
+				'degree'			: that.$degree.val(),
+				'degree_id'			: that.$degree_id.val(),
+				'school'			: that.$school.val(),
+				'school_id'			: that.$school_id.val(),
+				'fieldofstudy'		: that.$fieldofstudy.val(),
+				'fieldofstudy_id'	: that.$fieldofstudy_id.val(),
+			};
+
+			if ( that.$formAdd.hasClass('add-form') ){
+				that.url = that.$formAdd.data('add');
+
+				that.submit( $(this), 'add' );
+			}else{
+				that.url = that.$formAdd.data('edit');
+
+				that.submit( $(this), 'edit' );
+			}
+
+			return false;
+		});
+
+		this.$degree.typeahead({
+			source: function (query, process) {
+				that.$degree_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$el.data('degree') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						degrees = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							degrees[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$degree.parent().find('ul.typeahead').css('left', '1631px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$degree_id.val(degrees[item].id);
+	    		return item;
+			}
+		});
+
+		this.$school.typeahead({
+			source: function (query, process) {
+				that.$school_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$el.data('school') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						schools = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							schools[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$school.parent().find('ul.typeahead').css('left', '1631px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$school_id.val(schools[item].id);
+	    		return item;
+			}
+		});
+
+		this.$fieldofstudy.typeahead({
+			source: function (query, process) {
+				that.$fieldofstudy_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$el.data('fieldofstudy') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						fieldofstudies = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							fieldofstudies[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$fieldofstudy.parent().find('ul.typeahead').css('left', '1631px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$fieldofstudy_id.val(fieldofstudies[item].id);
+	    		return item;
+			}
+		});
+	}
+
+	Education.prototype.submit = function($button, method){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				if ( method == 'remove' ){
+					$button.parents('.education-item').remove();
+				}else if ( method == 'edit' ){
+					var $item = $.tmpl($('#background-education-item'), data);
+
+					$('#' + data.id).before($item).remove();
+
+					that.$btnCancel.trigger('click');
+
+					$('.education-label').each(function(){
+						new Education( $(this) );
+					});
+				}else if ( method == 'add' ){
+					that.$btnCancel.trigger('click');
+
+					var $item = $.tmpl($('#background-education-item'), data);
+
+					that.$formAdd.parent().append($item);
+
+					$('.education-label').each(function(){
+						new Education( $(this) );
+					});
+				}
+			}else if ( data.education_started_ended != null ){
+				var $started = that.$formAdd.find('[name=\"started\"]');
+				$started.tooltip('destroy');
+				$started.parent().removeClass('success');
+				$started.parent().addClass('error');
+				$started.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+
+				var $ended = that.$formAdd.find('[name=\"ended\"]');
+				$ended.tooltip('destroy');
+				$ended.parent().removeClass('success');
+				$ended.parent().addClass('error');
+				$ended.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+			}
+		});
+	}
+
+	Education.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		$('.education-label').each(function(){
+			new Education( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Experience
+(function($, document, undefined) {
+	function Experience($el){
+		this.$el 			= $el;
+		this.$formAdd 		= $el.find('.background-experience-form-add');
+
+		this.$btnAdd 		= $el.find('.profiles-btn-add');
+		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
+		this.$btnEdit 		= $el.find('.profiles-btn-edit');
+		this.$btnRemove		= $el.find('.profiles-btn-remove');
+		this.$btnSave 		= $el.find('.profiles-btn-save');
+
+		this.$strMonth		= this.$formAdd.find('[name=\"started_month\"]');
+		this.$strYear		= this.$formAdd.find('[name=\"started_year\"]');
+		this.$endMonth		= this.$formAdd.find('[name=\"ended_month\"]');
+		this.$endYear		= this.$formAdd.find('[name=\"ended_year\"]');
+		this.$title			= this.$formAdd.find('[name=\"title\"]');
+		this.$company		= this.$formAdd.find('[name=\"company\"]');
+		this.$location		= this.$formAdd.find('[name=\"location\"]');
+		this.$city_id		= this.$formAdd.find('[name=\"city_id\"]');
+
+		this.attachEvents();
+	}
+
+	Experience.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$btnAdd.click(function(){
+			that.$formAdd.removeClass('hidden').addClass('add-form');
+		});
+
+		this.$btnCancel.click(function(){
+			that.$formAdd.addClass('hidden').removeClass('add-form').find('input').val('');
+			that.$formAdd.find('select').val('0');
+
+			that.$el.find('.experience-item').removeClass('hidden');
+		});
+
+		this.$btnEdit.click(function(){
+			var $item = $(this).parents('.experience-item');
+
+			that.$strMonth.val( $item.data('startedm') );
+			that.$strYear.val( $item.data('startedy') );
+			that.$endMonth.val( $item.data('endedm') );
+			that.$endYear.val( $item.data('endedy') );
+			that.$title.val( $item.data('title') );
+			that.$company.val( $item.data('company') );
+			that.$location.val( $item.data('location') );
+			that.$city_id.val( $item.data('city-id') );
+
+			$item.addClass('hidden');
+			that.$formAdd.removeClass('hidden').data('edit', $item.data('edit'));
+		});
+
+		this.$btnRemove.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			if ( confirm("You sure delete this ?") == false ){
+				return false;
+			}
+
+			that.url = $(this).parents('.experience-item').data('remove');
+
+			that.submit( $(this), 'remove' );
+
+			return false;
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass( 'disabled' ) ) {
+				return false;
+			}
+
+			var method = 'add';
+			if ( that.$formAdd.hasClass('add-form') ){
+				that.url = that.$formAdd.data('add');
+			}else{
+				method = 'edit';
+				that.url = that.$formAdd.data('edit');
+			}
+
+			that.data = {
+				'started_month'		: that.$strMonth.val(),
+				'ended_month'		: that.$endMonth.val(),
+				'started_year'		: that.$strYear.val(),
+				'ended_year'		: that.$endYear.val(),
+				'title'				: that.$title.val(),
+				'company'			: that.$company.val(),
+				'location'			: that.$location.val(),
+				'city_id'			: that.$city_id.val()
+			};
+
+			that.submit( $(this), method );
+
+			return false;
+		});
+
+		this.$location.typeahead({
+			source: function (query, process) {
+				that.$city_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$location.parent().data('autocomplete') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						locations = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							locations[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$location.parent().find('ul.typeahead').css('left', '2317px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$city_id.val(locations[item].id);
+	    		return item;
+			}
+		});
+	}
+
+	Experience.prototype.submit = function($button, method){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				if ( method == 'remove' ){
+					$button.parents('.experience-item').remove();
+				}else if ( method == 'edit' ){
+					var $item = $.tmpl($('#background-experience-item'), data);
+
+					$('#' + data.id).before($item).remove();
+
+					that.$btnCancel.trigger('click');
+					
+					$('.experience-label').each(function(){
+						new Experience( $(this) );
+					});
+				}else if ( method == 'add' ){
+					that.$btnCancel.trigger('click');
+
+					var $item = $.tmpl($('#background-experience-item'), data);
+
+					that.$formAdd.parent().append($item);
+
+					$('.experience-label').each(function(){
+						new Experience( $(this) );
+					});
+				}
+			}else if ( data.education_started_ended != null ){
+				var $started = that.$formAdd.find('[name=\"started\"]');
+				$started.tooltip('destroy');
+				$started.parent().removeClass('success');
+				$started.parent().addClass('error');
+				$started.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+
+				var $ended = that.$formAdd.find('[name=\"ended\"]');
+				$ended.tooltip('destroy');
+				$ended.parent().removeClass('success');
+				$ended.parent().addClass('error');
+				$ended.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+			}
+		});
+	}
+
+	Experience.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		$('.experience-label').each(function(){
+			new Experience( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Skill
+(function($, document, undefined) {
+	function Skill($el){
+		this.$el 			= $el;
+		this.$formAdd 		= $el.find('.background-skill-form-add');
+		
+		this.$btnAdd 		= $el.find('.profiles-btn-add');
+		this.$btnSave 		= $el.find('.profiles-btn-save');
+		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
+		this.$btnRemove 	= $el.find('.profiles-btn-remove');
+
+		this.$skill 		= this.$formAdd.find('[name=\"skill\"]');
+
+		this.attachEvents();
+	}
+
+	Skill.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$btnAdd.click(function(){
+			that.$formAdd.removeClass('hidden');
+		});
+
+		this.$btnCancel.click(function(){
+			that.$formAdd.addClass('hidden').find('input').each(function(){
+				$(this).val('');
+			});
+		});
+
+		this.$btnRemove.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			if ( confirm("You sure delete this ?") == false ){
+				return false;
+			}
+
+			that.url = $(this).parents('.skill-item').data('remove');
+
+			that.submit( $(this), 'remove' );
+
+			return false;
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			that.data = {
+				'skill': that.$skill.val()
+			};
+
+			that.url = that.$formAdd.data('add');
+
+			that.submit( $(this), 'add' );
+
+			return false;
+		});
+	}
+
+	Skill.prototype.submit = function($button, method){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				if ( method == 'remove' ){
+					$button.parents('.skill-item').remove();
+				}else if ( method == 'add' ){
+					that.$btnCancel.trigger('click');
+
+					var $item = $.tmpl($('#background-skill-item'), data);
+
+					that.$formAdd.parent().append($item);
+
+					$('.skill-label').each(function(){
+						new Skill( $(this) );
+					});
+				}
+			}
+		});
+	}
+
+	Skill.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		$('.skill-label').each(function(){
+			new Skill( $(this) );
+		});
+	});
+}(jQuery, document));

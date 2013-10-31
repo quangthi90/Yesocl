@@ -240,10 +240,10 @@ class ControllerGroupGroup extends Controller {
 			$this->data['error_name'] = '';
 		}
 		
-		if ( isset($this->error['error_sumary']) ) {
-			$this->data['error_sumary'] = $this->error['error_sumary'];
+		if ( isset($this->error['error_summary']) ) {
+			$this->data['error_summary'] = $this->error['error_summary'];
 		} else {
-			$this->data['error_sumary'] = '';
+			$this->data['error_summary'] = '';
 		}
 		
 		if ( isset($this->error['error_description']) ) {
@@ -283,7 +283,7 @@ class ControllerGroupGroup extends Controller {
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_fullname'] = $this->language->get( 'entry_fullname' );
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
-		$this->data['entry_sumary'] = $this->language->get( 'entry_sumary' );
+		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 		$this->data['entry_website'] = $this->language->get( 'entry_website' );
 		$this->data['entry_type'] = $this->language->get( 'entry_type' );
@@ -338,13 +338,13 @@ class ControllerGroupGroup extends Controller {
 			$this->data['name'] = '';
 		}
 		
-		// Entry sumary
-		if ( isset($this->request->post['sumary']) ){
-			$this->data['sumary'] = $this->request->post['sumary'];
+		// Entry summary
+		if ( isset($this->request->post['summary']) ){
+			$this->data['summary'] = $this->request->post['summary'];
 		}elseif ( isset($group) ){
-			$this->data['sumary'] = $group->getsumary();
+			$this->data['summary'] = $group->getsummary();
 		}else {
-			$this->data['sumary'] = '';
+			$this->data['summary'] = '';
 		}
 		
 		// Entry description
@@ -467,8 +467,8 @@ class ControllerGroupGroup extends Controller {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}
 		
-		if ( !isset($this->request->post['sumary']) || strlen($this->request->post['sumary']) < 50 ){
-			$this->error['error_sumary'] = $this->language->get( 'error_sumary' );
+		if ( !isset($this->request->post['summary']) || strlen($this->request->post['summary']) < 50 ){
+			$this->error['error_summary'] = $this->language->get( 'error_summary' );
 		}
 		
 		if ( !isset($this->request->post['description']) || strlen($this->request->post['description']) < 50 ){

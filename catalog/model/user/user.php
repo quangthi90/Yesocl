@@ -115,5 +115,19 @@ class ModelUserUser extends Model {
  
 		return $this->client->execute( $query );
 	}
+
+	public function isExistEmail( $email, $user_id = '' ) {
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 'emails.email' => $email ) );
+		
+		foreach ( $users as $user ) {
+			if ( $user->getId() == $user_id ){
+				continue;
+			}else {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 }
 ?>
