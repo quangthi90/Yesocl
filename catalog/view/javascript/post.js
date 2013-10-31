@@ -336,7 +336,7 @@
                     comment_box.find('.y-box-header span').html(that.comment_count);
                     comment_form.attr('data-url', that.comment_url);
                     page = 1;
-                    $('.comment-body').animate({
+                    $('.comment-body').stop().animate({
                         scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
                     }, 1000);
                     new CommentForm(comment_form);
@@ -370,7 +370,7 @@
             comment_box.find('.y-box-header span').html(that.comment_count);
             comment_form.attr('data-url', that.comment_url);
             page = 1;
-            $('.comment-body').animate({
+            $('.comment-body').stop().animate({
                 scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
             }, 100);
             new CommentForm(comment_form);
@@ -406,13 +406,13 @@
         $('#overlay').show(100);        
         list_comment.makeCustomScroll(false);
         //Show comment box:
-        comment_box.animate({ "right": "2px" }, 200);
+        comment_box.stop().animate({ "right": "2px" }, 200);
     }
     CommentBtn.prototype.hideCommentBox = function($button) {
         $('#overlay').hide();
         $('.post').removeClass('post-selecting');
         $button.removeClass('disabled');
-        comment_box.animate({"right": "-500px" }, "slow");
+        comment_box.stop().animate({"right": "-500px" }, "slow");
         page = 1;
     }
 
@@ -498,7 +498,7 @@
                 $('#add-more-item').before(htmlOutput);
                 that.$content.val('');
                 //Scroll to last post which have just been added
-                list_comment.animate({ 
+                list_comment.stop().animate({ 
                     scrollTop: $('#add-more-item').offset().top
                 }, 1000);
 
