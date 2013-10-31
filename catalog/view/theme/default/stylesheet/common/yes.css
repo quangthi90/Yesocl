@@ -830,23 +830,27 @@ a.btn-notification:hover .notification-item-name > i {
   color: #727272;
   font-weight: normal;
   font-size: 12px;
+  padding: 5px 0px 3px 0px;
   overflow: hidden;
 }
 .post .post_header .post_meta span{
-  margin-left: 15px;
+  margin-left: 20px;
 } 
 .post .post_header .post_meta span:first-child {
   margin-left: 0px;
 }
 .post .post_header .post_meta span i {
   color: #009B77;
-  margin-right: 2px;
+  margin-right: 5px;
+}
+.post .post_header .post_meta span d {
+  font-weight: bold;
 }
 .post .post_header .post_title a {
   color: #363636;
 }
 .post .post_header .post_title a:hover{
-  color: #5bb75b;
+  color: #009B77;
 }
         
 .post .post_body {
@@ -987,6 +991,7 @@ a.btn-notification:hover .notification-item-name > i {
 .post .post_virtual_overlay {
   background: #25CAB0;
   opacity: 0.5;
+  display: block;
   position: absolute;
   top: 1px;
   left: 1px;
@@ -1424,7 +1429,7 @@ a.btn-notification:hover .notification-item-name > i {
   color: #000000;
 }
 .post_in_block .post_header a:hover {
-  color: #5bb75b;
+  color: #009B77;
 }
 .post_in_block .post_date{
   text-align: left;
@@ -1440,6 +1445,9 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post_in_block .post_body .post_text_raw{
   padding: 0px 10px;
+}
+.post_in_block .post_body .post_text_raw > a:hover {
+  color: #000;
 }
 .post_body .post_text_raw p,
 .post_body .post_text_raw div,

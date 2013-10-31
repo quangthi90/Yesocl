@@ -38,22 +38,57 @@
                                     <i class="icon-calendar"></i> <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
                                 </span>
                                 <span class="post_cm fr">
-                                    <i class="icon-comments-alt"></i> <d>{{ post.comment_count }}</d>
+                                    <a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
+                                        data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+                                        data-comment-count="{{ post.comment_count }}"
+                                        data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}">
+                                        <i class="icon-comments medium-icon"></i>
+                                    </a>
+                                    <a href="#" class="view-list-user" 
+                                        data-view-title="People comment on this post"  
+                                        data-view-type="comment" 
+                                        data-post-slug="{{ post.slug }}" 
+                                        data-post-type="{{ post_type }}"
+                                        data-type-slug="{{ branch.slug }}">
+                                        <d>{{ post.comment_count }}</d>
+                                    </a>
                                 </span>
                                 <span class="post_like fr">
-                                    <i class="icon-thumbs-up"></i> <d>{{ post.like_count }}</d>
+                                    <a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
+                                        data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+                                        data-post-liked="{{ post.isUserLiked }}">
+                                        {% if post.isUserLiked == 0 %}
+                                            <i class="icon-thumbs-up medium-icon"></i>
+                                        {% else %}
+                                            <i class="icon-thumbs-down medium-icon"></i>
+                                        {% endif %}
+                                    </a>
+                                    <a href="#" class="view-list-liker" 
+                                        data-url="{{ path('PostGetLiker', {post_slug: post.slug, post_type: post_type}) }}"
+                                        data-view-title="People like this post" 
+                                        data-view-type="like" 
+                                        data-post-slug="{{ post.slug }}" 
+                                        data-post-type="{{ post_type }}">
+                                        <d>{{ post.like_count }}</d>
+                                    </a>
                                 </span>
                             </div>
                         </div>
                         <div class="post_body">
                             <div class="post_image">
-                                <img src="{{ post.image }}" alt="title">
+                                <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">
+                                    <img src="{{ post.image }}" alt="title">
+                                </a>                                
                             </div>
-                            <div class="post_text_raw">{{ post.description }}</div> 
+                            <div class="post_text_raw">
+                                <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">
+                                    {{ post.description }}
+                                </a>
+                            </div> 
                         </div>
                         <div class="hover post_overlay">
-                            <div class="post_virtual_overlay">
-                            </div>
+                            <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}" class="post_virtual_overlay">
+                            </a>
                             <div class="post_overlay_wrapper">
                                 <!--div class="post_remove">
                                     <a href="#" title="Delete"><i class="icon-remove"></i></a>
@@ -73,8 +108,7 @@
                                         <a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
                                             data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
                                             data-comment-count="{{ post.comment_count }}"
-                                            data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
-                                        >
+                                            data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}">
                                             <i class="icon-comments medium-icon"></i>
                                         </a>
                                         <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
