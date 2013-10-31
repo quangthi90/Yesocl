@@ -41,7 +41,7 @@
 	};
 
 	Login.prototype.submit = function($button){
-		that = this;
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',

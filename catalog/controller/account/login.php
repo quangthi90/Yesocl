@@ -65,20 +65,18 @@ class ControllerAccountLogin extends Controller {
   private function validate() {
     if ( !isset( $this->request->post['email'] ) ) {
       $this->error['warning'] = $this->language->get('error_login');
-    }
-
-    if ( !isset( $this->request->post['password'] ) ) {
+    
+    }elseif ( !isset( $this->request->post['password'] ) ) {
       $this->error['warning'] = $this->language->get('error_login');
-    }
-
-    if ( !isset( $this->request->post['remember'] ) ) {
+    
+    }elseif ( !isset( $this->request->post['remember'] ) ) {
       $this->request->post['remember'] = false;
-    }
-
-    if (!$this->error) {   
-      if (!$this->customer->login($this->request->post['email'], $this->request->post['password'], false, $this->request->post['remember'])) {
+    
+    }elseif (!$this->customer->login($this->request->post['email'], $this->request->post['password'], false, $this->request->post['remember'])) {
         $this->error['warning'] = $this->language->get('error_login');
       }
+
+    if (!$this->error) {
       return true;
     } else {
       return false;
