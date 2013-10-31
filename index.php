@@ -16,6 +16,7 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
+require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 // require_once(DIR_SYSTEM . 'library/affiliate.php');
 // require_once(DIR_SYSTEM . 'library/currency.php');
 // require_once(DIR_SYSTEM . 'library/tax.php');
@@ -203,7 +204,16 @@ $language->load($languages[$code]['filename']);
 $registry->set('language', $language); 
 
 // Document
-$registry->set('document', new Document()); 		
+$registry->set('document', new Document()); 
+
+// facebook
+$fb_setting = array(
+	'appId' => '1417585645119646',
+	'secret' => 'cb6ad77f5cf54b9178cdfc15ee458e95',
+	'cookie' => false,
+	);
+$facebook = new Facebook( $fb_setting );
+$registry->set( 'facebook', $facebook );		
 
 // Customer
 $customer = new Customer($registry);
@@ -247,21 +257,37 @@ $controller = new Front($registry);
 $controller->addPreAction(new Action('common/maintenance'));
 
 // SEO URL's
-$controller->addPreAction(new Action('common/seo_url'));	
-	
+$controller->addPreAction(new Action('common/seo_url'));
+
 // Router
 if ( $customer->isLogged() ) {
-	if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
+		if (!isset($request->get['route']) || (
+			$request->get['route'] == 'account/login/login' || 
+			$request->get['route'] == 'account/login' ||
+			$request->get['route'] == 'account/register/register' ||
+			$request->get['route'] == 'account/forgotten' ||
+			$request->get['route'] == 'welcome/home'
+		)) 
+		{
+			$action = new Action('common/home');
+		}else{
+			$action = new Action($request->get['route']);
+		}
+	/*if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
 		$action = new Action($request->get['route']);
 	} else {
 		$action = new Action('common/home');
-	}
+	}*/
+}elseif ( $customer->hasRemember() ) {
+	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
+	exit;
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
 		$request->get['route'] == 'account/login' ||
 		$request->get['route'] == 'account/register/register' ||
-		$request->get['route'] == 'account/forgotten'
+		$request->get['route'] == 'account/forgotten' ||
+		$request->get['route'] == 'account/login/facebookConnect'
 	)) 
 	{
 		$action = new Action($request->get['route']);

@@ -5,6 +5,11 @@ class ControllerWelcomeHome extends Controller {
 	  		$this->redirect($this->url->link('common/home', '', 'SSL'));
     	}*/
 
+    	if ( isset( $this->session->data['error'] ) ) {
+    		$this->data['error'] = $this->session->data['error'];
+    		unset( $this->session->data['error'] );
+    	}
+
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {

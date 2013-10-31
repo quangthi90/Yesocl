@@ -25,7 +25,7 @@
                     <div class="warning"></div>
                 </div>
                 <div class="checkbox-container">
-                    <input id="remember" name="remember" type="checkbox" /> 
+                    <input id="remember" name="remember" type="checkbox" value="true" /> 
                     <label for="remember">Remember me</label>
                 </div>                
                 <div class="btns">

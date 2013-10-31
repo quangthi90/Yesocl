@@ -81,6 +81,7 @@ $(document).ready(function(){
       			<ul>
       				<li><a href="<?php echo $user_group; ?>"><?php echo $text_user_group; ?></a></li>
       				<li><a href="<?php echo $user; ?>"><?php echo $text_user; ?></a></li>
+              <li><a href="<?php echo $social_network; ?>"><?php echo $text_social_network; ?></a></li>
       			</ul>
       		</li>
       	</ul>

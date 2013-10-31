@@ -35,6 +35,7 @@ $_['route']['SearchPage']		= 'common/search';
 $_['route']['Search']			= 'common/search';
 $_['route']['ChangeAvatar']		= 'account/avatar';
 $_['route']['ProfilePage']		= 'account/edit';
+$_['route']['FaceBookConnect']	= 'account/login/facebookConnect';
 
 // Friend
 $_['route']['FriendPage']		= 'friend/friend';

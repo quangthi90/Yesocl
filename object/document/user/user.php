@@ -45,6 +45,9 @@ Class User {
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
 
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Social\Network", inversedBy="users") */
+    private $socialNetwork;
+
     /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
 	private $groups = array();
 	
@@ -235,6 +238,14 @@ Class User {
 
 	public function getGroupUser(){
 		return $this->groupUser;
+	}
+
+	public function setSocialNetwork( \Document\Social\Network $socialNetwork ){
+		$this->socialNetwork = $socialNetwork;
+	}
+
+	public function getSocialNetwork(){
+		return $this->socialNetwork;
 	}
 
 	public function addCompanyCreated( \Document\Company\Company $companyCreated ){
