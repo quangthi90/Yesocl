@@ -12,7 +12,7 @@
 
 {% block body %}
 <div id="y-content" class="no-header-fixed">
-    <div id="y-main-content" class="has-horizontal post-category">
+    <div id="y-main-content" class="has-horizontal post-category" >
         {% set block_info = category %}
         {% set block_href = path('CategoryPage', {category_slug: category.slug}) %}
         {% set is_back_btn = true %}

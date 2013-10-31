@@ -414,8 +414,8 @@
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
-			var heightPost = (heightBlockContent - 2*marginPost)/2;
-			var widthPost = this.widthMain*5/18 - 3*marginPost;
+			var heightPost = Math.floor((heightBlockContent - 2*marginPost)/2);
+			var widthPost = Math.floor(this.widthMain*5/18 - 3*marginPost);
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
@@ -426,7 +426,7 @@
 			this.blocks.each(function(index) {
 				var blockFeed = new BlockFeed($(this), heightPost,widthPost);
 				blockFeed.putFeed();	
-				totalWithContent += ($(this).outerWidth() + marginBlock);			
+				totalWithContent += ($(this).outerWidth() + marginBlock);		
 			});
 			this.root.width(totalWithContent + 2);
 			this.feeds.each(function() {
@@ -443,21 +443,13 @@
 			var totalWidth = 0;
 			this.blocks.each(function(index) {			
 				$(this).find('.block-content').height(heightBlockContent);
-				var firstColumn = $(this).find('.column:first-child');
+				var firstColumn = $(this).find('.column:first-child');				
+				firstColumn.width(minPostEditorWidth);				
+				firstColumn.find('.post').height(heightBlockContent - 100 - marginPostOnWall - 2*marginPostOnWall);
 				var columnPerBlock = $(this).find('.column').not(':first-child');
-				firstColumn.width(minPostEditorWidth);					
 				var totalWidthOfColumns = firstColumn.outerWidth() + marginPostOnWall;
 				columnPerBlock.each(function() {
-					if($(this).children('.post').length == 2) {
-						var firstPost = $(this).children('.post:first-child');
-						var lastPost = $(this).children('.post:last-child');					
-						$(this).css('margin-right', marginPostOnWall + 'px');
-						firstPost.css('margin-bottom', marginPostOnWall + 'px');
-						if(lastPost.outerHeight() > (heightBlockContent - firstPost.outerHeight() - marginPostOnWall)) {
-							lastPost.find('.post_image').hide();	
-						}
-						lastPost.height(heightBlockContent - firstPost.outerHeight() - marginPostOnWall);					
-					}	
+					$(this).children('.post').height(Math.floor((heightBlockContent - marginPostOnWall)/2 - 2*(marginPostOnWall)));
 					$(this).width(minPostStatusWidth);			
 					totalWidthOfColumns += $(this).outerWidth() + marginPostOnWall;
 				});
@@ -473,8 +465,8 @@
 			this.blocks = this.root.find('.feed-block');		
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
-			var heightPost = (heightBlockContent - 2*marginPost)/2;
-			var widthPost = this.widthMain*5/18 - 3*marginPost;
+			var heightPost = Math.floor((heightBlockContent - 2*marginPost)/2);
+			var widthPost = Math.floor(this.widthMain*5/18 - 3*marginPost);
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
@@ -534,7 +526,7 @@
 			this.blockEle.find('.column-special .feed-container:nth-child(3)').width(this.widthAverPost - 5).css('float', 'left');	
 		}else {
 			var specialColumn = this.blockEle.find('.column-special'); 
-			var heightFirst = this.heightAverPost*4/3;
+			var heightFirst = Math.floor(this.heightAverPost*4/3);
 			var heightLast = this.heightAverPost*2 - heightFirst - 4;
 			specialColumn.each(function(index) {
 				if($(this).children('.feed-container').length ==1)  { 

@@ -891,57 +891,51 @@ a.btn-notification:hover .notification-item-name > i {
 .post:hover .post_remove {
   display: block;
 }
-.post_status  a i {
-  color: #ccc;
-}
-.post_status  a:hover i {
-  color: #0E0E0E;
-}
 
 /* --------------------------------------- END POST --------------------------------------------- */
 
 /* -----------------------------------------  POST is STATUS ----------------------------------- */
 .post_status {
-    -webkit-box-shadow: 0px 0px 5px #ccc;  
-    -moz-box-shadow: 0px 0px 5px #ccc;  
-    box-shadow: 0px 0px 5px #ccc;  
-    padding: 10px;
-    overflow: hidden;
-    cursor: default;
-    position: relative;
+  -webkit-box-shadow: 0px 0px 5px #ccc;  
+  -moz-box-shadow: 0px 0px 5px #ccc;  
+  box-shadow: 0px 0px 5px #ccc;  
+  padding: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  cursor: default;
+  position: relative;
+}
+.column .post_status:last-child {
+  margin-bottom: 0px;
 }
 .post_status .post_header {
-    overflow: hidden;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 5px;
 }
 .post_status .post_header .avatar_thumb{
-    float: left;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    overflow: hidden;
+  float: left;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  overflow: hidden;
 }
 .post_status .post_header .avatar_thumb img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 .post_status .post_header .post_meta_info {
-    margin-left: 60px;
+  margin-left: 60px;
 }
 .post_status .post_header .post_meta_info .post_user {
-    margin-bottom: 5px;
-
+  margin-bottom: 5px;
 }
 .post_status .post_header .post_meta_info .post_user a {
-    font-weight: bold;
-
+  font-weight: bold;
 }
 .post_status .post_header .post_meta_info .post_user a:hover {
-
 }
-.post_status .post_body {
-  
+.post_status .post_body {  
 }
 .post_status .post_body .post_image {
   overflow: hidden;
@@ -1401,6 +1395,9 @@ a.btn-notification:hover .notification-item-name > i {
 .column {
   height: 100%;
   float: left;
+  margin-right: 15px;
+  min-width: 350px;
+  max-width: 350px;
   overflow: hidden;
 }
 .column:last-child{
