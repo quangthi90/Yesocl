@@ -1,63 +1,20 @@
-{% block profiles_tabs_step5 %}
-<div class="row-fluid profiles-box profiles-step5">
-	<div class="span10 offset1">
-		<div class="row-fluid profiles-box-header">
-			<div class="span5 profiles-box-header-title">BACKGROUND</div>
-			<div class="span7">
-				<a href="#myCarousel" data-slide="next" class="btn profiles-box-header-next"><i class="icon-chevron-sign-right"></i></a>
-				<a href="#myCarousel" data-slide="prev" class="btn profiles-box-header-next"><i class="icon-chevron-sign-left"></i></a>
-			</div>
+{% block profiles_tabs_skill %}
+<div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left" data-url="{{ link_add_skill }}">
+	<div class="skill-label">
+		<div class="profiles-tabs-main-header">
+			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>
+			<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
+			<div class="pull-right"><input class="profiles-input editors" type="text" name="skill" placeholder="Text here..." /></div>
+			<div class="clear"></div>
 		</div>
-
-		<div class="row-fluid profiles-box-content">
-			<div class="row-fluid">
-				<a href="#" class="btn profiles-box-content-title span3">Experiences</a>
-				<a class="btn profiles-btn-edit" href="#"><i class="icon-pencil"></i></a>
-			</div>
-
-			<div class="row-fluid">
-				<div class="profiles-box-content-main">
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-
-					<div class="profile-box-item">
-						<div class="profile-box-item-label">From Junly 13th to now</div>
-						<div class="profile-box-item-content">
-							<p>PG</p>
-							<p>NTT Data VN</p>
-							<p>Information Technology</p>
-						</div>
-					</div>
-				</div>
-			</div>
+		<div class="profiles-tabs-main-body">
+			{% for skill in user.skills %}
+			<div class="profiles-tabs-item2 btn" data-id="{{ skill.id }}" data-remove="{{ link_remove_skill }}">{{ skill.skill }}<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
+			{% endfor %}
 		</div>
 	</div>
 </div>
 {% endblock %}
 
-{% block profiles_tabs_step5_javascript %}
+{% block profiles_tabs_skill_javascript %}
 {% endblock %}
