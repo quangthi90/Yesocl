@@ -51,7 +51,7 @@ class ControllerCommonSearch extends Controller {
 			$user = $user->formatToCache();
 
 			$user['meta'] = $meta;
-			$user['fr_status'] = $friend_status;
+			$user['status'] = $friend_status;
 
 			if ( !array_key_exists($user['id'], $this->data['users']) ){
 				if ( !empty($user['avatar']) ){

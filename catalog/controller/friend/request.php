@@ -213,5 +213,37 @@ class ControllerFriendRequest extends Controller {
             'success' => 'not ok'
         )));
 	}
+
+	public function unFriend(){
+		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+			$this->load->model('user/user');
+
+           	if ( empty($this->request->get['user_slug']) ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'user slug is empty'
+		        )));
+           	}
+
+           	$user_slug = $this->request->get['user_slug'];
+
+           	$result = $this->model_user_user->editUser( $user_slug, array('unfriend' => $this->customer->getId()) );
+
+           	if ( !$result ){
+           		return $this->response->setOutput(json_encode(array(
+		            'success' => 'not ok',
+		            'warning' => 'send request have error'
+		        )));
+           	}
+
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+    	}
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+	}
 }
 ?>
