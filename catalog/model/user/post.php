@@ -62,6 +62,16 @@ class ModelUserPost extends Model {
 		$posts->addPost( $post );
 		
 		$this->dm->flush();
+
+		$this->load->model('cache/post');
+		$data = array(
+			'post_id' => $post->getId(),
+			'type' => $this->config->get('post')['cache']['user'],
+			'type_id' => $user->getId(),
+			'view' => 0,
+			'created' => $post->getCreated()
+		);
+		$this->model_cache_post->addPost( $data );
 		
 		return $post;
 	}

@@ -61,7 +61,7 @@
                                 <div class="post_action">
                                     <div class="action_tool">
                                         <a class="like-post" href="#" title="{% if post.isUserLiked == 0 %}Like{% else %}Unlike{% endif %}"
-                                            data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
+                                            data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post.type}) }}"
                                             data-post-liked="{{ post.isUserLiked }}"
                                         >
                                             {% if post.isUserLiked == 0 %}
@@ -71,28 +71,28 @@
                                             {% endif %}
                                         </a>
                                         <a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
-                                            data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+                                            data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post.type}) }}"
                                             data-comment-count="{{ post.comment_count }}"
-                                            data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
+                                            data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post.type}) }}"
                                         >
                                             <i class="icon-comments medium-icon"></i>
                                         </a>
-                                        <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
+                                        <a href="{{ path('PostPage', {post_type: post.type, post_slug: post.slug}) }}" title="View"><i class="icon-eye-open medium-icon"></i></a>
                                     </div>
                                     <div class="who-action">
                                         <a href="#" class="view-list-liker" 
-                                            data-url="{{ path('PostGetLiker', {post_slug: post.slug, post_type: post_type}) }}"
+                                            data-url="{{ path('PostGetLiker', {post_slug: post.slug, post_type: post.type}) }}"
                                             data-view-title="People like this post" 
                                             data-view-type="like" 
                                             data-post-slug="{{ post.slug }}" 
-                                            data-post-type="{{ post_type }}">
+                                            data-post-type="{{ post.type }}">
                                             <d>{{ post.like_count }}</d>
                                         </a>
                                         <a href="#" class="view-list-user" 
                                             data-view-title="People comment on this post"  
                                             data-view-type="comment" 
                                             data-post-slug="{{ post.slug }}" 
-                                            data-post-type="{{ post_type }}"
+                                            data-post-type="{{ post.type }}"
                                             data-type-slug="{{ branch.slug }}">
                                             {{ post.comment_count }}
                                         </a>
@@ -100,7 +100,7 @@
                                             data-view-title="People view this post"  
                                             data-view-type="view"
                                             data-post-slug="{{ post.slug }}" 
-                                            data-post-type="{{ post_type }}"
+                                            data-post-type="{{ post.type }}"
                                             data-type-slug="{{ branch.slug }}">
                                             1k
                                         </a>
