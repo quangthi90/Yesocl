@@ -1092,7 +1092,7 @@ class ControllerUserUser extends Controller {
 		// Entry birthday
 		if ( isset($this->request->post['meta']['birthday']) ){
 			$this->data['birthday'] = $this->request->post['meta']['birthday'];
-		}elseif ( isset($user) && $user->getMeta() ){
+		}elseif ( isset($user) && $user->getMeta()->getBirthday() ){
 			$this->data['birthday'] = $user->getMeta()->getBirthday()->format('m/d/Y');
 		}else {
 			$this->data['birthday'] = '';
@@ -1118,7 +1118,7 @@ class ControllerUserUser extends Controller {
 		if ( isset($this->request->post['meta']['location']['location']) ){
 			$this->data['location'] = $this->request->post['meta']['location']['location'];
 			$this->data['city_id'] = $this->request->post['meta']['location']['city_id'];
-		}elseif ( isset($user) && $user->getMeta() ){
+		}elseif ( isset($user) && $user->getMeta()->getLocation() ){
 			$this->data['location'] = $user->getMeta()->getLocation()->getLocation();
 			$this->data['city_id'] = $user->getMeta()->getLocation()->getCityId();
 		}else {
@@ -1186,7 +1186,7 @@ class ControllerUserUser extends Controller {
 		// Entry interest
 		if ( isset($this->request->post['background']['interest']) ){
 			$this->data['interest'] = $this->request->post['background']['interest'];
-		}elseif ( isset($user) ){
+		}elseif ( isset($user) && $user->getMeta()->getBackground() ){
 			$this->data['interest'] = $user->getMeta()->getBackground()->getInterest();
 		}else {
 			$this->data['interest'] = '';
@@ -1237,7 +1237,7 @@ class ControllerUserUser extends Controller {
 		$this->data['experiences'] = array();
 		if ( isset($this->request->post['background']['experiences']) ){
 			$this->data['experiences'] = $this->request->post['background']['experiences'];
-		}elseif ( isset( $user ) ){
+		}elseif ( isset( $user ) && $user->getMeta()->getBackground() ){
 			foreach ($user->getMeta()->getBackground()->getExperiences() as $key => $experience) {
 				$started = $experience->getStarted();
 				$ended = $experience->getEnded();
@@ -1259,7 +1259,7 @@ class ControllerUserUser extends Controller {
 		$this->data['educations'] = array();
 		if ( isset($this->request->post['background']['educations']) ){
 			$this->data['educations'] = $this->request->post['background']['educations'];
-		}elseif ( isset( $user ) ){
+		}elseif ( isset( $user ) && $user->getMeta()->getBackground() ){
 			foreach ($user->getMeta()->getBackground()->getEducations() as $key => $education) {
 				$this->data['educations'][$key] = array(
 					'school' => $education->getSchool(),

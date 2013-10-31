@@ -751,7 +751,9 @@ class ModelUserUser extends Model {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
 
 				if ( $user ){
+					$this->load->model('tool/image');
 					$this->load->model('tool/cache');
+					$this->model_tool_image->deleteDirectoryImage( DIR_IMAGE . $this->config->get('user')['default']['image_link'] . $user->getId() );
 					$this->model_tool_cache->deleteObject( $user->getSlug(), $this->config->get('common')['type']['user'] );
 					
 					$this->dm->remove($user);

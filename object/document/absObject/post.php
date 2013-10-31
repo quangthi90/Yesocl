@@ -149,6 +149,7 @@ Abstract Class Post {
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
+		$this->updated = new \DateTime();
 		$this->deleted = false;
 	}
 

@@ -45,12 +45,14 @@ $_['routing']['ProfileEditExperience']			= 'profile/update-experience/{experienc
 $_['routing']['ProfileAddExperience']			= 'profile/add-experience/';
 $_['routing']['ProfileAddSkill']				= 'profile/add-skill/';
 $_['routing']['ProfileRemoveSkill']				= 'profile/remove-skill/{skill_id}';
+$_['routing']['FaceBookConnect']				= 'facebookcnt/';
 
 // Friend
 $_['routing']['FriendPage']						= 'friend/{user_slug}/';
 $_['routing']['RequestPage']					= 'friend/request/';
 $_['routing']['MakeFriend']						= 'friend/request/{user_slug}/';
 $_['routing']['ConfirmFriend']					= 'friend/confirm/{user_slug}/';
+$_['routing']['UnFriend']						= 'friend/remove/{user_slug}/';
 $_['routing']['IgnoreFriend']					= 'friend/ignore/{user_slug}/';
 
 //Upload

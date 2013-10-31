@@ -45,12 +45,14 @@ $_['route']['ProfileEditExperience']		= 'account/profiles/experience/edit/';
 $_['route']['ProfileAddExperience']			= 'account/profiles/experience/add/';
 $_['route']['ProfileAddSkill']				= 'account/profiles/skill/add/';
 $_['route']['ProfileRemoveSkill']			= 'account/profiles/skill/remove/';
+$_['route']['FaceBookConnect']				= 'account/login/facebookConnect';
 
 // Friend
 $_['route']['FriendPage']					= 'friend/friend';
 $_['route']['RequestPage']					= 'friend/request';
 $_['route']['MakeFriend']					= 'friend/request/makeFriend';
 $_['route']['ConfirmFriend']				= 'friend/request/confirm';
+$_['route']['UnFriend']						= 'friend/request/unFriend';
 $_['route']['IgnoreFriend']					= 'friend/request/ignore';
 
 // Upload

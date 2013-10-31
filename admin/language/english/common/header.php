@@ -14,6 +14,7 @@ $_['text_user_manage']             		= 'User Manage';
 $_['text_admin']                        = 'Admin Account';
 $_['text_admin_group']             		= 'Admin Group';
 $_['text_admin_manage']            		= 'Admin Manage';
+$_['text_social_network']            	= 'Social Network';
 
 // Company
 $_['text_companies']                    = 'Companies';
