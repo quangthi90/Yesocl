@@ -27,12 +27,4 @@
 {% block javascript %}
 {{ block('post_common_post_comment_javascript') }}
 <script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/jquery.hoverdir.js') }}"></script>
-<script type="text/javascript">
-    $(function() {
-        $('.feed-block .feed').each( function() {
-            $(this).hoverdir(); 
-        });
-    });
-</script>
 {% endblock %}
