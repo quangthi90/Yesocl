@@ -8,6 +8,7 @@
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
 		this.$experience = $el.find('#profiles-tabs-background-experience');
+		this.$skill = $el.find('#profiles-tabs-background-skill');
 		
 		this.$header = this.$background.find('.profiles-tabs-header');
 
@@ -31,6 +32,12 @@
 		this.$experience.outerWidth(contentWidth);
 		experience_main_body.outerHeight(contentHeight - this.$header.height() - 30);
 		experience_main_body.niceScroll();
+
+		// Skill
+		var skill_main_body = this.$skill.find('.profiles-tabs-main-body');
+		this.$skill.outerWidth(contentWidth);
+		skill_main_body.outerHeight(contentHeight - this.$header.height() - 30);
+		skill_main_body.niceScroll();
 
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
