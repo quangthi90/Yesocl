@@ -48,4 +48,7 @@ $_['error_education_started_ended']		= 'Start time must be before End time!';
 $_['error_education_degree']			= 'Degree is empty!';
 $_['error_education_school']			= 'School is empty!';
 $_['error_education_fieldofstudy']		= 'Field of Study is empty!';
+
+// Skill
+$_['error_skill']				= 'Skill is empty!';
 ?>

@@ -928,3 +928,116 @@
 		});
 	});
 }(jQuery, document));
+
+// Skill
+(function($, document, undefined) {
+	function Skill($el){
+		this.$el 			= $el;
+		this.$formAdd 		= $el.find('.background-skill-form-add');
+		
+		this.$btnAdd 		= $el.find('.profiles-btn-add');
+		this.$btnSave 		= $el.find('.profiles-btn-save');
+		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
+		this.$btnRemove 	= $el.find('.profiles-btn-remove');
+
+		this.$skill 		= this.$formAdd.find('[name=\"skill\"]');
+
+		this.attachEvents();
+	}
+
+	Skill.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$btnAdd.click(function(){
+			that.$formAdd.removeClass('hidden');
+		});
+
+		this.$btnCancel.click(function(){
+			that.$formAdd.addClass('hidden').find('input').each(function(){
+				$(this).val('');
+			});
+		});
+
+		this.$btnRemove.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			if ( confirm("You sure delete this ?") == false ){
+				return false;
+			}
+
+			that.url = $(this).parents('.skill-item').data('remove');
+
+			that.submit( $(this), 'remove' );
+
+			return false;
+		});
+
+		this.$btnSave.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			that.data = {
+				'skill': that.$skill.val()
+			};
+
+			that.url = that.$formAdd.data('add');
+
+			that.submit( $(this), 'add' );
+
+			return false;
+		});
+	}
+
+	Skill.prototype.submit = function($button, method){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				if ( method == 'remove' ){
+					$button.parents('.skill-item').remove();
+				}else if ( method == 'add' ){
+					that.$btnCancel.trigger('click');
+
+					var $item = $.tmpl($('#background-skill-item'), data);
+
+					that.$formAdd.parent().append($item);
+
+					$('.skill-label').each(function(){
+						new Skill( $(this) );
+					});
+				}
+			}
+		});
+	}
+
+	Skill.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
+
+	$(function(){
+		$('.skill-label').each(function(){
+			new Skill( $(this) );
+		});
+	});
+}(jQuery, document));

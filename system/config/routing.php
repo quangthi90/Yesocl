@@ -43,6 +43,8 @@ $_['routing']['ProfileAddEducation']			= 'profile/add-education/';
 $_['routing']['ProfileRemoveExperience']		= 'profile/remove-experience/{experience_id}/';
 $_['routing']['ProfileEditExperience']			= 'profile/update-experience/{experience_id}/';
 $_['routing']['ProfileAddExperience']			= 'profile/add-experience/';
+$_['routing']['ProfileAddSkill']				= 'profile/add-skill/';
+$_['routing']['ProfileRemoveSkill']				= 'profile/remove-skill/{skill_id}';
 
 // Friend
 $_['routing']['FriendPage']						= 'friend/{user_slug}/';

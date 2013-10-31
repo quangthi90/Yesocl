@@ -1,13 +1,8 @@
 <?php
-use Document\User\User,
-	Document\User\Meta,
-	Document\User\Meta\Email,
-	Document\User\Meta\Location,
+use Document\User\Meta\Location,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
-	Document\User\Meta\Phone,
-	Document\User\Meta\Skill,
-	Document\User\Meta\Background;
+	Document\User\Meta\Skill;
 
 class ModelUserBackground extends Model {
 
@@ -250,6 +245,46 @@ class ModelUserBackground extends Model {
 		$this->dm->flush();
 
 		return $experience->getId();
+	}
+
+	public function addSkill( $user_id, $data = array() ) {
+		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+
+		if ( !$user ) {
+			return false;
+		}
+
+		if ( !isset( $data['skill'] ) || empty( $data['skill'] ) ) {
+			return false;
+		}
+
+		$skill = new Skill();
+		$skill->setSkill( $data['skill'] );
+
+		$this->dm->persist( $skill );
+		$user->getMeta()->getBackground()->addSkill( $skill );
+
+		$this->dm->flush();
+
+		return $skill->getId();
+	}
+
+	public function removeSkill( $user_id, $id ) {
+		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+
+		if ( !$user ) {
+			return false;
+		}
+
+		$skill = $user->getMeta()->getBackground()->getSkillById( $id );
+
+		if ( $skill ){
+			$user->getMeta()->getBackground()->getSkills()->removeElement( $skill );
+		}
+
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>

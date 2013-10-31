@@ -34,15 +34,17 @@ $_['route']['AjaxLogin']					= 'account/login/login';
 $_['route']['AjaxRegister']					= 'account/register/register';
 
 // Profile
-$_['route']['ProfilePage']					= 'account/profile';
-$_['route']['ProfileEditInfo']				= 'account/profiles/information/update';
-$_['route']['ProfileEditSummary']			= 'account/profiles/summary/update';
-$_['route']['ProfileRemoveEducation']		= 'account/profiles/education/remove';
-$_['route']['ProfileEditEducation']			= 'account/profiles/education/edit';
-$_['route']['ProfileAddEducation']			= 'account/profiles/education/add';
-$_['route']['ProfileRemoveExperience']		= 'account/profiles/experience/remove';
-$_['route']['ProfileEditExperience']		= 'account/profiles/experience/edit';
-$_['route']['ProfileAddExperience']			= 'account/profiles/experience/add';
+$_['route']['ProfilePage']					= 'account/profile/';
+$_['route']['ProfileEditInfo']				= 'account/profiles/information/update/';
+$_['route']['ProfileEditSummary']			= 'account/profiles/summary/update/';
+$_['route']['ProfileRemoveEducation']		= 'account/profiles/education/remove/';
+$_['route']['ProfileEditEducation']			= 'account/profiles/education/edit/';
+$_['route']['ProfileAddEducation']			= 'account/profiles/education/add/';
+$_['route']['ProfileRemoveExperience']		= 'account/profiles/experience/remove/';
+$_['route']['ProfileEditExperience']		= 'account/profiles/experience/edit/';
+$_['route']['ProfileAddExperience']			= 'account/profiles/experience/add/';
+$_['route']['ProfileAddSkill']				= 'account/profiles/skill/add/';
+$_['route']['ProfileRemoveSkill']			= 'account/profiles/skill/remove/';
 
 // Friend
 $_['route']['FriendPage']					= 'friend/friend';

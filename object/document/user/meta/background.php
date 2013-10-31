@@ -52,6 +52,16 @@ Class Background {
     	return null;
     }
 
+    public function getSkillById( $id ){
+    	foreach ( $this->skills as $skill ) {
+    		if ( $skill->getId() == $id ){
+    			return $skill;
+    		}
+    	}
+
+    	return null;
+    }
+
 	public function getId(){
 		return $this->id;
 	}

@@ -25,9 +25,6 @@
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.format.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
-<script id="background-skill-item" type="text/x-jquery-tmpl">
-    <div class="profiles-tabs-item2 btn" data-id="${ id }" data-remove="${ remove }">${ skill }<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
-</script>
 <script type="text/javascript">
 	function addScroll(warper, column, width, height) {
 		$(warper).outerWidth(width);

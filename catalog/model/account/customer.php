@@ -103,10 +103,6 @@ class ModelAccountCustomer extends Model {
 			}
 		}*/
 	}
-	
-	public function editCustomer($data) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET firstname = '" . $this->db->escape($data['firstname']) . "', lastname = '" . $this->db->escape($data['lastname']) . "', email = '" . $this->db->escape($data['email']) . "', telephone = '" . $this->db->escape($data['telephone']) . "', fax = '" . $this->db->escape($data['fax']) . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
-	}
 
 	public function editPassword($email, $password) {
 		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
@@ -125,10 +121,6 @@ class ModelAccountCustomer extends Model {
 		$this->dm->flush();
 
 		return true;
-	}
-
-	public function editNewsletter($newsletter) {
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET newsletter = '" . (int)$newsletter . "' WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 	}
 					
 	public function getCustomer($user_id) {
@@ -157,159 +149,12 @@ class ModelAccountCustomer extends Model {
 		return $query;
 	}
 		
-	public function getCustomerByToken($token) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customer WHERE token = '" . $this->db->escape($token) . "' AND token != ''");
-		
-		$this->db->query("UPDATE " . DB_PREFIX . "customer SET token = ''");
-		
-		return $query->row;
-	}
-		
-	public function getCustomers($data = array()) {
-		$sql = "SELECT *, CONCAT(c.firstname, ' ', c.lastname) AS name, cg.name AS customer_group FROM " . DB_PREFIX . "customer c LEFT JOIN " . DB_PREFIX . "customer_group cg ON (c.customer_group_id = cg.customer_group_id) ";
-
-		$implode = array();
-		
-		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
-			$implode[] = "LCASE(CONCAT(c.firstname, ' ', c.lastname)) LIKE '" . $this->db->escape(utf8_strtolower($data['filter_name'])) . "%'";
-		}
-		
-		if (isset($data['filter_email']) && !is_null($data['filter_email'])) {
-			$implode[] = "c.email = '" . $this->db->escape($data['filter_email']) . "'";
-		}
-		
-		if (isset($data['filter_customer_group_id']) && !is_null($data['filter_customer_group_id'])) {
-			$implode[] = "cg.customer_group_id = '" . $this->db->escape($data['filter_customer_group_id']) . "'";
-		}	
-		
-		if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-			$implode[] = "c.status = '" . (int)$data['filter_status'] . "'";
-		}	
-		
-		if (isset($data['filter_approved']) && !is_null($data['filter_approved'])) {
-			$implode[] = "c.approved = '" . (int)$data['filter_approved'] . "'";
-		}	
-			
-		if (isset($data['filter_ip']) && !is_null($data['filter_ip'])) {
-			$implode[] = "c.customer_id IN (SELECT customer_id FROM " . DB_PREFIX . "customer_ip WHERE ip = '" . $this->db->escape($data['filter_ip']) . "')";
-		}	
-				
-		if (isset($data['filter_date_added']) && !is_null($data['filter_date_added'])) {
-			$implode[] = "DATE(c.date_added) = DATE('" . $this->db->escape($data['filter_date_added']) . "')";
-		}
-		
-		if ($implode) {
-			$sql .= " WHERE " . implode(" AND ", $implode);
-		}
-		
-		$sort_data = array(
-			'name',
-			'c.email',
-			'customer_group',
-			'c.status',
-			'c.ip',
-			'c.date_added'
-		);	
-			
-		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
-			$sql .= " ORDER BY " . $data['sort'];	
-		} else {
-			$sql .= " ORDER BY name";	
-		}
-			
-		if (isset($data['order']) && ($data['order'] == 'DESC')) {
-			$sql .= " DESC";
-		} else {
-			$sql .= " ASC";
-		}
-		
-		if (isset($data['start']) || isset($data['limit'])) {
-			if ($data['start'] < 0) {
-				$data['start'] = 0;
-			}			
-
-			if ($data['limit'] < 1) {
-				$data['limit'] = 20;
-			}	
-			
-			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
-		}		
-		
-		$query = $this->db->query($sql);
-		
-		return $query->rows;	
-	}
-		
 	public function getTotalCustomersByEmail($email) {
 		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
 			'emails.email' => $email
 		));
 
 		return $query->count();
-	}
-	
-	public function getIps($customer_id) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip` WHERE customer_id = '" . (int)$customer_id . "'");
-		
-		return $query->rows;
-	}	
-	
-	public function isBlacklisted($ip) {
-		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "customer_ip_blacklist` WHERE ip = '" . $this->db->escape($ip) . "'");
-		
-		return $query->num_rows;
-	}
-
-	public function addSkill( $data = array() ) {
-		if ( $this->customer->isLogged() ) {
-			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
-
-			if ( !$customer ) {
-				return false;
-			}
-
-			if ( !isset( $data['skill'] ) || empty( $data['skill'] ) ) {
-				return false;
-			}
-
-			$skill = new Skill();
-			$skill->setSkill( $data['skill'] );
-
-			$this->dm->persist( $skill );
-			$customer->getMeta()->getBackground()->addSkill( $skill );
-
-			$this->dm->flush();
-
-			return $skill;
-		}else {
-			return false;
-		}
-	}
-
-	public function removeSkill( $data = array() ) {
-		if ( $this->customer->isLogged() ) {
-			$customer = $this->dm->getRepository('Document\User\User')->find( $this->customer->getId() );
-
-			if ( !$customer ) {
-				return false;
-			}
-
-			if ( !isset( $data['id'] ) || empty( $data['id'] ) ) {
-				return false;
-			}
-
-			foreach ($customer->getMeta()->getBackground()->getSkills() as $skill) {
-				if ( $skill->getId() == $data['id'] ) {
-					$customer->getMeta()->getBackground()->getSkills()->removeElement( $skill );
-				}
-			}
-		}else {
-			return false;
-		}
-
-		$this->dm->flush();
-
-		return true;
 	}
 
 	public function editAvatar($data) {
