@@ -54,7 +54,7 @@
 	};
 		
 	FriendAction.prototype.triggerProgress = function($el, promise){
-		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
 		var $old_icon = $el.find('i');
 		var f        = function() {
 			$spinner.remove();

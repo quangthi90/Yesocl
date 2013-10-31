@@ -122,7 +122,7 @@
     }
     
     UserListViewer.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('d');
         var f        = function() {
             $spinner.remove();
@@ -195,7 +195,7 @@
         });		
     };		
     LikePostBtn.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
@@ -267,7 +267,7 @@
     };
 		
     LikeCommentBtn.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f        = function() {
             $spinner.remove();
             $el.removeClass('disabled');
@@ -350,7 +350,7 @@
                 }     
             });
         }else{
-            var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+            var $spinner = $('<i class="icon-spinner icon-spin"></i>');
             var $old_icon = that.$el.find('i');
             var f        = function() {
                 $spinner.remove();
@@ -386,7 +386,7 @@
     };
     CommentBtn.prototype.triggerProgress = function($el, promise)
     {
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
@@ -526,7 +526,7 @@
     };
     CommentForm.prototype.triggerProgress = function($el, promise)
     {
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f = function() {
             $el.removeClass('disabled');
             $spinner.remove();
@@ -565,7 +565,7 @@
                     data: data,
                     dataType: 'json',
                     progress: function () {
-                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-refresh"></i>Loading...</span>');
+                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-spinner"></i>Loading...</span>');
                     },
                     success: function (data) {
                         if(data.success == 'ok') {
