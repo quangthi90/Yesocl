@@ -1397,7 +1397,6 @@ a.btn-notification:hover .notification-item-name > i {
   float: left;
   margin-right: 15px;
   min-width: 350px;
-  max-width: 350px;
   overflow: hidden;
 }
 .column:last-child{
