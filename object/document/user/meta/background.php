@@ -42,6 +42,16 @@ Class Background {
     	return null;
     }
 
+    public function getExperienceById( $id ){
+    	foreach ( $this->experiences as $experience ) {
+    		if ( $experience->getId() == $id ){
+    			return $experience;
+    		}
+    	}
+
+    	return null;
+    }
+
 	public function getId(){
 		return $this->id;
 	}

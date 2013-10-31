@@ -40,6 +40,9 @@ $_['route']['ProfileEditSummary']			= 'account/profiles/summary/update';
 $_['route']['ProfileRemoveEducation']		= 'account/profiles/education/remove';
 $_['route']['ProfileEditEducation']			= 'account/profiles/education/edit';
 $_['route']['ProfileAddEducation']			= 'account/profiles/education/add';
+$_['route']['ProfileRemoveExperience']		= 'account/profiles/experience/remove';
+$_['route']['ProfileEditExperience']		= 'account/profiles/experience/edit';
+$_['route']['ProfileAddExperience']			= 'account/profiles/experience/add';
 
 // Friend
 $_['route']['FriendPage']					= 'friend/friend';

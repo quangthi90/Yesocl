@@ -220,6 +220,10 @@
 			},
 			items: 5,
 			minLength: 1,
+			updater: function (item) {
+				that.$el.find('input[name=\"cityid\"]').val(locations[item].id);
+	    		return item;
+			}
 		});
 
 		this.$industryAutoComplete.typeahead({
@@ -242,6 +246,10 @@
 			},
 			items: 5,
 			minLength: 1,
+			updater: function (item) {
+				that.$el.find('input[name=\"industryid\"]').val(industries[item].id);
+	    		return item;
+			}
 		});
 	}
 
@@ -458,6 +466,9 @@
 			that.$degree.val( $item.data('degree') );
 			that.$school.val( $item.data('school') );
 			that.$fieldofstudy.val( $item.data('fieldofstudy') );
+			that.$degree_id.val( $item.data('degree-id') );
+			that.$school_id.val( $item.data('school-id') );
+			that.$fieldofstudy_id.val( $item.data('fieldofstudy-id') );
 
 			$item.addClass('hidden');
 			that.$formAdd.removeClass('hidden').removeClass('add-form').data('edit', $item.data('edit'));
@@ -532,6 +543,10 @@
 			},
 			items: 5,
 			minLength: 1,
+			updater: function (item) {
+				that.$degree_id.val(degrees[item].id);
+	    		return item;
+			}
 		});
 
 		this.$school.typeahead({
@@ -558,6 +573,10 @@
 			},
 			items: 5,
 			minLength: 1,
+			updater: function (item) {
+				that.$school_id.val(schools[item].id);
+	    		return item;
+			}
 		});
 
 		this.$fieldofstudy.typeahead({
@@ -584,6 +603,10 @@
 			},
 			items: 5,
 			minLength: 1,
+			updater: function (item) {
+				that.$fieldofstudy_id.val(fieldofstudies[item].id);
+	    		return item;
+			}
 		});
 	}
 
@@ -697,6 +720,7 @@
 		this.$title			= this.$formAdd.find('[name=\"title\"]');
 		this.$company		= this.$formAdd.find('[name=\"company\"]');
 		this.$location		= this.$formAdd.find('[name=\"location\"]');
+		this.$city_id		= this.$formAdd.find('[name=\"city_id\"]');
 
 		this.attachEvents();
 	}
@@ -711,27 +735,52 @@
 		this.$btnCancel.click(function(){
 			that.$formAdd.addClass('hidden').removeClass('add-form').find('input').val('');
 			that.$formAdd.find('select').val('0');
+
+			that.$el.find('.experience-item').removeClass('hidden');
 		});
 
 		this.$btnEdit.click(function(){
 			var $item = $(this).parents('.experience-item');
 
-			that.$formAdd.removeClass('hidden');
-			that.$formAdd.data('edit', $(this).data('edit'));
-
 			that.$strMonth.val( $item.data('startedm') );
 			that.$strYear.val( $item.data('startedy') );
 			that.$endMonth.val( $item.data('endedm') );
 			that.$endYear.val( $item.data('endedy') );
-			that.$title.val( $item.data('startedm') );
-			that.$company.val( $item.data('startedm') );
-			that.$location.val( $item.data('startedm') );
+			that.$title.val( $item.data('title') );
+			that.$company.val( $item.data('company') );
+			that.$location.val( $item.data('location') );
+			that.$city_id.val( $item.data('city-id') );
+
+			$item.addClass('hidden');
+			that.$formAdd.removeClass('hidden').data('edit', $item.data('edit'));
+		});
+
+		this.$btnRemove.click(function(){
+			if ( $(this).hasClass('disabled') ) {
+				return false;
+			}
+
+			if ( confirm("You sure delete this ?") == false ){
+				return false;
+			}
+
+			that.url = $(this).parents('.experience-item').data('remove');
+
+			that.submit( $(this), 'remove' );
+
+			return false;
 		});
 
 		this.$btnSave.click(function(){
-			if ( this.$formAdd.hasClass('add-form') ){
+			if ( $(this).hasClass( 'disabled' ) ) {
+				return false;
+			}
+
+			var method = 'add';
+			if ( that.$formAdd.hasClass('add-form') ){
 				that.url = that.$formAdd.data('add');
 			}else{
+				method = 'edit';
 				that.url = that.$formAdd.data('edit');
 			}
 
@@ -743,11 +792,128 @@
 				'title'				: that.$title.val(),
 				'company'			: that.$company.val(),
 				'location'			: that.$location.val(),
+				'city_id'			: that.$city_id.val()
 			};
 
-			this.submit( $(this) );
+			that.submit( $(this), method );
+
+			return false;
+		});
+
+		this.$location.typeahead({
+			source: function (query, process) {
+				that.$city_id.val('');
+				return $.ajax({
+					type: 'Post',
+					url: that.$location.parent().data('autocomplete') + query,
+					success: function (json) {
+						var parJSON = JSON.parse(json);
+						var suggestions = [];
+						locations = {};
+						$.each(parJSON, function (i, suggestTerm) {
+							locations[suggestTerm.name] = suggestTerm;
+							suggestions.push(suggestTerm.name);
+						});
+						process(suggestions);
+
+						// Note
+						// Fix for screen 14", Fix it
+						that.$location.parent().find('ul.typeahead').css('left', '2317px');
+					},
+				});
+			},
+			items: 5,
+			minLength: 1,
+			updater: function (item) {
+				that.$city_id.val(locations[item].id);
+	    		return item;
+			}
 		});
 	}
+
+	Experience.prototype.submit = function($button, method){
+		var that = this;
+		
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			data: that.data,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if ( data.message == 'success' ) {
+				if ( method == 'remove' ){
+					$button.parents('.experience-item').remove();
+				}else if ( method == 'edit' ){
+					var $item = $.tmpl($('#background-experience-item'), data);
+
+					$('#' + data.id).before($item).remove();
+
+					that.$btnCancel.trigger('click');
+					
+					$('.experience-label').each(function(){
+						new Experience( $(this) );
+					});
+				}else if ( method == 'add' ){
+					that.$btnCancel.trigger('click');
+
+					var $item = $.tmpl($('#background-experience-item'), data);
+
+					that.$formAdd.parent().append($item);
+
+					$('.experience-label').each(function(){
+						new Experience( $(this) );
+					});
+				}
+			}else if ( data.education_started_ended != null ){
+				var $started = that.$formAdd.find('[name=\"started\"]');
+				$started.tooltip('destroy');
+				$started.parent().removeClass('success');
+				$started.parent().addClass('error');
+				$started.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+
+				var $ended = that.$formAdd.find('[name=\"ended\"]');
+				$ended.tooltip('destroy');
+				$ended.parent().removeClass('success');
+				$ended.parent().addClass('error');
+				$ended.tooltip({
+					animation: true,
+					html: false,
+					placement: 'top',
+					selector: true,
+					title: data.education_started_ended,
+					trigger:'hover focus',
+					delay:0,
+					container: false
+				});
+			}
+		});
+	}
+
+	Experience.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+	};
 
 	$(function(){
 		$('.experience-label').each(function(){

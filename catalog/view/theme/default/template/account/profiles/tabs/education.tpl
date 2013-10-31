@@ -49,7 +49,16 @@
 				</div>
 			</div>
 			{% for education in user.educations %}
-			<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" data-ended="{{ education.ended }}" data-degree="{{ education.degree }}" data-school="{{ education.school }}" data-fieldofstudy="{{ education.fieldofstudy }}" data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
+			<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" 
+				data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" 
+				data-ended="{{ education.ended }}" 
+				data-degree="{{ education.degree }}" 
+				data-degree-id="{{ education.degree_id }}" 
+				data-school="{{ education.school }}" 
+				data-school-id="{{ education.school_id }}" 
+				data-fieldofstudy="{{ education.fieldofstudy }}" 
+				data-fieldofstudy-id="{{ education.fieldofstudy_id }}" 
+				data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
 				<div>
 					<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span> to <span class="profiles-tabs-value">{{ education.ended }}</span></div>
 				</div>
@@ -70,7 +79,7 @@
 	</div>
 </div>
 <script id="background-education-item" type="text/x-jquery-tmpl">
-	<div class="profiles-tabs-item1 education-item" id="${ id }" data-edit="${ edit }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-school="${ school }" data-fieldofstudy="${ fieldofstudy }" data-remove="${ remove }">
+	<div class="profiles-tabs-item1 education-item" id="${ id }" data-edit="${ edit }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-degree-id="${ degree_id }" data-school="${ school }" data-school-id="${ school_id }" data-fieldofstudy="${ fieldofstudy }" data-fieldofstudy-id="${ fieldofstudy_id }" data-remove="${ remove }">
 		<div>
 			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started }</span> to <span class="profiles-tabs-value">${ ended }</span></div>
 		</div>

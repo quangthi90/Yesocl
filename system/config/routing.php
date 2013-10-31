@@ -40,6 +40,9 @@ $_['routing']['ProfileEditSummary']				= 'profile/update-summary/';
 $_['routing']['ProfileRemoveEducation']			= 'profile/remove-education/{education_id}/';
 $_['routing']['ProfileEditEducation']			= 'profile/update-education/{education_id}/';
 $_['routing']['ProfileAddEducation']			= 'profile/add-education/';
+$_['routing']['ProfileRemoveExperience']		= 'profile/remove-experience/{experience_id}/';
+$_['routing']['ProfileEditExperience']			= 'profile/update-experience/{experience_id}/';
+$_['routing']['ProfileAddExperience']			= 'profile/add-experience/';
 
 // Friend
 $_['routing']['FriendPage']						= 'friend/{user_slug}/';

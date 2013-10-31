@@ -7,7 +7,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<div class="background-experience-form-add hidden">
+			<div class="background-experience-form-add hidden" data-add="{{ path('ProfileAddExperience') }}">
 				<div class="profiles-tabs-item1-label">
 					From 
 					<select class="span1" name="started_month">
@@ -44,23 +44,34 @@
 							<div class="span4">Company: </div>
 							<input type="text"  name="company" />
 						</div>
-						<div class="row-fluid">
+						<div class="row-fluid" data-autocomplete="{{ path('LocationAutoComplete') }}">
 							<div class="span4">Location: </div>
 							<input type="text" name="location" />
+							<input type="hidden" name="city_id" />
 						</div>
 					</div>
 				</div>
 			</div>
 			{% for experience in user.experiences %}
-			<div class="profiles-tabs-item1 experience-item" data-id="{{ experience.id }}" data-edit="{{ link_edit_experience }}" data-startedm="{{ experience.started_text }}" data-endedm="{{ experience.ended_text }}" data-startedy="{{ experience.started_year }}" data-endedy="{{ experience.ended_year }}" data-startedm="{{ experience.started_month }}" data-endedm="{{ experience.ended_month }}" data-title="{{ experience.title }}" data-company="{{ experience.company }}" data-location="{{ experience.location }}" data-remove="{{ link_remove_experience }}">
+			<div class="profiles-tabs-item1 experience-item" id="{{ experience.id }}" 
+				data-edit="{{ path('ProfileEditExperience', {experience_id: experience.id}) }}" 
+				data-startedm="{{ experience.started_text }}" 
+				data-endedm="{{ experience.ended_text }}" 
+				data-startedy="{{ experience.started_year }}" 
+				data-endedy="{{ experience.ended_year }}" 
+				data-startedm="{{ experience.started_month }}" 
+				data-endedm="{{ experience.ended_month }}" 
+				data-title="{{ experience.title }}" 
+				data-company="{{ experience.company }}" 
+				data-location="{{ experience.location }}" 
+				data-remove="{{ path('ProfileRemoveExperience', {experience_id: experience.id}) }}" 
+				data-city-id="{{ experience.city_id }}">
 				<div>
 					<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ experience.started_text }}</span> to <span class="profiles-tabs-value">{{ experience.ended_text }}</span></div>
 				</div>
 				<div class="profiles-tabs-item1-content">
 					<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove  profiles-btn-remove"><i class="icon-trash"></i></a>
 					<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="profiles-tabs-value">
 						<div class="profiles-tabs-value-item">{{ experience.title }}</div>
 						<div class="profiles-tabs-value-item">{{ experience.company }}</div>
@@ -72,6 +83,22 @@
 		</div>
 	</div>
 </div>
+<script id="background-experience-item" type="text/x-jquery-tmpl">
+	<div class="profiles-tabs-item1 experience-item" id="${ id }" data-edit="${ edit }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-city-id="${ city_id }" data-remove="${ remove }">
+		<div>
+			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started_text }</span> to <span class="profiles-tabs-value">${ ended_text }</span></div>
+		</div>
+		<div class="profiles-tabs-item1-content">
+			<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
+			<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+			<div class="profiles-tabs-value">
+				<div class="profiles-tabs-value-item">${ title }</div>
+				<div class="profiles-tabs-value-item">${ company }</div>
+				<div class="profiles-tabs-value-item viewers">${ location }</div>
+			</div>
+		</div>
+	</div>
+</script>
 {% endblock %}
 
 {% block profiles_tabs_experience_javascript %}

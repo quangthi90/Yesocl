@@ -20,6 +20,9 @@ class ControllerAccountProfilesEducation extends Controller {
 				$json['degree'] = $this->request->post['degree'];
 				$json['school'] = $this->request->post['school'];
 				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
+				$json['degree_id'] = $this->request->post['degree_id'];
+				$json['school_id'] = $this->request->post['school_id'];
+				$json['fieldofstudy_id'] = $this->request->post['fieldofstudy_id'];
 				$json['edit'] = $this->extension->path('ProfileEditEducation', array(
 					'education_id' => $id
 				));
@@ -74,6 +77,9 @@ class ControllerAccountProfilesEducation extends Controller {
 				$json['degree'] = $this->request->post['degree'];
 				$json['school'] = $this->request->post['school'];
 				$json['fieldofstudy'] = $this->request->post['fieldofstudy'];
+				$json['degree_id'] = $this->request->post['degree_id'];
+				$json['school_id'] = $this->request->post['school_id'];
+				$json['fieldofstudy_id'] = $this->request->post['fieldofstudy_id'];
 				$json['edit'] = $this->extension->path('ProfileEditEducation', array(
 					'education_id' => $id
 				));
