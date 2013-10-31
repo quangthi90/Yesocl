@@ -41,6 +41,7 @@ $_['route']['FaceBookConnect']	= 'account/login/facebookConnect';
 $_['route']['FriendPage']		= 'friend/friend';
 $_['route']['RequestPage']		= 'friend/request';
 $_['route']['MakeFriend']		= 'friend/request/makeFriend';
+$_['route']['UnFriend']			= 'friend/request/unFriend';
 $_['route']['ConfirmFriend']	= 'friend/request/confirm';
 $_['route']['IgnoreFriend']		= 'friend/request/ignore';
 

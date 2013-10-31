@@ -15,6 +15,7 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->load->model( 'branch/branch' );
+		$this->load->model( 'friend/friend' );
 		$this->load->model( 'cache/post' );
 		$this->load->model('tool/image');
 
@@ -23,7 +24,9 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['all_posts'] = array();
 
 		$branch_ids = array_keys($branchs);
-		$user_ids = array( $this->customer->getId() );
+		$user_ids = $this->model_friend_friend->getListFriendIds();
+		$user_ids[] = $this->customer->getId();
+
 
 		$posts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
@@ -55,7 +58,11 @@ class ControllerCommonRefresh extends Controller {
 			// $post['avatar'] = $avatar;
 			
 			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
+			if ( $post['type'] == $this->config->get('post')['cache']['branch'] ) {
+				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('post')['cache']['branch'], 'SSL');
+			}elseif ( $post['type'] == $this->config->get('post')['cache']['user'] ) {
+				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('post')['cache']['user'], 'SSL');
+			}
 			$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 			$list_posts[] = $post;

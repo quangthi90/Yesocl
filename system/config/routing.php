@@ -45,6 +45,7 @@ $_['routing']['FaceBookConnect']= 'facebookcnt/';
 $_['routing']['FriendPage']		= 'friend/{user_slug}/';
 $_['routing']['RequestPage']	= 'friend/request/';
 $_['routing']['MakeFriend']		= 'friend/request/{user_slug}/';
+$_['routing']['UnFriend']		= 'friend/remove/{user_slug}/';
 $_['routing']['ConfirmFriend']	= 'friend/confirm/{user_slug}/';
 $_['routing']['IgnoreFriend']	= 'friend/ignore/{user_slug}/';
 
