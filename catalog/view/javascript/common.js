@@ -414,8 +414,8 @@
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
-			var heightPost = Math.floor((heightBlockContent - 2*marginPost)/2);
-			var widthPost = Math.floor(this.widthMain*5/18 - 3*marginPost);
+			var heightPost = (heightBlockContent - 2*marginPost)/2;
+			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
@@ -428,7 +428,7 @@
 				blockFeed.putFeed();	
 				totalWithContent += ($(this).outerWidth() + marginBlock);		
 			});
-			this.root.width(totalWithContent + 2);
+			this.root.width(totalWithContent + 10);
 			this.feeds.each(function() {
 				$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 				var hp = $(this).children('.post_header').first().outerHeight();
@@ -465,8 +465,8 @@
 			this.blocks = this.root.find('.feed-block');		
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
-			var heightPost = Math.floor((heightBlockContent - 2*marginPost)/2);
-			var widthPost = Math.floor(this.widthMain*5/18 - 3*marginPost);
+			var heightPost = (heightBlockContent - 2*marginPost)/2;
+			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
@@ -481,7 +481,7 @@
 				blockFeed.putFeed();	
 				totalWithContent += $(this).outerWidth();	
 			});
-			this.root.width(totalWithContent + 2);
+			this.root.width(totalWithContent + 10);
 			this.feeds.each(function() {
 				$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
 				var hp = $(this).children('.post_header').first().outerHeight();
@@ -502,11 +502,6 @@
 		}
 		else{				
 		}
-		if(this.root.length == 0) { 
-			this.rootContent.attr('data-totalScroll', this.rootContent.width());
-		}else{ 
-			this.rootContent.attr('data-totalScroll', this.root.width());
-		}	
 		this.rootContent.niceScroll();
 	}
 	function BlockFeed(block, heightAverPost, widthAverPost) {
@@ -526,7 +521,7 @@
 			this.blockEle.find('.column-special .feed-container:nth-child(3)').width(this.widthAverPost - 5).css('float', 'left');	
 		}else {
 			var specialColumn = this.blockEle.find('.column-special'); 
-			var heightFirst = Math.floor(this.heightAverPost*4/3);
+			var heightFirst = this.heightAverPost*4/3;
 			var heightLast = this.heightAverPost*2 - heightFirst - 4;
 			specialColumn.each(function(index) {
 				if($(this).children('.feed-container').length ==1)  { 

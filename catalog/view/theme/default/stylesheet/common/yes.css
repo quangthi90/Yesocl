@@ -1775,7 +1775,7 @@ ul.user_actions li:hover i{
   position: fixed;
   right: 0px;
   width: 180px;
-  top: 25px;
+  top: 78px;
   bottom: 75px;
   background-color: #5F5F5F;
   padding: 15px;
@@ -1785,6 +1785,7 @@ ul.user_actions li:hover i{
   background-color: #F0F0F0;
   padding: 3px 0px 3px 10px;
   margin-bottom: 20px;
+  height: 24px;
 }
 .friend-header strong {
   font-size: 20px;
@@ -1798,6 +1799,7 @@ ul.user_actions li:hover i{
 #friend-filter .friend-search {
   position: relative;
   margin-bottom: 20px;
+  height: 30px;
   display: none;
 }
 #friend-filter .friend-search input{
