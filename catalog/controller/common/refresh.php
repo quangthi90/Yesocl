@@ -16,7 +16,8 @@ class ControllerCommonRefresh extends Controller {
 
 		$this->load->model( 'branch/branch' );
 		$this->load->model( 'cache/post' );
-		$this->load->model('tool/image');
+		$this->load->model( 'tool/image' );
+		$this->load->model( 'user/user' );
 
 		$branchs = $this->model_branch_branch->getAllBranchs()->toArray();
 
@@ -30,20 +31,13 @@ class ControllerCommonRefresh extends Controller {
 			'type_ids' => array_merge($branch_ids, $user_ids),
 		));
 		
-		$post_count = count($posts);
-		$count = 1;
+		// ***** Bommer remove
+		/*$post_count = count($posts);
+		$count = 1;*/
 		$list_posts = array();
+		$user_ids = array();
 
 		foreach ($posts as $i => $post) {
-			// avatar
-			/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
-				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
-			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
-                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
-            }else{
-				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
-			}*/
-
 			// thumb
 			if ( isset($post['thumb']) && !empty($post['thumb']) ){
 				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
@@ -52,20 +46,47 @@ class ControllerCommonRefresh extends Controller {
 			}
 
 			$post['image'] = $image;
-			// $post['avatar'] = $avatar;
 			
 			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
 			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
 			$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
-			$list_posts[] = $post;
+			$this->data['posts'][] = $post;
 			
-			if ( $count % 6 == 0 || $count == $post_count ){
-				$this->data['all_posts'][] = $list_posts;
+			// ***** Bommer remove
+			// Disable for update template
+			// Remove this code when approve new template
+			/*if ( $count % 6 == 0 || $count == $post_count ){
+				$this->data['posts'][] = $list_posts;
 				$list_posts = array();
 			}
 
-			$count++;
+			$count++;*/
+
+			$user_id = $post['user_id'];
+
+			if ( in_array($user_id, $user_ids) ){
+				$user_ids[] = $user_id;
+			}
+		}
+
+		$this->data['users'] = array();
+		$users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
+
+		if ( $users ){
+			foreach ( $users as $user ) {
+				$user = $user->formatToCache();
+
+				if ( !empty($user['avatar']) ){
+					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
+				}elseif ( !empty($user['email']) ){
+		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
+		        }else{
+		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
+				}
+
+				$this->data['users'][$user['id']] = $user;
+			}
 		}
 		
 		$this->data['date_format'] = $this->language->get('date_format_full');
