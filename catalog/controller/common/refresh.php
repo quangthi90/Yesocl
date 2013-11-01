@@ -65,7 +65,7 @@ class ControllerCommonRefresh extends Controller {
 
 			$user_id = $post['user_id'];
 
-			if ( in_array($user_id, $user_ids) ){
+			if ( !in_array($user_id, $user_ids) ){
 				$user_ids[] = $user_id;
 			}
 		}
