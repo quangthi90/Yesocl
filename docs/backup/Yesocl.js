@@ -1739,10 +1739,10 @@ db.getCollection("branch_post").insert({
       "deleted": false,
       "email": "quangthi_90@yahoo.com.vn",
       "likerIds": [
-        "518f5555471deea409000000"
+        
       ],
       "status": true,
-      "updated": ISODate("2013-09-01T17:37:54.0Z"),
+      "updated": ISODate("2013-11-03T03:26:07.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
@@ -1781,7 +1781,7 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d1f7471dee840a000003\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Cơ điện lạnh (REE)",
-  "updated": ISODate("2013-09-01T17:37:54.0Z"),
+  "updated": ISODate("2013-11-03T03:26:07.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2273,7 +2273,7 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5217929f471dee3c08000001\/avatar.png",
   "title": "Lăng kính Yestoc phiên 16\/08: “cẩn trọng vùng kháng cự mạnh”",
-  "updated": ISODate("2013-09-03T05:27:14.0Z"),
+  "updated": ISODate("2013-11-03T03:28:36.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2305,7 +2305,7 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179237471deeb408000001\/avatar.jpg",
   "title": "Lăng kính Yestoc tuần 19\/08-23\/08: ” tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510″",
-  "updated": ISODate("2013-08-29T17:35:44.0Z"),
+  "updated": ISODate("2013-11-03T07:25:35.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2505,163 +2505,13 @@ db.getCollection("branch_post").insert({
   "description": "Quan điểm kĩ thuật ngắn hạn: Vnindex hôm nay tiếp tục một phiên tăng điểm mạnh lên vùng kháng cự 492, diễn biến của nhóm cổ phiếu trụ cột vẫn [...]",
   "email": "quangthi_90@yahoo.com.vn",
   "likerIds": [
-    "518f5f43471deeb40900001f",
-    "518f5555471deea409000000"
+    "518f5f43471deeb40900001f"
   ],
   "slug": "lang-kinh-yestoc-phien-0108-cho-mua-tai-muc-ho-tro-manh-52179345471deefc0b000000",
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179345471deefc0b000001\/avatar.jpg",
   "title": "Lăng kính Yestoc phiên 01\/08: “Chờ mua tại mức hỗ trợ mạnh”",
-  "updated": ISODate("2013-09-29T17:06:48.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
-  "_id": ObjectId("521792d9471deeb408000003"),
-  "author": "user1",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3ceced874596804000000"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("521e0893471dee8c09000000"),
-      "author": "user1",
-      "content": "1111111111111111",
-      "created": ISODate("2013-08-28T14:26:27.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-02T10:20:38.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0d36471dee5c09000000"),
-      "content": "2222222222222",
-      "status": true,
-      "created": ISODate("2013-08-28T14:46:14.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("521e0db9471dee5c09000001"),
-      "author": "user1",
-      "content": "3333333333",
-      "created": ISODate("2013-08-28T14:48:25.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T06:27:09.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0f9f471dee5c09000002"),
-      "author": "user1",
-      "content": "444444444444",
-      "created": ISODate("2013-08-28T14:56:31.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T06:26:57.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0fd1471dee5c09000003"),
-      "content": "55555555555555",
-      "status": true,
-      "created": ISODate("2013-08-28T14:57:21.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("521e1012471dee5c09000004"),
-      "author": "user1",
-      "content": "6666666666666",
-      "created": ISODate("2013-08-28T14:58:26.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T06:26:49.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5222d7f7471dee0c0a000000"),
-      "content": "777777777777",
-      "status": true,
-      "created": ISODate("2013-09-01T06:00:23.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước :&lt;\/strong&gt; …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều, &amp;nbsp;cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tThanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-  "created": ISODate("2013-08-23T16:50:33.0Z"),
-  "deleted": false,
-  "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5f43471deeb40900001f",
-    "518f5555471deea409000000"
-  ],
-  "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
-  "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
-  "updated": ISODate("2013-10-25T13:19:26.0Z"),
+  "updated": ISODate("2013-11-03T03:30:31.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2738,85 +2588,6 @@ db.getCollection("branch_post").insert({
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
   "updated": ISODate("2013-08-29T17:51:48.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
-  "_id": ObjectId("52179310471deec003000001"),
-  "author": "user1",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3ceced874596804000000"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("52486249471dee740b000000"),
-      "author": "user1",
-      "content": "1. abc",
-      "created": ISODate("2013-09-29T17:24:25.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-09-29T17:24:25.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("524862b7471dee740b000002"),
-      "author": "user1",
-      "content": "2. abc",
-      "created": ISODate("2013-09-29T17:26:15.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-09-29T17:26:15.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("524862c3471dee740b000003"),
-      "author": "user1",
-      "content": "3. abc",
-      "created": ISODate("2013-09-29T17:26:27.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-09-29T17:26:27.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-  "created": ISODate("2013-08-23T16:51:28.0Z"),
-  "deleted": false,
-  "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5f43471deeb40900001f"
-  ],
-  "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
-  "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
-  "updated": ISODate("2013-10-13T06:39:25.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -3150,6 +2921,39 @@ db.getCollection("branch_post").insert({
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       }
+    },
+    {
+      "_id": ObjectId("5275b41d471dee980b000000"),
+      "author": "Quang Thi",
+      "content": "Vẫn còn kiếm được tiền tại thị trường Việt Nam là nhận định mới nhất của ông Andy Ho, Giám đốc điều hành Quỹ đầu tư VinaCapital dựa trên các diễn biến của nền kinh tế và tình hình đầu tư của VinaCapital.\nĐứng trước rất nhiều những khó khăn từ biến động và suy thoái của nền kinh tế toàn cầu, sau một thời gian ngắn, nền kinh tế của Việt Nam từng bước phục hồi và duy trì sự ổn định của đồng tiền. Sự ổn định này khiến các nhà đầu tư nước ngoài đánh giá Việt Nam vẫn là thị trường tiềm năng và chiến lược hoạt động của VinaCapital là tiếp tục đầu tư vào tài sản có giá trị tiềm năng tăng trưởng, kết hợp thoái vốn ở các tài sản có giá trị cao trong danh mục với mức giá cao hơn so với thị trường và tăng cường thực hiện các thương vụ M&amp;A.",
+      "created": ISODate("2013-11-03T02:25:33.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-11-03T02:25:48.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5275b4bd471dee900b00000f"),
+      "author": "Quang Thi",
+      "content": "Vẫn còn kiếm được tiền tại thị trường Việt Nam là nhận định mới nhất của ông Andy Ho, Giám đốc điều hành Quỹ đầu tư VinaCapital dựa trên các diễn biến của nền kinh tế và tình hình đầu tư của VinaCapital.\nĐứng trước rất nhiều những khó khăn từ biến động và suy thoái của nền kinh tế toàn cầu, sau một thời gian ngắn, nền kinh tế của Việt Nam từng bước phục hồi và duy trì sự ổn định của đồng tiền. Sự ổn định này khiến các nhà đầu tư nước ngoài đánh giá Việt Nam vẫn là thị trường tiềm năng và chiến lược hoạt động của VinaCapital là tiếp tục đầu tư vào tài sản có giá trị tiềm năng tăng trưởng, kết hợp thoái vốn ở các tài sản có giá trị cao trong danh mục với mức giá cao hơn so với thị trường và tăng cường thực hiện các thương vụ M&amp;A.\n",
+      "created": ISODate("2013-11-03T02:28:13.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-03T02:28:13.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng điểm, tuy nhiên khối lượng giao dịch chỉ đạt 10 triệu cp, sụt giảm mạnh so với phiên trước cho thấy mức độ tin cậy của mẫu hình khá thấp. &amp;nbsp;Trong ngắn hạn, chúng tôi vẫn duy trì quan điểm xu hướng giảm và các chỉ số sẽ gặp áp lực bán mạnh khi tiếp cận ngưỡng kháng cự trong các phiên tới. Vùng kháng cự hiện tại tập trung ở vùng giá 490-492 của chỉ số VNIndex và 61.7-62 của chỉ số HNXIndex. Do đó, nhà đầu tư cần thận trọng với quyết định giải ngân trong giai đoạn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tTiếp tục ưu tiên chiến lược hạ tỉ trọng cổ phiếu khi thị trường xuất hiện nhịp tăng ngắn hạn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mở vị thế mua trong giai đoạn này đến khi chúng tôi đưa ra điểm mua mới.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
@@ -3164,7 +2968,295 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179382471deeb408000005\/avatar.jpg",
   "title": "Lăng kính Yestoc phiên 31\/07: ” Thị trường tiệm cận ngưỡng kháng cự mạnh”",
-  "updated": ISODate("2013-10-16T18:31:22.0Z"),
+  "updated": ISODate("2013-11-03T02:28:13.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179310471deec003000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("52486249471dee740b000000"),
+      "author": "user1",
+      "content": "1. abc",
+      "created": ISODate("2013-09-29T17:24:25.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-09-29T17:24:25.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524862b7471dee740b000002"),
+      "author": "user1",
+      "content": "2. abc",
+      "created": ISODate("2013-09-29T17:26:15.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-09-29T17:26:15.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524862c3471dee740b000003"),
+      "author": "user1",
+      "content": "3. abc",
+      "created": ISODate("2013-09-29T17:26:27.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-09-29T17:26:27.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5275fb80471dee7809000000"),
+      "author": "Quang Thi",
+      "content": "4. abc",
+      "created": ISODate("2013-11-03T07:30:08.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-03T07:30:08.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5275fb87471dee7809000001"),
+      "author": "Quang Thi",
+      "content": "5. abc",
+      "created": ISODate("2013-11-03T07:30:15.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-03T07:30:15.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:51:28.0Z"),
+  "deleted": false,
+  "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f",
+    "518f5555471deea409000000"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
+  "updated": ISODate("2013-11-03T07:30:15.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("521792d9471deeb408000003"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521e0893471dee8c09000000"),
+      "author": "user1",
+      "content": "1111111111111111",
+      "created": ISODate("2013-08-28T14:26:27.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-02T10:20:38.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0d36471dee5c09000000"),
+      "content": "2222222222222",
+      "status": true,
+      "created": ISODate("2013-08-28T14:46:14.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521e0db9471dee5c09000001"),
+      "author": "user1",
+      "content": "3333333333",
+      "created": ISODate("2013-08-28T14:48:25.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:27:09.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0f9f471dee5c09000002"),
+      "author": "user1",
+      "content": "444444444444",
+      "created": ISODate("2013-08-28T14:56:31.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:26:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0fd1471dee5c09000003"),
+      "content": "55555555555555",
+      "status": true,
+      "created": ISODate("2013-08-28T14:57:21.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521e1012471dee5c09000004"),
+      "author": "user1",
+      "content": "6666666666666",
+      "created": ISODate("2013-08-28T14:58:26.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T06:26:49.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5222d7f7471dee0c0a000000"),
+      "content": "777777777777",
+      "status": true,
+      "created": ISODate("2013-09-01T06:00:23.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("527b6d8d471dee780b000000"),
+      "author": "Quang Thi",
+      "content": "fdsafajdslkf jadslfjl ajdsfkljsdakljfklas jklfjsdaktjfklsadjmc[f jtskdajfkldaj,fsdklaj fldaf sdafdsa",
+      "created": ISODate("2013-11-07T10:38:05.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-07T10:38:06.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527b6dc5471dee780b000001"),
+      "author": "Quang Thi",
+      "content": "\n\nReview quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch  thấp. Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.\n\nQuan điểm kĩ thuật ngắn hạn:\n\nChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều,  cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.\n\nQuan điểm kĩ thuật trung hạn:\n\nĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.\n\nChiến lược giao dịch ngắn hạn:\n\n    Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.\n    Thanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.\n\n",
+      "created": ISODate("2013-11-07T10:39:01.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-07T10:39:01.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước :&lt;\/strong&gt; …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều, &amp;nbsp;cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tThanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:50:33.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
+  "updated": ISODate("2013-11-07T10:39:01.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -3175,7 +3267,7 @@ db.getCollection("branch_post").insert({
 /** cache_post records **/
 db.getCollection("cache_post").insert({
   "_id": ObjectId("521a02c7471deed409000004"),
-  "created": ISODate("2013-10-05T08:57:45.0Z"),
+  "created": ISODate("2013-11-03T02:28:13.0Z"),
   "postId": "52179382471deeb408000005",
   "type": "Branch",
   "typeId": "51d39ba5d87459c40a000017",
@@ -3223,7 +3315,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("521e0893471dee8c09000001"),
-  "created": ISODate("2013-09-01T06:00:23.0Z"),
+  "created": ISODate("2013-11-07T10:39:01.0Z"),
   "view": NumberInt(0),
   "postId": "521792d9471deeb408000003",
   "type": "Branch",
@@ -3255,7 +3347,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("52486249471dee740b000001"),
-  "created": ISODate("2013-09-29T17:26:27.0Z"),
+  "created": ISODate("2013-11-03T07:30:15.0Z"),
   "view": NumberInt(0),
   "postId": "52179310471deec003000001",
   "type": "Branch",
@@ -3287,7 +3379,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("526bec37471dee000b000003"),
-  "created": ISODate("2013-10-26T16:30:00.0Z"),
+  "created": ISODate("2013-10-31T01:45:57.0Z"),
   "view": NumberInt(0),
   "postId": "526bec37471dee000b000002",
   "type": "User",
@@ -3316,6 +3408,38 @@ db.getCollection("cache_post").insert({
   "postId": "5270c6c3471dee1809000001",
   "type": "User",
   "typeId": "525bd847471deea808000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5271b613471deedc0a000002"),
+  "created": ISODate("2013-10-31T01:44:51.0Z"),
+  "view": NumberInt(0),
+  "postId": "5271b613471deedc0a000001",
+  "type": "User",
+  "typeId": "525bd847471deea808000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5271b632471deeec0a000002"),
+  "created": ISODate("2013-10-31T01:45:21.0Z"),
+  "view": NumberInt(0),
+  "postId": "5271b631471deeec0a000001",
+  "type": "User",
+  "typeId": "525bd847471deea808000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5275af3e471dee940b000007"),
+  "created": ISODate("2013-11-03T08:33:37.0Z"),
+  "view": NumberInt(0),
+  "postId": "5275af3e471dee940b000006",
+  "type": "User",
+  "typeId": "525bd847471deea808000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5275c321471dee940b00000a"),
+  "created": ISODate("2013-11-03T03:29:37.0Z"),
+  "view": NumberInt(0),
+  "postId": "5275b15f471dee900b00000e",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
 });
 
 /** city records **/
@@ -4914,12 +5038,12 @@ db.getCollection("street").insert({
 
 /** user records **/
 db.getCollection("user").insert({
-  "_id": ObjectId("526f80f1471deec40b000000"),
-  "avatar": "data\/catalog\/user\/526f80f1471deec40b000000\/avatar.jpg",
-  "created": ISODate("2013-10-29T09:33:37.0Z"),
+  "_id": ObjectId("5275acb1471dee900b000000"),
+  "avatar": "data\/catalog\/user\/5275acb1471dee900b000000\/avatar.jpg",
+  "created": ISODate("2013-11-03T01:53:53.0Z"),
   "emails": [
     {
-      "_id": ObjectId("526f80f1471deec40b000002"),
+      "_id": ObjectId("5275acf8471dee900b000004"),
       "email": "thanhhuong_2704@yahoo.com.vn",
       "primary": true
     }
@@ -4930,15 +5054,24 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("526f80f1471deec40b000001"),
+    "_id": ObjectId("5275acb1471dee900b000001"),
+    "address": "rhdftjfyfjtdr",
+    "birthday": ISODate("2013-11-03T01:55:04.0Z"),
     "firstname": "Thanh",
+    "industry": "Chemicals",
+    "industry_id": "514b0970913db4ac08000020",
     "lastname": "Hương",
+    "location": {
+      "_id": ObjectId("5275acf8471dee900b000003"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
+    },
     "sex": NumberInt(0)
   },
   "refreshIds": [
     
   ],
-  "salt": "503038c9d",
+  "salt": "64b7cc107",
   "slug": "user-temp-5",
   "status": true,
   "username": "thanh.huong.50"
@@ -5002,14 +5135,7 @@ db.getCollection("user").insert({
     
   ],
   "friends": [
-    {
-      "_id": ObjectId("5268091d471dee5408000000"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
+    
   ],
   "groupUser": {
     "$ref": "user_group",
@@ -5046,14 +5172,7 @@ db.getCollection("user").insert({
     "518f5f43471deeb40900001f"
   ],
   "friends": [
-    {
-      "_id": ObjectId("5268092a471dee5408000002"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
+    
   ],
   "groupUser": {
     "$ref": "user_group",
@@ -5355,22 +5474,6 @@ db.getCollection("user").insert({
       }
     },
     {
-      "_id": ObjectId("5268091d471dee5408000001"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("525ed8ee471dee580b000005"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5268092a471dee5408000003"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("52601121471dee680b000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
       "_id": ObjectId("52680940471dee7807000003"),
       "user": {
         "$ref": "user",
@@ -5393,17 +5496,17 @@ db.getCollection("user").insert({
       "educations": [
         {
           "_id": ObjectId("526808b4471dee880b000008"),
-          "school": "Vietnam National University - Ho Chi Minh City",
-          "school_id": "",
-          "started": "2008",
-          "ended": "2012",
           "degree": "Master Of Technology",
-          "degree_id": "",
+          "degree_id": "514af917913db48c05000018",
+          "description": "",
+          "ended": "2012",
           "fieldOfStudy": "Information Technology",
-          "fieldOfStudy_id": "",
+          "fieldOfStudy_id": "514af970913db48c0500001a",
           "grace": "",
+          "school": "Vietnam National University - Ha Noi",
+          "school_id": "514af88b913db48c05000016",
           "societies": "",
-          "description": ""
+          "started": "2008"
         },
         {
           "_id": ObjectId("526808b4471dee880b000009"),
@@ -5418,12 +5521,50 @@ db.getCollection("user").insert({
           "grace": "",
           "societies": "",
           "description": ""
+        },
+        {
+          "_id": ObjectId("52714011471dee6c0b000000"),
+          "school": "University of Economics Ho Chi Minh City",
+          "started": "2013",
+          "ended": "2007",
+          "degree": "Bachelor Of Engineering",
+          "fieldOfStudy": "Information Technology"
+        },
+        {
+          "_id": ObjectId("5275ada8471dee940b000000"),
+          "school": "Vietnam National University - Ho Chi Minh City",
+          "school_id": "514af827913db48c05000014",
+          "started": "2013",
+          "ended": "2013",
+          "degree": "Master Of Library &amp; Information Science",
+          "degree_id": "514af8f4913db48c05000017",
+          "fieldOfStudy": "Information Technology",
+          "fieldOfStudy_id": "514af970913db48c0500001a"
+        }
+      ],
+      "experiences": [
+        {
+          "_id": ObjectId("52722521471dee600a000000"),
+          "company": "YesGroup",
+          "ended": ISODate("2013-01-01T02:00:40.0Z"),
+          "location": {
+            "_id": ObjectId("5275ae48471dee940b000002"),
+            "location": "HCM, Việt Nam"
+          },
+          "started": ISODate("2013-01-01T02:00:40.0Z"),
+          "title": "3 năm kinh nghiệm về PHP"
         }
       ],
       "interest": "",
       "maritalStatus": false,
+      "skills": [
+        {
+          "_id": ObjectId("5275ae4f471dee940b000003"),
+          "skill": "cxf czd fzsd"
+        }
+      ],
       "sumary": "Lorem ipsum dolor sit amet, vix tantas dissentias ullamcorper ad, per lorem virtute equidem cu. Eu hinc facer explicari his, an ius officiis theophrastus, nec id dico melius ullamcorper. Omnis nominati consulatu ea usu, cu qui magna erant splendide. Quis alii facilis ne duo, mea brute tation dissentias ei, qui ex phaedrum constituam. ",
-      "summary": "lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj "
+      "summary": "lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj slfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj g f xgdfgfdxgn"
     },
     "birthday": ISODate("1990-08-13T16:03:11.0Z"),
     "firstname": "bommer",
@@ -5523,49 +5664,6 @@ db.getCollection("user_group").insert({
 });
 
 /** user_post records **/
-db.getCollection("user_post").insert({
-  "_id": ObjectId("526bec37471dee000b000001"),
-  "posts": [
-    {
-      "_id": ObjectId("526bec37471dee000b000002"),
-      "author": "user2",
-      "comments": [
-        {
-          "_id": ObjectId("526bee08471dee240b000001"),
-          "author": "Bommer Luu",
-          "content": "hello user 2",
-          "created": ISODate("2013-10-26T16:30:00.0Z"),
-          "deleted": false,
-          "email": "user3@test.com",
-          "status": true,
-          "updated": ISODate("2013-10-26T16:30:00.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("525bd847471deea808000000"),
-            "$db": "yesocl"
-          }
-        }
-      ],
-      "content": "hello user 3",
-      "created": ISODate("2013-10-26T16:22:15.0Z"),
-      "deleted": false,
-      "email": "user2@test.com",
-      "slug": "526bec37471dee000b000000",
-      "status": true,
-      "updated": ISODate("2013-10-26T16:30:00.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("525bd847471deea808000000"),
-    "$db": "yesocl"
-  }
-});
 db.getCollection("user_post").insert({
   "_id": ObjectId("52486543471dee340b000003"),
   "posts": [
@@ -5831,11 +5929,249 @@ db.getCollection("user_post").insert({
       },
       "slug": "52713b18471dee640b000000",
       "deleted": false
+    },
+    {
+      "_id": ObjectId("5275b111471dee900b000006"),
+      "content": "ygygtcyh u",
+      "status": true,
+      "created": ISODate("2013-11-03T02:12:33.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5275b111471dee900b000005",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5275b117471dee900b000008"),
+      "author": "Quang Thi",
+      "content": "tgxtgfttxf",
+      "created": ISODate("2013-11-03T02:12:39.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "slug": "5275b117471dee900b000007",
+      "status": true,
+      "updated": ISODate("2013-11-07T10:46:30.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5275b122471dee900b00000a"),
+      "content": "asxqwedewd",
+      "status": true,
+      "created": ISODate("2013-11-03T02:12:49.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5275b121471dee900b000009",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5275b128471dee900b00000c"),
+      "content": "axasdwcd",
+      "status": true,
+      "created": ISODate("2013-11-03T02:12:56.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5275b128471dee900b00000b",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5275b15f471dee900b00000e"),
+      "author": "Quang Thi",
+      "comments": [
+        {
+          "_id": ObjectId("5275c321471dee940b000009"),
+          "author": "Quang Thi",
+          "content": "KLIJUOIPUO\n",
+          "created": ISODate("2013-11-03T03:29:37.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "status": true,
+          "updated": ISODate("2013-11-03T03:29:37.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "@v",
+      "created": ISODate("2013-11-03T02:13:51.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "slug": "5275b15f471dee900b00000d",
+      "status": true,
+      "updated": ISODate("2013-11-03T03:29:37.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_post").insert({
+  "_id": ObjectId("526bec37471dee000b000001"),
+  "posts": [
+    {
+      "_id": ObjectId("526bec37471dee000b000002"),
+      "author": "user2",
+      "comments": [
+        {
+          "_id": ObjectId("526bee08471dee240b000001"),
+          "author": "Bommer Luu",
+          "content": "hello user 2",
+          "created": ISODate("2013-10-26T16:30:00.0Z"),
+          "deleted": false,
+          "email": "user3@test.com",
+          "status": true,
+          "updated": ISODate("2013-10-26T16:30:00.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("525bd847471deea808000000"),
+            "$db": "yesocl"
+          }
+        },
+        {
+          "_id": ObjectId("5271b655471deee80a000000"),
+          "author": "Bommer Luu",
+          "content": "hello bommer",
+          "created": ISODate("2013-10-31T01:45:57.0Z"),
+          "deleted": false,
+          "email": "user3@test.com",
+          "status": true,
+          "updated": ISODate("2013-10-31T01:45:57.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("525bd847471deea808000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "hello user 3",
+      "created": ISODate("2013-10-26T16:22:15.0Z"),
+      "deleted": false,
+      "email": "user2@test.com",
+      "slug": "526bec37471dee000b000000",
+      "status": true,
+      "updated": ISODate("2013-10-31T01:45:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5271b613471deedc0a000001"),
+      "content": "abc xyz",
+      "status": true,
+      "created": ISODate("2013-10-31T01:44:51.0Z"),
+      "updated": ISODate("2013-10-31T01:44:51.0Z"),
+      "author": "Bommer Luu",
+      "email": "user3@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5271b613471deedc0a000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5271b631471deeec0a000001"),
+      "content": "lưu quang thi",
+      "status": true,
+      "created": ISODate("2013-10-31T01:45:21.0Z"),
+      "updated": ISODate("2013-10-31T01:45:22.0Z"),
+      "author": "Bommer Luu",
+      "email": "user3@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5271b631471deeec0a000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5275af3e471dee940b000006"),
+      "author": "Quang Thi",
+      "comments": [
+        {
+          "_id": ObjectId("5275af56471dee940b000008"),
+          "author": "Quang Thi",
+          "content": "jhiuhiuhui",
+          "created": ISODate("2013-11-03T02:05:10.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "status": true,
+          "updated": ISODate("2013-11-03T02:05:10.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        },
+        {
+          "_id": ObjectId("52760a61471dee040c000000"),
+          "author": "Quang Thi",
+          "content": "kjhkjhkjhk",
+          "created": ISODate("2013-11-03T08:33:37.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "status": true,
+          "updated": ISODate("2013-11-03T08:33:37.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "ytgyugyijhhyi",
+      "created": ISODate("2013-11-03T02:04:46.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "slug": "5275af3e471dee940b000005",
+      "status": true,
+      "updated": ISODate("2013-11-03T08:33:37.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("525bd847471deea808000000"),
     "$db": "yesocl"
   }
 });
