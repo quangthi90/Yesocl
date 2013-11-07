@@ -16,7 +16,7 @@ function getURLVar(urlVarName) {
 		}
 	}	
 	return urlVarValue;
-} 
+}
 
 jQuery.fn.showMessageDialog = function() {
 	if($(this).length == 0)

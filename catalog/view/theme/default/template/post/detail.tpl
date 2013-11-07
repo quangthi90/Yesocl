@@ -11,7 +11,7 @@
 
 {% block body %}
 <div id="y-content">
-	<div id="post-detail" class="post">
+	<div id="post-detail">
 		<div id="post-detail-header">				
 			<div class="post-title-container">
 				<h2 class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
@@ -26,55 +26,39 @@
 				</div>
 			</div>				
 		</div>
-		<div class="post-detail-meta">
-			<div class="post-actions left">
-				<a href="#" class="btn-link-round " onclick="history.go(-1); return false;" > 
-					<i class="icon-undo medium-icon"></i>						
-				</a>					
-				<a href="#">
-					<span class="action-text">Go back</span>
-				</a>
-			</div>				
+		<div class="post-detail-meta">		
 			<ul class="post-actions">
 				<li>
+					<a href="#" class="btn-link-round" title="Go back" onclick="history.go(-1); return false;" > 
+						<i class="icon-undo medium-icon"></i>						
+					</a>
+				</li>
+				<li>
 					<a class="btn-link-round like-post" href="#"
-					data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}">
+					data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}" title="{{ post.like_count }}">
 					{% if post.isUserLiked == 0 %}
                         <i class="icon-thumbs-up medium-icon"></i>
                     {% else %}
                         <i class="icon-thumbs-down medium-icon"></i>
                     {% endif %}
 					</a>
-					<div class="number-viewer action-text">
-						<span><i class="icon-caret-up"></i></span>
-						<d>{{ post.like_count }}</d>
-					</div>
 				</li>
 				<li>
-					<a href="#" class="btn-link-round open-comment" data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}" data-comment-count="{{ post.comment_count }}" data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}">
+					<a href="#" class="btn-link-round open-comment" data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}" data-comment-count="{{ post.comment_count }}" data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}" title="{{ post.comment_count }}">
                         <i class="icon-comments medium-icon"></i>
                     </a>
-					<div class="number-viewer action-text">
-						<span><i class="icon-caret-up"></i></span>
-						<d>{{ post.comment_count }}</d>
-					</div>
 				</li>
 				<li>
-					<a href="#" class="btn-link-round "><i class="icon-eye-open medium-icon"></i></a>
-					<div class="number-viewer action-text">
-						<span><i class="icon-caret-up"></i></span>
-						<d>1000</d>
-					</div>
-				</li>					
-			</ul>
-			<div class="post-actions right">					
-				<a href="#">
-					<span class="action-text">More posts</span>
-				</a>
-				<a href="#" class="btn-link-round "> 						
-					<i class="icon-th medium-icon"></i>
-				</a>					
-			</div>
+					<a href="#" class="btn-link-round" title="1k">
+						<i class="icon-eye-open medium-icon"></i>
+					</a>
+				</li>
+				<li>
+					<a href="#" class="btn-link-round" title="More post"> 						
+						<i class="icon-th medium-icon"></i>
+					</a>
+				</li>				
+			</ul>			
 			<div class="clear"></div>			
 		</div>		
 		<div id="post-content">

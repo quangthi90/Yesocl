@@ -2,7 +2,6 @@
     var comment_box = $('#comment-box');
     var comment_form = $('.comment-form');
     var list_comment = $('#comment-box .y-box-content');
-    var posts = []; 
     var page = 1;
 
     function UserInfo(user_name, user_img, user_url, number_friend, is_friend, is_follow) {
@@ -123,7 +122,7 @@
     }
     
     UserListViewer.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('d');
         var f        = function() {
             $spinner.remove();
@@ -144,7 +143,6 @@
 
         this.attachEvents();
     }
-
     LikePostBtn.prototype.attachEvents = function(){
         var that = this;
 
@@ -160,7 +158,6 @@
             return false;
         });
     };
-
     LikePostBtn.prototype.submit = function($button){
         var that = this;		
 
@@ -196,12 +193,9 @@
             }
 
         });		
-    };
-    
-    
-		
+    };		
     LikePostBtn.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
@@ -273,7 +267,7 @@
     };
 		
     LikeCommentBtn.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f        = function() {
             $spinner.remove();
             $el.removeClass('disabled');
@@ -294,25 +288,30 @@
         this.comments = [];
         this.attachEvents();
     }
-
     CommentBtn.prototype.attachEvents = function(){
         var that = this;
-
         this.$el.click(function(e) {
             if(that.$el.hasClass('disabled')) {
                 e.preventDefault();
-
                 return false;
             }
-
             $('#comment-box').find('.y-box-header .close').trigger('click');
-
             that.submit(that.$el);
-
             return false;
         });
+        //Attach close event:
+        comment_box.on('click', '.y-box-header .close', function(){
+            that.hideCommentBox(that.$el);
+        });        
+        $('#overlay').click(function() {
+            that.hideCommentBox(that.$el);
+        });
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) { 
+                that.hideCommentBox(that.$el);
+            }
+        });
     };
-
     CommentBtn.prototype.submit = function($button){
         var that = this;
         if (that.comments.length == 0){
@@ -337,7 +336,7 @@
                     comment_box.find('.y-box-header span').html(that.comment_count);
                     comment_form.attr('data-url', that.comment_url);
                     page = 1;
-                    $('.comment-body').animate({
+                    $('.comment-body').stop().animate({
                         scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
                     }, 1000);
                     new CommentForm(comment_form);
@@ -347,14 +346,11 @@
                     });
 
                     jQuery(".timeago").timeago();
-                }
-
-                if ( $button.parents('.post').attr('class') != undefined ){
-                    showCommentForCurrentPost($button.parents('.post'));
-                }
+                    that.showCommentBox($button); 
+                }     
             });
         }else{
-            var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+            var $spinner = $('<i class="icon-spinner icon-spin"></i>');
             var $old_icon = that.$el.find('i');
             var f        = function() {
                 $spinner.remove();
@@ -374,9 +370,9 @@
             comment_box.find('.y-box-header span').html(that.comment_count);
             comment_form.attr('data-url', that.comment_url);
             page = 1;
-            $('.comment-body').animate({
+            $('.comment-body').stop().animate({
                 scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-            }, 1000);
+            }, 100);
             new CommentForm(comment_form);
 
             $('.comment-item .like-comment').each(function(){
@@ -384,16 +380,13 @@
             });
 
             jQuery(".timeago").timeago();
-            if ( $button.parents('.post').attr('class') != undefined ){
-                showCommentForCurrentPost($button.parents('.post'));
-            }
+            that.showCommentBox($button);
             f();
         }
     };
-
     CommentBtn.prototype.triggerProgress = function($el, promise)
     {
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
@@ -404,7 +397,24 @@
 
         promise.then(f, f);
     };
-    
+    CommentBtn.prototype.showCommentBox = function($button) {
+        var post = $button.parents('.post');
+        if(post.length >= 0){
+            $('.post').removeClass('post-selecting');
+            post.addClass('post-selecting');
+        }       
+        $('#overlay').show(100);        
+        list_comment.makeCustomScroll(false);
+        //Show comment box:
+        comment_box.stop().animate({ "right": "2px" }, 200);
+    }
+    CommentBtn.prototype.hideCommentBox = function($button) {
+        $('#overlay').hide();
+        $('.post').removeClass('post-selecting');
+        $button.removeClass('disabled');
+        comment_box.stop().animate({"right": "-500px" }, "slow");
+        page = 1;
+    }
 
     function CommentForm( $el ){
         var that = this;
@@ -418,7 +428,6 @@
             that.$comment_btn.hide();
         }
     }
-
     CommentForm.prototype.attachEvents = function(){
         var that = this;
         this.$comment_btn.click(function(e) {
@@ -468,10 +477,8 @@
             }
         });
     };
-
     CommentForm.prototype.submit = function($button){
         var that = this;
-
         var promise = $.ajax({
             type: 'POST',
             url:  this.url,
@@ -491,7 +498,7 @@
                 $('#add-more-item').before(htmlOutput);
                 that.$content.val('');
                 //Scroll to last post which have just been added
-                list_comment.animate({ 
+                list_comment.stop().animate({ 
                     scrollTop: $('#add-more-item').offset().top
                 }, 1000);
 
@@ -512,16 +519,14 @@
             }
         });
     };
-
     CommentForm.prototype.validate = function(){
         if(this.$content.val().length == 0){
             return false;
         }
     };
-
     CommentForm.prototype.triggerProgress = function($el, promise)
     {
-        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f = function() {
             $el.removeClass('disabled');
             $spinner.remove();
@@ -531,37 +536,6 @@
 
         promise.then(f, f);
     };
-
-    function showCommentForCurrentPost ($post) {
-		
-        $('.post').removeClass('post-selecting');
-        $post.addClass('post-selecting');
-        $('#overlay').show('fast');
-
-        if($post.attr('class').indexOf('last-feed')){ 
-            $('#y-main-content').scrollLeft($('#y-main-content').width());
-        }
-
-        //Show comment box:
-        comment_box.animate({
-            "right": "2px"
-        }, "slow", function(){			
-            //list_comment.makeScrollWithoutCalResize();
-            });
-    // list_comment.animate({ 
-    // 	scrollTop: $('#add-more-item').offset().top
-    // }, 1000);
-    }
-
-    function hideCommentBox () {
-        $('#overlay').hide();
-        $('.post').removeClass('post-selecting');
-        $('.open-comment').removeClass('disabled');
-        comment_box.animate({
-            "right": "-500px"
-        }, "slow");
-        page = 1;
-    }
 
     $(function(){
         $('.who-action .view-list-liker').each(function(){
@@ -573,20 +547,7 @@
         });
 
         $('.open-comment').each(function(){
-            posts.push(new CommentBtn($(this)));			
-        });
-
-        $('.comment-container').on('click', '.y-box-header .close', function(){
-            hideCommentBox();
-        });
-		
-        $('#overlay').click(function() {
-            hideCommentBox ();
-        });
-        $(document).keyup(function(e) {
-            if (e.keyCode == 27) { 
-                hideCommentBox ();
-            }
+            new CommentBtn($(this));
         });
 
         var getComments = function () {
@@ -604,7 +565,7 @@
                     data: data,
                     dataType: 'json',
                     progress: function () {
-                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-refresh"></i>Loading...</span>');
+                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-spinner"></i>Loading...</span>');
                     },
                     success: function (data) {
                         if(data.success == 'ok') {

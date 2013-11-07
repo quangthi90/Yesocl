@@ -14,7 +14,7 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" class="has-horizontal account-mywall">
+    <div id="y-main-content" class="has-horizontal account-mywall" style="width: 9999px;">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}

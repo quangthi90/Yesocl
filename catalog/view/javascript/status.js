@@ -1,6 +1,9 @@
 (function($, document, undefined) {
+	var marginPostDefault = 15;
+	var widthPostDefault = 350;
 	function Status( $el ){
-		var that = this;
+		this.mainContent = $('.account-mywall').first();
+		this.blockContent = this.mainContent.find('.block-content');
 		this.$el		= $el;
 		this.$title		= $el.find('.status-title')
 		this.$content	= $el.find('.status-content');
@@ -15,7 +18,6 @@
 		this.$status_btn.click(function(e) {
 			if(that.$status_btn.hasClass('disabled')) {
 				e.preventDefault();
-
 				return false;
 			}
 			
@@ -55,19 +57,20 @@
 		promise.then(function(data) {
 			if(data.success == 'ok'){
 				var $htmlOutput = $.tmpl( $('#post-item-template'), data.post );
-				
 				var $column_first = $('.column').first();
 				var $first_post = $column_first.children('.post_status');
-				
+				var heightDefault = (that.blockContent.height() - marginPostDefault)/2 - 2*marginPostDefault; 	
 				if ( $first_post.length == 0 ){
+					heightDefault = that.blockContent.height() - 100 - marginPostDefault - 2*marginPostDefault;
+					$htmlOutput.height(heightDefault);
 					$column_first.append( $htmlOutput );
 				}else{
+					$htmlOutput.height(heightDefault);
 					$htmlOutput = $htmlOutput.after( $first_post );
 					$htmlOutput = $('<div class="column">').append($htmlOutput);
-					// $first_post.remove();
-					$('.column').first().after( $htmlOutput );
+					that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
+					$('.column').first().after($htmlOutput );					
 				}
-
 				$(document).trigger('POST_BUTTON');
 				$(document).trigger('HORIZONTAL_POST');
 				jQuery(".timeago").timeago();
@@ -86,7 +89,7 @@
 	};
 
 	Status.prototype.triggerProgress = function($el, promise){
-		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
 		var f        = function() {
 			$el.removeClass('disabled');
 			$spinner.remove();

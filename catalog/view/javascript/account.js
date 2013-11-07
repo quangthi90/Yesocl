@@ -73,7 +73,7 @@
 
 	Login.prototype.triggerProgress = function($el, promise)
 	{
-		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
 		var f        = function() {
 			$el.removeClass('disabled');
 			$spinner.remove();
