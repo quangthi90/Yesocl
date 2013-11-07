@@ -45,61 +45,6 @@
 			  			<i class="icon-fire"></i> <span>My friend</span>
 		  			</a>
 			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
-		  			</a>
-			  	</li>
 			  	{% endblock %}
 			</ul>	
 		</div>

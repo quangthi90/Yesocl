@@ -670,6 +670,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .sidebar-wrapper .search-box {
   position: relative;
+  display: none;
 }
 .search-box input[type="text"] {
   padding-right: 25px;
@@ -711,7 +712,7 @@ a.btn-notification:hover .notification-item-name > i {
 .sidebar-controls {
   color: #fff;
   position: absolute;
-  top: 135px;
+  top: 85px;
   left: 30px;
   right: 30px;
   bottom: 40px;
@@ -733,10 +734,16 @@ a.btn-notification:hover .notification-item-name > i {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.yes-menu-list .menu-item > a.active,
 .yes-menu-list .menu-item > a:hover,
 .yes-menu-list .menu-item > a:focus {
   background-color: #009B77;
+}
+.yes-menu-list .menu-item.active > a {
+  background-color: #009B77;
+  font-weight: bold;
+}
+.yes-menu-list .menu-item.active > a > span {
+  color: #000;
 }
 .yes-menu-list .menu-item > a > span {
   color: #fff;
