@@ -99,5 +99,9 @@ class Doctrine {
     public function getDm(){
         return $this->dm;
     }
+
+    public function getClient(){
+        return $this->client;
+    }
 }
 ?>

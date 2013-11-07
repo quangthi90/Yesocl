@@ -3,7 +3,7 @@ use Document\Branch\Post;
 
 use MongoId;
 
-class ModelBranchPost extends Doctrine {
+class ModelBranchPost extends Model {
 	/**
 	 * Add new Post of Branch to Database
 	 * 2013/07/24

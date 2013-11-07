@@ -1,7 +1,7 @@
 <?php
 use Document\Attribute\Type;
 
-class ModelAttributeType extends Doctrine {
+class ModelAttributeType extends Model {
 	public function addType( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

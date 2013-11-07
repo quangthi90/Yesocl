@@ -9,6 +9,10 @@
     padding: 4px 16px;
 }
 
+.btn i {
+    margin-right: 5px;
+}
+
 .btn-ystandard {
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
@@ -289,54 +293,84 @@ a:hover, a.active
     color: #000;
 }
 
-#y-header .y-welcome-login,
-#y-header .y-welcome-login .text-welcome-login-bottom > a{
+.y-welcome-login  {
+    line-height: 70px;
+    text-align: right;
+}
+.y-welcome-login a.btn {
+    color: #FFF;
+}
+.y-welcome-login a.btn i {
+    margin-right: 5px;
+}
+.y-welcome-login a.btn:hover i{
+    color: #000;
+}
+
+.login-social ul > li {
+    display: inline-block;
+    margin-left: 7px;
+}
+.login-social ul > li > a {
+    display: block;
+    padding: 5px;
+    height: 25px;
+    width: 25px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    text-align: center;
+}
+.login-social ul > li > a > i{
+    color: #ccc;
+    font-size: 18px; 
+    line-height: 25px;
+}
+.login-social ul > li > a:hover {
+    background-color: #fff;
+}
+.login-social ul > li > a:hover > i{
+    color: #5bb75b;
+}
+
+#login-form-container {
+    z-index: 10000;
+    position: absolute;
+    right: 5px;
+    background: #1A1919;
+    padding: 20px;
+}
+
+#login-form-container label {
+    display: inline-block;
     color: #fff;
 }
-
-#y-header .y-welcome-login .text-welcome-login-top,
-#y-header .y-welcome-login .text-welcome-login-bottom,
-#y-header .y-welcome-login .text-welcome-login-bottom > a{
-    color: #BABABA;
+#login-form-container a.link-login {
+    float: right;
+    color: #fff;
+    font-weight: bold;  
+    font-size: 11px; 
 }
-
-#y-header .y-welcome-login .text-welcome-login-top{
-    font-size: 12px;
-}
-
-#y-header .y-welcome-login .text-welcome-login-bottom,
-#y-header .y-welcome-login .text-welcome-login-bottom > label{
-    font-size: 11px;
-}
-
-#y-header .y-welcome-login .text-welcome-login-bottom > label{
-    cursor: pointer;
-}
-
-#y-header .y-welcome-login .text-welcome-login-bottom > a:hover{
+#login-form-container a.link-login:hover {
     text-decoration: underline;
 }
-
-#y-header .y-welcome-login .button-login-welcome{
-    line-height: 70px;
+#login-form-container input.input-welcome {
+    height: 25px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
 }
-
-#y-header .y-welcome-login .button-login-welcome > button{
-    height: 22px;
-    line-height: 12px;
-    padding: 4px 7px;
-    margin-top: -3px;
-    cursor: pointer;
+#login-form-container span.add-on {
+    line-height: 25px;
+    height: 25px;
 }
-
-#y-header .y-welcome-login .input-welcome{
-    margin-top: 23px;
-    margin-bottom: 2px;
-    height: 22px;
-    min-height: 22px;
-    padding: 2px 6px;
+#login-form-container .row-fluid {
+    padding: 5px 0px;
 }
-
+#login-form-container .btn-container {
+    text-align: center;
+    margin: 10px 0px 0px 0px;
+    padding-bottom: 0px;
+}
 
 /*--------------------------------------------------------------------
     CONTENT
@@ -359,7 +393,7 @@ a:hover, a.active
 #y-frm-register
 {
     width:390px;
-	top: 100px;
+	top: 75px;
 	right: -9990px;
 	display: block;
 	border: 2px solid #ddd;
@@ -377,7 +411,7 @@ a:hover, a.active
 }
 
 #y-frm-register .controls {
-    margin-bottom: 8px;
+    margin-bottom: 2px;
 }
 
 #y-frm-register  select {
@@ -453,5 +487,17 @@ a:hover, a.active
     padding:5px 0px 5px 35px;
     background:transparent url(../img/help-email.png) no-repeat 0px 50%;
 }
+
+/* CAPTCHA */
+.captcha-row {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0px;
+}
+.captcha-row #recaptcha_response_field {
+    height: 28px;
+    padding: 0px 5px;
+}
+/* RECAPTCHA */
 
 /*End Y-CSS*/

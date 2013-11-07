@@ -21,7 +21,8 @@ class ControllerBranchCategory extends Controller {
 		
 		$this->data['category'] = array(
 			'id' => $category->getId(),
-			'name' => $category->getName()
+			'name' => $category->getName(),
+			'slug' => $category->getSlug()
 		);
 		$this->data['all_posts'] = array();
 

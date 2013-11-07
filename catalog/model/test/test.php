@@ -5,7 +5,7 @@ use Document\User\Meta\Email;
 use Document\User\Post;
 use Document\AbsObject\Comment;
 
-Class ModelTestTest extends Doctrine {
+Class ModelTestTest extends Model {
 	public function getMongoDBSpeed( $start = 0) {
 		// $posts = array();
 		// for ($i=0; $i < 50; $i++) { 

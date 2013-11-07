@@ -1,7 +1,7 @@
 <?php
 use Document\Company\GroupMember;
 
-class ModelCompanyGroupMember extends Doctrine {
+class ModelCompanyGroupMember extends Model {
 	public function addGroupMember( $company_id, $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

@@ -1,7 +1,7 @@
 <?php
 use Document\Attribute\Attribute;
 
-class ModelAttributeAttribute extends Doctrine {
+class ModelAttributeAttribute extends Model {
 	public function addAttribute( $data = array() ) {
 		// Name is require
 		if ( !isset($data['name']) || empty($data['name']) ){

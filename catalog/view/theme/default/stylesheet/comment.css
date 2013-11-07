@@ -36,12 +36,20 @@
 	top: 30px;
 	left: 0px;
 	right: 0px;
-	bottom: 120px;
+	bottom: 90px;
 }
 
 .y-box-content .comment-item {
-	overflow: hidden;
 	margin-bottom: 3px;
+	position: relative;
+}
+
+.y-box-content .comment-item .yes-dropdown{
+	display: none;
+}
+
+.y-box-content .comment-item:hover .yes-dropdown{
+	display: block;
 }
 
 .comment-item  .avatar_thumb img{
@@ -94,4 +102,14 @@
 #comment-box .post_new .comment-action a.fl {
 	padding: 5px;
 }
+
+#comment-box .post_new .comment-action .btn-comment{
+    margin-left: 10px;
+}
+
+#comment-box .post_new .comment-action .comment-press-enter{
+    padding:4px 0px 0px 0px;
+}
+
+
 

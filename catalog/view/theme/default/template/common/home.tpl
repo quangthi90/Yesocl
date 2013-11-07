@@ -12,7 +12,7 @@
 
 {% block body %}
 <div id="y-content" class="no-header-fixed">
-	<div id="y-main-content" class="has-horizontal has-block">
+	<div id="y-main-content" class="has-horizontal has-block" >
 	{% for branch in branchs %}
         {% set style = random([1, 2]) %}
 		{% set posts = all_posts[branch.slug] %}
@@ -21,7 +21,7 @@
             {% set block_href = path('BranchPage', {branch_slug: branch.slug}) %}
             {{ block('post_common_post_block_list') }}
 		{% endif %}
-	{% endfor %}		
+	{% endfor %}
 	</div>
 </div>
 {{ block('post_common_post_comment') }}
@@ -30,12 +30,4 @@
 {% block javascript %}
 {{ block('post_common_post_comment_javascript') }}
 <script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/jquery.hoverdir.js') }}"></script>
-<script type="text/javascript">
-    $(function() {    
-        $('.feed-block .feed').each( function() {
-            $(this).hoverdir(); 
-        });
-    });
-</script>
 {% endblock %}

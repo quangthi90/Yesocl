@@ -1,7 +1,7 @@
 <?php
 use Document\Country;
 
-class ModelLocalisationCountry extends Doctrine {
+class ModelLocalisationCountry extends Model {
 	public function addCountry($name, $data = array(), $status = false) {
 		$country = new Country($name, $status);
 

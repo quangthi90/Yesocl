@@ -3,14 +3,12 @@ use Document\AbsObject\Comment;
 
 use MongoId;
 
-class ModelBranchComment extends Doctrine {
+class ModelBranchComment extends Model {
 	public function getComments( $data = array() ){
-		$this->load->model( 'tool/cache' );
-
 		$query = array();
 
-		if ( empty($data['start']) ){
-			$data['start'] = 0;
+		if ( empty($data['page']) ){
+			$data['page'] = 1;
 		}
 
 		if ( empty($data['limit']) ){
@@ -26,20 +24,24 @@ class ModelBranchComment extends Doctrine {
 		$comments = array();
 
 		if ( $post ){
-			foreach ( $post->getComments() as $key => $comment ) {
-				if ( $key < $data['start'] ){
-					continue;
-				}
+			$query_comments = $post->getComments( true );
+			$total = count( $query_comments );
 
+			$start = ($data['page'] - 1) * $data['limit'];
+
+			if ( $start < 0 ){
+				$start = 0;
+			}
+			for ( $i = $start; $i < $total; $i++ ) {
 				if ( count($comments) == $data['limit'] ){
 					break;
 				}
 
-				$comments[] = $comment->formatToCache();
+				$comments[] = $query_comments[$i];
 			}
 		}
 
-		return $comments;
+		return array_reverse($comments);
 	}
 
 	public function getComment( $Comment_id ){
@@ -103,6 +105,7 @@ class ModelBranchComment extends Doctrine {
 			}
 		}
 
+		// Update cache post for what's new
 		$type = $this->config->get('post')['cache']['branch'];
 		$this->load->model('cache/post');
 		$data = array(
@@ -114,7 +117,7 @@ class ModelBranchComment extends Doctrine {
 		);
 		$this->model_cache_post->editPost( $data );
 
-		return $comment->formatToCache();
+		return $comment;
 	}
 
 	public function editComment( $comment_id, $data = array() ){
@@ -128,8 +131,17 @@ class ModelBranchComment extends Doctrine {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		if ( !empty($data['likerId']) && !in_array($data['likerId'], $comment->getLikerIds()) ){
+		$comment = $post->getCommentById( $comment_id );
+		
+		$likerIds = $comment->getLikerIds();
+
+		$key = array_search( $data['likerId'], $likerIds );
+		
+		if ( !$likerIds || $key === false ){
 			$comment->addLikerId( $data['likerId'] );
+		}else{
+			unset($likerIds[$key]);
+			$comment->setLikerIds( $likerIds );
 		}
 
 		$this->dm->flush();

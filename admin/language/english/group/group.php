@@ -24,7 +24,7 @@ $_['button_select_all_categories']  = 'Select all categories';
 $_['entry_author']            = 'Owner:';
 $_['entry_fullname']          = 'Fullname:';
 $_['entry_name']              = 'Name:';
-$_['entry_sumary']            = 'Sumary:';
+$_['entry_summary']            = 'Summary:';
 $_['entry_description']       = 'Description:';
 $_['entry_website']           = 'Website:';
 $_['entry_status']            = 'Status:';
@@ -43,7 +43,7 @@ $_['column_action']           = 'Action';
 // Error
 $_['error_default']           = 'Warning: This Group cannot be deleted as it is currently assigned as the default store Group!';
 $_['error_name']              = 'Group Name must be between 3 and 128 characters!';
-$_['error_sumary']            = 'Group sumary must be more than 50 characters!';
+$_['error_summary']            = 'Group summary must be more than 50 characters!';
 $_['error_description']       = 'Group description must be more than 50 characters!';
 $_['error_author']         	  = 'Warning: Owner is required!';
 $_['error_description']       = 'Group Description must be more than 50 characters! ';

@@ -188,6 +188,13 @@ db.getCollection("user_group").ensureIndex({
   
 ]);
 
+/** user_post indexes **/
+db.getCollection("user_post").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** ward indexes **/
 db.getCollection("ward").ensureIndex({
   "_id": NumberInt(1)
@@ -211,53 +218,23 @@ db.getCollection("admin").insert({
 db.getCollection("admin").insert({
   "_id": ObjectId("52073699471dee9809000000"),
   "username": "tester",
-  "password": "272082619d1140aa87cc46be9aba00831f55a938",
+  "password": "4509919b2026c296e2b649fdf352ff190f5e2a24",
   "group": {
     "$ref": "admin_group",
-    "$id": ObjectId("515f0c69471dee8c1f000000"),
+    "$id": ObjectId("52479d98471dee280c000001"),
     "$db": "yesocl"
   },
   "status": true,
-  "salt": "e48657078"
+  "salt": "af2a3c334"
 });
 
 /** admin_group records **/
 db.getCollection("admin_group").insert({
-  "_id": ObjectId("515f0c69471dee8c1f000000"),
-  "name": "Supper Admin",
+  "_id": ObjectId("52479d98471dee280c000001"),
+  "name": "Poster",
   "permissions": [
     {
-      "_id": ObjectId("52051a30471dee900a000002"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("515f03ef471deeac1f000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000003"),
+      "_id": ObjectId("52479f72471dee280c000030"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f03ff471deeac1f000001"),
@@ -287,10 +264,10 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a000004"),
+      "_id": ObjectId("52479f72471dee280c000031"),
       "layout": {
         "$ref": "design_layout",
-        "$id": ObjectId("51d38f3cd874592c09000000"),
+        "$id": ObjectId("515f03ef471deeac1f000000"),
         "$db": "yesocl"
       },
       "actions": [
@@ -317,337 +294,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a000005"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51d39389d874590803000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000006"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51fe1a9b471dee0c0b000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000007"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51d3942dd874597808000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000008"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51ea5392471dee1c0a000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000009"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51e018be471dee1c0a000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00000a"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51828041471dee0808000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00000b"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516ab55f913db42c12000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00000c"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516ab59e913db47809000002"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00000d"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51e01fe9471dee1c0a000001"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00000e"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a683d471dee480b00001a"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00000f"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a684f471dee480b00001b"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000010"),
+      "_id": ObjectId("52479f72471dee280c000032"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f04d5471deeac1f000004"),
@@ -677,7 +324,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a000011"),
+      "_id": ObjectId("52479f72471dee280c000033"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0568471deeac1f000005"),
@@ -707,10 +354,10 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a000012"),
+      "_id": ObjectId("52479f72471dee280c000034"),
       "layout": {
         "$ref": "design_layout",
-        "$id": ObjectId("51d4fab6d874593009000000"),
+        "$id": ObjectId("51d38f3cd874592c09000000"),
         "$db": "yesocl"
       },
       "actions": [
@@ -737,10 +384,46 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a000013"),
+      "_id": ObjectId("52479f72471dee280c000035"),
       "layout": {
         "$ref": "design_layout",
-        "$id": ObjectId("516a680e471dee480b000018"),
+        "$id": ObjectId("51ea5392471dee1c0a000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    }
+  ]
+});
+db.getCollection("admin_group").insert({
+  "_id": ObjectId("515f0c69471dee8c1f000000"),
+  "name": "Supper Admin",
+  "permissions": [
+    {
+      "_id": ObjectId("52694e39471deed008000001"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("515f03ff471deeac1f000001"),
         "$db": "yesocl"
       },
       "actions": [
@@ -767,247 +450,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a000014"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a67a8471dee480b000016"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000015"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51dd78fb471dee6c09000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000016"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a6823471dee480b000019"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000017"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a67d6471dee480b000017"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000018"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a6882471dee480b00001d"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a000019"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516a6871471dee480b00001c"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00001a"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("516df1eb976982440f000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00001b"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("52051a16471dee900a000001"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00001c"),
+      "_id": ObjectId("52694e39471deed008000002"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f0416471deeac1f000002"),
@@ -1037,37 +480,7 @@ db.getCollection("admin_group").insert({
       ]
     },
     {
-      "_id": ObjectId("52051a30471dee900a00001d"),
-      "layout": {
-        "$ref": "design_layout",
-        "$id": ObjectId("51ebd206471deec80a000000"),
-        "$db": "yesocl"
-      },
-      "actions": [
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6230471dee3c0b000000"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a6295471dee480b000004"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a624b471dee3c0b000002"),
-          "$db": "yesocl"
-        },
-        {
-          "$ref": "design_action",
-          "$id": ObjectId("516a62b2471dee480b000006"),
-          "$db": "yesocl"
-        }
-      ]
-    },
-    {
-      "_id": ObjectId("52051a30471dee900a00001e"),
+      "_id": ObjectId("52694e39471deed008000003"),
       "layout": {
         "$ref": "design_layout",
         "$id": ObjectId("515f042b471deeac1f000003"),
@@ -1097,6 +510,816 @@ db.getCollection("admin_group").insert({
         {
           "$ref": "design_action",
           "$id": ObjectId("516a62f0471dee480b000008"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000004"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("515f03ef471deeac1f000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000005"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("515f04d5471deeac1f000004"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000006"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("515f0568471deeac1f000005"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000007"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a67d6471dee480b000017"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000008"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a67a8471dee480b000016"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000009"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a680e471dee480b000018"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800000a"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a6823471dee480b000019"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800000b"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a683d471dee480b00001a"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800000c"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a684f471dee480b00001b"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800000d"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a6871471dee480b00001c"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800000e"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516a6882471dee480b00001d"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800000f"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516ab55f913db42c12000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000010"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516ab59e913db47809000002"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000011"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51828041471dee0808000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000012"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("516df1eb976982440f000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000013"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51d38f3cd874592c09000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000014"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51d39389d874590803000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000015"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51d3942dd874597808000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000016"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51d4fab6d874593009000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000017"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51dd78fb471dee6c09000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000018"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51e018be471dee1c0a000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed008000019"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51e01fe9471dee1c0a000001"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800001a"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51ea5392471dee1c0a000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800001b"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51ebd206471deec80a000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800001c"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("51fe1a9b471dee0c0b000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800001d"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("52051a16471dee900a000001"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
+          "$db": "yesocl"
+        }
+      ]
+    },
+    {
+      "_id": ObjectId("52694e39471deed00800001e"),
+      "layout": {
+        "$ref": "design_layout",
+        "$id": ObjectId("52694e2a471deed008000000"),
+        "$db": "yesocl"
+      },
+      "actions": [
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6230471dee3c0b000000"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a6295471dee480b000004"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a624b471dee3c0b000002"),
+          "$db": "yesocl"
+        },
+        {
+          "$ref": "design_action",
+          "$id": ObjectId("516a62b2471dee480b000006"),
           "$db": "yesocl"
         }
       ]
@@ -1404,10 +1627,22 @@ db.getCollection("branch").insert({
     "$db": "yesocl"
   },
   "deleted": false,
-  "name": "Yestoc",
-  "order": NumberInt(1),
+  "name": "Chứng khoán",
+  "order": NumberInt(0),
   "slug": "yestoc-520ce99c471dee9c09000000",
   "status": true
+});
+db.getCollection("branch").insert({
+  "_id": ObjectId("5247a0a3471dee280c000037"),
+  "name": "IT",
+  "slug": "it-5247a0a3471dee280c000036",
+  "status": true,
+  "company": {
+    "$ref": "company",
+    "$id": ObjectId("51e97c88471dee180a000000"),
+    "$db": "yesocl"
+  },
+  "order": NumberInt(1)
 });
 
 /** branch_category records **/
@@ -1443,6 +1678,28 @@ db.getCollection("branch_category").insert({
   "name": "Nhận định thị trường",
   "order": NumberInt(2),
   "slug": "nhan-dinh-thi-truong"
+});
+db.getCollection("branch_category").insert({
+  "_id": ObjectId("5247a0e0471dee280c000038"),
+  "name": "Công Nghệ",
+  "slug": "cong-nghe",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("5247a0a3471dee280c000037"),
+    "$db": "yesocl"
+  },
+  "order": NumberInt(1)
+});
+db.getCollection("branch_category").insert({
+  "_id": ObjectId("5247a0f7471dee280c000039"),
+  "name": "Website",
+  "slug": "website",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("5247a0a3471dee280c000037"),
+    "$db": "yesocl"
+  },
+  "order": NumberInt(2)
 });
 
 /** branch_post records **/
@@ -2024,39 +2281,6 @@ db.getCollection("branch_post").insert({
   }
 });
 db.getCollection("branch_post").insert({
-  "_id": ObjectId("52179310471deec003000001"),
-  "author": "user1",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3ceced874596804000000"),
-    "$db": "yesocl"
-  },
-  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-  "created": ISODate("2013-08-23T16:51:28.0Z"),
-  "deleted": false,
-  "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5f43471deeb40900001f",
-    "518f5555471deea409000000"
-  ],
-  "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
-  "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
-  "updated": ISODate("2013-09-02T10:57:16.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
   "_id": ObjectId("52179237471deeb408000001"),
   "author": "user1",
   "branch": {
@@ -2288,7 +2512,7 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179345471deefc0b000001\/avatar.jpg",
   "title": "Lăng kính Yestoc phiên 01\/08: “Chờ mua tại mức hỗ trợ mạnh”",
-  "updated": ISODate("2013-09-02T10:55:16.0Z"),
+  "updated": ISODate("2013-09-29T17:06:48.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2430,13 +2654,14 @@ db.getCollection("branch_post").insert({
   "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
   "email": "quangthi_90@yahoo.com.vn",
   "likerIds": [
-    "518f5f43471deeb40900001f"
+    "518f5f43471deeb40900001f",
+    "518f5555471deea409000000"
   ],
   "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
   "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
-  "updated": ISODate("2013-09-02T10:56:50.0Z"),
+  "updated": ISODate("2013-10-25T13:19:26.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2513,6 +2738,85 @@ db.getCollection("branch_post").insert({
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
   "updated": ISODate("2013-08-29T17:51:48.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179310471deec003000001"),
+  "author": "user1",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("52486249471dee740b000000"),
+      "author": "user1",
+      "content": "1. abc",
+      "created": ISODate("2013-09-29T17:24:25.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-09-29T17:24:25.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524862b7471dee740b000002"),
+      "author": "user1",
+      "content": "2. abc",
+      "created": ISODate("2013-09-29T17:26:15.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-09-29T17:26:15.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524862c3471dee740b000003"),
+      "author": "user1",
+      "content": "3. abc",
+      "created": ISODate("2013-09-29T17:26:27.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-09-29T17:26:27.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "created": ISODate("2013-08-23T16:51:28.0Z"),
+  "deleted": false,
+  "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
+  "updated": ISODate("2013-10-13T06:39:25.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2801,17 +3105,51 @@ db.getCollection("branch_post").insert({
     },
     {
       "_id": ObjectId("521f77f7471dee5c11000002"),
+      "author": "user1",
       "content": "999999999999",
-      "status": true,
       "created": ISODate("2013-08-29T16:33:59.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        ""
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-29T04:47:35.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
-      },
+      }
+    },
+    {
+      "_id": ObjectId("524fd313471dee880a000003"),
       "author": "user1",
+      "content": "fdsafsd",
+      "created": ISODate("2013-10-05T08:51:31.0Z"),
+      "deleted": false,
       "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
+      "status": true,
+      "updated": ISODate("2013-10-05T08:51:31.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524fd489471dee9c0a000000"),
+      "author": "user1",
+      "content": "dfadfas",
+      "created": ISODate("2013-10-05T08:57:45.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-10-05T08:57:45.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng điểm, tuy nhiên khối lượng giao dịch chỉ đạt 10 triệu cp, sụt giảm mạnh so với phiên trước cho thấy mức độ tin cậy của mẫu hình khá thấp. &amp;nbsp;Trong ngắn hạn, chúng tôi vẫn duy trì quan điểm xu hướng giảm và các chỉ số sẽ gặp áp lực bán mạnh khi tiếp cận ngưỡng kháng cự trong các phiên tới. Vùng kháng cự hiện tại tập trung ở vùng giá 490-492 của chỉ số VNIndex và 61.7-62 của chỉ số HNXIndex. Do đó, nhà đầu tư cần thận trọng với quyết định giải ngân trong giai đoạn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tTiếp tục ưu tiên chiến lược hạ tỉ trọng cổ phiếu khi thị trường xuất hiện nhịp tăng ngắn hạn.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mở vị thế mua trong giai đoạn này đến khi chúng tôi đưa ra điểm mua mới.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
@@ -2820,14 +3158,13 @@ db.getCollection("branch_post").insert({
   "description": "Quan điểm kĩ thuật ngắn hạn: Thị trường phục hồi với hai chỉ số cùng tăng điểm sau khi giảm khá mạnh. Hnxindex hình thành bộ nến bullish engulfing tăng [...]",
   "email": "quangthi_90@yahoo.com.vn",
   "likerIds": [
-    "518f5f43471deeb40900001f",
-    "518f5555471deea409000000"
+    "518f5f43471deeb40900001f"
   ],
   "slug": "lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004",
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179382471deeb408000005\/avatar.jpg",
   "title": "Lăng kính Yestoc phiên 31\/07: ” Thị trường tiệm cận ngưỡng kháng cự mạnh”",
-  "updated": ISODate("2013-09-02T10:55:54.0Z"),
+  "updated": ISODate("2013-10-16T18:31:22.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2838,7 +3175,7 @@ db.getCollection("branch_post").insert({
 /** cache_post records **/
 db.getCollection("cache_post").insert({
   "_id": ObjectId("521a02c7471deed409000004"),
-  "created": ISODate("2013-08-29T16:33:59.0Z"),
+  "created": ISODate("2013-10-05T08:57:45.0Z"),
   "postId": "52179382471deeb408000005",
   "type": "Branch",
   "typeId": "51d39ba5d87459c40a000017",
@@ -2915,6 +3252,70 @@ db.getCollection("cache_post").insert({
   "postId": "5216d059471dee740b000001",
   "type": "Branch",
   "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52486249471dee740b000001"),
+  "created": ISODate("2013-09-29T17:26:27.0Z"),
+  "view": NumberInt(0),
+  "postId": "52179310471deec003000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("524cee4d471dee0c0b000003"),
+  "created": ISODate("2013-10-03T04:10:52.0Z"),
+  "view": NumberInt(0),
+  "postId": "524cee4c471dee0c0b000002",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("524cf35e471deecc0a000002"),
+  "created": ISODate("2013-10-03T04:32:30.0Z"),
+  "view": NumberInt(0),
+  "postId": "524cf35e471deecc0a000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("526bebdf471dee140b000002"),
+  "created": ISODate("2013-10-26T16:20:47.0Z"),
+  "view": NumberInt(0),
+  "postId": "526bebdf471dee140b000001",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("526bec37471dee000b000003"),
+  "created": ISODate("2013-10-26T16:30:00.0Z"),
+  "view": NumberInt(0),
+  "postId": "526bec37471dee000b000002",
+  "type": "User",
+  "typeId": "525bd847471deea808000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("526beccd471dee140b000005"),
+  "created": ISODate("2013-10-26T16:28:57.0Z"),
+  "view": NumberInt(0),
+  "postId": "526beccd471dee140b000004",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5270c46c471dee0c0a000002"),
+  "created": ISODate("2013-10-30T08:33:47.0Z"),
+  "view": NumberInt(0),
+  "postId": "5270c46b471dee0c0a000001",
+  "type": "User",
+  "typeId": "525bd847471deea808000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5270c6c3471dee1809000002"),
+  "created": ISODate("2013-10-30T08:43:47.0Z"),
+  "view": NumberInt(0),
+  "postId": "5270c6c3471dee1809000001",
+  "type": "User",
+  "typeId": "525bd847471deea808000000"
 });
 
 /** city records **/
@@ -4123,6 +4524,33 @@ db.getCollection("design_layout").insert({
   "name": "Comment of User",
   "path": "user\/comment"
 });
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("52694e2a471deed008000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Social Network",
+  "path": "social\/network"
+});
 
 /** district records **/
 db.getCollection("district").insert({
@@ -4486,12 +4914,13 @@ db.getCollection("street").insert({
 
 /** user records **/
 db.getCollection("user").insert({
-  "_id": ObjectId("52051e42471dee780a000002"),
-  "created": ISODate("2013-08-09T16:52:18.0Z"),
+  "_id": ObjectId("526f80f1471deec40b000000"),
+  "avatar": "data\/catalog\/user\/526f80f1471deec40b000000\/avatar.jpg",
+  "created": ISODate("2013-10-29T09:33:37.0Z"),
   "emails": [
     {
-      "_id": ObjectId("52051e42471dee780a000004"),
-      "email": "user3@test.com",
+      "_id": ObjectId("526f80f1471deec40b000002"),
+      "email": "thanhhuong_2704@yahoo.com.vn",
       "primary": true
     }
   ],
@@ -4501,25 +4930,277 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("52051e42471dee780a000003"),
+    "_id": ObjectId("526f80f1471deec40b000001"),
+    "firstname": "Thanh",
+    "lastname": "Hương",
+    "sex": NumberInt(0)
+  },
+  "refreshIds": [
+    
+  ],
+  "salt": "503038c9d",
+  "slug": "user-temp-5",
+  "status": true,
+  "username": "thanh.huong.50"
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("525ed884471dee780b000014"),
+  "avatar": "data\/catalog\/user\/525ed884471dee780b000014\/avatar.png",
+  "created": ISODate("2013-10-16T18:18:44.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("525ed884471dee780b000016"),
+      "email": "user5@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("5268090e471dee7807000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("525ed884471dee780b000015"),
+    "firstname": "L232e",
+    "lastname": "Văn",
+    "birthday": ISODate("2000-12-31T23:00:00.0Z"),
+    "sex": NumberInt(1)
+  },
+  "password": "56f5dbcf245d438c456c6a87e6d5378353b4ffbe",
+  "refreshIds": [
+    
+  ],
+  "salt": "0a64345ba",
+  "slug": "user-temp-1",
+  "status": true
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("525ed8ee471dee580b000005"),
+  "avatar": "data\/catalog\/user\/525ed8ee471dee580b000005\/avatar.jpg",
+  "created": ISODate("2013-10-16T18:20:30.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("525ed8ee471dee580b000007"),
+      "email": "user6@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("5268091d471dee5408000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("525ed8ee471dee580b000006"),
+    "firstname": "abc",
+    "lastname": "xyz",
+    "birthday": ISODate("2008-05-04T22:00:00.0Z"),
+    "sex": NumberInt(3)
+  },
+  "password": "dbbe1a2258e45a1bb6f741d685a0de2b43f836ca",
+  "refreshIds": [
+    
+  ],
+  "salt": "a87e4d797",
+  "slug": "user-temp-2",
+  "status": true
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("52601121471dee680b000000"),
+  "avatar": "data\/catalog\/user\/52601121471dee680b000000\/avatar.jpg",
+  "created": ISODate("2013-10-17T16:32:33.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("52601121471dee680b000002"),
+      "email": "user7@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    "518f5f43471deeb40900001f"
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("5268092a471dee5408000002"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("52601121471dee680b000001"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("2010-06-02T22:00:00.0Z"),
+    "sex": NumberInt(1)
+  },
+  "password": "248f2093c0f2f6049950cbf42a51927cb028408a",
+  "refreshIds": [
+    
+  ],
+  "salt": "fc48b431c",
+  "slug": "user-temp-3",
+  "status": true
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("5260e5b4471dee6c08000000"),
+  "avatar": "data\/catalog\/user\/5260e5b4471dee6c08000000\/avatar.jpg",
+  "created": ISODate("2013-10-18T07:39:31.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("5260e5b4471dee6c08000002"),
+      "email": "user8@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("52680940471dee7807000002"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("5260e5b4471dee6c08000001"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("2009-04-03T22:00:00.0Z"),
+    "sex": NumberInt(2)
+  },
+  "password": "1c3b43d60529ff6cc7e24c1e65595acdf596fbba",
+  "refreshIds": [
+    
+  ],
+  "salt": "7b748a1b1",
+  "slug": "user-temp-4",
+  "status": true
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("525bd847471deea808000000"),
+  "avatar": "data\/catalog\/user\/525bd847471deea808000000\/avatar.png",
+  "created": ISODate("2013-10-14T11:40:55.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("525bd847471deea808000002"),
+      "email": "user3@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("526808fe471deec406000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("526bec22471dee100b000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("525bd847471deea808000001"),
     "firstname": "Bommer",
     "lastname": "Luu",
     "birthday": ISODate("1990-08-12T22:00:00.0Z"),
     "sex": NumberInt(1)
   },
-  "password": "40f4046cac30a61c1d0e541dbb27bd8dcadf70b1",
-  "salt": "6f940b082",
+  "password": "38cd494f4e20391887704da2c512fb7e9a8efe9c",
+  "refreshIds": [
+    
+  ],
+  "salt": "62df54b25",
   "slug": "user-temp",
   "status": true
 });
 db.getCollection("user").insert({
   "_id": ObjectId("518f5f43471deeb40900001f"),
+  "avatar": "data\/catalog\/user\/518f5f43471deeb40900001f\/avatar.jpg",
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
       "_id": ObjectId("520677de471dee880b000013"),
       "email": "user2@test.com",
       "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("526808ef471dee4009000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("526bec22471dee100b000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "groupUser": {
@@ -4624,6 +5305,9 @@ db.getCollection("user").insert({
       }
     }
   ],
+  "refreshIds": [
+    
+  ],
   "salt": "dc1668c45",
   "slug": "user2",
   "status": true,
@@ -4635,9 +5319,64 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("521a25d4471dee240800000b"),
+      "_id": ObjectId("52713bcf471dee740b000001"),
       "email": "quangthi_90@yahoo.com.vn",
       "primary": true
+    },
+    {
+      "_id": ObjectId("52713bcf471dee740b000002"),
+      "email": "lqthi.khtn@gmail.com",
+      "primary": false
+    }
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("526808ef471dee4009000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("526808ff471deec406000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5268090e471dee7807000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525ed884471dee780b000014"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5268091d471dee5408000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525ed8ee471dee580b000005"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5268092a471dee5408000003"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("52601121471dee680b000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52680940471dee7807000003"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("5260e5b4471dee6c08000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "groupUser": {
@@ -4646,65 +5385,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("521a25d4471dee2408000002"),
-    "firstname": "Bommer",
-    "lastname": "Luu",
-    "birthday": ISODate("2013-08-25T15:42:12.0Z"),
-    "sex": NumberInt(1),
-    "headingLine": "",
-    "location": {
-      "_id": ObjectId("521a25d4471dee2408000003"),
-      "location": "HCM, Việt Nam",
-      "cityId": "5143bfca913db4a408000012"
-    },
-    "postalCode": "84",
-    "industry": "Chemicals",
-    "industry_id": "514b0970913db4ac08000020",
+    "_id": ObjectId("526808b4471dee880b000000"),
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
-    "ims": [
-      {
-        "_id": ObjectId("521a25d4471dee2408000004"),
-        "im": "user1",
-        "type": "skype",
-        "visible": "myfollow"
-      }
-    ],
-    "phones": [
-      {
-        "_id": ObjectId("521a25d4471dee2408000005"),
-        "phone": "0903000333",
-        "type": "mobile",
-        "visible": "myfollow"
-      }
-    ],
-    "websites": [
-      {
-        "_id": ObjectId("521a25d4471dee2408000006"),
-        "url": "www.yesocl.com",
-        "title": ""
-      }
-    ],
     "background": {
-      "_id": ObjectId("521a25d4471dee2408000007"),
-      "experiencies": [
-        {
-          "_id": ObjectId("521a25d4471dee2408000008"),
-          "company": "Yesocl",
-          "title": "My Company",
-          "location": {
-            "_id": ObjectId("521a25d4471dee2408000009"),
-            "location": "HCM, Việt Nam",
-            "cityId": "5143bfca913db4a408000012"
-          },
-          "started": ISODate("2013-01-01T16:42:12.0Z"),
-          "ended": ISODate("2013-01-01T16:42:12.0Z"),
-          "current": false,
-          "description": "Lorem ipsum dolor sit amet, nec in corpora dignissim, nam ea agam zril electram, aperiam vulputate eam ne. Id scaevola mandamus delicatissimi mel, ei prompta nusquam nec. At ferri ridens nam, quo reque expetendis contentiones ut. Mazim aperiri te per, cum adhuc summo in."
-        }
-      ],
+      "_id": ObjectId("526808b4471dee880b000007"),
+      "adviceForContact": "",
       "educations": [
         {
-          "_id": ObjectId("521a25d4471dee240800000a"),
+          "_id": ObjectId("526808b4471dee880b000008"),
           "school": "Vietnam National University - Ho Chi Minh City",
           "school_id": "",
           "started": "2008",
@@ -4716,12 +5404,72 @@ db.getCollection("user").insert({
           "grace": "",
           "societies": "",
           "description": ""
+        },
+        {
+          "_id": ObjectId("526808b4471dee880b000009"),
+          "school": "Nguyễn Công Trứ",
+          "school_id": "",
+          "started": "2006",
+          "ended": "2008",
+          "degree": "Trung học Phổ Thông",
+          "degree_id": "",
+          "fieldOfStudy": "Học sinh",
+          "fieldOfStudy_id": "",
+          "grace": "",
+          "societies": "",
+          "description": ""
         }
       ],
       "interest": "",
       "maritalStatus": false,
-      "adviceForContact": ""
-    }
+      "sumary": "Lorem ipsum dolor sit amet, vix tantas dissentias ullamcorper ad, per lorem virtute equidem cu. Eu hinc facer explicari his, an ius officiis theophrastus, nec id dico melius ullamcorper. Omnis nominati consulatu ea usu, cu qui magna erant splendide. Quis alii facilis ne duo, mea brute tation dissentias ei, qui ex phaedrum constituam. ",
+      "summary": "lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj "
+    },
+    "birthday": ISODate("1990-08-13T16:03:11.0Z"),
+    "firstname": "bommer",
+    "headingLine": "",
+    "ims": [
+      {
+        "_id": ObjectId("526808b4471dee880b000002"),
+        "im": "user1",
+        "type": "skype",
+        "visible": "myfollow"
+      }
+    ],
+    "industry": "Design",
+    "industry_id": "514b0983913db4ac08000021",
+    "lastname": "luu",
+    "location": {
+      "_id": ObjectId("52713bcf471dee740b000000"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
+    },
+    "phones": [
+      {
+        "_id": ObjectId("52713bcf471dee740b000003"),
+        "phone": "0903000333",
+        "type": "mobile"
+      },
+      {
+        "_id": ObjectId("52713bcf471dee740b000004"),
+        "phone": "0328492842",
+        "type": "mobile"
+      },
+      {
+        "_id": ObjectId("52713bcf471dee740b000005"),
+        "phone": "01265327779",
+        "type": "telephone"
+      }
+    ],
+    "postalCode": "84",
+    "sex": NumberInt(1),
+    "websites": [
+      {
+        "_id": ObjectId("526808b4471dee880b000006"),
+        "url": "www.yesocl.com",
+        "title": ""
+      }
+    ]
   },
   "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
   "posts": [
@@ -4765,13 +5513,331 @@ db.getCollection("user").insert({
   "salt": "09b2a07c9",
   "slug": "user1",
   "status": true,
-  "username": "user1"
+  "username": "Quang Thi"
 });
 
 /** user_group records **/
 db.getCollection("user_group").insert({
   "_id": ObjectId("516b4a91913db43009000000"),
   "name": "Default"
+});
+
+/** user_post records **/
+db.getCollection("user_post").insert({
+  "_id": ObjectId("526bec37471dee000b000001"),
+  "posts": [
+    {
+      "_id": ObjectId("526bec37471dee000b000002"),
+      "author": "user2",
+      "comments": [
+        {
+          "_id": ObjectId("526bee08471dee240b000001"),
+          "author": "Bommer Luu",
+          "content": "hello user 2",
+          "created": ISODate("2013-10-26T16:30:00.0Z"),
+          "deleted": false,
+          "email": "user3@test.com",
+          "status": true,
+          "updated": ISODate("2013-10-26T16:30:00.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("525bd847471deea808000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "hello user 3",
+      "created": ISODate("2013-10-26T16:22:15.0Z"),
+      "deleted": false,
+      "email": "user2@test.com",
+      "slug": "526bec37471dee000b000000",
+      "status": true,
+      "updated": ISODate("2013-10-26T16:30:00.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("525bd847471deea808000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_post").insert({
+  "_id": ObjectId("52486543471dee340b000003"),
+  "posts": [
+    {
+      "_id": ObjectId("52486543471dee340b000004"),
+      "content": "1. abc",
+      "status": true,
+      "created": ISODate("2013-09-29T17:37:07.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52486543471dee340b000002",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5248654a471dee340b000006"),
+      "content": "2. abc",
+      "status": true,
+      "created": ISODate("2013-09-29T17:37:14.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5248654a471dee340b000005",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52486551471dee340b000008"),
+      "content": "3. abc",
+      "status": true,
+      "created": ISODate("2013-09-29T17:37:21.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52486551471dee340b000007",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52486564471dee340b00000a"),
+      "title": "4. abc",
+      "content": "content abc&lt;br&gt;",
+      "status": true,
+      "created": ISODate("2013-09-29T17:37:40.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "4-abc-52486564471dee340b000009",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("526beccd471dee140b000004"),
+      "author": "Bommer Luu",
+      "comments": [
+        {
+          "_id": ObjectId("526bedc9471dee240b000000"),
+          "author": "user2",
+          "content": "hello user 3",
+          "created": ISODate("2013-10-26T16:28:57.0Z"),
+          "deleted": false,
+          "email": "user2@test.com",
+          "status": true,
+          "updated": ISODate("2013-10-26T16:28:57.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5f43471deeb40900001f"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "hello user 2",
+      "created": ISODate("2013-10-26T16:24:45.0Z"),
+      "deleted": false,
+      "email": "user3@test.com",
+      "slug": "526beccd471dee140b000003",
+      "status": true,
+      "updated": ISODate("2013-10-26T16:28:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5270c46b471dee0c0a000001"),
+      "content": "hello user 2",
+      "status": true,
+      "created": ISODate("2013-10-30T08:33:47.0Z"),
+      "updated": ISODate("2013-10-30T08:33:48.0Z"),
+      "author": "Bommer Luu",
+      "email": "user3@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5270c46b471dee0c0a000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5270c6c3471dee1809000001"),
+      "content": "abc user 3 ....",
+      "status": true,
+      "created": ISODate("2013-10-30T08:43:47.0Z"),
+      "updated": ISODate("2013-10-30T08:43:47.0Z"),
+      "author": "Bommer Luu",
+      "email": "user3@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("525bd847471deea808000000"),
+        "$db": "yesocl"
+      },
+      "slug": "5270c6c3471dee1809000000",
+      "deleted": false
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_post").insert({
+  "_id": ObjectId("524cee4c471dee0c0b000001"),
+  "posts": [
+    {
+      "_id": ObjectId("524cee4c471dee0c0b000002"),
+      "author": "user1",
+      "content": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, quas essent iisque ex quo, in aliquip perpetua voluptatibus pro, sea no cibo delenit maiorum. Oratio forensibus an nam, in mollis deleniti sed. In mel bonorum postulant. Esse eruditi efficiantur vis id. Vel ei mutat labitur inimicus, liber philosophia ut sit. Etiam dicam lobortis mea ut, mel et sumo diam contentiones. Usu an posse invenire signiferumque, vel tale iudico id, ex nam etiam graece reformidans.&lt;\/p&gt;\r\n&lt;p style=&quot;text-align: center;&quot;&gt;\r\n\t&lt;img src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2012\/12\/ck-65.jpg&quot; \/&gt;&lt;br \/&gt;\r\n\tEst ludus soluta at, ius nulla mandamus eu. Eu has nostro facilisis. Ea vocent consequat suscipiantur nam. Viderer delicata duo ei, has omnis solum putent no. Ne labores invidunt sed. Fastidii scriptorem eos in, quo ne utroque lucilius. Dico facilisis et mei, ex nam erat ipsum.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tAn meis habemus theophrastus eam. Legimus antiopam eloquentiam at qui, ei menandri lobortis nam. An vidisse saperet pri. Te eum eros mediocritatem. Vis possit graeco ornatus at, purto deleniti te mea. Vis cu case noster, an nam partem perfecto posidonium, duo delectus electram voluptatum at.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tSea an causae veritus. Nec minim ignota volumus et, melius laboramus nam eu. No viris ignota sit, id oporteat inimicus imperdiet vim. Ei nibh honestatis vix, vivendum verterem contentiones nec at. Ne sale iisque albucius ius.&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-10-03T04:10:52.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "slug": "1-lorem-ipsum-dolor-sit-amet-vix-nisl-repudiandae-vituperatoribus-524cee4c471dee0c0b000000",
+      "status": true,
+      "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/524cee4c471dee0c0b000002\/avatar.jpg",
+      "title": "1. Lorem ipsum dolor sit amet, vix nisl repudiandae vituperatoribus",
+      "updated": ISODate("2013-10-03T04:15:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524cf35e471deecc0a000001"),
+      "author": "user1",
+      "content": "&lt;p&gt;\r\n\tLorem ipsum dolor sit amet, quas essent iisque ex quo, in aliquip perpetua voluptatibus pro, sea no cibo delenit maiorum. Oratio forensibus an nam, in mollis deleniti sed. In mel bonorum postulant. Esse eruditi efficiantur vis id. Vel ei mutat labitur inimicus, liber philosophia ut sit. Etiam dicam lobortis mea ut, mel et sumo diam contentiones. Usu an posse invenire signiferumque, vel tale iudico id, ex nam etiam graece reformidans.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tEst ludus soluta at, ius nulla mandamus eu. Eu has nostro facilisis. Ea vocent consequat suscipiantur nam. Viderer delicata duo ei, has omnis solum putent no. Ne labores invidunt sed. Fastidii scriptorem eos in, quo ne utroque lucilius. Dico facilisis et mei, ex nam erat ipsum.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tAn meis habemus theophrastus eam. Legimus antiopam eloquentiam at qui, ei menandri lobortis nam. An vidisse saperet pri. Te eum eros mediocritatem. Vis possit graeco ornatus at, purto deleniti te mea. Vis cu case noster, an nam partem perfecto posidonium, duo delectus electram voluptatum at.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tSea an causae veritus. Nec minim ignota volumus et, melius laboramus nam eu. No viris ignota sit, id oporteat inimicus imperdiet vim. Ei nibh honestatis vix, vivendum verterem contentiones nec at. Ne sale iisque albucius ius.&lt;br \/&gt;\r\n\t&lt;br \/&gt;\r\n\tMei et eleifend iudicabit. No vero nemore adolescens pro, mel ad inermis torquatos concludaturque. No nullam integre iuvaret qui, ei sed invenire volutpat dissentiet, vim ea facer error. Cum dico ipsum quaerendum at, mei nisl vivendum ex.&lt;\/p&gt;\r\n",
+      "created": ISODate("2013-10-03T04:32:30.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "slug": "bmdesign-tu-van-thiet-ke-website-524cf35e471deecc0a000000",
+      "status": true,
+      "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/524cf35e471deecc0a000001\/avatar.jpg",
+      "title": "[BmDesign] - Tư vấn thiết kế Website",
+      "updated": ISODate("2013-10-03T10:01:13.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("524d939e471deed00b000001"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2013-10-03T15:56:14.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "524d939e471deed00b000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("524d93a9471deed00b000003"),
+      "content": "aaaa",
+      "status": true,
+      "created": ISODate("2013-10-03T15:56:25.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "524d93a9471deed00b000002",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("526b463c471dee6409000001"),
+      "content": "hello",
+      "status": true,
+      "created": ISODate("2013-10-26T04:34:04.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "526b463c471dee6409000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("526bebdf471dee140b000001"),
+      "content": "hello Bommer",
+      "status": true,
+      "created": ISODate("2013-10-26T16:20:47.0Z"),
+      "updated": ISODate("2013-10-26T16:20:47.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "526bebdf471dee140b000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52713a9e471dee5c0b000001"),
+      "content": "Hôm nay làm được nhiều việc quá :)",
+      "status": true,
+      "created": ISODate("2013-10-30T16:58:06.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52713a9e471dee5c0b000000",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52713b18471dee640b000001"),
+      "content": "anc",
+      "status": true,
+      "created": ISODate("2013-10-30T17:00:08.0Z"),
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52713b18471dee640b000000",
+      "deleted": false
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
 });
 
 /** ward records **/

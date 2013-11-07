@@ -45,6 +45,9 @@ Class User {
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
 
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Social\Network", inversedBy="users") */
+    private $socialNetwork;
+
     /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
 	private $groups = array();
 	
@@ -60,8 +63,17 @@ Class User {
 	/** @MongoDB\Collection */
 	private $refreshIds = array();
 
-	/** @MongoDB\EmbedMany(targetDocument="Post") */
-	private $posts = array();
+	/** @MongoDB\ReferenceOne(targetDocument="Posts", mappedBy="user") */
+	private $postData;
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Friend") */
+	private $friends = array();
+
+	/** @MongoDB\EmbedMany(targetDocument="Document\Friend\Group") */
+	private $friendGroups = array();
+
+	/** @MongoDB\Collection */
+	private $friendRequests;
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
@@ -70,6 +82,9 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
+        $this->getDataGender();
+        $this->getDataSolrFriendList();
+        $this->getDataSolrRequestList();
     }
 
     /** @MongoDB\PreUpdate */
@@ -78,31 +93,16 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
+        $this->getDataGender();
+        $this->getDataSolrFriendList();
+        $this->getDataSolrRequestList();
     }
-
-	/**
-	 * Get Post By ID
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: MongoDB ID
-	 * @return:
-	 * 		- Object Post
-	 * 		- null if not found
-	 */
-	public function getPostById( $post_id ){
-		foreach ( $this->posts as $post ){
-			if ( $post->getId() === $post_id ){
-				return $post;
-			}
-		}
-		
-		return null;
-	}
 
     /**
 	* Format array to save to Cache
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Branch
+	* @return: array User
 	*/
     public function formatToCache(){
 		$data = array(
@@ -149,6 +149,26 @@ Class User {
 		return false;
 	}
 
+	public function getFriendById( $friend_id ){
+		foreach ( $this->friends as $friend ) {
+			if ( $friend->getUser() && $friend->getUser()->getId() == $friend_id ){
+				return $friend;
+			}
+		}
+
+		return null;
+	}
+
+	public function getFriendBySlug( $friend_slug ){
+		foreach ( $this->friends as $friend ) {
+			if ( $friend->getUser() && $friend->getUser()->getSlug() == $friend_slug){
+				return $friend;
+			}
+		}
+
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}
@@ -162,6 +182,9 @@ Class User {
 	}
 
 	public function getUsername(){
+		if ( !$this->username ){
+			return $this->getFullname();
+		}
 		return $this->username;
 	}
 
@@ -202,7 +225,11 @@ Class User {
 	}
 
 	public function getFullname(){
-		return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		if ( $this->meta ){
+			return $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+		}
+
+		return '';
 	}
 
 	public function setGroupUser( $groupUser ){
@@ -211,6 +238,14 @@ Class User {
 
 	public function getGroupUser(){
 		return $this->groupUser;
+	}
+
+	public function setSocialNetwork( \Document\Social\Network $socialNetwork ){
+		$this->socialNetwork = $socialNetwork;
+	}
+
+	public function getSocialNetwork(){
+		return $this->socialNetwork;
 	}
 
 	public function addCompanyCreated( \Document\Company\Company $companyCreated ){
@@ -269,16 +304,12 @@ Class User {
 		return $this->avatar;
 	}
 
-	public function addPost( Post $post ){
-		$this->posts[] = $post;
+	public function setPostData( $postData ){
+		$this->posts = $postData;
 	}
 
-	public function setPosts( $posts ){
-		$this->posts = $posts;
-	}
-
-	public function getPosts(){
-		return $this->posts;
+	public function getPostData(){
+		return $this->postData;
 	}
 
 	public function addRefreshId( $refreshId ){
@@ -291,6 +322,42 @@ Class User {
 
 	public function getRefreshIds(){
 		return $this->refreshIds;
+	}
+
+	public function addFriend( \Document\Friend\Friend $friend ){
+		$this->friends[] = $friend;
+	}
+
+	public function setFriends( $friends ){
+		$this->friends = $friends;
+	}
+
+	public function getFriends(){
+		return $this->friends;
+	}
+
+	public function addFriendGroup( \Document\Friend\Group $friendGroup ){
+		$this->friendGroups[] = $friendGroup;
+	}
+
+	public function setFriendGroups( $friendGroups ){
+		$this->friendGroups = $friendGroups;
+	}
+
+	public function getFriendGroups(){
+		return $this->friendGroups;
+	}
+
+	public function addFriendRequest( $friendRequest ){
+		$this->friendRequests[] = $friendRequest;
+	}
+
+	public function setFriendRequests( $friendRequests ){
+		$this->friendRequests = $friendRequests;
+	}
+
+	public function getFriendRequests(){
+		return $this->friendRequests;
 	}
 
 	/**
@@ -389,6 +456,76 @@ Class User {
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrFriendList;
+
+	public function setSolrFriendList( $solrFriendList ){
+		$this->solrFriendList = $solrFriendList;
+	}
+
+	public function getSolrFriendList(){
+		return $this->solrFriendList;
+	}
+
+	public function getDataSolrFriendList(){
+		try{
+			foreach ($this->getFriends() as $friend) {
+				$this->solrFriendList .= ' ' . $friend->getUser()->getId();
+			}
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrRequestList;
+
+	public function setSolrRequestList( $solrRequestList ){
+		$this->solrRequestList = $solrRequestList;
+	}
+
+	public function getSolrRequestList(){
+		return $this->solrRequestList;
+	}
+
+	public function getDataSolrRequestList(){
+		try{
+			foreach ($this->getFriendRequests() as $request) {
+				$this->solrRequestList .= ' ' . $request;
+			}
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
+		}
+	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $gender;
+
+	public function setGender( $gender ){
+		$this->gender = $gender;
+	}
+
+	public function getGender(){
+		return $this->gender;
+	}
+
+	public function getDataGender(){
+		try{
+			$this->gender = (int) $this->getMeta()->getSex();
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
 		}
 	}
 	//---------------------------------- end Solr Data Cache --------------------------

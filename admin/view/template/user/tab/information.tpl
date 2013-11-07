@@ -96,6 +96,10 @@
         <td><input class="input-xxlarge" type="text" name="background[adviceforcontact]" value="<?php echo $advice_for_contact; ?>" /></td>
     </tr>
     <tr>
+        <td><?php echo $entry_summary; ?></td>
+        <td><textarea class="input-xxlarge" rows="8" name="background[summary]"><?php echo $summary; ?></textarea></td>
+    </tr>
+    <tr>
         <td><span class="required">*</span> <?php echo $entry_industry; ?></td>
         <td><input required="required" datalist="industry" class="datalist industry input-medium" type="text" name="meta[industry]" value="<?php echo $industry; ?>" /><input name="meta[industry_id]" value="<?php echo $industry_id; ?>" type="hidden" />
         <?php if ($error_industry) { ?>

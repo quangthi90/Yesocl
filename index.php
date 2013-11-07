@@ -16,12 +16,16 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
+require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 // require_once(DIR_SYSTEM . 'library/affiliate.php');
 // require_once(DIR_SYSTEM . 'library/currency.php');
 // require_once(DIR_SYSTEM . 'library/tax.php');
 // require_once(DIR_SYSTEM . 'library/weight.php');
 // require_once(DIR_SYSTEM . 'library/length.php');
 // require_once(DIR_SYSTEM . 'library/cart.php');
+
+// Rename Document for linux
+// include ('libs/renameFolder.php');
 
 require_once(DIR_DATABASE . 'doctrine.php');
 
@@ -39,6 +43,8 @@ $registry->set('config', $config);
 // Database 
 $db = new Doctrine($registry);
 $registry->set('db', $db);
+$registry->set('dm', $db->getDm());
+$registry->set('client', $db->getClient());
 
 // Store
 /*if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
@@ -81,11 +87,6 @@ $twig = new Twig_Environment($twig_loader, array(
     // 'cache' => DIR_SYSTEM . '/cache/twig',
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
-// Custom twig extension
-require_once DIR_APPLICATION . 'extension/loader.php';
-$extension = new ExtensionLoader( $twig, $config );
-$registry->set('extension', $extension);
-$registry->set('twig', $twig);
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -203,7 +204,16 @@ $language->load($languages[$code]['filename']);
 $registry->set('language', $language); 
 
 // Document
-$registry->set('document', new Document()); 		
+$registry->set('document', new Document()); 
+
+// facebook
+$fb_setting = array(
+	'appId' => '1417585645119646',
+	'secret' => 'cb6ad77f5cf54b9178cdfc15ee458e95',
+	'cookie' => false,
+	);
+$facebook = new Facebook( $fb_setting );
+$registry->set( 'facebook', $facebook );		
 
 // Customer
 $customer = new Customer($registry);
@@ -233,6 +243,12 @@ $registry->set('customer', $customer);
 
 //  Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
+
+// Custom twig extension
+require_once DIR_APPLICATION . 'extension/loader.php';
+$extension = new ExtensionLoader( $twig, $registry );
+$registry->set('extension', $extension);
+$registry->set('twig', $twig);
 		
 // Front Controller 
 $controller = new Front($registry);
@@ -241,21 +257,37 @@ $controller = new Front($registry);
 $controller->addPreAction(new Action('common/maintenance'));
 
 // SEO URL's
-$controller->addPreAction(new Action('common/seo_url'));	
-	
+$controller->addPreAction(new Action('common/seo_url'));
+
 // Router
 if ( $customer->isLogged() ) {
-	if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
+		if (!isset($request->get['route']) || (
+			$request->get['route'] == 'account/login/login' || 
+			$request->get['route'] == 'account/login' ||
+			$request->get['route'] == 'account/register/register' ||
+			$request->get['route'] == 'account/forgotten' ||
+			$request->get['route'] == 'welcome/home'
+		)) 
+		{
+			$action = new Action('common/home');
+		}else{
+			$action = new Action($request->get['route']);
+		}
+	/*if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
 		$action = new Action($request->get['route']);
 	} else {
 		$action = new Action('common/home');
-	}
+	}*/
+}elseif ( $customer->hasRemember() ) {
+	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
+	exit;
 }else{
 	if (isset($request->get['route']) && (
 		$request->get['route'] == 'account/login/login' || 
 		$request->get['route'] == 'account/login' ||
 		$request->get['route'] == 'account/register/register' ||
-		$request->get['route'] == 'account/forgotten'
+		$request->get['route'] == 'account/forgotten' ||
+		$request->get['route'] == 'account/login/facebookConnect'
 	)) 
 	{
 		$action = new Action($request->get['route']);

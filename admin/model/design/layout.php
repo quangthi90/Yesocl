@@ -88,26 +88,22 @@ class ModelDesignLayout extends Doctrine {
 			$data['start'] = 0;
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' )
-    		->limit( $data['limit'] )
+		return $this->dm->getRepository('Document\Design\Layout')->findAll()
+			->limit( $data['limit'] )
     		->skip( $data['start'] )
     		->sort( 'path' );
-    		
-    	return $query->getQuery()->execute();
 	}
 
 	public function getAllLayouts() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' )->sort( 'path' );
+		$query = $this->dm->getRepository( 'Document\Design\Layout' )->findAll()->sort( 'path' );
     		
-    	return $query->getQuery()->execute();
+    	return $query;
 	}
 	
 	public function getTotalLayouts() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Layout' );
+		$query = $this->dm->getRepository( 'Document\Design\Layout' )->findAll();
 
-		$layouts = $query->getQuery()->execute();
-
-		return count($layouts);
+		return $query->count();
 	}
 }
 ?>

@@ -11,7 +11,7 @@ use Document\User\Meta\Education;
 use Document\User\Meta\Experience;
 use Document\User\Meta\Former;
 
-class ModelUserUser extends Doctrine {
+class ModelUserUser extends Model {
 	/**
 	 * Create new User
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -98,6 +98,11 @@ class ModelUserUser extends Doctrine {
 			$data['background']['adviceforcontact'] = '';
 		}
 
+		// Summary
+		if ( !isset($data['background']['summary']) || empty($data['background']['summary']) ){
+			$data['background']['summary'] = '';
+		}
+
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
@@ -131,9 +136,9 @@ class ModelUserUser extends Doctrine {
 			$data['user']['websites'] = array();
 		}
 
-		// Experiencies
-		if ( !isset($data['background']['experiencies']) || empty($data['background']['experiencies']) ){
-			$data['background']['experiencies'] = array();
+		// Experiences
+		if ( !isset($data['background']['experiences']) || empty($data['background']['experiences']) ){
+			$data['background']['experiences'] = array();
 		}
 
 		// Educations
@@ -174,9 +179,9 @@ class ModelUserUser extends Doctrine {
 			$emails[$email_data['email']] = $email;
 		}
 
-		// Create Experiencies
-		$experiencies = array();
-		foreach ($data['background']['experiencies'] as $experience_data) {
+		// Create Experiences
+		$experiences = array();
+		foreach ($data['background']['experiences'] as $experience_data) {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
@@ -198,7 +203,7 @@ class ModelUserUser extends Doctrine {
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
-			$experiencies[] = $experience;
+			$experiences[] = $experience;
 		}
 
 		// Create Educations
@@ -226,8 +231,9 @@ class ModelUserUser extends Doctrine {
 		$background = new Background();
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
+		$background->setSummary( trim( $data['background']['summary'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
-		$background->setExperiencies( $experiencies );
+		$background->setExperiences( $experiences );
 		$background->setEducations( $educations );
 
 		// Create Ims
@@ -290,7 +296,7 @@ class ModelUserUser extends Doctrine {
 		$meta = new Meta();
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
-		$meta->setBirthday( new \Datetime( $data['background']['birthday'] ) );
+		$meta->setBirthday( new \Datetime( $data['meta']['birthday'] ) );
 		$meta->setSex( $data['meta']['sex'] );
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
@@ -446,6 +452,11 @@ class ModelUserUser extends Doctrine {
 			$data['background']['adviceforcontact'] = '';
 		}
 
+		// Summary
+		if ( !isset($data['background']['summary']) || empty($data['background']['summary']) ){
+			$data['background']['summary'] = '';
+		}
+
 		// Industry is required
 		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
 			return false;
@@ -479,9 +490,9 @@ class ModelUserUser extends Doctrine {
 			$data['user']['websites'] = array();
 		}
 
-		// Experiencies
-		if ( !isset($data['background']['experiencies']) || empty($data['background']['experiencies']) ){
-			$data['background']['experiencies'] = array();
+		// Experiences
+		if ( !isset($data['background']['experiences']) || empty($data['background']['experiences']) ){
+			$data['background']['experiences'] = array();
 		}
 
 		// Educations
@@ -522,9 +533,9 @@ class ModelUserUser extends Doctrine {
 			$emails[$email_data['email']] = $email;
 		}
 
-		// Create Experiencies
-		$experiencies = array();
-		foreach ($data['background']['experiencies'] as $experience_data) {
+		// Create Experiences
+		$experiences = array();
+		foreach ($data['background']['experiences'] as $experience_data) {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
@@ -546,7 +557,7 @@ class ModelUserUser extends Doctrine {
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
-			$experiencies[] = $experience;
+			$experiences[] = $experience;
 		}
 
 		// Create Educations
@@ -574,8 +585,9 @@ class ModelUserUser extends Doctrine {
 		$background = new Background();
 		$background->setMaritalStatus( $data['background']['maritalstatus'] );
 		$background->setAdviceForContact( trim( $data['background']['adviceforcontact'] ) );
+		$background->setSummary( trim( $data['background']['summary'] ) );
 		$background->setInterest( trim( $data['background']['interest'] ) );
-		$background->setExperiencies( $experiencies );
+		$background->setExperiences( $experiences );
 		$background->setEducations( $educations );
 
 		// Create Ims
@@ -639,7 +651,7 @@ class ModelUserUser extends Doctrine {
 		$meta->setFirstname( trim( $data['meta']['firstname'] ) );
 		$meta->setLastname( trim( $data['meta']['lastname'] ) );
 		$meta->setSex( $data['meta']['sex'] );
-		$meta->setBirthday(new \Datetime( $data['background']['birthday'] ));
+		$meta->setBirthday(new \Datetime( $data['meta']['birthday'] ));
 		$meta->setLocation( $location );
 		$meta->setPostalCode( trim( $data['meta']['postalcode'] ) );
 		$meta->setAddress( trim( $data['meta']['address'] ) );
@@ -739,7 +751,9 @@ class ModelUserUser extends Doctrine {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
 
 				if ( $user ){
+					$this->load->model('tool/image');
 					$this->load->model('tool/cache');
+					$this->model_tool_image->deleteDirectoryImage( DIR_IMAGE . $this->config->get('user')['default']['image_link'] . $user->getId() );
 					$this->model_tool_cache->deleteObject( $user->getSlug(), $this->config->get('common')['type']['user'] );
 					
 					$this->dm->remove($user);
