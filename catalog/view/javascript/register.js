@@ -109,7 +109,7 @@
 		}
 
 		if (this.$password.val() == ''){
-			return false;	
+			return false;
 		}
 
 		if (this.$confirm.val() == ''){

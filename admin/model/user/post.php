@@ -65,7 +65,7 @@ class ModelUserPost extends Model {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $post->getId();
 			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
 				$post->setThumb( $data['thumb'] );
 			}
@@ -136,11 +136,13 @@ class ModelUserPost extends Model {
 
 		$this->load->model('tool/image');
 		
+		$this->dm->flush();
+
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId() . '/' . $folder_name . '/' . $post->getId();
+			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $post_id;
 			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
 				$post->setThumb( $data['thumb'] );
 			}

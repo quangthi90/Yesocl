@@ -12,6 +12,13 @@
 		<img src="image/template/intro-2-bg.png" />  
     </div>    
 </div>
+{% if error != null %}
+<div id="y-message-info" data-title="Login failed" 
+                        data-message="{{ error }}" 
+                        data-class="anim error"
+                        style="display: none;">      
+</div>
+{% endif %}
 <div id="y-frm-register" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">
@@ -67,7 +74,6 @@
 	                    <option value="">-- Select sex --</option>
 	                    <option value="1">Male</option>
 	                    <option value="2">Female</option>
-	                    <option value="3">Unknow</option>
 	                </select>
 	                <div class="warning hidden">warning</div>
             	</div>
@@ -89,41 +95,8 @@
 {% endblock %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>
+	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>  
     <script type="text/javascript">
-        jQuery(document).ready(function () {
-        	//Join clicked:
-			$('#intro-bg img').click(function(e){
-				$('#overlay').fadeIn(function(){					
-					$('#intro-bg').css('text-align','left');					
-					$('#y-frm-register').animate(
-						{
-							right : '50px'
-						},600
-					);					
-				});
-			});			
-			//if close button is clicked
-			$('.y-frm .close').click(function (e) {
-				closeLoginForm();
-			});					
-			//if overlay is clicked
-			$('#overlay').click(function () {
-				closeLoginForm();
-			});		
-        });		
-		//Close Form:
-		function closeLoginForm(){				
-			$('#y-frm-register').animate(
-				{
-					right : '-9990px'
-				},500,	
-				function(){
-					$('#overlay').fadeOut(300, function(){
-						$('#intro-bg').css('text-align','center');	
-					});												
-				}					
-			);
-		}		
-    </script>
+        $('#y-message-info').showMessageDialog();
+    </script>  
 {% endblock %}

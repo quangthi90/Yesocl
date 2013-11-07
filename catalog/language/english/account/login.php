@@ -19,4 +19,6 @@ $_['entry_password']               = 'Password:';
 // Error
 $_['error_login']                  = 'Warning: No match for E-Mail Address and/or Password.';
 $_['error_approved']               = 'Warning: Your account requires approval before you can login.'; 
+$_['error_unable_connect']		   = 'Warning: Can not connect to you facebook acount!';
+$_['error_exist_connect']		   = 'Warning: Your email was used!';
 ?>

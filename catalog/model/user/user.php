@@ -28,6 +28,12 @@ class ModelUserUser extends Model {
 			$user->addFriend( $friend );
 		}
 
+		if ( !empty($data['unfriend']) ){
+			$user->getFriends()->removeElement( $user->getFriendById( $data['unfriend'] ) );
+			$user2 = $this->dm->getRepository('Document\User\User')->find( $data['unfriend'] );
+			$user2->getFriends()->removeElement( $user2->getFriendBySlug( $user_slug ) );
+		}
+
 		$this->dm->flush();
 
 		return true;
@@ -108,6 +114,20 @@ class ModelUserUser extends Model {
 		$query->setStart( $data['start'] );
  
 		return $this->client->execute( $query );
+	}
+
+	public function isExistEmail( $email, $user_id = '' ) {
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 'emails.email' => $email ) );
+		
+		foreach ( $users as $user ) {
+			if ( $user->getId() == $user_id ){
+				continue;
+			}else {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }
 ?>

@@ -9,6 +9,7 @@ class ControllerFriendFriend extends Controller {
 		
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
+		$this->load->model('friend/friend');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -22,6 +23,13 @@ class ControllerFriendFriend extends Controller {
 		if ( !$user ){
 			return false;
 		}
+
+		$this->data['link_filter_friends'] = $this->url->link( 'friend/friend/getListFriends', '', 'SSL' );
+
+		$this->data['data_filter_all'] = '{ "filter_request": "1" }';
+		$this->data['data_filter_recent_added'] = '{}';
+		$this->data['data_filter_male'] = '{ "filter_gender": "1" }';
+		$this->data['data_filter_female'] = '{ "filter_gender": "2" }';
 
 		$user_temp = $user->formatToCache();
 
@@ -37,9 +45,14 @@ class ControllerFriendFriend extends Controller {
 
 		$this->data['current_user_id'] = $user->getId();
 
-		$this->data['friends'] = array();
+		$this->data['friends'] = $this->model_friend_friend->getListFriends( array(
+			'filter_request' => 1,
+			) 
+		);
 
-		foreach ( $user->getFriends() as $friend ) {
+		/*$this->data['friends'] = array();
+
+		foreach ( $this->user->getFriends() as $friend ) {
 			$friend = $friend->getUser();
 
 			if ( $friend->getFriendRequests() && in_array($this->customer->getId(), $friend->getFriendRequests()) ){
@@ -60,6 +73,7 @@ class ControllerFriendFriend extends Controller {
 
 			$friend['meta'] = $meta;
 			$friend['fr_status'] = $friend_status;
+			$friend['numFriend'] = ( $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) ) == 0 ) ? 'Not have multi friend' : $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) );
 
 			if ( !array_key_exists($friend['id'], $this->data['users']) ){
 				if ( !empty($friend['avatar']) ){
@@ -73,7 +87,7 @@ class ControllerFriendFriend extends Controller {
 				$this->data['users'][$friend['id']] = $friend;
 				$this->data['friends'][$friend['id']] = $friend;
 			}
-		}
+		}*/
 
 		$this->data['group'] = array();
 
@@ -83,7 +97,7 @@ class ControllerFriendFriend extends Controller {
 				'name' => $group->getName()
 			);
 		}
-		
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';
 		} else {
@@ -97,6 +111,38 @@ class ControllerFriendFriend extends Controller {
 		);
 										
 		$this->response->setOutput($this->twig_render());
+	}
+
+	public function getListFriends() {
+		$json = array();
+
+		if ( $this->customer->isLogged() ) {
+			$data = array();
+
+			if ( isset( $this->request->post['filter_name'] ) && (strlen( $this->request->post['filter_name'] ) > 0) ) {
+				$data['filter_name'] = $this->request->post['filter_name'];
+			}
+
+			if ( isset( $this->request->post['filter_gender'] ) ) {
+				$data['filter_gender'] = $this->request->post['filter_gender'];
+			}
+
+			if ( isset( $this->request->post['filter_request'] ) ) {
+				$data['filter_request'] = $this->request->post['filter_request'];
+			}
+
+			$data['limit'] = 20;
+			$data['start'] = 0;
+
+			if ( count( $data ) > 0 ) {
+				$this->load->model( 'friend/friend' );
+
+				$json['success'] = 'ok';
+				$json['friends'] = $this->model_friend_friend->getListFriends( $data );
+			} 
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>

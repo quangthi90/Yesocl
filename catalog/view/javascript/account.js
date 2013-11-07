@@ -6,6 +6,8 @@
 		this.$email		= $el.find('input[name=\'email\']');
 		this.$password	= $el.find('input[name=\'password\']');
 
+		this.$remember	= $el.find('input[name=\'remember\']');
+
 		this.url		= $el.attr('action');
 		this.direct_url = $el.data('url');
 
@@ -27,7 +29,8 @@
 			if(that.validate() != false){
 				that.data = {
 					email		: that.$email.val(),
-					password	: that.$password.val()
+					password	: that.$password.val(),
+					remember	: (that.$remember.attr('checked') == 'checked')?'1':'0'
 				};
 
 				that.submit(that.$login_btn);
@@ -38,7 +41,7 @@
 	};
 
 	Login.prototype.submit = function($button){
-		that = this;
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',

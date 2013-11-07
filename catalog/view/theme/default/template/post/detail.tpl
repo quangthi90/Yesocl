@@ -63,11 +63,6 @@
 		</div>		
 		<div id="post-content">
 			{{ post.content|raw }}
-			{{ post.content|raw }}
-			{{ post.content|raw }}
-			{{ post.content|raw }}
-			{{ post.content|raw }}
-			{{ post.content|raw }}
 		</div>
 	</div>
 	{{ block('post_common_post_comment') }}

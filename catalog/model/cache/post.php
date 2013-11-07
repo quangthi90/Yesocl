@@ -192,10 +192,12 @@ class ModelCachePost extends Model {
 				if ( !$post ){
 					continue;
 				}
-				$post = $this->model_tool_cache->setCachePost( $post );
-			}
 
-			$posts[] = $post;
+				$post = $this->model_tool_cache->setCachePost( $post );
+
+				$post['type'] = strtolower( $type );
+				$posts[] = $post;
+			}
 		}
 
 		return $posts;

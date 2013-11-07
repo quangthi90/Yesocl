@@ -27,10 +27,40 @@ Class Background {
 	private $adviceForContact;
 
     /** @MongoDB\String */
-	private $sumary;
+	private $summary;
 
     /** @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Skill") */
     private $skills = array();
+
+    public function getEducationById( $id ){
+    	foreach ( $this->educations as $education ) {
+    		if ( $education->getId() == $id ){
+    			return $education;
+    		}
+    	}
+
+    	return null;
+    }
+
+    public function getExperienceById( $id ){
+    	foreach ( $this->experiences as $experience ) {
+    		if ( $experience->getId() == $id ){
+    			return $experience;
+    		}
+    	}
+
+    	return null;
+    }
+
+    public function getSkillById( $id ){
+    	foreach ( $this->skills as $skill ) {
+    		if ( $skill->getId() == $id ){
+    			return $skill;
+    		}
+    	}
+
+    	return null;
+    }
 
 	public function getId(){
 		return $this->id;
@@ -84,12 +114,12 @@ Class Background {
 		return $this->adviceForContact;
 	}
 
-	public function setSumary( $sumary ) {
-		$this->sumary = $sumary;
+	public function setSummary( $summary ) {
+		$this->summary = $summary;
 	}
 
-	public function getSumary() {
-		return $this->sumary;
+	public function getSummary() {
+		return $this->summary;
 	}
 
 	public function addSkill( Education $skill ){
