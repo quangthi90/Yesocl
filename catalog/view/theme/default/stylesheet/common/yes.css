@@ -670,6 +670,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .sidebar-wrapper .search-box {
   position: relative;
+  display: none;
 }
 .search-box input[type="text"] {
   padding-right: 25px;
@@ -711,7 +712,7 @@ a.btn-notification:hover .notification-item-name > i {
 .sidebar-controls {
   color: #fff;
   position: absolute;
-  top: 135px;
+  top: 85px;
   left: 30px;
   right: 30px;
   bottom: 40px;
@@ -733,10 +734,16 @@ a.btn-notification:hover .notification-item-name > i {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.yes-menu-list .menu-item > a.active,
 .yes-menu-list .menu-item > a:hover,
 .yes-menu-list .menu-item > a:focus {
   background-color: #009B77;
+}
+.yes-menu-list .menu-item.active > a {
+  background-color: #009B77;
+  font-weight: bold;
+}
+.yes-menu-list .menu-item.active > a > span {
+  color: #fff;
 }
 .yes-menu-list .menu-item > a > span {
   color: #fff;
@@ -814,17 +821,18 @@ a.btn-notification:hover .notification-item-name > i {
     background: #fff;
     position: relative;
 }
-
 .post-selecting {
   border-top-color: #3B8F39;
   z-index: 101;
 }
-
 .post .post_header .post_title {
     font-size: 19px;
-    margin: 3px 0px 0px 0px;
+    margin: 3px 0px 3px 0px;
     white-space: normal;
-    line-height: 24px;
+    line-height: 23px;
+    max-height: 48px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .post .post_header .post_meta {
   color: #727272;
@@ -835,6 +843,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post .post_header .post_meta span{
   margin-left: 20px;
+  vertical: middle;
 } 
 .post .post_header .post_meta span:first-child {
   margin-left: 0px;
@@ -845,6 +854,23 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post .post_header .post_meta span d {
   font-weight: bold;
+}
+.post .post_header .post_meta span.user_info {
+}
+.post .post_header .post_meta span.user_info .name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #575757;
+}
+.post .post_header .post_meta span.user_info .image > img{
+  width: 25px;
+  height: 25px;
+}
+.post .post_header .post_meta span.post_time i {
+  font-size: 12px;  
+}
+.post .post_header .post_meta span.post_time d {
+  font-size: 10px;
 }
 .post .post_header .post_title a {
   color: #363636;
@@ -1478,10 +1504,12 @@ a.btn-notification:hover .notification-item-name > i {
 .post-bigger .post_header .post_title {
   font-size: 26px;
   line-height: 30px;
+  max-height: 60px;
 }
 .column-special .post-special .post_title {
   font-size: 21px;
   line-height: 26px;
+  max-height: 51px;
 }
 .column-special .post-special .post_body {
   font-size: 15px;
@@ -1494,6 +1522,7 @@ a.btn-notification:hover .notification-item-name > i {
 .column-special .post-weak .post_title{
   font-size: 16px; 
   line-height: 20px;
+  max-height: 42px;
 }
 .column-special .post-weak .post_body {
   font-size: 12px;

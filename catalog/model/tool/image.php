@@ -99,5 +99,15 @@ class ModelToolImage extends Model {
 			return false;
 		}
 	}
+
+	public function getAvatarUser( $_avatar, $_email ){
+		$avatar = $this->resize( $_avatar, 180, 180 );
+
+		if ( $avatar ){
+			return $avatar;
+		}
+
+		return $this->getGavatar( $_email, 180 );
+	}
 }
 ?>
