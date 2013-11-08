@@ -825,9 +825,22 @@ a.btn-notification:hover .notification-item-name > i {
   border-top-color: #3B8F39;
   z-index: 101;
 }
+.post .yes-dropdown {
+  top: 4px;
+  right: 1px;
+  display: none;
+}
+.post:hover .yes-dropdown {
+  display: block;
+}
+.post .yes-dropdown .dropdown-toggle {
+  padding: 5px 8px;
+  background-color: #f0f0f0;
+}
 .post .post_header .post_title {
     font-size: 19px;
     margin: 3px 0px 3px 0px;
+    padding-right: 10px;
     white-space: normal;
     line-height: 23px;
     max-height: 48px;
@@ -1804,6 +1817,9 @@ ul.user_actions li:hover i{
 .yes-dropdown .dropdown-toggle{
   cursor: pointer;
 }
+.yes-dropdown .dropdown-toggle i {
+  color: #505050;
+}
 .yes-dropdown .dropdown .dropdown-menu {
   min-width: inherit;
   right: 0px;
@@ -1812,6 +1828,9 @@ ul.user_actions li:hover i{
 .yes-dropdown .dropdown .dropdown-menu a {
   cursor: pointer;
   padding-right: 15px;
+}
+.yes-dropdown .dropdown.open .dropdown-toggle > i{
+  color: #009B77;
 }
 /* -------------------------------------- END DROPDOWN ---------------------------------------- */
 /* ------------------------------------- START FRIEND ------------------------------------------ */

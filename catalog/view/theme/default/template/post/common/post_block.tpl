@@ -1,8 +1,21 @@
 {% block post_common_post_block %}
 	<div class="feed post post_status">
-		<div class="post_remove">
-			<a href="#" title="Delete"><i class="icon-remove"></i></a>
-		</div>
+		<div class="yes-dropdown">
+            <div class="dropdown">
+               <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="icon-caret-down"></i>
+               </a>
+               <ul class="dropdown-menu">
+                    <li>
+                        <a href="#"><i class="icon-edit"></i>Edit</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#"><i class="icon-trash"></i>Delete</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
 		<div class="post_header">			
 			<div class="avatar_thumb">
 				<a href="{{ path('WallPage', {user_slug: user.slug}) }}">
