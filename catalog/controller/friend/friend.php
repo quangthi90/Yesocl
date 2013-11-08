@@ -98,6 +98,9 @@ class ControllerFriendFriend extends Controller {
 			);
 		}
 
+		// set selected menu
+		$this->session->setFlash( 'menu', 'friend' );
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';
 		} else {

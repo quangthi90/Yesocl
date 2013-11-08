@@ -134,6 +134,9 @@ class ControllerAccountProfile extends Controller {
 		$this->data['current_year'] = date('Y');
 		$this->data['before_year'] = $this->data['current_year'] - 100;
 
+		// set selected menu
+		$this->session->setFlash( 'menu', 'profile' );
+
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/profiles/profiles.tpl';
 		} else {

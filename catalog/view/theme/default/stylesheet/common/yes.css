@@ -743,7 +743,7 @@ a.btn-notification:hover .notification-item-name > i {
   font-weight: bold;
 }
 .yes-menu-list .menu-item.active > a > span {
-  color: #000;
+  color: #fff;
 }
 .yes-menu-list .menu-item > a > span {
   color: #fff;
