@@ -46,6 +46,7 @@ $_['routing']['ProfileAddExperience']			= 'profile/add-experience/';
 $_['routing']['ProfileAddSkill']				= 'profile/add-skill/';
 $_['routing']['ProfileRemoveSkill']				= 'profile/remove-skill/{skill_id}';
 $_['routing']['FaceBookConnect']				= 'facebookcnt/';
+$_['routing']['CompleteRegister']				= 'profile/complete-register/';
 
 // Friend
 $_['routing']['FriendPage']						= 'friend/{user_slug}/';
