@@ -30,6 +30,22 @@
                 {% set user = users[post.user_id] %}
                 <div class="feed-container feed{{ loop.index }}">
                     <div class="feed post post_in_block">
+                        <div class="yes-dropdown">
+                            <div class="dropdown">
+                               <a class="dropdown-toggle" data-toggle="dropdown" title="Action">
+                                    <i class="icon-reorder"></i>
+                               </a>
+                               <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#"><i class="icon-edit"></i>Edit</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#"><i class="icon-trash"></i>Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="post_header">
                             <h4 class="post_title" title="{{ post.title }}">
                                 <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
