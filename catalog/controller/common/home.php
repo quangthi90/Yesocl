@@ -16,12 +16,15 @@ class ControllerCommonHome extends Controller {
 
 		$this->load->model( 'branch/branch' );
 		$this->load->model( 'branch/post' );
-		$this->load->model('tool/image');
+		$this->load->model( 'tool/image' );
+		$this->load->model( 'user/user' );
 
 		$branchs = $this->model_branch_branch->getAllBranchs();
 
 		$this->data['all_posts'] = array();
 		$this->data['branchs'] = array();
+
+		$user_ids = array();
 
 		foreach ( $branchs as $key => $branch ) {
 			$branch = $branch->formatToCache();
@@ -50,14 +53,27 @@ class ControllerCommonHome extends Controller {
 
 				$post['image'] = $image;
 				
-
-				$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
 				$post['isUserLiked'] = $liked;
 
 				$this->data['all_posts'][$branch_slug][] = $post;
+
+				if ( !in_array($post['user_id'], $user_ids) ){
+					$user_ids[] = $post['user_id'];
+				}
 			}
 
 			$this->data['branchs'][] = $branch;
+		}
+
+		$users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
+
+		$this->data['users'] = array();
+		foreach ( $users as $user ) {
+			$user = $user->formatToCache();
+
+			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+
+			$this->data['users'][$user['id']] = $user;
 		}
 
 		$this->data['date_format'] = $this->language->get('date_format_full');

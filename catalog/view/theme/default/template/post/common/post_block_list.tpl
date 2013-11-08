@@ -27,6 +27,7 @@
             {% endif %}
 
             {% for post in posts|slice(0, limit) %}
+                {% set user = users[post.user_id] %}
                 <div class="feed-container feed{{ loop.index }}">
                     <div class="feed post post_in_block">
                         <div class="post_header">
@@ -35,11 +36,11 @@
                             </h4>
                             <div class="post_meta">
                                 <span class="user_info fl">
-                                    <a class="image" href="#">
-                                        <img src="http://www.gravatar.com/avatar/d41d8cd98f00b204e9800998ecf8427e?s=180" alt="user" />
+                                    <a class="image" href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                                        <img src="{{ user.avatar }}" alt="{{ user.username }}" />
                                     </a>
-                                    <a class="name" href="#">
-                                        User
+                                    <a class="name" href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                                        {{ user.username }}
                                     </a>
                                 </span>
                                 <span class="post_time fl">
