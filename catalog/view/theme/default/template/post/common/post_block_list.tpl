@@ -27,15 +27,25 @@
             {% endif %}
 
             {% for post in posts|slice(0, limit) %}
+                {% set user = users[post.user_id] %}
                 <div class="feed-container feed{{ loop.index }}">
                     <div class="feed post post_in_block">
                         <div class="post_header">
-                            <h4 class="post_title">
+                            <h4 class="post_title" title="{{ post.title }}">
                                 <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
                             </h4>
                             <div class="post_meta">
+                                <span class="user_info fl">
+                                    <a class="image" href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                                        <img src="{{ user.avatar }}" alt="{{ user.username }}" />
+                                    </a>
+                                    <a class="name" href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                                        {{ user.username }}
+                                    </a>
+                                </span>
                                 <span class="post_time fl">
-                                    <i class="icon-calendar"></i> <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
+                                    <i class="icon-calendar"></i> 
+                                    <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
                                 </span>
                                 <span class="post_cm fr">
                                     <a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
