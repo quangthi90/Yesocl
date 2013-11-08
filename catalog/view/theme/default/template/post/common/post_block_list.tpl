@@ -32,8 +32,8 @@
                     <div class="feed post post_in_block">
                         <div class="yes-dropdown">
                             <div class="dropdown">
-                               <a class="dropdown-toggle" data-toggle="dropdown" title="Action">
-                                    <i class="icon-reorder"></i>
+                               <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-caret-down"></i>
                                </a>
                                <ul class="dropdown-menu">
                                     <li>
