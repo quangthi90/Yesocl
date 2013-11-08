@@ -113,18 +113,19 @@
 
 #comment-box .mCSB_scrollTools .mCSB_draggerRail {
 	width: 6px;
+	background: #f0f0f0;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 }
 #comment-box .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
-	width: 6px;	
+	width: 6px;
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
 }
 #comment-box .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
-	background: #000;
+	background: #b4b4b4;
 }
 #comment-box .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
 	background: #009B77;
