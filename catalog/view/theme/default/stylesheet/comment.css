@@ -111,5 +111,21 @@
     padding:4px 0px 0px 0px;
 }
 
-
-
+#comment-box .mCSB_scrollTools .mCSB_draggerRail {
+	width: 6px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+#comment-box .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	width: 6px;	
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+#comment-box .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+	background: #000;
+}
+#comment-box .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+	background: #009B77;
+}
