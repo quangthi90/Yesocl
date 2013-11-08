@@ -421,15 +421,18 @@
         this.$el			= $el;
         this.$content		= $el.find('textarea');
         this.$comment_btn	= $el.find('.btn-comment');
-        this.$comments = [];
+        this.$comments      = [];
         this.$press_enter_cb  = $el.find('.cb-press-enter');
+        
         this.attachEvents();
-        if(that.$press_enter_cb.parent().hasClass('checked')){
-            that.$comment_btn.hide();
-        }
     }
     CommentForm.prototype.attachEvents = function(){
         var that = this;
+
+        if(this.$press_enter_cb.parent().hasClass('checked')){
+            this.$comment_btn.hide();
+        }
+
         this.$comment_btn.click(function(e) {
             if(that.$comment_btn.hasClass('disabled')) {
                 e.preventDefault();
@@ -462,6 +465,12 @@
                 
         this.$content.keypress(function(e){
             if(that.$press_enter_cb.parent().hasClass('checked') && e.which == 13){
+                if ( that.$press_enter_cb.parent().hasClass('disabled') ){
+                    e.preventDefault();
+
+                    return false;
+                }
+
                 if(that.validate() == false){
                     return false;
                 }
@@ -472,7 +481,7 @@
                     content   : that.$content.val()
                 };
 
-                that.submit(that.$comment_btn);
+                that.submit(that.$press_enter_cb.parent());
                 return false;
             }
         });
