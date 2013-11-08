@@ -258,7 +258,7 @@
 		this.goLeftBtn = el.find('#auto-scroll-left');
 		this.goRightBtn = el.find('#auto-scroll-right');
 		this.notificationList = el.find('.notification-content-list');	
-		this.loaderBg = el.find('#y-loader');
+		//this.loaderBg = el.find('#y-loader');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -368,12 +368,12 @@
 	    });
 
 	    //Loader:	    
-		$(window).load(function(){
-			that.loaderBg.fadeOut(100);
-		});
-		$('a:not(a[href="#"])').click(function() { 
-			that.loaderBg.fadeIn(100);
-		});
+		//$(window).load(function(){
+		//	that.loaderBg.fadeOut(100);
+		//});
+		//$('a:not(a[href="#"])').click(function() { 
+		//	that.loaderBg.fadeIn(100);
+		//});
 
 	    //Popup link of image:
 	    $('.img-link-popup').magnificPopup({type:'image'});
