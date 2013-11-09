@@ -89,7 +89,6 @@
     var comment_box = $('#comment-box');
     var comment_form = $('.comment-form');
     var list_comment = $('#comment-box .y-box-content');
-    var comments = [];
 
     function CommentBtn( $el ){
         var that = this;
@@ -98,14 +97,6 @@
         this.comment_count  = $el.data('comment-count');
         this.comment_url    = $el.data('comment-url');
         this.url            = $el.data('url');
-        
-        if ( comments.length == 0 ){
-            this.comments = [];
-        }else{
-            this.comments = comments;
-            comments = [];
-
-        }
 
         this.attachEvents();
     }
@@ -135,7 +126,8 @@
     };
     CommentBtn.prototype.submit = function($button){
         var that = this;
-        if (that.comments.length == 0){
+        
+        if ( this.$el.data('Hint') == undefined ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -147,10 +139,12 @@
                     $('.comment-body').html('');
 
                     var htmlOutput = '';
+                    var comments = [];
                     for (key in data.comments) {
-                        that.comments.push(data.comments[key]);
+                        comments.push(data.comments[key]);
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
+                    that.$el.data('Hint', comments);
                 
                     htmlOutput += '<div id="add-more-item"></div>';
                     comment_box.find('.comment-body').html(htmlOutput);
@@ -160,7 +154,7 @@
                     $('.comment-body').stop().animate({
                         scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
                     }, 1000);
-                    new CommentForm(comment_form, that.comments);
+                    new CommentForm(comment_form);
 
                     $('.comment-item .like-comment').each(function(){
                         new LikeCommentBtn($(this));            
@@ -182,8 +176,10 @@
             $('.comment-body').html('');
 
             var htmlOutput = '';
-            for (key in that.comments) {
-                htmlOutput += $.tmpl( $('#item-template'), that.comments[key] ).html();
+
+            var comments = that.$el.data('Hint');
+            for (key in comments) {
+                htmlOutput += $.tmpl( $('#item-template'), comments[key] ).html();
             }
                 
             htmlOutput += '<div id="add-more-item"></div>';
@@ -236,12 +232,11 @@
         page = 1;
     }
 
-    function CommentForm( $el, _comments ){
+    function CommentForm( $el ){
         var that = this;
         this.$el            = $el;
         this.$content       = $el.find('textarea');
         this.$comment_btn   = $el.find('.btn-comment');
-        this.comments       = _comments;
         this.$press_enter_cb  = $el.find('.cb-press-enter');
         
         this.attachEvents();
@@ -321,11 +316,12 @@
             if(data.success == 'ok'){
                 var $curr_item = $('.open-comment.disabled').parents('.post');
 
-                that.comments.push(data.comment);
-                
-                comments = that.comments;
+                var $comment_btn = $curr_item.find('.open-comment');
 
-                $curr_item.find('.open-comment').each(function(){
+                var comments = $comment_btn.data('Hint');
+                comments.push(data.comment);
+
+                $comment_btn.each(function(){
                     new CommentBtn($(this));
                 });
 
@@ -337,12 +333,12 @@
                     scrollTop: $('#add-more-item').offset().top
                 }, 1000);
 
-                var comment_count = that.comments.length;
+                var comment_count = comments.length;
 
                 that.$el.parent().find('.counter').html( comment_count );
                 
-                $curr_item.find('.open-comment').parent().find('d').html( comment_count );
-                $curr_item.find('.open-comment').attr('data-comment-count', comment_count).find('d').html( comment_count );
+                $comment_btn.parent().find('d').html( comment_count );
+                $comment_btn.attr('data-comment-count', comment_count).find('d').html( comment_count );
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
                 $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 
