@@ -368,7 +368,7 @@
         promise.then(f, f);
     };
 
-    // Like a comment
+    // Like + Unlike a comment
     function LikeCommentBtn( $el ){
         var that = this;
 
@@ -457,12 +457,14 @@
     };
     LikeCommentBtn.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
-            $el.removeClass('disabled');
+            $el.removeClass('disabled').prepend($old_icon);
         };
 
-        $el.addClass('disabled').parent().append($spinner);
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
 
         promise.then(f, f);
     };
