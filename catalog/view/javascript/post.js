@@ -332,9 +332,7 @@
                 $('#add-more-item').before(htmlOutput);
                 that.$content.val('');
                 //Scroll to last post which have just been added
-                list_comment.stop().animate({ 
-                    scrollTop: list_comment[0].scrollHeight
-                }, 1000);
+                list_comment.mCustomScrollbar("scrollTo","last");
 
                 var comment_count = comments.length;
 
