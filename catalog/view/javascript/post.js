@@ -85,11 +85,13 @@
     });
 }(jQuery, document));
 
+// Comment action
 (function($, document, undefined) {
     var comment_box = $('#comment-box');
     var comment_form = $('.comment-form');
     var list_comment = $('#comment-box .y-box-content');
 
+    // Show list comment
     function CommentBtn( $el ){
         var that = this;
 
@@ -156,7 +158,7 @@
                     }, 1000);
                     new CommentForm(comment_form);
 
-                    $('.comment-item .like-comment').each(function(){
+                    $('.comment-item .comment-footer').each(function(){
                         new LikeCommentBtn($(this));            
                     });
 
@@ -192,7 +194,7 @@
             }, 100);
             new CommentForm(comment_form);
 
-            $('.comment-item .like-comment').each(function(){
+            $('.comment-item .comment-footer').each(function(){
                 new LikeCommentBtn($(this));            
             });
 
@@ -232,6 +234,7 @@
         page = 1;
     }
 
+    // Submit new comment
     function CommentForm( $el ){
         var that = this;
         this.$el            = $el;
@@ -330,7 +333,7 @@
                 that.$content.val('');
                 //Scroll to last post which have just been added
                 list_comment.stop().animate({ 
-                    scrollTop: $('#add-more-item').offset().top
+                    scrollTop: list_comment[0].scrollHeight
                 }, 1000);
 
                 var comment_count = comments.length;
@@ -342,7 +345,7 @@
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
                 $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 
-                $('.comment-item .like-comment').each(function(){
+                $('.comment-item .comment-footer').each(function(){
                     new LikeCommentBtn($(this));            
                 });
 
@@ -367,34 +370,34 @@
         promise.then(f, f);
     };
 
+    // Like a comment
     function LikeCommentBtn( $el ){
         var that = this;
-
-        var $curr_item = $el.parents('.post');
 
         this.$el            = $el;
         this.url            = $el.data('url');
         this.isLiked        = $el.data('comment-liked');
-        this.iconLike       = $el.find('i');
+        this.$btnLike       = $el.find('.like-comment');
+        this.$btnUnLike     = $el.find('.dropdown-menu .un-like-btn');
+        this.$likedLabel    = $el.find('.liked-label');
+
         this.attachEvents();
     }
-
     LikeCommentBtn.prototype.attachEvents = function(){
         var that = this;
 
-        this.$el.click(function(e) {
-            if(that.$el.hasClass('disabled')) {
+        this.$btnLike.click(function(e) {
+            if(that.$btnLike.hasClass('disabled')) {
                 e.preventDefault();
 
                 return false;
             }
 
-            that.submit(that.$el);
+            that.submit(that.$btnLike);
 
             return false;
         });
     };
-        
     LikeCommentBtn.prototype.submit = function($button){
         var that = this;
 
@@ -410,22 +413,23 @@
             if(data.success == 'ok'){
                 that.$el.find('d').html( data.like_count ); 
 
-                var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
-                var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
                 //Unlike
                 if(that.isLiked == 1) {
-                    that.iconLike.replaceWith($likeIcon);
-                    that.iconLike = $likeIcon;
+                    that.$el.removeClass('hidden');
+                    that.$btnUnLike.addClass('hidden');
+                    that.$likedLabel.addClass('hidden');
                     that.isLiked = 0;
-                }else { //Like
-                    that.iconLike.replaceWith($unLikeIcon);
-                    that.iconLike = $unLikeIcon;
+                
+                //Like
+                }else {
+                    that.$el.addClass('hidden');
+                    that.$btnUnLike.removeClass('hidden');
+                    that.$likedLabel.removeClass('hidden');
                     that.isLiked = 1;
                 }
             }
         });
     };
-        
     LikeCommentBtn.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f        = function() {
@@ -437,7 +441,6 @@
 
         promise.then(f, f);
     };
-
     $(function(){
         $('.open-comment').each(function(){
             new CommentBtn($(this));
@@ -451,6 +454,7 @@
     });
 }(jQuery, document));
 
+// Show list users
 (function($, document, undefined) {
     var list_comment = $('#comment-box .y-box-content');
 
@@ -626,6 +630,5 @@
         list_comment.on('scroll', function () {
             getComments();
         });*/
-    });
-    
+    }); 
 }(jQuery, document));

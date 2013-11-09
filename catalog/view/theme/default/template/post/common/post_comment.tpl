@@ -11,8 +11,8 @@
 			</div>
 			<div class="y-box-content comment-body">
 				<div id="add-more-item"></div>
-			</div>		
-			</div>	
+			</div>
+			</div>
 			<form class="y-comment-reply post post_new comment-form">
 				<div class="txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
@@ -21,8 +21,8 @@
 					<a class="fl comment-tool" href="#" title="Chèn hình">
 						<i class="icon-camera icon-2x"></i>
 					</a>
-					<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
-                                        <div class="fr comment-press-enter">Press Enter to send  <input type="checkbox" class="cb-press-enter" /></div>				
+					<a href="#" class="btn btn-yes fr btn-comment">Post</a>
+					<div class="fr comment-press-enter">Press Enter to send  <input type="checkbox" class="cb-press-enter" /></div>
 				</div>
 			</form>		
 		</div>			
@@ -47,17 +47,15 @@
 					</div>
 				</div>
 				<div class="comment-footer">
-					<a href="#" class="like-comment"
+					<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}"
 						data-url="${href_like}"
 						data-comment-liked="${is_liked}"
 					>
-					{{if is_liked == true}}
-						<i class="icon-thumbs-down medium-icon"></i> 
-					{{else}}
-						<i class="icon-thumbs-up medium-icon"></i> 
-					{{/if}}
-						Like (<d>${like_count}</d>)
+						<i class="icon-thumbs-up medium-icon"></i>
+						Like
 					</a>
+					<span class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked</span>
+					&nbsp;(<a href="#">${like_count}</a>)
 				</div>
 				<div class="yes-dropdown">
 					<div class="dropdown">
@@ -65,13 +63,16 @@
 					    	<i class="icon-reorder"></i>
 					   </a>
 					   <ul class="dropdown-menu">
-						    <li>
+					   		<li class="un-like-btn{{if is_liked != true}} hidden{{/if}}">
+						     	<a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+					     	</li>
+						    <!--li>
 						     	<a href="#"><i class="icon-edit"></i>Edit</a>
 					     	</li>
 					     	<li class="divider"></li>
 						    <li>
 						    	<a href="#"><i class="icon-trash"></i>Delete</a>
-						    </li>
+						    </li-->
 					    </ul>
 					</div>
 				</div>
