@@ -46,18 +46,18 @@
 						</div>												
 					</div>
 				</div>
-				<div class="comment-footer">
-					<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}"
-						data-url="${href_like}"
-						data-comment-liked="${is_liked}"
-					>
+				<div class="comment-footer" 
+					data-url="${href_like}"
+					data-comment-liked="${is_liked}"
+					data-id="${id}">
+					<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
 						<i class="icon-thumbs-up medium-icon"></i>
 						Like
 					</a>
 					<span class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked</span>
-					&nbsp;(<a href="#">${like_count}</a>)
+					&nbsp;(<a class="like-count" href="#">${like_count}</a>)
 				</div>
-				<div class="yes-dropdown">
+				<div class="yes-dropdown option-dropdown">
 					<div class="dropdown">
 					   <a class="dropdown-toggle" data-toggle="dropdown" title="Action">
 					    	<i class="icon-reorder"></i>

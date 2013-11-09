@@ -377,15 +377,18 @@
         this.$el            = $el;
         this.url            = $el.data('url');
         this.isLiked        = $el.data('comment-liked');
-        this.$btnLike       = $el.find('.like-comment');
-        this.$btnUnLike     = $el.find('.dropdown-menu .un-like-btn');
-        this.$likedLabel    = $el.find('.liked-label');
+        this.comment_id     = $el.data('id');
 
+        this.$btnLike       = $el.find('.like-comment');
+        this.$btnUnLike     = $el.parent().find('.option-dropdown .dropdown-menu .un-like-btn');
+        this.$likedLabel    = $el.find('.liked-label');
+        
         this.attachEvents();
     }
     LikeCommentBtn.prototype.attachEvents = function(){
         var that = this;
 
+        // Like Comment
         this.$btnLike.click(function(e) {
             if(that.$btnLike.hasClass('disabled')) {
                 e.preventDefault();
@@ -394,6 +397,19 @@
             }
 
             that.submit(that.$btnLike);
+
+            return false;
+        });
+
+        // Unlike Comment
+        this.$btnUnLike.click(function(e) {
+            if(that.$btnUnLike.hasClass('disabled')) {
+                e.preventDefault();
+
+                return false;
+            }
+
+            that.submit(that.$btnUnLike.find('a'));
 
             return false;
         });
@@ -411,22 +427,33 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                that.$el.find('d').html( data.like_count ); 
+                that.$el.find('.like-count').html( data.like_count ); 
 
                 //Unlike
                 if(that.isLiked == 1) {
-                    that.$el.removeClass('hidden');
+                    that.$btnLike.removeClass('hidden');
                     that.$btnUnLike.addClass('hidden');
                     that.$likedLabel.addClass('hidden');
                     that.isLiked = 0;
                 
                 //Like
                 }else {
-                    that.$el.addClass('hidden');
+                    that.$btnLike.addClass('hidden');
                     that.$btnUnLike.removeClass('hidden');
                     that.$likedLabel.removeClass('hidden');
                     that.isLiked = 1;
                 }
+
+                var $curr_post = $('.open-comment.disabled');
+                var comments = $curr_post.data('Hint');
+
+                for (var i = 0; i < comments.length; i++) {
+                    if ( comments[i].id == that.comment_id ){
+                        comments[i].is_liked = that.isLiked;
+                        comments[i].like_count = data.like_count;
+                        break;
+                    }
+                };
             }
         });
     };
