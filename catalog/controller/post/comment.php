@@ -128,35 +128,28 @@ class ControllerPostComment extends Controller {
                 'success' => 'not ok: post type empty'
             )));
         }
-
-        if ( isset($this->request->post['start']) && !empty($this->request->post['start']) ){
-            $data['start'] = $this->request->post['start'];
-        }
-
-        if ( isset($this->request->post['limit']) && !empty($this->request->post['limit']) ){
-            $data['limit'] = $this->request->post['limit'];
-        }
         
         switch ($data['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $comments = $this->model_branch_comment->getComments( $data );
+                $query_comments = $this->model_branch_comment->getComments( $data );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $comments = $this->model_user_comment->getComments( $data );
+                $query_comments = $this->model_user_comment->getComments( $data );
                 break;
             
             default:
-                $comments = array();
+                $query_comments = array();
                 break;
         }
 
         $this->load->model('user/user');
         $this->load->model('tool/image');
 
-        foreach ( $comments as $key => $comment ) {
+        $comments = array();
+        foreach ( $query_comments as $comment ) {
             if ( in_array($this->customer->getId(), $comment->getLikerIds()) ){
                 $liked = true;
             }else{
@@ -193,9 +186,9 @@ class ControllerPostComment extends Controller {
             $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
             $comment['is_liked'] = $liked;
 
-            $comments[$key] = $comment;
+            $comments[] = $comment;
         }
-
+        
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'comments' => empty($comments) ? array() : $comments
