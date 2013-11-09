@@ -500,7 +500,6 @@
 
         }
         if(that.users.length == 0){	
-            //D? li?u test demo:
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -515,10 +514,7 @@
                         that.users.push(user);
                     }
                     var templateUserInfo = $('#user-info-template');
-                    $('#user-viewer-container').html('');
-                    var userViewerContainer = $('#user-viewer-container');
-                    var htmlContent = '';
-
+                    var htmlContent = '<div id="user-viewer-container">';
                     for (var i = 0; i < that.users.length; i++) {
                         var user = that.users[i];
                         var html = templateUserInfo.html().replace(/USER_URL/gi, user.userUrl);
@@ -530,25 +526,19 @@
                             actionFriend = '<i class="icon-plus"></i>Add as Friend';
                         }
                         html = html.replace(/USER_ACTIONS/gi, actionFriend);
-                        htmlContent += html;
+                        htmlContent += html + html  + html  + html;
                     };
-                    userViewerContainer.html(htmlContent);
-                    userViewerContainer.bPopup({
-                        follow: [false, false],				
-                        speed: 300,
-                        transition: 'slideDown',
-                        modalColor : '#000',
-                        opacity: '0.5'
-                    });
+                    htmlContent += '</div>';
+                    bootbox.dialog({
+                        message: htmlContent,
+                        title: "Who liked this post"
+                    });                 
                 }
 
             });
         }else{
             var templateUserInfo = $('#user-info-template');
-            $('#user-viewer-container').html('');
-            var userViewerContainer = $('#user-viewer-container');
-            var htmlContent = '';
-
+            var htmlContent = '<div id="user-viewer-container">';
             for (var i = 0; i < that.users.length; i++) {
                 var user = that.users[i];
                 var html = templateUserInfo.html();
@@ -563,14 +553,11 @@
                 html = html.replace(/USER_ACTIONS/gi, actionFriend);
                 htmlContent += html;
             };
-            userViewerContainer.html(htmlContent);
-            userViewerContainer.bPopup({
-                follow: [false, false],				
-                speed: 300,
-                transition: 'slideDown',
-                modalColor : '#000',
-                opacity: '0.5'
-            });
+            htmlContent += '</div>';
+            bootbox.dialog({
+                message: htmlContent,
+                title: "Who liked this post"
+            });  
         }	
     }
     UserListViewer.prototype.triggerProgress = function($el, promise){
@@ -587,7 +574,7 @@
     };
 
     $(function(){
-        $('.who-action .view-list-liker').each(function(){
+        $('.view-list-liker').each(function(){
             new UserListViewer($(this));
         });
 
