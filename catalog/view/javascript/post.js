@@ -555,7 +555,7 @@
                             actionFriend = '<i class="icon-plus"></i>Add as Friend';
                         }
                         html = html.replace(/USER_ACTIONS/gi, actionFriend);
-                        htmlContent += html + html  + html  + html;
+                        htmlContent += html;
                     };
                     htmlContent += '</div>';
                     bootbox.dialog({
