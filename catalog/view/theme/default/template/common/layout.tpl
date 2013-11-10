@@ -27,9 +27,6 @@
 		</div>
 		{{ include(template_from_string( footer )) }}
 		<div id="overlay"></div>
-		<div style="width: 500px; height: 500px; top: 40px; left: 100px; display: none;" 
-			id="user-viewer-container">		
-		</div>
 		<div style="display: none;" id="user-info-template">
 			<div class="user-item fl">
 				<div class="user-item-info fl">

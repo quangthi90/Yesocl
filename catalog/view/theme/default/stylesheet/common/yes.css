@@ -1706,14 +1706,17 @@ div[data-role="editor-toolbar"] {
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
 }
 .user-item {
   overflow: hidden;  
-  margin-bottom: 5px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
   width: 500px;
+}
+.user-item:last-child {
+  border-bottom: none;
 }
 .user-item .user-item-info{
   overflow: hidden;
@@ -1731,10 +1734,11 @@ div[data-role="editor-toolbar"] {
 }
 .user-item .user-item-overview span {
   display: block;
+  font-size: 11px;
 }
 .user-item .user-item-name{
   line-height: 20px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
 }
 .user-item .btn-user-actions i {
@@ -2113,6 +2117,9 @@ ul.user_actions li:hover i{
 }
 /* ------------------------------------- END SEARCH RESULT -----------------------------------------*/
 /* ------------------------------------- START MODAL  ----------------------------------------------*/
+.modal-body {
+  max-height: 450px;
+}
 .modal-footer .btn {
   min-width: 90px;
 }

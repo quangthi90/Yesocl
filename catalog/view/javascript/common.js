@@ -380,7 +380,8 @@
 	    $('.link-popup').magnificPopup({
 	    	type:'inline',
 	    	midClick: true,
-	    	removalDelay: 300
+	    	removalDelay: 300,
+			mainClass: 'mfp-fade'
 	    });
 	}
 
