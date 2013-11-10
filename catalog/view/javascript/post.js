@@ -85,6 +85,185 @@
     });
 }(jQuery, document));
 
+// Show list users liked post
+(function($, document, undefined) {
+    var list_comment = $('#comment-box .y-box-content');
+
+    function UserInfo(user_name, user_img, user_url, number_friend, is_friend, is_follow) {
+        this.userName = user_name;
+        this.userUrl = user_url;
+        this.userImg = user_img;
+        this.numberFriend = number_friend;
+        this.isFriend = is_friend;
+        this.isFollow = is_follow;
+    }
+
+    function UserListViewer(el) {
+        this.element        = el;
+        this.viewTitle      = el.data('view-title');
+        this.viewType       = el.data('view-title');
+        this.postSlug       = el.data('post-slug');
+        this.postType       = el.data('post-type');
+        this.typeSlug       = el.data('type-slug');
+        this.url            = el.data('url');
+        this.addEvents();
+        this.users = [];
+    }
+    UserListViewer.prototype.addEvents = function() {
+        var that = this;
+        this.element.click(function(e){
+            e.preventDefault();
+            if($(this).hasClass('disabled')) {
+                return false;
+            }
+            that.showViewer();
+        });
+    }
+    UserListViewer.prototype.showViewer = function() {
+        var that = this;
+
+        var data;
+        if(that.viewType == 'like'){
+
+        }
+        else if (that.viewType == 'comment') {
+
+        }
+        else if (that.viewType == 'view') {
+
+        }
+        if(that.users.length == 0){ 
+            //D? li?u test demo:
+            var promise = $.ajax({
+                type: 'POST',
+                url:  this.url,
+                dataType: 'json'
+            });
+        
+            this.triggerProgress(that.element, promise);
+            promise.then(function(data) { 
+                if(data.success == 'ok'){ 
+                    for (key in data.users) {
+                        var user = new UserInfo(data.users[key].username, data.users[key].avatar, data.users[key].href_user, 10, 0, 1);
+                        that.users.push(user);
+                    }
+                    var templateUserInfo = $('#user-info-template');
+                    $('#user-viewer-container').html('');
+                    var userViewerContainer = $('#user-viewer-container');
+                    var htmlContent = '';
+
+                    for (var i = 0; i < that.users.length; i++) {
+                        var user = that.users[i];
+                        var html = templateUserInfo.html().replace(/USER_URL/gi, user.userUrl);
+                        html = html.replace(/USER_NAME/gi, user.userName);
+                        html = html.replace(/USER_IMG/gi, user.userImg);
+                        html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
+                        var actionFriend = '<i class="icon-ok"></i>Friend';
+                        if(user.isFriend == 0) {
+                            actionFriend = '<i class="icon-plus"></i>Add as Friend';
+                        }
+                        html = html.replace(/USER_ACTIONS/gi, actionFriend);
+                        htmlContent += html;
+                    };
+                    userViewerContainer.html(htmlContent);
+                    userViewerContainer.bPopup({
+                        follow: [false, false],             
+                        speed: 300,
+                        transition: 'slideDown',
+                        modalColor : '#000',
+                        opacity: '0.5'
+                    });
+                }
+
+            });
+        }else{
+            var templateUserInfo = $('#user-info-template');
+            $('#user-viewer-container').html('');
+            var userViewerContainer = $('#user-viewer-container');
+            var htmlContent = '';
+
+            for (var i = 0; i < that.users.length; i++) {
+                var user = that.users[i];
+                var html = templateUserInfo.html();
+                html = html.replace(/USER_URL/gi, user.userUrl);
+                html = html.replace(/USER_NAME/gi, user.userName);
+                html = html.replace(/USER_IMG/gi, user.userImg);
+                html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
+                var actionFriend = '<i class="icon-ok"></i>Friend';
+                if(user.isFriend == 0) {
+                    actionFriend = '<i class="icon-plus"></i>Add as Friend';
+                }
+                html = html.replace(/USER_ACTIONS/gi, actionFriend);
+                htmlContent += html;
+            };
+            userViewerContainer.html(htmlContent);
+            userViewerContainer.bPopup({
+                follow: [false, false],             
+                speed: 300,
+                transition: 'slideDown',
+                modalColor : '#000',
+                opacity: '0.5'
+            });
+        }   
+    }
+    UserListViewer.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('d');
+        var f        = function() {
+            $spinner.remove();
+            $el.html($old_icon);
+        };
+        
+        $el.addClass('disabled').html($spinner);
+
+        promise.then(f, f);
+    };
+
+    $(function(){
+        $('.who-action .view-list-liker').each(function(){
+            new UserListViewer($(this));
+        });
+
+        /*var getComments = function () {
+            list_comment.off('scroll');
+            if(list_comment.scrollTop() == 0 && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
+                page++;
+                var data = {
+                    'post_slug' : comment_form.attr('data-post-id'),
+                    'post_type' : comment_form.attr('data-post-type'),
+                    'page'      : page
+                }
+                $.ajax({
+                    type: 'POST',
+                    url:  $('.open-comment.disabled').data('url'),
+                    data: data,
+                    dataType: 'json',
+                    progress: function () {
+                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-spinner"></i>Loading...</span>');
+                    },
+                    success: function (data) {
+                        if(data.success == 'ok') {
+                            var htmlOutput = '';
+                            for (key in data.comments) {
+                                htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
+                            }
+                            $('.comment-body').find('.loading').remove();
+                            $('.comment-body').prepend(htmlOutput);
+                            jQuery(".timeago").timeago();
+                        }
+                    }
+                });
+            } 
+            list_comment.on('scroll', function () {
+                getComments();
+            });
+        }
+        list_comment.on('scroll', function () {
+            getComments();
+        });*/
+    }); 
+}(jQuery, document));
+
 // Comment action
 (function($, document, undefined) {
     var comment_box = $('#comment-box');
@@ -481,7 +660,7 @@
     });
 }(jQuery, document));
 
-// Show list users
+// Show list users liked comment
 (function($, document, undefined) {
     var list_comment = $('#comment-box .y-box-content');
 
