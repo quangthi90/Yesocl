@@ -1722,8 +1722,7 @@ div[data-role="editor-toolbar"] {
   overflow: hidden;
   width: 320px;
 }
-.user-item .user-actions{
-  margin-right: 20px;
+.user-item .user-actions{  
 }
 .user-item .user-item-avatar{
   height: 50px;
