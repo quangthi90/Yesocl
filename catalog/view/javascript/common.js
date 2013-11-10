@@ -55,7 +55,7 @@
 		this.sidebarToggle = this.sidebarRoot.find("#sidebar-toggle");
 		this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
 		this.searchCtrl	   = this.sidebarRoot.find("input#ss-keyword");
-		this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");
+		this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");		
 		this.makeCustomVerticalScroll();
 		this.attachEvents();
 	}

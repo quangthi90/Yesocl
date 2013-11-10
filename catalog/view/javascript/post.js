@@ -518,13 +518,18 @@
             
             this.triggerProgress(that.element, promise);
             promise.then(function(data) { 
-                if(data.success == 'ok'){ 
-                    
+                if(data.success == 'ok'){                     
                     htmlContent = $('#user-info-template').html();
                     bootbox.dialog({
                         message: htmlContent,
-                        title: "Who liked this post"
-                    });                 
+                        title: "Who liked this post",
+                        onEscape: function(){
+                            bootbox.hideAll();
+                        }
+                    });
+                    $('.modal-backdrop').on('click', function(){
+                        bootbox.hideAll();
+                    });
                 }
 
             });
@@ -532,8 +537,14 @@
             htmlContent = $('#user-info-template').html();
             bootbox.dialog({
                 message: htmlContent,
-                title: "Who liked this post"
+                title: "Who liked this post",
+                onEscape: function(){
+                    bootbox.hideAll();
+                }                
             });  
+            $('.modal-backdrop').on('click', function(){
+                bootbox.hideAll();
+            });
         }	
     }
     UserListViewer.prototype.triggerProgress = function($el, promise){
