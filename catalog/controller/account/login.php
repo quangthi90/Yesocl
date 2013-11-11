@@ -11,7 +11,7 @@ class ControllerAccountLogin extends Controller {
 		}	
 		
 		if ($this->customer->isLogged()) {
-      		$this->redirect($this->url->link('common/home', '', 'SSL'));
+      		$this->redirect( $this->extension->path('HomePage') );
     	}
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/login.tpl')) {
