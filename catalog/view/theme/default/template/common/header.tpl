@@ -1,4 +1,4 @@
-<div id="y-header">  
+<div id="y-header" style="display: none;">  
 	{% set user_slug = get_current_user().slug %}
 	<div class="header-wrapper">
 		<div id="header-logo">
@@ -290,4 +290,57 @@
 			</div>
 		</div>
 	</div>                               
+</div>
+<div id="y-header-no-login">
+  <div id="y-logo-no-login">
+    <a href="{{ path('WelcomePage') }}">
+      <img src="{{ asset_img('template/logo2.png') }}"/>
+    </a>
+  </div>
+  <div class="login-container">    
+    <div class="login-yesocl">
+      <form action="{{ path('AjaxLogin') }}" method="post" class="row-fluid login-form" data-url="{{ path('Login') }}">        
+        <div class="y-rows fl">
+          <div class="y-row">
+            <div class="y-td input-prepend">
+              <span class="add-on"><i class="icon-user"></i></span>
+              <input required="required" name="email" type="email" autocomplete="off"
+                  placeholder="Email"  class="input-welcome" tabindex="1" />
+            </div>
+            <div class="y-td input-prepend">
+              <span class="add-on"><i class="icon-lock"></i></span>
+              <input required="required" name="password" type="password" autocomplete="off"
+                  placeholder="Password" class="input-welcome" tabindex="2" />
+            </div>
+          </div>
+          <div class="y-row">
+            <span class="remember-login">
+              <input type="checkbox" name="remember" value="true"> Remember me
+            </span>
+            <a class="link-login" href="{{ path('LostPass') }}">Forgot password!</a>
+          </div>
+        </div>
+        <div class="btn-container fl">
+          <button type="submit" class="btn btn-yes btn-login" tabindex="3">Sign in
+          </button>     
+        </div>                   
+      </form>
+    </div>
+    <div class="login-social">
+      <ul>
+          <li>
+              <a href="{{ action.connect_face }}"><i class="icon-facebook"></i></a>
+          </li>
+          <li>
+              <a href="#"><i class="icon-twitter"></i></a>
+          </li>
+          <li>
+              <a href="#"><i class="icon-linkedin"></i></a>
+          </li>
+          <li>
+              <a href="#"><i class="icon-google-plus"></i></a>
+          </li>
+      </ul>
+    </div>
+  </div>
 </div>
