@@ -20,12 +20,6 @@ class ControllerAccountLogin extends Controller {
 			$this->template = 'default/template/account/login.tpl';
 		}
 
-		$this->data['action'] = array(
-			'login' 		=> $this->url->link('account/login/login', '', 'SSL'),
-			'home'			=> $this->url->link('common/home', '', 'SSL'),
-			'login_page' 	=> $this->url->link('account/login', '', 'SSL')
-		);
-
 		$this->children = array(
 			'welcome/footer',
 			'welcome/header'

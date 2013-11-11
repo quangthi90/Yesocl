@@ -13,7 +13,7 @@
         </div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">
-            <form action="{{ action.login }}" class="login-form" data-url="{{ action.login_page }}">
+            <form action="{{ path('Login') }}" class="login-form" data-url="{{ path('AjaxLogin') }}">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-user"></i></span>
                     <input class="span3" id="username" required="required" name="email" type="email" placeholder="Email">
