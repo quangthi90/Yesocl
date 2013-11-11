@@ -1,5 +1,6 @@
-<div id="y-header" style="display: none;">  
-	{% set user_slug = get_current_user().slug %}
+{% set user_slug = get_current_user().slug %}
+{% if user_slug != null %}
+<div id="y-header">
 	<div class="header-wrapper">
 		<div id="header-logo">
 			<a href="{{ path('HomePage') }}">
@@ -8,19 +9,19 @@
 		</div>
 		<div id="header-user">
 			<div id="user-info-wrapper" class="fr">	
-				<div class="fr user-avatar">					
+				<div class="fr user-avatar">
 					<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
 						<img src="{{ user_info.avatar }}" />
 					</a>
-				</div>				
+				</div>
 				<div class="fr user-info">
 					<a class="user-name" href="{{ path('WallPage', {user_slug: user_slug}) }}">
 				      	{{ user_info.username }}
 				    </a>
 				    <span class="user-more-info">Developer</span>
-				</div>						
+				</div>
 			</div>
-			<div id="user-quick-menu" class="fr dropdown user-menu">							
+			<div id="user-quick-menu" class="fr dropdown user-menu">
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
@@ -51,8 +52,8 @@
 			      		<a href="{{ path('Logout') }}">
 			      			<i class="icon-signout"></i> Log out
 		      			</a>
-		      		</li>				      
-			    </ul>				
+		      		</li>
+			    </ul>
 			</div>
 			<div id="user-notification" class="fr notification-group">        		
         <div class="dropdown notification-item message">
@@ -291,6 +292,7 @@
 		</div>
 	</div>                               
 </div>
+{% else %}
 <div id="y-header-no-login">
   <div id="y-logo-no-login">
     <a href="{{ path('WelcomePage') }}">
@@ -344,3 +346,4 @@
     </div>
   </div>
 </div>
+{% endif %}
