@@ -169,6 +169,11 @@ class ControllerPostComment extends Controller {
                 'post_type' => $data['post_type'],
                 'comment_id' => $comment['id']
             ));
+            $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+                'post_slug' => $data['post_slug'],
+                'post_type' => $data['post_type'],
+                'comment_id' => $comment['id']
+            ));
             $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
             $comment['is_liked'] = $liked;
 
@@ -177,7 +182,7 @@ class ControllerPostComment extends Controller {
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'comments' => empty($comments) ? array() : $comments
+            'comments' => $comments
         )));
     }
 
@@ -234,6 +239,76 @@ class ControllerPostComment extends Controller {
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'like_count' => count($comment->getLikerIds())
+        )));
+    }
+
+    public function getLikers(){
+        $data = array();
+
+        if ( !empty($this->request->get['comment_id']) ){
+            $data['comment_id'] = $this->request->get['comment_id'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: comment id empty'
+            )));
+        }
+
+        if ( isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug']) ){
+            $data['post_slug'] = $this->request->get['post_slug'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug empty'
+            )));
+        }
+
+        if ( isset($this->request->get['post_type']) && !empty($this->request->get['post_type']) ){
+            $data['post_type'] = $this->request->get['post_type'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type empty'
+            )));
+        }
+        
+        switch ($data['post_type']) {
+            case $this->config->get('post')['type']['branch']:
+                $this->load->model('branch/comment');
+                $comment = $this->model_branch_comment->getComment( $data );
+                break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $comment = $this->model_user_comment->getComment( $data );
+                break;
+            
+            default:
+                $comment = null;
+                break;
+        }
+
+        $this->load->model('user/user');
+        $this->load->model('tool/image');
+
+        $users = array();
+
+        if ( $comment ){
+            $query_users = $this->model_user_user->getUsers( array(
+                'user_ids' => $comment->getLikerIds()
+            ));
+
+            if ( $query_users ){
+                foreach ( $query_users as $user ) {
+                    $user = $user->formatToCache();
+
+                    $user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+
+                    $users[] = $user;
+                }
+            }
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'users' => $users
         )));
     }
 }

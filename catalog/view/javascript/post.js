@@ -308,7 +308,7 @@
     CommentBtn.prototype.submit = function($button){
         var that = this;
         
-        if ( this.$el.data('Hint') == undefined ){
+        if ( this.$el.data('comments') == undefined ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -325,7 +325,7 @@
                         comments.push(data.comments[key]);
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
-                    that.$el.data('Hint', comments);
+                    that.$el.data('comments', comments);
                 
                     htmlOutput += '<div id="add-more-item"></div>';
                     comment_box.find('.comment-body').html(htmlOutput);
@@ -338,7 +338,8 @@
                     new CommentForm(comment_form);
 
                     $('.comment-item .comment-footer').each(function(){
-                        new LikeCommentBtn($(this));            
+                        new LikeCommentBtn($(this));
+                        new LikedCommentListBtn($(this));
                     });
 
                     jQuery(".timeago").timeago();
@@ -358,7 +359,7 @@
 
             var htmlOutput = '';
 
-            var comments = that.$el.data('Hint');
+            var comments = that.$el.data('comments');
             for (key in comments) {
                 htmlOutput += $.tmpl( $('#item-template'), comments[key] ).html();
             }
@@ -374,7 +375,8 @@
             new CommentForm(comment_form);
 
             $('.comment-item .comment-footer').each(function(){
-                new LikeCommentBtn($(this));            
+                new LikeCommentBtn($(this));
+                new LikedCommentListBtn($(this));
             });
 
             jQuery(".timeago").timeago();
@@ -500,7 +502,7 @@
 
                 var $comment_btn = $curr_item.find('.open-comment');
 
-                var comments = $comment_btn.data('Hint');
+                var comments = $comment_btn.data('comments');
                 comments.push(data.comment);
 
                 $comment_btn.each(function(){
@@ -523,7 +525,8 @@
                 $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 
                 $('.comment-item .comment-footer').each(function(){
-                    new LikeCommentBtn($(this));            
+                    new LikeCommentBtn($(this));
+                    new LikedCommentListBtn($(this));
                 });
 
                 jQuery(".timeago").timeago();
@@ -622,7 +625,7 @@
                 }
 
                 var $curr_post = $('.open-comment.disabled');
-                var comments = $curr_post.data('Hint');
+                var comments = $curr_post.data('comments');
 
                 for (var i = 0; i < comments.length; i++) {
                     if ( comments[i].id == that.comment_id ){
@@ -647,6 +650,86 @@
 
         promise.then(f, f);
     };
+
+    // Show list users liked comment
+    function LikedCommentListBtn( $el ){
+        var that = this;
+
+        this.$el            = $el;
+        this.like_count     = $el.data('like-count');
+
+        this.$btnLikedUser  = $el.find('.like-count');
+        this.url            = this.$btnLikedUser.data('url');
+        
+        this.attachEvents();
+    }
+    LikedCommentListBtn.prototype.attachEvents = function(){
+        var that = this;
+
+        // Like Comment
+        this.$btnLikedUser.click(function(e) {
+            if(that.$btnLikedUser.hasClass('disabled')) {
+                e.preventDefault();
+
+                return false;
+            }
+
+            that.submit(that.$btnLikedUser);
+
+            return false;
+        });
+    };
+    LikedCommentListBtn.prototype.submit = function($button){
+        var that = this;
+
+        if ( this.$el.data('likedList') == undefined ){
+            var promise = $.ajax({
+                type: 'POST',
+                url:  this.url,
+                dataType: 'json'
+            });
+
+            this.triggerProgress($button, promise);
+
+            promise.then(function(data) {
+                if(data.success == 'ok'){
+                    $('#user-info-template').html('');
+
+                    var htmlOutput = '';
+                    var users = [];
+                    for (key in data.users) {
+                        users.push(data.users[key]);
+                        $('#user-info-template').append($.tmpl( $('#list-user-liked-template'), data.users[key] ));
+                    }
+                    that.$el.data('users', users);
+
+                    $('#user-info-template').bPopup({
+                        follow: [false, false],             
+                        speed: 300,
+                        transition: 'slideDown',
+                        modalColor : '#000',
+                        opacity: '0.5'
+                    });
+                }
+            });
+        }else{
+
+        }
+    };
+    LikedCommentListBtn.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
     $(function(){
         $('.open-comment').each(function(){
             new CommentBtn($(this));
@@ -658,128 +741,4 @@
             });
         });
     });
-}(jQuery, document));
-
-// Show list users liked comment
-(function($, document, undefined) {
-    var list_comment = $('#comment-box .y-box-content');
-
-    function UserListViewer(el) {
-        this.element 		= el;
-        this.viewTitle 		= el.data('view-title');
-        this.viewType 		= el.data('view-title');
-        this.postSlug		= el.data('post-slug');
-        this.postType		= el.data('post-type');
-        this.typeSlug 		= el.data('type-slug');
-        this.url	        = el.data('url');
-        this.addEvents();
-        this.users = [];
-    }
-    UserListViewer.prototype.addEvents = function() {
-        var that = this;
-        this.element.click(function(e){
-            e.preventDefault();
-            if($(this).hasClass('disabled')) {
-                return false;
-            }
-            that.showViewer();
-        });
-    }
-    UserListViewer.prototype.showViewer = function() {
-        var that = this;
-        var htmlContent = "";
-        if(that.users.length == 0){	
-            var promise = $.ajax({
-                type: 'POST',
-                url:  this.url,
-                dataType: 'json'
-            });
-            
-            this.triggerProgress(that.element, promise);
-            promise.then(function(data) { 
-                if(data.success == 'ok'){                     
-                    htmlContent = $('#user-info-template').html();
-                    bootbox.dialog({
-                        message: htmlContent,
-                        title: "Who liked this post",
-                        onEscape: function(){
-                            bootbox.hideAll();
-                        }
-                    });
-                    $('.modal-backdrop').on('click', function(){
-                        bootbox.hideAll();
-                    });
-                }
-
-            });
-        }else{
-            htmlContent = $('#user-info-template').html();
-            bootbox.dialog({
-                message: htmlContent,
-                title: "Who liked this post",
-                onEscape: function(){
-                    bootbox.hideAll();
-                }                
-            });  
-            $('.modal-backdrop').on('click', function(){
-                bootbox.hideAll();
-            });
-        }	
-    }
-    UserListViewer.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var $old_icon = $el.find('d');
-        var f        = function() {
-            $spinner.remove();
-            $el.html($old_icon);
-        };
-        
-        $el.addClass('disabled').html($spinner);
-
-        promise.then(f, f);
-    };
-
-    $(function(){
-        $('.view-list-liker').each(function(){
-            new UserListViewer($(this));
-        });
-
-        /*var getComments = function () {
-            list_comment.off('scroll');
-            if(list_comment.scrollTop() == 0 && (((page + 1)*10 < $('.open-comment.disabled').attr('data-comment-count')) || ((page + 1)*10 - $('.open-comment.disabled').attr('data-comment-count') <= 10)) ) {
-                page++;
-                var data = {
-                    'post_slug'	: comment_form.attr('data-post-id'),
-                    'post_type' : comment_form.attr('data-post-type'),
-                    'page'		: page
-                }
-                $.ajax({
-                    type: 'POST',
-                    url:  $('.open-comment.disabled').data('url'),
-                    data: data,
-                    dataType: 'json',
-                    progress: function () {
-                        $('.comment-body').prepend('<span class="loading"><i class="icon-spin icon-spinner"></i>Loading...</span>');
-                    },
-                    success: function (data) {
-                        if(data.success == 'ok') {
-                            var htmlOutput = '';
-                            for (key in data.comments) {
-                                htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
-                            }
-                            $('.comment-body').find('.loading').remove();
-                            $('.comment-body').prepend(htmlOutput);
-                            jQuery(".timeago").timeago();
-                        }
-                    }
-                });
-            } 
-            list_comment.on('scroll', function () {
-                getComments();
-            });
-        }
-        list_comment.on('scroll', function () {
-            getComments();
-        });*/
-    }); 
 }(jQuery, document));

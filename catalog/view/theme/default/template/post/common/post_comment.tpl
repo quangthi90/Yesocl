@@ -49,13 +49,14 @@
 				<div class="comment-footer" 
 					data-url="${href_like}"
 					data-comment-liked="${is_liked}"
-					data-id="${id}">
+					data-id="${id}"
+					data-like-count="${like_count}">
 					<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
 						<i class="icon-thumbs-up medium-icon"></i>
 						Like
 					</a>
 					<span class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked</span>
-					&nbsp;(<a class="like-count" href="#">${like_count}</a>)
+					&nbsp;(<a class="like-count" data-url="${href_liked_user}" href="#">${like_count}</a>)
 				</div>
 				<div class="yes-dropdown option-dropdown">
 					<div class="dropdown">

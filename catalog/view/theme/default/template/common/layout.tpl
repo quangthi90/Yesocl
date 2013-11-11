@@ -23,71 +23,12 @@
 		{{ include(template_from_string( sidebar_control )) }}
 		<div id="y-container">
 			{% block body %}
-			{% endblock %}			
+			{% endblock %}
 		</div>
 		{{ include(template_from_string( footer )) }}
 		<div id="overlay"></div>
-		<div style="display: none;" id="user-info-template">
-			<div class="user-item add-friend">
-				<div class="user-item-info fl">
-					<a href="#" class="user-item-avatar fl">
-						<img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="USER_NAME" />
-					</a>
-					<div class="user-item-overview fl">
-						<a href="#" class="user-item-name">User A</a>
-						<span><strong>100</strong> friend(s)</span>
-					</div>
-				</div>
-				<div class="user-actions fr">
-					<button data-url="{{ path('MakeFriend', {user_slug: user.slug}) }}" 
-						class="btn btn-yes btn-friend friend-group" data-cancel="0">
-						<i class="icon-plus-sign"></i> Make Friend
-					</button>
-				</div>
-			</div>
-			<div class="user-item user-is-friend">
-				<div class="user-item-info fl">
-					<a href="#" class="user-item-avatar fl">
-						<img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="USER_NAME" />
-					</a>
-					<div class="user-item-overview fl">
-						<a href="#" class="user-item-name">User A</a>
-						<span><strong>100</strong> friend(s)</span>
-					</div>
-				</div>
-				<div class="user-actions fr">
-					<div class="dropdown friend-group">
-	                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
-	                    <ul class="dropdown-menu" role="menu">
-	                        <li>
-	                            <a class="btn-unfriend" data-url="{{ path('UnFriend', {user_slug: user.slug}) }}">Unfriend</a>
-	                        </li>
-	                    </ul>
-	                </div>
-				</div>
-			</div>
-			<div class="user-item send-request">
-				<div class="user-item-info fl">
-					<a href="#" class="user-item-avatar fl">
-						<img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="USER_NAME" />
-					</a>
-					<div class="user-item-overview fl">
-						<a href="#" class="user-item-name">User A</a>
-						<span><strong>100</strong> friend(s)</span>
-					</div>
-				</div>
-				<div class="user-actions fr">
-					<div class="dropdown friend-group">
-	                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
-	                    <ul class="dropdown-menu" role="menu">
-	                        <li>
-	                            <a class="btn-friend" href="#" data-url="{{ path('MakeFriend', {user_slug: friend.slug}) }}" data-cancel="1">Cancel Request</a>
-	                        </li>
-	                    </ul>
-	                </div>
-				</div>
-			</div>
-		</div>
+		
+		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		<!--
 		<div id="y-loader">
 			<div id="y-loader-bg"></div>
@@ -130,10 +71,11 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.bootbox.js') }}">
 		</script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.typeahead.js') }}">
-		</script>	
+		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.bpopup.min.js') }}"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>	
+		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}

@@ -5,8 +5,6 @@ use MongoId;
 
 class ModelBranchComment extends Model {
 	public function getComments( $data = array() ){
-		$query = array();
-
 		if ( empty($data['post_slug']) ){
 			return array();
 		}
@@ -22,8 +20,24 @@ class ModelBranchComment extends Model {
 		return $comments;
 	}
 
-	public function getComment( $Comment_id ){
+	public function getComment( $data ){
+		if ( empty($data['comment_id']) ){
+			return array();
+		}
 
+		if ( !empty($data['post_slug']) ){
+			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		}else{
+			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+				'comments.id' => $data['comment_id']
+			));
+		}
+
+		if ( !$post ){
+			return null;
+		}
+
+		return $post->getCommentById( $data['comment_id'] );
 	}
 
 	public function addComment( $data = array() ){
