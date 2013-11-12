@@ -54,13 +54,7 @@ class ControllerCommonSearch extends Controller {
 			$user['status'] = $friend_status;
 
 			if ( !array_key_exists($user['id'], $this->data['users']) ){
-				if ( !empty($user['avatar']) ){
-					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
-				}elseif ( !empty($user['email']) ){
-		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
-		        }else{
-		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-				}
+				$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
 
 				$this->data['users'][$user['id']] = $user;
 			}

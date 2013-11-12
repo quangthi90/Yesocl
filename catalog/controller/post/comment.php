@@ -286,6 +286,7 @@ class ControllerPostComment extends Controller {
         }
 
         $this->load->model('user/user');
+        $this->load->model('friend/friend');
         $this->load->model('tool/image');
 
         $users = array();
@@ -297,9 +298,15 @@ class ControllerPostComment extends Controller {
 
             if ( $query_users ){
                 foreach ( $query_users as $user ) {
+                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer, $user );
+
                     $user = $user->formatToCache();
 
+                    $user['fr_status'] = $fr_status['status'];
+                    $user['fr_href'] = $fr_status['href'];
+
                     $user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+                    $user['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $user['slug']) );
 
                     $users[] = $user;
                 }

@@ -182,5 +182,53 @@ class ModelFriendFriend extends Model {
 
 		return count( $results );
 	}
+
+	/**
+	 * Check status of 2 users
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	Object User ($user)
+	 * 	Object User ($user_ob)
+	 * @return: array
+	 *	- int status
+	 *		1: me
+	 *		2: friend
+	 *		3: sent request make friend
+	 *		4: not relationship
+	 *	- string href to get action: send request, cancel request, unfriend
+	 */
+	public function checkFriendStatus( $user, $user_ob ){
+		// me
+		if ( $user->getId() == $user_ob->getId() ){
+            return array(
+            	'status' => 1,
+            	'href' => null
+            );
+        
+        }elseif ( $user_ob->getFriendById( $user->getId()) ){
+            return array(
+            	'status' => 2,
+            	'href' => $this->extension->path('UnFriend', array(
+	                'user_slug' => $user->getSlug()
+	            ))
+           	); 
+        
+        }elseif ( $user_ob->getFriendRequests() && in_array($user->getId(), $user_ob->getFriendRequests()) ){
+            return array(
+            	'status' => 3,
+            	'href' => $this->extension->path('MakeFriend', array(
+                	'user_slug' => $user_ob->getSlug()
+                ))
+            );
+        
+        }else{
+        	return array(
+            	'status' => 4,
+            	'href' => $this->extension->path('MakeFriend', array(
+	                'user_slug' => $user_ob->getSlug()
+	            ))
+            );
+        }
+	}
 }
 ?>

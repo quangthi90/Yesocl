@@ -262,5 +262,11 @@
         $('#friend-filter').each(function(){
             new FriendFilter( $(this) );
         });
+
+        $(document).bind('FRIEND_ACTION', function(e) {
+            $('.friend-actions').each(function(){
+                new FriendAction($(this));
+            });
+        });
     });
 }(jQuery, document));

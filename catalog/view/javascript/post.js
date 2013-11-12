@@ -261,7 +261,7 @@
                     var htmlOutput = '';
                     var comments = [];
                     for (key in data.comments) {
-                        comments.push(data.comments[key]);
+                        comments[data.comments[key].id] = data.comments[key];
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
                     that.$el.data('comments', comments);
@@ -444,7 +444,7 @@
                 var $comment_btn = $curr_item.find('.open-comment');
 
                 var comments = $comment_btn.data('comments');
-                comments.push(data.comment);
+                comments[data.comment.id] = data.comment;
 
                 $comment_btn.each(function(){
                     new CommentBtn($(this));
@@ -569,13 +569,8 @@
                 var $curr_post = $('.open-comment.disabled');
                 var comments = $curr_post.data('comments');
 
-                for (var i = 0; i < comments.length; i++) {
-                    if ( comments[i].id == that.comment_id ){
-                        comments[i].is_liked = that.isLiked;
-                        comments[i].like_count = data.like_count;
-                        break;
-                    }
-                };
+                comments[that.comment_id].is_liked = that.isLiked;
+                comments[that.comment_id].like_count = data.like_count;
             }
         });
     };
@@ -624,7 +619,10 @@
     LikedCommentListBtn.prototype.submit = function($button){
         var that = this;
 
-        if ( this.$el.data('likedList') == undefined ){
+        var $curr_post = $('.open-comment.disabled');
+        var comments = $curr_post.data('comments');
+        
+        if ( comments[this.$el.data('id')].users == undefined ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -641,10 +639,10 @@
                     var usersViewer = $('<div id="#user-viewer-container"></div>');
                     var users = [];
                     for (key in data.users) {
-                        users.push(data.users[key]);
+                        users[data.users[key].id] = data.users[key];
                         $.tmpl( $('#list-user-liked-template'), data.users[key]).appendTo(usersViewer);
                     }
-                    that.$el.data('users', users);
+                    comments[that.$el.data('id')].users = users;
                     bootbox.dialog({
                         message: usersViewer.wrap('<div>').parent().html(),
                         title: "Who liked this post",
@@ -655,10 +653,26 @@
                     $('.modal-backdrop').on('click', function(){
                        bootbox.hideAll();
                     });
+                    $(document).trigger('FRIEND_ACTION');
                 }
             });
         }else{
-
+            var usersViewer = $('<div id="#user-viewer-container"></div>');
+            var users = comments[this.$el.data('id')].users;
+            for (key in users) {
+                $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
+            }
+            bootbox.dialog({
+                message: usersViewer.wrap('<div>').parent().html(),
+                title: "Who liked this post",
+                onEscape: function(){
+                    bootbox.hideAll();
+                }
+            });
+            $('.modal-backdrop').on('click', function(){
+               bootbox.hideAll();
+            });
+            $(document).trigger('FRIEND_ACTION');
         }
     };
     LikedCommentListBtn.prototype.triggerProgress = function($el, promise){
