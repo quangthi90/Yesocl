@@ -58,12 +58,14 @@
 						<span class="comment-time">
 							<d class="timeago" title="${created}"></d>
 						</span>
-						<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
-							<i class="icon-thumbs-up medium-icon"></i>
-							Like
-						</a>
-						<span class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked</span>
-						&nbsp;(<a class="like-count" data-url="${href_liked_user}" href="#">${like_count}</a>)
+						<span class="like-container">
+							<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
+								<i class="icon-thumbs-up medium-icon"></i> Like
+							</a>
+							<strong class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked
+							</strong>
+							&nbsp;(<a class="like-count" data-url="${href_liked_user}" href="#">${like_count}</a>)
+						</span>		
 					</div>
 					<div class="comment-content">
 						{{html content}}							
