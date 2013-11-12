@@ -2216,9 +2216,13 @@ ul.user_actions li:hover i{
 .login-yesocl .link-login:hover {
   text-decoration: underline;
 }
-.login-yesocl span.remember-login{  
+.login-yesocl span.remember-login {  
   color: #FFF;
   margin-right: 152px;
+}
+.login-yesocl span.remember-login label {
+  margin-bottom: 0px; 
+  display: inline-block;
   font-size: 11px;
 }
 /* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */

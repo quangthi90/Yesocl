@@ -317,7 +317,8 @@
           </div>
           <div class="y-row">
             <span class="remember-login">
-              <input type="checkbox" name="remember" value="true"> Remember me
+              <input type="checkbox" name="remember" value="true" id="remember"> 
+              <label for="remember">Remember me</label>
             </span>
             <a class="link-login" href="{{ path('LostPass') }}">Forgot password!</a>
           </div>
