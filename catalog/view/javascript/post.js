@@ -276,7 +276,7 @@
                     }, 1000);
                     new CommentForm(comment_form);
 
-                    $('.comment-item .comment-footer').each(function(){
+                    $('.comment-item .comment-info').each(function(){
                         new LikeCommentBtn($(this));
                         new LikedCommentListBtn($(this));
                     });
@@ -313,7 +313,7 @@
             }, 100);
             new CommentForm(comment_form);
 
-            $('.comment-item .comment-footer').each(function(){
+            $('.comment-item .comment-info').each(function(){
                 new LikeCommentBtn($(this));
                 new LikedCommentListBtn($(this));
             });
@@ -466,7 +466,7 @@
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
                 $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 
-                $('.comment-item .comment-footer').each(function(){
+                $('.comment-item .comment-info').each(function(){
                     new LikeCommentBtn($(this));
                     new LikedCommentListBtn($(this));
                 });
@@ -502,7 +502,7 @@
         this.comment_id     = $el.data('id');
 
         this.$btnLike       = $el.find('.like-comment');
-        this.$btnUnLike     = $el.parent().find('.option-dropdown .dropdown-menu .un-like-btn');
+        this.$btnUnLike     = $el.parents('.comment-item').find('.un-like-btn');
         this.$likedLabel    = $el.find('.liked-label');
         
         this.attachEvents();
