@@ -46,6 +46,7 @@ $_['route']['ProfileAddExperience']			= 'account/profiles/experience/add/';
 $_['route']['ProfileAddSkill']				= 'account/profiles/skill/add/';
 $_['route']['ProfileRemoveSkill']			= 'account/profiles/skill/remove/';
 $_['route']['FaceBookConnect']				= 'account/login/facebookConnect';
+$_['route']['CompleteRegister']				= 'account/register';
 
 // Friend
 $_['route']['FriendPage']					= 'friend/friend';
