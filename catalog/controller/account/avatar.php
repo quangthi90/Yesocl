@@ -26,26 +26,6 @@ class ControllerAccountAvatar extends Controller {
     	}else {
     		$this->session->data['warning'] = $this->language->get('text_warning');
     	}
-
-      	/*$this->data['breadcrumbs'] = array();
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link('common/home'),       	
-        	'separator' => false
-      	); 
-
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('text_account'),
-			'href'      => $this->url->link('account/account', '', 'SSL'),
-        	'separator' => $this->language->get('text_separator')
-      	);
-		
-      	$this->data['breadcrumbs'][] = array(
-        	'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link('account/avatar', '', 'SSL'),
-        	'separator' => $this->language->get('text_separator')
-      	);*/
 			
     	$this->data['heading_title'] = $this->language->get('heading_title');
 
@@ -59,9 +39,6 @@ class ControllerAccountAvatar extends Controller {
     	}elseif (isset($this->error['warning'])) { 
 			$this->data['warning'] = $this->error['warning'];
 		}
-	
-    	$this->data['action']['avatar'] = $this->url->link('account/avatar', '', 'SSL');
-    	$this->data['action']['home'] = $this->url->link('common/home', '', 'SSL');
 
 		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
 

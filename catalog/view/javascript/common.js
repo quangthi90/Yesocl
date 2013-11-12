@@ -258,7 +258,8 @@
 		this.goLeftBtn = el.find('#auto-scroll-left');
 		this.goRightBtn = el.find('#auto-scroll-right');
 		this.notificationList = el.find('.notification-content-list');	
-		//this.loaderBg = el.find('#y-loader');
+		this.commentBox = el.find('#comment-box');
+		this.loaderBg = el.find('#y-loader');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -383,6 +384,49 @@
 	    	removalDelay: 300,
 			mainClass: 'mfp-fade'
 	    });
+
+	    //Comment box:
+	    if(that.commentBox.length > 0) {
+	    	that.commentBox.width(that.main.width()/3);
+	    	var expandBtn = that.commentBox.find('.btn-expand');
+	    	var restoreBtn = that.commentBox.find('.btn-restore');
+	    	expandBtn.fadeIn();
+	    	restoreBtn.fadeOut();
+	    	expandBtn.on('click', function(e){
+	    		e.preventDefault();
+	    		var me = $(this);
+	    		if(me.hasClass('active')){
+	    			return;
+	    		}
+	    		me.addClass('active');
+	    		that.commentBox.animate({
+	    			width: that.main.width()*2/3
+	    		}, 300, function(){
+	    			that.commentBox.find('.comment-meta').width(that.commentBox.width() - 97);
+	    			expandBtn.fadeOut(100, function(){
+	    				me.removeClass('active');
+	    				restoreBtn.fadeIn(200);
+	    			});
+	    		});	    		
+	    	});
+	    	restoreBtn.on('click', function(e){
+	    		e.preventDefault();
+	    		var me = $(this);
+	    		if(me.hasClass('active')){
+	    			return;
+	    		}
+	    		me.addClass('active');
+	    		that.commentBox.animate({
+	    			width: that.main.width()/3
+	    		}, 300, function(){
+	    			that.commentBox.find('.comment-meta').width(that.commentBox.width() - 97);
+	    			restoreBtn.fadeOut(100, function(){
+	    				me.removeClass('active');
+	    				expandBtn.fadeIn(200);
+	    			});
+	    		});
+	    	});
+	    }
 	}
 
 	/*

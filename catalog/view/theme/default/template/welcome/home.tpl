@@ -9,7 +9,7 @@
 {% block body %}
 <div id="y-content" class="y-sub-container-1">
     <div id="intro-bg">    	
-		<img src="image/template/intro-2-bg.png" />  
+		<img src="{{ asset_img('template/intro-2-bg.png') }}" />  
     </div>    
 </div>
 {% if error != null %}

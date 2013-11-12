@@ -288,12 +288,12 @@
                 e.preventDefault();
                 return false;
             }
-            $('#comment-box').find('.y-box-header .close').trigger('click');
+            $('#comment-box').find('.y-box-header .btn-close').trigger('click');
             that.submit(that.$el);
             return false;
         });
         //Attach close event:
-        comment_box.on('click', '.y-box-header .close', function(){
+        comment_box.on('click', '.y-box-header .btn-close', function(){
             that.hideCommentBox(that.$el);
         });        
         $('#overlay').click(function() {
@@ -405,13 +405,15 @@
         $('#overlay').show(100);        
         list_comment.makeCustomScroll(false);
         //Show comment box:
+        comment_box.width($('#y-content').width()/3);
+        comment_box.find('.comment-meta').width(comment_box.width() - 97);
         comment_box.stop().animate({ "right": "2px" }, 200);
     }
     CommentBtn.prototype.hideCommentBox = function($button) {
         $('#overlay').hide();
         $('.post').removeClass('post-selecting');
         $button.removeClass('disabled');
-        comment_box.stop().animate({"right": "-500px" }, "slow");
+        comment_box.stop().animate({"right": "-1000px" }, "slow");
         page = 1;
     }
 
@@ -456,9 +458,9 @@
         
         this.$press_enter_cb.click(function(e) {
             if(that.$press_enter_cb.parent().hasClass('checked')){
-                that.$comment_btn.hide("slow");
+                that.$comment_btn.hide(100);
             }else{
-                that.$comment_btn.show("slow");
+                that.$comment_btn.show(100);
             }
         });
                 
@@ -511,6 +513,7 @@
 
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
                 $('#add-more-item').before(htmlOutput);
+                comment_box.find('.comment-meta').width(comment_box.width() - 97);
                 that.$content.val('');
                 //Scroll to last post which have just been added
                 list_comment.mCustomScrollbar("scrollTo","last");

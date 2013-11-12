@@ -76,6 +76,7 @@
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}

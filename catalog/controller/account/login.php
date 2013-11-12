@@ -11,7 +11,7 @@ class ControllerAccountLogin extends Controller {
 		}	
 		
 		if ($this->customer->isLogged()) {
-      		$this->redirect($this->url->link('common/home', '', 'SSL'));
+      		$this->redirect( $this->extension->path('HomePage') );
     	}
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/login.tpl')) {
@@ -19,12 +19,6 @@ class ControllerAccountLogin extends Controller {
 		} else {
 			$this->template = 'default/template/account/login.tpl';
 		}
-
-		$this->data['action'] = array(
-			'login' 		=> $this->url->link('account/login/login', '', 'SSL'),
-			'home'			=> $this->url->link('common/home', '', 'SSL'),
-			'login_page' 	=> $this->url->link('account/login', '', 'SSL')
-		);
 
 		$this->children = array(
 			'welcome/footer',
