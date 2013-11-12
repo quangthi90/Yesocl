@@ -14,7 +14,7 @@
         <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            
-            <form action="{{ action.password }}" method="post">
+            <form action="{{ path('ChangePassword') }}" method="post">
                 <div class="input-prepend">
                     <span class="add-on"><i class="icon-lock icon-2x"></i> New</span>
                     <input name="password" class="span3" id="new-password" type="password" placeholder="New password">
@@ -25,7 +25,7 @@
                 </div>         
                 <div class="btns">
                      <button type="submit" class="btn btn-success">Change</button>   
-                     <a class="btn" href="{{ action.home }}">Cancel</a>   
+                     <a class="btn" href="{{ path('HomePage') }}">Cancel</a>   
                 </div>
             </form>     
         </div>

@@ -2140,3 +2140,176 @@ ul.user_actions li:hover i{
 }
 
 /* ------------------------------------- END LOADER ------------------------------------------- */
+/* ------------------------------------- START HEADER-NO-LOGIN  ------------------------------- */
+/*
+#y-header-no-login {
+  position: fixed;
+  top: 0px;
+  left: 15px;
+  right: 0px;
+  height: 58px;
+  background: #0E0E0E;
+  overflow: hidden;  
+}
+#y-logo-no-login {
+    float: left;
+}
+#y-logo-no-login img {
+  width: 130px;
+}
+#y-header-no-login .login-container {
+  float: right;  
+  overflow: hidden;
+  min-width: 800px;
+}
+.login-container .login-social {
+  float: right;  
+  padding: 10px 25px;
+  margin-right: 25px;
+  border-right: 1px solid #414141;
+  border-left: 1px solid #414141;
+}
+.login-social ul {  
+}
+.login-social ul li {
+  display: inline-block;  
+}
+.login-social ul li a {
+  display: block;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  margin: 0px 3px;
+}
+.login-social ul li a i {
+  color: #fff;
+  font-size: 18px;
+  line-height: 27px;
+}
+.login-social ul li a:hover {
+  background: #fff;
+}
+.login-social ul li a:hover i {
+  color: #009B77;
+}
+.login-container .login-yesocl {
+  float: right;
+  padding: 5px;
+}
+.login-yesocl .y-rows {
+}
+.y-rows .y-row {
+  margin-right: 5px;
+}
+.y-rows .y-row .y-td{
+  margin-bottom: 0px;
+}
+.login-yesocl .y-td input {
+  height: 20px;
+}
+.login-yesocl .link-login {  
+  color: #FFF;
+  font-size: 11px;
+}
+.login-yesocl .link-login:hover {
+  text-decoration: underline;
+}
+.login-yesocl span.remember-login {  
+  color: #FFF;
+  margin-right: 152px;
+}
+.login-yesocl span.remember-login label {
+  margin-bottom: 0px; 
+  display: inline-block;
+  font-size: 11px;
+}
+*/
+/* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */
+/* ------------------------------------- START HEADER-NO-LOGIN  ------------------------------- */
+#y-header-no-login {
+  position: fixed;
+  top: 0px;
+  left: 15px;
+  right: 0px;
+  height: 58px;
+  background: #ECEBEB;
+  overflow: hidden;  
+}
+#y-logo-no-login {
+  float: left;
+  margin-left: 15px;
+}
+#y-logo-no-login img {
+  /* width: 130px; */
+}
+#y-header-no-login .login-container {
+  float: right;  
+  overflow: hidden;
+  min-width: 800px;
+}
+.login-container .login-social {
+  float: right;  
+  padding: 10px 25px;
+  margin-right: 25px;
+  border-right: 1px solid #E4E4E4;
+}
+.login-social ul {  
+}
+.login-social ul li {
+  display: inline-block;  
+}
+.login-social ul li a {
+  display: block;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  margin: 0px 3px;
+}
+.login-social ul li a i {
+  color: #000;
+  font-size: 18px;
+  line-height: 27px;
+}
+.login-social ul li a:hover {
+  background: #fff;
+}
+.login-social ul li a:hover i {
+  color: #009B77;
+}
+.login-container .login-yesocl {
+  float: right;
+  padding: 5px;
+}
+.login-yesocl .y-rows {
+}
+.y-rows .y-row {
+  margin-right: 5px;
+}
+.y-rows .y-row .y-td{
+  margin-bottom: 0px;
+}
+.login-yesocl .y-td input {
+  height: 20px;
+}
+.login-yesocl .link-login {  
+  font-size: 11px;
+}
+.login-yesocl .link-login:hover {
+  text-decoration: underline;
+}
+.login-yesocl span.remember-login {  
+  color: #0e0e0e;
+  margin-right: 152px;
+}
+.login-yesocl span.remember-login label {
+  margin-bottom: 0px; 
+  display: inline-block;
+  font-size: 11px;
+}
+/* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */

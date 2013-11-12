@@ -77,6 +77,7 @@ $config->load( 'branch' );
 $config->load( 'common' );
 $config->load( 'routing' );
 $config->load( 'route' );
+$config->load( 'ignore' );
 
 // Twig
 require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';

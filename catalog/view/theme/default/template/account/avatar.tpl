@@ -14,7 +14,7 @@
         <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            
-            <form action="{{ action.avatar }}" method="post" enctype="multipart/form-data">
+            <form action="{{ path('ChangeAvatar') }}" method="post" enctype="multipart/form-data">
                 <div class="thumb fileupload fileupload-new" data-provides="fileupload">
                     <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="{{ img_avatar }}" style="width: 150px; height: 150px;" /></div>
                     <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="btns">
                      <button type="submit" class="btn btn-success">Save</button>   
-                     <a class="btn" href="{{ action.home }}">Cancel</a>   
+                     <a class="btn" href="{{ path('HomePage') }}">Cancel</a>   
                 </div>
             </form>     
         </div>

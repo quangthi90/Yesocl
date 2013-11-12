@@ -10,10 +10,6 @@ class ControllerWelcomeHeader extends Controller {
 		}
 
 		$this->data['action'] = array(
-			'login' 		=> $this->url->link('account/login/login', '', 'SSL'),
-			'home'			=> $this->url->link('common/home', '', 'SSL'),
-			'login_page' 	=> $this->url->link('account/login', '', 'SSL'),
-			'forgot_pass'	=> $this->url->link('account/forgotten', '', 'SSL'),
 			'connect_face'	=> $this->facebook->getLoginUrl( array( 
 				'scope' => 'publish_stream, email',
 				'redirect_uri' => HTTP_SERVER . 'facebookcnt/',

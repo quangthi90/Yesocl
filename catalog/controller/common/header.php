@@ -15,6 +15,16 @@ class ControllerCommonHeader extends Controller {
 			'avatar' => $avatar,
 			'username' => $this->customer->getUsername()
 		);
+
+		if ( !$this->customer->isLogged() ){
+			$this->data['action'] = array(
+				'connect_face'	=> $this->facebook->getLoginUrl( array( 
+					'scope' => 'publish_stream, email',
+					'redirect_uri' => HTTP_SERVER . 'facebookcnt/',
+					) 
+				)
+			);
+		}
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/header.tpl';

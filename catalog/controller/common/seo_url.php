@@ -31,6 +31,12 @@ class ControllerCommonSeoUrl extends Controller {
 					break;
 				}
 			}
+
+			// Check login
+			if ( !$this->customer->isLogged() 
+				&& !in_array($route, $this->config->get('ignore')) ){
+				return $this->forward('welcome/home');
+			}
 			
 			if (isset($this->request->get['route'])) {
 				return $this->forward($this->request->get['route']);
