@@ -296,7 +296,7 @@
 <div id="y-header-no-login">
   <div id="y-logo-no-login">
     <a href="{{ path('WelcomePage') }}">
-      <img src="{{ asset_img('template/logo2.png') }}"/>
+      <img src="{{ asset_img('template/logo.png') }}"/>
     </a>
   </div>
   <div class="login-container">    
