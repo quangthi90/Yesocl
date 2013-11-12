@@ -89,15 +89,6 @@
 (function($, document, undefined) {
     var list_comment = $('#comment-box .y-box-content');
 
-    function UserInfo(user_name, user_img, user_url, number_friend, is_friend, is_follow) {
-        this.userName = user_name;
-        this.userUrl = user_url;
-        this.userImg = user_img;
-        this.numberFriend = number_friend;
-        this.isFriend = is_friend;
-        this.isFollow = is_follow;
-    }
-
     function UserListViewer(el) {
         this.element        = el;
         this.viewTitle      = el.data('view-title');
@@ -107,7 +98,6 @@
         this.typeSlug       = el.data('type-slug');
         this.url            = el.data('url');
         this.addEvents();
-        this.users = [];
     }
     UserListViewer.prototype.addEvents = function() {
         var that = this;
@@ -121,90 +111,39 @@
     }
     UserListViewer.prototype.showViewer = function() {
         var that = this;
-
-        var data;
-        if(that.viewType == 'like'){
-
-        }
-        else if (that.viewType == 'comment') {
-
-        }
-        else if (that.viewType == 'view') {
-
-        }
-        if(that.users.length == 0){ 
-            //D? li?u test demo:
-            var promise = $.ajax({
-                type: 'POST',
-                url:  this.url,
-                dataType: 'json'
-            });
-        
-            this.triggerProgress(that.element, promise);
-            promise.then(function(data) { 
-                if(data.success == 'ok'){ 
-                    for (key in data.users) {
-                        var user = new UserInfo(data.users[key].username, data.users[key].avatar, data.users[key].href_user, 10, 0, 1);
-                        that.users.push(user);
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.url,
+            dataType: 'json'
+        });
+    
+        this.triggerProgress(that.element, promise);
+        promise.then(function(data) { 
+            if(data.success == 'ok') { 
+                if(data.users.length == 0){
+                    return;
+                }
+                var usersViewer = $('<div id="#user-viewer-container"></div>');
+                var users = [];
+                for (key in data.users) {
+                    users.push(data.users[key]);
+                    $.tmpl( $('#list-user-liked-template'), data.users[key]).appendTo(usersViewer);
+                }
+                that.element.data('users', users);
+                bootbox.dialog({
+                    message: usersViewer.wrap('<div>').parent().html(),
+                    title: "Who liked this post",
+                    onEscape: function(){
+                        bootbox.hideAll();
                     }
-                    var templateUserInfo = $('#user-info-template');
-                    $('#user-viewer-container').html('');
-                    var userViewerContainer = $('#user-viewer-container');
-                    var htmlContent = '';
+                });
+                $('.modal-backdrop').on('click', function(){
+                   bootbox.hideAll();
+                });
+            }else{
 
-                    for (var i = 0; i < that.users.length; i++) {
-                        var user = that.users[i];
-                        var html = templateUserInfo.html().replace(/USER_URL/gi, user.userUrl);
-                        html = html.replace(/USER_NAME/gi, user.userName);
-                        html = html.replace(/USER_IMG/gi, user.userImg);
-                        html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
-                        var actionFriend = '<i class="icon-ok"></i>Friend';
-                        if(user.isFriend == 0) {
-                            actionFriend = '<i class="icon-plus"></i>Add as Friend';
-                        }
-                        html = html.replace(/USER_ACTIONS/gi, actionFriend);
-                        htmlContent += html;
-                    };
-                    userViewerContainer.html(htmlContent);
-                    userViewerContainer.bPopup({
-                        follow: [false, false],             
-                        speed: 300,
-                        transition: 'slideDown',
-                        modalColor : '#000',
-                        opacity: '0.5'
-                    });
-                }
-
-            });
-        }else{
-            var templateUserInfo = $('#user-info-template');
-            $('#user-viewer-container').html('');
-            var userViewerContainer = $('#user-viewer-container');
-            var htmlContent = '';
-
-            for (var i = 0; i < that.users.length; i++) {
-                var user = that.users[i];
-                var html = templateUserInfo.html();
-                html = html.replace(/USER_URL/gi, user.userUrl);
-                html = html.replace(/USER_NAME/gi, user.userName);
-                html = html.replace(/USER_IMG/gi, user.userImg);
-                html = html.replace(/NUMBER_OF_FRIEND/gi, user.numberFriend);
-                var actionFriend = '<i class="icon-ok"></i>Friend';
-                if(user.isFriend == 0) {
-                    actionFriend = '<i class="icon-plus"></i>Add as Friend';
-                }
-                html = html.replace(/USER_ACTIONS/gi, actionFriend);
-                htmlContent += html;
-            };
-            userViewerContainer.html(htmlContent);
-            userViewerContainer.bPopup({
-                follow: [false, false],             
-                speed: 300,
-                transition: 'slideDown',
-                modalColor : '#000',
-                opacity: '0.5'
-            });
-        }   
+            }
+        });
     }
     UserListViewer.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
@@ -220,7 +159,7 @@
     };
 
     $(function(){
-        $('.who-action .view-list-liker').each(function(){
+        $('.view-list-liker').each(function(){
             new UserListViewer($(this));
         });
 
@@ -695,28 +634,27 @@
             this.triggerProgress($button, promise);
 
             promise.then(function(data) {
-                if(data.success == 'ok'){
-                    $('#user-info-template').html('');
-
-                    var htmlOutput = '';
+                if(data.success == 'ok'){                    
+                    if(data.users.length == 0){
+                        return;
+                    }
+                    var usersViewer = $('<div id="#user-viewer-container"></div>');
                     var users = [];
                     for (key in data.users) {
                         users.push(data.users[key]);
-                        htmlOutput += $.tmpl( $('#list-user-liked-template'), data.users[key] );
+                        $.tmpl( $('#list-user-liked-template'), data.users[key]).appendTo(usersViewer);
                     }
                     that.$el.data('users', users);
-
-                    $('#user-info-template').dialog({
-                        message: htmlOutput,
-                        title: "Who liked this post"
+                    bootbox.dialog({
+                        message: usersViewer.wrap('<div>').parent().html(),
+                        title: "Who liked this post",
+                        onEscape: function(){
+                            bootbox.hideAll();
+                        }
                     });
-                    // $('#user-info-template').bPopup({
-                    //     follow: [false, false],             
-                    //     speed: 300,
-                    //     transition: 'slideDown',
-                    //     modalColor : '#000',
-                    //     opacity: '0.5'
-                    // });
+                    $('.modal-backdrop').on('click', function(){
+                       bootbox.hideAll();
+                    });
                 }
             });
         }else{

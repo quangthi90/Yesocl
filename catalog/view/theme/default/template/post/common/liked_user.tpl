@@ -48,21 +48,23 @@
 	</div>
 	{% raw %}
 	<div id="list-user-liked-template" class="hidden">
-		<div class="user-item add-friend">
-			<div class="user-item-info fl">
-				<a href="${href_user}" class="user-item-avatar fl">
-					<img src="${avatar}" alt="${username}" />
-				</a>
-				<div class="user-item-overview fl">
-					<a href="${href_user}" class="user-item-name">${username}</a>
-					<span><strong>${multi_number}</strong> friend(s)</span>
+		<div>
+			<div class="user-item add-friend">
+				<div class="user-item-info fl">
+					<a href="${href_user}" class="user-item-avatar fl">
+						<img src="${avatar}" alt="${username}" />
+					</a>
+					<div class="user-item-overview fl">
+						<a href="${href_user}" class="user-item-name">${username}</a>
+						<span><strong>${multi_number}</strong> friend(s)</span>
+					</div>
 				</div>
-			</div>
-			<div class="user-actions fr">
-				<button data-url="${href_makefriend}" 
-					class="btn btn-yes btn-friend friend-group" data-cancel="0">
-					<i class="icon-plus-sign"></i> Make Friend
-				</button>
+				<div class="user-actions fr">
+					<button data-url="${href_makefriend}" 
+						class="btn btn-yes btn-friend friend-group" data-cancel="0">
+						<i class="icon-plus-sign"></i> Make Friend
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
