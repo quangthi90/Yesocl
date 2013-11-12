@@ -702,17 +702,21 @@
                     var users = [];
                     for (key in data.users) {
                         users.push(data.users[key]);
-                        $('#user-info-template').append($.tmpl( $('#list-user-liked-template'), data.users[key] ));
+                        htmlOutput += $.tmpl( $('#list-user-liked-template'), data.users[key] );
                     }
                     that.$el.data('users', users);
 
-                    $('#user-info-template').bPopup({
-                        follow: [false, false],             
-                        speed: 300,
-                        transition: 'slideDown',
-                        modalColor : '#000',
-                        opacity: '0.5'
+                    $('#user-info-template').dialog({
+                        message: htmlOutput,
+                        title: "Who liked this post"
                     });
+                    // $('#user-info-template').bPopup({
+                    //     follow: [false, false],             
+                    //     speed: 300,
+                    //     transition: 'slideDown',
+                    //     modalColor : '#000',
+                    //     opacity: '0.5'
+                    // });
                 }
             });
         }else{
