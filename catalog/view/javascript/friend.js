@@ -40,7 +40,7 @@
 	};
 		
 	FriendAction.prototype.submit = function($button){
-		var that = this;		
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
@@ -64,11 +64,11 @@
 				new FriendAction( that.$el );
 			}
 
-		});		
+		});
 	};
 		
 	FriendAction.prototype.remove = function($button){
-		var that = this;		
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
@@ -85,9 +85,9 @@
 			if(data.success == 'ok'){
 				that.$el.parent().remove();
 			}
-		});		
+		});
 	};
-		
+
 	FriendAction.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
 		var $old_icon = $el.find('i');
@@ -125,15 +125,13 @@
             		data: { 'filter_name': query },
             		dataType: 'json',
             		success: function ( json ) {
-            			if ( json.success != 'ok' ) {
-            				
-            			}else {
+            			if ( json.success == 'ok' ) {
 				            $.each(json.friends, function (i, item) {
 				            	if ( friendList.indexOf(item.id + '-' + item.name) == -1 ) {
 					                friendList.push(item.id + '-' + item.name);
 					                map[item.id + '-' + item.name] = item;
 				            	}
-				            });            
+				            });
                 			process(friendList);
             			}
             		},
@@ -178,9 +176,7 @@
             	data: { 'filter_name': that.$inputSearch.val() },
             	dataType: 'json',
             	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {  
+            		if ( json.success == 'ok' ) { 
             			if ( json.friends.length > 0 ) {
 	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
 	            			$friends.each(function(){
@@ -231,9 +227,7 @@
             	data: data,
             	dataType: 'json',
             	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {   
+            		if ( json.success == 'ok' ) {
             			if ( json.friends.length > 0 ) {
 	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
 	            			$friends.each(function(){
