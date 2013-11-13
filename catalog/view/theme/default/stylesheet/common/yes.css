@@ -590,16 +590,17 @@ a.btn-notification:hover .notification-item-name > i {
   padding: 3px;
 }
 .notification-content-list {
-  max-height: 500px;
   overflow-x: hidden;
-  overflow-y: auto;
-  display: none;
+  overflow-y: auto;  
   position: absolute;
   top: 53px;
   left: 0px;
+  max-height: 500px;
   background-color: #FFF;  
   border: 1px solid #ddd;
   border-top: none;
+  opacity: 0;
+  padding: 10px 0px 10px 10px;
 }
 .notification-content-list .notification-content-item {
   overflow: hidden;
@@ -652,6 +653,28 @@ a.btn-notification:hover .notification-item-name > i {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.notification-item .mCSB_scrollTools .mCSB_draggerRail {
+  width: 6px;
+  background: #f0f0f0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.notification-item .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  width: 6px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.notification-item .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+  background: #b4b4b4;
+}
+.notification-item .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+  background: #009B77;
+}
+.notification-item .mCSB_container {
+  margin-right: 20px;
 }
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
