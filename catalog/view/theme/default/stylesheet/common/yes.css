@@ -532,7 +532,7 @@ label.in-line{
   outline: none;
 }
 .notification-item a.btn-notification:hover,
-.notification-item.open a.btn-notification {
+.notification-item.active a.btn-notification {
   background-color: transparent;
 }
 .notification-item a.btn-notification > i {
@@ -551,7 +551,7 @@ label.in-line{
   transition: all 0.2s ease-in-out;
 }
 .notification-item a.btn-notification:hover > i,
-.notification-item.open a.btn-notification > i {
+.notification-item.active a.btn-notification > i {
   color: #fff;
   border:1px solid #009B77;
   background-color: #009B77;
@@ -563,7 +563,7 @@ label.in-line{
   font-size: 12px;
 }
 .notification-item a.btn-notification:hover .notification-item-name,
-.notification-item.open a.btn-notification .notification-item-name {
+.notification-item.active a.btn-notification .notification-item-name {
   color: #FFF;
 }
 a.btn-notification .notification-item-name > i {
@@ -574,7 +574,7 @@ a.btn-notification .notification-item-name > i {
 a.btn-notification:hover .notification-item-name > i {
   display: block;
 }
-.notification-item.open a.btn-notification .notification-item-name > i {
+.notification-item.active a.btn-notification .notification-item-name > i {
   display: block;
 }
 .notification-item .notification-item-count {
@@ -593,6 +593,13 @@ a.btn-notification:hover .notification-item-name > i {
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
+  display: none;
+  position: absolute;
+  top: 53px;
+  left: 0px;
+  background-color: #FFF;  
+  border: 1px solid #ddd;
+  border-top: none;
 }
 .notification-content-list .notification-content-item {
   overflow: hidden;
