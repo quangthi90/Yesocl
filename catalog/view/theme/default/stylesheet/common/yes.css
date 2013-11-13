@@ -440,12 +440,13 @@ label.in-line{
 }
 #user-notification {
   margin-right: 10px;
-  padding: 0px 10px;
+  padding: 2px 10px 0px 10px;
   background: transparent url(../../image/split.png) no-repeat 100% 50%;
 }
 #user-quick-menu {
   margin-right: 15px;
   padding-right: 10px;
+  padding-top: 2px;
 }
 #user-quick-menu > a {
   display: inline-block;
@@ -461,10 +462,11 @@ label.in-line{
 .user-menu > a > i {
   color: #0e0e0e;
   font-size: 16px;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
   border-radius: 50%;
-  border: 1px solid #b4b4b4;
+  border: 1px solid #009B77;
   padding: 10px;
   display: block;
   -webkit-transition: all 0.2s ease-in-out;
@@ -536,10 +538,11 @@ label.in-line{
 .notification-item a.btn-notification > i {
   color: #0e0e0e;
   font-size: 16px;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
   border-radius: 50%;
-  border: 1px solid #b4b4b4;
+  border: 1px solid #009B77;
   padding: 10px;
   display: block;
   -webkit-transition: all 0.2s ease-in-out;
@@ -2293,7 +2296,7 @@ ul.user_actions li:hover i{
   padding: 5px;
   text-align: center;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid #009B77;
   margin: 0px 3px;
 }
 .login-social ul li a i {
@@ -2302,10 +2305,10 @@ ul.user_actions li:hover i{
   line-height: 27px;
 }
 .login-social ul li a:hover {
-  background: #fff;
+  background: #009B77;
 }
 .login-social ul li a:hover i {
-  color: #009B77;
+  color: #fff;
 }
 .login-container .login-yesocl {
   float: right;
