@@ -28,12 +28,14 @@
 					{{/if}}
 
 					{{if fr_status == 3}}
-					<a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a class="btn-friend" href="#" data-url="${fr_href}" data-cancel="1">Cancel Request</a>
-                        </li>
-                    </ul>
+					<div class="dropdown friend-group">
+						<a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li>
+	                            <a class="btn-friend" href="#" data-url="${fr_href}" data-cancel="1">Cancel Request</a>
+	                        </li>
+	                    </ul>
+	                </div>
 					{{/if}}
 
 					{{if fr_status == 4}}
