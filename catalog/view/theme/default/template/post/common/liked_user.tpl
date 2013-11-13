@@ -18,13 +18,14 @@
 				</div>
 				<div class="user-actions fr friend-actions">
 					{{if fr_status == 2}}
-					<!--a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a class="btn-unfriend" data-url="${fr_href}">Unfriend</a>
-                        </li>
-                    </ul-->
-                    <a class="btn btn-yes" role="button"><i class="icon-ok"></i> Friend</a>
+					<div class="dropdown friend-group">
+						<a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li>
+	                            <a class="btn-unfriend" data-id="${id}" data-url="${fr_href}">Unfriend</a>
+	                        </li>
+	                    </ul>
+	                </div>
 					{{/if}}
 
 					{{if fr_status == 3}}
@@ -32,15 +33,14 @@
 						<a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
 	                    <ul class="dropdown-menu" role="menu">
 	                        <li>
-	                            <a class="btn-friend" href="#" data-url="${fr_href}" data-cancel="1">Cancel Request</a>
+	                            <a class="btn-friend" href="#" data-id="${id}" data-url="${fr_href}" data-cancel="1">Cancel Request</a>
 	                        </li>
 	                    </ul>
 	                </div>
 					{{/if}}
 
 					{{if fr_status == 4}}
-					<button data-url="${fr_href}" 
-						class="btn btn-yes btn-friend friend-group" data-cancel="0">
+					<button data-url="${fr_href}" data-id="${id}" class="btn btn-yes btn-friend friend-group" data-cancel="0">
 						<i class="icon-plus-sign"></i> Make Friend
 					</button>
 					{{/if}}
@@ -48,14 +48,14 @@
 			</div>
 		</div>
         <div id="send-request">
-            <button data-cancel="0" data-url="${href}" class="btn btn-yes btn-friend friend-group"><i class="icon-plus-sign"></i> Make Friend</button>
+            <button data-cancel="0" data-id="${id}" data-url="${href}" class="btn btn-yes btn-friend friend-group"><i class="icon-plus-sign"></i> Make Friend</button>
         </div>
         <div id="cancel-request">
             <div class="dropdown friend-group">
                 <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
                 <ul class="dropdown-menu" role="menu">
                     <li>
-                        <a data-cancel="1" class="btn-friend" href="#" data-url="${href}">Cancel Request</a>
+                        <a data-cancel="1" class="btn-friend" data-id="${id}" href="#" data-url="${href}">Cancel Request</a>
                     </li>
                 </ul>
             </div>

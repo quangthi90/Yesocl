@@ -636,13 +636,19 @@
                     if(data.users.length == 0){
                         return;
                     }
-                    var usersViewer = $('<div id="#user-viewer-container"></div>');
+
                     var users = [];
+
                     for (key in data.users) {
                         users[data.users[key].id] = data.users[key];
-                        $.tmpl( $('#list-user-liked-template'), data.users[key]).appendTo(usersViewer);
                     }
+
                     comments[that.$el.data('id')].users = users;
+
+                    var usersViewer = $('<div id="#user-viewer-container"></div>');
+                    for (key in users) {
+                        $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
+                    }
                     bootbox.dialog({
                         message: usersViewer.wrap('<div>').parent().html(),
                         title: "Who liked this post",
@@ -653,12 +659,16 @@
                     $('.modal-backdrop').on('click', function(){
                        bootbox.hideAll();
                     });
-                    $(document).trigger('FRIEND_ACTION');
+
+                    $(document).trigger('FRIEND_ACTION', [false]);
+
+                    $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
                 }
             });
         }else{
+            users = comments[this.$el.data('id')].users;
+
             var usersViewer = $('<div id="#user-viewer-container"></div>');
-            var users = comments[this.$el.data('id')].users;
             for (key in users) {
                 $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
             }
@@ -672,7 +682,10 @@
             $('.modal-backdrop').on('click', function(){
                bootbox.hideAll();
             });
-            $(document).trigger('FRIEND_ACTION');
+
+            $(document).trigger('FRIEND_ACTION', [false]);
+
+            $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
         }
     };
     LikedCommentListBtn.prototype.triggerProgress = function($el, promise){
@@ -698,6 +711,16 @@
             $('.open-comment').each(function(){
                 new CommentBtn($(this));
             });
+        });
+
+        $(document).bind('FRIEND_UPDATE_STATUS', function(e, status, id) {
+            var $curr_post = $('.open-comment.disabled');
+
+            var comments = $curr_post.data('comments');
+
+            var comment_id = $('#list-user-liked-template').data('comment_id');
+
+            comments[comment_id].users[id].fr_status = status;
         });
     });
 }(jQuery, document));
