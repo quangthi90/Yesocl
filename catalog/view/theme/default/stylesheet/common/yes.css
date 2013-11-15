@@ -1757,6 +1757,9 @@ div[data-role="editor-toolbar"] {
 }
 .user-item .user-actions{  
 }
+.user-item .user-actions .dropdown-menu{
+  min-width: 130px;
+}
 .user-item .user-item-avatar{
   height: 50px;
   width: 50px;  
