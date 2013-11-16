@@ -39,13 +39,6 @@
                                     <li class="unlike-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
                                         <a href="#"><i class="icon-thumbs-down"></i> Unlike</a>
                                     </li>
-                                    <!--li>
-                                        <a href="#"><i class="icon-edit"></i>Edit</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#"><i class="icon-trash"></i>Delete</a>
-                                    </li-->
                                 </ul>
                             </div>
                         </div>
@@ -89,7 +82,7 @@
                                     <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
                                         Liked
                                     </span>
-                                    <a class="post-liked-list" href="#" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
+                                    <a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
                                 </span>
                             </div>
                         </div>

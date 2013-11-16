@@ -10,7 +10,7 @@ $_['route']['PostLike']						= 'post/post/like';
 $_['route']['PostAdd']						= 'post/post/addStatus';
 $_['route']['PostGetLiker']					= 'post/post/getLikers';
 
-// Branch
+// Comment
 $_['route']['CommentList'] 					= 'post/comment/getComments';
 $_['route']['CommentAdd']					= 'post/comment/addComment';
 $_['route']['CommentLike']					= 'post/comment/like';

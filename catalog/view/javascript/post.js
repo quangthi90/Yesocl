@@ -69,6 +69,9 @@
                     that.$btnLike.addClass('hidden');
                     that.$el.data('is-liked', 1);
                 }
+
+                that.$el.find('.post-liked-list').data('users', null);
+                that.$el.find('.post-liked-list').data('like-count', data.like_count);
             }
         });     
     };
@@ -101,77 +104,113 @@
 
 // Show list users liked post
 (function($, document, undefined) {
-    function UserListViewer(el) {
-        this.element        = el;
-        this.viewTitle      = el.data('view-title');
-        this.viewType       = el.data('view-title');
-        this.postSlug       = el.data('post-slug');
-        this.postType       = el.data('post-type');
-        this.typeSlug       = el.data('type-slug');
-        this.url            = el.data('url');
+    function UserListViewer($el) {
+        this.$el        = $el;
+        this.url        = $el.data('url');
+
         this.addEvents();
     }
     UserListViewer.prototype.addEvents = function() {
         var that = this;
-        this.element.click(function(e){
+        this.$el.click(function(e){
             e.preventDefault();
-            if($(this).hasClass('disabled')) {
+            
+            if( $(this).hasClass('disabled') || that.$el.data('like-count') == 0 ) {
                 return false;
             }
-            that.showViewer();
+
+            that.submit(that.$el);
+
+            return false;
         });
     }
-    UserListViewer.prototype.showViewer = function() {
+    UserListViewer.prototype.submit = function($button) {
         var that = this;
-        var promise = $.ajax({
-            type: 'POST',
-            url:  this.url,
-            dataType: 'json'
-        });
-    
-        this.triggerProgress(that.element, promise);
-        promise.then(function(data) { 
-            if(data.success == 'ok') { 
-                if(data.users.length == 0){
-                    return;
-                }
-                var usersViewer = $('<div id="#user-viewer-container"></div>');
-                var users = [];
-                for (key in data.users) {
-                    users.push(data.users[key]);
-                    $.tmpl( $('#list-user-liked-template'), data.users[key]).appendTo(usersViewer);
-                }
-                that.element.data('users', users);
-                bootbox.dialog({
-                    message: usersViewer.wrap('<div>').parent().html(),
-                    title: "Who liked this post",
-                    onEscape: function(){
-                        bootbox.hideAll();
-                    }
-                });
-                $('.modal-backdrop').on('click', function(){
-                   bootbox.hideAll();
-                });
-            }else{
 
+        var users = $button.data('users');
+        
+        if ( users == undefined ){
+            var promise = $.ajax({
+                type: 'POST',
+                url:  this.url,
+                dataType: 'json'
+            });
+
+            this.triggerProgress($button, promise);
+
+            promise.then(function(data) {
+                if(data.success == 'ok'){                    
+                    if(data.users.length == 0){
+                        return;
+                    }
+
+                    var users = [];
+
+                    for (key in data.users) {
+                        users[data.users[key].id] = data.users[key];
+                    }
+
+                    $button.data('users', users);
+
+                    var usersViewer = $('<div id="#user-viewer-container"></div>');
+                    for (key in users) {
+                        $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
+                    }
+                    bootbox.dialog({
+                        message: usersViewer.wrap('<div>').parent().html(),
+                        title: "Who liked this post",
+                        onEscape: function(){
+                            bootbox.hideAll();
+                        }
+                    });
+                    $('.modal-backdrop').on('click', function(){
+                       bootbox.hideAll();
+                    });
+
+                    $(document).trigger('FRIEND_ACTION', [false]);
+
+                    // $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+                }
+            });
+        }else{
+            users = $button.data('users');
+
+            var usersViewer = $('<div id="#user-viewer-container"></div>');
+            for (key in users) {
+                $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
             }
-        });
+            bootbox.dialog({
+                message: usersViewer.wrap('<div>').parent().html(),
+                title: "Who liked this post",
+                onEscape: function(){
+                    bootbox.hideAll();
+                }
+            });
+            $('.modal-backdrop').on('click', function(){
+               bootbox.hideAll();
+            });
+
+            $(document).trigger('FRIEND_ACTION', [false]);
+
+            // $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+        }
     }
     UserListViewer.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var $old_icon = $el.find('d');
+        var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
-            $el.html($old_icon);
+            $el.removeClass('disabled').prepend($old_icon);
         };
-        
-        $el.addClass('disabled').html($spinner);
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
 
         promise.then(f, f);
     };
 
     $(function(){
-        $('.view-list-liker').each(function(){
+        $('.post-liked-list').each(function(){
             new UserListViewer($(this));
         });
     }); 
@@ -660,7 +699,7 @@
                     }
                     bootbox.dialog({
                         message: usersViewer.wrap('<div>').parent().html(),
-                        title: "Who liked this post",
+                        title: "Who liked this comment",
                         onEscape: function(){
                             bootbox.hideAll();
                         }
@@ -683,7 +722,7 @@
             }
             bootbox.dialog({
                 message: usersViewer.wrap('<div>').parent().html(),
-                title: "Who liked this post",
+                title: "Who liked this comment",
                 onEscape: function(){
                     bootbox.hideAll();
                 }
