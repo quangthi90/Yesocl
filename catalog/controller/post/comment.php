@@ -82,6 +82,11 @@ class ControllerPostComment extends Controller {
             'post_type' => $data['post_type'],
             'comment_id' => $comment['id']
         ));
+        $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+            'post_slug' => $data['post_slug'],
+            'post_type' => $data['post_type'],
+            'comment_id' => $comment['id']
+        ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
         $comment['is_liked'] = false;
 

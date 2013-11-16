@@ -418,7 +418,7 @@
 
                 var comments = $comment_btn.data('comments');
                 comments[data.comment.id] = data.comment;
-                console.log(comments.length);
+                
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
                 $('#add-more-item').before(htmlOutput);
                 $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
@@ -545,8 +545,10 @@
                 var $curr_post = $('.open-comment.disabled');
                 var comments = $curr_post.data('comments');
 
+                that.$el.data('like-count', data.like_count);
                 comments[that.comment_id].is_liked = that.isLiked;
                 comments[that.comment_id].like_count = data.like_count;
+                comments[that.comment_id].users = null;
             }
         });
     };
@@ -597,7 +599,7 @@
 
         // Like Comment
         this.$btnLikedUser.click(function(e) {
-            if(that.$btnLikedUser.hasClass('disabled')) {
+            if(that.$btnLikedUser.hasClass('disabled') || that.$el.data('like-count') == 0) {
                 e.preventDefault();
 
                 return false;
