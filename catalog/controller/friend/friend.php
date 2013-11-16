@@ -33,13 +33,7 @@ class ControllerFriendFriend extends Controller {
 
 		$user_temp = $user->formatToCache();
 
-		if ( !empty($user_temp['avatar']) ){
-			$user_temp['avatar'] = $this->model_tool_image->resize( $user_temp['avatar'], 180, 180 );
-		}elseif ( !empty($user_temp['email']) ){
-            $user_temp['avatar'] = $this->model_tool_image->getGavatar( $user_temp['email'], 180 );
-        }else{
-        	$user_temp['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-		}
+		$user_temp['avatar'] = $this->model_tool_image->getAvatarUser( $user_temp['avatar'], $user_temp['email'] );
 
 		$this->data['users'] = array( $user_temp['id'] => $user_temp );
 
@@ -47,47 +41,7 @@ class ControllerFriendFriend extends Controller {
 
 		$this->data['friends'] = $this->model_friend_friend->getListFriends( array(
 			'filter_request' => 1,
-			) 
-		);
-
-		/*$this->data['friends'] = array();
-
-		foreach ( $this->user->getFriends() as $friend ) {
-			$friend = $friend->getUser();
-
-			if ( $friend->getFriendRequests() && in_array($this->customer->getId(), $friend->getFriendRequests()) ){
-				$friend_status = 2;
-			}elseif ( $this->customer->getUser()->getFriendById($friend->getId()) ){
-				$friend_status = 1;
-			}else{
-				$friend_status = 0;
-			}
-
-			if ( $friend->getMeta() ){
-				$meta = $friend->getMeta()->formatToCache();
-			}else{
-				$meta = array();
-			}
-
-			$friend = $friend->formatToCache();
-
-			$friend['meta'] = $meta;
-			$friend['fr_status'] = $friend_status;
-			$friend['numFriend'] = ( $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) ) == 0 ) ? 'Not have multi friend' : $this->model_friend_friend->getTotalMultiFriends( array( 'friendId' => $friend['id'] ) );
-
-			if ( !array_key_exists($friend['id'], $this->data['users']) ){
-				if ( !empty($friend['avatar']) ){
-					$friend['avatar'] = $this->model_tool_image->resize( $friend['avatar'], 180, 180 );
-				}elseif ( !empty($friend['email']) ){
-		            $friend['avatar'] = $this->model_tool_image->getGavatar( $friend['email'], 180 );
-		        }else{
-		        	$friend['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-				}
-
-				$this->data['users'][$friend['id']] = $friend;
-				$this->data['friends'][$friend['id']] = $friend;
-			}
-		}*/
+		));
 
 		$this->data['group'] = array();
 
