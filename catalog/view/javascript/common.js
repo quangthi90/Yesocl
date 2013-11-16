@@ -1,11 +1,20 @@
+/*
+	JS Utitlity Function
+*/
+function getActualLengthOfArray(arr) {
+   return $.grep(arr, function(el){
+      return el !== undefined;
+     }
+    ).length;
+}
+/*
+	End JS Utitlity Function
+*/
 (function($, document, undefined) {
-	/*
-	Quick access functions
-	*/
-	jQuery.fn.makeScrollWithoutCalResize = function() {
-		$(this).niceScroll();	
-	}
 
+	jQuery.fn.makeScrollWithoutCalResize = function() {
+	$(this).niceScroll();	
+	}
 	jQuery.fn.makeCustomScroll = function(isHonrizontal) {
 		$(this).mCustomScrollbar({
 			set_width:false, /*optional element width: boolean, pixels, percentage*/
@@ -42,17 +51,6 @@
 			theme:"light" /*"light", "dark", "light-2", "dark-2", "light-thick", "dark-thick", "light-thin", "dark-thin"*/
 		});
 	}
-
-	Array.prototype.size = function(){
-	  return $.grep(this, function(el){
-		  		return el !== undefined;
-		  	}
-	  	).length;
-	};
-
-	/*
-	End quick access functions
-	*/
 
 	/*
 		Left sidebar
@@ -747,7 +745,6 @@
 	End Custom List Post
 	*/
 	$(document).ready(function() {
-
 		new HorizontalBlock($('.has-horizontal'));
 		new FlexibleElement($(this));
 		new Sidebar($(this));

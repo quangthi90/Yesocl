@@ -219,10 +219,8 @@
                         comments[data.comments[key].id] = data.comments[key];
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
-                    that.$el.data('comments', comments);
-                    
-                    comments = new Array( comments );
-                    var comment_count = comments.size;
+                    that.$el.data('comments', comments);  
+                    var comment_count = getActualLengthOfArray(comments);   
 
                     htmlOutput += '<div id="add-more-item"></div>';
                     $('#comment-box').find('.comment-body').html(htmlOutput);
