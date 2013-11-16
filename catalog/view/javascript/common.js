@@ -44,8 +44,7 @@
 	}
 
 	Array.prototype.size = function(){
-	  return this.filter(
-		  	function(el){
+	  return $.grep(this, function(el){
 		  		return el !== undefined;
 		  	}
 	  	).length;
