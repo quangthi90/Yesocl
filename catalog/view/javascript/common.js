@@ -749,12 +749,6 @@
 	*/
 	$(document).ready(function() {
 
-		var mycars = new Array();
-		mycars[0] = "Saab";
-		mycars[1] = "Volvo";
-		mycars[10] = "BMW";
-		alert(mycars.size());
-
 		new HorizontalBlock($('.has-horizontal'));
 		new FlexibleElement($(this));
 		new Sidebar($(this));
