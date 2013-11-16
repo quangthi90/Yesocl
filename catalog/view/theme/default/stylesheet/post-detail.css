@@ -1,28 +1,60 @@
 #y-content {
-    padding: 25px 0px 0px 25px;
-    background: #ffffff;
+    padding: 15px 0px 0px 0px;
+    background: #EBEBEB;
 }
 #post-detail {
     width: 100%;
     height: 100%;
     position: relative;
 }
-#post-detail  #post-detail-header {
-    position: fixed;
-    top: 58px;
-    left: 15px;
-    right: 0px; 
-    padding: 10px 25px 5px 75px;
-    cursor: default !important;
+#detail-header {
+    position: absolute;    
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 70px;
     border-bottom: 1px solid #ddd;
-    background-color: #EBEBEB;
+}
+#detail-content {
+    position: absolute;    
+    left: 0px;
+    top: 71px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #fff;
+}
+#post-content {
+    -webkit-column-width: 450px;    
+    -moz-column-width: 450px;
+    column-width: 450px;
+    -moz-column-gap: 35px;    
+    -webkit-column-gap: 35px;  
+    column-gap: 35px;            
+    text-align: justify;  
+    font-size: 15px;
+    line-height: 22px;
+    position: absolute;
+    top: 0px;
+    left: 15px;
+    bottom: 0px;
+    right: 350px;
+    padding-top: 15px;
+    padding-right: 25px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+#comment-wrapper {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    width: 345px;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
 }
 .goback-link {
     position: relative;
-    z-index: 3;
-    float: left;
-    padding: 0px;
-    width: 24px;
+    padding: 15px 20px 15px 20px;
 }
 .goback-link a {
     display: block;
@@ -85,10 +117,14 @@
 .post-actions a.btn-link-round:hover i {
     color: #000;
 }
-#post-detail-header .post-title-container {
-    clear: both;
+#detail-header .post-title-container {
+    position: absolute;
+    top: 0px;
+    left: 75px;
+    right: 20px;
+    height: 100%;
 }
-#post-detail-header .post-title {
+#detail-header .post-title {
     padding: 0px;
     margin: 0px;
     overflow: hidden;
@@ -96,26 +132,6 @@
     text-overflow: ellipsis;
     font-size: 24px;
     line-height: 35px;
-}
-
-#post-content {
-    padding: 10px;
-    -webkit-column-width: 450px;    
-    -moz-column-width: 450px;
-    column-width: 450px;
-    -moz-column-gap: 35px;    
-    -webkit-column-gap: 35px;  
-    column-gap: 35px;  
-    position: absolute;    
-    top: 60px;    
-    bottom: 10px;
-    left: 0px;  
-    text-align: justify;  
-    font-size: 15px;
-    line-height: 22px;
-    width: 1000px;
-    overflow-x: auto;
-    overflow-y: hidden;
 }
 #post-content * {
     line-height: 22px;
@@ -132,4 +148,26 @@
     white-space: nowrap;
     max-width: 500px;
     height: auto;
+}
+#comment-wrapper .comment-form {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+}
+#comment-wrapper .comment-form .txt_editor{
+    border-bottom: 1px solid #F7F7F7;
+}
+#comment-wrapper .comment-form .post_input{
+    min-height: 45px;
+    max-height: 45px;
+    width: 97%;
+}
+#comment-wrapper .comment-form .comment-action{
+    height: 25px;
+    padding: 3px 5px 2px 5px;
+    overflow: hidden;
+}
+#comment-wrapper .comment-form .comment-action .btn {
+    padding: 2px 15px;
 }

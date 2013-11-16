@@ -450,8 +450,10 @@
 		this.columns = el.find('.column');
 		this.feeds = el.find('.feed');	
 		this.heightMain =  el.height();
-		this.widthMain = el.width();		
-		this.initializeBlock();
+		this.widthMain = el.width();
+		if(!this.rootContent.hasClass('no-scroll')) {
+			this.initializeBlock();
+		}
 	}
 	HorizontalBlock.prototype.initializeBlock = function() {
 		if(this.root.hasClass(df_INVIDUAL_BLOCK)) {

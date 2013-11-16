@@ -1,23 +1,23 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/post_comment.tpl' %}
+{% use '@template/default/template/post/common/post_comment_in_page.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
-    {{ block('post_common_post_comment_style') }}
+    {{ block('post_common_post_comment_in_page_style') }}
 {% endblock %}
 
 {% block body %}
-<div id="y-content">
+<div id="y-content" class="no-scroll">
 	<div id="post-detail">
-		<div class="goback-link fl">
-			<a href="#" class="btn-link-round" title="Go back" onclick="history.go(-1); return false;" > 
-				<i class="icon-arrow-left medium-icon"></i>					
-			</a>
-		</div>	
-		<div id="post-detail-header">
+		<div id="detail-header">
+			<div class="goback-link fl">
+				<a href="#" class="btn-link-round" title="Go back" > 
+					<i class="icon-arrow-left medium-icon"></i>					
+				</a>
+			</div>
 			<div class="post-title-container">				
 				<h2 class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
 				<div class="post-detail-meta">
@@ -55,18 +55,21 @@
 					</ul>			
 					<div class="clear"></div>	
 				</div>
-			</div>				
-		</div>	
-		<div id="post-content">
-			{{ post.content|raw }}
-			{{ post.content|raw }}
-			{{ post.content|raw }}
+			</div>
+		</div>		
+		<div id="detail-content">
+			<div id="post-content">
+				{{ post.content|raw }}
+				{{ post.content|raw }}
+				{{ post.content|raw }}
+			</div>
+			{{ block('post_common_post_comment_in_page') }}
 		</div>
 	</div>
-	{{ block('post_common_post_comment') }}
 </div>
 {% endblock %}
 
 {% block javascript %}
-{{ block('post_common_post_comment_javascript') }}
+<script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
+{{ block('post_common_post_comment_in_page_javascript') }}
 {% endblock %}
