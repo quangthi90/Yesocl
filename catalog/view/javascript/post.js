@@ -235,11 +235,28 @@
                 e.preventDefault();
                 return false;
             }
-            $('#comment-box').find('.y-box-header .btn-close').trigger('click');
-            that.submit(that.$el);
+            // $('#comment-box').find('.y-box-header .btn-close').trigger('click');
+
+            if ( that.$el.data('comment-count') == 0 ){
+                var htmlOutput = '';
+                htmlOutput += '<div id="add-more-item"></div>';
+                $('#comment-box').find('.comment-body').html(htmlOutput);
+                $('#comment-box').find('.y-box-header span').html(that.comment_count);
+                $('.comment-form').attr('data-url', that.comment_url);
+                
+                $('.comment-body').stop().animate({
+                    scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
+                }, 1000);
+
+                $(document).trigger('SHOWN_COMMENT_LIST');
+
+                that.showCommentBox(that.$el); 
+            }else{
+                that.submit(that.$el);
+            }
+
             return false;
         });
-        //Attach close event:
         $('#comment-box').on('click', '.y-box-header .btn-close', function(){
             that.hideCommentBox(that.$el);
         });        
