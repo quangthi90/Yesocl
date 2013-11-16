@@ -43,6 +43,14 @@
 		});
 	}
 
+	Array.prototype.size = function(){
+	  return this.filter(
+		  	function(el){
+		  		return el !== undefined;
+		  	}
+	  	).length;
+	};
+
 	/*
 	End quick access functions
 	*/
@@ -740,6 +748,13 @@
 	End Custom List Post
 	*/
 	$(document).ready(function() {
+
+		var mycars = new Array();
+		mycars[0] = "Saab";
+		mycars[1] = "Volvo";
+		mycars[10] = "BMW";
+		alert(mycars.size());
+
 		new HorizontalBlock($('.has-horizontal'));
 		new FlexibleElement($(this));
 		new Sidebar($(this));
