@@ -1,25 +1,40 @@
-// Button like post
+// Like + Unlike a post
 (function($, document, undefined) {
     function LikePostBtn( $el ){
         var that = this;
         this.$el            = $el;
         this.url            = $el.data('url');
-        this.isLiked        = $el.data('post-liked');
-        this.iconLike       = $el.find('i');
+        this.isLiked        = $el.data('is-liked');
+        
+        this.$btnLike       = $el.find('.like-post');
+        this.$btnUnLike     = $el.find('.unlike-post');
+        this.$btnLiked      = $el.find('.liked-post');
 
         this.attachEvents();
     }
     LikePostBtn.prototype.attachEvents = function(){
         var that = this;
 
-        this.$el.click(function(e) {
-            if(that.$el.hasClass('disabled')) {
+        this.$btnLike.click(function(e) {
+            if(that.$btnLike.hasClass('disabled')) {
                 e.preventDefault();
 
                 return false;
             }
 
-            that.submit(that.$el);
+            that.submit(that.$btnLike);
+
+            return false;
+        });
+
+        this.$btnUnLike.click(function(e) {
+            if(that.$btnUnLike.find('a').hasClass('disabled')) {
+                e.preventDefault();
+
+                return false;
+            }
+
+            that.submit(that.$btnUnLike.find('a'));
 
             return false;
         });
@@ -38,26 +53,23 @@
         promise.then(function(data) { 
             if(data.success == 'ok'){ 
                 var $curr_item = that.$el.parents('.post'); 
-                $curr_item.find('.post_meta .post_like d').html( data.like_count );
-                $button.find('d').html( data.like_count );
-                $curr_item.find('.view-list-liker d').html( data.like_count );
+                that.$el.find('.post_meta .post_like d').html( data.like_count );
+                that.$el.find('.post-liked-list').html( data.like_count ).data('like-count', data.like_count);
 
-                var $likeIcon = $('<i class="icon-thumbs-up medium-icon"></i>');
-                var $unLikeIcon = $('<i class="icon-thumbs-down medium-icon"></i>');
                 //Unlike
-                if(that.isLiked == 1) {
-                    that.iconLike.replaceWith($likeIcon);
-                    that.iconLike = $likeIcon;
-                    that.isLiked = 0;
+                if(that.$el.data('is-liked') == 1) {
+                    that.$btnLiked.addClass('hidden');
+                    that.$btnUnLike.addClass('hidden');
+                    that.$btnLike.removeClass('hidden');
+                    that.$el.data('is-liked', 0);
+                    that.$btnUnLike.parents('.dropdown').removeClass('open');
                 }else { //Like
-                    that.iconLike.replaceWith($unLikeIcon);
-                    that.iconLike = $unLikeIcon;
-                    that.isLiked = 1;
+                    that.$btnLiked.removeClass('hidden');
+                    that.$btnUnLike.removeClass('hidden');
+                    that.$btnLike.addClass('hidden');
+                    that.$el.data('is-liked', 1);
                 }
-
-                that.$el.removeClass('disabled');
             }
-
         });     
     };
     LikePostBtn.prototype.triggerProgress = function($el, promise){
@@ -65,15 +77,17 @@
         var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
-            $el.html($old_icon);
+            $el.removeClass('disabled').prepend($old_icon);
         };
 
-        $el.addClass('disabled').html($spinner);
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
 
         promise.then(f, f);
     };
+
     $(function(){
-        $('.like-post').each(function(){
+        $('.post-item').each(function(){
             new LikePostBtn($(this));           
         });
 
@@ -418,7 +432,7 @@
 
                 var comments = $comment_btn.data('comments');
                 comments[data.comment.id] = data.comment;
-                
+
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
                 $('#add-more-item').before(htmlOutput);
                 $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
@@ -527,14 +541,15 @@
             if(data.success == 'ok'){
                 that.$el.find('.like-count').html( data.like_count ); 
 
-                //Unlike
+                // Unlike
                 if(that.isLiked == 1) {
                     that.$btnLike.removeClass('hidden');
                     that.$btnUnLike.addClass('hidden');
                     that.$likedLabel.addClass('hidden');
                     that.isLiked = 0;
+                    that.$btnUnLike.parents('.dropdown').removeClass('open');
                 
-                //Like
+                // Like
                 }else {
                     that.$btnLike.addClass('hidden');
                     that.$btnUnLike.removeClass('hidden');

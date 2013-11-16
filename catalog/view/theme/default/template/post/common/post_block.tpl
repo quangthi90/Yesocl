@@ -1,18 +1,21 @@
 {% block post_common_post_block %}
-	<div class="feed post post_status">
+	<div class="feed post post_status post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
 		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-caret-down"></i>
                </a>
                <ul class="dropdown-menu">
-                    <li>
+               		<li class="unlike-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
+                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
+                    </li>
+                    <!--li>
                         <a href="#"><i class="icon-edit"></i>Edit</a>
                     </li>
                     <li class="divider"></li>
                     <li>
                         <a href="#"><i class="icon-trash"></i>Delete</a>
-                    </li>
+                    </li-->
                 </ul>
             </div>
         </div>
@@ -42,17 +45,13 @@
 						<d>{{ post.comment_count }}</d>
 					</span>
 					<span class="post_like fr">
-						<a class="like-post" href="#"
-                            data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}"
-                            data-post-liked="{{ post.isUserLiked }}"
-                        >
-							{% if post.isUserLiked == 0 %}
-                                <i class="icon-thumbs-up medium-icon"></i>
-                            {% else %}
-                                <i class="icon-thumbs-down medium-icon"></i>
-                            {% endif %}
-						</a>
-						<d>{{ post.like_count }}</d>
+						<a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
+							<i class="icon-thumbs-up medium-icon"></i>
+                        </a>
+                        <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
+                            Liked
+						</span>
+						<a class="post-liked-list" href="#" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
 					</span>
 				</div>
 			</div>

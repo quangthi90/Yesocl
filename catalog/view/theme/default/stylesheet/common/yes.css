@@ -888,7 +888,7 @@ a.btn-notification:hover .notification-item-name > i {
   overflow: hidden;
 }
 .post .post_header .post_meta span{
-  margin-left: 20px;
+  margin-left: 10px;
   vertical: middle;
 } 
 .post .post_header .post_meta span:first-child {
