@@ -324,6 +324,10 @@ label.in-line{
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
+img.small-avatar {
+  width: 30px;
+  height: 30px;
+}
 
 /* ------------------------------------- COMMON LAYOUT ---------------------------------------- */
 #y-container

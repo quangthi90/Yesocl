@@ -12,29 +12,39 @@
     top: 58px;
     left: 15px;
     right: 0px; 
-    padding: 10px 25px 5px 25px;
+    padding: 10px 25px 5px 75px;
     cursor: default !important;
     border-bottom: 1px solid #ddd;
-    background-color: #f0f0f0;
+    background-color: #EBEBEB;
 }
 .goback-link {
-
+    position: relative;
+    z-index: 3;
+    float: left;
+    padding: 0px;
+    width: 24px;
 }
 .goback-link a {
-
+    display: block;
+    padding: 7px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #009B77;
+    border-radius: 50%;
 }
 .goback-link a:hover {
 
 }
 .goback-link a i {
-
+    font-size: 20px;
+    color: #0e0e0e;
 }
 .goback-link a:hover i {
-
+    color: #009B77;
 }
 .post-user-time a {
     font-weight: bold;
-    font-size: 14px;    
+    font-size: 13px;    
 }
 .post-user-time i {
     font-size: 16px;
@@ -46,7 +56,13 @@
 }
 .post-actions li {
     display: inline-block;
-    padding: 5px 8px;
+    padding: 1px 5px;
+}
+.post-actions li span.number {
+    padding: 1px 8px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    display: inline-block;
 }
 .post-actions a.btn-link-round  {
     display: inline-block;
@@ -69,37 +85,6 @@
 .post-actions a.btn-link-round:hover i {
     color: #000;
 }
-.post-actions .action-text {
-    font-weight: normal;
-    font-size: 11px;
-    clear: left;
-    line-height: 15px;
-}
-.post-actions .action-text d {
-    font-weight: bold;
-    font-size: 10px;
-}
-.post-actions .number-viewer {
-    position: relative;
-    min-width: 25px;
-    margin-top: 3px;
-    color: #000;
-    border-radius: 2px;    
-    border: 1px solid #009B77;
-    padding: 0px 2px;
-}
-.post-actions .number-viewer span {
-    position: absolute;
-    top: -10px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-}
-.post-actions .number-viewer i {
-    color: #009B77;
-    text-align: center;
-    vertical-align: top;
-}
 #post-detail-header .post-title-container {
     clear: both;
 }
@@ -109,6 +94,8 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    font-size: 24px;
+    line-height: 35px;
 }
 
 #post-content {

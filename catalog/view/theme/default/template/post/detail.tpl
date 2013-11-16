@@ -13,8 +13,8 @@
 <div id="y-content">
 	<div id="post-detail">
 		<div class="goback-link fl">
-			<a href="#" class="btn-link-round" onclick="history.go(-1); return false;" > 
-				<i class="icon-arrow-left medium-icon"></i> Back					
+			<a href="#" class="btn-link-round" title="Go back" onclick="history.go(-1); return false;" > 
+				<i class="icon-arrow-left medium-icon"></i>					
 			</a>
 		</div>	
 		<div id="post-detail-header">
@@ -22,7 +22,9 @@
 				<h2 class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
 				<div class="post-detail-meta">
 					<div class="post-user-time fl">
-						<i class="icon-bookmark"></i>
+						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
+							<img class="small-avatar" src="{{ post.avatar }}" alt="{{ post.author }}">
+						</a>
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 							{{ post.author }}
 						</a> - 
@@ -33,23 +35,22 @@
 					<ul class="post-actions fr">
 						<li>
 							<a class="like-post" href="#"
-							data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}" title="{{ post.like_count }}">
+							data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}">
 							{% if post.isUserLiked == 0 %}
 		                        <i class="icon-thumbs-up medium-icon"></i>
 		                    {% else %}
 		                        <i class="icon-thumbs-down medium-icon"></i>
 		                    {% endif %}
 							</a>
+							<span class="number">
+								<a href="#">{{ post.like_count }}</a>
+							</span>
 						</li>
 						<li>
-							<a href="#" class="open-comment" data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}" data-comment-count="{{ post.comment_count }}" data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}" title="{{ post.comment_count }}">
-		                        <i class="icon-comments medium-icon"></i>
-		                    </a>
-						</li>
-						<li>
-							<a href="#" class="" title="1k">
+							<a class="">
 								<i class="icon-eye-open medium-icon"></i>
 							</a>
+							<span class="number">1k</span>
 						</li>			
 					</ul>			
 					<div class="clear"></div>	
