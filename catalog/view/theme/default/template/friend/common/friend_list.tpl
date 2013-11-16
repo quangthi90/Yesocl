@@ -109,5 +109,4 @@
             </div>
         </div>
     </script>
-    <script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 {% endblock %}

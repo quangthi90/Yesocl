@@ -5,16 +5,6 @@ use MongoId;
 
 class ModelBranchComment extends Model {
 	public function getComments( $data = array() ){
-		$query = array();
-
-		if ( empty($data['page']) ){
-			$data['page'] = 1;
-		}
-
-		if ( empty($data['limit']) ){
-			$data['limit'] = 10;
-		}
-
 		if ( empty($data['post_slug']) ){
 			return array();
 		}
@@ -24,28 +14,30 @@ class ModelBranchComment extends Model {
 		$comments = array();
 
 		if ( $post ){
-			$query_comments = $post->getComments( true );
-			$total = count( $query_comments );
-
-			$start = ($data['page'] - 1) * $data['limit'];
-
-			if ( $start < 0 ){
-				$start = 0;
-			}
-			for ( $i = $start; $i < $total; $i++ ) {
-				if ( count($comments) == $data['limit'] ){
-					break;
-				}
-
-				$comments[] = $query_comments[$i];
-			}
+			$comments = $post->getComments();
 		}
-
-		return array_reverse($comments);
+		
+		return $comments;
 	}
 
-	public function getComment( $Comment_id ){
+	public function getComment( $data ){
+		if ( empty($data['comment_id']) ){
+			return array();
+		}
 
+		if ( !empty($data['post_slug']) ){
+			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		}else{
+			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+				'comments.id' => $data['comment_id']
+			));
+		}
+
+		if ( !$post ){
+			return null;
+		}
+
+		return $post->getCommentById( $data['comment_id'] );
 	}
 
 	public function addComment( $data = array() ){

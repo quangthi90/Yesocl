@@ -85,19 +85,32 @@
     float: left;
 }
 .comment-item  .comment-info{
+    overflow: hidden;
 }
 .comment-item  .comment-info  a {
 	color: #494949;
 	font-weight: bold;
 }
-.comment-item .comment-info .like-comment {
-	font-weight: normal;
-	margin-left: 10px;
+.comment-item .comment-info .like-container {
+	margin-right: 25px;
+	float: right;
 }
-.comment-item .comment-info .like-comment i {
-	font-weight: normal;
-	font-size: 15px;
+.comment-item .comment-info .like-container .liked-label {
+    font-weight: normal;
+
+    font-size: 11px;
 }
+.comment-item .comment-info .like-container .like-count {
+
+}
+.comment-item .comment-info .like-container .like-comment {
+	font-weight: normal;
+	font-size: 11px;
+}
+.comment-item .comment-info .like-container .like-comment i {
+	font-weight: normal;
+	font-size: 14px;
+ }
 .comment-item  .comment-info  a:hover {
 	color: #009B77;
 }

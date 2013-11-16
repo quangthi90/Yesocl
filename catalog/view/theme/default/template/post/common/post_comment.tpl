@@ -21,8 +21,8 @@
 			</div>
 			<div class="y-box-content comment-body">
 				<div id="add-more-item"></div>
-			</div>		
-			</div>	
+			</div>
+			</div>
 			<form class="y-comment-reply post post_new comment-form">
 				<div class="txt_editor">
 					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
@@ -49,39 +49,45 @@
 					</a>
 				</div>
 				<div class="comment-meta">
-					<div class="comment-info">
+					<div class="comment-info"
+						data-url="${href_like}"
+						data-comment-liked="${is_liked}"
+						data-id="${id}"
+						data-like-count="${like_count}">
 						<a href="${href_user}">${author}</a>
 						<span class="comment-time">
 							<d class="timeago" title="${created}"></d>
 						</span>
-						<a href="#" class="like-comment" data-url="${href_like}" 
-						data-comment-liked="${is_liked}">
-						{{if is_liked == true}}
-							<i class="icon-thumbs-down medium-icon"></i> 
-						{{else}}
-							<i class="icon-thumbs-up medium-icon"></i> 
-						{{/if}}
-							Like (<d>${like_count}</d>)
-						</a>
+						<span class="like-container">
+							<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
+								<i class="icon-thumbs-up medium-icon"></i> Like
+							</a>
+							<strong class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked
+							</strong>
+							&nbsp;(<a class="like-count" data-url="${href_liked_user}" href="#">${like_count}</a>)
+						</span>		
 					</div>
 					<div class="comment-content">
 						{{html content}}							
 					</div>												
 				</div>
 				<div class="clear"></div>
-				<div class="yes-dropdown">
+				<div class="yes-dropdown option-dropdown">
 					<div class="dropdown">
 					   <a class="dropdown-toggle" data-toggle="dropdown" title="Action">
 					    	<i class="icon-reorder"></i>
 					   </a>
 					   <ul class="dropdown-menu">
-						    <li>
+					   		<li class="un-like-btn{{if is_liked != true}} hidden{{/if}}">
+						     	<a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+					     	</li>
+						    <!--li>
 						     	<a href="#"><i class="icon-edit"></i>Edit</a>
 					     	</li>
 					     	<li class="divider"></li>
 						    <li>
 						    	<a href="#"><i class="icon-trash"></i>Delete</a>
-						    </li>
+						    </li-->
 					    </ul>
 					</div>
 				</div>

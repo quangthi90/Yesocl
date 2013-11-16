@@ -440,12 +440,13 @@ label.in-line{
 }
 #user-notification {
   margin-right: 10px;
-  padding: 0px 10px;
+  padding: 2px 10px 0px 10px;
   background: transparent url(../../image/split.png) no-repeat 100% 50%;
 }
 #user-quick-menu {
   margin-right: 15px;
   padding-right: 10px;
+  padding-top: 2px;
 }
 #user-quick-menu > a {
   display: inline-block;
@@ -461,10 +462,11 @@ label.in-line{
 .user-menu > a > i {
   color: #0e0e0e;
   font-size: 16px;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
   border-radius: 50%;
-  border: 1px solid #b4b4b4;
+  border: 1px solid #009B77;
   padding: 10px;
   display: block;
   -webkit-transition: all 0.2s ease-in-out;
@@ -530,16 +532,17 @@ label.in-line{
   outline: none;
 }
 .notification-item a.btn-notification:hover,
-.notification-item.open a.btn-notification {
+.notification-item.active a.btn-notification {
   background-color: transparent;
 }
 .notification-item a.btn-notification > i {
   color: #0e0e0e;
   font-size: 16px;
-  height: 20px;
-  width: 20px;
+  height: 18px;
+  width: 18px;
+  line-height: 18px;
   border-radius: 50%;
-  border: 1px solid #b4b4b4;
+  border: 1px solid #009B77;
   padding: 10px;
   display: block;
   -webkit-transition: all 0.2s ease-in-out;
@@ -548,7 +551,7 @@ label.in-line{
   transition: all 0.2s ease-in-out;
 }
 .notification-item a.btn-notification:hover > i,
-.notification-item.open a.btn-notification > i {
+.notification-item.active a.btn-notification > i {
   color: #fff;
   border:1px solid #009B77;
   background-color: #009B77;
@@ -560,7 +563,7 @@ label.in-line{
   font-size: 12px;
 }
 .notification-item a.btn-notification:hover .notification-item-name,
-.notification-item.open a.btn-notification .notification-item-name {
+.notification-item.active a.btn-notification .notification-item-name {
   color: #FFF;
 }
 a.btn-notification .notification-item-name > i {
@@ -571,7 +574,7 @@ a.btn-notification .notification-item-name > i {
 a.btn-notification:hover .notification-item-name > i {
   display: block;
 }
-.notification-item.open a.btn-notification .notification-item-name > i {
+.notification-item.active a.btn-notification .notification-item-name > i {
   display: block;
 }
 .notification-item .notification-item-count {
@@ -587,9 +590,17 @@ a.btn-notification:hover .notification-item-name > i {
   padding: 3px;
 }
 .notification-content-list {
-  max-height: 500px;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: auto;  
+  position: absolute;
+  top: 53px;
+  left: 0px;
+  max-height: 500px;
+  background-color: #FFF;  
+  border: 1px solid #ddd;
+  border-top: none;
+  opacity: 0;
+  padding: 10px 0px 10px 10px;
 }
 .notification-content-list .notification-content-item {
   overflow: hidden;
@@ -642,6 +653,28 @@ a.btn-notification:hover .notification-item-name > i {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.notification-item .mCSB_scrollTools .mCSB_draggerRail {
+  width: 6px;
+  background: #f0f0f0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.notification-item .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  width: 6px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.notification-item .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+  background: #b4b4b4;
+}
+.notification-item .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+  background: #009B77;
+}
+.notification-item .mCSB_container {
+  margin-right: 20px;
 }
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
@@ -825,9 +858,22 @@ a.btn-notification:hover .notification-item-name > i {
   border-top-color: #3B8F39;
   z-index: 101;
 }
+.post .yes-dropdown {
+  top: 4px;
+  right: 1px;
+  display: none;
+}
+.post:hover .yes-dropdown {
+  display: block;
+}
+.post .yes-dropdown .dropdown-toggle {
+  padding: 5px 8px;
+  background-color: #f0f0f0;
+}
 .post .post_header .post_title {
     font-size: 19px;
     margin: 3px 0px 3px 0px;
+    padding-right: 10px;
     white-space: normal;
     line-height: 23px;
     max-height: 48px;
@@ -842,7 +888,7 @@ a.btn-notification:hover .notification-item-name > i {
   overflow: hidden;
 }
 .post .post_header .post_meta span{
-  margin-left: 20px;
+  margin-left: 10px;
   vertical: middle;
 } 
 .post .post_header .post_meta span:first-child {
@@ -1693,21 +1739,26 @@ div[data-role="editor-toolbar"] {
   overflow-y: auto;
   overflow-x: hidden;
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
 }
 .user-item {
   overflow: hidden;  
-  margin-bottom: 5px;
-  padding-bottom: 5px;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #f0f0f0;
   width: 500px;
+}
+.user-item:last-child {
+  border-bottom: none;
 }
 .user-item .user-item-info{
   overflow: hidden;
   width: 320px;
 }
-.user-item .user-actions{
-  margin-right: 20px;
+.user-item .user-actions{  
+}
+.user-item .user-actions .dropdown-menu{
+  min-width: 130px;
 }
 .user-item .user-item-avatar{
   height: 50px;
@@ -1718,10 +1769,11 @@ div[data-role="editor-toolbar"] {
 }
 .user-item .user-item-overview span {
   display: block;
+  font-size: 11px;
 }
 .user-item .user-item-name{
   line-height: 20px;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: bold;
 }
 .user-item .btn-user-actions i {
@@ -1804,6 +1856,9 @@ ul.user_actions li:hover i{
 .yes-dropdown .dropdown-toggle{
   cursor: pointer;
 }
+.yes-dropdown .dropdown-toggle i {
+  color: #505050;
+}
 .yes-dropdown .dropdown .dropdown-menu {
   min-width: inherit;
   right: 0px;
@@ -1812,6 +1867,9 @@ ul.user_actions li:hover i{
 .yes-dropdown .dropdown .dropdown-menu a {
   cursor: pointer;
   padding-right: 15px;
+}
+.yes-dropdown .dropdown.open .dropdown-toggle > i{
+  color: #009B77;
 }
 /* -------------------------------------- END DROPDOWN ---------------------------------------- */
 /* ------------------------------------- START FRIEND ------------------------------------------ */
@@ -2094,6 +2152,9 @@ ul.user_actions li:hover i{
 }
 /* ------------------------------------- END SEARCH RESULT -----------------------------------------*/
 /* ------------------------------------- START MODAL  ----------------------------------------------*/
+.modal-body {
+  max-height: 450px;
+}
 .modal-footer .btn {
   min-width: 90px;
 }
@@ -2268,7 +2329,7 @@ ul.user_actions li:hover i{
   padding: 5px;
   text-align: center;
   border-radius: 50%;
-  border: 1px solid #ddd;
+  border: 1px solid #009B77;
   margin: 0px 3px;
 }
 .login-social ul li a i {
@@ -2277,10 +2338,10 @@ ul.user_actions li:hover i{
   line-height: 27px;
 }
 .login-social ul li a:hover {
-  background: #fff;
+  background: #009B77;
 }
 .login-social ul li a:hover i {
-  color: #009B77;
+  color: #fff;
 }
 .login-container .login-yesocl {
   float: right;
