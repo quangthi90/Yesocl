@@ -33,14 +33,14 @@
     border-radius: 50%;
 }
 .goback-link a:hover {
-
+    background-color: #009B77;
 }
 .goback-link a i {
     font-size: 20px;
     color: #0e0e0e;
 }
 .goback-link a:hover i {
-    color: #009B77;
+    color: #fff;
 }
 .post-user-time a {
     font-weight: bold;

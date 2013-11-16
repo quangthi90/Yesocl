@@ -2076,7 +2076,7 @@ ul.user_actions li:hover i{
   top: 58px;
   padding: 30px 25px;
   background-color: #9B9B9B;
-  z-index: 2;
+  z-index: 100;
   overflow: hidden;
   display: none;
 }
