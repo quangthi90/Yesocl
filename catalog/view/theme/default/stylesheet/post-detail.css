@@ -17,17 +17,20 @@
     border-bottom: 1px solid #ddd;
     background-color: #f0f0f0;
 }
- .post-detail-meta {
-    overflow: hidden;
-    position: fixed;
-    bottom: 35px;
-    right: 25px;
-    text-align: center;
-    z-index: 100;
-    background-color: transparent;
-    cursor: default !important;
+.goback-link {
+
 }
-#post-detail-header .post-user-time {        
+.goback-link a {
+
+}
+.goback-link a:hover {
+
+}
+.goback-link a i {
+
+}
+.goback-link a:hover i {
+
 }
 .post-user-time a {
     font-weight: bold;
@@ -40,8 +43,6 @@
 .post-user-time .post-time {
     font-style: italic;
     font-size: 12px;
-}
-.post-detail-meta .post-actions {    
 }
 .post-actions li {
     display: inline-block;
@@ -112,22 +113,26 @@
 
 #post-content {
     padding: 10px;
-    -webkit-column-width: 500px;    
-    -moz-column-width: 500px;
-    column-width: 500px;
+    -webkit-column-width: 450px;    
+    -moz-column-width: 450px;
+    column-width: 450px;
     -moz-column-gap: 35px;    
     -webkit-column-gap: 35px;  
     column-gap: 35px;  
     position: absolute;    
     top: 60px;    
-    bottom: 60px;
+    bottom: 10px;
     left: 0px;  
     text-align: justify;  
     font-size: 15px;
     line-height: 22px;
+    width: 1000px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 #post-content * {
     line-height: 22px;
+    display: inline-block;
 }
 #post-content p {
     white-space: normal;
