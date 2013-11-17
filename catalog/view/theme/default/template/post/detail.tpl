@@ -5,6 +5,7 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
+	<link href="{{ asset_css('libs/jquery-ui-1.10.3.custom.min.css') }}" rel="stylesheet" media="screen" />
     <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
     {{ block('post_common_post_comment_in_page_style') }}
 {% endblock %}
@@ -14,7 +15,7 @@
 	<div id="post-detail">
 		<div id="detail-header">
 			<div class="goback-link fl">
-				<a href="#" class="btn-link-round" title="Go back" > 
+				<a href="#" class="btn-link-round btn-goback" title="Go back" > 
 					<i class="icon-arrow-left medium-icon"></i>					
 				</a>
 			</div>
@@ -70,6 +71,7 @@
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{ asset_js('jquery/jquery-ui-1.10.3.custom.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
 {{ block('post_common_post_comment_in_page_javascript') }}
 {% endblock %}

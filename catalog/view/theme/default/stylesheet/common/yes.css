@@ -327,6 +327,7 @@ label.in-line{
 img.small-avatar {
   width: 30px;
   height: 30px;
+  border-radius: 50%;
 }
 
 /* ------------------------------------- COMMON LAYOUT ---------------------------------------- */
@@ -908,9 +909,13 @@ a.btn-notification:hover .notification-item-name > i {
 .post .post_header .post_meta span.user_info {
 }
 .post .post_header .post_meta span.user_info .name {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
+    margin-left: 3px;
     color: #575757;
+}
+.post .post_header .post_meta span.user_info .name:hover {
+  color: #009B77;
 }
 .post .post_header .post_meta span.user_info .image > img{
   width: 25px;

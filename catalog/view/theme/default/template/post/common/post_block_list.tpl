@@ -49,7 +49,7 @@
                             <div class="post_meta">
                                 <span class="user_info fl">
                                     <a class="image" href="{{ path('WallPage', {user_slug: user.slug}) }}">
-                                        <img src="{{ user.avatar }}" alt="{{ user.username }}" />
+                                        <img class="small-avatar" src="{{ user.avatar }}" alt="{{ user.username }}" />
                                     </a>
                                     <a class="name" href="{{ path('WallPage', {user_slug: user.slug}) }}">
                                         {{ user.username }}

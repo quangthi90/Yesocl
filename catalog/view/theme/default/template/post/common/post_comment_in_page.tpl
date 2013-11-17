@@ -27,28 +27,28 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0893471dee8c09000000/like/"
+			                data-comment-liked="true" data-id="521e0893471dee8c09000000" data-like-count="1">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T20:35:20+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a4e68471deed80900000f/like/"
-			                    data-comment-liked="false"><i class="icon-thumbs-up medium-icon"></i>Like (<d>0</d>)
-			                </a>
+			                    <d class="timeago" title="2013-08-28T16:26:27+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment hidden"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0893471dee8c09000000/get-liker"
+			                    href="#">1</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                7777777777777
+			                1111111111111111
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
 			                </ul>
 			            </div>
 			        </div>
@@ -60,28 +60,29 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0d36471dee5c09000000/like/"
+			                data-comment-liked="false" data-id="521e0d36471dee5c09000000" data-like-count="0">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T20:31:22+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a4d7a471deed80900000e/like/"
-			                    data-comment-liked="false"><i class="icon-thumbs-up medium-icon"></i>Like (<d>0</d>)
-			                </a>
+			                    <d class="timeago" title="2013-08-28T16:46:14+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label hidden">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0d36471dee5c09000000/get-liker"
+			                    href="#">0</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                99999999999999
+			                2222222222222
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn hidden"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+			                    </li>
 			                </ul>
 			            </div>
 			        </div>
@@ -93,28 +94,28 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0db9471dee5c09000001/like/"
+			                data-comment-liked="true" data-id="521e0db9471dee5c09000001" data-like-count="1">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T20:30:57+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a4d61471deed80900000d/like/"
-			                    data-comment-liked="false"><i class="icon-thumbs-up medium-icon"></i>Like (<d>0</d>)
-			                </a>
+			                    <d class="timeago" title="2013-08-28T16:48:25+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment hidden"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0db9471dee5c09000001/get-liker"
+			                    href="#">1</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                666666666
+			                3333333333
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
 			                </ul>
 			            </div>
 			        </div>
@@ -126,28 +127,28 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0f9f471dee5c09000002/like/"
+			                data-comment-liked="true" data-id="521e0f9f471dee5c09000002" data-like-count="1">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T15:24:21+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a0585471dee2408000001/like/"
-			                    data-comment-liked="true"><i class="icon-thumbs-down medium-icon"></i>Like (<d>1</d>)
-			                </a>
+			                    <d class="timeago" title="2013-08-28T16:56:31+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment hidden"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0f9f471dee5c09000002/get-liker"
+			                    href="#">1</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                555555555555
+			                444444444444
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
 			                </ul>
 			            </div>
 			        </div>
@@ -159,28 +160,29 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0fd1471dee5c09000003/like/"
+			                data-comment-liked="false" data-id="521e0fd1471dee5c09000003" data-like-count="0">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T15:19:15+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a0453471dee2408000000/like/"
-			                    data-comment-liked="false"><i class="icon-thumbs-up medium-icon"></i>Like (<d>0</d>)
-			                </a>
+			                    <d class="timeago" title="2013-08-28T16:57:21+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label hidden">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e0fd1471dee5c09000003/get-liker"
+			                    href="#">0</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                44444444444
+			                55555555555555
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn hidden"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+			                    </li>
 			                </ul>
 			            </div>
 			        </div>
@@ -192,28 +194,28 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e1012471dee5c09000004/like/"
+			                data-comment-liked="true" data-id="521e1012471dee5c09000004" data-like-count="1">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T15:13:08+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a02e4471dee000900000c/like/"
-			                    data-comment-liked="true"><i class="icon-thumbs-down medium-icon"></i>Like (<d>1</d>)
-			                </a>
+			                    <d class="timeago" title="2013-08-28T16:58:26+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment hidden"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/521e1012471dee5c09000004/get-liker"
+			                    href="#">1</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                333333333333333333
+			                6666666666666
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>                    
 			                </ul>
 			            </div>
 			        </div>
@@ -225,94 +227,29 @@
 			                    alt="user">
 			            </a>
 			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
+			        <div class="comment-meta">
+			            <div class="comment-info" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/5222d7f7471dee0c0a000000/like/"
+			                data-comment-liked="false" data-id="5222d7f7471dee0c0a000000" data-like-count="0">
 			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T15:12:39+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a02c7471deed409000003/like/"
-			                    data-comment-liked="true"><i class="icon-thumbs-down medium-icon"></i>Like (<d>2</d>)
-			                </a>
+			                    <d class="timeago" title="2013-09-01T08:00:23+02:00">3 months ago</d>
+			                </span><span class="like-container"><a href="#" class="like-comment"><i class="icon-thumbs-up medium-icon">
+			                </i>Like </a><strong class="liked-label hidden">Liked </strong>&nbsp;(<a class="like-count"
+			                    data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002/comment/5222d7f7471dee0c0a000000/get-liker"
+			                    href="#">0</a>) </span>
 			            </div>
 			            <div class="comment-content">
-			                222222222222222
+			                777777777777
 			            </div>
 			        </div>
 			        <div class="clear">
 			        </div>
-			        <div class="yes-dropdown">
+			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
 			                    <i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
-			                </ul>
-			            </div>
-			        </div>
-			    </div>
-			    <div class="comment-item">
-			        <div class="avatar_thumb">
-			            <a href="http://localhost/yesocl1/wall-page/user1/">
-			                <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180"
-			                    alt="user">
-			            </a>
-			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
-			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T15:11:45+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a0291471deed409000002/like/"
-			                    data-comment-liked="false"><i class="icon-thumbs-up medium-icon"></i>Like (<d>0</d>)
-			                </a>
-			            </div>
-			            <div class="comment-content">
-			                222222222222222
-			            </div>
-			        </div>
-			        <div class="clear">
-			        </div>
-			        <div class="yes-dropdown">
-			            <div class="dropdown">
-			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
-			                    <i class="icon-reorder"></i></a>
-			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
-			                </ul>
-			            </div>
-			        </div>
-			    </div>
-			    <div class="comment-item">
-			        <div class="avatar_thumb">
-			            <a href="http://localhost/yesocl1/wall-page/user1/">
-			                <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180"
-			                    alt="user">
-			            </a>
-			        </div>
-			        <div class="comment-meta" style="width: 347px;">
-			            <div class="comment-info">
-			                <a href="http://localhost/yesocl1/wall-page/user1/">Quang Thi</a> <span class="comment-time">
-			                    <d class="timeago" title="2013-08-25T15:11:11+02:00">3 months ago</d>
-			                </span><a href="#" class="like-comment" data-url="http://localhost/yesocl1/branch/post/lang-kinh-yestoc-phien-3107-thi-truong-tiem-can-nguong-khang-cu-manh-52179382471deeb408000004/comment/521a026f471deed409000001/like/"
-			                    data-comment-liked="false"><i class="icon-thumbs-up medium-icon"></i>Like (<d>0</d>)
-			                </a>
-			            </div>
-			            <div class="comment-content">
-			                11111111111111
-			            </div>
-			        </div>
-			        <div class="clear">
-			        </div>
-			        <div class="yes-dropdown">
-			            <div class="dropdown">
-			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action">
-			                    <i class="icon-reorder"></i></a>
-			                <ul class="dropdown-menu">
-			                    <li><a href="#"><i class="icon-edit"></i>Edit</a> </li>
-			                    <li class="divider"></li>
-			                    <li><a href="#"><i class="icon-trash"></i>Delete</a> </li>
+			                    <li class="un-like-btn hidden"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+			                    </li>
 			                </ul>
 			            </div>
 			        </div>
