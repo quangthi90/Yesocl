@@ -18,7 +18,7 @@
             dropZone: that.dropZone,
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 5000000, // 5 MB
+            maxFileSize: 500000, // 5 MB
             disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
             previewThumbnail: false,
             previewMaxWidth: 430,

@@ -58,7 +58,7 @@ class ModelToolImage extends Model {
 	public function isValidImage( $file ) {
 		$allowedType = array("image/gif", "image/jpeg", "image/jpg", "image/png");
 		
-		if ( $file["size"] < 300000 && in_array($file["type"], $allowedType) && !$file['error'] ) {
+		if ( $file["size"] < 500000 && in_array($file["type"], $allowedType) && !$file['error'] ) {
 	    	return true;
   		}
 
