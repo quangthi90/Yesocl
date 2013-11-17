@@ -1,3 +1,5 @@
+{% use '@template/default/template/friend/common/friend_button.tpl' %}
+
 {% block common_profile_column %}
     <div class="free-block fl" style="width: 180px;">
         <div class="free-block-content">
@@ -7,9 +9,10 @@
                 </a>
                 <a href="#" class="user_info_name"><i class="icon-male"></i> {{ user.username }}</a>
                 <div class="user_relationship">
-                    <a href="#" class="btn btn-yes">
-                        <i class="icon-plus-sign"></i> Add friend
-                    </a>
+                    {% set fr_status = user.fr_status.status %}
+                    {% set fr_slug = user.slug %}
+                    {{ block('friend_common_friend_button') }}
+                    {{ block('friend_common_friend_button_template') }}
                     <a href="#" class="btn btn-yes">
                         <i class="icon-random"></i> Follow
                     </a>
@@ -23,7 +26,7 @@
                     <i class="icon-list-alt"></i><a href="#">Profile</a>
                 </li>
                 <li>
-                    <i class="icon-fire"></i><a href="#">Friends</a>
+                    <i class="icon-fire"></i><a href="{{ path('FriendPage', {user_slug: user.slug}) }}">Friends</a>
                 </li>
                 <li>
                     <i class="icon-file-alt"></i><a href="#">Posts</a>

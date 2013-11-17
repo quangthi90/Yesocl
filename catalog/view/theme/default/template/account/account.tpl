@@ -48,6 +48,11 @@
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript">
+$(function(){
+    $(document).trigger('FRIEND_ACTION', [false]);    
+});
+</script>
 {{ block('post_common_post_comment_javascript') }}
 {{ block('post_common_form_status_javascript') }}
 {% endblock %}

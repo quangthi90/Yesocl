@@ -386,6 +386,10 @@
         });
 
         $(document).bind('FRIEND_UPDATE_STATUS', function(e, status, id) {
+            if ( id == undefined ){
+                return false;
+            }
+
             var $curr_post = $('.open-comment.disabled');
 
             var comments = $curr_post.data('comments');

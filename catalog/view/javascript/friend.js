@@ -285,10 +285,6 @@
 	}
 
 	$(function(){
-        $('.friend-actions').each(function(){
-            new FriendAction( $(this), true );
-        });
-
         $('#friend-filter').each(function(){
             new FriendFilter( $(this) );
         });
