@@ -1,6 +1,6 @@
 <?php
 class ModelToolImage extends Model {
-	public function resize($filename, $width, $height) {
+	public function resize($filename, $width, $height, $scale = false) {
 		if (!file_exists(DIR_IMAGE . $filename) || !is_file(DIR_IMAGE . $filename)) {
 			return;
 		} 
@@ -25,7 +25,11 @@ class ModelToolImage extends Model {
 			}
 			
 			$image = new Image(DIR_IMAGE . $old_image);
-			$image->resize($width, $height);
+			if ( $scale == false ){
+				$image->resize($width, $height);
+			}else{
+				$image->scale($width, $height);
+			}
 			$image->save(DIR_IMAGE . $new_image);
 		}
 		
@@ -52,20 +56,13 @@ class ModelToolImage extends Model {
 	}
 
 	public function isValidImage( $file ) {
-		$allowedExts = array("gif", "jpeg", "jpg", "png");
-		$extension = end(explode(".", $file["name"]));
+		$allowedType = array("image/gif", "image/jpeg", "image/jpg", "image/png");
+		
+		if ( $file["size"] < 300000 && in_array($file["type"], $allowedType) && !$file['error'] ) {
+	    	return true;
+  		}
 
-		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
-  			if ($file["error"] > 0) {
-    			return false;
-    		}
-  			else {
-	    		return true;
-    		}
-  		}
-		else {
-  			return false;
-  		}
+  		return false;
 	}
 
 	public function uploadImage( $folder, $filename, $thumb ) {
