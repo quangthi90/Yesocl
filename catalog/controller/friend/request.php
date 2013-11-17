@@ -227,7 +227,10 @@ class ControllerFriendRequest extends Controller {
 
            	$user_slug = $this->request->get['user_slug'];
 
-           	$result = $this->model_user_user->editUser( $user_slug, array('unfriend' => $this->customer->getId()) );
+           	$result = $this->model_user_user->unFriend( 
+           		array('slug' => $user_slug), // User 1
+           		array('id' => $this->customer->getId()) // User 2
+           	);
 
            	if ( !$result ){
            		return $this->response->setOutput(json_encode(array(

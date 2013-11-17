@@ -1,11 +1,20 @@
+/*
+	JS Utitlity Function
+*/
+function getActualLengthOfArray(arr) {
+   return $.grep(arr, function(el){
+      return el !== undefined;
+     }
+    ).length;
+}
+/*
+	End JS Utitlity Function
+*/
 (function($, document, undefined) {
-	/*
-	Quick access functions
-	*/
-	jQuery.fn.makeScrollWithoutCalResize = function() {
-		$(this).niceScroll();	
-	}
 
+	jQuery.fn.makeScrollWithoutCalResize = function() {
+	$(this).niceScroll();	
+	}
 	jQuery.fn.makeCustomScroll = function(isHonrizontal) {
 		$(this).mCustomScrollbar({
 			set_width:false, /*optional element width: boolean, pixels, percentage*/
@@ -44,10 +53,6 @@
 	}
 
 	/*
-	End quick access functions
-	*/
-
-	/*
 		Left sidebar
 	*/
 	function Sidebar(el){
@@ -55,7 +60,7 @@
 		this.sidebarToggle = this.sidebarRoot.find("#sidebar-toggle");
 		this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
 		this.searchCtrl	   = this.sidebarRoot.find("input#ss-keyword");
-		this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");
+		this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");		
 		this.makeCustomVerticalScroll();
 		this.attachEvents();
 	}
@@ -107,6 +112,46 @@
 	}
 	/* End Left Sidebar */
 
+	/*
+		Start Notification
+	*/
+	function Notification(el){
+		this.root = el;
+		this.notificationItem = el.find('.notification-item');
+		this.allNotificationBtn = el.find('.btn-notification');
+		this.allNotificationList = el.find('.notification-content-list');
+		this.notInclude = $('#y-container, #y-sidebar,#y-footer');
+		this.attachEvents();
+	}
+	Notification.prototype.attachEvents = function() {
+		var that = this;
+		that.notificationItem.each(function(){
+			var me = $(this);
+			var btnInvoke = $(this).children('.btn-notification');
+			var listNotification = $(this).children('.notification-content-list');
+			listNotification.makeCustomScroll(false);
+			listNotification.css('opacity', '1').hide(10);
+			btnInvoke.on('click', function(e){
+				e.preventDefault();
+				var hasActive = me.hasClass('active');
+				that.allNotificationList.slideUp(10);
+				that.notificationItem.removeClass('active');
+				if(!hasActive){
+					listNotification.slideDown(200, function(){
+						me.addClass('active');
+					});	
+				}
+			});
+		});
+		that.notInclude.on('click', function(){ 
+			that.allNotificationList.slideUp(10);
+			that.notificationItem.removeClass('active');
+		});
+	}
+	/*
+		End Notification
+	*/
+
 	/*Start AUTOCOMPLETE */
 	function SearchAutoComplete(el) {
 		this.root = el;
@@ -117,7 +162,6 @@
 		this.attachEvents();
 		this.initAutoComplete();
 	}
-
 	SearchAutoComplete.prototype.attachEvents = function() {
 		var that = this;
 		$(that.invokeCtrl).click(function() {
@@ -257,9 +301,8 @@
 		this.mainContent = el.find("#y-main-content");
 		this.goLeftBtn = el.find('#auto-scroll-left');
 		this.goRightBtn = el.find('#auto-scroll-right');
-		this.notificationList = el.find('.notification-content-list');	
 		this.commentBox = el.find('#comment-box');
-		this.loaderBg = el.find('#y-loader');
+		//this.loaderBg = el.find('#y-loader');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -299,11 +342,6 @@
 	    that.goRightBtn.click(function() {
 			if($(this).hasClass('disabled')) return;
 			that.main.animate({scrollLeft: maxScroll }, 1000);
-	    });
-
-	    //Apply scroll for notification:
-	    this.notificationList.each(function(){
-	    	//$(this).makeCustomScroll(false);
 	    });
 
 	    //Demo alert, confirm, prompt, dialog:
@@ -381,7 +419,8 @@
 	    $('.link-popup').magnificPopup({
 	    	type:'inline',
 	    	midClick: true,
-	    	removalDelay: 300
+	    	removalDelay: 300,
+			mainClass: 'mfp-fade'
 	    });
 
 	    //Comment box:
@@ -711,6 +750,9 @@
 		new HorizontalBlock($('.has-horizontal'));
 		new FlexibleElement($(this));
 		new Sidebar($(this));
+		if($('#user-notification').length > 0){
+			new Notification($('#user-notification'));
+		}		
 		$(".timeago").timeago();
 		$('.search-form').each(function(){
 			new SearchBtn( $(this) );

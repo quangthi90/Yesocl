@@ -1,12 +1,14 @@
 (function($, document, undefined) {
-	function FriendAction( $el ){
+	function FriendAction( $el, removeUnFriend ){
 		var that = this;
 		this.$el			= $el;
 		this.$friend_btn	= $el.find('.btn-friend');
 		this.$unfriend_btn	= $el.find('.btn-unfriend');
 		this.friend_url		= this.$friend_btn.data('url');
 		this.unfriend_url	= this.$unfriend_btn.data('url');
+		
 		this.is_cancel		= this.$friend_btn.data('cancel')
+		this.is_remove_friend = removeUnFriend;
 
 		this.attachEvents();
 	}
@@ -40,7 +42,7 @@
 	};
 		
 	FriendAction.prototype.submit = function($button){
-		var that = this;		
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
@@ -53,10 +55,25 @@
 		promise.then(function(data) { 
 			if(data.success == 'ok'){
 				var $htmlOutput = '';
+
 				if ( that.is_cancel == 0 ){
-					$htmlOutput = $.tmpl( $('#cancel-request'), {href: that.friend_url} );
+					$htmlOutput = $.tmpl( $('#cancel-request'), {
+						href: that.friend_url,
+						id: that.$friend_btn.data('id')
+					});
+					$(document).trigger('FRIEND_UPDATE_STATUS', [
+						3, 
+						that.$friend_btn.data('id')
+					]);
 				}else{
-					$htmlOutput = $.tmpl( $('#send-request'), {href: that.friend_url} );
+					$htmlOutput = $.tmpl( $('#send-request'), {
+						href: that.friend_url,
+						id: that.$friend_btn.data('id')
+					});
+					$(document).trigger('FRIEND_UPDATE_STATUS', [
+						4, 
+						that.$friend_btn.data('id')
+					]);
 				}
 
 				that.$el.find('.friend-group').remove();
@@ -64,11 +81,11 @@
 				new FriendAction( that.$el );
 			}
 
-		});		
+		});
 	};
 		
 	FriendAction.prototype.remove = function($button){
-		var that = this;		
+		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
@@ -83,11 +100,30 @@
 
 		promise.then(function(data) { 
 			if(data.success == 'ok'){
-				that.$el.parent().remove();
+				// Remove friend
+				if ( that.is_remove_friend == true ){
+					that.$el.parent().remove();
+
+				// Change status to not relationship
+				// And show button make friend
+				}else{
+					var $htmlOutput = $.tmpl( $('#send-request'), {
+						href: that.friend_url,
+						id: that.$unfriend_btn.data('id')
+					});
+					that.$el.find('.friend-group').remove();
+					that.$el.prepend( $htmlOutput );
+					new FriendAction( that.$el );
+					
+					$(document).trigger('FRIEND_UPDATE_STATUS', [
+						4, 
+						that.$unfriend_btn.data('id')
+					]);
+				}
 			}
-		});		
+		});
 	};
-		
+
 	FriendAction.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
 		var $old_icon = $el.find('i');
@@ -125,15 +161,13 @@
             		data: { 'filter_name': query },
             		dataType: 'json',
             		success: function ( json ) {
-            			if ( json.success != 'ok' ) {
-            				
-            			}else {
+            			if ( json.success == 'ok' ) {
 				            $.each(json.friends, function (i, item) {
 				            	if ( friendList.indexOf(item.id + '-' + item.name) == -1 ) {
 					                friendList.push(item.id + '-' + item.name);
 					                map[item.id + '-' + item.name] = item;
 				            	}
-				            });            
+				            });
                 			process(friendList);
             			}
             		},
@@ -178,9 +212,7 @@
             	data: { 'filter_name': that.$inputSearch.val() },
             	dataType: 'json',
             	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {  
+            		if ( json.success == 'ok' ) { 
             			if ( json.friends.length > 0 ) {
 	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
 	            			$friends.each(function(){
@@ -231,9 +263,7 @@
             	data: data,
             	dataType: 'json',
             	success: function ( json ) {
-            		if ( json.success != 'ok' ) {
-            				
-            		}else {   
+            		if ( json.success == 'ok' ) {
             			if ( json.friends.length > 0 ) {
 	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
 	            			$friends.each(function(){
@@ -256,11 +286,17 @@
 
 	$(function(){
         $('.friend-actions').each(function(){
-            new FriendAction( $(this) );
+            new FriendAction( $(this), true );
         });
 
         $('#friend-filter').each(function(){
             new FriendFilter( $(this) );
+        });
+
+        $(document).bind('FRIEND_ACTION', function(e, remove) {
+            $('.friend-actions').each(function(){
+                new FriendAction($(this), remove);
+            });
         });
     });
 }(jQuery, document));

@@ -23,31 +23,12 @@
 		{{ include(template_from_string( sidebar_control )) }}
 		<div id="y-container">
 			{% block body %}
-			{% endblock %}			
+			{% endblock %}
 		</div>
 		{{ include(template_from_string( footer )) }}
 		<div id="overlay"></div>
-		<div style="width: 500px; height: 500px; top: 40px; left: 100px; display: none;" 
-			id="user-viewer-container">		
-		</div>
-		<div style="display: none;" id="user-info-template">
-			<div class="user-item fl">
-				<div class="user-item-info fl">
-					<a href="USER_URL" class="user-item-avatar fl">
-						<img src="USER_IMG" alt="USER_NAME" />
-					</a>
-					<div class="user-item-overview fl">
-						<a href="USER_URL" class="user-item-name">USER_NAME</a>
-						<span><strong>NUMBER_OF_FRIEND</strong> friend(s)</span>
-					</div>
-				</div>
-				<div class="user-actions fr">
-					<a href="#" class="btn-user-actions">
-						USER_ACTIONS
-					</a>
-				</div>
-			</div>
-		</div>
+		
+		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		<!--
 		<div id="y-loader">
 			<div id="y-loader-bg"></div>
@@ -90,11 +71,12 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.bootbox.js') }}">
 		</script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.typeahead.js') }}">
-		</script>	
+		</script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}

@@ -51,6 +51,33 @@ class ModelUserComment extends Model {
 		return $comments;
 	}
 
+	public function getComment( $data = array() ){
+		$if ( empty($data['comment_id']) ){
+			return array();
+		}
+
+		if ( !empty($data['post_slug']) ){
+			$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+				'posts.slug' => $data['post_slug']
+			));
+		}else{
+			$posts = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+				'posts.comments.id' => $data['comment_id']
+			));
+		}
+
+		$post = null;
+		if ( $posts ){
+			$post = $posts->getPostBySlug( $data['post_slug'] );
+		}
+
+		if ( !$post ){
+			return null;
+		}
+
+		return $post->getCommentById( $data['comment_id'] );
+	}
+
 	public function addComment( $data = array() ){
 		// Post is required
 		if ( empty($data['post_slug']) ){

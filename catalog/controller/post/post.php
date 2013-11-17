@@ -159,40 +159,53 @@ class ControllerPostPost extends Controller {
             )));
         }
 
-        if (!empty($this->request->post['page'])) {
-            $data['page'] = $this->request->post['page'];
+        switch ($data['post_type']) {
+            case $this->config->get('post')['type']['branch']:
+                $this->load->model('branch/post');
+                $post = $this->model_branch_post->getPost( $data );
+                break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/post');
+                $post = $this->model_user_post->getPost( $data );
+                break;
+            
+            default:
+                $post = null;
+                break;
         }
 
-        if (isset($this->request->post['limit']) && !empty($this->request->post['limit'])) {
-            $data['limit'] = $this->request->post['limit'];
-        }
-        $this->load->model('branch/post');
-        $post = $this->model_branch_post->getPost($data);
-        if (!$post) {
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: post not exsisted'
-            )));
-        }
         $this->load->model('user/user');
-        $users = $this->model_user_user->getUsers(array('user_ids' => $post->getLikerIds()));
+        $this->load->model('friend/friend');
         $this->load->model('tool/image');
-        $likers = array();
-        foreach ($users as $key => $user) {
-            $user = $user->formatToCache();
-            if ($user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar'])) {
-                $avatar = $this->model_tool_image->resize($user['avatar'], 180, 180);
-            } else {
-                $avatar = $this->model_tool_image->getGavatar($user['email'], 180);
-            }
-            $user['avatar'] = $avatar;
-            $user['href_user'] = $this->extension->path('WallPage', array(
-                'user_slug' => $user['slug']
+        
+        $users = array();
+
+        if ( $post ){
+            $query_users = $this->model_user_user->getUsers(array(
+                'user_ids' => $post->getLikerIds()
             ));
-            $likers[] = $user;
+            
+            if ( $query_users ){
+                foreach ( $query_users as $user ) {
+                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer, $user );
+
+                    $user = $user->formatToCache();
+
+                    $user['fr_status'] = $fr_status['status'];
+                    $user['fr_href'] = $fr_status['href'];
+
+                    $user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+                    $user['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $user['slug']) );
+
+                    $users[] = $user;
+                }
+            }
         }
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'users' => empty($likers) ? array() : $likers
+            'users' => $users
         )));
     }
 }
