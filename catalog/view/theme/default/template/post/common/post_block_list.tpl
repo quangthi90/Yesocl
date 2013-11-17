@@ -3,14 +3,14 @@
         <div class="block-header">
         {% if block_info is defined %}
         {% if is_back_btn is defined and is_back_btn == true %}
-            <a class="block-seemore fl" href="#" onclick="history.go(-1); return false;"> 
-                <i class="icon-angle-left"></i>
+            <a class="block-back fl" href="#" onclick="history.go(-1); return false;"> 
+                <i class="icon-arrow-left"></i>
             </a>
             <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
         {% else %}
             <a class="block-title fl" href="{{ block_href }}">{{ block_info.name }}</a>
             <a class="block-seemore fl" href="{{ block_href }}"> 
-                <i class="icon-angle-right"></i>
+                <i class="icon-arrow-right"></i>
             </a>
         {% endif %}
         {% endif %}
