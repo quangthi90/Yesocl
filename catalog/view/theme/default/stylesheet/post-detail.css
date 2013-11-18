@@ -151,7 +151,8 @@
     white-space: nowrap;
     max-width: 500px;
     height: auto;
-    cursor: pointer;
+    cursor: -webkit-zoom-in;
+    cursor: zoom-in;
 }
 #comment-wrapper .comment-form {
     position: absolute;
