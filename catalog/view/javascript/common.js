@@ -308,7 +308,17 @@ function getActualLengthOfArray(arr) {
 	FlexibleElement.prototype.attachEvents = function() { 
 		var that = this;
 		//Tooltip:
-		$('a[title]').tooltip({ container: 'body' });
+		$('a[title]').each(function(){
+			if($(this).hasClass('tooltip-bottom')) {
+				$(this).tooltip({
+						container: 'body', 
+						placement: 'bottom'
+					}
+				);
+			}else {
+				$(this).tooltip({ container: 'body' });
+			}
+		})
 
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();

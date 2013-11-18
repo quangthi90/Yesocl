@@ -14,7 +14,7 @@
 					<a href="#" class="btn-restore" title="Restore" style="display: none;">
 						<i class="icon-indent-right"></i>
 					</a>
-					<a href="#" class="btn-close" title="Close">
+					<a href="#" class="btn-close" title="Hide">
 						<i class="icon-remove"></i>
 					</a>
 				</div>				

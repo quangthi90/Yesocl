@@ -1734,17 +1734,17 @@ div[data-role="editor-toolbar"] {
 .tooltip-inner {
   background-color: #009B77;
 }
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #009B77;
+}
 .tooltip.top .tooltip-arrow {
   border-top-color: #009B77;
 }
-.tooltip.right .tooltip-arrow {
-  border-top-color: #009B77;
-}
 .tooltip.left .tooltip-arrow {
-  border-top-color: #009B77;
+  border-left-color: #009B77;
 }
-.tooltip.bottom .tooltip-arrow {
-  border-top-color: #009B77;
+.tooltip.right .tooltip-arrow {
+  border-right-color: #009B77;
 }
 /* ---------------------------------------- END TOOLTIP -------------------------------------- */
 /* ---------------------------------- START USER LIST VIEWER ----------------------------------*/

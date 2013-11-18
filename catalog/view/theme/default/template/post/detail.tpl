@@ -5,7 +5,6 @@
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
-	<link href="{{ asset_css('libs/jquery-ui-1.10.3.custom.min.css') }}" rel="stylesheet" media="screen" />
     <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
     {{ block('post_common_post_comment_in_page_style') }}
 {% endblock %}
@@ -15,7 +14,7 @@
 	<div id="post-detail">
 		<div id="detail-header">
 			<div class="goback-link fl">
-				<a href="#" class="btn-link-round btn-goback" title="Go back" > 
+				<a href="#" class="btn-link-round tooltip-bottom btn-goback" title="Go back" > 
 					<i class="icon-arrow-left medium-icon"></i>					
 				</a>
 			</div>
@@ -29,14 +28,14 @@
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 							{{ post.author }}
 						</a> - 
-						<span class="post-time timeago">
-							{{ post.created|date(date_format) }}
+						<span class="post-time">
+							<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 						</span>
 					</div>
 					<ul class="post-actions fr">
 						<li>
 							<a class="like-post" href="#"
-							data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}">
+							data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}" title="Like/Unlike">
 							{% if post.isUserLiked == 0 %}
 		                        <i class="icon-thumbs-up medium-icon"></i>
 		                    {% else %}
@@ -44,8 +43,14 @@
 		                    {% endif %}
 							</a>
 							<span class="number">
-								<a href="#">{{ post.like_count }}</a>
+								<a href="#" title="View who liked">{{ post.like_count }}</a>
 							</span>
+						</li>
+						<li style="display: none;" class="toggle-comment">
+							<a href="#" title="Open comment box">
+								<i class="icon-comments-alt medium-icon"></i>
+							</a>
+							<span class="number">7</span>
 						</li>
 						<li>
 							<a class="">
@@ -71,7 +76,6 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ asset_js('jquery/jquery-ui-1.10.3.custom.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
 {{ block('post_common_post_comment_in_page_javascript') }}
 {% endblock %}

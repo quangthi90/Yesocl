@@ -12,6 +12,8 @@
         this.commentMeta = this.postComment.find('.comment-meta');
         this.expandComment = this.postComment.find('.btn-expand');
         this.restoreComment = this.postComment.find('.btn-restore');
+        this.closeCommentBox = this.postComment.find('.btn-close');
+        this.toggleComment = this.root.find('.toggle-comment'); 
         this.expandCommentLevel = 1;
         this.attachEvents();
     }
@@ -22,15 +24,27 @@
         that.goBackBtn.on('click', function(){
             history.go(-1); 
             return false;
-        });
-        
-        that.expandComment.on('click', function(){
+        });        
+        that.expandComment.on('click', function(e){
+            e.preventDefault();
+            $(this).fadeOut(100);
             that.expandCommentLevel ++;
             that.adjustSize();
         });
-        that.restoreComment.on('click', function(){
+        that.restoreComment.on('click', function(e){
+            e.preventDefault();
+            $(this).fadeOut(100);
             that.expandCommentLevel --;
             that.adjustSize();
+        });
+        that.toggleComment.children('a').on('click', function(e){
+            e.preventDefault();
+            that.toggleComment.fadeOut(100);
+            that.initializeSize();
+        });
+        that.closeCommentBox.on('click', function(e){
+            e.preventDefault();
+            that.makeFullContent();
         });
 
         //Scroll bar:
@@ -56,19 +70,22 @@
             that.postComment.width(widthComment).animate({ right: '0px' }, 400);
         })
     }
+    DetailSection.prototype.makeFullContent = function() {
+        var that = this;
+        var widthComment = 0;
+        that.postComment.width(widthComment).animate({ right: '0px' }, 300, function(){
+            that.postContent.animate({ right : (widthComment + 15) + 'px' }, 500, function(){
+                that.toggleComment.fadeIn(100);
+                that.toggleComment.children('a').tooltip('show');
+                setTimeout(function(){
+                    that.toggleComment.children('a').tooltip('hide');
+                }, 3000);
+                that.postContent.getNiceScroll().resize();
+            });
+        });        
+    }
     DetailSection.prototype.adjustSize = function() {
         var that = this;
-        if(that.expandCommentLevel == 1){
-            that.restoreComment.fadeOut(300);
-            that.expandComment.fadeIn(300);
-        }else if(that.expandCommentLevel == 4){
-            that.restoreComment.fadeIn(300);
-            that.expandComment.fadeOut(300);
-        }else{
-            that.restoreComment.fadeIn(300);
-            that.expandComment.fadeIn(300);
-        }
-
         var widthComment  = Math.floor(that.widthDetail/4)*that.expandCommentLevel;
         if(that.widthDetail - widthComment < minDetailContent){
             widthComment = that.widthDetail - minDetailContent; 
@@ -76,7 +93,16 @@
         that.postContent.animate({ right : (widthComment + 15) + 'px' }, 300, function(){
             that.postContent.getNiceScroll().resize();
             that.commentMeta.width(widthComment - 90);
-            that.postComment.width(widthComment).animate({ right: '0px' }, 500);            
+            that.postComment.width(widthComment).animate({ right: '0px' }, 500, function(){
+                if(that.expandCommentLevel === 1 || 
+                    that.expandCommentLevel === 2 ){
+                    that.expandComment.fadeIn(200);
+                }
+                if(that.expandCommentLevel === 2 || 
+                    that.expandCommentLevel === 3 ){
+                    that.restoreComment.fadeIn(200);
+                }
+            });            
         });
     }
 
