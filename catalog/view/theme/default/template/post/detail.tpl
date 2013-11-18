@@ -66,8 +66,6 @@
 		<div id="detail-content">
 			<div id="post-content">
 				{{ post.content|raw }}
-				{{ post.content|raw }}
-				{{ post.content|raw }}
 			</div>
 			{{ block('post_common_post_comment_in_page') }}
 		</div>

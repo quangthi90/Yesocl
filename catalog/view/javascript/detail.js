@@ -56,6 +56,40 @@
                 updateOnContentResize: true
             }
         });
+        //Img gallery:
+        if(that.postContent.find('img').length > 0) {
+            that.postContent.find('img').each(function(){
+                if($(this).parent('a').length == 0){
+                    var imgWrapper = $("<a class='img-wrapper'></a>");
+                    imgWrapper.attr('href', $(this).attr('src'));
+                    imgWrapper.attr('title', $(this).attr('alt'));
+                    $(this).wrap(imgWrapper);
+                }
+            });
+            that.postContent.magnificPopup({
+                delegate: 'a',
+                type: 'image',
+                closeOnContentClick: false,
+                closeBtnInside: false,
+                mainClass: 'mfp-with-zoom mfp-img-mobile',
+                image: {
+                    verticalFit: true,
+                    titleSrc: function(item) {
+                        return item.el.attr('title');
+                    }
+                },
+                gallery: {
+                    enabled: true
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300, 
+                    opener: function(element) {
+                        return element.find('img');
+                    }
+                }
+            });
+        }
 
         //Adjust size:
         setTimeout(that.initializeSize(), 1000);

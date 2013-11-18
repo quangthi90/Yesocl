@@ -9,10 +9,10 @@
 				Comment box (<span class="counter">10</span>)
 				<div class="y-box-expand">
 					<a href="#" class="btn-expand" title="Expand">
-						<i class="icon-indent-left"></i>
+						<i class="icon-arrow-left"></i>
 					</a>
 					<a href="#" class="btn-restore" title="Restore" style="display: none;">
-						<i class="icon-indent-right"></i>
+						<i class="icon-arrow-right"></i>
 					</a>
 					<a href="#" class="btn-close" title="Hide">
 						<i class="icon-remove"></i>
