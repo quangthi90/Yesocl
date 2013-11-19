@@ -41,16 +41,19 @@ class ControllerFriendFriend extends Controller {
 
 		foreach ( $friends as $friend ) {
 			$friend_id = $friend->getUser()->getId();
-			if ( !in_array($friend_id, $user_ids) && $friend_id != $curr_user->getId() ){
-				$user_ids[] = $friend_id;
+			if ( $friend_id == $curr_user->getId() ){
+				continue;
 			}
+			$user_ids[$friend_id] = $friend_id;
 		}
+
+		$this->data['friend_ids'] = $user_ids;
 
 		$users = $this->model_user_user->getUsers(array(
 			'user_ids' => $user_ids
 		));
 
-		$this->data['users'] = array();
+		$this->data['users'] = array($user_temp['id'], $user_temp);
 
 		foreach ( $users as $user ) {
 			$fr_status = $this->model_friend_friend->checkFriendStatus( $user, $curr_user );
@@ -60,11 +63,13 @@ class ControllerFriendFriend extends Controller {
 			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
 
 			$user['fr_status'] = $fr_status;
+
+			$this->data['users'][$user['id']] = $user;
 		}
 
 		$this->data['group'] = array();
 
-		foreach ( $user->getFriendGroups() as $group ) {
+		foreach ( $curr_user->getFriendGroups() as $group ) {
 			$this->data['group'][$group->getId()] = array(
 				'id' => $group->getId(),
 				'name' => $group->getName()

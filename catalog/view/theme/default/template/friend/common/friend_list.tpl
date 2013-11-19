@@ -1,8 +1,9 @@
 {% block friend_common_friend_list %}
-    {% if friends is not defined %}
-        {% set friends = [] %}
+    {% if friend_ids is not defined %}
+        {% set friend_ids = [] %}
     {% endif %}
-    {% for friend in friends %}
+    {% for friend_id in friend_ids %}
+        {% set friend = users[friend_id] %}
         <div class="block-content-item friend-item">
             <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
                 <img src="{{ friend.avatar }}">

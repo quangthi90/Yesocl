@@ -12,10 +12,10 @@
 {% block body %}
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal account-friend" style="width: 9999px; padding-right: 250px;">
-        {#% if current_user_id != get_current_user().id %}
+        {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}
-        {% endif %#}
+        {% endif %}
         <div class="feed-block">
             <div class="block-header">
                 <a class="block-title fl" href="#">Friend</a>  
