@@ -14,7 +14,7 @@
 	<div id="post-detail">
 		<div id="detail-header">
 			<div class="goback-link fl">
-				<a href="#" class="btn-link-round tooltip-bottom btn-goback" title="Go back" > 
+				<a href="#" class="tooltip-bottom btn-goback" title="Go back" > 
 					<i class="icon-arrow-left medium-icon"></i>					
 				</a>
 			</div>
@@ -66,6 +66,15 @@
 		<div id="detail-content">
 			<div id="post-content">
 				{{ post.content|raw }}
+				{{ post.content|raw }}
+			</div>
+			<div id="detail-scroll">
+				<a class="btn-link-round fl" id="detail-first" href="#" style="display: none;">
+					<i class="icon-arrow-left"></i>
+				</a>
+				<a class="btn-link-round fr" id="detail-last" href="#" style="display: none;">
+					<i class="icon-arrow-right"></i>
+				</a>
 			</div>
 			{{ block('post_common_post_comment_in_page') }}
 		</div>

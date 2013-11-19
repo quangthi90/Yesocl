@@ -11,7 +11,7 @@
           </ul>
         </div>
     </div>
-    <div id="yes-footer-bar">
+    <div id="yes-footer-bar" style="display: none;">
         <div class="footer-toolbar-ctrl" id="auto-scroll-left">
           <a href="#" title="Go First">
             <i class="icon-fast-backward"></i>

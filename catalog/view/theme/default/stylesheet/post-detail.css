@@ -51,6 +51,14 @@
     overflow: hidden;
     border-left: 3px solid #ccc;
 }
+#detail-scroll {
+    position: absolute;
+    left: 15px;
+    right: 15px;
+    bottom: 5px;
+    z-index: 10;
+    height: 30px;
+}
 .goback-link {
     position: relative;
     padding: 15px 20px 15px 20px;
@@ -100,10 +108,10 @@
     font-size: 11px;
     font-weight: bold;
 }
-.post-actions a.btn-link-round  {
+#post-detail a.btn-link-round  {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -111,14 +119,16 @@
     background-color: #009B77;
     padding: 5px;
     text-align: center;
+    line-height: 15px;
 }
-.post-actions a.btn-link-round i {
+#post-detail a.btn-link-round i {
     color: #fff;
+    font-size: 12px;
 }
-.post-actions a.btn-link-round:hover {
+#post-detail a.btn-link-round:hover {
     background-color: #fff;
 }
-.post-actions a.btn-link-round:hover i {
+#post-detail a.btn-link-round:hover i {
     color: #000;
 }
 #detail-header .post-title-container {

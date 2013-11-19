@@ -8,13 +8,19 @@
         this.heightDetail = this.detailContentWrapper.height();
         this.postContent = this.detailContentWrapper.find('#post-content');
         this.postComment = this.detailContentWrapper.find('#comment-wrapper');
+        this.quickScroll = this.detailContentWrapper.find('#detail-scroll');        
         this.commentList = this.postComment.find('.comment-body');
         this.commentMeta = this.postComment.find('.comment-meta');
         this.expandComment = this.postComment.find('.btn-expand');
         this.restoreComment = this.postComment.find('.btn-restore');
         this.closeCommentBox = this.postComment.find('.btn-close');
+        this.scrollLeftBtn = this.quickScroll.find('#detail-first');
+        this.scrollLastBtn = this.quickScroll.find('#detail-last');
         this.toggleComment = this.root.find('.toggle-comment'); 
         this.expandCommentLevel = 1;
+        this.canScrollLeft = false;
+        this.canScrollLast = false;
+        this.timeoutId = 0;
         this.attachEvents();
     }
     DetailSection.prototype.attachEvents = function(){
@@ -45,6 +51,43 @@
         that.closeCommentBox.on('click', function(e){
             e.preventDefault();
             that.makeFullContent();
+        });
+        that.postContent.scroll(function(){
+            if(that.timeoutId != 0) {
+                clearTimeout(that.timeoutId);
+            }
+            var xScroll = $(this).scrollLeft();
+            var minWidth = that.scrollLeftBtn.outerWidth() + 25;
+            if(xScroll > minWidth) {
+                that.scrollLeftBtn.fadeIn(300);
+                that.canScrollLeft = true;
+            }else {
+                that.scrollLeftBtn.fadeOut(200);
+                that.canScrollLeft = false;
+            }
+            if(xScroll < ($(this).width() - minWidth )) {
+                that.scrollLastBtn.fadeIn(300);
+                that.canScrollLast = true;
+            }else{
+                that.scrollLastBtn.fadeOut(200);
+                that.canScrollLast = false;
+            }
+            that.timeoutId = setTimeout(function(){
+                if(!that.scrollLeftBtn.is(":hover")) {
+                    that.scrollLeftBtn.fadeOut(200);    
+                }
+                if(!that.scrollLastBtn.is(":hover")) {
+                    that.scrollLastBtn.fadeOut(200);
+                }                
+            }, 2000);
+        });        
+        that.scrollLeftBtn.on('click', function(e){
+            e.preventDefault();
+            that.postContent.animate({ scrollLeft: 0 }, 1000);
+        });
+        that.scrollLastBtn.on('click', function(e){
+            e.preventDefault();
+            that.postContent.animate({ scrollLeft: that.postContent.width() }, 1000);
         });
 
         //Scroll bar:
@@ -99,6 +142,7 @@
         that.expandCommentLevel = 1;
         var widthComment  = Math.floor(that.widthDetail/4);
         that.postContent.animate({ right : (widthComment + 15) + 'px' }, 700, function(){
+            that.quickScroll.css('right', (widthComment + 15) + 'px');
             that.postContent.getNiceScroll().resize();
             that.commentMeta.width(widthComment - 90);
             that.postComment.width(widthComment).animate({ right: '0px' }, 400);
@@ -109,6 +153,7 @@
         var widthComment = 0;
         that.postComment.width(widthComment).animate({ right: '0px' }, 300, function(){
             that.postContent.animate({ right : (widthComment + 15) + 'px' }, 500, function(){
+                that.quickScroll.css('right', (widthComment + 15) + 'px');
                 that.toggleComment.fadeIn(100);
                 that.toggleComment.children('a').tooltip('show');
                 setTimeout(function(){
@@ -125,6 +170,7 @@
             widthComment = that.widthDetail - minDetailContent; 
         }
         that.postContent.animate({ right : (widthComment + 15) + 'px' }, 300, function(){
+            that.quickScroll.css('right', (widthComment + 15) + 'px');
             that.postContent.getNiceScroll().resize();
             that.commentMeta.width(widthComment - 90);
             that.postComment.width(widthComment).animate({ right: '0px' }, 500, function(){
