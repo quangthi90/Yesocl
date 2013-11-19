@@ -324,6 +324,11 @@ label.in-line{
   -moz-border-radius: 0px;
   border-radius: 0px;
 }
+img.small-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 
 /* ------------------------------------- COMMON LAYOUT ---------------------------------------- */
 #y-container
@@ -904,9 +909,13 @@ a.btn-notification:hover .notification-item-name > i {
 .post .post_header .post_meta span.user_info {
 }
 .post .post_header .post_meta span.user_info .name {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: bold;
+    margin-left: 3px;
     color: #575757;
+}
+.post .post_header .post_meta span.user_info .name:hover {
+  color: #009B77;
 }
 .post .post_header .post_meta span.user_info .image > img{
   width: 25px;
@@ -1725,17 +1734,17 @@ div[data-role="editor-toolbar"] {
 .tooltip-inner {
   background-color: #009B77;
 }
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: #009B77;
+}
 .tooltip.top .tooltip-arrow {
   border-top-color: #009B77;
 }
-.tooltip.right .tooltip-arrow {
-  border-top-color: #009B77;
-}
 .tooltip.left .tooltip-arrow {
-  border-top-color: #009B77;
+  border-left-color: #009B77;
 }
-.tooltip.bottom .tooltip-arrow {
-  border-top-color: #009B77;
+.tooltip.right .tooltip-arrow {
+  border-right-color: #009B77;
 }
 /* ---------------------------------------- END TOOLTIP -------------------------------------- */
 /* ---------------------------------- START USER LIST VIEWER ----------------------------------*/
@@ -2134,7 +2143,7 @@ ul.user_actions li:hover i{
   top: 58px;
   padding: 30px 25px;
   background-color: #9B9B9B;
-  z-index: 2;
+  z-index: 100;
   overflow: hidden;
   display: none;
 }

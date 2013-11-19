@@ -33,7 +33,7 @@ function getActualLengthOfArray(arr) {
 			},
 			advanced:{
 				updateOnBrowserResize:true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
-				updateOnContentResize:false, /*auto-update scrollbars on content resize (for dynamic content): boolean*/
+				updateOnContentResize:true, /*auto-update scrollbars on content resize (for dynamic content): boolean*/
 				autoExpandHorizontalScroll:false, /*auto-expand width for horizontal scrolling: boolean*/
 				autoScrollOnFocus:true, /*auto-scroll on focused elements: boolean*/
 				normalizeMouseWheelDelta:false /*normalize mouse-wheel delta (-1/1)*/
@@ -308,7 +308,17 @@ function getActualLengthOfArray(arr) {
 	FlexibleElement.prototype.attachEvents = function() { 
 		var that = this;
 		//Tooltip:
-		$('a[title]').tooltip({ container: 'body' });
+		$('a[title]').each(function(){
+			if($(this).hasClass('tooltip-bottom')) {
+				$(this).tooltip({
+						container: 'body', 
+						placement: 'bottom'
+					}
+				);
+			}else {
+				$(this).tooltip({ container: 'body' });
+			}
+		})
 
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();
@@ -489,8 +499,10 @@ function getActualLengthOfArray(arr) {
 		this.columns = el.find('.column');
 		this.feeds = el.find('.feed');	
 		this.heightMain =  el.height();
-		this.widthMain = el.width();		
-		this.initializeBlock();
+		this.widthMain = el.width();
+		if(!this.rootContent.hasClass('no-scroll')) {
+			this.initializeBlock();
+		}
 	}
 	HorizontalBlock.prototype.initializeBlock = function() {
 		if(this.root.hasClass(df_INVIDUAL_BLOCK)) {
