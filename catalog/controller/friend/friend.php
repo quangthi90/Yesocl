@@ -15,12 +15,12 @@ class ControllerFriendFriend extends Controller {
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
 		if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
-			$user = $this->model_user_user->getUserFull( $this->request->get );
+			$curr_user = $this->model_user_user->getUserFull( $this->request->get );
 		}else{
-			$user = $this->customer->getUser();
+			$curr_user = $this->customer->getUser();
 		}
 
-		if ( !$user ){
+		if ( !$curr_user ){
 			return false;
 		}
 
@@ -31,17 +31,36 @@ class ControllerFriendFriend extends Controller {
 		$this->data['data_filter_male'] = '{ "filter_gender": "1" }';
 		$this->data['data_filter_female'] = '{ "filter_gender": "2" }';
 
-		$user_temp = $user->formatToCache();
+		$user_temp = $curr_user->formatToCache();
 
 		$user_temp['avatar'] = $this->model_tool_image->getAvatarUser( $user_temp['avatar'], $user_temp['email'] );
 
-		$this->data['users'] = array( $user_temp['id'] => $user_temp );
+		$this->data['current_user_id'] = $curr_user->getId();
 
-		$this->data['current_user_id'] = $user->getId();
+		$friends = $curr_user->getFriends();
 
-		$this->data['friends'] = $this->model_friend_friend->getListFriends( array(
-			'filter_request' => 1,
+		foreach ( $friends as $friend ) {
+			$friend_id = $friend->getUser()->getId();
+			if ( !in_array($friend_id, $user_ids) && $friend_id != $curr_user->getId() ){
+				$user_ids[] = $friend_id;
+			}
+		}
+
+		$users = $this->model_user_user->getUsers(array(
+			'user_ids' => $user_ids
 		));
+
+		$this->data['users'] = array();
+
+		foreach ( $users as $user ) {
+			$fr_status = $this->model_friend_friend->checkFriendStatus( $user, $curr_user );
+
+			$user = $user->formatToCache();
+
+			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+
+			$user['fr_status'] = $fr_status;
+		}
 
 		$this->data['group'] = array();
 
