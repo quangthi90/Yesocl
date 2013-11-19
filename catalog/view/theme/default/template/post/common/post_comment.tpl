@@ -21,23 +21,22 @@
 			</div>
 			<div class="y-box-content comment-body">
 				<div id="add-more-item"></div>
+			</div>		
+		</div>	
+		<form class="y-comment-reply post post_new comment-form">
+			<div class="txt_editor">
+				<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
 			</div>
+			<div class="comment-action"> 
+				<a class="fl comment-tool" href="#" title="Add photo">
+					<i class="icon-camera icon-2x"></i>
+				</a>
+				<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
+                <div class="fr comment-press-enter">Press Enter to send  
+                	<input type="checkbox" class="cb-press-enter" />
+                </div>				
 			</div>
-			<form class="y-comment-reply post post_new comment-form">
-				<div class="txt_editor">
-					<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
-				</div>
-				<div class="comment-action"> 
-					<a class="fl comment-tool" href="#" title="Add photo">
-						<i class="icon-camera icon-2x"></i>
-					</a>
-					<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
-                    <div class="fr comment-press-enter">Press Enter to send  
-                    	<input type="checkbox" class="cb-press-enter" />
-                    </div>				
-				</div>
-			</form>		
-		</div>			
+		</form>		
 	</div>
 {% raw %}
 	<div id="item-template" class="hidden">
