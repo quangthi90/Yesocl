@@ -155,7 +155,6 @@ function getActualLengthOfArray(arr) {
 	/*Start AUTOCOMPLETE */
 	function SearchAutoComplete(el) {
 		this.root = el;
-		this.bodyEl = $('body');
 		this.autoCtrl = el.find('.search-ctrl');
 		this.invokeCtrl = el.data('invoke-search');
 		this.template = el.find('.search-result-item-template');	
@@ -185,7 +184,7 @@ function getActualLengthOfArray(arr) {
 		$(document).keypress(function(e){ 			
 			//Check if any input is focused, if so, don't continue:
 			var isFocus = false;		
-			if(that.bodyEl.hasClass('popup-shown')) {
+			if($(this).find('.mfp-ready').length > 0) {
 				isFocus = true;
 			}else {
 				$('input,textarea').each(function(){
@@ -535,6 +534,7 @@ function getActualLengthOfArray(arr) {
 				var heightUpdated = $(this).height();
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
+			this.columns.css('opacity', '1');
 		}
 		else if(this.root.hasClass(df_ACCOUNT_MYWALL)) {
 			this.blocks = this.root.find('.feed-block');	
@@ -552,10 +552,12 @@ function getActualLengthOfArray(arr) {
 					$(this).children('.post').height(Math.floor((heightBlockContent - marginPostOnWall)/2 - 2*(marginPostOnWall)));
 					$(this).width(minPostStatusWidth);			
 					totalWidthOfColumns += $(this).outerWidth() + marginPostOnWall;
+					$(this).css('opacity', '1');
 				});
 				firstColumn.css('min-width', minPostEditorWidth + 'px');
 				columnPerBlock.css('min-width', minPostStatusWidth + 'px');	
 				firstColumn.css('margin-right', marginPostOnWall + 'px');
+				firstColumn.animate({ 'opacity': '1' }, 500);
 				totalWidth += totalWidthOfColumns;
 			});
 			this.freeBlock.css('margin-right', marginBlock);
@@ -588,6 +590,7 @@ function getActualLengthOfArray(arr) {
 				var heightUpdated = $(this).height();
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
+			this.columns.css('opacity', '1');
 		}
 		else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
 			var heightBlockContent = this.heightMain - 42;

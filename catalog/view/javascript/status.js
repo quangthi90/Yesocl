@@ -2,7 +2,6 @@
 	var marginPostDefault = 15;
 	var widthPostDefault = 350;
 	function Status( $el ){
-		this.bodyEl = $('body');
 		this.mainContent = $('.account-mywall').first();
 		this.blockContent = this.mainContent.find('.block-content');
 		this.$el		= $el;
