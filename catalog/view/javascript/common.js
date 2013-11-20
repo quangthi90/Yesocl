@@ -155,6 +155,7 @@ function getActualLengthOfArray(arr) {
 	/*Start AUTOCOMPLETE */
 	function SearchAutoComplete(el) {
 		this.root = el;
+		this.bodyEl = $('body');
 		this.autoCtrl = el.find('.search-ctrl');
 		this.invokeCtrl = el.data('invoke-search');
 		this.template = el.find('.search-result-item-template');	
@@ -184,9 +185,13 @@ function getActualLengthOfArray(arr) {
 		$(document).keypress(function(e){ 			
 			//Check if any input is focused, if so, don't continue:
 			var isFocus = false;		
-			$('input,textarea').each(function(){
-				if ($(this).is(":focus")) isFocus = true;
-			});
+			if(that.bodyEl.hasClass('popup-shown')) {
+				isFocus = true;
+			}else {
+				$('input,textarea').each(function(){
+					if ($(this).is(":focus")) isFocus = true;
+				});
+			}			
 			if (isFocus) return;
 			if((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122)) {
 				that.openSearchPanel();	

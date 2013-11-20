@@ -2,6 +2,7 @@
 	var marginPostDefault = 15;
 	var widthPostDefault = 350;
 	function Status( $el ){
+		this.bodyEl = $('body');
 		this.mainContent = $('.account-mywall').first();
 		this.blockContent = this.mainContent.find('.block-content');
 		this.$el		= $el;
@@ -121,19 +122,20 @@
 		    //['help', ['help']] //no help button
 		  	],
 		  	onfocus: function(e) {
-		  		if(firstLoad != 0){
-		  			$('.dlg-column').eq(0).hide();
-		  			$('.dlg-column').eq(1).width('100%');
-				}
-				firstLoad = 1;  		
+		  		//if(firstLoad != 0){
+		  		//	$('.dlg-column').eq(0).hide();
+		  		//	$('.dlg-column').eq(1).width('100%');
+				//}
+				//firstLoad = 1;
+
 		  	},
 		  	onblur: function(e) {
-		  		var noteEditor = $(this).parent('.note-editor').find('.note-dialog .modal');
-		  		if(noteEditor.length > 0 && noteEditor.hasClass('in')) {
-		  			return;
-		  		}	
-		  		$('.dlg-column').eq(0).width('28%').show();
-	  			$('.dlg-column').eq(1).width('70%');	  		
+		  		//var noteEditor = $(this).parent('.note-editor').find('.note-dialog .modal');
+		  		//if(noteEditor.length > 0 && noteEditor.hasClass('in')) {
+		  		//	return;
+		  		//}	
+		  		//$('.dlg-column').eq(0).width('28%').show();
+	  			//$('.dlg-column').eq(1).width('68%');	  		
 		  	}
 		});		
 	});

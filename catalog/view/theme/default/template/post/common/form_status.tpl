@@ -55,7 +55,7 @@
 			    			</a>
 			    		</div>
 					</div>
-					<div class="dlg-column fr" style="width:70%;">
+					<div class="dlg-column fr" style="width:68%;">
 						<div class="alert alert-error top-warning hidden">Warning!!</div>
 				    	<div class="control-group">
 				    		<label for="title" class="control-label">Title</label>
@@ -68,7 +68,7 @@
 			    			<label class="control-label">Content</label>
 					    	<div class="y-editor status-content" id="post-adv-editor"></div>
 				    	</div>
-					</div>				    	
+					</div>
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
@@ -154,8 +154,4 @@
 <script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
-<script type="text/javascript">	
-	$('button.btn-reset').click(function() {
-	});	   
-</script>
 {% endblock %}
