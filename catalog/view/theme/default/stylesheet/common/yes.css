@@ -1498,6 +1498,10 @@ a.btn-notification:hover .notification-item-name > i {
   margin-right: 15px;
   min-width: 350px;
   overflow: hidden;
+  opacity: 0;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 .column:last-child{
   margin-right: 0;
