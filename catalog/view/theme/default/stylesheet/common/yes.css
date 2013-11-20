@@ -1164,7 +1164,6 @@ a.btn-notification:hover .notification-item-name > i {
 
 .img-previewer-container {
   overflow: hidden;
-  border-top: 1px solid #ddd;
   text-align: center;
 }
 .img-previewer-container .post_image_item {
