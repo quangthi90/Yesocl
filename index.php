@@ -17,12 +17,6 @@ require_once(DIR_SYSTEM . 'startup.php');
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
 require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
-// require_once(DIR_SYSTEM . 'library/affiliate.php');
-// require_once(DIR_SYSTEM . 'library/currency.php');
-// require_once(DIR_SYSTEM . 'library/tax.php');
-// require_once(DIR_SYSTEM . 'library/weight.php');
-// require_once(DIR_SYSTEM . 'library/length.php');
-// require_once(DIR_SYSTEM . 'library/cart.php');
 
 // Rename Document for linux
 // include ('libs/renameFolder.php');
@@ -45,19 +39,6 @@ $db = new Doctrine($registry);
 $registry->set('db', $db);
 $registry->set('dm', $db->getDm());
 $registry->set('client', $db->getClient());
-
-// Store
-/*if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
-	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`ssl`, 'www.', '') = '" . $db->escape('https://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
-} else {
-	$store_query = $db->query("SELECT * FROM " . DB_PREFIX . "store WHERE REPLACE(`url`, 'www.', '') = '" . $db->escape('http://' . str_replace('www.', '', $_SERVER['HTTP_HOST']) . rtrim(dirname($_SERVER['PHP_SELF']), '/.\\') . '/') . "'");
-}*/
-
-/*if ($store_query->num_rows) {
-	$config->set('config_store_id', $store_query->row['store_id']);
-} else {
-	$config->set('config_store_id', 0);
-}*/
 		
 // Settings
 $settings = $db->getDm()->getRepository( 'Document\Setting\Config' )->findAll();
@@ -220,28 +201,6 @@ $registry->set( 'facebook', $facebook );
 $customer = new Customer($registry);
 $registry->set('customer', $customer);
 
-// Affiliate
-// $registry->set('affiliate', new Affiliate($registry));
-
-// if (isset($request->get['tracking']) && !isset($request->cookie['tracking'])) {
-// 	setcookie('tracking', $request->get['tracking'], time() + 3600 * 24 * 1000, '/');
-// }
-		
-// Currency
-// $registry->set('currency', new Currency($registry));
-
-// Tax
-// $registry->set('tax', new Tax($registry));
-
-// Weight
-// $registry->set('weight', new Weight($registry));
-
-// Length
-// $registry->set('length', new Length($registry));
-
-// Cart
-// $registry->set('cart', new Cart($registry));
-
 //  Encryption
 $registry->set('encryption', new Encryption($config->get('config_encryption')));
 
@@ -261,40 +220,10 @@ $controller->addPreAction(new Action('common/maintenance'));
 $controller->addPreAction(new Action('common/seo_url'));
 
 // Router
-if ( $customer->isLogged() ) {
-		if (!isset($request->get['route']) || (
-			$request->get['route'] == 'account/login/login' || 
-			$request->get['route'] == 'account/login' ||
-			$request->get['route'] == 'account/register/register' ||
-			$request->get['route'] == 'account/forgotten' ||
-			$request->get['route'] == 'welcome/home'
-		)) 
-		{
-			$action = new Action('common/home');
-		}else{
-			$action = new Action($request->get['route']);
-		}
-	/*if (isset($request->get['route']) && $request->get['route'] != 'welcome/home') {
-		$action = new Action($request->get['route']);
-	} else {
-		$action = new Action('common/home');
-	}*/
-}elseif ( $customer->hasRemember() ) {
-	header('Location: ' . $url->link($request->get['route']?$request->get['route']:'common/home'));
-	exit;
+if ( isset($request->get['route']) ){
+	$action = new Action($request->get['route']);
 }else{
-	if (isset($request->get['route']) && (
-		$request->get['route'] == 'account/login/login' || 
-		$request->get['route'] == 'account/login' ||
-		$request->get['route'] == 'account/register/register' ||
-		$request->get['route'] == 'account/forgotten' ||
-		$request->get['route'] == 'account/login/facebookConnect'
-	)) 
-	{
-		$action = new Action($request->get['route']);
-	}else{
-		$action = new Action('welcome/home');
-	}
+	$action = new Action('welcome/home');
 }
 
 // Dispatch
