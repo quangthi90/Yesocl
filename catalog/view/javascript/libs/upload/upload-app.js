@@ -91,6 +91,7 @@
             });
             that.resultContainer.val(that.listImgUrl);
         }).on('fileuploadfail', function (e, data) {
+            console.log(data);
             $.each(data.files, function (index, file) {
                 var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> File upload failed');            
                 $(data.context[index]).append(error);

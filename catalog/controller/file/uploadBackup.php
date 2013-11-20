@@ -391,7 +391,7 @@ class ControllerFileUpload extends Controller{
         return $this->fix_integer_overflow($val);
     }
 
-    protected function validate($uploaded_file, $file, $error, $index) {
+    protected function validate($uploaded_file, $file, $error, $index) { 
         if ($error) {
             $file->error = $this->get_error_message($error);
             return false;
@@ -468,8 +468,7 @@ class ControllerFileUpload extends Controller{
         );
     }
 
-    protected function get_unique_filename($name,
-            $type = null, $index = null, $content_range = null) {
+    protected function get_unique_filename($name, $type = null, $index = null, $content_range = null) {
         while(is_dir($this->get_upload_path($name))) {
             $name = $this->upcount_name($name);
         }
@@ -485,8 +484,7 @@ class ControllerFileUpload extends Controller{
         return $name;
     }
 
-    protected function trim_file_name($name,
-            $type = null, $index = null, $content_range = null) {
+    protected function trim_file_name($name, $type = null, $index = null, $content_range = null) {
 
         // Remove path information and dots around the filename, to prevent uploading
         // into different directories or replacing hidden system files.
@@ -504,14 +502,12 @@ class ControllerFileUpload extends Controller{
         return $name;
     }
 
-    protected function trim_file_name_random($name,
-            $type = null, $index = null, $content_range = null) {
+    protected function trim_file_name_random($name, $type = null, $index = null, $content_range = null) {
         $name = $this->trim_file_name(md5(date('Y-m-d H:i:s:u')), $type, $index);
         return $name;
     }
 
-    protected function get_file_name($name,
-            $type = null, $index = null, $content_range = null) {
+    protected function get_file_name($name, $type = null, $index = null, $content_range = null) {
         return $this->get_unique_filename(
             $this->trim_file_name_random($name, $type, $index, $content_range),
             $type,
@@ -658,8 +654,7 @@ class ControllerFileUpload extends Controller{
         }
     }
 
-    protected function handle_file_upload($uploaded_file, $name, $size, $type, $error,
-            $index = null, $content_range = null) {
+    protected function handle_file_upload($uploaded_file, $name, $size, $type, $error, $index = null, $content_range = null) {
         $file = new stdClass();
         $file->name = $this->get_file_name($name, $type, $index, $content_range);
         $file->size = $this->fix_integer_overflow(intval($size));

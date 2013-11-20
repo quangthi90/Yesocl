@@ -19,7 +19,7 @@
 					<div class="span8 post_new_control">
 						<a href="#" id="insert-new-img">
 							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="thumb" data-url="{{ path('UploadFile') }}" id="img-upload" />
+							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						</a>
 						<a href="#" title="Advance post" data-mfp-src="#post-advance-popup" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
