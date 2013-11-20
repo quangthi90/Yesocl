@@ -106,16 +106,16 @@ class ModelToolImage extends Model {
 			return false;
 		}
 	}
-    
-    public function upload() {
-    	//Option for upload:
-    	$this->options = array(
-            'script_url' => $this->get_full_url(),
+
+    public function upload( $path, $name, $param_name ) {
+        //Option for upload:
+    	$options = array(
+            'script_url' => HTTP_SERVER,
             'upload_dir' => DIR_IMAGE.'/data/upload/',
-            'upload_url' => $this->get_full_url().'image/data/upload/',
+            'upload_url' => HTTP_IMAGE . $path,
             'user_dirs' => false,
             'mkdir_mode' => 0755,
-            'param_name' => 'files',
+            'param_name' => $param_name,
             // Set the following option to 'POST', if your server does not support
             // DELETE requests. This is a parameter sent to the client:
             'delete_type' => 'DELETE',
@@ -197,32 +197,29 @@ class ModelToolImage extends Model {
                     'max_height' => 400
                 )
             )
-        );    
-    	switch ($this->get_server_var('REQUEST_METHOD')) {
+        );
+
+        $upload = new Upload( $options );
+
+    	switch ($upload->get_server_var('REQUEST_METHOD')) {
             case 'OPTIONS':
             case 'HEAD':
-                $this->head();
+                $upload->head();
                 break;
             case 'GET':
-                $this->get();
+                $upload->get();
                 break;
             case 'PATCH':
             case 'PUT':
             case 'POST':
-                $this->post();
+                $upload->post( true, $name );
                 break;
             case 'DELETE':
-                $this->delete();
+                $upload->delete();
                 break;
             default:
-                $this->header('HTTP/1.1 405 Method Not Allowed');
+                $upload->header('HTTP/1.1 405 Method Not Allowed');
         }
     }
-
-	/*
-	====================================================================================================
-		End Upload Image
-	==================================================================================================== 
-	*/
 }
 ?>
