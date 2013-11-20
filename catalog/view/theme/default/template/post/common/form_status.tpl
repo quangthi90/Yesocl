@@ -81,16 +81,35 @@
 	</div>
 	{% raw %}
 	<div class="hidden" id="post-item-template">
-		<div class="feed post post_status">
+		<div class="feed post post_status post-item" data-url="${href.post_like}" data-is-liked="0">
+			<div class="yes-dropdown">
+	            <div class="dropdown">
+	               <a class="dropdown-toggle" data-toggle="dropdown">
+	                    <i class="icon-caret-down"></i>
+	               </a>
+	               <ul class="dropdown-menu">
+	               		<li class="unlike-post hidden">
+	                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
+	                    </li>
+	                    <!--li>
+	                        <a href="#"><i class="icon-edit"></i>Edit</a>
+	                    </li>
+	                    <li class="divider"></li>
+	                    <li>
+	                        <a href="#"><i class="icon-trash"></i>Delete</a>
+	                    </li-->
+	                </ul>
+	            </div>
+	        </div>
 			<div class="post_header">
 				<div class="avatar_thumb">
-					<a href="#">
+					<a href="${href.user_info}">
 						<img src="${post.user.avatar}" alt="user" />
 					</a>
 				</div>
 				<div class="post_meta_info">
 					<div class="post_user">
-						<a href="#">${post.user.username}</a>
+						<a href="${href.user_info}">${post.user.username}</a>
 					</div>
 					<div class="post_meta">
 						<span class="post_time fl">
@@ -108,13 +127,13 @@
 							<d>0</d>
 						</span>
 						<span class="post_like fr">
-							<a class="like-post" href="#"
-	                            data-url="${href.post_like}"
-	                            data-post-liked="false"
-	                        >
-	                            <i class="icon-thumbs-up medium-icon"></i>
-							</a>
-							<d>0</d>
+							<a class="like-post " href="#">
+								<i class="icon-thumbs-up medium-icon"></i>
+	                        </a>
+	                        <span class="liked-post hidden">
+	                            Liked
+							</span>
+							<a class="post-liked-list" href="#" data-url="${href.post_get_liked}" data-like-count="0">0</a>
 						</span>
 					</div>
 				</div>
@@ -129,6 +148,9 @@
 				<div class="post_text_raw">
 					{{html post.content}}
 				</div>
+				{{if post.see_more == 1}}
+				<a class="yes-see-more" href="${href.post_detail}">See more <i class=" icon-double-angle-right"></i></a>
+				{{/if}}
 			</div>
 		</div>
 	</div>

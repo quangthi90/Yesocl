@@ -51,13 +51,17 @@ class ControllerPostPost extends Controller {
                 'comment_list' => $this->extension->path( "CommentList", $data_post_info ),
                 'comment_add' => $this->extension->path( "CommentAdd", $data_post_info ),
                 'post_like' => $this->extension->path( "PostLike", $data_post_info ),
-                'post_detail' => $this->extension->path( "PostPage", $data_post_info )
+                'post_detail' => $this->extension->path( "PostPage", $data_post_info ),
+                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $user['slug']) ),
+                'post_get_liked' => $this->extension->path( "PostGetLiker", $data_post_info )
             );
 
             $content = html_entity_decode($post->getContent());
+            $see_more = false;
 
             if ( strlen($content) > 200 ){
                 $content = substr($content, 0, 200) . '[...]';
+                $see_more = true;
             }
 
             $return_data = array(
@@ -69,7 +73,8 @@ class ControllerPostPost extends Controller {
                     'created' => $post->getCreated()->format( $this->language->get('date_format_full') ),
                     'image' => $image,
                     'title' => $post->getTitle(),
-                    'content' => $content
+                    'content' => $content,
+                    'see_more' => $see_more
                 ),
                 'href' => $href
             );
