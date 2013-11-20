@@ -1,7 +1,7 @@
 <?php
 class ModelToolImage extends Model {
 
-	protected $options = null;
+	protected $options;
     protected $error_messages = array(
         1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
         2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form',
@@ -131,117 +131,24 @@ class ModelToolImage extends Model {
 	*/
 
 	/*
-	Upload Image
-	*/
-	protected function initOptions(){
-		$this->$options = array(
-	        'script_url' => $this->get_full_url(),
-	        'upload_dir' => DIR_IMAGE.'/data/upload/',
-	        'upload_url' => $this->get_full_url().'image/data/upload/',
-	        'user_dirs' => false,
-	        'mkdir_mode' => 0755,
-	        'param_name' => 'files',
-	        // Set the following option to 'POST', if your server does not support
-	        // DELETE requests. This is a parameter sent to the client:
-	        'delete_type' => 'DELETE',
-	        'access_control_allow_origin' => '*',
-	        'access_control_allow_credentials' => false,
-	        'access_control_allow_methods' => array(
-	            'OPTIONS',
-	            'HEAD',
-	            'GET',
-	            'POST',
-	            'PUT',
-	            'PATCH',
-	            'DELETE'
-	        ),
-	        'access_control_allow_headers' => array(
-	            'Content-Type',
-	            'Content-Range',
-	            'Content-Disposition'
-	        ),
-	        // Enable to provide file downloads via GET requests to the PHP script:
-	        //     1. Set to 1 to download files via readfile method through PHP
-	        //     2. Set to 2 to send a X-Sendfile header for lighttpd/Apache
-	        //     3. Set to 3 to send a X-Accel-Redirect header for nginx
-	        // If set to 2 or 3, adjust the upload_url option to the base path of
-	        // the redirect parameter, e.g. '/files/'.
-	        'download_via_php' => false,
-	        // Read files in chunks to avoid memory limits when download_via_php
-	        // is enabled, set to 0 to disable chunked reading of files:
-	        'readfile_chunk_size' => 10 * 1024 * 1024, // 10 MiB
-	        // Defines which files can be displayed inline when downloaded:
-	        'inline_file_types' => '/\.(gif|jpe?g|png)$/i',
-	        // Defines which files (based on their names) are accepted for upload:
-	        'accept_file_types' => '/.+$/i',
-	        // The php.ini settings upload_max_filesize and post_max_size
-	        // take precedence over the following max_file_size setting:
-	        'max_file_size' => null,
-	        'min_file_size' => 1,
-	        // The maximum number of files for the upload directory:
-	        'max_number_of_files' => null,
-	        // Image resolution restrictions:
-	        'max_width' => null,
-	        'max_height' => null,
-	        'min_width' => 1,
-	        'min_height' => 1,
-	        // Set the following option to false to enable resumable uploads:
-	        'discard_aborted_uploads' => true,
-	        // Set to false to disable rotating images based on EXIF meta data:
-	        'orient_image' => true,
-	        'image_versions' => array(
-	            // Uncomment the following version to restrict the size of
-	            // uploaded images:
-	            /*
-	            '' => array(
-	                'max_width' => 1920,
-	                'max_height' => 1200,
-	                'jpeg_quality' => 95
-	            ),
-	            */
-	            // Uncomment the following to create medium sized images:
-	            /*
-	            'medium' => array(
-	                'max_width' => 800,
-	                'max_height' => 600,
-	                'jpeg_quality' => 80
-	            ),
-	            */
-	            'thumbnail' => array(
-	                // Uncomment the following to use a defined directory for the thumbnails
-	                // instead of a subdirectory based on the version identifier.
-	                // Make sure that this directory doesn't allow execution of files if you
-	                // don't pose any restrictions on the type of uploaded files, e.g. by
-	                // copying the .htaccess file from the files directory for Apache:
-	                //'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/thumb/',
-	                //'upload_url' => $this->get_full_url().'/thumb/',
-	                // Uncomment the following to force the max
-	                // dimensions and e.g. create square thumbnails:
-	                //'crop' => true,
-	                'max_width' => 450,
-	                'max_height' => 400
-	            )
-            )
-        );
-	}	
-
+	====================================================================================================
+		Start Upload Image
+	==================================================================================================== 
+	*/ 
 	protected function get_full_url() {
         $https = !empty($_SERVER['HTTPS']) && strcasecmp($_SERVER['HTTPS'], 'on') === 0;
         return ($https ? HTTPS_SERVER : HTTP_SERVER);
     }
-
     protected function get_user_id() {
         @session_start();
         return session_id();
     }
-
     protected function get_user_path() {
         if ($this->options['user_dirs']) {
             return $this->get_user_id().'/';
         }
         return '';
     }
-
     protected function get_upload_path($file_name = null, $version = null) {
         $file_name = $file_name ? $file_name : '';
         if (empty($version)) {
@@ -256,11 +163,9 @@ class ModelToolImage extends Model {
         return $this->options['upload_dir'].$this->get_user_path()
             .$version_path.$file_name;
     }
-
     protected function get_query_separator($url) {
         return strpos($url, '?') === false ? '?' : '&';
     }
-
     protected function get_download_url($file_name, $version = null, $direct = false) {
         if (!$direct && $this->options['download_via_php']) {
             $url = $this->options['script_url']
@@ -283,7 +188,6 @@ class ModelToolImage extends Model {
         return $this->options['upload_url'].$this->get_user_path()
             .$version_path.rawurlencode($file_name);
     }
-
     protected function set_additional_file_properties($file) {
         $file->deleteUrl = $this->options['script_url']
             .$this->get_query_separator($this->options['script_url'])
@@ -297,7 +201,6 @@ class ModelToolImage extends Model {
             $file->deleteWithCredentials = true;
         }
     }
-
     // Fix for overflowing signed 32 bit integers,
     // works for sizes up to 2^32-1 bytes (4 GiB - 1):
     protected function fix_integer_overflow($size) {
@@ -306,7 +209,6 @@ class ModelToolImage extends Model {
         }
         return $size;
     }
-
     protected function get_file_size($file_path, $clear_stat_cache = false) {
         if ($clear_stat_cache) {
             clearstatcache(true, $file_path);
@@ -314,7 +216,6 @@ class ModelToolImage extends Model {
         return $this->fix_integer_overflow(filesize($file_path));
 
     }
-
     protected function is_valid_file_object($file_name) {
         $file_path = $this->get_upload_path($file_name);
         if (is_file($file_path) && $file_name[0] !== '.') {
@@ -322,7 +223,6 @@ class ModelToolImage extends Model {
         }
         return false;
     }
-
     protected function get_file_object($file_name) {
         if ($this->is_valid_file_object($file_name)) {
             $file = new stdClass();
@@ -346,7 +246,6 @@ class ModelToolImage extends Model {
         }
         return null;
     }
-
     protected function get_file_objects($iteration_method = 'get_file_object') {
         $upload_dir = $this->get_upload_path();
         if (!is_dir($upload_dir)) {
@@ -357,11 +256,9 @@ class ModelToolImage extends Model {
             scandir($upload_dir)
         )));
     }
-
     protected function count_file_objects() {
         return count($this->get_file_objects('is_valid_file_object'));
     }
-
     protected function create_scaled_image($file_name, $version, $options) {
         $file_path = $this->get_upload_path($file_name);
         if (!empty($version)) {
@@ -459,12 +356,10 @@ class ModelToolImage extends Model {
         imagedestroy($new_img);
         return $success;
     }
-
     protected function get_error_message($error) {
         return array_key_exists($error, $this->error_messages) ?
             $this->error_messages[$error] : $error;
     }
-
     function get_config_bytes($val) {
         $val = trim($val);
         $last = strtolower($val[strlen($val)-1]);
@@ -478,7 +373,6 @@ class ModelToolImage extends Model {
         }
         return $this->fix_integer_overflow($val);
     }
-
     protected function validate($uploaded_file, $file, $error, $index) { 
         if ($error) {
             $file->error = $this->get_error_message($error);
@@ -540,13 +434,11 @@ class ModelToolImage extends Model {
         }
         return true;
     }
-
     protected function upcount_name_callback($matches) {
         $index = isset($matches[1]) ? intval($matches[1]) + 1 : 1;
         $ext = isset($matches[2]) ? $matches[2] : '';
         return ' ('.$index.')'.$ext;
     }
-
     protected function upcount_name($name) {
         return preg_replace_callback(
             '/(?:(?: \(([\d]+)\))?(\.[^.]+))?$/',
@@ -555,7 +447,6 @@ class ModelToolImage extends Model {
             1
         );
     }
-
     protected function get_unique_filename($name, $type = null, $index = null, $content_range = null) {
         while(is_dir($this->get_upload_path($name))) {
             $name = $this->upcount_name($name);
@@ -571,7 +462,6 @@ class ModelToolImage extends Model {
         }
         return $name;
     }
-
     protected function trim_file_name($name, $type = null, $index = null, $content_range = null) {
 
         // Remove path information and dots around the filename, to prevent uploading
@@ -589,12 +479,10 @@ class ModelToolImage extends Model {
         }        
         return $name;
     }
-
     protected function trim_file_name_random($name, $type = null, $index = null, $content_range = null) {
         $name = $this->trim_file_name(md5(date('Y-m-d H:i:s:u')), $type, $index);
         return $name;
     }
-
     protected function get_file_name($name, $type = null, $index = null, $content_range = null) {
         return $this->get_unique_filename(
             $this->trim_file_name_random($name, $type, $index, $content_range),
@@ -603,11 +491,9 @@ class ModelToolImage extends Model {
             $content_range
         );
     }
-
     protected function handle_form_data($file, $index) {
         // Handle form data, e.g. $_REQUEST['description'][$index]
     }
-
     protected function imageflip($image, $mode) {
         if (function_exists('imageflip')) {
             return imageflip($image, $mode);
@@ -651,7 +537,6 @@ class ModelToolImage extends Model {
         imagedestroy($image);
         return $new_img;
     }
-
     protected function orient_image($file_path) {
         if (!function_exists('exif_read_data')) {
             return false;
@@ -709,7 +594,6 @@ class ModelToolImage extends Model {
         imagedestroy($image);
         return $success;
     }
-
     protected function handle_image_file($file_path, $file) {
         if ($this->options['orient_image']) {
             $this->orient_image($file_path);
@@ -741,7 +625,6 @@ class ModelToolImage extends Model {
                     .implode($failed_versions,', ');
         }
     }
-
     protected function handle_file_upload($uploaded_file, $name, $size, $type, $error, $index = null, $content_range = null) {
         $file = new stdClass();
         $file->name = $this->get_file_name($name, $type, $index, $content_range);
@@ -794,7 +677,6 @@ class ModelToolImage extends Model {
         }
         return $file;
     }
-
     protected function readfile($file_path) {
         $file_size = $this->get_file_size($file_path);
         $chunk_size = $this->options['readfile_chunk_size'];
@@ -810,19 +692,15 @@ class ModelToolImage extends Model {
         }
         return readfile($file_path);
     }
-
     protected function body($str) {
         echo $str;
     }
-    
     protected function header($str) {
         header($str);
     }
-
     protected function get_server_var($id) {
         return isset($_SERVER[$id]) ? $_SERVER[$id] : '';
     }
-
     protected function generate_response($content, $print_response = true) {
         if ($print_response) {
             $json = json_encode($content);
@@ -846,20 +724,16 @@ class ModelToolImage extends Model {
         }
         return $content;
     }
-
     protected function get_version_param() {
         return isset($_GET['version']) ? basename(stripslashes($_GET['version'])) : null;
     }
-
     protected function get_singular_param_name() {
         return substr($this->options['param_name'], 0, -1);
     }
-
     protected function get_file_name_param() {
         $name = $this->get_singular_param_name();
         return isset($_GET[$name]) ? basename(stripslashes($_GET[$name])) : null;
     }
-
     protected function get_file_names_params() {
         $params = isset($_GET[$this->options['param_name']]) ?
             $_GET[$this->options['param_name']] : array();
@@ -868,7 +742,6 @@ class ModelToolImage extends Model {
         }
         return $params;
     }
-
     protected function get_file_type($file_path) {
         switch (strtolower(pathinfo($file_path, PATHINFO_EXTENSION))) {
             case 'jpeg':
@@ -882,7 +755,6 @@ class ModelToolImage extends Model {
                 return '';
         }
     }
-
     protected function download() {
         switch ($this->options['download_via_php']) {
             case 1:
@@ -924,7 +796,6 @@ class ModelToolImage extends Model {
         $this->header('Last-Modified: '.gmdate('D, d M Y H:i:s T', filemtime($file_path)));
         $this->readfile($file_path);
     }
-
     protected function send_content_type_header() {
         $this->header('Vary: Accept');
         if (strpos($this->get_server_var('HTTP_ACCEPT'), 'application/json') !== false) {
@@ -933,7 +804,6 @@ class ModelToolImage extends Model {
             $this->header('Content-type: text/plain');
         }
     }
-
     protected function send_access_control_headers() {
         $this->header('Access-Control-Allow-Origin: '.$this->options['access_control_allow_origin']);
         $this->header('Access-Control-Allow-Credentials: '
@@ -943,7 +813,6 @@ class ModelToolImage extends Model {
         $this->header('Access-Control-Allow-Headers: '
             .implode(', ', $this->options['access_control_allow_headers']));
     }
-
     public function head() {
         $this->header('Pragma: no-cache');
         $this->header('Cache-Control: no-store, no-cache, must-revalidate');
@@ -955,7 +824,6 @@ class ModelToolImage extends Model {
         }
         $this->send_content_type_header();
     }
-
     public function get($print_response = true) {
         if ($print_response && isset($_GET['download'])) {
             return $this->download();
@@ -972,9 +840,10 @@ class ModelToolImage extends Model {
         }
         return $this->generate_response($response, $print_response);
     }
-
-	public function upload($print_response = true) {
-		$this->initOptions();
+    public function post($print_response = true) {
+        if (isset($_REQUEST['_method']) && $_REQUEST['_method'] === 'DELETE') {
+            return $this->delete($print_response);
+        }
         $upload = isset($_FILES[$this->options['param_name']]) ?
             $_FILES[$this->options['param_name']] : null;
         // Parse the Content-Disposition header, if available:
@@ -1027,8 +896,145 @@ class ModelToolImage extends Model {
             $print_response
         );
     }
+    public function delete($print_response = true) {
+        $file_names = $this->get_file_names_params();
+        if (empty($file_names)) {
+            $file_names = array($this->get_file_name_param());
+        }
+        $response = array();
+        foreach($file_names as $file_name) {
+            $file_path = $this->get_upload_path($file_name);
+            $success = is_file($file_path) && $file_name[0] !== '.' && unlink($file_path);
+            if ($success) {
+                foreach($this->options['image_versions'] as $version => $options) {
+                    if (!empty($version)) {
+                        $file = $this->get_upload_path($file_name, $version);
+                        if (is_file($file)) {
+                            unlink($file);
+                        }
+                    }
+                }
+            }
+            $response[$file_name] = $success;
+        }
+        return $this->generate_response($response, $print_response);
+    }
+    public function upload() {
+    	//Option for upload:
+    	$this->options = array(
+            'script_url' => $this->get_full_url(),
+            'upload_dir' => DIR_IMAGE.'/data/upload/',
+            'upload_url' => $this->get_full_url().'image/data/upload/',
+            'user_dirs' => false,
+            'mkdir_mode' => 0755,
+            'param_name' => 'files',
+            // Set the following option to 'POST', if your server does not support
+            // DELETE requests. This is a parameter sent to the client:
+            'delete_type' => 'DELETE',
+            'access_control_allow_origin' => '*',
+            'access_control_allow_credentials' => false,
+            'access_control_allow_methods' => array(
+                'OPTIONS',
+                'HEAD',
+                'GET',
+                'POST',
+                'PUT',
+                'PATCH',
+                'DELETE'
+            ),
+            'access_control_allow_headers' => array(
+                'Content-Type',
+                'Content-Range',
+                'Content-Disposition'
+            ),
+            // Enable to provide file downloads via GET requests to the PHP script:
+            //     1. Set to 1 to download files via readfile method through PHP
+            //     2. Set to 2 to send a X-Sendfile header for lighttpd/Apache
+            //     3. Set to 3 to send a X-Accel-Redirect header for nginx
+            // If set to 2 or 3, adjust the upload_url option to the base path of
+            // the redirect parameter, e.g. '/files/'.
+            'download_via_php' => false,
+            // Read files in chunks to avoid memory limits when download_via_php
+            // is enabled, set to 0 to disable chunked reading of files:
+            'readfile_chunk_size' => 10 * 1024 * 1024, // 10 MiB
+            // Defines which files can be displayed inline when downloaded:
+            'inline_file_types' => '/\.(gif|jpe?g|png)$/i',
+            // Defines which files (based on their names) are accepted for upload:
+            'accept_file_types' => '/.+$/i',
+            // The php.ini settings upload_max_filesize and post_max_size
+            // take precedence over the following max_file_size setting:
+            'max_file_size' => null,
+            'min_file_size' => 1,
+            // The maximum number of files for the upload directory:
+            'max_number_of_files' => null,
+            // Image resolution restrictions:
+            'max_width' => null,
+            'max_height' => null,
+            'min_width' => 1,
+            'min_height' => 1,
+            // Set the following option to false to enable resumable uploads:
+            'discard_aborted_uploads' => true,
+            // Set to false to disable rotating images based on EXIF meta data:
+            'orient_image' => true,
+            'image_versions' => array(
+                // Uncomment the following version to restrict the size of
+                // uploaded images:
+                /*
+                '' => array(
+                    'max_width' => 1920,
+                    'max_height' => 1200,
+                    'jpeg_quality' => 95
+                ),
+                */
+                // Uncomment the following to create medium sized images:
+                /*
+                'medium' => array(
+                    'max_width' => 800,
+                    'max_height' => 600,
+                    'jpeg_quality' => 80
+                ),
+                */
+                'thumbnail' => array(
+                    // Uncomment the following to use a defined directory for the thumbnails
+                    // instead of a subdirectory based on the version identifier.
+                    // Make sure that this directory doesn't allow execution of files if you
+                    // don't pose any restrictions on the type of uploaded files, e.g. by
+                    // copying the .htaccess file from the files directory for Apache:
+                    //'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/thumb/',
+                    //'upload_url' => $this->get_full_url().'/thumb/',
+                    // Uncomment the following to force the max
+                    // dimensions and e.g. create square thumbnails:
+                    //'crop' => true,
+                    'max_width' => 450,
+                    'max_height' => 400
+                )
+            )
+        );    
+    	switch ($this->get_server_var('REQUEST_METHOD')) {
+            case 'OPTIONS':
+            case 'HEAD':
+                $this->head();
+                break;
+            case 'GET':
+                $this->get();
+                break;
+            case 'PATCH':
+            case 'PUT':
+            case 'POST':
+                $this->post();
+                break;
+            case 'DELETE':
+                $this->delete();
+                break;
+            default:
+                $this->header('HTTP/1.1 405 Method Not Allowed');
+        }
+    }
+
 	/*
-	End Upload Image
+	====================================================================================================
+		End Upload Image
+	==================================================================================================== 
 	*/
 }
 ?>

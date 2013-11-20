@@ -10,7 +10,6 @@ class ControllerFileUpload extends Controller
 		$name = time();
 	
 		return $this->model_tool_image->upload();
-
 	}
 }
 ?>
