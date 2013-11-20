@@ -155,7 +155,6 @@ function getActualLengthOfArray(arr) {
 	/*Start AUTOCOMPLETE */
 	function SearchAutoComplete(el) {
 		this.root = el;
-		this.bodyEl = $('body');
 		this.autoCtrl = el.find('.search-ctrl');
 		this.invokeCtrl = el.data('invoke-search');
 		this.template = el.find('.search-result-item-template');	
@@ -185,7 +184,7 @@ function getActualLengthOfArray(arr) {
 		$(document).keypress(function(e){ 			
 			//Check if any input is focused, if so, don't continue:
 			var isFocus = false;		
-			if(that.bodyEl.hasClass('popup-shown')) {
+			if($(this).find('.mfp-ready').length > 0) {
 				isFocus = true;
 			}else {
 				$('input,textarea').each(function(){
