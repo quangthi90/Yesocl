@@ -9,7 +9,7 @@
 				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
 				<input type="hidden" name="img-url" class="img-url" value="" />
 			</div>
-			<div class="img-previewer-container">				
+			<div class="img-previewer-container">
 			</div>
 			<div class="y-progress">
 				<div class="bar" style="width: 0%;"></div>
@@ -34,9 +34,9 @@
 	</div>
 	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
 		<div class="y-dlg">
-			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">	
+			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 				<div class="dlg-title">
-			        <i class="icon-yes"></i> New post  
+			        <i class="icon-yes"></i> New post
 			    </div>
 			    <div class="dlg-content">
 			    	<div class="dlg-column upload-container fl" style="width:28%;">

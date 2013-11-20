@@ -43,7 +43,7 @@ class ControllerCommonRefresh extends Controller {
 		foreach ($posts as $i => $post) {
 			// thumb
 			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
 			}else{
 				$image = null;
 			}

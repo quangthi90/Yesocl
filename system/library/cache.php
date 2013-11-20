@@ -55,7 +55,7 @@ class Cache {
 		if ($files) {
 			foreach ($files as $file) {
 				$time = explode('.', basename($file))[0];
-      			if (time() < ($time + 15 * 3600)) {
+      			if (time() > ($time + 15 * 3600)) {
 					if (file_exists($file)) {
 						unlink($file);
 

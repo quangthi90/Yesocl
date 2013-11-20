@@ -33,7 +33,8 @@
 				};
 			}else{
 				that.data = {
-					content 	: that.$content.val()
+					content 	: that.$content.val(),
+					thumb		: that.$el.find('.img-link-popup').attr('href')
 				};
 			}
 
@@ -79,6 +80,7 @@
 				that.$content.val('');
 				that.$content.html('');
 				that.$title.val('');
+				that.$el.find('.img-previewer-container').html('');
 			}
 		});
 	};
