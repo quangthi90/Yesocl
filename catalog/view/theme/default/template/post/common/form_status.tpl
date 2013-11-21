@@ -34,7 +34,7 @@
 	</div>
 	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
 		<div class="y-dlg">
-			<form autocomplete="off" class="form-status full-post" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+			<form autocomplete="off" class="form-status full-post">
 				<div class="dlg-title">
 			        <i class="icon-yes"></i> New post
 			    </div>
@@ -60,20 +60,20 @@
 				    	<div class="control-group">
 				    		<label for="title" class="control-label">Title</label>
 				    		<div class="controls">
-				    			<input class="status-title" placeholder="Your title" type="text" name="title" id="title"
+				    			<input class="post-advance-title" placeholder="Your title" type="text" name="title" id="title"
 				    				style="width: 98%;" />
 				    		</div>
 			    		</div>
 			    		<div class="control-group">
 			    			<label class="control-label">Content</label>
-					    	<div class="y-editor status-content" id="post-adv-editor"></div>
+					    	<div class="y-editor post-advance-content" id="post-adv-editor"></div>
 				    	</div>
 					</div>
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
-		                <button type="submit" class="btn btn-yes btn-status">Post</button>
+		                <button type="submit" class="btn btn-yes btn-post-advance">Post</button>
 		            </div>
 			    </div>		
 			</form>
