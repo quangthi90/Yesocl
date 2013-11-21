@@ -13,7 +13,7 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" class="has-horizontal account-mywall" style="width: 9999px;">
+    <div id="y-main-content" class="has-horizontal post-per-column" style="width: 9999px;">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}
@@ -28,18 +28,16 @@
                 </a>           
             </div>
             <div class="block-content">
-                <div class="column">
+                <div class="column has-new-post">
                     {% set user = users[current_user_id] %}
                     {{ block('post_common_form_status') }}
+                </div>
                 {% for post in posts %}
-                    {% set user = users[post.user_id] %}
-                    {{ block('post_common_post_block') }}
-                    {% if loop.index % 2 == 1 and loop.index != posts|length %}
-                </div>
-                <div class="column">
-                    {% endif %}
+                    <div class="column">
+                        {% set user = users[post.user_id] %}
+                        {{ block('post_common_post_block') }}
+                    </div>
                 {% endfor %}
-                </div>
             </div>
         </div>
         {{ block('post_common_post_comment') }}
