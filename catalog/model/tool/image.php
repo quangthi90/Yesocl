@@ -55,14 +55,14 @@ class ModelToolImage extends Model {
     	}
 	}
 
-	public function getAvatarUser( $_avatar, $_email ){
-		$avatar = $this->resize( $_avatar, 180, 180 );
+	public function getAvatarUser( $_avatar, $_email, $width = 180, $height = 180 ){
+		$avatar = $this->resize( $_avatar, $width, $height, true );
 
 		if ( $avatar ){
 			return $avatar;
 		}
 
-		return $this->getGavatar( $_email, 180 );
+		return $this->getGavatar( $_email, $width );
 	}
 
 	public function isValidImage( $file ) {
@@ -220,6 +220,27 @@ class ModelToolImage extends Model {
             default:
                 $upload->header('HTTP/1.1 405 Method Not Allowed');
         }
+    }
+
+    public function moveFile( $source, $dest ){
+        if ( !is_file($source) ){
+            return false;
+        }
+        
+        $folder_names = explode('/', dirname(str_replace('../', '', $dest)));
+        $path = '';
+        
+        foreach ( $folder_names as $folder_name ) {
+            $path .= $folder_name . '/';
+            if ( !is_dir( $path ) ) {
+                mkdir( $path );
+            }
+        }
+        $return = copy($source, $dest);
+
+        unlink( $source );
+
+        return $return;
     }
 }
 ?>

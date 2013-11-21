@@ -47,14 +47,8 @@ class ControllerPostDetail extends Controller {
 
 		$this->load->model('tool/image');
 
-		if ( $post->getUser() && $post->getUser()->getAvatar() && file_exists(DIR_IMAGE . $post->getUser()->getAvatar()) ){
-			$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
-		}elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
-            $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
-        }else{
-			$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
-		}
-
+		$avatar = $this->model_tool_image->getAvatarUser( $post->getUser()->getAvatar(), $post->getUser()->getPrimaryEmail()->getEmail() );
+		
 		$comment_count = $post->getComments()->count();
 
 		if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
