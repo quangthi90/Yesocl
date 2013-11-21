@@ -1,8 +1,8 @@
 (function($, document, undefined) {
 	var marginPostDefault = 15;
-	var widthPostDefault = 350;
+	var widthPostDefault = 420;
 	function Status( $el ){
-		this.mainContent = $('.account-mywall').first();
+		this.mainContent = $('#y-main-content');
 		this.blockContent = this.mainContent.find('.block-content');
 		this.$el		= $el;
 		this.$title		= $el.find('.status-title')
@@ -57,25 +57,21 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				var $htmlOutput = $.tmpl( $('#post-item-template'), data.post );
-				var $column_first = $('.column').first();
-				var $first_post = $column_first.children('.post_status');
-				var heightDefault = (that.blockContent.height() - marginPostDefault)/2 - 2*marginPostDefault; 	
-				if ( $first_post.length == 0 ){
-					heightDefault = that.blockContent.height() - 100 - marginPostDefault - 2*marginPostDefault;
-					$htmlOutput.height(heightDefault);
-					$column_first.append( $htmlOutput );
-				}else{
-					$htmlOutput.height(heightDefault);
-					$htmlOutput = $htmlOutput.after( $first_post );
-					$htmlOutput = $('<div class="column">').append($htmlOutput);
-					that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
-					$('.column').first().after($htmlOutput );					
-				}
+				var htmlOutput = $.tmpl( $('#post-item-template'), data.post );	
+				var firstColumn = that.blockContent.find('.column:first-child');			
+				var newColumn = $('<div class="column">').append(htmlOutput);
+				newColumn.children('.post').height(firstColumn.height() - 2*(marginPostDefault + 1));
+				newColumn.width(widthPostDefault);
+				newColumn.css({
+					'opacity':'1', 
+					'min-width': widthPostDefault + 'px'
+				});
+				firstColumn.hide().after(newColumn).show(500);
+				that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
+
 				$(document).trigger('POST_BUTTON');
 				$(document).trigger('HORIZONTAL_POST');
 				jQuery(".timeago").timeago();
-
 				that.$content.val('');
 				that.$content.html('');
 				that.$title.val('');
