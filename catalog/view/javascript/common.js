@@ -304,9 +304,7 @@ function getActualLengthOfArray(arr) {
 		this.main = el.find('#y-content');
 		this.mainContent = el.find("#y-main-content");
 		this.goLeftBtn = el.find('#auto-scroll-left');
-		this.goRightBtn = el.find('#auto-scroll-right');
 		this.commentBox = el.find('#comment-box');
-		//this.loaderBg = el.find('#y-loader');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -327,8 +325,11 @@ function getActualLengthOfArray(arr) {
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();
 		var maxView = 2400 - that.main.width();
-		that.goLeftBtn.addClass('disabled');
 		that.main.scroll(function(e) { 
+			if($(this).hasClass('scrolling')) {
+				that.goLeftBtn.fadeOut(10);
+				return;
+			}
 			var x = $(this).scrollLeft();
 	    	var leftOffset = 0;
 	    	var freeBlockFirst = $(this).find(".free-block:first-child");
@@ -336,26 +337,21 @@ function getActualLengthOfArray(arr) {
 	    		leftOffset = freeBlockFirst.width();
 	    	}
 	        if(x > leftOffset){
-	        	that.goLeftBtn.removeClass('disabled');	
+	        	that.goLeftBtn.fadeIn(500);
 	        }
 	        else {
-	            that.goLeftBtn.addClass('disabled');	
-	        }
-	        if(x >= maxScroll) {
-	        	that.goRightBtn.addClass('disabled');	
-	        }else {
-	        	that.goRightBtn.removeClass('disabled');	
+	            that.goLeftBtn.fadeOut(300);
 	        }
 	        //Background move when scroll:	        
     		$(this).css('background-position', parseInt((-1)*x*maxView/maxScroll/10) + 'px 0px');
 	    });
-	    that.goLeftBtn.click(function(){
-	    	if($(this).hasClass('disabled')) return;
-			that.main.animate({scrollLeft: 0}, 1000);
-	    });
-	    that.goRightBtn.click(function() {
-			if($(this).hasClass('disabled')) return;
-			that.main.animate({scrollLeft: maxScroll }, 1000);
+	    that.goLeftBtn.click(function(e){
+	    	e.preventDefault();
+	    	if(that.main.hasClass('scrolling')) return;
+	    	that.main.addClass('scrolling');
+			that.main.animate( { scrollLeft: 0 }, 1000, function(){
+				$(this).removeClass('scrolling');
+			});
 	    });
 
 	    //Demo alert, confirm, prompt, dialog:
@@ -419,15 +415,6 @@ function getActualLengthOfArray(arr) {
 					}
 				});
 	    });
-
-	    //Loader:	    
-		//$(window).load(function(){
-		//	that.loaderBg.fadeOut(100);
-		//});
-		//$('a:not(a[href="#"])').click(function() { 
-		//	that.loaderBg.fadeIn(100);
-		//});
-
 	    //Popup link of image:
 	    $('.img-link-popup').magnificPopup({type:'image'});
 	    $('.link-popup').magnificPopup({
