@@ -970,42 +970,42 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post .post_header .post_title a:hover{
   color: #009B77;
-}
-        
+}     
 .post .post_body {
-    overflow: hidden;
-    white-space: normal;
-    padding: 5px 10px 0px 10px;
-    font-size: 15px;
-    text-align: justify;
-    text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: normal;
+  padding: 5px 10px 0px 10px;
+  font-size: 15px;
+  text-align: justify;
+  text-overflow: ellipsis;
+}
+.post .post_body .post_text_raw {
+  word-break: break-word;
 }
 .post .post_body .post_image {
-    float: left;
-    margin: 0px 10px 5px 0px;
-    width: 40%;
-    height: auto;    
+  float: left;
+  margin: 0px 10px 5px 0px;
+  width: 40%;
+  height: auto;    
 }
-
 .post .post_body .post_image img {
   height: 100%;
   width: 100%;
   border: none;
 }
-
 .post_remove {
-    position: absolute;
-    right: 2px;
-    top: 2px;
-    display: none;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+  display: none;
 }
 .post_remove a {
-    display: block;
-    padding: 3px 7px;
-    background-color: #fff;      
+  display: block;
+  padding: 3px 7px;
+  background-color: #fff;      
 }
 .post_remove a i {
-    font-size: 16px;    
+  font-size: 16px;    
 }
 .post:hover .post_remove {
   display: block;
