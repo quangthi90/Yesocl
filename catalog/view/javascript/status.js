@@ -1,7 +1,8 @@
 (function($, document, undefined) {
 	var marginPostDefault = 15;
 	var widthPostDefault = 420;
-	function Status( $el ){
+	function Status( $el ) {
+		this.rootContent = $('#y-content');
 		this.mainContent = $('#y-main-content');
 		this.blockContent = this.mainContent.find('.block-content');
 		this.$el		= $el;
@@ -68,6 +69,7 @@
 				});
 				firstColumn.hide().after(newColumn).show(500);
 				that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
+				that.rootContent.getNiceScroll().resize();
 
 				$(document).trigger('POST_BUTTON');
 				$(document).trigger('HORIZONTAL_POST');
