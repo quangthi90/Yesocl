@@ -515,8 +515,9 @@
                 //Scroll to last post which have just been added
                 $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","last");
 
-                var comment_count = comments.length;
-
+                var comment_count = getActualLengthOfArray(comments);
+                console.log(comments);
+                console.log(comment_count);
                 that.$el.parent().find('.counter').html( comment_count );
                 
                 $comment_btn.parent().find('d').html( comment_count );
