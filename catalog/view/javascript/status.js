@@ -72,6 +72,7 @@
 				that.rootContent.getNiceScroll().resize();
 
 				$(document).trigger('POST_BUTTON');
+				$(document).trigger('POST_SHOW_LIKED_BUTTON');
 				$(document).trigger('HORIZONTAL_POST');
 				jQuery(".timeago").timeago();
 				that.$content.val('');
