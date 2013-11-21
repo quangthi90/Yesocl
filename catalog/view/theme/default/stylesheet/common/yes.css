@@ -873,7 +873,11 @@ a.btn-notification:hover .notification-item-name > i {
     column-break-inside: avoid;
     white-space: nowrap ;
 }
-.block-content-item {  
+.block-content-item {
+  opacity: 0;
+  -moz-transition: opacity 0.3s ease-in-out;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 #feed-end {
     visibility: visible;
@@ -1803,6 +1807,9 @@ div[data-role="editor-toolbar"] {
 .user-item .user-item-avatar{
   height: 50px;
   width: 50px;  
+  border-radius: 50%;  
+  display: block;
+  overflow: hidden; 
 }
 .user-item .user-item-overview {
   margin-left: 10px;

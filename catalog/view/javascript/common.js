@@ -602,10 +602,12 @@ function getActualLengthOfArray(arr) {
 			var numberRow = Math.floor(heightBlockContent/(heightFriendBlockItem + marginFriendBlockItem));
 			var listBlockItem = this.root.find('.block-content-item');
 			if(listBlockItem.length == 0) {
-				console.log('No friend found !');
+				this.root.css('min-width', '500px');
+			}else {
+				var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
+				this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+				listBlockItem.css('opacity','1');
 			}
-			var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
-			this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
 		}
 		else{				
 		}
