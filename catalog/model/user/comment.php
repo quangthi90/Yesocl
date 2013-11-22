@@ -52,7 +52,7 @@ class ModelUserComment extends Model {
 	}
 
 	public function getComment( $data = array() ){
-		$if ( empty($data['comment_id']) ){
+		if ( empty($data['comment_id']) ){
 			return array();
 		}
 

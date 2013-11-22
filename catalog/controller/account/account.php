@@ -24,6 +24,7 @@ class ControllerAccountAccount extends Controller {
 
 		$this->load->model('user/user');
 		$this->load->model('tool/image');
+		$this->load->model('friend/friend');
 
 		$user = $this->model_user_user->getUserFull( $this->request->get );
 
@@ -33,14 +34,10 @@ class ControllerAccountAccount extends Controller {
 
 		$user_temp = $user->formatToCache();
 
-		if ( !empty($user_temp['avatar']) ){
-			$user_temp['avatar'] = $this->model_tool_image->resize( $user_temp['avatar'], 180, 180 );
-		}elseif ( !empty($user_temp['email']) ){
-            $user_temp['avatar'] = $this->model_tool_image->getGavatar( $user_temp['email'], 180 );
-        }else{
-        	$user_temp['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-		}
+		$user_temp['avatar'] = $this->model_tool_image->getAvatarUser( $user_temp['avatar'], $user_temp['email'] );
 
+		$user_temp['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $user );
+		// var_dump($user_temp['fr_status']); exit;
 		$this->data['users'] = array( $user_temp['id'] => $user_temp );
 
 		$this->data['current_user_id'] = $user->getId();
@@ -74,13 +71,7 @@ class ControllerAccountAccount extends Controller {
 			if ( !array_key_exists($user->getId(), $this->data['users']) ){
 				$user = $user->formatToCache();
 
-				if ( !empty($user['avatar']) ){
-					$user['avatar'] = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
-				}elseif ( !empty($user['email']) ){
-		            $user['avatar'] = $this->model_tool_image->getGavatar( $user['email'], 180 );
-		        }else{
-		        	$user['avatar'] = $this->model_tool_image->resize( 'no_user_avatar.png', 180, 180 );
-				}
+				$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
 
 				$this->data['users'][$user['id']] = $user;
 			}
@@ -88,7 +79,7 @@ class ControllerAccountAccount extends Controller {
 			$post = $post->formatToCache();
 
 			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
 			}else{
 				$image = null;
 			}
