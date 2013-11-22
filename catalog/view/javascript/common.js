@@ -305,6 +305,8 @@ function getActualLengthOfArray(arr) {
 		this.mainContent = el.find("#y-main-content");
 		this.goLeftBtn = el.find('#auto-scroll-left');
 		this.commentBox = el.find('#comment-box');
+		this.linkPopupCommon = el.find('.link-popup');
+		this.linkPopupImage = el.find('.img-link-popup');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -321,6 +323,17 @@ function getActualLengthOfArray(arr) {
 				$(this).tooltip({ container: 'body' });
 			}
 		})
+
+		//Popup link:
+		if(that.linkPopupImage.length > 0) {
+			that.linkPopupImage.magnificPopup({type:'image'});	
+		}
+		that.linkPopupCommon.magnificPopup({
+	    	type:'inline',
+	    	midClick: true,
+	    	removalDelay: 300,
+			mainClass: 'mfp-fade'
+	    });
 
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();
@@ -414,15 +427,7 @@ function getActualLengthOfArray(arr) {
 						}
 					}
 				});
-	    });
-	    //Popup link of image:
-	    $('.img-link-popup').magnificPopup({type:'image'});
-	    $('.link-popup').magnificPopup({
-	    	type:'inline',
-	    	midClick: true,
-	    	removalDelay: 300,
-			mainClass: 'mfp-fade'
-	    });
+	    });	    
 
 	    //Comment box:
 	    if(that.commentBox.length > 0) {
