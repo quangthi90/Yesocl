@@ -135,7 +135,9 @@
         }
 
         //Adjust size:
-        setTimeout(that.initializeSize(), 1000);
+        setTimeout(function() { 
+            that.initializeSize(); 
+        }, 1000);
     }
     DetailSection.prototype.initializeSize = function() {
         var that = this;
