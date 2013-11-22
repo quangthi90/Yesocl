@@ -18,7 +18,7 @@
             dropZone: that.dropZone,
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 5000000, // 5 MB
+            maxFileSize: 500000, // 5 MB
             disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
             previewThumbnail: false,
             previewMaxWidth: 430,
@@ -91,6 +91,7 @@
             });
             that.resultContainer.val(that.listImgUrl);
         }).on('fileuploadfail', function (e, data) {
+            console.log(data);
             $.each(data.files, function (index, file) {
                 var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> File upload failed');            
                 $(data.context[index]).append(error);

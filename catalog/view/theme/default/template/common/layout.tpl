@@ -29,14 +29,6 @@
 		<div id="overlay"></div>
 		
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
-		<!--
-		<div id="y-loader">
-			<div id="y-loader-bg"></div>
-			<div id="spinner-wrapper">
-				<img src="{{ asset_img('template/loader-white.gif') }}">
-			</div>
-		</div>
-		-->
 		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}">
 		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
 		  <div class="suggestion-container"></div>
