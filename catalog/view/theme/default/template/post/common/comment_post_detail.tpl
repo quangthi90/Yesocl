@@ -14,7 +14,9 @@
 					<a href="#" class="btn-restore" title="Restore" style="display: none;">
 						<i class="icon-arrow-right"></i>
 					</a>
-					<a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
+					<a href="#" class="btn-close" title="Hide">
+						<i class="icon-remove"></i>
+					</a>
 				</div>				
 			</div>
 			<div class="y-box-content comment-body">
