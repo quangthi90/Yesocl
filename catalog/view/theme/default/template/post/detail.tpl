@@ -1,12 +1,12 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/post_comment_in_page.tpl' %}
+{% use '@template/default/template/post/common/comment_post_detail.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
-    {{ block('post_common_post_comment_in_page_style') }}
+    {{ block('post_common_comment_post_detail_style') }}
 {% endblock %}
 
 {% block body %}
@@ -66,7 +66,6 @@
 		<div id="detail-content">
 			<div id="post-content">
 				{{ post.content|raw }}
-				{{ post.content|raw }}
 			</div>
 			<div id="detail-scroll">
 				<a class="btn-link-round fl" id="detail-first" href="#" style="display: none;">
@@ -76,7 +75,8 @@
 					<i class="icon-arrow-right"></i>
 				</a>
 			</div>
-			{{ block('post_common_post_comment_in_page') }}
+			{{ block('post_common_comment_post_detail') }}
+			{{ block('post_common_comment_post_detail_template') }}
 		</div>
 	</div>
 </div>
@@ -84,5 +84,5 @@
 
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
-{{ block('post_common_post_comment_in_page_javascript') }}
+{{ block('post_common_comment_post_detail_javascript') }}
 {% endblock %}
