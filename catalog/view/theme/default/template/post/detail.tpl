@@ -66,7 +66,6 @@
 		<div id="detail-content">
 			<div id="post-content">
 				{{ post.content|raw }}
-				{{ post.content|raw }}
 			</div>
 			<div id="detail-scroll">
 				<a class="btn-link-round fl" id="detail-first" href="#" style="display: none;">
