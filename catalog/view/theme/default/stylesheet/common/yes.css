@@ -984,7 +984,12 @@ a.btn-notification:hover .notification-item-name > i {
   text-overflow: ellipsis;
 }
 .post .post_body .post_text_raw {
+  -ms-word-break: break-all;
+  word-break: break-all;
   word-break: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }
 .post .post_body .post_image {
   float: left;
