@@ -14,9 +14,7 @@
 					<a href="#" class="btn-restore" title="Restore" style="display: none;">
 						<i class="icon-arrow-right"></i>
 					</a>
-					<a href="#" class="btn-close" title="Hide">
-						<i class="icon-remove"></i>
-					</a>
+					<a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
 				</div>				
 			</div>
 			<div class="y-box-content comment-body">
@@ -132,4 +130,9 @@
 
 {% block post_common_comment_post_detail_javascript %}
 <script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
+<script type="text/javascript">
+$(function(){
+	
+});
+</script>
 {% endblock %}
