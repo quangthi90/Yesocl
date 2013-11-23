@@ -1128,7 +1128,7 @@
                 }
             }
         };
-        jQuery.fn.typeahead = function(method) {
+        jQuery.fn.typeaheadCustom = function(method) {
             if (methods[method]) {
                 return methods[method].apply(this, [].slice.call(arguments, 1));
             } else {
