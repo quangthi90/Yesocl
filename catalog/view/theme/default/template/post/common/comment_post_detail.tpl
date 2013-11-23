@@ -6,7 +6,7 @@
 	<div id="comment-wrapper" class="y-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				Comment box (<span class="counter">{{ comments|length }}</span>)
+				Comment box (<span class="counter"><d>{{ comments|length }}<d></span>)
 				<div class="y-box-expand">
 					<a href="#" class="btn-expand" title="Expand">
 						<i class="icon-arrow-left"></i>
@@ -29,14 +29,14 @@
 			        </div>
 			        <div class="comment-meta">
 			            <div class="comment-info" data-url="{{ comment.href_like }}"
-			                data-comment-liked="true" data-id="{{ comment.id }}" data-like-count="{{ comment.like_count }}">
+			                data-comment-liked="{{ comment.is_liked }}" data-id="{{ comment.id }}" data-like-count="{{ comment.like_count }}">
 			                <a href="{{ comment.href_user }}">{{ comment.username }}</a> 
 			                <span class="comment-time">
 			                    <d class="timeago" title="{{ comment.created }}"></d>
 			                </span>
 			                <span class="like-container">
-			                	<a href="#" class="like-comment{% if comment.is_liked == true %} hidden{% endif %}"><i class="icon-thumbs-up medium-icon"></i> Like </a>
-			                	<strong class="liked-label{% if comment.is_liked == false %} hidden{% endif %}">Liked </strong>
+			                	<a href="#" class="like-comment{% if comment.is_liked == 1 %} hidden{% endif %}"><i class="icon-thumbs-up medium-icon"></i> Like </a>
+			                	<strong class="liked-label{% if comment.is_liked == 0 %} hidden{% endif %}">Liked </strong>
 			                	&nbsp;(<a class="like-count"
 			                    data-url="{{ comment.href_liked_user }}"
 			                    href="#">{{ comment.like_count }}</a>) </span>
@@ -51,7 +51,7 @@
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action"><i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li class="un-like-btn{% if comment.is_liked == false %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
+			                    <li class="un-like-btn{% if comment.is_liked == 0 %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
 			                </ul>
 			            </div>
 			        </div>
@@ -134,7 +134,7 @@
 <script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
 <script type="text/javascript">
 $(function(){
-	
+
 });
 </script>
 {% endblock %}

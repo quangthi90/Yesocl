@@ -73,7 +73,7 @@ class ControllerPostDetail extends Controller {
 			'user_slug'		=> $post->getUser()->getSlug()
 		);
 
-		$this->data['comments'] = $this->model_tool_object->formatListCommentsOfPost( $post->getComments()->toArray() );
+		$this->data['comments'] = $this->model_tool_object->formatListCommentsOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
 		
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['is_user'] = $is_user;

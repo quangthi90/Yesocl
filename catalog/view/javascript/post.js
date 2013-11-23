@@ -549,6 +549,10 @@
     };
 
     $(function(){
+        $('.comment-form').each(function(){
+            new AddComment($(this));
+        });
+        
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-form').each(function(){
                 new AddComment($(this));
@@ -636,10 +640,18 @@
                 var $curr_post = $('.open-comment.disabled');
                 var comments = $curr_post.data('comments');
                 
+                if ( comments == undefined ){
+                    comments = new Array();
+                }
+                if ( comments[that.comment_id] == undefined ){
+                    comments[that.comment_id] = new Array();
+                }
+                
                 that.$el.data('like-count', data.like_count);
                 comments[that.comment_id].is_liked = that.isLiked;
                 comments[that.comment_id].like_count = data.like_count;
                 comments[that.comment_id].users = null;
+                $curr_post.data('comments', comments);
             }
         });
     };
@@ -658,6 +670,10 @@
     };
 
     $(function(){
+        $('.comment-item .comment-info').each(function(){
+            new LikeComment($(this));
+        });
+
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new LikeComment($(this));
@@ -709,6 +725,10 @@
 
         if ( comments == undefined ){
             comments = new Array();
+        }
+
+        if ( comments[this.$el.data('id')] == undefined ){
+            comments[this.$el.data('id')] = new Array();
         }
         
         if ( comments[this.$el.data('id')].users == undefined ){
@@ -792,6 +812,10 @@
     };
 
     $(function(){
+        $('.comment-item .comment-info').each(function(){
+            new ShowCommentUsersLiked($(this));
+        });
+
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new ShowCommentUsersLiked($(this));

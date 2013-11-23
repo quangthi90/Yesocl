@@ -8,7 +8,7 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Comment formated
 	 */
-	public function formatListCommentsOfPost( $base_comment ){
+	public function formatListCommentsOfPost( $base_comment, $post_slug, $post_type ){
 		$this->load->model('user/user');
         $this->load->model('tool/image');
 
@@ -48,13 +48,13 @@ class ModelToolObject extends Model
 	                'user_slug' => $user['slug']
 	            ));
 	            $comment['href_like'] = $this->extension->path('CommentLike', array(
-	                'post_slug' => $data['post_slug'],
-	                'post_type' => $data['post_type'],
+	                'post_slug' => $post_slug,
+	                'post_type' => $post_type,
 	                'comment_id' => $comment['id']
 	            ));
 	            $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-	                'post_slug' => $data['post_slug'],
-	                'post_type' => $data['post_type'],
+	                'post_slug' => $post_slug,
+	                'post_type' => $post_type,
 	                'comment_id' => $comment['id']
 	            ));
 	            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
@@ -67,9 +67,9 @@ class ModelToolObject extends Model
 	    }
         
         if ( in_array($this->customer->getId(), $base_comment->getLikerIds()) ){
-            $liked = true;
+            $liked = 1;
         }else{
-            $liked = false;
+            $liked = 0;
         }
 
         $comment = $base_comment->formatToCache();
@@ -88,13 +88,13 @@ class ModelToolObject extends Model
             'user_slug' => $user['slug']
         ));
         $comment['href_like'] = $this->extension->path('CommentLike', array(
-            'post_slug' => $data['post_slug'],
-            'post_type' => $data['post_type'],
+            'post_slug' => $post_slug,
+            'post_type' => $post_type,
             'comment_id' => $comment['id']
         ));
         $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-            'post_slug' => $data['post_slug'],
-            'post_type' => $data['post_type'],
+            'post_slug' => $post_slug,
+            'post_type' => $post_type,
             'comment_id' => $comment['id']
         ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );

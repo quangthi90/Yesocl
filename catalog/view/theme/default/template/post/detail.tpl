@@ -52,7 +52,7 @@
 							</span>
 						</li>
 						<li style="display: none;" class="toggle-comment">
-							<a href="#" title="Open comment box">
+							<a class="open-comment disabled" href="#" title="Open comment box">
 								<i class="icon-comments-alt medium-icon"></i>
 							</a>
 							<span class="number">7</span>

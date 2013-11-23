@@ -6,7 +6,7 @@
                     <i class="icon-caret-down"></i>
                </a>
                <ul class="dropdown-menu">
-               		<li class="unlike-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
+               		<li class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
                         <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
                     </li>
                     <!--li>
