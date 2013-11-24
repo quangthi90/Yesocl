@@ -216,7 +216,7 @@ class ControllerFriendRequest extends Controller {
 
 	public function unFriend(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
-			$this->load->model('user/user');
+			$this->load->model('friend/friend');
 
            	if ( empty($this->request->get['user_slug']) ){
            		return $this->response->setOutput(json_encode(array(
@@ -227,7 +227,7 @@ class ControllerFriendRequest extends Controller {
 
            	$user_slug = $this->request->get['user_slug'];
 
-           	$result = $this->model_user_user->unFriend( 
+           	$result = $this->model_friend_friend->unFriend( 
            		array('slug' => $user_slug), // User 1
            		array('id' => $this->customer->getId()) // User 2
            	);

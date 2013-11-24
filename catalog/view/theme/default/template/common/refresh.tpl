@@ -12,16 +12,24 @@
 
 {% block body %}
 <div id="y-content" class="no-header-fixed">
-    <div id="y-main-content" class="has-horizontal post-category">
-        <div class="column">
-        {% for post in posts %}
-            {% set user = users[post.user_id] %}
-            {{ block('post_common_post_block') }}
-            {% if loop.index % 2 == 1 and loop.index != posts|length %}
-        </div>
-        <div class="column">
-            {% endif %}
-        {% endfor %}
+    <div id="y-main-content" class="has-horizontal post-per-column">
+        <div class="feed-block block-what-new">
+            <div class="block-header">
+                <a class="block-title fl" href="#">
+                    What's new                    
+                </a>  
+                <a class="block-seemore fl" href="#"> 
+                    <i class="icon-angle-right"></i>
+                </a>           
+            </div>
+            <div class="block-content">
+                {% for post in posts %}
+                    <div class="column">
+                        {% set user = users[post.user_id] %}
+                        {{ block('post_common_post_block') }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

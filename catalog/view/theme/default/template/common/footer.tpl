@@ -11,17 +11,10 @@
           </ul>
         </div>
     </div>
-    <div id="yes-footer-bar" style="display: none;">
-        <div class="footer-toolbar-ctrl" id="auto-scroll-left">
-          <a href="#" title="Go First">
-            <i class="icon-fast-backward"></i>
-          </a>
-        </div>
-        <div class="footer-toolbar-ctrl" id="auto-scroll-right">
-          <a href="#" title="Go Last">
-            <i class="icon-fast-forward"></i>
-          </a>
-        </div>
+    <div id="scroll-footer">
+        <a href="#" class="btn-link-circle medium" id="auto-scroll-left" title="Scroll Left" style="display: none;">
+          <i class="icon-arrow-left"></i>
+        </a>
     </div>
     <div id="yes-info">
         <div class="copyright">

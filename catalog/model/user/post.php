@@ -51,6 +51,19 @@ class ModelUserPost extends Model {
 			$post->setTitle( $data['title'] );
 		}
 
+		if ( !empty($data['image_link']) && !empty($data['extension']) && is_file($data['image_link']) ){
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $post->getSlug() . '/' . $avatar_name . '.' . $data['extension'];
+			$dest = DIR_IMAGE . $path;
+			
+			$this->load->model('tool/image');
+			if ( $this->model_tool_image->moveFile($data['image_link'], $dest) ){
+				$post->setThumb( $path );
+			}
+		}
+
 		$posts = $user->getPostData();
 
 		if ( !$posts ){

@@ -37,18 +37,11 @@ class ControllerBranchCategory extends Controller {
 		foreach ($posts as $i => $post) {
 			$post = $post->formatToCache();
 
-			// avatar
-			/*if ( isset($post['user']) && isset($post['user']['avatar']) ){
-				$avatar = $this->model_tool_image->resize( $post['user']['avatar'], 180, 180 );
-			}elseif ( isset($post['user']) && isset($post['user']['email']) ){
-                $avatar = $this->model_tool_image->getGavatar( $post['user']['email'], 180 );
-            }else{
-				$avatar = $this->model_tool_image->getGavatar( $post['email'], 180 );
-			}*/
+			$avatar = $this->model_tool_image->getAvatarUser( $post['user']['avatar'], $post['user']['email'] );
 
 			// thumb
 			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
 			}else{
 				$image = null;
 			}

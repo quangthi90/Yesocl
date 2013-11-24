@@ -184,9 +184,13 @@ function getActualLengthOfArray(arr) {
 		$(document).keypress(function(e){ 			
 			//Check if any input is focused, if so, don't continue:
 			var isFocus = false;		
-			$('input,textarea').each(function(){
-				if ($(this).is(":focus")) isFocus = true;
-			});
+			if($(this).find('.mfp-ready').length > 0) {
+				isFocus = true;
+			}else {
+				$('input,textarea').each(function(){
+					if ($(this).is(":focus")) isFocus = true;
+				});
+			}			
 			if (isFocus) return;
 			if((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122)) {
 				that.openSearchPanel();	
@@ -300,9 +304,9 @@ function getActualLengthOfArray(arr) {
 		this.main = el.find('#y-content');
 		this.mainContent = el.find("#y-main-content");
 		this.goLeftBtn = el.find('#auto-scroll-left');
-		this.goRightBtn = el.find('#auto-scroll-right');
 		this.commentBox = el.find('#comment-box');
-		//this.loaderBg = el.find('#y-loader');
+		this.linkPopupCommon = el.find('.link-popup');
+		this.linkPopupImage = el.find('.img-link-popup');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -320,11 +324,25 @@ function getActualLengthOfArray(arr) {
 			}
 		})
 
+		//Popup link:
+		if(that.linkPopupImage.length > 0) {
+			that.linkPopupImage.magnificPopup({type:'image'});	
+		}
+		that.linkPopupCommon.magnificPopup({
+	    	type:'inline',
+	    	midClick: true,
+	    	removalDelay: 300,
+			mainClass: 'mfp-fade'
+	    });
+
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();
 		var maxView = 2400 - that.main.width();
-		that.goLeftBtn.addClass('disabled');
 		that.main.scroll(function(e) { 
+			if($(this).hasClass('scrolling')) {
+				that.goLeftBtn.fadeOut(10);
+				return;
+			}
 			var x = $(this).scrollLeft();
 	    	var leftOffset = 0;
 	    	var freeBlockFirst = $(this).find(".free-block:first-child");
@@ -332,26 +350,21 @@ function getActualLengthOfArray(arr) {
 	    		leftOffset = freeBlockFirst.width();
 	    	}
 	        if(x > leftOffset){
-	        	that.goLeftBtn.removeClass('disabled');	
+	        	that.goLeftBtn.fadeIn(500);
 	        }
 	        else {
-	            that.goLeftBtn.addClass('disabled');	
-	        }
-	        if(x >= maxScroll) {
-	        	that.goRightBtn.addClass('disabled');	
-	        }else {
-	        	that.goRightBtn.removeClass('disabled');	
+	            that.goLeftBtn.fadeOut(300);
 	        }
 	        //Background move when scroll:	        
     		$(this).css('background-position', parseInt((-1)*x*maxView/maxScroll/10) + 'px 0px');
 	    });
-	    that.goLeftBtn.click(function(){
-	    	if($(this).hasClass('disabled')) return;
-			that.main.animate({scrollLeft: 0}, 1000);
-	    });
-	    that.goRightBtn.click(function() {
-			if($(this).hasClass('disabled')) return;
-			that.main.animate({scrollLeft: maxScroll }, 1000);
+	    that.goLeftBtn.click(function(e){
+	    	e.preventDefault();
+	    	if(that.main.hasClass('scrolling')) return;
+	    	that.main.addClass('scrolling');
+			that.main.animate( { scrollLeft: 0 }, 1000, function(){
+				$(this).removeClass('scrolling');
+			});
 	    });
 
 	    //Demo alert, confirm, prompt, dialog:
@@ -414,24 +427,7 @@ function getActualLengthOfArray(arr) {
 						}
 					}
 				});
-	    });
-
-	    //Loader:	    
-		//$(window).load(function(){
-		//	that.loaderBg.fadeOut(100);
-		//});
-		//$('a:not(a[href="#"])').click(function() { 
-		//	that.loaderBg.fadeIn(100);
-		//});
-
-	    //Popup link of image:
-	    $('.img-link-popup').magnificPopup({type:'image'});
-	    $('.link-popup').magnificPopup({
-	    	type:'inline',
-	    	midClick: true,
-	    	removalDelay: 300,
-			mainClass: 'mfp-fade'
-	    });
+	    });	    
 
 	    //Comment box:
 	    if(that.commentBox.length > 0) {
@@ -481,15 +477,16 @@ function getActualLengthOfArray(arr) {
 	Custom List Post
 	*/
 	var marginPost = 5;
-	var marginPostOnWall = 15;
+	var marginPostPerColumn = 15;
 	var marginBlock = 50;
-	var minPostEditorWidth = 450;
-	var minPostStatusWidth = 350;
+	var minFirstColumn = 450;
+	var minPostStatusWidth = 420;
 	var marginFriendBlockItem = 10;
 	var widthFriendBlockItem = 320;
 	var heightFriendBlockItem = 85;
-	var df_INVIDUAL_BLOCK = 'has-block';
-	var df_ACCOUNT_MYWALL = 'account-mywall';
+	var maxHeightBlock = 450;
+	var df_POST_HAS_BLOCK = 'post-has-block';
+	var df_POST_PER_COLUMN = 'post-per-column';
 	var df_CATEGORY_SINGLE = 'post-category';
 	var df_FRIEND_ACCOUNT = 'account-friend';
 
@@ -505,7 +502,7 @@ function getActualLengthOfArray(arr) {
 		}
 	}
 	HorizontalBlock.prototype.initializeBlock = function() {
-		if(this.root.hasClass(df_INVIDUAL_BLOCK)) {
+		if(this.root.hasClass(df_POST_HAS_BLOCK)) {
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
@@ -530,27 +527,46 @@ function getActualLengthOfArray(arr) {
 				var heightUpdated = $(this).height();
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
+			this.columns.css('opacity', '1');
 		}
-		else if(this.root.hasClass(df_ACCOUNT_MYWALL)) {
+		else if(this.root.hasClass(df_POST_PER_COLUMN)) {
 			this.blocks = this.root.find('.feed-block');	
 			this.freeBlock = this.root.find('.free-block');
-			var heightBlockContent = this.heightMain - 42;
 			var totalWidth = 0;
+			var heightBlockContent = this.heightMain - 42;
+			if(heightBlockContent > maxHeightBlock) {
+				var extraPadding = Math.floor((this.heightMain - maxHeightBlock)/2);
+				this.rootContent.css({
+					'padding-top': extraPadding + 'px',
+					'padding-bottom': extraPadding + 'px'
+				});
+				this.heightMain -= 2*(extraPadding);
+				heightBlockContent = maxHeightBlock;
+			}			
 			this.blocks.each(function(index) {			
 				$(this).find('.block-content').height(heightBlockContent);
-				var firstColumn = $(this).find('.column:first-child');				
-				firstColumn.width(minPostEditorWidth);				
-				firstColumn.find('.post').height(heightBlockContent - 100 - marginPostOnWall - 2*marginPostOnWall);
-				var columnPerBlock = $(this).find('.column').not(':first-child');
-				var totalWidthOfColumns = firstColumn.outerWidth() + marginPostOnWall;
+				var columnPerBlock = $(this).find('.column');
+				var firstColumn = $(this).find('.column:first-child');
+				var totalWidthOfColumns = 0;
+				if(firstColumn.length > 0 && firstColumn.hasClass('has-new-post')){
+					firstColumn.width(minFirstColumn);	
+					firstColumn.css({ 
+						'opacity':'1',
+						'min-width': minFirstColumn + 'px',
+						'margin-right': marginPostPerColumn + 'px'
+					});
+					totalWidthOfColumns = firstColumn.outerWidth() + marginPostPerColumn;
+					columnPerBlock = $(this).find('.column').not(':first-child');
+				}
 				columnPerBlock.each(function() {
-					$(this).children('.post').height(Math.floor((heightBlockContent - marginPostOnWall)/2 - 2*(marginPostOnWall)));
-					$(this).width(minPostStatusWidth);			
-					totalWidthOfColumns += $(this).outerWidth() + marginPostOnWall;
+					$(this).children('.post').height(heightBlockContent - 2*(marginPostPerColumn + 1));
+					$(this).width(minPostStatusWidth);
+					$(this).css({
+						'opacity':'1', 
+						'min-width': minPostStatusWidth + 'px'
+					});
+					totalWidthOfColumns += $(this).outerWidth() + marginPostPerColumn;
 				});
-				firstColumn.css('min-width', minPostEditorWidth + 'px');
-				columnPerBlock.css('min-width', minPostStatusWidth + 'px');	
-				firstColumn.css('margin-right', marginPostOnWall + 'px');
 				totalWidth += totalWidthOfColumns;
 			});
 			this.freeBlock.css('margin-right', marginBlock);
@@ -583,6 +599,7 @@ function getActualLengthOfArray(arr) {
 				var heightUpdated = $(this).height();
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
+			this.columns.css('opacity', '1');
 		}
 		else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
 			var heightBlockContent = this.heightMain - 42;
@@ -590,10 +607,12 @@ function getActualLengthOfArray(arr) {
 			var numberRow = Math.floor(heightBlockContent/(heightFriendBlockItem + marginFriendBlockItem));
 			var listBlockItem = this.root.find('.block-content-item');
 			if(listBlockItem.length == 0) {
-				console.log('No friend found !');
+				this.root.css('min-width', '500px');
+			}else {
+				var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
+				this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+				listBlockItem.css('opacity','1');
 			}
-			var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
-			this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
 		}
 		else{				
 		}

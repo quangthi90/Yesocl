@@ -46,7 +46,7 @@ class ControllerCommonHome extends Controller {
 
 				// thumb
 				if ( isset($post['thumb']) && !empty($post['thumb']) ){
-					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250 );
+					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
 				}else{
 					$image = null;
 				}

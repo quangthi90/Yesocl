@@ -1,6 +1,6 @@
 <?php
 class ModelToolImage extends Model {
-	public function resize($filename, $width, $height) {
+	public function resize($filename, $width, $height, $scale = false) {
 		if (!file_exists(DIR_IMAGE . $filename) || !is_file(DIR_IMAGE . $filename)) {
 			return;
 		} 
@@ -25,7 +25,11 @@ class ModelToolImage extends Model {
 			}
 			
 			$image = new Image(DIR_IMAGE . $old_image);
-			$image->resize($width, $height);
+			if ( $scale == false ){
+				$image->resize($width, $height);
+			}else{
+				$image->scale($width, $height);
+			}
 			$image->save(DIR_IMAGE . $new_image);
 		}
 		
@@ -51,21 +55,24 @@ class ModelToolImage extends Model {
     	}
 	}
 
-	public function isValidImage( $file ) {
-		$allowedExts = array("gif", "jpeg", "jpg", "png");
-		$extension = end(explode(".", $file["name"]));
+	public function getAvatarUser( $_avatar, $_email, $width = 180, $height = 180 ){
+		$avatar = $this->resize( $_avatar, $width, $height, true );
 
-		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
-  			if ($file["error"] > 0) {
-    			return false;
-    		}
-  			else {
-	    		return true;
-    		}
+		if ( $avatar ){
+			return $avatar;
+		}
+
+		return $this->getGavatar( $_email, $width );
+	}
+
+	public function isValidImage( $file ) {
+		$allowedType = array("image/gif", "image/jpeg", "image/jpg", "image/png");
+		
+		if ( $file["size"] < 500000 && in_array($file["type"], $allowedType) && !$file['error'] ) {
+	    	return true;
   		}
-		else {
-  			return false;
-  		}
+
+  		return false;
 	}
 
 	public function uploadImage( $folder, $filename, $thumb ) {
@@ -100,14 +107,140 @@ class ModelToolImage extends Model {
 		}
 	}
 
-	public function getAvatarUser( $_avatar, $_email ){
-		$avatar = $this->resize( $_avatar, 180, 180 );
+    public function upload( $path, $name, $param_name ) {
+        //Option for upload:
+    	$options = array(
+            'script_url' => HTTP_SERVER,
+            'upload_dir' => DIR_IMAGE.'/data/upload/',
+            'upload_url' => HTTP_IMAGE . $path,
+            'user_dirs' => false,
+            'mkdir_mode' => 0755,
+            'param_name' => $param_name,
+            // Set the following option to 'POST', if your server does not support
+            // DELETE requests. This is a parameter sent to the client:
+            'delete_type' => 'DELETE',
+            'access_control_allow_origin' => '*',
+            'access_control_allow_credentials' => false,
+            'access_control_allow_methods' => array(
+                'OPTIONS',
+                'HEAD',
+                'GET',
+                'POST',
+                'PUT',
+                'PATCH',
+                'DELETE'
+            ),
+            'access_control_allow_headers' => array(
+                'Content-Type',
+                'Content-Range',
+                'Content-Disposition'
+            ),
+            // Enable to provide file downloads via GET requests to the PHP script:
+            //     1. Set to 1 to download files via readfile method through PHP
+            //     2. Set to 2 to send a X-Sendfile header for lighttpd/Apache
+            //     3. Set to 3 to send a X-Accel-Redirect header for nginx
+            // If set to 2 or 3, adjust the upload_url option to the base path of
+            // the redirect parameter, e.g. '/files/'.
+            'download_via_php' => false,
+            // Read files in chunks to avoid memory limits when download_via_php
+            // is enabled, set to 0 to disable chunked reading of files:
+            'readfile_chunk_size' => 10 * 1024 * 1024, // 10 MiB
+            // Defines which files can be displayed inline when downloaded:
+            'inline_file_types' => '/\.(gif|jpe?g|png)$/i',
+            // Defines which files (based on their names) are accepted for upload:
+            'accept_file_types' => '/.+$/i',
+            // The php.ini settings upload_max_filesize and post_max_size
+            // take precedence over the following max_file_size setting:
+            'max_file_size' => null,
+            'min_file_size' => 1,
+            // The maximum number of files for the upload directory:
+            'max_number_of_files' => null,
+            // Image resolution restrictions:
+            'max_width' => null,
+            'max_height' => null,
+            'min_width' => 1,
+            'min_height' => 1,
+            // Set the following option to false to enable resumable uploads:
+            'discard_aborted_uploads' => true,
+            // Set to false to disable rotating images based on EXIF meta data:
+            'orient_image' => true,
+            'image_versions' => array(
+                // Uncomment the following version to restrict the size of
+                // uploaded images:
+                /*
+                '' => array(
+                    'max_width' => 1920,
+                    'max_height' => 1200,
+                    'jpeg_quality' => 95
+                ),
+                */
+                // Uncomment the following to create medium sized images:
+                /*
+                'medium' => array(
+                    'max_width' => 800,
+                    'max_height' => 600,
+                    'jpeg_quality' => 80
+                ),
+                */
+                'thumbnail' => array(
+                    // Uncomment the following to use a defined directory for the thumbnails
+                    // instead of a subdirectory based on the version identifier.
+                    // Make sure that this directory doesn't allow execution of files if you
+                    // don't pose any restrictions on the type of uploaded files, e.g. by
+                    // copying the .htaccess file from the files directory for Apache:
+                    //'upload_dir' => dirname($this->get_server_var('SCRIPT_FILENAME')).'/thumb/',
+                    //'upload_url' => $this->get_full_url().'/thumb/',
+                    // Uncomment the following to force the max
+                    // dimensions and e.g. create square thumbnails:
+                    //'crop' => true,
+                    'max_width' => 450,
+                    'max_height' => 400
+                )
+            )
+        );
 
-		if ( $avatar ){
-			return $avatar;
-		}
+        $upload = new Upload( $options );
 
-		return $this->getGavatar( $_email, 180 );
-	}
+    	switch ($upload->get_server_var('REQUEST_METHOD')) {
+            case 'OPTIONS':
+            case 'HEAD':
+                $upload->head();
+                break;
+            case 'GET':
+                $upload->get();
+                break;
+            case 'PATCH':
+            case 'PUT':
+            case 'POST':
+                $upload->post( true, $name );
+                break;
+            case 'DELETE':
+                $upload->delete();
+                break;
+            default:
+                $upload->header('HTTP/1.1 405 Method Not Allowed');
+        }
+    }
+
+    public function moveFile( $source, $dest ){
+        if ( !is_file($source) ){
+            return false;
+        }
+        
+        $folder_names = explode('/', dirname(str_replace('../', '', $dest)));
+        $path = '';
+        
+        foreach ( $folder_names as $folder_name ) {
+            $path .= $folder_name . '/';
+            if ( !is_dir( $path ) ) {
+                mkdir( $path );
+            }
+        }
+        $return = copy($source, $dest);
+
+        unlink( $source );
+
+        return $return;
+    }
 }
 ?>

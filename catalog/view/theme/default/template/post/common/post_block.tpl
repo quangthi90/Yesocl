@@ -6,7 +6,7 @@
                     <i class="icon-caret-down"></i>
                </a>
                <ul class="dropdown-menu">
-               		<li class="unlike-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
+               		<li class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
                         <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
                     </li>
                     <!--li>
@@ -51,7 +51,7 @@
                         <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
                             Liked
 						</span>
-						<a class="post-liked-list" href="#" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
+						<a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
 					</span>
 				</div>
 			</div>

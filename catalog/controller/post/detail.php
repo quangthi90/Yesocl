@@ -46,15 +46,10 @@ class ControllerPostDetail extends Controller {
 		}
 
 		$this->load->model('tool/image');
+		$this->load->model('tool/object');
 
-		if ( $post->getUser() && $post->getUser()->getAvatar() && file_exists(DIR_IMAGE . $post->getUser()->getAvatar()) ){
-			$avatar = $this->model_tool_image->resize( $post->getUser()->getAvatar(), 180, 180 );
-		}elseif ( $post->getUser() && $post->getUser()->getPrimaryEmail()->getEmail() ){
-            $avatar = $this->model_tool_image->getGavatar( $post->getUser()->getPrimaryEmail()->getEmail(), 180 );
-        }else{
-			$avatar = $this->model_tool_image->getGavatar( $post->getEmail(), 180 );
-		}
-
+		$avatar = $this->model_tool_image->getAvatarUser( $post->getUser()->getAvatar(), $post->getUser()->getPrimaryEmail()->getEmail() );
+		
 		$comment_count = $post->getComments()->count();
 
 		if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
@@ -78,6 +73,8 @@ class ControllerPostDetail extends Controller {
 			'user_slug'		=> $post->getUser()->getSlug()
 		);
 
+		$this->data['comments'] = $this->model_tool_object->formatListCommentsOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
+		
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['is_user'] = $is_user;
 		
