@@ -373,6 +373,7 @@
         $('#comment-box').width($('#y-content').width()/3);
         $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
         $('#comment-box').stop().animate({ "right": "2px" }, 200);
+        $('#comment-box .y-box-content').mCustomScrollbar('update');
     }
     ShowListComments.prototype.hideCommentBox = function($button) {
         $('#overlay').hide();
@@ -417,7 +418,7 @@
         this.$el            = $el;
         this.$content       = $el.find('textarea');
         this.$comment_btn   = $el.find('.btn-comment');
-        this.$press_enter_cb  = $el.find('.cb-press-enter');
+        this.$press_enter_cb  = $el.find('.cb-press-enter'); 
         
         this.attachEvents();
     }
@@ -512,9 +513,9 @@
                 $('#add-more-item').before(htmlOutput);
                 $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
                 that.$content.val('');
-                //Scroll to last post which have just been added
+                //Scroll to last post which have just been added 
                 $('#comment-box .y-box-content').mCustomScrollbar("update");
-                $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","#add-more-item");
+                $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","bottom");
 
                 var comment_count = getActualLengthOfArray(comments);
                 console.log(comments);
