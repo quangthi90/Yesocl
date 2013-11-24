@@ -477,7 +477,8 @@
                 $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
                 that.$content.val('');
                 //Scroll to last post which have just been added
-                $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","last");
+                $('#comment-box .y-box-content').mCustomScrollbar("update");
+                $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","#add-more-item");
 
                 var comment_count = comments.length;
 
