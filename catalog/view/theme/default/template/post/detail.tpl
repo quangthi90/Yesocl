@@ -55,7 +55,7 @@
 							<a class="open-comment disabled" href="#" title="Open comment box">
 								<i class="icon-comments-alt medium-icon"></i>
 							</a>
-							<span class="number">7</span>
+							<span class="number">{{ comments|length }}</span>
 						</li>
 						<li>
 							<a class="">
@@ -81,7 +81,6 @@
 				</a>
 			</div>
 			{{ block('post_common_comment_post_detail') }}
-			{{ block('post_common_comment_post_detail_template') }}
 		</div>
 	</div>
 </div>
