@@ -364,11 +364,8 @@
         //Show comment box:
         $('#comment-box').width($('#y-content').width()/3);
         $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
-        var commentBody = $('#comment-box .comment-body');
+        var commentBody = $('.comment-body').first();
         commentBody.makeCustomScroll(false);
-        setTimeout(function(){
-            commentBody.mCustomScrollbar('scrollTo', 'bottom');
-        }, 100);
         $('#comment-box').stop().animate({ "right": "2px" }, 200);
     }
     ShowListComments.prototype.hideCommentBox = function($button) {
@@ -491,7 +488,7 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                var commentBody = $('#comment-box .comment-body');
+                var commentBody = $('.comment-body').first();
                 commentBody.mCustomScrollbar('destroy');
                 var $curr_item = $('.open-comment.disabled').parents('.post');
                 var $comment_btn = $curr_item.find('.open-comment');
@@ -511,7 +508,7 @@
                 commentBody.makeCustomScroll(false);
                 setTimeout(function() {   
                     commentBody.mCustomScrollbar("scrollTo", "bottom");
-                }, 200);                
+                }, 500);                
                 var comment_count = getActualLengthOfArray(comments);
                 //console.log(comments);
                 //console.log(comment_count);
