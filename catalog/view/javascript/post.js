@@ -250,10 +250,6 @@
                 $('#comment-box').find('.y-box-header span').html(that.comment_count);
                 $('.comment-form').attr('data-url', that.comment_url);
                 
-                $('.comment-body').stop().animate({
-                    scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-                }, 1000);
-
                 that.$el.addClass('disabled');
 
                 $(document).trigger('SHOWN_COMMENT_LIST');
@@ -305,10 +301,6 @@
                     $('#comment-box').find('.y-box-header span').html(that.comment_count);
                     $('.comment-form').attr('data-url', that.comment_url);
                     
-                    $('.comment-body').stop().animate({
-                        scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-                    }, 1000);
-
                     $(document).trigger('SHOWN_COMMENT_LIST');
 
                     jQuery(".timeago").timeago();
@@ -338,9 +330,6 @@
             $('#comment-box').find('.y-box-header span').html(that.comment_count);
             $('.comment-form').attr('data-url', that.comment_url);
             page = 1;
-            $('.comment-body').stop().animate({
-                scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-            }, 100);
 
             $(document).trigger('SHOWN_COMMENT_LIST');
 
@@ -366,14 +355,24 @@
         if(post.length >= 0){
             $('.post').removeClass('post-selecting');
             post.addClass('post-selecting');
-        }       
-        $('#overlay').show(100);        
-        $('#comment-box .y-box-content').makeCustomScroll(false);
+        }      
+        //Hide all tootip:
+        $('a[title]').tooltip('hide');
+        //Show overlay: 
+        $('#overlay').show(100);
+        var commentBody = $('#comment-box .comment-body');
+        if(commentBody.hasClass('mCustomScrollbar')) {
+            commentBody.mCustomScrollbar("destroy");
+        }
+        commentBody.makeCustomScroll(false);
+        setTimeout(function(){
+            commentBody.mCustomScrollbar('scrollTo', 'last');
+        }, 100);
+        
         //Show comment box:
         $('#comment-box').width($('#y-content').width()/3);
         $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
         $('#comment-box').stop().animate({ "right": "2px" }, 200);
-        $('#comment-box .y-box-content').mCustomScrollbar('update');
     }
     ShowListComments.prototype.hideCommentBox = function($button) {
         $('#overlay').hide();
@@ -514,14 +513,14 @@
                 $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
                 that.$content.val('');
                 //Scroll to last post which have just been added 
-                $('#comment-box .y-box-content').mCustomScrollbar("update");
-                $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","bottom");
-
+                setTimeout(function() {
+                    $('#comment-box .comment-body').mCustomScrollbar("update");
+                    $('#comment-box .comment-body').mCustomScrollbar("scrollTo", "bottom");
+                }, 50);                
                 var comment_count = getActualLengthOfArray(comments);
-                console.log(comments);
-                console.log(comment_count);
-                that.$el.parent().find('.counter').html( comment_count );
-                
+                //console.log(comments);
+                //console.log(comment_count);
+                that.$el.parent().find('.counter').html( comment_count );                
                 $comment_btn.parent().find('d').html( comment_count );
                 $comment_btn.attr('data-comment-count', comment_count).find('d').html( comment_count );
                 $curr_item.find('.post_header .post_cm d').html( comment_count );

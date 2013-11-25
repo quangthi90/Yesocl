@@ -53,8 +53,9 @@
 	top: 30px;
 	left: 0px;
 	right: 0px;
-	bottom: 90px;
+	height: 467px;
 	background-color: #fff;
+	border-left: 1px solid #ddd;
 }
 .y-box-content .comment-item {
 	margin-bottom: 3px;
@@ -143,6 +144,9 @@
 }
 #comment-box .post_new .comment-action .comment-press-enter{
     padding:4px 0px 0px 0px;
+}
+#add-more-item {
+	height: 2px;
 }
 #comment-box .mCSB_scrollTools .mCSB_draggerRail {
 	width: 6px;
