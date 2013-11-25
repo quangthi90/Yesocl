@@ -1,5 +1,7 @@
 <?php 
-class ControllerFriendFriend extends Controller { 
+use DateTime;
+
+class ControllerFriendFriend extends Controller {
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
@@ -23,13 +25,6 @@ class ControllerFriendFriend extends Controller {
 		if ( !$curr_user ){
 			return false;
 		}
-
-		$this->data['link_filter_friends'] = $this->url->link( 'friend/friend/getListFriends', '', 'SSL' );
-
-		$this->data['data_filter_all'] = '{ "filter_request": "1" }';
-		$this->data['data_filter_recent_added'] = '{}';
-		$this->data['data_filter_male'] = '{ "filter_gender": "1" }';
-		$this->data['data_filter_female'] = '{ "filter_gender": "2" }';
 
 		$user_temp = $curr_user->formatToCache();
 
@@ -58,11 +53,15 @@ class ControllerFriendFriend extends Controller {
 		foreach ( $users as $user ) {
 			$fr_status = $this->model_friend_friend->checkFriendStatus( $user, $curr_user );
 
+			$gender = $user->getMeta()->getSex();
+
 			$user = $user->formatToCache();
 
 			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
 
 			$user['fr_status'] = $fr_status;
+
+			$user['gender'] = $gender;
 
 			$this->data['users'][$user['id']] = $user;
 		}
@@ -78,6 +77,12 @@ class ControllerFriendFriend extends Controller {
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'friend' );
+
+		$this->data['filter_type'] = $this->config->get('friend')['filter']['type'];
+
+		$recent_time = new DateTime('now');
+		date_add($recent_time, date_interval_create_from_date_string('7 days'));
+		$this->data['recent_time'] = $recent_time;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';

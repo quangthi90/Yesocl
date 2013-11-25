@@ -3,6 +3,7 @@
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 {% use '@template/default/template/friend/common/friend_list.tpl' %}
 {% use '@template/default/template/friend/common/friend_filter.tpl' %}
+{% use '@template/default/template/friend/common/friend_button.tpl' %}
 
 {% block title %}{{ users[current_user_id].username }} | Friends {% endblock %}
 
@@ -24,9 +25,15 @@
                 </a>
             </div>
             <div class="block-content">
+            {% for friend_id in friend_ids %}
+                {% set friend = users[friend_id] %}
                 {{ block('friend_common_friend_list') }}
+            {% endfor %}
+                {{ block('friend_common_friend_button_template') }}
             </div>
-        </div>  
+        </div>
+        {% set friend_count = friend_ids|length %}
+        {% set user = users[current_user_id] %}
         {{ block('friend_common_friend_filter') }}
     </div>
 </div>

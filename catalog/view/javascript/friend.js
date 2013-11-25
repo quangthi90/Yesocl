@@ -1,3 +1,4 @@
+// Friend action button
 (function($, document, undefined) {
 	function FriendAction( $el, removeUnFriend ){
 		var that = this;
@@ -138,11 +139,22 @@
 		promise.then(f, f);
 	};
 
-	function FriendFilter( $element ){
-		this.$element			= $element;
-		this.$inputSearch		= $element.find('#search-input');
-		this.$btnSearch			= $element.find('.friend-search-btn');
-		this.$friendConditions		= $element.find('.friend-condition');
+	$(function(){
+        $(document).bind('FRIEND_ACTION', function(e, remove) {
+            $('.friend-actions').each(function(){
+                new FriendAction($(this), remove);
+            });
+        });
+    });
+}(jQuery, document));
+
+// Filter friend
+(function($, document, undefined) {
+	function FriendFilter( $el ){
+		this.$el 				= $el;
+		this.$inputSearch		= $el.find('#search-input');
+		this.$btnSearch			= $el.find('.friend-search-btn');
+		this.$friendConditions	= $el.find('.friend-condition');
 
 		this.attachEvents();
 	}
@@ -150,7 +162,7 @@
 	FriendFilter.prototype.attachEvents = function () {
 		var that = this;
 
-		this.$inputSearch.typeahead({
+		/*this.$inputSearch.typeahead({
             source: function (query, process) {
             	friendList = [];
                 map = {};      
@@ -230,21 +242,26 @@
             		alert(xhr.responseText);
             	},
             });
-		});
+		});*/
 
 		this.$friendConditions.each( function () {
-			new FriendCondition( $(this) );
-		})
+			$(this).click(function(){
+				if ( $(this).hasClass('active') ){
+					return false;
+				}
+
+				that.$friendConditions.each(function(){
+					$(this).removeClass('active');
+				});
+				$(this).addClass('active');
+
+				$('.friend-item').addClass('hidden');
+				$('.friend-item.' + $(this).data('friend')).removeClass('hidden');
+			});
+		});
 	}
 
-	function FriendCondition( $element ) {
-		this.$element = $element;
-		this.$action = $element.find('a');
-
-		this.attachEvents();
-	}
-
-	FriendCondition.prototype.attachEvents = function () {
+	/*FriendFilter.prototype.attachEvents = function () {
 		var that = this;
 
 		this.$action.click( function () {
@@ -282,17 +299,11 @@
             	},
             });
 		});
-	}
+	}*/
 
 	$(function(){
-        $('#friend-filter').each(function(){
+		$('#friend-filter').each(function(){
             new FriendFilter( $(this) );
-        });
-
-        $(document).bind('FRIEND_ACTION', function(e, remove) {
-            $('.friend-actions').each(function(){
-                new FriendAction($(this), remove);
-            });
         });
     });
 }(jQuery, document));

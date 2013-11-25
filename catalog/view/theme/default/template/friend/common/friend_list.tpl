@@ -1,32 +1,34 @@
-{% use '@template/default/template/friend/common/friend_button.tpl' %}
-
 {% block friend_common_friend_list %}
-    {% if friend_ids is not defined %}
-        {% set friend_ids = [] %}
+    {% set class = 'all' %}
+    {% if friend.created <= recent_time %}
+        {% set class = class ~ ' recent' %}
     {% endif %}
-    {% for friend_id in friend_ids %}
-        {% set friend = users[friend_id] %}
-        <div class="block-content-item friend-item">
-            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
-                <img src="{{ friend.avatar }}">
-            </a>
-            <div class="fl friend-info">
-                <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
-                <ul class="friend-infolist">
-                    <li>{{ friend.industry }}</li>
-                    <li>{{ friend.numFriend }}</li>
-                </ul>
-            </div>
-            {% set fr_status = friend.fr_status.status %}
-            {% set fr_slug = friend.slug %}
-            {{ block('friend_common_friend_button') }}
+    {% if friend.gender == 1 %}
+        {% set class = class ~ ' male' %}
+    {% else %}
+        {% set class = class ~ ' female' %}
+    {% endif %}
+    <div class="block-content-item friend-item {{ class }}">
+        <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
+            <img src="{{ friend.avatar }}">
+        </a>
+        <div class="fl friend-info">
+            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
+            <ul class="friend-infolist">
+                <li>{{ friend.industry }}</li>
+                <li>{{ friend.numFriend }}</li>
+            </ul>
         </div>
-    {% endfor %}
-    {{ block('friend_common_friend_button_template') }}
+        {% set fr_status = friend.fr_status.status %}
+        {% set fr_slug = friend.slug %}
+        {{ block('friend_common_friend_button') }}
+    </div>
 {% endblock %}
 
-{% block friend_common_friend_list_javascript %}
-    <script id="friend-item" type="text/x-jquery-tmpl">
+{% block friend_common_friend_list_template %}
+{% raw %}
+<div class="hidden">
+    <div id="friend-item">
         <div class="block-content-item friend-item">
             <a href="${ url }" class="fl friend-img">
                 <img src="${ avatar }">
@@ -68,7 +70,12 @@
                 {{ status_if_end }}
             </div>
         </div>
-    </script>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}
+
+{% block friend_common_friend_list_javascript %}
     <script type="text/javascript">
     $(function(){
         $(document).trigger('FRIEND_ACTION', [true]);
