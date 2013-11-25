@@ -2,16 +2,27 @@
 class ControllerPostPost extends Controller {
 	private $error = array();
 
-	public function addStatus(){
+	public function addPost(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('user/post');
             $this->load->model('tool/image');
 
+            $image_link = null;
+            $extension = null;
+            if ( !empty($this->request->post['thumb']) ){
+                $parts = explode('/', $this->request->post['thumb'] );
+                $filename = $parts[count($parts) - 1];
+                $image_link = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $filename;
+                $extension = explode('.', $filename)[1];
+            }
+            
             $data = array(
                 'content' => $this->request->post['content'],
                 'title' => $this->request->post['title'],
                 'user_slug' => $this->request->get['user_slug'],
-                'author_id' => $this->customer->getId()
+                'author_id' => $this->customer->getId(),
+                'image_link' => $image_link,
+                'extension' => $extension
             );
 
             $post = $this->model_user_post->addPost( $data );
@@ -19,18 +30,12 @@ class ControllerPostPost extends Controller {
             $user = $post->getUser()->formatToCache();
 
             // avatar
-            if ( $user && $user['avatar'] && file_exists(DIR_IMAGE . $user['avatar']) ){
-                $avatar = $this->model_tool_image->resize( $user['avatar'], 180, 180 );
-            }elseif ( $user && $user['email'] ){
-                $avatar = $this->model_tool_image->getGavatar( $user['email'], 180 );
-            }else{
-                $avatar = $this->model_tool_image->getGavatar( $comment['email'], 180 );
-            }
+            $avatar = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
 
             // thumb
             $thumb = $post->getThumb();
             if ( !empty($thumb) ){
-                $image = $this->model_tool_image->resize( $thumb, 400, 250 );
+                $image = $this->model_tool_image->resize( $thumb, 400, 250, true );
             }else{
                 $image = null;
             }
@@ -46,13 +51,17 @@ class ControllerPostPost extends Controller {
                 'comment_list' => $this->extension->path( "CommentList", $data_post_info ),
                 'comment_add' => $this->extension->path( "CommentAdd", $data_post_info ),
                 'post_like' => $this->extension->path( "PostLike", $data_post_info ),
-                'post_detail' => $this->extension->path( "PostPage", $data_post_info )
+                'post_detail' => $this->extension->path( "PostPage", $data_post_info ),
+                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $user['slug']) ),
+                'post_get_liked' => $this->extension->path( "PostGetLiker", $data_post_info )
             );
 
             $content = html_entity_decode($post->getContent());
+            $see_more = false;
 
             if ( strlen($content) > 200 ){
                 $content = substr($content, 0, 200) . '[...]';
+                $see_more = true;
             }
 
             $return_data = array(
@@ -64,7 +73,8 @@ class ControllerPostPost extends Controller {
                     'created' => $post->getCreated()->format( $this->language->get('date_format_full') ),
                     'image' => $image,
                     'title' => $post->getTitle(),
-                    'content' => $content
+                    'content' => $content,
+                    'see_more' => $see_more
                 ),
                 'href' => $href
             );

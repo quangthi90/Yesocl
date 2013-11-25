@@ -95,7 +95,7 @@
         });
 
         $(document).bind('POST_BUTTON', function(e) {
-            $('.like-post').each(function(){
+            $('.post-item').each(function(){
                 new LikePostBtn($(this));           
             });
         });
@@ -213,6 +213,12 @@
         $('.post-liked-list').each(function(){
             new UserListViewer($(this));
         });
+
+        $(document).bind('POST_SHOW_LIKED_BUTTON', function(e) {
+            $('.post-liked-list').each(function(){
+                new UserListViewer($(this));
+            });
+        });
     }); 
 }(jQuery, document));
 
@@ -235,11 +241,30 @@
                 e.preventDefault();
                 return false;
             }
-            $('#comment-box').find('.y-box-header .btn-close').trigger('click');
-            that.submit(that.$el);
+            // $('#comment-box').find('.y-box-header .btn-close').trigger('click');
+
+            if ( that.$el.data('comment-count') == 0 ){
+                var htmlOutput = '';
+                htmlOutput += '<div id="add-more-item"></div>';
+                $('#comment-box').find('.comment-body').html(htmlOutput);
+                $('#comment-box').find('.y-box-header span').html(that.comment_count);
+                $('.comment-form').attr('data-url', that.comment_url);
+                
+                $('.comment-body').stop().animate({
+                    scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
+                }, 1000);
+
+                that.$el.addClass('disabled');
+
+                $(document).trigger('SHOWN_COMMENT_LIST');
+
+                that.showCommentBox(that.$el); 
+            }else{
+                that.submit(that.$el);
+            }
+
             return false;
         });
-        //Attach close event:
         $('#comment-box').on('click', '.y-box-header .btn-close', function(){
             that.hideCommentBox(that.$el);
         });        
@@ -369,6 +394,10 @@
         });
 
         $(document).bind('FRIEND_UPDATE_STATUS', function(e, status, id) {
+            if ( id == undefined ){
+                return false;
+            }
+
             var $curr_post = $('.open-comment.disabled');
 
             var comments = $curr_post.data('comments');
@@ -470,7 +499,14 @@
                 var $comment_btn = $curr_item.find('.open-comment');
 
                 var comments = $comment_btn.data('comments');
+
+                if ( comments == undefined ){
+                    comments = new Array();
+                }
+
                 comments[data.comment.id] = data.comment;
+
+                $comment_btn.data('comments', comments);
 
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
                 $('#add-more-item').before(htmlOutput);
@@ -479,8 +515,9 @@
                 //Scroll to last post which have just been added
                 $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","last");
 
-                var comment_count = comments.length;
-
+                var comment_count = getActualLengthOfArray(comments);
+                console.log(comments);
+                console.log(comment_count);
                 that.$el.parent().find('.counter').html( comment_count );
                 
                 $comment_btn.parent().find('d').html( comment_count );
@@ -598,7 +635,7 @@
 
                 var $curr_post = $('.open-comment.disabled');
                 var comments = $curr_post.data('comments');
-
+                
                 that.$el.data('like-count', data.like_count);
                 comments[that.comment_id].is_liked = that.isLiked;
                 comments[that.comment_id].like_count = data.like_count;
@@ -669,6 +706,10 @@
 
         var $curr_post = $('.open-comment.disabled');
         var comments = $curr_post.data('comments');
+
+        if ( comments == undefined ){
+            comments = new Array();
+        }
         
         if ( comments[this.$el.data('id')].users == undefined ){
             var promise = $.ajax({

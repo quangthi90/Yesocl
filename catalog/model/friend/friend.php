@@ -230,5 +230,41 @@ class ModelFriendFriend extends Model {
             );
         }
 	}
+
+	public function unFriend( $user1, $user2 ){
+		if ( !empty($user1['id']) ){
+			$user1 = $this->dm->getRepository('Document\User\User')->find( $user1['id'] );
+		}elseif ( !empty($user1['slug']) ){
+			$user1 = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user1['slug'] );
+		}else{
+			return false;
+		}
+		
+		if ( !empty($user2['id']) ){
+			$user2 = $this->dm->getRepository('Document\User\User')->find( $user2['id'] );
+		}elseif ( !empty($user2['slug']) ){
+			$user2 = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user2['slug'] );
+		}else{
+			return false;
+		}
+
+		foreach ( $user1->getFriends() as $friend ) {
+			if ( $friend->getUser()->getId() == $user2->getId() ){
+				$user1->getFriends()->removeElement( $friend );
+				break;
+			}
+		}
+
+		foreach ( $user2->getFriends() as $friend ) {
+			if ( $friend->getUser()->getId() == $user1->getId() ){
+				$user2->getFriends()->removeElement( $friend );
+				break;
+			}
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
 }
 ?>

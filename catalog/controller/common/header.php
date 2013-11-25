@@ -6,7 +6,7 @@ class ControllerCommonHeader extends Controller {
 		$avatar = $this->customer->getAvatar();
 		
 		if( !empty($avatar) && file_exists(DIR_IMAGE . $avatar) ){
-			$avatar = $this->model_tool_image->resize( $avatar, 180, 180 );
+			$avatar = $this->model_tool_image->resize( $avatar, 180, 180, true );
 		}else{
 			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
 		}
