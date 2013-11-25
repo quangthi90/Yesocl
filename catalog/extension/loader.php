@@ -40,6 +40,7 @@ class ExtensionLoader
             new Twig_SimpleFunction('asset_js', array($this, 'assetJs')),
             new Twig_SimpleFunction('asset_img', array($this, 'assetImg')),
             new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser')),
+            new Twig_SimpleFunction('is_logged', array($this, 'isLogged')),
             new Twig_SimpleFunction('get_flash', array($this, 'getFlash')),
             new Twig_SimpleFunction('get_friend_list', array($this, 'getFriendList')),
             new Twig_SimpleFunction('in_array', array($this, 'inArray')),
@@ -80,6 +81,10 @@ class ExtensionLoader
 
     public function getCurrentUser(){
         return $this->customer;
+    }
+
+    public function isLogged(){
+        return $this->customer->isLogged();
     }
 
     public function getFlash( $key ){
