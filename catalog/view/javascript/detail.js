@@ -10,7 +10,6 @@
         this.postComment = this.detailContentWrapper.find('#comment-wrapper');
         this.quickScroll = this.detailContentWrapper.find('#detail-scroll');        
         this.commentList = this.postComment.find('.comment-body');
-        this.commentMeta = this.postComment.find('.comment-meta');
         this.expandComment = this.postComment.find('.btn-expand');
         this.restoreComment = this.postComment.find('.btn-restore');
         this.closeCommentBox = this.postComment.find('.btn-close');
@@ -146,7 +145,7 @@
         that.postContent.animate({ right : (widthComment + 15) + 'px' }, 700, function(){
             that.quickScroll.css('right', (widthComment + 15) + 'px');
             that.postContent.getNiceScroll().resize();
-            that.commentMeta.width(widthComment - 90);
+            that.postComment.find('.comment-meta').width(widthComment - 90);
             that.postComment.width(widthComment).animate({ right: '0px' }, 400);
         })
     }
@@ -174,7 +173,7 @@
         that.postContent.animate({ right : (widthComment + 15) + 'px' }, 300, function(){
             that.quickScroll.css('right', (widthComment + 15) + 'px');
             that.postContent.getNiceScroll().resize();
-            that.commentMeta.width(widthComment - 90);
+            that.postComment.find('.comment-meta').width(widthComment - 90);
             that.postComment.width(widthComment).animate({ right: '0px' }, 500, function(){
                 if(that.expandCommentLevel === 1 || 
                     that.expandCommentLevel === 2 ){

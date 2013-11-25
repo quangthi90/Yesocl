@@ -502,16 +502,16 @@
 
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();                
                 $('#add-more-item').before(htmlOutput);
-                $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
-                that.$content.val('');
+                commentBody.find('.comment-meta').width(commentBody.width() - 97);
+                
                 //Scroll to last post which have just been added 
                 commentBody.makeCustomScroll(false);
                 setTimeout(function() {   
                     commentBody.mCustomScrollbar("scrollTo", "bottom");
                 }, 500);                
+                
                 var comment_count = getActualLengthOfArray(comments);
-                //console.log(comments);
-                //console.log(comment_count);
+                that.$content.val('');
                 that.$el.parent().find('.counter').html( comment_count );                
                 $comment_btn.parent().find('d').html( comment_count );
                 $comment_btn.attr('data-comment-count', comment_count).find('d').html( comment_count );
