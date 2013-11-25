@@ -293,9 +293,7 @@
                         comments[data.comments[key].id] = data.comments[key];
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
-                    that.$el.data('comments', comments);  
-                    var comment_count = getActualLengthOfArray(comments);   
-
+                    that.$el.data('comments', comments);   
                     htmlOutput += '<div id="add-more-item"></div>';
                     $('#comment-box').find('.comment-body').html(htmlOutput);
                     $('#comment-box').find('.y-box-header span').html(that.comment_count);
@@ -515,6 +513,7 @@
                 that.$el.parent().find('.counter').html( comment_count );                
                 $comment_btn.parent().find('d').html( comment_count );
                 $comment_btn.attr('data-comment-count', comment_count).find('d').html( comment_count );
+                $comment_btn.attr('title', comment_count);
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
                 $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 

@@ -1,12 +1,99 @@
 /*
 	JS Utitlity Function
 */
-function getActualLengthOfArray(arr) {
-   return $.grep(arr, function(el){
-      return el !== undefined;
-     }
-    ).length;
+function getActualLengthOfArray(obj) {
+	var size = 0;
+   	for (var i in obj) {
+		if(obj[i] !== undefined) {
+			size ++;
+		}
+	}
+	return size;
 }
+//Define HashTable in JS
+function HashTable(obj)
+{
+    this.length = 0;
+    this.items = {};
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            this.items[p] = obj[p];
+            this.length++;
+        }
+    }
+    //Add new item to hashtable
+    this.setItem = function(key, value)
+    {
+        var previous = undefined;
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+        }
+        else {
+            this.length++;
+        }
+        this.items[key] = value;
+        return previous;
+    }
+    //Get existed item by key
+    this.getItem = function(key) {
+        return this.hasItem(key) ? this.items[key] : undefined;
+    }
+    //Check whether item has key existed 
+    this.hasItem = function(key)
+    {
+        return this.items.hasOwnProperty(key);
+    }   
+    //Remove existed item from hastable
+    this.removeItem = function(key)
+    {
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+            this.length--;
+            delete this.items[key];
+            return previous;
+        }
+        else {
+            return undefined;
+        }
+    }
+    //Return list of keys of hashtable
+    this.keys = function()
+    {
+        var keys = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                keys.push(k);
+            }
+        }
+        return keys;
+    }
+    //Return list of values of hashtable
+    this.values = function()
+    {
+        var values = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                values.push(this.items[k]);
+            }
+        }
+        return values;
+    }
+    //Foreach implement
+    this.each = function(fn) {
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                fn(k, this.items[k]);
+            }
+        }
+    }
+    //Clear hashtable
+    this.clear = function()
+    {
+        this.items = {}
+        this.length = 0;
+    }
+}
+
 /*
 	End JS Utitlity Function
 */
