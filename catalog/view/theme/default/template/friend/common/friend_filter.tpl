@@ -21,7 +21,7 @@
                 <i class="icon-female"></i><a href="#">Female Friends</a>
             </li>  
         </ul>
-        <ul class="friend-conditions mutual-friend-block">
+        {#<ul class="friend-conditions mutual-friend-block">
             <li>
                 <i class="icon-ok"></i><a href="#">Mutual Friends</a>
             </li>
@@ -37,6 +37,6 @@
             <li>
                 <i class="icon-ok"></i><a href="#">Same City</a>
             </li> 
-        </ul> 
+        </ul>#}
     </div>
 {% endblock %}
