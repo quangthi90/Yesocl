@@ -879,5 +879,34 @@ function HashTable(obj)
 		$('.search-form').each(function(){
 			new SearchAutoComplete($(this));
 		});
+
+		//Demo HashTable
+		var obj = {
+			'one': 1,
+			'two': 2,
+			'three': 3,
+			'four': 4,
+			'five': 5,
+			'six': 6,
+			'seven': 7,
+			'eight': 8,
+			'nine': 9,
+			'ten': 10,
+		};
+		var ht = new HashTable(obj);
+		//Return length:
+		console.log(ht.length);
+		//Add new item:
+		ht.setItem('elevent',11);
+		console.log('After adding: ' + ht.length);
+		//Remove item:
+		ht.removeItem('elevent');
+		console.log('After removing: ' + ht.length);
+		//Check existed:
+		console.log('Key one: ' + ht.hasItem('one'));
+		//Foreach:
+		ht.each(function(key, value){
+			console.log(key + ' - ' + value);
+		});
 	});
 }(jQuery, document));
