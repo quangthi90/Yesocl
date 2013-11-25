@@ -360,18 +360,15 @@
         $('a[title]').tooltip('hide');
         //Show overlay: 
         $('#overlay').show(100);
-        var commentBody = $('#comment-box .comment-body');
-        if(commentBody.hasClass('mCustomScrollbar')) {
-            commentBody.mCustomScrollbar("destroy");
-        }
-        commentBody.makeCustomScroll(false);
-        setTimeout(function(){
-            commentBody.mCustomScrollbar('scrollTo', 'last');
-        }, 100);
         
         //Show comment box:
         $('#comment-box').width($('#y-content').width()/3);
         $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
+        var commentBody = $('#comment-box .comment-body');
+        commentBody.makeCustomScroll(false);
+        setTimeout(function(){
+            commentBody.mCustomScrollbar('scrollTo', 'bottom');
+        }, 100);
         $('#comment-box').stop().animate({ "right": "2px" }, 200);
     }
     ShowListComments.prototype.hideCommentBox = function($button) {
@@ -494,29 +491,27 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
+                var commentBody = $('#comment-box .comment-body');
+                commentBody.mCustomScrollbar('destroy');
                 var $curr_item = $('.open-comment.disabled').parents('.post');
-
                 var $comment_btn = $curr_item.find('.open-comment');
-
                 var comments = $comment_btn.data('comments');
-
+                
                 if ( comments == undefined ){
                     comments = new Array();
                 }
-
                 comments[data.comment.id] = data.comment;
-
                 $comment_btn.data('comments', comments);
 
-                htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
+                htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();                
                 $('#add-more-item').before(htmlOutput);
                 $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
                 that.$content.val('');
                 //Scroll to last post which have just been added 
-                setTimeout(function() {
-                    $('#comment-box .comment-body').mCustomScrollbar("update");
-                    $('#comment-box .comment-body').mCustomScrollbar("scrollTo", "bottom");
-                }, 50);                
+                commentBody.makeCustomScroll(false);
+                setTimeout(function() {   
+                    commentBody.mCustomScrollbar("scrollTo", "bottom");
+                }, 200);                
                 var comment_count = getActualLengthOfArray(comments);
                 //console.log(comments);
                 //console.log(comment_count);
