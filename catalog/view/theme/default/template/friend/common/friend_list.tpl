@@ -69,4 +69,9 @@
             </div>
         </div>
     </script>
+    <script type="text/javascript">
+    $(function(){
+        $(document).trigger('FRIEND_ACTION', [true]);
+    });
+    </script>
 {% endblock %}
