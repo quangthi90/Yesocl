@@ -67,6 +67,12 @@
           				<div class="span9"><textarea class="description input-xxlarge" type="text" name="background[experiences][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
           			</div>
           		</div>
+              <div class="row-fluid">
+                <div class="span4">
+                  <div class="span3"></div>
+                  <div class="span9"><?php if ( $experience['self_employed'] ) { ?><a class="btn-lost-self-employed btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger hide"><i class="icon-minus"></i></a><?php }else { ?><a class="btn-lost-self-employed btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger"><i class="icon-minus"></i></a><?php } ?><input class="self-employed" type="hidden" name="background[experiences][<?php echo $key; ?>][self_employed]" value="<?php echo $experience['self_employed']; ?>" /> <?php echo $text_self_employed; ?></div>
+                </div>
+              </div>
 				</td>
 			</tr>
 			<?php } ?>
@@ -205,6 +211,12 @@
           	html += 			'<div class="span9"><input class="description input-xxlarge" type="text" name="background[experiences][' + experience_length + '][description]" value="" /></div>';
           	html += 		'</div>';
           	html += 	'</div>';
+            html +=  '<div class="row-fluid">';
+            html +=    '<div class="span4">';
+            html +=      '<div class="span3"></div>';
+            html +=      '<div class="span9"><a class="btn-lost-self-employed btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger"><i class="icon-minus"></i></a><input class="self-employed" type="hidden" name="background[experiences][' + experience_length + '][self_employed]" value="0" /> <?php echo $text_self_employed; ?></div>';
+            html +=    '</div>';
+            html +=  '</div>';
 			html += 	'</td>';
 			html += '</tr>';
 
@@ -242,6 +254,22 @@
       $(this).hide();
       $(this).parent().parent().find('.btn-set-current').show();
       $(this).parent().parent().find('input.current').attr({
+        value: 0
+      });
+    });
+
+    $('#tab-experience').on('click', '.btn-set-self-employed', function(){
+      $(this).hide();
+      $(this).parent().parent().find('.btn-lost-self-employed').show();
+      $(this).parent().parent().find('input.self-employed').attr({
+        value: 1
+      });
+    });
+
+    $('#tab-experience').on('click', '.btn-lost-self-employed', function(){
+      $(this).hide();
+      $(this).parent().parent().find('.btn-set-self-employed').show();
+      $(this).parent().parent().find('input.self-employed').attr({
         value: 0
       });
     });

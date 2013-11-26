@@ -225,18 +225,18 @@ class ModelAccountCustomer extends Model {
 	}
 					
 	public function getCustomer($user_id) {
-		$this->load->model('tool/cache');
-		$user = $this->model_tool_cache->getUser($user_id);
+		//$this->load->model('tool/cache');
+		//$user = $this->model_tool_cache->getUser($user_id);
 
-		if ( !$user ){
+		//if ( !$user ){
 			$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
 			if ( !$user ){
 				return null;
 			}
 
-			$user = $this->model_tool_cache->setUser( $user );
-		}
+			//$user = $this->model_tool_cache->setUser( $user );
+		//}
 
 		return $user;
 	}

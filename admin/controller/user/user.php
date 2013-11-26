@@ -66,6 +66,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_male'] = $this->language->get( 'text_male' );
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
+		$this->data['text_self_employed'] = $this->language->get( 'text_self_employed' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -325,6 +326,7 @@ class ControllerUserUser extends Controller {
 					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
+					'self_employed' => $experience->getSelfEmployed(),
 				);
 			}
 		}
@@ -882,6 +884,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
 		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
+		$this->data['text_self_employed'] = $this->language->get( 'text_self_employed' );
 		$this->data['text_change'] = $this->language->get( 'text_change' );
 		$this->data['text_remove'] = $this->language->get( 'text_remove' );
 		
@@ -1251,6 +1254,7 @@ class ControllerUserUser extends Controller {
 					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
+					'self_employed' => $experience->getSelfEmployed(),
 					);
 			}
 		}

@@ -78,6 +78,16 @@ Class Background {
 		return $this->experiences;
 	}
 
+	public function getCurrentExperience() {
+		foreach ($experiences as $experience) {
+			if ($experience->getCurrent()) {
+				return $experience;
+			}
+		}
+
+		return null;
+	}
+
 	public function addEducation( Education $education ){
 		$this->educations[] = $education;
 	}
@@ -88,6 +98,16 @@ Class Background {
 
 	public function getEducations(){
 		return $this->educations;
+	}
+
+	public function getCurrentEducation() {
+		foreach ($educations as $education) {
+			if ($education->getCurrent()) {
+				return $education;
+			}
+		}
+
+		return null;
 	}
 
 	public function setInterest( $interest ){

@@ -289,6 +289,12 @@
                   <div class="span9"><textarea disabled="disabled" class="description input-xxlarge" type="text" name="background[experiences][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
                 </div>
               </div>
+              <div class="row-fluid">
+                <div class="span4">
+                  <div class="span3"></div>
+                  <div class="span9"><?php if ( $experience['self_employed'] ) { ?><a class="btn-lost-self-employed btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger hide"><i class="icon-minus"></i></a><?php }else { ?><a class="btn-lost-self-employed btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger"><i class="icon-minus"></i></a><?php } ?> <?php echo $text_self_employed; ?></div>
+                </div>
+              </div>
             </td>
           </tr>
           <?php } ?>

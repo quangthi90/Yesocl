@@ -28,6 +28,7 @@ $_['text_view']		  				= 'View';
 $_['text_visible']		  			= 'Visible';
 $_['text_year']		  				= 'Year:';
 $_['text_select_image']		  		= 'Select image:';
+$_['text_self_employed']		  	= 'I am a self-employed';
 
 // Button
 $_['button_add_education']		  	= 'Add Education';

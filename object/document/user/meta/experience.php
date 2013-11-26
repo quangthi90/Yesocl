@@ -23,6 +23,9 @@ Class Experience {
 	private $ended;
 
 	/** @MongoDB\Boolean */
+	private $selfEmployed;
+
+	/** @MongoDB\Boolean */
 	private $current;
 
 	/** @MongoDB\String */
@@ -70,6 +73,14 @@ Class Experience {
 
 	public function getEnded(){
 		return $this->ended;
+	}
+
+	public function setSelfEmployed( $selfEmployed ){
+		$this->selfEmployed = $selfEmployed;
+	}
+
+	public function getSelfEmployed(){
+		return $this->selfEmployed;
 	}
 
 	public function setCurrent( $current ){

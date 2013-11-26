@@ -200,6 +200,12 @@ class ModelUserUser extends Model {
 			$location->setCityId( trim( $experience_data['city_id'] ) );
 			$experience->setLocation( $location );
 
+			if (empty($experience_data['self_employed'])) {
+				$experience->setSelfEmployed( 1 );
+			}else {
+				$experience->setSelfEmployed( (int)$experience_data['self_employed'] );
+			}
+
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
@@ -553,6 +559,12 @@ class ModelUserUser extends Model {
 			$location->setLocation( trim( $experience_data['location'] ) );
 			$location->setCityId( trim( $experience_data['city_id'] ) );
 			$experience->setLocation( $location );
+
+			if (empty($experience_data['self_employed'])) {
+				$experience->setSelfEmployed( 1 );
+			}else {
+				$experience->setSelfEmployed( (int)$experience_data['self_employed'] );
+			}
 			
 			$experience->setEnded( $ended );
 			$experience->setStarted( $started );

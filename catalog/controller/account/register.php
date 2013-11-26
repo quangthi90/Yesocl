@@ -39,20 +39,80 @@ class ControllerAccountRegister extends Controller {
 	}
 	      
   	public function index() {  		
+  		if ($this->customer->getId()) {
+  			// text
+  			$this->data['text_introdure_your_self'] = 'Introduce your self';
+  			$this->data['text_create_profile'] = 'Create my profile';
+  			$this->data['text_profile_recommend'] = 'A Yesocl profile helps you...';
+  			$this->data['text_recommend_1'] = 'Showcase your skills and experience';
+  			$this->data['text_recommend_2'] = 'Be found for new opportunities';
+  			$this->data['text_recommend_3'] = 'Stay in touch with colleagues and friends';
+  			$this->data['text_field_required'] = 'Field is required';
+  			$this->data['text_i_current'] = 'I am current';
+  			$this->data['text_live_in'] = 'I live in';
+  			$this->data['text_location_placer'] = 'Input Text';
+  			$this->data['text_postal_code'] = 'Postal code';
+  			$this->data['text_post_code_placer'] = 'Input Text';
+  			$this->data['text_employed'] = 'Employed';
+  			$this->data['text_job_seeker'] = 'Job Seeker';
+  			$this->data['text_student'] = 'Student';
+  			$this->data['text_job_title'] = 'Job title';
+  			$this->data['text_job_title_placer'] = 'Input Text';
+  			$this->data['text_self_employed'] = 'I am a self-employed';
+  			$this->data['text_company'] = 'Company';
+  			$this->data['text_company_placer'] = 'Input Text';
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
-		} else {
-			$this->template = 'default/template/account/register/register.tpl';
-		}
-		
-		$this->children = array(
-			'common/sidebar_control',
-			'common/footer',
-			'common/header'	
-		);
-				
-		$this->response->setOutput($this->twig_render());
+  			// get customer data
+  			$this->load->model('account/customer');
+  			$customer = $this->model_account_customer->getCustomer($this->customer->getId());
+  			if (empty($customer)) {
+  				// set redirect link & redirect to login form.
+  			}
+
+  			// fetch data to step 1
+  			$meta = $customer->getMeta();
+  			$background = $customer->getBackground();
+  			//location
+  			$location = $meta->getLocation();
+  			$this->data['location']	= $location->getLocation();
+  			$this->data['city_id']	= $location->getCityId();
+  			//post code
+  			$this->data['postal_code'] = $meta->getPostalCode();
+  			//experience
+  			$experience = $background->getCurrentExperience();
+  			if ($experience) {/*
+  				$this->data['company']['name'] = $experience->getCompany();
+  				$this->data['company']['title'] = $experience->getTitle();
+  				$this->data['company']['start'] = $experience->getStarted();
+  				$this->data['company']['end'] = $experience->getEnded();
+  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();*/
+  			}
+  			//education
+  			$education = $background->getCurrentEducation();
+  			if ($education) {/*
+  				$this->data['school']['name'] = $education->getSchool();
+  				$this->data['school']['id'] = $education->getSchoolId();
+  				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
+  				$this->data['school']['start'] = $education->getStarted();
+  				$this->data['school']['end'] = $education->getEnded();*/
+  			}
+
+			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
+				$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
+			} else {
+				$this->template = 'default/template/account/register/register.tpl';
+			}
+			
+			$this->children = array(
+				'common/sidebar_control',
+				'common/footer',
+				'common/header'	
+			);
+					
+			$this->response->setOutput($this->twig_render());
+  		}else {
+  			// set redirect link & redirect to login form.
+  		}
   	}
 
   	private function validate() {
