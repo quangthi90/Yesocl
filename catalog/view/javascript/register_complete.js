@@ -28,7 +28,7 @@
 					that.$inputCompany.toggle();
 				}
 			}else if ($(this).find('input[checked=\"checked\"].jobseeker').length != 0) {
-
+				
 			}else if ($(this).find('input[checked=\"checked\"].student').length != 0) {
 				
 			}

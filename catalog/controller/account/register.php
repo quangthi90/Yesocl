@@ -40,6 +40,23 @@ class ControllerAccountRegister extends Controller {
 	      
   	public function index() {  		
   		if ($this->customer->getId()) {
+  			// error
+  			if (isset($this->error['localtion'])) {
+  				$this->data['error_location'] = $this->error['location'];
+  			}
+
+  			if (isset($this->error['postal_code'])) {
+  				$this->data['error_postal_code'] = $this->error['postal_code'];
+  			}
+
+  			if (isset($this->error['job_title'])) {
+  				$this->data['error_job_title'] = $this->error['job_title'];
+  			}
+
+  			if (isset($this->error['company'])) {
+  				$this->data['error_company'] = $this->error['company'];
+  			}
+
   			// text
   			$this->data['text_introdure_your_self'] = 'Introduce your self';
   			$this->data['text_create_profile'] = 'Create my profile';
@@ -58,6 +75,8 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_student'] = 'Student';
   			$this->data['text_job_title'] = 'Job title';
   			$this->data['text_job_title_placer'] = 'Input Text';
+  			$this->data['text_industry'] = 'Industry';
+  			$this->data['text_industry_placer'] = 'Input Text';
   			$this->data['text_self_employed'] = 'I am a self-employed';
   			$this->data['text_company'] = 'Company';
   			$this->data['text_company_placer'] = 'Input Text';
@@ -71,7 +90,7 @@ class ControllerAccountRegister extends Controller {
 
   			// fetch data to step 1
   			$meta = $customer->getMeta();
-  			$background = $customer->getBackground();
+  			$background = $meta->getBackground();
   			//location
   			$location = $meta->getLocation();
   			$this->data['location']	= $location->getLocation();
@@ -80,22 +99,28 @@ class ControllerAccountRegister extends Controller {
   			$this->data['postal_code'] = $meta->getPostalCode();
   			//experience
   			$experience = $background->getCurrentExperience();
-  			if ($experience) {/*
+  			$this->data['current'] = 0;
+  			if ($experience) {
   				$this->data['company']['name'] = $experience->getCompany();
   				$this->data['company']['title'] = $experience->getTitle();
   				$this->data['company']['start'] = $experience->getStarted();
   				$this->data['company']['end'] = $experience->getEnded();
-  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();*/
+  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
+  				$this->data['current'] = 1;
   			}
   			//education
   			$education = $background->getCurrentEducation();
-  			if ($education) {/*
+  			if ($education) {
   				$this->data['school']['name'] = $education->getSchool();
   				$this->data['school']['id'] = $education->getSchoolId();
   				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
   				$this->data['school']['start'] = $education->getStarted();
-  				$this->data['school']['end'] = $education->getEnded();*/
+  				$this->data['school']['end'] = $education->getEnded();
+  				$this->data['current'] = 2;
   			}
+  			// industry
+  			$this->data['industry'] = $meta->getIndustry();
+  			$this->data['industry_id'] = $meta->getIndustryId();
 
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';

@@ -5,62 +5,84 @@
 	</div>
 	<div class="span10 register-box-step">
 		<h2 class="row-fluid">
-			<span class="span11 offset1 register-box-title">Introduce your self</span>
+			<span class="span11 offset1 register-box-title">{{ text_introdure_your_self }}</span>
 		</h2>
 		<div class="row-fluid">
     		<form class="form-horizontal span7">
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2 offset1" for="inputLocation">I live in</label>
+				    <label class="control-label span2 offset1" for="inputLocation">{{ text_live_in }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputLocation" placeholder="Input Text">
-				    	<span class="yes-warning">Field is required</span>
+				    	<input class="span11" type="text" id="inputLocation" placeholder="{{ text_location_placer }}">
+				    	{% if not(error_location is empty) %}<span class="yes-warning">{{ error_location }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2 offset1" for="inputPostal">Postal code</label>
+				    <label class="control-label span2 offset1" for="inputPostal">{{ text_postal_code }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputPostal" placeholder="Input Text">
-				    	<span class="yes-warning">Field is required</span>
+				    	<input class="span11" type="text" id="inputPostal" placeholder="{{ text_post_code_placer }}">
+				    	{% if not(error_postal_code is empty) %}<span class="yes-warning">{{ error_postal_code }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-			    	<label class="control-label span2 offset1">I am current</label>
+			    	<label class="control-label span2 offset1">{{ text_i_current }}</label>
 				    <div class="controls span9">
+				    	{% if current == 0 %}
 					    <label class="radio inline">
-					    	<input type="radio" name="current"> Employed
+					    	<input type="radio" name="current" value="2"> {{ text_employed }}
 					    </label>
 					    <label class="radio inline">
-					    	<input type="radio" name="current"> Job Seeker
+					    	<input type="radio" name="current" value="0" checked="checked"> {{ text_job_seeker }}
 					    </label>
 					    <label class="radio inline">
-					    	<input type="radio" name="current"> Student
+					    	<input type="radio" name="current" value="1"> {{ text_student }}
 					    </label>
+				    	{% elseif current == 1 %}
+					    <label class="radio inline">
+					    	<input type="radio" name="current" value="2"> {{ text_employed }}
+					    </label>
+					    <label class="radio inline">
+					    	<input type="radio" name="current" value="0"> {{ text_job_seeker }}
+					    </label>
+					    <label class="radio inline">
+					    	<input type="radio" name="current" value="1" checked="checked"> {{ text_student }}
+					    </label>
+				    	{% else %}
+					    <label class="radio inline">
+					    	<input type="radio" name="current" value="2" checked="checked"> {{ text_employed }}
+					    </label>
+					    <label class="radio inline">
+					    	<input type="radio" name="current" value="0"> {{ text_job_seeker }}
+					    </label>
+					    <label class="radio inline">
+					    	<input type="radio" name="current" value="1"> {{ text_student }}
+					    </label>
+            			{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2 offset1" for="inputJob">Job title</label>
+				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputJob" placeholder="Input Text">
-				    	<span class="yes-warning">Field is required</span>
+				    	<input class="span11" type="text" id="inputJob" placeholder="{{ text_job_title_placer }}">
+				    	{% if not(error_job_title is empty) %}<span class="yes-warning">{{ error_job_title }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
 					    <label>
-					    	<input type="checkbox"> I am a self-employed
+					    	<input type="checkbox"> {{ text_self_employed }}
 					    </label>
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2 offset1" for="inputCompany">Company</label>
+				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" placeholder="Input Text">
-				    	<span class="yes-warning">Field is required</span>
+				    	<input class="span11" type="text" id="inputCompany" placeholder="{{ text_company_placer }}">
+				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
-				    	<a href="#myCarousel" data-slide="next"><button class="btn btn-success">Create my profile</button></a>
+				    	<a href="#myCarousel" data-slide="next"><button class="btn btn-success">{{ text_create_profile }}</button></a>
 				    </div>
 			    </div>
 		    </form>
@@ -69,14 +91,14 @@
 		    		<div class="row-fluid register-recommend-heading">
 		    			<div class="span12">
 					    	<i class="regisert-recommend-icon"></i>
-					    	<h5>A Yesocl profile helps you...</h5>
+					    	<h5>{{ text_profile_recommend }}</h5>
 					    </div>
 				    </div>
 			    	<div class="row-fluid register-recommend-content">
 			    		<div class="span12">
-				    		<p>Showcase your skills and experience</p>
-				    		<p>Be found for new opportunities</p>
-				    		<p>Stay in touch with colleagues and friends</p>
+				    		<p>{{ text_recommend_1 }}</p>
+				    		<p>{{ text_recommend_2 }}</p>
+				    		<p>{{ text_recommend_3 }}</p>
 				    	</div>
 			    	</div>
 			    </div>
