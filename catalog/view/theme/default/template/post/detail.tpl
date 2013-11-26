@@ -1,12 +1,12 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/post_comment_in_page.tpl' %}
+{% use '@template/default/template/post/common/comment_post_detail.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
-    {{ block('post_common_post_comment_in_page_style') }}
+    {{ block('post_common_comment_post_detail_style') }}
 {% endblock %}
 
 {% block body %}
@@ -32,25 +32,30 @@
 							<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 						</span>
 					</div>
-					<ul class="post-actions fr">
+					<ul class="post-actions fr post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
 						<li>
-							<a class="like-post" href="#"
-							data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-post-liked="{{ post.isUserLiked }}" title="Like/Unlike">
-							{% if post.isUserLiked == 0 %}
-		                        <i class="icon-thumbs-up medium-icon"></i>
-		                    {% else %}
-		                        <i class="icon-thumbs-down medium-icon"></i>
-		                    {% endif %}
-							</a>
+							<a class="like-post{% if post.isUserLiked == 1 %} hidden{% endif %}" href="#" title="Like">
+								<i class="icon-thumbs-up medium-icon"></i>
+		                    </a>
+		                    <span class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
+			                    <a href="#" title="Unlike">
+			                        <i class="icon-thumbs-down medium-icon"></i>
+								</a>
+							</span>
 							<span class="number">
-								<a href="#" title="View who liked">{{ post.like_count }}</a>
+								<a class="post-liked-list" href="#" 
+									data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" 
+									data-like-count="{{ post.like_count }}" 
+									title="View who liked">
+									{{ post.like_count }}
+								</a>
 							</span>
 						</li>
 						<li style="display: none;" class="toggle-comment">
-							<a href="#" title="Open comment box">
+							<a class="open-comment disabled" href="#" title="Open comment box">
 								<i class="icon-comments-alt medium-icon"></i>
 							</a>
-							<span class="number">7</span>
+							<span class="number" id="post-detail-comment-number">{{ comments|length }}</span>
 						</li>
 						<li>
 							<a class="">
@@ -66,7 +71,6 @@
 		<div id="detail-content">
 			<div id="post-content">
 				{{ post.content|raw }}
-				{{ post.content|raw }}
 			</div>
 			<div id="detail-scroll">
 				<a class="btn-link-round fl" id="detail-first" href="#" style="display: none;">
@@ -76,7 +80,7 @@
 					<i class="icon-arrow-right"></i>
 				</a>
 			</div>
-			{{ block('post_common_post_comment_in_page') }}
+			{{ block('post_common_comment_post_detail') }}
 		</div>
 	</div>
 </div>
@@ -84,5 +88,5 @@
 
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
-{{ block('post_common_post_comment_in_page_javascript') }}
+{{ block('post_common_comment_post_detail_javascript') }}
 {% endblock %}

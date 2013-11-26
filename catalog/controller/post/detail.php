@@ -46,6 +46,7 @@ class ControllerPostDetail extends Controller {
 		}
 
 		$this->load->model('tool/image');
+		$this->load->model('tool/object');
 
 		$avatar = $this->model_tool_image->getAvatarUser( $post->getUser()->getAvatar(), $post->getUser()->getPrimaryEmail()->getEmail() );
 		
@@ -72,6 +73,8 @@ class ControllerPostDetail extends Controller {
 			'user_slug'		=> $post->getUser()->getSlug()
 		);
 
+		$this->data['comments'] = $this->model_tool_object->formatListCommentsOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
+		
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['is_user'] = $is_user;
 		
