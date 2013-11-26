@@ -288,15 +288,16 @@
                     $('.comment-body').html('');
 
                     var htmlOutput = '';
-                    var comments = new Array();
+                    var comments = new HashTable();
                     for (key in data.comments) {
-                        comments[data.comments[key].id] = data.comments[key];
+                        comments.setItem(data.comments[key].id, data.comments[key]);
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
+                    
                     that.$el.data('comments', comments);   
                     htmlOutput += '<div id="add-more-item"></div>';
                     $('#comment-box').find('.comment-body').html(htmlOutput);
-                    $('#comment-box').find('.y-box-header span').html(that.comment_count);
+                    $('#comment-box').find('.y-box-header span').html(comments.length);
                     $('.comment-form').attr('data-url', that.comment_url);
                     
                     $(document).trigger('SHOWN_COMMENT_LIST');
@@ -325,7 +326,7 @@
                 
             htmlOutput += '<div id="add-more-item"></div>';
             $('#comment-box').find('.comment-body').html(htmlOutput);
-            $('#comment-box').find('.y-box-header span').html(that.comment_count);
+            $('#comment-box').find('.y-box-header span').html(comments.length);
             $('.comment-form').attr('data-url', that.comment_url);
             page = 1;
 
@@ -493,9 +494,9 @@
                 var comments = $comment_btn.data('comments');
                 
                 if ( comments == undefined ){
-                    comments = new Array();
+                    comments = new HashTable();
                 }
-                comments[data.comment.id] = data.comment;
+                comments.setItem(data.comment.id, data.comment);
                 $comment_btn.data('comments', comments);
 
                 htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();                
@@ -508,7 +509,14 @@
                     commentBody.mCustomScrollbar("scrollTo", "bottom");
                 }, 500);                
                 
-                var comment_count = getActualLengthOfArray(comments);
+                var comment_count = 0;
+                that.$el.parent().find('.comment-item').each(function(){
+                    comment_count++;
+                });
+
+                // only post detail
+                $('#post-detail-comment-number').html(comment_count);
+
                 that.$content.val('');
                 that.$el.parent().find('.counter').html( comment_count );                
                 $comment_btn.parent().find('d').html( comment_count );

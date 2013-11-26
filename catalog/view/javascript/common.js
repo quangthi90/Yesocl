@@ -893,7 +893,7 @@ function HashTable(obj)
 			'nine': 9,
 			'ten': 10,
 		};
-		var ht = new HashTable(obj);
+		var ht = new HashTable();
 		//Return length:
 		console.log(ht.length);
 		//Add new item:
