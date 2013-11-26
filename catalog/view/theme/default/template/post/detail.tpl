@@ -61,7 +61,7 @@
 							<a class="">
 								<i class="icon-eye-open medium-icon"></i>
 							</a>
-							<span class="number">1k</span>
+							<span class="number">{{ post.count_viewer }}</span>
 						</li>			
 					</ul>			
 					<div class="clear"></div>	
