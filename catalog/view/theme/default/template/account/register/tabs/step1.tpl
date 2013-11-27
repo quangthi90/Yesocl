@@ -12,14 +12,15 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputLocation">{{ text_live_in }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputLocation" placeholder="{{ text_location_placer }}">
+				    	<input class="span11" type="text" id="inputLocation" name="location" placeholder="{{ text_location_placer }}" value="">
+				    	<input type="hidden" name="city_id" value="">
 				    	{% if not(error_location is empty) %}<span class="yes-warning">{{ error_location }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputPostal">{{ text_postal_code }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputPostal" placeholder="{{ text_post_code_placer }}">
+				    	<input class="span11" type="text" id="inputPostal" name="postal_code" placeholder="{{ text_post_code_placer }}">
 				    	{% if not(error_postal_code is empty) %}<span class="yes-warning">{{ error_postal_code }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -64,7 +65,7 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputIndustry">{{ text_industry }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputIndustry" placeholder="{{ text_industry_placer }}">
+				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}">
 				    	{% if not(error_industry is empty) %}<span class="yes-warning">{{ error_industry }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -74,14 +75,14 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputSchool">{{ text_school }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputSchool" placeholder="{{ text_school_placer }}">
+				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}">
 				    	{% if not(error_school is empty) %}<span class="yes-warning">{{ error_school }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputFieldOfStudy">{{ text_fieldofstudy }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputFieldOfStudy" placeholder="{{ text_fieldofstudy_placer }}">
+				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}">
 				    	{% if not(error_fieldofstudy is empty) %}<span class="yes-warning">{{ error_fieldofstudy }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -101,21 +102,21 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" placeholder="{{ text_company_placer }}">
+				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}">
 				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputJob" placeholder="{{ text_job_title_placer }}">
+				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}">
 				    	{% if not(error_job_title is empty) %}<span class="yes-warning">{{ error_job_title }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
 					    <label>
-					    	<input type="checkbox"> {{ text_self_employed }}
+					    	<input type="checkbox" value="1" name="company[self_employed]"> {{ text_self_employed }}
 					    </label>
 				    </div>
 			    </div>
