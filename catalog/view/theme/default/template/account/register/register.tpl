@@ -43,6 +43,7 @@
 {% endblock %}
 
 {% block javascript %}
+<script type="text/javascript" src="{{ asset_js('register_complete.js') }}"></script>
 <script type="text/javascript">
 jQuery(document).ready(function (){
 	
