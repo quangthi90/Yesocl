@@ -82,7 +82,7 @@
 			    <div class="control-group row-fluid student-input">
 				    <label class="control-label span2 offset1" for="inputFieldOfStudy">{{ text_fieldofstudy }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="school.fieldofstudy">
+				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="{{ school.fieldofstudy }}">
 				    	{% if not(error_fieldofstudy is empty) %}<span class="yes-warning">{{ error_fieldofstudy }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -209,7 +209,7 @@
 			    <div class="control-group row-fluid student-input">
 				    <label class="control-label span2 offset1" for="inputFieldOfStudy">{{ text_fieldofstudy }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="school.fieldofstudy">
+				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="{{ school.fieldofstudy }}">
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid student-input">

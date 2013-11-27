@@ -11,22 +11,24 @@
 	}
 
 	RegisterCompleteStep1.prototype.attachEvents = function () {
-		this.$el.find('input[name=\"current\"]').click(function () {alert($(this).val());
+		var that = this;
+
+		this.$el.find('input[name=\"current\"]').click(function () {
 			if ($(this).val() == 2) {
 				that.$el.find('.employed-input').remove();
 				that.$el.find('.job-seeker-input').remove();
 				that.$el.find('.student-input').remove();
-				that.$el.find('#current-input-step1').before($.tmpl($('#employed-input')));
+				that.$el.find('#current-input-step1').after($.tmpl($('#employed-inputs')));
 			}else if ($(this).val() == 0) {
 				that.$el.find('.employed-input').remove();
 				that.$el.find('.job-seeker-input').remove();
 				that.$el.find('.student-input').remove();
-				that.$el.find('#current-input-step1').before($.tmpl($('#job-seeker-input')));
+				that.$el.find('#current-input-step1').after($.tmpl($('#job-seeker-inputs')));
 			}else if ($(this).val() == 1) {
 				that.$el.find('.employed-input').remove();
 				that.$el.find('.job-seeker-input').remove();
 				that.$el.find('.student-input').remove();
-				that.$el.find('#current-input-step1').before($.tmpl($('#student-input')));
+				that.$el.find('#current-input-step1').after($.tmpl($('#student-inputs')));
 			}
 		});
 	}
