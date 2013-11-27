@@ -1,10 +1,6 @@
 <?php
 class ControllerCompanyCompany extends Controller {
 	public function autocomplete() {
-		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
-			return $this->forward('error/permission');
-		}
-
 		$this->load->model( 'company/company' );
 
 		$sort = 'name';
@@ -25,8 +21,10 @@ class ControllerCompanyCompany extends Controller {
 		$companies = $this->model_company_company->getCompanies( $data );
 
 		$json = array();
+		$json['companies'] = array();
+		$json['success'] = 'ok';
 		foreach ( $companies as $company ) {
-			$json[] = array(
+			$json['companies'][] = array(
 				'id' => $company->getId(),
 				'name' => $company->getName(),
 				);

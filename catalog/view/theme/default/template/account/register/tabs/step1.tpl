@@ -100,8 +100,9 @@
 			    <div class="control-group row-fluid employed-input">
 				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="{{ company.name }}">
+				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="{{ company.name }}" data-url="{{ link_autocomplete_company }}">
 				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
+				    	<input type="hidden" name="company[id]" value="{{ company.id }}" />
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid employed-input">
@@ -168,7 +169,8 @@
 				<div class="control-group row-fluid employed-input">
 				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="{{ company.name }}">
+				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="{{ company.name }}" data-url="{{ link_autocomplete_company }}">
+				    	<input type="hidden" name="company[id]" value="{{ company.id }}" />
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid employed-input">

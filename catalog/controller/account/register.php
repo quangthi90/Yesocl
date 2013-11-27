@@ -96,6 +96,9 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_fieldofstudy'] = 'Field of study';
   			$this->data['text_fieldofstudy_placer'] = 'Input Text';
 
+  			// link
+  			$this->data['link_autocomplete_company'] = HTTP_SERVER . $this->url->link('company/company/autocomplete');
+
   			// get customer data
   			$this->load->model('account/customer');
   			$customer = $this->model_account_customer->getCustomer($this->customer->getId());
@@ -126,6 +129,7 @@ class ControllerAccountRegister extends Controller {
   			$this->data['current'] = 0;
   			if ($experience) {
   				$this->data['company']['name'] = $experience->getCompany();
+  				$this->data['company']['id'] = $experience->getCompanyId();
   				$this->data['company']['title'] = $experience->getTitle();
   				$this->data['company']['start']['month'] = $experience->getStarted()->format('m');
   				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
@@ -134,6 +138,7 @@ class ControllerAccountRegister extends Controller {
   				$this->data['current'] = 1;
   			}else {
   				$this->data['company']['name'] = '';
+  				$this->data['company']['id'] = '0';
   				$this->data['company']['title'] = '';
   				$this->data['company']['start']['month'] = 1;
   				$this->data['company']['start']['year'] = $current_year;

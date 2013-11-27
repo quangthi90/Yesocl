@@ -30,7 +30,61 @@
 				that.$el.find('.student-input').remove();
 				that.$el.find('#current-input-step1').after($.tmpl($('#student-inputs')));
 			}
+
+			new RegisterCompleteStep1(that.$el);
 		});
+
+		this.$el.find('input[name=\"company[name]\"]').typeahead({
+            source: function (query, process) {
+            	companyList = [];
+                map = {};      
+                		
+            	$.ajax({
+            		type: 'GET',
+            		url: that.$el.find('input[name=\"company[name]\"]').data('url'),
+            		data: { 'filter_name': query },
+            		dataType: 'json',
+            		success: function ( json ) {
+            			if ( json.success == 'ok' ) {
+				            $.each(json.companies, function (i, item) {
+				            	if ( companyList.indexOf(item.name) == -1 ) {
+					                companyList.push(item.name);
+					                map[item.name] = item;
+				            	}
+				            });
+                			process(companyList);
+            			}
+            		},
+            		error: function (xhr, error) {
+            			alert(xhr.responseText);
+            		},
+            	});
+            },
+            updater: function (item) {
+                var selectedCompany = map[item];
+                that.$el.find('input[name=\"company[id]\"]').val(selectedCompany.id);
+                return selectedCompany.name;
+            },
+            matcher: function (item) {
+                return true;
+            },
+            /*sorter: function (items) {
+                return items.sort();
+            },
+            highlighter: function (item) {
+                var selectedCompany = map[item];
+                var regex = new RegExp( '(' + this.query + ')', 'gi' );
+                var boldItem = selectedCompany.name.replace( regex, "<strong>$1</strong>" );
+                var htmlContent = '<div class="friend-dropdown-info">'
+                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
+                                + '<div class="friend-meta-info">'
+                                + '<span class="friend-name">' + boldItem + '</span>' 
+                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
+                                + '</div>'
+                                + '</div>';
+                return htmlContent;
+            }*/
+        });
 	}
 
 	$(function(){
