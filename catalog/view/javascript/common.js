@@ -314,7 +314,7 @@ function HashTable(obj)
 			{id:"10", category:"Group", image: tempImg, value: "Dau Tu Bat Dong San", url:"#", metaInfo:"200 members"},
 			{id:"11", category:"Group", image: tempImg, value: "Cong Nghe Thong Tin", url:"#", metaInfo:"1k members"}
 		];
-		that.autoCtrl.typeahead([
+		that.autoCtrl.typeaheadCustom([
 		  {
 		    name: 'dataset-category category-friend',
 		    local: dbFriend,
@@ -378,7 +378,7 @@ function HashTable(obj)
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
 		var that = this;
 		this.root.slideUp(200, function(){
-			that.autoCtrl.typeahead('setQuery', '');
+			that.autoCtrl.typeaheadCustom('setQuery', '');
 			$(that.invokeCtrl).removeClass('active');
 		})
 	}
