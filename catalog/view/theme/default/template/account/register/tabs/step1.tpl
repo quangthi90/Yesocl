@@ -74,7 +74,7 @@
 			    <div class="control-group row-fluid student-input">
 				    <label class="control-label span2 offset1" for="inputSchool">{{ text_school }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="{{ school.name }}">
+				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="{{ school.name }}" data-url="{{ link_autocomplete_school }}">
 				    	<input type="hidden" name="school[id]" value="{{ school.id }}">
 				    	{% if not(error_school is empty) %}<span class="yes-warning">{{ error_school }}</span>{% endif %}
 				    </div>
@@ -204,7 +204,7 @@
 				<div class="control-group row-fluid student-input">
 				    <label class="control-label span2 offset1" for="inputSchool">{{ text_school }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="{{ school.name }}">
+				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="{{ school.name }}"  data-url="{{ link_autocomplete_school }}">
 				    	<input type="hidden" name="school[id]" value="{{ school.id }}">
 				    </div>
 			    </div>

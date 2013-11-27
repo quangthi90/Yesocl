@@ -85,6 +85,40 @@
                 return htmlContent;
             }*/
         });
+
+		this.$el.find('input[name=\"school[name]\"]').typeahead({
+            source: function (query, process) {
+            	schoolList = [];
+                map = {};      
+                		
+            	$.ajax({
+            		type: 'GET',
+            		url: that.$el.find('input[name=\"school[name]\"]').data('url'),
+            		data: { 'keyword': query },
+            		dataType: 'json',
+            		success: function ( json ) {
+				        $.each(json, function (i, item) {
+				           	if ( schoolList.indexOf(item.name) == -1 ) {
+					            schoolList.push(item.name);
+					            map[item.name] = item;
+				            }
+				        });
+                		process(schoolList);
+            		},
+            		error: function (xhr, error) {
+            			alert(xhr.responseText);
+            		},
+            	});
+            },
+            updater: function (item) {
+                var selectedSchool = map[item];
+                that.$el.find('input[name=\"school[id]\"]').val(selectedSchool.id);
+                return selectedSchool.name;
+            },
+            matcher: function (item) {
+                return true;
+            },
+        });
 	}
 
 	$(function(){
