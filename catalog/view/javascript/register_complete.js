@@ -219,6 +219,40 @@
                 return true;
             },
         });
+
+		this.$el.find('input[name=\"location\"]').typeahead({
+            source: function (query, process) {
+            	locationList = [];
+                map = {};      
+                		
+            	$.ajax({
+            		type: 'GET',
+            		url: that.$el.find('input[name=\"location\"]').data('url'),
+            		data: { 'keyword': query },
+            		dataType: 'json',
+            		success: function ( json ) {
+				        $.each(json, function (i, item) {
+				           	if ( locationList.indexOf(item.name) == -1 ) {
+					            locationList.push(item.name);
+					            map[item.name] = item;
+				            }
+				        });
+                		process(locationList);
+            		},
+            		error: function (xhr, error) {
+            			alert(xhr.responseText);
+            		},
+            	});
+            },
+            updater: function (item) {
+                var selectedLocation = map[item];
+                that.$el.find('input[name=\"city_id\"]').val(selectedLocation.id);
+                return selectedLocation.name;
+            },
+            matcher: function (item) {
+                return true;
+            },
+        });
 	}
 
 	$(function(){

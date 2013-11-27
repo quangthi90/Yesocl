@@ -12,7 +12,7 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputLocation">{{ text_live_in }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputLocation" name="location" placeholder="{{ text_location_placer }}" value="{{ location }}">
+				    	<input class="span11" type="text" id="inputLocation" name="location" placeholder="{{ text_location_placer }}" value="{{ location }}" data-url="{{ link_autocomplete_location }}">
 				    	<input type="hidden" name="city_id" value="{{ city_id }}">
 				    	{% if not(error_location is empty) %}<span class="yes-warning">{{ error_location }}</span>{% endif %}
 				    </div>
