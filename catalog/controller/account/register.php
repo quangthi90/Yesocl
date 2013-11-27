@@ -57,6 +57,14 @@ class ControllerAccountRegister extends Controller {
   				$this->data['error_company'] = $this->error['company'];
   			}
 
+  			if (isset($this->error['industry'])) {
+  				$this->data['error_industry'] = $this->error['industry'];
+  			}
+
+  			if (isset($this->error['school'])) {
+  				$this->data['error_school'] = $this->error['school'];
+  			}
+
   			// text
   			$this->data['text_introdure_your_self'] = 'Introduce your self';
   			$this->data['text_create_profile'] = 'Create my profile';
@@ -80,6 +88,13 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_self_employed'] = 'I am a self-employed';
   			$this->data['text_company'] = 'Company';
   			$this->data['text_company_placer'] = 'Input Text';
+  			$this->data['text_industry'] = 'Industry';
+  			$this->data['text_industry_placer'] = 'Input Text';
+  			$this->data['text_school'] = 'School';
+  			$this->data['text_school_placer'] = 'Input Text';
+  			$this->data['text_from'] = 'From';
+  			$this->data['text_fieldofstudy'] = 'Field of study';
+  			$this->data['text_fieldofstudy_placer'] = 'Input Text';
 
   			// get customer data
   			$this->load->model('account/customer');
@@ -89,6 +104,10 @@ class ControllerAccountRegister extends Controller {
   			}
 
   			// fetch data to step 1
+  			// common
+  			$this->data['current_year'] = (new DateTime())->format('Y');
+  			$this->data['before_year'] = $this->data['current_year'] - 99;
+
   			$meta = $customer->getMeta();
   			$background = $meta->getBackground();
   			//location

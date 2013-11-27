@@ -59,6 +59,52 @@
             			{% endif %}
 				    </div>
 			    </div>
+				{% if current == 0 %}
+			    <!-- job seeker -->
+			    <div class="control-group row-fluid">
+				    <label class="control-label span2 offset1" for="inputIndustry">{{ text_industry }}</label>
+				    <div class="controls span9">
+				    	<input class="span11" type="text" id="inputIndustry" placeholder="{{ text_industry_placer }}">
+				    	{% if not(error_industry is empty) %}<span class="yes-warning">{{ error_industry }}</span>{% endif %}
+				    </div>
+			    </div>
+			    <!-- end job seeker -->
+				{% elseif current == 1 %}
+			    <!-- student -->
+			    <div class="control-group row-fluid">
+				    <label class="control-label span2 offset1" for="inputSchool">{{ text_school }}</label>
+				    <div class="controls span9">
+				    	<input class="span11" type="text" id="inputSchool" placeholder="{{ text_school_placer }}">
+				    	{% if not(error_school is empty) %}<span class="yes-warning">{{ error_school }}</span>{% endif %}
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid">
+				    <label class="control-label span2 offset1" for="inputFieldOfStudy">{{ text_fieldofstudy }}</label>
+				    <div class="controls span9">
+				    	<input class="span11" type="text" id="inputFieldOfStudy" placeholder="{{ text_fieldofstudy_placer }}">
+				    	{% if not(error_fieldofstudy is empty) %}<span class="yes-warning">{{ error_fieldofstudy }}</span>{% endif %}
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid">
+				    <label class="control-label span2 offset1" for="inputFrom">{{ text_from }}</label>
+				    <div class="controls span9">
+						<select class="span2" name="school[start][year]">
+							{% for i in current_year..before_year %}
+							<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select> 
+				    </div>
+			    </div>
+			    <!-- end student -->
+				{% else %}
+			    <!-- employed -->
+			    <div class="control-group row-fluid">
+				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
+				    <div class="controls span9">
+				    	<input class="span11" type="text" id="inputCompany" placeholder="{{ text_company_placer }}">
+				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
+				    </div>
+			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
@@ -74,12 +120,20 @@
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
-				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
-				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" placeholder="{{ text_company_placer }}">
-				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
-				    </div>
+				    <label class="control-label span2 offset1" for="inputFrom">{{ text_from }}</label>
+				    <select class="span2" name="company[start][month]" id="inputFrom">
+						{% for i in 1..12 %}
+						<option value="{{ i }}">{{ i }}</option>
+						{% endfor %}
+					</select> 
+					<select class="span2" name="company[start][year]">
+						{% for i in current_year..before_year %}
+						<option value="{{ i }}">{{ i }}</option>
+						{% endfor %}
+					</select> 
 			    </div>
+			    <!-- end employed -->
+            	{% endif %}
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
 				    	<a href="#myCarousel" data-slide="next"><button class="btn btn-success">{{ text_create_profile }}</button></a>
