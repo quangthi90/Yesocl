@@ -12,15 +12,15 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputLocation">{{ text_live_in }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputLocation" name="location" placeholder="{{ text_location_placer }}" value="">
-				    	<input type="hidden" name="city_id" value="">
+				    	<input class="span11" type="text" id="inputLocation" name="location" placeholder="{{ text_location_placer }}" value="{{ location }}">
+				    	<input type="hidden" name="city_id" value="{{ city_id }}">
 				    	{% if not(error_location is empty) %}<span class="yes-warning">{{ error_location }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputPostal">{{ text_postal_code }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputPostal" name="postal_code" placeholder="{{ text_post_code_placer }}">
+				    	<input class="span11" type="text" id="inputPostal" name="postal_code" placeholder="{{ text_post_code_placer }}" value="{{ postal_code }}">
 				    	{% if not(error_postal_code is empty) %}<span class="yes-warning">{{ error_postal_code }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -65,7 +65,8 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputIndustry">{{ text_industry }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}">
+				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}" value="{{ industry }}">
+				    	<input type="hidden" name="industry_id" value="{{ industry_id }}">
 				    	{% if not(error_industry is empty) %}<span class="yes-warning">{{ error_industry }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -75,23 +76,24 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputSchool">{{ text_school }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}">
+				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="{{ school.name }}">
+				    	<input type="hidden" name="school[id]" value="{{ school.id }}">
 				    	{% if not(error_school is empty) %}<span class="yes-warning">{{ error_school }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputFieldOfStudy">{{ text_fieldofstudy }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}">
+				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="school.fieldofstudy">
 				    	{% if not(error_fieldofstudy is empty) %}<span class="yes-warning">{{ error_fieldofstudy }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputFrom">{{ text_from }}</label>
 				    <div class="controls span9">
-						<select class="span2" name="school[start][year]">
+						<select class="span2" name="school[start]">
 							{% for i in current_year..before_year %}
-							<option value="{{ i }}">{{ i }}</option>
+							<option value="{{ i }}" {% if school.start == i %}checked="checked"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>
@@ -102,21 +104,21 @@
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}">
+				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="{{ company.name }}">
 				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}">
+				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="{{ company.title }}">
 				    	{% if not(error_job_title is empty) %}<span class="yes-warning">{{ error_job_title }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
 					    <label>
-					    	<input type="checkbox" value="1" name="company[self_employed]"> {{ text_self_employed }}
+					    	<input type="checkbox" value="1" name="company[self_employed]" {% if company.self_employed %}checked="checked"{% endif %}> {{ text_self_employed }}
 					    </label>
 				    </div>
 			    </div>
@@ -124,12 +126,12 @@
 				    <label class="control-label span2 offset1" for="inputFrom">{{ text_from }}</label>
 				    <select class="span2" name="company[start][month]" id="inputFrom">
 						{% for i in 1..12 %}
-						<option value="{{ i }}">{{ i }}</option>
+						<option value="{{ i }}" {%if company.start.month == i %}checked="checked"{% endif %}>{{ i }}</option>
 						{% endfor %}
 					</select> 
 					<select class="span2" name="company[start][year]">
 						{% for i in current_year..before_year %}
-						<option value="{{ i }}">{{ i }}</option>
+						<option value="{{ i }}" {%if company.start.year == i %}checked="checked"{% endif %}>{{ i }}</option>
 						{% endfor %}
 					</select> 
 			    </div>

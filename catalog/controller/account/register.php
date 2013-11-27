@@ -112,8 +112,13 @@ class ControllerAccountRegister extends Controller {
   			$background = $meta->getBackground();
   			//location
   			$location = $meta->getLocation();
-  			$this->data['location']	= $location->getLocation();
-  			$this->data['city_id']	= $location->getCityId();
+  			if ($location) {
+	  			$this->data['location']	= $location->getLocation();
+	  			$this->data['city_id']	= $location->getCityId();
+  			}else {
+	  			$this->data['location']	= '';
+	  			$this->data['city_id']	= 0;
+  			}
   			//post code
   			$this->data['postal_code'] = $meta->getPostalCode();
   			//experience
@@ -122,8 +127,9 @@ class ControllerAccountRegister extends Controller {
   			if ($experience) {
   				$this->data['company']['name'] = $experience->getCompany();
   				$this->data['company']['title'] = $experience->getTitle();
-  				$this->data['company']['start'] = $experience->getStarted();
-  				$this->data['company']['end'] = $experience->getEnded();
+  				$this->data['company']['start']['month'] = $experience->getStarted()->format('m');
+  				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
+  				//$this->data['company']['end'] = $experience->getEnded();
   				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
   				$this->data['current'] = 1;
   			}
@@ -134,7 +140,7 @@ class ControllerAccountRegister extends Controller {
   				$this->data['school']['id'] = $education->getSchoolId();
   				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
   				$this->data['school']['start'] = $education->getStarted();
-  				$this->data['school']['end'] = $education->getEnded();
+  				//$this->data['school']['end'] = $education->getEnded();
   				$this->data['current'] = 2;
   			}
   			// industry
