@@ -6,13 +6,7 @@
 {% block profiles_tabs_background %}
 <div id="profiles-tabs-background" class="profiles-tabs">
 	<div class="profiles-tabs-header">
-		<div class="span7">
-			<div class="row-fluid">
-				<div class="profiles-tabs-title span5"><i class="icon-list"></i> Background</div>
-			</div>
-		</div>
-		<div class="pull-right profiles-btn-next"><a href="#"><i class="icon-chevron-right"></i></a></div>
-		<div class="clear"></div>
+		<div class="profiles-tabs-title"><i class="icon-list"></i> Background</div>
 	</div>
 	{{ block('profiles_tabs_summary') }}
 	{{ block('profiles_tabs_education') }}

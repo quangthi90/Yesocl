@@ -8,36 +8,49 @@
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
 		this.$experience = $el.find('#profiles-tabs-background-experience');
-		this.$skill = $el.find('#profiles-tabs-background-skill');
-		
+		this.$skill = $el.find('#profiles-tabs-background-skill');		
 		this.$header = this.$background.find('.profiles-tabs-header');
+		this.$main_profile = $el.find('.profiles-tabs-main');
 
-		var contentHeight = this.$el.height()*9/10;
+		var contentHeight = this.$el.height();
 		var contentWidth = this.$information.width();
+		var gapHeight = 35 + 50 + 2*(20 + 1);
+
+		//Fix height of main profile:
+		this.$main_profile.height(contentHeight - 35 - 2*(20 + 1));
+
+		// Information
+		var information_main_body = this.$information.find('.profiles-tabs-main-body');
+		this.$information.outerWidth(contentWidth);
+		information_main_body.outerHeight(contentHeight - gapHeight);
+		information_main_body.makeCustomScroll();
 
 		// Summary
 		var summary_main_body = this.$summary.find('.profiles-tabs-main-body');
 		this.$summary.outerWidth(contentWidth);
-		summary_main_body.outerHeight(contentHeight - this.$header.height() - 30);
-		summary_main_body.niceScroll();
+		summary_main_body.outerHeight(contentHeight - gapHeight);
+		summary_main_body.makeCustomScroll();
+		var textareaCtrl = summary_main_body.find('textarea[name="summary"]');
+		textareaCtrl.css('max-height', (summary_main_body.height() - 30) + 'px');
+		textareaCtrl.css('min-height', (summary_main_body.height() - 30) + 'px');
 
 		// Education
 		var education_main_body = this.$education.find('.profiles-tabs-main-body');
 		this.$education.outerWidth(contentWidth);
-		education_main_body.outerHeight(contentHeight - this.$header.height() - 30);
-		education_main_body.niceScroll();
+		education_main_body.outerHeight(contentHeight - gapHeight);
+		education_main_body.makeCustomScroll();
 
 		// Experience
 		var experience_main_body = this.$experience.find('.profiles-tabs-main-body');
 		this.$experience.outerWidth(contentWidth);
-		experience_main_body.outerHeight(contentHeight - this.$header.height() - 30);
-		experience_main_body.niceScroll();
+		experience_main_body.outerHeight(contentHeight - gapHeight);
+		experience_main_body.makeCustomScroll();
 
 		// Skill
 		var skill_main_body = this.$skill.find('.profiles-tabs-main-body');
 		this.$skill.outerWidth(contentWidth);
-		skill_main_body.outerHeight(contentHeight - this.$header.height() - 30);
-		skill_main_body.niceScroll();
+		skill_main_body.outerHeight(contentHeight - gapHeight);
+		skill_main_body.makeCustomScroll();
 
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
