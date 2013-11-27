@@ -319,6 +319,7 @@ class ControllerUserUser extends Controller {
 				$location = $experience->getLocation();
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
+					'company_id' => $experience->getCompanyId(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
@@ -1247,6 +1248,7 @@ class ControllerUserUser extends Controller {
 				$location = $experience->getLocation();
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
+					'company_id' => $experience->getCompanyId(),
 					'current' => $experience->getCurrent(),
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',

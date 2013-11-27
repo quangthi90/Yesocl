@@ -5,7 +5,7 @@
 				<div class="row-fluid">
 					<div class="span4">
 						<div class="span3"><strong><?php echo $entry_company; ?></strong></div>
-						<div class="span9"><input class="company input-medium" type="text" name="background[experiences][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /><input type="hidden" class="company_id" name="background[experiences][<?php echo $key; ?>][company_id]" value="" />
+						<div class="span9"><input class="company input-medium" type="text" name="background[experiences][<?php echo $key; ?>][company]" value="<?php echo $experience['company']; ?>" /><input type="hidden" class="company_id" name="background[experiences][<?php echo $key; ?>][company_id]" value="<?php echo $experience['company_id']; ?>" />
 
                           <?php if ( isset( $error_experience[$key]['company'] ) ) { ?>
                           <div class="warning"><?php echo $error_experience[$key]['company']; ?></div>

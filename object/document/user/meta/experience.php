@@ -11,6 +11,9 @@ Class Experience {
 	private $company;
 
 	/** @MongoDB\String */
+	private $company_id;
+
+	/** @MongoDB\String */
 	private $title;
 
 	/** @MongoDB\EmbedOne(targetDocument="Location") */
@@ -41,6 +44,14 @@ Class Experience {
 
 	public function getCompany(){
 		return $this->company;
+	}
+
+	public function setCompanyId( $company_id ){
+		$this->company_id = $company_id;
+	}
+
+	public function getCompanyId(){
+		return $this->company_id;
 	}
 
 	public function setTitle( $title ){
