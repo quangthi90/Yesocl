@@ -36,6 +36,8 @@
 
 		this.$el.find('input[name=\"company[name]\"]').typeahead({
             source: function (query, process) {
+                that.$el.find('input[name=\"company[id]\"]').val('0');
+
             	companyList = [];
                 map = {};      
                 		
@@ -121,6 +123,8 @@
 
 		this.$el.find('input[name=\"school[name]\"]').typeahead({
             source: function (query, process) {
+                that.$el.find('input[name=\"school[id]\"]').val('0');
+
             	schoolList = [];
                 map = {};      
                 		
@@ -188,6 +192,8 @@
 
 		this.$el.find('input[name=\"industry\"]').typeahead({
             source: function (query, process) {
+                that.$el.find('input[name=\"industry_id\"]').val('0');
+
             	industryList = [];
                 map = {};      
                 		
@@ -222,6 +228,8 @@
 
 		this.$el.find('input[name=\"location\"]').typeahead({
             source: function (query, process) {
+            	that.$el.find('input[name=\"city_id\"]').val('0');
+
             	locationList = [];
                 map = {};      
                 		
