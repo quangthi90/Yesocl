@@ -96,7 +96,8 @@ Abstract Class Post {
 			'status'		=> $this->getStatus(),
 			'email'			=> $this->getEmail(),
 			'comment_count' => $this->getComments()->count(),
-			'like_count'	=> count($this->getLikerIds())
+			'like_count'	=> count($this->getLikerIds()),
+			'liker_ids'		=> $this->getLikerIds()
 		);
 
 		return $post_data;
