@@ -119,6 +119,39 @@
                 return true;
             },
         });
+
+		this.$el.find('input[name=\"school[fieldofstudy]\"]').typeahead({
+            source: function (query, process) {
+            	fieldofstudyList = [];
+                map = {};      
+                		
+            	$.ajax({
+            		type: 'GET',
+            		url: that.$el.find('input[name=\"school[fieldofstudy]\"]').data('url'),
+            		data: { 'keyword': query },
+            		dataType: 'json',
+            		success: function ( json ) {
+				        $.each(json, function (i, item) {
+				           	if ( fieldofstudyList.indexOf(item.name) == -1 ) {
+					            fieldofstudyList.push(item.name);
+					            map[item.name] = item;
+				            }
+				        });
+                		process(fieldofstudyList);
+            		},
+            		error: function (xhr, error) {
+            			alert(xhr.responseText);
+            		},
+            	});
+            },
+            updater: function (item) {
+                var selectedFieldOfStudt = map[item];
+                return selectedFieldOfStudt.name;
+            },
+            matcher: function (item) {
+                return true;
+            },
+        });
 	}
 
 	$(function(){
