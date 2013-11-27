@@ -111,13 +111,16 @@ class Customer {
   	}
   
   	public function isLogged() {
-    	return $this->customer_id;
+  		if ($this->customer_id) {
+  			return $this->customer_id;
+  		}elseif ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) ) {
+  			$this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'] );
+  		}
+  		return $this->customer_id;
   	}
 
   	public function hasRemember() {
-  		if ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) && $this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'] ) ) {
-  			return true;
-  		}
+  		
   		return false;
   	}
 

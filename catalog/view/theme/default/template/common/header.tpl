@@ -1,5 +1,5 @@
-{% set user_slug = get_current_user().slug %}
-{% if user_slug != null %}
+{% if is_logged() %}
+  {% set user_slug = get_current_user().slug %}
 <div id="y-header">
 	<div class="header-wrapper">
 		<div id="header-logo">

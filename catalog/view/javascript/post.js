@@ -250,10 +250,6 @@
                 $('#comment-box').find('.y-box-header span').html(that.comment_count);
                 $('.comment-form').attr('data-url', that.comment_url);
                 
-                $('.comment-body').stop().animate({
-                    scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-                }, 1000);
-
                 that.$el.addClass('disabled');
 
                 $(document).trigger('SHOWN_COMMENT_LIST');
@@ -292,23 +288,18 @@
                     $('.comment-body').html('');
 
                     var htmlOutput = '';
-                    var comments = new Array();
+                    var comments = new HashTable();
                     for (key in data.comments) {
-                        comments[data.comments[key].id] = data.comments[key];
+                        comments.setItem(data.comments[key].id, data.comments[key]);
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
-                    that.$el.data('comments', comments);  
-                    var comment_count = getActualLengthOfArray(comments);   
-
+                    
+                    that.$el.data('comments', comments);   
                     htmlOutput += '<div id="add-more-item"></div>';
                     $('#comment-box').find('.comment-body').html(htmlOutput);
-                    $('#comment-box').find('.y-box-header span').html(that.comment_count);
+                    $('#comment-box').find('.y-box-header span').html(comments.length);
                     $('.comment-form').attr('data-url', that.comment_url);
                     
-                    $('.comment-body').stop().animate({
-                        scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-                    }, 1000);
-
                     $(document).trigger('SHOWN_COMMENT_LIST');
 
                     jQuery(".timeago").timeago();
@@ -335,12 +326,9 @@
                 
             htmlOutput += '<div id="add-more-item"></div>';
             $('#comment-box').find('.comment-body').html(htmlOutput);
-            $('#comment-box').find('.y-box-header span').html(that.comment_count);
+            $('#comment-box').find('.y-box-header span').html(comments.length);
             $('.comment-form').attr('data-url', that.comment_url);
             page = 1;
-            $('.comment-body').stop().animate({
-                scrollTop: $(".comment-body").find("#add-more-item").first().offset().top
-            }, 100);
 
             $(document).trigger('SHOWN_COMMENT_LIST');
 
@@ -366,12 +354,17 @@
         if(post.length >= 0){
             $('.post').removeClass('post-selecting');
             post.addClass('post-selecting');
-        }       
-        $('#overlay').show(100);        
-        $('#comment-box .y-box-content').makeCustomScroll(false);
+        }      
+        //Hide all tootip:
+        $('a[title]').tooltip('hide');
+        //Show overlay: 
+        $('#overlay').show(100);
+        
         //Show comment box:
         $('#comment-box').width($('#y-content').width()/3);
         $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
+        var commentBody = $('.comment-body').first();
+        commentBody.makeCustomScroll(false);
         $('#comment-box').stop().animate({ "right": "2px" }, 200);
     }
     ShowListComments.prototype.hideCommentBox = function($button) {
@@ -417,7 +410,7 @@
         this.$el            = $el;
         this.$content       = $el.find('textarea');
         this.$comment_btn   = $el.find('.btn-comment');
-        this.$press_enter_cb  = $el.find('.cb-press-enter');
+        this.$press_enter_cb  = $el.find('.cb-press-enter'); 
         
         this.attachEvents();
     }
@@ -494,34 +487,41 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
+                var commentBody = $('.comment-body').first();
+                commentBody.mCustomScrollbar('destroy');
                 var $curr_item = $('.open-comment.disabled').parents('.post');
-
                 var $comment_btn = $curr_item.find('.open-comment');
-
                 var comments = $comment_btn.data('comments');
-
+                
                 if ( comments == undefined ){
-                    comments = new Array();
+                    comments = new HashTable();
                 }
-
-                comments[data.comment.id] = data.comment;
-
+                comments.setItem(data.comment.id, data.comment);
                 $comment_btn.data('comments', comments);
 
-                htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
+                htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();                
                 $('#add-more-item').before(htmlOutput);
-                $('#comment-box').find('.comment-meta').width($('#comment-box').width() - 97);
-                that.$content.val('');
-                //Scroll to last post which have just been added
-                $('#comment-box .y-box-content').mCustomScrollbar("scrollTo","last");
-
-                var comment_count = getActualLengthOfArray(comments);
-                console.log(comments);
-                console.log(comment_count);
-                that.$el.parent().find('.counter').html( comment_count );
+                commentBody.find('.comment-meta').width(commentBody.width() - 97);
                 
+                //Scroll to last post which have just been added 
+                commentBody.makeCustomScroll(false);
+                setTimeout(function() {   
+                    commentBody.mCustomScrollbar("scrollTo", "bottom");
+                }, 500);                
+                
+                var comment_count = 0;
+                that.$el.parent().find('.comment-item').each(function(){
+                    comment_count++;
+                });
+
+                // only post detail
+                $('#post-detail-comment-number').html(comment_count);
+
+                that.$content.val('');
+                that.$el.parent().find('.counter').html( comment_count );                
                 $comment_btn.parent().find('d').html( comment_count );
                 $comment_btn.attr('data-comment-count', comment_count).find('d').html( comment_count );
+                $comment_btn.attr('title', comment_count);
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
                 $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 
@@ -549,6 +549,10 @@
     };
 
     $(function(){
+        $('.comment-form').each(function(){
+            new AddComment($(this));
+        });
+        
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-form').each(function(){
                 new AddComment($(this));
@@ -636,10 +640,18 @@
                 var $curr_post = $('.open-comment.disabled');
                 var comments = $curr_post.data('comments');
                 
+                if ( comments == undefined ){
+                    comments = new Array();
+                }
+                if ( comments[that.comment_id] == undefined ){
+                    comments[that.comment_id] = new Array();
+                }
+                
                 that.$el.data('like-count', data.like_count);
                 comments[that.comment_id].is_liked = that.isLiked;
                 comments[that.comment_id].like_count = data.like_count;
                 comments[that.comment_id].users = null;
+                $curr_post.data('comments', comments);
             }
         });
     };
@@ -658,6 +670,10 @@
     };
 
     $(function(){
+        $('.comment-item .comment-info').each(function(){
+            new LikeComment($(this));
+        });
+
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new LikeComment($(this));
@@ -709,6 +725,10 @@
 
         if ( comments == undefined ){
             comments = new Array();
+        }
+
+        if ( comments[this.$el.data('id')] == undefined ){
+            comments[this.$el.data('id')] = new Array();
         }
         
         if ( comments[this.$el.data('id')].users == undefined ){
@@ -792,6 +812,10 @@
     };
 
     $(function(){
+        $('.comment-item .comment-info').each(function(){
+            new ShowCommentUsersLiked($(this));
+        });
+
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new ShowCommentUsersLiked($(this));
