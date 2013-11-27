@@ -261,6 +261,10 @@
                 return true;
             },
         });
+
+		this.$el.find('button#btn-finished-step1').click(function () {
+			
+		});
 	}
 
 	$(function(){

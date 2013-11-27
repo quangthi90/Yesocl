@@ -135,7 +135,7 @@
             	{% endif %}
 			    <div class="control-group row-fluid">
 				    <div class="controls span9 offset3">
-				    	<a href="#myCarousel" data-slide="next"><button class="btn btn-success">{{ text_create_profile }}</button></a>
+				    	<a href="#myCarousel" data-slide="next"><button class="btn btn-success" id="btn-finished-step1">{{ text_create_profile }}</button></a>
 				    </div>
 			    </div>
 		    </form>
