@@ -100,6 +100,7 @@ class ControllerAccountRegister extends Controller {
   			$this->data['link_autocomplete_company'] = HTTP_SERVER . $this->url->link('company/company/autocomplete');
   			$this->data['link_autocomplete_school'] = HTTP_SERVER . $this->url->link('data/value/schoolAutoComplete');
   			$this->data['link_autocomplete_fieldofstudy'] = HTTP_SERVER . $this->url->link('data/value/fieldOfStudyAutoComplete');
+  			$this->data['link_autocomplete_title'] = HTTP_SERVER . $this->url->link('data/value/industryAutoComplete');
 
   			// get customer data
   			$this->load->model('account/customer');

@@ -86,6 +86,39 @@
             }*/
         });
 
+		this.$el.find('input[name=\"company[title]\"]').typeahead({
+            source: function (query, process) {
+            	titleList = [];
+                map = {};      
+                		
+            	$.ajax({
+            		type: 'GET',
+            		url: that.$el.find('input[name=\"company[title]\"]').data('url'),
+            		data: { 'keyword': query },
+            		dataType: 'json',
+            		success: function ( json ) {
+				        $.each(json, function (i, item) {
+				           	if ( titleList.indexOf(item.name) == -1 ) {
+					            titleList.push(item.name);
+					            map[item.name] = item;
+				            }
+				        });
+                		process(titleList);
+            		},
+            		error: function (xhr, error) {
+            			alert(xhr.responseText);
+            		},
+            	});
+            },
+            updater: function (item) {
+                var selectedTitle = map[item];
+                return selectedTitle.name;
+            },
+            matcher: function (item) {
+                return true;
+            },
+        });
+
 		this.$el.find('input[name=\"school[name]\"]').typeahead({
             source: function (query, process) {
             	schoolList = [];
@@ -147,6 +180,40 @@
             updater: function (item) {
                 var selectedFieldOfStudt = map[item];
                 return selectedFieldOfStudt.name;
+            },
+            matcher: function (item) {
+                return true;
+            },
+        });
+
+		this.$el.find('input[name=\"industry\"]').typeahead({
+            source: function (query, process) {
+            	industryList = [];
+                map = {};      
+                		
+            	$.ajax({
+            		type: 'GET',
+            		url: that.$el.find('input[name=\"industry\"]').data('url'),
+            		data: { 'keyword': query },
+            		dataType: 'json',
+            		success: function ( json ) {
+				        $.each(json, function (i, item) {
+				           	if ( industryList.indexOf(item.name) == -1 ) {
+					            industryList.push(item.name);
+					            map[item.name] = item;
+				            }
+				        });
+                		process(industryList);
+            		},
+            		error: function (xhr, error) {
+            			alert(xhr.responseText);
+            		},
+            	});
+            },
+            updater: function (item) {
+                var selectedIndustry = map[item];
+                that.$el.find('input[name=\"industry_id\"]').val(selectedIndustry.id);
+                return selectedIndustry.name;
             },
             matcher: function (item) {
                 return true;

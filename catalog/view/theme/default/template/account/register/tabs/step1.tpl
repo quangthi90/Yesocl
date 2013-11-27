@@ -65,7 +65,7 @@
 			    <div class="control-group row-fluid job-seeker-input">
 				    <label class="control-label span2 offset1" for="inputIndustry">{{ text_industry }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}" value="{{ industry }}">
+				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}" value="{{ industry }}" data-url="{{ link_autocomplete_title }}">
 				    	<input type="hidden" name="industry_id" value="{{ industry_id }}">
 				    	{% if not(error_industry is empty) %}<span class="yes-warning">{{ error_industry }}</span>{% endif %}
 				    </div>
@@ -108,7 +108,7 @@
 			    <div class="control-group row-fluid employed-input">
 				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="{{ company.title }}">
+				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="{{ company.title }}" data-url="{{ link_autocomplete_title }}">
 				    	{% if not(error_job_title is empty) %}<span class="yes-warning">{{ error_job_title }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -176,7 +176,7 @@
 			    <div class="control-group row-fluid employed-input">
 				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="{{ company.title }}">
+				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="{{ company.title }}" data-url="{{ link_autocomplete_title }}">
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid employed-input">
@@ -229,7 +229,7 @@
 				<div class="control-group row-fluid job-seeker-input">
 				    <label class="control-label span2 offset1" for="inputIndustry">{{ text_industry }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}" value="{{ industry }}">
+				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}" value="{{ industry }}" data-url="{{ link_autocomplete_title }}">
 				    	<input type="hidden" name="industry_id" value="{{ industry_id }}">
 				    </div>
 			    </div>
