@@ -135,7 +135,7 @@ class ModelUserPost extends Model {
 		return $post;
 	}
 
-	public function getPost( $data = array() ){
+	public function getPost( $data = array(), $increase_viewer = false ){
 		$query = array();
 		if ( !empty($data['post_id']) ){
 			$query['posts.id'] = $data['post_id'];
@@ -149,15 +149,21 @@ class ModelUserPost extends Model {
 			return null;
 		}
 
+		$post = null;
 		if ( !empty($data['post_id']) ){
-			return $posts->getPostById( $data['post_id'] );
+			$post =  $posts->getPostById( $data['post_id'] );
 		}
 
 		if ( !empty($data['post_slug']) ){
-			return $posts->getPostBySlug( $data['post_slug'] );
+			$post = $posts->getPostBySlug( $data['post_slug'] );
 		}
 
-		return null;
+		if ( $post != null && $increase_viewer == true ){
+			$post->setCountViewer( $post->getCountViewer() + 1 );
+			$this->dm->flush();
+		}
+
+		return $post;
 	}
 
 	public function getPostBySlug( $post_slug ){

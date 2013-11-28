@@ -55,6 +55,9 @@ Abstract Class Post {
 	/** @MongoDB\Collection */
     private $likerIds;
 
+    /** @MongoDB\Int */
+    private $countViewer = 0;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -97,7 +100,9 @@ Abstract Class Post {
 			'email'			=> $this->getEmail(),
 			'comment_count' => $this->getComments()->count(),
 			'like_count'	=> count($this->getLikerIds()),
-			'liker_ids'		=> $this->getLikerIds()
+			'liker_ids'		=> $this->getLikerIds(),
+			'like_count'	=> count($this->getLikerIds()),
+			'count_viewer'	=> $this->getCountViewer()
 		);
 
 		return $post_data;
@@ -231,5 +236,13 @@ Abstract Class Post {
 
 	public function setLikerIds( $likerIds ){
 		$this->likerIds = $likerIds;
+	}
+
+	public function setCountViewer( $countViewer ){
+		$this->countViewer = $countViewer;
+	}
+
+	public function getCountViewer(){
+		return $this->countViewer;
 	}
 }
