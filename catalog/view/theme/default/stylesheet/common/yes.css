@@ -1567,7 +1567,7 @@ a.btn-notification:hover .notification-item-name > i {
   overflow: hidden;
 }
 .post_in_block .post_header{
-  padding: 5px 15px;
+  padding: 5px 15px 0px 15px;
   background: #FCFCFC;
 }
 .post_in_block .post_header a {
