@@ -942,7 +942,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post .post_header .post_meta span i {
   color: #009B77;
-  margin-right: 2px;
+  margin-right: 0px;
   font-size: 13px;
 }
 .post .post_header .post_meta span d {
@@ -951,7 +951,7 @@ a.btn-notification:hover .notification-item-name > i {
 .post .post_header .post_meta span d.number-counter {
   border: 1px solid #f0f0f0;
   padding: 2px 5px;
-  font-size: 11px;
+  font-size: 11px;  
 }
 .post .post_header .post_meta span.user_info {
 }
