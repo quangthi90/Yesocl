@@ -1,4 +1,5 @@
 (function($, document, undefined) {
+    var carouselEle = $('#myCarousel');
 	function RegisterComplete($element) {
 		this.$el = $element;
 		this.step1 = new RegisterCompleteStep1($element.find('.register-step1'));
@@ -265,9 +266,12 @@
 
 		this.$el.find('button#btn-finished-step1').click(function () {
 			if (that.validate()) {
-
+                carouselEle.carousel('next');
+                setTimeout(function(){
+                    carouselEle.carousel('pause');
+                }, 500);
 			}else {
-				//$('#myCarousel').carousel('pause');
+				carouselEle.carousel('pause');
 			}
 		});
 	}

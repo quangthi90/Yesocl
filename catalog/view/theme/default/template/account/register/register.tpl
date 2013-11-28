@@ -46,22 +46,6 @@
 <script type="text/javascript" src="{{ asset_js('register_complete.js') }}"></script>
 <script type="text/javascript">
 jQuery(document).ready(function (){
-	var carouselEle = $('#myCarousel');
-	$('#btn-finished-step1').on('click', function(e) {
-		e.preventDefault();
-		var canNavigate = true;
-		//Code
-
-		//Slide to next slide:
-		if(!canNavigate) {
-			carouselEle.carousel('pause');
-		}else {
-			carouselEle.carousel('next');
-			setTimeout(function(){
-				carouselEle.carousel('pause');
-			}, 500);
-		}
-	});
 	$('.register-table-content').makeCustomScroll(false);
 });
 </script>
