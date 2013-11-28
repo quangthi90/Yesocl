@@ -931,22 +931,27 @@ a.btn-notification:hover .notification-item-name > i {
   color: #727272;
   font-weight: normal;
   font-size: 12px;
-  padding: 5px 0px 3px 0px;
+  padding: 3px 0px 3px 0px;
   overflow: hidden;
 }
 .post .post_header .post_meta span{
   margin-left: 10px;
-  vertical: middle;
 } 
 .post .post_header .post_meta span:first-child {
   margin-left: 0px;
 }
 .post .post_header .post_meta span i {
   color: #009B77;
-  margin-right: 5px;
+  margin-right: 2px;
+  font-size: 13px;
 }
 .post .post_header .post_meta span d {
-  font-weight: bold;
+  font-weight: normal;
+}
+.post .post_header .post_meta span d.number-counter {
+  border: 1px solid #f0f0f0;
+  padding: 2px 5px;
+  font-size: 11px;
 }
 .post .post_header .post_meta span.user_info {
 }
@@ -963,11 +968,18 @@ a.btn-notification:hover .notification-item-name > i {
   width: 25px;
   height: 25px;
 }
+.post .post_header .post_meta span.post_time {
+  padding: 1px 0px;
+}
 .post .post_header .post_meta span.post_time i {
-  font-size: 12px;  
+  font-size: 12px;
+  display: none;
 }
 .post .post_header .post_meta span.post_time d {
   font-size: 10px;
+}
+.post .post_header .post_meta span.liked-post {
+  font-size: 11px;
 }
 .post .post_header .post_title a {
   color: #363636;

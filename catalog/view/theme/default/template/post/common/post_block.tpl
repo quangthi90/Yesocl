@@ -34,16 +34,6 @@
 						<i class="icon-calendar"></i> 
 						<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
 					</span>
-					<span class="post_cm fr">
-						<a href="#" class="open-comment"
-							data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
-							data-comment-count="{{ post.comment_count }}"
-							data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}"
-						>
-							<i class="icon-comments-alt"></i>
-						</a>
-						<d>{{ post.comment_count }}</d>
-					</span>
 					<span class="post_like fr">
 						<a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
 							<i class="icon-thumbs-up medium-icon"></i>
@@ -51,8 +41,23 @@
                         <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
                             Liked
 						</span>
-						<a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
+						<a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">
+							<d class="number-counter">{{ post.like_count }}</d>
+						</a>
 					</span>
+					<span class="post_cm fr">
+						<a href="#" class="open-comment"
+							data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
+							data-comment-count="{{ post.comment_count }}"
+							data-comment-url="{{ path('CommentAdd', {post_slug: post.slug, post_type: post_type}) }}">
+							<i class="icon-comments-alt"></i>
+						</a>
+						<d class="number-counter">{{ post.comment_count }}</d>
+					</span>					
+					<span class="post_view fr">
+                        <i class="icon-eye-open"></i>
+                        <d class="number-counter">10</d>
+                    </span>
 				</div>
 			</div>
 		</div>

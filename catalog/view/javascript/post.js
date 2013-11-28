@@ -54,7 +54,7 @@
             if(data.success == 'ok'){ 
                 var $curr_item = that.$el.parents('.post'); 
                 that.$el.find('.post_meta .post_like d').html( data.like_count );
-                that.$el.find('.post-liked-list').html( data.like_count ).data('like-count', data.like_count);
+                that.$el.find('.post-liked-list d').html( data.like_count ).data('like-count', data.like_count);
 
                 //Unlike
                 if(that.$el.data('is-liked') == 1) {
