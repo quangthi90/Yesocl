@@ -18,7 +18,7 @@ textarea[name="summary"] {
 	margin-right: 10px;
 }
 .profiles-tabs .btn-remove:hover i {
-	color: #FFF;
+	color: #9E0303;
 	font-weight: normal;
 }
 .profiles-tabs .btn-add {
@@ -143,14 +143,23 @@ textarea[name="summary"] {
 }
 .profiles-tabs-item1-label {
 	font-weight: bold;
-	color: #0C660F;
+	color: #7A7A7A;
 	margin-bottom: 10px;
+	font-size: 12px;
 }
 .profiles-tabs-value {
-	color: #000;
+	color: #0e0e0e;
+	font-size: 13px;
 }
 .profiles-tabs-value  .profiles-tabs-value-item {
-	padding: 2px 0px;	
+	padding: 2px 0px;
+	color: #797777;
+	font-size: 12px;
+}
+.profiles-tabs-value  .profiles-tabs-value-item:first-child {
+	font-weight: bold;
+	color: #363636;
+	font-size: 13px;
 }
 .profiles-tabs-item1-content {
 	margin-bottom: 10px;
@@ -160,6 +169,14 @@ textarea[name="summary"] {
 }
 .profiles-tabs-item1-content input {
 	margin-bottom: 0px;
+}
+.profiles-tabs-item1-content .profiles-btn-edit, 
+.profiles-tabs-item1-content .profiles-btn-remove {
+	display: none;
+}
+.profiles-tabs-item1-content:hover .profiles-btn-edit, 
+.profiles-tabs-item1-content:hover .profiles-btn-remove {
+	display: inline-block;
 }
 .profiles-form-add {
 	margin-bottom: 10px;
