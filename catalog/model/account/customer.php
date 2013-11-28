@@ -45,7 +45,7 @@ class ModelAccountCustomer extends Model {
 
 			$network = $this->dm->getRepository( 'Document\Social\Network' )->findOneBy( array( 'code' => $data['network'] ) );
 
-			$slug = $this->url->create_slug( 'user temp' );
+			$slug = $this->url->create_slug( $data['firstname'] . ' ' . $data['lastname'] );
 			$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 			$arr_slugs = array_map(function($user){
 				return $user->getSlug();
