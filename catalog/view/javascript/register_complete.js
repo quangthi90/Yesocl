@@ -267,7 +267,7 @@
 			if (that.validate()) {
 
 			}else {
-				return false;
+				//$('#myCarousel').carousel('pause');
 			}
 		});
 	}
