@@ -57,6 +57,9 @@ jQuery(document).ready(function (){
 			carouselEle.carousel('pause');
 		}else {
 			carouselEle.carousel('next');
+			setTimeout(function(){
+				carouselEle.carousel('pause');
+			}, 500);
 		}
 	});
 	$('.register-table-content').makeCustomScroll(false);
