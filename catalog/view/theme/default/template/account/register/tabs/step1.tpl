@@ -234,4 +234,7 @@
 	    </div>
     </div>
 </script>
+<script id="yes-warning-tpl" type="text/x-jquery-tmpl">
+	<span class="yes-warning">${error}</span>
+</script>
 {% endblock %}

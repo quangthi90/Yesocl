@@ -6,6 +6,7 @@
 
 	function RegisterCompleteStep1($element) {
 		this.$el = $element;
+		this.$inputLocation = $element.find('input[name=\"location\"]');
 
 		this.attachEvents();
 	}
@@ -226,7 +227,7 @@
             },
         });
 
-		this.$el.find('input[name=\"location\"]').typeahead({
+		this.$inputLocation.typeahead({
             source: function (query, process) {
             	that.$el.find('input[name=\"city_id\"]').val('0');
 
@@ -235,7 +236,7 @@
                 		
             	$.ajax({
             		type: 'GET',
-            		url: that.$el.find('input[name=\"location\"]').data('url'),
+            		url: that.$inputLocation.data('url'),
             		data: { 'keyword': query },
             		dataType: 'json',
             		success: function ( json ) {
@@ -263,8 +264,30 @@
         });
 
 		this.$el.find('button#btn-finished-step1').click(function () {
-			
+			if (that.validate()) {
+
+			}else {
+				return false;
+			}
 		});
+	}
+
+	RegisterCompleteStep1.validate = function () {
+		var that = this;
+		var error = true;
+
+		this.$el.find('.yes-warning').remove();
+
+		var location = $.trim(this.$inputLocation.val());
+		if (location.length == 0) {
+			error = false;
+			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error': '<?php echo $text_field_required; ?>'}));
+		}else if (location.length < 3 || location.length > 127) {
+			error = false;
+			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error': '<?php echo $text_error_location; ?>'}));
+		}
+
+		return error;
 	}
 
 	$(function(){

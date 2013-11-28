@@ -72,7 +72,6 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_recommend_1'] = 'Showcase your skills and experience';
   			$this->data['text_recommend_2'] = 'Be found for new opportunities';
   			$this->data['text_recommend_3'] = 'Stay in touch with colleagues and friends';
-  			$this->data['text_field_required'] = 'Field is required';
   			$this->data['text_i_current'] = 'I am current';
   			$this->data['text_live_in'] = 'I live in';
   			$this->data['text_location_placer'] = 'Input Text';
@@ -95,6 +94,10 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_from'] = 'From';
   			$this->data['text_fieldofstudy'] = 'Field of study';
   			$this->data['text_fieldofstudy_placer'] = 'Input Text';
+
+  			// error
+  			$this->data['text_field_required'] = 'Field is required';
+  			$this->data['text_error_location'] = 'Location mush be between 3 to 127 character!';
 
   			// link
   			$this->data['link_autocomplete_company'] = HTTP_SERVER . $this->url->link('company/company/autocomplete');
