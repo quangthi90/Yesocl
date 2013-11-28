@@ -116,7 +116,6 @@ class ControllerAccountRegister extends Controller {
   			$this->data['before_year'] = $this->data['current_year'] - 99;
 
   			$meta = $customer->getMeta();
-  			$background = $meta->getBackground();
   			//location
   			$location = $meta->getLocation();
   			if ($location) {
@@ -128,40 +127,44 @@ class ControllerAccountRegister extends Controller {
   			}
   			//post code
   			$this->data['postal_code'] = $meta->getPostalCode();
-  			//experience
-  			$experience = $background->getCurrentExperience();
-  			$this->data['current'] = 0;
-  			if ($experience) {
-  				$this->data['company']['name'] = $experience->getCompany();
-  				$this->data['company']['id'] = $experience->getCompanyId();
-  				$this->data['company']['title'] = $experience->getTitle();
-  				$this->data['company']['start']['month'] = $experience->getStarted()->format('m');
-  				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
-  				//$this->data['company']['end'] = $experience->getEnded();
-  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
-  				$this->data['current'] = 1;
-  			}else {
-  				$this->data['company']['name'] = '';
-  				$this->data['company']['id'] = '0';
-  				$this->data['company']['title'] = '';
-  				$this->data['company']['start']['month'] = 1;
-  				$this->data['company']['start']['year'] = $current_year;
-  				$this->data['company']['self_employed'] = 0;
-  			}
-  			//education
-  			$education = $background->getCurrentEducation();
-  			if ($education) {
-  				$this->data['school']['name'] = $education->getSchool();
-  				$this->data['school']['id'] = $education->getSchoolId();
-  				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
-  				$this->data['school']['start'] = $education->getStarted();
-  				//$this->data['school']['end'] = $education->getEnded();
-  				$this->data['current'] = 2;
-  			}else {
-  				$this->data['school']['name'] = '';
-  				$this->data['school']['id'] = 0;
-  				$this->data['school']['field_of_study'] = '';
-  				$this->data['school']['start'] = $current_year;
+  			// background
+  			$background = $meta->getBackground();
+  			if ($background) {
+	  			//experience
+	  			$experience = $background->getCurrentExperience();
+	  			$this->data['current'] = 0;
+	  			if ($experience) {
+	  				$this->data['company']['name'] = $experience->getCompany();
+	  				$this->data['company']['id'] = $experience->getCompanyId();
+	  				$this->data['company']['title'] = $experience->getTitle();
+	  				$this->data['company']['start']['month'] = $experience->getStarted()->format('m');
+	  				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
+	  				//$this->data['company']['end'] = $experience->getEnded();
+	  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
+	  				$this->data['current'] = 1;
+	  			}else {
+	  				$this->data['company']['name'] = '';
+	  				$this->data['company']['id'] = '0';
+	  				$this->data['company']['title'] = '';
+	  				$this->data['company']['start']['month'] = 1;
+	  				$this->data['company']['start']['year'] = $current_year;
+	  				$this->data['company']['self_employed'] = 0;
+	  			}
+	  			//education
+	  			$education = $background->getCurrentEducation();
+	  			if ($education) {
+	  				$this->data['school']['name'] = $education->getSchool();
+	  				$this->data['school']['id'] = $education->getSchoolId();
+	  				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
+	  				$this->data['school']['start'] = $education->getStarted();
+	  				//$this->data['school']['end'] = $education->getEnded();
+	  				$this->data['current'] = 2;
+	  			}else {
+	  				$this->data['school']['name'] = '';
+	  				$this->data['school']['id'] = 0;
+	  				$this->data['school']['field_of_study'] = '';
+	  				$this->data['school']['start'] = $current_year;
+	  			}
   			}
   			// industry
   			$this->data['industry'] = $meta->getIndustry();
