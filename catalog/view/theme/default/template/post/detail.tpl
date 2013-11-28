@@ -47,7 +47,7 @@
 									data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" 
 									data-like-count="{{ post.like_count }}" 
 									title="View who liked">
-									{{ post.like_count }}
+									<d>{{ post.like_count }}</d>
 								</a>
 							</span>
 						</li>
