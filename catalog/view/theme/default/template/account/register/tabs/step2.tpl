@@ -1,33 +1,58 @@
 {% block register_tabs_step2 %}
 <div class="row-fluid register-box register-step2">
-	<div class="span1 offset1 register-box-left register-box-extend">
-		<div class="register-box-background"></div>
-	</div>
-	<div class="span10 register-box-step">
-		<h2 class="row-fluid">
-			<span class="span11 offset1 register-box-title">Adding Email</span>
-		</h2>
-		<div class="row-fluid register-step2-content">
+	<div class="span12 register-box-step">
+		<div class="row-fluid">
+			<h2 class="span11 offset1 register-box-title">
+				<i class="icon-envelope-alt"></i> Adding Email
+			</h2>
+		</div>
+		<div class="row-fluid register-add-email">
 			<div class="span12">
 				<div class="row-fluid">
 					<h5 class="span11 offset1 register-note">Get start adding your email address</h5>
 				</div>
-	    		<form class="form-horizontal row-fluid">
-	    			<div class="span10 offset1 register-add-email">
-					    <div class="control-group">
-						    <label class="control-label" for="inputLocation"><span>Your email</span></label>
-						    <div class="controls">
-						    	<input type="text" id="inputLocation" placeholder="Input Text">
-						    	<button class="inline"><i class="icon-plus"></i></button>
-						    	<span class="yes-warning">Field is required</span>
-						    </div>
-					    </div>
-					</div>
-			    </form>
+	    		<div class="row-fluid connect-email">
+	    			<div class="span10 offset1">
+	    				<ul class="nav nav-tabs">
+						  <li class="active">
+						  	<a href="#gmail-contact" data-toggle="tab">
+						  		<i class="cicon-gmail"></i>Gmail
+						  	</a>	
+				  	      </li>
+						  <li>
+						  	<a href="#yahoo-contact" data-toggle="tab">
+						  		<i class="cicon-yahoo"></i> Yahoo
+					  		</a>
+						  </li>
+						  <li>
+						  	<a href="#facebook-contact" data-toggle="tab">
+						  		<i class="cicon-facebook"></i> Facebook
+						  	</a>
+						  </li>
+						</ul>
+						<div class="tab-content">
+						  <div class="tab-pane fade in active email-filling" id="gmail-contact">						  	
+						  	<input type="text" class="email-control" id="g-mail" placeholder="Type Gmail Id">
+						  	<span class="tag-append">@gmail.com</span>
+						  </div>
+						  <div class="tab-pane fade email-filling" id="yahoo-contact">
+						  	<input type="text" class="email-control" id="g-mail" placeholder="Type Yahoo Id">
+						  	<select name="tag-append">
+						  		<option>@yahoo.com</option>
+						  		<option>@yahoo.com.vn</option>
+						  	</select>
+						  </div>
+						  <div class="tab-pane fade email-filling" id="facebook-contact">
+						  	<input type="text" class="email-control" id="g-mail" placeholder="Type Facebook Id">
+						  	<span class="tag-append">@facebook.com</span>
+						  </div>
+						</div>
+	    			</div>
+	    		</div>
 			    <div class="space-line-20"></div>
 			    <div class="row-fluid">
 			    	<div class="span11 offset1">
-			    		<a href="#myCarousel" data-slide="next"><button class="btn btn-success">Continue</button></a>
+			    		<a href="#myCarousel" data-slide="next"><button class="btn btn-yes">Continue</button></a>
 			    	</div>
 			    </div>
 			    <div class="row-fluid space-top-20px">
@@ -37,9 +62,6 @@
 			    </div>
 			</div>
 		</div>
-	</div>
-	<div class="span1 register-box-right register-box-extend">
-		<div class="register-box-background"></div>
 	</div>
 </div>
 {% endblock %}

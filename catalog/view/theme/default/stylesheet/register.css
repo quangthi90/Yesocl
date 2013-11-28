@@ -1,192 +1,213 @@
-#y-content .register-box{
-    padding-bottom: 40px;
+.register-box{
+    margin: 0px auto;
+    max-width: 92%;
+    padding: 30px 0px;
 }
-    #y-content .register-box .register-box-step{
-        border: 1px solid #c0c0c0;
-        margin-left: 0;
-        box-shadow: 0px 10px 20px #949494;
-        height: 485px;
-    }
-    #y-content .register-box .register-box-extend{
-        width: 3%;
-        height: 485px;
-        padding: 10px 0;
-    }
-    #y-content .register-box .register-box-right{
-        margin-left: 0;
-    }
-        #y-content .register-box .register-box-background{
-            background-color: #3d9915;
-            height: 100%;
-            width: 100%;
-            box-shadow: 0px 10px 20px #949494;
-            height: 465px;
-        }
-        #y-content .register-box .register-box-step .register-box-title{
-            color: #3d9915;
-        }
-            #y-content .register-box .register-box-step .form-horizontal > .control-group > label{
-                /*width: 30%;*/
-            }
-            #y-content .register-step1 .register-box-step .form-horizontal > .control-group > .controls{
-                /*margin-left: 35%;*/
-            }
-            #y-content .register-step1 .register-box-step .form-horizontal > .control-group > .controls input[type="text"]{
-                /*width: 80%;*/
-            }
-        #y-content .register-box .register-box-step .register-box-recommend{
-            border: 1px solid #3d9915;
-            border-radius: 5px;
-            padding: 10px;
-        }
-            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-heading{
-                height: 50px;
-                line-height: 32px;
-            }
-            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-heading,
-            #y-content .register-box .register-box-step .register-box-recommend .register-recommend-content{
-                width: 90%;
-                margin: auto;
-            }
-            #y-content .register-box .register-box-step .register-box-recommend .regisert-recommend-icon{
-                background: url("../image/register-recommend-heading-icon.png") no-repeat;
-                height: 32px;
-                width: 20px;
-                margin-right: 5px;
-                margin-left: 5px;
-                float: left;
-            }
-        #y-content .register-box .register-box-step .register-note{
-            font-weight: normal;
-        }
-        #y-content .register-step2 .register-box-step .register-step2-content{
-            margin-top: 80px;
-        }
-        #y-content .register-box .register-box-step .register-add-email{
-            padding-top: 30px;
-            padding-bottom: 30px;
-            background-color: #8acd6d;
-            border-radius: 5px;
-        }
-            #y-content .register-box .register-box-step .register-add-email .control-group{
-                margin-bottom: 0;
-            }
-                #y-content .register-step2 .register-box-step .register-add-email .control-group > label{
-                    width: 100px;
-                }
-                    #y-content .register-step2 .register-box-step .register-add-email .control-group > label > span{
-                        color: #fff;
-                    }
-                #y-content .register-step2 .register-box-step .register-add-email .control-group > .controls{
-                    margin-left: 120px;
-                }
-                    #y-content .register-step2 .register-box-step .register-add-email .control-group > .controls button{
-                        height: 32px;
-                        font-size: 15px;
-                        color: #6cb04f;
-                    }
-                #y-content .register-step2 .register-box-step .register-add-email .control-group input[type="text"]{
-                    width: 80%;
-                }
-            #y-content .register-box .register-box-step .register-table-heading{
-                background: #ffffff; /* Old browsers */
-                background: -moz-linear-gradient(top,  #ffffff 0%, #eaeaea 100%); /* FF3.6+ */
-                background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#eaeaea)); /* Chrome,Safari4+ */
-                background: -webkit-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Chrome10+,Safari5.1+ */
-                background: -o-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* Opera 11.10+ */
-                background: -ms-linear-gradient(top,  #ffffff 0%,#eaeaea 100%); /* IE10+ */
-                background: linear-gradient(to bottom,  #ffffff 0%,#eaeaea 100%); /* W3C */
-                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=0 ); /* IE6-9 */
-                height: 30px;
-                line-height: 30px;
-            }
-        #y-content .register-box .register-box-step .register-skip{
-            color: #64ad44;
-        }
-#y-content .register-table{
+.register-box .register-box-step{
+    border: 1px solid #ddd;
+    background-color: #fff;
+    margin-left: -10px;
+}
+.register-box .register-box-extend{
+    height: 485px;
+    padding: 10px 0;
+}
+.register-box .register-box-right{
+    margin-left: 0;
+}
+.register-box .register-box-background{
+    background-color: #009B77;
+    width: 100%;
+    height: 465px;
+}
+.register-box .register-box-step .register-box-title{
+    color: #009b77;        
+    margin-bottom: 25px;
+    font-size: 23px;
+}
+.register-box .register-box-step .register-box-title i {
+    color: #0e0e0e;
+    font-size: 18px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.register-box .register-box-step .register-box-recommend{
+    border: 1px solid #009B77;
+    padding: 15px 10px;
+}
+.register-box .register-box-step .register-box-recommend .register-recommend-heading{
+    height: 50px;
+    line-height: 32px;
+}
+.register-box .register-box-step .register-box-recommend .register-recommend-heading,
+.register-box .register-box-step .register-box-recommend .register-recommend-content{
+    width: 90%;
+    margin: auto;
+}
+.register-box .register-box-step .register-box-recommend .regisert-recommend-icon{
+    background: url("../image/register-recommend-heading-icon.png") no-repeat;
+    height: 32px;
+    width: 20px;
+    margin-right: 5px;
+    margin-left: 5px;
+    float: left;
+}
+.register-box .register-box-step .register-note{
+    font-weight: normal;
+}
+.register-box-step .register-add-email .nav-tabs li > a {
+    color: #707070;
+    font-weight: bold;
+}
+.register-box-step .register-add-email .nav-tabs li > a  > i{
+    margin-right: 8px;        
+    font-weight: bold;
+    font-size: 14px;
+}
+.register-box-step .register-add-email .nav-tabs li > a:hover,
+.register-box-step .register-add-email .nav-tabs li.active > a {
+    color: #0e0e0e;
+}
+.register-box-step .register-add-email .email-filling {
+}
+.register-box-step .register-add-email .email-filling select {
+    height: 28px;        
+    width: 150px;
+    margin-left: -5px;
+}
+.register-box-step .register-add-email .email-filling .email-control{
+    padding: 5px;
+}
+.register-box-step .register-add-email .email-filling .tag-append {
+    font-weight: bold;        
+    color: #727070;
+}
+.register-box .register-box-step .register-skip{
+    color: #009B77;
+}
+.register-box .register-table{
     border: 1px solid #cfcfcf;
+    padding: 10px 5px;
 }
-    #y-content .register-table .register-table-heading > .pull-left{
-        margin-left: 10px;
-    }
-    #y-content .register-table .register-table-heading > .pull-right{
-        margin-right: 10px;
-    }
-    #y-content .register-table .register-table-content{
-        height: 287px;
-        overflow: auto;
-    }
-    #y-content .register-table .register-user-list{
-        border-top: 1px solid #cfcfcf;
-    }
-        #y-content .register-table .register-user-box .register-user-info .pull-left:first-child{
-            margin-left: 5px;
-            margin-top: 15px;
-        }
-        #y-content .register-table .register-user-box .register-user-info > div{
-            padding: 10px 5px;
-        }
-        #y-content .register-table .register-user-box .register-user-avatar{
-            border: 3px solid #b5c1c2;
-        }
-        #y-content .register-table .register-user-box .register-user-name{
-            font-weight: bold;
-            margin-top: 5px;
-        }
-#y-content .register-current-user-info{
-    border: 1px solid #ececec;
-    background: #fbfbfb; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fbfbfb 0%, #f4f4f4 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f4f4f4)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #fbfbfb 0%,#f4f4f4 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #fbfbfb 0%,#f4f4f4 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #fbfbfb 0%,#f4f4f4 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #fbfbfb 0%,#f4f4f4 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f4f4f4',GradientType=0 ); /* IE6-9 */
+.register-table .register-table-heading {
+    padding-bottom: 5px;    
+    margin-bottom: 5px;
+    border-bottom: 1px solid #F0F0F0;
 }
-    #y-content .register-current-user-info > div{
-        padding: 20px;
-    }
-    #y-content .register-current-user-info .register-current-user-heading{
-        font-size: 17px;
-    }
-    #y-content .register-current-user-info .register-current-user-support-info{
-        color: #959595;
-    }
-#y-content .register-invite-friend{
-    background-color: #8acd6d;
-    border-radius: 0 0 5px 5px;
+.register-table .register-table-heading > .pull-left{
+    margin-left: 10px;
 }
-    #y-content .register-invite-friend > div{
-        padding: 20px;
-    }
-    #y-content .register-invite-friend .register-invite-input > textarea{
-        height: 100px;
-        width: 100%;
-        padding: 0;
-        resize: none;
-    }
-    #y-content .register-box .btn-facebook,
-    #y-content .register-box .btn-twitter{
-        height: 25px;
-        line-height: 15px;
-        padding-left: 35px;
-    }
-    #y-content .register-box .btn-facebook > i,
-    #y-content .register-box .btn-twitter > i{
-        position: absolute;
-        margin-left: -30px;
-        margin-top: -10px;
-    }
-    #y-content .register-box .btn-twitter{
-        margin-left: 5px;
-    }
+.register-table .register-table-heading > .pull-right{
+    margin-right: 10px;
+}
+.register-table .register-table-content{
+    height: 287px;
+    overflow: auto;
+}
+.register-table .register-user-list{
+    border-top: 1px solid #F1F1F1;
+    padding: 10px;
+}
+.register-user-list .register-user-box{
+}
+.register-user-box .check-select {
+    padding: 17px 5px 17px 0px;
+
+}
+.register-user-box .register-user-avatar{
+    border: 1px solid #b5c1c2;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    margin-right: 10px;
+}
+.register-user-box .register-user-info {
+
+}
+.register-user-box .register-user-name{
+    font-weight: bold;
+    margin-top: 5px;
+}
+.register-user-box .register-user-description {
+    color: #757575;
+
+    font-size: 12px;
+}
+.register-current-user-info{
+    border: 1px solid #ddd; 
+    border-bottom: none;
+}
+.register-current-user-info > div{
+    padding: 20px;
+}
+.register-current-user-info .register-current-user-heading{
+    font-size: 17px;
+}
+.register-current-user-info .register-current-user-support-info{
+    color: #959595;
+}
+.register-invite-friend{
+    background-color: #F3F3F3;
+    border: 1px solid #ddd;
+    border-top: none;
+}
+.register-invite-friend > div{
+    padding: 20px;
+}
+.register-invite-friend .register-invite-input > textarea{
+    height: 100px;
+    width: 98%;
+    padding: 5px;
+    resize: none;
+}
+.register-box .btn-facebook,
+.register-box .btn-twitter{
+    height: 25px;
+    line-height: 15px;
+    padding-left: 35px;
+}
+.register-box .btn-facebook > i,
+.register-box .btn-twitter > i{
+    position: absolute;
+    margin-left: -30px;
+    margin-top: -10px;
+}
+.register-box .btn-twitter{
+    margin-left: 5px;
+}
 .space-top-10px{
     margin-top: 10px;
 }
 .space-top-20px{
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .border-top-none{
     border-top: none !important;
+}
+.register-box label input[type='checkbox'] {
+    vertical-align: top;
+    margin-right: 10px;
+}
+.register-table .mCSB_scrollTools .mCSB_draggerRail {
+    width: 6px;
+    background: #f0f0f0;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.register-table .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+    width: 6px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+.register-table .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+    background: #b4b4b4;
+}
+.register-table .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+    background: #009B77;
+}
+.register-table .mCSB_container {
+    margin-right: 20px;
 }

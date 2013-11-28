@@ -1,11 +1,39 @@
-/*@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed&subset=latin,vietnamese);
+/*
+  CUSTOM FONT ICON
+*/
 @font-face {
-  font-family: 'Roboto Condensed';
+  font-family: 'fontello';
+  src: url('custom-font/fontello.eot?94066798');
+  src: url('custom-font/fontello.eot?94066798#iefix') format('embedded-opentype'),
+       url('custom-font/fontello.woff?94066798') format('woff'),
+       url('custom-font/fontello.ttf?94066798') format('truetype'),
+       url('custom-font/fontello.svg?94066798#fontello') format('svg');
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Condensed Regular'), local('RobotoCondensed-Regular'), 
-    url(font.woff) format('woff');
-}*/
+}
+
+[class^="cicon-"]:before, [class*="cicon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none; 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+}
+
+.cicon-yahoo:before { content: '\e800'; } /* '' */
+.cicon-facebook:before { content: '\e802'; } /* '' */
+.cicon-gmail:before { content: '\e803'; } /* '' */
+/*
+  END CUSTOM FONT ICON
+*/
 
 /*Format Yes Style*/
 .radio input[type="radio"], .checkbox input[type="checkbox"]{
@@ -16,10 +44,10 @@ div.radio.active, div.checker.active{
   display: inline-block;
 }
 .btn-twitter,
-.btn-twitter:hover{
+.btn-twitter:hover {
+  text-shadow: 0px 0px 0px #fff;
   border: 1px solid #0b8bb1;
   color: #fff;
-  font-weight: normal;
   background: #82d3e9; /* Old browsers */
   background: -moz-linear-gradient(top,  #82d3e9 0%, #199fc7 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#82d3e9), color-stop(100%,#199fc7)); /* Chrome,Safari4+ */
@@ -31,6 +59,7 @@ div.radio.active, div.checker.active{
 }
 .btn-facebook,
 .btn-facebook:hover{
+  text-shadow: 0px 0px 0px #fff;
   border: 1px solid #205198;
   background: #8d9ec3; /* Old browsers */
   background: -moz-linear-gradient(top,  #8d9ec3 0%, #395795 100%); /* FF3.6+ */
@@ -41,7 +70,6 @@ div.radio.active, div.checker.active{
   background: linear-gradient(to bottom,  #8d9ec3 0%,#395795 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8d9ec3', endColorstr='#395795',GradientType=0 ); /* IE6-9 */
   color: #fff;
-  font-weight: normal;
 }
 .icon-yes-facebook{
   background: url('../../image/facebook-logo.png');
@@ -299,8 +327,12 @@ ul.dropdown-menu li.divider {
 .dropdown-submenu:focus > a {
   color: #ffffff;
   text-decoration: none;
-  background: #009975; 
-  
+  background: #009975;   
+}
+.nav-tabs > li > a {
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 #overlay 
 {

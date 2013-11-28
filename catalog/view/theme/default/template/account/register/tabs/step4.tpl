@@ -1,12 +1,11 @@
 {% block register_tabs_step4 %}
 <div class="row-fluid register-box register-step4">
-	<div class="span1 offset1 register-box-left register-box-extend">
-		<div class="register-box-background"></div>
-	</div>
-	<div class="span10 register-box-step">
-		<h2 class="row-fluid">
-			<span class="span11 offset1 register-box-title">Invite to join Yesocl</span>
-		</h2>
+	<div class="span12 register-box-step">
+		<div class="row-fluid">
+			<h2 class="span11 offset1 register-box-title">
+				<i class="icon-group"></i> Invite to join Yesocl
+			</h2>
+		</div>
 		<div class="row-fluid">
 			<div class="span10 offset1">
 				<div class="pull-left">We found 1 person you know on</div>
@@ -64,14 +63,11 @@
 		</div>
 		<div class="row-fluid space-top-20px">
 			<div class="span11 offset1">
-				<a href="#myCarousel" data-slide="next"><button class="btn btn-success">Add Connection(s)</button></a>
+				<a href="#myCarousel" data-slide="next"><button class="btn btn-yes">Add Connection(s)</button></a>
 				or
 				<a class="register-skip" href="#myCarousel" data-slide="next">Skip this step</a>
 			</div>
 		</div>
-	</div>
-	<div class="span1 register-box-right register-box-extend">
-		<div class="register-box-background"></div>
 	</div>
 </div>
 {% endblock %}

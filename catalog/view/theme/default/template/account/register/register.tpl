@@ -45,11 +45,11 @@
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('register_complete.js') }}"></script>
 <script type="text/javascript">
-jQuery(document).ready(function (){
-	
+jQuery(document).ready(function (){	
 	$('#myCarousel').on('slid', function(){
 		$(this).carousel('pause');
 	});
+	$('.register-table-content').makeCustomScroll(false);
 });
 </script>
 {{ block('register_tabs_step1_javascript') }}

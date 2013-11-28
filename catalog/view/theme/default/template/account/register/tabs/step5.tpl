@@ -1,12 +1,11 @@
 {% block register_tabs_step5 %}
 <div class="row-fluid register-box register-step5">
-	<div class="span1 offset1 register-box-left register-box-extend">
-		<div class="register-box-background"></div>
-	</div>
-	<div class="span10 register-box-step">
-		<h2 class="row-fluid">
-			<span class="span11 offset1 register-box-title">Find your friends</span>
-		</h2>
+	<div class="span12 register-box-step">
+		<div class="row-fluid">
+			<h2 class="span11 offset1 register-box-title">
+				<i class="icon-signin"></i> Find your friends
+			</h2>
+		</div>
 		<div class="row-fluid">
 			<div class="span10 offset1">
 				<div class="pull-left">Congratulation! You’ve just created your professional profile</div>
@@ -48,9 +47,6 @@
 				<a class="register-skip" href="#myCarousel" data-slide="next">Skip this step</a>
 			</div>
 		</div>
-	</div>
-	<div class="span1 register-box-right register-box-extend">
-		<div class="register-box-background"></div>
 	</div>
 </div>
 {% endblock %}
