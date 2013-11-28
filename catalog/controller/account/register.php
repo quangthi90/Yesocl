@@ -98,6 +98,7 @@ class ControllerAccountRegister extends Controller {
   			// error
   			$this->data['text_field_required'] = 'Field is required';
   			$this->data['text_error_location'] = 'Location mush be between 3 to 127 character!';
+  			$this->data['text_error_postal_code'] = 'Invalid postal code!';
 
   			// link
   			$this->data['link_autocomplete_company'] = HTTP_SERVER . $this->url->link('company/company/autocomplete');

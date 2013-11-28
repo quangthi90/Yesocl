@@ -8,6 +8,7 @@
 	function RegisterCompleteStep1($element) {
 		this.$el = $element;
 		this.$inputLocation = $element.find('input[name=\"location\"]');
+		this.$inputPostalCode = $element.find('input[name=\"postal_code\"]');
 
 		this.attachEvents();
 	}
@@ -289,6 +290,15 @@
 		}else if (location.length < 3 || location.length > 127) {
 			error = false;
 			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-location') }));
+		}
+
+		var postal_code = $.trim(this.$inputPostalCode.val());
+		if (postal_code.length == 0) {
+			error = false;
+			that.$inputPostalCode.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+		}else if (!/^[0,9]{3,5}$/.test(postal_code)) {
+			error = false;
+			that.$inputPostalCode.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-postal-code') }));
 		}
 
 		return error;
