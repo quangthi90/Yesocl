@@ -320,9 +320,10 @@
             var htmlOutput = '';
 
             var comments = that.$el.data('comments');
-            for (key in comments) {
-                htmlOutput += $.tmpl( $('#item-template'), comments[key] ).html();
-            }
+            
+            comments.each(function(key, value){
+                htmlOutput += $.tmpl( $('#item-template'), value ).html();
+            });
                 
             htmlOutput += '<div id="add-more-item"></div>';
             $('#comment-box').find('.comment-body').html(htmlOutput);
@@ -397,7 +398,7 @@
 
             var comment_id = $('#list-user-liked-template').data('comment_id');
 
-            comments[comment_id].users[id].fr_status = status;
+            comments.getItem(comment_id).users[id].fr_status = status;
         });
     });
 }(jQuery, document));
@@ -641,16 +642,20 @@
                 var comments = $curr_post.data('comments');
                 
                 if ( comments == undefined ){
-                    comments = new Array();
+                    comments = new HashTable();
                 }
-                if ( comments[that.comment_id] == undefined ){
-                    comments[that.comment_id] = new Array();
+                var comment = comments.getItem(that.comment_id);
+                if ( comment == undefined ){
+                    comment = new Array();
                 }
-                
+
+                comment.is_liked = that.isLiked;
+                comment.like_count = data.like_count;
+                comment.users = null;
+
+                comments.setItem(that.comment_id, comment);
+
                 that.$el.data('like-count', data.like_count);
-                comments[that.comment_id].is_liked = that.isLiked;
-                comments[that.comment_id].like_count = data.like_count;
-                comments[that.comment_id].users = null;
                 $curr_post.data('comments', comments);
             }
         });
@@ -724,14 +729,16 @@
         var comments = $curr_post.data('comments');
 
         if ( comments == undefined ){
-            comments = new Array();
+            comments = new HashTable();
         }
 
-        if ( comments[this.$el.data('id')] == undefined ){
-            comments[this.$el.data('id')] = new Array();
+        var comment = comments.getItem(this.$el.data('id'));
+
+        if ( comment == undefined ){
+            comment = new Array();
         }
         
-        if ( comments[this.$el.data('id')].users == undefined ){
+        if ( comment.users == undefined ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -752,7 +759,7 @@
                         users[data.users[key].id] = data.users[key];
                     }
 
-                    comments[that.$el.data('id')].users = users;
+                    comment.users = users;
 
                     var usersViewer = $('<div id="#user-viewer-container"></div>');
                     for (key in users) {
@@ -775,7 +782,7 @@
                 }
             });
         }else{
-            users = comments[this.$el.data('id')].users;
+            users = comment.users;
 
             var usersViewer = $('<div id="#user-viewer-container"></div>');
             for (key in users) {

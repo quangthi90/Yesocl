@@ -100,6 +100,8 @@ Abstract Class Post {
 			'email'			=> $this->getEmail(),
 			'comment_count' => $this->getComments()->count(),
 			'like_count'	=> count($this->getLikerIds()),
+			'liker_ids'		=> $this->getLikerIds(),
+			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer()
 		);
 
