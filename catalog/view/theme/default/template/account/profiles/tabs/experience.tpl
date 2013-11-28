@@ -76,6 +76,7 @@
 						<div class="profiles-tabs-value-item">{{ experience.title }}</div>
 						<div class="profiles-tabs-value-item">{{ experience.company }}</div>
 						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
+						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
 					</div>
 				</div>
 			</div>
