@@ -264,7 +264,7 @@
             },
         });
 
-		this.$el.find('button#btn-finished-step1').click(function () {
+		this.$el.find('#btn-finished-step1').click(function () {
 			if (that.validate()) {
                 carouselEle.carousel('next');
                 setTimeout(function(){
@@ -276,7 +276,7 @@
 		});
 	}
 
-	RegisterCompleteStep1.validate = function () {
+	RegisterCompleteStep1.prototype.validate = function () {
 		var that = this;
 		var error = true;
 
@@ -285,10 +285,10 @@
 		var location = $.trim(this.$inputLocation.val());
 		if (location.length == 0) {
 			error = false;
-			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error': '<?php echo $text_field_required; ?>'}));
+			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
 		}else if (location.length < 3 || location.length > 127) {
 			error = false;
-			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error': '<?php echo $text_error_location; ?>'}));
+			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-location') }));
 		}
 
 		return error;

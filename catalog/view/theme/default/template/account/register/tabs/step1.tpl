@@ -1,5 +1,5 @@
 {% block register_tabs_step1 %}
-<div class="row-fluid register-box register-step1">
+<div class="row-fluid register-box register-step1" data-error-field-required="{{ text_field_required }}" data-error-location="{{ text_error_location }}">
 	<div class="span12 register-box-step">
 		<div class="row-fluid">
 			<h2 class="span11 offset1 register-box-title">
