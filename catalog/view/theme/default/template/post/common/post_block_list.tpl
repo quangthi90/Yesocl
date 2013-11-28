@@ -88,7 +88,7 @@
                                 </span>
                                 <span class="post_view fr">
                                     <i class="icon-eye-open"></i>
-                                    <d class="number-counter">10</d>
+                                    <d class="number-counter">{{ post.count_viewer }}</d>
                                 </span>
                             </div>
                         </div>

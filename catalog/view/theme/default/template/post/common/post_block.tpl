@@ -53,11 +53,13 @@
 							<i class="icon-comments-alt"></i>
 						</a>
 						<d class="number-counter">{{ post.comment_count }}</d>
-					</span>					
+					</span>	
+					{% if post_type != 'user' %}				
 					<span class="post_view fr">
                         <i class="icon-eye-open"></i>
-                        <d class="number-counter">10</d>
+                        <d class="number-counter">{{ post.count_viewer }}</d>
                     </span>
+                    {% endif %}
 				</div>
 			</div>
 		</div>
