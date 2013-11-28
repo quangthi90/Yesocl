@@ -44,7 +44,7 @@
 				<a href="#myCarousel" data-slide="next"><button class="btn btn-facebook"><i class="icon-yes-facebook"></i> Share on facebook</button></a>
 				<a href="#myCarousel" data-slide="next"><button class="btn btn-twitter"><i class="icon-yes-twitter"></i> Share on twitter</button></a>
 				or
-				<a class="register-skip" href="#myCarousel" data-slide="next">Skip this step</a>
+				<a class="register-skip" href="#">Skip this step</a>
 			</div>
 		</div>
 	</div>

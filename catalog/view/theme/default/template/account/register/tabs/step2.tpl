@@ -52,7 +52,9 @@
 			    <div class="space-line-20"></div>
 			    <div class="row-fluid">
 			    	<div class="span11 offset1">
-			    		<a href="#myCarousel" data-slide="next"><button class="btn btn-yes">Continue</button></a>
+			    		<a href="#myCarousel" class="btn btn-yes" id="btn-finished-step2">
+				    		Continue
+				    	</a>
 			    	</div>
 			    </div>
 			    <div class="row-fluid space-top-20px">

@@ -63,7 +63,9 @@
 		</div>
 		<div class="row-fluid space-top-20px">
 			<div class="span11 offset1">
-				<a href="#myCarousel" data-slide="next"><button class="btn btn-yes">Add Connection(s)</button></a>
+				<a href="#myCarousel" class="btn btn-yes" id="btn-finished-step4">
+		    		Add Connection(s)
+		    	</a>
 				or
 				<a class="register-skip" href="#myCarousel" data-slide="next">Skip this step</a>
 			</div>

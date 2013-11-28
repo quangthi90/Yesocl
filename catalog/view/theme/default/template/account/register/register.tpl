@@ -15,7 +15,7 @@
 {% block body %}
 <div id="y-content" class="y-sub-container-1">
 	<div id="y-main-content">
-		<div id="myCarousel" class="carousel slide">
+		<div id="myCarousel" class="carousel slide" data-interval="false">
 		  	<!-- Carousel items -->
 		  	<div class="carousel-inner">
 		  		<div class="active item">
@@ -45,9 +45,19 @@
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('register_complete.js') }}"></script>
 <script type="text/javascript">
-jQuery(document).ready(function (){	
-	$('#myCarousel').on('slid', function(){
-		$(this).carousel('pause');
+jQuery(document).ready(function (){
+	var carouselEle = $('#myCarousel');
+	$('#btn-finished-step1').on('click', function(e) {
+		e.preventDefault();
+		var canNavigate = true;
+		//Code
+
+		//Slide to next slide:
+		if(!canNavigate) {
+			carouselEle.carousel('pause');
+		}else {
+			carouselEle.carousel('next');
+		}
 	});
 	$('.register-table-content').makeCustomScroll(false);
 });
