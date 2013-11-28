@@ -37,17 +37,21 @@
 					<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="profiles-tabs-value">
 						<div class="row-fluid">
-							<div class="span4">Title: </div>
+							<div class="span3">Title: </div>
 							<input type="text" name="title" />
 						</div>
 						<div class="row-fluid">
-							<div class="span4">Company: </div>
+							<div class="span3">Company: </div>
 							<input type="text"  name="company" />
 						</div>
 						<div class="row-fluid" data-autocomplete="{{ path('LocationAutoComplete') }}">
-							<div class="span4">Location: </div>
+							<div class="span3">Location: </div>
 							<input type="text" name="location" />
 							<input type="hidden" name="city_id" />
+						</div>
+						<div class="row-fluid">
+							<div class="span3">Self-Employed: </div>
+							<input type="checkbox"  name="self_employed" />
 						</div>
 					</div>
 				</div>
@@ -76,7 +80,9 @@
 						<div class="profiles-tabs-value-item">{{ experience.title }}</div>
 						<div class="profiles-tabs-value-item">{{ experience.company }}</div>
 						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
-						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
+						<div class="profiles-tabs-value-item check-self-employed">
+							<i class="icon-check-sign"></i> Self-employed
+						</div>
 					</div>
 				</div>
 			</div>
@@ -96,6 +102,9 @@
 				<div class="profiles-tabs-value-item">${ title }</div>
 				<div class="profiles-tabs-value-item">${ company }</div>
 				<div class="profiles-tabs-value-item viewers">${ location }</div>
+				<div class="profiles-tabs-value-item check-self-employed">
+					<i class="icon-check-sign"></i> Self-employed
+				</div>
 			</div>
 		</div>
 	</div>
