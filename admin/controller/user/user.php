@@ -107,6 +107,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_self_employed'] = $this->language->get( 'entry_self_employed' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
 		$this->data['entry_title'] = $this->language->get( 'entry_title' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
@@ -320,6 +321,7 @@ class ControllerUserUser extends Controller {
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => ($ended) ? 0 : 1,
+					'self_employed' => $experience->getSelfEmployed(),
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
 					'city_id' => ( $location ) ? $location->getCityId() : '',
@@ -926,6 +928,7 @@ class ControllerUserUser extends Controller {
 		$this->data['entry_summary'] = $this->language->get( 'entry_summary' );
 
 		$this->data['entry_company'] = $this->language->get( 'entry_company' );
+		$this->data['entry_self_employed'] = $this->language->get( 'entry_self_employed' );
 		$this->data['entry_current'] = $this->language->get( 'entry_current' );
 		$this->data['entry_title'] = $this->language->get( 'entry_title' );
 		$this->data['entry_location'] = $this->language->get( 'entry_location' );
@@ -1247,6 +1250,7 @@ class ControllerUserUser extends Controller {
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
 					'current' => ($ended) ? 0 : 1,
+					'self_employed' => $experience->getSelfEmployed(),
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
 					'city_id' => ( $location ) ? $location->getCityId() : '',

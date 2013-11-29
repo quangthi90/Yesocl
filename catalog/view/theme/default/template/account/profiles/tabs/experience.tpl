@@ -80,6 +80,8 @@
 				data-title="{{ experience.title }}" 
 				data-company="{{ experience.company }}" 
 				data-location="{{ experience.location }}" 
+				data-self-employed="{{ experience.self_employed }}"
+				data-current="{{ experience.current }}"
 				data-remove="{{ path('ProfileRemoveExperience', {experience_id: experience.id}) }}" 
 				data-city-id="{{ experience.city_id }}">
 				<div>
@@ -98,7 +100,7 @@
 						<div class="profiles-tabs-value-item">{{ experience.company }}</div>
 						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
 						<div class="profiles-tabs-value-item check-self-employed">
-							<i class="icon-check-sign"></i> Self-employed
+							<i class="icon-check-sign"></i> {% if experience.self_employed %}{{ text_self_employed }}{% else %}Employed{% endif %}
 						</div>
 					</div>
 				</div>
@@ -109,11 +111,11 @@
 </div>
 {% raw %}
 <script id="background-experience-item" type="text/x-jquery-tmpl">
-	<div class="profiles-tabs-item1 experience-item {{if ended_text == null }}current{{/if}}" id="${ id }" data-edit="${ edit }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-city-id="${ city_id }" data-remove="${ remove }">
+	<div class="profiles-tabs-item1 experience-item {{if ended_text == null }}current{{/if}}" id="${ id }" data-edit="${ edit }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-city-id="${ city_id }" data-self-employed="${ self_employed }" data-current="${ current }" data-remove="${ remove }">
 		<div>
 			<div class="profiles-tabs-item1-label">
 				From <span class="profiles-tabs-value">${ started_text }</span>
-				{{if ended_text != null }}
+				{{if ended_text != null && ended_text != '' }}
 					to <span class="profiles-tabs-value">${ ended_text }</span>
 				{{/if}}
 			</div>
@@ -126,7 +128,11 @@
 				<div class="profiles-tabs-value-item">${ company }</div>
 				<div class="profiles-tabs-value-item viewers">${ location }</div>
 				<div class="profiles-tabs-value-item check-self-employed">
+				{{if self_employed }}
 					<i class="icon-check-sign"></i> Self-employed
+				{{else}}
+					<i class="icon-check-sign"></i> Employed
+				{{/if}}
 				</div>
 			</div>
 		</div>

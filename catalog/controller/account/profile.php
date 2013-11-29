@@ -9,6 +9,9 @@ class ControllerAccountProfile extends Controller {
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
+		// text
+		$this->data['text_self_employed'] = 'Self-employed';
+
 		$this->load->model('user/user');
 		$this->load->model('data/value');
 
@@ -79,6 +82,7 @@ class ControllerAccountProfile extends Controller {
 					'location' => $experience->getLocation()->getLocation(),
 					'city_id' => $experience->getLocation()->getId(),
 					'current' => ($ended) ? 0 : 1,
+					'self_employed' => ($experience->getSelfEmployed()) ? 1 : 0,
 					'started_month' => $experience->getStarted()->format('n'),
 					'ended_month' => ($ended) ? $ended->format('n') : '',
 					'started_year' => $experience->getStarted()->format('Y'),

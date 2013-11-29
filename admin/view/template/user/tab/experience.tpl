@@ -67,6 +67,12 @@
           				<div class="span9"><textarea class="description input-xxlarge" type="text" name="background[experiences][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
           			</div>
           		</div>
+              <div class="row-fluid">
+                <div class="span4">
+                  <div class="span3"><?php echo $entry_self_employed; ?></div>
+                  <div class="span9"><select class="self_employed input-medium" name="background[experiences][<?php echo $key; ?>][self_employed]"><?php if ($experience['self_employed']) { ?><option value="1" selected="selected"><?php echo $text_yes; ?></option><option value="0"><?php echo $text_no; ?></option><?php }else { ?><option value="1"><?php echo $text_yes; ?></option><option value="0" selected="selected"><?php echo $text_no; ?></option><?php } ?></select></div>
+                </div>
+              </div>
 				</td>
 			</tr>
 			<?php } ?>
@@ -152,7 +158,7 @@
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
-			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger hide"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiences][' + experience_length + '][current]" value="1" /></div>';
+			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiences][' + experience_length + '][current]" value="0" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html += 	'</div>';
@@ -205,6 +211,12 @@
           	html += 			'<div class="span9"><input class="description input-xxlarge" type="text" name="background[experiences][' + experience_length + '][description]" value="" /></div>';
           	html += 		'</div>';
           	html += 	'</div>';
+            html +=   '<div class="row-fluid">';
+            html +=     '<div class="span4">';
+            html +=       '<div class="span3"><?php echo $entry_self_employed; ?></div>';
+            html +=       '<div class="span9"><select class="self_employed input-medium" type="text" name="background[experiences][' + experience_length + '][self_employed]"><option value="1"><?php echo $text_yes; ?></option><option value="0" selected="selected"><?php echo $text_no; ?></option></select></div>';
+            html +=     '</div>';
+            html +=   '</div>';
 			html += 	'</td>';
 			html += '</tr>';
 
