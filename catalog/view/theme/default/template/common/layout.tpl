@@ -67,6 +67,7 @@
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<!-- Custom Script -->
