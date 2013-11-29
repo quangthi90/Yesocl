@@ -24,7 +24,7 @@ $_['route']['WallPage']						= 'account/account';
 $_['route']['ChangePassword']				= 'account/password';
 $_['route']['Logout']						= 'account/logout';
 $_['route']['SearchPage']					= 'common/search';
-$_['route']['Search']						= 'common/search';
+$_['route']['SearchTypeahead']				= 'common/search/autoComplete/';
 $_['route']['ChangeAvatar']					= 'account/avatar';
 $_['route']['Login']						= 'account/login';
 $_['route']['LostPass']						= 'account/forgotten';
@@ -60,9 +60,9 @@ $_['route']['IgnoreFriend']					= 'friend/request/ignore';
 $_['route']['UploadFile'] 					= 'file/upload';
 
 // Data Value
-$_['route']['LocationAutoCompleteRoute']	= 'data/value/locationAutoComplete';
-$_['route']['IndustryAutoCompleteRoute']	= 'data/value/industryAutoComplete';
-$_['route']['DegreeAutoCompleteRoute']		= 'data/value/degreeAutoComplete';
-$_['route']['SchoolAutoCompleteRoute']		= 'data/value/schoolAutoComplete';
-$_['route']['FieldOfStudyAutoCompleteRoute']= 'data/value/fieldOfStudyAutoComplete';
+$_['route']['LocationAutoComplete']			= 'data/value/locationAutoComplete';
+$_['route']['IndustryAutoComplete']			= 'data/value/industryAutoComplete';
+$_['route']['DegreeAutoComplete']			= 'data/value/degreeAutoComplete';
+$_['route']['SchoolAutoComplete']			= 'data/value/schoolAutoComplete';
+$_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete';
 ?>

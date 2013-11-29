@@ -18,7 +18,7 @@
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
-	<body>
+	<body>{{ path('SearchTypeahead') }}
 		{{ include(template_from_string( header )) }}
 		{{ include(template_from_string( sidebar_control )) }}
 		<div id="y-container">
@@ -29,7 +29,7 @@
 		<div id="overlay"></div>
 		
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
-		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}">
+		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}" data-url-typeahead="{{ path('SearchTypeahead') }}">
 		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
 		  <div class="suggestion-container"></div>
 		  {% raw %}

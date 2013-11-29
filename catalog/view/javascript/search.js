@@ -56,18 +56,18 @@
 
 // Search auto complete
 (function($, document, undefined) {
-	function SearchAutoComplete(el) {
-		this.root = el;
-		this.autoCtrl = el.find('.search-ctrl');
-		this.invokeCtrl = el.data('invoke-search');
-		this.template = el.find('.search-result-item-template');	
-		this.suggestContainer = el.find('.suggestion-container');
+	function SearchAutoComplete($el) {
+		this.$root = $el;
+		this.$autoCtrl = $el.find('.search-ctrl');
+		this.$invokeCtrl = $el.data('invoke-search');
+		this.$template = $el.find('.search-result-item-template');	
+		this.$suggestContainer = $el.find('.suggestion-container');
 		this.attachEvents();
 		this.initAutoComplete();
 	}
 	SearchAutoComplete.prototype.attachEvents = function() {
 		var that = this;
-		$(that.invokeCtrl).click(function() {
+		$(that.$invokeCtrl).click(function() {
 			if($(this).hasClass('active')) {
 				that.closeSearchPanel();
 				$(this).removeClass('active');
@@ -75,16 +75,16 @@
 				that.openSearchPanel();
 			}
 		});
-		that.root.hover(function(){
-				that.autoCtrl.focus();
+		that.$root.hover(function(){
+				that.$autoCtrl.focus();
 			}
 		);
-		that.root.click(function(){
-				that.autoCtrl.focus();
+		that.$root.click(function(){
+				that.$autoCtrl.focus();
 			}
 		);
 		//Auto invoke search:
-		$(document).keypress(function(e){ 			
+		$(document).keypress(function(e){
 			//Check if any input is focused, if so, don't continue:
 			var isFocus = false;		
 			if($(this).find('.mfp-ready').length > 0) {
@@ -98,7 +98,7 @@
 			if((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122)) {
 				that.openSearchPanel();	
 				if($.browser.mozilla) {
-					that.autoCtrl.val(String.fromCharCode(e.which));
+					that.$autoCtrl.val(String.fromCharCode(e.which));
 				}			
 			}
 		});
@@ -119,7 +119,7 @@
 			{id:"3", category:"Friend", image: tempImg, value: "Nguyễn Thị C", url:"#", metaInfo:"10 friends"},
 			{id:"4", category:"Friend", image: tempImg, value: "Võ Văn D", url:"#", metaInfo:"10 friends"},
 			{id:"5", category:"Friend", image: tempImg, value: "Lê Thị E", url:"#", metaInfo:"10 friends"}
-		]; 
+		];
 		var dbPost = [
 			{id:"6", category:"Post", image: tempImg, value: "Abc def dfdd", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
 			{id:"7", category:"Post", image: tempImg, value: "Lang kinh thi truong hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
@@ -130,12 +130,12 @@
 			{id:"10", category:"Group", image: tempImg, value: "Dau Tu Bat Dong San", url:"#", metaInfo:"200 members"},
 			{id:"11", category:"Group", image: tempImg, value: "Cong Nghe Thong Tin", url:"#", metaInfo:"1k members"}
 		];
-		that.autoCtrl.typeaheadCustom([
+		that.$autoCtrl.typeaheadCustom([
 		  {
 		    name: 'dataset-category category-friend',
 		    local: dbFriend,
 		    template: function(data){
-	            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
+	            var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<div class="data-detail">'
 	                            + '<img src="' + data.image + '" alt="" />'
@@ -152,7 +152,7 @@
 		    name: 'dataset-category category-post',
 		    local: dbPost,
 		    template: function(data){
-	            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
+	            var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<div class="data-detail">'
 	                            + '<img src="' + data.image + '" alt="" />'
@@ -169,7 +169,7 @@
 		    name: 'dataset-category category-group',
 		    local: dbGroup,
 		    template: function(data){
-	            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
+	            var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<div class="data-detail">'
 	                            + '<img src="' + data.image + '" alt="" />'
@@ -186,16 +186,16 @@
 	}
 	SearchAutoComplete.prototype.openSearchPanel = function() {
 		var that = this;
-		that.root.slideDown(200, function(){			
-			$(that.invokeCtrl).addClass('active');
-			that.autoCtrl.focus();			
+		that.$root.slideDown(200, function(){			
+			$(that.$invokeCtrl).addClass('active');
+			that.$autoCtrl.focus();			
 		});	
 	}
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
 		var that = this;
-		this.root.slideUp(200, function(){
-			that.autoCtrl.typeaheadCustom('setQuery', '');
-			$(that.invokeCtrl).removeClass('active');
+		this.$root.slideUp(200, function(){
+			that.$autoCtrl.typeaheadCustom('setQuery', '');
+			$(that.$invokeCtrl).removeClass('active');
 		})
 	}
 
