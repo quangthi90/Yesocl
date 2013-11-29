@@ -268,7 +268,7 @@
 
 		this.$el.find('#btn-finished-step1').click(function () {
 			if (that.validate()) {
-                this.submit($(this))
+                that.submit($(this));
                 carouselEle.carousel('next');
                 setTimeout(function(){
                     carouselEle.carousel('pause');
@@ -314,7 +314,7 @@
 		}
 
 		postal_code = $.trim(this.$inputPostalCode.val());
-		if (postal_code.length != 0 && !/^[0,9]{3,5}$/.test(postal_code)) {
+		if (postal_code.length != 0 && /^[0,9]{3,5}$/.test(postal_code)) {
 			error = false;
 			that.$inputPostalCode.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-postal-code') }));
 		}
@@ -378,7 +378,7 @@
             }
         }
 
-        if (!error) {
+        if (error) {
             this.data = {
                 'location': location,
                 'city_id': city_id,
@@ -397,7 +397,7 @@
                 'school_end': school_end,
                 'industry': industry,
                 'industry_id': industry_id,
-            }
+            };
         }
 
 		return error;
@@ -408,9 +408,9 @@
 
         var promise = $.ajax({
             type: 'POST',
-            url:  this.data('url'),
+            url:  this.$el.data('url'),
             data: this.data,
-            dataType: 'json'
+            dataType: 'json',
         });
 
         this.triggerProgress($button, promise);
@@ -426,15 +426,12 @@
 
     RegisterCompleteStep1.prototype.triggerProcess = function ($el, promise) {
         var $spinner = $('<i class="icon-refresh icon-spin"></i>');
-        //var $old_icon = $el.find('i');
         var f        = function() {
             $spinner.remove();
-            //$el.removeClass('disabled').html($old_icon);
             $el.removeClass('disabled');
         };
         
         $el.addClass('disabled');
-        //$el.addClass('disabled').html($spinner);
 
         promise.then(f, f);
     }

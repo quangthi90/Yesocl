@@ -457,11 +457,23 @@
 		this.$fieldofstudy 	= this.$formAdd.find('[name=\"fieldofstudy\"]');
 		this.$fieldofstudy_id 	= this.$formAdd.find('[name=\"fieldofstudy_id\"]');
 
+		this.$specifiedTime = this.$formAdd.find('.specified-time');
+		this.$presentTime   = this.$formAdd.find('.present');
+		this.$presentCheckbox = this.$formAdd.find('#time_present');
+
 		this.attachEvents();
 	}
 
 	Education.prototype.attachEvents = function(){
 		var that = this;
+
+		this.$presentCheckbox.change(function() {
+			if($(this).attr('checked') === 'checked') {
+				that.$specifiedTime.fadeOut(100);
+			}else {
+				that.$specifiedTime.fadeIn(100);
+			}
+		});
 
 		this.$btnAdd.click(function(){
 			that.$formAdd.removeClass('hidden').addClass('add-form');
@@ -737,16 +749,34 @@
 		this.$strYear		= this.$formAdd.find('[name=\"started_year\"]');
 		this.$endMonth		= this.$formAdd.find('[name=\"ended_month\"]');
 		this.$endYear		= this.$formAdd.find('[name=\"ended_year\"]');
+		this.$self_employed	= this.$formAdd.find('[name=\"self_employed\"]');
 		this.$title			= this.$formAdd.find('[name=\"title\"]');
 		this.$company		= this.$formAdd.find('[name=\"company\"]');
 		this.$location		= this.$formAdd.find('[name=\"location\"]');
 		this.$city_id		= this.$formAdd.find('[name=\"city_id\"]');
+
+		this.$specifiedTime = this.$formAdd.find('.specified-time');
+		this.$presentTime   = this.$formAdd.find('.present');
+		this.$presentCheckbox = this.$formAdd.find('#time_present');
 
 		this.attachEvents();
 	}
 
 	Experience.prototype.attachEvents = function(){
 		var that = this;
+
+		this.$presentCheckbox.change(function() {
+			$(this).val('1');
+			if($(this).attr('checked') === 'checked') {
+				that.$specifiedTime.fadeOut(100);
+			}else {
+				that.$specifiedTime.fadeIn(100);
+			}
+		});
+
+		this.$self_employed.change(function () {
+			$(this).val('1');
+		})
 
 		this.$btnAdd.click(function(){
 			that.$formAdd.removeClass('hidden').addClass('add-form');
@@ -755,6 +785,14 @@
 		this.$btnCancel.click(function(){
 			that.$formAdd.addClass('hidden').removeClass('add-form').find('input').val('');
 			that.$formAdd.find('select').val('0');
+			if (that.$presentCheckbox.attr('checked') === 'checked') {
+				that.$presentCheckbox.trigger('click');
+				that.$presentCheckbox.parent().removeClass('checked');
+			}
+			if (that.$self_employed.attr('checked') === 'checked') {
+				that.$self_employed.trigger('click');
+				that.$self_employed.parent().removeClass('checked');
+			}
 
 			that.$el.find('.experience-item').removeClass('hidden');
 		});
@@ -765,11 +803,19 @@
 			that.$strMonth.val( $item.data('startedm') );
 			that.$strYear.val( $item.data('startedy') );
 			that.$endMonth.val( $item.data('endedm') );
+			if ($item.data('current') == '1' && that.$presentCheckbox.attr('checked') !== 'checked') {
+				that.$presentCheckbox.trigger('click');
+				that.$presentCheckbox.parent().addClass('checked');
+			}
 			that.$endYear.val( $item.data('endedy') );
 			that.$title.val( $item.data('title') );
 			that.$company.val( $item.data('company') );
 			that.$location.val( $item.data('location') );
 			that.$city_id.val( $item.data('city-id') );
+			if ($item.data('self-employed') == '1' && that.$self_employed.attr('checked') !== 'checked') {
+				that.$self_employed.trigger('click');
+				that.$self_employed.parent().addClass('checked');
+			}
 
 			$item.addClass('hidden');
 			that.$formAdd.removeClass('hidden').data('edit', $item.data('edit'));
@@ -812,7 +858,9 @@
 				'title'				: that.$title.val(),
 				'company'			: that.$company.val(),
 				'location'			: that.$location.val(),
-				'city_id'			: that.$city_id.val()
+				'city_id'			: that.$city_id.val(),
+				'self_employed'		: (that.$self_employed.attr('checked') === 'checked') ? 1 : 0,
+				'current'		: (that.$presentCheckbox.attr('checked') === 'checked') ? 1 : 0,
 			};
 
 			that.submit( $(this), method );
@@ -858,7 +906,7 @@
 			type: 'POST',
 			url:  this.url,
 			data: that.data,
-			dataType: 'json'
+			dataType: 'json',
 		});
 
 		this.triggerProgress($button, promise);
