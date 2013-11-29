@@ -886,7 +886,7 @@
 
 						// Note
 						// Fix for screen 14", Fix it
-						that.$location.parent().find('ul.typeahead').css('left', '2317px');
+						//that.$location.parent().find('ul.typeahead').css('left', '2317px');
 					},
 				});
 			},
