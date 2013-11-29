@@ -44,7 +44,7 @@
 			<div class="comment-item">
 				<div class="avatar_thumb">
 					<a href="${href_user}">
-						<img src="${avatar}" alt="user">
+						<img src="${avatar}" alt="${author}">
 					</a>
 				</div>
 				<div class="comment-meta">
@@ -67,16 +67,16 @@
 						</span>		
 					</div>
 					<div class="comment-content">
-						{{html content}}							
-					</div>												
+						{{html content}}
+					</div>
 				</div>
 				<div class="clear"></div>
 				<div class="yes-dropdown option-dropdown">
 					<div class="dropdown">
-					   <a class="dropdown-toggle" data-toggle="dropdown" title="Action">
+					   	<a class="dropdown-toggle" data-toggle="dropdown" title="Action">
 					    	<i class="icon-reorder"></i>
-					   </a>
-					   <ul class="dropdown-menu">
+					   	</a>
+					   	<ul class="dropdown-menu">
 					   		<li class="un-like-btn{{if is_liked != true}} hidden{{/if}}">
 						     	<a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
 					     	</li>

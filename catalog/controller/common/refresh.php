@@ -43,32 +43,18 @@ class ControllerCommonRefresh extends Controller {
 		foreach ($posts as $i => $post) {
 			// thumb
 			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
+				$post['image'] = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
 			}else{
-				$image = null;
+				$post['image'] = null;
 			}
 
-			$post['image'] = $image;
-			
-			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-			if ( $post['type'] == $this->config->get('post')['cache']['branch'] ) {
-				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('post')['cache']['branch'], 'SSL');
-			}elseif ( $post['type'] == $this->config->get('post')['cache']['user'] ) {
-				$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('post')['cache']['user'], 'SSL');
+			if ( in_array($this->customer->getId(), $post['liker_ids']) ){
+				$post['isUserLiked'] = true;
+			}else{
+				$post['isUserLiked'] = false;
 			}
-			$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 			$this->data['posts'][] = $post;
-			
-			// ***** Bommer remove
-			// Disable for update template
-			// Remove this code when approve new template
-			/*if ( $count % 6 == 0 || $count == $post_count ){
-				$this->data['posts'][] = $list_posts;
-				$list_posts = array();
-			}
-
-			$count++;*/
 
 			$user_id = $post['user_id'];
 
@@ -91,7 +77,6 @@ class ControllerCommonRefresh extends Controller {
 		}
 		
 		$this->data['date_format'] = $this->language->get('date_format_full');
-		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		// set selected menu

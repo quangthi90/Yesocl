@@ -25,14 +25,14 @@ class ControllerPostDetail extends Controller {
 		switch ($this->request->get['post_type']) {
 			case $this->config->get('post')['type']['branch']:
 				$this->load->model('branch/post');
-				$post = $this->model_branch_post->getPost( $this->request->get );
+				$post = $this->model_branch_post->getPost( $this->request->get, true );
 				$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 				break;
 
 			case $this->config->get('post')['type']['user']:
 				$is_user = true;
 				$this->load->model('user/post');
-				$post = $this->model_user_post->getPost( $this->request->get );
+				$post = $this->model_user_post->getPost( $this->request->get, true );
 				$this->data['post_type'] = $this->config->get('common')['type']['user'];
 				break;
 			
@@ -46,6 +46,7 @@ class ControllerPostDetail extends Controller {
 		}
 
 		$this->load->model('tool/image');
+		$this->load->model('tool/object');
 
 		$avatar = $this->model_tool_image->getAvatarUser( $post->getUser()->getAvatar(), $post->getUser()->getPrimaryEmail()->getEmail() );
 		
@@ -69,9 +70,12 @@ class ControllerPostDetail extends Controller {
 			'slug'			=> $post->getSlug(),
 			'like_count'	=> count($post->getLikerIds()),
 			'isUserLiked'	=> $liked,
-			'user_slug'		=> $post->getUser()->getSlug()
+			'user_slug'		=> $post->getUser()->getSlug(),
+			'count_viewer'	=> $post->getCountViewer()
 		);
 
+		$this->data['comments'] = $this->model_tool_object->formatListCommentsOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
+		
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['is_user'] = $is_user;
 		

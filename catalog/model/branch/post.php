@@ -87,14 +87,21 @@ class ModelBranchPost extends Model {
 		return $results;
 	}
 
-	public function getPost( $data = array() ){
+	public function getPost( $data = array(), $increase_viewer = false ){
+		$post = null;
+
 		if ( !empty($data['post_id']) ){
-			return $this->dm->getRepository('Document\Branch\Post')->find( $data['post_id'] );
+			$post = $this->dm->getRepository('Document\Branch\Post')->find( $data['post_id'] );
 		}elseif ( !empty($data['post_slug']) ){
-			return $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
 		}
 
-		return null;
+		if ( $post != null && $increase_viewer == true ){
+			$post->setCountViewer( $post->getCountViewer() + 1 );
+			$this->dm->flush();
+		}
+
+		return $post;
 	}
 
 	public function getLastPostByCategory( $branch_id, $category_id ){

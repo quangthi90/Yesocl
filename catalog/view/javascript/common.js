@@ -1,12 +1,99 @@
 /*
 	JS Utitlity Function
 */
-function getActualLengthOfArray(arr) {
-   return $.grep(arr, function(el){
-      return el !== undefined;
-     }
-    ).length;
+function getActualLengthOfArray(obj) {
+	var size = 0;
+   	for (var i in obj) {
+		if(obj[i] !== undefined) {
+			size ++;
+		}
+	}
+	return size;
 }
+//Define HashTable in JS
+function HashTable(obj)
+{
+    this.length = 0;
+    this.items = {};
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            this.items[p] = obj[p];
+            this.length++;
+        }
+    }
+    //Add new item to hashtable
+    this.setItem = function(key, value)
+    {
+        var previous = undefined;
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+        }
+        else {
+            this.length++;
+        }
+        this.items[key] = value;
+        return previous;
+    }
+    //Get existed item by key
+    this.getItem = function(key) {
+        return this.hasItem(key) ? this.items[key] : undefined;
+    }
+    //Check whether item has key existed 
+    this.hasItem = function(key)
+    {
+        return this.items.hasOwnProperty(key);
+    }   
+    //Remove existed item from hastable
+    this.removeItem = function(key)
+    {
+        if (this.hasItem(key)) {
+            previous = this.items[key];
+            this.length--;
+            delete this.items[key];
+            return previous;
+        }
+        else {
+            return undefined;
+        }
+    }
+    //Return list of keys of hashtable
+    this.keys = function()
+    {
+        var keys = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                keys.push(k);
+            }
+        }
+        return keys;
+    }
+    //Return list of values of hashtable
+    this.values = function()
+    {
+        var values = [];
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                values.push(this.items[k]);
+            }
+        }
+        return values;
+    }
+    //Foreach implement
+    this.each = function(fn) {
+        for (var k in this.items) {
+            if (this.hasItem(k)) {
+                fn(k, this.items[k]);
+            }
+        }
+    }
+    //Clear hashtable
+    this.clear = function()
+    {
+        this.items = {}
+        this.length = 0;
+    }
+}
+
 /*
 	End JS Utitlity Function
 */
@@ -26,7 +113,7 @@ function getActualLengthOfArray(arr) {
 			autoDraggerLength:true, /*auto-adjust scrollbar dragger length: boolean*/
 			autoHideScrollbar:true, /*auto-hide scrollbar when idle*/
 			scrollButtons:{ /*scroll buttons*/
-				enable:false, /*scroll buttons support: boolean*/
+				enable: true, /*scroll buttons support: boolean*/
 				scrollType:"continuous", /*scroll buttons scrolling type: "continuous", "pixels"*/
 				scrollSpeed:"auto", /*scroll buttons continuous scrolling speed: integer, "auto"*/
 				scrollAmount:40 /*scroll buttons pixels scroll amount: integer (pixels)*/
@@ -227,7 +314,7 @@ function getActualLengthOfArray(arr) {
 			{id:"10", category:"Group", image: tempImg, value: "Dau Tu Bat Dong San", url:"#", metaInfo:"200 members"},
 			{id:"11", category:"Group", image: tempImg, value: "Cong Nghe Thong Tin", url:"#", metaInfo:"1k members"}
 		];
-		that.autoCtrl.typeahead([
+		that.autoCtrl.typeaheadCustom([
 		  {
 		    name: 'dataset-category category-friend',
 		    local: dbFriend,
@@ -291,7 +378,7 @@ function getActualLengthOfArray(arr) {
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
 		var that = this;
 		this.root.slideUp(200, function(){
-			that.autoCtrl.typeahead('setQuery', '');
+			that.autoCtrl.typeaheadCustom('setQuery', '');
 			$(that.invokeCtrl).removeClass('active');
 		})
 	}
@@ -431,7 +518,7 @@ function getActualLengthOfArray(arr) {
 
 	    //Comment box:
 	    if(that.commentBox.length > 0) {
-	    	that.commentBox.width(that.main.width()/3);
+	    	that.commentBox.width(that.main.width()/3); 
 	    	var expandBtn = that.commentBox.find('.btn-expand');
 	    	var restoreBtn = that.commentBox.find('.btn-restore');
 	    	expandBtn.fadeIn();
@@ -480,6 +567,7 @@ function getActualLengthOfArray(arr) {
 	var marginPostPerColumn = 15;
 	var marginBlock = 50;
 	var minFirstColumn = 450;
+	var minPostWidth = 400;
 	var minPostStatusWidth = 420;
 	var marginFriendBlockItem = 10;
 	var widthFriendBlockItem = 320;
@@ -508,11 +596,15 @@ function getActualLengthOfArray(arr) {
 			var heightBlockContent = this.heightMain - 42;
 			var heightPost = (heightBlockContent - 2*marginPost)/2;
 			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
+			if(widthPost < minPostWidth){
+				widthPost = minPostWidth;
+			}
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);		
-			this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			//this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
 			this.blocks.css('margin-right', marginBlock + 'px');	
 			var totalWithContent = 0;	
 			this.blocks.each(function(index) {
@@ -573,16 +665,20 @@ function getActualLengthOfArray(arr) {
 			this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
 		}
 		else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
-			this.blocks = this.root.find('.feed-block');		
+			this.blocks = this.root.find('.feed-block');	
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
 			var heightPost = (heightBlockContent - 2*marginPost)/2;
 			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
+			if(widthPost < minPostWidth){
+				widthPost = minPostWidth;
+			}
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);		
-			this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			//this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
 			var totalWithContent = 0;
 			this.blocks.each(function(index) {
 				if(index != 0) {

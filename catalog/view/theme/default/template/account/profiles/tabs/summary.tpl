@@ -18,7 +18,7 @@
 			<div class="clear"></div>
 		</div>
 		<div class="profiles-tabs-main-body">
-			<textarea style="height: 100%; width: 98%;" name="summary">{{ user.summary }}</textarea>
+			<textarea name="summary">{{ user.summary }}</textarea>
 		</div>
 	</div>
 </div>
