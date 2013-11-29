@@ -66,6 +66,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_male'] = $this->language->get( 'text_male' );
 		$this->data['text_female'] = $this->language->get( 'text_female' );
 		$this->data['text_other'] = $this->language->get( 'text_other' );
+		$this->data['text_now'] = $this->language->get( 'text_now' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -318,11 +319,11 @@ class ControllerUserUser extends Controller {
 				$location = $experience->getLocation();
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
-					'current' => $experience->getCurrent(),
+					'current' => ($ended) ? 0 : 1,
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
 					'city_id' => ( $location ) ? $location->getCityId() : '',
-					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+					'ended' => ($ended) ? array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ) : array('month' => '', 'year' => ''),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
 				);
@@ -884,6 +885,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
 		$this->data['text_change'] = $this->language->get( 'text_change' );
 		$this->data['text_remove'] = $this->language->get( 'text_remove' );
+		$this->data['text_now'] = $this->language->get( 'text_now' );
 		
 		// Button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -1244,11 +1246,11 @@ class ControllerUserUser extends Controller {
 				$location = $experience->getLocation();
 				$this->data['experiences'][$key] = array(
 					'company' => $experience->getCompany(),
-					'current' => $experience->getCurrent(),
+					'current' => ($ended) ? 0 : 1,
 					'title' => $experience->getTitle(),
 					'location' => ( $location ) ? $location->getLocation() : '',
 					'city_id' => ( $location ) ? $location->getCityId() : '',
-					'ended' => array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ),
+					'ended' => ($ended) ? array( 'month' => $ended->format( 'm' ), 'year' => $ended->format( 'Y' ) ) : array('month' => '', 'year' => ''),
 					'started' => array( 'month' => $started->format( 'm' ), 'year' => $started->format( 'Y' ) ),
 					'description' => $experience->getDescription(),
 					);

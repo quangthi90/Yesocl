@@ -268,9 +268,12 @@
                           <?php } ?>
                           </select>
                           <?php echo $text_to; ?>
+                          <?php if ($experience['current']) { ?>
+                          <?php echo $text_now; ?>
+                          <?php }else { ?>
                           <?php echo $text_month; ?>
                           <select disabled="disabled" class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" >
-                    <?php for ($i = 1 ; $i < 13; $i++) { ?>
+                          <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
@@ -280,6 +283,7 @@
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
+                          <?php } ?>
                         </div>
                 </div>
               </div>

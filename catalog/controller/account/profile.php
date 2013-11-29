@@ -71,18 +71,20 @@ class ControllerAccountProfile extends Controller {
 		$experiences_data = array();
 		if ( $user->getMeta()->getBackground() ){
 			foreach ($user->getMeta()->getBackground()->getExperiences() as $experience) {
+				$ended = $experience->getEnded();
 				$experiences_data[] = array(
 					'id' => $experience->getId(),
 					'title' => $experience->getTitle(),
 					'company' => $experience->getCompany(),
 					'location' => $experience->getLocation()->getLocation(),
 					'city_id' => $experience->getLocation()->getId(),
+					'current' => ($ended) ? 0 : 1,
 					'started_month' => $experience->getStarted()->format('n'),
-					'ended_month' => $experience->getEnded()->format('n'),
+					'ended_month' => ($ended) ? $ended->format('n') : '',
 					'started_year' => $experience->getStarted()->format('Y'),
-					'ended_year' => $experience->getEnded()->format('Y'),
+					'ended_year' => ($ended) ? $ended->format('Y') : '',
 					'started_text' => $experience->getStarted()->format('F Y'),
-					'ended_text' => $experience->getEnded()->format('F Y')
+					'ended_text' => ($ended) ? $experience->getEnded()->format('F Y') : '',
 				);
 			}
 		}

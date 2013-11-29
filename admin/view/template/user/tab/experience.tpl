@@ -48,13 +48,13 @@
                           </select>
                           <?php echo $text_to; ?>
                           <?php echo $text_month; ?>
-                          <select class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" >
+                          <select class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" <?php if ($experience['current']) { ?>disabled="disabled"<?php } ?>>
                     <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_year; ?>
-                          <select class="ended-year input-small" name="background[experiences][<?php echo $key; ?>][ended][year]" >
+                          <select class="ended-year input-small" name="background[experiences][<?php echo $key; ?>][ended][year]" <?php if ($experience['current']) { ?>disabled="disabled"<?php } ?>>
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
@@ -226,6 +226,8 @@
         return false;
       }
 			
+      $(this).parents('tr').find('select.ended-year').attr('disabled', 'disabled');
+      $(this).parents('tr').find('select.ended-month').attr('disabled', 'disabled');
 			$(this).hide();
 			$(this).parent().parent().find('.btn-lost-current').show();
 			$(this).parent().parent().find('input.current').attr({
@@ -239,6 +241,8 @@
         return false;
       }
       
+      $(this).parents('tr').find('select.ended-year').removeAttr('disabled');
+      $(this).parents('tr').find('select.ended-month').removeAttr('disabled');
       $(this).hide();
       $(this).parent().parent().find('.btn-set-current').show();
       $(this).parent().parent().find('input.current').attr({
