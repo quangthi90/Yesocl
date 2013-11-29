@@ -57,11 +57,14 @@
 // Search auto complete
 (function($, document, undefined) {
 	function SearchAutoComplete($el) {
-		this.$root = $el;
-		this.$autoCtrl = $el.find('.search-ctrl');
-		this.$invokeCtrl = $el.data('invoke-search');
-		this.$template = $el.find('.search-result-item-template');	
-		this.$suggestContainer = $el.find('.suggestion-container');
+		this.$root 				= $el;
+		this.$autoCtrl 			= $el.find('.search-ctrl');
+		this.$invokeCtrl 		= $el.data('invoke-search');
+		this.$template 			= $el.find('.search-result-item-template');	
+		this.$suggestContainer 	= $el.find('.suggestion-container');
+
+		this.url 				= $el.data('url-typeahead');
+
 		this.attachEvents();
 		this.initAutoComplete();
 	}
@@ -113,13 +116,6 @@
 
 		//Get datasource:
 		var tempImg = "http://findicons.com/icon/download/51187/clipping_picture/48/png";
-		var dbFriend = [
-			{id:"1", category:"Friend", image: tempImg, value: "Nguyễn Văn A", url:"#", metaInfo:"10 friends"},
-			{id:"2", category:"Friend", image: tempImg, value: "Trần Văn B", url:"#", metaInfo:"10 friends"},
-			{id:"3", category:"Friend", image: tempImg, value: "Nguyễn Thị C", url:"#", metaInfo:"10 friends"},
-			{id:"4", category:"Friend", image: tempImg, value: "Võ Văn D", url:"#", metaInfo:"10 friends"},
-			{id:"5", category:"Friend", image: tempImg, value: "Lê Thị E", url:"#", metaInfo:"10 friends"}
-		];
 		var dbPost = [
 			{id:"6", category:"Post", image: tempImg, value: "Abc def dfdd", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
 			{id:"7", category:"Post", image: tempImg, value: "Lang kinh thi truong hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
@@ -133,12 +129,14 @@
 		that.$autoCtrl.typeaheadCustom([
 		  {
 		    name: 'dataset-category category-friend',
-		    local: dbFriend,
+		    remote: that.url + '%QUERY/',
+		    limit: 10,
+		    cache: true,
 		    template: function(data){
 	            var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
-	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
+	            var boldItem = data.username.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<div class="data-detail">'
-	                            + '<img src="' + data.image + '" alt="" />'
+	                            + '<img src="' + data.avatar + '" alt="' + data.username + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
 	                            + '<div class="data-more">' + data.metaInfo + '</div>'   
@@ -152,6 +150,7 @@
 		    name: 'dataset-category category-post',
 		    local: dbPost,
 		    template: function(data){
+		    	console.log(data);
 	            var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<div class="data-detail">'
