@@ -59,6 +59,17 @@
                                     <i class="icon-calendar"></i> 
                                     <d class="timeago" title="{{ post.created|date(date_format) }}"></d>
                                 </span>
+                                <span class="post_like fr">
+                                    <a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
+                                        <i class="icon-thumbs-up medium-icon"></i>
+                                    </a>
+                                    <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
+                                        Liked
+                                    </span>
+                                    <a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">
+                                        <d class="number-counter">{{ post.like_count }}</d>
+                                    </a>
+                                </span>
                                 <span class="post_cm fr">
                                     <a href="#" title="Comment ({{ post.comment_count }})" class="open-comment" 
                                         data-url="{{ path('CommentList', {post_slug: post.slug, post_type: post_type}) }}"
@@ -72,17 +83,12 @@
                                         data-post-slug="{{ post.slug }}" 
                                         data-post-type="{{ post_type }}"
                                         data-type-slug="{{ branch.slug }}">
-                                        <d>{{ post.comment_count }}</d>
+                                        <d class="number-counter">{{ post.comment_count }}</d>
                                     </a>
                                 </span>
-                                <span class="post_like fr">
-                                    <a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
-                                        <i class="icon-thumbs-up medium-icon"></i>
-                                    </a>
-                                    <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
-                                        Liked
-                                    </span>
-                                    <a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">{{ post.like_count }}</a>
+                                <span class="post_view fr">
+                                    <i class="icon-eye-open"></i>
+                                    <d class="number-counter">{{ post.count_viewer }}</d>
                                 </span>
                             </div>
                         </div>
