@@ -11,18 +11,29 @@
 		<div class="profiles-tabs-main-body">
 			<div class="background-education-form-add hidden" data-add="{{ path('ProfileAddEducation') }}">
 				<div class="profiles-tabs-item1-label">
-					From 
-					<select name="started">
-						{% for i in current_year..before_year %}
-						<option value="{{ i }}">{{ i }}</option>
-						{% endfor %}
-					</select> 
-					to 
-					<select name="ended">
-						{% for i in current_year..before_year %}
-						<option value="{{ i }}">{{ i }}</option>
-						{% endfor %}
-					</select>
+					<span class="time-from">
+						From 
+						<select name="started">
+							{% for i in current_year..before_year %}
+							<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select>  
+					</span>
+					to
+					<span class="time-to">
+						<span class="specified-time">
+							<select name="ended">
+								{% for i in current_year..before_year %}
+								<option value="{{ i }}">{{ i }}</option>
+								{% endfor %}
+							</select>
+							<strong style="margin-left: 5px; margin-right: 10px;">or</strong>
+						</span>						
+						<span class="present">
+							<label for="time_present">present</label>
+							<input type="checkbox" id="time_present" name="time_present">
+						</span>	
+					</span>
 				</div>
 				<div class="profiles-tabs-item1-content">
 					<a class="profiles-btn-cancel btn profiles-btn pull-right">
@@ -49,7 +60,7 @@
 				</div>
 			</div>
 			{% for education in user.educations %}
-			<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" 
+			<div class="profiles-tabs-item1 education-item {% if education.ended == null %}current{% endif %}" id="{{ education.id }}" 
 				data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" 
 				data-ended="{{ education.ended }}" 
 				data-degree="{{ education.degree }}" 
@@ -60,7 +71,12 @@
 				data-fieldofstudy-id="{{ education.fieldofstudy_id }}" 
 				data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
 				<div>
-					<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">{{ education.started }}</span> to <span class="profiles-tabs-value">{{ education.ended }}</span></div>
+					<div class="profiles-tabs-item1-label">
+						From <span class="profiles-tabs-value">{{ education.started }}</span> 
+						{% if education.ended != null %}
+							to <span class="profiles-tabs-value">{{ education.ended }}</span>
+						{% endif %}
+					</div>
 				</div>
 				<div class="profiles-tabs-item1-content">
 					<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
@@ -78,10 +94,16 @@
 		</div>
 	</div>
 </div>
+{% raw %}
 <script id="background-education-item" type="text/x-jquery-tmpl">
-	<div class="profiles-tabs-item1 education-item" id="${ id }" data-edit="${ edit }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-degree-id="${ degree_id }" data-school="${ school }" data-school-id="${ school_id }" data-fieldofstudy="${ fieldofstudy }" data-fieldofstudy-id="${ fieldofstudy_id }" data-remove="${ remove }">
+	<div class="profiles-tabs-item1 education-item {{if ended == null }}current{{/if}}" id="${ id }" data-edit="${ edit }" data-started="${ started }" data-ended="${ ended }" data-degree="${ degree }" data-degree-id="${ degree_id }" data-school="${ school }" data-school-id="${ school_id }" data-fieldofstudy="${ fieldofstudy }" data-fieldofstudy-id="${ fieldofstudy_id }" data-remove="${ remove }">
 		<div>
-			<div class="profiles-tabs-item1-label">From <span class="profiles-tabs-value">${ started }</span> to <span class="profiles-tabs-value">${ ended }</span></div>
+			<div class="profiles-tabs-item1-label">
+				From <span class="profiles-tabs-value">${ started }</span> 
+				{{if ended != null }}
+					to <span class="profiles-tabs-value">${ ended }</span>
+				{{/if}}
+			</div>
 		</div>
 		<div class="profiles-tabs-item1-content">
 			<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
@@ -96,6 +118,7 @@
 		</div>
 	</div>
 </script>
+{% endraw %}
 {% endblock %}
 
 {% block profiles_tabs_education_javascript %}

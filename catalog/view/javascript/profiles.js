@@ -457,11 +457,23 @@
 		this.$fieldofstudy 	= this.$formAdd.find('[name=\"fieldofstudy\"]');
 		this.$fieldofstudy_id 	= this.$formAdd.find('[name=\"fieldofstudy_id\"]');
 
+		this.$specifiedTime = this.$formAdd.find('.specified-time');
+		this.$presentTime   = this.$formAdd.find('.present');
+		this.$presentCheckbox = this.$formAdd.find('#time_present');
+
 		this.attachEvents();
 	}
 
 	Education.prototype.attachEvents = function(){
 		var that = this;
+
+		this.$presentCheckbox.change(function() {
+			if($(this).attr('checked') === 'checked') {
+				that.$specifiedTime.fadeOut(100);
+			}else {
+				that.$specifiedTime.fadeIn(100);
+			}
+		});
 
 		this.$btnAdd.click(function(){
 			that.$formAdd.removeClass('hidden').addClass('add-form');
@@ -741,6 +753,7 @@
 		this.$company		= this.$formAdd.find('[name=\"company\"]');
 		this.$location		= this.$formAdd.find('[name=\"location\"]');
 		this.$city_id		= this.$formAdd.find('[name=\"city_id\"]');
+
 		this.$specifiedTime = this.$formAdd.find('.specified-time');
 		this.$presentTime   = this.$formAdd.find('.present');
 		this.$presentCheckbox = this.$formAdd.find('#time_present');
