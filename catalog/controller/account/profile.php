@@ -139,6 +139,7 @@ class ControllerAccountProfile extends Controller {
 		// orther const
 		$this->data['current_year'] = date('Y');
 		$this->data['before_year'] = $this->data['current_year'] - 100;
+		$this->data['fulture_year'] = $this->data['current_year'] + 10;
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'profile' );

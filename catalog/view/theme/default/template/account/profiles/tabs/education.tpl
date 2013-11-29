@@ -23,7 +23,7 @@
 					<span class="time-to">
 						<span class="specified-time">
 							<select name="ended">
-								{% for i in current_year..before_year %}
+								{% for i in fulture_year..before_year %}
 								<option value="{{ i }}">{{ i }}</option>
 								{% endfor %}
 							</select>
