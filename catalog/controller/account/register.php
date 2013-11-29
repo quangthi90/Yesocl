@@ -118,6 +118,7 @@ class ControllerAccountRegister extends Controller {
   			// common
   			$this->data['current_year'] = (new DateTime())->format('Y');
   			$this->data['before_year'] = $this->data['current_year'] - 99;
+  			$this->data['future_year'] = $this->data['current_year'] + 50;
 
   			$meta = $customer->getMeta();
   			//location
@@ -133,10 +134,10 @@ class ControllerAccountRegister extends Controller {
   			$this->data['postal_code'] = $meta->getPostalCode();
   			// background
   			$background = $meta->getBackground();
+	  		$this->data['current'] = 0;
   			if ($background) {
 	  			//experience
 	  			$experience = $background->getCurrentExperience();
-	  			$this->data['current'] = 0;
 	  			if ($experience) {
 	  				$this->data['company']['name'] = $experience->getCompany();
 	  				$this->data['company']['id'] = $experience->getCompanyId();
@@ -169,6 +170,17 @@ class ControllerAccountRegister extends Controller {
 	  				$this->data['school']['field_of_study'] = '';
 	  				$this->data['school']['start'] = $current_year;
 	  			}
+  			}else {
+  				$this->data['company']['name'] = '';
+	  			$this->data['company']['id'] = '0';
+	  			$this->data['company']['title'] = '';
+	  			$this->data['company']['start']['month'] = 1;
+	  			$this->data['company']['start']['year'] = $current_year;
+	  			$this->data['company']['self_employed'] = 0;
+	  			$this->data['school']['name'] = '';
+	  			$this->data['school']['id'] = 0;
+	  			$this->data['school']['field_of_study'] = '';
+	  			$this->data['school']['start'] = $current_year;
   			}
   			// industry
   			$this->data['industry'] = $meta->getIndustry();

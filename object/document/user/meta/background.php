@@ -80,7 +80,7 @@ Class Background {
 
 	public function getCurrentExperience() {
 		foreach ($experiences as $experience) {
-			if ($experience->getCurrent()) {
+			if (is_null($experience->getEnded())) {
 				return $experience;
 			}
 		}
@@ -102,7 +102,7 @@ Class Background {
 
 	public function getCurrentEducation() {
 		foreach ($educations as $education) {
-			if ($education->getCurrent()) {
+			if ($education->getEnded() > date('Y')) {
 				return $education;
 			}
 		}

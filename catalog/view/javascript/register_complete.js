@@ -293,10 +293,7 @@
 		}
 
 		var postal_code = $.trim(this.$inputPostalCode.val());
-		if (postal_code.length == 0) {
-			error = false;
-			that.$inputPostalCode.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
-		}else if (!/^[0,9]{3,5}$/.test(postal_code)) {
+		if (postal_code.length != 0 && !/^[0,9]{3,5}$/.test(postal_code)) {
 			error = false;
 			that.$inputPostalCode.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-postal-code') }));
 		}
