@@ -1,15 +1,12 @@
 {% block friend_common_friend_filter %}
     <div id="friend-filter">
-        <div class="friend-header">
-            <strong>{{ friend_count }}</strong> friends
-        </div>
         <div class="friend-search">
             <input type="text" placeholder="quick filter ..." size="50" id="filter-input" />
             <span><i class="icon-search"></i></span>
         </div>
         <ul class="friend-conditions">
             <li class="friend-condition active" data-friend="all"{# data-url="{{ path('GetFriends', {user_slug: user.slug, filter_type: filter_type.recent, filter_value: 0}) }}"#}>
-                <i class="icon-list"></i><a href="#">All Friends</a>
+                <i class="icon-list"></i><a href="#">All Friends (<strong>{{ friend_count }}</strong>)</a>
             </li>          
             <li class="friend-condition" data-friend="recent" {# data-url="{{ path('GetFriends', {user_slug: user.slug, filter_type: filter_type.recent, filter_value: 1}) }}"#}>
                 <i class="icon-star"></i><a href="#">Recently Added</a>

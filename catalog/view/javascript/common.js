@@ -707,6 +707,7 @@ function HashTable(obj)
 			}else {
 				var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
 				this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+				this.rootContent.css('right','220px');
 				listBlockItem.css('opacity','1');
 			}
 		}

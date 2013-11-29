@@ -152,9 +152,14 @@
 (function($, document, undefined) {
 	function FriendFilter( $el ){
 		this.$el 				= $el;
-		this.$inputFilter		= $el.find('#filter-input');
+		this.$rootContent 		= $('#y-content');
+		this.$mainContent 		= $('#y-main-content');
+		
 		this.$friendConditions	= $el.find('.friend-condition');
-
+		this.$inputFilter		= $el.find('#filter-input');
+		this.$userContainer 	= this.$mainContent.find('.user-container');
+		this.$friendList		= this.$userContainer.find('.friend-item');
+		this.$isDone 			= true;
 		this.attachEvents();
 	}
 
@@ -168,25 +173,73 @@
 		}
 
 		that.$inputFilter.keyup(function(){
-			var query = $(this).val().toString().trim();
-			
+			if(that.$friendList.length === 0 || that.$isDone === false )
+				return;			
+			var userId = '', userName='', userEmail='';
+			var query = $(this).val().toString().trim().toLowerCase();
+			if(query.length == 0) {
+				that.showResult(that.$friendList);
+				return;
+			}
+			that.$isDone = false;
+			var resultFilter = that.$friendList.filter(function(index) {
+				if($(this).data('user-id')) {
+					userId = $(this).data('user-id');
+				}else {
+					userId = "*";
+				}
+				if($(this).data('user-name')) {
+					userName = $(this).data('user-name');
+				}else {
+					userName = "*";
+				}
+				if($(this).data('user-email')) {
+					userEmail = $(this).data('user-email');
+				}else {
+					userEmail = "*";
+				}
+				return (userId.toLowerCase().indexOf(query) > -1 || 
+						userName.toLowerCase().indexOf(query) > -1 || 
+						userEmail.toLowerCase().indexOf(query) > -1);
+			});
+			that.showResult(resultFilter);
 		});
 
 		this.$friendConditions.each( function () {
-			$(this).click(function(){
+			$(this).click(function(e){
+				e.preventDefault();				
 				if ( $(this).hasClass('active') ){
 					return false;
 				}
-
 				that.$friendConditions.each(function(){
 					$(this).removeClass('active');
 				});
 				$(this).addClass('active');
-
-				$('.friend-item').addClass('hidden');
-				$('.friend-item.' + $(this).data('friend')).removeClass('hidden');
+				var typeFilter = $(this).data('friend');
+				var resultFriend = that.$friendList.filter(function(index) {
+					return $(this).hasClass(typeFilter);
+				});
+				that.showResult(resultFriend);
+				return true;
 			});
 		});
+	}
+	FriendFilter.prototype.showResult = function (result) {
+		var that = this;
+		
+		that.$friendList.fadeOut(10);
+		//Empty result
+		if(typeof result == "undefined"){
+			that.$mainContent.width(that.$rootContent.width() - 10);
+		}else {
+			var numberRow = Math.floor(that.$mainContent.find('.feed-block').height()/(85 + 10));
+			var numberCol = Math.floor(result.length/numberRow) + 1;
+			that.$mainContent.width(numberCol*(320 + 15));
+			result.stop(true,true).fadeIn(300);						
+		}
+		that.$rootContent.getNiceScroll().resize();
+		that.$rootContent.animate({scrollLeft : '0px'}, 200);
+		that.$isDone = true;
 	}
 
 	$(function(){
