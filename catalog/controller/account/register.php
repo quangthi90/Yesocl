@@ -99,6 +99,11 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_field_required'] = 'Field is required';
   			$this->data['text_error_location'] = 'Location mush be between 3 to 127 character!';
   			$this->data['text_error_postal_code'] = 'Invalid postal code!';
+  			$this->data['text_error_company_name'] = 'Company name mush be between 3 to 127 character!';
+  			$this->data['text_error_company_title'] = 'Job title mush be between 3 to 127 character!';
+  			$this->data['text_error_school_name'] = 'School name mush be between 3 to 127 character!';
+  			$this->data['text_error_school_fieldofstudy'] = 'Field of study mush be between 3 to 127 character!';
+  			$this->data['text_error_industry'] = 'Industry mush be between 3 to 127 character!';
 
   			// link
   			$this->data['link_autocomplete_company'] = HTTP_SERVER . $this->url->link('company/company/autocomplete');
@@ -106,6 +111,7 @@ class ControllerAccountRegister extends Controller {
   			$this->data['link_autocomplete_fieldofstudy'] = HTTP_SERVER . $this->url->link('data/value/fieldOfStudyAutoComplete');
   			$this->data['link_autocomplete_title'] = HTTP_SERVER . $this->url->link('data/value/industryAutoComplete');
   			$this->data['link_autocomplete_location'] = HTTP_SERVER . $this->url->link('data/value/locationAutoComplete');
+  			$this->data['link_submit_step_1'] = HTTP_SERVER . $this->url->link('account/register/step1');
 
   			// get customer data
   			$this->load->model('account/customer');

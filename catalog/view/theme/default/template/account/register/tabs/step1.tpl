@@ -1,5 +1,5 @@
 {% block register_tabs_step1 %}
-<div class="row-fluid register-box register-step1" data-error-field-required="{{ text_field_required }}" data-error-location="{{ text_error_location }}" data-error-postal-code="{{ text_error_postal_code }}">
+<div class="row-fluid register-box register-step1" data-error-field-required="{{ text_field_required }}" data-error-location="{{ text_error_location }}" data-error-postal-code="{{ text_error_postal_code }}" data-error-company-name="{{ text_error_company_name }}" data-error-company-title ="{{ text_error_company_title }}" data-url="{{ link_submit_step_1 }}" data-error-school-name="{{ text_error_school_name }}" data-error-school-fieldofstudy="{{ text_error_school_fieldofstudy }}" data-error-industry="{{ text_error_industry }}">
 	<div class="span12 register-box-step">
 		<div class="row-fluid">
 			<h2 class="span11 offset1 register-box-title">
@@ -90,6 +90,16 @@
 				    <div class="controls span9">
 						<select class="span2" name="school[start]">
 							{% for i in current_year..before_year %}
+							<option value="{{ i }}" {% if school.start == i %}checked="checked"{% endif %}>{{ i }}</option>
+							{% endfor %}
+						</select> 
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid student-input">
+				    <label class="control-label span2 offset1" for="inputFrom">{{ text_to }}</label>
+				    <div class="controls span9">
+						<select class="span2" name="school[ended]">
+							{% for i in fulture_year..before_year %}
 							<option value="{{ i }}" {% if school.start == i %}checked="checked"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 

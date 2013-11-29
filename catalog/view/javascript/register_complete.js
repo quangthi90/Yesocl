@@ -267,6 +267,7 @@
 
 		this.$el.find('#btn-finished-step1').click(function () {
 			if (that.validate()) {
+
                 carouselEle.carousel('next');
                 setTimeout(function(){
                     carouselEle.carousel('pause');
@@ -281,9 +282,28 @@
 		var that = this;
 		var error = true;
 
+        var location = '';
+        var city_id = '';
+        var postal_code = '';
+        var current = '';
+        var company_name = '';
+        var company_id = '';
+        var company_title = '';
+        var company_start_month = '';
+        var company_start_year = '';
+        var company_self_employed = '';
+        var school_id = '';
+        var school_name = '';
+        var school_fieldofstudy = '';
+        var school_start = '';
+        var school_end = '';
+        var industry = '';
+        var industry_id = '';
+
 		this.$el.find('.yes-warning').remove();
 
-		var location = $.trim(this.$inputLocation.val());
+		location = $.trim(this.$inputLocation.val());
+        city_id = $.trim(this.$el.find('input[name=\"city_id\"]').val());
 		if (location.length == 0) {
 			error = false;
 			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
@@ -292,14 +312,110 @@
 			that.$inputLocation.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-location') }));
 		}
 
-		var postal_code = $.trim(this.$inputPostalCode.val());
+		postal_code = $.trim(this.$inputPostalCode.val());
 		if (postal_code.length != 0 && !/^[0,9]{3,5}$/.test(postal_code)) {
 			error = false;
 			that.$inputPostalCode.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-postal-code') }));
 		}
 
+        current = this.$el.find('input[name=\"current\"]:checked').val();
+        if (current == '2') {
+            var $inputCompanyName = this.$el.find('input[name=\"company[name]\"]');
+            var $inputCompanyTitle = this.$el.find('input[name=\"company[title]\"]');
+            company_id = this.$el.find('input[name=\"company[id]\"]').val();
+            company_name = $inputCompanyName.val();
+            if (company_name.length == 0) {
+                error = false;
+                $inputCompanyName.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (company_name.length < 3 || company_name.length > 127) {
+                error = false;
+                $inputCompanyName.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-company-name') }));
+            }
+            company_title = $inputCompanyTitle.val();
+            if (company_title.length == 0) {
+                error = false;
+                $inputCompanyTitle.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (company_title.length < 3 || company_title.length > 127) {
+                error = false;
+                $inputCompanyTitle.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-company-title') }));
+            }
+            company_self_employed = (this.$el.find('input[name=\"company[self_employed]\"]').attr('checked') === 'checked') ? 1 : 0;
+            company_start_month = this.$el.find('input[name=\"company[start][month]\"]').val();
+            company_start_year = this.$el.find('input[name=\"company[start][year]\"]').val();
+        }else if (current == '1') {
+            var $inputSchoolName = this.$el.find('input[name=\"school[name]\"]');
+            var $inputSchoolFieldOfStudy = this.$el.find('input[name=\"school[fieldofstudy]\"]');
+            school_id = this.$el.find('input[name=\"school[id]\"]').val();
+            school_name = $inputSchoolName.val();
+            if (school_name.length == 0) {
+                error = false;
+                $inputSchoolName.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (school_name.length < 3 || school_name.length > 127) {
+                error = false;
+                $inputSchoolName.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-school-name') }));
+            }
+            school_fieldofstudy = $inputSchoolFieldOfStudy.val();
+            if (school_fieldofstudy.length == 0) {
+                error = false;
+                $inputSchoolFieldOfStudy.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (school_fieldofstudy.length < 3 || school_fieldofstudy.length > 127) {
+                error = false;
+                $inputSchoolFieldOfStudy.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-school-fieldofstudy') }));
+            }
+            school_start = this.$el.find('input[name=\"school[start]\"]').val();
+            school_end= this.$el.find('input[name=\"school[end]\"]').val();
+        }else {
+            var $inputIndustry = this.$el.find('input[name=\"industry\"]');
+            industry_id = this.$el.find('input[name=\"industry_id\"]').val();
+            industry = $inputIndustry.val();
+            if (industry.length == 0) {
+                error = false;
+                $inputIndustry.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (industry.length < 3 || industry.length > 127) {
+                error = false;
+                $inputIndustry.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-industry') }));
+            }
+        }
+
+        if (!error) {
+            this.data = {
+                'location': location,
+                'city_id': city_id,
+                'postal_code': postal_code,
+                'current': current,
+                'company_id': company_id,
+                'company_name': company_name,
+                'company_title': company_title,
+                'company_start_month': company_start_month,
+                'company_start_year': company_start_year,
+                'company_self_employed': company_self_employed,
+                'school_id': school_id,
+                'school_name': school_name,
+                'school_fieldofstudy': school_fieldofstudy,
+                'school_start': school_start,
+                'school_end': school_end,
+                'industry': industry,
+                'industry_id': industry_id,
+            }
+        }
+
 		return error;
 	}
+
+    RegisterCompleteStep1.prototype.submit = function () {
+        var that = this;
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.data('url'),
+            data: this.data,
+            dataType: 'json'
+        });
+    }
+
+    RegisterCompleteStep1.prototype.triggerProcess = function () {
+
+    }
 
 	$(function(){
 		new RegisterComplete($('#y-main-content'));
