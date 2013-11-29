@@ -152,7 +152,7 @@ class ControllerAccountRegister extends Controller {
 	  				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
 	  				//$this->data['company']['end'] = $experience->getEnded();
 	  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
-	  				$this->data['current'] = 1;
+	  				$this->data['current'] = 2;
 	  			}else {
 	  				$this->data['company']['name'] = '';
 	  				$this->data['company']['id'] = '0';
@@ -169,7 +169,7 @@ class ControllerAccountRegister extends Controller {
 	  				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
 	  				$this->data['school']['start'] = $education->getStarted();
 	  				//$this->data['school']['end'] = $education->getEnded();
-	  				$this->data['current'] = 2;
+	  				$this->data['current'] = 1;
 	  			}else {
 	  				$this->data['school']['name'] = '';
 	  				$this->data['school']['id'] = 0;

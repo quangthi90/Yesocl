@@ -79,8 +79,8 @@ Class Background {
 	}
 
 	public function getCurrentExperience() {
-		foreach ($experiences as $experience) {
-			if (is_null($experience->getEnded())) {
+		foreach ($this->experiences as $experience) {
+			if ($experience->getEnded() == null) {
 				return $experience;
 			}
 		}
