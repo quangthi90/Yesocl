@@ -12,7 +12,7 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" class="has-horizontal account-friend" style="padding-right: 250px;">
+    <div id="y-main-content" class="has-horizontal account-friend">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}
@@ -24,7 +24,7 @@
                     <i class="icon-angle-right"></i>
                 </a>
             </div>
-            <div class="block-content">
+            <div class="block-content user-container">
             {% for friend_id in friend_ids %}
                 {% set friend = users[friend_id] %}
                 {{ block('friend_common_friend_list') }}

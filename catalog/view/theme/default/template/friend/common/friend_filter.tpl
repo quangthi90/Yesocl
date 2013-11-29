@@ -4,13 +4,13 @@
             <strong>{{ friend_count }}</strong> friends
         </div>
         <div class="friend-search">
-            <input type="text" placeholder="quick search ..." size="50" name="friend-key" id="search-input" />
-            <a href="#" class="friend-search-btn"><i class="icon-search"></i></a>
+            <input type="text" placeholder="quick filter ..." size="50" id="filter-input" />
+            <span><i class="icon-search"></i></span>
         </div>
         <ul class="friend-conditions">
             <li class="friend-condition active" data-friend="all"{# data-url="{{ path('GetFriends', {user_slug: user.slug, filter_type: filter_type.recent, filter_value: 0}) }}"#}>
                 <i class="icon-list"></i><a href="#">All Friends</a>
-            </li>                
+            </li>          
             <li class="friend-condition" data-friend="recent" {# data-url="{{ path('GetFriends', {user_slug: user.slug, filter_type: filter_type.recent, filter_value: 1}) }}"#}>
                 <i class="icon-star"></i><a href="#">Recently Added</a>
             </li>
@@ -19,7 +19,7 @@
             </li>
             <li class="friend-condition" data-friend="female" {# data-url="{{ path('GetFriends', {user_slug: user.slug, filter_type: filter_type.gender, filter_value: 0}) }}" data-filter="{{ data_filter_female }}"#}>
                 <i class="icon-female"></i><a href="#">Female Friends</a>
-            </li>  
+            </li> 
         </ul>
         {#<ul class="friend-conditions mutual-friend-block">
             <li>

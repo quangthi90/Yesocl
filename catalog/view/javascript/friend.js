@@ -93,7 +93,7 @@
 			url:  this.unfriend_url,
 			dataType: 'json',
 			error: function (xhr, error) {
-				alert(xhr.responseText);
+				console.log(error);
 			}
 		});
 
@@ -152,8 +152,7 @@
 (function($, document, undefined) {
 	function FriendFilter( $el ){
 		this.$el 				= $el;
-		this.$inputSearch		= $el.find('#search-input');
-		this.$btnSearch			= $el.find('.friend-search-btn');
+		this.$inputFilter		= $el.find('#filter-input');
 		this.$friendConditions	= $el.find('.friend-condition');
 
 		this.attachEvents();
@@ -162,87 +161,16 @@
 	FriendFilter.prototype.attachEvents = function () {
 		var that = this;
 
-		/*this.$inputSearch.typeahead({
-            source: function (query, process) {
-            	friendList = [];
-                map = {};      
-                		
-            	$.ajax({
-            		type: 'POST',
-            		url: that.$inputSearch.data('url'),
-            		data: { 'filter_name': query },
-            		dataType: 'json',
-            		success: function ( json ) {
-            			if ( json.success == 'ok' ) {
-				            $.each(json.friends, function (i, item) {
-				            	if ( friendList.indexOf(item.id + '-' + item.name) == -1 ) {
-					                friendList.push(item.id + '-' + item.name);
-					                map[item.id + '-' + item.name] = item;
-				            	}
-				            });
-                			process(friendList);
-            			}
-            		},
-            		error: function (xhr, error) {
-            			alert(xhr.responseText);
-            		},
-            	});
-            },
-            updater: function (item) {
-                var selectedFriend = map[item];
-                return selectedFriend.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-            sorter: function (items) {
-                return items.sort();
-            },
-            highlighter: function (item) {
-                var selectedFriend = map[item];
-                var regex = new RegExp( '(' + this.query + ')', 'gi' );
-                var boldItem = selectedFriend.name.replace( regex, "<strong>$1</strong>" );
-                var htmlContent = '<div class="friend-dropdown-info">'
-                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
-                                + '<div class="friend-meta-info">'
-                                + '<span class="friend-name">' + boldItem + '</span>' 
-                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
-                                + '</div>'
-                                + '</div>';
-                return htmlContent;
-            }
-        });
+		if(!String.prototype.trim) {
+		  String.prototype.trim = function () {
+		    return this.replace(/^\s+|\s+$/g,'');
+		  };
+		}
 
-		this.$btnSearch.click( function () {
-			if ( that.$inputSearch.val() == '' ) {
-				return false;
-			}
-
-			$.ajax({
-            	type: 'POST',
-            	url: that.$inputSearch.data('url'),
-            	data: { 'filter_name': that.$inputSearch.val() },
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success == 'ok' ) { 
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
-		});*/
+		that.$inputFilter.keyup(function(){
+			var query = $(this).val().toString().trim();
+			
+		});
 
 		this.$friendConditions.each( function () {
 			$(this).click(function(){
@@ -260,46 +188,6 @@
 			});
 		});
 	}
-
-	/*FriendFilter.prototype.attachEvents = function () {
-		var that = this;
-
-		this.$action.click( function () {
-			if ( that.$element.hasClass('active') ) {
-				return false;
-			}else {
-				$('#friend-filter .friend-conditions .active').removeClass('active');
-				that.$element.addClass('active');
-			}
-
-			var data = that.$element.data('filter');
-
-			$.ajax({
-            	type: 'POST',
-            	url: that.$element.data('url'),
-            	data: data,
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success == 'ok' ) {
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
-		});
-	}*/
 
 	$(function(){
 		$('#friend-filter').each(function(){
