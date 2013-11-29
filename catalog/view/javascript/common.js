@@ -567,6 +567,7 @@ function HashTable(obj)
 	var marginPostPerColumn = 15;
 	var marginBlock = 50;
 	var minFirstColumn = 450;
+	var minPostWidth = 400;
 	var minPostStatusWidth = 420;
 	var marginFriendBlockItem = 10;
 	var widthFriendBlockItem = 320;
@@ -595,11 +596,15 @@ function HashTable(obj)
 			var heightBlockContent = this.heightMain - 42;
 			var heightPost = (heightBlockContent - 2*marginPost)/2;
 			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
+			if(widthPost < minPostWidth){
+				widthPost = minPostWidth;
+			}
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);		
-			this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			//this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
 			this.blocks.css('margin-right', marginBlock + 'px');	
 			var totalWithContent = 0;	
 			this.blocks.each(function(index) {
@@ -660,16 +665,20 @@ function HashTable(obj)
 			this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
 		}
 		else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
-			this.blocks = this.root.find('.feed-block');		
+			this.blocks = this.root.find('.feed-block');	
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
 			var heightPost = (heightBlockContent - 2*marginPost)/2;
 			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
+			if(widthPost < minPostWidth){
+				widthPost = minPostWidth;
+			}
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);		
-			this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			//this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
 			var totalWithContent = 0;
 			this.blocks.each(function(index) {
 				if(index != 0) {
