@@ -1,5 +1,6 @@
 (function($, document, undefined) {
     var carouselEle = $('#myCarousel');
+    
 	function RegisterComplete($element) {
 		this.$el = $element;
 		this.step1 = new RegisterCompleteStep1($element.find('.register-step1'));
@@ -267,7 +268,7 @@
 
 		this.$el.find('#btn-finished-step1').click(function () {
 			if (that.validate()) {
-
+                this.submit($(this))
                 carouselEle.carousel('next');
                 setTimeout(function(){
                     carouselEle.carousel('pause');
@@ -402,7 +403,7 @@
 		return error;
 	}
 
-    RegisterCompleteStep1.prototype.submit = function () {
+    RegisterCompleteStep1.prototype.submit = function ($button) {
         var that = this;
 
         var promise = $.ajax({
@@ -411,10 +412,31 @@
             data: this.data,
             dataType: 'json'
         });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) {
+            if ( data.message != 'success' ) {
+                
+            }else {
+                
+            }
+        });
     }
 
-    RegisterCompleteStep1.prototype.triggerProcess = function () {
+    RegisterCompleteStep1.prototype.triggerProcess = function ($el, promise) {
+        var $spinner = $('<i class="icon-refresh icon-spin"></i>');
+        //var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            //$el.removeClass('disabled').html($old_icon);
+            $el.removeClass('disabled');
+        };
+        
+        $el.addClass('disabled');
+        //$el.addClass('disabled').html($spinner);
 
+        promise.then(f, f);
     }
 
 	$(function(){

@@ -210,6 +210,20 @@ class ControllerAccountRegister extends Controller {
   		}
   	}
 
+  	public function step1() {
+  		$json = array();
+
+  		if ($this->customer->getId() && $this->validateStep1()) {
+  			$json['message'] = 'success';
+  		}else {
+
+  		}
+
+  		$json['error'] = $this->error;
+
+  		$this->response->setOutput(json_decode($json));
+  	}
+
   	private function validate() {
     	if ((utf8_strlen($this->request->post['firstname']) < 1) || (utf8_strlen($this->request->post['firstname']) > 32)) {
       		$this->error['warning'] = $this->language->get('error_firstname');
@@ -239,5 +253,49 @@ class ControllerAccountRegister extends Controller {
     	} 
     	return false;
   	}	
+
+  	private function validateStep1() {
+  		//$this->load->language('account/register');
+
+  		if (empty($this->request->post['location']) || strlen(trim($this->request->post['location'])) < 3 || strlen(trim($this->request->post['location'])) > 127) {
+  			$this->error['location'] = $this->language->get('error_location');
+  		}
+
+  		if (!empty($this->request->post['postal_code']) && !preg_match('/^[0,9]{3,5}$/', $this->request->post['postal_code'])) {
+  			$this->error['postal_code'] = $this->language->get('error_postal_code');
+  		}
+
+  		if (empty($this->request->post['current'])) {
+  			if ($this->request->post['current'] == 2) {
+  				if (empty($this->request->post['company_name']) || strlen(trim($this->request->post['company_name'])) < 3 || strlen(trim($this->request->post['company_name'])) > 127) {
+  					$this->error['company_name'] = $this->language->get('error_company_name');
+  				}
+
+  				if (empty($this->request->post['company_title']) || strlen(trim($this->request->post['company_title'])) < 3 || strlen(trim($this->request->post['company_title'])) > 127) {
+  					$this->error['company_title'] = $this->language->get('error_company_title');
+  				}
+  			}elseif ($this->request->post['current'] == 1) {
+  				if (empty($this->request->post['school_name']) || strlen(trim($this->request->post['school_name'])) < 3 || strlen(trim($this->request->post['school_name'])) > 127) {
+  					$this->error['school_name'] = $this->language->get('error_school_name');
+  				}
+
+  				if (empty($this->request->post['school_fieldofstudy']) || strlen(trim($this->request->post['school_fieldofstudy'])) < 3 || strlen(trim($this->request->post['school_fieldofstudy'])) > 127) {
+  					$this->error['school_fieldofstudy'] = $this->language->get('error_school_fieldofstudy');
+  				}
+  			}else {
+  				if (empty($this->request->post['industry']) || strlen(trim($this->request->post['industry'])) < 3 || strlen(trim($this->request->post['industry'])) > 127) {
+  					$this->error['industry'] = $this->language->get('error_industry');
+  				}
+  			}
+  		}else {
+  			$this->error['current'] = $this->language->get('error_current');
+  		}
+
+  		if ($this->error) {
+  			return false;
+  		}else {
+  			return true;
+  		}
+  	}
 }
 ?>
