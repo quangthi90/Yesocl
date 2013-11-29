@@ -569,7 +569,7 @@
 
 						// Note
 						// Fix for screen 14", Fix it
-						that.$degree.parent().find('ul.typeahead').css('left', '1631px');
+						//that.$degree.parent().find('ul.typeahead').css('left', '1631px');
 					},
 				});
 			},
@@ -599,7 +599,7 @@
 
 						// Note
 						// Fix for screen 14", Fix it
-						that.$school.parent().find('ul.typeahead').css('left', '1631px');
+						//that.$school.parent().find('ul.typeahead').css('left', '1631px');
 					},
 				});
 			},
@@ -629,7 +629,7 @@
 
 						// Note
 						// Fix for screen 14", Fix it
-						that.$fieldofstudy.parent().find('ul.typeahead').css('left', '1631px');
+						//that.$fieldofstudy.parent().find('ul.typeahead').css('left', '1631px');
 					},
 				});
 			},
