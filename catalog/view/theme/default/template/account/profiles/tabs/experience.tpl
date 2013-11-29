@@ -89,6 +89,8 @@
 						From <span class="profiles-tabs-value">{{ experience.started_text }}</span> 
 						{% if experience.ended_text != null %}
 							to <span class="profiles-tabs-value">{{ experience.ended_text }}</span>
+						{% else %}
+							to present
 						{% endif %}
 					</div>
 				</div>
@@ -117,6 +119,8 @@
 				From <span class="profiles-tabs-value">${ started_text }</span>
 				{{if ended_text != null && ended_text != '' }}
 					to <span class="profiles-tabs-value">${ ended_text }</span>
+				{{else}}
+					to present
 				{{/if}}
 			</div>
 		</div>
