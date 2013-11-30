@@ -25,9 +25,9 @@
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
-          <a href="#">
+          {#<a href="#">
 			    	<i class="icon-edit"></i>
-			    </a>
+			    </a>#}
 			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
 	    		</a>
@@ -56,7 +56,7 @@
 			    </ul>
 			</div>
 			<div id="user-notification" class="fr notification-group">        		
-        <div class="notification-item common">
+        {#<div class="notification-item common">
           <a href="#" class="btn-notification">
             <i class="icon-bell"></i>
             <span class="notification-item-count">3</span>
@@ -234,7 +234,7 @@
               </li>                   
             </ul>
           </div>
-        </div>
+        </div>#}
         {% set requests = get_request_friend() %}
         <div class="notification-item friend">
           <a href="#" class="btn-notification">

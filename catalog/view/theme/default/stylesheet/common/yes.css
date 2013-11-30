@@ -175,6 +175,7 @@ body
   width:auto;
   overflow:hidden;
   font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+  background-color: #ECEBEB;
 }
 ul{
   padding: 0px;
@@ -1971,45 +1972,35 @@ ul.user_actions li:hover i{
 #friend-filter {
   position: fixed;
   right: 0px;
-  width: 180px;
-  top: 78px;
-  bottom: 75px;
-  background-color: #5F5F5F;
+  width: 170px;
+  top: 68px;
+  bottom: 68px;
+  background-color: #FFFFFF;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   padding: 15px;
   cursor: default;
-}
-.friend-header {
-  background-color: #F0F0F0;
-  padding: 3px 0px 3px 10px;
-  margin-bottom: 20px;
-  height: 24px;
-}
-.friend-header strong {
-  font-size: 20px;
-}
-#friend-filter:hover .friend-search {
-  display: block;
-}
-#friend-filter:hover .friend-header {
-  display: none;
 }
 #friend-filter .friend-search {
   position: relative;
   margin-bottom: 20px;
   height: 30px;
-  display: none;
 }
 #friend-filter .friend-search input{
-  width: 147px;
+  width: 138px;
   padding-right: 25px;
   border: 1px solid #ddd;
   display: block;
   height: 20px;
 }
-#friend-filter .friend-search .friend-search-btn {
+#friend-filter .friend-search span {
   position: absolute;
   top: 5px;
-  right: 10px;
+  right: 8px;
+}
+#friend-filter .friend-search span i {
+  color: #b4b4b4;
 }
 #friend-filter .friend-search .dropdown-menu > li > a {
   padding: 0px;
@@ -2064,8 +2055,9 @@ ul.user_actions li:hover i{
 }
 #friend-filter .friend-conditions li {
   margin-bottom: 5px;
-  padding: 3px 0px;
+  padding: 5px 0px;
   border-bottom: 1px dotted #f0f0f0;
+  border-left: 1px solid #fff;
   overflow: hidden;
 }
 #friend-filter .friend-conditions li:last-child {
@@ -2074,34 +2066,36 @@ ul.user_actions li:hover i{
 #friend-filter .friend-conditions li i {
   margin-right: 10px;  
   margin-top: 2px;  
-  color: #fff;
+  color: #292929;
   display: block;
   float: left;
   width: 15px;
+  font-size: 15px;
+  text-align: center;
 }
 #friend-filter .friend-conditions li a {
   font-size: 12px;
   font-weight: bold;
-  color: #fff;
+  color: #666;
   display: block;
   float: left;
 }
 #friend-filter .friend-conditions li:hover a {  
-  color: #B1FCED;
+  color: #000;
 }
 #friend-filter .friend-conditions li:hover i {
-  color: #01EBB4;
+  color: #009B77;
 }
 #friend-filter .friend-conditions li.active {
   background-color: #fff;  
-  border-left: 5px solid #009B77;
+  border-left: 1px solid #009B77;
   margin-left: 0px;
 }
 #friend-filter .friend-conditions li.active a {
-  color: #009B77;
+  color: #000;
 }
 #friend-filter .friend-conditions li.active i {
-  color: #000;
+  color: #009B77;
   margin-left: 5px;
 }
 .friend-item {

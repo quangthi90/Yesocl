@@ -1,3 +1,4 @@
+// Friend action button
 (function($, document, undefined) {
 	function FriendAction( $el, removeUnFriend ){
 		var that = this;
@@ -92,7 +93,7 @@
 			url:  this.unfriend_url,
 			dataType: 'json',
 			error: function (xhr, error) {
-				alert(xhr.responseText);
+				console.log(error);
 			}
 		});
 
@@ -138,161 +139,112 @@
 		promise.then(f, f);
 	};
 
-	function FriendFilter( $element ){
-		this.$element			= $element;
-		this.$inputSearch		= $element.find('#search-input');
-		this.$btnSearch			= $element.find('.friend-search-btn');
-		this.$friendConditions		= $element.find('.friend-condition');
+	$(function(){
+        $(document).bind('FRIEND_ACTION', function(e, remove) {
+            $('.friend-actions').each(function(){
+                new FriendAction($(this), remove);
+            });
+        });
+    });
+}(jQuery, document));
 
+// Filter friend
+(function($, document, undefined) {
+	function FriendFilter( $el ){
+		this.$el 				= $el;
+		this.$rootContent 		= $('#y-content');
+		this.$mainContent 		= $('#y-main-content');
+		
+		this.$friendConditions	= $el.find('.friend-condition');
+		this.$inputFilter		= $el.find('#filter-input');
+		this.$userContainer 	= this.$mainContent.find('.user-container');
+		this.$friendList		= this.$userContainer.find('.friend-item');
+		this.$isDone 			= true;
 		this.attachEvents();
 	}
 
 	FriendFilter.prototype.attachEvents = function () {
 		var that = this;
 
-		this.$inputSearch.typeahead({
-            source: function (query, process) {
-            	friendList = [];
-                map = {};      
-                		
-            	$.ajax({
-            		type: 'POST',
-            		url: that.$inputSearch.data('url'),
-            		data: { 'filter_name': query },
-            		dataType: 'json',
-            		success: function ( json ) {
-            			if ( json.success == 'ok' ) {
-				            $.each(json.friends, function (i, item) {
-				            	if ( friendList.indexOf(item.id + '-' + item.name) == -1 ) {
-					                friendList.push(item.id + '-' + item.name);
-					                map[item.id + '-' + item.name] = item;
-				            	}
-				            });
-                			process(friendList);
-            			}
-            		},
-            		error: function (xhr, error) {
-            			alert(xhr.responseText);
-            		},
-            	});
-            },
-            updater: function (item) {
-                var selectedFriend = map[item];
-                return selectedFriend.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-            sorter: function (items) {
-                return items.sort();
-            },
-            highlighter: function (item) {
-                var selectedFriend = map[item];
-                var regex = new RegExp( '(' + this.query + ')', 'gi' );
-                var boldItem = selectedFriend.name.replace( regex, "<strong>$1</strong>" );
-                var htmlContent = '<div class="friend-dropdown-info">'
-                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
-                                + '<div class="friend-meta-info">'
-                                + '<span class="friend-name">' + boldItem + '</span>' 
-                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
-                                + '</div>'
-                                + '</div>';
-                return htmlContent;
-            }
-        });
+		if(!String.prototype.trim) {
+		  String.prototype.trim = function () {
+		    return this.replace(/^\s+|\s+$/g,'');
+		  };
+		}
 
-		this.$btnSearch.click( function () {
-			if ( that.$inputSearch.val() == '' ) {
-				return false;
+		that.$inputFilter.keyup(function(){
+			if(that.$friendList.length === 0 || that.$isDone === false )
+				return;			
+			var userId = '', userName='', userEmail='';
+			var query = $(this).val().toString().trim().toLowerCase();
+			if(query.length == 0) {
+				that.showResult(that.$friendList);
+				return;
 			}
-
-			$.ajax({
-            	type: 'POST',
-            	url: that.$inputSearch.data('url'),
-            	data: { 'filter_name': that.$inputSearch.val() },
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success == 'ok' ) { 
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
+			that.$isDone = false;
+			var resultFilter = that.$friendList.filter(function(index) {
+				if($(this).data('user-id')) {
+					userId = $(this).data('user-id');
+				}else {
+					userId = "*";
+				}
+				if($(this).data('user-name')) {
+					userName = $(this).data('user-name');
+				}else {
+					userName = "*";
+				}
+				if($(this).data('user-email')) {
+					userEmail = $(this).data('user-email');
+				}else {
+					userEmail = "*";
+				}
+				return (userId.toLowerCase().indexOf(query) > -1 || 
+						userName.toLowerCase().indexOf(query) > -1 || 
+						userEmail.toLowerCase().indexOf(query) > -1);
+			});
+			that.showResult(resultFilter);
 		});
 
 		this.$friendConditions.each( function () {
-			new FriendCondition( $(this) );
-		})
-	}
-
-	function FriendCondition( $element ) {
-		this.$element = $element;
-		this.$action = $element.find('a');
-
-		this.attachEvents();
-	}
-
-	FriendCondition.prototype.attachEvents = function () {
-		var that = this;
-
-		this.$action.click( function () {
-			if ( that.$element.hasClass('active') ) {
-				return false;
-			}else {
-				$('#friend-filter .friend-conditions .active').removeClass('active');
-				that.$element.addClass('active');
-			}
-
-			var data = that.$element.data('filter');
-
-			$.ajax({
-            	type: 'POST',
-            	url: that.$element.data('url'),
-            	data: data,
-            	dataType: 'json',
-            	success: function ( json ) {
-            		if ( json.success == 'ok' ) {
-            			if ( json.friends.length > 0 ) {
-	            			var $friends = $.tmpl( $('#friend-item'), json.friends );
-	            			$friends.each(function(){
-					            new FriendAction( $(this) );
-					        });
-	            			var $htmlParent = $('#y-content .block-content');
-	            		    $('#y-content .friend-item').remove();
-	            		    $htmlParent.prepend( $friends );
-            		    }else {
-            		    	$('#y-content .friend-item').remove();
-            		    }
-            		}
-            	},
-            	error: function (xhr, error) {
-            		alert(xhr.responseText);
-            	},
-            });
+			$(this).click(function(e){
+				e.preventDefault();				
+				if ( $(this).hasClass('active') ){
+					return false;
+				}
+				that.$friendConditions.each(function(){
+					$(this).removeClass('active');
+				});
+				$(this).addClass('active');
+				var typeFilter = $(this).data('friend');
+				var resultFriend = that.$friendList.filter(function(index) {
+					return $(this).hasClass(typeFilter);
+				});
+				that.showResult(resultFriend);
+				return true;
+			});
 		});
+	}
+	FriendFilter.prototype.showResult = function (result) {
+		var that = this;
+		
+		that.$friendList.fadeOut(10);
+		//Empty result
+		if(typeof result == "undefined"){
+			that.$mainContent.width(that.$rootContent.width() - 10);
+		}else {
+			var numberRow = Math.floor(that.$mainContent.find('.feed-block').height()/(85 + 10));
+			var numberCol = Math.floor(result.length/numberRow) + 1;
+			that.$mainContent.width(numberCol*(320 + 15));
+			result.stop(true,true).fadeIn(300);						
+		}
+		that.$rootContent.getNiceScroll().resize();
+		that.$rootContent.animate({scrollLeft : '0px'}, 200);
+		that.$isDone = true;
 	}
 
 	$(function(){
-        $('#friend-filter').each(function(){
+		$('#friend-filter').each(function(){
             new FriendFilter( $(this) );
-        });
-
-        $(document).bind('FRIEND_ACTION', function(e, remove) {
-            $('.friend-actions').each(function(){
-                new FriendAction($(this), remove);
-            });
         });
     });
 }(jQuery, document));
