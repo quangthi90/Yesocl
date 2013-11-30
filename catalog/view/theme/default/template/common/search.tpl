@@ -18,8 +18,11 @@
                 </a>
             </div>
             <div class="block-content">
-                {% set friends = users %}
+            {% for friend_id in search_user_ids %}
+                {% set friend = users[friend_id] %}
                 {{ block('friend_common_friend_list') }}
+            {% endfor %}
+                {{ block('friend_common_friend_button_template') }}
             </div>
         </div>
     </div>

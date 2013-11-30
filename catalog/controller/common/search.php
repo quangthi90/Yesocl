@@ -9,6 +9,7 @@ class ControllerCommonSearch extends Controller {
 		
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
+		$this->load->model('friend/friend');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -19,46 +20,33 @@ class ControllerCommonSearch extends Controller {
 			return false;
 		}
 
-		$users = $this->model_user_user->searchUserByKeyword( array('keyword' => $keyword) );
+		$search_users = $this->model_user_user->searchUserByKeyword( array('keyword' => $keyword) );
 
-		foreach ($users as $user) {
-			$user_ids[$user->getId()] = $user->getId();
+		foreach ($search_users as $search_user) {
+			$user_ids[$search_user->getId()] = $search_user->getId();
 		}
 
-		$users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
+		$query_users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
 
-		$this->data['users'] = array();
+		$users = array();
+		$curr_user = $this->customer->getUser();
+		$this->data['search_user_ids'] = array();
 
-		foreach ( $users as $user ) {
-			if ( $user->getId() == $this->customer->getId() ){
+		foreach ( $query_users as $query_user ) {
+			if ( $query_user->getId() == $curr_user->getId() ){
 				continue;
 			}
 
-			if ( $user->getFriendRequests() && in_array($this->customer->getId(), $user->getFriendRequests()) ){
-				$friend_status = 2;
-			}elseif ( $this->customer->getUser()->getFriendById($user->getId()) ){
-				$friend_status = 1;
-			}else{
-				$friend_status = 0;
-			}
-			
-			if ( $user->getMeta() ){
-				$meta = $user->getMeta()->formatToCache();
-			}else{
-				$meta = array();
-			}
+			$user = $query_user->formatToCache();
 
-			$user = $user->formatToCache();
+			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $query_user, $curr_user );
+			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
 
-			$user['meta'] = $meta;
-			$user['status'] = $friend_status;
-
-			if ( !array_key_exists($user['id'], $this->data['users']) ){
-				$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-
-				$this->data['users'][$user['id']] = $user;
-			}
+			$users[$user['id']] = $user;
+			$this->data['search_user_ids'][] = $user['id'];
 		}
+		
+		$this->data['users'] = $users;
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/search.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/search.tpl';
