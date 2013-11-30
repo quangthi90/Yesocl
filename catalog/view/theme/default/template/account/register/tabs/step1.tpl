@@ -88,7 +88,7 @@
 				    <div class="controls span9">
 						<select class="span2" name="school[start]">
 							{% for i in current_year..before_year %}
-							<option value="{{ i }}" {% if school.start == i %}checked="checked"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}" {% if school.start == i %}selected="selected"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>
@@ -97,8 +97,8 @@
 				    <label class="control-label span2 offset1" for="inputFrom">{{ text_to }}</label>
 				    <div class="controls span9">
 						<select class="span2" name="school[end]">
-							{% for i in fulture_year..before_year %}
-							<option value="{{ i }}" {% if school.end == i %}checked="checked"{% endif %}>{{ i }}</option>
+							{% for i in future_year..before_year %}
+							<option value="{{ i }}" {% if school.end == i %}selected="selected"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>
@@ -130,12 +130,12 @@
 				    <div class="controls span9">
 				    	<select class="span2" name="company[start][month]" id="inputFrom">
 							{% for i in 1..12 %}
-							<option value="{{ i }}" {%if company.start.month == i %}checked="checked"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}" {%if company.start.month == i %}selected="selected"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 
 						<select class="span2" name="company[start][year]">
 							{% for i in current_year..before_year %}
-							<option value="{{ i }}" {%if company.start.year == i %}checked="checked"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}" {%if company.start.year == i %}selected="selected"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>

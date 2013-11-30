@@ -124,7 +124,7 @@ class ControllerAccountRegister extends Controller {
   			// common
   			$this->data['current_year'] = date('Y');
   			$this->data['before_year'] = $this->data['current_year'] - 99;
-  			$this->data['fulture_year'] = $this->data['current_year'] + 10;
+  			$this->data['future_year'] = $this->data['current_year'] + 10;
 
   			$meta = $customer->getMeta();
   			//location
