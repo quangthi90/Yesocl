@@ -4,7 +4,7 @@
 		this.$el			= $el;
 		this.url			= $el.data('url');
 		this.$keyword 		= $el.find('input[name=\'keyword\']');
-		this.$btn 			= $el.find('.btn-search');
+		// this.$btn 			= $el.find('.btn-search');
 
 		// console.log(this.$btn.attr('class'));
 
@@ -15,11 +15,17 @@
 
 		this.$keyword.keydown(function(e){
 			if (e.which == 13){
-				that.$btn.trigger('click');
+				url = that.generateUrl();
+
+				if ( url ){
+					location = url;
+				}
+
+				return false;
 			}
 		});
 
-		this.$btn.click(function(e) {
+		/*this.$btn.click(function(e) {
 			e.preventDefault();
 			
 			if(that.$el.hasClass('disabled')) {
@@ -33,7 +39,7 @@
 			}
 
 			return false;
-		});
+		});*/
 	};	
 	SearchBtn.prototype.generateUrl = function(){
 		var url = this.url;
