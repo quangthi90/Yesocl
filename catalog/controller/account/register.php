@@ -124,7 +124,7 @@ class ControllerAccountRegister extends Controller {
   			// common
   			$this->data['current_year'] = (new DateTime())->format('Y');
   			$this->data['before_year'] = $this->data['current_year'] - 99;
-  			$this->data['future_year'] = $this->data['current_year'] + 50;
+  			$this->data['fulture_year'] = $this->data['current_year'] + 10;
 
   			$meta = $customer->getMeta();
   			//location
@@ -168,13 +168,14 @@ class ControllerAccountRegister extends Controller {
 	  				$this->data['school']['id'] = $education->getSchoolId();
 	  				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
 	  				$this->data['school']['start'] = $education->getStarted();
-	  				//$this->data['school']['end'] = $education->getEnded();
+	  				$this->data['school']['end'] = $education->getEnded();
 	  				$this->data['current'] = 1;
 	  			}else {
 	  				$this->data['school']['name'] = '';
 	  				$this->data['school']['id'] = 0;
 	  				$this->data['school']['field_of_study'] = '';
 	  				$this->data['school']['start'] = $current_year;
+	  				$this->data['school']['end'] = $current_year;
 	  			}
   			}else {
   				$this->data['company']['name'] = '';
@@ -187,6 +188,7 @@ class ControllerAccountRegister extends Controller {
 	  			$this->data['school']['id'] = 0;
 	  			$this->data['school']['field_of_study'] = '';
 	  			$this->data['school']['start'] = $current_year;
+	  			$this->data['school']['end'] = $current_year;
   			}
   			// industry
   			$this->data['industry'] = $meta->getIndustry();
@@ -211,17 +213,18 @@ class ControllerAccountRegister extends Controller {
   	}
 
   	public function step1() {
-  		$json = array();
+  		$aJson = array();
 
   		if ($this->customer->getId() && $this->validateStep1()) {
-  			$json['message'] = 'success';
+  			//$this->load->model('')
+  			$aJson['message'] = 'success';
   		}else {
 
   		}
 
-  		$json['error'] = $this->error;
+  		$aJson['error'] = $this->error;
 
-  		$this->response->setOutput(json_decode($json));
+  		$this->response->setOutput(json_encode($aJson));
   	}
 
   	private function validate() {
@@ -261,11 +264,11 @@ class ControllerAccountRegister extends Controller {
   			$this->error['location'] = $this->language->get('error_location');
   		}
 
-  		if (!empty($this->request->post['postal_code']) && !preg_match('/^[0,9]{3,5}$/', $this->request->post['postal_code'])) {
+  		if (!empty($this->request->post['postal_code']) && !preg_match('/^[0-9]{3,5}$/', $this->request->post['postal_code'])) {
   			$this->error['postal_code'] = $this->language->get('error_postal_code');
   		}
 
-  		if (empty($this->request->post['current'])) {
+  		if (isset($this->request->post['current'])) {
   			if ($this->request->post['current'] == 2) {
   				if (empty($this->request->post['company_name']) || strlen(trim($this->request->post['company_name'])) < 3 || strlen(trim($this->request->post['company_name'])) > 127) {
   					$this->error['company_name'] = $this->language->get('error_company_name');

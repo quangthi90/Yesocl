@@ -414,7 +414,7 @@
             if ( data.message != 'success' ) {
                 
             }else {
-                
+                alert(data.message);
             }
         });
     }

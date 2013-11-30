@@ -96,9 +96,9 @@
 			    <div class="control-group row-fluid student-input {% if current != 1 %}hide{% endif %}">
 				    <label class="control-label span2 offset1" for="inputFrom">{{ text_to }}</label>
 				    <div class="controls span9">
-						<select class="span2" name="school[ended]">
+						<select class="span2" name="school[end]">
 							{% for i in fulture_year..before_year %}
-							<option value="{{ i }}" {% if school.start == i %}checked="checked"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}" {% if school.end == i %}checked="checked"{% endif %}>{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>
