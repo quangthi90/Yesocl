@@ -1,5 +1,5 @@
 <?php 
-class ControllerAccountAccount extends Controller { 
+class ControllerAccountWall extends Controller { 
 	private $iLimit = 20;
 
 	public function index() {
