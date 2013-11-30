@@ -324,7 +324,7 @@ class ModelUserBackground extends Model {
 			}
 
 			if (empty($data['company_self_employed'])) {
-				$data['company']['self_employed'] = 0;
+				$data['company_self_employed'] = 0;
 			}
 
 			if (empty($data['company_start_month'])) {
@@ -355,12 +355,36 @@ class ModelUserBackground extends Model {
 				$data['school']['end'] = date('Y');
 			}
 		}else {
-			if (empty($data['industry'])) {
+			if (empty($data['mscompany_name'])) {
 				return false;
 			}
 
-			if (empty($data['industry_id'])) {
-				$data['industry_id'] = 0;
+			if (empty($data['mscompany_id'])) {
+				$data['mscompany']['id'] = 0;
+			}
+
+			if (empty($data['mscompany_title'])) {
+				return false;
+			}
+
+			if (empty($data['mscompany_self_employed'])) {
+				$data['mscompany_self_employed'] = 0;
+			}
+
+			if (empty($data['mscompany_start_month'])) {
+				$data['mscompany_start_month'] = date('m');
+			}
+
+			if (empty($data['mscompany_start_year'])) {
+				$data['mscompany_start_year'] = date('Y');
+			}
+
+			if (empty($data['mscompany_end_month'])) {
+				$data['mscompany_end_month'] = date('m');
+			}
+
+			if (empty($data['mscompany_end_year'])) {
+				$data['mscompany_end_year'] = date('Y');
 			}
 		}
 
@@ -403,8 +427,24 @@ class ModelUserBackground extends Model {
 				$user->getMeta()->setBackground($background);
 			}
 		}else {
-			$user->getMeta()->setIndustry($data['industry']);
-			$user->getMeta()->setIndustryId($data['industry_id']);
+			$experience = new Experience();
+			$experience->setCompany($data['mscompany_name']);
+			$experience->setCompanyId($data['mscompany_id']);
+			$experience->setTitle($data['mscompany_title']);
+			$experience->setSelfEmployed($data['mscompany_self_employed']);
+			$start = new \Datetime();
+			$start->setDate($data['mscompany_start_month'], $data['mscompany_start_year'], 1);
+			$experience->setStarted($start);
+			$end = new \Datetime();
+			$end->setDate($data['mscompany_end_month'], $data['mscompany_end_year'], 1);
+			$experience->setEnded($end);
+			if ($user->getMeta()->getBackground()) {
+				$user->getMeta()->getBackground()->addExperience($experience);
+			}else {
+				$background = new Background();
+				$background->addExperience($experience);
+				$user->getMeta()->setBackground($background);
+			}
 		}
 
 		$this->dm->flush();

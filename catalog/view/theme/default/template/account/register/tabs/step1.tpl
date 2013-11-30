@@ -59,27 +59,18 @@
             			{% endif %}
 				    </div>
 			    </div>
-			    <div id="current-input-step1"></div>
-			    <div class="control-group row-fluid job-seeker-input {% if current != 0 %}hide{% endif %}">
-				    <label class="control-label span2 offset1" for="inputIndustry">{{ text_industry }}</label>
-				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputIndustry" name="industry" placeholder="{{ text_industry_placer }}" value="{{ industry }}" data-url="{{ link_autocomplete_title }}">
-				    	<input type="hidden" name="industry_id" value="{{ industry_id }}">
-				    	{% if not(error_industry is empty) %}<span class="yes-warning">{{ error_industry }}</span>{% endif %}
-				    </div>
-			    </div>
 			    <div class="control-group row-fluid student-input {% if current != 1 %}hide{% endif %}">
 				    <label class="control-label span2 offset1" for="inputSchool">{{ text_school }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="{{ school.name }}" data-url="{{ link_autocomplete_school }}">
-				    	<input type="hidden" name="school[id]" value="{{ school.id }}">
+				    	<input class="span11" type="text" id="inputSchool" name="school[name]" placeholder="{{ text_school_placer }}" value="" data-url="{{ link_autocomplete_school }}">
+				    	<input type="hidden" name="school[id]" value="">
 				    	{% if not(error_school is empty) %}<span class="yes-warning">{{ error_school }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid student-input {% if current != 1 %}hide{% endif %}">
 				    <label class="control-label span2 offset1" for="inputFieldOfStudy">{{ text_fieldofstudy }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="{{ school.field_of_study }}" data-url="{{ link_autocomplete_fieldofstudy }}">
+				    	<input class="span11" type="text" id="inputFieldOfStudy" name="school[fieldofstudy]" placeholder="{{ text_fieldofstudy_placer }}" value="" data-url="{{ link_autocomplete_fieldofstudy }}">
 				    	{% if not(error_fieldofstudy is empty) %}<span class="yes-warning">{{ error_fieldofstudy }}</span>{% endif %}
 				    </div>
 			    </div>
@@ -88,7 +79,7 @@
 				    <div class="controls span9">
 						<select class="span2" name="school[start]">
 							{% for i in current_year..before_year %}
-							<option value="{{ i }}" {% if school.start == i %}selected="selected"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}">{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>
@@ -98,30 +89,30 @@
 				    <div class="controls span9">
 						<select class="span2" name="school[end]">
 							{% for i in future_year..before_year %}
-							<option value="{{ i }}" {% if school.end == i %}selected="selected"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}">{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid employed-input {% if current != 2 %}hide{% endif %}">
-				    <label class="control-label span2 offset1" for="inputCompany">{{ text_company }}</label>
+				    <label class="control-label span2 offset1 employed-input {% if current != 2 %}hide{% endif %}" for="inputCompany">{{ text_company }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="{{ company.name }}" data-url="{{ link_autocomplete_company }}">
+				    	<input class="span11" type="text" id="inputCompany" name="company[name]" placeholder="{{ text_company_placer }}" value="" data-url="{{ link_autocomplete_company }}">
 				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
-				    	<input type="hidden" name="company[id]" value="{{ company.id }}" />
+				    	<input type="hidden" name="company[id]" value="" />
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid employed-input {% if current != 2 %}hide{% endif %}">
-				    <label class="control-label span2 offset1" for="inputJob">{{ text_job_title }}</label>
+				    <label class="control-label span2 offset1 employed-input" for="inputJob">{{ text_job_title }}</label>
 				    <div class="controls span9">
-				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="{{ company.title }}" data-url="{{ link_autocomplete_title }}">
+				    	<input class="span11" type="text" id="inputJob" name="company[title]" placeholder="{{ text_job_title_placer }}" value="" data-url="{{ link_autocomplete_title }}">
 				    	{% if not(error_job_title is empty) %}<span class="yes-warning">{{ error_job_title }}</span>{% endif %}
 				    </div>
 			    </div>
 			    <div class="control-group row-fluid employed-input {% if current != 2 %}hide{% endif %}">
 				    <div class="controls span9 offset3">
 					    <label>
-					    	<input type="checkbox" value="1" name="company[self_employed]" {% if company.self_employed %}checked="checked"{% endif %}> {{ text_self_employed }}
+					    	<input type="checkbox" value="1" name="company[self_employed]"> {{ text_self_employed }}
 					    </label>
 				    </div>
 			    </div>
@@ -130,12 +121,64 @@
 				    <div class="controls span9">
 				    	<select class="span2" name="company[start][month]" id="inputFrom">
 							{% for i in 1..12 %}
-							<option value="{{ i }}" {%if company.start.month == i %}selected="selected"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}">{{ i }}</option>
 							{% endfor %}
 						</select> 
 						<select class="span2" name="company[start][year]">
 							{% for i in current_year..before_year %}
-							<option value="{{ i }}" {%if company.start.year == i %}selected="selected"{% endif %}>{{ i }}</option>
+							<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select> 
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid job-seeker-input {% if current != 0 %}hide{% endif %}">
+				    <label class="control-label span2 offset1 job-seeker-input" for="inputCompany">{{ text_most_recent_company }}</label>
+				    <div class="controls span9">
+				    	<input class="span11" type="text" id="inputCompany" name="mscompany[name]" placeholder="{{ text_company_placer }}" value="" data-url="{{ link_autocomplete_company }}">
+				    	{% if not(error_company is empty) %}<span class="yes-warning">{{ error_company }}</span>{% endif %}
+				    	<input type="hidden" name="mscompany[id]" value="" />
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid job-seeker-input {% if current != 0 %}hide{% endif %}">
+				    <label class="control-label span2 offset1" for="inputJob">{{ text_most_recent_job_title }}</label>
+				    <div class="controls span9">
+				    	<input class="span11" type="text" id="inputJob" name="mscompany[title]" placeholder="{{ text_job_title_placer }}" value="" data-url="{{ link_autocomplete_title }}">
+				    	{% if not(error_job_title is empty) %}<span class="yes-warning">{{ error_job_title }}</span>{% endif %}
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid job-seeker-input {% if current != 0 %}hide{% endif %}">
+				    <div class="controls span9 offset3">
+					    <label>
+					    	<input type="checkbox" value="1" name="mscompany[self_employed]"> {{ text_self_employed }}
+					    </label>
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid job-seeker-input {% if current != 0 %}hide{% endif %}">
+				    <label class="control-label span2 offset1" for="inputFrom">{{ text_from }}</label>
+				    <div class="controls span9">
+				    	<select class="span2" name="mscompany[start][month]" id="inputFrom">
+							{% for i in 1..12 %}
+							<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select> 
+						<select class="span2" name="mscompany[start][year]">
+							{% for i in current_year..before_year %}
+							<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select> 
+				    </div>
+			    </div>
+			    <div class="control-group row-fluid job-seeker-input {% if current != 0 %}hide{% endif %}">
+				    <label class="control-label span2 offset1" for="inputFrom">{{ text_to }}</label>
+				    <div class="controls span9">
+				    	<select class="span2" name="mscompany[end][month]" id="inputFrom">
+							{% for i in 1..12 %}
+							<option value="{{ i }}">{{ i }}</option>
+							{% endfor %}
+						</select> 
+						<select class="span2" name="company[end][year]">
+							{% for i in current_year..before_year %}
+							<option value="{{ i }}">{{ i }}</option>
 							{% endfor %}
 						</select> 
 				    </div>

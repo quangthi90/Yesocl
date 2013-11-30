@@ -80,18 +80,21 @@ class ControllerAccountRegister extends Controller {
   			$this->data['text_employed'] = 'Employed';
   			$this->data['text_job_seeker'] = 'Job Seeker';
   			$this->data['text_student'] = 'Student';
+  			$this->data['text_most_recent_job_title'] = 'Most Recent Job title';
   			$this->data['text_job_title'] = 'Job title';
   			$this->data['text_job_title_placer'] = 'Input Text';
   			$this->data['text_industry'] = 'Industry';
   			$this->data['text_industry_placer'] = 'Input Text';
   			$this->data['text_self_employed'] = 'I am a self-employed';
   			$this->data['text_company'] = 'Company';
+  			$this->data['text_most_recent_company'] = 'Most Recent Company';
   			$this->data['text_company_placer'] = 'Input Text';
   			$this->data['text_industry'] = 'Industry';
   			$this->data['text_industry_placer'] = 'Input Text';
   			$this->data['text_school'] = 'School';
   			$this->data['text_school_placer'] = 'Input Text';
   			$this->data['text_from'] = 'From';
+  			$this->data['text_to'] = 'To';
   			$this->data['text_fieldofstudy'] = 'Field of study';
   			$this->data['text_fieldofstudy_placer'] = 'Input Text';
 
@@ -139,59 +142,7 @@ class ControllerAccountRegister extends Controller {
   			//post code
   			$this->data['postal_code'] = $meta->getPostalCode();
   			// background
-  			$background = $meta->getBackground();
 	  		$this->data['current'] = 0;
-  			if ($background) {
-	  			//experience
-	  			$experience = $background->getCurrentExperience();
-	  			if ($experience) {
-	  				$this->data['company']['name'] = $experience->getCompany();
-	  				$this->data['company']['id'] = $experience->getCompanyId();
-	  				$this->data['company']['title'] = $experience->getTitle();
-	  				$this->data['company']['start']['month'] = $experience->getStarted()->format('m');
-	  				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
-	  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
-	  				$this->data['current'] = 2;
-	  			}else {
-	  				$this->data['company']['name'] = '';
-	  				$this->data['company']['id'] = '0';
-	  				$this->data['company']['title'] = '';
-	  				$this->data['company']['start']['month'] = 1;
-	  				$this->data['company']['start']['year'] = $current_year;
-	  				$this->data['company']['self_employed'] = 0;
-	  			}
-	  			//education
-	  			$education = $background->getCurrentEducation();
-	  			if ($education) {
-	  				$this->data['school']['name'] = $education->getSchool();
-	  				$this->data['school']['id'] = $education->getSchoolId();
-	  				$this->data['school']['field_of_study'] = $education->getFieldOfStudy();
-	  				$this->data['school']['start'] = $education->getStarted();
-	  				$this->data['school']['end'] = $education->getEnded();
-	  				$this->data['current'] = 1;
-	  			}else {
-	  				$this->data['school']['name'] = '';
-	  				$this->data['school']['id'] = 0;
-	  				$this->data['school']['field_of_study'] = '';
-	  				$this->data['school']['start'] = $current_year;
-	  				$this->data['school']['end'] = $current_year;
-	  			}
-  			}else {
-  				$this->data['company']['name'] = '';
-	  			$this->data['company']['id'] = '0';
-	  			$this->data['company']['title'] = '';
-	  			$this->data['company']['start']['month'] = 1;
-	  			$this->data['company']['start']['year'] = $current_year;
-	  			$this->data['company']['self_employed'] = 0;
-	  			$this->data['school']['name'] = '';
-	  			$this->data['school']['id'] = 0;
-	  			$this->data['school']['field_of_study'] = '';
-	  			$this->data['school']['start'] = $current_year;
-	  			$this->data['school']['end'] = $current_year;
-  			}
-  			// industry
-  			$this->data['industry'] = $meta->getIndustry();
-  			$this->data['industry_id'] = $meta->getIndustryId();
 
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/register/register.tpl')) {
 				$this->template = $this->config->get('config_template') . '/template/account/register/register.tpl';
@@ -285,8 +236,12 @@ class ControllerAccountRegister extends Controller {
   					$this->error['school_fieldofstudy'] = $this->language->get('error_school_fieldofstudy');
   				}
   			}else {
-  				if (empty($this->request->post['industry']) || strlen(trim($this->request->post['industry'])) < 3 || strlen(trim($this->request->post['industry'])) > 127) {
-  					$this->error['industry'] = $this->language->get('error_industry');
+  				if (empty($this->request->post['mscompany_name']) || strlen(trim($this->request->post['mscompany_name'])) < 3 || strlen(trim($this->request->post['mscompany_name'])) > 127) {
+  					$this->error['mscompany_name'] = $this->language->get('error_company_name');
+  				}
+
+  				if (empty($this->request->post['mscompany_title']) || strlen(trim($this->request->post['mscompany_title'])) < 3 || strlen(trim($this->request->post['mscompany_title'])) > 127) {
+  					$this->error['mscompany_title'] = $this->language->get('error_company_title');
   				}
   			}
   		}else {

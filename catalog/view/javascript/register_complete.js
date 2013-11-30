@@ -19,13 +19,13 @@
 
         this.$el.find('input[name=\"current\"]').click(function () {
             if (that.$el.find('input[name=\"current\"]:checked').val() == '2') {
-                that.$el.find('.employed-input').toggleClass('hide', false);
                 that.$el.find('.job-seeker-input').toggleClass('hide', true);
                 that.$el.find('.student-input').toggleClass('hide', true);
+                that.$el.find('.employed-input').toggleClass('hide', false);
             }else if (that.$el.find('input[name=\"current\"]:checked').val() == '0') {
                 that.$el.find('.employed-input').toggleClass('hide', true);
-                that.$el.find('.job-seeker-input').toggleClass('hide', false);
                 that.$el.find('.student-input').toggleClass('hide', true);
+                that.$el.find('.job-seeker-input').toggleClass('hide', false);
             }else if (that.$el.find('input[name=\"current\"]:checked').val() == '1') {
                 that.$el.find('.employed-input').toggleClass('hide', true);
                 that.$el.find('.job-seeker-input').toggleClass('hide', true);
@@ -33,119 +33,15 @@
             }
         });
 
-        /*this.$el.find('input[name=\"company[name]\"]').typeahead({
-            source: function (query, process) {
-                that.$el.find('input[name=\"company[id]\"]').val('0');
-
-                companyList = [];
-                map = {};      
-                        
-                $.ajax({
-                    type: 'GET',
-                    url: that.$el.find('input[name=\"company[name]\"]').data('url'),
-                    data: { 'filter_name': query },
-                    dataType: 'json',
-                    success: function ( json ) {
-                        if ( json.success == 'ok' ) {
-                            $.each(json.companies, function (i, item) {
-                                if ( companyList.indexOf(item.name) == -1 ) {
-                                    companyList.push(item.name);
-                                    map[item.name] = item;
-                                }
-                            });
-                            process(companyList);
-                        }
-                    },
-                    error: function (xhr, error) {
-                        alert(xhr.responseText);
-                    },
-                });
-            },
-            updater: function (item) {
-                var selectedCompany = map[item];
-                that.$el.find('input[name=\"company[id]\"]').val(selectedCompany.id);
-                return selectedCompany.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-        });*/
         new AutocompleteRegister(that.$el.find('input[name=\"company[name]\"]'), that.$el.find('input[name=\"company[name]\"]').data('url'), 'filter_name', 'name', that.$el.find('input[name=\"company[id]\"]'), 'id');
+        new AutocompleteRegister(that.$el.find('input[name=\"mscompany[name]\"]'), that.$el.find('input[name=\"mscompany[name]\"]').data('url'), 'filter_name', 'name', that.$el.find('input[name=\"mscompany[id]\"]'), 'id');
 
         new AutocompleteRegister(that.$el.find('input[name=\"company[title]\"]'), that.$el.find('input[name=\"company[title]\"]').data('url'), 'keyword', 'name', null, '');
+        new AutocompleteRegister(that.$el.find('input[name=\"mscompany[title]\"]'), that.$el.find('input[name=\"mscompany[title]\"]').data('url'), 'keyword', 'name', null, '');
 
-        /*this.$el.find('input[name=\"school[name]\"]').typeahead({
-            source: function (query, process) {
-                that.$el.find('input[name=\"school[id]\"]').val('0');
-
-                schoolList = [];
-                map = {};      
-                        
-                $.ajax({
-                    type: 'GET',
-                    url: that.$el.find('input[name=\"school[name]\"]').data('url'),
-                    data: { 'keyword': query },
-                    dataType: 'json',
-                    success: function ( json ) {
-                        $.each(json, function (i, item) {
-                            if ( schoolList.indexOf(item.name) == -1 ) {
-                                schoolList.push(item.name);
-                                map[item.name] = item;
-                            }
-                        });
-                        process(schoolList);
-                    },
-                    error: function (xhr, error) {
-                        alert(xhr.responseText);
-                    },
-                });
-            },
-            updater: function (item) {
-                var selectedSchool = map[item];
-                that.$el.find('input[name=\"school[id]\"]').val(selectedSchool.id);
-                return selectedSchool.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-        });*/
         new AutocompleteRegister(that.$el.find('input[name=\"school[name]\"]'), that.$el.find('input[name=\"school[name]\"]').data('url'), 'keyword', 'name', that.$el.find('input[name=\"school[id]\"]'), 'id');
 
-        /*this.$el.find('input[name=\"school[fieldofstudy]\"]').typeahead({
-            source: function (query, process) {
-                fieldofstudyList = [];
-                map = {};      
-                        
-                $.ajax({
-                    type: 'GET',
-                    url: that.$el.find('input[name=\"school[fieldofstudy]\"]').data('url'),
-                    data: { 'keyword': query },
-                    dataType: 'json',
-                    success: function ( json ) {
-                        $.each(json, function (i, item) {
-                            if ( fieldofstudyList.indexOf(item.name) == -1 ) {
-                                fieldofstudyList.push(item.name);
-                                map[item.name] = item;
-                            }
-                        });
-                        process(fieldofstudyList);
-                    },
-                    error: function (xhr, error) {
-                        alert(xhr.responseText);
-                    },
-                });
-            },
-            updater: function (item) {
-                var selectedFieldOfStudt = map[item];
-                return selectedFieldOfStudt.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-        });*/
         new AutocompleteRegister(that.$el.find('input[name=\"school[fieldofstudy]\"]'), that.$el.find('input[name=\"school[fieldofstudy]\"]').data('url'), 'keyword', 'name', null, '');
-
-        new AutocompleteRegister(that.$el.find('input[name=\"industry\"]'), that.$el.find('input[name=\"industry\"]').data('url'), 'keyword', 'name', that.$el.find('input[name=\"industry_id\"]'), 'id');
 
         new AutocompleteRegister(that.$inputLocation, that.$inputLocation.data('url'), 'keyword', 'name', that.$el.find('input[name=\"city_id\"]'), 'id');
 
@@ -172,13 +68,19 @@
         var company_start_month = '';
         var company_start_year = '';
         var company_self_employed = '';
+        var mscompany_name = '';
+        var mscompany_id = '';
+        var mscompany_title = '';
+        var mscompany_start_month = '';
+        var mscompany_start_year = '';
+        var mscompany_end_month = '';
+        var mscompany_end_year = '';
+        var mscompany_self_employed = '';
         var school_id = '';
         var school_name = '';
         var school_fieldofstudy = '';
         var school_start = '';
         var school_end = '';
-        var industry = '';
-        var industry_id = '';
 
         this.$el.find('.yes-warning').remove();
 
@@ -245,16 +147,30 @@
             school_start = this.$el.find('select[name=\"school[start]\"]').val();
             school_end= this.$el.find('select[name=\"school[end]\"]').val();
         }else {
-            var $inputIndustry = this.$el.find('input[name=\"industry\"]');
-            industry_id = this.$el.find('input[name=\"industry_id\"]').val();
-            industry = $inputIndustry.val();
-            if (industry.length == 0) {
+            var $inputCompanyName = this.$el.find('input[name=\"mscompany[name]\"]');
+            var $inputCompanyTitle = this.$el.find('input[name=\"mscompany[title]\"]');
+            mscompany_id = this.$el.find('input[name=\"mscompany[id]\"]').val();
+            mscompany_name = $inputCompanyName.val();
+            if (company_name.length == 0) {
                 error = false;
-                $inputIndustry.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
-            }else if (industry.length < 3 || industry.length > 127) {
+                $inputCompanyName.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (company_name.length < 3 || company_name.length > 127) {
                 error = false;
-                $inputIndustry.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-industry') }));
+                $inputCompanyName.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-company-name') }));
             }
+            mscompany_title = $inputCompanyTitle.val();
+            if (company_title.length == 0) {
+                error = false;
+                $inputCompanyTitle.after($.tmpl($('#yes-warning-tpl'), { 'error': that.$el.data('error-field-required') }));
+            }else if (company_title.length < 3 || company_title.length > 127) {
+                error = false;
+                $inputCompanyTitle.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-company-title') }));
+            }
+            mscompany_self_employed = (this.$el.find('input[name=\"mscompany[self_employed]\"]').attr('checked') === 'checked') ? 1 : 0;
+            mscompany_start_month = this.$el.find('select[name=\"mscompany[start][month]\"]').val();
+            mscompany_start_year = this.$el.find('select[name=\"mscompany[start][year]\"]').val();
+            mscompany_end_month = this.$el.find('select[name=\"mscompany[end][month]\"]').val();
+            mscompany_end_year = this.$el.find('select[name=\"mscompany[end][year]\"]').val();
         }
 
         if (error) {
@@ -269,13 +185,19 @@
                 'company_start_month': company_start_month,
                 'company_start_year': company_start_year,
                 'company_self_employed': company_self_employed,
+                'mscompany_id': mscompany_id,
+                'mscompany_name': mscompany_name,
+                'mscompany_title': mscompany_title,
+                'mscompany_start_month': mscompany_start_month,
+                'mscompany_start_year': mscompany_start_year,
+                'mscompany_end_month': mscompany_end_month,
+                'mscompany_end_year': mscompany_end_year,
+                'mscompany_self_employed': mscompany_self_employed,
                 'school_id': school_id,
                 'school_name': school_name,
                 'school_fieldofstudy': school_fieldofstudy,
                 'school_start': school_start,
                 'school_end': school_end,
-                'industry': industry,
-                'industry_id': industry_id,
             };
         }
 
