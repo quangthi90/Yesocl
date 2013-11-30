@@ -408,7 +408,7 @@
             dataType: 'json',
         });
 
-        this.triggerProgress($button, promise);
+        this.triggerProcess($button, promise);
 
         promise.then(function(data) {
             if ( data.message != 'success' ) {
