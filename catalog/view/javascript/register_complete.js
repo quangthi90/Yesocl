@@ -33,7 +33,7 @@
             }
         });
 
-        this.$el.find('input[name=\"company[name]\"]').typeahead({
+        /*this.$el.find('input[name=\"company[name]\"]').typeahead({
             source: function (query, process) {
                 that.$el.find('input[name=\"company[id]\"]').val('0');
 
@@ -69,25 +69,10 @@
             matcher: function (item) {
                 return true;
             },
-            /*sorter: function (items) {
-                return items.sort();
-            },
-            highlighter: function (item) {
-                var selectedCompany = map[item];
-                var regex = new RegExp( '(' + this.query + ')', 'gi' );
-                var boldItem = selectedCompany.name.replace( regex, "<strong>$1</strong>" );
-                var htmlContent = '<div class="friend-dropdown-info">'
-                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
-                                + '<div class="friend-meta-info">'
-                                + '<span class="friend-name">' + boldItem + '</span>' 
-                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
-                                + '</div>'
-                                + '</div>';
-                return htmlContent;
-            }*/
-        });
+        });*/
+        new AutocompleteRegister(that.$el.find('input[name=\"company[name]\"]'), that.$el.find('input[name=\"company[name]\"]').data('url'), 'filter_name', 'name', that.$el.find('input[name=\"company[id]\"]'), 'id');
 
-        this.$el.find('input[name=\"company[title]\"]').typeahead({
+        /*this.$el.find('input[name=\"company[title]\"]').typeahead({
             source: function (query, process) {
                 titleList = [];
                 map = {};      
@@ -118,9 +103,10 @@
             matcher: function (item) {
                 return true;
             },
-        });
+        });*/
+        new AutocompleteRegister(that.$el.find('input[name=\"company[title]\"]'), that.$el.find('input[name=\"company[title]\"]').data('url'), 'keyword', 'name', null, '');
 
-        this.$el.find('input[name=\"school[name]\"]').typeahead({
+        /*this.$el.find('input[name=\"school[name]\"]').typeahead({
             source: function (query, process) {
                 that.$el.find('input[name=\"school[id]\"]').val('0');
 
@@ -154,9 +140,10 @@
             matcher: function (item) {
                 return true;
             },
-        });
+        });*/
+        new AutocompleteRegister(that.$el.find('input[name=\"school[name]\"]'), that.$el.find('input[name=\"school[name]\"]').data('url'), 'keyword', 'name', that.$el.find('input[name=\"school[id]\"]'), 'id');
 
-        this.$el.find('input[name=\"school[fieldofstudy]\"]').typeahead({
+        /*this.$el.find('input[name=\"school[fieldofstudy]\"]').typeahead({
             source: function (query, process) {
                 fieldofstudyList = [];
                 map = {};      
@@ -187,9 +174,10 @@
             matcher: function (item) {
                 return true;
             },
-        });
+        });*/
+        new AutocompleteRegister(that.$el.find('input[name=\"school[fieldofstudy]\"]'), that.$el.find('input[name=\"school[fieldofstudy]\"]').data('url'), 'keyword', 'name', null, '');
 
-        this.$el.find('input[name=\"industry\"]').typeahead({
+        /*this.$el.find('input[name=\"industry\"]').typeahead({
             source: function (query, process) {
                 that.$el.find('input[name=\"industry_id\"]').val('0');
 
@@ -223,9 +211,10 @@
             matcher: function (item) {
                 return true;
             },
-        });
+        });*/
+        new AutocompleteRegister(that.$el.find('input[name=\"industry\"]'), that.$el.find('input[name=\"industry\"]').data('url'), 'keyword', 'name', that.$el.find('input[name=\"industry_id\"]'), 'id');
 
-        this.$inputLocation.typeahead({
+        /*this.$inputLocation.typeahead({
             source: function (query, process) {
                 that.$el.find('input[name=\"city_id\"]').val('0');
 
@@ -259,7 +248,8 @@
             matcher: function (item) {
                 return true;
             },
-        });
+        });*/
+        new AutocompleteRegister(that.$inputLocation, that.$inputLocation.data('url'), 'keyword', 'name', that.$el.find('input[name=\"city_id\"]'), 'id');
 
         this.$el.find('#btn-finished-step1').click(function () {
             if (that.validate()) {
@@ -429,6 +419,79 @@
         $el.addClass('disabled');
 
         promise.then(f, f);
+    }
+
+    function AutocompleteRegister($label_input, url, filter_label , label, $value_input, value) {
+        this.url = url;
+        this.filter_label = filter_label;
+        this.$label_input = $label_input;
+        this.label = label;
+        this.$value_input = $value_input;
+        this.value = value;
+
+        this.attachEvents();
+    }
+
+    AutocompleteRegister.prototype.attachEvents = function () {
+        var that = this;
+
+        this.$label_input.typeahead({
+            source: function (query, process) {
+                if (that.$value_input != null) {
+                    that.$value_input.val('');
+                }
+
+                aDataList = [];
+                jMapper = {};   
+                data = {};
+                data[that.filter_label] = query;
+                        
+                $.ajax({
+                    type: 'GET',
+                    url: that.url,
+                    data: data,
+                    dataType: 'json',
+                    success: function ( json ) {
+                        $.each(json, function (i, item) {
+                            if ( aDataList.indexOf(item[that.label]) == -1 ) {
+                                aDataList.push(item[that.label]);
+                                jMapper[item[that.label]] = item;
+                            }
+                        });
+                        process(aDataList);
+                    },
+                    error: function (xhr, error) {
+                        alert(xhr.responseText);
+                    },
+                });
+            },
+            updater: function (item) {
+                var selectedItem = jMapper[item];
+                if (that.$value_input != null) {
+                    that.$value_input.val(selectedItem[that.value]);
+                }
+                return selectedItem[that.label];
+            },
+            matcher: function (item) {
+                return true;
+            },
+            /*sorter: function (items) {
+                return items.sort();
+            },
+            highlighter: function (item) {
+                var selectedCompany = map[item];
+                var regex = new RegExp( '(' + this.query + ')', 'gi' );
+                var boldItem = selectedCompany.name.replace( regex, "<strong>$1</strong>" );
+                var htmlContent = '<div class="friend-dropdown-info">'
+                                + '<img src="' + selectedFriend.avatar + '" alt="" />'
+                                + '<div class="friend-meta-info">'
+                                + '<span class="friend-name">' + boldItem + '</span>' 
+                                + '<span class="num-friend">' + selectedFriend.numFriend + '</span>'   
+                                + '</div>'
+                                + '</div>';
+                return htmlContent;
+            }*/
+        });
     }
 
     $(function(){

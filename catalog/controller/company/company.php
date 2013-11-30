@@ -21,10 +21,8 @@ class ControllerCompanyCompany extends Controller {
 		$companies = $this->model_company_company->getCompanies( $data );
 
 		$json = array();
-		$json['companies'] = array();
-		$json['success'] = 'ok';
 		foreach ( $companies as $company ) {
-			$json['companies'][] = array(
+			$json[] = array(
 				'id' => $company->getId(),
 				'name' => $company->getName(),
 				);
