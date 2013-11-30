@@ -1,6 +1,7 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
 {% use '@template/default/template/friend/common/friend_list.tpl' %}
+{% use '@template/default/template/friend/common/friend_button.tpl' %}
 
 {% block title %}{{ users[current_user_id].username }} | Friends {% endblock %}
 

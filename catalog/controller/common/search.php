@@ -41,6 +41,7 @@ class ControllerCommonSearch extends Controller {
 
 			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $query_user, $curr_user );
 			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+			$user['gender'] = $query_user->getMeta()->getSex();
 
 			$users[$user['id']] = $user;
 			$this->data['search_user_ids'][] = $user['id'];
