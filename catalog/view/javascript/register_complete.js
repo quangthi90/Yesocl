@@ -72,38 +72,6 @@
         });*/
         new AutocompleteRegister(that.$el.find('input[name=\"company[name]\"]'), that.$el.find('input[name=\"company[name]\"]').data('url'), 'filter_name', 'name', that.$el.find('input[name=\"company[id]\"]'), 'id');
 
-        /*this.$el.find('input[name=\"company[title]\"]').typeahead({
-            source: function (query, process) {
-                titleList = [];
-                map = {};      
-                        
-                $.ajax({
-                    type: 'GET',
-                    url: that.$el.find('input[name=\"company[title]\"]').data('url'),
-                    data: { 'keyword': query },
-                    dataType: 'json',
-                    success: function ( json ) {
-                        $.each(json, function (i, item) {
-                            if ( titleList.indexOf(item.name) == -1 ) {
-                                titleList.push(item.name);
-                                map[item.name] = item;
-                            }
-                        });
-                        process(titleList);
-                    },
-                    error: function (xhr, error) {
-                        alert(xhr.responseText);
-                    },
-                });
-            },
-            updater: function (item) {
-                var selectedTitle = map[item];
-                return selectedTitle.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-        });*/
         new AutocompleteRegister(that.$el.find('input[name=\"company[title]\"]'), that.$el.find('input[name=\"company[title]\"]').data('url'), 'keyword', 'name', null, '');
 
         /*this.$el.find('input[name=\"school[name]\"]').typeahead({
@@ -177,87 +145,13 @@
         });*/
         new AutocompleteRegister(that.$el.find('input[name=\"school[fieldofstudy]\"]'), that.$el.find('input[name=\"school[fieldofstudy]\"]').data('url'), 'keyword', 'name', null, '');
 
-        /*this.$el.find('input[name=\"industry\"]').typeahead({
-            source: function (query, process) {
-                that.$el.find('input[name=\"industry_id\"]').val('0');
-
-                industryList = [];
-                map = {};      
-                        
-                $.ajax({
-                    type: 'GET',
-                    url: that.$el.find('input[name=\"industry\"]').data('url'),
-                    data: { 'keyword': query },
-                    dataType: 'json',
-                    success: function ( json ) {
-                        $.each(json, function (i, item) {
-                            if ( industryList.indexOf(item.name) == -1 ) {
-                                industryList.push(item.name);
-                                map[item.name] = item;
-                            }
-                        });
-                        process(industryList);
-                    },
-                    error: function (xhr, error) {
-                        alert(xhr.responseText);
-                    },
-                });
-            },
-            updater: function (item) {
-                var selectedIndustry = map[item];
-                that.$el.find('input[name=\"industry_id\"]').val(selectedIndustry.id);
-                return selectedIndustry.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-        });*/
         new AutocompleteRegister(that.$el.find('input[name=\"industry\"]'), that.$el.find('input[name=\"industry\"]').data('url'), 'keyword', 'name', that.$el.find('input[name=\"industry_id\"]'), 'id');
 
-        /*this.$inputLocation.typeahead({
-            source: function (query, process) {
-                that.$el.find('input[name=\"city_id\"]').val('0');
-
-                locationList = [];
-                map = {};      
-                        
-                $.ajax({
-                    type: 'GET',
-                    url: that.$inputLocation.data('url'),
-                    data: { 'keyword': query },
-                    dataType: 'json',
-                    success: function ( json ) {
-                        $.each(json, function (i, item) {
-                            if ( locationList.indexOf(item.name) == -1 ) {
-                                locationList.push(item.name);
-                                map[item.name] = item;
-                            }
-                        });
-                        process(locationList);
-                    },
-                    error: function (xhr, error) {
-                        alert(xhr.responseText);
-                    },
-                });
-            },
-            updater: function (item) {
-                var selectedLocation = map[item];
-                that.$el.find('input[name=\"city_id\"]').val(selectedLocation.id);
-                return selectedLocation.name;
-            },
-            matcher: function (item) {
-                return true;
-            },
-        });*/
         new AutocompleteRegister(that.$inputLocation, that.$inputLocation.data('url'), 'keyword', 'name', that.$el.find('input[name=\"city_id\"]'), 'id');
 
         this.$el.find('#btn-finished-step1').click(function () {
             if (that.validate()) {
                 that.submit($(this));
-                carouselEle.carousel('next');
-                setTimeout(function(){
-                    carouselEle.carousel('pause');
-                }, 500);
             }else {
                 carouselEle.carousel('pause');
             }
@@ -326,8 +220,8 @@
                 $inputCompanyTitle.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-company-title') }));
             }
             company_self_employed = (this.$el.find('input[name=\"company[self_employed]\"]').attr('checked') === 'checked') ? 1 : 0;
-            company_start_month = this.$el.find('input[name=\"company[start][month]\"]').val();
-            company_start_year = this.$el.find('input[name=\"company[start][year]\"]').val();
+            company_start_month = this.$el.find('select[name=\"company[start][month]\"]').val();
+            company_start_year = this.$el.find('select[name=\"company[start][year]\"]').val();
         }else if (current == '1') {
             var $inputSchoolName = this.$el.find('input[name=\"school[name]\"]');
             var $inputSchoolFieldOfStudy = this.$el.find('input[name=\"school[fieldofstudy]\"]');
@@ -348,8 +242,8 @@
                 error = false;
                 $inputSchoolFieldOfStudy.after($.tmpl($('#yes-warning-tpl'), { 'error':  that.$el.data('error-school-fieldofstudy') }));
             }
-            school_start = this.$el.find('input[name=\"school[start]\"]').val();
-            school_end= this.$el.find('input[name=\"school[end]\"]').val();
+            school_start = this.$el.find('select[name=\"school[start]\"]').val();
+            school_end= this.$el.find('select[name=\"school[end]\"]').val();
         }else {
             var $inputIndustry = this.$el.find('input[name=\"industry\"]');
             industry_id = this.$el.find('input[name=\"industry_id\"]').val();
@@ -396,15 +290,21 @@
             url:  this.$el.data('url'),
             data: this.data,
             dataType: 'json',
+            error: function(xhr, error) {
+                alert(xhr.responseText);
+            }
         });
 
         this.triggerProcess($button, promise);
 
         promise.then(function(data) {
             if ( data.message != 'success' ) {
-                
+                carouselEle.carousel('pause');
             }else {
-                alert(data.message);
+                carouselEle.carousel('next');
+                setTimeout(function(){
+                    carouselEle.carousel('pause');
+                }, 500);
             }
         });
     }

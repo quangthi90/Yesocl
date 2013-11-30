@@ -122,7 +122,7 @@ class ControllerAccountRegister extends Controller {
 
   			// fetch data to step 1
   			// common
-  			$this->data['current_year'] = (new DateTime())->format('Y');
+  			$this->data['current_year'] = date('Y');
   			$this->data['before_year'] = $this->data['current_year'] - 99;
   			$this->data['fulture_year'] = $this->data['current_year'] + 10;
 
@@ -150,7 +150,6 @@ class ControllerAccountRegister extends Controller {
 	  				$this->data['company']['title'] = $experience->getTitle();
 	  				$this->data['company']['start']['month'] = $experience->getStarted()->format('m');
 	  				$this->data['company']['start']['year'] = $experience->getStarted()->format('Y');
-	  				//$this->data['company']['end'] = $experience->getEnded();
 	  				$this->data['company']['self_employed'] = $experience->getSelfEmployed();
 	  				$this->data['current'] = 2;
 	  			}else {
@@ -215,11 +214,11 @@ class ControllerAccountRegister extends Controller {
   	public function step1() {
   		$aJson = array();
 
-  		if ($this->customer->getId() && $this->validateStep1()) {
-  			//$this->load->model('')
+  		$this->load->model('user/background');
+  		if ($this->customer->getId() && $this->validateStep1() && $this->model_user_background->completeRegister($this->customer->getId(), $this->request->post)) {
   			$aJson['message'] = 'success';
   		}else {
-
+  			$aJson['message'] = 'error';
   		}
 
   		$aJson['error'] = $this->error;

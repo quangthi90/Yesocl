@@ -1,11 +1,11 @@
 <?php
 use Document\User\Meta\Location,
+	Document\User\Meta\Background,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
 	Document\User\Meta\Skill;
 
 class ModelUserBackground extends Model {
-
 	public function addEducation( $user_id, $data = array() ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
@@ -280,6 +280,131 @@ class ModelUserBackground extends Model {
 
 		if ( $skill ){
 			$user->getMeta()->getBackground()->getSkills()->removeElement( $skill );
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function completeRegister( $user_id, $data = array()) {
+		$user = $this->dm->getRepository('Document\User\User')->find($user_id);
+
+		if (!$user) {
+			return false;
+		}
+
+		if (empty($data['location'])) {
+			return false;
+		}
+
+		if (empty($data['city_id'])) {
+			$data['city_id'] = 0;
+		}
+
+		if (empty($data['postal_code'])) {
+			$data['postal_code'] = '';
+		}
+
+		if (!isset($data['current'])) {
+			return false;
+		}
+
+		if ($data['current'] == '2') {
+			if (empty($data['company_name'])) {
+				return false;
+			}
+
+			if (empty($data['company_id'])) {
+				$data['company']['id'] = 0;
+			}
+
+			if (empty($data['company_title'])) {
+				return false;
+			}
+
+			if (empty($data['company_self_employed'])) {
+				$data['company']['self_employed'] = 0;
+			}
+
+			if (empty($data['company_start_month'])) {
+				$data['company_start_month'] = date('m');
+			}
+
+			if (empty($data['company_start_year'])) {
+				$data['company_start_year'] = date('Y');
+			}
+		}elseif ($data['current'] == '1') {
+			if (empty($data['school_name'])) {
+				return false;
+			}
+
+			if (empty($data['school_id'])) {
+				$data['school']['id'] = 0;
+			}
+
+			if (empty($data['school_fieldofstudy'])) {
+				return false;
+			}
+
+			if (empty($data['school_start'])) {
+				$data['school']['start'] = date('Y');
+			}
+
+			if (empty($data['school_end'])) {
+				$data['school']['end'] = date('Y');
+			}
+		}else {
+			if (empty($data['industry'])) {
+				return false;
+			}
+
+			if (empty($data['industry_id'])) {
+				$data['industry_id'] = 0;
+			}
+		}
+
+		$location = new Location();
+		$location->setLocation($data['location']);
+		$location->setCityId($data['city_id']);
+		$user->getMeta()->setLocation($location);
+
+		$user->getMeta()->setPostalCode($data['postal_code']);
+
+		if ($data['current'] == '2') {
+			$experience = new Experience();
+			$experience->setCompany($data['company_name']);
+			$experience->setCompanyId($data['company_id']);
+			$experience->setTitle($data['company_title']);
+			$experience->setSelfEmployed($data['company_self_employed']);
+			$start = new \Datetime();
+			$start->setDate($data['company_start_month'], $data['company_start_year'], 1);
+			$experience->setStarted($start);
+			$experience->setEnded(null);
+			if ($user->getMeta()->getBackground()) {
+				$user->getMeta()->getBackground()->addExperience($experience);
+			}else {
+				$background = new Background();
+				$background->addExperience($experience);
+				$user->getMeta()->setBackground($background);
+			}
+		}elseif ($data['current'] == '1') {
+			$education = new Education();
+			$education->setSchool($data['school_name']);
+			$education->setSchoolId($data['school_id']);
+			$education->setFieldOfStudy($data['school_fieldofstudy']);
+			$education->setStarted($data['school_start']);
+			$education->setEnded($data['school_end']);
+			if ($user->getMeta()->getBackground()) {
+				$user->getMeta()->getBackground()->addEducation($education);
+			}else {
+				$background = new Background();
+				$background->addEducation($education);
+				$user->getMeta()->setBackground($background);
+			}
+		}else {
+			$user->getMeta()->setIndustry($data['industry']);
+			$user->getMeta()->setIndustryId($data['industry_id']);
 		}
 
 		$this->dm->flush();

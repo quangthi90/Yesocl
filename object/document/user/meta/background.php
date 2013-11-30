@@ -101,8 +101,8 @@ Class Background {
 	}
 
 	public function getCurrentEducation() {
-		foreach ($educations as $education) {
-			if ($education->getEnded() == null || $education->getEnded() > date('Y')) {
+		foreach ($this->educations as $education) {
+			if ($education->getEnded() > date('Y')) {
 				return $education;
 			}
 		}
