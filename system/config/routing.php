@@ -50,6 +50,7 @@ $_['routing']['CompleteRegister']				= 'profile/complete-register/';
 
 // Friend
 $_['routing']['FriendPage']						= 'friend/{user_slug}/';
+$_['routing']['GetFriends']						= 'friend/{user_slug}/get-friend-list/{filter_type}/{filter_value}/';
 $_['routing']['RequestPage']					= 'friend/request/';
 $_['routing']['MakeFriend']						= 'friend/request/{user_slug}/';
 $_['routing']['ConfirmFriend']					= 'friend/confirm/{user_slug}/';
