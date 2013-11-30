@@ -1,72 +1,34 @@
 {% block friend_common_friend_list %}
-    {% if friends is not defined %}
-        {% set friends = [] %}
+    {% set class = 'all' %}
+    {% if friend.created <= recent_time %}
+        {% set class = class ~ ' recent' %}
     {% endif %}
-    {% for friend in friends %}
-        <div class="block-content-item friend-item">
-            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
-                <img src="{{ friend.avatar }}">
-            </a>
-            <div class="fl friend-info">
-                <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
-                <ul class="friend-infolist">
-                    <li>{{ friend.industry }}</li>
-                    <li>{{ friend.numFriend }}</li>
-                </ul>
-            </div>
-            <div class="friend-actions">
-                {% if friend.status == 0 %}
-                <button data-url="{{ path('MakeFriend', {user_slug: friend.slug}) }}" class="btn btn-yes btn-friend friend-group" data-cancel="0"><i class="icon-plus-sign"></i> Make Friend</button>
-                {% elseif friend.status == 1 %}
-                <div class="dropdown friend-group">
-                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Friend</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a class="btn-unfriend" data-url="{{ path('UnFriend', {user_slug: friend.slug}) }}">Unfriend</a>
-                        </li>
-                    </ul>
-                </div>
-                {% else %}
-                <div class="dropdown friend-group">
-                    <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li>
-                            <a class="btn-friend" href="#" data-url="{{ path('MakeFriend', {user_slug: friend.slug}) }}" data-cancel="1">Cancel Request</a>
-                        </li>
-                    </ul>
-                </div>
-                {% endif %}
-                <!--div class="dropdown">
-                    <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Unfollow</a></li>
-                    </ul>
-                </div-->
-                <!--a href="#" class="btn btn-yes btn-follow"><i class="icon-rss"></i> Follow</a-->
-            </div>
+    {% if friend.gender == 1 %}
+        {% set class = class ~ ' male' %}
+    {% else %}
+        {% set class = class ~ ' female' %}
+    {% endif %}
+    <div class="block-content-item friend-item {{ class }}" data-user-id="{{friend.slug}}" data-user-name="{{friend.username}}" data-user-email="{{ friend.email }}">
+        <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
+            <img src="{{ friend.avatar }}">
+        </a>
+        <div class="fl friend-info">
+            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
+            <ul class="friend-infolist">
+                <li>{{ friend.industry }}</li>
+                <li>{{ friend.numFriend }}</li>
+            </ul>
         </div>
-    {% endfor %}
-    {% raw %}
-    <div class="hidden">
-        <div id="send-request">
-            <button data-cancel="0" data-url="${href}" class="btn btn-yes btn-friend friend-group"><i class="icon-plus-sign"></i> Make Friend</button>
-        </div>
-        <div id="cancel-request">
-            <div class="dropdown friend-group">
-                <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Sent Request</a>
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a data-cancel="1" class="btn-friend" href="#" data-url="${href}">Cancel Request</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        {% set fr_status = friend.fr_status.status %}
+        {% set fr_slug = friend.slug %}
+        {{ block('friend_common_friend_button') }}
     </div>
-    {% endraw %}
 {% endblock %}
 
-{% block friend_common_friend_list_javascript %}
-    <script id="friend-item" type="text/x-jquery-tmpl">
+{% block friend_common_friend_list_template %}
+{% raw %}
+<div class="hidden">
+    <div id="friend-item">
         <div class="block-content-item friend-item">
             <a href="${ url }" class="fl friend-img">
                 <img src="${ avatar }">
@@ -108,5 +70,15 @@
                 {{ status_if_end }}
             </div>
         </div>
+    </div>
+</div>
+{% endraw %}
+{% endblock %}
+
+{% block friend_common_friend_list_javascript %}
+    <script type="text/javascript">
+    $(function(){
+        $(document).trigger('FRIEND_ACTION', [true]);
+    });
     </script>
 {% endblock %}

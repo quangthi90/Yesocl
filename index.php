@@ -59,6 +59,7 @@ $config->load( 'common' );
 $config->load( 'routing' );
 $config->load( 'route' );
 $config->load( 'ignore' );
+$config->load( 'friend' );
 
 // Twig
 require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
