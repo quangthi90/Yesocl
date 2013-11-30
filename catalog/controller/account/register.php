@@ -97,13 +97,13 @@ class ControllerAccountRegister extends Controller {
 
   			// error
   			$this->data['text_field_required'] = 'Field is required';
-  			$this->data['text_error_location'] = 'Location mush be between 3 to 127 character!';
-  			$this->data['text_error_postal_code'] = 'Invalid postal code!';
-  			$this->data['text_error_company_name'] = 'Company name mush be between 3 to 127 character!';
-  			$this->data['text_error_company_title'] = 'Job title mush be between 3 to 127 character!';
-  			$this->data['text_error_school_name'] = 'School name mush be between 3 to 127 character!';
-  			$this->data['text_error_school_fieldofstudy'] = 'Field of study mush be between 3 to 127 character!';
-  			$this->data['text_error_industry'] = 'Industry mush be between 3 to 127 character!';
+  			$this->data['text_error_location'] = 'Location must be between 3 to 127 character!';
+  			$this->data['text_error_postal_code'] = 'Postal code must be between 3 to 5 character!';
+  			$this->data['text_error_company_name'] = 'Company name must be between 3 to 127 character!';
+  			$this->data['text_error_company_title'] = 'Job title must be between 3 to 127 character!';
+  			$this->data['text_error_school_name'] = 'School name must be between 3 to 127 character!';
+  			$this->data['text_error_school_fieldofstudy'] = 'Field of study must be between 3 to 127 character!';
+  			$this->data['text_error_industry'] = 'Industry must be between 3 to 127 character!';
 
   			// link
   			$this->data['link_autocomplete_company'] = HTTP_SERVER . $this->url->link('company/company/autocomplete');
