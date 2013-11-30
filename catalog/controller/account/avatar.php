@@ -2,14 +2,8 @@
 class ControllerAccountAvatar extends Controller {
 	private $error = array();
 	     
-  	public function index() {	
-    	//if (!$this->customer->isLogged()) {
-      	//	$this->session->data['redirect'] = $this->url->link('account/avatar', '', 'SSL');
-
-      	//	$this->redirect($this->url->link('account/login', '', 'SSL'));
-    	//}
-
-		$this->language->load('account/avatar');
+  	public function index() {
+    	$this->language->load('account/avatar');
 
     	$this->document->setTitle($this->language->get('heading_title'));
 		
@@ -19,7 +13,7 @@ class ControllerAccountAvatar extends Controller {
 			if ( $this->model_account_customer->editAvatar( $this->request->files ) ) {
 	      		$this->session->data['success'] = $this->language->get('text_success');
 		  
-		  		$this->redirect($this->url->link('account/avatar', '', 'SSL'));
+		  		$this->redirect($this->extension->path('ChangeAvatar'));
 			}
 			
  			$this->session->data['warning'] = $this->language->get('text_warning');
