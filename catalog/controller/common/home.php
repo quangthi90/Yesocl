@@ -19,60 +19,55 @@ class ControllerCommonHome extends Controller {
 		$this->load->model( 'tool/image' );
 		$this->load->model( 'user/user' );
 
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$lBranchs = $this->model_branch_branch->getAllBranchs();
 
 		$this->data['all_posts'] = array();
 		$this->data['branchs'] = array();
 
-		$user_ids = array();
+		$aUsers = array();
 
-		foreach ( $branchs as $key => $branch ) {
-			$branch = $branch->formatToCache();
-			$branch_slug = $branch['slug'];
+		foreach ( $lBranchs as $key => $oBranch ) {
+			$aBranch = $oBranch->formatToCache();
+			$sBranchSlug = $aBranch['slug'];
 
-			$posts = $this->model_branch_post->getPosts(array(
-				'branch_id' => $branch['id'],
+			$lPosts = $this->model_branch_post->getPosts(array(
+				'branch_id' => $aBranch['id'],
 				'limit' => 6
 			));
 			
-			foreach ($posts as $i => $post) {
-				if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
-					$liked = true;
-				}else{
-					$liked = false;
-				}
+			foreach ($lPosts as $i => $oPost) {
+				$aPost = $oPost->formatToCache();
 
-				$post = $post->formatToCache();
+				if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+					$aPost['isUserLiked'] = true;
+				}else{
+					$aPost['isUserLiked'] = false;
+				}
 
 				// thumb
-				if ( isset($post['thumb']) && !empty($post['thumb']) ){
-					$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
+				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
 				}else{
-					$image = null;
+					$aPost['image'] = null;
 				}
 
-				$post['image'] = $image;
-				
-				$post['isUserLiked'] = $liked;
+				$this->data['all_posts'][$sBranchSlug][] = $aPost;
 
-				$this->data['all_posts'][$branch_slug][] = $post;
+				if ( empty($aUsers[$aPost['user_id']]) ){
+					$oUser = $oPost->getUser();
 
-				$user_ids[$post['user_id']] = $post['user_id'];
+					$aUser = $oUser->formatToCache();
+
+					$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+
+					$aUsers[$aUser['id']] = $aUser;
+				}
 			}
 
-			$this->data['branchs'][] = $branch;
+			$this->data['branchs'][] = $aBranch;
 		}
 
-		$users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
-
-		$this->data['users'] = array();
-		foreach ( $users as $user ) {
-			$user = $user->formatToCache();
-
-			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-
-			$this->data['users'][$user['id']] = $user;
-		}
+		$this->data['users'] = $aUsers;
 
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
