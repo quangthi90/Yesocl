@@ -57,9 +57,7 @@ class ControllerCommonHome extends Controller {
 
 				$this->data['all_posts'][$branch_slug][] = $post;
 
-				if ( !in_array($post['user_id'], $user_ids) ){
-					$user_ids[] = $post['user_id'];
-				}
+				$user_ids[$post['user_id']] = $post['user_id'];
 			}
 
 			$this->data['branchs'][] = $branch;

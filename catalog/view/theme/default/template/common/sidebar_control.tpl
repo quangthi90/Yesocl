@@ -25,11 +25,11 @@
 			  			<i class="icon-home"></i> <span>Home feed</span>
 			  		</a>
 			  	</li>
-			  	<li class="menu-item">
+			  	{#<li class="menu-item">
 			  		<a href="#">
 			  			<i class="icon-umbrella"></i> <span>Follower's post </span>
 		  			</a>
-			  	</li>
+			  	</li>#}
 			  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
 			  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
 			  			<i class="icon-bookmark"></i> <span> Wall Page </span>

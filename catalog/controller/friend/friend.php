@@ -26,45 +26,39 @@ class ControllerFriendFriend extends Controller {
 			return false;
 		}
 
-		$user_temp = $curr_user->formatToCache();
+		$arr_curr_user = $curr_user->formatToCache();
 
-		$user_temp['avatar'] = $this->model_tool_image->getAvatarUser( $user_temp['avatar'], $user_temp['email'] );
+		$arr_curr_user['avatar'] = $this->model_tool_image->getAvatarUser( $arr_curr_user['avatar'], $arr_curr_user['email'] );
 
 		$this->data['current_user_id'] = $curr_user->getId();
 
 		$friends = $curr_user->getFriends();
 
+		$this->data['friend_ids'] = array();
+		$this->data['users'] = array($arr_curr_user['id'], $arr_curr_user);
+
 		foreach ( $friends as $friend ) {
-			$friend_id = $friend->getUser()->getId();
-			if ( $friend_id == $curr_user->getId() ){
+			$ob_user = $friend->getUser();
+
+			if ( $ob_user->getId() == $curr_user->getId() ){
 				continue;
 			}
-			$user_ids[$friend_id] = $friend_id;
-		}
 
-		$this->data['friend_ids'] = $user_ids;
+			$user = $ob_user->formatToCache();
+
+			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+
+			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $ob_user, $curr_user );
+
+			$user['gender'] = $ob_user->getMeta()->getSex();
+
+			$this->data['users'][$user['id']] = $user;
+			$this->data['friend_ids'][$ob_user->getId()] = $ob_user->getId();
+		}
 
 		$users = $this->model_user_user->getUsers(array(
 			'user_ids' => $user_ids
 		));
-
-		$this->data['users'] = array($user_temp['id'], $user_temp);
-
-		foreach ( $users as $user ) {
-			$fr_status = $this->model_friend_friend->checkFriendStatus( $user, $curr_user );
-
-			$gender = $user->getMeta()->getSex();
-
-			$user = $user->formatToCache();
-
-			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-
-			$user['fr_status'] = $fr_status;
-
-			$user['gender'] = $gender;
-
-			$this->data['users'][$user['id']] = $user;
-		}
 
 		$this->data['group'] = array();
 
