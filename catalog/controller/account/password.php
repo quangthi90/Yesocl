@@ -3,13 +3,7 @@ class ControllerAccountPassword extends Controller {
 	private $error = array();
 	     
   	public function index() {	
-    	//if (!$this->customer->isLogged()) {
-      	//	$this->session->data['redirect'] = $this->url->link('account/password', '', 'SSL');
-
-      	//	$this->redirect($this->url->link('account/login', '', 'SSL'));
-    	//}
-
-		$this->language->load('account/password');
+    	$this->language->load('account/password');
 
     	$this->document->setTitle($this->language->get('heading_title'));
 			  

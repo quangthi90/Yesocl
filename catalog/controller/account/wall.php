@@ -1,6 +1,6 @@
 <?php 
-class ControllerAccountAccount extends Controller { 
-	private $limit = 20;
+class ControllerAccountWall extends Controller { 
+	private $iLimit = 20;
 
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -15,9 +15,9 @@ class ControllerAccountAccount extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		if ( !empty($this->request->get['user_slug']) ){
-			$user_slug = $this->request->get['user_slug'];
+			$sUserSlug = $this->request->get['user_slug'];
 		}elseif ( $this->customer->isLogged() ){
-			$user_slug = $this->customer->getSlug();
+			$sUserSlug = $this->customer->getSlug();
 		}else{
 			$this->redirect( $this->extension->path('HomePage') );
 		}
@@ -26,70 +26,65 @@ class ControllerAccountAccount extends Controller {
 		$this->load->model('tool/image');
 		$this->load->model('friend/friend');
 
-		$user = $this->model_user_user->getUserFull( $this->request->get );
+		$oUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
 
-		if ( !$user ){
+		if ( !$oUser ){
 			return false;
 		}
 
-		$user_temp = $user->formatToCache();
+		$aUser = $oUser->formatToCache();
 
-		$user_temp['avatar'] = $this->model_tool_image->getAvatarUser( $user_temp['avatar'], $user_temp['email'] );
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $oUser );
+		$this->data['users'] = array( $aUser['id'] => $aUser );
 
-		$user_temp['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $user );
-		// var_dump($user_temp['fr_status']); exit;
-		$this->data['users'] = array( $user_temp['id'] => $user_temp );
-
-		$this->data['current_user_id'] = $user->getId();
+		$this->data['current_user_id'] = $oUser->getId();
 
 		$this->data['posts'] = array();
-		if ( $user->getPostData() ){
-			$posts = $user->getPostData()->getPosts();
+		if ( $oUser->getPostData() ){
+			$lPosts = $oUser->getPostData()->getPosts();
 		}else{
-			$posts = array();
+			$lPosts = array();
 		}
-		$start = 0;
-		$count_post = 1;
+		$iStart = 0;
+		$iCountPost = 1;
 
-		foreach ( $posts as $key => $post ) {
-			if ( $key < $start ){
+		foreach ( $lPosts as $iKey => $oPost ) {
+			if ( $iKey < $iStart ){
 				continue;
 			}
 
-			if ( $count_post > $this->limit ){
+			if ( $iCountPost > $this->iLimit ){
 				break;
 			}
 
-			if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
-				$liked = true;
+			$aPost = $oPost->formatToCache();
+
+			if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+				$aPost['isUserLiked'] = true;
 			}else{
-				$liked = false;
+				$aPost['isUserLiked'] = false;
 			}
 
-			$user = $post->getUser();
+			$oUser = $oPost->getUser();
 
-			if ( !array_key_exists($user->getId(), $this->data['users']) ){
-				$user = $user->formatToCache();
+			if ( !array_key_exists($oUser->getId(), $this->data['users']) ){
+				$aUser = $oUser->formatToCache();
 
-				$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 
-				$this->data['users'][$user['id']] = $user;
+				$this->data['users'][$aUser['id']] = $aUser;
 			}
-			
-			$post = $post->formatToCache();
 
-			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
 			}else{
-				$image = null;
+				$aPost['image'] = null;
 			}
 
-			$post['image'] = $image;
-			$post['isUserLiked'] = $liked;
-
-			$this->data['posts'][] = $post;
+			$this->data['posts'][] = $aPost;
 			
-			$count_post++;
+			$iCountPost++;
 		}
 
 		$this->data['post_type'] = $this->config->get('common')['type']['user'];

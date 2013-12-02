@@ -20,59 +20,52 @@ class ControllerCommonRefresh extends Controller {
 		$this->load->model( 'tool/image' );
 		$this->load->model( 'user/user' );
 
-		$branchs = $this->model_branch_branch->getAllBranchs()->toArray();
+		$aBranchs = $this->model_branch_branch->getAllBranchs()->toArray();
 
 		$this->data['all_posts'] = array();
 
-		$branch_ids = array_keys($branchs);
-		$user_ids = $this->model_friend_friend->getListFriendIds();
-		$user_ids[] = $this->customer->getId();
+		$aBranchIds = array_keys($aBranchs);
+		$aUserIds = $this->model_friend_friend->getListFriendIds();
+		$aUserIds[] = $this->customer->getId();
 
 
-		$posts = $this->model_cache_post->getPosts(array(
+		$aPosts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
-			'type_ids' => array_merge($branch_ids, $user_ids),
+			'type_ids' => array_merge($aBranchIds, $aUserIds),
 		));
 		
-		// ***** Bommer remove
-		/*$post_count = count($posts);
-		$count = 1;*/
 		$list_posts = array();
-		$user_ids = array();
+		$aUserIds = array();
 
-		foreach ($posts as $i => $post) {
+		foreach ($aPosts as $i => $aPost) {
 			// thumb
-			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$post['image'] = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
 			}else{
-				$post['image'] = null;
+				$aPost['image'] = null;
 			}
 
-			if ( in_array($this->customer->getId(), $post['liker_ids']) ){
-				$post['isUserLiked'] = true;
+			if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
+				$aPost['isUserLiked'] = true;
 			}else{
-				$post['isUserLiked'] = false;
+				$aPost['isUserLiked'] = false;
 			}
 
-			$this->data['posts'][] = $post;
+			$this->data['posts'][] = $aPost;
 
-			$user_id = $post['user_id'];
-
-			if ( !in_array($user_id, $user_ids) ){
-				$user_ids[] = $user_id;
-			}
+			$aUserIds[$aPost['user_id']] = $aPost['user_id'];
 		}
 
 		$this->data['users'] = array();
-		$users = $this->model_user_user->getUsers( array('user_ids' => $user_ids) );
+		$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
 
-		if ( $users ){
-			foreach ( $users as $user ) {
-				$user = $user->formatToCache();
+		if ( $lUsers ){
+			foreach ( $lUsers as $oUser ) {
+				$aUser = $oUser->formatToCache();
 
-				$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 
-				$this->data['users'][$user['id']] = $user;
+				$this->data['users'][$aUser['id']] = $aUser;
 			}
 		}
 		

@@ -53,9 +53,10 @@ class Cache {
 		$files = $this->scanFiles( DIR_IMAGE . 'data/upload/' );
 		
 		if ($files) {
+			$time_check = time() - 15 * 60;
 			foreach ($files as $file) {
 				$time = explode('.', basename($file))[0];
-      			if (time() > ($time + 15 * 3600)) {
+      			if ($time_check > $time) {
 					if (file_exists($file)) {
 						unlink($file);
 
