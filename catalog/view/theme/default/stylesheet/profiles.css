@@ -308,6 +308,10 @@ textarea[name="summary"] {
 .profiles-tabs-main-body .education-item.current .profiles-tabs-item1-content{
 	border-left: 2px solid #009B77;
 }
+#profiles-tabs-information input[name="birthday"] {
+    height: 20px;
+    width: 132px;
+}
 
 /* Custom Scrollbar */
 .profiles-tabs .mCSB_scrollTools .mCSB_draggerRail {

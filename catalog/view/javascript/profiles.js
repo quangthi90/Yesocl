@@ -11,24 +11,23 @@
 		this.$skill = $el.find('#profiles-tabs-background-skill');		
 		this.$header = this.$background.find('.profiles-tabs-header');
 		this.$main_profile = $el.find('.profiles-tabs-main');
+		this.$contentHeight = this.$el.height();
+		this.$gapHeight = 35 + 50 + 2*(20 + 1);
 
-		var contentHeight = this.$el.height();
 		var contentWidth = this.$information.width();
-		var gapHeight = 35 + 50 + 2*(20 + 1);
-
 		//Fix height of main profile:
-		this.$main_profile.height(contentHeight - 35 - 2*(20 + 1));
+		this.$main_profile.height(this.$contentHeight - 35 - 2*(20 + 1));
 
 		// Information
 		var information_main_body = this.$information.find('.profiles-tabs-main-body');
 		this.$information.outerWidth(contentWidth);
-		information_main_body.outerHeight(contentHeight - gapHeight);
+		information_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 		information_main_body.makeCustomScroll();
 
 		// Summary
 		var summary_main_body = this.$summary.find('.profiles-tabs-main-body');
 		this.$summary.outerWidth(contentWidth);
-		summary_main_body.outerHeight(contentHeight - gapHeight);
+		summary_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 		summary_main_body.makeCustomScroll();
 		var textareaCtrl = summary_main_body.find('textarea[name="summary"]');
 		textareaCtrl.css('max-height', (summary_main_body.height() - 30) + 'px');
@@ -37,25 +36,41 @@
 		// Education
 		var education_main_body = this.$education.find('.profiles-tabs-main-body');
 		this.$education.outerWidth(contentWidth);
-		education_main_body.outerHeight(contentHeight - gapHeight);
+		education_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 		education_main_body.makeCustomScroll();
 
 		// Experience
 		var experience_main_body = this.$experience.find('.profiles-tabs-main-body');
 		this.$experience.outerWidth(contentWidth);
-		experience_main_body.outerHeight(contentHeight - gapHeight);
+		experience_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 		experience_main_body.makeCustomScroll();
 
 		// Skill
 		var skill_main_body = this.$skill.find('.profiles-tabs-main-body');
 		this.$skill.outerWidth(contentWidth);
-		skill_main_body.outerHeight(contentHeight - gapHeight);
+		skill_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 		skill_main_body.makeCustomScroll();
 
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
-
 		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
+
+		//Handle profile changed:
+		var that = this;
+		$(document).on('PROFILE_CHANGED', function(e, data) {
+			that.updateScroll(data.type);
+		});
+	}
+	ProfilesLayout.prototype.updateScroll = function(type) {
+		if(type === 1) {
+			var information_main_body = this.$information.find('.profiles-tabs-main-body');
+			information_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
+			information_main_body.makeCustomScroll();
+		}else if (type === 2) {
+		}else if (type === 3) {
+		}else if (type === 4) {
+		}else if(type === 5) {
+		}
 	}
 
 	$(function(){
@@ -202,7 +217,18 @@
 		this.$btnRemoveEmail.click(function(){
 			var $emails_form = $(this).parents('.emails-form');
 			if ( $emails_form.find('input.primary').val() == 1 ){
-				alert('not delete primary email!');
+				bootbox.dialog({
+				title: "Inform",
+				message: "The primary email can't be deleted !",				
+				buttons: {
+					oke: {
+						  label: "OK",
+						  className: "btn-primary",
+						  callback: function() {
+						  }
+						}
+					}
+				});
 			}else{
 				$emails_form.remove();
 			}
@@ -288,13 +314,13 @@
 		promise.then(function(data) {
 			if ( data.message == 'success' ) {
 				var $profile_label = $.tmpl($('#profiles-label'), data);
-
 				var $profile_form = $.tmpl($('#profiles-form'), data);
-
 				that.$el.parent().html('').append($profile_label).append($profile_form);
 
 				new InfoLabel($profile_label);
 				new InfoForm($profile_form);
+
+				$(document).trigger('PROFILE_CHANGED', [{type: 1}]);
 			}else if ( data.birthday != null ){
 				var $input = that.$el.find('[name=\"birthday\"]');
 				$input.tooltip('destroy');
@@ -407,6 +433,7 @@
 				that.$input.val(that.data.summary);
 				that.$el.parent().find('.background-input-summary').html(that.data.summary);
 				that.$btnCancel.trigger('click');
+				$(document).trigger('PROFILE_CHANGED', [{type: 2}]);
 			}
 		});
 	};
@@ -498,16 +525,30 @@
 			if ( $(this).hasClass('disabled') ) {
 				return false;
 			}
-
-			if ( confirm("You sure delete this ?") == false ){
-				return false;
-			}
-
-			that.url = $(this).parents('.education-item').data('remove');
-
-			that.submit( $(this), 'remove' );
-
-			return false;
+			var me = $(this);
+	        bootbox.dialog({
+				title: "Confirm",
+				message: "Are you sure you want to delete this item ?",				
+				buttons: 
+				{
+					cancel: {
+						label: "Cancel",
+						className: "btn",
+						callback: function() {							
+						}
+					},
+					oke: {
+						label: "OK",
+						className: "btn-primary",
+						callback: function() {
+							me.fadeIn(100);
+							that.url = me.parents('.education-item').data('remove');
+							that.submit(me, 'remove' );
+					  	}
+					}
+				}
+			});
+	        return false;	
 		});
 
 		this.$btnSave.click(function(){
@@ -667,6 +708,7 @@
 						new Education( $(this) );
 					});
 				}
+				$(document).trigger('PROFILE_CHANGED', [{type: 3}]);
 			}else if ( data.education_started_ended != null ){
 				var $started = that.$formAdd.find('[name=\"started\"]');
 				$started.tooltip('destroy');
@@ -813,15 +855,29 @@
 			if ( $(this).hasClass('disabled') ) {
 				return false;
 			}
-
-			if ( confirm("You sure delete this ?") == false ){
-				return false;
-			}
-
-			that.url = $(this).parents('.experience-item').data('remove');
-
-			that.submit( $(this), 'remove' );
-
+			var me = $(this);
+	        bootbox.dialog({
+				title: "Confirm",
+				message: "Are you sure you want to delete this item ?",				
+				buttons: 
+				{
+					cancel: {
+						label: "Cancel",
+						className: "btn",
+						callback: function() {							
+						}
+					},
+					oke: {
+						label: "OK",
+						className: "btn-primary",
+						callback: function() {
+							me.fadeIn(100);
+							that.url = me.parents('.experience-item').data('remove');
+							that.submit(me, 'remove' );
+					  	}
+					}
+				}
+			});
 			return false;
 		});
 
@@ -924,6 +980,7 @@
 						new Experience( $(this) );
 					});
 				}
+				$(document).trigger('PROFILE_CHANGED', [{type: 4}]);
 			}else if ( data.education_started_ended != null ){
 				var $started = that.$formAdd.find('[name=\"started\"]');
 				$started.tooltip('destroy');
@@ -1011,15 +1068,29 @@
 			if ( $(this).hasClass('disabled') ) {
 				return false;
 			}
-
-			if ( confirm("You sure delete this ?") == false ){
-				return false;
-			}
-
-			that.url = $(this).parents('.skill-item').data('remove');
-
-			that.submit( $(this), 'remove' );
-
+			var me = $(this);
+	        bootbox.dialog({
+				title: "Confirm",
+				message: "Are you sure you want to delete this item ?",				
+				buttons: 
+				{
+					cancel: {
+						label: "Cancel",
+						className: "btn",
+						callback: function() {							
+						}
+					},
+					oke: {
+						label: "OK",
+						className: "btn-primary",
+						callback: function() {
+							me.fadeIn(100);
+							that.url = me.parents('.skill-item').data('remove');
+							that.submit(me, 'remove' );
+					  	}
+					}
+				}
+			});
 			return false;
 		});
 
@@ -1067,6 +1138,7 @@
 						new Skill( $(this) );
 					});
 				}
+				$(document).trigger('PROFILE_CHANGED', [{type: 5}]);
 			}
 		});
 	}

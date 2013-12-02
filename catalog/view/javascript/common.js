@@ -113,7 +113,7 @@ function HashTable(obj)
 			autoDraggerLength:true, /*auto-adjust scrollbar dragger length: boolean*/
 			autoHideScrollbar:true, /*auto-hide scrollbar when idle*/
 			scrollButtons:{ /*scroll buttons*/
-				enable: true, /*scroll buttons support: boolean*/
+				enable: false, /*scroll buttons support: boolean*/
 				scrollType:"continuous", /*scroll buttons scrolling type: "continuous", "pixels"*/
 				scrollSpeed:"auto", /*scroll buttons continuous scrolling speed: integer, "auto"*/
 				scrollAmount:40 /*scroll buttons pixels scroll amount: integer (pixels)*/
