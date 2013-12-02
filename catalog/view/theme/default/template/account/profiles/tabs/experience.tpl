@@ -69,28 +69,23 @@
 			</div>
 			{% for experience in user.experiences %}
 			<!-- Check current -->
-			<div class="profiles-tabs-item1 experience-item {% if experience.ended_text == null %}current{% endif %}" id="{{ experience.id }}" 
+			<div class="profiles-tabs-item1 experience-item" id="{{ experience.id }}" 
 				data-edit="{{ path('ProfileEditExperience', {experience_id: experience.id}) }}"
-				data-startedy="{{ experience.started|date('yy') }}" 
-				data-endedy="{{ experience.ended_year }}" 
-				data-startedm="{{ experience.started_month }}" 
-				data-endedm="{{ experience.ended_month }}" 
+				data-startedy="{{ experience.started|date('Y') }}" 
+				data-endedy="{% if experience.ended != null %}{{ experience.ended|date('Y') }}{% endif %}" 
+				data-startedm="{{ experience.started|date('m') }}" 
+				data-endedm="{% if experience.ended != null %}{{ experience.ended|date('m') }}{% endif %}" 
 				data-title="{{ experience.title }}" 
 				data-company="{{ experience.company }}" 
 				data-location="{{ experience.location }}" 
 				data-self-employed="{{ experience.self_employed }}"
-				data-current="{{ experience.current }}"
+				data-current="{% if experience.ended == null %}1{% else %}0{% endif %}"
 				data-remove="{{ path('ProfileRemoveExperience', {experience_id: experience.id}) }}" 
 				data-city-id="{{ experience.city_id }}">
-				<div>
-					<div class="profiles-tabs-item1-label">
-						From <span class="profiles-tabs-value">{{ experience.started|date('m-Y') }}</span> 
-						{% if experience.ended_text != null %}
-							to <span class="profiles-tabs-value">{{ experience.ended_text }}</span>
-						{% else %}
-							to present
-						{% endif %}
-					</div>
+				<div class="profiles-tabs-item1-label">
+					From <span class="profiles-tabs-value">{{ experience.started|date('M Y') }}</span> 
+					to <span class="profiles-tabs-value{% if experience.ended == null %} hidden{% endif %}">{{ experience.ended|date('M Y') }}</span>
+					<span {% if experience.ended != null %}class="hidden"{% endif %}>present</span>
 				</div>
 				<div class="profiles-tabs-item1-content">
 					<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove  profiles-btn-remove"><i class="icon-trash"></i></a>
@@ -111,7 +106,7 @@
 </div>
 {% raw %}
 <script id="background-experience-item" type="text/x-jquery-tmpl">
-	<div class="profiles-tabs-item1 experience-item {{if ended_text == null }}current{{/if}}" id="${ id }" data-edit="${ edit }" data-startedt="${ started_text }" data-endedt="${ ended_text }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-city-id="${ city_id }" data-self-employed="${ self_employed }" data-current="${ current }" data-remove="${ remove }">
+	<div class="profiles-tabs-item1 experience-item {{if ended_text == null }}current{{/if}}" id="${ id }" data-edit="${ edit }" data-startedy="${ started_year }" data-endedy="${ ended_year }" data-startedm="${ started_month }" data-endedm="${ ended_month }" data-title="${ title }" data-company="${ company }" data-location="${ location }" data-city-id="${ city_id }" data-self-employed="${ self_employed }" data-current="${ current }" data-remove="${ remove }">
 		<div>
 			<div class="profiles-tabs-item1-label">
 				From <span class="profiles-tabs-value">${ started_text }</span>
