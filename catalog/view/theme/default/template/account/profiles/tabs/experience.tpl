@@ -70,10 +70,8 @@
 			{% for experience in user.experiences %}
 			<!-- Check current -->
 			<div class="profiles-tabs-item1 experience-item {% if experience.ended_text == null %}current{% endif %}" id="{{ experience.id }}" 
-				data-edit="{{ path('ProfileEditExperience', {experience_id: experience.id}) }}" 
-				data-startedm="{{ experience.started_text }}" 
-				data-endedm="{{ experience.ended_text }}" 
-				data-startedy="{{ experience.started_year }}" 
+				data-edit="{{ path('ProfileEditExperience', {experience_id: experience.id}) }}"
+				data-startedy="{{ experience.started|date('yy') }}" 
 				data-endedy="{{ experience.ended_year }}" 
 				data-startedm="{{ experience.started_month }}" 
 				data-endedm="{{ experience.ended_month }}" 
@@ -86,7 +84,7 @@
 				data-city-id="{{ experience.city_id }}">
 				<div>
 					<div class="profiles-tabs-item1-label">
-						From <span class="profiles-tabs-value">{{ experience.started_text }}</span> 
+						From <span class="profiles-tabs-value">{{ experience.started|date('m-Y') }}</span> 
 						{% if experience.ended_text != null %}
 							to <span class="profiles-tabs-value">{{ experience.ended_text }}</span>
 						{% else %}

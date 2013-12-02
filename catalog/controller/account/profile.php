@@ -96,19 +96,15 @@ class ControllerAccountProfile extends Controller {
 			if ( !$oExperLocation = $oExperience->getLocation() ){
 				$oExperLocation = new Location();
 			}
-
+			
 			$aExperiences[] = array(
 				'id' => $oExperience->getId(),
 				'title' => $oExperience->getTitle(),
 				'company' => $oExperience->getCompany(),
 				'location' => $oExperLocation->getLocation(),
 				'city_id' => $oExperLocation->getId(),
-				'started_month' => $oExperience->getStarted()->format('n'),
-				'ended_month' => $oExperience->getEnded()->format('n'),
-				'started_year' => $oExperience->getStarted()->format('Y'),
-				'ended_year' => $oExperience->getEnded()->format('Y'),
-				'started_text' => $oExperience->getStarted()->format('F Y'),
-				'ended_text' => $oExperience->getEnded()->format('F Y')
+				'started' => $oExperience->getStarted(),
+				'ended' => $oExperience->getEnded()
 			);
 		}
 
@@ -141,7 +137,7 @@ class ControllerAccountProfile extends Controller {
 			'phones' => $aPhones,
 			'sex' => $oUser->getMeta()->getSex(),
 			'sext' => $oUser->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
-			'birthday' => $oMeta->getBirthday() ? $oMeta->getBirthday()->format('d/m/Y') : date('d/m/Y', time()),
+			'birthday' => $oMeta->getBirthday(),
 			'location' => $oUserLocation->getLocation(),
 			'cityid' => $oUserLocation->getCityId(),
 			'address' => $oUser->getMeta()->getAddress(),
