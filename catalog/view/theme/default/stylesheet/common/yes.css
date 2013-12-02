@@ -2134,6 +2134,12 @@ ul.user_actions li:hover i{
   margin-right: 30px;
   min-width: 200px;
 }
+.tt-dropdown-menu .category-friend {
+  display: none;
+}
+.tt-dropdown-menu .category-friend:last-child {
+  display: block;
+}
 .tt-dropdown-menu  .tt-dataset-dataset-category:last-child {
   margin-right: 10px;
 }

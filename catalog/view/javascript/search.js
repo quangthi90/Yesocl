@@ -96,6 +96,7 @@
 				that.$autoCtrl.focus();
 			}
 		);
+		var characters = [];
 		//Auto invoke search:
 		$(document).keypress(function(e){
 			//Check if any input is focused, if so, don't continue:
@@ -109,10 +110,13 @@
 			}			
 			if (isFocus) return;
 			if((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122)) {
-				that.openSearchPanel();	
+				that.openSearchPanel();				
+				if(!that.$autoCtrl.is(':focus')) {
+					that.$autoCtrl.focus();
+				}
 				if($.browser.mozilla) {
 					that.$autoCtrl.val(String.fromCharCode(e.which));
-				}			
+				}		
 			}
 		});
 		$(document).keyup(function(e) {
@@ -174,21 +178,18 @@
 		    },
 		    header: '<h3 class="category-name">Post</h3>'
 		  }
-	  	]).on('typeahead:opened', function() {
-		   console.log('opened');
-		}).on('typeahead:autocompleted', function() {
-		   console.log('autocompleted');
-		}).on('typeahead:selected', function() {
-		   console.log('selected');
+	  	]);
+		$('span.tt-dropdown-menu').on('typeahead:suggestionsRendered', function () {
+		    alert('rendered!');
 		});
 	}
 	SearchAutoComplete.prototype.openSearchPanel = function() {
 		var that = this;
 		that.$root.slideDown(200, function(){			
-			$(that.$invokeCtrl).addClass('active');
-			that.$autoCtrl.focus();
+			$(that.$invokeCtrl).addClass('active');			
 			that.$btn.fadeIn(100);
 		});	
+		that.$autoCtrl.focus();
 	}
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
 		var that = this;
@@ -197,7 +198,8 @@
 		this.$root.slideUp(200, function(){
 			that.$autoCtrl.typeaheadCustom('setQuery', '');
 			$(that.$invokeCtrl).removeClass('active');
-		})
+			$(document).focus();
+		});
 	}
 
 	$(document).ready(function() {
