@@ -125,9 +125,8 @@ class ControllerCommonSearch extends Controller {
 			
 			$data['avatar'] = $this->model_tool_image->getAvatarUser( $data['avatar'], $data['email'] );
 
-			$this->data['users'][$data['id']] = $data;
-		}
-
+			$this->data['users'][$data['id']] = $data;			
+		}	
 		return $this->response->setOutput(json_encode(
 			$this->data['users']
         ));

@@ -30,7 +30,8 @@
 		
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}" data-url-typeahead="{{ path('SearchTypeahead') }}">
-		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
+		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text" autocomplete="off" spellcheck="false">
+		  <a href="#" class="btn btn-search" style="display: none;"><i class="icon-search"></i></a>
 		  <div class="suggestion-container"></div>
 		  {% raw %}
 		  <div class="hidden search-result-item-template">

@@ -814,11 +814,13 @@
             },
             renderSuggestions: function(dataset, suggestions) {
                 var datasetClassName = "tt-dataset-" + dataset.name, wrapper = '<div class="tt-suggestion">%body</div>', compiledHtml, $suggestionsList, $dataset = this.$menu.find("." + datasetClassName), elBuilder, fragment, $el;
-                if ($dataset.length === 0) {
-                    $suggestionsList = $(html.suggestionsList).css(css.suggestionsList);
-                    $dataset = $("<div></div>").addClass(datasetClassName).append(dataset.header).append($suggestionsList).append(dataset.footer).appendTo(this.$menu);
-                }
                 if (suggestions.length > 0) {
+
+                    if ($dataset.length === 0) {
+                        $suggestionsList = $(html.suggestionsList).css(css.suggestionsList);
+                        $dataset = $("<div></div>").addClass(datasetClassName).append(dataset.header).append($suggestionsList).append(dataset.footer).appendTo(this.$menu);
+                    }
+
                     this.isEmpty = false;
                     this.isOpen && this._show();
                     elBuilder = document.createElement("div");
