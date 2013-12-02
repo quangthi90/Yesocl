@@ -83,8 +83,8 @@
 				data-remove="{{ path('ProfileRemoveExperience', {experience_id: experience.id}) }}" 
 				data-city-id="{{ experience.city_id }}">
 				<div class="profiles-tabs-item1-label">
-					From <span class="profiles-tabs-value">{{ experience.started|date('M Y') }}</span> 
-					to <span class="profiles-tabs-value{% if experience.ended == null %} hidden{% endif %}">{{ experience.ended|date('M Y') }}</span>
+					From <span class="profiles-tabs-value">{{ experience.started|date('F Y') }}</span> 
+					to <span class="profiles-tabs-value{% if experience.ended == null %} hidden{% endif %}">{{ experience.ended|date('F Y') }}</span>
 					<span {% if experience.ended != null %}class="hidden"{% endif %}>present</span>
 				</div>
 				<div class="profiles-tabs-item1-content">
