@@ -407,7 +407,7 @@ a.btn-link-circle:hover i {
   bottom: 0px;
   left: 0px;
   right: 0px;     
-  z-index:10; 
+  z-index:1; 
   font-size: 10px;
 }
 #y-footer .copyright strong {
@@ -421,7 +421,7 @@ a.btn-link-circle:hover i {
   top: 0px; 
   left: -370px;   
   bottom: 0px;
-  z-index: 11;
+  z-index: 101;
   color: #fff;
   text-align: center;     
   padding-bottom: 20px;
@@ -2187,7 +2187,7 @@ ul.user_actions li:hover i{
   top: 58px;
   padding: 30px 25px;
   background-color: #9B9B9B;
-  z-index: 100;
+  z-index: 99;
   overflow: hidden;
   display: none;
 }

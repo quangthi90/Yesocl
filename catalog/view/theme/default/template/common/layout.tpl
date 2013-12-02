@@ -18,7 +18,7 @@
 		{% block stylesheet %}
 		{% endblock %}
 	</head>
-	<body>{{ path('SearchTypeahead') }}
+	<body>
 		{{ include(template_from_string( header )) }}
 		{{ include(template_from_string( sidebar_control )) }}
 		<div id="y-container">
