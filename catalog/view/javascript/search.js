@@ -96,7 +96,12 @@
 				that.$autoCtrl.focus();
 			}
 		);
-		var characters = [];
+		that.$autoCtrl.keyup(function(){
+			if($(this).val().length === 0) {
+				that.resizePanel();
+			}
+		});
+
 		//Auto invoke search:
 		$(document).keypress(function(e){
 			//Check if any input is focused, if so, don't continue:
@@ -137,7 +142,7 @@
 		];
 		that.$autoCtrl.typeaheadCustom([
 		  {
-		    name: 'dataset-category category-friend',
+		    name: 'dataset-friend',
 		    remote: {
 		    	url: that.url + '%QUERY/',
 		    	cache: true,
@@ -160,7 +165,7 @@
 		    header: '<h3 class="category-name">Friend</h3>'
 		  },
 		  {
-		    name: 'dataset-category category-post',
+		    name: 'dataset-post',
 		    local: dbPost,
 		    limit: 5,		    
 		    valueKey: 'value',
@@ -178,9 +183,13 @@
 		    },
 		    header: '<h3 class="category-name">Post</h3>'
 		  }
-	  	]);
-		$('span.tt-dropdown-menu').on('typeahead:suggestionsRendered', function () {
-		    alert('rendered!');
+	  	]).on('typeahead:opened', function(){
+	  		that.resizePanel();
+	  	}).on('typeahead:closed', function(){
+	  		that.resizePanel();
+	  	});
+		$('span.tt-dropdown-menu').on('typeahead:suggestionsRendered', function (e, data) {
+		    that.resizePanel();
 		});
 	}
 	SearchAutoComplete.prototype.openSearchPanel = function() {
@@ -200,6 +209,18 @@
 			$(that.$invokeCtrl).removeClass('active');
 			$(document).focus();
 		});
+	}
+	SearchAutoComplete.prototype.resizePanel = function() {
+		var that = this;
+
+		var inputContainer = $('span.twitter-typeahead');
+		var dropDownContainer = $('span.tt-dropdown-menu');
+		var minHeight = parseInt(that.$root.css('min-height'));
+		if(dropDownContainer.height() == 0) {
+			that.$root.animate({ 'height' : minHeight + 'px' }, 100);
+		}else {
+			that.$root.animate({ 'height' : (minHeight + dropDownContainer.height() + 40) + 'px' }, 200);
+		}
 	}
 
 	$(document).ready(function() {

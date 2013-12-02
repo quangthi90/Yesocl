@@ -2128,24 +2128,32 @@ ul.user_actions li:hover i{
   background-color: #FFF;
   padding: 15px;
 }
-.tt-dropdown-menu  .tt-dataset-dataset-category {
+.tt-dropdown-menu .tt-dataset-dataset-friend {
   overflow: hidden;
   float: left;
   margin-right: 30px;
   min-width: 200px;
 }
-.tt-dropdown-menu .category-friend {
-  display: none;
-}
-.tt-dropdown-menu .category-friend:last-child {
-  display: block;
-}
-.tt-dropdown-menu  .tt-dataset-dataset-category:last-child {
+.tt-dropdown-menu .tt-dataset-dataset-friend:last-child {
   margin-right: 10px;
 }
-.tt-dataset-dataset-category .tt-suggestions {
+.tt-dataset-dataset-friend .tt-suggestions {
   overflow: hidden;
 }
+
+.tt-dropdown-menu .tt-dataset-dataset-post {
+  overflow: hidden;
+  float: left;
+  margin-right: 30px;
+  min-width: 200px;
+}
+.tt-dropdown-menu  .tt-dataset-dataset-post:last-child {
+  margin-right: 10px;
+}
+.tt-dataset-dataset-post .tt-suggestions {
+  overflow: hidden;
+}
+
 .tt-suggestions .tt-suggestion {
   display: block;
   clear: left;
@@ -2188,11 +2196,12 @@ ul.user_actions li:hover i{
 #search-panel {
   position: absolute;
   left: 15px;
-  bottom: 21px;
   right: 0px;
-  top: 58px;
+  bottom: 21px;
+  min-height: 40px;
+  max-height: 390px;
   padding: 30px 25px;
-  background-color: #9B9B9B;
+  background-color: #CCCCCC;
   z-index: 99;
   overflow: hidden;
   display: none;
