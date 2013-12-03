@@ -14,7 +14,7 @@
 		this.$keyword.keydown(function(e){
 			if (e.which == 13){
 				url = that.generateUrl();
-				if ( url ){
+				if (url){
 					location = url;
 				}
 				return false;
@@ -22,23 +22,12 @@
 		});
 
 		this.$btn.click(function(e) {
-			e.preventDefault();
-			
+			e.preventDefault();			
 			if(that.$el.hasClass('disabled')) {
 				return false;
-			}
-			if(!String.prototype.trim) {
-			  String.prototype.trim = function () {
-			    return this.replace(/^\s+|\s+$/g,'');
-			  };
-			}
-			if(that.$keyword.val().toString().trim().length === 0) {
-				that.$keyword.focus();
-				return false;
-			}
-
+			}			
 			url = that.generateUrl();
-			if ( url ){
+			if (url){
 				location = url;
 			}
 			return false;
@@ -47,11 +36,16 @@
 	SearchBtn.prototype.generateUrl = function(){
 		var url = this.url;
 				 
-		var search = this.$keyword.val();		
-		if (search) {
-			url += encodeURIComponent(search);
+		var search = this.$keyword.val();
+		if(!String.prototype.trim) {
+		  String.prototype.trim = function () {
+		    return this.replace(/^\s+|\s+$/g,'');
+		  };
 		}
-		
+		if(search.toString().trim().length === 0) {
+			return false;
+		}
+		url += encodeURIComponent(search);		
 		return url;
 	};
 
@@ -148,7 +142,8 @@
 		    	cache: true,
 		    	maxParallelRequests: 1
 		    },
-		    limit: 5,		    
+		    limit: 5,
+		    limitLength: 2,	    
 		    valueKey: 'username',
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
@@ -203,9 +198,9 @@
 		var that = this;		
 		this.$root.slideUp(200, function(){
 			that.$autoCtrl.typeaheadCustom('setQuery', '');
-			$(that.$invokeCtrl).removeClass('active');
-			$(document).focus();
+			$(that.$invokeCtrl).removeClass('active');			
 		});
+		$(that.$invokeCtrl).focus();
 	}
 	SearchAutoComplete.prototype.resizePanel = function() {
 		var that = this;
