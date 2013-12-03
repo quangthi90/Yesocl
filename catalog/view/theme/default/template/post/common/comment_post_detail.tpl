@@ -4,7 +4,7 @@
 
 {% block post_common_comment_post_detail %}
 	<div id="comment-wrapper" class="y-box">
-		<div class="comment-container"> 
+		<div class="comment-container" id="comment-box"> 
 			<div class="y-box-header">
 				Comment box (<span class="counter"><d>{{ comments|length }}<d></span>)
 				<div class="y-box-expand">
@@ -29,7 +29,7 @@
 			        </div>
 			        <div class="comment-meta">
 			            <div class="comment-info" data-url="{{ comment.href_like }}"
-			                data-comment-liked="{{ comment.is_liked }}" data-id="{{ comment.id }}" data-like-count="{{ comment.like_count }}">
+			                data-comment-liked="{{ comment.is_liked }}" data-id="{{ comment.id }}" data-like-count="{{ comment.like_count }}" data-comment-edit="{{ comment.href_edit }}" data-comment-delete="{{ comment.href_delete }}">
 			                <a href="{{ comment.href_user }}">{{ comment.author }}</a> 
 			                <span class="comment-time">
 			                    <d class="timeago" title="{{ comment.created }}"></d>
@@ -52,6 +52,16 @@
 			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action"><i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
 			                    <li class="un-like-btn{% if comment.is_liked == 0 %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
+			                    {% if comment.is_owner == true %}
+			                    <li class="divider"></li>
+			                    <li class="edit-comment-btn">
+							     	<a href="#"><i class="icon-edit"></i>Edit</a>
+						     	</li>
+						     	<li class="divider"></li>
+							    <li class="delete-comment-btn">
+							    	<a href="#"><i class="icon-trash"></i>Delete</a>
+							    </li>
+							    {% endif %}
 			                </ul>
 			            </div>
 			        </div>
@@ -89,7 +99,9 @@
 		            	data-url="${href_like}"
 						data-comment-liked="${is_liked}"
 						data-id="${id}"
-						data-like-count="${like_count}">
+						data-like-count="${like_count}"
+						data-url-edit="${href_edit}"
+						data-url-delete="${href_delete}">
 		                <a href="${href_user}">${author}</a> 
 		                <span class="comment-time">
 		                    <d class="timeago" title="${created}"></d>
@@ -118,13 +130,16 @@
 					   		<li class="un-like-btn{{if is_liked != true}} hidden{{/if}}">
 						     	<a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
 					     	</li>
-						    <!--li>
+					     	{{if is_owner == true}}
+					     	<li class="divider"></li>
+						    <li class="edit-comment-btn">
 						     	<a href="#"><i class="icon-edit"></i>Edit</a>
 					     	</li>
 					     	<li class="divider"></li>
-						    <li>
+						    <li class="delete-comment-btn">
 						    	<a href="#"><i class="icon-trash"></i>Delete</a>
-						    </li-->
+						    </li>
+						    {{/if}}
 					    </ul>
 					</div>
 		        </div>

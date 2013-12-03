@@ -97,6 +97,62 @@ class ControllerPostComment extends Controller {
         )));
     }
 
+    public function deleteComment(){
+        if ( !$this->customer->isLogged() ) {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: user not login'
+            )));
+        }
+
+        if ( empty($this->request->get['post_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug is empty'
+            )));
+        }
+
+        if ( empty($this->request->get['post_type']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type is empty'
+            )));
+        }
+
+        if ( empty($this->request->get['comment_id']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug is empty'
+            )));
+        }
+
+        $aDatas['post_slug'] = $this->request->get['post_slug'];
+        $aDatas['post_type'] = $this->request->get['post_type'];
+        $aDatas['comment_id'] = $this->request->get['comment_id'];
+        
+        switch ($aDatas['post_type']) {
+            case $this->config->get('post')['type']['branch']:
+                $this->load->model('branch/comment');
+                $bResult = $this->model_branch_comment->deleteComment( $aDatas['comment_id'], $aDatas );
+                break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $bResult = $this->model_user_comment->deleteComment( $aDatas['comment_id'], $aDatas );
+                break;
+            
+            default:
+                $bResult = null;
+                break;
+        }
+        
+        if ( !$bResult ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: delete comment have error'
+            )));
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+    }
+
     private function validate() {
         if ((utf8_strlen($this->request->post['content']) < 1)) {
             $this->error['content'] = $this->language->get('error_content');
@@ -146,58 +202,16 @@ class ControllerPostComment extends Controller {
 
         $this->load->model('user/user');
         $this->load->model('tool/image');
+        $this->load->model('tool/object');
 
         $aUsers = array();
         $idCurrUserId = $this->customer->getId();
 
-        $aComments = array();
-        foreach ( $lQueryComments as $oComment ) {
-            $aComment = $oComment->formatToCache();
-
-            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
-                $aComment['is_liked'] = true;
-            }else{
-                $aComment['is_liked'] = false;
-            }
-
-            if ( empty($aUsers[$aComment['user_slug']]) ){
-                $aUser = $this->model_user_user->getUser( $aComment['user_slug'] );
-                $aUsers[$aComment['user_slug']] = $aUser;
-            }else{
-                $aUser = $aUsers[$aComment['user_slug']];
-            }
-            
-            $aComment['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-
-            if ( $aUser && $aUser['username'] ){
-                $aComment['author'] = $aUser['username'];
-            }else{
-                $aComment['author'] = $aComment['author'];
-            }
-
-            $aComment['href_user'] = $this->extension->path('WallPage', array(
-                'user_slug' => $aUser['slug']
-            ));
-            $aComment['href_like'] = $this->extension->path('CommentLike', array(
-                'post_slug' => $aDatas['post_slug'],
-                'post_type' => $aDatas['post_type'],
-                'comment_id' => $aComment['id']
-            ));
-            $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-                'post_slug' => $aDatas['post_slug'],
-                'post_type' => $aDatas['post_type'],
-                'comment_id' => $aComment['id']
-            ));
-            $aComment['created'] = $aComment['created']->format( $this->language->get('date_format_full') );
-
-            if ( $aUser['id'] == $idCurrUserId ){
-                $aComment['is_owner'] = true;
-            }else{
-                $aComment['is_owner'] = false;
-            }
-
-            $aComments[] = $aComment;
-        }
+        $aComments = $this->model_tool_object->formatListCommentsOfPost(
+            $lQueryComments->toArray(),
+            $aDatas['post_slug'],
+            $aDatas['post_type']
+        );
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

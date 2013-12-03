@@ -175,5 +175,37 @@ class ModelUserComment extends Model {
 
 		return $comment;
 	}
+
+	public function deleteComment( $comment_id, $data = array() ){
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.comments.id' => $comment_id
+		));
+
+		if ( !$posts ){
+			return false;
+		}
+
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+
+		$post = $posts->getPostBySlug( $data['post_slug'] );
+
+		if ( !$post ){
+			return false;
+		}
+
+		$comment = $post->getCommentById( $comment_id );
+		
+		if ( $comment->getUser()->getId() != $this->customer->getId() ){
+			return false;
+		}
+
+		$post->getComments()->removeElement( $comment );
+
+		$this->dm->flush();
+
+		return true;
+	}
 }
 ?>

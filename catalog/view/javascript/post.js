@@ -294,17 +294,22 @@
                         htmlOutput += $.tmpl( $('#item-template'), data.comments[key] ).html();
                     }
                     
-                    that.$el.data('comments', comments);   
+                    that.$el.data('comments', comments);
+
                     htmlOutput += '<div id="add-more-item"></div>';
                     $('#comment-box').find('.comment-body').html(htmlOutput);
-                    $('#comment-box').find('.y-box-header span').html(comments.length);
+                    var comment_count = 0;
+                    $('#comment-box').find('.comment-item').each(function(){
+                        comment_count++;
+                    });
+                    $('#comment-box').find('.y-box-header span').html(comment_count);
                     $('.comment-form').attr('data-url', that.comment_url);
                     
                     $(document).trigger('SHOWN_COMMENT_LIST');
 
                     jQuery(".timeago").timeago();
                     that.showCommentBox($button); 
-                }     
+                }
             });
         }else{
             var $spinner = $('<i class="icon-spinner icon-spin"></i>');
@@ -327,7 +332,11 @@
                 
             htmlOutput += '<div id="add-more-item"></div>';
             $('#comment-box').find('.comment-body').html(htmlOutput);
-            $('#comment-box').find('.y-box-header span').html(comments.length);
+            var comment_count = 0;
+            $('#comment-box').find('.comment-item').each(function(){
+                comment_count++;
+            });
+            $('#comment-box').find('.y-box-header span').html(comment_count);
             $('.comment-form').attr('data-url', that.comment_url);
             page = 1;
 
@@ -511,7 +520,7 @@
                 }, 500);                
                 
                 var comment_count = 0;
-                that.$el.parent().find('.comment-item').each(function(){
+                $('#comment-box').find('.comment-item').each(function(){
                     comment_count++;
                 });
 
@@ -519,12 +528,10 @@
                 $('#post-detail-comment-number').html(comment_count);
 
                 that.$content.val('');
-                that.$el.parent().find('.counter').html( comment_count );                
-                $comment_btn.parent().find('d').html( comment_count );
-                $comment_btn.attr('data-comment-count', comment_count).find('d').html( comment_count );
-                $comment_btn.attr('title', comment_count);
+                $('#comment-box').find('.counter').html( comment_count );                
+                $comment_btn.parent().find('.number-counter').html( comment_count );
+                $comment_btn.attr('data-original-title', comment_count);
                 $curr_item.find('.post_header .post_cm d').html( comment_count );
-                $curr_item.find(".view-list-user[data-view-type='comment']").html(comment_count);
                 
                 $(document).trigger('COMMENT_ADDED');
 
@@ -832,6 +839,108 @@
         $(document).bind('COMMENT_ADDED', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new ShowCommentUsersLiked($(this));
+            });
+        });
+    });
+}(jQuery, document));
+
+// Delete a comment
+(function($, document, undefined) {
+    function DeleteComment( $el ){
+        var that = this;
+
+        this.$el            = $el;
+        this.url            = $el.data('url-delete');
+        this.comment_id     = $el.data('id');
+
+        this.$item          = $el.parents('.comment-item');
+        this.$btnDelete     = this.$item.find('.delete-comment-btn');
+        
+        this.attachEvents();
+    }
+    DeleteComment.prototype.attachEvents = function(){
+        var that = this;
+
+        this.$btnDelete.click(function(e) {
+            if(that.$btnDelete.hasClass('disabled')) {
+                e.preventDefault();
+
+                return false;
+            }
+
+            that.submit(that.$btnDelete.find('a'));
+
+            return false;
+        });
+    };
+    DeleteComment.prototype.submit = function($button){
+        var that = this;
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.url,
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) {
+            if(data.success == 'ok'){
+                var $curr_item = $('.open-comment.disabled').parents('.post');
+                var $comment_btn = $curr_item.find('.open-comment');
+                var comments = $comment_btn.data('comments');
+                
+                if ( comments != undefined ){
+                    comments.removeItem(that.comment_id);
+                }
+                
+                $comment_btn.data('comments', comments);
+
+                that.$item.remove();
+
+                var comment_count = 0;
+                $('#comment-box').find('.comment-item').each(function(){
+                    comment_count++;
+                });
+
+                // only post detail
+                $('#post-detail-comment-number').html(comment_count);
+
+                $('#comment-box').find('.counter').html( comment_count );                
+                $comment_btn.parent().find('.number-counter').html( comment_count );
+                $comment_btn.attr('data-original-title', comment_count);
+                $curr_item.find('.post_header .post_cm d').html( comment_count );
+            }
+        });
+    };
+    DeleteComment.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    $(function(){
+        $('.comment-item .comment-info').each(function(){
+            new DeleteComment($(this));
+        });
+
+        $(document).bind('SHOWN_COMMENT_LIST', function(e) {
+            $('.comment-item .comment-info').each(function(){
+                new DeleteComment($(this));
+            });
+        });
+
+        $(document).bind('COMMENT_ADDED', function(e) {
+            $('.comment-item .comment-info').each(function(){
+                new DeleteComment($(this));
             });
         });
     });

@@ -16,6 +16,8 @@ class ModelToolObject extends Model
         	return array();
         }
 
+        $idCurrUserId = $this->customer->getId();
+
         if ( is_array($base_comment) ){
         	$comments = array();
         	$users = array();
@@ -57,8 +59,25 @@ class ModelToolObject extends Model
 	                'post_type' => $post_type,
 	                'comment_id' => $comment['id']
 	            ));
+	            $comment['href_edit'] = $this->extension->path('CommentEdit', array(
+	                'post_slug' => $post_slug,
+	                'post_type' => $post_type,
+	                'comment_id' => $comment['id']
+	            ));
+	            
+	            $comment['href_delete'] = $this->extension->path('CommentDelete', array(
+	                'post_slug' => $post_slug,
+	                'post_type' => $post_type,
+	                'comment_id' => $comment['id']
+	            ));
 	            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
 	            $comment['is_liked'] = $liked;
+
+	            if ( $comment['user_id'] == $idCurrUserId ){
+	            	$comment['is_owner'] = true;
+	            }else{
+	            	$comment['is_owner'] = false;
+	            }
 
 	            $comments[] = $comment;
 	        }
@@ -99,6 +118,11 @@ class ModelToolObject extends Model
         ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
         $comment['is_liked'] = $liked;
+        if ( $comment['user_id'] == $idCurrUserId ){
+        	$comment['is_owner'] = true;
+        }else{
+        	$comment['is_owner'] = false;
+        }
 
         return $comment;
 	}

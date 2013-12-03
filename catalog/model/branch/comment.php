@@ -123,8 +123,6 @@ class ModelBranchComment extends Model {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		$comment = $post->getCommentById( $comment_id );
-		
 		$likerIds = $comment->getLikerIds();
 
 		$key = array_search( $data['likerId'], $likerIds );
@@ -139,6 +137,28 @@ class ModelBranchComment extends Model {
 		$this->dm->flush();
 
 		return $comment;
+	}
+
+	public function deleteComment( $comment_id, $data = array() ){
+		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+			'comments.id' => $comment_id
+		));
+
+		if ( !$post ){
+			return false;
+		}
+
+		$comment = $post->getCommentById( $comment_id );
+		
+		if ( $comment->getUser()->getId() != $this->customer->getId() ){
+			return false;
+		}
+
+		$post->getComments()->removeElement( $comment );
+
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>
