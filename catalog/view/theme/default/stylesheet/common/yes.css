@@ -2131,8 +2131,8 @@ ul.user_actions li:hover i{
 .tt-dropdown-menu .tt-dataset-dataset-friend {
   overflow: hidden;
   float: left;
-  margin-right: 30px;
-  min-width: 200px;
+  margin-right: 50px;
+  min-width: 255px;
 }
 .tt-dropdown-menu .tt-dataset-dataset-friend:last-child {
   margin-right: 10px;
@@ -2195,9 +2195,9 @@ ul.user_actions li:hover i{
 
 #search-panel {
   position: absolute;
-  left: 15px;
+  top: 60px;
   right: 0px;
-  bottom: 21px;
+  min-width: 577px;
   min-height: 40px;
   max-height: 390px;
   padding: 30px 25px;
@@ -2207,28 +2207,25 @@ ul.user_actions li:hover i{
   display: none;
 }
 #search-panel .search-ctrl {
-  width: 94%;
+  width: 555px;
   padding: 10px;  
-  padding-right: 50px;
   font-size: 16px;
   outline: none;
 }
 #search-panel .tt-hint {
-  width: 94%;
+  width: 555px;
   padding: 10px;
-  padding-right: 50px;
   font-size: 16px;
   color:#ccc;
 }
 #search-panel .twitter-typeahead {
-  display: block;
-  width: 100%;
+  /* width: 84%; */
+  vertical-align: top;
 }
 #search-panel .btn-search {
-  position: absolute;
-  top: 30px;
-  right: 25px;
-  padding: 8px 20px;
+  padding: 8px 18px;
+  margin-left: -5px;
+  border-left: none;
   z-index: 1;
 }
 /* ------------------------------------- END SEARCH RESULT -----------------------------------------*/

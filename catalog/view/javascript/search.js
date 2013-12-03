@@ -195,15 +195,12 @@
 	SearchAutoComplete.prototype.openSearchPanel = function() {
 		var that = this;
 		that.$root.slideDown(200, function(){			
-			$(that.$invokeCtrl).addClass('active');			
-			that.$btn.fadeIn(100);
+			$(that.$invokeCtrl).addClass('active');	
 		});	
 		that.$autoCtrl.focus();
 	}
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
-		var that = this;
-
-		that.$btn.fadeOut(100);
+		var that = this;		
 		this.$root.slideUp(200, function(){
 			that.$autoCtrl.typeaheadCustom('setQuery', '');
 			$(that.$invokeCtrl).removeClass('active');
