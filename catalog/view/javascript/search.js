@@ -179,7 +179,7 @@
 		    header: '<h3 class="category-name">Post</h3>'
 		  }
 	  	]).on('typeahead:opened', function(){
-	  		that.resizePanel();
+	  		that.resizePanel();	  		
 	  	}).on('typeahead:closed', function(){
 	  		that.resizePanel();
 	  	});
@@ -209,9 +209,14 @@
 		var dropDownContainer = $('span.tt-dropdown-menu');
 		var minHeight = parseInt(that.$root.css('min-height'));
 		if(dropDownContainer.height() == 0) {
-			that.$root.animate({ 'height' : minHeight + 'px' }, 100);
+			that.$root.animate({ 'height' : minHeight + 'px' }, 0);
 		}else {
-			that.$root.animate({ 'height' : (minHeight + dropDownContainer.height() + 40) + 'px' }, 200);
+			that.$root.animate({ 'height' : (minHeight + dropDownContainer.height() + 40) + 'px' }, 0);
+		}
+
+		var firstSuggestion = dropDownContainer.find('.tt-suggestions .tt-suggestion').first();
+		if(firstSuggestion.length > 0){
+			firstSuggestion.trigger('mouseover');
 		}
 	}
 
