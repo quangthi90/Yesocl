@@ -2171,6 +2171,7 @@ ul.user_actions li:hover i{
 }
 .data-detail{
   overflow: hidden;
+  display: block;
 }
 .data-detail img{
   width: 40px;
@@ -2219,8 +2220,13 @@ ul.user_actions li:hover i{
   color:#ccc;
 }
 #search-panel .twitter-typeahead {
-  /* width: 84%; */
   vertical-align: top;
+}
+#search-panel .twitter-typeahead i {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  font-size: 16px;
 }
 #search-panel .btn-search {
   padding: 8px 18px;

@@ -13,6 +13,11 @@
 
 		this.$keyword.keydown(function(e){
 			if (e.which == 13){
+				var firstSuggestion = $('span.tt-dropdown-menu').find('.tt-is-under-cursor');
+				if(firstSuggestion.length > 0) {
+					location = firstSuggestion.children('a').attr('href');
+					return false;
+				}
 				url = that.generateUrl();
 				if (url){
 					location = url;
@@ -140,7 +145,14 @@
 		    remote: {
 		    	url: that.url + '%QUERY/',
 		    	cache: true,
-		    	maxParallelRequests: 1
+		    	beforeSend: function(xhr, setting) {
+		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
+		    		$('span.twitter-typeahead').append(spinner);
+		    	},
+		        filter: function(parsedResponse){
+		            $('span.twitter-typeahead').find('i').remove();
+		            return parsedResponse;
+		        }
 		    },
 		    limit: 5,
 		    limitLength: 2,	    
@@ -148,13 +160,13 @@
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.username.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<div class="data-detail">'
+	            var htmlContent = '<a href="http://google.com.vn" class="data-detail">'
 	                            + '<img src="' + data.avatar + '" alt="' + data.username + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
 	                            + '<div class="data-more">' + data.metaInfo + '</div>'   
 	                            + '</div>'
-	                            + '</div>';
+	                            + '</a>';
 	            return htmlContent;
 		    },
 		    header: '<h3 class="category-name">Friend</h3>'
@@ -167,13 +179,13 @@
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<div class="data-detail">'
+	            var htmlContent = '<a href="http://google.com.vn" class="data-detail">'
 	                            + '<img src="' + data.image + '" alt="' + data.value + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
 	                            + '<div class="data-more">' + data.metaInfo + '</div>'   
 	                            + '</div>'
-	                            + '</div>';
+	                            + '</a>';
 	            return htmlContent;
 		    },
 		    header: '<h3 class="category-name">Post</h3>'
@@ -201,6 +213,10 @@
 			$(that.$invokeCtrl).removeClass('active');			
 		});
 		$(that.$invokeCtrl).focus();
+		var iconSpin = $('span.twitter-typeahead').find('i');
+		if(iconSpin.length > 0) {
+			iconSpin.remove();
+		}
 	}
 	SearchAutoComplete.prototype.resizePanel = function() {
 		var that = this;
