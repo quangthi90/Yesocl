@@ -113,7 +113,7 @@ function HashTable(obj)
 			autoDraggerLength:true, /*auto-adjust scrollbar dragger length: boolean*/
 			autoHideScrollbar:true, /*auto-hide scrollbar when idle*/
 			scrollButtons:{ /*scroll buttons*/
-				enable: true, /*scroll buttons support: boolean*/
+				enable: false, /*scroll buttons support: boolean*/
 				scrollType:"continuous", /*scroll buttons scrolling type: "continuous", "pixels"*/
 				scrollSpeed:"auto", /*scroll buttons continuous scrolling speed: integer, "auto"*/
 				scrollAmount:40 /*scroll buttons pixels scroll amount: integer (pixels)*/
@@ -432,6 +432,7 @@ function HashTable(obj)
 	var df_POST_PER_COLUMN = 'post-per-column';
 	var df_CATEGORY_SINGLE = 'post-category';
 	var df_FRIEND_ACCOUNT = 'account-friend';
+	var df_SEARCH_PAGE 	= 'search-page';
 
 	function HorizontalBlock(el) {	
 		this.rootContent = $("#y-content");
@@ -566,7 +567,15 @@ function HashTable(obj)
 				listBlockItem.css('opacity','1');
 			}
 		}
-		else{				
+		else if(this.root.hasClass(df_SEARCH_PAGE)){
+			this.root.css('min-width', this.widthMain + 'px');
+			var heightBlockContent = this.heightMain - 42;
+			this.root.find('.block-content').height(heightBlockContent - 5);
+			this.columns.height(heightBlockContent - 20).css('opacity', '1');
+			this.columns.find('.search-result-container').each(function(){
+				$(this).makeCustomScroll(false);
+			});
+		}else {
 		}
 		this.rootContent.niceScroll();
 	}

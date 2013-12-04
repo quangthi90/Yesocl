@@ -32,20 +32,6 @@
 		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}" data-url-typeahead="{{ path('SearchTypeahead') }}">
 		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text" autocomplete="off" spellcheck="false">
 		  <a href="#" class="btn btn-search"><i class="icon-search"></i></a>
-		  <div class="suggestion-container"></div>
-		  {% raw %}
-		  <div class="hidden search-result-item-template">
-		    <a href="${url}">
-		      <div class="data-detail">
-		        <img src="${image}" alt="" />
-		        <div class="data-meta-info">
-		          <div class="data-name">${value}</div>
-		          <div class="data-more">${metaInfo}</div>
-		        </div>
-		      </div>
-		    </a>
-		  </div>
-		  {% endraw %}
 		</div>		
 
     	<!-- Library Script -->
