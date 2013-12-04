@@ -5,6 +5,7 @@
 		this.url			= $el.data('url');
 		this.$keyword 		= $el.find('input[name=\'keyword\']');
 		this.$btn 			= $el.find('.btn-search');
+		this.$invokeCtrl 	= $el.data('invoke-search');
 
 		this.attachEvents();
 	}
@@ -15,11 +16,13 @@
 			if (e.which == 13){
 				var firstSuggestion = $('span.tt-dropdown-menu').find('.tt-is-under-cursor');
 				if(firstSuggestion.length > 0) {
+					$(that.$invokeCtrl).trigger('click');
 					location = firstSuggestion.children('a').attr('href');
 					return false;
 				}
-				url = that.generateUrl();
+				var url = that.generateUrl();
 				if (url){
+					$(that.$invokeCtrl).trigger('click');
 					location = url;
 				}
 				return false;
@@ -31,8 +34,9 @@
 			if(that.$el.hasClass('disabled')) {
 				return false;
 			}			
-			url = that.generateUrl();
+			var url = that.generateUrl();
 			if (url){
+				$(that.$invokeCtrl).trigger('click');
 				location = url;
 			}
 			return false;
@@ -166,6 +170,7 @@
 		    header: '<h3 class="category-name">Friend</h3>'
 		  },
 		  {
+			name: 'dataset-post',
 		    remote: {
 		    	url: that.postUrl + '%QUERY/',
 		    	cache: true,
