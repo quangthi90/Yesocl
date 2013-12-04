@@ -132,13 +132,6 @@
 	SearchAutoComplete.prototype.initAutoComplete = function() {
 		var that = this;
 
-		//Get datasource:
-		var tempImg = "http://findicons.com/icon/download/51187/clipping_picture/48/png";
-		var dbPost = [
-			{id:"6", category:"Post", image: tempImg, value: "Bieu do chung khoan", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
-			{id:"7", category:"Post", image: tempImg, value: "Lang kinh thi truong hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
-			{id:"8", category:"Post", image: tempImg, value: "Chi so VN-Index hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"}
-		];
 		that.$autoCtrl.typeaheadCustom([
 		  {
 		    name: 'dataset-friend',
@@ -160,7 +153,7 @@
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.username.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<a href="'+ data.href +'" class="data-detail">'
+	            var htmlContent = '<a href="' + data.href + '" class="data-detail">'
 	                            + '<img src="' + data.avatar + '" alt="' + data.username + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
@@ -172,15 +165,26 @@
 		    header: '<h3 class="category-name">Friend</h3>'
 		  },
 		  {
-		    name: 'dataset-post',
-		    local: dbPost,
-		    limit: 5,		    
+		    remote: {
+		    	url: that.postUrl + '%QUERY/',
+		    	cache: true,
+		    	beforeSend: function(xhr, setting) {
+		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
+		    		$('span.twitter-typeahead').append(spinner);
+		    	},
+		        filter: function(parsedResponse){
+		            $('span.twitter-typeahead').find('i').remove();
+		            return parsedResponse;
+		        }
+		    },
+		    limit: 5,
+		    limitLength: 2,			    
 		    valueKey: 'value',
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<a href="http://google.com.vn" class="data-detail">'
-	                            + '<img src="' + data.image + '" alt="' + data.value + '" />'
+	            var htmlContent = '<a href="' + data.href + '" class="data-detail">'
+	                            + '<img src="' + data.image + '" alt="' + data.title + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
 	                            + '<div class="data-more">' + data.metaInfo + '</div>'   

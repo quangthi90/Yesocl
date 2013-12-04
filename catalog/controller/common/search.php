@@ -9,6 +9,7 @@ class ControllerCommonSearch extends Controller {
 		
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
+		$this->load->model('tool/search');
 		$this->load->model('friend/friend');
 
 		$this->document->setTitle($this->config->get('config_title'));
@@ -20,7 +21,7 @@ class ControllerCommonSearch extends Controller {
 			return false;
 		}
 
-		$lSearchUsers = $this->model_user_user->searchUserByKeyword( array('keyword' => $sKeyword) );
+		$lSearchUsers = $this->model_tool_search->searchUserByKeyword( array('keyword' => $sKeyword) );
 
 		$aUserIds = array();
 		foreach ($lSearchUsers as $oSearchUser) {
@@ -65,7 +66,7 @@ class ControllerCommonSearch extends Controller {
 		$this->response->setOutput($this->twig_render());
 	}
 
-	public function FriendTypeahead() {
+	public function friendTypeahead() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
@@ -74,6 +75,7 @@ class ControllerCommonSearch extends Controller {
 		
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
+		$this->load->model('tool/search');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -84,8 +86,9 @@ class ControllerCommonSearch extends Controller {
 			return false;
 		}
 
-		$aUsers = $this->model_user_user->searchUserByKeyword( array('keyword' => $sKeyword) );
+		$aUsers = $this->model_tool_search->searchUserByKeyword( array('keyword' => $sKeyword) );
 
+		$aUserIds = array();
 		foreach ($aUsers as $oUser) {
 			$aUserIds[$oUser->getId()] = $oUser->getId();
 		}
@@ -96,6 +99,61 @@ class ControllerCommonSearch extends Controller {
 
 		foreach ( $aUsers as $oUser ) {
 			if ( $oUser->getId() == $this->customer->getId() ){
+				continue;
+			}
+
+			$aUser = $oUser->formatToCache();
+
+			$aUser['category'] = 'Friend';
+
+			$aUser['metaInfo'] = array();
+			if ( $oUser->getMeta() && $oUser->getMeta()->getLocation() ){
+				$aUser['metaInfo'] = $oUser->getMeta()->getLocation()->getLocation();
+			}
+			
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
+
+			$this->data['users'][$aUser['id']] = $aUser;
+		}	
+		return $this->response->setOutput(json_encode(
+			$this->data['users']
+        ));
+	}
+
+	public function postTypeahead() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = $this->config->get('config_url');
+		}
+		
+		$this->load->model('tool/image');
+		$this->load->model('branch/post');
+		$this->load->model('tool/search');
+
+		$this->document->setTitle($this->config->get('config_title'));
+		$this->document->setDescription($this->config->get('config_meta_description'));
+
+		$sKeyword = $this->request->get['keyword'];
+
+		if ( empty($sKeyword) ){
+			return false;
+		}
+
+		$aPosts = $this->model_tool_search->searchPostByKeyword( array('keyword' => $sKeyword) );
+
+		$aPostIds = array();
+		foreach ($aPosts as $oPost) {
+			$aPostIds[$oPost->getId()] = $oPost->getId();
+		}
+
+		$aPosts = $this->model_user_user->getUsers( array('user_ids' => $aPostIds) );
+
+		$this->data['users'] = array();
+
+		foreach ( $aPosts as $oPost ) {
+			if ( $oPost->getId() == $this->customer->getId() ){
 				continue;
 			}
 

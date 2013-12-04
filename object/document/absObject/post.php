@@ -1,25 +1,39 @@
 <?php
 namespace Document\AbsObject;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /**
-* @MongoDB\MappedSuperclass
-* @MongoDB\InheritanceType("COLLECTION_PER_CLASS")
-* @MongoDB\DiscriminatorMap({
-*     "BranchPost"="\Document\Branch\Post"
-* })
-*/
+ * @MongoDB\MappedSuperclass
+ * @MongoDB\InheritanceType("COLLECTION_PER_CLASS")
+ * @MongoDB\DiscriminatorMap({
+ *     "BranchPost"="\Document\Branch\Post"
+ * })
+ * @SOLR\Document(collection="post")
+ */
 Abstract Class Post {
-	/** @MongoDB\Id */
+	/** 
+	 * @MongoDB\Id 
+	 * @SOLR\Field(type="id")
+	 */
 	private $id;
 
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 * @SOLR\Field(type="text")
+	 */
 	private $title;
 
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 * @SOLR\Field(type="text")
+	 */
 	private $description;
 
-	/** @MongoDB\String */
+	/** 
+	 * @MongoDB\String 
+	 * @SOLR\Field(type="text")
+	 */
 	private $content;
 	
 	/** @MongoDB\Boolean */
@@ -57,6 +71,11 @@ Abstract Class Post {
 
     /** @MongoDB\Int */
     private $countViewer = 0;
+
+    /** 
+	 * @SOLR\Field(type="text")
+	 */
+	private $type;
 
 	/**
 	 * Get Comment By ID
@@ -244,5 +263,13 @@ Abstract Class Post {
 
 	public function getCountViewer(){
 		return $this->countViewer;
+	}
+
+	public function setType( $type ){
+		$this->type = $type;
+	}
+
+	public function getType(){
+		return $this->type;
 	}
 }
