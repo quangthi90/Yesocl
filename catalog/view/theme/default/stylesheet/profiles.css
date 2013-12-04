@@ -312,6 +312,9 @@ textarea[name="summary"] {
     height: 20px;
     width: 132px;
 }
+#profiles-tabs-information .bfh-datepicker.open > .bfh-datepicker-calendar{
+	position: relative;
+}
 
 /* Custom Scrollbar */
 .profiles-tabs .mCSB_scrollTools .mCSB_draggerRail {
