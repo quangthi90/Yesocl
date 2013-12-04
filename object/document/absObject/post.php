@@ -131,6 +131,10 @@ Abstract Class Post {
 		return $this->id;
 	}
 	
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+	
 	public function setTitle( $title ){
 		$this->title = $title;
 	}

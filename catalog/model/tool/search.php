@@ -25,7 +25,7 @@ class ModelToolSearch extends Model
 		if ( isset( $data['limit'] ) ) {
 			$data['limit'] = (int)$data['limit'];
 		}else {
-			$data['limit'] = 10;
+			$data['limit'] = 5;
 		}
 
 		$query->setQuery( $query_data );
@@ -59,7 +59,7 @@ class ModelToolSearch extends Model
 		if ( isset( $data['limit'] ) ) {
 			$data['limit'] = (int)$data['limit'];
 		}else {
-			$data['limit'] = 10;
+			$data['limit'] = 5;
 		}
 
 		$query->setQuery( $query_data );

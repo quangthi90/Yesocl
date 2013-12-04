@@ -18,6 +18,12 @@ Class Post extends AbstractPost {
     	$this->setType('Branch');
     }
 
+    /** @MongoDB\PostUpdate */
+    public function postUpdate()
+    {
+    	$this->setType('Branch');
+    }
+
 	public function setBranch( $branch ){
 		$this->branch = $branch;
 	}

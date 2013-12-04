@@ -93,11 +93,11 @@ class ControllerCommonSearch extends Controller {
 			$aUserIds[$oUser->getId()] = $oUser->getId();
 		}
 
-		$aUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
+		$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
 
 		$this->data['users'] = array();
 
-		foreach ( $aUsers as $oUser ) {
+		foreach ( $lUsers as $oUser ) {
 			if ( $oUser->getId() == $this->customer->getId() ){
 				continue;
 			}
@@ -129,8 +129,8 @@ class ControllerCommonSearch extends Controller {
 		}
 		
 		$this->load->model('tool/image');
-		$this->load->model('branch/post');
 		$this->load->model('tool/search');
+		$this->load->model('branch/post');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -143,36 +143,45 @@ class ControllerCommonSearch extends Controller {
 
 		$aPosts = $this->model_tool_search->searchPostByKeyword( array('keyword' => $sKeyword) );
 
-		$aPostIds = array();
-		foreach ($aPosts as $oPost) {
-			$aPostIds[$oPost->getId()] = $oPost->getId();
+		$aBranchPostIds = array();
+		foreach ( $aPosts as $oPost ) {
+			switch ( $oPost->getType() ) {
+				case $this->config->get('post')['type']['branch']:
+					$aBranchPostIds[$oPost->getId()] = $oPost->getId();
+					break;
+			}
 		}
 
-		$aPosts = $this->model_user_user->getUsers( array('user_ids' => $aPostIds) );
+		$lBranchPosts = $this->model_branch_post->getPosts( array('post_ids' => $aBranchPostIds) );
 
 		$this->data['users'] = array();
 
-		foreach ( $aPosts as $oPost ) {
+		foreach ( $lBranchPosts as $oPost ) {
 			if ( $oPost->getId() == $this->customer->getId() ){
 				continue;
 			}
 
-			$aUser = $oUser->formatToCache();
+			$aPost = $oPost->formatToCache();
 
-			$aUser['category'] = 'Friend';
+			$aPost['category'] = 'Post';
 
-			$aUser['metaInfo'] = array();
-			if ( $oUser->getMeta() && $oUser->getMeta()->getLocation() ){
-				$aUser['metaInfo'] = $oUser->getMeta()->getLocation()->getLocation();
-			}
+			$aPost['metaInfo'] = $aPost['like_count'] . ' likes - ' . $aPost['comment_count'] . ' comments - ' . $aPost['count_viewer'] . ' views';
 			
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 40, 40 );
+			}else{
+				$aPost['image'] = null;
+			}
 
-			$this->data['users'][$aUser['id']] = $aUser;
+			$aPost['href'] = $this->extension->path('PostPage', array(
+				'post_slug' => $aPost['slug'],
+				'post_type' => $this->config->get('post')['type']['branch']
+			));
+
+			$this->data['posts'][$aPost['id']] = $aPost;
 		}	
 		return $this->response->setOutput(json_encode(
-			$this->data['users']
+			$this->data['posts']
         ));
 	}
 }

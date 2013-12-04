@@ -72,6 +72,7 @@
 		this.$btn 				= $el.find('.btn-search');
 
 		this.friendUrl			= $el.data('url-friend-typeahead');
+		this.postUrl			= $el.data('url-post-typeahead');
 
 		this.attachEvents();
 		this.initAutoComplete();
@@ -150,7 +151,7 @@
 		    limit: 5,
 		    limitLength: 2,	    
 		    valueKey: 'username',
-		    template: function(data){		    	
+		    template: function(data){
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.username.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<a href="' + data.href + '" class="data-detail">'
@@ -179,10 +180,10 @@
 		    },
 		    limit: 5,
 		    limitLength: 2,			    
-		    valueKey: 'value',
+		    valueKey: 'title',
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
-	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
+	            var boldItem = data.title.replace( regex, "<strong>$1</strong>" );
 	            var htmlContent = '<a href="' + data.href + '" class="data-detail">'
 	                            + '<img src="' + data.image + '" alt="' + data.title + '" />'
 	                            + '<div class="data-meta-info">'
