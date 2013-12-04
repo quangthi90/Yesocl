@@ -29,11 +29,7 @@
 		<div id="overlay"></div>
 		
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
-		{{ include('@template/default/template/common/quick_search.tpl') }}
-		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}" data-url-typeahead="{{ path('SearchTypeahead') }}">
-		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text" autocomplete="off" spellcheck="false">
-		  <a href="#" class="btn btn-search"><i class="icon-search"></i></a>
-		</div>		
+		{{ include('@template/default/template/common/quick_search.tpl') }}	
 
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>

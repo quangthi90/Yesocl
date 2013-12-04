@@ -71,7 +71,7 @@
 		this.$suggestContainer 	= $el.find('.suggestion-container');
 		this.$btn 				= $el.find('.btn-search');
 
-		this.url 				= $el.data('url-typeahead');
+		this.friendUrl			= $el.data('url-friend-typeahead');
 
 		this.attachEvents();
 		this.initAutoComplete();
@@ -143,7 +143,7 @@
 		  {
 		    name: 'dataset-friend',
 		    remote: {
-		    	url: that.url + '%QUERY/',
+		    	url: that.friendUrl + '%QUERY/',
 		    	cache: true,
 		    	beforeSend: function(xhr, setting) {
 		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
@@ -160,7 +160,7 @@
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.username.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<a href="http://google.com.vn" class="data-detail">'
+	            var htmlContent = '<a href="'+ data.href +'" class="data-detail">'
 	                            + '<img src="' + data.avatar + '" alt="' + data.username + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
