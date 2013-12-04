@@ -144,11 +144,11 @@
 		    	url: that.friendUrl + '%QUERY/',
 		    	cache: true,
 		    	beforeSend: function(xhr, setting) {
-		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
+		    		var spinner = $('<i class="icon-spinner icon-spin load-friend"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
 		    	},
 		        filter: function(parsedResponse){
-		            $('span.twitter-typeahead').find('i').remove();
+		            $('span.twitter-typeahead').find('i.load-friend').remove();
 		            return parsedResponse;
 		        }
 		    },
@@ -175,11 +175,11 @@
 		    	url: that.postUrl + '%QUERY/',
 		    	cache: true,
 		    	beforeSend: function(xhr, setting) {
-		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
+		    		var spinner = $('<i class="icon-spinner icon-spin load-post"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
 		    	},
 		        filter: function(parsedResponse){
-		            $('span.twitter-typeahead').find('i').remove();
+		            $('span.twitter-typeahead').find('i.load-post').remove();
 		            return parsedResponse;
 		        }
 		    },
@@ -204,6 +204,8 @@
 	  		that.resizePanel();	  		
 	  	}).on('typeahead:closed', function(){
 	  		that.resizePanel();
+	  	}).on('typeahead:selected', function(){
+	  		that.closeSearchPanel();
 	  	});
 		$('span.tt-dropdown-menu').on('typeahead:suggestionsRendered', function (e, data) {
 		    that.resizePanel();

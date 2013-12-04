@@ -2219,13 +2219,13 @@ ul.user_actions li:hover i{
 #search-panel .search-ctrl {
   width: 600px;
   padding: 10px;  
-  font-size: 16px;
+  font-size: 15px;
   outline: none;
 }
 #search-panel .tt-hint {
   width: 600px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 15px;
   color:#ccc;
 }
 #search-panel .twitter-typeahead {
