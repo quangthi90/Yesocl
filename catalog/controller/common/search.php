@@ -86,6 +86,8 @@ class ControllerCommonSearch extends Controller {
 				$aPost['image'] = null;
 			}
 
+			$aPost['type'] = $this->config->get('post')['type']['branch'];
+
 			$aPosts[$aPost['id']] = $aPost;
 		}
 

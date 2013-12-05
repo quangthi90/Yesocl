@@ -17,15 +17,15 @@
                     <i class="icon-angle-right"></i>
                 </a>
             </div>
-            {% set numCategoryHasResult = 3 %}
+            {% set numCategoryHasResult = 2 %}
             <div class="block-content search-container-{{numCategoryHasResult}}">
                 <div class="column search-category">
-                    <h3>People (50)</h3>
+                    <h3>People ({{ users|length }})</h3>
                     <div class="search-result-container">
                         <ul>
                             {% for user in users %}
                             <li>
-                                <a href="#" class="data-detail">
+                                <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="data-detail" title="{{ user.username }}">
                                     <img src="{{ user.avatar }}" alt="{{ user.username }}" />
                                     <div class="data-meta-info">
                                       <div class="data-name">{{ user.username }}</div>
@@ -42,16 +42,16 @@
                     </div>
                 </div>
                 <div class="column search-category">
-                    <h3>Post (20)</h3>
+                    <h3>Post ({{ posts|length }})</h3>
                     <div class="search-result-container">
                         <ul>
-                            {% for i in 1..20 %}
+                            {% for post in posts %}
                             <li>
-                                <a href="#" class="data-detail">
-                                    <img src="http://findicons.com/icon/download/51187/clipping_picture/48/png" alt="" />
+                                <a href="{{ path('PostPage', {post_type: post.type, post_slug: post.slug}) }}" title="{{ post.title }}" class="data-detail">
+                                    <img src="{{ post.image }}" alt="{{ post.title }}" />
                                     <div class="data-meta-info">
-                                      <div class="data-name">Chỉ số VN-Index</div>
-                                      <div class="data-more">10 likes - 10 comments</div>
+                                      <div class="data-name">{{ post.title }}</div>
+                                      <div class="data-more">{{ post.metaInfo }}</div>
                                     </div>
                                 </a>
                             </li>
@@ -59,7 +59,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="column search-category">
+                {#<div class="column search-category">
                     <h3>Group (10)</h3>
                     <div class="search-result-container">
                         <ul>
@@ -76,7 +76,7 @@
                             {% endfor %}                        
                         </ul>
                     </div>
-                </div>
+                </div>#}
             </div>
         </div>
     </div>

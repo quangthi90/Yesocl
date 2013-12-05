@@ -158,7 +158,7 @@
 		    template: function(data){
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.username.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<a href="' + data.href + '" class="data-detail">'
+	            var htmlContent = '<a href="' + data.href + '" class="data-detail" title="' + data.username + '">'
 	                            + '<img src="' + data.avatar + '" alt="' + data.username + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
@@ -189,7 +189,7 @@
 		    template: function(data){		    	
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
 	            var boldItem = data.title.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<a href="' + data.href + '" class="data-detail">'
+	            var htmlContent = '<a href="' + data.href + '" class="data-detail" title="' + data.title + '">'
 	                            + '<img src="' + data.image + '" alt="' + data.title + '" />'
 	                            + '<div class="data-meta-info">'
 	                            + '<div class="data-name">' + boldItem + '</div>' 
