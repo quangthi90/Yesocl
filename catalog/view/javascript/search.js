@@ -5,6 +5,7 @@
 		this.url			= $el.data('url');
 		this.$keyword 		= $el.find('input[name=\'keyword\']');
 		this.$btn 			= $el.find('.btn-search');
+		this.$invokeCtrl 	= $el.data('invoke-search');
 
 		this.attachEvents();
 	}
@@ -15,11 +16,13 @@
 			if (e.which == 13){
 				var firstSuggestion = $('span.tt-dropdown-menu').find('.tt-is-under-cursor');
 				if(firstSuggestion.length > 0) {
+					$(that.$invokeCtrl).trigger('click');
 					location = firstSuggestion.children('a').attr('href');
 					return false;
 				}
-				url = that.generateUrl();
+				var url = that.generateUrl();
 				if (url){
+					$(that.$invokeCtrl).trigger('click');
 					location = url;
 				}
 				return false;
@@ -31,8 +34,9 @@
 			if(that.$el.hasClass('disabled')) {
 				return false;
 			}			
-			url = that.generateUrl();
+			var url = that.generateUrl();
 			if (url){
+				$(that.$invokeCtrl).trigger('click');
 				location = url;
 			}
 			return false;
@@ -140,11 +144,11 @@
 		    	url: that.friendUrl + '%QUERY/',
 		    	cache: true,
 		    	beforeSend: function(xhr, setting) {
-		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
+		    		var spinner = $('<i class="icon-spinner icon-spin load-friend"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
 		    	},
 		        filter: function(parsedResponse){
-		            $('span.twitter-typeahead').find('i').remove();
+		            $('span.twitter-typeahead').find('i.load-friend').remove();
 		            return parsedResponse;
 		        }
 		    },
@@ -166,15 +170,16 @@
 		    header: '<h3 class="category-name">Friend</h3>'
 		  },
 		  {
+			name: 'dataset-post',
 		    remote: {
 		    	url: that.postUrl + '%QUERY/',
 		    	cache: true,
 		    	beforeSend: function(xhr, setting) {
-		    		var spinner = $('<i class="icon-spinner icon-spin"></i>');
+		    		var spinner = $('<i class="icon-spinner icon-spin load-post"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
 		    	},
 		        filter: function(parsedResponse){
-		            $('span.twitter-typeahead').find('i').remove();
+		            $('span.twitter-typeahead').find('i.load-post').remove();
 		            return parsedResponse;
 		        }
 		    },
@@ -199,6 +204,8 @@
 	  		that.resizePanel();	  		
 	  	}).on('typeahead:closed', function(){
 	  		that.resizePanel();
+	  	}).on('typeahead:selected', function(){
+	  		that.closeSearchPanel();
 	  	});
 		$('span.tt-dropdown-menu').on('typeahead:suggestionsRendered', function (e, data) {
 		    that.resizePanel();
