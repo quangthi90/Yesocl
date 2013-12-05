@@ -1,6 +1,5 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/friend/common/friend_list.tpl' %}
 {% use '@template/default/template/friend/common/friend_button.tpl' %}
 
 {% block title %}{{ users[current_user_id].username }} | Search {% endblock %}
@@ -24,19 +23,23 @@
                     <h3>People (50)</h3>
                     <div class="search-result-container">
                         <ul>
-                            {% for i in 1..50 %}
+                            {% for user in users %}
                             <li>
                                 <a href="#" class="data-detail">
-                                    <img src="http://findicons.com/icon/download/51187/clipping_picture/48/png" alt="" />
+                                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
                                     <div class="data-meta-info">
-                                      <div class="data-name">Nguyễn Văn A</div>
-                                      <div class="data-more">Mộ Đức, Quảng Ngãi</div>
+                                      <div class="data-name">{{ user.username }}</div>
+                                      <div class="data-more">{{ user.metaInfo }}</div>
                                     </div>
+                                    {% set fr_status = user.fr_status.status %}
+                                    {% set fr_slug = user.slug %}
+                                    {{ block('friend_common_friend_button') }}
                                 </a>
                             </li>
-                            {% endfor %}                          
-                        </ul>    
-                    </div>                    
+                            {% endfor %}
+                        </ul>
+                        {{ block('friend_common_friend_button_template') }}
+                    </div>
                 </div>
                 <div class="column search-category">
                     <h3>Post (20)</h3>

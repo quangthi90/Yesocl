@@ -8,9 +8,10 @@ class ControllerCommonSearch extends Controller {
 		}
 		
 		$this->load->model('tool/image');
-		$this->load->model('user/user');
 		$this->load->model('tool/search');
+		$this->load->model('user/user');
 		$this->load->model('friend/friend');
+		$this->load->model('branch/post');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -22,6 +23,7 @@ class ControllerCommonSearch extends Controller {
 		}
 
 		$lSearchUsers = $this->model_tool_search->searchUserByKeyword( array('keyword' => $sKeyword) );
+		$lSearchPosts = $this->model_tool_search->searchPostByKeyword( array('keyword' => $sKeyword) );
 
 		$aUserIds = array();
 		foreach ($lSearchUsers as $oSearchUser) {
@@ -45,11 +47,49 @@ class ControllerCommonSearch extends Controller {
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 			$aUser['gender'] = $oQueryUser->getMeta()->getSex();
 
+			$aUser['metaInfo'] = '';
+			if ( $oQueryUser->getMeta() && $oQueryUser->getMeta()->getLocation() ){
+				$aUser['metaInfo'] = $oQueryUser->getMeta()->getLocation()->getLocation();
+			}
+
 			$aUsers[$aUser['id']] = $aUser;
 			$this->data['search_user_ids'][] = $aUser['id'];
 		}
 		
 		$this->data['users'] = $aUsers;
+
+		$aBranchPostIds = array();
+		foreach ( $lSearchPosts as $oPost ) {
+			switch ( $oPost->getType() ) {
+				case $this->config->get('post')['type']['branch']:
+					$aBranchPostIds[$oPost->getId()] = $oPost->getId();
+					break;
+			}
+		}
+
+		$lBranchPosts = $this->model_branch_post->getPosts( array('post_ids' => $aBranchPostIds) );
+
+		$aPosts = array();
+
+		foreach ( $lBranchPosts as $oPost ) {
+			if ( $oPost->getId() == $this->customer->getId() ){
+				continue;
+			}
+
+			$aPost = $oPost->formatToCache();
+
+			$aPost['metaInfo'] = $aPost['like_count'] . ' likes - ' . $aPost['comment_count'] . ' comments - ' . $aPost['count_viewer'] . ' views';
+			
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 40, 40 );
+			}else{
+				$aPost['image'] = null;
+			}
+
+			$aPosts[$aPost['id']] = $aPost;
+		}
+
+		$this->data['posts'] = $aPosts;
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/search.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/search.tpl';
@@ -106,7 +146,7 @@ class ControllerCommonSearch extends Controller {
 
 			$aUser['category'] = 'Friend';
 
-			$aUser['metaInfo'] = array();
+			$aUser['metaInfo'] = '';
 			if ( $oUser->getMeta() && $oUser->getMeta()->getLocation() ){
 				$aUser['metaInfo'] = $oUser->getMeta()->getLocation()->getLocation();
 			}
@@ -154,7 +194,7 @@ class ControllerCommonSearch extends Controller {
 
 		$lBranchPosts = $this->model_branch_post->getPosts( array('post_ids' => $aBranchPostIds) );
 
-		$this->data['users'] = array();
+		$this->data['posts'] = array();
 
 		foreach ( $lBranchPosts as $oPost ) {
 			if ( $oPost->getId() == $this->customer->getId() ){
@@ -179,7 +219,7 @@ class ControllerCommonSearch extends Controller {
 			));
 
 			$this->data['posts'][$aPost['id']] = $aPost;
-		}	
+		}
 		return $this->response->setOutput(json_encode(
 			$this->data['posts']
         ));
