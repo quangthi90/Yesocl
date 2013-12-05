@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/friend/common/friend_list.tpl' %}
 {% use '@template/default/template/friend/common/friend_button.tpl' %}
 
 {% block title %}{{ users[current_user_id].username }} | Search {% endblock %}
@@ -22,22 +23,10 @@
                 <div class="column search-category">
                     <h3>People ({{ users|length }})</h3>
                     <div class="search-result-container">
-                        <ul>
-                            {% for user in users %}
-                            <li>
-                                <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="data-detail" title="{{ user.username }}">
-                                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
-                                    <div class="data-meta-info">
-                                      <div class="data-name">{{ user.username }}</div>
-                                      <div class="data-more">{{ user.metaInfo }}</div>
-                                    </div>
-                                    {% set fr_status = user.fr_status.status %}
-                                    {% set fr_slug = user.slug %}
-                                    {{ block('friend_common_friend_button') }}
-                                </a>
-                            </li>
-                            {% endfor %}
-                        </ul>
+                        {% for user in users %}
+                            {% set friend = user %}
+                            {{ block('friend_common_friend_list') }}
+                        {% endfor %}
                         {{ block('friend_common_friend_button_template') }}
                     </div>
                 </div>
