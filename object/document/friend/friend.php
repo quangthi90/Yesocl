@@ -46,4 +46,12 @@ Class Friend {
 	public function getUser(){
 		return $this->user;
 	}
+
+	public function setCreated( $created ){
+		$this->created = $created;
+	}
+
+	public function getCreated(){
+		return $this->created;
+	}
 }

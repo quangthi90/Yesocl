@@ -4,7 +4,7 @@ class ControllerPostComment extends Controller {
 
     public function addComment(){
         if ( $this->customer->isLogged() ) {
-            $data['user_id'] = $this->customer->getId();
+            $aDatas['user_id'] = $this->customer->getId();
         }else {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: user not login'
@@ -30,69 +30,70 @@ class ControllerPostComment extends Controller {
         }
 
         if ( $this->validate() ) {
-            $data['post_slug'] = $this->request->get['post_slug'];
-            $data['post_type'] = $this->request->get['post_type'];
-            $data['content'] = $this->request->post['content'];
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
+            $aDatas['content'] = $this->request->post['content'];
         }else {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: validate false'
             )));
         }
         
-        switch ($data['post_type']) {
+        switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $comment = $this->model_branch_comment->addComment( $data );
+                $oComment = $this->model_branch_comment->addComment( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $comment = $this->model_user_comment->addComment( $data );
+                $oComment = $this->model_user_comment->addComment( $aDatas );
                 break;
             
             default:
-                $comment = array();
+                $oComment = null;
                 break;
         }
         
-        if ( $comment == false ){
+        if ( !$oComment ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: add comment have error'
             )));
         }
 
-        $comment = $comment->formatToCache();
+        $aComment = $oComment->formatToCache();
 
         $this->load->model('user/user');
         $this->load->model('tool/image');
 
-        $user = $this->model_user_user->getUser( $comment['user_slug'] );
+        $aUser = $this->model_user_user->getUser( $aComment['user_slug'] );
 
-        $comment['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+        $aComment['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 
-        if ( $user && $user['username'] ){
-            $comment['author'] = $user['username'];
+        if ( $aUser && $aUser['username'] ){
+            $aComment['author'] = $aUser['username'];
         }
 
-        $comment['href_user'] = $this->extension->path('WallPage', array(
-            'user_slug' => $user['slug']
+        $aComment['href_user'] = $this->extension->path('WallPage', array(
+            'user_slug' => $aUser['slug']
         ));
-        $comment['href_like'] = $this->extension->path('CommentLike', array(
-            'post_slug' => $data['post_slug'],
-            'post_type' => $data['post_type'],
-            'comment_id' => $comment['id']
+        $aComment['href_like'] = $this->extension->path('CommentLike', array(
+            'post_slug' => $aDatas['post_slug'],
+            'post_type' => $aDatas['post_type'],
+            'comment_id' => $aComment['id']
         ));
-        $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-            'post_slug' => $data['post_slug'],
-            'post_type' => $data['post_type'],
-            'comment_id' => $comment['id']
+        $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+            'post_slug' => $aDatas['post_slug'],
+            'post_type' => $aDatas['post_type'],
+            'comment_id' => $aComment['id']
         ));
-        $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
-        $comment['is_liked'] = false;
+        $aComment['created'] = $aComment['created']->format( $this->language->get('date_format_full') );
+        $aComment['is_liked'] = false;
+        $aComment['is_owner'] = true;
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'comment' => $comment
+            'comment' => $aComment
         )));
     }
 
@@ -109,10 +110,10 @@ class ControllerPostComment extends Controller {
     }
 
     public function getComments(){
-        $data = array();
+        $aDatas = array();
 
         if ( isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug']) ){
-            $data['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
@@ -120,82 +121,95 @@ class ControllerPostComment extends Controller {
         }
 
         if ( isset($this->request->get['post_type']) && !empty($this->request->get['post_type']) ){
-            $data['post_type'] = $this->request->get['post_type'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
             )));
         }
         
-        switch ($data['post_type']) {
+        switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $query_comments = $this->model_branch_comment->getComments( $data );
+                $lQueryComments = $this->model_branch_comment->getComments( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $query_comments = $this->model_user_comment->getComments( $data );
+                $lQueryComments = $this->model_user_comment->getComments( $aDatas );
                 break;
             
             default:
-                $query_comments = array();
+                $lQueryComments = array();
                 break;
         }
 
         $this->load->model('user/user');
         $this->load->model('tool/image');
 
-        $comments = array();
-        foreach ( $query_comments as $comment ) {
-            if ( in_array($this->customer->getId(), $comment->getLikerIds()) ){
-                $liked = true;
+        $aUsers = array();
+        $idCurrUserId = $this->customer->getId();
+
+        $aComments = array();
+        foreach ( $lQueryComments as $oComment ) {
+            $aComment = $oComment->formatToCache();
+
+            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
+                $aComment['is_liked'] = true;
             }else{
-                $liked = false;
+                $aComment['is_liked'] = false;
             }
 
-            $comment = $comment->formatToCache();
-
-            $user = $this->model_user_user->getUser( $comment['user_slug'] );
+            if ( empty($aUsers[$aComment['user_slug']]) ){
+                $aUser = $this->model_user_user->getUser( $aComment['user_slug'] );
+                $aUsers[$aComment['user_slug']] = $aUser;
+            }else{
+                $aUser = $aUsers[$aComment['user_slug']];
+            }
             
-            $comment['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+            $aComment['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 
-            if ( $user && $user['username'] ){
-                $comment['author'] = $user['username'];
+            if ( $aUser && $aUser['username'] ){
+                $aComment['author'] = $aUser['username'];
             }else{
-                $comment['author'] = $comment['author'];
+                $aComment['author'] = $aComment['author'];
             }
 
-            $comment['href_user'] = $this->extension->path('WallPage', array(
-                'user_slug' => $user['slug']
+            $aComment['href_user'] = $this->extension->path('WallPage', array(
+                'user_slug' => $aUser['slug']
             ));
-            $comment['href_like'] = $this->extension->path('CommentLike', array(
-                'post_slug' => $data['post_slug'],
-                'post_type' => $data['post_type'],
-                'comment_id' => $comment['id']
+            $aComment['href_like'] = $this->extension->path('CommentLike', array(
+                'post_slug' => $aDatas['post_slug'],
+                'post_type' => $aDatas['post_type'],
+                'comment_id' => $aComment['id']
             ));
-            $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-                'post_slug' => $data['post_slug'],
-                'post_type' => $data['post_type'],
-                'comment_id' => $comment['id']
+            $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+                'post_slug' => $aDatas['post_slug'],
+                'post_type' => $aDatas['post_type'],
+                'comment_id' => $aComment['id']
             ));
-            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
-            $comment['is_liked'] = $liked;
+            $aComment['created'] = $aComment['created']->format( $this->language->get('date_format_full') );
 
-            $comments[] = $comment;
+            if ( $aUser['id'] == $idCurrUserId ){
+                $aComment['is_owner'] = true;
+            }else{
+                $aComment['is_owner'] = false;
+            }
+
+            $aComments[] = $aComment;
         }
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'comments' => $comments
+            'comments' => $aComments
         )));
     }
 
     public function like(){
-        $data = array();
+        $aDatas = array();
 
         if ( !empty($this->request->get['comment_id']) ){
-            $data['comment_id'] = $this->request->get['comment_id'];
+            $aDatas['comment_id'] = $this->request->get['comment_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: comment id empty'
@@ -203,7 +217,7 @@ class ControllerPostComment extends Controller {
         }
 
         if ( !empty($this->request->get['post_slug']) ){
-            $data['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
@@ -211,31 +225,32 @@ class ControllerPostComment extends Controller {
         }
 
         if ( !empty($this->request->get['post_type']) ){
-            $data['post_type'] = $this->request->get['post_type'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
             )));
         }
 
-        $data['likerId'] = $this->customer->getId();
+        $aDatas['likerId'] = $this->customer->getId();
         
-        switch ($data['post_type']) {
+        switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $comment = $this->model_branch_comment->editComment( $data['comment_id'], $data );
+                $oComment = $this->model_branch_comment->editComment( $aDatas['comment_id'], $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $comment = $this->model_user_comment->editComment( $data['comment_id'], $data );
+                $oComment = $this->model_user_comment->editComment( $aDatas['comment_id'], $aDatas );
                 break;
             
             default:
+                $oComment = null;
                 break;
         }
 
-        if ( $comment == false ){
+        if ( !$oComment ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok'
             )));
@@ -243,15 +258,15 @@ class ControllerPostComment extends Controller {
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'like_count' => count($comment->getLikerIds())
+            'like_count' => count($oComment->getLikerIds())
         )));
     }
 
     public function getLikers(){
-        $data = array();
+        $aDatas = array();
 
         if ( !empty($this->request->get['comment_id']) ){
-            $data['comment_id'] = $this->request->get['comment_id'];
+            $aDatas['comment_id'] = $this->request->get['comment_id'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: comment id empty'
@@ -259,7 +274,7 @@ class ControllerPostComment extends Controller {
         }
 
         if ( isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug']) ){
-            $data['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
@@ -267,26 +282,26 @@ class ControllerPostComment extends Controller {
         }
 
         if ( isset($this->request->get['post_type']) && !empty($this->request->get['post_type']) ){
-            $data['post_type'] = $this->request->get['post_type'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
             )));
         }
         
-        switch ($data['post_type']) {
+        switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $comment = $this->model_branch_comment->getComment( $data );
+                $oComment = $this->model_branch_comment->getComment( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $comment = $this->model_user_comment->getComment( $data );
+                $oComment = $this->model_user_comment->getComment( $aDatas );
                 break;
             
             default:
-                $comment = null;
+                $oComment = null;
                 break;
         }
 
@@ -294,33 +309,33 @@ class ControllerPostComment extends Controller {
         $this->load->model('friend/friend');
         $this->load->model('tool/image');
 
-        $users = array();
+        $aUsers = array();
 
-        if ( $comment ){
-            $query_users = $this->model_user_user->getUsers( array(
-                'user_ids' => $comment->getLikerIds()
+        if ( $oComment ){
+            $lQueryUsers = $this->model_user_user->getUsers( array(
+                'user_ids' => $oComment->getLikerIds()
             ));
 
-            if ( $query_users ){
-                foreach ( $query_users as $user ) {
-                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer, $user );
+            if ( $lQueryUsers ){
+                foreach ( $lQueryUsers as $oUser ) {
+                    $aFrStatus = $this->model_friend_friend->checkFriendStatus( $this->customer, $oUser );
 
-                    $user = $user->formatToCache();
+                    $aUser = $oUser->formatToCache();
 
-                    $user['fr_status'] = $fr_status['status'];
-                    $user['fr_href'] = $fr_status['href'];
+                    $aUser['fr_status'] = $aFrStatus['status'];
+                    $aUser['fr_href'] = $aFrStatus['href'];
 
-                    $user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-                    $user['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $user['slug']) );
+                    $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+                    $aUser['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $aUser['slug']) );
 
-                    $users[] = $user;
+                    $aUsers[] = $aUser;
                 }
             }
         }
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'users' => $users
+            'users' => $aUsers
         )));
     }
 }

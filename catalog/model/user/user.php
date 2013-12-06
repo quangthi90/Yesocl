@@ -25,6 +25,8 @@ class ModelUserUser extends Model {
 		if ( !empty($data['friend']) ){
 			$friend = new Friend();
 			$friend->setUser( $data['friend'] );
+			$this->dm->persist( $friend );
+			// var_dump($friend->getCreated()); exit;
 			$user->addFriend( $friend );
 		}
 
