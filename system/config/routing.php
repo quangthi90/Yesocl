@@ -23,8 +23,9 @@ $_['routing']['HomePage']	 					= 'home/';
 $_['routing']['WallPage']	 					= 'wall-page/{user_slug}/';
 $_['routing']['ChangePassword']					= 'change-password/';
 $_['routing']['Logout']							= 'logout/';
-$_['routing']['SearchPage']						= 'search/';
-$_['routing']['Search']							= 'search/{keyword}/';
+$_['routing']['SearchPage']						= 'search/{keyword}/';
+$_['routing']['FriendTypeahead']				= 'search/typeahead/friend/{keyword}/';
+$_['routing']['PostTypeahead']					= 'search/typeahead/post/{keyword}/';
 $_['routing']['Login']							= 'login/';
 $_['routing']['ChangeAvatar']					= 'change-avatar/';
 $_['routing']['LostPass']						= 'lost_password/';
@@ -61,15 +62,10 @@ $_['routing']['IgnoreFriend']					= 'friend/ignore/{user_slug}/';
 $_['routing']['UploadFile'] 					= 'upload/';
 
 // Data Value
-$_['routing']['LocationAutoComplete']			= 'data/location/';
-$_['routing']['LocationAutoCompleteRoute']		= 'data/location/{keyword}/';
-$_['routing']['IndustryAutoComplete']			= 'data/industry/';
-$_['routing']['IndustryAutoCompleteRoute']		= 'data/industry/{keyword}/';
-$_['routing']['DegreeAutoComplete']				= 'data/degree/';
-$_['routing']['DegreeAutoCompleteRoute']		= 'data/degree/{keyword}/';
-$_['routing']['SchoolAutoComplete']				= 'data/school/';
-$_['routing']['SchoolAutoCompleteRoute']		= 'data/school/{keyword}/';
-$_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/';
-$_['routing']['FieldOfStudyAutoCompleteRoute']	= 'data/field-of-study/{keyword}/';
+$_['routing']['LocationAutoComplete']			= 'data/location/{keyword}/';
+$_['routing']['IndustryAutoComplete']			= 'data/industry/{keyword}/';
+$_['routing']['DegreeAutoComplete']				= 'data/degree/{keyword}/';
+$_['routing']['SchoolAutoComplete']				= 'data/school/{keyword}/';
+$_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 
 ?>

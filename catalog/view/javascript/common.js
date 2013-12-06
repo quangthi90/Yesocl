@@ -113,7 +113,7 @@ function HashTable(obj)
 			autoDraggerLength:true, /*auto-adjust scrollbar dragger length: boolean*/
 			autoHideScrollbar:true, /*auto-hide scrollbar when idle*/
 			scrollButtons:{ /*scroll buttons*/
-				enable: true, /*scroll buttons support: boolean*/
+				enable: false, /*scroll buttons support: boolean*/
 				scrollType:"continuous", /*scroll buttons scrolling type: "continuous", "pixels"*/
 				scrollSpeed:"auto", /*scroll buttons continuous scrolling speed: integer, "auto"*/
 				scrollAmount:40 /*scroll buttons pixels scroll amount: integer (pixels)*/
@@ -238,151 +238,6 @@ function HashTable(obj)
 	/*
 		End Notification
 	*/
-
-	/*Start AUTOCOMPLETE */
-	function SearchAutoComplete(el) {
-		this.root = el;
-		this.autoCtrl = el.find('.search-ctrl');
-		this.invokeCtrl = el.data('invoke-search');
-		this.template = el.find('.search-result-item-template');	
-		this.suggestContainer = el.find('.suggestion-container');
-		this.attachEvents();
-		this.initAutoComplete();
-	}
-	SearchAutoComplete.prototype.attachEvents = function() {
-		var that = this;
-		$(that.invokeCtrl).click(function() {
-			if($(this).hasClass('active')) {
-				that.closeSearchPanel();
-				$(this).removeClass('active');
-			}else{
-				that.openSearchPanel();
-			}				
-		});
-		that.root.hover(function(){
-				that.autoCtrl.focus();
-			}
-		);
-		that.root.click(function(){
-				that.autoCtrl.focus();
-			}
-		);
-		//Auto invoke search:
-		$(document).keypress(function(e){ 			
-			//Check if any input is focused, if so, don't continue:
-			var isFocus = false;		
-			if($(this).find('.mfp-ready').length > 0) {
-				isFocus = true;
-			}else {
-				$('input,textarea').each(function(){
-					if ($(this).is(":focus")) isFocus = true;
-				});
-			}			
-			if (isFocus) return;
-			if((e.which >= 48 && e.which <= 90) || (e.which >= 97 && e.which <= 122)) {
-				that.openSearchPanel();	
-				if($.browser.mozilla) {
-					that.autoCtrl.val(String.fromCharCode(e.which));
-				}			
-			}
-		});
-		$(document).keyup(function(e) {
-		    if (e.keyCode == 27) { 
-		        that.closeSearchPanel();
-		    }
-		});
-	}
-	SearchAutoComplete.prototype.initAutoComplete = function() {
-		var that = this;
-
-		//Get datasource:
-		var tempImg = "http://findicons.com/icon/download/51187/clipping_picture/48/png";
-		var dbFriend = [
-			{id:"1", category:"Friend", image: tempImg, value: "Nguyễn Văn A", url:"#", metaInfo:"10 friends"},
-			{id:"2", category:"Friend", image: tempImg, value: "Trần Văn B", url:"#", metaInfo:"10 friends"},
-			{id:"3", category:"Friend", image: tempImg, value: "Nguyễn Thị C", url:"#", metaInfo:"10 friends"},
-			{id:"4", category:"Friend", image: tempImg, value: "Võ Văn D", url:"#", metaInfo:"10 friends"},
-			{id:"5", category:"Friend", image: tempImg, value: "Lê Thị E", url:"#", metaInfo:"10 friends"}
-		]; 
-		var dbPost = [
-			{id:"6", category:"Post", image: tempImg, value: "Abc def dfdd", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
-			{id:"7", category:"Post", image: tempImg, value: "Lang kinh thi truong hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"},
-			{id:"8", category:"Post", image: tempImg, value: "Chi so VN-Index hom nay", url:"#", metaInfo:"100 likes - 30 comments - 1k views"}
-		];
-		var dbGroup = [
-			{id:"9", category:"Group", image: tempImg, value: "Tai Chinh Chung Khoan", url:"#", metaInfo:"100 members"},
-			{id:"10", category:"Group", image: tempImg, value: "Dau Tu Bat Dong San", url:"#", metaInfo:"200 members"},
-			{id:"11", category:"Group", image: tempImg, value: "Cong Nghe Thong Tin", url:"#", metaInfo:"1k members"}
-		];
-		that.autoCtrl.typeaheadCustom([
-		  {
-		    name: 'dataset-category category-friend',
-		    local: dbFriend,
-		    template: function(data){
-	            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
-	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<div class="data-detail">'
-	                            + '<img src="' + data.image + '" alt="" />'
-	                            + '<div class="data-meta-info">'
-	                            + '<div class="data-name">' + boldItem + '</div>' 
-	                            + '<div class="data-more">' + data.metaInfo + '</div>'   
-	                            + '</div>'
-	                            + '</div>';
-	            return htmlContent;
-		    },
-		    header: '<h3 class="category-name">Friend</h3>'
-		  },
-		  {
-		    name: 'dataset-category category-post',
-		    local: dbPost,
-		    template: function(data){
-	            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
-	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<div class="data-detail">'
-	                            + '<img src="' + data.image + '" alt="" />'
-	                            + '<div class="data-meta-info">'
-	                            + '<div class="data-name">' + boldItem + '</div>' 
-	                            + '<div class="data-more">' + data.metaInfo + '</div>'   
-	                            + '</div>'
-	                            + '</div>';
-	            return htmlContent;
-		    },
-		    header: '<h3 class="category-name">Post</h3>'
-		  },
-		  {
-		    name: 'dataset-category category-group',
-		    local: dbGroup,
-		    template: function(data){
-	            var regex = new RegExp( '(' + that.autoCtrl.val() + ')', 'gi' );
-	            var boldItem = data.value.replace( regex, "<strong>$1</strong>" );
-	            var htmlContent = '<div class="data-detail">'
-	                            + '<img src="' + data.image + '" alt="" />'
-	                            + '<div class="data-meta-info">'
-	                            + '<div class="data-name">' + boldItem + '</div>' 
-	                            + '<div class="data-more">' + data.metaInfo + '</div>'   
-	                            + '</div>'
-	                            + '</div>';
-	            return htmlContent;
-		    },
-		    header: '<h3 class="category-name">Group</h3>'
-		  }
-	  	]);
-	}
-	SearchAutoComplete.prototype.openSearchPanel = function() {
-		var that = this;
-		that.root.slideDown(200, function(){			
-			$(that.invokeCtrl).addClass('active');
-			that.autoCtrl.focus();			
-		});	
-	}
-	SearchAutoComplete.prototype.closeSearchPanel = function() {
-		var that = this;
-		this.root.slideUp(200, function(){
-			that.autoCtrl.typeaheadCustom('setQuery', '');
-			$(that.invokeCtrl).removeClass('active');
-		})
-	}
-	/* End Search AutoComplete */
 
 	/*
 	Jquery effects
@@ -577,6 +432,7 @@ function HashTable(obj)
 	var df_POST_PER_COLUMN = 'post-per-column';
 	var df_CATEGORY_SINGLE = 'post-category';
 	var df_FRIEND_ACCOUNT = 'account-friend';
+	var df_SEARCH_PAGE 	= 'search-page';
 
 	function HorizontalBlock(el) {	
 		this.rootContent = $("#y-content");
@@ -711,7 +567,25 @@ function HashTable(obj)
 				listBlockItem.css('opacity','1');
 			}
 		}
-		else{				
+		else if(this.root.hasClass(df_SEARCH_PAGE)){
+			this.root.css('min-width', this.widthMain + 'px');
+			var heightBlockContent = this.heightMain - 42;
+			this.root.find('.block-content').height(heightBlockContent - 5);
+			this.columns.height(heightBlockContent - 20).css('opacity', '1');
+			this.columns.find('.search-result-container').each(function(){
+				var firstItem = $(this).find('.data-detail').first();
+				var friendItem = $(this).find('.friend-item').first();
+				var maxContentWidth = 250;
+				if(firstItem.length > 0) {
+					maxContentWidth = Math.floor(firstItem.width() - 60 - 20);
+				}else if(friendItem.length > 0) {
+					maxContentWidth = Math.floor(friendItem.width() - 60 - 20);
+				}
+				$(this).find('.data-meta-info').css('max-width', maxContentWidth + 'px');
+				$(this).find('.friend-info').css('max-width', maxContentWidth + 'px');
+				$(this).makeCustomScroll(false);
+			});
+		}else {
 		}
 		this.rootContent.niceScroll();
 	}
@@ -747,53 +621,6 @@ function HashTable(obj)
 			});
 		}
 	}
-
-	function SearchBtn( $el ){
-		this.$el			= $el;
-		this.url			= $el.data('url');
-		this.$keyword 		= $el.find('input[name=\'keyword\']');
-		this.$btn 			= $el.find('.btn-search');
-
-		// console.log(this.$btn.attr('class'));
-
-		this.attachEvents();
-	}
-	SearchBtn.prototype.attachEvents = function(){
-		var that = this;
-
-		this.$keyword.keydown(function(e){
-			if (e.which == 13){
-				that.$btn.trigger('click');
-			}
-		});
-
-		this.$btn.click(function(e) {
-			e.preventDefault();
-			
-			if(that.$el.hasClass('disabled')) {
-				return false;
-			}
-
-			url = that.generateUrl();
-
-			if ( url ){
-				location = url;
-			}
-
-			return false;
-		});
-	};	
-	SearchBtn.prototype.generateUrl = function(){
-		var url = this.url;
-				 
-		var search = this.$keyword.val();
-		
-		if (search) {
-			url += encodeURIComponent(search);
-		}
-		
-		return url;
-	};
 
 	function NotifyFriendBtn( $el ){
 		this.$el			= $el;
@@ -880,14 +707,9 @@ function HashTable(obj)
 			new Notification($('#user-notification'));
 		}		
 		$(".timeago").timeago();
-		$('.search-form').each(function(){
-			new SearchBtn( $(this) );
-		});
+		
 		$('.notify-actions').each(function(){
 			new NotifyFriendBtn( $(this) );
-		});
-		$('.search-form').each(function(){
-			new SearchAutoComplete($(this));
 		});
 	});
 }(jQuery, document));

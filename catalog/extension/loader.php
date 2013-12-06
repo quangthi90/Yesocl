@@ -63,6 +63,14 @@ class ExtensionLoader
                 $parts[$index] = $param;
             }
         }
+
+        if ( count($params) == 0 ){
+            foreach ( $parts as $key => $data ) {
+                if ( preg_match('/^{/', $data) && preg_match('/}$/', $data) ){
+                    array_splice($parts, $key, 1);
+                }
+            }
+        }
         
         return HTTPS_SERVER . implode('/', $parts);
     }

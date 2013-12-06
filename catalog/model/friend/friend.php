@@ -209,7 +209,7 @@ class ModelFriendFriend extends Model {
             return array(
             	'status' => 2,
             	'href' => $this->extension->path('UnFriend', array(
-	                'user_slug' => $user->getSlug()
+	                'user_slug' => $user_ob->getSlug()
 	            ))
            	); 
         
