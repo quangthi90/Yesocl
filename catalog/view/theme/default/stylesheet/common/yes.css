@@ -2084,7 +2084,7 @@ ul.user_actions li:hover i{
 }
 .friend-item .friend-info {
   margin-left: 10px;
-  width: 222px;
+  max-width: 222px;
 }
 .friend-item .friend-info .friend-name {
   font-size: 15px;
@@ -2101,8 +2101,7 @@ ul.user_actions li:hover i{
 }
 .friend-item .friend-actions {
   position: absolute;
-  top: 17px;
-  bottom: 10px;
+  top: 30px;
   right: 10px;
   display: none;
 }
@@ -2289,9 +2288,9 @@ ul.user_actions li:hover i{
   min-width: 270px;
   max-width: 300px;
 }
-.search-container-2 .search-category .data-detail {
-  min-width: 45%;
-  max-width: 97%;
+.search-container-1 .search-category .friend-item {
+    max-width: 290px;
+    margin-right: 10px;
 }
 .search-category .data-detail:hover {
   background-color: #F7F7F7;
@@ -2307,6 +2306,38 @@ ul.user_actions li:hover i{
   float: left;
   max-width: 250px;
 }
+.search-category .friend-item {
+  opacity: 1;  
+  padding: 5px 5px 5px 5px;
+  margin: 0px 5px 2px 0px;
+  border-left: 1px solid #fff;
+  box-shadow: 0px 0px 0px 0px #ccc;
+  min-height: 52px;
+  width: 100%;
+}
+.search-category .friend-item .friend-actions {
+  top: 18px;
+  right: 15px;
+}
+.search-category .friend-item:hover {
+  background-color: #F7F7F7;
+}
+.search-category .friend-item .friend-img {
+  display: block;
+  height: 50px;
+  width: 50px;
+}
+.search-category .friend-item .friend-info .friend-name {
+  font-size: 13px;
+  display: block;
+  color: #4D4D4D;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.search-category .friend-item .friend-info .friend-name:hover {
+  color: #000;
+}
+
 .search-category .mCSB_scrollTools .mCSB_draggerRail {
   width: 6px;
   background: #f0f0f0;
