@@ -79,6 +79,8 @@ class ModelBranchPost extends Model {
 
 		if ( !empty($data['post_ids']) ){
 			$query['id'] = array('$in' => $data['post_ids']);
+		}elseif (isset($data['post_ids']) ){
+			return null;
 		}
 
 		$results = $this->dm->getRepository('Document\Branch\Post')
