@@ -63,6 +63,9 @@
 	position: relative;
 	border-bottom: 1px solid #f0f0f0;
 }
+.y-box-content .mCSB_container div:last-child {
+	margin-bottom: 18px;
+}
 .y-box-content .comment-item .yes-dropdown{
 	display: none;
 }
@@ -138,6 +141,7 @@
 }
 #comment-box .post_new .comment-action a.fl {
 	padding: 5px;
+	margin-left: 5px;
 }
 #comment-box .post_new .comment-action .btn-comment{
     margin-left: 10px;

@@ -25,11 +25,11 @@
 		</div>	
 		<form class="y-comment-reply post post_new comment-form">
 			<div class="txt_editor">
-				<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
+				<textarea class="post_input" placeholder="Your comment ..."></textarea>
 			</div>
 			<div class="comment-action"> 
-				<a class="fl comment-tool" href="#" title="Add photo">
-					<i class="icon-camera icon-2x"></i>
+				<a class="fl comment-tool" href="#" title="Advance comment">
+					<i class="icon-resize-full"></i>
 				</a>
 				<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
                 <div class="fr comment-press-enter">Press Enter to send  
@@ -75,7 +75,7 @@
 				<div class="clear"></div>
 				<div class="yes-dropdown option-dropdown">
 					<div class="dropdown">
-					   	<a class="dropdown-toggle" data-toggle="dropdown" title="Action">
+					   	<a class="dropdown-toggle" data-toggle="dropdown">
 					    	<i class="icon-reorder"></i>
 					   	</a>
 					   	<ul class="dropdown-menu">
