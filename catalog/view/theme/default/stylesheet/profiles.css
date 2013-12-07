@@ -312,6 +312,9 @@ textarea[name="summary"] {
     height: 20px;
     width: 132px;
 }
+#profiles-tabs-information .primary-email-btn {
+	cursor: pointer;
+}
 #profiles-tabs-information .bfh-datepicker.open > .bfh-datepicker-calendar{
 	position: relative;
 }
