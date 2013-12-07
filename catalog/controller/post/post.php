@@ -141,12 +141,35 @@ class ControllerPostPost extends Controller {
                 break;
             
             default:
+                $post = null;
                 break;
         }
-        
+
+        if ( $post ){
+            if ( $post->getUser()->getId() != $this->customer->getId() ){
+                $this->load->model('user/user');
+
+                if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
+                    $this->model_user_user->addNotification(
+                        $post->getUser()->getId(),
+                        $this->customer->getUser(),
+                        $this->config->get('common')['action']['like'],
+                        $post->getId(),
+                        $data['post_type']
+                    );
+                }else{
+                    
+                }
+            }
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok',
+                'like_count' => count($post->getLikerIds())
+            )));
+        }
+
         return $this->response->setOutput(json_encode(array(
-            'success' => 'ok',
-            'like_count' => count($post->getLikerIds())
+            'success' => 'not ok'
         )));
     }
 

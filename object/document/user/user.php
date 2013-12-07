@@ -75,6 +75,9 @@ Class User {
 	/** @MongoDB\Collection */
 	private $friendRequests;
 
+	/** @MongoDB\EmbedMany(targetDocument="Notification") */
+	private $notifications = array();
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -166,6 +169,26 @@ Class User {
 			}
 		}
 
+		return null;
+	}
+
+	
+
+	/**
+	 * Get Notification By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object notification
+	 * 		- null if not found
+	 */
+	public function getNotificationById( $notification_id ){
+		foreach ( $this->notifications as $notification ){
+			if ( $notification->getId() === $notification_id ){
+				return $notification;
+			}
+		}
+		
 		return null;
 	}
 
@@ -358,6 +381,18 @@ Class User {
 
 	public function getFriendRequests(){
 		return $this->friendRequests;
+	}
+
+	public function addNotification( Notification $notification ){
+		$this->notifications[] = $notification;
+	}
+
+	public function setNotifications( $notifications ){
+		$this->notifications = $notifications;
+	}
+
+	public function getNotifications(){
+		return $this->notifications;
 	}
 
 	/**

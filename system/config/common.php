@@ -12,4 +12,8 @@ $_['common']['type']['user'] 					= 'user';
 $_['common']['block']['limit']					= 6;
 
 $_['common']['image']['upload_cache']			= 'data/upload/';
+
+$_['common']['action']['like']					= 'like';
+$_['common']['action']['comment']				= 'comment';
+$_['common']['action']['tag']					= 'tag';
 ?>
