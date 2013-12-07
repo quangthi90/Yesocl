@@ -1,5 +1,4 @@
 {% block post_common_post_form_status_style %}
-<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block post_common_form_status %}
@@ -172,8 +171,6 @@
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
-<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
 {% endblock %}

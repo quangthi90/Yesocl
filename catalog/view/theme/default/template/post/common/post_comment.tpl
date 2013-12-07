@@ -28,8 +28,8 @@
 				<textarea class="post_input" placeholder="Your comment ..."></textarea>
 			</div>
 			<div class="comment-action"> 
-				<a class="fl comment-tool" href="#" title="Advance comment">
-					<i class="icon-resize-full"></i>
+				<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-popup" href="#" title="Advance comment">
+					<i class="icon-external-link"></i>
 				</a>
 				<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
                 <div class="fr comment-press-enter">Press Enter to send  
@@ -37,6 +37,29 @@
                 </div>				
 			</div>
 		</form>		
+	</div>
+	<div class="mfp-hide y-dlg-container" id="comment-advance-popup">
+		<div class="y-dlg">
+			<form autocomplete="off" class="form-status full-post">
+				<div class="dlg-title">
+			        <i class="icon-yes"></i> Advanced comment
+			    </div>
+			    <div class="dlg-content">
+			    	<div class="dlg-column fr" style="width:100%;">
+						<div class="alert alert-error top-warning hidden">Warning!!</div>
+				    	<div class="control-group">
+			    			<label class="control-label">Comment</label>
+					    	<div class="y-editor post-advance-content"></div>
+				    	</div>
+					</div>
+			    </div>
+			    <div class="dlg-footer">
+			    	<div class="controls">
+		                <button type="submit" class="btn btn-yes btn-post-advance">Post</button>
+		            </div>
+			    </div>		
+			</form>
+		</div>
 	</div>
 {% raw %}
 	<div id="item-template" class="hidden">
