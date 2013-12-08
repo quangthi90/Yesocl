@@ -418,10 +418,14 @@
     function AddComment( $el ){
         var that = this;
         this.$el            = $el;
+        
         this.$content       = $el.find('textarea');
         this.$comment_btn   = $el.find('.btn-comment');
         this.$press_enter_cb  = $el.find('.cb-press-enter'); 
-        
+
+        this.$content_advance = $('#comment-advance-popup').find('.post-advance-content');
+        this.$btn_advance   = $('#comment-advance-popup').find('.btn-post-advance');
+        console.log(this.$btn_advance.attr('class'));
         this.attachEvents();
     }
     AddComment.prototype.attachEvents = function(){
@@ -452,6 +456,28 @@
 
             return false;
         });
+
+        this.$btn_advance.click(function(e) {
+            if(that.$btn_advance.hasClass('disabled')) {
+                e.preventDefault();
+
+                return false;
+            }
+            
+            if(that.validate() == false){
+                return false;
+            }
+
+            that.url    = that.$el.attr('data-url');
+
+            that.data = {
+                content     : that.$content_advance.code()
+            };
+
+            that.submit(that.$btn_advance);
+
+            return false;
+        });
         
         this.$press_enter_cb.click(function(e) {
             if(that.$press_enter_cb.parent().hasClass('checked')){
@@ -469,7 +495,7 @@
                     return false;
                 }
 
-                if(that.validate() == false){
+                if(that.validate(true) == false){
                     return false;
                 }
 
@@ -539,8 +565,12 @@
             }
         });
     };
-    AddComment.prototype.validate = function(){
-        if(this.$content.val().length == 0){
+    AddComment.prototype.validate = function(is_advance){
+        if(is_advance == false && this.$content.val().length == 0){
+            return false;
+        }
+
+        if ( this.$content_advance.code().length == 0 ){
             return false;
         }
     };

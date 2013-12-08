@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/information.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/background.tpl' %}
 

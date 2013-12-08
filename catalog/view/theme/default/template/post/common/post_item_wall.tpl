@@ -1,4 +1,4 @@
-{% block post_common_post_block %}
+{% block post_common_post_item_wall %}
 	{% if post.type is defined %}
 		{% set post_type = post.type %}
 	{% endif %}
@@ -88,7 +88,4 @@
 			<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a> 
 		{% endif %}	
 	</div>
-{% endblock %}
-
-{% block post_common_post_block_javascript %}
 {% endblock %}

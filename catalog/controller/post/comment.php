@@ -196,7 +196,7 @@ class ControllerPostComment extends Controller {
                 break;
             
             default:
-                $lQueryComments = array();
+                $lQueryComments = null;
                 break;
         }
 
@@ -207,8 +207,14 @@ class ControllerPostComment extends Controller {
         $aUsers = array();
         $idCurrUserId = $this->customer->getId();
 
+        if ( $lQueryComments != null ){
+            $aQueryComments = $lQueryComments->toArray();
+        }else{
+            $aQueryComments = array();
+        }
+
         $aComments = $this->model_tool_object->formatListCommentsOfPost(
-            $lQueryComments->toArray(),
+            $aQueryComments,
             $aDatas['post_slug'],
             $aDatas['post_type']
         );

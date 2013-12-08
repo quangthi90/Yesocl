@@ -27,28 +27,8 @@ class ModelUserComment extends Model {
 		if ( $posts ){
 			$post = $posts->getPostBySlug( $data['post_slug'] );
 		}
-
-		$comments = array();
-
-		if ( $post ){
-			$query_comments = $post->getComments( true );
-			$total = count( $query_comments );
-
-			$start = ($data['page'] - 1) * $data['limit'];
-
-			if ( $start < 0 ){
-				$start = 0;
-			}
-			for ( $i = $start; $i < $total; $i++ ) {
-				if ( count($comments) == $data['limit'] ){
-					break;
-				}
-
-				$comments[] = $query_comments[$i];
-			}
-		}
 		
-		return $comments;
+		return $post->getComments( true );
 	}
 
 	public function getComment( $data = array() ){
