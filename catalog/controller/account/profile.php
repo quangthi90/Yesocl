@@ -13,6 +13,9 @@ class ControllerAccountProfile extends Controller {
 			$this->redirect( $this->extension->path('WelcomePage') );
 		}
 
+		// text
+		$this->data['text_self_employed'] = 'Self-employed';
+
 		$this->load->model('user/user');
 		$this->load->model('data/value');
 
@@ -93,19 +96,15 @@ class ControllerAccountProfile extends Controller {
 			if ( !$oExperLocation = $oExperience->getLocation() ){
 				$oExperLocation = new Location();
 			}
-
+			
 			$aExperiences[] = array(
 				'id' => $oExperience->getId(),
 				'title' => $oExperience->getTitle(),
 				'company' => $oExperience->getCompany(),
 				'location' => $oExperLocation->getLocation(),
 				'city_id' => $oExperLocation->getId(),
-				'started_month' => $oExperience->getStarted()->format('n'),
-				'ended_month' => $oExperience->getEnded()->format('n'),
-				'started_year' => $oExperience->getStarted()->format('Y'),
-				'ended_year' => $oExperience->getEnded()->format('Y'),
-				'started_text' => $oExperience->getStarted()->format('F Y'),
-				'ended_text' => $oExperience->getEnded()->format('F Y')
+				'started' => $oExperience->getStarted(),
+				'ended' => $oExperience->getEnded()
 			);
 		}
 
@@ -138,7 +137,7 @@ class ControllerAccountProfile extends Controller {
 			'phones' => $aPhones,
 			'sex' => $oUser->getMeta()->getSex(),
 			'sext' => $oUser->getMeta()->getSex() ? $this->language->get('text_male') : $this->language->get('text_female'),
-			'birthday' => $oMeta->getBirthday() ? $oMeta->getBirthday()->format('d/m/Y') : date('d/m/Y', time()),
+			'birthday' => $oMeta->getBirthday(),
 			'location' => $oUserLocation->getLocation(),
 			'cityid' => $oUserLocation->getCityId(),
 			'address' => $oUser->getMeta()->getAddress(),
@@ -153,6 +152,7 @@ class ControllerAccountProfile extends Controller {
 		// orther const
 		$this->data['current_year'] = date('Y');
 		$this->data['before_year'] = $this->data['current_year'] - 100;
+		$this->data['fulture_year'] = $this->data['current_year'] + 10;
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'profile' );

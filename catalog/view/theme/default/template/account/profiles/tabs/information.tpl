@@ -51,7 +51,7 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span2 offset1">Birthday</div>
-						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.birthdayt }}</span></div>
+						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.birthday|date('d/m/Y') }}</span></div>
 					</div>
 					<div class="row-fluid">
 						<div class="span2 offset1">Address</div>
@@ -111,7 +111,7 @@
 									<a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a>
 								</div>
 								{% endfor %}
-								<a class="btn btn-success btn-add emails-btn-add" href="#" data-index="{{ user.emails|length }}">
+								<a class="btn btn-add emails-btn-add" href="#" data-index="{{ user.emails|length }}">
 									<i class="icon-plus"></i> <i class="icon-envelope"></i>
 								</a>
 							</div>
@@ -134,7 +134,7 @@
 									<a class="btn btn-danger btn-remove phones-btn-remove" href="#"><i class="icon-trash"></i></a>
 								</div>
 								{% endfor %}
-								<a class="btn btn-success btn-add phones-btn-add" href="#" data-index="{{ user.phones|length }}">
+								<a class="btn btn-add phones-btn-add" href="#" data-index="{{ user.phones|length }}">
 									<i class="icon-plus"></i> <i class="icon-phone"></i>
 								</a>
 							</div>
@@ -156,10 +156,10 @@
 					</div>
 					<div class="row-fluid inputBirthday">
 						<div class="span2 offset1">Birthday</div>
-						<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="{{ user.birthday }}">
+						<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="{{ user.birthday|date('d/m/Y') }}">
 						  	<div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker">
 						    	<span class="add-on btn"><i class="icon-calendar"></i></span>
-						    	<input type="text" name="birthday" class="input-medium" value="{{ user.birthday }}" readonly />
+						    	<input type="text" name="birthday" class="input-medium" value="{{ user.birthday|date('d/m/Y') }}" readonly />
 						  	</div>
 						  	<div class="bfh-datepicker-calendar">
 						    	<table class="calendar table table-bordered">
@@ -259,7 +259,7 @@
 								<a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a>
 							</div>
 							{{ email_loop_end }}
-							<a class="btn btn-success btn-add emails-btn-add " href="#" data-index="${ Object.keys(emails).length }">
+							<a class="btn btn-add emails-btn-add " href="#" data-index="${ Object.keys(emails).length }">
 								<i class="icon-plus"></i> <i class="icon-envelope"></i>
 							</a>
 						</div>
@@ -285,7 +285,7 @@
 								<a class="btn btn-danger btn-remove phones-btn-remove" href="#"><i class="icon-trash"></i></a>
 							</div>
 							{{ phone_loop_end }}
-							<a class="btn btn-success btn-add phones-btn-add" href="#" data-index="${ Object.keys(phones).length }">
+							<a class="btn btn-add phones-btn-add" href="#" data-index="${ Object.keys(phones).length }">
 								<i class="icon-plus"></i> <i class="icon-phone"></i>
 							</a>
 						</div>

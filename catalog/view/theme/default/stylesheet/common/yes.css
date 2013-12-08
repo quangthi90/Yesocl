@@ -421,7 +421,7 @@ a.btn-link-circle:hover i {
   top: 0px; 
   left: -370px;   
   bottom: 0px;
-  z-index: 101;
+  z-index: 9999;
   color: #fff;
   text-align: center;     
   padding-bottom: 20px;
@@ -2365,14 +2365,21 @@ ul.user_actions li:hover i{
 .modal-body {
   max-height: 450px;
 }
+.modal-footer {
+  padding: 10px 15px;
+  background: #fff;
+}
 .modal-footer .btn {
   min-width: 90px;
+  padding: 2px 10px;
+  font-size: 12px;
+  outline: none;
 }
 .modal-header {
   padding: 5px 15px 5px 35px;
   border-bottom: 1px solid #BDBABA;
-  background: #059679 url("../../image/icon-y.png") no-repeat 10px 50%;
-  color: #fff;
+  background: #F7F7F7 url("../../image/icon-y.png") no-repeat 10px 46%;
+  color: #0e0e0e;
 }
 .modal-header .close {
   text-shadow: 0px 0px 0px transparent;
