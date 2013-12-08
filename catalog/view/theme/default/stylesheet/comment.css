@@ -63,8 +63,10 @@
 	position: relative;
 	border-bottom: 1px solid #f0f0f0;
 }
-.y-box-content .mCSB_container div:last-child {
-	margin-bottom: 18px;
+.y-box-content .mCSB_container > div.comment-item:nth-last-child(2) .dropdown-menu{
+	top: auto;
+	bottom: 100%;
+	right: 5px;
 }
 .y-box-content .comment-item .yes-dropdown{
 	display: none;
