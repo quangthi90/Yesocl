@@ -47,10 +47,10 @@ class ControllerFriendFriend extends Controller {
 			$user = $ob_user->formatToCache();
 
 			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-
 			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $ob_user, $curr_user );
-
 			$user['gender'] = $ob_user->getMeta()->getSex();
+			$user['added'] = $friend->getCreated();
+
 
 			$this->data['users'][$user['id']] = $user;
 			$this->data['friend_ids'][$ob_user->getId()] = $ob_user->getId();
@@ -75,7 +75,7 @@ class ControllerFriendFriend extends Controller {
 		$this->data['filter_type'] = $this->config->get('friend')['filter']['type'];
 
 		$recent_time = new DateTime('now');
-		date_add($recent_time, date_interval_create_from_date_string('7 days'));
+		date_sub($recent_time, date_interval_create_from_date_string('7 days'));
 		$this->data['recent_time'] = $recent_time;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {

@@ -25,6 +25,8 @@ class ModelUserUser extends Model {
 		if ( !empty($data['friend']) ){
 			$friend = new Friend();
 			$friend->setUser( $data['friend'] );
+			$this->dm->persist( $friend );
+			// var_dump($friend->getCreated()); exit;
 			$user->addFriend( $friend );
 		}
 
@@ -80,40 +82,6 @@ class ModelUserUser extends Model {
 		}
 
 		return null;
-	}
-
-	public function searchUserByKeyword( $data = array() ) {
-		if ( !isset( $data['keyword'] ) || empty( $data['keyword'] ) ) {
-			return array();
-		}
-
-		$query = $this->client->createSelect(
-    		array(
-				'mappedDocument' => 'Document\User\User',
-				)
-    	);
- 
-		$query_data = 'solrEmail_t:*' . $data['keyword'] . '* OR ';
-		$query_data .= 'solrFullname_t:*' . $data['keyword'] . '* OR ';
-		$query_data .= 'username_t:*' . $data['keyword'] . '* ';
-
-		if ( isset( $data['start'] ) ) {
-			$data['start'] = (int)$data['start'];
-		}else {
-			$data['start'] = 0;
-		}
-
-		if ( isset( $data['limit'] ) ) {
-			$data['limit'] = (int)$data['limit'];
-		}else {
-			$data['limit'] = 10;
-		}
-
-		$query->setQuery( $query_data );
-		$query->setRows( $data['limit'] );
-		$query->setStart( $data['start'] );
- 
-		return $this->client->execute( $query );
 	}
 
 	public function isExistEmail( $email, $user_id = '' ) {
