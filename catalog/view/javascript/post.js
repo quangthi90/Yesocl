@@ -728,6 +728,7 @@
         });
 
         $(document).bind('COMMENT_ADDED', function(e) {
+            $('.mfp-ready').trigger('click');
             $('.comment-item .comment-info').each(function(){
                 new LikeComment($(this));
             });
@@ -872,6 +873,7 @@
         });
 
         $(document).bind('COMMENT_ADDED', function(e) {
+            $('.mfp-ready').trigger('click');
             $('.comment-item .comment-info').each(function(){
                 new ShowCommentUsersLiked($(this));
             });
@@ -974,6 +976,7 @@
         });
 
         $(document).bind('COMMENT_ADDED', function(e) {
+            $('.mfp-ready').trigger('click');
             $('.comment-item .comment-info').each(function(){
                 new DeleteComment($(this));
             });
@@ -1018,6 +1021,7 @@
         });
 
         $(document).bind('COMMENT_ADDED', function(e) {
+            $('.mfp-ready').trigger('click');
             $('.comment-item .comment-info').each(function(){
                 new DeleteComment($(this));
             });

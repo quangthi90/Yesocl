@@ -74,8 +74,8 @@
 					<textarea class="post_input" placeholder="Your comment ..."></textarea>
 				</div>
 				<div class="comment-action"> 
-					<a class="fl comment-tool" href="#" title="Add photo">
-						<i class="icon-camera icon-2x"></i>
+					<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-popup" href="#" title="Advance comment">
+						<i class="icon-external-link"></i>
 					</a>
 					<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
 	                <div class="fr comment-press-enter">Press Enter to send  
