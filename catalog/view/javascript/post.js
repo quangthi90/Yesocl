@@ -425,7 +425,7 @@
 
         this.$content_advance = $('#comment-advance-popup').find('.post-advance-content');
         this.$btn_advance   = $('#comment-advance-popup').find('.btn-post-advance');
-        console.log(this.$btn_advance.attr('class'));
+        
         this.attachEvents();
     }
     AddComment.prototype.attachEvents = function(){
@@ -452,6 +452,8 @@
                 content     : that.$content.val()
             };
 
+            $('#comment-form').removeClass('edit-comment');
+
             that.submit(that.$comment_btn);
 
             return false;
@@ -473,6 +475,8 @@
             that.data = {
                 content     : that.$content_advance.code()
             };
+
+            $('#comment-form').removeClass('edit-comment');
 
             that.submit(that.$btn_advance);
 
@@ -554,6 +558,7 @@
                 $('#post-detail-comment-number').html(comment_count);
 
                 that.$content.val('');
+                that.$content_advance.code('');
                 $('#comment-box').find('.counter').html( comment_count );                
                 $comment_btn.parent().find('.number-counter').html( comment_count );
                 $comment_btn.attr('data-original-title', comment_count);
@@ -965,6 +970,50 @@
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new DeleteComment($(this));
+            });
+        });
+
+        $(document).bind('COMMENT_ADDED', function(e) {
+            $('.comment-item .comment-info').each(function(){
+                new DeleteComment($(this));
+            });
+        });
+    });
+}(jQuery, document));
+
+// Edit a comment
+(function($, document, undefined) {
+    function EditComment( $el ){
+        var that = this;
+
+        this.$el            = $el;
+        this.url            = $el.data('url-edit');
+        this.comment_id     = $el.data('id');
+
+        this.$item          = $el.parents('.comment-item');
+        this.content        = this.$item.find('.comment-content');
+        this.$btnEdit       = this.$item.find('.edit-comment-btn');
+        
+        this.attachEvents();
+    }
+    EditComment.prototype.attachEvents = function(){
+        var that = this;
+
+        this.$btnEdit.click(function(e) {
+            $('#comment-form').addClass('edit-comment').data('url-edit', that.url);
+            
+            $('#comment-advance-popup').find('.post-advance-content').code(that.content.html());
+        });
+    };
+
+    $(function(){
+        $('.comment-item .comment-info').each(function(){
+            new EditComment($(this));
+        });
+
+        $(document).bind('SHOWN_COMMENT_LIST', function(e) {
+            $('.comment-item .comment-info').each(function(){
+                new EditComment($(this));
             });
         });
 
