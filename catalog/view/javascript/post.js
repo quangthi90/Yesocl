@@ -425,7 +425,6 @@
 
         this.$content_advance = $('#comment-advance-popup').find('.post-advance-content');
         this.$btn_advance   = $('#comment-advance-popup').find('.btn-post-advance');
-        console.log(this.$btn_advance.attr('class'));
         this.attachEvents();
     }
     AddComment.prototype.attachEvents = function(){

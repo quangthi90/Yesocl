@@ -4,7 +4,7 @@
 
 {% block post_common_comment_post_detail %}
 	<div id="comment-wrapper" class="y-box">
-		<div class="comment-container" id="comment-box"> 
+		<div class="comment-container"> 
 			<div class="y-box-header">
 				Comment box (<span class="counter"><d>{{ comments|length }}<d></span>)
 				<div class="y-box-expand">
@@ -151,9 +151,4 @@
 
 {% block post_common_comment_post_detail_javascript %}
 <script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
-<script type="text/javascript">
-$(function(){
-
-});
-</script>
 {% endblock %}
