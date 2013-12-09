@@ -466,7 +466,7 @@
     });
 }(jQuery, document));
 
-// Submit new comment
+// Submit edit or add new comment
 (function($, document, undefined) {
     // Submit new comment
     function AddComment( $el ){
@@ -497,13 +497,12 @@
             if(!that.validate(false)){
                 return false;
             }
+
             that.url    = that.$el.attr('data-url');
 
             that.data = {
                 content     : that.$content.val()
             };
-
-            $('#comment-form').removeClass('edit-comment');
 
             that.submit(that.$comment_btn);
 
@@ -520,13 +519,15 @@
                 return false;
             }
 
-            that.url    = that.$el.attr('data-url');
+            if ( that.$el.hasClass('edit-comment') ){
+                that.url = that.$el.data('url-edit');
+            }else{
+                that.url    = that.$el.attr('data-url');
+            }
 
             that.data = {
                 content     : that.$content_advance.code()
             };
-
-            $('#comment-form').removeClass('edit-comment');
 
             that.submit(that.$btn_advance);
 
@@ -577,86 +578,103 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                var commentBox = $('#comment-box');
-                var commentBody = $('.comment-body').first();
-                commentBody.mCustomScrollbar('destroy');
-                var $curr_item = $('.open-comment.disabled').parents('.post');
-                var $comment_btn = $curr_item.find('.open-comment');
-                var comments = $comment_btn.data('comments');
-                
-                if (comments == undefined){
-                    comments = new HashTable();
-                }
-                comments.setItem(data.comment.id, data.comment);
-                $comment_btn.data('comments', comments);
-
-                htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();                
-                $('#add-more-item').before(htmlOutput);
-                commentBody.find('.comment-meta').width(commentBody.width() - 97);
-                
-                //Scroll to last post which have just been added 
-                commentBody.makeCustomScroll(false);
-                setTimeout(function() {   
-                    commentBody.mCustomScrollbar("scrollTo", "bottom");
-                }, 500);      
-
-                //Popup advanced comment:
-                commentBox.find('.link-popup').magnificPopup({
-                    type:'inline',
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'mfp-fade'
-                });
-                //Zoom image in comment:
-                commentBox.find('.comment-content img').each(function(){
-                    if($(this).parent('a').length == 0){
-                        var imgWrapper = $("<a class='img-wrapper'></a>");
-                        imgWrapper.attr('href', $(this).attr('src'));
-                        imgWrapper.attr('title', $(this).attr('alt'));
-                        $(this).wrap(imgWrapper);
-                    }         
-                });
-                commentBox.find('.comment-content').magnificPopup({
-                    delegate: 'a',
-                    type: 'image',
-                    closeOnContentClick: false,
-                    closeBtnInside: false,
-                    mainClass: 'mfp-with-zoom mfp-img-mobile',
-                    image: {
-                        verticalFit: true,
-                        titleSrc: function(item) {
-                            return item.el.attr('title');
-                        }
-                    },
-                    gallery: {
-                        enabled: true
-                    },
-                    zoom: {
-                        enabled: true,
-                        duration: 300, 
-                        opener: function(element) {
-                            return element.find('img');
-                        }
+                if ( that.$el.hasClass('edit-comment') ){
+                    var comments = $('.open-comment.disabled').data('comments');
+                    if (comments == undefined){
+                        comments = new HashTable();
                     }
-                });        
-                
-                var comment_count = 0;
-                commentBox.find('.comment-item').each(function(){
-                    comment_count++;
-                });
-                // only post detail
-                $('#post-detail-comment-number').html(comment_count);
 
-                that.$content.val('');
-                that.$content_advance.code('');
-                commentBox.find('.counter').html( comment_count );                
-                $comment_btn.parent().find('.number-counter').html( comment_count );
-                $comment_btn.attr('data-original-title', comment_count);
-                $curr_item.find('.post_header .post_cm d').html( comment_count );
-                
-                $('.mfp-ready').trigger('click');
+                    comments.setItem(data.comment.id, data.comment);
+                    $('.open-comment.disabled').data('comments', comments);
+
+                    htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
+                    var $curr_item = $('.comment-body').find('.comment-info[data-id=\'' + data.comment.id + '\']').parents('.comment-item');
+                    $curr_item.after(htmlOutput);
+                    $curr_item.remove();
+
+                    that.$el.removeClass('edit-comment');
+                }else{
+                    var commentBox = $('#comment-box');
+                    var commentBody = $('.comment-body').first();
+                    commentBody.mCustomScrollbar('destroy');
+                    var $curr_item = $('.open-comment.disabled').parents('.post');
+                    var $comment_btn = $curr_item.find('.open-comment');
+                    var comments = $comment_btn.data('comments');
+                    
+                    if (comments == undefined){
+                        comments = new HashTable();
+                    }
+                    comments.setItem(data.comment.id, data.comment);
+                    $comment_btn.data('comments', comments);
+
+                    htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
+                    $('#add-more-item').before(htmlOutput);
+                    commentBody.find('.comment-meta').width(commentBody.width() - 97);
+                    
+                    //Scroll to last post which have just been added 
+                    commentBody.makeCustomScroll(false);
+                    setTimeout(function() {   
+                        commentBody.mCustomScrollbar("scrollTo", "bottom");
+                    }, 500);      
+
+                    //Popup advanced comment:
+                    commentBox.find('.link-popup').magnificPopup({
+                        type:'inline',
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'mfp-fade'
+                    });
+                    //Zoom image in comment:
+                    commentBox.find('.comment-content img').each(function(){
+                        if($(this).parent('a').length == 0){
+                            var imgWrapper = $("<a class='img-wrapper'></a>");
+                            imgWrapper.attr('href', $(this).attr('src'));
+                            imgWrapper.attr('title', $(this).attr('alt'));
+                            $(this).wrap(imgWrapper);
+                        }         
+                    });
+                    commentBox.find('.comment-content').magnificPopup({
+                        delegate: 'a',
+                        type: 'image',
+                        closeOnContentClick: false,
+                        closeBtnInside: false,
+                        mainClass: 'mfp-with-zoom mfp-img-mobile',
+                        image: {
+                            verticalFit: true,
+                            titleSrc: function(item) {
+                                return item.el.attr('title');
+                            }
+                        },
+                        gallery: {
+                            enabled: true
+                        },
+                        zoom: {
+                            enabled: true,
+                            duration: 300, 
+                            opener: function(element) {
+                                return element.find('img');
+                            }
+                        }
+                    });        
+                    
+                    var comment_count = 0;
+                    commentBox.find('.comment-item').each(function(){
+                        comment_count++;
+                    });
+                    // only post detail
+                    $('#post-detail-comment-number').html(comment_count);
+
+                    that.$content.val('');
+                    that.$content_advance.code('');
+                    commentBox.find('.counter').html( comment_count );                
+                    $comment_btn.parent().find('.number-counter').html( comment_count );
+                    $comment_btn.attr('data-original-title', comment_count);
+                    $curr_item.find('.post_header .post_cm d').html( comment_count );
+                }
+
                 $('.timeago').timeago();
                 $(document).trigger('COMMENT_ADDED'); 
+                $('.mfp-ready').trigger('click');
             }
         });
     };

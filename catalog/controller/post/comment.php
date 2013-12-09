@@ -97,6 +97,83 @@ class ControllerPostComment extends Controller {
         )));
     }
 
+    public function editComment(){
+        if ( !$this->customer->isLogged() ) {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: user not login'
+            )));
+        }
+
+        if ( empty($this->request->get['post_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug is empty'
+            )));
+        }
+
+        if ( empty($this->request->get['post_type']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type is empty'
+            )));
+        }
+
+        if ( empty($this->request->post['content']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: content is empty'
+            )));
+        }
+
+        if ( empty($this->request->get['comment_id']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug is empty'
+            )));
+        }
+
+        if ( $this->validate() ) {
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
+            $aDatas['content'] = $this->request->post['content'];
+        }else {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: validate false'
+            )));
+        }
+        
+        switch ($aDatas['post_type']) {
+            case $this->config->get('post')['type']['branch']:
+                $this->load->model('branch/comment');
+                $oComment = $this->model_branch_comment->editComment( $this->request->get['comment_id'], $aDatas );
+                break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/comment');
+                $oComment = $this->model_user_comment->editComment( $this->request->get['comment_id'], $aDatas );
+                break;
+            
+            default:
+                $oComment = null;
+                break;
+        }
+        
+        if ( !$oComment ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: add comment have error'
+            )));
+        }
+
+        $this->load->model('tool/object');
+
+        $aComment = $this->model_tool_object->formatListCommentsOfPost(
+            $oComment,
+            $aDatas['post_slug'],
+            $aDatas['post_type']
+        );
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'comment' => $aComment
+        )));
+    }    
+
     public function deleteComment(){
         if ( !$this->customer->isLogged() ) {
             return $this->response->setOutput(json_encode(array(

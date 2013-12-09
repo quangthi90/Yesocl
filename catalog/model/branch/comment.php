@@ -123,15 +123,21 @@ class ModelBranchComment extends Model {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		$likerIds = $comment->getLikerIds();
+		if ( !empty($data['likerId']) ){
+			$likerIds = $comment->getLikerIds();
 
-		$key = array_search( $data['likerId'], $likerIds );
-		
-		if ( !$likerIds || $key === false ){
-			$comment->addLikerId( $data['likerId'] );
-		}else{
-			unset($likerIds[$key]);
-			$comment->setLikerIds( $likerIds );
+			$key = array_search( $data['likerId'], $likerIds );
+			
+			if ( !$likerIds || $key === false ){
+				$comment->addLikerId( $data['likerId'] );
+			}else{
+				unset($likerIds[$key]);
+				$comment->setLikerIds( $likerIds );
+			}
+		}
+
+		if ( !empty($data['content']) ){
+			$comment->setContent($data['content']);
 		}
 
 		$this->dm->flush();
