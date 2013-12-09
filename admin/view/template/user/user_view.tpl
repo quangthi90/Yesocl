@@ -268,9 +268,12 @@
                           <?php } ?>
                           </select>
                           <?php echo $text_to; ?>
+                          <?php if ($experience['current']) { ?>
+                          <?php echo $text_now; ?>
+                          <?php }else { ?>
                           <?php echo $text_month; ?>
                           <select disabled="disabled" class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" >
-                    <?php for ($i = 1 ; $i < 13; $i++) { ?>
+                          <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
@@ -280,6 +283,7 @@
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
+                          <?php } ?>
                         </div>
                 </div>
               </div>
@@ -287,6 +291,12 @@
                 <div class="span4">
                   <div class="span3"><?php echo $entry_description; ?></div>
                   <div class="span9"><textarea disabled="disabled" class="description input-xxlarge" type="text" name="background[experiences][<?php echo $key; ?>][description]"><?php echo $experience['description']; ?></textarea></div>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span4">
+                  <div class="span3"><?php echo $entry_self_employed; ?></div>
+                  <div class="span9"><select disabled="disabled" class="self_employed input-medium" name="background[experiences][<?php echo $key; ?>][self_employed]"><?php if ($experience['self_employed']) { ?><option value="1" selected="selected"><?php echo $text_yes; ?></option><option value="0"><?php echo $text_no; ?></option><?php }else { ?><option value="1"><?php echo $text_yes; ?></option><option value="0" selected="selected"><?php echo $text_no; ?></option><?php } ?></select></div>
                 </div>
               </div>
             </td>

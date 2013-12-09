@@ -18,7 +18,7 @@ textarea[name="summary"] {
 	margin-right: 10px;
 }
 .profiles-tabs .btn-remove:hover i {
-	color: #FFF;
+	color: #9E0303;
 	font-weight: normal;
 }
 .profiles-tabs .btn-add {
@@ -28,7 +28,7 @@ textarea[name="summary"] {
 	font-size: 10px;
 }
 .profiles-tabs .btn-add:hover i {
-	color: #FFF;
+	color: #009B77;
 	font-weight: normal;
 }
 .profile-content-set {
@@ -143,14 +143,30 @@ textarea[name="summary"] {
 }
 .profiles-tabs-item1-label {
 	font-weight: bold;
-	color: #0C660F;
+	color: #7A7A7A;
 	margin-bottom: 10px;
+	font-size: 12px;
 }
 .profiles-tabs-value {
-	color: #000;
+	color: #0e0e0e;
+	font-size: 13px;
 }
 .profiles-tabs-value  .profiles-tabs-value-item {
-	padding: 2px 0px;	
+	padding: 2px 0px;
+	color: #797777;
+	font-size: 12px;
+}
+.profiles-tabs-value .profiles-tabs-value-item:first-child {
+	font-weight: bold;
+	color: #363636;
+	font-size: 13px;
+}
+.profiles-tabs-value .profiles-tabs-value-item.check-self-employed {
+	color: #646464;
+}
+.profiles-tabs-value .profiles-tabs-value-item.check-self-employed i {
+	color: #0e0e0e;
+	margin-right: 5px;
 }
 .profiles-tabs-item1-content {
 	margin-bottom: 10px;
@@ -160,6 +176,14 @@ textarea[name="summary"] {
 }
 .profiles-tabs-item1-content input {
 	margin-bottom: 0px;
+}
+.profiles-tabs-item1-content .profiles-btn-edit, 
+.profiles-tabs-item1-content .profiles-btn-remove {
+	display: none;
+}
+.profiles-tabs-item1-content:hover .profiles-btn-edit, 
+.profiles-tabs-item1-content:hover .profiles-btn-remove {
+	display: inline-block;
 }
 .profiles-form-add {
 	margin-bottom: 10px;
@@ -255,6 +279,44 @@ textarea[name="summary"] {
 }
 #profiles-tabs-background-skill .profiles-btn-remove:hover i {
 	color: rgb(133, 19, 19);
+}
+.profiles-tabs-main-body .time-from {
+    margin-right: 10px;
+    display: inline-block;
+}
+.profiles-tabs-main-body .time-to {
+    margin-left:  10px;
+    display: inline-block;
+}
+.profiles-tabs-main-body .time-to .specified-time {
+    margin-right: 5px;
+    display: inline-block;
+}
+.profiles-tabs-main-body .time-to .present {
+    margin-left: 0px;	
+    display: inline-block;
+}
+.profiles-tabs-main-body .time-to .present label {
+	display: inline-block;
+}
+.profiles-tabs-main-body .time-to .present input {
+	vertical-align: top;
+}
+.profiles-tabs-main-body .experience-item.current .profiles-tabs-item1-content{
+	border-left: 2px solid #009B77;
+}
+.profiles-tabs-main-body .education-item.current .profiles-tabs-item1-content{
+	border-left: 2px solid #009B77;
+}
+#profiles-tabs-information input[name="birthday"] {
+    height: 20px;
+    width: 132px;
+}
+#profiles-tabs-information .primary-email-btn {
+	cursor: pointer;
+}
+#profiles-tabs-information .bfh-datepicker.open > .bfh-datepicker-calendar{
+	position: relative;
 }
 
 /* Custom Scrollbar */

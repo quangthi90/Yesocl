@@ -124,7 +124,7 @@ class ModelUserBackground extends Model {
 		}
 
 		if ( empty($data['ended_month']) ) {
-			return false;
+			//return false;
 		}
 
 		if ( empty($data['started_year']) ) {
@@ -132,7 +132,7 @@ class ModelUserBackground extends Model {
 		}
 
 		if ( empty($data['ended_year']) ) {
-			return false;
+			//return false;
 		}
 
 		if ( empty($data['title']) ) {
@@ -141,6 +141,10 @@ class ModelUserBackground extends Model {
 
 		if ( empty($data['company']) ) {
 			return false;
+		}
+
+		if ( empty($data['self_employed']) ) {
+			$data['self_employed'] = 0;
 		}
 
 		if ( empty($data['location']) ) {
@@ -152,12 +156,17 @@ class ModelUserBackground extends Model {
 		$started->setDate( $data['started_year'], $data['started_month'], 1 );
 		$experience->setStarted( $started );
 
-		$ended = new \Datetime();
-		$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		if (!empty($data['current']) && $data['current']) {
+			$ended = null;
+		}else {
+			$ended = new \Datetime();
+			$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		}
 		$experience->setEnded( $ended );
 
 		$experience->setTitle( $data['title'] );
 		$experience->setCompany( $data['company'] );
+		$experience->setSelfEmployed( $data['self_employed'] );
 
 		$location = new Location();
 		$location->setLocation( trim( $data['location'] ) );
@@ -201,7 +210,7 @@ class ModelUserBackground extends Model {
 		}
 
 		if ( empty($data['ended_month']) ) {
-			return false;
+			//return false;
 		}
 
 		if ( empty($data['started_year']) ) {
@@ -209,7 +218,7 @@ class ModelUserBackground extends Model {
 		}
 
 		if ( empty($data['ended_year']) ) {
-			return false;
+			//return false;
 		}
 
 		if ( empty($data['title']) ) {
@@ -218,6 +227,14 @@ class ModelUserBackground extends Model {
 
 		if ( empty($data['company']) ) {
 			return false;
+		}
+
+		if ( empty($data['self_employed']) ) {
+			$data['self_employed'] = 0;
+		}
+
+		if ( empty($data['current']) ) {
+			$data['current'] = 0;
 		}
 
 		if ( empty($data['location']) ) {
@@ -230,12 +247,17 @@ class ModelUserBackground extends Model {
 		$started->setDate( $data['started_year'], $data['started_month'], 1 );
 		$experience->setStarted( $started );
 
-		$ended = new \Datetime();
-		$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		if (!empty($data['current']) && $data['current']) {
+			$ended = null;
+		}else {
+			$ended = new \Datetime();
+			$ended->setDate( $data['ended_year'], $data['ended_month'], 1 );
+		}
 		$experience->setEnded( $ended );
 
 		$experience->setTitle( $data['title'] );
 		$experience->setCompany( $data['company'] );
+		$experience->setSelfEmployed( $data['self_employed'] );
 
 		$location = new Location();
 		$location->setLocation( trim( $data['location'] ) );

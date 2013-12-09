@@ -119,6 +119,8 @@
                 return false;
             }
 
+            $(this).addClass('show-liked-list');
+
             that.submit(that.$el);
 
             return false;
@@ -161,10 +163,12 @@
                         title: "Who liked this post",
                         onEscape: function(){
                             bootbox.hideAll();
+                            $('.show-liked-list').removeClass('show-liked-list');
                         }
                     });
                     $('.modal-backdrop').on('click', function(){
                        bootbox.hideAll();
+                       $('.show-liked-list').removeClass('show-liked-list');
                     });
 
                     $(document).trigger('FRIEND_ACTION', [false]);
@@ -445,6 +449,13 @@
             }
 
             var $curr_post = $('.open-comment.disabled');
+
+            if ( $curr_post.attr('class') == undefined ){
+                var users = $('.show-liked-list').data('users');
+                users[id].fr_status = status;
+                $('.show-liked-list').data('users', users);
+                return;
+            }
 
             var comments = $curr_post.data('comments');
 
