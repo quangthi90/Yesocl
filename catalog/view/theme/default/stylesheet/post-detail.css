@@ -42,7 +42,7 @@
     overflow-x: auto;
     overflow-y: hidden;
 }
-#comment-wrapper {
+.comment-wrapper {
     position: absolute;
     right: -99999px;
     top: 0px;
@@ -164,28 +164,28 @@
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
 }
-#comment-wrapper .comment-form {
+.comment-wrapper .comment-form {
     position: absolute;
     bottom: 0px;
     left: 0px;
     right: 0px;
 }
-#comment-wrapper .comment-body {
+.comment-wrapper .comment-body {
     border-left: none;
 }
-#comment-wrapper .comment-form .txt_editor{
+.comment-wrapper .comment-form .txt_editor{
     border-bottom: 1px solid #F7F7F7;
 }
-#comment-wrapper .comment-form .post_input{
+.comment-wrapper .comment-form .post_input{
     min-height: 45px;
     max-height: 45px;
     width: 97%;
 }
-#comment-wrapper .comment-form .comment-action{
+.comment-wrapper .comment-form .comment-action{
     height: 25px;
     padding: 3px 5px 2px 5px;
     overflow: hidden;
 }
-#comment-wrapper .comment-form .comment-action .btn {
+.comment-wrapper .comment-form .comment-action .btn {
     padding: 2px 15px;
 }

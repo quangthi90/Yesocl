@@ -3,7 +3,7 @@
 {% endblock %}
 
 {% block post_common_comment_post_detail %}
-	<div id="comment-wrapper" class="y-box">
+	<div id="comment-box" class="y-box comment-wrapper">
 		<div class="comment-container"> 
 			<div class="y-box-header">
 				Comment box (<span class="counter"><d>{{ comments|length }}<d></span>)
@@ -49,7 +49,7 @@
 			        </div>
 			        <div class="yes-dropdown option-dropdown">
 			            <div class="dropdown">
-			                <a class="dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Action"><i class="icon-reorder"></i></a>
+			                <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
 			                    <li class="un-like-btn{% if comment.is_liked == 0 %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
 			                    {% if comment.is_owner == true %}

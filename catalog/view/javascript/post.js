@@ -241,7 +241,6 @@
                 e.preventDefault();
                 return false;
             }
-            // $('#comment-box').find('.y-box-header .btn-close').trigger('click');
 
             if ( that.$el.data('comment-count') == 0 ){
                 var htmlOutput = '';
@@ -261,7 +260,7 @@
 
             return false;
         });
-        $('#comment-box').on('click', '.y-box-header .btn-close', function(){
+        $('#comment-box').on('click', '#btn-close', function(){
             that.hideCommentBox(that.$el);
         });        
         $('#overlay').click(function() {

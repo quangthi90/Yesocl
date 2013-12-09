@@ -547,8 +547,8 @@ function HashTable(obj)
 	    //Comment box:
 	    if(that.commentBox.length > 0) {
 	    	that.commentBox.width(that.main.width()/3); 
-	    	var expandBtn = that.commentBox.find('.btn-expand');
-	    	var restoreBtn = that.commentBox.find('.btn-restore');
+	    	var expandBtn = that.commentBox.find('#btn-expand');
+	    	var restoreBtn = that.commentBox.find('#btn-restore');
 	    	expandBtn.fadeIn();
 	    	restoreBtn.fadeOut();
 	    	expandBtn.on('click', function(e){
