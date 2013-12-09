@@ -482,14 +482,11 @@
         this.$comment_btn.click(function(e) {
             if(that.$comment_btn.hasClass('disabled')) {
                 e.preventDefault();
-
                 return false;
             }
-            
-            if(that.validate() == false){
+            if(!that.validate(false)){
                 return false;
             }
-
             that.url    = that.$el.attr('data-url');
 
             that.data = {
@@ -506,11 +503,10 @@
         this.$btn_advance.click(function(e) {
             if(that.$btn_advance.hasClass('disabled')) {
                 e.preventDefault();
-
                 return false;
             }
             
-            if(that.validate() == false){
+            if(!that.validate(true)){
                 return false;
             }
 
@@ -543,7 +539,7 @@
                     return false;
                 }
 
-                if(that.validate(true) == false){
+                if(!that.validate(false)){
                     return false;
                 }
 
@@ -616,13 +612,16 @@
         });
     };
     AddComment.prototype.validate = function(is_advance){
-        if(is_advance == false && this.$content.val().length == 0){
-            return false;
-        }
-
-        if ( this.$content_advance.code().length == 0 ){
-            return false;
-        }
+        if(is_advance) {
+            if (this.$content_advance.code().length == 0 ){
+                return false;
+            }
+        }else {
+            if(this.$content.val().length == 0){
+                return false;
+            }
+        }        
+        return true;
     };
     AddComment.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
@@ -1059,12 +1058,6 @@
         $(document).bind('SHOWN_COMMENT_LIST', function(e) {
             $('.comment-item .comment-info').each(function(){
                 new EditComment($(this));
-            });
-        });
-
-        $(document).bind('COMMENT_ADDED', function(e) {
-            $('.comment-item .comment-info').each(function(){
-                new DeleteComment($(this));
             });
         });
     });
