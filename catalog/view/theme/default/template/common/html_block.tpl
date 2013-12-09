@@ -1,6 +1,6 @@
 {# -- Comment -- #}
 {% block common_html_block_comment_quick_form %}
-	<form class="y-comment-reply post post_new comment-form" id="comment-form">
+	<form class="y-comment-reply post post_new comment-form" id="comment-form"{% if add_comment_url is defined %} data-url="{{ add_comment_url }}"{% endif %}>
 		<div class="txt_editor">
 			<textarea class="post_input" placeholder="Your comment ..."></textarea>
 		</div>
@@ -90,7 +90,7 @@
 						     	{{if is_owner == true }}
 						     	<li class="divider"></li>
 							    <li class="edit-comment-btn">
-							     	<a class="comment-tool link-popup" href="#" data-mfp-src="#comment-advance-popup"><i class="icon-edit"></i>Edit</a>
+							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-popup"><i class="icon-edit"></i>Edit</a>
 						     	</li>
 						     	<li class="divider"></li>
 							    <li class="delete-comment-btn">
