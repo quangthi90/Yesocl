@@ -588,13 +588,52 @@
                 commentBody.makeCustomScroll(false);
                 setTimeout(function() {   
                     commentBody.mCustomScrollbar("scrollTo", "bottom");
-                }, 500);                
+                }, 500);      
+
+                //Popup advanced comment:
+                commentBox.find('.link-popup').magnificPopup({
+                    type:'inline',
+                    midClick: true,
+                    removalDelay: 300,
+                    mainClass: 'mfp-fade'
+                });
+                //Zoom image in comment:
+                commentBox.find('.comment-content img').each(function(){
+                    if($(this).parent('a').length == 0){
+                        var imgWrapper = $("<a class='img-wrapper'></a>");
+                        imgWrapper.attr('href', $(this).attr('src'));
+                        imgWrapper.attr('title', $(this).attr('alt'));
+                        $(this).wrap(imgWrapper);
+                    }         
+                });
+                commentBox.find('.comment-content').magnificPopup({
+                    delegate: 'a',
+                    type: 'image',
+                    closeOnContentClick: false,
+                    closeBtnInside: false,
+                    mainClass: 'mfp-with-zoom mfp-img-mobile',
+                    image: {
+                        verticalFit: true,
+                        titleSrc: function(item) {
+                            return item.el.attr('title');
+                        }
+                    },
+                    gallery: {
+                        enabled: true
+                    },
+                    zoom: {
+                        enabled: true,
+                        duration: 300, 
+                        opener: function(element) {
+                            return element.find('img');
+                        }
+                    }
+                });        
                 
                 var comment_count = 0;
                 commentBox.find('.comment-item').each(function(){
                     comment_count++;
                 });
-
                 // only post detail
                 $('#post-detail-comment-number').html(comment_count);
 
@@ -1045,7 +1084,11 @@
 
         this.$btnEdit.click(function(e) {
             $('#comment-form').addClass('edit-comment').data('url-edit', that.url);
-            
+            that.content.find('img').each(function(){
+                if($(this).parent().is('a.img-wrapper')){
+                    $(this).unwrap();
+                }
+            });            
             $('#comment-advance-popup').find('.post-advance-content').code(that.content.html());
         });
     };
