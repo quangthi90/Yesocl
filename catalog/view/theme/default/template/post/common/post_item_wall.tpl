@@ -12,13 +12,17 @@
                		<li class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
                         <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
                     </li>
-                    <!--li>
+                    {% if post.is_edit is defined and post.is_edit == true %}
+                    <li>
                         <a href="#"><i class="icon-edit"></i>Edit</a>
                     </li>
+                    {% endif %}
+                    {% if post.is_del is defined and post.is_del == true %}
                     <li class="divider"></li>
                     <li>
                         <a href="#"><i class="icon-trash"></i>Delete</a>
-                    </li-->
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

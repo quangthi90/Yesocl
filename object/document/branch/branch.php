@@ -38,6 +38,11 @@ Class Branch {
 	/** @MongoDB\Int */
 	private $order;
 
+    /** 
+	 * @SOLR\Field(type="text")
+	 */
+	private $type;
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -196,5 +201,13 @@ Class Branch {
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function setType( $type ){
+		$this->type = $type;
+	}
+
+	public function getType(){
+		return $this->type;
 	}
 }
