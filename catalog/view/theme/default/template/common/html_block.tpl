@@ -174,13 +174,13 @@
 		               		<li class="unlike-post hidden">
 		                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
 		                    </li>
-		                    <!--li>
+		                    <li>
 		                        <a href="#"><i class="icon-edit"></i>Edit</a>
 		                    </li>
 		                    <li class="divider"></li>
 		                    <li>
 		                        <a href="#"><i class="icon-trash"></i>Delete</a>
-		                    </li-->
+		                    </li>
 		                </ul>
 		            </div>
 		        </div>

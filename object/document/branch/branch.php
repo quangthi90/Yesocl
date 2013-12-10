@@ -1,6 +1,7 @@
 <?php
 namespace Document\Branch;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** @MongoDB\Document(collection="branch") */
 Class Branch {
