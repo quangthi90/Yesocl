@@ -1009,11 +1009,28 @@
         this.$btnDelete.click(function(e) {
             if(that.$btnDelete.hasClass('disabled')) {
                 e.preventDefault();
-
                 return false;
             }
-
-            that.submit(that.$btnDelete.find('a'));
+            bootbox.dialog({
+                title: "Confirm",
+                message: "Are you sure you want to delete this comment ?",             
+                buttons: 
+                {
+                    cancel: {
+                        label: "Cancel",
+                        className: "btn",
+                        callback: function() {                          
+                        }
+                    },
+                    oke: {
+                        label: "OK",
+                        className: "btn-primary",
+                        callback: function() {
+                            that.submit(that.$btnDelete.find('a'));
+                        }
+                    }
+                }
+            });
 
             return false;
         });
