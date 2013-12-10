@@ -33,4 +33,5 @@
 
 {% block post_common_comment_post_list_javascript %}
 <script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('comment.js') }}"></script>
 {% endblock %}
