@@ -669,10 +669,10 @@
                     $comment_btn.parent().find('.number-counter').html( comment_count );
                     $comment_btn.attr('data-original-title', comment_count);
                     $curr_item.find('.post_header .post_cm d').html( comment_count );
+                    $('.timeago').timeago();
+                    $(document).trigger('COMMENT_ADDED');
                 }
 
-                $('.timeago').timeago();
-                $(document).trigger('COMMENT_ADDED'); 
                 $('.mfp-ready').trigger('click');
             }
         });
