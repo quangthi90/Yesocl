@@ -61,35 +61,13 @@ class ControllerPostComment extends Controller {
             )));
         }
 
-        $aComment = $oComment->formatToCache();
+        $this->load->model('tool/object');
 
-        $this->load->model('user/user');
-        $this->load->model('tool/image');
-
-        $aUser = $this->model_user_user->getUser( $aComment['user_slug'] );
-
-        $aComment['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-
-        if ( $aUser && $aUser['username'] ){
-            $aComment['author'] = $aUser['username'];
-        }
-
-        $aComment['href_user'] = $this->extension->path('WallPage', array(
-            'user_slug' => $aUser['slug']
-        ));
-        $aComment['href_like'] = $this->extension->path('CommentLike', array(
-            'post_slug' => $aDatas['post_slug'],
-            'post_type' => $aDatas['post_type'],
-            'comment_id' => $aComment['id']
-        ));
-        $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-            'post_slug' => $aDatas['post_slug'],
-            'post_type' => $aDatas['post_type'],
-            'comment_id' => $aComment['id']
-        ));
-        $aComment['created'] = $aComment['created']->format( $this->language->get('date_format_full') );
-        $aComment['is_liked'] = false;
-        $aComment['is_owner'] = true;
+        $aComment = $this->model_tool_object->formatCommentOfPost(
+            $oComment,
+            $aDatas['post_slug'],
+            $aDatas['post_type']
+        );
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
@@ -162,7 +140,7 @@ class ControllerPostComment extends Controller {
 
         $this->load->model('tool/object');
 
-        $aComment = $this->model_tool_object->formatListCommentsOfPost(
+        $aComment = $this->model_tool_object->formatCommentOfPost(
             $oComment,
             $aDatas['post_slug'],
             $aDatas['post_type']
@@ -290,7 +268,7 @@ class ControllerPostComment extends Controller {
             $aQueryComments = array();
         }
 
-        $aComments = $this->model_tool_object->formatListCommentsOfPost(
+        $aComments = $this->model_tool_object->formatCommentOfPost(
             $aQueryComments,
             $aDatas['post_slug'],
             $aDatas['post_type']

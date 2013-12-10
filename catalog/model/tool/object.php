@@ -8,7 +8,7 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Comment formated
 	 */
-	public function formatListCommentsOfPost( $base_comment, $post_slug, $post_type ){
+	public function formatCommentOfPost( $base_comment, $post_slug, $post_type ){
 		$this->load->model('user/user');
         $this->load->model('tool/image');
 
@@ -112,6 +112,17 @@ class ModelToolObject extends Model
             'comment_id' => $comment['id']
         ));
         $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+            'post_slug' => $post_slug,
+            'post_type' => $post_type,
+            'comment_id' => $comment['id']
+        ));
+        $comment['href_edit'] = $this->extension->path('CommentEdit', array(
+            'post_slug' => $post_slug,
+            'post_type' => $post_type,
+            'comment_id' => $comment['id']
+        ));
+        
+        $comment['href_delete'] = $this->extension->path('CommentDelete', array(
             'post_slug' => $post_slug,
             'post_type' => $post_type,
             'comment_id' => $comment['id']

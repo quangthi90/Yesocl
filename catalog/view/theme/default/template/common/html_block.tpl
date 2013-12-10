@@ -5,7 +5,7 @@
 			<textarea class="post_input" placeholder="Your comment ..."></textarea>
 		</div>
 		<div class="comment-action"> 
-			<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-popup" href="#" title="Advance comment">
+			<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-add-popup" href="#" title="Advance comment">
 				<i class="icon-external-link"></i>
 			</a>
 			<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
@@ -17,7 +17,10 @@
 {% endblock %}
 
 {% block common_html_block_comment_advance_form %}
-	<div class="mfp-hide y-dlg-container" id="comment-advance-popup">
+	{% if advance_comment_id is not defined %}
+		{% set advance_comment_id = 'comment-advance-add-popup' %}
+	{% endif %}
+	<div class="mfp-hide y-dlg-container" id="{{ advance_comment_id }}">
 		<div class="y-dlg">
 			<form autocomplete="off" class="form-status full-post">
 				<div class="dlg-title">
@@ -90,7 +93,7 @@
 						     	{{if is_owner == true }}
 						     	<li class="divider"></li>
 							    <li class="edit-comment-btn">
-							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-popup"><i class="icon-edit"></i>Edit</a>
+							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
 						     	</li>
 						     	<li class="divider"></li>
 							    <li class="delete-comment-btn">

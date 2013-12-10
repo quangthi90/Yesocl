@@ -55,7 +55,7 @@
 			                    {% if comment.is_owner == true %}
 			                    <li class="divider"></li>
 			                    <li class="edit-comment-btn">
-							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-popup"><i class="icon-edit"></i>Edit</a>
+							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
 						     	</li>
 						     	<li class="divider"></li>
 							    <li class="delete-comment-btn">
@@ -73,6 +73,8 @@
 				{% set add_comment_url = path('CommentAdd', {post_slug: post.slug, post_type: post_type}) %}
 			{% endif %}
 			{{ block('common_html_block_comment_quick_form') }}
+			{{ block('common_html_block_comment_advance_form') }}
+			{% set advance_comment_id = 'comment-advance-edit-popup' %}
 			{{ block('common_html_block_comment_advance_form') }}
 		</div>
 	</div>
