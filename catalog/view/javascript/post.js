@@ -586,11 +586,10 @@
 
                     comments.setItem(data.comment.id, data.comment);
                     $('.open-comment.disabled').data('comments', comments);
-
-                    htmlOutput = $.tmpl( $('#item-template'), data.comment ).html();
+                    
                     var $curr_item = $('.comment-body').find('.comment-info[data-id=\'' + data.comment.id + '\']').parents('.comment-item');
-                    $curr_item.after(htmlOutput);
-                    $curr_item.remove();
+                    
+                    $curr_item.find('.comment-content').html( data.comment.content );
 
                     that.$el.removeClass('edit-comment');
                 }else{
