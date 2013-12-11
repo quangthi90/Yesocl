@@ -249,20 +249,27 @@ function HashTable(obj)
 		var that = this;
 		that.$tagElement.mentionsInput({
 			onDataRequest:function (mode, query, callback) {
-			  var data = [
-				{ id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:7, name:'kenneth@auchenberg.dk', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:8, name:'Pete Awesome Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-				{ id:9, name:'Kenneth Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
-			  ];
 
-			  data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
-			  callback.call(this, data);
+				//Demo data:
+				var img = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";
+				var data = [
+					{ id:1, name:'Thiet Ngo', 'avatar': img, 'type':'contact' },
+					{ id:2, name:'Quang Thi', 'avatar':img, 'type':'contact' },
+					{ id:3, name:'Bieu Nguyen', 'avatar':img, 'type':'contact' },
+					{ id:4, name:'Thiệt Ngô', 'avatar':img, 'type':'contact' },
+					{ id:5, name:'Lưu Quang Thi', 'avatar':img, 'type':'contact' },
+					{ id:6, name:'Nguyễn Biểu', 'avatar':img, 'type':'contact' }					
+				  ];
+				data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+				
+				//Always return data for autocomplete dropdown list:
+				callback.call(this, data);
+
+				//Example for Ajax call:
+				//$.getJSON('assets/data.json', function(responseData) {
+			    //    responseData = _.filter(responseData, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+			    //    callback.call(this, responseData);
+		      	//});
 			},
 			minChars: 1,
 			showAvatars: true

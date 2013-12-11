@@ -1183,11 +1183,9 @@ a.btn-notification:hover .notification-item-name > i {
   border:1px solid #ddd; 
   background-color: #fff;
 }
-.post_new  .txt_editor {
-  overflow: hidden;
+.post_new  .txt_editor {  
 }
 .txt_editor .post_input {
-  width: 98%;
   min-height: 50px;
   margin: 0px;
   border:none;

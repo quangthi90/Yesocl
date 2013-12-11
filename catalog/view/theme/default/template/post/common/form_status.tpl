@@ -6,7 +6,7 @@
 	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
-				<textarea class="post_input status-content" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
+				<textarea class="post_input status-content mention" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
 				<input type="hidden" name="img-url" class="img-url" value="" />
 			</div>
 			<div class="img-previewer-container">
