@@ -500,6 +500,7 @@ function HashTable(obj)
 	var df_CATEGORY_SINGLE = 'post-category';
 	var df_FRIEND_ACCOUNT = 'account-friend';
 	var df_SEARCH_PAGE 	= 'search-page';
+	var df_NOTIFICATION_PAGE 	= 'notification-page';
 
 	function HorizontalBlock(el) {	
 		this.rootContent = $("#y-content");
@@ -543,6 +544,7 @@ function HashTable(obj)
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
 			this.columns.css('opacity', '1');
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_POST_PER_COLUMN)) {
 			this.blocks = this.root.find('.feed-block');	
@@ -586,6 +588,7 @@ function HashTable(obj)
 			});
 			this.freeBlock.css('margin-right', marginBlock);
 			this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
 			this.blocks = this.root.find('.feed-block');	
@@ -619,6 +622,7 @@ function HashTable(obj)
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
 			this.columns.css('opacity', '1');
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
 			var heightBlockContent = this.heightMain - 42;
@@ -633,6 +637,7 @@ function HashTable(obj)
 				this.rootContent.css('right','220px');
 				listBlockItem.css('opacity','1');
 			}
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_SEARCH_PAGE)){
 			this.root.css('min-width', this.widthMain + 'px');
@@ -652,9 +657,15 @@ function HashTable(obj)
 				$(this).find('.friend-info').css('max-width', maxContentWidth + 'px');
 				$(this).makeCustomScroll(false);
 			});
-		}else {
+			this.rootContent.niceScroll();
+		}else if(this.root.hasClass(df_NOTIFICATION_PAGE)){
+			this.root.css('min-width', this.widthMain + 'px');
+			var heightBlockContent = this.heightMain - 42;
+			this.root.find('.block-content').height(heightBlockContent - 5);			
+			var ntfContainer = this.root.find('.ntf-container');
+			ntfContainer.height(heightBlockContent - 5 - 20).niceScroll();
 		}
-		this.rootContent.niceScroll();
+		
 	}
 	function BlockFeed(block, heightAverPost, widthAverPost) {
 		this.blockEle = block;

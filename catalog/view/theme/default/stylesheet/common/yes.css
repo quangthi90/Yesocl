@@ -720,6 +720,54 @@ a.btn-notification:hover .notification-item-name > i {
 .notification-item .mCSB_container {
   margin-right: 20px;
 }
+.notification-page {
+}
+.notification-page .ntf-container {
+  padding: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #fff;
+  height: 100%;
+}
+.notification-page .ntf-list {
+  -webkit-column-width: 420px;    
+  -moz-column-width: 420px;
+  column-width: 420px;
+  -moz-column-gap: 15px;    
+  -webkit-column-gap: 15px;
+  column-gap: 15px;
+  height: 100%;
+}
+.ntf-list > li {
+  margin: 3px 10px 3px 10px;
+}
+.ntf-list .ntf-date {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
+}
+.ntf-list .ntf-item {
+  padding: 3px 5px;
+  border-bottom: 1px dotted #f0f0f0;
+}
+.ntf-list .ntf-item > i {
+  font-size: 16px;
+  margin-right: 5px;
+}
+.ntf-list .ntf-item:hover i {
+  color: #009B77;
+}
+.ntf-item .ntf-content {
+  
+}
+.ntf-item .ntf-content a {
+
+}
+.ntf-item .ntf-time {
+  font-size: 10px;
+  margin-left: 10px;
+  color: #363636;
+}
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
 #sidebar-toggle {
@@ -2242,12 +2290,12 @@ ul.user_actions li:hover i{
 }
 
 .search-category {
-    min-width: 300px;
-    height: 100%;
-    margin-right: 20px;
-    padding: 0px 15px 15px 15px;
-    background-color: #fff;
-    position: relative;
+  min-width: 300px;
+  height: 100%;
+  margin-right: 20px;
+  padding: 0px 15px 15px 15px;
+  background-color: #fff;
+  position: relative;
 }
 .search-container-3 .search-category {
   width: 28%;
