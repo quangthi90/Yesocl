@@ -66,6 +66,14 @@ class ControllerAccountWall extends Controller {
 				$aPost['isUserLiked'] = false;
 			}
 
+			$aPost['is_del'] = true;
+
+			if ( $this->customer->getId() == $aPost['user_id'] ){
+				$aPost['is_edit'] = true;
+			}else{
+				$aPost['is_edit'] = false;
+			}
+
 			$oUser = $oPost->getUser();
 
 			if ( !array_key_exists($oUser->getId(), $this->data['users']) ){
@@ -93,10 +101,10 @@ class ControllerAccountWall extends Controller {
 		// set selected menu
 		$this->session->setFlash( 'menu', 'wall' );
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/account.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/account/account.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/wal.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/wall.tpl';
 		} else {
-			$this->template = 'default/template/account/account.tpl';
+			$this->template = 'default/template/account/wall.tpl';
 		}
 		
 		$this->children = array(

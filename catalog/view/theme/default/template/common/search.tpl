@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/friend/common/friend_list.tpl' %}
 {% use '@template/default/template/friend/common/friend_button.tpl' %}
 

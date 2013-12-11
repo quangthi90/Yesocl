@@ -1,6 +1,7 @@
 <?php
 namespace Document\Branch;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** @MongoDB\Document(collection="branch") */
 Class Branch {
@@ -37,6 +38,11 @@ Class Branch {
 
 	/** @MongoDB\Int */
 	private $order;
+
+    /** 
+	 * @SOLR\Field(type="text")
+	 */
+	private $type;
 
 	/**
 	 * Get Post By ID
@@ -196,5 +202,13 @@ Class Branch {
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function setType( $type ){
+		$this->type = $type;
+	}
+
+	public function getType(){
+		return $this->type;
 	}
 }

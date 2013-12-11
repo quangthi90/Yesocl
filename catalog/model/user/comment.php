@@ -27,28 +27,8 @@ class ModelUserComment extends Model {
 		if ( $posts ){
 			$post = $posts->getPostBySlug( $data['post_slug'] );
 		}
-
-		$comments = array();
-
-		if ( $post ){
-			$query_comments = $post->getComments( true );
-			$total = count( $query_comments );
-
-			$start = ($data['page'] - 1) * $data['limit'];
-
-			if ( $start < 0 ){
-				$start = 0;
-			}
-			for ( $i = $start; $i < $total; $i++ ) {
-				if ( count($comments) == $data['limit'] ){
-					break;
-				}
-
-				$comments[] = $query_comments[$i];
-			}
-		}
 		
-		return $comments;
+		return $post->getComments( true );
 	}
 
 	public function getComment( $data = array() ){
@@ -160,20 +140,58 @@ class ModelUserComment extends Model {
 			return false;
 		}
 		
-		$likerIds = $comment->getLikerIds();
+		if ( !empty($data['likerId']) ){
+			$likerIds = $comment->getLikerIds();
 
-		$key = array_search( $data['likerId'], $likerIds );
-		
-		if ( !$likerIds || $key === false ){
-			$comment->addLikerId( $data['likerId'] );
-		}else{
-			unset($likerIds[$key]);
-			$comment->setLikerIds( $likerIds );
+			$key = array_search( $data['likerId'], $likerIds );
+			
+			if ( !$likerIds || $key === false ){
+				$comment->addLikerId( $data['likerId'] );
+			}else{
+				unset($likerIds[$key]);
+				$comment->setLikerIds( $likerIds );
+			}
+		}
+
+		if ( !empty($data['content']) ){
+			$comment->setContent( $data['content'] );
 		}
 
 		$this->dm->flush();
 
 		return $comment;
+	}
+
+	public function deleteComment( $comment_id, $data = array() ){
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.comments.id' => $comment_id
+		));
+
+		if ( !$posts ){
+			return false;
+		}
+
+		if ( empty($data['post_slug']) ){
+			return false;
+		}
+
+		$post = $posts->getPostBySlug( $data['post_slug'] );
+
+		if ( !$post ){
+			return false;
+		}
+
+		$comment = $post->getCommentById( $comment_id );
+		
+		if ( $comment->getUser()->getId() != $this->customer->getId() ){
+			return false;
+		}
+
+		$post->getComments()->removeElement( $comment );
+
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>
