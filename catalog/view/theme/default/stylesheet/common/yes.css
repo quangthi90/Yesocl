@@ -2494,3 +2494,9 @@ ul.user_actions li:hover i{
   font-size: 11px;
 }
 /* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */
+
+/*CUSTOM LIB's CSS*/
+.comment-form .mentions-autocomplete-list {
+  bottom: 100%;
+}
+/*END CUSTOM LIB's CSS*/

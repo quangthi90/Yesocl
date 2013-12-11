@@ -25,7 +25,7 @@
 		</div>	
 		<form class="y-comment-reply post post_new comment-form">
 			<div class="txt_editor">
-				<textarea class="post_input" placeholder="What's in your mind ..."></textarea>
+				<textarea class="post_input mention" placeholder="What's in your mind ..."></textarea>
 			</div>
 			<div class="comment-action"> 
 				<a class="fl comment-tool" href="#" title="Add photo">
