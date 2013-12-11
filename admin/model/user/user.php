@@ -185,11 +185,17 @@ class ModelUserUser extends Model {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
-			$ended = new \Datetime();
-			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+
+			$experience = new Experience();
+			if (!$experience_data['current']) {
+				$ended = new \Datetime();
+				$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+				$experience->setEnded( $ended );
+			}else {
+				$experience->setEnded( null );
+			}
 			$started = new \Datetime();
 			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
-			$experience = new Experience();
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCompanyId( $experience_data['company_id'] );
 			$experience->setCurrent( trim( $experience_data['current'] ) );
@@ -546,8 +552,15 @@ class ModelUserUser extends Model {
 			if ( !isset( $experience_data['company'] ) || empty( $experience_data['company'] ) ) {
 				continue;
 			}
-			$ended = new \Datetime();
-			$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+
+			$experience = new Experience();
+			if (!$experience_data['current']) {
+				$ended = new \Datetime();
+				$ended->setDate( $experience_data['ended']['year'], $experience_data['ended']['month'], 1 );
+				$experience->setEnded( $ended );
+			}else {
+				$experience->setEnded( null );
+			}
 			$started = new \Datetime();
 			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience = new Experience();
@@ -568,7 +581,6 @@ class ModelUserUser extends Model {
 				$experience->setSelfEmployed( (int)$experience_data['self_employed'] );
 			}
 			
-			$experience->setEnded( $ended );
 			$experience->setStarted( $started );
 			$experience->setDescription( trim( $experience_data['description'] ) );
 			$experiences[] = $experience;

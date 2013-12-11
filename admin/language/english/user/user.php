@@ -44,6 +44,7 @@ $_['entry_advice_for_contact']     = 'Advice For Contact:';
 $_['entry_birthday']          		= 'Birthday:';
 $_['entry_company']             	= 'Company:';
 $_['entry_confirm']             	= 'Confirm:';
+$_['entry_self_employed']             	= 'Self employed:';
 $_['entry_current']             	= 'Current:';
 $_['entry_date_attended']           = 'Date Attended:';
 $_['entry_degree']             		= 'Degree:';

@@ -17,51 +17,65 @@ class ControllerBranchCategory extends Controller {
 		$this->load->model('tool/image');
 		$this->load->model('tool/cache');
 
-		$category = $this->model_branch_category->getCategory( $this->request->get );
+		$oCategory = $this->model_branch_category->getCategory( $this->request->get );
 		
 		$this->data['category'] = array(
-			'id' => $category->getId(),
-			'name' => $category->getName(),
-			'slug' => $category->getSlug()
+			'id' => $oCategory->getId(),
+			'name' => $oCategory->getName(),
+			'slug' => $oCategory->getSlug()
 		);
 		$this->data['all_posts'] = array();
 
-		$posts = $this->model_branch_post->getPosts(array(
-			'category_id' => $category->getId()
+		$lPosts = $this->model_branch_post->getPosts(array(
+			'category_id' => $oCategory->getId()
 		));
 
-		$post_count = $posts->count(true);
-		$count = 1;
-		$list_posts = array();
+		$iPostCount = $lPosts->count(true);
+		$iCount = 1;
+		$aPosts = array();
+		$aUsers = array();
 
-		foreach ($posts as $i => $post) {
-			$post = $post->formatToCache();
+		foreach ($lPosts as $i => $oPost) {
+			$aPost = $oPost->formatToCache();
 
-			$avatar = $this->model_tool_image->getAvatarUser( $post['user']['avatar'], $post['user']['email'] );
+			if ( empty($aUsers[$aPost['user_id']]) ){
+				$oUser = $oPost->getUser();
+
+				$aUser = $oUser->formatToCache();
+
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+
+				$aUsers[$aPost['user_id']] = $aUser;
+			}
+
+			if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
+				$aPost['isUserLiked'] = true;
+			}else{
+				$aPost['isUserLiked'] = false;
+			}
 
 			// thumb
-			if ( isset($post['thumb']) && !empty($post['thumb']) ){
-				$image = $this->model_tool_image->resize( $post['thumb'], 400, 250, true );
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
 			}else{
-				$image = null;
+				$aPost['image'] = null;
+			}
+			
+			$aPost['href_user'] = $this->url->link('account/edit', 'user_slug=' . $aPost['user']['slug'], 'SSL');
+			$aPost['href_post'] = $this->url->link('post/detail', 'post_slug=' . $aPost['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
+			$aPost['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
+
+			$aPosts[] = $aPost;
+			
+			if ( $iCount % 6 == 0 || $iCount == $iPostCount ){
+				$this->data['all_posts'][] = $aPosts;
+				$aPosts = array();
 			}
 
-			$post['image'] = $image;
-			// $post['avatar'] = $avatar;
-			
-			$post['href_user'] = $this->url->link('account/edit', 'user_slug=' . $post['user']['slug'], 'SSL');
-			$post['href_post'] = $this->url->link('post/detail', 'post_slug=' . $post['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-			$post['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
-
-			$list_posts[] = $post;
-			
-			if ( $count % 6 == 0 || $count == $post_count ){
-				$this->data['all_posts'][] = $list_posts;
-				$list_posts = array();
-			}
-
-			$count++;
+			$iCount++;
 		}
+
+		$this->data['users'] = $aUsers;
 		
 		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];

@@ -29,23 +29,7 @@
 		<div id="overlay"></div>
 		
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
-		<div id="search-panel" class="search-form" data-invoke-search="#btn-search-invoke-on" data-url="{{ path('SearchPage') }}">
-		  <input class="search-ctrl" name="keyword" id="searchText" placeholder="Enter your key ..." type="text">
-		  <div class="suggestion-container"></div>
-		  {% raw %}
-		  <div class="hidden search-result-item-template">
-		    <a href="${url}">
-		      <div class="data-detail">
-		        <img src="${image}" alt="" />
-		        <div class="data-meta-info">
-		          <div class="data-name">${value}</div>
-		          <div class="data-more">${metaInfo}</div>
-		        </div>
-		      </div>
-		    </a>
-		  </div>
-		  {% endraw %}
-		</div>		
+		{{ include('@template/default/template/common/quick_search.tpl') }}	
 
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
@@ -67,6 +51,7 @@
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<!-- Custom Script -->

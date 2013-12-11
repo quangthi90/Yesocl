@@ -60,7 +60,6 @@ class ModelBranchPost extends Model {
 	}
 
 	public function getPosts( $data = array() ){
-		$this->load->model( 'tool/cache' );
 		if (  empty($data['start']) ){
 			$data['start'] = 0;
 		}
@@ -76,6 +75,12 @@ class ModelBranchPost extends Model {
 
 		if ( !empty($data['category_id']) ){
 			$query['category.id'] = $data['category_id'];
+		}
+
+		if ( !empty($data['post_ids']) ){
+			$query['id'] = array('$in' => $data['post_ids']);
+		}elseif (isset($data['post_ids']) ){
+			return null;
 		}
 
 		$results = $this->dm->getRepository('Document\Branch\Post')

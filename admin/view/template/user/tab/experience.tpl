@@ -48,13 +48,13 @@
                           </select>
                           <?php echo $text_to; ?>
                           <?php echo $text_month; ?>
-                          <select class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" >
+                          <select class="ended-month input-small" name="background[experiences][<?php echo $key; ?>][ended][month]" <?php if ($experience['current']) { ?>disabled="disabled"<?php } ?>>
                     <?php for ($i = 1 ; $i < 13; $i++) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['month']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
                           </select>
                           <?php echo $text_year; ?>
-                          <select class="ended-year input-small" name="background[experiences][<?php echo $key; ?>][ended][year]" >
+                          <select class="ended-year input-small" name="background[experiences][<?php echo $key; ?>][ended][year]" <?php if ($experience['current']) { ?>disabled="disabled"<?php } ?>>
                           <?php for ($i = $cur_year ; $i > $cur_year - 100; $i--) { ?>
                               <option value="<?php echo $i; ?>" <?php if ($i == $experience['ended']['year']) { ?>selected="selected"<?php } ?>><?php echo $i; ?></option>
                           <?php } ?>
@@ -69,8 +69,8 @@
           		</div>
               <div class="row-fluid">
                 <div class="span4">
-                  <div class="span3"></div>
-                  <div class="span9"><?php if ( $experience['self_employed'] ) { ?><a class="btn-lost-self-employed btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger hide"><i class="icon-minus"></i></a><?php }else { ?><a class="btn-lost-self-employed btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger"><i class="icon-minus"></i></a><?php } ?><input class="self-employed" type="hidden" name="background[experiences][<?php echo $key; ?>][self_employed]" value="<?php echo $experience['self_employed']; ?>" /> <?php echo $text_self_employed; ?></div>
+                  <div class="span3"><?php echo $entry_self_employed; ?></div>
+                  <div class="span9"><select class="self_employed input-medium" name="background[experiences][<?php echo $key; ?>][self_employed]"><?php if ($experience['self_employed']) { ?><option value="1" selected="selected"><?php echo $text_yes; ?></option><option value="0"><?php echo $text_no; ?></option><?php }else { ?><option value="1"><?php echo $text_yes; ?></option><option value="0" selected="selected"><?php echo $text_no; ?></option><?php } ?></select></div>
                 </div>
               </div>
 				</td>
@@ -158,7 +158,6 @@
 			html += 		'</div>';
 			html += 		'<div class="span4">';
 			html += 			'<div class="span3"><?php echo $entry_current; ?></div>';
-			html += 			'<div class="span9"><a class="btn-lost-current btn btn-success"><i class="icon-ok"></i></a><a class="btn-set-current btn btn-danger hide"><i class="icon-minus"></i></a><input class="current" type="hidden" name="background[experiences][' + experience_length + '][current]" value="1" /></div>';
 			html += 		'</div>';
 			html += 		'<div class="span1 offset3"><a class="btn-remove-experience btn btn-danger"><i class="icon-trash"></i></a></div>';
 			html += 	'</div>';
@@ -213,7 +212,7 @@
           	html += 	'</div>';
             html +=  '<div class="row-fluid">';
             html +=    '<div class="span4">';
-            html +=      '<div class="span3"></div>';
+            html +=       '<div class="span3"><?php echo $entry_self_employed; ?></div>';
             html +=      '<div class="span9"><a class="btn-lost-self-employed btn btn-success hide"><i class="icon-ok"></i></a><a class="btn-set-self-employed btn btn-danger"><i class="icon-minus"></i></a><input class="self-employed" type="hidden" name="background[experiences][' + experience_length + '][self_employed]" value="0" /> <?php echo $text_self_employed; ?></div>';
             html +=    '</div>';
             html +=  '</div>';
@@ -238,6 +237,8 @@
         return false;
       }
 			
+      $(this).parents('tr').find('select.ended-year').attr('disabled', 'disabled');
+      $(this).parents('tr').find('select.ended-month').attr('disabled', 'disabled');
 			$(this).hide();
 			$(this).parent().parent().find('.btn-lost-current').show();
 			$(this).parent().parent().find('input.current').attr({
@@ -251,6 +252,8 @@
         return false;
       }
       
+      $(this).parents('tr').find('select.ended-year').removeAttr('disabled');
+      $(this).parents('tr').find('select.ended-month').removeAttr('disabled');
       $(this).hide();
       $(this).parent().parent().find('.btn-set-current').show();
       $(this).parent().parent().find('input.current').attr({

@@ -28,9 +28,6 @@ Class Experience {
 	/** @MongoDB\Boolean */
 	private $selfEmployed;
 
-	/** @MongoDB\Boolean */
-	private $current;
-
 	/** @MongoDB\String */
 	private $description;
 
@@ -88,18 +85,11 @@ Class Experience {
 
 	public function setSelfEmployed( $selfEmployed ){
 		$this->selfEmployed = $selfEmployed;
+
 	}
 
 	public function getSelfEmployed(){
 		return $this->selfEmployed;
-	}
-
-	public function setCurrent( $current ){
-		$this->current = $current;
-	}
-
-	public function getCurrent(){
-		return $this->current;
 	}
 
 	public function setDescription( $description ){

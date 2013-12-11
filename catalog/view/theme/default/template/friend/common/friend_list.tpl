@@ -1,6 +1,6 @@
 {% block friend_common_friend_list %}
     {% set class = 'all' %}
-    {% if friend.created <= recent_time %}
+    {% if friend.added is defined and friend.added|date('U') >= recent_time|date('U') %}
         {% set class = class ~ ' recent' %}
     {% endif %}
     {% if friend.gender == 1 %}
