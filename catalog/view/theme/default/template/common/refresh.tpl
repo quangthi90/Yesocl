@@ -1,13 +1,14 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/post/common/post_block.tpl' %}
-{% use '@template/default/template/post/common/post_comment.tpl' %}
+{% use '@template/default/template/common/html_block.tpl' %}
+{% use '@template/default/template/post/common/post_item_wall.tpl' %}
+{% use '@template/default/template/post/common/comment_post_list.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('home.css') }}" rel="stylesheet" media="screen" />
-    {{ block('post_common_post_comment_style') }}
+    {{ block('post_common_comment_post_list_style') }}
 {% endblock %}
 
 {% block body %}
@@ -16,7 +17,7 @@
         <div class="feed-block block-what-new">
             <div class="block-header">
                 <a class="block-title fl" href="#">
-                    What's new                    
+                    What's new
                 </a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
@@ -26,17 +27,17 @@
                 {% for post in posts %}
                     <div class="column">
                         {% set user = users[post.user_id] %}
-                        {{ block('post_common_post_block') }}
+                        {{ block('post_common_post_item_wall') }}
                     </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </div>
-{{ block('post_common_post_comment') }}
+{{ block('post_common_comment_post_list') }}
 {% endblock %}
 
 {% block javascript %}
-{{ block('post_common_post_comment_javascript') }}
+{{ block('post_common_comment_post_list_javascript') }}
 <script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
 {% endblock %}

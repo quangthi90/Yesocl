@@ -1,5 +1,4 @@
 {% block post_common_post_form_status_style %}
-<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block post_common_form_status %}

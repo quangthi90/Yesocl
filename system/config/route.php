@@ -15,6 +15,8 @@ $_['route']['CommentList'] 					= 'post/comment/getComments';
 $_['route']['CommentAdd']					= 'post/comment/addComment';
 $_['route']['CommentLike']					= 'post/comment/like';
 $_['route']['CommentGetLiker']				= 'post/comment/getLikers';
+$_['route']['CommentDelete']				= 'post/comment/deleteComment';
+$_['route']['CommentEdit']					= 'post/comment/editComment';
 
 // Page
 $_['route']['RefreshPage']					= 'common/refresh';

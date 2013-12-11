@@ -1,4 +1,4 @@
-{% block post_common_post_block_list %}
+{% block post_common_post_item_list %}
 	<div class="feed-block">
         <div class="block-header">
         {% if block_info is defined %}

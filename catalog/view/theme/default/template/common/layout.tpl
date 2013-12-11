@@ -13,6 +13,7 @@
 		<link href="{{ asset_css('libs/magnific-popup.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/mcustomscrollbar.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/mention-input.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
 		<!-- Common css -->
 		<link href="{{ asset_css('common/yes.css') }}" rel="stylesheet" media="screen" />
 		<!-- Custom css -->
@@ -57,6 +58,9 @@
 		</script>
 		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.mentions.input.js') }}">
 		</script>		
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>

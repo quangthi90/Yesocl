@@ -16,15 +16,24 @@ class ControllerAccountProfilesExperience extends Controller {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started_month'] = (int)$this->request->post['started_month'];
-				$json['ended_month'] = (int)$this->request->post['ended_month'];
 				$json['started_year'] = (int)$this->request->post['started_year'];
-				$json['ended_year'] = (int)$this->request->post['ended_year'];
 				$json['started_text'] = date("F Y", mktime(0, 0, 0, $json['started_month'], 1, $json['started_year']));
-				$json['ended_text'] = date("F Y", mktime(0, 0, 0, $json['ended_month'], 1, $json['ended_year']));
+				if (!empty($this->request->post['current']) && $this->request->post['current']) {
+					$json['current'] = $this->request->post['current'];
+					$json['ended_year'] = '';
+					$json['ended_month'] = '';
+					$json['ended_text'] = 'now';
+				}else {
+					$json['current'] = 0;
+					$json['ended_year'] = (int)$this->request->post['ended_year'];
+					$json['ended_month'] = (int)$this->request->post['ended_month'];
+					$json['ended_text'] = date("F Y", mktime(0, 0, 0, $json['ended_month'], 1, $json['ended_year']));
+				}
 				$json['title'] = $this->request->post['title'];
 				$json['company'] = $this->request->post['company'];
 				$json['location'] = $this->request->post['location'];
 				$json['city_id'] = $this->request->post['city_id'];
+				$json['self_employed'] = (isset($this->request->post['self_employed']) && $this->request->post['self_employed']) ? 1 : 0;
 				$json['edit'] = $this->extension->path('ProfileEditExperience', array(
 					'experience_id' => $id
 				));
@@ -71,15 +80,24 @@ class ControllerAccountProfilesExperience extends Controller {
 				$json['message'] = 'success';
 				$json['id'] = $id;
 				$json['started_month'] = (int)$this->request->post['started_month'];
-				$json['ended_month'] = (int)$this->request->post['ended_month'];
 				$json['started_year'] = (int)$this->request->post['started_year'];
-				$json['ended_year'] = (int)$this->request->post['ended_year'];
 				$json['started_text'] = date("F Y", mktime(0, 0, 0, $json['started_month'], 1, $json['started_year']));
-				$json['ended_text'] = date("F Y", mktime(0, 0, 0, $json['ended_month'], 1, $json['ended_year']));
+				if (!empty($this->request->post['current']) && $this->request->post['current']) {
+					$json['current'] = $this->request->post['current'];
+					$json['ended_year'] = '';
+					$json['ended_month'] = '';
+					$json['ended_text'] = '';
+				}else {
+					$json['current'] = 0;
+					$json['ended_year'] = (int)$this->request->post['ended_year'];
+					$json['ended_month'] = (int)$this->request->post['ended_month'];
+					$json['ended_text'] = date("F Y", mktime(0, 0, 0, $json['ended_month'], 1, $json['ended_year']));
+				}
 				$json['title'] = $this->request->post['title'];
 				$json['company'] = $this->request->post['company'];
 				$json['location'] = $this->request->post['location'];
 				$json['city_id'] = $this->request->post['city_id'];
+				$json['self_employed'] = (isset($this->request->post['self_employed']) && $this->request->post['self_employed']) ? 1 : 0;
 				$json['edit'] = $this->extension->path('ProfileEditExperience', array(
 					'experience_id' => $id
 				));

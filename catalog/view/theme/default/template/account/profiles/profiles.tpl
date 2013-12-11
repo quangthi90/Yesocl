@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/information.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/background.tpl' %}
 
@@ -26,18 +27,8 @@
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
 <script type="text/javascript">
-	function addScroll(warper, column, width, height) {
-		$(warper).outerWidth(width);
-		$(warper + ' ' + column).outerHeight(height);
-		$(warper + ' ' + column).niceScroll();
-	}
-
 	$(document).ready( function () {
 		$('#y-content').niceScroll();
-	} );
-
-	window.onresize=function() {
-		window.setTimeout('location.reload()', 1);
-	};
+	});
 </script>
 {% endblock %}

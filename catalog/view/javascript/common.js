@@ -122,7 +122,7 @@ function HashTable(obj)
 				updateOnBrowserResize:true, /*update scrollbars on browser resize (for layouts based on percentages): boolean*/
 				updateOnContentResize:true, /*auto-update scrollbars on content resize (for dynamic content): boolean*/
 				autoExpandHorizontalScroll:false, /*auto-expand width for horizontal scrolling: boolean*/
-				autoScrollOnFocus:true, /*auto-scroll on focused elements: boolean*/
+				autoScrollOnFocus:false, /*auto-scroll on focused elements: boolean*/
 				normalizeMouseWheelDelta:false /*normalize mouse-wheel delta (-1/1)*/
 			},
 			contentTouchScroll:true, /*scrolling by touch-swipe content: boolean*/
@@ -137,6 +137,28 @@ function HashTable(obj)
 			},
 			theme:"light" /*"light", "dark", "light-2", "dark-2", "light-thick", "dark-thick", "light-thin", "dark-thin"*/
 		});
+	}
+	jQuery.fn.makeEditor = function(heightCustom) {
+		$(this).summernote({
+			height: heightCustom,  
+			focus: true,
+  			toolbar: [
+		    //['style', ['style']], // no style button
+		    ['style', ['bold', 'italic', 'underline', 'clear']],
+		    ['fontsize', ['fontsize']],
+		    //['color', ['color']],
+		    ['para', ['ul', 'ol', 'paragraph']],
+		    ['table', ['table']],
+		    ['height', ['height']],
+		    ['insert', ['picture', 'link']],		    
+		    ['fullscreen', ['fullscreen']],
+		    //['help', ['help']] //no help button
+		  	],
+		  	onfocus: function(e) {
+		  	},
+		  	onblur: function(e) {
+		  	}
+		});	
 	}
 
 	/*
@@ -288,6 +310,7 @@ function HashTable(obj)
 		this.commentBox = el.find('#comment-box');
 		this.linkPopupCommon = el.find('.link-popup');
 		this.linkPopupImage = el.find('.img-link-popup');
+		this.editor = el.find('.y-editor');
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -315,6 +338,11 @@ function HashTable(obj)
 	    	removalDelay: 300,
 			mainClass: 'mfp-fade'
 	    });
+
+	    //Editor:
+	    that.editor.each(function() {
+	    	$(this).makeEditor(250);
+	    }); 
 
 		//For show/hide GoLeft
 		var maxScroll = that.mainContent.width() - that.main.width();
@@ -413,8 +441,8 @@ function HashTable(obj)
 	    //Comment box:
 	    if(that.commentBox.length > 0) {
 	    	that.commentBox.width(that.main.width()/3); 
-	    	var expandBtn = that.commentBox.find('.btn-expand');
-	    	var restoreBtn = that.commentBox.find('.btn-restore');
+	    	var expandBtn = that.commentBox.find('#btn-expand');
+	    	var restoreBtn = that.commentBox.find('#btn-restore');
 	    	expandBtn.fadeIn();
 	    	restoreBtn.fadeOut();
 	    	expandBtn.on('click', function(e){

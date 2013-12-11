@@ -7,7 +7,7 @@
         this.widthDetail = this.detailContentWrapper.width();
         this.heightDetail = this.detailContentWrapper.height();
         this.postContent = this.detailContentWrapper.find('#post-content');
-        this.postComment = this.detailContentWrapper.find('#comment-wrapper');
+        this.postComment = this.detailContentWrapper.find('#comment-box');
         this.quickScroll = this.detailContentWrapper.find('#detail-scroll');        
         this.commentList = this.postComment.find('.comment-body');
         this.expandComment = this.postComment.find('.btn-expand');
