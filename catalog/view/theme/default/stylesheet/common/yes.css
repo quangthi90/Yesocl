@@ -730,12 +730,12 @@ a.btn-notification:hover .notification-item-name > i {
   height: 100%;
 }
 .notification-page .ntf-list {
-  -webkit-column-width: 420px;    
-  -moz-column-width: 420px;
-  column-width: 420px;
-  -moz-column-gap: 15px;    
-  -webkit-column-gap: 15px;
-  column-gap: 15px;
+  -webkit-column-width: 450px;    
+  -moz-column-width: 450px;
+  column-width: 450px;
+  -moz-column-gap: 30px;    
+  -webkit-column-gap: 30px;
+  column-gap: 30px;
   height: 100%;
 }
 .ntf-list > li {
@@ -745,9 +745,12 @@ a.btn-notification:hover .notification-item-name > i {
   font-weight: bold;
   border-bottom: 1px solid #ddd;
   margin-bottom: 5px;
+  font-size: 18px;
+  color: #009B77;
 }
 .ntf-list .ntf-item {
-  padding: 3px 5px;
+  padding: 5px 5px;
+  margin-bottom: 10px;
   border-bottom: 1px dotted #f0f0f0;
 }
 .ntf-list .ntf-item > i {
