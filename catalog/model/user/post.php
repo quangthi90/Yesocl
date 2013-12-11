@@ -135,6 +135,26 @@ class ModelUserPost extends Model {
 		return $post;
 	}
 
+	public function deletePost( $post_slug ) {
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $post_slug) );
+
+		if ( !$posts ){
+			return false;
+		}
+		
+		$post = $posts->getPostBySlug( $data['post_slug'] );
+
+		if ( !$post ){
+			return false;
+		}
+		
+		$posts->getPosts()->removeElement( $post );
+		
+		$this->dm->flush();
+		
+		return true;
+	}
+
 	public function getPost( $data = array(), $increase_viewer = false ){
 		$query = array();
 		if ( !empty($data['post_id']) ){

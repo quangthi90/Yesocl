@@ -2,7 +2,7 @@
 	{% if post.type is defined %}
 		{% set post_type = post.type %}
 	{% endif %}
-	<div class="feed post post_status post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
+	<div class="feed post post_status post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-edit-url="{{ path('PostEdit', {post_slue: post.slug, post_type: post_type}) }}" data-delete-url="{{ path('PostDelete', {post_slue: post.slug, post_type: post_type}) }}">
 		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
