@@ -7,81 +7,83 @@ class ControllerPostPost extends Controller {
 			$this->load->model('user/post');
             $this->load->model('tool/image');
 
-            $image_link = null;
-            $extension = null;
+            $sImageLink = null;
+            $sExtension = null;
             if ( !empty($this->request->post['thumb']) ){
-                $parts = explode('/', $this->request->post['thumb'] );
-                $filename = $parts[count($parts) - 1];
-                $image_link = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $filename;
-                $extension = explode('.', $filename)[1];
+                $aParts = explode('/', $this->request->post['thumb'] );
+                $sFilename = $aParts[count($aParts) - 1];
+                $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
+                $sExtension = explode('.', $sFilename)[1];
             }
             
-            $data = array(
+            $aDatas = array(
                 'content' => $this->request->post['content'],
                 'title' => $this->request->post['title'],
                 'user_slug' => $this->request->get['user_slug'],
                 'author_id' => $this->customer->getId(),
-                'image_link' => $image_link,
-                'extension' => $extension
+                'image_link' => $sImageLink,
+                'extension' => $sExtension
             );
 
-            $post = $this->model_user_post->addPost( $data );
+            $oPost = $this->model_user_post->addPost( $aDatas );
 
-            $user = $post->getUser()->formatToCache();
+            $oUser = $oPost->getUser()->formatToCache();
 
             // avatar
-            $avatar = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+            $sAvatar = $this->model_tool_image->getAvatarUser( $oUser['avatar'], $oUser['email'] );
 
             // thumb
-            $thumb = $post->getThumb();
-            if ( !empty($thumb) ){
-                $image = $this->model_tool_image->resize( $thumb, 400, 250, true );
+            $aThumb = $oPost->getThumb();
+            if ( !empty($aThumb) ){
+                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250, true );
             }else{
-                $image = null;
+                $sImage = null;
             }
 
-            $post_type = $this->config->get('post')['type']['user'];
+            $sPostType = $this->config->get('post')['type']['user'];
 
             // href
-            $data_post_info = array(
-                'post_type' => $post_type,
-                'post_slug' => $post->getSlug()
+            $aData_post_infos = array(
+                'post_type' => $sPostType,
+                'post_slug' => $oPost->getSlug()
             );
-            $href = array(
-                'comment_list' => $this->extension->path( "CommentList", $data_post_info ),
-                'comment_add' => $this->extension->path( "CommentAdd", $data_post_info ),
-                'post_like' => $this->extension->path( "PostLike", $data_post_info ),
-                'post_detail' => $this->extension->path( "PostPage", $data_post_info ),
-                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $user['slug']) ),
-                'post_get_liked' => $this->extension->path( "PostGetLiker", $data_post_info )
+            $aHref = array(
+                'comment_list' => $this->extension->path( "CommentList", $aData_post_infos ),
+                'comment_add' => $this->extension->path( "CommentAdd", $aData_post_infos ),
+                'post_like' => $this->extension->path( "PostLike", $aData_post_infos ),
+                'post_detail' => $this->extension->path( "PostPage", $aData_post_infos ),
+                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $oUser['slug']) ),
+                'post_get_liked' => $this->extension->path( "PostGetLiker", $aData_post_infos ),
+                'delete' => $this->extension->path( "PostDelete", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) ),
+                'edit' => $this->extension->path( "PostEdit", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) )
             );
 
-            $content = html_entity_decode($post->getContent());
-            $see_more = false;
+            $sContent = html_entity_decode($oPost->getContent());
+            $bIsSeeMore = false;
 
-            if ( strlen($content) > 200 ){
-                $content = substr($content, 0, 200) . '[...]';
-                $see_more = true;
+            if ( strlen($sContent) > 200 ){
+                $sContent = substr($sContent, 0, 200) . '[...]';
+                $bIsSeeMore = true;
             }
 
-            $return_data = array(
+            $aReturnData = array(
                 'post' => array(
                     'user' => array(
-                        'avatar' => $avatar,
-                        'username' => $post->getAuthor()
+                        'avatar' => $sAvatar,
+                        'username' => $oPost->getAuthor()
                     ),
-                    'created' => $post->getCreated()->format( $this->language->get('date_format_full') ),
-                    'image' => $image,
-                    'title' => $post->getTitle(),
-                    'content' => $content,
-                    'see_more' => $see_more
+                    'created' => $oPost->getCreated()->format( $this->language->get('date_format_full') ),
+                    'image' => $sImage,
+                    'title' => $oPost->getTitle(),
+                    'content' => $sContent,
+                    'see_more' => $bIsSeeMore
                 ),
-                'href' => $href
+                'href' => $aHref
             );
 
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok',
-                'post' => $return_data
+                'post' => $aReturnData
 	        )));
     	}
 		
@@ -90,6 +92,123 @@ class ControllerPostPost extends Controller {
             'error' => $this->error['warning']
         )));
 	}
+
+    public function editPost(){
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            if ( empty($this->request->get['post_slug']) ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok: post slug empty'
+                )));
+            }
+
+            $this->load->model('user/post');
+            $this->load->model('tool/image');
+
+            $sImageLink = null;
+            $sExtension = null;
+            if ( !empty($this->request->post['thumb']) ){
+                $aParts = explode('/', $this->request->post['thumb'] );
+                $sFilename = $aParts[count($aParts) - 1];
+                $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
+                $sExtension = explode('.', $sFilename)[1];
+            }
+            
+            $aDatas = array(
+                'content' => $this->request->post['content'],
+                'title' => $this->request->post['title'],
+                'image_link' => $sImageLink,
+                'extension' => $sExtension
+            );
+
+            $oPost = $this->model_user_post->editPost( $this->request->get['post_slug'],  $aDatas );
+
+            if ( !$oPost ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'error' => $this->error['warning']
+                )));
+            }
+
+            // thumb
+            $aThumb = $oPost->getThumb();
+            
+            if ( !empty($aThumb) ){
+                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250, true );
+            }else{
+                $sImage = null;
+            }
+
+            $sPostType = $this->config->get('post')['type']['user'];
+
+            $sContent = html_entity_decode($oPost->getContent());
+
+            if ( strlen($sContent) > 200 ){
+                $sContent = substr($sContent, 0, 200) . '[...]';
+            }
+
+            $aReturnData = array(
+                'image' => $sImage,
+                'title' => $oPost->getTitle(),
+                'content' => $sContent
+            );
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok',
+                'post' => $aReturnData
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok',
+            'error' => $this->error['warning']
+        )));
+    }
+
+    public function deletePost(){
+        $aDatas = array();
+
+        if ( !empty($this->request->get['post_slug']) ){
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post slug empty'
+            )));
+        }
+
+        if ( !empty($this->request->get['post_type']) ){
+            $aDatas['post_type'] = $this->request->get['post_type'];
+        }else{
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: post type empty'
+            )));
+        }
+        
+        switch ($aDatas['post_type']) {
+            case $this->config->get('post')['type']['branch']:
+                $this->load->model('branch/post');
+                $bResult = $this->model_branch_post->deletePost( $aDatas['post_slug'] );
+                break;
+
+            case $this->config->get('post')['type']['user']:
+                $this->load->model('user/post');
+                $bResult = $this->model_user_post->deletePost( $aDatas['post_slug'] );
+                break;
+            
+            default:
+                $bResult = false;
+                break;
+        }
+
+        if ( $bResult == false ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+    }
 
     public function validate(){
         if ( empty( $this->request->post['content']) ) {
@@ -109,10 +228,10 @@ class ControllerPostPost extends Controller {
     }
 
     public function like(){
-        $data = array();
+        $aDatas = array();
 
         if ( !empty($this->request->get['post_slug']) ){
-            $data['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
@@ -120,24 +239,24 @@ class ControllerPostPost extends Controller {
         }
 
         if ( !empty($this->request->get['post_type']) ){
-            $data['post_type'] = $this->request->get['post_type'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
         }else{
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
             )));
         }
 
-        $data['likerId'] = $this->customer->getId();
+        $aDatas['likerId'] = $this->customer->getId();
         
-        switch ($data['post_type']) {
+        switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/post');
-                $post = $this->model_branch_post->editPost( $data['post_slug'], $data );
+                $oPost = $this->model_branch_post->editPost( $aDatas['post_slug'], $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/post');
-                $post = $this->model_user_post->editPost( $data['post_slug'], $data );
+                $oPost = $this->model_user_post->editPost( $aDatas['post_slug'], $aDatas );
                 break;
             
             default:
@@ -146,15 +265,15 @@ class ControllerPostPost extends Controller {
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'like_count' => count($post->getLikerIds())
+            'like_count' => count($oPost->getLikerIds())
         )));
     }
 
     public function getLikers() {
-        $data = array();
+        $aDatas = array();
 
         if (isset($this->request->get['post_slug']) && !empty($this->request->get['post_slug'])) {
-            $data['post_slug'] = $this->request->get['post_slug'];
+            $aDatas['post_slug'] = $this->request->get['post_slug'];
         } else {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post slug empty'
@@ -162,26 +281,26 @@ class ControllerPostPost extends Controller {
         }
 
         if (isset($this->request->get['post_type']) && !empty($this->request->get['post_type'])) {
-            $data['post_type'] = $this->request->get['post_type'];
+            $aDatas['post_type'] = $this->request->get['post_type'];
         } else {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: post type empty'
             )));
         }
 
-        switch ($data['post_type']) {
+        switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/post');
-                $post = $this->model_branch_post->getPost( $data );
+                $oPost = $this->model_branch_post->getPost( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/post');
-                $post = $this->model_user_post->getPost( $data );
+                $oPost = $this->model_user_post->getPost( $aDatas );
                 break;
             
             default:
-                $post = null;
+                $oPost = null;
                 break;
         }
 
@@ -189,33 +308,33 @@ class ControllerPostPost extends Controller {
         $this->load->model('friend/friend');
         $this->load->model('tool/image');
         
-        $users = array();
+        $aUsers = array();
 
-        if ( $post ){
-            $query_users = $this->model_user_user->getUsers(array(
-                'user_ids' => $post->getLikerIds()
+        if ( $oPost ){
+            $lUsers = $this->model_user_user->getUsers(array(
+                'user_ids' => $oPost->getLikerIds()
             ));
             
-            if ( $query_users ){
-                foreach ( $query_users as $user ) {
-                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer, $user );
+            if ( $lUsers ){
+                foreach ( $lUsers as $oUser ) {
+                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer, $oUser );
 
-                    $user = $user->formatToCache();
+                    $aUser = $oUser->formatToCache();
 
-                    $user['fr_status'] = $fr_status['status'];
-                    $user['fr_href'] = $fr_status['href'];
+                    $aUser['fr_status'] = $fr_status['status'];
+                    $aUser['fr_href'] = $fr_status['href'];
 
-                    $user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-                    $user['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $user['slug']) );
+                    $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+                    $aUser['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $aUser['slug']) );
 
-                    $users[] = $user;
+                    $aUsers[] = $aUser;
                 }
             }
         }
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'users' => $users
+            'users' => $aUsers
         )));
     }
 }

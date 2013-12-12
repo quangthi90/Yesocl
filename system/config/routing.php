@@ -9,6 +9,8 @@ $_['routing']['PostPage'] 						= '{post_type}/post/{post_slug}/';
 $_['routing']['PostLike'] 						= '{post_type}/post/{post_slug}/like/';
 $_['routing']['PostAdd'] 						= '{post_type}/{user_slug}/post/add/';
 $_['routing']['PostGetLiker'] 					= '{post_type}/post/{post_slug}/get-liker/';
+$_['routing']['PostDelete'] 					= '{post_type}/post/{post_slug}/delete/';
+$_['routing']['PostEdit'] 						= '{post_type}/post/{post_slug}/edit/';
 
 // Comment
 $_['routing']['CommentList'] 					= '{post_type}/post/{post_slug}/comments/';

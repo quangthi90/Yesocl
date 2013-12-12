@@ -903,8 +903,7 @@ a.btn-notification:hover .notification-item-name > i {
     position: relative;
 }
 .post-selecting {
-  border-top-color: #3B8F39;
-  z-index: 101;
+  border-top: 2px solid #009B77;
 }
 .post .yes-dropdown {
   top: 4px;
@@ -1722,6 +1721,7 @@ a.btn-notification:hover .notification-item-name > i {
   font-weight: bold;
   font-size: 18px;
   color: #ccc;
+  overflow: hidden;
 }
 /* ------------------------------------------ END POPUP ---------------------------------------- */
 /* ----------------------------------------- START EDITOR -------------------------------------- */

@@ -20,7 +20,7 @@
 							<i class="icon-camera icon-2x"></i>
 							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						</a>
-						<a href="#" title="Advance post" data-mfp-src="#post-advance-popup" class="link-popup">
+						<a href="#" title="Advance post" data-mfp-src="#post-advance-add-popup" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
@@ -31,6 +31,8 @@
  			</div>
 		</div>
 	</div>
+	{{ block('common_html_block_post_advance_form') }}
+	{% set post_popup_id = 'post-advance-edit-popup' %}
 	{{ block('common_html_block_post_advance_form') }}
 	{{ block('common_html_block_post_item_template') }}
 	{{ block('common_html_block_upload_image_template') }}
@@ -45,6 +47,5 @@
 	<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
 	<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
 	<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
-	<script type="text/javascript" src="{{ asset_js('status.js') }}"></script>
 	<script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
 {% endblock %}
