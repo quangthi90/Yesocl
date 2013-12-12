@@ -1,8 +1,8 @@
-{% block post_common_post_block %}
+{% block post_common_post_item_wall %}
 	{% if post.type is defined %}
 		{% set post_type = post.type %}
 	{% endif %}
-	<div class="feed post post_status post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
+	<div class="feed post post_status post-item js-post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-url-edit="{{ path('PostEdit', {post_slug: post.slug, post_type: post_type}) }}" data-url-delete="{{ path('PostDelete', {post_slug: post.slug, post_type: post_type}) }}">
 		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
@@ -12,13 +12,18 @@
                		<li class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
                         <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
                     </li>
-                    <!--li>
-                        <a href="#"><i class="icon-edit"></i>Edit</a>
-                    </li>
+                    {% if post.is_edit is defined and post.is_edit == true %}
                     <li class="divider"></li>
-                    <li>
+                    <li class="post-edit-btn">
+                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
+                    </li>
+                    {% endif %}
+                    {% if post.is_del is defined and post.is_del == true %}
+                    <li class="divider"></li>
+                    <li class="post-delete-btn">
                         <a href="#"><i class="icon-trash"></i>Delete</a>
-                    </li-->
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -88,7 +93,4 @@
 			<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a> 
 		{% endif %}	
 	</div>
-{% endblock %}
-
-{% block post_common_post_block_javascript %}
 {% endblock %}

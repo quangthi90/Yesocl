@@ -8,13 +8,15 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Comment formated
 	 */
-	public function formatListCommentsOfPost( $base_comment, $post_slug, $post_type ){
+	public function formatCommentOfPost( $base_comment, $post_slug, $post_type ){
 		$this->load->model('user/user');
         $this->load->model('tool/image');
 
         if ( !$base_comment ){
         	return array();
         }
+
+        $idCurrUserId = $this->customer->getId();
 
         if ( is_array($base_comment) ){
         	$comments = array();
@@ -57,8 +59,25 @@ class ModelToolObject extends Model
 	                'post_type' => $post_type,
 	                'comment_id' => $comment['id']
 	            ));
+	            $comment['href_edit'] = $this->extension->path('CommentEdit', array(
+	                'post_slug' => $post_slug,
+	                'post_type' => $post_type,
+	                'comment_id' => $comment['id']
+	            ));
+	            
+	            $comment['href_delete'] = $this->extension->path('CommentDelete', array(
+	                'post_slug' => $post_slug,
+	                'post_type' => $post_type,
+	                'comment_id' => $comment['id']
+	            ));
 	            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
 	            $comment['is_liked'] = $liked;
+
+	            if ( $comment['user_id'] == $idCurrUserId ){
+	            	$comment['is_owner'] = true;
+	            }else{
+	            	$comment['is_owner'] = false;
+	            }
 
 	            $comments[] = $comment;
 	        }
@@ -97,8 +116,24 @@ class ModelToolObject extends Model
             'post_type' => $post_type,
             'comment_id' => $comment['id']
         ));
+        $comment['href_edit'] = $this->extension->path('CommentEdit', array(
+            'post_slug' => $post_slug,
+            'post_type' => $post_type,
+            'comment_id' => $comment['id']
+        ));
+        
+        $comment['href_delete'] = $this->extension->path('CommentDelete', array(
+            'post_slug' => $post_slug,
+            'post_type' => $post_type,
+            'comment_id' => $comment['id']
+        ));
         $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
         $comment['is_liked'] = $liked;
+        if ( $comment['user_id'] == $idCurrUserId ){
+        	$comment['is_owner'] = true;
+        }else{
+        	$comment['is_owner'] = false;
+        }
 
         return $comment;
 	}

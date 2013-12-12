@@ -9,12 +9,16 @@ $_['route']['PostPage'] 					= 'post/detail';
 $_['route']['PostLike']						= 'post/post/like';
 $_['route']['PostAdd']						= 'post/post/addPost';
 $_['route']['PostGetLiker']					= 'post/post/getLikers';
+$_['route']['PostDelete']					= 'post/post/deletePost';
+$_['route']['PostEdit']						= 'post/post/editPost';
 
 // Comment
 $_['route']['CommentList'] 					= 'post/comment/getComments';
 $_['route']['CommentAdd']					= 'post/comment/addComment';
 $_['route']['CommentLike']					= 'post/comment/like';
 $_['route']['CommentGetLiker']				= 'post/comment/getLikers';
+$_['route']['CommentDelete']				= 'post/comment/deleteComment';
+$_['route']['CommentEdit']					= 'post/comment/editComment';
 
 // Page
 $_['route']['RefreshPage']					= 'common/refresh';
