@@ -15,7 +15,7 @@
                     {% if post.is_edit is defined and post.is_edit == true %}
                     <li class="divider"></li>
                     <li class="post-edit-btn">
-                        <a href="#"><i class="icon-edit"></i>Edit</a>
+                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
                     </li>
                     {% endif %}
                     {% if post.is_del is defined and post.is_del == true %}

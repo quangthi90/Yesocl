@@ -471,6 +471,12 @@
             e.preventDefault();
 
             // $edit_post_form
+            var demoImg = "http://imagizer.imageshack.us/402xf/201/newwg.jpg";
+            //Update current image's url:
+            $edit_post_form.find('.img-url').val(demoImg);
+            
+            var tempImg = $('<img>').attr('src', demoImg).attr('alt', 'xxxx');
+            $edit_post_form.find('.drop-zone-show').html('').append(tempImg);
 
             return false;
         });
