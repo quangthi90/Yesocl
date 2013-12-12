@@ -18,7 +18,7 @@ class ModelUserPost extends Model {
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function addPost( $data = array(), $thumb = array() ) {
+	public function addPost( $data = array() ) {
 		if ( empty($data['user_slug']) ){
 			return false;
 		}
@@ -104,17 +104,38 @@ class ModelUserPost extends Model {
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function editPost( $post_slug, $data = array(), $thumb = array() ) {
+	public function editPost( $post_slug, $data = array() ) {
 		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $post_slug) );
-
+		
 		if ( !$posts ){
 			return false;
 		}
 		
-		$post = $posts->getPostBySlug( $data['post_slug'] );
+		$post = $posts->getPostBySlug( $post_slug );
 
 		if ( !$post ){
 			return false;
+		}
+
+		if ( !empty($data['image_link']) && !empty($data['extension']) && is_file($data['image_link']) ){
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $post->getUser()->getId() . '/' . $folder_name . '/' . $post->getSlug() . '/' . $avatar_name . '.' . $data['extension'];
+			$dest = DIR_IMAGE . $path;
+			
+			$this->load->model('tool/image');
+			if ( $this->model_tool_image->moveFile($data['image_link'], $dest) ){
+				$post->setThumb( $path );
+			}
+		}
+
+		if ( !empty($data['content']) ){
+			$post->setContent( $data['content'] );
+		}
+
+		if ( !empty($data['title']) ){
+			$post->setTitle( $data['title'] );
 		}
 		
 		if ( !empty($data['likerId']) ){

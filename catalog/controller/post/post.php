@@ -93,6 +93,77 @@ class ControllerPostPost extends Controller {
         )));
 	}
 
+    public function editPost(){
+        if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+            if ( empty($this->request->get['post_slug']) ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok: post slug empty'
+                )));
+            }
+
+            $this->load->model('user/post');
+            $this->load->model('tool/image');
+
+            $sImageLink = null;
+            $sExtension = null;
+            if ( !empty($this->request->post['thumb']) ){
+                $aParts = explode('/', $this->request->post['thumb'] );
+                $sFilename = $aParts[count($aParts) - 1];
+                $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
+                $sExtension = explode('.', $sFilename)[1];
+            }
+            
+            $aDatas = array(
+                'content' => $this->request->post['content'],
+                'title' => $this->request->post['title'],
+                'image_link' => $sImageLink,
+                'extension' => $sExtension
+            );
+
+            $oPost = $this->model_user_post->editPost( $this->request->get['post_slug'],  $aDatas );
+
+            if ( !$oPost ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'error' => $this->error['warning']
+                )));
+            }
+
+            // thumb
+            $aThumb = $oPost->getThumb();
+            
+            if ( !empty($aThumb) ){
+                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250, true );
+            }else{
+                $sImage = null;
+            }
+
+            $sPostType = $this->config->get('post')['type']['user'];
+
+            $sContent = html_entity_decode($oPost->getContent());
+
+            if ( strlen($sContent) > 200 ){
+                $sContent = substr($sContent, 0, 200) . '[...]';
+            }
+
+            $aReturnData = array(
+                'image' => $sImage,
+                'title' => $oPost->getTitle(),
+                'content' => $sContent
+            );
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok',
+                'post' => $aReturnData
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok',
+            'error' => $this->error['warning']
+        )));
+    }
+
     public function deletePost(){
         $aDatas = array();
 

@@ -119,7 +119,12 @@
 		<div class="y-dlg">
 			<form autocomplete="off" class="form-status full-post">
 				<div class="dlg-title">
-			        <i class="icon-yes"></i> New post
+			        <i class="icon-yes"></i> 
+			        {% if post_popup_id == 'post-advance-add-popup' %}
+			        New post
+			        {% else %}
+			        Edit post
+			        {% endif %}
 			    </div>
 			    <div class="dlg-content">
 			    	<div class="dlg-column upload-container fl" style="width:28%;">

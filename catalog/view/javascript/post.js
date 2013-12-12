@@ -460,6 +460,9 @@
     function ShowEditAdvance($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-edit-btn');
+        this.content    = $el.find('.post_text_raw').html();
+        this.title      = $el.find('.post_title > a').html();
+        this.$image     = $el.find('.post_image > img');
 
         this.url        = $el.data('url-edit');
 
@@ -470,13 +473,20 @@
         this.$btn.click(function(e){
             e.preventDefault();
 
-            // $edit_post_form
-            var demoImg = "http://imagizer.imageshack.us/402xf/201/newwg.jpg";
-            //Update current image's url:
-            $edit_post_form.find('.img-url').val(demoImg);
-            
-            var tempImg = $('<img>').attr('src', demoImg).attr('alt', 'xxxx');
-            $edit_post_form.find('.drop-zone-show').html('').append(tempImg);
+            // Content
+            $edit_post_form.find('.post-advance-content').code( that.content );
+
+            // Title
+            $edit_post_form.find('.post-advance-title').val( that.title );
+
+            // Image
+            $edit_post_form.find('.drop-zone-show').html('').append(that.$image);
+
+            // Url
+            $edit_post_form.data('url', that.url);
+
+            // Cache current post
+            $edit_post_form.data('post', that.$el);
 
             return false;
         });
@@ -491,4 +501,93 @@
             new ShowEditAdvance($post_item);
         });
     }); 
+}(jQuery, document));
+
+// Submit edit post
+(function($, document, undefined) {
+    function EditPost( $el ) {
+        this.$el                = $el;
+        this.$title             = $el.find('.post-advance-title');
+        this.$content           = $el.find('.post-advance-content');
+        this.$btn               = $el.find('.btn-post-advance');
+
+        this.attachEvents();
+    }
+
+    EditPost.prototype.attachEvents = function(){
+        var that = this;
+
+        this.$btn.click(function(e) {
+            e.preventDefault();
+            
+            if($(this).hasClass('disabled') || that.validate() == false) {
+                return false;
+            }
+            
+            if ( that.$el.find('.img-url').val() == null ){
+                var thumb = null;
+            }else{
+                var thumb = that.$el.find('.img-link-popup').attr('href');
+            }
+            
+            that.url = that.$el.data('url');
+            
+            that.data = {
+                title       : that.$title.val(),
+                content     : that.$content.code(),
+                thumb       : thumb
+            };
+
+            that.submit($(this));
+
+            return false;
+        });    
+    };
+
+    EditPost.prototype.submit = function($button){
+        var that = this;
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.url,
+            data: this.data,
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) {
+            if(data.success == 'ok'){
+                var $current_post = that.$el.data('post');
+                
+                $current_post.find('.post_text_raw').html( data.post.content );
+                $current_post.find('.post_title > a').html( data.post.title );
+                $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
+
+                $('.mfp-ready').trigger('click');
+            }
+        });
+    };
+
+    EditPost.prototype.validate = function(){
+        if ( this.$content.code() == '' ){
+            return false;
+        }
+    };
+
+    EditPost.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var f        = function() {
+            $el.removeClass('disabled');
+            $spinner.remove();
+        };
+
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    $(function(){
+        new EditPost($('#post-advance-edit-popup'));
+    });
 }(jQuery, document));
