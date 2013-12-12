@@ -112,7 +112,10 @@
 
 {# -- Comment -- #}
 {% block common_html_block_post_advance_form %}
-	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
+	{% if post_popup_id is not defined %}
+		{% set post_popup_id = 'post-advance-add-popup' %}
+	{% endif %}
+	<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}">
 		<div class="y-dlg">
 			<form autocomplete="off" class="form-status full-post">
 				<div class="dlg-title">

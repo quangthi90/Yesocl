@@ -230,6 +230,8 @@
 (function($, document, undefined) {
     var marginPostDefault = 15;
     var widthPostDefault = 420;
+    var $post_add_form = $('#post-advance-add-popup');
+
     function AddPost( $el ) {
         this.rootContent        = $('#y-content');
         this.mainContent        = $('#y-main-content');
@@ -240,10 +242,10 @@
         this.url                = $el.data('url');
         this.$status_btn        = $el.find('.btn-status');
 
-        this.$advance_title     = $('#post-advance-popup').find('.post-advance-title');
-        this.$advance_content   = $('#post-advance-popup').find('.post-advance-content');
-        this.$advance_btn       = $('#post-advance-popup').find('.btn-post-advance');
-        this.$editor            = $('#post-advance-popup').find('.y-editor');
+        this.$advance_title     = $post_add_form.find('.post-advance-title');
+        this.$advance_content   = $post_add_form.find('.post-advance-content');
+        this.$advance_btn       = $post_add_form.find('.btn-post-advance');
+        this.$editor            = $post_add_form.find('.y-editor');
         this.attachEvents();
     }
 
@@ -263,7 +265,7 @@
             that.data = {
                 title       : that.$advance_title.val(),
                 content     : that.$advance_content.code(),
-                thumb       : $('#post-advance-popup').find('.img-link-popup').attr('href')
+                thumb       : $post_add_form.find('.img-link-popup').attr('href')
             };
 
             that.submit(that.$advance_btn);
@@ -327,7 +329,7 @@
                 that.$content.val('');
                 that.$advance_content.code('');
                 that.$advance_title.val('');
-                $('#post-advance-popup').find('.img-previewer-container').html('');
+                $post_add_form.find('.img-previewer-container').html('');
                 that.$el.find('.img-previewer-container').html('');
 
                 $('.mfp-ready').trigger('click');
@@ -447,6 +449,40 @@
 
         $(document).bind('DELETE_POST', function(e, $post_item) {
             new DeletePost($post_item);
+        });
+    }); 
+}(jQuery, document));
+
+// Show advance edit post
+(function($, document, undefined) {
+    var $edit_post_form = $('#post-advance-edit-popup');
+
+    function ShowEditAdvance($el) {
+        this.$el        = $el;
+        this.$btn       = $el.find('.post-edit-btn');
+
+        this.url        = $el.data('url-edit');
+
+        this.addEvents();
+    }
+    ShowEditAdvance.prototype.addEvents = function() {
+        var that = this;
+        this.$btn.click(function(e){
+            e.preventDefault();
+
+            // $edit_post_form
+
+            return false;
+        });
+    }
+
+    $(function(){
+        $('.js-post-item').each(function(){
+            new ShowEditAdvance($(this));
+        });
+
+        $(document).bind('EDIT_POST', function(e, $post_item) {
+            new ShowEditAdvance($post_item);
         });
     }); 
 }(jQuery, document));
