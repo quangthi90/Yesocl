@@ -142,13 +142,13 @@ class ModelUserPost extends Model {
 			return false;
 		}
 		
-		$post = $posts->getPostBySlug( $data['post_slug'] );
+		$post = $posts->getPostBySlug( $post_slug );
 
 		if ( !$post ){
 			return false;
 		}
 		
-		$posts->getPosts()->removeElement( $post );
+		$posts->getPosts(false)->removeElement( $post );
 		
 		$this->dm->flush();
 		

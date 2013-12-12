@@ -9,8 +9,8 @@ $_['route']['PostPage'] 					= 'post/detail';
 $_['route']['PostLike']						= 'post/post/like';
 $_['route']['PostAdd']						= 'post/post/addPost';
 $_['route']['PostGetLiker']					= 'post/post/getLikers';
-$_['route']['PostDelete']					= 'post/post/delete';
-$_['route']['PostEdit']						= 'post/post/edit';
+$_['route']['PostDelete']					= 'post/post/deletePost';
+$_['route']['PostEdit']						= 'post/post/editPost';
 
 // Comment
 $_['route']['CommentList'] 					= 'post/comment/getComments';

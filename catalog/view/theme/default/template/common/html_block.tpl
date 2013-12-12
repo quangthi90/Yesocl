@@ -164,7 +164,7 @@
 {% block common_html_block_post_item_template %}
 	{% raw %}
 		<div class="hidden" id="post-item-template">
-			<div class="feed post post_status post-item" data-url="${href.post_like}" data-is-liked="0" data-url-edit="${href.edit}" data-url-delete="${href.delete}">
+			<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-url-edit="${href.edit}" data-url-delete="${href.delete}">
 				<div class="yes-dropdown">
 		            <div class="dropdown">
 		               <a class="dropdown-toggle" data-toggle="dropdown">
@@ -174,11 +174,12 @@
 		               		<li class="unlike-post hidden">
 		                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
 		                    </li>
-		                    <li>
+		                    <li class="divider"></li>
+		                    <li class="post-edit-btn">
 		                        <a href="#"><i class="icon-edit"></i>Edit</a>
 		                    </li>
 		                    <li class="divider"></li>
-		                    <li>
+		                    <li class="post-delete-btn">
 		                        <a href="#"><i class="icon-trash"></i>Delete</a>
 		                    </li>
 		                </ul>

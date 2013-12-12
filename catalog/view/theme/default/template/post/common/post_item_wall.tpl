@@ -2,7 +2,7 @@
 	{% if post.type is defined %}
 		{% set post_type = post.type %}
 	{% endif %}
-	<div class="feed post post_status post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-edit-url="{{ path('PostEdit', {post_slug: post.slug, post_type: post_type}) }}" data-delete-url="{{ path('PostDelete', {post_slug: post.slug, post_type: post_type}) }}">
+	<div class="feed post post_status post-item js-post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-url-edit="{{ path('PostEdit', {post_slug: post.slug, post_type: post_type}) }}" data-url-delete="{{ path('PostDelete', {post_slug: post.slug, post_type: post_type}) }}">
 		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
@@ -13,13 +13,14 @@
                         <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
                     </li>
                     {% if post.is_edit is defined and post.is_edit == true %}
-                    <li>
+                    <li class="divider"></li>
+                    <li class="post-edit-btn">
                         <a href="#"><i class="icon-edit"></i>Edit</a>
                     </li>
                     {% endif %}
                     {% if post.is_del is defined and post.is_del == true %}
                     <li class="divider"></li>
-                    <li>
+                    <li class="post-delete-btn">
                         <a href="#"><i class="icon-trash"></i>Delete</a>
                     </li>
                     {% endif %}
