@@ -1,5 +1,5 @@
 {% block register_tabs_step2 %}
-<div class="row-fluid register-box register-step2">
+<div class="row-fluid register-box register-step2" data-yahoocnt="{{ link_get_yahoo_mail }}" data-gmailcnt="">
 	<div class="span12 register-box-step">
 		<div class="row-fluid">
 			<h2 class="span11 offset1 register-box-title">
@@ -20,7 +20,7 @@
 						  	</a>	
 				  	      </li>
 						  <li>
-						  	<a href="#yahoo-contact" data-toggle="tab">
+						  	<a href="#yahoo-contact" data-toggle="tab" class="btn-get-yahoo-mail">
 						  		<i class="cicon-yahoo"></i> Yahoo
 					  		</a>
 						  </li>

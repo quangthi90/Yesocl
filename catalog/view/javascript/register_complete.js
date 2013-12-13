@@ -4,6 +4,7 @@
 	function RegisterComplete($element) {
 		this.$el = $element;
 		this.step1 = new RegisterCompleteStep1($element.find('.register-step1'));
+        this.step2 = new RegisterCompleteStep2($element.find('.register-step2'));
 	}
 
     function RegisterCompleteStep1($element) {
@@ -207,7 +208,7 @@
     RegisterCompleteStep1.prototype.submit = function ($button) {
         var that = this;
 
-        var promise = $.ajax({
+        /*var promise = $.ajax({
             type: 'POST',
             url:  this.$el.data('url'),
             data: this.data,
@@ -217,18 +218,18 @@
             }
         });
 
-        this.triggerProcess($button, promise);
+        this.triggerProcess($button, promise);*/
 
-        promise.then(function(data) {
-            if ( data.message != 'success' ) {
-                carouselEle.carousel('pause');
-            }else {
+        //promise.then(function(data) {
+        //    if ( data.message != 'success' ) {
+        //        carouselEle.carousel('pause');
+        //    }else {
                 carouselEle.carousel('next');
                 setTimeout(function(){
                     carouselEle.carousel('pause');
                 }, 500);
-            }
-        });
+        //    }
+        //});
     }
 
     RegisterCompleteStep1.prototype.triggerProcess = function ($el, promise) {
@@ -244,7 +245,20 @@
     }
 
     function RegisterCompleteStep2($element) {
-        
+        this.$el = $element;
+
+        this.$btnGetYahooMail = $element.find('.btn-get-yahoo-mail');
+        //this.$btnGetGMail = $element.find('.btn-get-g-mail');
+
+        this.attachEvents();
+    }
+
+    RegisterCompleteStep2.prototype.attachEvents = function() {
+        var that = this;
+
+        this.$btnGetYahooMail.click(function() {
+            window.open(that.$el.data('yahoocnt'), '_parent ','directories=no, location=no, titlebar=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600,height=280,top=200,left=200');
+        });
     }
 
     function AutocompleteRegister($label_input, url, filter_label , label, $value_input, value) {
@@ -322,5 +336,17 @@
 
     $(function(){
         new RegisterComplete($('#y-main-content'));
+        
+
     });
 }(jQuery, document));
+
+        getFriendList = function(data) {console.log(data);
+            if (data.success == 'ok') {
+                if (data.type == 'yahoo') {
+
+                }else if (data.type == 'gmail') {
+
+                }
+            }
+        }

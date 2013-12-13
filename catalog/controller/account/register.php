@@ -35,7 +35,6 @@ class ControllerAccountRegister extends Controller {
             'success' => 'not ok',
             'warning' => $this->data['error_warning']
         )));
-		
 	}
 	      
   	public function index() {  		
@@ -115,6 +114,7 @@ class ControllerAccountRegister extends Controller {
   			$this->data['link_autocomplete_title'] = HTTP_SERVER . $this->url->link('data/value/industryAutoComplete');
   			$this->data['link_autocomplete_location'] = HTTP_SERVER . $this->url->link('data/value/locationAutoComplete');
   			$this->data['link_submit_step_1'] = HTTP_SERVER . $this->url->link('account/register/step1');
+  			$this->data['link_get_yahoo_mail'] = HTTP_SERVER . $this->url->link('common/yahoocnt/getContactsList');
 
   			// get customer data
   			$this->load->model('account/customer');
