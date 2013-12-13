@@ -2557,4 +2557,11 @@ ul.user_actions li:hover i{
 .comment-form .mentions-autocomplete-list {
   bottom: 100%;
 }
+.note-editor .btn-toolbar button {
+  padding: 3px 13px;
+  outline: none;
+}
+.note-editor .btn-toolbar button > i {
+  font-size: 13px;
+}
 /*END CUSTOM LIB's CSS*/
