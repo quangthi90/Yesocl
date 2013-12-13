@@ -112,11 +112,19 @@
 
 {# -- Comment -- #}
 {% block common_html_block_post_advance_form %}
-	<div class="mfp-hide y-dlg-container" id="post-advance-popup">
+	{% if post_popup_id is not defined %}
+		{% set post_popup_id = 'post-advance-add-popup' %}
+	{% endif %}
+	<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}">
 		<div class="y-dlg">
 			<form autocomplete="off" class="form-status full-post">
 				<div class="dlg-title">
-			        <i class="icon-yes"></i> New post
+			        <i class="icon-yes"></i> 
+			        {% if post_popup_id == 'post-advance-add-popup' %}
+			        New post
+			        {% else %}
+			        Edit post
+			        {% endif %}
 			    </div>
 			    <div class="dlg-content">
 			    	<div class="dlg-column upload-container fl" style="width:28%;">
@@ -164,7 +172,7 @@
 {% block common_html_block_post_item_template %}
 	{% raw %}
 		<div class="hidden" id="post-item-template">
-			<div class="feed post post_status post-item" data-url="${href.post_like}" data-is-liked="0">
+			<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-url-edit="${href.edit}" data-url-delete="${href.delete}">
 				<div class="yes-dropdown">
 		            <div class="dropdown">
 		               <a class="dropdown-toggle" data-toggle="dropdown">
@@ -174,11 +182,12 @@
 		               		<li class="unlike-post hidden">
 		                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
 		                    </li>
-		                    <li>
+		                    <li class="divider"></li>
+		                    <li class="post-edit-btn">
 		                        <a href="#"><i class="icon-edit"></i>Edit</a>
 		                    </li>
 		                    <li class="divider"></li>
-		                    <li>
+		                    <li class="post-delete-btn">
 		                        <a href="#"><i class="icon-trash"></i>Delete</a>
 		                    </li>
 		                </ul>
