@@ -143,16 +143,16 @@ function HashTable(obj)
 			height: heightCustom,  
 			focus: true,
   			toolbar: [
-		    ['style', ['style']],
-		    ['style', ['bold', 'italic', 'underline', 'clear']],
-		    //['fontsize', ['fontsize']],
-		    //['color', ['color']],
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    //['table', ['table']],
-		    //['height', ['height']],
-		    ['insert', ['picture', 'link']],		    
-		    ['fullscreen', ['fullscreen']],
-		    //['help', ['help']] //no help button
+  				['tag', ['tag']],
+			    ['style', ['style']],
+			    ['style', ['bold', 'italic', 'underline', 'clear']],
+			    //['fontsize', ['fontsize']],
+			    //['color', ['color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    //['table', ['table']],
+			    //['height', ['height']],
+			    ['insert', ['picture', 'link']],		    
+			    ['fullscreen', ['fullscreen']]
 		  	]
 		});	
 	}

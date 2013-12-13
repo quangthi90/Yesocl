@@ -59,7 +59,7 @@
 		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.mentions.input.js') }}">
 		</script>		
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/summernote.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
