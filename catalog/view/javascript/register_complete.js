@@ -243,6 +243,10 @@
         promise.then(f, f);
     }
 
+    function RegisterCompleteStep2($element) {
+        
+    }
+
     function AutocompleteRegister($label_input, url, filter_label , label, $value_input, value) {
         this.url = url;
         this.filter_label = filter_label;

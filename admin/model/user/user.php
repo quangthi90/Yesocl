@@ -198,7 +198,6 @@ class ModelUserUser extends Model {
 			$started->setDate( $experience_data['started']['year'], $experience_data['started']['month'], 1 );
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCompanyId( $experience_data['company_id'] );
-			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
 
 			// Create Location
@@ -566,7 +565,6 @@ class ModelUserUser extends Model {
 			$experience = new Experience();
 			$experience->setCompany( trim( $experience_data['company'] ) );
 			$experience->setCompanyId( $experience_data['company_id'] );
-			$experience->setCurrent( trim( $experience_data['current'] ) );
 			$experience->setTitle( trim( $experience_data['title'] ) );
 
 			// Create Location
