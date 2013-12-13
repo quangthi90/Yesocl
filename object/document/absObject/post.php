@@ -72,6 +72,11 @@ Abstract Class Post {
     /** @MongoDB\Int */
     private $countViewer = 0;
 
+    /** 
+	 * @SOLR\Field(type="text")
+	 */
+	private $type;
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -262,5 +267,13 @@ Abstract Class Post {
 
 	public function getCountViewer(){
 		return $this->countViewer;
+	}
+
+	public function setType( $type ){
+		$this->type = $type;
+	}
+
+	public function getType(){
+		return $this->type;
 	}
 }
