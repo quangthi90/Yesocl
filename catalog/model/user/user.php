@@ -118,5 +118,25 @@ class ModelUserUser extends Model {
 
 		return true;
 	}
+
+	public function deleteNotification( $user_id, $actor_id, $object_id, $action ){
+		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+
+		if ( !$user ){
+			return false;
+		}
+
+		$notification = $user->getNotificationByData( $actor_id, $object_id, $action );
+
+		if ( !$notification ){
+			return false;
+		}
+
+		$notification->setStatus( false );
+
+		$this->dm->flush();
+
+		return true;
+	}
 }
 ?>

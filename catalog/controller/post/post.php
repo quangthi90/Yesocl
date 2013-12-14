@@ -277,7 +277,12 @@ class ControllerPostPost extends Controller {
                         $data['post_type']
                     );
                 }else{
-                    
+                    $this->model_user_user->deleteNotification(
+                        $post->getUser()->getId(),
+                        $this->customer->getId(),
+                        $post->getId(),
+                        $this->config->get('common')['action']['like']
+                    );
                 }
             }
 
