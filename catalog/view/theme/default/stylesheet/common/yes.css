@@ -2574,10 +2574,10 @@ ul.user_actions li:hover i{
   overflow-y: inherit;
 }
 .note-editor .note-tag-dialog .tag-data {
-  width: 520px;
+  width: 525px;
 }
 .note-editor .note-tag-dialog .typeahead{
-  width: 523px;
+  width: 528px;
 }
 .note-editor .note-tag-dialog .typeahead li {
   display: block;
@@ -2608,4 +2608,45 @@ ul.user_actions li:hover i{
 }
 .note-tag-dialog .typeahead li > a > span.user-name {
 }
+.note-tag-dialog .tag-container {
+  margin: 15px 0px;  
+  padding: 10px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+.note-tag-dialog .tag-container.no-tag-item {
+  border: none;
+}
+.note-tag-dialog .tag-container .tagItem {
+  background-color: #f0f0f0;  
+  padding: 3px 5px;
+  margin: 3px;
+  display: block;
+  float: left;
+}
+.note-tag-dialog .tag-container .tagItem i {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #ddd;
+}
+.note-tag-dialog .tag-container .tagItem:hover i {
+  color: #0e0e0e;
+}
+.note-editor .tag-wrapper {  
+}
+.note-editor .tag-wrapper .tagItem{  
+  padding: 2px;
+  margin-right: 3px;
+  background-color: #f0f0f0;
+}
+.note-editor .tag-wrapper .tagItem i {
+  color: #ddd;
+  margin-left: 5px;
+  font-size: 11px;
+}
+.note-editor .tag-wrapper .tagItem:hover i {
+  color: #0E0E0E;
+  visibility: visible;
+}
+
 /*END CUSTOM LIB's CSS*/

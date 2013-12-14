@@ -900,8 +900,31 @@
 
     this.insertTag = function ($editable, sTag) {
       recordUndo($editable);
-      var $tag = $('<p>').html(sTag);
-      range.create().insertNode($tag[0]);
+      var $tagEle = $('<span class="tag-wrapper"></span>').html(sTag).append($('<span class="space">&nbsp;</span>'));
+      $tagEle.find('.tagItem').each(function(){
+        $(this).css('border', '1px solid #F0F0F0');
+        $(this).children('i').on('click', function(){
+          $(this).parent().remove();
+        });
+        $(this).on('click', function(){
+          $editable.focus();
+          if (typeof window.getSelection != "undefined"
+                  && typeof document.createRange != "undefined") {
+              var range = document.createRange();
+              range.selectNodeContents($editable[0]);
+              range.collapse(false);
+              var sel = window.getSelection();
+              sel.removeAllRanges();
+              sel.addRange(range);
+          } else if (typeof document.body.createTextRange != "undefined") {
+              var textRange = document.body.createTextRange();
+              textRange.moveToElementText($editable[0]);
+              textRange.collapse(false);
+              textRange.select();
+          }
+        });
+      });
+      range.create().insertNode($tagEle[0]);
     };
 
     this.formatBlock = function($editable, sValue){
@@ -1197,84 +1220,122 @@
   /**
     * Tag
     */
-  var TagDlg = function($el, $callback){
+  var friendList = [];
+  var map = {};
+  function TagDlg ($el, $callback){
     this.dlgContainer = $el;
     this.inputTag     = $el.find('.tag-data');
     this.btnTag       = $el.find('.note-tag-btn');
     this.tagContainer = $el.find('.tag-container');
     this.insertTagToContent = $callback;
-
+    this.attachEvents();
+    this.initAutoComplete();
+  }
+  TagDlg.prototype.attachEvents = function() {
     var that = this;
-    that.dlgContainer.on('shown.bs.modal', function () {
-      that.inputTag.val('').keyup(function () {
+    that.dlgContainer.on('shown.bs.modal',function () {
+      that.inputTag.val('').on('keyup',function () {
         if ($(this).val()) {
           that.btnTag.removeClass('disabled').attr('disabled', false);
         } else {
           that.btnTag.addClass('disabled').attr('disabled', true);
         }
       }).trigger('focus');
-      that.btnTag.click(function (event) {
-        event.preventDefault();
+      that.btnTag.on('click',function (event) {
+        event.preventDefault();        
+        that.insertTagToContent(that.tagContainer.html()); 
         that.dlgContainer.modal('hide');
-        that.insertTagToContent(that.inputTag.val()); 
       });
     }).on('hidden.bs.modal', function () {
-      that.inputTag.off('keyup');
+      //that.inputTag.off('keyup');
       that.btnTag.off('click');
       that.dlgContainer.off('shown.bs.modal hidden.bs.modal');
+      that.tagContainer.html('');
     }).modal('show');
+  }
+  TagDlg.prototype.initAutoComplete = function() {
+    var that = this;
+    var typeaheadData = that.inputTag.typeahead({
+        source: function (query, process) {
+          //Lấy dữ liệu = ajax
+          //..................
+          friendList = [];
+          map = {}; 
 
-    var friendList = [];
-    var map = {}; 
-    this.initAutoComplete = function() {
-      that.inputTag.typeahead({
-          source: function (query, process) {
-            //Lấy dữ liệu = ajax
-            //..................
-            friendList = [];
-            map = {}; 
-
-            var tempImg = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";         
-            var data = [
-              {"id":"nguyen-van-a", "image": tempImg, "name": "Nguyễn Văn A", "url":"#"},
-              {"id":"tran-van-b", "image": tempImg, "name": "Trần Văn B", "url":"#"},
-              {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
-              {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
-              {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
-            ];             
-            $.each(data, function (i, item) {
-                friendList.push(item.id + '-' + item.name);
-                map[item.id + '-' + item.name] = item;
-            });            
-            process(friendList);
-          },
-          updater: function (item) {
-            var selectedFriend = map[item];
-            return selectedFriend.name;
-          },
-          matcher: function (item) {
-              if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
-                  return true;
-              }
-          },
-          sorter: function (items) {
-            return items.sort();
-          },
-          highlighter: function (item) {
-            that.inputTag.focus();
-            var selectedFriend = map[item];
-            var htmlContent = '<img src="' + selectedFriend.image + '" alt="' + selectedFriend.name + '" />'
-                            + '<span class="user-name">' + selectedFriend.name + '</span>';
-            return htmlContent;
-          }
+          var tempImg = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";         
+          var data = [
+            {"id":"nguyen-van-a", "image": tempImg, "name": "Nguyễn Văn A", "url":"#"},
+            {"id":"tran-van-b", "image": tempImg, "name": "Trần Văn B", "url":"#"},
+            {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
+            {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
+            {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
+          ];             
+          $.each(data, function (i, item) {
+              friendList.push(item.id + '-' + item.name);
+              map[item.id + '-' + item.name] = item;
+          });            
+          process(friendList);
+        },
+        updater: function (item) {
+          var selectedFriend = map[item];
+          return selectedFriend.name;
+        },
+        matcher: function (item) {
+            if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
+                return true;
+            }
+        },
+        sorter: function (items) {
+          return items.sort();
+        },
+        highlighter: function (item) {
+          that.inputTag.focus();
+          var selectedFriend = map[item];
+          var htmlContent = '<img src="' + selectedFriend.image + '" alt="' + selectedFriend.name + '" />'
+                          + '<span class="user-name">' + selectedFriend.name + '</span>';
+          return htmlContent;
+        }
+    }).data('typeahead');      
+    typeaheadData.select = function () {
+        var val = this.$menu.find('.active').attr('data-value');
+        var selectedData = map[val];
+        this.$element.val(this.updater(val)).trigger('selected', [{ selectedItem : selectedData }]);
+        return this.hide();
+    };
+    that.inputTag.on('selected', function(e,data){
+      var existedTagItem = that.tagContainer.find('.tagItem').filter(function(index){
+        return $(this).attr('data-value') === ('@' + data.selectedItem.id);
       });
-    };    
+      if(existedTagItem.length > 0){
+        existedTagItem.css('background-color','#B4B4B4');
+        setTimeout(function(){existedTagItem.css('background-color','#F0F0F0');}, 2000);
+        that.inputTag.val('').focus();
+        return;
+      }      
+      var tagItem = $('<span class="tagItem"></span>').attr('data-value','@' + data.selectedItem.id).attr('contentEditable','false');
+      var showTagEl = $('<b class="tag-name"></b>').html(data.selectedItem.name);
+      var linkTagEl = $('<a class="tag-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.url).css('display', 'none');
+      var removeTag = $('<i class="icon-remove"></i>').on('click', function(){
+        $(this).parent().fadeOut(500, function(){
+          $(this).remove();
+          if(that.tagContainer.children('.tagItem').length == 0){
+            that.tagContainer.addClass('no-tag-item');
+          }
+        });
+      });
+      if(that.tagContainer.hasClass('no-tag-item')){
+        that.tagContainer.removeClass('no-tag-item');
+      }
+      tagItem.append(showTagEl).append(linkTagEl).append(removeTag).appendTo(that.tagContainer);
+      that.inputTag.val('').focus();
+    });
   }
 
   /**
    * Dialog
    */
   var Dialog = function () {
+
     this.showImageDialog = function ($dialog, hDropImage, fnInsertImages, fnInsertImage) {
       var $imageDialog = $dialog.find('.note-image-dialog');
       var $dropzone = $dialog.find('.note-dropzone'),
@@ -1372,12 +1433,10 @@
 
     this.showTagDialog = function ($dialog, callback) {
       var $tagDialog = $dialog.find('.note-tag-dialog');
-      if($tagDialog.length > 0){
-        var tagDlg = new TagDlg($tagDialog, callback);
-        tagDlg.initAutoComplete();
-      }else {
-        console.log('Tag dialog not found !');
+      if(this.tagDlgCache){        
+        delete this.tagDlgCache;
       }
+      this.tagDlgCache = new TagDlg($tagDialog, callback);    
     };
 
     this.showHelpDialog = function ($dialog) {
@@ -2128,7 +2187,7 @@
         return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + locale.link.link + '" data-event="showLinkDialog" data-shortcut="Ctrl+K" data-mac-shortcut="⌘+K" tabindex="-1"><i class="fa fa-link icon-link"></i></button>';
       },
       video: function(locale){
-          return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + locale.video.video + '" data-event="showVideoDialog" tabindex="-1"><i class="fa fa-youtube-play icon-play"></i></button>';
+        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + locale.video.video + '" data-event="showVideoDialog" tabindex="-1"><i class="fa fa-youtube-play icon-play"></i></button>';
       },
       table: function(locale) {
         return '<button type="button" class="btn btn-default btn-sm btn-small dropdown-toggle" title="' + locale.table.table + '" data-toggle="dropdown" tabindex="-1"><i class="fa fa-table icon-table"></i> <span class="caret"></span></button>' +
@@ -2465,6 +2524,7 @@
                       '</div>' +
                       '<div class="modal-body">' +
                          '<input name="tag-data" autocomplete="off" class="tag-data" placeholder="Type something ..." />' +
+                         '<div class="tag-container no-tag-item"></div>' +
                       '</div>' +
                       '<div class="modal-footer">' +
                         '<button class="btn btn-primary note-tag-btn disabled" disabled="disabled">' + 'OK' + '</button>' +
@@ -2692,13 +2752,25 @@
           return bCodeview ? info.codable.val() : info.editable.html();
         }
         return $holder.html();
-      }
-
+      }    
       // set the HTML contents
       this.each(function (i, elHolder) {
         var info = renderer.layoutInfoFromHolder($(elHolder));
         if (info && info.editable) { info.editable.html(sHTML); }
       });
+    },
+    getTags: function(){
+      var $holder = this.first();
+      if ($holder.length === 0) { return; }
+      var info = renderer.layoutInfoFromHolder($holder);
+      if (!!(info && info.editable)) {
+        var tags = []; 
+        info.editable.find('.tagItem').each(function(){
+          tags.push($(this).data('value'));
+        });
+        return tags;
+      }
+      return undefined;
     },
     // destroy Editor Layout and dettach Key and Mouse Event
     destroy: function () {
