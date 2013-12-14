@@ -771,6 +771,9 @@
     var style = new Style();
     this.currentStyle = function (elTarget) {
       var rng = range.create();
+      if(rng === null){
+        return;
+      }
       return rng.isOnEditable() && style.current(rng, elTarget);
     };
 
@@ -895,6 +898,12 @@
       }
     }
 
+    this.insertTag = function ($editable, sTag) {
+      recordUndo($editable);
+      var $tag = $('<p>').html(sTag);
+      range.create().insertNode($tag[0]);
+    };
+
     this.formatBlock = function($editable, sValue){
       recordUndo($editable);
       sValue = agent.bMSIE ? '<' + sValue + '>' : sValue;
@@ -982,7 +991,7 @@
         recordUndo($editable);
         editor.insertVideo($editable, sLinkUrl);
       })
-    }
+    };
 
     this.color = function ($editable, sObjColor) {
       var oColor = JSON.parse(sObjColor);
@@ -1186,6 +1195,83 @@
   };
 
   /**
+    * Tag
+    */
+  var TagDlg = function($el, $callback){
+    this.dlgContainer = $el;
+    this.inputTag     = $el.find('.tag-data');
+    this.btnTag       = $el.find('.note-tag-btn');
+    this.tagContainer = $el.find('.tag-container');
+    this.insertTagToContent = $callback;
+
+    var that = this;
+    that.dlgContainer.on('shown.bs.modal', function () {
+      //that.inputTag.val('').keyup(function () {
+      //  if ($(this).val()) {
+      //    that.btnTag.removeClass('disabled').attr('disabled', false);
+      //  } else {
+      //    that.btnTag.addClass('disabled').attr('disabled', true);
+      //  }
+      //}).trigger('focus');
+      that.inputTag.val('').trigger('focus');
+      that.btnTag.click(function (event) {
+        event.preventDefault();
+        that.dlgContainer.modal('hide');
+        that.insertTagToContent(that.inputTag.val()); 
+      });
+    }).on('hidden.bs.modal', function () {
+      that.inputTag.off('keyup');
+      that.btnTag.off('click');
+      that.dlgContainer.off('shown.bs.modal hidden.bs.modal');
+    }).modal('show');
+
+    var friendList = [];
+    var map = {}; 
+    this.initAutoComplete = function() {
+      that.inputTag.typeahead({
+          source: function (query, process) {
+              //Lấy dữ liệu = ajax
+              //..................
+              friendList = [];
+              map = {}; 
+
+              var tempImg = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";         
+              var data = [
+                {"id":"nguyen-van-a", "image": tempImg, "name": "Nguyễn Văn A", "url":"#"},
+                {"id":"tran-van-b", "image": tempImg, "name": "Trần Văn B", "url":"#"},
+                {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
+                {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
+                {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
+              ];             
+              $.each(data, function (i, item) {
+                  friendList.push(item.id + '-' + item.name);
+                  map[item.id + '-' + item.name] = item;
+              });            
+              process(friendList);
+          },
+          updater: function (item) {
+              var selectedFriend = map[item];
+              return selectedFriend.name;
+          },
+          matcher: function (item) {
+              if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
+                  return true;
+              }
+          },
+          sorter: function (items) {
+              return items.sort();
+          },
+          highlighter: function (item) {
+              var selectedFriend = map[item];
+              var htmlContent = '<img src="' + selectedFriend.image + '" alt="' + selectedFriend.name + '" />'
+                              + '<span class="user-name">' + selectedFriend.name + '</span>';
+              return htmlContent;
+          }
+      });
+    };    
+  }
+
+  /**
    * Dialog
    */
   var Dialog = function () {
@@ -1255,7 +1341,6 @@
       }).modal('show');
     }
 
-
     this.showLinkDialog = function ($dialog, linkInfo, callback) {
       var $linkDialog = $dialog.find('.note-link-dialog');
       var $linkText = $linkDialog.find('.note-link-text'),
@@ -1283,6 +1368,16 @@
         $linkBtn.off('click');
         $linkDialog.off('shown.bs.modal hidden.bs.modal');
       }).modal('show');
+    };
+
+    this.showTagDialog = function ($dialog, callback) {
+      var $tagDialog = $dialog.find('.note-tag-dialog');
+      if($tagDialog.length > 0){
+        var tagDlg = new TagDlg($tagDialog, callback);
+        tagDlg.initAutoComplete();
+      }else {
+        console.log('Tag dialog not found !');
+      }
     };
 
     this.showHelpDialog = function ($dialog) {
@@ -1483,7 +1578,8 @@
             $toolbar = oLayoutInfo.toolbar(),
             $dialog = oLayoutInfo.dialog(),
             $editable = oLayoutInfo.editable(),
-            $codable = oLayoutInfo.codable();
+            $codable = oLayoutInfo.codable(),
+            $popover = oLayoutInfo.popover();
 
         // before command
         var elTarget;
@@ -1581,6 +1677,12 @@
           }
 
           toolbar.updateCodeview(oLayoutInfo.toolbar(), bCodeview);
+        } else if(sEvent === 'showTagUserList'){
+          $editable.focus();
+          dialog.showTagDialog($dialog, function(sTag){
+            editor.restoreRange($editable);
+            editor.insertTag($editable, sTag);
+          });
         }
 
         hToolbarAndPopoverUpdate(event);
@@ -2146,7 +2248,7 @@
         return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + locale.options.codeview + '" data-event="codeview" tabindex="-1"><i class="fa fa-code icon-code"></i></button>';
       },
       tag: function(locale) {
-        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + locale.options.tag + '" data-event="showHelpDialog" tabindex="-1"><i class="fa fa-user icon-user"></i></button>';
+        return '<button type="button" class="btn btn-default btn-sm btn-small" title="' + locale.options.tag + '" data-event="showTagUserList" tabindex="-1" data-container="body" data-toggle="popover" data-placement="bottom" data-content="ABC"><i class="fa fa-user icon-user"></i></button>';
       }
     };
     var sPopover = function(locale) {
@@ -2302,7 +2404,6 @@
                       '</div>' +
                       '<div class="modal-body">' +
                         '<div class="row-fluid">' +
-
                         '<div class="form-group">' +
                           '<label>' + locale.link.text_to_display + '</label>' +
                           '<span class="note-link-text form-control input-xlarge uneditable-input" />' +
@@ -2319,41 +2420,58 @@
                     '</div>' +
                   '</div>' +
                 '</div>' +
-                    '<div class="note-video-dialog modal" aria-hidden="false">' +
-                      '<div class="modal-dialog">' +
-                        '<div class="modal-content">' +
-                          '<div class="modal-header">' +
-                            '<button type="button" class="close" aria-hidden="true" tabindex="-1">×</button>' +
-                            '<h4>' + locale.video.insert +'</h4>' +
-                          '</div>' +
-                          '<div class="modal-body">' +
-                            '<div class="row-fluid">' +
+                '<div class="note-video-dialog modal" aria-hidden="false">' +
+                  '<div class="modal-dialog">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<button type="button" class="close" aria-hidden="true" tabindex="-1">×</button>' +
+                        '<h4>' + locale.video.insert +'</h4>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                        '<div class="row-fluid">' +
 
-                            '<div class="form-group">' +
-                              '<label>' + locale.video.url + '</label>&nbsp;<small class="text-muted">' + locale.video.providers + '</small>' +
-                              '<input class="note-video-url form-control span12" type="text" />' +
-                            '</div>' +
-                            '</div>' +
-                          '</div>' +
-                          '<div class="modal-footer">' +
-                            '<button href="#" class="btn btn-primary note-video-btn disabled" disabled="disabled">' + locale.video.insert + '</button>' +
-                          '</div>' +
+                        '<div class="form-group">' +
+                          '<label>' + locale.video.url + '</label>&nbsp;<small class="text-muted">' + locale.video.providers + '</small>' +
+                          '<input class="note-video-url form-control span12" type="text" />' +
+                        '</div>' +
                         '</div>' +
                       '</div>' +
+                      '<div class="modal-footer">' +
+                        '<button href="#" class="btn btn-primary note-video-btn disabled" disabled="disabled">' + locale.video.insert + '</button>' +
+                      '</div>' +
                     '</div>' +
+                  '</div>' +
+                '</div>' +
                 '<div class="note-help-dialog modal" aria-hidden="false">' +
                   '<div class="modal-dialog">' +
                     '<div class="modal-content">' +
                       '<div class="modal-body">' +
                         '<div class="modal-background">' +
-                        '<a class="modal-close pull-right" aria-hidden="true" tabindex="-1">' + locale.shortcut.close + '</a>' +
-                        '<div class="title">' + locale.shortcut.shortcuts + '</div>' +
-                        (agent.bMac ? sShortcutTable(locale) : replaceMacKeys(sShortcutTable(locale))) +
-                        '<p class="text-center"><a href="//hackerwins.github.io/summernote/" target="_blank">Summernote v0.4</a> · <a href="//github.com/HackerWins/summernote" target="_blank">Project</a> · <a href="//github.com/HackerWins/summernote/issues" target="_blank">Issues</a></p>' +
+                          '<a class="modal-close pull-right" aria-hidden="true" tabindex="-1">' + locale.shortcut.close + '</a>' +
+                          '<div class="title">' + locale.shortcut.shortcuts + '</div>' +
+                          (agent.bMac ? sShortcutTable(locale) : replaceMacKeys(sShortcutTable(locale))) +
+                          '<p class="text-center"><a href="//hackerwins.github.io/summernote/" target="_blank">Summernote v0.4</a> · <a href="//github.com/HackerWins/summernote" target="_blank">Project</a> · <a href="//github.com/HackerWins/summernote/issues" target="_blank">Issues</a></p>' +
+                        '</div>' +
                       '</div>' +
                     '</div>' +
                   '</div>' +
                 '</div>' +
+                '<div class="note-tag-dialog modal" aria-hidden="false">' +
+                  '<div class="modal-dialog">' +
+                    '<div class="modal-content">' +
+                      '<div class="modal-header">' +
+                        '<button type="button" class="close" aria-hidden="true" tabindex="-1">×</button>' +
+                        '<h4>' + 'Tag' + '</h4>' +
+                      '</div>' +
+                      '<div class="modal-body">' +
+                         '<input name="tag-data" autocomplete="off" class="tag-data" placeholder="Type something ..." />' +
+                      '</div>' +
+                      '<div class="modal-footer">' +
+                        '<button class="btn btn-primary note-tag-btn disabled" disabled="disabled">' + 'OK' + '</button>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>'
               '</div>';
     };
 

@@ -2564,4 +2564,48 @@ ul.user_actions li:hover i{
 .note-editor .btn-toolbar button > i {
   font-size: 13px;
 }
+.note-editor .note-popover .popover{
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.note-editor .note-tag-dialog .modal-body {
+  min-height: 180px;
+  overflow-y: inherit;
+}
+.note-editor .note-tag-dialog .tag-data {
+  width: 520px;
+}
+.note-editor .note-tag-dialog .typeahead{
+  width: 523px;
+}
+.note-editor .note-tag-dialog .typeahead li {
+  display: block;
+}
+.note-tag-dialog .dropdown-menu > .active > a,
+.note-tag-dialog .dropdown-menu > .active > a:hover,
+.note-tag-dialog .dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #009B77;
+  background-image: -moz-linear-gradient(top, #009B77, #009B77);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009B77), to(#009B77));
+  background-image: -webkit-linear-gradient(top, #009B77, #009B77);
+  background-image: -o-linear-gradient(top, #009B77, #009B77);
+  background-image: linear-gradient(to bottom, #009B77, #009B77);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#009B77', endColorstr='#009B77', GradientType=0);
+}
+.note-tag-dialog .typeahead li > a {
+  overflow: hidden;
+}
+.note-tag-dialog .typeahead li > a > img {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 5px;
+}
+.note-tag-dialog .typeahead li > a > span.user-name {
+}
 /*END CUSTOM LIB's CSS*/
