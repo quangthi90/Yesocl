@@ -24,6 +24,40 @@ class ControllerCommonHeader extends Controller {
 					) 
 				)
 			);
+		}else{
+			$user = $this->customer->getUser();
+
+			$notifications = $user->getNotifications();
+
+			$experie_time = new DateTime('now');
+			date_sub($experie_time, date_interval_create_from_date_string('7 days'));
+
+			$this->data['users'] = array();
+			$this->data['notifications'] = array();
+			foreach ( $notifications as $notification ) {
+				if ( $notification->getRead() || $notification->getCreated() < $experie_time ){
+					continue;
+				}
+
+				$actor = $notification->getActor();
+
+				if ( !array_key_exists($actor->getId(), $users) ){
+					$user = $actor->formatToCache();
+
+					$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+
+					$this->data['users'][$actor->getId()] = $user;
+				}
+
+				$this->data['notifications'][] = array(
+					'actor_id' => $actor->getId(),
+					'action' => $notification->getAction(),
+					'object_id' => $notification->getObjectId(),
+					'created' => $notification->getCreated()
+				);
+			}
+
+			$this->data['date_format'] = $this->language->get('date_format_full');
 		}
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
