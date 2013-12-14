@@ -61,7 +61,7 @@ class ControllerCommonSearch extends Controller {
 		$aBranchPostIds = array();
 		foreach ( $lSearchPosts as $oPost ) {
 			switch ( $oPost->getType() ) {
-				case $this->config->get('post')['type']['branch']:
+				case $this->config->get('post')['cache']['branch']:
 					$aBranchPostIds[$oPost->getId()] = $oPost->getId();
 					break;
 			}
@@ -188,12 +188,12 @@ class ControllerCommonSearch extends Controller {
 		$aBranchPostIds = array();
 		foreach ( $aPosts as $oPost ) {
 			switch ( $oPost->getType() ) {
-				case $this->config->get('post')['type']['branch']:
+				case $this->config->get('post')['cache']['branch']:
 					$aBranchPostIds[$oPost->getId()] = $oPost->getId();
 					break;
 			}
 		}
-
+		
 		$lBranchPosts = $this->model_branch_post->getPosts( array('post_ids' => $aBranchPostIds) );
 
 		$this->data['posts'] = array();
