@@ -1206,14 +1206,13 @@
 
     var that = this;
     that.dlgContainer.on('shown.bs.modal', function () {
-      //that.inputTag.val('').keyup(function () {
-      //  if ($(this).val()) {
-      //    that.btnTag.removeClass('disabled').attr('disabled', false);
-      //  } else {
-      //    that.btnTag.addClass('disabled').attr('disabled', true);
-      //  }
-      //}).trigger('focus');
-      that.inputTag.val('').trigger('focus');
+      that.inputTag.val('').keyup(function () {
+        if ($(this).val()) {
+          that.btnTag.removeClass('disabled').attr('disabled', false);
+        } else {
+          that.btnTag.addClass('disabled').attr('disabled', true);
+        }
+      }).trigger('focus');
       that.btnTag.click(function (event) {
         event.preventDefault();
         that.dlgContainer.modal('hide');
@@ -1230,28 +1229,28 @@
     this.initAutoComplete = function() {
       that.inputTag.typeahead({
           source: function (query, process) {
-              //Lấy dữ liệu = ajax
-              //..................
-              friendList = [];
-              map = {}; 
+            //Lấy dữ liệu = ajax
+            //..................
+            friendList = [];
+            map = {}; 
 
-              var tempImg = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";         
-              var data = [
-                {"id":"nguyen-van-a", "image": tempImg, "name": "Nguyễn Văn A", "url":"#"},
-                {"id":"tran-van-b", "image": tempImg, "name": "Trần Văn B", "url":"#"},
-                {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
-                {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
-                {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
-              ];             
-              $.each(data, function (i, item) {
-                  friendList.push(item.id + '-' + item.name);
-                  map[item.id + '-' + item.name] = item;
-              });            
-              process(friendList);
+            var tempImg = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";         
+            var data = [
+              {"id":"nguyen-van-a", "image": tempImg, "name": "Nguyễn Văn A", "url":"#"},
+              {"id":"tran-van-b", "image": tempImg, "name": "Trần Văn B", "url":"#"},
+              {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
+              {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
+              {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
+            ];             
+            $.each(data, function (i, item) {
+                friendList.push(item.id + '-' + item.name);
+                map[item.id + '-' + item.name] = item;
+            });            
+            process(friendList);
           },
           updater: function (item) {
-              var selectedFriend = map[item];
-              return selectedFriend.name;
+            var selectedFriend = map[item];
+            return selectedFriend.name;
           },
           matcher: function (item) {
               if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
@@ -1259,13 +1258,14 @@
               }
           },
           sorter: function (items) {
-              return items.sort();
+            return items.sort();
           },
           highlighter: function (item) {
-              var selectedFriend = map[item];
-              var htmlContent = '<img src="' + selectedFriend.image + '" alt="' + selectedFriend.name + '" />'
-                              + '<span class="user-name">' + selectedFriend.name + '</span>';
-              return htmlContent;
+            that.inputTag.focus();
+            var selectedFriend = map[item];
+            var htmlContent = '<img src="' + selectedFriend.image + '" alt="' + selectedFriend.name + '" />'
+                            + '<span class="user-name">' + selectedFriend.name + '</span>';
+            return htmlContent;
           }
       });
     };    
