@@ -55,12 +55,15 @@
 		      		</li>
 			    </ul>
 			</div>
-			<div id="user-notification" class="fr notification-group">        		
+			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common">
           <a href="#" class="btn-notification">
             <i class="icon-bell"></i>
+            {% if notifications|length > 0 %}
             <span class="notification-item-count">{{ notifications|length }}</span>
+            {% endif %}
           </a>
+          {% if notifications|length > 0 %}
           <div class="notification-content-list">
             <ul>
               {% for notification in notifications %}
@@ -81,6 +84,7 @@
               {% endfor %}
             </ul>
           </div>
+          {% endif %}
         </div>
         {#<div class="notification-item message">
           <a href="#" class="btn-notification">

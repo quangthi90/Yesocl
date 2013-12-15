@@ -28,14 +28,16 @@ class ControllerCommonHeader extends Controller {
 			$user = $this->customer->getUser();
 
 			$notifications = $user->getNotifications();
-
 			$experie_time = new DateTime('now');
 			date_sub($experie_time, date_interval_create_from_date_string('7 days'));
 
 			$this->data['users'] = array();
 			$this->data['notifications'] = array();
 			foreach ( $notifications as $notification ) {
-				if ( $notification->getRead() || $notification->getCreated() < $experie_time ){
+				if ( $notification->getRead() == true || 
+					($notification->getCreated() < $experie_time 
+						&& $notification->getRead() == true) ||
+					$notification->getStatus() == false ){
 					continue;
 				}
 
@@ -56,7 +58,7 @@ class ControllerCommonHeader extends Controller {
 					'created' => $notification->getCreated()
 				);
 			}
-
+			
 			$this->data['date_format'] = $this->language->get('date_format_full');
 		}
 				

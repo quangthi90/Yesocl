@@ -106,7 +106,15 @@ class ModelUserUser extends Model {
 			return false;
 		}
 
-		$notification = new Notification();
+		$notification = $user->getNotificationByData( $actor->getId(), $object_id, $action );
+		
+		if ( !$notification ){
+			$notification = new Notification();
+			$this->dm->persist( $notification );
+		}else{
+			$notification->setStatus( true );
+		}
+
 		$notification->setActor( $actor );
 		$notification->setAction( $action );
 		$notification->setObjectId( $object_id );
