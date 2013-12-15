@@ -35,8 +35,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['notifications'] = array();
 			foreach ( $notifications as $notification ) {
 				if ( $notification->getRead() == true || 
-					($notification->getCreated() < $experie_time 
-						&& $notification->getRead() == true) ||
+					$notification->getCreated() < $experie_time ||
 					$notification->getStatus() == false ){
 					continue;
 				}

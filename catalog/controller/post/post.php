@@ -266,10 +266,10 @@ class ControllerPostPost extends Controller {
 
         if ( $oPost ){
             if ( $oPost->getUser()->getId() != $this->customer->getId() ){
-                $this->load->model('user/user');
+                $this->load->model('user/notification');
 
                 if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
-                    $this->model_user_user->addNotification(
+                    $this->model_user_notification->addNotification(
                         $oPost->getUser()->getId(),
                         $this->customer->getUser(),
                         $this->config->get('common')['action']['like'],
@@ -277,7 +277,7 @@ class ControllerPostPost extends Controller {
                         $data['post_type']
                     );
                 }else{
-                    $this->model_user_user->deleteNotification(
+                    $this->model_user_notification->deleteNotification(
                         $oPost->getUser()->getId(),
                         $this->customer->getId(),
                         $oPost->getId(),
