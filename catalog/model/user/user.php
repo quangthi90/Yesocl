@@ -98,25 +98,5 @@ class ModelUserUser extends Model {
 		
 		return false;
 	}
-
-	public function addNotification( $user_id, $actor, $action, $object_id, $type ){
-		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
-
-		if ( !$user ){
-			return false;
-		}
-
-		$notification = new Notification();
-		$notification->setActor( $actor );
-		$notification->setAction( $action );
-		$notification->setObjectId( $object_id );
-		$notification->setType( $type );
-
-		$user->addNotification( $notification );
-
-		$this->dm->flush();
-
-		return true;
-	}
 }
 ?>

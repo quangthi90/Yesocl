@@ -260,36 +260,40 @@ class ControllerPostPost extends Controller {
                 break;
             
             default:
-                $post = null;
+                $oPost = null;
                 break;
         }
 
-        if ( $post ){
-            if ( $post->getUser()->getId() != $this->customer->getId() ){
-                $this->load->model('user/user');
+        if ( $oPost ){
+            if ( $oPost->getUser()->getId() != $this->customer->getId() ){
+                $this->load->model('user/notification');
 
-                if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
-                    $this->model_user_user->addNotification(
-                        $post->getUser()->getId(),
+                if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+                    $this->model_user_notification->addNotification(
+                        $oPost->getUser()->getId(),
                         $this->customer->getUser(),
                         $this->config->get('common')['action']['like'],
-                        $post->getId(),
+                        $oPost->getId(),
                         $data['post_type']
                     );
                 }else{
-                    
+                    $this->model_user_notification->deleteNotification(
+                        $oPost->getUser()->getId(),
+                        $this->customer->getId(),
+                        $oPost->getId(),
+                        $this->config->get('common')['action']['like']
+                    );
                 }
             }
 
             return $this->response->setOutput(json_encode(array(
                 'success' => 'ok',
-                'like_count' => count($post->getLikerIds())
+                'like_count' => count($oPost->getLikerIds())
             )));
         }
 
         return $this->response->setOutput(json_encode(array(
-            'success' => 'ok',
-            'like_count' => count($oPost->getLikerIds())
+            'success' => 'not ok'
         )));
     }
 

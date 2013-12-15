@@ -72,4 +72,7 @@ $_['routing']['DegreeAutoComplete']				= 'data/degree/{keyword}/';
 $_['routing']['SchoolAutoComplete']				= 'data/school/{keyword}/';
 $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 
+// Notification
+$_['routing']['NotificationReadAll']			= 'notification/readAll/';
+
 ?>

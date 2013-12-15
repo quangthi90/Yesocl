@@ -24,5 +24,21 @@ class ControllerCommonNotification extends Controller {
 										
 		$this->response->setOutput($this->twig_render());
 	}
+
+	public function readAll(){
+		$this->load->model('user/notification');
+
+		$result = $this->model_user_notification->readAll( $this->customer->getId() );
+
+		if ( $result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'ok'
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+	}
 }
 ?>
