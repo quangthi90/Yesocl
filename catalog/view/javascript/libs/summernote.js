@@ -902,7 +902,7 @@
       recordUndo($editable);
       var $tagEle = $('<span class="tag-wrapper"></span>').html(sTag).append($('<span class="space">&nbsp;</span>'));
       $tagEle.find('.tagItem').each(function(){
-        $(this).css('border', '1px solid #F0F0F0');
+        $(this).css('background-color', '#F0F0F0');
         $(this).children('i').on('click', function(){
           $(this).parent().remove();
         });
@@ -1222,7 +1222,8 @@
     */
   var friendList = [];
   var map = {};
-  function TagDlg ($el, $callback){
+  var currentTagsGlobal = [];
+  function TagDlg ($currentTags, $el, $callback){
     this.dlgContainer = $el;
     this.inputTag     = $el.find('.tag-data');
     this.btnTag       = $el.find('.note-tag-btn');
@@ -1230,17 +1231,12 @@
     this.insertTagToContent = $callback;
     this.attachEvents();
     this.initAutoComplete();
+    currentTagsGlobal = $currentTags;
   }
   TagDlg.prototype.attachEvents = function() {
     var that = this;
     that.dlgContainer.on('shown.bs.modal',function () {
-      that.inputTag.val('').on('keyup',function () {
-        if ($(this).val()) {
-          that.btnTag.removeClass('disabled').attr('disabled', false);
-        } else {
-          that.btnTag.addClass('disabled').attr('disabled', true);
-        }
-      }).trigger('focus');
+      that.inputTag.val('').trigger('focus');
       that.btnTag.on('click',function (event) {
         event.preventDefault();        
         that.insertTagToContent(that.tagContainer.html()); 
@@ -1251,6 +1247,10 @@
       that.btnTag.off('click');
       that.dlgContainer.off('shown.bs.modal hidden.bs.modal');
       that.tagContainer.html('');
+      if(!that.tagContainer.hasClass('no-tag-item')) {
+        that.tagContainer.addClass('no-tag-item');
+      }
+      that.btnTag.addClass('disabled').attr('disabled', true);
     }).modal('show');
   }
   TagDlg.prototype.initAutoComplete = function() {
@@ -1269,11 +1269,11 @@
             {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
             {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
             {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
-          ];             
+          ];                
           $.each(data, function (i, item) {
               friendList.push(item.id + '-' + item.name);
               map[item.id + '-' + item.name] = item;
-          });            
+          });
           process(friendList);
         },
         updater: function (item) {
@@ -1281,9 +1281,13 @@
           return selectedFriend.name;
         },
         matcher: function (item) {
-            if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
-                return true;
-            }
+          var checkingItem = map[item];
+          if(currentTagsGlobal.length != 0 && $.inArray('@' + checkingItem.id, currentTagsGlobal) >= 0){
+            return false;
+          }
+          if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
+              return true;
+          }
         },
         sorter: function (items) {
           return items.sort();
@@ -1307,26 +1311,34 @@
         return $(this).attr('data-value') === ('@' + data.selectedItem.id);
       });
       if(existedTagItem.length > 0){
-        existedTagItem.css('background-color','#B4B4B4');
-        setTimeout(function(){existedTagItem.css('background-color','#F0F0F0');}, 2000);
         that.inputTag.val('').focus();
         return;
-      }      
+      } 
       var tagItem = $('<span class="tagItem"></span>').attr('data-value','@' + data.selectedItem.id).attr('contentEditable','false');
       var showTagEl = $('<b class="tag-name"></b>').html(data.selectedItem.name);
       var linkTagEl = $('<a class="tag-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.url).css('display', 'none');
       var removeTag = $('<i class="icon-remove"></i>').on('click', function(){
         $(this).parent().fadeOut(500, function(){
-          $(this).remove();
+          var deletedValue = $(this).data('value');
+          var indexDeletedValue = currentTagsGlobal.indexOf(deletedValue);
+          if(indexDeletedValue >= 0){
+            currentTagsGlobal.splice(indexDeletedValue, 1);
+          }
+          $(this).remove();          
           if(that.tagContainer.children('.tagItem').length == 0){
             that.tagContainer.addClass('no-tag-item');
+            that.btnTag.addClass('disabled').attr('disabled', true);        
           }
         });
       });
       if(that.tagContainer.hasClass('no-tag-item')){
         that.tagContainer.removeClass('no-tag-item');
       }
+      if(that.btnTag.hasClass('disabled')) {
+        that.btnTag.removeClass('disabled').attr('disabled', false);
+      }
       tagItem.append(showTagEl).append(linkTagEl).append(removeTag).appendTo(that.tagContainer);
+      currentTagsGlobal.push('@' + data.selectedItem.id);
       that.inputTag.val('').focus();
     });
   }
@@ -1431,12 +1443,12 @@
       }).modal('show');
     };
 
-    this.showTagDialog = function ($dialog, callback) {
+    this.showTagDialog = function (currentTags, $dialog, callback) {
       var $tagDialog = $dialog.find('.note-tag-dialog');
       if(this.tagDlgCache){        
         delete this.tagDlgCache;
       }
-      this.tagDlgCache = new TagDlg($tagDialog, callback);    
+      this.tagDlgCache = new TagDlg(currentTags, $tagDialog, callback);    
     };
 
     this.showHelpDialog = function ($dialog) {
@@ -1738,7 +1750,12 @@
           toolbar.updateCodeview(oLayoutInfo.toolbar(), bCodeview);
         } else if(sEvent === 'showTagUserList'){
           $editable.focus();
-          dialog.showTagDialog($dialog, function(sTag){
+          //Get current tags:
+          var tags = []; 
+          $editable.find('.tagItem').each(function(){
+            tags.push($(this).data('value'));            
+          });
+          dialog.showTagDialog(tags, $dialog, function(sTag){
             editor.restoreRange($editable);
             editor.insertTag($editable, sTag);
           });
