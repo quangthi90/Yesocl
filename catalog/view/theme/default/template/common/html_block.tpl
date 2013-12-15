@@ -30,12 +30,6 @@
 			    	<div class="dlg-column fr" style="width:100%;">
 						<div class="alert alert-error top-warning hidden">Warning!!</div>
 				    	<div class="control-group">
-			    			<label class="control-label">Tag</label>
-					    	<div class="controls">
-				    			<textarea class="comment-tag mention" placeholder="type name ..." name="tag" id="comment-tag" max-length="100" style="height: 40px;"></textarea>
-				    		</div>
-				    	</div>
-				    	<div class="control-group">
 			    			<label class="control-label">Comment</label>
 					    	<div class="y-editor post-advance-content"></div>
 				    	</div>
@@ -158,12 +152,6 @@
 				    				style="width: 98%;" />
 				    		</div>
 			    		</div>
-			    		<div class="control-group">
-			    			<label class="control-label">Tag</label>
-					    	<div class="controls">
-				    			<textarea class="post-tag mention" name="tag" id="post-tag"  placeholder="type name ..." max-length="100" style="height: 40px;"></textarea>
-				    		</div>
-				    	</div>
 			    		<div class="control-group">
 			    			<label class="control-label">Content</label>
 					    	<div class="y-editor post-advance-content" id="post-adv-editor"></div>
