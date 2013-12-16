@@ -69,6 +69,7 @@
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('routing.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('notification.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}
