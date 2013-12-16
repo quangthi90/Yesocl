@@ -288,10 +288,7 @@ function HashTable(obj)
 			    //    responseData = _.filter(responseData, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 			    //    callback.call(this, responseData);
 		      	//});
-			},
-			minChars: 1,
-			showAvatars: true,
-			triggerChar: '@'
+			}
 	  	});
 	}
 	/*

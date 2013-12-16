@@ -19,7 +19,7 @@
     elastic         : true,
     fullNameTrigger : false,
     onDataRequest   : $.noop,
-    minChars        : 2,
+    minChars        : 1,
     showAvatars     : true,
     classes         : {
       autoCompleteItemActive : "active"
@@ -31,8 +31,9 @@
       autocompleteListItemAvatar : _.template('<img  src="<%= avatar %>" />'),
       autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
+      mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>'),
       mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
-      mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>')
+      mentionItemContent          : _.template('<a href="#" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= type %>:<%= id %>)"><%= value %></a>')      
     },
     mentionItemRegex: /@\[([^\]]+)\]\(([^:]+):(\d+)\)/g
   };
@@ -161,11 +162,12 @@
 
     function updateValues() {
       var initialMessage = getInputBoxValue();
-      
       var syntaxMessage = '';
+      var contentMessage = '';
       var index = 0;
       _.each(mentionsCollection, function (mention) {
         var textSyntax = settings.templates.mentionItemSyntax({ value : mention.value, type : mention.type, id : mention.id });
+        var linkSyntax = settings.templates.mentionItemContent({ value: mention.value, id: mention.id, type : mention.type });
 
         var mentionIndex = initialMessage.indexOf(mention.value, index);
         if (mentionIndex === -1) {
@@ -174,24 +176,26 @@
         
         syntaxMessage += initialMessage.substr(index, mentionIndex - index);
         syntaxMessage += textSyntax;
+        contentMessage += initialMessage.substr(index, mentionIndex - index);
+        contentMessage += linkSyntax;
          
         index = mentionIndex + mention.value.length;
       });
       syntaxMessage += initialMessage.substr(index);
+      contentMessage += initialMessage.substr(index);
 
       var mentionText = utils.htmlEncode(syntaxMessage);
-
       _.each(mentionsCollection, function (mention) {
         var textSyntax = settings.templates.mentionItemSyntax({ value : utils.htmlEncode(mention.value), type : mention.type, id : mention.id });
         var textHighlight = settings.templates.mentionItemHighlight({ value : utils.htmlEncode(mention.value) });
 
         mentionText = mentionText.replace(textSyntax, textHighlight);
       });
-
       mentionText = mentionText.replace(/\n/g, '<br />');
       mentionText = mentionText.replace(/ {2}/g, '&nbsp; ');
-
+      
       elmInputBox.data('messageText', syntaxMessage);
+      elmInputBox.data('messageHtmlContent', contentMessage);
       elmMentionsOverlay.find('div').html(mentionText);
     }
 
@@ -481,6 +485,16 @@
 
       val : function (callback) {
         var value = mentionsCollection.length ? elmInputBox.data('messageText') : getInputBoxValue();
+        
+        if (!_.isFunction(callback)) {
+          return value;
+        }
+
+        callback.call(this, value);
+      },
+
+      getHtmlContent : function(callback) {
+        var value = mentionsCollection.length ? elmInputBox.data('messageHtmlContent') : getInputBoxValue();
         
         if (!_.isFunction(callback)) {
           return value;

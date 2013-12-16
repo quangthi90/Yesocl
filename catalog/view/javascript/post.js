@@ -287,10 +287,8 @@
             $.each(mentions, function(key, value){                
                 usersTagged.push(value.id);
             });
-            return false;
-
             that.data = {
-                content     : that.$content.val(),
+                content     : that.$content.mentionsInput('getHtmlContent'),
                 tags        : usersTagged,
                 thumb       : that.$el.find('.img-link-popup').attr('href')
             };
