@@ -95,6 +95,24 @@ function HashTable(obj)
 }
 
 /*
+	Create current User info
+*/
+function CurrentUser()
+{
+    var $curr_user_info = $('#current-user-info');
+    this.slug = $curr_user_info.find('#current-user-slug');
+
+    $curr_user_info.remove();
+    
+    this.getSlug = function()
+    {
+        return this.slug;
+    }
+}
+
+var yCurrUser = new CurrentUser();
+
+/*
 	End JS Utitlity Function
 */
 (function($, document, undefined) {
@@ -216,46 +234,6 @@ function HashTable(obj)
 		this.menuContainer.makeCustomScroll(false);
 	}
 	/* End Left Sidebar */
-
-	/*
-		Start Notification
-	*/
-	function Notification(el){
-		this.root = el;
-		this.notificationItem = el.find('.notification-item');
-		this.allNotificationBtn = el.find('.btn-notification');
-		this.allNotificationList = el.find('.notification-content-list');
-		this.notInclude = $('#y-container, #y-sidebar,#y-footer');
-		this.attachEvents();
-	}
-	Notification.prototype.attachEvents = function() {
-		var that = this;
-		that.notificationItem.each(function(){
-			var me = $(this);
-			var btnInvoke = $(this).children('.btn-notification');
-			var listNotification = $(this).children('.notification-content-list');
-			listNotification.makeCustomScroll(false);
-			listNotification.css('opacity', '1').hide(10);
-			btnInvoke.on('click', function(e){
-				e.preventDefault();
-				var hasActive = me.hasClass('active');
-				that.allNotificationList.slideUp(10);
-				that.notificationItem.removeClass('active');
-				if(!hasActive){
-					listNotification.slideDown(200, function(){
-						me.addClass('active');
-					});	
-				}
-			});
-		});
-		that.notInclude.on('click', function(){ 
-			that.allNotificationList.slideUp(10);
-			that.notificationItem.removeClass('active');
-		});
-	}
-	/*
-		End Notification
-	*/
 	/*
 		Start Mention (Tag)
 	*/

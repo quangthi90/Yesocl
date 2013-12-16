@@ -4,7 +4,7 @@ class ControllerCommonNotification extends Controller {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
-			$this->data['base'] = $this->config->get('config_url');
+			$this->data['base'] = HTTP_SERVER;
 		}
 		
 		$this->document->setTitle($this->config->get('config_title'));

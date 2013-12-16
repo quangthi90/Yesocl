@@ -1,11 +1,55 @@
-// Notification for make friend
+// Show dropdown list for notification
+(function($, document, undefined) {
+	function Notification(el){
+		this.root = el;
+		this.notificationItem = el.find('.notification-item');
+		this.allNotificationBtn = el.find('.btn-notification');
+		this.allNotificationList = el.find('.notification-content-list');
+		this.notInclude = $('#y-container, #y-sidebar,#y-footer');
+		this.attachEvents();
+	}
+	Notification.prototype.attachEvents = function() {
+		var that = this;
+		that.notificationItem.each(function(){
+			var me = $(this);
+			var btnInvoke = $(this).children('.btn-notification');
+			var listNotification = $(this).children('.notification-content-list');
+			listNotification.makeCustomScroll(false);
+			listNotification.css('opacity', '1').hide(10);
+			btnInvoke.on('click', function(e){
+				e.preventDefault();
+				var hasActive = me.hasClass('active');
+				that.allNotificationList.slideUp(10);
+				that.notificationItem.removeClass('active');
+				if(!hasActive){
+					listNotification.slideDown(200, function(){
+						me.addClass('active');
+					});	
+				}
+			});
+		});
+		that.notInclude.on('click', function(){ 
+			that.allNotificationList.slideUp(10);
+			that.notificationItem.removeClass('active');
+		});
+	}
+
+	$(document).ready(function() {
+		if($('#user-notification').length > 0){
+			new Notification($('#user-notification'));
+		}
+	});
+}(jQuery, document));
+
+// Notification btn
 (function($, document, undefined) {
 	function NotifyFriendBtn( $el ){
 		this.$el			= $el;
 		this.$accept_btn	= $el.find('.btn-accept');
-		this.accept_url		= this.$accept_btn.data('url');
 		this.$ignore_btn	= $el.find('.btn-ignore');
-		this.ignore_url		= this.$ignore_btn.data('url');
+		this.$see_notify_btn = $el.find('.js-btn-see-notify');
+
+		this.slug 			= $el.data('slug');
 
 		this.attachEvents();
 	}
@@ -15,10 +59,12 @@
 		this.$accept_btn.click(function(e) {
 			e.preventDefault();
 			
-			if(that.$el.hasClass('disabled')) {
+			if(that.$accept_btn.hasClass('disabled')) {
 				return false;
 			}
 
+			that.url = yRouting.generate('ConfirmFriend', {user_slug: that.slug});
+			
 			that.submit( that.$accept_btn, that.accept_url );
 
 			return false;
@@ -27,21 +73,35 @@
 		this.$ignore_btn.click(function(e) {
 			e.preventDefault();
 			
-			if(that.$el.hasClass('disabled')) {
+			if(that.$ignore_btn.hasClass('disabled')) {
 				return false;
 			}
 
+			that.url = yRouting.generate('IgnoreFriend', {user_slug: that.slug});
+			
 			that.submit( that.$ignore_btn, that.ignore_url );
 
 			return false;
 		});
+
+		this.$see_notify_btn.click(function(e) {
+			e.preventDefault();
+			
+			if(that.$see_notify_btn.hasClass('disabled')) {
+				return false;
+			}
+
+			that.submit( that.$see_notify_btn, that.ignore_url );
+
+			return false;
+		});
 	};	
-	NotifyFriendBtn.prototype.submit = function($button, url){
+	NotifyFriendBtn.prototype.submit = function($button){
 		var that = this;
 
 		var promise = $.ajax({
 			type: 'POST',
-			url: url,
+			url: that.url,
 			dataType: 'json'
 		});
 
@@ -75,10 +135,6 @@
 	};
 
 	$(document).ready(function() {
-		if($('#user-notification').length > 0){
-			new Notification($('#user-notification'));
-		}
-		
 		$('.notify-actions').each(function(){
 			new NotifyFriendBtn( $(this) );
 		});

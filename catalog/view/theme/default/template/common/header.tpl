@@ -8,6 +8,11 @@
 
 {% if is_logged() %}
   {% set user_slug = get_current_user().slug %}
+{# current user info -- deleted after read #}
+<div id="current-user-info" class="hidden">
+  <input type="hidden" id="current-user-slug" value="{{ user_slug }}" />
+</div>
+{# end user #}
 <div id="y-header">
 	<div class="header-wrapper">
 		<div id="header-logo">
@@ -65,7 +70,7 @@
 			</div>
 			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common">
-          <a href="#" class="btn-notification">
+          <a href="#" class="btn-notification js-btn-see-notify">
             <i class="icon-bell"></i>
             {% if notifications|length > 0 %}
             <span class="notification-item-count">{{ notifications|length }}</span>
@@ -145,7 +150,7 @@
           <div class="notification-content-list">
             <ul>
               {% for user in requests %}
-              <li class="notification-content-item notify-actions">
+              <li class="notification-content-item notify-actions" data-slug="{{ user.slug }}">
                 <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="notification-content-item-img">
                   <img src="{{ user.avatar }}" alt="{{ user.username }}">
                 </a>
@@ -154,8 +159,8 @@
                     <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
                   </div>
                   <div>
-                    <a href="#" data-url="{{ path('ConfirmFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-accept">Accept</a>
-                    <a href="#" data-url="{{ path('IgnoreFriend', {user_slug: user.slug}) }}" class="btn btn-yes btn-ignore">Ignore </a>
+                    <a href="#" class="btn btn-yes btn-accept">Accept</a>
+                    <a href="#" class="btn btn-yes btn-ignore">Ignore </a>
                   </div>
                 </div>
               </li>
