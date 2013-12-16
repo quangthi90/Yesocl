@@ -1282,7 +1282,7 @@
         },
         matcher: function (item) {
           var checkingItem = map[item];
-          if(currentTagsGlobal.length != 0 && $.inArray('@' + checkingItem.id, currentTagsGlobal) >= 0){
+          if(currentTagsGlobal.length != 0 && $.inArray(checkingItem.id, currentTagsGlobal) >= 0){
             return false;
           }
           if (item.toLowerCase().indexOf(this.query.trim().toLowerCase()) >= 0) {
@@ -1308,13 +1308,13 @@
     };
     that.inputTag.on('selected', function(e,data){
       var existedTagItem = that.tagContainer.find('.tagItem').filter(function(index){
-        return $(this).attr('data-value') === ('@' + data.selectedItem.id);
+        return ($(this).attr('data-value') === data.selectedItem.id);
       });
       if(existedTagItem.length > 0){
         that.inputTag.val('').focus();
         return;
       } 
-      var tagItem = $('<span class="tagItem"></span>').attr('data-value','@' + data.selectedItem.id).attr('contentEditable','false');
+      var tagItem = $('<span class="tagItem"></span>').attr('data-value', data.selectedItem.id).attr('contentEditable','false');
       var showTagEl = $('<b class="tag-name"></b>').html(data.selectedItem.name);
       var linkTagEl = $('<a class="tag-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.url).css('display', 'none');
       var removeTag = $('<i class="icon-remove"></i>').on('click', function(){
@@ -1338,7 +1338,7 @@
         that.btnTag.removeClass('disabled').attr('disabled', false);
       }
       tagItem.append(showTagEl).append(linkTagEl).append(removeTag).appendTo(that.tagContainer);
-      currentTagsGlobal.push('@' + data.selectedItem.id);
+      currentTagsGlobal.push(data.selectedItem.id);
       that.inputTag.val('').focus();
     });
   }
