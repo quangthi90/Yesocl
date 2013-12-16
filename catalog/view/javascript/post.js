@@ -279,13 +279,19 @@
                 e.preventDefault();
                 return false;
             }
-            
             if(that.validate(false) == false){
                 return false;
             }
+            var usersTagged = [];
+            var mentions = that.$content.mentionsInput('getMentions');
+            $.each(mentions, function(key, value){                
+                usersTagged.push(value.id);
+            });
+            return false;
 
             that.data = {
                 content     : that.$content.val(),
+                tags        : usersTagged,
                 thumb       : that.$el.find('.img-link-popup').attr('href')
             };
 

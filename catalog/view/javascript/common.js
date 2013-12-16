@@ -271,12 +271,12 @@ function HashTable(obj)
 				//Demo data:
 				var img = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";
 				var data = [
-					{ id:1, name:'Thiet Ngo', 'avatar': img, 'type':'contact' },
-					{ id:2, name:'Quang Thi', 'avatar':img, 'type':'contact' },
-					{ id:3, name:'Bieu Nguyen', 'avatar':img, 'type':'contact' },
-					{ id:4, name:'Thiệt Ngô', 'avatar':img, 'type':'contact' },
-					{ id:5, name:'Lưu Quang Thi', 'avatar':img, 'type':'contact' },
-					{ id:6, name:'Nguyễn Biểu', 'avatar':img, 'type':'contact' }					
+					{ id:'ngo-thiet', name:'Thiet Ngo', 'avatar': img, 'type':'contact' },
+					{ id:'quang-thi', name:'Quang Thi', 'avatar':img, 'type':'contact' },
+					{ id:'bieu-nguyen', name:'Bieu Nguyen', 'avatar':img, 'type':'contact' },
+					{ id:'thiet-ngo-1', name:'Thiệt Ngô', 'avatar':img, 'type':'contact' },
+					{ id:'luu-quang-thi', name:'Lưu Quang Thi', 'avatar':img, 'type':'contact' },
+					{ id:'nguyen-bieu', name:'Nguyễn Biểu', 'avatar':img, 'type':'contact' }					
 				  ];
 				data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 				
@@ -290,7 +290,8 @@ function HashTable(obj)
 		      	//});
 			},
 			minChars: 1,
-			showAvatars: true
+			showAvatars: true,
+			triggerChar: '@'
 	  	});
 	}
 	/*

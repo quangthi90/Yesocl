@@ -90,6 +90,8 @@
 .mentions-input-box .mentions > div > strong {
   font-weight:normal;
   background: #ddd;
+  color: #ddd;
+  padding: 2px 0px;
 }
 .mentions-input-box .mentions > div > strong > span {
   filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);

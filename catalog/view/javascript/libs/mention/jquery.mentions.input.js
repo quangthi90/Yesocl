@@ -523,8 +523,7 @@
       getMentions : function (callback) {
         if (!_.isFunction(callback)) {
           return mentionsCollection;
-        }
-
+        }        
         callback.call(this, mentionsCollection);
       }
     };
