@@ -210,10 +210,9 @@
         // Discard bad mentions.
         if(!mention.value){
           return true;
-        }
-        
+        }        
         // Expect to find the mention in the right place.
-        return inputText.indexOf(mention.value) === false;
+        return inputText.indexOf(mention.value) < 0;
       });
       mentionsCollection = _.compact(mentionsCollection);
     }
@@ -446,7 +445,7 @@
         if (settings.fullNameTrigger) {
           doSearchFullNameTrigger(query);
         } else {
-          settings.onDataRequest.call(this, 'search', query, function (responseData) {
+          settings.onDataRequest.call(this, 'search', mentionsCollection, query, function (responseData) {
             populateDropdown(query, responseData);
           });
         }
@@ -461,7 +460,7 @@
         query = query.substring(query.lastIndexOf(arr[arr.length - 1]));
         if(query.length < settings.minChars) { return; }
 
-        settings.onDataRequest.call(this, 'search', query, function (responseData) {
+        settings.onDataRequest.call(this, 'search', mentionsCollection, query, function (responseData) {
           currentDataQuery = query;
           populateDropdown(query, responseData);
         });

@@ -266,8 +266,7 @@ function HashTable(obj)
 	Tag.prototype.attachEvents = function() {
 		var that = this;
 		that.$tagElement.mentionsInput({
-			onDataRequest:function (mode, query, callback) {
-
+			onDataRequest:function (mode,currentMentionCollection,query,callback) {
 				//Demo data:
 				var img = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";
 				var data = [
@@ -278,7 +277,16 @@ function HashTable(obj)
 					{ id:'luu-quang-thi', name:'Lưu Quang Thi', 'avatar':img, 'type':'contact' },
 					{ id:'nguyen-bieu', name:'Nguyễn Biểu', 'avatar':img, 'type':'contact' }					
 				  ];
-				data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+				data = _.filter(data, function(item) {
+					if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
+						var checkExisted = _.filter(currentMentionCollection, function(tempItem){
+							return (item.id === tempItem.id);
+						});
+						if(checkExisted.length > 0)
+							return false;
+					}					
+					return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+				});
 				
 				//Always return data for autocomplete dropdown list:
 				callback.call(this, data);
@@ -288,7 +296,8 @@ function HashTable(obj)
 			    //    responseData = _.filter(responseData, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
 			    //    callback.call(this, responseData);
 		      	//});
-			}
+			},
+			fullNameTrigger: true
 	  	});
 	}
 	/*
