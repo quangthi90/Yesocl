@@ -41,13 +41,12 @@
 	});
 }(jQuery, document));
 
-// Notification btn
+// Notification request make friend
 (function($, document, undefined) {
 	function NotifyFriendBtn( $el ){
 		this.$el			= $el;
 		this.$accept_btn	= $el.find('.btn-accept');
 		this.$ignore_btn	= $el.find('.btn-ignore');
-		this.$see_notify_btn = $el.find('.js-btn-see-notify');
 
 		this.slug 			= $el.data('slug');
 
@@ -65,7 +64,7 @@
 
 			that.url = yRouting.generate('ConfirmFriend', {user_slug: that.slug});
 			
-			that.submit( that.$accept_btn, that.accept_url );
+			that.submit( that.$accept_btn );
 
 			return false;
 		});
@@ -79,19 +78,7 @@
 
 			that.url = yRouting.generate('IgnoreFriend', {user_slug: that.slug});
 			
-			that.submit( that.$ignore_btn, that.ignore_url );
-
-			return false;
-		});
-
-		this.$see_notify_btn.click(function(e) {
-			e.preventDefault();
-			
-			if(that.$see_notify_btn.hasClass('disabled')) {
-				return false;
-			}
-
-			that.submit( that.$see_notify_btn, that.ignore_url );
+			that.submit( that.$ignore_btn );
 
 			return false;
 		});
@@ -137,6 +124,71 @@
 	$(document).ready(function() {
 		$('.notify-actions').each(function(){
 			new NotifyFriendBtn( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Notification like, comment, tag
+(function($, document, undefined) {
+	function NotificationCommon( $el ){
+		this.$el 				= $el;
+		this.$see_notify_btn  	= $el.find('.js-btn-see-notify');
+
+		this.slug 				= $el.data('slug');
+
+		this.attachEvents();
+	}
+	NotificationCommon.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$see_notify_btn.click(function(e) {
+			e.preventDefault();
+			
+			if(that.$el.data('notification-count') == 0 || that.$see_notify_btn.hasClass('disabled')) {
+				return false;
+			}
+			
+			that.url = yRouting.generate('NotificationReadAll');
+			
+			that.submit( that.$see_notify_btn );
+
+			return false;
+		});
+	};	
+	NotificationCommon.prototype.submit = function($button){
+		var that = this;
+
+		var promise = $.ajax({
+			type: 'POST',
+			url: that.url,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) { 
+			if(data.success == 'ok'){			
+				that.$el.find('.notification-item-count').addClass('hidden');
+				that.$el.find('.notification-content-list').addClass('hidden');
+			}
+		});	
+	};
+	NotificationCommon.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+		var $old_icon = $el.find('i');
+		var f        = function() {
+			$spinner.remove();
+			$el.html($old_icon);
+		};
+
+		$el.addClass('disabled').html($spinner);
+
+		promise.then(f, f);
+	};
+
+	$(document).ready(function() {
+		$('.js-notification-common').each(function(){
+			new NotificationCommon( $(this) );
 		});
 	});
 }(jQuery, document));

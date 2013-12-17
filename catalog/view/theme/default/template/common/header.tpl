@@ -69,7 +69,7 @@
 			    </ul>
 			</div>
 			<div id="user-notification" class="fr notification-group">
-        <div class="notification-item common">
+        <div class="notification-item common js-notification-common" data-notification-count="{{ notifications|length }}">
           <a href="#" class="btn-notification js-btn-see-notify">
             <i class="icon-bell"></i>
             {% if notifications|length > 0 %}

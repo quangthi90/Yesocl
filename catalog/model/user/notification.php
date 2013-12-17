@@ -65,7 +65,7 @@ class ModelUserNotification extends Model {
 			$aNotifications[] = $oNotification;
 		}
 
-		$oUser->setNotification( $aNotifications );
+		$oUser->setNotifications( $aNotifications );
 
 		$this->dm->flush();
 

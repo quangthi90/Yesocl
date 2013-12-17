@@ -16,9 +16,8 @@ function Routing()
     // Generate url by name & params
     this.generate = function(name, params)
     {
-        // console.log(this.routing);
         var url = this.routing.getItem(name);
-        // console.log(url);
+        
         for ( key in params ){
             url = url.replace( '{' + key + '}', params[key] );
         }
@@ -26,5 +25,5 @@ function Routing()
         return $('base').attr('href') + url;
     }
 }
-console.log(window.location.protocol + "//" + window.location.host + "/");
+
 var yRouting = new Routing();
