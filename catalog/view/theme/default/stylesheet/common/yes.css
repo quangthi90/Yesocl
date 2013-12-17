@@ -652,6 +652,16 @@ a.btn-notification:hover .notification-item-name > i {
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
+.notification-content-list .notification-content-item.read{
+  opacity: 0.8;
+}
+.notification-content-list .notification-content-item.read:hover {
+  opacity: 1;
+}
+.notification-content-list .notification-content-item.unread{
+  border-left: 2px solid #009B77;
+  background-color: #F5F5F5;
+}
 .notification-content-list .notification-content-item:last-child {
   border-bottom: none;
 }
@@ -676,6 +686,9 @@ a.btn-notification:hover .notification-item-name > i {
 .notification-content-item .notification-content-item-detail  .notification-text {
   line-height: 18px;
   margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .notification-content-item .notification-content-item-detail  .notification-text a {
   font-weight: bold;
@@ -2562,6 +2575,9 @@ a.wall-link {
   color: #666;
   font-size: 13px;
   display: inline-block;
+}
+a.wall-link:hover {
+  color: #009B77;
 }
 .note-editor .btn-toolbar button {
   padding: 3px 13px;
