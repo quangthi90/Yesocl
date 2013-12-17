@@ -17,6 +17,6 @@ $_['common']['action']['like']					= 'like';
 $_['common']['action']['comment']				= 'comment';
 $_['common']['action']['tag']					= 'tag';
 
-$_['common']['object']['comment']				= 'comment';
-$_['common']['object']['post']					= 'post';
+$_['common']['object']['comment']				= 'comment of your post';
+$_['common']['object']['post']					= 'your post';
 ?>

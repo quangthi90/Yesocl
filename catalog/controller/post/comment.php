@@ -331,6 +331,29 @@ class ControllerPostComment extends Controller {
             )));
         }
 
+        if ( $oComment->getUser()->getId() != $this->customer->getId() ){
+            $this->load->model('user/notification');
+
+            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
+                $this->model_user_notification->addNotification(
+                    $oComment->getUser()->getId(),
+                    $this->customer->getUser(),
+                    $this->config->get('common')['action']['like'],
+                    $oComment->getId(),
+                    $aDatas['post_slug'],
+                    $aDatas['post_type'],
+                    $this->config->get('common')['object']['comment']
+                );
+            }else{
+                $this->model_user_notification->deleteNotification(
+                    $oComment->getUser()->getId(),
+                    $this->customer->getId(),
+                    $oComment->getId(),
+                    $this->config->get('common')['action']['like']
+                );
+            }
+        }
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'like_count' => count($oComment->getLikerIds())
