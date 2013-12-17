@@ -16,4 +16,7 @@ $_['common']['image']['upload_cache']			= 'data/upload/';
 $_['common']['action']['like']					= 'like';
 $_['common']['action']['comment']				= 'comment';
 $_['common']['action']['tag']					= 'tag';
+
+$_['common']['object']['comment']				= 'comment';
+$_['common']['object']['post']					= 'post';
 ?>

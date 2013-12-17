@@ -33,11 +33,16 @@ class ControllerCommonHeader extends Controller {
 
 			$this->data['users'] = array();
 			$this->data['notifications'] = array();
+			$aObjects = array();
+
+			$this->data['notification_count'] = 0;
 			foreach ( $notifications as $notification ) {
-				if ( $notification->getRead() == true || 
-					$notification->getCreated() < $experie_time ||
-					$notification->getStatus() == false ){
+				if ( $notification->getCreated() < $experie_time ){
 					continue;
+				}
+
+				if ( $notification->getRead() == false ){
+					$this->data['notification_count']++;
 				}
 
 				$actor = $notification->getActor();
@@ -51,10 +56,13 @@ class ControllerCommonHeader extends Controller {
 				}
 
 				$this->data['notifications'][] = array(
-					'actor_id' => $actor->getId(),
-					'action' => $notification->getAction(),
+					'actor_id' 	=> $actor->getId(),
+					'action' 	=> $notification->getAction(),
 					'object_id' => $notification->getObjectId(),
-					'created' => $notification->getCreated()
+					'created' 	=> $notification->getCreated(),
+					'slug'		=> $notification->getSlug(),
+					'object' 	=> $notification->getObject(),
+					'type'		=> $notification->getType()
 				);
 			}
 			

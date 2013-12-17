@@ -69,35 +69,35 @@
 			    </ul>
 			</div>
 			<div id="user-notification" class="fr notification-group">
-        <div class="notification-item common js-notification-common" data-notification-count="{{ notifications|length }}">
+        <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
           <a href="#" class="btn-notification js-btn-see-notify">
             <i class="icon-bell"></i>
-            {% if notifications|length > 0 %}
-            <span class="notification-item-count">{{ notifications|length }}</span>
-            {% endif %}
+            <span class="notification-item-count{% if notification_count == 0 %} hidden{% endif %}">{{ notification_count }}</span>
           </a>
-          {% if notifications|length > 0 %}
           <div class="notification-content-list">
             <ul>
               {% for notification in notifications %}
                 {% set user = users[notification['actor_id']] %}
               <li class="notification-content-item">
-                <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="notification-content-item-img">
-                  <img src="{{ user.avatar }}" alt="{{ user.username }}">
-                </a>
-                <div class="notification-content-item-detail">
-                  <div class="notification-text">
-                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> {{ notification.action }} on your {{ notification.object_id }}
-                  </div>
-                  <div class="notification-time">
-                  	{{ notification.created|date(format_date) }}
-                  </div>
+                <div class="notification-content-item-img">
+                  <a href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
+                  </a>
                 </div>
+                <a href="{{ path('PostPage', {post_slug: notification.slug, post_type: notification.type}) }}">
+                  <div class="notification-content-item-detail">
+                    <div class="notification-text">
+                      {{ user.username }} {{ notification.action }} on your {{ notification.object }}
+                    </div>
+                    <div class="notification-time">
+                      {{ notification.created|date(format_date) }}
+                    </div>
+                  </div>
+                </a>
               </li>
               {% endfor %}
             </ul>
           </div>
-          {% endif %}
         </div>
         {#<div class="notification-item message">
           <a href="#" class="btn-notification">

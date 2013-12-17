@@ -2,7 +2,7 @@
 use Document\User\Notification;
 
 class ModelUserNotification extends Model {
-	public function addNotification( $user_id, $actor, $action, $object_id, $type ){
+	public function addNotification( $user_id, $actor, $action, $object_id, $slug, $type, $object ){
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
 		if ( !$user ){
@@ -21,7 +21,9 @@ class ModelUserNotification extends Model {
 		$notification->setActor( $actor );
 		$notification->setAction( $action );
 		$notification->setObjectId( $object_id );
+		$notification->setSlug( $slug );
 		$notification->setType( $type );
+		$notification->setObject( $object );
 
 		$user->addNotification( $notification );
 

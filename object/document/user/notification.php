@@ -20,7 +20,13 @@ Class Notification {
 	private $type;
 
 	/** @MongoDB\String */
+	private $object;
+
+	/** @MongoDB\String */
 	private $objectId;
+
+	/** @MongoDB\String */
+	private $slug;	
 
 	/** @MongoDB\Boolean */
 	private $read;
@@ -66,12 +72,28 @@ Class Notification {
 		return $this->type;
 	}
 
+	public function setObject( $object ){
+		$this->object = $object;
+	}
+
+	public function getObject(){
+		return $this->object;
+	}
+
 	public function setObjectId( $objectId ){
 		$this->objectId = $objectId;
 	}
 
 	public function getObjectId(){
 		return $this->objectId;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
 	}
 
 	public function setRead( $read ){

@@ -164,12 +164,12 @@
 			dataType: 'json'
 		});
 
-		this.triggerProgress($button, promise);
+		// this.triggerProgress($button, promise);
 
 		promise.then(function(data) { 
 			if(data.success == 'ok'){			
 				that.$el.find('.notification-item-count').addClass('hidden');
-				that.$el.find('.notification-content-list').addClass('hidden');
+				// that.$el.find('.notification-content-list').addClass('hidden');
 			}
 		});	
 	};
