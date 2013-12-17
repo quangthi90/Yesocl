@@ -27,13 +27,13 @@
     templates       : {
       wrapper                    : _.template('<div class="mentions-input-box"></div>'),
       autocompleteList           : _.template('<div class="mentions-autocomplete-list"></div>'),
-      autocompleteListItem       : _.template('<li data-ref-id="<%= id %>" data-ref-type="<%= type %>" data-display="<%= display %>"><%= content %></li>'),
+      autocompleteListItem       : _.template('<li data-ref-id="<%= id %>" data-ref-type="<%= type %>" data-display="<%= display %>" data-wall="<%= wall %>"><%= content %></li>'),
       autocompleteListItemAvatar : _.template('<img  src="<%= avatar %>" />'),
       autocompleteListItemIcon   : _.template('<div class="icon <%= icon %>"></div>'),
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
       mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>'),
       mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
-      mentionItemContent          : _.template('<a href="#" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= type %>:<%= id %>)"><%= value %></a>')      
+      mentionItemContent          : _.template('<a href="<%= wall %>" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= type %>:<%= id %>)"><%= value %></a>')      
     },
     mentionItemRegex: /@\[([^\]]+)\]\(([^:]+):(\d+)\)/g
   };
@@ -167,7 +167,7 @@
       var index = 0;
       _.each(mentionsCollection, function (mention) {
         var textSyntax = settings.templates.mentionItemSyntax({ value : mention.value, type : mention.type, id : mention.id });
-        var linkSyntax = settings.templates.mentionItemContent({ value: mention.value, id: mention.id, type : mention.type });
+        var linkSyntax = settings.templates.mentionItemContent({ value: mention.value, id: mention.id, type : mention.type, wall : mention.wall });
 
         var mentionIndex = initialMessage.indexOf(mention.value, index);
         if (mentionIndex === -1) {
@@ -217,7 +217,7 @@
       mentionsCollection = _.compact(mentionsCollection);
     }
 
-    function addMention(value, id, type) {
+    function addMention(value, id, type, wall) {
       var currentMessage = getInputBoxValue();
 
       if (settings.fullNameTrigger) {
@@ -250,6 +250,7 @@
       mentionsCollection.push({
         id    : id,
         type  : type,
+        wall  : wall,
         value : value,
         index : startCaretPosition
       });
@@ -278,7 +279,7 @@
     function onAutoCompleteItemClick(e) {
       var elmTarget = $(this);
 
-      addMention(elmTarget.attr('data-display'), elmTarget.attr('data-ref-id'), elmTarget.attr('data-ref-type'));
+      addMention(elmTarget.attr('data-display'), elmTarget.attr('data-ref-id'), elmTarget.attr('data-ref-type'), elmTarget.attr('data-wall'));
 
       return false;
     }
@@ -415,6 +416,7 @@
           'id'      : utils.htmlEncode(item.id),
           'display' : utils.htmlEncode(item.name),
           'type'    : utils.htmlEncode(item.type),
+          'wall'    : utils.htmlEncode(item.wall),
           'content' : utils.highlightTerm(utils.htmlEncode((item.name)), query),
           'item'    : item
         }));

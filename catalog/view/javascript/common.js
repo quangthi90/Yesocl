@@ -248,12 +248,12 @@ var yCurrUser = new CurrentUser();
 				//Demo data:
 				var img = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";
 				var data = [
-					{ id:'ngo-thiet', name:'Thiet Ngo', 'avatar': img, 'type':'contact' },
-					{ id:'quang-thi', name:'Quang Thi', 'avatar':img, 'type':'contact' },
-					{ id:'bieu-nguyen', name:'Bieu Nguyen', 'avatar':img, 'type':'contact' },
-					{ id:'thiet-ngo-1', name:'Thiệt Ngô', 'avatar':img, 'type':'contact' },
-					{ id:'luu-quang-thi', name:'Lưu Quang Thi', 'avatar':img, 'type':'contact' },
-					{ id:'nguyen-bieu', name:'Nguyễn Biểu', 'avatar':img, 'type':'contact' }					
+					{ id:'ngo-thiet', name:'Thiet Ngo', 'avatar': img, 'type':'contact', wall: '#' },
+					{ id:'quang-thi', name:'Quang Thi', 'avatar':img, 'type':'contact', wall: 'http://localhost/yesocl1/wall-page/user1/' },
+					{ id:'bieu-nguyen', name:'Bieu Nguyen', 'avatar':img, 'type':'contact', wall: '#' },
+					{ id:'thiet-ngo-1', name:'Thiệt Ngô', 'avatar':img, 'type':'contact', wall: '#' },
+					{ id:'luu-quang-thi', name:'Lưu Quang Thi', 'avatar':img, 'type':'contact', wall: '#' },
+					{ id:'nguyen-bieu', name:'Nguyễn Biểu', 'avatar':img, 'type':'contact', wall: '#' }					
 				  ];
 				data = _.filter(data, function(item) {
 					if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
