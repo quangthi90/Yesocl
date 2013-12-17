@@ -2557,6 +2557,12 @@ ul.user_actions li:hover i{
 .comment-form .mentions-autocomplete-list {
   bottom: 100%;
 }
+a.wall-link {
+  font-weight: bold;
+  color: #666;
+  font-size: 13px;
+  display: inline-block;
+}
 .note-editor .btn-toolbar button {
   padding: 3px 13px;
   outline: none;
@@ -2632,17 +2638,36 @@ ul.user_actions li:hover i{
 .note-tag-dialog .tag-container .tagItem:hover i {
   color: #0e0e0e;
 }
+.note-tag-dialog .tag-container a.wall-link {
+  display: none;
+}
+.tag-wrapper .tagItem {
+  background-color: transparent;
+}
+.tag-wrapper .tagItem .tag-name{
+  display: none;
+}
+.tag-wrapper .tagItem i {
+  display: none;
+}
 .note-editor .tag-wrapper {  
 }
 .note-editor .tag-wrapper .tagItem{  
   padding: 2px;
   margin-right: 3px;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0;  
+}
+.note-editor .tag-wrapper .tagItem .tag-name {
+  display: inline-block;
+}
+.note-editor .tag-wrapper .tagItem .wall-link {
+  display: none;
 }
 .note-editor .tag-wrapper .tagItem i {
   color: #ddd;
   margin-left: 5px;
   font-size: 11px;
+  display: inline-block;
 }
 .note-editor .tag-wrapper .tagItem:hover i {
   color: #0E0E0E;

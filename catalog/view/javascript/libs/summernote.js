@@ -902,7 +902,6 @@
       recordUndo($editable);
       var $tagEle = $('<span class="tag-wrapper"></span>').html(sTag).append($('<span class="space">&nbsp;</span>'));
       $tagEle.find('.tagItem').each(function(){
-        $(this).css('background-color', '#F0F0F0');
         $(this).children('i').on('click', function(){
           $(this).parent().remove();
         });
@@ -1316,7 +1315,7 @@
       } 
       var tagItem = $('<span class="tagItem"></span>').attr('data-value', data.selectedItem.id).attr('contentEditable','false');
       var showTagEl = $('<b class="tag-name"></b>').html(data.selectedItem.name);
-      var linkTagEl = $('<a class="tag-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.url).css('display', 'none');
+      var linkTagEl = $('<a class="wall-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.url);
       var removeTag = $('<i class="icon-remove"></i>').on('click', function(){
         $(this).parent().fadeOut(500, function(){
           var deletedValue = $(this).data('value');
