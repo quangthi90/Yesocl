@@ -28,17 +28,19 @@ class ControllerCommonHeader extends Controller {
 			$user = $this->customer->getUser();
 
 			$notifications = $user->getNotifications();
-			$experie_time = new DateTime('now');
-			date_sub($experie_time, date_interval_create_from_date_string('7 days'));
+			$expire_time = new DateTime('now');
+			date_sub($expire_time, date_interval_create_from_date_string('7 days'));
 
 			$this->data['users'] = array();
 			$this->data['notifications'] = array();
 			$aObjects = array();
 
 			$this->data['notification_count'] = 0;
+			$aExpireNotiIds = array();
 			for ( $i = $notifications->count() - 1; $i >= 0; $i-- ) {
 				$notification = $notifications[$i];
-				if ( $notification->getCreated() < $experie_time ){
+				if ( $notification->getCreated() < $expire_time ){
+					$aExpireNotiIds[] = $notification->getId();
 					continue;
 				}
 
@@ -66,6 +68,11 @@ class ControllerCommonHeader extends Controller {
 					'type'		=> $notification->getType(),
 					'read'		=> $notification->getRead()
 				);
+			}
+
+			if ( count($aExpireNotiIds) > 0 ){
+				$this->load->model('user/notification');
+				$this->model_user_notification->deleteNotifications( $this->customer->getId(), $aExpireNotiIds );
 			}
 			
 			$this->data['date_format'] = $this->language->get('date_format_full');

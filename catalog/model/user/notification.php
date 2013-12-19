@@ -52,6 +52,28 @@ class ModelUserNotification extends Model {
 		return true;
 	}
 
+	public function deleteNotifications( $user_id, $notification_ids ){
+		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+
+		if ( !$user ){
+			return false;
+		}
+
+		foreach ( $notification_ids as $notification_id ) {
+			$notification = $user->getNotificationById( $notification_id );
+
+			if ( !$notification ){
+				continue;
+			}
+
+			$user->getNotifications()->removeElement( $notification );
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
 	public function readAll( $user_id ){
 		$oUser = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
