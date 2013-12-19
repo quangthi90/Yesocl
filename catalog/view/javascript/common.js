@@ -474,6 +474,11 @@ function HashTable(obj)
 		}
 	}
 	HorizontalBlock.prototype.initializeBlock = function() {
+		if(!String.prototype.trim) {
+		  String.prototype.trim = function () {
+		    return this.replace(/^\s+|\s+$/g,'');
+		  };
+		}
 		if(this.root.hasClass(df_POST_HAS_BLOCK)) {
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');				
@@ -540,6 +545,9 @@ function HashTable(obj)
 					$(this).css({
 						'opacity':'1', 
 						'min-width': minPostStatusWidth + 'px'
+					});
+					$(this).find('.post_text_raw').each(function(){
+						$(this).html($(this).text().toString().trim());
 					});
 					totalWidthOfColumns += $(this).outerWidth() + marginPostPerColumn;
 				});
