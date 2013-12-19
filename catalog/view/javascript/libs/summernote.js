@@ -2772,7 +2772,15 @@
       // set the HTML contents
       this.each(function (i, elHolder) {
         var info = renderer.layoutInfoFromHolder($(elHolder));
-        if (info && info.editable) { info.editable.html(sHTML); }
+        if (info && info.editable) { 
+          info.editable.html(sHTML);
+          info.editable.find('.tagItem').each(function(){
+            var me = $(this);
+            me.children('i').on('click', function(){
+              me.remove();            
+            });
+          });
+        }
       });
     },
     getTags: function(){
