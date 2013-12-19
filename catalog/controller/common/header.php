@@ -36,7 +36,8 @@ class ControllerCommonHeader extends Controller {
 			$aObjects = array();
 
 			$this->data['notification_count'] = 0;
-			foreach ( $notifications as $notification ) {
+			for ( $i = $notifications->count() - 1; $i >= 0; $i-- ) {
+				$notification = $notifications[$i];
 				if ( $notification->getCreated() < $experie_time ){
 					continue;
 				}
@@ -62,7 +63,8 @@ class ControllerCommonHeader extends Controller {
 					'created' 	=> $notification->getCreated(),
 					'slug'		=> $notification->getSlug(),
 					'object' 	=> $notification->getObject(),
-					'type'		=> $notification->getType()
+					'type'		=> $notification->getType(),
+					'read'		=> $notification->getRead()
 				);
 			}
 			

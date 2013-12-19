@@ -78,7 +78,7 @@
             <ul>
               {% for notification in notifications %}
                 {% set user = users[notification['actor_id']] %}
-              <li class="notification-content-item">
+              <li class="notification-content-item{% if notification.read == false %} unread{% else %} read{% endif %}">
                 <div class="notification-content-item-img">
                   <a href="{{ path('WallPage', {user_slug: user.slug}) }}">
                     <img src="{{ user.avatar }}" alt="{{ user.username }}" />
@@ -95,44 +95,6 @@
                   </div>
                 </a>
               </li>
-              {% endfor %}
-              {% for i in 1..5 %}
-              <li class="notification-content-item unread">
-                <div class="notification-content-item-img">
-                  <a href="#">
-                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="QuangThi" />
-                  </a>
-                </div>
-                <a href="#">
-                  <div class="notification-content-item-detail">
-                    <div class="notification-text">
-                      Quang Thi like your comment of post: "Bất Động Sản đang ấm dần trở lại"
-                    </div>
-                    <div class="notification-time">
-                      00:00 12/18/2013
-                    </div>
-                  </div>
-                </a>
-              </li>              
-              {% endfor %}
-              {% for i in 1..5 %}
-              <li class="notification-content-item read">
-                <div class="notification-content-item-img">
-                  <a href="#">
-                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="QuangThi" />
-                  </a>
-                </div>
-                <a href="#">
-                  <div class="notification-content-item-detail">
-                    <div class="notification-text">
-                      Quang Thi like your comment of post: "Bất Động Sản đang ấm dần trở lại"
-                    </div>
-                    <div class="notification-time">
-                      00:00 12/18/2013
-                    </div>
-                  </div>
-                </a>
-              </li>              
               {% endfor %}
             </ul>
           </div>
