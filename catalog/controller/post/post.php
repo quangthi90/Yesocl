@@ -88,19 +88,19 @@ class ControllerPostPost extends Controller {
             );
 
             // Add notification
-            /*if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
+            if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
                 $this->load->model('user/notification');
 
                 $this->model_user_notification->addNotification(
-                    $oPost->getUser()->getId(),
+                    $this->request->get['user_slug'],
                     $this->customer->getUser(),
-                    $this->config->get('common')['action']['like'],
+                    $this->config->get('common')['action']['post'],
                     $oPost->getId(),
                     $oPost->getSlug(),
-                    $aDatas['post_type'],
-                    $this->config->get('common')['object']['post']
+                    $sPostType,
+                    $this->config->get('common')['object']['wall']
                 );
-            }*/
+            }
 
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok',

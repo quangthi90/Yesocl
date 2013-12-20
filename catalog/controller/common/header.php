@@ -48,10 +48,6 @@ class ControllerCommonHeader extends Controller {
 					continue;
 				}
 
-				if ( $notification->getRead() == false ){
-					$this->data['notification_count']++;
-				}
-
 				$actor = $notification->getActor();
 
 				if ( !array_key_exists($actor->getId(), $users) ){
@@ -83,34 +79,38 @@ class ControllerCommonHeader extends Controller {
 				}else{
 					$oPost = $aPosts[$notification->getSlug()];
 				}
-
+				
 				if ( $oPost ){
-					$aPosts[$oPost->getSlug()] = $oPost;
-				}
-
-				if ( $notification->getObjectId() != $oPost->getId() ){
-					$oComment = $oPost->getCommentById( $notification->getObjectId() );
-					$sTitle = utf8_substr($oComment->getContent(), 0, 20, 'utf8');
-				}else{
-					if ( $oPost->getTitle() == null ){
-						$sTitle = html_entity_decode(utf8_substr($oPost->getContent(), 0, 20, 'utf8'));
-					}else{
-						$sTitle = utf8_substr($oPost->getTitle(), 0, 20, 'utf8');
+					if ( $notification->getRead() == false ){
+						$this->data['notification_count']++;
 					}
+				
+					$aPosts[$oPost->getSlug()] = $oPost;
+
+					if ( $notification->getObjectId() != $oPost->getId() ){
+						$oComment = $oPost->getCommentById( $notification->getObjectId() );
+						$sTitle = utf8_substr($oComment->getContent(), 0, 20, 'utf8');
+					}else{
+						if ( $oPost->getTitle() == null ){
+							$sTitle = html_entity_decode(utf8_substr($oPost->getContent(), 0, 20, 'utf8'));
+						}else{
+							$sTitle = utf8_substr($oPost->getTitle(), 0, 20, 'utf8');
+						}
+					}
+
+					$this->data['notifications'][] = array(
+						'actor_id' 	=> $actor->getId(),
+						'action' 	=> $action,
+						'object_id' => $notification->getObjectId(),
+						'created' 	=> $notification->getCreated(),
+						'slug'		=> $notification->getSlug(),
+						'type'		=> $notification->getType(),
+						'read'		=> $notification->getRead(),
+						'title'		=> $sTitle
+					);
 				}
-
-				$this->data['notifications'][] = array(
-					'actor_id' 	=> $actor->getId(),
-					'action' 	=> $action,
-					'object_id' => $notification->getObjectId(),
-					'created' 	=> $notification->getCreated(),
-					'slug'		=> $notification->getSlug(),
-					'type'		=> $notification->getType(),
-					'read'		=> $notification->getRead(),
-					'title'		=> $sTitle
-				);
 			}
-
+			
 			if ( count($aExpireNotiIds) > 0 ){
 				$this->load->model('user/notification');
 				$this->model_user_notification->deleteNotifications( $this->customer->getId(), $aExpireNotiIds );

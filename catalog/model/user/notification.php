@@ -3,7 +3,12 @@ use Document\User\Notification;
 
 class ModelUserNotification extends Model {
 	public function addNotification( $user_id, $actor, $action, $object_id, $slug, $type, $object ){
-		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'$or' => array(
+				array('id' => $user_id),
+				array('slug' => $user_id)
+			)
+		));
 
 		if ( !$user ){
 			return false;
