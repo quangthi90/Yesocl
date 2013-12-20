@@ -505,5 +505,29 @@ Class User {
 			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
 		}
 	}
+
+	/**
+	* @SOLR\Field(type="text")
+	*/
+	private $solrFriendList;
+
+	public function setSolrFriendList( $solrFriendList ){
+		$this->solrFriendList = $solrFriendList;
+	}
+
+	public function getSolrFriendList(){
+		return $this->solrFriendList;
+	}
+
+	public function getDataSolrFriendList(){
+		try{
+			foreach ($this->getFriends() as $friend) {
+				$this->solrFriendList .= ' ' . $friend->getUser()->getId();
+			}
+		}
+		catch(Exception $e){
+			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
+		}
+	}
 	//---------------------------------- end Solr Data Cache --------------------------
 }

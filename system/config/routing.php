@@ -61,6 +61,7 @@ $_['routing']['MakeFriend']						= 'friend/request/{user_slug}/';
 $_['routing']['ConfirmFriend']					= 'friend/confirm/{user_slug}/';
 $_['routing']['UnFriend']						= 'friend/remove/{user_slug}/';
 $_['routing']['IgnoreFriend']					= 'friend/ignore/{user_slug}/';
+$_['routing']['SearchFriend']					= 'friend/search/{keyword}/';
 
 //Upload
 $_['routing']['UploadFile'] 					= 'upload/';
