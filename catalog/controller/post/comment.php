@@ -42,24 +42,27 @@ class ControllerPostComment extends Controller {
         switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $oComment = $this->model_branch_comment->addComment( $aDatas );
+                $aResult = $this->model_branch_comment->addComment( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $oComment = $this->model_user_comment->addComment( $aDatas );
+                $aResult = $this->model_user_comment->addComment( $aDatas );
                 break;
             
             default:
-                $oComment = null;
+                $aResult = null;
                 break;
         }
-        
-        if ( !$oComment ){
+
+        if ( !$aResult ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: add comment have error'
             )));
         }
+
+        $oComment = $aResult['comment'];
+        $oPost = $aResult['post'];
 
         $this->load->model('tool/object');
 
@@ -68,6 +71,21 @@ class ControllerPostComment extends Controller {
             $aDatas['post_slug'],
             $aDatas['post_type']
         );
+
+        // Add notification
+        if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
+            $this->load->model('user/notification');
+
+            $this->model_user_notification->addNotification(
+                $oPost->getUser()->getSlug(),
+                $this->customer->getUser(),
+                $this->config->get('common')['action']['comment'],
+                $oComment->getId(),
+                $oPost->getSlug(),
+                $aDatas['post_type'],
+                $this->config->get('common')['object']['post']
+            );
+        }
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
