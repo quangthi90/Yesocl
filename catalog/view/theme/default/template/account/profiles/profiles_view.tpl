@@ -3,6 +3,7 @@
 {% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/information_view.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/background_view.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/profile_overview.tpl' %}
 
 {% block title %}Yesocl - Social Network{% endblock %}
 
@@ -12,8 +13,9 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="no-header-fixed">
+<div id="y-content" class="profile-view-page">
 	<div id="y-main-content">
+		{{ block('profiles_tabs_profile_overview') }}
 		{{ block('profiles_tabs_information_view') }}
 		{{ block('profiles_tabs_background_view') }}
 	</div>
