@@ -126,7 +126,7 @@ jQuery(document).ready(function (){
 		closeLoginForm();
 	});					
 	//if overlay is clicked
-	$('#overlay').click(function () {
+	$('#overlay').click(function (e) {
 		e.preventDefault();
 		closeLoginForm();
 	});	
