@@ -171,5 +171,20 @@ class ControllerAccountProfile extends Controller {
 				
 		$this->response->setOutput($this->twig_render());
 	}
+	public function view() {
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles_view.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/profiles/profiles_view.tpl';
+		} else {
+			$this->template = 'default/template/account/profiles/profiles_view.tpl';
+		}
+		
+		$this->children = array(
+			'common/sidebar_control',
+			'common/footer',
+			'common/header'	
+		);
+				
+		$this->response->setOutput($this->twig_render());
+	}
 }
 ?>
