@@ -53,6 +53,7 @@
 		<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.cookie.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/jquery.truncate.min.js') }}"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
