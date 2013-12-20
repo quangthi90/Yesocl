@@ -317,6 +317,7 @@
                 var firstColumn = that.blockContent.find('.column:first-child');            
                 var newColumn = $('<div class="column">').append(htmlOutput);
                 newColumn.children('.post').height(firstColumn.height() - 2*(marginPostDefault + 1));
+                //newColumn.find('.post_text_raw').
                 newColumn.width(widthPostDefault);
                 newColumn.css({
                     'opacity':'1', 

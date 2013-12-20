@@ -64,13 +64,7 @@ class ControllerPostPost extends Controller {
                 'edit' => $this->extension->path( "PostEdit", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) )
             );
 
-            $sContent = html_entity_decode($oPost->getContent());
             $bIsSeeMore = false;
-
-            if ( strlen($sContent) > 200 ){
-                $sContent = substr($sContent, 0, 200) . '[...]';
-                $bIsSeeMore = true;
-            }
 
             $aReturnData = array(
                 'post' => array(
@@ -81,7 +75,7 @@ class ControllerPostPost extends Controller {
                     'created' => $oPost->getCreated()->format( $this->language->get('date_format_full') ),
                     'image' => $sImage,
                     'title' => $oPost->getTitle(),
-                    'content' => $sContent,
+                    'content' => html_entity_decode($oPost->getContent()),
                     'see_more' => $bIsSeeMore
                 ),
                 'href' => $aHref
@@ -161,16 +155,10 @@ class ControllerPostPost extends Controller {
 
             $sPostType = $this->config->get('post')['type']['user'];
 
-            $sContent = html_entity_decode($oPost->getContent());
-
-            if ( strlen($sContent) > 200 ){
-                $sContent = substr($sContent, 0, 200) . '[...]';
-            }
-
             $aReturnData = array(
                 'image' => $sImage,
                 'title' => $oPost->getTitle(),
-                'content' => $sContent
+                'content' => html_entity_decode($oPost->getContent())
             );
 
             return $this->response->setOutput(json_encode(array(
