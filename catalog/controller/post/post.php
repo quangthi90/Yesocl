@@ -27,6 +27,12 @@ class ControllerPostPost extends Controller {
 
             $oPost = $this->model_user_post->addPost( $aDatas );
 
+            if ( !$oPost ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok: Save Post have error',
+                )));
+            }
+
             $oUser = $oPost->getUser()->formatToCache();
 
             // avatar
@@ -80,6 +86,21 @@ class ControllerPostPost extends Controller {
                 ),
                 'href' => $aHref
             );
+
+            // Add notification
+            /*if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
+                $this->load->model('user/notification');
+
+                $this->model_user_notification->addNotification(
+                    $oPost->getUser()->getId(),
+                    $this->customer->getUser(),
+                    $this->config->get('common')['action']['like'],
+                    $oPost->getId(),
+                    $oPost->getSlug(),
+                    $aDatas['post_type'],
+                    $this->config->get('common')['object']['post']
+                );
+            }*/
 
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok',
@@ -213,11 +234,15 @@ class ControllerPostPost extends Controller {
     public function validate(){
         if ( empty( $this->request->post['content']) ) {
             $this->error['warning'] = $this->language->get( 'error_content' );
+        
         }elseif ( !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
             $this->load->model('tool/image');
             if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
                 $this->error['warning'] = $this->language->get( 'error_thumb');
             }
+        
+        }elseif ( empty($this->request->get['user_slug']) ){
+            $this->error['warning'] = 'user slug is empty';
         }
 
         if ( $this->error ) {

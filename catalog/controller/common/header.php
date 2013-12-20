@@ -25,6 +25,9 @@ class ControllerCommonHeader extends Controller {
 				)
 			);
 		}else{
+			$this->load->model('user/post');
+			$this->load->model('branch/post');
+
 			$user = $this->customer->getUser();
 
 			$notifications = $user->getNotifications();
@@ -37,6 +40,7 @@ class ControllerCommonHeader extends Controller {
 
 			$this->data['notification_count'] = 0;
 			$aExpireNotiIds = array();
+			$aPosts = array();
 			for ( $i = $notifications->count() - 1; $i >= 0; $i-- ) {
 				$notification = $notifications[$i];
 				if ( $notification->getCreated() < $expire_time ){
@@ -58,15 +62,52 @@ class ControllerCommonHeader extends Controller {
 					$this->data['users'][$actor->getId()] = $user;
 				}
 
+				$action = $this->config->get('notify')['action'][$notification->getAction() . '-' . $notification->getObject()];
+
+				if ( empty($aPosts[$notification->getObjectId()]) ){
+					switch ( $notification->getType() ) {
+						case $this->config->get('post')['type']['branch']:
+			                $this->load->model('branch/post');
+			                $oPost = $this->model_branch_post->getPostBySlug( $notification->getSlug() );
+			                break;
+
+			            case $this->config->get('post')['type']['user']:
+			                $this->load->model('user/post');
+			                $oPost = $this->model_user_post->getPostBySlug( $notification->getSlug() );
+			                break;
+			            
+			            default:
+			                $oPost = null;
+			                break;
+					}
+				}else{
+					$oPost = $aPosts[$notification->getSlug()];
+				}
+
+				if ( $oPost ){
+					$aPosts[$oPost->getSlug()] = $oPost;
+				}
+
+				if ( $notification->getObjectId() != $oPost->getId() ){
+					$oComment = $oPost->getCommentById( $notification->getObjectId() );
+					$sTitle = utf8_substr($oComment->getContent(), 0, 20, 'utf8');
+				}else{
+					if ( $oPost->getTitle() == null ){
+						$sTitle = html_entity_decode(utf8_substr($oPost->getContent(), 0, 20, 'utf8'));
+					}else{
+						$sTitle = utf8_substr($oPost->getTitle(), 0, 20, 'utf8');
+					}
+				}
+
 				$this->data['notifications'][] = array(
 					'actor_id' 	=> $actor->getId(),
-					'action' 	=> $notification->getAction(),
+					'action' 	=> $action,
 					'object_id' => $notification->getObjectId(),
 					'created' 	=> $notification->getCreated(),
 					'slug'		=> $notification->getSlug(),
-					'object' 	=> $notification->getObject(),
 					'type'		=> $notification->getType(),
-					'read'		=> $notification->getRead()
+					'read'		=> $notification->getRead(),
+					'title'		=> $sTitle
 				);
 			}
 

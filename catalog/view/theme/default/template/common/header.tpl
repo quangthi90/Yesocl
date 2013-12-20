@@ -87,7 +87,7 @@
                 <a href="{{ path('PostPage', {post_slug: notification.slug, post_type: notification.type}) }}">
                   <div class="notification-content-item-detail">
                     <div class="notification-text">
-                      {{ user.username ~ ' ' ~ notification.action ~ ' ' ~ notification.object }}
+                      {{ user.username ~ ' ' ~ notification.action ~ ': ' ~ notification.title }}...
                     </div>
                     <div class="notification-time">
                       {{ notification.created|date(format_date) }}
