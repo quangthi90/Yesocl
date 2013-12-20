@@ -1,9 +1,8 @@
 {% block profiles_tabs_information_view %}
-<div>
-	<div class="profiles-tabs-header">
-		<div class="profiles-tabs-title"><i class="icon-list"></i> Basic Information</div>
-	</div>
-	<div class="profiles-tabs-main">		
+<div class="profile-column">
+	<h2 class="profile-column"><i class="icon-list"></i> Personal Information</h2>
+	<div class="profile-column-content">
+		
 	</div>
 </div>
 {% endblock %}

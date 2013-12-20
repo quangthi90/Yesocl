@@ -1,5 +1,5 @@
 {% block profiles_tabs_profile_overview %}
-<div class="column fixed profile-overview">
+<div class="profile-column profile-overview">
 	<div class="profile-user">
 		<a href="#" class="profile-img">
 			<img src="http://www.gravatar.com/avatar/38e39c8422969437d01e758d120c9d8?s=180" alt="WMThiet">

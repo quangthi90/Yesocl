@@ -1,11 +1,6 @@
-#y-main-content {
-	/*overflow-y: hidden;
-    overflow-x: auto;*/
-}
-#y-content {
-	/*overflow-y: hidden;
-    overflow-x: auto;*/
-}
+/*
+========================================= START EDIT PROFILE ===========================================
+*/
 textarea[name="summary"] {
 	max-width: 565px;
 	min-width: 565px;
@@ -342,3 +337,7 @@ textarea[name="summary"] {
 .profiles-tabs .mCSB_container {
 	margin-right: 20px;
 }
+/*============================== END EDIT PROFILE ===============================================*/
+/*============================== START VIEW PROFILE ===============================================*/
+
+/*============================== END VIEW PROFILE ===============================================*/
