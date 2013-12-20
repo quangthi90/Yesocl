@@ -10,6 +10,11 @@ function getActualLengthOfArray(obj) {
 	}
 	return size;
 }
+if(!String.prototype.trim) {
+  String.prototype.trim = function () {
+    return this.replace(/^\s+|\s+$/g,'');
+  };
+}
 //Define HashTable in JS
 function HashTable(obj)
 {
@@ -474,11 +479,6 @@ function HashTable(obj)
 		}
 	}
 	HorizontalBlock.prototype.initializeBlock = function() {
-		if(!String.prototype.trim) {
-		  String.prototype.trim = function () {
-		    return this.replace(/^\s+|\s+$/g,'');
-		  };
-		}
 		if(this.root.hasClass(df_POST_HAS_BLOCK)) {
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');				
@@ -540,14 +540,35 @@ function HashTable(obj)
 					columnPerBlock = $(this).find('.column').not(':first-child');
 				}
 				columnPerBlock.each(function() {
-					$(this).children('.post').height(heightBlockContent - 2*(marginPostPerColumn + 1));
 					$(this).width(minPostStatusWidth);
+					var post = $(this).children('.post');
+					var postHeader = post.children('.post_header');
+					var postBody   = post.children('.post_body');
+					var postTitle  = postBody.children('.post_title');
+					var postImg    = postBody.children('.post_image');
+					var postTextRaw = postBody.children('.post_text_raw');
+					var imgInTextRaw = postTextRaw.find('img');
+					post.height(heightBlockContent - 2*(marginPostPerColumn + 1));
+					postBody.height(post.height() - postHeader.height() - 10 - 22);
+					if(postTitle.length > 0){
+						postImg.height(postBody.height()*0.6);
+					}else {
+						postImg.height(postBody.height()*0.7);
+					}
+					var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+					postTextRaw.height(Math.floor(maxHeightText/20)*20);
+					if(imgInTextRaw.length > 0) {
+						imgInTextRaw.hide(10);
+					}
+					postTextRaw.truncate({
+					    width: 'auto',
+					    token: '&hellip;',
+					    side: 'right',
+					    multiline: true
+					});
 					$(this).css({
 						'opacity':'1', 
 						'min-width': minPostStatusWidth + 'px'
-					});
-					$(this).find('.post_text_raw').each(function(){
-						$(this).html($(this).text().toString().trim());
 					});
 					totalWidthOfColumns += $(this).outerWidth() + marginPostPerColumn;
 				});

@@ -1077,14 +1077,19 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post_status .post_body {  
 }
+.post_status .post_body .post_text_raw {
+  line-height: 20px;
+  font-size: 14px;
+  overflow: hidden;
+}
 .post_status .post_body .post_image {
   overflow: hidden;
-  max-width: 40%;
-  width: auto;
+  width: 100%;
+  float: none;
 }
 .post_status .post_body .post_image img {
-  height: auto;
-  width: auto;
+  max-height: 100%;
+  text-align: center;
 }
 .post_status .yes-see-more {
   position: absolute;
