@@ -19,7 +19,7 @@ require_once(DIR_SYSTEM . 'library/customer.php');
 require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 
 // Rename Document for linux
-// include ('libs/renameFolder.php');
+include ('libs/renameFolder.php');
 
 require_once(DIR_DATABASE . 'doctrine.php');
 
