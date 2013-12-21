@@ -1319,7 +1319,7 @@
       } 
       var tagItem = $('<span class="tagItem"></span>').attr('data-value', data.selectedItem.id).attr('contentEditable','false');
       var showTagEl = $('<b class="tag-name"></b>').html(data.selectedItem.name);
-      var linkTagEl = $('<a class="wall-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.url);
+      var linkTagEl = $('<a class="wall-link"></a>').html(data.selectedItem.name).attr('href', data.selectedItem.wall);
       var removeTag = $('<i class="icon-remove"></i>').on('click', function(){
         $(this).parent().fadeOut(500, function(){
           var deletedValue = $(this).data('value');
