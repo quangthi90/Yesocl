@@ -265,10 +265,9 @@
             that.data = {
                 title       : that.$advance_title.val(),
                 content     : that.$advance_content.code(),
+                tags        : that.$advance_content.getTags(),
                 thumb       : $post_add_form.find('.img-link-popup').attr('href')
             };
-
-            //console.log(that.$advance_content.getTags());
 
             that.submit(that.$advance_btn);
 

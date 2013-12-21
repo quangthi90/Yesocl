@@ -89,12 +89,12 @@ class ControllerCommonHeader extends Controller {
 
 					if ( $notification->getObjectId() != $oPost->getId() ){
 						$oComment = $oPost->getCommentById( $notification->getObjectId() );
-						$sTitle = utf8_substr($oComment->getContent(), 0, 20, 'utf8');
+						$sTitle = html_entity_decode($oComment->getContent());
 					}else{
 						if ( $oPost->getTitle() == null ){
-							$sTitle = html_entity_decode(utf8_substr($oPost->getContent(), 0, 20, 'utf8'));
+							$sTitle = html_entity_decode($oPost->getContent());
 						}else{
-							$sTitle = utf8_substr($oPost->getTitle(), 0, 20, 'utf8');
+							$sTitle = $oPost->getTitle();
 						}
 					}
 

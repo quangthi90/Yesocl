@@ -73,9 +73,9 @@ class ControllerPostComment extends Controller {
         );
 
         // Add notification
+        $this->load->model('user/notification');
+        
         if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
-            $this->load->model('user/notification');
-
             $this->model_user_notification->addNotification(
                 $oPost->getUser()->getSlug(),
                 $this->customer->getUser(),
@@ -85,6 +85,22 @@ class ControllerPostComment extends Controller {
                 $aDatas['post_type'],
                 $this->config->get('common')['object']['post']
             );
+        }
+
+        if ( !empty($this->request->post['tags']) ){
+            $aUserSlugs = $this->request->post['tags'];
+
+            foreach ( $aUserSlugs as $sUserSlug ) {
+                $this->model_user_notification->addNotification(
+                    $sUserSlug,
+                    $this->customer->getUser(),
+                    $this->config->get('common')['action']['tag'],
+                    $oComment->getId(),
+                    $oPost->getSlug(),
+                    $aDatas['post_type'],
+                    $this->config->get('common')['object']['comment']
+                );
+            }
         }
 
         return $this->response->setOutput(json_encode(array(

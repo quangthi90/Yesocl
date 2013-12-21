@@ -96,9 +96,7 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
-        $this->getDataGender();
         $this->getDataSolrFriendList();
-        $this->getDataSolrRequestList();
     }
 
     /**
