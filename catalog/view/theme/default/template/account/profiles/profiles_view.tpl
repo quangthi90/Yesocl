@@ -13,8 +13,8 @@
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="profile-view-page">
-	<div id="y-main-content">
+<div id="y-content" class="no-scroll profile-view-page">
+	<div id="y-main-content" style="width: 10000px;">
 		{{ block('profiles_tabs_profile_overview') }}
 		{{ block('profiles_tabs_information_view') }}
 		{{ block('profiles_tabs_background_view') }}
@@ -28,9 +28,4 @@
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.format.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('libs/bootstrap-formhelpers-phone.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('profiles.js') }}"></script>
-<script type="text/javascript">
-	$(document).ready( function () {
-		$('#y-content').niceScroll();
-	});
-</script>
 {% endblock %}
