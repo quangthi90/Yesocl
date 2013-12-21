@@ -19,34 +19,6 @@
 					</div>
 				</div>
 				<div class="row-fluid register-table-content">
-					{% for i in 1..8 %}
-					<div class="clearfix register-user-list {% if i < 2 %}border-top-none{% endif %}">
-						<div class="span6 clearfix register-user-box">
-							<div class="pull-left check-select">
-								<input type="checkbox" name="friends" />
-							</div>
-							<div class="pull-left register-user-avatar">
-								<img src="image/template/register-user-avatar-list.jpg" />
-							</div>
-							<div class="pull-left register-user-info">
-								<p class="register-user-name">Username</p>
-								<p class="register-user-description">Student at Arizona State University</p>
-							</div>
-						</div>
-						<div class="span6 clearfix register-user-box">
-							<div class="pull-left check-select">
-								<input type="checkbox" name="friends" />
-							</div>
-							<div class="pull-left register-user-avatar">
-								<img src="image/template/register-user-avatar-list.jpg" />
-							</div>
-							<div class="pull-left register-user-info">
-								<p class="register-user-name">Username</p>
-								<p class="register-user-description">Student at Arizona State University</p>
-							</div>
-						</div>
-					</div>
-					{% endfor %}
 				</div>
 			</div>
 		</div>
@@ -64,6 +36,36 @@
 {% endblock %}
 
 {% block register_tabs_step3_javascript %}
+<script id="register-complete-step3-table-content-tmp" type="text/x-jquery-tmpl">
+{% for i in 1..8 %}
+	<div class="clearfix register-user-list {% if i < 2 %}border-top-none{% endif %}">
+		<div class="span6 clearfix register-user-box">
+			<div class="pull-left check-select">
+				<input type="checkbox" name="friends" />
+			</div>
+			<div class="pull-left register-user-avatar">
+				<img src="image/template/register-user-avatar-list.jpg" />
+			</div>
+			<div class="pull-left register-user-info">
+				<p class="register-user-name">Username</p>
+				<p class="register-user-description">Student at Arizona State University</p>
+			</div>
+		</div>
+		<div class="span6 clearfix register-user-box">
+			<div class="pull-left check-select">
+				<input type="checkbox" name="friends" />
+			</div>
+			<div class="pull-left register-user-avatar">
+				<img src="image/template/register-user-avatar-list.jpg" />
+			</div>
+			<div class="pull-left register-user-info">
+				<p class="register-user-name">Username</p>
+				<p class="register-user-description">Student at Arizona State University</p>
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</script>
 <script type="text/javascript">
 jQuery(document).ready(function (){
 	$('.register-table').on('click', '.register-slect-all-friend', function(){

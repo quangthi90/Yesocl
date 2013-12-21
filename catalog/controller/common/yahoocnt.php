@@ -57,7 +57,7 @@ class ControllerCommonYahoocnt extends Controller {
 			$response .= json_encode($result);
 			$response .= ');">';
 		}*/
-			$response .= 'onunload="window.opener.document.getFriendList({message: \'success\'});">';
+			$response .= 'onunload="window.opener.getFriendList({success: \'ok\'});">';
 		$response .= '</body></html>';
 
 		// render

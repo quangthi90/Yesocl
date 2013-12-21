@@ -15,7 +15,7 @@
 	    			<div class="span10 offset1">
 	    				<ul class="nav nav-tabs">
 						  <li class="active">
-						  	<a href="#gmail-contact" data-toggle="tab">
+						  	<a href="#gmail-contact" data-toggle="tab" class="btn-get-g-mail">
 						  		<i class="cicon-gmail"></i>Gmail
 						  	</a>	
 				  	      </li>

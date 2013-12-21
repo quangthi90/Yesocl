@@ -5,6 +5,7 @@
 		this.$el = $element;
 		this.step1 = new RegisterCompleteStep1($element.find('.register-step1'));
         this.step2 = new RegisterCompleteStep2($element.find('.register-step2'));
+        this.step3 = new RegisterCompleteStep3($element.find('.register-step3'));
 	}
 
     function RegisterCompleteStep1($element) {
@@ -208,7 +209,7 @@
     RegisterCompleteStep1.prototype.submit = function ($button) {
         var that = this;
 
-        /*var promise = $.ajax({
+        var promise = $.ajax({
             type: 'POST',
             url:  this.$el.data('url'),
             data: this.data,
@@ -218,18 +219,18 @@
             }
         });
 
-        this.triggerProcess($button, promise);*/
+        this.triggerProcess($button, promise);
 
-        //promise.then(function(data) {
-        //    if ( data.message != 'success' ) {
-        //        carouselEle.carousel('pause');
-        //    }else {
+        promise.then(function(data) {
+            if ( data.message != 'success' ) {
+                carouselEle.carousel('pause');
+            }else {
                 carouselEle.carousel('next');
                 setTimeout(function(){
                     carouselEle.carousel('pause');
                 }, 500);
-        //    }
-        //});
+            }
+        });
     }
 
     RegisterCompleteStep1.prototype.triggerProcess = function ($el, promise) {
@@ -248,7 +249,7 @@
         this.$el = $element;
 
         this.$btnGetYahooMail = $element.find('.btn-get-yahoo-mail');
-        //this.$btnGetGMail = $element.find('.btn-get-g-mail');
+        this.$btnGetGMail = $element.find('.btn-get-g-mail');
 
         this.attachEvents();
     }
@@ -259,6 +260,22 @@
         this.$btnGetYahooMail.click(function() {
             window.open(that.$el.data('yahoocnt'), '_parent ','directories=no, location=no, titlebar=no, status=no, menubar=no, scrollbars=yes, resizable=no,width=600,height=280,top=200,left=200');
         });
+    }
+
+    function RegisterCompleteStep3($element) {
+        this.$el = $element;
+        this.$tableContent = $element.find('.register-table-content');
+
+        this.attachEvents();
+    }
+
+    RegisterCompleteStep3.prototype.attachEvents = function() {
+        var that = this;
+    }
+
+    RegisterCompleteStep3.prototype.addUserBoxes = function(data) {
+        var $content = $.tmpl($('#register-complete-step3-table-content-tmp'), data);
+        this.$tableContent.html($content);
     }
 
     function AutocompleteRegister($label_input, url, filter_label , label, $value_input, value) {
@@ -335,18 +352,22 @@
     }
 
     $(function(){
-        new RegisterComplete($('#y-main-content'));
-        
-
+        var register = new RegisterComplete($('#y-main-content'));
     });
 }(jQuery, document));
 
-        getFriendList = function(data) {console.log(data);
-            if (data.success == 'ok') {
-                if (data.type == 'yahoo') {
-
-                }else if (data.type == 'gmail') {
-
-                }
+    getFriendList = function(data) {
+        if (data.success == 'ok') {
+            var friends = {};
+            if (data.type == 'yahoo') {
+            }else if (data.type == 'gmail') {
             }
+            var tmp = $('.register-step3').find('.register-table-content');
+            var $content = $.tmpl($('#register-complete-step3-table-content-tmp'), friends);
+            tmp.html($content);
+            $('#myCarousel').carousel('next');
+            setTimeout(function(){
+                $('#myCarousel').carousel('pause');
+            }, 500);
         }
+    }
