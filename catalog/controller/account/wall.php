@@ -85,7 +85,7 @@ class ControllerAccountWall extends Controller {
 			}
 
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 			}else{
 				$aPost['image'] = null;
 			}

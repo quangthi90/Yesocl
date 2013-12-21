@@ -25,6 +25,9 @@ class ControllerCommonHeader extends Controller {
 				)
 			);
 		}
+
+		// Return list routings for js
+		$this->data['routing'] = $this->config->get('routing');
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/header.tpl';
