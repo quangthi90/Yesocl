@@ -100,6 +100,7 @@ function HashTable(obj)
 }
 
 var yListFriends = null;
+var is_send_ajax = 0;
 
 /*
 	Create current User info
@@ -251,7 +252,6 @@ var yCurrUser = new CurrentUser();
 	Tag.prototype.attachEvents = function() {
 		var that = this;
 
-		var is_send_ajax = 0;
 		that.$tagElement.mentionsInput({
 			onDataRequest:function (mode,currentMentionCollection,query,callback) {
 				if ( yListFriends == null && is_send_ajax == 0 ){

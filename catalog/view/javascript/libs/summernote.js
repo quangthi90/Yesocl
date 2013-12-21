@@ -1256,20 +1256,24 @@
     var that = this;
     var typeaheadData = that.inputTag.typeahead({
         source: function (query, process) {
-          //Lấy dữ liệu = ajax
-          //..................
-          friendList = [];
-          map = {}; 
+          if ( yListFriends == null && is_send_ajax == 0 ){
+            is_send_ajax = 1;
+            $.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+              if ( json.success == 'ok' ){
+                if ( json.friends == undefined ){
+                  is_send_ajax = 0;
+                }
+                yListFriends = json.friends;
+                console.log(yListFriends);
+              }
+            });
+          }
 
-          var tempImg = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";         
-          var data = [
-            {"id":"nguyen-van-a", "image": tempImg, "name": "Nguyễn Văn A", "url":"#"},
-            {"id":"tran-van-b", "image": tempImg, "name": "Trần Văn B", "url":"#"},
-            {"id":"nguyen-thi-c", "image": tempImg, "name": "Nguyễn Thị C", "url":"#"},
-            {"id":"vo-van-d", "image": tempImg, "name": "Võ Văn D", "url":"#"},
-            {"id":"le-thi-e", "image": tempImg, "name": "Lê Thị E", "url":"#"}
-          ];                
-          $.each(data, function (i, item) {
+          if ( yListFriends == null ){
+            return false;
+          }
+
+          $.each(yListFriends, function (i, item) {
               friendList.push(item.id + '-' + item.name);
               map[item.id + '-' + item.name] = item;
           });
@@ -1294,7 +1298,7 @@
         highlighter: function (item) {
           that.inputTag.focus();
           var selectedFriend = map[item];
-          var htmlContent = '<img src="' + selectedFriend.image + '" alt="' + selectedFriend.name + '" />'
+          var htmlContent = '<img src="' + selectedFriend.avatar + '" alt="' + selectedFriend.name + '" />'
                           + '<span class="user-name">' + selectedFriend.name + '</span>';
           return htmlContent;
         }
