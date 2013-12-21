@@ -1,6 +1,6 @@
 {% block profiles_tabs_skill_view %}
 <div class="fl profile-column profile-column-skill">
-	<h3 class="profile-column"><i class="icon-list"></i> Skill Sets</h3>
+	<h3 class="profile-column-title"><i class="icon-list"></i> Skill Sets</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
 			<div class="profile-info-item skill-item">

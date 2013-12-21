@@ -1,6 +1,6 @@
 {% block profiles_tabs_experience_view %}
 <div class="fl profile-column profile-column-experience">
-	<h3 class="profile-column"><i class="icon-list"></i> Work Experience</h3>
+	<h3 class="profile-column-title"><i class="icon-list"></i> Work Experience</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
 			<div class="profile-info-item work-item">

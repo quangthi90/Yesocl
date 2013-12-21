@@ -1,10 +1,9 @@
 // Create layout
 (function($, document, undefined) {
 	function ProfilesLayout($el) {
-		this.$el = $el;
+		this.$el = $el;		
 		this.$information = $el.find('#profiles-tabs-information');
-		this.$background = $el.find('#profiles-tabs-background');
-		
+		this.$background = $el.find('#profiles-tabs-background');		
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
 		this.$experience = $el.find('#profiles-tabs-background-experience');
@@ -73,8 +72,17 @@
 		}
 	}
 
+	function ProfileViewLayout($el){
+		this.$el = $el;
+	}
+
 	$(function(){
-		new ProfilesLayout($('#y-main-content'));
+		var mainContent = $('#y-main-content');
+		if(mainContent.hasClass('profile-view-page')){
+			new ProfileViewLayout(mainContent);
+		}else {
+			new ProfilesLayout(mainContent);
+		}		
 	});
 }(jQuery, document));
 

@@ -1,6 +1,6 @@
 {% block profiles_tabs_summary_view %}
 <div class="fl profile-column profile-column-summary">
-	<h3 class="profile-column"><i class="icon-list"></i> Summary</h3>
+	<h3 class="profile-column-title"><i class="icon-list"></i> Summary</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
 			Ldfere fdsl adafdaf a sdfj a' k'ffsfsfks s fdafd s dfdsfcdsf dfdsfdf dfasfsfs sd ndfkdsjf 
