@@ -55,7 +55,7 @@ $_['route']['CompleteRegister']				= 'account/register';
 
 // Friend
 $_['route']['FriendPage']					= 'friend/friend';
-$_['route']['GetFriends']					= 'friend/friend/getListFriends';
+$_['route']['GetAllFriends']				= 'friend/friend/getAllFriends';
 $_['route']['RequestPage']					= 'friend/request';
 $_['route']['MakeFriend']					= 'friend/request/makeFriend';
 $_['route']['ConfirmFriend']				= 'friend/request/confirm';

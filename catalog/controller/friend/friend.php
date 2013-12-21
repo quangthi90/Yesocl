@@ -93,36 +93,41 @@ class ControllerFriendFriend extends Controller {
 		$this->response->setOutput($this->twig_render());
 	}
 
-	public function getListFriends() {
-		$json = array();
-
-		if ( $this->customer->isLogged() ) {
-			$data = array();
-
-			if ( isset( $this->request->post['filter_name'] ) && (strlen( $this->request->post['filter_name'] ) > 0) ) {
-				$data['filter_name'] = $this->request->post['filter_name'];
-			}
-
-			if ( isset( $this->request->post['filter_gender'] ) ) {
-				$data['filter_gender'] = $this->request->post['filter_gender'];
-			}
-
-			if ( isset( $this->request->post['filter_request'] ) ) {
-				$data['filter_request'] = $this->request->post['filter_request'];
-			}
-
-			$data['limit'] = 20;
-			$data['start'] = 0;
-
-			if ( count( $data ) > 0 ) {
-				$this->load->model( 'friend/friend' );
-
-				$json['success'] = 'ok';
-				$json['friends'] = $this->model_friend_friend->getListFriends( $data );
-			} 
+	public function getAllFriends() {
+		if ( !$this->customer->isLogged() ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok: not login',
+            )));
 		}
 
-		$this->response->setOutput( json_encode( $json ) );
+		$this->load->model('tool/image');
+
+		$aFriends = array();
+
+		$lFriends = $this->customer->getUser()->getFriends();
+
+		if ( $lFriends ){
+			foreach ( $lFriends as $oFriend ) {
+				$oUser = $oFriend->getUser();
+
+				$aUser = $oUser->formatToCache();
+
+				// Mapping to return for tag js
+				// Check again when change libs tag js
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUser['name'] = $aUser['username'];
+				$aUser['id'] = $aUser['slug'];
+				$aUser['type'] = 'contact';
+				$aUser['wall'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
+
+				$aFriends[] = $aUser;
+			}
+		}
+
+		return $this->response->setOutput( json_encode(array(
+			'success' => 'ok',
+			'friends' => $aFriends
+		)));
 	}
 }
 ?>

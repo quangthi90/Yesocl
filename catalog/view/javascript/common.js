@@ -99,6 +99,8 @@ function HashTable(obj)
     }
 }
 
+var yListFriends = null;
+
 /*
 	Create current User info
 */
@@ -248,37 +250,37 @@ var yCurrUser = new CurrentUser();
 	}
 	Tag.prototype.attachEvents = function() {
 		var that = this;
+
+		var is_send_ajax = 0;
 		that.$tagElement.mentionsInput({
 			onDataRequest:function (mode,currentMentionCollection,query,callback) {
-				//Demo data:
-				var img = "http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180";
-				var data = [
-					{ id:'ngo-thiet', name:'Thiet Ngo', 'avatar': img, 'type':'contact', wall: '#' },
-					{ id:'quang-thi', name:'Quang Thi', 'avatar':img, 'type':'contact', wall: 'http://localhost/yesocl1/wall-page/user1/' },
-					{ id:'bieu-nguyen', name:'Bieu Nguyen', 'avatar':img, 'type':'contact', wall: '#' },
-					{ id:'thiet-ngo-1', name:'Thiệt Ngô', 'avatar':img, 'type':'contact', wall: '#' },
-					{ id:'luu-quang-thi', name:'Lưu Quang Thi', 'avatar':img, 'type':'contact', wall: '#' },
-					{ id:'nguyen-bieu', name:'Nguyễn Biểu', 'avatar':img, 'type':'contact', wall: '#' }					
-				  ];
-				data = _.filter(data, function(item) {
-					if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
-						var checkExisted = _.filter(currentMentionCollection, function(tempItem){
-							return (item.id === tempItem.id);
-						});
-						if(checkExisted.length > 0)
-							return false;
-					}					
-					return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
-				});
-				
-				//Always return data for autocomplete dropdown list:
-				callback.call(this, data);
-
-				//Example for Ajax call:
-				//$.getJSON('assets/data.json', function(responseData) {
-			    //    responseData = _.filter(responseData, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
-			    //    callback.call(this, responseData);
-		      	//});
+				if ( yListFriends == null && is_send_ajax == 0 ){
+					is_send_ajax = 1;
+					$.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+						if ( json.success == 'ok' ){
+							if ( json.friends == undefined ){
+								is_send_ajax = 0;
+							}
+							yListFriends = json.friends;
+							responseData = _.filter(yListFriends, function(item) { 
+					       		return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
+					       	});
+					       	callback.call(this, responseData);
+						}
+			      	});
+				}else{
+					data = _.filter(yListFriends, function(item) {
+						if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
+							var checkExisted = _.filter(currentMentionCollection, function(tempItem){
+								return (item.id === tempItem.id);
+							});
+							if(checkExisted.length > 0)
+								return false;
+						}					
+						return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					});
+					callback.call(this, data);
+				}
 			},
 			fullNameTrigger: true
 	  	});
