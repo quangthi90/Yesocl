@@ -356,8 +356,8 @@
     });
 }(jQuery, document));
 
-    getFriendList = function(data) {
-        if (data.success == 'ok') {
+    getFriendList = function(data) {console.log(data);
+        /*if (data.success == 'ok') {
             var friends = {};
             if (data.type == 'yahoo') {
             }else if (data.type == 'gmail') {
@@ -369,5 +369,5 @@
             setTimeout(function(){
                 $('#myCarousel').carousel('pause');
             }, 500);
-        }
+        }*/
     }
