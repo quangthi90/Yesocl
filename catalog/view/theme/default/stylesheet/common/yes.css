@@ -961,14 +961,17 @@ a.btn-notification:hover .notification-item-name > i {
 
 /* -------------------------------------------- START POST ------------------------------------ */
 .post {
-    width: auto;
-    height: auto;    
-    padding: 0px;
-    background: #fff;
-    position: relative;
+  width: auto;
+  height: auto;    
+  padding: 0px;
+  background: #fff;
+  position: relative;
 }
 .post-selecting {
   border-top: 2px solid #009B77;
+}
+.post.deleting {
+  background: #FAF0F0;
 }
 .post .yes-dropdown {
   top: 4px;

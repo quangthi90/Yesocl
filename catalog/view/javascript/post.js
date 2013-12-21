@@ -419,7 +419,8 @@
     }
     DeletePost.prototype.submit = function($button) {
         var that = this;
-
+        //Mark deleted post:
+        that.$el.addClass('deleting');
         var promise = $.ajax({
             type: 'POST',
             url:  this.url,
@@ -429,8 +430,12 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
-            if(data.success == 'ok'){                    
-                that.$el.parent().remove();
+            if(data.success == 'ok') {                   
+                that.$el.parent().css('opacity','0').slideUp(300, function(){
+                    $(this).remove();
+                });
+            }else{
+                that.$el.parent().removeClass('deleting');
             }
         });
     }
