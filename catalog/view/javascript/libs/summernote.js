@@ -1256,6 +1256,8 @@
     var that = this;
     var typeaheadData = that.inputTag.typeahead({
         source: function (query, process) {
+          friendList = [];
+          map = {};
           if ( yListFriends == null && is_send_ajax == 0 ){
             is_send_ajax = 1;
             $.getJSON(yRouting.generate('GetAllFriends'), function(json) {
