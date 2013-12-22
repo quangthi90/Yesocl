@@ -2,7 +2,7 @@
 <div class="fl profile-column profile-overview">
 	<div class="profile-user">
 		<a href="#" class="profile-img">
-			<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/c1.0.179.179/s160x160/1455049_663193417034462_1496654404_a.jpg" alt="WMThiet">
+			<img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WMThiet">
 		</a>
 		<a href="#" class="profile-name">WMThiet</a>
 		<span class="profile-metainfo">Developer/NTT Data VN</span>
