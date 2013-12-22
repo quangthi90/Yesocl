@@ -82,9 +82,9 @@ class ControllerPostPost extends Controller {
             );
 
             // Add notification
+            $this->load->model('user/notification');
+            
             if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
-                $this->load->model('user/notification');
-
                 $this->model_user_notification->addNotification(
                     $this->request->get['user_slug'],
                     $this->customer->getUser(),
@@ -94,6 +94,22 @@ class ControllerPostPost extends Controller {
                     $sPostType,
                     $this->config->get('common')['object']['wall']
                 );
+            }
+
+            if ( !empty($this->request->post['tags']) ){
+                $aUserSlugs = $this->request->post['tags'];
+
+                foreach ( $aUserSlugs as $sUserSlug ) {
+                    $this->model_user_notification->addNotification(
+                        $sUserSlug,
+                        $this->customer->getUser(),
+                        $this->config->get('common')['action']['tag'],
+                        $oPost->getId(),
+                        $oPost->getSlug(),
+                        $sPostType,
+                        $this->config->get('common')['object']['post']
+                    );
+                }
             }
 
 			return $this->response->setOutput(json_encode(array(
@@ -280,10 +296,10 @@ class ControllerPostPost extends Controller {
         if ( $oPost ){
             if ( $oPost->getUser()->getId() != $this->customer->getId() ){
                 $this->load->model('user/notification');
-
+                
                 if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
                     $this->model_user_notification->addNotification(
-                        $oPost->getUser()->getId(),
+                        $oPost->getUser()->getSlug(),
                         $this->customer->getUser(),
                         $this->config->get('common')['action']['like'],
                         $oPost->getId(),

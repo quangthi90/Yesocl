@@ -79,7 +79,7 @@ class ControllerCommonHeader extends Controller {
 				}else{
 					$oPost = $aPosts[$notification->getSlug()];
 				}
-				
+				// var_dump(!$oPost);
 				if ( $oPost ){
 					if ( $notification->getRead() == false ){
 						$this->data['notification_count']++;
@@ -109,6 +109,7 @@ class ControllerCommonHeader extends Controller {
 						'title'		=> $sTitle
 					);
 				}
+				// exit;
 			}
 			
 			if ( count($aExpireNotiIds) > 0 ){

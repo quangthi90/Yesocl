@@ -370,7 +370,7 @@ class ControllerPostComment extends Controller {
 
             if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
                 $this->model_user_notification->addNotification(
-                    $oComment->getUser()->getId(),
+                    $oComment->getUser()->getSlug(),
                     $this->customer->getUser(),
                     $this->config->get('common')['action']['like'],
                     $oComment->getId(),

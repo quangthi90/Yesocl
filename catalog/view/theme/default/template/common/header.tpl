@@ -83,15 +83,14 @@
               {% for notification in notifications %}
                 {% set user = users[notification['actor_id']] %}
               <li class="notification-content-item{% if notification.read == false %} unread{% else %} read{% endif %}">
-                <div class="notification-content-item-img">
-                  <a href="{{ path('WallPage', {user_slug: user.slug}) }}">
-                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
-                  </a>
-                </div>
                 <a href="{{ path('PostPage', {post_slug: notification.slug, post_type: notification.type}) }}">
+                  <div class="notification-content-item-img">
+                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
+                  </div>
                   <div class="notification-content-item-detail">
                     <div class="notification-text">
-                      {{ user.username ~ ' ' ~ notification.action ~ ': ' ~ notification.title|raw }}
+                      {{ user.username ~ ' ' ~ notification.action ~ ': ' }}
+                      {{ notification.title|raw }}
                     </div>
                     <div class="notification-time">
                       {{ notification.created|date(format_date) }}
