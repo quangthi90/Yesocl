@@ -821,7 +821,7 @@ class ModelUserUser extends Model {
 		}
 
 		return $this->dm->getRepository( 'Document\User\User' )->findAll()
-			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('created' => 1) );
+			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('created' => -1) );
 	}
 	
 	/**
