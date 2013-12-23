@@ -194,7 +194,28 @@ class ControllerAccountProfile extends Controller {
 
 		$aUser = $oUser->formatToCache();
 
-		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$aUser['avatar'] 	= $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$aUser['fullname'] 	= $oUser->getFullName();
+		$aUser['gender'] 	= $oUser->getMeta()->getSex() ? 'Male' : 'Female';
+		$aUser['birthday'] 	= $oUser->getMeta()->getBirthday()->format('d/m/Y');
+		$aUser['address'] 	= $oUser->getMeta()->getAddress();
+		$aUser['location']	= $oUser->getMeta()->getLocation()->getLocation();
+		$aUser['industry']	= $oUser->getMeta()->getIndustry();
+		
+		// Emails
+		$aEmails = $oUser->getEmails();
+		foreach ( $aEmails as $oEmail ) {
+			$aUser['emails'][$oEmail->getId()] = $oEmail->getEmail();
+			if ( $oEmail->getPrimary() == true ){
+				$this->data['primary_email'] = $oEmail->getId();
+			}
+		}
+
+		// Phones
+		$aPhones = $oUser->getMeta()->getPhones();
+		foreach ( $aPhones as $oPhone ) {
+			$aUser['phones'][] = $oPhone->getPhone();
+		}
 
 		$this->data['user'] = $aUser;
 

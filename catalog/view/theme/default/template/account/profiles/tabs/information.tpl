@@ -46,7 +46,7 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Sex</div>
+						<div class="span2 offset1">Gender</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.sext }}</span></div>
 					</div>
 					<div class="row-fluid">
@@ -292,7 +292,7 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Sex</div>
+					<div class="span2 offset1">Gender</div>
 					<div class="span9 control-group" data-url="{{ link_validate_sex }}">
 						<select class="span5" name="sex">
 							<option value="1">Male</option>

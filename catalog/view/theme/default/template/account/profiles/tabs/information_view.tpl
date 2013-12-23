@@ -5,66 +5,54 @@
 		<div class="profile-column-content">
 			<div class="row-fluid">
 				<div class="span3 profile-label">Username</div>
-				<div class="span9 profile-value">wmthiet</div>
+				<div class="span9 profile-value">{{ user.username }}</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Fullname</div>
-				<div class="span9 profile-value">Ngo Van Thiet</div>
+				<div class="span9 profile-value">{{ user.fullname }}</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Email</div>
 				<div class="span9 profile-value profile-emails">
-					<div class="email-item email-primary">
-						<span class="label label-success"><i class="icon-envelope"></i></span>
-						<span class="">nvthiet.khtn08@gmail.com</span> 
-					</div>
+					{% for id, email in user.emails %}
 					<div class="email-item">
-						<span class="label"><i class="icon-envelope"></i></span>
-						<span class="">nvthiet.111@gmail.com</span> 
+						<span class="label{% if primary_email == id %} label-success{% endif %}"><i class="icon-envelope"></i></span>
+						<span class="">{{ email }}</span> 
 					</div>
-					<div class="email-item">
-						<span class="label"><i class="icon-envelope"></i></span>
-						<span class="">nvthiet.222@gmail.com</span> 
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Phone</div>
 				<div class="span9 profile-value profile-phones">
+					{% for phone in user.phones %}
 					<div class="phones-item">
 						<span><i class="icon-phone"></i></span>
-						<span>098721212</span>
+						<span>{{ phone }}</span>
 					</div>
-					<div class="phones-item">
-						<span><i class="icon-phone"></i></span>
-						<span>0987232322</span>
-					</div>
-					<div class="phones-item">
-						<span><i class="icon-phone"></i></span>
-						<span>0987232324</span>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 			<div class="row-fluid">
-				<div class="span3 profile-label">Sex</div>
-				<div class="span9 profile-value">Male</div>
+				<div class="span3 profile-label">Gender</div>
+				<div class="span9 profile-value">{{ user.gender }}</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Birthday</div>
-				<div class="span9 profile-value">26/06/1990</div>
+				<div class="span9 profile-value">{{ user.birthday }}</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Address</div>
-				<div class="span9 profile-value">52 DatThanh Street, Ward 6, Tan Binh District
+				<div class="span9 profile-value">{{ user.address }}
 				</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Living</div>
-				<div class="span9 profile-value">Ho Chi Minh City</div>
+				<div class="span9 profile-value">{{ user.location }}</div>
 			</div>
 			<div class="row-fluid">
 				<div class="span3 profile-label">Industry</div>
-				<div class="span9 profile-value">Information Technology</div>
+				<div class="span9 profile-value">{{ user.industry }}</div>
 			</div>
 		</div>
 	</div>
