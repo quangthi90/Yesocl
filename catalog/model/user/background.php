@@ -3,6 +3,7 @@ use Document\User\Meta\Location,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
 	Document\User\Meta\Skill;
+use Datetime;
 
 class ModelUserBackground extends Model {
 
@@ -48,7 +49,13 @@ class ModelUserBackground extends Model {
 
 		$this->dm->flush();
 
-		return $education->getId();	}
+		if ( $user->getMeta()->getCurrent() == '' ){
+			$user->getMeta()->setCurrentInfo();
+			$this->dm->flush();
+		}
+
+		return $education->getId();
+	}
 
 	public function removeEducation( $user_id, $id ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
@@ -64,6 +71,8 @@ class ModelUserBackground extends Model {
 		}
 
 		$user->getMeta()->getBackground()->getEducations()->removeElement( $education );
+
+		$user->getMeta()->setCurrentInfo();
 
 		$this->dm->flush();
 
@@ -108,6 +117,13 @@ class ModelUserBackground extends Model {
 		$education->setFieldOfStudy( $data['fieldofstudy'] );
 		$education->setFieldOfStudyId( $data['fieldofstudy_id'] );
 
+		// Set current job for user
+		// Studient - Employee - Job Seeker
+		if ( $user->getMeta()->getCurrent() == '' ){
+			$user->getMeta()->setCurrentInfo();
+			$this->dm->flush();
+		}
+
 		$this->dm->flush();
 
 		return $education->getId();	}
@@ -123,16 +139,8 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
-		if ( empty($data['ended_month']) ) {
-			//return false;
-		}
-
 		if ( empty($data['started_year']) ) {
 			return false;
-		}
-
-		if ( empty($data['ended_year']) ) {
-			//return false;
 		}
 
 		if ( empty($data['title']) ) {
@@ -177,6 +185,11 @@ class ModelUserBackground extends Model {
 
 		$this->dm->flush();
 
+		if ( !empty($data['current']) ){
+			$user->getMeta()->setCurrentInfo();
+			$this->dm->flush();
+		}
+
 		return $experience->getId();
 	}
 
@@ -191,6 +204,10 @@ class ModelUserBackground extends Model {
 		
 		if ( $experience ){
 			$user->getMeta()->getBackground()->getExperiences()->removeElement( $experience );
+		}
+
+		if ( $id == $user->getMeta()->getCurrentId() ){
+			$user->getMeta()->setCurrentInfo();
 		}
 
 		$this->dm->flush();
@@ -209,16 +226,8 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
-		if ( empty($data['ended_month']) ) {
-			//return false;
-		}
-
 		if ( empty($data['started_year']) ) {
 			return false;
-		}
-
-		if ( empty($data['ended_year']) ) {
-			//return false;
 		}
 
 		if ( empty($data['title']) ) {
@@ -241,13 +250,17 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
+		if ( empty($data['ended_year']) && empty($data['ended_month']) ){
+			$user->setCurrent( 'work at ' . $data['company'] );
+		}
+
 		$experience = $user->getMeta()->getBackground()->getExperienceById( $id );
 
 		$started = new \Datetime();
 		$started->setDate( $data['started_year'], $data['started_month'], 1 );
 		$experience->setStarted( $started );
 
-		if (!empty($data['current']) && $data['current']) {
+		if ( !empty($data['current']) ) {
 			$ended = null;
 		}else {
 			$ended = new \Datetime();
@@ -263,6 +276,10 @@ class ModelUserBackground extends Model {
 		$location->setLocation( trim( $data['location'] ) );
 		$experience->setLocation( $location );
 		$location->setCityId( $data['cityid'] );
+
+		if ( !empty($data['current']) ){
+			$user->getMeta()->setCurrentInfo();
+		}
 
 		$this->dm->flush();
 

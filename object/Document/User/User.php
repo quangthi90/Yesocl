@@ -82,6 +82,7 @@ Class User {
     public function prePersist()
     {
     	$this->created = new \DateTime();
+    	$this->meta->setCurrent('unknow');
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
@@ -109,7 +110,8 @@ Class User {
 			'username' 		=> $this->getUsername(),
 			'avatar' 		=> $this->getAvatar(),
 			'slug'			=> $this->getSlug(),
-			'email' 		=> $this->getPrimaryEmail()->getEmail()
+			'email' 		=> $this->getPrimaryEmail()->getEmail(),
+			'current'		=> $this->getMeta()->getCurrent()
 		);
 
 		return $data;
