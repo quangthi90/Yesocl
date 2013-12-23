@@ -1,6 +1,7 @@
 <?php
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use DateTime;
 
 /** 
  * @MongoDB\EmbeddedDocument
@@ -55,6 +56,12 @@ Class Meta {
 	/** @MongoDB\String */
 	private $address;
 
+	/** @MongoDB\String */
+	private $current;
+
+	/** @MongoDB\String */
+	private $current_id;
+
 	/** 
 	 * @MongoDB\EmbedMany(targetDocument="Document\User\Meta\Im") 
 	 */
@@ -99,6 +106,33 @@ Class Meta {
 		);
 
 		return $data;
+	}
+
+	public function setCurrentInfo(){
+		$this->setCurrent('Job Seeker');
+		$this->setCurrentId('');
+
+		$experiences = $this->background->getExperiences();
+		foreach ( $experiences as $experience ) {
+			if ( $experience->getEnded() == null ){
+				$this->setCurrent( 'working at ' . $experience->getCompany() );
+				$this->setCurrentId( $experience->getId() );
+				return true;
+			}
+		}
+
+		$educations = $this->background->getEducations();
+		$time = new DateTime();
+		$time = $time->format('Y');
+		foreach ( $educations as $education ) {
+			if ( $education->getEnded() >= $time ){
+				$this->setCurrent( 'studying at ' . $education->getSchool() );
+				$this->setCurrentId( $education->getId() );
+				return true;
+			}
+		}
+
+		return true;
 	}
 
 	public function setFirstname( $firstname ){
@@ -179,6 +213,22 @@ Class Meta {
 
 	public function getAddress(){
 		return $this->address;
+	}
+
+	public function setCurrent( $current ){
+		$this->current = $current;
+	}
+
+	public function getCurrent(){
+		return $this->current;
+	}
+
+	public function setCurrentId( $current_id ){
+		$this->current_id = $current_id;
+	}
+
+	public function getCurrentId(){
+		return $this->current_id;
 	}
 
 	public function addIm( Im $im ){

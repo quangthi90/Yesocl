@@ -88,7 +88,13 @@ class ExtensionLoader
     }
 
     public function getCurrentUser(){
-        return $this->customer;
+        $this->load->model('tool/image');
+
+        $oUser = $this->customer->getUser();
+        $aUser = $oUser->formatToCache();
+        $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+        
+        return $aUser;
     }
 
     public function isLogged(){
@@ -136,13 +142,7 @@ class ExtensionLoader
         foreach ( $users as $user ) {
             $user = $user->formatToCache();
 
-            if ( !empty($user['avatar']) ){
-                $user['avatar'] = $this->registry->get('model_tool_image')->resize( $user['avatar'], 180, 180 );
-            }elseif ( !empty($user['email']) ){
-                $user['avatar'] = $this->registry->get('model_tool_image')->getGavatar( $user['email'], 180 );
-            }else{
-                $user['avatar'] = $this->registry->get('model_tool_image')->resize( 'no_user_avatar.png', 180, 180 );
-            }
+            $user['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $user['avatar'], $user['email'] );
 
             $returns[] = $user;
         }

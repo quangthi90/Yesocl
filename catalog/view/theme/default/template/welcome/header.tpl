@@ -26,7 +26,7 @@
                                     <i class="icon-facebook"></i>
                                 </a>
                             </li>
-                            <li>
+                            {#<li>
                                 <a href="#">
                                     <i class="icon-twitter"></i>
                                 </a>
@@ -40,7 +40,7 @@
                                 <a href="#">
                                     <i class="icon-google-plus"></i>
                                 </a>
-                            </li>
+                            </li>#}
                         </ul>
                     </div>
                 </div>
