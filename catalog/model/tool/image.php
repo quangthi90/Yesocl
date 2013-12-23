@@ -56,7 +56,7 @@ class ModelToolImage extends Model {
 	}
 
 	public function getAvatarUser( $_avatar, $_email, $width = 180, $height = 180 ){
-		$avatar = $this->resize( $_avatar, $width, $height, true );
+		$avatar = $this->resize( $_avatar, $width, $height );
 
 		if ( $avatar ){
 			return $avatar;
