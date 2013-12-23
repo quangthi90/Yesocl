@@ -91,7 +91,7 @@
                   <div class="notification-content-item-detail">
                     <div class="notification-text">
                       {{ user.username ~ ' ' ~ notification.action ~ ': ' }}
-                      {{ notification.title|raw }}
+                      "{{ notification.title|raw }}"
                     </div>
                     <div class="notification-time">
                       {{ notification.created|date(format_date) }}
