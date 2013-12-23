@@ -99,8 +99,23 @@
 			e.preventDefault();
 			var href = $(this).attr('href');
 			if($(href).length == 0) return;
-			var leftPosition = $(href).position().left;
-			that.$rootContent.animate({scrollLeft: leftPosition + 'px'}, 1000);
+			var leftPosition = 0;
+			if(href === '#profile-column-information'){
+				leftPosition = 200;
+			}else if(href === '#profile-column-summary') {
+				leftPosition = $('#profile-column-information').width() + 30 ;
+			}else if(href === '#profile-column-education') {
+				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30;
+			}else if(href === '#profile-column-experience') {
+				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30 + $('#profile-column-education').width() + 30;
+			}else if(href === '#profile-column-skill') {
+				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30 + $('#profile-column-education').width() + 30 + $('#profile-column-experience').width() + 30;
+			}
+			that.$rootContent.animate({scrollLeft: (leftPosition - 200) + 'px'}, 1000);
+			that.$profileColumn.removeClass('active');
+			that.$navigationItem.removeClass('active');
+			$(this).addClass('active');
+			$(href).addClass('active');
 		});
 	}
 	ProfileViewLayout.prototype.makeLayoutScroll = function(){

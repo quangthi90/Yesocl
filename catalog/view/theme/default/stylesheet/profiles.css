@@ -358,8 +358,11 @@ textarea[name="summary"] {
 	opacity: 0;
 }
 .profile-column .profile-column-title {
-    color: #009B77;
+    color: #000;
     cursor: pointer;
+}
+.profile-column.active .profile-column-title {	
+	color: #009B77;
 }
 .profile-column .profile-column-title > i {
     font-size: 21px;	
@@ -487,7 +490,9 @@ textarea[name="summary"] {
 .profile-category-li .profile-category-item:hover > i {
 	color: #FFF;
 }
-
+.profile-category-li .profile-category-item.active > i {
+	color: #009B77;
+}
 .profile-info-item .profile-info-basic .profile-info-title .degree-name {
 	border-right: 1px solid #ccc;
 	padding-right: 10px;
