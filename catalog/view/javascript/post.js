@@ -265,6 +265,7 @@
             that.data = {
                 title       : that.$advance_title.val(),
                 content     : that.$advance_content.code(),
+                tags        : that.$advance_content.getTags(),
                 thumb       : $post_add_form.find('.img-link-popup').attr('href')
             };
 
@@ -277,13 +278,17 @@
                 e.preventDefault();
                 return false;
             }
-            
             if(that.validate(false) == false){
                 return false;
             }
-
+            var usersTagged = [];
+            var mentions = that.$content.mentionsInput('getMentions');
+            $.each(mentions, function(key, value){                
+                usersTagged.push(value.id);
+            });
             that.data = {
-                content     : that.$content.val(),
+                content     : that.$content.mentionsInput('getHtmlContent'),
+                tags        : usersTagged,
                 thumb       : that.$el.find('.img-link-popup').attr('href')
             };
 
@@ -414,7 +419,8 @@
     }
     DeletePost.prototype.submit = function($button) {
         var that = this;
-
+        //Mark deleted post:
+        that.$el.addClass('deleting');
         var promise = $.ajax({
             type: 'POST',
             url:  this.url,
@@ -424,8 +430,12 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
-            if(data.success == 'ok'){                    
-                that.$el.parent().remove();
+            if(data.success == 'ok') {                   
+                that.$el.parent().css('opacity','0').slideUp(300, function(){
+                    $(this).remove();
+                });
+            }else{
+                that.$el.parent().removeClass('deleting');
             }
         });
     }

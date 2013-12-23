@@ -55,12 +55,13 @@ $_['route']['CompleteRegister']				= 'account/register';
 
 // Friend
 $_['route']['FriendPage']					= 'friend/friend';
-$_['route']['GetFriends']					= 'friend/friend/getListFriends';
+$_['route']['GetAllFriends']				= 'friend/friend/getAllFriends';
 $_['route']['RequestPage']					= 'friend/request';
 $_['route']['MakeFriend']					= 'friend/request/makeFriend';
 $_['route']['ConfirmFriend']				= 'friend/request/confirm';
 $_['route']['UnFriend']						= 'friend/request/unFriend';
 $_['route']['IgnoreFriend']					= 'friend/request/ignore';
+$_['route']['SearchFriend']					= 'friend/friend/search/';
 
 // Upload
 $_['route']['UploadFile'] 					= 'file/upload';
@@ -71,4 +72,7 @@ $_['route']['IndustryAutoComplete']			= 'data/value/industryAutoComplete';
 $_['route']['DegreeAutoComplete']			= 'data/value/degreeAutoComplete';
 $_['route']['SchoolAutoComplete']			= 'data/value/schoolAutoComplete';
 $_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete';
+
+// Notification
+$_['route']['NotificationReadAll']			= 'common/notification/readAll/';
 ?>

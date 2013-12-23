@@ -75,6 +75,9 @@ Class User {
 	/** @MongoDB\Collection */
 	private $friendRequests;
 
+	/** @MongoDB\EmbedMany(targetDocument="Notification") */
+	private $notifications = array();
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -93,9 +96,7 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
-        $this->getDataGender();
         $this->getDataSolrFriendList();
-        $this->getDataSolrRequestList();
     }
 
     /**
@@ -166,6 +167,38 @@ Class User {
 			}
 		}
 
+		return null;
+	}
+
+	
+
+	/**
+	 * Get Notification By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: MongoDB ID
+	 * @return:
+	 * 		- Object notification
+	 * 		- null if not found
+	 */
+	public function getNotificationById( $notification_id ){
+		foreach ( $this->notifications as $notification ){
+			if ( $notification->getId() == $notification_id ){
+				return $notification;
+			}
+		}
+		
+		return null;
+	}
+
+	public function getNotificationByData( $actor_id, $object_id, $action ){
+		foreach ( $this->notifications as $notification ){
+			if ( $notification->getActor()->getId() == $actor_id
+				&& $notification->getObjectId() == $object_id
+				&& $notification->getAction() == $action ){
+				return $notification;
+			}
+		}
+		
 		return null;
 	}
 
@@ -360,6 +393,18 @@ Class User {
 		return $this->friendRequests;
 	}
 
+	public function addNotification( Notification $notification ){
+		$this->notifications[] = $notification;
+	}
+
+	public function setNotifications( $notifications ){
+		$this->notifications = $notifications;
+	}
+
+	public function getNotifications(){
+		return $this->notifications;
+	}
+
 	/**
 	* @SOLR\Field(type="text")
 	*/
@@ -477,52 +522,6 @@ Class User {
 			foreach ($this->getFriends() as $friend) {
 				$this->solrFriendList .= ' ' . $friend->getUser()->getId();
 			}
-		}
-		catch(Exception $e){
-			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
-		}
-	}
-
-	/**
-	* @SOLR\Field(type="text")
-	*/
-	private $solrRequestList;
-
-	public function setSolrRequestList( $solrRequestList ){
-		$this->solrRequestList = $solrRequestList;
-	}
-
-	public function getSolrRequestList(){
-		return $this->solrRequestList;
-	}
-
-	public function getDataSolrRequestList(){
-		try{
-			foreach ($this->getFriendRequests() as $request) {
-				$this->solrRequestList .= ' ' . $request;
-			}
-		}
-		catch(Exception $e){
-			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);
-		}
-	}
-
-	/**
-	* @SOLR\Field(type="text")
-	*/
-	private $gender;
-
-	public function setGender( $gender ){
-		$this->gender = $gender;
-	}
-
-	public function getGender(){
-		return $this->gender;
-	}
-
-	public function getDataGender(){
-		try{
-			$this->gender = (int) $this->getMeta()->getSex();
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr Friend List!<br>See User Document <b>Function getDataSolrFriendList()</b>', 0, $e);

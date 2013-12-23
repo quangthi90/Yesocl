@@ -1,5 +1,6 @@
 <?php
-use Document\Friend\Friend;
+use Document\Friend\Friend,
+	Document\User\Notification;
 
 class ModelUserUser extends Model {
 	public function editUser( $user_slug, $data = array() ){

@@ -272,8 +272,15 @@
 
             that.url    = that.$el.attr('data-url');
 
+            var usersTagged = [];
+            var mentions = that.$content.mentionsInput('getMentions');
+            $.each(mentions, function(key, value){                
+                usersTagged.push(value.id);
+            });
+
             that.data = {
-                content     : that.$content.val()
+                tags        : usersTagged,
+                content     : that.$content.mentionsInput('getHtmlContent')
             };
 
             that.submit(that.$comment_btn);

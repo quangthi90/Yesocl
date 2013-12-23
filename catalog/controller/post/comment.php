@@ -42,24 +42,27 @@ class ControllerPostComment extends Controller {
         switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $oComment = $this->model_branch_comment->addComment( $aDatas );
+                $aResult = $this->model_branch_comment->addComment( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $oComment = $this->model_user_comment->addComment( $aDatas );
+                $aResult = $this->model_user_comment->addComment( $aDatas );
                 break;
             
             default:
-                $oComment = null;
+                $aResult = null;
                 break;
         }
-        
-        if ( !$oComment ){
+
+        if ( !$aResult ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: add comment have error'
             )));
         }
+
+        $oComment = $aResult['comment'];
+        $oPost = $aResult['post'];
 
         $this->load->model('tool/object');
 
@@ -68,6 +71,37 @@ class ControllerPostComment extends Controller {
             $aDatas['post_slug'],
             $aDatas['post_type']
         );
+
+        // Add notification
+        $this->load->model('user/notification');
+        
+        if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
+            $this->model_user_notification->addNotification(
+                $oPost->getUser()->getSlug(),
+                $this->customer->getUser(),
+                $this->config->get('common')['action']['comment'],
+                $oComment->getId(),
+                $oPost->getSlug(),
+                $aDatas['post_type'],
+                $this->config->get('common')['object']['post']
+            );
+        }
+
+        if ( !empty($this->request->post['tags']) ){
+            $aUserSlugs = $this->request->post['tags'];
+
+            foreach ( $aUserSlugs as $sUserSlug ) {
+                $this->model_user_notification->addNotification(
+                    $sUserSlug,
+                    $this->customer->getUser(),
+                    $this->config->get('common')['action']['tag'],
+                    $oComment->getId(),
+                    $oPost->getSlug(),
+                    $aDatas['post_type'],
+                    $this->config->get('common')['object']['comment']
+                );
+            }
+        }
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
@@ -329,6 +363,29 @@ class ControllerPostComment extends Controller {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok'
             )));
+        }
+
+        if ( $oComment->getUser()->getId() != $this->customer->getId() ){
+            $this->load->model('user/notification');
+
+            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
+                $this->model_user_notification->addNotification(
+                    $oComment->getUser()->getSlug(),
+                    $this->customer->getUser(),
+                    $this->config->get('common')['action']['like'],
+                    $oComment->getId(),
+                    $aDatas['post_slug'],
+                    $aDatas['post_type'],
+                    $this->config->get('common')['object']['comment']
+                );
+            }else{
+                $this->model_user_notification->deleteNotification(
+                    $oComment->getUser()->getId(),
+                    $this->customer->getId(),
+                    $oComment->getId(),
+                    $this->config->get('common')['action']['like']
+                );
+            }
         }
 
         return $this->response->setOutput(json_encode(array(

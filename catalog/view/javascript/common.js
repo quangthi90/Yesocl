@@ -99,6 +99,27 @@ function HashTable(obj)
     }
 }
 
+var yListFriends = null;
+var is_send_ajax = 0;
+
+/*
+	Create current User info
+*/
+function CurrentUser()
+{
+    var $curr_user_info = $('#current-user-info');
+    this.slug = $curr_user_info.find('#current-user-slug');
+
+    $curr_user_info.remove();
+    
+    this.getSlug = function()
+    {
+        return this.slug;
+    }
+}
+
+var yCurrUser = new CurrentUser();
+
 /*
 	End JS Utitlity Function
 */
@@ -148,21 +169,17 @@ function HashTable(obj)
 			height: heightCustom,  
 			focus: true,
   			toolbar: [
-		    //['style', ['style']], // no style button
-		    ['style', ['bold', 'italic', 'underline', 'clear']],
-		    //['fontsize', ['fontsize']],
-		    //['color', ['color']],
-		    ['para', ['ul', 'ol', 'paragraph']],
-		    ['table', ['table']],
-		    ['height', ['height']],
-		    ['insert', ['picture', 'link']],		    
-		    ['fullscreen', ['fullscreen']],
-		    //['help', ['help']] //no help button
-		  	],
-		  	onfocus: function(e) {
-		  	},
-		  	onblur: function(e) {
-		  	}
+  				['tag', ['tag']],
+			    ['style', ['style']],
+			    ['style', ['bold', 'italic', 'underline', 'clear']],
+			    //['fontsize', ['fontsize']],
+			    //['color', ['color']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    //['table', ['table']],
+			    //['height', ['height']],
+			    ['insert', ['picture', 'link']],		    
+			    ['fullscreen', ['fullscreen']]
+		  	]
 		});	
 	}
 
@@ -225,47 +242,52 @@ function HashTable(obj)
 		this.menuContainer.makeCustomScroll(false);
 	}
 	/* End Left Sidebar */
-
 	/*
-		Start Notification
+		Start Mention (Tag)
 	*/
-	function Notification(el){
-		this.root = el;
-		this.notificationItem = el.find('.notification-item');
-		this.allNotificationBtn = el.find('.btn-notification');
-		this.allNotificationList = el.find('.notification-content-list');
-		this.notInclude = $('#y-container, #y-sidebar,#y-footer');
+	function Tag(el) {
+		this.$tagElement = el.find('.mention');
 		this.attachEvents();
 	}
-	Notification.prototype.attachEvents = function() {
+	Tag.prototype.attachEvents = function() {
 		var that = this;
-		that.notificationItem.each(function(){
-			var me = $(this);
-			var btnInvoke = $(this).children('.btn-notification');
-			var listNotification = $(this).children('.notification-content-list');
-			listNotification.makeCustomScroll(false);
-			listNotification.css('opacity', '1').hide(10);
-			btnInvoke.on('click', function(e){
-				e.preventDefault();
-				var hasActive = me.hasClass('active');
-				that.allNotificationList.slideUp(10);
-				that.notificationItem.removeClass('active');
-				if(!hasActive){
-					listNotification.slideDown(200, function(){
-						me.addClass('active');
-					});	
+
+		that.$tagElement.mentionsInput({
+			onDataRequest:function (mode,currentMentionCollection,query,callback) {
+				if ( yListFriends == null && is_send_ajax == 0 ){
+					is_send_ajax = 1;
+					$.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+						if ( json.success == 'ok' ){
+							if ( json.friends == undefined ){
+								is_send_ajax = 0;
+							}
+							yListFriends = json.friends;
+							responseData = _.filter(yListFriends, function(item) { 
+					       		return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
+					       	});
+					       	callback.call(this, responseData);
+						}
+			      	});
+				}else{
+					data = _.filter(yListFriends, function(item) {
+						if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
+							var checkExisted = _.filter(currentMentionCollection, function(tempItem){
+								return (item.id === tempItem.id);
+							});
+							if(checkExisted.length > 0)
+								return false;
+						}					
+						return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+					});
+					callback.call(this, data);
 				}
-			});
-		});
-		that.notInclude.on('click', function(){ 
-			that.allNotificationList.slideUp(10);
-			that.notificationItem.removeClass('active');
-		});
+			},
+			fullNameTrigger: true
+	  	});
 	}
 	/*
-		End Notification
+		End Mention (Tag)
 	*/
-
 	/*
 	Jquery effects
 	*/
@@ -466,6 +488,7 @@ function HashTable(obj)
 	var df_CATEGORY_SINGLE = 'post-category';
 	var df_FRIEND_ACCOUNT = 'account-friend';
 	var df_SEARCH_PAGE 	= 'search-page';
+	var df_NOTIFICATION_PAGE 	= 'notification-page';
 
 	function HorizontalBlock(el) {	
 		this.rootContent = $("#y-content");
@@ -509,6 +532,7 @@ function HashTable(obj)
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
 			this.columns.css('opacity', '1');
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_POST_PER_COLUMN)) {
 			this.blocks = this.root.find('.feed-block');	
@@ -576,6 +600,7 @@ function HashTable(obj)
 			});
 			this.freeBlock.css('margin-right', marginBlock);
 			this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
 			this.blocks = this.root.find('.feed-block');	
@@ -609,6 +634,7 @@ function HashTable(obj)
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
 			});
 			this.columns.css('opacity', '1');
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
 			var heightBlockContent = this.heightMain - 42;
@@ -623,6 +649,7 @@ function HashTable(obj)
 				this.rootContent.css('right','220px');
 				listBlockItem.css('opacity','1');
 			}
+			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_SEARCH_PAGE)){
 			this.root.css('min-width', this.widthMain + 'px');
@@ -642,9 +669,15 @@ function HashTable(obj)
 				$(this).find('.friend-info').css('max-width', maxContentWidth + 'px');
 				$(this).makeCustomScroll(false);
 			});
-		}else {
+			this.rootContent.niceScroll();
+		}else if(this.root.hasClass(df_NOTIFICATION_PAGE)){
+			this.root.css('min-width', this.widthMain + 'px');
+			var heightBlockContent = this.heightMain - 42;
+			this.root.find('.block-content').height(heightBlockContent - 5);			
+			var ntfContainer = this.root.find('.ntf-container');
+			ntfContainer.height(heightBlockContent - 5 - 20).niceScroll();
 		}
-		this.rootContent.niceScroll();
+		
 	}
 	function BlockFeed(block, heightAverPost, widthAverPost) {
 		this.blockEle = block;
@@ -679,80 +712,6 @@ function HashTable(obj)
 		}
 	}
 
-	function NotifyFriendBtn( $el ){
-		this.$el			= $el;
-		this.$accept_btn	= $el.find('.btn-accept');
-		this.accept_url		= this.$accept_btn.data('url');
-		this.$ignore_btn	= $el.find('.btn-ignore');
-		this.ignore_url		= this.$ignore_btn.data('url');
-
-		this.attachEvents();
-	}
-	NotifyFriendBtn.prototype.attachEvents = function(){
-		var that = this;
-
-		this.$accept_btn.click(function(e) {
-			e.preventDefault();
-			
-			if(that.$el.hasClass('disabled')) {
-				return false;
-			}
-
-			that.submit( that.$accept_btn, that.accept_url );
-
-			return false;
-		});
-
-		this.$ignore_btn.click(function(e) {
-			e.preventDefault();
-			
-			if(that.$el.hasClass('disabled')) {
-				return false;
-			}
-
-			that.submit( that.$ignore_btn, that.ignore_url );
-
-			return false;
-		});
-	};	
-	NotifyFriendBtn.prototype.submit = function($button, url){
-		var that = this;
-
-		var promise = $.ajax({
-			type: 'POST',
-			url: url,
-			dataType: 'json'
-		});
-
-		this.triggerProgress($button, promise);
-
-		promise.then(function(data) { 
-			if(data.success == 'ok'){			
-				var $group = that.$el.parents('.notification-item').find('.notification-item-count');
-				
-				var count_request = parseInt($group.data('count'), 10) - 1;
-				
-				$group.data('count', count_request);
-
-				$group.html(count_request).addClass('hidden');
-				
-				that.$el.remove();
-			}
-		});	
-	};
-	NotifyFriendBtn.prototype.triggerProgress = function($el, promise){
-		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-		var $old_icon = $el.find('i');
-		var f        = function() {
-			$spinner.remove();
-			$el.html($old_icon);
-		};
-
-		$el.addClass('disabled').html($spinner);
-
-		promise.then(f, f);
-	};
-
 	/*
 	End Custom List Post
 	*/
@@ -760,13 +719,7 @@ function HashTable(obj)
 		new HorizontalBlock($('.has-horizontal'));
 		new FlexibleElement($(this));
 		new Sidebar($(this));
-		if($('#user-notification').length > 0){
-			new Notification($('#user-notification'));
-		}		
+		new Tag($(this));
 		$(".timeago").timeago();
-		
-		$('.notify-actions').each(function(){
-			new NotifyFriendBtn( $(this) );
-		});
 	});
 }(jQuery, document));

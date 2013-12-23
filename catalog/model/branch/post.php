@@ -135,5 +135,11 @@ class ModelBranchPost extends Model {
 		
 		return $results;
 	}
+
+	public function getPostBySlug( $post_slug ) {
+		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $post_slug );
+
+		return $post;
+	}
 }
 ?>

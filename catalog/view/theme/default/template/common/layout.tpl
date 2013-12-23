@@ -12,6 +12,7 @@
 		<link href="{{ asset_css('libs/uniform.default.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/magnific-popup.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/mcustomscrollbar.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/mention-input.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
 		<!-- Common css -->
 		<link href="{{ asset_css('common/yes.css') }}" rel="stylesheet" media="screen" />
@@ -49,8 +50,16 @@
 		</script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.typeahead.js') }}">
 		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.elastic.js') }}">
+		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.events.input.js') }}">
+		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/mention/underscore.min.js') }}">
+		</script>
+		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.mentions.input.js') }}">
+		</script>		
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/summernote.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/summernote.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.cookie.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.truncate.min.js') }}"></script>
@@ -61,6 +70,7 @@
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('routing.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('notification.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}

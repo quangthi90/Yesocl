@@ -11,19 +11,18 @@ function Routing()
         this.routing.setItem( $($routing[key]).data('page'), $($routing[key]).data('link') );
     }
 
-    $('#list-routing').remove();
+    $routing.remove();
     
     // Generate url by name & params
     this.generate = function(name, params)
     {
-        // console.log(this.routing);
         var url = this.routing.getItem(name);
-        // console.log(url);
+        
         for ( key in params ){
-            url = url.replace( key, params[key] );
+            url = url.replace( '{' + key + '}', params[key] );
         }
 
-        return url;
+        return $('base').attr('href') + url;
     }
 }
 

@@ -4,7 +4,7 @@ class ControllerFriendRequest extends Controller {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
 		} else {
-			$this->data['base'] = $this->config->get('config_url');
+			$this->data['base'] = HTTP_SERVER;
 		}
 		
 		$this->load->model('tool/image');
@@ -122,7 +122,7 @@ class ControllerFriendRequest extends Controller {
 		            'warning' => 'user slug is empty'
 		        )));
            	}
-
+           	
            	$friend = $this->model_user_user->getUserFull( $this->request->get );
 
            	if ( !$friend ){
@@ -151,20 +151,16 @@ class ControllerFriendRequest extends Controller {
 
            	$result = $result1 * $result2;
 
-           	if ( !$result ){
+           	if ( $result ){
            		return $this->response->setOutput(json_encode(array(
-		            'success' => 'not ok',
-		            'warning' => 'send request have error'
+		            'success' => 'ok'
 		        )));
            	}
-
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'ok'
-	        )));
     	}
 		
     	return $this->response->setOutput(json_encode(array(
-            'success' => 'not ok'
+            'success' => 'not ok',
+            'warning' => 'send request have error'
         )));
 	}
 

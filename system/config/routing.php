@@ -54,8 +54,8 @@ $_['routing']['FaceBookConnect']				= 'facebookcnt/';
 $_['routing']['CompleteRegister']				= 'profile/complete-register/';
 
 // Friend
-$_['routing']['FriendPage']						= 'friend/{user_slug}/';
-$_['routing']['GetFriends']						= 'friend/{user_slug}/get-friend-list/{filter_type}/{filter_value}/';
+$_['routing']['FriendPage']						= 'friend/friend-page/{user_slug}/';
+$_['routing']['GetAllFriends']					= 'friend/get-all/';
 $_['routing']['RequestPage']					= 'friend/request/';
 $_['routing']['MakeFriend']						= 'friend/request/{user_slug}/';
 $_['routing']['ConfirmFriend']					= 'friend/confirm/{user_slug}/';
@@ -71,5 +71,8 @@ $_['routing']['IndustryAutoComplete']			= 'data/industry/{keyword}/';
 $_['routing']['DegreeAutoComplete']				= 'data/degree/{keyword}/';
 $_['routing']['SchoolAutoComplete']				= 'data/school/{keyword}/';
 $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
+
+// Notification
+$_['routing']['NotificationReadAll']			= 'notification/readAll/';
 
 ?>
