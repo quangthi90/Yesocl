@@ -449,6 +449,8 @@ textarea[name="summary"] {
 }
 .profile-user .profile-img img{
 	padding: 1px;
+	width: 150px;
+	height: 150px;
 }
 .profile-user .profile-name {
     display: block;
