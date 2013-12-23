@@ -2,9 +2,9 @@
 <div class="fl profile-column profile-overview">
 	<div class="profile-user">
 		<a href="#" class="profile-img">
-			<img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WMThiet">
+			<img src="{{ user.avatar }}" alt="{{ user.username }}">
 		</a>
-		<a href="#" class="profile-name">WMThiet</a>
+		<a href="#" class="profile-name">{{ user.username }}</a>
 		<span class="profile-metainfo">Developer/NTT Data VN</span>
 	</div>
 	<div class="profile-categories">

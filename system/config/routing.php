@@ -39,7 +39,7 @@ $_['routing']['AjaxLogin']						= 'login/ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 
 // Profile
-$_['routing']['ProfilePage']					= 'profile/page/{user_slug}';
+$_['routing']['ProfilePage']					= 'profile/page/{user_slug}/';
 $_['routing']['ProfileEditInfo']				= 'profile/update-information/';
 $_['routing']['ProfileEditSummary']				= 'profile/update-summary/';
 $_['routing']['ProfileRemoveEducation']			= 'profile/remove-education/{education_id}/';
