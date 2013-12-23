@@ -115,16 +115,19 @@ jQuery(document).ready(function (){
 	});
 	//Login button clicked:
 	$('#login-invoke').click(function(e) {
+		e.preventDefault();
 		$('#login-form-container').stop().slideDown(500, function() {
 			$(this).find('input[name="email"]').focus();
 		});		
 	});	
 	//if close button is clicked
 	$('.y-frm .close').click(function (e) {
+		e.preventDefault();
 		closeLoginForm();
 	});					
 	//if overlay is clicked
-	$('#overlay').click(function () {
+	$('#overlay').click(function (e) {
+		e.preventDefault();
 		closeLoginForm();
 	});	
 });

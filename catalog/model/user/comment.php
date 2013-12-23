@@ -112,7 +112,10 @@ class ModelUserComment extends Model {
 		);
 		$this->model_cache_post->editPost( $data );
 
-		return $comment;
+		return array(
+			'comment' => $comment,
+			'post' => $post
+		);
 	}
 
 	public function editComment( $comment_id, $data = array() ){

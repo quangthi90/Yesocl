@@ -27,6 +27,12 @@ class ControllerPostPost extends Controller {
 
             $oPost = $this->model_user_post->addPost( $aDatas );
 
+            if ( !$oPost ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok: Save Post have error',
+                )));
+            }
+
             $oUser = $oPost->getUser()->formatToCache();
 
             // avatar
@@ -74,6 +80,37 @@ class ControllerPostPost extends Controller {
                 ),
                 'href' => $aHref
             );
+
+            // Add notification
+            $this->load->model('user/notification');
+            
+            if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
+                $this->model_user_notification->addNotification(
+                    $this->request->get['user_slug'],
+                    $this->customer->getUser(),
+                    $this->config->get('common')['action']['post'],
+                    $oPost->getId(),
+                    $oPost->getSlug(),
+                    $sPostType,
+                    $this->config->get('common')['object']['wall']
+                );
+            }
+
+            if ( !empty($this->request->post['tags']) ){
+                $aUserSlugs = $this->request->post['tags'];
+
+                foreach ( $aUserSlugs as $sUserSlug ) {
+                    $this->model_user_notification->addNotification(
+                        $sUserSlug,
+                        $this->customer->getUser(),
+                        $this->config->get('common')['action']['tag'],
+                        $oPost->getId(),
+                        $oPost->getSlug(),
+                        $sPostType,
+                        $this->config->get('common')['object']['post']
+                    );
+                }
+            }
 
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'ok',
@@ -201,11 +238,15 @@ class ControllerPostPost extends Controller {
     public function validate(){
         if ( empty( $this->request->post['content']) ) {
             $this->error['warning'] = $this->language->get( 'error_content' );
+        
         }elseif ( !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
             $this->load->model('tool/image');
             if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
                 $this->error['warning'] = $this->language->get( 'error_thumb');
             }
+        
+        }elseif ( empty($this->request->get['user_slug']) ){
+            $this->error['warning'] = 'user slug is empty';
         }
 
         if ( $this->error ) {
@@ -248,12 +289,42 @@ class ControllerPostPost extends Controller {
                 break;
             
             default:
+                $oPost = null;
                 break;
         }
-        
+
+        if ( $oPost ){
+            if ( $oPost->getUser()->getId() != $this->customer->getId() ){
+                $this->load->model('user/notification');
+                
+                if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+                    $this->model_user_notification->addNotification(
+                        $oPost->getUser()->getSlug(),
+                        $this->customer->getUser(),
+                        $this->config->get('common')['action']['like'],
+                        $oPost->getId(),
+                        $oPost->getSlug(),
+                        $aDatas['post_type'],
+                        $this->config->get('common')['object']['post']
+                    );
+                }else{
+                    $this->model_user_notification->deleteNotification(
+                        $oPost->getUser()->getId(),
+                        $this->customer->getId(),
+                        $oPost->getId(),
+                        $this->config->get('common')['action']['like']
+                    );
+                }
+            }
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok',
+                'like_count' => count($oPost->getLikerIds())
+            )));
+        }
+
         return $this->response->setOutput(json_encode(array(
-            'success' => 'ok',
-            'like_count' => count($oPost->getLikerIds())
+            'success' => 'not ok'
         )));
     }
 

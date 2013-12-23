@@ -208,21 +208,15 @@ class ModelUserPost extends Model {
 	}
 
 	public function getPostBySlug( $post_slug ){
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
 			'posts.slug' => $post_slug
 		));
 
-		if ( !$user ){
+		if ( !$posts ){
 			return null;
 		}
 
-		$post = $user->getPostBySlug( $post_slug );
-
-		if ( !$post ){
-			return null;
-		}
-
-		return $post;
+		return $posts->getPostBySlug( $post_slug );
 	}
 }
 ?>

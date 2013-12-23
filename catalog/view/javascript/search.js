@@ -143,7 +143,8 @@
 		    remote: {
 		    	url: that.friendUrl + '%QUERY/',
 		    	cache: true,
-		    	beforeSend: function(xhr, setting) {
+		    	timeout: 500,
+		    	beforeSend: function(xhr, setting) {		    		
 		    		var spinner = $('<i class="icon-spinner icon-spin load-friend"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
 		    	},
@@ -153,7 +154,7 @@
 		        }
 		    },
 		    limit: 5,
-		    limitLength: 2,	    
+		    limitLength: 2,
 		    valueKey: 'username',
 		    template: function(data){
 		    	var regex = new RegExp( '(' + that.$autoCtrl.val() + ')', 'gi' );
@@ -174,6 +175,7 @@
 		    remote: {
 		    	url: that.postUrl + '%QUERY/',
 		    	cache: true,
+		    	timeout: 500,
 		    	beforeSend: function(xhr, setting) {
 		    		var spinner = $('<i class="icon-spinner icon-spin load-post"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
@@ -201,9 +203,11 @@
 		    header: '<h3 class="category-name">Post</h3>'
 		  }
 	  	]).on('typeahead:opened', function(){
-	  		that.resizePanel();	  		
+	  		that.resizePanel();	
 	  	}).on('typeahead:closed', function(){
 	  		that.resizePanel();
+	  		$('span.twitter-typeahead').find('i.load-friend').remove();
+	  		$('span.twitter-typeahead').find('i.load-post').remove();
 	  	}).on('typeahead:selected', function(){
 	  		that.closeSearchPanel();
 	  	});

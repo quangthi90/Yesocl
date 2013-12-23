@@ -421,7 +421,7 @@ a.btn-link-circle:hover i {
   top: 0px; 
   left: -370px;   
   bottom: 0px;
-  z-index: 9999;
+  z-index: 99;
   color: #fff;
   text-align: center;     
   padding-bottom: 20px;
@@ -652,6 +652,19 @@ a.btn-notification:hover .notification-item-name > i {
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
+.notification-content-list .notification-content-item:hover {
+  background-color: #F0F0F0;
+}
+.notification-content-list .notification-content-item.read{
+  opacity: 0.8;
+}
+.notification-content-list .notification-content-item.read:hover {
+  opacity: 1;
+}
+.notification-content-list .notification-content-item.unread{
+  border-left: 2px solid #009B77;
+  background-color: #F5F5F5;
+}
 .notification-content-list .notification-content-item:last-child {
   border-bottom: none;
 }
@@ -674,8 +687,12 @@ a.btn-notification:hover .notification-item-name > i {
   padding-right: 15px;
 }
 .notification-content-item .notification-content-item-detail  .notification-text {
-  line-height: 18px;
+  line-height: 15px;
   margin-bottom: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  max-height: 31px;
 }
 .notification-content-item .notification-content-item-detail  .notification-text a {
   font-weight: bold;
@@ -719,6 +736,57 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .notification-item .mCSB_container {
   margin-right: 20px;
+}
+.notification-page {
+}
+.notification-page .ntf-container {
+  padding: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  background-color: #fff;
+  height: 100%;
+}
+.notification-page .ntf-list {
+  -webkit-column-width: 450px;    
+  -moz-column-width: 450px;
+  column-width: 450px;
+  -moz-column-gap: 30px;    
+  -webkit-column-gap: 30px;
+  column-gap: 30px;
+  height: 100%;
+}
+.ntf-list > li {
+  margin: 3px 10px 3px 10px;
+}
+.ntf-list .ntf-date {
+  font-weight: bold;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #009B77;
+}
+.ntf-list .ntf-item {
+  padding: 5px 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px dotted #f0f0f0;
+}
+.ntf-list .ntf-item > i {
+  font-size: 16px;
+  margin-right: 5px;
+}
+.ntf-list .ntf-item:hover i {
+  color: #009B77;
+}
+.ntf-item .ntf-content {
+  
+}
+.ntf-item .ntf-content a {
+
+}
+.ntf-item .ntf-time {
+  font-size: 10px;
+  margin-left: 10px;
+  color: #363636;
 }
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
@@ -896,14 +964,17 @@ a.btn-notification:hover .notification-item-name > i {
 
 /* -------------------------------------------- START POST ------------------------------------ */
 .post {
-    width: auto;
-    height: auto;    
-    padding: 0px;
-    background: #fff;
-    position: relative;
+  width: auto;
+  height: auto;    
+  padding: 0px;
+  background: #fff;
+  position: relative;
 }
 .post-selecting {
   border-top: 2px solid #009B77;
+}
+.post.deleting {
+  background: #FAF0F0;
 }
 .post .yes-dropdown {
   top: 4px;
@@ -1187,11 +1258,9 @@ a.btn-notification:hover .notification-item-name > i {
   border:1px solid #ddd; 
   background-color: #fff;
 }
-.post_new  .txt_editor {
-  overflow: hidden;
+.post_new  .txt_editor {  
 }
 .txt_editor .post_input {
-  width: 98%;
   min-height: 50px;
   margin: 0px;
   border:none;
@@ -2261,12 +2330,12 @@ ul.user_actions li:hover i{
 }
 
 .search-category {
-    min-width: 300px;
-    height: 100%;
-    margin-right: 20px;
-    padding: 0px 15px 15px 15px;
-    background-color: #fff;
-    position: relative;
+  min-width: 300px;
+  height: 100%;
+  margin-right: 20px;
+  padding: 0px 15px 15px 15px;
+  background-color: #fff;
+  position: relative;
 }
 .search-container-3 .search-category {
   width: 28%;
@@ -2520,3 +2589,129 @@ ul.user_actions li:hover i{
   font-size: 11px;
 }
 /* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */
+
+/*CUSTOM LIB's CSS*/
+.comment-form .mentions-autocomplete-list {
+  bottom: 100%;
+}
+a.wall-link {
+  font-weight: bold;
+  color: #666;
+  font-size: 13px;
+  display: inline-block;
+}
+a.wall-link:hover {
+  color: #009B77;
+}
+.note-editor .btn-toolbar button {
+  padding: 3px 13px;
+  outline: none;
+}
+.note-editor .btn-toolbar button > i {
+  font-size: 13px;
+}
+.note-editor .note-popover .popover{
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.note-editor .note-tag-dialog .modal-body {
+  min-height: 180px;
+  overflow-y: inherit;
+}
+.note-editor .note-tag-dialog .tag-data {
+  width: 525px;
+}
+.note-editor .note-tag-dialog .typeahead{
+  width: 528px;
+}
+.note-editor .note-tag-dialog .typeahead li {
+  display: block;
+}
+.note-tag-dialog .dropdown-menu > .active > a,
+.note-tag-dialog .dropdown-menu > .active > a:hover,
+.note-tag-dialog .dropdown-menu > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #009B77;
+  background-image: -moz-linear-gradient(top, #009B77, #009B77);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009B77), to(#009B77));
+  background-image: -webkit-linear-gradient(top, #009B77, #009B77);
+  background-image: -o-linear-gradient(top, #009B77, #009B77);
+  background-image: linear-gradient(to bottom, #009B77, #009B77);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#009B77', endColorstr='#009B77', GradientType=0);
+}
+.note-tag-dialog .typeahead li > a {
+  overflow: hidden;
+}
+.note-tag-dialog .typeahead li > a > img {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 5px;
+}
+.note-tag-dialog .typeahead li > a > span.user-name {
+}
+.note-tag-dialog .tag-container {
+  margin: 15px 0px;  
+  padding: 10px;
+  border: 1px solid #f0f0f0;
+  overflow: hidden;
+}
+.note-tag-dialog .tag-container.no-tag-item {
+  border: none;
+}
+.note-tag-dialog .tag-container .tagItem {
+  background-color: #f0f0f0;  
+  padding: 3px 5px;
+  margin: 3px;
+  display: block;
+  float: left;
+}
+.note-tag-dialog .tag-container .tagItem i {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #ddd;
+}
+.note-tag-dialog .tag-container .tagItem:hover i {
+  color: #0e0e0e;
+}
+.note-tag-dialog .tag-container a.wall-link {
+  display: none;
+}
+.tag-wrapper .tagItem {
+  background-color: transparent;
+}
+.tag-wrapper .tagItem .tag-name{
+  display: none;
+}
+.tag-wrapper .tagItem i {
+  display: none;
+}
+.note-editor .tag-wrapper {  
+}
+.note-editor .tag-wrapper .tagItem{  
+  padding: 2px;
+  margin-right: 3px;
+  background-color: #f0f0f0;  
+}
+.note-editor .tag-wrapper .tagItem .tag-name {
+  display: inline-block;
+}
+.note-editor .tag-wrapper .tagItem .wall-link {
+  display: none;
+}
+.note-editor .tag-wrapper .tagItem i {
+  color: #ddd;
+  margin-left: 5px;
+  font-size: 11px;
+  display: inline-block;
+}
+.note-editor .tag-wrapper .tagItem:hover i {
+  color: #0E0E0E;
+  visibility: visible;
+}
+
+/*END CUSTOM LIB's CSS*/
