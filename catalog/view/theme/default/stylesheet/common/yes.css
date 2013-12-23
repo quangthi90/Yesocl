@@ -652,6 +652,9 @@ a.btn-notification:hover .notification-item-name > i {
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
+.notification-content-list .notification-content-item:hover {
+  background-color: #F0F0F0;
+}
 .notification-content-list .notification-content-item.read{
   opacity: 0.8;
 }

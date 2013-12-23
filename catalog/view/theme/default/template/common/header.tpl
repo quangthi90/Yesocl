@@ -82,10 +82,11 @@
             <ul>
               {% for notification in notifications %}
                 {% set user = users[notification['actor_id']] %}
-              <li class="notification-content-item{% if notification.read == false %} unread{% else %} read{% endif %}">
-                <a href="{{ path('PostPage', {post_slug: notification.slug, post_type: notification.type}) }}">
+              <li class="notification-content-item{% if notification.read == false %} unread{% else %} read{% endif %}" data-link="{{ path('PostPage', {post_slug: notification.slug, post_type: notification.type}) }}">
                   <div class="notification-content-item-img">
-                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
+                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                      <img src="{{ user.avatar }}" alt="{{ user.username }}" />
+                    </a>                    
                   </div>
                   <div class="notification-content-item-detail">
                     <div class="notification-text">
@@ -96,7 +97,6 @@
                       {{ notification.created|date(format_date) }}
                     </div>
                   </div>
-                </a>
               </li>
               {% endfor %}
             </ul>

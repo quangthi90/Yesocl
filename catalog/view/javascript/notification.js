@@ -28,6 +28,15 @@
 				}
 			});
 		});
+		var notificationLink = that.notificationItem.find('.notification-content-item[data-link]');
+		if(notificationLink.length > 0){
+			notificationLink.each(function(){
+				$(this).on('click', function(){
+					that.notInclude.trigger('click');
+					location.href= $(this).attr('data-link');
+				});
+			});
+		}
 		that.notInclude.on('click', function(){ 
 			that.allNotificationList.slideUp(10);
 			that.notificationItem.removeClass('active');
