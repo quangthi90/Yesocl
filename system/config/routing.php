@@ -39,7 +39,7 @@ $_['routing']['AjaxLogin']						= 'login/ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 
 // Profile
-$_['routing']['ProfilePage']					= 'profile/';
+$_['routing']['ProfilePage']					= 'profile/page/{user_slug}';
 $_['routing']['ProfileEditInfo']				= 'profile/update-information/';
 $_['routing']['ProfileEditSummary']				= 'profile/update-summary/';
 $_['routing']['ProfileRemoveEducation']			= 'profile/remove-education/{education_id}/';
@@ -54,7 +54,7 @@ $_['routing']['FaceBookConnect']				= 'facebookcnt/';
 $_['routing']['CompleteRegister']				= 'profile/complete-register/';
 
 // Friend
-$_['routing']['FriendPage']						= 'friend/friend-page/{user_slug}/';
+$_['routing']['FriendPage']						= 'friend/page/{user_slug}/';
 $_['routing']['GetAllFriends']					= 'friend/get-all/';
 $_['routing']['RequestPage']					= 'friend/request/';
 $_['routing']['MakeFriend']						= 'friend/request/{user_slug}/';
