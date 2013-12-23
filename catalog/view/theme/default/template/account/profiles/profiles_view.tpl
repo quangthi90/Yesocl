@@ -14,7 +14,7 @@
 
 {% block body %}
 <div id="y-content" class="no-scroll">
-	<div id="y-main-content" class="profile-view-page" style="width:5000px;">
+	<div id="y-main-content" class="profile-view-page" style="width:2900px;">
 		{{ block('profiles_tabs_profile_overview') }}
 		{{ block('profiles_tabs_information_view') }}
 		{{ block('profiles_tabs_background_view') }}

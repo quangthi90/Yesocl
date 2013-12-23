@@ -10,31 +10,31 @@
 	<div class="profile-categories">
 		<ul>
 			<li class="profile-category-li">
-				<a class="btn btn-yes profile-category-item" href="#">
+				<a class="btn btn-yes profile-category-item" href="#profile-column-information">
 					<i class="icon-check"></i>
 					<span>Personal Information</span>
 				</a>
 			</li>
 			<li class="profile-category-li">
-				<a class="btn btn-yes profile-category-item" href="#">
+				<a class="btn btn-yes profile-category-item" href="#profile-column-summary">
 					<i class="icon-check"></i>
 					<span>Summary</span>
 				</a>
 			</li>
 			<li class="profile-category-li">
-				<a class="btn btn-yes profile-category-item" href="#">
+				<a class="btn btn-yes profile-category-item" href="#profile-column-education">
 					<i class="icon-check"></i>
 					<span>Education Background</span>
 				</a>
 			</li>
 			<li class="profile-category-li">
-				<a class="btn btn-yes profile-category-item" href="#">
+				<a class="btn btn-yes profile-category-item" href="#profile-column-experience">
 					<i class="icon-check"></i>
 					<span>Work Experience</span>
 				</a>
 			</li>
 			<li class="profile-category-li">
-				<a class="btn btn-yes profile-category-item" href="#">
+				<a class="btn btn-yes profile-category-item" href="#profile-column-skill">
 					<i class="icon-check"></i>
 					<span>Skill Sets</span>
 				</a>

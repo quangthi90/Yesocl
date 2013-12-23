@@ -336,141 +336,10 @@ textarea[name="summary"] {
 }
 .profiles-tabs .mCSB_container {
 	margin-right: 20px;
-#y-content {
-	overflow: auto;
-}
-#y-content .profile-view-page {	
-}
-.profile-column {
-    height: 100%;
-    min-width: 500px;
-    max-width: 700px;
-    margin-right: 30px;
-    overflow: hidden;
-}
-.profile-column .profile-column-title {
-    color: #009B77;
-    cursor: pointer;
-}
-.profile-column .profile-column-title > i {
-    font-size: 21px;	
-}
-.profile-column .profile-column-wrapper {
-    background-color: #fff;
-    padding: 15px 5px 15px 15px;
-}
-.profile-column-wrapper .profile-column-content {
-    height: 100%;
-    width: 100%;
-}
-.profile-column-content .row-fluid {
-    margin-bottom: 1px;	
-}
-.profile-column-content .row-fluid .profile-label {
-    background-color: #f0f0f0;
-    padding: 5px;
-    font-weight: bold;
-}
-.profile-column-content .row-fluid .profile-value {
-    font-size: 13px;
-    border-top: 1px dotted #f0f0f0;
-    padding: 3px 0px;
-}
-.profile-column-content .row-fluid:first-child .profile-value {
-	border-top:none;
-}
-.profile-column-content .profile-info-item {
-    border-bottom: 1px solid #f0f0f0;
-	
-    padding-bottom: 5px;
-    overflow: hidden;
-}
-.profile-info-item .profile-info-basic {
-    overflow: hidden;
-    margin-bottom: 5px;
-}
-.profile-info-item .profile-info-basic .profile-info-title {
-    float: left;
-}
-.profile-info-item .profile-info-basic .profile-info-title > h4 {
-    margin-bottom: 0px;
-	
-}
-.profile-info-item .profile-info-basic .profile-info-time {
-    float: right;
-}
-.profile-info-time .time-from {
-	padding: 5px 5px;
-	background-color: #f0f0f0;
-	font-size: 12px;
- }
-.profile-info-time .time-to {
-	padding: 5px 5px;
-	background-color: #f0f0f0;
-	font-weight: bold;
-	font-size: 12px;
-	border-left: 1px solid #009B77;
- }
-.profile-info-item .profile-info-decription {
-    color: #818181;
 }
 
-.profile-overview {
-    min-width: 200px;	
-    background-color: #FFF;
-}
-.profile-user {
-    text-align: center;
-    margin-bottom: 15px;
-    padding: 15px 0px;
-    border-bottom: 1px solid #ddd;
-}
-.profile-user .profile-img {
-    display: block;
-}
-.profile-user .profile-img img{
-	padding: 1px;
-}
-.profile-user .profile-name {
-    display: block;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 10px 0px 2px 0px;
-    font-size: 16px;
-}
-.profile-user .profile-metainfo {
-    display: block;
-    font-size: 12px;
-}
-.profile-categories {
-    padding: 5px 15px;
-}
-.profile-categories ul{
-
-}
-.profile-categories ul .profile-category-li {
-    margin-bottom: 5px;
-}
-.profile-category-li .profile-category-item {
-    display: block;
-    text-align: left;
-    font-size: 12px;
-}
-.profile-category-item > i {
-    margin-right: 5px;
-    font-size: 15px;
-}
-.profile-category-item > span {
-	
-}
-.profile-category-li .profile-category-item:hover > i {
-	color: #FFF;
-}
-
-
-/*============================== END VIEW PROFILE ===============================================*/
-}
 /*============================== END EDIT PROFILE ===============================================*/
+/*============================== START VIEW PROFILE =============================================*/
 #y-content {
 	overflow: auto;
 }
@@ -482,6 +351,11 @@ textarea[name="summary"] {
     max-width: 700px;
     margin-right: 30px;
     overflow: hidden;
+    -webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	opacity: 0;
 }
 .profile-column .profile-column-title {
     color: #009B77;
@@ -557,6 +431,13 @@ textarea[name="summary"] {
     min-width: 200px;	
     background-color: #FFF;
 }
+.profile-overview.scrolling {
+	position: fixed;
+	left: 15px;
+	z-index : 10;
+	border-top : 1px solid #ddd;
+	border-right : 1px solid #ddd;
+}
 .profile-user {
     text-align: center;
     margin-bottom: 15px;
@@ -617,4 +498,28 @@ textarea[name="summary"] {
 	
 }
 
-/*============================== START VIEW PROFILE ===============================================*/
+/* Custom Scrollbar */
+.profile-column .mCSB_scrollTools .mCSB_draggerRail {
+	width: 6px;
+	background: #f0f0f0;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+.profile-column .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	width: 6px;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
+.profile-column .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+	background: #b4b4b4;
+}
+.profile-column .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+	background: #009B77;
+}
+.profile-column .mCSB_container {
+	margin-right: 20px;
+}
+
+/*============================== END VIEW PROFILE ===============================================*/

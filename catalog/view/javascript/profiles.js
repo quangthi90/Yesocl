@@ -74,6 +74,52 @@
 
 	function ProfileViewLayout($el){
 		this.$el = $el;
+		this.$rootContent = $el.parent('#y-content');
+		this.$heightContent = $el.height();
+		this.$profileColumn = $el.find('.profile-column');
+		this.$overviewColumn = $el.find('.profile-overview');
+		this.$navigationItem = $el.find('.profile-category-item');
+		this.makeLayoutScroll();
+		this.attachEvents();
+	}
+	ProfileViewLayout.prototype.attachEvents = function(){
+		var that = this;
+		var widthContent = that.$el.width();
+		that.$rootContent.scroll(function(e){
+			var x = $(this).scrollLeft();
+			if(x > 10) {
+				that.$overviewColumn.addClass('scrolling');
+				that.$el.width(widthContent - that.$overviewColumn.width());
+			}else {
+				that.$overviewColumn.removeClass('scrolling');
+				that.$el.width(widthContent);
+			}
+		});
+		that.$navigationItem.on('click', function(e){
+			e.preventDefault();
+			var href = $(this).attr('href');
+			if($(href).length == 0) return;
+			var leftPosition = $(href).position().left;
+			that.$rootContent.animate({scrollLeft: leftPosition + 'px'}, 1000);
+		});
+	}
+	ProfileViewLayout.prototype.makeLayoutScroll = function(){
+		var that = this;
+		var totalOfWidth = 0;
+
+		that.$overviewColumn.height(that.$heightContent);
+		that.$profileColumn.each(function(){
+			var title = $(this).find('.profile-column-title');
+			var wrapper = $(this).find('.profile-column-wrapper');
+			var content = $(this).find('.profile-column-content');
+
+			wrapper.height(that.$heightContent - title.outerHeight() - 20 - 30);
+			content.makeCustomScroll();
+			totalOfWidth += $(this).outerWidth() + 35;
+			$(this).css('opacity','1');
+		});
+		that.$el.width(totalOfWidth);
+		that.$rootContent.makeScrollWithoutCalResize();
 	}
 
 	$(function(){

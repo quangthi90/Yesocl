@@ -1,5 +1,5 @@
 {% block profiles_tabs_education_view %}
-<div class="fl profile-column profile-column-education">
+<div class="fl profile-column profile-column-education" id="profile-column-education">
 	<h3 class="profile-column-title"><i class="icon-list"></i> Education Background</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">

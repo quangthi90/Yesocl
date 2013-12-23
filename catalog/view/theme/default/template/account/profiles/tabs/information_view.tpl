@@ -1,5 +1,5 @@
 {% block profiles_tabs_information_view %}
-<div class="fl profile-column profile-column-information">
+<div class="fl profile-column profile-column-information" id="profile-column-information">
 	<h3 class="profile-column-title"><i class="icon-list"></i> Personal Information</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
