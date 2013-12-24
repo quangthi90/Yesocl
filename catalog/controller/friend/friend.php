@@ -40,17 +40,16 @@ class ControllerFriendFriend extends Controller {
 		foreach ( $friends as $friend ) {
 			$ob_user = $friend->getUser();
 
-			if ( $ob_user->getId() == $curr_user->getId() ){
+			if ( $ob_user->getId() == $this->customer->getId() ){
 				continue;
 			}
 
 			$user = $ob_user->formatToCache();
 
 			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $ob_user, $curr_user );
+			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer->getUser(), $ob_user );
 			$user['gender'] = $ob_user->getMeta()->getSex();
 			$user['added'] = $friend->getCreated();
-
 
 			$this->data['users'][$user['id']] = $user;
 			$this->data['friend_ids'][$ob_user->getId()] = $ob_user->getId();
