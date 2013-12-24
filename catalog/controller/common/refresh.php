@@ -25,18 +25,35 @@ class ControllerCommonRefresh extends Controller {
 		$this->data['all_posts'] = array();
 
 		$aBranchIds = array_keys($aBranchs);
-		$aUserIds = $this->model_friend_friend->getListFriendIds();
-		$aUserIds[] = $this->customer->getId();
 
+		$aUserIds = array();
+
+		$this->data['users'] = array();
+
+		// Add current user
+		$oCurrUser = $this->customer->getUser();
+		$aUser = $oCurrUser->formatToCache();
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$this->data['users'][$aUser['id']] = $aUser;
+
+		// Get list friends
+		$lFriends = $oCurrUser->getFriends();
+		foreach ( $lFriends as $oFriend ) {
+			$oUser = $oFriend->getUser();
+			$aUserIds[] = $oUser->getId();
+
+			$aUser = $oUser->formatToCache();
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$this->data['users'][$aUser['id']] = $aUser;
+		}
 
 		$aPosts = $this->model_cache_post->getPosts(array(
 			'sort' => 'created',
 			'type_ids' => array_merge($aBranchIds, $aUserIds),
 		));
 		
-		$list_posts = array();
-		$aUserIds = array();
-
+		// Get list Posts
+		$aUserPostIds = array();
 		foreach ($aPosts as $i => $aPost) {
 			// thumb
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
@@ -53,11 +70,16 @@ class ControllerCommonRefresh extends Controller {
 
 			$this->data['posts'][] = $aPost;
 
-			$aUserIds[$aPost['user_id']] = $aPost['user_id'];
+			if ( !in_array($aPost['user_id'], $aUserIds) ){
+				$aUserPostIds[$aPost['user_id']] = $aPost['user_id'];
+			}
 		}
 
-		$this->data['users'] = array();
-		$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
+		// Get list post users
+		$lUsers = null;
+		if ( count($aUserPostIds) > 0 ){
+			$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
+		}
 
 		if ( $lUsers ){
 			foreach ( $lUsers as $oUser ) {
@@ -70,7 +92,6 @@ class ControllerCommonRefresh extends Controller {
 		}
 		
 		$this->data['date_format'] = $this->language->get('date_format_full');
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'refresh' );
