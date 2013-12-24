@@ -141,19 +141,25 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Gender</div>
+						<div class="span2 offset1">Address</div>
 						<div class="span9 control-group">
-							<select class="span5" name="gender">
-								{% if user.sex == 1 %}
-								<option value="1" selected="selected">Male</option>
-								<option value="0">Female</option>
-								{% else %}
-								<option value="1">Male</option>
-								<option value="0" selected="selected">Female</option>
-								{% endif %}
-							</select>
+							<input class="span5" type="text" placeholder="Address" name="address" value="{{ user.address }}" required="required" />
 						</div>
 					</div>
+					<div class="row-fluid">
+						<div class="span2 offset1">Living</div>
+						<div class="span9 control-group" data-autocomplete="{{ path('LocationAutoComplete') }}">
+							<input class="span5" type="text" placeholder="Living" name="location" value="{{ user.location }}" />
+							<input type="hidden" name="cityid" value="{{ user.cityid }}" />
+						</div>
+					</div>
+					<div class="row-fluid">
+						<div class="span2 offset1">Industry</div>
+						<div class="span9 control-group" data-autocomplete="{{ path('IndustryAutoComplete') }}">
+							<input class="span5" type="text" placeholder="Industry" name="industry" value="{{ user.industry }}" />
+							<input type="hidden" name="industryid" value="{{ user.industryid }}" />
+						</div>
+					</div>					
 					<div class="row-fluid inputBirthday">
 						<div class="span2 offset1">Birthday</div>
 						<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="{{ user.birthday|date('d/m/Y') }}">
@@ -186,23 +192,17 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Address</div>
+						<div class="span2 offset1">Gender</div>
 						<div class="span9 control-group">
-							<input class="span5" type="text" placeholder="Address" name="address" value="{{ user.address }}" required="required" />
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span2 offset1">Living</div>
-						<div class="span9 control-group" data-autocomplete="{{ path('LocationAutoComplete') }}">
-							<input class="span5" type="text" placeholder="Living" name="location" value="{{ user.location }}" />
-							<input type="hidden" name="cityid" value="{{ user.cityid }}" />
-						</div>
-					</div>
-					<div class="row-fluid">
-						<div class="span2 offset1">Industry</div>
-						<div class="span9 control-group" data-autocomplete="{{ path('IndustryAutoComplete') }}">
-							<input class="span5" type="text" placeholder="Industry" name="industry" value="{{ user.industry }}" />
-							<input type="hidden" name="industryid" value="{{ user.industryid }}" />
+							<select class="span5" name="gender">
+								{% if user.sex == 1 %}
+								<option value="1" selected="selected">Male</option>
+								<option value="0">Female</option>
+								{% else %}
+								<option value="1">Male</option>
+								<option value="0" selected="selected">Female</option>
+								{% endif %}
+							</select>
 						</div>
 					</div>
 				</div>

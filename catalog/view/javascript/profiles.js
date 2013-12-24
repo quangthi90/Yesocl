@@ -7,9 +7,9 @@
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
 		this.$experience = $el.find('#profiles-tabs-background-experience');
-		this.$skill = $el.find('#profiles-tabs-background-skill');		
-		this.$header = this.$background.find('.profiles-tabs-header');
-		this.$main_profile = $el.find('.profiles-tabs-main');
+		this.$skill = $el.find('#profiles-tabs-background-skill');
+		this.$header = this.$background.find('.profiles-tabs-header');		
+		this.$main_profile = $el.find('.profiles-tabs-main');		
 		this.$contentHeight = this.$el.height();
 		this.$gapHeight = 35 + 50 + 2*(20 + 1);
 
@@ -53,7 +53,7 @@
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
 		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
-
+		
 		//Handle profile changed:
 		var that = this;
 		$(document).on('PROFILE_CHANGED', function(e, data) {
