@@ -87,7 +87,7 @@
 		var widthContent = that.$el.width();
 		that.$rootContent.scroll(function(e){
 			var x = $(this).scrollLeft();
-			if(x > 10) {
+			if(x > 700) {
 				that.$overviewColumn.addClass('scrolling');
 				that.$el.width(widthContent - that.$overviewColumn.width());
 			}else {
