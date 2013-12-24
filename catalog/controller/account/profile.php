@@ -217,6 +217,37 @@ class ControllerAccountProfile extends Controller {
 			$aUser['phones'][] = $oPhone->getPhone();
 		}
 
+		// Check background null
+		if ( !$oBackground = $oUser->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->setEducations( array() );
+			$oBackground->setExperiences( array() );
+			$oBackground->setSkills( array() );
+		}
+
+		// Summary
+		$aUser['summary'] = $oBackground->getSummary();
+
+		// Educations
+		$educations = $oBackground->getEducations();
+		foreach ( $educations as $education ) {
+			$aUser['educations'][] = array(
+				'school' 	=> $education->getSchool(),
+				'degree'	=> $education->getDegree(),
+				'field'		=> $education->getFieldOfStudy(),
+				'started'	=> $education->getStarted(),
+				'ended'		=> $education->getEnded()
+			);
+		}
+
+		// Experiences
+		$experiences = $oBackground->getExperiences();
+		foreach ( $experiences as $experience ) {
+			$aUser['experiences'][] = array(
+				
+			);
+		}
+
 		$this->data['user'] = $aUser;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/profiles/profiles_view.tpl')) {
