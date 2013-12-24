@@ -244,7 +244,11 @@ class ControllerAccountProfile extends Controller {
 		$experiences = $oBackground->getExperiences();
 		foreach ( $experiences as $experience ) {
 			$aUser['experiences'][] = array(
-				
+				'company'	=> $experience->getCompany(),
+				'location'	=> $experience->getLocation()->getLocation(),
+				'title'		=> $experience->getTitle(),
+				'start'		=> $experience->getStarted(),
+				'ended'		=> $experience->getEnded()
 			);
 		}
 
