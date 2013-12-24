@@ -35,6 +35,7 @@ class ControllerCommonRefresh extends Controller {
 		$aUser = $oCurrUser->formatToCache();
 		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 		$this->data['users'][$aUser['id']] = $aUser;
+		$aUserIds[] = $oCurrUser->getId();
 
 		// Get list friends
 		$lFriends = $oCurrUser->getFriends();
