@@ -4,17 +4,13 @@
   <div class="routing" data-page="{{ key }}" data-link="{{ link }}" ></div>
 {% endfor %}
 </div>
-
-{% for i in 10 %}
-  <div class="aaa">{{i}}</div>
-{% endfor %}
 {# end list routing #}
 
 {% if is_logged() %}
-  {% set user_slug = get_current_user().slug %}
+  {% set currUser = get_current_user() %}
 {# current user info -- deleted after read #}
 <div id="current-user-info" class="hidden">
-  <input type="hidden" id="current-user-slug" value="{{ user_slug }}" />
+  <input type="hidden" id="current-user-slug" value="{{ currUser.slug }}" />
 </div>
 {# end user #}
 <div id="y-header">
@@ -27,15 +23,15 @@
 		<div id="header-user">
 			<div id="user-info-wrapper" class="fr">	
 				<div class="fr user-avatar">
-					<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-						<img src="{{ user_info.avatar }}" />
+					<a href="{{ path('WallPage', {user_slug: currUser.slug}) }}">
+						<img src="{{ currUser.avatar }}" />
 					</a>
 				</div>
 				<div class="fr user-info">
-					<a class="user-name" href="{{ path('WallPage', {user_slug: user_slug}) }}">
-				      	{{ user_info.username }}
-				    </a>
-				    <span class="user-more-info">Developer</span>
+					<a class="user-name" href="{{ path('WallPage', {user_slug: currUser.slug}) }}">{{ currUser.username }}</a>
+			    <span class="user-more-info">
+            {{ currUser.current }}
+          </span>
 				</div>
 			</div>
 			<div id="user-quick-menu" class="fr dropdown user-menu">

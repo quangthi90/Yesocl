@@ -5,7 +5,7 @@
 			<img src="{{ user.avatar }}" alt="{{ user.username }}">
 		</a>
 		<a href="#" class="profile-name">{{ user.username }}</a>
-		<span class="profile-metainfo">Developer/NTT Data VN</span>
+		<span class="profile-metainfo">{{ user.current }}</span>
 	</div>
 	<div class="profile-categories">
 		<ul>

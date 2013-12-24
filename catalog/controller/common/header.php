@@ -10,11 +10,6 @@ class ControllerCommonHeader extends Controller {
 		}else{
 			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
 		}
-		
-		$this->data['user_info'] = array(
-			'avatar' => $avatar,
-			'username' => $this->customer->getUsername()
-		);
 
 		if ( !$this->customer->isLogged() ){
 			$this->data['action'] = array(
