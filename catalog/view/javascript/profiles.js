@@ -87,10 +87,10 @@
 		var widthContent = that.$el.width();
 		that.$rootContent.scroll(function(e){
 			var x = $(this).scrollLeft();
-			if(x > 200) {
+			if(x > 100) {
 				that.$overviewColumn.addClass('scrolling');
 				that.$el.width(widthContent - that.$overviewColumn.width());
-			}else if(x === 0) {
+			}else if(x < 30) {
 				that.$overviewColumn.removeClass('scrolling');
 				that.$el.width(widthContent);
 			}
@@ -101,7 +101,7 @@
 			if($(href).length == 0) return;
 			var leftPosition = 0;
 			if(href === '#profile-column-information'){
-				leftPosition = 200;
+				leftPosition = 0;
 			}else if(href === '#profile-column-summary') {
 				leftPosition = $('#profile-column-information').width() + 30 ;
 			}else if(href === '#profile-column-education') {
@@ -111,7 +111,7 @@
 			}else if(href === '#profile-column-skill') {
 				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30 + $('#profile-column-education').width() + 30 + $('#profile-column-experience').width() + 30;
 			}
-			that.$rootContent.animate({scrollLeft: (leftPosition - 200) + 'px'}, 1000);
+			that.$rootContent.animate({scrollLeft: (leftPosition) + 'px'}, 1000);
 			that.$profileColumn.removeClass('active');
 			that.$navigationItem.removeClass('active');
 			$(this).addClass('active');

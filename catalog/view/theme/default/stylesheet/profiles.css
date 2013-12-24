@@ -343,7 +343,8 @@ textarea[name="summary"] {
 #y-content {
 	overflow: auto;
 }
-#y-content .profile-view-page {	
+#y-content .profile-view-page {
+	margin-left: 240px;
 }
 .profile-column {
     height: 100%;
@@ -433,13 +434,18 @@ textarea[name="summary"] {
 .profile-overview {
     min-width: 200px;	
     background-color: #FFF;
+    position: fixed;
+	left: 35px;
+	z-index : 10;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 .profile-overview.scrolling {
-	position: fixed;
 	left: 15px;
-	z-index : 10;
-	border-top : 1px solid #ddd;
 	border-right : 1px solid #ddd;
+	background-color: #FAFAFA;
 }
 .profile-user {
     text-align: center;
