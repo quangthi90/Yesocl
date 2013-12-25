@@ -1,10 +1,10 @@
 {% block profiles_tabs_profile_overview %}
 <div class="fl profile-column profile-overview">
 	<div class="profile-user">
-		<a href="#" class="profile-img">
+		<a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="profile-img">
 			<img src="{{ user.avatar }}" alt="{{ user.username }}">
 		</a>
-		<a href="#" class="profile-name">{{ user.username }}</a>
+		<a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="profile-name">{{ user.username }}</a>
 		<span class="profile-metainfo">{{ user.current }}</span>
 	</div>
 	<div class="profile-categories">

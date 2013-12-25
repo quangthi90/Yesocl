@@ -194,12 +194,16 @@ class ControllerAccountProfile extends Controller {
 
 		$aUser = $oUser->formatToCache();
 
+		if ( !$oLocation = $oUser->getMeta()->getLocation ){
+			$oLocation = new Location();
+		}
+
 		$aUser['avatar'] 	= $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 		$aUser['fullname'] 	= $oUser->getFullName();
 		$aUser['gender'] 	= $oUser->getMeta()->getSex() ? 'Male' : 'Female';
 		$aUser['birthday'] 	= $oUser->getMeta()->getBirthday()->format('d/m/Y');
 		$aUser['address'] 	= $oUser->getMeta()->getAddress();
-		$aUser['location']	= $oUser->getMeta()->getLocation()->getLocation();
+		$aUser['location']	= $oLocation->getLocation();
 		$aUser['industry']	= $oUser->getMeta()->getIndustry();
 		
 		// Emails
@@ -243,9 +247,13 @@ class ControllerAccountProfile extends Controller {
 		// Experiences
 		$lExperiences = $oBackground->getExperiences();
 		foreach ( $lExperiences as $oExperience ) {
+			if ( !$oLocation = $oExperience->getLocation() ){
+				$oLocation = new Location();
+			}
+
 			$aUser['experiences'][] = array(
 				'company'	=> $oExperience->getCompany(),
-				'location'	=> $oExperience->getLocation()->getLocation(),
+				'location'	=> $oLocation->getLocation(),
 				'title'		=> $oExperience->getTitle(),
 				'started'	=> $oExperience->getStarted(),
 				'ended'		=> $oExperience->getEnded()
