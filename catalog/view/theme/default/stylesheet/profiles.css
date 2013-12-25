@@ -389,6 +389,12 @@ textarea[name="summary"] {
     border-top: 1px dotted #f0f0f0;
     padding: 3px 0px;
 }
+.profile-column-content .row-fluid .profile-value .email-item {
+	padding-bottom: 10px;
+}
+.profile-column-content .row-fluid .profile-value .phones-item {
+	padding-bottom: 10px;
+}
 .profile-column-content .row-fluid:first-child .profile-value {
 	border-top:none;
 }
