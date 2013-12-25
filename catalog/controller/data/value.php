@@ -25,6 +25,10 @@ class ControllerDataValue extends Controller {
 			$cities = $this->model_localisation_city->searchLocationByKeyword( $data );
 			
 			foreach ( $cities as $city ) {
+				if ( !$city->getLocation() ){
+					continue;
+				}
+				
 				$json[] = array(
 					'name' => $city->getLocation(),
 					'id' => $city->getId(),
