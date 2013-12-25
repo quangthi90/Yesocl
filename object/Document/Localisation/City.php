@@ -20,10 +20,10 @@ Class City {
 	/** @MongoDB\Boolean */
 	private $status;
 	
-	/** @MongoDB\ReferenceOne(targetDocument="country", inversedBy="cities") */
+	/** @MongoDB\ReferenceOne(targetDocument="Country", inversedBy="cities") */
     private $country;
     
-    /** @MongoDB\ReferenceMany(targetDocument="district", mappedBy="city") */
+    /** @MongoDB\ReferenceMany(targetDocument="District", mappedBy="city") */
 	private $districts = array();
 
 	public function getId(){
