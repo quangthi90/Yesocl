@@ -26,23 +26,24 @@ class ControllerAccountWall extends Controller {
 		$this->load->model('tool/image');
 		$this->load->model('friend/friend');
 
-		$oUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
+		$oLoggedUser = $this->customer->getUser();
+		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
 
-		if ( !$oUser ){
+		if ( !$oCurrUser ){
 			return false;
 		}
 
-		$aUser = $oUser->formatToCache();
+		$aUser = $oCurrUser->formatToCache();
 
 		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $oUser );
+		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $oCurrUser );
 		$this->data['users'] = array( $aUser['id'] => $aUser );
 
-		$this->data['current_user_id'] = $oUser->getId();
+		$this->data['current_user_id'] = $oCurrUser->getId();
 
 		$this->data['posts'] = array();
-		if ( $oUser->getPostData() ){
-			$lPosts = $oUser->getPostData()->getPosts();
+		if ( $oCurrUser->getPostData() ){
+			$lPosts = $oCurrUser->getPostData()->getPosts();
 		}else{
 			$lPosts = array();
 		}
@@ -66,15 +67,19 @@ class ControllerAccountWall extends Controller {
 				$aPost['isUserLiked'] = false;
 			}
 
-			$aPost['is_del'] = true;
+			$oUser = $oPost->getUser();
+
+			if ( $oCurrUser->getId() == $oLoggedUser->getId() || $oLoggedUser->getId() == $oUser->getId() ){
+				$aPost['is_del'] = true;
+			}else{
+				$aPost['is_del'] = false;
+			}
 
 			if ( $this->customer->getId() == $aPost['user_id'] ){
 				$aPost['is_edit'] = true;
 			}else{
 				$aPost['is_edit'] = false;
 			}
-
-			$oUser = $oPost->getUser();
 
 			if ( !array_key_exists($oUser->getId(), $this->data['users']) ){
 				$aUser = $oUser->formatToCache();
