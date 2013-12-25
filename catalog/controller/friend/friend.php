@@ -17,55 +17,50 @@ class ControllerFriendFriend extends Controller {
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
 		if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
-			$curr_user = $this->model_user_user->getUserFull( $this->request->get );
+			$oCurrUser = $this->model_user_user->getUserFull( $this->request->get );
 		}else{
-			$curr_user = $this->customer->getUser();
+			$oCurrUser = $this->customer->getUser();
 		}
 
-		if ( !$curr_user ){
+		if ( !$oCurrUser ){
 			return false;
 		}
 
-		$arr_curr_user = $curr_user->formatToCache();
+		$oLoggedUser = $this->customer->getUser();
 
-		$arr_curr_user['avatar'] = $this->model_tool_image->getAvatarUser( $arr_curr_user['avatar'], $arr_curr_user['email'] );
+		$aCurrUser = $oCurrUser->formatToCache();
 
-		$this->data['current_user_id'] = $curr_user->getId();
+		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'] );
+		$aCurrUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser, $oCurrUser );
+		$this->data['users'] = array($aCurrUser['id'] => $aCurrUser);
 
-		$friends = $curr_user->getFriends();
+		$this->data['current_user_id'] = $oCurrUser->getId();
+
+		$lFriends = $oCurrUser->getFriends();
 
 		$this->data['friend_ids'] = array();
-		$this->data['users'] = array($arr_curr_user['id'], $arr_curr_user);
+		
+		foreach ( $lFriends as $oFriend ) {
+			$oUser = $oFriend->getUser();
 
-		foreach ( $friends as $friend ) {
-			$ob_user = $friend->getUser();
+			$aUser = $oUser->formatToCache();
 
-			if ( $ob_user->getId() == $curr_user->getId() ){
-				continue;
-			}
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser, $oUser );
+			$aUser['added'] = $oFriend->getCreated();
 
-			$user = $ob_user->formatToCache();
-
-			$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
-			$user['fr_status'] = $this->model_friend_friend->checkFriendStatus( $ob_user, $curr_user );
-			$user['gender'] = $ob_user->getMeta()->getSex();
-			$user['added'] = $friend->getCreated();
-
-
-			$this->data['users'][$user['id']] = $user;
-			$this->data['friend_ids'][$ob_user->getId()] = $ob_user->getId();
+			$this->data['users'][$aUser['id']] = $aUser;
+			$this->data['friend_ids'][$oUser->getId()] = $oUser->getId();
 		}
 
-		$users = $this->model_user_user->getUsers(array(
-			'user_ids' => $user_ids
-		));
+		$this->data['groups'] = array();
 
-		$this->data['group'] = array();
+		$lFriendGroups = $oCurrUser->getFriendGroups();
 
-		foreach ( $curr_user->getFriendGroups() as $group ) {
-			$this->data['group'][$group->getId()] = array(
-				'id' => $group->getId(),
-				'name' => $group->getName()
+		foreach ( $lFriendGroups as $oFriendGroup ) {
+			$this->data['groups'][$oFriendGroup->getId()] = array(
+				'id' => $oFriendGroup->getId(),
+				'name' => $oFriendGroup->getName()
 			);
 		}
 
@@ -74,9 +69,9 @@ class ControllerFriendFriend extends Controller {
 
 		$this->data['filter_type'] = $this->config->get('friend')['filter']['type'];
 
-		$recent_time = new DateTime('now');
-		date_sub($recent_time, date_interval_create_from_date_string('7 days'));
-		$this->data['recent_time'] = $recent_time;
+		$sRecentTime = new DateTime('now');
+		date_sub($sRecentTime, date_interval_create_from_date_string('7 days'));
+		$this->data['recent_time'] = $sRecentTime;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/friend.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/friend/friend.tpl';

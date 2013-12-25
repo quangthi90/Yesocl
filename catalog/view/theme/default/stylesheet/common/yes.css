@@ -1938,6 +1938,7 @@ a i.icon-spin{
 .free-block {
   background-color: #fff;
   height: 100%;  
+  margin-right: 50px;
 }
 .free-block .free-block-content {
   padding: 15px;

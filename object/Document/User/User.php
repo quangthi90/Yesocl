@@ -111,7 +111,8 @@ Class User {
 			'avatar' 		=> $this->getAvatar(),
 			'slug'			=> $this->getSlug(),
 			'email' 		=> $this->getPrimaryEmail()->getEmail(),
-			'current'		=> $this->getMeta()->getCurrent()
+			'current'		=> $this->getMeta()->getCurrent(),
+			'gender'		=> $this->meta->getSex()
 		);
 
 		return $data;

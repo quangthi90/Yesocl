@@ -4,10 +4,10 @@
     <div class="free-block fl" style="width: 180px;">
         <div class="free-block-content">
             <div class="user_info_overview">
-                <a href="#" class="user_info_avatar">
-                    <img src="{{ user.avatar }}" alt="Name" />
+                <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_avatar">
+                    <img src="{{ user.avatar }}" alt="{{ user.username }}" />
                 </a>
-                <a href="#" class="user_info_name"><i class="icon-male"></i> {{ user.username }}</a>
+                <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_name"><i class="icon-{% if user.gender == 1 %}male{% else %}female{% endif %}"></i> {{ user.username }}</a>
                 <div class="user_relationship">
                     {% set fr_status = user.fr_status.status %}
                     {% set fr_slug = user.slug %}

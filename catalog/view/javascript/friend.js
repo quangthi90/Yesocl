@@ -234,7 +234,14 @@
 		}else {
 			var numberRow = Math.floor(that.$mainContent.find('.feed-block').height()/(85 + 10));
 			var numberCol = Math.floor(result.length/numberRow) + 1;
-			that.$mainContent.width(numberCol*(320 + 15));
+			var freeBlock = that.$mainContent.find('.free-block');
+			var blockContent = that.$mainContent.find('.feed-block');
+			if(freeBlock.length === 0){
+				that.$mainContent.width(numberCol*(320 + 15));	
+			}else{
+				blockContent.width(numberCol*(320 + 15));	
+				that.$mainContent.width(freeBlock.width() + 60 + numberCol*(320 + 15));
+			}
 			result.stop(true,true).fadeIn(300);						
 		}
 		that.$rootContent.getNiceScroll().resize();
