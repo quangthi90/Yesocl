@@ -23,7 +23,7 @@
             </div>
             <ul class="user_actions">
                 <li>
-                    <i class="icon-list-alt"></i><a href="#">Profile</a>
+                    <i class="icon-list-alt"></i><a href="{{ path('ProfilePage', {user_slug: user.slug}) }}">Profile</a>
                 </li>
                 <li>
                     <i class="icon-fire"></i><a href="{{ path('FriendPage', {user_slug: user.slug}) }}">Friends</a>

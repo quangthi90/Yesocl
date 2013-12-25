@@ -1,16 +1,15 @@
 // Create layout
 (function($, document, undefined) {
 	function ProfilesLayout($el) {
-		this.$el = $el;
+		this.$el = $el;		
 		this.$information = $el.find('#profiles-tabs-information');
-		this.$background = $el.find('#profiles-tabs-background');
-		
+		this.$background = $el.find('#profiles-tabs-background');		
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
 		this.$experience = $el.find('#profiles-tabs-background-experience');
-		this.$skill = $el.find('#profiles-tabs-background-skill');		
-		this.$header = this.$background.find('.profiles-tabs-header');
-		this.$main_profile = $el.find('.profiles-tabs-main');
+		this.$skill = $el.find('#profiles-tabs-background-skill');
+		this.$header = this.$background.find('.profiles-tabs-header');		
+		this.$main_profile = $el.find('.profiles-tabs-main');		
 		this.$contentHeight = this.$el.height();
 		this.$gapHeight = 35 + 50 + 2*(20 + 1);
 
@@ -54,7 +53,7 @@
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
 		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
-
+		
 		//Handle profile changed:
 		var that = this;
 		$(document).on('PROFILE_CHANGED', function(e, data) {
@@ -73,8 +72,78 @@
 		}
 	}
 
+	function ProfileViewLayout($el){
+		this.$el = $el;
+		this.$rootContent = $el.parent('#y-content');
+		this.$heightContent = $el.height();
+		this.$profileColumn = $el.find('.profile-column');
+		this.$overviewColumn = $el.find('.profile-overview');
+		this.$navigationItem = $el.find('.profile-category-item');
+		this.makeLayoutScroll();
+		this.attachEvents();
+	}
+	ProfileViewLayout.prototype.attachEvents = function(){
+		var that = this;
+		var widthContent = that.$el.width();
+		that.$rootContent.scroll(function(e){
+			var x = $(this).scrollLeft();
+			if(x > 100) {
+				that.$overviewColumn.addClass('scrolling');
+				that.$el.width(widthContent - that.$overviewColumn.width());
+			}else if(x < 30) {
+				that.$overviewColumn.removeClass('scrolling');
+				that.$el.width(widthContent);
+			}
+		});
+		that.$navigationItem.on('click', function(e){
+			e.preventDefault();
+			var href = $(this).attr('href');
+			if($(href).length == 0) return;
+			var leftPosition = 0;
+			if(href === '#profile-column-information'){
+				leftPosition = 0;
+			}else if(href === '#profile-column-summary') {
+				leftPosition = $('#profile-column-information').width() + 30 ;
+			}else if(href === '#profile-column-education') {
+				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30;
+			}else if(href === '#profile-column-experience') {
+				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30 + $('#profile-column-education').width() + 30;
+			}else if(href === '#profile-column-skill') {
+				leftPosition = $('#profile-column-information').width() + 30 + $('#profile-column-summary').width() + 30 + $('#profile-column-education').width() + 30 + $('#profile-column-experience').width() + 30;
+			}
+			that.$rootContent.animate({scrollLeft: (leftPosition) + 'px'}, 1000);
+			that.$profileColumn.removeClass('active');
+			that.$navigationItem.removeClass('active');
+			$(this).addClass('active');
+			$(href).addClass('active');
+		});
+	}
+	ProfileViewLayout.prototype.makeLayoutScroll = function(){
+		var that = this;
+		var totalOfWidth = 0;
+
+		that.$overviewColumn.height(that.$heightContent);
+		that.$profileColumn.each(function(){
+			var title = $(this).find('.profile-column-title');
+			var wrapper = $(this).find('.profile-column-wrapper');
+			var content = $(this).find('.profile-column-content');
+
+			wrapper.height(that.$heightContent - title.outerHeight() - 20 - 30);
+			content.makeCustomScroll();
+			totalOfWidth += $(this).outerWidth() + 35;
+			$(this).css('opacity','1');
+		});
+		that.$el.width(totalOfWidth);
+		that.$rootContent.makeScrollWithoutCalResize();
+	}
+
 	$(function(){
-		new ProfilesLayout($('#y-main-content'));
+		var mainContent = $('#y-main-content');
+		if(mainContent.hasClass('profile-view-page')){
+			new ProfileViewLayout(mainContent);
+		}else {
+			new ProfilesLayout(mainContent);
+		}		
 	});
 }(jQuery, document));
 

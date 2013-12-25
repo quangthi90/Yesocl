@@ -490,16 +490,18 @@ var yCurrUser = new CurrentUser();
 	var df_SEARCH_PAGE 	= 'search-page';
 	var df_NOTIFICATION_PAGE 	= 'notification-page';
 
-	function HorizontalBlock(el) {	
-		this.rootContent = $("#y-content");
-		this.root = el;
-		this.columns = el.find('.column');
-		this.feeds = el.find('.feed');	
-		this.heightMain =  el.height();
-		this.widthMain = el.width();
-		if(!this.rootContent.hasClass('no-scroll')) {
-			this.initializeBlock();
-		}
+	function HorizontalBlock(el) {
+		if(el.length > 0){
+			this.rootContent = $("#y-content");
+			this.root = el;
+			this.columns = el.find('.column');
+			this.feeds = el.find('.feed');	
+			this.heightMain =  el.height();
+			this.widthMain = el.width();
+			if(!this.rootContent.hasClass('no-scroll')) {
+				this.initializeBlock();
+			}
+		}		
 	}
 	HorizontalBlock.prototype.initializeBlock = function() {
 		if(this.root.hasClass(df_POST_HAS_BLOCK)) {

@@ -36,7 +36,7 @@
 		  			</a>
 			  	</li>	
 			  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
-			  		<a href="{{ path('ProfilePage') }}">
+			  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
 			  			<i class="icon-user-md"></i> <span>My profile</span>
 		  			</a>
 			  	</li>
