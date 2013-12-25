@@ -644,8 +644,15 @@ var yCurrUser = new CurrentUser();
 			if(listBlockItem.length == 0) {
 				this.root.css('min-width', '500px');
 			}else {
+				var freeBlock = this.root.find('.free-block');
+				var blockContent = this.root.find('.feed-block');
 				var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
-				this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+				if(freeBlock.length === 0){
+					this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));	
+				}else{
+					blockContent.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
+					this.root.width(freeBlock.width() + 60 + numberCol*(widthFriendBlockItem + marginFriendBlockItem));	
+				}
 				this.rootContent.css('right','220px');
 				listBlockItem.css('opacity','1');
 			}
