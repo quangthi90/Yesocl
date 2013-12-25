@@ -3,7 +3,7 @@
 	<h3 class="profile-column-title"><i class="icon-list"></i> Work Experience</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
-			{% for experience in experiences %}
+			{% for experience in user.experiences %}
 			<div class="profile-info-item work-item">
 				<div class="profile-info-basic">
 					<div class="profile-info-title">
@@ -13,7 +13,7 @@
 						<span class="company-address">{{ experience.location }}</span>
 					</div>
 					<div class="profile-info-time">
-						<span class="time-from">{{ experience.started|date('d/m/Y') }}</span><span class="time-to">{{ experience.ended|date('d/m/Y') }}</span>
+						<span class="time-from">{{ experience.started|date('d/m/Y') }}</span><span class="time-to">{% if experience.ended != null %}{{ experience.ended|date('d/m/Y') }}{% else %}Present{% endif %}</span>
 					</div>
 				</div>
 				{#<div class="profile-info-decription">

@@ -229,27 +229,33 @@ class ControllerAccountProfile extends Controller {
 		$aUser['summary'] = $oBackground->getSummary();
 
 		// Educations
-		$educations = $oBackground->getEducations();
-		foreach ( $educations as $education ) {
+		$lEducations = $oBackground->getEducations();
+		foreach ( $lEducations as $oEducation ) {
 			$aUser['educations'][] = array(
-				'school' 	=> $education->getSchool(),
-				'degree'	=> $education->getDegree(),
-				'field'		=> $education->getFieldOfStudy(),
-				'started'	=> $education->getStarted(),
-				'ended'		=> $education->getEnded()
+				'school' 	=> $oEducation->getSchool(),
+				'degree'	=> $oEducation->getDegree(),
+				'field'		=> $oEducation->getFieldOfStudy(),
+				'started'	=> $oEducation->getStarted(),
+				'ended'		=> $oEducation->getEnded()
 			);
 		}
 
 		// Experiences
-		$experiences = $oBackground->getExperiences();
-		foreach ( $experiences as $experience ) {
+		$lExperiences = $oBackground->getExperiences();
+		foreach ( $lExperiences as $oExperience ) {
 			$aUser['experiences'][] = array(
-				'company'	=> $experience->getCompany(),
-				'location'	=> $experience->getLocation()->getLocation(),
-				'title'		=> $experience->getTitle(),
-				'start'		=> $experience->getStarted(),
-				'ended'		=> $experience->getEnded()
+				'company'	=> $oExperience->getCompany(),
+				'location'	=> $oExperience->getLocation()->getLocation(),
+				'title'		=> $oExperience->getTitle(),
+				'started'	=> $oExperience->getStarted(),
+				'ended'		=> $oExperience->getEnded()
 			);
+		}
+
+		// Skills
+		$lSkills = $oBackground->getSkills();
+		foreach ( $lSkills as $oSkill ) {
+			$aUser['skills'][] = $oSkill->getSkill();
 		}
 
 		$this->data['user'] = $aUser;
