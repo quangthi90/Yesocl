@@ -1,5 +1,6 @@
 <?php
-use Document\User\Meta\Location,
+use Document\User\Meta\Background,
+	Document\User\Meta\Location,
 	Document\User\Meta\Education,
 	Document\User\Meta\Experience,
 	Document\User\Meta\Skill;
@@ -45,7 +46,14 @@ class ModelUserBackground extends Model {
 		$education->setFieldOfStudyId( $data['fieldofstudy_id'] );
 
 		$this->dm->persist( $education );
-		$user->getMeta()->getBackground()->addEducation( $education );
+
+		if ( !$oBackground = $user->getMeta()->getBackground() ){
+			$oBackground = new Education();
+			$oBackground->addEducation( $education );
+			$user->getMeta()->setBackground( $oBackground );
+		}else{
+			$oBackground->addEducation( $education );
+		}
 
 		$this->dm->flush();
 
@@ -181,7 +189,13 @@ class ModelUserBackground extends Model {
 		$experience->setLocation( $location );
 
 		$this->dm->persist( $experience );
-		$user->getMeta()->getBackground()->addExperience( $experience );
+		if ( !$oBackground = $user->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->addExperience( $experience );
+			$user->getMeta()->setBackground( $oBackground );
+		}else{
+			$oBackground->addExperience( $experience );
+		}
 
 		$this->dm->flush();
 
@@ -301,7 +315,14 @@ class ModelUserBackground extends Model {
 		$skill->setSkill( $data['skill'] );
 
 		$this->dm->persist( $skill );
-		$user->getMeta()->getBackground()->addSkill( $skill );
+
+		if ( !$oBackground = $user->getMeta()->getBackground() ){
+			$oBackground = new Background();
+			$oBackground->addSkill( $skill );
+			$user->getMeta()->setBackground( $oBackground );
+		}else{
+			$oBackground->addSkill( $skill );
+		}
 
 		$this->dm->flush();
 
