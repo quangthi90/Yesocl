@@ -91,6 +91,9 @@ class ExtensionLoader
         $this->load->model('tool/image');
 
         $oUser = $this->customer->getUser();
+        if ( !$oUser ){
+            return null;
+        }
         $aUser = $oUser->formatToCache();
         $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'] );
         

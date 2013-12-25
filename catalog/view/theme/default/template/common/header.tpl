@@ -6,8 +6,8 @@
 </div>
 {# end list routing #}
 
-{% if is_logged() %}
-  {% set currUser = get_current_user() %}
+{% set currUser = get_current_user() %}
+{% if is_logged() and currUser != null %}
 {# current user info -- deleted after read #}
 <div id="current-user-info" class="hidden">
   <input type="hidden" id="current-user-slug" value="{{ currUser.slug }}" />
