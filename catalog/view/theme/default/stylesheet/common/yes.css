@@ -292,15 +292,15 @@ ul.dropdown-menu li.divider {
   color: #000;
 }
 .dropdown-menu > li > a:hover > i{
-  color: #fff;
+  color: #009B77;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
 .dropdown-submenu:focus > a {
-  color: #ffffff;
+  color: #0E0E0E;
   text-decoration: none;
-  background: #009975; 
+  background: #F0F0F0; 
   
 }
 #overlay 
