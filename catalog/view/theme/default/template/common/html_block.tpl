@@ -262,3 +262,35 @@
 	{% endraw %}
 {% endblock %}
 {# -- End Comment -- #}
+
+{% block common_html_block_new_message_form %}
+	<div class="mfp-hide y-dlg-container" id="new-message-form">
+		<div class="y-dlg">
+			<form autocomplete="off" class="new-message-form">
+				<div class="dlg-title">
+			        <i class="icon-yes"></i> New Message
+			    </div>
+			    <div class="dlg-content">
+			    	<div class="control-group">
+			    		<label for="sent-user" class="control-label">Send to</label>
+			    		<div class="controls">
+			    			<input type="text" class="sent-user" id="sent-user" class="sent-user">
+			    		</div>
+		    		</div>
+		    		<div class="control-group">
+		    			<label for="sent-user" class="control-label">Content</label>
+			    		<textarea class="message-editor" placeholder="Write a message ..."></textarea>
+		    		</div>			    	
+			    </div>	
+			    <div class="dlg-footer">
+			    	<div class="controls">
+			    		<a href="#" class="btn btn-yes btn-send-msg">Send</a>
+						<label class="enter-option">
+							<input type="checkbox" class="enter-check" checked="checked"> Press enter to send
+						</label>           
+		            </div>
+			    </div>			    	
+			</form>
+		</div>
+	</div>
+{% endblock %}

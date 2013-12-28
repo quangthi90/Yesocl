@@ -191,11 +191,33 @@
 
     margin-right: 20px;
 }
-.mesasage-box-footer .new-message-footer .btn-send {
+.mesasage-box-footer .new-message-footer .btn-send-msg {
     float: right;
 
     margin-right: 20px;
     padding: 2px 10px;
+}
+#new-message-form {
+    max-width: 800px;
+    background-color: #fff;
+}
+#new-message-form .sent-user {
+    width: 98%;
+    height: 23px;
+}
+#new-message-form .message-editor {
+    width: 98%;
+    height: 100px;    
+    resize: none;
+}
+#new-message-form .enter-option {
+    float: right;
+    margin-right: 20px;
+    margin-top: 2px;
+}
+#new-message-form .btn-send-msg {
+    padding: 2px 10px;
+    float: right;
 }
 
 .message-page .mCSB_scrollTools .mCSB_draggerRail {

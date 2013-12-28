@@ -9,8 +9,8 @@ function MessageLayout($el) {
     this.$messageBox        = $el.find('.message-box-list');
     this.$userList          = this.$userBox.find('.user-box-scroll');
     this.$messageList       = this.$messageBox.find('.mesasage-box-container');
-    this.$enterCheck        = $el.find('#enter-check');
-    this.$sendBtn           = $el.find('#send-msg-btn');
+    this.$enterCheck        = $el.find('.enter-check');
+    this.$sendBtn           = $el.find('.btn-send-msg');
     this.makeLayout();
     this.attachEvents();
 };

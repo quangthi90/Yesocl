@@ -2,6 +2,8 @@
 
 {% block title %}Messages - Yesocl - Social Network{% endblock %}
 
+{% use '@template/default/template/common/html_block.tpl' %}
+
 {% block stylesheet %}
 <link href="{{ asset_css('message.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
@@ -53,7 +55,9 @@
             				<a class="btn btn-yes dropdown-toggle tool-item" data-toggle="dropdown">
                                 <i class="icon-gear"></i>Action <i class="icon-caret-down"></i>
                            </a>
-                           <a href="#" class="btn btn-yes tool-item"><i class="icon-plus-sign"></i> New Message</a>
+                           <a href="#" data-mfp-src="#new-message-form" class="btn btn-yes tool-item link-popup">
+                           		<i class="icon-plus-sign"></i> New Message
+                           	</a>
                            <ul class="dropdown-menu">
                                 <li>
                                     <a href="#"><i class="icon-remove"></i> Remove</a>
@@ -99,9 +103,9 @@
           	  		<div class="mesasage-box-footer">
             			<textarea class="message-editor" placeholder="Write a message ..."></textarea>
             			<div class="new-message-footer">
-            				<a href="" class="btn btn-yes btn-send" id="send-msg-btn">Send</a>
+            				<a href="" class="btn btn-yes btn-send btn-send-msg">Send</a>
             				<label class="enter-option">
-            					<input type="checkbox" id="enter-check" checked="checked"> Press enter to send
+            					<input type="checkbox" class="enter-check" checked="checked"> Press enter to send
             				</label>            				
             			</div>
             		</div>
@@ -110,6 +114,7 @@
         </div>
 	</div>
 </div>
+{{ block('common_html_block_new_message_form') }}
 {% endblock %}
 
 {% block javascript %}
