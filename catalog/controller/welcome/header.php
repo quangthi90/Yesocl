@@ -8,11 +8,11 @@ class ControllerWelcomeHeader extends Controller {
 		} else {
 			$this->data['base'] = HTTP_SERVER;
 		}
-
+		// print($this->extension->path('FaceBookConnect')); exit;
 		$this->data['action'] = array(
 			'connect_face'	=> $this->facebook->getLoginUrl( array( 
 				'scope' => 'publish_stream, email',
-				'redirect_uri' => HTTP_SERVER . 'facebookcnt/',
+				'redirect_uri' => $this->extension->path('FaceBookConnect'),
 				) 
 			)
 		);

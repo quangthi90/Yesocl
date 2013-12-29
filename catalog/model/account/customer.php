@@ -242,7 +242,7 @@ class ModelAccountCustomer extends Model {
 	}
 	
 	public function getCustomerByEmail($email) {
-		$query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+		$query = $this->dm->getRepository('Document\User\User')->findOneBy( array(
 			'status' => true,
 			'emails.email' => $email
 		));

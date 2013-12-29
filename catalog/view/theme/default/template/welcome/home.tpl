@@ -98,5 +98,33 @@
 	<script type="text/javascript" src="{{ asset_js('register.js') }}"></script>  
     <script type="text/javascript">
         $('#y-message-info').showMessageDialog();
-    </script>  
+    </script>
+    <script src="http://connect.facebook.net/en_US/all.js#appId={{ fb_app_id }}&xfbml=1"></script>
+    <script type="text/javascript">
+    FB.init({
+        appId   : '{{ fb_app_id }}',
+        status  : true,
+        cookie  : true, 
+        xfbml   : true 
+    });
+    function callFBLogin(){
+        FB.login(function(response) {
+            if (response.authResponse) {
+                FB.api('/me', function(response) {
+                    var promise = $.ajax({
+                        type: 'POST',
+                        url:  yRouting('FaceBookConnect'),
+                        dataType: 'json',
+                        data: {data: response}
+                    });
+                });
+            }else{
+                alert("Access not authorized.");
+            }
+        },{scope: 'email'});
+    }
+    $('.btn-fb-login').click(function(){
+        callFBLogin();
+    });
+    </script>
 {% endblock %}

@@ -27,6 +27,8 @@ class ControllerWelcomeHome extends Controller {
 		$this->load->library('recaptcha');
 		$captcha = new Recaptcha();
 		$this->data['recaptcha_html'] = $captcha->recaptcha_get_html();
+
+		$this->data['fb_app_id'] = FB_API_ID;
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/welcome/home.tpl';

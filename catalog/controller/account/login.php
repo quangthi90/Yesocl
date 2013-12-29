@@ -78,46 +78,20 @@ class ControllerAccountLogin extends Controller {
   }
 
   public function facebookConnect() {
-    if ( isset($_GET['code']) ) {
-      $code = $_GET['code'];
-      $facebook_access_token_uri = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->facebook->getAppId() . '&redirect_uri=' . HTTP_SERVER . 'facebookcnt/' . '&client_secret=' . $this->facebook->getAppSecret() . '&code=' . $code;
-
-      $ch = curl_init(); 
-      curl_setopt($ch, CURLOPT_URL, $facebook_access_token_uri);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
-      $response = curl_exec($ch); 
-      curl_close($ch);
-   
-      // Get access token
-      $access_token = str_replace('access_token=', '', explode("&", $response)[0]);
+    if ( !$this->request->post['data'] ){
+      return false;
     }
 
-    if ( isset( $access_token ) ) {
-      // Get user infomation
-      $ch = curl_init(); 
-      curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/me?access_token=$access_token");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
-      $response = curl_exec($ch); 
-      curl_close($ch);
-   
-      $customer_data = json_decode($response);
-    }
-
-    if ( isset( $this->session->data['redirect'] ) ) {
-      $redirect_url = $this->session->data['redirect'];
-      unset( $this->session->data['redirect'] );
-    }else {
-      $redirect_url = HTTP_SERVER;
-    }
-
+    $data = $this->request->post['data'];
+    var_dump($data); exit;
     $this->load->language('account/login');
-    if ( isset( $customer_data ) && isset( $customer_data->id ) ) {
-      $this->load->model('account/customer');
-      $user_config = $this->config->get('user');
+    $this->load->model('account/customer');
 
-      $customer = $this->model_account_customer->getCustomerByEmail( $customer_data->email );
+    $customer = $this->model_account_customer->getCustomerByEmail( $data['email'] );
+
+    if ( isset( $customer_data ) && isset( $customer_data->id ) ) {
+      
+      $user_config = $this->config->get('user');
 
       if ( $customer && $customer->getId() ) {
         if ( !$customer->getSocialNetwork() || $customer->getSocialNetwork()->getCode() == $user_config['network']['default'] ) {

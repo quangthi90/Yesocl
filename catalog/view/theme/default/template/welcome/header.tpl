@@ -21,8 +21,8 @@
                 <div class="span8">
                     <div class="login-social">
                         <ul>
-                            <li>
-                                <a href="{{ action.connect_face }}">
+                            <li class="btn-fb-login">
+                                <a href="#">
                                     <i class="icon-facebook"></i>
                                 </a>
                             </li>
