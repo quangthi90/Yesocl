@@ -14,7 +14,9 @@
 			var me = $(this);
 			var btnInvoke = $(this).children('.btn-notification');
 			var listNotification = $(this).children('.notification-content-list');
-			listNotification.makeCustomScroll(false);
+			if(!listNotification.hasClass('empty')){
+				listNotification.makeCustomScroll(false);	
+			}			
 			listNotification.css('opacity', '1').hide(10);
 			btnInvoke.on('click', function(e){
 				e.preventDefault();

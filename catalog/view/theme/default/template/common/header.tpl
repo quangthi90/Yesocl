@@ -41,7 +41,7 @@
           {#<a href="#">
 			    	<i class="icon-edit"></i>
 			    </a>#}
-			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
+			    <a class="dropdown-toggle toggle-user-menu btn-header-not-search" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
 	    		</a>
 			    <ul class="dropdown-menu">
@@ -70,10 +70,11 @@
 			</div>
 			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
-          <a href="#" class="btn-notification js-btn-see-notify">
+          <a href="#" class="btn-notification btn-header-not-search js-btn-see-notify">
             <i class="icon-bell"></i>
             <span class="notification-item-count{% if notification_count == 0 %} hidden{% endif %}">{{ notification_count }}</span>
           </a>
+          {% if notifications|length > 0 %}
           <div class="notification-content-list">
             <ul>
               {% for notification in notifications %}
@@ -97,6 +98,11 @@
               {% endfor %}
             </ul>
           </div>
+          {% else %}
+          <div class="notification-content-list empty">
+            No new notifications
+          </div>
+          {% endif %}
         </div>
         {#<div class="notification-item message">
           <a href="#" class="btn-notification">
@@ -139,7 +145,7 @@
         </div>#}
         {% set requests = get_request_friend() %}
         <div class="notification-item friend">
-          <a href="#" class="btn-notification">
+          <a href="#" class="btn-notification btn-header-not-search">
             <i class="icon-user"></i>
             {% if requests|length > 0 %}
             <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>
@@ -165,6 +171,10 @@
               </li>
               {% endfor %}
             </ul>
+          </div>
+          {% else %}
+          <div class="notification-content-list empty">
+            No new friend requests
           </div>
           {% endif %}
         </div>

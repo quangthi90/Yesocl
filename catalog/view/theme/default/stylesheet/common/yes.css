@@ -646,6 +646,10 @@ a.btn-notification:hover .notification-item-name > i {
   opacity: 0;
   padding: 10px 0px 10px 10px;
 }
+.notification-content-list.empty {
+  width: 180px;
+  font-weight: bold;
+}
 .notification-content-list .notification-content-item {
   overflow: hidden;
   padding: 5px;
