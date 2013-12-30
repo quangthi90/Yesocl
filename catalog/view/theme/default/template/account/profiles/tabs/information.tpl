@@ -51,7 +51,7 @@
 					</div>
 					<div class="row-fluid">
 						<div class="span2 offset1">Birthday</div>
-						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.birthday|date('d/m/Y') }}</span></div>
+						<div class="span9"><span class="profiles-tabs-value viewers">{% if user.birthday != null %}{{ user.birthday|date('d/m/Y') }}{% endif %}</span></div>
 					</div>
 					<div class="row-fluid">
 						<div class="span2 offset1">Address</div>
@@ -165,7 +165,7 @@
 						<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="{{ user.birthday|date('d/m/Y') }}">
 						  	<div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker">
 						    	<span class="add-on btn"><i class="icon-calendar"></i></span>
-						    	<input type="text" name="birthday" class="input-medium" value="{{ user.birthday|date('d/m/Y') }}" readonly />
+						    	<input type="text" name="birthday" class="input-medium" value="{% if user.birthday != null %}{{ user.birthday|date('d/m/Y') }}{% endif %}" readonly />
 						  	</div>
 						  	<div class="bfh-datepicker-calendar">
 						    	<table class="calendar table table-bordered">

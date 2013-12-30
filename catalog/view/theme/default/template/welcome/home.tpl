@@ -143,7 +143,7 @@
                 /*Todo: add message login facebook fail here...*/
                 alert("Access not authorized.");
             }
-        },{scope: 'email'});
+        },{scope: 'email,user_birthday'});
     }
     $('.btn-fb-login').click(function(){
         if ( $(this).hasClass('disabled') ){

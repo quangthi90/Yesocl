@@ -78,7 +78,7 @@ class ControllerAccountLogin extends Controller {
   }
 
   public function facebookConnect() {
-    if ( !$this->request->post['data'] ){
+    if ( empty($this->request->post['data']) ){
       return false;
     }
 
@@ -104,17 +104,19 @@ class ControllerAccountLogin extends Controller {
         'success' => 'ok'
       )));
     }
-    // var_dump($aDatas); exit;
+    
     // get avatar
     $ch = curl_init(); 
     curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/' . $aDatas['id'] .'/picture?type=large&redirect=false');
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
     $response = json_decode(curl_exec($ch));
     curl_close($ch);
-
+    
     $sAvatarLink = DIR_IMAGE . 'data/upload/' . $aDatas['username'] . '.jpg';
     copy($response->data->url, $sAvatarLink);
+
+    $oBirthday = new DateTime($aDatas['birthday']);
     
     $aUserData = array(
       'firstname' => $aDatas['first_name'],
@@ -122,7 +124,10 @@ class ControllerAccountLogin extends Controller {
       'sex' => $aDatas['gender'] == 'female' ? '2' : '1',
       'email' => $aDatas['email'],
       'avatar' => $sAvatarLink,
-      'location' => $aDatas['location'] ? $aDatas['location']['name'] : ''
+      'location' => $aDatas['location'] ? $aDatas['location']['name'] : '',
+      'day' => $oBirthday->format('d'),
+      'month' => $oBirthday->format('m'),
+      'year' => $oBirthday->format('Y')
     );
 
     // Create basic user
