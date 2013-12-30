@@ -101,6 +101,7 @@
     </script>
     <script src="http://connect.facebook.net/en_US/all.js#appId={{ fb_app_id }}&xfbml=1"></script>
     <script type="text/javascript">
+
     FB.init({
         appId   : '{{ fb_app_id }}',
         status  : true,
@@ -113,17 +114,42 @@
                 FB.api('/me', function(response) {
                     var promise = $.ajax({
                         type: 'POST',
-                        url:  yRouting('FaceBookConnect'),
+                        url:  yRouting.generate('FaceBookConnect'),
                         dataType: 'json',
                         data: {data: response}
                     });
+
+                    var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+                    var $old_icon = $('.btn-fb-login').find('i');
+                    var f        = function() {
+                        $spinner.remove();
+                        $('.btn-fb-login').removeClass('disabled').find('a').prepend($old_icon);
+                    };
+
+                    $old_icon.remove();
+                    $('.btn-fb-login').addClass('disabled').find('a').prepend($spinner);
+
+                    promise.then(f, f);
+
+                    promise.then(function(data){
+                        if ( data.success == 'ok' ){
+                            window.location.reload();
+                        }else{
+                            /*Todo: add message error here...*/
+                        }
+                    });
                 });
             }else{
+                /*Todo: add message login facebook fail here...*/
                 alert("Access not authorized.");
             }
         },{scope: 'email'});
     }
     $('.btn-fb-login').click(function(){
+        if ( $(this).hasClass('disabled') ){
+            return false;
+        }
+        $(this).addClass('disabled');
         callFBLogin();
     });
     </script>

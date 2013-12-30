@@ -8,22 +8,22 @@ use Datetime;
 
 class ModelUserBackground extends Model {
 
-	public function addEducation( $user_id, $data = array() ) {
+	public function addEducation( $user_id, $data = array(), $isSocial = false ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
 		if ( !$user ) {
 			return false;
 		}
 
-		if ( empty($data['started']) ) {
+		if ( $isSocial == false && empty($data['started']) ) {
 			return false;
 		}
 
-		if ( empty($data['ended']) ) {
+		if ( $isSocial == false && empty($data['ended']) ) {
 			return false;
 		}
 
-		if ( empty($data['degree']) ) {
+		if ( $isSocial == false && empty($data['degree']) ) {
 			return false;
 		}
 
@@ -31,7 +31,7 @@ class ModelUserBackground extends Model {
 			return false;
 		}
 
-		if ( empty($data['fieldofstudy']) ) {
+		if ( $isSocial == false && empty($data['fieldofstudy']) ) {
 			return false;
 		}
 
@@ -48,7 +48,7 @@ class ModelUserBackground extends Model {
 		$this->dm->persist( $education );
 
 		if ( !$oBackground = $user->getMeta()->getBackground() ){
-			$oBackground = new Education();
+			$oBackground = new Background();
 			$oBackground->addEducation( $education );
 			$user->getMeta()->setBackground( $oBackground );
 		}else{
@@ -129,29 +129,29 @@ class ModelUserBackground extends Model {
 		// Studient - Employee - Job Seeker
 		if ( $user->getMeta()->getCurrent() == '' ){
 			$user->getMeta()->setCurrentInfo();
-			$this->dm->flush();
 		}
 
 		$this->dm->flush();
 
-		return $education->getId();	}
+		return $education->getId();
+	}
 
-	public function addExperience( $user_id, $data = array() ) {
+	public function addExperience( $user_id, $data = array(), $isSocial = false ) {
 		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
 
 		if ( !$user ) {
 			return false;
 		}
 
-		if ( empty($data['started_month']) ) {
+		if ( $isSocial == false && empty($data['started_month']) ) {
 			return false;
 		}
 
-		if ( empty($data['started_year']) ) {
+		if ( $isSocial == false && empty($data['started_year']) ) {
 			return false;
 		}
 
-		if ( empty($data['title']) ) {
+		if ( $isSocial == false && empty($data['title']) ) {
 			return false;
 		}
 
@@ -163,7 +163,7 @@ class ModelUserBackground extends Model {
 			$data['self_employed'] = 0;
 		}
 
-		if ( empty($data['location']) ) {
+		if ( $isSocial == false && empty($data['location']) ) {
 			return false;
 		}
 

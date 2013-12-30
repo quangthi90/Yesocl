@@ -8,9 +8,9 @@ class ControllerAccountAvatar extends Controller {
     	$this->document->setTitle($this->language->get('heading_title'));
 		
     	if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->load->model('account/customer');
-
-			if ( $this->model_account_customer->editAvatar( $this->request->files ) ) {
+			$this->load->model('user/user');
+			
+			if ( $this->model_user_user->editUser($this->customer->getSlug(), array('avatar' => $this->request->files['avatar'])) ) {
 	      		$this->session->data['success'] = $this->language->get('text_success');
 		  
 		  		$this->redirect($this->extension->path('ChangeAvatar'));

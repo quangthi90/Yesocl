@@ -11,10 +11,10 @@ class ControllerAccountRegister extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
-		$this->load->model('account/customer');
+		$this->load->model('user/user');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_account_customer->addCustomer($this->request->post);
+			$this->model_user_user->addUser($this->request->post);
 			
 			$this->customer->login($this->request->post['email'], $this->request->post['password']);
 			
@@ -65,7 +65,7 @@ class ControllerAccountRegister extends Controller {
     	}elseif ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['warning'] = $this->language->get('error_email');
     	
-    	}elseif ($this->model_account_customer->getCustomerByEmail($this->request->post['email'])) {
+    	}elseif ( $this->model_user_user->getUserFull(array('email' => $this->request->post['email'])) ) {
       		$this->error['warning'] = $this->language->get('error_exists');
     	}else{
     		$this->load->library('recaptcha');
