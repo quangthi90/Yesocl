@@ -186,8 +186,9 @@ class ModelCompanyCompany extends Model {
 		$company->setCreated( new \Datetime( $data['created'] ) );
 		$company->setStatus( $data['status'] );
 
+		
+		$company->setBranchs( array() );
 		if ( isset($data['branchs']) || !empty($data['branchs']) ){
-			$company->setBranchs( array() );
 			foreach ( $data['branchs'] as $branch_id ) {
 				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $branch_id );
 				$company->addBranch( $branch );
