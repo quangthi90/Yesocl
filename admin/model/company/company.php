@@ -93,6 +93,8 @@ class ModelCompanyCompany extends Model {
 
 		$this->dm->persist( $company );
 
+		$this->dm->flush();
+
 		if ( !empty( $logo ) ) {
 			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
 				$company->setLogo( $data['logo'] );
