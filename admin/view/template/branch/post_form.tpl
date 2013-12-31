@@ -93,12 +93,12 @@
 <script type="text/javascript" src="view/javascript/ckeditor/ckeditor.js"></script> 
 <script type="text/javascript"><!--
 CKEDITOR.replace('post_content', {
-  filebrowserBrowseUrl: 'index.php?route=common/filemanager',
-  filebrowserImageBrowseUrl: 'index.php?route=common/filemanager',
-  filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager',
-  filebrowserUploadUrl: 'index.php?route=common/filemanager',
-  filebrowserImageUploadUrl: 'index.php?route=common/filemanager',
-  filebrowserFlashUploadUrl: 'index.php?route=common/filemanager'
+  filebrowserBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserImageBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserFlashBrowseUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserImageUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>',
+  filebrowserFlashUploadUrl: 'index.php?route=common/filemanager&token=<?php echo $token; ?>'
 });
 //--></script>
 <script type="text/javascript"><!--//

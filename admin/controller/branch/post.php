@@ -493,6 +493,8 @@ class ControllerBranchPost extends Controller {
 			$this->data['status'] = 1;
 		}
 
+		$this->data['token'] = $this->session->data['token'];
+
 		// template
 		$this->template = 'branch/post_form.tpl';
 
