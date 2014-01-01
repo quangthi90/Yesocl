@@ -5,7 +5,7 @@
 		this.notificationItem = el.find('.notification-item');
 		this.allNotificationBtn = el.find('.btn-notification');
 		this.allNotificationList = el.find('.notification-content-list');
-		this.notInclude = $('#y-container, #y-sidebar,#y-footer');
+		this.notInclude = $('#y-container, #y-sidebar,#y-footer, #toggle-user-menu');
 		this.attachEvents();
 	}
 	Notification.prototype.attachEvents = function() {

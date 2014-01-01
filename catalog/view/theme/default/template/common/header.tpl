@@ -41,7 +41,7 @@
           {#<a href="#">
 			    	<i class="icon-edit"></i>
 			    </a>#}
-			    <a class="dropdown-toggle toggle-user-menu btn-header-not-search" data-toggle="dropdown" href="#">
+			    <a class="dropdown-toggle toggle-user-menu btn-header-not-search" id="toggle-user-menu" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
 	    		</a>
 			    <ul class="dropdown-menu">

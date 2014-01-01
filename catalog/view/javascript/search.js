@@ -225,6 +225,14 @@
 	SearchAutoComplete.prototype.openSearchPanel = function() {
 		var that = this;
 
+		that.$notIncluding.each(function(){
+			var activeItems = $(this).parent('.active');
+			var openedItems = $(this).parent('.open');
+			if(activeItems.length > 0 || openedItems.length > 0){
+				$(this).trigger('click');
+			}
+		});
+
 		that.isOpened = true;
 		that.$root.slideDown(200, function(){			
 			$(that.$invokeCtrl).addClass('active');	
