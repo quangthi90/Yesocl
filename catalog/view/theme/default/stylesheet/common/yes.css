@@ -1328,6 +1328,7 @@ a.btn-notification:hover .notification-item-name > i {
 .img-previewer-container .post_image_item img {
   min-width: 200px;
   max-width: 435px;
+  max-height: 300px;
 }
 .img-previewer-container .alert strong {
   font-weight: bold;
