@@ -5,97 +5,84 @@ use Document\Company\Company,
 use MongoRegex;
 
 class ModelCompanyCompany extends Model {
-	public function addCompany( $data = array(), $logo = array() ) {
+	public function addCompany( $aData = array(), $aLogo = array() ) {
 		// name is required & isn't exist
-		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
-		}else {
+		if ( empty($aData['name']) || $this->isExistName($aData['name']) ){
 			return false;
 		}
 
 		// owner is required
-		if ( isset( $data['user_id'] ) ) {
-			$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
-
-			if ( empty( $user ) ) {
-				return false;
-			}
-		}else {
+		if ( empty($aData['user_id']) ){
 			return false;
 		}
 
 		// owner is required
-		if ( isset( $data['group'] ) ) {
-			$group = $this->dm->getRepository( 'Document\Company\Group' )->find( $data['group'] );
-
-			if ( empty( $group ) ) {
-				return false;
-			}
-		}else {
+		if ( empty($aData['group']) ){
 			return false;
 		}
-
-		// logo
-		if ( isset( $logo ) ) {
-  			if ( !$this->isValidLogo( $logo ) ) {
-  				return false;
-  			}
-  		}
-		else {
-			$logo = array();
-  		}
 
 		// description is required
-		if ( !isset( $data['description'] ) ) {
+		if ( empty( $aData['description'] ) ) {
 			return false;
 		}
 
-		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		$this->data['name'] = strtolower( trim( $aData['name'] ) );
+
+		$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $aData['user_id'] );
+		if ( !$oUser ) {
+			return false;
+		}
+
+		$oGroup = $this->dm->getRepository( 'Document\Company\Group' )->find( $aData['group'] );
+		if ( !$oGroup ) {
+			return false;
 		}
 
 		// Slug
-		$slug = $this->url->create_slug( $data['name'] );
-		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$slug/i") );
-
-		$arr_slugs = array_map(function($company){
-			return $company->getSlug();
-		}, $companies->toArray());
-
+		$sSlug = $this->url->create_slug( $aData['name'] );
+		$lCompanies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$sSlug/i") );
+		$aSlugs = array_map(function($oCompany){
+			return $oCompany->getSlug();
+		}, $lCompanies->toArray());
 		$this->load->model( 'tool/slug' );
-		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+		$sSlug = $this->model_tool_slug->getSlug( $sSlug, $aSlugs );
 		
-		$company = new Company();
-		$company->setSlug( $slug );
-		$company->setSlug( $slug . $expend );
-		$company->setName( $data['name'] );
-		$company->setOwner( $user );
-		$company->setGroup( $group );
-		$company->setDescription( $data['description'] );
-		$company->setCreated( new \Datetime( $data['created'] ) );
-		$company->setStatus( $data['status'] );
+		// Add Company
+		$oCompany = new Company();
+		$oCompany->setSlug( $sSlug );
+		$oCompany->setSlug( $sSlug . $expend );
+		$oCompany->setName( $aData['name'] );
+		$oCompany->setOwner( $oUser );
+		$oCompany->setGroup( $oGroup );
+		$oCompany->setDescription( $aData['description'] );
+		$oCompany->setCreated( new \Datetime( $aData['created'] ) );
+		$oCompany->setStatus( $aData['status'] );
 
-		if ( isset($data['branchs']) || !empty($data['branchs']) ){
-			$company->setBranchs( array() );
-			foreach ( $data['branchs'] as $branch_id ) {
-				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $branch_id );
-				$company->addBranch( $branch );
+		if ( isset($aData['branchs']) || !empty($aData['branchs']) ){
+			$oCompany->setBranchs( array() );
+			foreach ( $aData['branchs'] as $idBranchId ) {
+				$oBranch = $this->dm->getRepository('Document\Branch\Branch')->find( $idBranchId );
+				$oCompany->addBranch( $oBranch );
 			}
 		}
 
-		$group_member = new GroupMember();
-		$group_member->setName( $this->config->get('company')['default']['group_member_name'] );
-		$group_member->setStatus( true );
-		$group_member->setCanDel( false );
-		$this->dm->persist( $group_member );
-		$company->addGroupMember( $group_member );
+		$oGroupMember = new GroupMember();
+		$oGroupMember->setName( $this->config->get('company')['default']['group_member_name'] );
+		$oGroupMember->setStatus( true );
+		$oGroupMember->setCanDel( false );
+		$this->dm->persist( $oGroupMember );
+		$oCompany->addGroupMember( $oGroupMember );
 
-		$this->dm->persist( $company );
+		$this->dm->persist( $oCompany );
+		$this->dm->flush();
 
-		if ( !empty( $logo ) ) {
-			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
-				$company->setLogo( $data['logo'] );
+		$this->load->model('tool/image');
+		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
+			$folder_link = $this->config->get('company')['default']['image_link'];
+			$avatar_name = $this->config->get('company')['default']['avatar_name'];
+			$path = $folder_link . $oCompany->getId() . '/';
+			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
+				$oCompany->setLogo( $aData['logo'] );
 			}
 		}
 
@@ -104,99 +91,85 @@ class ModelCompanyCompany extends Model {
 		return true;
 	}
 
-	public function editCompany( $company_id, $data = array(), $logo = array() ) {
-		// name is required
-		if ( isset( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
-		}else {
+	public function editCompany( $idCompanyId, $aData = array(), $aLogo = array() ) {
+		// name is required & isn't exist
+		if ( empty($aData['name']) || $this->isExistName($aData['name']) ){
 			return false;
 		}
 
 		// owner is required
-		if ( isset( $data['user_id'] ) ) {
-			$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
-
-			if ( empty( $user ) ) {
-				return false;
-			}
-		}else {
+		if ( empty($aData['user_id']) ){
 			return false;
 		}
 
-		// logo
-		if ( isset( $logo ) && $logo['size'] > 0 ) {
-  			if ( !$this->isValidLogo( $logo ) ) {
-  				return false;
-  			}
-  		}
-		else {
-			$logo = array();
-  		}
-
-		// group is required
-		if ( isset( $data['group'] ) ) {
-			$group = $this->dm->getRepository( 'Document\Company\Group' )->find( $data['group'] );
-
-			if ( empty( $group ) ) {
-				return false;
-			}
-		}else {
+		// owner is required
+		if ( empty($aData['group']) ){
 			return false;
 		}
 
 		// description is required
-		if ( !isset( $data['description'] ) ) {
+		if ( empty( $aData['description'] ) ) {
 			return false;
 		}
 
-		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		$this->data['name'] = strtolower( trim( $aData['name'] ) );
+
+		$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $aData['user_id'] );
+		if ( !$oUser ) {
+			return false;
 		}
 
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
-		if ( empty( $company ) ) {
+		$oGroup = $this->dm->getRepository( 'Document\Company\Group' )->find( $aData['group'] );
+		if ( !$oGroup ) {
+			return false;
+		}
+
+		$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->find( $idCompanyId );
+		if ( !$oCompany ) {
 			return false;
 		}
 
 		// name is exist
-		/*if ( $company->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		/*if ( $oCompany->getName() != $aData['name'] && $this->isExistName( $aData['name'] ) ) {
 			return false;
 		}*/
 
 		// Slug
-		if ( $data['name'] != $company->getName() ){
-			$slug = $this->url->create_slug( $data['name'] );
-			$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$slug/i") );
-
-			$arr_slugs = array_map(function($company){
-				return $company->getSlug();
-			}, $companies->toArray());
-
+		if ( $aData['name'] != $oCompany->getName() ){
+			$sSlug = $this->url->create_slug( $aData['name'] );
+			$lCompanies = $this->dm->getRepository( 'Document\Company\Company' )->findBySlug( new MongoRegex("/^$sSlug/i") );
+			$aSlugs = array_map(function($oCompany){
+				return $oCompany->getSlug();
+			}, $lCompanies->toArray());
 			$this->load->model( 'tool/slug' );
-			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
-			
-			$company->setSlug( $slug );
+			$sSlug = $this->model_tool_slug->getSlug( $sSlug, $aSlugs );
+			$oCompany->setSlug( $sSlug );
 		}
 
-		$company->setName( $data['name'] );
-		$company->setOwner( $user );
-		$company->setGroup( $group );
-		$company->setDescription( $data['description'] );
-		$company->setCreated( new \Datetime( $data['created'] ) );
-		$company->setStatus( $data['status'] );
+		// Update Company Info
+		$oCompany->setName( $aData['name'] );
+		$oCompany->setOwner( $oUser );
+		$oCompany->setGroup( $oGroup );
+		$oCompany->setDescription( $aData['description'] );
+		$oCompany->setCreated( new \Datetime( $aData['created'] ) );
+		$oCompany->setStatus( $aData['status'] );
 
-		if ( isset($data['branchs']) || !empty($data['branchs']) ){
-			$company->setBranchs( array() );
-			foreach ( $data['branchs'] as $branch_id ) {
-				$branch = $this->dm->getRepository('Document\Branch\Branch')->find( $branch_id );
-				$company->addBranch( $branch );
+		
+		$oCompany->setBranchs( array() );
+		if ( isset($aData['branchs']) || !empty($aData['branchs']) ){
+			foreach ( $aData['branchs'] as $idBranchId ) {
+				$oBranch = $this->dm->getRepository('Document\Branch\Branch')->find( $idBranchId );
+				$oCompany->addBranch( $oBranch );
 			}
 		}
 
-		if ( !empty( $logo ) ) {exit;
-			if ( $data['logo'] = $this->uploadLogo( $company->getId(), $logo ) ) {
-				$company->setLogo( $data['logo'] );
+		$this->load->model('tool/image');
+		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
+			$folder_link = $this->config->get('company')['default']['image_link'];
+			$avatar_name = $this->config->get('company')['default']['avatar_name'];
+			$path = $folder_link . $oCompany->getId() . '/';
+			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
+				$oCompany->setLogo( $aData['logo'] );
 			}
 		}
 		
@@ -205,14 +178,14 @@ class ModelCompanyCompany extends Model {
 		return true;
 	}
 
-	public function deleteCompanies( $data = array() ) {
-		if ( isset( $data['id'] ) ) {
-			foreach ($data['id'] as $id) {
-				$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $id );
+	public function deleteCompanies( $aData = array() ) {
+		if ( isset( $aData['id'] ) ) {
+			foreach ($aData['id'] as $id) {
+				$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->find( $id );
 
-				if ( !empty( $company ) ) {
-					$this->delete_directory( DIR_IMAGE . 'data/catalog/company/' . $company->getId() );
-					$this->dm->remove( $company );
+				if ( !empty( $oCompany ) ) {
+					$this->delete_directory( DIR_IMAGE . 'data/catalog/company/' . $oCompany->getId() );
+					$this->dm->remove( $oCompany );
 				}
 			}
 		}
@@ -220,39 +193,39 @@ class ModelCompanyCompany extends Model {
 		$this->dm->flush();
 	}
 
-	public function getCompany( $company_id ) {
-		return $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
+	public function getCompany( $idCompanyId ) {
+		return $this->dm->getRepository( 'Document\Company\Company' )->find( $idCompanyId );
 	}
 
-	public function getCompanies( $data = array() ) {
-		if ( isset( $data['start'] ) && $data['start'] >= 0 ) {
-			$data['start'] = (int)$data['start'];
+	public function getCompanies( $aData = array() ) {
+		if ( isset( $aData['start'] ) && $aData['start'] >= 0 ) {
+			$aData['start'] = (int)$aData['start'];
 		}else {
-			$data['start'] = 0;
+			$aData['start'] = 0;
 		}
 
-		if ( isset( $data['limit'] ) && $data['limit'] > 0 ) {
-			$data['limit'] = (int)$data['limit'];
+		if ( isset( $aData['limit'] ) && $aData['limit'] > 0 ) {
+			$aData['limit'] = (int)$aData['limit'];
 		}else {
-			$data['limit'] = 10;
+			$aData['limit'] = 10;
 		}
 
 		$query = $this->dm->createQueryBuilder( 'Document\Company\Company' )
-    		->limit( $data['limit'] )
-    		->skip( $data['start'] );
+    		->limit( $aData['limit'] )
+    		->skip( $aData['start'] );
 
-		if ( isset( $data['filter_name'] ) ) {
-			$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
+		if ( isset( $aData['filter_name'] ) ) {
+			$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $aData['filter_name'] ) . '.*/i') );
 		}
 
-		if ( isset( $data['sort'] ) ) {
-			if ( isset( $data['order'] ) && $data['order'] == 'desc' ) {
-    			$query->sort( $data['sort'], 'desc' );
+		if ( isset( $aData['sort'] ) ) {
+			if ( isset( $aData['order'] ) && $aData['order'] == 'desc' ) {
+    			$query->sort( $aData['sort'], 'desc' );
     		}else {
-    			$query->sort( $data['sort'], 'asc' );
+    			$query->sort( $aData['sort'], 'asc' );
     		}
 		}else {
-			if ( isset( $data['order'] ) && $data['order'] == 'asc' ) {
+			if ( isset( $aData['order'] ) && $aData['order'] == 'asc' ) {
 				$query->sort( 'created', 'asc' );
 			}else {
 				$query->sort( 'created', 'desc' );
@@ -262,53 +235,53 @@ class ModelCompanyCompany extends Model {
 		return $query->getQuery()->execute();
 	}
 
-	public function getTotalCompanies( $data = array() ) {
+	public function getTotalCompanies( $aData = array() ) {
 		$query = $this->dm->createQueryBuilder( 'Document\Company\Company' );
 
-		if ( isset( $data['filter_name'] ) ) {
-    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $data['filter_name'] ) . '.*/i') );
+		if ( isset( $aData['filter_name'] ) ) {
+    		$query->field( 'name' )->equals( new \MongoRegex('/' . trim( $aData['filter_name'] ) . '.*/i') );
     	}
 
 		return count( $query->getQuery()->execute() );
 	}
 
 	public function isExistName( $name ) {
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->findOneBy( array( 'name' => strtolower( trim( $name ) ) ) );
+		$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->findOneBy( array( 'name' => strtolower( trim( $name ) ) ) );
 
-		if ( !empty( $company ) ) {
+		if ( !empty( $oCompany ) ) {
 			return true;
 		}else {
 			return false;
 		}
 	}
 
-	public function addFollower( $company_id, $user_id ) {
-		$user = $this->dm->getRepository( 'Document\User\User' )->find( $user_id );
-		if ( empty( $user ) ) {
+	public function addFollower( $idCompanyId, $oUser_id ) {
+		$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $oUser_id );
+		if ( empty( $oUser ) ) {
 			return false;
 		}
 
-		if ( $this->isExistFollower( $company_id, $user_id ) ) {
+		if ( $this->isExistFollower( $idCompanyId, $oUser_id ) ) {
 			return false;
 		}
 
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
-		if ( empty( $company ) ) {
+		$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->find( $idCompanyId );
+		if ( empty( $oCompany ) ) {
 			return false;
 		}
 
-		$company->addFollower( $user );
+		$oCompany->addFollower( $oUser );
 
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function isExistFollower( $company_id, $user_id ) {
-		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array( 'followers.id' => $user_id ) );
+	public function isExistFollower( $idCompanyId, $oUser_id ) {
+		$lCompanies = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array( 'followers.id' => $oUser_id ) );
 		
-		foreach ($companies as $company) {
-			if ( $company->getId() == $company_id  ) {
+		foreach ($lCompanies as $oCompany) {
+			if ( $oCompany->getId() == $idCompanyId  ) {
 				return true;
 			}
 		}
@@ -316,15 +289,15 @@ class ModelCompanyCompany extends Model {
 		return false;
 	}
 
-	public function removeFollowers( $company_id, $data = array() ) {
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
+	public function removeFollowers( $idCompanyId, $aData = array() ) {
+		$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->find( $idCompanyId );
 
-		if ( isset( $data['id'] ) ) {
-			foreach ( $data['id'] as $id ) {
-				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
+		if ( isset( $aData['id'] ) ) {
+			foreach ( $aData['id'] as $id ) {
+				$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $id );
 
-				if ( !empty( $user ) ) {
-					$company->getFollowers()->removeElement( $user );
+				if ( !empty( $oUser ) ) {
+					$oCompany->getFollowers()->removeElement( $oUser );
 				}
 			}
 		}
@@ -332,8 +305,8 @@ class ModelCompanyCompany extends Model {
 		$this->dm->flush();
 	}
 
-	public function addRelativeCompany( $company_id, $relative_id ) {
-		if ( $company_id == $relative_id ) {
+	public function addRelativeCompany( $idCompanyId, $relative_id ) {
+		if ( $idCompanyId == $relative_id ) {
 			return false;
 		}
 
@@ -342,27 +315,27 @@ class ModelCompanyCompany extends Model {
 			return false;
 		}
 
-		if ( $this->isExistRelativeCompany( $company_id, $relative_id ) ) {
+		if ( $this->isExistRelativeCompany( $idCompanyId, $relative_id ) ) {
 			return false;
 		}
 
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
-		if ( empty( $company ) ) {
+		$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->find( $idCompanyId );
+		if ( empty( $oCompany ) ) {
 			return false;
 		}
 
-		$company->addRelativeCompany( $relative );
+		$oCompany->addRelativeCompany( $relative );
 
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function isExistRelativeCompany( $company_id, $relative_id ) {
-		$companies = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array( 'relativeCompanies.id' => $relative_id ) );
+	public function isExistRelativeCompany( $idCompanyId, $relative_id ) {
+		$lCompanies = $this->dm->getRepository( 'Document\Company\Company' )->findBy( array( 'relativeCompanies.id' => $relative_id ) );
 		
-		foreach ($companies as $company) {
-			if ( $company->getId() == $company_id  ) {
+		foreach ($lCompanies as $oCompany) {
+			if ( $oCompany->getId() == $idCompanyId  ) {
 				return true;
 			}
 		}
@@ -370,15 +343,15 @@ class ModelCompanyCompany extends Model {
 		return false;
 	}
 
-	public function removeRelativeCompanies( $company_id, $data = array() ) {
-		$company = $this->dm->getRepository( 'Document\Company\Company' )->find( $company_id );
+	public function removeRelativeCompanies( $idCompanyId, $aData = array() ) {
+		$oCompany = $this->dm->getRepository( 'Document\Company\Company' )->find( $idCompanyId );
 
-		if ( isset( $data['id'] ) ) {
-			foreach ( $data['id'] as $id ) {
+		if ( isset( $aData['id'] ) ) {
+			foreach ( $aData['id'] as $id ) {
 				$relative = $this->dm->getRepository( 'Document\Company\Company' )->find( $id );
 
 				if ( !empty( $relative ) ) {
-					$company->getRelativeCompanies()->removeElement( $relative );
+					$oCompany->getRelativeCompanies()->removeElement( $relative );
 				}
 			}
 		}
@@ -402,9 +375,9 @@ class ModelCompanyCompany extends Model {
   		}
 	}
 
-	public function uploadLogo( $company_id, $logo ) {
-		$ext = end(explode(".", $logo["name"]));
-		$path = 'data/catalog/company/' . $company_id . '/logo.';
+	public function uploadLogo( $idCompanyId, $aLogo ) {
+		$ext = end(explode(".", $aLogo["name"]));
+		$path = 'data/catalog/company/' . $idCompanyId . '/logo.';
 		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
 			unlink($path . '.jpg');
 		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
@@ -427,11 +400,11 @@ class ModelCompanyCompany extends Model {
 			mkdir( DIR_IMAGE . 'data/catalog/company' );
 		}
 
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $company_id ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/company/' . $company_id );
+		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $idCompanyId ) ) {
+			mkdir( DIR_IMAGE . 'data/catalog/company/' . $idCompanyId );
 		}
 
-		if ( move_uploaded_file( $logo['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
+		if ( move_uploaded_file( $aLogo['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
 			return $path . $ext;
 		}else {
 			return false;

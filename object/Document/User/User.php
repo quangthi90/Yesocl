@@ -45,9 +45,6 @@ Class User {
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="users") */
     private $groupUser;
 
-	/** @MongoDB\ReferenceOne(targetDocument="Document\Social\Network", inversedBy="users") */
-    private $socialNetwork;
-
     /** @MongoDB\ReferenceMany(targetDocument="Document\Group\Group", mappedBy="author") */
 	private $groups = array();
 	
@@ -77,6 +74,9 @@ Class User {
 
 	/** @MongoDB\EmbedMany(targetDocument="Notification") */
 	private $notifications = array();
+
+	/** @MongoDB\Boolean */
+	private $isSocial;
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
@@ -404,6 +404,14 @@ Class User {
 
 	public function getNotifications(){
 		return $this->notifications;
+	}
+
+	public function setIsSocial( $isSocial ){
+		$this->isSocial = $isSocial;
+	}
+
+	public function getIsSocial(){
+		return $this->isSocial;
 	}
 
 	/**

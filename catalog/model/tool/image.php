@@ -78,16 +78,6 @@ class ModelToolImage extends Model {
 	public function uploadImage( $folder, $filename, $thumb ) {
 		$ext = end(explode(".", $thumb["name"]));
 
-		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
-			unlink($path . '.jpg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
-			unlink($path . '.jpeg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.gif' ) ) {
-			unlink($path . '.gif');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.png' ) ) {
-			unlink($path . '.png' );
-		}
-
 		$folder_names = explode('/', $folder);
 		$path = DIR_IMAGE;
 		

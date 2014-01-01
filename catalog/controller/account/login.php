@@ -66,7 +66,7 @@ class ControllerAccountLogin extends Controller {
     }elseif ( !isset( $this->request->post['remember'] ) ) {
       $this->request->post['remember'] = false;
     
-    }elseif (!$this->customer->login($this->request->post['email'], $this->request->post['password'], false, $this->request->post['remember'])) {
+    }elseif (!$this->customer->login($this->request->post['email'], $this->request->post['password'], $this->request->post['remember'])) {
         $this->error['warning'] = $this->language->get('error_login');
       }
 
@@ -78,137 +78,116 @@ class ControllerAccountLogin extends Controller {
   }
 
   public function facebookConnect() {
-    if ( isset($_GET['code']) ) {
-      $code = $_GET['code'];
-      $facebook_access_token_uri = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->facebook->getAppId() . '&redirect_uri=' . HTTP_SERVER . 'facebookcnt/' . '&client_secret=' . $this->facebook->getAppSecret() . '&code=' . $code;
-
-      $ch = curl_init(); 
-      curl_setopt($ch, CURLOPT_URL, $facebook_access_token_uri);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
-      $response = curl_exec($ch); 
-      curl_close($ch);
-   
-      // Get access token
-      $access_token = str_replace('access_token=', '', explode("&", $response)[0]);
+    if ( empty($this->request->post['data']) ){
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'not ok',
+        'error' => 'Facebook Data is empty'
+      )));
     }
 
-    if ( isset( $access_token ) ) {
-      // Get user infomation
-      $ch = curl_init(); 
-      curl_setopt($ch, CURLOPT_URL, "https://graph.facebook.com/me?access_token=$access_token");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
-      $response = curl_exec($ch); 
-      curl_close($ch);
-   
-      $customer_data = json_decode($response);
-    }
+    $aDatas = $this->request->post['data'];
 
-    if ( isset( $this->session->data['redirect'] ) ) {
-      $redirect_url = $this->session->data['redirect'];
-      unset( $this->session->data['redirect'] );
-    }else {
-      $redirect_url = HTTP_SERVER;
+    if ( empty($aDatas['email']) ){
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'not ok',
+        'error' => 'Your accout not have email, please update it in your facebook'
+      ))); 
     }
 
     $this->load->language('account/login');
-    if ( isset( $customer_data ) && isset( $customer_data->id ) ) {
-      $this->load->model('account/customer');
-      $user_config = $this->config->get('user');
+    $this->load->model('user/user');
+    $this->load->model('user/background');
 
-      $customer = $this->model_account_customer->getCustomerByEmail( $customer_data->email );
+    $oUser = $this->model_user_user->getUserFull( array('email' => $aDatas['email']) );
 
-      if ( $customer && $customer->getId() ) {
-        if ( !$customer->getSocialNetwork() || $customer->getSocialNetwork()->getCode() == $user_config['network']['default'] ) {
-          $this->session->data['error'] = $this->language->get('error_exist_connect');
-          $this->redirect( $redirect_url );
-        }else {
-          if ( !$this->customer->loginNetwork( array(
-            'email' => $customer->getPrimaryEmail()->getEmail(),
-            'network' => $customer->getSocialNetwork()->getCode(),
-            )
-          ) ) {
-            $this->session->data['error'] = $this->language->get('error_unable_connect');
-            $this->redirect( $redirect_url );
-          }
-        }
-      }else {
-        $data = array();
-
-        // id
-        if ( isset( $customer_data->id ) && $customer_data->email ) {
-          $data['id'] = $customer_data->id;
-
-          $ch = curl_init(); 
-          curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/' . $data['id'] .'/picture?type=large&redirect=false');
-          curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-          curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);    
-          $response = curl_exec($ch); 
-          curl_close($ch);
-       
-          $avatar = json_decode($response);
-          if ( isset( $avatar->data->url ) ) {
-            $data['avatar'] = $avatar->data->url;
-          }
-        }else {
-          $this->session->data['error'] = 'Error';
-          $this->redirect( $redirect_url );
-        }
-
-        // email
-        if ( isset( $customer_data->email ) && $customer_data->email ) {
-          $data['email'] = $customer_data->email;
-        }else {
-          $this->session->data['error'] = 'Error';
-          $this->redirect( $redirect_url );
-        }
-
-        // username
-        if ( isset( $customer_data->username ) ) {
-          $data['username'] = $customer_data->username;
-        }
-
-        // firstname
-        if ( isset( $customer_data->first_name ) ) {
-          $data['firstname'] = $customer_data->first_name;
-        }
-
-        // lastname
-        if ( isset( $customer_data->last_name ) ) {
-          $data['lastname'] = $customer_data->last_name;
-        }
-
-        // gender
-        if ( isset( $customer_data->gender ) ) {
-          $data['gender'] = ($customer_data->gender == 'male') ? 1 : 0;
-        }
-
-        // location
-        if ( isset( $customer_data->location ) ) {
-          $data['location'] = $customer_data->location->name;
-        }
-
-        // network type
-        $data['network'] = $user_config['network']['facebook'];
-
-        if ( !$this->model_account_customer->addCustomer( $data ) ) {
-          $this->session->data['error'] = $this->language->get('error_unable_connect');
-          $this->redirect( $redirect_url );
-        }
-
-        // login
-        if ( !$this->customer->loginNetwork( $data ) ) {
-          $this->session->data['error'] = $this->language->get('error_unable_connect');
-          $this->redirect( $redirect_url );
-        }
+    if ( $oUser ){
+      if ( !$oUser->getIsSocial() ){
+        return $this->response->setOutput(json_encode(array(
+          'success' => 'not ok',
+          'error' => 'Email already exists in the system'
+        )));
       }
 
-      $this->redirect( $redirect_url );
-    }else {
-      $this->session->data['error'] = $this->language->get('error_unable_connect');
-      $this->redirect( $redirect_url );
+      $this->customer->login( $aDatas['email'], '', false, true );
+
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'ok'
+      )));
     }
+    
+    // get avatar
+    $ch = curl_init(); 
+    curl_setopt($ch, CURLOPT_URL, 'https://graph.facebook.com/' . $aDatas['id'] .'/picture?type=large&redirect=false');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+    $response = json_decode(curl_exec($ch));
+    curl_close($ch);
+    
+    $sAvatarLink = DIR_IMAGE . 'data/upload/' . $aDatas['username'] . '.jpg';
+    copy($response->data->url, $sAvatarLink);
+
+    $oBirthday = new DateTime($aDatas['birthday']);
+    
+    $aUserData = array(
+      'firstname' => $aDatas['first_name'],
+      'lastname' => $aDatas['last_name'],
+      'sex' => $aDatas['gender'] == 'female' ? '2' : '1',
+      'email' => $aDatas['email'],
+      'avatar' => $sAvatarLink,
+      'location' => $aDatas['location'] ? $aDatas['location']['name'] : '',
+      'day' => $oBirthday->format('d'),
+      'month' => $oBirthday->format('m'),
+      'year' => $oBirthday->format('Y')
+    );
+
+    // Create basic user
+    $oUser = $this->model_user_user->addUser( $aUserData, true );
+
+    // Add Education
+    if ( !empty($aDatas['education']) ){
+      foreach ( $aDatas['education'] as $aEducation ) {
+        $aEducationData = array(
+          'school' => $aEducation['school']['name'],
+          'degree' => !empty($aEducation['degree']['name']) ? $aEducation['degree']['name'] : '',
+          'ended' => !empty($aEducation['year']['name']) ? $aEducation['year']['name'] : ''
+        );
+        $this->model_user_background->addEducation( $oUser->getId(), $aEducationData, true );
+      }
+    }
+
+    // Add Experience
+    if ( !empty($aDatas['work']) ){
+      foreach ( $aDatas['work'] as $aExperience ) {
+        $current = false;
+        if ( empty($aExperience['end_date']) ){
+          $current = true;
+        }
+        $ended = null;
+        if ( !empty($aExperience['end_date']) && $aExperience['end_date'] != '0000-00' ){
+          $ended = new DateTime($aExperience['end_date']);
+        }
+        $started = null;
+        if ( !empty($aExperience['start_date']) && $aExperience['start_date'] != '0000-00' ){
+          $started = new DateTime($aExperience['start_date']);
+        }
+        $aExperienceData = array(
+          'company' => $aExperience['employer']['name'],
+          'current' => $current,
+          'location' => $aExperience['location']['name'],
+          'started_month' => $started ? $started->format('m') : null,
+          'started_year' => $started ? $started->format('Y') : null,
+          'ended_month' => $ended ? $ended->format('m') : null,
+          'ended_year' => $ended ? $ended->format('Y') : null
+        );
+        $this->model_user_background->addExperience( $oUser->getId(), $aExperienceData, true );
+      }
+    }
+    // exit;
+    $this->customer->login( $aDatas['email'], '', false, true );
+
+    return $this->response->setOutput(json_encode(array(
+      'success' => 'ok'
+    )));
   }
 }
 ?>

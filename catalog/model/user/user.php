@@ -1,8 +1,140 @@
 <?php
 use Document\Friend\Friend,
 	Document\User\Notification;
+use Document\User\User,
+	Document\User\Meta,
+	Document\User\Meta\Email,
+	Document\User\Meta\Education,
+	Document\User\Meta\Experience,
+	Document\User\Meta\Location,
+	Document\User\Meta\Phone,
+	Document\User\Meta\Skill;
 
 class ModelUserUser extends Model {
+	public function addUser($data, $isSocial = false) {
+		if ( empty( $data['email'] ) ) {
+			return false;
+		}
+
+		$user_config = $this->config->get('user');
+		
+		$user_group_info = $this->dm->getRepository('Document\User\Group')->findOneByName( $user_config['default']['group_name']);
+		
+		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		
+		$meta = new Meta();
+		if ( !empty( $data['firstname'] ) ) {
+			$meta->setFirstname( $data['firstname'] );
+		}
+		if ( !empty( $data['lastname'] ) ) {
+			$meta->setLastname( $data['lastname'] );
+		}
+		if ( !empty( $data['month'] ) && !empty( $data['day'] ) && !empty( $data['year'] ) ) {
+			$meta->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
+		}
+		if ( !empty( $data['sex'] ) ) {
+			$meta->setSex( $data['sex'] );
+		}
+
+		if ( !empty($data['location']) ){
+			$location = new Location();
+			$location->setLocation( $data['location'] );
+			$meta->setLocation( $location );
+		}
+		
+		$email = new Email();
+		$email->setEmail( $data['email'] );
+		$email->setPrimary( true );
+
+		// Slug
+		$slug = $this->url->create_slug( $data['firstname'] . ' ' . $data['lastname'] );
+		
+		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+
+		$arr_slugs = array_map(function($user){
+			return $user->getSlug();
+		}, $users->toArray());
+
+		$this->load->model( 'tool/slug' );
+		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+
+      	$user = new User();
+      	$user->setSlug( $slug );
+      	$user->setMeta( $meta );
+      	$user->addEmail( $email );
+      	$user->setSalt( $salt );
+      	$user->setStatus( true );
+      	$user->setGroupUser( $user_group_info );
+      	if ( !$isSocial ) {
+      		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+      	}
+      	$user->setIsSocial( $isSocial );
+
+      	$this->dm->persist( $user );
+		$this->dm->flush();
+
+		if ( !empty($data['avatar']) ){
+      		$this->load->model('tool/image');
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId() . '/' . $avatar_name . '.jpg';
+			
+			$this->model_tool_image->moveFile( $data['avatar'], DIR_IMAGE . $path );
+			$user->setAvatar( $path );
+		}
+
+		$this->dm->flush();
+		// $this->language->load('mail/customer');
+		
+		/*$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+		
+		$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
+		
+		if (!$user_group_info['approval']) {
+			$message .= $this->language->get('text_login') . "\n";
+		} else {
+			$message .= $this->language->get('text_approval') . "\n";
+		}
+		
+		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
+		$message .= $this->language->get('text_services') . "\n\n";
+		$message .= $this->language->get('text_thanks') . "\n";
+		$message .= $this->config->get('config_name');
+		
+		$mail = new Mail();
+		$mail->protocol = $this->config->get('config_mail_protocol');
+		$mail->parameter = $this->config->get('config_mail_parameter');
+		$mail->hostname = $this->config->get('config_smtp_host');
+		$mail->username = $this->config->get('config_smtp_username');
+		$mail->password = $this->config->get('config_smtp_password');
+		$mail->port = $this->config->get('config_smtp_port');
+		$mail->timeout = $this->config->get('config_smtp_timeout');				
+		$mail->setTo($data['email']);
+		$mail->setFrom($this->config->get('config_email'));
+		$mail->setSender($this->config->get('config_name'));
+		$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
+		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
+		$mail->send();
+		
+		// Send to main admin email if new account email is enabled
+		if ($this->config->get('config_account_mail')) {
+			$mail->setTo($this->config->get('config_email'));
+			$mail->send();
+			
+			// Send to additional alert emails if new account email is enabled
+			$emails = explode(',', $this->config->get('config_alert_emails'));
+			
+			foreach ($emails as $email) {
+				if (strlen($email) > 0 && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
+					$mail->setTo($email);
+					$mail->send();
+				}
+			}
+		}*/
+
+		return $user;
+	}
+
 	public function editUser( $user_slug, $data = array() ){
 		$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user_slug );
 
@@ -35,6 +167,16 @@ class ModelUserUser extends Model {
 			$user->getFriends()->removeElement( $user->getFriendById( $data['unfriend'] ) );
 			$user2 = $this->dm->getRepository('Document\User\User')->find( $data['unfriend'] );
 			$user2->getFriends()->removeElement( $user2->getFriendBySlug( $user_slug ) );
+		}
+
+		$this->load->model('tool/image');
+		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ){
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $user->getId();
+			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
+				$user->setAvatar( $data['avatar'] );
+			}
 		}
 
 		$this->dm->flush();
@@ -70,6 +212,12 @@ class ModelUserUser extends Model {
 
 		if ( !empty($data['user_slug']) ){
 			return $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['user_slug'] );
+		}
+
+		if ( !empty($data['email']) ){
+			return $this->dm->getRepository('Document\User\User')->findOneBy( array(
+				'emails.email' => $data['email']
+			));
 		}
 
 		return null;

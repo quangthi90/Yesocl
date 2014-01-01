@@ -1,3 +1,11 @@
+{# list routing for js -- deleted after read #}
+<div id="list-routing" class="hidden">
+{% for key, link in routing %}
+  <div class="routing" data-page="{{ key }}" data-link="{{ link }}" ></div>
+{% endfor %}
+</div>
+{# end list routing #}
+
 <div id="y-header" class="outer-30">
     <div class="row-fluid">
         <div id="y-logo" class="span3">
@@ -21,8 +29,8 @@
                 <div class="span8">
                     <div class="login-social">
                         <ul>
-                            <li>
-                                <a href="{{ action.connect_face }}">
+                            <li class="btn-fb-login">
+                                <a href="#">
                                     <i class="icon-facebook"></i>
                                 </a>
                             </li>
