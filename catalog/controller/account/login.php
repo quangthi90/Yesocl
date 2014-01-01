@@ -79,10 +79,20 @@ class ControllerAccountLogin extends Controller {
 
   public function facebookConnect() {
     if ( empty($this->request->post['data']) ){
-      return false;
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'not ok',
+        'error' => 'Facebook Data is empty'
+      )));
     }
 
     $aDatas = $this->request->post['data'];
+
+    if ( empty($aDatas['email']) ){
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'not ok',
+        'error' => 'Your accout not have email, please update it in your facebook'
+      ))); 
+    }
 
     $this->load->language('account/login');
     $this->load->model('user/user');
