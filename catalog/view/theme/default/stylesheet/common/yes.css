@@ -644,11 +644,12 @@ a.btn-notification:hover .notification-item-name > i {
   border: 1px solid #ddd;
   border-top: none;
   opacity: 0;
-  padding: 10px 0px 10px 10px;
+  padding: 0px;
 }
 .notification-content-list.empty {
   width: 180px;
   font-weight: bold;
+  padding: 5px;
 }
 .notification-content-list .notification-content-item {
   overflow: hidden;
@@ -666,7 +667,6 @@ a.btn-notification:hover .notification-item-name > i {
   opacity: 1;
 }
 .notification-content-list .notification-content-item.unread{
-  border-left: 2px solid #009B77;
   background-color: #F5F5F5;
 }
 .notification-content-list .notification-content-item:last-child {
@@ -719,6 +719,9 @@ a.btn-notification:hover .notification-item-name > i {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.notification-item .mCustomScrollBox>.mCSB_scrollTools {
+  width: 5px;
+}
 .notification-item .mCSB_scrollTools .mCSB_draggerRail {
   width: 6px;
   background: #f0f0f0;
@@ -739,7 +742,7 @@ a.btn-notification:hover .notification-item-name > i {
   background: #009B77;
 }
 .notification-item .mCSB_container {
-  margin-right: 20px;
+  margin-right: 0px;
 }
 .notification-page {
 }

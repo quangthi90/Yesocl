@@ -69,6 +69,33 @@
 			    </ul>
 			</div>
 			<div id="user-notification" class="fr notification-group">
+        <div class="notification-item common js-notification-common" data-notification-count="5">
+          <a href="#" class="btn-notification btn-header-not-search js-btn-see-notify">
+            <i class="icon-bell"></i>
+            <span class="notification-item-count">5</span>
+          </a>
+          <div class="notification-content-list">
+            <ul>
+              {% for i in 0..8 %}
+              <li class="notification-content-item unread" data-link="#">
+                  <div class="notification-content-item-img">
+                    <a href="#">
+                      <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="Thiet" />
+                    </a>                    
+                  </div>
+                  <div class="notification-content-item-detail">
+                    <div class="notification-text">
+                      Thiet commented on your status .... 
+                    </div>
+                    <div class="notification-time">
+                      2 hours ago ^^
+                    </div>
+                  </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
         <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
           <a href="#" class="btn-notification btn-header-not-search js-btn-see-notify">
             <i class="icon-bell"></i>

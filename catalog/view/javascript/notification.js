@@ -17,16 +17,14 @@
 			if(!listNotification.hasClass('empty')){
 				listNotification.makeCustomScroll(false);	
 			}			
-			listNotification.css('opacity', '1').hide(10);
 			btnInvoke.on('click', function(e){
 				e.preventDefault();
 				var hasActive = me.hasClass('active');
-				that.allNotificationList.slideUp(10);
+				that.allNotificationList.css({'opacity': '0'});
 				that.notificationItem.removeClass('active');
 				if(!hasActive){
-					listNotification.slideDown(200, function(){
-						me.addClass('active');
-					});	
+					listNotification.css({'opacity': '1'});
+					me.addClass('active');
 				}
 			});
 		});
