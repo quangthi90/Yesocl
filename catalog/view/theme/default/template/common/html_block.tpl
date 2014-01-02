@@ -237,7 +237,7 @@
 						<a href="${href.post_detail}">${post.title}</a>
 					</h4>
 					<div class="post_image">
-						<img src="${post.image}" />
+						<img src="${post.image}" alt="${post.title}" />
 					</div>
 					<div class="post_text_raw">
 						{{html post.content}}
