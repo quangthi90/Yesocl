@@ -2723,4 +2723,110 @@ a.wall-link:hover {
   visibility: visible;
 }
 
+/* ======================================== START AVATAR ========================================== */
+#y-frm-avatar {
+  margin: 20px auto;
+  width: 800px;
+}
+#y-frm-avatar .frm-content {
+  padding: 10px 20px 20px 20px;
+}
+.avatar-step {
+  display: none;
+}
+.avatar-step.upload-container {
+  display: block;
+}
+.avatar-step.upload-container .img-previewer-container {  
+  margin-bottom: 20px;
+}
+.avatar-step.upload-container .drop-zone-show {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #8F8F8F;
+  background-color: #F0F0F0;
+  border: 2px dotted #ccc;
+  padding: 100px 0px;
+}
+.avatar-step.upload-container .y-progress {
+  margin-bottom: 15px;
+}
+.avatar-step.upload-container .drag-img-upload {
+}
+.avatar-step.upload-container .drag-img-upload {
+  text-align: center;
+}
+.avatar-step.upload-container .btn-upload {
+  position: relative;
+  padding: 10px 15px;
+}
+.avatar-step.upload-container .btn-upload:hover {
+  background-position: 0 -40px;
+}
+.avatar-step.upload-container .btn-upload span {
+  font-size: 15px;
+  font-weight: normal;
+}
+.avatar-step.upload-container .btn-upload span i {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.avatar-step.upload-container .btn-upload:hover span i {
+  color: #FFF;
+  font-weight: normal;
+}
+.avatar-step.upload-container .btn-upload input {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 147px;
+  cursor: pointer;
+  display: block;
+}
+.avatar-step.image-cropper {
+  display: none;
+  overflow: hidden;
+}
+.avatar-step.image-cropper .uploaded-image {
+  float: left;
+  height: 320px;
+  width: 550px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #F0F0F0;
+  background-color: #FAFAFA;
+}
+.avatar-step.image-cropper .uploaded-image > img {
+  position: absolute;
+  display: none;
+}
+.avatar-step.image-cropper .previewed-image {
+  float: right;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+.avatar-step.image-cropper .previewed-image .none-image {
+  width: 148px;
+  height: 148px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+}
+.avatar-step.image-cropper .previewed-image > img {  
+}
+.avatar-step.image-cropper .previewed-image label {
+  font-weight: bold;
+  text-align: center;
+}
+.avatar-step.image-cropper .image-buttons {
+  clear: both;
+  text-align: right;
+  padding: 20px 0px 0px 0px;
+}
+
+/* ======================================== END AVATAR ============================================ */
+
 /*END CUSTOM LIB's CSS*/
+
