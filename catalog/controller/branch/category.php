@@ -30,7 +30,7 @@ class ControllerBranchCategory extends Controller {
 			print("This category is not exist");
 			return false;
 		}
-		// print("hello"); exit;
+		
 		$this->data['category'] = array(
 			'id' => $oCategory->getId(),
 			'name' => $oCategory->getName(),
@@ -46,7 +46,7 @@ class ControllerBranchCategory extends Controller {
 		$iCount = 1;
 		$aPosts = array();
 		$aUsers = array();
-		print($iPostCount); exit;
+		
 		foreach ($lPosts as $i => $oPost) {
 			$aPost = $oPost->formatToCache();
 
@@ -68,14 +68,10 @@ class ControllerBranchCategory extends Controller {
 
 			// thumb
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 			}else{
 				$aPost['image'] = null;
 			}
-			
-			$aPost['href_user'] = $this->url->link('account/edit', 'user_slug=' . $aPost['user']['slug'], 'SSL');
-			$aPost['href_post'] = $this->url->link('post/detail', 'post_slug=' . $aPost['slug'] . '&post_type=' . $this->config->get('common')['type']['branch'], 'SSL');
-			$aPost['href_status'] = $this->url->link('post/comment/getComments', 'type_slug=' . $branch_slug, 'SSL');
 
 			$aPosts[] = $aPost;
 			
@@ -93,10 +89,10 @@ class ControllerBranchCategory extends Controller {
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/Category.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/post/Category.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/category.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/post/category.tpl';
 		} else {
-			$this->template = 'default/template/post/Category.tpl';
+			$this->template = 'default/template/post/category.tpl';
 		}
 		
 		$this->children = array(
