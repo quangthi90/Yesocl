@@ -184,7 +184,7 @@
 		                    </li>
 		                    <li class="divider"></li>
 		                    <li class="post-edit-btn">
-		                        <a href="#"><i class="icon-edit"></i>Edit</a>
+		                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
 		                    </li>
 		                    <li class="divider"></li>
 		                    <li class="post-delete-btn">

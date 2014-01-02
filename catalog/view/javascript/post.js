@@ -330,6 +330,14 @@
                 $(document).trigger('POST_SHOW_LIKED_BUTTON');
                 $(document).trigger('HORIZONTAL_POST');
                 $(document).trigger('DELETE_POST', [htmlOutput]);
+                $(document).trigger('EDIT_POST', [htmlOutput]);
+
+                htmlOutput.find('.link-popup').magnificPopup({
+                    type:'inline',
+                    midClick: true,
+                    removalDelay: 300,
+                    mainClass: 'mfp-fade'
+                });
 
                 jQuery(".timeago").timeago();
                 that.$content.val('');
@@ -483,7 +491,7 @@
         var that = this;
         this.$btn.click(function(e){
             e.preventDefault();
-
+            console.log(that.url);
             // Content
             $edit_post_form.find('.post-advance-content').code( that.content );
 
