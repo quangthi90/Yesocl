@@ -7,6 +7,13 @@ class ControllerBranchCategory extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		if ( empty($this->request->get['category_slug']) ){
+			print("Category slug is empty");
+			return false;
+		}
+
+		$sSlug = $this->request->get['category_slug'];
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
@@ -17,7 +24,12 @@ class ControllerBranchCategory extends Controller {
 		$this->load->model('tool/image');
 		$this->load->model('tool/cache');
 
-		$oCategory = $this->model_branch_category->getCategory( $this->request->get );
+		$oCategory = $this->model_branch_category->getCategory( array('category_slug' => $sSlug) );
+
+		if ( !$oCategory ){
+			print("This category is not exist");
+			return false;
+		}
 		
 		$this->data['category'] = array(
 			'id' => $oCategory->getId(),
