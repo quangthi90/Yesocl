@@ -30,7 +30,7 @@ class ControllerBranchCategory extends Controller {
 			print("This category is not exist");
 			return false;
 		}
-		
+		// print("hello"); exit;
 		$this->data['category'] = array(
 			'id' => $oCategory->getId(),
 			'name' => $oCategory->getName(),
@@ -46,7 +46,7 @@ class ControllerBranchCategory extends Controller {
 		$iCount = 1;
 		$aPosts = array();
 		$aUsers = array();
-
+		print($iPostCount); exit;
 		foreach ($lPosts as $i => $oPost) {
 			$aPost = $oPost->formatToCache();
 
