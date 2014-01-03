@@ -122,38 +122,10 @@
             that.$uploadedImage.fadeIn(200, function(){
                 $(this).Jcrop({
                     onChange: function(crop){
-                        if (parseInt(crop.w) > 0)
-                        {
-                            var rx = 150 / crop.w;
-                            var ry = 150 / crop.h;            
-                            that.$previewImage.css({
-                              width: Math.round(rx * that.$boundX) + 'px',
-                              height: Math.round(ry * that.$boundY) + 'px',
-                              marginLeft: '-' + Math.round(rx * crop.x) + 'px',
-                              marginTop: '-' + Math.round(ry * crop.y) + 'px'
-                            }).show(10);
-                            that.$nonePreviewImage.hide(10);
-                        }else {
-                            that.$nonePreviewImage.show(10);
-                            that.$previewImage.hide(10);
-                        }
+                        that.updatePreview(crop);
                     },
                     onSelect: function(crop){
-                        if (parseInt(crop.w) > 0)
-                        {
-                            var rx = 150 / crop.w;
-                            var ry = 150 / crop.h;            
-                            that.$previewImage.css({
-                              width: Math.round(rx * that.$boundX) + 'px',
-                              height: Math.round(ry * that.$boundY) + 'px',
-                              marginLeft: '-' + Math.round(rx * crop.x) + 'px',
-                              marginTop: '-' + Math.round(ry * crop.y) + 'px'
-                            }).show(10);
-                            that.$nonePreviewImage.hide(10);
-                        }else {
-                            that.$nonePreviewImage.show(10);
-                            that.$previewImage.hide(10);
-                        }
+                        that.updatePreview(crop);
                     },
                     aspectRatio: 1,
                     boxWidth: 550,
@@ -164,13 +136,10 @@
                     that.$boundY = bounds[1];
                     that.$jcropApi = this;
                 });
-            });        
-        });        
-
-        that.$saveAvatarBtn.on('click', function(e){
-            e.preventDefault();
-
+            }); 
+            that.$clearPreviewBtn.trigger('click');
         });
+        
         that.$chooseAvatarBtn.on('click', function(e){
             e.preventDefault();
             if(that.$jcropApi !== null ){
@@ -197,8 +166,42 @@
             e.preventDefault();
             that.$nonePreviewImage.show(10);
             that.$previewImage.hide(10);
+            that.$saveAvatarBtn.addClass('disabled');
             that.$jcropApi.release();
         });
+        that.$saveAvatarBtn.on('click', function(e){
+            e.preventDefault();
+            if($(this).hasClass('disabled')){
+                return false;
+            }
+            var cropX = $(this).data('crop-x');
+            var cropY = $(this).data('crop-y');
+            var cropW = $(this).data('crop-w');
+            alert('Crop Image -> X:' + cropX + ', Y:' + cropY + ', Width:' + cropW);
+        });
+    };
+    ImageCropper.prototype.updatePreview = function(crop) {
+        var that = this;
+        if (parseInt(crop.w) > 0)
+        {
+            var rx = 150 / crop.w;
+            var ry = 150 / crop.h;            
+            that.$previewImage.css({
+              width: Math.round(rx * that.$boundX) + 'px',
+              height: Math.round(ry * that.$boundY) + 'px',
+              marginLeft: '-' + Math.round(rx * crop.x) + 'px',
+              marginTop: '-' + Math.round(ry * crop.y) + 'px'
+            }).show(10);
+            that.$nonePreviewImage.hide(10);
+            that.$saveAvatarBtn.data('crop-x', Math.round(crop.x));
+            that.$saveAvatarBtn.data('crop-y', Math.round(crop.y));
+            that.$saveAvatarBtn.data('crop-w', Math.round(rx * that.$boundX));
+            that.$saveAvatarBtn.removeClass('disabled');
+        }else {
+            that.$nonePreviewImage.show(10);
+            that.$previewImage.hide(10);
+            that.$saveAvatarBtn.addClass('disabled');
+        }
     };
 
     $(function(){        
