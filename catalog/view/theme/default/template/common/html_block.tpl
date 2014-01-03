@@ -242,6 +242,9 @@
 					<div class="post_text_raw">
 						{{html post.content}}
 					</div>
+					<div class="post_text_editable" style="display: none;">
+						{{html post.content}}
+					</div>
 					{{if post.see_more == 1}}
 					<a class="yes-see-more" href="${href.post_detail}">See more <i class=" icon-double-angle-right"></i></a>
 					{{/if}}

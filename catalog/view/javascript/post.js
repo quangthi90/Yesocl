@@ -313,40 +313,60 @@
         promise.then(function(data) {
             if(data.success == 'ok'){
                 var htmlOutput = $.tmpl( $('#post-item-template'), data.post ); 
-                var firstColumn = that.blockContent.find('.column:first-child');            
+                var firstColumn = that.blockContent.find('.column:first-child');          
                 var newColumn = $('<div class="column">').append(htmlOutput);
-                newColumn.children('.post').height(firstColumn.height() - 2*(marginPostDefault + 1));
-                //newColumn.find('.post_text_raw').
-                newColumn.width(widthPostDefault);
+                newColumn.width(widthPostDefault);                
                 newColumn.css({
                     'opacity':'1', 
                     'min-width': widthPostDefault + 'px'
                 });
+                var post = newColumn.children('.post');
+                var postBody   = post.children('.post_body');
+                var postTitle  = postBody.children('.post_title');
+                var postImg    = postBody.children('.post_image');
+                var postTextRaw = postBody.children('.post_text_raw');
+                var imgInTextRaw = postTextRaw.find('img');
+                post.height(firstColumn.height() - 2*(marginPostDefault + 1));
+                postBody.height(post.height() - 65 - 10 - 22);
+                if(postTitle.length > 0){
+                    postImg.height(postBody.height()*0.6);
+                }else {
+                    postImg.height(postBody.height()*0.7);
+                }
+                var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+                postTextRaw.height(Math.floor(maxHeightText/20)*20);
+                if(imgInTextRaw.length > 0) {
+                    imgInTextRaw.hide(10);
+                }
+                //postTextRaw.truncate({
+                //    width: 'auto',
+                //    token: '&hellip;',
+                //    side: 'right',
+                //    multiline: true
+                //});
                 firstColumn.hide().after(newColumn).show(500);
                 that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
                 that.rootContent.getNiceScroll().resize();
 
-                $(document).trigger('POST_BUTTON');
-                $(document).trigger('POST_SHOW_LIKED_BUTTON');
-                $(document).trigger('HORIZONTAL_POST');
-                $(document).trigger('DELETE_POST', [htmlOutput]);
-                $(document).trigger('EDIT_POST', [htmlOutput]);
-
-                htmlOutput.find('.link-popup').magnificPopup({
+                post.find('.link-popup').magnificPopup({
                     type:'inline',
                     midClick: true,
                     removalDelay: 300,
                     mainClass: 'mfp-fade'
                 });
-
-                jQuery(".timeago").timeago();
+                $(".timeago").timeago();
                 that.$content.val('');
                 that.$advance_content.code('');
                 that.$advance_title.val('');
                 $post_add_form.find('.img-previewer-container').html('');
                 that.$el.find('.img-previewer-container').html('');
-
                 $('.mfp-ready').trigger('click');
+
+                $(document).trigger('POST_BUTTON');
+                $(document).trigger('POST_SHOW_LIKED_BUTTON');
+                $(document).trigger('HORIZONTAL_POST');
+                $(document).trigger('DELETE_POST', [htmlOutput]);
+                $(document).trigger('EDIT_POST', [htmlOutput]);                
             }
         });
     };
@@ -479,7 +499,7 @@
     function ShowEditAdvance($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-edit-btn');
-        this.content    = $el.find('.post_text_raw').html();
+        this.content    = $el.find('.post_text_editable').html();
         this.title      = $el.find('.post_title > a').html();
         this.$image     = $el.find('.post_image > img');
 
@@ -580,6 +600,7 @@
                 var $current_post = that.$el.data('post');
                 
                 $current_post.find('.post_text_raw').html( data.post.content );
+                $current_post.find('.post_text_editable').html( data.post.content );
                 $current_post.find('.post_title > a').html( data.post.title );
                 $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
 
