@@ -88,31 +88,35 @@
             .parent().addClass($.support.fileInput ? undefined : 'disabled');
     };
 
-    var boundX = 0;
-    var boundY = 0;
     function ImageCropper(imageUrl) {
         this.$uploadContainer = $('#avatar-choose-image');
         this.$imageCropper    = $('#avatar-edit-image');
         this.$imageUrl        = imageUrl;
         this.$uploadedImageContainer = this.$imageCropper.find('.uploaded-image');
         this.$previewedImageContainer = this.$imageCropper.find(".previewed-image");
+        this.$nonePreviewImage = this.$imageCropper.find('.none-image');
         this.$uploadedImage   = this.$imageCropper.find('#uploaded-image');
         this.$previewImage   = this.$imageCropper.find('#previewed-image');
-        this.$previewNoneImage = this.$imageCropper.find('#avatar-none-image');
         this.$saveAvatarBtn = this.$imageCropper.find('#avatar-save');
         this.$chooseAvatarBtn = this.$imageCropper.find('#avatar-re-choose-image');
+        this.$makeCircleBtn = this.$imageCropper.find('#make-circle-btn');
+        this.$clearPreviewBtn = this.$imageCropper.find('#make-clear-btn');
+        this.$boundX = 0;
+        this.$boundY = 0;
         this.$jcropApi = null;       
 
         this.attachEvents();
     };
     ImageCropper.prototype.attachEvents = function() {
         var that = this;
-        that.$previewImage.hide(10);
         that.$uploadContainer.fadeOut(300, function(){
             that.$imageCropper.fadeIn(400);    
         });
         var spinIcon = $('<span class="loadding-icon" style="display:block;text-align: center;"><i class="icon-spinner icon-spin icon-large"></i></span>') ;
         that.$uploadedImageContainer.append(spinIcon);
+        that.$previewImage.prop('src', that.$imageUrl).load(function(){
+            that.$nonePreviewImage.hide(10);
+        });
         that.$uploadedImage.prop('src', that.$imageUrl).load(function(){
             that.$uploadedImageContainer.find('.loadding-icon').remove();
             that.$uploadedImage.fadeIn(200, function(){
@@ -123,14 +127,34 @@
                             var rx = 150 / crop.w;
                             var ry = 150 / crop.h;            
                             that.$previewImage.css({
-                              width: Math.round(rx * boundX) + 'px',
-                              height: Math.round(ry * boundX) + 'px',
+                              width: Math.round(rx * that.$boundX) + 'px',
+                              height: Math.round(ry * that.$boundY) + 'px',
                               marginLeft: '-' + Math.round(rx * crop.x) + 'px',
                               marginTop: '-' + Math.round(ry * crop.y) + 'px'
                             }).show(10);
+                            that.$nonePreviewImage.hide(10);
+                        }else {
+                            that.$nonePreviewImage.show(10);
+                            that.$previewImage.hide(10);
                         }
                     },
-                    //onSelect: updatePreview,
+                    onSelect: function(crop){
+                        if (parseInt(crop.w) > 0)
+                        {
+                            var rx = 150 / crop.w;
+                            var ry = 150 / crop.h;            
+                            that.$previewImage.css({
+                              width: Math.round(rx * that.$boundX) + 'px',
+                              height: Math.round(ry * that.$boundY) + 'px',
+                              marginLeft: '-' + Math.round(rx * crop.x) + 'px',
+                              marginTop: '-' + Math.round(ry * crop.y) + 'px'
+                            }).show(10);
+                            that.$nonePreviewImage.hide(10);
+                        }else {
+                            that.$nonePreviewImage.show(10);
+                            that.$previewImage.hide(10);
+                        }
+                    },
                     aspectRatio: 1,
                     boxWidth: 550,
                     boxHeight: 320
@@ -139,7 +163,6 @@
                     that.$boundX = bounds[0];
                     that.$boundY = bounds[1];
                     that.$jcropApi = this;
-                    that.$previewedImageContainer.appendTo(that.$jcropApi.ui.holder);
                 });
             });        
         });        
@@ -152,12 +175,29 @@
             e.preventDefault();
             if(that.$jcropApi !== null ){
                 that.$jcropApi.destroy();
-            }
-            that.$imageCropper.fadeOut(400, function(){
+            }            
+            that.$imageCropper.fadeOut(300, function(){
+                that.$nonePreviewImage.show(10);
+                that.$previewImage.hide(10);
                 that.$uploadContainer.find('.post_image_item').remove();
-                that.$uploadContainer.find('.drop-zone-show').show();
-                that.$uploadContainer.fadeIn(300);
+                that.$uploadContainer.find('.drop-zone-show').show(100);
+                that.$uploadContainer.fadeIn(200);
             });
+        });
+        that.$makeCircleBtn.on('click', function(e){
+            e.preventDefault();
+            that.$previewedImageContainer.toggleClass('circle');
+            if(that.$previewedImageContainer.hasClass('circle')){
+                $(this).attr('data-original-title', 'Remove circle');
+            }else{
+                $(this).attr('data-original-title', 'Make circle');
+            }
+        });
+        that.$clearPreviewBtn.on('click', function(e){
+            e.preventDefault();
+            that.$nonePreviewImage.show(10);
+            that.$previewImage.hide(10);
+            that.$jcropApi.release();
         });
     };
 

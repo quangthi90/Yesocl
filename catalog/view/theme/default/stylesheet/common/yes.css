@@ -2803,7 +2803,10 @@ a.wall-link:hover {
   display: none;
 }
 .avatar-step.image-cropper .previewed-image {
-  float: right;
+  float: right;  
+  width: 150px;
+}
+.avatar-step.image-cropper .previewed-image .previewed-image-container {
   width: 150px;
   height: 150px;
   overflow: hidden;
@@ -2813,13 +2816,35 @@ a.wall-link:hover {
   height: 148px;
   background-color: #f0f0f0;
   border: 1px solid #ddd;
+  display: none;
 }
-.avatar-step.image-cropper .previewed-image > img {  
+.avatar-step.image-cropper .previewed-image img {  
+  max-width: none;
+}
+.avatar-step.image-cropper .previewed-image.circle .previewed-image-container {
+  border-radius: 50%;
 }
 .avatar-step.image-cropper .previewed-image label {
   font-weight: bold;
   text-align: center;
 }
+.avatar-step.image-cropper .previewed-image .preview-tools {
+  margin: 30px 0px 0px 0px;  
+  text-align: center;
+}
+.previewed-image .preview-tools .preview-tool-item {
+  padding: 5px 5px 3px 5px;
+  border: 1px solid #f0f0f0;
+  display: inline-block;
+}
+.previewed-image .preview-tools .preview-tool-item i {
+    font-size: 18px;
+}
+.previewed-image .preview-tools .preview-tool-item:hover {
+  background-color: #f0f0f0;
+  color: #009B77;
+}
+
 .avatar-step.image-cropper .image-buttons {
   clear: both;
   text-align: right;

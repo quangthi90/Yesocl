@@ -30,17 +30,22 @@
                 </div>
             </div>
             <div class="avatar-step image-cropper" id="avatar-edit-image">
-                <input type="hidden" name="edited-img-url" class="edited-img-url" value="" />
                 <div class="uploaded-image">
                     <img id="uploaded-image">                    
                 </div>
                 <div class="previewed-image">
                     <label>Preview avatar</label>
-                    <div class="none-image" id="avatar-none-image"></div>
-                    <img id="previewed-image">
+                    <div class="previewed-image-container">
+                        <div class="none-image"></div>
+                        <img id="previewed-image">
+                    </div>
+                    <div class="preview-tools">
+                        <a href="#" class="preview-tool-item" id="make-circle-btn" title="Make circle"><i class="icon-circle-blank"></i></a>
+                        <a href="#" class="preview-tool-item" id="make-clear-btn"  title="Clear"><i class="icon-eraser"></i></a>
+                    </div>  
                 </div>
                 <div class="image-buttons">
-                    <a href="#" class="btn btn-yes" id="avatar-save">Save avatar</a>
+                    <a href="#" class="btn btn-yes" data-has-image="false" data- id="avatar-save">Save avatar</a>
                     <a href="#" class="btn btn-yes" id="avatar-re-choose-image">Choose another image</a>
                     <a href="#" class="btn btn-yes">Cancel</a>
                 </div>
