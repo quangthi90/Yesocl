@@ -1,6 +1,7 @@
 <?php
 class ControllerCommonFileManager extends Controller {
 	private $error = array();
+	private $route = 'common/filemanager';
 	
 	public function index() {
 		$this->load->language('common/filemanager');
@@ -173,7 +174,7 @@ class ControllerCommonFileManager extends Controller {
 			$json['error'] = $this->language->get('error_directory');
 		}
 		
-		if (!$this->user->hasPermission('modify', 'common/filemanager')) {
+		if (!$this->user->hasPermission($this->route, $this->config->get('action_insert'))) {
       		$json['error'] = $this->language->get('error_permission');  
     	}
 		
@@ -205,7 +206,7 @@ class ControllerCommonFileManager extends Controller {
 			$json['error'] = $this->language->get('error_select');
 		}
 		
-		if (!$this->user->hasPermission('modify', 'common/filemanager')) {
+		if (!$this->user->hasPermission($this->route, $this->config->get('action_delete'))) {
       		$json['error'] = $this->language->get('error_permission');  
     	}
 		
@@ -277,7 +278,7 @@ class ControllerCommonFileManager extends Controller {
 			$json['error'] = $this->language->get('error_directory');
 		}
 		
-		if (!$this->user->hasPermission('modify', 'common/filemanager')) {
+		if (!$this->user->hasPermission($this->route, $this->config->get('action_move'))) {
       		$json['error'] = $this->language->get('error_permission');  
     	}
 		
@@ -321,7 +322,7 @@ class ControllerCommonFileManager extends Controller {
 			$json['error'] = $this->language->get('error_select');
 		}
 		
-		if (!$this->user->hasPermission('modify', 'common/filemanager')) {
+		if (!$this->user->hasPermission($this->route, $this->config->get('action_copy'))) {
       		$json['error'] = $this->language->get('error_permission');  
     	}	
 		
@@ -403,7 +404,7 @@ class ControllerCommonFileManager extends Controller {
 			}			
 		}
 		
-		if (!$this->user->hasPermission('modify', 'common/filemanager')) {
+		if (!$this->user->hasPermission($this->route, $this->config->get('action_rename'))) {
       		$json['error'] = $this->language->get('error_permission');  
     	}
 		
@@ -474,7 +475,7 @@ class ControllerCommonFileManager extends Controller {
 			$json['error'] = $this->language->get('error_directory');
 		}
 		
-		if (!$this->user->hasPermission('modify', 'common/filemanager')) {
+		if (!$this->user->hasPermission($this->route, $this->config->get('action_upload'))) {
       		$json['error'] = $this->language->get('error_permission');  
     	}
 		

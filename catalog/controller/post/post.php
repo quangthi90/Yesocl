@@ -245,7 +245,7 @@ class ControllerPostPost extends Controller {
                 $this->error['warning'] = $this->language->get( 'error_thumb');
             }
         
-        }elseif ( empty($this->request->get['user_slug']) ){
+        }elseif ( isset($this->request->get['user_slug']) && empty($this->request->get['user_slug']) ){
             $this->error['warning'] = 'user slug is empty';
         }
 

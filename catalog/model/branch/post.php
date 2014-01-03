@@ -26,7 +26,7 @@ class ModelBranchPost extends Model {
 			$likerIds = $post->getLikerIds();
 			$key = array_search( $data['likerId'], $likerIds );
 			
-			if ( $key === false ){
+			if ( !$likerIds || $key === false ){
 				$post->addLikerId( $data['likerId'] );
 			}else{
 				unset($likerIds[$key]);

@@ -45,11 +45,11 @@
 		    		<i class="icon-cog"></i>
 	    		</a>
 			    <ul class="dropdown-menu">
-			      	<li>
+			      	{#<li>
 			      		<a href="#">
 			      			<i class="icon-cogs"></i> Privacy settings
 		      			</a>
-		      		</li>
+		      		</li>#}
 			      	<li>
 			      		<a href="{{ path('ChangePassword') }}">
 			      			<i class="icon-unlock-alt"></i> Change password

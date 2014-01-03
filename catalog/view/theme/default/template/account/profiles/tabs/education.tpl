@@ -71,8 +71,8 @@
 					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="profiles-tabs-value">
-						<div class="profiles-tabs-value-item">{{ education.degree }}</div>
 						<div class="profiles-tabs-value-item">{{ education.school }}</div>
+						<div class="profiles-tabs-value-item">{{ education.degree }}</div>
 						<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
 					</div>
 				</div>
@@ -96,8 +96,8 @@
 			<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 			<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 			<div class="profiles-tabs-value">
-				<div class="profiles-tabs-value-item">${ degree }</div>
 				<div class="profiles-tabs-value-item">${ school }</div>
+				<div class="profiles-tabs-value-item">${ degree }</div>
 				<div class="profiles-tabs-value-item viewers">${ fieldofstudy }</div>
 			</div>
 		</div>
