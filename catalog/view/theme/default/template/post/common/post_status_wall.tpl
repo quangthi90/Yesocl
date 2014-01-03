@@ -25,7 +25,7 @@
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<button type="button" class="btn btn-yes btn-status">Post</button>
+						<a href="#" class="btn btn-yes btn-status">Post</a>
 					</div>
 				</div>
  			</div>

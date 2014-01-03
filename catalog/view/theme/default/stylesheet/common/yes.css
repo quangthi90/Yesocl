@@ -220,6 +220,9 @@ a:focus > i{
   -o-transition: background-position 0.1s linear;
   transition: background-position 0.1s linear;
 }
+.btn-yes > i.icon-spinner{
+  margin-right: 5px;
+}
 i.big-icon {
   font-size: 25px;
   text-align: left;
