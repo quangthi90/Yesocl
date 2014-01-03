@@ -95,7 +95,7 @@
                         <div class="post_body">
                             <div class="post_image">
                                 <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">
-                                    <img src="{{ post.image }}" alt="title">
+                                    <img src="{{ post.image }}" alt="{{ post.title }}">
                                 </a>                                
                             </div>
                             <div class="post_text_raw">

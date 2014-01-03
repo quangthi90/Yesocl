@@ -25,7 +25,10 @@ class ControllerCommonHeader extends Controller {
 
 			$user = $this->customer->getUser();
 
-			$notifications = $user->getNotifications();
+			if ( !$notifications = $user->getNotifications() ){
+				$notifications = array();
+			}
+			
 			$expire_time = new DateTime('now');
 			date_sub($expire_time, date_interval_create_from_date_string('7 days'));
 
