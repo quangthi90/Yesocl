@@ -38,9 +38,9 @@
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
-          {#<a href="#">
+          <a href="{{ path('MessagePage') }}">
 			    	<i class="icon-edit"></i>
-			    </a>#}
+			    </a>
 			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
 	    		</a>
@@ -98,7 +98,7 @@
             </ul>
           </div>
         </div>
-        {#<div class="notification-item message">
+        <div class="notification-item message">
           <a href="#" class="btn-notification">
             <i class="icon-envelope"></i>
             <span class="notification-item-count">5</span>
@@ -136,7 +136,7 @@
               </li>                   
             </ul>
           </div>
-        </div>#}
+        </div>
         {% set requests = get_request_friend() %}
         <div class="notification-item friend">
           <a href="#" class="btn-notification">

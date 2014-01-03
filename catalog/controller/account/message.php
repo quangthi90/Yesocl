@@ -1,5 +1,5 @@
 <?php  
-class ControllerCommonMessage extends Controller {
+class ControllerAccountMessage extends Controller {
 
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -11,10 +11,10 @@ class ControllerCommonMessage extends Controller {
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/message.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/common/message.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
 		} else {
-			$this->template = 'default/template/common/message.tpl';
+			$this->template = 'default/template/account/message.tpl';
 		}
 		
 		$this->children = array(
