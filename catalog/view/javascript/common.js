@@ -431,14 +431,13 @@ var yCurrUser = new CurrentUser();
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);		
-			//this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
 			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
 			this.blocks.css('margin-right', marginBlock + 'px');	
 			var totalWithContent = 0;	
 			this.blocks.each(function(index) {
 				var blockFeed = new BlockFeed($(this), heightPost,widthPost);
-				blockFeed.putFeed();	
-				totalWithContent += ($(this).outerWidth() + marginBlock);		
+				$(this).width(blockFeed.actualWidth);
+				totalWithContent += ($(this).outerWidth() + marginBlock);
 			});
 			this.root.width(totalWithContent + 10);
 			this.feeds.each(function() {
@@ -530,8 +529,7 @@ var yCurrUser = new CurrentUser();
 			this.columns.width(widthPost);
 			this.columns.css('margin-right', marginPost + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
-			this.blockContent.height(heightBlockContent);		
-			//this.blocks.css('max-width', (5/6)*this.widthMain + 'px');
+			this.blockContent.height(heightBlockContent);
 			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
 			var totalWithContent = 0;
 			this.blocks.each(function(index) {
@@ -539,7 +537,6 @@ var yCurrUser = new CurrentUser();
 					$(this).find('.block-header').css('visibility','hidden');
 				}
 				var blockFeed = new BlockFeed($(this), heightPost,widthPost);
-				blockFeed.putFeed();	
 				totalWithContent += $(this).outerWidth();	
 			});
 			this.root.width(totalWithContent + 10);
@@ -606,8 +603,11 @@ var yCurrUser = new CurrentUser();
 		this.blockEle = block;
 		this.listFeed = block.find('.feed-container');
 		this.numberFeed = block.find('.feed').length;
+		this.columns = block.find('.column');
 		this.heightAverPost = heightAverPost;
 		this.widthAverPost = widthAverPost;
+		this.actualWidth = 0;
+		this.putFeed();
 	}
 	BlockFeed.prototype.putFeed = function() {
 		this.listFeed.height(this.heightAverPost - 2);
@@ -633,6 +633,11 @@ var yCurrUser = new CurrentUser();
 				}			
 			});
 		}
+		var widthColumn = 0;
+		this.columns.each(function(){
+			widthColumn += $(this).outerWidth() + marginPost;
+		});
+		this.actualWidth = widthColumn;
 	}
 
 	/*
