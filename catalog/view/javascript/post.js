@@ -524,7 +524,7 @@
         var that = this;
         this.$btn.click(function(e){
             e.preventDefault();
-            console.log(that.url);
+            
             // Content
             $edit_post_form.find('.post-advance-content').code( that.content );
 
@@ -611,13 +611,22 @@
         promise.then(function(data) {
             if(data.success == 'ok'){
                 var $current_post = that.$el.data('post');
-                
-                $current_post.find('.post_text_raw').html( data.post.content );
+                var textRaw = $current_post.find('.post_text_raw');
+                textRaw.html( data.post.content );
+                setTimeout(function(){
+                    textRaw.truncate({
+                        width: 'auto',
+                        token: '&hellip;',
+                        side: 'right',
+                        multiline: true
+                    });
+                }, 500); 
                 $current_post.find('.post_text_editable').html( data.post.content );
                 $current_post.find('.post_title > a').html( data.post.title );
                 $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
 
                 $('.mfp-ready').trigger('click');
+                $(document).trigger('EDIT_POST', [$current_post]);
             }
         });
     };
