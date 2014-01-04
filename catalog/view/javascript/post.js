@@ -320,34 +320,39 @@
                     'opacity':'1', 
                     'min-width': widthPostDefault + 'px'
                 });
+                
+                //Adjust size of layout:
                 var post = newColumn.children('.post');
                 var postBody   = post.children('.post_body');
-                var postTitle  = postBody.children('.post_title');
-                var postImg    = postBody.children('.post_image');
-                var postTextRaw = postBody.children('.post_text_raw');
-                var imgInTextRaw = postTextRaw.find('img');
                 post.height(firstColumn.height() - 2*(marginPostDefault + 1));
                 postBody.height(post.height() - 65 - 10 - 22);
+                var postTitle  = postBody.children('.post_title');                
+                var postImg    = postBody.children('.post_image');
                 if(postTitle.length > 0){
                     postImg.height(postBody.height()*0.6);
                 }else {
                     postImg.height(postBody.height()*0.7);
                 }
+                var postTextRaw = postBody.children('.post_text_raw');                
                 var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
                 postTextRaw.height(Math.floor(maxHeightText/20)*20);
+                var imgInTextRaw = postTextRaw.find('img');
                 if(imgInTextRaw.length > 0) {
                     imgInTextRaw.hide(10);
-                }
-                //postTextRaw.truncate({
-                //    width: 'auto',
-                //    token: '&hellip;',
-                //    side: 'right',
-                //    multiline: true
-                //});
+                }                
                 firstColumn.hide().after(newColumn).show(500);
                 that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
                 that.rootContent.getNiceScroll().resize();
 
+                //Attach events:
+                setTimeout(function(){
+                    post.find('.post_text_raw').truncate({
+                        width: 'auto',
+                        token: '&hellip;',
+                        side: 'right',
+                        multiline: true
+                    });
+                }, 500); 
                 post.find('.link-popup').magnificPopup({
                     type:'inline',
                     midClick: true,
@@ -355,13 +360,16 @@
                     mainClass: 'mfp-fade'
                 });
                 $(".timeago").timeago();
-                that.$content.val('');
+
+                //Reset:
+                that.$content.mentionsInput('reset').height(40);
                 that.$advance_content.code('');
                 that.$advance_title.val('');
                 $post_add_form.find('.img-previewer-container').html('');
                 that.$el.find('.img-previewer-container').html('');
                 $('.mfp-ready').trigger('click');
 
+                //Rise events:
                 $(document).trigger('POST_BUTTON');
                 $(document).trigger('POST_SHOW_LIKED_BUTTON');
                 $(document).trigger('HORIZONTAL_POST');
@@ -409,6 +417,8 @@
         this.$btn       = $el.find('.post-delete-btn');
 
         this.url        = $el.data('url-delete');
+        this.mainContent = $('#y-main-content');
+        this.rootContent = $('#y-content');
 
         this.addEvents();
     }
@@ -458,9 +468,12 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
-            if(data.success == 'ok') {                   
+            if(data.success == 'ok') {
+                var widthColumn = that.$el.parent().outerWidth();                
                 that.$el.parent().css('opacity','0').slideUp(300, function(){
                     $(this).remove();
+                    that.mainContent.width(that.mainContent.width() - widthColumn);
+                    that.rootContent.getNiceScroll().resize();
                 });
             }else{
                 that.$el.parent().removeClass('deleting');
