@@ -233,12 +233,16 @@
 					</div>
 				</div>
 				<div class="post_body">
+					{{if post.title != null}}
 					<h4 class="post_title">
 						<a href="${href.post_detail}">${post.title}</a>
 					</h4>
+					{{/if}}
+					{{if post.image != null}}
 					<div class="post_image">
 						<img src="${post.image}" alt="${post.title}" />
 					</div>
+					{{/if}}
 					<div class="post_text_raw">
 						{{html post.content}}
 					</div>

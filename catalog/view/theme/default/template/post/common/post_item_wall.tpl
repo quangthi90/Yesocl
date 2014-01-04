@@ -72,9 +72,11 @@
 			</div>
 		</div>
 		<div class="post_body">
+			{% if post.title is not defined %}
 			<h4 class="post_title">
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
+			{% endif %}
 			{% if post.image != null %}
 				<div class="post_image">
 					<img src="{{ post.image }}" />

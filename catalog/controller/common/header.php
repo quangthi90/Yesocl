@@ -25,7 +25,7 @@ class ControllerCommonHeader extends Controller {
 
 			$user = $this->customer->getUser();
 
-			if ( !$notifications = $user->getNotifications() ){
+			if ( !$user || !$notifications = $user->getNotifications() ){
 				$notifications = array();
 			}
 			
