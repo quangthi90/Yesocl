@@ -2,7 +2,7 @@
 // Locale
 $_['code']                  = 'en';
 $_['direction']             = 'ltr';
-$_['date_format_short']     = 'd/m/Y';
+$_['date_format_short']     = 'd F Y';
 $_['date_format_long']      = 'd/m/Y h:i:s A';
 $_['date_format_full']      = 'c';
 $_['time_format']           = 'h:i:s A';

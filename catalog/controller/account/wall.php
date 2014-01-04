@@ -1,6 +1,7 @@
 <?php 
 class ControllerAccountWall extends Controller { 
 	private $iLimit = 20;
+	private $sDateSub = '15 days';
 
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
@@ -81,6 +82,12 @@ class ControllerAccountWall extends Controller {
 				$aPost['is_edit'] = false;
 			}
 
+			if ( $aPost['created'] < $sRecentTime ){
+				$aPost['date_format'] = $this->language->get('date_format_long');
+			}else{
+				$aPost['date_format'] = $this->language->get('date_format_full');
+			}
+
 			if ( !array_key_exists($oUser->getId(), $this->data['users']) ){
 				$aUser = $oUser->formatToCache();
 
@@ -101,7 +108,13 @@ class ControllerAccountWall extends Controller {
 		}
 
 		$this->data['post_type'] = $this->config->get('common')['type']['user'];
-		$this->data['date_format'] = $this->language->get('date_format_full');
+
+		// Date return
+		$this->data['date_format_short'] = $this->language->get('date_format_short');
+		$this->data['date_format_full'] = $this->language->get('date_format_full');
+		$sRecentTime = new DateTime('now');
+		date_sub( $sRecentTime, date_interval_create_from_date_string($this->sDateSub) );
+		$this->data['recent_time'] = $sRecentTime;
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'wall' );
