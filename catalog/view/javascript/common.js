@@ -635,7 +635,9 @@ var yCurrUser = new CurrentUser();
 		}
 		var widthColumn = 0;
 		this.columns.each(function(){
-			widthColumn += $(this).outerWidth() + marginPost;
+			if($(this).children().length > 0){
+				widthColumn += $(this).outerWidth() + marginPost;	
+			}
 		});
 		this.actualWidth = widthColumn;
 	}
