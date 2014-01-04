@@ -79,7 +79,7 @@ class ControllerCommonRefresh extends Controller {
 		// Get list post users
 		$lUsers = null;
 		if ( count($aUserPostIds) > 0 ){
-			$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
+			$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserPostIds) );
 		}
 
 		if ( $lUsers ){
