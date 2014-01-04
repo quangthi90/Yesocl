@@ -274,19 +274,19 @@
 			    	<div class="control-group">
 			    		<label for="sent-user" class="control-label">Send to</label>
 			    		<div class="controls">
-			    			<input type="text" class="sent-user" id="sent-user" class="sent-user">
+			    			<input type="text" class="sent-user" id="sent-user" class="sent-user js-message-to">
 			    		</div>
 		    		</div>
 		    		<div class="control-group">
 		    			<label for="sent-user" class="control-label">Content</label>
-			    		<textarea class="message-editor" placeholder="Write a message ..."></textarea>
+			    		<textarea class="message-editor js-message-content" placeholder="Write a message ..."></textarea>
 		    		</div>			    	
 			    </div>	
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<a href="#" class="btn btn-yes btn-send-msg">Send</a>
 						<label class="enter-option">
-							<input type="checkbox" class="enter-check" checked="checked"> Press enter to send
+							<input type="checkbox" class="enter-check js-btn-message-send" checked="checked"> Press enter to send
 						</label>           
 		            </div>
 			    </div>			    	

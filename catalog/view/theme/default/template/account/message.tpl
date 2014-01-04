@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block body %}
+{% set current_user = get_current_user() %}
 <div id="y-content" class="message-page">
 	<div id="y-main-content">
 		<div class="feed-block">
@@ -21,8 +22,8 @@
             <div class="block-content message-box">
             	<div class="user-box">
             		<div class="user-box-menu" id="user-box-menu">
-            			<a href="#">Inbox (10)</a>
-            			<a href="#">Other (10)</a>
+            			<a href="#">Inbox ({{ messages|length }})</a>
+            			{#<a href="#">Other (10)</a>#}
             		</div>
             		<div class="user-box-search" id="user-box-search">
             			<input type="text" id="message-search" placeholder="Search ..." />
@@ -30,14 +31,19 @@
             		<div class="user-box-users">
             			<div class="user-box-scroll">
             				<ul>
-            					{% for i in 1..30 %}
+            					{% for message in messages %}
+                                    {% if message.sender_id == current_user.id %}
+                                        {% set user = users[message.receipter_id] %}
+                                    {% else %}
+                                        {% set user = users[message.sender_id] %}
+                                    {% endif %}
 	            				<li class="user-message-li">
 	            					<a href="#" class="user-message-link">
-	            						<img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="wmthiet">
+	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
 	            						<span class="user-message-info">
-	            							<strong class="user-name">WM Thiet</strong>
+	            							<strong class="user-name">{{ user.username }}</strong>
 	            							<span class="message-overview">hello</span>
-	            							<span class="message-time">9:11</span>
+	            							<span class="message-time">{{ message.created|date('C') }}</span>
 	            						</span>
 	            					</a>          					
 	            				</li>
@@ -47,11 +53,21 @@
             		</div>
             	</div>
             	<div class="message-box-list">
+                    {% if messages|length > 0 %}
+                        {% set message = messages[0] %}
+                        {% if message.sender_id == current_user.id %}
+                            {% set user = users[message.receipter_id] %}
+                        {% else %}
+                            {% set user = users[message.sender_id] %}
+                        {% endif %}
+                    {% endif %}
             		<div class="mesasage-box-header">
             			<h3 class="message-box-name">
-            				WM Thiet
+                        {% if user is defined %}
+                            {{ user.username }}
+                        {% endif %}
             			</h3>
-            			<div class="message-box-tools dropdown">            				
+            			<div class="message-box-tools dropdown">
             				<a class="btn btn-yes dropdown-toggle tool-item" data-toggle="dropdown">
                                 <i class="icon-gear"></i>Action <i class="icon-caret-down"></i>
                            </a>
@@ -69,19 +85,16 @@
             		<div class="mesasage-box-body">
             			<div class="mesasage-box-container">
             				<ul>
-            					{% for i in 1..30 %}
+            					{% for message in curr_messages %}
+                                    {% set user = users[message.sender_id] %}
             					<li class="message-item">
             						<a href="#">
-            							<img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180">
+            							<img src="{{ user.avatar }}" alt="{{ user.username }}">
             						</a>
             						<div class="message-body">
-            							<h6 class="sender-name">WMThiet</h6>
-            							<span class="sender-time"><i class="icon-calendar"></i> 10:00 AM</span>
-            							<div class="message-content">
-            								Lipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            							</div>            							
+            							<h6 class="sender-name">{{ user.username }}</h6>
+            							<span class="sender-time"><i class="icon-calendar"></i> {{ user.created|date('c') }}</span>
+            							<div class="message-content">{{ user.content }}</div>
             						</div>
             						<div class="yes-dropdown">
 			                            <div class="dropdown">
@@ -96,6 +109,8 @@
 			                            </div>
 			                        </div>
             					</li>
+                                {% else %}
+                                Not have new message
             					{% endfor %}         					
             				</ul>
             			</div>

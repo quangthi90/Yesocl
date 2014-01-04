@@ -1,7 +1,6 @@
 <?php
 namespace Document\Friend;
-use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
-	Document\AbsObject\Post as AbstractPost;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /** @MongoDB\EmbeddedDocument */
 Class Message {
