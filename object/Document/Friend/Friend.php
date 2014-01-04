@@ -21,9 +21,6 @@ Class Friend {
     /** @MongoDB\Date */
 	private $created;
 
-	/** @MongoDB\EmbedMany(targetDocument="Message") */
-	private $messages = array();
-
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -56,17 +53,5 @@ Class Friend {
 
 	public function getCreated(){
 		return $this->created;
-	}
-
-	public function addMessage( Message $message ){
-		$this->messages[] = $message;
-	}
-
-	public function setMessages( $messages ){
-		$this->messages = $messages;
-	}
-
-	public function getMessages(){
-		return $this->messages;
 	}
 }

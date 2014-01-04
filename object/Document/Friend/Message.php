@@ -15,8 +15,11 @@ Class Message {
 	 */
 	private $content;
 
-	/** @MongoDB\Boolean */
-    private $sender; // true if friend is sender
+	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
+    private $sender;
+
+    /** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
+    private $receipter;
 
     /** @MongoDB\Boolean */
 	private $read; // true if message is read
@@ -48,6 +51,14 @@ Class Message {
 
 	public function getSender(){
 		return $this->sender;
+	}
+
+	public function setReceipter( $receipter ){
+		$this->receipter = $receipter;
+	}
+
+	public function getReceipter(){
+		return $this->receipter;
 	}
 
 	public function setRead( $read ){
