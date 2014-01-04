@@ -16,16 +16,16 @@
 			<div class="post_tool">
 				<div class="row-fluid">
 					<div class="span8 post_new_control">
-						<a href="#" id="insert-new-img">
-							<i class="icon-camera icon-2x"></i>
-							<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
+						<a href="#" id="insert-new-img" onclick="$('#img-upload').trigger('click'); return false;">
+							<i class="icon-camera icon-2x"></i>							
 						</a>
+						<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						<a href="#" title="Advance post" data-mfp-src="#post-advance-add-popup" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<button type="button" class="btn btn-yes btn-status">Post</button>
+						<a href="#" class="btn btn-yes btn-status">Post</a>
 					</div>
 				</div>
  			</div>
