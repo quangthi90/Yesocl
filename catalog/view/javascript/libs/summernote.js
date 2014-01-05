@@ -1266,7 +1266,6 @@
                   is_send_ajax = 0;
                 }
                 yListFriends = json.friends;
-                console.log(yListFriends);
               }
             });
           }

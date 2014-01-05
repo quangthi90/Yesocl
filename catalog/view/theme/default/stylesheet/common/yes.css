@@ -2595,7 +2595,7 @@ ul.user_actions li:hover i{
 }
 /* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */
 
-/*CUSTOM LIB's CSS*/
+/* ------------------------------ START CUSTOM LIB's CSS  ---------------------------------- */
 .comment-form .mentions-autocomplete-list {
   bottom: 100%;
 }
@@ -2636,17 +2636,17 @@ a.wall-link:hover {
 .note-tag-dialog .dropdown-menu > .active > a,
 .note-tag-dialog .dropdown-menu > .active > a:hover,
 .note-tag-dialog .dropdown-menu > .active > a:focus {
-  color: #ffffff;
+  color: #000;
   text-decoration: none;
   outline: 0;
-  background-color: #009B77;
-  background-image: -moz-linear-gradient(top, #009B77, #009B77);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009B77), to(#009B77));
-  background-image: -webkit-linear-gradient(top, #009B77, #009B77);
-  background-image: -o-linear-gradient(top, #009B77, #009B77);
-  background-image: linear-gradient(to bottom, #009B77, #009B77);
+  background-color: #EBEBEB;
+  background-image: -moz-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EBEBEB), to(#EBEBEB));
+  background-image: -webkit-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -o-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: linear-gradient(to bottom, #EBEBEB, #EBEBEB);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#009B77', endColorstr='#009B77', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EBEBEB', endColorstr='#EBEBEB', GradientType=0);
 }
 .note-tag-dialog .typeahead li > a {
   overflow: hidden;
@@ -2655,9 +2655,10 @@ a.wall-link:hover {
   width: 30px;
   height: 30px;
   float: left;
-  margin-right: 5px;
+  margin-right: 8px;
 }
-.note-tag-dialog .typeahead li > a > span.user-name {
+.note-tag-dialog .typeahead li > a:hover > span.user-name {
+  font-weight: bold;
 }
 .note-tag-dialog .tag-container {
   margin: 15px 0px;  
@@ -2718,5 +2719,67 @@ a.wall-link:hover {
   color: #0E0E0E;
   visibility: visible;
 }
+/* ---------------------------------- END CUSTOM LIB's CSS  ---------------------------------- */
+/* ------------------------------------- START TAG-USER -------------------------------------- */
+.tag-user-wrapper {
+}
+.tag-user-wrapper .typeahead{
+}
+.tag-user-wrapper .typeahead li {
+  display: block;
+}
+.tag-user-wrapper .dropdown-menu > .active > a,
+.tag-user-wrapper .dropdown-menu > .active > a:hover,
+.tag-user-wrapper .dropdown-menu > .active > a:focus {
+  color: #000;
+  text-decoration: none;
+  outline: 0;
+  background-color: #EBEBEB;
+  background-image: -moz-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EBEBEB), to(#EBEBEB));
+  background-image: -webkit-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -o-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: linear-gradient(to bottom, #EBEBEB, #EBEBEB);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EBEBEB', endColorstr='#EBEBEB', GradientType=0);
+}
+.tag-user-wrapper .typeahead li > a {
+  overflow: hidden;
+}
+.tag-user-wrapper .typeahead li > a > img {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 8px;
+}
+.tag-user-wrapper .typeahead li > a:hover > span.user-name {
+  font-weight: bold;
+}
+.tag-user-wrapper .tags-group {
+  border: 1px solid #F0F0F0;
+  padding: 8px 5px 5px 8px;
+  max-height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.tag-user-wrapper .tags-container {  
+}
+.tag-user-wrapper .tags-container .tagItem {
+  padding: 5px 8px;
+  margin: 2px;
+  display: inline-block;
+  background-color: #ddd;
+}
+.tag-user-wrapper .tagItem  .tag-name{
+  font-weight: bold;
+  font-size: 12px;
+}
+.tag-user-wrapper .tagItem  i.icon-remove{
+  margin-left: 10px;
+  color: #ccc;
+}
+.tag-user-wrapper .tagItem:hover  i.icon-remove{
+  color: #000;
+}
+/* ------------------------------------- START TAG-USER -------------------------------------- */
 
-/*END CUSTOM LIB's CSS*/

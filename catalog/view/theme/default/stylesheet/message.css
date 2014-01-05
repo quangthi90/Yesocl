@@ -202,9 +202,23 @@
     background-color: #fff;
 }
 #new-message-form .sent-user {
-    width: 98%;
-    height: 23px;
+    margin-bottom: 0px;
+    padding: 5px 0px;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;    
 }
+#new-message-form .sent-user:focus {    
+    outline: none;
+    border-color: rgba(82, 168, 236, 0.8);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
 #new-message-form .message-editor {
     width: 98%;
     height: 100px;    

@@ -270,13 +270,15 @@
 				<div class="dlg-title">
 			        <i class="icon-yes"></i> New Message
 			    </div>
-			    <div class="dlg-content">
+			    <div class="dlg-content tag-user-wrapper">
 			    	<div class="control-group">
 			    		<label for="sent-user" class="control-label">Send to</label>
-			    		<div class="controls">
-			    			<input type="text" class="sent-user" id="sent-user" class="sent-user js-message-to">
+			    		<div class="controls tags-group">
+			    			<span class="tags-container">		    			
+		    				</span>
+			    			<input type="text" class="sent-user tagText js-message-to" id="sent-user">
 			    		</div>
-		    		</div>
+		    		</div>		    		
 		    		<div class="control-group">
 		    			<label for="sent-user" class="control-label">Content</label>
 			    		<textarea class="message-editor js-message-content" placeholder="Write a message ..."></textarea>
@@ -284,9 +286,9 @@
 			    </div>	
 			    <div class="dlg-footer">
 			    	<div class="controls">
-			    		<a href="#" class="btn btn-yes btn-send-msg">Send</a>
+			    		<a href="#" class="btn btn-yes btn-send-msg js-btn-message-send">Send</a>
 						<label class="enter-option">
-							<input type="checkbox" class="enter-check js-btn-message-send" checked="checked"> Press enter to send
+							<input type="checkbox" class="enter-check" checked="checked"> Press enter to send
 						</label>           
 		            </div>
 			    </div>			    	
