@@ -43,7 +43,7 @@ class ControllerCommonHeader extends Controller {
 				if ( !array_key_exists($actor->getId(), $users) ){
 					$user = $actor->formatToCache();
 
-					$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'], 180, 180 );
+					$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'], 100, 100 );
 
 					$this->data['users'][$actor->getId()] = $user;
 				}
