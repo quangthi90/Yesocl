@@ -220,6 +220,9 @@ a:focus > i{
   -o-transition: background-position 0.1s linear;
   transition: background-position 0.1s linear;
 }
+.btn-yes > i.icon-spinner{
+  margin-right: 5px;
+}
 i.big-icon {
   font-size: 25px;
   text-align: left;
@@ -1287,6 +1290,7 @@ a.btn-notification:hover .notification-item-name > i {
   filter: alpha(opacity=0);
   width: 18px;
   height: 18px;
+  display: none;
 }
 .post_new .post_tool {
   padding: 2px 0px 0px 10px;

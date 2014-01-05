@@ -79,7 +79,7 @@ class ControllerCommonRefresh extends Controller {
 		// Get list post users
 		$lUsers = null;
 		if ( count($aUserPostIds) > 0 ){
-			$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
+			$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserPostIds) );
 		}
 
 		if ( $lUsers ){
@@ -91,8 +91,6 @@ class ControllerCommonRefresh extends Controller {
 				$this->data['users'][$aUser['id']] = $aUser;
 			}
 		}
-		
-		$this->data['date_format'] = $this->language->get('date_format_full');
 		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'refresh' );

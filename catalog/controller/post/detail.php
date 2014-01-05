@@ -76,7 +76,6 @@ class ControllerPostDetail extends Controller {
 
 		$this->data['comments'] = $this->model_tool_object->formatCommentOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
 		
-		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['is_user'] = $is_user;
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/detail.tpl')) {

@@ -72,7 +72,7 @@ class ControllerPostPost extends Controller {
                         'avatar' => $sAvatar,
                         'username' => $oPost->getAuthor()
                     ),
-                    'created' => $oPost->getCreated()->format( $this->language->get('date_format_full') ),
+                    'created' => $this->extension->dateFormat( $oPost->getCreated() ),
                     'image' => $sImage,
                     'title' => $oPost->getTitle(),
                     'content' => html_entity_decode($oPost->getContent()),

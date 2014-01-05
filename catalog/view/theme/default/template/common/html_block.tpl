@@ -37,7 +37,7 @@
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
-		                <button type="submit" class="btn btn-yes btn-post-advance">Post</button>
+		                <a href="#" class="btn btn-yes btn-post-advance">Post</a>
 		            </div>
 			    </div>		
 			</form>
@@ -161,7 +161,7 @@
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
-		                <button type="submit" class="btn btn-yes btn-post-advance">Post</button>
+		                <a href="#" class="btn btn-yes btn-post-advance">Post</a>
 		            </div>
 			    </div>		
 			</form>
