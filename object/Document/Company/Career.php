@@ -1,6 +1,7 @@
 <?php
 namespace Document\Company;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use DateTimeZone;
 
 /** @MongoDB\EmbeddedDocument */
 Class Career {
@@ -52,13 +53,13 @@ Class Career {
 
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
-		$this->joined = new \DateTime();
-		$this->updated = new \DateTime();
+		$this->joined = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->updated = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
 	}
 
 	/** @MongoDB\PreUpdate */
 	public function preUpdate(){
-		$this->updated = new \DateTime();
+		$this->updated = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
 	}
 
 	public function setUser( $user ){

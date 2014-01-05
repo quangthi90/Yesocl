@@ -1,6 +1,7 @@
 <?php
 namespace Document\Group;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use DateTimeZone;
 
 /** @MongoDB\Document(db="yesocl", collection="group") */
 Class Group {
@@ -185,7 +186,7 @@ Class Group {
 
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
-		$this->created = new \DateTime();
+		$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
 	}
 
 	public function setAuthor( $author ){

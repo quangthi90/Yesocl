@@ -2,6 +2,7 @@
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
 	Document\AbsObject\Post as AbstractPost;
+use DateTimeZone;
 
 /** @MongoDB\EmbeddedDocument */
 Class Notification {
@@ -39,7 +40,7 @@ Class Notification {
 
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
-		$this->created = new \DateTime();
+		$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
 		$this->read = false;
 		$this->status = true;
 	}
