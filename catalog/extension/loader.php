@@ -101,7 +101,7 @@ class ExtensionLoader
             return null;
         }
         $aUser = $oUser->formatToCache();
-        $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+        $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'], 180, 180 );
         
         return $aUser;
     }
