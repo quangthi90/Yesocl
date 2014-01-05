@@ -7,6 +7,7 @@ class ExtensionLoader
     private $session;
     private $load;
     private $registry;
+    private $recentTime;
 
     public function __construct(Twig_Environment $twig, $registry){
         $this->registry = $registry;
@@ -26,6 +27,10 @@ class ExtensionLoader
         foreach ($this->getFunctions() as $function) {
             $twig->addFunction( $function );
         }
+
+        // Default reference params
+        $this->recentTime = new DateTime();
+        date_sub( $this->recentTime, date_interval_create_from_date_string('15 days') );
     }
 
     public function getName(){
@@ -44,7 +49,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_flash', array($this, 'getFlash')),
             new Twig_SimpleFunction('get_friend_list', array($this, 'getFriendList')),
             new Twig_SimpleFunction('in_array', array($this, 'inArray')),
-            new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend'))
+            new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend')),
+            new Twig_SimpleFunction('date_format', array($this, 'dateFormat'))
         );
     }
 
@@ -151,5 +157,12 @@ class ExtensionLoader
         }
 
         return $returns;
+    }
+
+    public function dateFormat( $datetime ){
+        if ( $datetime < $this->recentTime ){
+            return $datetime->format( $this->registry->get('language')->get('date_format_short') );
+        }
+        return $datetime->format( $this->registry->get('language')->get('date_format_long') );
     }
 }

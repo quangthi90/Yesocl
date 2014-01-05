@@ -78,9 +78,7 @@ class ControllerBranchCategories extends Controller {
 			$this->data['users'][$aUser['id']] = $aUser;
 		}
 
-		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/categories.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/categories.tpl';

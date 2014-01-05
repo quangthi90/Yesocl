@@ -40,11 +40,7 @@
 				<div class="post_meta">
 					<span class="post_time fl">
 						<i class="icon-calendar"></i>
-						{% if post.created < recent_time %}
-						<d title="{{ post.created|date(date_format_short) }}">{{ post.created|date(date_format_short) }}</d>
-						{% else %}
-						<d class="timeago" title="{{ post.created|date(date_format_full) }}"></d>
-						{% endif %}
+						<d class="timeago" title="{{ date_format(post.created) }}"></d>
 					</span>
 					<span class="post_like fr">
 						<a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">

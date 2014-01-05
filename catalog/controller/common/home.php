@@ -69,9 +69,7 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['users'] = $aUsers;
 
-		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'home' );

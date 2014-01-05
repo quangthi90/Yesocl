@@ -92,8 +92,6 @@ class ControllerCommonRefresh extends Controller {
 			}
 		}
 		
-		$this->data['date_format'] = $this->language->get('date_format_full');
-		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'refresh' );
 

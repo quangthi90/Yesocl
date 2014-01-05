@@ -70,7 +70,7 @@ class ModelToolObject extends Model
 	                'post_type' => $post_type,
 	                'comment_id' => $comment['id']
 	            ));
-	            $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+	            $comment['created'] = $this->extension->dateFormat( $comment['created'] );
 	            $comment['is_liked'] = $liked;
 
 	            if ( $comment['user_id'] == $idCurrUserId ){
@@ -127,7 +127,7 @@ class ModelToolObject extends Model
             'post_type' => $post_type,
             'comment_id' => $comment['id']
         ));
-        $comment['created'] = $comment['created']->format( $this->language->get('date_format_full') );
+        $comment['created'] = $this->extension->dateFormat( $comment['created'] );
         $comment['is_liked'] = $liked;
         if ( $comment['user_id'] == $idCurrUserId ){
         	$comment['is_owner'] = true;
