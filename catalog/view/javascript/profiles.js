@@ -66,9 +66,9 @@
 			information_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 			information_main_body.makeCustomScroll();
 		}else if (type === 2) {
-		}else if (type === 3) {
-		}else if (type === 4) {
-		}else if(type === 5) {
+		}else if (type === 3) { // Education
+		}else if (type === 4) { // Experience
+		}else if(type === 5) {  // Skill
 		}
 	}
 
