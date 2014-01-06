@@ -2806,8 +2806,9 @@ a.wall-link:hover {
   width: 150px;
 }
 .avatar-step.image-cropper .previewed-image .previewed-image-container {
-  width: 150px;
+  width: 148px;
   height: 150px;
+  border: 1px solid #F0F0F0;
   overflow: hidden;
 }
 .avatar-step.image-cropper .previewed-image .none-image {

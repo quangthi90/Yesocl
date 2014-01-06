@@ -128,6 +128,7 @@
                         that.updatePreview(crop);
                     },
                     aspectRatio: 1,
+                    bgColor: '#FAFAFA',
                     boxWidth: 550,
                     boxHeight: 320
                 },function(){
