@@ -15,8 +15,19 @@
 			var btnInvoke = $(this).children('.btn-notification');
 			var listNotification = $(this).children('.notification-content-list');
 			if(!listNotification.hasClass('empty')){
-				listNotification.makeCustomScroll(false);	
-			}			
+				var notificationText = me.find('.notification-text');
+				notificationText.each(function(){
+					if($(this).height() > 32){
+						$(this).truncate({
+		                    width: 'auto',
+		                    token: '&hellip;',
+		                    side: 'right',
+		                    multiline: true
+		                });	
+					}					
+				});
+				listNotification.makeCustomScroll(false);				
+			}
 			btnInvoke.on('click', function(e){
 				e.preventDefault();
 				var hasActive = me.hasClass('active');
