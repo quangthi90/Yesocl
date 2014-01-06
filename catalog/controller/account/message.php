@@ -72,5 +72,30 @@ class ControllerAccountMessage extends Controller {
 										
 		$this->response->setOutput($this->twig_render());
 	}
+
+	public function send(){
+		if ( empty($this->request->post['user_slugs']) ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+		}
+
+		if ( empty($this->request->post['content']) ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'content is empty'
+            )));
+		}
+
+		$aSlugs = $this->request->post['user_slugs'];
+		$sContent = $this->request->post['content'];
+
+		$this->load->model('friend/message');
+		
+		foreach ( $aSlugs as $sSlug ) {
+			# code...
+		}
+	}
 }
 ?>

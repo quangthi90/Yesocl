@@ -71,12 +71,62 @@
         });
         that.$sendBtn.click(function(e){
             e.preventDefault();
-            var tagedUsers = that.$subject.data('users'); 
-            if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
-                that.$subject.focus();
+            
+            if ( that.validate() == false ){
                 return false;
-            }            
-        });        
+            }
+            
+            that.submit(that.$sendBtn);
+
+            return false;
+        });
+    };
+
+    MessageForm.prototype.submit = function($button) {
+        var that = this;        
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  yRouting.generate('MessageSend'),
+            data: {
+                user_slugs: this.$subject.data('users'),
+                content: this.$content.val()
+            },
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) { 
+            if(data.success == 'ok'){
+                $('.mfp-ready').trigger('click');
+            }
+        });
+    };
+
+    MessageForm.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    MessageForm.prototype.validate = function() {
+        var tagedUsers = this.$subject.data('users');
+        if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
+            this.$subject.focus();
+            return false;
+        }else if( this.$content.length == 0 ){
+            return false;
+        }
+        return true;
     };
 
     $(document).ready(function() {
