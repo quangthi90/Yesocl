@@ -20,19 +20,12 @@ class ControllerAccountMessage extends Controller {
 		foreach ( $aMessages as $key => $oMessage ) {
 			$this->data['messages'][] = array(
 				'content' 		=> $oMessage->getContent(),
-				'sender_id' 	=> $oMessage->getSender()->getId(),
-				'receipter_id' 	=> $oMessage->getReceipter()->getId(),
+				'object_id' 	=> $oMessage->getObject()->getId(),
+				'is_sender'		=> $oMessage->getIsSender(),
 				'created' 		=> $oMessage->getCreated()
 			);
 
-			if ( $oMessage->getSender()->getId() != $idCurrentUser ){
-				$oUser = $oMessage->getSender();
-			}elseif ( $oMessage->getReceipter()->getId() != $idCurrentUser ){
-				$oUser = $oMessage->getReceipter();
-			}else{
-				continue;
-			}
-
+			$oUser = $oMessage->getObject();
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 			$this->data['users'][$aUser['id']] = $aUser;
@@ -41,18 +34,14 @@ class ControllerAccountMessage extends Controller {
 		$this->data['curr_messages'] = array();
 		if ( count($aMessages) > 0 ){
 			$oMessage = $aMessages[0];
-			if ( $oMessage->getSender()->getId() == $$idCurrentUser ){
-				$oUser = $oMessage->getReceipter();
-			}else{
-				$oUser = $oMessage->getSender();
-			}
+			$this->data['object_id'] = $oMessage->getObject()->getId();
 
-			$aMessages = $this->model_friend_message->getMessagesByUser( $idCurrentUser, $oUser->getId() );
+			$aMessages = $this->model_friend_message->getMessagesByUser( $idCurrentUser, $this->data['object_id'] );
 			foreach ( $aMessages as $oMessage ) {
 				$this->data['curr_messages'][] = array(
 					'content' 		=> $oMessage->getContent(),
-					'sender_id' 	=> $oMessage->getSender()->getId(),
-					'receipter_id' 	=> $oMessage->getReceipter()->getId(),
+					'object_id' 	=> $oMessage->getObject()->getId(),
+					'is_sender'		=> $oMessage->getIsSender(),
 					'created' 		=> $oMessage->getCreated()
 				);
 			}
@@ -92,10 +81,18 @@ class ControllerAccountMessage extends Controller {
 		$sContent = $this->request->post['content'];
 
 		$this->load->model('friend/message');
-		
-		foreach ( $aSlugs as $sSlug ) {
-			# code...
+		$result = $this->model_friend_message->send( $this->customer->getId(), $aSlugs, $sContent );
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'send message not success'
+            )));
 		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
 	}
 }
 ?>

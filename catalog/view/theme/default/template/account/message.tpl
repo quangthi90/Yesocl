@@ -32,11 +32,7 @@
             			<div class="user-box-scroll">
             				<ul>
             					{% for message in messages %}
-                                    {% if message.sender_id == current_user.id %}
-                                        {% set user = users[message.receipter_id] %}
-                                    {% else %}
-                                        {% set user = users[message.sender_id] %}
-                                    {% endif %}
+                                    {% set user = users[message.object_id] %}
 	            				<li class="user-message-li">
 	            					<a href="#" class="user-message-link">
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
@@ -55,11 +51,7 @@
             	<div class="message-box-list">
                     {% if messages|length > 0 %}
                         {% set message = messages[0] %}
-                        {% if message.sender_id == current_user.id %}
-                            {% set user = users[message.receipter_id] %}
-                        {% else %}
-                            {% set user = users[message.sender_id] %}
-                        {% endif %}
+                        {% set user = users[message.object_id] %}
                     {% endif %}
             		<div class="mesasage-box-header">
             			<h3 class="message-box-name">
@@ -86,7 +78,7 @@
             			<div class="mesasage-box-container">
             				<ul>
             					{% for message in curr_messages %}
-                                    {% set user = users[message.sender_id] %}
+                                    {% set user = users[object_id] %}
             					<li class="message-item">
             						<a href="#">
             							<img src="{{ user.avatar }}" alt="{{ user.username }}">

@@ -1,4 +1,7 @@
 <?php
+use Document\Friend\Messages,
+	Document\Friend\Message;
+
 class ModelFriendMessage extends Model {
 	/**
 	 * Get last 20 users have new message
@@ -27,6 +30,7 @@ class ModelFriendMessage extends Model {
 		$iCountMessages = count( $aMessages );
 		$iIndex = 1;
 		$aMessageUsers = array();
+		$aUserIds = array();
 
 		for ( $i = $iCountMessages - 1; $i >= 0; $i-- ) { 
 			if ( count($aMessageUsers) == $iLimit ){
@@ -38,13 +42,11 @@ class ModelFriendMessage extends Model {
 			}
 
 			$oMessage = $aMessages[$i];
-			$idSender = $oMessage->getSender()->getId();
-			$idReceipter = $oMessage->getReceipter()->getId();
+			$idObjectUser = $oMessage->getObject()->getId();
 
-			if ( empty($aMessageUsers[$idSender]) && $idSender != $oUser->getId() ){
-				$aMessageUsers[$idSender] = $oMessage;
-			}elseif ( empty($aMessageUsers[$idReceipter]) && $idReceipter != $oUser->getId() ){
-				$aMessageUsers[$idReceipter] = $oMessage;
+			if ( empty($aUserIds[$idObjectUser]) ){
+				$aMessageUsers[] = $oMessage;
+				$aUserIds[$idObjectUser] = $idObjectUser;
 			}else{
 				continue;
 			}
@@ -85,20 +87,12 @@ class ModelFriendMessage extends Model {
 			}
 
 			$oMessage = $aMessages[$i];
-			$idSender = $oMessage->getSender()->getId();
-			$idReceipter = $oMessage->getReceipter()->getId();
 
-			if ( $iIndex < $iStart || ($idObjectUser != $idSender && $idObjectUser != $idReceipter) ){
+			if ( $iIndex < $iStart || $idObjectUser != $oMessage->getObject()->getId() ){
 				continue;
 			}
 
-			if ( empty($aMessageUsers[$idSender]) && $idSender != $oUser->getId() ){
-				$aMessageUsers[$idSender] = $oMessage;
-			}elseif ( empty($aMessageUsers[$idReceipter]) && $idReceipter != $oUser->getId() ){
-				$aMessageUsers[$idReceipter] = $oMessage;
-			}else{
-				continue;
-			}
+			$aMessageUsers[] = $oMessage;
 
 			$iIndex++;
 		}
@@ -110,51 +104,60 @@ class ModelFriendMessage extends Model {
 	 * Send Message
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: 
-	 * 	- Object MongoID Current User
-	 *	- Object MongoID Object User
+	 * 	- Object MongoID User Send
+	 *	- Array String Slug Users Receipt
 	 * 	- Int start
 	 *	- Int Limit
-	 * @return: array objects Message
+	 * @return: Boolean
 	 */
-	public function getMessagesByUser( $idUserFrom, $idUserTo, $sContent ){
-		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
-			'user.id' => $idCurrUser
+	public function send( $idUserFrom, $aUserToSlugs, $sContent ){
+		$oFromMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
+			'user.id' => $idUserFrom
 		));
 
-		if ( !$oMessages ){
-			return null;
+		if ( !$oFromMessages ){
+			$oFromMessages = new Messages();
+			$oUserFrom = $this->dm->getRepository('Document\User\User')->find( $idUserFrom );
+			$oFromMessages->setUser( $oUserFrom );
+			$this->dm->persist( $oFromMessages );
+		}else{
+			$oUserFrom = $oFromMessages->getUser();
+		}
+
+		if ( !$oUserFrom ){
+			return false;
 		}
 		
-		$aMessages = $oMessages->getMessages()->toArray();
-		$iCountMessages = count( $aMessages );
-		$iIndex = 1;
-		$aMessageUsers = array();
-
-		for ( $i = $iCountMessages - 1; $i >= 0; $i-- ) { 
-			if ( count($aMessageUsers) == $iLimit ){
-				break;
-			}
-
-			$oMessage = $aMessages[$i];
-			$idSender = $oMessage->getSender()->getId();
-			$idReceipter = $oMessage->getReceipter()->getId();
-
-			if ( $iIndex < $iStart || ($idObjectUser != $idSender && $idObjectUser != $idReceipter) ){
+		foreach ( $aUserToSlugs as $sUserToSlug ) {
+			$oUserTo = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserToSlug );
+			if ( !$oUserTo ){
 				continue;
 			}
 
-			if ( empty($aMessageUsers[$idSender]) && $idSender != $oUser->getId() ){
-				$aMessageUsers[$idSender] = $oMessage;
-			}elseif ( empty($aMessageUsers[$idReceipter]) && $idReceipter != $oUser->getId() ){
-				$aMessageUsers[$idReceipter] = $oMessage;
-			}else{
-				continue;
-			}
+			$oMessage = new Message();
+			$oMessage->setObject( $oUserTo );
+			$oMessage->setIsSender( true );
+			$oMessage->setContent( $sContent );
+			$oMessage->setRead( true );
+			$oFromMessages->addMessage( $oMessage );
 
-			$iIndex++;
+			$oToMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
+				'user.id' => $oUserTo->getId()
+			));
+			if ( !$oToMessages ){
+				$oToMessages = new Messages();
+				$oToMessages->setUser( $oUserTo );
+				$this->dm->persist( $oToMessages );
+			}
+			$oMessage->setObject( $oUserFrom );
+			$oMessage->setIsSender( false );
+			$oMessage->setRead( false );
+			$oToMessages->addMessage( $oMessage );
 		}
 
-		return $aMessageUsers;
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>

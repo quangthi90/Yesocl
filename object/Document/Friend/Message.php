@@ -15,10 +15,10 @@ Class Message {
 	private $content;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
-    private $sender;
+    private $object;
 
-    /** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
-    private $receipter;
+    /** @MongoDB\Boolean */ // true if user is sender
+    private $isSender;
 
     /** @MongoDB\Boolean */
 	private $read; // true if message is read
@@ -44,20 +44,20 @@ Class Message {
 		return $this->content;
 	}
 
-	public function setSender( $sender ){
-		$this->sender = $sender;
+	public function setobject( $object ){
+		$this->object = $object;
 	}
 
-	public function getSender(){
-		return $this->sender;
+	public function getObject(){
+		return $this->object;
 	}
 
-	public function setReceipter( $receipter ){
-		$this->receipter = $receipter;
+	public function setIsSender( $isSender ){
+		$this->isSender = $isSender;
 	}
 
-	public function getReceipter(){
-		return $this->receipter;
+	public function getIsSender(){
+		return $this->isSender;
 	}
 
 	public function setRead( $read ){
