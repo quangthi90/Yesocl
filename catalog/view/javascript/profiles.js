@@ -60,15 +60,33 @@
 			that.updateScroll(data.type);
 		});
 	}
-	ProfilesLayout.prototype.updateScroll = function(type) {
-		if(type === 1) {
+	ProfilesLayout.prototype.updateScroll = function(type) {		
+		if(type === 1) {			
 			var information_main_body = this.$information.find('.profiles-tabs-main-body');
 			information_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 			information_main_body.makeCustomScroll();
 		}else if (type === 2) {
 		}else if (type === 3) { // Education
+			var education_main_body = this.$education.find('.profiles-tabs-main-body');
+			var emptyEle = education_main_body.find('.empty-data');
+			emptyEle.addClass('hidden');
+			if(education_main_body.find('.education-item').length === 0){
+				emptyEle.removeClass('hidden');
+			}
 		}else if (type === 4) { // Experience
+			var experience_main_body = this.$experience.find('.profiles-tabs-main-body');
+			var emptyEle = experience_main_body.find('.empty-data');
+			emptyEle.addClass('hidden');
+			if(experience_main_body.find('.experience-item').length === 0){
+				emptyEle.removeClass('hidden');
+			}
 		}else if(type === 5) {  // Skill
+			var skill_main_body = this.$skill.find('.profiles-tabs-main-body');
+			var emptyEle = skill_main_body.find('.empty-data');
+			emptyEle.addClass('hidden');
+			if(skill_main_body.find('.skill-item').length === 0){
+				emptyEle.removeClass('hidden');
+			}
 		}
 	}
 

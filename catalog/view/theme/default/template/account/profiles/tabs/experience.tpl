@@ -101,6 +101,9 @@
 				</div>
 			</div>
 			{% endfor %}
+			<div class="{% if user.experiences|length > 0 %}hidden{% endif %} empty-data">
+				No information found			
+			</div>
 		</div>
 	</div>
 </div>
