@@ -1538,6 +1538,10 @@ a.btn-notification:hover .notification-item-name > i {
 .feed-block .block-content {
   overflow: hidden;
 }
+.feed-block .block-content .empty-data {
+  color: #8B8B8B;
+  font-weight: bold;
+}
 .block-title {
   padding: 0px;
   margin: 0px;
