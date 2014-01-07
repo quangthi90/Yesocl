@@ -133,7 +133,7 @@ class ModelFriendMessage extends Model {
 			if ( !$oUserTo ){
 				continue;
 			}
-
+			
 			$oMessage = new Message();
 			$oMessage->setObject( $oUserTo );
 			$oMessage->setIsSender( true );
@@ -144,13 +144,16 @@ class ModelFriendMessage extends Model {
 			$oToMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
 				'user.id' => $oUserTo->getId()
 			));
+			
 			if ( !$oToMessages ){
 				$oToMessages = new Messages();
 				$oToMessages->setUser( $oUserTo );
 				$this->dm->persist( $oToMessages );
 			}
+			$oMessage = new Message();
 			$oMessage->setObject( $oUserFrom );
 			$oMessage->setIsSender( false );
+			$oMessage->setContent( $sContent );
 			$oMessage->setRead( false );
 			$oToMessages->addMessage( $oMessage );
 		}

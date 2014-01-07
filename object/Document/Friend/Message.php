@@ -1,6 +1,7 @@
 <?php
 namespace Document\Friend;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use DateTimeZone;
 
 /** @MongoDB\EmbeddedDocument */
 Class Message {
@@ -29,7 +30,7 @@ Class Message {
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
-    	$this->created = new \DateTime();
+    	$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
     }
 
 	public function getId() {

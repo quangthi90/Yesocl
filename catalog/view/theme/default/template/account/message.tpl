@@ -38,8 +38,8 @@
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
 	            						<span class="user-message-info">
 	            							<strong class="user-name">{{ user.username }}</strong>
-	            							<span class="message-overview">hello</span>
-	            							<span class="message-time">{{ message.created|date('C') }}</span>
+	            							<span class="message-overview">{{ message.content }}</span>
+	            							<span class="message-time timeago" title="{{ date_format(message.created) }}"></span>
 	            						</span>
 	            					</a>          					
 	            				</li>
@@ -85,8 +85,8 @@
             						</a>
             						<div class="message-body">
             							<h6 class="sender-name">{{ user.username }}</h6>
-            							<span class="sender-time"><i class="icon-calendar"></i> {{ user.created|date('c') }}</span>
-            							<div class="message-content">{{ user.content }}</div>
+            							<span class="sender-time"><i class="icon-calendar"></i> {{ date_format(message.created) }}</span>
+            							<div class="message-content">{{ message.content }}</div>
             						</div>
             						<div class="yes-dropdown">
 			                            <div class="dropdown">
