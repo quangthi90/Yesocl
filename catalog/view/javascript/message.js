@@ -123,7 +123,7 @@
         if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
             this.$subject.focus();
             return false;
-        }else if( this.$content.length == 0 ){
+        }else if( this.$content.val().length == 0 ){
             return false;
         }
         return true;
