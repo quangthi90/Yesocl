@@ -44,6 +44,46 @@
 	            					</a>          					
 	            				</li>
 	            				{% endfor %}
+                                <li class="user-message-li sent-box active">
+                                    <a href="#" class="user-message-link">
+                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
+                                        <span class="user-message-info">
+                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>  
+                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
+                                            <span class="message-time timeago" title=""></span>
+                                        </span>
+                                    </a>                            
+                                </li>
+                                <li class="user-message-li sent-box">
+                                    <a href="#" class="user-message-link">
+                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
+                                        <span class="user-message-info">
+                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>
+                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
+                                            <span class="message-time timeago" title=""></span>
+                                        </span>
+                                    </a>                            
+                                </li>
+                                <li class="user-message-li inbox unread">
+                                    <a href="#" class="user-message-link">
+                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
+                                        <span class="user-message-info">
+                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>
+                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
+                                            <span class="message-time timeago" title=""></span>
+                                        </span>
+                                    </a>                            
+                                </li>
+                                <li class="user-message-li inbox read">
+                                    <a href="#" class="user-message-link">
+                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
+                                        <span class="user-message-info">
+                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>
+                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
+                                            <span class="message-time timeago" title=""></span>
+                                        </span>
+                                    </a>                            
+                                </li>
 	            			</ul>
             			</div>
             		</div>
@@ -106,6 +146,9 @@
             					{% endfor %}         					
             				</ul>
             			</div>
+                        <div class="message-waiting">
+                            <div class="waiting-bg"><i class="icon-spinner icon-spin"></i></div>
+                        </div>                        
             		</div>
           	  		<div class="mesasage-box-footer">
             			<textarea class="message-editor" placeholder="Write a message ..."></textarea>
