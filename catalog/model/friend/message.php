@@ -12,14 +12,9 @@ class ModelFriendMessage extends Model {
 	 *	Int Limit
 	 * @return: array objects Message
 	 */
-	public function getLastMessages( $sUserSlug, $iStart = 0, $iLimit = 20 ){
-		$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
-		if ( !$oUser ){
-			return null;
-		}
-
+	public function getLastMessages( $idUser, $iStart = 0, $iLimit = 20 ){
 		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
-			'user.id' => $oUser->getId()
+			'user.id' => $idUser
 		));
 
 		if ( !$oMessages ){

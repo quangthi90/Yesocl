@@ -41,7 +41,7 @@
 	            							<span class="message-overview">{{ message.content }}</span>
 	            							<span class="message-time timeago" title="{{ date_format(message.created) }}"></span>
 	            						</span>
-	            					</a>          					
+	            					</a>
 	            				</li>
 	            				{% endfor %}
 	            			</ul>
@@ -49,16 +49,8 @@
             		</div>
             	</div>
             	<div class="message-box-list">
-                    {% if messages|length > 0 %}
-                        {% set message = messages[0] %}
-                        {% set user = users[message.object_id] %}
-                    {% endif %}
             		<div class="mesasage-box-header">
-            			<h3 class="message-box-name">
-                        {% if user is defined %}
-                            {{ user.username }}
-                        {% endif %}
-            			</h3>
+            			<h3 class="message-box-name"></h3>
             			<div class="message-box-tools dropdown">
             				<a class="btn btn-yes dropdown-toggle tool-item" data-toggle="dropdown">
                                 <i class="icon-gear"></i>Action <i class="icon-caret-down"></i>
@@ -70,41 +62,13 @@
                                 <li>
                                     <a href="#"><i class="icon-remove"></i> Remove</a>
                                 </li>
-                            </ul>       				
+                            </ul>
             			</div>
             			<div class="clear"></div>
             		</div>
             		<div class="mesasage-box-body">
             			<div class="mesasage-box-container">
-            				<ul>
-            					{% for message in curr_messages %}
-                                    {% set user = users[object_id] %}
-            					<li class="message-item">
-            						<a href="#">
-            							<img src="{{ user.avatar }}" alt="{{ user.username }}">
-            						</a>
-            						<div class="message-body">
-            							<h6 class="sender-name">{{ user.username }}</h6>
-            							<span class="sender-time"><i class="icon-calendar"></i> {{ date_format(message.created) }}</span>
-            							<div class="message-content">{{ message.content }}</div>
-            						</div>
-            						<div class="yes-dropdown">
-			                            <div class="dropdown">
-			                               <a class="dropdown-toggle" data-toggle="dropdown">
-			                                    <i class="icon-caret-down"></i>
-			                               </a>
-			                               <ul class="dropdown-menu">
-			                                    <li>
-			                                        <a href="#"><i class="icon-remove"></i> Delete</a>
-			                                    </li>
-			                                </ul>
-			                            </div>
-			                        </div>
-            					</li>
-                                {% else %}
-                                Not have new message
-            					{% endfor %}         					
-            				</ul>
+            				<ul></ul>
             			</div>
             		</div>
           	  		<div class="mesasage-box-footer">
@@ -121,6 +85,7 @@
         </div>
 	</div>
 </div>
+{{ block('common_html_block_message_detail_item') }}
 {{ block('common_html_block_new_message_form') }}
 {% endblock %}
 

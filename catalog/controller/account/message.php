@@ -12,11 +12,11 @@ class ControllerAccountMessage extends Controller {
 
 		$this->load->model('friend/message');
 		$this->load->model('tool/image');
-		$aMessages = $this->model_friend_message->getLastMessages( $this->customer->getSlug() );
+		$idCurrentUser = $this->customer->getId();
+		$aMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
 
 		$this->data['users'] = array();
 		$this->data['messages'] = array();
-		$idCurrentUser = $this->customer->getId();
 		foreach ( $aMessages as $key => $oMessage ) {
 			$this->data['messages'][] = array(
 				'content' 		=> $oMessage->getContent(),
@@ -29,22 +29,6 @@ class ControllerAccountMessage extends Controller {
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 			$this->data['users'][$aUser['id']] = $aUser;
-		}
-
-		$this->data['curr_messages'] = array();
-		if ( count($aMessages) > 0 ){
-			$oMessage = $aMessages[0];
-			$this->data['object_id'] = $oMessage->getObject()->getId();
-
-			$aMessages = $this->model_friend_message->getMessagesByUser( $idCurrentUser, $this->data['object_id'] );
-			foreach ( $aMessages as $oMessage ) {
-				$this->data['curr_messages'][] = array(
-					'content' 		=> $oMessage->getContent(),
-					'object_id' 	=> $oMessage->getObject()->getId(),
-					'is_sender'		=> $oMessage->getIsSender(),
-					'created' 		=> $oMessage->getCreated()
-				);
-			}
 		}
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {

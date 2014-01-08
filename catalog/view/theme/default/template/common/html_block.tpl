@@ -263,6 +263,7 @@
 {% endblock %}
 {# -- End Comment -- #}
 
+{# -- Message -- #}
 {% block common_html_block_new_message_form %}
 	<div class="mfp-hide y-dlg-container" id="new-message-form">
 		<div class="y-dlg">
@@ -296,3 +297,33 @@
 		</div>
 	</div>
 {% endblock %}
+
+{% block common_html_block_message_detail_item %}
+	{% raw %}
+	<div id="message-detail-item">
+		<li class="message-item">
+			<a href="#">
+				<img src="${avatar}" alt="${username}">
+			</a>
+			<div class="message-body">
+				<h6 class="sender-name">${username}</h6>
+				<span class="sender-time"><i class="icon-calendar"></i> ${created}</span>
+				<div class="message-content">${content}</div>
+			</div>
+			<div class="yes-dropdown">
+	            <div class="dropdown">
+	               <a class="dropdown-toggle" data-toggle="dropdown">
+	                    <i class="icon-caret-down"></i>
+	               </a>
+	               <ul class="dropdown-menu">
+	                    <li>
+	                        <a href="#"><i class="icon-remove"></i> Delete</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+		</li>
+	</div>
+	{% endraw %}
+{% endblock %}
+{# -- End Message -- #}
