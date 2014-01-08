@@ -35,7 +35,7 @@ class ControllerAccountWall extends Controller {
 
 		$aUser = $oCurrUser->formatToCache();
 
-		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
 		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $oCurrUser );
 		$this->data['users'] = array( $aUser['id'] => $aUser );
 
@@ -101,7 +101,6 @@ class ControllerAccountWall extends Controller {
 		}
 
 		$this->data['post_type'] = $this->config->get('common')['type']['user'];
-		$this->data['date_format'] = $this->language->get('date_format_full');
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'wall' );

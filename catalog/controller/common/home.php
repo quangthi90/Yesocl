@@ -48,7 +48,7 @@ class ControllerCommonHome extends Controller {
 				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
 					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 				}else{
-					$aPost['image'] = null;
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 				}
 
 				$this->data['all_posts'][$sBranchSlug][] = $aPost;
@@ -69,9 +69,7 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['users'] = $aUsers;
 
-		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'home' );

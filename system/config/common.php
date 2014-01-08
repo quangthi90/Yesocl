@@ -28,4 +28,6 @@ $_['notify']['action']['like-comment']			= 'likes your comment';
 $_['notify']['action']['post-wall']				= 'posts on your wall';
 $_['notify']['action']['tag-comment']			= 'mentioned you in a comment';
 $_['notify']['action']['tag-post']				= 'mentioned you in a post';
+
+$_['no_image']['branch']['post']				= 'no-image-branch-post.jpg';
 ?>

@@ -3,14 +3,6 @@ class ControllerCommonHeader extends Controller {
 	protected function index() {
 		$this->load->model('tool/image');
 
-		$avatar = $this->customer->getAvatar();
-		
-		if( !empty($avatar) && file_exists(DIR_IMAGE . $avatar) ){
-			$avatar = $this->model_tool_image->resize( $avatar, 180, 180, true );
-		}else{
-			$avatar = $this->model_tool_image->getGavatar( $this->customer->getEmail(), 180 );
-		}
-
 		if ( !$this->customer->isLogged() ){
 			$this->data['action'] = array(
 				'connect_face'	=> $this->facebook->getLoginUrl( array( 
@@ -51,7 +43,7 @@ class ControllerCommonHeader extends Controller {
 				if ( !array_key_exists($actor->getId(), $users) ){
 					$user = $actor->formatToCache();
 
-					$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] );
+					$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'], 100, 100 );
 
 					$this->data['users'][$actor->getId()] = $user;
 				}

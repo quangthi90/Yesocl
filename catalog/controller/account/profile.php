@@ -198,7 +198,7 @@ class ControllerAccountProfile extends Controller {
 			$oLocation = new Location();
 		}
 
-		$aUser['avatar'] 	= $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$aUser['avatar'] 	= $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
 		$aUser['fullname'] 	= $oUser->getFullName();
 		$aUser['gender'] 	= $oUser->getMeta()->getSex() ? 'Male' : 'Female';
 		$aUser['birthday'] 	= $oUser->getMeta()->getBirthday()->format('d/m/Y');

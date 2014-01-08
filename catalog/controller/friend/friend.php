@@ -30,7 +30,7 @@ class ControllerFriendFriend extends Controller {
 
 		$aCurrUser = $oCurrUser->formatToCache();
 
-		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'] );
+		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 180, 180 );
 		$aCurrUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser, $oCurrUser );
 		$this->data['users'] = array($aCurrUser['id'] => $aCurrUser);
 

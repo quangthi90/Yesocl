@@ -57,7 +57,7 @@ class ControllerBranchCategories extends Controller {
 				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
 					$aPosts[$i]['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 				}else{
-					$aPosts[$i]['image'] = null;
+					$aPosts[$i]['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 				}
 
 				$aUserIds[$aPost['user_id']] = $aPost['user_id'];
@@ -78,9 +78,7 @@ class ControllerBranchCategories extends Controller {
 			$this->data['users'][$aUser['id']] = $aUser;
 		}
 
-		$this->data['date_format'] = $this->language->get('date_format_full');
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-		$this->data['action']['comment'] = $this->url->link('post/comment/addComment', '', 'SSL');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/categories.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/categories.tpl';

@@ -39,8 +39,8 @@
 				</div>
 				<div class="post_meta">
 					<span class="post_time fl">
-						<i class="icon-calendar"></i> 
-						<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
+						<i class="icon-calendar"></i>
+						<d class="timeago" title="{{ date_format(post.created) }}"></d>
 					</span>
 					<span class="post_like fr">
 						<a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">

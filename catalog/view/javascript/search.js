@@ -151,13 +151,20 @@
 		    	url: that.friendUrl + '%QUERY/',
 		    	cache: true,
 		    	timeout: 500,
-		    	beforeSend: function(xhr, setting) {		    		
+		    	beforeSend: function(xhr, setting) {
+		    		if ( $('span.twitter-typeahead').hasClass('disabled') ){
+		    			return false;
+		    		}
+		    		$('span.twitter-typeahead').addClass('disabled');
 		    		var spinner = $('<i class="icon-spinner icon-spin load-friend"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
 		    	},
 		        filter: function(parsedResponse){
 		            $('span.twitter-typeahead').find('i.load-friend').remove();
 		            return parsedResponse;
+		        },
+		        afterSend: function(xhr, setting){
+		        	$('span.twitter-typeahead').removeClass('disabled');
 		        }
 		    },
 		    limit: 5,

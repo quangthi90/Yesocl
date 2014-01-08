@@ -1,7 +1,6 @@
 <?php
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use DateTime;
 
 /** 
  * @MongoDB\EmbeddedDocument
@@ -122,7 +121,7 @@ Class Meta {
 		}
 
 		$educations = $this->background->getEducations();
-		$time = new DateTime();
+		$time = new \DateTime();
 		$time = $time->format('Y');
 		foreach ( $educations as $education ) {
 			if ( $education->getEnded() >= $time ){
