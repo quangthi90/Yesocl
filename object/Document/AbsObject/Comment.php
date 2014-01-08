@@ -1,7 +1,6 @@
 <?php
 namespace Document\AbsObject;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use DateTimeZone;
 
 /** @MongoDB\EmbeddedDocument */
 Class Comment {
@@ -86,13 +85,13 @@ Class Comment {
 
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
-		$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->created = new \DateTime();
 		$this->deleted = false;
 	}
 
 	/** @MongoDB\PreUpdate */
 	public function preUpdate(){
-		$this->updated = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->updated = new \DateTime();
 	}
 
 	public function setUser( $user ){

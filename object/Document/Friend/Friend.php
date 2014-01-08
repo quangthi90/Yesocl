@@ -2,7 +2,6 @@
 namespace Document\Friend;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
 	Document\AbsObject\Post as AbstractPost;
-use DateTimeZone;
 
 /** @MongoDB\EmbeddedDocument */
 Class Friend {
@@ -25,7 +24,7 @@ Class Friend {
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
-    	$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+    	$this->created = new \DateTime();
     }
 
 	public function getId() {

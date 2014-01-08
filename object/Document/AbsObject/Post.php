@@ -2,7 +2,6 @@
 namespace Document\AbsObject;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Solr\Mapping\Annotations as SOLR;
-use DateTimeZone;
 
 /**
  * @MongoDB\MappedSuperclass
@@ -178,14 +177,14 @@ Abstract Class Post {
 
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
-		$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
-		$this->updated = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->created = new \DateTime();
+		$this->updated = new \DateTime();
 		$this->deleted = false;
 	}
 
 	/** @MongoDB\PreUpdate */
 	public function preUpdate(){
-		$this->updated = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->updated = new \DateTime();
 	}
 
 	public function setAuthor( $author ){
