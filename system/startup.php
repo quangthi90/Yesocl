@@ -44,9 +44,11 @@ if (ini_get('magic_quotes_gpc')) {
 	$_COOKIE = clean($_COOKIE);
 }
 
-if (!ini_get('date.timezone')) {
-	date_default_timezone_set('UTC');
-}
+// if (!ini_get('date.timezone')) {
+// 	date_default_timezone_set('UTC');
+// }
+
+date_default_timezone_set('Asia/Bangkok');
 
 // Windows IIS Compatibility  
 if (!isset($_SERVER['DOCUMENT_ROOT'])) { 

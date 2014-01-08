@@ -2,7 +2,6 @@
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Doctrine\Solr\Mapping\Annotations as SOLR;
-use DateTimeZone;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="user")
@@ -82,7 +81,7 @@ Class User {
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
-    	$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+    	$this->created = new \DateTime();
     	$this->meta->setCurrent('unknow');
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();

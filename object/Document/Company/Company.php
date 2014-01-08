@@ -1,7 +1,6 @@
 <?php
 namespace Document\Company;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use DateTimeZone;
 
 /** 
  * @MongoDB\Document(collection="company")
@@ -102,12 +101,12 @@ Class Company {
 
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
-		$this->created = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->created = new \DateTime();
 	}
 
 	/** @MongoDB\PreUpdate */
 	public function preUpdate(){
-		$this->updated = new \DateTime('now', new DateTimeZone('Asia/Bangkok'));
+		$this->updated = new \DateTime();
 	}
 
 	public function getId(){
