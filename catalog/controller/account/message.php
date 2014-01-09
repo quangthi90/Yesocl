@@ -78,5 +78,53 @@ class ControllerAccountMessage extends Controller {
             'success' => 'ok'
         )));
 	}
+
+	public function getMessageListByUser(){
+		if ( empty($this->request->get['user_slug']) ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+		}
+
+		$this->load->model('friend/message');
+		$this->load->model('user/user');
+		$this->load->model('tool/image');
+
+		$sObjectSlug = $this->request->get['user_slug'];
+		$aObjectUser = $this->model_user_user->getUser( $sObjectSlug );
+		if ( !$aObjectUser ){
+			return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user have slug: ' . $sObjectSlug . ' not exist'
+            )));
+		}
+		$idCurrUser = $this->customer->getId();
+		$idObjectUser = $aObjectUser['id'];
+
+		// Array Object User info
+		$aObjectUser['avatar'] = $this->model_tool_image->getAvatarUser( $aObjectUser['avatar'], $aObjectUser['email'] );
+		$aObjectUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aObjectUser['slug']));
+		
+		// Array Current User info
+		$aCurrUser = $this->extension->getCurrentUser();
+		$aCurrUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aCurrUser['slug']));
+
+		$aMessages = $this->model_friend_message->getMessagesByUser( $idCurrUser, $idObjectUser );
+
+		$aReturnMessages = array();
+		foreach ( $aMessages as $oMessage ) {
+			$aReturnMessages[] = array(
+				'content' => $oMessage->getContent(),
+				'created' => $this->extension->dateFormat( $oMessage->getCreated() ),
+				'user' => $oMessage->getIsSender() == true ? $aCurrUser : $aObjectUser
+			);
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'messages' => $aReturnMessages
+        )));
+	}
 }
 ?>

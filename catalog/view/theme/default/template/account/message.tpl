@@ -30,11 +30,11 @@
             		</div>
             		<div class="user-box-users">
             			<div class="user-box-scroll">
-            				<ul>
+            				<ul class="js-mess-user-list">
             					{% for message in messages %}
                                     {% set user = users[message.object_id] %}
-	            				<li class="user-message-li">
-	            					<a href="#" class="user-message-link">
+	            				<li class="user-message-li js-mess-user-item" data-user-slug="{{ user.slug }}">
+	            					<a href="#" class="user-message-link js-mess-user-link">
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
 	            						<span class="user-message-info">
 	            							<strong class="user-name">{{ user.username }}</strong>
@@ -108,9 +108,9 @@
             		</div>
             		<div class="mesasage-box-body">
             			<div class="mesasage-box-container">
-            				<ul></ul>
+            				<ul class="js-mess-list-content"></ul>
             			</div>
-                        <div class="message-waiting">
+                        <div class="message-waiting js-mess-loading hidden">
                             <div class="waiting-bg"><i class="icon-spinner icon-spin"></i></div>
                         </div>                        
             		</div>

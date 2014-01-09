@@ -79,4 +79,5 @@ $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
 // Message
 $_['route']['MessagePage']					= 'account/message';
 $_['route']['MessageSend']					= 'account/message/send/';
+$_['route']['MessageGetList']				= 'account/message/getMessageListByUser/';
 ?>

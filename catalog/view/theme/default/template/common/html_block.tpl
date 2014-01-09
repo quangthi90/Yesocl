@@ -302,11 +302,11 @@
 	{% raw %}
 	<div id="message-detail-item">
 		<li class="message-item">
-			<a href="#">
-				<img src="${avatar}" alt="${username}">
+			<a href="${user.href}">
+				<img src="${user.avatar}" alt="${user.username}">
 			</a>
 			<div class="message-body">
-				<h6 class="sender-name">${username}</h6>
+				<h6 class="sender-name">${user.username}</h6>
 				<span class="sender-time"><i class="icon-calendar"></i> ${created}</span>
 				<div class="message-content">${content}</div>
 			</div>

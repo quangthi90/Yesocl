@@ -51,91 +51,7 @@
     });
 }(jQuery, document));
 
-// Message form
-(function($, document, undefined) {
-    function MessageForm($el) {
-        this.$el = $el;
-        this.$subject = $el.find('.js-message-to');
-        this.$content = $el.find('.js-message-content');
-        this.$sendBtn = $el.find('.js-btn-message-send');
-
-        this.attachEvents();
-    };
-    MessageForm.prototype.attachEvents = function() {
-        var that = this;
-
-        that.$content.keyup(function(e){
-            if(e.keyCode === 13 && $(this).val().trim().length > 0){
-                that.$sendBtn.trigger('click');         
-            }
-        });
-        that.$sendBtn.click(function(e){
-            e.preventDefault();
-            
-            if ( that.validate() == false ){
-                return false;
-            }
-            
-            that.submit(that.$sendBtn);
-
-            return false;
-        });
-    };
-
-    MessageForm.prototype.submit = function($button) {
-        var that = this;        
-
-        var promise = $.ajax({
-            type: 'POST',
-            url:  yRouting.generate('MessageSend'),
-            data: {
-                user_slugs: this.$subject.data('users'),
-                content: this.$content.val()
-            },
-            dataType: 'json'
-        });
-
-        this.triggerProgress($button, promise);
-
-        promise.then(function(data) { 
-            if(data.success == 'ok'){
-                $('.mfp-ready').trigger('click');
-            }
-        });
-    };
-
-    MessageForm.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var $old_icon = $el.find('i');
-        var f        = function() {
-            $spinner.remove();
-            $el.removeClass('disabled').prepend($old_icon);
-        };
-
-        $old_icon.remove();
-        $el.addClass('disabled').prepend($spinner);
-
-        promise.then(f, f);
-    };
-
-    MessageForm.prototype.validate = function() {
-        var tagedUsers = this.$subject.data('users');
-        if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
-            this.$subject.focus();
-            return false;
-        }else if( this.$content.val().length == 0 ){
-            return false;
-        }
-        return true;
-    };
-
-    $(document).ready(function() {
-        $('#new-message-form').each(function(){
-            new MessageForm($(this));
-        });
-    });
-}(jQuery, document));
-
+// Friend auto complete
 (function($, document, undefined) {
     var friendList = [];
     var map = {};
@@ -252,6 +168,153 @@
     $(document).ready(function() {
         $('.tag-user-wrapper').each(function(){
             new TagUser($(this));
+        });
+    });
+}(jQuery, document));
+
+// Message form
+(function($, document, undefined) {
+    function MessageForm($el) {
+        this.$el = $el;
+        this.$subject = $el.find('.js-message-to');
+        this.$content = $el.find('.js-message-content');
+        this.$sendBtn = $el.find('.js-btn-message-send');
+
+        this.attachEvents();
+    };
+    MessageForm.prototype.attachEvents = function() {
+        var that = this;
+
+        that.$content.keyup(function(e){
+            if(e.keyCode === 13 && $(this).val().trim().length > 0){
+                that.$sendBtn.trigger('click');         
+            }
+        });
+        that.$sendBtn.click(function(e){
+            e.preventDefault();
+            
+            if ( that.validate() == false ){
+                return false;
+            }
+            
+            that.submit(that.$sendBtn);
+
+            return false;
+        });
+    };
+
+    MessageForm.prototype.submit = function($button) {
+        var that = this;        
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  yRouting.generate('MessageSend'),
+            data: {
+                user_slugs: this.$subject.data('users'),
+                content: this.$content.val()
+            },
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) { 
+            if(data.success == 'ok'){
+                $('.mfp-ready').trigger('click');
+            }
+        });
+    };
+
+    MessageForm.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    MessageForm.prototype.validate = function() {
+        var tagedUsers = this.$subject.data('users');
+        if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
+            this.$subject.focus();
+            return false;
+        }else if( this.$content.val().length == 0 ){
+            return false;
+        }
+        return true;
+    };
+
+    $(document).ready(function() {
+        $('#new-message-form').each(function(){
+            new MessageForm($(this));
+        });
+    });
+}(jQuery, document));
+
+// Load list message by user
+(function($, document, undefined) {
+    function MessageList($el) {
+        this.$el = $el;
+        this.$userMessBtn = $el.find('.js-mess-user-link');
+        
+        this.slug = $el.data('user-slug');
+
+        this.attachEvents();
+    };
+    MessageList.prototype.attachEvents = function() {
+        var that = this;
+
+        that.$userMessBtn.click(function(e){
+            e.preventDefault();
+            
+            that.submit(that.$userMessBtn);
+
+            return false;
+        });
+    };
+
+    MessageList.prototype.submit = function($button) {
+        var that = this;        
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  yRouting.generate('MessageGetList', {
+                user_slug: that.slug
+            }),
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) { 
+            if(data.success == 'ok'){
+                var $htmlContent = '';
+                $('.js-mess-list-content').html('');
+                for ( key in data.messages ){
+                    $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), data.messages[key]) );
+                }
+            }
+        });
+    };
+
+    MessageList.prototype.triggerProgress = function($el, promise){
+        $('.js-mess-loading').removeClass('hidden');
+        var f        = function() {
+            $('.js-mess-loading').addClass('hidden');
+        };
+
+        promise.then(f, f);
+    };
+
+    $(document).ready(function() {
+        $('.js-mess-user-list').find('.js-mess-user-item').each(function(){
+            new MessageList($(this));
         });
     });
 }(jQuery, document));
