@@ -285,25 +285,42 @@
     MessageList.prototype.submit = function($button) {
         var that = this;        
 
-        var promise = $.ajax({
-            type: 'POST',
-            url:  yRouting.generate('MessageGetList', {
-                user_slug: that.slug
-            }),
-            dataType: 'json'
-        });
+        var users = $('.js-mess-user-list').data('users-messages');
+        if ( typeof users == 'undefined' ){
+            users = new HashTable();
+        }
+        $('.js-mess-user-list').data('users-messages', users);
 
-        this.triggerProgress($button, promise);
+        if ( typeof users.getItem(that.slug) == 'undefined' ){
+            var promise = $.ajax({
+                type: 'POST',
+                url:  yRouting.generate('MessageGetList', {
+                    user_slug: that.slug
+                }),
+                dataType: 'json'
+            });
 
-        promise.then(function(data) { 
-            if(data.success == 'ok'){
-                var $htmlContent = '';
-                $('.js-mess-list-content').html('');
-                for ( key in data.messages ){
-                    $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), data.messages[key]) );
+            this.triggerProgress($button, promise);
+
+            promise.then(function(data) { 
+                if(data.success == 'ok'){
+                    var $htmlContent = '';
+                    $('.js-mess-list-content').html('');
+                    for ( key in data.messages ){
+                        $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), data.messages[key]) );
+                    }
+
+                    // Cache users message
+                    users.setItem(that.slug, data.messages);
                 }
+            });
+        }else{
+            $('.js-mess-list-content').html('');
+            var messages = users.getItem(that.slug);
+            for ( key in messages ){
+                $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), messages[key]) );
             }
-        });
+        }
     };
 
     MessageList.prototype.triggerProgress = function($el, promise){
