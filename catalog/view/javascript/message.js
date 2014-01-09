@@ -272,6 +272,9 @@
 
         that.$userMessBtn.click(function(e){
             e.preventDefault();
+
+            $('.js-mess-user-list').find('.js-mess-user-item.active').removeClass('active');
+            that.$el.addClass('active');
             
             that.submit(that.$userMessBtn);
 
