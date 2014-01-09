@@ -22,7 +22,8 @@ class ControllerAccountMessage extends Controller {
 				'content' 		=> $oMessage->getContent(),
 				'object_id' 	=> $oMessage->getObject()->getId(),
 				'is_sender'		=> $oMessage->getIsSender(),
-				'created' 		=> $oMessage->getCreated()
+				'created' 		=> $oMessage->getCreated(),
+				'read'			=> $oMessage->getRead()
 			);
 
 			$oUser = $oMessage->getObject();

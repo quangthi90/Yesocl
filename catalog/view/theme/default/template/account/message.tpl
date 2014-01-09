@@ -33,7 +33,7 @@
             				<ul class="js-mess-user-list">
             					{% for message in messages %}
                                     {% set user = users[message.object_id] %}
-	            				<li class="user-message-li js-mess-user-item {% if message.is_sender == true %}sent-box{% else %}inbox{% endif %}" data-user-slug="{{ user.slug }}">
+	            				<li class="user-message-li js-mess-user-item {% if message.is_sender == true %}sent-box{% else %}inbox{% endif %} {% if loop.index == 1 %}active read{% elseif message.read == false %}unread{% else %}read{% endif %}" data-user-slug="{{ user.slug }}">
 	            					<a href="#" class="user-message-link js-mess-user-link">
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
 	            						<span class="user-message-info">
@@ -48,46 +48,6 @@
 	            					</a>
 	            				</li>
 	            				{% endfor %}
-                                <li class="user-message-li sent-box active">
-                                    <a href="#" class="user-message-link">
-                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
-                                        <span class="user-message-info">
-                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>  
-                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
-                                            <span class="message-time timeago" title=""></span>
-                                        </span>
-                                    </a>                            
-                                </li>
-                                <li class="user-message-li sent-box">
-                                    <a href="#" class="user-message-link">
-                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
-                                        <span class="user-message-info">
-                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>
-                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
-                                            <span class="message-time timeago" title=""></span>
-                                        </span>
-                                    </a>                            
-                                </li>
-                                <li class="user-message-li inbox unread">
-                                    <a href="#" class="user-message-link">
-                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
-                                        <span class="user-message-info">
-                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>
-                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
-                                            <span class="message-time timeago" title=""></span>
-                                        </span>
-                                    </a>                            
-                                </li>
-                                <li class="user-message-li inbox read">
-                                    <a href="#" class="user-message-link">
-                                        <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="abc">
-                                        <span class="user-message-info">
-                                            <strong class="user-name">WMThiet <i class="icon-ok"></i></strong>
-                                            <span class="message-overview"><i class="icon-mail-reply"> </i>abc</span>
-                                            <span class="message-time timeago" title=""></span>
-                                        </span>
-                                    </a>                            
-                                </li>
 	            			</ul>
             			</div>
             		</div>
