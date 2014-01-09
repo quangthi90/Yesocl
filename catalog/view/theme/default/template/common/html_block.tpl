@@ -289,7 +289,7 @@
 			    	<div class="controls">
 			    		<a href="#" class="btn btn-yes btn-send-msg js-btn-message-send">Send</a>
 						<label class="enter-option">
-							<input type="checkbox" class="enter-check" checked="checked"> Press enter to send
+							<input type="checkbox" class="enter-check js-mess-check" checked="checked"> Press enter to send
 						</label>           
 		            </div>
 			    </div>			    	

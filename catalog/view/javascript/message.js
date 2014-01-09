@@ -186,8 +186,11 @@
         var that = this;
 
         that.$content.keyup(function(e){
-            if(e.keyCode === 13 && $(this).val().trim().length > 0){
-                that.$sendBtn.trigger('click');         
+            e.preventDefault();
+
+            if(e.keyCode === 13 && $('.js-mess-check').parent().hasClass('checked') && that.validate() ){
+                that.$sendBtn.trigger('click');
+                return false;
             }
         });
         that.$sendBtn.click(function(e){
