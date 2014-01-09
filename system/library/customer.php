@@ -68,7 +68,13 @@ class Customer {
 			$this->firstname = $customer_query->getMeta()->getFirstName();
 			$this->lastname = $customer_query->getMeta()->getLastName();
 			$this->email = $customer_query->getPrimaryEmail()->getEmail();
+			$this->username = $customer_query->getUsername();
 			$this->customer_group_id = $customer_query->getGroupUser()->getId();
+			$this->slug = $customer_query->getSlug();
+			$this->avatar = $customer_query->getAvatar();
+			$this->friend_list = $customer_query->getFriends();
+			$this->friend_requests = $customer_query->getFriendRequests();
+			$this->user = $customer_query;
 
 			// remember
 			if ($remember) {

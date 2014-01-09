@@ -57,7 +57,7 @@ class ControllerBranchCategories extends Controller {
 				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
 					$aPosts[$i]['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 				}else{
-					$aPosts[$i]['image'] = null;
+					$aPosts[$i]['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 				}
 
 				$aUserIds[$aPost['user_id']] = $aPost['user_id'];
