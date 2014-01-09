@@ -253,11 +253,11 @@
         var that = this;
 
         this.$advance_btn.click(function(e) {
+            e.preventDefault();
+            
             if(that.$advance_btn.hasClass('disabled')) {
-                e.preventDefault();
                 return false;
             }
-
             if(that.validate(true) == false){
                 return false;
             }
@@ -380,15 +380,27 @@
     };
 
     AddPost.prototype.validate = function(is_advance){
-        if ( is_advance == true ){
-            if ( this.$advance_content.code() == '' ){
+
+        if(!String.prototype.trim) {
+          String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g,'');
+          };
+        }
+
+        if (is_advance){
+            var tempEle = $("<div></div>");
+            tempEle.append(this.$advance_content.code());
+            if (tempEle.text().trim().length === 0 ){
+                this.$advance_content.code('');
                 return false;
             }
         }else{
-            if ( this.$content.val().length == 0 ){
+            if (this.$content.val().trim().length === 0 ){
+                this.$content.val('').focus();
                 return false;
             }
         }
+        return true;
     };
 
     AddPost.prototype.triggerProgress = function($el, promise){
@@ -632,9 +644,19 @@
     };
 
     EditPost.prototype.validate = function(){
-        if ( this.$content.code() == '' ){
+        if(!String.prototype.trim) {
+          String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g,'');
+          };
+        }
+
+        var tempEle = $("<div></div>");
+        tempEle.append(this.$content.code());
+        if (tempEle.text().trim().length === 0 ){
+            this.$content.code('');
             return false;
         }
+        return true;
     };
 
     EditPost.prototype.triggerProgress = function($el, promise){
