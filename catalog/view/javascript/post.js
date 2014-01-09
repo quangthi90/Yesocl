@@ -362,12 +362,16 @@
                 $(".timeago").timeago();
 
                 //Reset:
-                that.$content.mentionsInput('reset').height(40);
-                that.$advance_content.code('');
-                that.$advance_title.val('');
-                $post_add_form.find('.img-previewer-container').html('');
-                that.$el.find('.img-previewer-container').html('');
-                $('.mfp-ready').trigger('click');
+                if($button.hasClass('btn-status')){
+                    that.$content.mentionsInput('reset');
+                    that.$content.height(40);
+                    that.$el.find('.img-previewer-container').html('');
+                }else {
+                    that.$advance_content.code('');
+                    that.$advance_title.val('');
+                    $post_add_form.find('.img-previewer-container').html('');
+                    $('.mfp-ready').trigger('click');
+                }
 
                 //Rise events:
                 $(document).trigger('POST_BUTTON');
