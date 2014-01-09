@@ -211,7 +211,7 @@
             url:  yRouting.generate('MessageSend'),
             data: {
                 user_slugs: this.$subject.data('users'),
-                content: this.$content.val()
+                content: this.$content.val().trim()
             },
             dataType: 'json'
         });
@@ -244,7 +244,7 @@
         if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
             this.$subject.focus();
             return false;
-        }else if( this.$content.val().length == 0 ){
+        }else if( this.$content.val().trim().length == 0 ){
             return false;
         }
         return true;
