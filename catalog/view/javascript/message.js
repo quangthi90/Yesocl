@@ -316,5 +316,8 @@
         $('.js-mess-user-list').find('.js-mess-user-item').each(function(){
             new MessageList($(this));
         });
+
+        $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+
     });
 }(jQuery, document));
