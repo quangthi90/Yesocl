@@ -27,7 +27,7 @@ class ControllerAccountMessage extends Controller {
 
 			$oUser = $oMessage->getObject();
 			$aUser = $oUser->formatToCache();
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 50, 50 );
 			$this->data['users'][$aUser['id']] = $aUser;
 		}
 
@@ -103,11 +103,11 @@ class ControllerAccountMessage extends Controller {
 		$idObjectUser = $aObjectUser['id'];
 
 		// Array Object User info
-		$aObjectUser['avatar'] = $this->model_tool_image->getAvatarUser( $aObjectUser['avatar'], $aObjectUser['email'] );
+		$aObjectUser['avatar'] = $this->model_tool_image->getAvatarUser( $aObjectUser['avatar'], $aObjectUser['email'], 50, 50 );
 		$aObjectUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aObjectUser['slug']));
 		
 		// Array Current User info
-		$aCurrUser = $this->extension->getCurrentUser();
+		$aCurrUser = $this->extension->getCurrentUser( 50, 50);
 		$aCurrUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aCurrUser['slug']));
 
 		$aMessages = $this->model_friend_message->getMessagesByUser( $idCurrUser, $idObjectUser );

@@ -38,7 +38,14 @@
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
 	            						<span class="user-message-info">
 	            							<strong class="user-name">{{ user.username }}</strong>
-	            							<span class="message-overview">{{ message.content }}</span>
+	            							<span class="message-overview">
+                                                {% if message.is_sender == true %}
+                                                <i class="icon-mail-reply"></i>
+                                                {% else %}
+                                                <i class="icon-ok"></i>
+                                                {% endif %}
+                                                {{ message.content }}
+                                            </span>
 	            							<span class="message-time timeago" title="{{ date_format(message.created) }}"></span>
 	            						</span>
 	            					</a>

@@ -93,7 +93,7 @@ class ExtensionLoader
         return HTTP_IMAGE . $path;
     }
 
-    public function getCurrentUser(){
+    public function getCurrentUser( $width = 180, $height = 180){
         $this->load->model('tool/image');
 
         $oUser = $this->customer->getUser();
@@ -101,7 +101,7 @@ class ExtensionLoader
             return null;
         }
         $aUser = $oUser->formatToCache();
-        $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'], 180, 180 );
+        $aUser['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $aUser['avatar'], $aUser['email'], $width, $height );
         
         return $aUser;
     }
