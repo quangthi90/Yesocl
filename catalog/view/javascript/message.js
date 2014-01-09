@@ -223,6 +223,10 @@
 
         promise.then(function(data) { 
             if(data.success == 'ok'){
+                /*Todo: clear form new message - Thiet*/
+                that.$el.find('.tags-container').html('');
+                that.$content.val('');
+
                 $('.mfp-ready').trigger('click');
             }
         });
