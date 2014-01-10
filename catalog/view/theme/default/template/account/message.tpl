@@ -41,7 +41,7 @@
 	            							<span class="message-overview">
                                                 <i class="icon-mail-reply"></i>
                                                 <i class="icon-ok"></i>
-                                                {{ message.content }}
+                                                <span class="js-mess-user-content">{{ message.content }}</span>
                                             </span>
 	            							<span class="message-time timeago" title="{{ date_format(message.created) }}"></span>
 	            						</span>

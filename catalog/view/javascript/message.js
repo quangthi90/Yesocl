@@ -172,7 +172,7 @@
     });
 }(jQuery, document));
 
-// Message form
+// New Message form
 (function($, document, undefined) {
     function MessageForm($el) {
         this.$el = $el;
@@ -223,11 +223,27 @@
 
         promise.then(function(data) { 
             if(data.success == 'ok'){
+                var content = that.$content.val().trim();
+
                 /*Todo: clear form new message - Thiet*/
                 that.$el.find('.tags-container').html('');
                 that.$content.val('');
 
+                var user_slugs = that.$subject.data('users')
+                for (i in user_slugs) {
+                    var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
+
+                    if ( typeof $user_item == 'undefined' ){
+                        window.location.reload();
+                    }else{
+                        // $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']').remove();
+                        $user_item.find('.js-mess-user-content').html(content);
+                        $('.js-mess-user-list').prepend($user_item);
+                    }
+                };
+
                 $('.mfp-ready').trigger('click');
+                $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
             }
         });
     };
@@ -328,6 +344,10 @@
                 $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), messages[key]) );
             }
         }
+
+        /*
+        To do: move scroll to bottom code here
+        */
     };
 
     MessageList.prototype.triggerProgress = function($el, promise){
