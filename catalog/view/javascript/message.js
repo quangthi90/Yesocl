@@ -56,7 +56,6 @@
     var friendList = [];
     var map = {};
     var currentTagsGlobal = [];
-    var yListFriends = null;
     var is_send_ajax = 0;
     function TagUser($el) {
         this.$root = $el;
@@ -72,23 +71,23 @@
             source: function (query, process) {
               friendList = [];
               map = {};
-              if ( yListFriends == null && is_send_ajax == 0 ){
+              if ( window.yListFriends == null && is_send_ajax == 0 ){
                 is_send_ajax = 1;
                 $.getJSON(yRouting.generate('GetAllFriends'), function(json) {
                   if ( json.success == 'ok' ){
                     if ( json.friends == undefined ){
                       is_send_ajax = 0;
                     }
-                    yListFriends = json.friends;
+                    window.yListFriends = json.friends;
                   }
                 });
               }
 
-              if ( yListFriends == null ){
+              if ( window.yListFriends == null ){
                 return false;
               }
 
-              $.each(yListFriends, function (i, item) {
+              $.each(window.yListFriends, function (i, item) {
                   friendList.push(item.id + '-' + item.name);
                   map[item.id + '-' + item.name] = item;
               });
@@ -205,7 +204,6 @@
             return false;
         });
     };
-
     MessageForm.prototype.submit = function($button) {
         var that = this;        
 
@@ -232,13 +230,35 @@
                 var user_slugs = that.$subject.data('users')
                 for (i in user_slugs) {
                     var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
-                    console.log(typeof $user_item);
+                    
                     if ( $user_item.attr('class') == undefined ){
-                        window.location.reload();
+                        if ( window.yListFriends == null || window.yListFriends[user_slugs[i]] == undefined ){
+                            window.location.reload();
+                        }
+                        var user = window.yListFriends[user_slugs[i]];
+                        user['content'] = content;
+                        $user_item = $.tmpl( $('#message-user-item'), user);
+                        $(document).trigger('MESSAGE_LIST', [$user_item]);
                     }else{
-                        $user_item.find('.js-mess-user-content').html(content);
-                        $('.js-mess-user-list').prepend($user_item);
+                        var users = $('.js-mess-user-list').data('users-messages');
+                        if ( typeof users_messages == 'undefined' ){
+                            users = new HashTable();
+                        }
+
+                        var user_messages = users.getItem(user_slugs[i]);
+                        if ( typeof user_messages != 'undefined' ){
+                            user_messages.push({
+                                content: content,
+                                created: data.time,
+                                user: data.user
+                            });
+                            users.setItem(user_slugs[i], user_messages);
+                            $('.js-mess-user-list').data('users-messages', users);
+                        }
                     }
+
+                    $user_item.find('.js-mess-user-content').html(content);
+                    $('.js-mess-user-list').prepend($user_item);
                 };
 
                 $('.mfp-ready').trigger('click');
@@ -246,7 +266,6 @@
             }
         });
     };
-
     MessageForm.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
@@ -260,7 +279,6 @@
 
         promise.then(f, f);
     };
-
     MessageForm.prototype.validate = function() {
         var tagedUsers = this.$subject.data('users');
         if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
@@ -271,7 +289,6 @@
         }
         return true;
     };
-
     $(document).ready(function() {
         $('#new-message-form').each(function(){
             new MessageForm($(this));
@@ -303,7 +320,6 @@
             return false;
         });
     };
-
     MessageList.prototype.submit = function($button) {
         var that = this;        
 
@@ -348,7 +364,6 @@
         To do: move scroll to bottom code here
         */
     };
-
     MessageList.prototype.triggerProgress = function($el, promise){
         $('.js-mess-loading').removeClass('hidden');
         var f        = function() {
@@ -357,13 +372,13 @@
 
         promise.then(f, f);
     };
-
     $(document).ready(function() {
         $('.js-mess-user-list').find('.js-mess-user-item').each(function(){
             new MessageList($(this));
         });
 
-        $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
-
+        $(document).bind('MESSAGE_LIST', function(e, $user_item) {
+            new MessageList($user_item);
+        });
     });
 }(jQuery, document));

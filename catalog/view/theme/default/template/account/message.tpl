@@ -94,8 +94,14 @@
 </div>
 {{ block('common_html_block_message_detail_item') }}
 {{ block('common_html_block_new_message_form') }}
+{{ block('common_html_block_message_user_item') }}
 {% endblock %}
 
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('message.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+});
+</script>
 {% endblock %}

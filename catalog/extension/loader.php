@@ -159,7 +159,10 @@ class ExtensionLoader
         return $returns;
     }
 
-    public function dateFormat( $datetime ){
+    public function dateFormat( DateTime $datetime = null ){
+        if ( $datetime == null ){
+            $datetime = new DateTime();
+        }
         if ( $datetime < $this->recentTime ){
             return $datetime->format( $this->registry->get('language')->get('date_format_short') );
         }

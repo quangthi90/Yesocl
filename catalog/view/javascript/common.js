@@ -168,22 +168,22 @@ var yCurrUser = new CurrentUser();
 
 		that.$tagElement.mentionsInput({
 			onDataRequest:function (mode,currentMentionCollection,query,callback) {
-				if ( yListFriends == null && is_send_ajax == 0 ){
+				if ( window.yListFriends == null && is_send_ajax == 0 ){
 					is_send_ajax = 1;
 					$.getJSON(yRouting.generate('GetAllFriends'), function(json) {
 						if ( json.success == 'ok' ){
 							if ( json.friends == undefined ){
 								is_send_ajax = 0;
 							}
-							yListFriends = json.friends;
-							responseData = _.filter(yListFriends, function(item) { 
+							window.yListFriends = json.friends;
+							responseData = _.filter(window.yListFriends, function(item) { 
 					       		return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
 					       	});
 					       	callback.call(this, responseData);
 						}
 			      	});
 				}else{
-					data = _.filter(yListFriends, function(item) {
+					data = _.filter(window.yListFriends, function(item) {
 						if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
 							var checkExisted = _.filter(currentMentionCollection, function(tempItem){
 								return (item.id === tempItem.id);

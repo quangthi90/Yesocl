@@ -76,7 +76,9 @@ class ControllerAccountMessage extends Controller {
 		}
 
 		return $this->response->setOutput(json_encode(array(
-            'success' => 'ok'
+            'success' => 'ok',
+            'time' => $this->extension->dateFormat(),
+            'user' => $this->extension->getCurrentUser()
         )));
 	}
 

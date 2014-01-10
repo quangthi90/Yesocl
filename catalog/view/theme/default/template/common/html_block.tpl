@@ -330,11 +330,11 @@
 	{% block common_html_block_message_user_item %}
 		{% raw %}
 		<div id="message-user-item">
-			<li class="user-message-li js-mess-user-item sent-box read ${active}" data-user-slug="${user.slug}">
+			<li class="user-message-li js-mess-user-item sent-box read" data-user-slug="${slug}">
 				<a href="#" class="user-message-link js-mess-user-link">
-					<img src="${user.avatar}" alt="${user.username}">
+					<img src="${avatar}" alt="${username}">
 					<span class="user-message-info">
-						<strong class="user-name">${user.username}</strong>
+						<strong class="user-name">${username}</strong>
 						<span class="message-overview">
                             <i class="icon-mail-reply"></i>
                             <i class="icon-ok"></i>
