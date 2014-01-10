@@ -232,11 +232,10 @@
                 var user_slugs = that.$subject.data('users')
                 for (i in user_slugs) {
                     var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
-
-                    if ( typeof $user_item == 'undefined' ){
+                    console.log(typeof $user_item);
+                    if ( $user_item.attr('class') == undefined ){
                         window.location.reload();
                     }else{
-                        // $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']').remove();
                         $user_item.find('.js-mess-user-content').html(content);
                         $('.js-mess-user-list').prepend($user_item);
                     }
