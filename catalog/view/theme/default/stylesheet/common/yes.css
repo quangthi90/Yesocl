@@ -118,8 +118,8 @@ ul
     padding: 0px;
 }
 
-*:focus {
-  outline: 0;
+*, *:focus {
+  outline: none;
 }
 /*END OVERLOAD BOOTSTRAP*/
 /* --------------------------------- START Y-CSS ----------------------------------------------- */
@@ -156,9 +156,11 @@ ul{
 }
 a {
   text-decoration: none;
+  outline: none;
 }
 a > i,i{
-  color: #0E0E0E;  
+  color: #0E0E0E; 
+  outline: none; 
 }
 a:hover,
 a:focus {
@@ -671,6 +673,9 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .notification-content-list .notification-content-item.unread{
   background-color: #F5F5F5;
+}
+.notification-content-list .notification-content-item.unread:hover{
+  background-color: #F7F7F7;
 }
 .notification-content-list .notification-content-item:last-child {
   border-bottom: none;

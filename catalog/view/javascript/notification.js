@@ -30,12 +30,12 @@
 			}
 			btnInvoke.on('click', function(e){
 				e.preventDefault();
-				var hasActive = me.hasClass('active');
 				that.allNotificationList.css({'opacity': '0'});
 				that.notificationItem.removeClass('active');
-				if(!hasActive){
-					listNotification.css({'opacity': '1'});
-					me.addClass('active');
+				var ni = $(this).parent('.notification-item');
+				if(!ni.hasClass('active')){
+					ni.children('.notification-content-list').css({'opacity': '1'});
+					ni.addClass('active');
 				}
 			});
 		});
@@ -49,7 +49,7 @@
 			});
 		}
 		that.notInclude.on('click', function(){ 
-			that.allNotificationList.slideUp(10);
+			that.allNotificationList.css({'opacity': '0'});
 			that.notificationItem.removeClass('active');
 		});
 	}
