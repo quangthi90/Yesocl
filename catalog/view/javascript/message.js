@@ -296,6 +296,130 @@
     });
 }(jQuery, document));
 
+// Submit chat
+/*(function($, document, undefined) {
+    function MessageChat($el) {
+        this.$el = $el;
+        this.$subject = $el.find('.js-message-to');
+        this.$content = $el.find('.js-message-content');
+        this.$sendBtn = $el.find('.js-btn-message-send');
+
+        this.attachEvents();
+    };
+    MessageChat.prototype.attachEvents = function() {
+        var that = this;
+
+        that.$content.keyup(function(e){
+            e.preventDefault();
+
+            if(e.keyCode === 13 && $('.js-mess-check').parent().hasClass('checked') && that.validate() ){
+                that.$sendBtn.trigger('click');
+                return false;
+            }
+        });
+        that.$sendBtn.click(function(e){
+            e.preventDefault();
+            
+            if ( that.validate() == false ){
+                return false;
+            }
+            
+            that.submit(that.$sendBtn);
+
+            return false;
+        });
+    };
+    MessageChat.prototype.submit = function($button) {
+        var that = this;        
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  yRouting.generate('MessageSend'),
+            data: {
+                user_slugs: this.$subject.data('users'),
+                content: this.$content.val().trim()
+            },
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) { 
+            if(data.success == 'ok'){
+                var content = that.$content.val().trim();
+
+                that.$el.find('.tags-container').html('');
+                that.$content.val('');
+
+                var user_slugs = that.$subject.data('users')
+                for (i in user_slugs) {
+                    var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
+                    
+                    if ( $user_item.attr('class') == undefined ){
+                        if ( window.yListFriends == null || window.yListFriends[user_slugs[i]] == undefined ){
+                            window.location.reload();
+                        }
+                        var user = window.yListFriends[user_slugs[i]];
+                        user['content'] = content;
+                        $user_item = $.tmpl( $('#message-user-item'), user);
+                        $(document).trigger('MESSAGE_LIST', [$user_item]);
+                    }else{
+                        var users = $('.js-mess-user-list').data('users-messages');
+                        if ( typeof users_messages == 'undefined' ){
+                            users = new HashTable();
+                        }
+
+                        var user_messages = users.getItem(user_slugs[i]);
+                        if ( typeof user_messages != 'undefined' ){
+                            user_messages.push({
+                                content: content,
+                                created: data.time,
+                                user: data.user
+                            });
+                            users.setItem(user_slugs[i], user_messages);
+                            $('.js-mess-user-list').data('users-messages', users);
+                        }
+                    }
+
+                    $user_item.find('.js-mess-user-content').html(content);
+                    $('.js-mess-user-list').prepend($user_item);
+                };
+
+                $('.mfp-ready').trigger('click');
+                $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+            }
+        });
+    };
+    MessageChat.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+    MessageChat.prototype.validate = function() {
+        var tagedUsers = this.$subject.data('users');
+        if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
+            this.$subject.focus();
+            return false;
+        }else if( this.$content.val().trim().length == 0 ){
+            return false;
+        }
+        return true;
+    };
+    $(document).ready(function() {
+        $('#new-message-form').each(function(){
+            new MessageChat($(this));
+        });
+    });
+}(jQuery, document));*/
+
 // Load list message by user
 (function($, document, undefined) {
     function MessageList($el) {
@@ -303,6 +427,7 @@
         this.$userMessBtn = $el.find('.js-mess-user-link');
         
         this.slug = $el.data('user-slug');
+        this.username = $el.data('username');
 
         this.attachEvents();
     };
@@ -323,13 +448,15 @@
     MessageList.prototype.submit = function($button) {
         var that = this;        
 
-        var users = $('.js-mess-user-list').data('users-messages');
-        if ( typeof users == 'undefined' ){
-            users = new HashTable();
+        var users_messages = $('.js-mess-user-list').data('users-messages');
+        if ( typeof users_messages == 'undefined' ){
+            users_messages = new HashTable();
         }
-        $('.js-mess-user-list').data('users-messages', users);
+        $('.js-mess-user-list').data('users-messages', users_messages);
 
-        if ( typeof users.getItem(that.slug) == 'undefined' ){
+        $('.js-mess-username').html( that.username );
+
+        if ( typeof users_messages.getItem(that.slug) == 'undefined' ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  yRouting.generate('MessageGetList', {
@@ -342,19 +469,19 @@
 
             promise.then(function(data) { 
                 if(data.success == 'ok'){
-                    var $htmlContent = '';
                     $('.js-mess-list-content').html('');
                     for ( key in data.messages ){
                         $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), data.messages[key]) );
                     }
 
                     // Cache users message
-                    users.setItem(that.slug, data.messages);
+                    users_messages.setItem(that.slug, data.messages);
+                    $('.js-mess-user-list').data('users-messages', users_messages);
                 }
             });
         }else{
             $('.js-mess-list-content').html('');
-            var messages = users.getItem(that.slug);
+            var messages = users_messages.getItem(that.slug);
             for ( key in messages ){
                 $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), messages[key]) );
             }

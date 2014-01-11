@@ -110,7 +110,7 @@
 	{% endblock %}
 {# -- End Comment -- #}
 
-{# -- Comment -- #}
+{# -- Post -- #}
 	{% block common_html_block_post_advance_form %}
 		{% if post_popup_id is not defined %}
 			{% set post_popup_id = 'post-advance-add-popup' %}
@@ -261,7 +261,7 @@
 			</div>
 		{% endraw %}
 	{% endblock %}
-{# -- End Comment -- #}
+{# -- End Post -- #}
 
 {# -- Message -- #}
 	{% block common_html_block_new_message_form %}
@@ -330,7 +330,7 @@
 	{% block common_html_block_message_user_item %}
 		{% raw %}
 		<div id="message-user-item">
-			<li class="user-message-li js-mess-user-item sent-box read" data-user-slug="${slug}">
+			<li class="user-message-li js-mess-user-item sent-box read" data-user-slug="${slug}" data-username="${username}">
 				<a href="#" class="user-message-link js-mess-user-link">
 					<img src="${avatar}" alt="${username}">
 					<span class="user-message-info">

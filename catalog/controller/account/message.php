@@ -126,7 +126,8 @@ class ControllerAccountMessage extends Controller {
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'messages' => $aReturnMessages
+            'messages' => $aReturnMessages,
+            'user' => $aObjectUser
         )));
 	}
 }

@@ -33,7 +33,7 @@
             				<ul class="js-mess-user-list">
             					{% for message in messages %}
                                     {% set user = users[message.object_id] %}
-	            				<li class="user-message-li js-mess-user-item {% if message.is_sender == true %}sent-box{% else %}inbox{% endif %} {% if loop.index == 1 %}active read{% elseif message.read == false %}unread{% else %}read{% endif %}" data-user-slug="{{ user.slug }}">
+	            				<li class="user-message-li js-mess-user-item {% if message.is_sender == true %}sent-box{% else %}inbox{% endif %} {% if loop.index == 1 %}active read{% elseif message.read == false %}unread{% else %}read{% endif %}" data-user-slug="{{ user.slug }}" data-username="{{ user.username }}">
 	            					<a href="#" class="user-message-link js-mess-user-link">
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
 	            						<span class="user-message-info">
@@ -54,7 +54,7 @@
             	</div>
             	<div class="message-box-list">
             		<div class="mesasage-box-header">
-            			<h3 class="message-box-name"></h3>
+            			<h3 class="message-box-name js-mess-username"></h3>
             			<div class="message-box-tools dropdown">
             				<a class="btn btn-yes dropdown-toggle tool-item" data-toggle="dropdown">
                                 <i class="icon-gear"></i>Action <i class="icon-caret-down"></i>
