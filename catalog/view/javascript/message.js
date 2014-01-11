@@ -227,7 +227,7 @@
                 that.$el.find('.tags-container').html('');
                 that.$content.val('');
 
-                var user_slugs = that.$subject.data('users')
+                var user_slugs = that.$subject.data('users');
                 for (i in user_slugs) {
                     var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
                     
@@ -237,17 +237,17 @@
                         }
                         var user = window.yListFriends[user_slugs[i]];
                         user['content'] = content;
-                        $user_item = $.tmpl( $('#message-user-item'), user);
+                        $user_item = $.tmpl( $('#message-user-item'), user );
                         $(document).trigger('MESSAGE_LIST', [$user_item]);
                     }else{
                         var users = $('.js-mess-user-list').data('users-messages');
-                        if ( typeof users_messages == 'undefined' ){
+                        if ( typeof users == 'undefined' ){
                             users = new HashTable();
                         }
 
                         var user_messages = users.getItem(user_slugs[i]);
                         if ( typeof user_messages != 'undefined' ){
-                            user_messages.push({
+                            user_messages.unshift({
                                 content: content,
                                 created: data.time,
                                 user: data.user
@@ -256,6 +256,12 @@
                             $('.js-mess-user-list').data('users-messages', users);
                         }
                     }
+                    
+                    // Update time for list message users
+                    var $time = $user_item.find('.js-mess-user-time').clone();
+                    $user_item.find('.js-mess-user-time').remove();
+                    $time.attr('title', data.time).html('').timeago();
+                    $user_item.find('.js-mess-user-info').append($time);
 
                     $user_item.find('.js-mess-user-content').html(content);
                     $('.js-mess-user-list').prepend($user_item);
@@ -297,13 +303,13 @@
 }(jQuery, document));
 
 // Submit chat
-/*(function($, document, undefined) {
+(function($, document, undefined) {
     function MessageChat($el) {
         this.$el = $el;
-        this.$subject = $el.find('.js-message-to');
+        this.$subject = $el.find('.js-mess-username');
         this.$content = $el.find('.js-message-content');
         this.$sendBtn = $el.find('.js-btn-message-send');
-
+        
         this.attachEvents();
     };
     MessageChat.prototype.attachEvents = function() {
@@ -332,11 +338,12 @@
     MessageChat.prototype.submit = function($button) {
         var that = this;        
 
+        var slug = this.$subject.data('user-slug');
         var promise = $.ajax({
             type: 'POST',
             url:  yRouting.generate('MessageSend'),
             data: {
-                user_slugs: this.$subject.data('users'),
+                user_slugs: [slug],
                 content: this.$content.val().trim()
             },
             dataType: 'json'
@@ -347,46 +354,41 @@
         promise.then(function(data) { 
             if(data.success == 'ok'){
                 var content = that.$content.val().trim();
-
-                that.$el.find('.tags-container').html('');
                 that.$content.val('');
 
-                var user_slugs = that.$subject.data('users')
-                for (i in user_slugs) {
-                    var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
-                    
-                    if ( $user_item.attr('class') == undefined ){
-                        if ( window.yListFriends == null || window.yListFriends[user_slugs[i]] == undefined ){
-                            window.location.reload();
-                        }
-                        var user = window.yListFriends[user_slugs[i]];
-                        user['content'] = content;
-                        $user_item = $.tmpl( $('#message-user-item'), user);
-                        $(document).trigger('MESSAGE_LIST', [$user_item]);
-                    }else{
-                        var users = $('.js-mess-user-list').data('users-messages');
-                        if ( typeof users_messages == 'undefined' ){
-                            users = new HashTable();
-                        }
+                var $mess_item = $('.js-mess-list-content').find('.message-item:first-child').clone();
+                var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + slug + '\']');
 
-                        var user_messages = users.getItem(user_slugs[i]);
-                        if ( typeof user_messages != 'undefined' ){
-                            user_messages.push({
-                                content: content,
-                                created: data.time,
-                                user: data.user
-                            });
-                            users.setItem(user_slugs[i], user_messages);
-                            $('.js-mess-user-list').data('users-messages', users);
-                        }
-                    }
+                if ( $mess_item.attr('class') == undefined || $user_item.attr('class') == undefined ){
+                    window.location.reload();
+                }
 
-                    $user_item.find('.js-mess-user-content').html(content);
-                    $('.js-mess-user-list').prepend($user_item);
-                };
+                $mess_item.find('.js-mess-content').html( content );
+                $mess_item.find('.js-mess-date').html( data.time );
+                $('.js-mess-list-content').append($mess_item);
 
-                $('.mfp-ready').trigger('click');
-                $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+                // Update time for list message users
+                var $time = $user_item.find('.js-mess-user-time').clone();
+                $user_item.find('.js-mess-user-time').remove();
+                $time.attr('title', data.time).html('').timeago();
+                $user_item.find('.js-mess-user-info').append($time);
+
+                $('.js-mess-user-list').prepend($user_item);
+                var users = $('.js-mess-user-list').data('users-messages');
+                if ( typeof users == 'undefined' ){
+                    users = new HashTable();
+                }
+
+                var user_messages = users.getItem(slug);
+                if ( typeof user_messages != 'undefined' ){
+                    user_messages.push({
+                        content: content,
+                        created: data.time,
+                        user: data.user
+                    });
+                    users.setItem(slug, user_messages);
+                    $('.js-mess-user-list').data('users-messages', users);
+                }
             }
         });
     };
@@ -404,21 +406,17 @@
         promise.then(f, f);
     };
     MessageChat.prototype.validate = function() {
-        var tagedUsers = this.$subject.data('users');
-        if(typeof tagedUsers === 'undefined' || tagedUsers.length == 0) {
-            this.$subject.focus();
-            return false;
-        }else if( this.$content.val().trim().length == 0 ){
+        if( this.$content.val().trim().length == 0 ){
             return false;
         }
         return true;
     };
     $(document).ready(function() {
-        $('#new-message-form').each(function(){
+        $('.js-mess-box').each(function(){
             new MessageChat($(this));
         });
     });
-}(jQuery, document));*/
+}(jQuery, document));
 
 // Load list message by user
 (function($, document, undefined) {
@@ -454,7 +452,7 @@
         }
         $('.js-mess-user-list').data('users-messages', users_messages);
 
-        $('.js-mess-username').html( that.username );
+        $('.js-mess-username').html( that.username ).data('user-slug', that.slug);
 
         if ( typeof users_messages.getItem(that.slug) == 'undefined' ){
             var promise = $.ajax({

@@ -307,8 +307,8 @@
 				</a>
 				<div class="message-body">
 					<h6 class="sender-name">${user.username}</h6>
-					<span class="sender-time"><i class="icon-calendar"></i> ${created}</span>
-					<div class="message-content">${content}</div>
+					<span class="sender-time"><i class="icon-calendar"></i> <span class="js-mess-date">${created}</span></span>
+					<div class="message-content js-mess-content">${content}</div>
 				</div>
 				<div class="yes-dropdown">
 		            <div class="dropdown">
@@ -333,14 +333,14 @@
 			<li class="user-message-li js-mess-user-item sent-box read" data-user-slug="${slug}" data-username="${username}">
 				<a href="#" class="user-message-link js-mess-user-link">
 					<img src="${avatar}" alt="${username}">
-					<span class="user-message-info">
+					<span class="user-message-info js-mess-user-info">
 						<strong class="user-name">${username}</strong>
 						<span class="message-overview">
                             <i class="icon-mail-reply"></i>
                             <i class="icon-ok"></i>
                             ${content}
                         </span>
-						<span class="message-time timeago" title="${created}"></span>
+						<span class="message-time timeago js-mess-user-time" title="${created}"></span>
 					</span>
 				</a>
 			</li>

@@ -36,14 +36,14 @@
 	            				<li class="user-message-li js-mess-user-item {% if message.is_sender == true %}sent-box{% else %}inbox{% endif %} {% if loop.index == 1 %}active read{% elseif message.read == false %}unread{% else %}read{% endif %}" data-user-slug="{{ user.slug }}" data-username="{{ user.username }}">
 	            					<a href="#" class="user-message-link js-mess-user-link">
 	            						<img src="{{ user.avatar }}" alt="{{ user.username }}">
-	            						<span class="user-message-info">
+	            						<span class="user-message-info js-mess-user-info">
 	            							<strong class="user-name">{{ user.username }}</strong>
 	            							<span class="message-overview">
                                                 <i class="icon-mail-reply"></i>
                                                 <i class="icon-ok"></i>
                                                 <span class="js-mess-user-content">{{ message.content }}</span>
                                             </span>
-	            							<span class="message-time timeago" title="{{ date_format(message.created) }}"></span>
+	            							<span class="message-time timeago js-mess-user-time" title="{{ date_format(message.created) }}"></span>
 	            						</span>
 	            					</a>
 	            				</li>
@@ -52,7 +52,7 @@
             			</div>
             		</div>
             	</div>
-            	<div class="message-box-list">
+            	<div class="message-box-list js-mess-box">
             		<div class="mesasage-box-header">
             			<h3 class="message-box-name js-mess-username"></h3>
             			<div class="message-box-tools dropdown">
@@ -79,9 +79,9 @@
                         </div>                        
             		</div>
           	  		<div class="mesasage-box-footer">
-            			<textarea class="message-editor" placeholder="Write a message ..."></textarea>
+            			<textarea class="message-editor js-message-content" placeholder="Write a message ..."></textarea>
             			<div class="new-message-footer">
-            				<a href="" class="btn btn-yes btn-send btn-send-msg">Send</a>
+            				<a href="" class="btn btn-yes btn-send btn-send-msg js-btn-message-send">Send</a>
             				<label class="enter-option">
             					<input type="checkbox" class="enter-check" checked="checked"> Press enter to send
             				</label>            				
