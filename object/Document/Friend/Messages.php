@@ -20,6 +20,11 @@ Class Messages {
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
 	private $lastMessages = array();
 
+	/** 
+	 * @MongoDB\Int
+	 */
+	private $unRead;
+
 	public function getLastMessageByUserId( $idUser ){
 		foreach ( $this->lastMessages as $oMessage ) {
 			if ( $oMessage->getObject()->getId() == $idUser ){
@@ -34,6 +39,7 @@ Class Messages {
     public function prePersist()
     {
     	$this->created = new \DateTime();
+    	$this->unRead = 0;
     }
 
 	public function getId() {
@@ -55,6 +61,10 @@ Class Messages {
 
 		$this->lastMessages[] = $message;
 		$this->messages[] = $message;
+
+		if ( $message->getRead() == false ){
+			$this->unRead++;
+		}
 	}
 
 	public function setMessages( $messages ){
@@ -74,6 +84,15 @@ Class Messages {
 	}
 
 	public function getLastMessages(){
+		$this->unRead = 0;
 		return $this->lastMessages;
+	}
+
+	public function setUnRead( $unRead ){
+		$this->unRead = $unRead;
+	}
+
+	public function getUnRead(){
+		return $this->unRead;
 	}
 }

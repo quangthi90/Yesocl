@@ -143,5 +143,20 @@ class ModelFriendMessage extends Model {
 
 		return true;
 	}
+
+	/**
+	 * Get Messages Object
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	- Object MongoID User
+	 * @return: object Messages
+	 */
+	public function getMessagesObject( $idUser ){
+		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
+			'user.id' => $idUser
+		));
+
+		return $oMessages;
+	}
 }
 ?>
