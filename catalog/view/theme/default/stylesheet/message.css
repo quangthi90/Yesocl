@@ -31,7 +31,6 @@
 }
 .user-box .user-box-users .user-message-li {
     padding: 1px 0px 1px 15px;
-    border-right: 1px solid #FFF;
 }
 .user-box .user-box-users .user-message-li:first-child {
     padding-top: 0px;
@@ -40,11 +39,11 @@
     display: block;
     overflow: hidden;
     position: relative;
+    border-right: 1px solid #FFF;
     background-color: #FAFAFA;
 }
 .user-box .user-box-users .user-message-li .user-message-link:hover,
 .user-box .user-box-users .user-message-li.active .user-message-link {
-    background-color: #f0f0f0;
     border-right: 1px solid #009B77;
 }
 .user-message-li .user-message-link img {
@@ -78,16 +77,16 @@
     margin-right: 2px;
     display: none;
 }
+.user-box .user-box-users .user-message-li.read .user-message-link {
+}
+.user-box .user-box-users .user-message-li.unread .user-message-link {
+    background-color: #DFDFDF;
+}
 .user-message-li.sent-box .user-message-link span.message-overview > i.icon-mail-reply {
     display: inline-block;
 }
-.user-message-li.unread .user-message-link i.icon-ok {
-    display: none;
-}
-.user-message-li.read .user-message-link i.icon-ok {
+.user-message-li.inbox .user-message-link span.message-overview > i.icon-ok {
     display: inline-block;
-    float: right;
-    padding: 5px;
 }
 .user-message-li .user-message-link span.message-time {
     font-size: 11px;
