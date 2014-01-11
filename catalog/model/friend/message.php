@@ -62,7 +62,7 @@ class ModelFriendMessage extends Model {
 	 *	- Int Limit
 	 * @return: array objects Message
 	 */
-	public function getMessagesByUser( $idCurrUser, $idObjectUser, $iStart = 0, $iLimit = 20 ){
+	public function getMessagesByUser( $idCurrUser, $idObjectUser, $bIsRead = true, $iStart = 0, $iLimit = 20 ){
 		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
 			'user.id' => $idCurrUser
 		));
@@ -90,7 +90,13 @@ class ModelFriendMessage extends Model {
 			$aMessageUsers[] = $oMessage;
 
 			$iIndex++;
+
+			if ( $bIsRead == true ){
+				$oMessage->setRead( true );
+			}
 		}
+
+		$this->dm->flush();
 
 		return $aMessageUsers;
 	}

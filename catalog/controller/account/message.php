@@ -17,6 +17,7 @@ class ControllerAccountMessage extends Controller {
 
 		$this->data['users'] = array();
 		$this->data['messages'] = array();
+		$iCountUnReadMess = 0;
 		foreach ( $aMessages as $key => $oMessage ) {
 			$this->data['messages'][] = array(
 				'content' 		=> $oMessage->getContent(),
@@ -30,7 +31,13 @@ class ControllerAccountMessage extends Controller {
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 50, 50 );
 			$this->data['users'][$aUser['id']] = $aUser;
+
+			if ( $oMessage->getRead() == false ){
+				$iCountUnReadMess++;
+			}
 		}
+
+		$this->data['inbox_length'] = $iCountUnReadMess;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
