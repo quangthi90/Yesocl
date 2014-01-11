@@ -12,7 +12,7 @@ class ModelFriendMessage extends Model {
 	 *	Int Limit
 	 * @return: array objects Message
 	 */
-	public function getLastMessages( $idUser, $iStart = 0, $iLimit = 20 ){
+	public function getLastMessages( $idUser, $bIsOnlyUnread = false, $iStart = 0, $iLimit = 20 ){
 		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
 			'user.id' => $idUser
 		));
@@ -20,36 +20,10 @@ class ModelFriendMessage extends Model {
 		if ( !$oMessages ){
 			return null;
 		}
+
+		$aMessages = $oMessages->getLastMessages()->toArray();
 		
-		$aMessages = $oMessages->getMessages()->toArray();
-		$iCountMessages = count( $aMessages );
-		$iIndex = 1;
-		$aMessageUsers = array();
-		$aUserIds = array();
-
-		for ( $i = $iCountMessages - 1; $i >= 0; $i-- ) { 
-			if ( count($aMessageUsers) == $iLimit ){
-				break;
-			}
-
-			if ( $iIndex < $iStart ){
-				continue;
-			}
-
-			$oMessage = $aMessages[$i];
-			$idObjectUser = $oMessage->getObject()->getId();
-
-			if ( empty($aUserIds[$idObjectUser]) ){
-				$aMessageUsers[] = $oMessage;
-				$aUserIds[$idObjectUser] = $idObjectUser;
-			}else{
-				continue;
-			}
-
-			$iIndex++;
-		}
-
-		return $aMessageUsers;
+		return array_reverse($aMessages);;
 	}
 
 	/**
@@ -94,6 +68,12 @@ class ModelFriendMessage extends Model {
 			if ( $bIsRead == true ){
 				$oMessage->setRead( true );
 			}
+		}
+
+		$oMessage = $oMessages->getLastMessageByUserId( $idObjectUser );
+
+		if ( $oMessage ){
+			$oMessage->setRead( true );
 		}
 
 		$this->dm->flush();

@@ -13,12 +13,12 @@ class ControllerAccountMessage extends Controller {
 		$this->load->model('friend/message');
 		$this->load->model('tool/image');
 		$idCurrentUser = $this->customer->getId();
-		$aMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
+		$lMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
 
 		$this->data['users'] = array();
 		$this->data['messages'] = array();
 		$iCountUnReadMess = 0;
-		foreach ( $aMessages as $key => $oMessage ) {
+		foreach ( $lMessages as $key => $oMessage ) {
 			$this->data['messages'][] = array(
 				'content' 		=> $oMessage->getContent(),
 				'object_id' 	=> $oMessage->getObject()->getId(),
@@ -32,7 +32,7 @@ class ControllerAccountMessage extends Controller {
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 50, 50 );
 			$this->data['users'][$aUser['id']] = $aUser;
 
-			if ( $oMessage->getRead() == false ){
+			if ( $oMessage->getRead() == false && $key != 0 ){
 				$iCountUnReadMess++;
 			}
 		}
