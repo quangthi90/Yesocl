@@ -137,5 +137,17 @@ class ControllerAccountMessage extends Controller {
             'user' => $aObjectUser
         )));
 	}
+
+	public function getLastMessages(){
+		$this->load->model('friend/message');
+        $this->load->model('tool/image');
+
+        $aMessages = $this->model_friend_message->getLastMessages( $this->customer->getId() );
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok',
+            'error' => $this->error['warning']
+        )));
+	}
 }
 ?>

@@ -12,7 +12,7 @@ class ModelFriendMessage extends Model {
 	 *	Int Limit
 	 * @return: array objects Message
 	 */
-	public function getLastMessages( $idUser, $bIsOnlyUnread = false, $iStart = 0, $iLimit = 20 ){
+	public function getLastMessages( $idUser ){
 		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
 			'user.id' => $idUser
 		));
