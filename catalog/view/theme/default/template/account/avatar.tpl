@@ -23,10 +23,10 @@
                     <div class="bar" style="width: 0%;"></div>
                 </div>
                 <div class="drag-img-upload">                           
-                    <a href="" class="btn btn-yes btn-upload">
+                    <a href="" class="btn btn-yes btn-upload" onclick="$('#avatar-upload-img').trigger('click'); return false;">
                         <span><i class="icon-upload"></i> Choose image</span>
-                        <input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
                     </a>
+                    <input type="file" data-no-uniform="true" class="hidden img-upload" id="avatar-upload-img" name="files[]" data-url="{{ path('UploadFile') }}" />
                 </div>
             </div>
             <div class="avatar-step image-cropper" id="avatar-edit-image">

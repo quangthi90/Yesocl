@@ -166,7 +166,9 @@
             that.$nonePreviewImage.show(10);
             that.$previewImage.hide(10);
             that.$saveAvatarBtn.addClass('disabled');
-            that.$jcropApi.release();
+            if(that.$jcropApi !== null ){
+                that.$jcropApi.release();
+            }
         });
         that.$saveAvatarBtn.on('click', function(e){
             e.preventDefault();
