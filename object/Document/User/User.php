@@ -24,6 +24,12 @@ Class User {
 	private $password;
 
 	/** @MongoDB\String */
+	private $forgotten;
+
+	/** @MongoDB\Date */
+	private $forgotCreated;
+
+	/** @MongoDB\String */
 	private $salt;
 
 	/** @MongoDB\String */
@@ -228,6 +234,24 @@ Class User {
 
 	public function getPassword(){
 		return $this->password;
+	}
+
+	public function setForgotten( $forgotten ){
+		$this->forgotCreated = new \DateTime();
+		date_sub($this->forgotCreated, date_interval_create_from_date_string('1 days'));
+		$this->forgotten = $forgotten;
+	}
+
+	public function getForgotten(){
+		return $this->forgotten;
+	}
+
+	public function setForgotCreated( $forgotCreated ){
+		$this->forgotCreated = $forgotCreated;
+	}
+
+	public function getForgotCreated(){
+		return $this->forgotCreated;
 	}
 
 	public function setSalt( $salt ){

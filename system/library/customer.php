@@ -58,7 +58,10 @@ class Customer {
 		    	$user_password = sha1($salt . sha1($salt . sha1($password)));
 		    	
 		    	if ( $user_password != $customer_query->getPassword() ){
-		    		return false;
+		    		$date = new DateTime();
+		    		if ( $customer_query->getForgotCreated() > $date || $user_password != $customer_query->getForgotten() ){
+		    			return false;
+		    		}
 		    	}
 		    }
 

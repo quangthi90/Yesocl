@@ -3,22 +3,26 @@ class ControllerAccountForgotten extends Controller {
 	private $error = array();
 
 	public function index() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+	      	$this->data['base'] = $this->config->get('config_ssl');
+	    } else {
+	      	$this->data['base'] = HTTP_SERVER;
+	    }
+
 		if ($this->customer->isLogged()) {
-			$this->redirect($this->url->link('account/account', '', 'SSL'));
+			$this->redirect($this->extension->path('HomePage'));
 		}
 
 		$this->language->load('account/forgotten');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 		
-		$this->load->model('account/customer');
+		$this->load->model('user/user');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->language->load('mail/forgotten');
 			
-			$password = substr(md5(mt_rand()), 0, 10);
-			
-			$this->model_account_customer->editPassword($this->request->post['email'], $password);
+			$password = $this->model_user_user->editPassword($this->request->post['email']);
 			
 			$subject = sprintf($this->language->get('text_subject'), 'Admin');
 			
@@ -43,7 +47,7 @@ class ControllerAccountForgotten extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 
-			$this->redirect($this->url->link('account/forgotten', '', 'SSL'));
+			$this->redirect($this->extension->path('LostPass'));
 		}
 		
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -80,7 +84,7 @@ class ControllerAccountForgotten extends Controller {
 	private function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
-		} elseif ($this->model_account_customer->getTotalCustomersByEmail($this->request->post['email']) == 0) {
+		} elseif ($this->model_user_user->getTotalCustomersByEmail($this->request->post['email']) == 0) {
 			$this->error['warning'] = $this->language->get('error_email');
 		}
 

@@ -246,5 +246,33 @@ class ModelUserUser extends Model {
 		
 		return false;
 	}
+
+	public function editPassword($email, $password) {
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'emails.email' => $email
+		));
+
+		if ( !$user || $user->getIsSocial() == true ){
+			return null;
+		}
+
+		$salt = $user->getSalt();
+		$passwordInput = substr(md5(mt_rand()), 0, 10);
+		$password = sha1($salt . sha1($salt . sha1($passwordInput)));
+		
+		$user->setForgotten( $password );
+
+		$this->dm->flush();
+
+		return $passwordInput;
+	}
+
+	public function getTotalCustomersByEmail($email) {
+		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
+			'emails.email' => $email
+		));
+
+		return $query->count();
+	}
 }
 ?>
