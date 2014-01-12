@@ -1,5 +1,6 @@
 // MESSAGE JS
 var currentTagsGlobal = [];
+var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
 
 (function($, document, undefined) {
     var minWidthContent = 1000;
@@ -25,6 +26,10 @@ var currentTagsGlobal = [];
                 that.$sendBtn.show(10);
             }
         });
+        this.$messageList.on(_LoadMessageCompletedEvent, function(){
+            $(this).mCustomScrollbar("scrollTo", "bottom");
+        });
+
         that.$sendBtn.hide(10);
     };
     MessageLayout.prototype.makeLayout = function() {
@@ -263,14 +268,14 @@ var currentTagsGlobal = [];
                     $('.js-mess-user-list').prepend($user_item);
                 };
 
-                /*Todo: clear form new message - Thiet*/
+                //Reset inputs and close message form:
                 that.$subject.val('');
                 that.$content.val('');
                 that.$el.find('.tags-container').html('');
                 currentTagsGlobal = [];
-                that.$subject.data('users', currentTagsGlobal);          
-
+                that.$subject.data('users', currentTagsGlobal);
                 $('.mfp-ready').trigger('click');
+
                 $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
             }
         });
@@ -481,6 +486,10 @@ var currentTagsGlobal = [];
                     $('.js-mess-user-list').data('users-messages', users_messages);
 
                     that.$el.removeClass('unread').addClass('read');
+                    //Scroll to bottom:
+                    setTimeout(function(){
+                        $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
+                    }, 500);              
                 }
             });
         }else{
@@ -489,11 +498,9 @@ var currentTagsGlobal = [];
             for ( key in messages ){
                 $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), messages[key]) );
             }
-        }
-
-        /*
-        To do: move scroll to bottom code here
-        */
+            //Scroll to bottom:
+            $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
+        }        
     };
     MessageList.prototype.triggerProgress = function($el, promise){
         $('.js-mess-loading').removeClass('hidden');
@@ -514,7 +521,7 @@ var currentTagsGlobal = [];
     });
 }(jQuery, document));
 
-// Load list message by user
+// Filter message list
 (function($, document, undefined) {
     function MessageFilter($el) {
         this.$el = $el;
