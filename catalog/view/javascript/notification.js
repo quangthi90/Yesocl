@@ -12,8 +12,7 @@
 		var that = this;
 		that.notificationItem.each(function(){
 			var me = $(this);
-			var btnInvoke = $(this).children('.btn-notification');
-			var listNotification = $(this).children('.notification-content-list');
+			var listNotification = me.children('.notification-content-list');
 			if(!listNotification.hasClass('empty')){
 				var notificationText = me.find('.notification-text');
 				notificationText.each(function(){
@@ -28,28 +27,37 @@
 				});
 				listNotification.makeCustomScroll(false);				
 			}
-			btnInvoke.on('click', function(e){
-				e.preventDefault();
-				that.allNotificationList.css({'opacity': '0'});
-				that.notificationItem.removeClass('active');
-				var ni = $(this).parent('.notification-item');
-				if(!ni.hasClass('active')){
-					ni.children('.notification-content-list').css({'opacity': '1'});
-					ni.addClass('active');
-				}
-			});
-		});
-		var notificationLink = that.notificationItem.find('.notification-content-item[data-link]');
-		if(notificationLink.length > 0){
-			notificationLink.each(function(){
-				$(this).on('click', function(){
+			setTimeout(function(){
+				listNotification.fadeOut(100, function(){
+					$(this).css({'opacity': '1'});
+				});
+			}, 300);
+
+			//Click on notification item to go to post:
+			var notificationLink = me.find('.notification-content-item[data-link]');
+			if(notificationLink.length > 0){
+				notificationLink.on('click', function(){
 					that.notInclude.trigger('click');
 					location.href= $(this).attr('data-link');
 				});
-			});
-		}
+			}		
+		});
+		
+		that.allNotificationBtn.on('click', function(e){
+			e.preventDefault();
+			that.allNotificationList.fadeOut(10);
+			that.notificationItem.removeClass('active');
+			var ni = $(this).parent('.notification-item');
+			if(!ni.data('isShowing')) {
+				ni.children('.notification-content-list').fadeIn(100);
+				ni.addClass('active');
+				ni.data('isShowing', true);
+			}else {
+				ni.data('isShowing', false);
+			}
+		});
 		that.notInclude.on('click', function(){ 
-			that.allNotificationList.css({'opacity': '0'});
+			that.allNotificationList.fadeOut(10);
 			that.notificationItem.removeClass('active');
 		});
 	}

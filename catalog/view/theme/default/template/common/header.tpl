@@ -38,10 +38,10 @@
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
-          {#<a href="#">
+          <a href="{{ path('MessagePage') }}">
 			    	<i class="icon-edit"></i>
-			    </a>#}
-			    <a class="dropdown-toggle toggle-user-menu btn-header-not-search" id="toggle-user-menu" data-toggle="dropdown" href="#">
+			    </a>
+			    <a class="dropdown-toggle toggle-user-menu btn-header-not-search" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
 	    		</a>
 			    <ul class="dropdown-menu">
@@ -74,7 +74,6 @@
             <i class="icon-bell"></i>
             <span class="notification-item-count{% if notification_count == 0 %} hidden{% endif %}">{{ notification_count }}</span>
           </a>
-          {% if notifications|length > 0 %}
           <div class="notification-content-list">
             <ul>
               {% for notification in notifications %}
@@ -98,20 +97,17 @@
               {% endfor %}
             </ul>
           </div>
-          {% else %}
-          <div class="notification-content-list empty">
-            No new notifications
-          </div>
-          {% endif %}
         </div>
-        {#<div class="notification-item message">
-          <a href="#" class="btn-notification">
+        <div class="notification-item message">
+          <a href="#" class="btn-notification btn-header-not-search">
             <i class="icon-envelope"></i>
-            <span class="notification-item-count">5</span>
+            {% if mess_unread > 0 %}
+            <span class="notification-item-count">{{ mess_unread }}</span>
+            {% endif %}
           </a>
           <div class="notification-content-list">
             <ul>
-              <li class="notification-content-item">
+              {#<li class="notification-content-item">
                 <a href="#" class="notification-content-item-img">
                   <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
                 </a>
@@ -126,23 +122,10 @@
                     1 hour ago
                   </div>
                 </div>
-              </li>
-              <li class="notification-content-item">
-                <a href="#" class="notification-content-item-img">
-                  <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                </a>
-                <div class="notification-content-item-detail">
-                  <div class="notification-text">
-                    <a href="#">WMThiet</a> sent a message to you
-                  </div>
-                  <div class="message-content">
-                    hello everyone
-                  </div>
-                </div>
-              </li>                   
+              </li>#}
             </ul>
           </div>
-        </div>#}
+        </div>
         {% set requests = get_request_friend() %}
         <div class="notification-item friend">
           <a href="#" class="btn-notification btn-header-not-search">
@@ -171,10 +154,6 @@
               </li>
               {% endfor %}
             </ul>
-          </div>
-          {% else %}
-          <div class="notification-content-list empty">
-            No new friend requests
           </div>
           {% endif %}
         </div>
