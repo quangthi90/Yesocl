@@ -62,12 +62,12 @@ class ControllerAccountAvatar extends Controller {
         $aDatas = array('avatar' => array(
             'x' => $this->request->post['cropX'],
             'y' => $this->request->post['cropY'],
-            'width' => $this->request->get['cropW'],
+            'width' => $this->request->post['cropW'],
             'image_link' => $sImageLink,
             'extension' => $sExtension
         ));
 
-        $return = $this->model_user_user->editUser( $aDatas );
+        $return = $this->model_user_user->editUser( $this->customer->getSlug(), $aDatas );
 
         if ( !$return ){
         	return $this->response->setOutput(json_encode(array(

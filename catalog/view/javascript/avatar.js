@@ -182,6 +182,9 @@
                 cropW: $(this).data('crop-w'),
                 image: that.$imageUrl
             };
+
+            alert('width: ' + $(this).data('crop-w'));
+            return false;
             
             that.save($(this));
         });
