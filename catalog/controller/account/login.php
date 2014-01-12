@@ -3,6 +3,12 @@ class ControllerAccountLogin extends Controller {
 	private $error = array();
 	
 	public function index() {
+    if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+      $this->data['base'] = $this->config->get('config_ssl');
+    } else {
+      $this->data['base'] = HTTP_SERVER;
+    }
+    
 		$this->load->model('account/customer');	
 
 		if ( isset($this->session->data['warning']) ){
