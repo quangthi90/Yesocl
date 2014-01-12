@@ -20,13 +20,14 @@
                 </a>
             </div>
             <div class="block-content message-box">
-            	<div class="user-box">
+            	<div class="user-box" id="user-box">
             		<div class="user-box-menu" id="user-box-menu">
             			<a href="#">Inbox ({{ messages|length }})</a>
             			{#<a href="#">Other (10)</a>#}
             		</div>
             		<div class="user-box-search" id="user-box-search">
-            			<input type="text" id="message-search" placeholder="Search ..." />
+            			<input type="text" class="message-search" id="message-search" placeholder="Search ..." />
+                        <span class="mesage-search-loader"><i class="icon-spinner icon-spin"></i></span>
             		</div>
             		<div class="user-box-users">
             			<div class="user-box-scroll">

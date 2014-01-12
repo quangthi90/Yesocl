@@ -22,12 +22,21 @@
 }
 .user-box .user-box-search {
     padding: 5px 15px;
+    position: relative;
 }
-.user-box .user-box-search input {
+.user-box .user-box-search input.message-search {
     width: 95%;
 }
-.user-box .user-box-users {
-    
+.user-box .user-box-search .mesage-search-loader {
+    position: absolute;
+    right: 23px;
+    top: 8px;
+    display: none;
+}
+.user-box .user-box-search .mesage-search-loader > i {
+    font-size: 14px;
+}
+.user-box .user-box-users {    
 }
 .user-box .user-box-users .user-message-li {
     padding: 1px 0px 1px 15px;
