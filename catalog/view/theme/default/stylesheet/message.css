@@ -98,7 +98,7 @@
     display: inline-block;
 }
 .user-message-li .user-message-link span.message-time {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: bold;
     color: #838383;
     position: absolute;

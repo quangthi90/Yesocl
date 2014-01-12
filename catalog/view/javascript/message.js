@@ -1,4 +1,6 @@
 // MESSAGE JS
+var currentTagsGlobal = [];
+
 (function($, document, undefined) {
     var minWidthContent = 1000;
     function MessageLayout($el) {
@@ -55,7 +57,6 @@
 (function($, document, undefined) {
     var friendList = [];
     var map = {};
-    var currentTagsGlobal = [];
     var is_send_ajax = 0;
     function TagUser($el) {
         this.$root = $el;
@@ -222,11 +223,6 @@
         promise.then(function(data) { 
             if(data.success == 'ok'){
                 var content = that.$content.val().trim();
-
-                /*Todo: clear form new message - Thiet*/
-                that.$el.find('.tags-container').html('');
-                that.$content.val('');
-
                 var user_slugs = that.$subject.data('users');
                 for (i in user_slugs) {
                     var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + user_slugs[i] + '\']');
@@ -266,6 +262,13 @@
                     $user_item.find('.js-mess-user-content').html(content);
                     $('.js-mess-user-list').prepend($user_item);
                 };
+
+                /*Todo: clear form new message - Thiet*/
+                that.$subject.val('');
+                that.$content.val('');
+                that.$el.find('.tags-container').html('');
+                currentTagsGlobal = [];
+                that.$subject.data('users', currentTagsGlobal);          
 
                 $('.mfp-ready').trigger('click');
                 $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
