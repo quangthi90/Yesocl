@@ -1,5 +1,4 @@
 (function($, document, undefined) {
-
     function ImageUploader(el){
         this.$jqXHR = null;
         this.$container = el;
@@ -117,7 +116,7 @@
         that.$previewImage.prop('src', that.$imageUrl).load(function(){
             that.$nonePreviewImage.hide(10);
         });
-        that.$uploadedImage.prop('src', that.$imageUrl).load(function(){
+        that.$uploadedImage.prop('src', that.$imageUrl).load(function(e){
             that.$uploadedImageContainer.find('.loadding-icon').remove();
             that.$uploadedImage.fadeIn(200, function(){
                 $(this).Jcrop({
@@ -140,7 +139,6 @@
             }); 
             that.$clearPreviewBtn.trigger('click');
         });
-        
         that.$chooseAvatarBtn.on('click', function(e){
             e.preventDefault();
             if(that.$jcropApi !== null ){
@@ -175,10 +173,15 @@
             if($(this).hasClass('disabled')){
                 return false;
             }
-            var cropX = $(this).data('crop-x');
-            var cropY = $(this).data('crop-y');
-            var cropW = $(this).data('crop-w');
-            alert('Crop Image -> X:' + cropX + ', Y:' + cropY + ', Width:' + cropW);
+
+            that.data = {
+                cropX: $(this).data('crop-x'),
+                cropY: $(this).data('crop-y'),
+                cropW: $(this).data('crop-w'),
+                image: that.$imageUrl
+            };
+            
+            that.save($(this));
         });
     };
     ImageCropper.prototype.updatePreview = function(crop) {
@@ -203,6 +206,37 @@
             that.$previewImage.hide(10);
             that.$saveAvatarBtn.addClass('disabled');
         }
+    };
+    ImageCropper.prototype.save = function($button){
+        var that = this;        
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  yRouting.generate('SaveAvatar'),
+            data: that.data,
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) { 
+            if(data.success == 'ok'){ 
+                window.location.reload();
+            }
+        });     
+    };
+    ImageCropper.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
     };
 
     $(function(){        

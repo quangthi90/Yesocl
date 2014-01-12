@@ -30,7 +30,6 @@ $_['route']['Logout']						= 'account/logout';
 $_['route']['SearchPage']					= 'common/search';
 $_['route']['FriendTypeahead']				= 'common/search/friendTypeahead/';
 $_['route']['PostTypeahead']				= 'common/search/postTypeahead/';
-$_['route']['ChangeAvatar']					= 'account/avatar';
 $_['route']['Login']						= 'account/login';
 $_['route']['LostPass']						= 'account/forgotten';
 
@@ -75,4 +74,8 @@ $_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete'
 
 // Notification
 $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
+
+// Avatar
+$_['route']['ChangeAvatar']					= 'account/avatar';
+$_['route']['SaveAvatar']					= 'account/avatar/save';
 ?>

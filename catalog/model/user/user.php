@@ -169,13 +169,16 @@ class ModelUserUser extends Model {
 			$user2->getFriends()->removeElement( $user2->getFriendBySlug( $user_slug ) );
 		}
 
-		$this->load->model('tool/image');
-		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ){
+		if ( !empty($data['avatar']) && !empty($data['avatar']['image_link']) && !empty($data['avatar']['extension']) && is_file($data['avatar']['image_link']) ){
+			$this->load->model('tool/image');
+
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
-			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
+			$path = $folder_link . $user->getId() . '/' . $avatar_name . $data['extension'];
+			$dest = DIR_IMAGE . $path;
+			
+			if ( $this->model_tool_image->moveFile($data['image_link'], $dest) ){
+				$user->setAvatar( $path );
 			}
 		}
 

@@ -31,7 +31,6 @@ $_['routing']['SearchPage']						= 'search/{keyword}/';
 $_['routing']['FriendTypeahead']				= 'search/typeahead/friend/{keyword}/';
 $_['routing']['PostTypeahead']					= 'search/typeahead/post/{keyword}/';
 $_['routing']['Login']							= 'login/';
-$_['routing']['ChangeAvatar']					= 'change-avatar/';
 $_['routing']['LostPass']						= 'lost_password/';
 
 // Ajax
@@ -75,4 +74,7 @@ $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 // Notification
 $_['routing']['NotificationReadAll']			= 'notification/readAll/';
 
+// Avatar
+$_['routing']['ChangeAvatar']					= 'avatar/change/';
+$_['routing']['SaveAvatar']						= 'avatar/save/';
 ?>
