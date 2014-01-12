@@ -17,13 +17,29 @@ Class Messages {
 	/** @MongoDB\EmbedMany(targetDocument="Message") */
 	private $messages = array();
 
-	/** @MongoDB\Date */
-	private $lastMessageCreated;
+	/** @MongoDB\EmbedMany(targetDocument="Message") */
+	private $lastMessages = array();
+
+	/** 
+	 * @MongoDB\Int
+	 */
+	private $unRead;
+
+	public function getLastMessageByUserId( $idUser ){
+		foreach ( $this->lastMessages as $oMessage ) {
+			if ( $oMessage->getObject()->getId() == $idUser ){
+				return $oMessage;
+			}
+		}
+
+		return null;
+	}
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
     	$this->created = new \DateTime();
+    	$this->unRead = 0;
     }
 
 	public function getId() {
@@ -39,8 +55,16 @@ Class Messages {
 	}
 
 	public function addMessage( Message $message ){
-		$this->lastMessageCreated = new \DateTime();
+		if ( $oMessage = $this->getLastMessageByUserId($message->getObject()->getId()) ){
+			$this->lastMessages->removeElement( $oMessage );
+		}
+
+		$this->lastMessages[] = $message;
 		$this->messages[] = $message;
+
+		if ( $message->getRead() == false ){
+			$this->unRead++;
+		}
 	}
 
 	public function setMessages( $messages ){
@@ -51,11 +75,24 @@ Class Messages {
 		return $this->messages;
 	}
 
-	public function setLastMessageCreated( $lastMessageCreated ){
-		$this->lastMessageCreated = $lastMessageCreated;
+	public function addLastMessage( Message $lastMessage ){
+		$this->lastMessages[] = $lastMessage;
 	}
 
-	public function getLastMessageCreated(){
-		return $this->lastMessageCreated;
+	public function setLastMessages( $lastMessages ){
+		$this->lastMessages = $lastMessages;
+	}
+
+	public function getLastMessages(){
+		$this->unRead = 0;
+		return $this->lastMessages;
+	}
+
+	public function setUnRead( $unRead ){
+		$this->unRead = $unRead;
+	}
+
+	public function getUnRead(){
+		return $this->unRead;
 	}
 }

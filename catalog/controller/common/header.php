@@ -14,9 +14,11 @@ class ControllerCommonHeader extends Controller {
 		}else{
 			$this->load->model('user/post');
 			$this->load->model('branch/post');
+			$this->load->model('friend/message');
 
 			$user = $this->customer->getUser();
 
+			// -- Notifications --
 			if ( !$notifications = $user->getNotifications() ){
 				$notifications = array();
 			}
@@ -105,6 +107,15 @@ class ControllerCommonHeader extends Controller {
 			if ( count($aExpireNotiIds) > 0 ){
 				$this->load->model('user/notification');
 				$this->model_user_notification->deleteNotifications( $this->customer->getId(), $aExpireNotiIds );
+			}
+			// -- End Notifications --
+
+			$oMessages = $this->model_friend_message->getMessagesObject( $this->customer->getId() );
+
+			if ( !$oMessages ){
+				$this->data['mess_unread'] = 0;
+			}else{
+				$this->data['mess_unread'] = $oMessages->getUnRead();
 			}
 			
 			$this->data['date_format'] = $this->language->get('date_format_full');

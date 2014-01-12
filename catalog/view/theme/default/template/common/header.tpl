@@ -101,11 +101,13 @@
         <div class="notification-item message">
           <a href="#" class="btn-notification">
             <i class="icon-envelope"></i>
-            <span class="notification-item-count">5</span>
+            {% if mess_unread > 0 %}
+            <span class="notification-item-count">{{ mess_unread }}</span>
+            {% endif %}
           </a>
           <div class="notification-content-list">
             <ul>
-              <li class="notification-content-item">
+              {#<li class="notification-content-item">
                 <a href="#" class="notification-content-item-img">
                   <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
                 </a>
@@ -120,20 +122,7 @@
                     1 hour ago
                   </div>
                 </div>
-              </li>
-              <li class="notification-content-item">
-                <a href="#" class="notification-content-item-img">
-                  <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                </a>
-                <div class="notification-content-item-detail">
-                  <div class="notification-text">
-                    <a href="#">WMThiet</a> sent a message to you
-                  </div>
-                  <div class="message-content">
-                    hello everyone
-                  </div>
-                </div>
-              </li>                   
+              </li>#}
             </ul>
           </div>
         </div>

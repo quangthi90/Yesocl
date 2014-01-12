@@ -372,6 +372,7 @@
                 $user_item.find('.js-mess-user-time').remove();
                 $time.attr('title', data.time).html('').timeago();
                 $user_item.find('.js-mess-user-info').append($time);
+                $user_item.find('.js-mess-user-content').html( content );
 
                 $('.js-mess-user-list').prepend($user_item);
                 var users = $('.js-mess-user-list').data('users-messages');
@@ -475,6 +476,8 @@
                     // Cache users message
                     users_messages.setItem(that.slug, data.messages);
                     $('.js-mess-user-list').data('users-messages', users_messages);
+
+                    that.$el.removeClass('unread').addClass('read');
                 }
             });
         }else{

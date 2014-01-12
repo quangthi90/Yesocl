@@ -13,11 +13,12 @@ class ControllerAccountMessage extends Controller {
 		$this->load->model('friend/message');
 		$this->load->model('tool/image');
 		$idCurrentUser = $this->customer->getId();
-		$aMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
+		$lMessages = $this->model_friend_message->getLastMessages( $idCurrentUser );
 
 		$this->data['users'] = array();
 		$this->data['messages'] = array();
-		foreach ( $aMessages as $key => $oMessage ) {
+		$iCountUnReadMess = 0;
+		foreach ( $lMessages as $key => $oMessage ) {
 			$this->data['messages'][] = array(
 				'content' 		=> $oMessage->getContent(),
 				'object_id' 	=> $oMessage->getObject()->getId(),
@@ -30,7 +31,13 @@ class ControllerAccountMessage extends Controller {
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 50, 50 );
 			$this->data['users'][$aUser['id']] = $aUser;
+
+			if ( $oMessage->getRead() == false && $key != 0 ){
+				$iCountUnReadMess++;
+			}
 		}
+
+		$this->data['inbox_length'] = $iCountUnReadMess;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/message.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/message.tpl';
@@ -128,6 +135,18 @@ class ControllerAccountMessage extends Controller {
             'success' => 'ok',
             'messages' => $aReturnMessages,
             'user' => $aObjectUser
+        )));
+	}
+
+	public function getLastMessages(){
+		$this->load->model('friend/message');
+        $this->load->model('tool/image');
+
+        $aMessages = $this->model_friend_message->getLastMessages( $this->customer->getId() );
+		
+    	return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok',
+            'error' => $this->error['warning']
         )));
 	}
 }
