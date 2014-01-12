@@ -72,7 +72,7 @@
             			<div class="clear"></div>
             		</div>
             		<div class="mesasage-box-body">
-            			<div class="mesasage-box-container">
+            			<div class="mesasage-box-container">                            
             				<ul class="js-mess-list-content"></ul>
             			</div>
                         <div class="message-waiting js-mess-loading hidden">

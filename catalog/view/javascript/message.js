@@ -1,6 +1,9 @@
 // MESSAGE JS
 var currentTagsGlobal = [];
+var triggerDone = true;
+var numberOfCall = 0;
 var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
+var _ScrollReachTop = 'SCROLL_REACHED_TOP';
 
 (function($, document, undefined) {
     var minWidthContent = 1000;
@@ -48,7 +51,35 @@ var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
         var heightHeader = that.$messageBox.find('.mesasage-box-header').outerHeight();
         var heightFooter = 100;
         that.$messageList.height(heightContent - heightHeader - heightFooter - 10);
-        that.$messageList.makeCustomScroll();
+        that.$messageList.mCustomScrollbar({
+            horizontalScroll: false,
+            scrollInertia:950,
+            mouseWheel:true,
+            autoDraggerLength:true,
+            autoHideScrollbar:true,
+            scrollButtons:{
+                enable: false,
+                scrollAmount:80
+            },
+            advanced:{
+                updateOnBrowserResize:true,
+                updateOnContentResize:true,
+                autoExpandHorizontalScroll:false,
+                autoScrollOnFocus:false,
+                normalizeMouseWheelDelta:false
+            },
+            contentTouchScroll:true,
+            callbacks:{
+                onTotalScrollBack:function(){
+                    if(triggerDone) {
+                        that.$messageList.trigger(_ScrollReachTop);
+                        triggerDone = false;
+                    }                                     
+                },
+                onTotalScrollBackOffset:0
+            },
+            theme:"light"
+        });
 
         that.$messageBoxContent.css('opacity', '1');
     };  
@@ -435,6 +466,7 @@ var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
         
         this.slug = $el.data('user-slug');
         this.username = $el.data('username');
+        this.loadmoreText = '<li class="message-item loadmore-waiting hidden">Loadding more <i class="icon-spin icon-spinner"></i></li>';
 
         this.attachEvents();
     };
@@ -480,6 +512,7 @@ var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
                     for ( key in data.messages ){
                         $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), data.messages[key]) );
                     }
+                    $('.js-mess-list-content').prepend($(that.loadmoreText));
 
                     // Cache users message
                     users_messages.setItem(that.slug, data.messages);
@@ -498,6 +531,8 @@ var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
             for ( key in messages ){
                 $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), messages[key]) );
             }
+            $('.js-mess-list-content').prepend($(that.loadmoreText));
+
             //Scroll to bottom:
             setTimeout(function(){
                 $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
@@ -562,5 +597,42 @@ var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
     };
     $(document).ready(function() {
         new MessageFilter($('#user-box'));    
+    });
+}(jQuery, document));
+
+// Load more in message list
+(function($, document, undefined) {
+    function MessageLoadMore($el) {
+        this.$messageListContainer = $el;
+        this.$messageList = $el.find('.js-mess-list-content');
+        this.attachEvents();
+    };
+    MessageLoadMore.prototype.attachEvents = function() {
+        var that = this;
+
+        that.$messageListContainer.on(_ScrollReachTop, function(){
+            var loadding = $(this).find('.loadmore-waiting');
+            loadding.removeClass('hidden');
+
+            //Just a sample for loadding more message:
+            setTimeout(function(){
+                var newMessage = '<li class="message-item"><a href="http://localhost/yesocl1/wall-page/user1/"><img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=50" alt="Quang Thi"></a><div class="message-body"><h6 class="sender-name">Quang Thi</h6><span class="sender-time"><i class="icon-calendar"></i><span class="js-mess-date">Wednesday, 08 January 2014 - 14:35</span></span><div class="message-content js-mess-content">load more ...</div></div><div class="yes-dropdown"><div class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-caret-down"></i></a><ul class="dropdown-menu"><li><a href="#"><i class="icon-remove"></i> Delete</a></li></ul></div></div></li>';                
+                loadding.after($(newMessage));
+                loadding.after($(newMessage));
+                loadding.after($(newMessage));
+                loadding.after($(newMessage));
+                loadding.after($(newMessage));
+
+                that.$messageListContainer.mCustomScrollbar("update");
+                that.$messageListContainer.mCustomScrollbar("scrollTo", 200);
+                loadding.addClass('hidden');
+                triggerDone = true;
+            }, 2000);
+        });
+    };
+    $(document).ready(function() {
+        $('.mesasage-box-container').each(function(){
+            new MessageLoadMore($(this));
+        });
     });
 }(jQuery, document));
