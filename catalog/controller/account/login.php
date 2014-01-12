@@ -88,10 +88,11 @@ class ControllerAccountLogin extends Controller {
     $aDatas = $this->request->post['data'];
 
     if ( empty($aDatas['email']) ){
-      return $this->response->setOutput(json_encode(array(
+      /*return $this->response->setOutput(json_encode(array(
         'success' => 'not ok',
         'error' => 'Your accout not have email, please update it in your facebook'
-      ))); 
+      ))); */
+      $aDatas['email'] = $aDatas['username'] . '@facebook.com';
     }
 
     $this->load->language('account/login');
@@ -127,7 +128,7 @@ class ControllerAccountLogin extends Controller {
     copy($response->data->url, $sAvatarLink);
 
     $oBirthday = new DateTime($aDatas['birthday']);
-    
+
     $aUserData = array(
       'firstname' => $aDatas['first_name'],
       'lastname' => $aDatas['last_name'],
