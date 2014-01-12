@@ -499,7 +499,9 @@ var _LoadMessageCompletedEvent = 'LOAD_MESSAGE_COMPLETED';
                 $('.js-mess-list-content').prepend( $.tmpl($('#message-detail-item'), messages[key]) );
             }
             //Scroll to bottom:
-            $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
+            setTimeout(function(){
+                $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
+            }, 500); 
         }        
     };
     MessageList.prototype.triggerProgress = function($el, promise){
