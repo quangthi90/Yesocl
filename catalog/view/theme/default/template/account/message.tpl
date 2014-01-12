@@ -22,7 +22,7 @@
             <div class="block-content message-box">
             	<div class="user-box" id="user-box">
             		<div class="user-box-menu" id="user-box-menu">
-            			<a href="#">Inbox ({{ inbox_length }})</a>
+            			<a href="#">Inbox (<span class="js-count-unread"></span>)</a>
             			{#<a href="#">Other (10)</a>#}
             		</div>
             		<div class="user-box-search" id="user-box-search">

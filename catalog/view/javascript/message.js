@@ -478,7 +478,11 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
 
             $('.js-mess-user-list').find('.js-mess-user-item.active').removeClass('active');
             that.$el.addClass('active');
+
+            that.$el.removeClass('unread').addClass('read');
             
+            var count_unread = $('.js-mess-user-list').find('.js-mess-user-item.unread').length;
+            $('.js-count-unread').html(count_unread);
             that.submit(that.$userMessBtn);
 
             return false;
@@ -518,7 +522,6 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
                     users_messages.setItem(that.slug, data.messages);
                     $('.js-mess-user-list').data('users-messages', users_messages);
 
-                    that.$el.removeClass('unread').addClass('read');
                     //Scroll to bottom:
                     setTimeout(function(){
                         $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
