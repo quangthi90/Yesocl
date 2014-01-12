@@ -107,22 +107,70 @@
           </a>
           <div class="notification-content-list">
             <ul>
-              {#<li class="notification-content-item">
-                <a href="#" class="notification-content-item-img">
-                  <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                </a>
-                <div class="notification-content-item-detail">
-                  <div class="notification-text">
-                    <a href="#">WMThiet</a> sent a message to you
-                  </div>
-                  <div class="message-content">
-                    hello everyone
-                  </div>
-                  <div class="notification-time">
-                    1 hour ago
-                  </div>
-                </div>
-              </li>#}
+                <li class="user-message-li js-mess-user-item sent-box" data-user-slug="user-1" data-username="User 1">
+                  <a href="#" class="user-message-link js-mess-user-link">
+                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
+                    <span class="user-message-info js-mess-user-info">
+                      <strong class="user-name">User 1</strong>
+                      <span class="message-overview">
+                          <i class="icon-mail-reply"></i>
+                          <i class="icon-ok"></i>
+                          <span class="js-mess-user-content">
+                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
+                          </span>
+                      </span>
+                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
+                    </span>
+                  </a>
+                </li>
+                <li class="user-message-li js-mess-user-item sent-box" data-user-slug="user-1" data-username="User 1">
+                  <a href="#" class="user-message-link js-mess-user-link">
+                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
+                    <span class="user-message-info js-mess-user-info">
+                      <strong class="user-name">User 1</strong>
+                      <span class="message-overview">
+                          <i class="icon-mail-reply"></i>
+                          <i class="icon-ok"></i>
+                          <span class="js-mess-user-content">
+                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
+                          </span>
+                      </span>
+                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
+                    </span>
+                  </a>
+                </li>
+                <li class="user-message-li js-mess-user-item inbox read" data-user-slug="user-1" data-username="User 1">
+                  <a href="#" class="user-message-link js-mess-user-link">
+                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
+                    <span class="user-message-info js-mess-user-info">
+                      <strong class="user-name">User 1</strong>
+                      <span class="message-overview">
+                          <i class="icon-mail-reply"></i>
+                          <i class="icon-ok"></i>
+                          <span class="js-mess-user-content">
+                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
+                          </span>
+                      </span>
+                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
+                    </span>
+                  </a>
+                </li>
+                <li class="user-message-li js-mess-user-item inbox unread" data-user-slug="user-1" data-username="User 1">
+                  <a href="#" class="user-message-link js-mess-user-link">
+                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
+                    <span class="user-message-info js-mess-user-info">
+                      <strong class="user-name">User 1</strong>
+                      <span class="message-overview">
+                          <i class="icon-mail-reply"></i>
+                          <i class="icon-ok"></i>
+                          <span class="js-mess-user-content">
+                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
+                          </span>
+                      </span>
+                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
+                    </span>
+                  </a>
+                </li>
             </ul>
           </div>
         </div>

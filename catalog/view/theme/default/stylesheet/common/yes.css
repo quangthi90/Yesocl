@@ -649,6 +649,9 @@ a.btn-notification:hover .notification-item-name > i {
   opacity: 0;
   padding: 10px 0px 10px 10px;
 }
+.notification-content-list ul {
+  min-width: 200px;
+}
 .notification-content-list .notification-content-item {
   overflow: hidden;
   padding: 5px;
@@ -791,6 +794,74 @@ a.btn-notification:hover .notification-item-name > i {
   margin-left: 10px;
   color: #363636;
 }
+
+/* MESSAGE NOTIFICATION */
+.notification-item.message .user-message-li {
+  padding: 1px 0px 1px 0px;
+  max-width: 300px;
+}
+.notification-item.message .user-message-li:first-child {
+  padding-top: 0px;
+}
+.notification-item.message .user-message-li .user-message-link {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border-right: 1px solid #FFF;
+  background-color: #FAFAFA;
+}
+.notification-item.message .user-message-li .user-message-link:hover,
+.notification-item.message .user-message-li.active .user-message-link {
+  border-right: 1px solid #009B77;
+}
+.notification-item.message .user-message-li .user-message-link img {
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-right: 8px;
+}
+.notification-item.message .user-message-li .user-message-link strong.user-name {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0e0e0e;
+  font-size: 12px;
+}
+.notification-item.message .user-message-li .user-message-link span.message-overview {
+  font-size: 12px;
+  color: #5F5F5F;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.notification-item.message .user-message-li .user-message-link i {
+  font-size: 11px;
+  color: #b4b4b4;
+  margin-right: 2px;
+  display: none;
+}
+.notification-item.message .user-message-li.read .user-message-link {
+}
+.notification-item.message .user-message-li.unread .user-message-link {
+  background-color: #DFDFDF;
+}
+.notification-item.message .user-message-li.sent-box .user-message-link span.message-overview > i.icon-mail-reply {
+  display: inline-block;
+}
+.notification-item.message .user-message-li.inbox .user-message-link span.message-overview > i.icon-ok {
+  display: inline-block;
+}
+.notification-item.message .user-message-li .user-message-link span.message-time {
+  font-size: 10px;
+  font-weight: bold;
+  color: #838383;
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
 #sidebar-toggle {
