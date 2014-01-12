@@ -31,12 +31,12 @@ class ControllerAccountForgotten extends Controller {
 			$message .= $password;
 
 			$mail = new Mail();
-			$mail->protocol = 'smtp';
+			$mail->protocol = $this->config->get('email')['protocol'];
 			// $mail->parameter = $this->config->get('config_mail_parameter');
-			$mail->hostname = 'ssl://smtp.gmail.com';
-			$mail->username = 'bommerdesign@gmail.com';
-			$mail->password = '13081990';
-			$mail->port = '465';
+			$mail->hostname = $this->config->get('email')['hostname'];
+			$mail->username = $this->config->get('email')['username'];
+			$mail->password = $this->config->get('email')['password'];
+			$mail->port = $this->config->get('email')['port'];
 			// $mail->timeout = $this->config->get('config_smtp_timeout');				
 			$mail->setTo($this->request->post['email']);
 			$mail->setFrom('admin@yesocl.com');

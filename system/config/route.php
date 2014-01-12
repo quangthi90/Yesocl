@@ -33,6 +33,7 @@ $_['route']['PostTypeahead']				= 'common/search/postTypeahead/';
 $_['route']['ChangeAvatar']					= 'account/avatar';
 $_['route']['Login']						= 'account/login';
 $_['route']['LostPass']						= 'account/forgotten';
+$_['route']['ActiveAccount']					= 'account/active';
 
 // Ajax
 $_['route']['AjaxLogin']					= 'account/login/login';

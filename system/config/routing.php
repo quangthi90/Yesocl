@@ -33,6 +33,7 @@ $_['routing']['PostTypeahead']					= 'search/typeahead/post/{keyword}/';
 $_['routing']['Login']							= 'login/';
 $_['routing']['ChangeAvatar']					= 'change-avatar/';
 $_['routing']['LostPass']						= 'lost_password/';
+$_['routing']['ActiveAccount']					= 'active/{token}/';
 
 // Ajax
 $_['routing']['AjaxLogin']						= 'login/ajax/';

@@ -84,6 +84,12 @@ Class User {
 	/** @MongoDB\Boolean */
 	private $isSocial;
 
+	/** @MongoDB\String */
+	private $token;
+
+	/** @MongoDB\Date */
+	private $tokenTime;
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -238,7 +244,7 @@ Class User {
 
 	public function setForgotten( $forgotten ){
 		$this->forgotCreated = new \DateTime();
-		date_sub($this->forgotCreated, date_interval_create_from_date_string('1 days'));
+		date_add($this->forgotCreated, date_interval_create_from_date_string('1 days'));
 		$this->forgotten = $forgotten;
 	}
 
@@ -436,6 +442,25 @@ Class User {
 
 	public function getIsSocial(){
 		return $this->isSocial;
+	}
+
+	public function setToken( $token ){
+		$this->tokenTime = new \DateTime();
+		date_add($this->tokenTime, date_interval_create_from_date_string('7 days'));
+
+		$this->token = $token;
+	}
+
+	public function getToken(){
+		return $this->token;
+	}
+
+	public function setTokenTime( $tokenTime ){
+		$this->tokenTime = $tokenTime;
+	}
+
+	public function getTokenTime(){
+		return $this->tokenTime;
 	}
 
 	/**
