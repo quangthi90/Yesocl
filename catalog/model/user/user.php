@@ -83,35 +83,31 @@ class ModelUserUser extends Model {
 			$user->setAvatar( $path );
 		}
 
+		$token = md5( time() );
+		$user->setToken( $token );
+
 		$this->dm->flush();
-		// $this->language->load('mail/customer');
-		
-		/*$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
-		
+		$this->language->load('mail/user');
+
+		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));		
 		$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
-		
-		if (!$user_group_info['approval']) {
-			$message .= $this->language->get('text_login') . "\n";
-		} else {
-			$message .= $this->language->get('text_approval') . "\n";
-		}
-		
-		$message .= $this->url->link('account/login', '', 'SSL') . "\n\n";
+		$message .= $this->language->get('text_approval') . "\n" ;
+		$message .= $this->extension->path('ActiveAccount', array('token' => $token)) . "\n\n";
 		$message .= $this->language->get('text_services') . "\n\n";
 		$message .= $this->language->get('text_thanks') . "\n";
 		$message .= $this->config->get('config_name');
 		
 		$mail = new Mail();
-		$mail->protocol = $this->config->get('config_mail_protocol');
-		$mail->parameter = $this->config->get('config_mail_parameter');
-		$mail->hostname = $this->config->get('config_smtp_host');
-		$mail->username = $this->config->get('config_smtp_username');
-		$mail->password = $this->config->get('config_smtp_password');
-		$mail->port = $this->config->get('config_smtp_port');
-		$mail->timeout = $this->config->get('config_smtp_timeout');				
-		$mail->setTo($data['email']);
-		$mail->setFrom($this->config->get('config_email'));
-		$mail->setSender($this->config->get('config_name'));
+		$mail->protocol = $this->config->get('email')['protocol'];
+		// $mail->parameter = $this->config->get('config_mail_parameter');
+		$mail->hostname = $this->config->get('email')['hostname'];
+		$mail->username = $this->config->get('email')['username'];
+		$mail->password = $this->config->get('email')['password'];
+		$mail->port = $this->config->get('email')['port'];
+		// $mail->timeout = $this->config->get('config_smtp_timeout');				
+		$mail->setTo($this->request->post['email']);
+		$mail->setFrom('admin@yesocl.com');
+		$mail->setSender('Admin Yesocl');
 		$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
 		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
 		$mail->send();
@@ -130,7 +126,7 @@ class ModelUserUser extends Model {
 					$mail->send();
 				}
 			}
-		}*/
+		}
 
 		return $user;
 	}
@@ -251,6 +247,50 @@ class ModelUserUser extends Model {
 		}
 		
 		return false;
+	}
+
+	public function editPassword($email, $password) {
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'emails.email' => $email
+		));
+
+		if ( !$user || $user->getIsSocial() == true ){
+			return null;
+		}
+
+		$salt = $user->getSalt();
+		$passwordInput = substr(md5(mt_rand()), 0, 10);
+		$password = sha1($salt . sha1($salt . sha1($passwordInput)));
+		
+		$user->setForgotten( $password );
+
+		$this->dm->flush();
+
+		return $passwordInput;
+	}
+
+	public function getTotalCustomersByEmail($email) {
+		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
+			'emails.email' => $email
+		));
+
+		return $query->count();
+	}
+
+	public function active( $token ){
+		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'token' => $token
+		));
+
+		if ( !$user ){
+			return null;
+		}
+
+		$user->setToken('');
+
+		$this->dm->flush();
+
+		return $user;
 	}
 }
 ?>

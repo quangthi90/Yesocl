@@ -106,8 +106,6 @@ class ControllerCommonHeader extends Controller {
 				$this->load->model('user/notification');
 				$this->model_user_notification->deleteNotifications( $this->customer->getId(), $aExpireNotiIds );
 			}
-			
-			$this->data['date_format'] = $this->language->get('date_format_full');
 		}
 
 		// Return list routings for js

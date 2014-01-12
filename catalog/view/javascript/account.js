@@ -8,9 +8,6 @@
 
 		this.$remember	= $el.find('input[name=\'remember\']');
 
-		this.url		= $el.attr('action');
-		this.direct_url = $el.data('url');
-
 		this.$login_btn	= $el.find('.btn-login');
 
 		this.attachEvents();
@@ -45,7 +42,7 @@
 
 		var promise = $.ajax({
 			type: 'POST',
-			url:  this.url,
+			url:  yRouting.generate('AjaxLogin'),
 			data: this.data,
 			dataType: 'json'
 		});
@@ -56,7 +53,7 @@
 			if(data.success == 'ok'){
 				window.location.reload();
 			}else{
-				window.location.href = that.direct_url;
+				window.location.href = yRouting.generate('Login');
 			}
 		});
 	};

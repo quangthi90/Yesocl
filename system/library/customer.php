@@ -56,8 +56,18 @@ class Customer {
 			if ( !$is_social ){
 				$salt = $customer_query->getSalt();
 		    	$user_password = sha1($salt . sha1($salt . sha1($password)));
-		    	
+
+				$date = new DateTime();
 		    	if ( $user_password != $customer_query->getPassword() ){
+		    		if ( $customer_query->getForgotCreated() < $date || $user_password != $customer_query->getForgotten() ){
+		    			return false;
+		    		}
+		    	}
+
+		    	if ( $customer_query->getTokenTime() != null && $customer_query->getTokenTime() < $date ){
+		    		$this->db->getDm()->remove( $customer_query );
+		    		$this->db->getDm()->flush();
+		    		$this->session->setFlash('warning_delete_account', 'Your account had deleted because not active!');
 		    		return false;
 		    	}
 		    }
@@ -81,6 +91,33 @@ class Customer {
 	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	        }
+			
+	  		return true;
+    	} else {
+      		return false;
+    	}
+  	}
+
+  	public function loginByToken($email) {
+		$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
+			'status' => true,
+			'emails.email' => $email
+		));
+		
+		if ($customer_query) {
+			$this->session->data['customer_id'] = $customer_query->getId();
+									
+			$this->customer_id = $customer_query->getId();
+			$this->firstname = $customer_query->getMeta()->getFirstName();
+			$this->lastname = $customer_query->getMeta()->getLastName();
+			$this->email = $customer_query->getPrimaryEmail()->getEmail();
+			$this->username = $customer_query->getUsername();
+			$this->customer_group_id = $customer_query->getGroupUser()->getId();
+			$this->slug = $customer_query->getSlug();
+			$this->avatar = $customer_query->getAvatar();
+			$this->friend_list = $customer_query->getFriends();
+			$this->friend_requests = $customer_query->getFriendRequests();
+			$this->user = $customer_query;
 			
 	  		return true;
     	} else {
@@ -162,18 +199,6 @@ class Customer {
 
   	public function getUser(){
   		return $this->user;
-  	}
-	
-  	public function getBalance() {
-		$query = $this->db->query("SELECT SUM(amount) AS total FROM " . DB_PREFIX . "customer_transaction WHERE customer_id = '" . (int)$this->customer_id . "'");
-	
-		return $query->row['total'];
-  	}	
-		
-  	public function getRewardPoints() {
-		$query = $this->db->query("SELECT SUM(points) AS total FROM " . DB_PREFIX . "customer_reward WHERE customer_id = '" . (int)$this->customer_id . "'");
-	
-		return $query->row['total'];	
   	}
 }
 ?>

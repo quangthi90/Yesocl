@@ -1,6 +1,6 @@
 {% extends '@template/default/template/welcome/layout.tpl' %}
 
-{% block title %}Login for Yesocl{% endblock %}
+{% block title %}Lost Password - Yesocl{% endblock %}
 
 {% block stylesheet %}
 <link href="{{ asset_css('account.css') }}" rel="stylesheet" media="screen" />
