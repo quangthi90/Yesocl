@@ -27,18 +27,6 @@ class ControllerAccountAvatar extends Controller {
   	}
 
   	public function save(){
-  		if ( empty($this->request->post['cropX']) ){
-  			return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'X value is empty'
-            )));
-  		}
-  		if ( empty($this->request->post['cropY']) ){
-  			return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'Y value is empty'
-            )));
-  		}
   		if ( empty($this->request->post['cropW']) ){
   			return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
