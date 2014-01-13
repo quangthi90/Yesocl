@@ -75,6 +75,11 @@ Class User {
 	/** @MongoDB\EmbedMany(targetDocument="Notification") */
 	private $notifications = array();
 
+	/** 
+	 * @MongoDB\Int
+	 */
+	private $unRead;
+
 	/** @MongoDB\Boolean */
 	private $isSocial;
 
@@ -404,6 +409,14 @@ Class User {
 
 	public function getNotifications(){
 		return $this->notifications;
+	}
+
+	public function setUnRead( $unRead ){
+		$this->unRead = $unRead;
+	}
+
+	public function getUnRead(){
+		return $this->unRead;
 	}
 
 	public function setIsSocial( $isSocial ){

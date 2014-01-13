@@ -16,10 +16,10 @@ class ControllerCommonHeader extends Controller {
 			$this->load->model('branch/post');
 			$this->load->model('friend/message');
 
-			$user = $this->customer->getUser();
+			$oLoggedUser = $this->customer->getUser();
 
 			// -- Notifications --
-			if ( !$notifications = $user->getNotifications() ){
+			if ( !$notifications = $oLoggedUser->getNotifications() ){
 				$notifications = array();
 			}
 			
@@ -71,7 +71,7 @@ class ControllerCommonHeader extends Controller {
 				}else{
 					$oPost = $aPosts[$notification->getSlug()];
 				}
-				// var_dump(!$oPost);
+				
 				if ( $oPost ){
 					if ( $notification->getRead() == false ){
 						$this->data['notification_count']++;
@@ -110,14 +110,7 @@ class ControllerCommonHeader extends Controller {
 			}
 			// -- End Notifications --
 
-			$oMessages = $this->model_friend_message->getMessagesObject( $this->customer->getId() );
-
-			if ( !$oMessages ){
-				$this->data['mess_unread'] = 0;
-			}else{
-				$this->data['mess_unread'] = $oMessages->getUnRead();
-			}
-			
+			$this->data['mess_unread'] = $oLoggedUser->getUnRead();
 			$this->data['date_format'] = $this->language->get('date_format_full');
 		}
 

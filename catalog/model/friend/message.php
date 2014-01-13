@@ -22,6 +22,8 @@ class ModelFriendMessage extends Model {
 		}
 
 		$aMessages = $oMessages->getLastMessages()->toArray();
+
+		$this->dm->flush();
 		
 		return array_reverse($aMessages);;
 	}

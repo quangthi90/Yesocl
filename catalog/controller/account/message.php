@@ -135,11 +135,36 @@ class ControllerAccountMessage extends Controller {
 		$this->load->model('friend/message');
         $this->load->model('tool/image');
 
-        $aMessages = $this->model_friend_message->getLastMessages( $this->customer->getId() );
+        $lMessages = $this->model_friend_message->getLastMessages( $this->customer->getId() );
+
+        $aMessages = array();
+        $aUsers = array();
+        foreach ( $lMessages as $key => $oMessage ) {
+        	if ( empty($aUsers[$oMessage->getObject()->getId()]) ){
+        		$oUser = $oMessage->getObject();
+				$aUser = $oUser->formatToCache();
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( 
+					$aUser['avatar'], 
+					$aUser['email'], 
+					50, 
+					50 
+				);
+				$aUsers[$aUser['id']] = $aUser;
+        	}
+
+			$aMessages[] = array(
+				'content' 		=> $oMessage->getContent(),
+				'object_id' 	=> $oMessage->getObject()->getId(),
+				'is_sender'		=> $oMessage->getIsSender(),
+				'created' 		=> $this->extension->dateFormat( $oMessage->getCreated() ),
+				'read'			=> $oMessage->getRead(),
+				'user'			=> $aUsers[$oMessage->getObject()->getId()]
+			);
+		}
 		
     	return $this->response->setOutput(json_encode(array(
-            'success' => 'not ok',
-            'error' => $this->error['warning']
+            'success' => 'ok',
+            'messages' => $aMessages
         )));
 	}
 }

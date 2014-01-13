@@ -93,9 +93,12 @@
         </div>
 	</div>
 </div>
-{{ block('common_html_block_message_detail_item') }}
-{{ block('common_html_block_new_message_form') }}
-{{ block('common_html_block_message_user_item') }}
+{% endblock %}
+
+{% block template %}
+    {{ block('common_html_block_message_detail_item') }}
+    {{ block('common_html_block_new_message_form') }}
+    {{ block('common_html_block_message_user_item') }}
 {% endblock %}
 
 {% block javascript %}

@@ -98,80 +98,15 @@
             </ul>
           </div>
         </div>
-        <div class="notification-item message">
-          <a href="#" class="btn-notification">
+        <div class="notification-item message js-noti-mess">
+          <a href="#" class="btn-notification js-btn-noti-mess">
             <i class="icon-envelope"></i>
             {% if mess_unread > 0 %}
             <span class="notification-item-count">{{ mess_unread }}</span>
             {% endif %}
           </a>
           <div class="notification-content-list">
-            <ul>
-                <li class="user-message-li js-mess-user-item sent-box" data-user-slug="user-1" data-username="User 1">
-                  <a href="#" class="user-message-link js-mess-user-link">
-                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
-                    <span class="user-message-info js-mess-user-info">
-                      <strong class="user-name">User 1</strong>
-                      <span class="message-overview">
-                          <i class="icon-mail-reply"></i>
-                          <i class="icon-ok"></i>
-                          <span class="js-mess-user-content">
-                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
-                          </span>
-                      </span>
-                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
-                    </span>
-                  </a>
-                </li>
-                <li class="user-message-li js-mess-user-item sent-box" data-user-slug="user-1" data-username="User 1">
-                  <a href="#" class="user-message-link js-mess-user-link">
-                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
-                    <span class="user-message-info js-mess-user-info">
-                      <strong class="user-name">User 1</strong>
-                      <span class="message-overview">
-                          <i class="icon-mail-reply"></i>
-                          <i class="icon-ok"></i>
-                          <span class="js-mess-user-content">
-                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
-                          </span>
-                      </span>
-                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
-                    </span>
-                  </a>
-                </li>
-                <li class="user-message-li js-mess-user-item inbox read" data-user-slug="user-1" data-username="User 1">
-                  <a href="#" class="user-message-link js-mess-user-link">
-                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
-                    <span class="user-message-info js-mess-user-info">
-                      <strong class="user-name">User 1</strong>
-                      <span class="message-overview">
-                          <i class="icon-mail-reply"></i>
-                          <i class="icon-ok"></i>
-                          <span class="js-mess-user-content">
-                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
-                          </span>
-                      </span>
-                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
-                    </span>
-                  </a>
-                </li>
-                <li class="user-message-li js-mess-user-item inbox unread" data-user-slug="user-1" data-username="User 1">
-                  <a href="#" class="user-message-link js-mess-user-link">
-                    <img src="http://www.gravatar.com/avatar/c38e39c8422969437d01e758d120c9d8?s=180" alt="WmThiet">
-                    <span class="user-message-info js-mess-user-info">
-                      <strong class="user-name">User 1</strong>
-                      <span class="message-overview">
-                          <i class="icon-mail-reply"></i>
-                          <i class="icon-ok"></i>
-                          <span class="js-mess-user-content">
-                            alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo alo   alo alo alo alo alo alo 
-                          </span>
-                      </span>
-                      <span class="message-time timeago js-mess-user-time" title="Sunday, 12 January 2014"></span>
-                    </span>
-                  </a>
-                </li>
-            </ul>
+            <ul class="js-noti-mess-list"></ul>
           </div>
         </div>
         {% set requests = get_request_friend() %}
@@ -208,6 +143,24 @@
 			</div>
 		</div>
 	</div>                               
+</div>
+<div id="html-template-header" class="hidden">
+  <div id="message-item-header">
+    <li class="user-message-li ${_class}">
+      <a href="{{ path('MessagePage') }}" class="user-message-link">
+        <img src="${user.avatar}" alt="${user.username}">
+        <span class="user-message-info">
+          <strong class="user-name">${user.username}</strong>
+          <span class="message-overview">
+              <i class="icon-mail-reply"></i>
+              <i class="icon-ok"></i>
+              <span>${content}</span>
+          </span>
+          <span class="message-time timeago" title="${created}"></span>
+        </span>
+      </a>
+    </li>
+</div>
 </div>
 {% else %}
 <div id="y-header-no-login">

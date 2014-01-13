@@ -33,6 +33,11 @@
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		{{ include('@template/default/template/common/quick_search.tpl') }}	
 
+		<div id="html-template" class="hidden">
+			{% block template %}
+			{% endblock %}
+		</div>
+
     	<!-- Library Script -->
     	<script type="text/javascript" src="{{ asset_js('jquery/jquery-1.8.3.min.js') }}"></script>
     	<script type="text/javascript" src="{{ asset_js('libs/jquery.easing.1.3.js') }}"></script>
