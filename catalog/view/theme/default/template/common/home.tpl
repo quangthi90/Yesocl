@@ -33,19 +33,16 @@
 	<script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
 	{% if warning_active is defined %}
 	<script type="text/javascript">
-	var msgCallback = $("<div></div>").css(
-	{
-		'position': 'absolute',
-		'right': '15px',
-		'top': '60px',
-		'background-color' : '#ddd',
-		'color' : '#009B77',
-		'padding' : '15px',
-		'font-weight' : 'bold'
-	}).hide().appendTo('body');
-	bootbox.alert("{{warning_active}}", function() {
-		msgCallback.html('Alert: ' + 'Alert callback').fadeIn(1000).delay(2000).fadeOut(300);
-	});
+		bootbox.dialog({
+			message: "{{warning_active}}",
+			title: "Active warning !",
+			buttons: {
+				success: {
+					label: "Ok",
+					className: "btn-primary"
+				}
+			}
+		});
 	</script>
 	{% endif %}
 {% endblock %}
