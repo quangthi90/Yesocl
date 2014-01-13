@@ -61,7 +61,7 @@
 </div>
 <div class="line-shadow"></div>
 <div id="login-form-container" style="display: none;">
-    <form action="{{ path('AjaxLogin') }}" method="post" class="row-fluid login-form" data-url="{{ path('Login') }}">
+    <form class="row-fluid login-form">
         <div class="row-fluid">
             <div class="span12 input-prepend">
                 <span class="add-on"><i class="icon-user"></i></span>

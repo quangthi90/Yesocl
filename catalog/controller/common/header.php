@@ -111,7 +111,6 @@ class ControllerCommonHeader extends Controller {
 			// -- End Notifications --
 
 			$this->data['mess_unread'] = $oLoggedUser->getUnRead();
-			$this->data['date_format'] = $this->language->get('date_format_full');
 		}
 
 		// Return list routings for js
