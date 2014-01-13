@@ -127,7 +127,7 @@
                         that.updatePreview(crop);
                     },
                     aspectRatio: 1,
-                    bgColor: '#FAFAFA',
+                    bgColor: '#F0F0F0',
                     boxWidth: 550,
                     boxHeight: 320
                 },function(){

@@ -2803,8 +2803,8 @@ a.wall-link:hover {
   width: 550px;
   overflow: hidden;
   position: relative;
-  border: 1px solid #F0F0F0;
-  background-color: #FAFAFA;
+  border: 1px solid #DDDDDD;
+  background-color: #F0F0F0;
 }
 .avatar-step.image-cropper .uploaded-image > img {
   position: absolute;
