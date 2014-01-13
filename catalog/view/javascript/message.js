@@ -616,7 +616,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
 }(jQuery, document));
 
 // Load more in message list
-(function($, document, undefined) {
+/*(function($, document, undefined) {
     function MessageLoadMore($el) {
         this.$messageListContainer = $el;
         this.$messageList = $el.find('.js-mess-list-content');
@@ -650,4 +650,4 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
             new MessageLoadMore($(this));
         });
     });
-}(jQuery, document));
+}(jQuery, document));*/

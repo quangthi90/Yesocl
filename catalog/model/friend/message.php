@@ -38,7 +38,7 @@ class ModelFriendMessage extends Model {
 	 *	- Int Limit
 	 * @return: array objects Message
 	 */
-	public function getMessagesByUser( $idCurrUser, $idObjectUser, $bIsRead = true, $iStart = 0, $iLimit = 20 ){
+	public function getMessagesByUser( $idCurrUser, $idObjectUser, $bIsRead = true, $iStart = 0, $iLimit = 100 ){
 		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
 			'user.id' => $idCurrUser
 		));
