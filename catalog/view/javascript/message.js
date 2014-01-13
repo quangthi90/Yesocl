@@ -287,6 +287,11 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
                             users.setItem(user_slugs[i], user_messages);
                             $('.js-mess-user-list').data('users-messages', users);
                         }
+
+                        //Scroll to bottom:
+                        setTimeout(function(){
+                            $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
+                        }, 500);
                     }
                     
                     // Update time for list message users
@@ -395,15 +400,17 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
                 var content = that.$content.val().trim();
                 that.$content.val('');
 
-                var $mess_item = $('.js-mess-list-content').find('.message-item:first-child').clone();
                 var $user_item = $('.js-mess-user-list').find('[data-user-slug=\'' + slug + '\']');
 
-                if ( $mess_item.attr('class') == undefined || $user_item.attr('class') == undefined ){
+                if ( $user_item.attr('class') == undefined ){
                     window.location.reload();
                 }
 
-                $mess_item.find('.js-mess-content').html( content );
-                $mess_item.find('.js-mess-date').html( data.time );
+                var $mess_item = $.tmpl($('#message-detail-item'), {
+                    content: content,
+                    created: data.time,
+                    user: data.user
+                });
                 $('.js-mess-list-content').append($mess_item);
 
                 // Update time for list message users
@@ -421,7 +428,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
 
                 var user_messages = users.getItem(slug);
                 if ( typeof user_messages != 'undefined' ){
-                    user_messages.push({
+                    user_messages.unshift({
                         content: content,
                         created: data.time,
                         user: data.user
@@ -429,6 +436,11 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
                     users.setItem(slug, user_messages);
                     $('.js-mess-user-list').data('users-messages', users);
                 }
+
+                //Scroll to bottom:
+                setTimeout(function(){
+                    $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
+                }, 500);
             }
         });
     };
@@ -525,7 +537,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
                     //Scroll to bottom:
                     setTimeout(function(){
                         $('.js-mess-list-content').parent().trigger(_LoadMessageCompletedEvent);
-                    }, 500);              
+                    }, 500);
                 }
             });
         }else{
