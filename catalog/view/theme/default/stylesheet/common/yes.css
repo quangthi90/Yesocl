@@ -650,7 +650,7 @@ a.btn-notification:hover .notification-item-name > i {
   padding: 10px 0px 10px 10px;
 }
 .notification-content-list ul {
-  min-width: 200px;
+  min-width: 300px;
 }
 .notification-content-list .notification-content-item {
   overflow: hidden;
