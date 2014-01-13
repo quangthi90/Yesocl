@@ -76,4 +76,10 @@ $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 // Notification
 $_['routing']['NotificationReadAll']			= 'notification/readAll/';
 
+// Message
+$_['routing']['MessagePage']					= 'message/page/';
+$_['routing']['MessageSend']					= 'message/send/';
+$_['routing']['MessageGetList']					= 'message/get-list/{user_slug}/';
+$_['routing']['MessageGetLast']					= 'message/get-last/';
+
 ?>

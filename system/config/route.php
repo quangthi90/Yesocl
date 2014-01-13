@@ -76,4 +76,10 @@ $_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete'
 
 // Notification
 $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
+
+// Message
+$_['route']['MessagePage']					= 'account/message';
+$_['route']['MessageSend']					= 'account/message/send/';
+$_['route']['MessageGetList']				= 'account/message/getMessageListByUser/';
+$_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
 ?>
