@@ -163,7 +163,6 @@
 		this.$see_notify_btn  	= $el.find('.js-btn-see-notify');
 
 		this.slug 				= $el.data('slug');
-		this.url 				= window.yRouting.generate('NotificationReadAll');
 
 		this.attachEvents();
 	}
@@ -187,7 +186,7 @@
 
 		var promise = $.ajax({
 			type: 'POST',
-			url: that.url,
+			url: window.yRouting.generate('NotificationReadAll'),
 			dataType: 'json'
 		});
 
@@ -227,8 +226,6 @@
 		this.$messBtn  			= $el.find('.js-btn-noti-mess');
 		this.$messList			= $el.find('.js-noti-mess-list');
 
-		this.url 				= window.yRouting.generate('MessageGetLast');
-
 		this.attachEvents();
 	}
 	NotificationMessage.prototype.attachEvents = function(){
@@ -252,7 +249,7 @@
 
 			var promise = $.ajax({
 				type: 'POST',
-				url: that.url,
+				url: window.yRouting.generate('MessageGetLast'),
 				dataType: 'json'
 			});
 
