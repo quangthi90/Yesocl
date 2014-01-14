@@ -34,8 +34,6 @@ $_['routing']['Login']							= 'login/';
 $_['routing']['ChangeAvatar']					= 'change-avatar/';
 $_['routing']['LostPass']						= 'lost_password/';
 $_['routing']['ActiveAccount']					= 'active/{token}/';
-
-// Ajax
 $_['routing']['AjaxLogin']						= 'login/ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 
@@ -82,4 +80,6 @@ $_['routing']['MessageSend']					= 'message/send/';
 $_['routing']['MessageGetList']					= 'message/get-list/{user_slug}/';
 $_['routing']['MessageGetLast']					= 'message/get-last/';
 
+// Ajax
+$_['routing']['AjaxGetRouting']					= 'ajax/get/routing/';
 ?>

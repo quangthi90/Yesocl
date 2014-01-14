@@ -1,11 +1,3 @@
-{# list routing for js -- deleted after read #}
-<div id="list-routing" class="hidden">
-{% for key, link in routing %}
-  <div class="routing" data-page="{{ key }}" data-link="{{ link }}" ></div>
-{% endfor %}
-</div>
-{# end list routing #}
-
 {% set currUser = get_current_user() %}
 {% if is_logged() and currUser != null %}
 {# current user info -- deleted after read #}
