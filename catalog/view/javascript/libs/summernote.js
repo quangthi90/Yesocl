@@ -1258,24 +1258,23 @@
         source: function (query, process) {
           friendList = [];
           map = {};
-          if ( yListFriends == null && is_send_ajax == 0 ){
+          if ( window.yListFriends == null && is_send_ajax == 0 ){
             is_send_ajax = 1;
-            $.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+            $.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
               if ( json.success == 'ok' ){
                 if ( json.friends == undefined ){
                   is_send_ajax = 0;
                 }
-                yListFriends = json.friends;
-                console.log(yListFriends);
+                window.yListFriends = json.friends;
               }
             });
           }
 
-          if ( yListFriends == null ){
+          if ( window.yListFriends == null ){
             return false;
           }
 
-          $.each(yListFriends, function (i, item) {
+          $.each(window.yListFriends, function (i, item) {
               friendList.push(item.id + '-' + item.name);
               map[item.id + '-' + item.name] = item;
           });

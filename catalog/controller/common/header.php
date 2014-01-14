@@ -14,10 +14,12 @@ class ControllerCommonHeader extends Controller {
 		}else{
 			$this->load->model('user/post');
 			$this->load->model('branch/post');
+			$this->load->model('friend/message');
 
-			$user = $this->customer->getUser();
+			$oLoggedUser = $this->customer->getUser();
 
-			if ( !$user || !$notifications = $user->getNotifications() ){
+			// -- Notifications --
+			if ( !$notifications = $oLoggedUser->getNotifications() ){
 				$notifications = array();
 			}
 			
@@ -69,7 +71,7 @@ class ControllerCommonHeader extends Controller {
 				}else{
 					$oPost = $aPosts[$notification->getSlug()];
 				}
-				// var_dump(!$oPost);
+				
 				if ( $oPost ){
 					if ( $notification->getRead() == false ){
 						$this->data['notification_count']++;
@@ -106,10 +108,10 @@ class ControllerCommonHeader extends Controller {
 				$this->load->model('user/notification');
 				$this->model_user_notification->deleteNotifications( $this->customer->getId(), $aExpireNotiIds );
 			}
-		}
+			// -- End Notifications --
 
-		// Return list routings for js
-		$this->data['routing'] = $this->config->get('routing');
+			$this->data['mess_unread'] = $oLoggedUser->getUnRead();
+		}
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/header.tpl';

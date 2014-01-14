@@ -39,10 +39,10 @@
 
 	Login.prototype.submit = function($button){
 		var that = this;
-
+		
 		var promise = $.ajax({
 			type: 'POST',
-			url:  yRouting.generate('AjaxLogin'),
+			url:  window.yRouting.generate('AjaxLogin'),
 			data: this.data,
 			dataType: 'json'
 		});
@@ -53,7 +53,7 @@
 			if(data.success == 'ok'){
 				window.location.reload();
 			}else{
-				window.location.href = yRouting.generate('Login');
+				window.location.href = window.yRouting.generate('Login');
 			}
 		});
 	};

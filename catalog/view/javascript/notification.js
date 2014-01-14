@@ -90,7 +90,7 @@
 				return false;
 			}
 
-			that.url = yRouting.generate('ConfirmFriend', {user_slug: that.slug});
+			that.url = window.yRouting.generate('ConfirmFriend', {user_slug: that.slug});
 			
 			that.submit( that.$accept_btn );
 
@@ -104,7 +104,7 @@
 				return false;
 			}
 
-			that.url = yRouting.generate('IgnoreFriend', {user_slug: that.slug});
+			that.url = window.yRouting.generate('IgnoreFriend', {user_slug: that.slug});
 			
 			that.submit( that.$ignore_btn );
 
@@ -163,6 +163,7 @@
 		this.$see_notify_btn  	= $el.find('.js-btn-see-notify');
 
 		this.slug 				= $el.data('slug');
+		this.url 				= window.yRouting.generate('NotificationReadAll');
 
 		this.attachEvents();
 	}
@@ -175,8 +176,6 @@
 			if(that.$el.data('notification-count') == 0 || that.$see_notify_btn.hasClass('disabled')) {
 				return false;
 			}
-			
-			that.url = yRouting.generate('NotificationReadAll');
 			
 			that.submit( that.$see_notify_btn );
 
@@ -217,6 +216,103 @@
 	$(document).ready(function() {
 		$('.js-notification-common').each(function(){
 			new NotificationCommon( $(this) );
+		});
+	});
+}(jQuery, document));
+
+// Notification new message
+(function($, document, undefined) {
+	function NotificationMessage( $el ){
+		this.$el 				= $el;
+		this.$messBtn  			= $el.find('.js-btn-noti-mess');
+		this.$messList			= $el.find('.js-noti-mess-list');
+
+		this.url 				= window.yRouting.generate('MessageGetLast');
+
+		this.attachEvents();
+	}
+	NotificationMessage.prototype.attachEvents = function(){
+		var that = this;
+
+		this.$messBtn.click(function(e) {
+			e.preventDefault();
+			
+			that.submit( that.$messBtn );
+
+			return false;
+		});
+	};	
+	NotificationMessage.prototype.submit = function($button){
+		var that = this;
+
+		that.$messList.html('');
+		var messages = that.$el.data('messages');
+		if ( typeof messages == 'undefined' ){
+			messages = [];
+
+			var promise = $.ajax({
+				type: 'POST',
+				url: that.url,
+				dataType: 'json'
+			});
+
+			this.triggerProgress($button, promise);
+
+			promise.then(function(data) { 
+				if(data.success == 'ok'){
+					that.$el.find('.notification-item-count').addClass('hidden').html(0);
+
+					for ( var key in data.messages ){
+						message = data.messages[key];
+						var _class = ' ';
+						
+						if ( message.is_sender == true ){
+							_class += 'sent-box';
+						}else{
+							_class += 'inbox';
+						}
+
+						if ( message.read == true ){
+							_class += ' read';
+						}else{
+							_class += ' unread';
+						}
+
+						message['_class'] = _class;
+
+						messages.push( message );
+						that.$messList.prepend( $.tmpl($('#message-item-header'), message) );
+					}
+
+					that.$el.data('messages', messages);
+					$('.timeago').timeago();
+				}
+			});
+		}else{
+			for ( var key in messages ){
+				var message = messages[key];
+				that.$messList.prepend( $.tmpl($('#message-item-header'), message) );
+			}
+
+			$('.timeago').timeago();
+		}
+	};
+	NotificationMessage.prototype.triggerProgress = function($el, promise){
+		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+		var $old_icon = $el.find('i');
+		var f        = function() {
+			$spinner.remove();
+			$el.html($old_icon);
+		};
+
+		$el.addClass('disabled').html($spinner);
+
+		promise.then(f, f);
+	};
+
+	$(document).ready(function() {
+		$('.js-noti-mess').each(function(){
+			new NotificationMessage( $(this) );
 		});
 	});
 }(jQuery, document));

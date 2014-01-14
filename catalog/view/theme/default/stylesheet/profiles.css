@@ -313,6 +313,12 @@ textarea[name="summary"] {
 #profiles-tabs-information .bfh-datepicker.open > .bfh-datepicker-calendar{
 	position: relative;
 }
+.profiles-tabs-main-body .empty-data {
+	font-size: 18px;
+	color: #ccc;
+	padding: 10% 0px;
+	text-align: center;
+}
 
 /* Custom Scrollbar */
 .profiles-tabs .mCSB_scrollTools .mCSB_draggerRail {
@@ -402,6 +408,13 @@ textarea[name="summary"] {
     border-bottom: 1px solid #f0f0f0;	
     padding-bottom: 5px;
     overflow: hidden;
+}
+.profile-column-content .profile-info-item.empty-data {
+	border: none;
+	padding: 25% 0px;
+	text-align: center;
+	font-size: 18px;
+	color: #ccc;
 }
 .profile-info-item .profile-info-basic {
     overflow: hidden;

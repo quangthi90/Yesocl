@@ -32,9 +32,7 @@ $_['route']['FriendTypeahead']				= 'common/search/friendTypeahead/';
 $_['route']['PostTypeahead']				= 'common/search/postTypeahead/';
 $_['route']['Login']						= 'account/login';
 $_['route']['LostPass']						= 'account/forgotten';
-$_['route']['ActiveAccount']					= 'account/active';
-
-// Ajax
+$_['route']['ActiveAccount']				= 'account/active';
 $_['route']['AjaxLogin']					= 'account/login/login';
 $_['route']['AjaxRegister']					= 'account/register/register';
 
@@ -79,4 +77,13 @@ $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
 // Avatar
 $_['route']['ChangeAvatar']					= 'account/avatar';
 $_['route']['SaveAvatar']					= 'account/avatar/save';
+
+// Message
+$_['route']['MessagePage']					= 'account/message';
+$_['route']['MessageSend']					= 'account/message/send/';
+$_['route']['MessageGetList']				= 'account/message/getMessageListByUser/';
+$_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
+
+// Ajax
+$_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';
 ?>

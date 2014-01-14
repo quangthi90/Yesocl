@@ -540,7 +540,6 @@
         var that = this;
         this.$btn.click(function(e){
             e.preventDefault();
-            
             // Content
             $edit_post_form.find('.post-advance-content').code( that.content );
 

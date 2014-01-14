@@ -1,11 +1,3 @@
-{# list routing for js -- deleted after read #}
-<div id="list-routing" class="hidden">
-{% for key, link in routing %}
-  <div class="routing" data-page="{{ key }}" data-link="{{ link }}" ></div>
-{% endfor %}
-</div>
-{# end list routing #}
-
 <div id="y-header" class="outer-30">
     <div class="row-fluid">
         <div id="y-logo" class="span3">

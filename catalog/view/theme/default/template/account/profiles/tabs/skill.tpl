@@ -15,6 +15,9 @@
 			{% for skill in user.skills %}
 			<div class="profiles-tabs-item2 btn skill-item" data-id="{{ skill.id }}" data-remove="{{ path('ProfileRemoveSkill', {skill_id: skill.id}) }}">{{ skill.skill }}<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
 			{% endfor %}
+			<div class="{% if user.skills|length > 0 %}hidden{% endif %} empty-data">
+				No information found			
+			</div>
 		</div>
 	</div>
 </div>

@@ -73,6 +73,7 @@ class Customer {
 		    }
 
 			$this->session->data['customer_id'] = $customer_query->getId();
+			$this->session->data['customer_slug'] = $customer_query->getSlug();
 									
 			$this->customer_id = $customer_query->getId();
 			$this->firstname = $customer_query->getMeta()->getFirstName();
@@ -127,6 +128,7 @@ class Customer {
   	
 	public function logout() {		
 		unset($this->session->data['customer_id']);
+		unset($this->session->data['customer_slug']);
 
 		$this->customer_id = '';
 		$this->firstname = '';

@@ -24,11 +24,14 @@
 			</div>
 		</div>
 		{{ block('common_html_block_comment_quick_form') }}
-		{{ block('common_html_block_comment_advance_form') }}
-		{% set advance_comment_id = 'comment-advance-edit-popup' %}
-		{{ block('common_html_block_comment_advance_form') }}
 	</div>
-	{{ block('common_html_block_comment_item_template') }}
+{% endblock %}
+
+{% block template %}
+	{{ block('common_html_block_comment_advance_form') }}
+	{% set advance_comment_id = 'comment-advance-edit-popup' %}
+	{{ block('common_html_block_comment_advance_form') }}
+    {{ block('common_html_block_comment_item_template') }}
 {% endblock %}
 
 {% block post_common_comment_post_list_javascript %}

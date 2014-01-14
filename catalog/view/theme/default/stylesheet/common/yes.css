@@ -297,15 +297,15 @@ ul.dropdown-menu li.divider {
   color: #000;
 }
 .dropdown-menu > li > a:hover > i{
-  color: #fff;
+  color: #009B77;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-submenu:hover > a,
 .dropdown-submenu:focus > a {
-  color: #ffffff;
+  color: #0E0E0E;
   text-decoration: none;
-  background: #009975; 
+  background: #F0F0F0; 
   
 }
 #overlay 
@@ -651,6 +651,9 @@ a.btn-notification:hover .notification-item-name > i {
   opacity: 0;
   padding: 0px;
 }
+.notification-content-list ul {
+  min-width: 300px;
+}
 .notification-content-list.empty {
   width: 180px;
   font-weight: bold;
@@ -804,6 +807,74 @@ a.btn-notification:hover .notification-item-name > i {
   margin-left: 10px;
   color: #363636;
 }
+
+/* MESSAGE NOTIFICATION */
+.notification-item.message .user-message-li {
+  padding: 1px 0px 1px 0px;
+  max-width: 300px;
+}
+.notification-item.message .user-message-li:first-child {
+  padding-top: 0px;
+}
+.notification-item.message .user-message-li .user-message-link {
+  display: block;
+  overflow: hidden;
+  position: relative;
+  border-right: 1px solid #FFF;
+  background-color: #FAFAFA;
+}
+.notification-item.message .user-message-li .user-message-link:hover,
+.notification-item.message .user-message-li.active .user-message-link {
+  border-right: 1px solid #009B77;
+}
+.notification-item.message .user-message-li .user-message-link img {
+  width: 50px;
+  height: 50px;
+  float: left;
+  margin-right: 8px;
+}
+.notification-item.message .user-message-li .user-message-link strong.user-name {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0e0e0e;
+  font-size: 12px;
+}
+.notification-item.message .user-message-li .user-message-link span.message-overview {
+  font-size: 12px;
+  color: #5F5F5F;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+.notification-item.message .user-message-li .user-message-link i {
+  font-size: 11px;
+  color: #b4b4b4;
+  margin-right: 2px;
+  display: none;
+}
+.notification-item.message .user-message-li.read .user-message-link {
+}
+.notification-item.message .user-message-li.unread .user-message-link {
+  background-color: #DFDFDF;
+}
+.notification-item.message .user-message-li.sent-box .user-message-link span.message-overview > i.icon-mail-reply {
+  display: inline-block;
+}
+.notification-item.message .user-message-li.inbox .user-message-link span.message-overview > i.icon-ok {
+  display: inline-block;
+}
+.notification-item.message .user-message-li .user-message-link span.message-time {
+  font-size: 10px;
+  font-weight: bold;
+  color: #838383;
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+
 /* ------------------------------------ END NOTIFICATION ----------------------------------- */
 /* ----------------------------------- START SIDEBAR ---------------------------------------- */
 #sidebar-toggle {
@@ -1549,6 +1620,10 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .feed-block .block-content {
   overflow: hidden;
+}
+.feed-block .block-content .empty-data {
+  color: #8B8B8B;
+  font-weight: bold;
 }
 .block-title {
   padding: 0px;
@@ -2607,7 +2682,7 @@ ul.user_actions li:hover i{
 }
 /* ------------------------------ END HEADER-NO-LOGIN  ------------------------------------- */
 
-/*CUSTOM LIB's CSS*/
+/* ------------------------------ START CUSTOM LIB's CSS  ---------------------------------- */
 .comment-form .mentions-autocomplete-list {
   bottom: 100%;
 }
@@ -2648,17 +2723,17 @@ a.wall-link:hover {
 .note-tag-dialog .dropdown-menu > .active > a,
 .note-tag-dialog .dropdown-menu > .active > a:hover,
 .note-tag-dialog .dropdown-menu > .active > a:focus {
-  color: #ffffff;
+  color: #000;
   text-decoration: none;
   outline: 0;
-  background-color: #009B77;
-  background-image: -moz-linear-gradient(top, #009B77, #009B77);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#009B77), to(#009B77));
-  background-image: -webkit-linear-gradient(top, #009B77, #009B77);
-  background-image: -o-linear-gradient(top, #009B77, #009B77);
-  background-image: linear-gradient(to bottom, #009B77, #009B77);
+  background-color: #EBEBEB;
+  background-image: -moz-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EBEBEB), to(#EBEBEB));
+  background-image: -webkit-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -o-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: linear-gradient(to bottom, #EBEBEB, #EBEBEB);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#009B77', endColorstr='#009B77', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EBEBEB', endColorstr='#EBEBEB', GradientType=0);
 }
 .note-tag-dialog .typeahead li > a {
   overflow: hidden;
@@ -2667,9 +2742,10 @@ a.wall-link:hover {
   width: 30px;
   height: 30px;
   float: left;
-  margin-right: 5px;
+  margin-right: 8px;
 }
-.note-tag-dialog .typeahead li > a > span.user-name {
+.note-tag-dialog .typeahead li > a:hover > span.user-name {
+  font-weight: bold;
 }
 .note-tag-dialog .tag-container {
   margin: 15px 0px;  
@@ -2730,6 +2806,69 @@ a.wall-link:hover {
   color: #0E0E0E;
   visibility: visible;
 }
+/* ---------------------------------- END CUSTOM LIB's CSS  ---------------------------------- */
+/* ------------------------------------- START TAG-USER -------------------------------------- */
+.tag-user-wrapper {
+}
+.tag-user-wrapper .typeahead{
+}
+.tag-user-wrapper .typeahead li {
+  display: block;
+}
+.tag-user-wrapper .dropdown-menu > .active > a,
+.tag-user-wrapper .dropdown-menu > .active > a:hover,
+.tag-user-wrapper .dropdown-menu > .active > a:focus {
+  color: #000;
+  text-decoration: none;
+  outline: 0;
+  background-color: #EBEBEB;
+  background-image: -moz-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EBEBEB), to(#EBEBEB));
+  background-image: -webkit-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: -o-linear-gradient(top, #EBEBEB, #EBEBEB);
+  background-image: linear-gradient(to bottom, #EBEBEB, #EBEBEB);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EBEBEB', endColorstr='#EBEBEB', GradientType=0);
+}
+.tag-user-wrapper .typeahead li > a {
+  overflow: hidden;
+}
+.tag-user-wrapper .typeahead li > a > img {
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin-right: 8px;
+}
+.tag-user-wrapper .typeahead li > a:hover > span.user-name {
+  font-weight: bold;
+}
+.tag-user-wrapper .tags-group {
+  border: 1px solid #F0F0F0;
+  padding: 8px 5px 5px 8px;
+  max-height: 150px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.tag-user-wrapper .tags-container {  
+}
+.tag-user-wrapper .tags-container .tagItem {
+  padding: 5px 8px;
+  margin: 2px;
+  display: inline-block;
+  background-color: #ddd;
+}
+.tag-user-wrapper .tagItem  .tag-name{
+  font-weight: bold;
+  font-size: 12px;
+}
+.tag-user-wrapper .tagItem  i.icon-remove{
+  margin-left: 10px;
+  color: #ccc;
+}
+.tag-user-wrapper .tagItem:hover  i.icon-remove{
+  color: #000;
+}
+/* ------------------------------------- START TAG-USER -------------------------------------- */
 
 /* ======================================== START AVATAR ========================================== */
 #y-frm-avatar {

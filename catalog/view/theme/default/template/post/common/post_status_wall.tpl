@@ -31,11 +31,14 @@
  			</div>
 		</div>
 	</div>
+{% endblock %}
+
+{% block template %}
 	{{ block('common_html_block_post_advance_form') }}
 	{% set post_popup_id = 'post-advance-edit-popup' %}
 	{{ block('common_html_block_post_advance_form') }}
-	{{ block('common_html_block_post_item_template') }}
 	{{ block('common_html_block_upload_image_template') }}
+    {{ block('common_html_block_post_item_template') }}
 {% endblock %}
 
 {% block post_common_post_status_wall_javascript %}
