@@ -16,6 +16,8 @@ function Routing()
             for ( var key in data.routing ){
                 that.routing.setItem( key, data.routing[key] );
             }
+
+            $(document).trigger('LOAD_ROUTING_COMPLETE');
         }
     });
     
