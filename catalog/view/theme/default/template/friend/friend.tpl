@@ -25,11 +25,17 @@
                 </a>
             </div>
             <div class="block-content user-container">
-            {% for friend_id in friend_ids %}
-                {% set friend = users[friend_id] %}
-                {{ block('friend_common_friend_list') }}
-            {% endfor %}
-                {{ block('friend_common_friend_button_template') }}
+                {% if friend_ids|length > 0 %}
+                    {% for friend_id in friend_ids %}
+                        {% set friend = users[friend_id] %}
+                        {{ block('friend_common_friend_list') }}
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-data">
+                        No friends found
+                    </div>
+                {% endif %}
+                {{ block('friend_common_friend_button_template') }}            
             </div>
         </div>
         {% set friend_count = friend_ids|length %}

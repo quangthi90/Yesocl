@@ -49,35 +49,38 @@
 				</div>
 			</div>
 			{% for education in user.educations %}
-			<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" 
-				data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" 
-				data-ended="{{ education.ended }}" 
-				data-degree="{{ education.degree }}" 
-				data-degree-id="{{ education.degree_id }}" 
-				data-school="{{ education.school }}" 
-				data-school-id="{{ education.school_id }}" 
-				data-fieldofstudy="{{ education.fieldofstudy }}" 
-				data-fieldofstudy-id="{{ education.fieldofstudy_id }}" 
-				data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
-				<div>
-					<div class="profiles-tabs-item1-label">
-						From <span class="profiles-tabs-value">{{ education.started }}</span> 
-						to <span class="profiles-tabs-value">{{ education.ended }}</span>						
+				<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" 
+					data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" 
+					data-ended="{{ education.ended }}" 
+					data-degree="{{ education.degree }}" 
+					data-degree-id="{{ education.degree_id }}" 
+					data-school="{{ education.school }}" 
+					data-school-id="{{ education.school_id }}" 
+					data-fieldofstudy="{{ education.fieldofstudy }}" 
+					data-fieldofstudy-id="{{ education.fieldofstudy_id }}" 
+					data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
+					<div>
+						<div class="profiles-tabs-item1-label">
+							From <span class="profiles-tabs-value">{{ education.started }}</span> 
+							to <span class="profiles-tabs-value">{{ education.ended }}</span>						
+						</div>
+					</div>
+					<div class="profiles-tabs-item1-content">
+						<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
+						<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
+						<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
+						<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
+						<div class="profiles-tabs-value">
+							<div class="profiles-tabs-value-item">{{ education.school }}</div>
+							<div class="profiles-tabs-value-item">{{ education.degree }}</div>
+							<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
+						</div>
 					</div>
 				</div>
-				<div class="profiles-tabs-item1-content">
-					<a class="profiles-tabs-value btn profiles-btn pull-right btn-remove profiles-btn-remove"><i class="icon-trash"></i></a>
-					<a class="btn profiles-btn profiles-btn-edit profiles-tabs-value pull-right"><i class="icon-pencil"></i></a>
-					<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
-					<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
-					<div class="profiles-tabs-value">
-						<div class="profiles-tabs-value-item">{{ education.school }}</div>
-						<div class="profiles-tabs-value-item">{{ education.degree }}</div>
-						<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
-					</div>
-				</div>
-			</div>
 			{% endfor %}
+			<div class="{% if user.educations|length > 0 %}hidden{% endif %} empty-data">
+				No information found			
+			</div>
 		</div>
 	</div>
 </div>
