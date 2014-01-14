@@ -33,9 +33,8 @@ $_['routing']['PostTypeahead']					= 'search/typeahead/post/{keyword}/';
 $_['routing']['Login']							= 'login/';
 $_['routing']['ChangeAvatar']					= 'change-avatar/';
 $_['routing']['LostPass']						= 'lost_password/';
-
-// Ajax
-$_['routing']['AjaxLogin']						= 'login/ajax/';
+$_['routing']['ActiveAccount']					= 'active/{token}/';
+$_['routing']['AjaxLogin']						= 'login-ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 
 // Profile
@@ -75,4 +74,12 @@ $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 // Notification
 $_['routing']['NotificationReadAll']			= 'notification/readAll/';
 
+// Message
+$_['routing']['MessagePage']					= 'message/page/';
+$_['routing']['MessageSend']					= 'message/send/';
+$_['routing']['MessageGetList']					= 'message/get-list/{user_slug}/';
+$_['routing']['MessageGetLast']					= 'message/get-last/';
+
+// Ajax
+$_['routing']['AjaxGetRouting']					= 'service/get/routing/';
 ?>

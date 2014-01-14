@@ -491,7 +491,6 @@
         var that = this;
         this.$btn.click(function(e){
             e.preventDefault();
-            console.log(that.url);
             // Content
             $edit_post_form.find('.post-advance-content').code( that.content );
 

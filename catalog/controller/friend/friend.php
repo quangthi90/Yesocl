@@ -115,7 +115,7 @@ class ControllerFriendFriend extends Controller {
 				$aUser['type'] = 'contact';
 				$aUser['wall'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
 
-				$aFriends[] = $aUser;
+				$aFriends[$aUser['slug']] = $aUser;
 			}
 		}
 

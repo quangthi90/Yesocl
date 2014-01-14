@@ -3,12 +3,20 @@ class ControllerAccountLogin extends Controller {
 	private $error = array();
 	
 	public function index() {
+    if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+      $this->data['base'] = $this->config->get('config_ssl');
+    } else {
+      $this->data['base'] = HTTP_SERVER;
+    }
+    
 		$this->load->model('account/customer');	
 
-		if ( isset($this->session->data['warning']) ){
-			$this->data['warning'] = $this->session->data['warning'];
-			unset($this->session->data['warning']);
-		}	
+    if ( !$this->data['warning'] = $this->session->getFlash('warning_delete_account') ){
+      if ( isset($this->session->data['warning']) ){
+        $this->data['warning'] = $this->session->data['warning'];
+        unset($this->session->data['warning']);
+      }
+    }
 		
 		if ($this->customer->isLogged()) {
       		$this->redirect( $this->extension->path('HomePage') );
@@ -32,7 +40,7 @@ class ControllerAccountLogin extends Controller {
 		$this->load->model('account/customer');
 	
     $this->language->load('account/login');
-
+    
     if ( $this->customer->isLogged() ){
     	return $this->response->setOutput(json_encode(array(
         'success' => 'ok'

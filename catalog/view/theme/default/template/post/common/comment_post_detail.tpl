@@ -73,12 +73,15 @@
 				{% set add_comment_url = path('CommentAdd', {post_slug: post.slug, post_type: post_type}) %}
 			{% endif %}
 			{{ block('common_html_block_comment_quick_form') }}
-			{{ block('common_html_block_comment_advance_form') }}
-			{% set advance_comment_id = 'comment-advance-edit-popup' %}
-			{{ block('common_html_block_comment_advance_form') }}
 		</div>
 	</div>
-	{{ block('common_html_block_comment_item_template') }}
+{% endblock %}
+
+{% block template %}
+	{{ block('common_html_block_comment_advance_form') }}
+	{% set advance_comment_id = 'comment-advance-edit-popup' %}
+	{{ block('common_html_block_comment_advance_form') }}
+    {{ block('common_html_block_comment_item_template') }}
 {% endblock %}
 
 {% block post_common_comment_post_detail_javascript %}

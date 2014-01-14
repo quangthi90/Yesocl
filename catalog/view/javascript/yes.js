@@ -217,5 +217,5 @@ function HashTable(obj)
     }
 }
 
-var yListFriends = null;
+window.yListFriends = null;
 var is_send_ajax = 0;

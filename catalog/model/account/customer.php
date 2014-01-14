@@ -9,25 +9,6 @@ use Document\User\User,
 	Document\User\Meta\Skill;
 
 class ModelAccountCustomer extends Model {
-	public function editPassword($email, $password) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
-			'emails.email' => $email
-		));
-
-		if ( !$user ){
-			return false;
-		}
-
-		$salt = $user->getSalt();
-		$password = sha1($salt . sha1($salt . sha1($password)));
-		
-		$user->setPassword( $password );
-
-		$this->dm->flush();
-
-		return true;
-	}
-					
 	public function getCustomer($user_id) {
 		$this->load->model('tool/cache');
 		$user = $this->model_tool_cache->getUser($user_id);
@@ -52,14 +33,6 @@ class ModelAccountCustomer extends Model {
 		));
 
 		return $query;
-	}
-		
-	public function getTotalCustomersByEmail($email) {
-		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
-			'emails.email' => $email
-		));
-
-		return $query->count();
 	}
 }
 ?>

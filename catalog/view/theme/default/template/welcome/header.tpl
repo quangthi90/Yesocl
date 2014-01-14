@@ -1,11 +1,3 @@
-{# list routing for js -- deleted after read #}
-<div id="list-routing" class="hidden">
-{% for key, link in routing %}
-  <div class="routing" data-page="{{ key }}" data-link="{{ link }}" ></div>
-{% endfor %}
-</div>
-{# end list routing #}
-
 <div id="y-header" class="outer-30">
     <div class="row-fluid">
         <div id="y-logo" class="span3">
@@ -61,7 +53,7 @@
 </div>
 <div class="line-shadow"></div>
 <div id="login-form-container" style="display: none;">
-    <form action="{{ path('AjaxLogin') }}" method="post" class="row-fluid login-form" data-url="{{ path('Login') }}">
+    <form class="row-fluid login-form">
         <div class="row-fluid">
             <div class="span12 input-prepend">
                 <span class="add-on"><i class="icon-user"></i></span>

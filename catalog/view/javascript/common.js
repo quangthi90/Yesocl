@@ -44,8 +44,6 @@ var yCurrUser = new CurrentUser();
 	}
 	jQuery.fn.makeCustomScroll = function(isHonrizontal) {
 		$(this).mCustomScrollbar({
-			set_width:false, /*optional element width: boolean, pixels, percentage*/
-			set_height:false, /*optional element height: boolean, pixels, percentage*/
 			horizontalScroll: isHonrizontal, /*scroll horizontally: boolean*/
 			scrollInertia:950, /*scrolling inertia: integer (milliseconds)*/
 			mouseWheel:true, /*mousewheel support: boolean*/
@@ -65,16 +63,7 @@ var yCurrUser = new CurrentUser();
 				autoScrollOnFocus:false, /*auto-scroll on focused elements: boolean*/
 				normalizeMouseWheelDelta:false /*normalize mouse-wheel delta (-1/1)*/
 			},
-			contentTouchScroll:true, /*scrolling by touch-swipe content: boolean*/
-			callbacks:{
-				onScrollStart:function(){}, /*user custom callback function on scroll start event*/
-				onScroll:function(){}, /*user custom callback function on scroll event*/
-				onTotalScroll:function(){}, /*user custom callback function on scroll end reached event*/
-				onTotalScrollBack:function(){}, /*user custom callback function on scroll begin reached event*/
-				onTotalScrollOffset:0, /*scroll end reached offset: integer (pixels)*/
-				onTotalScrollBackOffset:0, /*scroll begin reached offset: integer (pixels)*/
-				whileScrolling:function(){} /*user custom callback function on scrolling event*/
-			},
+			contentTouchScroll:true, /*scrolling by touch-swipe content: boolean*/			
 			theme:"light" /*"light", "dark", "light-2", "dark-2", "light-thick", "dark-thick", "light-thin", "dark-thin"*/
 		});
 	}
@@ -168,22 +157,22 @@ var yCurrUser = new CurrentUser();
 
 		that.$tagElement.mentionsInput({
 			onDataRequest:function (mode,currentMentionCollection,query,callback) {
-				if ( yListFriends == null && is_send_ajax == 0 ){
+				if ( window.yListFriends == null && is_send_ajax == 0 ){
 					is_send_ajax = 1;
-					$.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+					$.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
 						if ( json.success == 'ok' ){
 							if ( json.friends == undefined ){
 								is_send_ajax = 0;
 							}
-							yListFriends = json.friends;
-							responseData = _.filter(yListFriends, function(item) { 
+							window.yListFriends = json.friends;
+							responseData = _.filter(window.yListFriends, function(item) { 
 					       		return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
 					       	});
 					       	callback.call(this, responseData);
 						}
 			      	});
 				}else{
-					data = _.filter(yListFriends, function(item) {
+					data = _.filter(window.yListFriends, function(item) {
 						if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
 							var checkExisted = _.filter(currentMentionCollection, function(tempItem){
 								return (item.id === tempItem.id);

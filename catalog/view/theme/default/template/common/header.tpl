@@ -1,11 +1,3 @@
-{# list routing for js -- deleted after read #}
-<div id="list-routing" class="hidden">
-{% for key, link in routing %}
-  <div class="routing" data-page="{{ key }}" data-link="{{ link }}" ></div>
-{% endfor %}
-</div>
-{# end list routing #}
-
 {% set currUser = get_current_user() %}
 {% if is_logged() and currUser != null %}
 {# current user info -- deleted after read #}
@@ -38,9 +30,9 @@
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
-          {#<a href="#">
+          <a href="{{ path('MessagePage') }}">
 			    	<i class="icon-edit"></i>
-			    </a>#}
+			    </a>
 			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
 		    		<i class="icon-cog"></i>
 	    		</a>
@@ -98,45 +90,17 @@
             </ul>
           </div>
         </div>
-        {#<div class="notification-item message">
-          <a href="#" class="btn-notification">
+        <div class="notification-item message js-noti-mess">
+          <a href="#" class="btn-notification js-btn-noti-mess">
             <i class="icon-envelope"></i>
-            <span class="notification-item-count">5</span>
+            {% if mess_unread > 0 %}
+            <span class="notification-item-count">{{ mess_unread }}</span>
+            {% endif %}
           </a>
           <div class="notification-content-list">
-            <ul>
-              <li class="notification-content-item">
-                <a href="#" class="notification-content-item-img">
-                  <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                </a>
-                <div class="notification-content-item-detail">
-                  <div class="notification-text">
-                    <a href="#">WMThiet</a> sent a message to you
-                  </div>
-                  <div class="message-content">
-                    hello everyone
-                  </div>
-                  <div class="notification-time">
-                    1 hour ago
-                  </div>
-                </div>
-              </li>
-              <li class="notification-content-item">
-                <a href="#" class="notification-content-item-img">
-                  <img src="http://community.nasdaq.com/common/images/defaultUserAvatar.jpg" alt="">
-                </a>
-                <div class="notification-content-item-detail">
-                  <div class="notification-text">
-                    <a href="#">WMThiet</a> sent a message to you
-                  </div>
-                  <div class="message-content">
-                    hello everyone
-                  </div>
-                </div>
-              </li>                   
-            </ul>
+            <ul class="js-noti-mess-list"></ul>
           </div>
-        </div>#}
+        </div>
         {% set requests = get_request_friend() %}
         <div class="notification-item friend">
           <a href="#" class="btn-notification">
@@ -171,6 +135,24 @@
 			</div>
 		</div>
 	</div>                               
+</div>
+<div id="html-template-header" class="hidden">
+  <div id="message-item-header">
+    <li class="user-message-li ${_class}">
+      <a href="{{ path('MessagePage') }}" class="user-message-link">
+        <img src="${user.avatar}" alt="${user.username}">
+        <span class="user-message-info">
+          <strong class="user-name">${user.username}</strong>
+          <span class="message-overview">
+              <i class="icon-mail-reply"></i>
+              <i class="icon-ok"></i>
+              <span>${content}</span>
+          </span>
+          <span class="message-time timeago" title="${created}"></span>
+        </span>
+      </a>
+    </li>
+</div>
 </div>
 {% else %}
 <div id="y-header-no-login">

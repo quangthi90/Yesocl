@@ -24,6 +24,12 @@ Class User {
 	private $password;
 
 	/** @MongoDB\String */
+	private $forgotten;
+
+	/** @MongoDB\Date */
+	private $forgotCreated;
+
+	/** @MongoDB\String */
 	private $salt;
 
 	/** @MongoDB\String */
@@ -75,8 +81,19 @@ Class User {
 	/** @MongoDB\EmbedMany(targetDocument="Notification") */
 	private $notifications = array();
 
+	/** 
+	 * @MongoDB\Int
+	 */
+	private $unRead;
+
 	/** @MongoDB\Boolean */
 	private $isSocial;
+
+	/** @MongoDB\String */
+	private $token;
+
+	/** @MongoDB\Date */
+	private $tokenTime;
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
@@ -228,6 +245,24 @@ Class User {
 
 	public function getPassword(){
 		return $this->password;
+	}
+
+	public function setForgotten( $forgotten ){
+		$this->forgotCreated = new \DateTime();
+		date_add($this->forgotCreated, date_interval_create_from_date_string('1 days'));
+		$this->forgotten = $forgotten;
+	}
+
+	public function getForgotten(){
+		return $this->forgotten;
+	}
+
+	public function setForgotCreated( $forgotCreated ){
+		$this->forgotCreated = $forgotCreated;
+	}
+
+	public function getForgotCreated(){
+		return $this->forgotCreated;
 	}
 
 	public function setSalt( $salt ){
@@ -406,12 +441,39 @@ Class User {
 		return $this->notifications;
 	}
 
+	public function setUnRead( $unRead ){
+		$this->unRead = $unRead;
+	}
+
+	public function getUnRead(){
+		return $this->unRead;
+	}
+
 	public function setIsSocial( $isSocial ){
 		$this->isSocial = $isSocial;
 	}
 
 	public function getIsSocial(){
 		return $this->isSocial;
+	}
+
+	public function setToken( $token ){
+		$this->tokenTime = new \DateTime();
+		date_add($this->tokenTime, date_interval_create_from_date_string('7 days'));
+
+		$this->token = $token;
+	}
+
+	public function getToken(){
+		return $this->token;
+	}
+
+	public function setTokenTime( $tokenTime ){
+		$this->tokenTime = $tokenTime;
+	}
+
+	public function getTokenTime(){
+		return $this->tokenTime;
 	}
 
 	/**

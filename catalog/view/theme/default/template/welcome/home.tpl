@@ -12,13 +12,6 @@
 		<img src="{{ asset_img('template/intro-2-bg.png') }}" />  
     </div>    
 </div>
-{% if error != null %}
-<div id="y-message-info" data-title="Login failed" 
-                        data-message="{{ error }}" 
-                        data-class="anim error"
-                        style="display: none;">      
-</div>
-{% endif %}
 <div id="y-frm-register" class="y-frm">
     <a href="#" class="close">X</a>
     <div class="frm-title">

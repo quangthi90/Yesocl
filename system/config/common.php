@@ -30,4 +30,10 @@ $_['notify']['action']['tag-comment']			= 'mentioned you in a comment';
 $_['notify']['action']['tag-post']				= 'mentioned you in a post';
 
 $_['no_image']['branch']['post']				= 'no-image-branch-post.jpg';
+
+$_['email']['hostname']							= 'ssl://smtp.gmail.com';
+$_['email']['username']							= 'bommerdesign@gmail.com';
+$_['email']['password']							= '13081990';
+$_['email']['port']								= '465';
+$_['email']['protocol']							= 'smtp';
 ?>
