@@ -1,31 +1,38 @@
 // Routing to generate url
 function Routing()
 {
-    this.routing = [];
+    var that = this;
+
+    this.routing = new HashTable();
     
     var promise = $.ajax({
         type: 'POST',
-        url:  $('base').attr('href') + 'ajax/get/routing/',
+        url:  $('base').attr('href') + 'ajax/service/get/routing/',
         dataType: 'json'
     });
 
     promise.then(function(data) {
         if ( data.success == 'ok' ){
-            this.routing = data.routing;
+            for ( var key in data.routing ){
+                that.routing.setItem( key, data.routing[key] );
+            }
         }
     });
     
     // Generate url by name & params
-    this.generate = function(name, params)
+    this.generate = function(name, params, method)
     {
-        var url = this.routing[name];
+        if ( typeof method == 'undefined' ){
+            method = '';
+        }
+        var url = this.routing.getItem(name);
         
         for ( key in params ){
             url = url.replace( '{' + key + '}', params[key] );
         }
 
-        return $('base').attr('href') + url;
+        return $('base').attr('href') + method + url;
     }
 }
 
-var yRouting = new Routing();
+window.yRouting = new Routing();

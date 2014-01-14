@@ -159,7 +159,7 @@ var yCurrUser = new CurrentUser();
 			onDataRequest:function (mode,currentMentionCollection,query,callback) {
 				if ( window.yListFriends == null && is_send_ajax == 0 ){
 					is_send_ajax = 1;
-					$.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+					$.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
 						if ( json.success == 'ok' ){
 							if ( json.friends == undefined ){
 								is_send_ajax = 0;

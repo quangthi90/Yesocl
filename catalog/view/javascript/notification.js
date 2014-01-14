@@ -71,7 +71,7 @@
 				return false;
 			}
 
-			that.url = yRouting.generate('ConfirmFriend', {user_slug: that.slug});
+			that.url = window.yRouting.generate('ConfirmFriend', {user_slug: that.slug});
 			
 			that.submit( that.$accept_btn );
 
@@ -85,7 +85,7 @@
 				return false;
 			}
 
-			that.url = yRouting.generate('IgnoreFriend', {user_slug: that.slug});
+			that.url = window.yRouting.generate('IgnoreFriend', {user_slug: that.slug});
 			
 			that.submit( that.$ignore_btn );
 
@@ -144,7 +144,7 @@
 		this.$see_notify_btn  	= $el.find('.js-btn-see-notify');
 
 		this.slug 				= $el.data('slug');
-		this.url 				= yRouting.generate('NotificationReadAll');
+		this.url 				= window.yRouting.generate('NotificationReadAll');
 
 		this.attachEvents();
 	}
@@ -208,7 +208,7 @@
 		this.$messBtn  			= $el.find('.js-btn-noti-mess');
 		this.$messList			= $el.find('.js-noti-mess-list');
 
-		this.url 				= yRouting.generate('MessageGetLast');
+		this.url 				= window.yRouting.generate('MessageGetLast');
 
 		this.attachEvents();
 	}

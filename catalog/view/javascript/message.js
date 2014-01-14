@@ -110,7 +110,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
               map = {};
               if ( window.yListFriends == null && is_send_ajax == 0 ){
                 is_send_ajax = 1;
-                $.getJSON(yRouting.generate('GetAllFriends'), function(json) {
+                $.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
                   if ( json.success == 'ok' ){
                     if ( json.friends == undefined ){
                       is_send_ajax = 0;
@@ -246,7 +246,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
 
         var promise = $.ajax({
             type: 'POST',
-            url:  yRouting.generate('MessageSend'),
+            url:  window.yRouting.generate('MessageSend'),
             data: {
                 user_slugs: this.$subject.data('users'),
                 content: this.$content.val().trim()
@@ -385,7 +385,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
         var slug = this.$subject.data('user-slug');
         var promise = $.ajax({
             type: 'POST',
-            url:  yRouting.generate('MessageSend'),
+            url:  window.yRouting.generate('MessageSend'),
             data: {
                 user_slugs: [slug],
                 content: this.$content.val().trim()
@@ -514,7 +514,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
         if ( typeof users_messages.getItem(that.slug) == 'undefined' ){
             var promise = $.ajax({
                 type: 'POST',
-                url:  yRouting.generate('MessageGetList', {
+                url:  window.yRouting.generate('MessageGetList', {
                     user_slug: that.slug
                 }),
                 dataType: 'json'

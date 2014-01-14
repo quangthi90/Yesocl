@@ -128,6 +128,7 @@ class Customer {
   	
 	public function logout() {		
 		unset($this->session->data['customer_id']);
+		unset($this->session->data['customer_slug']);
 
 		$this->customer_id = '';
 		$this->firstname = '';
