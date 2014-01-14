@@ -600,9 +600,13 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
                 that.$searchLoader.fadeOut(100);
                 return;
             }
+            key = key.toLowerCase();
             that.$userMessageItems.addClass('hidden');
             var matchedItems = that.$userMessageItems.filter(function(index){
-                return $(this).data('username').indexOf(key) >= 0;
+                if($(this).data('username').length == 0) {
+                    return false;
+                }
+                return $(this).data('username').toLowerCase().indexOf(key) >= 0;
             });            
             if(matchedItems.length > 0){
                 matchedItems.removeClass('hidden');
