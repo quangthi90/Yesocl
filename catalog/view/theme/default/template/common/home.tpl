@@ -37,6 +37,13 @@
 			message: "{{warning_active}}",
 			title: "Active warning !",
 			buttons: {
+				resend: {
+					label: "Resend active email",
+					className: "btn-primary",
+					callback: function() {
+					    alert('Add code for resending email ...');
+				  	}
+				},
 				success: {
 					label: "Ok",
 					className: "btn-primary"
