@@ -33,7 +33,7 @@
 	</div>
 {% endblock %}
 
-{% block template %}
+{% block post_common_post_status_wall_html_template %}
 	{{ block('common_html_block_post_advance_form') }}
 	{% set post_popup_id = 'post-advance-edit-popup' %}
 	{{ block('common_html_block_post_advance_form') }}
