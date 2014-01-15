@@ -160,8 +160,8 @@
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
+				    		<a href="#" class="btn btn-yes btn-post-advance">Post</a>
 				    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
-			                <a href="#" class="btn btn-yes btn-post-advance">Post</a>
 			            </div>
 				    </div>		
 				</form>
