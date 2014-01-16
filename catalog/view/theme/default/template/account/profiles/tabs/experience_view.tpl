@@ -1,6 +1,6 @@
 {% block profiles_tabs_experience_view %}
 <div class="fl profile-column profile-column-experience" id="profile-column-experience">
-	<h3 class="profile-column-title"><i class="icon-list"></i> Work Experience</h3>
+	<h3 class="profile-column-title"><i class="icon-list"></i> {% trans %}Work Experience{% endtrans %}</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
 			{% if user.experiences|length > 0 %}
@@ -14,7 +14,7 @@
 							<span class="company-address">{{ experience.location }}</span>
 						</div>
 						<div class="profile-info-time">
-							<span class="time-from">{{ experience.started|date('d/m/Y') }}</span><span class="time-to">{% if experience.ended != null %}{{ experience.ended|date('d/m/Y') }}{% else %}Present{% endif %}</span>
+							<span class="time-from">{{ experience.started|date('d/m/Y') }}</span><span class="time-to">{% if experience.ended != null %}{{ experience.ended|date('d/m/Y') }}{% else %}{% trans %}Present{% endtrans %}{% endif %}</span>
 						</div>
 					</div>
 					{#<div class="profile-info-decription">
@@ -26,7 +26,7 @@
 				{% endfor %}
 			{% else %}
 				<div class="profile-info-item empty-data">
-					No information found				
+					{% trans %}No information found{% endtrans %}
 				</div>
 			{% endif %}
 		</div>

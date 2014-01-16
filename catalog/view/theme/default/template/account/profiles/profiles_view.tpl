@@ -5,7 +5,7 @@
 {% use '@template/default/template/account/profiles/tabs/background_view.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/profile_overview.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}Yesocl - {% trans %}View Profile{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('libs/bootstrap-formhelpers.css') }}" rel="stylesheet" media="screen" />

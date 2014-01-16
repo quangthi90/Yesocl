@@ -4,7 +4,7 @@
 {% use '@template/default/template/account/profiles/tabs/information.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/background.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}Yesocl - {% trans %}Edit Profile{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('libs/bootstrap-formhelpers.css') }}" rel="stylesheet" media="screen" />

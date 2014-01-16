@@ -67,10 +67,29 @@ Twig_Autoloader::register();
 $twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
 $twig_loader->addPath(DIR_TEMPLATE, 'template');
 $twig = new Twig_Environment($twig_loader, array(
-    // 'cache' => DIR_SYSTEM . '/cache/twig',
+    'cache' => DIR_SYSTEM . '/cache/twig',
+    'auto_reload' => true
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
+$twig->addExtension(new Twig_Extensions_Extension_I18n());
 
+// Set language to French
+putenv('LC_ALL=vn_VN');
+setlocale(LC_ALL, 'vn_VN');
+// print(DIR_LANGUAGE . 'locale'); exit;
+// Specify the location of the translation tables
+bindtextdomain('vn', DIR_LANGUAGE . 'locale');
+bind_textdomain_codeset('vn', 'UTF-8');
+
+// Choose domain
+textdomain('vn');
+
+// Print a test message
+echo gettext("Trang chủ");
+
+// Or use the alias _() for gettext()
+// echo _("Home Feed");
+exit;
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
 $registry->set('url', $url);

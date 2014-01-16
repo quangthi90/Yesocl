@@ -14,28 +14,28 @@
                     {{ block('friend_common_friend_button') }}
                     {{ block('friend_common_friend_button_template') }}
                     <a href="#" class="btn btn-yes">
-                        <i class="icon-random"></i> Follow
+                        <i class="icon-random"></i> {% trans %}Follow{% endtrans %}
                     </a>
                     <a href="#" class="btn btn-yes">
-                        <i class="icon-share-alt"></i> Message
+                        <i class="icon-share-alt"></i> {% trans %}Message{% endtrans %}
                     </a>
                 </div>                    
             </div>
             <ul class="user_actions">
                 <li>
-                    <i class="icon-list-alt"></i><a href="{{ path('ProfilePage', {user_slug: user.slug}) }}">Profile</a>
+                    <i class="icon-list-alt"></i><a href="{{ path('ProfilePage', {user_slug: user.slug}) }}">{% trans %}Profile{% endtrans %}</a>
                 </li>
                 <li>
-                    <i class="icon-fire"></i><a href="{{ path('FriendPage', {user_slug: user.slug}) }}">Friends</a>
+                    <i class="icon-fire"></i><a href="{{ path('FriendPage', {user_slug: user.slug}) }}">{% trans %}Friends{% endtrans %}</a>
                 </li>
                 <li>
-                    <i class="icon-file-alt"></i><a href="#">Posts</a>
+                    <i class="icon-file-alt"></i><a href="#">{% trans %}Posts{% endtrans %}</a>
                 </li>
                 <li>
-                    <i class="icon-group"></i><a href="#">Groups</a>
+                    <i class="icon-group"></i><a href="#">{% trans %}Groups{% endtrans %}</a>
                 </li>
                 <li>
-                    <i class="icon-tasks"></i><a href="#">Activities</a>
+                    <i class="icon-tasks"></i><a href="#">{% trans %}Activities{% endtrans %}</a>
                 </li> 
             </ul>
         </div>

@@ -1,7 +1,7 @@
 {% block profiles_tabs_information %}
 <div id="profiles-tabs-information" class="profiles-tabs" data-url="{{ path('ProfileEditInfo') }}">
 	<div class="profiles-tabs-header">
-		<div class="profiles-tabs-title"><i class="icon-list"></i> Basic Information</div>
+		<div class="profiles-tabs-title"><i class="icon-list"></i> {% trans %}Basic Information{% endtrans %}</div>
 	</div>
 	<div class="profiles-tabs-main">
 		<div class="row-fluid profile-label">
@@ -12,15 +12,15 @@
 			<div class="profiles-tabs-main-body">
 				<div class="basic-profiles-item">
 					<div class="row-fluid">
-						<div class="span2 offset1">Username</div>
+						<div class="span2 offset1">{% trans %}Username{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.username }}</span></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Fullname</div>
+						<div class="span2 offset1">{% trans %}Fullname{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.fullname }}</span></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Email</div>
+						<div class="span2 offset1">{% trans %}Email{% endtrans %}</div>
 						<div class="span9">
 							<div class="row-fluid">
 								{% for email in user.emails %}
@@ -33,7 +33,7 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Phone</div>
+						<div class="span2 offset1">{% trans %}Phone{% endtrans %}</div>
 						<div class="span9">
 							<div class="row-fluid">
 								{% for phone in user.phones %}
@@ -46,23 +46,23 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Gender</div>
+						<div class="span2 offset1">{% trans %}Gender{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.sext }}</span></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Birthday</div>
+						<div class="span2 offset1">{% trans %}Birthday{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{% if user.birthday != null %}{{ user.birthday|date('d/m/Y') }}{% endif %}</span></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Address</div>
+						<div class="span2 offset1">{% trans %}Address{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.address }}</span></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Living</div>
+						<div class="span2 offset1">{% trans %}Living{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.location }}</span></div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Industry</div>
+						<div class="span2 offset1">{% trans %}Industry{% endtrans %}</div>
 						<div class="span9"><span class="profiles-tabs-value viewers">{{ user.industry }}</span></div>
 					</div>
 				</div>
@@ -82,13 +82,13 @@
 				<div class="basic-profiles-form" 
 					data-url="{{ path('ProfileEditInfo') }}">
 					<div class="row-fluid">
-						<div class="span2 offset1">Username</div>
+						<div class="span2 offset1">{% trans %}Username{% endtrans %}</div>
 						<div class="span9 control-group" data-url="{{ link_validate_username }}">
 							<input class="span5" type="text" placeholder="Username" name="username" value="{{ user.username }}" required="required" />
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Fullname</div>
+						<div class="span2 offset1">{% trans %}Fullname{% endtrans %}</div>
 						<div class="span9">
 							<span class="control-group" data-url="{{ link_validate_firstname }}">
 								<input class="span3" type="text" placeholder="Firstname" name="firstname" value="{{ user.firstname }}" required="required" />
@@ -99,7 +99,7 @@
 						</div>
 					</div>
 					<div class="row-fluid profile-content-set">
-						<div class="span2 offset1">Email</div>
+						<div class="span2 offset1">{% trans %}Email{% endtrans %}</div>
 						<div class="span9">
 							<div class="row-fluid">
 								{% for email in user.emails %}
@@ -118,7 +118,7 @@
 						</div>
 					</div>
 					<div class="row-fluid profile-content-set">
-						<div class="span2 offset1">Phone</div>
+						<div class="span2 offset1">{% trans %}Phone{% endtrans %}</div>
 						<div class="span9">
 							<div class="row-fluid">
 								{% for phone in user.phones %}
@@ -141,27 +141,27 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Address</div>
+						<div class="span2 offset1">{% trans %}Address{% endtrans %}</div>
 						<div class="span9 control-group">
 							<input class="span5" type="text" placeholder="Address" name="address" value="{{ user.address }}" required="required" />
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Living</div>
+						<div class="span2 offset1">{% trans %}Living{% endtrans %}</div>
 						<div class="span9 control-group" data-autocomplete="{{ path('LocationAutoComplete') }}">
 							<input class="span5" type="text" placeholder="Living" name="location" value="{{ user.location }}" />
 							<input type="hidden" name="cityid" value="{{ user.cityid }}" />
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Industry</div>
+						<div class="span2 offset1">{% trans %}Industry{% endtrans %}</div>
 						<div class="span9 control-group" data-autocomplete="{{ path('IndustryAutoComplete') }}">
 							<input class="span5" type="text" placeholder="Industry" name="industry" value="{{ user.industry }}" />
 							<input type="hidden" name="industryid" value="{{ user.industryid }}" />
 						</div>
 					</div>					
 					<div class="row-fluid inputBirthday">
-						<div class="span2 offset1">Birthday</div>
+						<div class="span2 offset1">{% trans %}Birthday{% endtrans %}</div>
 						<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="{{ user.birthday|date('d/m/Y') }}">
 						  	<div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker">
 						    	<span class="add-on btn"><i class="icon-calendar"></i></span>
@@ -192,15 +192,15 @@
 						</div>
 					</div>
 					<div class="row-fluid">
-						<div class="span2 offset1">Gender</div>
+						<div class="span2 offset1">{% trans %}Gender{% endtrans %}</div>
 						<div class="span9 control-group">
 							<select class="span5" name="gender">
 								{% if user.sex == 1 %}
-								<option value="1" selected="selected">Male</option>
-								<option value="0">Female</option>
+								<option value="1" selected="selected">{% trans %}Male{% endtrans %}</option>
+								<option value="0">{% trans %}Female{% endtrans %}</option>
 								{% else %}
-								<option value="1">Male</option>
-								<option value="0" selected="selected">Female</option>
+								<option value="1">{% trans %}Male{% endtrans %}</option>
+								<option value="0" selected="selected">{% trans %}Female{% endtrans %}</option>
 								{% endif %}
 							</select>
 						</div>
@@ -225,13 +225,13 @@
 		<div class="profiles-tabs-main-body">
 			<div class="basic-profiles-form">
 				<div class="row-fluid">
-					<div class="span2 offset1">Username</div>
+					<div class="span2 offset1">{% trans %}Username{% endtrans %}</div>
 					<div class="span9 control-group" data-url="{{ link_validate_username }}">
 						<input class="span5" type="text" placeholder="Input Text" name="username" value="${ username }" required="required" />
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Fullname</div>
+					<div class="span2 offset1">{% trans %}Fullname{% endtrans %}</div>
 					<div class="span9">
 						<span class="control-group" data-url="{{ link_validate_firstname }}">
 							<input class="span3" type="text" placeholder="Input Text" name="firstname" value="${ firstname }" required="required" />
@@ -242,7 +242,7 @@
 					</div>
 				</div>
 				<div class="row-fluid profile-content-set">
-					<div class="span2 offset1">Email</div>
+					<div class="span2 offset1">{% trans %}Email{% endtrans %}</div>
 					<div class="span9">
 						<div class="row-fluid">
 							{% set email_loop = '{{each emails}}' %}
@@ -266,7 +266,7 @@
 					</div>
 				</div>
 				<div class="row-fluid profile-content-set">
-					<div class="span2 offset1">Phone</div>
+					<div class="span2 offset1">{% trans %}Phone{% endtrans %}</div>
 					<div class="span9">
 						<div class="row-fluid">
 							{% set phone_loop = '{{each phones}}' %}
@@ -292,7 +292,7 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Gender</div>
+					<div class="span2 offset1">{% trans %}Gender{% endtrans %}</div>
 					<div class="span9 control-group" data-url="{{ link_validate_sex }}">
 						<select class="span5" name="sex">
 							<option value="1">Male</option>
@@ -301,7 +301,7 @@
 					</div>
 				</div>
 				<div class="row-fluid inputBirthday">
-					<div class="span2 offset1">Birthday</div>
+					<div class="span2 offset1">{% trans %}Birthday{% endtrans %}</div>
 					<div class="span9 bfh-datepicker" data-format="d/m/y" data-date="${ birthday }">
 					  	<div class="input-prepend bfh-datepicker-toggle control-group" data-toggle="bfh-datepicker" data-url="{{ link_validate_birthday }}">
 					    	<span class="add-on btn"><i class="icon-calendar"></i></span>
@@ -332,20 +332,20 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Address</div>
+					<div class="span2 offset1">{% trans %}Address{% endtrans %}</div>
 					<div class="span9 control-group" data-url="{{ link_validate_address }}">
 						<input class="span5" type="text" placeholder="Input Text" name="address" value="${ address }" required="required" />
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Living</div>
+					<div class="span2 offset1">{% trans %}Living{% endtrans %}</div>
 					<div class="span9 control-group" data-autocomplete="{{ path('LocationAutoComplete') }}">
 						<input class="span5" type="text" placeholder="Input Text" name="location" value="${ location }" />
 						<input type="hidden" name="cityid" value="${ cityid }" />
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Industry</div>
+					<div class="span2 offset1">{% trans %}Industry{% endtrans %}</div>
 					<div class="span9 control-group" data-autocomplete="{{ path('IndustryAutoComplete') }}">
 						<input class="span5" type="text" placeholder="Input Text" name="industry" value="${ industry }" />
 						<input type="hidden" name="industryid" value="${ industryid }" />
@@ -370,7 +370,7 @@
     <div class="emails-form control-group" data-url="{{ link_validate_email }}">
     	<input class="span5 email" type="text" placeholder="Input Text" name="emails[${ index }][email]" value="" />
     	<input class="primary" type="hidden" name="emails[${ index }][primary]" value="0" /> 
-    	<span class="label primary-email-btn">primary</span> 
+    	<span class="label primary-email-btn">{% trans %}primary{% endtrans %}</span> 
     	<a class="btn btn-danger btn-remove emails-btn-remove" href="#"><i class="icon-trash"></i></a>
     </div>
 </script>
@@ -383,19 +383,19 @@
 		<div class="profiles-tabs-main-body">
 			<div class="basic-profiles-item">
 				<div class="row-fluid">
-					<div class="span2 offset1">Username</div>
+					<div class="span2 offset1">{% trans %}Username{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ username }</span>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Fullname</div>
+					<div class="span2 offset1">{% trans %}Fullname{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ fullname }</span>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Email</div>
+					<div class="span2 offset1">{% trans %}Email{% endtrans %}</div>
 					<div class="span9">
 						<div class="row-fluid">
 							{% set email_loop = '{{each emails}}' %}
@@ -414,7 +414,7 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Phone</div>
+					<div class="span2 offset1">{% trans %}Phone{% endtrans %}</div>
 					<div class="span9">
 						<div class="row-fluid">
 							{% set phone_loop = '{{each phones}}' %}
@@ -429,31 +429,31 @@
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Gender</div>
+					<div class="span2 offset1">{% trans %}Gender{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ sext }</span>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Birthday</div>
+					<div class="span2 offset1">{% trans %}Birthday{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ birthdayt }</span>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Address</div>
+					<div class="span2 offset1">{% trans %}Address{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ address }</span>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Living</div>
+					<div class="span2 offset1">{% trans %}Living{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ location }</span>
 					</div>
 				</div>
 				<div class="row-fluid">
-					<div class="span2 offset1">Industry</div>
+					<div class="span2 offset1">{% trans %}Industry{% endtrans %}</div>
 					<div class="span9">
 						<span class="profiles-tabs-value viewers">${ industry }</span>
 					</div>

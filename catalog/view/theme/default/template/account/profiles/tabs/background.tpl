@@ -6,7 +6,7 @@
 {% block profiles_tabs_background %}
 <div id="profiles-tabs-background" class="profiles-tabs">
 	<div class="profiles-tabs-header">
-		<div class="profiles-tabs-title"><i class="icon-list"></i> Background</div>
+		<div class="profiles-tabs-title"><i class="icon-list"></i> {% trans %}Background{% endtrans %}</div>
 	</div>
 	{{ block('profiles_tabs_summary') }}
 	{{ block('profiles_tabs_education') }}

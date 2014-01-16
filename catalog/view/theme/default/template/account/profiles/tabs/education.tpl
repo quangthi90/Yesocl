@@ -3,7 +3,7 @@
 	<div class="education-label" data-degree="{{ path('DegreeAutoComplete') }}" data-school="{{ path('SchoolAutoComplete') }}" data-fieldofstudy="{{ path('FieldOfStudyAutoComplete') }}">
 		<div class="profiles-tabs-main-header">
 			<a href="#" class="btn sub-profile-header">
-				<i class="icon-paper-clip"></i> Education</a>
+				<i class="icon-paper-clip"></i> {% trans %}Education{% endtrans %}</a>
 			<a class="btn profiles-btn pull-right btn-add profiles-btn-add">
 				<i class="icon-plus"></i></a>
 			<div class="clear"></div>
@@ -31,17 +31,17 @@
 						<i class="icon-save"></i></a>
 					<div class="profiles-tabs-value">
 						<div class="row-fluid">
-							<div class="span4">Degree: </div>
+							<div class="span4">{% trans %}Degree{% endtrans %}: </div>
 							<input type="text" name="degree" />
 							<input type="hidden" name="degree_id" />
 						</div>
 						<div class="row-fluid">
-							<div class="span4">School: </div>
+							<div class="span4">{% trans %}School{% endtrans %}: </div>
 							<input type="text"  name="school" />
 							<input type="hidden"  name="school_id" />
 						</div>
 						<div class="row-fluid">
-							<div class="span4">Field Of Study: </div>
+							<div class="span4">{% trans %}Field Of Study{% endtrans %}: </div>
 							<input type="text" name="fieldofstudy" />
 							<input type="hidden" name="fieldofstudy_id" />
 						</div>
@@ -79,7 +79,7 @@
 				</div>
 			{% endfor %}
 			<div class="{% if user.educations|length > 0 %}hidden{% endif %} empty-data">
-				No information found			
+				{% trans %}No information found{% endtrans %}			
 			</div>
 		</div>
 	</div>
