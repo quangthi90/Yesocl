@@ -233,18 +233,18 @@
 
 		this.$messBtn.click(function(e) {
 			e.preventDefault();
+			if(that.$el.hasClass('disabled')){
+				return false;
+			}
 			
 			that.submit( that.$messBtn );
-
-			return false;
 		});
 	};	
 	NotificationMessage.prototype.submit = function($button){
 		var that = this;
-
-		that.$messList.html('');
 		var messages = that.$el.data('messages');
 		if ( typeof messages == 'undefined' ){
+			that.$messList.html('<li class="user-message-li load-waiting">Loadding messages <i class="icon-spin icon-spinner"></i></li>');
 			messages = [];
 
 			var promise = $.ajax({
@@ -258,7 +258,7 @@
 			promise.then(function(data) { 
 				if(data.success == 'ok'){
 					that.$el.find('.notification-item-count').addClass('hidden').html(0);
-
+					that.$messList.html('');
 					for ( var key in data.messages ){
 						message = data.messages[key];
 						var _class = ' ';
@@ -286,6 +286,7 @@
 				}
 			});
 		}else{
+			that.$messList.html('');
 			for ( var key in messages ){
 				var message = messages[key];
 				that.$messList.prepend( $.tmpl($('#message-item-header'), message) );
@@ -295,14 +296,10 @@
 		}
 	};
 	NotificationMessage.prototype.triggerProgress = function($el, promise){
-		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-		var $old_icon = $el.find('i');
-		var f        = function() {
-			$spinner.remove();
-			$el.html($old_icon);
+		var f = function() {
+			$el.removeClass('disabled');
 		};
-
-		$el.addClass('disabled').html($spinner);
+		$el.addClass('disabled');
 
 		promise.then(f, f);
 	};

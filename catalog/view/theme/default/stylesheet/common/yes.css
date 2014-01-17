@@ -810,11 +810,19 @@ a.btn-notification:hover .notification-item-name > i {
 
 /* MESSAGE NOTIFICATION */
 .notification-item.message .user-message-li {
-  padding: 1px 0px 1px 0px;
+  padding: 0px 3px 3px 3px;
   max-width: 300px;
 }
 .notification-item.message .user-message-li:first-child {
-  padding-top: 0px;
+  padding-top: 3px;
+}
+.notification-item.message .user-message-li.load-waiting
+{
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  font-weight: bold;
+  font-size: 12px;
 }
 .notification-item.message .user-message-li .user-message-link {
   display: block;
