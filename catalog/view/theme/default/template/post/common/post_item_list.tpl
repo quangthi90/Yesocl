@@ -37,7 +37,7 @@
                                </a>
                                <ul class="dropdown-menu">
                                     <li class="unlike-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
-                                        <a href="#"><i class="icon-thumbs-down"></i> Unlike</a>
+                                        <a href="#"><i class="icon-thumbs-down"></i> {% trans %}Unlike{% endtrans %}</a>
                                     </li>
                                 </ul>
                             </div>
@@ -64,7 +64,7 @@
                                         <i class="icon-thumbs-up medium-icon"></i>
                                     </a>
                                     <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
-                                        Liked
+                                        {% trans %}Liked{% endtrans %}
                                     </span>
                                     <a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">
                                         <d class="number-counter">{{ post.like_count }}</d>

@@ -44,18 +44,18 @@
 		      		</li>#}
 			      	<li>
 			      		<a href="{{ path('ChangePassword') }}">
-			      			<i class="icon-unlock-alt"></i> Change password
+			      			<i class="icon-unlock-alt"></i> {% trans %}Change password{% endtrans %}
 		      			</a>
 		      		</li>
 			      	<li>
 			      		<a href="{{ path('ChangeAvatar') }}">
-			      			<i class="icon-user"></i> Change avatar
+			      			<i class="icon-user"></i> {% trans %}Change avatar{% endtrans %}
 		      			</a>
 		      		</li>
 			      	<li class="divider"></li>
 			      	<li>
 			      		<a href="{{ path('Logout') }}">
-			      			<i class="icon-signout"></i> Log out
+			      			<i class="icon-signout"></i> {% trans %}Log out{% endtrans %}
 		      			</a>
 		      		</li>
 			    </ul>
@@ -119,11 +119,11 @@
                 </a>
                 <div class="notification-content-item-detail">
                   <div class="notification-text">
-                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
+                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> {% trans %}added you as friend{% endtrans %}
                   </div>
                   <div>
-                    <a href="#" class="btn btn-yes btn-accept">Accept</a>
-                    <a href="#" class="btn btn-yes btn-ignore">Ignore </a>
+                    <a href="#" class="btn btn-yes btn-accept">{% trans %}Accept{% endtrans %}</a>
+                    <a href="#" class="btn btn-yes btn-ignore">{% trans %}Ignore{% endtrans %}</a>
                   </div>
                 </div>
               </li>
@@ -180,13 +180,13 @@
           <div class="y-row">
             <span class="remember-login">
               <input type="checkbox" name="remember" value="true" id="remember"> 
-              <label for="remember">Remember me</label>
+              <label for="remember">{% trans %}Remember me{% endtrans %}</label>
             </span>
-            <a class="link-login" href="{{ path('LostPass') }}">Forgot password!</a>
+            <a class="link-login" href="{{ path('LostPass') }}">{% trans %}Forgot password{% endtrans %}!</a>
           </div>
         </div>
         <div class="btn-container fl">
-          <button type="submit" class="btn btn-yes btn-login" tabindex="3">Sign in
+          <button type="submit" class="btn btn-yes btn-login" tabindex="3">{% trans %}Sign in{% endtrans %}
           </button>     
         </div>                   
       </form>

@@ -67,14 +67,14 @@ Twig_Autoloader::register();
 $twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
 $twig_loader->addPath(DIR_TEMPLATE, 'template');
 $twig = new Twig_Environment($twig_loader, array(
-    'cache' => DIR_SYSTEM . '/cache/twig',
+    'cache' => DIR_SYSTEM . '/twig/',
     'auto_reload' => true
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
 
 // Multi languages
-$lang = 'vietnamese';
+$lang = 'vi_VN';
 putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
 putenv("LANGUAGE=$lang"); //same as above
 setlocale(LC_ALL, $lang);

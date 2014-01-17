@@ -5,7 +5,7 @@
 {% use '@template/default/template/friend/common/friend_filter.tpl' %}
 {% use '@template/default/template/friend/common/friend_button.tpl' %}
 
-{% block title %}{{ users[current_user_id].username }} | Friends {% endblock %}
+{% block title %}{{ users[current_user_id].username }} | {% trans %}Friend Page{% endtrans %} {% endblock %}
 
 {% block stylesheet %}
 {% endblock %}
@@ -19,7 +19,7 @@
         {% endif %}
         <div class="feed-block">
             <div class="block-header">
-                <a class="block-title fl" href="#">Friend</a>  
+                <a class="block-title fl" href="#">{% trans %}Friend{% endtrans %}</a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
                 </a>
@@ -32,7 +32,7 @@
                     {% endfor %}
                 {% else %}
                     <div class="empty-data">
-                        No friends found
+                        {% trans %}No friends found{% endtrans %}
                     </div>
                 {% endif %}
                 {{ block('friend_common_friend_button_template') }}            

@@ -8,8 +8,8 @@
 				<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-add-popup" href="#" title="Advance comment">
 					<i class="icon-external-link"></i>
 				</a>
-				<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
-	            <div class="fr comment-press-enter">Press Enter to send  
+				<a href="#" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
+	            <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
 	            	<input type="checkbox" class="cb-press-enter" />
 	            </div>
 			</div>
@@ -24,20 +24,20 @@
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
-				        <i class="icon-yes"></i> Advanced comment
+				        <i class="icon-yes"></i> {% trans %}Advanced comment{% endtrans %}
 				    </div>
 				    <div class="dlg-content">
 				    	<div class="dlg-column fr" style="width:100%;">
-							<div class="alert alert-error top-warning hidden">Warning!!</div>
+							<div class="alert alert-error top-warning hidden">{% trans %}Warning{% endtrans %}!!</div>
 					    	<div class="control-group">
-				    			<label class="control-label">Comment</label>
+				    			<label class="control-label">{% trans %}Comment{% endtrans %}</label>
 						    	<div class="y-editor post-advance-content"></div>
 					    	</div>
 						</div>
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-			                <a href="#" class="btn btn-yes btn-post-advance">Post</a>
+			                <a href="#" class="btn btn-yes btn-post-advance">{% trans %}Post{% endtrans %}</a>
 			            </div>
 				    </div>		
 				</form>
@@ -69,9 +69,9 @@
 								</span>
 								<span class="like-container">
 									<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
-										<i class="icon-thumbs-up medium-icon"></i> Like
+										<i class="icon-thumbs-up medium-icon"></i> {% endraw %}{% trans %}Like{% endtrans %}{% raw %}
 									</a>
-									<strong class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked
+									<strong class="liked-label{{if is_liked != true}} hidden{{/if}}">{% endraw %}{% trans %}Liked{% endtrans %}{% raw %}
 									</strong>
 									&nbsp;(<a class="like-count" data-url="${href_liked_user}" href="#">${like_count}</a>)
 								</span>		
@@ -88,16 +88,16 @@
 							   	</a>
 							   	<ul class="dropdown-menu">
 							   		<li class="un-like-btn{{if is_liked != true}} hidden{{/if}}">
-								     	<a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+								     	<a href="#"><i class="icon-thumbs-down"></i>{% endraw %}{% trans %}Unlike{% endtrans %}{% raw %}</a>
 							     	</li>
 							     	{{if is_owner == true }}
 							     	<li class="divider"></li>
 								    <li class="edit-comment-btn">
-								     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
+								     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% endraw %}{% trans %}Edit{% endtrans %}</a>
 							     	</li>
 							     	<li class="divider"></li>
 								    <li class="delete-comment-btn">
-								    	<a href="#"><i class="icon-trash"></i>Delete</a>
+								    	<a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}{% raw %}</a>
 								    </li>
 								    {{/if}}
 							    </ul>
@@ -121,47 +121,47 @@
 					<div class="dlg-title">
 				        <i class="icon-yes"></i> 
 				        {% if post_popup_id == 'post-advance-add-popup' %}
-				        New post
+				        {% trans %}New post{% endtrans %}
 				        {% else %}
-				        Edit post
+				        {% trans %}Edit post{% endtrans %}
 				        {% endif %}
 				    </div>
 				    <div class="dlg-content">
 				    	<div class="dlg-column upload-container fl" style="width:28%;">
-				    		<label class="control-label">Choose an image for new post</label>
+				    		<label class="control-label">{% trans %}Choose an image for new post{% endtrans %}</label>
 				    		<input type="hidden" name="img-url" class="img-url" value="" />
 				    		<div class="img-previewer-container" placeholder="Drag an photo here">
-				    			<p class="drop-zone-show">Drag an image here</p>
+				    			<p class="drop-zone-show">{% trans %}Drag an image here{% endtrans %}</p>
 				    		</div>
 				    		<div class="y-progress">
 								<div class="bar" style="width: 0%;"></div>
 							</div>
 				    		<div class="drag-img-upload">			    			
 				    			<a href="#" class="btn btn-yes">
-				    				<span><i class="icon-upload"></i> Choose image</span>
+				    				<span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
 				    				<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
 				    			</a>
 				    		</div>
 						</div>
 						<div class="dlg-column fr" style="width:68%;">
-							<div class="alert alert-error top-warning hidden">Warning!!</div>
+							<div class="alert alert-error top-warning hidden">{% trans %}Warning{% endtrans %}!!</div>
 					    	<div class="control-group">
-					    		<label for="title" class="control-label">Title</label>
+					    		<label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
 					    		<div class="controls">
 					    			<input class="post-advance-title" placeholder="Your title" type="text" name="title" id="title"
 					    				style="width: 98%;" />
 					    		</div>
 				    		</div>
 				    		<div class="control-group">
-				    			<label class="control-label">Content</label>
+				    			<label class="control-label">{% trans %}Content{% endtrans %}</label>
 						    	<div class="y-editor post-advance-content" id="post-adv-editor"></div>
 					    	</div>
 						</div>
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-				    		<a href="#" class="btn btn-yes btn-post-advance">Post</a>
-				    		<button type="reset" class="btn btn-yes btn-reset">Reset</button>
+				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Post{% endtrans %}</a>
+				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		
 				</form>
@@ -172,7 +172,7 @@
 	{% block common_html_block_post_item_template %}
 		{% raw %}
 			<div class="hidden" id="post-item-template">
-				<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-url-edit="${href.edit}" data-url-delete="${href.delete}">
+				<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-url-edit="${href.edit}" data-url-delete="${href.delete}">{% endraw %}
 					<div class="yes-dropdown">
 			            <div class="dropdown">
 			               <a class="dropdown-toggle" data-toggle="dropdown">
@@ -180,19 +180,19 @@
 			               </a>
 			               <ul class="dropdown-menu">
 			               		<li class="unlike-post hidden">
-			                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
+			                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
 			                    </li>
 			                    <li class="divider"></li>
 			                    <li class="post-edit-btn">
-			                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
+			                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 			                    </li>
 			                    <li class="divider"></li>
 			                    <li class="post-delete-btn">
-			                        <a href="#"><i class="icon-trash"></i>Delete</a>
+			                        <a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 			                    </li>
 			                </ul>
 			            </div>
-			        </div>
+			        </div>{% raw %}
 					<div class="post_header">
 						<div class="avatar_thumb">
 							<a href="${href.user_info}">
@@ -223,7 +223,7 @@
 										<i class="icon-thumbs-up medium-icon"></i>
 			                        </a>
 			                        <span class="liked-post hidden">
-			                            Liked
+			                            {% endraw %}{% trans %}Liked{% endtrans %}{% raw %}
 									</span>
 									<a class="post-liked-list" href="#" data-url="${href.post_get_liked}" data-like-count="0">
 										<d class="number-counter">0</d>
@@ -243,7 +243,7 @@
 							{{html post.content}}
 						</div>
 						{{if post.see_more == 1}}
-						<a class="yes-see-more" href="${href.post_detail}">See more <i class=" icon-double-angle-right"></i></a>
+						<a class="yes-see-more" href="${href.post_detail}">{% endraw %}{% trans %}See more{% endtrans %}{% raw %} <i class=" icon-double-angle-right"></i></a>
 						{{/if}}
 					</div>
 				</div>
@@ -269,11 +269,11 @@
 			<div class="y-dlg">
 				<form autocomplete="off" class="new-message-form">
 					<div class="dlg-title">
-				        <i class="icon-yes"></i> New Message
+				        <i class="icon-yes"></i> {% trans %}New Message{% endtrans %}
 				    </div>
 				    <div class="dlg-content tag-user-wrapper">
 				    	<div class="control-group">
-				    		<label for="sent-user" class="control-label">Send to</label>
+				    		<label for="sent-user" class="control-label">{% trans %}Send to{% endtrans %}</label>
 				    		<div class="controls tags-group">
 				    			<span class="tags-container">		    			
 			    				</span>
@@ -281,15 +281,15 @@
 				    		</div>
 			    		</div>		    		
 			    		<div class="control-group">
-			    			<label for="sent-user" class="control-label">Content</label>
-				    		<textarea class="message-editor js-message-content" placeholder="Write a message ..."></textarea>
+			    			<label for="sent-user" class="control-label">{% trans %}Content{% endtrans %}</label>
+				    		<textarea class="message-editor js-message-content" placeholder="{% trans %}Write a message{% endtrans %} ..."></textarea>
 			    		</div>			    	
 				    </div>	
 				    <div class="dlg-footer">
 				    	<div class="controls">
-				    		<a href="#" class="btn btn-yes btn-send-msg js-btn-message-send">Send</a>
+				    		<a href="#" class="btn btn-yes btn-send-msg js-btn-message-send">{% trans %}Send{% endtrans %}</a>
 							<label class="enter-option">
-								<input type="checkbox" class="enter-check js-mess-check" checked="checked"> Press enter to send
+								<input type="checkbox" class="enter-check js-mess-check" checked="checked"> {% trans %}Press enter to send{% endtrans %}
 							</label>           
 			            </div>
 				    </div>			    	
@@ -317,7 +317,7 @@
 		               </a>
 		               <ul class="dropdown-menu">
 		                    <li>
-		                        <a href="#"><i class="icon-remove"></i> Delete</a>
+		                        <a href="#"><i class="icon-remove"></i> {% endraw %}{% trans %}Delete{% endtrans %}{% raw %}</a>
 		                    </li>
 		                </ul>
 		            </div>

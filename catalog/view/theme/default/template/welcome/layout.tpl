@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>		
-		<title>{% block title %}Yesocl{% endblock %}</title>
+		<title>{% block title %}{% trans %}Welcome Page{% endtrans %}{% endblock %} | Yesocl - Social Network</title>
 		<base href="{{ base }}" />
 		<link rel="shortcut icon" href="image/template/favicon.png">
 		<link href="{{ asset_css('libs/bootstrap.css') }}" rel="stylesheet" media="screen" />

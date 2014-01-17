@@ -10,18 +10,18 @@
                </a>
                <ul class="dropdown-menu">
                		<li class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
-                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> Unlike</a>
+                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
                     </li>
                     {% if post.is_edit is defined and post.is_edit == true %}
                     <li class="divider"></li>
                     <li class="post-edit-btn">
-                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
+                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
                     </li>
                     {% endif %}
                     {% if post.is_del is defined and post.is_del == true %}
                     <li class="divider"></li>
                     <li class="post-delete-btn">
-                        <a href="#"><i class="icon-trash"></i>Delete</a>
+                        <a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
                     </li>
                     {% endif %}
                 </ul>

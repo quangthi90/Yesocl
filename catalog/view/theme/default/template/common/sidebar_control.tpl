@@ -4,7 +4,7 @@
 		<div class="sidebar-header">
 			<h3>
 				<span id="sidebar-close"><i class="icon-hand-left"></i></span> 
-				Main Menu
+				{% trans %}Main Menu{% endtrans %}
 			</h3>
 		</div>
 		<div class="search-box">
@@ -17,12 +17,12 @@
 				{% set menu = get_flash('menu') %}
 			  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
 			  		<a href="{{ path('RefreshPage') }}"> 
-			  			<i class="icon-refresh"></i> <span>What's new</span>
+			  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
 			  		</a>
 			  	</li>
 			  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
 			  		<a href="{{ path('HomePage') }}"> 
-			  			<i class="icon-home"></i> <span>Home feed</span>
+			  			<i class="icon-home"></i> <span>{% trans %}Home feed{% endtrans %}</span>
 			  		</a>
 			  	</li>
 			  	{#<li class="menu-item">
@@ -32,17 +32,17 @@
 			  	</li>#}
 			  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
 			  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-bookmark"></i> <span> Wall Page </span>
+			  			<i class="icon-bookmark"></i> <span>{% trans %}Wall Page{% endtrans %}</span>
 		  			</a>
 			  	</li>	
 			  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
 			  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
-			  			<i class="icon-user-md"></i> <span>My profile</span>
+			  			<i class="icon-user-md"></i> <span>{% trans %}My profile{% endtrans %}</span>
 		  			</a>
 			  	</li>
 			  	<li class="menu-item {% if menu == 'friend' %}active{% endif %}">
 			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>My friend</span>
+			  			<i class="icon-fire"></i> <span>{% trans %}My friend{% endtrans %}</span>
 		  			</a>
 			  	</li>
 			  	{% endblock %}

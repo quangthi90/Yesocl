@@ -4,7 +4,7 @@
 {% use '@template/default/template/post/common/post_item_wall.tpl' %}
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}{% trans %}What's new{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('home.css') }}" rel="stylesheet" media="screen" />
@@ -17,7 +17,7 @@
         <div class="feed-block block-what-new">
             <div class="block-header">
                 <a class="block-title fl" href="#">
-                    What's new
+                    {% trans %}What's new{% endtrans %}
                 </a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>

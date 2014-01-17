@@ -1,6 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% block title %}{{ users[current_user_id].username }} | Notification {% endblock %}
+{% block title %}{{ users[current_user_id].username }} | {% trans %}Notification{% endtrans %} {% endblock %}
 
 {% block stylesheet %}
 {% endblock %}
@@ -10,7 +10,7 @@
     <div id="y-main-content" class="has-horizontal notification-page">
         <div class="feed-block" style="width: 100%;">
             <div class="block-header">
-                <a class="block-title fl" href="#">All Notifications</a>  
+                <a class="block-title fl" href="#">{% trans %}All Notifications{% endtrans %}</a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
                 </a>
@@ -18,7 +18,7 @@
             <div class="block-content">               
                <div class="ntf-container">
                    <ul class="ntf-list">
-                        <li class="ntf-date">Sent Today</li>
+                        <li class="ntf-date">{% trans %}Sent Today{% endtrans %}</li>
                         {% for i in 0..10 %}
                        <li class="ntf-item">
                            <i class="icon-thumbs-up-alt"></i>

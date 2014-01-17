@@ -1,6 +1,6 @@
 {% extends '@template/default/template/welcome/layout.tpl' %}
 
-{% block title %}Login for Yesocl{% endblock %}
+{% block title %}{% trans %}Login{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
 <link href="{{ asset_css('account.css') }}" rel="stylesheet" media="screen" />
@@ -9,9 +9,9 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
     <div class="y-frm" id="y-frm-login">
-        <div class="frm-title"> Sign In <strong>YESOCL.com</strong>
+        <div class="frm-title">{% trans %}Sign In{% endtrans %} <strong>YESOCL.com</strong>
         </div>
-        <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
+        <div class="alert alert-error {% if warning is not defined or warning == null %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">
             <form class="login-form">
                 <div class="input-prepend">
@@ -26,17 +26,17 @@
                 </div>
                 <div class="checkbox-container">
                     <input id="remember" name="remember" type="checkbox" value="true" /> 
-                    <label for="remember">Remember me</label>
+                    <label for="remember">{% trans %}Remember me{% endtrans %}</label>
                 </div>                
                 <div class="btns">
-                     <button class="btn btn-success btn-login">Sign In</button>   
+                     <button class="btn btn-success btn-login">{% trans %}Sign In{% endtrans %}</button>   
                 </div>
             </form>     
         </div>
         <div class="frm-footer">
             <ul>
-                <li>Don't have an account ? <a href="#">Sign Up</a><br></li>
-                <li>Remind ! <a href="#">Password</a></li>
+                <li>{% trans %}Don't have an account{% endtrans %} ? <a href="#">{% trans %}Sign Up{% endtrans %}</a><br></li>
+                <li>{% trans %}Remind{% endtrans %} ! <a href="#">{% trans %}Password{% endtrans %}</a></li>
             </ul>
         </div>
     </div>
