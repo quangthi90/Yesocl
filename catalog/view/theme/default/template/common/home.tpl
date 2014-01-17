@@ -14,6 +14,7 @@
 {% block body %}
 	<div id="y-content" class="no-header-fixed">
 		<div id="y-main-content" class="has-horizontal post-has-block" >
+			{% trans %}Social Network{% endtrans %}
 		{% for branch in branchs %}
 	        {% set style = random([1, 2]) %}
 			{% set posts = all_posts[branch.slug] %}

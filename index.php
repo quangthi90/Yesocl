@@ -73,23 +73,14 @@ $twig = new Twig_Environment($twig_loader, array(
 $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
 
-// Set language to French
-putenv('LC_ALL=vn_VN');
-setlocale(LC_ALL, 'vn_VN');
-// print(DIR_LANGUAGE . 'locale'); exit;
-// Specify the location of the translation tables
-bindtextdomain('vn', DIR_LANGUAGE . 'locale');
-bind_textdomain_codeset('vn', 'UTF-8');
+// Multi languages
+$lang = 'vietnamese';
+putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
+putenv("LANGUAGE=$lang"); //same as above
+setlocale(LC_ALL, $lang);
+bindtextdomain($lang, DIR_LANGUAGE . "locale");
+textdomain($lang);
 
-// Choose domain
-textdomain('vn');
-
-// Print a test message
-echo gettext("Trang chủ");
-
-// Or use the alias _() for gettext()
-// echo _("Home Feed");
-exit;
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
 $registry->set('url', $url);
