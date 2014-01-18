@@ -14,10 +14,36 @@
 		</div>
 		<div id="header-user">
 			<div id="user-info-wrapper" class="fr">	
-				<div class="fr user-avatar">
+				<div class="fr user-avatar dropdown">
 					<a href="{{ path('WallPage', {user_slug: currUser.slug}) }}">
 						<img src="{{ currUser.avatar }}" />
 					</a>
+          <a href="#" class="dropdown-toggle toggle-user-menu" data-toggle="dropdown">
+            <i class="icon-arrow-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+              {#<li>
+                <a href="#">
+                  <i class="icon-cogs"></i> Privacy settings
+                </a>
+              </li>#}
+              <li>
+                <a href="{{ path('ChangePassword') }}">
+                  <i class="icon-unlock-alt"></i> {% trans %}Change password{% endtrans %}
+                </a>
+              </li>
+              <li>
+                <a href="{{ path('ChangeAvatar') }}">
+                  <i class="icon-user"></i> {% trans %}Change avatar{% endtrans %}
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="{{ path('Logout') }}">
+                  <i class="icon-signout"></i> {% trans %}Log out{% endtrans %}
+                </a>
+              </li>
+          </ul>
 				</div>
 				<div class="fr user-info">
 					<a class="user-name" href="{{ path('WallPage', {user_slug: currUser.slug}) }}">{{ currUser.username }}</a>
@@ -26,39 +52,13 @@
           </span>
 				</div>
 			</div>
-			<div id="user-quick-menu" class="fr dropdown user-menu">
+			<div id="user-quick-menu" class="fr user-menu">
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
           <a href="{{ path('MessagePage') }}">
 			    	<i class="icon-edit"></i>
-			    </a>
-			    <a class="dropdown-toggle toggle-user-menu" data-toggle="dropdown" href="#">
-		    		<i class="icon-cog"></i>
-	    		</a>
-			    <ul class="dropdown-menu">
-			      	{#<li>
-			      		<a href="#">
-			      			<i class="icon-cogs"></i> Privacy settings
-		      			</a>
-		      		</li>#}
-			      	<li>
-			      		<a href="{{ path('ChangePassword') }}">
-			      			<i class="icon-unlock-alt"></i> {% trans %}Change password{% endtrans %}
-		      			</a>
-		      		</li>
-			      	<li>
-			      		<a href="{{ path('ChangeAvatar') }}">
-			      			<i class="icon-user"></i> {% trans %}Change avatar{% endtrans %}
-		      			</a>
-		      		</li>
-			      	<li class="divider"></li>
-			      	<li>
-			      		<a href="{{ path('Logout') }}">
-			      			<i class="icon-signout"></i> {% trans %}Log out{% endtrans %}
-		      			</a>
-		      		</li>
-			    </ul>
+			    </a>			    	    
 			</div>
 			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
