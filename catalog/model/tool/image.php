@@ -148,8 +148,8 @@ class ModelToolImage extends Model {
             // Image resolution restrictions:
             'max_width' => null,
             'max_height' => null,
-            'min_width' => 1,
-            'min_height' => 1,
+            'min_width' => 200,
+            'min_height' => 200,
             // Set the following option to false to enable resumable uploads:
             'discard_aborted_uploads' => true,
             // Set to false to disable rotating images based on EXIF meta data:

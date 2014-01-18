@@ -16,12 +16,16 @@
             dropZone: that.$dropZone,
             autoUpload: true,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
-            maxFileSize: 500000, // 5 MB
+            maxFileSize: 500000,
             disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),
             previewThumbnail: false,
-            previewMaxWidth: 430,
-            previewMaxHeight: 200,
-            previewCrop: true
+            previewMaxWidth: 550,
+            previewMaxHeight: 320,
+            imageMaxWidth: 550,
+            imageMaxHeight: 320,
+            imageMinWidth: 200,
+            imageMinHeight: 200,
+            imageCrop: true
         }).on('fileuploadadd', function (e, data) {
             that.$previewerImgContainer.children('.post_image_item').remove();
             that.$dropZoneShow.hide();
@@ -127,6 +131,7 @@
                         that.updatePreview(crop);
                     },
                     aspectRatio: 1,
+                    minSize: [200,200],
                     bgColor: '#F0F0F0',
                     boxWidth: 550,
                     boxHeight: 320
@@ -175,11 +180,12 @@
             if($(this).hasClass('disabled')){
                 return false;
             }
-
             that.data = {
                 cropX: $(this).data('crop-x'),
                 cropY: $(this).data('crop-y'),
                 cropW: $(this).data('crop-w'),
+                holderW: that.$previewImage.width(),
+                holderH: that.$previewImage.height(),
                 image: that.$imageUrl
             };
             
@@ -190,8 +196,8 @@
         var that = this;
         if (parseInt(crop.w) > 0)
         {
-            var rx = 150 / crop.w;
-            var ry = 150 / crop.h;            
+            var rx = 200 / crop.w;
+            var ry = 200 / crop.h;   
             that.$previewImage.css({
               width: Math.round(rx * that.$boundX) + 'px',
               height: Math.round(ry * that.$boundY) + 'px',
@@ -199,9 +205,9 @@
               marginTop: '-' + Math.round(ry * crop.y) + 'px'
             }).show(10);
             that.$nonePreviewImage.hide(10);
-            that.$saveAvatarBtn.data('crop-x', Math.round(crop.x));
-            that.$saveAvatarBtn.data('crop-y', Math.round(crop.y));
-            that.$saveAvatarBtn.data('crop-w', Math.round(crop.w));
+            that.$saveAvatarBtn.data('crop-x', Math.round(rx * crop.x));
+            that.$saveAvatarBtn.data('crop-y', Math.round(ry * crop.y));
+            that.$saveAvatarBtn.data('crop-w', Math.round(rx * crop.w));
             that.$saveAvatarBtn.removeClass('disabled');
         }else {
             that.$nonePreviewImage.show(10);
@@ -218,16 +224,26 @@
             data: that.data,
             dataType: 'json'
         });
-
         this.triggerProgress($button, promise);
 
-        promise.then(function(data) { 
-            if(data !== null && data.success === 'ok'){ 
-                window.location.reload();
-            }else {
-                console.log(data);
-                alert('failed');
-            }
+        promise.then(function(data) {
+            console.log(data);
+            bootbox.dialog({
+                message: data.message,
+                title: "Change avatar",
+                buttons: {
+                    main: {
+                        label: "OK",
+                        className: "btn-primary",
+                        callback: function() {
+                            if(data !== null && data.success === 'ok'){
+                                that.$saveAvatarBtn.addClass('disabled');
+                                window.location = $('base').text();   
+                            }                            
+                        }
+                    }
+                }
+            });
         });     
     };
     ImageCropper.prototype.triggerProgress = function($el, promise){

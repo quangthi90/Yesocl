@@ -17,17 +17,19 @@
             <div class="avatar-step upload-container" id="avatar-choose-image">
                 <input type="hidden" name="img-url" class="img-url" value="" />
                 <div class="img-previewer-container" placeholder="Drag an photo here">
-                    <p class="drop-zone-show">Drag an image here</p>
+                    <p class="drop-zone-show">
+                        <span>Drag an image here or </span>
+                        <span class="drag-img-upload">
+                            <a href="" class="btn btn-yes btn-upload" onclick="$('#avatar-upload-img').trigger('click'); return false;">
+                                <span><i class="icon-upload"></i> Choose image</span>
+                            </a>
+                            <input type="file" data-no-uniform="true" class="hidden img-upload" id="avatar-upload-img" name="files[]" data-url="{{ path('UploadFile') }}" />
+                        </span>
+                    </p>
                 </div>
                 <div class="y-progress">
                     <div class="bar" style="width: 0%;"></div>
-                </div>
-                <div class="drag-img-upload">                           
-                    <a href="" class="btn btn-yes btn-upload" onclick="$('#avatar-upload-img').trigger('click'); return false;">
-                        <span><i class="icon-upload"></i> Choose image</span>
-                    </a>
-                    <input type="file" data-no-uniform="true" class="hidden img-upload" id="avatar-upload-img" name="files[]" data-url="{{ path('UploadFile') }}" />
-                </div>
+                </div>                
             </div>
             <div class="avatar-step image-cropper" id="avatar-edit-image">
                 <div class="uploaded-image">
@@ -45,7 +47,6 @@
                     </div>  
                 </div>
                 <div class="image-buttons">
-                    <span id="avatar-test"></span>
                     <a href="#" class="btn btn-yes" data-has-image="false" data- id="avatar-save">Save avatar</a>
                     <a href="#" class="btn btn-yes" id="avatar-re-choose-image">Choose another image</a>
                     <a href="#" class="btn btn-yes">Cancel</a>

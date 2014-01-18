@@ -2902,7 +2902,7 @@ a.wall-link:hover {
   color: #8F8F8F;
   background-color: #F0F0F0;
   border: 2px dotted #ccc;
-  padding: 100px 0px;
+  padding: 140px 0px;
 }
 .avatar-step.upload-container .y-progress {
   margin-bottom: 15px;
@@ -2914,13 +2914,13 @@ a.wall-link:hover {
 }
 .avatar-step.upload-container .btn-upload {
   position: relative;
-  padding: 10px 15px;
+  padding: 5px 10px;
 }
 .avatar-step.upload-container .btn-upload:hover {
   background-position: 0 -40px;
 }
 .avatar-step.upload-container .btn-upload span {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: normal;
 }
 .avatar-step.upload-container .btn-upload span i {
@@ -3005,6 +3005,9 @@ a.wall-link:hover {
   clear: both;
   text-align: right;
   padding: 20px 0px 0px 0px;
+}
+.avatar-step.image-cropper .jcrop-holder {
+  margin: 0px auto;
 }
 
 /* ======================================== END AVATAR ============================================ */

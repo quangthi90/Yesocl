@@ -172,9 +172,13 @@ class ModelUserUser extends Model {
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
 			$path = $folder_link . $user->getId() . '/' . $avatar_name . '.' . $data['avatar']['extension'];
 			$dest = DIR_IMAGE . $path;
-			exit;
 			if ( $this->model_tool_image->moveFile($data['avatar']['image_link'], $dest) ){
 				$image = new Image( $dest );
+				$holderW = $data['avatar']['holderW'];
+				$holderH = $data['avatar']['holderH'];
+				if($holderW > 0 && $holderH > 0){
+					$image->resize($holderW, $holderH);
+				}
 				$image->crop( $data['avatar']['x'], $data['avatar']['y'], $data['avatar']['x'] + $data['avatar']['width'], $data['avatar']['y'] + $data['avatar']['width'] );
 				$image->save( $dest );
 				$user->setAvatar( $path );
