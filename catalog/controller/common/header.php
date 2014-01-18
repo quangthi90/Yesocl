@@ -19,8 +19,12 @@ class ControllerCommonHeader extends Controller {
 			$oLoggedUser = $this->customer->getUser();
 
 			// -- Notifications --
-			if ( !$notifications = $oLoggedUser->getNotifications() ){
-				$notifications = array();
+			if ( !$aNotifications = $oLoggedUser->getNotifications() ){
+				$aNotifications = array();
+				$iNotiCount = 0;
+			}else{
+				$aNotifications = $aNotifications;
+				$iNotiCount = $aNotifications->count();
 			}
 			
 			$expire_time = new DateTime('now');
@@ -33,8 +37,8 @@ class ControllerCommonHeader extends Controller {
 			$this->data['notification_count'] = 0;
 			$aExpireNotiIds = array();
 			$aPosts = array();
-			for ( $i = $notifications->count() - 1; $i >= 0; $i-- ) {
-				$notification = $notifications[$i];
+			for ( $i = $iNotiCount - 1; $i >= 0; $i-- ) {
+				$notification = $aNotifications[$i];
 				if ( $notification->getCreated() < $expire_time ){
 					$aExpireNotiIds[] = $notification->getId();
 					continue;
@@ -101,7 +105,6 @@ class ControllerCommonHeader extends Controller {
 						'title'		=> $sTitle
 					);
 				}
-				// exit;
 			}
 			
 			if ( count($aExpireNotiIds) > 0 ){

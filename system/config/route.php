@@ -75,6 +75,7 @@ $_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete'
 
 // Notification
 $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
+$_['route']['NotificationPage']				= 'common/notification/';
 
 // Message
 $_['route']['MessagePage']					= 'account/message';

@@ -74,6 +74,7 @@ $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 
 // Notification
 $_['routing']['NotificationReadAll']			= 'notification/readAll/';
+$_['routing']['NotificationPage']				= 'notification/page/';
 
 // Message
 $_['routing']['MessagePage']					= 'message/page/';

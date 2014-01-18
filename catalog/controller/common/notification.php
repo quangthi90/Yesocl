@@ -7,8 +7,8 @@ class ControllerCommonNotification extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 		
-		$this->document->setTitle($this->config->get('config_title'));
-		$this->document->setDescription($this->config->get('config_meta_description'));
+		$oLoggedUser = $this->customer->getUser();
+		$aNotifications = $oLoggedUser->getNotifications();
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/notification.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/notification.tpl';
