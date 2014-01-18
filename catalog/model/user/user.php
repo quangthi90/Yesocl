@@ -179,7 +179,7 @@ class ModelUserUser extends Model {
 				if($holderW > 0 && $holderH > 0){
 					$image->resize($holderW, $holderH);
 				}
-				$image->crop( $data['avatar']['x'], $data['avatar']['y'], $data['avatar']['x'] + $data['avatar']['width'], $data['avatar']['y'] + $data['avatar']['width'] );
+				$image->crop( $data['avatar']['x'], $data['avatar']['y'], $data['avatar']['x'] + $data['avatar']['width'], $data['avatar']['y'] + $data['avatar']['width'], true );
 				$image->save( $dest );
 				$user->setAvatar( $path );
 			}
