@@ -74,12 +74,12 @@ $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
 
 // Multi languages
-$lang = 'vi_VN';
-putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
-putenv("LANGUAGE=$lang"); //same as above
-setlocale(LC_ALL, $lang);
-bindtextdomain($lang, DIR_LANGUAGE . "locale");
-textdomain($lang);
+// $lang = 'vi_VN';
+// putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
+// putenv("LANGUAGE=$lang"); //same as above
+// setlocale(LC_ALL, $lang);
+// bindtextdomain($lang, DIR_LANGUAGE . "locale");
+// textdomain($lang);
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
