@@ -30,10 +30,18 @@ class __TwigTemplate_ceaceb8a0ad67ff497179615062f94b325cb9b5197a06a8178aa40855b2
         }
         $_trait_2_blocks = $_trait_2->getBlocks();
 
+        $_trait_3 = $this->env->loadTemplate("@template/default/template/account/profiles/tabs/profile_overview_edit.tpl");
+        // line 6
+        if (!$_trait_3->isTraitable()) {
+            throw new Twig_Error_Runtime('Template "'."@template/default/template/account/profiles/tabs/profile_overview_edit.tpl".'" cannot be used as a trait.');
+        }
+        $_trait_3_blocks = $_trait_3->getBlocks();
+
         $this->traits = array_merge(
             $_trait_0_blocks,
             $_trait_1_blocks,
-            $_trait_2_blocks
+            $_trait_2_blocks,
+            $_trait_3_blocks
         );
 
         $this->blocks = array_merge(
@@ -60,39 +68,43 @@ class __TwigTemplate_ceaceb8a0ad67ff497179615062f94b325cb9b5197a06a8178aa40855b2
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
-    // line 7
+    // line 8
     public function block_title($context, array $blocks = array())
     {
         echo "Yesocl - ";
         echo gettext("Edit Profile");
     }
 
-    // line 9
+    // line 10
     public function block_stylesheet($context, array $blocks = array())
     {
-        // line 10
+        // line 11
         echo "    <link href=\"";
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_css')->getCallable(), array("libs/bootstrap-formhelpers.css")), "html", null, true);
         echo "\" rel=\"stylesheet\" media=\"screen\" />
     <link href=\"";
-        // line 11
+        // line 12
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_css')->getCallable(), array("profiles.css")), "html", null, true);
         echo "\" rel=\"stylesheet\" media=\"screen\" />
 ";
     }
 
-    // line 14
+    // line 15
     public function block_body($context, array $blocks = array())
     {
-        // line 15
+        // line 16
         echo "<div id=\"y-content\" class=\"no-header-fixed\">
 \t<div id=\"y-main-content\">
 \t\t";
-        // line 17
+        // line 18
+        $this->displayBlock("profiles_tabs_profile_overview_edit", $context, $blocks);
+        echo "
+\t\t";
+        // line 19
         $this->displayBlock("profiles_tabs_information", $context, $blocks);
         echo "
 \t\t";
-        // line 18
+        // line 20
         $this->displayBlock("profiles_tabs_background", $context, $blocks);
         echo "
 \t</div>
@@ -100,27 +112,27 @@ class __TwigTemplate_ceaceb8a0ad67ff497179615062f94b325cb9b5197a06a8178aa40855b2
 ";
     }
 
-    // line 23
+    // line 25
     public function block_javascript($context, array $blocks = array())
     {
-        // line 24
+        // line 26
         echo "<script type=\"text/javascript\" src=\"";
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_js')->getCallable(), array("libs/bootstrap-formhelpers-datepicker.en_US.js")), "html", null, true);
         echo "\"></script>
 <script type=\"text/javascript\" src=\"";
-        // line 25
+        // line 27
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_js')->getCallable(), array("libs/bootstrap-formhelpers-datepicker.js")), "html", null, true);
         echo "\"></script>
 <script type=\"text/javascript\" src=\"";
-        // line 26
+        // line 28
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_js')->getCallable(), array("libs/bootstrap-formhelpers-phone.format.js")), "html", null, true);
         echo "\"></script>
 <script type=\"text/javascript\" src=\"";
-        // line 27
+        // line 29
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_js')->getCallable(), array("libs/bootstrap-formhelpers-phone.js")), "html", null, true);
         echo "\"></script>
 <script type=\"text/javascript\" src=\"";
-        // line 28
+        // line 30
         echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset_js')->getCallable(), array("profiles.js")), "html", null, true);
         echo "\"></script>
 <script type=\"text/javascript\">
@@ -143,6 +155,6 @@ class __TwigTemplate_ceaceb8a0ad67ff497179615062f94b325cb9b5197a06a8178aa40855b2
 
     public function getDebugInfo()
     {
-        return array (  124 => 28,  120 => 27,  116 => 26,  112 => 25,  107 => 24,  104 => 23,  96 => 18,  92 => 17,  88 => 15,  85 => 14,  79 => 11,  74 => 10,  71 => 9,  64 => 7,  28 => 5,  21 => 4,  14 => 3,);
+        return array (  136 => 30,  132 => 29,  128 => 28,  124 => 27,  119 => 26,  116 => 25,  108 => 20,  104 => 19,  100 => 18,  96 => 16,  93 => 15,  87 => 12,  82 => 11,  79 => 10,  72 => 8,  35 => 6,  28 => 5,  21 => 4,  14 => 3,);
     }
 }
