@@ -45,6 +45,7 @@
                     </div>  
                 </div>
                 <div class="image-buttons">
+                    <span id="avatar-test"></span>
                     <a href="#" class="btn btn-yes" data-has-image="false" data- id="avatar-save">Save avatar</a>
                     <a href="#" class="btn btn-yes" id="avatar-re-choose-image">Choose another image</a>
                     <a href="#" class="btn btn-yes">Cancel</a>

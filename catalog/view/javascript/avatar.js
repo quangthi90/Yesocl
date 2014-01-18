@@ -144,11 +144,11 @@
             if(that.$jcropApi !== null ){
                 that.$jcropApi.destroy();
             }            
-            that.$imageCropper.fadeOut(300, function(){
+            that.$imageCropper.fadeOut(10, function(){
                 that.$nonePreviewImage.show(10);
                 that.$previewImage.hide(10);
                 that.$uploadContainer.find('.post_image_item').remove();
-                that.$uploadContainer.find('.drop-zone-show').show(100);
+                that.$uploadContainer.find('.drop-zone-show').show(10);
                 that.$uploadContainer.fadeIn(200);
             });
         });
@@ -182,9 +182,6 @@
                 cropW: $(this).data('crop-w'),
                 image: that.$imageUrl
             };
-
-            alert('width: ' + $(this).data('crop-w'));
-            return false;
             
             that.save($(this));
         });
@@ -204,7 +201,7 @@
             that.$nonePreviewImage.hide(10);
             that.$saveAvatarBtn.data('crop-x', Math.round(crop.x));
             that.$saveAvatarBtn.data('crop-y', Math.round(crop.y));
-            that.$saveAvatarBtn.data('crop-w', Math.round(rx * that.$boundX));
+            that.$saveAvatarBtn.data('crop-w', Math.round(crop.w));
             that.$saveAvatarBtn.removeClass('disabled');
         }else {
             that.$nonePreviewImage.show(10);
@@ -225,8 +222,11 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) { 
-            if(data.success == 'ok'){ 
+            if(data !== null && data.success === 'ok'){ 
                 window.location.reload();
+            }else {
+                console.log(data);
+                alert('failed');
             }
         });     
     };
