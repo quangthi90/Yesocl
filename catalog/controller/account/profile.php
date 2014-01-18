@@ -18,6 +18,7 @@ class ControllerAccountProfile extends Controller {
 
 		$this->load->model('user/user');
 		$this->load->model('data/value');
+		$this->load->model('tool/image');
 
 		$oUser = $this->customer->getUser();
 
@@ -129,6 +130,8 @@ class ControllerAccountProfile extends Controller {
 		// user data
 		$this->data['user'] = array(
 			'id' => $oUser->getId(),
+			'slug' => $oUser->getSlug(),
+			'avatar' => $this->model_tool_image->getAvatarUser( $oUser->getAvatar(), $oUser->getPrimaryEmail()->getEmail(), 150, 150 ),
 			'username' => $oUser->getUsername(),
 			'firstname' => $oUser->getMeta()->getFirstname(),
 			'lastname' => $oUser->getMeta()->getLastname(),
