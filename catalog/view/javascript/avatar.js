@@ -148,14 +148,8 @@
             e.preventDefault();
             if(that.$jcropApi !== null ){
                 that.$jcropApi.destroy();
-            }            
-            that.$imageCropper.fadeOut(10, function(){
-                that.$nonePreviewImage.show(10);
-                that.$previewImage.hide(10);
-                that.$uploadContainer.find('.post_image_item').remove();
-                that.$uploadContainer.find('.drop-zone-show').show(10);
-                that.$uploadContainer.fadeIn(200);
-            });
+            }
+            window.location.reload();
         });
         that.$makeCircleBtn.on('click', function(e){
             e.preventDefault();
@@ -193,7 +187,7 @@
         });
     };
     ImageCropper.prototype.updatePreview = function(crop) {
-        var that = this;
+        var that = this;        
         if (parseInt(crop.w) > 0)
         {
             var rx = 200 / crop.w;
@@ -227,7 +221,6 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
-            console.log(data);
             bootbox.dialog({
                 message: data.message,
                 title: "Change avatar",
@@ -238,11 +231,12 @@
                         callback: function() {
                             if(data !== null && data.success === 'ok'){
                                 that.$saveAvatarBtn.addClass('disabled');
-                                window.location = $('base').text();   
+                                window.location = $('base').text();
                             }                            
                         }
                     }
-                }
+                },
+                closeButton: false
             });
         });     
     };
