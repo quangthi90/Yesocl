@@ -5,7 +5,7 @@
 	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
 		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
-				<textarea class="post_input status-content mention" style="resize: none;" placeholder="What's in your mind ..." maxlength="1000"></textarea>
+				<textarea class="post_input status-content mention" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %} ..." maxlength="1000"></textarea>
 				<input type="hidden" name="img-url" class="img-url" value="" />
 			</div>
 			<div class="img-previewer-container">
@@ -19,13 +19,13 @@
 						<a href="#" id="insert-new-img" onclick="$('#img-upload').trigger('click'); return false;">
 							<i class="icon-camera icon-2x"></i>							
 						</a>
-						<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
+						<input type="file" data-no-uniform="true" class="img-upload" title="{% trans %}Choose image to upload{% endtrans %}" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
 						<a href="#" title="Advance post" data-mfp-src="#post-advance-add-popup" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<a href="#" class="btn btn-yes btn-status">Post</a>
+						<a href="#" class="btn btn-yes btn-status">{% trans %}Post{% endtrans %}</a>
 					</div>
 				</div>
  			</div>
@@ -33,7 +33,7 @@
 	</div>
 {% endblock %}
 
-{% block template %}
+{% block post_common_post_status_wall_html_template %}
 	{{ block('common_html_block_post_advance_form') }}
 	{% set post_popup_id = 'post-advance-edit-popup' %}
 	{{ block('common_html_block_post_advance_form') }}

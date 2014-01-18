@@ -2,7 +2,7 @@
 <div id="profiles-tabs-background-skill" class="profiles-tabs-main pull-left">
 	<div class="skill-label">
 		<div class="profiles-tabs-main-header">
-			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Skill & Expertise</a>
+			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> {% trans %}Skill & Expertise{% endtrans %}</a>
 			<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
 			<div class="clear"></div>
 		</div>
@@ -16,7 +16,7 @@
 			<div class="profiles-tabs-item2 btn skill-item" data-id="{{ skill.id }}" data-remove="{{ path('ProfileRemoveSkill', {skill_id: skill.id}) }}">{{ skill.skill }}<a class="btn-remove profiles-btn-remove" href="#"><i class="icon-remove"></i></a></div>
 			{% endfor %}
 			<div class="{% if user.skills|length > 0 %}hidden{% endif %} empty-data">
-				No information found			
+				{% trans %}No information found{% endtrans %}
 			</div>
 		</div>
 	</div>

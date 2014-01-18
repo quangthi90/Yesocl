@@ -14,10 +14,41 @@
 		</div>
 		<div id="header-user">
 			<div id="user-info-wrapper" class="fr">	
-				<div class="fr user-avatar">
+				<div class="fr user-avatar dropdown">
 					<a href="{{ path('WallPage', {user_slug: currUser.slug}) }}">
 						<img src="{{ currUser.avatar }}" />
 					</a>
+          <a href="#" class="dropdown-toggle toggle-user-menu" data-toggle="dropdown">
+            <i class="icon-arrow-down"></i>
+          </a>
+          <ul class="dropdown-menu">
+              {#<li>
+                <a href="#">
+                  <i class="icon-cogs"></i> Privacy settings
+                </a>
+              </li>#}
+              <li>
+                <a href="{{ path('ProfileEdit') }}">
+                  <i class="icon-user"></i> {% trans %}Edit profile{% endtrans %}
+                </a>
+              </li>
+              <li>
+                <a href="{{ path('ChangePassword') }}">
+                  <i class="icon-unlock-alt"></i> {% trans %}Change password{% endtrans %}
+                </a>
+              </li>
+              <li>
+                <a href="{{ path('ChangeAvatar') }}">
+                  <i class="icon-camera"></i> {% trans %}Change avatar{% endtrans %}
+                </a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="{{ path('Logout') }}">
+                  <i class="icon-signout"></i> {% trans %}Log out{% endtrans %}
+                </a>
+              </li>
+          </ul>
 				</div>
 				<div class="fr user-info">
 					<a class="user-name" href="{{ path('WallPage', {user_slug: currUser.slug}) }}">{{ currUser.username }}</a>
@@ -26,39 +57,13 @@
           </span>
 				</div>
 			</div>
-			<div id="user-quick-menu" class="fr dropdown user-menu">
+			<div id="user-quick-menu" class="fr user-menu">
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
           <a href="{{ path('MessagePage') }}">
 			    	<i class="icon-edit"></i>
 			    </a>
-			    <a class="dropdown-toggle toggle-user-menu btn-header-not-search" data-toggle="dropdown" href="#">
-		    		<i class="icon-cog"></i>
-	    		</a>
-			    <ul class="dropdown-menu">
-			      	{#<li>
-			      		<a href="#">
-			      			<i class="icon-cogs"></i> Privacy settings
-		      			</a>
-		      		</li>#}
-			      	<li>
-			      		<a href="{{ path('ChangePassword') }}">
-			      			<i class="icon-unlock-alt"></i> Change password
-		      			</a>
-		      		</li>
-			      	<li>
-			      		<a href="{{ path('ChangeAvatar') }}">
-			      			<i class="icon-user"></i> Change avatar
-		      			</a>
-		      		</li>
-			      	<li class="divider"></li>
-			      	<li>
-			      		<a href="{{ path('Logout') }}">
-			      			<i class="icon-signout"></i> Log out
-		      			</a>
-		      		</li>
-			    </ul>
 			</div>
 			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
@@ -119,11 +124,11 @@
                 </a>
                 <div class="notification-content-item-detail">
                   <div class="notification-text">
-                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> added you as friend
+                    <a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a> {% trans %}added you as friend{% endtrans %}
                   </div>
                   <div>
-                    <a href="#" class="btn btn-yes btn-accept">Accept</a>
-                    <a href="#" class="btn btn-yes btn-ignore">Ignore </a>
+                    <a href="#" class="btn btn-yes btn-accept">{% trans %}Accept{% endtrans %}</a>
+                    <a href="#" class="btn btn-yes btn-ignore">{% trans %}Ignore{% endtrans %}</a>
                   </div>
                 </div>
               </li>
@@ -180,13 +185,13 @@
           <div class="y-row">
             <span class="remember-login">
               <input type="checkbox" name="remember" value="true" id="remember"> 
-              <label for="remember">Remember me</label>
+              <label for="remember">{% trans %}Remember me{% endtrans %}</label>
             </span>
-            <a class="link-login" href="{{ path('LostPass') }}">Forgot password!</a>
+            <a class="link-login" href="{{ path('LostPass') }}">{% trans %}Forgot password{% endtrans %}!</a>
           </div>
         </div>
         <div class="btn-container fl">
-          <button type="submit" class="btn btn-yes btn-login" tabindex="3">Sign in
+          <button type="submit" class="btn btn-yes btn-login" tabindex="3">{% trans %}Sign in{% endtrans %}
           </button>     
         </div>                   
       </form>

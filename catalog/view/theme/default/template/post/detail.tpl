@@ -3,7 +3,7 @@
 {% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/post/common/comment_post_detail.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
@@ -35,11 +35,11 @@
 					</div>
 					<ul class="post-actions fr post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
 						<li>
-							<a class="like-post{% if post.isUserLiked == 1 %} hidden{% endif %}" href="#" title="Like">
+							<a class="like-post{% if post.isUserLiked == 1 %} hidden{% endif %}" href="#" title="{% trans %}Like{% endtrans %}">
 								<i class="icon-thumbs-up medium-icon"></i>
 		                    </a>
 		                    <span class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
-			                    <a href="#" title="Unlike">
+			                    <a href="#" title="{% trans %}Unlike{% endtrans %}">
 			                        <i class="icon-thumbs-down medium-icon"></i>
 								</a>
 							</span>
@@ -53,7 +53,7 @@
 							</span>
 						</li>
 						<li style="display: none;" class="toggle-comment">
-							<a class="open-comment disabled" href="#" title="Open comment box">
+							<a class="open-comment disabled" href="#" title="{% trans %}Open comment box{% endtrans %}">
 								<i class="icon-comments-alt medium-icon"></i>
 							</a>
 							<span class="number" id="post-detail-comment-number">{{ comments|length }}</span>

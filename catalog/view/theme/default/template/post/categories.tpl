@@ -4,7 +4,7 @@
 {% use '@template/default/template/post/common/post_item_list.tpl' %}
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}{% trans %}Branch Categories Page{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('home.css') }}" rel="stylesheet" media="screen" />

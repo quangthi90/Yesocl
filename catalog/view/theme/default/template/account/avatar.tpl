@@ -1,6 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% block title %}Change Avatar - Yesocl Network{% endblock %}
+{% block title %}{% trans %}Change Avatar{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('libs/jquery.jcrop.min.css') }}" rel="stylesheet" media="screen" />
@@ -10,7 +10,7 @@
 <div id="y-content" class="no-header-fixed">
   <div id="y-main-content">
     <div class="y-frm" id="y-frm-avatar">
-        <div class="frm-title"> Change avatar</div>
+        <div class="frm-title">{% trans %}Change avatar{% endtrans %}</div>
         <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            

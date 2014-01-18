@@ -77,7 +77,7 @@ class ControllerCommonHome extends Controller {
 		// Check current account is actived
 		$date = new DateTime();
 		$oLoggedUser = $this->customer->getUser();
-		if ( $oLoggedUser->getToken() != '' && $oLoggedUser->getTokenTime() >= $date ){
+		if ( $oLoggedUser && $oLoggedUser->getToken() != '' && $oLoggedUser->getTokenTime() >= $date ){
 			$this->data['warning_active'] = 'An active link has been sent to your email, please active your account before ' . $oLoggedUser->getTokenTime()->format('d/m/Y') . ' (your account will be DELETED if you do not active before this time)';
 		}
 

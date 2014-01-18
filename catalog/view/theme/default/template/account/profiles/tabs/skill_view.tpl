@@ -1,6 +1,6 @@
 {% block profiles_tabs_skill_view %}
 <div class="fl profile-column profile-column-skill" id="profile-column-skill">
-	<h3 class="profile-column-title"><i class="icon-list"></i> Skill Sets</h3>
+	<h3 class="profile-column-title"><i class="icon-list"></i> {% trans %}Skill Sets{% endtrans %}</h3>
 	<div class="profile-column-wrapper">
 		<div class="profile-column-content">
 			{% if user.skills|length > 0 %}
@@ -23,7 +23,7 @@
 				{% endfor %}
 			{% else %}
 				<div class="profile-info-item empty-data">
-					No information found				
+					{% trans %}No information found{% endtrans %}
 				</div>
 			{% endif %}
 		</div>

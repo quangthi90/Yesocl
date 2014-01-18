@@ -2,7 +2,7 @@
 <div id="profiles-tabs-background-experience" class="profiles-tabs-main pull-left" data-url="{{ link_add_experience }}">
 	<div class="experience-label">
 		<div class="profiles-tabs-main-header">
-			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> Experience</a>
+			<a href="#" class="btn sub-profile-header"><i class="icon-paper-clip"></i> {% trans %}Experience{% endtrans %}</a>
 			<a class="btn profiles-btn pull-right btn-add profiles-btn-add"><i class="icon-plus"></i></a>
 			<div class="clear"></div>
 		</div>
@@ -35,10 +35,10 @@
 								<option value="{{ i }}">{{ i }}</option>
 								{% endfor %}
 							</select>
-							<strong style="margin-left: 5px; margin-right: 10px;">or</strong>
+							<strong style="margin-left: 5px; margin-right: 10px;">{% trans %}or{% endtrans %}</strong>
 						</span>						
 						<span class="present">
-							<label for="time_present">present</label>
+							<label for="time_present">{% trans %}present{% endtrans %}</label>
 							<input type="checkbox" id="time_present" name="time_present">
 						</span>	
 					</span>											
@@ -48,20 +48,20 @@
 					<a class="profiles-btn-save btn profiles-btn pull-right"><i class="icon-save"></i></a>
 					<div class="profiles-tabs-value">
 						<div class="row-fluid">
-							<div class="span3">Title: </div>
+							<div class="span3">{% trans %}Title{% endtrans %}: </div>
 							<input type="text" name="title" />
 						</div>
 						<div class="row-fluid">
-							<div class="span3">Company: </div>
+							<div class="span3">{% trans %}Company{% endtrans %}: </div>
 							<input type="text"  name="company" />
 						</div>
 						<div class="row-fluid" data-autocomplete="{{ path('LocationAutoComplete') }}">
-							<div class="span3">Location: </div>
+							<div class="span3">{% trans %}Location{% endtrans %}: </div>
 							<input type="text" name="location" />
 							<input type="hidden" name="city_id" />
 						</div>
 						<div class="row-fluid">
-							<div class="span3">Self-Employed: </div>
+							<div class="span3">{% trans %}Self-Employed{% endtrans %}: </div>
 							<input type="checkbox"  name="self_employed" />
 						</div>
 					</div>
@@ -95,14 +95,14 @@
 						<div class="profiles-tabs-value-item">{{ experience.company }}</div>
 						<div class="profiles-tabs-value-item viewers">{{ experience.location }}</div>
 						<div class="profiles-tabs-value-item check-self-employed">
-							<i class="icon-check-sign"></i> {% if experience.self_employed %}{{ text_self_employed }}{% else %}Employed{% endif %}
+							<i class="icon-check-sign"></i> {% if experience.self_employed %}{{ text_self_employed }}{% else %}{% trans %}Employed{% endtrans %}{% endif %}
 						</div>
 					</div>
 				</div>
 			</div>
 			{% endfor %}
 			<div class="{% if user.experiences|length > 0 %}hidden{% endif %} empty-data">
-				No information found			
+				{% trans %}No information found{% endtrans %}
 			</div>
 		</div>
 	</div>

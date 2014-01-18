@@ -6,7 +6,7 @@
 	<div id="comment-box" class="y-box comment-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">				
-				Comment box (<span class="counter"></span>)
+				{% trans %}Comment box{% endtrans %} (<span class="counter"></span>)
 				<div class="y-box-expand">
 					<a href="#" id="btn-expand" class="btn-expand" title="Expand">
 						<i class="icon-indent-left"></i>

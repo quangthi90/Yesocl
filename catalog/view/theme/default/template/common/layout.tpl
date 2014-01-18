@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>		
-		<title>{% block title %}Yesocl{% endblock %} | Yesocl - Social Network</title>
+		<title>{% block title %}{% trans %}Home Feed{% endtrans %}{% endblock %} | Yesocl - {% trans %}Social Network{% endtrans %}</title>
 		<base href="{{ base }}" />		
 		<!-- Icon -->
 		<link rel="shortcut icon" href="image/template/favicon.png">		

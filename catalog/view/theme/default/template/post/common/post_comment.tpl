@@ -6,7 +6,7 @@
 	<div id="comment-box" class="y-box">
 		<div class="comment-container"> 
 			<div class="y-box-header">				
-				Comment box (<span class="counter"></span>)
+				{% trans %}Comment box{% endtrans %} (<span class="counter"></span>)
 				<div class="y-box-expand">
 					<a href="#" class="btn-expand" title="Expand">
 						<i class="icon-indent-left"></i>
@@ -31,8 +31,8 @@
 				<a class="fl comment-tool" href="#" title="Add photo">
 					<i class="icon-camera icon-2x"></i>
 				</a>
-				<a href="#" class="btn btn-yes fr btn-comment">Post</a>	
-                <div class="fr comment-press-enter">Press Enter to send  
+				<a href="#" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
+                <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
                 	<input type="checkbox" class="cb-press-enter" />
                 </div>				
 			</div>
@@ -59,9 +59,9 @@
 						</span>
 						<span class="like-container">
 							<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
-								<i class="icon-thumbs-up medium-icon"></i> Like
+								<i class="icon-thumbs-up medium-icon"></i> {% endraw %}{% trans %}Like{% endtrans %}{% raw %}
 							</a>
-							<strong class="liked-label{{if is_liked != true}} hidden{{/if}}">Liked
+							<strong class="liked-label{{if is_liked != true}} hidden{{/if}}">{% endraw %}{% trans %}Liked{% endtrans %}{% raw %}
 							</strong>
 							&nbsp;(<a class="like-count" data-url="${href_liked_user}" href="#">${like_count}</a>)
 						</span>		
@@ -78,7 +78,7 @@
 					   	</a>
 					   	<ul class="dropdown-menu">
 					   		<li class="un-like-btn{{if is_liked != true}} hidden{{/if}}">
-						     	<a href="#"><i class="icon-thumbs-down"></i>Unlike</a>
+						     	<a href="#"><i class="icon-thumbs-down"></i>{% endraw %}{% trans %}Unlike{% endtrans %}{% raw %}</a>
 					     	</li>
 						    <!--li>
 						     	<a href="#"><i class="icon-edit"></i>Edit</a>

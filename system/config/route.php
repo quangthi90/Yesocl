@@ -37,7 +37,8 @@ $_['route']['AjaxLogin']					= 'account/login/login';
 $_['route']['AjaxRegister']					= 'account/register/register';
 
 // Profile
-$_['route']['ProfilePage']					= 'account/profile/';
+$_['route']['ProfilePage']					= 'account/profile/view/';
+$_['route']['ProfileEdit']					= 'account/profile/';
 $_['route']['ProfileEditInfo']				= 'account/profiles/information/update/';
 $_['route']['ProfileEditSummary']			= 'account/profiles/summary/update/';
 $_['route']['ProfileRemoveEducation']		= 'account/profiles/education/remove/';
@@ -73,6 +74,7 @@ $_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete'
 
 // Notification
 $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
+$_['route']['NotificationPage']				= 'common/notification/';
 
 // Avatar
 $_['route']['ChangeAvatar']					= 'account/avatar';

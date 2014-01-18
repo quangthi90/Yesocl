@@ -4,7 +4,7 @@
 {% use '@template/default/template/friend/common/friend_list.tpl' %}
 {% use '@template/default/template/friend/common/friend_button.tpl' %}
 
-{% block title %}{{ users[current_user_id].username }} | Search {% endblock %}
+{% block title %}{% trans %}Search Page{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
 {% endblock %}
@@ -14,7 +14,7 @@
     <div id="y-main-content" class="has-horizontal search-page">
         <div class="feed-block" style="width: 100%;">
             <div class="block-header">
-                <a class="block-title fl" href="#">Search</a>  
+                <a class="block-title fl" href="#">{% trans %}Search{% endtrans %}</a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
                 </a>
@@ -22,7 +22,7 @@
             {% set numCategoryHasResult = 2 %}
             <div class="block-content search-container-{{numCategoryHasResult}}">
                 <div class="column search-category">
-                    <h3>People ({{ users|length }})</h3>
+                    <h3>{% trans %}People{% endtrans %} ({{ users|length }})</h3>
                     <div class="search-result-container">
                         {% for user in users %}
                             {% set friend = user %}
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="column search-category">
-                    <h3>Post ({{ posts|length }})</h3>
+                    <h3>{% trans %}Post{% endtrans %} ({{ posts|length }})</h3>
                     <div class="search-result-container">
                         <ul>
                             {% for post in posts %}

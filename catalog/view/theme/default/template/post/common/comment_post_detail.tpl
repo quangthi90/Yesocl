@@ -6,7 +6,7 @@
 	<div id="comment-box" class="y-box comment-wrapper">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				Comment box (<span class="counter"><d>{{ comments|length }}<d></span>)
+				{% trans %}Comment box{% endtrans %} (<span class="counter"><d>{{ comments|length }}<d></span>)
 				<div class="y-box-expand">
 					<a href="#" class="btn-expand" title="Expand">
 						<i class="icon-arrow-left"></i>
@@ -35,8 +35,8 @@
 			                    <d class="timeago" title="{{ comment.created }}"></d>
 			                </span>
 			                <span class="like-container">
-			                	<a href="#" class="like-comment{% if comment.is_liked == 1 %} hidden{% endif %}"><i class="icon-thumbs-up medium-icon"></i> Like </a>
-			                	<strong class="liked-label{% if comment.is_liked == 0 %} hidden{% endif %}">Liked </strong>
+			                	<a href="#" class="like-comment{% if comment.is_liked == 1 %} hidden{% endif %}"><i class="icon-thumbs-up medium-icon"></i> {% trans %}Like{% endtrans %} </a>
+			                	<strong class="liked-label{% if comment.is_liked == 0 %} hidden{% endif %}">{% trans %}Liked{% endtrans %} </strong>
 			                	&nbsp;(<a class="like-count"
 			                    data-url="{{ comment.href_liked_user }}"
 			                    href="#">{{ comment.like_count }}</a>) </span>
@@ -51,15 +51,15 @@
 			            <div class="dropdown">
 			                <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i></a>
 			                <ul class="dropdown-menu">
-			                    <li class="un-like-btn{% if comment.is_liked == 0 %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>Unlike</a> </li>
+			                    <li class="un-like-btn{% if comment.is_liked == 0 %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a> </li>
 			                    {% if comment.is_owner == true %}
 			                    <li class="divider"></li>
 			                    <li class="edit-comment-btn">
-							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>Edit</a>
+							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 						     	</li>
 						     	<li class="divider"></li>
 							    <li class="delete-comment-btn">
-							    	<a href="#"><i class="icon-trash"></i>Delete</a>
+							    	<a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 							    </li>
 							    {% endif %}
 			                </ul>

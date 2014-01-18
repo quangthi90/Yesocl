@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="span4">
-                    <a href="#" class="btn btn-success" id="login-invoke"><i class="icon-unlock-alt"></i> Login</a>  
+                    <a href="#" class="btn btn-success" id="login-invoke"><i class="icon-unlock-alt"></i> {% trans %}Login{% endtrans %}</a>  
                 </div>
             </div>
         </div> 
@@ -58,24 +58,24 @@
             <div class="span12 input-prepend">
                 <span class="add-on"><i class="icon-user"></i></span>
                 <input required="required" name="email" type="email" autocomplete="off"
-                    placeholder="Email"  class="input-welcome" tabindex="1" />
+                    placeholder="{% trans %}Email{% endtrans %}"  class="input-welcome" tabindex="1" />
             </div>
         </div>
         <div class="row-fluid">
             <div class="span12 input-prepend">
                 <span class="add-on"><i class="icon-lock"></i></span>
                 <input required="required" name="password" type="password" autocomplete="off"
-                    placeholder="Password" class="input-welcome" tabindex="2" />
+                    placeholder="{% trans %}Password{% endtrans %}" class="input-welcome" tabindex="2" />
             </div>
         </div>
         <div class="row-fluid" style="border-bottom: 1px solid #f0f0f0;">
             <label>
-                <input type="checkbox" name="remember" value="true"> Remember me
+                <input type="checkbox" name="remember" value="true"> {% trans %}Remember me{% endtrans %}
             </label>
-            <a class="link-login" href="{{ path('LostPass') }}">Forgot password!</a>
+            <a class="link-login" href="{{ path('LostPass') }}">{% trans %}Forgot password{% endtrans %}!</a>
         </div>
         <div class="row-fluid btn-container">
-            <button type="submit" class="btn btn-success btn-login" tabindex="3">Sign in
+            <button type="submit" class="btn btn-success btn-login" tabindex="3">{% trans %}Sign in{% endtrans %}
             </button>   
         </div>                         
     </form>

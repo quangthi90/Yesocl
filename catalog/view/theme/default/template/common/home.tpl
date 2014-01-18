@@ -4,7 +4,7 @@
 {% use '@template/default/template/post/common/post_item_list.tpl' %}
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}{% trans %}Home Feed{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('home.css') }}" rel="stylesheet" media="screen" />
@@ -13,7 +13,7 @@
 
 {% block body %}
 	<div id="y-content" class="no-header-fixed">
-		<div id="y-main-content" class="has-horizontal post-has-block" >
+		<div id="y-main-content" class="has-horizontal post-has-block">
 		{% for branch in branchs %}
 	        {% set style = random([1, 2]) %}
 			{% set posts = all_posts[branch.slug] %}

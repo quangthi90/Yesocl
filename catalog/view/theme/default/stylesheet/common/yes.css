@@ -448,9 +448,29 @@ a.btn-link-circle:hover i {
   float: right;
 }
 #user-info-wrapper{  
-  padding: 1px 15px;
+  padding: 1px 15px 1px 15px;
 }
 #user-info-wrapper .user-avatar {
+}
+#user-info-wrapper .toggle-user-menu {
+  position: absolute;
+  top: 15px;
+  right: 13px;
+  display: none;
+  background-color: #EEEEEE;
+  height: 30px;
+  width: 31px;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 50%;
+}
+#user-info-wrapper:hover .toggle-user-menu,
+#user-info-wrapper .user-avatar.open .toggle-user-menu {
+  display: block;
+}
+#user-info-wrapper .user-avatar.open .dropdown-menu {
+  left: -90px;
+  top: 105%;
 }
 #user-info-wrapper .user-avatar img {
   height: 55px;  

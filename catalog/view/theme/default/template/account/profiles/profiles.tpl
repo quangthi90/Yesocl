@@ -3,8 +3,9 @@
 {% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/information.tpl' %}
 {% use '@template/default/template/account/profiles/tabs/background.tpl' %}
+{% use '@template/default/template/account/profiles/tabs/profile_overview_edit.tpl' %}
 
-{% block title %}Yesocl - Social Network{% endblock %}
+{% block title %}Yesocl - {% trans %}Edit Profile{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     <link href="{{ asset_css('libs/bootstrap-formhelpers.css') }}" rel="stylesheet" media="screen" />
@@ -14,6 +15,7 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
 	<div id="y-main-content">
+		{{ block('profiles_tabs_profile_overview_edit') }}
 		{{ block('profiles_tabs_information') }}
 		{{ block('profiles_tabs_background') }}
 	</div>

@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Yesocl\n"
+"POT-Creation-Date: 2014-01-17 23:58+0700\n"
+"PO-Revision-Date: 2014-01-17 23:59+0700\n"
+"Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-Basepath: .\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: F:\\Program Files\\xampp\\htdocs\\Yesocl\\system"
+"\\cache\\twig\n"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\cache\twig/d1/ce/438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234cd94d.php:66
+msgid "Home Feed"
+msgstr "Trang chủ"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\cache\twig/d1/ce/438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234cd94d.php:91
+msgid "Social Network"
+msgstr "Mạng xã hội"
+
+#~ msgid "Hello"
+#~ msgstr "Xin chào"
