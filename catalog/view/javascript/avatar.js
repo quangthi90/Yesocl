@@ -131,7 +131,7 @@
                         that.updatePreview(crop);
                     },
                     aspectRatio: 1,
-                    minSize: [200,200],
+                    minSize: [150,150],
                     bgColor: '#F0F0F0',
                     boxWidth: 550,
                     boxHeight: 320
@@ -190,8 +190,8 @@
         var that = this;        
         if (parseInt(crop.w) > 0)
         {
-            var rx = 200 / crop.w;
-            var ry = 200 / crop.h;   
+            var rx = 150 / crop.w;
+            var ry = 150 / crop.h;   
             that.$previewImage.css({
               width: Math.round(rx * that.$boundX) + 'px',
               height: Math.round(ry * that.$boundY) + 'px',
