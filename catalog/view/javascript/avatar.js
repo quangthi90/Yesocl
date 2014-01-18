@@ -131,7 +131,7 @@
                         that.updatePreview(crop);
                     },
                     aspectRatio: 1,
-                    minSize: [150,150],
+                    minSize: [100,100],
                     bgColor: '#F0F0F0',
                     boxWidth: 550,
                     boxHeight: 320
