@@ -8,7 +8,7 @@
 					{% trans %}No information found{% endtrans %}
 				</div>
 			{% else %}
-				user.summary
+				{{ user.summary }}
 			{% endif %}
 		</div>
 	</div>
