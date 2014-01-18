@@ -2,20 +2,24 @@
 (function($, document, undefined) {
 	function ProfilesLayout($el) {
 		this.$el = $el;		
+		this.$rootContent = $el.parent('#y-content');
 		this.$information = $el.find('#profiles-tabs-information');
 		this.$background = $el.find('#profiles-tabs-background');		
 		this.$summary = $el.find('#profiles-tabs-background-summary');
 		this.$education = $el.find('#profiles-tabs-background-education');
 		this.$experience = $el.find('#profiles-tabs-background-experience');
 		this.$skill = $el.find('#profiles-tabs-background-skill');
+		this.$overview = $el.find('#profile-overview-tab');
 		this.$header = this.$background.find('.profiles-tabs-header');		
-		this.$main_profile = $el.find('.profiles-tabs-main');		
+		this.$main_profile = $el.find('.profiles-tabs-main');
+		this.$navigationItem = $el.find('.profile-navigation-item');
 		this.$contentHeight = this.$el.height();
 		this.$gapHeight = 35 + 50 + 2*(20 + 1);
 
 		var contentWidth = this.$information.width();
 		//Fix height of main profile:
-		this.$main_profile.height(this.$contentHeight - 35 - 2*(20 + 1));
+		this.$main_profile.height(this.$contentHeight - 35);
+		this.$overview.height(this.$contentHeight);
 
 		// Information
 		var information_main_body = this.$information.find('.profiles-tabs-main-body');
@@ -52,12 +56,48 @@
 
 		// Background
 		this.$background.width((this.$summary.outerWidth() + 25)*4 - 25);
-		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*2);
+		
+		this.$el.width(this.$information.outerWidth() + this.$background.outerWidth() + 25*3);
+		this.$el.css('padding-left', this.$overview.width() + 25 + 'px');
+		this.$overview.css('opacity', '1');
+		this.$information.css('opacity', '1');
+		this.$background.css('opacity', '1');
 		
 		//Handle profile changed:
+		this.attachEvents();
+	}
+	ProfilesLayout.prototype.attachEvents = function(){
 		var that = this;
 		$(document).on('PROFILE_CHANGED', function(e, data) {
 			that.updateScroll(data.type);
+		});
+		that.$rootContent.scroll(function(e){
+			var x = $(this).scrollLeft();
+			if(x > 100) {
+				that.$overview.addClass('scrolling');				
+			}else if(x < 30) {
+				that.$overview.removeClass('scrolling');
+			}
+		});
+		that.$navigationItem.on('click', function(e){
+			e.preventDefault();
+			var href = $(this).attr('href');
+			var leftPosition = 0;
+			if(href === '#1'){
+				leftPosition = 0;
+			}else if(href === '#2') {
+				leftPosition = that.$information.width() + 30 ;
+			}else if(href === '#3') {
+				leftPosition = that.$information.width() + 30 + that.$summary.width() + 30;
+			}else if(href === '#4') {
+				leftPosition = that.$information.width() + 30 + that.$summary.width() + 30 + that.$education.width() + 30;
+			}else if(href === '#5') {
+				leftPosition = that.$information.width() + 30 + that.$summary.width() + 30 + that.$education.width() + 30 + that.$experience.width() + 30;
+			}
+			that.$rootContent.animate({scrollLeft: (leftPosition) + 'px'}, 1000);
+			that.$navigationItem.removeClass('active');
+			$(this).addClass('active');
+			$(href).addClass('active');
 		});
 	}
 	ProfilesLayout.prototype.updateScroll = function(type) {		

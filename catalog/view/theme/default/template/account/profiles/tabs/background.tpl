@@ -4,7 +4,7 @@
 {% use '@template/default/template/account/profiles/tabs/skill.tpl' %}
 
 {% block profiles_tabs_background %}
-<div id="profiles-tabs-background" class="profiles-tabs">
+<div id="profiles-tabs-background" class="profiles-tabs" style="opacity: 0;">
 	<div class="profiles-tabs-header">
 		<div class="profiles-tabs-title"><i class="icon-list"></i> {% trans %}Background{% endtrans %}</div>
 	</div>

@@ -1,5 +1,5 @@
 {% block profiles_tabs_information %}
-<div id="profiles-tabs-information" class="profiles-tabs" data-url="{{ path('ProfileEditInfo') }}">
+<div id="profiles-tabs-information" class="profiles-tabs" data-url="{{ path('ProfileEditInfo') }}" style="opacity: 0;">
 	<div class="profiles-tabs-header">
 		<div class="profiles-tabs-title"><i class="icon-list"></i> {% trans %}Basic Information{% endtrans %}</div>
 	</div>

@@ -28,13 +28,18 @@
                 </a>
               </li>#}
               <li>
+                <a href="{{ path('ProfileEdit') }}">
+                  <i class="icon-user"></i> {% trans %}Edit profile{% endtrans %}
+                </a>
+              </li>
+              <li>
                 <a href="{{ path('ChangePassword') }}">
                   <i class="icon-unlock-alt"></i> {% trans %}Change password{% endtrans %}
                 </a>
               </li>
               <li>
                 <a href="{{ path('ChangeAvatar') }}">
-                  <i class="icon-user"></i> {% trans %}Change avatar{% endtrans %}
+                  <i class="icon-camera"></i> {% trans %}Change avatar{% endtrans %}
                 </a>
               </li>
               <li class="divider"></li>
