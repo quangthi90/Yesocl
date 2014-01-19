@@ -174,23 +174,24 @@ class __TwigTemplate_d1ce438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234
 \t\t\tbuttons: {
 \t\t\t\tresend: {
 \t\t\t\t\tlabel: \"Resend active email\",
-\t\t\t\t\tclassName: \"btn-primary\",
+\t\t\t\t\tclassName: \"btn-primary js-resend-active-link\",
 \t\t\t\t\tcallback: function() {
 \t\t\t\t\t    var promise = \$.ajax({
 \t\t\t                type: 'POST',
 \t\t\t                url:  yRouting.generate('ReActiveAccount'),
 \t\t\t                dataType: 'json'
 \t\t\t            });
+\t\t\t            var \$el = \$('.js-resend-active-link');
 \t\t\t            var \$spinner = \$('<i class=\"icon-spinner icon-spin\"></i>');
-\t\t\t\t        // var \$old_icon = \$el.find('i');
+\t\t\t\t        var \$old_icon = \$el.find('i');
 \t\t\t\t        var f        = function() {
 \t\t\t\t            \$spinner.remove();
 \t\t\t\t            \$el.html(\$old_icon);
 \t\t\t\t        };
 
-\t\t\t\t        // \$el.addClass('disabled').html(\$spinner);
+\t\t\t\t        \$el.addClass('disabled').html(\$spinner);
 
-\t\t\t\t        // promise.then(f, f);
+\t\t\t\t        promise.then(f, f);
 
 \t\t\t            promise.then(function(data) { 
 \t\t\t                if(data.success == 'ok'){

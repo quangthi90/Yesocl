@@ -39,23 +39,24 @@
 			buttons: {
 				resend: {
 					label: "Resend active email",
-					className: "btn-primary",
+					className: "btn-primary js-resend-active-link",
 					callback: function() {
 					    var promise = $.ajax({
 			                type: 'POST',
 			                url:  yRouting.generate('ReActiveAccount'),
 			                dataType: 'json'
 			            });
+			            var $el = $('.js-resend-active-link');
 			            var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-				        // var $old_icon = $el.find('i');
+				        var $old_icon = $el.find('i');
 				        var f        = function() {
 				            $spinner.remove();
 				            $el.html($old_icon);
 				        };
 
-				        // $el.addClass('disabled').html($spinner);
+				        $el.addClass('disabled').html($spinner);
 
-				        // promise.then(f, f);
+				        promise.then(f, f);
 
 			            promise.then(function(data) { 
 			                if(data.success == 'ok'){
