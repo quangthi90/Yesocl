@@ -32,7 +32,8 @@ $_['routing']['FriendTypeahead']				= 'search/typeahead/friend/{keyword}/';
 $_['routing']['PostTypeahead']					= 'search/typeahead/post/{keyword}/';
 $_['routing']['Login']							= 'login/';
 $_['routing']['LostPass']						= 'lost_password/';
-$_['routing']['ActiveAccount']					= 'active/{token}/';
+$_['routing']['ActiveAccount']					= 'active/send/{token}/';
+$_['routing']['ReActiveAccount']				= 'active/resend/';
 $_['routing']['AjaxLogin']						= 'login-ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 

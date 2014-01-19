@@ -176,7 +176,27 @@ class __TwigTemplate_d1ce438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234
 \t\t\t\t\tlabel: \"Resend active email\",
 \t\t\t\t\tclassName: \"btn-primary\",
 \t\t\t\t\tcallback: function() {
-\t\t\t\t\t    alert('Add code for resending email ...');
+\t\t\t\t\t    var promise = \$.ajax({
+\t\t\t                type: 'POST',
+\t\t\t                url:  yRouting.generate('ReActiveAccount'),
+\t\t\t                dataType: 'json'
+\t\t\t            });
+\t\t\t            var \$spinner = \$('<i class=\"icon-spinner icon-spin\"></i>');
+\t\t\t\t        // var \$old_icon = \$el.find('i');
+\t\t\t\t        var f        = function() {
+\t\t\t\t            \$spinner.remove();
+\t\t\t\t            \$el.html(\$old_icon);
+\t\t\t\t        };
+
+\t\t\t\t        // \$el.addClass('disabled').html(\$spinner);
+
+\t\t\t\t        // promise.then(f, f);
+
+\t\t\t            promise.then(function(data) { 
+\t\t\t                if(data.success == 'ok'){
+\t\t\t                \talert('Resend active link success!');
+\t\t\t                }
+\t\t\t            });
 \t\t\t\t  \t}
 \t\t\t\t},
 \t\t\t\tsuccess: {
@@ -202,6 +222,6 @@ class __TwigTemplate_d1ce438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234
 
     public function getDebugInfo()
     {
-        return array (  171 => 37,  167 => 35,  161 => 33,  156 => 32,  153 => 31,  143 => 26,  129 => 25,  123 => 23,  120 => 22,  117 => 21,  114 => 20,  111 => 19,  91 => 17,  87 => 15,  84 => 14,  78 => 11,  73 => 10,  70 => 9,  64 => 7,  28 => 5,  21 => 4,  14 => 3,  405 => 202,  396 => 195,  394 => 194,  385 => 190,  380 => 188,  358 => 171,  350 => 166,  346 => 165,  342 => 163,  323 => 147,  313 => 139,  308 => 136,  297 => 131,  293 => 130,  289 => 128,  283 => 127,  274 => 123,  270 => 122,  265 => 121,  261 => 120,  257 => 118,  255 => 117,  252 => 116,  244 => 114,  242 => 113,  237 => 110,  235 => 109,  228 => 104,  222 => 102,  220 => 101,  212 => 95,  201 => 90,  195 => 87,  191 => 86,  181 => 81,  177 => 80,  165 => 34,  162 => 77,  158 => 76,  147 => 28,  141 => 69,  133 => 64,  122 => 56,  115 => 54,  108 => 18,  106 => 48,  102 => 47,  96 => 43,  94 => 42,  90 => 41,  85 => 38,  83 => 37,  79 => 36,  74 => 33,  72 => 32,  68 => 31,  65 => 30,  56 => 19,  52 => 18,  43 => 12,  39 => 11,  34 => 8,  29 => 5,  26 => 4,  24 => 2,  22 => 1,);
+        return array (  171 => 37,  167 => 35,  165 => 34,  161 => 33,  156 => 32,  153 => 31,  147 => 28,  143 => 26,  129 => 25,  123 => 23,  120 => 22,  117 => 21,  114 => 20,  111 => 19,  108 => 18,  91 => 17,  87 => 15,  84 => 14,  78 => 11,  73 => 10,  70 => 9,  64 => 7,  28 => 5,  21 => 4,  14 => 3,);
     }
 }

@@ -41,7 +41,27 @@
 					label: "Resend active email",
 					className: "btn-primary",
 					callback: function() {
-					    alert('Add code for resending email ...');
+					    var promise = $.ajax({
+			                type: 'POST',
+			                url:  yRouting.generate('ReActiveAccount'),
+			                dataType: 'json'
+			            });
+			            var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+				        // var $old_icon = $el.find('i');
+				        var f        = function() {
+				            $spinner.remove();
+				            $el.html($old_icon);
+				        };
+
+				        // $el.addClass('disabled').html($spinner);
+
+				        // promise.then(f, f);
+
+			            promise.then(function(data) { 
+			                if(data.success == 'ok'){
+			                	alert('Resend active link success!');
+			                }
+			            });
 				  	}
 				},
 				success: {
