@@ -35,6 +35,8 @@
 			</div>
 			<div class="post_meta_info">
 				<div class="post_user">
+					<a href="#">Post User</a>
+					<span><i class="icon-caret-right"></i></span>
 					<a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a>
 				</div>
 				<div class="post_meta">

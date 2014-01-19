@@ -1238,6 +1238,16 @@ a.btn-notification:hover .notification-item-name > i {
 .post_status .post_header .post_meta_info .post_user a {
   font-weight: bold;
 }
+.post_status .post_header .post_meta_info .post_user span {
+  padding: 0px 10px;
+}
+.post_status .post_header .post_meta_info .post_user span > i {
+  font-size: 16px;
+  color: #b4b4b4;
+}
+.post_status .post_header .post_meta_info .post_user:hover span > i {
+  color: #0E0E0E;
+}
 .post_status .post_header .post_meta_info .post_user a:hover {
 }
 .post_status .post_body {  
