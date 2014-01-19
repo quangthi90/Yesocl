@@ -3,35 +3,55 @@
 {% block title %}{% trans %}Change Avatar{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
-    <link href="{{ asset_css('account.css') }}" rel="stylesheet" media="screen" />
+    <link href="{{ asset_css('libs/jquery.jcrop.min.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
 <div id="y-content" class="no-header-fixed">
   <div id="y-main-content">
-    <div class="y-frm" id="y-frm-password">
+    <div class="y-frm" id="y-frm-avatar">
         <div class="frm-title">{% trans %}Change avatar{% endtrans %}</div>
         <div class="alert alert-success {% if success is not defined %}hidden{% endif %}">{{ success }}</div>
         <div class="alert alert-error {% if warning is not defined %}hidden{% endif %}">{{ warning }}</div>
         <div class="frm-content">            
-            <form action="{{ path('ChangeAvatar') }}" method="post" enctype="multipart/form-data">
-                <div class="thumb fileupload fileupload-new" data-provides="fileupload">
-                    <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src="{{ img_avatar }}" style="width: 150px; height: 150px;" /></div>
-                    <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
-                    <div>
-                        <span class="btn btn-file" onclick="$('this').find('input').click();">
-                            <span class="fileupload-new">{% trans %}Select image{% endtrans %}</span>
-                            <span class="fileupload-exists">{% trans %}Change{% endtrans %}</span>
-                            <input name="avatar" type="file" />
+            <div class="avatar-step upload-container" id="avatar-choose-image">
+                <input type="hidden" name="img-url" class="img-url" value="" />
+                <div class="img-previewer-container" placeholder="Drag an photo here">
+                    <p class="drop-zone-show">
+                        <span>Drag an image here or </span>
+                        <span class="drag-img-upload">
+                            <a href="" class="btn btn-yes btn-upload" onclick="$('#avatar-upload-img').trigger('click'); return false;">
+                                <span><i class="icon-upload"></i> Choose image</span>
+                            </a>
+                            <input type="file" data-no-uniform="true" class="hidden img-upload" id="avatar-upload-img" name="files[]" data-url="{{ path('UploadFile') }}" />
                         </span>
-                        <a href="#" class="btn fileupload-exists" data-dismiss="fileupload" onclick="$('.thumb img').attr('src', '{{ img_default }}');">{% trans %}Remove{% endtrans %}</a>
+                    </p>
+                </div>
+                <div class="y-progress">
+                    <div class="bar" style="width: 0%;"></div>
+                </div>                
+            </div>
+            <div class="avatar-step image-cropper" id="avatar-edit-image">
+                <div class="uploaded-image">
+                    <img id="uploaded-image">                    
+                </div>
+                <div class="previewed-image">
+                    <label>Preview avatar</label>
+                    <div class="previewed-image-container">
+                        <div class="none-image"></div>
+                        <img id="previewed-image">
                     </div>
+                    <div class="preview-tools">
+                        <a href="#" class="preview-tool-item" id="make-circle-btn" title="Make circle"><i class="icon-circle-blank"></i></a>
+                        <a href="#" class="preview-tool-item" id="make-clear-btn"  title="Clear"><i class="icon-eraser"></i></a>
+                    </div>  
                 </div>
-                <div class="btns">
-                     <button type="submit" class="btn btn-success">{% trans %}Save{% endtrans %}</button>   
-                     <a class="btn" href="{{ path('HomePage') }}">{% trans %}Cancel{% endtrans %}</a>   
+                <div class="image-buttons">
+                    <a href="#" class="btn btn-yes" data-has-image="false" data- id="avatar-save">Save avatar</a>
+                    <a href="#" class="btn btn-yes" id="avatar-re-choose-image">Choose another image</a>
+                    <a href="#" class="btn btn-yes">Cancel</a>
                 </div>
-            </form>     
+            </div>
         </div>
         <div class="frm-footer">            
         </div>
@@ -41,16 +61,14 @@
 {% endblock %}
 
 {% block javascript %}
-<script type="text/javascript" src="{{ asset_js('libs/bootstrap-fileupload.js') }}"></script>
-<script type="text/javascript">
-/*
-Changing the image at runtime by using JavaScript.
-@imgId   : ID of Image HTML Control
-@strPath : The path of the image that you just browse.
-*/
-
-jQuery(document).ready(function (){
-  
-});
-</script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.ui.widget.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.load-image.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.canvas-to-blob.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.iframe-transport.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-process.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-image.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('libs/jquery.jcrop.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('avatar.js') }}"></script>
 {% endblock %}

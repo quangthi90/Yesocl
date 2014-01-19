@@ -11,167 +11,150 @@ use Document\User\User,
 	Document\User\Meta\Skill;
 
 class ModelUserUser extends Model {
-	public function addUser($data, $isSocial = false) {
-		if ( empty( $data['email'] ) ) {
+	public function addUser($aData, $bIsSocial = false) {
+		if ( empty( $aData['email'] ) ) {
 			return false;
 		}
 
-		$user_config = $this->config->get('user');
+		$aUserConfig = $this->config->get('user');
 		
-		$user_group_info = $this->dm->getRepository('Document\User\Group')->findOneByName( $user_config['default']['group_name']);
+		$oUserGroup = $this->dm->getRepository('Document\User\Group')->findOneByName( $aUserConfig['default']['group_name']);
 		
-		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
+		$sSalt = substr(md5(uniqid(rand(), true)), 0, 9);
 		
-		$meta = new Meta();
-		if ( !empty( $data['firstname'] ) ) {
-			$meta->setFirstname( $data['firstname'] );
+		$oMeta = new Meta();
+		if ( !empty( $aData['firstname'] ) ) {
+			$oMeta->setFirstname( $aData['firstname'] );
 		}
-		if ( !empty( $data['lastname'] ) ) {
-			$meta->setLastname( $data['lastname'] );
+		if ( !empty( $aData['lastname'] ) ) {
+			$oMeta->setLastname( $aData['lastname'] );
 		}
-		if ( !empty( $data['month'] ) && !empty( $data['day'] ) && !empty( $data['year'] ) ) {
-			$meta->setBirthday( new \Datetime($data['month'] . '/' . $data['day'] . '/' . $data['year']) );
+		if ( !empty( $aData['month'] ) && !empty( $aData['day'] ) && !empty( $aData['year'] ) ) {
+			$oMeta->setBirthday( new \Datetime($aData['month'] . '/' . $aData['day'] . '/' . $aData['year']) );
 		}
-		if ( !empty( $data['sex'] ) ) {
-			$meta->setSex( $data['sex'] );
+		if ( !empty( $aData['sex'] ) ) {
+			$oMeta->setSex( $aData['sex'] );
 		}
 
-		if ( !empty($data['location']) ){
-			$location = new Location();
-			$location->setLocation( $data['location'] );
-			$meta->setLocation( $location );
+		if ( !empty($aData['location']) ){
+			$oLocation = new Location();
+			$oLocation->setLocation( $aData['location'] );
+			$oMeta->setLocation( $oLocation );
 		}
 		
-		$email = new Email();
-		$email->setEmail( $data['email'] );
-		$email->setPrimary( true );
+		$oEmail = new Email();
+		$oEmail->setEmail( $aData['email'] );
+		$oEmail->setPrimary( true );
 
 		// Slug
-		$slug = $this->url->create_slug( $data['firstname'] . ' ' . $data['lastname'] );
+		$sSlug = $this->url->create_slug( $aData['firstname'] . ' ' . $aData['lastname'] );
 		
-		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$sSlug/i") );
 
-		$arr_slugs = array_map(function($user){
-			return $user->getSlug();
-		}, $users->toArray());
+		$aSlugs = array_map(function($oUser){
+			return $oUser->getSlug();
+		}, $lUsers->toArray());
 
 		$this->load->model( 'tool/slug' );
-		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
+		$this->load->model( 'tool/mail' );
 
-      	$user = new User();
-      	$user->setSlug( $slug );
-      	$user->setMeta( $meta );
-      	$user->addEmail( $email );
-      	$user->setSalt( $salt );
-      	$user->setStatus( true );
-      	$user->setGroupUser( $user_group_info );
-      	if ( !$isSocial ) {
-      		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+		$sSlug = $this->model_tool_slug->getSlug( $sSlug, $aSlugs );
+
+      	$oUser = new User();
+      	$oUser->setSlug( $sSlug );
+      	$oUser->setMeta( $oMeta );
+      	$oUser->addEmail( $oEmail );
+      	$oUser->setSalt( $sSalt );
+      	$oUser->setStatus( true );
+      	$oUser->setGroupUser( $oUserGroup );
+      	if ( !$bIsSocial ) {
+      		$oUser->setPassword( sha1($sSalt . sha1($sSalt . sha1($aData['password']))) );
       	}
-      	$user->setIsSocial( $isSocial );
+      	$oUser->setIsSocial( $bIsSocial );
 
-      	$this->dm->persist( $user );
+      	$this->dm->persist( $oUser );
 		$this->dm->flush();
 
-		if ( !empty($data['avatar']) ){
+		if ( !empty($aData['avatar']) ){
       		$this->load->model('tool/image');
-			$folder_link = $this->config->get('user')['default']['image_link'];
-			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId() . '/' . $avatar_name . '.jpg';
+			$sFolderLink = $this->config->get('user')['default']['image_link'];
+			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
+			$sPath = $sFolderLink . $oUser->getId() . '/' . $sAvatarName . '.jpg';
 			
-			$this->model_tool_image->moveFile( $data['avatar'], DIR_IMAGE . $path );
-			$user->setAvatar( $path );
+			$this->model_tool_image->moveFile( $aData['avatar'], DIR_IMAGE . $sPath );
+			$oUser->setAvatar( $sPath );
 		}
 
-		$token = md5( time() );
-		$user->setToken( $token );
+		$sToken = md5( time() );
+		$oUser->setToken( $sToken );
 
 		$this->dm->flush();
 		$this->language->load('mail/user');
 
-		$subject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));		
-		$message = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
-		$message .= $this->language->get('text_approval') . "\n" ;
-		$message .= $this->extension->path('ActiveAccount', array('token' => $token)) . "\n\n";
-		$message .= $this->language->get('text_services') . "\n\n";
-		$message .= $this->language->get('text_thanks') . "\n";
-		$message .= $this->config->get('config_name');
+		$sSubject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));		
+		$sMessage = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
+		$sMessage .= $this->language->get('text_approval') . "\n" ;
+		$sMessage .= $this->extension->path('ActiveAccount', array('token' => $sToken)) . "\n\n";
+		$sMessage .= $this->language->get('text_services') . "\n\n";
+		$sMessage .= $this->language->get('text_thanks') . "\n";
+		$sMessage .= $this->config->get('config_name');
 		
-		$mail = new Mail();
-		$mail->protocol = $this->config->get('email')['protocol'];
-		// $mail->parameter = $this->config->get('config_mail_parameter');
-		$mail->hostname = $this->config->get('email')['hostname'];
-		$mail->username = $this->config->get('email')['username'];
-		$mail->password = $this->config->get('email')['password'];
-		$mail->port = $this->config->get('email')['port'];
-		// $mail->timeout = $this->config->get('config_smtp_timeout');				
-		$mail->setTo($this->request->post['email']);
-		$mail->setFrom('admin@yesocl.com');
-		$mail->setSender('Admin Yesocl');
-		$mail->setSubject(html_entity_decode($subject, ENT_QUOTES, 'UTF-8'));
-		$mail->setText(html_entity_decode($message, ENT_QUOTES, 'UTF-8'));
-		$mail->send();
-		
-		// Send to main admin email if new account email is enabled
-		if ($this->config->get('config_account_mail')) {
-			$mail->setTo($this->config->get('config_email'));
-			$mail->send();
-			
-			// Send to additional alert emails if new account email is enabled
-			$emails = explode(',', $this->config->get('config_alert_emails'));
-			
-			foreach ($emails as $email) {
-				if (strlen($email) > 0 && preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $email)) {
-					$mail->setTo($email);
-					$mail->send();
-				}
-			}
-		}
+		$this->model_tool_mail->sendMail( $aData['email'], $sSubject, $sMessage );
 
-		return $user;
+		return $oUser;
 	}
 
-	public function editUser( $user_slug, $data = array() ){
-		$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user_slug );
+	public function editUser( $sUserSlug, $aData = array() ){
+		$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
 
-		if ( !$user ){
+		if ( !$oUser ){
 			return false;
 		}
 
-		if ( !empty($data['request_friend']) ){
-			$requests = $user->getFriendRequests();
+		if ( !empty($aData['request_friend']) ){
+			$aRequests = $oUser->getFriendRequests();
 
-			$key = array_search( $data['request_friend'], $requests );
+			$iIndex = array_search( $aData['request_friend'], $aRequests );
 
-			if ( !$requests || $key === false ){
-				$user->addFriendRequest( $data['request_friend'] );
+			if ( !$aRequests || $iIndex === false ){
+				$oUser->addFriendRequest( $aData['request_friend'] );
 			}else{
-				unset($requests[$key]);
-				$user->setFriendRequests( $requests );
+				unset($aRequests[$iIndex]);
+				$oUser->setFriendRequests( $aRequests );
 			}
 		}
 
-		if ( !empty($data['friend']) ){
-			$friend = new Friend();
-			$friend->setUser( $data['friend'] );
-			$this->dm->persist( $friend );
-			// var_dump($friend->getCreated()); exit;
-			$user->addFriend( $friend );
+		if ( !empty($aData['friend']) ){
+			$oFriend = new Friend();
+			$oFriend->setUser( $aData['friend'] );
+			$this->dm->persist( $oFriend );
+			// var_dump($oFriend->getCreated()); exit;
+			$oUser->addFriend( $oFriend );
 		}
 
-		if ( !empty($data['unfriend']) ){
-			$user->getFriends()->removeElement( $user->getFriendById( $data['unfriend'] ) );
-			$user2 = $this->dm->getRepository('Document\User\User')->find( $data['unfriend'] );
-			$user2->getFriends()->removeElement( $user2->getFriendBySlug( $user_slug ) );
+		if ( !empty($aData['unfriend']) ){
+			$oUser->getFriends()->removeElement( $oUser->getFriendById( $aData['unfriend'] ) );
+			$oUser2 = $this->dm->getRepository('Document\User\User')->find( $aData['unfriend'] );
+			$oUser2->getFriends()->removeElement( $oUser2->getFriendBySlug( $sUserSlug ) );
 		}
 
-		$this->load->model('tool/image');
-		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ){
-			$folder_link = $this->config->get('user')['default']['image_link'];
-			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
-			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
+		if ( !empty($aData['avatar']) && !empty($aData['avatar']['image_link']) && !empty($aData['avatar']['extension']) && is_file($aData['avatar']['image_link']) ){
+			$this->load->model('tool/image');
+
+			$sFolderLink = $this->config->get('user')['default']['image_link'];
+			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
+			$sPath = $sFolderLink . $oUser->getId() . '/' . $sAvatarName . '.' . $aData['avatar']['extension'];
+			$dest = DIR_IMAGE . $sPath;
+			if ( $this->model_tool_image->moveFile($aData['avatar']['image_link'], $dest) ){
+				$oImage = new Image( $dest );
+				$iHolderW = $aData['avatar']['holderW'];
+				$iHolderH = $aData['avatar']['holderH'];
+				if($iHolderW > 0 && $iHolderH > 0){
+					$oImage->resize($iHolderW, $iHolderH);
+				}
+				$oImage->crop( $aData['avatar']['x'], $aData['avatar']['y'], $aData['avatar']['x'] + $aData['avatar']['width'], $aData['avatar']['y'] + $aData['avatar']['width'], true );
+				$oImage->save( $dest );
+				$oUser->setAvatar( $sPath );
 			}
 		}
 
@@ -180,60 +163,60 @@ class ModelUserUser extends Model {
 		return true;
 	}
 
-	public function getUser( $user_slug ){
+	public function getUser( $sUserSlug ){
 		$this->load->model('tool/cache');
-		$user_type = $this->config->get('common')['type']['user'];
+		$sUserType = $this->config->get('common')['type']['user'];
 
-		$user = $this->model_tool_cache->getObject( $user_slug, $user_type );
+		$oUser = $this->model_tool_cache->getObject( $sUserSlug, $sUserType );
 
-		if ( !$user ){
-			$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user_slug );
+		if ( !$oUser ){
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
 
-			if ( !$user ){
+			if ( !$oUser ){
 				return null;
 			}
 
-			$this->model_tool_cache->setObject( $user, $user_type );
+			$this->model_tool_cache->setObject( $oUser, $sUserType );
 
-			$user = $user->formatToCache();
+			$oUser = $oUser->formatToCache();
 		}
 
-		return $user;
+		return $oUser;
 	}
 
-	public function getUserFull( $data = array() ){
-		if ( !empty($data['user_id']) ){
-			return $this->dm->getRepository('Document\User\User')->find( $data['user_id'] );
+	public function getUserFull( $aData = array() ){
+		if ( !empty($aData['user_id']) ){
+			return $this->dm->getRepository('Document\User\User')->find( $aData['user_id'] );
 		}
 
-		if ( !empty($data['user_slug']) ){
-			return $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['user_slug'] );
+		if ( !empty($aData['user_slug']) ){
+			return $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
 		}
 
-		if ( !empty($data['email']) ){
+		if ( !empty($aData['email']) ){
 			return $this->dm->getRepository('Document\User\User')->findOneBy( array(
-				'emails.email' => $data['email']
+				'emails.email' => $aData['email']
 			));
 		}
 
 		return null;
 	}
 
-	public function getUsers( $data = array() ){
-		if ( !empty($data['user_ids']) ){
+	public function getUsers( $aData = array() ){
+		if ( !empty($aData['user_ids']) ){
 			return $this->dm->getRepository('Document\User\User')->findBy(array(
-				'id' => array('$in' => $data['user_ids'])
+				'id' => array('$in' => $aData['user_ids'])
 			));
 		}
 
 		return null;
 	}
 
-	public function isExistEmail( $email, $user_id = '' ) {
-		$users = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 'emails.email' => $email ) );
+	public function isExistEmail( $oEmail, $idUser = '' ) {
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 'emails.email' => $oEmail ) );
 		
-		foreach ( $users as $user ) {
-			if ( $user->getId() == $user_id ){
+		foreach ( $lUsers as $oUser ) {
+			if ( $oUser->getId() == $idUser ){
 				continue;
 			}else {
 				return true;
@@ -243,48 +226,48 @@ class ModelUserUser extends Model {
 		return false;
 	}
 
-	public function editPassword($email, $password) {
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
-			'emails.email' => $email
+	public function editPassword($oEmail, $sPassword) {
+		$oUser = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'emails.email' => $oEmail
 		));
 
-		if ( !$user || $user->getIsSocial() == true ){
+		if ( !$oUser || $oUser->getIsSocial() == true ){
 			return null;
 		}
 
-		$salt = $user->getSalt();
-		$passwordInput = substr(md5(mt_rand()), 0, 10);
-		$password = sha1($salt . sha1($salt . sha1($passwordInput)));
+		$sSalt = $oUser->getSalt();
+		$sPasswordInput = substr(md5(mt_rand()), 0, 10);
+		$sPassword = sha1($sSalt . sha1($sSalt . sha1($sPasswordInput)));
 		
-		$user->setForgotten( $password );
+		$oUser->setForgotten( $sPassword );
 
 		$this->dm->flush();
 
-		return $passwordInput;
+		return $sPasswordInput;
 	}
 
-	public function getTotalCustomersByEmail($email) {
+	public function getTotalCustomersByEmail($oEmail) {
 		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
-			'emails.email' => $email
+			'emails.email' => $oEmail
 		));
 
 		return $query->count();
 	}
 
-	public function active( $token ){
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
-			'token' => $token
+	public function active( $sToken ){
+		$oUser = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'token' => $sToken
 		));
 
-		if ( !$user ){
+		if ( !$oUser ){
 			return null;
 		}
 
-		$user->setToken('');
+		$oUser->setToken('');
 
 		$this->dm->flush();
 
-		return $user;
+		return $oUser;
 	}
 }
 ?>

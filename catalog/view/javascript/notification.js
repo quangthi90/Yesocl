@@ -5,40 +5,59 @@
 		this.notificationItem = el.find('.notification-item');
 		this.allNotificationBtn = el.find('.btn-notification');
 		this.allNotificationList = el.find('.notification-content-list');
-		this.notInclude = $('#y-container, #y-sidebar,#y-footer');
+		this.notInclude = $('#y-container, #y-sidebar,#y-footer, #toggle-user-menu');
 		this.attachEvents();
 	}
 	Notification.prototype.attachEvents = function() {
 		var that = this;
 		that.notificationItem.each(function(){
 			var me = $(this);
-			var btnInvoke = $(this).children('.btn-notification');
-			var listNotification = $(this).children('.notification-content-list');
-			listNotification.makeCustomScroll(false);
-			listNotification.css('opacity', '1').hide(10);
-			btnInvoke.on('click', function(e){
-				e.preventDefault();
-				var hasActive = me.hasClass('active');
-				that.allNotificationList.slideUp(10);
-				that.notificationItem.removeClass('active');
-				if(!hasActive){
-					listNotification.slideDown(200, function(){
-						me.addClass('active');
-					});	
-				}
-			});
-		});
-		var notificationLink = that.notificationItem.find('.notification-content-item[data-link]');
-		if(notificationLink.length > 0){
-			notificationLink.each(function(){
-				$(this).on('click', function(){
+			var listNotification = me.children('.notification-content-list');
+			if(!listNotification.hasClass('empty')){
+				var notificationText = me.find('.notification-text');
+				notificationText.each(function(){
+					if($(this).height() > 32){
+						$(this).truncate({
+		                    width: 'auto',
+		                    token: '&hellip;',
+		                    side: 'right',
+		                    multiline: true
+		                });	
+					}					
+				});
+				listNotification.makeCustomScroll(false);				
+			}
+			setTimeout(function(){
+				listNotification.fadeOut(100, function(){
+					$(this).css({'opacity': '1'});
+				});
+			}, 300);
+
+			//Click on notification item to go to post:
+			var notificationLink = me.find('.notification-content-item[data-link]');
+			if(notificationLink.length > 0){
+				notificationLink.on('click', function(){
 					that.notInclude.trigger('click');
 					location.href= $(this).attr('data-link');
 				});
-			});
-		}
+			}		
+		});
+		
+		that.allNotificationBtn.on('click', function(e){
+			e.preventDefault();
+			that.allNotificationList.fadeOut(10);
+			that.notificationItem.removeClass('active');
+			var ni = $(this).parent('.notification-item');
+			if(!ni.data('isShowing')) {
+				ni.children('.notification-content-list').fadeIn(100);
+				ni.addClass('active');
+				ni.data('isShowing', true);
+			}else {
+				ni.data('isShowing', false);
+			}
+		});
 		that.notInclude.on('click', function(){ 
-			that.allNotificationList.slideUp(10);
+			that.allNotificationList.fadeOut(10);
 			that.notificationItem.removeClass('active');
 		});
 	}
@@ -214,18 +233,18 @@
 
 		this.$messBtn.click(function(e) {
 			e.preventDefault();
+			if(that.$el.hasClass('disabled')){
+				return false;
+			}
 			
 			that.submit( that.$messBtn );
-
-			return false;
 		});
 	};	
 	NotificationMessage.prototype.submit = function($button){
 		var that = this;
-
-		that.$messList.html('');
 		var messages = that.$el.data('messages');
 		if ( typeof messages == 'undefined' ){
+			that.$messList.html('<li class="user-message-li load-waiting">Loadding messages <i class="icon-spin icon-spinner"></i></li>');
 			messages = [];
 
 			var promise = $.ajax({
@@ -239,7 +258,7 @@
 			promise.then(function(data) { 
 				if(data.success == 'ok'){
 					that.$el.find('.notification-item-count').addClass('hidden').html(0);
-
+					that.$messList.html('');
 					for ( var key in data.messages ){
 						message = data.messages[key];
 						var _class = ' ';
@@ -267,6 +286,7 @@
 				}
 			});
 		}else{
+			that.$messList.html('');
 			for ( var key in messages ){
 				var message = messages[key];
 				that.$messList.prepend( $.tmpl($('#message-item-header'), message) );
@@ -276,14 +296,10 @@
 		}
 	};
 	NotificationMessage.prototype.triggerProgress = function($el, promise){
-		var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-		var $old_icon = $el.find('i');
-		var f        = function() {
-			$spinner.remove();
-			$el.html($old_icon);
+		var f = function() {
+			$el.removeClass('disabled');
 		};
-
-		$el.addClass('disabled').html($spinner);
+		$el.addClass('disabled');
 
 		promise.then(f, f);
 	};

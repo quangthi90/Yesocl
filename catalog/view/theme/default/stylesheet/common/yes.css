@@ -118,8 +118,8 @@ ul
     padding: 0px;
 }
 
-*:focus {
-  outline: 0;
+*, *:focus {
+  outline: none;
 }
 /*END OVERLOAD BOOTSTRAP*/
 /* --------------------------------- START Y-CSS ----------------------------------------------- */
@@ -156,9 +156,11 @@ ul{
 }
 a {
   text-decoration: none;
+  outline: none;
 }
 a > i,i{
-  color: #0E0E0E;  
+  color: #0E0E0E; 
+  outline: none; 
 }
 a:hover,
 a:focus {
@@ -667,10 +669,15 @@ a.btn-notification:hover .notification-item-name > i {
   border: 1px solid #ddd;
   border-top: none;
   opacity: 0;
-  padding: 10px 0px 10px 10px;
+  padding: 0px;
 }
 .notification-content-list ul {
   min-width: 300px;
+}
+.notification-content-list.empty {
+  width: 180px;
+  font-weight: bold;
+  padding: 5px;
 }
 .notification-content-list .notification-content-item {
   overflow: hidden;
@@ -688,8 +695,10 @@ a.btn-notification:hover .notification-item-name > i {
   opacity: 1;
 }
 .notification-content-list .notification-content-item.unread{
-  border-left: 2px solid #009B77;
   background-color: #F5F5F5;
+}
+.notification-content-list .notification-content-item.unread:hover{
+  background-color: #F7F7F7;
 }
 .notification-content-list .notification-content-item:last-child {
   border-bottom: none;
@@ -713,12 +722,13 @@ a.btn-notification:hover .notification-item-name > i {
   padding-right: 15px;
 }
 .notification-content-item .notification-content-item-detail  .notification-text {
-  line-height: 15px;
-  margin-bottom: 5px;
+  line-height: 16px;
+  margin-bottom: 0px;
   overflow: hidden;
-  text-overflow: ellipsis;
   font-size: 12px;
-  max-height: 31px;
+  max-height: 40px;
+  width: 185px;
+  float: left;
 }
 .notification-content-item .notification-content-item-detail  .notification-text a {
   font-weight: bold;
@@ -741,6 +751,9 @@ a.btn-notification:hover .notification-item-name > i {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.notification-item .mCustomScrollBox>.mCSB_scrollTools {
+  width: 5px;
+}
 .notification-item .mCSB_scrollTools .mCSB_draggerRail {
   width: 6px;
   background: #f0f0f0;
@@ -761,7 +774,7 @@ a.btn-notification:hover .notification-item-name > i {
   background: #009B77;
 }
 .notification-item .mCSB_container {
-  margin-right: 20px;
+  margin-right: 0px;
 }
 .notification-page {
 }
@@ -817,11 +830,19 @@ a.btn-notification:hover .notification-item-name > i {
 
 /* MESSAGE NOTIFICATION */
 .notification-item.message .user-message-li {
-  padding: 1px 0px 1px 0px;
+  padding: 0px 3px 3px 3px;
   max-width: 300px;
 }
 .notification-item.message .user-message-li:first-child {
-  padding-top: 0px;
+  padding-top: 3px;
+}
+.notification-item.message .user-message-li.load-waiting
+{
+  text-align: center;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  font-weight: bold;
+  font-size: 12px;
 }
 .notification-item.message .user-message-li .user-message-link {
   display: block;
@@ -1161,8 +1182,6 @@ a.btn-notification:hover .notification-item-name > i {
   text-overflow: ellipsis;
 }
 .post .post_body .post_text_raw {
-  -ms-word-break: break-all;
-  word-break: break-all;
   word-break: break-word;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
@@ -1426,6 +1445,7 @@ a.btn-notification:hover .notification-item-name > i {
 .img-previewer-container .post_image_item img {
   min-width: 200px;
   max-width: 435px;
+  max-height: 300px;
 }
 .img-previewer-container .alert strong {
   font-weight: bold;
@@ -2909,4 +2929,140 @@ a.wall-link:hover {
   color: #000;
 }
 /* ------------------------------------- START TAG-USER -------------------------------------- */
+
+/* ======================================== START AVATAR ========================================== */
+#y-frm-avatar {
+  margin: 20px auto;
+  width: 800px;
+}
+#y-frm-avatar .frm-content {
+  padding: 10px 20px 20px 20px;
+}
+.avatar-step {
+  display: none;
+}
+.avatar-step.upload-container {
+  display: block;
+}
+.avatar-step.upload-container .img-previewer-container {  
+  margin-bottom: 20px;
+}
+.avatar-step.upload-container .drop-zone-show {
+  margin: 0px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #8F8F8F;
+  background-color: #F0F0F0;
+  border: 2px dotted #ccc;
+  padding: 140px 0px;
+}
+.avatar-step.upload-container .y-progress {
+  margin-bottom: 15px;
+}
+.avatar-step.upload-container .drag-img-upload {
+}
+.avatar-step.upload-container .drag-img-upload {
+  text-align: center;
+}
+.avatar-step.upload-container .btn-upload {
+  position: relative;
+  padding: 5px 10px;
+}
+.avatar-step.upload-container .btn-upload:hover {
+  background-position: 0 -40px;
+}
+.avatar-step.upload-container .btn-upload span {
+  font-size: 14px;
+  font-weight: normal;
+}
+.avatar-step.upload-container .btn-upload span i {
+  font-size: 18px;
+  margin-right: 5px;
+}
+.avatar-step.upload-container .btn-upload:hover span i {
+  color: #FFF;
+  font-weight: normal;
+}
+.avatar-step.upload-container .btn-upload input {
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 147px;
+  cursor: pointer;
+  display: block;
+}
+.avatar-step.image-cropper {
+  display: none;
+  overflow: hidden;
+}
+.avatar-step.image-cropper .uploaded-image {
+  float: left;
+  height: 320px;
+  width: 550px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #DDDDDD;
+  background-color: #F0F0F0;
+}
+.avatar-step.image-cropper .uploaded-image > img {
+  position: absolute;
+  display: none;
+}
+.avatar-step.image-cropper .previewed-image {
+  float: right;  
+  width: 150px;
+}
+.avatar-step.image-cropper .previewed-image .previewed-image-container {
+  width: 148px;
+  height: 150px;
+  border: 1px solid #F0F0F0;
+  overflow: hidden;
+}
+.avatar-step.image-cropper .previewed-image .none-image {
+  width: 148px;
+  height: 148px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  display: none;
+}
+.avatar-step.image-cropper .previewed-image img {  
+  max-width: none;
+}
+.avatar-step.image-cropper .previewed-image.circle .previewed-image-container {
+  border-radius: 50%;
+}
+.avatar-step.image-cropper .previewed-image label {
+  font-weight: bold;
+  text-align: center;
+}
+.avatar-step.image-cropper .previewed-image .preview-tools {
+  margin: 30px 0px 0px 0px;  
+  text-align: center;
+}
+.previewed-image .preview-tools .preview-tool-item {
+  padding: 5px 5px 3px 5px;
+  border: 1px solid #f0f0f0;
+  display: inline-block;
+}
+.previewed-image .preview-tools .preview-tool-item i {
+    font-size: 18px;
+}
+.previewed-image .preview-tools .preview-tool-item:hover {
+  background-color: #f0f0f0;
+  color: #009B77;
+}
+
+.avatar-step.image-cropper .image-buttons {
+  clear: both;
+  text-align: right;
+  padding: 20px 0px 0px 0px;
+}
+.avatar-step.image-cropper .jcrop-holder {
+  margin: 0px auto;
+}
+
+/* ======================================== END AVATAR ============================================ */
+
+/*END CUSTOM LIB's CSS*/
 

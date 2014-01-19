@@ -165,22 +165,47 @@ class __TwigTemplate_d1ce438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234
         if (array_key_exists("warning_active", $context)) {
             // line 35
             echo "\t<script type=\"text/javascript\">
-\tvar msgCallback = \$(\"<div></div>\").css(
-\t{
-\t\t'position': 'absolute',
-\t\t'right': '15px',
-\t\t'top': '60px',
-\t\t'background-color' : '#ddd',
-\t\t'color' : '#009B77',
-\t\t'padding' : '15px',
-\t\t'font-weight' : 'bold'
-\t}).hide().appendTo('body');
-\tbootbox.alert(\"";
-            // line 46
+\t\tbootbox.dialog({
+\t\t\tmessage: \"";
+            // line 37
             echo twig_escape_filter($this->env, (isset($context["warning_active"]) ? $context["warning_active"] : null), "html", null, true);
-            echo "\", function() {
-\t\tmsgCallback.html('Alert: ' + 'Alert callback').fadeIn(1000).delay(2000).fadeOut(300);
-\t});
+            echo "\",
+\t\t\ttitle: \"Active warning !\",
+\t\t\tbuttons: {
+\t\t\t\tresend: {
+\t\t\t\t\tlabel: \"Resend active email\",
+\t\t\t\t\tclassName: \"btn-primary js-resend-active-link\",
+\t\t\t\t\tcallback: function() {
+\t\t\t\t\t    var promise = \$.ajax({
+\t\t\t                type: 'POST',
+\t\t\t                url:  yRouting.generate('ReActiveAccount'),
+\t\t\t                dataType: 'json'
+\t\t\t            });
+\t\t\t            var \$el = \$('.js-resend-active-link');
+\t\t\t            var \$spinner = \$('<i class=\"icon-spinner icon-spin\"></i>');
+\t\t\t\t        var \$old_icon = \$el.find('i');
+\t\t\t\t        var f        = function() {
+\t\t\t\t            \$spinner.remove();
+\t\t\t\t            \$el.html(\$old_icon);
+\t\t\t\t        };
+
+\t\t\t\t        \$el.addClass('disabled').html(\$spinner);
+
+\t\t\t\t        promise.then(f, f);
+
+\t\t\t            promise.then(function(data) { 
+\t\t\t                if(data.success == 'ok'){
+\t\t\t                \talert('Resend active link success!');
+\t\t\t                }
+\t\t\t            });
+\t\t\t\t  \t}
+\t\t\t\t},
+\t\t\t\tsuccess: {
+\t\t\t\t\tlabel: \"Ok\",
+\t\t\t\t\tclassName: \"btn-primary\"
+\t\t\t\t}
+\t\t\t}
+\t\t});
 \t</script>
 \t";
         }
@@ -198,6 +223,6 @@ class __TwigTemplate_d1ce438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234
 
     public function getDebugInfo()
     {
-        return array (  180 => 46,  167 => 35,  165 => 34,  156 => 32,  153 => 31,  147 => 28,  143 => 26,  129 => 25,  120 => 22,  114 => 20,  108 => 18,  87 => 15,  84 => 14,  78 => 11,  73 => 10,  64 => 7,  28 => 5,  21 => 4,  14 => 3,  369 => 197,  354 => 185,  330 => 166,  322 => 161,  318 => 160,  314 => 158,  295 => 142,  285 => 134,  280 => 131,  263 => 122,  254 => 118,  250 => 117,  245 => 116,  241 => 115,  237 => 113,  235 => 112,  232 => 111,  224 => 109,  222 => 108,  217 => 105,  215 => 104,  208 => 99,  202 => 97,  200 => 96,  192 => 90,  181 => 85,  175 => 82,  171 => 81,  161 => 33,  157 => 75,  145 => 73,  142 => 72,  138 => 71,  127 => 67,  121 => 64,  111 => 19,  102 => 51,  94 => 46,  91 => 17,  81 => 33,  56 => 19,  52 => 18,  39 => 11,  34 => 8,  29 => 5,  26 => 4,  24 => 2,  22 => 1,  123 => 23,  117 => 21,  110 => 39,  104 => 38,  97 => 34,  90 => 33,  83 => 24,  77 => 23,  70 => 9,  63 => 23,  60 => 17,  57 => 16,  43 => 12,  41 => 16,  25 => 2,  23 => 1,);
+        return array (  171 => 37,  167 => 35,  165 => 34,  161 => 33,  156 => 32,  153 => 31,  147 => 28,  143 => 26,  129 => 25,  123 => 23,  120 => 22,  117 => 21,  114 => 20,  111 => 19,  108 => 18,  91 => 17,  87 => 15,  84 => 14,  78 => 11,  73 => 10,  70 => 9,  64 => 7,  28 => 5,  21 => 4,  14 => 3,);
     }
 }

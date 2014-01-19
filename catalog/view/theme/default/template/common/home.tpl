@@ -33,19 +33,44 @@
 	<script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
 	{% if warning_active is defined %}
 	<script type="text/javascript">
-	var msgCallback = $("<div></div>").css(
-	{
-		'position': 'absolute',
-		'right': '15px',
-		'top': '60px',
-		'background-color' : '#ddd',
-		'color' : '#009B77',
-		'padding' : '15px',
-		'font-weight' : 'bold'
-	}).hide().appendTo('body');
-	bootbox.alert("{{warning_active}}", function() {
-		msgCallback.html('Alert: ' + 'Alert callback').fadeIn(1000).delay(2000).fadeOut(300);
-	});
+		bootbox.dialog({
+			message: "{{warning_active}}",
+			title: "Active warning !",
+			buttons: {
+				resend: {
+					label: "Resend active email",
+					className: "btn-primary js-resend-active-link",
+					callback: function() {
+					    var promise = $.ajax({
+			                type: 'POST',
+			                url:  yRouting.generate('ReActiveAccount'),
+			                dataType: 'json'
+			            });
+			            var $el = $('.js-resend-active-link');
+			            var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+				        var $old_icon = $el.find('i');
+				        var f        = function() {
+				            $spinner.remove();
+				            $el.html($old_icon);
+				        };
+
+				        $el.addClass('disabled').html($spinner);
+
+				        promise.then(f, f);
+
+			            promise.then(function(data) { 
+			                if(data.success == 'ok'){
+			                	alert('Resend active link success!');
+			                }
+			            });
+				  	}
+				},
+				success: {
+					label: "Ok",
+					className: "btn-primary"
+				}
+			}
+		});
 	</script>
 	{% endif %}
 {% endblock %}

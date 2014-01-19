@@ -253,11 +253,11 @@
         var that = this;
 
         this.$advance_btn.click(function(e) {
+            e.preventDefault();
+            
             if(that.$advance_btn.hasClass('disabled')) {
-                e.preventDefault();
                 return false;
             }
-
             if(that.validate(true) == false){
                 return false;
             }
@@ -313,54 +313,98 @@
         promise.then(function(data) {
             if(data.success == 'ok'){
                 var htmlOutput = $.tmpl( $('#post-item-template'), data.post ); 
-                var firstColumn = that.blockContent.find('.column:first-child');            
+                var firstColumn = that.blockContent.find('.column:first-child');          
                 var newColumn = $('<div class="column">').append(htmlOutput);
-                newColumn.children('.post').height(firstColumn.height() - 2*(marginPostDefault + 1));
-                //newColumn.find('.post_text_raw').
-                newColumn.width(widthPostDefault);
+                newColumn.width(widthPostDefault);                
                 newColumn.css({
                     'opacity':'1', 
                     'min-width': widthPostDefault + 'px'
                 });
+                
+                //Adjust size of layout:
+                var post = newColumn.children('.post');
+                var postBody   = post.children('.post_body');
+                post.height(firstColumn.height() - 2*(marginPostDefault + 1));
+                postBody.height(post.height() - 65 - 10 - 22);
+                var postTitle  = postBody.children('.post_title');                
+                var postImg    = postBody.children('.post_image');
+                if(postTitle.length > 0){
+                    postImg.height(postBody.height()*0.6);
+                }else {
+                    postImg.height(postBody.height()*0.7);
+                }
+                var postTextRaw = postBody.children('.post_text_raw');                
+                var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+                postTextRaw.height(Math.floor(maxHeightText/20)*20);
+                var imgInTextRaw = postTextRaw.find('img');
+                if(imgInTextRaw.length > 0) {
+                    imgInTextRaw.hide(10);
+                }                
                 firstColumn.hide().after(newColumn).show(500);
                 that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
                 that.rootContent.getNiceScroll().resize();
 
-                $(document).trigger('POST_BUTTON');
-                $(document).trigger('POST_SHOW_LIKED_BUTTON');
-                $(document).trigger('HORIZONTAL_POST');
-                $(document).trigger('DELETE_POST', [htmlOutput]);
-                $(document).trigger('EDIT_POST', [htmlOutput]);
-
-                htmlOutput.find('.link-popup').magnificPopup({
+                //Attach events:
+                setTimeout(function(){
+                    post.find('.post_text_raw').truncate({
+                        width: 'auto',
+                        token: '&hellip;',
+                        side: 'right',
+                        multiline: true
+                    });
+                }, 500); 
+                post.find('.link-popup').magnificPopup({
                     type:'inline',
                     midClick: true,
                     removalDelay: 300,
                     mainClass: 'mfp-fade'
                 });
+                $(".timeago").timeago();
 
-                jQuery(".timeago").timeago();
-                that.$content.val('');
-                that.$advance_content.code('');
-                that.$advance_title.val('');
-                $post_add_form.find('.img-previewer-container').html('');
-                that.$el.find('.img-previewer-container').html('');
+                //Reset:
+                if($button.hasClass('btn-status')){
+                    that.$content.mentionsInput('reset');
+                    that.$content.height(40);
+                    that.$el.find('.img-previewer-container').html('');
+                }else {
+                    that.$advance_content.code('');
+                    that.$advance_title.val('');
+                    $post_add_form.find('.img-previewer-container').html('');
+                    $('.mfp-ready').trigger('click');
+                }
 
-                $('.mfp-ready').trigger('click');
+                //Rise events:
+                $(document).trigger('POST_BUTTON');
+                $(document).trigger('POST_SHOW_LIKED_BUTTON');
+                $(document).trigger('HORIZONTAL_POST');
+                $(document).trigger('DELETE_POST', [htmlOutput]);
+                $(document).trigger('EDIT_POST', [htmlOutput]);                
             }
         });
     };
 
     AddPost.prototype.validate = function(is_advance){
-        if ( is_advance == true ){
-            if ( this.$advance_content.code() == '' ){
+
+        if(!String.prototype.trim) {
+          String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g,'');
+          };
+        }
+
+        if (is_advance){
+            var tempEle = $("<div></div>");
+            tempEle.append(this.$advance_content.code());
+            if (tempEle.text().trim().length === 0 ){
+                this.$advance_content.code('');
                 return false;
             }
         }else{
-            if ( this.$content.val().length == 0 ){
+            if (this.$content.val().trim().length === 0 ){
+                this.$content.val('').focus();
                 return false;
             }
         }
+        return true;
     };
 
     AddPost.prototype.triggerProgress = function($el, promise){
@@ -389,6 +433,8 @@
         this.$btn       = $el.find('.post-delete-btn');
 
         this.url        = $el.data('url-delete');
+        this.mainContent = $('#y-main-content');
+        this.rootContent = $('#y-content');
 
         this.addEvents();
     }
@@ -438,9 +484,12 @@
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
-            if(data.success == 'ok') {                   
+            if(data.success == 'ok') {
+                var widthColumn = that.$el.parent().outerWidth();                
                 that.$el.parent().css('opacity','0').slideUp(300, function(){
                     $(this).remove();
+                    that.mainContent.width(that.mainContent.width() - widthColumn);
+                    that.rootContent.getNiceScroll().resize();
                 });
             }else{
                 that.$el.parent().removeClass('deleting');
@@ -479,7 +528,7 @@
     function ShowEditAdvance($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-edit-btn');
-        this.content    = $el.find('.post_text_raw').html();
+        this.content    = $el.find('.post_text_editable').html();
         this.title      = $el.find('.post_title > a').html();
         this.$image     = $el.find('.post_image > img');
 
@@ -577,20 +626,40 @@
         promise.then(function(data) {
             if(data.success == 'ok'){
                 var $current_post = that.$el.data('post');
-                
-                $current_post.find('.post_text_raw').html( data.post.content );
+                var textRaw = $current_post.find('.post_text_raw');
+                textRaw.html( data.post.content );
+                setTimeout(function(){
+                    textRaw.truncate({
+                        width: 'auto',
+                        token: '&hellip;',
+                        side: 'right',
+                        multiline: true
+                    });
+                }, 500); 
+                $current_post.find('.post_text_editable').html( data.post.content );
                 $current_post.find('.post_title > a').html( data.post.title );
                 $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
 
                 $('.mfp-ready').trigger('click');
+                $(document).trigger('EDIT_POST', [$current_post]);
             }
         });
     };
 
     EditPost.prototype.validate = function(){
-        if ( this.$content.code() == '' ){
+        if(!String.prototype.trim) {
+          String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g,'');
+          };
+        }
+
+        var tempEle = $("<div></div>");
+        tempEle.append(this.$content.code());
+        if (tempEle.text().trim().length === 0 ){
+            this.$content.code('');
             return false;
         }
+        return true;
     };
 
     EditPost.prototype.triggerProgress = function($el, promise){
