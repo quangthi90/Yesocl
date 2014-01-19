@@ -123,9 +123,14 @@ class Image {
         imagedestroy($watermark);
     }
     
-    public function crop($top_x, $top_y, $bottom_x, $bottom_y) {
+    public function crop($top_x, $top_y, $bottom_x, $bottom_y, $is_white_background = false) {
         $image_old = $this->image;
         $this->image = imagecreatetruecolor($bottom_x - $top_x, $bottom_y - $top_y);
+
+        if ( $is_white_background ){
+        	$color = imagecolorallocate($this->image, 255, 255, 255);
+			imagefill($this->image, 0, 0, $color);
+        }
         
         imagecopy($this->image, $image_old, 0, 0, $top_x, $top_y, $this->info['width'], $this->info['height']);
         imagedestroy($image_old);

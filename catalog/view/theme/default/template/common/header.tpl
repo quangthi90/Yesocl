@@ -63,11 +63,11 @@
           </a>
           <a href="{{ path('MessagePage') }}">
 			    	<i class="icon-edit"></i>
-			    </a>			    	    
+			    </a>
 			</div>
 			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
-          <a href="#" class="btn-notification js-btn-see-notify">
+          <a href="#" class="btn-notification btn-header-not-search js-btn-see-notify">
             <i class="icon-bell"></i>
             <span class="notification-item-count{% if notification_count == 0 %} hidden{% endif %}">{{ notification_count }}</span>
           </a>
@@ -96,7 +96,7 @@
           </div>
         </div>
         <div class="notification-item message js-noti-mess">
-          <a href="#" class="btn-notification js-btn-noti-mess">
+          <a href="#" class="btn-notification js-btn-noti-mess btn-header-not-search">
             <i class="icon-envelope"></i>
             {% if mess_unread > 0 %}
             <span class="notification-item-count">{{ mess_unread }}</span>
@@ -108,7 +108,7 @@
         </div>
         {% set requests = get_request_friend() %}
         <div class="notification-item friend">
-          <a href="#" class="btn-notification">
+          <a href="#" class="btn-notification btn-header-not-search">
             <i class="icon-user"></i>
             {% if requests|length > 0 %}
             <span class="notification-item-count" data-count="{{ requests|length }}">{{ requests|length }}</span>

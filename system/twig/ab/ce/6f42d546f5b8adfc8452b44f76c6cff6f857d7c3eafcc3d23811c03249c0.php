@@ -133,14 +133,14 @@ class __TwigTemplate_abce6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03
             echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('path')->getCallable(), array("MessagePage")), "html", null, true);
             echo "\">
 \t\t\t    \t<i class=\"icon-edit\"></i>
-\t\t\t    </a>\t\t\t    \t    
+\t\t\t    </a>
 \t\t\t</div>
 \t\t\t<div id=\"user-notification\" class=\"fr notification-group\">
         <div class=\"notification-item common js-notification-common\" data-notification-count=\"";
             // line 69
             echo twig_escape_filter($this->env, (isset($context["notification_count"]) ? $context["notification_count"] : null), "html", null, true);
             echo "\">
-          <a href=\"#\" class=\"btn-notification js-btn-see-notify\">
+          <a href=\"#\" class=\"btn-notification btn-header-not-search js-btn-see-notify\">
             <i class=\"icon-bell\"></i>
             <span class=\"notification-item-count";
             // line 72
@@ -213,7 +213,7 @@ class __TwigTemplate_abce6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03
           </div>
         </div>
         <div class=\"notification-item message js-noti-mess\">
-          <a href=\"#\" class=\"btn-notification js-btn-noti-mess\">
+          <a href=\"#\" class=\"btn-notification js-btn-noti-mess btn-header-not-search\">
             <i class=\"icon-envelope\"></i>
             ";
             // line 101
@@ -235,7 +235,7 @@ class __TwigTemplate_abce6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03
             $context["requests"] = call_user_func_array($this->env->getFunction('get_request_friend')->getCallable(), array());
             // line 110
             echo "        <div class=\"notification-item friend\">
-          <a href=\"#\" class=\"btn-notification\">
+          <a href=\"#\" class=\"btn-notification btn-header-not-search\">
             <i class=\"icon-user\"></i>
             ";
             // line 113

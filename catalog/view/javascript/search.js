@@ -74,9 +74,11 @@
 		this.$template 			= $el.find('.search-result-item-template');	
 		this.$suggestContainer 	= $el.find('.suggestion-container');
 		this.$btn 				= $el.find('.btn-search');
+		this.$notIncluding 		= $('#y-header').find('.btn-header-not-search');
 
 		this.friendUrl			= $el.data('url-friend-typeahead');
 		this.postUrl			= $el.data('url-post-typeahead');
+		this.isOpened 			= false;
 
 		this.attachEvents();
 		this.initAutoComplete();
@@ -104,6 +106,11 @@
 			if($(this).val().length === 0) {
 				that.resizePanel();
 			}
+		});
+		that.$notIncluding.on('click', function(){
+			if(that.isOpened){
+				that.closeSearchPanel();	
+			}			
 		});
 
 		//Auto invoke search:
@@ -224,13 +231,25 @@
 	}
 	SearchAutoComplete.prototype.openSearchPanel = function() {
 		var that = this;
+
+		that.$notIncluding.each(function(){
+			var activeItems = $(this).parent('.active');
+			var openedItems = $(this).parent('.open');
+			if(activeItems.length > 0 || openedItems.length > 0){
+				$(this).trigger('click');
+			}
+		});
+
+		that.isOpened = true;
 		that.$root.slideDown(200, function(){			
 			$(that.$invokeCtrl).addClass('active');	
 		});	
 		that.$autoCtrl.focus();
 	}
 	SearchAutoComplete.prototype.closeSearchPanel = function() {
-		var that = this;		
+		var that = this;	
+
+		that.isOpened = false;	
 		this.$root.slideUp(200, function(){
 			that.$autoCtrl.typeaheadCustom('setQuery', '');
 			$(that.$invokeCtrl).removeClass('active');			

@@ -31,9 +31,9 @@ $_['routing']['SearchPage']						= 'search/{keyword}/';
 $_['routing']['FriendTypeahead']				= 'search/typeahead/friend/{keyword}/';
 $_['routing']['PostTypeahead']					= 'search/typeahead/post/{keyword}/';
 $_['routing']['Login']							= 'login/';
-$_['routing']['ChangeAvatar']					= 'change-avatar/';
 $_['routing']['LostPass']						= 'lost_password/';
-$_['routing']['ActiveAccount']					= 'active/{token}/';
+$_['routing']['ActiveAccount']					= 'active/send/{token}/';
+$_['routing']['ReActiveAccount']				= 'active/resend/';
 $_['routing']['AjaxLogin']						= 'login-ajax/';
 $_['routing']['AjaxRegister']					= 'register/ajax/';
 
@@ -76,6 +76,9 @@ $_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
 $_['routing']['NotificationReadAll']			= 'notification/readAll/';
 $_['routing']['NotificationPage']				= 'notification/page/';
 
+// Avatar
+$_['routing']['ChangeAvatar']					= 'avatar/change/';
+$_['routing']['SaveAvatar']						= 'avatar/save/';
 // Message
 $_['routing']['MessagePage']					= 'message/page/';
 $_['routing']['MessageSend']					= 'message/send/';

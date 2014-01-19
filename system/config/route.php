@@ -30,10 +30,10 @@ $_['route']['Logout']						= 'account/logout';
 $_['route']['SearchPage']					= 'common/search';
 $_['route']['FriendTypeahead']				= 'common/search/friendTypeahead/';
 $_['route']['PostTypeahead']				= 'common/search/postTypeahead/';
-$_['route']['ChangeAvatar']					= 'account/avatar';
 $_['route']['Login']						= 'account/login';
 $_['route']['LostPass']						= 'account/forgotten';
 $_['route']['ActiveAccount']				= 'account/active';
+$_['route']['ReActiveAccount']				= 'account/active/resendActiveLink';
 $_['route']['AjaxLogin']					= 'account/login/login';
 $_['route']['AjaxRegister']					= 'account/register/register';
 
@@ -76,6 +76,10 @@ $_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete'
 // Notification
 $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
 $_['route']['NotificationPage']				= 'common/notification/';
+
+// Avatar
+$_['route']['ChangeAvatar']					= 'account/avatar';
+$_['route']['SaveAvatar']					= 'account/avatar/save';
 
 // Message
 $_['route']['MessagePage']					= 'account/message';
