@@ -1718,6 +1718,28 @@ a.btn-notification:hover .notification-item-name > i {
   bottom: 30px;
   z-index: 100;
 }
+.language-wrapper {
+  float: right;
+  margin-right: 15px;
+}
+.language-wrapper.open .dropdown-menu {
+  left: -52px;
+  min-width: 135px;
+}
+.language-wrapper .language-item {
+}
+.language-wrapper .language-item.selected {
+  font-size: 11px;  
+  font-weight: bold;
+}
+.language-wrapper .language-item > img {
+  margin-right: 3px;
+}
+.language-wrapper .language-item > span {
+}
+.language-wrapper .language-item:hover > span {
+}
+
 /* ----------------------------------- END FOOTER BAR ---------------------------------------- */
 /* -------------------------------- START CUSTOM for POST ------------------------------------ */
 .column {

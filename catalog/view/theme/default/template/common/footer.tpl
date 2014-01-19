@@ -20,6 +20,21 @@
         <div class="copyright">
             Copyright &copy; 2013 - <strong>YESOCL.com</strong>
         </div> 
+        <div class="language-wrapper dropup">
+          <a href="#" class="language-item selected dropdown-toggle" data-toggle="dropdown">
+            <img src="image/flags/england.png"> 
+            <span> English</span>
+            <i class="icon-caret-up"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#" class="language-item"><img src="image/flags/vn.png"> <span>Vietnamese</span></a>
+            </li>
+            <li>
+              <a href="#" class="language-item"><img src="image/flags/cn.png"> <span>Chinese</span></a>
+            </li>
+          </ul>
+        </div> 
         <div class="links-footer">
           <ul>
             <li><a href="#">Create Group</a></li>
@@ -28,6 +43,6 @@
             <li><a href="#">Contact</a></li>
             <li><a href="#">About us</a></li>
           </ul>            
-        </div>         
+        </div>              
     </div>    
 </div>
