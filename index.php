@@ -61,6 +61,10 @@ $config->load( 'route' );
 $config->load( 'ignore' );
 $config->load( 'friend' );
 
+// Request
+$request = new Request();
+$registry->set('request', $request);
+
 // Twig
 require_once DIR_SYSTEM . 'library/Twig/Autoloader.php';
 Twig_Autoloader::register();
@@ -74,12 +78,18 @@ $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
 
 // Multi languages
-// $lang = 'vi_VN';
-// putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
-// putenv("LANGUAGE=$lang"); //same as above
-// setlocale(LC_ALL, $lang);
-// bindtextdomain($lang, DIR_LANGUAGE . "locale");
-// textdomain($lang);
+$sLangFile = DIR_LANGUAGE . 'locale/' . $request->cookie['language'] . '/LC_MESSAGES/' . $request->cookie['language'] . '.po';
+if ( isset($request->cookie['language']) && is_file($sLangFile) ){
+	$lang = $request->cookie['language'];
+}else{
+	$lang = 'vi_VN';
+}
+
+putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
+putenv("LANGUAGE=$lang"); //same as above
+setlocale(LC_ALL, $lang);
+bindtextdomain($lang, DIR_LANGUAGE . "locale");
+textdomain($lang);
 
 // Url
 $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $config->get('config_ssl') : $config->get('config_url'));	
@@ -123,10 +133,6 @@ function error_handler($errno, $errstr, $errfile, $errline) {
 	
 // Error Handler
 set_error_handler('error_handler');
-
-// Request
-$request = new Request();
-$registry->set('request', $request);
  
 // Response
 $response = new Response();

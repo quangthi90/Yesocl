@@ -12,7 +12,7 @@
 			<li class="profile-category-li">
 				<a class="btn btn-yes profile-category-item" href="#profile-column-information">
 					<i class="icon-check"></i>
-					<span{% trans %}>Personal Information{% endtrans %}</span>
+					<span>{% trans %}Personal Information{% endtrans %}</span>
 				</a>
 			</li>
 			<li class="profile-category-li">

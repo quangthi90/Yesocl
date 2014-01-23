@@ -1,7 +1,7 @@
 <?php
 
-/* default/template/common/footer.tpl */
-class __TwigTemplate_c7a589b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da252082359 extends Twig_Template
+/* __string_template__e12e654fa3e80c3e76eb9b4148626c1859848250724b21013253d1f934643030 */
+class __TwigTemplate_0ba36c51d7ac2dfc0575de9778aae0026644a6907495948ee266bfa41ca3d8e5 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -71,7 +71,7 @@ class __TwigTemplate_c7a589b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da2520
 
     public function getTemplateName()
     {
-        return "default/template/common/footer.tpl";
+        return "__string_template__e12e654fa3e80c3e76eb9b4148626c1859848250724b21013253d1f934643030";
     }
 
     public function getDebugInfo()
