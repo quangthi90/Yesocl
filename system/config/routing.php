@@ -87,4 +87,5 @@ $_['routing']['MessageGetLast']					= 'message/get-last/';
 
 // Ajax
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';
+$_['routing']['SetLanguage']					= 'service/push/language/';
 ?>

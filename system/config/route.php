@@ -89,4 +89,5 @@ $_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
 
 // Ajax
 $_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';
+$_['route']['SetLanguage']					= 'ajax/language/setLanguage/';
 ?>
