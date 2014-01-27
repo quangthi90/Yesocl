@@ -38,7 +38,7 @@
     left: 15px;
     bottom: 0px;
     right: 15px;
-    padding: 15px 20px 15px 0px;    
+    padding: 15px 20px 25px 0px;    
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -50,6 +50,7 @@
     width: 345px;
     overflow: hidden;
     border-left: 3px solid #ccc;
+    z-index: 10;
 }
 #detail-scroll {
     position: absolute;
@@ -160,6 +161,7 @@
     column-break-inside: avoid;
     white-space: nowrap;
     max-width: 500px;
+    max-height: 95%;
     height: auto;
     cursor: -webkit-zoom-in;
     cursor: zoom-in;

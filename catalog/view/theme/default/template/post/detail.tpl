@@ -77,9 +77,6 @@
 				<a class="btn-link-round fl" id="detail-first" href="#" style="display: none;">
 					<i class="icon-arrow-left"></i>
 				</a>
-				<a class="btn-link-round fr" id="detail-last" href="#" style="display: none;">
-					<i class="icon-arrow-right"></i>
-				</a>
 			</div>
 			{{ block('post_common_comment_post_detail') }}
 		</div>

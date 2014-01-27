@@ -14,7 +14,6 @@
         this.restoreComment = this.postComment.find('.btn-restore');
         this.closeCommentBox = this.postComment.find('.btn-close');
         this.scrollLeftBtn = this.quickScroll.find('#detail-first');
-        this.scrollLastBtn = this.quickScroll.find('#detail-last');
         this.toggleComment = this.root.find('.toggle-comment'); 
         this.expandCommentLevel = 1;
         this.canScrollLeft = false;
@@ -49,7 +48,7 @@
         });
         that.closeCommentBox.on('click', function(e){
             e.preventDefault();
-            that.makeFullContent();
+            that.makeFullContentVisible();
         });
         that.postContent.scroll(function(){
             if(that.timeoutId != 0) {
@@ -83,10 +82,6 @@
         that.scrollLeftBtn.on('click', function(e){
             e.preventDefault();
             that.postContent.animate({ scrollLeft: 0 }, 1000);
-        });
-        that.scrollLastBtn.on('click', function(e){
-            e.preventDefault();
-            that.postContent.animate({ scrollLeft: that.postContent.width() }, 1000);
         });
 
         //Scroll bar:
@@ -142,27 +137,17 @@
         var that = this;
         that.expandCommentLevel = 1;
         var widthComment  = Math.floor(that.widthDetail/4);
-        that.postContent.animate({ right : (widthComment + 15) + 'px' }, 700, function(){
-            that.quickScroll.css('right', (widthComment + 15) + 'px');
-            that.postContent.getNiceScroll().resize();
-            that.postComment.find('.comment-meta').width(widthComment - 90);
-            that.postComment.width(widthComment).animate({ right: '0px' }, 400);
-        })
+        that.postComment.find('.comment-meta').width(widthComment - 90);
+        that.postComment.width(widthComment).animate({ right: '0px' }, 400);
     }
-    DetailSection.prototype.makeFullContent = function() {
+    DetailSection.prototype.makeFullContentVisible = function() {
         var that = this;
-        var widthComment = 0;
-        that.postComment.width(widthComment).animate({ right: '0px' }, 300, function(){
-            that.postContent.animate({ right : (widthComment + 15) + 'px' }, 500, function(){
-                that.quickScroll.css('right', (widthComment + 15) + 'px');
-                that.toggleComment.fadeIn(100);
-                that.toggleComment.children('a').tooltip('show');
-                setTimeout(function(){
-                    that.toggleComment.children('a').tooltip('hide');
-                }, 3000);
-                that.postContent.getNiceScroll().resize();
-            });
-        });        
+        that.postComment.width(0);
+        that.toggleComment.fadeIn(100);
+        that.toggleComment.children('a').tooltip('show');
+        setTimeout(function(){
+            that.toggleComment.children('a').tooltip('hide');
+        }, 3000); 
     }
     DetailSection.prototype.adjustSize = function() {
         var that = this;
@@ -170,21 +155,17 @@
         if(that.widthDetail - widthComment < minDetailContent){
             widthComment = that.widthDetail - minDetailContent; 
         }
-        that.postContent.animate({ right : (widthComment + 15) + 'px' }, 300, function(){
-            that.quickScroll.css('right', (widthComment + 15) + 'px');
-            that.postContent.getNiceScroll().resize();
-            that.postComment.find('.comment-meta').width(widthComment - 90);
-            that.postComment.width(widthComment).animate({ right: '0px' }, 500, function(){
-                if(that.expandCommentLevel === 1 || 
-                    that.expandCommentLevel === 2 ){
-                    that.expandComment.fadeIn(200);
-                }
-                if(that.expandCommentLevel === 2 || 
-                    that.expandCommentLevel === 3 ){
-                    that.restoreComment.fadeIn(200);
-                }
-            });            
-        });
+        that.postComment.find('.comment-meta').width(widthComment - 90);
+        that.postComment.width(widthComment).animate({ right: '0px' }, 500, function(){
+            if(that.expandCommentLevel === 1 || 
+                that.expandCommentLevel === 2 ){
+                that.expandComment.fadeIn(200);
+            }
+            if(that.expandCommentLevel === 2 || 
+                that.expandCommentLevel === 3 ){
+                that.restoreComment.fadeIn(200);
+            }
+        }); 
     }
 
     $(document).ready(function(){
