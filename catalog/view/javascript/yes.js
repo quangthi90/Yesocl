@@ -219,3 +219,78 @@ function HashTable(obj)
 
 window.yListFriends = null;
 var is_send_ajax = 0;
+
+// Language
+(function($, document, undefined) {
+    function LanguageBtn( $el ){
+        var that = this;
+        
+        this.$el   = $el;
+        this.code 			= this.$el.data('code');
+
+        this.attachEvents();
+    }
+    LanguageBtn.prototype.attachEvents = function(){
+        var that = this;
+
+        this.$el.click(function(e) {
+        	if ( that.$el.data('selected') == false ){
+	            if(that.$el.hasClass('disabled')) {
+	                e.preventDefault();
+
+	                return false;
+	            }
+
+	            that.submit(that.$el);
+
+	            return false;
+	        }
+        });
+    };
+    LanguageBtn.prototype.submit = function($button){
+        var that = this;        
+        
+        var promise = $.ajax({
+            type: 'POST',
+            url:  yRouting.generate('SetLanguage'),
+            data: {language: this.code},
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) { 
+            if(data.success == 'ok'){ 
+                window.location.reload();
+            }
+        });     
+    };
+    LanguageBtn.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var $old_icon = $el.find('i');
+        var f        = function() {
+            $spinner.remove();
+            $el.removeClass('disabled').prepend($old_icon);
+        };
+
+        $old_icon.remove();
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    $(function(){
+        $('.js-language-btn .language-item').each(function(){
+            new LanguageBtn($(this));           
+        });
+
+        $('.js-language-btn').find('.language-item').each(function(){
+        	if ( $(this).data('selected') == true ){
+        		var $img = $(this).find('img').clone();
+        		$('.js-language').find('.js-language-label img').replaceWith( $img );
+        		var text = $(this).find('span').html();
+        		$('.js-language').find('.js-language-label span').html( text );
+        	}
+        });
+    });
+}(jQuery, document));

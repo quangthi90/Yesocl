@@ -8,6 +8,7 @@ class ExtensionLoader
     private $load;
     private $registry;
     private $recentTime;
+    private $request;
 
     public function __construct(Twig_Environment $twig, $registry){
         $this->registry = $registry;
@@ -15,6 +16,7 @@ class ExtensionLoader
         $this->config = $registry->get('config');
         $this->customer = $registry->get('customer');
         $this->session = $registry->get('session');
+        $this->request = $registry->get('request');
         $this->dm = $registry->get('dm');
         $this->load = $registry->get('load');
 
@@ -50,7 +52,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_friend_list', array($this, 'getFriendList')),
             new Twig_SimpleFunction('in_array', array($this, 'inArray')),
             new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend')),
-            new Twig_SimpleFunction('date_format', array($this, 'dateFormat'))
+            new Twig_SimpleFunction('date_format', array($this, 'dateFormat')),
+            new Twig_SimpleFunction('get_cookie', array($this, 'getCookie'))
         );
     }
 
@@ -167,5 +170,9 @@ class ExtensionLoader
             return $datetime->format( $this->registry->get('language')->get('date_format_short') );
         }
         return $datetime->format( $this->registry->get('language')->get('date_format_long') );
+    }
+
+    public function getCookie( $key ){
+        return $this->request->cookie[$key];
     }
 }
