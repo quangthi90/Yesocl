@@ -17,7 +17,7 @@
           {% set language_code = get_cookie('language') %}
           <ul class="dropdown-menu js-language-btn">
             <li>
-              <a href="#" data-selected="{% if language_code == 'en_EN' %}true{% else %}false{% endif %}" data-code="en_EN" class="language-item"><img src="image/flags/england.png"> <span>English</span></a>
+              <a href="#" data-selected="{% if language_code == 'en' %}true{% else %}false{% endif %}" data-code="en" class="language-item"><img src="image/flags/england.png"> <span>English</span></a>
             </li>
             <li>
               <a href="#" data-selected="{% if language_code == 'vi_VN' or get_cookie('language') == '' %}true{% else %}false{% endif %}" data-code="vi_VN" class="language-item"><img src="image/flags/vn.png"> <span>Vietnamese</span></a>

@@ -9,9 +9,9 @@ class ControllerAjaxLanguage extends Controller {
 		}
 
 		$language = $this->request->post['language'];
-
+		
 		setcookie('language', $language, time() + 60 * 60 * 24 * 30, '/', $this->request->server['HTTP_HOST']);
-		print($this->request->cookie['language']); exit;
+		
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok'
         )));

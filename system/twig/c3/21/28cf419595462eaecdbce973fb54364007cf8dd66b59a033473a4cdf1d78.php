@@ -1,7 +1,7 @@
 <?php
 
-/* default/template/common/footer.tpl */
-class __TwigTemplate_c7a589b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da252082359 extends Twig_Template
+/* __string_template__d5a043bd06ca04fa6163be0545e1e330ce1fc13734a8f19c4be56589a4c7e83b */
+class __TwigTemplate_c32128cf419595462eaecdbce973fb54364007cf8dd66b59a033473a4cdf1d78 extends Twig_Template
 {
     public function __construct(Twig_Environment $env)
     {
@@ -35,40 +35,15 @@ class __TwigTemplate_c7a589b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da2520
             <span> </span>
             <i class=\"icon-caret-up\"></i>
           </a>
-          ";
-        // line 17
-        $context["language_code"] = call_user_func_array($this->env->getFunction('get_cookie')->getCallable(), array("language"));
-        // line 18
-        echo "          <ul class=\"dropdown-menu js-language-btn\">
+                    <ul class=\"dropdown-menu js-language-btn\">
             <li>
-              <a href=\"#\" data-selected=\"";
-        // line 20
-        if (((isset($context["language_code"]) ? $context["language_code"] : null) == "en")) {
-            echo "true";
-        } else {
-            echo "false";
-        }
-        echo "\" data-code=\"en\" class=\"language-item\"><img src=\"image/flags/england.png\"> <span>English</span></a>
+              <a href=\"#\" data-selected=\"false\" data-code=\"en\" class=\"language-item\"><img src=\"image/flags/england.png\"> <span>English</span></a>
             </li>
             <li>
-              <a href=\"#\" data-selected=\"";
-        // line 23
-        if ((((isset($context["language_code"]) ? $context["language_code"] : null) == "vi_VN") || (call_user_func_array($this->env->getFunction('get_cookie')->getCallable(), array("language")) == ""))) {
-            echo "true";
-        } else {
-            echo "false";
-        }
-        echo "\" data-code=\"vi_VN\" class=\"language-item\"><img src=\"image/flags/vn.png\"> <span>Vietnamese</span></a>
+              <a href=\"#\" data-selected=\"false\" data-code=\"vi_VN\" class=\"language-item\"><img src=\"image/flags/vn.png\"> <span>Vietnamese</span></a>
             </li>
             <li>
-              <a href=\"#\" data-selected=\"";
-        // line 26
-        if (((isset($context["language_code"]) ? $context["language_code"] : null) == "zh")) {
-            echo "true";
-        } else {
-            echo "false";
-        }
-        echo "\" data-code=\"zh\" class=\"language-item\"><img src=\"image/flags/cn.png\"> <span>Chinese</span></a>
+              <a href=\"#\" data-selected=\"false\" data-code=\"zh\" class=\"language-item\"><img src=\"image/flags/cn.png\"> <span>Chinese</span></a>
             </li>
           </ul>
         </div> 
@@ -87,12 +62,7 @@ class __TwigTemplate_c7a589b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da2520
 
     public function getTemplateName()
     {
-        return "default/template/common/footer.tpl";
-    }
-
-    public function isTraitable()
-    {
-        return false;
+        return "__string_template__d5a043bd06ca04fa6163be0545e1e330ce1fc13734a8f19c4be56589a4c7e83b";
     }
 
     public function getDebugInfo()
