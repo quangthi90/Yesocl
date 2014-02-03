@@ -78,9 +78,11 @@ $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
 
 // Multi languages
-$sLangFile = DIR_LANGUAGE . 'locale/' . $request->cookie['language'] . '/LC_MESSAGES/' . $request->cookie['language'] . '.po';
-if ( isset($request->cookie['language']) && is_file($sLangFile) ){
-	$lang = $request->cookie['language'];
+if ( isset($request->cookie['language']) ){
+	$sLangFile = DIR_LANGUAGE . 'locale/' . $request->cookie['language'] . '/LC_MESSAGES/' . $request->cookie['language'] . '.po';
+	if ( is_file($sLangFile) ){
+		$lang = $request->cookie['language'];
+	}
 }else{
 	$lang = 'vi_VN';
 	setcookie('language', $lang, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
