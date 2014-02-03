@@ -12,13 +12,13 @@
 			<li class="profile-category-li">
 				<a class="btn btn-yes profile-category-item" href="{{ path('ProfilePage', {user_slug: user.slug}) }}">
 					<i class="icon-check"></i>
-					<span{% trans %}>View your profile{% endtrans %}</span>
+					<span>{% trans %}View your profile{% endtrans %}</span>
 				</a>
 			</li>
 			<li class="profile-category-li">
 				<a class="btn btn-yes profile-category-item profile-navigation-item" href="#1">
 					<i class="icon-check"></i>
-					<span{% trans %}>Personal Information{% endtrans %}</span>
+					<span>{% trans %}Personal Information{% endtrans %}</span>
 				</a>
 			</li>
 			<li class="profile-category-li">

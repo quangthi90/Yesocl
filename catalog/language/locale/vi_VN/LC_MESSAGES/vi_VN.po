@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-01-20 15:28+0700\n"
-"PO-Revision-Date: 2014-01-20 15:39+0700\n"
+"POT-Creation-Date: 2014-02-03 17:22+0700\n"
+"PO-Revision-Date: 2014-02-03 17:22+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -22,6 +22,8 @@ msgstr "Menu chính"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:77
+#: Files\xampp\htdocs\Yesocl\system\twig/5e/7b/7de927e2ab6c166894d04c5ca22e843732c8b74a8ecea1d2e4f5b9221e7a.php:66
+#: Files\xampp\htdocs\Yesocl\system\twig/5e/7b/7de927e2ab6c166894d04c5ca22e843732c8b74a8ecea1d2e4f5b9221e7a.php:94
 msgid "What's new"
 msgstr "Tin mới"
 
@@ -159,13 +161,16 @@ msgstr "Bạn gái"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/21/4d/881f37ece0ca7392816ba3aa266fb00e12a961afda739f5b1268e2d14d8c.php:63
-msgid ">View your profile"
+#, fuzzy
+msgid "View your profile"
 msgstr "Hồ sơ của bạn"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/21/4d/881f37ece0ca7392816ba3aa266fb00e12a961afda739f5b1268e2d14d8c.php:72
-msgid ">Personal Information"
-msgstr ""
+#: Files\xampp\htdocs\Yesocl\system\twig/88/53/833ad5e50c8d6341706d53973d2629bf00353cc268562bab73e6ae9d41eb.php:67
+#: Files\xampp\htdocs\Yesocl\system\twig/ef/65/e344a0cf649fe8ffe0b0d02ae40ee7b709fb09c42eeea9c87f6031f0811e.php:39
+msgid "Personal Information"
+msgstr "Thông tin cá nhân"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/21/4d/881f37ece0ca7392816ba3aa266fb00e12a961afda739f5b1268e2d14d8c.php:90
@@ -489,12 +494,6 @@ msgid "Change avatar"
 msgstr "Thay đổi hình đại diện"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/88/53/833ad5e50c8d6341706d53973d2629bf00353cc268562bab73e6ae9d41eb.php:67
-#: Files\xampp\htdocs\Yesocl\system\twig/ef/65/e344a0cf649fe8ffe0b0d02ae40ee7b709fb09c42eeea9c87f6031f0811e.php:39
-msgid "Personal Information"
-msgstr "Thông tin cá nhân"
-
-#: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/95/15/fa306b318cd035ea2030511d2d479b4a900d8b4fea7c7c7f8b01d903ceb6.php:63
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:63
 msgid "Comment box"
@@ -664,17 +663,17 @@ msgid "Remove"
 msgstr "Xóa"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:38
+#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:37
 msgid "Notification"
 msgstr "Nhắc nhở"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:57
+#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:56
 msgid "All Notifications"
 msgstr "Tất cả ghi chú"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:68
+#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:67
 msgid "Sent Today"
 msgstr "Gửi hôm nay"
 
@@ -722,6 +721,11 @@ msgstr "Xem hồ sơ"
 #: Files\xampp\htdocs\Yesocl\system\twig/ce/ac/eb8a0ad67ff497179615062f94b325cb9b5197a06a8178aa40855b2f91fa.php:75
 msgid "Edit Profile"
 msgstr "Sửa hồ sơ"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/e3/fe/ff4faaa1f0881188361c113f6d34dd7f4a5eb316bda42f9eb50ce58f3c88.php:66
+msgid "Branch Categories Page"
+msgstr "Trang loại lĩnh vực"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/e4/94/e35ed697bb17221729cab905bcf64f4a87510498d583e512231cc0e32497.php:42
@@ -841,3 +845,11 @@ msgstr "Không tìm ra Email vừa nhập"
 #: Files\xampp\htdocs\Yesocl\system\twig/fe/20/940c3c6be4a276f1ef7ba6f0945fc1e6d00814d12ca69142e951bd1f375b.php:117
 msgid "Send again"
 msgstr "Gửi lại"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/fe/b6/ed4f4375ae989b30c249a4c2423661209a07befec7b98dc5783a92b01384.php:66
+msgid "Category Detail Page"
+msgstr "Trang chi tiết loại lĩnh vực"
+
+#~ msgid ">Personal Information"
+#~ msgstr "Thông tin cá nhân"

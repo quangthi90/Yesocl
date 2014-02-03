@@ -54,8 +54,8 @@ class ControllerCommonHeader extends Controller {
 					$this->data['users'][$actor->getId()] = $user;
 				}
 
-				$action = $this->config->get('notify')['action'][$notification->getAction() . '-' . $notification->getObject()];
-
+				$action = gettext( $this->config->get('notify')['action'][$notification->getAction() . '-' . $notification->getObject()] );
+				
 				if ( empty($aPosts[$notification->getObjectId()]) ){
 					switch ( $notification->getType() ) {
 						case $this->config->get('post')['type']['branch']:

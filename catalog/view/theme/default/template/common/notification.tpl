@@ -1,6 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% block title %}{{ users[current_user_id].username }} | {% trans %}Notification{% endtrans %} {% endblock %}
+{% block title %} {% trans %}Notification{% endtrans %} {% endblock %}
 
 {% block stylesheet %}
 {% endblock %}

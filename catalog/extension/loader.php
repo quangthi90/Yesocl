@@ -53,7 +53,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('in_array', array($this, 'inArray')),
             new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend')),
             new Twig_SimpleFunction('date_format', array($this, 'dateFormat')),
-            new Twig_SimpleFunction('get_cookie', array($this, 'getCookie'))
+            new Twig_SimpleFunction('get_cookie', array($this, 'getCookie')),
+            new Twig_SimpleFunction('trans', array($this, 'trans'))
         );
     }
 
@@ -174,5 +175,9 @@ class ExtensionLoader
 
     public function getCookie( $key ){
         return $this->request->cookie[$key];
+    }
+
+    public function trans( $message ){
+        return gettext($message);
     }
 }
