@@ -36,10 +36,12 @@
 
             return false;
         });
-        $('#comment-box').on('click', '#btn-close', function(){
+        $('#comment-box').on('click', '#btn-close', function(e){
+            e.preventDefault();
             that.hideCommentBox(that.$el);
         });        
-        $('#overlay').click(function() {
+        $('#overlay').click(function(e) {
+            e.preventDefault();
             that.hideCommentBox(that.$el);
         });
         $(document).keyup(function(e) {
@@ -200,7 +202,7 @@
         $('#overlay').hide();
         $('.post').removeClass('post-selecting');
         $button.removeClass('disabled');
-        $('#comment-box').stop().animate({"right": "-1000px" }, "slow");
+        $('#comment-box').stop().animate({"right": "-5000px" }, "slow");
         page = 1;
     }
 
