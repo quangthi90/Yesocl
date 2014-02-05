@@ -665,7 +665,7 @@ a.btn-notification:hover .notification-item-name > i {
   top: 53px;
   left: 0px;
   max-height: 500px;
-  background-color: #FFFFFF;  
+  background-color: #FFFFFF;
   border: 1px solid #ECEBEB;
   border-top: none;
   opacity: 0;
@@ -686,7 +686,7 @@ a.btn-notification:hover .notification-item-name > i {
   cursor: pointer;
 }
 .notification-content-list .notification-content-item:hover {
-  background-color: #F0F0F0;
+  background-color: #F8F8F8;
 }
 .notification-content-list .notification-content-item.read{
   opacity: 0.8;
@@ -699,6 +699,23 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .notification-content-list .notification-content-item.unread:hover{
   background-color: #F7F7F7;
+}
+.notification-content-list .notification-content-item.see-all-ntf {
+  text-align: center;  
+  font-size: 12px;
+  font-weight: bold;
+}
+.notification-content-list .notification-content-item.see-all-ntf:hover {
+  background-color: #FCFCFC;  
+}
+.notification-content-list .notification-content-item.see-all-ntf:hover a {
+  color: #009B77;
+}
+.notification-content-list .notification-content-item.empty-ntf {
+  padding-left: 15px;
+}
+.notification-content-list .notification-content-item.empty-ntf:hover {
+  background-color: #FFFFFF;
 }
 .notification-content-list .notification-content-item:last-child {
   border-bottom: none;

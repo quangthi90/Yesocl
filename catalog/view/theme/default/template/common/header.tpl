@@ -91,6 +91,15 @@
                   </div>
               </li>
               {% endfor %}
+              {% if notifications|length > 0 %}
+                <li class="notification-content-item see-all-ntf">
+                  <a href="#">See all notifications</a>
+                </li>
+              {% else %}
+                <li class="notification-content-item empty-ntf">
+                  No notifications to show
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>
