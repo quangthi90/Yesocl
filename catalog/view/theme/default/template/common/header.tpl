@@ -93,7 +93,7 @@
               {% endfor %}
               {% if notifications|length > 0 %}
                 <li class="notification-content-item see-all-ntf">
-                  <a href="#">See all notifications</a>
+                  <a href="{{ path('NotificationPage') }}">{% trans %}See all notifications{% endtrans %}</a>
                 </li>
               {% else %}
                 <li class="notification-content-item empty-ntf">
