@@ -747,6 +747,9 @@ a.btn-notification:hover .notification-item-name > i {
   width: 185px;
   float: left;
 }
+.notification-content-item .notification-content-item-detail  .notification-text img {
+  display: none;
+}
 .notification-content-item .notification-content-item-detail  .notification-text a {
   font-weight: bold;
   font-size: 12px;
@@ -797,6 +800,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .notification-page .ntf-container {
   padding: 10px;
+  margin-right: 20px;
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #fff;
@@ -818,13 +822,18 @@ a.btn-notification:hover .notification-item-name > i {
   font-weight: bold;
   border-bottom: 1px solid #ddd;
   margin-bottom: 5px;
+  padding-bottom: 5px;
   font-size: 18px;
   color: #009B77;
 }
 .ntf-list .ntf-item {
-  padding: 5px 5px;
+  padding: 5px 30px 5px 0px;
   margin-bottom: 10px;
   border-bottom: 1px dotted #f0f0f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
 }
 .ntf-list .ntf-item > i {
   font-size: 16px;
@@ -833,16 +842,19 @@ a.btn-notification:hover .notification-item-name > i {
 .ntf-list .ntf-item:hover i {
   color: #009B77;
 }
-.ntf-item .ntf-content {
-  
+.ntf-item .ntf-content {  
+}
+.ntf-item .ntf-content img {
+  display: none;
 }
 .ntf-item .ntf-content a {
-
 }
 .ntf-item .ntf-time {
-  font-size: 10px;
+  font-size: 11px;
   margin-left: 10px;
   color: #363636;
+  position: absolute;
+  right: 2px;
 }
 
 /* MESSAGE NOTIFICATION */
