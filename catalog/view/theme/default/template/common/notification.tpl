@@ -18,71 +18,17 @@
             <div class="block-content">               
                <div class="ntf-container">
                    <ul class="ntf-list">
-                        <li class="ntf-date">{% trans %}Sent Today{% endtrans %}</li>
-                        {% for i in 0..10 %}
-                       <li class="ntf-item">
-                           <i class="icon-thumbs-up-alt"></i>
-                           <span class="ntf-content">Nguyen Van A likes your comment: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       <li class="ntf-item">
-                           <i class="icon-comments"></i>
-                           <span class="ntf-content">Nguyen Van A commments on your status: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       {% endfor %}
-                       <li class="ntf-date">Sent Yesterday</li>
-                        {% for i in 0..10 %}
-                       <li class="ntf-item">
-                           <i class="icon-thumbs-up-alt"></i>
-                           <span class="ntf-content">Nguyen Van A likes your comment: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       <li class="ntf-item">
-                           <i class="icon-comments"></i>
-                           <span class="ntf-content">Nguyen Van A commments on your status: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       {% endfor %}
-                       <li class="ntf-date">Sent December 09</li>
-                        {% for i in 0..10 %}
-                       <li class="ntf-item">
-                           <i class="icon-thumbs-up-alt"></i>
-                           <span class="ntf-content">Nguyen Van A likes your comment: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       <li class="ntf-item">
-                           <i class="icon-comments"></i>
-                           <span class="ntf-content">Nguyen Van A commments on your status: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       {% endfor %}
-                       <li class="ntf-date">Sent December 08</li>
-                        {% for i in 0..10 %}
-                       <li class="ntf-item">
-                           <i class="icon-thumbs-up-alt"></i>
-                           <span class="ntf-content">Nguyen Van A likes your comment: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       <li class="ntf-item">
-                           <i class="icon-comments"></i>
-                           <span class="ntf-content">Nguyen Van A commments on your status: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       {% endfor %}
-                       <li class="ntf-date">Sent December 07</li>
-                        {% for i in 0..10 %}
-                       <li class="ntf-item">
-                           <i class="icon-thumbs-up-alt"></i>
-                           <span class="ntf-content">Nguyen Van A likes your comment: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       <li class="ntf-item">
-                           <i class="icon-comments"></i>
-                           <span class="ntf-content">Nguyen Van A commments on your status: "^^"</span>
-                           <span class="ntf-time">23:59</span>
-                       </li>
-                       {% endfor %}
+                    {% for time, notis in notifications %}
+                      <li class="ntf-date">{% trans %}Sent{% endtrans %} {{ times[time] }}</li>
+                      {% for noti in notis %}
+                        {% set user = users[noti['actor_id']] %}
+                      <li class="ntf-item">
+                        <i class="icon-thumbs-up-alt"></i>
+                        <span class="ntf-content">{{ user.username }} {{ noti.action }} "{{ noti.title|raw }}"</span>
+                        <span class="ntf-time">{{ noti.created|date('H:i') }}</span>
+                      </li>
+                      {% endfor %}
+                    {% endfor %}
                    </ul>
                </div>               
             </div>

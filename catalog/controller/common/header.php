@@ -38,13 +38,13 @@ class ControllerCommonHeader extends Controller {
 			$aExpireNotiIds = array();
 			$aPosts = array();
 			for ( $i = $iNotiCount - 1; $i >= 0; $i-- ) {
-				$notification = $aNotifications[$i];
-				if ( $notification->getCreated() < $expire_time ){
-					$aExpireNotiIds[] = $notification->getId();
+				$oNotification = $aNotifications[$i];
+				if ( $oNotification->getCreated() < $expire_time ){
+					$aExpireNotiIds[] = $oNotification->getId();
 					continue;
 				}
 
-				$actor = $notification->getActor();
+				$actor = $oNotification->getActor();
 
 				if ( !array_key_exists($actor->getId(), $users) ){
 					$user = $actor->formatToCache();
@@ -54,18 +54,16 @@ class ControllerCommonHeader extends Controller {
 					$this->data['users'][$actor->getId()] = $user;
 				}
 
-				$action = gettext( $this->config->get('notify')['action'][$notification->getAction() . '-' . $notification->getObject()] );
+				$action = gettext( $this->config->get('notify')['action'][$oNotification->getAction() . '-' . $oNotification->getObject()] );
 				
-				if ( empty($aPosts[$notification->getObjectId()]) ){
-					switch ( $notification->getType() ) {
+				if ( empty($aPosts[$oNotification->getObjectId()]) ){
+					switch ( $oNotification->getType() ) {
 						case $this->config->get('post')['type']['branch']:
-			                $this->load->model('branch/post');
-			                $oPost = $this->model_branch_post->getPostBySlug( $notification->getSlug() );
+			                $oPost = $this->model_branch_post->getPostBySlug( $oNotification->getSlug() );
 			                break;
 
 			            case $this->config->get('post')['type']['user']:
-			                $this->load->model('user/post');
-			                $oPost = $this->model_user_post->getPostBySlug( $notification->getSlug() );
+			                $oPost = $this->model_user_post->getPostBySlug( $oNotification->getSlug() );
 			                break;
 			            
 			            default:
@@ -73,18 +71,18 @@ class ControllerCommonHeader extends Controller {
 			                break;
 					}
 				}else{
-					$oPost = $aPosts[$notification->getSlug()];
+					$oPost = $aPosts[$oNotification->getSlug()];
 				}
 				
 				if ( $oPost ){
-					if ( $notification->getRead() == false ){
+					if ( $oNotification->getRead() == false ){
 						$this->data['notification_count']++;
 					}
 				
 					$aPosts[$oPost->getSlug()] = $oPost;
 
-					if ( $notification->getObjectId() != $oPost->getId() ){
-						$oComment = $oPost->getCommentById( $notification->getObjectId() );
+					if ( $oNotification->getObjectId() != $oPost->getId() ){
+						$oComment = $oPost->getCommentById( $oNotification->getObjectId() );
 						$sTitle = html_entity_decode($oComment->getContent());
 					}else{
 						if ( $oPost->getTitle() == null ){
@@ -97,11 +95,11 @@ class ControllerCommonHeader extends Controller {
 					$this->data['notifications'][] = array(
 						'actor_id' 	=> $actor->getId(),
 						'action' 	=> $action,
-						'object_id' => $notification->getObjectId(),
-						'created' 	=> $notification->getCreated(),
-						'slug'		=> $notification->getSlug(),
-						'type'		=> $notification->getType(),
-						'read'		=> $notification->getRead(),
+						'object_id' => $oNotification->getObjectId(),
+						'created' 	=> $oNotification->getCreated(),
+						'slug'		=> $oNotification->getSlug(),
+						'type'		=> $oNotification->getType(),
+						'read'		=> $oNotification->getRead(),
 						'title'		=> $sTitle
 					);
 				}
