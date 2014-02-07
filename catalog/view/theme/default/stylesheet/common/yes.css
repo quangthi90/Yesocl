@@ -827,7 +827,7 @@ a.btn-notification:hover .notification-item-name > i {
   color: #009B77;
 }
 .ntf-list .ntf-item {
-  padding: 5px 30px 5px 0px;
+  padding: 5px 30px 10px 0px;
   margin-bottom: 10px;
   border-bottom: 1px dotted #f0f0f0;
   white-space: nowrap;
