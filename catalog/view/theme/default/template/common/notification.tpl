@@ -16,7 +16,7 @@
                 </a>
             </div>
             <div class="block-content">               
-               <div class="ntf-container">
+               <div class="ntf-container" style="opacity: 0;">
                    <ul class="ntf-list">
                     {% for time, notis in notifications %}
                       <li class="ntf-date">{% trans %}Sent{% endtrans %} {{ times[time] }}</li>
@@ -26,7 +26,7 @@
                         <i class="icon-thumbs-up-alt"></i>
                         <span class="ntf-content">{{ user.username }} {{ noti.action }} "{{ noti.title|raw }}"</span>
                         <span class="ntf-time">{{ noti.created|date('H:i') }}</span>
-                      </li>
+                      </li>                      
                       {% endfor %}
                     {% endfor %}
                    </ul>
