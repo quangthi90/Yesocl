@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div class="post_body">
-			{% if post.title is not defined %}
+			{% if post.title != null %}
 			<h4 class="post_title">
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
