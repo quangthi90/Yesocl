@@ -584,7 +584,11 @@ var yCurrUser = new CurrentUser();
 			var heightBlockContent = this.heightMain - 42;
 			this.root.find('.block-content').height(heightBlockContent - 5);			
 			var ntfContainer = this.root.find('.ntf-container');
-			ntfContainer.height(heightBlockContent - 5 - 20).niceScroll();
+			ntfContainer.height(heightBlockContent - 5 - 20);
+			ntfContainer.css('opacity', '1');
+			setTimeout(function(){				
+				ntfContainer.niceScroll();
+			}, 200);	
 		}
 		
 	}
