@@ -63,8 +63,8 @@
                            <a href="#" data-mfp-src="#new-message-form" class="btn btn-yes tool-item link-popup">
                            		<i class="icon-plus-sign"></i> {% trans %}New Message{% endtrans %}
                            	</a>
-                           <ul class="dropdown-menu">
-                                <li>
+                            <ul class="dropdown-menu">
+                                <li class="btn-remove-mess-user">
                                     <a href="#"><i class="icon-remove"></i> {% trans %}Remove{% endtrans %}</a>
                                 </li>
                             </ul>
@@ -107,6 +107,37 @@
 $(document).ready(function() {
     $(document).bind('LOAD_ROUTING_COMPLETE', function(e) {
         $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+    });
+
+    $('.btn-remove-mess-user').on('click', function(e){
+        e.preventDefault();
+
+        bootbox.dialog({
+            title: "Confirm",
+            message: "{% trans %}Are you sure to delete this list message of current user{% endtrans %} ?",
+            buttons: 
+            {
+                cancel: {
+                    label: "{% trans %}Cancel{% endtrans %}",
+                    className: "btn",
+                    callback: function() {
+                    }
+                },
+                oke: {
+                    label: "{% trans %}OK{% endtrans %}",
+                    className: "btn-primary",
+                    callback: function() {
+                        $('.js-mess-user-list').find('.js-mess-user-item.active').remove();
+                        if ( $('.js-mess-user-list').find('.js-mess-user-item').length == 0 ){
+                            $('.js-mess-username').html('');
+                            $('.js-mess-list-content').html('');
+                        }else{
+                            $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+                        }
+                    }
+                }
+            }
+        });
     });
 });
 </script>
