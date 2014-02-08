@@ -6,7 +6,7 @@
 
 {% block body %}
     <div id="y-content">
-        <div id="y-main-content" class="has-horizontal account-friend" style="width: 9999px;">
+        <div id="y-main-content"  data-block-width="400" data-block-height="130" class="has-horizontal block-auto-floatleft full-width" style="width: 9999px;">
             <div class="feed-block">
                 <div class="block-header">
                     <a class="block-title fl" href="#">My Branches</a>  
@@ -15,18 +15,20 @@
                     </a>
                 </div>
                 <div class="block-content user-container">
-                    <div class="block-content-item">
-                        <a href="#" class="fl friend-img">
-                            <img src="{{ friend.avatar }}">
+                    {% for i in 0..20 %}
+                    <div class="block-content-item branch-item">
+                        <a href="#" class="fl branch-img">
+                            <img src="http://www.img.lx.it.pt/iwbf2013/images/it_logo.jpg" alt="IT">
                         </a>
-                        <div class="fl friend-info">
-                            <a href="#" class="friend-name">Technology</a>
-                            <ul class="friend-infolist">
-                                <li>1000 posts</li>
-                                <li>100 members</li>                            
+                        <div class="fl branch-info">
+                            <a href="#" class="branch-name">Technology</a>
+                            <ul class="branch-infolist">
+                                <li><i class="icon-group"></i> <span class="count-number">100</span> members</li>
+                                <li><i class="icon-pencil"></i> <span class="count-number">1000</span> posts</li>                    
                             </ul>
                         </div>
-                    </div>          
+                    </div>                  
+                    {% endfor %}
                 </div>
             </div>     
         </div>

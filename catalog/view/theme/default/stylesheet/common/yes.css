@@ -2343,6 +2343,7 @@ ul.user_actions li:hover i{
   width: 300px;
   box-shadow: 1px 2px 4px -1px #ccc;
   cursor: default;
+  overflow: hidden;
 }
 .friend-item .friend-img {
   display: block;
@@ -2357,6 +2358,13 @@ ul.user_actions li:hover i{
   font-size: 15px;
   font-weight: bold;  
   white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #414141;
+}
+.friend-item .friend-info .friend-name:hover {
+  color: #000;
 }
 .friend-item .friend-infolist {
   margin-top: 5px;
@@ -2388,6 +2396,85 @@ ul.user_actions li:hover i{
   font-size: 14px;
 }
 /* ------------------------------------- END FRIEND ------------------------------------------ */
+
+/* ------------------------------------- START MY_BRANCH-------------------------------------- */
+.branch-item {
+  float: left;  
+  position: relative;
+  background-color: #FFF;
+  padding: 0px;
+  margin: 0px 10px 10px 0px;
+  width: 400px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+  cursor: default;
+  overflow: hidden;
+}
+.branch-item .branch-img {
+  display: block;
+  height: 130px;
+  width: 130px;
+}
+.branch-item .branch-info {
+  margin-left: 15px;
+  margin-top: 15px;
+  width: 250px;
+  overflow: hidden;
+}
+.branch-item .branch-info .branch-name {
+  font-size: 16px;
+  font-weight: bold;  
+  color: #414141;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  display: block;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 5px;
+}
+.branch-item .branch-info .branch-name:hover {
+  color: #000;
+}
+.branch-item .branch-infolist {
+  margin-top: 20px;
+}
+.branch-item .branch-infolist li {
+  font-size: 13px;
+  color: #515151; 
+  white-space: nowrap;       
+  margin-bottom: 2px;
+}
+.branch-item .branch-infolist li > i {
+    font-size: 13px;
+    color: #555555;
+    margin-right: 5px;
+}
+.branch-item .branch-infolist li > span.count-number {
+  font-weight: bold;
+  font-size: 12px;
+}
+.branch-item .branch-actions {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  display: none;
+}
+.branch-item:hover .branch-actions {
+  display: block;
+}
+.branch-item .branch-actions .btn {  
+  font-size: 11px; 
+  padding: 3px 8px;
+  display: block;
+  text-align: left;
+}
+.branch-item .branch-actions .btn i {  
+  color: #FFF; 
+  float: left;
+  margin: 3px 10px 4px 0px;
+  font-size: 14px;
+}
+/* ------------------------------------- END MY_BRANCH --------------------------------------- */
 
 /* ------------------------------------ START SEARCH RESULT ------------------------------------ */
 .tt-dropdown-menu {

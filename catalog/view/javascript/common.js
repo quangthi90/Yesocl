@@ -382,14 +382,12 @@ var yCurrUser = new CurrentUser();
 	var minFirstColumn = 450;
 	var minPostWidth = 400;
 	var minPostStatusWidth = 420;
-	var marginFriendBlockItem = 10;
-	var widthFriendBlockItem = 320;
-	var heightFriendBlockItem = 85;
+	var marginFriendBlockItem = 10;	
 	var maxHeightBlock = 450;
 	var df_POST_HAS_BLOCK = 'post-has-block';
 	var df_POST_PER_COLUMN = 'post-per-column';
 	var df_CATEGORY_SINGLE = 'post-category';
-	var df_FRIEND_ACCOUNT = 'account-friend';
+	var df_FRIEND_ACCOUNT = 'block-auto-floatleft';
 	var df_SEARCH_PAGE 	= 'search-page';
 	var df_NOTIFICATION_PAGE 	= 'notification-page';
 
@@ -539,9 +537,11 @@ var yCurrUser = new CurrentUser();
 			this.rootContent.niceScroll();
 		}
 		else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
+			var widthBlockItem = parseInt(this.root.data('block-width'));
+			var heightBlockItem = parseInt(this.root.data('block-height'));
 			var heightBlockContent = this.heightMain - 42;
 			var totalWidth = 0;
-			var numberRow = Math.floor(heightBlockContent/(heightFriendBlockItem + marginFriendBlockItem));
+			var numberRow = Math.floor(heightBlockContent/(heightBlockItem + marginFriendBlockItem));
 			var listBlockItem = this.root.find('.block-content-item');
 			if(listBlockItem.length == 0) {
 				this.root.css('min-width', '500px');
@@ -550,12 +550,16 @@ var yCurrUser = new CurrentUser();
 				var blockContent = this.root.find('.feed-block');
 				var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
 				if(freeBlock.length === 0){
-					this.root.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));	
+					this.root.width(numberCol*(widthBlockItem + marginFriendBlockItem));	
 				}else{
-					blockContent.width(numberCol*(widthFriendBlockItem + marginFriendBlockItem));
-					this.root.width(freeBlock.width() + 60 + numberCol*(widthFriendBlockItem + marginFriendBlockItem));	
+					blockContent.width(numberCol*(widthBlockItem + marginFriendBlockItem));
+					this.root.width(freeBlock.width() + 60 + numberCol*(widthBlockItem + marginFriendBlockItem));	
 				}
-				this.rootContent.css('right','220px');
+				if(this.root.hasClass('full-width')){
+					this.rootContent.css('right','0px');
+				}else {
+					this.rootContent.css('right','220px');
+				}
 				listBlockItem.css('opacity','1');
 			}
 			this.rootContent.niceScroll();
