@@ -2409,6 +2409,19 @@ ul.user_actions li:hover i{
   cursor: default;
   overflow: hidden;
 }
+.branch-item .yes-dropdown {
+  display: none;
+}
+.branch-item .yes-dropdown a.dropdown-toggle {
+  padding: 3px;
+  background-color: #f0f0f0;
+  width: 15px;
+  display: block;
+  text-align: center;
+}
+.branch-item:hover .yes-dropdown {
+  display: block;
+}
 .branch-item .branch-img {
   display: block;
   height: 130px;

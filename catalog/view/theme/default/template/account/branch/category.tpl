@@ -27,6 +27,17 @@
                                 <li><i class="icon-pencil"></i> <span class="count-number">1000</span> posts</li>                    
                             </ul>
                         </div>
+                        <div class="yes-dropdown">
+                            <div class="dropdown">
+                               <a class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-caret-down"></i>
+                               </a>
+                               <ul class="dropdown-menu">
+                                    <li><a href="#">Leave branch</a></li>
+                                    <li><a href="#">...</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>                  
                     {% endfor %}
                 </div>
