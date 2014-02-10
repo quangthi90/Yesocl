@@ -160,5 +160,38 @@ class ModelFriendMessage extends Model {
 
 		return $oMessages;
 	}
+
+	/**
+	 * Delete all message by user
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	- Object MongoID Current User
+	 * 	- Object MongoID Object User
+	 * @return: boolean
+	 */
+	public function deleteUserMessages( $idCurrUser, $idObjectUser ){
+		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
+			'user.id' => $idCurrUser
+		));
+
+		if ( !$oMessages ){
+			return false;
+		}
+		
+		$lMessages = $oMessages->getMessages();
+
+		foreach ( $lMessages as $oMessage ) { 
+			if ( $idObjectUser == $oMessage->getObject()->getId() ){
+				$lMessages->removeElement( $oMessage );
+			}
+		}
+
+		$oMessage = $oMessages->getLastMessageByUserId( $idObjectUser );
+		$oMessages->getLastMessages()->removeElement( $oMessage );
+
+		$this->dm->flush();
+
+		return true;
+	}
 }
 ?>

@@ -218,12 +218,12 @@ class ControllerPostComment extends Controller {
         switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $bResult = $this->model_branch_comment->deleteComment( $aDatas['comment_id'], $aDatas );
+                $bResult = $this->model_branch_comment->deleteComment( $aDatas['comment_id'], $this->customer->getId() );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $bResult = $this->model_user_comment->deleteComment( $aDatas['comment_id'], $aDatas );
+                $bResult = $this->model_user_comment->deleteComment( $aDatas['comment_id'], $aDatas, $this->customer->getId() );
                 break;
             
             default:
@@ -233,7 +233,7 @@ class ControllerPostComment extends Controller {
         
         if ( !$bResult ){
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: delete comment have error'
+                'success' => 'not ok: you not have authentication for this comment'
             )));
         }
 

@@ -84,6 +84,8 @@ $_['routing']['MessagePage']					= 'message/page/';
 $_['routing']['MessageSend']					= 'message/send/';
 $_['routing']['MessageGetList']					= 'message/get-list/{user_slug}/';
 $_['routing']['MessageGetLast']					= 'message/get-last/';
+$_['routing']['MessageDeleteAll']				= 'message/delete/all/{user_slug}/';
+$_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 
 // Ajax
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';

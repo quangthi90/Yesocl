@@ -114,7 +114,7 @@ $(document).ready(function() {
 
         bootbox.dialog({
             title: "Confirm",
-            message: "{% trans %}Are you sure to delete this list message of current user{% endtrans %} ?",
+            message: "{% trans %}Are you sure to delete all messages of current user{% endtrans %} ?",
             buttons: 
             {
                 cancel: {
@@ -127,13 +127,21 @@ $(document).ready(function() {
                     label: "{% trans %}OK{% endtrans %}",
                     className: "btn-primary",
                     callback: function() {
-                        $('.js-mess-user-list').find('.js-mess-user-item.active').remove();
+                        var curr_user = $('.js-mess-user-list').find('.js-mess-user-item.active');
+                        var user_slug = curr_user.data('user-slug');
+                        curr_user.remove();
                         if ( $('.js-mess-user-list').find('.js-mess-user-item').length == 0 ){
                             $('.js-mess-username').html('');
                             $('.js-mess-list-content').html('');
                         }else{
                             $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
                         }
+
+                        $.ajax({
+                            type: 'POST',
+                            url:  yRouting.generate('MessageDeleteAll', {user_slug: user_slug}),
+                            dataType: 'json'
+                        });
                     }
                 }
             }
