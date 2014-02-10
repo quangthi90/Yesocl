@@ -43,6 +43,9 @@ Class Post {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="posts") */
     private $user;
 
+    /** @MongoDB\String */
+	private $ownerId;
+
 	/** @MongoDB\EmbedMany(targetDocument="Document\AbsObject\Comment") */
 	private $comments = array();
 
@@ -105,7 +108,8 @@ Class Post {
 			'like_count'	=> count($this->getLikerIds()),
 			'liker_ids'		=> $this->getLikerIds(),
 			'like_count'	=> count($this->getLikerIds()),
-			'count_viewer'	=> $this->getCountViewer()
+			'count_viewer'	=> $this->getCountViewer(),
+			'owner_id' 		=> $this->getOwnerId()
 		);
 
 		return $post_data;
@@ -251,5 +255,13 @@ Class Post {
 
 	public function getCountViewer(){
 		return $this->countViewer;
+	}
+
+	public function setOwnerId( $ownerId ){
+		$this->ownerId = $ownerId;
+	}
+
+	public function getOwnerId(){
+		return $this->ownerId;
 	}
 }
