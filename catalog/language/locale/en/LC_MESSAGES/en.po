@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-11 01:42+0700\n"
-"PO-Revision-Date: 2014-02-11 01:42+0700\n"
+"POT-Creation-Date: 2014-02-11 01:50+0700\n"
+"PO-Revision-Date: 2014-02-11 01:50+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -96,25 +96,25 @@ msgstr ""
 #: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:149
 #: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:145
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:175
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:218
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:376
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:221
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:379
 msgid "Unlike"
 msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/19/45/909c69b30cfae2d1a12b5920b76c4cd793f063d583cbd5ac461e77229db1.php:72
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:185
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:226
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:383
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:229
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:386
 msgid "Edit"
 msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/19/45/909c69b30cfae2d1a12b5920b76c4cd793f063d583cbd5ac461e77229db1.php:85
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:192
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:233
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:390
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:571
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:236
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:393
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:574
 msgid "Delete"
 msgstr ""
 
@@ -205,7 +205,7 @@ msgstr ""
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:137
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:136
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:193
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:196
 msgid "Like"
 msgstr ""
 
@@ -231,7 +231,7 @@ msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/37/d9/d193f85a23067d0a81db7847b73c9f69f6bdf2bcfcac6459affceb207e87.php:154
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:323
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:326
 msgid "Title"
 msgstr ""
 
@@ -258,8 +258,8 @@ msgstr ""
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:210
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:144
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:198
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:433
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:201
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:436
 msgid "Liked"
 msgstr ""
 
@@ -314,8 +314,8 @@ msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/4b/36/0568ae994a316ac392123b1d9ba1da4e72b0deb2c038f03351678af8e8d1.php:67
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:138
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:318
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:141
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:321
 msgid "Warning"
 msgstr ""
 
@@ -443,9 +443,9 @@ msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/51/d1/76801d02936bb703169a14771e4807232b26ffc7b993c6eaf0e5bd2972f9.php:88
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:97
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:153
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:343
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:100
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:156
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:346
 msgid "Submit"
 msgstr ""
 
@@ -517,86 +517,91 @@ msgid "Post"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:101
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:91
+msgid "Your comment"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:104
 msgid "Press Enter to send"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:131
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:134
 msgid "Advanced comment"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:143
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:146
 msgid "Comment"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:274
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:277
 msgid "New post"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:280
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:283
 msgid "Edit post"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:290
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:293
 msgid "Choose an image for new post"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:296
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:299
 msgid "Drag an image here"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:306
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:309
 msgid "Choose image"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:333
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:518
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:336
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:521
 msgid "Content"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:347
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:350
 msgid "Reset"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:460
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:463
 msgid "See more"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:500
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:503
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:199
 msgid "New Message"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:507
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:510
 msgid "Send to"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:522
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:525
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:224
 msgid "Write a message"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:530
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:533
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:229
 msgid "Send"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:535
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:538
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:234
 msgid "Press enter to send"
 msgstr ""
