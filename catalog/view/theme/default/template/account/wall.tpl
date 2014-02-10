@@ -47,10 +47,6 @@
     </div>
 {% endblock %}
 
-{% block template %}
-    {{ block('post_common_post_status_wall_html_template') }}
-{% endblock %}
-
 {% block javascript %}
 <script type="text/javascript">
 $(function(){
