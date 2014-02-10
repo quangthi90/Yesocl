@@ -2,7 +2,7 @@
 	{% block common_html_block_comment_quick_form %}
 		<form class="y-comment-reply post post_new comment-form" id="comment-form"{% if add_comment_url is defined %} data-url="{{ add_comment_url }}"{% endif %}>
 			<div class="txt_editor">
-				<textarea class="post_input mention" placeholder="Your comment ..."></textarea>
+				<textarea class="post_input mention" placeholder="{% trans %}Your comment{% endtrans %} ..."></textarea>
 			</div>
 			<div class="comment-action"> 
 				<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-add-popup" href="#" title="Advance comment">
