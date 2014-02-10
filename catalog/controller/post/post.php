@@ -33,10 +33,10 @@ class ControllerPostPost extends Controller {
                 )));
             }
 
-            $oUser = $oPost->getUser()->formatToCache();
+            $aAuthor = $oPost->getUser()->formatToCache();
 
             // avatar
-            $sAvatar = $this->model_tool_image->getAvatarUser( $oUser['avatar'], $oUser['email'] );
+            $sAvatar = $this->model_tool_image->getAvatarUser( $aAuthor['avatar'], $aAuthor['email'] );
 
             // thumb
             $aThumb = $oPost->getThumb();
@@ -58,7 +58,7 @@ class ControllerPostPost extends Controller {
                 'comment_add' => $this->extension->path( "CommentAdd", $aData_post_infos ),
                 'post_like' => $this->extension->path( "PostLike", $aData_post_infos ),
                 'post_detail' => $this->extension->path( "PostPage", $aData_post_infos ),
-                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $oUser['slug']) ),
+                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $aAuthor['slug']) ),
                 'post_get_liked' => $this->extension->path( "PostGetLiker", $aData_post_infos ),
                 'delete' => $this->extension->path( "PostDelete", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) ),
                 'edit' => $this->extension->path( "PostEdit", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) )
@@ -78,8 +78,22 @@ class ControllerPostPost extends Controller {
                     'content' => html_entity_decode($oPost->getContent()),
                     'see_more' => $bIsSeeMore
                 ),
-                'href' => $aHref
+                'href' => $aHref,
+                'is_owner' => true
             );
+
+            if ( $aAuthor['id'] != $oPost->getOwnerId() ){
+                $this->load->model('user/user');
+
+                $aOwner = $this->model_user_user->getUser( $this->request->get['user_slug'] );
+                if ( $aOwner ){
+                    $aReturnData['is_owner'] = false;
+                    $aReturnData['owner'] = array(
+                        'username' => $aOwner['username'],
+                        'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
+                    );
+                }
+            }
 
             // Add notification
             $this->load->model('user/notification');
