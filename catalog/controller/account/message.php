@@ -167,5 +167,36 @@ class ControllerAccountMessage extends Controller {
             'messages' => $aMessages
         )));
 	}
+
+	public function deleteUserMessages(){
+		if ( empty($this->request->get['user_slug']) ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: user slug is empty',
+	        )));
+		}
+
+		$this->load->model('friend/message');
+		$this->load->model('user/user');
+
+		$aObjectUser = $this->model_user_user->getUser( $this->request->get['user_slug'] );
+
+		if ( !$aObjectUser ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: user not found with user slug: ' . $this->request->get['user_slug'],
+	        )));
+		}
+
+		$result = $this->model_friend_message->deleteUserMessages( $this->customer->getId(), $aObjectUser['id'] );
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: you not have authentication',
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+        )));
+	}
 }
 ?>

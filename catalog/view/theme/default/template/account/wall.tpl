@@ -6,7 +6,7 @@
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 
-{% block title %}{{ user_info.username }} | {% trans %}Wall Page{% endtrans %}{% endblock %}
+{% block title %}{{ users[current_user_id].username }} | {% trans %}Wall Page{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
     {{ block('post_common_comment_post_list_style') }}
@@ -45,10 +45,6 @@
             {{ block('post_common_comment_post_list') }}
         </div>
     </div>
-{% endblock %}
-
-{% block template %}
-    {{ block('post_common_post_status_wall_html_template') }}
 {% endblock %}
 
 {% block javascript %}

@@ -86,6 +86,8 @@ $_['route']['MessagePage']					= 'account/message';
 $_['route']['MessageSend']					= 'account/message/send/';
 $_['route']['MessageGetList']				= 'account/message/getMessageListByUser/';
 $_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
+$_['route']['MessageDeleteAll']				= 'account/message/deleteUserMessages/';
+$_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 
 // Ajax
 $_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';

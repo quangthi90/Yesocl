@@ -165,7 +165,7 @@ class ModelUserComment extends Model {
 		return $comment;
 	}
 
-	public function deleteComment( $comment_id, $data = array() ){
+	public function deleteComment( $comment_id, $data = array(), $author_id ){
 		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
 			'posts.comments.id' => $comment_id
 		));
@@ -186,7 +186,7 @@ class ModelUserComment extends Model {
 
 		$comment = $post->getCommentById( $comment_id );
 		
-		if ( $comment->getUser()->getId() != $this->customer->getId() ){
+		if ( $comment->getUser()->getId() != $author_id ){
 			return false;
 		}
 
