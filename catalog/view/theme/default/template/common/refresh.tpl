@@ -37,6 +37,10 @@
 {{ block('post_common_comment_post_list') }}
 {% endblock %}
 
+{% block template %}
+    {{ block('post_common_comment_post_list_template') }}
+{% endblock %}
+
 {% block javascript %}
 {{ block('post_common_comment_post_list_javascript') }}
 <script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>

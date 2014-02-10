@@ -27,7 +27,7 @@
 	</div>
 {% endblock %}
 
-{% block template %}
+{% block post_common_comment_post_list_template %}
 	{{ block('common_html_block_comment_advance_form') }}
 	{% set advance_comment_id = 'comment-advance-edit-popup' %}
 	{{ block('common_html_block_comment_advance_form') }}

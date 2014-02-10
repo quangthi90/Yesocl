@@ -84,6 +84,10 @@
 </div>
 {% endblock %}
 
+{% block template %}
+    {{ block('post_common_comment_post_detail_template') }}
+{% endblock %}
+
 {% block javascript %}
 <script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
 {{ block('post_common_comment_post_detail_javascript') }}
