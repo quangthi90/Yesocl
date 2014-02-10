@@ -8,7 +8,7 @@
 				<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-add-popup" href="#" title="Advance comment">
 					<i class="icon-external-link"></i>
 				</a>
-				<a href="#" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
+				<a href="#" class="btn btn-yes fr btn-comment">{% trans %}Submit{% endtrans %}</a>	
 	            <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
 	            	<input type="checkbox" class="cb-press-enter" />
 	            </div>
@@ -37,7 +37,7 @@
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-			                <a href="#" class="btn btn-yes btn-post-advance">{% trans %}Post{% endtrans %}</a>
+			                <a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
 			            </div>
 				    </div>		
 				</form>
@@ -160,7 +160,7 @@
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Post{% endtrans %}</a>
+				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
 				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-03 17:22+0700\n"
-"PO-Revision-Date: 2014-02-03 17:22+0700\n"
+"POT-Creation-Date: 2014-02-11 01:40+0700\n"
+"PO-Revision-Date: 2014-02-11 01:42+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -22,8 +22,8 @@ msgstr "Menu chính"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:77
-#: Files\xampp\htdocs\Yesocl\system\twig/5e/7b/7de927e2ab6c166894d04c5ca22e843732c8b74a8ecea1d2e4f5b9221e7a.php:66
-#: Files\xampp\htdocs\Yesocl\system\twig/5e/7b/7de927e2ab6c166894d04c5ca22e843732c8b74a8ecea1d2e4f5b9221e7a.php:94
+#: Files\xampp\htdocs\Yesocl\system\twig/5e/7b/7de927e2ab6c166894d04c5ca22e843732c8b74a8ecea1d2e4f5b9221e7a.php:67
+#: Files\xampp\htdocs\Yesocl\system\twig/5e/7b/7de927e2ab6c166894d04c5ca22e843732c8b74a8ecea1d2e4f5b9221e7a.php:95
 msgid "What's new"
 msgstr "Tin mới"
 
@@ -64,7 +64,7 @@ msgstr "Đăng nhập"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/10/60/6e20638f5b1ed0f9289b81ce2c752c3c69a415ca842ef243a349b4b030e5.php:84
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:380
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:400
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:97
 msgid "Remember me"
 msgstr "Ghi nhớ"
@@ -94,7 +94,7 @@ msgstr "Mật khẩu"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/19/45/909c69b30cfae2d1a12b5920b76c4cd793f063d583cbd5ac461e77229db1.php:61
-#: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:148
+#: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:149
 #: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:145
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:175
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:218
@@ -115,7 +115,7 @@ msgstr "Sửa"
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:192
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:233
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:390
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:563
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:571
 msgid "Delete"
 msgstr "Xóa"
 
@@ -194,25 +194,25 @@ msgid "Skill Sets"
 msgstr "Kỹ năng"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/23/00/cf221414ddf1c4498e613e05544c572f734eeccbbc4150fe89aa4474ff73.php:34
+#: Files\xampp\htdocs\Yesocl\system\twig/23/00/cf221414ddf1c4498e613e05544c572f734eeccbbc4150fe89aa4474ff73.php:47
 msgid "Social Network"
 msgstr "Mạng xã hội"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/23/00/cf221414ddf1c4498e613e05544c572f734eeccbbc4150fe89aa4474ff73.php:257
-#: Files\xampp\htdocs\Yesocl\system\twig/d1/ce/438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234cd94d.php:66
+#: Files\xampp\htdocs\Yesocl\system\twig/23/00/cf221414ddf1c4498e613e05544c572f734eeccbbc4150fe89aa4474ff73.php:274
+#: Files\xampp\htdocs\Yesocl\system\twig/d1/ce/438c05e36c7613ba80bdb3dfa31eac818d2ee2a8e3cdc6a5343d234cd94d.php:67
 msgid "Home Feed"
 msgstr "Trang chủ"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:136
+#: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:137
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:136
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:193
 msgid "Like"
 msgstr "Thích"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:174
+#: Files\xampp\htdocs\Yesocl\system\twig/37/9f/c9e3bd4c4c92d82d8f53c7b24f1b7275c5d76d088a4ec7ada4ffecf4b658.php:175
 msgid "Open comment box"
 msgstr "Mở cửa sổ bình luận"
 
@@ -261,7 +261,7 @@ msgstr "Làm công"
 #: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:210
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:144
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:198
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:429
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:433
 msgid "Liked"
 msgstr "Đã thích"
 
@@ -445,12 +445,17 @@ msgstr "Chọn hình"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/51/d1/76801d02936bb703169a14771e4807232b26ffc7b993c6eaf0e5bd2972f9.php:88
-#: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:126
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:97
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:153
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:343
-msgid "Post"
-msgstr "Bài viết"
+msgid "Submit"
+msgstr "Gửi lên"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/55/29/444dfb2bf41a730234272004256372a64cc97ba6c7c220f922fa9f64c625.php:47
+#, fuzzy
+msgid "Branch Page"
+msgstr "Trang loại lĩnh vực"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/59/1f/a934a439b5d1b727dccb7ade2e23eb3142e0102abfbb4c230c8fc547b238.php:74
@@ -510,6 +515,11 @@ msgid "Skill & Expertise"
 msgstr "Kỹ năng"
 
 #: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:126
+msgid "Post"
+msgstr "Bài viết"
+
+#: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:101
 msgid "Press Enter to send"
 msgstr "Nhấn \"Enter\" để gửi"
@@ -551,7 +561,7 @@ msgstr "Chọn hình ảnh"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:333
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:510
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:518
 msgid "Content"
 msgstr "Nội dung"
 
@@ -561,35 +571,35 @@ msgid "Reset"
 msgstr "Trả về ban đầu"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:452
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:460
 msgid "See more"
 msgstr "Xem thêm"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:492
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:500
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:199
 msgid "New Message"
 msgstr "Tin nhắn mới"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:499
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:507
 msgid "Send to"
 msgstr "Gửi đến"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:514
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:522
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:224
 msgid "Write a message"
 msgstr "Viết tin nhắn"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:522
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:530
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:229
 msgid "Send"
 msgstr "Gửi"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:527
+#: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:535
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:234
 msgid "Press enter to send"
 msgstr "Nhấn \"Enter\" để gửi"
@@ -610,28 +620,34 @@ msgid "Log out"
 msgstr "Đăng xuất"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:287
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:220
+#, fuzzy
+msgid "See all notifications"
+msgstr "Tất cả ghi chú"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:307
 msgid "added you as friend"
 msgstr "kết bạn với bạn"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:293
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:313
 msgid "Accept"
 msgstr "Đồng ý"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:297
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:317
 msgid "Ignore"
 msgstr "Bỏ qua"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:387
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:407
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:104
 msgid "Forgot password"
 msgstr "Quên mật khẩu"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:394
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:414
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:110
 msgid "Sign in"
 msgstr "Đăng nhập"
@@ -663,6 +679,22 @@ msgid "Remove"
 msgstr "Xóa"
 
 #: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:285
+msgid "Are you sure to delete all messages of current user"
+msgstr "Bạn có chắc muốn xóa tất cả tin nhắn của người dùng hiện tại không"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:292
+#: Files\xampp\htdocs\Yesocl\system\twig/fe/20/940c3c6be4a276f1ef7ba6f0945fc1e6d00814d12ca69142e951bd1f375b.php:94
+msgid "Cancel"
+msgstr "Hủy"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:301
+msgid "OK"
+msgstr "Đồng ý"
+
+#: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:37
 msgid "Notification"
 msgstr "Nhắc nhở"
@@ -673,9 +705,9 @@ msgid "All Notifications"
 msgstr "Tất cả ghi chú"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:67
-msgid "Sent Today"
-msgstr "Gửi hôm nay"
+#: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:72
+msgid "Sent"
+msgstr "Gửi đi"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/cb/b2/0d70bda2797d987d7bae0601804604d4eaaeb52968677b4c9817c7c6684c.php:88
@@ -723,7 +755,7 @@ msgid "Edit Profile"
 msgstr "Sửa hồ sơ"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/e3/fe/ff4faaa1f0881188361c113f6d34dd7f4a5eb316bda42f9eb50ce58f3c88.php:66
+#: Files\xampp\htdocs\Yesocl\system\twig/e3/fe/ff4faaa1f0881188361c113f6d34dd7f4a5eb316bda42f9eb50ce58f3c88.php:67
 msgid "Branch Categories Page"
 msgstr "Trang loại lĩnh vực"
 
@@ -822,11 +854,6 @@ msgid "Reset password"
 msgstr "Thiết lập lại mật khẩu"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/fe/20/940c3c6be4a276f1ef7ba6f0945fc1e6d00814d12ca69142e951bd1f375b.php:94
-msgid "Cancel"
-msgstr "Hủy"
-
-#: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/fe/20/940c3c6be4a276f1ef7ba6f0945fc1e6d00814d12ca69142e951bd1f375b.php:103
 msgid "Try login again !"
 msgstr "Thử đăng nhập lại"
@@ -847,9 +874,12 @@ msgid "Send again"
 msgstr "Gửi lại"
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/fe/b6/ed4f4375ae989b30c249a4c2423661209a07befec7b98dc5783a92b01384.php:66
+#: Files\xampp\htdocs\Yesocl\system\twig/fe/b6/ed4f4375ae989b30c249a4c2423661209a07befec7b98dc5783a92b01384.php:67
 msgid "Category Detail Page"
 msgstr "Trang chi tiết loại lĩnh vực"
+
+#~ msgid "Sent Today"
+#~ msgstr "Gửi hôm nay"
 
 #~ msgid ">Personal Information"
 #~ msgstr "Thông tin cá nhân"

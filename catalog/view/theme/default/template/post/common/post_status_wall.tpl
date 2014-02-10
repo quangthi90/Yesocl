@@ -25,7 +25,7 @@
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<a href="#" class="btn btn-yes btn-status">{% trans %}Post{% endtrans %}</a>
+						<a href="#" class="btn btn-yes btn-status">{% trans %}Submit{% endtrans %}</a>
 					</div>
 				</div>
  			</div>
