@@ -1,3 +1,5 @@
+{% use '@template/default/template/common/language_block.tpl' %}
+
 <!DOCTYPE html>
 <html>
 	<head>		
@@ -32,7 +34,8 @@
 		
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		{{ include('@template/default/template/common/quick_search.tpl') }}	
-
+		{{ block('common_language_block') }}
+		
 		<div id="html-template" class="hidden">
 			{% block template %}
 			{% endblock %}
