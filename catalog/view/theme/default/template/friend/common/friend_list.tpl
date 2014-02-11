@@ -15,8 +15,8 @@
         <div class="fl friend-info">
             <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="friend-name">{{ friend.username }}</a>
             <ul class="friend-infolist">
-                <li>{{ friend.industry }}</li>
-                <li>{{ friend.numFriend }}</li>
+                <li>{{ friend.current }}</li>
+                {#<li>{{ friend.numFriend }}</li>#}
             </ul>
         </div>
         {% set fr_status = friend.fr_status.status %}

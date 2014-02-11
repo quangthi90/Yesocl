@@ -35,9 +35,11 @@
 			</div>
 			<div class="post_meta_info">
 				<div class="post_user">
-					<a href="#">Post User</a>
-					<span><i class="icon-caret-right"></i></span>
 					<a href="{{ path('WallPage', {user_slug: user.slug}) }}">{{ user.username }}</a>
+					{% if post.owner_id is defined and post.owner_id != null and post.owner_id != user.id %}
+					<span><i class="icon-caret-right"></i></span>
+					<a href="{{ path('WallPage', {user_slug: users[post.owner_id].slug}) }}">{{ users[post.owner_id].username }}</a>
+					{% endif %}
 				</div>
 				<div class="post_meta">
 					<span class="post_time fl">
@@ -74,7 +76,7 @@
 			</div>
 		</div>
 		<div class="post_body">
-			{% if post.title is not defined %}
+			{% if post.title != null %}
 			<h4 class="post_title">
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>

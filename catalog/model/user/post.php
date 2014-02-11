@@ -46,6 +46,7 @@ class ModelUserPost extends Model {
 		$post->setUser( $author );
 		$post->setStatus( true );
 		$post->setSlug( $slug );
+		$post->setOwnerId( $user->getId() );
 
 		if ( !empty($data['title']) ){
 			$post->setTitle( $data['title'] );

@@ -2,13 +2,13 @@
 	{% block common_html_block_comment_quick_form %}
 		<form class="y-comment-reply post post_new comment-form" id="comment-form"{% if add_comment_url is defined %} data-url="{{ add_comment_url }}"{% endif %}>
 			<div class="txt_editor">
-				<textarea class="post_input mention" placeholder="Your comment ..."></textarea>
+				<textarea class="post_input mention" placeholder="{% trans %}Your comment{% endtrans %} ..."></textarea>
 			</div>
 			<div class="comment-action"> 
 				<a class="fl comment-tool link-popup" data-mfp-src="#comment-advance-add-popup" href="#" title="Advance comment">
 					<i class="icon-external-link"></i>
 				</a>
-				<a href="#" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
+				<a href="#" class="btn btn-yes fr btn-comment">{% trans %}Submit{% endtrans %}</a>	
 	            <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
 	            	<input type="checkbox" class="cb-press-enter" />
 	            </div>
@@ -37,7 +37,7 @@
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-			                <a href="#" class="btn btn-yes btn-post-advance">{% trans %}Post{% endtrans %}</a>
+			                <a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
 			            </div>
 				    </div>		
 				</form>
@@ -160,7 +160,7 @@
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Post{% endtrans %}</a>
+				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
 				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		
@@ -202,6 +202,10 @@
 						<div class="post_meta_info">
 							<div class="post_user">
 								<a href="${href.user_info}">${post.user.username}</a>
+								{{if is_owner == false}}
+								<span><i class="icon-caret-right"></i></span>
+								<a href="${owner.href}">${owner.username}</a>
+								{{/if}}
 							</div>
 							<div class="post_meta">
 								<span class="post_time fl">
@@ -233,12 +237,16 @@
 						</div>
 					</div>
 					<div class="post_body">
+						{{if post.title != null}}
 						<h4 class="post_title">
 							<a href="${href.post_detail}">${post.title}</a>
 						</h4>
+						{{/if}}
+						{{if post.image != null}}
 						<div class="post_image">
 							<img src="${post.image}" alt="${post.title}" />
 						</div>
+						{{/if}}
 						<div class="post_text_raw">
 							{{html post.content}}
 						</div>
@@ -301,7 +309,7 @@
 	{% block common_html_block_message_detail_item %}
 		{% raw %}
 		<div id="message-detail-item">
-			<li class="message-item">
+			<li class="message-item" data-mess-id="${id}">
 				<a href="${user.href}">
 					<img src="${user.avatar}" alt="${user.username}">
 				</a>
@@ -316,7 +324,7 @@
 		                    <i class="icon-caret-down"></i>
 		               </a>
 		               <ul class="dropdown-menu">
-		                    <li>
+		                    <li class="btn-remove-mess">
 		                        <a href="#"><i class="icon-remove"></i> {% endraw %}{% trans %}Delete{% endtrans %}{% raw %}</a>
 		                    </li>
 		                </ul>

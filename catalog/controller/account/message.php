@@ -118,6 +118,7 @@ class ControllerAccountMessage extends Controller {
 		$aReturnMessages = array();
 		foreach ( $aMessages as $oMessage ) {
 			$aReturnMessages[] = array(
+				'id' => $oMessage->getId(),
 				'content' => $oMessage->getContent(),
 				'created' => $this->extension->dateFormat( $oMessage->getCreated() ),
 				'user' => $oMessage->getIsSender() == true ? $aCurrUser : $aObjectUser
@@ -165,6 +166,59 @@ class ControllerAccountMessage extends Controller {
     	return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'messages' => $aMessages
+        )));
+	}
+
+	public function deleteUserMessages(){
+		if ( empty($this->request->get['user_slug']) ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: user slug is empty',
+	        )));
+		}
+
+		$this->load->model('friend/message');
+		$this->load->model('user/user');
+
+		$aObjectUser = $this->model_user_user->getUser( $this->request->get['user_slug'] );
+
+		if ( !$aObjectUser ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: user not found with user slug: ' . $this->request->get['user_slug'],
+	        )));
+		}
+
+		$result = $this->model_friend_message->deleteUserMessages( $this->customer->getId(), $aObjectUser['id'] );
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: you not have authentication',
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+        )));
+	}
+
+	public function deleteMessage(){
+		if ( empty($this->request->get['message_id']) ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: message id is empty',
+	        )));
+		}
+
+		$this->load->model('friend/message');
+
+		$result = $this->model_friend_message->deleteMessage( $this->customer->getId(), $this->request->get['message_id'] );
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: you not have authentication',
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
         )));
 	}
 }

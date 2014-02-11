@@ -111,7 +111,14 @@
             {% endif %}
           </a>
           <div class="notification-content-list">
-            <ul class="js-noti-mess-list"></ul>
+            <ul class="messages-list js-noti-mess-list">
+              <li class="notification-content-item see-all-ntf">
+                <a href="{{ path('MessagePage') }}">{% trans %}See all messages{% endtrans %}</a>
+              </li>
+              <li class="notification-content-item empty-ntf">
+                No notifications to show
+              </li>
+            </ul>
           </div>
         </div>
         {% set requests = get_request_friend() %}

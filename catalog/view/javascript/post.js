@@ -449,13 +449,13 @@
 
             bootbox.dialog({
                 title: "Confirm",
-                message: "Are you sure you want to delete this post ?",             
+                message: "Are you sure you want to delete this post ?",
                 buttons: 
                 {
                     cancel: {
                         label: "Cancel",
                         className: "btn",
-                        callback: function() {                          
+                        callback: function() {
                         }
                     },
                     oke: {

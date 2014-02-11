@@ -35,29 +35,30 @@
     }
   };
   var $t = $.timeago;
+  var currentLocaleTexts = $('#language-data-time');
 
   $.extend($.timeago, {
     settings: {
       refreshMillis: 60000,
       allowFuture: false,
       localeTitle: false,
-      cutoff: 0,
+      cutoff: 2*24*60*60*1000,
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
-        suffixAgo: "ago",
-        suffixFromNow: "from now",
-        seconds: "less than a minute",
-        minute: "about a minute",
-        minutes: "%d minutes",
-        hour: "about an hour",
-        hours: "about %d hours",
-        day: "a day",
-        days: "%d days",
-        month: "about a month",
-        months: "%d months",
-        year: "about a year",
-        years: "%d years",
+        suffixAgo: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-suffixago") : "ago",
+        suffixFromNow: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-suffixfromnow") : "from now",
+        seconds: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-seconds") : "less than a minute",
+        minute: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-minute") : "about a minute",
+        minutes: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-minutes") : "%d minutes",
+        hour: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-hour") : "about an hour",
+        hours: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-hours") : "about %d hours",
+        day: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-day") : "a day",
+        days: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-days") : "%d days",
+        month: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-month") : "about a month",
+        months: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-months") : "%d months",
+        year: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-year") : "about a year",
+        years: currentLocaleTexts.length > 0 ? currentLocaleTexts.data("text-years") : "%d years",
         wordSeparator: " ",
         numbers: []
       }
@@ -160,6 +161,9 @@
     if (!isNaN(data.datetime)) {
       if ( $s.cutoff == 0 || distance(data.datetime) < $s.cutoff) {
         $(this).text(inWords(data.datetime));
+      }else {
+        var options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
+        $(this).text(data.datetime.toLocaleDateString(options));
       }
     }
     return this;
@@ -168,8 +172,8 @@
   function prepareData(element) {
     element = $(element);
     if (!element.data("timeago")) {
-      element.data("timeago", { datetime: $t.datetime(element) });
       var text = $.trim(element.text());
+      element.data("timeago", { datetime: $t.datetime(element) });
       if ($t.settings.localeTitle) {
         element.attr("title", element.data('timeago').datetime.toLocaleString());
       } else if (text.length > 0 && !($t.isTime(element) && element.attr("title"))) {

@@ -862,6 +862,24 @@ a.btn-notification:hover .notification-item-name > i {
   padding: 0px 3px 3px 3px;
   max-width: 300px;
 }
+.notification-item.message .messages-list .see-all-ntf {
+  display: none;
+}
+.notification-item.message .messages-list .empty-ntf {
+  display: none; 
+}
+.notification-item.message .has-messages .see-all-ntf {
+  display: block;
+}
+.notification-item.message .has-messages .empty-ntf {
+  display: none; 
+}
+.notification-item.message .no-messages .see-all-ntf {
+  display: none;
+}
+.notification-item.message .no-messages .empty-ntf {
+  display: block; 
+}
 .notification-item.message .user-message-li:first-child {
   padding-top: 3px;
 }

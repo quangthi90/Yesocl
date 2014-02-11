@@ -227,7 +227,19 @@ var yCurrUser = new CurrentUser();
 	    	type:'inline',
 	    	midClick: true,
 	    	removalDelay: 300,
-			mainClass: 'mfp-fade'
+			mainClass: 'mfp-fade',
+			callbacks: {
+				open: function() {
+				    var src = $(that.linkPopupCommon.attr('data-mfp-src'));				    
+				    var inputs = src.find('input[type="text"]').first();
+				    if(inputs.length === 0) {
+				    	inputs = src.find('textarea').first();
+				    }
+				    setTimeout(function(){
+				    	inputs.focus();	    
+				    }, 500);
+			  	}
+			}
 	    });
 
 	    //Editor:
@@ -588,7 +600,11 @@ var yCurrUser = new CurrentUser();
 			var heightBlockContent = this.heightMain - 42;
 			this.root.find('.block-content').height(heightBlockContent - 5);			
 			var ntfContainer = this.root.find('.ntf-container');
-			ntfContainer.height(heightBlockContent - 5 - 20).niceScroll();
+			ntfContainer.height(heightBlockContent - 5 - 20);
+			ntfContainer.css('opacity', '1');
+			setTimeout(function(){				
+				ntfContainer.niceScroll();
+			}, 200);	
 		}
 		
 	}
