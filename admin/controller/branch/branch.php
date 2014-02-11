@@ -174,7 +174,6 @@ class ControllerBranchBranch extends Controller {
 
 		// column
 		$this->data['column_branch'] = $this->language->get( 'column_branch' );
-		$this->data['column_company'] = $this->language->get( 'column_company' );
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		$this->data['column_order'] = $this->language->get( 'column_order' );
@@ -221,7 +220,6 @@ class ControllerBranchBranch extends Controller {
 				$this->data['branchs'][] = array(
 					'id' 		=> $branch->getId(),
 					'name' 		=> $branch->getName(),
-					'company' 	=> $branch->getCompany()->getName(),
 					'status' 	=> $branch->getStatus(),
 					'order' 	=> $branch->getOrder(),
 					'action' 	=> $action,
@@ -270,12 +268,6 @@ class ControllerBranchBranch extends Controller {
 			$this->data['error_name'] = '';
 		}
 
-		if ( isset( $this->error['error_company'] ) ) {
-			$this->data['error_company'] = $this->error['error_company'];
-		}else {
-			$this->data['error_company'] = '';
-		}
-
 		// page
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
@@ -308,7 +300,6 @@ class ControllerBranchBranch extends Controller {
 		// entry
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
-		$this->data['entry_company'] = $this->language->get( 'entry_company' );
 		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 
 		// button
@@ -345,17 +336,6 @@ class ControllerBranchBranch extends Controller {
 			$this->data['status'] = 1;
 		}
 
-		// company
-		if ( isset( $this->request->post['company'] ) ) {
-			$this->data['company'] = $this->request->post['company'];
-		}elseif ( isset( $branch ) && $branch->getCompany() ) {
-			$this->data['company'] = $branch->getCompany()->getName();
-			$this->data['company_id'] = $branch->getCompany()->getId();
-		}else {
-			$this->data['company'] = '';
-			$this->data['company_id'] = 0;
-		}
-
 		// order
 		if ( isset($this->request->post['order']) ){
 			$this->data['order'] = $this->request->post['order'];
@@ -364,8 +344,6 @@ class ControllerBranchBranch extends Controller {
 		}else {
 			$this->data['order'] = 0;
 		}
-
-		$this->data['autocomplete_company'] = html_entity_decode( $this->url->link('company/company/autocomplete', 'token=' . $this->session->data['token'], 'SSL') );
 
 		// template
 		$this->template = 'branch/branch_form.tpl';
@@ -383,8 +361,6 @@ class ControllerBranchBranch extends Controller {
 	private function isValidateForm() {
 		if ( !isset( $this->request->post['name']) || strlen( trim( $this->request->post['name'] ) ) < 1 || strlen( trim( $this->request->post['name'] ) ) > 128  ) {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}elseif ( !isset( $this->request->post['company_id']) || $this->request->post['company_id'] == 0 ) {
-			$this->error['error_company'] = $this->language->get( 'error_company' );
 		}
 
 		if ( $this->error ) {

@@ -29,17 +29,6 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_company; ?></td>
-            <td>
-              <input class="input-xxlarge" required="required" type="text" name="company" value="<?php echo $company; ?>" />
-              <input type="hidden" name="company_id" value="<?php echo $company_id; ?>">
-            <?php if ($error_company) { ?>
-                <div class="alert alert-error">
-                  <strong>Error!</strong> <?php echo $error_company; ?>
-                </div>
-            <?php } ?></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_order; ?></td>
             <td><input class="input-xxlarge" required="required" type="text" name="order" value="<?php echo $order; ?>" /></td>
           </tr>
@@ -51,33 +40,5 @@
       </form>
     </div>
   </div>
-</div>
-<script type="text/javascript"><!--
-$('input[name=\'company\']').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: '<?php echo $autocomplete_company; ?>&filter_name=' +  encodeURIComponent(request.term),
-      dataType: 'json',
-      success: function(json) {   
-        response($.map(json, function(item) {
-          return {
-            label: item.name,
-            value: item.id
-          }
-        }));
-      }
-    });
-  }, 
-  select: function(event, ui) {
-    $('input[name=\'company\']').val(ui.item.label);
-    $('input[name=\'company_id\']').val(ui.item.value);
-            
-    return false;
-  },
-  focus: function(event, ui) {
-        return false;
-    }
-});
-//--></script> 
+</div> 
 <?php echo $footer; ?>

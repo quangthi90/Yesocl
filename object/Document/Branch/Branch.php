@@ -30,9 +30,6 @@ Class Branch {
 	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="branch") */
 	private $categories = array();
 
-	/** @MongoDB\ReferenceOne(targetDocument="\Document\Company\Company") */
-	private $company;
-
 	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="branch") */
 	private $posts = array();
 
@@ -89,7 +86,6 @@ Class Branch {
     public function formatToCache(){
 		$data = array(
 			'id'		=> $this->getId(),
-			'company' 	=> $this->getCompany()->getId(),
 			'name' 		=> $this->getName(),
 			'slug'		=> $this->getSlug(),
 			'status'	=> $this->getStatus()
@@ -178,14 +174,6 @@ Class Branch {
 
 	public function getCategories(){
 		return $this->categories;
-	}
-
-	public function setCompany( $company ){
-		$this->company = $company;
-	}
-
-	public function getCompany(){
-		return $this->company;
 	}
 
 	public function setPosts( $posts ){

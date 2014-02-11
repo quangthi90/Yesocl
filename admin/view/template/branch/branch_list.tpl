@@ -26,7 +26,6 @@
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $column_branch; ?></td>
-              <td><?php echo $column_company; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_order; ?></td>
               <td><?php echo $column_action; ?></td>
@@ -38,7 +37,6 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $branch['id']; ?>"/></td>
               <td><?php echo $branch['name']; ?></td>
-              <td><?php echo $branch['company']; ?></td>
               <td><?php echo $branch['status'] ? $text_enable : $text_disable; ?></td>
               <td><?php echo $branch['order']; ?></td>
               <td class="right"><?php foreach ( $branch['action'] as $action ) { ?>

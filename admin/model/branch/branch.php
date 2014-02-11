@@ -11,7 +11,6 @@ class ModelBranchBranch extends Model {
 	*	- array data
 	* 	{
 	*		string Name 		-- required
-	*		string Company ID 	-- required
 	*		bool Status
 	*		int Order
 	* 	}
@@ -24,16 +23,6 @@ class ModelBranchBranch extends Model {
 		if ( isset($data['name']) && !empty($data['name']) ) {
 			$this->data['name'] = strtolower( trim($data['name']) );
 		}else {
-			return false;
-		}
-		
-		// Company
-		if ( isset($data['company_id']) ){
-			$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
-			if ( !$company ){
-				return false;
-			}
-		}else{
 			return false;
 		}
 
@@ -53,7 +42,6 @@ class ModelBranchBranch extends Model {
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
 		$branch->setOrder( $data['order'] );
-		$branch->setCompany( $company );
 		$branch->setSlug( $slug );
 		
 		$this->dm->persist( $branch );
@@ -71,7 +59,6 @@ class ModelBranchBranch extends Model {
 	*	- array data
 	* 	{
 	*		string Name 		-- required
-	*		string Company ID 	-- required
 	*		bool Status
 	*		int Order
 	* 	}
@@ -100,20 +87,6 @@ class ModelBranchBranch extends Model {
 		// order
 		if ( !isset($data['order']) || empty($data['order']) ){
 			$data['order'] = 0;
-		}
-
-		// Company
-		if ( isset($data['company_id']) ){
-			if ( !$branch->getCompany() || $data['company_id'] != $branch->getCompany()->getId() ){
-				$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
-				if ( !$company ){
-					return false;
-				}
-			}else{
-				$company = $branch->getCompany();
-			}
-		}else{
-			return false;
 		}
 
 		$branch->setName( $data['name'] );
