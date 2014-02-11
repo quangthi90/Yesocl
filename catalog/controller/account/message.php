@@ -118,6 +118,7 @@ class ControllerAccountMessage extends Controller {
 		$aReturnMessages = array();
 		foreach ( $aMessages as $oMessage ) {
 			$aReturnMessages[] = array(
+				'id' => $oMessage->getId(),
 				'content' => $oMessage->getContent(),
 				'created' => $this->extension->dateFormat( $oMessage->getCreated() ),
 				'user' => $oMessage->getIsSender() == true ? $aCurrUser : $aObjectUser

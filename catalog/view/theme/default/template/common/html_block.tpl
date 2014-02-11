@@ -309,7 +309,7 @@
 	{% block common_html_block_message_detail_item %}
 		{% raw %}
 		<div id="message-detail-item">
-			<li class="message-item">
+			<li class="message-item" data-mess-id="${id}">
 				<a href="${user.href}">
 					<img src="${user.avatar}" alt="${user.username}">
 				</a>
