@@ -13,6 +13,7 @@ $_['button_delete'] 	= 'Delete';
 $_['button_save'] 		= 'Save';
 $_['button_cancel'] 	= 'Cancel';
 $_['button_post'] 		= 'Posts';
+$_['button_members']	= 'Members';
 
 // column
 $_['column_branch'] 	= 'Branch';
