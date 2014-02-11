@@ -227,7 +227,19 @@ var yCurrUser = new CurrentUser();
 	    	type:'inline',
 	    	midClick: true,
 	    	removalDelay: 300,
-			mainClass: 'mfp-fade'
+			mainClass: 'mfp-fade',
+			callbacks: {
+				open: function() {
+				    var src = $(that.linkPopupCommon.attr('data-mfp-src'));				    
+				    var inputs = src.find('input[type="text"]').first();
+				    if(inputs.length === 0) {
+				    	inputs = src.find('textarea').first();
+				    }
+				    setTimeout(function(){
+				    	inputs.focus();	    
+				    }, 500);
+			  	}
+			}
 	    });
 
 	    //Editor:

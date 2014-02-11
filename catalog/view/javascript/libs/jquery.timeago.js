@@ -65,7 +65,6 @@
     },
     inWords: function(distanceMillis) {
       var $l = this.settings.strings;
-      console.log($l);
       var prefix = $l.prefixAgo;
       var suffix = $l.suffixAgo;
       if (this.settings.allowFuture) {
