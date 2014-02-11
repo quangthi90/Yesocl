@@ -199,5 +199,27 @@ class ControllerAccountMessage extends Controller {
             'success' => 'ok',
         )));
 	}
+
+	public function deleteMessage(){
+		if ( empty($this->request->get['message_id']) ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: message id is empty',
+	        )));
+		}
+
+		$this->load->model('friend/message');
+
+		$result = $this->model_friend_message->deleteMessage( $this->customer->getId(), $this->request->get['message_id'] );
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok: you not have authentication',
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+        )));
+	}
 }
 ?>

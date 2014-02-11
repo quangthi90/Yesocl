@@ -147,6 +147,45 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('.js-mess-list-content').on('click', '.btn-remove-mess', function(e){
+        e.preventDefault();
+        var $curr_mess = $(this).parents('li.message-item');
+        bootbox.dialog({
+            title: "Confirm",
+            message: "{% trans %}Are you sure to delete this message{% endtrans %} ?",
+            buttons: 
+            {
+                cancel: {
+                    label: "{% trans %}Cancel{% endtrans %}",
+                    className: "btn",
+                    callback: function() {
+                    }
+                },
+                oke: {
+                    label: "{% trans %}OK{% endtrans %}",
+                    className: "btn-primary",
+                    callback: function() {
+                        var mess_id = $curr_mess.data('mess-id');
+                        $curr_mess.remove();
+                        
+                        if ( $('.js-mess-list-content').find('li.message-item').length == 1 ){
+                            $('.js-mess-username').html('');
+                            $('.js-mess-list-content').html('');
+                            $('.js-mess-user-list').find('.js-mess-user-item.active').remove();
+                            $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
+                        }
+
+                        $.ajax({
+                            type: 'POST',
+                            url:  yRouting.generate('MessageDeleteOne', {message_id: mess_id}),
+                            dataType: 'json'
+                        });
+                    }
+                }
+            }
+        });
+    });
 });
 </script>
 {% endblock %}

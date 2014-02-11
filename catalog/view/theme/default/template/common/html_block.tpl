@@ -324,7 +324,7 @@
 		                    <i class="icon-caret-down"></i>
 		               </a>
 		               <ul class="dropdown-menu">
-		                    <li>
+		                    <li class="btn-remove-mess">
 		                        <a href="#"><i class="icon-remove"></i> {% endraw %}{% trans %}Delete{% endtrans %}{% raw %}</a>
 		                    </li>
 		                </ul>

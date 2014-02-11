@@ -162,7 +162,7 @@ class ModelFriendMessage extends Model {
 	}
 
 	/**
-	 * Delete all message by user
+	 * Delete all messages by user
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: 
 	 * 	- Object MongoID Current User
@@ -183,11 +183,48 @@ class ModelFriendMessage extends Model {
 		foreach ( $lMessages as $oMessage ) { 
 			if ( $idObjectUser == $oMessage->getObject()->getId() ){
 				$lMessages->removeElement( $oMessage );
+				break;
 			}
 		}
 
 		$oMessage = $oMessages->getLastMessageByUserId( $idObjectUser );
 		$oMessages->getLastMessages()->removeElement( $oMessage );
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	/**
+	 * Delete 1 message by message id
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	- Object MongoID Owner
+	 * 	- Object MongoID Message
+	 * @return: boolean
+	 */
+	public function deleteMessage( $idOwner, $idMessage ){
+		$oMessages = $this->dm->getRepository('Document\Friend\Messages')->findOneBy(array(
+			'user.id' => $idOwner
+		));
+
+		if ( !$oMessages ){
+			return false;
+		}
+		
+		$lMessages = $oMessages->getMessages();
+
+		foreach ( $lMessages as $oMessage ) { 
+			if ( $idMessage == $oMessage->getId() ){
+				$lMessages->removeElement( $oMessage );
+				break;
+			}
+		}
+
+		if ( $lMessages->count() == 0 ){
+			$oMessage = $oMessages->getLastMessageByUserId( $oMessage->getObject()->getId() );
+			$oMessages->getLastMessages()->removeElement( $oMessage );
+		}
 
 		$this->dm->flush();
 
