@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-11 01:48+0700\n"
-"PO-Revision-Date: 2014-02-11 01:49+0700\n"
+"POT-Creation-Date: 2014-02-11 16:32+0700\n"
+"PO-Revision-Date: 2014-02-11 16:33+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -691,14 +691,21 @@ msgstr "Bạn có chắc muốn xóa tất cả tin nhắn của người dùng 
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:292
+#: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:340
 #: Files\xampp\htdocs\Yesocl\system\twig/fe/20/940c3c6be4a276f1ef7ba6f0945fc1e6d00814d12ca69142e951bd1f375b.php:94
 msgid "Cancel"
 msgstr "Hủy"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:301
+#: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:349
 msgid "OK"
 msgstr "Đồng ý"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/b4/18/a2eea86e9d742a5cd5fed1648a63485f8c183be871e62c84bfbaffa048cd.php:333
+msgid "Are you sure to delete this message"
+msgstr "Bạn có chắc muốn xóa tin nhắn này không"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:37
