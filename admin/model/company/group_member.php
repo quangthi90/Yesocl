@@ -86,6 +86,8 @@ class ModelCompanyGroupMember extends Model {
 				}
 
 				$group_members[$key] = $group_member;
+
+				break;
 			}
 		}
 		$company->setGroupMembers( $group_members );

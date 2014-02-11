@@ -1709,19 +1709,21 @@ class ControllerUserUser extends Controller {
 
 		$this->load->model('user/user');
 		$user = $this->model_user_user->getUser( array('user_id' => $user_id) );
-
+		
 		if ( !$user ){
-			return false;
+			$this->response->setOutput( json_encode( array(
+				'error' => 'user have ID ' . $this->request->post['user_id'] . ' is not exist'
+			)));
+		}else{
+			$json = array(
+				'id' => $user->getId(),
+				'username' => $user->getUsername(),
+				'fullname' => $user->getFullname(),
+				'email' => $user->getPrimaryEmail()->getEmail()
+			);
+
+			$this->response->setOutput( json_encode( $json ) );
 		}
-
-		$json = array(
-			'id' => $user->getId(),
-			'username' => $user->getUsername(),
-			'fullname' => $user->getFullname(),
-			'email' => $user->getPrimaryEmail()->getEmail()
-		);
-
-		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>
