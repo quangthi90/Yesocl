@@ -244,7 +244,8 @@
 		var that = this;
 		var messages = that.$el.data('messages');
 		if ( typeof messages == 'undefined' ){
-			that.$messList.html('<li class="user-message-li load-waiting">Loadding messages <i class="icon-spin icon-spinner"></i></li>');
+			var loadingWait = $('<li class="user-message-li load-waiting">Loadding messages <i class="icon-spin icon-spinner"></i></li>');
+			that.$messList.prepend(loadingWait);
 			messages = [];
 
 			var promise = $.ajax({
@@ -258,7 +259,7 @@
 			promise.then(function(data) { 
 				if(data.success == 'ok'){
 					that.$el.find('.notification-item-count').addClass('hidden').html(0);
-					that.$messList.html('');
+					that.$messList.find('.user-message-li').remove();
 					for ( var key in data.messages ){
 						message = data.messages[key];
 						var _class = ' ';
@@ -281,17 +282,30 @@
 						that.$messList.prepend( $.tmpl($('#message-item-header'), message) );
 					}
 
+					if(messages.length >  0) {
+						that.$messList.removeClass('no-messages');
+						that.$messList.addClass('has-messages');
+					}else {
+						that.$messList.removeClass('has-messages');
+						that.$messList.addClass('no-messages');
+					}
 					that.$el.data('messages', messages);
 					$('.timeago').timeago();
 				}
 			});
 		}else{
-			that.$messList.html('');
+			that.$messList.find('.user-message-li').remove();
 			for ( var key in messages ){
 				var message = messages[key];
 				that.$messList.prepend( $.tmpl($('#message-item-header'), message) );
 			}
-
+			if(messages.length >  0) {
+				that.$messList.removeClass('no-messages');
+				that.$messList.addClass('has-messages');
+			}else {
+				that.$messList.removeClass('has-messages');
+				that.$messList.addClass('no-messages');
+			}
 			$('.timeago').timeago();
 		}
 	};
