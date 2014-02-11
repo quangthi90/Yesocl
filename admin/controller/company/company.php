@@ -509,7 +509,7 @@ class ControllerCompanyCompany extends Controller {
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_group_member' ),
-					'href' => $this->url->link( 'company/group_member', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'company/member_group', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-list',
 				);
 
