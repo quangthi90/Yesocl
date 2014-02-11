@@ -46,7 +46,7 @@
 		  			</a>
 			  	</li>
 			  	<li class="menu-item {% if menu == 'my-branch' %}active{% endif %}">
-			  		<a href="{{ path('MyBranch', {user_slug: user_slug}) }}">
+			  		<a href="{{ path('BranchList') }}">
 			  			<i class="icon-fire"></i> <span>{% trans %}My branch{% endtrans %}</span>
 		  			</a>
 			  	</li>

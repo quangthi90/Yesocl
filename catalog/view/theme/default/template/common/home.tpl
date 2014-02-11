@@ -19,7 +19,7 @@
 			{% set posts = all_posts[branch.slug] %}
 			{% if posts|length > 0 %}
 	            {% set block_info = branch %}
-	            {% set block_href = path('BranchPage', {branch_slug: branch.slug}) %}
+	            {% set block_href = path('BranchCategories', {branch_slug: branch.slug}) %}
 	            {{ block('post_common_post_item_list') }}
 			{% endif %}
 		{% endfor %}

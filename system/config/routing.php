@@ -1,8 +1,10 @@
 <?php
 
 // Branch
-$_['routing']['BranchPage'] 					= 'branch/{branch_slug}/';
-$_['routing']['CategoryPage'] 					= 'category/{category_slug}/';
+$_['routing']['BranchCategories'] 				= 'branch/categories/{branch_slug}/';
+$_['routing']['BranchCategory']					= 'branch/category/{category_slug}/';
+$_['routing']['BranchList']		 				= 'branch/list/';
+$_['routing']['BranchDetail'] 					= 'branch/detail/{branch_slug}';
 
 // Post
 $_['routing']['PostPage'] 						= '{post_type}/post/{post_slug}/';
