@@ -32,7 +32,7 @@
 			  	</li>#}
 			  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
 			  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-bookmark"></i> <span>{% trans %}Wall Page{% endtrans %}</span>
+			  			<i class="icon-bookmark"></i> <span>{% trans %}My Wall{% endtrans %}</span>
 		  			</a>
 			  	</li>	
 			  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">

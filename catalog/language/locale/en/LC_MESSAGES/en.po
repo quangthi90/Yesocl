@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-11 16:33+0700\n"
-"PO-Revision-Date: 2014-02-11 16:33+0700\n"
+"POT-Creation-Date: 2014-02-11 16:42+0700\n"
+"PO-Revision-Date: 2014-02-11 16:42+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -34,8 +34,7 @@ msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:110
-#: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:85
-msgid "Wall Page"
+msgid "My Wall"
 msgstr ""
 
 #: F:\Program
@@ -509,6 +508,11 @@ msgstr ""
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/9b/ff/371f75fe961db072d578b991d2a92cd93f749c6580ff65dbb2f7c72a1609.php:41
 msgid "Skill & Expertise"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:83
+msgid "Wall Page of"
 msgstr ""
 
 #: F:\Program

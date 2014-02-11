@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-11 16:32+0700\n"
-"PO-Revision-Date: 2014-02-11 16:33+0700\n"
+"POT-Creation-Date: 2014-02-11 16:41+0700\n"
+"PO-Revision-Date: 2014-02-11 16:42+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -35,8 +35,8 @@ msgstr "Trang chủ"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:110
-#: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:85
-msgid "Wall Page"
+#, fuzzy
+msgid "My Wall"
 msgstr "Tường nhà của mình"
 
 #: F:\Program
@@ -161,9 +161,8 @@ msgstr "Bạn gái"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/21/4d/881f37ece0ca7392816ba3aa266fb00e12a961afda739f5b1268e2d14d8c.php:63
-#, fuzzy
 msgid "View your profile"
-msgstr "Hồ sơ của bạn"
+msgstr "Xem hồ sơ của mình"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/21/4d/881f37ece0ca7392816ba3aa266fb00e12a961afda739f5b1268e2d14d8c.php:72
@@ -515,6 +514,11 @@ msgid "Skill & Expertise"
 msgstr "Kỹ năng"
 
 #: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:83
+msgid "Wall Page of"
+msgstr "Tường nhà của"
+
+#: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/a1/99/e6343eda755828d5fa06eb51706e9d8ca000b542842b7f880fd5775f1fa6.php:126
 msgid "Post"
 msgstr "Bài viết"
@@ -627,9 +631,8 @@ msgstr "Đăng xuất"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:220
-#, fuzzy
 msgid "See all notifications"
-msgstr "Tất cả ghi chú"
+msgstr "Xem tất cả ghi chú"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:307
@@ -890,6 +893,9 @@ msgstr "Gửi lại"
 #: Files\xampp\htdocs\Yesocl\system\twig/fe/b6/ed4f4375ae989b30c249a4c2423661209a07befec7b98dc5783a92b01384.php:67
 msgid "Category Detail Page"
 msgstr "Trang chi tiết loại lĩnh vực"
+
+#~ msgid "'s Wall Page"
+#~ msgstr "Tường nhà của"
 
 #~ msgid "Sent Today"
 #~ msgstr "Gửi hôm nay"
