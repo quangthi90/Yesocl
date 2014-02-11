@@ -33,6 +33,9 @@ Class Branch {
 	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="branch") */
 	private $posts = array();
 
+	/** @MongoDB\ReferenceMany(targetDocument="Document\User\User", inversedBy="branchs") */
+	private $members = array();	
+
 	/** @MongoDB\Int */
 	private $order;
 
@@ -198,5 +201,17 @@ Class Branch {
 
 	public function getType(){
 		return $this->type;
+	}
+
+	public function setMembers( $members ){
+		$this->members = $members;
+	}
+
+	public function getMembers(){
+		return $this->members;
+	}
+
+	public function addMember( $member ){
+		return $this->members[] = $member;
 	}
 }
