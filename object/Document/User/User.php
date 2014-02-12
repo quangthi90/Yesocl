@@ -96,7 +96,7 @@ Class User {
 	private $tokenTime;
 
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch", mappedBy="members") */
-	private $branchs = array();
+	private $branches = array();
 
 	/** @MongoDB\PrePersist */
     public function prePersist()
@@ -479,16 +479,16 @@ Class User {
 		return $this->tokenTime;
 	}
 
-	public function setBranchs( $branchs ){
-		$this->branchs = $branchs;
+	public function setBranches( $branches ){
+		$this->branches = $branches;
 	}
 
-	public function getBranchs(){
-		return $this->branchs;
+	public function getBranches(){
+		return $this->branches;
 	}
 
 	public function addBranch( \Document\Branch\Branch $branch ){
-		return $this->branchs[] = $branch;
+		return $this->branches[] = $branch;
 	}
 
 	/**

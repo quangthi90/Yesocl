@@ -10,14 +10,14 @@ class ModelBranchPosition extends Model {
 			return false;
 		}
 
-		// branchs
-		$branchs = array();
-		if ( isset( $data['branchs'] ) ) {
-			foreach ($data['branchs'] as $branch_data) {
-				$branchs[$branch_data['id']] = $branch_data['id'];
+		// branches
+		$branches = array();
+		if ( isset( $data['branches'] ) ) {
+			foreach ($data['branches'] as $branch_data) {
+				$branches[$branch_data['id']] = $branch_data['id'];
 			}
 		}else {
-			$branchs = array();
+			$branches = array();
 		}
 
 		// status
@@ -29,8 +29,8 @@ class ModelBranchPosition extends Model {
 		$position->setName( $data['name'] );
 		$position->setStatus( $data['status'] );
 
-		// branchs
-		foreach ($branchs as $branch_data) {
+		// branches
+		foreach ($branches as $branch_data) {
 			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_data );
 			if ( !empty( $branch ) ) {
 				$position->addBranch( $branch );
@@ -51,14 +51,14 @@ class ModelBranchPosition extends Model {
 			return false;
 		}
 
-		// branchs
-		$branchs = array();
-		if ( isset( $data['branchs'] ) ) {
-			foreach ($data['branchs'] as $branch_data) {
-				$branchs[$branch_data['id']] = $branch_data['id'];
+		// branches
+		$branches = array();
+		if ( isset( $data['branches'] ) ) {
+			foreach ($data['branches'] as $branch_data) {
+				$branches[$branch_data['id']] = $branch_data['id'];
 			}
 		}else {
-			$branchs = array();
+			$branches = array();
 		}
 
 		// status
@@ -79,9 +79,9 @@ class ModelBranchPosition extends Model {
 		$position->setName( $data['name'] );
 		$position->setStatus( $data['status'] );
 
-		// branchs
-		$position->setBranchs( array() );
-		foreach ($branchs as $branch_data) {
+		// branches
+		$position->setBranches( array() );
+		foreach ($branches as $branch_data) {
 			$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_data );
 			if ( !empty( $branch ) ) {
 				$position->addBranch( $branch );

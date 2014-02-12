@@ -15,10 +15,10 @@
                     </a>
                 </div>
                 <div class="block-content user-container">
-                    {% for branch in branchs %}
+                    {% for branch in branches %}
                     <div class="block-content-item branch-item">
                         <a href="{{ path('BranchDetail', {branch_slug: branch.slug}) }}" class="fl branch-img">
-                            <img src="http://www.img.lx.it.pt/iwbf2013/images/it_logo.jpg" alt="IT">
+                            <img src="{{ branch.logo }}" alt="IT">
                         </a>
                         <div class="fl branch-info">
                             <a href="{{ path('BranchDetail', {branch_slug: branch.slug}) }}" class="branch-name">{{ branch.name }}</a>

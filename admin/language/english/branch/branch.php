@@ -21,12 +21,14 @@ $_['column_company'] 	= 'Company Owner';
 $_['column_status'] 	= 'Status';
 $_['column_action'] 	= 'Action';
 $_['column_order']      = 'Order';
+$_['column_logo'] 		= 'Logo';
 
 // entry
 $_['entry_name'] 		= 'Branch Name:';
 $_['entry_status'] 		= 'Status:';
 $_['entry_company'] 	= 'Company Owner:';
 $_['entry_order']       = 'Order:';
+$_['entry_logo'] 		= 'Logo:';
 
 // error
 $_['error_name'] 		= 'Warning: Branch Name must be more than 1 characters and less than 128 characters!';
@@ -36,5 +38,6 @@ $_['error_warning'] 	= 'Warning: Error!';
 $_['success'] 			= 'Success: You have modified Branch!';
 $_['error_insert'] 		= 'Warning: Insert not success!';
 $_['error_update'] 		= 'Warning: Update not success!';
+$_['error_logo'] 		= 'Warning: Logo upload failed!';
 
 ?>

@@ -19,16 +19,16 @@ class ControllerCommonHome extends Controller {
 		$this->load->model( 'tool/image' );
 		$this->load->model( 'user/user' );
 
-		$lBranchs = $this->model_branch_branch->getAllBranchs();
+		$lBranches = $this->model_branch_branch->getAllBranches();
 
 		$this->data['all_posts'] = array();
-		$this->data['branchs'] = array();
+		$this->data['branches'] = array();
 
 		$aUsers = array();
 
-		foreach ( $lBranchs as $key => $oBranch ) {
+		foreach ( $lBranches as $key => $oBranch ) {
 			$aBranch = $oBranch->formatToCache();
-			$sBranchSlug = $aBranch['slug'];
+			$sBrancheSlug = $aBranch['slug'];
 
 			$lPosts = $this->model_branch_post->getPosts(array(
 				'branch_id' => $aBranch['id'],
@@ -51,7 +51,7 @@ class ControllerCommonHome extends Controller {
 					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 				}
 
-				$this->data['all_posts'][$sBranchSlug][] = $aPost;
+				$this->data['all_posts'][$sBrancheSlug][] = $aPost;
 
 				if ( empty($aUsers[$aPost['user_id']]) ){
 					$oUser = $oPost->getUser();
@@ -64,7 +64,7 @@ class ControllerCommonHome extends Controller {
 				}
 			}
 
-			$this->data['branchs'][] = $aBranch;
+			$this->data['branches'][] = $aBranch;
 		}
 
 		$this->data['users'] = $aUsers;

@@ -6,12 +6,12 @@
         <tr>
           <th><?php echo $column_branch; ?></th>
         </tr>
-        <?php foreach ( $branchs as $branch ) { ?>
+        <?php foreach ( $branches as $branch ) { ?>
         <tr>
           <td>
             <div class="controls">
               <label class="checkbox inline">
-                <input type="checkbox" name="branchs[]" value="<?php echo $branch['id']; ?>" <?php if ($branch['checked'] == true){ ?>checked="checked"<?php } ?> />
+                <input type="checkbox" name="branches[]" value="<?php echo $branch['id']; ?>" <?php if ($branch['checked'] == true){ ?>checked="checked"<?php } ?> />
                 <?php echo $branch['name']; ?>
               </label>
             </div>
@@ -22,7 +22,7 @@
           <td>
             <div class="controls">
               <a class="btn inline btn-warning" onclick="$('.check-all-branch').click();"><?php echo $button_select_all_branch; ?></a>
-              <input class="hidden check-all-branch" type="checkbox" onclick="$('input[name*=\'branchs\']').attr('checked', this.checked);" />
+              <input class="hidden check-all-branch" type="checkbox" onclick="$('input[name*=\'branches\']').attr('checked', this.checked);" />
             </div>
           </td>
         </tr>

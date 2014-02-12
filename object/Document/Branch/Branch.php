@@ -18,7 +18,7 @@ Class Branch {
 	 */
 	private $slug; 
 
-	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branchs") */
+	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branches") */
 	private $positions = array();
 	
 	/** @MongoDB\Boolean */
@@ -33,7 +33,7 @@ Class Branch {
 	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="branch") */
 	private $posts = array();
 
-	/** @MongoDB\ReferenceMany(targetDocument="Document\User\User", inversedBy="branchs") */
+	/** @MongoDB\ReferenceMany(targetDocument="Document\User\User", inversedBy="branches") */
 	private $members = array();	
 
 	/** @MongoDB\Int */
@@ -43,6 +43,11 @@ Class Branch {
 	 * @SOLR\Field(type="text")
 	 */
 	private $type;
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $logo;
 
 	/**
 	 * Get Post By ID
@@ -110,6 +115,7 @@ Class Branch {
 			'name' 		=> $this->getName(),
 			'slug'		=> $this->getSlug(),
 			'status'	=> $this->getStatus(),
+			'logo'		=> $this->getLogo(),
 			'member_count' => $this->getMembers()->count(),
 			'post_count' => $this->getPosts()->count()
 		);
@@ -233,5 +239,13 @@ Class Branch {
 
 	public function addMember( \Document\User\User $member ){
 		return $this->members[] = $member;
+	}
+
+	public function setLogo( $logo ){
+		$this->logo = $logo;
+	}
+
+	public function getLogo(){
+		return $this->logo;
 	}
 }

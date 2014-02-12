@@ -21,7 +21,7 @@ $_['button_delete'] 		= 'Delete';
 $_['button_save'] 			= 'Save';
 $_['button_cancel'] 		= 'Cancel';
 $_['button_back'] 			= 'Back';
-$_['button_select_all_branch']	= 'Select all Branchs';
+$_['button_select_all_branch']	= 'Select all Branches';
 
 // column
 $_['column_company'] 		= 'Company';

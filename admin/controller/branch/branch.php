@@ -41,7 +41,11 @@ class ControllerBranchBranch extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_branch_branch->addBranch( $this->request->post ) ) {
+			if ( !isset( $this->request->files['logo'] ) ) {
+				$this->request->files['logo'] = array();
+			}
+
+			if ( $this->model_branch_branch->addBranch($this->request->post, $this->request->files['logo']) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_insert' );
@@ -85,7 +89,11 @@ class ControllerBranchBranch extends Controller {
 
 		// request
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateForm() ) {
-			if ( $this->model_branch_branch->editBranch( $this->request->get['branch_id'], $this->request->post ) ) {
+			if ( !isset( $this->request->files['logo'] ) ) {
+				$this->request->files['logo'] = array();
+			}
+
+			if ( $this->model_branch_branch->editBranch($this->request->get['branch_id'], $this->request->post, $this->request->files['logo']) ) {
 				$this->session->data['success'] = $this->language->get( 'success' );
 			}else {
 				$this->session->data['error_warning'] = $this->language->get( 'error_warning' );
@@ -112,7 +120,7 @@ class ControllerBranchBranch extends Controller {
 		$this->load->model( 'branch/branch' );
 
 		if ( $this->request->server['REQUEST_METHOD'] == 'POST' && $this->isValidateDelete() ) {
-			$this->model_branch_branch->deleteBranchs( $this->request->post );
+			$this->model_branch_branch->deleteBranches( $this->request->post );
 
 			$this->session->data['success'] = $this->language->get( 'success' );
 
@@ -177,6 +185,7 @@ class ControllerBranchBranch extends Controller {
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		$this->data['column_order'] = $this->language->get( 'column_order' );
+		$this->data['column_logo'] = $this->language->get( 'column_logo' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -192,11 +201,11 @@ class ControllerBranchBranch extends Controller {
 			);
 
 		// branch
-		$branchs = $this->model_branch_branch->getBranchs( $data );
+		$branches = $this->model_branch_branch->getBranches( $data );
 
-		$this->data['branchs'] = array();
-		if ( $branchs ){
-			foreach ($branchs as $branch) {
+		$this->data['branches'] = array();
+		if ( $branches ){
+			foreach ($branches as $branch) {
 				$action = array();
 
 				$action[] = array(
@@ -217,11 +226,12 @@ class ControllerBranchBranch extends Controller {
 					'icon' => 'icon-user',
 				);
 
-				$this->data['branchs'][] = array(
+				$this->data['branches'][] = array(
 					'id' 		=> $branch->getId(),
 					'name' 		=> $branch->getName(),
 					'status' 	=> $branch->getStatus(),
 					'order' 	=> $branch->getOrder(),
+					'logo' 		=> HTTP_IMAGE . $branch->getLogo(),
 					'action' 	=> $action,
 				);
 			}
@@ -229,7 +239,7 @@ class ControllerBranchBranch extends Controller {
 
 		// pagination
 		$pagination = new Pagination();
-		$pagination->total = $branchs->count();
+		$pagination->total = $branches->count();
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
@@ -301,6 +311,7 @@ class ControllerBranchBranch extends Controller {
 		$this->data['entry_name'] = $this->language->get( 'entry_name' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_order'] = $this->language->get( 'entry_order' );
+		$this->data['entry_logo'] = $this->language->get( 'entry_logo' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -345,6 +356,13 @@ class ControllerBranchBranch extends Controller {
 			$this->data['order'] = 0;
 		}
 
+		// logo
+		if ( isset( $branch ) && trim( $branch->getLogo() ) != '' ) {
+			$this->data['img_logo'] = HTTP_IMAGE . $branch->getLogo();
+		}else {
+			$this->data['img_logo'] = $this->data['img_default'];
+		}
+
 		// template
 		$this->template = 'branch/branch_form.tpl';
 
@@ -361,6 +379,13 @@ class ControllerBranchBranch extends Controller {
 	private function isValidateForm() {
 		if ( !isset( $this->request->post['name']) || strlen( trim( $this->request->post['name'] ) ) < 1 || strlen( trim( $this->request->post['name'] ) ) > 128  ) {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
+		}
+
+		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) && $this->request->files['logo']['size'] > 0 ) {
+			$this->load->model('tool/image');
+			if ( !$this->model_tool_image->isValidImage( $this->request->files['logo'] ) ) {
+				$this->error['error_logo'] = $this->language->get( 'error_logo');
+			}
 		}
 
 		if ( $this->error ) {
@@ -390,10 +415,10 @@ class ControllerBranchBranch extends Controller {
 			);
 
 		$this->load->model( 'branch/branch' );
-		$branchs = $this->model_branch_branch->getBranchs( $data );
+		$branches = $this->model_branch_branch->getBranches( $data );
 
 		$json = array();
-		foreach ($branchs as $branch) {
+		foreach ($branches as $branch) {
 			$json[] = array(
 				'name' => $branch->getName(),
 				'id' => $branch->getId(),

@@ -34,11 +34,11 @@
               <div><input class="autocomplete_branch" type="text" value="" /></div>
               <table class="table table-hover">
                 <?php $i = 0; ?>
-                <?php foreach ($branchs as $key => $branch) { ?>
+                <?php foreach ($branches as $key => $branch) { ?>
                   <tr>
                     <td>
-                      <input type="hidden" name="branchs[<?php echo $i; ?>][id]" value="<?php echo $branch['id']; ?>" />
-                      <input type="hidden" name="branchs[<?php echo $i; ?>][name]" value="<?php echo $branch['name']; ?>" />
+                      <input type="hidden" name="branches[<?php echo $i; ?>][id]" value="<?php echo $branch['id']; ?>" />
+                      <input type="hidden" name="branches[<?php echo $i; ?>][name]" value="<?php echo $branch['name']; ?>" />
                       <span><?php echo $branch['name']; ?></span>
                     </td>
                     <td>
@@ -61,7 +61,7 @@
 </div>
 <?php echo $footer; ?>
 <script type="text/javascript"><!--//
-var count_branch = <?php echo count( $branchs ) ; ?>;
+var count_branch = <?php echo count( $branches ) ; ?>;
 
 $(function () {
 
@@ -83,7 +83,7 @@ $(function () {
      }, 
      select: function(event, ui) {
       if ( $('input[value=\'' + ui.item.value + '\']').length == 0 ) {
-       $(this).parent().parent().find('ul').append('<li><input type="hidden" name="branchs[' + count_branch + '][id]" value="' + ui.item.value + '" /><input type="hidden" name="branchs[' + count_branch + '][name]" value="' + ui.item.label + '" /><span>' + ui.item.label + '</span><a class="btn-remove-branch btn btn-danger"><i class="icon-trash"></i></a></li>');
+       $(this).parent().parent().find('ul').append('<li><input type="hidden" name="branches[' + count_branch + '][id]" value="' + ui.item.value + '" /><input type="hidden" name="branches[' + count_branch + '][name]" value="' + ui.item.label + '" /><span>' + ui.item.label + '</span><a class="btn-remove-branch btn btn-danger"><i class="icon-trash"></i></a></li>');
         count_branch++;
       }else {
         alert('Branch is exist');

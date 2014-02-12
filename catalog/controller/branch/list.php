@@ -7,15 +7,24 @@ class ControllerBranchList extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		$this->load->model('tool/image');
+
 		$oCurrentUser = $this->customer->getUser();
 
-		$lBranch = $oCurrentUser->getBranchs();
+		$lBranch = $oCurrentUser->getBranches();
 
-		$this->data['branchs'] = array();
+		$this->data['branches'] = array();
 		foreach ( $lBranch as $oBranch ) {
 			$aBranch = $oBranch->formatToCache();
 
-			$this->data['branchs'][] = $aBranch;
+			// thumb
+			if ( !empty($aBranch['logo']) ){
+				$aBranch['logo'] = $this->model_tool_image->resize( $aBranch['logo'], 130, 130 );
+			}else{
+				$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+			}
+
+			$this->data['branches'][] = $aBranch;
 		}
 
     	$this->document->setTitle($this->language->get('heading_title'));
