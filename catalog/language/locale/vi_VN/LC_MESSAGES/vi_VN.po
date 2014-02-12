@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
 "POT-Creation-Date: 2014-02-12 19:49+0700\n"
-"PO-Revision-Date: 2014-02-12 19:49+0700\n"
+"PO-Revision-Date: 2014-02-12 19:53+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -28,12 +28,12 @@ msgstr "Các lĩnh vực của tôi"
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/01/74/2d629af7b60ee33dc0ce6e13b88ae21f811fa016348f1a8bcdc16c211417.php:95
 msgid "members"
-msgstr "Các thành viên"
+msgstr "thành viên"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/01/74/2d629af7b60ee33dc0ce6e13b88ae21f811fa016348f1a8bcdc16c211417.php:101
 msgid "posts"
-msgstr "Các bài viết"
+msgstr "bài viết"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:32
