@@ -81,6 +81,24 @@ Class Branch {
 	}
 
 	/**
+	 * Get Member By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: string Member ID
+	 * @return:
+	 * 		- Object Member
+	 * 		- null if not found
+	 */
+	public function getMemberById( $member_id ){
+		foreach ( $this->members as $member ){
+			if ( $member->getId() == $member_id ){
+				return  $member;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
 	* Format array to save to Cache
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
@@ -211,7 +229,7 @@ Class Branch {
 		return $this->members;
 	}
 
-	public function addMember( $member ){
+	public function addMember( \Document\User\User $member ){
 		return $this->members[] = $member;
 	}
 }
