@@ -7,6 +7,17 @@ class ControllerBranchList extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		$oCurrentUser = $this->customer->getUser();
+
+		$lBranch = $oCurrentUser->getBranchs();
+
+		$this->data['branchs'] = array();
+		foreach ( $lBranch as $oBranch ) {
+			$aBranch = $oBranch->formatToCache();
+
+			$this->data['branchs'][] = $aBranch;
+		}
+
     	$this->document->setTitle($this->language->get('heading_title'));
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/branch/list.tpl')) {

@@ -2,20 +2,20 @@
 
 {% use '@template/default/template/common/html_block.tpl' %}
 
-{% block title %}{% trans %}Branch Page{% endtrans %}{% endblock %}
+{% block title %}{% trans %}My Branch Page{% endtrans %}{% endblock %}
 
 {% block body %}
     <div id="y-content">
         <div id="y-main-content"  data-block-width="400" data-block-height="130" class="has-horizontal block-auto-floatleft full-width" style="width: 9999px;">
             <div class="feed-block">
                 <div class="block-header">
-                    <a class="block-title fl" href="#">My Branches</a>  
+                    <a class="block-title fl" href="#">{% trans %}My Branches{% endtrans %}</a>  
                     <a class="block-seemore fl" href="#"> 
                         <i class="icon-angle-right"></i>
                     </a>
                 </div>
                 <div class="block-content user-container">
-                    {% for i in 0..20 %}
+                    {% for branch in branchs %}
                     <div class="block-content-item branch-item">
                         <a href="#" class="fl branch-img">
                             <img src="http://www.img.lx.it.pt/iwbf2013/images/it_logo.jpg" alt="IT">
