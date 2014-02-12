@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-11 16:42+0700\n"
-"PO-Revision-Date: 2014-02-11 16:42+0700\n"
+"POT-Creation-Date: 2014-02-12 19:49+0700\n"
+"PO-Revision-Date: 2014-02-12 19:49+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -14,6 +14,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: F:\\Program Files\\xampp\\htdocs\\Yesocl\\system"
 "\\twig\n"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/01/74/2d629af7b60ee33dc0ce6e13b88ae21f811fa016348f1a8bcdc16c211417.php:47
+msgid "My Branch Page"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/01/74/2d629af7b60ee33dc0ce6e13b88ae21f811fa016348f1a8bcdc16c211417.php:60
+msgid "My Branches"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/01/74/2d629af7b60ee33dc0ce6e13b88ae21f811fa016348f1a8bcdc16c211417.php:95
+msgid "members"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/01/74/2d629af7b60ee33dc0ce6e13b88ae21f811fa016348f1a8bcdc16c211417.php:101
+msgid "posts"
+msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:32
@@ -48,6 +68,11 @@ msgid "My friend"
 msgstr ""
 
 #: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/0a/97/e9a682a4f7ab1bf5abb5525b6a38dc512993c46c50b13af31614fef3f1a0.php:158
+msgid "My branch"
+msgstr ""
+
+#: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/10/60/6e20638f5b1ed0f9289b81ce2c752c3c69a415ca842ef243a349b4b030e5.php:36
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:63
 msgid "Login"
@@ -62,7 +87,7 @@ msgstr ""
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/10/60/6e20638f5b1ed0f9289b81ce2c752c3c69a415ca842ef243a349b4b030e5.php:84
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:400
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:412
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:97
 msgid "Remember me"
 msgstr ""
@@ -88,6 +113,11 @@ msgstr ""
 #: Files\xampp\htdocs\Yesocl\system\twig/4b/36/0568ae994a316ac392123b1d9ba1da4e72b0deb2c038f03351678af8e8d1.php:96
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:89
 msgid "Password"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/17/d7/cbde6da5441fffdb7c1ce7e42c21f0f8c4c4185e49a588a7cc668cd47db7.php:47
+msgid "Branch Detail Page"
 msgstr ""
 
 #: F:\Program
@@ -631,28 +661,33 @@ msgid "See all notifications"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:307
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:256
+msgid "See all messages"
+msgstr ""
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:319
 msgid "added you as friend"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:313
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:325
 msgid "Accept"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:317
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:329
 msgid "Ignore"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:407
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:419
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:104
 msgid "Forgot password"
 msgstr ""
 
 #: F:\Program
-#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:414
+#: Files\xampp\htdocs\Yesocl\system\twig/ab/ce/6f42d546f5b8adfc8452b44f76c6cff6f857d7c3eafcc3d23811c03249c0.php:426
 #: Files\xampp\htdocs\Yesocl\system\twig/ef/c7/f6a5f02353c3eb25da753cc306212ff4834910d611e833a0f757983fac65.php:110
 msgid "Sign in"
 msgstr ""
