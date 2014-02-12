@@ -84,7 +84,7 @@ if ( isset($request->cookie['language']) ){
 		$lang = $request->cookie['language'];
 	}
 }else{
-	$lang = 'vi_VN';
+	$lang = 'vi';
 	setcookie('language', $lang, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 }
 
