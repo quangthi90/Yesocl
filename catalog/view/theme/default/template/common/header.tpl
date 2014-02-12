@@ -61,9 +61,6 @@
 			    <a href="#" id="btn-search-invoke-on">
             <i class="icon-search"></i>
           </a>
-          <a href="{{ path('MessagePage') }}">
-			    	<i class="icon-edit"></i>
-			    </a>
 			</div>
 			<div id="user-notification" class="fr notification-group">
         <div class="notification-item common js-notification-common" data-notification-count="{{ notification_count }}">
