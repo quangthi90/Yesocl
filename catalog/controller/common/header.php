@@ -111,6 +111,12 @@ class ControllerCommonHeader extends Controller {
 			}
 			// -- End Notifications --
 
+			if ( $oLoggedUser->getBranches()->count() == 0 ){
+				$this->data['show_branch_menu'] = false;
+			}else{
+				$this->data['show_branch_menu'] = true;
+			}
+
 			$this->data['mess_unread'] = $oLoggedUser->getUnRead();
 		}
 				
