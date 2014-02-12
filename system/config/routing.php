@@ -81,6 +81,7 @@ $_['routing']['NotificationPage']				= 'notification/page/';
 // Avatar
 $_['routing']['ChangeAvatar']					= 'avatar/change/';
 $_['routing']['SaveAvatar']						= 'avatar/save/';
+
 // Message
 $_['routing']['MessagePage']					= 'message/page/';
 $_['routing']['MessageSend']					= 'message/send/';

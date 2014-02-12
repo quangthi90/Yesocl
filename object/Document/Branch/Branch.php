@@ -109,7 +109,9 @@ Class Branch {
 			'id'		=> $this->getId(),
 			'name' 		=> $this->getName(),
 			'slug'		=> $this->getSlug(),
-			'status'	=> $this->getStatus()
+			'status'	=> $this->getStatus(),
+			'member_count' => $this->getMembers()->count(),
+			'post_count' => $this->getPosts()->count()
 		);
 
 		return $data;

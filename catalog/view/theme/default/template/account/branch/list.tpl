@@ -17,17 +17,17 @@
                 <div class="block-content user-container">
                     {% for branch in branchs %}
                     <div class="block-content-item branch-item">
-                        <a href="#" class="fl branch-img">
+                        <a href="{{ path('BranchDetail', {branch_slug: branch.slug}) }}" class="fl branch-img">
                             <img src="http://www.img.lx.it.pt/iwbf2013/images/it_logo.jpg" alt="IT">
                         </a>
                         <div class="fl branch-info">
-                            <a href="#" class="branch-name">Technology</a>
+                            <a href="{{ path('BranchDetail', {branch_slug: branch.slug}) }}" class="branch-name">{{ branch.name }}</a>
                             <ul class="branch-infolist">
-                                <li><i class="icon-group"></i> <span class="count-number">100</span> members</li>
-                                <li><i class="icon-pencil"></i> <span class="count-number">1000</span> posts</li>                    
+                                <li><i class="icon-group"></i> <span class="count-number">{{ branch.member_count }}</span> {% trans %}members{% endtrans %}</li>
+                                <li><i class="icon-pencil"></i> <span class="count-number">{{ branch.post_count }}</span> {% trans %}posts{% endtrans %}</li>                    
                             </ul>
                         </div>
-                        <div class="yes-dropdown">
+                        {#<div class="yes-dropdown">
                             <div class="dropdown">
                                <a class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="icon-caret-down"></i>
@@ -37,7 +37,7 @@
                                     <li><a href="#">...</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>#}
                     </div>                  
                     {% endfor %}
                 </div>
