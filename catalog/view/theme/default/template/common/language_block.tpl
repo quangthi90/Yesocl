@@ -1,5 +1,6 @@
 {% block common_language_block %}
-	<div id="language-data" style="display: none;">
+	{% set language_code = get_cookie('language') %}
+	<div id="language-data" data-locale-code="{% if get_cookie('language') == '' %}vi{% else %}language_code{% endif %}" style="display: none;">
 		<div id="language-data-time" 
 			data-text-suffixago="trước" 
 			data-text-suffixfrommow="cách đây"

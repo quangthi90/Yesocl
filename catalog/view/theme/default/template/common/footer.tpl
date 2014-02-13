@@ -22,9 +22,9 @@
             <li>
               <a href="#" data-selected="{% if language_code == 'vi' or get_cookie('language') == '' %}true{% else %}false{% endif %}" data-code="vi" class="language-item"><img src="image/flags/vn.png"> <span>Vietnamese</span></a>
             </li>
-            <li>
+            {#<li>
               <a href="#" data-selected="{% if language_code == 'zh' %}true{% else %}false{% endif %}" data-code="zh" class="language-item"><img src="image/flags/cn.png"> <span>Chinese</span></a>
-            </li>
+            </li>#}
           </ul>
         </div> 
         <div class="links-footer">

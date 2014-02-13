@@ -43,6 +43,7 @@
       allowFuture: false,
       localeTitle: false,
       cutoff: 2*24*60*60*1000,
+      languageCode: currentLocaleTexts.data('locale-code'),
       strings: {
         prefixAgo: null,
         prefixFromNow: null,
@@ -162,8 +163,7 @@
       if ( $s.cutoff == 0 || distance(data.datetime) < $s.cutoff) {
         $(this).text(inWords(data.datetime));
       }else {
-        var options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
-        $(this).text(data.datetime.toLocaleDateString(options));
+        $(this).text(data.datetime.toDateString());
       }
     }
     return this;
