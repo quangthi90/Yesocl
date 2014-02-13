@@ -2594,6 +2594,7 @@ db.getCollection("branch_post").insert({
     }
   ],
   "content": "&lt;p&gt;\r\n\t&lt;em&gt;Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng tin tưởng VNM có thể duy trì được tốc độ tăng trưởng doanh thu trên 20%\/năm nhờ giành thêm được thị phần.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi kỳ vọng tăng trưởng trong tương lai của VNM sẽ dựa trên 4 nhóm sản phẩm chính.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Xuất khẩu cũng sẽ là động lực tăng trưởng vững của VNM nhưng chúng tôi cho rằng sẽ không có sự đột biến thần kỳ trong hoạt động này.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Chúng tôi cũng kỳ vọng VNM sẽ có hoạt động M&amp;amp;A quy mô nhỏ tại Việt Nam và nước ngoài.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận gộp nhiều khả năng đã đạt cao nhất là 36,5% vào 2009 và năm nay sẽ giảm do chi phí đầu vào tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tỷ suất lợi nhuận sẽ ổn định những năm sau đó và chủ yếu chịu ảnh hưởng của biến động của chi phí đầu vào.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Tiền mặt sẽ tăng lên kể từ năm nay vì các hoạt động đầu tư của công ty hiện đã gần như hoàn tất.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Và chúng tôi kỳ vọng tỷ lệ chi trả cổ tức trên lợi nhuận sẽ tăng dần lên 50%.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện room dành cho NĐTNN của cổ phiếu VNM đã hết nhưng có thể sẽ được nới vào năm 2014.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Định giá cổ phiếu VNM vẫn hợp lý và nếu so với bình quân các doanh nghiệp cùng ngành thì giá cổ phiếu VNM vẫn còn tiềm năng tăng.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;&amp;nbsp;&lt;\/em&gt;·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; &lt;em&gt;Hiện P\/E dự phóng 2013 của cổ phiếu VNM là 17,4 lần và P\/B là 6,1 lần. Chúng tôi tiếp tục duy trì đánh giá Khả quan đối với cổ phiếu VNM.&lt;\/em&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;em&gt;nguồn HSC&lt;\/em&gt;&lt;\/p&gt;\r\n",
+  "countViewer": NumberInt(0),
   "created": ISODate("2013-08-23T03:00:41.0Z"),
   "deleted": false,
   "description": "Chúng tôi dự báo thị trường sữa của Việt Nam sẽ tăng trưởng với tốc độ CAGR 17,3% trong 3 năm tới.",
@@ -2605,7 +2606,7 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d059471dee740b000001\/avatar.jpg",
   "title": "CTCP sữa Việt Nam (VNM – HSX): Ước KQKD 6 tháng và triển vọng KQKD 2013 và 2014. Tiếp tục duy trì đánh giá Khả quan",
-  "updated": ISODate("2013-11-09T06:59:18.0Z"),
+  "updated": ISODate("2014-02-13T11:58:34.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -7971,38 +7972,6 @@ db.getCollection("user").insert({
   },
   "notifications": [
     {
-      "_id": ObjectId("52f33a37471dee7009000000"),
-      "action": "like",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "type": "branch",
-      "object": "comment",
-      "objectId": "527dcfdf471deef00b000000",
-      "slug": "lang-kinh-yestoc-phien-1608-can-trong-vung-khang-cu-manh-5217929f471dee3c08000000",
-      "read": true,
-      "status": true,
-      "created": ISODate("2014-02-06T07:31:03.0Z")
-    },
-    {
-      "_id": ObjectId("52f33a38471dee7009000001"),
-      "action": "like",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "type": "branch",
-      "object": "comment",
-      "objectId": "521c4b6b471dee200b000003",
-      "slug": "lang-kinh-yestoc-phien-1608-can-trong-vung-khang-cu-manh-5217929f471dee3c08000000",
-      "read": true,
-      "status": true,
-      "created": ISODate("2014-02-06T07:31:04.0Z")
-    },
-    {
       "_id": ObjectId("52f912a9471deea80a00000b"),
       "action": "post",
       "actor": {
@@ -8261,7 +8230,7 @@ db.getCollection("user").insert({
   "salt": "dc1668c45",
   "slug": "user2",
   "status": true,
-  "unRead": NumberInt(1),
+  "unRead": NumberInt(0),
   "username": "user2"
 });
 db.getCollection("user").insert({
@@ -8678,7 +8647,7 @@ db.getCollection("user_message").insert({
         "$db": "yesocl"
       },
       "isSender": false,
-      "read": false,
+      "read": true,
       "created": ISODate("2014-02-11T09:31:49.0Z")
     }
   ],
@@ -8812,7 +8781,7 @@ db.getCollection("user_message").insert({
         "$db": "yesocl"
       },
       "isSender": false,
-      "read": false,
+      "read": true,
       "created": ISODate("2014-02-01T11:39:09.0Z")
     },
     {
@@ -8824,7 +8793,7 @@ db.getCollection("user_message").insert({
         "$db": "yesocl"
       },
       "isSender": false,
-      "read": false,
+      "read": true,
       "created": ISODate("2014-02-10T16:49:13.0Z")
     },
     {
@@ -8836,7 +8805,7 @@ db.getCollection("user_message").insert({
         "$db": "yesocl"
       },
       "isSender": false,
-      "read": false,
+      "read": true,
       "created": ISODate("2014-02-11T09:08:05.0Z")
     },
     {
@@ -8848,7 +8817,7 @@ db.getCollection("user_message").insert({
         "$db": "yesocl"
       },
       "isSender": false,
-      "read": false,
+      "read": true,
       "created": ISODate("2014-02-11T09:31:49.0Z")
     }
   ],
