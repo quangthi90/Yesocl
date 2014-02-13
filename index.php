@@ -76,6 +76,7 @@ $twig = new Twig_Environment($twig_loader, array(
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
+$twig->addExtension(new Twig_Extensions_Extension_Intl());
 
 // Multi languages
 if ( isset($request->cookie['language']) ){

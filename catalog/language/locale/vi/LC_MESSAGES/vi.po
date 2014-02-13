@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-14 01:04+0700\n"
-"PO-Revision-Date: 2014-02-14 01:04+0700\n"
+"POT-Creation-Date: 2014-02-14 02:15+0700\n"
+"PO-Revision-Date: 2014-02-14 02:15+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -157,7 +157,7 @@ msgstr "Xóa"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/19/45/909c69b30cfae2d1a12b5920b76c4cd793f063d583cbd5ac461e77229db1.php:154
-#: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:210
+#: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:212
 #: Files\xampp\htdocs\Yesocl\system\twig/9d/91/c613f723fe1b24055ae0c46b01ff42dc9335bb2a1c0c1d5252af0321f9fa.php:144
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:201
 #: Files\xampp\htdocs\Yesocl\system\twig/a7/31/847cf9c7e17b99e9c9a34c71d790fac9e21f22b3c4b0cf604358354f20a8.php:436
@@ -300,6 +300,11 @@ msgstr "Làm chủ"
 #: Files\xampp\htdocs\Yesocl\system\twig/37/d9/d193f85a23067d0a81db7847b73c9f69f6bdf2bcfcac6459affceb207e87.php:295
 msgid "Employed"
 msgstr "Làm công"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/3b/8b/8feda3c5c2ab3ab14723c44fb1aaf5a8a0bdcbe74479d2d484a824a201a2.php:190
+msgid "at"
+msgstr "lúc"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/45/ac/19f7580062caed3f7d0a9120bb090fc87754633d25a3f3c3af343079b73d.php:76

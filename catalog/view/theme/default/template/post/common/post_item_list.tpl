@@ -57,7 +57,7 @@
                                 </span>
                                 <span class="post_time fl">
                                     <i class="icon-calendar"></i>
-                                    <d class="timeago" title="{{ date_format(post.created) }}"></d>
+                                    <d class="" title="{{ post.created|localizeddate('full', 'short', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss") }}">{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, 'd MMMM') }}</d>
                                 </span>
                                 <span class="post_like fr">
                                     <a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
