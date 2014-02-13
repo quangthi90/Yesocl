@@ -330,6 +330,7 @@
 		                </ul>
 		            </div>
 		        </div>
+		        <div class="clear"></div>
 			</li>
 		</div>
 		{% endraw %}
