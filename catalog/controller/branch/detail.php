@@ -75,6 +75,7 @@ class ControllerBranchDetail extends Controller {
     	$this->data['users'] = $aUsers;
     	$this->data['posts'] = $aPosts;
     	$this->data['branch'] = $oBranch->formatToCache();
+    	$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/branch/detail.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/account/branch/detail.tpl';
