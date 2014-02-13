@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-02-14 02:15+0700\n"
-"PO-Revision-Date: 2014-02-14 02:15+0700\n"
+"POT-Creation-Date: 2014-02-14 02:18+0700\n"
+"PO-Revision-Date: 2014-02-14 02:19+0700\n"
 "Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -778,6 +778,16 @@ msgstr "Tất cả ghi chú"
 #: Files\xampp\htdocs\Yesocl\system\twig/c1/a2/0dbbfed6aad4c3f5019d43cc9ecdd9948e4c547d0a5c43b6ce986fb0fa8d.php:72
 msgid "Sent"
 msgstr "Gửi đi"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/c7/a5/89b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da252082359.php:52
+msgid "English"
+msgstr "Tiếng Anh"
+
+#: F:\Program
+#: Files\xampp\htdocs\Yesocl\system\twig/c7/a5/89b44b6da2403680365c61dbb5cb8d5b298856b37457ba473da252082359.php:64
+msgid "Vietnamese"
+msgstr "Tiếng Việt"
 
 #: F:\Program
 #: Files\xampp\htdocs\Yesocl\system\twig/cb/b2/0d70bda2797d987d7bae0601804604d4eaaeb52968677b4c9817c7c6684c.php:88
