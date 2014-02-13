@@ -20,7 +20,7 @@
 		{% if advance_comment_id is not defined %}
 			{% set advance_comment_id = 'comment-advance-add-popup' %}
 		{% endif %}
-		<div class="mfp-hide y-dlg-container" id="{{ advance_comment_id }}">
+		<div class="mfp-hide y-dlg-container" data-focus-type="editable" id="{{ advance_comment_id }}">
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
@@ -115,7 +115,7 @@
 		{% if post_popup_id is not defined %}
 			{% set post_popup_id = 'post-advance-add-popup' %}
 		{% endif %}
-		<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}">
+		<div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="{{ post_popup_id }}">
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
@@ -273,7 +273,7 @@
 
 {# -- Message -- #}
 	{% block common_html_block_new_message_form %}
-		<div class="mfp-hide y-dlg-container" id="new-message-form">
+		<div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="new-message-form">
 			<div class="y-dlg">
 				<form autocomplete="off" class="new-message-form">
 					<div class="dlg-title">
