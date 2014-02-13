@@ -82,6 +82,8 @@ if ( isset($request->cookie['language']) ){
 	$sLangFile = DIR_LANGUAGE . 'locale/' . $request->cookie['language'] . '/LC_MESSAGES/' . $request->cookie['language'] . '.po';
 	if ( is_file($sLangFile) ){
 		$lang = $request->cookie['language'];
+	}else{
+		$lang = 'vi';
 	}
 }else{
 	$lang = 'vi';
