@@ -223,6 +223,16 @@ Class User {
 		return null;
 	}
 
+	public function getBranchBySlug( $branch_slug ){
+		foreach ( $this->branches as $branch ){
+			if ( $branch->getSlug() == $branch_slug ){
+				return $branch;
+			}
+		}
+		
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}
