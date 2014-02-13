@@ -230,14 +230,22 @@ var yCurrUser = new CurrentUser();
 			mainClass: 'mfp-fade',
 			callbacks: {
 				open: function() {
-				    var src = $(that.linkPopupCommon.attr('data-mfp-src'));				    
-				    var inputs = src.find('input[type="text"]').first();
-				    if(inputs.length === 0) {
-				    	inputs = src.find('textarea').first();
-				    }
-				    setTimeout(function(){
-				    	inputs.focus();	    
-				    }, 500);
+				    var src = $(that.linkPopupCommon.attr('data-mfp-src'));
+				    var focusType = src.data('focus-type');
+				    if(focusType === undefined)
+				    	return;
+				    if(focusType === 'editable'){
+				    	var editable = src.find('.note-editable').first();
+				    	setTimeout(function(){
+				    		alert('a');
+					    	editable.click();
+					    }, 1000);
+				    }else {
+				    	var inputs = src.find(focusType).first();
+				    	setTimeout(function(){
+					    	inputs.focus();
+					    }, 500);
+				    }				    		    
 			  	}
 			}
 	    });
