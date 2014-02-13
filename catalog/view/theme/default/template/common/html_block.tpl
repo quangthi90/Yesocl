@@ -226,9 +226,9 @@
 									<a class="like-post " href="#">
 										<i class="icon-thumbs-up medium-icon"></i>
 			                        </a>
-			                        <span class="liked-post hidden">
+			                        <d class="liked-post hidden">
 			                            {% endraw %}{% trans %}Liked{% endtrans %}{% raw %}
-									</span>
+									</d>
 									<a class="post-liked-list" href="#" data-url="${href.post_get_liked}" data-like-count="0">
 										<d class="number-counter">0</d>
 									</a>

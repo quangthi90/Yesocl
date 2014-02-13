@@ -63,9 +63,9 @@
                                     <a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
                                         <i class="icon-thumbs-up medium-icon"></i>
                                     </a>
-                                    <span class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
+                                    <d class="liked-post {% if post.isUserLiked == 0 %}hidden{% endif %}">
                                         {% trans %}Liked{% endtrans %}
-                                    </span>
+                                    </d>
                                     <a class="post-liked-list" href="#" data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" data-like-count="{{ post.like_count }}">
                                         <d class="number-counter">{{ post.like_count }}</d>
                                     </a>
