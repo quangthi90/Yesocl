@@ -94,7 +94,7 @@
                 </li>
               {% else %}
                 <li class="notification-content-item empty-ntf">
-                  No notifications to show
+                  {% trans %}No notifications to show{% endtrans %}
                 </li>
               {% endif %}
             </ul>
@@ -113,7 +113,7 @@
                 <a href="{{ path('MessagePage') }}">{% trans %}See all messages{% endtrans %}</a>
               </li>
               <li class="notification-content-item empty-ntf">
-                No notifications to show
+                {% trans %}No messages to show{% endtrans %}
               </li>
             </ul>
           </div>
