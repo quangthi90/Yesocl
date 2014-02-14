@@ -231,7 +231,9 @@ var yCurrUser = new CurrentUser();
 			callbacks: {
 				open: function() {
 				    var src = $(that.linkPopupCommon.attr('data-mfp-src'));
+				    console.log(that.linkPopupCommon.attr('data-mfp-src'));
 				    var focusType = src.data('focus-type');
+				    console.log(focusType);
 				    if(focusType === undefined)
 				    	return;
 				    if(focusType === 'editable'){
