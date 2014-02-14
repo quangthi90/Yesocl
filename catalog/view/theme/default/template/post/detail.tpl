@@ -30,7 +30,12 @@
 							{{ post.author }}
 						</a> - 
 						<span class="post-time">
-							<d class="timeago" title="{{ post.created|date(date_format) }}"></d>
+							{% set date_timeago = get_datetime_from_now(-2) %}
+							{% if post.created >= date_timeago %}
+                            <d class="timeago" title="{{ post.created|date('c') }}"></d>
+                            {% else %}
+                            <d title="{{ post.created|localizeddate('full', 'short', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss") }}">{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "d MMMM '" ~ 'at'|trans ~ "' hh:ss") }}</d>
+                            {% endif %}
 						</span>
 					</div>
 					<ul class="post-actions fr post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">

@@ -44,7 +44,12 @@
 				<div class="post_meta">
 					<span class="post_time fl">
 						<i class="icon-calendar"></i>
-						<d class="timeago" title="{{ date_format(post.created) }}"></d>
+						{% set date_timeago = get_datetime_from_now(-2) %}
+						{% if post.created >= date_timeago %}
+                        <d class="timeago" title="{{ post.created|date('c') }}"></d>
+                        {% else %}
+                        <d title="{{ post.created|localizeddate('full', 'short', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss") }}">{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "d MMMM '" ~ 'at'|trans ~ "' hh:ss") }}</d>
+                        {% endif %}
 					</span>
 					<span class="post_like fr">
 						<a class="like-post {% if post.isUserLiked == 1 %}hidden{% endif %}" href="#">
