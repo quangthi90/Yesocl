@@ -1,6 +1,5 @@
 {% block common_language_block %}
-	{% set language_code = get_cookie('language') %}
-	<div id="language-data" data-locale-code="{% if get_cookie('language') == '' %}vi{% else %}{{ language_code }}{% endif %}" class="hidden">
+	<div id="language-data" class="hidden">
 		<div id="language-data-time" 
 			data-text-suffixago="{% trans %}ago{% endtrans %}" 
 			data-text-suffixfrommow="{% trans %}from now{% endtrans %}"
