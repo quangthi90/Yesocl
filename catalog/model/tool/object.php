@@ -8,134 +8,179 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Comment formated
 	 */
-	public function formatCommentOfPost( $base_comment, $post_slug, $post_type ){
+	public function formatCommentOfPost( $lBaseComment, $sPostSlug, $sPostType ){
 		$this->load->model('user/user');
         $this->load->model('tool/image');
 
-        if ( !$base_comment ){
+        if ( !$lBaseComment ){
         	return array();
         }
 
         $idCurrUserId = $this->customer->getId();
 
-        if ( is_array($base_comment) ){
-        	$comments = array();
-        	$users = array();
-	        foreach ( $base_comment as $comment_temp ) {
-	            if ( in_array($this->customer->getId(), $comment_temp->getLikerIds()) ){
-	                $liked = true;
+        if ( is_array($lBaseComment) ){
+        	$aComments = array();
+        	$aUsers = array();
+	        foreach ( $lBaseComment as $oComment ) {
+	            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
+	                $iLiked = true;
 	            }else{
-	                $liked = false;
+	                $iLiked = false;
 	            }
 
-	            $comment = $comment_temp->formatToCache();
+	            $aComment = $oComment->formatToCache();
 
-	            if ( empty($users[$comment['user_id']]) ){
-	            	$user = $comment_temp->getUser()->formatToCache();
-	            	$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] ); 
-	            	$users[$user['id']] = $user;
+	            if ( empty($aUsers[$aComment['user_id']]) ){
+	            	$aUser = $oComment->getUser()->formatToCache();
+	            	$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] ); 
+	            	$aUsers[$aUser['id']] = $aUser;
 	            }else{
-	            	$user = $users[$comment['user_id']];
+	            	$aUser = $aUsers[$aComment['user_id']];
 	            }
 	            
-	            $comment['avatar'] = $user['avatar'];
+	            $aComment['avatar'] = $aUser['avatar'];
 
-	            if ( $user && $user['username'] ){
-	                $comment['author'] = $user['username'];
+	            if ( $aUser && $aUser['username'] ){
+	                $aComment['author'] = $aUser['username'];
 	            }else{
-	                $comment['author'] = $comment['author'];
+	                $aComment['author'] = $aComment['author'];
 	            }
 
-	            $comment['href_user'] = $this->extension->path('WallPage', array(
-	                'user_slug' => $user['slug']
+	            $aComment['href_user'] = $this->extension->path('WallPage', array(
+	                'user_slug' => $aUser['slug']
 	            ));
-	            $comment['href_like'] = $this->extension->path('CommentLike', array(
-	                'post_slug' => $post_slug,
-	                'post_type' => $post_type,
-	                'comment_id' => $comment['id']
+	            $aComment['href_like'] = $this->extension->path('CommentLike', array(
+	                'post_slug' => $sPostSlug,
+	                'post_type' => $sPostType,
+	                'comment_id' => $aComment['id']
 	            ));
-	            $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-	                'post_slug' => $post_slug,
-	                'post_type' => $post_type,
-	                'comment_id' => $comment['id']
+	            $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+	                'post_slug' => $sPostSlug,
+	                'post_type' => $sPostType,
+	                'comment_id' => $aComment['id']
 	            ));
-	            $comment['href_edit'] = $this->extension->path('CommentEdit', array(
-	                'post_slug' => $post_slug,
-	                'post_type' => $post_type,
-	                'comment_id' => $comment['id']
-	            ));
+	            $aComment['is_liked'] = $iLiked;
+
+	            if ( $aComment['user_id'] == $idCurrUserId ){
+	            	$aComment['is_owner'] = true;
+	            	$aComment['href_edit'] = $this->extension->path('CommentEdit', array(
+	                'post_slug' => $sPostSlug,
+	                'post_type' => $sPostType,
+	                'comment_id' => $aComment['id']
+		            ));
+		            $aComment['href_delete'] = $this->extension->path('CommentDelete', array(
+		                'post_slug' => $sPostSlug,
+		                'post_type' => $sPostType,
+		                'comment_id' => $aComment['id']
+		            ));
 	            
-	            $comment['href_delete'] = $this->extension->path('CommentDelete', array(
-	                'post_slug' => $post_slug,
-	                'post_type' => $post_type,
-	                'comment_id' => $comment['id']
-	            ));
-	            $comment['created'] = $this->extension->dateFormat( $comment['created'] );
-	            $comment['is_liked'] = $liked;
-
-	            if ( $comment['user_id'] == $idCurrUserId ){
-	            	$comment['is_owner'] = true;
 	            }else{
-	            	$comment['is_owner'] = false;
+	            	$aComment['is_owner'] = false;
 	            }
 
-	            $comments[] = $comment;
+	            $date = $this->extension->getDatetimeFromNow( -2 );
+		        if ( $aComment['created'] < $date ){
+		        	$aComment['created_title'] = $this->extension->localizedDate(
+		        		$aComment['created'],
+		        		'full',
+		        		'none',
+		        		$this->extension->getCookie('language'),
+		        		null,
+		        		"cccc, d MMMM yyyy '" . gettext('at') . "' hh:ss"
+		        	);
+		        	$aComment['created_label'] = $this->extension->localizedDate(
+		        		$aComment['created'],
+		        		'full',
+		        		'none',
+		        		$this->extension->getCookie('language'),
+		        		null,
+		        		"d MMMM '" . gettext('at') . "' hh:ss"
+		        	);
+		        }else{
+		        	$aComment['created_title'] = $aComment['created']->format('c');
+		        	$aComment['created_label'] = null;
+		        }
+
+	            $aComments[] = $aComment;
 	        }
 
-	        return $comments;
+	        return $aComments;
 	    }
         
-        if ( in_array($this->customer->getId(), $base_comment->getLikerIds()) ){
-            $liked = 1;
+        if ( in_array($this->customer->getId(), $lBaseComment->getLikerIds()) ){
+            $iLiked = 1;
         }else{
-            $liked = 0;
+            $iLiked = 0;
         }
 
-        $comment = $base_comment->formatToCache();
+        $aComment = $lBaseComment->formatToCache();
 
-    	$user = $base_comment->getUser()->formatToCache();
+    	$aUser = $lBaseComment->getUser()->formatToCache();
     	
-    	$comment['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'] ); 
+    	$aComment['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] ); 
     	
-        if ( $user && $user['username'] ){
-            $comment['author'] = $user['username'];
+        if ( $aUser && $aUser['username'] ){
+            $aComment['author'] = $aUser['username'];
         }else{
-            $comment['author'] = $comment['author'];
+            $aComment['author'] = $aComment['author'];
         }
 
-        $comment['href_user'] = $this->extension->path('WallPage', array(
-            'user_slug' => $user['slug']
+        $aComment['href_user'] = $this->extension->path('WallPage', array(
+            'user_slug' => $aUser['slug']
         ));
-        $comment['href_like'] = $this->extension->path('CommentLike', array(
-            'post_slug' => $post_slug,
-            'post_type' => $post_type,
-            'comment_id' => $comment['id']
+        $aComment['href_like'] = $this->extension->path('CommentLike', array(
+            'post_slug' => $sPostSlug,
+            'post_type' => $sPostType,
+            'comment_id' => $aComment['id']
         ));
-        $comment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
-            'post_slug' => $post_slug,
-            'post_type' => $post_type,
-            'comment_id' => $comment['id']
-        ));
-        $comment['href_edit'] = $this->extension->path('CommentEdit', array(
-            'post_slug' => $post_slug,
-            'post_type' => $post_type,
-            'comment_id' => $comment['id']
+        $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+            'post_slug' => $sPostSlug,
+            'post_type' => $sPostType,
+            'comment_id' => $aComment['id']
         ));
         
-        $comment['href_delete'] = $this->extension->path('CommentDelete', array(
-            'post_slug' => $post_slug,
-            'post_type' => $post_type,
-            'comment_id' => $comment['id']
-        ));
-        $comment['created'] = $this->extension->dateFormat( $comment['created'] );
-        $comment['is_liked'] = $liked;
-        if ( $comment['user_id'] == $idCurrUserId ){
-        	$comment['is_owner'] = true;
+        $aComment['is_liked'] = $iLiked;
+        if ( $aComment['user_id'] == $idCurrUserId ){
+        	$aComment['is_owner'] = true;
+        	$aComment['href_edit'] = $this->extension->path('CommentEdit', array(
+	            'post_slug' => $sPostSlug,
+	            'post_type' => $sPostType,
+	            'comment_id' => $aComment['id']
+	        ));
+	        $aComment['href_delete'] = $this->extension->path('CommentDelete', array(
+	            'post_slug' => $sPostSlug,
+	            'post_type' => $sPostType,
+	            'comment_id' => $aComment['id']
+	        ));
+        
         }else{
-        	$comment['is_owner'] = false;
+        	$aComment['is_owner'] = false;
         }
 
-        return $comment;
+        $date = $this->extension->getDatetimeFromNow( -2 );
+        if ( $aComment['created'] < $date ){
+        	$aComment['created_title'] = $this->extension->localizedDate(
+        		$aComment['created'],
+        		'full',
+        		'none',
+        		$this->extension->getCookie('language'),
+        		null,
+        		"cccc, d MMMM yyyy '" . gettext('at') . "' hh:ss"
+        	);
+        	$aComment['created_label'] = $this->extension->localizedDate(
+        		$aComment['created'],
+        		'full',
+        		'none',
+        		$this->extension->getCookie('language'),
+        		null,
+        		"d MMMM '" . gettext('at') . "' hh:ss"
+        	);
+        }else{
+        	$aComment['created_title'] = $aComment['created']->format('c');
+        	$aComment['created_label'] = null;
+        }
+
+        return $aComment;
 	}
 }
 ?>

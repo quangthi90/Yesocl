@@ -65,7 +65,12 @@
 								data-url-delete="${href_delete}">
 								<a href="${href_user}">${author}</a>
 								<span class="comment-time">
-									<d class="timeago" title="${created}"></d>
+									{{if created_label != null}}
+									<d title="${created_title}">${created_label}</d>
+									{{/if}}
+									{{if created_label == null}}
+									<d class="timeago" title="${created_title}"></d>
+									{{/if}}
 								</span>
 								<span class="like-container">
 									<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
