@@ -50,7 +50,7 @@
     width: 345px;
     overflow: hidden;
     border-left: 3px solid #ccc;
-    z-index: 10;
+    z-index: 2;
 }
 #detail-scroll {
     position: absolute;
