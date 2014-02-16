@@ -34,7 +34,7 @@
 							{% if post.created >= date_timeago %}
                             <d class="timeago" title="{{ post.created|date('c') }}"></d>
                             {% else %}
-                            <d title="{{ post.created|localizeddate('full', 'short', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss") }}">{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "d MMMM '" ~ 'at'|trans ~ "' hh:ss") }}</d>
+                            <d title="{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss") }}">{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "d MMMM '" ~ 'at'|trans ~ "' hh:ss") }}</d>
                             {% endif %}
 						</span>
 					</div>
