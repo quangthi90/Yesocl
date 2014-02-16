@@ -450,9 +450,6 @@ a.btn-link-circle:hover i {
 #user-info-wrapper{  
   padding: 1px 15px 1px 15px;
 }
-#user-info-wrapper .user-avatar:hover > .avartar {
-  opacity: 0.3;
-}
 #user-info-wrapper .toggle-user-menu {
   position: absolute;
   top: 14px;
@@ -472,6 +469,10 @@ a.btn-link-circle:hover i {
 #user-info-wrapper .user-avatar.open .dropdown-menu {
   left: -90px;
   top: 105%;
+}
+#user-info-wrapper .user-avatar:hover > .avatar, 
+#user-info-wrapper .user-avatar.open > .avatar {
+  opacity: 0.3;
 }
 #user-info-wrapper .user-avatar img {
   height: 55px;  
