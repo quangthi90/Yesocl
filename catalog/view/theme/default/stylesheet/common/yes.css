@@ -450,14 +450,15 @@ a.btn-link-circle:hover i {
 #user-info-wrapper{  
   padding: 1px 15px 1px 15px;
 }
-#user-info-wrapper .user-avatar {
+#user-info-wrapper .user-avatar:hover > .avartar {
+  opacity: 0.3;
 }
 #user-info-wrapper .toggle-user-menu {
   position: absolute;
-  top: 15px;
+  top: 14px;
   right: 13px;
   display: none;
-  background-color: #EEEEEE;
+  background-color: #FFFFFF;
   height: 30px;
   width: 31px;
   text-align: center;
@@ -475,8 +476,11 @@ a.btn-link-circle:hover i {
 #user-info-wrapper .user-avatar img {
   height: 55px;  
   width: 55px;
-  border: 1px solid #fff;
+  border: 1px solid #FFFFFF;
   border-radius: 50%;
+}
+#user-info-wrapper .user-avatar:hover img {
+  border: 1px solid #EBEBEB;
 }
 #user-info-wrapper .user-menu {
   margin-right: 10px;
