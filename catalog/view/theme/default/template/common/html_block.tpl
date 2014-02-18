@@ -169,6 +169,81 @@
 		</div>
 	{% endblock %}
 
+	{% block common_html_block_post_advance_branch_form %}
+		{% if post_popup_id is not defined %}
+			{% set post_popup_id = 'post-advance-branch-add-popup' %}
+		{% endif %}
+		<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}">
+			<div class="y-dlg">
+				<form autocomplete="off" class="form-status full-post">
+					<div class="dlg-title">
+				        <i class="icon-yes"></i> 
+				        {% if post_popup_id == 'post-advance-branch-add-popup' %}
+				        {% trans %}New post{% endtrans %}
+				        {% else %}
+				        {% trans %}Edit post{% endtrans %}
+				        {% endif %}
+				    </div>
+				    <div class="dlg-content">
+				    	<div class="dlg-column upload-container fl" style="width:28%;">
+				    		<label class="control-label">{% trans %}Choose an image for new post{% endtrans %}</label>
+				    		<input type="hidden" name="img-url" class="img-url" value="" />
+				    		<div class="img-previewer-container" placeholder="Drag an photo here">
+				    			<p class="drop-zone-show">{% trans %}Drag an image here{% endtrans %}</p>
+				    		</div>
+				    		<div class="y-progress">
+								<div class="bar" style="width: 0%;"></div>
+							</div>
+				    		<div class="drag-img-upload">			    			
+				    			<a href="#" class="btn btn-yes">
+				    				<span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
+				    				<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
+				    			</a>
+				    		</div>
+						</div>
+						<div class="dlg-column fr" style="width:68%;">
+							<div class="alert alert-error top-warning hidden">{% trans %}Warning{% endtrans %}!!</div>
+					    	<div class="control-group">
+					    		<label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
+					    		<div class="controls">
+					    			<input class="post-advance-title" placeholder="Your title" type="text" name="title" id="title"
+					    				style="width: 98%;" />
+					    		</div>
+				    		</div>
+				    		<div class="control-group">
+					    		<label for="description" class="control-label">{% trans %}Description{% endtrans %}</label>
+					    		<div class="controls">
+					    			<textarea class="post-advance-des" placeholder="Your description" type="text" name="description" id="description" style="width: 98%; height: 40px; resize: none;" max-length="200"></textarea>
+					    		</div>
+				    		</div>
+				    		<div class="control-group">
+					    		<label for="category-branch" class="control-label">{% trans %}Category{% endtrans %}</label>
+					    		<div class="controls">
+					    			<select name="category" id="category-branch" style="width: 99%;height: 30px;font-size: 13px;">
+					    				<option>IT Technoloy</option>
+					    				<option>IT Technoloy</option>
+					    				<option>IT Technoloy</option>
+					    			</select>
+					    		</div>
+				    		</div>
+				    		<div class="control-group">
+				    			<label class="control-label">{% trans %}Content{% endtrans %}</label>
+						    	<div class="y-editor post-advance-content" id="post-adv-editor" data-height="150">
+						    	</div>
+					    	</div>
+						</div>
+				    </div>
+				    <div class="dlg-footer">
+				    	<div class="controls">
+				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
+				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
+			            </div>
+				    </div>		
+				</form>
+			</div>
+		</div>
+	{% endblock %}
+
 	{% block common_html_block_post_item_template %}
 		{% raw %}
 			<div class="hidden" id="post-item-template">

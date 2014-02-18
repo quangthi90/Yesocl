@@ -1,7 +1,7 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
 {% use '@template/default/template/common/html_block.tpl' %}
-{% use '@template/default/template/post/common/post_status_wall.tpl' %}
+{% use '@template/default/template/post/common/post_status_branch.tpl' %}
 {% use '@template/default/template/post/common/post_item_wall.tpl' %}
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 
@@ -9,7 +9,7 @@
 
 {% block stylesheet %}
     {{ block('post_common_comment_post_list_style') }}
-    {{ block('post_common_post_status_wall_style') }}
+    {{ block('post_common_post_status_branch_style') }}
 {% endblock %}
 
 {% block body %}
@@ -27,7 +27,7 @@
                 <div class="block-content">
                     <div class="column has-new-post">
                         {% set user = users[current_user_id] %}
-                        {{ block('post_common_post_status_wall') }}
+                        {{ block('post_common_post_status_branch') }}
                     </div>
                     {% for post in posts %}
                         <div class="column">
@@ -43,7 +43,7 @@
 {% endblock %}
 
 {% block template %}
-    {{ block('post_common_post_status_wall_html_template') }}
+    {{ block('post_common_post_status_branch_html_template') }}
     {{ block('post_common_comment_post_list_template') }}
 {% endblock %}
 
@@ -54,5 +54,5 @@ $(function(){
 });
 </script>
 {{ block('post_common_comment_post_list_javascript') }}
-{{ block('post_common_post_status_wall_javascript') }}
+{{ block('post_common_post_status_branch_javascript') }}
 {% endblock %}

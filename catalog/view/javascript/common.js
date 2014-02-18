@@ -244,7 +244,12 @@ var yCurrUser = new CurrentUser();
 
 	    //Editor:
 	    that.editor.each(function() {
-	    	$(this).makeEditor(250);
+	    	var height = $(this).data('height');
+	    	var heightVal = 250;
+	    	if(typeof height !== 'undefined'){
+	    		heightVal = parseInt(height);
+	    	}
+	    	$(this).makeEditor(heightVal);
 	    }); 
 
 		//For show/hide GoLeft
