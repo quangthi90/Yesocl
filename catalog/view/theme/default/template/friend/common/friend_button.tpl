@@ -32,7 +32,6 @@
 {% endblock %}
 
 {% block friend_common_friend_button_template %}
-{% raw %}
 <div class="hidden">
     <div id="send-request">
         <a data-cancel="0" data-url="${href}" class="btn btn-yes btn-friend friend-group"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
@@ -48,7 +47,6 @@
         </div>
     </div>
 </div>
-{% endraw %}
 {% endblock %}
 
 {% block friend_common_friend_button_javascript %}

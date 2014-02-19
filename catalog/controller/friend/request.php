@@ -115,6 +115,7 @@ class ControllerFriendRequest extends Controller {
 	public function confirm(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			$this->load->model('user/user');
+			$this->load->model('friend/friend');
 
            	if ( empty($this->request->get['user_slug']) ){
            		return $this->response->setOutput(json_encode(array(
@@ -122,36 +123,20 @@ class ControllerFriendRequest extends Controller {
 		            'warning' => 'user slug is empty'
 		        )));
            	}
-           	
-           	$friend = $this->model_user_user->getUserFull( $this->request->get );
 
-           	if ( !$friend ){
+           	$aUserB = $this->model_user_user->getUser( $this->request->get['user_slug'] );
+           	
+           	if ( !$aUserB ){
            		return $this->response->setOutput(json_encode(array(
 		            'success' => 'not ok',
-		            'warning' => 'friend is empty'
+		            'warning' => 'user slug "' . $this->request->get['user_slug'] . '" is not exist'
 		        )));
            	}
 
-           	$user_slug = $this->customer->getSlug();
+           	$idUserA = $this->customer->getId();
+           	$idUserB = $aUserB['id'];
 
-           	$result1 = $this->model_user_user->editUser( 
-           		$user_slug,
-           		array(
-           			'request_friend' => $friend->getId(),
-           			'friend' => $friend
-           		) 
-           	);
-
-           	$result2 = $this->model_user_user->editUser( 
-           		$friend->getSlug(),
-           		array(
-           			'friend' => $this->customer->getUser()
-           		) 
-           	);
-
-           	$result = $result1 * $result2;
-
-           	if ( $result ){
+           	if ( $this->model_friend_friend->makeFriend($idUserA, $idUserB) ){
            		return $this->response->setOutput(json_encode(array(
 		            'success' => 'ok'
 		        )));

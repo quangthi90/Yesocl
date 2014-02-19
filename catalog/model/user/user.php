@@ -124,20 +124,6 @@ class ModelUserUser extends Model {
 			}
 		}
 
-		if ( !empty($aData['friend']) ){
-			$oFriend = new Friend();
-			$oFriend->setUser( $aData['friend'] );
-			$this->dm->persist( $oFriend );
-			// var_dump($oFriend->getCreated()); exit;
-			$oUser->addFriend( $oFriend );
-		}
-
-		if ( !empty($aData['unfriend']) ){
-			$oUser->getFriends()->removeElement( $oUser->getFriendById( $aData['unfriend'] ) );
-			$oUser2 = $this->dm->getRepository('Document\User\User')->find( $aData['unfriend'] );
-			$oUser2->getFriends()->removeElement( $oUser2->getFriendBySlug( $sUserSlug ) );
-		}
-
 		if ( !empty($aData['avatar']) && !empty($aData['avatar']['image_link']) && !empty($aData['avatar']['extension']) && is_file($aData['avatar']['image_link']) ){
 			$this->load->model('tool/image');
 
@@ -167,21 +153,21 @@ class ModelUserUser extends Model {
 		$this->load->model('tool/cache');
 		$sUserType = $this->config->get('common')['type']['user'];
 
-		$oUser = $this->model_tool_cache->getObject( $sUserSlug, $sUserType );
+		$aUser = $this->model_tool_cache->getObject( $sUserSlug, $sUserType );
 
-		if ( !$oUser ){
+		if ( !$aUser ){
 			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
-
+			
 			if ( !$oUser ){
 				return null;
 			}
 
 			$this->model_tool_cache->setObject( $oUser, $sUserType );
 
-			$oUser = $oUser->formatToCache();
+			$aUser = $oUser->formatToCache();
 		}
 
-		return $oUser;
+		return $aUser;
 	}
 
 	public function getUserFull( $aData = array() ){

@@ -36,7 +36,7 @@ class ControllerAccountWall extends Controller {
 		$aUser = $oCurrUser->formatToCache();
 
 		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
-		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer, $oCurrUser );
+		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oCurrUser->getId() );
 		$this->data['users'] = array( $aUser['id'] => $aUser );
 
 		$this->data['current_user_id'] = $oCurrUser->getId();
