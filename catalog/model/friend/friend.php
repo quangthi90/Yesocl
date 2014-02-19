@@ -43,21 +43,26 @@ class ModelFriendFriend extends Model {
         
         }
 
+        $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
+
+        if ( !$oUserB ){
+        	return array(
+            	'status' => -1,
+            	'href' => null
+            );
+        }
+
         $oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
 			'user.id' => $idUserA
 		));
 
-        $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
-
-        if ( !$oUserB ){
-        	return -1;
-        }
-
 		if ( !$oFriendAs ){
-			'status' => 4,
-        	'href' => $this->extension->path('MakeFriend', array(
-                'user_slug' => $oUserB->getSlug()
-            ));
+			return array(
+				'status' => 4,
+        		'href' => $this->extension->path('MakeFriend', array(
+                	'user_slug' => $oUserB->getSlug()
+                ))
+            );
 		}
 
         if ( $oFriendAs->getFriendByUserId($idUserB) ){
@@ -68,13 +73,6 @@ class ModelFriendFriend extends Model {
 	            ))
            	); 
         
-        }
-
-        if ( !$oUserB ){
-        	'status' => 4,
-        	'href' => $this->extension->path('MakeFriend', array(
-                'user_slug' => $oUserB->getSlug()
-            ));
         }
 
         if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ){
