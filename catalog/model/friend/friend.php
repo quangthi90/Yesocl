@@ -30,8 +30,7 @@ class ModelFriendFriend extends Model {
 	 *		2: friend
 	 *		3: sent request make friend
 	 *		4: not relationship
-	 *		-1: not found A
-	 *		-2: not found B
+	 *		-1: not found User B
 	 *	- string href to get action: send request, cancel request, unfriend
 	 */
 	public function checkFriendStatus( $idUserA, $idUserB ){
@@ -47,23 +46,35 @@ class ModelFriendFriend extends Model {
         $oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
 			'user.id' => $idUserA
 		));
+
+        $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
+
+        if ( !$oUserB ){
+        	return -1;
+        }
+
 		if ( !$oFriendAs ){
-			return 4;
+			'status' => 4,
+        	'href' => $this->extension->path('MakeFriend', array(
+                'user_slug' => $oUserB->getSlug()
+            ));
 		}
 
-        if ( $oUserB = $oFriendAs->getFriendByUserId($idUserB) ){
+        if ( $oFriendAs->getFriendByUserId($idUserB) ){
             return array(
             	'status' => 2,
             	'href' => $this->extension->path('UnFriend', array(
-	                'user_slug' => $oUserB->getUser()->getSlug()
+	                'user_slug' => $oUserB->getSlug()
 	            ))
            	); 
         
         }
 
-        $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
         if ( !$oUserB ){
-        	return 4;
+        	'status' => 4,
+        	'href' => $this->extension->path('MakeFriend', array(
+                'user_slug' => $oUserB->getSlug()
+            ));
         }
 
         if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ){
