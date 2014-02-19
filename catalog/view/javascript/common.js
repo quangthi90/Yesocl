@@ -249,7 +249,7 @@ var yCurrUser = new CurrentUser();
 					    }				    		    
 				  	}
 				}
-		    });
+		    });		    
 		});		
 
 	    //Editor:
