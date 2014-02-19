@@ -460,7 +460,7 @@ class ControllerUserUser extends Controller {
 		}
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') /*&& $this->isValidateUpdate()*/ ){
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateUpdate() ){
 			if ( $this->model_user_user->editUser( $this->request->get['user_id'], $this->request->post ) ) {
 				$this->session->data['success'] = $this->language->get( 'text_success' );
 			}else {

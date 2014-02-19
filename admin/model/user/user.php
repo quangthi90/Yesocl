@@ -438,19 +438,19 @@ class ModelUserUser extends Model {
 		}
 		
 		// City is required
-		// if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
-		// 	return false;
-		// }
+		if ( !isset($data['meta']['location']['location']) || empty($data['meta']['location']['location']) ){
+			return false;
+		}
 		
 		// Postal code is required
-		// if ( !isset($data['meta']['postalcode']) || empty($data['meta']['postalcode']) ){
-		// 	return false;
-		// }
+		if ( !isset($data['meta']['postalcode']) || empty($data['meta']['postalcode']) ){
+			return false;
+		}
 		
 		// Address is required
-		/*if ( !isset($data['meta']['address']) || empty($data['meta']['address']) ){
+		if ( !isset($data['meta']['address']) || empty($data['meta']['address']) ){
 			return false;
-		}*/
+		}
 
 		// Advice for contact
 		if ( !isset($data['background']['adviceforcontact']) || empty($data['background']['adviceforcontact']) ){
@@ -463,12 +463,12 @@ class ModelUserUser extends Model {
 		}
 
 		// Industry is required
-		// if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
-		// 	return false;
-		// }
-		// if ( !isset($data['meta']['industry_id']) ){
-		// 	$data['meta']['industry_id'] = 0;
-		// }
+		if ( !isset($data['meta']['industry']) || empty($data['meta']['industry']) ){
+			return false;
+		}
+		if ( !isset($data['meta']['industry_id']) ){
+			$data['meta']['industry_id'] = 0;
+		}
 
 		// Heading Line
 		if ( !isset($data['meta']['headingline']) || empty($data['meta']['headingline']) ){
