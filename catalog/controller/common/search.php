@@ -43,7 +43,7 @@ class ControllerCommonSearch extends Controller {
 
 			$aUser = $oQueryUser->formatToCache();
 
-			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oQueryUser, $oCurrUser );
+			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oQueryUser->getId(), $oCurrUser->getId() );
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 			$aUser['gender'] = $oQueryUser->getMeta()->getSex();
 

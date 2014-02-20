@@ -38,7 +38,12 @@ class ControllerCommonRefresh extends Controller {
 		$aUserIds[] = $oCurrUser->getId();
 
 		// Get list friends
-		$lFriends = $oCurrUser->getFriends();
+		$oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+		if ( $oFriends ){
+			$lFriends = $oFriends->getFriends();
+		}else{
+			$lFriends = array();
+		}
 		foreach ( $lFriends as $oFriend ) {
 			$oUser = $oFriend->getUser();
 			$aUserIds[] = $oUser->getId();
