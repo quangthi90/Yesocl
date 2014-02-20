@@ -10,7 +10,6 @@ class Customer {
 	private $slug;
 	private $facebook;
 	private $url;
-	private $friend_list;
 	private $friend_requests;
 	private $user;
 	
@@ -37,7 +36,6 @@ class Customer {
 				$this->customer_group_id = $customer_query->getGroupUser()->getId();
 				$this->slug = $customer_query->getSlug();
 				$this->avatar = $customer_query->getAvatar();
-				$this->friend_list = $customer_query->getFriends();
 				$this->friend_requests = $customer_query->getFriendRequests();
 				$this->user = $customer_query;
 			} else {
@@ -83,7 +81,6 @@ class Customer {
 			$this->customer_group_id = $customer_query->getGroupUser()->getId();
 			$this->slug = $customer_query->getSlug();
 			$this->avatar = $customer_query->getAvatar();
-			$this->friend_list = $customer_query->getFriends();
 			$this->friend_requests = $customer_query->getFriendRequests();
 			$this->user = $customer_query;
 

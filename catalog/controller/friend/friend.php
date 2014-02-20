@@ -31,12 +31,17 @@ class ControllerFriendFriend extends Controller {
 		$aCurrUser = $oCurrUser->formatToCache();
 
 		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 180, 180 );
-		$aCurrUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser, $oCurrUser );
+		$aCurrUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser->getId(), $oCurrUser->getId() );
 		$this->data['users'] = array($aCurrUser['id'] => $aCurrUser);
 
 		$this->data['current_user_id'] = $oCurrUser->getId();
 
-		$lFriends = $oCurrUser->getFriends();
+		$oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+		if ( $oFriends ){
+			$lFriends = $oFriends->getFriends();
+		}else{
+			$lFriends = array();
+		}
 
 		$this->data['friend_ids'] = array();
 		
@@ -46,7 +51,7 @@ class ControllerFriendFriend extends Controller {
 			$aUser = $oUser->formatToCache();
 
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser, $oUser );
+			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser->getId(), $oUser->getId() );
 			$aUser['added'] = $oFriend->getCreated();
 
 			$this->data['users'][$aUser['id']] = $aUser;
@@ -55,7 +60,11 @@ class ControllerFriendFriend extends Controller {
 
 		$this->data['groups'] = array();
 
-		$lFriendGroups = $oCurrUser->getFriendGroups();
+		if ( $oFriends ){
+			$lFriendGroups = $oFriends->getFriendGroups();
+		}else{
+			$lFriendGroups = array();
+		}
 
 		foreach ( $lFriendGroups as $oFriendGroup ) {
 			$this->data['groups'][$oFriendGroup->getId()] = array(

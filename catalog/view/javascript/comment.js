@@ -196,7 +196,9 @@
         if(commentBody.length > 0) {
             commentBody.makeCustomScroll(false);  
         }
-        commentBox.stop().animate({ "right": "2px" }, 200);
+        commentBox.stop().animate({ "right": "2px" }, 200, function(){
+            commentBox.find('textarea.post_input').focus();
+        });
     }
     ShowListComments.prototype.hideCommentBox = function($button) {
         $('#overlay').hide();

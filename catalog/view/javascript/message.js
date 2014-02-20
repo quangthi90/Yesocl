@@ -578,8 +578,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
     function MessageFilter($el) {
         this.$el = $el;
         this.$searchText = $el.find('#message-search');
-        this.$userListContainer = $el.find('.js-mess-user-list');
-        this.$userMessageItems = this.$userListContainer.find('.user-message-li');
+        this.$userListContainer = $el.find('.js-mess-user-list');        
         this.$searchLoader = $el.find('.mesage-search-loader');
         this.attachEvents();
     };
@@ -594,15 +593,17 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
         that.$searchText.keyup(function(){
             that.$searchLoader.fadeIn(100);
             var key = $(this).val();
+            var userMessageItems = that.$userListContainer.find('.js-mess-user-item');
             if(key.trim().length == 0){
-                that.$searchText.val('').focus();
-                that.$userMessageItems.removeClass('hidden');
-                that.$searchLoader.fadeOut(100);
+                that.$searchText.val('').focus();                
+                that.$searchLoader.fadeOut(0);
+                userMessageItems.removeClass('hidden');
                 return;
             }
             key = key.toLowerCase();
-            that.$userMessageItems.addClass('hidden');
-            var matchedItems = that.$userMessageItems.filter(function(index){
+
+            userMessageItems.addClass('hidden');
+            var matchedItems = userMessageItems.filter(function(index){
                 if($(this).data('username').length == 0) {
                     return false;
                 }
@@ -611,11 +612,11 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
             if(matchedItems.length > 0){
                 matchedItems.removeClass('hidden');
             }
-            that.$searchLoader.fadeOut(100);
+            that.$searchLoader.fadeOut(0);
         });
     };
     $(document).ready(function() {
-        new MessageFilter($('#user-box'));    
+        new MessageFilter($('#user-box'));
     });
 }(jQuery, document));
 

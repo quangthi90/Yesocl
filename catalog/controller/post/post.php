@@ -390,7 +390,7 @@ class ControllerPostPost extends Controller {
             
             if ( $lUsers ){
                 foreach ( $lUsers as $oUser ) {
-                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer, $oUser );
+                    $fr_status = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oUser->getId() );
 
                     $aUser = $oUser->formatToCache();
 

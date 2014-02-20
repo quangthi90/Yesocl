@@ -159,7 +159,6 @@
 
 }
 .mesasage-box-body .mesasage-box-container .message-item {
-    overflow: hidden;
     position: relative;
     border-bottom: 1px solid #f0f0f0;
     margin-bottom: 10px;

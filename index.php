@@ -76,12 +76,15 @@ $twig = new Twig_Environment($twig_loader, array(
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
 $twig->addExtension(new Twig_Extensions_Extension_I18n());
+$twig->addExtension(new Twig_Extensions_Extension_Intl());
 
 // Multi languages
 if ( isset($request->cookie['language']) ){
 	$sLangFile = DIR_LANGUAGE . 'locale/' . $request->cookie['language'] . '/LC_MESSAGES/' . $request->cookie['language'] . '.po';
 	if ( is_file($sLangFile) ){
 		$lang = $request->cookie['language'];
+	}else{
+		$lang = 'vi';
 	}
 }else{
 	$lang = 'vi';

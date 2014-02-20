@@ -202,6 +202,7 @@ var yCurrUser = new CurrentUser();
 		this.linkPopupCommon = el.find('.link-popup');
 		this.linkPopupImage = el.find('.img-link-popup');
 		this.editor = el.find('.y-editor');
+
 		this.attachEvents();
 	}
 	FlexibleElement.prototype.attachEvents = function() { 
@@ -223,24 +224,33 @@ var yCurrUser = new CurrentUser();
 		if(that.linkPopupImage.length > 0) {
 			that.linkPopupImage.magnificPopup({type:'image'});	
 		}
-		that.linkPopupCommon.magnificPopup({
-	    	type:'inline',
-	    	midClick: true,
-	    	removalDelay: 300,
-			mainClass: 'mfp-fade',
-			callbacks: {
-				open: function() {
-				    var src = $(that.linkPopupCommon.attr('data-mfp-src'));				    
-				    var inputs = src.find('input[type="text"]').first();
-				    if(inputs.length === 0) {
-				    	inputs = src.find('textarea').first();
-				    }
-				    setTimeout(function(){
-				    	inputs.focus();	    
-				    }, 500);
-			  	}
-			}
-	    });
+		that.linkPopupCommon.each(function(){
+			$(this).magnificPopup({
+		    	type:'inline',
+		    	midClick: true,
+		    	removalDelay: 300,
+				mainClass: 'mfp-fade',
+				callbacks: {
+					open: function() {
+					    var src = $(this.content.selector);			    
+					    var focusType = src.data('focus-type');
+					    if(focusType === undefined)
+					    	return;
+					    if(focusType === 'editable'){
+					    	var editable = src.find('.note-editable').first();
+					    	setTimeout(function(){
+						    	editable.focus();
+						    }, 500);
+					    }else {
+					    	var inputs = src.find(focusType).first();
+					    	setTimeout(function(){
+						    	inputs.focus();
+						    }, 500);
+					    }				    		    
+				  	}
+				}
+		    });		    
+		});		
 
 	    //Editor:
 	    that.editor.each(function() {

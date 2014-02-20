@@ -20,7 +20,7 @@
 		{% if advance_comment_id is not defined %}
 			{% set advance_comment_id = 'comment-advance-add-popup' %}
 		{% endif %}
-		<div class="mfp-hide y-dlg-container" id="{{ advance_comment_id }}">
+		<div class="mfp-hide y-dlg-container" data-focus-type="editable" id="{{ advance_comment_id }}">
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
@@ -65,7 +65,12 @@
 								data-url-delete="${href_delete}">
 								<a href="${href_user}">${author}</a>
 								<span class="comment-time">
-									<d class="timeago" title="${created}"></d>
+									{{if created_label != null}}
+									<d title="${created_title}">${created_label}</d>
+									{{/if}}
+									{{if created_label == null}}
+									<d class="timeago" title="${created_title}"></d>
+									{{/if}}
 								</span>
 								<span class="like-container">
 									<a href="#" class="like-comment{{if is_liked == true}} hidden{{/if}}">
@@ -115,7 +120,7 @@
 		{% if post_popup_id is not defined %}
 			{% set post_popup_id = 'post-advance-add-popup' %}
 		{% endif %}
-		<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}">
+		<div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="{{ post_popup_id }}">
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
@@ -301,9 +306,9 @@
 									<a class="like-post " href="#">
 										<i class="icon-thumbs-up medium-icon"></i>
 			                        </a>
-			                        <span class="liked-post hidden">
+			                        <d class="liked-post hidden">
 			                            {% endraw %}{% trans %}Liked{% endtrans %}{% raw %}
-									</span>
+									</d>
 									<a class="post-liked-list" href="#" data-url="${href.post_get_liked}" data-like-count="0">
 										<d class="number-counter">0</d>
 									</a>
@@ -348,7 +353,7 @@
 
 {# -- Message -- #}
 	{% block common_html_block_new_message_form %}
-		<div class="mfp-hide y-dlg-container" id="new-message-form">
+		<div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="new-message-form">
 			<div class="y-dlg">
 				<form autocomplete="off" class="new-message-form">
 					<div class="dlg-title">
@@ -405,6 +410,7 @@
 		                </ul>
 		            </div>
 		        </div>
+		        <div class="clear"></div>
 			</li>
 		</div>
 		{% endraw %}

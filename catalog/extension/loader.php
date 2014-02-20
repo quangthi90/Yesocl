@@ -54,7 +54,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend')),
             new Twig_SimpleFunction('date_format', array($this, 'dateFormat')),
             new Twig_SimpleFunction('get_cookie', array($this, 'getCookie')),
-            new Twig_SimpleFunction('trans', array($this, 'trans'))
+            new Twig_SimpleFunction('get_datetime_from_now', array($this, 'getDatetimeFromNow')),
+            new Twig_SimpleFunction('localized_date', array($this, 'localizedDate'))
         );
     }
 
@@ -167,9 +168,7 @@ class ExtensionLoader
         if ( $datetime == null ){
             $datetime = new DateTime();
         }
-        if ( $datetime < $this->recentTime ){
-            return $datetime->format( $this->registry->get('language')->get('date_format_short') );
-        }
+        
         return $datetime->format( $this->registry->get('language')->get('date_format_long') );
     }
 
@@ -177,7 +176,34 @@ class ExtensionLoader
         return $this->request->cookie[$key];
     }
 
-    public function trans( $message ){
-        return gettext($message);
+    public function getDatetimeFromNow( $value ){
+        $datetime = new DateTime();
+        date_add( $datetime, date_interval_create_from_date_string($value . ' days') );
+        return $datetime;
+    }
+
+    public function localizedDate($date, $dateFormat = 'medium', $timeFormat = 'medium', $locale = null, $timezone = null, $format = null){
+        if (!class_exists('IntlDateFormatter')) {
+            throw new RuntimeException('The intl extension is needed to use intl-based filters.');
+        }
+
+        $formatValues = array(
+            'none'   => IntlDateFormatter::NONE,
+            'short'  => IntlDateFormatter::SHORT,
+            'medium' => IntlDateFormatter::MEDIUM,
+            'long'   => IntlDateFormatter::LONG,
+            'full'   => IntlDateFormatter::FULL,
+        );
+
+        $formatter = IntlDateFormatter::create(
+            $locale,
+            $formatValues[$dateFormat],
+            $formatValues[$timeFormat],
+            $date->getTimezone()->getName(),
+            IntlDateFormatter::GREGORIAN,
+            $format
+        );
+
+        return $formatter->format($date->getTimestamp());
     }
 }
