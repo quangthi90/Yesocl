@@ -2,35 +2,32 @@
 {% endblock %}
 
 {% block post_common_post_status_branch %}
-	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
-		<div class="post_new drop-zone">
-			<div class="row-fluid txt_editor">
-				<textarea class="post_input status-content mention" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
-				<input type="hidden" name="img-url" class="img-url" value="" />
-			</div>
-			<div class="img-previewer-container">
-			</div>
-			<div class="y-progress">
-				<div class="bar" style="width: 0%;"></div>
-			</div>
-			<div class="post_tool">
-				<div class="row-fluid">
-					<div class="span8 post_new_control">
-						<a href="#" id="insert-new-img" onclick="$('#img-upload').trigger('click'); return false;">
-							<i class="icon-camera icon-2x"></i>							
-						</a>
-						<input type="file" data-no-uniform="true" class="img-upload" title="{% trans %}Choose image to upload{% endtrans %}" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
-						<a href="#" title="Advance post" data-mfp-src="#post-advance-branch-add-popup" class="link-popup">
-							<i class="icon-external-link-sign icon-2x"></i>
-						</a>
-					</div>
-					<div class="span4 text-right">
-						<a href="#" class="btn btn-yes btn-status">{% trans %}Submit{% endtrans %}</a>
-					</div>
-				</div>
- 			</div>
-		</div>
-	</div>
+	<div class="branch-overview">
+        <img class="branch-logo" src="http://events.oasis-open.org/home/sites/events.oasis-open.org.home/files/u5/GREEN-IT-3.gif">
+        <h3 class="branch-name">Information Technology</h3>
+    </div>
+    <div class="branch-tool">
+        <a href="#" class="branch-function link-popup" data-mfp-src="#post-advance-branch-add-popup">
+            <i class="icon-pencil"></i>
+            <span>New post</span>
+        </a>
+        <a href="#" style="width: 30%;" class="branch-function">
+            <i class="icon-group"></i>
+            <span>Members (1)</span>
+        </a>
+        {% set isMember = true %}
+        {% if isMember == true %}
+        <a href="#" class="branch-function">
+            <i class="icon-signout"></i>
+            <span>Leave branch</span>
+        </a>
+        {% else %}
+        <a href="#" class="branch-function">
+            <i class="icon-signin"></i>
+            <span>Join branch</span>
+        </a>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block post_common_post_status_branch_html_template %}

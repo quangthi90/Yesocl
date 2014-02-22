@@ -18,7 +18,7 @@
                     {% for branch in branches %}
                     <div class="block-content-item branch-item">
                         <a href="{{ path('BranchDetail', {branch_slug: branch.slug}) }}" class="fl branch-img">
-                            <img src="{{ branch.logo }}" alt="IT">
+                            <img src="{{ branch.logo }}" alt="{{ branch.name }}">
                         </a>
                         <div class="fl branch-info">
                             <a href="{{ path('BranchDetail', {branch_slug: branch.slug}) }}" class="branch-name">{{ branch.name }}</a>

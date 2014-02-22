@@ -60,9 +60,6 @@ div.radio.active, div.checker.active{
   width: 16px;
 }
 
-.language-box a:hover .icon-yes-flag {   
-}
-
 .language-box .icon-lang-vn {
   background: url('../../image/flags/vn.png');
 }
@@ -103,23 +100,23 @@ input[type="color"], .uneditable-input
 
 form
 {
-    margin:0px;
+  margin:0px;
 }
 
 label
 {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 ul
 {
-    list-style: none;
-    margin:0px;
-    padding: 0px;
+  list-style: none;
+  margin:0px;
+  padding: 0px;
 }
 
 *, *:focus {
-  outline: none;
+  outline: none !important;
 }
 /*END OVERLOAD BOOTSTRAP*/
 /* --------------------------------- START Y-CSS ----------------------------------------------- */
@@ -156,11 +153,9 @@ ul{
 }
 a {
   text-decoration: none;
-  outline: none;
 }
 a > i,i{
   color: #0E0E0E; 
-  outline: none; 
 }
 a:hover,
 a:focus {
@@ -2513,6 +2508,62 @@ ul.user_actions li:hover i{
   margin: 3px 10px 4px 0px;
   font-size: 14px;
 }
+
+.branch-info {
+  background-color: #FFFFFF;
+  position: relative;
+}
+.branch-info .branch-overview {
+  bottom: 90px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+}
+.branch-info .branch-overview .branch-logo {
+  height: 100%;
+}
+.branch-info .branch-overview .branch-name {
+  background-color: #F0F0F0;
+  border-bottom: 1px solid #CCCCCC;
+  border-top: 1px solid #CCCCCC;
+  color: #0E0E0E;
+  font-size: 18px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.branch-info .branch-tool {
+  bottom: 5px;
+  height: 43px;
+  left: 0;
+  line-height: 43px;
+  position: absolute;
+  right: 0;
+}
+.branch-info .branch-tool .branch-function {
+  display: block;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  width: 35%;
+}
+.branch-info .branch-tool .branch-function:hover {
+  background-color: #009B77;
+  color: #FFFFFF;
+}
+.branch-info .branch-tool .branch-function i {
+  font-size: 16px;
+  margin-right: 3px;
+}
+.branch-info .branch-tool .branch-function:hover i {
+  color: #FFFFFF;
+}
+
 /* ------------------------------------- END MY_BRANCH --------------------------------------- */
 
 /* ------------------------------------ START SEARCH RESULT ------------------------------------ */

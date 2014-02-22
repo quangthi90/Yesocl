@@ -25,7 +25,7 @@
                     </a>           
                 </div>
                 <div class="block-content">
-                    <div class="column has-new-post">
+                    <div class="column has-new-post branch-info">
                         {% set user = users[current_user_id] %}
                         {{ block('post_common_post_status_branch') }}
                     </div>
