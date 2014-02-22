@@ -49,9 +49,9 @@ class ModelBranchBranch extends Model {
 
 		$this->load->model('tool/image');
 		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
-			$folder_link = $this->config->get('company')['default']['image_link'];
-			$avatar_name = $this->config->get('company')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId() . '/';
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
+			$path = $folder_link . $branch->getId();
 			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
 				$branch->setLogo( $aData['logo'] );
 			}
@@ -115,9 +115,9 @@ class ModelBranchBranch extends Model {
 
 		$this->load->model('tool/image');
 		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
-			$folder_link = $this->config->get('company')['default']['image_link'];
-			$avatar_name = $this->config->get('company')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId() . '/';
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
+			$path = $folder_link . $branch->getId();
 			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
 				$branch->setLogo( $aData['logo'] );
 			}

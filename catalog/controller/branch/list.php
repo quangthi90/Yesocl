@@ -21,7 +21,7 @@ class ControllerBranchList extends Controller {
 			if ( !empty($aBranch['logo']) ){
 				$aBranch['logo'] = $this->model_tool_image->resize( $aBranch['logo'], 130, 130 );
 			}else{
-				$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+				$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 130, 130 );
 			}
 
 			$this->data['branches'][] = $aBranch;

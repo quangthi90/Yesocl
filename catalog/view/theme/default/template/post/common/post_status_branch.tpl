@@ -3,30 +3,30 @@
 
 {% block post_common_post_status_branch %}
 	<div class="branch-overview">
-        <img class="branch-logo" src="http://events.oasis-open.org/home/sites/events.oasis-open.org.home/files/u5/GREEN-IT-3.gif">
-        <h3 class="branch-name">Information Technology</h3>
+        <img class="branch-logo" src="{{ branch.logo }}">
+        <h3 class="branch-name">{{ branch.name }}</h3>
     </div>
     <div class="branch-tool">
         <a href="#" class="branch-function link-popup" data-mfp-src="#post-advance-branch-add-popup">
             <i class="icon-pencil"></i>
-            <span>New post</span>
+            <span>{% trans %}New post{% endtrans %}</span>
         </a>
         <a href="#" style="width: 30%;" class="branch-function">
             <i class="icon-group"></i>
-            <span>Members (1)</span>
+            <span>{% trans %}Members{% endtrans %} ({{ branch.member_count }})</span>
         </a>
-        {% set isMember = true %}
-        {% if isMember == true %}
-        <a href="#" class="branch-function">
+        {#% set isMember = true %}
+        {% if isMember == true %#}
+        <a href="{{ path('BranchList') }}" class="branch-function">
             <i class="icon-signout"></i>
-            <span>Leave branch</span>
+            <span>{% trans %}Leave branch{% endtrans %}</span>
         </a>
-        {% else %}
+        {#% else %}
         <a href="#" class="branch-function">
             <i class="icon-signin"></i>
-            <span>Join branch</span>
+            <span>{% trans %}Join branch{% endtrans %}</span>
         </a>
-        {% endif %}
+        {% endif %#}
     </div>
 {% endblock %}
 
