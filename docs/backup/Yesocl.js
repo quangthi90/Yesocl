@@ -188,6 +188,13 @@ db.getCollection("user").ensureIndex({
   
 ]);
 
+/** user_friend indexes **/
+db.getCollection("user_friend").ensureIndex({
+  "_id": NumberInt(1)
+},[
+  
+]);
+
 /** user_group indexes **/
 db.getCollection("user_group").ensureIndex({
   "_id": NumberInt(1)
@@ -1716,7 +1723,7 @@ db.getCollection("branch").insert({
     "$db": "yesocl"
   },
   "deleted": false,
-  "logo": "data\/catalog\/company\/51d39ba5d87459c40a000017\/\/avatar.jpg",
+  "logo": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/avatar.jpg",
   "members": [
     {
       "$ref": "user",
@@ -1736,7 +1743,7 @@ db.getCollection("branch").insert({
     "$id": ObjectId("51e97c88471dee180a000000"),
     "$db": "yesocl"
   },
-  "logo": "data\/catalog\/company\/5247a0a3471dee280c000037\/\/avatar.jpg",
+  "logo": "data\/catalog\/branch\/5247a0a3471dee280c000037\/avatar.jpg",
   "members": [
     {
       "$ref": "user",
@@ -7761,6 +7768,40 @@ db.getCollection("user").insert({
   "unRead": NumberInt(0)
 });
 db.getCollection("user").insert({
+  "_id": ObjectId("52d40c10471deee809000006"),
+  "created": ISODate("2014-01-13T15:53:52.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("52d40c10471deee809000008"),
+      "email": "user10@test.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": false,
+  "meta": {
+    "_id": ObjectId("52d40c10471deee809000007"),
+    "firstname": "bommer",
+    "lastname": "10",
+    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "current": "unknow"
+  },
+  "password": "064275b6fea34e11d2344d5a1dbf0469436e72d3",
+  "refreshIds": [
+    
+  ],
+  "salt": "3bf61c766",
+  "slug": "bommer-10",
+  "status": true,
+  "token": "9e0bd825551a31b252625bc3f62b4aaf",
+  "tokenTime": ISODate("2014-01-20T15:53:53.0Z")
+});
+db.getCollection("user").insert({
   "_id": ObjectId("518f5555471deea409000000"),
   "avatar": "data\/catalog\/user\/518f5555471deea409000000\/avatar.jpg",
   "created": ISODate("2013-05-12T08:39:48.0Z"),
@@ -7971,38 +8012,7 @@ db.getCollection("user").insert({
     ]
   },
   "notifications": [
-    {
-      "_id": ObjectId("52f912a9471deea80a00000b"),
-      "action": "post",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "type": "user",
-      "object": "wall",
-      "objectId": "52f912a9471deea80a000009",
-      "slug": "52f912a9471deea80a000008",
-      "read": true,
-      "status": true,
-      "created": ISODate("2014-02-10T17:55:53.0Z")
-    },
-    {
-      "_id": ObjectId("52f91556471deeb40a000006"),
-      "action": "post",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "type": "user",
-      "object": "wall",
-      "objectId": "52f91556471deeb40a000004",
-      "slug": "52f91556471deeb40a000003",
-      "read": true,
-      "status": true,
-      "created": ISODate("2014-02-10T18:07:18.0Z")
-    }
+    
   ],
   "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
   "posts": null,
@@ -8156,54 +8166,7 @@ db.getCollection("user").insert({
     ]
   },
   "notifications": [
-    {
-      "_id": ObjectId("52f91bd6471deeb40a00000a"),
-      "action": "post",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "type": "user",
-      "object": "wall",
-      "objectId": "52f91bd6471deeb40a000008",
-      "slug": "52f91bd6471deeb40a000007",
-      "read": true,
-      "status": true,
-      "created": ISODate("2014-02-10T18:35:02.0Z")
-    },
-    {
-      "_id": ObjectId("52f91c1b471dee9c0a000003"),
-      "action": "post",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "type": "user",
-      "object": "wall",
-      "objectId": "52f91c1b471dee9c0a000001",
-      "slug": "52f91c1b471dee9c0a000000",
-      "read": true,
-      "status": true,
-      "created": ISODate("2014-02-10T18:36:11.0Z")
-    },
-    {
-      "_id": ObjectId("52f9dd5b471deef40a000001"),
-      "action": "comment",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "type": "user",
-      "object": "post",
-      "objectId": "52f9dd5b471deef40a000000",
-      "slug": "52f91ba8471deea80a00000c",
-      "read": false,
-      "status": true,
-      "created": ISODate("2014-02-11T08:20:43.0Z")
-    }
+    
   ],
   "password": "225d31b59e3e1de2d6d7c581e7e74e2cde897552",
   "posts": [
@@ -8233,39 +8196,45 @@ db.getCollection("user").insert({
   "unRead": NumberInt(0),
   "username": "user2"
 });
-db.getCollection("user").insert({
-  "_id": ObjectId("52d40c10471deee809000006"),
-  "created": ISODate("2014-01-13T15:53:52.0Z"),
-  "emails": [
+
+/** user_friend records **/
+db.getCollection("user_friend").insert({
+  "_id": ObjectId("530637a6471dee700b000000"),
+  "friends": [
     {
-      "_id": ObjectId("52d40c10471deee809000008"),
-      "email": "user10@test.com",
-      "primary": true
+      "_id": ObjectId("53085e08471deeb40b000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-02-22T08:21:28.0Z")
     }
   ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
     "$db": "yesocl"
-  },
-  "isSocial": false,
-  "meta": {
-    "_id": ObjectId("52d40c10471deee809000007"),
-    "firstname": "bommer",
-    "lastname": "10",
-    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
-    "sex": NumberInt(1),
-    "current": "unknow"
-  },
-  "password": "064275b6fea34e11d2344d5a1dbf0469436e72d3",
-  "refreshIds": [
-    
+  }
+});
+db.getCollection("user_friend").insert({
+  "_id": ObjectId("530637a6471dee700b000001"),
+  "friends": [
+    {
+      "_id": ObjectId("53085e08471deeb40b000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-02-22T08:21:28.0Z")
+    }
   ],
-  "salt": "3bf61c766",
-  "slug": "bommer-10",
-  "status": true,
-  "token": "9e0bd825551a31b252625bc3f62b4aaf",
-  "tokenTime": ISODate("2014-01-20T15:53:53.0Z")
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
 });
 
 /** user_group records **/
@@ -9361,6 +9330,160 @@ db.getCollection("user_post").insert({
   }
 });
 db.getCollection("user_post").insert({
+  "_id": ObjectId("52486543471dee340b000003"),
+  "posts": [
+    {
+      "_id": ObjectId("52b69e99471dee2c0b000011"),
+      "author": "user2",
+      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user1&quot; data-content-syntax=&quot;@[Quang Thi](contact:user1)&quot;&gt;Quang Thi&lt;\/a&gt;",
+      "countViewer": NumberInt(1),
+      "created": ISODate("2013-12-22T08:11:05.0Z"),
+      "deleted": false,
+      "email": "user2@test.com",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "slug": "52b69e99471dee2c0b000010",
+      "status": true,
+      "updated": ISODate("2013-12-23T06:01:01.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52b7d20f471dee280b000001"),
+      "title": "Hello world!",
+      "content": "&lt;p&gt;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user1&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Quang Thi&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot;&gt;Quang Thi&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;Hello&amp;nbsp;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user-temp&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Bommer Luu&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user-temp\/&quot;&gt;Bommer Luu&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;br&gt;&lt;\/p&gt;",
+      "status": true,
+      "created": ISODate("2013-12-23T06:02:55.0Z"),
+      "updated": ISODate("2013-12-23T06:07:40.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "hello-world-52b7d20f471dee280b000000",
+      "thumb": "data\/catalog\/user\/518f5f43471deeb40900001f\/post\/hello-world-52b7d20f471dee280b000000\/avatar.jpg",
+      "deleted": false,
+      "countViewer": NumberInt(1)
+    },
+    {
+      "_id": ObjectId("52c759f3471dee800b000004"),
+      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user2\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user2&quot; data-content-syntax=&quot;@[user2](contact:user2)&quot;&gt;user2&lt;\/a&gt;",
+      "status": true,
+      "created": ISODate("2014-01-04T00:46:43.0Z"),
+      "updated": ISODate("2014-01-04T00:46:43.0Z"),
+      "author": "Bommer Luu",
+      "email": "user7@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("52601121471dee680b000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52c759f3471dee800b000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52c75a79471dee4c0b000004"),
+      "content": "hello all",
+      "status": true,
+      "created": ISODate("2014-01-04T00:48:57.0Z"),
+      "updated": ISODate("2014-01-04T00:48:57.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52c75a79471dee4c0b000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52cd921f471deebc0a000001"),
+      "content": "dfa fsda f",
+      "status": true,
+      "created": ISODate("2014-01-08T17:59:59.0Z"),
+      "updated": ISODate("2014-01-08T18:00:00.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "52cd921f471deebc0a000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52f91bbb471deea40a000001"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-02-10T18:34:35.0Z"),
+      "updated": ISODate("2014-02-10T18:34:35.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "518f5f43471deeb40900001f",
+      "slug": "52f91bbb471deea40a000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52f91bd6471deeb40a000008"),
+      "content": "bbbbbbbbbbb",
+      "status": true,
+      "created": ISODate("2014-02-10T18:35:02.0Z"),
+      "updated": ISODate("2014-02-10T18:35:02.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "518f5f43471deeb40900001f",
+      "slug": "52f91bd6471deeb40a000007",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52f91c1b471dee9c0a000001"),
+      "content": "cccccccccccccc",
+      "status": true,
+      "created": ISODate("2014-02-10T18:36:11.0Z"),
+      "updated": ISODate("2014-02-10T18:36:11.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "518f5f43471deeb40900001f",
+      "slug": "52f91c1b471dee9c0a000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_post").insert({
   "_id": ObjectId("524cee4c471dee0c0b000001"),
   "posts": [
     {
@@ -9717,160 +9840,6 @@ db.getCollection("user_post").insert({
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("user_post").insert({
-  "_id": ObjectId("52486543471dee340b000003"),
-  "posts": [
-    {
-      "_id": ObjectId("52b69e99471dee2c0b000011"),
-      "author": "user2",
-      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user1&quot; data-content-syntax=&quot;@[Quang Thi](contact:user1)&quot;&gt;Quang Thi&lt;\/a&gt;",
-      "countViewer": NumberInt(1),
-      "created": ISODate("2013-12-22T08:11:05.0Z"),
-      "deleted": false,
-      "email": "user2@test.com",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "slug": "52b69e99471dee2c0b000010",
-      "status": true,
-      "updated": ISODate("2013-12-23T06:01:01.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52b7d20f471dee280b000001"),
-      "title": "Hello world!",
-      "content": "&lt;p&gt;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user1&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Quang Thi&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot;&gt;Quang Thi&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;Hello&amp;nbsp;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user-temp&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Bommer Luu&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user-temp\/&quot;&gt;Bommer Luu&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;br&gt;&lt;\/p&gt;",
-      "status": true,
-      "created": ISODate("2013-12-23T06:02:55.0Z"),
-      "updated": ISODate("2013-12-23T06:07:40.0Z"),
-      "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "slug": "hello-world-52b7d20f471dee280b000000",
-      "thumb": "data\/catalog\/user\/518f5f43471deeb40900001f\/post\/hello-world-52b7d20f471dee280b000000\/avatar.jpg",
-      "deleted": false,
-      "countViewer": NumberInt(1)
-    },
-    {
-      "_id": ObjectId("52c759f3471dee800b000004"),
-      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user2\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user2&quot; data-content-syntax=&quot;@[user2](contact:user2)&quot;&gt;user2&lt;\/a&gt;",
-      "status": true,
-      "created": ISODate("2014-01-04T00:46:43.0Z"),
-      "updated": ISODate("2014-01-04T00:46:43.0Z"),
-      "author": "Bommer Luu",
-      "email": "user7@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("52601121471dee680b000000"),
-        "$db": "yesocl"
-      },
-      "slug": "52c759f3471dee800b000003",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52c75a79471dee4c0b000004"),
-      "content": "hello all",
-      "status": true,
-      "created": ISODate("2014-01-04T00:48:57.0Z"),
-      "updated": ISODate("2014-01-04T00:48:57.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "slug": "52c75a79471dee4c0b000003",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52cd921f471deebc0a000001"),
-      "content": "dfa fsda f",
-      "status": true,
-      "created": ISODate("2014-01-08T17:59:59.0Z"),
-      "updated": ISODate("2014-01-08T18:00:00.0Z"),
-      "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "slug": "52cd921f471deebc0a000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f91bbb471deea40a000001"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-02-10T18:34:35.0Z"),
-      "updated": ISODate("2014-02-10T18:34:35.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5f43471deeb40900001f",
-      "slug": "52f91bbb471deea40a000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f91bd6471deeb40a000008"),
-      "content": "bbbbbbbbbbb",
-      "status": true,
-      "created": ISODate("2014-02-10T18:35:02.0Z"),
-      "updated": ISODate("2014-02-10T18:35:02.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5f43471deeb40900001f",
-      "slug": "52f91bd6471deeb40a000007",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f91c1b471dee9c0a000001"),
-      "content": "cccccccccccccc",
-      "status": true,
-      "created": ISODate("2014-02-10T18:36:11.0Z"),
-      "updated": ISODate("2014-02-10T18:36:11.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5f43471deeb40900001f",
-      "slug": "52f91c1b471dee9c0a000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    }
-  ],
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5f43471deeb40900001f"),
     "$db": "yesocl"
   }
 });
