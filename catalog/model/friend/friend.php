@@ -93,34 +93,28 @@ class ModelFriendFriend extends Model {
         );
 	}
 
-	public function unFriend( $user1, $user2 ){
-		if ( !empty($user1['id']) ){
-			$user1 = $this->dm->getRepository('Document\User\User')->find( $user1['id'] );
-		}elseif ( !empty($user1['slug']) ){
-			$user1 = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user1['slug'] );
-		}else{
-			return false;
-		}
-		
-		if ( !empty($user2['id']) ){
-			$user2 = $this->dm->getRepository('Document\User\User')->find( $user2['id'] );
-		}elseif ( !empty($user2['slug']) ){
-			$user2 = $this->dm->getRepository('Document\User\User')->findOneBySlug( $user2['slug'] );
-		}else{
-			return false;
-		}
+	public function unFriend( $idUserA, $idUserB ){
+		$oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
+			'user.id' => $idUserA
+		));
 
-		foreach ( $user1->getFriends() as $friend ) {
-			if ( $friend->getUser()->getId() == $user2->getId() ){
-				$user1->getFriends()->removeElement( $friend );
-				break;
+		if ( $oFriendAs ){
+			$oFriendB = $oFriendAs->getFriendByUserId( $idUserB );
+
+			if ( $oFriendB ){
+				$oFriendAs->getFriends()->removeElement( $oFriendB );
 			}
 		}
 
-		foreach ( $user2->getFriends() as $friend ) {
-			if ( $friend->getUser()->getId() == $user1->getId() ){
-				$user2->getFriends()->removeElement( $friend );
-				break;
+		$oFriendBs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
+			'user.id' => $idUserB
+		));
+
+		if ( $oFriendBs ){
+			$oFriendA = $oFriendBs->getFriendByUserId( $idUserA );
+
+			if ( $oFriendA ){
+				$oFriendBs->getFriends()->removeElement( $oFriendA );
 			}
 		}
 
@@ -180,7 +174,8 @@ class ModelFriendFriend extends Model {
 		// Remove request from user B to user A
 		$aRequestAs = $oUserA->getFriendRequests();
 		$iIndex = array_search( $idUserB, $aRequestAs );
-		if ( $aRequestAs && $iIndex != false ){
+		
+		if ( $aRequestAs && $iIndex !== false ){
 			unset($aRequestAs[$iIndex]);
 			$oUserA->setFriendRequests( $aRequestAs );
 		}
@@ -188,11 +183,11 @@ class ModelFriendFriend extends Model {
 		// Remove request from user A to user B
 		$aRequestBs = $oUserB->getFriendRequests();
 		$iIndex = array_search( $idUserA, $aRequestBs );
-		if ( $aRequestBs && $iIndex != false ){
+		if ( $aRequestBs && $iIndex !== false ){
 			unset($aRequestBs[$iIndex]);
 			$oUserB->setFriendRequests( $aRequestBs );
 		}
-
+		
 		$this->dm->flush();
 
 		return true;
