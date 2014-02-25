@@ -22,7 +22,7 @@ if(!String.prototype.trim) {
 function CurrentUser()
 {
     var $curr_user_info = $('#current-user-info');
-    this.slug = $curr_user_info.find('#current-user-slug');
+    this.slug = $curr_user_info.find('#current-user-slug').val();
 
     $curr_user_info.remove();
     

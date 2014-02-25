@@ -178,9 +178,9 @@
 		{% if post_popup_id is not defined %}
 			{% set post_popup_id = 'post-advance-branch-add-popup' %}
 		{% endif %}
-		<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}">
+		<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}" data-post-type="{{ post_type }}">
 			<div class="y-dlg">
-				<form autocomplete="off" class="form-status full-post">
+				<form autocomplete="off" class="full-post">
 					<div class="dlg-title">
 				        <i class="icon-yes"></i> 
 				        {% if post_popup_id == 'post-advance-branch-add-popup' %}
@@ -224,10 +224,10 @@
 				    		<div class="control-group">
 					    		<label for="category-branch" class="control-label">{% trans %}Category{% endtrans %}</label>
 					    		<div class="controls">
-					    			<select name="category" id="category-branch" style="width: 99%;height: 30px;font-size: 13px;">
-					    				<option>IT Technoloy</option>
-					    				<option>IT Technoloy</option>
-					    				<option>IT Technoloy</option>
+					    			<select class="post-advance-cat" style="width: 99%;height: 30px;font-size: 13px;">
+					    				{% for category in categories %}
+					    				<option value="{{ category.id }}">{{ category.name }}</option>
+					    				{% endfor %}
 					    			</select>
 					    		</div>
 				    		</div>

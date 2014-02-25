@@ -4,7 +4,6 @@ class ControllerPostPost extends Controller {
 
 	public function addPost(){
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->load->model('user/post');
             $this->load->model('tool/image');
 
             $sImageLink = null;
@@ -15,17 +14,43 @@ class ControllerPostPost extends Controller {
                 $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
                 $sExtension = explode('.', $sFilename)[1];
             }
-            
-            $aDatas = array(
-                'content' => $this->request->post['content'],
-                'title' => $this->request->post['title'],
-                'user_slug' => $this->request->get['user_slug'],
-                'author_id' => $this->customer->getId(),
-                'image_link' => $sImageLink,
-                'extension' => $sExtension
-            );
 
-            $oPost = $this->model_user_post->addPost( $aDatas );
+            $sPostType = $this->request->get['post_type'];
+
+            switch ( $sPostType ) {
+                case $this->config->get('common')['type']['user']:
+                    $this->load->model('user/post');
+                    $aDatas = array(
+                        'content'       => $this->request->post['content'],
+                        'title'         => $this->request->post['title'],
+                        'user_slug'     => $this->request->get['user_slug'],
+                        'author_id'     => $this->customer->getId(),
+                        'image_link'    => $sImageLink,
+                        'extension'     => $sExtension
+                    );
+
+                    $oPost = $this->model_user_post->addPost( $aDatas );
+                    break;
+
+                case $this->config->get('common')['type']['branch']:
+                    $this->load->model('branch/post');
+                    $aDatas = array(
+                        'content'       => $this->request->post['content'],
+                        'title'         => $this->request->post['title'],
+                        'description'   => $this->request->post['description'],
+                        'category'      => $this->request->post['category'],
+                        'user_slug'     => $this->request->get['user_slug'],
+                        'image_link'    => $sImageLink,
+                        'extension'     => $sExtension
+                    );
+
+                    $oPost = $this->model_branch_post->addPost( $aDatas );
+                    break;
+                
+                default:
+                    $oPost = null;
+                    break;
+            }
 
             if ( !$oPost ){
                 return $this->response->setOutput(json_encode(array(
@@ -45,8 +70,6 @@ class ControllerPostPost extends Controller {
             }else{
                 $sImage = null;
             }
-
-            $sPostType = $this->config->get('post')['type']['user'];
 
             // href
             $aData_post_infos = array(
@@ -82,17 +105,40 @@ class ControllerPostPost extends Controller {
                 'is_owner' => true
             );
 
-            if ( $aAuthor['id'] != $oPost->getOwnerId() ){
-                $this->load->model('user/user');
+            // Check owner
+            // If post of wall & owner = false ==> user A post on all of user B
+            // If post of branch ==> user A post on any Branch
+            switch ( $sPostType ) {
+                case $this->config->get('common')['type']['user']:
+                    if ( $aAuthor['id'] != $oPost->getOwnerId() ){
+                        $this->load->model('user/user');
 
-                $aOwner = $this->model_user_user->getUser( $this->request->get['user_slug'] );
-                if ( $aOwner ){
+                        $aOwner = $this->model_user_user->getUser( $this->request->get['user_slug'] );
+                        if ( $aOwner ){
+                            $aReturnData['is_owner'] = false;
+                            $aReturnData['owner'] = array(
+                                'username' => $aOwner['username'],
+                                'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
+                            );
+                        }
+                    }
+                    break;
+
+                case $this->config->get('common')['type']['branch']:
+                    $this->load->model('branch/branch');
+
+                    $oBranch = $this->model_branch_branch->getBranchByCategoryId( $aDatas['category'] );
+
                     $aReturnData['is_owner'] = false;
                     $aReturnData['owner'] = array(
                         'username' => $aOwner['username'],
                         'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
                     );
-                }
+                    break;
+                
+                default:
+                    $oPost = null;
+                    break;
             }
 
             // Add notification
@@ -250,10 +296,10 @@ class ControllerPostPost extends Controller {
     }
 
     public function validate(){
-        if ( empty( $this->request->post['content']) ) {
+        if ( empty($this->request->post['content']) ) {
             $this->error['warning'] = $this->language->get( 'error_content' );
         
-        }elseif ( !empty( $this->request->files['thumb'] ) && $this->request->files['thumb']['size'] > 0 ) {
+        }elseif ( !empty($this->request->files['thumb']) && $this->request->files['thumb']['size'] > 0 ) {
             $this->load->model('tool/image');
             if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
                 $this->error['warning'] = $this->language->get( 'error_thumb');
@@ -261,6 +307,14 @@ class ControllerPostPost extends Controller {
         
         }elseif ( isset($this->request->get['user_slug']) && empty($this->request->get['user_slug']) ){
             $this->error['warning'] = 'user slug is empty';
+        
+        }elseif ( $this->request->get['post_type'] == $this->config->get('common')['type']['branch'] ){
+            if ( empty($this->request->post['description']) ){
+                $this->error['warning'] = 'description is empty';
+            
+            }elseif ( empty($this->request->post['category']) ){
+                $this->error['warning'] = 'category is empty';
+            }
         }
 
         if ( $this->error ) {

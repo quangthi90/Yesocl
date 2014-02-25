@@ -141,6 +141,16 @@ Class Branch {
 		return posts;
 	}
 
+	public function getCategoryById( $category_id ){
+		foreach ( $this->categories as $category ) {
+			if ( $category_id == $category->getId() ){
+				return $category;
+			}
+		}
+
+		return null;
+	}
+
 	public function getId(){
 		return $this->id;
 	}

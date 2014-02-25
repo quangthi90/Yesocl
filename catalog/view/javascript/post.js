@@ -226,13 +226,13 @@
     }); 
 }(jQuery, document));
 
-// Add new post
+// Add new post in wall page
 (function($, document, undefined) {
     var marginPostDefault = 15;
     var widthPostDefault = 420;
     var $post_add_form = $('#post-advance-add-popup');
 
-    function AddPost( $el ) {
+    function AddPostWall( $el ) {
         this.rootContent        = $('#y-content');
         this.mainContent        = $('#y-main-content');
         this.blockContent       = this.mainContent.find('.block-content');
@@ -245,11 +245,11 @@
         this.$advance_title     = $post_add_form.find('.post-advance-title');
         this.$advance_content   = $post_add_form.find('.post-advance-content');
         this.$advance_btn       = $post_add_form.find('.btn-post-advance');
-        this.$editor            = $post_add_form.find('.y-editor');
+        
         this.attachEvents();
     }
 
-    AddPost.prototype.attachEvents = function(){
+    AddPostWall.prototype.attachEvents = function(){
         var that = this;
 
         this.$advance_btn.click(function(e) {
@@ -298,7 +298,7 @@
         });     
     };
 
-    AddPost.prototype.submit = function($button){
+    AddPostWall.prototype.submit = function($button){
         var that = this;
 
         var promise = $.ajax({
@@ -383,7 +383,7 @@
         });
     };
 
-    AddPost.prototype.validate = function(is_advance){
+    AddPostWall.prototype.validate = function(is_advance){
 
         if(!String.prototype.trim) {
           String.prototype.trim = function () {
@@ -407,7 +407,7 @@
         return true;
     };
 
-    AddPost.prototype.triggerProgress = function($el, promise){
+    AddPostWall.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f        = function() {
             $el.removeClass('disabled');
@@ -421,8 +421,166 @@
 
     $(function(){
         $('.form-status').each(function(){
-            new AddPost($(this));
+            new AddPostWall($(this));
         });     
+    });
+}(jQuery, document));
+
+// Show advance edit post in wall page
+(function($, document, undefined) {
+    var $edit_post_form = $('#post-advance-edit-popup');
+
+    function ShowEditPostWallAdvance($el) {
+        this.$el        = $el;
+        this.$btn       = $el.find('.post-edit-btn');
+        this.content    = $el.find('.post_text_editable').html();
+        this.title      = $el.find('.post_title > a').html();
+        this.$image     = $el.find('.post_image > img');
+
+        this.url        = $el.data('url-edit');
+
+        this.addEvents();
+    }
+    ShowEditPostWallAdvance.prototype.addEvents = function() {
+        var that = this;
+        this.$btn.click(function(e){
+            e.preventDefault();
+            // Content
+            $edit_post_form.find('.post-advance-content').code( that.content );
+
+            // Title
+            $edit_post_form.find('.post-advance-title').val( that.title );
+
+            // Image
+            $edit_post_form.find('.drop-zone-show').html('').append(that.$image);
+
+            // Url
+            $edit_post_form.data('url', that.url);
+
+            // Cache current post
+            $edit_post_form.data('post', that.$el);
+
+            return false;
+        });
+    }
+
+    $(function(){
+        $('.js-post-item').each(function(){
+            new ShowEditPostWallAdvance($(this));
+        });
+
+        $(document).bind('EDIT_POST', function(e, $post_item) {
+            new ShowEditPostWallAdvance($post_item);
+        });
+    }); 
+}(jQuery, document));
+
+// Submit edit post in wall page
+(function($, document, undefined) {
+    function EditPostWall( $el ) {
+        this.$el                = $el;
+        this.$title             = $el.find('.post-advance-title');
+        this.$content           = $el.find('.post-advance-content');
+        this.$btn               = $el.find('.btn-post-advance');
+
+        this.attachEvents();
+    }
+
+    EditPostWall.prototype.attachEvents = function(){
+        var that = this;
+
+        this.$btn.click(function(e) {
+            e.preventDefault();
+            
+            if($(this).hasClass('disabled') || that.validate() == false) {
+                return false;
+            }
+            
+            if ( that.$el.find('.img-url').val() == null ){
+                var thumb = null;
+            }else{
+                var thumb = that.$el.find('.img-link-popup').attr('href');
+            }
+            
+            that.url = that.$el.data('url');
+            
+            that.data = {
+                title       : that.$title.val(),
+                content     : that.$content.code(),
+                thumb       : thumb
+            };
+
+            that.submit($(this));
+
+            return false;
+        });    
+    };
+
+    EditPostWall.prototype.submit = function($button){
+        var that = this;
+
+        var promise = $.ajax({
+            type: 'POST',
+            url:  this.url,
+            data: this.data,
+            dataType: 'json'
+        });
+
+        this.triggerProgress($button, promise);
+
+        promise.then(function(data) {
+            if(data.success == 'ok'){
+                var $current_post = that.$el.data('post');
+                var textRaw = $current_post.find('.post_text_raw');
+                textRaw.html( data.post.content );
+                setTimeout(function(){
+                    textRaw.truncate({
+                        width: 'auto',
+                        token: '&hellip;',
+                        side: 'right',
+                        multiline: true
+                    });
+                }, 500); 
+                $current_post.find('.post_text_editable').html( data.post.content );
+                $current_post.find('.post_title > a').html( data.post.title );
+                $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
+
+                $('.mfp-ready').trigger('click');
+                $(document).trigger('EDIT_POST', [$current_post]);
+            }
+        });
+    };
+
+    EditPostWall.prototype.validate = function(){
+        if(!String.prototype.trim) {
+          String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g,'');
+          };
+        }
+
+        var tempEle = $("<div></div>");
+        tempEle.append(this.$content.code());
+        if (tempEle.text().trim().length === 0 ){
+            this.$content.code('');
+            return false;
+        }
+        return true;
+    };
+
+    EditPostWall.prototype.triggerProgress = function($el, promise){
+        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
+        var f        = function() {
+            $el.removeClass('disabled');
+            $spinner.remove();
+        };
+
+        $el.addClass('disabled').prepend($spinner);
+
+        promise.then(f, f);
+    };
+
+    $(function(){
+        new EditPostWall($('#post-advance-edit-popup'));
     });
 }(jQuery, document));
 
@@ -521,102 +679,60 @@
     }); 
 }(jQuery, document));
 
-// Show advance edit post
+// Add new post in wall page
 (function($, document, undefined) {
-    var $edit_post_form = $('#post-advance-edit-popup');
+    var $post_add_form = $('#post-advance-branch-add-popup');
 
-    function ShowEditAdvance($el) {
-        this.$el        = $el;
-        this.$btn       = $el.find('.post-edit-btn');
-        this.content    = $el.find('.post_text_editable').html();
-        this.title      = $el.find('.post_title > a').html();
-        this.$image     = $el.find('.post_image > img');
-
-        this.url        = $el.data('url-edit');
-
-        this.addEvents();
-    }
-    ShowEditAdvance.prototype.addEvents = function() {
-        var that = this;
-        this.$btn.click(function(e){
-            e.preventDefault();
-            // Content
-            $edit_post_form.find('.post-advance-content').code( that.content );
-
-            // Title
-            $edit_post_form.find('.post-advance-title').val( that.title );
-
-            // Image
-            $edit_post_form.find('.drop-zone-show').html('').append(that.$image);
-
-            // Url
-            $edit_post_form.data('url', that.url);
-
-            // Cache current post
-            $edit_post_form.data('post', that.$el);
-
-            return false;
-        });
-    }
-
-    $(function(){
-        $('.js-post-item').each(function(){
-            new ShowEditAdvance($(this));
-        });
-
-        $(document).bind('EDIT_POST', function(e, $post_item) {
-            new ShowEditAdvance($post_item);
-        });
-    }); 
-}(jQuery, document));
-
-// Submit edit post
-(function($, document, undefined) {
-    function EditPost( $el ) {
+    function AddPostBranch( $el ) {
+        this.rootContent        = $('#y-content');
+        this.mainContent        = $('#y-main-content');
+        this.blockContent       = this.mainContent.find('.block-content');
+        
         this.$el                = $el;
-        this.$title             = $el.find('.post-advance-title');
-        this.$content           = $el.find('.post-advance-content');
-        this.$btn               = $el.find('.btn-post-advance');
+
+        this.$advance_title     = $post_add_form.find('.post-advance-title');
+        this.$advance_des       = $post_add_form.find('.post-advance-des');
+        this.$advance_content   = $post_add_form.find('.post-advance-content');
+        this.$advance_cat       = $post_add_form.find('.post-advance-cat');
+        this.$advance_btn       = $post_add_form.find('.btn-post-advance');
 
         this.attachEvents();
     }
 
-    EditPost.prototype.attachEvents = function(){
+    AddPostBranch.prototype.attachEvents = function(){
         var that = this;
 
-        this.$btn.click(function(e) {
+        this.$advance_btn.click(function(e) {
             e.preventDefault();
             
-            if($(this).hasClass('disabled') || that.validate() == false) {
+            if(that.$advance_btn.hasClass('disabled')) {
                 return false;
             }
-            
-            if ( that.$el.find('.img-url').val() == null ){
-                var thumb = null;
-            }else{
-                var thumb = that.$el.find('.img-link-popup').attr('href');
+            if(that.validate() == false){
+                return false;
             }
-            
-            that.url = that.$el.data('url');
-            
+
             that.data = {
-                title       : that.$title.val(),
-                content     : that.$content.code(),
-                thumb       : thumb
+                title       : that.$advance_title.val(),
+                description : that.$advance_des.val(),
+                content     : that.$advance_content.code(),
+                category    : that.$advance_cat.val(),
+                tags        : that.$advance_content.getTags(),
+                thumb       : $post_add_form.find('.img-link-popup').attr('href')
             };
 
-            that.submit($(this));
+            that.submit(that.$advance_btn);
 
             return false;
         });    
     };
 
-    EditPost.prototype.submit = function($button){
+    AddPostBranch.prototype.submit = function($button){
         var that = this;
-
+        
         var promise = $.ajax({
             type: 'POST',
-            url:  this.url,
+            url:  yRouting.generate('PostAdd', {post_type: $post_add_form.data('post-type'), user_slug: yCurrUser.getSlug()}),
             data: this.data,
             dataType: 'json'
         });
@@ -625,28 +741,79 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                var $current_post = that.$el.data('post');
-                var textRaw = $current_post.find('.post_text_raw');
-                textRaw.html( data.post.content );
+                var htmlOutput = $.tmpl( $('#post-item-template'), data.post ); 
+                var firstColumn = that.blockContent.find('.column:first-child');          
+                var newColumn = $('<div class="column">').append(htmlOutput);
+                newColumn.width(widthPostDefault);                
+                newColumn.css({
+                    'opacity':'1', 
+                    'min-width': widthPostDefault + 'px'
+                });
+                
+                //Adjust size of layout:
+                var post = newColumn.children('.post');
+                var postBody   = post.children('.post_body');
+                post.height(firstColumn.height() - 2*(marginPostDefault + 1));
+                postBody.height(post.height() - 65 - 10 - 22);
+                var postTitle  = postBody.children('.post_title');                
+                var postImg    = postBody.children('.post_image');
+                if(postTitle.length > 0){
+                    postImg.height(postBody.height()*0.6);
+                }else {
+                    postImg.height(postBody.height()*0.7);
+                }
+                var postTextRaw = postBody.children('.post_text_raw');                
+                var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+                postTextRaw.height(Math.floor(maxHeightText/20)*20);
+                var imgInTextRaw = postTextRaw.find('img');
+                if(imgInTextRaw.length > 0) {
+                    imgInTextRaw.hide(10);
+                }                
+                firstColumn.hide().after(newColumn).show(500);
+                that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
+                that.rootContent.getNiceScroll().resize();
+
+                //Attach events:
                 setTimeout(function(){
-                    textRaw.truncate({
+                    post.find('.post_text_raw').truncate({
                         width: 'auto',
                         token: '&hellip;',
                         side: 'right',
                         multiline: true
                     });
                 }, 500); 
-                $current_post.find('.post_text_editable').html( data.post.content );
-                $current_post.find('.post_title > a').html( data.post.title );
-                $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
+                post.find('.link-popup').magnificPopup({
+                    type:'inline',
+                    midClick: true,
+                    removalDelay: 300,
+                    mainClass: 'mfp-fade'
+                });
+                $(".timeago").timeago();
 
-                $('.mfp-ready').trigger('click');
-                $(document).trigger('EDIT_POST', [$current_post]);
+                //Reset:
+                if($button.hasClass('btn-status')){
+                    that.$content.mentionsInput('reset');
+                    that.$content.height(40);
+                    that.$el.find('.img-previewer-container').html('');
+                }else {
+                    that.$advance_content.code('');
+                    that.$advance_title.val('');
+                    $post_add_form.find('.img-previewer-container').html('');
+                    $('.mfp-ready').trigger('click');
+                }
+
+                //Rise events:
+                $(document).trigger('POST_BUTTON');
+                $(document).trigger('POST_SHOW_LIKED_BUTTON');
+                $(document).trigger('HORIZONTAL_POST');
+                $(document).trigger('DELETE_POST', [htmlOutput]);
+                $(document).trigger('EDIT_POST', [htmlOutput]);                
             }
         });
     };
 
-    EditPost.prototype.validate = function(){
+    AddPostBranch.prototype.validate = function(){
+
         if(!String.prototype.trim) {
           String.prototype.trim = function () {
             return this.replace(/^\s+|\s+$/g,'');
@@ -654,15 +821,21 @@
         }
 
         var tempEle = $("<div></div>");
-        tempEle.append(this.$content.code());
+        tempEle.append(this.$advance_content.code());
         if (tempEle.text().trim().length === 0 ){
-            this.$content.code('');
+            this.$advance_content.code('');
             return false;
         }
+
+        if (this.$advance_des.val().trim().length === 0){
+            this.$advance_des.val('');
+            return false;
+        }
+
         return true;
     };
 
-    EditPost.prototype.triggerProgress = function($el, promise){
+    AddPostBranch.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f        = function() {
             $el.removeClass('disabled');
@@ -675,6 +848,8 @@
     };
 
     $(function(){
-        new EditPost($('#post-advance-edit-popup'));
+        $('.form-status').each(function(){
+            new AddPostBranch($(this));
+        });     
     });
 }(jQuery, document));

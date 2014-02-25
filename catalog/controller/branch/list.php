@@ -27,6 +27,9 @@ class ControllerBranchList extends Controller {
 			$this->data['branches'][] = $aBranch;
 		}
 
+		// set selected menu
+		$this->session->setFlash( 'menu', 'branch' );
+
     	$this->document->setTitle($this->language->get('heading_title'));
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/branch/list.tpl')) {
