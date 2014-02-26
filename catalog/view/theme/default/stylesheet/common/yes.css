@@ -880,7 +880,7 @@ a.btn-notification:hover .notification-item-name > i {
   display: none; 
 }
 .notification-item.message .no-messages .see-all-ntf {
-  display: none;
+  display: block;
 }
 .notification-item.message .no-messages .empty-ntf {
   display: block; 
