@@ -44,7 +44,7 @@ class Customer {
   		}
 	}
 		
-  	public function login($email, $password, $remember = false, $is_social = false) {
+  	public function login($email, $password, $remember = false, $is_social = false, $is_pass_encode = false) {
 		$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
 			'status' => true,
 			'emails.email' => $email
@@ -53,7 +53,12 @@ class Customer {
 		if ($customer_query) {
 			if ( !$is_social ){
 				$salt = $customer_query->getSalt();
-		    	$user_password = sha1($salt . sha1($salt . sha1($password)));
+
+				if ( !$is_pass_encode ){
+		    		$user_password = sha1($salt . sha1($salt . sha1($password)));
+		    	}else{
+		    		$user_password = $password;
+		    	}
 
 				$date = new DateTime();
 		    	if ( $user_password != $customer_query->getPassword() ){
@@ -87,7 +92,7 @@ class Customer {
 			// remember
 			if ($remember) {
 	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
-	    		setcookie('ypass', $password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
+	    		setcookie('ypass', $user_password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	        }
 			
 	  		return true;
@@ -134,10 +139,10 @@ class Customer {
 		$this->customer_group_id = '';
 
 		// delete cookie
-		if ( isset( $this->request->cookie['yid'] ) ) {
+		if ( !empty($this->request->cookie['yid']) ) {
 			setcookie('yid', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
-		if ( isset( $this->request->cookie['ypass'] ) ) {
+		if ( !empty($this->request->cookie['ypass']) ) {
 			setcookie('ypass', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
   	}
@@ -146,7 +151,7 @@ class Customer {
   		if ($this->customer_id) {
   			return $this->customer_id;
   		}elseif ( isset( $this->request->cookie['yid'] ) && isset( $this->request->cookie['ypass'] ) ) {
-  			$this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'] );
+  			$this->login( $this->request->cookie['yid'], $this->request->cookie['ypass'], false, false, true );
   		}
   		return $this->customer_id;
   	}

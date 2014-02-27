@@ -53,7 +53,7 @@
         promise.then(function(data) { 
             if(data.success == 'ok'){ 
                 var $curr_item = that.$el.parents('.post'); 
-                that.$el.find('.post_meta .post_like d').html( data.like_count );
+                that.$el.find('.post_meta .post_like d.number-counter').html( data.like_count );
                 that.$el.find('.post-liked-list d').html( data.like_count ).data('like-count', data.like_count);
 
                 //Unlike
@@ -69,7 +69,7 @@
                     that.$btnLike.addClass('hidden');
                     that.$el.data('is-liked', 1);
                 }
-
+                
                 that.$el.find('.post-liked-list').data('users', null);
                 that.$el.find('.post-liked-list').data('like-count', data.like_count);
             }
@@ -588,7 +588,7 @@
     });
 }(jQuery, document));
 
-// Show delete post
+// Delete post
 (function($, document, undefined) {
     function DeletePost($el) {
         this.$el        = $el;

@@ -1,25 +1,13 @@
 // Routing to generate url
-function Routing()
+function Routing( _routing )
 {
     var that = this;
 
     this.routing = new HashTable();
     
-    var promise = $.ajax({
-        type: 'POST',
-        url:  $('base').attr('href') + 'ajax/service/get/routing/',
-        dataType: 'json'
-    });
-
-    promise.then(function(data) {
-        if ( data.success == 'ok' ){
-            for ( var key in data.routing ){
-                that.routing.setItem( key, data.routing[key] );
-            }
-
-            $(document).trigger('LOAD_ROUTING_COMPLETE');
-        }
-    });
+    for ( var key in _routing ){
+        that.routing.setItem( key, _routing[key] );
+    }
     
     // Generate url by name & params
     this.generate = function(name, params, method)
@@ -36,5 +24,3 @@ function Routing()
         return $('base').attr('href') + method + url;
     }
 }
-
-window.yRouting = new Routing();
