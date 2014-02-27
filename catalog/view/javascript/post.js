@@ -681,6 +681,8 @@
 
 // Add new post in wall page
 (function($, document, undefined) {
+    var marginPostDefault = 15;
+    var widthPostDefault = 420;
     var $post_add_form = $('#post-advance-branch-add-popup');
 
     function AddPostBranch( $el ) {
@@ -791,16 +793,12 @@
                 $(".timeago").timeago();
 
                 //Reset:
-                if($button.hasClass('btn-status')){
-                    that.$content.mentionsInput('reset');
-                    that.$content.height(40);
-                    that.$el.find('.img-previewer-container').html('');
-                }else {
-                    that.$advance_content.code('');
-                    that.$advance_title.val('');
-                    $post_add_form.find('.img-previewer-container').html('');
-                    $('.mfp-ready').trigger('click');
-                }
+                that.$advance_content.code('');
+                that.$advance_title.val('');
+                that.$advance_des.val('');
+                that.$advance_cat.val('');
+                $post_add_form.find('.img-previewer-container').html('');
+                $('.mfp-ready').trigger('click');
 
                 //Rise events:
                 $(document).trigger('POST_BUTTON');

@@ -131,8 +131,8 @@ class ControllerPostPost extends Controller {
 
                     $aReturnData['is_owner'] = false;
                     $aReturnData['owner'] = array(
-                        'username' => $aOwner['username'],
-                        'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
+                        'username' => $oBranch->getName(),
+                        'href' => $this->extension->path("BranchCategories", array('branch_slug' => $oBranch->getSlug()) )
                     );
                     break;
                 

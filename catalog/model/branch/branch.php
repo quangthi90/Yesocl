@@ -17,5 +17,11 @@ class ModelBranchBranch extends Model {
 
 		return null;
 	}
+
+	public function getBranchByCategoryId( $idCategory ){
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $idCategory );
+
+		return $oCategory->getBranch();
+	}
 }
 ?>

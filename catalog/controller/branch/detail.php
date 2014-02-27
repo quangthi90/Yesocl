@@ -39,7 +39,7 @@ class ControllerBranchDetail extends Controller {
 
     		if ( empty($aUsers[$oUser->getId()]) ){
     			$aUser = $oUser->formatToCache();
-    			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['email'], $aUser['avatar'] );
+    			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
     			$aUsers[$oUser->getId()] = $aUser;
     		}
 
@@ -66,7 +66,7 @@ class ControllerBranchDetail extends Controller {
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
 				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 			}else{
-				$aPost['image'] = null;
+				$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 			}
 
     		$aPosts[] = $aPost;
