@@ -679,7 +679,7 @@
     }); 
 }(jQuery, document));
 
-// Add new post in wall page
+// Add new post in branch detail page
 (function($, document, undefined) {
     var marginPostDefault = 15;
     var widthPostDefault = 420;

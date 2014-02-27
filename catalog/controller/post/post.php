@@ -125,14 +125,12 @@ class ControllerPostPost extends Controller {
                     break;
 
                 case $this->config->get('common')['type']['branch']:
-                    $this->load->model('branch/branch');
-
-                    $oBranch = $this->model_branch_branch->getBranchByCategoryId( $aDatas['category'] );
+                    $oCategory = $oPost->getCategory();
 
                     $aReturnData['is_owner'] = false;
                     $aReturnData['owner'] = array(
-                        'username' => $oBranch->getName(),
-                        'href' => $this->extension->path("BranchCategories", array('branch_slug' => $oBranch->getSlug()) )
+                        'username' => $oCategory->getName(),
+                        'href' => $this->extension->path("BranchCategory", array('branch_slug' => $oCategory->getSlug()) )
                     );
                     break;
                 

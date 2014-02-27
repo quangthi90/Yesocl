@@ -40,6 +40,10 @@
 					<span><i class="icon-caret-right"></i></span>
 					<a href="{{ path('WallPage', {user_slug: users[post.owner_id].slug}) }}">{{ users[post.owner_id].username }}</a>
 					{% endif %}
+					{% if post.category_slug is defined %}
+					<span><i class="icon-caret-right"></i></span>
+					<a href="{{ path('BranchCategory', {category_slug: post.category_slug}) }}">{{ post.category_name }}</a>
+					{% endif %}
 				</div>
 				<div class="post_meta">
 					<span class="post_time fl">

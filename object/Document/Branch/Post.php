@@ -12,6 +12,40 @@ Class Post extends AbstractPost {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Category") */
 	private $category;
 
+	/**
+	* Format array to save to Cache
+	* 2014/02/27
+	* @author: Bommer <bommer@bommerdesign.com>
+	* @return: array User
+	*/
+	public function formatToCache(){
+		$limit = 200;
+
+		$post_data = array(
+			'id'			=> $this->getId(),
+			'author' 		=> $this->getAuthor(),
+			'title' 		=> $this->getTitle(),
+			'description'	=> $this->getDescription(),
+			'content' 		=> html_entity_decode($this->getContent()),
+			'created'		=> $this->getCreated(),
+			'user_id'		=> $this->getUser()->getId(),
+			'user_slug'		=> $this->getUser()->getSlug(),
+			'thumb'			=> $this->getThumb(),
+			'slug'			=> $this->getSlug(),
+			'status'		=> $this->getStatus(),
+			'email'			=> $this->getEmail(),
+			'comment_count' => $this->getComments()->count(),
+			'like_count'	=> count($this->getLikerIds()),
+			'liker_ids'		=> $this->getLikerIds(),
+			'like_count'	=> count($this->getLikerIds()),
+			'count_viewer'	=> $this->getCountViewer(),
+			'category_slug'	=> $this->category->getSlug(),
+			'category_name'	=> $this->category->getName()
+		);
+
+		return $post_data;
+	}
+
 	/** @MongoDB\PostPersist */
     public function postPersist()
     {
