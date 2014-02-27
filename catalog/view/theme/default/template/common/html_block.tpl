@@ -142,10 +142,10 @@
 								<div class="bar" style="width: 0%;"></div>
 							</div>
 				    		<div class="drag-img-upload">			    			
-				    			<a href="#" class="btn btn-yes">
+				    			<a href="#" class="btn btn-yes" onclick="$('#img-upload-adv').click() ; return false;">
 				    				<span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
-				    				<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
 				    			</a>
+				    			<input type="file" data-no-uniform="true" id="img-upload-adv"  class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
 				    		</div>
 						</div>
 						<div class="dlg-column fr" style="width:68%;">
@@ -200,10 +200,10 @@
 								<div class="bar" style="width: 0%;"></div>
 							</div>
 				    		<div class="drag-img-upload">			    			
-				    			<a href="#" class="btn btn-yes">
-				    				<span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
-				    				<input type="file" data-no-uniform="true" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
+				    			<a href="#" class="btn btn-yes" onclick="$('#img-upload-adv').click() ; return false;">
+				    				<span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>				    				
 				    			</a>
+				    			<input type="file" data-no-uniform="true" id="img-upload-adv" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
 				    		</div>
 						</div>
 						<div class="dlg-column fr" style="width:68%;">
