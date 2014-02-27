@@ -122,8 +122,8 @@ class ModelBranchPost extends Model {
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function editPost( $oPost_slug, $aData = array(), $thumb = array() ) {
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $oPost_slug );
+	public function editPost( $sPostSlug, $aData = array(), $thumb = array() ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
 		if ( !$oPost ){
 			return false;
@@ -164,6 +164,51 @@ class ModelBranchPost extends Model {
 		}
 		
 		return $oPost;
+	}
+
+	/**
+	 * Delete post
+	 * 2014/02/27
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array Thumb
+	 *	- array data
+	 * 	{
+	 *		string Liker ID (User ID)
+	 * 	}
+	 * @return: bool
+	 *	- object post: success
+	 * 	- false: not success
+	 */
+	public function deletePost( $sPostSlug ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
+
+		if ( !$oPost ){
+			return true;
+		}
+
+		$this->dm->remove( $oPost );
+
+		$this->dm->flush();
+
+		//-- Update 6 last posts
+		$this->load->model('tool/cache');
+
+		$oPosts = $this->getPosts( array(
+			'branch_id' => $branch_id,
+			'category_id' => $aData['category_id'],
+			'limit' => 6
+		));
+
+		$this->model_tool_cache->updateLastCategoryPosts( 
+			$this->config->get('post')['type']['branch'], 
+			$oPost->getBranch()->getId(), 
+			$oPost->getCategory()->getId(), 
+			$oPosts 
+		);
+
+		return true;
 	}
 
 	public function getPosts( $aData = array() ){
@@ -243,8 +288,8 @@ class ModelBranchPost extends Model {
 		return $results;
 	}
 
-	public function getPostBySlug( $oPost_slug ) {
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $oPost_slug );
+	public function getPostBySlug( $sPostSlug ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
 		return $oPost;
 	}
