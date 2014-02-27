@@ -317,7 +317,7 @@
                 var newColumn = $('<div class="column">').append(htmlOutput);
                 newColumn.width(widthPostDefault);                
                 newColumn.css({
-                    'opacity':'1', 
+                    'opacity':'0', 
                     'min-width': widthPostDefault + 'px'
                 });
                 
@@ -340,7 +340,7 @@
                 if(imgInTextRaw.length > 0) {
                     imgInTextRaw.hide(10);
                 }                
-                firstColumn.hide().after(newColumn).show(500);
+                firstColumn.hide().after(newColumn).show(200);
                 that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
                 that.rootContent.getNiceScroll().resize();
 
@@ -352,15 +352,18 @@
                         side: 'right',
                         multiline: true
                     });
-                }, 500); 
-                post.find('.link-popup').magnificPopup({
-                    type:'inline',
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'mfp-fade'
-                });
-                $(".timeago").timeago();
 
+                    $(".timeago").timeago(); 
+
+                    post.find('.link-popup').magnificPopup({
+                        type:'inline',
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'mfp-fade'
+                    });            
+                    newColumn.css('opacity', '1');
+                }, 500); 
+                
                 //Reset:
                 if($button.hasClass('btn-status')){
                     that.$content.mentionsInput('reset');
@@ -369,7 +372,8 @@
                 }else {
                     that.$advance_content.code('');
                     that.$advance_title.val('');
-                    $post_add_form.find('.img-previewer-container').html('');
+                    $post_add_form.find('.drop-zone-show').show(0);
+                    $post_add_form.find('.post_image_item').remove();
                     $('.mfp-ready').trigger('click');
                 }
 
@@ -748,7 +752,7 @@
                 var newColumn = $('<div class="column">').append(htmlOutput);
                 newColumn.width(widthPostDefault);                
                 newColumn.css({
-                    'opacity':'1', 
+                    'opacity':'0', 
                     'min-width': widthPostDefault + 'px'
                 });
                 
@@ -771,7 +775,7 @@
                 if(imgInTextRaw.length > 0) {
                     imgInTextRaw.hide(10);
                 }                
-                firstColumn.hide().after(newColumn).show(500);
+                firstColumn.after(newColumn);              
                 that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
                 that.rootContent.getNiceScroll().resize();
 
@@ -783,21 +787,25 @@
                         side: 'right',
                         multiline: true
                     });
+
+                    $(".timeago").timeago(); 
+
+                    post.find('.link-popup').magnificPopup({
+                        type:'inline',
+                        midClick: true,
+                        removalDelay: 300,
+                        mainClass: 'mfp-fade'
+                    });            
+                    newColumn.css('opacity', '1');
                 }, 500); 
-                post.find('.link-popup').magnificPopup({
-                    type:'inline',
-                    midClick: true,
-                    removalDelay: 300,
-                    mainClass: 'mfp-fade'
-                });
-                $(".timeago").timeago();
 
                 //Reset:
                 that.$advance_content.code('');
                 that.$advance_title.val('');
                 that.$advance_des.val('');
-                that.$advance_cat.val('');
-                $post_add_form.find('.img-previewer-container').html('');
+                that.$advance_cat.val('');                
+                $post_add_form.find('.drop-zone-show').show(0);
+                $post_add_form.find('.post_image_item').remove();
                 $('.mfp-ready').trigger('click');
 
                 //Rise events:
