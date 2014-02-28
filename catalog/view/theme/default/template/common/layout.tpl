@@ -88,7 +88,12 @@
 			var _user = '{{ print_user_data() }}';
 			window.yRouting = new Routing( JSON.parse(_routing) );
 			window.yUser = new User( JSON.parse(_user) );
-			// console.log(window.yUser);
+		</script>
+		<script type="text/javascript">
+			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?';
+			var sCancel = '{% trans %}Cancel{% endtrans %}';
+			var sConfirm = '{% trans %}Confirm{% endtrans %}';
+			var sOk = '{% trans %}Ok{% endtrans %}';
 		</script>
 		{% block datascript %}
 		{% endblock %}

@@ -477,122 +477,19 @@
     }); 
 }(jQuery, document));
 
-// Submit edit post in wall page
-(function($, document, undefined) {
-    function EditPostWall( $el ) {
-        this.$el                = $el;
-        this.$title             = $el.find('.post-advance-title');
-        this.$content           = $el.find('.post-advance-content');
-        this.$btn               = $el.find('.btn-post-advance');
-
-        this.attachEvents();
-    }
-
-    EditPostWall.prototype.attachEvents = function(){
-        var that = this;
-
-        this.$btn.click(function(e) {
-            e.preventDefault();
-            
-            if($(this).hasClass('disabled') || that.validate() == false) {
-                return false;
-            }
-            
-            if ( that.$el.find('.img-url').val() == null ){
-                var thumb = null;
-            }else{
-                var thumb = that.$el.find('.img-link-popup').attr('href');
-            }
-            
-            that.url = that.$el.data('url');
-            
-            that.data = {
-                title       : that.$title.val(),
-                content     : that.$content.code(),
-                thumb       : thumb
-            };
-
-            that.submit($(this));
-
-            return false;
-        });    
-    };
-
-    EditPostWall.prototype.submit = function($button){
-        var that = this;
-
-        var promise = $.ajax({
-            type: 'POST',
-            url:  this.url,
-            data: this.data,
-            dataType: 'json'
-        });
-
-        this.triggerProgress($button, promise);
-
-        promise.then(function(data) {
-            if(data.success == 'ok'){
-                var $current_post = that.$el.data('post');
-                var textRaw = $current_post.find('.post_text_raw');
-                textRaw.html( data.post.content );
-                setTimeout(function(){
-                    textRaw.truncate({
-                        width: 'auto',
-                        token: '&hellip;',
-                        side: 'right',
-                        multiline: true
-                    });
-                }, 500); 
-                $current_post.find('.post_text_editable').html( data.post.content );
-                $current_post.find('.post_title > a').html( data.post.title );
-                $current_post.find('.post_image').html($('<image src="' + data.post.image + '" />'));
-
-                $('.mfp-ready').trigger('click');
-                $(document).trigger('EDIT_POST', [$current_post]);
-            }
-        });
-    };
-
-    EditPostWall.prototype.validate = function(){
-        if(!String.prototype.trim) {
-          String.prototype.trim = function () {
-            return this.replace(/^\s+|\s+$/g,'');
-          };
-        }
-
-        var tempEle = $("<div></div>");
-        tempEle.append(this.$content.code());
-        if (tempEle.text().trim().length === 0 ){
-            this.$content.code('');
-            return false;
-        }
-        return true;
-    };
-
-    EditPostWall.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var f        = function() {
-            $el.removeClass('disabled');
-            $spinner.remove();
-        };
-
-        $el.addClass('disabled').prepend($spinner);
-
-        promise.then(f, f);
-    };
-
-    $(function(){
-        new EditPostWall($('#post-advance-edit-popup'));
-    });
-}(jQuery, document));
-
 // Delete post
 (function($, document, undefined) {
     function DeletePost($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-delete-btn');
 
-        this.url        = $el.data('url-delete');
+        this.postType   = $el.data('post-type');
+        this.postSlug   = $el.data('post-slug');
+        this.url        = window.yRouting.generate('PostDelete', {
+            post_type: this.postType,
+            post_slug: this.postSlug
+        });
+
         this.mainContent = $('#y-main-content');
         this.rootContent = $('#y-content');
 
@@ -608,12 +505,12 @@
             }
 
             bootbox.dialog({
-                title: "Confirm",
-                message: "Are you sure you want to delete this post ?",
+                title: sConfirm,
+                message: sConfirmDeletePost,
                 buttons: 
                 {
                     cancel: {
-                        label: "Cancel",
+                        label: sCancel,
                         className: "btn",
                         callback: function() {
                         }
