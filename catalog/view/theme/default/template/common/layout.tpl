@@ -83,7 +83,6 @@
     	{% block javascript %}
 		{% endblock %}
 		<!-- Defined Data for Script -->
-		
 		<script type="text/javascript">
 			var _routing = '{{ print_routing_list() }}';
 			window.yRouting = new Routing( JSON.parse(_routing) );
