@@ -82,9 +82,7 @@ class ControllerPostPost extends Controller {
                 'post_like' => $this->extension->path( "PostLike", $aData_post_infos ),
                 'post_detail' => $this->extension->path( "PostPage", $aData_post_infos ),
                 'user_info' => $this->extension->path( "WallPage", array('user_slug' => $aAuthor['slug']) ),
-                'post_get_liked' => $this->extension->path( "PostGetLiker", $aData_post_infos ),
-                'delete' => $this->extension->path( "PostDelete", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) ),
-                'edit' => $this->extension->path( "PostEdit", array('post_slug' => $oPost->getSlug(), 'post_type' => $sPostType) )
+                'post_get_liked' => $this->extension->path( "PostGetLiker", $aData_post_infos )
             );
 
             $bIsSeeMore = false;
@@ -99,8 +97,10 @@ class ControllerPostPost extends Controller {
                     'image' => $sImage,
                     'title' => $oPost->getTitle(),
                     'content' => html_entity_decode($oPost->getContent()),
-                    'see_more' => $bIsSeeMore
+                    'see_more' => $bIsSeeMore,
+                    'slug' => $oPost->getSlug()
                 ),
+                'post_type' => $sPostType,
                 'href' => $aHref,
                 'is_owner' => true
             );

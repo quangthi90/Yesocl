@@ -5,7 +5,7 @@
 	<div class="form-status upload-container js-post-form" data-post-type="{{ post_type }}" data-is-add-form="1">
 		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
-				<textarea class="post_input post-content mention" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
+				<textarea class="post_input js-post-content mention js-post-status" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
 				<input type="hidden" name="img-url" class="img-url" value="" />
 			</div>
 			<div class="img-previewer-container">
@@ -25,7 +25,7 @@
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<a href="#" class="btn btn-yes post-submit-btn">{% trans %}Submit{% endtrans %}</a>
+						<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}Submit{% endtrans %}</a>
 					</div>
 				</div>
  			</div>

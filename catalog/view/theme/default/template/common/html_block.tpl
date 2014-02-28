@@ -117,7 +117,7 @@
 
 {# -- Post -- #}
 	{% block common_html_block_post_advance_form %}
-		<div class="mfp-hide y-dlg-container js-advance-post" data-focus-type="input[type='text']" data-is-add-form="1">
+		<div class="mfp-hide y-dlg-container js-advance-post js-post-form" data-focus-type="input[type='text']" data-is-add-form="1" data-post-type="{{ post_type }}">
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
@@ -146,19 +146,19 @@
 					    	<div class="control-group">
 					    		<label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
 					    		<div class="controls">
-					    			<input class="post-advance-title" placeholder="Your title" type="text" name="title" id="title"
+					    			<input class="js-post-title" placeholder="Your title" type="text" name="title" id="title"
 					    				style="width: 98%;" />
 					    		</div>
 				    		</div>
 				    		<div class="control-group">
 				    			<label class="control-label">{% trans %}Content{% endtrans %}</label>
-						    	<div class="y-editor post-advance-content" id="post-adv-editor"></div>
+						    	<div class="y-editor js-post-content" id="post-adv-editor"></div>
 					    	</div>
 						</div>
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
+				    		<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}Submit{% endtrans %}</a>
 				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		
@@ -245,7 +245,7 @@
 	{% block common_html_block_post_item_template %}
 		{% raw %}
 			<div class="hidden" id="post-item-template">
-				<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-url-edit="${href.edit}" data-url-delete="${href.delete}">{% endraw %}
+				<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-post-type="${post_type}" data-post-slug="${post.slug}">{% endraw %}
 					<div class="yes-dropdown">
 			            <div class="dropdown">
 			               <a class="dropdown-toggle" data-toggle="dropdown">
@@ -257,7 +257,7 @@
 			                    </li>
 			                    <li class="divider"></li>
 			                    <li class="post-edit-btn">
-			                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
+			                        <a href="#" class="link-popup" data-mfp-src=".js-advance-post"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 			                    </li>
 			                    <li class="divider"></li>
 			                    <li class="post-delete-btn">

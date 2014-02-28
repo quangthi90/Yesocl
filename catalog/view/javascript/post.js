@@ -226,12 +226,64 @@
     }); 
 }(jQuery, document));
 
+// Show advance edit post
+(function($, document, undefined) {
+    var $advance_post_form = $('.js-advance-post');
+
+    function ShowEditPostAdvance($el) {
+        this.$el        = $el;
+        this.$btn       = $el.find('.post-edit-btn');
+        this.content    = $el.find('.post_text_editable').html();
+        this.title      = $el.find('.post_title > a').html();
+        this.$image     = $el.find('.post_image > img');
+
+        this.addEvents();
+    }
+    ShowEditPostAdvance.prototype.addEvents = function() {
+        var that = this;
+        this.$btn.click(function(e){
+            e.preventDefault();
+
+            // Update title of advance popup
+            $advance_post_form.find('.js-advance-post-title').html( sEditPost );
+
+            // Content
+            $advance_post_form.find('.js-post-content').code( that.content );
+
+            // Title
+            $advance_post_form.find('.js-post-title').val( that.title );
+
+            // Image
+            $advance_post_form.find('.drop-zone-show').html('').append(that.$image);
+
+            // Mention is edit form
+            $advance_post_form.data('is-add-form', 0);
+
+            // Cache current post
+            $advance_post_form.data('post', that.$el);
+
+            // Post slug
+            $advance_post_form.data('post-slug', that.$el.data('post-slug'));
+
+            return false;
+        });
+    }
+
+    $(function(){
+        $('.js-post-item').each(function(){
+            new ShowEditPostAdvance($(this));
+        });
+
+        $(document).bind('EDIT_POST', function(e, $post_item) {
+            new ShowEditPostAdvance($post_item);
+        });
+    }); 
+}(jQuery, document));
+
 // Submit post to add or edit
 (function($, document, undefined) {
     var marginPostDefault = 15;
     var widthPostDefault = 420;
-
-    var $advance_post_form = $('.js-advance-post');
 
     function SubmitPost( $el ) {
         this.rootContent        = $('#y-content');
@@ -239,12 +291,12 @@
         this.blockContent       = this.mainContent.find('.block-content');
         
         this.$el                = $el;
-        this.$title             = $el.find('.post-title');
-        this.$category          = $el.find('.post-category');
-        this.$description       = $el.find('.post-description');
-        this.$content           = $el.find('.post-content');
-        this.$submitBtn         = $el.find('.post-submit-btn');
-
+        this.$title             = $el.find('.js-post-title');
+        this.$category          = $el.find('.js-post-category');
+        this.$description       = $el.find('.js-post-description');
+        this.$content           = $el.find('.js-post-content');
+        this.$submitBtn         = $el.find('.js-post-submit-btn');
+        
         this.postType           = $el.data('post-type');
         
         this.attachEvents();
@@ -259,25 +311,24 @@
             if(that.$submitBtn.hasClass('disabled')) {
                 return false;
             }
-            if(that.validate(true) == false){
+            if(that.validate() == false){
                 return false;
             }
 
             // content, user tagged, thumb
-            var usersTagged = [];
-            if ( that.$content.val() != undefined ){
+            if ( !that.$content.hasClass('js-post-status') ){
+                var content = that.$content.code();
+                var usersTagged = that.$content.getTags();
+                var thumb = that.$el.find('.img-link-popup').attr('href');
+            
+            }else{
+                var usersTagged = [];
                 var mentions = that.$content.mentionsInput('getMentions');
                 $.each(mentions, function(key, value){                
                     usersTagged.push(value.id);
                 });
                 var content = that.$content.mentionsInput('getHtmlContent');
                 var thumb = that.$el.find('.img-link-popup').attr('href');
-            }else if ( that.content.code() != undefined ){
-                var content = that.content.code();
-                usersTagged = that.$content.getTags()
-                var thumb = that.$el.find('.img-link-popup').attr('href');
-            }else{
-                return false;
             }
 
             that.data = {
@@ -288,7 +339,7 @@
             };
 
             that.is_add = that.$el.data('is-add-form');
-
+            
             that.submit(that.$submitBtn);
 
             return false;
@@ -303,6 +354,11 @@
                 post_type: that.postType,
                 user_slug: window.yUser.get('slug')
             });
+        }else{
+            this.url = window.yRouting.generate('PostEdit', {
+                post_type: that.postType,
+                post_slug: that.$el.data('post-slug')
+            });
         }
 
         var promise = $.ajax({
@@ -311,7 +367,7 @@
             data: this.data,
             dataType: 'json'
         });
-
+        
         this.triggerProgress($button, promise);
 
         promise.then(function(data) {
@@ -369,9 +425,17 @@
                 }, 500); 
                 
                 //Reset:
-                that.$content.mentionsInput('reset');
-                that.$content.height(40);
-                that.$el.find('.img-previewer-container').html('');
+                if ( that.$content.hasClass('js-post-status') ){
+                    that.$content.mentionsInput('reset');
+                    that.$content.height(40);
+                    that.$el.find('.img-previewer-container').html('');
+                }else{
+                    that.$content.code('');
+                    that.$title.val('');
+                    that.$el.find('.drop-zone-show').show(0);
+                    that.$el.find('.post_image_item').remove();
+                    $('.mfp-ready').trigger('click');
+                }
 
                 //Rise events:
                 $(document).trigger('POST_BUTTON');
@@ -391,10 +455,11 @@
         }
 
         if ( this.$title.val() != undefined && this.$title.val().trim().length === 0 ){
+            this.$title.val('');
             return false;
         }
 
-        if ( this.$content.val() != undefined && this.$content.val().trim().length === 0 ){
+        if ( this.$content.hasClass('js-post-status') && this.$content.val().trim().length === 0 ){
             this.$content.val('');
             return false;
         }
@@ -424,57 +489,6 @@
             new SubmitPost($(this));
         });     
     });
-}(jQuery, document));
-
-// Show advance edit post
-(function($, document, undefined) {
-    var $advance_post_form = $('.js-advance-post');
-
-    function ShowEditPostAdvance($el) {
-        this.$el        = $el;
-        this.$btn       = $el.find('.post-edit-btn');
-        this.content    = $el.find('.post_text_editable').html();
-        this.title      = $el.find('.post_title > a').html();
-        this.$image     = $el.find('.post_image > img');
-
-        this.addEvents();
-    }
-    ShowEditPostAdvance.prototype.addEvents = function() {
-        var that = this;
-        this.$btn.click(function(e){
-            e.preventDefault();
-
-            // Update title of advance popup
-            $advance_post_form.find('.js-advance-post-title').html( sEditPost );
-
-            // Content
-            $advance_post_form.find('.post-advance-content').code( that.content );
-
-            // Title
-            $advance_post_form.find('.post-advance-title').val( that.title );
-
-            // Image
-            $advance_post_form.find('.drop-zone-show').html('').append(that.$image);
-
-            // Mention is edit form
-            $advance_post_form.data('is-add-form', 0);
-
-            // Cache current post
-            $advance_post_form.data('post', that.$el);
-
-            return false;
-        });
-    }
-
-    $(function(){
-        $('.js-post-item').each(function(){
-            new ShowEditPostAdvance($(this));
-        });
-
-        $(document).bind('EDIT_POST', function(e, $post_item) {
-            new ShowEditPostAdvance($post_item);
-        });
-    }); 
 }(jQuery, document));
 
 // Delete post
