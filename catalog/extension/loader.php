@@ -56,7 +56,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_cookie', array($this, 'getCookie')),
             new Twig_SimpleFunction('get_datetime_from_now', array($this, 'getDatetimeFromNow')),
             new Twig_SimpleFunction('localized_date', array($this, 'localizedDate')),
-            new Twig_SimpleFunction('print_routing_list', array($this, 'printRoutingList'))
+            new Twig_SimpleFunction('print_routing_list', array($this, 'printRoutingList')),
+            new Twig_SimpleFunction('print_user_data', array($this, 'printUserData'))
         );
     }
 
@@ -210,5 +211,19 @@ class ExtensionLoader
 
     public function printRoutingList(){
         print json_encode($this->config->get('routing'));
+    }
+
+    public function printUserData(){
+        $oLoggedUser = $this->customer->getUser();
+
+        $aReturn = array(
+            'id' => $oLoggedUser->getId(),
+            'username' => $oLoggedUser->getUsername(),
+            'fullname' => $oLoggedUser->getFullname(),
+            'email' => $oLoggedUser->getPrimaryEmail()->getEmail(),
+            'slug' => $oLoggedUser->getSlug()
+        );
+
+        print json_encode( $aReturn );
     }
 }

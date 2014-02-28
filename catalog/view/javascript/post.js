@@ -226,80 +226,84 @@
     }); 
 }(jQuery, document));
 
-// Add new post in wall page
+// Submit post to add or edit
 (function($, document, undefined) {
     var marginPostDefault = 15;
     var widthPostDefault = 420;
-    var $post_add_form = $('#post-advance-add-popup');
 
-    function AddPostWall( $el ) {
+    var $advance_post_form = $('.js-advance-post');
+
+    function SubmitPost( $el ) {
         this.rootContent        = $('#y-content');
         this.mainContent        = $('#y-main-content');
         this.blockContent       = this.mainContent.find('.block-content');
         
         this.$el                = $el;
-        this.$content           = $el.find('.status-content');
-        this.url                = $el.data('url');
-        this.$status_btn        = $el.find('.btn-status');
+        this.$title             = $el.find('.post-title');
+        this.$category          = $el.find('.post-category');
+        this.$description       = $el.find('.post-description');
+        this.$content           = $el.find('.post-content');
+        this.$submitBtn         = $el.find('.post-submit-btn');
 
-        this.$advance_title     = $post_add_form.find('.post-advance-title');
-        this.$advance_content   = $post_add_form.find('.post-advance-content');
-        this.$advance_btn       = $post_add_form.find('.btn-post-advance');
+        this.postType           = $el.data('post-type');
         
         this.attachEvents();
     }
 
-    AddPostWall.prototype.attachEvents = function(){
+    SubmitPost.prototype.attachEvents = function(){
         var that = this;
 
-        this.$advance_btn.click(function(e) {
+        this.$submitBtn.click(function(e) {
             e.preventDefault();
             
-            if(that.$advance_btn.hasClass('disabled')) {
+            if(that.$submitBtn.hasClass('disabled')) {
                 return false;
             }
             if(that.validate(true) == false){
                 return false;
             }
 
+            // content, user tagged, thumb
+            var usersTagged = [];
+            if ( that.$content.val() != undefined ){
+                var mentions = that.$content.mentionsInput('getMentions');
+                $.each(mentions, function(key, value){                
+                    usersTagged.push(value.id);
+                });
+                var content = that.$content.mentionsInput('getHtmlContent');
+                var thumb = that.$el.find('.img-link-popup').attr('href');
+            }else if ( that.content.code() != undefined ){
+                var content = that.content.code();
+                usersTagged = that.$content.getTags()
+                var thumb = that.$el.find('.img-link-popup').attr('href');
+            }else{
+                return false;
+            }
+
             that.data = {
-                title       : that.$advance_title.val(),
-                content     : that.$advance_content.code(),
-                tags        : that.$advance_content.getTags(),
-                thumb       : $post_add_form.find('.img-link-popup').attr('href')
+                title       : that.$title.val(),
+                content     : content,
+                tags        : usersTagged,
+                thumb       : thumb
             };
 
-            that.submit(that.$advance_btn);
+            that.is_add = that.$el.data('is-add-form');
+
+            that.submit(that.$submitBtn);
 
             return false;
         });
-        this.$status_btn.click(function(e) {
-            if(that.$status_btn.hasClass('disabled')) {
-                e.preventDefault();
-                return false;
-            }
-            if(that.validate(false) == false){
-                return false;
-            }
-            var usersTagged = [];
-            var mentions = that.$content.mentionsInput('getMentions');
-            $.each(mentions, function(key, value){                
-                usersTagged.push(value.id);
-            });
-            that.data = {
-                content     : that.$content.mentionsInput('getHtmlContent'),
-                tags        : usersTagged,
-                thumb       : that.$el.find('.img-link-popup').attr('href')
-            };
-
-            that.submit(that.$status_btn);
-
-            return false;
-        });     
     };
 
-    AddPostWall.prototype.submit = function($button){
+    SubmitPost.prototype.submit = function($button){
         var that = this;
+
+        if ( this.is_add == 1 ){
+            this.url = window.yRouting.generate('PostAdd', {
+                post_type: that.postType,
+                user_slug: window.yUser.get('slug')
+            });
+        }
 
         var promise = $.ajax({
             type: 'POST',
@@ -365,17 +369,9 @@
                 }, 500); 
                 
                 //Reset:
-                if($button.hasClass('btn-status')){
-                    that.$content.mentionsInput('reset');
-                    that.$content.height(40);
-                    that.$el.find('.img-previewer-container').html('');
-                }else {
-                    that.$advance_content.code('');
-                    that.$advance_title.val('');
-                    $post_add_form.find('.drop-zone-show').show(0);
-                    $post_add_form.find('.post_image_item').remove();
-                    $('.mfp-ready').trigger('click');
-                }
+                that.$content.mentionsInput('reset');
+                that.$content.height(40);
+                that.$el.find('.img-previewer-container').html('');
 
                 //Rise events:
                 $(document).trigger('POST_BUTTON');
@@ -387,31 +383,31 @@
         });
     };
 
-    AddPostWall.prototype.validate = function(is_advance){
-
+    SubmitPost.prototype.validate = function(){
         if(!String.prototype.trim) {
           String.prototype.trim = function () {
             return this.replace(/^\s+|\s+$/g,'');
           };
         }
 
-        if (is_advance){
-            var tempEle = $("<div></div>");
-            tempEle.append(this.$advance_content.code());
-            if (tempEle.text().trim().length === 0 ){
-                this.$advance_content.code('');
-                return false;
-            }
-        }else{
-            if (this.$content.val().trim().length === 0 ){
-                this.$content.val('').focus();
-                return false;
-            }
+        if ( this.$title.val() != undefined && this.$title.val().trim().length === 0 ){
+            return false;
         }
+
+        if ( this.$content.val() != undefined && this.$content.val().trim().length === 0 ){
+            this.$content.val('');
+            return false;
+        }
+            // var tempEle = $("<div></div>");
+            // tempEle.append(this.$advance_content.code());
+            // if (tempEle.text().trim().length === 0 ){
+            //     this.$advance_content.code('');
+            //     return false;
+            // }
         return true;
     };
 
-    AddPostWall.prototype.triggerProgress = function($el, promise){
+    SubmitPost.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var f        = function() {
             $el.removeClass('disabled');
@@ -424,45 +420,47 @@
     };
 
     $(function(){
-        $('.form-status').each(function(){
-            new AddPostWall($(this));
+        $('.js-post-form').each(function(){
+            new SubmitPost($(this));
         });     
     });
 }(jQuery, document));
 
-// Show advance edit post in wall page
+// Show advance edit post
 (function($, document, undefined) {
-    var $edit_post_form = $('#post-advance-edit-popup');
+    var $advance_post_form = $('.js-advance-post');
 
-    function ShowEditPostWallAdvance($el) {
+    function ShowEditPostAdvance($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-edit-btn');
         this.content    = $el.find('.post_text_editable').html();
         this.title      = $el.find('.post_title > a').html();
         this.$image     = $el.find('.post_image > img');
 
-        this.url        = $el.data('url-edit');
-
         this.addEvents();
     }
-    ShowEditPostWallAdvance.prototype.addEvents = function() {
+    ShowEditPostAdvance.prototype.addEvents = function() {
         var that = this;
         this.$btn.click(function(e){
             e.preventDefault();
+
+            // Update title of advance popup
+            $advance_post_form.find('.js-advance-post-title').html( sEditPost );
+
             // Content
-            $edit_post_form.find('.post-advance-content').code( that.content );
+            $advance_post_form.find('.post-advance-content').code( that.content );
 
             // Title
-            $edit_post_form.find('.post-advance-title').val( that.title );
+            $advance_post_form.find('.post-advance-title').val( that.title );
 
             // Image
-            $edit_post_form.find('.drop-zone-show').html('').append(that.$image);
+            $advance_post_form.find('.drop-zone-show').html('').append(that.$image);
 
-            // Url
-            $edit_post_form.data('url', that.url);
+            // Mention is edit form
+            $advance_post_form.data('is-add-form', 0);
 
             // Cache current post
-            $edit_post_form.data('post', that.$el);
+            $advance_post_form.data('post', that.$el);
 
             return false;
         });
@@ -470,11 +468,11 @@
 
     $(function(){
         $('.js-post-item').each(function(){
-            new ShowEditPostWallAdvance($(this));
+            new ShowEditPostAdvance($(this));
         });
 
         $(document).bind('EDIT_POST', function(e, $post_item) {
-            new ShowEditPostWallAdvance($post_item);
+            new ShowEditPostAdvance($post_item);
         });
     }); 
 }(jQuery, document));

@@ -74,7 +74,7 @@
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('routing.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
@@ -85,7 +85,10 @@
 		<!-- Defined Data for Script -->
 		<script type="text/javascript">
 			var _routing = '{{ print_routing_list() }}';
+			var _user = '{{ print_user_data() }}';
 			window.yRouting = new Routing( JSON.parse(_routing) );
+			window.yUser = new User( JSON.parse(_user) );
+			// console.log(window.yUser);
 		</script>
 		{% block datascript %}
 		{% endblock %}

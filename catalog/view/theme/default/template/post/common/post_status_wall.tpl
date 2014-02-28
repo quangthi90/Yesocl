@@ -2,10 +2,10 @@
 {% endblock %}
 
 {% block post_common_post_status_wall %}
-	<div class="form-status upload-container" data-url="{{ path('PostAdd', {post_type: post_type, user_slug: user.slug}) }}">
+	<div class="form-status upload-container js-post-form" data-post-type="{{ post_type }}" data-is-add-form="1">
 		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
-				<textarea class="post_input status-content mention" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
+				<textarea class="post_input post-content mention" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
 				<input type="hidden" name="img-url" class="img-url" value="" />
 			</div>
 			<div class="img-previewer-container">
@@ -20,12 +20,12 @@
 							<i class="icon-camera icon-2x"></i>							
 						</a>
 						<input type="file" data-no-uniform="true" class="img-upload" title="{% trans %}Choose image to upload{% endtrans %}" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
-						<a href="#" title="Advance post" data-mfp-src="#post-advance-add-popup" class="link-popup">
+						<a href="#" title="{% trans %}Advance post{% endtrans %}" data-mfp-src=".js-advance-post" class="link-popup">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
 					<div class="span4 text-right">
-						<a href="#" class="btn btn-yes btn-status">{% trans %}Submit{% endtrans %}</a>
+						<a href="#" class="btn btn-yes post-submit-btn">{% trans %}Submit{% endtrans %}</a>
 					</div>
 				</div>
  			</div>
@@ -35,10 +35,15 @@
 
 {% block post_common_post_status_wall_html_template %}
 	{{ block('common_html_block_post_advance_form') }}
-	{% set post_popup_id = 'post-advance-edit-popup' %}
-	{{ block('common_html_block_post_advance_form') }}
 	{{ block('common_html_block_upload_image_template') }}
     {{ block('common_html_block_post_item_template') }}
+{% endblock %}
+
+{% block post_common_post_status_wall_html_datascript %}
+	<script type="text/javascript">
+	var sEditPost = "{% trans %}Edit Post{% endtrans %}";
+	var sAddPost = "{% trans %}Add Post{% endtrans %}";
+	</script>
 {% endblock %}
 
 {% block post_common_post_status_wall_javascript %}

@@ -2,7 +2,7 @@
 	{% if post.type is defined %}
 		{% set post_type = post.type %}
 	{% endif %}
-	<div class="feed post post_status post-item js-post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-url-edit="{{ path('PostEdit', {post_slug: post.slug, post_type: post_type}) }}" data-url-delete="{{ path('PostDelete', {post_slug: post.slug, post_type: post_type}) }}">
+	<div class="feed post post_status post-item js-post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}"data-post-type="{{ post_type }}" data-post-slug="{{ post_slug }}">
 		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
@@ -15,7 +15,7 @@
                     {% if post.is_edit is defined and post.is_edit == true %}
                     <li class="divider"></li>
                     <li class="post-edit-btn">
-                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
+                        <a href="#" class="link-popup" data-mfp-src=".js-advance-post"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
                     </li>
                     {% endif %}
                     {% if post.is_del is defined and post.is_del == true %}

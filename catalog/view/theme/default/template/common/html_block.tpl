@@ -117,19 +117,12 @@
 
 {# -- Post -- #}
 	{% block common_html_block_post_advance_form %}
-		{% if post_popup_id is not defined %}
-			{% set post_popup_id = 'post-advance-add-popup' %}
-		{% endif %}
-		<div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="{{ post_popup_id }}">
+		<div class="mfp-hide y-dlg-container js-advance-post" data-focus-type="input[type='text']" data-is-add-form="1">
 			<div class="y-dlg">
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
 				        <i class="icon-yes"></i> 
-				        {% if post_popup_id == 'post-advance-add-popup' %}
-				        {% trans %}New post{% endtrans %}
-				        {% else %}
-				        {% trans %}Edit post{% endtrans %}
-				        {% endif %}
+				        <span class="js-advance-post-title" data-default-title="{% trans %}New post{% endtrans %}">{% trans %}New post{% endtrans %}</span>
 				    </div>
 				    <div class="dlg-content">
 				    	<div class="dlg-column upload-container fl" style="width:28%;">
