@@ -86,6 +86,37 @@ var yCurrUser = new CurrentUser();
 		});	
 	}
 
+	jQuery.fn.makePopupLink = function() {
+		$(this).magnificPopup({
+	    	type:'inline',
+	    	midClick: true,
+	    	removalDelay: 300,
+			mainClass: 'mfp-fade',
+			callbacks: {
+				open: function() {
+				    var src = $(this.content.selector);			    
+				    var focusType = src.data('focus-type');
+				    if(focusType === undefined)
+				    	return;
+				    if(focusType === 'editable'){
+				    	var editable = src.find('.note-editable').first();
+				    	setTimeout(function(){
+					    	editable.focus();
+					    }, 500);
+				    }else {
+				    	var inputs = src.find(focusType).first();
+				    	setTimeout(function(){
+					    	inputs.focus();
+					    }, 500);
+				    }				    		    
+			  	},
+			  	close: function() {
+			        $(document).trigger('POPUP_CLOSED', [{ popupId: this.content.selector }]);
+			    }
+			}
+	    });	
+	};
+
 	/*
 		Left sidebar
 	*/
@@ -225,32 +256,8 @@ var yCurrUser = new CurrentUser();
 			that.linkPopupImage.magnificPopup({type:'image'});	
 		}
 		that.linkPopupCommon.each(function(){
-			$(this).magnificPopup({
-		    	type:'inline',
-		    	midClick: true,
-		    	removalDelay: 300,
-				mainClass: 'mfp-fade',
-				callbacks: {
-					open: function() {
-					    var src = $(this.content.selector);			    
-					    var focusType = src.data('focus-type');
-					    if(focusType === undefined)
-					    	return;
-					    if(focusType === 'editable'){
-					    	var editable = src.find('.note-editable').first();
-					    	setTimeout(function(){
-						    	editable.focus();
-						    }, 500);
-					    }else {
-					    	var inputs = src.find(focusType).first();
-					    	setTimeout(function(){
-						    	inputs.focus();
-						    }, 500);
-					    }				    		    
-				  	}
-				}
-		    });		    
-		});		
+			$(this).makePopupLink();   
+		});
 
 	    //Editor:
 	    that.editor.each(function() {

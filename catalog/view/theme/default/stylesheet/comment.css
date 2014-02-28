@@ -68,6 +68,14 @@
 	bottom: 100%;
 	right: 5px;
 }
+.y-box-content .mCSB_container > div.comment-item:first-child .dropdown-menu {
+	top: auto;
+	bottom: auto;
+	right: 5px;
+}
+.y-box-content .mCSB_container.mCS_no_scrollbar #add-more-item {
+	height: 50px;
+}
 .y-box-content .comment-item .yes-dropdown{
 	display: none;
 }

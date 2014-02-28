@@ -150,12 +150,7 @@
         var commentBox = $('#comment-box');
         if(commentBox.find('.comment-item').length > 0) {
             //Popup advanced comment:
-            commentBox.find('.link-popup').magnificPopup({
-                type:'inline',
-                midClick: true,
-                removalDelay: 300,
-                mainClass: 'mfp-fade'
-            });
+            commentBox.find('.link-popup').makePopupLink();
             commentBox.find('.comment-content img').each(function(){
                 if($(this).parent('a').length == 0){
                     var imgWrapper = $("<a class='img-wrapper'></a>");
