@@ -584,7 +584,8 @@
     });
 }(jQuery, document));
 
-// Delete post(function($, document, undefined) {
+// Delete post
+(function($, document, undefined) {
     function DeletePost($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-delete-btn');
