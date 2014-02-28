@@ -426,7 +426,7 @@
     });
 }(jQuery, document));
 
-// Show delete post
+// Delete post
 (function($, document, undefined) {
     function DeletePost($el) {
         this.$el        = $el;
