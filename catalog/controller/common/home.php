@@ -9,6 +9,9 @@ class ControllerCommonHome extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		// printf(html_entity_decode('&quot;')); exit;
+		// var_dump($this->config->get('routing')); exit;
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		

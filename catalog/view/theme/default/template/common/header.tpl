@@ -88,15 +88,14 @@
                   </div>
               </li>
               {% endfor %}
-              {% if notifications|length > 0 %}
-                <li class="notification-content-item see-all-ntf">
-                  <a href="{{ path('NotificationPage') }}">{% trans %}See all notifications{% endtrans %}</a>
-                </li>
-              {% else %}
+              {% if notifications|length == 0 %}
                 <li class="notification-content-item empty-ntf">
                   {% trans %}No notifications to show{% endtrans %}
-                </li>
+                </li>                
               {% endif %}
+              <li class="notification-content-item see-all-ntf">
+                  <a href="{{ path('NotificationPage') }}">{% trans %}See all notifications{% endtrans %}</a>
+                </li>
             </ul>
           </div>
         </div>
@@ -108,12 +107,12 @@
             {% endif %}
           </a>
           <div class="notification-content-list">
-            <ul class="messages-list js-noti-mess-list">
-              <li class="notification-content-item see-all-ntf">
-                <a href="{{ path('MessagePage') }}">{% trans %}See all messages{% endtrans %}</a>
-              </li>
+            <ul class="messages-list js-noti-mess-list">              
               <li class="notification-content-item empty-ntf">
                 {% trans %}No messages to show{% endtrans %}
+              </li>
+              <li class="notification-content-item see-all-ntf">
+                <a href="{{ path('MessagePage') }}">{% trans %}See all messages{% endtrans %}</a>
               </li>
             </ul>
           </div>

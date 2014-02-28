@@ -105,9 +105,7 @@
 <script type="text/javascript" src="{{ asset_js('message.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    $(document).bind('LOAD_ROUTING_COMPLETE', function(e) {
-        $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
-    });
+    $('.js-mess-user-list').find('.js-mess-user-item:first-child > .js-mess-user-link').trigger('click');
 
     $('.btn-remove-mess-user').on('click', function(e){
         e.preventDefault();
