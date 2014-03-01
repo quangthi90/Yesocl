@@ -236,7 +236,7 @@
         this.content    = $el.find('.post_text_editable').html();
         this.title      = $el.find('.post_title > a').html();
         this.$image     = $el.find('.post_image > img');
-
+        
         this.addEvents();
     }
     ShowEditPostAdvance.prototype.addEvents = function() {
@@ -254,7 +254,10 @@
             $advance_post_form.find('.js-post-title').val( that.title );
 
             // Image
-            $advance_post_form.find('.drop-zone-show').html('').append(that.$image);
+            if ( that.$image.attr('src') != '' ){
+                $advance_post_form.find('.drop-zone-show').html('').append('<img src="' + that.$image.attr('src') + '" />');
+            }
+            
 
             // Mention is edit form
             $advance_post_form.data('is-add-form', 0);
@@ -277,6 +280,18 @@
         $(document).bind('EDIT_POST', function(e, $post_item) {
             new ShowEditPostAdvance($post_item);
         });
+
+        $(document).bind('POPUP_CLOSED', function(e) {
+            if ( $('.js-advance-post').data('is-add-form') == 1 ){
+                $('.js-post-status').parents('.js-post-form').data('form-value', {
+                    title: $('.js-advance-post').find('.js-post-title').val(),
+                    content: $('.js-advance-post').find('.js-post-content').code(),
+                    image: $('.js-advance-post').find('.img-uploaded').attr('src')
+                });
+            }
+
+            $('.js-advance-post').find('.js-post-reset-btn').trigger('click');
+        });
     }); 
 }(jQuery, document));
 
@@ -296,6 +311,7 @@
         this.$description       = $el.find('.js-post-description');
         this.$content           = $el.find('.js-post-content');
         this.$submitBtn         = $el.find('.js-post-submit-btn');
+        this.$showPopupBtn      = $el.find('.js-show-popup-btn');
         
         this.postType           = $el.data('post-type');
         
@@ -319,7 +335,7 @@
             if ( !that.$content.hasClass('js-post-status') ){
                 var content = that.$content.code();
                 var usersTagged = that.$content.getTags();
-                var thumb = that.$el.find('.img-link-popup').attr('href');
+                var thumb = that.$el.find('.img-uploaded').attr('src');
             
             }else{
                 var usersTagged = [];
@@ -328,7 +344,7 @@
                     usersTagged.push(value.id);
                 });
                 var content = that.$content.mentionsInput('getHtmlContent');
-                var thumb = that.$el.find('.img-link-popup').attr('href');
+                var thumb = that.$el.find('.img-uploaded').attr('src');
             }
 
             that.data = {
@@ -343,6 +359,26 @@
             that.submit(that.$submitBtn);
 
             return false;
+        });
+
+        this.$showPopupBtn.click(function(e){
+            e.preventDefault();
+
+            $('.js-advance-post').data('is-add-form', 1);
+
+            var form_value = that.$el.data('form-value');
+
+            $('.js-advance-post').find('.js-advance-post-title').html( sAddPost );
+
+            if ( typeof form_value != 'undefined' ){
+                $('.js-advance-post').find('.js-post-title').val(form_value.title);
+                $('.js-advance-post').find('.js-post-content').code(form_value.content);
+                if ( form_value.image != undefined ){
+                    var $post_image = $.tmpl( $('#uploaded-image-template'), {thumbnailUrl: form_value.image} );
+                    $('.js-advance-post').find('.drop-zone-show').hide();
+                    $('.js-advance-post').find('.img-previewer-container').append( $post_image );
+                }
+            }
         });
     };
 
@@ -372,57 +408,87 @@
 
         promise.then(function(data) {
             if(data.success == 'ok'){
-                var htmlOutput = $.tmpl( $('#post-item-template'), data.post ); 
-                var firstColumn = that.blockContent.find('.column:first-child');          
-                var newColumn = $('<div class="column">').append(htmlOutput);
-                newColumn.width(widthPostDefault);                
-                newColumn.css({
-                    'opacity':'0', 
-                    'min-width': widthPostDefault + 'px'
-                });
-                
-                //Adjust size of layout:
-                var post = newColumn.children('.post');
-                var postBody   = post.children('.post_body');
-                post.height(firstColumn.height() - 2*(marginPostDefault + 1));
-                postBody.height(post.height() - 65 - 10 - 22);
-                var postTitle  = postBody.children('.post_title');                
-                var postImg    = postBody.children('.post_image');
-                if(postTitle.length > 0){
-                    postImg.height(postBody.height()*0.6);
-                }else {
-                    postImg.height(postBody.height()*0.7);
-                }
-                var postTextRaw = postBody.children('.post_text_raw');                
-                var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
-                postTextRaw.height(Math.floor(maxHeightText/20)*20);
-                var imgInTextRaw = postTextRaw.find('img');
-                if(imgInTextRaw.length > 0) {
-                    imgInTextRaw.hide(10);
-                }                
-                firstColumn.hide().after(newColumn).show(200);
-                that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
-                that.rootContent.getNiceScroll().resize();
-
-                //Attach events:
-                setTimeout(function(){
-                    post.find('.post_text_raw').truncate({
-                        width: 'auto',
-                        token: '&hellip;',
-                        side: 'right',
-                        multiline: true
+                if ( that.is_add == 1 ){
+                    var htmlOutput = $.tmpl( $('#post-item-template'), data.post ); 
+                    var firstColumn = that.blockContent.find('.column:first-child');          
+                    var newColumn = $('<div class="column">').append(htmlOutput);
+                    newColumn.width(widthPostDefault);                
+                    newColumn.css({
+                        'opacity':'0', 
+                        'min-width': widthPostDefault + 'px'
                     });
+                    
+                    //Adjust size of layout:
+                    var post = newColumn.children('.post');
+                    var postBody   = post.children('.post_body');
+                    post.height(firstColumn.height() - 2*(marginPostDefault + 1));
+                    postBody.height(post.height() - 65 - 10 - 22);
+                    var postTitle  = postBody.children('.post_title');                
+                    var postImg    = postBody.children('.post_image');
+                    if(postTitle.length > 0){
+                        postImg.height(postBody.height()*0.6);
+                    }else {
+                        postImg.height(postBody.height()*0.7);
+                    }
+                    var postTextRaw = postBody.children('.post_text_raw');                
+                    var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+                    postTextRaw.height(Math.floor(maxHeightText/20)*20);
+                    var imgInTextRaw = postTextRaw.find('img');
+                    if(imgInTextRaw.length > 0) {
+                        imgInTextRaw.hide(10);
+                    }                
+                    firstColumn.hide().after(newColumn).show(200);
+                    that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
+                    that.rootContent.getNiceScroll().resize();
 
-                    $(".timeago").timeago(); 
+                    //Attach events:
+                    setTimeout(function(){
+                        post.find('.post_text_raw').truncate({
+                            width: 'auto',
+                            token: '&hellip;',
+                            side: 'right',
+                            multiline: true
+                        });
 
-                    post.find('.link-popup').magnificPopup({
-                        type:'inline',
-                        midClick: true,
-                        removalDelay: 300,
-                        mainClass: 'mfp-fade'
-                    });            
-                    newColumn.css('opacity', '1');
-                }, 500); 
+                        $(".timeago").timeago(); 
+
+                        post.find('.link-popup').magnificPopup({
+                            type:'inline',
+                            midClick: true,
+                            removalDelay: 300,
+                            mainClass: 'mfp-fade'
+                        });            
+                        newColumn.css('opacity', '1');
+                    }, 500); 
+
+                    //Rise events:
+                    $(document).trigger('POST_BUTTON');
+                    $(document).trigger('POST_SHOW_LIKED_BUTTON');
+                    $(document).trigger('HORIZONTAL_POST');
+                    $(document).trigger('DELETE_POST', [htmlOutput]);
+                    $(document).trigger('EDIT_POST', [htmlOutput]); 
+                }else{
+                    var $current_post = that.$el.data('post');
+                    var textRaw = $current_post.find('.post_text_raw');
+                    textRaw.html( data.post.content );
+                    setTimeout(function(){
+                        textRaw.truncate({
+                            width: 'auto',
+                            token: '&hellip;',
+                            side: 'right',
+                            multiline: true
+                        });
+                    }, 500); 
+                    $current_post.find('.post_text_editable').html( data.post.content );
+                    if ( data.post.title != null ){
+                        $current_post.find('.post_title').removeClass('hidden').find('a').html( data.post.title );
+                    }
+                    if ( data.post.image != null ){
+                        $current_post.find('.post_image').removeClass('hidden').html($('<image src="' + data.post.image + '" />'));
+                    }
+
+                    $(document).trigger('EDIT_POST', [$current_post]);
+                }
                 
                 //Reset:
                 if ( that.$content.hasClass('js-post-status') ){
@@ -430,19 +496,9 @@
                     that.$content.height(40);
                     that.$el.find('.img-previewer-container').html('');
                 }else{
-                    that.$content.code('');
-                    that.$title.val('');
-                    that.$el.find('.drop-zone-show').show(0);
-                    that.$el.find('.post_image_item').remove();
+                    that.$el.find('.js-post-reset-btn').trigger('click');
                     $('.mfp-ready').trigger('click');
-                }
-
-                //Rise events:
-                $(document).trigger('POST_BUTTON');
-                $(document).trigger('POST_SHOW_LIKED_BUTTON');
-                $(document).trigger('HORIZONTAL_POST');
-                $(document).trigger('DELETE_POST', [htmlOutput]);
-                $(document).trigger('EDIT_POST', [htmlOutput]);                
+                }               
             }
         });
     };
@@ -454,7 +510,7 @@
           };
         }
 
-        if ( this.$title.val() != undefined && this.$title.val().trim().length === 0 ){
+        if ( this.is_add == 1 && this.$title.val() != undefined && this.$title.val().trim().length === 0 ){
             this.$title.val('');
             return false;
         }

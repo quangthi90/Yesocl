@@ -233,6 +233,7 @@ var yCurrUser = new CurrentUser();
 		this.linkPopupCommon = el.find('.link-popup');
 		this.linkPopupImage = el.find('.img-link-popup');
 		this.editor = el.find('.y-editor');
+		this.advancedResetBtn = el.find('.js-post-reset-btn');
 
 		this.attachEvents();
 	}
@@ -405,6 +406,18 @@ var yCurrUser = new CurrentUser();
 	    		});
 	    	});
 	    }
+
+	    this.advancedResetBtn.click(function(e){
+	    	e.preventDefault();
+
+	    	var $advancedPopup = $(this).parents('.js-advance-post');
+	    	
+	    	// Remove data in popup form
+	    	$advancedPopup.find('.js-post-content').code('');
+            $advancedPopup.find('.js-post-title').val('');
+            $advancedPopup.find('.post_image_item').remove();
+            $advancedPopup.find('.drop-zone-show').html(sNoteDragImage).show();
+	    });
 	}
 
 	/*

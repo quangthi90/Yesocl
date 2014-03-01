@@ -90,10 +90,11 @@
 			window.yUser = new User( JSON.parse(_user) );
 		</script>
 		<script type="text/javascript">
-			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?';
-			var sCancel = '{% trans %}Cancel{% endtrans %}';
-			var sConfirm = '{% trans %}Confirm{% endtrans %}';
-			var sOk = '{% trans %}Ok{% endtrans %}';
+			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',
+				sCancel = '{% trans %}Cancel{% endtrans %}',
+				sConfirm = '{% trans %}Confirm{% endtrans %}',
+				sOk = '{% trans %}Ok{% endtrans %}',
+				sNoteDragImage = '{% trans %}Drag an image here{% endtrans %}';
 		</script>
 		{% block datascript %}
 		{% endblock %}

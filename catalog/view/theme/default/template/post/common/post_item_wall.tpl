@@ -85,16 +85,12 @@
 			</div>
 		</div>
 		<div class="post_body">
-			{% if post.title != null %}
-			<h4 class="post_title">
+			<h4 class="post_title{% if post.title == null %} hidden{% endif %}">
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
-			{% endif %}
-			{% if post.image != null %}
-				<div class="post_image">
-					<img src="{{ post.image }}" />
-				</div>
-			{% endif %}
+			<div class="post_image{% if post.image == null %} hidden{% endif %}">
+				<img src="{{ post.image }}" />
+			</div>
 			<div class="post_text_raw">
 				{{ post.content|raw }}
 			</div>

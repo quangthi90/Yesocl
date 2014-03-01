@@ -20,7 +20,7 @@
 							<i class="icon-camera icon-2x"></i>							
 						</a>
 						<input type="file" data-no-uniform="true" class="img-upload" title="{% trans %}Choose image to upload{% endtrans %}" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
-						<a href="#" title="{% trans %}Advance post{% endtrans %}" data-mfp-src=".js-advance-post" class="link-popup">
+						<a href="#" title="{% trans %}Advance post{% endtrans %}" data-mfp-src=".js-advance-post" class="link-popup js-show-popup-btn">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>

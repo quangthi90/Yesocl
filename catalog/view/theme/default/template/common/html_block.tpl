@@ -122,7 +122,7 @@
 				<form autocomplete="off" class="form-status full-post">
 					<div class="dlg-title">
 				        <i class="icon-yes"></i> 
-				        <span class="js-advance-post-title" data-default-title="{% trans %}New post{% endtrans %}">{% trans %}New post{% endtrans %}</span>
+				        <span class="js-advance-post-title">{% trans %}New post{% endtrans %}</span>
 				    </div>
 				    <div class="dlg-content">
 				    	<div class="dlg-column upload-container fl" style="width:28%;">
@@ -159,7 +159,7 @@
 				    <div class="dlg-footer">
 				    	<div class="controls">
 				    		<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}Submit{% endtrans %}</a>
-				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
+				    		<button type="reset" class="btn btn-yes btn-reset js-post-reset-btn">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		
 				</form>
@@ -310,17 +310,16 @@
 						</div>
 					</div>
 					<div class="post_body">
-						{{if post.title != null}}
-						<h4 class="post_title">
+						<h4 class="post_title{{if post.title == null}} hidden{{/if}}">
 							<a href="${href.post_detail}">${post.title}</a>
 						</h4>
-						{{/if}}
-						{{if post.image != null}}
-						<div class="post_image">
+						<div class="post_image{{if post.image == null}} hidden{{/if}}">
 							<img src="${post.image}" alt="${post.title}" />
 						</div>
-						{{/if}}
 						<div class="post_text_raw">
+							{{html post.content}}
+						</div>
+						<div class="post_text_editable" style="display: none;">
 							{{html post.content}}
 						</div>
 						{{if post.see_more == 1}}
@@ -336,8 +335,8 @@
 		{% raw %}
 			<div class="hidden" id="uploaded-image-template">
 				<div class="post_image_item">
-					<a href="#" class="image"><img src="${thumbnailUrl}"/></a>
-					<a href="#" class="close"><i class="icon-remove"></i></a>
+					<img class="img-uploaded" src="${thumbnailUrl}"/>
+					<span class="close"><i class="icon-remove"></i></span>
 				</div>
 			</div>
 		{% endraw %}
