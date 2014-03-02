@@ -45,6 +45,11 @@
 			  			<i class="icon-fire"></i> <span>{% trans %}My friend{% endtrans %}</span>
 		  			</a>
 			  	</li>
+			  	<li class="menu-item {% if menu == 'follow' %}active{% endif %}">
+			  		<a href="{{ path('FollowPage', {user_slug: user_slug}) }}">
+			  			<i class="icon-fire"></i> <span>{% trans %}My Following{% endtrans %}</span>
+		  			</a>
+			  	</li>
 			  	{% endblock %}
 			</ul>	
 		</div>
