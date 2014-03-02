@@ -41,8 +41,9 @@
 
 {% block post_common_post_status_wall_html_datascript %}
 	<script type="text/javascript">
-	var sEditPost = "{% trans %}Edit Post{% endtrans %}";
-	var sAddPost = "{% trans %}Add Post{% endtrans %}";
+	var sEditPost = "{% trans %}Edit Post{% endtrans %}",
+		sAddPost = "{% trans %}Add Post{% endtrans %}",
+		sNoteDragImage = '{% trans %}Drag an image here{% endtrans %}';
 	</script>
 {% endblock %}
 

@@ -109,26 +109,64 @@ class ModelBranchPost extends Model {
 
 	/**
 	 * Edit Post of Branch to Database
-	 * 2013/08/29
+	 * 2014/03/02
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- string Post ID
-	 *	- array Thumb
 	 *	- array data
 	 * 	{
-	 *		string Liker ID (User ID)
+	 *		string title
+	 *		string description
+	 *		string content
+	 *		string MongoID category ID
+	 *		array image info
 	 * 	}
 	 * @return: bool
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function editPost( $sPostSlug, $aData = array(), $thumb = array() ) {
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
-
+	public function editPost( $oPost_slug, $aData = array() ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $oPost_slug );
+		
 		if ( !$oPost ){
 			return false;
 		}
 
+		$oBranch = $oPost->getBranch();
+
+		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $oBranch->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $aData['extension'];
+			$dest = DIR_IMAGE . $path;
+			
+			$this->load->model('tool/image');
+			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
+				$oPost->setThumb( $path );
+			}
+		}
+
+		if ( !empty($aData['content']) ){
+			$oPost->setContent( $aData['content'] );
+		}
+
+		if ( !empty($aData['title']) ){
+			$oPost->setTitle( $aData['title'] );
+		}
+
+		if ( !empty($aData['description']) ){
+			$oPost->setDescription( $aData['description'] );
+		}
+
+		if ( !empty($aData['category']) ){
+			$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+
+			if ( $oCategory ){
+				$oPost->setCategory( $oCategory );
+			}
+		}
+		
 		if ( !empty($aData['likerId']) ){
 			$likerIds = $oPost->getLikerIds();
 			$key = array_search( $aData['likerId'], $likerIds );
@@ -140,28 +178,8 @@ class ModelBranchPost extends Model {
 				$oPost->setLikerIds( $likerIds );
 			}
 		}
-
-		$this->dm->flush();
-
-		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-
-		$oPosts = $this->getPosts( array(
-			'branch_id' => $branch_id,
-			'category_id' => $aData['category_id'],
-			'limit' => 6
-		));
 		
-		foreach ( $oPosts as $p ) {
-			if ( $oPost->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['branch'], 
-					$oPost->getBranch()->getId(), 
-					$oPost->getCategory()->getId(), 
-					$oPosts 
-				);
-			}
-		}
+		$this->dm->flush();
 		
 		return $oPost;
 	}

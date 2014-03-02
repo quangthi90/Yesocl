@@ -7,7 +7,7 @@
         <h3 class="branch-name">{{ branch.name }}</h3>
     </div>
     <div class="branch-tool">
-        <a href="#" class="branch-function link-popup" data-mfp-src="#post-advance-branch-add-popup">
+        <a href="#" class="branch-function link-popup js-show-popup-btn" data-mfp-src=".js-advance-post">
             <i class="icon-pencil"></i>
             <span>{% trans %}New post{% endtrans %}</span>
         </a>
@@ -32,10 +32,16 @@
 
 {% block post_common_post_status_branch_html_template %}
 	{{ block('common_html_block_post_advance_branch_form') }}
-	{% set is_add_form = false %}
-	{{ block('common_html_block_post_advance_branch_form') }}
 	{{ block('common_html_block_upload_image_template') }}
     {{ block('common_html_block_post_item_template') }}
+{% endblock %}
+
+{% block post_common_post_status_branch_html_datascript %}
+    <script type="text/javascript">
+    var sEditPost = "{% trans %}Edit Post{% endtrans %}",
+        sAddPost = "{% trans %}Add Post{% endtrans %}",
+        sNoteDragImage = '{% trans %}Drag an image here{% endtrans %}';
+    </script>
 {% endblock %}
 
 {% block post_common_post_status_branch_javascript %}

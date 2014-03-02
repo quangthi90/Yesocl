@@ -233,9 +233,12 @@
     function ShowEditPostAdvance($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-edit-btn');
+        this.$image     = $el.find('.post_image > img');
+
         this.content    = $el.find('.post_text_editable').html();
         this.title      = $el.find('.post_title > a').html();
-        this.$image     = $el.find('.post_image > img');
+        this.category   = $el.data('category-id');
+        this.description = $el.data('description');
         
         this.addEvents();
     }
@@ -253,6 +256,12 @@
             // Title
             $advance_post_form.find('.js-post-title').val( that.title );
 
+            // Description
+            $advance_post_form.find('.js-post-description').val( that.description );
+
+            // Category
+            $advance_post_form.find('.js-post-category').val( that.category );
+            
             // Image
             if ( that.$image.attr('src') != '' ){
                 $advance_post_form.find('.drop-zone-show').html('').append('<img src="' + that.$image.attr('src') + '" />');
@@ -283,9 +292,11 @@
 
         $(document).bind('POPUP_CLOSED', function(e) {
             if ( $('.js-advance-post').data('is-add-form') == 1 ){
-                $('.js-post-status').parents('.js-post-form').data('form-value', {
+                $('.js-advance-post').data('form-value', {
                     title: $('.js-advance-post').find('.js-post-title').val(),
                     content: $('.js-advance-post').find('.js-post-content').code(),
+                    description: $('.js-advance-post').find('.js-post-description').val(),
+                    category: $('.js-advance-post').find('.js-post-category').val(),
                     image: $('.js-advance-post').find('.img-uploaded').attr('src')
                 });
             }
@@ -311,7 +322,7 @@
         this.$description       = $el.find('.js-post-description');
         this.$content           = $el.find('.js-post-content');
         this.$submitBtn         = $el.find('.js-post-submit-btn');
-        this.$showPopupBtn      = $el.find('.js-show-popup-btn');
+        this.$showPopupBtn      = $('.js-show-popup-btn');
         
         this.postType           = $el.data('post-type');
         
@@ -349,6 +360,8 @@
 
             that.data = {
                 title       : that.$title.val(),
+                category    : that.$category.val(),
+                description : that.$description.val(),
                 content     : content,
                 tags        : usersTagged,
                 thumb       : thumb
@@ -366,13 +379,15 @@
 
             $('.js-advance-post').data('is-add-form', 1);
 
-            var form_value = that.$el.data('form-value');
+            var form_value = $('.js-advance-post').data('form-value');
 
             $('.js-advance-post').find('.js-advance-post-title').html( sAddPost );
 
             if ( typeof form_value != 'undefined' ){
                 $('.js-advance-post').find('.js-post-title').val(form_value.title);
                 $('.js-advance-post').find('.js-post-content').code(form_value.content);
+                $('.js-advance-post').find('.js-post-description').val(form_value.description);
+                $('.js-advance-post').find('.js-post-category').val(form_value.category);
                 if ( form_value.image != undefined ){
                     var $post_image = $.tmpl( $('#uploaded-image-template'), {thumbnailUrl: form_value.image} );
                     $('.js-advance-post').find('.drop-zone-show').hide();
@@ -646,181 +661,4 @@
             new DeletePost($post_item);
         });
     }); 
-}(jQuery, document));
-
-// Add new post in branch detail page
-(function($, document, undefined) {
-    var marginPostDefault = 15;
-    var widthPostDefault = 420;
-    var $post_add_form = $('#post-advance-branch-add-popup');
-
-    function AddPostBranch( $el ) {
-        this.rootContent        = $('#y-content');
-        this.mainContent        = $('#y-main-content');
-        this.blockContent       = this.mainContent.find('.block-content');
-        
-        this.$el                = $el;
-
-        this.$advance_title     = $post_add_form.find('.post-advance-title');
-        this.$advance_des       = $post_add_form.find('.post-advance-des');
-        this.$advance_content   = $post_add_form.find('.post-advance-content');
-        this.$advance_cat       = $post_add_form.find('.post-advance-cat');
-        this.$advance_btn       = $post_add_form.find('.btn-post-advance');
-
-        this.attachEvents();
-    }
-
-    AddPostBranch.prototype.attachEvents = function(){
-        var that = this;
-
-        this.$advance_btn.click(function(e) {
-            e.preventDefault();
-            
-            if(that.$advance_btn.hasClass('disabled')) {
-                return false;
-            }
-            if(that.validate() == false){
-                return false;
-            }
-
-            that.data = {
-                title       : that.$advance_title.val(),
-                description : that.$advance_des.val(),
-                content     : that.$advance_content.code(),
-                category    : that.$advance_cat.val(),
-                tags        : that.$advance_content.getTags(),
-                thumb       : $post_add_form.find('.img-link-popup').attr('href')
-            };
-
-            that.submit(that.$advance_btn);
-
-            return false;
-        });    
-    };
-
-    AddPostBranch.prototype.submit = function($button){
-        var that = this;
-        
-        var promise = $.ajax({
-            type: 'POST',
-            url:  yRouting.generate('PostAdd', {post_type: $post_add_form.data('post-type'), user_slug: yCurrUser.getSlug()}),
-            data: this.data,
-            dataType: 'json'
-        });
-
-        this.triggerProgress($button, promise);
-
-        promise.then(function(data) {
-            if(data.success == 'ok'){
-                var htmlOutput = $.tmpl( $('#post-item-template'), data.post ); 
-                var firstColumn = that.blockContent.find('.column:first-child');          
-                var newColumn = $('<div class="column">').append(htmlOutput);
-                newColumn.width(widthPostDefault);                
-                newColumn.css({
-                    'opacity':'0', 
-                    'min-width': widthPostDefault + 'px'
-                });
-                
-                //Adjust size of layout:
-                var post = newColumn.children('.post');
-                var postBody   = post.children('.post_body');
-                post.height(firstColumn.height() - 2*(marginPostDefault + 1));
-                postBody.height(post.height() - 65 - 10 - 22);
-                var postTitle  = postBody.children('.post_title');                
-                var postImg    = postBody.children('.post_image');
-                if(postTitle.length > 0){
-                    postImg.height(postBody.height()*0.6);
-                }else {
-                    postImg.height(postBody.height()*0.7);
-                }
-                var postTextRaw = postBody.children('.post_text_raw');                
-                var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
-                postTextRaw.height(Math.floor(maxHeightText/20)*20);
-                var imgInTextRaw = postTextRaw.find('img');
-                if(imgInTextRaw.length > 0) {
-                    imgInTextRaw.hide(10);
-                }                
-                firstColumn.after(newColumn);              
-                that.mainContent.width(that.mainContent.width() + widthPostDefault + marginPostDefault);
-                that.rootContent.getNiceScroll().resize();
-
-                //Attach events:
-                setTimeout(function(){
-                    post.find('.post_text_raw').truncate({
-                        width: 'auto',
-                        token: '&hellip;',
-                        side: 'right',
-                        multiline: true
-                    });
-
-                    $(".timeago").timeago(); 
-
-                    post.find('.link-popup').magnificPopup({
-                        type:'inline',
-                        midClick: true,
-                        removalDelay: 300,
-                        mainClass: 'mfp-fade'
-                    });            
-                    newColumn.css('opacity', '1');
-                }, 500); 
-
-                //Reset:
-                that.$advance_content.code('');
-                that.$advance_title.val('');
-                that.$advance_des.val('');
-                that.$advance_cat.val('');                
-                $post_add_form.find('.drop-zone-show').show(0);
-                $post_add_form.find('.post_image_item').remove();
-                $('.mfp-ready').trigger('click');
-
-                //Rise events:
-                $(document).trigger('POST_BUTTON');
-                $(document).trigger('POST_SHOW_LIKED_BUTTON');
-                $(document).trigger('HORIZONTAL_POST');
-                $(document).trigger('DELETE_POST', [htmlOutput]);
-                $(document).trigger('EDIT_POST', [htmlOutput]);                
-            }
-        });
-    };
-
-    AddPostBranch.prototype.validate = function(){
-
-        if(!String.prototype.trim) {
-          String.prototype.trim = function () {
-            return this.replace(/^\s+|\s+$/g,'');
-          };
-        }
-
-        var tempEle = $("<div></div>");
-        tempEle.append(this.$advance_content.code());
-        if (tempEle.text().trim().length === 0 ){
-            this.$advance_content.code('');
-            return false;
-        }
-
-        if (this.$advance_des.val().trim().length === 0){
-            this.$advance_des.val('');
-            return false;
-        }
-
-        return true;
-    };
-
-    AddPostBranch.prototype.triggerProgress = function($el, promise){
-        var $spinner = $('<i class="icon-spinner icon-spin"></i>');
-        var f        = function() {
-            $el.removeClass('disabled');
-            $spinner.remove();
-        };
-
-        $el.addClass('disabled').prepend($spinner);
-
-        promise.then(f, f);
-    };
-
-    $(function(){
-        $('.form-status').each(function(){
-            new AddPostBranch($(this));
-        });     
-    });
 }(jQuery, document));

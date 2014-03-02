@@ -47,6 +47,10 @@
     {{ block('post_common_comment_post_list_template') }}
 {% endblock %}
 
+{% block datascript %}
+    {{ block('post_common_post_status_branch_html_datascript') }}
+{% endblock %}
+
 {% block javascript %}
 <script type="text/javascript">
 $(function(){

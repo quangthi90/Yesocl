@@ -93,8 +93,7 @@
 			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',
 				sCancel = '{% trans %}Cancel{% endtrans %}',
 				sConfirm = '{% trans %}Confirm{% endtrans %}',
-				sOk = '{% trans %}Ok{% endtrans %}',
-				sNoteDragImage = '{% trans %}Drag an image here{% endtrans %}';
+				sOk = '{% trans %}Ok{% endtrans %}';
 		</script>
 		{% block datascript %}
 		{% endblock %}

@@ -40,7 +40,8 @@ Class Post extends AbstractPost {
 			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer(),
 			'category_slug'	=> $this->category->getSlug(),
-			'category_name'	=> $this->category->getName()
+			'category_name'	=> $this->category->getName(),
+			'category_id'	=> $this->category->getId()
 		);
 
 		return $post_data;

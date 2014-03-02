@@ -128,7 +128,7 @@
 				    	<div class="dlg-column upload-container fl" style="width:28%;">
 				    		<label class="control-label">{% trans %}Choose an image for new post{% endtrans %}</label>
 				    		<input type="hidden" name="img-url" class="img-url" value="" />
-				    		<div class="img-previewer-container" placeholder="Drag an photo here">
+				    		<div class="img-previewer-container" placeholder="{% trans %}Drag an image here{% endtrans %}">
 				    			<p class="drop-zone-show">{% trans %}Drag an image here{% endtrans %}</p>
 				    		</div>
 				    		<div class="y-progress">
@@ -159,7 +159,7 @@
 				    <div class="dlg-footer">
 				    	<div class="controls">
 				    		<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}Submit{% endtrans %}</a>
-				    		<button type="reset" class="btn btn-yes btn-reset js-post-reset-btn">{% trans %}Reset{% endtrans %}</button>
+				    		<button type="reset" class="btn btn-yes js-post-reset-btn">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		
 				</form>
@@ -168,25 +168,18 @@
 	{% endblock %}
 
 	{% block common_html_block_post_advance_branch_form %}
-		{% if post_popup_id is not defined %}
-			{% set post_popup_id = 'post-advance-branch-add-popup' %}
-		{% endif %}
-		<div class="mfp-hide y-dlg-container" id="{{ post_popup_id }}" data-post-type="{{ post_type }}">
+		<div class="mfp-hide y-dlg-container js-advance-post js-post-form" data-focus-type="input[type='text']" data-is-add-form="1" data-post-type="{{ post_type }}">
 			<div class="y-dlg">
 				<form autocomplete="off" class="full-post">
 					<div class="dlg-title">
 				        <i class="icon-yes"></i> 
-				        {% if post_popup_id == 'post-advance-branch-add-popup' %}
-				        {% trans %}New post{% endtrans %}
-				        {% else %}
-				        {% trans %}Edit post{% endtrans %}
-				        {% endif %}
+				        <span class="js-advance-post-title">{% trans %}New post{% endtrans %}</span>
 				    </div>
 				    <div class="dlg-content">
 				    	<div class="dlg-column upload-container fl" style="width:28%;">
 				    		<label class="control-label">{% trans %}Choose an image for new post{% endtrans %}</label>
 				    		<input type="hidden" name="img-url" class="img-url" value="" />
-				    		<div class="img-previewer-container" placeholder="Drag an photo here">
+				    		<div class="img-previewer-container" placeholder="{% trans %}Drag an image here{% endtrans %}">
 				    			<p class="drop-zone-show">{% trans %}Drag an image here{% endtrans %}</p>
 				    		</div>
 				    		<div class="y-progress">
@@ -204,20 +197,20 @@
 					    	<div class="control-group">
 					    		<label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
 					    		<div class="controls">
-					    			<input class="post-advance-title" placeholder="Your title" type="text" name="title" id="title"
+					    			<input class="js-post-title" placeholder="Your title" type="text" name="title" id="title"
 					    				style="width: 98%;" />
 					    		</div>
 				    		</div>
 				    		<div class="control-group">
 					    		<label for="description" class="control-label">{% trans %}Description{% endtrans %}</label>
 					    		<div class="controls">
-					    			<textarea class="post-advance-des" placeholder="Your description" type="text" name="description" id="description" style="width: 98%; height: 40px; resize: none;" max-length="200"></textarea>
+					    			<textarea class="js-post-description" placeholder="Your description" type="text" name="description" id="description" style="width: 98%; height: 40px; resize: none;" max-length="200"></textarea>
 					    		</div>
 				    		</div>
 				    		<div class="control-group">
 					    		<label for="category-branch" class="control-label">{% trans %}Category{% endtrans %}</label>
 					    		<div class="controls">
-					    			<select class="post-advance-cat" style="width: 99%;height: 30px;font-size: 13px;">
+					    			<select class="js-post-category" style="width: 99%;height: 30px;font-size: 13px;">
 					    				{% for category in categories %}
 					    				<option value="{{ category.id }}">{{ category.name }}</option>
 					    				{% endfor %}
@@ -226,15 +219,15 @@
 				    		</div>
 				    		<div class="control-group">
 				    			<label class="control-label">{% trans %}Content{% endtrans %}</label>
-						    	<div class="y-editor post-advance-content" id="post-adv-editor" data-height="150">
+						    	<div class="y-editor js-post-content" id="post-adv-editor" data-height="150">
 						    	</div>
 					    	</div>
 						</div>
 				    </div>
 				    <div class="dlg-footer">
 				    	<div class="controls">
-				    		<a href="#" class="btn btn-yes btn-post-advance">{% trans %}Submit{% endtrans %}</a>
-				    		<button type="reset" class="btn btn-yes btn-reset">{% trans %}Reset{% endtrans %}</button>
+				    		<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}Submit{% endtrans %}</a>
+				    		<button type="reset" class="btn btn-yes js-post-reset-btn">{% trans %}Reset{% endtrans %}</button>
 			            </div>
 				    </div>		
 				</form>
@@ -245,7 +238,7 @@
 	{% block common_html_block_post_item_template %}
 		{% raw %}
 			<div class="hidden" id="post-item-template">
-				<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-post-type="${post_type}" data-post-slug="${post.slug}">{% endraw %}
+				<div class="feed post post_status post-item js-post-item" data-url="${href.post_like}" data-is-liked="0" data-post-type="${post_type}" data-post-slug="${post.slug}" data-category-id="${post.category_id}" data-description="${post.description}">{% endraw %}
 					<div class="yes-dropdown">
 			            <div class="dropdown">
 			               <a class="dropdown-toggle" data-toggle="dropdown">

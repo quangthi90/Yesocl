@@ -201,15 +201,40 @@ class ControllerPostPost extends Controller {
                 $sImageLink = DIR_IMAGE . $this->config->get('common')['image']['upload_cache'] . $sFilename;
                 $sExtension = explode('.', $sFilename)[1];
             }
-            
-            $aDatas = array(
-                'content' => $this->request->post['content'],
-                'title' => $this->request->post['title'],
-                'image_link' => $sImageLink,
-                'extension' => $sExtension
-            );
 
-            $oPost = $this->model_user_post->editPost( $this->request->get['post_slug'],  $aDatas );
+            $sPostType = $this->request->get['post_type'];
+
+            switch ( $sPostType ) {
+                case $this->config->get('common')['type']['user']:
+                    $this->load->model('user/post');
+                    $aDatas = array(
+                        'content' => $this->request->post['content'],
+                        'title' => $this->request->post['title'],
+                        'image_link' => $sImageLink,
+                        'extension' => $sExtension
+                    );
+
+                    $oPost = $this->model_user_post->editPost( $this->request->get['post_slug'],  $aDatas );
+                    break;
+
+                case $this->config->get('common')['type']['branch']:
+                    $this->load->model('branch/post');
+                    $aDatas = array(
+                        'content'       => $this->request->post['content'],
+                        'title'         => $this->request->post['title'],
+                        'description'   => $this->request->post['description'],
+                        'category'      => $this->request->post['category'],
+                        'image_link'    => $sImageLink,
+                        'extension'     => $sExtension
+                    );
+
+                    $oPost = $this->model_branch_post->editPost( $this->request->get['post_slug'], $aDatas );
+                    break;
+                
+                default:
+                    $oPost = null;
+                    break;
+            }
 
             if ( !$oPost ){
                 return $this->response->setOutput(json_encode(array(

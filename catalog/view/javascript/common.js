@@ -415,6 +415,8 @@ var yCurrUser = new CurrentUser();
 	    	// Remove data in popup form
 	    	$advancedPopup.find('.js-post-content').code('');
             $advancedPopup.find('.js-post-title').val('');
+            $advancedPopup.find('.js-post-description').val('');
+            $advancedPopup.find('.js-post-category').val('');
             $advancedPopup.find('.post_image_item').remove();
             $advancedPopup.find('.drop-zone-show').html(sNoteDragImage).show();
 	    });
