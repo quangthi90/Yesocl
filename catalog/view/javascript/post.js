@@ -1,7 +1,7 @@
 // Like + Unlike a post
 (function($, document, undefined) {
+    'use strict';
     function LikePostBtn( $el ){
-        var that = this;
         this.$el            = $el;
         this.url            = $el.data('url');
         this.isLiked        = $el.data('is-liked');
@@ -52,7 +52,7 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				var $curr_item = that.$el.parents('.post');
+				// var $curr_item = that.$el.parents('.post');
                 that.$el.find('.post_meta .post_like d.number-counter').html( data.like_count );
                 that.$el.find('.post-liked-list d').html( data.like_count ).data('like-count', data.like_count);
 
@@ -94,7 +94,7 @@
             new LikePostBtn($(this));
         });
 
-        $(document).bind('POST_BUTTON', function(e) {
+        $(document).bind('POST_BUTTON', function() {
             $('.post-item').each(function(){
                 new LikePostBtn($(this));
             });
@@ -104,6 +104,8 @@
 
 // Show list users liked post
 (function($, document, undefined) {
+    'use strict';
+
     function UserListViewer($el) {
         this.$el        = $el;
         this.url        = $el.data('url');
@@ -125,10 +127,8 @@
 
             return false;
         });
-	}
+	};
     UserListViewer.prototype.submit = function($button) {
-        var that = this;
-
         var users = $button.data('users');
         
         if ( users === undefined ){
@@ -154,49 +154,13 @@
 
                     $button.data('users', users);
 
-                    var usersViewer = $('<div id="#user-viewer-container"></div>');
-                    for (key in users) {
-                        $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
-                    }
-                    bootbox.dialog({
-                        message: usersViewer.wrap('<div>').parent().html(),
-                        title: 'Who liked this post',
-                        onEscape: function(){
-                            bootbox.hideAll();
-                            $('.show-liked-list').removeClass('show-liked-list');
-                        }
-                    });
-                    $('.modal-backdrop').on('click', function(){
-                       bootbox.hideAll();
-                       $('.show-liked-list').removeClass('show-liked-list');
-                    });
-
-                    $(document).trigger('FRIEND_ACTION', [false]);
-
-                    // $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+                    window.userFunction.showPopupUserList( users );
                 }
             });
         }else{
             users = $button.data('users');
 
-            var usersViewer = $('<div id="#user-viewer-container"></div>');
-            for (var key in users) {
-                $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
-            }
-            bootbox.dialog({
-                message: usersViewer.wrap('<div>').parent().html(),
-                title: 'Who liked this post',
-                onEscape: function(){
-                    bootbox.hideAll();
-                }
-            });
-            $('.modal-backdrop').on('click', function(){
-               bootbox.hideAll();
-            });
-
-            $(document).trigger('FRIEND_ACTION', [false]);
-
-            // $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+            window.userFunction.showPopupUserList( users );
         }
     };
     UserListViewer.prototype.triggerProgress = function($el, promise){
@@ -218,7 +182,7 @@
             new UserListViewer($(this));
         });
 
-        $(document).bind('POST_SHOW_LIKED_BUTTON', function(e) {
+        $(document).bind('POST_SHOW_LIKED_BUTTON', function() {
             $('.post-liked-list').each(function(){
                 new UserListViewer($(this));
             });
@@ -228,6 +192,8 @@
 
 // Show advance edit post
 (function($, document, undefined) {
+    'use strict';
+
     var $advance_post_form = $('.js-advance-post');
 
     function ShowEditPostAdvance($el) {
@@ -290,7 +256,7 @@
             new ShowEditPostAdvance($post_item);
         });
 
-        $(document).bind('POPUP_CLOSED', function(e) {
+        $(document).bind('POPUP_CLOSED', function() {
             if ( $('.js-advance-post').data('is-add-form') == 1 ){
                 $('.js-advance-post').data('form-value', {
                     title: $('.js-advance-post').find('.js-post-title').val(),
@@ -308,6 +274,8 @@
 
 // Submit post to add or edit
 (function($, document, undefined) {
+    'use strict';
+
     var marginPostDefault = 15;
     var widthPostDefault = 420;
 
@@ -535,12 +503,12 @@
             this.$content.val('');
             return false;
         }
-            // var tempEle = $("<div></div>");
-            // tempEle.append(this.$advance_content.code());
-            // if (tempEle.text().trim().length === 0 ){
-            //     this.$advance_content.code('');
-            //     return false;
-            // }
+            
+        if ( this.$description.val() !== undefined && this.$description.val().trim().length === 0 ){
+            this.$description.val('');
+            return false;
+        }
+
         return true;
     };
 
@@ -565,6 +533,8 @@
 
 // Delete post
 (function($, document, undefined) {
+    'use strict';
+
     function DeletePost($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-delete-btn');
