@@ -58,9 +58,9 @@ class ModelCompanyCompany extends Model {
 		$oCompany->setCreated( new \Datetime( $aData['created'] ) );
 		$oCompany->setStatus( $aData['status'] );
 
-		if ( isset($aData['branchs']) || !empty($aData['branchs']) ){
-			$oCompany->setBranchs( array() );
-			foreach ( $aData['branchs'] as $idBranchId ) {
+		if ( isset($aData['branches']) || !empty($aData['branches']) ){
+			$oCompany->setBranches( array() );
+			foreach ( $aData['branches'] as $idBranchId ) {
 				$oBranch = $this->dm->getRepository('Document\Branch\Branch')->find( $idBranchId );
 				$oCompany->addBranch( $oBranch );
 			}
@@ -155,9 +155,9 @@ class ModelCompanyCompany extends Model {
 		$oCompany->setStatus( $aData['status'] );
 
 		
-		$oCompany->setBranchs( array() );
-		if ( isset($aData['branchs']) || !empty($aData['branchs']) ){
-			foreach ( $aData['branchs'] as $idBranchId ) {
+		$oCompany->setBranches( array() );
+		if ( isset($aData['branches']) || !empty($aData['branches']) ){
+			foreach ( $aData['branches'] as $idBranchId ) {
 				$oBranch = $this->dm->getRepository('Document\Branch\Branch')->find( $idBranchId );
 				$oCompany->addBranch( $oBranch );
 			}
@@ -357,58 +357,6 @@ class ModelCompanyCompany extends Model {
 		}
 
 		$this->dm->flush();
-	}
-
-	public function isValidLogo( $file ) {
-		$allowedExts = array("gif", "jpeg", "jpg", "png");
-		$extension = end(explode(".", $file["name"]));
-		if ((($file["type"] == "image/gif") || ($file["type"] == "image/jpeg") || ($file["type"] == "image/jpg") || ($file["type"] == "image/png")) && ($file["size"] < 300000) && in_array($extension, $allowedExts)) {
-  			if ($file["error"] > 0) {
-    			return false;
-    		}
-  			else {
-	    		return true;
-    		}
-  		}
-		else {
-  			return false;
-  		}
-	}
-
-	public function uploadLogo( $idCompanyId, $aLogo ) {
-		$ext = end(explode(".", $aLogo["name"]));
-		$path = 'data/catalog/company/' . $idCompanyId . '/logo.';
-		if (file_exists( DIR_IMAGE . $path . '.jpg')) {
-			unlink($path . '.jpg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.jpeg' ) ) {
-			unlink($path . '.jpeg');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.gif' ) ) {
-			unlink($path . '.gif');
-		}elseif ( file_exists( DIR_IMAGE . $path . '.png' ) ) {
-			unlink($path . '.png' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data' ) ) {
-			mkdir( DIR_IMAGE . 'data' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/company' ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/company' );
-		}
-
-		if ( !is_dir( DIR_IMAGE . 'data/catalog/company/' . $idCompanyId ) ) {
-			mkdir( DIR_IMAGE . 'data/catalog/company/' . $idCompanyId );
-		}
-
-		if ( move_uploaded_file( $aLogo['tmp_name'], DIR_IMAGE . $path . $ext ) ) {
-			return $path . $ext;
-		}else {
-			return false;
-		}
 	}
 
 	public function delete_directory( $dirname ) {

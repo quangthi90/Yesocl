@@ -22,7 +22,7 @@ $_['text_company']                      = 'Company';
 $_['text_company_group']              	= 'Company Group';
 
 // Branch
-$_['text_branchs']                    	= 'Branchs';
+$_['text_branches']                    	= 'Branches';
 $_['text_branch']                      	= 'Branch';
 $_['text_position']              		= 'Position';
 $_['text_category']              		= 'Category';

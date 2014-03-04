@@ -56,7 +56,7 @@ class ModelUserPost extends Model {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $post->getSlug() . '/' . $avatar_name . '.' . $data['extension'];
+			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $post->getId() . '/' . $avatar_name . '.' . $data['extension'];
 			$dest = DIR_IMAGE . $path;
 			
 			$this->load->model('tool/image');
@@ -122,7 +122,7 @@ class ModelUserPost extends Model {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $post->getUser()->getId() . '/' . $folder_name . '/' . $post->getSlug() . '/' . $avatar_name . '.' . $data['extension'];
+			$path = $folder_link . $post->getUser()->getId() . '/' . $folder_name . '/' . $post->getId() . '/' . $avatar_name . '.' . $data['extension'];
 			$dest = DIR_IMAGE . $path;
 			
 			$this->load->model('tool/image');

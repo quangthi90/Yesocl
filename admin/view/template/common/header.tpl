@@ -94,7 +94,7 @@ $(document).ready(function(){
           <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
         </ul>
       </li>
-      <li id="company"><a class="top"><?php echo $text_branchs; ?></a>
+      <li id="company"><a class="top"><?php echo $text_branches; ?></a>
         <ul>
           <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>
           <li><a href="<?php echo $branch_position; ?>"><?php echo $text_position; ?></a></li>

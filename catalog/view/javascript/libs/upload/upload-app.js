@@ -73,13 +73,8 @@
         }).on('fileuploaddone', function (e, data) {
             $.each(data.result.files, function (index, file) {
                 if (file.url) {
-                    var link = $('<a>')
-                        .prop('href', file.url)
-                        .addClass('img-link-popup')
-                        .magnificPopup({type:'image'}); 
                     var imageUploaded = $('<img>').prop('src', file.url).addClass('img-uploaded');
                     $(data.context[index]).children('canvas').replaceWith(imageUploaded);
-                    $(data.context[index]).children('.img-uploaded').wrap(link);
                     if(that.listImgUrl.length == 0){
                         that.listImgUrl = file.url;
                     }else {                    

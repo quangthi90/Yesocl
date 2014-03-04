@@ -1,8 +1,10 @@
 <?php
 
 // Branch
-$_['route']['BranchPage'] 					= 'branch/categories';
-$_['route']['CategoryPage']					= 'branch/category';
+$_['route']['BranchCategories'] 				= 'branch/categories';
+$_['route']['BranchCategory']					= 'branch/category';
+$_['route']['BranchList']						= 'branch/list';
+$_['route']['BranchDetail']						= 'branch/detail';
 
 // Post
 $_['route']['PostPage'] 					= 'post/detail';

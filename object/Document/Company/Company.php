@@ -61,7 +61,7 @@ Class Company {
 	private $groupMembers = array();
 
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch") */
-	private $branchs = array();
+	private $branches = array();
 
 	/**
 	 * Get Group of Member By ID
@@ -90,7 +90,7 @@ Class Company {
 	 * 		- null if not found
 	 */
 	public function getBranchById( $branch_id ){
-		foreach ( $this->branchs as $branch ){
+		foreach ( $this->branches as $branch ){
 			if ( $branch->getId() === $branch_id ){
 				return $branch;
 			}
@@ -234,14 +234,14 @@ Class Company {
 	}
 
 	public function addBranch( \Document\Branch\Branch $branch ){
-		$this->branchs[] = $branch;
+		$this->branches[] = $branch;
 	}
 
-	public function setBranchs( $branchs ){
-		$this->branchs = $branchs;
+	public function setBranches( $branches ){
+		$this->branches = $branches;
 	}
 
-	public function getBranchs(){
-		return $this->branchs;
+	public function getBranches(){
+		return $this->branches;
 	}
 }

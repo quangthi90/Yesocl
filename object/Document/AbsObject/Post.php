@@ -95,38 +95,6 @@ Abstract Class Post {
 		return null;
 	}
 
-	/**
-	* Format array to save to Cache
-	* 05/26/2013
-	* @author: Bommer <bommer@bommerdesign.com>
-	* @return: array Post
-	*/
-	public function formatToCache(){
-		$limit = 200;
-
-		$post_data = array(
-			'id'			=> $this->getId(),
-			'author' 		=> $this->getAuthor(),
-			'title' 		=> $this->getTitle(),
-			'description'	=> $this->getDescription(),
-			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
-			'user_id'		=> $this->getUser()->getId(),
-			'user_slug'		=> $this->getUser()->getSlug(),
-			'thumb'			=> $this->getThumb(),
-			'slug'			=> $this->getSlug(),
-			'status'		=> $this->getStatus(),
-			'email'			=> $this->getEmail(),
-			'comment_count' => $this->getComments()->count(),
-			'like_count'	=> count($this->getLikerIds()),
-			'liker_ids'		=> $this->getLikerIds(),
-			'like_count'	=> count($this->getLikerIds()),
-			'count_viewer'	=> $this->getCountViewer()
-		);
-
-		return $post_data;
-	}
-
 	public function getId(){
 		return $this->id;
 	}

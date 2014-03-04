@@ -86,6 +86,9 @@ Class User {
 	/** @MongoDB\Date */
 	private $tokenTime;
 
+	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch", mappedBy="members") */
+	private $branches = array();
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -193,6 +196,16 @@ Class User {
 				&& $notification->getObjectId() == $object_id
 				&& $notification->getAction() == $action ){
 				return $notification;
+			}
+		}
+		
+		return null;
+	}
+
+	public function getBranchBySlug( $branch_slug ){
+		foreach ( $this->branches as $branch ){
+			if ( $branch->getSlug() == $branch_slug ){
+				return $branch;
 			}
 		}
 		
@@ -417,6 +430,18 @@ Class User {
 
 	public function getTokenTime(){
 		return $this->tokenTime;
+	}
+
+	public function setBranches( $branches ){
+		$this->branches = $branches;
+	}
+
+	public function getBranches(){
+		return $this->branches;
+	}
+
+	public function addBranch( \Document\Branch\Branch $branch ){
+		return $this->branches[] = $branch;
 	}
 
 	/**

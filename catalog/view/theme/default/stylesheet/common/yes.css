@@ -60,9 +60,6 @@ div.radio.active, div.checker.active{
   width: 16px;
 }
 
-.language-box a:hover .icon-yes-flag {   
-}
-
 .language-box .icon-lang-vn {
   background: url('../../image/flags/vn.png');
 }
@@ -103,23 +100,23 @@ input[type="color"], .uneditable-input
 
 form
 {
-    margin:0px;
+  margin:0px;
 }
 
 label
 {
-    font-size: 13px;
+  font-size: 13px;
 }
 
 ul
 {
-    list-style: none;
-    margin:0px;
-    padding: 0px;
+  list-style: none;
+  margin:0px;
+  padding: 0px;
 }
 
 *, *:focus {
-  outline: none;
+  outline: none !important;
 }
 /*END OVERLOAD BOOTSTRAP*/
 /* --------------------------------- START Y-CSS ----------------------------------------------- */
@@ -156,11 +153,9 @@ ul{
 }
 a {
   text-decoration: none;
-  outline: none;
 }
 a > i,i{
   color: #0E0E0E; 
-  outline: none; 
 }
 a:hover,
 a:focus {
@@ -832,7 +827,7 @@ a.btn-notification:hover .notification-item-name > i {
   color: #009B77;
 }
 .ntf-list .ntf-item {
-  padding: 5px 30px 5px 0px;
+  padding: 5px 30px 10px 0px;
   margin-bottom: 10px;
   border-bottom: 1px dotted #f0f0f0;
   white-space: nowrap;
@@ -2366,6 +2361,7 @@ ul.user_actions li:hover i{
   width: 300px;
   box-shadow: 1px 2px 4px -1px #ccc;
   cursor: default;
+  overflow: hidden;
 }
 .friend-item .friend-img {
   display: block;
@@ -2380,6 +2376,13 @@ ul.user_actions li:hover i{
   font-size: 15px;
   font-weight: bold;  
   white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #414141;
+}
+.friend-item .friend-info .friend-name:hover {
+  color: #000;
 }
 .friend-item .friend-infolist {
   margin-top: 5px;
@@ -2414,6 +2417,154 @@ ul.user_actions li:hover i{
   font-size: 14px;
 }
 /* ------------------------------------- END FRIEND ------------------------------------------ */
+
+/* ------------------------------------- START MY_BRANCH-------------------------------------- */
+.branch-item {
+  float: left;  
+  position: relative;
+  background-color: #FFF;
+  padding: 0px;
+  margin: 0px 10px 10px 0px;
+  width: 400px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+  cursor: default;
+  overflow: hidden;
+}
+.branch-item .yes-dropdown {
+  display: none;
+}
+.branch-item .yes-dropdown a.dropdown-toggle {
+  padding: 3px;
+  background-color: #f0f0f0;
+  width: 15px;
+  display: block;
+  text-align: center;
+}
+.branch-item:hover .yes-dropdown {
+  display: block;
+}
+.branch-item .branch-img {
+  display: block;
+  height: 130px;
+  width: 130px;
+}
+.branch-item .branch-info {
+  margin-left: 15px;
+  margin-top: 15px;
+  width: 250px;
+  overflow: hidden;
+}
+.branch-item .branch-info .branch-name {
+  font-size: 16px;
+  font-weight: bold;  
+  color: #414141;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  display: block;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 5px;
+}
+.branch-item .branch-info .branch-name:hover {
+  color: #000;
+}
+.branch-item .branch-infolist {
+  margin-top: 20px;
+}
+.branch-item .branch-infolist li {
+  font-size: 13px;
+  color: #515151; 
+  white-space: nowrap;       
+  margin-bottom: 2px;
+}
+.branch-item .branch-infolist li > i {
+    font-size: 13px;
+    color: #555555;
+    margin-right: 5px;
+}
+.branch-item .branch-infolist li > span.count-number {
+  font-weight: bold;
+  font-size: 12px;
+}
+.branch-item .branch-actions {
+  position: absolute;
+  top: 30px;
+  right: 10px;
+  display: none;
+}
+.branch-item:hover .branch-actions {
+  display: block;
+}
+.branch-item .branch-actions .btn {  
+  font-size: 11px; 
+  padding: 3px 8px;
+  display: block;
+  text-align: left;
+}
+.branch-item .branch-actions .btn i {  
+  color: #FFF; 
+  float: left;
+  margin: 3px 10px 4px 0px;
+  font-size: 14px;
+}
+
+.branch-info {
+  background-color: #FFFFFF;
+  position: relative;
+}
+.branch-info .branch-overview {
+  bottom: 90px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+}
+.branch-info .branch-overview .branch-logo {
+  height: 100%;
+}
+.branch-info .branch-overview .branch-name {
+  background-color: #F0F0F0;
+  border-bottom: 1px solid #CCCCCC;
+  border-top: 1px solid #CCCCCC;
+  color: #0E0E0E;
+  font-size: 18px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.branch-info .branch-tool {
+  bottom: 5px;
+  height: 43px;
+  left: 0;
+  line-height: 43px;
+  position: absolute;
+  right: 0;
+}
+.branch-info .branch-tool .branch-function {
+  display: block;
+  float: left;
+  height: 100%;
+  overflow: hidden;
+  text-align: center;
+  width: 35%;
+}
+.branch-info .branch-tool .branch-function:hover {
+  background-color: #009B77;
+  color: #FFFFFF;
+}
+.branch-info .branch-tool .branch-function i {
+  font-size: 16px;
+  margin-right: 3px;
+}
+.branch-info .branch-tool .branch-function:hover i {
+  color: #FFFFFF;
+}
+
+/* ------------------------------------- END MY_BRANCH --------------------------------------- */
 
 /* ------------------------------------ START SEARCH RESULT ------------------------------------ */
 .tt-dropdown-menu {
