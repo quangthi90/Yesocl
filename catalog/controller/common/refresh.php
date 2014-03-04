@@ -20,11 +20,11 @@ class ControllerCommonRefresh extends Controller {
 		$this->load->model( 'tool/image' );
 		$this->load->model( 'user/user' );
 
-		$aBranchs = $this->model_branch_branch->getAllBranchs()->toArray();
+		$aBranches = $this->model_branch_branch->getAllBranches()->toArray();
 
 		$this->data['all_posts'] = array();
 
-		$aBranchIds = array_keys($aBranchs);
+		$aBranchIds = array_keys($aBranches);
 
 		$aUserIds = array();
 

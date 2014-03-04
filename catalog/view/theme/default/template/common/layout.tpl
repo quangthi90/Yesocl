@@ -72,9 +72,9 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.cookie.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.truncate.min.js') }}"></script>
 		<!-- Common Script -->
+		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('routing.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
@@ -84,8 +84,16 @@
 		{% endblock %}
 		<!-- Defined Data for Script -->
 		<script type="text/javascript">
-			var _routing = '{{ print_routing_list() }}';
+			var _routing = '{{ get_routing_list()|raw }}';
+			var _user = '{{ get_user_data()|raw }}';
 			window.yRouting = new Routing( JSON.parse(_routing) );
+			window.yUser = new User( JSON.parse(_user) );
+		</script>
+		<script type="text/javascript">
+			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',
+				sCancel = '{% trans %}Cancel{% endtrans %}',
+				sConfirm = '{% trans %}Confirm{% endtrans %}',
+				sOk = '{% trans %}Ok{% endtrans %}';
 		</script>
 		{% block datascript %}
 		{% endblock %}

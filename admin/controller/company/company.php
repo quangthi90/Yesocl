@@ -509,7 +509,7 @@ class ControllerCompanyCompany extends Controller {
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_group_member' ),
-					'href' => $this->url->link( 'company/group_member', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'company/member_group', 'company_id=' . $company->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-list',
 				);
 
@@ -752,15 +752,15 @@ class ControllerCompanyCompany extends Controller {
 
 		// branch
 		$this->load->model('branch/branch');
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$branches = $this->model_branch_branch->getAllBranches();
 
-		$this->data['branchs'] = array();
-		foreach ( $branchs as $branch ) {
+		$this->data['branches'] = array();
+		foreach ( $branches as $branch ) {
 			$checked = false;
 			if ( isset($company) && $company->getBranchById($branch->getId()) ){
 				$checked = true;
 			}
-			$this->data['branchs'][] = array(
+			$this->data['branches'][] = array(
 				'id' => $branch->getId(),
 				'name' => $branch->getName(),
 				'checked' => $checked
@@ -796,7 +796,8 @@ class ControllerCompanyCompany extends Controller {
 		}*/
 		
 		if ( isset( $this->request->files['logo'] ) && !empty( $this->request->files['logo'] ) && $this->request->files['logo']['size'] > 0 ) {
-			if ( !$this->model_company_company->isValidLogo( $this->request->files['logo'] ) ) {
+			$this->load->model('tool/image');
+			if ( !$this->model_tool_image->isValidImage( $this->request->files['logo'] ) ) {
 				$this->error['error_logo'] = $this->language->get( 'error_logo');
 			}
 		}

@@ -288,11 +288,11 @@ class ControllerBranchCategory extends Controller {
 		}
 
 		$this->load->model('branch/branch');
-		$branchs = $this->model_branch_branch->getAllBranchs();
+		$branches = $this->model_branch_branch->getAllBranches();
 
-		$this->data['branchs'] = array();
-		foreach ( $branchs as $branch ) {
-			$this->data['branchs'][] = array(
+		$this->data['branches'] = array();
+		foreach ( $branches as $branch ) {
+			$this->data['branches'][] = array(
 				'id' => $branch->getId(),
 				'name' => $branch->getName()
 			);
@@ -319,8 +319,8 @@ class ControllerBranchCategory extends Controller {
 		$this->data['parents'] = array();
 		if ( $this->data['branch_id'] != 0 ){
 			$branch_id = $this->data['branch_id'];
-		}elseif ( count($this->data['branchs']) > 0 ){
-			$branch_id = $this->data['branchs'][0]['id'];
+		}elseif ( count($this->data['branches']) > 0 ){
+			$branch_id = $this->data['branches'][0]['id'];
 		}else{
 			$branch_id = 0;
 		}

@@ -18,7 +18,7 @@ Class Branch {
 	 */
 	private $slug; 
 
-	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branchs") */
+	/** @MongoDB\ReferenceMany(targetDocument="Position", mappedBy="branches") */
 	private $positions = array();
 	
 	/** @MongoDB\Boolean */
@@ -30,11 +30,11 @@ Class Branch {
 	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="branch") */
 	private $categories = array();
 
-	/** @MongoDB\ReferenceOne(targetDocument="\Document\Company\Company") */
-	private $company;
-
 	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="branch") */
 	private $posts = array();
+
+	/** @MongoDB\ReferenceMany(targetDocument="Document\User\User", inversedBy="branches") */
+	private $members = array();	
 
 	/** @MongoDB\Int */
 	private $order;
@@ -43,6 +43,11 @@ Class Branch {
 	 * @SOLR\Field(type="text")
 	 */
 	private $type;
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $logo;
 
 	/**
 	 * Get Post By ID
@@ -81,6 +86,24 @@ Class Branch {
 	}
 
 	/**
+	 * Get Member By ID
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: string Member ID
+	 * @return:
+	 * 		- Object Member
+	 * 		- null if not found
+	 */
+	public function getMemberById( $member_id ){
+		foreach ( $this->members as $member ){
+			if ( $member->getId() == $member_id ){
+				return  $member;
+			}
+		}
+		
+		return null;
+	}
+
+	/**
 	* Format array to save to Cache
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
@@ -89,10 +112,12 @@ Class Branch {
     public function formatToCache(){
 		$data = array(
 			'id'		=> $this->getId(),
-			'company' 	=> $this->getCompany()->getId(),
 			'name' 		=> $this->getName(),
 			'slug'		=> $this->getSlug(),
-			'status'	=> $this->getStatus()
+			'status'	=> $this->getStatus(),
+			'logo'		=> $this->getLogo(),
+			'member_count' => $this->getMembers()->count(),
+			'post_count' => $this->getPosts()->count()
 		);
 
 		return $data;
@@ -114,6 +139,16 @@ Class Branch {
 		}
 		
 		return posts;
+	}
+
+	public function getCategoryById( $category_id ){
+		foreach ( $this->categories as $category ) {
+			if ( $category_id == $category->getId() ){
+				return $category;
+			}
+		}
+
+		return null;
 	}
 
 	public function getId(){
@@ -180,14 +215,6 @@ Class Branch {
 		return $this->categories;
 	}
 
-	public function setCompany( $company ){
-		$this->company = $company;
-	}
-
-	public function getCompany(){
-		return $this->company;
-	}
-
 	public function setPosts( $posts ){
 		$this->posts = $posts;
 	}
@@ -210,5 +237,25 @@ Class Branch {
 
 	public function getType(){
 		return $this->type;
+	}
+
+	public function setMembers( $members ){
+		$this->members = $members;
+	}
+
+	public function getMembers(){
+		return $this->members;
+	}
+
+	public function addMember( \Document\User\User $member ){
+		return $this->members[] = $member;
+	}
+
+	public function setLogo( $logo ){
+		$this->logo = $logo;
+	}
+
+	public function getLogo(){
+		return $this->logo;
 	}
 }

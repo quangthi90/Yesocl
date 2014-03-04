@@ -11,7 +11,6 @@ class ModelBranchBranch extends Model {
 	*	- array data
 	* 	{
 	*		string Name 		-- required
-	*		string Company ID 	-- required
 	*		bool Status
 	*		int Order
 	* 	}
@@ -19,21 +18,11 @@ class ModelBranchBranch extends Model {
 	*	- true: success
 	*	- false: not success
 	*/
-	public function addBranch( $data = array() ) {
+	public function addBranch( $data = array(), $aLogo = array() ) {
 		// name is required & isn't exist
 		if ( isset($data['name']) && !empty($data['name']) ) {
 			$this->data['name'] = strtolower( trim($data['name']) );
 		}else {
-			return false;
-		}
-		
-		// Company
-		if ( isset($data['company_id']) ){
-			$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
-			if ( !$company ){
-				return false;
-			}
-		}else{
 			return false;
 		}
 
@@ -53,10 +42,21 @@ class ModelBranchBranch extends Model {
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
 		$branch->setOrder( $data['order'] );
-		$branch->setCompany( $company );
 		$branch->setSlug( $slug );
 		
 		$this->dm->persist( $branch );
+		$this->dm->flush();
+
+		$this->load->model('tool/image');
+		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
+			$path = $folder_link . $branch->getId();
+			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
+				$branch->setLogo( $aData['logo'] );
+			}
+		}
+
 		$this->dm->flush();
 
 		return true;
@@ -71,7 +71,6 @@ class ModelBranchBranch extends Model {
 	*	- array data
 	* 	{
 	*		string Name 		-- required
-	*		string Company ID 	-- required
 	*		bool Status
 	*		int Order
 	* 	}
@@ -79,7 +78,7 @@ class ModelBranchBranch extends Model {
 	*	- true: success
 	*	- false: not success
 	*/
-	public function editBranch( $branch_id, $data = array() ) {
+	public function editBranch( $branch_id, $data = array(), $aLogo = array() ) {
 		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
 		if ( empty( $branch ) ) {
 			return false;
@@ -102,24 +101,9 @@ class ModelBranchBranch extends Model {
 			$data['order'] = 0;
 		}
 
-		// Company
-		if ( isset($data['company_id']) ){
-			if ( !$branch->getCompany() || $data['company_id'] != $branch->getCompany()->getId() ){
-				$company = $this->dm->getRepository('Document\Company\Company')->find( $data['company_id'] );
-				if ( !$company ){
-					return false;
-				}
-			}else{
-				$company = $branch->getCompany();
-			}
-		}else{
-			return false;
-		}
-
 		$branch->setName( $data['name'] );
 		$branch->setStatus( $data['status'] );
 		$branch->setOrder( $data['order'] );
-		$branch->setCompany( $company );
 
 		if ( $data['name'] != $branch->getName() ){
 			$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
@@ -129,21 +113,33 @@ class ModelBranchBranch extends Model {
 		
 		$this->dm->flush();
 
+		$this->load->model('tool/image');
+		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
+			$path = $folder_link . $branch->getId();
+			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
+				$branch->setLogo( $aData['logo'] );
+			}
+		}
+		
+		$this->dm->flush();
+
 		return true;
 	}
 
 	/**
-	* Delete Branchs by ID
+	* Delete Branches by ID
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @param: array string ID
 	*/
-	public function deleteBranchs( $data ) {
+	public function deleteBranches( $data ) {
 		if ( isset( $data['id'] ) ) {
 			foreach ($data['id'] as $id) {
 				$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
 				if ( !empty( $branch ) ) {
-					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branchs.id' )->equals( $branch->getId() )->getQuery()->execute();
+					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branches.id' )->equals( $branch->getId() )->getQuery()->execute();
 					
 					$this->dm->remove( $branch );
 				}
@@ -165,7 +161,7 @@ class ModelBranchBranch extends Model {
 	}
 
 	/**
-	* Get Branchs
+	* Get Branches
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @param: 
@@ -176,7 +172,7 @@ class ModelBranchBranch extends Model {
 	*	}
 	* @return: list Object Branch Sort by Order
 	*/
-	public function getBranchs( $data = array() ) {
+	public function getBranches( $data = array() ) {
 		if ( isset( $data['start'] ) && $data['start'] >= 0 ) {
 			$data['start'] = (int)$data['start'];
 		}else {
@@ -197,12 +193,12 @@ class ModelBranchBranch extends Model {
 	}
 
 	/**
-	* Get All Branchs
+	* Get All Branches
 	* 2013/07/24
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @return: list Object Branch Sort by Order
 	*/
-	public function getAllBranchs(){
+	public function getAllBranches(){
 		$query = $this->dm->getRepository('Document\Branch\Branch')->findAll()
 			->sort( array('order' => 1) );
 

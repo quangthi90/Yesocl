@@ -757,47 +757,17 @@
 
                     comment.users = users;
 
-                    var usersViewer = $('<div id="#user-viewer-container"></div>');
-                    for (key in users) {
-                        $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
-                    }
-                    bootbox.dialog({
-                        message: usersViewer.wrap('<div>').parent().html(),
-                        title: "Who liked this comment",
-                        onEscape: function(){
-                            bootbox.hideAll();
-                        }
-                    });
-                    $('.modal-backdrop').on('click', function(){
-                       bootbox.hideAll();
-                    });
-
-                    $(document).trigger('FRIEND_ACTION', [false]);
-
                     $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+
+                    window.userFunction.showPopupUserList( users );
                 }
             });
         }else{
             users = comment.users;
 
-            var usersViewer = $('<div id="#user-viewer-container"></div>');
-            for (key in users) {
-                $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
-            }
-            bootbox.dialog({
-                message: usersViewer.wrap('<div>').parent().html(),
-                title: "Who liked this comment",
-                onEscape: function(){
-                    bootbox.hideAll();
-                }
-            });
-            $('.modal-backdrop').on('click', function(){
-               bootbox.hideAll();
-            });
-
-            $(document).trigger('FRIEND_ACTION', [false]);
-
             $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+
+            window.userFunction.showPopupUserList( users );
         }
     };
     ShowCommentUsersLiked.prototype.triggerProgress = function($el, promise){

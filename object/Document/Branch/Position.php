@@ -13,7 +13,7 @@ Class Position {
 	private $name; 
 
 	/** @MongoDB\ReferenceMany(targetDocument="Branch", inversedBy="positions") */
-	private $branchs = array();
+	private $branches = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -31,15 +31,15 @@ Class Position {
 	}
 
 	public function addBranch( $branch ){
-		$this->branchs[] = $branch;
+		$this->branches[] = $branch;
 	}
 
-	public function setBranchs( $branchs ){
-		$this->branchs = $branchs;
+	public function setBranches( $branches ){
+		$this->branches = $branches;
 	}
 
-	public function getBranchs(){
-		return $this->branchs;
+	public function getBranches(){
+		return $this->branches;
 	}
 
 	public function setStatus( $status ){

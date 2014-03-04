@@ -95,7 +95,6 @@ Class Post {
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'title' 		=> $this->getTitle(),
-			'description'	=> $this->getDescription(),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),

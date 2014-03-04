@@ -2,7 +2,7 @@
 	{% if post.type is defined %}
 		{% set post_type = post.type %}
 	{% endif %}
-	<div class="feed post post_status post-item js-post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-url-edit="{{ path('PostEdit', {post_slug: post.slug, post_type: post_type}) }}" data-url-delete="{{ path('PostDelete', {post_slug: post.slug, post_type: post_type}) }}">
+	<div class="feed post post_status post-item js-post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}" data-post-type="{{ post_type }}" data-post-slug="{{ post.slug }}" data-category-id="{{ post.category_id }}" data-description="{{ post.description }}">
 		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
@@ -15,7 +15,7 @@
                     {% if post.is_edit is defined and post.is_edit == true %}
                     <li class="divider"></li>
                     <li class="post-edit-btn">
-                        <a href="#" class="link-popup" data-mfp-src="#post-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
+                        <a href="#" class="link-popup" data-mfp-src=".js-advance-post"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
                     </li>
                     {% endif %}
                     {% if post.is_del is defined and post.is_del == true %}
@@ -39,6 +39,10 @@
 					{% if post.owner_id is defined and post.owner_id != null and post.owner_id != user.id %}
 					<span><i class="icon-caret-right"></i></span>
 					<a href="{{ path('WallPage', {user_slug: users[post.owner_id].slug}) }}">{{ users[post.owner_id].username }}</a>
+					{% endif %}
+					{% if post.category_slug is defined %}
+					<span><i class="icon-caret-right"></i></span>
+					<a href="{{ path('BranchCategory', {category_slug: post.category_slug}) }}">{{ post.category_name }}</a>
 					{% endif %}
 				</div>
 				<div class="post_meta">
@@ -81,16 +85,12 @@
 			</div>
 		</div>
 		<div class="post_body">
-			{% if post.title != null %}
-			<h4 class="post_title">
+			<h4 class="post_title{% if post.title == null %} hidden{% endif %}">
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
-			{% endif %}
-			{% if post.image != null %}
-				<div class="post_image">
-					<img src="{{ post.image }}" />
-				</div>
-			{% endif %}
+			<div class="post_image{% if post.image == null %} hidden{% endif %}">
+				<img src="{{ post.image }}" />
+			</div>
 			<div class="post_text_raw">
 				{{ post.content|raw }}
 			</div>

@@ -1,8 +1,192 @@
 <?php
+use Document\Branch\Post;
+
 class ModelBranchPost extends Model {
 	/**
-	 * Edit Post of Branch to Database
+	 * Add Post of Branch to Database
 	 * 2013/08/29
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- array data
+	 * 	{
+	 *		string user slug (author)
+	 *		string title
+	 *		string description
+	 *		string content
+	 *		string MongoID category
+	 *		string image link
+	 *		string extension
+	 * 	}
+	 * @return:
+	 *	- object post: success
+	 * 	- false: not success
+	 */
+	public function addPost( $aData = array() ) {
+		// Check user author
+		if ( empty($aData['user_slug']) ){
+			return false;
+		}
+		$oUserAuthor = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+		if ( !$oUserAuthor ){
+			return false;
+		}
+
+		// Check category
+		if ( empty($aData['category']) ){
+			return false;
+		}
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+		if ( !$oCategory ){
+			return false;
+		}
+		$oBranch = $oCategory->getBranch();
+		if ( !$oBranch ){
+			return false;
+		}
+
+		// Check authentication
+		$oTempBranch = $oUserAuthor->getBranchBySlug( $oBranch->getSlug() );
+		if ( !$oTempBranch ){
+			return false;
+		}
+
+		// Check title
+		if ( empty($aData['title']) ){
+			return false;
+		}
+
+		// Check description
+		if ( empty($aData['description']) ){
+			return false;
+		}
+
+		// Check content
+		if ( empty($aData['content']) ){
+			return false;
+		}
+
+		$slug = $this->url->create_slug( $aData['title'] ) . new MongoId();
+		
+		$oPost = new Post();
+		$oPost->setTitle( $aData['title'] );
+		$oPost->setDescription( $aData['description'] );
+		$oPost->setContent( $aData['content'] );
+		$oPost->setCategory( $oCategory );
+		$oPost->setBranch( $oBranch );
+		$oPost->setUser( $oUserAuthor );
+		$oPost->setStatus( true );
+		$oPost->setSlug( $slug );
+
+		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $oBranch->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $aData['extension'];
+			$dest = DIR_IMAGE . $path;
+			
+			$this->load->model('tool/image');
+			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
+				$oPost->setThumb( $path );
+			}
+		}
+
+		$this->dm->persist( $oPost );
+		
+		$this->dm->flush();
+
+		$this->load->model('cache/post');
+		$aData = array(
+			'post_id' => $oPost->getId(),
+			'type' => $this->config->get('post')['cache']['branch'],
+			'type_id' => $oBranch->getId(),
+			'view' => 0,
+			'created' => $oPost->getCreated()
+		);
+		$this->model_cache_post->addPost( $aData );
+		
+		return $oPost;
+	}
+
+	/**
+	 * Edit Post of Branch to Database
+	 * 2014/03/02
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: 
+	 *	- string Post ID
+	 *	- array data
+	 * 	{
+	 *		string title
+	 *		string description
+	 *		string content
+	 *		string MongoID category ID
+	 *		array image info
+	 * 	}
+	 * @return: bool
+	 *	- object post: success
+	 * 	- false: not success
+	 */
+	public function editPost( $oPost_slug, $aData = array() ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $oPost_slug );
+		
+		if ( !$oPost ){
+			return false;
+		}
+
+		$oBranch = $oPost->getBranch();
+
+		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+			$folder_link = $this->config->get('branch')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$avatar_name = $this->config->get('post')['default']['avatar_name'];
+			$path = $folder_link . $oBranch->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $aData['extension'];
+			$dest = DIR_IMAGE . $path;
+			
+			$this->load->model('tool/image');
+			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
+				$oPost->setThumb( $path );
+			}
+		}
+
+		if ( !empty($aData['content']) ){
+			$oPost->setContent( $aData['content'] );
+		}
+
+		if ( !empty($aData['title']) ){
+			$oPost->setTitle( $aData['title'] );
+		}
+
+		if ( !empty($aData['description']) ){
+			$oPost->setDescription( $aData['description'] );
+		}
+
+		if ( !empty($aData['category']) ){
+			$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+
+			if ( $oCategory ){
+				$oPost->setCategory( $oCategory );
+			}
+		}
+		
+		if ( !empty($aData['likerId']) ){
+			$likerIds = $oPost->getLikerIds();
+			$key = array_search( $aData['likerId'], $likerIds );
+			
+			if ( !$likerIds || $key === false ){
+				$oPost->addLikerId( $aData['likerId'] );
+			}else{
+				unset($likerIds[$key]);
+				$oPost->setLikerIds( $likerIds );
+			}
+		}
+		
+		$this->dm->flush();
+		
+		return $oPost;
+	}
+
+	/**
+	 * Delete post
+	 * 2014/02/27
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	- string Post ID
@@ -15,98 +199,84 @@ class ModelBranchPost extends Model {
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function editPost( $post_slug, $data = array(), $thumb = array() ) {
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $post_slug );
+	public function deletePost( $sPostSlug ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
-		if ( !$post ){
-			return false;
+		if ( !$oPost ){
+			return true;
 		}
 
-		if ( !empty($data['likerId']) ){
-			$likerIds = $post->getLikerIds();
-			$key = array_search( $data['likerId'], $likerIds );
-			
-			if ( !$likerIds || $key === false ){
-				$post->addLikerId( $data['likerId'] );
-			}else{
-				unset($likerIds[$key]);
-				$post->setLikerIds( $likerIds );
-			}
-		}
+		$this->dm->remove( $oPost );
 
 		$this->dm->flush();
 
 		//-- Update 6 last posts
 		$this->load->model('tool/cache');
 
-		$posts = $this->getPosts( array(
+		$oPosts = $this->getPosts( array(
 			'branch_id' => $branch_id,
-			'category_id' => $data['category_id'],
+			'category_id' => $aData['category_id'],
 			'limit' => 6
 		));
-		
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['branch'], 
-					$post->getBranch()->getId(), 
-					$post->getCategory()->getId(), 
-					$posts 
-				);
-			}
-		}
-		
-		return $post;
+
+		$this->model_tool_cache->updateLastCategoryPosts( 
+			$this->config->get('post')['type']['branch'], 
+			$oPost->getBranch()->getId(), 
+			$oPost->getCategory()->getId(), 
+			$oPosts 
+		);
+
+		return true;
 	}
 
-	public function getPosts( $data = array() ){
-		if (  empty($data['start']) ){
-			$data['start'] = 0;
+	public function getPosts( $aData = array() ){
+		if (  empty($aData['start']) ){
+			$aData['start'] = 0;
 		}
-		if ( empty($data['limit']) ){
-			$data['limit'] = 20;
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 20;
 		}
 
 		$query = array('deleted' => false);
 
-		if ( !empty($data['branch_id']) ){
-			$query['branch.id'] = $data['branch_id'];
+		if ( !empty($aData['branch_id']) ){
+			$query['branch.id'] = $aData['branch_id'];
 		}
 
-		if ( !empty($data['category_id']) ){
-			$query['category.id'] = $data['category_id'];
+		if ( !empty($aData['category_id']) ){
+			$query['category.id'] = $aData['category_id'];
 		}
 
-		if ( !empty($data['post_ids']) ){
-			$query['id'] = array('$in' => $data['post_ids']);
-		}elseif (isset($data['post_ids']) ){
+		if ( !empty($aData['post_ids']) ){
+			$query['id'] = array('$in' => $aData['post_ids']);
+		}elseif (isset($aData['post_ids']) ){
 			return null;
 		}
 
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
-			->skip($data['start'])
-			->limit($data['limit'])
+			->skip($aData['start'])
+			->limit($aData['limit'])
 			->sort(array('created' => -1));
 
 		return $results;
 	}
 
-	public function getPost( $data = array(), $increase_viewer = false ){
-		$post = null;
+	public function getPost( $aData = array(), $increase_viewer = false ){
+		$oPost = null;
 
-		if ( !empty($data['post_id']) ){
-			$post = $this->dm->getRepository('Document\Branch\Post')->find( $data['post_id'] );
-		}elseif ( !empty($data['post_slug']) ){
-			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		if ( !empty($aData['post_id']) ){
+			$oPost = $this->dm->getRepository('Document\Branch\Post')->find( $aData['post_id'] );
+		}elseif ( !empty($aData['post_slug']) ){
+			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $aData['post_slug'] );
 		}
 
-		if ( $post != null && $increase_viewer == true ){
-			$post->setCountViewer( $post->getCountViewer() + 1 );
+		if ( $oPost != null && $increase_viewer == true ){
+			$oPost->setCountViewer( $oPost->getCountViewer() + 1 );
 			$this->dm->flush();
 		}
 
-		return $post;
+		return $oPost;
 	}
 
 	public function getLastPostByCategory( $branch_id, $category_id ){
@@ -120,7 +290,7 @@ class ModelBranchPost extends Model {
 		
 		if ( count($results) == 0 ){
 			$this->load->model('branch/post');
-			$posts = $this->getPosts(array(
+			$oPosts = $this->getPosts(array(
 				'branch_id' => $branch_id,
 				'category_id' => $category_id,
 				'limit' => $this->config->get('common')['block']['limit']
@@ -129,17 +299,17 @@ class ModelBranchPost extends Model {
 				$this->config->get('post')['type']['branch'],
 				$branch_id,
 				$category_id,
-				$posts
+				$oPosts
 			);
 		}
 		
 		return $results;
 	}
 
-	public function getPostBySlug( $post_slug ) {
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $post_slug );
+	public function getPostBySlug( $sPostSlug ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
-		return $post;
+		return $oPost;
 	}
 }
 ?>
