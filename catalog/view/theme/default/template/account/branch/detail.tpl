@@ -49,13 +49,18 @@
 
 {% block datascript %}
     {{ block('post_common_post_status_branch_html_datascript') }}
+    <script type="text/javascript">
+        var _members = '{{ members|json_encode()|raw }}';
+        window.members = JSON.parse(_members);
+    </script>
 {% endblock %}
 
 {% block javascript %}
 <script type="text/javascript">
-$(function(){
-    $(document).trigger('FRIEND_ACTION', [false]);    
-});
+    $('.js-branch-member').on('click', function(){
+        window.userFunction.showPopupUserList( window.members );
+        return false;
+    });
 </script>
 {{ block('post_common_comment_post_list_javascript') }}
 {{ block('post_common_post_status_branch_javascript') }}

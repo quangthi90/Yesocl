@@ -11,7 +11,7 @@
             <i class="icon-pencil"></i>
             <span>{% trans %}New post{% endtrans %}</span>
         </a>
-        <a href="#" style="width: 30%;" class="branch-function">
+        <a href="#" style="width: 30%;" class="branch-function js-branch-member">
             <i class="icon-group"></i>
             <span>{% trans %}Members{% endtrans %} ({{ branch.member_count }})</span>
         </a>

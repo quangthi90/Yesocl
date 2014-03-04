@@ -27,6 +27,7 @@ class ControllerBranchDetail extends Controller {
     	$oLoggedUser = $this->customer->getUser();
 
     	$this->load->model('branch/post');
+    	$this->load->model('friend/friend');
     	$this->load->model('tool/image');
 
     	$lPosts = $this->model_branch_post->getPosts( array('branch_id' => $oBranch->getId()) );
@@ -84,6 +85,20 @@ class ControllerBranchDetail extends Controller {
 			$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 360, 360 );
 		}
 		$this->data['branch'] = $aBranch;
+
+		// Member of Branch
+		$lUserMembers = $oBranch->getMembers();
+		$aUserMembers = array();
+		foreach ( $lUserMembers as $oUserMember ) {
+			$aUserMember = $oUserMember->formatToCache();
+			$afrStatus = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oUserMember->getId() );
+            $aUserMember['fr_status'] = $afrStatus['status'];
+            $aUserMember['fr_href'] = $afrStatus['href'];
+			$aUserMember['avatar'] = $this->model_tool_image->getAvatarUser( $aUserMember['avatar'], $aUserMember['email'] );
+
+			$aUserMembers[] = $aUserMember;
+		}
+		$this->data['members'] = $aUserMembers;
 
 		// Categories
 		$lCategories = $oBranch->getCategories();
