@@ -51,11 +51,11 @@
 			  			</a>
 				  	</li>
 				  	{% if show_branch_menu == true %}
-				  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
-				  		<a href="{{ path('BranchList') }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}My branch{% endtrans %}</span>
-			  			</a>
-				  	</li>
+					  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
+					  		<a href="{{ path('BranchList') }}">
+					  			<i class="icon-fire"></i> <span>{% trans %}My branch{% endtrans %}</span>
+				  			</a>
+					  	</li>
 				  	{% endif %}
 			  	{% endblock %}
 			</ul>	
