@@ -66,7 +66,7 @@ class ControllerPostPost extends Controller {
             // thumb
             $aThumb = $oPost->getThumb();
             if ( !empty($aThumb) ){
-                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250, true );
+                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250 );
             }else{
                 $sImage = null;
             }
@@ -247,7 +247,7 @@ class ControllerPostPost extends Controller {
             $aThumb = $oPost->getThumb();
             
             if ( !empty($aThumb) ){
-                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250, true );
+                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250 );
             }else{
                 $sImage = null;
             }
