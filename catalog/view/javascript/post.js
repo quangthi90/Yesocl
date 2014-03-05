@@ -131,7 +131,7 @@
     UserListViewer.prototype.submit = function($button) {
         var users = $button.data('users');
         
-        if ( users === undefined ){
+        if ( users === undefined || users === null ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,

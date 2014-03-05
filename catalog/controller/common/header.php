@@ -83,7 +83,15 @@ class ControllerCommonHeader extends Controller {
 
 					if ( $oNotification->getObjectId() != $oPost->getId() ){
 						$oComment = $oPost->getCommentById( $oNotification->getObjectId() );
-						$sTitle = html_entity_decode($oComment->getContent());
+						if ( $oComment ){
+							$sTitle = html_entity_decode($oComment->getContent());
+						}else{
+							if ( $oPost->getTitle() == null ){
+								$sTitle = html_entity_decode($oPost->getContent());
+							}else{
+								$sTitle = $oPost->getTitle();
+							}
+						}
 					}else{
 						if ( $oPost->getTitle() == null ){
 							$sTitle = html_entity_decode($oPost->getContent());
