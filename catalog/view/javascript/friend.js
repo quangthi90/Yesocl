@@ -1,14 +1,15 @@
 // Friend action button
 (function($, document, undefined) {
+	'use strict';
+
 	function FriendAction( $el, removeUnFriend ){
-		var that = this;
 		this.$el			= $el;
 		this.$friend_btn	= $el.find('.btn-friend');
 		this.$unfriend_btn	= $el.find('.btn-unfriend');
 		this.friend_url		= this.$friend_btn.data('url');
 		this.unfriend_url	= this.$unfriend_btn.data('url');
 		
-		this.is_cancel		= this.$friend_btn.data('cancel')
+		this.is_cancel		= this.$friend_btn.data('cancel');
 		this.is_remove_friend = removeUnFriend;
 
 		this.attachEvents();
@@ -53,17 +54,17 @@
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { 
+		promise.then(function(data) {
 			if(data.success == 'ok'){
 				var $htmlOutput = '';
 
-				if ( that.is_cancel == 0 ){
+				if ( that.is_cancel == '0' ){
 					$htmlOutput = $.tmpl( $('#cancel-request'), {
 						href: that.friend_url,
 						id: that.$friend_btn.data('id')
 					});
 					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						3, 
+						3,
 						that.$friend_btn.data('id')
 					]);
 				}else{
@@ -72,7 +73,7 @@
 						id: that.$friend_btn.data('id')
 					});
 					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						4, 
+						4,
 						that.$friend_btn.data('id')
 					]);
 				}
@@ -99,10 +100,10 @@
 
 		this.triggerProgress($button, promise);
 
-		promise.then(function(data) { 
+		promise.then(function(data) {
 			if(data.success == 'ok'){
 				// Remove friend
-				if ( that.is_remove_friend == true ){
+				if ( that.is_remove_friend === true ){
 					that.$el.parent().remove();
 
 				// Change status to not relationship
@@ -117,7 +118,7 @@
 					new FriendAction( that.$el );
 					
 					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						4, 
+						4,
 						that.$unfriend_btn.data('id')
 					]);
 				}
@@ -150,16 +151,17 @@
 
 // Filter friend
 (function($, document, undefined) {
+	'use strict';
 	function FriendFilter( $el ){
-		this.$el 				= $el;
-		this.$rootContent 		= $('#y-content');
-		this.$mainContent 		= $('#y-main-content');
+		this.$el = $el;
+		this.$rootContent = $('#y-content');
+		this.$mainContent = $('#y-main-content');
 		
 		this.$friendConditions	= $el.find('.friend-condition');
 		this.$inputFilter		= $el.find('#filter-input');
-		this.$userContainer 	= this.$mainContent.find('.user-container');
+		this.$userContainer = this.$mainContent.find('.user-container');
 		this.$friendList		= this.$userContainer.find('.friend-item');
-		this.$isDone 			= true;
+		this.$isDone = true;
 		this.attachEvents();
 	}
 
@@ -174,32 +176,32 @@
 
 		that.$inputFilter.keyup(function(){
 			if(that.$friendList.length === 0 || that.$isDone === false )
-				return;			
+				return;
 			var userId = '', userName='', userEmail='';
 			var query = $(this).val().toString().trim().toLowerCase();
-			if(query.length == 0) {
+			if(query.length === 0) {
 				that.showResult(that.$friendList);
 				return;
 			}
 			that.$isDone = false;
-			var resultFilter = that.$friendList.filter(function(index) {
+			var resultFilter = that.$friendList.filter(function() {
 				if($(this).data('user-id')) {
 					userId = $(this).data('user-id');
 				}else {
-					userId = "*";
+					userId = '*';
 				}
 				if($(this).data('user-name')) {
 					userName = $(this).data('user-name');
 				}else {
-					userName = "*";
+					userName = '*';
 				}
 				if($(this).data('user-email')) {
 					userEmail = $(this).data('user-email');
 				}else {
-					userEmail = "*";
+					userEmail = '*';
 				}
-				return (userId.toLowerCase().indexOf(query) > -1 || 
-						userName.toLowerCase().indexOf(query) > -1 || 
+				return (userId.toLowerCase().indexOf(query) > -1 ||
+						userName.toLowerCase().indexOf(query) > -1 ||
 						userEmail.toLowerCase().indexOf(query) > -1);
 			});
 			that.showResult(resultFilter);
@@ -207,7 +209,7 @@
 
 		this.$friendConditions.each( function () {
 			$(this).click(function(e){
-				e.preventDefault();				
+				e.preventDefault();
 				if ( $(this).hasClass('active') ){
 					return false;
 				}
@@ -216,20 +218,20 @@
 				});
 				$(this).addClass('active');
 				var typeFilter = $(this).data('friend');
-				var resultFriend = that.$friendList.filter(function(index) {
+				var resultFriend = that.$friendList.filter(function() {
 					return $(this).hasClass(typeFilter);
 				});
 				that.showResult(resultFriend);
 				return true;
 			});
 		});
-	}
+	};
 	FriendFilter.prototype.showResult = function (result) {
 		var that = this;
 		
 		that.$friendList.fadeOut(10);
 		//Empty result
-		if(typeof result == "undefined"){
+		if(typeof result == 'undefined'){
 			that.$mainContent.width(that.$rootContent.width() - 10);
 		}else {
 			var numberRow = Math.floor(that.$mainContent.find('.feed-block').height()/(85 + 10));
@@ -237,17 +239,17 @@
 			var freeBlock = that.$mainContent.find('.free-block');
 			var blockContent = that.$mainContent.find('.feed-block');
 			if(freeBlock.length === 0){
-				that.$mainContent.width(numberCol*(320 + 15));	
+				that.$mainContent.width(numberCol*(320 + 15));
 			}else{
-				blockContent.width(numberCol*(320 + 15));	
+				blockContent.width(numberCol*(320 + 15));
 				that.$mainContent.width(freeBlock.width() + 60 + numberCol*(320 + 15));
 			}
-			result.stop(true,true).fadeIn(300);						
+			result.stop(true,true).fadeIn(300);
 		}
 		that.$rootContent.getNiceScroll().resize();
 		that.$rootContent.animate({scrollLeft : '0px'}, 200);
 		that.$isDone = true;
-	}
+	};
 
 	$(function(){
 		$('#friend-filter').each(function(){
