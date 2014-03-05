@@ -60,7 +60,11 @@ $('#add-member').on('click', function(){
     dataType: 'json',
     type: 'post',
     data: {user_id: $('#member-id').val()},
-    success: function(json) {   
+    success: function(json) {
+      if ( json.error != null ){
+        alert(json.error);
+        return false;
+      }
       var trHtml = '<tr>';
       trHtml += '<td>' + json.username + '</td>';
       trHtml += '<td>' + json.fullname + '</td>';

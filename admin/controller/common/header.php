@@ -45,7 +45,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_company_group'] = $this->language->get('text_company_group');
 
 		// Branch
-		$this->data['text_branchs'] = $this->language->get('text_branchs');
+		$this->data['text_branches'] = $this->language->get('text_branches');
 		$this->data['text_branch'] = $this->language->get('text_branch');
 		$this->data['text_position'] = $this->language->get('text_position');
 		$this->data['text_category'] = $this->language->get('text_category');

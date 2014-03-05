@@ -46,7 +46,7 @@ class ModelBranchComment extends Model {
 			return false;
 		}
 		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
-		if ( empty( $user ) ) {
+		if ( empty($user) ) {
 			return false;
 		}
 
@@ -60,7 +60,7 @@ class ModelBranchComment extends Model {
 		}
 
 		// Content is required
-		if ( !isset( $data['content'] ) || empty( $data['content'] ) ) {
+		if ( empty($data['content']) ) {
 			return false;
 		}
 
@@ -69,7 +69,7 @@ class ModelBranchComment extends Model {
 
 		$comment = new Comment();
 		$comment->setUser( $user );
-		$comment->setContent( $data['content'] );
+		$comment->setContent( htmlentities($data['content']) );
 		$comment->setStatus( $data['status'] );
 
 		$post->addComment( $comment );
@@ -119,7 +119,7 @@ class ModelBranchComment extends Model {
 		}
 
 		if ( !empty($data['content']) ){
-			$comment->setContent($data['content']);
+			$comment->setContent( htmlentities($data['content']) );
 		}
 
 		$this->dm->flush();

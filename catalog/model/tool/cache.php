@@ -49,6 +49,7 @@ class ModelToolCache extends Model {
 		
 		$path = $fd_ob_link . $object_id . '/' . $fd_category_name . '/' . $category_id . '/';
 		
+		// Delete old cache
 		if ( is_dir(DIR_CACHE . $path) ){
 			$this->load->model('tool/image');
 			$this->model_tool_image->deleteDirectoryImage(DIR_CACHE . $path);

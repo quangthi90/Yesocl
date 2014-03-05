@@ -313,18 +313,18 @@ class ControllerBranchPosition extends Controller {
 		}
 
 		// branch
-		if ( isset( $this->request->post['branchs'] ) ) {
-			$this->data['branchs'] = $this->request->post['branchs'];
+		if ( isset( $this->request->post['branches'] ) ) {
+			$this->data['branches'] = $this->request->post['branches'];
 		}elseif ( isset( $position ) ) {
-			$this->data['branchs'] = array();
-			foreach ($position->getBranchs() as $branch) {
-				$this->data['branchs'][] = array(
+			$this->data['branches'] = array();
+			foreach ($position->getBranches() as $branch) {
+				$this->data['branches'][] = array(
 					'id' => $branch->getId(),
 					'name' => $branch->getName(),
 					);
 			}
 		}else {
-			$this->data['branchs'] = array();
+			$this->data['branches'] = array();
 		}
 
 		// status

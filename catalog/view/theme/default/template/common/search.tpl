@@ -74,5 +74,5 @@
 {% endblock %}
 
 {% block javascript %}
-    
+    {{ block('friend_common_friend_list_javascript') }}
 {% endblock %}
