@@ -39,6 +39,10 @@ class ModelUserPost extends Model {
 			return false;
 		}
 
+		// Encode html
+		$data['content'] = htmlentities( $data['content'] );
+		$data['title'] = htmlentities( $data['title'] );
+
 		$slug = (!empty($data['title']) ? $this->url->create_slug( $data['title'] ) . '-' : '') . new MongoId();
 		
 		$post = new Post();
@@ -132,11 +136,11 @@ class ModelUserPost extends Model {
 		}
 
 		if ( !empty($data['content']) ){
-			$post->setContent( $data['content'] );
+			$post->setContent( htmlentities($data['content']) );
 		}
 
 		if ( !empty($data['title']) ){
-			$post->setTitle( $data['title'] );
+			$post->setTitle( htmlentities($data['title']) );
 		}
 		
 		if ( !empty($data['likerId']) ){

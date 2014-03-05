@@ -65,6 +65,11 @@ class ModelBranchPost extends Model {
 			return false;
 		}
 
+		// Encode html
+		$data['content'] = htmlentities( $data['content'] );
+		$data['title'] = htmlentities( $data['title'] );
+		$data['description'] = htmlentities( $data['description'] );
+
 		$slug = $this->url->create_slug( $aData['title'] ) . new MongoId();
 		
 		$oPost = new Post();
@@ -148,15 +153,15 @@ class ModelBranchPost extends Model {
 		}
 
 		if ( !empty($aData['content']) ){
-			$oPost->setContent( $aData['content'] );
+			$oPost->setContent( htmlentities($aData['content']) );
 		}
 
 		if ( !empty($aData['title']) ){
-			$oPost->setTitle( $aData['title'] );
+			$oPost->setTitle( htmlentities($aData['title']) );
 		}
 
 		if ( !empty($aData['description']) ){
-			$oPost->setDescription( $aData['description'] );
+			$oPost->setDescription( htmlentities($aData['description']) );
 		}
 
 		if ( !empty($aData['category']) ){
