@@ -1,13 +1,14 @@
 {% block friend_common_friend_button %}
 <div class="friend-actions">
+    <!-- friend button -->
     {% if fr_status == 4 %}
-    <a data-url="{{ path('MakeFriend', {user_slug: fr_slug}) }}" class="btn btn-yes btn-friend friend-group" data-cancel="0"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
+    <a class="btn btn-yes btn-friend js-makefriend-btn friend-group"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
     {% elseif fr_status == 2 %}
     <div class="dropdown friend-group">
         <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Friend{% endtrans %}</a>
         <ul class="dropdown-menu" role="menu">
             <li>
-                <a class="btn-unfriend" data-url="{{ path('UnFriend', {user_slug: fr_slug}) }}">{% trans %}Unfriend{% endtrans %}</a>
+                <a class="js-unfriend-btn">{% trans %}Unfriend{% endtrans %}</a>
             </li>
         </ul>
     </div>
@@ -16,32 +17,36 @@
         <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
         <ul class="dropdown-menu" role="menu">
             <li>
-                <a class="btn-friend" href="#" data-url="{{ path('MakeFriend', {user_slug: fr_slug}) }}" data-cancel="1">{% trans %}Cancel Request{% endtrans %}</a>
+                <a class="js-cancel-request-friend-btn" href="#">{% trans %}Cancel Request{% endtrans %}</a>
             </li>
         </ul>
     </div>
     {% endif %}
-    <!--div class="dropdown">
-        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> Following</a>
+    <!-- follow button -->
+    {% if fl_status == 2 %}
+    <div class="dropdown">
+        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown" data-url="{{ fl_href }}"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
         <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Unfollow</a></li>
+            <li><a href="#" class="js-unfollow-btn">{% trans %}Unfollow{% endtrans %}</a></li>
         </ul>
-    </div-->
-    <!--a href="#" class="btn btn-yes btn-follow"><i class="icon-rss"></i> Follow</a-->
+    </div>
+    {% elseif fl_status == 3 %}
+    <a href="#" class="btn btn-yes btn-follow js-makefollow-btn" data-url="{{ fl_href }}"><i class="icon-rss"></i> {% trans %}Follow{% endtrans %}</a>
+    {% endif %}
 </div>
 {% endblock %}
 
 {% block friend_common_friend_button_template %}
 <div class="hidden">
     <div id="send-request">
-        <a data-cancel="0" data-url="${href}" class="btn btn-yes btn-friend friend-group"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
+        <a class="btn btn-yes btn-friend friend-group js-makefriend-btn"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
     </div>
     <div id="cancel-request">
         <div class="dropdown friend-group">
             <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
             <ul class="dropdown-menu" role="menu">
                 <li>
-                    <a data-cancel="1" class="btn-friend" href="#" data-url="${href}">{% trans %}Cancel Request{% endtrans %}</a>
+                    <a class="btn-friend js-cancel-request-friend-btn" href="#">{% trans %}Cancel Request{% endtrans %}</a>
                 </li>
             </ul>
         </div>

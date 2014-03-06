@@ -67,6 +67,8 @@ $_['route']['SearchFriend']					= 'friend/friend/search/';
 
 // Follow
 $_['route']['FollowPage']					= 'follow/list';
+$_['route']['AddFollower']					= 'friend/request/addFollower/';
+$_['route']['RemoveFollower']				= 'friend/request/removeFollower/';
 
 // Upload
 $_['route']['UploadFile'] 					= 'file/upload';

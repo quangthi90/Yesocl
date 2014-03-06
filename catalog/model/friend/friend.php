@@ -24,32 +24,24 @@ class ModelFriendFriend extends Model {
 	 * @param: 
 	 * 	MongoId User A
 	 * 	MongoId User B
-	 * @return: array
-	 *	- int status
-	 *		1: me
-	 *		2: friend
-	 *		3: sent request make friend
-	 *		4: not relationship
-	 *		-1: not found User B
-	 *	- string href to get action: send request, cancel request, unfriend
+	 * @return: int
+	 *	1: me
+	 *	2: friend
+	 *	3: sent request make friend
+	 *	4: not relationship
+	 *	-1: not found User B
 	 */
-	public function checkFriendStatus( $idUserA, $idUserB ){
+	public function checkStatus( $idUserA, $idUserB ){
 		// me
 		if ( $idUserA == $idUserB ){
-            return array(
-            	'status' => 1,
-            	'href' => null
-            );
+            return 1;
         
         }
 
         $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
 
         if ( !$oUserB ){
-        	return array(
-            	'status' => -1,
-            	'href' => null
-            );
+        	return -1;
         }
 
         $oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
@@ -57,40 +49,20 @@ class ModelFriendFriend extends Model {
 		));
 
 		if ( !$oFriendAs ){
-			return array(
-				'status' => 4,
-        		'href' => $this->extension->path('MakeFriend', array(
-                	'user_slug' => $oUserB->getSlug()
-                ))
-            );
+			return 4;
 		}
 
         if ( $oFriendAs->getFriendByUserId($idUserB) ){
-            return array(
-            	'status' => 2,
-            	'href' => $this->extension->path('UnFriend', array(
-	                'user_slug' => $oUserB->getSlug()
-	            ))
-           	); 
+            return 2; 
         
         }
 
         if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ){
-            return array(
-            	'status' => 3,
-            	'href' => $this->extension->path('MakeFriend', array(
-                	'user_slug' => $oUserB->getSlug()
-                ))
-            );
+            return 3;
         
         }
 
-    	return array(
-        	'status' => 4,
-        	'href' => $this->extension->path('MakeFriend', array(
-                'user_slug' => $oUserB->getSlug()
-            ))
-        );
+    	return 4;
 	}
 
 	public function unFriend( $idUserA, $idUserB ){

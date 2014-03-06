@@ -9,16 +9,15 @@
                 </a>
                 <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_name"><i class="icon-{% if user.gender == 1 %}male{% else %}female{% endif %}"></i> {{ user.username }}</a>
                 <div class="user_relationship">
-                    {% set fr_status = user.fr_status.status %}
-                    {% set fr_slug = user.slug %}
+                    {% set fr_status = user.fr_status %}
                     {{ block('friend_common_friend_button') }}
                     {{ block('friend_common_friend_button_template') }}
                     <a href="#" class="btn btn-yes">
                         <i class="icon-random"></i> {% trans %}Follow{% endtrans %}
                     </a>
-                    <a href="#" class="btn btn-yes">
+                    {#<a href="#" class="btn btn-yes">
                         <i class="icon-share-alt"></i> {% trans %}Message{% endtrans %}
-                    </a>
+                    </a>#}
                 </div>                    
             </div>
             <ul class="user_actions">
@@ -28,7 +27,7 @@
                 <li>
                     <i class="icon-fire"></i><a href="{{ path('FriendPage', {user_slug: user.slug}) }}">{% trans %}Friends{% endtrans %}</a>
                 </li>
-                <li>
+                {#<li>
                     <i class="icon-file-alt"></i><a href="#">{% trans %}Posts{% endtrans %}</a>
                 </li>
                 <li>
@@ -36,7 +35,7 @@
                 </li>
                 <li>
                     <i class="icon-tasks"></i><a href="#">{% trans %}Activities{% endtrans %}</a>
-                </li> 
+                </li>#}
             </ul>
         </div>
     </div>

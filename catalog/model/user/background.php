@@ -38,11 +38,11 @@ class ModelUserBackground extends Model {
 		$education = new Education();
 		$education->setStarted( (string) $data['started'] );
 		$education->setEnded( (string) $data['ended'] );
-		$education->setDegree( $data['degree'] );
+		$education->setDegree( htmlentities($data['degree']) );
 		$education->setDegreeId( $data['degree_id'] );
-		$education->setSchool( $data['school'] );
+		$education->setSchool( htmlentities($data['school']) );
 		$education->setSchoolId( $data['school_id'] );
-		$education->setFieldOfStudy( $data['fieldofstudy'] );
+		$education->setFieldOfStudy( htmlentities($data['fieldofstudy']) );
 		$education->setFieldOfStudyId( $data['fieldofstudy_id'] );
 
 		$this->dm->persist( $education );
@@ -55,12 +55,9 @@ class ModelUserBackground extends Model {
 			$oBackground->addEducation( $education );
 		}
 
+		$user->getMeta()->setCurrentInfo();
+		
 		$this->dm->flush();
-
-		if ( $user->getMeta()->getCurrent() == '' ){
-			$user->getMeta()->setCurrentInfo();
-			$this->dm->flush();
-		}
 
 		return $education->getId();
 	}
@@ -115,21 +112,19 @@ class ModelUserBackground extends Model {
 		}
 
 		$education = $user->getMeta()->getBackground()->getEducationById( $id );
-
+		
 		$education->setStarted( (string) $data['started'] );
 		$education->setEnded( (string) $data['ended'] );
-		$education->setDegree( $data['degree'] );
+		$education->setDegree( htmlentities($data['degree']) );
 		$education->setDegreeId( $data['degree_id'] );
-		$education->setSchool( $data['school'] );
+		$education->setSchool( htmlentities($data['school']) );
 		$education->setSchoolId( $data['school_id'] );
-		$education->setFieldOfStudy( $data['fieldofstudy'] );
+		$education->setFieldOfStudy( htmlentities($data['fieldofstudy']) );
 		$education->setFieldOfStudyId( $data['fieldofstudy_id'] );
 
 		// Set current job for user
 		// Studient - Employee - Job Seeker
-		if ( $user->getMeta()->getCurrent() == '' ){
-			$user->getMeta()->setCurrentInfo();
-		}
+		$user->getMeta()->setCurrentInfo();
 
 		$this->dm->flush();
 
