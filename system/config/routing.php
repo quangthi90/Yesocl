@@ -64,6 +64,9 @@ $_['routing']['ConfirmFriend']					= 'friend/confirm/{user_slug}/';
 $_['routing']['UnFriend']						= 'friend/remove/{user_slug}/';
 $_['routing']['IgnoreFriend']					= 'friend/ignore/{user_slug}/';
 
+// Follow
+$_['routing']['FollowPage']						= 'follow/page/';
+
 //Upload
 $_['routing']['UploadFile'] 					= 'upload/';
 

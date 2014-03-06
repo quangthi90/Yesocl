@@ -65,6 +65,9 @@ $_['route']['UnFriend']						= 'friend/request/unFriend';
 $_['route']['IgnoreFriend']					= 'friend/request/ignore';
 $_['route']['SearchFriend']					= 'friend/friend/search/';
 
+// Follow
+$_['route']['FollowPage']					= 'follow/list';
+
 // Upload
 $_['route']['UploadFile'] 					= 'file/upload';
 
