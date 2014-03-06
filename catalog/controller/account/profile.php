@@ -80,11 +80,11 @@ class ControllerAccountProfile extends Controller {
 		foreach ( $oBackground->getEducations() as $oEducation ) {
 			$aEducations[] = array(
 				'id' => $oEducation->getId(),
-				'school' => $oEducation->getSchool(),
+				'school' => html_entity_decode($oEducation->getSchool()),
 				'school_id' => $oEducation->getSchoolId(),
-				'degree' => $oEducation->getDegree(),
+				'degree' => html_entity_decode($oEducation->getDegree()),
 				'degree_id' => $oEducation->getDegreeId(),
-				'fieldofstudy' => $oEducation->getFieldOfStudy(),
+				'fieldofstudy' => html_entity_decode($oEducation->getFieldOfStudy()),
 				'fieldofstudy_id' => $oEducation->getFieldOfStudyId(),
 				'started' => $oEducation->getStarted(),
 				'ended' => $oEducation->getEnded()
@@ -100,9 +100,9 @@ class ControllerAccountProfile extends Controller {
 			
 			$aExperiences[] = array(
 				'id' => $oExperience->getId(),
-				'title' => $oExperience->getTitle(),
-				'company' => $oExperience->getCompany(),
-				'location' => $oExperLocation->getLocation(),
+				'title' => html_entity_decode($oExperience->getTitle()),
+				'company' => html_entity_decode($oExperience->getCompany()),
+				'location' => html_entity_decode($oExperLocation->getLocation()),
 				'city_id' => $oExperLocation->getId(),
 				'started' => $oExperience->getStarted(),
 				'ended' => $oExperience->getEnded()

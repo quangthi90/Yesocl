@@ -14,7 +14,7 @@
 					<div class="user-item-overview fl">
 						<a href="${href_user}" class="user-item-name">${username}</a>
 						<!--<span><strong>${multi_number}</strong> {% endraw %}{% trans %}friend{% endtrans %}{% raw %}(s)</span>-->
-						<span>${current}</span>
+						<span class="js-current-status" title="${current}">${current}</span>
 					</div>
 				</div>
 				<div class="user-actions fr friend-actions">

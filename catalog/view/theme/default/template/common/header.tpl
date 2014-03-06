@@ -52,7 +52,7 @@
 				</div>
 				<div class="fr user-info">
 					<a class="user-name" href="{{ path('WallPage', {user_slug: currUser.slug}) }}">{{ currUser.username }}</a>
-			    <span class="user-more-info">
+			    <span class="user-more-info js-current-status" title="{{ currUser.current }}">
             {{ currUser.current }}
           </span>
 				</div>
