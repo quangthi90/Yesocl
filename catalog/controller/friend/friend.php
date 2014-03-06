@@ -50,7 +50,7 @@ class ControllerFriendFriend extends Controller {
 
 			$aUser = $oUser->formatToCache();
 
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 65, 65 );
 			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser->getId(), $oUser->getId() );
 			$aUser['added'] = $oFriend->getCreated();
 
