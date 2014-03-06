@@ -33,7 +33,7 @@ class ModelFriendFriend extends Model {
 	 *		-1: not found User B
 	 *	- string href to get action: send request, cancel request, unfriend
 	 */
-	public function checkFriendStatus( $idUserA, $idUserB ){
+	public function checkStatus( $idUserA, $idUserB ){
 		// me
 		if ( $idUserA == $idUserB ){
             return array(

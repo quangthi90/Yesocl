@@ -450,7 +450,7 @@ class ControllerPostComment extends Controller {
 
             if ( $lQueryUsers ){
                 foreach ( $lQueryUsers as $oUser ) {
-                    $aFrStatus = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oUser->getId() );
+                    $aFrStatus = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
 
                     $aUser = $oUser->formatToCache();
 

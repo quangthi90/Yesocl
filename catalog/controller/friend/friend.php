@@ -12,6 +12,7 @@ class ControllerFriendFriend extends Controller {
 		$this->load->model('tool/image');
 		$this->load->model('user/user');
 		$this->load->model('friend/friend');
+		$this->load->model('friend/follower');
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
@@ -31,7 +32,8 @@ class ControllerFriendFriend extends Controller {
 		$aCurrUser = $oCurrUser->formatToCache();
 
 		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 180, 180 );
-		$aCurrUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser->getId(), $oCurrUser->getId() );
+		$aCurrUser['fr_status'] = $this->model_friend_friend->checkStatus( $oLoggedUser->getId(), $oCurrUser->getId() );
+		$aCurrUser['fl_status'] = $this->model_friend_follower->checkStatus( $oLoggedUser->getId(), $oCurrUser->getId() );
 		$this->data['users'] = array($aCurrUser['id'] => $aCurrUser);
 
 		$this->data['current_user_id'] = $oCurrUser->getId();
@@ -51,13 +53,12 @@ class ControllerFriendFriend extends Controller {
 			$aUser = $oUser->formatToCache();
 
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oLoggedUser->getId(), $oUser->getId() );
+			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oLoggedUser->getId(), $oUser->getId() );
+			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oLoggedUser->getId(), $oUser->getId() );
 			$aUser['added'] = $oFriend->getCreated();
-
 			$this->data['users'][$aUser['id']] = $aUser;
 			$this->data['friend_ids'][$oUser->getId()] = $oUser->getId();
 		}
-
 		$this->data['groups'] = array();
 
 		if ( $oFriends ){
