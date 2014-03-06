@@ -2221,8 +2221,8 @@ ul.user_actions li:hover i{
   color: #009B77;
 }
 /* -------------------------------------- END DROPDOWN ---------------------------------------- */
-/* ------------------------------------- START FRIEND ------------------------------------------ */
-#friend-filter {
+/* ------------------------------------- START FRIEND & FOLLOW ------------------------------------------ */
+.user-box-filter {
   position: fixed;
   right: 0px;
   width: 170px;
@@ -2235,88 +2235,88 @@ ul.user_actions li:hover i{
   padding: 15px;
   cursor: default;
 }
-#friend-filter .friend-search {
+.user-box-filter .user-search {
   position: relative;
   margin-bottom: 20px;
   height: 30px;
 }
-#friend-filter .friend-search input{
+.user-box-filter .user-search input{
   width: 138px;
   padding-right: 25px;
   border: 1px solid #ddd;
   display: block;
   height: 20px;
 }
-#friend-filter .friend-search span {
+.user-box-filter .user-search span {
   position: absolute;
   top: 5px;
   right: 8px;
 }
-#friend-filter .friend-search span i {
+.user-box-filter .user-search span i {
   color: #b4b4b4;
 }
-#friend-filter .friend-search .dropdown-menu > li > a {
+.user-box-filter .user-search .dropdown-menu > li > a {
   padding: 0px;
   background-color: #FFF;
   margin-bottom: 1px;
   overflow: hidden;
   clear: both;
 }
-#friend-filter .friend-search .dropdown-menu > li:hover > a,
-#friend-filter .friend-search .dropdown-menu > li.active > a {
+.user-box-filter .user-search .dropdown-menu > li:hover > a,
+.user-box-filter .user-search .dropdown-menu > li.active > a {
   background: #009B77;
 }
-#friend-filter .friend-search .dropdown-menu > li:hover > a span,
-#friend-filter .friend-search .dropdown-menu > li.active > a span{
+.user-box-filter .user-search .dropdown-menu > li:hover > a span,
+.user-box-filter .user-search .dropdown-menu > li.active > a span{
   color: #FFF;
 }
-#friend-filter .friend-search .dropdown-menu > li:last-child > a {
+.user-box-filter .user-search .dropdown-menu > li:last-child > a {
   margin-bottom: 0px;
 }
-#friend-filter .friend-dropdown-info {  
+.user-box-filter .friend-dropdown-info {  
   width: 178px;
   overflow: hidden;
   float: left;
 }
-#friend-filter .friend-dropdown-info img {
+.user-box-filter .friend-dropdown-info img {
   width: 40px;
   height: 40px;
   float: left;
 }
-#friend-filter .friend-dropdown-info .friend-meta-info {
+.user-box-filter .friend-dropdown-info .friend-meta-info {
   margin-left: 45px;
 }
-#friend-filter .friend-dropdown-info .friend-meta-info span {
+.user-box-filter .friend-dropdown-info .friend-meta-info span {
   display: block;
   white-space: nowrap;
 }
-#friend-filter .friend-dropdown-info .friend-name {
+.user-box-filter .friend-dropdown-info .friend-name {
   color: #000;
   font-size: 12px;
 }
-#friend-filter .friend-dropdown-info .num-friend {
+.user-box-filter .friend-dropdown-info .num-friend {
   font-size: 11px;
   color: #0E0E0E;
 }
-#friend-filter .friend-conditions {
+.user-box-filter .user-conditions {
   margin-bottom: 15px;
 }
-#friend-filter .friend-conditions.mutual-friend-block {
+.user-box-filter .user-conditions.mutual-friend-block {
   margin-bottom: 0px;
   padding-top: 15px;
   border-top: 1px solid #fff;
 }
-#friend-filter .friend-conditions li {
+.user-box-filter .user-conditions li {
   margin-bottom: 5px;
   padding: 5px 0px;
   border-bottom: 1px dotted #f0f0f0;
   border-left: 1px solid #fff;
   overflow: hidden;
 }
-#friend-filter .friend-conditions li:last-child {
+.user-box-filter .user-conditions li:last-child {
   border-bottom: none;
 }
-#friend-filter .friend-conditions li i {
+.user-box-filter .user-conditions li i {
   margin-right: 10px;  
   margin-top: 2px;  
   color: #292929;
@@ -2326,54 +2326,61 @@ ul.user_actions li:hover i{
   font-size: 15px;
   text-align: center;
 }
-#friend-filter .friend-conditions li a {
+.user-box-filter .user-conditions li a {
   font-size: 12px;
   font-weight: bold;
   color: #666;
   display: block;
   float: left;
 }
-#friend-filter .friend-conditions li:hover a {  
+.user-box-filter .user-conditions li:hover a {  
   color: #000;
 }
-#friend-filter .friend-conditions li:hover i {
+.user-box-filter .user-conditions li:hover i {
   color: #009B77;
 }
-#friend-filter .friend-conditions li.active {
+.user-box-filter .user-conditions li.active {
   background-color: #fff;  
   border-left: 1px solid #009B77;
   margin-left: 0px;
 }
-#friend-filter .friend-conditions li.active a {
+.user-box-filter .user-conditions li.active a {
   color: #000;
 }
-#friend-filter .friend-conditions li.active i {
+.user-box-filter .user-conditions li.active i {
   color: #009B77;
   margin-left: 5px;
 }
+
 .friend-item {
   float: left;  
   position: relative;
   background-color: #FFF;
-  padding: 10px;
   margin: 0px 10px 10px 0px;
-  min-height: 65px;
-  width: 300px;
+  width: 380px;
   box-shadow: 1px 2px 4px -1px #ccc;
   cursor: default;
   overflow: hidden;
 }
 .friend-item .friend-img {
   display: block;
-  height: 65px;
-  width: 65px;
+  height: 80px;
+  width: 80px;
+  float: left;
+}
+.friend-item .friend-img img {
+  height: 100%;
+  width: 100%;
 }
 .friend-item .friend-info {
-  margin-left: 10px;
-  max-width: 222px;
+  display: inline-block;
+  margin: 10px 0px 0px 10px;  
+  max-width: 220px;
+  max-height: 100px;
+  overflow: hidden;
 }
 .friend-item .friend-info .friend-name {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;  
   white-space: nowrap;
   display: block;
@@ -2390,7 +2397,9 @@ ul.user_actions li:hover i{
 .friend-item .friend-infolist li {
   font-size: 13px;
   color: #515151; 
-  white-space: nowrap;       
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;   
 }
 .friend-item .friend-actions {
   position: absolute;
@@ -2411,6 +2420,80 @@ ul.user_actions li:hover i{
   text-align: left;
 }
 .friend-item .friend-actions .btn i {  
+  color: #FFF; 
+  float: left;
+  margin: 3px 5px 4px 0px;
+  font-size: 14px;
+}
+
+.follow-item {
+  float: left;  
+  position: relative;
+  background-color: #FFF;
+  margin: 0px 10px 10px 0px;
+  width: 380px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+  cursor: default;
+  overflow: hidden;
+}
+.follow-item .follow-img {
+  display: block;
+  height: 80px;
+  width: 80px;
+  float: left;
+}
+.follow-item .follow-img img {
+  height: 100%;
+  width: 100%;
+}
+.follow-item .follow-info {
+  display: inline-block;
+  margin: 10px 0px 0px 10px;  
+  max-width: 220px;
+  max-height: 100px;
+  overflow: hidden;
+}
+.follow-item .follow-info .follow-name {
+  font-size: 13px;
+  font-weight: bold;  
+  white-space: nowrap;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #414141;
+}
+.follow-item .follow-info .follow-name:hover {
+  color: #000;
+}
+.follow-item .follow-infolist {
+  margin-top: 10px;
+}
+.follow-item .follow-infolist li {
+  font-size: 13px;
+  color: #515151; 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;   
+}
+.follow-item .follow-actions {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  display: none;
+}
+.follow-item:hover .follow-actions {
+  display: block;
+}
+.follow-item .follow-actions ul {
+  min-width: inherit;
+}
+.follow-item .follow-actions .btn {  
+  font-size: 11px; 
+  padding: 3px 8px;
+  display: block;
+  text-align: left;
+}
+.follow-item .follow-actions .btn i {  
   color: #FFF; 
   float: left;
   margin: 3px 5px 4px 0px;

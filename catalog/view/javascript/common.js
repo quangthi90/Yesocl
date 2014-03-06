@@ -456,7 +456,7 @@ var yCurrUser = new CurrentUser();
 	HorizontalBlock.prototype.initializeBlock = function() {
 		if(this.root.hasClass(df_POST_HAS_BLOCK)) {
 			this.blocks = this.root.find('.feed-block');
-			this.blockContent = this.root.find('.block-content');				
+			this.blockContent = this.root.find('.block-content');			
 			var heightBlockContent = this.heightMain - 42;
 			var heightPost = (heightBlockContent - 2*marginPost)/2;
 			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
