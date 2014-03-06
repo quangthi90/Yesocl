@@ -93,7 +93,7 @@ Class User {
     public function prePersist()
     {
     	$this->created = new \DateTime();
-    	$this->meta->setCurrent('unknow');
+    	$this->meta->setCurrent('Job Seeker');
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();

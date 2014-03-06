@@ -13,13 +13,13 @@
 				<div class="profiles-tabs-item1-label">
 					From 
 					<select name="started">
-						{% for i in current_year..before_year %}
+						{% for i in fulture_year..before_year %}
 						<option value="{{ i }}">{{ i }}</option>
 						{% endfor %}
 					</select> 
 					to 
 					<select name="ended">
-						{% for i in current_year..before_year %}
+						{% for i in fulture_year..before_year %}
 						<option value="{{ i }}">{{ i }}</option>
 						{% endfor %}
 					</select>
@@ -52,11 +52,11 @@
 				<div class="profiles-tabs-item1 education-item" id="{{ education.id }}" 
 					data-edit="{{ path('ProfileEditEducation', {education_id: education.id}) }}" data-started="{{ education.started }}" 
 					data-ended="{{ education.ended }}" 
-					data-degree="{{ education.degree }}" 
+					data-degree="{{ education.degree|raw }}" 
 					data-degree-id="{{ education.degree_id }}" 
-					data-school="{{ education.school }}" 
+					data-school="{{ education.school|raw }}" 
 					data-school-id="{{ education.school_id }}" 
-					data-fieldofstudy="{{ education.fieldofstudy }}" 
+					data-fieldofstudy="{{ education.fieldofstudy|raw }}" 
 					data-fieldofstudy-id="{{ education.fieldofstudy_id }}" 
 					data-remove="{{ path('ProfileRemoveEducation', {education_id: education.id}) }}">
 					<div>
@@ -71,9 +71,9 @@
 						<a class="profiles-btn-cancel editors btn profiles-btn pull-right"><i class="icon-mail-forward"></i></a>
 						<a class="profiles-btn-save editors btn profiles-btn pull-right"><i class="icon-save"></i></a>
 						<div class="profiles-tabs-value">
-							<div class="profiles-tabs-value-item">{{ education.school }}</div>
-							<div class="profiles-tabs-value-item">{{ education.degree }}</div>
-							<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy }}</div>
+							<div class="profiles-tabs-value-item">{{ education.school|raw }}</div>
+							<div class="profiles-tabs-value-item">{{ education.degree|raw }}</div>
+							<div class="profiles-tabs-value-item viewers">{{ education.fieldofstudy|raw }}</div>
 						</div>
 					</div>
 				</div>
