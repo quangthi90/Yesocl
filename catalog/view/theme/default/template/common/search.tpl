@@ -74,5 +74,7 @@
 {% endblock %}
 
 {% block javascript %}
+    {% set isRemove = false %}
     {{ block('friend_common_friend_list_javascript') }}
+}
 {% endblock %}

@@ -11,7 +11,8 @@
 		this.$unFollowBtn		= $el.find('.js-unfollow-btn');
 		
 		this.userSlug			= $el.parents('.js-friend-info').data('user-slug');
-		this.is_remove_friend = removeUnFriend;
+
+		this.isRemoveFriend = removeUnFriend;
 
 		this.attachEvents();
 	}
@@ -94,8 +95,8 @@
 					// ]);
 				}else{
 					// Remove friend
-					if ( that.is_remove_friend === true ){
-						that.$el.parent().remove();
+					if ( that.isRemoveFriend === true ){
+						that.$el.parents('.js-friend-info').remove();
 						return false;
 
 					// Change status to not relationship

@@ -26,9 +26,12 @@
 {% endblock %}
 
 {% block friend_common_friend_list_javascript %}
+    {% if isRemove is not defined %}
+        {% set isRemove = true %}
+    {% endif %}
     <script type="text/javascript">
     $(function(){
-        $(document).trigger('FRIEND_ACTION', [true]);
+        $(document).trigger('FRIEND_ACTION', [{{ isRemove }}]);
     });
     </script>
 {% endblock %}
