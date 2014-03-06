@@ -1716,27 +1716,6 @@ db.getCollection("attribute_type").insert({
 
 /** branch records **/
 db.getCollection("branch").insert({
-  "_id": ObjectId("51d39ba5d87459c40a000017"),
-  "company": {
-    "$ref": "company",
-    "$id": ObjectId("51e97c88471dee180a000000"),
-    "$db": "yesocl"
-  },
-  "deleted": false,
-  "logo": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/avatar.jpg",
-  "members": [
-    {
-      "$ref": "user",
-      "$id": ObjectId("518f5555471deea409000000"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Chứng khoán",
-  "order": NumberInt(0),
-  "slug": "yestoc-520ce99c471dee9c09000000",
-  "status": true
-});
-db.getCollection("branch").insert({
   "_id": ObjectId("5247a0a3471dee280c000037"),
   "company": {
     "$ref": "company",
@@ -1754,6 +1733,32 @@ db.getCollection("branch").insert({
   "name": "IT",
   "order": NumberInt(1),
   "slug": "it-5247a0a3471dee280c000036",
+  "status": true
+});
+db.getCollection("branch").insert({
+  "_id": ObjectId("51d39ba5d87459c40a000017"),
+  "company": {
+    "$ref": "company",
+    "$id": ObjectId("51e97c88471dee180a000000"),
+    "$db": "yesocl"
+  },
+  "deleted": false,
+  "logo": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/avatar.jpg",
+  "members": [
+    {
+      "$ref": "user",
+      "$id": ObjectId("518f5555471deea409000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "user",
+      "$id": ObjectId("518f5f43471deeb40900001f"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Chứng khoán",
+  "order": NumberInt(0),
+  "slug": "yestoc-520ce99c471dee9c09000000",
   "status": true
 });
 
@@ -1815,6 +1820,284 @@ db.getCollection("branch_category").insert({
 });
 
 /** branch_post records **/
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d154471dee800a000001"),
+  "author": "Quang Thi",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521a4fba471deeb809000010"),
+      "author": "user1",
+      "content": "aaaaaaaaa",
+      "created": ISODate("2013-08-25T18:40:58.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2013-09-01T13:52:43.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521a4fc3471deeb809000012"),
+      "content": "bbbbbbbbbbb",
+      "status": true,
+      "created": ISODate("2013-08-25T18:41:07.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("527dd52a471deee40b000002"),
+      "author": "Quang Thi",
+      "content": "3333333333333",
+      "created": ISODate("2013-11-09T06:24:42.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:24:42.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dd814471deee40b00000a"),
+      "author": "Quang Thi",
+      "content": "444444444444",
+      "created": ISODate("2013-11-09T06:37:08.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:37:08.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dd87d471deee40b00000c"),
+      "author": "Quang Thi",
+      "content": "555555555555555",
+      "created": ISODate("2013-11-09T06:38:53.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:38:53.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dd9e3471deee40b00000d"),
+      "author": "Quang Thi",
+      "content": "666666666666666",
+      "created": ISODate("2013-11-09T06:44:51.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:44:51.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dda11471deee40b000010"),
+      "author": "Quang Thi",
+      "content": "777777777777",
+      "created": ISODate("2013-11-09T06:45:37.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:45:37.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dda68471deee40b000012"),
+      "author": "Quang Thi",
+      "content": "888888888888888",
+      "created": ISODate("2013-11-09T06:47:04.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:47:05.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dda9f471deee40b000014"),
+      "author": "Quang Thi",
+      "content": "999999999999999999",
+      "created": ISODate("2013-11-09T06:47:59.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:48:00.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527debdf471deee40b00002c"),
+      "author": "Quang Thi",
+      "content": "1000000000000000",
+      "created": ISODate("2013-11-09T08:01:35.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T08:01:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527deccf471deef40b000003"),
+      "author": "Quang Thi",
+      "content": "1100000000000",
+      "created": ISODate("2013-11-09T08:05:35.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T08:05:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527deda5471deef40b000005"),
+      "author": "Quang Thi",
+      "content": "120000000000000",
+      "created": ISODate("2013-11-09T08:09:09.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T08:09:09.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527def5d471deee40b00002e"),
+      "author": "Quang Thi",
+      "content": "1300000000000",
+      "created": ISODate("2013-11-09T08:16:29.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T08:16:29.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527df019471deee40b000030"),
+      "author": "Quang Thi",
+      "content": "14000000000",
+      "created": ISODate("2013-11-09T08:19:37.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T08:19:37.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dfe71471deef40b00000b"),
+      "author": "Quang Thi",
+      "content": "150000000000",
+      "created": ISODate("2013-11-09T09:20:49.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T09:20:50.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52811227471dee300b000000"),
+      "author": "Quang Thi",
+      "content": "Lorem ipsum dolor sit amet, errem solet eu mei, dolores expetendis intellegebat his ex, eruditi alienum no sed. Inani accumsan voluptaria cum an, eos altera diceret facilis an, mutat postea sensibus nam ei. Te erant scripta volumus eam. Qui putent eripuit nusquam te, ius cu congue inermis explicari. Te ceteros omittam gubergren ius, dicam noluisse democritum ex eos, an saperet reprehendunt eos.\n",
+      "created": ISODate("2013-11-11T17:21:43.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-11T17:21:44.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\tTheo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng (76,19 triệu USD) từ mức hiện tại là 1,43 nghìn tỷ đồng. DIG sẽ trình kế hoạch tăng vốn tại ĐHCĐTN diễn ra vào ngày 15\/4.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVẫn chưa có thời gian cụ thể cho kế hoạch tăng vốn nhưng nhiều khả năng sẽ là trước cuối Q3 và có thể dưới hình thức phát hành quyền cho cổ đông hiện hữu. DIG đang cần thêm vốn để đầu tư cho các dự án của mình.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHSC dự báo doanh thu năm 2013 đạt 968 tỷ đồng (tăng trưởng 23%) và lợi nhuận thuần đạt 62,6 tỷ đồng (tăng trưởng 169%). Dự báo này dựa trên giả định là DIG có thể ghi nhận doanh thu từ dự án Nam Vĩnh Yên và An Sơn. Chúng tôi tiếp tục duy trì đánh giá Mua vào đối với cổ phiếu DIG. Hiện DIG là một trong những cổ phiếu niêm yết tốt trong ngành BĐS chuyên về phát triển nhà ở giá thấp; tuy nhiên, sắp tới Tập đoàn Nam Long (đứng đầu về nhà ở giá thấp) sẽ chào sàn với giá tham chiếu 27.000đ theo đó các NĐT có thể sẽ chuyển bớt sự chú ý sang cổ phiếu sắp chào sàn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tNam Long là thương hiệu hàng đầu và có bề dày trong lĩnh vực BĐS giá thấp với 20 năm kinh nghiệm; có quỹ đất 567 ha mà phần lớn được mua cách đây hơn 13 năm và chủ yếu nằm trong và xung quanh TP HCM; có sản phẩm E-home rất thành công với căn hộ 9 tầng tập trung vào người mua sơ cấp với giá hấp dẫn là 1 tỷ đồng trở xuống; tại giá chào sàn, giá cổ phiếu của Tập đoàn Nam Long thấp hơn 38% so với NAV. Theo đó, các NĐT nên chờ và xem xét đầu tư vào cổ phiếu Tập đoàn Nam Long.&lt;\/p&gt;\r\n",
+  "countViewer": NumberInt(3),
+  "created": ISODate("2013-08-23T03:04:52.0Z"),
+  "deleted": false,
+  "description": "Theo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000",
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "bao-cao-ngan-ve-tong-cong-ty-co-phan-dau-tu-phat-trien-xay-dung-dig-5216d154471dee800a000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d154471dee800a000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Tổng Công ty Cổ phần Đầu tư Phát triển Xây dựng (DIG)",
+  "updated": ISODate("2014-01-23T06:28:24.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
 db.getCollection("branch_post").insert({
   "_id": ObjectId("5216d281471dee840a000005"),
   "author": "Quang Thi",
@@ -2066,233 +2349,6 @@ db.getCollection("branch_post").insert({
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d281471dee840a000005\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Đầu tư Phát triển Đô thị và Khu Công nghiệp Sông Đà (SJS)",
   "updated": ISODate("2014-02-11T08:20:26.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
-  "_id": ObjectId("5216d192471dee840a000001"),
-  "author": "Quang Thi",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3a0cad87459c40a000019"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("521c4b78471dee200b000005"),
-      "content": "2222222222",
-      "status": true,
-      "created": ISODate("2013-08-27T06:47:20.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("521c4e58471dee100b000002"),
-      "content": "33333333333",
-      "status": true,
-      "created": ISODate("2013-08-27T06:59:35.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("521f8a34471dee5c11000003"),
-      "content": "4444444444444",
-      "status": true,
-      "created": ISODate("2013-08-29T17:51:48.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("527dd5bd471deee40b000004"),
-      "author": "Quang Thi",
-      "content": "4444444444444",
-      "created": ISODate("2013-11-09T06:27:09.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:27:10.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dd71a471deee40b000006"),
-      "author": "Quang Thi",
-      "content": "5555555555555",
-      "created": ISODate("2013-11-09T06:32:58.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:32:58.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527ddd09471deee40b000023"),
-      "author": "Quang Thi",
-      "content": "6666666666",
-      "created": ISODate("2013-11-09T06:58:17.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:58:17.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527ddd38471deee40b000025"),
-      "author": "Quang Thi",
-      "content": "7777777777777777",
-      "created": ISODate("2013-11-09T06:59:04.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:59:04.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dddbd471deee40b000029"),
-      "author": "Quang Thi",
-      "content": "888888888888888",
-      "created": ISODate("2013-11-09T07:01:17.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T07:01:17.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dddf5471deee40b00002b"),
-      "author": "Quang Thi",
-      "content": "9999999999999999",
-      "created": ISODate("2013-11-09T07:02:13.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T07:02:14.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527decdf471deef40b000004"),
-      "author": "Quang Thi",
-      "content": "100000000000",
-      "created": ISODate("2013-11-09T08:05:51.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T08:05:51.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dfedb471deef40b00000c"),
-      "author": "Quang Thi",
-      "content": "1100000000000",
-      "created": ISODate("2013-11-09T09:22:35.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T09:22:35.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dfef3471deef40b00000d"),
-      "author": "Quang Thi",
-      "content": "12000000000",
-      "created": ISODate("2013-11-09T09:22:59.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T09:22:59.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52a417f6471dee440b000000"),
-      "author": "Quang Thi",
-      "content": "130000000000000",
-      "created": ISODate("2013-12-08T06:55:50.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-12-08T06:55:51.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\tVSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận trước thuế là 214 tỷ đồng, giảm 26%. Công ty sẽ trả cổ tức bằng cả cổ phiếu (tỷ lệ 1:5) và tiền mặt (4.000đ\/cp). Chúng tôi cho rằng tiền mặt sẽ được trả sau khi trả bằng cổ phiếu nên tỷ lệ cổ tức\/giá tổng cộng sẽ là 10,3% ở mức giá hiện tại.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tKế hoạch kinh doanh năm 2013 của VSC có vẻ khá thận trọng và đây là điều thường thấy ở công ty này. Chúng tôi thấy rằng trong 5 năm liền (từ 2008-2012), công ty đã vượt kế hoạch lợi nhuận trước thuế đề ra là 46%. Tốc độ tăng trưởng CAGR trong 5 năm của doanh thu là 25% còn của lợi nhuận thuần là 21%. Trong năm nay, VSC đã lý giải việc đặt kế hoạch kinh doanh thấp là do doanh thu từ dịch vụ lưu kho lạnh sẽ giảm do trong năm ngoái doanh thu này đạt cao trong điều kiện đặc biệt. Trong năm 2012, công ty đạt 80 tỷ đồng doanh thu từ dịch vụ lưu kho lạnh, tăng mạnh 43% do chính phủ Trung Quốc đã bất ngờ đóng cửa biên giới trong 3 tháng trong năm 2012 khiến các công ty phải lưu hàng trong kho lạnh trong nhiều tháng. Chúng tôi cũng đã có đề cập đến điều này trong báo cáo trước về VSC.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC hiện đang chạy hết công suất nên sẽ không còn nhiều dư địa để tăng trưởng. Trong năm nay, VSC đặt kế hoạch hàng hóa qua cảng là 350.000 TEU, chỉ tăng 1%. Và chúng tôi cũng dự báo phí dịch vụ sẽ giữ nguyên. VSC đã giữ nguyên phí dịch vụ trong 2 năm và chúng tôi cũng lưu ý là hầu hết phí dịch vụ được tính bằng USD.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi dự báo doanh thu từ hoạt động kinh doanh cảng sẽ đạt 706 tỷ đồng, tăng trưởng 1%; cao hơn kế hoạch của công ty 9%; và dự báo doanh thu từ dịch vụ lưu kho lạnh giảm 30% và đạt 56 tỷ đồng trong năm 2013. Dự báo này dựa trên giả định là hàng thực phẩm đông lạnh sẽ được lưu thông thông suốt qua biên giới Việt – Trung trong năm nay. Tóm lại, chúng tôi dự báo tổng doanh thu là 762 tỷ đồng, giảm nhẹ 2%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cũng dự báo lợi nhuận thuần sẽ đạt 228 tỷ đồng, không thay đổi so với năm 2012 và cao hơn 33% so với kế hoạch của công ty. Dự báo lợi nhuận thuần của chúng tôi dựa trên giả định chi phí giảm nhờ công ty giảm sự phụ thuộc vào bên cho thuê bãi container. Năm nay, công ty sẽ xây dựng bãi container của riêng mình với diện tích 7,5ha. Bãi container này sẽ được hoàn thành và đưa vào hoạt động vào Q2 năm nay và sẽ giúp giảm 7% giá vốn hàng bán xuống còn 474 tỷ đồng trong năm 2013. Điều này sẽ giúp tỷ suất lợi nhuận gộp tăng từ mức 34,4% lên 37,8%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC có kế hoạch tăng vốn điều lệ trong năm nay thông qua phát hành cổ phiếu thưởng nói trên, theo đó sẽ tăng vốn điều lệ từ 240 tỷ đồng lên 288 tỷ đồng từ giữa năm nay. EPS điều chỉnh pha loãng 2013 sẽ là 8.620đ, giảm 10%. Theo mức giá hôm nay, VSC hiện đang giao dịch với P\/E dự phóng là 4,9 lần và P\/B dự phóng là 1,5 lần. VSC có tình hình tài chính tốt với tỷ lệ nợ\/tổng tài sản chỉ ở mức 0,25 lần và tỷ lệ cổ tức\/giá tương đối cao. Tuy nhiên, trước mắt thì công ty dường như không có kế hoạch tăng công suất và do đó khó giữ được tiềm năng tăng trưởng dài hạn. Theo kế hoạch đầu tư mở rộng năm 2013, chúng tôi thấy rằng công ty có vẻ chú trọng vào việc mở rộng bãi container để giảm sự phụ thuộc vào bên thứ ba. Vì vậy, cổ phiếu có nguy cơ mất đi khả năng tăng trưởng nếu công ty không có kế hoạch tăng công suất hoạt động kinh doanh cảng. Cổ phiếu VSC hiện có tỷ lệ cổ tức\/giá khá tốt và định giá thấp theo quan điểm của chúng tôi.&lt;\/p&gt;\r\n",
-  "countViewer": NumberInt(0),
-  "created": ISODate("2013-08-23T03:05:54.0Z"),
-  "deleted": false,
-  "description": "VSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận [...]",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5555471deea409000000"
-  ],
-  "slug": "bao-cao-ngan-ve-cong-ty-co-phan-tap-doan-container-viet-nam-vsc-5216d192471dee840a000000",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
-  "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
-  "updated": ISODate("2013-12-20T05:49:43.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2950,284 +3006,6 @@ db.getCollection("branch_post").insert({
   }
 });
 db.getCollection("branch_post").insert({
-  "_id": ObjectId("5216d154471dee800a000001"),
-  "author": "Quang Thi",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3a0cad87459c40a000019"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("521a4fba471deeb809000010"),
-      "author": "user1",
-      "content": "aaaaaaaaa",
-      "created": ISODate("2013-08-25T18:40:58.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T13:52:43.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521a4fc3471deeb809000012"),
-      "content": "bbbbbbbbbbb",
-      "status": true,
-      "created": ISODate("2013-08-25T18:41:07.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("527dd52a471deee40b000002"),
-      "author": "Quang Thi",
-      "content": "3333333333333",
-      "created": ISODate("2013-11-09T06:24:42.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:24:42.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dd814471deee40b00000a"),
-      "author": "Quang Thi",
-      "content": "444444444444",
-      "created": ISODate("2013-11-09T06:37:08.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:37:08.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dd87d471deee40b00000c"),
-      "author": "Quang Thi",
-      "content": "555555555555555",
-      "created": ISODate("2013-11-09T06:38:53.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:38:53.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dd9e3471deee40b00000d"),
-      "author": "Quang Thi",
-      "content": "666666666666666",
-      "created": ISODate("2013-11-09T06:44:51.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:44:51.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dda11471deee40b000010"),
-      "author": "Quang Thi",
-      "content": "777777777777",
-      "created": ISODate("2013-11-09T06:45:37.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:45:37.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dda68471deee40b000012"),
-      "author": "Quang Thi",
-      "content": "888888888888888",
-      "created": ISODate("2013-11-09T06:47:04.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:47:05.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dda9f471deee40b000014"),
-      "author": "Quang Thi",
-      "content": "999999999999999999",
-      "created": ISODate("2013-11-09T06:47:59.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T06:48:00.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527debdf471deee40b00002c"),
-      "author": "Quang Thi",
-      "content": "1000000000000000",
-      "created": ISODate("2013-11-09T08:01:35.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T08:01:35.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527deccf471deef40b000003"),
-      "author": "Quang Thi",
-      "content": "1100000000000",
-      "created": ISODate("2013-11-09T08:05:35.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T08:05:35.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527deda5471deef40b000005"),
-      "author": "Quang Thi",
-      "content": "120000000000000",
-      "created": ISODate("2013-11-09T08:09:09.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T08:09:09.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527def5d471deee40b00002e"),
-      "author": "Quang Thi",
-      "content": "1300000000000",
-      "created": ISODate("2013-11-09T08:16:29.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T08:16:29.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527df019471deee40b000030"),
-      "author": "Quang Thi",
-      "content": "14000000000",
-      "created": ISODate("2013-11-09T08:19:37.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T08:19:37.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527dfe71471deef40b00000b"),
-      "author": "Quang Thi",
-      "content": "150000000000",
-      "created": ISODate("2013-11-09T09:20:49.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-09T09:20:50.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52811227471dee300b000000"),
-      "author": "Quang Thi",
-      "content": "Lorem ipsum dolor sit amet, errem solet eu mei, dolores expetendis intellegebat his ex, eruditi alienum no sed. Inani accumsan voluptaria cum an, eos altera diceret facilis an, mutat postea sensibus nam ei. Te erant scripta volumus eam. Qui putent eripuit nusquam te, ius cu congue inermis explicari. Te ceteros omittam gubergren ius, dicam noluisse democritum ex eos, an saperet reprehendunt eos.\n",
-      "created": ISODate("2013-11-11T17:21:43.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-11T17:21:44.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\tTheo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng (76,19 triệu USD) từ mức hiện tại là 1,43 nghìn tỷ đồng. DIG sẽ trình kế hoạch tăng vốn tại ĐHCĐTN diễn ra vào ngày 15\/4.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVẫn chưa có thời gian cụ thể cho kế hoạch tăng vốn nhưng nhiều khả năng sẽ là trước cuối Q3 và có thể dưới hình thức phát hành quyền cho cổ đông hiện hữu. DIG đang cần thêm vốn để đầu tư cho các dự án của mình.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tHSC dự báo doanh thu năm 2013 đạt 968 tỷ đồng (tăng trưởng 23%) và lợi nhuận thuần đạt 62,6 tỷ đồng (tăng trưởng 169%). Dự báo này dựa trên giả định là DIG có thể ghi nhận doanh thu từ dự án Nam Vĩnh Yên và An Sơn. Chúng tôi tiếp tục duy trì đánh giá Mua vào đối với cổ phiếu DIG. Hiện DIG là một trong những cổ phiếu niêm yết tốt trong ngành BĐS chuyên về phát triển nhà ở giá thấp; tuy nhiên, sắp tới Tập đoàn Nam Long (đứng đầu về nhà ở giá thấp) sẽ chào sàn với giá tham chiếu 27.000đ theo đó các NĐT có thể sẽ chuyển bớt sự chú ý sang cổ phiếu sắp chào sàn này.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tNam Long là thương hiệu hàng đầu và có bề dày trong lĩnh vực BĐS giá thấp với 20 năm kinh nghiệm; có quỹ đất 567 ha mà phần lớn được mua cách đây hơn 13 năm và chủ yếu nằm trong và xung quanh TP HCM; có sản phẩm E-home rất thành công với căn hộ 9 tầng tập trung vào người mua sơ cấp với giá hấp dẫn là 1 tỷ đồng trở xuống; tại giá chào sàn, giá cổ phiếu của Tập đoàn Nam Long thấp hơn 38% so với NAV. Theo đó, các NĐT nên chờ và xem xét đầu tư vào cổ phiếu Tập đoàn Nam Long.&lt;\/p&gt;\r\n",
-  "countViewer": NumberInt(3),
-  "created": ISODate("2013-08-23T03:04:52.0Z"),
-  "deleted": false,
-  "description": "Theo tài liệu ĐHCĐTN của DIG (đánh giá Mua vào), thì công ty sẽ lấy ý kiến cổ đông về việc tăng vốn điều lệ lên 1,6 nghìn tỷ đồng",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5555471deea409000000",
-    "518f5f43471deeb40900001f"
-  ],
-  "slug": "bao-cao-ngan-ve-tong-cong-ty-co-phan-dau-tu-phat-trien-xay-dung-dig-5216d154471dee800a000000",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d154471dee800a000001\/avatar.jpg",
-  "title": "“Báo cáo ngắn” về Tổng Công ty Cổ phần Đầu tư Phát triển Xây dựng (DIG)",
-  "updated": ISODate("2014-01-23T06:28:24.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
   "_id": ObjectId("521792d9471deeb408000003"),
   "author": "Quang Thi",
   "branch": {
@@ -3731,120 +3509,6 @@ db.getCollection("branch_post").insert({
   }
 });
 db.getCollection("branch_post").insert({
-  "_id": ObjectId("52179237471deeb408000001"),
-  "author": "Quang Thi",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3ceced874596804000000"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("527f51d4471dee440b000000"),
-      "author": "Quang Thi",
-      "content": "        11111111111111 Edited",
-      "created": ISODate("2013-11-10T09:28:52.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-12-09T11:14:26.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5286522b471deea00b000002"),
-      "author": "Quang Thi",
-      "content": "        2222222222222222 &lt;u&gt;Edited&lt;\/u&gt;&lt;br&gt;",
-      "created": ISODate("2013-11-15T16:56:11.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        
-      ],
-      "status": true,
-      "updated": ISODate("2013-12-13T08:56:14.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52943326471dee8409000001"),
-      "author": "Quang Thi",
-      "content": "777777777777",
-      "created": ISODate("2013-11-26T05:35:34.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-26T05:35:34.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52a70b1f471deed409000000"),
-      "author": "Quang Thi",
-      "content": "888888888",
-      "created": ISODate("2013-12-10T12:37:51.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-12-10T12:37:51.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52a70c90471deed409000003"),
-      "author": "Quang Thi",
-      "content": "444444444444",
-      "created": ISODate("2013-12-10T12:44:00.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-12-10T12:44:00.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&amp;nbsp;Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 497 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex. Tuy nhiên, vùng 507-510 là ngưỡng cản khá mạnh của Vnindex (đây là điểm nối các đỉnh của mẫu hình vai đầu vai trung dài hạn) do đó hoạt động chốt lời mạnh có thể sẽ tiếp tục diễn ra vào đầu tuần sau. Chúng tôi cho rằng nếu thanh khoản tiếp tục duy trì trên 50tr\/ phiên thì có thể Vnindex sẽ chỉ điều chỉnh nhẹ ( nếu có) về vùng 502-503. Ngược lại, nếu phá vỡ ngưỡng cản 507-510, Vnindex sẽ hướng về vùng kháng cự kế tiếp là 525-530.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tPhân tích đồ thị Hnxindex có thể thấy mẫu hình cái nêm hướng xuống đang được hình thành, nếu vùng cản 63-63.5 được phá vỡ, khả năng Hnxindex sẽ hình thành 1 xu hướng tăng mạnh với taget ở vùng 66-67.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3346&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tỞ chart tuần Vnindex, chỉ số này vẫn chưa xuất hiện điểm mua trung hạn do vùng kháng cự 510-525 tập trung khá nhiều lực bán mạnh, chúng tôi đánh giá xu hướng trung hạn hiện tại ở mức trung tính và cần thời gian để xác nhận.&amp;nbsp;Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư lướt sóng sau khi chốt lời ở vùng 508 như khuyến nghị của chúng tôi&amp;nbsp;có thể tiếp tục giải ngân khi Vnindex tích lũy trong các phiên đầu tuần.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro thấp, có thể chờ mua khi Vnindex phá vỡ vùng 507-510 .&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã midcap cơ bản tốt và có dòng tiền mạnh.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-  "countViewer": NumberInt(5),
-  "created": ISODate("2013-08-23T16:47:51.0Z"),
-  "deleted": false,
-  "description": "Review quan điểm tuần trước: Chúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành [...]",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5555471deea409000000",
-    "518f5f43471deeb40900001f"
-  ],
-  "slug": "lang-kinh-yestoc-tuan-1908-2308-tang-ti-trong-co-phieu-khi-vnindex-pha-vo-vung-can-507-510-52179237471deeb408000000",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179237471deeb408000001\/avatar.jpg",
-  "title": "Lăng kính Yestoc tuần 19\/08-23\/08: ” tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510″",
-  "updated": ISODate("2014-01-23T06:27:13.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
   "_id": ObjectId("5217929f471dee3c08000001"),
   "author": "Quang Thi",
   "branch": {
@@ -4286,6 +3950,36 @@ db.getCollection("branch_post").insert({
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       }
+    },
+    {
+      "_id": ObjectId("5312ca96a7c0e92009000000"),
+      "author": "Quang Thi",
+      "content": "abc xxx",
+      "created": ISODate("2014-03-02T06:07:18.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2014-03-02T06:07:18.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5312caa7a7c0e92009000001"),
+      "author": "Quang Thi",
+      "content": "aaa",
+      "created": ISODate("2014-03-02T06:07:34.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2014-03-02T06:07:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tThị trường tiếp tục phiên tăng điểm thứ 2 liên tiếp, cả hai chỉ số đều hình thành các cây nến trắng lớn, đặc biệt là thanh khoản trên sàn Hose đã tăng đột biến. Thị trường cho thấy sự phân hóa tập trung ở các cổ phiếu penny mang tính đầu cơ khiến những mã này có khối lượng dư trần khá lớn, điển hình là ITA, KBC, DIG, PVT, OGC, DQC…, trong khi các mã bluechip có phần yếu hơn và chỉ xanh nhẹ. Nhìn chung, thị trường có diễn biến khá tốt trong phiên hôm nay, tuy nhiên chúng tôi vẫn giữ quan điểm trong bài phân tích trước, &amp;nbsp;khả năng Vnindex sẽ gặp khó khăn khi tiệm cận vùng cản mạnh 507-510, cũng như vùng 63-63.5 trên Hnxindex.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3306&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư có thể chốt lời một phần danh mục như chúng tôi khuyến nghị trong các phiên tăng&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tHạn chế mua đuổi cổ phiếu khi Vnindex tiệm cận ngưỡng kháng cự mạnh&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tChúng tôi sẽ cập nhật điểm mua mới khi Vnindex bức phá được ngưỡng kháng cự 507-510&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
@@ -4302,7 +3996,351 @@ db.getCollection("branch_post").insert({
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5217929f471dee3c08000001\/avatar.png",
   "title": "Lăng kính Yestoc phiên 16\/08: “cẩn trọng vùng kháng cự mạnh”",
-  "updated": ISODate("2014-02-09T13:41:25.0Z"),
+  "updated": ISODate("2014-03-02T06:07:35.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("5216d192471dee840a000001"),
+  "author": "Quang Thi",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3a0cad87459c40a000019"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("521c4b78471dee200b000005"),
+      "content": "2222222222",
+      "status": true,
+      "created": ISODate("2013-08-27T06:47:20.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521c4e58471dee100b000002"),
+      "content": "33333333333",
+      "status": true,
+      "created": ISODate("2013-08-27T06:59:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("521f8a34471dee5c11000003"),
+      "content": "4444444444444",
+      "status": true,
+      "created": ISODate("2013-08-29T17:51:48.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("527dd5bd471deee40b000004"),
+      "author": "Quang Thi",
+      "content": "4444444444444",
+      "created": ISODate("2013-11-09T06:27:09.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:27:10.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dd71a471deee40b000006"),
+      "author": "Quang Thi",
+      "content": "5555555555555",
+      "created": ISODate("2013-11-09T06:32:58.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:32:58.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527ddd09471deee40b000023"),
+      "author": "Quang Thi",
+      "content": "6666666666",
+      "created": ISODate("2013-11-09T06:58:17.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:58:17.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527ddd38471deee40b000025"),
+      "author": "Quang Thi",
+      "content": "7777777777777777",
+      "created": ISODate("2013-11-09T06:59:04.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T06:59:04.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dddbd471deee40b000029"),
+      "author": "Quang Thi",
+      "content": "888888888888888",
+      "created": ISODate("2013-11-09T07:01:17.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T07:01:17.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dddf5471deee40b00002b"),
+      "author": "Quang Thi",
+      "content": "9999999999999999",
+      "created": ISODate("2013-11-09T07:02:13.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T07:02:14.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527decdf471deef40b000004"),
+      "author": "Quang Thi",
+      "content": "100000000000",
+      "created": ISODate("2013-11-09T08:05:51.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T08:05:51.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dfedb471deef40b00000c"),
+      "author": "Quang Thi",
+      "content": "1100000000000",
+      "created": ISODate("2013-11-09T09:22:35.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T09:22:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527dfef3471deef40b00000d"),
+      "author": "Quang Thi",
+      "content": "12000000000",
+      "created": ISODate("2013-11-09T09:22:59.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-09T09:22:59.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52a417f6471dee440b000000"),
+      "author": "Quang Thi",
+      "content": "130000000000000",
+      "created": ISODate("2013-12-08T06:55:50.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-12-08T06:55:51.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\tVSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận trước thuế là 214 tỷ đồng, giảm 26%. Công ty sẽ trả cổ tức bằng cả cổ phiếu (tỷ lệ 1:5) và tiền mặt (4.000đ\/cp). Chúng tôi cho rằng tiền mặt sẽ được trả sau khi trả bằng cổ phiếu nên tỷ lệ cổ tức\/giá tổng cộng sẽ là 10,3% ở mức giá hiện tại.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tKế hoạch kinh doanh năm 2013 của VSC có vẻ khá thận trọng và đây là điều thường thấy ở công ty này. Chúng tôi thấy rằng trong 5 năm liền (từ 2008-2012), công ty đã vượt kế hoạch lợi nhuận trước thuế đề ra là 46%. Tốc độ tăng trưởng CAGR trong 5 năm của doanh thu là 25% còn của lợi nhuận thuần là 21%. Trong năm nay, VSC đã lý giải việc đặt kế hoạch kinh doanh thấp là do doanh thu từ dịch vụ lưu kho lạnh sẽ giảm do trong năm ngoái doanh thu này đạt cao trong điều kiện đặc biệt. Trong năm 2012, công ty đạt 80 tỷ đồng doanh thu từ dịch vụ lưu kho lạnh, tăng mạnh 43% do chính phủ Trung Quốc đã bất ngờ đóng cửa biên giới trong 3 tháng trong năm 2012 khiến các công ty phải lưu hàng trong kho lạnh trong nhiều tháng. Chúng tôi cũng đã có đề cập đến điều này trong báo cáo trước về VSC.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC hiện đang chạy hết công suất nên sẽ không còn nhiều dư địa để tăng trưởng. Trong năm nay, VSC đặt kế hoạch hàng hóa qua cảng là 350.000 TEU, chỉ tăng 1%. Và chúng tôi cũng dự báo phí dịch vụ sẽ giữ nguyên. VSC đã giữ nguyên phí dịch vụ trong 2 năm và chúng tôi cũng lưu ý là hầu hết phí dịch vụ được tính bằng USD.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi dự báo doanh thu từ hoạt động kinh doanh cảng sẽ đạt 706 tỷ đồng, tăng trưởng 1%; cao hơn kế hoạch của công ty 9%; và dự báo doanh thu từ dịch vụ lưu kho lạnh giảm 30% và đạt 56 tỷ đồng trong năm 2013. Dự báo này dựa trên giả định là hàng thực phẩm đông lạnh sẽ được lưu thông thông suốt qua biên giới Việt – Trung trong năm nay. Tóm lại, chúng tôi dự báo tổng doanh thu là 762 tỷ đồng, giảm nhẹ 2%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cũng dự báo lợi nhuận thuần sẽ đạt 228 tỷ đồng, không thay đổi so với năm 2012 và cao hơn 33% so với kế hoạch của công ty. Dự báo lợi nhuận thuần của chúng tôi dựa trên giả định chi phí giảm nhờ công ty giảm sự phụ thuộc vào bên cho thuê bãi container. Năm nay, công ty sẽ xây dựng bãi container của riêng mình với diện tích 7,5ha. Bãi container này sẽ được hoàn thành và đưa vào hoạt động vào Q2 năm nay và sẽ giúp giảm 7% giá vốn hàng bán xuống còn 474 tỷ đồng trong năm 2013. Điều này sẽ giúp tỷ suất lợi nhuận gộp tăng từ mức 34,4% lên 37,8%.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tVSC có kế hoạch tăng vốn điều lệ trong năm nay thông qua phát hành cổ phiếu thưởng nói trên, theo đó sẽ tăng vốn điều lệ từ 240 tỷ đồng lên 288 tỷ đồng từ giữa năm nay. EPS điều chỉnh pha loãng 2013 sẽ là 8.620đ, giảm 10%. Theo mức giá hôm nay, VSC hiện đang giao dịch với P\/E dự phóng là 4,9 lần và P\/B dự phóng là 1,5 lần. VSC có tình hình tài chính tốt với tỷ lệ nợ\/tổng tài sản chỉ ở mức 0,25 lần và tỷ lệ cổ tức\/giá tương đối cao. Tuy nhiên, trước mắt thì công ty dường như không có kế hoạch tăng công suất và do đó khó giữ được tiềm năng tăng trưởng dài hạn. Theo kế hoạch đầu tư mở rộng năm 2013, chúng tôi thấy rằng công ty có vẻ chú trọng vào việc mở rộng bãi container để giảm sự phụ thuộc vào bên thứ ba. Vì vậy, cổ phiếu có nguy cơ mất đi khả năng tăng trưởng nếu công ty không có kế hoạch tăng công suất hoạt động kinh doanh cảng. Cổ phiếu VSC hiện có tỷ lệ cổ tức\/giá khá tốt và định giá thấp theo quan điểm của chúng tôi.&lt;\/p&gt;\r\n",
+  "countViewer": NumberInt(0),
+  "created": ISODate("2013-08-23T03:05:54.0Z"),
+  "deleted": false,
+  "description": "VSC đã tổ chức ĐHCĐTN vào cuối tuần. VSC đặt kế hoạch kinh doanh cho năm nay với doanh thu thuần là 650 tỷ đồng, giảm 17% và lợi nhuận [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000"
+  ],
+  "slug": "bao-cao-ngan-ve-cong-ty-co-phan-tap-doan-container-viet-nam-vsc-5216d192471dee840a000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
+  "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
+  "updated": ISODate("2013-12-20T05:49:43.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("52179237471deeb408000001"),
+  "author": "Quang Thi",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("527f51d4471dee440b000000"),
+      "author": "Quang Thi",
+      "content": "        11111111111111 Edited",
+      "created": ISODate("2013-11-10T09:28:52.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "status": true,
+      "updated": ISODate("2014-02-28T00:44:28.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5286522b471deea00b000002"),
+      "author": "Quang Thi",
+      "content": "        2222222222222222 &lt;u&gt;Edited&lt;\/u&gt;&lt;br&gt;",
+      "created": ISODate("2013-11-15T16:56:11.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        
+      ],
+      "status": true,
+      "updated": ISODate("2013-12-13T08:56:14.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52943326471dee8409000001"),
+      "author": "Quang Thi",
+      "content": "777777777777",
+      "created": ISODate("2013-11-26T05:35:34.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-11-26T05:35:34.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52a70b1f471deed409000000"),
+      "author": "Quang Thi",
+      "content": "888888888",
+      "created": ISODate("2013-12-10T12:37:51.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-12-10T12:37:51.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52a70c90471deed409000003"),
+      "author": "Quang Thi",
+      "content": "444444444444",
+      "created": ISODate("2013-12-10T12:44:00.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2013-12-10T12:44:00.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&amp;nbsp;Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 497 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐóng cửa phiên giao dịch cuối tuần, khối lượng tăng mạnh và các các chỉ báo đảo chiều đang hỗ trợ tích cực cho VNIndex. Tuy nhiên, vùng 507-510 là ngưỡng cản khá mạnh của Vnindex (đây là điểm nối các đỉnh của mẫu hình vai đầu vai trung dài hạn) do đó hoạt động chốt lời mạnh có thể sẽ tiếp tục diễn ra vào đầu tuần sau. Chúng tôi cho rằng nếu thanh khoản tiếp tục duy trì trên 50tr\/ phiên thì có thể Vnindex sẽ chỉ điều chỉnh nhẹ ( nếu có) về vùng 502-503. Ngược lại, nếu phá vỡ ngưỡng cản 507-510, Vnindex sẽ hướng về vùng kháng cự kế tiếp là 525-530.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tPhân tích đồ thị Hnxindex có thể thấy mẫu hình cái nêm hướng xuống đang được hình thành, nếu vùng cản 63-63.5 được phá vỡ, khả năng Hnxindex sẽ hình thành 1 xu hướng tăng mạnh với taget ở vùng 66-67.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;a href=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1.png&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;&quot; class=&quot;alignleft  wp-image-3346&quot; height=&quot;452&quot; src=&quot;http:\/\/yestoc.com\/wp-content\/uploads\/2013\/08\/vnindex1-1024x452.png&quot; style=&quot;border: 1px solid black;&quot; title=&quot;vnindex&quot; width=&quot;600&quot; \/&gt;&lt;\/a&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tỞ chart tuần Vnindex, chỉ số này vẫn chưa xuất hiện điểm mua trung hạn do vùng kháng cự 510-525 tập trung khá nhiều lực bán mạnh, chúng tôi đánh giá xu hướng trung hạn hiện tại ở mức trung tính và cần thời gian để xác nhận.&amp;nbsp;Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư lướt sóng sau khi chốt lời ở vùng 508 như khuyến nghị của chúng tôi&amp;nbsp;có thể tiếp tục giải ngân khi Vnindex tích lũy trong các phiên đầu tuần.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro thấp, có thể chờ mua khi Vnindex phá vỡ vùng 507-510 .&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tDanh mục tập trung vào các mã midcap cơ bản tốt và có dòng tiền mạnh.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "countViewer": NumberInt(5),
+  "created": ISODate("2013-08-23T16:47:51.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước: Chúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000",
+    "518f5f43471deeb40900001f"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-1908-2308-tang-ti-trong-co-phieu-khi-vnindex-pha-vo-vung-can-507-510-52179237471deeb408000000",
+  "status": true,
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179237471deeb408000001\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 19\/08-23\/08: ” tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510″",
+  "updated": ISODate("2014-02-28T00:44:28.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -4567,23 +4605,37 @@ db.getCollection("branch_post").insert({
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       }
+    },
+    {
+      "_id": ObjectId("530fdbf8a7c0e97c0c000000"),
+      "author": "Quang Thi",
+      "content": "fdaf asdf adsf",
+      "created": ISODate("2014-02-28T00:44:40.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "status": true,
+      "updated": ISODate("2014-02-28T00:44:40.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
     }
   ],
-  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "content": "\n\t\t\t\t\n\t\t\t\t&lt;p&gt;\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\n&lt;p&gt;\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\n&lt;p&gt;\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\n&lt;p&gt;\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\n&lt;p&gt;\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\n&lt;p&gt;\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\n&lt;ul&gt;\n\t&lt;li&gt;\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\n\t&lt;li&gt;\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\n\t&lt;li&gt;\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\n&lt;\/ul&gt;\n\n\t\t\t\n\t\t\t",
   "countViewer": NumberInt(25),
   "created": ISODate("2013-08-23T16:51:28.0Z"),
   "deleted": false,
   "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
   "email": "quangthi_90@yahoo.com.vn",
   "likerIds": [
-    "518f5555471deea409000000",
     "518f5f43471deeb40900001f"
   ],
   "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
   "status": true,
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
   "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
-  "updated": ISODate("2014-02-11T08:21:16.0Z"),
+  "updated": ISODate("2014-03-02T06:02:56.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -4592,6 +4644,406 @@ db.getCollection("branch_post").insert({
 });
 
 /** cache_post records **/
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b54da6471deed80c000002"),
+  "created": ISODate("2013-12-21T08:13:26.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b54da6471deed80c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b54e92471deed80c000005"),
+  "created": ISODate("2013-12-21T08:17:22.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b54e92471deed80c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b55c8c471deec80c000002"),
+  "created": ISODate("2013-12-21T09:17:00.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b55c8c471deec80c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b55dbb471deecc0c000002"),
+  "created": ISODate("2013-12-21T09:22:02.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b55dbb471deecc0c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b561e1471deecc0c000005"),
+  "created": ISODate("2013-12-21T09:39:45.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b561e1471deecc0c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b561f8471deecc0c000008"),
+  "created": ISODate("2013-12-21T09:56:32.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b561f8471deecc0c000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b67aab471dee340b000002"),
+  "created": ISODate("2013-12-22T05:37:47.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b67aab471dee340b000001",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b67b59471dee2c0b000002"),
+  "created": ISODate("2013-12-22T05:40:41.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b67b59471dee2c0b000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b67b63471dee2c0b000005"),
+  "created": ISODate("2013-12-22T05:40:51.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b67b63471dee2c0b000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b67b93471dee2c0b000008"),
+  "created": ISODate("2013-12-22T05:41:39.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b67b93471dee2c0b000007",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b67be9471dee2c0b00000b"),
+  "created": ISODate("2013-12-22T05:43:05.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b67be9471dee2c0b00000a",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b67c40471dee2c0b00000e"),
+  "created": ISODate("2013-12-22T05:44:32.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b67c40471dee2c0b00000d",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b69e99471dee2c0b000012"),
+  "created": ISODate("2013-12-22T08:11:05.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b69e99471dee2c0b000011",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52b7d20f471dee280b000002"),
+  "created": ISODate("2013-12-23T06:02:55.0Z"),
+  "view": NumberInt(0),
+  "postId": "52b7d20f471dee280b000001",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52bac834471deee00a000006"),
+  "created": ISODate("2013-12-25T11:57:39.0Z"),
+  "view": NumberInt(0),
+  "postId": "52bac833471deee00a000005",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c4ec91471deea40a000002"),
+  "created": ISODate("2014-01-02T04:35:29.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c4ec91471deea40a000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c4edb8471deea40a000007"),
+  "created": ISODate("2014-01-02T04:40:24.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c4edb8471deea40a000006",
+  "type": "User",
+  "typeId": "52c26cdf471dee640a000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c4edcb471deea40a00000c"),
+  "created": ISODate("2014-01-02T04:40:43.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c4edcb471deea40a00000b",
+  "type": "User",
+  "typeId": "52c26cdf471dee640a000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c54328471dee880a000002"),
+  "created": ISODate("2014-01-02T10:44:56.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c54328471dee880a000001",
+  "type": "User",
+  "typeId": "52c26cdf471dee640a000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c54472471dee7c0a000004"),
+  "created": ISODate("2014-01-02T10:50:26.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c54472471dee7c0a000003",
+  "type": "User",
+  "typeId": "52c26cdf471dee640a000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c544b8471dee7c0a000009"),
+  "created": ISODate("2014-01-02T10:51:36.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c544b8471dee7c0a000008",
+  "type": "User",
+  "typeId": "52c26cdf471dee640a000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c592a3471deec809000002"),
+  "created": ISODate("2014-01-02T16:24:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c592a3471deec809000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c592d3471deec809000005"),
+  "created": ISODate("2014-01-02T16:24:51.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c592d3471deec809000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c592ff471deec809000008"),
+  "created": ISODate("2014-01-02T16:25:35.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c592ff471deec809000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c5965b471deec80900000b"),
+  "created": ISODate("2014-01-02T16:39:55.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c5965b471deec80900000a",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c5967c471deec80900000e"),
+  "created": ISODate("2014-01-02T16:40:28.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c5967c471deec80900000d",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c59893471dee7c0a00000d"),
+  "created": ISODate("2014-01-02T16:49:23.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c59893471dee7c0a00000c",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c59a0e471dee7c0a000010"),
+  "created": ISODate("2014-01-02T16:55:42.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c59a0e471dee7c0a00000f",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c59aed471dee7c0a000013"),
+  "created": ISODate("2014-01-02T16:59:25.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c59aed471dee7c0a000012",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c75723471dee800b000002"),
+  "created": ISODate("2014-01-04T00:34:42.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c75723471dee800b000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c7573a471dee900b000002"),
+  "created": ISODate("2014-01-04T00:35:06.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c7573a471dee900b000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c75762471dee4c0b000002"),
+  "created": ISODate("2014-01-05T05:20:53.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c75762471dee4c0b000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c759f3471dee800b000005"),
+  "created": ISODate("2014-01-04T00:46:43.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c759f3471dee800b000004",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c75a79471dee4c0b000005"),
+  "created": ISODate("2014-01-04T00:48:57.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c75a79471dee4c0b000004",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c8ec93471dee9c09000003"),
+  "created": ISODate("2014-01-05T05:24:35.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c8ec93471dee9c09000002",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c8ed57471dee9c09000006"),
+  "created": ISODate("2014-01-05T05:27:51.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c8ed57471dee9c09000005",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c8ed61471dee9c09000009"),
+  "created": ISODate("2014-01-05T05:28:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c8ed61471dee9c09000008",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52c8ee49471dee9c0900000c"),
+  "created": ISODate("2014-01-05T05:31:59.0Z"),
+  "view": NumberInt(0),
+  "postId": "52c8ee49471dee9c0900000b",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd097c471dee3810000002"),
+  "created": ISODate("2014-01-08T08:17:40.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd097c471dee3810000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd09c9471dee3810000006"),
+  "created": ISODate("2014-01-08T08:18:17.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd09c9471dee3810000005",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd0a4d471dee3810000009"),
+  "created": ISODate("2014-01-08T08:27:58.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd0a4d471dee3810000008",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd0aa5471dee381000000c"),
+  "created": ISODate("2014-01-08T08:21:57.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd0aa5471dee381000000b",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd8b30471dee4010000004"),
+  "created": ISODate("2014-01-08T17:30:23.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd8b2f471dee4010000003",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd8b64471dee1410000002"),
+  "created": ISODate("2014-01-08T17:31:16.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd8b64471dee1410000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd8ba4471dee1810000002"),
+  "created": ISODate("2014-01-08T17:32:20.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd8ba4471dee1810000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd8c0a471dee441000000a"),
+  "created": ISODate("2014-01-08T17:34:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd8c09471dee4410000009",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd8c81471dee4010000007"),
+  "created": ISODate("2014-01-08T17:36:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd8c81471dee4010000006",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd8e7d471dee1810000005"),
+  "created": ISODate("2014-01-08T17:44:29.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd8e7d471dee1810000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd912e471dee040b000002"),
+  "created": ISODate("2014-01-08T17:55:57.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd912e471dee040b000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("52cd9220471deebc0a000002"),
+  "created": ISODate("2014-01-08T17:59:59.0Z"),
+  "view": NumberInt(0),
+  "postId": "52cd921f471deebc0a000001",
+  "type": "User",
+  "typeId": "518f5f43471deeb40900001f"
+});
 db.getCollection("cache_post").insert({
   "_id": ObjectId("521a4280471deed809000007"),
   "created": ISODate("2013-11-09T06:38:46.0Z"),
@@ -4618,7 +5070,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("521c4b6b471dee200b000004"),
-  "created": ISODate("2014-02-09T13:41:24.0Z"),
+  "created": ISODate("2014-03-02T06:07:34.0Z"),
   "view": NumberInt(0),
   "postId": "5217929f471dee3c08000001",
   "type": "Branch",
@@ -4658,7 +5110,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("52486249471dee740b000001"),
-  "created": ISODate("2014-02-11T08:21:16.0Z"),
+  "created": ISODate("2014-02-28T00:44:40.0Z"),
   "view": NumberInt(0),
   "postId": "52179310471deec003000001",
   "type": "Branch",
@@ -5089,406 +5541,6 @@ db.getCollection("cache_post").insert({
   "typeId": "518f5555471deea409000000"
 });
 db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b54da6471deed80c000002"),
-  "created": ISODate("2013-12-21T08:13:26.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b54da6471deed80c000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b54e92471deed80c000005"),
-  "created": ISODate("2013-12-21T08:17:22.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b54e92471deed80c000004",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b55c8c471deec80c000002"),
-  "created": ISODate("2013-12-21T09:17:00.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b55c8c471deec80c000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b55dbb471deecc0c000002"),
-  "created": ISODate("2013-12-21T09:22:02.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b55dbb471deecc0c000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b561e1471deecc0c000005"),
-  "created": ISODate("2013-12-21T09:39:45.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b561e1471deecc0c000004",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b561f8471deecc0c000008"),
-  "created": ISODate("2013-12-21T09:56:32.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b561f8471deecc0c000007",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b67aab471dee340b000002"),
-  "created": ISODate("2013-12-22T05:37:47.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b67aab471dee340b000001",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b67b59471dee2c0b000002"),
-  "created": ISODate("2013-12-22T05:40:41.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b67b59471dee2c0b000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b67b63471dee2c0b000005"),
-  "created": ISODate("2013-12-22T05:40:51.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b67b63471dee2c0b000004",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b67b93471dee2c0b000008"),
-  "created": ISODate("2013-12-22T05:41:39.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b67b93471dee2c0b000007",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b67be9471dee2c0b00000b"),
-  "created": ISODate("2013-12-22T05:43:05.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b67be9471dee2c0b00000a",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b67c40471dee2c0b00000e"),
-  "created": ISODate("2013-12-22T05:44:32.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b67c40471dee2c0b00000d",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b69e99471dee2c0b000012"),
-  "created": ISODate("2013-12-22T08:11:05.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b69e99471dee2c0b000011",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52b7d20f471dee280b000002"),
-  "created": ISODate("2013-12-23T06:02:55.0Z"),
-  "view": NumberInt(0),
-  "postId": "52b7d20f471dee280b000001",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52bac834471deee00a000006"),
-  "created": ISODate("2013-12-25T11:57:39.0Z"),
-  "view": NumberInt(0),
-  "postId": "52bac833471deee00a000005",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c4ec91471deea40a000002"),
-  "created": ISODate("2014-01-02T04:35:29.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c4ec91471deea40a000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c4edb8471deea40a000007"),
-  "created": ISODate("2014-01-02T04:40:24.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c4edb8471deea40a000006",
-  "type": "User",
-  "typeId": "52c26cdf471dee640a000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c4edcb471deea40a00000c"),
-  "created": ISODate("2014-01-02T04:40:43.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c4edcb471deea40a00000b",
-  "type": "User",
-  "typeId": "52c26cdf471dee640a000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c54328471dee880a000002"),
-  "created": ISODate("2014-01-02T10:44:56.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c54328471dee880a000001",
-  "type": "User",
-  "typeId": "52c26cdf471dee640a000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c54472471dee7c0a000004"),
-  "created": ISODate("2014-01-02T10:50:26.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c54472471dee7c0a000003",
-  "type": "User",
-  "typeId": "52c26cdf471dee640a000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c544b8471dee7c0a000009"),
-  "created": ISODate("2014-01-02T10:51:36.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c544b8471dee7c0a000008",
-  "type": "User",
-  "typeId": "52c26cdf471dee640a000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c592a3471deec809000002"),
-  "created": ISODate("2014-01-02T16:24:03.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c592a3471deec809000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c592d3471deec809000005"),
-  "created": ISODate("2014-01-02T16:24:51.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c592d3471deec809000004",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c592ff471deec809000008"),
-  "created": ISODate("2014-01-02T16:25:35.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c592ff471deec809000007",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c5965b471deec80900000b"),
-  "created": ISODate("2014-01-02T16:39:55.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c5965b471deec80900000a",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c5967c471deec80900000e"),
-  "created": ISODate("2014-01-02T16:40:28.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c5967c471deec80900000d",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c59893471dee7c0a00000d"),
-  "created": ISODate("2014-01-02T16:49:23.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c59893471dee7c0a00000c",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c59a0e471dee7c0a000010"),
-  "created": ISODate("2014-01-02T16:55:42.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c59a0e471dee7c0a00000f",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c59aed471dee7c0a000013"),
-  "created": ISODate("2014-01-02T16:59:25.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c59aed471dee7c0a000012",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c75723471dee800b000002"),
-  "created": ISODate("2014-01-04T00:34:42.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c75723471dee800b000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c7573a471dee900b000002"),
-  "created": ISODate("2014-01-04T00:35:06.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c7573a471dee900b000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c75762471dee4c0b000002"),
-  "created": ISODate("2014-01-05T05:20:53.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c75762471dee4c0b000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c759f3471dee800b000005"),
-  "created": ISODate("2014-01-04T00:46:43.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c759f3471dee800b000004",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c75a79471dee4c0b000005"),
-  "created": ISODate("2014-01-04T00:48:57.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c75a79471dee4c0b000004",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c8ec93471dee9c09000003"),
-  "created": ISODate("2014-01-05T05:24:35.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c8ec93471dee9c09000002",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c8ed57471dee9c09000006"),
-  "created": ISODate("2014-01-05T05:27:51.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c8ed57471dee9c09000005",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c8ed61471dee9c09000009"),
-  "created": ISODate("2014-01-05T05:28:01.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c8ed61471dee9c09000008",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52c8ee49471dee9c0900000c"),
-  "created": ISODate("2014-01-05T05:31:59.0Z"),
-  "view": NumberInt(0),
-  "postId": "52c8ee49471dee9c0900000b",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd097c471dee3810000002"),
-  "created": ISODate("2014-01-08T08:17:40.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd097c471dee3810000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd09c9471dee3810000006"),
-  "created": ISODate("2014-01-08T08:18:17.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd09c9471dee3810000005",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd0a4d471dee3810000009"),
-  "created": ISODate("2014-01-08T08:27:58.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd0a4d471dee3810000008",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd0aa5471dee381000000c"),
-  "created": ISODate("2014-01-08T08:21:57.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd0aa5471dee381000000b",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd8b30471dee4010000004"),
-  "created": ISODate("2014-01-08T17:30:23.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd8b2f471dee4010000003",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd8b64471dee1410000002"),
-  "created": ISODate("2014-01-08T17:31:16.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd8b64471dee1410000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd8ba4471dee1810000002"),
-  "created": ISODate("2014-01-08T17:32:20.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd8ba4471dee1810000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd8c0a471dee441000000a"),
-  "created": ISODate("2014-01-08T17:34:01.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd8c09471dee4410000009",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd8c81471dee4010000007"),
-  "created": ISODate("2014-01-08T17:36:01.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd8c81471dee4010000006",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd8e7d471dee1810000005"),
-  "created": ISODate("2014-01-08T17:44:29.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd8e7d471dee1810000004",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd912e471dee040b000002"),
-  "created": ISODate("2014-01-08T17:55:57.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd912e471dee040b000001",
-  "type": "User",
-  "typeId": "518f5555471deea409000000"
-});
-db.getCollection("cache_post").insert({
-  "_id": ObjectId("52cd9220471deebc0a000002"),
-  "created": ISODate("2014-01-08T17:59:59.0Z"),
-  "view": NumberInt(0),
-  "postId": "52cd921f471deebc0a000001",
-  "type": "User",
-  "typeId": "518f5f43471deeb40900001f"
-});
-db.getCollection("cache_post").insert({
   "_id": ObjectId("52d6c31b471deea80a000002"),
   "created": ISODate("2014-01-15T17:19:23.0Z"),
   "view": NumberInt(0),
@@ -5498,7 +5550,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("52f50526471deeb00c000002"),
-  "created": ISODate("2014-02-07T16:09:10.0Z"),
+  "created": ISODate("2014-03-05T16:12:39.0Z"),
   "view": NumberInt(0),
   "postId": "52f50526471deeb00c000001",
   "type": "User",
@@ -5522,7 +5574,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("52f912a9471deea80a00000a"),
-  "created": ISODate("2014-02-10T17:55:53.0Z"),
+  "created": ISODate("2014-03-05T16:22:25.0Z"),
   "view": NumberInt(0),
   "postId": "52f912a9471deea80a000009",
   "type": "User",
@@ -5583,6 +5635,446 @@ db.getCollection("cache_post").insert({
   "postId": "52f91c1b471dee9c0a000001",
   "type": "User",
   "typeId": "518f5f43471deeb40900001f"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530ef8cda7c0e9900b000002"),
+  "created": ISODate("2014-02-27T08:35:25.0Z"),
+  "view": NumberInt(0),
+  "postId": "530ef8cda7c0e9900b000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530ef8dda7c0e9900b000005"),
+  "created": ISODate("2014-02-27T08:35:40.0Z"),
+  "view": NumberInt(0),
+  "postId": "530ef8dca7c0e9900b000004",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530ef95da7c0e9900b000008"),
+  "created": ISODate("2014-02-27T08:37:48.0Z"),
+  "view": NumberInt(0),
+  "postId": "530ef95ca7c0e9900b000007",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530ef996a7c0e9bc0b000002"),
+  "created": ISODate("2014-02-27T22:53:37.0Z"),
+  "view": NumberInt(0),
+  "postId": "530ef996a7c0e9bc0b000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530ef9f5a7c0e9e00a000002"),
+  "created": ISODate("2014-02-27T08:40:21.0Z"),
+  "view": NumberInt(0),
+  "postId": "530ef9f5a7c0e9e00a000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530efa11a7c0e9e00a000005"),
+  "created": ISODate("2014-02-27T08:40:48.0Z"),
+  "view": NumberInt(0),
+  "postId": "530efa11a7c0e9e00a000004",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530efa86a7c0e9080b000002"),
+  "created": ISODate("2014-02-27T08:42:46.0Z"),
+  "view": NumberInt(0),
+  "postId": "530efa86a7c0e9080b000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530f01d8a7c0e9900b00000b"),
+  "created": ISODate("2014-02-27T09:13:59.0Z"),
+  "view": NumberInt(0),
+  "postId": "530f01d7a7c0e9900b00000a",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530f0216a7c0e9e00a000008"),
+  "created": ISODate("2014-02-27T09:15:02.0Z"),
+  "view": NumberInt(0),
+  "postId": "530f0216a7c0e9e00a000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("530fc2e9a7c0e9a80c000002"),
+  "created": ISODate("2014-02-27T22:57:54.0Z"),
+  "view": NumberInt(0),
+  "postId": "530fc2e9a7c0e9a80c000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("531049f6a7c0e9600c000002"),
+  "created": ISODate("2014-02-28T08:33:58.0Z"),
+  "view": NumberInt(0),
+  "postId": "531049f6a7c0e9600c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53104cc0a7c0e9600c000006"),
+  "created": ISODate("2014-02-28T08:45:52.0Z"),
+  "view": NumberInt(0),
+  "postId": "53104cc0a7c0e9600c000005",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310518da7c0e9940c000002"),
+  "created": ISODate("2014-02-28T09:06:20.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310518ca7c0e9940c000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53105279a7c0e9380c000002"),
+  "created": ISODate("2014-02-28T09:10:17.0Z"),
+  "view": NumberInt(0),
+  "postId": "53105279a7c0e9380c000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("531052b7a7c0e9440c000002"),
+  "created": ISODate("2014-02-28T09:11:19.0Z"),
+  "view": NumberInt(0),
+  "postId": "531052b7a7c0e9440c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310296ca7c0e9440c000002"),
+  "created": ISODate("2014-02-28T06:15:06.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310296aa7c0e9440c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("531029eda7c0e9480c000002"),
+  "created": ISODate("2014-02-28T06:17:36.0Z"),
+  "view": NumberInt(0),
+  "postId": "531029eda7c0e9480c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310d824a7c0e9180c000002"),
+  "created": ISODate("2014-02-28T18:40:35.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310d823a7c0e9180c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310d915a7c0e9080c000002"),
+  "created": ISODate("2014-02-28T18:44:37.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310d915a7c0e9080c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310d96ca7c0e92c0a000002"),
+  "created": ISODate("2014-02-28T18:46:04.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310d96ca7c0e92c0a000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310e0cca7c0e98009000002"),
+  "created": ISODate("2014-02-28T19:17:31.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310e0cba7c0e98009000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310e598a7c0e91c0c000002"),
+  "created": ISODate("2014-02-28T19:38:00.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310e598a7c0e91c0c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310e6a5a7c0e9180c000005"),
+  "created": ISODate("2014-02-28T19:42:29.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310e6a5a7c0e9180c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310e6afa7c0e9180c000008"),
+  "created": ISODate("2014-02-28T19:42:39.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310e6afa7c0e9180c000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310ec35a7c0e9180c00000b"),
+  "created": ISODate("2014-02-28T20:06:13.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310ec35a7c0e9180c00000a",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310ed68a7c0e98009000005"),
+  "created": ISODate("2014-02-28T20:11:20.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310ed68a7c0e98009000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310edf5a7c0e9080c000005"),
+  "created": ISODate("2014-02-28T20:13:40.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310edf4a7c0e9080c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310ee59a7c0e98009000008"),
+  "created": ISODate("2014-02-28T20:15:20.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310ee59a7c0e98009000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310ee9fa7c0e9180c00000e"),
+  "created": ISODate("2014-02-28T20:16:31.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310ee9fa7c0e9180c00000d",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310ef21a7c0e9800900000b"),
+  "created": ISODate("2014-02-28T20:18:41.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310ef21a7c0e9800900000a",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f0aca7c0e9040c000002"),
+  "created": ISODate("2014-02-28T20:25:16.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f0aca7c0e9040c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f13fa7c0e9140c000002"),
+  "created": ISODate("2014-02-28T20:27:43.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f13fa7c0e9140c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f221a7c0e9080c000008"),
+  "created": ISODate("2014-02-28T20:31:29.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f221a7c0e9080c000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f230a7c0e92c0a000005"),
+  "created": ISODate("2014-02-28T20:31:43.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f22fa7c0e92c0a000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f23fa7c0e92c0a000008"),
+  "created": ISODate("2014-02-28T20:31:58.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f23ea7c0e92c0a000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f3d9a7c0e9140c000005"),
+  "created": ISODate("2014-02-28T20:38:49.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f3d9a7c0e9140c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5310f42fa7c0e9140c000008"),
+  "created": ISODate("2014-02-28T20:40:14.0Z"),
+  "view": NumberInt(0),
+  "postId": "5310f42fa7c0e9140c000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53124963a7c0e9800900000e"),
+  "created": ISODate("2014-03-01T20:56:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "53124963a7c0e9800900000d",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("531249aaa7c0e9040c000005"),
+  "created": ISODate("2014-03-01T20:57:14.0Z"),
+  "view": NumberInt(0),
+  "postId": "531249aaa7c0e9040c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53124a8aa7c0e9040c000008"),
+  "created": ISODate("2014-03-01T21:00:57.0Z"),
+  "view": NumberInt(0),
+  "postId": "53124a89a7c0e9040c000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53124a8fa7c0e9040c00000b"),
+  "created": ISODate("2014-03-01T21:01:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "53124a8fa7c0e9040c00000a",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53124b6fa7c0e91c0c000005"),
+  "created": ISODate("2014-03-01T21:04:47.0Z"),
+  "view": NumberInt(0),
+  "postId": "53124b6fa7c0e91c0c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53124b7fa7c0e9080c00000b"),
+  "created": ISODate("2014-03-01T21:05:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "53124b7fa7c0e9080c00000a",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5312523ca7c0e97809000002"),
+  "created": ISODate("2014-03-01T21:33:48.0Z"),
+  "view": NumberInt(0),
+  "postId": "5312523ca7c0e97809000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53128410a7c0e97809000002"),
+  "created": ISODate("2014-03-02T01:06:24.0Z"),
+  "view": NumberInt(0),
+  "postId": "53128410a7c0e97809000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5312c9b8a7c0e97c09000002"),
+  "created": ISODate("2014-03-02T06:03:59.0Z"),
+  "view": NumberInt(0),
+  "postId": "5312c9b7a7c0e97c09000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5313946da7c0e97c09000006"),
+  "created": ISODate("2014-03-02T20:28:29.0Z"),
+  "view": NumberInt(0),
+  "postId": "5313946da7c0e97c09000005",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53171a6da7c0e9980c000002"),
+  "created": ISODate("2014-03-05T12:37:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "53171a6da7c0e9980c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53171b1ea7c0e9980c000005"),
+  "created": ISODate("2014-03-05T12:39:58.0Z"),
+  "view": NumberInt(0),
+  "postId": "53171b1ea7c0e9980c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53171b63a7c0e99c0c000002"),
+  "created": ISODate("2014-03-05T16:18:41.0Z"),
+  "view": NumberInt(0),
+  "postId": "53171b63a7c0e99c0c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53171b9fa7c0e96c0c000002"),
+  "created": ISODate("2014-03-05T16:09:25.0Z"),
+  "view": NumberInt(0),
+  "postId": "53171b9fa7c0e96c0c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53171dd1a7c0e9740c000002"),
+  "created": ISODate("2014-03-05T12:51:29.0Z"),
+  "view": NumberInt(0),
+  "postId": "53171dd1a7c0e9740c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5317211ea7c0e9780c000002"),
+  "created": ISODate("2014-03-05T13:05:34.0Z"),
+  "view": NumberInt(0),
+  "postId": "5317211ea7c0e9780c000001",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5317216ba7c0e9780c000005"),
+  "created": ISODate("2014-03-05T13:06:51.0Z"),
+  "view": NumberInt(0),
+  "postId": "5317216ba7c0e9780c000004",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("531721f7a7c0e9780c000008"),
+  "created": ISODate("2014-03-05T13:09:11.0Z"),
+  "view": NumberInt(0),
+  "postId": "531721f7a7c0e9780c000007",
+  "type": "User",
+  "typeId": "518f5555471deea409000000"
 });
 
 /** city records **/
@@ -6081,60 +6573,6 @@ db.getCollection("design_action").insert({
 
 /** design_layout records **/
 db.getCollection("design_layout").insert({
-  "_id": ObjectId("515f03ff471deeac1f000001"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Admin Group",
-  "path": "admin\/group"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("515f0416471deeac1f000002"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "User Group",
-  "path": "user\/group"
-});
-db.getCollection("design_layout").insert({
   "_id": ObjectId("515f042b471deeac1f000003"),
   "actions": [
     {
@@ -6165,222 +6603,6 @@ db.getCollection("design_layout").insert({
   ],
   "name": "User Manage",
   "path": "user\/user"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("515f03ef471deeac1f000000"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Admin Manage",
-  "path": "admin\/admin"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("515f04d5471deeac1f000004"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Action Manage",
-  "path": "design\/action"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("515f0568471deeac1f000005"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Layout Manage",
-  "path": "design\/layout"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("516a67d6471dee480b000017"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Type Of Group",
-  "path": "group\/type"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("516a67a8471dee480b000016"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Group Manage",
-  "path": "group\/group"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("516a680e471dee480b000018"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Comment Of Group",
-  "path": "group\/comment"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("516a6823471dee480b000019"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Post Of Group",
-  "path": "group\/post"
-});
-db.getCollection("design_layout").insert({
-  "_id": ObjectId("516a683d471dee480b00001a"),
-  "actions": [
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6230471dee3c0b000000"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a6295471dee480b000004"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a624b471dee3c0b000002"),
-      "$db": "yesocl"
-    },
-    {
-      "$ref": "design_action",
-      "$id": ObjectId("516a62b2471dee480b000006"),
-      "$db": "yesocl"
-    }
-  ],
-  "name": "Data Type Manage",
-  "path": "data\/type"
 });
 db.getCollection("design_layout").insert({
   "_id": ObjectId("516a684f471dee480b00001b"),
@@ -6894,6 +7116,276 @@ db.getCollection("design_layout").insert({
   ],
   "name": "Social Network",
   "path": "social\/network"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("515f03ff471deeac1f000001"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Admin Group",
+  "path": "admin\/group"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("515f0416471deeac1f000002"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "User Group",
+  "path": "user\/group"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("515f03ef471deeac1f000000"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Admin Manage",
+  "path": "admin\/admin"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("515f04d5471deeac1f000004"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Action Manage",
+  "path": "design\/action"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("515f0568471deeac1f000005"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Layout Manage",
+  "path": "design\/layout"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516a67d6471dee480b000017"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Type Of Group",
+  "path": "group\/type"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516a67a8471dee480b000016"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Group Manage",
+  "path": "group\/group"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516a680e471dee480b000018"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Comment Of Group",
+  "path": "group\/comment"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516a6823471dee480b000019"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Post Of Group",
+  "path": "group\/post"
+});
+db.getCollection("design_layout").insert({
+  "_id": ObjectId("516a683d471dee480b00001a"),
+  "actions": [
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6230471dee3c0b000000"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a6295471dee480b000004"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a624b471dee3c0b000002"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "design_action",
+      "$id": ObjectId("516a62b2471dee480b000006"),
+      "$db": "yesocl"
+    }
+  ],
+  "name": "Data Type Manage",
+  "path": "data\/type"
 });
 db.getCollection("design_layout").insert({
   "_id": ObjectId("52c27386471deed40a000000"),
@@ -7517,6 +8009,223 @@ db.getCollection("user").insert({
   "status": true
 });
 db.getCollection("user").insert({
+  "_id": ObjectId("52d40c10471deee809000006"),
+  "created": ISODate("2014-01-13T15:53:52.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("52d40c10471deee809000008"),
+      "email": "user10@test.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": false,
+  "meta": {
+    "_id": ObjectId("52d40c10471deee809000007"),
+    "firstname": "bommer",
+    "lastname": "10",
+    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "current": "unknow"
+  },
+  "password": "064275b6fea34e11d2344d5a1dbf0469436e72d3",
+  "refreshIds": [
+    
+  ],
+  "salt": "3bf61c766",
+  "slug": "bommer-10",
+  "status": true,
+  "token": "9e0bd825551a31b252625bc3f62b4aaf",
+  "tokenTime": ISODate("2014-01-20T15:53:53.0Z")
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("52c26cdf471dee640a000000"),
+  "avatar": "data\/catalog\/user\/52c26cdf471dee640a000000\/avatar.jpg",
+  "created": ISODate("2013-12-31T07:06:07.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("52c26cdf471dee640a000003"),
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    "518f5555471deea409000000"
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("52c4ed96471dee7c0a000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-01-02T04:39:50.0Z")
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": true,
+  "meta": {
+    "_id": ObjectId("52c26cdf471dee640a000001"),
+    "background": {
+      "_id": ObjectId("52c26ce0471dee640a000004"),
+      "educations": [
+        {
+          "_id": ObjectId("52c26ce0471dee640a000005"),
+          "school": "Trường THPT Ngô Gia Tự- eakar",
+          "started": "",
+          "ended": "2008",
+          "degree": ""
+        },
+        {
+          "_id": ObjectId("52c26ce0471dee640a000006"),
+          "school": "Trường Đại học Tài chính - Marketing",
+          "started": "",
+          "ended": "",
+          "degree": ""
+        },
+        {
+          "_id": ObjectId("52c26ce0471dee640a000007"),
+          "school": "Saigonact",
+          "started": "",
+          "ended": "",
+          "degree": ""
+        }
+      ],
+      "experiences": [
+        {
+          "_id": ObjectId("52c26ce0471dee640a000008"),
+          "company": "The-c.vn",
+          "location": {
+            "_id": ObjectId("52c26ce0471dee640a000009"),
+            "location": "Ho Chi Minh City, Vietnam"
+          },
+          "started": ISODate("2013-10-01T06:06:08.0Z"),
+          "selfEmployed": false
+        }
+      ],
+      "summary": " dsf dsafa dfsd fsadf sdf saf safsda fdsaf sdaf sad"
+    },
+    "birthday": ISODate("1990-04-26T22:00:00.0Z"),
+    "current": "working at The-c.vn",
+    "current_id": "52c26ce0471dee640a000008",
+    "firstname": "Thanh",
+    "lastname": "Hương",
+    "location": {
+      "_id": ObjectId("52c26cdf471dee640a000002"),
+      "location": "Ho Chi Minh City, Vietnam"
+    },
+    "sex": NumberInt(2)
+  },
+  "notifications": [
+    
+  ],
+  "refreshIds": [
+    
+  ],
+  "salt": "ca7181196",
+  "slug": "thanh-huong",
+  "status": true,
+  "unRead": NumberInt(0)
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("525bd847471deea808000000"),
+  "avatar": "data\/catalog\/user\/525bd847471deea808000000\/avatar.png",
+  "created": ISODate("2013-10-14T11:40:55.0Z"),
+  "emails": [
+    {
+      "_id": ObjectId("5317170ea7c0e9ac0c000003"),
+      "email": "user3@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("526bec22471dee100b000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("52af3e7b471dee5408000001"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2013-12-16T17:55:07.0Z")
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("5317170ea7c0e9ac0c000000"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "headingLine": "",
+    "location": {
+      "_id": ObjectId("5317170ea7c0e9ac0c000001"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
+    },
+    "postalCode": "84",
+    "industry": "IT",
+    "industry_id": "",
+    "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
+    "background": {
+      "_id": ObjectId("5317170ea7c0e9ac0c000002"),
+      "interest": "",
+      "maritalStatus": false,
+      "adviceForContact": "",
+      "summary": ""
+    }
+  },
+  "notifications": [
+    {
+      "_id": ObjectId("52b7d210471dee280b000004"),
+      "action": "tag",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "52b7d20f471dee280b000001",
+      "slug": "hello-world-52b7d20f471dee280b000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2013-12-23T06:02:56.0Z")
+    }
+  ],
+  "password": "38cd494f4e20391887704da2c512fb7e9a8efe9c",
+  "refreshIds": [
+    
+  ],
+  "salt": "62df54b25",
+  "slug": "user-temp",
+  "status": true,
+  "username": "Bommer Luu"
+});
+db.getCollection("user").insert({
   "_id": ObjectId("5260e5b4471dee6c08000000"),
   "avatar": "data\/catalog\/user\/5260e5b4471dee6c08000000\/avatar.jpg",
   "created": ISODate("2013-10-18T07:39:31.0Z"),
@@ -7606,208 +8315,12 @@ db.getCollection("user").insert({
   "unRead": NumberInt(1)
 });
 db.getCollection("user").insert({
-  "_id": ObjectId("525bd847471deea808000000"),
-  "avatar": "data\/catalog\/user\/525bd847471deea808000000\/avatar.png",
-  "created": ISODate("2013-10-14T11:40:55.0Z"),
-  "emails": [
-    {
-      "_id": ObjectId("525bd847471deea808000002"),
-      "email": "user3@test.com",
-      "primary": true
-    }
-  ],
-  "friendRequests": [
-    
-  ],
-  "friends": [
-    {
-      "_id": ObjectId("526bec22471dee100b000000"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52af3e7b471dee5408000001"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "created": ISODate("2013-12-16T17:55:07.0Z")
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "meta": {
-    "_id": ObjectId("525bd847471deea808000001"),
-    "firstname": "Bommer",
-    "lastname": "Luu",
-    "birthday": ISODate("1990-08-12T22:00:00.0Z"),
-    "sex": NumberInt(1)
-  },
-  "notifications": [
-    {
-      "_id": ObjectId("52b7d210471dee280b000004"),
-      "action": "tag",
-      "actor": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "type": "user",
-      "object": "post",
-      "objectId": "52b7d20f471dee280b000001",
-      "slug": "hello-world-52b7d20f471dee280b000000",
-      "read": false,
-      "status": true,
-      "created": ISODate("2013-12-23T06:02:56.0Z")
-    }
-  ],
-  "password": "38cd494f4e20391887704da2c512fb7e9a8efe9c",
-  "refreshIds": [
-    
-  ],
-  "salt": "62df54b25",
-  "slug": "user-temp",
-  "status": true
-});
-db.getCollection("user").insert({
-  "_id": ObjectId("52c26cdf471dee640a000000"),
-  "avatar": "data\/catalog\/user\/52c26cdf471dee640a000000\/avatar.jpg",
-  "created": ISODate("2013-12-31T07:06:07.0Z"),
-  "emails": [
-    {
-      "_id": ObjectId("52c26cdf471dee640a000003"),
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "primary": true
-    }
-  ],
-  "friends": [
-    {
-      "_id": ObjectId("52c4ed96471dee7c0a000001"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "created": ISODate("2014-01-02T04:39:50.0Z")
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "isSocial": true,
-  "meta": {
-    "_id": ObjectId("52c26cdf471dee640a000001"),
-    "background": {
-      "_id": ObjectId("52c26ce0471dee640a000004"),
-      "educations": [
-        {
-          "_id": ObjectId("52c26ce0471dee640a000005"),
-          "school": "Trường THPT Ngô Gia Tự- eakar",
-          "started": "",
-          "ended": "2008",
-          "degree": ""
-        },
-        {
-          "_id": ObjectId("52c26ce0471dee640a000006"),
-          "school": "Trường Đại học Tài chính - Marketing",
-          "started": "",
-          "ended": "",
-          "degree": ""
-        },
-        {
-          "_id": ObjectId("52c26ce0471dee640a000007"),
-          "school": "Saigonact",
-          "started": "",
-          "ended": "",
-          "degree": ""
-        }
-      ],
-      "experiences": [
-        {
-          "_id": ObjectId("52c26ce0471dee640a000008"),
-          "company": "The-c.vn",
-          "location": {
-            "_id": ObjectId("52c26ce0471dee640a000009"),
-            "location": "Ho Chi Minh City, Vietnam"
-          },
-          "started": ISODate("2013-10-01T06:06:08.0Z"),
-          "selfEmployed": false
-        }
-      ],
-      "summary": " dsf dsafa dfsd fsadf sdf saf safsda fdsaf sdaf sad"
-    },
-    "birthday": ISODate("1990-04-26T22:00:00.0Z"),
-    "current": "working at The-c.vn",
-    "current_id": "52c26ce0471dee640a000008",
-    "firstname": "Thanh",
-    "lastname": "Hương",
-    "location": {
-      "_id": ObjectId("52c26cdf471dee640a000002"),
-      "location": "Ho Chi Minh City, Vietnam"
-    },
-    "sex": NumberInt(2)
-  },
-  "notifications": [
-    
-  ],
-  "refreshIds": [
-    
-  ],
-  "salt": "ca7181196",
-  "slug": "thanh-huong",
-  "status": true,
-  "unRead": NumberInt(0)
-});
-db.getCollection("user").insert({
-  "_id": ObjectId("52d40c10471deee809000006"),
-  "created": ISODate("2014-01-13T15:53:52.0Z"),
-  "emails": [
-    {
-      "_id": ObjectId("52d40c10471deee809000008"),
-      "email": "user10@test.com",
-      "primary": true
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "isSocial": false,
-  "meta": {
-    "_id": ObjectId("52d40c10471deee809000007"),
-    "firstname": "bommer",
-    "lastname": "10",
-    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
-    "sex": NumberInt(1),
-    "current": "unknow"
-  },
-  "password": "064275b6fea34e11d2344d5a1dbf0469436e72d3",
-  "refreshIds": [
-    
-  ],
-  "salt": "3bf61c766",
-  "slug": "bommer-10",
-  "status": true,
-  "token": "9e0bd825551a31b252625bc3f62b4aaf",
-  "tokenTime": ISODate("2014-01-20T15:53:53.0Z")
-});
-db.getCollection("user").insert({
   "_id": ObjectId("518f5555471deea409000000"),
-  "avatar": "data\/catalog\/user\/518f5555471deea409000000\/avatar.jpg",
+  "avatar": "data\/catalog\/user\/518f5555471deea409000000\/avatar.JPG",
   "created": ISODate("2013-05-12T08:39:48.0Z"),
   "emails": [
     {
-      "_id": ObjectId("52bb0c3c471deed00a00000f"),
+      "_id": ObjectId("5317145aa7c0e9a00c000011"),
       "email": "quangthi_90@yahoo.com.vn",
       "primary": true
     }
@@ -7868,14 +8381,14 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("52bb0c3c471deed00a000000"),
+    "_id": ObjectId("53171459a7c0e9a00c000000"),
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
     "background": {
-      "_id": ObjectId("52bb0c3c471deed00a000007"),
+      "_id": ObjectId("53171459a7c0e9a00c000007"),
       "adviceForContact": "",
       "educations": [
         {
-          "_id": ObjectId("52bb0c3c471deed00a00000c"),
+          "_id": ObjectId("53171459a7c0e9a00c00000e"),
           "school": "Vietnam National University - Ha Noi",
           "school_id": "",
           "started": "2008",
@@ -7889,7 +8402,7 @@ db.getCollection("user").insert({
           "description": ""
         },
         {
-          "_id": ObjectId("52bb0c3c471deed00a00000d"),
+          "_id": ObjectId("53171459a7c0e9a00c00000f"),
           "school": "University of Economics Ho Chi Minh City",
           "school_id": "",
           "started": "2013",
@@ -7903,7 +8416,7 @@ db.getCollection("user").insert({
           "description": ""
         },
         {
-          "_id": ObjectId("52bb0c3c471deed00a00000e"),
+          "_id": ObjectId("53171459a7c0e9a00c000010"),
           "school": "Vietnam National University - Ho Chi Minh City",
           "school_id": "",
           "started": "2013",
@@ -7919,55 +8432,56 @@ db.getCollection("user").insert({
       ],
       "experiences": [
         {
-          "_id": ObjectId("52bb0c3c471deed00a000008"),
+          "_id": ObjectId("53171459a7c0e9a00c000008"),
           "company": "YesGroup",
-          "title": "3 năm kinh nghiệm về PHP",
+          "description": "",
           "location": {
-            "_id": ObjectId("52bb0c3c471deed00a000009"),
-            "location": "HCM, Việt Nam",
-            "cityId": ""
+            "_id": ObjectId("531899f2a7c0e9ec09000000"),
+            "location": "HCM, Việt Nam"
           },
-          "started": ISODate("2012-01-01T16:47:55.0Z"),
           "selfEmployed": false,
-          "description": ""
+          "started": ISODate("2012-01-01T15:53:22.0Z"),
+          "title": "3 năm kinh nghiệm về PHP"
         },
         {
-          "_id": ObjectId("52bb0c3c471deed00a00000a"),
+          "_id": ObjectId("53171459a7c0e9a00c00000a"),
           "company": "ViDaIT",
           "title": "1 năm kinh nghiệm về Symfony",
           "location": {
-            "_id": ObjectId("52bb0c3c471deed00a00000b"),
+            "_id": ObjectId("53171459a7c0e9a00c00000b"),
             "location": "HCM, Việt Nam",
             "cityId": ""
           },
-          "started": ISODate("2013-01-01T16:47:55.0Z"),
+          "started": ISODate("2013-01-01T12:11:05.0Z"),
           "selfEmployed": false,
           "description": ""
         },
         {
-          "_id": ObjectId("52c170f3471deea80a000000"),
+          "_id": ObjectId("53171459a7c0e9a00c00000c"),
           "company": "BmDesign",
           "title": "fdsa fsdaf sdaf sadffdsa fsdaf sdaf sadf",
           "location": {
-            "_id": ObjectId("52c170f3471deea80a000001"),
-            "location": "HCM, Việt Nam"
+            "_id": ObjectId("53171459a7c0e9a00c00000d"),
+            "location": "HCM, Việt Nam",
+            "cityId": ""
           },
-          "started": ISODate("2013-01-01T13:11:15.0Z"),
-          "selfEmployed": false
+          "started": ISODate("2013-01-01T12:11:05.0Z"),
+          "selfEmployed": false,
+          "description": ""
         }
       ],
       "interest": "",
       "maritalStatus": false,
       "summary": "lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj slfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj slfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj slfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj lfkjasklfjdaskljfklsadjflksdaj"
     },
-    "birthday": ISODate("1990-08-12T22:00:00.0Z"),
+    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
     "current": "working at YesGroup",
-    "current_id": "52bb0c3c471deed00a000008",
+    "current_id": "53171459a7c0e9a00c000008",
     "firstname": "Bommer",
     "headingLine": "",
     "ims": [
       {
-        "_id": ObjectId("52bb0c3c471deed00a000002"),
+        "_id": ObjectId("53171459a7c0e9a00c000002"),
         "im": "user1",
         "type": "skype",
         "visible": "myfollow"
@@ -7977,25 +8491,25 @@ db.getCollection("user").insert({
     "industry_id": "514b0983913db4ac08000021",
     "lastname": "Luu",
     "location": {
-      "_id": ObjectId("52bb0c3c471deed00a000001"),
+      "_id": ObjectId("53171459a7c0e9a00c000001"),
       "location": "HCM, Việt Nam",
       "cityId": "5143bfca913db4a408000012"
     },
     "phones": [
       {
-        "_id": ObjectId("52bb0c3c471deed00a000003"),
+        "_id": ObjectId("53171459a7c0e9a00c000003"),
         "phone": "0903000333",
         "type": "mobile",
         "visible": "myfollow"
       },
       {
-        "_id": ObjectId("52bb0c3c471deed00a000004"),
+        "_id": ObjectId("53171459a7c0e9a00c000004"),
         "phone": "0328492842",
         "type": "mobile",
         "visible": "myfollow"
       },
       {
-        "_id": ObjectId("52bb0c3c471deed00a000005"),
+        "_id": ObjectId("53171459a7c0e9a00c000005"),
         "phone": "01265327779",
         "type": "telephone",
         "visible": "myfollow"
@@ -8005,14 +8519,29 @@ db.getCollection("user").insert({
     "sex": NumberInt(1),
     "websites": [
       {
-        "_id": ObjectId("52bb0c3c471deed00a000006"),
+        "_id": ObjectId("53171459a7c0e9a00c000006"),
         "url": "www.yesocl.com",
         "title": ""
       }
     ]
   },
   "notifications": [
-    
+    {
+      "_id": ObjectId("531049f6a7c0e9600c000003"),
+      "action": "post",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "wall",
+      "objectId": "531049f6a7c0e9600c000001",
+      "slug": "531049f6a7c0e9600c000000",
+      "read": true,
+      "status": true,
+      "created": ISODate("2014-02-28T08:33:58.0Z")
+    }
   ],
   "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
   "posts": null,
@@ -8031,7 +8560,7 @@ db.getCollection("user").insert({
   "created": ISODate("2013-05-12T09:22:11.0Z"),
   "emails": [
     {
-      "_id": ObjectId("520677de471dee880b000013"),
+      "_id": ObjectId("53105011a7c0e9700c000009"),
       "email": "user2@test.com",
       "primary": true
     }
@@ -8073,14 +8602,64 @@ db.getCollection("user").insert({
     "$db": "yesocl"
   },
   "meta": {
-    "_id": ObjectId("520677de471dee880b00000a"),
+    "_id": ObjectId("53105011a7c0e9700c000000"),
+    "firstname": "user2",
+    "lastname": "yesocl",
+    "birthday": ISODate("2013-08-10T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
+    "location": {
+      "_id": ObjectId("53105011a7c0e9700c000001"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
+    },
+    "postalCode": "84938",
+    "industry": "Chemicals",
+    "industry_id": "514b0970913db4ac08000020",
     "address": "129\/6\/5 Lê Văn Thọ F11 Gò Vấp",
+    "ims": [
+      {
+        "_id": ObjectId("53105011a7c0e9700c000002"),
+        "im": "user2",
+        "type": "skype",
+        "visible": "myfollow"
+      }
+    ],
+    "phones": [
+      {
+        "_id": ObjectId("53105011a7c0e9700c000003"),
+        "phone": "0904000444",
+        "type": "mobile",
+        "visible": "myfollow"
+      }
+    ],
+    "websites": [
+      {
+        "_id": ObjectId("53105011a7c0e9700c000004"),
+        "url": "www.yesocl.com",
+        "title": ""
+      }
+    ],
     "background": {
-      "_id": ObjectId("520677de471dee880b00000f"),
-      "adviceForContact": "Et vim quando vocent theophrastus, cetero ullamcorper ne his",
+      "_id": ObjectId("53105011a7c0e9700c000005"),
+      "experiences": [
+        {
+          "_id": ObjectId("53105011a7c0e9700c000006"),
+          "company": "YesGroup",
+          "title": "Developer Website",
+          "location": {
+            "_id": ObjectId("53105011a7c0e9700c000007"),
+            "location": "HCM, Việt Nam",
+            "cityId": ""
+          },
+          "started": ISODate("2012-10-01T09:00:01.0Z"),
+          "selfEmployed": false,
+          "description": ""
+        }
+      ],
       "educations": [
         {
-          "_id": ObjectId("520677de471dee880b000012"),
+          "_id": ObjectId("53105011a7c0e9700c000008"),
           "school": "University of Economics Ho Chi Minh City",
           "school_id": "",
           "started": "2009",
@@ -8094,79 +8673,109 @@ db.getCollection("user").insert({
           "description": "Elitr regione an his, ad eirmod propriae quo, vel ut unum putant ancillae. Pri omnesque definiebas ex, an omnium reprehendunt sea. An iusto ludus iriure eos, omnes postea id eum. Has pertinacia inciderint ex. Et qui postea vidisse pertinacia. Ne sea probo voluptatibus, an aperiri sadipscing consectetuer eam, ex detraxit adipiscing vix."
         }
       ],
-      "experiences": [
-        {
-          "_id": ObjectId("52bab245471deecc09000000"),
-          "company": "YesGroup",
-          "title": "Developer Website",
-          "location": {
-            "_id": ObjectId("52bab245471deecc09000001"),
-            "location": "HCM, Việt Nam"
-          },
-          "started": ISODate("2012-10-01T09:24:05.0Z"),
-          "selfEmployed": false
-        }
-      ],
-      "experiencies": [
-        {
-          "_id": ObjectId("520677de471dee880b000010"),
-          "company": "Yesocl",
-          "title": "My Company",
-          "location": {
-            "_id": ObjectId("520677de471dee880b000011"),
-            "location": "HCM, Việt Nam",
-            "cityId": "5143bfca913db4a408000012"
-          },
-          "started": ISODate("2013-01-01T18:26:54.0Z"),
-          "ended": ISODate("2013-01-01T18:26:54.0Z"),
-          "current": false,
-          "description": "Sed et utamur argumentum. Eum an habeo ubique efficiantur. Eu sea oporteat vituperatoribus, eos in graecis delicata persecuti. Mel an summo dicit eleifend. Copiosae quaestio mandamus vim et."
-        }
-      ],
       "interest": "Eu nam eius consul aliquando, choro integre iuvaret no nec, ut pericula scripserit per. Nam eu alii idque, suas patrioque vituperata ex est.",
-      "maritalStatus": true
-    },
-    "birthday": ISODate("2013-08-10T17:26:54.0Z"),
-    "current": "working at YesGroup",
-    "current_id": "52bab245471deecc09000000",
-    "firstname": "user2",
-    "headingLine": "Unum falli aperiri id pro. Ex impetus invenire eam.",
-    "ims": [
-      {
-        "_id": ObjectId("520677de471dee880b00000c"),
-        "im": "user2",
-        "type": "skype",
-        "visible": "myfollow"
-      }
-    ],
-    "industry": "Chemicals",
-    "industry_id": "514b0970913db4ac08000020",
-    "lastname": "yesocl",
-    "location": {
-      "_id": ObjectId("529ac5f8471dee6c0a000000"),
-      "location": "HCM, Việt Nam",
-      "cityId": "5143bfca913db4a408000012"
-    },
-    "phones": [
-      {
-        "_id": ObjectId("520677de471dee880b00000d"),
-        "phone": "0904000444",
-        "type": "mobile",
-        "visible": "myfollow"
-      }
-    ],
-    "postalCode": "84938",
-    "sex": NumberInt(1),
-    "websites": [
-      {
-        "_id": ObjectId("520677de471dee880b00000e"),
-        "url": "www.yesocl.com",
-        "title": ""
-      }
-    ]
+      "maritalStatus": true,
+      "adviceForContact": "Et vim quando vocent theophrastus, cetero ullamcorper ne his",
+      "summary": ""
+    }
   },
   "notifications": [
-    
+    {
+      "_id": ObjectId("53174cb7a7c0e9940c000002"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "53174cb7a7c0e9940c000001",
+      "slug": "52f912a9471deea80a000008",
+      "read": true,
+      "status": true,
+      "created": ISODate("2014-03-05T16:11:35.0Z")
+    },
+    {
+      "_id": ObjectId("53174f1ba7c0e9780c00000a"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "53174f1ba7c0e9780c000009",
+      "slug": "52f912a9471deea80a000008",
+      "read": true,
+      "status": true,
+      "created": ISODate("2014-03-05T16:21:47.0Z")
+    },
+    {
+      "_id": ObjectId("53174f41a7c0e9780c00000c"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "53174f41a7c0e9780c00000b",
+      "slug": "52f912a9471deea80a000008",
+      "read": true,
+      "status": true,
+      "created": ISODate("2014-03-05T16:22:25.0Z")
+    },
+    {
+      "_id": ObjectId("53175057a7c0e9780c00000d"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "52f912a9471deea80a000009",
+      "slug": "52f912a9471deea80a000008",
+      "read": true,
+      "status": false,
+      "created": ISODate("2014-03-05T16:27:02.0Z")
+    },
+    {
+      "_id": ObjectId("53175057a7c0e9780c00000d"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "52f912a9471deea80a000009",
+      "slug": "52f912a9471deea80a000008",
+      "read": true,
+      "status": true,
+      "created": ISODate("2014-03-05T16:27:02.0Z")
+    },
+    {
+      "_id": ObjectId("53175057a7c0e9780c00000d"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "52f912a9471deea80a000009",
+      "slug": "52f912a9471deea80a000008",
+      "read": true,
+      "status": true,
+      "created": ISODate("2014-03-05T16:27:02.0Z")
+    }
   ],
   "password": "225d31b59e3e1de2d6d7c581e7e74e2cde897552",
   "posts": [
@@ -8202,13 +8811,13 @@ db.getCollection("user_friend").insert({
   "_id": ObjectId("530637a6471dee700b000000"),
   "friends": [
     {
-      "_id": ObjectId("53085e08471deeb40b000000"),
+      "_id": ObjectId("531843d7a7c0e94809000000"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       },
-      "created": ISODate("2014-02-22T08:21:28.0Z")
+      "created": ISODate("2014-03-06T09:45:59.0Z")
     }
   ],
   "user": {
@@ -8221,13 +8830,13 @@ db.getCollection("user_friend").insert({
   "_id": ObjectId("530637a6471dee700b000001"),
   "friends": [
     {
-      "_id": ObjectId("53085e08471deeb40b000001"),
+      "_id": ObjectId("531843d7a7c0e94809000001"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
       },
-      "created": ISODate("2014-02-22T08:21:28.0Z")
+      "created": ISODate("2014-03-06T09:45:59.0Z")
     }
   ],
   "user": {
@@ -8301,6 +8910,175 @@ db.getCollection("user_message").insert({
   "user": {
     "$ref": "user",
     "$id": ObjectId("5260e5b4471dee6c08000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_message").insert({
+  "_id": ObjectId("52d37e82471deea00a000000"),
+  "lastMessages": [
+    
+  ],
+  "messages": [
+    {
+      "_id": ObjectId("52d37ea1471deea00a000004"),
+      "content": "hi abc",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": true,
+      "read": true,
+      "created": ISODate("2014-01-13T05:50:25.0Z")
+    },
+    {
+      "_id": ObjectId("52d3a948471dee880a000003"),
+      "content": "fsdfsadf",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-01-13T08:52:24.0Z")
+    },
+    {
+      "_id": ObjectId("52d3a96e471dee800a000008"),
+      "content": "fgfsgdfs",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": true,
+      "read": true,
+      "created": ISODate("2014-01-13T08:53:02.0Z")
+    },
+    {
+      "_id": ObjectId("52d3a99e471deee009000001"),
+      "content": "fdasfsadfsa",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-01-13T08:53:50.0Z")
+    },
+    {
+      "_id": ObjectId("52d3aa73471dee8c0a000001"),
+      "content": "88",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-01-13T08:57:23.0Z")
+    },
+    {
+      "_id": ObjectId("52d3aaeb471dee880a000005"),
+      "content": "99",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-01-13T08:59:23.0Z")
+    },
+    {
+      "_id": ObjectId("52d3ab11471dee8c0a000003"),
+      "content": "10",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-01-13T09:00:01.0Z")
+    },
+    {
+      "_id": ObjectId("52d41adf471dee400a000000"),
+      "content": "f dsf sad",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": true,
+      "read": true,
+      "created": ISODate("2014-01-13T16:57:02.0Z")
+    },
+    {
+      "_id": ObjectId("52d41ae9471dee800a000024"),
+      "content": "fsdaf sda",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": true,
+      "read": true,
+      "created": ISODate("2014-01-13T16:57:13.0Z")
+    },
+    {
+      "_id": ObjectId("52ecdcde471deec80b000001"),
+      "content": "hello",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-02-01T11:39:09.0Z")
+    },
+    {
+      "_id": ObjectId("52f90309471deea80a000001"),
+      "content": "abc xyz",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-02-10T16:49:13.0Z")
+    },
+    {
+      "_id": ObjectId("52f9e875471dee000b000001"),
+      "content": "hello user 2",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-02-11T09:08:05.0Z")
+    },
+    {
+      "_id": ObjectId("52f9ee05471dee000b000003"),
+      "content": "jflkdasj lfksad",
+      "object": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "isSender": false,
+      "read": true,
+      "created": ISODate("2014-02-11T09:31:49.0Z")
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
     "$db": "yesocl"
   }
 });
@@ -8605,198 +9383,6 @@ db.getCollection("user_message").insert({
   }
 });
 db.getCollection("user_message").insert({
-  "_id": ObjectId("52d37e82471deea00a000000"),
-  "lastMessages": [
-    {
-      "_id": ObjectId("52f9ee05471dee000b000003"),
-      "content": "jflkdasj lfksad",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-02-11T09:31:49.0Z")
-    }
-  ],
-  "messages": [
-    {
-      "_id": ObjectId("52d37e82471deea00a000002"),
-      "content": "hello bommer",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-01-13T05:49:54.0Z")
-    },
-    {
-      "_id": ObjectId("52d37ea1471deea00a000004"),
-      "content": "hi abc",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-01-13T05:50:25.0Z")
-    },
-    {
-      "_id": ObjectId("52d3a948471dee880a000003"),
-      "content": "fsdfsadf",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-01-13T08:52:24.0Z")
-    },
-    {
-      "_id": ObjectId("52d3a96e471dee800a000008"),
-      "content": "fgfsgdfs",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-01-13T08:53:02.0Z")
-    },
-    {
-      "_id": ObjectId("52d3a99e471deee009000001"),
-      "content": "fdasfsadfsa",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-01-13T08:53:50.0Z")
-    },
-    {
-      "_id": ObjectId("52d3aa73471dee8c0a000001"),
-      "content": "88",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-01-13T08:57:23.0Z")
-    },
-    {
-      "_id": ObjectId("52d3aaeb471dee880a000005"),
-      "content": "99",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-01-13T08:59:23.0Z")
-    },
-    {
-      "_id": ObjectId("52d3ab11471dee8c0a000003"),
-      "content": "10",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-01-13T09:00:01.0Z")
-    },
-    {
-      "_id": ObjectId("52d41adf471dee400a000000"),
-      "content": "f dsf sad",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-01-13T16:57:02.0Z")
-    },
-    {
-      "_id": ObjectId("52d41ae9471dee800a000024"),
-      "content": "fsdaf sda",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-01-13T16:57:13.0Z")
-    },
-    {
-      "_id": ObjectId("52ecdcde471deec80b000001"),
-      "content": "hello",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-02-01T11:39:09.0Z")
-    },
-    {
-      "_id": ObjectId("52f90309471deea80a000001"),
-      "content": "abc xyz",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-02-10T16:49:13.0Z")
-    },
-    {
-      "_id": ObjectId("52f9e875471dee000b000001"),
-      "content": "hello user 2",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-02-11T09:08:05.0Z")
-    },
-    {
-      "_id": ObjectId("52f9ee05471dee000b000003"),
-      "content": "jflkdasj lfksad",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "isSender": false,
-      "read": true,
-      "created": ISODate("2014-02-11T09:31:49.0Z")
-    }
-  ],
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5f43471deeb40900001f"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("user_message").insert({
   "_id": ObjectId("52d37e82471deea00a000001"),
   "lastMessages": [
     {
@@ -8810,30 +9396,6 @@ db.getCollection("user_message").insert({
       "isSender": true,
       "read": true,
       "created": ISODate("2014-01-13T09:15:28.0Z")
-    },
-    {
-      "_id": ObjectId("52f9edb9471deef40a000003"),
-      "content": "vdsa fdsa fsad",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("5260e5b4471dee6c08000000"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-02-11T09:30:33.0Z")
-    },
-    {
-      "_id": ObjectId("52f9ee05471dee000b000002"),
-      "content": "jflkdasj lfksad",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-02-11T09:31:49.0Z")
     }
   ],
   "messages": [
@@ -9100,18 +9662,6 @@ db.getCollection("user_message").insert({
       "isSender": true,
       "read": true,
       "created": ISODate("2014-01-13T09:15:28.0Z")
-    },
-    {
-      "_id": ObjectId("52f9ee05471dee000b000002"),
-      "content": "jflkdasj lfksad",
-      "object": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "isSender": true,
-      "read": true,
-      "created": ISODate("2014-02-11T09:31:49.0Z")
     }
   ],
   "user": {
@@ -9713,128 +10263,185 @@ db.getCollection("user_post").insert({
     },
     {
       "_id": ObjectId("52f50526471deeb00c000001"),
+      "author": "Quang Thi",
+      "comments": [
+        
+      ],
       "content": "hello new day ^^",
-      "status": true,
+      "countViewer": NumberInt(0),
       "created": ISODate("2014-02-07T16:09:10.0Z"),
-      "updated": ISODate("2014-02-07T16:09:10.0Z"),
-      "author": "Quang Thi",
+      "deleted": false,
       "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
       "slug": "52f50526471deeb00c000000",
+      "status": true,
       "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/52f50526471deeb00c000000\/avatar.png",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f90f76471deea80a000003"),
-      "content": "sfdsdf sdafadssad ",
-      "status": true,
-      "created": ISODate("2014-02-10T17:42:14.0Z"),
-      "updated": ISODate("2014-02-10T17:42:14.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
+      "updated": ISODate("2014-03-05T16:12:39.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
-      },
-      "slug": "52f90f76471deea80a000002",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f9125e471deea80a000006"),
-      "content": "abc xxx",
-      "status": true,
-      "created": ISODate("2014-02-10T17:54:38.0Z"),
-      "updated": ISODate("2014-02-10T17:54:39.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5555471deea409000000",
-      "slug": "52f9125e471deea80a000005",
-      "deleted": false,
-      "countViewer": NumberInt(0)
+      }
     },
     {
       "_id": ObjectId("52f912a9471deea80a000009"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-02-10T17:55:53.0Z"),
-      "updated": ISODate("2014-02-10T17:55:53.0Z"),
       "author": "user2",
+      "comments": [
+        {
+          "_id": ObjectId("53174f41a7c0e9780c00000b"),
+          "author": "Quang Thi",
+          "content": " fdsa fsdaf da",
+          "created": ISODate("2014-03-05T16:22:25.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "likerIds": [
+            "518f5555471deea409000000"
+          ],
+          "status": true,
+          "updated": ISODate("2014-03-05T16:30:14.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "abc",
+      "countViewer": NumberInt(3),
+      "created": ISODate("2014-02-10T17:55:53.0Z"),
+      "deleted": false,
       "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
+      "likerIds": [
+        
+      ],
       "ownerId": "518f5555471deea409000000",
       "slug": "52f912a9471deea80a000008",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f9154a471deeb40a000001"),
-      "content": "fs afdas fas",
       "status": true,
-      "created": ISODate("2014-02-10T18:07:06.0Z"),
-      "updated": ISODate("2014-02-10T18:07:06.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5555471deea409000000",
-      "slug": "52f9154a471deeb40a000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f91556471deeb40a000004"),
-      "content": "f asdf asdfasd",
-      "status": true,
-      "created": ISODate("2014-02-10T18:07:18.0Z"),
-      "updated": ISODate("2014-02-10T18:07:18.0Z"),
-      "author": "user2",
-      "email": "user2@test.com",
+      "updated": ISODate("2014-03-05T16:43:08.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
-      },
-      "ownerId": "518f5555471deea409000000",
-      "slug": "52f91556471deeb40a000003",
-      "deleted": false,
-      "countViewer": NumberInt(0)
+      }
     },
     {
-      "_id": ObjectId("52f91b99471deeac0a000001"),
-      "content": "aaaaaaaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-02-10T18:34:01.0Z"),
-      "updated": ISODate("2014-02-10T18:34:01.0Z"),
+      "_id": ObjectId("53171b63a7c0e99c0c000001"),
       "author": "Quang Thi",
+      "comments": [
+        {
+          "_id": ObjectId("53174e61a7c0e9980c000007"),
+          "author": "Quang Thi",
+          "content": " dsaf sad",
+          "created": ISODate("2014-03-05T16:18:41.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "likerIds": [
+            "518f5555471deea409000000"
+          ],
+          "status": true,
+          "updated": ISODate("2014-03-05T16:34:32.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "\n\t\t\t\t         df adsf dasfsda       \n\t\t\t",
+      "countViewer": NumberInt(0),
+      "created": ISODate("2014-03-05T12:41:07.0Z"),
+      "deleted": false,
       "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        
+      ],
+      "ownerId": "518f5555471deea409000000",
+      "slug": "53171b63a7c0e99c0c000000",
+      "status": true,
+      "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/53171b63a7c0e99c0c000001\/avatar.JPG",
+      "updated": ISODate("2014-03-05T16:51:13.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
-      },
-      "ownerId": "518f5555471deea409000000",
-      "slug": "52f91b99471deeac0a000000",
+      }
+    },
+    {
+      "_id": ObjectId("53171b9fa7c0e96c0c000001"),
+      "author": "Quang Thi",
+      "comments": [
+        {
+          "_id": ObjectId("53171bd7a7c0e9940c000000"),
+          "author": "Quang Thi",
+          "content": " fsdaf sadf sda",
+          "created": ISODate("2014-03-05T12:43:03.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "likerIds": [
+            "518f5555471deea409000000"
+          ],
+          "status": true,
+          "updated": ISODate("2014-03-05T16:51:26.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        },
+        {
+          "_id": ObjectId("5317472ea7c0e9840b000000"),
+          "author": "Quang Thi",
+          "content": "aaaaaaaaaaa",
+          "created": ISODate("2014-03-05T15:47:58.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "likerIds": [
+            "518f5555471deea409000000"
+          ],
+          "status": true,
+          "updated": ISODate("2014-03-05T16:50:16.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        },
+        {
+          "_id": ObjectId("53174c35a7c0e9840b000001"),
+          "author": "Quang Thi",
+          "content": "bbbbbbbbbbbbbbbbb",
+          "created": ISODate("2014-03-05T16:09:25.0Z"),
+          "deleted": false,
+          "email": "quangthi_90@yahoo.com.vn",
+          "likerIds": [
+            "518f5555471deea409000000"
+          ],
+          "status": true,
+          "updated": ISODate("2014-03-05T16:39:24.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("518f5555471deea409000000"),
+            "$db": "yesocl"
+          }
+        }
+      ],
+      "content": "        abc xxx       ",
+      "countViewer": NumberInt(0),
+      "created": ISODate("2014-03-05T12:42:07.0Z"),
       "deleted": false,
-      "countViewer": NumberInt(0)
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "ownerId": "518f5555471deea409000000",
+      "slug": "53171b9fa7c0e96c0c000000",
+      "status": true,
+      "thumb": "data\/catalog\/user\/518f5555471deea409000000\/post\/53171b9fa7c0e96c0c000001\/avatar.jpg",
+      "updated": ISODate("2014-03-05T16:54:40.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
     }
   ],
   "user": {
