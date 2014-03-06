@@ -8,7 +8,7 @@
     {% else %}
         {% set class = class ~ ' female' %}
     {% endif %}
-    <div class="block-content-item friend-item {{ class }}" data-user-id="{{friend.slug}}" data-user-name="{{friend.username}}" data-user-email="{{ friend.email }}">
+    <div class="block-content-item friend-item js-friend-info {{ class }}" data-user-id="{{friend.slug}}" data-user-name="{{friend.username}}" data-user-email="{{ friend.email }}" data-user-slug="{{ friend.slug }}">
         <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="fl friend-img">
             <img src="{{ friend.avatar }}">
         </a>
