@@ -80,47 +80,36 @@
 			if(data.success == 'ok'){
 				var $htmlOutput = '';
 
-				if ( that.status === 2 ){
-					$htmlOutput = $.tmpl( $('#cancel-request'), {
-						href: that.friend_url,
-						id: that.$friend_btn.data('id')
-					});
-					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						3,
-						that.$friend_btn.data('id')
-					]);
-				}else if ( that.status === 1 ){
-					$htmlOutput = $.tmpl( $('#send-request'), {
-						href: that.friend_url,
-						id: that.$friend_btn.data('id')
-					});
-					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						4,
-						that.$friend_btn.data('id')
-					]);
+				if ( that.frStatus === 1 ){
+					$htmlOutput = $.tmpl( $('#cancel-request') );
+					// $(document).trigger('FRIEND_UPDATE_STATUS', [
+					// 	3,
+					// 	''
+					// ]);
+				}else if ( that.frStatus === 2 ){
+					$htmlOutput = $.tmpl( $('#send-request') );
+					// $(document).trigger('FRIEND_UPDATE_STATUS', [
+					// 	4,
+					// 	''
+					// ]);
 				}else{
 					// Remove friend
 					if ( that.is_remove_friend === true ){
 						that.$el.parent().remove();
+						return false;
 
 					// Change status to not relationship
 					// And show button make friend
 					}else{
-						$htmlOutput = $.tmpl( $('#send-request'), {
-							href: that.friend_url,
-							id: that.$unfriend_btn.data('id')
-						});
-						that.$el.find('.friend-group').remove();
-						that.$el.prepend( $htmlOutput );
-						new FriendAction( that.$el );
+						$htmlOutput = $.tmpl( $('#send-request') );
 						
-						$(document).trigger('FRIEND_UPDATE_STATUS', [
-							4,
-							that.$unfriend_btn.data('id')
-						]);
+						// $(document).trigger('FRIEND_UPDATE_STATUS', [
+						// 	4,
+						// 	''
+						// ]);
 					}
 				}
-
+				
 				that.$el.find('.friend-group').remove();
 				that.$el.prepend( $htmlOutput );
 				new FriendAction( that.$el );

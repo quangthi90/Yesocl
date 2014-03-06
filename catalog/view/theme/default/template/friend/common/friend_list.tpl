@@ -19,10 +19,8 @@
                 {#<li>{{ friend.numFriend }}</li>#}
             </ul>
         </div>
-        {% set fr_status = friend.fr_status.status %}
-        {% set fr_href = friend.fr_status.href %}
-        {% set fl_status = friend.fl_status.status %}
-        {% set fl_href = friend.fl_status.href %}
+        {% set fr_status = friend.fr_status %}
+        {% set fl_status = friend.fl_status %}
         {{ block('friend_common_friend_button') }}
     </div>
 {% endblock %}

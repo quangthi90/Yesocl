@@ -39,14 +39,14 @@
 {% block friend_common_friend_button_template %}
 <div class="hidden">
     <div id="send-request">
-        <a data-cancel="0" data-url="${href}" class="btn btn-yes btn-friend friend-group"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
+        <a class="btn btn-yes btn-friend friend-group js-makefriend-btn"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
     </div>
     <div id="cancel-request">
         <div class="dropdown friend-group">
             <a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
             <ul class="dropdown-menu" role="menu">
                 <li>
-                    <a data-cancel="1" class="btn-friend" href="#" data-url="${href}">{% trans %}Cancel Request{% endtrans %}</a>
+                    <a class="btn-friend js-cancel-request-friend-btn" href="#">{% trans %}Cancel Request{% endtrans %}</a>
                 </li>
             </ul>
         </div>
