@@ -12,7 +12,7 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" data-block-width="320" data-block-height="85" class="has-horizontal block-auto-floatleft">
+    <div id="y-main-content" data-block-width="380" data-block-height="80" class="has-horizontal block-auto-floatleft">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}

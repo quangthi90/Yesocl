@@ -217,7 +217,7 @@
 		this.$rootContent = $('#y-content');
 		this.$mainContent = $('#y-main-content');
 		
-		this.$friendConditions	= $el.find('.friend-condition');
+		this.$friendConditions	= $el.find('.filter-condition');
 		this.$inputFilter		= $el.find('#filter-input');
 		this.$userContainer = this.$mainContent.find('.user-container');
 		this.$friendList		= this.$userContainer.find('.friend-item');
