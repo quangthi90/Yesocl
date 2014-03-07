@@ -24,30 +24,22 @@ class ModelFriendFollower extends Model {
 	 * @param: 
 	 * 	MongoId User A
 	 * 	MongoId User B
-	 * @return: array
-	 *	- int status
+	 * @return: int
 	 *		1: me
 	 *		2: Follower
 	 *		3: not relationship
 	 *		-1: not found User B
-	 *	- string href to get action: send request, cancel request, unFollower
 	 */
 	public function checkStatus( $idUserA, $idUserB ){
 		// me
 		if ( $idUserA == $idUserB ){
-            return array(
-            	'status' => 1,
-            	'href' => null
-            );
+            return 1;
         }
 
         $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
 
         if ( !$oUserB ){
-        	return array(
-            	'status' => -1,
-            	'href' => null
-            );
+        	return -1;
         }
 
         $oFollowerAs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
@@ -55,30 +47,15 @@ class ModelFriendFollower extends Model {
 		));
 
 		if ( !$oFollowerAs ){
-			return array(
-				'status' => 3,
-        		'href' => $this->extension->path('AddFollower', array(
-                	'user_slug' => $oUserB->getSlug()
-                ))
-            );
+			return 3;
 		}
 
         if ( $oFollowerAs->getFollowerByUserId($idUserB) ){
-            return array(
-            	'status' => 2,
-            	'href' => $this->extension->path('RemoveFollower', array(
-	                'user_slug' => $oUserB->getSlug()
-	            ))
-           	); 
+            return 2;
         
         }
 
-    	return array(
-        	'status' => 3,
-        	'href' => $this->extension->path('MakeFollower', array(
-                'user_slug' => $oUserB->getSlug()
-            ))
-        );
+    	return 3;
 	}
 
 	public function unFollow( $idUserA, $idUserB ){

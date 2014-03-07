@@ -2,7 +2,7 @@
 {% raw %}
 <div class="hidden">
 	<div id="list-user-liked-template">
-		<div class="user-item add-friend js-friend-info" data-id="${id}" data-user-slug="${slug}">
+		<div class="user-item add-friend js-friend-info" data-user-id="${id}" data-user-slug="${slug}">
 			<div class="user-item-info fl">
 				<a href="${href_user}" class="user-item-avatar fl">
 					<img src="${avatar}" alt="${username}" />

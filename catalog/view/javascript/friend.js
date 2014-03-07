@@ -11,6 +11,7 @@
 		this.$unFollowBtn		= $el.find('.js-unfollow-btn');
 		
 		this.userSlug			= $el.parents('.js-friend-info').data('user-slug');
+		this.userId 			= $el.parents('.js-friend-info').data('user-id');
 
 		this.isRemoveFriend = removeUnFriend;
 
@@ -64,6 +65,36 @@
 
 			return false;
 		});
+
+		this.$makeFollowBtn.click( function (e) {
+			if ( $(this).hasClass('disabled') ) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.url = window.yRouting.generate('AddFollower', {user_slug: that.userSlug});
+			that.isUnFollow = 0;
+
+			that.submitFollow($(this));
+
+			return false;
+		});
+
+		this.$unFollowBtn.click( function (e) {
+			if ( $(this).hasClass('disabled') ) {
+				e.preventDefault();
+
+				return false;
+			}
+
+			that.url = window.yRouting.generate('RemoveFollower', {user_slug: that.userSlug});
+			that.isUnFollow = 1;
+
+			that.submitFollow($(this));
+
+			return false;
+		});
 	};
 		
 	FriendAction.prototype.submitFriend = function($button){
@@ -83,16 +114,16 @@
 
 				if ( that.frStatus === 1 ){
 					$htmlOutput = $.tmpl( $('#cancel-request') );
-					// $(document).trigger('FRIEND_UPDATE_STATUS', [
-					// 	3,
-					// 	''
-					// ]);
+					$(document).trigger('FRIEND_UPDATE_STATUS', [
+						3,
+						that.userId
+					]);
 				}else if ( that.frStatus === 2 ){
 					$htmlOutput = $.tmpl( $('#send-request') );
-					// $(document).trigger('FRIEND_UPDATE_STATUS', [
-					// 	4,
-					// 	''
-					// ]);
+					$(document).trigger('FRIEND_UPDATE_STATUS', [
+						4,
+						that.userId
+					]);
 				}else{
 					// Remove friend
 					if ( that.isRemoveFriend === true ){
@@ -104,10 +135,57 @@
 					}else{
 						$htmlOutput = $.tmpl( $('#send-request') );
 						
-						// $(document).trigger('FRIEND_UPDATE_STATUS', [
-						// 	4,
-						// 	''
-						// ]);
+						$(document).trigger('FRIEND_UPDATE_STATUS', [
+							4,
+							that.userId
+						]);
+					}
+				}
+				
+				that.$el.find('.friend-group').remove();
+				that.$el.prepend( $htmlOutput );
+				new FriendAction( that.$el );
+			}
+
+		});
+	};
+
+	FriendAction.prototype.submitFollow = function($button){
+		var that = this;
+
+		var promise = $.ajax({
+			type: 'POST',
+			url:  this.url,
+			dataType: 'json'
+		});
+
+		this.triggerProgress($button, promise);
+
+		promise.then(function(data) {
+			if(data.success == 'ok'){
+				var $htmlOutput = '';
+
+				if ( that.isUnFollow === 0 ){
+					$htmlOutput = $.tmpl( $('#cancel-request') );
+					$(document).trigger('FRIEND_UPDATE_STATUS', [
+						3,
+						that.userId
+					]);
+				}else{
+					// Remove friend
+					if ( that.isRemoveFriend === true ){
+						that.$el.parents('.js-friend-info').remove();
+						return false;
+
+					// Change status to not relationship
+					// And show button make friend
+					}else{
+						$htmlOutput = $.tmpl( $('#send-request') );
+						
+						$(document).trigger('FRIEND_UPDATE_STATUS', [
+							4,
+							that.userId
+						]);
 					}
 				}
 				

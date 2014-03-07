@@ -55,6 +55,7 @@ class ControllerFriendFriend extends Controller {
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 65, 65 );
 			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oLoggedUser->getId(), $oUser->getId() );
 			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oLoggedUser->getId(), $oUser->getId() );
+			
 			$aUser['added'] = $oFriend->getCreated();
 			$this->data['users'][$aUser['id']] = $aUser;
 			$this->data['friend_ids'][$oUser->getId()] = $oUser->getId();

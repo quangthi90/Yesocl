@@ -731,7 +731,7 @@
         if ( comment === undefined ){
             comment = new Array();
         }
-        console.log(comment.users);
+        
         if ( comment.users === null || comment.users === undefined ){
             var promise = $.ajax({
                 type: 'POST',
