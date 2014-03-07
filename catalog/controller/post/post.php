@@ -467,13 +467,9 @@ class ControllerPostPost extends Controller {
             
             if ( $lUsers ){
                 foreach ( $lUsers as $oUser ) {
-                    $fr_status = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
-
                     $aUser = $oUser->formatToCache();
-
-                    $aUser['fr_status'] = $fr_status['status'];
-                    $aUser['fr_href'] = $fr_status['href'];
-
+                    
+                    $aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
                     $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
                     $aUser['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $aUser['slug']) );
 
