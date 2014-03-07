@@ -30,7 +30,7 @@
                     </a>           
                 </div>
                 <div class="block-content">
-                    {% if user.fr_status == 2 %}
+                    {% if user.fr_status == 2 or user.fr_status == 1 %}
                     <div class="column has-new-post">
                         {{ block('post_common_post_status_wall') }}
                     </div>
