@@ -731,7 +731,7 @@
         if ( comment === undefined ){
             comment = new Array();
         }
-        
+        console.log(comment.users);
         if ( comment.users === null || comment.users === undefined ){
             var promise = $.ajax({
                 type: 'POST',
@@ -754,6 +754,10 @@
                     }
 
                     comment.users = users;
+
+                    comments.setItem(that.$el.data('id'), comment);
+
+                    $curr_post.data('comments', comments);
 
                     $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
 
