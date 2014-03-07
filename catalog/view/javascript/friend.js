@@ -161,34 +161,25 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				var $htmlOutput = '';
+				var $htmlOutput = '',
+					fl_status = 1,
+					user = window.yUsers.getItem(that.userId);
 
 				if ( that.isUnFollow === 0 ){
-					$htmlOutput = $.tmpl( $('#cancel-request') );
-					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						3,
-						that.userId
-					]);
+					$htmlOutput = $.tmpl( $('#unfollow') );
+					fl_status = 2;
 				}else{
-					// Remove friend
-					if ( that.isRemoveFriend === true ){
-						that.$el.parents('.js-friend-info').remove();
-						return false;
+					$htmlOutput = $.tmpl( $('#send-follow') );
+					fl_status = 3;
+				}
 
-					// Change status to not relationship
-					// And show button make friend
-					}else{
-						$htmlOutput = $.tmpl( $('#send-request') );
-						
-						$(document).trigger('FRIEND_UPDATE_STATUS', [
-							4,
-							that.userId
-						]);
-					}
+				if ( user !== undefined ){
+					user.fl_status = fl_status;
+					window.yUsers.setItem(that.userId, user);
 				}
 				
-				that.$el.find('.friend-group').remove();
-				that.$el.prepend( $htmlOutput );
+				that.$el.find('.follow-group').remove();
+				that.$el.append( $htmlOutput );
 				new FriendAction( that.$el );
 			}
 

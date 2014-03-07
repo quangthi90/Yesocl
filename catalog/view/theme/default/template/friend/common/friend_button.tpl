@@ -24,14 +24,14 @@
     {% endif %}
     <!-- follow button -->
     {% if fl_status == 2 %}
-    <div class="dropdown">
-        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown" data-url="{{ fl_href }}"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
+    <div class="dropdown follow-group">
+        <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
         <ul class="dropdown-menu" role="menu">
             <li><a href="#" class="js-unfollow-btn">{% trans %}Unfollow{% endtrans %}</a></li>
         </ul>
     </div>
     {% elseif fl_status == 3 %}
-    <a href="#" class="btn btn-yes btn-follow js-makefollow-btn" data-url="{{ fl_href }}"><i class="icon-rss"></i> {% trans %}Follow{% endtrans %}</a>
+    <a href="#" class="btn btn-yes btn-follow js-makefollow-btn follow-group"><i class="icon-rss"></i> {% trans %}Follow{% endtrans %}</a>
     {% endif %}
 </div>
 {% endblock %}
@@ -50,6 +50,17 @@
                 </li>
             </ul>
         </div>
+    </div>
+    <div id="unfollow">
+        <div class="dropdown follow-group">
+            <a href="#" class="btn btn-yes btn-friend dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#" class="js-unfollow-btn">{% trans %}Unfollow{% endtrans %}</a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="send-follow">
+        <a href="#" class="btn btn-yes btn-follow js-makefollow-btn follow-group"><i class="icon-rss"></i> {% trans %}Follow{% endtrans %}</a>
     </div>
 </div>
 {% endblock %}

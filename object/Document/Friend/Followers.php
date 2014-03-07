@@ -17,7 +17,7 @@ Class Followers {
     /** @MongoDB\EmbedMany(targetDocument="Follower") */
 	private $followers = array();
 
-	public function getFollowweByUserId( $idUser ){
+	public function getFollowerByUserId( $idUser ){
 		foreach ( $this->followers as $oFollower ) {
 			if ( $oFollower->getUser()->getId() == $idUser ){
 				return $oFollower;

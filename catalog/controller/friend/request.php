@@ -155,5 +155,95 @@ class ControllerFriendRequest extends Controller {
             'success' => 'not ok'
         )));
 	}
+
+    public function addFollower(){
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+            $this->load->model('friend/follower');
+            $this->load->model('user/user');
+
+            if ( empty($this->request->get['user_slug']) ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'warning' => 'user slug is empty'
+                )));
+            }
+
+            $sUserSlug = $this->request->get['user_slug'];
+
+            $aUser = $this->model_user_user->getUser( $sUserSlug );
+
+            if ( !$aUser ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'warning' => 'user slug "' . $sUserSlug . '" not found'
+                )));
+            }
+
+            $result = $this->model_friend_follower->makeFollow( 
+                $this->customer->getId(), // User A
+                $aUser['id'] // User B
+            );
+
+            if ( !$result ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'warning' => 'send request have error'
+                )));
+            }
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok'
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+    }
+
+    public function removeFollower(){
+        if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
+            $this->load->model('friend/follower');
+            $this->load->model('user/user');
+
+            if ( empty($this->request->get['user_slug']) ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'warning' => 'user slug is empty'
+                )));
+            }
+
+            $sUserSlug = $this->request->get['user_slug'];
+
+            $aUser = $this->model_user_user->getUser( $sUserSlug );
+
+            if ( !$aUser ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'warning' => 'user slug "' . $sUserSlug . '" not found'
+                )));
+            }
+
+            $result = $this->model_friend_follower->unFollow( 
+                $this->customer->getId(), // User A
+                $aUser['id'] // User B
+            );
+
+            if ( !$result ){
+                return $this->response->setOutput(json_encode(array(
+                    'success' => 'not ok',
+                    'warning' => 'send request have error'
+                )));
+            }
+
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'ok'
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'not ok'
+        )));
+    }
 }
 ?>

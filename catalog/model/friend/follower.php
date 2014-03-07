@@ -59,7 +59,7 @@ class ModelFriendFollower extends Model {
 	}
 
 	public function unFollow( $idUserA, $idUserB ){
-		$oFollowerAs = $this->dm->getRepository('Document\Follower\Followers')->findOneBy(array(
+		$oFollowerAs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
 			'user.id' => $idUserA
 		));
 
@@ -71,25 +71,13 @@ class ModelFriendFollower extends Model {
 			}
 		}
 
-		$oFollowerBs = $this->dm->getRepository('Document\Follower\Followers')->findOneBy(array(
-			'user.id' => $idUserB
-		));
-
-		if ( $oFollowerBs ){
-			$oFollowerA = $oFollowerBs->getFollowerByUserId( $idUserA );
-
-			if ( $oFollowerA ){
-				$oFollowerBs->getFollowers()->removeElement( $oFollowerA );
-			}
-		}
-
 		$this->dm->flush();
 
 		return true;
 	}
 
 	/**
-	 * Make Follower
+	 * User A follow user B
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: 
 	 * 	MongoID User A ID
@@ -109,7 +97,7 @@ class ModelFriendFollower extends Model {
 		}
 
 		// Get Follower info of User A
-		$oFollowerAs = $this->dm->getRepository('Document\Follower\Followers')->findOneBy(array(
+		$oFollowerAs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
 			'user.id' => $idUserA
 		));
 		if ( !$oFollowerAs ){
@@ -121,37 +109,6 @@ class ModelFriendFollower extends Model {
 		$oFollowerB->setUser( $oUserB );
 		$this->dm->persist( $oFollowerB );
 		$oFollowerAs->addFollower( $oFollowerB );
-
-		// Get Follower info of User B
-		$oFollowerBs = $this->dm->getRepository('Document\Follower\Followers')->findOneBy(array(
-			'user.id' => $idUserB
-		));
-
-		if ( !$oFollowerBs ){
-			$oFollowerBs = new Followers();
-			$oFollowerBs->setUser( $oUserB );
-			$this->dm->persist( $oFollowerBs );
-		}
-		$oFollowerA = new Follower();
-		$oFollowerA->setUser( $oUserA );
-		$oFollowerBs->addFollower( $oFollowerA );
-
-		// Remove request from user B to user A
-		$aRequestAs = $oUserA->getFollowerRequests();
-		$iIndex = array_search( $idUserB, $aRequestAs );
-		
-		if ( $aRequestAs && $iIndex !== false ){
-			unset($aRequestAs[$iIndex]);
-			$oUserA->setFollowerRequests( $aRequestAs );
-		}
-
-		// Remove request from user A to user B
-		$aRequestBs = $oUserB->getFollowerRequests();
-		$iIndex = array_search( $idUserA, $aRequestBs );
-		if ( $aRequestBs && $iIndex !== false ){
-			unset($aRequestBs[$iIndex]);
-			$oUserB->setFollowerRequests( $aRequestBs );
-		}
 		
 		$this->dm->flush();
 
