@@ -110,20 +110,16 @@
 
 		promise.then(function(data) {
 			if(data.success == 'ok'){
-				var $htmlOutput = '';
+				var $htmlOutput = '',
+					status = 1,
+					user = window.yUsers.getItem(that.userId);
 
 				if ( that.frStatus === 1 ){
 					$htmlOutput = $.tmpl( $('#cancel-request') );
-					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						3,
-						that.userId
-					]);
+					status = 3;
 				}else if ( that.frStatus === 2 ){
 					$htmlOutput = $.tmpl( $('#send-request') );
-					$(document).trigger('FRIEND_UPDATE_STATUS', [
-						4,
-						that.userId
-					]);
+					status = 4;
 				}else{
 					// Remove friend
 					if ( that.isRemoveFriend === true ){
@@ -134,12 +130,14 @@
 					// And show button make friend
 					}else{
 						$htmlOutput = $.tmpl( $('#send-request') );
-						
-						$(document).trigger('FRIEND_UPDATE_STATUS', [
-							4,
-							that.userId
-						]);
+						status = 4;
 					}
+				}
+
+				// Update user status
+				if ( user !== undefined ){
+					user.fr_status = status;
+					window.yUsers.setItem( that.userId, user );
 				}
 				
 				that.$el.find('.friend-group').remove();

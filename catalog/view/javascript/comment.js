@@ -211,27 +211,6 @@
                 new ShowListComments($(this));
             });
         });
-
-        $(document).bind('FRIEND_UPDATE_STATUS', function(e, status, id) {
-            if ( id === undefined ){
-                return false;
-            }
-
-            var $curr_post = $('.open-comment.disabled');
-
-            if ( $curr_post.attr('class') === undefined ){
-                var users = $('.show-liked-list').data('users');
-                users[id].fr_status = status;
-                $('.show-liked-list').data('users', users);
-                return;
-            }
-
-            var comments = $curr_post.data('comments');
-
-            var comment_id = $('#list-user-liked-template').data('comment_id');
-
-            comments.getItem(comment_id).users[id].fr_status = status;
-        });
     });
 }(jQuery, document));
 
@@ -721,18 +700,19 @@
 
         var $curr_post = $('.open-comment.disabled');
         var comments = $curr_post.data('comments');
+        var commentId = this.$el.data('id');
 
         if ( comments === undefined ){
             comments = new HashTable();
         }
 
-        var comment = comments.getItem(this.$el.data('id'));
+        var comment = comments.getItem(commentId);
 
         if ( comment === undefined ){
-            comment = new Array();
+            comment = [];
         }
         
-        if ( comment.users === null || comment.users === undefined ){
+        if ( comment.userIds === null || comment.userIds === undefined ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -747,27 +727,38 @@
                         return;
                     }
 
-                    var users = [];
+                    var users = [],
+                        userIds = [];
 
                     for (var key in data.users) {
-                        users[data.users[key].id] = data.users[key];
+                        var user = window.yUsers.getItem(data.users[key].id);
+                        if ( user === undefined ){
+                            user = data.users[key];
+                            window.yUsers.setItem(data.users[key].id, user);
+                        }
+                        users.push(user);
+                        userIds[user.id] = user.id;
                     }
 
-                    comment.users = users;
+                    comment.userIds = userIds;
 
-                    comments.setItem(that.$el.data('id'), comment);
+                    comments.setItem(commentId, comment);
 
                     $curr_post.data('comments', comments);
-
-                    $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
 
                     window.userFunction.showPopupUserList( users );
                 }
             });
         }else{
-            var users = comment.users;
+            var userIds = comment.userIds,
+                users = [];
 
-            $('#list-user-liked-template').data('comment_id', that.$el.data('id'));
+            for ( var key in userIds ){
+                var user = window.yUsers.getItem(key);
+                if ( user !== undefined ){
+                    users.push(user);
+                }
+            }
 
             window.userFunction.showPopupUserList( users );
         }

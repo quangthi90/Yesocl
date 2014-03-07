@@ -40,7 +40,6 @@ function User( _user )
         that.user.setItem( key, _user[key] );
     }
     
-    // Generate url by name & params
     this.get = function( value )
     {
         return that.user.getItem( value );
