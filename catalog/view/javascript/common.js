@@ -620,7 +620,7 @@ var yCurrUser = new CurrentUser();
 			this.columns.height(heightBlockContent - 20).css('opacity', '1');
 			this.columns.find('.search-result-container').each(function(){
 				var firstItem = $(this).find('.data-detail').first();
-				var friendItem = $(this).find('.friend-item').first();
+				var friendItem = $(this).find('.user-item').first();
 				var maxContentWidth = 250;
 				if(firstItem.length > 0) {
 					maxContentWidth = Math.floor(firstItem.width() - 60 - 20);

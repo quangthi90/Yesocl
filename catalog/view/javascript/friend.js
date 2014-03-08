@@ -212,7 +212,7 @@
 // Filter friend
 (function($, document, undefined) {
 	'use strict';
-	function FriendFilter( $el ){
+	function UserFilter( $el ){
 		this.$el = $el;
 		this.$rootContent = $('#y-content');
 		this.$mainContent = $('#y-main-content');
@@ -220,12 +220,12 @@
 		this.$friendConditions	= $el.find('.filter-condition');
 		this.$inputFilter		= $el.find('#filter-input');
 		this.$userContainer = this.$mainContent.find('.user-container');
-		this.$friendList		= this.$userContainer.find('.friend-item');
+		this.$friendList		= this.$userContainer.find('.user-item');
 		this.$isDone = true;
 		this.attachEvents();
 	}
 
-	FriendFilter.prototype.attachEvents = function () {
+	UserFilter.prototype.attachEvents = function () {
 		var that = this;
 
 		if(!String.prototype.trim) {
@@ -277,7 +277,7 @@
 					$(this).removeClass('active');
 				});
 				$(this).addClass('active');
-				var typeFilter = $(this).data('friend');
+				var typeFilter = $(this).data('filter');
 				var resultFriend = that.$friendList.filter(function() {
 					return $(this).hasClass(typeFilter);
 				});
@@ -286,7 +286,7 @@
 			});
 		});
 	};
-	FriendFilter.prototype.showResult = function (result) {
+	UserFilter.prototype.showResult = function (result) {
 		var that = this;
 		
 		that.$friendList.fadeOut(10);
@@ -312,8 +312,8 @@
 	};
 
 	$(function(){
-		$('#friend-filter').each(function(){
-            new FriendFilter( $(this) );
+		$('.user-box-filter').each(function(){
+            new UserFilter( $(this) );
         });
     });
 }(jQuery, document));

@@ -2352,35 +2352,36 @@ ul.user_actions li:hover i{
   margin-left: 5px;
 }
 
-.friend-item {
+.user-item {
   float: left;  
   position: relative;
   background-color: #FFF;
   margin: 0px 10px 10px 0px;
+  padding: 0px;
   width: 380px;
   box-shadow: 1px 2px 4px -1px #ccc;
   cursor: default;
   overflow: hidden;
 }
-.friend-item .friend-img {
-  display: block;
-  height: 80px;
-  width: 80px;
-  float: left;
+.user-item .user-img {
+  display: inline-block;
+  height: 90px;
+  width: 90px;
 }
-.friend-item .friend-img img {
+.user-item .user-img img {
   height: 100%;
   width: 100%;
 }
-.friend-item .friend-info {
+.user-item .user-info {
   display: inline-block;
-  margin: 10px 0px 0px 10px;  
-  max-width: 220px;
+  margin: 0px 0px 0px 10px;
+  max-width: 270px;
   max-height: 100px;
   overflow: hidden;
+  vertical-align: middle;
 }
-.friend-item .friend-info .friend-name {
-  font-size: 13px;
+.user-item .user-info .user-name {
+  font-size: 14px;
   font-weight: bold;  
   white-space: nowrap;
   display: block;
@@ -2388,117 +2389,44 @@ ul.user_actions li:hover i{
   overflow: hidden;
   color: #414141;
 }
-.friend-item .friend-info .friend-name:hover {
+.user-item .user-info .user-name:hover {
   color: #000;
 }
-.friend-item .friend-infolist {
+.user-item .user-infolist {
   margin-top: 5px;
 }
-.friend-item .friend-infolist li {
+.user-item .user-infolist li {
   font-size: 13px;
   color: #515151; 
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;   
 }
-.friend-item .friend-actions {
+.user-item .friend-actions {
   position: absolute;
   top: 3px;
   right: 3px;
   display: none;
 }
-.friend-item:hover .friend-actions {
+.user-item:hover .friend-actions {
   display: block;
 }
-.friend-item .friend-actions ul {
+.user-item .friend-actions ul {
   min-width: inherit;
 }
-.friend-item .friend-actions .btn {  
+.user-item .friend-actions .btn {  
   font-size: 11px; 
   padding: 3px 8px;
   display: block;
   text-align: left;
 }
-.friend-item .friend-actions .btn i {  
+.user-item .friend-actions .btn i {  
   color: #FFF; 
   float: left;
   margin: 3px 5px 4px 0px;
   font-size: 14px;
 }
 
-.follow-item {
-  float: left;  
-  position: relative;
-  background-color: #FFF;
-  margin: 0px 10px 10px 0px;
-  width: 380px;
-  box-shadow: 1px 2px 4px -1px #ccc;
-  cursor: default;
-  overflow: hidden;
-}
-.follow-item .follow-img {
-  display: block;
-  height: 80px;
-  width: 80px;
-  float: left;
-}
-.follow-item .follow-img img {
-  height: 100%;
-  width: 100%;
-}
-.follow-item .follow-info {
-  display: inline-block;
-  margin: 10px 0px 0px 10px;  
-  max-width: 220px;
-  max-height: 100px;
-  overflow: hidden;
-}
-.follow-item .follow-info .follow-name {
-  font-size: 13px;
-  font-weight: bold;  
-  white-space: nowrap;
-  display: block;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  color: #414141;
-}
-.follow-item .follow-info .follow-name:hover {
-  color: #000;
-}
-.follow-item .follow-infolist {
-  margin-top: 10px;
-}
-.follow-item .follow-infolist li {
-  font-size: 13px;
-  color: #515151; 
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;   
-}
-.follow-item .follow-actions {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  display: none;
-}
-.follow-item:hover .follow-actions {
-  display: block;
-}
-.follow-item .follow-actions ul {
-  min-width: inherit;
-}
-.follow-item .follow-actions .btn {  
-  font-size: 11px; 
-  padding: 3px 8px;
-  display: block;
-  text-align: left;
-}
-.follow-item .follow-actions .btn i {  
-  color: #FFF; 
-  float: left;
-  margin: 3px 5px 4px 0px;
-  font-size: 14px;
-}
 /* ------------------------------------- END FRIEND ------------------------------------------ */
 
 /* ------------------------------------- START MY_BRANCH-------------------------------------- */
@@ -2815,7 +2743,7 @@ ul.user_actions li:hover i{
   min-width: 270px;
   max-width: 300px;
 }
-.search-container-1 .search-category .friend-item {
+.search-container-1 .search-category .user-item {
     max-width: 290px;
     margin-right: 10px;
 }
@@ -2833,7 +2761,7 @@ ul.user_actions li:hover i{
   float: left;
   max-width: 250px;
 }
-.search-category .friend-item {
+.search-category .user-item {
   opacity: 1;  
   padding: 5px 5px 5px 5px;
   margin: 0px 5px 2px 0px;
@@ -2842,26 +2770,26 @@ ul.user_actions li:hover i{
   min-height: 52px;
   width: 100%;
 }
-.search-category .friend-item .friend-actions {
+.search-category .user-item .friend-actions {
   top: 5px;
   right: 15px;
 }
-.search-category .friend-item:hover {
+.search-category .user-item:hover {
   background-color: #F7F7F7;
 }
-.search-category .friend-item .friend-img {
+.search-category .user-item .user-img {
   display: block;
   height: 50px;
   width: 50px;
 }
-.search-category .friend-item .friend-info .friend-name {
+.search-category .user-item .user-info .user-name {
   font-size: 13px;
   display: block;
   color: #4D4D4D;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.search-category .friend-item .friend-info .friend-name:hover {
+.search-category .user-item .user-info .user-name:hover {
   color: #000;
 }
 

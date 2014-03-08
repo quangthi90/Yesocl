@@ -1,9 +1,9 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
 {% use '@template/default/template/account/common/profile_column.tpl' %}
-{% use '@template/default/template/friend/common/friend_list.tpl' %}
-{% use '@template/default/template/friend/common/friend_filter.tpl' %}
-{% use '@template/default/template/friend/common/friend_button.tpl' %}
+{% use '@template/default/template/common/user_block/user_item.tpl' %}
+{% use '@template/default/template/common/user_block/user_filter.tpl' %}
+{% use '@template/default/template/common/user_block/user_button.tpl' %}
 
 {% block title %}{{ users[current_user_id].username }} | {% trans %}Friend Page{% endtrans %} {% endblock %}
 
@@ -12,7 +12,7 @@
 
 {% block body %}
 <div id="y-content">
-    <div id="y-main-content" data-block-width="380" data-block-height="80" class="has-horizontal block-auto-floatleft">
+    <div id="y-main-content" data-block-width="380" data-block-height="90" class="has-horizontal block-auto-floatleft">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
             {{ block('common_profile_column') }}
@@ -28,23 +28,23 @@
                 {% if friend_ids|length > 0 %}
                     {% for friend_id in friend_ids %}
                         {% set friend = users[friend_id] %}
-                        {{ block('friend_common_friend_list') }}
+                        {{ block('common_user_block_user_item') }}
                     {% endfor %}
                 {% else %}
                     <div class="empty-data">
                         {% trans %}No friends found{% endtrans %}
                     </div>
                 {% endif %}
-                {{ block('friend_common_friend_button_template') }}            
+                {{ block('common_user_block_user_button_template') }}        
             </div>
         </div>
         {% set friend_count = friend_ids|length %}
         {% set user = users[current_user_id] %}
-        {{ block('friend_common_friend_filter') }}
+        {{ block('common_user_block_user_filter') }}
     </div>
 </div>
 {% endblock %}
 
 {% block javascript %}
-    {{ block('friend_common_friend_list_javascript') }}
+    {{ block('common_user_block_user_item_javascript') }}
 {% endblock %}

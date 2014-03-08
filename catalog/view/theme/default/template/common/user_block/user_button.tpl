@@ -1,4 +1,4 @@
-{% block friend_common_friend_button %}
+{% block common_user_block_user_button %}
 <div class="friend-actions">
     <!-- friend button -->
     {% if fr_status == 4 %}
@@ -36,7 +36,7 @@
 </div>
 {% endblock %}
 
-{% block friend_common_friend_button_template %}
+{% block common_user_block_user_button_template %}
 <div class="hidden">
     <div id="send-request">
         <a class="btn btn-yes btn-friend friend-group js-makefriend-btn"><i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}</a>
@@ -65,5 +65,5 @@
 </div>
 {% endblock %}
 
-{% block friend_common_friend_button_javascript %}
+{% block common_user_block_user_button_javascript %}
 {% endblock %}
