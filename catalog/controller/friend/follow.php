@@ -1,7 +1,7 @@
 <?php 
 use DateTime;
 
-class ControllerFollowList extends Controller {
+class ControllerFriendFollow extends Controller {
 	public function index() {
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$this->data['base'] = $this->config->get('config_ssl');
@@ -15,10 +15,10 @@ class ControllerFollowList extends Controller {
 		// set selected menu
 		$this->session->setFlash( 'menu', 'follow' );
 
-		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/follow/list.tpl')) {
-			$this->template = $this->config->get('config_template') . '/template/follow/list.tpl';
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/follow.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/friend/follow.tpl';
 		} else {
-			$this->template = 'default/template/follow/list.tpl';
+			$this->template = 'default/template/friend/follow.tpl';
 		}
 		
 		$this->children = array(
