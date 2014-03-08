@@ -25,11 +25,6 @@
 				  			<i class="icon-home"></i> <span>{% trans %}Home feed{% endtrans %}</span>
 				  		</a>
 				  	</li>
-				  	{#<li class="menu-item">
-				  		<a href="#">
-				  			<i class="icon-umbrella"></i> <span>Follower's post </span>
-			  			</a>
-				  	</li>#}
 				  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
 				  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
 				  			<i class="icon-bookmark"></i> <span>{% trans %}My Wall{% endtrans %}</span>
@@ -46,8 +41,8 @@
 			  			</a>
 				  	</li>
 				  	<li class="menu-item {% if menu == 'follow' %}active{% endif %}">
-				  		<a href="{{ path('FollowPage') }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}My Following{% endtrans %}</span>
+				  		<a href="{{ path('FollowPage', {user_slug: user_slug}) }}">
+				  			<i class="icon-fire"></i> <span>{% trans %}My Follower{% endtrans %}</span>
 			  			</a>
 				  	</li>
 				  	{% if show_branch_menu == true %}
