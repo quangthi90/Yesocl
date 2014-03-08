@@ -1,4 +1,4 @@
-{% use '@template/default/template/friend/common/friend_button.tpl' %}
+{% use '@template/default/template/common/user_block/user_button.tpl' %}
 
 {% block common_profile_column %}
     <div class="free-block fl" style="width: 180px;">
@@ -10,8 +10,8 @@
                 <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_name"><i class="icon-{% if user.gender == 1 %}male{% else %}female{% endif %}"></i> {{ user.username }}</a>
                 <div class="user_relationship">
                     {% set fr_status = user.fr_status %}
-                    {{ block('friend_common_friend_button') }}
-                    {{ block('friend_common_friend_button_template') }}
+                    {{ block('common_user_block_user_button') }}
+                    {{ block('common_user_block_user_button_template') }}
                     <a href="#" class="btn btn-yes">
                         <i class="icon-random"></i> {% trans %}Follow{% endtrans %}
                     </a>
