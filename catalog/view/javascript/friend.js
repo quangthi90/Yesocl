@@ -14,7 +14,7 @@
 		this.userId 			= $el.parents('.js-friend-info').data('user-id');
 
 		this.isRemoveFriend = removeUnFriend;
-
+		console.log(this.isRemoveFriend);
 		this.attachEvents();
 	}
 
@@ -169,6 +169,11 @@
 					$htmlOutput = $.tmpl( $('#unfollow') );
 					fl_status = 2;
 				}else{
+					console.log(that.isRemoveFriend);
+					if ( that.isRemoveFriend === false ){
+						that.$el.parents('.js-friend-info').remove();
+						return false;
+					}
 					$htmlOutput = $.tmpl( $('#send-follow') );
 					fl_status = 3;
 				}

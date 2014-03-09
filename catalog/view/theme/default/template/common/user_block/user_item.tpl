@@ -27,7 +27,7 @@
 
 {% block common_user_block_user_item_javascript %}
     {% if isRemove is not defined %}
-        {% set isRemove = true %}
+        {% set isRemove = 'true' %}
     {% endif %}
     <script type="text/javascript">
     $(function(){

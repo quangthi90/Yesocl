@@ -18,7 +18,7 @@
         <div id="y-main-content" class="has-horizontal post-per-column" style="width: 9999px;">
             {% set user = users[current_user_id] %}
             {% if current_user_id != get_current_user().id %}
-                {{ block('common_profile_column') }}
+                {{ block('account_common_profile_column') }}
             {% endif %}
             <div class="feed-block block-post-new">
                 <div class="block-header">

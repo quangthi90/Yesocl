@@ -15,7 +15,7 @@ class ModelFriendFollower extends Model {
 			'user.id' => $idUser
 		));
 
-		return $oFollowers;
+		return $oFollowers->getFollowers();
 	}
 
 	/**

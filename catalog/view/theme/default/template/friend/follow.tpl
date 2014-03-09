@@ -15,7 +15,7 @@
     <div id="y-main-content" data-block-width="380" data-block-height="90" class="has-horizontal block-auto-floatleft">
         {% if current_user_id != get_current_user().id %}
             {% set user = users[current_user_id] %}
-            {{ block('common_profile_column') }}
+            {{ block('account_common_profile_column') }}
         {% endif %}
         <div class="feed-block">
             <div class="block-header">
@@ -25,9 +25,9 @@
                 </a>
             </div>
             <div class="block-content user-container">
-                {% if friend_ids|length > 0 %}
-                    {% for friend_id in friend_ids %}
-                        {% set friend = users[friend_id] %}
+                {% if follower_ids|length > 0 %}
+                    {% for follower_id in follower_ids %}
+                        {% set friend = users[follower_id] %}
                         {{ block('common_user_block_user_item') }}
                     {% endfor %}
                 {% else %}
@@ -38,7 +38,7 @@
                 {{ block('common_user_block_user_button_template') }}        
             </div>
         </div>
-        {% set friend_count = friend_ids|length %}
+        {% set friend_count = follower_ids|length %}
         {% set user = users[current_user_id] %}
         {{ block('common_user_block_user_filter') }}
     </div>
@@ -46,5 +46,6 @@
 {% endblock %}
 
 {% block javascript %}
+    {% set isRemove = 'false' %}
     {{ block('common_user_block_user_item_javascript') }}
 {% endblock %}

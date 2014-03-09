@@ -1,6 +1,6 @@
 {% use '@template/default/template/common/user_block/user_button.tpl' %}
 
-{% block common_profile_column %}
+{% block account_common_profile_column %}
     <div class="free-block fl" style="width: 180px;">
         <div class="free-block-content">
             <div class="user_info_overview">
