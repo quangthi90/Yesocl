@@ -15,7 +15,7 @@ class ModelFriendFollower extends Model {
 			'user.id' => $idUser
 		));
 
-		return $oFollowers->getFollowers();
+		return $oFollowers;
 	}
 
 	/**
@@ -62,12 +62,22 @@ class ModelFriendFollower extends Model {
 		$oFollowerAs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
 			'user.id' => $idUserA
 		));
-
 		if ( $oFollowerAs ){
-			$oFollowerB = $oFollowerAs->getFollowerByUserId( $idUserB );
+			$oFollowingB = $oFollowerAs->getFollowingByUserId( $idUserB );
 
-			if ( $oFollowerB ){
-				$oFollowerAs->getFollowers()->removeElement( $oFollowerB );
+			if ( $oFollowingB ){
+				$oFollowerAs->getFollowings()->removeElement( $oFollowingB );
+			}
+		}
+
+		$oFollowerBs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
+			'user.id' => $idUserB
+		));
+		if ( $oFollowerBs ){
+			$oFollowedB = $oFollowerBs->getFollowedByUserId( $idUserA );
+
+			if ( $oFollowedB ){
+				$oFollowerBs->getFolloweds()->removeElement( $oFollowedB );
 			}
 		}
 
@@ -105,10 +115,24 @@ class ModelFriendFollower extends Model {
 			$oFollowerAs->setUser( $oUserA );
 			$this->dm->persist( $oFollowerAs );
 		}
-		$oFollowerB = new Follower();
-		$oFollowerB->setUser( $oUserB );
-		$this->dm->persist( $oFollowerB );
-		$oFollowerAs->addFollower( $oFollowerB );
+		$oFollowingB = new Follower();
+		$oFollowingB->setUser( $oUserB );
+		$this->dm->persist( $oFollowingB );
+		$oFollowerAs->addFollowing( $oFollowingB );
+
+		// Get Follower info of User B
+		$oFollowerBs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
+			'user.id' => $idUserB
+		));
+		if ( !$oFollowerBs ){
+			$oFollowerBs = new Followers();
+			$oFollowerBs->setUser( $oUserB );
+			$this->dm->persist( $oFollowerBs );
+		}
+		$oFollowedA = new Follower();
+		$oFollowedA->setUser( $oUserA );
+		$this->dm->persist( $oFollowedA );
+		$oFollowerBs->addFollowed( $oFollowedA );
 		
 		$this->dm->flush();
 
