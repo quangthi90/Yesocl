@@ -5,6 +5,7 @@
             <span><i class="icon-search"></i></span>
         </div>
         <ul class="user-conditions">
+            {% if is_follow != true %}
             <li class="filter-condition active" data-filter="all">
                 <i class="icon-list"></i><a href="#">{% trans %}All Friends{% endtrans %} (<strong>{{ friend_count }}</strong>)</a>
             </li>          
@@ -17,12 +18,17 @@
             <li class="filter-condition" data-filter="female">
                 <i class="icon-female"></i><a href="#">{% trans %}Female Friends{% endtrans %}</a>
             </li>
+            {% else %}
+            <li class="filter-condition active" data-filter="all">
+                <i class="icon-list"></i><a href="#">{% trans %}All Follower{% endtrans %} (<strong>{{ friend_count }}</strong>)</a>
+            </li> 
             <li class="filter-condition" data-filter="following">
                 <i class="icon-rss-sign"></i><a href="#">{% trans %}Following{% endtrans %}</a>
             </li>
             <li class="filter-condition" data-filter="follower">
-                <i class="icon-rss"></i><a href="#">{% trans %}Follower{% endtrans %}</a>
+                <i class="icon-rss"></i><a href="#">{% trans %}Followed{% endtrans %}</a>
             </li>
+            {% endif %}
         </ul>
         {#<ul class="user-conditions mutual-friend-block">
             <li>

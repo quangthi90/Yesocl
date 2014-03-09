@@ -12,9 +12,8 @@
 		
 		this.userSlug			= $el.parents('.js-friend-info').data('user-slug');
 		this.userId 			= $el.parents('.js-friend-info').data('user-id');
-
 		this.isRemoveFriend = removeUnFriend;
-		console.log(this.isRemoveFriend);
+		
 		this.attachEvents();
 	}
 

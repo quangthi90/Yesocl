@@ -75,6 +75,6 @@
 
 {% block javascript %}
     {% set isRemove = 'false' %}
-    {{ block('friend_common_friend_list_javascript') }}
+    {{ block('common_user_block_user_item_javascript') }}
 }
 {% endblock %}

@@ -28,6 +28,7 @@
                 {% if follower_ids|length > 0 %}
                     {% for follower_id in follower_ids %}
                         {% set friend = users[follower_id] %}
+                        
                         {{ block('common_user_block_user_item') }}
                     {% endfor %}
                 {% else %}
@@ -40,6 +41,7 @@
         </div>
         {% set friend_count = follower_ids|length %}
         {% set user = users[current_user_id] %}
+        {% set is_follow = true %}
         {{ block('common_user_block_user_filter') }}
     </div>
 </div>
