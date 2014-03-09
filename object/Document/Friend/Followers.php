@@ -15,10 +15,23 @@ Class Followers {
     private $user;
 
     /** @MongoDB\EmbedMany(targetDocument="Follower") */
-	private $followers = array();
+	private $followeds = array();
 
-	public function getFollowerByUserId( $idUser ){
-		foreach ( $this->followers as $oFollower ) {
+	/** @MongoDB\EmbedMany(targetDocument="Follower") */
+	private $followings = array();
+
+	public function getFollowedByUserId( $idUser ){
+		foreach ( $this->followeds as $oFollower ) {
+			if ( $oFollower->getUser()->getId() == $idUser ){
+				return $oFollower;
+			}
+		}
+
+		return null;
+	}
+
+	public function getFollowingByUserId( $idUser ){
+		foreach ( $this->followings as $oFollower ) {
 			if ( $oFollower->getUser()->getId() == $idUser ){
 				return $oFollower;
 			}
@@ -39,22 +52,41 @@ Class Followers {
 		return $this->user;
 	}
 
-	public function addFollower( Follower $_oFollower ){
+	public function addFollowed( Follower $_oFollower ){
 		$idUserInput = $_oFollower->getUser()->getId();
-		foreach ( $this->followers as $oFollower ) {
+		foreach ( $this->followeds as $oFollower ) {
 			if ( $oFollower->getUser()->getId() == $idUserInput ){
 				return true;
 			}
 		}
 
-		$this->followers[] = $_oFollower;
+		$this->followeds[] = $_oFollower;
 	}
 
-	public function setFollowers( $followers ){
-		$this->followers = $followers;
+	public function setFolloweds( $followers ){
+		$this->followeds = $followers;
 	}
 
-	public function getFollowers(){
-		return $this->followers;
+	public function getFolloweds(){
+		return $this->followeds;
+	}
+
+	public function addFollowing( Follower $_oFollower ){
+		$idUserInput = $_oFollower->getUser()->getId();
+		foreach ( $this->followings as $oFollower ) {
+			if ( $oFollower->getUser()->getId() == $idUserInput ){
+				return true;
+			}
+		}
+
+		$this->followings[] = $_oFollower;
+	}
+
+	public function setFollowings( $followers ){
+		$this->followings = $followers;
+	}
+
+	public function getFollowings(){
+		return $this->followings;
 	}
 }
