@@ -105,7 +105,7 @@
                             </div>
                             <div class="post_text_raw">
                                 <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">
-                                    {{ post.description }}
+                                    {{ post.description|raw }}
                                 </a>
                             </div> 
                         </div>
