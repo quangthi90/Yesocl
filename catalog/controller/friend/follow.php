@@ -31,31 +31,55 @@ class ControllerFriendFollow extends Controller {
 		}
 
 		// List follow users
-		$lFollowers = $this->model_friend_follower->getFollowers( $oCurrUser->getId() );
+		$oFollowers = $this->model_friend_follower->getFollowers( $oCurrUser->getId() );
+		$lFollowings = $oFollowers->getFollowings();
 		$aUsers = array();
-		$aFollowerIds = array();
+		$aFollowingIds = array();
 
-		foreach ( $lFollowers as $oFollower ) {
+		foreach ( $lFollowings as $oFollower ) {
 			$oUser = $oFollower->getUser();
-			$aUser = $oUser->formatToCache();
-			
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oUser->getId() );
-			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oUser->getId() );
+			if ( empty($aUsers[$oUser->getId()]) ){
+				$aUser = $oUser->formatToCache();
+				
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oUser->getId() );
+				$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oUser->getId() );
 
-			$aUsers[$aUser['id']] = $aUser;
-			$aFollowerIds[] = $aUser['id'];
+				$aUsers[$aUser['id']] = $aUser;
+			}
+			$aFollowingIds[] = $oUser->getId();
+		}
+
+		$lFolloweds = $oFollowers->getFolloweds();
+		$aFollowedIds = array();
+		foreach ( $lFolloweds as $oFollower ) {
+			$oUser = $oFollower->getUser();
+			if ( empty($aUsers[$oUser->getId()]) ){
+				$aUser = $oUser->formatToCache();
+				
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oUser->getId() );
+				$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oUser->getId() );
+
+				$aUsers[$aUser['id']] = $aUser;
+			}
+			$aFollowedIds[] = $oUser->getId();
 		}
 
 		// Current user by slug
-		$aCurrUser = $oCurrUser->formatToCache();
-		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'] );
-		$this->data['curr_user'] = $aCurrUser;
-		$aUsers[$aCurrUser['id']] = $aCurrUser;
+		if ( empty($aUsers[$oCurrUser->getId()]) ){
+			$aCurrUser = $oCurrUser->formatToCache();
+			$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'] );
+			$this->data['curr_user'] = $aCurrUser;
+			$aUsers[$aCurrUser['id']] = $aCurrUser;
+		}
 
-		$this->data['follower_ids'] = $aFollowerIds;
+		$this->data['following_ids'] = $aFollowingIds;
+		$this->data['followed_ids'] = $aFollowedIds; 
 		$this->data['current_user_id'] = $aCurrUser['id'];
 		$this->data['users'] = $aUsers;
+
+		// var_dump($aFollowedIds); exit;
 		
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));

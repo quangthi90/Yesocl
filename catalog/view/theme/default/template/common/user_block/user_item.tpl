@@ -1,5 +1,9 @@
 {% block common_user_block_user_item %}
-    {% set class = 'all' %}
+    {% if class is not defined %}
+        {% set class = 'all' %}
+    {% else %}
+        {% set class = class ~ ' all' %}
+    {% endif %}
     {% if friend.added is defined and friend.added|date('U') >= recent_time|date('U') %}
         {% set class = class ~ ' recent' %}
     {% endif %}

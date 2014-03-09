@@ -19,13 +19,10 @@
                 <i class="icon-female"></i><a href="#">{% trans %}Female Friends{% endtrans %}</a>
             </li>
             {% else %}
-            <li class="filter-condition active" data-filter="all">
-                <i class="icon-list"></i><a href="#">{% trans %}All Follower{% endtrans %} (<strong>{{ friend_count }}</strong>)</a>
-            </li> 
             <li class="filter-condition" data-filter="following">
                 <i class="icon-rss-sign"></i><a href="#">{% trans %}Following{% endtrans %}</a>
             </li>
-            <li class="filter-condition" data-filter="follower">
+            <li class="filter-condition" data-filter="followed">
                 <i class="icon-rss"></i><a href="#">{% trans %}Followed{% endtrans %}</a>
             </li>
             {% endif %}

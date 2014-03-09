@@ -319,5 +319,7 @@
 		$('.user-box-filter').each(function(){
             new UserFilter( $(this) );
         });
+
+        $('.user-box-filter').find('.filter-condition').first().trigger('click');
     });
 }(jQuery, document));

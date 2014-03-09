@@ -25,10 +25,15 @@
                 </a>
             </div>
             <div class="block-content user-container">
-                {% if follower_ids|length > 0 %}
-                    {% for follower_id in follower_ids %}
+                {% if following_ids|length > 0 or followed_ids|length > 0 %}
+                    {% for follower_id in following_ids %}
                         {% set friend = users[follower_id] %}
-                        
+                        {% set class = 'following' %}
+                        {{ block('common_user_block_user_item') }}
+                    {% endfor %}
+                    {% for follower_id in followed_ids %}
+                        {% set friend = users[follower_id] %}
+                        {% set class = 'followed' %}
                         {{ block('common_user_block_user_item') }}
                     {% endfor %}
                 {% else %}

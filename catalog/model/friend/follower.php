@@ -50,7 +50,7 @@ class ModelFriendFollower extends Model {
 			return 3;
 		}
 
-        if ( $oFollowerAs->getFollowerByUserId($idUserB) ){
+        if ( $oFollowerAs->getFollowingByUserId($idUserB) ){
             return 2;
         
         }
