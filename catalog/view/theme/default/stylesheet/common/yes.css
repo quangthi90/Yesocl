@@ -1845,6 +1845,12 @@ a.btn-notification:hover .notification-item-name > i {
   padding: 5px 15px 0px 15px;
   background: #FCFCFC;
 }
+.post_in_block .post_header .post_user {
+}
+.post_in_block .post_header .post_user a.name {
+  font-weight: bold;
+  margin: 5px;
+}
 .post_in_block .post_header a {
   color: #000000;
 }
