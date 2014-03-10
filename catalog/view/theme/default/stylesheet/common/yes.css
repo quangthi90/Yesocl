@@ -748,7 +748,6 @@ a.btn-notification:hover .notification-item-name > i {
   font-size: 12px;
   max-height: 40px;
   width: 185px;
-  float: left;
 }
 .notification-content-item .notification-content-item-detail  .notification-text img {
   display: none;
