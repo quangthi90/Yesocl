@@ -490,6 +490,7 @@ textarea[name="summary"] {
 .profile-user .profile-metainfo {
     display: block;
     font-size: 12px;
+    max-width: 200px;
 }
 .profile-categories {
     padding: 5px 15px;
