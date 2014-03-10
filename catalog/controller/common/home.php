@@ -74,12 +74,16 @@ class ControllerCommonHome extends Controller {
 
 		// Follow post
 		$oFollowers = $this->model_friend_follower->getFollowers( $oLoggedUser->getId() );
-		$lFollowings = $oFollowers->getFollowings();
 
 		$aUserIds = array();
-		foreach ( $lFollowings as $oFollower ) {
-			$oUser = $oFollower->getUser();
-			$aUserIds[] = $oUser->getId();
+
+		if ( $oFollowers ){
+			$lFollowings = $oFollowers->getFollowings();
+
+			foreach ( $lFollowings as $oFollower ) {
+				$oUser = $oFollower->getUser();
+				$aUserIds[] = $oUser->getId();
+			}
 		}
 
 		$aPosts = $this->model_cache_post->getPosts(array(
@@ -87,6 +91,10 @@ class ControllerCommonHome extends Controller {
 			'type_ids' => $aUserIds,
 			'limit' => 6
 		));
+
+		if ( !$aPosts ){
+			$aPosts = array();
+		}
 
 		$this->data['fl_posts'] = array();
 		foreach ($aPosts as $aPost) {
