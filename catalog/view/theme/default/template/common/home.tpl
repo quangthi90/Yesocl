@@ -15,9 +15,9 @@
 	<div id="y-content" class="no-header-fixed">
 		<div id="y-main-content" class="has-horizontal post-has-block">
 		{% for branch in branches %}
+			{% set posts = all_posts[branch.slug] %}
 			{% if posts|length > 0 %}
 		        {% set style = random([1, 2]) %}
-				{% set posts = all_posts[branch.slug] %}
 	            {% set block_info = branch %}
 	            {% set post_type = branch_type %}
 	            {% set block_href = path('BranchCategories', {branch_slug: branch.slug}) %}
