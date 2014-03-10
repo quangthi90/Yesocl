@@ -45,6 +45,19 @@
 						<i class="icon-plus-sign"></i> {% endraw %}{% trans %}Make Friend{% endtrans %}{% raw %}
 					</button>
 					{{/if}}
+
+					<div class="dropdown friend-group">
+						<a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-rss-sign"></i> {% endraw %}{% trans %}Following{% endtrans %}{% raw %}</a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li>
+	                            <a class="btn-unfollow">{% endraw %}{% trans %}Unfollow{% endtrans %}{% raw %}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <!-- OR -->
+	                <button class="btn btn-yes btn-friend friend-group">
+						<i class="icon-rss"></i> {% endraw %}{% trans %}Follow{% endtrans %}{% raw %}
+					</button>
 				</div>
 			</div>
 		</div>
