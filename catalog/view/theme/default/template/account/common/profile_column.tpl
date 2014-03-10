@@ -1,6 +1,6 @@
-{% use '@template/default/template/friend/common/friend_button.tpl' %}
+{% use '@template/default/template/common/user_block/user_button.tpl' %}
 
-{% block common_profile_column %}
+{% block account_common_profile_column %}
     <div class="free-block fl" style="width: 180px;">
         <div class="free-block-content">
             <div class="user_info_overview">
@@ -9,16 +9,13 @@
                 </a>
                 <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_name"><i class="icon-{% if user.gender == 1 %}male{% else %}female{% endif %}"></i> {{ user.username }}</a>
                 <div class="user_relationship">
-                    {% set fr_status = user.fr_status.status %}
-                    {% set fr_slug = user.slug %}
-                    {{ block('friend_common_friend_button') }}
-                    {{ block('friend_common_friend_button_template') }}
-                    <a href="#" class="btn btn-yes">
-                        <i class="icon-random"></i> {% trans %}Follow{% endtrans %}
-                    </a>
-                    <a href="#" class="btn btn-yes">
+                    {% set fr_status = user.fr_status %}
+                    {% set fl_status = user.fl_status %}
+                    {{ block('common_user_block_user_button') }}
+                    {{ block('common_user_block_user_button_template') }}
+                    {#<a href="#" class="btn btn-yes">
                         <i class="icon-share-alt"></i> {% trans %}Message{% endtrans %}
-                    </a>
+                    </a>#}
                 </div>                    
             </div>
             <ul class="user_actions">
@@ -28,7 +25,7 @@
                 <li>
                     <i class="icon-fire"></i><a href="{{ path('FriendPage', {user_slug: user.slug}) }}">{% trans %}Friends{% endtrans %}</a>
                 </li>
-                <li>
+                {#<li>
                     <i class="icon-file-alt"></i><a href="#">{% trans %}Posts{% endtrans %}</a>
                 </li>
                 <li>
@@ -36,7 +33,7 @@
                 </li>
                 <li>
                     <i class="icon-tasks"></i><a href="#">{% trans %}Activities{% endtrans %}</a>
-                </li> 
+                </li>#}
             </ul>
         </div>
     </div>

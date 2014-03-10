@@ -439,6 +439,7 @@ class ControllerPostComment extends Controller {
 
         $this->load->model('user/user');
         $this->load->model('friend/friend');
+        $this->load->model('friend/follower');
         $this->load->model('tool/image');
 
         $aUsers = array();
@@ -450,13 +451,10 @@ class ControllerPostComment extends Controller {
 
             if ( $lQueryUsers ){
                 foreach ( $lQueryUsers as $oUser ) {
-                    $aFrStatus = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oUser->getId() );
-
                     $aUser = $oUser->formatToCache();
 
-                    $aUser['fr_status'] = $aFrStatus['status'];
-                    $aUser['fr_href'] = $aFrStatus['href'];
-
+                    $aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
+                    $aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUser->getId() );
                     $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
                     $aUser['href_user'] = $this->extension->path( 'WallPage', array('user_slug' => $aUser['slug']) );
 

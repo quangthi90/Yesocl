@@ -5,7 +5,7 @@
 {% use '@template/default/template/common/user_block/user_filter.tpl' %}
 {% use '@template/default/template/common/user_block/user_button.tpl' %}
 
-{% block title %}{{ users[current_user_id].username }} | {% trans %}Friend Page{% endtrans %} {% endblock %}
+{% block title %}{{ users[current_user_id].username }} | {% trans %}Follow Page{% endtrans %} {% endblock %}
 
 {% block stylesheet %}
 {% endblock %}
@@ -19,32 +19,40 @@
         {% endif %}
         <div class="feed-block">
             <div class="block-header">
-                <a class="block-title fl" href="#">{% trans %}Friend{% endtrans %}</a>  
+                <a class="block-title fl" href="#">{% trans %}Follow{% endtrans %}</a>  
                 <a class="block-seemore fl" href="#"> 
                     <i class="icon-angle-right"></i>
                 </a>
             </div>
             <div class="block-content user-container">
-                {% if friend_ids|length > 0 %}
-                    {% for friend_id in friend_ids %}
-                        {% set friend = users[friend_id] %}
+                {% if following_ids|length > 0 or followed_ids|length > 0 %}
+                    {% for follower_id in following_ids %}
+                        {% set friend = users[follower_id] %}
+                        {% set class = 'following' %}
+                        {{ block('common_user_block_user_item') }}
+                    {% endfor %}
+                    {% for follower_id in followed_ids %}
+                        {% set friend = users[follower_id] %}
+                        {% set class = 'followed' %}
                         {{ block('common_user_block_user_item') }}
                     {% endfor %}
                 {% else %}
                     <div class="empty-data">
-                        {% trans %}No friends found{% endtrans %}
+                        {% trans %}No follows found{% endtrans %}
                     </div>
                 {% endif %}
                 {{ block('common_user_block_user_button_template') }}        
             </div>
         </div>
-        {% set friend_count = friend_ids|length %}
+        {% set friend_count = follower_ids|length %}
         {% set user = users[current_user_id] %}
+        {% set is_follow = true %}
         {{ block('common_user_block_user_filter') }}
     </div>
 </div>
 {% endblock %}
 
 {% block javascript %}
+    {% set isRemove = 'false' %}
     {{ block('common_user_block_user_item_javascript') }}
 {% endblock %}

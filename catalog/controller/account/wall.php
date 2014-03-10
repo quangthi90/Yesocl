@@ -25,6 +25,7 @@ class ControllerAccountWall extends Controller {
 		$this->load->model('user/user');
 		$this->load->model('tool/image');
 		$this->load->model('friend/friend');
+		$this->load->model('friend/follower');
 
 		$oLoggedUser = $this->customer->getUser();
 		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
@@ -36,7 +37,8 @@ class ControllerAccountWall extends Controller {
 		$aUser = $oCurrUser->formatToCache();
 
 		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
-		$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oCurrUser->getId() );
+		$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
+		$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
 		$this->data['users'] = array( $aUser['id'] => $aUser );
 
 		$this->data['current_user_id'] = $oCurrUser->getId();

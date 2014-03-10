@@ -9,9 +9,6 @@ class ControllerCommonHome extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
-		// printf(html_entity_decode('&quot;')); exit;
-		// var_dump($this->config->get('routing')); exit;
-
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		
@@ -21,7 +18,12 @@ class ControllerCommonHome extends Controller {
 		$this->load->model( 'branch/post' );
 		$this->load->model( 'tool/image' );
 		$this->load->model( 'user/user' );
+		$this->load->model( 'cache/post' );
+		$this->load->model( 'friend/follower' );
 
+		$oLoggedUser = $this->customer->getUser();
+
+		// Branch post
 		$lBranches = $this->model_branch_branch->getAllBranches();
 
 		$this->data['all_posts'] = array();
@@ -38,7 +40,7 @@ class ControllerCommonHome extends Controller {
 				'limit' => 6
 			));
 			
-			foreach ($lPosts as $i => $oPost) {
+			foreach ($lPosts as $oPost) {
 				$aPost = $oPost->formatToCache();
 
 				if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
@@ -70,16 +72,69 @@ class ControllerCommonHome extends Controller {
 			$this->data['branches'][] = $aBranch;
 		}
 
+		// Follow post
+		$oFollowers = $this->model_friend_follower->getFollowers( $oLoggedUser->getId() );
+
+		$aUserIds = array();
+
+		if ( $oFollowers ){
+			$lFollowings = $oFollowers->getFollowings();
+
+			foreach ( $lFollowings as $oFollower ) {
+				$oUser = $oFollower->getUser();
+				$aUserIds[] = $oUser->getId();
+			}
+		}
+
+		$aPosts = $this->model_cache_post->getPosts(array(
+			'sort' => 'created',
+			'type_ids' => $aUserIds,
+			'limit' => 6
+		));
+
+		if ( !$aPosts ){
+			$aPosts = array();
+		}
+
+		$this->data['fl_posts'] = array();
+		foreach ($aPosts as $aPost) {
+			// thumb
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
+			}else{
+				$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+			}
+
+			if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
+				$aPost['isUserLiked'] = true;
+			}else{
+				$aPost['isUserLiked'] = false;
+			}
+
+			$aPost['description'] = $aPost['content'];
+
+			$this->data['fl_posts'][] = $aPost;
+
+			if ( empty($aUsers[$aPost['user_id']]) ){
+				$aUser = $this->model_user_user->getUser( $aPost['user_slug'] );
+				if ( !$aUser ){
+					continue;
+				}
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUsers[$aUser['id']] = $aUser;
+			}
+		}
+
 		$this->data['users'] = $aUsers;
 
-		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
+		$this->data['branch_type'] = $this->config->get('common')['type']['branch'];
+		$this->data['user_type'] = $this->config->get('common')['type']['user'];
 		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'home' );
 
 		// Check current account is actived
 		$date = new DateTime();
-		$oLoggedUser = $this->customer->getUser();
 		if ( $oLoggedUser && $oLoggedUser->getToken() != '' && $oLoggedUser->getTokenTime() >= $date ){
 			$this->data['warning_active'] = 'An active link has been sent to your email, please active your account before ' . $oLoggedUser->getTokenTime()->format('d/m/Y') . ' (your account will be DELETED if you do not active before this time)';
 		}

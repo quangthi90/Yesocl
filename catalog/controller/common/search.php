@@ -11,6 +11,7 @@ class ControllerCommonSearch extends Controller {
 		$this->load->model('tool/search');
 		$this->load->model('user/user');
 		$this->load->model('friend/friend');
+		$this->load->model('friend/follower');
 		$this->load->model('branch/post');
 
 		$this->document->setTitle($this->config->get('config_title'));
@@ -43,7 +44,8 @@ class ControllerCommonSearch extends Controller {
 
 			$aUser = $oQueryUser->formatToCache();
 
-			$aUser['fr_status'] = $this->model_friend_friend->checkFriendStatus( $oQueryUser->getId(), $oCurrUser->getId() );
+			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oQueryUser->getId() );
+			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oQueryUser->getId() );
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 			$aUser['gender'] = $oQueryUser->getMeta()->getSex();
 

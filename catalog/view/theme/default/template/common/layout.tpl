@@ -88,6 +88,7 @@
 			var _user = '{{ get_user_data()|raw }}';
 			window.yRouting = new Routing( JSON.parse(_routing) );
 			window.yUser = new User( JSON.parse(_user) );
+			window.yUsers = new HashTable();
 		</script>
 		<script type="text/javascript">
 			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',

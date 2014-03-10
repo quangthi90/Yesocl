@@ -15,14 +15,23 @@
 	<div id="y-content" class="no-header-fixed">
 		<div id="y-main-content" class="has-horizontal post-has-block">
 		{% for branch in branches %}
-	        {% set style = random([1, 2]) %}
 			{% set posts = all_posts[branch.slug] %}
 			{% if posts|length > 0 %}
+		        {% set style = random([1, 2]) %}
 	            {% set block_info = branch %}
+	            {% set post_type = branch_type %}
 	            {% set block_href = path('BranchCategories', {branch_slug: branch.slug}) %}
 	            {{ block('post_common_post_item_list') }}
 			{% endif %}
 		{% endfor %}
+		{% if fl_posts|length > 0 %}
+			{% set style = random([1, 2]) %}
+			{% set posts = fl_posts %}
+            {% set block_info = {name: 'Follow Posts'|trans} %}
+            {% set block_href = path('FollowPost') %}
+            {% set post_type = user_type %}
+            {{ block('post_common_post_item_list') }}
+		{% endif %}
 		</div>
 	</div>
 	{{ block('post_common_comment_post_list') }}

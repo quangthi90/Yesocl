@@ -1,8 +1,8 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
 {% use '@template/default/template/common/html_block.tpl' %}
-{% use '@template/default/template/friend/common/friend_list.tpl' %}
-{% use '@template/default/template/friend/common/friend_button.tpl' %}
+{% use '@template/default/template/common/user_block/user_item.tpl' %}
+{% use '@template/default/template/common/user_block/user_button.tpl' %}
 
 {% block title %}{% trans %}Search Page{% endtrans %}{% endblock %}
 
@@ -26,9 +26,9 @@
                     <div class="search-result-container">
                         {% for user in users %}
                             {% set friend = user %}
-                            {{ block('friend_common_friend_list') }}
+                            {{ block('common_user_block_user_item') }}
                         {% endfor %}
-                        {{ block('friend_common_friend_button_template') }}
+                        {{ block('common_user_block_user_button_template') }}
                     </div>
                 </div>
                 <div class="column search-category">
@@ -74,5 +74,7 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ block('friend_common_friend_list_javascript') }}
+    {% set isRemove = 'false' %}
+    {{ block('common_user_block_user_item_javascript') }}
+}
 {% endblock %}

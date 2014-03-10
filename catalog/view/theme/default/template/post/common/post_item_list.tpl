@@ -44,10 +44,26 @@
                             </div>
                         </div>
                         <div class="post_header">
+                            {% if post.title is empty %}
+                            <div class="post_user">
+                                <a class="image" href="{{ path('WallPage', {user_slug: user.slug}) }}">
+                                    <img class="small-avatar" src="{{ user.avatar }}" alt="{{ user.username }}" />
+                                </a>
+                                <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="name">{{ user.username }}
+                                </a>
+                                {% if post.owner_id is defined and post.owner_id != null and post.owner_id != user.id %}
+                                <span><i class="icon-caret-right"></i></span>
+                                <a href="{{ path('WallPage', {user_slug: users[post.owner_id].slug}) }}" class="name">{{ users[post.owner_id].username }}
+                                </a>
+                                {% endif %}
+                            </div> 
+                            {% else %}
                             <h4 class="post_title" title="{{ post.title }}">
                                 <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
                             </h4>
+                            {% endif %}
                             <div class="post_meta">
+                                {% if post.title is not empty %}
                                 <span class="user_info fl">
                                     <a class="image" href="{{ path('WallPage', {user_slug: user.slug}) }}">
                                         <img class="small-avatar" src="{{ user.avatar }}" alt="{{ user.username }}" />
@@ -56,6 +72,7 @@
                                         {{ user.username }}
                                     </a>
                                 </span>
+                                {% endif %}
                                 <span class="post_time fl">
                                     <i class="icon-calendar"></i>
                                     {% if post.created >= date_timeago %}
@@ -105,7 +122,7 @@
                             </div>
                             <div class="post_text_raw">
                                 <a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">
-                                    {{ post.description }}
+                                    {{ post.description|raw }}
                                 </a>
                             </div> 
                         </div>

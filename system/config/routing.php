@@ -58,11 +58,16 @@ $_['routing']['CompleteRegister']				= 'profile/complete-register/';
 // Friend
 $_['routing']['FriendPage']						= 'friend/page/{user_slug}/';
 $_['routing']['GetAllFriends']					= 'friend/get-all/';
-$_['routing']['RequestPage']					= 'friend/request/';
 $_['routing']['MakeFriend']						= 'friend/request/{user_slug}/';
 $_['routing']['ConfirmFriend']					= 'friend/confirm/{user_slug}/';
 $_['routing']['UnFriend']						= 'friend/remove/{user_slug}/';
 $_['routing']['IgnoreFriend']					= 'friend/ignore/{user_slug}/';
+
+// Follow
+$_['routing']['FollowPage']						= 'follow/page/{user_slug}/';
+$_['routing']['FollowPost']						= 'follow/list-posts/';
+$_['routing']['AddFollower']					= 'follow/add/{user_slug}/';
+$_['routing']['RemoveFollower']					= 'follow/remove/{user_slug}/';
 
 //Upload
 $_['routing']['UploadFile'] 					= 'upload/';

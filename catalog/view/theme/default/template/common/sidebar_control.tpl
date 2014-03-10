@@ -14,44 +14,44 @@
 		<div class="sidebar-controls">
 			<ul class="yes-menu-list left-menu">
 				{% block sidebar_control %}
-				{% set menu = get_flash('menu') %}
-			  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
-			  		<a href="{{ path('RefreshPage') }}"> 
-			  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
-			  		</a>
-			  	</li>
-			  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
-			  		<a href="{{ path('HomePage') }}"> 
-			  			<i class="icon-home"></i> <span>{% trans %}Home feed{% endtrans %}</span>
-			  		</a>
-			  	</li>
-			  	{#<li class="menu-item">
-			  		<a href="#">
-			  			<i class="icon-umbrella"></i> <span>Follower's post </span>
-		  			</a>
-			  	</li>#}
-			  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
-			  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-bookmark"></i> <span>{% trans %}My Wall{% endtrans %}</span>
-		  			</a>
-			  	</li>	
-			  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
-			  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
-			  			<i class="icon-user-md"></i> <span>{% trans %}My profile{% endtrans %}</span>
-		  			</a>
-			  	</li>
-			  	<li class="menu-item {% if menu == 'friend' %}active{% endif %}">
-			  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-			  			<i class="icon-fire"></i> <span>{% trans %}My friend{% endtrans %}</span>
-		  			</a>
-			  	</li>
-			  	{% if show_branch_menu == true %}
-			  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
-			  		<a href="{{ path('BranchList') }}">
-			  			<i class="icon-fire"></i> <span>{% trans %}My branch{% endtrans %}</span>
-		  			</a>
-			  	</li>
-			  	{% endif %}
+					{% set menu = get_flash('menu') %}
+				  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
+				  		<a href="{{ path('RefreshPage') }}"> 
+				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
+				  		</a>
+				  	</li>
+				  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
+				  		<a href="{{ path('HomePage') }}"> 
+				  			<i class="icon-home"></i> <span>{% trans %}Home feed{% endtrans %}</span>
+				  		</a>
+				  	</li>
+				  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
+				  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
+				  			<i class="icon-bookmark"></i> <span>{% trans %}My Wall{% endtrans %}</span>
+			  			</a>
+				  	</li>	
+				  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
+				  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
+				  			<i class="icon-user-md"></i> <span>{% trans %}My profile{% endtrans %}</span>
+			  			</a>
+				  	</li>
+				  	<li class="menu-item {% if menu == 'friend' %}active{% endif %}">
+				  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
+				  			<i class="icon-fire"></i> <span>{% trans %}My friend{% endtrans %}</span>
+			  			</a>
+				  	</li>
+				  	<li class="menu-item {% if menu == 'follow' %}active{% endif %}">
+				  		<a href="{{ path('FollowPage', {user_slug: user_slug}) }}">
+				  			<i class="icon-fire"></i> <span>{% trans %}My Follower{% endtrans %}</span>
+			  			</a>
+				  	</li>
+				  	{% if show_branch_menu == true %}
+					  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
+					  		<a href="{{ path('BranchList') }}">
+					  			<i class="icon-fire"></i> <span>{% trans %}My branch{% endtrans %}</span>
+				  			</a>
+					  	</li>
+				  	{% endif %}
 			  	{% endblock %}
 			</ul>	
 		</div>

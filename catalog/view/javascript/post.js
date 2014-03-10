@@ -129,9 +129,9 @@
         });
 	};
     UserListViewer.prototype.submit = function($button) {
-        var users = $button.data('users');
+        var userIds = $button.data('user-ids');
         
-        if ( users === undefined || users === null ){
+        if ( userIds === undefined || userIds === null ){
             var promise = $.ajax({
                 type: 'POST',
                 url:  this.url,
@@ -146,19 +146,29 @@
                         return false;
                     }
 
-                    var users = [];
+                    var users = [],
+                        userIds = [];
 
 					for (var key in data.users) {
-                        users[data.users[key].id] = data.users[key];
+                        if ( window.yUsers.getItem(data.users[key].id) === undefined ){
+                            window.yUsers.setItem( data.users[key].id, data.users[key] );
+                        }
+                        users.push( data.users[key] );
+                        userIds[data.users[key].id] = data.users[key].id;
                     }
 
-                    $button.data('users', users);
+                    $button.data('user-ids', userIds);
 
                     window.userFunction.showPopupUserList( users );
                 }
             });
         }else{
-            users = $button.data('users');
+            var users = [];
+            for ( var key in userIds ){
+                if ( window.yUsers.getItem(key) !== undefined ){
+                    users.push( window.yUsers.getItem(key) );
+                }
+            }
 
             window.userFunction.showPopupUserList( users );
         }
