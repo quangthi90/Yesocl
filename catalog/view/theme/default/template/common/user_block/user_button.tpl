@@ -31,7 +31,7 @@
         </ul>
     </div>
     {% elseif fl_status == 3 %}
-    <a href="#" class="btn btn-yes btn-follow js-makefollow-btn follow-group"><i class="icon-rss"></i> {% trans %}Follow{% endtrans %}</a>
+    <a href="#" class="btn btn-yes btn-follow follow-group js-makefollow-btn"><i class="icon-rss"></i> {% trans %}Follow{% endtrans %}</a>
     {% endif %}
 </div>
 {% endblock %}
