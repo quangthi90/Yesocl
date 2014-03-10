@@ -41,7 +41,7 @@ class ControllerFriendFollow extends Controller {
 			if ( empty($aUsers[$oUser->getId()]) ){
 				$aUser = $oUser->formatToCache();
 				
-				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 90, 90 );
 				$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oUser->getId() );
 				$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oUser->getId() );
 
@@ -57,7 +57,7 @@ class ControllerFriendFollow extends Controller {
 			if ( empty($aUsers[$oUser->getId()]) ){
 				$aUser = $oUser->formatToCache();
 				
-				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 90, 90 );
 				$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oUser->getId() );
 				$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oUser->getId() );
 
@@ -69,7 +69,7 @@ class ControllerFriendFollow extends Controller {
 		// Current user by slug
 		if ( empty($aUsers[$oCurrUser->getId()]) ){
 			$aCurrUser = $oCurrUser->formatToCache();
-			$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'] );
+			$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 90, 90 );
 			$this->data['curr_user'] = $aCurrUser;
 			$aUsers[$aCurrUser['id']] = $aCurrUser;
 		}
