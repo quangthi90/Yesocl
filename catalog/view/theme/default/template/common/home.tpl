@@ -28,6 +28,7 @@
 			{% set style = random([1, 2]) %}
 			{% set posts = fl_posts %}
             {% set block_info = {name: 'Follow Posts'|trans} %}
+            {% set block_href = path('FollowPost') %}
             {% set post_type = user_type %}
             {{ block('post_common_post_item_list') }}
 		{% endif %}

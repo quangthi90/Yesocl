@@ -65,6 +65,7 @@ $_['routing']['IgnoreFriend']					= 'friend/ignore/{user_slug}/';
 
 // Follow
 $_['routing']['FollowPage']						= 'follow/page/{user_slug}/';
+$_['routing']['FollowPost']						= 'follow/list-posts/';
 $_['routing']['AddFollower']					= 'follow/add/{user_slug}/';
 $_['routing']['RemoveFollower']					= 'follow/remove/{user_slug}/';
 

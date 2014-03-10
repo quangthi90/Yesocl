@@ -99,5 +99,93 @@ class ControllerFriendFollow extends Controller {
 										
 		$this->response->setOutput($this->twig_render());
 	}
+
+	public function listPosts() {
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$this->data['base'] = $this->config->get('config_ssl');
+		} else {
+			$this->data['base'] = HTTP_SERVER;
+		}
+
+		$this->load->model( 'friend/follower' );
+		$this->load->model( 'cache/post' );
+		$this->load->model( 'tool/image' );
+		$this->load->model( 'user/user' );
+
+		$aUserIds = array();
+		$aUsers = array();
+
+		// Add current user
+		$oCurrUser = $this->customer->getUser();
+		$aUser = $oCurrUser->formatToCache();
+		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+		$aUsers[$aUser['id']] = $aUser;
+
+		// Get list friends
+		$oFollowers = $this->model_friend_follower->getFollowers( $oCurrUser->getId() );
+		if ( $oFollowers ){
+			$lFollowers = $oFollowers->getFollowings();
+		}else{
+			$lFollowers = array();
+		}
+
+		foreach ( $lFollowers as $oFollower ) {
+			$oUser = $oFollower->getUser();
+			if ( empty($aUsers[$oUser->getId()]) ){
+				$aUser = $oUser->formatToCache();
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUsers[$aUser['id']] = $aUser;
+				$aUserIds[] = $aUser['id'];
+			}
+		}
+
+		$aPosts = $this->model_cache_post->getPosts(array(
+			'sort' => 'created',
+			'type_ids' => $aUserIds,
+		));
+		
+		// Get list Posts
+		foreach ($aPosts as $i => $aPost) {
+			// thumb
+			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
+			}else{
+				$aPost['image'] = null;
+			}
+
+			if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
+				$aPost['isUserLiked'] = true;
+			}else{
+				$aPost['isUserLiked'] = false;
+			}
+
+			$this->data['posts'][] = $aPost;
+
+			if ( empty($aUsers[$aPost['user_id']]) ){
+				$aUser = $this->model_user_user->getUser( $aPost['user_slug'] );
+				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUsers[$aUser['id']] = $aUser;
+			}
+		}
+
+		$this->data['users'] = $aUsers;
+		
+		// set selected menu
+		$this->session->setFlash( 'menu', 'refresh' );
+
+		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/friend/follow_post.tpl')) {
+			$this->template = $this->config->get('config_template') . '/template/friend/follow_post.tpl';
+		} else {
+			$this->template = 'default/template/friend/follow_post.tpl';
+		}
+		
+		$this->children = array(
+			'common/sidebar_control',
+			'common/footer',
+			'common/header'
+		);
+										
+		$this->response->setOutput($this->twig_render());
+	}
 }
 ?>
