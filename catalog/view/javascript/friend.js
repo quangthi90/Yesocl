@@ -247,15 +247,16 @@
 		that.$friendConditions.each( function () {
 			$(this).click(function(e){
 				e.preventDefault();
+
+				that.$typeFilter = $(this).data('filter');
 				if ($(this).hasClass('active') ){
 					return false;
 				}
 				that.$friendConditions.each(function(){
 					$(this).removeClass('active');
 				});
-				$(this).addClass('active');
+				$(this).addClass('active');				
 				
-				that.$typeFilter = $(this).data('filter');
 				that.doSearch();
 			});
 		});
