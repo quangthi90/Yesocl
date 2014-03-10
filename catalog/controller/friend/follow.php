@@ -78,8 +78,6 @@ class ControllerFriendFollow extends Controller {
 		$this->data['followed_ids'] = $aFollowedIds; 
 		$this->data['current_user_id'] = $aCurrUser['id'];
 		$this->data['users'] = $aUsers;
-
-		// var_dump($aFollowedIds); exit;
 		
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
