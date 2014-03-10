@@ -3,7 +3,7 @@
 <div class="hidden">
 	<div id="list-user-liked-template">
 		<div class="user-item add-friend js-friend-info" data-user-id="${id}" data-user-slug="${slug}">
-			<div class="user-item-info fl">
+			<div class="user-item-info">
 				<a href="${href_user}" class="user-item-avatar fl">
 					<img src="${avatar}" alt="${username}" />
 				</a>
@@ -13,7 +13,7 @@
 					<span class="js-current-status" title="${current}">${current}</span>
 				</div>
 			</div>
-			<div class="user-actions fr friend-actions">
+			<div class="user-actions friend-actions">
 				{{if fr_status == 2}}
 				<div class="dropdown friend-group">
 					<a href="#" class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% endraw %}{% trans %}Friend{% endtrans %}{% raw %}</a>

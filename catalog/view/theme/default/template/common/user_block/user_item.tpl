@@ -17,7 +17,7 @@
             <img src="{{ friend.avatar }}">
         </a>
         <div class="user-info">
-            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="user-name" title="{{ friend.username }}">{{ friend.username }}</a>
+            <a href="{{ path('WallPage', {user_slug: friend.slug}) }}" class="user-name">{{ friend.username }}</a>
             <ul class="user-infolist">
                 <li><span class="js-current-status" title="{{ friend.current }}">{{ friend.current }}</span></li>
                 {#<li>{{ friend.numFriend }}</li>#}
