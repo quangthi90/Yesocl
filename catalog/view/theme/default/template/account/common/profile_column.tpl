@@ -2,7 +2,7 @@
 
 {% block account_common_profile_column %}
     <div class="free-block fl" style="width: 180px;">
-        <div class="free-block-content">
+        <div class="free-block-content js-friend-info" data-user-slug="{{ user.slug }}">
             <div class="user_info_overview">
                 <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_avatar">
                     <img src="{{ user.avatar }}" alt="{{ user.username }}" />
