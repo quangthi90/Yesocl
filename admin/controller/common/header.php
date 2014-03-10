@@ -44,6 +44,10 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_company'] = $this->language->get('text_company');
 		$this->data['text_company_group'] = $this->language->get('text_company_group');
 
+		// Stock
+		$this->data['text_stocks'] = $this->language->get('text_stocks');
+		$this->data['text_import'] = $this->language->get('text_import');
+
 		// Branch
 		$this->data['text_branches'] = $this->language->get('text_branches');
 		$this->data['text_branch'] = $this->language->get('text_branch');
@@ -117,6 +121,9 @@ class ControllerCommonHeader extends Controller {
 			// user profile
 			$this->data['type'] = $this->url->link('data/type', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['value'] = $this->url->link('data/value', 'token=' . $this->session->data['token'], 'SSL');
+
+			// Stock
+			$this->data['stock_import'] = $this->url->link('stock/stock/import', 'token=' . $this->session->data['token'], 'SSL');
 
 			// Company
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');

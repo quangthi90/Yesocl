@@ -94,6 +94,11 @@ $(document).ready(function(){
           <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
         </ul>
       </li>
+      <li id="company"><a class="top"><?php echo $text_stocks; ?></a>
+        <ul>
+          <li><a href="<?php echo $stock_import; ?>"><?php echo $text_import; ?></a></li>></li>
+        </ul>
+      </li>
       <li id="company"><a class="top"><?php echo $text_branches; ?></a>
         <ul>
           <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>
