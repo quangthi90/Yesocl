@@ -91,7 +91,7 @@ class ControllerBranchDetail extends Controller {
 		$aUserMembers = array();
 		foreach ( $lUserMembers as $oUserMember ) {
 			$aUserMember = $oUserMember->formatToCache();
-			$afrStatus = $this->model_friend_friend->checkFriendStatus( $this->customer->getId(), $oUserMember->getId() );
+			$afrStatus = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUserMember->getId() );
             $aUserMember['fr_status'] = $afrStatus['status'];
             $aUserMember['fr_href'] = $afrStatus['href'];
 			$aUserMember['avatar'] = $this->model_tool_image->getAvatarUser( $aUserMember['avatar'], $aUserMember['email'] );

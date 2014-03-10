@@ -40,7 +40,6 @@ function User( _user )
         that.user.setItem( key, _user[key] );
     }
     
-    // Generate url by name & params
     this.get = function( value )
     {
         return that.user.getItem( value );
@@ -53,7 +52,7 @@ function UserFunction()
     
     this.showPopupUserList = function( users )
     {
-        var usersViewer = $('<div id="#user-viewer-container"></div>');
+        var usersViewer = $('<div id="#user-viewer-container" class="user-viewer"></div>');
         for (var key in users) {
             $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
         }

@@ -22,19 +22,15 @@ class ControllerCommonRefresh extends Controller {
 
 		$aBranches = $this->model_branch_branch->getAllBranches()->toArray();
 
-		$this->data['all_posts'] = array();
-
 		$aBranchIds = array_keys($aBranches);
-
 		$aUserIds = array();
-
-		$this->data['users'] = array();
+		$aUsers = array();
 
 		// Add current user
 		$oCurrUser = $this->customer->getUser();
 		$aUser = $oCurrUser->formatToCache();
 		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-		$this->data['users'][$aUser['id']] = $aUser;
+		$aUsers[$aUser['id']] = $aUser;
 		$aUserIds[] = $oCurrUser->getId();
 
 		// Get list friends
@@ -47,10 +43,9 @@ class ControllerCommonRefresh extends Controller {
 		foreach ( $lFriends as $oFriend ) {
 			$oUser = $oFriend->getUser();
 			$aUserIds[] = $oUser->getId();
-
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$this->data['users'][$aUser['id']] = $aUser;
+			$aUsers[$aUser['id']] = $aUser;
 		}
 
 		$aPosts = $this->model_cache_post->getPosts(array(
@@ -59,7 +54,6 @@ class ControllerCommonRefresh extends Controller {
 		));
 		
 		// Get list Posts
-		$aUserPostIds = array();
 		foreach ($aPosts as $i => $aPost) {
 			// thumb
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
@@ -76,26 +70,14 @@ class ControllerCommonRefresh extends Controller {
 
 			$this->data['posts'][] = $aPost;
 
-			if ( !in_array($aPost['user_id'], $aUserIds) ){
-				$aUserPostIds[$aPost['user_id']] = $aPost['user_id'];
-			}
-		}
-
-		// Get list post users
-		$lUsers = null;
-		if ( count($aUserPostIds) > 0 ){
-			$lUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserPostIds) );
-		}
-
-		if ( $lUsers ){
-			foreach ( $lUsers as $oUser ) {
-				$aUser = $oUser->formatToCache();
-
+			if ( empty($aUsers[$aPost['user_id']]) ){
+				$aUser = $this->model_user_user->getUser( $aPost['user_slug'] );
 				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-
-				$this->data['users'][$aUser['id']] = $aUser;
+				$aUsers[$aUser['id']] = $aUser;
 			}
 		}
+
+		$this->data['users'] = $aUsers;
 		
 		// set selected menu
 		$this->session->setFlash( 'menu', 'refresh' );

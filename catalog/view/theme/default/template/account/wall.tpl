@@ -16,9 +16,9 @@
 {% block body %}
     <div id="y-content">
         <div id="y-main-content" class="has-horizontal post-per-column" style="width: 9999px;">
+            {% set user = users[current_user_id] %}
             {% if current_user_id != get_current_user().id %}
-                {% set user = users[current_user_id] %}
-                {{ block('common_profile_column') }}
+                {{ block('account_common_profile_column') }}
             {% endif %}
             <div class="feed-block block-post-new">
                 <div class="block-header">
@@ -30,10 +30,11 @@
                     </a>           
                 </div>
                 <div class="block-content">
+                    {% if user.fr_status == 2 or user.fr_status == 1 %}
                     <div class="column has-new-post">
-                        {% set user = users[current_user_id] %}
                         {{ block('post_common_post_status_wall') }}
                     </div>
+                    {% endif %}
                     {% for post in posts %}
                         <div class="column">
                             {% set user = users[post.user_id] %}
