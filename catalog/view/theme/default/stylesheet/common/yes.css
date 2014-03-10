@@ -2118,7 +2118,14 @@ div[data-role="editor-toolbar"] {
 }
 .user-viewer .user-item .user-actions .btn {
   font-size: 11px;
-  padding: 3px 10px;
+  padding: 1px 10px;
+}
+.user-viewer .user-item .user-actions .btn > i {
+  font-size: 11px;
+  margin-right: 3px;
+}
+.user-viewer .user-item .user-actions .btn:hover > i {
+  color: #FFFFFF;
 }
 .user-viewer .user-item .user-item-avatar{
   height: 50px;
@@ -2419,6 +2426,12 @@ ul.user_actions li:hover i{
   right: 3px;
   display: none;
 }
+.user-container .user-item .friend-actions .friend-group {
+  float: left;
+}
+.user-container .user-item .friend-actions .follow-group {
+  float: left;
+}
 .user-container .user-item:hover .friend-actions {
   display: block;
 }
@@ -2427,7 +2440,7 @@ ul.user_actions li:hover i{
 }
 .user-container .user-item .friend-actions .btn {  
   font-size: 11px; 
-  padding: 3px 8px;
+  padding: 1px 5px;
   display: block;
   text-align: left;
 }
@@ -2435,7 +2448,7 @@ ul.user_actions li:hover i{
   color: #FFF; 
   float: left;
   margin: 3px 5px 4px 0px;
-  font-size: 14px;
+  font-size: 11px;
 }
 
 /* ------------------------------------- END FRIEND ------------------------------------------ */
