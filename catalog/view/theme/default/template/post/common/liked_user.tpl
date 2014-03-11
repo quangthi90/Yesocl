@@ -7,7 +7,7 @@
 				<a href="${href_user}" class="user-item-avatar fl">
 					<img src="${avatar}" alt="${username}" />
 				</a>
-				<div class="user-item-overview fl">
+				<div class="user-item-overview">
 					<a href="${href_user}" class="user-item-name">${username}</a>
 					<!--<span><strong>${multi_number}</strong> {% endraw %}{% trans %}friend{% endtrans %}{% raw %}(s)</span>-->
 					<span class="js-current-status" title="${current}">${current}</span>
