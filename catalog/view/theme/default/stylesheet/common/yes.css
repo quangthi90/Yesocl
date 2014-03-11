@@ -2096,8 +2096,8 @@ div[data-role="editor-toolbar"] {
 }
 .user-viewer .user-item {
   position: relative;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
+  margin-bottom: 5px;
+  padding: 10px 0px;
   border-bottom: 1px solid #f0f0f0;
   width: 500px;
 }
@@ -2111,9 +2111,19 @@ div[data-role="editor-toolbar"] {
   position: absolute;
   right: 0px;
   top: 0px;
+  display: none;
+}
+.user-viewer .user-item:hover .user-actions {
+  display: block;
 }
 .user-viewer .user-item .user-actions .dropdown-menu {
   min-width: 130px;
+}
+.user-viewer .user-item .friend-actions .friend-group {
+  float: left;
+}
+.user-viewer .user-item .friend-actions .follow-group {
+  float: left;
 }
 .user-viewer .user-item .user-actions .btn {
   font-size: 11px;
@@ -2134,7 +2144,7 @@ div[data-role="editor-toolbar"] {
   overflow: hidden; 
 }
 .user-viewer .user-item .user-item-overview {
-  margin-left: 10px;
+  margin-left: 60px;
 }
 .user-viewer .user-item .user-item-overview span {
   display: block;
