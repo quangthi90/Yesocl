@@ -49,6 +49,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_import'] = $this->language->get('text_import');
 		$this->data['text_stock'] = $this->language->get('text_stock');
 		$this->data['text_trading'] = $this->language->get('text_trading');
+		$this->data['text_market'] = $this->language->get('text_market');
 
 		// Branch
 		$this->data['text_branches'] = $this->language->get('text_branches');
@@ -127,6 +128,7 @@ class ControllerCommonHeader extends Controller {
 			// Stock
 			$this->data['stock_import'] = $this->url->link('stock/stock/import', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['trading_import'] = $this->url->link('stock/trading/import', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['stock_market'] = $this->url->link('stock/market', 'token=' . $this->session->data['token'], 'SSL');
 
 			// Company
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
