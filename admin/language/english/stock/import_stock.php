@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']     = 'Import stock';
+$_['heading_title']     = 'Import Stock';
 
 // Text
 $_['text_success']      = 'Success: You imported stock success!';

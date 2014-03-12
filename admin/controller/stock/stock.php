@@ -22,8 +22,8 @@ class ControllerStockStock extends Controller {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'stock/import' );
-		// $this->load->model( 'stock/stock' );
+		$this->load->language('stock/import_stock');
+		$this->load->model('stock/stock');
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -44,8 +44,8 @@ class ControllerStockStock extends Controller {
 		$this->data['button_submit'] = $this->language->get('button_submit');
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') ){
-			// $this->model_Stock_Stock->addStock( $this->request->post );
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && !empty($this->request->files['file']) ){
+			$aStockDatas = $this->model_stock_stock->importStock( $this->request->files['file'] );
 			
 			// $this->session->data['success'] = $this->language->get( 'text_success' );
 			// $this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
@@ -53,7 +53,7 @@ class ControllerStockStock extends Controller {
 
 		$this->data['action'] = $this->url->link( 'stock/stock/import', 'token=' . $this->session->data['token'], 'sSL' );
 		
-		$this->template = 'stock/import.tpl';
+		$this->template = 'stock/import_stock.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'

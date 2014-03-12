@@ -1,7 +1,11 @@
 <?php
 class ModelToolExcel extends Model {
-	public function loadExcel($slug, $arr_slugs) {
+	public function loadActiveSheet( $file ) {
+		$objPHPExcel = PHPExcel_IOFactory::load($file);
+
+		$sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 		
+		return $sheetData;
 	}
 }
 ?>
