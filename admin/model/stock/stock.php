@@ -105,12 +105,29 @@ class ModelStockStock extends Model {
 	}
 
 	public function importStock( $file ){
-		$this->load->model('tool\excel');
-		$aDatas = $this->model_tool_excel->loadActiveSheet( $file['tmp_name'] );
+		$this->load->model('tool/excel');
+		$this->load->model('stock/market');
+		$aStocks = $this->model_tool_excel->getActiveSheet( $file['tmp_name'] );
+		array_shift($aStocks);
 
-		foreach ( $aDatas as $aData ) {
-			# code...
+		foreach ( $aStocks as $aStock ) {
+			if ( !$oMarket = $this->model_stock_market->getMarket(array('code' => $aStock['B'])) ){
+				continue;
+			}
+			if ( !$oStock = $this->getStock(array('code' => $aStock['A'])) ){
+				$oStock = new Stock();
+			}
+			$oStock->setName( strtoupper(trim($aStock['A'])) );
+			$oStock->setCode( strtoupper(trim($aStock['A'])) );
+			$oStock->setMarket( $oMarket );
+			if ( !$oStock->getId() ){
+				$this->dm->persist( $oStock );
+			}
 		}
+
+		$this->dm->flush();
+
+		return true;
 	}
 }
 ?>

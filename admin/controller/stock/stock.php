@@ -46,9 +46,9 @@ class ControllerStockStock extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && !empty($this->request->files['file']) ){
 			if ( $this->model_stock_stock->importStock($this->request->files['file']) ){
-				$this->session->data['text_success'] = $this->language->get('text_success');
+				$this->data['success'] = $this->language->get('text_success');
 			}else{
-				$this->session->data['text_error'] = $this->language->get('text_success');
+				$this->data['error_warning'] = $this->language->get('text_error');
 			}
 		}
 

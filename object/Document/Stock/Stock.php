@@ -35,7 +35,7 @@ Class Stock {
 	private $market;
 	
 	/** @MongoDB\Boolean */
-	private $status;
+	private $status = true;
 
 	/** @MongoDB\Date */
 	private $created;
