@@ -97,6 +97,7 @@ $(document).ready(function(){
       <li id="company"><a class="top"><?php echo $text_stocks; ?></a>
         <ul>
           <li><a href="<?php echo $stock_market; ?>"><?php echo $text_market; ?></a></li>
+          <li><a href="<?php echo $stock; ?>"><?php echo $text_stock; ?></a></li>
           <li><a class="parent"><?php echo $text_import; ?></a>
             <ul>
               <li><a href="<?php echo $stock_import; ?>"><?php echo $text_stock; ?></a></li>

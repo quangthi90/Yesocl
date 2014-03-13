@@ -129,6 +129,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['stock_import'] = $this->url->link('stock/stock/import', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['trading_import'] = $this->url->link('stock/trading/import', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['stock_market'] = $this->url->link('stock/market', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['stock'] = $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'SSL');
 
 			// Company
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');
