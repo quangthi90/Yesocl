@@ -4,6 +4,7 @@ $_['heading_title']     = 'Import Stock';
 
 // Text
 $_['text_success']      = 'Success: You imported stock success!';
+$_['text_error']  		= 'Error: You imported stock not success!';
 
 // Entry
 $_['entry_import']        = 'Import:';

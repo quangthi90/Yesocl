@@ -25,7 +25,9 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $column_market; ?></td>
+              <td><?php echo $column_name; ?></td>
+              <td><?php echo $column_code; ?></td>
+              <td><?php echo $column_order; ?></td>
               <td><?php echo $column_status; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
@@ -36,7 +38,9 @@
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $market['id']; ?>"/></td>
               <td><?php echo $market['name']; ?></td>
-              <td><?php echo ( $market['status'] ) ? $text_enable : $text_disable; ?></td>
+              <td><?php echo $market['code']; ?></td>
+              <td><?php echo $market['order']; ?></td>
+              <td><?php echo $market['status']; ?></td>
               <td class="right"><?php foreach ( $market['action'] as $action ) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
                 <?php } ?></td>
@@ -45,7 +49,7 @@
             <?php }?>
             <?php if ( !$markets ) { ?>
             <tr class="center">
-              <td colspan="4"><?php echo $text_no_results; ?></td>
+              <td colspan="6"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>

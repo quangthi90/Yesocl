@@ -45,10 +45,11 @@ class ControllerStockStock extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && !empty($this->request->files['file']) ){
-			$aStockDatas = $this->model_stock_stock->importStock( $this->request->files['file'] );
-			
-			// $this->session->data['success'] = $this->language->get( 'text_success' );
-			// $this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
+			if ( $this->model_stock_stock->importStock($this->request->files['file']) ){
+				$this->session->data['text_success'] = $this->language->get('text_success');
+			}else{
+				$this->session->data['text_error'] = $this->language->get('text_success');
+			}
 		}
 
 		$this->data['action'] = $this->url->link( 'stock/stock/import', 'token=' . $this->session->data['token'], 'sSL' );

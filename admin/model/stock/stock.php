@@ -2,30 +2,30 @@
 use Document\Stock\Stock;
 
 class ModelStockStock extends Model {
-	public function addNetwork( $data = array() ) {
+	public function addStock( $aData = array() ) {
 		// name is required & isn't exist
-		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
+		if ( !empty($aData['name']) ) {
+			$this->data['name'] = strtoupper( trim($aData['name']) );
 		}else {
 			return false;
 		}
 
-		// code is required & isn't exist
-		if ( isset( $data['code'] ) && !$this->isExistCode( $data['code'] ) ) {
-			$this->data['code'] = strtolower( trim( $data['code'] ) );
+		// code is required
+		if ( isset( $aData['code'] ) && !$this->getStock(array('code' => $aData['code'])) ) {
+			$this->data['code'] = strtoupper( trim($aData['code']) );
 		}else {
 			return false;
 		}
 
 		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		if ( !isset( $aData['status'] ) ) {
+			$aData['status'] = 0;
 		}
 
 		$network = new Network();
-		$network->setName( $data['name'] );
-		$network->setCode( $data['code'] );
-		$network->setStatus( $data['status'] );
+		$network->setName( $aData['name'] );
+		$network->setCode( $aData['code'] );
+		$network->setStatus( $aData['status'] );
 
 		$this->dm->persist( $network );
 		$this->dm->flush();
@@ -33,24 +33,24 @@ class ModelStockStock extends Model {
 		return true;
 	}
 
-	public function editNetwork( $network_id, $data = array() ) {
+	public function editNetwork( $network_id, $aData = array() ) {
 		// name is required
-		if ( isset( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
+		if ( isset( $aData['name'] ) ) {
+			$this->data['name'] = strtoupper( trim( $aData['name'] ) );
 		}else {
 			return false;
 		}
 
 		// code is required
-		if ( isset( $data['code'] ) ) {
-			$this->data['code'] = strtolower( trim( $data['code'] ) );
+		if ( isset( $aData['code'] ) ) {
+			$this->data['code'] = strtoupper( trim( $aData['code'] ) );
 		}else {
 			return false;
 		}
 
 		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		if ( !isset( $aData['status'] ) ) {
+			$aData['status'] = 0;
 		}
 
 		$network = $this->dm->getRepository( 'Document\Social\Network' )->find( $network_id );
@@ -59,26 +59,26 @@ class ModelStockStock extends Model {
 		}
 
 		// name is exist
-		if ( $network->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
+		if ( $network->getName() != $aData['name'] && $this->isExistName( $aData['name'] ) ) {
 			return false;
 		}
 		// code is exist
-		if ( $network->getCode() != $data['code'] && $this->isExistCode( $data['code'] ) ) {
+		if ( $network->getCode() != $aData['code'] && $this->isExistCode( $aData['code'] ) ) {
 			return false;
 		}
 
-		$network->setName( $data['name'] );
-		$network->setCode( $data['code'] );
-		$network->setStatus( $data['status'] );
+		$network->setName( $aData['name'] );
+		$network->setCode( $aData['code'] );
+		$network->setStatus( $aData['status'] );
 		
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteNetworks( $data = array() ) {
-		if ( isset( $data['id'] ) ) {
-			foreach ($data['id'] as $id) {
+	public function deleteNetworks( $aData = array() ) {
+		if ( isset( $aData['id'] ) ) {
+			foreach ($aData['id'] as $id) {
 				$network = $this->dm->getRepository( 'Document\Social\Network' )->find( $id );
 
 				if ( !empty( $network ) ) {
@@ -94,7 +94,17 @@ class ModelStockStock extends Model {
 		$this->dm->flush();
 	}
 
-	public function import( $file ){
+	public function getStock( $aData = array() ){
+		if ( !empty($aData['id']) ){
+			return $this->dm->getRepository('Document\Stock\Stock')->find( $aData['id'] );
+		}elseif ( !empty($aData['code']) ){
+			return $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( strtoupper(trim($aData['code'])) );
+		}
+
+		return null;
+	}
+
+	public function importStock( $file ){
 		$this->load->model('tool\excel');
 		$aDatas = $this->model_tool_excel->loadActiveSheet( $file['tmp_name'] );
 

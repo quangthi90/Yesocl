@@ -2,30 +2,31 @@
 use Document\Stock\Market;
 
 class ModelStockMarket extends Model {
-	public function addMarket( $data = array() ) {
+	public function addMarket( $aDatas = array() ) {
 		// name is required & isn't exist
-		if ( isset( $data['name'] ) && !$this->isExistName( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
+		if ( !empty($aDatas['name']) ) {
+			$aDatas['name'] = strtoupper( trim($aDatas['name']) );
 		}else {
 			return false;
 		}
 
 		// code is required & isn't exist
-		if ( isset( $data['code'] ) && !$this->isExistCode( $data['code'] ) ) {
-			$this->data['code'] = strtolower( trim( $data['code'] ) );
+		if ( !empty($aDatas['code']) && !$this->getMarket($aDatas['code']) ) {
+			$aDatas['code'] = strtoupper( trim($aDatas['code']) );
 		}else {
 			return false;
 		}
 
 		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		if ( empty($aDatas['status']) ) {
+			$aDatas['status'] = false;
 		}
 
 		$oMarket = new Market();
-		$oMarket->setName( $data['name'] );
-		$oMarket->setCode( $data['code'] );
-		$oMarket->setStatus( $data['status'] );
+		$oMarket->setName( $aDatas['name'] );
+		$oMarket->setCode( $aDatas['code'] );
+		$oMarket->setOrder( $aDatas['order'] );
+		$oMarket->setStatus( $aDatas['status'] );
 
 		$this->dm->persist( $oMarket );
 		$this->dm->flush();
@@ -33,59 +34,41 @@ class ModelStockMarket extends Model {
 		return true;
 	}
 
-	public function editMarket( $oMarket_id, $data = array() ) {
+	public function editMarket( $oMarket_id, $aData = array() ) {
 		// name is required
-		if ( isset( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
-		}else {
-			return false;
-		}
-
-		// code is required
-		if ( isset( $data['code'] ) ) {
-			$this->data['code'] = strtolower( trim( $data['code'] ) );
+		if ( !empty($aData['name']) ) {
+			$aData['name'] = strtoupper( trim($aData['name']) );
 		}else {
 			return false;
 		}
 
 		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		if ( empty($aData['status']) ) {
+			$aData['status'] = false;
 		}
 
-		$oMarket = $this->dm->getRepository( 'Document\Social\Market' )->find( $oMarket_id );
-		if ( empty( $oMarket ) ) {
+		$oMarket = $this->dm->getRepository( 'Document\Stock\Market' )->find( $oMarket_id );
+		if ( !$oMarket ) {
 			return false;
 		}
 
-		// name is exist
-		if ( $oMarket->getName() != $data['name'] && $this->isExistName( $data['name'] ) ) {
-			return false;
+		$oMarket->setName( $aData['name'] );
+		if ( !empty($aData['order']) ){
+			$oMarket->setOrder( $aData['order'] );
 		}
-		// code is exist
-		if ( $oMarket->getCode() != $data['code'] && $this->isExistCode( $data['code'] ) ) {
-			return false;
-		}
-
-		$oMarket->setName( $data['name'] );
-		$oMarket->setCode( $data['code'] );
-		$oMarket->setStatus( $data['status'] );
+		$oMarket->setStatus( $aData['status'] );
 		
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteMarkets( $data = array() ) {
-		if ( isset( $data['id'] ) ) {
-			foreach ($data['id'] as $id) {
-				$oMarket = $this->dm->getRepository( 'Document\Social\Market' )->find( $id );
+	public function deleteMarkets( $aData = array() ) {
+		if ( !empty($aData['id']) ) {
+			foreach ($aData['id'] as $id) {
+				$oMarket = $this->dm->getRepository('Document\Stock\Market')->find( $id );
 
-				if ( !empty( $oMarket ) ) {
-					foreach ($oMarket->getUsers as $user) {
-						$this->dm->remove( $user );
-					}
-
+				if ( $oMarket ) {
 					$this->dm->remove( $oMarket );
 				}
 			}
@@ -94,13 +77,35 @@ class ModelStockMarket extends Model {
 		$this->dm->flush();
 	}
 
-	public function import( $file ){
-		$this->load->model('tool\excel');
-		$aDatas = $this->model_tool_excel->loadActiveSheet( $file['tmp_name'] );
-
-		foreach ( $aDatas as $aData ) {
-			# code...
+	public function getMarkets( $aData = array() ){
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
 		}
+
+		if ( empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+
+		if ( empty($aData['sort']) ){
+			$aData['order'] = 'order';
+			$aData['sort'] = 1;
+		}
+
+		return $this->dm->getRepository('Document\Stock\Market')
+			->findAll()
+			->skip( $aData['start'] )
+			->limit( $aData['limit'] )
+			->sort( array($aData['order'] => $aData['sort']) );
+	}
+
+	public function getMarket( $aData = array() ){
+		if ( !empty($aData['id']) ){
+			return $this->dm->getRepository('Document\Stock\Market')->find( $aData['id'] );
+		}elseif ( !empty($aData['code']) ){
+			return $this->dm->getRepository('Document\Stock\Market')->findOneByCode( strtoupper(trim($aData['code'])) );
+		}
+
+		return null;
 	}
 }
 ?>

@@ -22,6 +22,11 @@ Class Market {
 	private $code;
 
 	/** 
+	 * @MongoDB\Int
+	 */
+	private $order;
+
+	/** 
 	 * @MongoDB\EmbedMany(targetDocument="Exchange") 
 	 */
 	private $exchanges = array();
@@ -53,6 +58,14 @@ Class Market {
 
 	public function getCode(){
 		return $this->code;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 
 	public function addExchange( Exchange $exchange ){
