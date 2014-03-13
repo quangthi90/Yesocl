@@ -1,23 +1,28 @@
 <?php
 namespace Document\Stock;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="stock")
+ * @SOLR\Document(collection="stock")
  */
 Class Stock {
 	/** 
 	 * @MongoDB\Id 
+	 * @SOLR\Field(type="id")
 	 */
 	private $id; 
 
 	/** 
 	 * @MongoDB\String 
+	 * @SOLR\Field(type="text")
 	 */
 	private $name;
 
 	/** 
 	 * @MongoDB\String 
+	 * @SOLR\Field(type="text")
 	 */
 	private $code;
 
