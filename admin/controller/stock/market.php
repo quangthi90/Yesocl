@@ -328,7 +328,7 @@ class ControllerStockMarket extends Controller {
 			$this->error['error_code'] = $this->language->get( 'error_code' );
 		}
 
-		elseif ( $this->model_stock_market->getMarket(array('code', $this->request->post['code'])) ){
+		elseif ( !empty($this->request->post['code']) && $this->model_stock_market->getMarket(array('code', $this->request->post['code'])) ){
 			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
 		}
 

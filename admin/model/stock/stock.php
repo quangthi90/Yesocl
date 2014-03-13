@@ -17,76 +17,72 @@ class ModelStockStock extends Model {
 			return false;
 		}
 
+		// market is required
+		$oMarket = $this->dm->getRepository('Document\Stock\Market')->find( $aData['market_id'] );
+		if ( !$oMarket ){
+			return false;
+		}
+
 		// status
 		if ( !isset( $aData['status'] ) ) {
 			$aData['status'] = 0;
 		}
 
-		$network = new Network();
-		$network->setName( $aData['name'] );
-		$network->setCode( $aData['code'] );
-		$network->setStatus( $aData['status'] );
+		$oStock = new Stock();
+		$oStock->setName( $aData['name'] );
+		$oStock->setCode( $aData['code'] );
+		$oStock->setMarket( $oMarket );
+		$oStock->setStatus( $aData['status'] );
 
-		$this->dm->persist( $network );
+		$this->dm->persist( $oStock );
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function editNetwork( $network_id, $aData = array() ) {
+	public function editStock( $idStock, $aData = array() ) {
 		// name is required
-		if ( isset( $aData['name'] ) ) {
-			$this->data['name'] = strtoupper( trim( $aData['name'] ) );
-		}else {
-			return false;
-		}
-
-		// code is required
-		if ( isset( $aData['code'] ) ) {
-			$this->data['code'] = strtoupper( trim( $aData['code'] ) );
+		if ( !empty($aData['name']) ) {
+			$aData['name'] = strtoupper( trim($aData['name']) );
 		}else {
 			return false;
 		}
 
 		// status
-		if ( !isset( $aData['status'] ) ) {
-			$aData['status'] = 0;
+		if ( !isset($aData['status'] ) ) {
+			$aData['status'] = false;
 		}
 
-		$network = $this->dm->getRepository( 'Document\Social\Network' )->find( $network_id );
-		if ( empty( $network ) ) {
+		$oStock = $this->dm->getRepository('Document\Stock\Stock')->find( $idStock );
+		if ( !$oStock ) {
 			return false;
 		}
 
 		// name is exist
-		if ( $network->getName() != $aData['name'] && $this->isExistName( $aData['name'] ) ) {
-			return false;
+		if ( $oStock->getName() != $aData['name'] ) {
+			$oStock->setName( $aData['name'] );
 		}
-		// code is exist
-		if ( $network->getCode() != $aData['code'] && $this->isExistCode( $aData['code'] ) ) {
-			return false;
+		if ( $oStock->getMarket()->getId() != $aData['market_id'] ){
+			$oMarket = $this->dm->getRepository('Document\Stock\Market')->find( $aData['market_id'] );
+			
+			if ( $oMarket ){
+				$oStock->setMarket( $oMarket );
+			}
 		}
-
-		$network->setName( $aData['name'] );
-		$network->setCode( $aData['code'] );
-		$network->setStatus( $aData['status'] );
+		$oStock->setStatus( $aData['status'] );
 		
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteNetworks( $aData = array() ) {
+	public function deleteStocks( $aData = array() ) {
 		if ( isset( $aData['id'] ) ) {
 			foreach ($aData['id'] as $id) {
-				$network = $this->dm->getRepository( 'Document\Social\Network' )->find( $id );
+				$oStock = $this->dm->getRepository( 'Document\Stock\Stock' )->find( $id );
 
-				if ( !empty( $network ) ) {
-					foreach ($network->getUsers as $user) {
-						$this->dm->remove( $user );
-					}
-
-					$this->dm->remove( $network );
+				if ( !empty( $oStock ) ) {
+					$this->dm->remove( $oStock );
 				}
 			}
 		}
@@ -104,6 +100,27 @@ class ModelStockStock extends Model {
 		return null;
 	}
 
+	public function getStocks( $aData = array() ){
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		if ( empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+
+		if ( empty($aData['sort']) ){
+			$aData['order'] = 'name';
+			$aData['sort'] = 1;
+		}
+
+		return $this->dm->getRepository('Document\Stock\Stock')
+			->findAll()
+			->skip( $aData['start'] )
+			->limit( $aData['limit'] )
+			->sort( array($aData['order'] => $aData['sort']) );
+	}
+
 	public function importStock( $file ){
 		$this->load->model('tool/excel');
 		$this->load->model('stock/market');
@@ -117,6 +134,7 @@ class ModelStockStock extends Model {
 			if ( !$oStock = $this->getStock(array('code' => $aStock['A'])) ){
 				$oStock = new Stock();
 			}
+			// var_dump($oMarket->getId()); exit;
 			$oStock->setName( strtoupper(trim($aStock['A'])) );
 			$oStock->setCode( strtoupper(trim($aStock['A'])) );
 			$oStock->setMarket( $oMarket );

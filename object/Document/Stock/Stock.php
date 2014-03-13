@@ -31,7 +31,7 @@ Class Stock {
 	 */
 	private $exchanges = array();
 
-	/** @MongoDB\ReferenceMany(targetDocument="Market", inversedBy="stocks") */
+	/** @MongoDB\ReferenceOne(targetDocument="Market", inversedBy="stocks") */
 	private $market;
 	
 	/** @MongoDB\Boolean */
