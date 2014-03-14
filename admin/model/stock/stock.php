@@ -114,8 +114,25 @@ class ModelStockStock extends Model {
 			$aData['sort'] = 1;
 		}
 
+		$aQuery = array();
+		if ( !empty($aData['filter_name']) ){
+			$aQuery['name'] = new \MongoRegex('/i*' . strtoupper(trim($aData['filter_name'])) . '.*/i');
+		}
+
+		if ( !empty($aData['filter_code']) ){
+			$aQuery['code'] = new \MongoRegex('/' . strtoupper(trim($aData['filter_code'])) . '.*/i');
+		}
+
+		if ( !empty($aData['filter_market']) ){
+			$aQuery['market.id'] = $aData['filter_market'];
+		}
+
+		if ( !empty($aData['filter_status']) ){
+			$aQuery['status'] = (boolean)$aData['filter_status'];
+		}
+
 		return $this->dm->getRepository('Document\Stock\Stock')
-			->findAll()
+			->findBy( $aQuery )
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] )
 			->sort( array($aData['order'] => $aData['sort']) );

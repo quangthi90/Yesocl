@@ -118,7 +118,32 @@ class ControllerStockStock extends Controller {
 		}
 
 		$url = '';
-		$url .= '&page=' . $page;
+		$pageUrl .= '&page=' . $page;
+
+		$aData = array(
+			'start' => ($page - 1) * $this->limit,
+			'limit' => $this->limit
+		);
+
+		if ( !empty($this->request->get['filter_name']) ){
+			$url .= '&filter_name=' . $this->request->get['filter_name'];
+			$aData['filter_name'] = $this->request->get['filter_name'];
+		}
+
+		if ( !empty($this->request->get['filter_code']) ){
+			$url .= '&filter_code=' . $this->request->get['filter_code'];
+			$aData['filter_code'] = $this->request->get['filter_code'];
+		}
+
+		if ( !empty($this->request->get['filter_market']) ){
+			$url .= '&filter_market=' . $this->request->get['filter_market'];
+			$aData['filter_market'] = $this->request->get['filter_market'];
+		}
+
+		if ( !empty($this->request->get['filter_status']) ){
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+			$aData['filter_status'] = $this->request->get['filter_status'];
+		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -158,15 +183,10 @@ class ControllerStockStock extends Controller {
 		$this->data['button_filter'] = $this->language->get('button_filter');
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'stock/stock/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
-		$this->data['delete'] = $this->url->link( 'stock/stock/delete', 'token=' . $this->session->data['token'] . $url, 'SSL');
+		$this->data['insert'] = $this->url->link( 'stock/stock/insert', 'token=' . $this->session->data['token'] . $pageUrl . $url, 'SSL');
+		$this->data['delete'] = $this->url->link( 'stock/stock/delete', 'token=' . $this->session->data['token'] . $pageUrl . $url, 'SSL');
 
-		// Stock
-		$aData = array(
-			'start' => ($page - 1) * $this->limit,
-			'limit' => $this->limit
-		);
-		
+		// Stock		
 		$lStocks = $this->model_stock_stock->getStocks( $aData );
 		
 		$iStockTotal = $lStocks->count();
@@ -178,7 +198,7 @@ class ControllerStockStock extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit' ),
-					'href' => $this->url->link( 'stock/stock/update', 'stock_id=' . $oStock->getId() . '&token=' . $this->session->data['token'] . $url, 'sSL' ),
+					'href' => $this->url->link( 'stock/stock/update', 'stock_id=' . $oStock->getId() . '&token=' . $this->session->data['token'] . $pageUrl . $url, 'sSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -203,6 +223,30 @@ class ControllerStockStock extends Controller {
 			);
 		}
 
+		if ( !empty($this->request->get['filter_name']) ){
+			$this->data['filter_name'] = $this->request->get['filter_name'];
+		}else{
+			$this->data['filter_name'] = '';
+		}
+
+		if ( !empty($this->request->get['filter_code']) ){
+			$this->data['filter_code'] = $this->request->get['filter_code'];
+		}else{
+			$this->data['filter_code'] = '';
+		}
+
+		if ( !empty($this->request->get['filter_market']) ){
+			$this->data['filter_market'] = $this->request->get['filter_market'];
+		}else{
+			$this->data['filter_market'] = '';
+		}
+
+		if ( !empty($this->request->get['filter_status']) ){
+			$this->data['filter_status'] = $this->request->get['filter_status'];
+		}else{
+			$this->data['filter_status'] = '';
+		}
+
 		$this->data['token'] = $this->session->data['token'];
 		
 		$pagination = new Pagination();
@@ -210,7 +254,7 @@ class ControllerStockStock extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('stock/stock', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
+		$pagination->url = $this->url->link('stock/stock', '&page={page}' . '&token=' . $this->session->data['token'] . $url, 'sSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
