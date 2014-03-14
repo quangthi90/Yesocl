@@ -1,6 +1,6 @@
 <?php 
 class ControllerStockStock extends Controller {
-	private $error = array( );
+	private $error = array();
 	private $limit = 10;
 	private $route = 'stock/stock';
  
@@ -15,52 +15,6 @@ class ControllerStockStock extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 		
 		$this->getList();
-	}
-
-	public function import(){
-		if ( !$this->user->hasPermission($this->route, $this->config->get('action_import')) ) {
-			return $this->forward('error/permission');
-		}
-		
-		$this->load->language('stock/import_stock');
-		$this->load->model('stock/stock');
-
-		// breadcrumbs
-   		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('text_home' ),
-			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
-      		'separator' => false
-   		);
-   		$this->data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('heading_title' ),
-			'href'      => $this->url->link( 'stock/import', 'token=' . $this->session->data['token'], 'sSL' ),
-      		'separator' => ' :: '
-   		);
-
-   		// Heading title
-		$this->data['heading_title'] = $this->language->get('heading_title');
-
-		$this->data['entry_import'] = $this->language->get('entry_import');
-		$this->data['button_submit'] = $this->language->get('button_submit');
-
-		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && !empty($this->request->files['file']) ){
-			if ( $this->model_stock_stock->importStock($this->request->files['file']) ){
-				$this->data['success'] = $this->language->get('text_success');
-			}else{
-				$this->data['error_warning'] = $this->language->get('text_error');
-			}
-		}
-
-		$this->data['action'] = $this->url->link( 'stock/stock/import', 'token=' . $this->session->data['token'], 'sSL');
-		
-		$this->template = 'stock/import_stock.tpl';
-		$this->children = array(
-			'common/header',
-			'common/footer'
-		);
-				
-		$this->response->setOutput( $this->render() );
 	}
 
 	public function insert(){
@@ -83,7 +37,7 @@ class ControllerStockStock extends Controller {
 
 		$this->data['action'] = $this->url->link( 'stock/stock/insert', 'token=' . $this->session->data['token'], 'sSL');
 		
-		$this->getForm( );
+		$this->getForm();
 	}
 
 	public function update(){
@@ -132,10 +86,10 @@ class ControllerStockStock extends Controller {
 			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 
-		$this->getList( );
+		$this->getList();
 	}
 
-	private function getList( ){
+	private function getList(){
 		// catch error
 		if ( isset($this->error['warning']) ){
 			$this->data['error_warning'] = $this->error['warning'];
@@ -184,6 +138,9 @@ class ControllerStockStock extends Controller {
 		// Text
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		$this->data['text_edit'] = $this->language->get('text_edit');
+		$this->data['text_none'] = $this->language->get('text_none');
+		$this->data['text_enabled'] = $this->language->get('text_enabled');
+		$this->data['text_disabled'] = $this->language->get('text_disabled');
 
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
@@ -198,6 +155,7 @@ class ControllerStockStock extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_filter'] = $this->language->get('button_filter');
 		
 		// Link
 		$this->data['insert'] = $this->url->link( 'stock/stock/insert', 'token=' . $this->session->data['token'] . $url, 'SSL');
@@ -234,6 +192,18 @@ class ControllerStockStock extends Controller {
 				);
 			}
 		}
+
+		$this->load->model('stock/market');
+		$lMarkets = $this->model_stock_market->getMarkets();
+		$this->data['markets'] = array();
+		foreach ( $lMarkets as $oMarket ) {
+			$this->data['markets'][] = array(
+				'id' => $oMarket->getId(),
+				'name' => $oMarket->getName()
+			);
+		}
+
+		$this->data['token'] = $this->session->data['token'];
 		
 		$pagination = new Pagination();
 		$pagination->total = $iStockTotal;
@@ -406,6 +376,67 @@ class ControllerStockStock extends Controller {
 		}else {
 			return true;	
 		}
+	}
+
+	public function import(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_import')) ) {
+			return $this->forward('error/permission');
+		}
+		
+		$this->load->language('stock/import_stock');
+		$this->load->model('stock/stock');
+
+		// breadcrumbs
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get('text_home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
+      		'separator' => false
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get('heading_title' ),
+			'href'      => $this->url->link( 'stock/import', 'token=' . $this->session->data['token'], 'sSL' ),
+      		'separator' => ' :: '
+   		);
+
+   		// Heading title
+		$this->data['heading_title'] = $this->language->get('heading_title');
+
+		$this->data['entry_import'] = $this->language->get('entry_import');
+		$this->data['button_submit'] = $this->language->get('button_submit');
+
+		// request
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && !empty($this->request->files['file']) ){
+			if ( $this->model_stock_stock->importStock($this->request->files['file']) ){
+				$this->data['success'] = $this->language->get('text_success');
+			}else{
+				$this->data['error_warning'] = $this->language->get('text_error');
+			}
+		}
+
+		$this->data['action'] = $this->url->link( 'stock/stock/import', 'token=' . $this->session->data['token'], 'sSL');
+		
+		$this->template = 'stock/import_stock.tpl';
+		$this->children = array(
+			'common/header',
+			'common/footer'
+		);
+				
+		$this->response->setOutput( $this->render() );
+	}
+
+	public function search(){
+		$this->load->model('stock/stock');
+		$aResults = $this->model_stock_stock->searchStock( $this->request->get );
+
+		$aStocks = array();
+		foreach ( $aResults as $aResult ) {
+			$aStocks[$aResult->getCode()] = array(
+				'name' => $aResult->getName(),
+				'code' => $aResult->getCode()
+			);
+		}
+
+		$this->response->setOutput( json_encode($aStocks) );
 	}
 }
 ?>

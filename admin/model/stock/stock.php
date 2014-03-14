@@ -147,5 +147,50 @@ class ModelStockStock extends Model {
 
 		return true;
 	}
+
+	public function searchStock( $aData = array() ) {
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\Stock\Stock',
+			)
+    	);
+
+    	if ( !empty($aData['name']) ) {
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq1',
+				    'tag' => array('filter_name'),
+				    'query' => 'name_t:*' . strtoupper( trim($aData['name']) ) . '*',
+					)
+    			);
+    	}
+
+    	if ( !empty($aData['code']) ) {
+    		$query->addFilterQuery( 
+    			array(
+				    'key' => 'fq2',
+				    'tag' => array('filter_code'),
+				    'query' => 'code_t:' . strtoupper( trim($aData['code']) ) . '*',
+					)
+    			);
+    	}
+
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
+		}else {
+			$aData['start'] = 0;
+		}
+
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
+		}else {
+			$aData['limit'] = 10;
+		}
+
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
+ 
+		return $this->client->execute( $query );
+	}
 }
 ?>

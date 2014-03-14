@@ -33,6 +33,23 @@
             </tr>
           </thead>
           <tbody>
+            <tr class="filter">
+              <td></td>
+              <td><input type="text" name="name" id="name" /></td>
+              <td><input type="text" name="code" id="code" /></td>
+              <td><select class="input-large" name="market_id" id="market_id">
+              <option value="none"><?php echo $text_none; ?></option>
+              <?php foreach ( $markets as $market ) { ?>
+              <option value="<?php echo $market['id']; ?>"><?php echo $market['name']; ?></option>
+              <?php } ?>
+            </select></td>
+              <td><select class="input-large" name="status" id="status">
+              <option value="none"><?php echo $text_none; ?></option>
+              <option value="true"><?php echo $text_enabled; ?></option>
+              <option value="false"><?php echo $text_disabled; ?></option>
+            </select></td>
+              <td align="right"><a onclick="filter();" class="btn btn-primary"><?php echo $button_filter; ?></a></td>
+            </tr>
             <?php if ( $stocks ) { ?>
             <?php foreach ( $stocks as $stock ) { ?>
             <tr>
@@ -59,4 +76,89 @@
     </div>
   </div>
 </div>
+<script type="text/javascript"><!--
+function filter() {
+  url = 'index.php?route=data/value&token=<?php echo $token; ?>';
+
+  var filter_type_name = $('input[name=\'filter_type_name\']').attr('value');
+  
+  if (filter_type_name) {
+    url += '&filter_type_name=' + encodeURIComponent(filter_type_name);
+  }
+  
+  var filter_type = $('input[name=\'filter_type\']').attr('value');
+  
+  if (filter_type) {
+    url += '&filter_type=' + encodeURIComponent(filter_type);
+  }
+
+  var filter_name = $('input[name=\'filter_name\']').attr('value');
+  
+  if (filter_name) {
+    url += '&filter_name=' + encodeURIComponent(filter_name);
+  } 
+  
+  var filter_value = $('input[name=\'filter_value\']').attr('value');
+  
+  if (filter_value) {
+    url += '&filter_value=' + encodeURIComponent(filter_value);
+  } 
+
+  location = url;
+}
+//--></script>
+<script type="text/javascript"><!--
+$('input[id=\'name\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=stock/stock/search&token=<?php echo $token; ?>&name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.name
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[id=\'name\']').val(ui.item.value);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>
+<script type="text/javascript"><!--
+$('input[id=\'code\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=stock/stock/search&token=<?php echo $token; ?>&code=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.code,
+            value: item.code
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[id=\'code\']').val(ui.item.value);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
 <?php echo $footer; ?>
