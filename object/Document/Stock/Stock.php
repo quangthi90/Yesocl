@@ -40,6 +40,16 @@ Class Stock {
 	/** @MongoDB\Date */
 	private $created;
 
+	public function getExchangeByCreated( $created ){
+		foreach ( $this->exchanges as $oExchange ) {
+			if ( $oExchange->getCreated == $created ){
+				return $oExchange;
+			}
+		}
+
+		return null;
+	}
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {

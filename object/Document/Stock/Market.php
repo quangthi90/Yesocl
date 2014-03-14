@@ -5,24 +5,20 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(db="yesocl", collection="stock_market")
- * @SOLR\Document(collection="stock_market")
  */
 Class Market {
 	/** 
 	 * @MongoDB\Id 
-	 * @SOLR\Field(type="id")
 	 */
 	private $id;
 
 	/** 
 	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
 	 */
 	private $name;
 
 	/** 
 	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
 	 */
 	private $code;
 
@@ -30,11 +26,6 @@ Class Market {
 	 * @MongoDB\Int
 	 */
 	private $order;
-
-	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Exchange") 
-	 */
-	private $exchanges = array();
 
 	/** @MongoDB\ReferenceMany(targetDocument="Stock", mappedBy="market") */
 	private $stocks = array();
@@ -75,18 +66,6 @@ Class Market {
 
 	public function getOrder(){
 		return $this->order;
-	}
-
-	public function addExchange( Exchange $exchange ){
-		$this->exchanges[] = $exchange;
-	}
-
-	public function setExchanges( $exchanges ){
-		$this->exchanges = $exchanges;
-	}
-
-	public function getExchanges(){
-		return $this->exchanges;
 	}
 
 	public function addStock( Stock $stock ){

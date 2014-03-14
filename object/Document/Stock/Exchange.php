@@ -18,10 +18,10 @@ Class Exchange {
 	private $closePrice;
 
 	/** @MongoDB\Float */
-	private $maxPrice;
+	private $highPrice;
 
 	/** @MongoDB\Float */
-	private $minPrice;
+	private $lowPrice;
 
 	/** @MongoDB\Int */
 	private $volume;
@@ -55,20 +55,20 @@ Class Exchange {
 		$this->closePrice = $closePrice;
 	}
 
-	public function getMaxPrice(){
-		return $this->maxPrice;
+	public function getHighPrice(){
+		return $this->highPrice;
 	}
 
-	public function setMaxPrice( $maxPrice ){
-		$this->maxPrice = $maxPrice;
+	public function setHighPrice( $highPrice ){
+		$this->highPrice = $highPrice;
 	}
 
-	public function getMinPrice(){
-		return $this->minPrice;
+	public function getLowPrice(){
+		return $this->lowPrice;
 	}
 
-	public function setMinPrice( $minPrice ){
-		$this->minPrice = $minPrice;
+	public function setLowPrice( $lowPrice ){
+		$this->lowPrice = $lowPrice;
 	}
 
 	public function getVolume(){

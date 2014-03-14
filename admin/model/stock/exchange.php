@@ -1,7 +1,7 @@
 <?php
-use Document\Stock\Stock;
+use Document\Stock\Exchange;
 
-class ModelStockStock extends Model {
+class ModelStockExchange extends Model {
 	public function addStock( $aData = array() ) {
 		// name is required & isn't exist
 		if ( !empty($aData['name']) ) {
@@ -138,26 +138,34 @@ class ModelStockStock extends Model {
 			->sort( array($aData['order'] => $aData['sort']) );
 	}
 
-	public function importStock( $file ){
+	public function importExchange( $file ){
 		$this->load->model('tool/excel');
-		$this->load->model('stock/market');
-		$aStocks = $this->model_tool_excel->getActiveSheet( $file['tmp_name'] );
-		array_shift($aStocks);
-
-		foreach ( $aStocks as $aStock ) {
-			if ( !$oMarket = $this->model_stock_market->getMarket(array('code' => strtoupper(trim($aStock['B'])))) ){
+		$this->load->model('stock/stock');
+		$aExchanges = $this->model_tool_excel->getActiveSheet( $file['tmp_name'], 'B' );
+		array_shift($aExchanges);
+		// print("<pre>");
+		// var_dump($aExchanges);
+		// exit;
+		foreach ( $aExchanges as $aExchange ) {
+			if ( !$oStock = $this->model_stock_stock->getStock(array('code' => strtoupper(trim($aExchange['A'])))) ){
 				continue;
 			}
-			if ( !$oStock = $this->getStock(array('code' => $aStock['A'])) ){
-				$oStock = new Stock();
+			
+			$created = date_create_from_format('m-d-y', $aExchange['B']);
+
+			if ( $oStock->getExchangeByCreated($created) ){
+				continue;
 			}
-			// var_dump($oMarket->getId()); exit;
-			$oStock->setName( strtoupper(trim($aStock['A'])) );
-			$oStock->setCode( strtoupper(trim($aStock['A'])) );
-			$oStock->setMarket( $oMarket );
-			if ( !$oStock->getId() ){
-				$this->dm->persist( $oStock );
-			}
+
+			$oExchange = new Exchange();
+
+			$oExchange->setOpenPrice( $aExchange['C'] );
+			$oExchange->setHighPrice( $aExchange['D'] );
+			$oExchange->getLowPrice( $aExchange['E'] );
+			$oExchange->setClosePrice( $aExchange['F'] );
+			$oExchange->setVolume( $aExchange['G'] );
+
+			$oStock->addExchange( $oExchange );
 		}
 
 		$this->dm->flush();
