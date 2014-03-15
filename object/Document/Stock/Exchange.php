@@ -29,12 +29,6 @@ Class Exchange {
 	/** @MongoDB\Date */
 	private $created;
 
-	/** @MongoDB\PrePersist */
-    public function prePersist()
-    {
-    	$this->created = new \DateTime();
-    }
-
 	public function getId() {
 		return $this->id;
 	}

@@ -201,6 +201,12 @@ class ControllerStockStock extends Controller {
 					'href' => $this->url->link( 'stock/stock/update', 'stock_id=' . $oStock->getId() . '&token=' . $this->session->data['token'] . $pageUrl . $url, 'sSL' ),
 					'icon' => 'icon-edit',
 				);
+
+				$action[] = array(
+					'text' => $this->language->get('text_trading' ),
+					'href' => $this->url->link( 'stock/exchange', 'stock_id=' . $oStock->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'icon' => 'icon-signal',
+				);
 			
 				$this->data['stocks'][] = array(
 					'id' => $oStock->getId(),

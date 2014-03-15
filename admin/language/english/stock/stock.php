@@ -6,6 +6,7 @@ $_['heading_title'] 				= 'Stock Management';
 $_['text_edit'] 					= 'Edit';
 $_['text_enable'] 					= 'Enable';
 $_['text_disable'] 					= 'Disable';
+$_['text_trading'] 					= 'Trading';
 
 // button
 $_['button_insert'] 				= 'Insert';

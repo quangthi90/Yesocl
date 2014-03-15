@@ -131,11 +131,19 @@ class ModelStockStock extends Model {
 			$aQuery['status'] = (boolean)$aData['filter_status'];
 		}
 
-		return $this->dm->getRepository('Document\Stock\Stock')
+		$lStock = $this->dm->getRepository('Document\Stock\Stock')
 			->findBy( $aQuery )
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] )
 			->sort( array($aData['order'] => $aData['sort']) );
+
+		// Remove all security trading data in Stocks
+		// foreach ($lStock as $key => $oStock) {
+		// 	$oStock->setExchanges(array());
+		// }
+		// $this->dm->flush();
+
+		return $lStock;
 	}
 
 	public function importStock( $file ){

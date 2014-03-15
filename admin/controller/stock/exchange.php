@@ -10,9 +10,13 @@ class ControllerStockExchange extends Controller {
 		}
 
 		$this->load->language( 'stock/exchange' );
-		$this->load->model( 'stock/exchange' );
 
-		$this->document->setTitle( $this->language->get('heading_title') );
+		if ( empty($this->request->get['stock_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_stock_empty');
+			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
+		}
+
+		$this->load->model( 'stock/exchange' );
 		
 		$this->getList();
 	}
@@ -23,6 +27,12 @@ class ControllerStockExchange extends Controller {
 		}
 
 		$this->load->language( 'stock/exchange' );
+
+		if ( empty($this->request->get['stock_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_stock_empty');
+			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
+		}
+
 		$this->load->model( 'stock/exchange' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
@@ -46,13 +56,19 @@ class ControllerStockExchange extends Controller {
 		}
 		
 		$this->load->language( 'stock/exchange' );
+
+		if ( empty($this->request->get['stock_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_stock_empty');
+			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
+		}
+
 		$this->load->model( 'stock/exchange' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm(true) ){
-			$this->model_stock_exchange->editExchange( $this->request->get['Exchange_id'], $this->request->post );
+			$this->model_stock_exchange->editExchange( $this->request->get['exchange_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('stock/exchange', 'token=' . $this->session->data['token'], 'sSL') );
@@ -67,6 +83,12 @@ class ControllerStockExchange extends Controller {
 		}
 		
 		$this->load->language( 'stock/exchange' );
+		
+		if ( empty($this->request->get['stock_id']) ){
+			$this->session->data['error_warning'] = $this->language->get('error_stock_empty');
+			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
+		}
+
 		$this->load->model( 'stock/exchange' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
@@ -110,6 +132,9 @@ class ControllerStockExchange extends Controller {
 			$page = 1;
 		}
 
+		$url = '';
+		$url .= '&stock_id=' . $this->request->get['stock_id'];
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
@@ -122,18 +147,24 @@ class ControllerStockExchange extends Controller {
       		'separator' => ' :: '
    		);
 
+   		$this->load->model('stock/stock');
+		$oStock = $this->model_stock_stock->getStock( array('id' => $this->request->get['stock_id']) );
+
    		// Heading title
 		$this->data['heading_title'] = $this->language->get( 'heading_title' );
+		$this->document->setTitle( $this->language->get('heading_title') . ' | ' . $oStock->getCode() );
 		
 		// Text
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		$this->data['text_edit'] = $this->language->get('text_edit');
 
 		// Column
-		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_code'] = $this->language->get('column_code');
-		$this->data['column_order'] = $this->language->get('column_order');
-		$this->data['column_status'] = $this->language->get('column_status');	
+		$this->data['column_high'] = $this->language->get('column_high');
+		$this->data['column_low'] = $this->language->get('column_low');
+		$this->data['column_open'] = $this->language->get('column_open');
+		$this->data['column_close'] = $this->language->get('column_close');
+		$this->data['column_volume'] = $this->language->get('column_volume');
+		$this->data['column_created'] = $this->language->get('column_created');
 		$this->data['column_action'] = $this->language->get('column_action');
 		
 		// Confirm
@@ -142,49 +173,66 @@ class ControllerStockExchange extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+		$this->data['button_back'] = $this->language->get('button_back');
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'stock/exchange/insert', 'token=' . $this->session->data['token'], 'sSL' );
-		$this->data['delete'] = $this->url->link( 'stock/exchange/delete', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['insert'] = $this->url->link( 'stock/exchange/insert', 'token=' . $this->session->data['token'] . $url, 'sSL' );
+		$this->data['delete'] = $this->url->link( 'stock/exchange/delete', 'token=' . $this->session->data['token'] . $url, 'sSL' );
+		$this->data['back'] = $this->url->link( 'stock/stock', 'token=' . $this->session->data['token'], 'sSL' );
 
-		// Stock
+		// Exchange
 		$aData = array(
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit
 		);
+
+		if ( !$oStock ){
+			$this->session->data['error_warning'] = $this->language->get('error_stock_not_found');
+			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
+		}
 		
-		$lExchanges = $this->model_stock_exchange->getExchanges( $aData );
+		$lExchanges = $oStock->getExchanges();
 		
 		$iExchangeTotal = $lExchanges->count();
 		
-		$this->data['Exchanges'] = array();
+		$this->data['exchanges'] = array();
 		if ( $lExchanges ){
-			foreach ( $lExchanges as $oExchange ){
+			foreach ( $lExchanges as $key => $oExchange ){
+				if ( $key < $aData['start'] ){
+					continue;
+				}
+
+				if ( count($this->data['exchanges']) == $aData['limit'] ){
+					break;
+				}
+
 				$action = array();
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'stock/exchange/update', 'Exchange_id=' . $oExchange->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'href' => $this->url->link( 'stock/exchange/update', 'exchange_id=' . $oExchange->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
 					'icon' => 'icon-edit',
 				);
 			
-				$this->data['Exchanges'][] = array(
+				$this->data['exchanges'][] = array(
 					'id' => $oExchange->getId(),
-					'name' => $oExchange->getName(),
-					'code' => $oExchange->getCode(),
-					'order' => $oExchange->getOrder(),
-					'status' => $oExchange->getStatus() ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+					'high' => $oExchange->getHighPrice(),
+					'low' => $oExchange->getLowPrice(),
+					'open' => $oExchange->getOpenPrice(),
+					'close' => $oExchange->getClosePrice(),
+					'volume' => $oExchange->getVolume(),
+					'created' => $oExchange->getCreated()->format('d/m/Y'),
 					'action' => $action,
 				);
 			}
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $oExchange;
+		$pagination->total = $iExchangeTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('stock/exchange', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
+		$pagination->url = $this->url->link('stock/exchange', '&page={page}' . '&token=' . $this->session->data['token'] . $url, 'sSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -225,7 +273,7 @@ class ControllerStockExchange extends Controller {
 			$this->data['error_code'] = '';
 		}
 
-		$idExchange = $this->request->get['Exchange_id'];
+		$idExchange = $this->request->get['exchange_id'];
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -263,11 +311,11 @@ class ControllerStockExchange extends Controller {
 		
 		// Stock
 		$this->data['is_edit'] = false;
-		if ( isset($this->request->get['Exchange_id']) ){
+		if ( isset($this->request->get['exchange_id']) ){
 			$oExchange = $this->model_stock_exchange->getExchange( array('id' => $idExchange) );
 			
 			if ( $oExchange ){
-				$this->data['action'] = $this->url->link( 'stock/exchange/update', 'Exchange_id=' . $idExchange . '&token=' . $this->session->data['token'], 'sSL' );	
+				$this->data['action'] = $this->url->link( 'stock/exchange/update', 'exchange_id=' . $idExchange . '&token=' . $this->session->data['token'], 'sSL' );	
 				$this->data['is_edit'] = true;
 			}else {
 				$this->redirect( $this->data['cancel'] );

@@ -23,7 +23,7 @@
         <table class="form">
           <tr>
             <td><?php echo $entry_import; ?></td>
-            <td><input type="file" name="file" /></td>
+            <td><input type="file" name="file[]" multiple /></td>
           </tr>
         </table>
       </form>

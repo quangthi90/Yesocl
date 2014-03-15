@@ -138,84 +138,42 @@ class ModelStockExchange extends Model {
 			->sort( array($aData['order'] => $aData['sort']) );
 	}
 
-	public function importExchange( $file ){
+	public function importExchange( $files ){
 		$this->load->model('tool/excel');
 		$this->load->model('stock/stock');
-		$aExchanges = $this->model_tool_excel->getActiveSheet( $file['tmp_name'], 'B' );
-		array_shift($aExchanges);
-		// print("<pre>");
-		// var_dump($aExchanges);
-		// exit;
-		foreach ( $aExchanges as $aExchange ) {
-			if ( !$oStock = $this->model_stock_stock->getStock(array('code' => strtoupper(trim($aExchange['A'])))) ){
-				continue;
-			}
+		
+		$link_files = $files['tmp_name'];
+		foreach ($link_files as $file) {
+			$aExchanges = $this->model_tool_excel->getActiveSheet( $file, 'B' );
+			array_shift($aExchanges);
 			
-			$created = date_create_from_format('m-d-y', $aExchange['B']);
+			foreach ( $aExchanges as $aExchange ) {
+				if ( !$oStock = $this->model_stock_stock->getStock(array('code' => strtoupper(trim($aExchange['A'])))) ){
+					continue;
+				}
+				
+				$created = date_create_from_format('m-d-y', $aExchange['B']);
 
-			if ( $oStock->getExchangeByCreated($created) ){
-				continue;
+				// if ( $oStock->getExchangeByCreated($created) ){
+				// 	continue;
+				// }
+
+				$oExchange = new Exchange();
+
+				$oExchange->setOpenPrice( $aExchange['C'] );
+				$oExchange->setHighPrice( $aExchange['D'] );
+				$oExchange->setLowPrice( $aExchange['E'] );
+				$oExchange->setClosePrice( $aExchange['F'] );
+				$oExchange->setVolume( $aExchange['G'] );
+				$oExchange->setCreated( $created );
+				
+				$oStock->addExchange( $oExchange );
 			}
-
-			$oExchange = new Exchange();
-
-			$oExchange->setOpenPrice( $aExchange['C'] );
-			$oExchange->setHighPrice( $aExchange['D'] );
-			$oExchange->getLowPrice( $aExchange['E'] );
-			$oExchange->setClosePrice( $aExchange['F'] );
-			$oExchange->setVolume( $aExchange['G'] );
-
-			$oStock->addExchange( $oExchange );
 		}
 
 		$this->dm->flush();
 
 		return true;
-	}
-
-	public function searchStock( $aData = array() ) {
-		$query = $this->client->createSelect(
-    		array(
-				'mappedDocument' => 'Document\Stock\Stock',
-			)
-    	);
-
-    	if ( !empty($aData['name']) ) {
-    		$query->addFilterQuery( 
-    			array(
-				    'key' => 'fq1',
-				    'tag' => array('filter_name'),
-				    'query' => 'name_t:*' . strtoupper( trim($aData['name']) ) . '*',
-					)
-    			);
-    	}
-
-    	if ( !empty($aData['code']) ) {
-    		$query->addFilterQuery( 
-    			array(
-				    'key' => 'fq2',
-				    'tag' => array('filter_code'),
-				    'query' => 'code_t:' . strtoupper( trim($aData['code']) ) . '*',
-					)
-    			);
-    	}
-
-		if ( isset( $aData['start'] ) ) {
-			$aData['start'] = (int)$aData['start'];
-		}else {
-			$aData['start'] = 0;
-		}
-
-		if ( isset( $aData['limit'] ) ) {
-			$aData['limit'] = (int)$aData['limit'];
-		}else {
-			$aData['limit'] = 10;
-		}
-
-		$query->setRows( $aData['limit'] );
-		$query->setStart( $aData['start'] );
- 
-		return $this->client->execute( $query );
 	}
 }
 ?>
