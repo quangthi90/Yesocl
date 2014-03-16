@@ -23,15 +23,21 @@ $_['column_created'] 				= 'Created';
 $_['column_action'] 				= 'Action';
 
 // entry
-$_['entry_name'] 					= 'Name:';
-$_['entry_code'] 					= 'Code:';
-$_['entry_order'] 					= 'Order:';
-$_['entry_status'] 					= 'Status:';
+$_['entry_high'] 					= 'High Price:';
+$_['entry_low'] 					= 'Low Price:';
+$_['entry_open'] 					= 'Open Price:';
+$_['entry_close'] 					= 'Close Price:';
+$_['entry_volume'] 					= 'Volume:';
+$_['entry_created']					= 'Created:';
 
 // error
-$_['error_warning'] 				= 'Warning: Error!';
-$_['error_stock_empty']				= 'Warning: Error Stock ID is empty!';
-$_['error_stock_not_found']			= 'Warning: Error Stock not found!';
-$_['error_exist_code'] 				= 'Warning: Error Code is exist!';
-$_['text_success'] 					= 'Success: You have modified Market!';
+$_['error_warning'] 				= 'Warning: You have modified not success!';
+$_['error_high']					= 'Warning: Error High price is empty!';
+$_['error_low']						= 'Warning: Error Low price is empty!';
+$_['error_open'] 					= 'Warning: Error Open price is empty!';
+$_['error_close']					= 'Warning: Error Close price is empty!';
+$_['error_volume']					= 'Warning: Error Volume is empty!';
+$_['error_created']					= 'Warning: Error Created is empty!';
+$_['text_success'] 					= 'Success: You have modified Stock!';
+$_['error_stock_empty']				= 'Warning: Stock ID is empty';
 ?>

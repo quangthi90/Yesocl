@@ -2,87 +2,123 @@
 use Document\Stock\Exchange;
 
 class ModelStockExchange extends Model {
-	public function addStock( $aData = array() ) {
-		// name is required & isn't exist
-		if ( !empty($aData['name']) ) {
-			$this->data['name'] = strtoupper( trim($aData['name']) );
-		}else {
-			return false;
-		}
-
-		// code is required
-		if ( isset( $aData['code'] ) && !$this->getStock(array('code' => $aData['code'])) ) {
-			$this->data['code'] = strtoupper( trim($aData['code']) );
-		}else {
-			return false;
-		}
-
-		// market is required
-		$oMarket = $this->dm->getRepository('Document\Stock\Market')->find( $aData['market_id'] );
-		if ( !$oMarket ){
-			return false;
-		}
-
-		// status
-		if ( !isset( $aData['status'] ) ) {
-			$aData['status'] = 0;
-		}
-
-		$oStock = new Stock();
-		$oStock->setName( $aData['name'] );
-		$oStock->setCode( $aData['code'] );
-		$oStock->setMarket( $oMarket );
-		$oStock->setStatus( $aData['status'] );
-
-		$this->dm->persist( $oStock );
-		$this->dm->flush();
-
-		return true;
-	}
-
-	public function editStock( $idStock, $aData = array() ) {
-		// name is required
-		if ( !empty($aData['name']) ) {
-			$aData['name'] = strtoupper( trim($aData['name']) );
-		}else {
-			return false;
-		}
-
-		// status
-		if ( !isset($aData['status'] ) ) {
-			$aData['status'] = false;
-		}
-
+	public function addExchange( $idStock, $aData = array() ) {
 		$oStock = $this->dm->getRepository('Document\Stock\Stock')->find( $idStock );
-		if ( !$oStock ) {
+		if ( !$oStock ){
 			return false;
 		}
 
-		// name is exist
-		if ( $oStock->getName() != $aData['name'] ) {
-			$oStock->setName( $aData['name'] );
+		// created is required
+		if ( !empty($aData['created']) ) {
+			$aData['created'] = date_create_from_format('m/d/Y', $aData['created']);
+		}else {
+			return false;
 		}
-		if ( $oStock->getMarket()->getId() != $aData['market_id'] ){
-			$oMarket = $this->dm->getRepository('Document\Stock\Market')->find( $aData['market_id'] );
-			
-			if ( $oMarket ){
-				$oStock->setMarket( $oMarket );
-			}
+
+		if ( !$oExchange = $oStock->getExchangeByCreated($aData['created']) ){
+			$oExchange = new Exchange();
 		}
-		$oStock->setStatus( $aData['status'] );
+
+		// high is required
+		if ( empty($aData['high']) ) {
+			return false;
+		}
+
+		// low is required
+		if ( empty($aData['low']) ) {
+			return false;
+		}
+
+		// open is required
+		if ( empty($aData['open']) ) {
+			return false;
+		}
+
+		// close is required
+		if ( empty($aData['close']) ) {
+			return false;
+		}
+
+		// volume is required
+		if ( empty($aData['volume']) ) {
+			return false;
+		}
+
+		$oExchange->setHighPrice( $aData['high'] );
+		$oExchange->setLowPrice( $aData['low'] );
+		$oExchange->setOpenPrice( $aData['open'] );
+		$oExchange->setClosePrice( $aData['close'] );
+		$oExchange->setVolume( $aData['volume'] );
+		$oExchange->setCreated( $aData['created'] );
+
+		if ( !$oExchange->getId() ){
+			$oStock->addExchange( $oExchange );
+		}
 		
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteStocks( $aData = array() ) {
-		if ( isset( $aData['id'] ) ) {
-			foreach ($aData['id'] as $id) {
-				$oStock = $this->dm->getRepository( 'Document\Stock\Stock' )->find( $id );
+	public function editExchange( $idExchange, $aData = array() ) {
+		$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneBy( array(
+			'exchanges.id' => $idExchange
+		));
+		if ( !$oStock ){
+			return false;
+		}
 
-				if ( !empty( $oStock ) ) {
-					$this->dm->remove( $oStock );
+		if ( !$oExchange = $oStock->getExchangeById($idExchange) ){
+			return false;
+		}
+
+		// created
+		if ( !empty($aData['created']) ) {
+			$aData['created'] = date_create_from_format('m/d/Y', $aData['created']);
+			$oExchange->setCreated( $aData['created'] );
+		}
+
+		// high price
+		if ( !empty($aData['high']) ) {
+			$oExchange->setHighPrice( $aData['high'] );
+		}
+
+		// low price
+		if ( !empty($aData['low']) ) {
+			$oExchange->setLowPrice( $aData['low'] );
+		}
+
+		// open price
+		if ( !empty($aData['open']) ) {
+			$oExchange->setOpenPrice( $aData['open'] );
+		}
+
+		// close price
+		if ( !empty($aData['close']) ) {
+			$oExchange->setClosePrice( $aData['close'] );
+		}
+
+		// volume
+		if ( !empty($aData['volume']) ) {
+			$oExchange->setVolume( $aData['volume'] );
+		}
+		
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function deleteExchanges( $aData = array() ) {
+		if ( !empty($aData['id']) ) {
+			$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneBy( array('exchanges.id' => $aData['id'][0]) );
+			if ( !$oStock ){
+				return false;
+			}
+			foreach ($aData['id'] as $id) {
+				$oExchange = $oStock->getExchangeById( $id );
+
+				if ( $oExchange ) {
+					$oStock->getExchanges()->removeElement( $oExchange );
 				}
 			}
 		}

@@ -3,16 +3,16 @@ use Document\Stock\Stock;
 
 class ModelStockStock extends Model {
 	public function addStock( $aData = array() ) {
-		// name is required & isn't exist
+		// name is required
 		if ( !empty($aData['name']) ) {
-			$this->data['name'] = strtoupper( trim($aData['name']) );
+			$aData['name'] = strtoupper( trim($aData['name']) );
 		}else {
 			return false;
 		}
 
 		// code is required
 		if ( isset( $aData['code'] ) && !$this->getStock(array('code' => $aData['code'])) ) {
-			$this->data['code'] = strtoupper( trim($aData['code']) );
+			$aData['code'] = strtoupper( trim($aData['code']) );
 		}else {
 			return false;
 		}

@@ -3,14 +3,14 @@ use Document\Stock\Market;
 
 class ModelStockMarket extends Model {
 	public function addMarket( $aDatas = array() ) {
-		// name is required & isn't exist
+		// name is required
 		if ( !empty($aDatas['name']) ) {
 			$aDatas['name'] = strtoupper( trim($aDatas['name']) );
 		}else {
 			return false;
 		}
 
-		// code is required & isn't exist
+		// code is required
 		if ( !empty($aDatas['code']) && !$this->getMarket($aDatas['code']) ) {
 			$aDatas['code'] = strtoupper( trim($aDatas['code']) );
 		}else {

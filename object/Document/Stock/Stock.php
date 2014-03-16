@@ -50,6 +50,16 @@ Class Stock {
 		return null;
 	}
 
+	public function getExchangeById( $idExchange ){
+		foreach ( $this->exchanges as $oExchange ) {
+			if ( $oExchange->getId() == $idExchange ){
+				return $oExchange;
+			}
+		}
+
+		return null;
+	}
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
