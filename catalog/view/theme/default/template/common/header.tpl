@@ -209,10 +209,12 @@
     </div>
     <div class="login-social">
       <ul>
-          <li>
-              <a href="{{ action.connect_face }}"><i class="icon-facebook"></i></a>
+          <li class="btn-fb-login">
+              <a href="#">
+                  <i class="icon-facebook"></i>
+              </a>
           </li>
-          <li>
+          {#<li>
               <a href="#"><i class="icon-twitter"></i></a>
           </li>
           <li>
@@ -220,7 +222,7 @@
           </li>
           <li>
               <a href="#"><i class="icon-google-plus"></i></a>
-          </li>
+          </li>#}
       </ul>
     </div>
   </div>

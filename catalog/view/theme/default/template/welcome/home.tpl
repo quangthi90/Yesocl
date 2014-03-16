@@ -105,7 +105,7 @@
                 FB.api('/me', function(response) {
                     var promise = $.ajax({
                         type: 'POST',
-                        url:  yRouting.generate('FaceBookConnect'),
+                        url:  window.yRouting.generate('FaceBookConnect'),
                         dataType: 'json',
                         data: {data: response}
                     });

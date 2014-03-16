@@ -215,7 +215,9 @@ class ExtensionLoader
 
     public function getUserData(){
         $oLoggedUser = $this->customer->getUser();
-
+        if ( !$oLoggedUser ){
+            return null;
+        }
         $aReturn = array(
             'id' => $oLoggedUser->getId(),
             'username' => $oLoggedUser->getUsername(),
