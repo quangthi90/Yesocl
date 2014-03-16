@@ -126,7 +126,9 @@
                         if ( data.success == 'ok' ){
                             window.location.reload();
                         }else{
-                            /*Todo: add message error here...*/
+                            bootbox.alert(data.error, function() {
+                                msgCallback.html('Alert: ' + 'Alert callback').fadeIn(1000).delay(2000).fadeOut(300);
+                            });
                         }
                     });
                 });
