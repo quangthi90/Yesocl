@@ -40,8 +40,9 @@ var yCurrUser = new CurrentUser();
 (function($, document, undefined) {
 
 	jQuery.fn.makeScrollWithoutCalResize = function() {
-	$(this).niceScroll();	
-	}
+		$(this).niceScroll();	
+	};
+
 	jQuery.fn.makeCustomScroll = function(isHonrizontal) {
 		$(this).mCustomScrollbar({
 			horizontalScroll: isHonrizontal, /*scroll horizontally: boolean*/
@@ -66,7 +67,8 @@ var yCurrUser = new CurrentUser();
 			contentTouchScroll:true, /*scrolling by touch-swipe content: boolean*/			
 			theme:"light" /*"light", "dark", "light-2", "dark-2", "light-thick", "dark-thick", "light-thin", "dark-thin"*/
 		});
-	}
+	};
+
 	jQuery.fn.makeEditor = function(heightCustom) {
 		$(this).summernote({
 			height: heightCustom,  
@@ -84,7 +86,7 @@ var yCurrUser = new CurrentUser();
 			    ['fullscreen', ['fullscreen']]
 		  	]
 		});	
-	}
+	};
 
 	jQuery.fn.makePopupLink = function() {
 		$(this).magnificPopup({
@@ -128,7 +130,8 @@ var yCurrUser = new CurrentUser();
 		this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");		
 		this.makeCustomVerticalScroll();
 		this.attachEvents();
-	}
+	};
+
 	Sidebar.prototype.attachEvents = function(){
 		var that = this;
 		//Hide/show sidebar:
@@ -163,7 +166,8 @@ var yCurrUser = new CurrentUser();
 		$("#y-header, #y-content, #y-footer").click(function(){
 			that.hideSidebar();
 		});
-	}
+	};
+
 	Sidebar.prototype.hideSidebar = function() {
 		var that = this;
 		if(parseInt(that.sidebarRoot.css('left')) == 0 ) {
@@ -171,10 +175,12 @@ var yCurrUser = new CurrentUser();
 			that.searchCtrl.val('');
 			that.searchCtrl.blur();
 		}
-	}
+	};
+
 	Sidebar.prototype.makeCustomVerticalScroll = function() {
 		this.menuContainer.makeCustomScroll(false);
-	}
+	};
+
 	/* End Left Sidebar */
 	/*
 		Start Mention (Tag)
@@ -182,7 +188,8 @@ var yCurrUser = new CurrentUser();
 	function Tag(el) {
 		this.$tagElement = el.find('.mention');
 		this.attachEvents();
-	}
+	};
+
 	Tag.prototype.attachEvents = function() {
 		var that = this;
 
@@ -218,7 +225,8 @@ var yCurrUser = new CurrentUser();
 			},
 			fullNameTrigger: true
 	  	});
-	}
+	};
+
 	/*
 		End Mention (Tag)
 	*/
@@ -236,7 +244,8 @@ var yCurrUser = new CurrentUser();
 		this.advancedResetBtn = el.find('.js-post-reset-btn');
 
 		this.attachEvents();
-	}
+	};
+
 	FlexibleElement.prototype.attachEvents = function() { 
 		var that = this;
 		//Tooltip:
@@ -420,25 +429,28 @@ var yCurrUser = new CurrentUser();
             $advancedPopup.find('.post_image_item').remove();
             $advancedPopup.find('.drop-zone-show').html(sNoteDragImage).show();
 	    });
-	}
+	};
 
 	/*
 	Custom List Post
 	*/
-	var marginPost = 5;
-	var marginPostPerColumn = 15;
-	var marginBlock = 50;
-	var minFirstColumn = 450;
-	var minPostWidth = 400;
-	var minPostStatusWidth = 420;
-	var marginFriendBlockItem = 10;	
-	var maxHeightBlock = 450;
-	var df_POST_HAS_BLOCK = 'post-has-block';
-	var df_POST_PER_COLUMN = 'post-per-column';
-	var df_CATEGORY_SINGLE = 'post-category';
-	var df_FRIEND_ACCOUNT = 'block-auto-floatleft';
-	var df_SEARCH_PAGE 	= 'search-page';
-	var df_NOTIFICATION_PAGE 	= 'notification-page';
+
+	var ConfigBlock = {
+		MARGIN_POST : 5,
+		MARGIN_POST_PER_COLUMN : 15,
+		MARGIN_BLOCK : 50,
+		MIN_FIRST_COLUMN : 450,
+		MIN_POST_WIDTH : 400,
+		MIN_POST_STATUS_WIDTH : 420,
+		MARGIN_FRIEND_BLOCK_ITEM : 10,	
+		MAX_HEIGHT_BLOCK : 450,
+		df_POST_HAS_BLOCK : 'post-has-block',
+		df_POST_PER_COLUMN : 'post-per-column',
+		df_CATEGORY_SINGLE : 'post-category',
+		df_FRIEND_ACCOUNT : 'block-auto-floatleft',
+		df_SEARCH_PAGE 	: 'search-page',
+		df_NOTIFICATION_PAGE : 'notification-page'
+	};
 
 	function HorizontalBlock(el) {
 		if(el.length > 0){
@@ -452,32 +464,33 @@ var yCurrUser = new CurrentUser();
 				this.initializeBlock();
 			}
 		}		
-	}
+	};
+
 	HorizontalBlock.prototype.initializeBlock = function() {
-		if(this.root.hasClass(df_POST_HAS_BLOCK)) {
+		if(this.root.hasClass(ConfigBlock.df_POST_HAS_BLOCK)) {
 			this.blocks = this.root.find('.feed-block');
 			this.blockContent = this.root.find('.block-content');			
 			var heightBlockContent = this.heightMain - 42;
-			var heightPost = (heightBlockContent - 2*marginPost)/2;
-			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
-			if(widthPost < minPostWidth){
-				widthPost = minPostWidth;
+			var heightPost = (heightBlockContent - 2*ConfigBlock.MARGIN_POST)/2;
+			var widthPost = this.widthMain*5/18 - 3*(ConfigBlock.MARGIN_POST + 2);
+			if(widthPost < ConfigBlock.MIN_POST_WIDTH){
+				widthPost = ConfigBlock.MIN_POST_WIDTH;
 			}
 			this.columns.width(widthPost);
-			this.columns.css('margin-right', marginPost + 'px');
+			this.columns.css('margin-right', ConfigBlock.MARGIN_POST + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);		
-			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
-			this.blocks.css('margin-right', marginBlock + 'px');	
+			this.blocks.css('max-width', (widthPost + ConfigBlock.MARGIN_POST + 2 )*3 + 'px');
+			this.blocks.css('margin-right', ConfigBlock.MARGIN_BLOCK + 'px');	
 			var totalWithContent = 0;	
 			this.blocks.each(function(index) {
 				var blockFeed = new BlockFeed($(this), heightPost,widthPost);
 				$(this).width(blockFeed.actualWidth);
-				totalWithContent += ($(this).outerWidth() + marginBlock);
+				totalWithContent += ($(this).outerWidth() + ConfigBlock.MARGIN_BLOCK);
 			});
 			this.root.width(totalWithContent + 10);
 			this.feeds.each(function() {
-				$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
+				$(this).parent('.feed-container').css('margin-bottom', ConfigBlock.MARGIN_POST + 'px');
 				var hp = $(this).children('.post_header').first().outerHeight();
 				var heightUpdated = $(this).height();
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
@@ -485,19 +498,19 @@ var yCurrUser = new CurrentUser();
 			this.columns.css('opacity', '1');
 			this.rootContent.niceScroll();
 		}
-		else if(this.root.hasClass(df_POST_PER_COLUMN)) {
+		else if(this.root.hasClass(ConfigBlock.df_POST_PER_COLUMN)) {
 			this.blocks = this.root.find('.feed-block');	
 			this.freeBlock = this.root.find('.free-block');
 			var totalWidth = 0;
 			var heightBlockContent = this.heightMain - 42;
-			if(heightBlockContent > maxHeightBlock) {
-				var extraPadding = Math.floor((this.heightMain - maxHeightBlock)/2);
+			if(heightBlockContent > ConfigBlock.MAX_HEIGHT_BLOCK) {
+				var extraPadding = Math.floor((this.heightMain - ConfigBlock.MAX_HEIGHT_BLOCK)/2);
 				this.rootContent.css({
 					'padding-top': extraPadding + 'px',
 					'padding-bottom': extraPadding + 'px'
 				});
 				this.heightMain -= 2*(extraPadding);
-				heightBlockContent = maxHeightBlock;
+				heightBlockContent = ConfigBlock.MAX_HEIGHT_BLOCK;
 			}			
 			this.blocks.each(function(index) {			
 				$(this).find('.block-content').height(heightBlockContent);
@@ -505,17 +518,17 @@ var yCurrUser = new CurrentUser();
 				var firstColumn = $(this).find('.column:first-child');
 				var totalWidthOfColumns = 0;
 				if(firstColumn.length > 0 && firstColumn.hasClass('has-new-post')){
-					firstColumn.width(minFirstColumn);	
+					firstColumn.width(ConfigBlock.MIN_FIRST_COLUMN);	
 					firstColumn.css({ 
 						'opacity':'1',
-						'min-width': minFirstColumn + 'px',
-						'margin-right': marginPostPerColumn + 'px'
+						'min-width': ConfigBlock.MIN_FIRST_COLUMN + 'px',
+						'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
 					});
-					totalWidthOfColumns = firstColumn.outerWidth() + marginPostPerColumn;
+					totalWidthOfColumns = firstColumn.outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN;
 					columnPerBlock = $(this).find('.column').not(':first-child');
 				}
 				columnPerBlock.each(function() {
-					$(this).width(minPostStatusWidth);
+					$(this).width(ConfigBlock.MIN_POST_STATUS_WIDTH);
 					var post = $(this).children('.post');
 					var postHeader = post.children('.post_header');
 					var postBody   = post.children('.post_body');
@@ -523,7 +536,7 @@ var yCurrUser = new CurrentUser();
 					var postImg    = postBody.children('.post_image');
 					var postTextRaw = postBody.children('.post_text_raw');
 					var imgInTextRaw = postTextRaw.find('img');
-					post.height(heightBlockContent - 2*(marginPostPerColumn + 1));
+					post.height(heightBlockContent - 2*(ConfigBlock.MARGIN_POST_PER_COLUMN + 1));
 					postBody.height(post.height() - postHeader.height() - 10 - 22);
 					if(postTitle.length > 0){
 						postImg.height(postBody.height()*0.6);
@@ -543,30 +556,30 @@ var yCurrUser = new CurrentUser();
 					});
 					$(this).css({
 						'opacity':'1', 
-						'min-width': minPostStatusWidth + 'px'
+						'min-width': ConfigBlock.MIN_POST_STATUS_WIDTH + 'px'
 					});
-					totalWidthOfColumns += $(this).outerWidth() + marginPostPerColumn;
+					totalWidthOfColumns += $(this).outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN;
 				});
 				totalWidth += totalWidthOfColumns;
 			});
-			this.freeBlock.css('margin-right', marginBlock);
-			this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + marginBlock));
+			this.freeBlock.css('margin-right', ConfigBlock.MARGIN_BLOCK);
+			this.root.width(totalWidth == 0 ? this.widthMain : (totalWidth + this.freeBlock.outerWidth() + ConfigBlock.MARGIN_BLOCK));
 			this.rootContent.niceScroll();
 		}
-		else if(this.root.hasClass(df_CATEGORY_SINGLE)) {
+		else if(this.root.hasClass(ConfigBlock.df_CATEGORY_SINGLE)) {
 			this.blocks = this.root.find('.feed-block');	
 			this.blockContent = this.root.find('.block-content');				
 			var heightBlockContent = this.heightMain - 42;
-			var heightPost = (heightBlockContent - 2*marginPost)/2;
-			var widthPost = this.widthMain*5/18 - 3*(marginPost + 2);
-			if(widthPost < minPostWidth){
-				widthPost = minPostWidth;
+			var heightPost = (heightBlockContent - 2*ConfigBlock.MARGIN_POST)/2;
+			var widthPost = this.widthMain*5/18 - 3*(ConfigBlock.MARGIN_POST + 2);
+			if(widthPost < ConfigBlock.MIN_POST_WIDTH){
+				widthPost = ConfigBlock.MIN_POST_WIDTH;
 			}
 			this.columns.width(widthPost);
-			this.columns.css('margin-right', marginPost + 'px');
+			this.columns.css('margin-right', ConfigBlock.MARGIN_POST + 'px');
 			this.columns.children('.feed-container').width(widthPost - 5);
 			this.blockContent.height(heightBlockContent);
-			this.blocks.css('max-width', (widthPost + marginPost + 2 )*3 + 'px');
+			this.blocks.css('max-width', (widthPost + ConfigBlock.MARGIN_POST + 2 )*3 + 'px');
 			var totalWithContent = 0;
 			this.blocks.each(function(index) {
 				if(index != 0) {
@@ -577,7 +590,7 @@ var yCurrUser = new CurrentUser();
 			});
 			this.root.width(totalWithContent + 10);
 			this.feeds.each(function() {
-				$(this).parent('.feed-container').css('margin-bottom', marginPost + 'px');
+				$(this).parent('.feed-container').css('margin-bottom', ConfigBlock.MARGIN_POST + 'px');
 				var hp = $(this).children('.post_header').first().outerHeight();
 				var heightUpdated = $(this).height();
 				$(this).children('.post_body').first().height(heightUpdated - hp - 20);
@@ -585,12 +598,12 @@ var yCurrUser = new CurrentUser();
 			this.columns.css('opacity', '1');
 			this.rootContent.niceScroll();
 		}
-		else if(this.root.hasClass(df_FRIEND_ACCOUNT)) {
+		else if(this.root.hasClass(ConfigBlock.df_FRIEND_ACCOUNT)) {
 			var widthBlockItem = parseInt(this.root.data('block-width'));
 			var heightBlockItem = parseInt(this.root.data('block-height'));
 			var heightBlockContent = this.heightMain - 42;
 			var totalWidth = 0;
-			var numberRow = Math.floor(heightBlockContent/(heightBlockItem + marginFriendBlockItem));
+			var numberRow = Math.floor(heightBlockContent/(heightBlockItem + ConfigBlock.MARGIN_FRIEND_BLOCK_ITEM));
 			var listBlockItem = this.root.find('.block-content-item');
 			if(listBlockItem.length == 0) {
 				this.root.css('min-width', '500px');
@@ -599,10 +612,10 @@ var yCurrUser = new CurrentUser();
 				var blockContent = this.root.find('.feed-block');
 				var numberCol = Math.floor(listBlockItem.length/numberRow) + 1;
 				if(freeBlock.length === 0){
-					this.root.width(numberCol*(widthBlockItem + marginFriendBlockItem));	
+					this.root.width(numberCol*(widthBlockItem + ConfigBlock.MARGIN_FRIEND_BLOCK_ITEM));	
 				}else{
-					blockContent.width(numberCol*(widthBlockItem + marginFriendBlockItem));
-					this.root.width(freeBlock.width() + 60 + numberCol*(widthBlockItem + marginFriendBlockItem));	
+					blockContent.width(numberCol*(widthBlockItem + ConfigBlock.MARGIN_FRIEND_BLOCK_ITEM));
+					this.root.width(freeBlock.width() + 60 + numberCol*(widthBlockItem + ConfigBlock.MARGIN_FRIEND_BLOCK_ITEM));	
 				}
 				if(this.root.hasClass('full-width')){
 					this.rootContent.css('right','0px');
@@ -613,7 +626,7 @@ var yCurrUser = new CurrentUser();
 			}
 			this.rootContent.niceScroll();
 		}
-		else if(this.root.hasClass(df_SEARCH_PAGE)){
+		else if(this.root.hasClass(ConfigBlock.df_SEARCH_PAGE)){
 			this.root.css('min-width', this.widthMain + 'px');
 			var heightBlockContent = this.heightMain - 42;
 			this.root.find('.block-content').height(heightBlockContent - 5);
@@ -632,7 +645,8 @@ var yCurrUser = new CurrentUser();
 				$(this).makeCustomScroll(false);
 			});
 			this.rootContent.niceScroll();
-		}else if(this.root.hasClass(df_NOTIFICATION_PAGE)){
+		}
+		else if(this.root.hasClass(ConfigBlock.df_NOTIFICATION_PAGE)){
 			this.root.css('min-width', this.widthMain + 'px');
 			var heightBlockContent = this.heightMain - 42;
 			this.root.find('.block-content').height(heightBlockContent - 5);			
@@ -642,9 +656,9 @@ var yCurrUser = new CurrentUser();
 			setTimeout(function(){				
 				ntfContainer.niceScroll();
 			}, 200);	
-		}
-		
-	}
+		}		
+	};
+
 	function BlockFeed(block, heightAverPost, widthAverPost) {
 		this.blockEle = block;
 		this.listFeed = block.find('.feed-container');
@@ -654,13 +668,14 @@ var yCurrUser = new CurrentUser();
 		this.widthAverPost = widthAverPost;
 		this.actualWidth = 0;
 		this.putFeed();
-	}
+	};
+
 	BlockFeed.prototype.putFeed = function() {
 		this.listFeed.height(this.heightAverPost - 2);
 		if(this.numberFeed == 5) {
-			this.blockEle.find('.column-special .feed-container:nth-child(1)').width(2*(this.widthAverPost) + marginPost - 5);
+			this.blockEle.find('.column-special .feed-container:nth-child(1)').width(2*(this.widthAverPost) + ConfigBlock.MARGIN_POST - 5);
 			this.blockEle.find('.column-special .feed-container:nth-child(1)').addClass('post-bigger');
-			this.blockEle.find('.column-special .feed-container:nth-child(1)').parent('.column').width(2*(this.widthAverPost) + marginPost);
+			this.blockEle.find('.column-special .feed-container:nth-child(1)').parent('.column').width(2*(this.widthAverPost) + ConfigBlock.MARGIN_POST);
 			this.blockEle.find('.column-special .feed-container:nth-child(2)').width(this.widthAverPost - 2).css( {'float': 'left', 'margin-right': '5px'});
 			this.blockEle.find('.column-special .feed-container:nth-child(3)').width(this.widthAverPost - 5).css('float', 'left');	
 		}else {
@@ -682,11 +697,11 @@ var yCurrUser = new CurrentUser();
 		var widthColumn = 0;
 		this.columns.each(function(){
 			if($(this).children().length > 0){
-				widthColumn += $(this).outerWidth() + marginPost;	
+				widthColumn += $(this).outerWidth() + ConfigBlock.MARGIN_POST;	
 			}
 		});
 		this.actualWidth = widthColumn;
-	}
+	};
 
 	/*
 	End Custom List Post
