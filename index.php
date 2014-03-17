@@ -10,7 +10,7 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
-require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
+// require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 
 // Rename Document for linux
 // include ('libs/renameFolder.php');
@@ -157,13 +157,13 @@ $registry->set('session', $session);
 $registry->set('document', new Document()); 
 
 // facebook
-$fb_setting = array(
-	'appId' => FB_API_ID,
-	'secret' => FB_API_SECRET,
-	'cookie' => false,
-	);
-$facebook = new Facebook( $fb_setting );
-$registry->set( 'facebook', $facebook );		
+// $fb_setting = array(
+// 	'appId' => FB_API_ID,
+// 	'secret' => FB_API_SECRET,
+// 	'cookie' => false,
+// 	);
+// $facebook = new Facebook( $fb_setting );
+// $registry->set( 'facebook', $facebook );		
 
 // Customer
 $customer = new Customer($registry);
