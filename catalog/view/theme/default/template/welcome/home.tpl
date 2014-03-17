@@ -104,7 +104,7 @@
         };
 
         FB.init({
-            appId   : '{{ fb_app_id }}',
+            appId   : '{{ get_fb_api_id() }}',
             status  : true,
             cookie  : true, 
             xfbml   : true 
@@ -136,7 +136,7 @@
                             if (data != null && data.success == 'ok' ) {
                                 window.location.reload();
                             }else{
-                                showMessage('Error', 'Message: login facebook unsuccessfully !!');
+                                showMessage('Error', data.error);
                             }
                         });
                     });
