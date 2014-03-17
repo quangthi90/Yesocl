@@ -43,7 +43,7 @@
 
 {% block javascript %}
 	{{ block('post_common_comment_post_list_javascript') }}
-	<script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
+	
 	{% if warning_active is defined %}
 	<script type="text/javascript">
 		bootbox.dialog({
