@@ -137,10 +137,12 @@ class ControllerAccountMessage extends Controller {
         $this->load->model('tool/image');
 
         $lMessages = $this->model_friend_message->getLastMessages( $this->customer->getId() );
+        // $aQueryMessages = $lMessages->toArray();
+        // $aQueryMessages = array_reverse($aQueryMessages);
 
         $aMessages = array();
         $aUsers = array();
-        foreach ( $lMessages as $key => $oMessage ) {
+        foreach ( $lMessages as $oMessage ) {
         	if ( empty($aUsers[$oMessage->getObject()->getId()]) ){
         		$oUser = $oMessage->getObject();
 				$aUser = $oUser->formatToCache();

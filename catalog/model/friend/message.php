@@ -25,7 +25,8 @@ class ModelFriendMessage extends Model {
 
 		$this->dm->flush();
 		
-		return array_reverse($aMessages);;
+		// return array_reverse($aMessages);
+		return $aMessages;
 	}
 
 	/**
