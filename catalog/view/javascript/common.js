@@ -442,6 +442,7 @@ var yCurrUser = new CurrentUser();
 		MIN_FIRST_COLUMN : 450,
 		MIN_POST_WIDTH : 400,
 		MIN_POST_STATUS_WIDTH : 420,
+		MIN_STOCK_BLOCK_WIDTH : 800,
 		MARGIN_FRIEND_BLOCK_ITEM : 10,	
 		MAX_HEIGHT_BLOCK : 450,
 		df_POST_HAS_BLOCK : 'post-has-block',
@@ -449,7 +450,8 @@ var yCurrUser = new CurrentUser();
 		df_CATEGORY_SINGLE : 'post-category',
 		df_FRIEND_ACCOUNT : 'block-auto-floatleft',
 		df_SEARCH_PAGE 	: 'search-page',
-		df_NOTIFICATION_PAGE : 'notification-page'
+		df_NOTIFICATION_PAGE : 'notification-page',
+		df_STOCK_PAGE 	: 'stock-page'
 	};
 
 	function HorizontalBlock(el) {
@@ -457,7 +459,7 @@ var yCurrUser = new CurrentUser();
 			this.rootContent = $("#y-content");
 			this.root = el;
 			this.columns = el.find('.column');
-			this.feeds = el.find('.feed');	
+			this.feeds = el.find('.feed');
 			this.heightMain =  el.height();
 			this.widthMain = el.width();
 			if(!this.rootContent.hasClass('no-scroll')) {
@@ -656,6 +658,32 @@ var yCurrUser = new CurrentUser();
 			setTimeout(function(){				
 				ntfContainer.niceScroll();
 			}, 200);	
+		}
+		else if (this.root.hasClass(ConfigBlock.df_STOCK_PAGE)) {
+			this.blocks = this.root.find('.feed-block');
+			if(this.blocks.length == 0){
+				return;
+			}
+			var widthBlock =  parseInt(this.widthMain*2/3);
+			if(widthBlock < ConfigBlock.MIN_STOCK_BLOCK_WIDTH){
+				widthBlock = ConfigBlock.MIN_STOCK_BLOCK_WIDTH;
+			}
+
+			var totalWidth = 0;
+			this.blocks.each(function(){
+				var header = $(this).children('.block-header').first();
+				var content = $(this).children('.block-content').first(); 
+				content.height($(this).height() - header.outerHeight());
+				$(this).width(widthBlock);
+				$(this).css('margin-right', ConfigBlock.MARGIN_BLOCK + 'px');
+				totalWidth += widthBlock + ConfigBlock.MARGIN_BLOCK;
+			});
+
+			if(totalWidth > this.widthMain) {
+				this.root.width(totalWidth);				
+			}
+			this.blocks.css('opacity', '1');
+			this.rootContent.niceScroll();
 		}		
 	};
 

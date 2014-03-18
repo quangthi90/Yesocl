@@ -3,7 +3,7 @@ class ControllerCommonSidebarControl extends Controller {
 	public function index() {
 		$oLoggedUser = $this->customer->getUser();
 		
-		if ( $oLoggedUser->getBranches()->count() == 0 ){
+		if ( $oLoggedUser == null || $oLoggedUser->getBranches()->count() == 0 ){
 			$this->data['show_branch_menu'] = false;
 		}else{
 			$this->data['show_branch_menu'] = true;
