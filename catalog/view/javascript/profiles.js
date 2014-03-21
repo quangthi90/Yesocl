@@ -226,6 +226,8 @@
 		});
 	};
 
+	var industries = {};
+
 	function InfoForm($el){
 		this.$el					= $el;
 		this.url					= $el.data('url');
@@ -407,7 +409,10 @@
 				that.$el.find('input[name=\"industryid\"]').val('');
 				return $.ajax({
 					type: 'Post',
-					url: that.$industryAutoComplete.parent().data('autocomplete') + query,
+					url: window.yRouting.generate('DataValueAutoComplete', {
+						type: 'industry',
+						keyword: query
+					}),
 					success: function (json) {
 						var parJSON = JSON.parse(json);
 						var suggestions = [];
@@ -599,7 +604,7 @@
 	function Education($el){
 		this.$el				= $el;
 		this.$formAdd			= $el.find('.background-education-form-add');
-		
+
 		this.$btnAdd			= $el.find('.profiles-btn-add');
 		this.$btnSave			= $el.find('.profiles-btn-save');
 		this.$btnCancel			= $el.find('.profiles-btn-cancel');
@@ -712,90 +717,37 @@
 			return false;
 		});
 
-		this.$degree.typeahead({
-			source: function (query, process) {
-				that.$degree_id.val('');
-				return $.ajax({
-					type: 'Post',
-					url: that.$el.data('degree') + query,
-					success: function (json) {
-						var parJSON = JSON.parse(json);
-						var suggestions = [];
-						degrees = {};
-						$.each(parJSON, function (i, suggestTerm) {
-							degrees[suggestTerm.name] = suggestTerm;
-							suggestions.push(suggestTerm.name);
-						});
-						process(suggestions);
-					},
-				});
-			},
-			items: 5,
-			minLength: 1,
-			updater: function (item) {
-				that.$degree_id.val(degrees[item].id);
-				return item;
-			}
-		});
-
-		this.$school.typeahead({
-			source: function (query, process) {
-				that.$school_id.val('');
-				return $.ajax({
-					type: 'Post',
-					url: that.$el.data('school') + query,
-					success: function (json) {
-						var parJSON = JSON.parse(json);
-						var suggestions = [];
-						schools = {};
-						$.each(parJSON, function (i, suggestTerm) {
-							schools[suggestTerm.name] = suggestTerm;
-							suggestions.push(suggestTerm.name);
-						});
-						process(suggestions);
-
-						// Note
-						// Fix for screen 14", Fix it
-						//that.$school.parent().find('ul.typeahead').css('left', '1631px');
-					},
-				});
-			},
-			items: 5,
-			minLength: 1,
-			updater: function (item) {
-				that.$school_id.val(schools[item].id);
-	    		return item;
-			}
-		});
-
-		this.$fieldofstudy.typeahead({
-			source: function (query, process) {
-				that.$fieldofstudy_id.val('');
-				return $.ajax({
-					type: 'Post',
-					url: that.$el.data('fieldofstudy') + query,
-					success: function (json) {
-						var parJSON = JSON.parse(json);
-						var suggestions = [];
-						fieldofstudies = {};
-						$.each(parJSON, function (i, suggestTerm) {
-							fieldofstudies[suggestTerm.name] = suggestTerm;
-							suggestions.push(suggestTerm.name);
-						});
-						process(suggestions);
-
-						// Note
-						// Fix for screen 14", Fix it
-						//that.$fieldofstudy.parent().find('ul.typeahead').css('left', '1631px');
-					},
-				});
-			},
-			items: 5,
-			minLength: 1,
-			updater: function (item) {
-				that.$fieldofstudy_id.val(fieldofstudies[item].id);
-	    		return item;
-			}
+		this.$el.find('.value-autocomplete').each(function(){
+			var $input = $(this);
+			var values = {};
+			$input.typeahead({
+				source: function (query, process) {
+					$input.parent().find('.value-id').val('');
+					return $.ajax({
+						type: 'Post',
+						url: window.yRouting.generate('DataValueAutoComplete', {
+							type: $input.data('type'),
+							keyword: query
+						}),
+						success: function (json) {
+							var parJSON = JSON.parse(json);
+							var suggestions = [];
+							values = {};
+							$.each(parJSON, function (i, suggestTerm) {
+								values[suggestTerm.name] = suggestTerm;
+								suggestions.push(suggestTerm.name);
+							});
+							process(suggestions);
+						},
+					});
+				},
+				items: 5,
+				minLength: 1,
+				updater: function (item) {
+					$input.parent().find('.value-id').val(values[item].id);
+					return item;
+				}
+			});
 		});
 	};
 

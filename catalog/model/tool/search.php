@@ -1,8 +1,8 @@
 <?php
 class ModelToolSearch extends Model
 {
-	public function searchUserByKeyword( $data = array() ) {
-		if ( !isset( $data['keyword'] ) || empty( $data['keyword'] ) ) {
+	public function searchUserByKeyword( $aData = array() ) {
+		if ( !isset( $aData['keyword'] ) || empty( $aData['keyword'] ) ) {
 			return array();
 		}
 
@@ -12,31 +12,31 @@ class ModelToolSearch extends Model
 			)
     	);
  
-		$query_data = 'solrEmail_t:*' . $data['keyword'] . '* OR ';
-		$query_data .= 'solrFullname_t:*' . $data['keyword'] . '* OR ';
-		$query_data .= 'username_t:*' . $data['keyword'] . '* ';
+		$sQuery = 'solrEmail_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'solrFullname_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'username_t:*' . $aData['keyword'] . '* ';
 
-		if ( isset( $data['start'] ) ) {
-			$data['start'] = (int)$data['start'];
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
 		}else {
-			$data['start'] = 0;
+			$aData['start'] = 0;
 		}
 
-		if ( isset( $data['limit'] ) ) {
-			$data['limit'] = (int)$data['limit'];
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
 		}else {
-			$data['limit'] = 5;
+			$aData['limit'] = 5;
 		}
 
-		$query->setQuery( $query_data );
-		$query->setRows( $data['limit'] );
-		$query->setStart( $data['start'] );
+		$query->setQuery( $sQuery );
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
  
 		return $this->client->execute( $query );
 	}
 
-	public function searchPostByKeyword( $data = array() ) {
-		if ( !isset( $data['keyword'] ) || empty( $data['keyword'] ) ) {
+	public function searchPostByKeyword( $aData = array() ) {
+		if ( !isset( $aData['keyword'] ) || empty( $aData['keyword'] ) ) {
 			return array();
 		}
 
@@ -46,25 +46,59 @@ class ModelToolSearch extends Model
 			)
     	);
  
-		$query_data = 'title_t:*' . $data['keyword'] . '* OR ';
-		$query_data .= 'content_t:*' . $data['keyword'] . '* OR ';
-		$query_data .= 'description_t:*' . $data['keyword'] . '* ';
+		$sQuery = 'title_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'content_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'description_t:*' . $aData['keyword'] . '* ';
 
-		if ( isset( $data['start'] ) ) {
-			$data['start'] = (int)$data['start'];
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
 		}else {
-			$data['start'] = 0;
+			$aData['start'] = 0;
 		}
 
-		if ( isset( $data['limit'] ) ) {
-			$data['limit'] = (int)$data['limit'];
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
 		}else {
-			$data['limit'] = 5;
+			$aData['limit'] = 5;
 		}
 
-		$query->setQuery( $query_data );
-		$query->setRows( $data['limit'] );
-		$query->setStart( $data['start'] );
+		$query->setQuery( $sQuery );
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
+ 
+		return $this->client->execute( $query );
+	}
+
+	public function searchDataValueByKeyword( $sType, $aData = array() ) {
+		if ( !isset( $aData['keyword'] ) || empty( $aData['keyword'] ) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\Data\Value',
+			)
+    	);
+ 
+		$sQuery = 'name_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'value_t:*' . $aData['keyword'] . '* AND ';
+		$sQuery .= 'dataCode_t:' . $sType . '';
+
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
+		}else {
+			$aData['start'] = 0;
+		}
+
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
+		}else {
+			$aData['limit'] = 5;
+		}
+
+		$query->setQuery( $sQuery );
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
  
 		return $this->client->execute( $query );
 	}
