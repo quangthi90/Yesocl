@@ -1,22 +1,23 @@
 // Create layout
 (function($, document, undefined) {
+	'use strict';
 	function ProfilesLayout($el) {
-		this.$el = $el;		
-		this.$rootContent = $el.parent('#y-content');
-		this.$information = $el.find('#profiles-tabs-information');
-		this.$background = $el.find('#profiles-tabs-background');		
-		this.$summary = $el.find('#profiles-tabs-background-summary');
-		this.$education = $el.find('#profiles-tabs-background-education');
-		this.$experience = $el.find('#profiles-tabs-background-experience');
-		this.$skill = $el.find('#profiles-tabs-background-skill');
-		this.$overview = $el.find('#profile-overview-tab');
-		this.$header = this.$background.find('.profiles-tabs-header');		
-		this.$main_profile = $el.find('.profiles-tabs-main');
-		this.$navigationItem = $el.find('.profile-navigation-item');
-		this.$contentHeight = this.$el.height();
-		this.$gapHeight = 35 + 50 + 2*(20 + 1);
+		this.$el				= $el;
+		this.$rootContent		= $el.parent('#y-content');
+		this.$information		= $el.find('#profiles-tabs-information');
+		this.$background		= $el.find('#profiles-tabs-background');
+		this.$summary			= $el.find('#profiles-tabs-background-summary');
+		this.$education			= $el.find('#profiles-tabs-background-education');
+		this.$experience		= $el.find('#profiles-tabs-background-experience');
+		this.$skill				= $el.find('#profiles-tabs-background-skill');
+		this.$overview			= $el.find('#profile-overview-tab');
+		this.$header			= this.$background.find('.profiles-tabs-header');
+		this.$main_profile		= $el.find('.profiles-tabs-main');
+		this.$navigationItem	= $el.find('.profile-navigation-item');
+		this.$contentHeight		= this.$el.height();
+		this.$gapHeight			= 35 + 50 + 2*(20 + 1);
 
-		var contentWidth = this.$information.width();
+		var contentWidth		= this.$information.width();
 		//Fix height of main profile:
 		this.$main_profile.height(this.$contentHeight - 35);
 		this.$overview.height(this.$contentHeight);
@@ -74,7 +75,7 @@
 		that.$rootContent.scroll(function(e){
 			var x = $(this).scrollLeft();
 			if(x > 100) {
-				that.$overview.addClass('scrolling');				
+				that.$overview.addClass('scrolling');
 			}else if(x < 30) {
 				that.$overview.removeClass('scrolling');
 			}
@@ -99,36 +100,37 @@
 			$(this).addClass('active');
 			$(href).addClass('active');
 		});
-	}
-	ProfilesLayout.prototype.updateScroll = function(type) {		
-		if(type === 1) {			
+	};
+	ProfilesLayout.prototype.updateScroll = function(type) {
+		var emptyEle;
+		if(type === 1) {
 			var information_main_body = this.$information.find('.profiles-tabs-main-body');
 			information_main_body.outerHeight(this.$contentHeight - this.$gapHeight);
 			information_main_body.makeCustomScroll();
 		}else if (type === 2) {
 		}else if (type === 3) { // Education
 			var education_main_body = this.$education.find('.profiles-tabs-main-body');
-			var emptyEle = education_main_body.find('.empty-data');
+			emptyEle = education_main_body.find('.empty-data');
 			emptyEle.addClass('hidden');
 			if(education_main_body.find('.education-item').length === 0){
 				emptyEle.removeClass('hidden');
 			}
 		}else if (type === 4) { // Experience
 			var experience_main_body = this.$experience.find('.profiles-tabs-main-body');
-			var emptyEle = experience_main_body.find('.empty-data');
+			emptyEle = experience_main_body.find('.empty-data');
 			emptyEle.addClass('hidden');
 			if(experience_main_body.find('.experience-item').length === 0){
 				emptyEle.removeClass('hidden');
 			}
 		}else if(type === 5) {  // Skill
 			var skill_main_body = this.$skill.find('.profiles-tabs-main-body');
-			var emptyEle = skill_main_body.find('.empty-data');
+			emptyEle = skill_main_body.find('.empty-data');
 			emptyEle.addClass('hidden');
 			if(skill_main_body.find('.skill-item').length === 0){
 				emptyEle.removeClass('hidden');
 			}
 		}
-	}
+	};
 
 	function ProfileViewLayout($el){
 		this.$el = $el;
@@ -156,7 +158,7 @@
 		that.$navigationItem.on('click', function(e){
 			e.preventDefault();
 			var href = $(this).attr('href');
-			if($(href).length == 0) return;
+			if( $(href).length === 0 ) return;
 			var leftPosition = 0;
 			if(href === '#profile-column-information'){
 				leftPosition = 0;
@@ -175,7 +177,7 @@
 			$(this).addClass('active');
 			$(href).addClass('active');
 		});
-	}
+	};
 	ProfileViewLayout.prototype.makeLayoutScroll = function(){
 		var that = this;
 		var totalOfWidth = 0;
@@ -193,7 +195,7 @@
 		});
 		that.$el.width(totalOfWidth);
 		that.$rootContent.makeScrollWithoutCalResize();
-	}
+	};
 
 	$(function(){
 		var mainContent = $('#y-main-content');
@@ -201,15 +203,16 @@
 			new ProfileViewLayout(mainContent);
 		}else {
 			new ProfilesLayout(mainContent);
-		}		
+		}
 	});
 }(jQuery, document));
 
 // Information
 (function($, document, undefined) {
+	'use strict';
 	function InfoLabel($el) {
-		this.$el = $el;
-		this.$btn = $el.find('.profiles-btn-edit');
+		this.$el	= $el;
+		this.$btn	= $el.find('.profiles-btn-edit');
 
 		this.attachEvents();
 	}
@@ -221,24 +224,24 @@
 			that.$el.addClass('hidden');
 			that.$el.parent().find('.profile-form').removeClass('hidden');
 		});
-	}
+	};
 
 	function InfoForm($el){
-		this.$el 					= $el;
-		this.url 					= $el.data('url');
+		this.$el					= $el;
+		this.url					= $el.data('url');
 
-		this.$btnCancel 			= $el.find('.profiles-btn-cancel');
-		this.$btnSave 				= $el.find('.profiles-btn-save');
-		this.$btnAddPhone 			= $el.find('.phones-btn-add');
-		this.$btnAddEmail 			= $el.find('.emails-btn-add');
-		this.$btnRemovePhone 		= $el.find('.phones-btn-remove');
-		this.$btnRemoveEmail 		= $el.find('.emails-btn-remove');
-		this.$btnPrimaryEmail 		= $el.find('.primary-email-btn');
+		this.$btnCancel				= $el.find('.profiles-btn-cancel');
+		this.$btnSave				= $el.find('.profiles-btn-save');
+		this.$btnAddPhone			= $el.find('.phones-btn-add');
+		this.$btnAddEmail			= $el.find('.emails-btn-add');
+		this.$btnRemovePhone		= $el.find('.phones-btn-remove');
+		this.$btnRemoveEmail		= $el.find('.emails-btn-remove');
+		this.$btnPrimaryEmail		= $el.find('.primary-email-btn');
 
-		this.$locationAutoComplete 	= $el.find('input[name=\"location\"]');
-		this.$industryAutoComplete 	= $el.find('input[name=\"industry\"]');
+		this.$locationAutoComplete	= $el.find('input[name=\"location\"]');
+		this.$industryAutoComplete	= $el.find('input[name=\"industry\"]');
 
-		var $inputBirthday 			= this.$el.find('.inputBirthday .bfh-datepicker');
+		var $inputBirthday			= this.$el.find('.inputBirthday .bfh-datepicker');
 		$inputBirthday.bfhdatepicker($inputBirthday.data());
 
 		this.attachEvents();
@@ -260,10 +263,10 @@
 			var emails = [];
 			that.$el.find('.emails-form').each(function(){
 				emails.push({
-					email 	: $(this).find('.email').val(),
+					email : $(this).find('.email').val(),
 					primary : $(this).find('.primary').val()
 				});
-			})
+			});
 
 			var phones = [];
 			that.$el.find('.phones-form').each(function(){
@@ -296,7 +299,7 @@
 		this.$btnAddPhone.click(function () {
 			var data = {
 				'index': $(this).attr('data-index')
-			}
+			};
 
 			var $form = $.tmpl( $('#profiles-phone-form'), data);
 
@@ -315,7 +318,7 @@
 		this.$btnAddEmail.click(function () {
 			var data = {
 				'index': $(this).attr('data-index')
-			}
+			};
 
 			var $form = $.tmpl( $('#profiles-email-form'), data);
 
@@ -345,12 +348,12 @@
 			var $emails_form = $(this).parents('.emails-form');
 			if ( $emails_form.find('input.primary').val() == 1 ){
 				bootbox.dialog({
-				title: "Inform",
-				message: "The primary email can't be deleted !",				
+				title: 'Inform',
+				message: 'The primary email can\'t be deleted !',
 				buttons: {
 					oke: {
-						  label: "OK",
-						  className: "btn-primary",
+						  label: 'OK',
+						  className: 'btn-primary',
 						  callback: function() {
 						  }
 						}
@@ -395,7 +398,7 @@
 			minLength: 1,
 			updater: function (item) {
 				that.$el.find('input[name=\"cityid\"]').val(locations[item].id);
-	    		return item;
+				return item;
 			}
 		});
 
@@ -421,10 +424,10 @@
 			minLength: 1,
 			updater: function (item) {
 				that.$el.find('input[name=\"industryid\"]').val(industries[item].id);
-	    		return item;
+				return item;
 			}
 		});
-	}
+	};
 
 	InfoForm.prototype.submit = function($button){
 		var that = this;
@@ -448,7 +451,7 @@
 				new InfoForm($profile_form);
 
 				$(document).trigger('PROFILE_CHANGED', [{type: 1}]);
-			}else if ( data.birthday != null ){
+			}else if ( data.birthday !== null ){
 				var $input = that.$el.find('[name=\"birthday\"]');
 				$input.tooltip('destroy');
 				$input.parent().removeClass('success');
@@ -493,6 +496,7 @@
 
 // Summary
 (function($, document, undefined) {
+	'use strict';
 	function SummaryLabel($el){
 		this.$el = $el;
 		this.$btn = $el.find('.profiles-btn-edit');
@@ -507,15 +511,15 @@
 			that.$el.addClass('hidden');
 			that.$el.parent().find('.summary-form').removeClass('hidden');
 		});
-	}
+	};
 
 	function SummaryForm($el){
-		this.$el = $el;
-		this.$input = $el.find('[name=\"summary\"]');
-		this.$btnCancel = $el.find('.profiles-btn-cancel');
-		this.$btnSave = $el.find('.profiles-btn-save');
+		this.$el			= $el;
+		this.$input			= $el.find('[name=\"summary\"]');
+		this.$btnCancel		= $el.find('.profiles-btn-cancel');
+		this.$btnSave		= $el.find('.profiles-btn-save');
 		
-		this.url = $el.parent().data('url');
+		this.url			= $el.parent().data('url');
 
 		this.attachEvents();
 	}
@@ -541,7 +545,7 @@
 
 			return false;
 		});
-	}
+	};
 
 	SummaryForm.prototype.submit = function($button){
 		var that = this;
@@ -591,25 +595,26 @@
 
 // Education
 (function($, document, undefined) {
+	'use strict';
 	function Education($el){
-		this.$el 			= $el;
-		this.$formAdd 		= $el.find('.background-education-form-add');
+		this.$el				= $el;
+		this.$formAdd			= $el.find('.background-education-form-add');
 		
-		this.$btnAdd 		= $el.find('.profiles-btn-add');
-		this.$btnSave 		= $el.find('.profiles-btn-save');
-		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
-		this.$btnEdit 		= $el.find('.profiles-btn-edit');
-		this.$btnRemove 	= $el.find('.profiles-btn-remove');
+		this.$btnAdd			= $el.find('.profiles-btn-add');
+		this.$btnSave			= $el.find('.profiles-btn-save');
+		this.$btnCancel			= $el.find('.profiles-btn-cancel');
+		this.$btnEdit			= $el.find('.profiles-btn-edit');
+		this.$btnRemove			= $el.find('.profiles-btn-remove');
 
-		this.$started 		= this.$formAdd.find('[name=\"started\"]');
-		this.$ended 		= this.$formAdd.find('[name=\"ended\"]');
+		this.$started			= this.$formAdd.find('[name=\"started\"]');
+		this.$ended				= this.$formAdd.find('[name=\"ended\"]');
 
-		this.$degree 		= this.$formAdd.find('[name=\"degree\"]');
-		this.$degree_id 	= this.$formAdd.find('[name=\"degree_id\"]');
-		this.$school 		= this.$formAdd.find('[name=\"school\"]');
-		this.$school_id 	= this.$formAdd.find('[name=\"school_id\"]');
-		this.$fieldofstudy 	= this.$formAdd.find('[name=\"fieldofstudy\"]');
-		this.$fieldofstudy_id 	= this.$formAdd.find('[name=\"fieldofstudy_id\"]');
+		this.$degree			= this.$formAdd.find('[name=\"degree\"]');
+		this.$degree_id			= this.$formAdd.find('[name=\"degree_id\"]');
+		this.$school			= this.$formAdd.find('[name=\"school\"]');
+		this.$school_id			= this.$formAdd.find('[name=\"school_id\"]');
+		this.$fieldofstudy		= this.$formAdd.find('[name=\"fieldofstudy\"]');
+		this.$fieldofstudy_id	= this.$formAdd.find('[name=\"fieldofstudy_id\"]');
 
 		this.attachEvents();
 	}
@@ -654,28 +659,28 @@
 			}
 			var me = $(this);
 	        bootbox.dialog({
-				title: "Confirm",
-				message: "Are you sure you want to delete this item ?",				
-				buttons: 
+				title: 'Confirm',
+				message: 'Are you sure you want to delete this item ?',
+				buttons:
 				{
 					cancel: {
-						label: "Cancel",
-						className: "btn",
-						callback: function() {							
+						label: 'Cancel',
+						className: 'btn',
+						callback: function() {
 						}
 					},
 					oke: {
-						label: "OK",
-						className: "btn-primary",
+						label: 'OK',
+						className: 'btn-primary',
 						callback: function() {
 							me.fadeIn(100);
 							that.url = me.parents('.education-item').data('remove');
 							that.submit(me, 'remove' );
-					  	}
+						}
 					}
 				}
 			});
-	        return false;	
+	        return false;
 		});
 
 		this.$btnSave.click(function(){
@@ -722,10 +727,6 @@
 							suggestions.push(suggestTerm.name);
 						});
 						process(suggestions);
-
-						// Note
-						// Fix for screen 14", Fix it
-						//that.$degree.parent().find('ul.typeahead').css('left', '1631px');
 					},
 				});
 			},
@@ -733,7 +734,7 @@
 			minLength: 1,
 			updater: function (item) {
 				that.$degree_id.val(degrees[item].id);
-	    		return item;
+				return item;
 			}
 		});
 
@@ -796,7 +797,7 @@
 	    		return item;
 			}
 		});
-	}
+	};
 
 	Education.prototype.submit = function($button, method){
 		var that = this;
@@ -811,11 +812,12 @@
 		this.triggerProgress($button, promise);
 
 		promise.then(function(data) {
+			var $item;
 			if ( data.message == 'success' ) {
 				if ( method == 'remove' ){
 					$button.parents('.education-item').remove();
 				}else if ( method == 'edit' ){
-					var $item = $.tmpl($('#background-education-item'), data);
+					$item = $.tmpl($('#background-education-item'), data);
 
 					$('#' + data.id).before($item).remove();
 
@@ -827,7 +829,7 @@
 				}else if ( method == 'add' ){
 					that.$btnCancel.trigger('click');
 
-					var $item = $.tmpl($('#background-education-item'), data);
+					$item = $.tmpl($('#background-education-item'), data);
 
 					that.$formAdd.parent().append($item);
 
@@ -836,7 +838,7 @@
 					});
 				}
 				$(document).trigger('PROFILE_CHANGED', [{type: 3}]);
-			}else if ( data.education_started_ended != null ){
+			}else if ( data.education_started_ended !== null ){
 				var $started = that.$formAdd.find('[name=\"started\"]');
 				$started.tooltip('destroy');
 				$started.parent().removeClass('success');
@@ -868,7 +870,7 @@
 				});
 			}
 		});
-	}
+	};
 
 	Education.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
@@ -892,15 +894,16 @@
 
 // Experience
 (function($, document, undefined) {
+	'use strict';
 	function Experience($el){
-		this.$el 			= $el;
-		this.$formAdd 		= $el.find('.background-experience-form-add');
+		this.$el			= $el;
+		this.$formAdd		= $el.find('.background-experience-form-add');
 
-		this.$btnAdd 		= $el.find('.profiles-btn-add');
-		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
-		this.$btnEdit 		= $el.find('.profiles-btn-edit');
+		this.$btnAdd		= $el.find('.profiles-btn-add');
+		this.$btnCancel		= $el.find('.profiles-btn-cancel');
+		this.$btnEdit		= $el.find('.profiles-btn-edit');
 		this.$btnRemove		= $el.find('.profiles-btn-remove');
-		this.$btnSave 		= $el.find('.profiles-btn-save');
+		this.$btnSave		= $el.find('.profiles-btn-save');
 
 		this.$strMonth		= this.$formAdd.find('[name=\"started_month\"]');
 		this.$strYear		= this.$formAdd.find('[name=\"started_year\"]');
@@ -1164,16 +1167,17 @@
 
 // Skill
 (function($, document, undefined) {
+	'use strict';
 	function Skill($el){
-		this.$el 			= $el;
-		this.$formAdd 		= $el.find('.background-skill-form-add');
+		this.$el			= $el;
+		this.$formAdd		= $el.find('.background-skill-form-add');
 		
-		this.$btnAdd 		= $el.find('.profiles-btn-add');
-		this.$btnSave 		= $el.find('.profiles-btn-save');
-		this.$btnCancel 	= $el.find('.profiles-btn-cancel');
-		this.$btnRemove 	= $el.find('.profiles-btn-remove');
+		this.$btnAdd		= $el.find('.profiles-btn-add');
+		this.$btnSave		= $el.find('.profiles-btn-save');
+		this.$btnCancel		= $el.find('.profiles-btn-cancel');
+		this.$btnRemove		= $el.find('.profiles-btn-remove');
 
-		this.$skill 		= this.$formAdd.find('[name=\"skill\"]');
+		this.$skill			= this.$formAdd.find('[name=\"skill\"]');
 
 		this.attachEvents();
 	}
@@ -1196,25 +1200,25 @@
 				return false;
 			}
 			var me = $(this);
-	        bootbox.dialog({
-				title: "Confirm",
-				message: "Are you sure you want to delete this item ?",				
-				buttons: 
+			bootbox.dialog({
+				title: 'Confirm',
+				message: 'Are you sure you want to delete this item ?',
+				buttons:
 				{
 					cancel: {
-						label: "Cancel",
-						className: "btn",
-						callback: function() {							
+						label: 'Cancel',
+						className: 'btn',
+						callback: function() {
 						}
 					},
 					oke: {
-						label: "OK",
-						className: "btn-primary",
+						label: 'OK',
+						className: 'btn-primary',
 						callback: function() {
 							me.fadeIn(100);
 							that.url = me.parents('.skill-item').data('remove');
 							that.submit(me, 'remove' );
-					  	}
+						}
 					}
 				}
 			});
@@ -1236,7 +1240,7 @@
 
 			return false;
 		});
-	}
+	};
 
 	Skill.prototype.submit = function($button, method){
 		var that = this;
@@ -1268,7 +1272,7 @@
 				$(document).trigger('PROFILE_CHANGED', [{type: 5}]);
 			}
 		});
-	}
+	};
 
 	Skill.prototype.triggerProgress = function($el, promise){
 		var $spinner = $('<i class="icon-refresh icon-spin"></i>');
