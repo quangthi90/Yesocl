@@ -3543,6 +3543,57 @@ a.wall-link:hover {
   font-weight: bold;
 }
 
+.news-container {  
+}
+.news-container .news-column {  
+  width: 32%;
+  margin: 0 1% 1% 0;
+  float: left;
+}
+.news-container .news-column .news-item {
+  background-color: #FFFFFF;  
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+.news-item .news-img {
+}
+.news-item .news-title {
+  font-size: 18px;
+  padding: 10px 10px;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.news-item .news-title:hover {
+  color: #009B77;
+}
+.news-item .news-meta {
+  overflow: hidden;  
+  padding: 0px 10px 10px 10px;
+}
+.news-item .news-owner-img {
+  float: left;  
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+.news-item .news-owner {
+  color: #555555;  
+  font-size: 12px;
+  font-weight: bold;
+}
+.news-item .news-time {
+  display: block;
+  color: #555555;
+  font-size: 11px;
+  line-height: 12px;
+}
+.news-item .news-short-content {
+  padding: 0px 10px;
+  max-height: 42px;
+  overflow: hidden;
+}
 
 /* ======================================== END STOCK ============================================= */
 
