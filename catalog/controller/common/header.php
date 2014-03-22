@@ -4,13 +4,13 @@ class ControllerCommonHeader extends Controller {
 		$this->load->model('tool/image');
 
 		if ( !$this->customer->isLogged() ){
-			$this->data['action'] = array(
-				'connect_face'	=> $this->facebook->getLoginUrl( array( 
-					'scope' => 'publish_stream, email',
-					'redirect_uri' => HTTP_SERVER . 'facebookcnt/',
-					) 
-				)
-			);
+			// $this->data['action'] = array(
+			// 	'connect_face'	=> $this->facebook->getLoginUrl( array( 
+			// 		'scope' => 'publish_stream, email',
+			// 		'redirect_uri' => HTTP_SERVER . 'facebookcnt/',
+			// 		) 
+			// 	)
+			// );
 		}else{
 			$this->load->model('user/post');
 			$this->load->model('branch/post');
