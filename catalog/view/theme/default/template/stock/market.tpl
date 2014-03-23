@@ -4,6 +4,7 @@
 {% use '@template/default/template/stock/common/block_watch_list.tpl' %}
 {% use '@template/default/template/stock/common/block_news.tpl' %}
 {% use '@template/default/template/stock/common/block_ideas.tpl' %}
+{% use '@template/default/template/stock/common/block_post_report.tpl' %}
 
 {% block title %}{% trans %} Market - Stock page {% endtrans %}{% endblock %}
 
@@ -16,7 +17,8 @@
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
         {{ block('stock_common_block_news') }}    
-        {{ block('stock_common_block_ideas') }}        
+        {{ block('stock_common_block_ideas') }}
+        {{ block('stock_common_block_post_report') }}
     </div>
 </div>
 {% endblock %}
