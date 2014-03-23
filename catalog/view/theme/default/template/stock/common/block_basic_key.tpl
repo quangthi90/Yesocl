@@ -42,7 +42,7 @@
 			 		<td>1</td>
 			 	</tr>
 			 	<tr>
-			 		<td>
+			 		<td class="comp-condition">
 			 			Return %
 			 			<div class="btn-group">
 	                      	<a class="btn active">M</a>

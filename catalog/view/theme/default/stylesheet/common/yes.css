@@ -3675,12 +3675,15 @@ a.wall-link:hover {
   font-size: 12px;
 }
 
-.basic-key-table {  
-}
-.basic-key-table thead td {  
+.stock-block .table thead td {
   font-weight: bold;
   font-size: 14px;
   color: #009B77;
+  text-align: center;
+}
+.basic-key-table {  
+}
+.basic-key-table thead td {
   text-align: right;
 }
 .basic-key-table tbody td {
@@ -3703,6 +3706,46 @@ a.wall-link:hover {
 }
 .chart-section .chart-section-content {
   text-align: center;
+}
+
+.company-info {
+  margin-bottom: 20px;
+}
+.company-info .company-header {
+  margin-top: 0px;
+}
+.company-info .company-decription {
+  text-align: justify;
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 20px;
+}
+.company-info .company-decription-more {
+  text-align: right;
+}
+.company-info table td {  
+  border: none;
+}
+.company-info table tr:first-child td {  
+  border-bottom: 1px solid #b4b4b4;
+}
+.company-info table td.td-label {  
+  font-size: 13px;
+  border-left: 2px solid #b4b4b4;
+  width: 100px;
+}
+.company-info table td.td-value {  
+  font-weight: bold;
+}
+
+.funds-table {
+}
+.funds-table td {
+  text-align: center;
+}
+.funds-table td.funds {
+  text-align: left;
+  font-size: 14px;
 }
 
 /* ======================================== END STOCK ============================================= */
