@@ -694,13 +694,14 @@ var yCurrUser = new CurrentUser();
 		if(this.blocks.length == 0){
 			return;
 		}
-		var widthBlock =  parseInt(this.widthMain*2/3);
-		if(widthBlock < ConfigBlock.MIN_STOCK_BLOCK_WIDTH){
-			widthBlock = ConfigBlock.MIN_STOCK_BLOCK_WIDTH;
+		var widthStandard =  parseInt(this.widthMain*2/3);
+		if(widthStandard < ConfigBlock.MIN_STOCK_BLOCK_WIDTH){
+			widthStandard = ConfigBlock.MIN_STOCK_BLOCK_WIDTH;
 		}
 
 		var totalWidth = 0;
-		this.blocks.each(function(){
+		this.blocks.each(function() {
+			var widthBlock = widthStandard;
 			var header = $(this).children('.block-header').first();
 			var content = $(this).children('.block-content').first(); 
 			var heightContent = $(this).height() - header.outerHeight();

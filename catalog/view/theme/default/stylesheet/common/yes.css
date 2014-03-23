@@ -118,7 +118,6 @@ ul
 *, *:focus {
   outline: none !important;
   text-shadow: none !important;
-  box-shadow: none !important;  
 }
 /*END OVERLOAD BOOTSTRAP*/
 /* --------------------------------- START Y-CSS ----------------------------------------------- */
@@ -261,6 +260,9 @@ i.icon-2x{
 }
 .auto-hide {
   display: none;
+}
+.text-right {
+  text-align: right !important;
 }
 .current {
   display: block;
@@ -3371,85 +3373,108 @@ a.wall-link:hover {
 .stock-block:hover .block-header h3.block-title, {
   color: #000;
 }
-.stock-block .block-content {  
+.stock-block .block-content {
+  position: relative;
+}
+.stock-block .block-content .nav-tabs {
+  border-bottom: none;
+}
+.stock-block .block-content .nav-tabs > li > a {
+  border: none;
+  font-weight: bold;
+  text-transform: none;
+}
+.stock-block .block-content .nav-tabs > li.active > a {
+  font-size: 15px;
+  color: #000000;
+  text-transform: uppercase;
 }
 .stock-block .block-content .tab-content {
-  max-height: 80%;
-  overflow-y: auto;
-  padding: 20px;
-  margin-top: -20px;
+  position: absolute;
+  top: 89px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: #FFFFFF;
+  padding: 20px 20px 20px 20px;
+}
+.stock-block .block-content .chart-options {
+  background-color: #FFF;
+  padding: 10px;
+  z-index: 16;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 36px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.stock-block .block-content .chart-options a.btn {
+}
+.stock-block .block-content .chart-options a.btn > i {
+  margin-right: 5px;
+}
+.stock-block .block-content .chart-options a.btn:hover {
+}
+.stock-block .block-content .chart-options a.btn.active {
+  background-color: #009B77;
+  color: #FFFFFF;
+}
+.stock-block .block-content .chart-options a.btn.active i {
+  color: #FFFFFF;
 }
 
-.stock-block .market-statistics {
-  margin-bottom: 15px;
+.stock-block .chart-title {
+  margin: 0px;
+  line-height: 30px;
+  font-size: 18px;
 }
-.market-statistics .index-overview {
-
+.stock-block .chart-content {
 }
-.market-statistics .index-overview.up {
+.chart-content .index-overview {
+}
+.chart-content .index-overview.up {
   color: green;
 }
-.market-statistics .index-overview  li {
+.chart-content .index-overview  li {
   display: inline-block;
   line-height: 80px;
 }
-.market-statistics .index-overview .index-staus {
+.chart-content .index-overview .index-staus {
   font-size: 25px;
   margin-right: 10px;
 }
-.market-statistics .index-overview.up .index-staus i  {
+.chart-content .index-overview.up .index-staus i  {
   color: green;
 }
-.market-statistics .index-overview .index-mount {
+.chart-content .index-overview .index-mount {
   font-size: 35px;
   margin-right: 5px;
   color: #000;
 }
-.market-statistics .index-overview .index-status-mount {
+.chart-content .index-overview .index-status-mount {
   font-weight: bold;
   line-height: 16px;
 }
-
-.market-statistics .index-values {    
+.chart-content .index-values {
+  line-height: 10px; 
 }
-.market-statistics .index-values > div {
-  margin-bottom: 10px;
-}
-.market-statistics .index-values .index-label {
-}
-.market-statistics .index-values .index-value {
-  font-weight: bold;
-  color: #008A6A;
-}
-
-.stock-block .market-chart {
-}
-.market-chart .market-chart-container {
+.chart-content .index-values > div {
   margin-bottom: 15px;
 }
-
-.market-chart .market-chart-functions {
-  
+.chart-content .index-values .index-label {
+  font-weight: bold;
+  font-size: 11px;
+  color: #555;
 }
-.market-chart .market-chart-functions a.btn {
-
+.chart-content .index-values .index-value {
+  font-weight: bold;
+  color: #023C22;
 }
-.market-chart .market-chart-functions a.btn > i {
-  margin-right: 5px;
-}
-.market-chart .market-chart-functions a.btn:hover {
-
-}
-.market-chart .market-chart-functions a.btn.active {
-  background-color: #009B77;
-  color: #FFFFFF;
-}
-.market-chart .market-chart-functions a.btn.active i {
-  color: #FFFFFF;
+.chart-content .chart-area {
+  text-align: center;
 }
 
 #st-watch-list {
-
 }
 #st-watch-list .block-header {
   display: block;

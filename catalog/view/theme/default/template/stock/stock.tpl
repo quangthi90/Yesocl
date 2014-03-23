@@ -1,5 +1,9 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/stock/common/block_stock_chart.tpl' %}
+{% use '@template/default/template/stock/common/block_news.tpl' %}
+{% use '@template/default/template/stock/common/block_ideas.tpl' %}
+
 {% block title %}{% trans %} Stock - Stock page {% endtrans %}{% endblock %}
 
 {% block stylesheet %}    
@@ -8,30 +12,10 @@
 {% block body %}
 <div id="y-content" class="no-header-fixed">
     <div id="y-main-content" class="has-horizontal stock-page">
-        <div class="feed-block stock-block">
-            <div class="block-header">
-                <h3 class="block-title">Chart <i class="icon-caret-right"></i></h3>
-            </div>
-            <div class="block-content">
-                Content of Chart
-            </div>
-        </div>
-        <div class="feed-block stock-block">
-            <div class="block-header">
-                <h3 class="block-title">News <i class="icon-caret-right"></i></h3>
-            </div>
-            <div class="block-content">
-                Content of News
-            </div>
-        </div>
-        <div class="feed-block stock-block">
-            <div class="block-header">
-                <h3 class="block-title">Ideas <i class="icon-caret-right"></i></h3>
-            </div>
-            <div class="block-content">
-                Content of Ideas
-            </div>
-        </div>
+        {{ block('stock_common_block_stock_chart') }}
+        {{ block('stock_common_block_news') }}
+        {{ block('stock_common_block_ideas') }}
+
         <div class="feed-block stock-block">
             <div class="block-header">
                 <h3 class="block-title">Basic Key <i class="icon-caret-right"></i></h3>

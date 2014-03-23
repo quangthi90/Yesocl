@@ -16,15 +16,7 @@
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
         {{ block('stock_common_block_news') }}    
-        {{ block('stock_common_block_ideas') }}
-        <div class="feed-block stock-block">
-            <div class="block-header">
-                <h3 class="block-title">Post Report <i class="icon-caret-right"></i></h3>
-            </div>
-            <div class="block-content">
-                Content of Post Report
-            </div>
-        </div>
+        {{ block('stock_common_block_ideas') }}        
     </div>
 </div>
 {% endblock %}
