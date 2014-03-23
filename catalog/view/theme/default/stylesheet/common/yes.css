@@ -3376,6 +3376,28 @@ a.wall-link:hover {
 .stock-block .block-content {
   position: relative;
 }
+.stock-block .block-content .vertical-content {
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 15px;
+}
+.stock-block .block-content .btn-group {
+  display: block;
+}
+.stock-block .block-content a.btn {
+}
+.stock-block .block-content a.btn > i {
+  margin-right: 5px;
+}
+.stock-block .block-content a.btn:hover {
+}
+.stock-block .block-content a.btn.active {
+  background-color: #009B77;
+  color: #FFFFFF;
+}
+.stock-block .block-content a.btn.active i {
+  color: #FFFFFF;
+}
 .stock-block .block-content .nav-tabs {
   border-bottom: none;
 }
@@ -3407,20 +3429,6 @@ a.wall-link:hover {
   right: 0;
   top: 36px;
   border-bottom: 1px solid #F0F0F0;
-}
-.stock-block .block-content .chart-options a.btn {
-}
-.stock-block .block-content .chart-options a.btn > i {
-  margin-right: 5px;
-}
-.stock-block .block-content .chart-options a.btn:hover {
-}
-.stock-block .block-content .chart-options a.btn.active {
-  background-color: #009B77;
-  color: #FFFFFF;
-}
-.stock-block .block-content .chart-options a.btn.active i {
-  color: #FFFFFF;
 }
 
 .stock-block .chart-title {
@@ -3665,6 +3673,36 @@ a.wall-link:hover {
 .news-actions .news-action a:hover > d {
   color: #FFFFFF;
   font-size: 12px;
+}
+
+.basic-key-table {  
+}
+.basic-key-table thead td {  
+  font-weight: bold;
+  font-size: 14px;
+  color: #009B77;
+  text-align: right;
+}
+.basic-key-table tbody td {
+  text-align: right;
+}
+.basic-key-table tbody td.comp-condition {  
+  font-weight: bold;
+  text-align: left;
+  color: #555555;
+  text-transform: capitalize;
+}
+
+.chart-section {
+}
+.chart-section {
+  margin-bottom: 20px;
+}
+.chart-section .chart-section-title {
+  margin-top: 0px;
+}
+.chart-section .chart-section-content {
+  text-align: center;
 }
 
 /* ======================================== END STOCK ============================================= */
