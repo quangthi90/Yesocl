@@ -3,22 +3,13 @@
 {% block stock_common_block_ideas %}
 <div class="feed-block stock-block">
     <div class="block-header">
-        <h3 class="block-title">News <i class="icon-caret-right"></i></h3>
+        <h3 class="block-title">Ideas <i class="icon-caret-right"></i></h3>
     </div>
     <div class="block-content">
         <div class="news-container">
-			<div class="news-column">				
+			{% for i in 0..5 %}
 				{{ block('stock_common_news_item') }}
-				{{ block('stock_common_news_item') }}
-			</div>
-			<div class="news-column">
-				{{ block('stock_common_news_item') }}
-				{{ block('stock_common_news_item') }}
-			</div>
-			<div class="news-column">
-				{{ block('stock_common_news_item') }}
-				{{ block('stock_common_news_item') }}
-			</div>
+			{% endfor %}
 			<div class="clear"></div>
 		</div>
     </div>

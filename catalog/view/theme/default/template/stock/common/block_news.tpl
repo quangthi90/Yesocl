@@ -7,18 +7,9 @@
     </div>
     <div class="block-content">
         <div class="news-container">
-			<div class="news-column">				
+			{% for i in 0..4 %}
 				{{ block('stock_common_news_item') }}
-				{{ block('stock_common_news_item') }}
-			</div>
-			<div class="news-column">
-				{{ block('stock_common_news_item') }}
-				{{ block('stock_common_news_item') }}
-			</div>
-			<div class="news-column">
-				{{ block('stock_common_news_item') }}
-				{{ block('stock_common_news_item') }}
-			</div>
+			{% endfor %}
 			<div class="clear"></div>
 		</div>
     </div>

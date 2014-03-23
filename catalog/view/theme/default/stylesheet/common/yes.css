@@ -3543,25 +3543,32 @@ a.wall-link:hover {
   font-weight: bold;
 }
 
-.news-container {  
-}
 .news-container .news-column {  
   width: 32%;
-  margin: 0 1% 1% 0;
+  margin-right: 1%;
   float: left;
 }
-.news-container .news-column .news-item {
+.news-container .news-item {
   background-color: #FFFFFF;  
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
+  float: left;
+  position: relative;
 }
-.news-item .news-img {
+.news-item .news-link {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+}
+.news-item .news-link .news-img {  
+}
+.news-item.no-image .news-link {
+  display: none;
 }
 .news-item .news-title {
   font-size: 18px;
   padding: 10px 10px;
-  display: block;
-  white-space: nowrap;
+  display: block;  
   text-overflow: ellipsis;
   overflow: hidden;
 }
@@ -3576,6 +3583,7 @@ a.wall-link:hover {
   float: left;  
   width: 35px;
   height: 35px;
+  border-radius: 50%;
   margin-right: 10px;
 }
 .news-item .news-owner {
@@ -3591,8 +3599,47 @@ a.wall-link:hover {
 }
 .news-item .news-short-content {
   padding: 0px 10px;
-  max-height: 42px;
   overflow: hidden;
+}
+
+.news-item .news-actions {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: -1px;
+  height: 40px;
+  background-color: #5FD1B7;
+  z-index: 10;
+  border-top: 1px solid #EEE;
+  overflow: hidden;
+  display: none;
+}
+.news-item:hover .news-actions {
+  display: block;
+}
+.news-actions .news-action {
+  text-align: center;
+  padding: 10px 0px;
+  display: block;
+  border-right: 1px solid #FFFFFF;
+}
+.news-actions .news-action i {
+  font-size: 18px;
+  color: #555555;
+}
+.news-actions .news-action d {
+  padding: 2px 3px;
+  color: #555555;
+  font-size: 11px;
+  font-weight: bold;
+  vertical-align: top;
+}
+.news-actions .news-action a:hover i {
+  color: #000000;
+}
+.news-actions .news-action a:hover > d {
+  color: #FFFFFF;
+  font-size: 12px;
 }
 
 /* ======================================== END STOCK ============================================= */

@@ -1,6 +1,6 @@
 {% block stock_common_news_item %}
 <div class="news-item">
-	<a href="#">
+	<a href="#" class="news-link">
 		<img class="news-img" src="image/no-image-branch-post.jpg" alt="Title of news">
 	</a>
 	<a href="#" class="news-title">
@@ -19,6 +19,36 @@
 		Content content content content content content content content 
 		content content content content content content content content 
 		content content content content content content content content 
+	</div>
+	<div class="news-actions">
+		<div class="row-fluid">
+			<div class="span4">
+				<span class="news-action">
+					<a href="">
+						<i class="icon-eye-open"></i>
+					</a>
+					<d class="counter">100</d>
+				</span>
+			</div>
+			<div class="span4">
+				<span href="" class="news-action">
+					<a href="">
+						<i class="icon-comments"></i>
+					</a>
+					<d class="counter">100</d>
+				</span>
+			</div>
+			<div class="span4">
+				<span href="" class="news-action">
+					<a href="">
+						<i class="icon-thumbs-up"></i>	
+					</a>
+					<a href="#">
+						<d class="counter">100</d>
+					</a>
+				</span>
+			</div>
+		</div>
 	</div>
 </div>
 {% endblock %}
