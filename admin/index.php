@@ -119,17 +119,17 @@ $session = new Session();
 $registry->set('session', $session); 
 
 // Language
-$languages = array();
+// $languages = array();
 
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "language"); 
+// $query = $db->query("SELECT * FROM " . DB_PREFIX . "language"); 
 
-foreach ($query->rows as $result) {
-	$languages[$result['code']] = $result;
-}
+// foreach ($query->rows as $result) {
+// 	$languages[$result['code']] = $result;
+// }
 
 // Language	
-$language = new Language($languages['en']['directory']);
-$language->load($languages['en']['filename']);	
+$language = new Language('english');
+$language->load('english');	
 $registry->set('language', $language); 		
 
 // Document
