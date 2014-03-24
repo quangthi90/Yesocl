@@ -6,9 +6,7 @@
 	<div class="block-content">
 	    <ul class="watchlist-items">
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -18,7 +16,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -33,9 +31,7 @@
 	            </div>
 	        </li>
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -45,7 +41,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -60,9 +56,7 @@
 	            </div>
 	        </li>
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -72,7 +66,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -87,9 +81,7 @@
 	            </div>
 	        </li>
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -99,7 +91,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -114,9 +106,7 @@
 	            </div>
 	        </li>
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -126,7 +116,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -141,9 +131,7 @@
 	            </div>
 	        </li>
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -153,7 +141,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -168,9 +156,7 @@
 	            </div>
 	        </li>
 	        <li class="wl-item">
-	            <div class="wl-delete-bg">
-	                <a class="btn btn-circle"><i class="icon-remove"></i></a>
-	            </div>
+	        	<a href="#" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code">MSFT</a>
@@ -180,7 +166,7 @@
 	                </div>
 	            </div>
 	            <div class="row-fluid">
-	                <div class="span6">                                
+	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon"><i class="icon-caret-up"></i></span>
 	                        <span class="index-mount">10,000.23</span>
@@ -193,7 +179,7 @@
 	                    </div>
 	                </div>
 	            </div>
-	        </li>
+	        </li>        
 	        <li class="wl-item wl-item-new">
 	            <a class="btn btn-circle"><i class="icon-plus"></i></a>
 	        </li>
