@@ -28,6 +28,7 @@ class ControllerBranchDetail extends Controller {
 
     	$this->load->model('branch/post');
     	$this->load->model('friend/friend');
+    	$this->load->model('friend/follower');
     	$this->load->model('tool/image');
 
     	$lPosts = $this->model_branch_post->getPosts( array('branch_id' => $oBranch->getId()) );
@@ -91,9 +92,8 @@ class ControllerBranchDetail extends Controller {
 		$aUserMembers = array();
 		foreach ( $lUserMembers as $oUserMember ) {
 			$aUserMember = $oUserMember->formatToCache();
-			$afrStatus = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUserMember->getId() );
-            $aUserMember['fr_status'] = $afrStatus['status'];
-            $aUserMember['fr_href'] = $afrStatus['href'];
+			$aUserMember['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUserMember->getId() );
+			$aUserMember['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUserMember->getId() );
 			$aUserMember['avatar'] = $this->model_tool_image->getAvatarUser( $aUserMember['avatar'], $aUserMember['email'] );
 
 			$aUserMembers[] = $aUserMember;
