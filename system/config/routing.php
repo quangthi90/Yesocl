@@ -74,10 +74,7 @@ $_['routing']['UploadFile'] 					= 'upload/';
 
 // Data Value
 $_['routing']['LocationAutoComplete']			= 'data/location/{keyword}/';
-$_['routing']['IndustryAutoComplete']			= 'data/industry/{keyword}/';
-$_['routing']['DegreeAutoComplete']				= 'data/degree/{keyword}/';
-$_['routing']['SchoolAutoComplete']				= 'data/school/{keyword}/';
-$_['routing']['FieldOfStudyAutoComplete']		= 'data/field-of-study/{keyword}/';
+$_['routing']['DataValueAutoComplete']			= 'data/value/{type}/{keyword}/';
 
 // Notification
 $_['routing']['NotificationReadAll']			= 'notification/readAll/';

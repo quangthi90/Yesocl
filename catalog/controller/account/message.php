@@ -28,7 +28,7 @@ class ControllerAccountMessage extends Controller {
 
 			$oUser = $oMessage->getObject();
 			$aUser = $oUser->formatToCache();
-			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 50, 50 );
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 100, 100 );
 			$this->data['users'][$aUser['id']] = $aUser;
 		}
 
@@ -106,11 +106,11 @@ class ControllerAccountMessage extends Controller {
 		$idObjectUser = $aObjectUser['id'];
 
 		// Array Object User info
-		$aObjectUser['avatar'] = $this->model_tool_image->getAvatarUser( $aObjectUser['avatar'], $aObjectUser['email'], 50, 50 );
+		$aObjectUser['avatar'] = $this->model_tool_image->getAvatarUser( $aObjectUser['avatar'], $aObjectUser['email'], 100, 100 );
 		$aObjectUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aObjectUser['slug']));
 		
 		// Array Current User info
-		$aCurrUser = $this->extension->getCurrentUser( 50, 50);
+		$aCurrUser = $this->extension->getCurrentUser( 100, 100 );
 		$aCurrUser['href'] = $this->extension->path('WallPage', array('user_slug' => $aCurrUser['slug']));
 
 		$aMessages = $this->model_friend_message->getMessagesByUser( $idCurrUser, $idObjectUser );
@@ -137,10 +137,12 @@ class ControllerAccountMessage extends Controller {
         $this->load->model('tool/image');
 
         $lMessages = $this->model_friend_message->getLastMessages( $this->customer->getId() );
+        // $aQueryMessages = $lMessages->toArray();
+        // $aQueryMessages = array_reverse($aQueryMessages);
 
         $aMessages = array();
         $aUsers = array();
-        foreach ( $lMessages as $key => $oMessage ) {
+        foreach ( $lMessages as $oMessage ) {
         	if ( empty($aUsers[$oMessage->getObject()->getId()]) ){
         		$oUser = $oMessage->getObject();
 				$aUser = $oUser->formatToCache();

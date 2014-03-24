@@ -32,7 +32,11 @@ class ControllerFriendFollow extends Controller {
 
 		// List follow users
 		$oFollowers = $this->model_friend_follower->getFollowers( $oCurrUser->getId() );
-		$lFollowings = $oFollowers->getFollowings();
+		if ( $oFollowers ){
+			$lFollowings = $oFollowers->getFollowings();
+		}else{
+			$lFollowings = array();
+		}
 		$aUsers = array();
 		$aFollowingIds = array();
 
@@ -50,7 +54,12 @@ class ControllerFriendFollow extends Controller {
 			$aFollowingIds[] = $oUser->getId();
 		}
 
-		$lFolloweds = $oFollowers->getFolloweds();
+		if ( $oFollowers ){
+			$lFolloweds = $oFollowers->getFolloweds();
+		}else{
+			$lFolloweds = array();
+		}
+		
 		$aFollowedIds = array();
 		foreach ( $lFolloweds as $oFollower ) {
 			$oUser = $oFollower->getUser();

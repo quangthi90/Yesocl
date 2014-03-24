@@ -10,7 +10,7 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application Classes
 require_once(DIR_SYSTEM . 'library/customer.php');
-require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
+// require_once(DIR_SYSTEM . 'library/facebook/facebook.php');
 
 // Rename Document for linux
 // include ('libs/renameFolder.php');
@@ -65,7 +65,7 @@ Twig_Autoloader::register();
 $twig_loader = new Twig_Loader_Filesystem(DIR_TEMPLATE);
 $twig_loader->addPath(DIR_TEMPLATE, 'template');
 $twig = new Twig_Environment($twig_loader, array(
-    'cache' => DIR_SYSTEM . '/twig',
+    'cache' => DIR_SYSTEM . '/Twig',
     'auto_reload' => true
 	));
 $twig->addExtension(new Twig_Extension_StringLoader());
@@ -157,13 +157,13 @@ $registry->set('session', $session);
 $registry->set('document', new Document()); 
 
 // facebook
-$fb_setting = array(
-	'appId' => FB_API_ID,
-	'secret' => FB_API_SECRET,
-	'cookie' => false,
-	);
-$facebook = new Facebook( $fb_setting );
-$registry->set( 'facebook', $facebook );		
+// $fb_setting = array(
+// 	'appId' => FB_API_ID,
+// 	'secret' => FB_API_SECRET,
+// 	'cookie' => false,
+// 	);
+// $facebook = new Facebook( $fb_setting );
+// $registry->set( 'facebook', $facebook );		
 
 // Customer
 $customer = new Customer($registry);

@@ -57,7 +57,8 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_datetime_from_now', array($this, 'getDatetimeFromNow')),
             new Twig_SimpleFunction('localized_date', array($this, 'localizedDate')),
             new Twig_SimpleFunction('get_routing_list', array($this, 'getRoutingList')),
-            new Twig_SimpleFunction('get_user_data', array($this, 'getUserData'))
+            new Twig_SimpleFunction('get_user_data', array($this, 'getUserData')),
+            new Twig_SimpleFunction('get_fb_api_id', array($this, 'getFbApiId'))
         );
     }
 
@@ -215,7 +216,9 @@ class ExtensionLoader
 
     public function getUserData(){
         $oLoggedUser = $this->customer->getUser();
-
+        if ( !$oLoggedUser ){
+            return null;
+        }
         $aReturn = array(
             'id' => $oLoggedUser->getId(),
             'username' => $oLoggedUser->getUsername(),
@@ -225,5 +228,9 @@ class ExtensionLoader
         );
 
         return json_encode( $aReturn );
+    }
+
+    public function getFbApiId(){
+        return FB_API_ID;
     }
 }

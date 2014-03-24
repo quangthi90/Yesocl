@@ -2,7 +2,7 @@
 {% endblock %}
 
 {% block post_common_post_status_wall %}
-	<div class="form-status upload-container js-post-form" data-post-type="{{ post_type }}" data-is-add-form="1">
+	<div class="form-status upload-container js-post-form" data-post-type="{{ post_type }}" data-is-add-form="1" data-user-slug="{{ user.slug }}">
 		<div class="post_new drop-zone">
 			<div class="row-fluid txt_editor">
 				<textarea class="post_input js-post-content mention js-post-status" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>

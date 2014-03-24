@@ -1,9 +1,6 @@
 <?php 
 class ControllerDataValue extends Controller {
-	public function index() {
-	}
-
-	public function locationAutoComplete(){
+	public function locationAutoComplee(){
 		$json = array();
 
 		if ( !$this->customer->isLogged() ) {
@@ -39,136 +36,31 @@ class ControllerDataValue extends Controller {
 		$this->response->setOutput( json_encode( $json ) );
 	}
 
-	public function industryAutoComplete() {
+	public function search() {
 		$json = array();
 
-		if ( !$this->customer->isLogged() ) {
-			
-		}elseif ( !isset( $this->request->get['keyword'] ) || !is_string( $this->request->get['keyword'] ) ) {
-
-		}elseif ( (utf8_strlen( $this->request->get['keyword'] ) < 1) || (utf8_strlen( $this->request->get['keyword'] ) > 32) ) {
-
-		}else {
-			$this->load->model( 'data/value' );
-
-			$sort = 'name';
-
-			$data = array(
-				'filter_name' => trim( strtolower( $this->request->get['keyword'] ) ),
-				'filter_type_code' => $this->config->get( 'datatype_industry' ),
-				'sort' => $sort,
-			);
-
-			$industries = $this->model_data_value->getValues( $data );
-			
-			foreach ( $industries as $industry ) {
-				$json[] = array(
-					'name' => html_entity_decode( $industry->getName() ),
-					'id' => $industry->getId(),
-				);
-			}
+		if ( !$this->customer->isLogged() || empty($this->request->get['type']) ) {
+			$this->response->setOutput( json_encode($json) );
 		}
 
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function degreeAutoComplete() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() ) {
-			
-		}elseif ( !isset( $this->request->get['keyword'] ) || !is_string( $this->request->get['keyword'] ) ) {
-
-		}elseif ( (utf8_strlen( $this->request->get['keyword'] ) < 1) || (utf8_strlen( $this->request->get['keyword'] ) > 32) ) {
-
-		}else {
-			$this->load->model( 'data/value' );
-
-			$sort = 'name';
-
-			$data = array(
-				'filter_name' => trim( strtolower( $this->request->get['keyword'] ) ),
-				'filter_type_code' => $this->config->get( 'datatype_degree' ),
-				'sort' => $sort,
-			);
-
-			$degrees = $this->model_data_value->getValues( $data );
-			
-			foreach ( $degrees as $degree ) {
-				$json[] = array(
-					'name' => html_entity_decode( $degree->getName() ),
-					'id' => $degree->getId(),
-				);
-			}
+		if ( empty($this->request->get['keyword']) ) {
+			$this->response->setOutput( json_encode($json) );
 		}
 
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function schoolAutoComplete() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() ) {
-			
-		}elseif ( !isset( $this->request->get['keyword'] ) || !is_string( $this->request->get['keyword'] ) ) {
-
-		}elseif ( (utf8_strlen( $this->request->get['keyword'] ) < 1) || (utf8_strlen( $this->request->get['keyword'] ) > 32) ) {
-
-		}else {
-			$this->load->model( 'data/value' );
-
-			$sort = 'name';
-
-			$data = array(
-				'filter_name' => trim( strtolower( $this->request->get['keyword'] ) ),
-				'filter_type_code' => $this->config->get( 'datatype_school' ),
-				'sort' => $sort,
+		$this->load->model('tool/search');
+		$aValues = $this->model_tool_search->searchDataValueByKeyword( 
+			$this->request->get['type'], 
+			array('keyword' => trim(strtolower($this->request->get['keyword'])))
+		);
+		
+		foreach ( $aValues as $oValue ) {
+			$json[] = array(
+				'name' => html_entity_decode( $oValue->getName() ),
+				'id' => $oValue->getId(),
 			);
-
-			$degrees = $this->model_data_value->getValues( $data );
-			
-			foreach ( $degrees as $degree ) {
-				$json[] = array(
-					'name' => html_entity_decode( $degree->getName() ),
-					'id' => $degree->getId(),
-				);
-			}
 		}
 
-		$this->response->setOutput( json_encode( $json ) );
-	}
-
-	public function fieldOfStudyAutoComplete() {
-		$json = array();
-
-		if ( !$this->customer->isLogged() ) {
-			
-		}elseif ( !isset( $this->request->get['keyword'] ) || !is_string( $this->request->get['keyword'] ) ) {
-
-		}elseif ( (utf8_strlen( $this->request->get['keyword'] ) < 1) || (utf8_strlen( $this->request->get['keyword'] ) > 32) ) {
-
-		}else {
-			$this->load->model( 'data/value' );
-
-			$sort = 'name';
-
-			$data = array(
-				'filter_name' => trim( strtolower( $this->request->get['keyword'] ) ),
-				'filter_type_code' => $this->config->get( 'datatype_fieldofstudy' ),
-				'sort' => $sort,
-			);
-
-			$degrees = $this->model_data_value->getValues( $data );
-			
-			foreach ( $degrees as $degree ) {
-				$json[] = array(
-					'name' => html_entity_decode( $degree->getName() ),
-					'id' => $degree->getId(),
-				);
-			}
-		}
-
-		$this->response->setOutput( json_encode( $json ) );
+		$this->response->setOutput( json_encode($json) );
 	}
 }
 ?>

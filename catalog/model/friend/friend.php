@@ -49,17 +49,15 @@ class ModelFriendFriend extends Model {
 		));
 
 		if ( !$oFriendAs ){
+			if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ){
+	            return 3;
+	        }
+        
 			return 4;
 		}
 
         if ( $oFriendAs->getFriendByUserId($idUserB) ){
-            return 2; 
-        
-        }
-
-        if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ){
-            return 3;
-        
+            return 2;
         }
 
     	return 4;

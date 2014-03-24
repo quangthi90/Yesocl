@@ -295,14 +295,15 @@
         this.blockContent       = this.mainContent.find('.block-content');
         
         this.$el                = $el;
-        this.$title          = $el.find('.js-post-title');
-        this.$category        = $el.find('.js-post-category');
+        this.$title             = $el.find('.js-post-title');
+        this.$category          = $el.find('.js-post-category');
         this.$description       = $el.find('.js-post-description');
-        this.$content          = $el.find('.js-post-content');
-        this.$submitBtn      = $el.find('.js-post-submit-btn');
+        this.$content           = $el.find('.js-post-content');
+        this.$submitBtn         = $el.find('.js-post-submit-btn');
         this.$showPopupBtn      = $('.js-show-popup-btn');
         
-        this.postType          = $el.data('post-type');
+        this.postType           = $el.data('post-type');
+        this.userSlug           = $('.js-post-status').parents('.form-status').data('user-slug');
         
         this.attachEvents();
     }
@@ -382,7 +383,7 @@
         if ( this.is_add == 1 ){
             this.url = window.yRouting.generate('PostAdd', {
                 post_type: that.postType,
-                user_slug: window.yUser.get('slug')
+                user_slug: that.userSlug
             });
         }else{
             this.url = window.yRouting.generate('PostEdit', {

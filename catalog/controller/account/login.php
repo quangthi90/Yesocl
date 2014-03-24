@@ -89,7 +89,7 @@ class ControllerAccountLogin extends Controller {
     if ( empty($this->request->post['data']) ){
       return $this->response->setOutput(json_encode(array(
         'success' => 'not ok',
-        'error' => 'Facebook Data is empty'
+        'error' => 'Facebook Data is empty!'
       )));
     }
 
@@ -113,7 +113,7 @@ class ControllerAccountLogin extends Controller {
       if ( !$oUser->getIsSocial() ){
         return $this->response->setOutput(json_encode(array(
           'success' => 'not ok',
-          'error' => 'Email already exists in the system'
+          'error' => 'Email already exists in the system!'
         )));
       }
 

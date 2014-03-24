@@ -32,18 +32,18 @@
 					<div class="profiles-tabs-value">
 						<div class="row-fluid">
 							<div class="span4">{% trans %}Degree{% endtrans %}: </div>
-							<input type="text" name="degree" />
-							<input type="hidden" name="degree_id" />
+							<input class="value-autocomplete" type="text" name="degree" data-type="degree" />
+							<input class="value-id" type="hidden" name="degree_id" />
 						</div>
 						<div class="row-fluid">
 							<div class="span4">{% trans %}School{% endtrans %}: </div>
-							<input type="text"  name="school" />
-							<input type="hidden"  name="school_id" />
+							<input class="value-autocomplete" type="text"  name="school" data-type="school" />
+							<input class="value-id" type="hidden"  name="school_id" />
 						</div>
 						<div class="row-fluid">
 							<div class="span4">{% trans %}Field Of Study{% endtrans %}: </div>
-							<input type="text" name="fieldofstudy" />
-							<input type="hidden" name="fieldofstudy_id" />
+							<input class="value-autocomplete" type="text" name="fieldofstudy" data-type="fieldofstudy" />
+							<input class="value-id" type="hidden" name="fieldofstudy_id" />
 						</div>
 					</div>
 				</div>

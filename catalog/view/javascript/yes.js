@@ -18,36 +18,6 @@ function getURLVar(urlVarName) {
 	return urlVarValue;
 }
 
-jQuery.fn.showMessageDialog = function() {
-	if($(this).length == 0)
-		return;
-	var overlay = $('<div></div>').css({
-		'position' : 'fixed',
-		'top' : '0px',
-		'left' : '0px',
-		'height' : '100%',
-		'width' : '100%',
-		'opacity' : '0.7',
-		'background-color' : '#000',
-		'z-index' : '9999'
-	}).appendTo('body').fadeIn(300);
-	var title = $(this).data('title');
-    var errorMessage = $(this).data('message');
-    var titleClass = $(this).data('class');
-    new Messi(errorMessage, 
-    {
-        title: title, 
-        titleClass: titleClass, 
-        padding : '20px 10px 20px 10px',
-        buttons: [{id: 0, label: 'Close', val: 'X'}],
-        callback: function() {
-        	overlay.fadeOut(500, function(){
-        		overlay.remove();
-        	});
-        }
-    });
-}
-
 function leftMenu($el){
 	var that = this;
 

@@ -118,7 +118,6 @@ class Customer {
 			$this->customer_group_id = $customer_query->getGroupUser()->getId();
 			$this->slug = $customer_query->getSlug();
 			$this->avatar = $customer_query->getAvatar();
-			$this->friend_list = $customer_query->getFriends();
 			$this->friend_requests = $customer_query->getFriendRequests();
 			$this->user = $customer_query;
 			

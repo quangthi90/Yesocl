@@ -83,7 +83,7 @@ class ControllerCommonSearch extends Controller {
 			$aPost['metaInfo'] = $aPost['like_count'] . ' likes - ' . $aPost['comment_count'] . ' comments - ' . $aPost['count_viewer'] . ' views';
 			
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 50, 50 );
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 100, 100 );
 			}else{
 				$aPost['image'] = null;
 			}
@@ -212,7 +212,7 @@ class ControllerCommonSearch extends Controller {
 			$aPost['metaInfo'] = $aPost['like_count'] . ' likes - ' . $aPost['comment_count'] . ' comments - ' . $aPost['count_viewer'] . ' views';
 			
 			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 50, 50 );
+				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 100, 100 );
 			}else{
 				$aPost['image'] = null;
 			}

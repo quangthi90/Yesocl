@@ -73,59 +73,61 @@ class ControllerCommonHome extends Controller {
 		}
 
 		// Follow post
-		$oFollowers = $this->model_friend_follower->getFollowers( $oLoggedUser->getId() );
+		if ( $oLoggedUser ){
+			$oFollowers = $this->model_friend_follower->getFollowers( $oLoggedUser->getId() );
 
-		$aUserIds = array();
+			$aUserIds = array();
 
-		if ( $oFollowers ){
-			$lFollowings = $oFollowers->getFollowings();
+			if ( $oFollowers ){
+				$lFollowings = $oFollowers->getFollowings();
 
-			foreach ( $lFollowings as $oFollower ) {
-				$oUser = $oFollower->getUser();
-				$aUserIds[] = $oUser->getId();
-			}
-		}
-
-		$aPosts = $this->model_cache_post->getPosts(array(
-			'sort' => 'created',
-			'type_ids' => $aUserIds,
-			'limit' => 6
-		));
-
-		if ( !$aPosts ){
-			$aPosts = array();
-		}
-
-		$this->data['fl_posts'] = array();
-		foreach ($aPosts as $aPost) {
-			// thumb
-			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
-			}else{
-				$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
-			}
-
-			if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
-				$aPost['isUserLiked'] = true;
-			}else{
-				$aPost['isUserLiked'] = false;
-			}
-
-			$aPost['description'] = $aPost['content'];
-
-			$this->data['fl_posts'][] = $aPost;
-
-			if ( empty($aUsers[$aPost['user_id']]) ){
-				$aUser = $this->model_user_user->getUser( $aPost['user_slug'] );
-				if ( !$aUser ){
-					continue;
+				foreach ( $lFollowings as $oFollower ) {
+					$oUser = $oFollower->getUser();
+					$aUserIds[] = $oUser->getId();
 				}
-				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-				$aUsers[$aUser['id']] = $aUser;
 			}
-		}
 
-		$this->data['users'] = $aUsers;
+			$aPosts = $this->model_cache_post->getPosts(array(
+				'sort' => 'created',
+				'type_ids' => $aUserIds,
+				'limit' => 6
+			));
+
+			if ( !$aPosts ){
+				$aPosts = array();
+			}
+
+			$this->data['fl_posts'] = array();
+			foreach ($aPosts as $aPost) {
+				// thumb
+				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
+				}else{
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+				}
+
+				if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
+					$aPost['isUserLiked'] = true;
+				}else{
+					$aPost['isUserLiked'] = false;
+				}
+
+				$aPost['description'] = $aPost['content'];
+
+				$this->data['fl_posts'][] = $aPost;
+
+				if ( empty($aUsers[$aPost['user_id']]) ){
+					$aUser = $this->model_user_user->getUser( $aPost['user_slug'] );
+					if ( !$aUser ){
+						continue;
+					}
+					$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+					$aUsers[$aUser['id']] = $aUser;
+				}
+			}
+
+			$this->data['users'] = $aUsers;
+		}
 
 		$this->data['branch_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['user_type'] = $this->config->get('common')['type']['user'];
@@ -138,6 +140,9 @@ class ControllerCommonHome extends Controller {
 		if ( $oLoggedUser && $oLoggedUser->getToken() != '' && $oLoggedUser->getTokenTime() >= $date ){
 			$this->data['warning_active'] = 'An active link has been sent to your email, please active your account before ' . $oLoggedUser->getTokenTime()->format('d/m/Y') . ' (your account will be DELETED if you do not active before this time)';
 		}
+
+		// Facebook config
+		$this->data['fb_app_id'] = FB_API_ID;
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/home.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/common/home.tpl';

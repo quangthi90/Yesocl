@@ -76,10 +76,7 @@ $_['route']['UploadFile'] 					= 'file/upload';
 
 // Data Value
 $_['route']['LocationAutoComplete']			= 'data/value/locationAutoComplete';
-$_['route']['IndustryAutoComplete']			= 'data/value/industryAutoComplete';
-$_['route']['DegreeAutoComplete']			= 'data/value/degreeAutoComplete';
-$_['route']['SchoolAutoComplete']			= 'data/value/schoolAutoComplete';
-$_['route']['FieldOfStudyAutoComplete']		= 'data/value/fieldOfStudyAutoComplete';
+$_['route']['DataValueAutoComplete']		= 'data/value/search';
 
 // Notification
 $_['route']['NotificationReadAll']			= 'common/notification/readAll/';
