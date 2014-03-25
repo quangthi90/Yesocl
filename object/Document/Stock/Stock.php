@@ -33,6 +33,9 @@ Class Stock {
 
 	/** @MongoDB\ReferenceOne(targetDocument="Market", inversedBy="stocks") */
 	private $market;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="stock") */
+	private $posts = array();
 	
 	/** @MongoDB\Boolean */
 	private $status = true;
