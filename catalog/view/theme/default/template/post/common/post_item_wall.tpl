@@ -89,7 +89,9 @@
 				<a href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">{{ post.title }}</a>
 			</h4>
 			<div class="post_image{% if post.image == null %} hidden{% endif %}">
-				<img src="{{ post.image }}" />
+				<a class="img-link-popup" href="{{ post.thumb }}">
+					<img src="{{ post.image }}" />
+				</a>				
 			</div>
 			<div class="post_text_raw">
 				{{ post.content|raw }}
