@@ -94,6 +94,10 @@ $_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
 $_['route']['MessageDeleteAll']				= 'account/message/deleteUserMessages/';
 $_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 
+// Stock
+$_['route']['StockMarket']					= 'stock/market/';
+$_['route']['StockMarketNone']				= 'stock/market/';
+
 // Ajax
 $_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';
 $_['route']['SetLanguage']					= 'ajax/language/setLanguage/';

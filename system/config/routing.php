@@ -92,6 +92,10 @@ $_['routing']['MessageGetLast']					= 'message/get-last/';
 $_['routing']['MessageDeleteAll']				= 'message/delete/all/{user_slug}/';
 $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 
+// Stock
+$_['routing']['StockMarketNone']				= 'stock/market/';
+$_['routing']['StockMarket']					= 'stock/market/{market_code}/';
+
 // Ajax
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';
 $_['routing']['SetLanguage']					= 'service/push/language/';
