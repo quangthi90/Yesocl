@@ -16,7 +16,6 @@ class ModelStockPost extends Model {
 	 *		string Title 		-- required
 	 *		string Company ID 	-- required
 	 *		string User ID 		-- required
-	 *		string Category ID 	-- required
 	 *		string Description 	-- required
 	 *		string Content 		-- required
 	 *		bool Status
@@ -46,16 +45,6 @@ class ModelStockPost extends Model {
 			return false;
 		}
 
-		// Category is required
-		if ( !isset( $data['category_id'] ) ) {
-			return false;
-		}
-		
-		$category = $this->dm->getRepository( 'Document\Stock\Category' )->find( $data['category_id'] );
-		if ( empty( $category ) ) {
-			return false;
-		}
-
 		// Description is required
 		if ( !isset( $data['description'] ) || empty( $data['description'] ) ) {
 			return false;
@@ -79,7 +68,6 @@ class ModelStockPost extends Model {
 		$post->setSlug( $slug );
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
-		$post->setCategory( $category );
 		$post->setDescription( $data['description'] );
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
@@ -90,7 +78,7 @@ class ModelStockPost extends Model {
 		
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
-			$folder_link = $this->config->get('Stock')['default']['image_link'];
+			$folder_link = $this->config->get('stock')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
 			$path = $folder_link . $stock->getId() . '/' . $folder_name . '/' . $post->getId();
@@ -102,26 +90,7 @@ class ModelStockPost extends Model {
 		$this->dm->flush();
 		
 		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-
-		$posts = $this->getPosts( array(
-			'Stock_id' => $stock_id,
-			'category_id' => $data['category_id'],
-			'limit' => 6
-		));
-
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['Stock'], 
-					$stock->getId(), 
-					$category->getId(), 
-					$posts 
-				);
-			}
-		}
-
-		$type = $this->config->get('post')['cache']['Stock'];
+		$type = $this->config->get('post')['cache']['stock'];
 		$this->load->model('cache/post');
 		$data = array(
 			'post_id' => $post->getId(),
@@ -147,7 +116,6 @@ class ModelStockPost extends Model {
 	 *		string Title 		-- required
 	 *		string Company ID 	-- required
 	 *		string User ID 		-- required
-	 *		string Category ID 	-- required
 	 *		string Description 	-- required
 	 *		string Content 		-- required
 	 *		bool Status
@@ -168,15 +136,6 @@ class ModelStockPost extends Model {
 		}
 		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
 		if ( empty( $user ) ) {
-			return false;
-		}
-
-		// Category is required
-		if ( !isset( $data['category_id'] ) ) {
-			return false;
-		}
-		$category = $this->dm->getRepository( 'Document\Stock\Category' )->find( $data['category_id'] );
-		if ( empty( $category ) ) {
 			return false;
 		}
 
@@ -212,7 +171,6 @@ class ModelStockPost extends Model {
 
 		$post->setTitle( $data['title'] );
 		$post->setUser( $user );
-		$post->setCategory( $category );
 		$post->setDescription( $data['description'] );
 		$post->setContent( $data['post_content'] );
 		$post->setStatus( $data['status'] );
@@ -221,7 +179,7 @@ class ModelStockPost extends Model {
 
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
-			$folder_link = $this->config->get('Stock')['default']['image_link'];
+			$folder_link = $this->config->get('stock')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
 			$path = $folder_link . $stock->getId() . '/' . $folder_name . '/' . $post->getId();
@@ -231,26 +189,6 @@ class ModelStockPost extends Model {
 		}
 
 		$this->dm->flush();
-
-		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-
-		$posts = $this->getPosts( array(
-			'Stock_id' => $stock_id,
-			'category_id' => $data['category_id'],
-			'limit' => 6
-		));
-		
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['Stock'], 
-					$stock->getId(), 
-					$category->getId(), 
-					$posts 
-				);
-			}
-		}
 		
 		return true;
 	}
@@ -264,8 +202,6 @@ class ModelStockPost extends Model {
 	 * @return: boolean
 	 */
 	public function deletePost( $stock_id, $data = array() ) {
-		$category_ids = array();
-
 		$this->load->model('tool/image');
 		$this->load->model('cache/post');
 
@@ -275,10 +211,7 @@ class ModelStockPost extends Model {
 			foreach ( $data['id'] as $id ) {
 				$post = $this->dm->getRepository('Document\Stock\Post')->find( $id );
 				if ( !empty( $post ) ) {
-					$category_id = $post->getCategory()->getId();
-					$category_ids[$category_id] = $category_id;
-
-					$folder_link = $this->config->get('Stock')['default']['image_link'];
+					$folder_link = $this->config->get('stock')['default']['image_link'];
 					$folder_name = $this->config->get('post')['default']['image_folder'];
 					$path = DIR_IMAGE . $folder_link . $stock_id . '/' . $folder_name . '/' . $post->getId();
 					
@@ -290,23 +223,6 @@ class ModelStockPost extends Model {
 		}
 		
 		$this->dm->flush();
-
-		foreach ( $category_ids as $category_id ) {
-			//-- Update 6 last posts
-			$this->load->model('tool/cache');
-
-			$posts = $this->getPosts( array(
-				'Stock_id' => $stock_id,
-				'category_id' => $category_id,
-				'limit' => 6
-			));
-			$this->model_tool_cache->updateLastCategoryPosts( 
-				$this->config->get('post')['type']['Stock'], 
-				$stock_id, 
-				$category_id, 
-				$posts 
-			);
-		}
 
 		return true;
 	}
@@ -331,12 +247,8 @@ class ModelStockPost extends Model {
 		}
 
 		$query = array();
-		if ( !empty($data['Stock_id']) ){
-			$query['Stock.id'] = $data['Stock_id'];
-		}
-
-		if ( !empty($data['category_id']) ){
-			$query['category.id'] = $data['category_id'];
+		if ( !empty($data['stock_id']) ){
+			$query['stock.id'] = $data['stock_id'];
 		}
 
 		$results = $this->dm->getRepository('Document\Stock\Post')

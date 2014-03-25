@@ -28,7 +28,6 @@
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
               <td><?php echo $column_thumbl ?></td>
               <td><?php echo $column_post; ?></td>
-              <td><?php echo $column_category; ?></td>
               <td><?php echo $column_author; ?></td>
               <td><?php echo $column_created; ?></td>
               <td><?php echo $column_status; ?></td>
@@ -42,7 +41,6 @@
               <td><input name="id[]" type="checkbox" value="<?php echo $post['id']; ?>"/></td>
               <td><div class="thumbnail" style="width: 80px; height: 80px;"><img src="<?php echo $post['thumb']; ?>" /></div></td>
               <td><?php echo $post['title']; ?></td>
-              <td><?php echo $post['category']; ?></td>
               <td><?php echo $post['author']; ?></td>
               <td><?php echo $post['created']; ?></td>
               <td><?php echo $post['status']; ?></td>

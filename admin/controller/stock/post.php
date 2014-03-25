@@ -211,7 +211,6 @@ class ControllerStockPost extends Controller {
 		$this->data['column_status'] = $this->language->get( 'column_status' );
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		$this->data['column_thumb'] = $this->language->get( 'column_thumb' );
-		$this->data['column_category'] = $this->language->get( 'column_category' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -252,7 +251,6 @@ class ControllerStockPost extends Controller {
 				'id' => $post->getId(),
 				'thumb' => HTTP_IMAGE . $post->getThumb(),
 				'title' => $post->getTitle(),
-				'category' => $post->getCategory()->getName(),
 				'author' => $post->getUser()->getPrimaryEmail()->getEmail(),
 				'created' => $post->getCreated()->format( 'd/m/Y - h:i:s' ),
 				'status' => $post->getStatus() == true ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
@@ -313,12 +311,6 @@ class ControllerStockPost extends Controller {
 			$this->data['error_author'] = '';
 		}
 
-		if ( isset( $this->error['error_category'] ) ) {
-			$this->data['error_category'] = $this->error['error_category'];
-		}else {
-			$this->data['error_category'] = '';
-		}
-
 		if ( isset( $this->error['error_description'] ) ) {
 			$this->data['error_description'] = $this->error['error_description'];
 		}else {
@@ -366,27 +358,26 @@ class ControllerStockPost extends Controller {
    		);
 
    		// Heading title
-		$this->data['heading_title'] = $this->language->get( 'heading_title' );
+		$this->data['heading_title'] = $this->language->get('heading_title');
 
 		// text
-		$this->data['text_enable'] = $this->language->get( 'text_enable' );
-		$this->data['text_disable'] = $this->language->get( 'text_disable' );
-		$this->data['text_select_image'] = $this->language->get( 'text_select_image' );
-		$this->data['text_change'] = $this->language->get( 'text_change' );
-		$this->data['text_remove'] = $this->language->get( 'text_remove' );
+		$this->data['text_enable'] = $this->language->get('text_enable');
+		$this->data['text_disable'] = $this->language->get('text_disable');
+		$this->data['text_select_image'] = $this->language->get('text_select_image');
+		$this->data['text_change'] = $this->language->get('text_change');
+		$this->data['text_remove'] = $this->language->get('text_remove');
 
 		// entry
-		$this->data['entry_title'] = $this->language->get( 'entry_title' );
-		$this->data['entry_status'] = $this->language->get( 'entry_status' );
-		$this->data['entry_author'] = $this->language->get( 'entry_author' );
-		$this->data['entry_category'] = $this->language->get( 'entry_category' );
-		$this->data['entry_description'] = $this->language->get( 'entry_description' );
-		$this->data['entry_content'] = $this->language->get( 'entry_content' );
-		$this->data['entry_thumb'] = $this->language->get( 'entry_thumb' );
+		$this->data['entry_title'] = $this->language->get('entry_title');
+		$this->data['entry_status'] = $this->language->get('entry_status');
+		$this->data['entry_author'] = $this->language->get('entry_author');
+		$this->data['entry_description'] = $this->language->get('entry_description');
+		$this->data['entry_content'] = $this->language->get('entry_content');
+		$this->data['entry_thumb'] = $this->language->get('entry_thumb');
 
 		// button
-		$this->data['button_save'] = $this->language->get( 'button_save' );
-		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['button_cancel'] = $this->language->get('button_cancel');
 
 		// link
 		$this->data['cancel'] = $this->url->link( 'stock/post', 'token=' . $this->session->data['token'] . $url, 'SSL' );
@@ -415,7 +406,6 @@ class ControllerStockPost extends Controller {
 		// author
 		if ( isset( $post ) ) {
 			$user = $post->getUser();
-			$category = $post->getCategory();
 		}
 		if ( isset( $this->request->post['author'] ) ) {
 			$this->data['author'] = $this->request->post['author'];
@@ -431,32 +421,6 @@ class ControllerStockPost extends Controller {
 			$this->data['user_id'] = $user->getId();
 		}else {
 			$this->data['user_id'] = '';
-		}
-
-		// Category
-		if ( isset($this->request->post['category_id']) ){
-			$this->data['category_id'] = $this->request->post['category_id'];
-		}elseif ( isset( $category ) ){
-			$this->data['category_id'] = $category->getId();
-		}else {
-			$this->data['category_id'] = '';
-		}
-
-		$this->load->model( 'stock/stock' );
-		$stock = $this->model_stock_stock->getstock( $this->request->get['stock_id'] );
-		
-		if ( $stock ){
-			$categories = $stock->getCategories();
-		}else{
-			$categories = array();
-		}
-
-		$this->data['categories'] = array();
-		foreach ( $categories as $category ) {
-			$this->data['categories'][] = array(
-				'id' => $category->getId(),
-				'name' => $category->getName()
-			);
 		}
 
 		// description
@@ -521,10 +485,6 @@ class ControllerStockPost extends Controller {
 
 		if ( !isset( $this->request->post['post_content']) || strlen( trim( $this->request->post['post_content'] ) ) < 50 ) {
 			$this->error['error_content'] = $this->language->get( 'error_content' );
-		}
-
-		if ( !isset( $this->request->post['category_id']) || empty( $this->request->post['category_id'] ) ) {
-			$this->error['error_category'] = $this->language->get( 'error_category' );
 		}
 
 		if ( !isset( $this->request->post['user_id']) || empty( $this->request->post['user_id'] ) ) {

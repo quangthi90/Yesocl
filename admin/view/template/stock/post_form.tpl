@@ -56,14 +56,6 @@
             <?php } ?></td>
           </tr>
           <tr>
-            <td><?php echo $entry_category; ?></td>
-            <td><select name="category_id">
-              <?php foreach ( $categories as $category ) { ?>
-                <option value="<?php echo $category['id']; ?>" <?php if ($category['id'] == $category_id){ ?>selected="selected"<?php } ?>><?php echo $category['name']; ?></option>
-              <?php } ?>
-              </select></td>
-          </tr>
-          <tr>
             <td><?php echo $entry_thumb; ?></td>
             <td>
               <div class="thumb fileupload fileupload-new" data-provides="fileupload">
