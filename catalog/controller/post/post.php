@@ -64,9 +64,9 @@ class ControllerPostPost extends Controller {
             $sAvatar = $this->model_tool_image->getAvatarUser( $aAuthor['avatar'], $aAuthor['email'] );
 
             // thumb
-            $aThumb = $oPost->getThumb();
-            if ( !empty($aThumb) ){
-                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250 );
+            $sThumb = $oPost->getThumb();
+            if ( !empty($sThumb) ){
+                $sImage = $this->model_tool_image->resize( $sThumb, 400, 250 );
             }else{
                 $sImage = null;
             }
@@ -95,6 +95,7 @@ class ControllerPostPost extends Controller {
                     ),
                     'created' => $this->extension->dateFormat( $oPost->getCreated() ),
                     'image' => $sImage,
+                    'thumb' => $sThumb,
                     'title' => $oPost->getTitle(),
                     'content' => html_entity_decode($oPost->getContent()),
                     'see_more' => $bIsSeeMore,
@@ -244,10 +245,10 @@ class ControllerPostPost extends Controller {
             }
 
             // thumb
-            $aThumb = $oPost->getThumb();
+            $sThumb = $oPost->getThumb();
             
-            if ( !empty($aThumb) ){
-                $sImage = $this->model_tool_image->resize( $aThumb, 400, 250 );
+            if ( !empty($sThumb) ){
+                $sImage = $this->model_tool_image->resize( $sThumb, 400, 250 );
             }else{
                 $sImage = null;
             }
@@ -256,6 +257,7 @@ class ControllerPostPost extends Controller {
 
             $aReturnData = array(
                 'image' => $sImage,
+                'thumb' => $sThumb,
                 'title' => $oPost->getTitle(),
                 'content' => html_entity_decode($oPost->getContent())
             );

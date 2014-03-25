@@ -307,7 +307,9 @@
 							<a href="${href.post_detail}">${post.title}</a>
 						</h4>
 						<div class="post_image{{if post.image == null}} hidden{{/if}}">
-							<img src="${post.image}" alt="${post.title}" />
+							<a class="img-link-popup" href="${post.thumb}">
+								<img src="${post.image}" alt="${post.title}" />
+							</a>
 						</div>
 						<div class="post_text_raw">
 							{{html post.content}}
