@@ -16,7 +16,6 @@ class ModelStockComment extends Model {
 	 *		string Title 		-- required
 	 *		string Company ID 	-- required
 	 *		string User ID 		-- required
-	 *		string Category ID 	-- required
 	 *		string Description 	-- required
 	 *		string Content 		-- required
 	 *		bool Status
@@ -56,27 +55,6 @@ class ModelStockComment extends Model {
 		$post->addComment( $comment );
 
 		$this->dm->flush();
-		
-		//-- Update 6 last posts
-		$this->load->model('tool/cache');
-		$this->load->model('stock/post');
-
-		$posts = $this->model_Stock_post->getPosts( array(
-			'stock_id' => $post->getStock()->getId(),
-			'category_id' => $post->getCategory()->getId(),
-			'limit' => 6
-		));
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
-				$this->model_tool_cache->updateLastCategoryPosts( 
-					$this->config->get('post')['type']['stock'], 
-					$post->getStock()->getId(), 
-					$post->getCategory()->getId(), 
-					$posts 
-				);
-				break;
-			}
-		}
 
 		$type = $this->config->get('post')['cache']['stock'];
 		$this->load->model('cache/post');
@@ -104,7 +82,6 @@ class ModelStockComment extends Model {
 	 *		string Title 		-- required
 	 *		string Company ID 	-- required
 	 *		string User ID 		-- required
-	 *		string Category ID 	-- required
 	 *		string Description 	-- required
 	 *		string Content 		-- required
 	 *		bool Status
@@ -177,24 +154,6 @@ class ModelStockComment extends Model {
 		}
 		
 		$this->dm->flush();
-
-		if ( $post ){
-			//-- Update 6 last posts
-			$this->load->model('tool/cache');
-			$this->load->model('stock/post');
-
-			$posts = $this->model_Stock_post->getPosts( array(
-				'stock_id' => $post->getStock()->getId(),
-				'category_id' => $post->getCategory()->getId(),
-				'limit' => 6
-			));
-			$this->model_tool_cache->updateLastCategoryPosts( 
-				$this->config->get('post')['type']['stock'], 
-				$post->getStock()->getId(), 
-				$post->getCategory()->getId(), 
-				$posts 
-			);
-		}
 
 		return true;
 	}
