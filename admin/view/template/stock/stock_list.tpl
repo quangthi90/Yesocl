@@ -37,13 +37,13 @@
               <td></td>
               <td><input type="text" name="name" id="name" value="<?php echo $filter_name; ?>" /></td>
               <td><input type="text" name="code" id="code" value="<?php echo $filter_code; ?>" /></td>
-              <td><select class="input-large" name="market_id" id="market_id">
+              <td><select class="input-medium" name="market_id" id="market_id">
               <option value=""><?php echo $text_none; ?></option>
               <?php foreach ( $markets as $market ) { ?>
               <option value="<?php echo $market['id']; ?>" <?php if ($market['id'] == $filter_market){ ?>selected="selected"<?php } ?>><?php echo $market['name']; ?></option>
               <?php } ?>
             </select></td>
-              <td><select class="input-large" name="status" id="status">
+              <td><select class="input-medium" name="status" id="status">
               <option value=""><?php echo $text_none; ?></option>
               <option value="true" <?php if ('true' == $filter_status){ ?>selected="selected"<?php } ?>><?php echo $text_enabled; ?></option>
               <option value="false" <?php if ('false' == $filter_status){ ?>selected="selected"<?php } ?>><?php echo $text_disabled; ?></option>
