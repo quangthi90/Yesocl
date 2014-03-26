@@ -57,6 +57,10 @@ class ModelCompanyCompany extends Model {
 		$oCompany->setDescription( $aData['description'] );
 		$oCompany->setCreated( new \Datetime( $aData['created'] ) );
 		$oCompany->setStatus( $aData['status'] );
+		$oCompany->setAddress( $aData['address'] );
+		$oCompany->setPhone( $aData['phone'] );
+		$oCompany->setFax( $aData['fax'] );
+		$oCompany->setWebsite( $aData['website'] );
 
 		if ( isset($aData['branches']) || !empty($aData['branches']) ){
 			$oCompany->setBranches( array() );
@@ -153,6 +157,10 @@ class ModelCompanyCompany extends Model {
 		$oCompany->setDescription( $aData['description'] );
 		$oCompany->setCreated( new \Datetime( $aData['created'] ) );
 		$oCompany->setStatus( $aData['status'] );
+		$oCompany->setAddress( $aData['address'] );
+		$oCompany->setPhone( $aData['phone'] );
+		$oCompany->setFax( $aData['fax'] );
+		$oCompany->setWebsite( $aData['website'] );
 
 		
 		$oCompany->setBranches( array() );

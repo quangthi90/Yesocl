@@ -36,6 +36,9 @@ Class Stock {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="stock") */
 	private $posts = array();
+
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Company\Company", inversedBy="stock") */
+	private $company;
 	
 	/** @MongoDB\Boolean */
 	private $status = true;
@@ -127,5 +130,13 @@ Class Stock {
 
 	public function getCreated(){
 		return $this->created;
+	}
+
+	public function setCompany( $company ){
+		$this->company = $company;
+	}
+
+	public function getCompany(){
+		return $this->company;
 	}
 }

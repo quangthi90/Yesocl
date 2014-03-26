@@ -20,6 +20,7 @@
       <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form">
         <ul class="nav nav-tabs">
           <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
+          <li><a href="#tab-meta" data-toggle="tab"><?php echo $tab_meta; ?></a></li>
           <li><a href="#tab-email" data-toggle="tab"><?php echo $tab_branch; ?></a></li>
         </ul>
         <div class="tab-content">
@@ -27,8 +28,13 @@
           <div class="tab-pane active" id="tab-general">
             <?php include 'tab_company/general.tpl'; ?>
           </div>
+
+          <!-- Meta tab -->
+          <div class="tab-pane active" id="tab-meta">
+            <?php include 'tab_company/meta.tpl'; ?>
+          </div>
         
-          <!-- Member tab -->
+          <!-- Branch tab -->
           <div class="tab-pane" id="tab-email">
             <?php include 'tab_company/branch.tpl'; ?>
           </div>
