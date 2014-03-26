@@ -308,7 +308,7 @@
                 that.url  = that.$el.attr('data-url');
 
                 that.data = {
-                    content   : that.$content.val()
+                    content   : that.$content.mentionsInput('getHtmlContent')
                 };
 
                 that.submit(that.$press_enter_cb.parent());
@@ -401,6 +401,7 @@
                 $('#post-detail-comment-number').html(comment_count);
 
                 that.$content.val('');
+                that.$content.mentionsInput('reset');
                 that.$content_advance.code('');
                 commentBox.find('.counter').html( comment_count );
                 $comment_btn.parent().find('.number-counter').html( comment_count );

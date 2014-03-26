@@ -33,7 +33,8 @@
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
       mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>'),
       mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
-      mentionItemContent          : _.template('<a href="<%= wall %>" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= type %>:<%= id %>)"><%= value %></a>')      
+      mentionItemContent         : _.template('@USER[<%= id %>]')
+      //mentionItemContent          : _.template('<a href="<%= wall %>" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= id %>)"><%= value %></a>')
     },
     mentionItemRegex: /@\[([^\]]+)\]\(([^:]+):(\d+)\)/g
   };
@@ -177,7 +178,7 @@
         syntaxMessage += initialMessage.substr(index, mentionIndex - index);
         syntaxMessage += textSyntax;
         contentMessage += initialMessage.substr(index, mentionIndex - index);
-        contentMessage += linkSyntax;
+        contentMessage += utils.htmlEncode(linkSyntax);
          
         index = mentionIndex + mention.value.length;
       });

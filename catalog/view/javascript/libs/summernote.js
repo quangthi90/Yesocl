@@ -1341,7 +1341,7 @@
       if(that.btnTag.hasClass('disabled')) {
         that.btnTag.removeClass('disabled').attr('disabled', false);
       }
-      tagItem.append(showTagEl).append(linkTagEl).append(removeTag).appendTo(that.tagContainer);
+      tagItem.append(showTagEl).append(linkTagEl)..append(removeTag).appendTo(that.tagContainer);
       currentTagsGlobal.push(data.selectedItem.id);
       that.inputTag.val('').focus();
     });
