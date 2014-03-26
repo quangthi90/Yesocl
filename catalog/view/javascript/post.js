@@ -209,7 +209,7 @@
     function ShowEditPostAdvance($el) {
         this.$el        = $el;
         this.$btn       = $el.find('.post-edit-btn');
-        this.$image     = $el.find('.post_image > img');
+        this.$image     = $el.find('.post_image img');
 
         this.content    = $el.find('.post_text_editable').html();
         this.title      = $el.find('.post_title > a').html();
@@ -456,6 +456,20 @@
                         newColumn.css('opacity', '1');
                     }, 500);
 
+                    htmlOutput.find('.post_body').magnificPopup({
+                        delegate: 'a',
+                        type: 'image',
+                        closeOnContentClick: false,
+                        closeBtnInside: false,
+                        mainClass: 'mfp-with-zoom mfp-img-mobile',
+                        image: {
+                            verticalFit: true,
+                            titleSrc: function(item) {
+                                return item.el.attr('title');
+                            }
+                        }
+                    });
+
                     //Rise events:
                     $(document).trigger('POST_BUTTON');
                     $(document).trigger('POST_SHOW_LIKED_BUTTON');
@@ -479,7 +493,8 @@
                         $current_post.find('.post_title').removeClass('hidden').find('a').html( data.post.title );
                     }
                     if ( data.post.image !== null ){
-                        $current_post.find('.post_image').removeClass('hidden').html($('<image src="' + data.post.image + '" />'));
+                        $current_post.find('.post_image').removeClass('hidden').find('a').attr('href', data.post.thumb + '?' + new Date().getTime());
+                        $current_post.find('.post_image').removeClass('hidden').find('img').attr('src', data.post.image + '?' + new Date().getTime());
                     }
 
                     $(document).trigger('EDIT_POST', [$current_post]);

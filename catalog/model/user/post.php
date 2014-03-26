@@ -45,53 +45,55 @@ class ModelUserPost extends Model {
 
 		$slug = (!empty($data['title']) ? $this->url->create_slug( $data['title'] ) . '-' : '') . new MongoId();
 		
-		$post = new Post();
-		$post->setContent( $data['content'] );
-		$post->setUser( $author );
-		$post->setStatus( true );
-		$post->setSlug( $slug );
-		$post->setOwnerId( $user->getId() );
+		$oPost = new Post();
+		$oPost->setContent( $data['content'] );
+		$oPost->setUser( $author );
+		$oPost->setStatus( true );
+		$oPost->setSlug( $slug );
+		$oPost->setOwnerId( $user->getId() );
 
 		if ( !empty($data['title']) ){
-			$post->setTitle( $data['title'] );
+			$oPost->setTitle( $data['title'] );
 		}
+
+		$lPosts = $user->getPostData();
+
+		if ( !$lPosts ){
+			$lPosts = new Posts();
+			$this->dm->persist( $lPosts );
+			$lPosts->setUser( $user );
+		}
+
+		$lPosts->addPost( $oPost );
+		
+		$this->dm->flush();
 
 		if ( !empty($data['image_link']) && !empty($data['extension']) && is_file($data['image_link']) ){
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $post->getId() . '/' . $avatar_name . '.' . $data['extension'];
+			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $data['extension'];
 			$dest = DIR_IMAGE . $path;
 			
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($data['image_link'], $dest) ){
-				$post->setThumb( $path );
+				$oPost->setThumb( $path );
 			}
 		}
 
-		$posts = $user->getPostData();
-
-		if ( !$posts ){
-			$posts = new Posts();
-			$this->dm->persist( $posts );
-			$posts->setUser( $user );
-		}
-
-		$posts->addPost( $post );
-		
 		$this->dm->flush();
 
 		$this->load->model('cache/post');
 		$data = array(
-			'post_id' => $post->getId(),
+			'post_id' => $oPost->getId(),
 			'type' => $this->config->get('post')['cache']['user'],
 			'type_id' => $user->getId(),
 			'view' => 0,
-			'created' => $post->getCreated()
+			'created' => $oPost->getCreated()
 		);
 		$this->model_cache_post->addPost( $data );
 		
-		return $post;
+		return $oPost;
 	}
 
 	/**
@@ -109,16 +111,16 @@ class ModelUserPost extends Model {
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function editPost( $post_slug, $data = array() ) {
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $post_slug) );
+	public function editPost( $sPostSlug, $data = array() ) {
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $sPostSlug) );
 		
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return false;
 		}
 		
-		$post = $posts->getPostBySlug( $post_slug );
+		$oPost = $lPosts->getPostBySlug( $sPostSlug );
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
 
@@ -126,55 +128,67 @@ class ModelUserPost extends Model {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $post->getUser()->getId() . '/' . $folder_name . '/' . $post->getId() . '/' . $avatar_name . '.' . $data['extension'];
+			$path = $folder_link . $oPost->getUser()->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $data['extension'];
 			$dest = DIR_IMAGE . $path;
 			
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($data['image_link'], $dest) ){
-				$post->setThumb( $path );
+				$oPost->setThumb( $path );
 			}
 		}
 
 		if ( !empty($data['content']) ){
-			$post->setContent( htmlentities($data['content']) );
+			$oPost->setContent( htmlentities($data['content']) );
 		}
 
 		if ( !empty($data['title']) ){
-			$post->setTitle( htmlentities($data['title']) );
+			$oPost->setTitle( htmlentities($data['title']) );
 		}
 		
 		if ( !empty($data['likerId']) ){
-			$likerIds = $post->getLikerIds();
+			$likerIds = $oPost->getLikerIds();
 
 			$key = array_search( $data['likerId'], $likerIds );
 			
 			if ( !$likerIds || $key === false ){
-				$post->addLikerId( $data['likerId'] );
+				$oPost->addLikerId( $data['likerId'] );
 			}else{
 				unset($likerIds[$key]);
-				$post->setLikerIds( $likerIds );
+				$oPost->setLikerIds( $likerIds );
 			}
 		}
 		
 		$this->dm->flush();
 		
-		return $post;
+		return $oPost;
 	}
 
-	public function deletePost( $post_slug ) {
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $post_slug) );
+	public function deletePost( $sPostSlug ) {
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $sPostSlug) );
 
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return false;
 		}
 		
-		$post = $posts->getPostBySlug( $post_slug );
+		$oPost = $lPosts->getPostBySlug( $sPostSlug );
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
+
+		// Remove image
+		if ( $oPost->getThumb() ){
+			$this->load->model('tool/image');
+
+			$folder_link = $this->config->get('user')['default']['image_link'];
+			$folder_name = $this->config->get('post')['default']['image_folder'];
+			$path = DIR_IMAGE . $folder_link . $oPost->getUser()->getId() . '/' . $folder_name . '/' . $oPost->getId();
+			
+			// remove Image
+			$this->model_tool_image->deleteDirectoryImage( $path );
+		}
 		
-		$posts->getPosts(false)->removeElement( $post );
+		$lPosts->getPosts(false)->removeElement( $oPost );
 		
 		$this->dm->flush();
 		
@@ -189,39 +203,39 @@ class ModelUserPost extends Model {
 			$query['posts.slug'] = $data['post_slug'];
 		}
 
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( $query );
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( $query );
 
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return null;
 		}
 
-		$post = null;
+		$oPost = null;
 		if ( !empty($data['post_id']) ){
-			$post =  $posts->getPostById( $data['post_id'] );
+			$oPost =  $lPosts->getPostById( $data['post_id'] );
 		}
 
 		if ( !empty($data['post_slug']) ){
-			$post = $posts->getPostBySlug( $data['post_slug'] );
+			$oPost = $lPosts->getPostBySlug( $data['post_slug'] );
 		}
 
-		if ( $post != null && $increase_viewer == true ){
-			$post->setCountViewer( $post->getCountViewer() + 1 );
+		if ( $oPost != null && $increase_viewer == true ){
+			$oPost->setCountViewer( $oPost->getCountViewer() + 1 );
 			$this->dm->flush();
 		}
 
-		return $post;
+		return $oPost;
 	}
 
-	public function getPostBySlug( $post_slug ){
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-			'posts.slug' => $post_slug
+	public function getPostBySlug( $sPostSlug ){
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.slug' => $sPostSlug
 		));
 
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return null;
 		}
 
-		return $posts->getPostBySlug( $post_slug );
+		return $lPosts->getPostBySlug( $sPostSlug );
 	}
 }
 ?>
