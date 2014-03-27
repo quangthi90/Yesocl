@@ -198,7 +198,16 @@
         $('#overlay').hide();
         $('.post').removeClass('post-selecting');
         $button.removeClass('disabled');
-        $('#comment-box').stop().animate({'right': '-5000px' }, 'slow');
+        $('#comment-box').stop().animate({'right': '-5000px' }, 500, function(){
+
+            if($('.toggle-comment').length == 0) return;
+
+            $('.toggle-comment').fadeIn(100);
+            $('.toggle-comment').children('a').tooltip('show');
+            setTimeout(function(){
+                $('.toggle-comment').children('a').tooltip('hide');
+            }, 3000); 
+        });
         // var page = 1;
     };
     $(function(){
