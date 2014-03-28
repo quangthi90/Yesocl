@@ -11,6 +11,9 @@ Class Meta {
 	 */
 	private $id; 
 
+	/** @MongoDB\ReferenceOne(targetDocument="Stock", inversedBy="meta") */
+	private $stock;
+
 	/** 
 	 * @MongoDB\Float 
 	 */
@@ -103,6 +106,14 @@ Class Meta {
 
 	public function getId() {
 		return $this->id;
+	}
+
+	public function setStock( $stock ){
+		$this->stock = $stock;
+	}
+
+	public function getStock(){
+		return $this->stock;
 	}
 
 	public function setCurrentPrice( $currentPrice ){

@@ -41,7 +41,7 @@ Class Company {
 	/** @MongoDB\ReferenceMany(targetDocument="Company", inversedBy="relativeCompanies") */
 	private $relativeCompanies = array();
 
-	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", inversedBy="company") */
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", mappedBy="company") */
 	private $stock;
 
 	/** @MongoDB\Date */

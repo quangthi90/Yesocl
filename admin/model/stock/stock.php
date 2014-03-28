@@ -1,5 +1,7 @@
 <?php
-use Document\Stock\Stock;
+use Document\Stock\Stock,
+	Document\Stock\Meta,
+	Document\Company\Company;
 
 class ModelStockStock extends Model {
 	public function addStock( $aData = array() ) {
@@ -159,15 +161,58 @@ class ModelStockStock extends Model {
 			if ( !$oStock = $this->getStock(array('code' => $aStock['A'])) ){
 				$oStock = new Stock();
 			}
-			// var_dump($oMarket->getId()); exit;
-			$oStock->setName( strtoupper(trim($aStock['A'])) );
+			// print($aStock['A']); exit;
+			// if ( !$oCompany = $oStock->getCompany() ){
+			// 	$oCompany = new Company();
+			// }
+
+			// $oCompany->setName( strtoupper(trim($aStock['W'])) );
+			// $oCompany->setAddress( strtoupper(trim($aStock['Y'])) );
+			// $oCompany->setPhone( strtoupper(trim($aStock['Z'])) );
+			// $oCompany->setFax( strtoupper(trim($aStock['AA'])) );
+			// $oCompany->setWebsite( strtoupper(trim($aStock['AB'])) );
+
+			$oStock->setName( strtoupper(trim($aStock['W'])) );
 			$oStock->setCode( strtoupper(trim($aStock['A'])) );
 			$oStock->setMarket( $oMarket );
+
+			// if ( !$oStock->getId() || !$oMeta = $this->dm->getRepository('Document\Stock\Meta')->findOneBy(array('stock.id' => $oStock->getId())) ){
+			// 	$oMeta = new Meta();
+			// 	$oMeta->setStock( $oStock );
+			// }
+			// $oMeta->setCurrentPrice( strtoupper(trim($aStock['C'])) );
+			// $oMeta->setBookPrice( strtoupper(trim($aStock['D'])) );
+			// $oMeta->setPb( strtoupper(trim($aStock['E'])) );
+			// $oMeta->setEps( strtoupper(trim($aStock['H'])) );
+			// $oMeta->setPe( strtoupper(trim($aStock['I'])) );
+			// $oMeta->setRoa( strtoupper(trim($aStock['J'])) );
+			// $oMeta->setRoe( strtoupper(trim($aStock['K'])) );
+			// $oMeta->setBeta( strtoupper(trim($aStock['L'])) );
+			// $oMeta->setOutStandingVolume( strtoupper(trim($aStock['M'])) );
+			// $oMeta->setListedVolume( strtoupper(trim($aStock['N'])) );
+			// $oMeta->setTreasuryStock( strtoupper(trim($aStock['O'])) );
+			// $oMeta->setForeignOwnership( strtoupper(trim($aStock['P'])) );
+			// $oMeta->setCapitalMarket( strtoupper(trim($aStock['Q'])) );
+			// $oMeta->setSales( strtoupper(trim($aStock['R'])) );
+			// $oMeta->setProfitAfterTax( strtoupper(trim($aStock['S'])) );
+			// $oMeta->setOwnerEquity( strtoupper(trim($aStock['T'])) );
+			// $oMeta->setLiability( strtoupper(trim($aStock['U'])) );
+			// $oMeta->setAsset( strtoupper(trim($aStock['V'])) );
+			
+			// if ( !$oMeta->getId() ){
+			// 	$this->dm->persist( $oMeta );
+			// }
+
+			// if ( !$oCompany->getId() ){
+			// 	$oStock->setCompany( $oCompany );
+			// 	$this->dm->persist( $oCompany );
+			// }
+
 			if ( !$oStock->getId() ){
 				$this->dm->persist( $oStock );
 			}
 		}
-
+		// exit;
 		$this->dm->flush();
 
 		return true;
