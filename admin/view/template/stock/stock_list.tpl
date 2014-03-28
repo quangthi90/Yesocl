@@ -36,7 +36,7 @@
             <tr class="filter">
               <td></td>
               <td><input type="text" name="name" id="name" value="<?php echo $filter_name; ?>" /></td>
-              <td><input type="text" name="code" id="code" value="<?php echo $filter_code; ?>" /></td>
+              <td><input class="input-medium" type="text" name="code" id="code" value="<?php echo $filter_code; ?>" /></td>
               <td><select class="input-medium" name="market_id" id="market_id">
               <option value=""><?php echo $text_none; ?></option>
               <?php foreach ( $markets as $market ) { ?>

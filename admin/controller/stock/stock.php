@@ -80,7 +80,7 @@ class ControllerStockStock extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_stock_stock->deleteStock( $this->request->post );
+			$this->model_stock_stock->deleteStocks( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
