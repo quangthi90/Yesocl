@@ -531,8 +531,8 @@ class ControllerCompanyCompany extends Controller {
 					'id' => $oCompany->getId(),
 					'logo' => HTTP_IMAGE . $oCompany->getLogo(),
 					'name' => $oCompany->getName(),
-					'owner' => $oCompany->getOwner()->getPrimaryEmail()->getEmail(),
-					'group' => $oCompany->getGroup()->getName(),
+					'owner' => $oCompany->getOwner() ? $oCompany->getOwner()->getPrimaryEmail()->getEmail() : '',
+					'group' => $oCompany->getGroup() ? $oCompany->getGroup()->getName() : '',
 					'created' => $oCompany->getCreated()->format( 'd/m/Y' ),
 					'status' => $oCompany->getStatus(),
 					'action' => $action,
@@ -688,7 +688,7 @@ class ControllerCompanyCompany extends Controller {
 		// owner
 		if ( isset( $this->request->post['owner'] ) ) {
 			$this->data['owner'] = $this->request->post['owner'];
-		}elseif ( isset( $oCompany ) ) {
+		}elseif ( $oCompany && $oCompany->getOwner() ) {
 			$this->data['owner'] = $oCompany->getOwner()->getUsername() . '(' . $oCompany->getOwner()->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['owner'] = '';
@@ -696,7 +696,7 @@ class ControllerCompanyCompany extends Controller {
 
 		if ( isset( $this->request->post['user_id'] ) ) {
 			$this->data['user_id'] = $this->request->post['user_id'];
-		}elseif ( isset( $oCompany ) ) {
+		}elseif ( $oCompany && $oCompany->getOwner() ) {
 			$this->data['user_id'] = $oCompany->getOwner()->getId();
 		}else {
 			$this->data['user_id'] = '';
@@ -721,7 +721,7 @@ class ControllerCompanyCompany extends Controller {
 		}
 		if ( isset( $this->request->post['group'] ) ) {
 			$this->data['group'] = $this->request->post['group'];
-		}elseif ( isset( $oCompany ) ) {
+		}elseif ( $oCompany && $oCompany->getGroup() ) {
 			$this->data['group'] = $oCompany->getGroup()->getId();
 		}else {
 			$this->data['group'] = '';
