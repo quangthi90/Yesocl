@@ -5,6 +5,30 @@
 {% use '@template/default/template/post/common/post_item_wall.tpl' %}
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
+{% use '@template/default/template/post/template.tpl' %}
+
+{# format post created #}
+{% set date_timeago = get_datetime_from_now(-2) %}
+{% set aPosts = [] %}
+{% for key, post in posts %}
+    {% if post.created >= date_timeago %}
+        {% set post = post|merge({'created': post.created|date('c'), 'timeago': true}) %}
+    {% else %}
+        {% set post = post|merge({
+            'created_full': post.created|localizeddate('full', 'short', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss"), 
+            'created_short': post.created|localizeddate('full', 'none', get_cookie('language'), null, "d MMMM '" ~ 'at'|trans ~ "' hh:ss"), 
+            'timeago': false
+        }) %}
+    {% endif %}
+    {% if post.content|length > 200 %}
+        {% set post = post|merge({'see_more': true}) %}
+    {% else %}
+        {% set post = post|merge({'see_more': false}) %}
+    {% endif %}
+    {% set post = post|merge({'type': sPostType}) %}
+    {% set aPosts = aPosts|merge({(loop.index0): post}) %}
+{% endfor %}
+{# end format #}
 
 {% block title %}{% trans %}Wall Page of{% endtrans %} {{ users[current_user_id].username }}{% endblock %}
 
@@ -35,12 +59,13 @@
                         {{ block('post_common_post_status_wall') }}
                     </div>
                     {% endif %}
-                    {% for post in posts %}
+                    {{ block('post_template_item_single') }}
+                    {#% for post in posts %}
                         <div class="column">
                             {% set user = users[post.user_id] %}
                             {{ block('post_common_post_item_wall') }}
                         </div>
-                    {% endfor %}
+                    {% endfor %#}
                 </div>
             </div>
             {{ block('post_common_comment_post_list') }}
@@ -55,6 +80,15 @@
 
 {% block datascript %}
     {{ block('post_common_post_status_wall_html_datascript') }}
+    <script type="text/javascript">
+        var _users = JSON.parse( '{{ users|json_encode()|raw }}' );
+        for ( var key in _users ){
+            window.yUsers.setItem( key, _users[key] );
+        }
+        var _posts = '{{ aPosts|json_encode()|raw }}';
+        window.yPosts = new PostController( JSON.parse(_posts) );
+        var sPostType = '{{ post_type }}';
+    </script>
 {% endblock %}
 
 {% block javascript %}
@@ -63,6 +97,7 @@ $(function(){
     $(document).trigger('FRIEND_ACTION', [false]);    
 });
 </script>
-{{ block('post_common_comment_post_list_javascript') }}
+<script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
+{#{ block('post_common_comment_post_list_javascript') }#}
 {{ block('post_common_post_status_wall_javascript') }}
 {% endblock %}

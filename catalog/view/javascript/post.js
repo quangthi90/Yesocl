@@ -1,3 +1,48 @@
+// Post controller generate view (html)
+function PostController( aPosts ){
+    'use strict';
+    // Check user, owner, category & post info
+    this.aPosts = [];
+    for ( var key in aPosts ){
+        // User Author info
+        var user = window.yUsers.getItem( aPosts[key].user_id );
+        user.href = window.yRouting.generate('WallPage', {user_slug: user.slug});
+        aPosts[key].user = user;
+
+        // Owner when user A post on User B 's wall page
+        if ( aPosts[key].user_id != aPosts[key].owner_id ){
+            var owner = window.yUsers.getItem( aPosts[key].owner_id );
+            owner.href = window.yRouting.generate('WallPage', {user_slug: owner.slug});
+            aPosts[key].owner = owner;
+        }else{
+            aPosts[key].owner = null;
+        }
+
+        // Category when user A post on Branch X
+        if ( aPosts[key].category_slug !== undefined ){
+            var category = {
+                href: window.yRouting.generate('BranchCategory', {category_slug: aPosts[key].category_slug}),
+                name: aPosts[key].category_name
+            };
+            aPosts[key].category = category;
+        }else{
+            aPosts[key].category = null;
+        }
+
+        aPosts[key].href = window.yRouting.generate('PostPage', {post_type: aPosts[key].type, post_slug: aPosts[key].slug});
+
+        this.aPosts.push(aPosts[key]);
+    }
+    console.log(this.aPosts);
+    
+    // Connect list posts with Knockout js
+    var viewModelPosts = {
+        Posts: ko.observableArray( this.aPosts )
+    };
+    ko.applyBindings(viewModelPosts);
+}
+
+
 // Like + Unlike a post
 (function($, document, undefined) {
     'use strict';
