@@ -34,20 +34,21 @@ class ModelBranchCategory extends Model {
 		// Slug
 		$slug = $this->url->create_slug( $data['name'] );
 		$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
-		$arr_slugs = array_map(function($category){
-			return $category->getSlug();
+		$arr_slugs = array_map(function($oCategory){
+			return $oCategory->getSlug();
 		}, $categories->toArray());
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );	
 		
-		$category = new Category();
-		$category->setName( $data['name'] );
-		$category->setSlug( $slug );
-		$category->setBranch( $branch );
-		$category->setOrder( $order );
-		$category->setParent( $parent );
+		$oCategory = new Category();
+		$oCategory->setName( $data['name'] );
+		$oCategory->setSlug( $slug );
+		$oCategory->setBranch( $branch );
+		$oCategory->setOrder( $order );
+		$oCategory->setParent( $parent );
+		$oCategory->setIsStock( (bool)$data['isStock'] );
 
-		$this->dm->persist( $category );
+		$this->dm->persist( $oCategory );
 		$this->dm->flush();
 	}
 
@@ -67,8 +68,8 @@ class ModelBranchCategory extends Model {
 		}
 		
 		// Check category
-		$category = $this->dm->getRepository('Document\Branch\Category')->find( $id );
-		if ( !$category ){
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $id );
+		if ( !$oCategory ){
 			return false;
 		}
 
@@ -83,25 +84,26 @@ class ModelBranchCategory extends Model {
 		}
 
 		// Slug
-		if ( $data['name'] != $category->getName() ){
+		if ( $data['name'] != $oCategory->getName() ){
 			$slug = $this->url->create_slug( $data['name'] );
 		
 			$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-			$arr_slugs = array_map(function($category){
-				return $category->getSlug();
+			$arr_slugs = array_map(function($oCategory){
+				return $oCategory->getSlug();
 			}, $categories->toArray());
 
 			$this->load->model( 'tool/slug' );
 			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
 			
-			$category->setSlug( $slug );
+			$oCategory->setSlug( $slug );
 		}
 
-		$category->setName( $data['name'] );
-		$category->setBranch( $branch );
-		$category->setOrder( $order );
-		$category->setParent( $parent );
+		$oCategory->setName( $data['name'] );
+		$oCategory->setBranch( $branch );
+		$oCategory->setOrder( $order );
+		$oCategory->setParent( $parent );
+		$oCategory->setIsStock( (bool)$data['isStock'] );
 
 		$this->dm->flush();
 	}
@@ -109,9 +111,9 @@ class ModelBranchCategory extends Model {
 	public function deleteCategory( $data = array() ) {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
-				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
+				$oCategory = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
 
-				$this->dm->remove( $category );
+				$this->dm->remove( $oCategory );
 			}
 		}
 		
@@ -119,8 +121,8 @@ class ModelBranchCategory extends Model {
 	}
 	
 	public function getCategory( $action_id ) {
-		$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $action_id );
-		return $category;
+		$oCategory = $this->dm->getRepository( 'Document\Branch\Category' )->find( $action_id );
+		return $oCategory;
 	}
 
 	public function getCategories( $data = array() ) {

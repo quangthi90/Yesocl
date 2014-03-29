@@ -32,6 +32,9 @@ Class Category {
 	/** @MongoDB\Int */
 	private $order;
 
+	/** @MongoDB\Boolean */
+	private $isStock;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -94,5 +97,13 @@ Class Category {
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function setIsStock( $isStock ){
+		$this->isStock = $isStock;
+	}
+
+	public function getIsStock(){
+		return $this->isStock;
 	}
 }

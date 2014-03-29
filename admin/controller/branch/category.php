@@ -156,33 +156,33 @@ class ControllerBranchCategory extends Controller {
 
 		$categories = $this->model_branch_category->getCategories( $data );
 		
-		$category_total = $this->model_branch_category->getTotalCategories();
+		$oCategory_total = $this->model_branch_category->getTotalCategories();
 		
 		$this->data['categories'] = array();
 		
 		if ( $categories ){
-			foreach ( $categories as $category ){
+			foreach ( $categories as $oCategory ){
 				$action = array();
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'branch/category/update', 'category_id=' . $category->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'branch/category/update', 'category_id=' . $oCategory->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 				
 				$this->data['categories'][] = array(
-					'id' => $category->getId(),
-					'name' => $category->getName(),
-					'parent' => $category->getParent() != null ? $category->getParent()->getName() : 'Root',
-					'branch' => $category->getBranch()->getName(),
-					'order' => $category->getOrder(),
+					'id' => $oCategory->getId(),
+					'name' => $oCategory->getName(),
+					'parent' => $oCategory->getParent() != null ? $oCategory->getParent()->getName() : 'Root',
+					'branch' => $oCategory->getBranch()->getName(),
+					'order' => $oCategory->getOrder(),
 					'action' => $action
 				);
 			}
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $category_total;
+		$pagination->total = $oCategory_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
@@ -240,30 +240,31 @@ class ControllerBranchCategory extends Controller {
    		);
 
    		// Heading title
-		$this->data['heading_title'] = $this->language->get( 'heading_title' );
+		$this->data['heading_title'] = $this->language->get('heading_title');
 		
 		// Text	
-		//$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
-		//$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_true'] = $this->language->get('text_true');
+		$this->data['text_false'] = $this->language->get('text_false');
 		
 		// Button
-		$this->data['button_save'] = $this->language->get( 'button_save' );
-		$this->data['button_cancel'] = $this->language->get( 'button_cancel' );
+		$this->data['button_save'] = $this->language->get('button_save');
+		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		
 		// Entry
-		$this->data['entry_name'] = $this->language->get( 'entry_name' );
-		$this->data['entry_branch'] = $this->language->get( 'entry_branch' );
-		$this->data['entry_order'] = $this->language->get( 'entry_order' );
-		$this->data['entry_parent'] = $this->language->get( 'entry_parent' );
+		$this->data['entry_name'] = $this->language->get('entry_name');
+		$this->data['entry_branch'] = $this->language->get('entry_branch');
+		$this->data['entry_order'] = $this->language->get('entry_order');
+		$this->data['entry_parent'] = $this->language->get('entry_parent');
+		$this->data['entry_is_stock'] = $this->language->get('entry_is_stock');
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'branch/category', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		if ( isset($this->request->get['category_id']) ){
-			$category = $this->model_branch_category->getcategory( $this->request->get['category_id'] );
+			$oCategory = $this->model_branch_category->getcategory( $this->request->get['category_id'] );
 			
-			if ( $category ){
-				$this->data['category'] = $this->url->link( 'branch/category/update', 'category_id=' . $category->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
+			if ( $oCategory ){
+				$this->data['category'] = $this->url->link( 'branch/category/update', 'category_id=' . $oCategory->getId() . '&token=' . $this->session->data['token'], 'SSL' );	
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -272,8 +273,8 @@ class ControllerBranchCategory extends Controller {
 		// Entry name
 		if ( isset($this->request->post['name']) ){
 			$this->data['name'] = $this->request->post['name'];
-		}elseif ( isset($category) ){
-			$this->data['name'] = $category->getName();
+		}elseif ( isset($oCategory) ){
+			$this->data['name'] = $oCategory->getName();
 		}else {
 			$this->data['name'] = '';
 		}
@@ -281,8 +282,8 @@ class ControllerBranchCategory extends Controller {
 		// Entry branch
 		if ( isset($this->request->post['branch_id']) ){
 			$this->data['branch_id'] = $this->request->post['branch_id'];
-		}elseif ( isset($category) && $category->getBranch() ){
-			$this->data['branch_id'] = $category->getBranch()->getId();
+		}elseif ( isset($oCategory) && $oCategory->getBranch() ){
+			$this->data['branch_id'] = $oCategory->getBranch()->getId();
 		}else {
 			$this->data['branch_id'] = 0;
 		}
@@ -301,8 +302,8 @@ class ControllerBranchCategory extends Controller {
 		// Entry order
 		if ( isset($this->request->post['order']) ){
 			$this->data['order'] = $this->request->post['order'];
-		}elseif ( isset($category) ){
-			$this->data['order'] = $category->getOrder();
+		}elseif ( isset($oCategory) ){
+			$this->data['order'] = $oCategory->getOrder();
 		}else {
 			$this->data['order'] = 0;
 		}
@@ -310,27 +311,36 @@ class ControllerBranchCategory extends Controller {
 		// Entry parent
 		if ( isset($this->request->post['parent_id']) ){
 			$this->data['parent_id'] = $this->request->post['parent_id'];
-		}elseif ( isset($category) && $category->getParent() ){
-			$this->data['parent_id'] = $category->getParent()->getId();
+		}elseif ( isset($oCategory) && $oCategory->getParent() ){
+			$this->data['parent_id'] = $oCategory->getParent()->getId();
 		}else {
 			$this->data['parent_id'] = 0;
 		}
 
 		$this->data['parents'] = array();
 		if ( $this->data['branch_id'] != 0 ){
-			$branch_id = $this->data['branch_id'];
+			$idBranch = $this->data['branch_id'];
 		}elseif ( count($this->data['branches']) > 0 ){
-			$branch_id = $this->data['branches'][0]['id'];
+			$idBranch = $this->data['branches'][0]['id'];
 		}else{
-			$branch_id = 0;
+			$idBranch = 0;
 		}
 
-		/*if ( $branch_id != 0 ){
-			$category_id = isset($category) ? $category->getId() : 0;
+		// Entry is Stock
+		if ( !empty($this->request->post['isStock']) ){
+			$this->data['isStock'] = $this->request->post['isStock'];
+		}elseif ( $oCategory ){
+			$this->data['isStock'] = $oCategory->getIsStock();
+		}else {
+			$this->data['isStock'] = false;
+		}
+		
+		/*if ( $idBranch != 0 ){
+			$oCategory_id = isset($oCategory) ? $oCategory->getId() : 0;
 			$this->load->model('branch/category');
 			$parents = $this->model_branch_category->getAllCategories( array('branch_id' => $this->data['branch_id']) );
 			foreach ( $parents as $parent ) {
-				if ( $parent->getId() == $category_id ){
+				if ( $parent->getId() == $oCategory_id ){
 					continue;
 				}
 				$this->data['parents'][] = array(
@@ -387,10 +397,10 @@ class ControllerBranchCategory extends Controller {
 			$categories = $this->model_branch_category->getAllCategories( array('branch_id' => $this->request->post['branch_id']) );
 
 			if ($categories){
-				foreach ( $categories as $category ) {
+				foreach ( $categories as $oCategory ) {
 					$json[] = array(
-						'id' => $category->getId(),
-						'name' => $category->getName()
+						'id' => $oCategory->getId(),
+						'name' => $oCategory->getName()
 					);
 				}
 			}
