@@ -150,7 +150,7 @@
 		    remote: {
 		    	url: that.friendUrl + '%QUERY/',
 		    	cache: true,
-		    	timeout: 500,
+		    	timeout: 5000,
 		    	beforeSend: function(xhr, setting) {
 		    		if ( $('span.twitter-typeahead').hasClass('disabled') ){
 		    			return false;
@@ -189,7 +189,7 @@
 		    remote: {
 		    	url: that.postUrl + '%QUERY/',
 		    	cache: true,
-		    	timeout: 500,
+		    	timeout: 5000,
 		    	beforeSend: function(xhr, setting) {
 		    		var spinner = $('<i class="icon-spinner icon-spin load-post"></i>');
 		    		$('span.twitter-typeahead').append(spinner);
