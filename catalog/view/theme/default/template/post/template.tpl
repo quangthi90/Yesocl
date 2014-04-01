@@ -52,7 +52,7 @@
 							</span>
 							<span class="post_like fr">
 								<!-- ko if: isUserLiked == 0 -->
-								<a class="js-like-post" href="#">
+								<a class="js-like-post" href="#" data-bind="click: isUserLiked">
 									<i class="icon-thumbs-up medium-icon"></i>
 		                        </a>
 		                        <!-- /ko -->

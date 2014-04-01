@@ -56,6 +56,7 @@ function PostController( aPosts ){
         function PostModel(_post){
             var self = this;
             
+            // Create data
             self.slug           = ko.observable( _post.slug );
             self.href           = ko.observable( _post.href );
             self.isUserLiked    = _post.isUserLiked;
@@ -87,6 +88,13 @@ function PostController( aPosts ){
             self.image          = ko.observable( _post.image );
             self.thumb          = ko.observable( _post.thumb );
             self.see_more       = ko.observable( _post.see_more );
+
+            // Event
+            // Click like
+            self.likePost = function() {
+                self.isUserLiked = 1;
+                console.log('hehe');
+            };
         }
     }
     ko.applyBindings(new PostsViewModel());
