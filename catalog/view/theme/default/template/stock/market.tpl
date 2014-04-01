@@ -24,4 +24,7 @@
 {% endblock %}
 
 {% block javascript %}
+
+{{ block('stock_common_block_watch_list_javascript') }}
+
 {% endblock %}

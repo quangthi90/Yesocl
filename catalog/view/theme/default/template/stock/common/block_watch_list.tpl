@@ -1,3 +1,5 @@
+{% use '@template/default/template/stock/common/block_watch_list_new.tpl' %}
+
 {% block stock_common_block_watch_list %}
 <div class="feed-block stock-block" id="st-watch-list">
 	<div class="block-header">
@@ -181,9 +183,14 @@
 	            </div>
 	        </li>        
 	        <li class="wl-item wl-item-new">
-	            <a class="btn btn-circle"><i class="icon-plus"></i></a>
+	            <a data-mfp-src="#new-wl" class="btn btn-circle link-popup"><i class="icon-plus"></i></a>
 	        </li>
 	    </ul>
 	</div>
-	</div>
+</div>
+{{ block('stock_common_block_watch_list_new') }}
+{% endblock %}
+
+{% block stock_common_block_watch_list_javascript %}
+ {{ block('stock_common_block_watch_list_new_javascript') }}
 {% endblock %}
