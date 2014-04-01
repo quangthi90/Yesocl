@@ -1,73 +1,134 @@
 // Post controller generate view (html)
 function PostController( aPosts ){
     'use strict';
-    // Check user, owner, category & post info
-    this.aPosts = [];
-    for ( var key in aPosts ){
+
+    var that = this;
+
+    // Update post info for template with knockout format
+    this.updateInfo = function(_post){
+        var post = _post;
+
         // User Author info
-        var user = window.yUsers.getItem( aPosts[key].user_id );
+        var user = window.yUsers.getItem( post.user_id );
         user.href = window.yRouting.generate('WallPage', {user_slug: user.slug});
-        aPosts[key].user = user;
+        post.user = user;
 
         // Owner when user A post on User B 's wall page
-        if ( aPosts[key].user_id != aPosts[key].owner_id ){
-            var owner = window.yUsers.getItem( aPosts[key].owner_id );
+        if ( post.user_id != post.owner_id ){
+            var owner = window.yUsers.getItem( post.owner_id );
             owner.href = window.yRouting.generate('WallPage', {user_slug: owner.slug});
-            aPosts[key].owner = owner;
+            post.object = owner;
         }else{
-            aPosts[key].owner = null;
+            post.object = null;
         }
 
         // Category when user A post on Branch X
-        if ( aPosts[key].category_slug !== undefined ){
+        if ( post.category_slug !== undefined ){
             var category = {
-                href: window.yRouting.generate('BranchCategory', {category_slug: aPosts[key].category_slug}),
-                name: aPosts[key].category_name
+                href: window.yRouting.generate('BranchCategory', {category_slug: post.category_slug}),
+                name: post.category_name
             };
-            aPosts[key].category = category;
+            post.object = category;
         }else{
-            aPosts[key].category = null;
+            post.object = null;
         }
 
-        aPosts[key].href = window.yRouting.generate('PostPage', {post_type: aPosts[key].type, post_slug: aPosts[key].slug});
+        post.href = window.yRouting.generate('PostPage', {post_type: post.type, post_slug: post.slug});
 
-        this.aPosts.push(aPosts[key]);
-    }
-    console.log(this.aPosts);
-    
-    // Connect list posts with Knockout js
-    var viewModelPosts = {
-        Posts: ko.observableArray( this.aPosts )
+        return post;
     };
-    ko.applyBindings(viewModelPosts);
+    
+    // Check user, owner, category & post info
+    this.aPosts = [];
+    for ( var key in aPosts ){
+        this.aPosts.push( this.updateInfo(aPosts[key]) );
+    }
+    // console.log(this.aPosts);
+    // Connect list posts with Knockout js
+    function PostsViewModel(){
+        var self = this;
+
+        self.posts = ko.observableArray();
+        for ( var key in that.aPosts ){
+            self.posts.push( new PostModel(that.aPosts[key]) );
+        }
+
+        function PostModel(_post){
+            var self = this;
+            
+            self.slug           = ko.observable( _post.slug );
+            self.href           = ko.observable( _post.href );
+            self.isUserLiked    = _post.isUserLiked;
+            self.is_edit        = ko.observable( _post.is_edit );
+            self.is_del         = ko.observable( _post.is_del );
+            self.user           = {
+                href: _post.user.href,
+                username: _post.user.username,
+                avatar: _post.user.avatar
+            };
+            if ( _post.object !== null ){
+                self.object = {
+                    href: _post.object.href,
+                    name: _post.object.name
+                };
+            }else{
+                self.object = null;
+            }
+            self.timeago        = _post.timeago;
+            self.created        = ko.observable( _post.created );
+            self.created_full   = ko.observable( _post.created_full );
+            self.created_short  = ko.observable( _post.created_short );
+            self.comment_count  = ko.observable( _post.comment_count );
+            self.count_viewer   = ko.observable( _post.count_viewer );
+            self.like_count     = ko.observable( _post.like_count );
+            self.type           = ko.observable( _post.type );
+            self.title          = ko.observable( _post.title );
+            self.content        = ko.observable( _post.content );
+            self.image          = ko.observable( _post.image );
+            self.thumb          = ko.observable( _post.thumb );
+            self.see_more       = ko.observable( _post.see_more );
+        }
+    }
+    ko.applyBindings(new PostsViewModel());
+
+    this.add = function(_post)
+    {
+        this.aPosts.push(_post);
+    };
+
+    this.update = function(key, _post){
+        this.aPosts[key] = _post;
+    };
+
+    this.remove = function(key){
+        this.aPosts.splice(key, 1);
+    };
 }
 
-
-// Like + Unlike a post
+// Post action
 (function($, document, undefined) {
     'use strict';
-    function LikePostBtn( $el ){
-        this.$el            = $el;
-        this.url            = $el.data('url');
-        this.isLiked        = $el.data('is-liked');
+    function PostAction( $el ){
+        this.$el                = $el;
         
-        this.$btnLike       = $el.find('.like-post');
-        this.$btnUnLike     = $el.find('.unlike-post');
-        this.$btnLiked      = $el.find('.liked-post');
+        this.$btnUnLike         = $el.find('.js-unlike-post');
+        this.$btnLike           = $el.find('.js-like-post');
 
         this.attachEvents();
     }
-    LikePostBtn.prototype.attachEvents = function(){
+    PostAction.prototype.attachEvents = function(){
         var that = this;
 
         this.$btnLike.click(function(e) {
-            if(that.$btnLike.hasClass('disabled')) {
-                e.preventDefault();
+            // if(that.$btnLike.hasClass('disabled')) {
+            //     e.preventDefault();
 
-                return false;
-            }
+            //     return false;
+            // }
 
-            that.submit(that.$btnLike);
+            // that.submit(that.$btnLike);
+
+
 
             return false;
         });
@@ -84,7 +145,7 @@ function PostController( aPosts ){
             return false;
         });
     };
-    LikePostBtn.prototype.submit = function($button){
+    PostAction.prototype.submit = function($button){
 		var that = this;
 
         var promise = $.ajax({
@@ -120,7 +181,7 @@ function PostController( aPosts ){
             }
         });
     };
-    LikePostBtn.prototype.triggerProgress = function($el, promise){
+    PostAction.prototype.triggerProgress = function($el, promise){
         var $spinner = $('<i class="icon-spinner icon-spin"></i>');
         var $old_icon = $el.find('i');
         var f       = function() {
@@ -135,13 +196,13 @@ function PostController( aPosts ){
     };
 
     $(function(){
-        $('.post-item').each(function(){
-            new LikePostBtn($(this));
+        $('.js-post-item').each(function(){
+            new PostAction($(this));
         });
 
         $(document).bind('POST_BUTTON', function() {
             $('.post-item').each(function(){
-                new LikePostBtn($(this));
+                new PostAction($(this));
             });
         });
     });

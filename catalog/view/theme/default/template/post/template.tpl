@@ -1,7 +1,7 @@
 {% block post_template_item_single %}
-	<!-- ko foreach: Posts -->
+	<!-- ko foreach: posts -->
 		<div class="column">
-			<div class="feed post post_status post-item js-post-item">
+			<div class="feed post post_status js-post-item" data-bind="attr: {'data-index': $index(), 'post-slug': slug}">
 				<div class="yes-dropdown">
 		            <div class="dropdown">
 		               	<a class="dropdown-toggle" data-toggle="dropdown">
@@ -9,18 +9,16 @@
 		               	</a>
 		               	<ul class="dropdown-menu">
 		               		<!-- ko if: isUserLiked == 1 -->
-		               		<li class="unlike-post">
+		               		<li class="js-unlike-post">
 		                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
 		                    </li>
 		                    <!-- /ko -->
 		                    <!-- ko if: is_edit -->
-		                    <li class="divider"></li>
 		                    <li class="post-edit-btn">
 		                        <a href="#" class="link-popup" data-mfp-src=".js-advance-post"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 		                    </li>
 		                    <!-- /ko -->
 		                    <!-- ko if: is_del -->
-		                    <li class="divider"></li>
 		                    <li class="post-delete-btn">
 		                        <a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 		                    </li>
@@ -37,20 +35,16 @@
 					<div class="post_meta_info">
 						<div class="post_user">
 							<a data-bind="attr: { href: user.href, title: user.username }, text: user.username"></a>
-							<!-- ko if: owner -->
+							<!-- ko if: object -->
 							<span><i class="icon-caret-right"></i></span>
-							<a data-bind="attr: { href: owner.href, title: owner.username }, text: owner.username"></a>
-							<!-- /ko -->
-							<!-- ko if: category -->
-							<span><i class="icon-caret-right"></i></span>
-							<a data-bind="attr: { href: category.href, title: category.name }, text: category.name"></a>
+							<a data-bind="attr: { href: object.href, title: object.name }, text: object.name"></a>
 							<!-- /ko -->
 						</div>
 						<div class="post_meta">
 							<span class="post_time fl">
 								<i class="icon-calendar"></i>
 								<!-- ko if: timeago -->
-		                        <d class="timeago" data-bind="title: created"></d>
+		                        <d class="timeago" data-bind="attr: { title: created }"></d>
 		                        <!-- /ko -->
 		                        <!-- ko if: !timeago -->
 		                        <d  data-bind="attr: { title: created_full }, text: created_short"></d>
@@ -58,12 +52,12 @@
 							</span>
 							<span class="post_like fr">
 								<!-- ko if: isUserLiked == 0 -->
-								<a class="like-post" href="#">
+								<a class="js-like-post" href="#">
 									<i class="icon-thumbs-up medium-icon"></i>
 		                        </a>
 		                        <!-- /ko -->
 		                        <!-- ko if: isUserLiked == 1 -->
-		                        <d class="liked-post">
+		                        <d>
 		                            {% trans %}Liked{% endtrans %}
 								</d>
 								<!-- /ko -->
