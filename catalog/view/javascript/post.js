@@ -59,7 +59,7 @@ function PostController( aPosts ){
             // Create data
             self.slug           = ko.observable( _post.slug );
             self.href           = ko.observable( _post.href );
-            self.isUserLiked    = _post.isUserLiked;
+            self.isUserLiked    = ko.observable( _post.isUserLiked );
             self.is_edit        = ko.observable( _post.is_edit );
             self.is_del         = ko.observable( _post.is_del );
             self.user           = {

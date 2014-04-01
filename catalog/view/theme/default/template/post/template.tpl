@@ -8,7 +8,7 @@
 		                    <i class="icon-caret-down"></i>
 		               	</a>
 		               	<ul class="dropdown-menu">
-		               		<!-- ko if: isUserLiked == 1 -->
+		               		<!-- ko if: isUserLiked() == 1 -->
 		               		<li class="js-unlike-post">
 		                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
 		                    </li>
@@ -51,12 +51,12 @@
 		                        <!-- /ko -->
 							</span>
 							<span class="post_like fr">
-								<!-- ko if: isUserLiked == 0 -->
-								<a class="js-like-post" href="#" data-bind="click: isUserLiked">
+								<!-- ko if: isUserLiked() == 0 -->
+								<a class="js-like-post" href="#" data-bind="click: likePost">
 									<i class="icon-thumbs-up medium-icon"></i>
 		                        </a>
 		                        <!-- /ko -->
-		                        <!-- ko if: isUserLiked == 1 -->
+		                        <!-- ko if: isUserLiked() == 1 -->
 		                        <d>
 		                            {% trans %}Liked{% endtrans %}
 								</d>
