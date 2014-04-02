@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block javascript %}
-
-{{ block('stock_common_block_watch_list_javascript') }}
+	{{ block('stock_common_block_watch_list_javascript') }}
+	<script type="text/javascript" src="{{ asset_js('ko-stock.js') }}"></script>
 
 {% endblock %}

@@ -3432,7 +3432,6 @@ a.wall-link:hover {
   top: 36px;
   border-bottom: 1px solid #F0F0F0;
 }
-
 .stock-block .chart-title {
   margin: 0px;
   line-height: 30px;
@@ -3760,6 +3759,29 @@ a.wall-link:hover {
 .funds-table td.funds {
   text-align: left;
   font-size: 14px;
+}
+
+.stock-page .mCSB_scrollTools .mCSB_draggerRail {
+  width: 6px;
+  background: #f0f0f0;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.stock-page .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+  width: 6px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+}
+.stock-page .mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{ 
+  background: #b4b4b4;
+}
+.stock-page .mCSB_scrollTools .mCSB_dragger:hover .mCSB_dragger_bar{
+  background: #009B77;
+}
+.stock-page .mCSB_container {
+  margin-right: 0px;
 }
 
 /* ======================================== END STOCK ============================================= */

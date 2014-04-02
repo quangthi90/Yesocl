@@ -71,6 +71,8 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.cookie.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.truncate.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/knockout.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/knockout.mapping.js') }}"></script>
 		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
