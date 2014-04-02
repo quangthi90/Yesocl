@@ -4,193 +4,195 @@ use Document\AbsObject\Comment;
 use MongoId;
 
 class ModelUserComment extends Model {
-	public function getComments( $data = array() ){
+	public function getComments( $aData = array() ){
 		$query = array();
 
-		if ( empty($data['page']) ){
-			$data['page'] = 0;
+		if ( empty($aData['page']) ){
+			$aData['page'] = 0;
 		}
 
-		if ( empty($data['limit']) ){
-			$data['limit'] = 10;
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
 		}
 
-		if ( empty($data['post_slug']) ){
+		if ( empty($aData['post_slug']) ){
 			return array();
 		}
 
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-			'posts.slug' => $data['post_slug']
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.slug' => $aData['post_slug']
 		));
 
-		$post = null;
-		if ( $posts ){
-			$post = $posts->getPostBySlug( $data['post_slug'] );
+		$oPost = null;
+		if ( $lPosts ){
+			$oPost = $lPosts->getPostBySlug( $aData['post_slug'] );
 		}
 		
-		return $post->getComments( true );
+		return $oPost->getComments( true );
 	}
 
-	public function getComment( $data = array() ){
-		if ( empty($data['comment_id']) ){
+	public function getComment( $aData = array() ){
+		if ( empty($aData['comment_id']) ){
 			return array();
 		}
 
-		if ( !empty($data['post_slug']) ){
-			$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-				'posts.slug' => $data['post_slug']
+		if ( !empty($aData['post_slug']) ){
+			$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+				'posts.slug' => $aData['post_slug']
 			));
 		}else{
-			$posts = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
-				'posts.comments.id' => $data['comment_id']
+			$lPosts = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+				'posts.comments.id' => $aData['comment_id']
 			));
 		}
 
-		$post = null;
-		if ( $posts ){
-			$post = $posts->getPostBySlug( $data['post_slug'] );
+		$oPost = null;
+		if ( $lPosts ){
+			$oPost = $lPosts->getPostBySlug( $aData['post_slug'] );
 		}
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return null;
 		}
 
-		return $post->getCommentById( $data['comment_id'] );
+		return $oPost->getCommentById( $aData['comment_id'] );
 	}
 
-	public function addComment( $data = array() ){
+	public function addComment( $aData = array() ){
 		// Post is required
-		if ( empty($data['post_slug']) ){
+		if ( empty($aData['post_slug']) ){
 			return false;
 		}
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
-			'posts.slug' => $data['post_slug']
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
+			'posts.slug' => $aData['post_slug']
 		));
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return false;
 		}
-		$post = $posts->getPostBySlug( $data['post_slug'] );
-		if ( !$post ){
+		$oPost = $lPosts->getPostBySlug( $aData['post_slug'] );
+		if ( !$oPost ){
 			return false;
 		}
 
 		// Author is required
-		if ( empty($data['user_id']) ) {
+		if ( empty($aData['user_id']) ) {
 			return false;
 		}
-		$user = $this->dm->getRepository( 'Document\User\User' )->find( $data['user_id'] );
-		if ( empty($user) ) {
+		$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $aData['user_id'] );
+		if ( empty($oUser) ) {
 			return false;
 		}
 
 		// Content is required
-		if ( empty($data['content']) ) {
+		if ( empty($aData['content']) ) {
 			return false;
 		}
 
 		// Status
-		$data['status'] = true;
+		$aData['status'] = true;
 
-		$comment = new Comment();
-		$comment->setUser( $user );
-		$comment->setContent( htmlentities($data['content']) );
-		$comment->setStatus( $data['status'] );
+		$oComment = new Comment();
+		$oComment->setUser( $oUser );
+		$oComment->setContent( htmlentities($aData['content']) );
+		$oComment->setStatus( $aData['status'] );
+		$oComment->setPostAuthorId( $oPost->getUser()->getId() );
+		$oComment->setPostOwnerId( $oPost->getOwnerId() );
 
-		$post->addComment( $comment );
+		$oPost->addComment( $oComment );
 		
 		$this->dm->flush();
 
 		// Update cache post for what's new
 		$type = $this->config->get('post')['cache']['user'];
 		$this->load->model('cache/post');
-		$data = array(
-			'post_id' => $post->getId(),
+		$aData = array(
+			'post_id' => $oPost->getId(),
 			'type' => $type,
-			'type_id' => $posts->getUser()->getId(),
+			'type_id' => $lPosts->getUser()->getId(),
 			'view' => 0,
-			'created' => $comment->getCreated()
+			'created' => $oComment->getCreated()
 		);
-		$this->model_cache_post->editPost( $data );
+		$this->model_cache_post->editPost( $aData );
 
 		return array(
-			'comment' => $comment,
-			'post' => $post
+			'comment' => $oComment,
+			'post' => $oPost
 		);
 	}
 
-	public function editComment( $comment_id, $data = array() ){
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-			'posts.comments.id' => $comment_id
+	public function editComment( $oComment_id, $aData = array() ){
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.comments.id' => $oComment_id
 		));
 
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return false;
 		}
 
-		if ( empty($data['post_slug']) ){
+		if ( empty($aData['post_slug']) ){
 			return false;
 		}
 
-		$post = $posts->getPostBySlug( $data['post_slug'] );
+		$oPost = $lPosts->getPostBySlug( $aData['post_slug'] );
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
 
-		$comment = $post->getCommentById( $comment_id );
+		$oComment = $oPost->getCommentById( $oComment_id );
 
-		if ( !$comment ){
+		if ( !$oComment ){
 			return false;
 		}
 		
-		if ( !empty($data['likerId']) ){
-			$likerIds = $comment->getLikerIds();
+		if ( !empty($aData['likerId']) ){
+			$likerIds = $oComment->getLikerIds();
 
-			$key = array_search( $data['likerId'], $likerIds );
+			$key = array_search( $aData['likerId'], $likerIds );
 			
 			if ( !$likerIds || $key === false ){
-				$comment->addLikerId( $data['likerId'] );
+				$oComment->addLikerId( $aData['likerId'] );
 			}else{
 				unset($likerIds[$key]);
-				$comment->setLikerIds( $likerIds );
+				$oComment->setLikerIds( $likerIds );
 			}
 		}
 
-		if ( !empty($data['content']) ){
-			$comment->setContent( htmlentities($data['content']) );
+		if ( !empty($aData['content']) ){
+			$oComment->setContent( htmlentities($aData['content']) );
 		}
 
 		$this->dm->flush();
 
-		return $comment;
+		return $oComment;
 	}
 
-	public function deleteComment( $comment_id, $data = array(), $author_id ){
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-			'posts.comments.id' => $comment_id
+	public function deleteComment( $oComment_id, $aData = array(), $author_id ){
+		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
+			'posts.comments.id' => $oComment_id
 		));
 
-		if ( !$posts ){
+		if ( !$lPosts ){
 			return false;
 		}
 
-		if ( empty($data['post_slug']) ){
+		if ( empty($aData['post_slug']) ){
 			return false;
 		}
 
-		$post = $posts->getPostBySlug( $data['post_slug'] );
+		$oPost = $lPosts->getPostBySlug( $aData['post_slug'] );
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
 
-		$comment = $post->getCommentById( $comment_id );
+		$oComment = $oPost->getCommentById( $oComment_id );
 		
-		if ( $comment->getUser()->getId() != $author_id ){
+		if ( $oComment->getUser()->getId() != $author_id ){
 			return false;
 		}
 
-		$post->getComments()->removeElement( $comment );
+		$oPost->getComments()->removeElement( $oComment );
 
 		$this->dm->flush();
 

@@ -2,10 +2,9 @@
 
 {% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/post/common/post_status_wall.tpl' %}
-{% use '@template/default/template/post/common/post_item_wall.tpl' %}
-{% use '@template/default/template/post/common/comment_post_list.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 {% use '@template/default/template/template/post.tpl' %}
+{% use '@template/default/template/template/comment.tpl' %}
 
 {# format post created #}
 {% set date_timeago = get_datetime_from_now(-2) %}
@@ -32,7 +31,7 @@
 {% block title %}{% trans %}Wall Page of{% endtrans %} {{ users[current_user_id].username }}{% endblock %}
 
 {% block stylesheet %}
-    {{ block('post_common_comment_post_list_style') }}
+    <link href="{{ asset_css('comment.css') }}" rel="stylesheet" media="screen" />
     {{ block('post_common_post_status_wall_style') }}
 {% endblock %}
 
@@ -67,7 +66,7 @@
                     {% endfor %#}
                 </div>
             </div>
-            {{ block('post_common_comment_post_list') }}
+            {{ block('template_comment_post_list') }}
         </div>
     </div>
 {% endblock %}
@@ -87,6 +86,7 @@
         var _posts = '{{ aPosts|json_encode()|raw }}';
         window.yPostController = new PostController( JSON.parse(_posts) );
         var sPostType = '{{ post_type }}';
+        window.yCommentController = new CommentController();
     </script>
 {% endblock %}
 
@@ -97,6 +97,6 @@ $(function(){
 });
 </script>
 <script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
-{#{ block('post_common_comment_post_list_javascript') }#}
+<script type="text/javascript" src="{{ asset_js('comment.js') }}"></script>
 {{ block('post_common_post_status_wall_javascript') }}
 {% endblock %}

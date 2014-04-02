@@ -17,20 +17,19 @@ function PostController( aPosts ){
         if ( post.user_id != post.owner_id ){
             var owner = window.yUsers.getItem( post.owner_id );
             owner.href = window.yRouting.generate('WallPage', {user_slug: owner.slug});
+            owner.name = owner.username;
             post.object = owner;
         }else{
             post.object = null;
         }
 
         // Category when user A post on Branch X
-        if ( post.category_slug !== undefined ){
+        if ( post.object === null && post.category_slug !== undefined ){
             var category = {
                 href: window.yRouting.generate('BranchCategory', {category_slug: post.category_slug}),
                 name: post.category_name
             };
             post.object = category;
-        }else{
-            post.object = null;
         }
 
         post.href = window.yRouting.generate('PostPage', {post_type: post.type, post_slug: post.slug});
@@ -55,7 +54,6 @@ function PostController( aPosts ){
 
         function PostModel(_post){
             var self = this;
-            // console.log(_post);
             // Create data
             self.slug           = ko.observable( _post.slug );
             self.href           = ko.observable( _post.href );
@@ -67,6 +65,7 @@ function PostController( aPosts ){
                 username: _post.user.username,
                 avatar: _post.user.avatar
             };
+            // console.log(_post.object);
             if ( _post.object !== null ){
                 self.object = {
                     href: _post.object.href,
@@ -75,7 +74,7 @@ function PostController( aPosts ){
             }else{
                 self.object = null;
             }
-            self.timeago        = _post.timeago;
+            self.timeago        = ko.observable( _post.timeago );
             self.created        = ko.observable( _post.created );
             self.created_full   = ko.observable( _post.created_full );
             self.created_short  = ko.observable( _post.created_short );
@@ -125,10 +124,44 @@ function PostController( aPosts ){
 
             // Show list Likers
             self.showLikers = function() {
-                if ( self.liker_ids.length == 0 ){
+                if ( self.liker_ids.length === 0 ){
                     return false;
                 }
                 window.yUserController.showPopupUsers( self.liker_ids );
+            };
+
+            // Show list comments
+            self.showComments = function(dataModel, event) {
+                console.log(event);
+                if ( self.comment_count() > 0 && self.comment_list === undefined ){
+                    var promise = $.ajax({
+                        type: 'POST',
+                        url:  window.yRouting.generate('CommentList', {
+                            post_type: self.type(),
+                            post_slug: self.slug()
+                        }),
+                        dataType: 'json'
+                    });
+
+                    promise.then(function(data) {
+                        if(data.success == 'ok'){
+                            self.comment_list = data.comments;
+                            for ( var key in data.users ){
+                                if ( window.yUsers.getItem(data.users[key].id) === null ){
+                                    window.yUsers.setItem( data.users[key].id, data.users[key] );
+                                }
+                            }
+                            self.showComments(dataModel, event);
+                        }else{
+                            // self.isUserLiked(!self.isUserLiked());
+                        }
+                    });
+
+                    return false;
+                }
+
+                window.yCommentController.setComments( self.comment_list );
+                showCommentBox( $(event.currentTarget) );
             };
         }
     }

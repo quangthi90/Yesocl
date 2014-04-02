@@ -34,6 +34,12 @@ Class Comment {
 	/** @MongoDB\Collection */
     private $likerIds;
 
+    /** @MongoDB\String */
+	private $postAuthorId;
+
+	/** @MongoDB\String */
+	private $postOwnerId;
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
@@ -49,7 +55,9 @@ Class Comment {
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'status'		=> $this->getStatus(),
-			'like_count'	=> count($this->getLikerIds())
+			'like_count'	=> count($this->getLikerIds()),
+			'post_owner_id'	=> $this->getPostOwnerId(),
+			'post_author_id'=> $this->getPostAuthorId()
 		);
 
 		return $data_format;
@@ -138,5 +146,21 @@ Class Comment {
 
 	public function setLikerIds( $likerIds ){
 		$this->likerIds = $likerIds;
+	}
+
+	public function setPostAuthorId( $postAuthorId ){
+		$this->postAuthorId = $postAuthorId;
+	}
+
+	public function getPostAuthorId(){
+		return $this->postAuthorId;
+	}
+
+	public function setPostOwnerId( $postOwnerId ){
+		$this->postOwnerId = $postOwnerId;
+	}
+
+	public function getPostOwnerId(){
+		return $this->postOwnerId;
 	}
 }

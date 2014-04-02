@@ -276,41 +276,75 @@ class ControllerPostComment extends Controller {
         switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $lQueryComments = $this->model_branch_comment->getComments( $aDatas );
+                $lComments = $this->model_branch_comment->getComments( $aDatas );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $lQueryComments = $this->model_user_comment->getComments( $aDatas );
+                $lComments = $this->model_user_comment->getComments( $aDatas );
                 break;
             
             default:
-                $lQueryComments = null;
+                $lComments = null;
                 break;
+        }
+
+        if ( !$lComments ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
         }
 
         $this->load->model('user/user');
         $this->load->model('tool/image');
-        $this->load->model('tool/object');
+        $this->load->model('friend/friend');
+        $this->load->model('friend/follower');
 
         $aUsers = array();
-        $idCurrUserId = $this->customer->getId();
+        $aComments = array();
+        $idLoggedUser = $this->customer->getId();
 
-        if ( $lQueryComments != null ){
-            $aQueryComments = $lQueryComments->toArray();
-        }else{
-            $aQueryComments = array();
+        foreach ( $lComments as $oComment ) {
+            $aComment = $oComment->formatToCache();
+
+            if ( in_array($idLoggedUser, $oComment->getLikerIds()) ){
+                $aComment['is_liked'] = true;
+            }else{
+                $aComment['is_liked'] = false;
+            }
+
+            if ( $aComment['user_id'] == $idLoggedUser 
+                || $aComment['post_owner_id'] == $idLoggedUser
+                || $aComment['post_author_id'] == $idLoggedUser ){
+                $aComment['is_del'] = true;
+            }else{
+                $aComment['is_del'] = false;
+            }
+
+            if ( $aComment['user_id'] == $idLoggedUser ){
+                $aComment['is_edit'] = true;
+            }else{
+                $aComment['is_edit'] = false;
+            }
+
+            $aComments[] = $aComment;
+
+            if ( empty($aUsers[$aComment['user_id']]) ){
+                $oUser = $oComment->getUser();
+                $aUser = $oUser->formatToCache();
+
+                $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+                $aUser['fr_status'] = $this->model_friend_friend->checkStatus( $idLoggedUser, $oUser->getId() );
+                $aUser['fl_status'] = $this->model_friend_follower->checkStatus( $idLoggedUser, $oUser->getId() );
+
+                $aUsers[$aUser['id']] = $aUser;
+            }
         }
-
-        $aComments = $this->model_tool_object->formatCommentOfPost(
-            $aQueryComments,
-            $aDatas['post_slug'],
-            $aDatas['post_type']
-        );
         
         return $this->response->setOutput(json_encode(array(
-            'success' => 'ok',
-            'comments' => $aComments
+            'success'   => 'ok',
+            'comments'  => $aComments,
+            'users'     => $aUsers
         )));
     }
 

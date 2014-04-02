@@ -1,8 +1,10 @@
+// User Controller generate view (html)
 function UserController(){
 	'use strict';
 
 	var that = this;
 
+	// Connect user data with knockout
 	function UsersViewModel(){
 		var self = this;
 
@@ -28,7 +30,7 @@ function UserController(){
 			self.popup_users([]);
 
 			for ( var key in _users ){
-				console.log(_users[key]);
+				// console.log(_users[key]);
 				self.popup_users.push( new UserModel(_users[key]) );
 			}
 			// console.log(self.popup_users.length);
@@ -39,6 +41,7 @@ function UserController(){
 	ko.cleanNode($userTemplatePopup);
 	ko.applyBindings(userModelView, $userTemplatePopup);
 
+	// Add new User to knockout
 	this.addUser = function(_userId){
 		var user = window.yUsers.getItem(_userId);
 		if ( typeof user == 'undefined' ){
@@ -62,6 +65,7 @@ function UserController(){
 		}
 	};
 
+	// Set list Users againt
 	this.setUsers = function(_userIds){
 		var users = [];
 		for ( var key in _userIds ){
@@ -81,7 +85,7 @@ function UserController(){
 						for ( var key in data.users ){
 		                    window.yUsers.setItem(data.users[key].id, data.users[key]);
 						}
-						this.setUsers(_userIds);
+						that.setUsers(_userIds);
 	                }
 	            });
 				return;
@@ -93,6 +97,7 @@ function UserController(){
 		userModelView.setUsers(users);
 	};
 
+	// Set list users to show popup
 	this.showPopupUsers = function(_userIds){
 		var users = [];
 		for ( var key in _userIds ){
@@ -112,7 +117,7 @@ function UserController(){
 						for ( var key in data.users ){
 		                    window.yUsers.setItem(data.users[key].id, data.users[key]);
 						}
-						this.setUsers(_userIds);
+						that.showPopupUsers(_userIds);
 	                }
 	            });
 				return;

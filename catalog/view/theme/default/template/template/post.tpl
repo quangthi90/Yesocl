@@ -8,7 +8,7 @@
 		                    <i class="icon-caret-down"></i>
 		               	</a>
 		               	<ul class="dropdown-menu">
-		               		<!-- ko if: isUserLiked() == 1 -->
+		               		<!-- ko if: isUserLiked() -->
 		               		<li class="js-unlike-post">
 		                        <a href="#" data-bind="click: likePost"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
 		                    </li>
@@ -43,20 +43,20 @@
 						<div class="post_meta">
 							<span class="post_time fl">
 								<i class="icon-calendar"></i>
-								<!-- ko if: timeago -->
+								<!-- ko if: timeago() -->
 		                        <d class="timeago" data-bind="attr: { title: created }"></d>
 		                        <!-- /ko -->
-		                        <!-- ko if: !timeago -->
+		                        <!-- ko if: !timeago() -->
 		                        <d  data-bind="attr: { title: created_full }, text: created_short"></d>
 		                        <!-- /ko -->
 							</span>
 							<span class="post_like fr">
-								<!-- ko if: isUserLiked() == 0 -->
+								<!-- ko if: !isUserLiked() -->
 								<a class="js-like-post" href="#" data-bind="click: likePost">
 									<i class="icon-thumbs-up medium-icon"></i>
 		                        </a>
 		                        <!-- /ko -->
-		                        <!-- ko if: isUserLiked() == true -->
+		                        <!-- ko if: isUserLiked() -->
 		                        <d>
 		                            {% trans %}Liked{% endtrans %}
 								</d>
@@ -66,7 +66,7 @@
 								</a>
 							</span>
 							<span class="post_cm fr">
-								<a href="#" class="open-comment">
+								<a href="#" class="open-comment" data-bind="click: showComments">
 									<i class="icon-comments-alt"></i>
 								</a>
 								<d class="number-counter" data-bind="text: comment_count"></d>
