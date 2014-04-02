@@ -97,4 +97,5 @@ $_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 // Ajax
 $_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';
 $_['route']['SetLanguage']					= 'ajax/language/setLanguage/';
+$_['route']['GetUsers']						= 'ajax/user/getUsers/';
 ?>

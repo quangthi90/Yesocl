@@ -32,7 +32,7 @@
 		{{ include(template_from_string( footer )) }}
 		<div id="overlay"></div>
 		
-		{{ include('@template/default/template/post/common/liked_user.tpl') }}
+		{{ include('@template/default/template/template/user_list_popup.tpl') }}
 		{{ include('@template/default/template/common/quick_search.tpl') }}	
 		{{ block('common_language_block') }}
 		
@@ -79,6 +79,7 @@
 		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('user.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('notification.js') }}"></script>
 		<!-- Custom Script -->
     	{% block javascript %}
@@ -90,6 +91,7 @@
 			window.yRouting = new Routing( JSON.parse(_routing) );
 			window.yUser = new User( JSON.parse(_user) );
 			window.yUsers = new HashTable();
+			window.yUserController = new UserController();
 		</script>
 		<script type="text/javascript">
 			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',

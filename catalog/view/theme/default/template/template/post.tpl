@@ -1,5 +1,5 @@
-{% block post_template_item_single %}
-	<!-- ko foreach: posts -->
+{% block template_post_item_single %}
+	<div id="js-list-post" data-bind="foreach: single_posts">
 		<div class="column">
 			<div class="feed post post_status js-post-item" data-bind="attr: {'post-slug': slug}">
 				<div class="yes-dropdown">
@@ -101,5 +101,5 @@
 				<!-- /ko -->
 			</div>
 		</div>
-	<!-- /ko -->
+	</div>
 {% endblock %}

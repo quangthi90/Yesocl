@@ -50,12 +50,9 @@ function UserFunction()
 {
     'use strict';
     
-    this.showPopupUserList = function( users )
+    this.showPopupUserList = function()
     {
-        var usersViewer = $('<div id="#user-viewer-container" class="user-viewer"></div>');
-        for (var key in users) {
-            $.tmpl( $('#list-user-liked-template'), users[key]).appendTo(usersViewer);
-        }
+        var usersViewer = $('#user-viewer-container');
         bootbox.dialog({
             message: usersViewer.wrap('<div>').parent().html(),
             title: 'Who liked this post',
@@ -68,8 +65,6 @@ function UserFunction()
            bootbox.hideAll();
            $('.show-liked-list').removeClass('show-liked-list');
         });
-
-        $(document).trigger('FRIEND_ACTION', [false]);
     };
 }
 

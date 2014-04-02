@@ -95,4 +95,5 @@ $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 // Ajax
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';
 $_['routing']['SetLanguage']					= 'service/push/language/';
+$_['routing']['GetUsers']						= 'service/get/users/';
 ?>

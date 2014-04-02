@@ -34,14 +34,25 @@ class ControllerAccountWall extends Controller {
 			return false;
 		}
 
+		// Focus user
 		$aUser = $oCurrUser->formatToCache();
-
 		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
 		$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
 		$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
 		$this->data['users'] = array( $aUser['id'] => $aUser );
-
 		$this->data['current_user_id'] = $oCurrUser->getId();
+
+		// Logged User
+		if ( $oCurrUser->getId() != $oLoggedUser->getId() ){
+			$aUser = $oLoggedUser->formatToCache();
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
+			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
+			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
+			$this->data['users'][$aUser['id']] = $aUser;
+		}
+
+		// print("<pre>");
+		// var_dump($this->data['users']); exit;
 
 		$this->data['posts'] = array();
 		if ( $oCurrUser->getPostData() ){
@@ -87,6 +98,8 @@ class ControllerAccountWall extends Controller {
 				$aUser = $oUser->formatToCache();
 
 				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+				$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
+				$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUser->getId() );
 
 				$this->data['users'][$aUser['id']] = $aUser;
 			}
@@ -102,7 +115,7 @@ class ControllerAccountWall extends Controller {
 			$iCountPost++;
 		}
 
-		$this->data['post_type'] = $this->config->get('common')['type']['user'];
+		$this->data['sPostType'] = $this->config->get('common')['type']['user'];
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'wall' );

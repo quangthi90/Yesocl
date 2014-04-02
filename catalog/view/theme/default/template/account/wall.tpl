@@ -5,7 +5,7 @@
 {% use '@template/default/template/post/common/post_item_wall.tpl' %}
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
-{% use '@template/default/template/post/template.tpl' %}
+{% use '@template/default/template/template/post.tpl' %}
 
 {# format post created #}
 {% set date_timeago = get_datetime_from_now(-2) %}
@@ -21,11 +21,10 @@
         }) %}
     {% endif %}
     {% if post.content|length > 200 %}
-        {% set post = post|merge({'see_more': true}) %}
+        {% set post = post|merge({'see_more': true, 'type': sPostType}) %}
     {% else %}
-        {% set post = post|merge({'see_more': false}) %}
+        {% set post = post|merge({'see_more': false, 'type': sPostType}) %}
     {% endif %}
-    {% set post = post|merge({'type': sPostType}) %}
     {% set aPosts = aPosts|merge({(loop.index0): post}) %}
 {% endfor %}
 {# end format #}
@@ -59,7 +58,7 @@
                         {{ block('post_common_post_status_wall') }}
                     </div>
                     {% endif %}
-                    {{ block('post_template_item_single') }}
+                    {{ block('template_post_item_single') }}
                     {#% for post in posts %}
                         <div class="column">
                             {% set user = users[post.user_id] %}
@@ -86,7 +85,7 @@
             window.yUsers.setItem( key, _users[key] );
         }
         var _posts = '{{ aPosts|json_encode()|raw }}';
-        window.yPosts = new PostController( JSON.parse(_posts) );
+        window.yPostController = new PostController( JSON.parse(_posts) );
         var sPostType = '{{ post_type }}';
     </script>
 {% endblock %}
