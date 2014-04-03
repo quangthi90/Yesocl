@@ -424,7 +424,7 @@ class ControllerPostComment extends Controller {
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'like_count' => count($oComment->getLikerIds())
+            'liker_ids' => $oComment->getLikerIds()
         )));
     }
 

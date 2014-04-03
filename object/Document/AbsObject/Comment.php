@@ -56,6 +56,7 @@ Class Comment {
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'status'		=> $this->getStatus(),
 			'like_count'	=> count($this->getLikerIds()),
+			'liker_ids'		=> $this->getLikerIds(),
 			'post_owner_id'	=> $this->getPostOwnerId(),
 			'post_author_id'=> $this->getPostAuthorId()
 		);

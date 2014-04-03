@@ -132,7 +132,6 @@ function PostController( aPosts ){
 
             // Show list comments
             self.showComments = function(dataModel, event) {
-                console.log(event);
                 if ( self.comment_count() > 0 && self.comment_list === undefined ){
                     var promise = $.ajax({
                         type: 'POST',
@@ -160,7 +159,7 @@ function PostController( aPosts ){
                     return false;
                 }
 
-                window.yCommentController.setComments( self.comment_list );
+                window.yCommentController.setComments( self.comment_list, self.type(), self.slug() );
                 showCommentBox( $(event.currentTarget) );
             };
         }

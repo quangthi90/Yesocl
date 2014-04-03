@@ -34,16 +34,16 @@
 		                        <!-- / -->
 							</span>
 							<span class="like-container">
-								<!-- ko if: is_liked() -->
-								<a href="#" class="like-comment">
+								<!-- ko if: !is_liked() -->
+								<a href="#" class="like-comment" data-bind="click: likeComment">
 									<i class="icon-thumbs-up medium-icon"></i> {% trans %}Like{% endtrans %}
 								</a>
 								<!-- /ko -->
-								<!-- ko if: !is_liked() -->
+								<!-- ko if: is_liked() -->
 								<strong class="liked-label">{% trans %}Liked{% endtrans %}
 								</strong>
 								<!-- /ko -->
-								&nbsp;(<a class="like-count" href="#" data-bind="text: like_count"></a>)
+								&nbsp;(<a class="like-count" href="#" data-bind="text: like_count, click: showLikers"></a>)
 							</span>		
 						</div>
 						<div class="comment-content" data-bind="text: content"></div>
@@ -55,17 +55,17 @@
 						    	<i class="icon-reorder"></i>
 						   	</a>
 						   	<ul class="dropdown-menu">
-						   		<!-- ko if: !is_liked() -->
+						   		<!-- ko if: is_liked() -->
 						   		<li class="un-like-btn">
-							     	<a href="#"><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a>
+							     	<a href="#" data-bind="click: likeComment"><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a>
 						     	</li>
 						     	<!-- /ko -->
-						     	<!-- ko if: is_edit -->
+						     	<!-- ko if: is_edit() -->
 							    <li class="edit-comment-btn">
 							     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 						     	</li>
 						     	<!-- /ko -->
-						     	<!-- ko if: is_del -->
+						     	<!-- ko if: is_del() -->
 							    <li class="delete-comment-btn">
 							    	<a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 							    </li>

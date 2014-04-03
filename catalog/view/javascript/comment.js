@@ -14,6 +14,7 @@ function CommentController(){
             var self = this;
             
             // Create data
+            self.id             = ko.observable( _comment.id );
             self.slug           = ko.observable( _comment.slug );
             self.is_liked       = ko.observable( _comment.is_liked );
             self.is_edit        = ko.observable( _comment.is_edit );
@@ -31,17 +32,20 @@ function CommentController(){
             self.like_count     = ko.observable( _comment.like_count );
             self.content        = ko.observable( _comment.content );
             self.liker_ids      = _comment.liker_ids;
+            self.post_type      = ko.observable( _comment.post_type );
+            self.post_slug      = ko.observable( _comment.post_slug );
 
             // Event
             // Like / Unlike
             self.likeComment = function() {
-                self.isUserLiked(!self.isUserLiked());
+                self.is_liked(!self.is_liked());
 
                 var promise = $.ajax({
                     type: 'POST',
-                    url:  window.yRouting.generate('PostLike', {
-                        post_type: self.type(),
-                        post_slug: self.slug()
+                    url:  window.yRouting.generate('CommentLike', {
+                        post_type: self.post_type(),
+                        post_slug: self.post_slug(),
+                        comment_id: self.id()
                     }),
                     dataType: 'json'
                 });
@@ -54,14 +58,14 @@ function CommentController(){
                         // List likers ID
                         self.liker_ids = data.liker_ids;
                     }else{
-                        self.isUserLiked(!self.isUserLiked());
+                        self.is_liked(!self.is_liked());
                     }
                 });
             };
 
             // Show list Likers
             self.showLikers = function() {
-                if ( self.liker_ids.length == 0 ){
+                if ( self.liker_ids.length === 0 ){
                     return false;
                 }
                 window.yUserController.showPopupUsers( self.liker_ids );
@@ -88,11 +92,13 @@ function CommentController(){
     ko.applyBindings(commentModelView, $commentTemplate);
 
     // Set list users to show popup
-    this.setComments = function(_comments){
+    this.setComments = function(_comments, _postType, _postSlug){
         for ( var key in _comments ){
             var user = window.yUsers.getItem(_comments[key].user_id);
             user.href = window.yRouting.generate('WallPage', {user_slug: user.slug});
             _comments[key].user = user;
+            _comments[key].post_type = _postType;
+            _comments[key].post_slug = _postSlug;
         }
         commentModelView.setComments(_comments);
     };
