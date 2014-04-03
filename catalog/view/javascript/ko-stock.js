@@ -10,10 +10,22 @@ function WatchListViewModel(options) {
 	self.API_Url = options.API_Url;
 	self.isLoading = ko.observable(false);
 	self.watchList = ko.observableArray([]);
+	self.cacheStock = ko.observableArray([]);
+	self.addedWatchList = ko.observableArray([]);
+	self.suggestWatchList = ko.observableArray([]);
+	self.query = ko.observable('');
 
 	//Public functions:
 	self.removeWatchList = function(wl){
 		self.watchList.remove(wl);
+	};
+
+	self.removeAdd = function(wl) {
+
+	};
+
+	self.clearQuery = function(){
+		self.query('');
 	};
 
 	self.startAddWL = function(popupEle, data) {
@@ -23,7 +35,7 @@ function WatchListViewModel(options) {
 			    src: $(popupEle),
 			    type: 'inline'
 			},
-			modal: true
+			modal: false
   		});
 	};
 
@@ -89,9 +101,11 @@ function WatchListViewModel(options) {
 		that.isNew = ko.observable(false);
 		that.stockCode = ko.observable('');
 		that.stockName = ko.observable('');
+		that.typeName = ko.observable('');
+		that.marketName = ko.observable('');
 		that.stockIndexValue = ko.observable(0);
 		that.stockTopIndexValue = ko.observable('');
-		that.stockBottomIndexValue = ko.observable('');
+		that.stockBottomIndexValue = ko.observable('');		
 
 		ko.mapping.fromJS(data, {}, this);
 	};

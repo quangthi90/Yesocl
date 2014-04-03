@@ -1,13 +1,13 @@
 {% block stock_common_block_watch_list %}
-<div class="feed-block stock-block" id="st-watch-list">
+<div class="feed-block stock-block" id="st-watch-list" data-bind="with: $root.watchListModel">
 	<div class="block-header">
 	    <h3 class="block-title">Watch List <i class="icon-caret-right"></i></h3>
 	</div>
 	<div class="block-content">
-	    <ul class="watchlist-items" data-bind="foreach: $root.watchListModel.watchList">
+	    <ul class="watchlist-items" data-bind="foreach: watchList">
 	    	<!-- ko if: $data.isNew() == false -->
 	        <li class="wl-item">
-	        	<a href="javascript: void()" data-bind="click: $root.watchListModel.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
+	        	<a href="javascript: void()" data-bind="click: $parent.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code" data-bind="text: $data.stockCode"></a>
@@ -36,7 +36,7 @@
 	        <!-- /ko -->
 	        <!-- ko if: $data.isNew() == true -->
 	        <li class="wl-item wl-item-new">
-	            <a data-bind="click: $root.watchListModel.startAddWL.bind($data,'#new-wl')" class="btn btn-circle link-popup"><i class="icon-plus"></i>
+	            <a data-bind="click: $parent.startAddWL.bind($data,'#new-wl')" class="btn btn-circle link-popup"><i class="icon-plus"></i>
 	            </a>
 	        </li>
 	        <!-- /ko -->
@@ -51,12 +51,47 @@
 			        <span class="js-advance-post-title">{% trans %}New Watch List{% endtrans %}</span>
 			    </div>
 			    <div class="dlg-content" style="min-height: 300px;">
-
+			    	<div class="wl-selected-container">
+			    		<!-- ko if: addedWatchList().length > 0 -->
+			    		<ul data-bind="foreach: addedWatchList">
+			    			<li class="wl-selected-item">
+			    				<span class="name" data-bind="text: $data.stockCode"></span>
+			    				<a href="#" data-bind="click: $parent.removeAdd"><i class="icon-remove"></i></a>
+			    			</li>
+			    		</ul>
+			    		<!-- /ko -->
+			    		<!-- ko if: addedWatchList().length == 0 -->
+		    			<span>No stock choosen</span>
+			    		<!-- /ko -->
+			    	</div>
+			    	<div class="wl-selected-control">
+		    		    <div class="input-append live-search">
+						    <input data-bind="value: query" type="text" class="query" placeholder="Type keyword ...">
+						    <a href="#" class="btn" data-bind="click: clearQuery"><i class="icon-remove"></i></a>
+					    </div>
+					    <div class="live-search-result">
+					    	<!-- ko if: suggestWatchList().length > 0 -->
+				    	    <table class="table table-hover">
+						    	<tbody>
+						    		<tr>
+						    			<td data-bind="text: $data.stockCode"></td>
+						    			<td data-bind="text: $data.stockName"></td>
+						    			<td data-bind="text: $data.typeName"></td>
+						    			<td data-bind="text: $data.marketName"></td>
+						    		</tr>
+						    	</tbody>
+						    </table>
+						    <!-- /ko -->
+						    <!-- ko if: suggestWatchList().length == 0 -->
+						    <span>No matchs found</span>
+							<!-- /ko -->
+					    </div>
+			    	</div>
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
 			    		<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}OK{% endtrans %}</a>
-			    		<button class="btn btn-yes js-post-reset-btn" data-bind="$root.watchListModel.closeAddWL">{% trans %}Close{% endtrans %}</button>
+			    		<button class="btn btn-yes js-post-reset-btn" data-bind="closeAddWL">{% trans %}Close{% endtrans %}</button>
 		            </div>
 			    </div>
 			</form>

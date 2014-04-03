@@ -3588,6 +3588,44 @@ a.wall-link:hover {
 .wl-item .index-status-mount .i-bottom {
   font-weight: bold;
 }
+.wl-selected-container {
+  border: 1px solid #F0F0F0;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.wl-selected-container ul {
+}
+.wl-selected-container ul > li.wl-selected-item {
+  border: 1px solid #F0F0F0;
+  display: inline-block;
+  padding: 3px 5px;
+}
+.wl-selected-container ul > li.wl-selected-item .name {
+    margin-right: 5px;
+}
+.wl-selected-container ul > li.wl-selected-item a {
+}
+.wl-selected-container ul > li.wl-selected-item a:hover {
+}
+.wl-selected-container ul > li.wl-selected-item a > i {
+  color: #DDDDDD;
+  font-weight: normal;
+}
+.wl-selected-container ul > li.wl-selected-item a:hover > i {
+}
+.wl-selected-control .live-search {
+}
+.wl-selected-control .live-search .query {
+  height: 22px;
+  width: 605px;
+}
+.wl-selected-control .live-search .btn i {
+  color: #555555;
+}
+.wl-selected-container .live-search-result {
+  max-height: 300px;
+  overflow-y: auto;
+}
 
 .news-container .news-column {  
   width: 32%;
