@@ -1,10 +1,10 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/common/html_block.tpl' %}
 {% use '@template/default/template/post/common/post_status_wall.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 {% use '@template/default/template/template/post.tpl' %}
 {% use '@template/default/template/template/comment.tpl' %}
+{% use '@template/default/template/template/form.tpl' %}
 
 {# format post created #}
 {% set date_timeago = get_datetime_from_now(-2) %}
@@ -51,19 +51,13 @@
                         <i class="icon-angle-right"></i>
                     </a>           
                 </div>
-                <div class="block-content">
+                <div class="block-content" id="js-block-content">
                     {% if user.fr_status == 2 or user.fr_status == 1 %}
                     <div class="column has-new-post">
                         {{ block('post_common_post_status_wall') }}
                     </div>
                     {% endif %}
                     {{ block('template_post_item_single') }}
-                    {#% for post in posts %}
-                        <div class="column">
-                            {% set user = users[post.user_id] %}
-                            {{ block('post_common_post_item_wall') }}
-                        </div>
-                    {% endfor %#}
                 </div>
             </div>
             {{ block('template_comment_post_list') }}
@@ -72,8 +66,7 @@
 {% endblock %}
 
 {% block template %}
-    {{ block('post_common_post_status_wall_html_template') }}
-    {{ block('post_common_comment_post_list_template') }}
+    {{ block('template_advance_post_item_single_user') }}
 {% endblock %}
 
 {% block datascript %}
@@ -87,6 +80,7 @@
         window.yPostController = new PostController( JSON.parse(_posts) );
         var sPostType = '{{ post_type }}';
         window.yCommentController = new CommentController();
+        window.yFormController = new FormController();
     </script>
 {% endblock %}
 
@@ -98,5 +92,6 @@ $(function(){
 </script>
 <script type="text/javascript" src="{{ asset_js('post.js') }}"></script>
 <script type="text/javascript" src="{{ asset_js('comment.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('form.js') }}"></script>
 {{ block('post_common_post_status_wall_javascript') }}
 {% endblock %}

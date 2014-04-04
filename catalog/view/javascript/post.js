@@ -55,6 +55,7 @@ function PostController( aPosts ){
         function PostModel(_post){
             var self = this;
             // Create data
+            self.id             = ko.observable( _post.id );
             self.slug           = ko.observable( _post.slug );
             self.href           = ko.observable( _post.href );
             self.isUserLiked    = ko.observable( _post.isUserLiked );
@@ -162,9 +163,20 @@ function PostController( aPosts ){
                 window.yCommentController.setComments( self.comment_list, self.type(), self.slug() );
                 showCommentBox( $(event.currentTarget) );
             };
+
+            self.editPost = function() {
+                var form = {
+                    id: self.id(),
+                    title: self.title(),
+                    content: self.content(),
+                    image: self.image()
+                };
+
+                window.yFormController.setForm( form );
+            }
         }
     }
-    var $listPostTemplate = document.getElementById('js-list-post');
+    var $listPostTemplate = document.getElementById('js-block-content');
     ko.cleanNode($listPostTemplate);
     ko.applyBindings(new PostsViewModel(), $listPostTemplate);
 
