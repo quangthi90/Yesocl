@@ -56,7 +56,7 @@
 			    		<ul data-bind="foreach: addedWatchList">
 			    			<li class="wl-selected-item">
 			    				<span class="name" data-bind="text: $data.stockCode"></span>
-			    				<a href="#" data-bind="click: $parent.removeAdd"><i class="icon-remove"></i></a>
+			    				<a href="#" data-bind="click: $parent.removeStock"><i class="icon-remove"></i></a>
 			    			</li>
 			    		</ul>
 			    		<!-- /ko -->
@@ -66,14 +66,14 @@
 			    	</div>
 			    	<div class="wl-selected-control">
 		    		    <div class="input-append live-search">
-						    <input data-bind="value: query" type="text" class="query" placeholder="Type keyword ...">
-						    <a href="#" class="btn" data-bind="click: clearQuery"><i class="icon-remove"></i></a>
+						    <input data-bind="value: query, enable: dataSourceEmpty() == false, attr : { 'placeholder' : dataSourceEmpty() == false ? 'Type stock ...' : 'No datasource found !' }, valueUpdate: 'keyup', hasFocus: dataSourceEmpty() == false, executeOnEnter: addStockEnter" type="text" class="query">
+						    <a href="#" class="btn" data-bind="click: clearQuery, css : { 'disabled' : dataSourceEmpty() == true }"><i class="icon-remove"></i></a>
 					    </div>
 					    <div class="live-search-result">
 					    	<!-- ko if: suggestWatchList().length > 0 -->
 				    	    <table class="table table-hover">
-						    	<tbody>
-						    		<tr>
+						    	<tbody data-bind="foreach: suggestWatchList">
+						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stockCode() == $parent.defaultSelectedStock().stockCode() }">
 						    			<td data-bind="text: $data.stockCode"></td>
 						    			<td data-bind="text: $data.stockName"></td>
 						    			<td data-bind="text: $data.typeName"></td>
@@ -82,7 +82,7 @@
 						    	</tbody>
 						    </table>
 						    <!-- /ko -->
-						    <!-- ko if: suggestWatchList().length == 0 -->
+						    <!-- ko if: dataSourceEmpty() == false && suggestWatchList().length == 0 -->
 						    <span>No matchs found</span>
 							<!-- /ko -->
 					    </div>
@@ -90,8 +90,8 @@
 			    </div>
 			    <div class="dlg-footer">
 			    	<div class="controls">
-			    		<a href="#" class="btn btn-yes js-post-submit-btn">{% trans %}OK{% endtrans %}</a>
-			    		<button class="btn btn-yes js-post-reset-btn" data-bind="closeAddWL">{% trans %}Close{% endtrans %}</button>
+			    		<a href="#" class="btn btn-yes" data-bind="visible: addedWatchList().length > 0, click: saveAddedStock">{% trans %}OK{% endtrans %}</a>
+			    		<button class="btn btn-yes" data-bind="click: closeAddWL">{% trans %}Close{% endtrans %}</button>
 		            </div>
 			    </div>
 			</form>
