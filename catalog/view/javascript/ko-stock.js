@@ -1,10 +1,13 @@
 
 //Register ViewModel for Stock Page
 function ChartViewModel (options) {
+	'use strict';
 	var self = this;
-};
+}
 
 function WatchListViewModel(options) {
+	'use strict';
+
 	var self = this;
 
 	self.API_Url = options.API_Url;
@@ -21,9 +24,9 @@ function WatchListViewModel(options) {
 		self.watchList.remove(wl);
 
 		if(self.cacheStockDatasource().length === 0)
-			return;		
+			return;
 		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stockCode());
-		if(temp){ 
+		if(temp){
 			temp.IsAdded(false);
 		}
 	};
@@ -31,7 +34,7 @@ function WatchListViewModel(options) {
 	self.removeStock = function(wl) {
 		self.addedWatchList.remove(wl);
 		if(self.cacheStockDatasource().length === 0)
-			return;		
+			return;
 		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stockCode());
 		if(temp){
 			temp.IsAdded(false);
@@ -41,7 +44,7 @@ function WatchListViewModel(options) {
 	self.addStock = function(wl) {
 		self.addedWatchList.push(wl);
 		if(self.cacheStockDatasource().length === 0)
-			return;		
+			return;
 		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stockCode());
 		if(temp){
 			temp.IsAdded(true);
@@ -57,7 +60,7 @@ function WatchListViewModel(options) {
 
 	self.startAddWL = function(popupEle, data) {
 		$.magnificPopup.open({
-		  	items: {
+			items: {
 			    src: $(popupEle),
 			    type: 'inline'
 			},
@@ -67,7 +70,7 @@ function WatchListViewModel(options) {
 					_initStockDatasource();
 				}
 			}
-  		});
+		});
 	};
 
 	self.closeAddWL = function(){
@@ -75,7 +78,7 @@ function WatchListViewModel(options) {
 	};
 
 	self.saveAddedStock = function() {
-		if(self.addedWatchList().length == 0)
+		if(self.addedWatchList().length === 0)
 			return;
 		//Call ajax to save selected stock to Watch List
 
@@ -95,20 +98,20 @@ function WatchListViewModel(options) {
 		var search = self.query().toLowerCase();
 		var result = null;
 		
-		if(search.length == 0) {
+		if(search.length === 0) {
 			result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
 	            return  !st.IsAdded();
-	        });	        
+	        });
 		}else {
 			result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
-	            return  !st.IsAdded() && (st.stockCode().toLowerCase().indexOf(search) >= 0 || 
-	            		st.stockName().toLowerCase().indexOf(search) >= 0 ||
-	            		st.marketName().toLowerCase().indexOf(search) >= 0);
+	            return  !st.IsAdded() && (st.stockCode().toLowerCase().indexOf(search) >= 0 ||
+						st.stockName().toLowerCase().indexOf(search) >= 0 ||
+						st.marketName().toLowerCase().indexOf(search) >= 0);
 	        });
 		}
 
         if(result && result.length > 0){
-        	self.defaultSelectedStock(result[0]);
+			self.defaultSelectedStock(result[0]);
         }
         return result;
 	});
@@ -118,7 +121,7 @@ function WatchListViewModel(options) {
 			return true;
 		}
 		var temp = ko.utils.arrayFirst(self.cacheStockDatasource(), function(st) {
-	        return st.IsAdded() == false;
+			return st.IsAdded() === false;
         });
         return (temp === null);
 	});
@@ -128,7 +131,7 @@ function WatchListViewModel(options) {
 		return ko.utils.arrayFirst(array, function(st) {
 	        return st.stockCode().toLowerCase() === id.toLowerCase();
         });
-	};
+	}
 
 	function _addCollectionWatchList(dataList) {
 		if(dataList && dataList.length > 0){
@@ -137,7 +140,7 @@ function WatchListViewModel(options) {
 				self.watchList.push(newWL);
 			};
 		}
-	};
+	}
 
 	function _loadWatchLists() {
 		
@@ -162,7 +165,7 @@ function WatchListViewModel(options) {
 				})
 			);
 		};
-	};
+	}
 
 	function _loadStartUp() {
 		self.isLoading(true);		
@@ -173,7 +176,7 @@ function WatchListViewModel(options) {
 		_loadWatchLists();
 
 		self.isLoading(false);
-	};
+	}
 
 	function _initStockDatasource() {
 		self.isInitDatasource(true);
@@ -305,12 +308,12 @@ function WatchListViewModel(options) {
 
 		self.query('');
 		self.isInitDatasource(false);
-	};
+	}
 
 	function _addSingleWatchList() {
 		var newWL = new WatchListItem(wl);
 		self.watchList.push(wl);
-	};
+	}
 
 	function WatchListItem(data) {
 		var that = this;
@@ -326,7 +329,7 @@ function WatchListViewModel(options) {
 		that.IsAdded = ko.observable(false);
 
 		ko.mapping.fromJS(data, {}, this);
-	};
+	}
 
 	_loadStartUp();
 };
