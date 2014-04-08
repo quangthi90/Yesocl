@@ -39,6 +39,15 @@ Class Market {
 	/** @MongoDB\Date */
 	private $created;
 
+	public function formatToCache() {
+		return array(
+			'id' => $this->id,
+			'name' => $this->name,
+			'code' => $this->code,
+			'order' => $this->order
+		);
+	}
+
 	public function getId() {
 		return $this->id;
 	}

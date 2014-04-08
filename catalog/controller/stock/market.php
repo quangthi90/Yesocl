@@ -7,9 +7,38 @@ class ControllerStockMarket extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
-		$this->document->setTitle($this->config->get('config_title'));
-		$this->document->setDescription($this->config->get('config_meta_description'));
-		$this->data['heading_title'] = $this->config->get('config_title');	
+		$sMaketCode = '';
+		if ( !empty($this->request->get['market_code']) ) {
+			$sMaketCode = $this->request->get['market_code'];
+		}
+
+		$this->load->model('stock/market');
+
+		$lMarkets = $this->model_stock_market->getMarkets();
+
+		if ( !$lMarkets ) {
+			return false;
+		}
+
+		$this->data['markets'] = array();
+		$oMarket = null;
+		$aMarkets = array();
+
+		foreach ( $lMarkets as $key => $oMarket ) {
+			$aMarkets[] = $oMarket;
+			if ( $sMaketCode == $oMarket->getCode() ){
+				$aMarkets[0] = $oMarket;
+			}
+			$this->data['markets'][] = $oMarket->formatToCache();
+		}
+
+		$oCurrMarket = $aMarkets[0];
+
+		$this->data['curr_market'] = $oCurrMarket->formatToCache();
+
+		$oStock = $oCurrMarket->getStockMarket();
+
+		$this->data['stock'] = $oStock->formatToCache();
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	

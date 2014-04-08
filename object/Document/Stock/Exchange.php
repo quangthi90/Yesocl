@@ -29,6 +29,18 @@ Class Exchange {
 	/** @MongoDB\Date */
 	private $created;
 
+	public function formatToCache() {
+		return array(
+			'id' => $this->id,
+			'open_price' => $this->openPrice,
+			'close_price' => $this->closePrice,
+			'high_price' => $this->highPrice,
+			'low_price' => $this->lowPrice,
+			'volume' => $this->volume,
+			'created' => $this->created
+		);
+	}
+
 	public function getId() {
 		return $this->id;
 	}

@@ -42,12 +42,30 @@ Class Stock {
 
 	/** @MongoDB\ReferenceOne(targetDocument="Meta", mappedBy="stock") */
 	private $meta;
+
+	/** 
+	 * @MongoDB\EmbedOne(targetDocument="Exchange")
+	 */
+	private $lastExchange;
+
+	/** @MongoDB\Boolean */
+	private $isDown;
 	
 	/** @MongoDB\Boolean */
 	private $status = true;
 
 	/** @MongoDB\Date */
 	private $created;
+
+	public function formatToCache() {
+		return array(
+			'id' => $this->id,
+			'name' => $this->name,
+			'code' => $this->code,
+			'is_down' => $this->isDown,
+			'last_exchange' => $this->lastExchange->formatToCache()
+		);
+	}
 
 	public function getExchangeByCreated( $created ){
 		foreach ( $this->exchanges as $oExchange ) {
@@ -101,6 +119,12 @@ Class Stock {
 
 	public function addExchange( Exchange $exchange ){
 		$this->exchanges[] = $exchange;
+		$this->lastExchange = $exchange;
+		if ( $this->lastExchange->getClosePrice() >= $exchange->getClosePrice() ){
+			$this->isDown = true;
+		}else{
+			$this->isDown = false;
+		}
 	}
 
 	public function setExchanges( $exchanges ){
@@ -127,14 +151,6 @@ Class Stock {
 		return $this->status;
 	}
 
-	public function setCreated( $created ){
-		$this->created = $created;
-	}
-
-	public function getCreated(){
-		return $this->created;
-	}
-
 	public function setCompany( $company ){
 		$this->company = $company;
 	}
@@ -149,5 +165,29 @@ Class Stock {
 
 	public function getMeta(){
 		return $this->meta;
+	}
+
+	public function setLastExchange( $lastExchange ){
+		$this->lastExchange = $lastExchange;
+	}
+
+	public function getLastExchange(){
+		return $this->lastExchange;
+	}
+
+	public function setIsDown( $isDown ){
+		$this->isDown = $isDown;
+	}
+
+	public function getIsDown(){
+		return $this->isDown;
+	}
+
+	public function setCreated( $created ){
+		$this->created = $created;
+	}
+
+	public function getCreated(){
+		return $this->created;
 	}
 }

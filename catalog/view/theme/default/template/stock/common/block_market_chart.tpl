@@ -5,9 +5,9 @@
     </div>
     <div class="block-content">
         <ul class="nav nav-tabs market-list">
-          <li class="active"><a href="#market-down" data-toggle="tab">Down</a></li>
-          <li><a href="#market-nasdaq" data-toggle="tab">NASDAQ</a></li>
-          <li><a href="#market-sp500" data-toggle="tab">S&P 500</a></li>
+        {% for market in markets %}
+          <li {% if curr_market.id == market.id %}class="active"{% endif %}><a href="{{ path('StockMarket', {market_code: market.code}) }}">{{ market.code }}</a></li>
+        {% endfor %}
         </ul>        
         <div class="tab-content">            
             <div class="tab-pane active" id="market-down">
@@ -16,10 +16,14 @@
                         <div class="span6 index-overview up">
                             <ul>
                                 <li class="index-staus">
+                                    {% if stock.is_down == true %}
+                                    <i class="icon-caret-down"></i>
+                                    {% else %}
                                     <i class="icon-caret-up"></i>
+                                    {% endif %}
                                 </li>
                                 <li class="index-mount">
-                                    10,000.23
+                                    {{ stock.last_exchange.close_price }}
                                 </li>
                                 <li class="index-status-mount">
                                     <span class="i-top"> + 100</span> 
@@ -36,7 +40,7 @@
                                 </div>
                                 <div class="span6">
                                     <label class="index-label">Open</label>
-                                    <span class="index-value">10,000.00 </span>
+                                    <span class="index-value">{{ stock.last_exchange.open_price }} </span>
                                 </div>
                             </div>
                             <div class="row-fluid">
@@ -46,7 +50,7 @@
                                 </div>
                                 <div class="span6">
                                     <label class="index-label">Previous Closed</label>
-                                    <span class="index-value">10,000.00 </span>
+                                    <span class="index-value">{{ stock.last_exchange.close_price }} </span>
                                 </div>
                             </div>
                         </div>
