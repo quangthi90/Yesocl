@@ -2,31 +2,37 @@
 use Document\Stock\Market;
 
 class ModelStockMarket extends Model {
-	public function addMarket( $aDatas = array() ) {
+	public function addMarket( $aData = array() ) {
 		// name is required
-		if ( !empty($aDatas['name']) ) {
-			$aDatas['name'] = strtoupper( trim($aDatas['name']) );
+		if ( !empty($aData['name']) ) {
+			$aData['name'] = strtoupper( trim($aData['name']) );
 		}else {
 			return false;
 		}
 
 		// code is required
-		if ( !empty($aDatas['code']) && !$this->getMarket($aDatas['code']) ) {
-			$aDatas['code'] = strtoupper( trim($aDatas['code']) );
+		if ( !empty($aData['code']) && !$this->getMarket($aData['code']) ) {
+			$aData['code'] = strtoupper( trim($aData['code']) );
 		}else {
 			return false;
 		}
 
 		// status
-		if ( empty($aDatas['status']) ) {
-			$aDatas['status'] = false;
+		if ( empty($aData['status']) ) {
+			$aData['status'] = false;
+		}
+
+		// stock
+		if ( !empty($aData['stock']) ){
+			$aData['stock'] = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode(new \MongoRegex('/' . strtoupper(trim($aData['stock'])) . '.*/i'));
 		}
 
 		$oMarket = new Market();
-		$oMarket->setName( $aDatas['name'] );
-		$oMarket->setCode( $aDatas['code'] );
-		$oMarket->setOrder( $aDatas['order'] );
-		$oMarket->setStatus( $aDatas['status'] );
+		$oMarket->setName( $aData['name'] );
+		$oMarket->setCode( $aData['code'] );
+		$oMarket->setOrder( $aData['order'] );
+		$oMarket->setStockMarket( $aData['stock'] );
+		$oMarket->setStatus( $aData['status'] );
 
 		$this->dm->persist( $oMarket );
 		$this->dm->flush();
@@ -55,6 +61,13 @@ class ModelStockMarket extends Model {
 		$oMarket->setName( $aData['name'] );
 		if ( !empty($aData['order']) ){
 			$oMarket->setOrder( $aData['order'] );
+		}
+
+		if ( !empty($aData['stock']) ){
+			if ( !$oMarket->getStockMarket() || $oMarket->getStockMarket()->getCode() != $aData['stock'] ){
+				$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( new \MongoRegex('/' . strtoupper(trim($aData['stock'])) . '.*/i') );
+				$oMarket->setStockMarket( $oStock );
+			}
 		}
 		$oMarket->setStatus( $aData['status'] );
 		

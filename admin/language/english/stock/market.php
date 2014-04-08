@@ -24,6 +24,7 @@ $_['column_action'] 				= 'Action';
 $_['entry_name'] 					= 'Name:';
 $_['entry_code'] 					= 'Code:';
 $_['entry_order'] 					= 'Order:';
+$_['entry_stock'] 					= 'Stock Market:';
 $_['entry_status'] 					= 'Status:';
 
 // error

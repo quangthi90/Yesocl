@@ -29,6 +29,9 @@ Class Market {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Stock", mappedBy="market") */
 	private $stocks = array();
+
+	/** @MongoDB\ReferenceOne(targetDocument="Stock") */
+	private $stockMarket;
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -78,6 +81,14 @@ Class Market {
 
 	public function getStocks(){
 		return $this->stocks;
+	}
+
+	public function setStockMarket( $stockMarket ){
+		$this->stockMarket = $stockMarket;
+	}
+
+	public function getStockMarket(){
+		return $this->stockMarket;
 	}
 
 	public function setStatus( $status ){

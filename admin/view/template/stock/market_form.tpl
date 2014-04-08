@@ -40,8 +40,12 @@
           </tr>
           <?php } ?>
           <tr>
+            <td><?php echo $entry_stock; ?></td>
+            <td><input class="input-xxlarge" type="text" name="stock" value="<?php echo $stock; ?>" /></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_order; ?></td>
-            <td><input class="input-xxlarge" type="text" name="order"  value="<?php echo $order; ?>" /></td>
+            <td><input class="input-xxlarge" type="text" name="order" value="<?php echo $order; ?>" /></td>
           </tr>
           <tr>
             <td><?php echo $entry_status; ?></td>
@@ -55,4 +59,31 @@
     </div>
   </div>
 </div>
+<script type="text/javascript"><!--
+$('input[name=\'stock\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=stock/stock/search&token=<?php echo $token; ?>&code=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.code,
+            value: item.code
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'stock\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script> 
 <?php echo $footer; ?>

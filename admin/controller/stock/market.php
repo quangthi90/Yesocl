@@ -256,6 +256,7 @@ class ControllerStockMarket extends Controller {
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_code'] = $this->language->get('entry_code');
 		$this->data['entry_order'] = $this->language->get('entry_order');
+		$this->data['entry_stock'] = $this->language->get('entry_stock');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		
 		// Link
@@ -301,6 +302,15 @@ class ControllerStockMarket extends Controller {
 			$this->data['order'] = '';
 		}
 
+		// Entry stock
+		if ( isset($this->request->post['stock']) ){
+			$this->data['stock'] = $this->request->post['stock'];
+		}elseif ( $oMarket && $oMarket->getStockMarket() ){
+			$this->data['stock'] = $oMarket->getStockMarket()->getName();
+		}else {
+			$this->data['stock'] = '';
+		}
+
 		// Entry status
 		if ( isset($this->request->post['status']) ){
 			$this->data['status'] = $this->request->post['status'];
@@ -309,6 +319,8 @@ class ControllerStockMarket extends Controller {
 		}else {
 			$this->data['status'] = true;
 		}
+
+		$this->data['token'] = $this->session->data['token'];
 
 		$this->template = 'stock/market_form.tpl';
 		$this->children = array(
