@@ -311,7 +311,7 @@
 								<img src="${post.image}" alt="${post.title}" />
 							</a>
 						</div>
-						<div class="post_text_raw">
+						<div class="post_text_raw" style="font-weight: normal">
 							{{html post.content}}
 						</div>
 						<div class="post_text_editable" style="display: none;">

@@ -69,7 +69,8 @@ class ModelBranchComment extends Model {
 
 		$comment = new Comment();
 		$comment->setUser( $user );
-		$comment->setContent( htmlentities($data['content']) );
+		// $comment->setContent( htmlentities($data['content']) );
+		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
 		$post->addComment( $comment );
@@ -119,7 +120,8 @@ class ModelBranchComment extends Model {
 		}
 
 		if ( !empty($data['content']) ){
-			$comment->setContent( htmlentities($data['content']) );
+			// $comment->setContent( htmlentities($data['content']) );
+			$comment->setContent( $data['content'] );
 		}
 
 		$this->dm->flush();

@@ -93,7 +93,7 @@
 					<img src="{{ post.image }}" />
 				</a>				
 			</div>
-			<div class="post_text_raw">
+			<div class="post_text_raw" style="font-weight: normal">
 				{{ post.content|raw }}
 			</div>
 			<div class="post_text_editable" style="display: none;">

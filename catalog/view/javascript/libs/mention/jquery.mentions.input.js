@@ -22,7 +22,7 @@
     minChars        : 1,
     showAvatars     : true,
     classes         : {
-      autoCompleteItemActive : 'active'
+      autoCompleteItemActive : "active"
     },
     templates       : {
       wrapper                    : _.template('<div class="mentions-input-box"></div>'),
@@ -33,8 +33,7 @@
       mentionsOverlay            : _.template('<div class="mentions"><div></div></div>'),
       mentionItemHighlight       : _.template('<strong><span><%= value %></span></strong>'),
       mentionItemSyntax          : _.template('@[<%= value %>](<%= type %>:<%= id %>)'),
-      //mentionItemContent         : _.template('@USER[<%= id %>]')
-      mentionItemContent          : _.template('<a href="<%= wall %>" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= id %>)"><%= value %></a>')
+      mentionItemContent          : _.template('<a href="<%= wall %>" class="wall-link" data-ref="<%= id %>" data-content-syntax="@[<%= value %>](<%= type %>:<%= id %>)"><%= value %></a>')      
     },
     mentionItemRegex: /@\[([^\]]+)\]\(([^:]+):(\d+)\)/g
   };
@@ -47,7 +46,7 @@
       if (!term && !term.length) {
         return value;
       }
-      return value.replace(new RegExp('(?![^&;]+;)(?!<[^<>]*)(' + term + ')(?![^<>]*>)(?![^&;]+;)', 'gi'), '<b>$1</b>');
+      return value.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + term + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<b>$1</b>");
     },
     setCaratPosition : function (domNode, caretPos) {
       if (domNode.createTextRange) {
@@ -64,7 +63,7 @@
       }
     },
     getCaratPosition : function (domNode) {
-      if(typeof(domNode.selectionStart) == 'number') {
+      if(typeof(domNode.selectionStart) == "number") {
         start = domNode.selectionStart;
         end = domNode.selectionEnd;
       }
@@ -77,7 +76,7 @@
           range_all.moveToElementText(domNode);
 
           // Calculate selection start point by moving beginning of range_all to beginning of range
-          for (start=0; range_all.compareEndPoints('StartToStart', range) < 0; start++) {
+          for (start=0; range_all.compareEndPoints("StartToStart", range) < 0; start++) {
             range_all.moveStart('character', 1);
           }
 
@@ -106,7 +105,7 @@
       return end;
     },
     rtrim: function(string) {
-      return string.replace(/\s+$/,'');
+      return string.replace(/\s+$/,"");
     }
   };
 
@@ -178,7 +177,7 @@
         syntaxMessage += initialMessage.substr(index, mentionIndex - index);
         syntaxMessage += textSyntax;
         contentMessage += initialMessage.substr(index, mentionIndex - index);
-        contentMessage += utils.htmlEncode(linkSyntax);
+        contentMessage += linkSyntax;
          
         index = mentionIndex + mention.value.length;
       });
@@ -211,7 +210,7 @@
         // Discard bad mentions.
         if(!mention.value){
           return true;
-        }
+        }        
         // Expect to find the mention in the right place.
         return inputText.indexOf(mention.value) < 0;
       });
@@ -235,7 +234,7 @@
       }
       else {
         // Using a regex to figure out positions
-        var regex = new RegExp('\\' + settings.triggerChar + currentDataQuery, 'gi');
+        var regex = new RegExp("\\" + settings.triggerChar + currentDataQuery, "gi");
         regex.exec(currentMessage);
 
         var startCaretPosition = regex.lastIndex - currentDataQuery.length - 1;
@@ -294,7 +293,7 @@
       updateValues();
       hideAutoComplete();
 
-      var space_index = _.lastIndexOf(inputBuffer, ' ');
+      var space_index = _.lastIndexOf(inputBuffer, " ");
       if (space_index > -1) {
         inputBuffer = inputBuffer.slice(space_index + 1);
       }
@@ -330,7 +329,7 @@
         // IE9 doesn't fire the oninput event when backspace or delete is pressed. This causes the highlighting
         // to stay on the screen whenever backspace is pressed after a highlighed word. This is simply a hack
         // to force updateValues() to fire when backspace/delete is pressed in IE9.
-        if (navigator.userAgent.indexOf('MSIE 9') > -1) {
+        if (navigator.userAgent.indexOf("MSIE 9") > -1) {
           _.defer(updateValues);
         }
 
@@ -410,7 +409,7 @@
       }
 
       elmAutocompleteList.empty();
-      var elmDropDownList = $('<ul>').appendTo(elmAutocompleteList).hide();
+      var elmDropDownList = $("<ul>").appendTo(elmAutocompleteList).hide();
 
       _.each(results, function (item, index) {
         var elmListItem = $(settings.templates.autocompleteListItem({
@@ -456,7 +455,7 @@
     }
 
     function doSearchFullNameTrigger(query) {
-      query = query.substring(query.lastIndexOf(' ') + 1);
+      query = query.substring(query.lastIndexOf(" ") + 1);
       var regexp = /[A-Z][a-z]/g;
       var arr = query.match(regexp);
       if(arr) {
@@ -539,7 +538,7 @@
       getMentions : function (callback) {
         if (!_.isFunction(callback)) {
           return mentionsCollection;
-        }
+        }        
         callback.call(this, mentionsCollection);
       }
     };
