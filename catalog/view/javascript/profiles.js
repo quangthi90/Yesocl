@@ -538,7 +538,7 @@
 		});
 
 		this.$btnSave.click(function(){
-			if ( $(this).hasClass('disabled') || that.$input.val().length < 50 ) {
+			if ( $(this).hasClass('disabled') || that.$input.val().length < 10 ) {
 				return false;
 			}
 
