@@ -3718,6 +3718,31 @@ a.wall-link:hover {
 .news-item:hover .news-actions {
   display: block;
 }
+.news-item .report-info {
+  padding-top: 5px;  
+  background-color: #FAFAFA;
+}
+.news-item .section-info {
+  padding: 5px 10px;
+}
+.news-item .section-info a {
+    font-weight: bold;
+}
+.news-item .section-info a:hover {  
+}
+.news-item .section-info.l {
+  text-align: left;
+}
+.news-item .section-info.r {
+  text-align: right; 
+}
+.news-item .section-info .stock-name {
+  text-transform: uppercase;
+}
+.news-item .section-info .branch-name {
+  color: #818080;  
+}
+
 .news-actions .news-action {
   text-align: center;
   padding: 10px 0px;
@@ -3726,17 +3751,20 @@ a.wall-link:hover {
 }
 .news-actions .news-action i {
   font-size: 18px;
-  color: #555555;
+  color: #0E0E0E;
 }
 .news-actions .news-action d {
   padding: 2px 3px;
-  color: #555555;
+  color: #0E0E0E;
   font-size: 11px;
   font-weight: bold;
   vertical-align: top;
 }
+.news-actions .news-action a span {
+  color: #000;
+}
 .news-actions .news-action a:hover i {
-  color: #000000;
+  color: #FFF;
 }
 .news-actions .news-action a:hover > d {
   color: #FFFFFF;
