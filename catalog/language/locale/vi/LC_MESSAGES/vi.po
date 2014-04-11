@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-04-10 23:47+0700\n"
-"PO-Revision-Date: 2014-04-10 23:48+0700\n"
-"Last-Translator: Bommer <lqthi.khtn@gmail.com>\n"
+"POT-Creation-Date: 2014-04-11 16:11+0700\n"
+"PO-Revision-Date: 2014-04-11 16:11+0700\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "Language: vi_VN\n"
 "MIME-Version: 1.0\n"
@@ -13,6 +13,8 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-SearchPath-0: E:\\Programs\\xampp\\htdocs\\Yesocl\\system\\twig\n"
+"X-Poedit-SearchPath-1: E:\\Programs\\xampp\\htdocs\\Yesocl\\catalog"
+"\\controller\n"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/03/36/872a16315fa5b2d9edc0df900df0766b86d04310f083327694d2923ae13a.php:75
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/db/8e/ec4fc2163c0b3e6baf023ead704d1eff646f870fdee778feef6afe80fd66.php:75
@@ -1297,6 +1299,14 @@ msgstr "Bài viết của người bạn theo đuôi"
 msgid "Category Detail Page"
 msgstr "Trang chi tiết loại lĩnh vực"
 
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/common/notification.php:93
+msgid "Today"
+msgstr "hôm nay"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/common/notification.php:95
+msgid "Yesterday"
+msgstr "hôm qua"
+
 #~ msgid "My Following"
 #~ msgstr "Người tôi đang theo đuôi"
 
@@ -1338,9 +1348,6 @@ msgstr "Trang chi tiết loại lĩnh vực"
 
 #~ msgid "'s Wall Page"
 #~ msgstr "Tường nhà của"
-
-#~ msgid "Sent Today"
-#~ msgstr "Gửi hôm nay"
 
 #~ msgid ">Personal Information"
 #~ msgstr "Thông tin cá nhân"

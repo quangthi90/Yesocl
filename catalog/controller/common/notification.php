@@ -90,9 +90,9 @@ class ControllerCommonNotification extends Controller {
 				if ( empty($this->data['times'][$time]) ){
 					$iDay = $now->format('d') - $created->format('d');
 					if ( $iDay == 0 ){
-						$this->data['times'][$time] = 'Today';
+						$this->data['times'][$time] = gettext('Today');
 					}elseif ( $iDay == 1 ){
-						$this->data['times'][$time] = 'Yesterday';
+						$this->data['times'][$time] = gettext('Yesterday');
 					}else{
 						$this->data['times'][$time] = $created->format('d F');
 					}
