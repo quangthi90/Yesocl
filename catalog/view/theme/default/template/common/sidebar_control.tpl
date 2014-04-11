@@ -27,30 +27,30 @@
 				  	</li>
 				  	<li class="menu-item {% if menu == 'wall' %}active{% endif %}">
 				  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
-				  			<i class="icon-bookmark"></i> <span>{% trans %}My Wall{% endtrans %}</span>
+				  			<i class="icon-bookmark"></i> <span>{% trans %}Wall Page{% endtrans %}</span>
 			  			</a>
 				  	</li>	
 				  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
 				  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
-				  			<i class="icon-user-md"></i> <span>{% trans %}My profile{% endtrans %}</span>
+				  			<i class="icon-user-md"></i> <span>{% trans %}Profile{% endtrans %}</span>
 			  			</a>
 				  	</li>
 				  	<li class="menu-item {% if menu == 'friend' %}active{% endif %}">
 				  		<a href="{{ path('FriendPage', {user_slug: user_slug}) }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}My friend{% endtrans %}</span>
+				  			<i class="icon-fire"></i> <span>{% trans %}Friend{% endtrans %}</span>
 			  			</a>
 				  	</li>
 				  	<li class="menu-item {% if menu == 'follow' %}active{% endif %}">
 				  		<a href="{{ path('FollowPage', {user_slug: user_slug}) }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}My Follower{% endtrans %}</span>
+				  			<i class="icon-fire"></i> <span>{% trans %}Follower{% endtrans %}</span>
 			  			</a>
 				  	</li>
 				  	{% if show_branch_menu == true %}
-				  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
-				  		<a href="{{ path('BranchList') }}">
-				  			<i class="icon-fire"></i> <span>{% trans %}My branch{% endtrans %}</span>
-			  			</a>
-				  	</li>
+					  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
+					  		<a href="{{ path('BranchList') }}">
+					  			<i class="icon-fire"></i> <span>{% trans %}Branch{% endtrans %}</span>
+				  			</a>
+					  	</li>
 				  	{% endif %}
 				  	<li class="menu-item {% if menu == 'stock' %}active{% endif %}">
 				  		<a href="{{ path('StockMarket') }}">

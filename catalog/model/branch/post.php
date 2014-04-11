@@ -66,9 +66,9 @@ class ModelBranchPost extends Model {
 		}
 
 		// Encode html
-		$data['content'] = htmlentities( $data['content'] );
-		$data['title'] = htmlentities( $data['title'] );
-		$data['description'] = htmlentities( $data['description'] );
+		// $data['content'] = htmlentities( $data['content'] );
+		// $data['title'] = htmlentities( $data['title'] );
+		// $data['description'] = htmlentities( $data['description'] );
 
 		$slug = $this->url->create_slug( $aData['title'] ) . new MongoId();
 		
@@ -153,15 +153,18 @@ class ModelBranchPost extends Model {
 		}
 
 		if ( !empty($aData['content']) ){
-			$oPost->setContent( htmlentities($aData['content']) );
+			// $oPost->setContent( htmlentities($aData['content']) );
+			$oPost->setContent( $aData['content'] );
 		}
 
 		if ( !empty($aData['title']) ){
-			$oPost->setTitle( htmlentities($aData['title']) );
+			// $oPost->setTitle( htmlentities($aData['title']) );
+			$oPost->setTitle( $aData['title'] );
 		}
 
 		if ( !empty($aData['description']) ){
-			$oPost->setDescription( htmlentities($aData['description']) );
+			// $oPost->setDescription( htmlentities($aData['description']) );
+			$oPost->setDescription( $aData['description'] );
 		}
 
 		if ( !empty($aData['category']) ){

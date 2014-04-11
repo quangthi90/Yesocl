@@ -198,7 +198,16 @@
         $('#overlay').hide();
         $('.post').removeClass('post-selecting');
         $button.removeClass('disabled');
-        $('#comment-box').stop().animate({'right': '-5000px' }, 'slow');
+        $('#comment-box').stop().animate({'right': '-5000px' }, 500, function(){
+
+            if($('.toggle-comment').length == 0) return;
+
+            $('.toggle-comment').fadeIn(100);
+            $('.toggle-comment').children('a').tooltip('show');
+            setTimeout(function(){
+                $('.toggle-comment').children('a').tooltip('hide');
+            }, 3000); 
+        });
         // var page = 1;
     };
     $(function(){
@@ -308,7 +317,7 @@
                 that.url  = that.$el.attr('data-url');
 
                 that.data = {
-                    content   : that.$content.val()
+                    content   : that.$content.mentionsInput('getHtmlContent')
                 };
 
                 that.submit(that.$press_enter_cb.parent());
@@ -401,6 +410,7 @@
                 $('#post-detail-comment-number').html(comment_count);
 
                 that.$content.val('');
+                that.$content.mentionsInput('reset');
                 that.$content_advance.code('');
                 commentBox.find('.counter').html( comment_count );
                 $comment_btn.parent().find('.number-counter').html( comment_count );

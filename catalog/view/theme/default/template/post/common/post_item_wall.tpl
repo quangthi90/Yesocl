@@ -93,15 +93,13 @@
 					<img src="{{ post.image }}" />
 				</a>				
 			</div>
-			<div class="post_text_raw">
+			<div class="post_text_raw" style="font-weight: normal">
 				{{ post.content|raw }}
 			</div>
 			<div class="post_text_editable" style="display: none;">
 				{{ post.content|raw }}
 			</div>
 		</div>
-		{% if post.content|length > 200 %}
-			<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a> 
-		{% endif %}
+		<a class="yes-see-more" href="{{ path('PostPage', {post_type: post_type, post_slug: post.slug}) }}">See more <i class=" icon-double-angle-right"></i></a>
 	</div>
 {% endblock %}

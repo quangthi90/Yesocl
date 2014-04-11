@@ -49,6 +49,11 @@ Class Branch {
 	 */
 	private $logo;
 
+	/** 
+	 * @MongoDB\Boolean 
+	 */
+	private $deleted = false;
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -257,5 +262,13 @@ Class Branch {
 
 	public function getLogo(){
 		return $this->logo;
+	}
+
+	public function setDeleted( $deleted ){
+		$this->deleted = $deleted;
+	}
+
+	public function getDeleted(){
+		return $this->deleted;
 	}
 }

@@ -32,7 +32,11 @@
 			                data-comment-liked="{{ comment.is_liked }}" data-id="{{ comment.id }}" data-like-count="{{ comment.like_count }}" data-url-edit="{{ comment.href_edit }}" data-url-delete="{{ comment.href_delete }}">
 			                <a href="{{ comment.href_user }}">{{ comment.author }}</a> 
 			                <span class="comment-time">
-			                    <d class="timeago" title="{{ comment.created }}"></d>
+			                	{% if comment.created_label != null %}
+								<d title="{{ comment.created_title }}">{{ comment.created_label }}</d>
+								{% else %}
+								<d class="timeago" title="{{ comment.created_title }}"></d>
+								{% endif %}
 			                </span>
 			                <span class="like-container">
 			                	<a href="#" class="like-comment{% if comment.is_liked == 1 %} hidden{% endif %}"><i class="icon-thumbs-up medium-icon"></i> {% trans %}Like{% endtrans %} </a>
