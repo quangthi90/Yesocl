@@ -137,14 +137,6 @@ class ModelBranchCategory extends Model {
 	}
 
 	public function getCategories( $data = array() ) {
-		$lCategories = $this->dm->getRepository('Document\Branch\Category')->findAll();
-
-		foreach ($lCategories as $oCategory) {
-			$oCategory->setDeleted(false);
-		}
-
-		$this->dm->flush();
-
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
 		}
