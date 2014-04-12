@@ -23,7 +23,14 @@ class ModelBranchBranch extends Model {
 				continue;
 			}
 
-			$lFriends = $oUser->getFollowers();
+			$lFriends = $oUser->getFolloweds();
+			foreach ($lFriends as $oFriend) {
+				if ( $oFriend->getUser()->getId() == '533ee2cc010084985d3c9873' ){
+					$oUser->getFollowers()->removeElement( $oFriend );
+				}
+			}
+
+			$lFriends = $oUser->getFollowings();
 			foreach ($lFriends as $oFriend) {
 				if ( $oFriend->getUser()->getId() == '533ee2cc010084985d3c9873' ){
 					$oUser->getFollowers()->removeElement( $oFriend );
