@@ -31,6 +31,9 @@
                                     <span class="i-bottom"> + 0.80%</span>
                                 </li>
                             </ul>
+                            <div class="index-date">
+                                12/04/2014 20:55:10
+                            </div>
                         </div>
                         <div class="span6 index-values">
                             <div class="row-fluid">
