@@ -174,8 +174,6 @@ Class User {
 		return null;
 	}
 
-	
-
 	/**
 	 * Get Notification By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>

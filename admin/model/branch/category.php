@@ -110,20 +110,41 @@ class ModelBranchCategory extends Model {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
+				$category->setDeleted(true);
+			}
+		}
+		
+		$this->dm->flush();
+	}
+	/*public function deleteCategory( $data = array() ) {
+		if ( isset($data['id']) ) {
+			foreach ( $data['id'] as $id ) {
+				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
 
 				$this->dm->remove( $category );
 			}
 		}
 		
 		$this->dm->flush();
-	}
+	}*/
 	
-	public function getCategory( $action_id ) {
-		$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $action_id );
-		return $category;
+	public function getCategory( $category_id ) {
+		$query = array( 
+			'deleted' => false,
+			'id' => $category_id
+		);
+		return $this->dm->getRepository( 'Document\Branch\Category' )->findOneBy( $query );
 	}
 
 	public function getCategories( $data = array() ) {
+		$lCategories = $this->dm->getRepository('Document\Branch\Category')->findAll();
+
+		foreach ($lCategories as $oCategory) {
+			$oCategory->setDeleted(false);
+		}
+
+		$this->dm->flush();
+
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
 		}
@@ -134,12 +155,14 @@ class ModelBranchCategory extends Model {
 			$data['sort'] = 'order';
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )
-    		->limit( $data['limit'] )
-    		->skip( $data['start'] )
-    		->sort( $data['sort'] );
-    	
-    	return $query->getQuery()->execute();
+		$query = array(
+			'deleted' => false
+		);
+
+		return $this->dm->getRepository('Document\Branch\Category')->findBy( $query )
+					->limit( $data['limit'] )
+		    		->skip( $data['start'] )
+		    		->sort( $data['sort'] );
 	}
 
 	public function getAllCategories( $data = array() ) {

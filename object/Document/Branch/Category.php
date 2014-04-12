@@ -32,6 +32,15 @@ Class Category {
 	/** @MongoDB\Int */
 	private $order;
 
+	/** @MongoDB\Boolean */
+	private $deleted;
+
+	/** @MongoDB\PrePersist */
+    public function prePersist()
+    {
+        $this->deleted = false;
+    }
+
 	public function getId(){
 		return $this->id;
 	}
@@ -94,5 +103,13 @@ Class Category {
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function getDeleted() {
+		return $this->deleted;
+	}
+
+	public function setDeleted( $deleted ) {
+		$this->deleted = $deleted;
 	}
 }
