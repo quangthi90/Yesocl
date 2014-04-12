@@ -378,16 +378,18 @@
 			$(this).addClass('label-success').parent().find('input.primary').val('1');
 		});
 
+		var locations = {};
+		var suggestions = {};
 		this.$locationAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"cityid\"]').val('');
-				var locations = [];
 				return $.ajax({
 					type: 'Post',
 					url: that.$locationAutoComplete.parent().data('autocomplete') + query,
 					success: function (json) {
 						var parJSON = JSON.parse(json);
 						var suggestions = [];
+						locations = {};
 						$.each(parJSON, function (i, suggestTerm) {
 							locations[suggestTerm.name] = suggestTerm;
 							suggestions.push(suggestTerm.name);
@@ -416,7 +418,7 @@
 					}),
 					success: function (json) {
 						var parJSON = JSON.parse(json);
-						var suggestions = [];
+						suggestions = {};
 						$.each(parJSON, function (i, suggestTerm) {
 							industries[suggestTerm.name] = suggestTerm;
 							suggestions.push(suggestTerm.name);
