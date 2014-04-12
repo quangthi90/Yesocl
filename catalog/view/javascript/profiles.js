@@ -226,8 +226,6 @@
 		});
 	};
 
-	var industries = {};
-
 	function InfoForm($el){
 		this.$el					= $el;
 		this.url					= $el.data('url');
@@ -379,7 +377,6 @@
 		});
 
 		var locations = {};
-		var suggestions = {};
 		this.$locationAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"cityid\"]').val('');
@@ -406,10 +403,10 @@
 			}
 		});
 
+		var industries = {};
 		this.$industryAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"industryid\"]').val('');
-				var industries = [];
 				return $.ajax({
 					type: 'Post',
 					url: window.yRouting.generate('DataValueAutoComplete', {
@@ -418,7 +415,8 @@
 					}),
 					success: function (json) {
 						var parJSON = JSON.parse(json);
-						suggestions = {};
+						var suggestions = [];
+						industries = {};
 						$.each(parJSON, function (i, suggestTerm) {
 							industries[suggestTerm.name] = suggestTerm;
 							suggestions.push(suggestTerm.name);
