@@ -203,7 +203,7 @@ class ControllerAccountProfile extends Controller {
 
 		$aUser = $oUser->formatToCache();
 
-		if ( !$oLocation = $oUser->getMeta()->getLocation ){
+		if ( !$oLocation = $oUser->getMeta()->getLocation() ){
 			$oLocation = new Location();
 		}
 

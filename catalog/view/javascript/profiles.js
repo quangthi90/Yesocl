@@ -381,13 +381,13 @@
 		this.$locationAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"cityid\"]').val('');
+				var locations = [];
 				return $.ajax({
 					type: 'Post',
 					url: that.$locationAutoComplete.parent().data('autocomplete') + query,
 					success: function (json) {
 						var parJSON = JSON.parse(json);
 						var suggestions = [];
-						locations = {};
 						$.each(parJSON, function (i, suggestTerm) {
 							locations[suggestTerm.name] = suggestTerm;
 							suggestions.push(suggestTerm.name);
@@ -407,6 +407,7 @@
 		this.$industryAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"industryid\"]').val('');
+				var industries = [];
 				return $.ajax({
 					type: 'Post',
 					url: window.yRouting.generate('DataValueAutoComplete', {
@@ -416,7 +417,6 @@
 					success: function (json) {
 						var parJSON = JSON.parse(json);
 						var suggestions = [];
-						industries = {};
 						$.each(parJSON, function (i, suggestTerm) {
 							industries[suggestTerm.name] = suggestTerm;
 							suggestions.push(suggestTerm.name);
