@@ -64,7 +64,7 @@ function WatchListViewModel(options) {
 			    src: $(popupEle),
 			    type: 'inline'
 			},
-			modal: true,
+			modal: false,
 			callbacks:{
 				open: function(){
 					_initStockDatasource();

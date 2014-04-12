@@ -3444,9 +3444,15 @@ a.wall-link:hover {
 .chart-content .index-overview.up {
   color: green;
 }
+.chart-content .index-overview .index-date {
+  color: #555;
+  font-weight: bold;
+  font-size: 12px;
+  padding-left: 25px;
+}
 .chart-content .index-overview  li {
   display: inline-block;
-  line-height: 80px;
+  line-height: 65px;
 }
 .chart-content .index-overview .index-staus {
   font-size: 25px;
