@@ -760,6 +760,9 @@ class ModelUserUser extends Model {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
+				$oPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
+					'user.id' => $id
+				));
 
 				if ( $user ){
 					$this->load->model('tool/image');
@@ -768,6 +771,10 @@ class ModelUserUser extends Model {
 					$this->model_tool_cache->deleteObject( $user->getSlug(), $this->config->get('common')['type']['user'] );
 					
 					$this->dm->remove($user);
+				}
+
+				if ( $oPosts ){
+					$this->dm->remove($oPosts);
 				}
 			}
 		}
