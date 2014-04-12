@@ -13,6 +13,7 @@ class ControllerStockMarket extends Controller {
 		}
 
 		$this->load->model('stock/market');
+		$this->load->model('stock/exchange');
 
 		$lMarkets = $this->model_stock_market->getMarkets();
 
@@ -39,6 +40,8 @@ class ControllerStockMarket extends Controller {
 		$oStock = $oCurrMarket->getStockMarket();
 
 		$this->data['stock'] = $oStock->formatToCache();
+
+		$this->model_stock_exchange->getMaxMinPrice(52 * 7, $oStock);
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	
