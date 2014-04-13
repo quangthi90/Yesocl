@@ -318,11 +318,11 @@ class ModelUserUser extends Model {
 		// Slug
 		$slug = $this->url->create_slug( $data['user']['username'] );
 		
-		$oUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 
 		$arr_slugs = array_map(function($oUser){
 			return $oUser->getSlug();
-		}, $oUsers->toArray());
+		}, $lUsers->toArray());
 
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
@@ -679,11 +679,11 @@ class ModelUserUser extends Model {
 		if ( $data['user']['username'] != $oUser->getUsername() ){
 			$slug = $this->url->create_slug( $data['user']['username'] );
 		
-			$oUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+			$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 
 			$arr_slugs = array_map(function($oUser){
 				return $oUser->getSlug();
-			}, $oUsers->toArray());
+			}, $lUsers->toArray());
 
 			$this->load->model( 'tool/slug' );
 			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
@@ -764,13 +764,20 @@ class ModelUserUser extends Model {
 				if ( $oUser ){
 					$oUser->setDeleted( true );
 				}
+				$this->dm->flush();
+
+				// Delete solr
+				$query = $this->client->createUpdate();
+	            $query->removeDocument( $oUser );
+	            $this->client->execute($query);
 			}
 		}
-		$this->dm->flush();
 
 		return true;
 	}
+
 	// Delete User from database
+	// -- Not Delete -- Check again before delete
 	/*public function deleteUser( $data = array() ) {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
@@ -832,6 +839,8 @@ class ModelUserUser extends Model {
 		if ( isset($data['group_id']) ){
 			return $this->dm->getRepository( 'Document\User\User' )->findBy( array('group.id' => $data['group_id']) );
 		}
+
+		$query = array('deleted' => false);
 		
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
@@ -841,7 +850,7 @@ class ModelUserUser extends Model {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\User\User' )->findAll()
+		return $this->dm->getRepository( 'Document\User\User' )->findBy( $query )
 			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('created' => -1) );
 	}
 	
@@ -852,8 +861,10 @@ class ModelUserUser extends Model {
 	 * @return: int Total User
 	 */
 	public function getTotalUsers() {
-		$oUsers = $this->dm->getRepository( 'Document\User\User' )->findAll();
-		return count($oUsers);
+		$query = array('deleted' => false);
+
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( $query );
+		return $lUsers->count();
 	}
 	
 	/**
@@ -863,9 +874,11 @@ class ModelUserUser extends Model {
 	 * @return: boolean
 	 */
 	public function isExistEmail( $curr_user_id, $email ) {
-		$oUsers = $this->dm->getRepository( 'Document\User\User' )->findAll();
+		$query = array('deleted' => false);
+
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( $query );
 		
-		foreach ( $oUsers as $oUser ) {
+		foreach ( $lUsers as $oUser ) {
 			if ( $oUser->getId() == $curr_user_id ){
 				continue;
 			}
