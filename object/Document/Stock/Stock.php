@@ -49,6 +49,11 @@ Class Stock {
 	/** 
 	 * @MongoDB\EmbedOne(targetDocument="Exchange")
 	 */
+	private $preLastExchange;
+
+	/** 
+	 * @MongoDB\EmbedOne(targetDocument="Exchange")
+	 */
 	private $lastExchange;
 
 	/** @MongoDB\Boolean */
@@ -90,6 +95,13 @@ Class Stock {
 		return null;
 	}
 
+	/**
+	 * Calculate Max and Min price in a some day
+	 * 2014/04/13
+	 * Param:
+	 *	- Int iDay
+	 *	- Object system Doctrine systemDoctrine
+	 */
 	public function calculateRangePrice( $iDay, $systemDoctrine ){
         $oTimeLimit = $this->lastExchange->getCreated();
         date_sub($oTimeLimit, date_interval_create_from_date_string($iDay . ' days'));
@@ -163,6 +175,11 @@ Class Stock {
 
 	public function addExchange( Exchange $exchange ){
 		$this->exchanges[] = $exchange;
+
+		// Update Pre last Exchange
+		$this->preLastExchange = $this->lastExchange;
+
+		// Update last Exchange
 		$this->lastExchange = $exchange;
 		if ( $this->lastExchange->getClosePrice() >= $exchange->getClosePrice() ){
 			$this->isDown = true;
@@ -209,6 +226,14 @@ Class Stock {
 
 	public function getMeta(){
 		return $this->meta;
+	}
+
+	public function setPreLastExchange( $preLastExchange ){
+		$this->preLastExchange = $preLastExchange;
+	}
+
+	public function getPreLastExchange(){
+		return $this->preLastExchange;
 	}
 
 	public function setLastExchange( $lastExchange ){
