@@ -32,14 +32,14 @@
                                 </li>
                             </ul>
                             <div class="index-date">
-                                12/04/2014 20:55:10
+                                {{ stock.last_exchange.created|date('d/m/Y') }}
                             </div>
                         </div>
                         <div class="span6 index-values">
                             <div class="row-fluid">
                                 <div class="span6">
-                                    <label class="index-label">Day Range</label>
-                                    <span class="index-value">10,000.00 - 20,000.00</span>
+                                    <label class="index-label">12-Week Range</label>
+                                    <span class="index-value">{{ stock.range_price.84.min_price }} - {{ stock.range_price.84.max_price }}</span>
                                 </div>
                                 <div class="span6">
                                     <label class="index-label">Open</label>
@@ -49,7 +49,7 @@
                             <div class="row-fluid">
                                 <div class="span6">
                                     <label class="index-label">52-Week Range</label>
-                                    <span class="index-value">10,000.00 - 20,000.00</span>
+                                    <span class="index-value">{{ stock.range_price.364.min_price }} - {{ stock.range_price.364.max_price }}</span>
                                 </div>
                                 <div class="span6">
                                     <label class="index-label">Previous Closed</label>

@@ -40,8 +40,10 @@ class ControllerStockMarket extends Controller {
 		$oStock = $oCurrMarket->getStockMarket();
 
 		$this->data['stock'] = $oStock->formatToCache();
-
-		$this->model_stock_exchange->getMaxMinPrice(52 * 7, $oStock);
+		$this->data['stock']['range_price'] = array(
+			'84' => $oStock->getRangePriceByDay( 84, $this->dm ),
+			'364' => $oStock->getRangePriceByDay( 364, $this->dm )
+		);
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	

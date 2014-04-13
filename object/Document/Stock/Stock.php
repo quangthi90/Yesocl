@@ -43,6 +43,9 @@ Class Stock {
 	/** @MongoDB\ReferenceOne(targetDocument="Meta", mappedBy="stock") */
 	private $meta;
 
+	/** @MongoDB\Hash */
+	private $rangePrice = array();
+
 	/** 
 	 * @MongoDB\EmbedOne(targetDocument="Exchange")
 	 */
@@ -85,6 +88,47 @@ Class Stock {
 		}
 
 		return null;
+	}
+
+	public function calculateRangePrice( $iDay, $systemDoctrine ){
+        $oTimeLimit = $this->lastExchange->getCreated();
+        date_sub($oTimeLimit, date_interval_create_from_date_string($iDay . ' days'));
+        
+        $aExchanges = $this->exchanges->toArray();
+        $aExchanges = array_reverse($aExchanges);
+
+        $iMaxPrice = $this->lastExchange->getHighPrice();
+        $iMinPrice = $this->lastExchange->getLowPrice();
+        foreach ($aExchanges as $oExchange) {
+            if ( $oExchange->getCreated() < $oTimeLimit ){
+                break;
+            }
+
+            if ( $iMaxPrice < $oExchange->getHighPrice() ){
+            	$iMaxPrice = $oExchange->getHighPrice();
+            }
+
+            if ( $iMinPrice > $oExchange->getLowPrice() ){
+            	$iMinPrice = $oExchange->getLowPrice();
+            }
+        }
+
+        $this->rangePrice = array(
+        	$iDay => array(
+        		'max_price' => $iMaxPrice,
+        		'min_price' => $iMinPrice
+        	)
+        );
+
+        $systemDoctrine->flush();
+	}
+
+	public function getRangePriceByDay( $iDay, $systemDoctrine ){
+		if ( empty($this->rangePrice[$iDay]) ){
+			$this->calculateRangePrice( $iDay, $systemDoctrine );
+		}
+
+		return $this->rangePrice[$iDay];
 	}
 
 	/** @MongoDB\PrePersist */
@@ -189,5 +233,13 @@ Class Stock {
 
 	public function getCreated(){
 		return $this->created;
+	}
+
+	public function setRangePrice( $rangePrice ){
+		$this->rangePrice = $rangePrice;
+	}
+
+	public function getRangePrice(){
+		return $this->rangePrice;
 	}
 }
