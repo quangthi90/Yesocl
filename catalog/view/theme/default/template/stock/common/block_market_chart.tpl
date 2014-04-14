@@ -1,7 +1,7 @@
 {% block stock_common_block_market_chart %}
-<div class="feed-block stock-block" id="st-market">
+<div class="feed-block stock-block" id="st-market" data-bind="with: $root.chart">
     <div class="block-header">
-        <h3 class="block-title">Market <i class="icon-caret-right"></i></h3> 
+        <h3 class="block-title">{% trans %}Market{% endtrans %} <i class="icon-caret-right"></i></h3> 
     </div>
     <div class="block-content">
         <ul class="nav nav-tabs market-list">
@@ -26,9 +26,9 @@
                                     {{ stock.last_exchange.close_price }}
                                 </li>
                                 <li class="index-status-mount">
-                                    <span class="i-top"> + 100</span> 
+                                    <span class="i-top">{{ stock.exchange_price }}</span> 
                                     <br />
-                                    <span class="i-bottom"> + 0.80%</span>
+                                    <span class="i-bottom">{{ stock.exchange_percent }}%</span>
                                 </li>
                             </ul>
                             <div class="index-date">
@@ -53,7 +53,7 @@
                                 </div>
                                 <div class="span6">
                                     <label class="index-label">Previous Closed</label>
-                                    <span class="index-value">{{ stock.last_exchange.close_price }} </span>
+                                    <span class="index-value">{{ stock.pre_last_exchange.close_price }} </span>
                                 </div>
                             </div>
                         </div>

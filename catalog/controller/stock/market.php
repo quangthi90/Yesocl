@@ -35,7 +35,7 @@ class ControllerStockMarket extends Controller {
 
 		$oCurrMarket = $aMarkets[0];
 
-		$this->data['curr_market'] = $oCurrMarket->formatToCache();
+		$this->data['curr_market_id'] = $oCurrMarket->getId();
 
 		$oStock = $oCurrMarket->getStockMarket();
 
@@ -44,7 +44,7 @@ class ControllerStockMarket extends Controller {
 			'84' => $oStock->getRangePriceByDay( 84, $this->dm ),
 			'364' => $oStock->getRangePriceByDay( 364, $this->dm )
 		);
-
+// var_dump($this->data['stock']['last_exchange']['created']); exit;
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	
 		

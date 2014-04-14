@@ -71,6 +71,9 @@ Class Stock {
 			'name' => $this->name,
 			'code' => $this->code,
 			'is_down' => $this->isDown,
+			'exchange_price' => round($this->lastExchange->getClosePrice() - $this->preLastExchange->getClosePrice(), 2),
+			'exchange_percent' => round(($this->lastExchange->getClosePrice() - $this->preLastExchange->getClosePrice()) / $this->preLastExchange->getClosePrice(), 4),
+			'pre_last_exchange' => $this->preLastExchange->formatToCache(),
 			'last_exchange' => $this->lastExchange->formatToCache()
 		);
 	}
@@ -102,10 +105,9 @@ Class Stock {
 	 *	- Int iDay
 	 *	- Object system Doctrine systemDoctrine
 	 */
-	public function calculateRangePrice( $iDay, $systemDoctrine ){
-        $oTimeLimit = $this->lastExchange->getCreated();
+	public function calculateRangePrice( $iDay, $systemDoctrine = null ){
+        $oTimeLimit = clone $this->lastExchange->getCreated();
         date_sub($oTimeLimit, date_interval_create_from_date_string($iDay . ' days'));
-        
         $aExchanges = $this->exchanges->toArray();
         $aExchanges = array_reverse($aExchanges);
 
@@ -132,7 +134,9 @@ Class Stock {
         	)
         );
 
-        $systemDoctrine->flush();
+        if ( $systemDoctrine != null ){
+        	$systemDoctrine->flush();
+        }
 	}
 
 	public function getRangePriceByDay( $iDay, $systemDoctrine ){
@@ -147,6 +151,17 @@ Class Stock {
     public function prePersist()
     {
     	$this->created = new \DateTime();
+    	foreach ( $this->rangePrice as $iDay => $aRange ) {
+    		$this->calculateRangePrice( $iDay );
+    	}
+    }
+
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+    	foreach ( $this->rangePrice as $iDay => $aRange ) {
+    		$this->calculateRangePrice( $iDay );
+    	}
     }
 
 	public function getId() {
@@ -175,16 +190,17 @@ Class Stock {
 
 	public function addExchange( Exchange $exchange ){
 		$this->exchanges[] = $exchange;
+		if ( $exchange->getCreated() > $this->lastExchange->getCreated() ){
+			// Update Pre last Exchange
+			$this->preLastExchange = $this->lastExchange;
 
-		// Update Pre last Exchange
-		$this->preLastExchange = $this->lastExchange;
-
-		// Update last Exchange
-		$this->lastExchange = $exchange;
-		if ( $this->lastExchange->getClosePrice() >= $exchange->getClosePrice() ){
-			$this->isDown = true;
-		}else{
-			$this->isDown = false;
+			// Update last Exchange
+			$this->lastExchange = $exchange;
+			if ( $this->lastExchange->getClosePrice() >= $exchange->getClosePrice() ){
+				$this->isDown = true;
+			}else{
+				$this->isDown = false;
+			}
 		}
 	}
 

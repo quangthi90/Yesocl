@@ -24,7 +24,11 @@
 {% endblock %}
 
 {% block javascript %}
+	<script type="text/javascript">
+		var _markets = '{{ markets|json_encode()|raw }}';
+		window.yMarkets = JSON.parse(_markets);
+	</script>
 	{{ block('stock_common_block_watch_list_javascript') }}
-	<script type="text/javascript" src="{{ asset_js('ko-stock.js') }}"></script>
+	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 
 {% endblock %}
