@@ -27,6 +27,9 @@
 	<script type="text/javascript">
 		var _markets = '{{ markets|json_encode()|raw }}';
 		window.yMarkets = JSON.parse(_markets);
+		var _stock = '{{ stock|json_encode()|raw }}';
+		window.yStock = JSON.parse(_stock);
+		window.yCurrMarketId = '{{ curr_market_id }}'
 	</script>
 	{{ block('stock_common_block_watch_list_javascript') }}
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>

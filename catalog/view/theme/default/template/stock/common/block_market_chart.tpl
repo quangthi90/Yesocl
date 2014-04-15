@@ -1,59 +1,80 @@
 {% block stock_common_block_market_chart %}
-<div class="feed-block stock-block" id="st-market" data-bind="with: $root.chart">
+<div class="feed-block stock-block" id="st-market" data-bind="with: $root.chartModel">
     <div class="block-header">
         <h3 class="block-title">{% trans %}Market{% endtrans %} <i class="icon-caret-right"></i></h3> 
     </div>
     <div class="block-content">
-        <ul class="nav nav-tabs market-list">
-        {% for market in markets %}
-          <li {% if curr_market.id == market.id %}class="active"{% endif %}><a href="{{ path('StockMarket', {market_code: market.code}) }}">{{ market.code }}</a></li>
-        {% endfor %}
-        </ul>        
-        <div class="tab-content">            
-            <div class="tab-pane active" id="market-down">
+        <ul class="nav nav-tabs market-list" data-bind="foreach: markets">
+          <!-- ko if: $parent.currMarketId() == $data.id() -->
+          <li class="active"><a href="#" data-bind="text: $data.name, click: $data.marketDetailClick"></a></li>
+          <!-- /ko -->
+          <!-- ko if: $parent.currMarketId() != $data.id() -->
+          <li><a href="#" data-bind="text: $data.name, click: $data.marketDetailClick"></a></li>
+          <!-- /ko -->
+        </ul>
+        <div class="tab-content" data-bind="with: stock">
+            <div class="tab-pane active">
                 <div class="chart-content">
                     <div class="row-fluid">
                         <div class="span6 index-overview up">
                             <ul>
                                 <li class="index-staus">
-                                    {% if stock.is_down == true %}
+                                    <!-- ko if: $data.is_down() -->
                                     <i class="icon-caret-down"></i>
-                                    {% else %}
+                                    <!-- /ko -->
+                                    <!-- ko if: !$data.is_down() -->
                                     <i class="icon-caret-up"></i>
-                                    {% endif %}
+                                    <!-- /ko -->
                                 </li>
-                                <li class="index-mount">
-                                    {{ stock.last_exchange.close_price }}
-                                </li>
+                                <li class="index-mount" data-bind="with: $data.last_exchange"><span data-bind="text: $data.close_price"></span></li>
                                 <li class="index-status-mount">
-                                    <span class="i-top">{{ stock.exchange_price }}</span> 
+                                    <span class="i-top">
+                                        <!-- ko if: $data.exchange_price() > 0 -->
+                                        +
+                                        <!-- /ko -->
+                                        <span data-bind="text: $data.exchange_price"></span>
+                                    </span> 
                                     <br />
-                                    <span class="i-bottom">{{ stock.exchange_percent }}%</span>
+                                    <span class="i-bottom">
+                                        <!-- ko if: $data.exchange_percent() > 0 -->
+                                        +
+                                        <!-- /ko -->
+                                        <span data-bind="text: $data.exchange_percent"></span>
+                                        %
+                                    </span>
                                 </li>
                             </ul>
                             <div class="index-date">
-                                {{ stock.last_exchange.created|date('d/m/Y') }}
+                                {#{ stock.last_exchange.created|date('d/m/Y') }#}
                             </div>
                         </div>
                         <div class="span6 index-values">
                             <div class="row-fluid">
                                 <div class="span6">
-                                    <label class="index-label">12-Week Range</label>
-                                    <span class="index-value">{{ stock.range_price.84.min_price }} - {{ stock.range_price.84.max_price }}</span>
+                                    <label class="index-label">12-{% trans %}Week{% endtrans %} {% trans %}Range{% endtrans %}</label>
+                                    <span class="index-value">
+                                        <span data-bind="text: $data.range_price[84].min_price"></span>
+                                         - 
+                                        <span data-bind="text: $data.range_price[84].max_price"></span>
+                                    </span>
                                 </div>
-                                <div class="span6">
-                                    <label class="index-label">Open</label>
-                                    <span class="index-value">{{ stock.last_exchange.open_price }} </span>
+                                <div class="span6" data-bind="with: $data.last_exchange">
+                                    <label class="index-label">{% trans %}Open{% endtrans %}</label>
+                                    <span class="index-value" data-bind="text: $data.open_price"></span>
                                 </div>
                             </div>
                             <div class="row-fluid">
                                 <div class="span6">
-                                    <label class="index-label">52-Week Range</label>
-                                    <span class="index-value">{{ stock.range_price.364.min_price }} - {{ stock.range_price.364.max_price }}</span>
+                                    <label class="index-label">52-{% trans %}Week{% endtrans %} {% trans %}Range{% endtrans %}</label>
+                                    <span class="index-value">
+                                        <span data-bind="text: $data.range_price[364].min_price"></span>
+                                         - 
+                                        <span data-bind="text: $data.range_price[364].max_price"></span>
+                                    </span>
                                 </div>
-                                <div class="span6">
-                                    <label class="index-label">Previous Closed</label>
-                                    <span class="index-value">{{ stock.pre_last_exchange.close_price }} </span>
+                                <div class="span6" data-bind="with: $data.pre_last_exchange">
+                                    <label class="index-label">{% trans %}Previous Closed{% endtrans %}</label>
+                                    <span class="index-value" data-bind="text: $data.close_price"></span>
                                 </div>
                             </div>
                         </div>
@@ -61,14 +82,8 @@
                     <div class="chart-area">
                         <img src="image/chart-demo.jpg" alt="" /> 
                     </div>                    
-                </div>                            
+                </div>
             </div>
-            <div class="tab-pane" id="market-nasdaq">
-                NASDAQ
-            </div>
-            <div class="tab-pane" id="market-sp500">
-                S&P 500
-            </div>                             
         </div>
         <div class="chart-options">
             <div class="row-fluid">

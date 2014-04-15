@@ -3,6 +3,14 @@
 function ChartViewModel (options) {
 	'use strict';
 	var self = this;
+
+	self.markets = ko.observableArray();
+	for ( var key in window.yMarkets ){
+		self.markets.push( new MarketModel(window.yMarkets[key]) );
+	}
+	self.currMarketId = ko.observable(window.yCurrMarketId);
+	self.stock = ko.observable( new StockModel(window.yStock) );
+	// console.log(window.yStock);
 }
 
 function WatchListViewModel(options) {
