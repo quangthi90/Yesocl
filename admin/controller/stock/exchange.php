@@ -209,6 +209,7 @@ class ControllerStockExchange extends Controller {
 			$key = 0;
 			foreach ( $aExchanges as $oExchange ){
 				if ( $key < $aData['start'] ){
+					$key++;
 					continue;
 				}
 
