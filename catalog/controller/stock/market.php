@@ -7,6 +7,7 @@ class ControllerStockMarket extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		// Market Code
 		$sMaketCode = '';
 		if ( !empty($this->request->get['market_code']) ) {
 			$sMaketCode = $this->request->get['market_code'];
@@ -14,7 +15,10 @@ class ControllerStockMarket extends Controller {
 
 		$this->load->model('stock/market');
 		$this->load->model('stock/exchange');
+		$this->load->model('user/setting');
+		$this->load->model('stock/stock');
 
+		// All Markets
 		$lMarkets = $this->model_stock_market->getMarkets();
 
 		if ( !$lMarkets ) {
@@ -33,10 +37,12 @@ class ControllerStockMarket extends Controller {
 			$this->data['markets'][] = $oMarket->formatToCache();
 		}
 
+		// Current Market
 		$oCurrMarket = $aMarkets[0];
 
 		$this->data['curr_market_id'] = $oCurrMarket->getId();
 
+		// Stock info of Market
 		$oStock = $oCurrMarket->getStockMarket();
 
 		$this->data['stock'] = $oStock->formatToCache();
@@ -44,7 +50,29 @@ class ControllerStockMarket extends Controller {
 			'84' => $oStock->getRangePriceByDay( 84, $this->dm ),
 			'364' => $oStock->getRangePriceByDay( 364, $this->dm )
 		);
-// var_dump($this->data['stock']['last_exchange']['created']); exit;
+
+		// Watch list - User Stocks
+		$oLoggedUser = $this->customer->getUser();
+		$oSetting = $this->model_user_setting->getSettingByUser( $oLoggedUser->getId() );
+		$lStocks = array();
+		if ( $oSetting ){
+			$lStocks = $oSetting->getStocks();
+		}
+		$this->data['watch_list'] = array();
+		foreach ( $lStocks as $oStock ) {
+			$this->data['watch_list'][] = $oStock->formatToCache();
+		}
+
+		// Stocks Market
+		$lStocks = $this->model_stock_stock->getAllStocks(array(
+			'market.id' => $oCurrMarket->getId()
+		));
+
+		$this->data['stocks'] = array();
+		foreach ( $lStocks as $oStock ) {
+			$this->data['stocks'][] = $oStock->formatToCache();
+		}
+
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	
 		

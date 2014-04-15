@@ -160,19 +160,10 @@ function WatchListViewModel(options) {
 		//		//Parse data and push to watch list array
 		//	}
 		//});
-	
-		for (var i = 0; i < 9; i++) {
-			self.watchList.push(
-				new WatchListItem({ 
-					stockCode: 'MAD', 
-					stockName: 'Demo', 
-					stockIndexValue : 100, 
-					stockBottomIndexValue: '0.3 %', 
-					stockTopIndexValue: '+ 100',
-					isNew: false
-				})
-			);
-		};
+
+		for ( var key in window.yWatchList ){
+			self.watchList.push( new StockModel(window.yWatchList[key]) );
+		}
 	}
 
 	function _loadStartUp() {
@@ -199,6 +190,10 @@ function WatchListViewModel(options) {
 		//});
 
 		//Samples:
+		for ( var key in window.yStocks ){
+			self.cacheStockDatasource.push( new StockModel(window.yStocks[key]) );
+		}
+
 		self.cacheStockDatasource([
 			new WatchListItem ({
 				stockCode : 'MAD',

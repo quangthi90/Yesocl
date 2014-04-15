@@ -10,25 +10,25 @@
 	        	<a href="javascript: void()" data-bind="click: $parent.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
-	                    <a href="#" class="stock-code" data-bind="text: $data.stockCode"></a>
+	                    <a href="#" class="stock-code" data-bind="text: $data.code"></a>
 	                </div>
 	                <div class="span6">
-	                    <a href="#" class="stock-name" data-bind="text: $data.stockName"></a>
+	                    <a href="#" class="stock-name" data-bind="text: $data.name"></a>
 	                </div>
 	            </div>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon">
-	                        	<i data-bind="css : { 'icon-caret-up' : $data.stockIndexValue() > 0, 'icon-caret-down' : $data.stockIndexValue() <= 0 }"></i>
+	                        	<i data-bind="css : { 'icon-caret-up' : !$data.is_down(), 'icon-caret-down' : $data.is_down() }"></i>
                         	</span>
-	                        <span class="index-mount" data-bind="text: $data.stockIndexValue"></span>
+	                        <span class="index-mount" data-bind="text: $data.last_exchange.close_price"></span>
 	                    </div>
 	                </div>
 	                <div class="span6">
 	                    <div class="index-status-mount">
-	                        <span class="i-top" data-bind="text: $data.stockTopIndexValue"></span> <br />
-	                        <span class="i-bottom" data-bind="text: $data.stockBottomIndexValue"></span>
+	                        <span class="i-top" data-bind="text: $data.exchange_price"></span> <br />
+	                        <span class="i-bottom" data-bind="text: $data.exchange_percent"></span>
 	                    </div>
 	                </div>
 	            </div>
@@ -55,13 +55,13 @@
 			    		<!-- ko if: addedWatchList().length > 0 -->
 			    		<ul data-bind="foreach: addedWatchList">
 			    			<li class="wl-selected-item">
-			    				<span class="name" data-bind="text: $data.stockCode"></span>
+			    				<span class="name" data-bind="text: $data.code"></span>
 			    				<a href="#" data-bind="click: $parent.removeStock"><i class="icon-remove"></i></a>
 			    			</li>
 			    		</ul>
 			    		<!-- /ko -->
 			    		<!-- ko if: addedWatchList().length == 0 -->
-		    			<span>No stock choosen</span>
+		    			<span>{% trans %}No stock choosen{% endtrans %}</span>
 			    		<!-- /ko -->
 			    	</div>
 			    	<div class="wl-selected-control">
@@ -74,10 +74,10 @@
 				    	    <table class="table table-hover">
 						    	<tbody data-bind="foreach: suggestWatchList">
 						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stockCode() == $parent.defaultSelectedStock().stockCode() }">
-						    			<td data-bind="text: $data.stockCode"></td>
-						    			<td data-bind="text: $data.stockName"></td>
-						    			<td data-bind="text: $data.typeName"></td>
-						    			<td data-bind="text: $data.marketName"></td>
+						    			<td data-bind="text: $data.code"></td>
+						    			<td data-bind="text: $data.name"></td>
+						    			{#<td data-bind="text: $data.typeName"></td>
+						    			<td data-bind="text: $data.marketName"></td>#}
 						    		</tr>
 						    	</tbody>
 						    </table>

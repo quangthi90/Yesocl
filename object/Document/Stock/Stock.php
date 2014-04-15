@@ -62,6 +62,9 @@ Class Stock {
 	/** @MongoDB\Boolean */
 	private $status = true;
 
+	/** @MongoDB\Boolean */
+	private $deleted;
+
 	/** @MongoDB\Date */
 	private $created;
 
@@ -151,6 +154,7 @@ Class Stock {
     public function prePersist()
     {
     	$this->created = new \DateTime();
+    	$this->deleted = false;
     	foreach ( $this->rangePrice as $iDay => $aRange ) {
     		$this->calculateRangePrice( $iDay );
     	}
@@ -282,5 +286,13 @@ Class Stock {
 
 	public function getRangePrice(){
 		return $this->rangePrice;
+	}
+
+	public function setDeleted( $deleted ){
+		$this->deleted = $deleted;
+	}
+
+	public function getDeleted(){
+		return $this->deleted;
 	}
 }

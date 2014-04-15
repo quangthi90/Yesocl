@@ -25,11 +25,24 @@
 
 {% block javascript %}
 	<script type="text/javascript">
+		// Market list
 		var _markets = '{{ markets|json_encode()|raw }}';
 		window.yMarkets = JSON.parse(_markets);
+
+		// Stock info of current Market
 		var _stock = '{{ stock|json_encode()|raw }}';
 		window.yStock = JSON.parse(_stock);
-		window.yCurrMarketId = '{{ curr_market_id }}'
+
+		// Current Market ID
+		window.yCurrMarketId = '{{ curr_market_id }}';
+
+		// Stock Watch list of current User
+		var _watchList = '{{ watch_list|json_encode()|raw }}';
+		window.yWatchList = JSON.parse(_watchList);
+
+		// List Stocks of current Market
+		var _stocks = '{{ stocks|json_encode()|raw }}';
+		window.yStocks = JSON.parse(_stocks);
 	</script>
 	{{ block('stock_common_block_watch_list_javascript') }}
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>

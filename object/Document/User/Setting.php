@@ -14,6 +14,9 @@ Class Setting {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
     private $user;
 
+    /** @MongoDB\ReferenceMany(targetDocument="Document\Stock\Stock") */
+    private $stocks = array();
+
 	public function getId() {
 		return $this->id;
 	}
@@ -24,5 +27,17 @@ Class Setting {
 
 	public function getUser(){
 		return $this->user;
+	}
+
+	public function addStock( $stock ){
+		$this->stocks[] = $stock;
+	}
+
+	public function setStocks( $stocks ){
+		$this->stocks = $stocks;
+	}
+
+	public function getStocks(){
+		return $this->stocks;
 	}
 }

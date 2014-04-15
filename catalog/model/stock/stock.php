@@ -3,7 +3,9 @@ use Document\Stock\Stock;
 
 class ModelStockStock extends Model {
 	public function getStocks( $aData = array() ) {
-		if ( empty($aData['start']) ) {
+        $query = array('deleted' => false);
+
+        if ( empty($aData['start']) ) {
     		$aData['start'] = 0;
     	}
 
@@ -17,11 +19,31 @@ class ModelStockStock extends Model {
 
         if ( empty($aData['order']) ){
             $aData['order'] = 1;
+        }
     		
-    	return $this->dm->getRepository('Document\Stock\Stock')->findAll()
+    	return $this->dm->getRepository('Document\Stock\Stock')->findBy($query)
             ->skip( $aData['start'] )
             ->limit( $aData['limit'] )
-            ->sort( $aData['sort'] => $aData['order'] );
+            ->sort( array($aData['sort'] => $aData['order']) );
 	}
+
+    public function getAllStocks( $aData = array() ) {
+        $query = array('deleted' => false);
+
+        if ( !empty($aData['market_id']) ){
+            $query['market.id'] = $aData['market_id'];
+        }
+
+        if ( empty($aData['sort']) ) {
+            $aData['sort'] = 'code';
+        }
+
+        if ( empty($aData['order']) ){
+            $aData['order'] = 1;
+        }
+            
+        return $this->dm->getRepository('Document\Stock\Stock')->findBy($query)
+            ->sort( array($aData['sort'] => $aData['order']) );
+    }
 }
 ?>
