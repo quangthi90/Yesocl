@@ -177,6 +177,8 @@ function WatchListViewModel(options) {
 		self.isLoading(false);
 	}
 
+	console.log(window.yStocks.length);
+
 	function _initStockDatasource() {
 		self.isInitDatasource(true);
 
@@ -193,109 +195,6 @@ function WatchListViewModel(options) {
 		for ( var key in window.yStocks ){
 			self.cacheStockDatasource.push( new StockModel(window.yStocks[key]) );
 		}
-
-		self.cacheStockDatasource([
-			new WatchListItem ({
-				stockCode : 'MAD',
-				stockName : 'Stock MAD',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100,
-				stockBottomIndexValue: '0.3 %',
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'AUH',
-				stockName : 'Stock AUH',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100,
-				stockBottomIndexValue: '0.3 %',
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'DEF',
-				stockName : 'Stock DEF',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100,
-				stockBottomIndexValue: '0.3 %',
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'DFC',
-				stockName : 'Stock DFC',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100,
-				stockBottomIndexValue: '0.3 %',
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'EFA',
-				stockName : 'Stock EFA',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100,
-				stockBottomIndexValue: '0.3 %',
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'AFE',
-				stockName : 'Stock AFE',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100, 
-				stockBottomIndexValue: '0.3 %', 
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'PDF',
-				stockName : 'Stock PDF',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100, 
-				stockBottomIndexValue: '0.3 %', 
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'EFD',
-				stockName : 'Stock EFA',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100, 
-				stockBottomIndexValue: '0.3 %', 
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'RTR',
-				stockName : 'Stock RTR',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100, 
-				stockBottomIndexValue: '0.3 %', 
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			}),
-			new WatchListItem ({
-				stockCode : 'AFR',
-				stockName : 'Stock AFR',
-				typeName : 'Stock',
-				marketName : 'VNIndex',
-				stockIndexValue : 100, 
-				stockBottomIndexValue: '0.3 %', 
-				stockTopIndexValue: '+ 100',
-				isNew: false
-			})
-		]);
 
 		//Remove stock which already added:
 		ko.utils.arrayForEach(self.cacheStockDatasource(), function(st){

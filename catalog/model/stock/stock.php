@@ -28,7 +28,7 @@ class ModelStockStock extends Model {
 	}
 
     public function getAllStocks( $aData = array() ) {
-        $query = array('deleted' => false);
+         $query = array('deleted' => false);
 
         if ( !empty($aData['market_id']) ){
             $query['market.id'] = $aData['market_id'];

@@ -77,7 +77,8 @@ Class Stock {
 			'exchange_price' => round($this->lastExchange->getClosePrice() - $this->preLastExchange->getClosePrice(), 2),
 			'exchange_percent' => round(($this->lastExchange->getClosePrice() - $this->preLastExchange->getClosePrice()) / $this->preLastExchange->getClosePrice(), 4),
 			'pre_last_exchange' => $this->preLastExchange->formatToCache(),
-			'last_exchange' => $this->lastExchange->formatToCache()
+			'last_exchange' => $this->lastExchange->formatToCache(),
+			'market' => $this->market->formatToCache()
 		);
 	}
 
@@ -194,7 +195,8 @@ Class Stock {
 
 	public function addExchange( Exchange $exchange ){
 		$this->exchanges[] = $exchange;
-		if ( $exchange->getCreated() > $this->lastExchange->getCreated() ){
+		// var_dump($exchange->getCreated()); print("<br>");
+		if ( !$this->lastExchange || $exchange->getCreated() > $this->lastExchange->getCreated() ){
 			// Update Pre last Exchange
 			$this->preLastExchange = $this->lastExchange;
 

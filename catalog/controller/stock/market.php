@@ -63,16 +63,6 @@ class ControllerStockMarket extends Controller {
 			$this->data['watch_list'][] = $oStock->formatToCache();
 		}
 
-		// Stocks Market
-		$lStocks = $this->model_stock_stock->getAllStocks(array(
-			'market.id' => $oCurrMarket->getId()
-		));
-
-		$this->data['stocks'] = array();
-		foreach ( $lStocks as $oStock ) {
-			$this->data['stocks'][] = $oStock->formatToCache();
-		}
-
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	
 		
