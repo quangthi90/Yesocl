@@ -76,8 +76,7 @@
 						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stock.code() == $parent.defaultSelectedStock().stock.code() }">
 						    			<td data-bind="text: $data.stock.code"></td>
 						    			<td data-bind="text: $data.stock.name"></td>
-						    			{#<td data-bind="text: $data.typeName"></td>
-						    			<td data-bind="text: $data.marketName"></td>#}
+						    			<td data-bind="text: $data.stock.market.name"></td>
 						    		</tr>
 						    	</tbody>
 						    </table>

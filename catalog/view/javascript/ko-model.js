@@ -36,9 +36,9 @@ function StockModel(data) {
 			max_price: ko.observable('')
 		}
 	};
-	that.pre_last_exchange = ko.observable( new ExchangeModel(data.pre_last_exchange) );
-	that.last_exchange = ko.observable( new ExchangeModel(data.last_exchange) );
-	that.market = ko.observable( new MarketModel(data.market) );
+	that.pre_last_exchange = new ExchangeModel(data.pre_last_exchange);
+	that.last_exchange = new ExchangeModel(data.last_exchange);
+	that.market = new MarketModel(data.market);
 
 	ko.mapping.fromJS(data, {}, this);
 }
