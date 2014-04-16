@@ -156,7 +156,11 @@ class ModelUserUser extends Model {
 		$aUser = $this->model_tool_cache->getObject( $sUserSlug, $sUserType );
 
 		if ( !$aUser ){
-			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+			$query = array(
+				'deleted' => false,
+				'slug' => $sUserSlug
+			);
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBy( $query );
 			
 			if ( !$oUser ){
 				return null;
@@ -171,37 +175,37 @@ class ModelUserUser extends Model {
 	}
 
 	public function getUserFull( $aData = array() ){
+		$query = array('deleted' => false);
+
 		if ( !empty($aData['user_id']) ){
-			return $this->dm->getRepository('Document\User\User')->find( $aData['user_id'] );
+			$query['id'] = $aData['user_id'];
+		}elseif ( !empty($aData['user_slug']) ){
+			$query['slug'] = $aData['user_slug'];
+		}elseif ( !empty($aData['email']) ){
+			$query['emails.email'] = $aData['email'];
+		}else{
+			return null;
 		}
 
-		if ( !empty($aData['user_slug']) ){
-			return $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
-		}
-
-		if ( !empty($aData['email']) ){
-			return $this->dm->getRepository('Document\User\User')->findOneBy( array(
-				'emails.email' => $aData['email']
-			));
-		}
-
-		return null;
+		return $this->dm->getRepository('Document\User\User')->findOneBy( $query );
 	}
 
 	public function getUsers( $aData = array() ){
 		if ( !empty($aData['user_ids']) ){
 			return $this->dm->getRepository('Document\User\User')->findBy(array(
+				'deleted' => false,
 				'id' => array('$in' => $aData['user_ids'])
 			));
 		}
-
-		if ( !empty($aData['email']))
 
 		return null;
 	}
 
 	public function isExistEmail( $oEmail, $idUser = '' ) {
-		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 'emails.email' => $oEmail ) );
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 
+			'deleted' => false,
+			'emails.email' => $oEmail 
+		));
 		
 		foreach ( $lUsers as $oUser ) {
 			if ( $oUser->getId() == $idUser ){
@@ -216,6 +220,7 @@ class ModelUserUser extends Model {
 
 	public function editPassword($oEmail, $sPassword) {
 		$oUser = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'deleted' => false,
 			'emails.email' => $oEmail
 		));
 
@@ -236,6 +241,7 @@ class ModelUserUser extends Model {
 
 	public function getTotalCustomersByEmail($oEmail) {
 		$query = $this->dm->getRepository('Document\User\User')->findBy(array(
+			'deleted' => false,
 			'emails.email' => $oEmail
 		));
 
@@ -244,6 +250,7 @@ class ModelUserUser extends Model {
 
 	public function active( $sToken ){
 		$oUser = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+			'deleted' => false,
 			'token' => $sToken
 		));
 
