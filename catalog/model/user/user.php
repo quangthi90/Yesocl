@@ -195,6 +195,8 @@ class ModelUserUser extends Model {
 			));
 		}
 
+		if ( !empty($aData['email']))
+
 		return null;
 	}
 
