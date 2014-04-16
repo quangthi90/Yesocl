@@ -71,7 +71,7 @@ class ControllerAccountWall extends Controller {
 
 			$oUser = $oPost->getUser();
 
-			if ( $oCurrUser->getId() == $oLoggedUser->getId() || $oLoggedUser->getId() == $oUser->getId() ){
+			if ( $oLoggedUser && ($oCurrUser->getId() == $oLoggedUser->getId() || $oLoggedUser->getId() == $oUser->getId()) ){
 				$aPost['is_del'] = true;
 			}else{
 				$aPost['is_del'] = false;

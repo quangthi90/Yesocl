@@ -9,6 +9,7 @@
                 </a>
                 <a href="{{ path('WallPage', {user_slug: user.slug}) }}" class="user_info_name"><i class="icon-{% if user.gender == 1 %}male{% else %}female{% endif %}"></i> {{ user.username }}</a>
                 <div class="user_relationship">
+                {% if is_logged() == true %}
                     {% set fr_status = user.fr_status %}
                     {% set fl_status = user.fl_status %}
                     {{ block('common_user_block_user_button') }}
@@ -16,6 +17,7 @@
                     {#<a href="#" class="btn btn-yes">
                         <i class="icon-share-alt"></i> {% trans %}Message{% endtrans %}
                     </a>#}
+                {% endif %}
                 </div>                    
             </div>
             <ul class="user_actions">
