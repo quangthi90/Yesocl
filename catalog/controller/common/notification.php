@@ -74,10 +74,15 @@ class ControllerCommonNotification extends Controller {
 
 				if ( $oNotification->getObjectId() != $oPost->getId() ){
 					$oComment = $oPost->getCommentById( $oNotification->getObjectId() );
-					if ( !$oComment ){
-						continue;
+					if ( $oComment ){
+						$sTitle = html_entity_decode($oComment->getContent());
+					}else{
+						if ( $oPost->getTitle() == null ){
+							$sTitle = html_entity_decode($oPost->getContent());
+						}else{
+							$sTitle = $oPost->getTitle();
+						}
 					}
-					$sTitle = html_entity_decode($oComment->getContent());
 				}else{
 					if ( $oPost->getTitle() == null ){
 						$sTitle = html_entity_decode($oPost->getContent());
