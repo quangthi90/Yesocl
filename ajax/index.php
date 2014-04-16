@@ -32,6 +32,18 @@ $config->load( 'route' );
 $config->load( 'ignore' );
 $config->load( 'friend' );
 
+// Doctrine
+require_once(DIR_DATABASE . 'doctrine.php');
+$db = new Doctrine($registry);
+$registry->set('db', $db);
+$registry->set('dm', $db->getDm());
+$registry->set('client', $db->getClient());
+
+// Customer
+require_once(DIR_SYSTEM . 'library/customer.php');
+$customer = new Customer($registry);
+$registry->set('customer', $customer);
+
 // Log 
 $log = new Log($config->get('config_error_filename'));
 $registry->set('log', $log);

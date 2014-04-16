@@ -6,8 +6,8 @@
 	<div class="block-content">
 	    <ul class="watchlist-items" data-bind="foreach: watchList">
 	    	<!-- ko if: $data.isNew() == false -->
-	        <li class="wl-item">
-	        	<a href="javascript: void()" data-bind="click: $parent.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
+	        <li class="wl-item" data-bind="with: $data.stock">
+	        	<a href="javascript: void()" data-bind="click: $parent(1).removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <a href="#" class="stock-code" data-bind="text: $data.code"></a>
@@ -73,9 +73,9 @@
 					    	<!-- ko if: suggestWatchList().length > 0 -->
 				    	    <table class="table table-hover">
 						    	<tbody data-bind="foreach: suggestWatchList">
-						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stockCode() == $parent.defaultSelectedStock().stockCode() }">
-						    			<td data-bind="text: $data.code"></td>
-						    			<td data-bind="text: $data.name"></td>
+						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stock.code() == $parent.defaultSelectedStock().stock.code() }">
+						    			<td data-bind="text: $data.stock.code"></td>
+						    			<td data-bind="text: $data.stock.name"></td>
 						    			{#<td data-bind="text: $data.typeName"></td>
 						    			<td data-bind="text: $data.marketName"></td>#}
 						    		</tr>

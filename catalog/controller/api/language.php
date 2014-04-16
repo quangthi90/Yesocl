@@ -1,5 +1,5 @@
 <?php
-class ControllerAjaxLanguage extends Controller {
+class ControllerApiLanguage extends Controller {
 	public function setLanguage() {
 		if ( empty($this->request->post['language']) ){
 			return $this->response->setOutput(json_encode(array(

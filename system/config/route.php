@@ -99,6 +99,7 @@ $_['route']['StockMarket']					= 'stock/market/';
 $_['route']['StockMarketNone']				= 'stock/market/';
 
 // Ajax
-$_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';
-$_['route']['SetLanguage']					= 'ajax/language/setLanguage/';
+$_['route']['AjaxGetRouting']				= 'api/config/getRoutings/';
+$_['route']['SetLanguage']					= 'api/language/setLanguage/';
+$_['route']['ApiGetAllStocks']				= 'api/stock/getAllStocks/';
 ?>

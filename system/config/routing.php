@@ -99,4 +99,5 @@ $_['routing']['StockMarket']					= 'stock/market/{market_code}/';
 // Ajax
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';
 $_['routing']['SetLanguage']					= 'service/push/language/';
+$_['routing']['ApiGetAllStocks']				= 'service/get/all-stocks/';
 ?>

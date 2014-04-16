@@ -77,7 +77,7 @@ class ControllerStockMarket extends Controller {
 			'common/footer',
 			'common/header'
 		);
-										
+
 		$this->response->setOutput($this->twig_render());
 	}
 }

@@ -33,7 +33,7 @@ function WatchListViewModel(options) {
 
 		if(self.cacheStockDatasource().length === 0)
 			return;
-		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stockCode());
+		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code());
 		if(temp){
 			temp.IsAdded(false);
 		}
@@ -43,7 +43,7 @@ function WatchListViewModel(options) {
 		self.addedWatchList.remove(wl);
 		if(self.cacheStockDatasource().length === 0)
 			return;
-		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stockCode());
+		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code());
 		if(temp){
 			temp.IsAdded(false);
 		}
@@ -53,7 +53,7 @@ function WatchListViewModel(options) {
 		self.addedWatchList.push(wl);
 		if(self.cacheStockDatasource().length === 0)
 			return;
-		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stockCode());
+		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code());
 		if(temp){
 			temp.IsAdded(true);
 		}
@@ -112,9 +112,10 @@ function WatchListViewModel(options) {
 	        });
 		}else {
 			result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
-	            return  !st.IsAdded() && (st.stockCode().toLowerCase().indexOf(search) >= 0 ||
-						st.stockName().toLowerCase().indexOf(search) >= 0 ||
-						st.marketName().toLowerCase().indexOf(search) >= 0);
+				// To do: fix error when call st.stock.market.name()
+	            return  !st.IsAdded() && (st.stock.code().toLowerCase().indexOf(search) >= 0 ||
+						st.stock.name().toLowerCase().indexOf(search) >= 0 ||
+						st.stock.market.name().toLowerCase().indexOf(search) >= 0);
 	        });
 		}
 
@@ -137,7 +138,10 @@ function WatchListViewModel(options) {
 	//Private functions:
 	function _getFirstInArray(array, id) {
 		return ko.utils.arrayFirst(array, function(st) {
-	        return st.stockCode().toLowerCase() === id.toLowerCase();
+			if ( st.stock === undefined ){
+				return false;
+			}
+	        return st.stock.code().toLowerCase() === id.toLowerCase();
         });
 	}
 
@@ -151,18 +155,13 @@ function WatchListViewModel(options) {
 	}
 
 	function _loadWatchLists() {
-		
-		//$.ajax({
-		//	type: "POST",
-		//	url: self.API_Url,
-		//	data: { },
-		//	success: function(response) {
-		//		//Parse data and push to watch list array
-		//	}
-		//});
-
+		window.yStockAddedWatchList = [];
 		for ( var key in window.yWatchList ){
-			self.watchList.push( new StockModel(window.yWatchList[key]) );
+			self.watchList.push( new WatchListItem({
+				stock: window.yWatchList[key],
+				IsAdded: true
+			}));
+			window.yStockAddedWatchList.push(window.yWatchList[key].id);
 		}
 	}
 
@@ -177,28 +176,30 @@ function WatchListViewModel(options) {
 		self.isLoading(false);
 	}
 
-	console.log(window.yStocks.length);
-
 	function _initStockDatasource() {
 		self.isInitDatasource(true);
 
-		//$.ajax({
-		//	type: "POST",
-		//	url: self.API_Url,
-		//	data: { },
-		//	success: function(response) {
-		//		//Parse data and push to watch list array
-		//	}
-		//});
-
-		//Samples:
-		for ( var key in window.yStocks ){
-			self.cacheStockDatasource.push( new StockModel(window.yStocks[key]) );
+		if ( self.cacheStockDatasource.length === 0 ){
+			$.ajax({
+				type: 'POST',
+				url: window.yRouting.generate('ApiGetAllStocks'),
+				dataType: 'json',
+				async: false,
+				success: function(data) {
+					if ( data.success == 'ok' ){
+						for ( var key in data.stocks ){
+							self.cacheStockDatasource.push( new WatchListItem({
+								stock: data.stocks[key]
+							}));
+						}
+					}
+				}
+			});
 		}
 
 		//Remove stock which already added:
 		ko.utils.arrayForEach(self.cacheStockDatasource(), function(st){
-			var temp = _getFirstInArray(self.watchList(), st.stockCode());
+			var temp = _getFirstInArray(self.watchList(), st.stock.code());
 			if(temp){
 				st.IsAdded(true);
 			}
@@ -217,13 +218,9 @@ function WatchListViewModel(options) {
 		var that = this;
 
 		that.isNew = ko.observable(false);
-		that.stockCode = ko.observable('');
-		that.stockName = ko.observable('');
-		that.typeName = ko.observable('');
-		that.marketName = ko.observable('');
-		that.stockIndexValue = ko.observable(0);
-		that.stockTopIndexValue = ko.observable('');
-		that.stockBottomIndexValue = ko.observable('');
+		if ( data.stock !== undefined ){
+			that.stock = new StockModel(data.stock);
+		}
 		that.IsAdded = ko.observable(false);
 
 		ko.mapping.fromJS(data, {}, this);

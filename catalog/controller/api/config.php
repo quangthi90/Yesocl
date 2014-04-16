@@ -1,5 +1,5 @@
 <?php
-class ControllerAjaxConfig extends Controller {
+class ControllerApiConfig extends Controller {
 	public function getRoutings() {
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',

@@ -1,5 +1,5 @@
 <?php
-class ControllerAjaxSeoUrl extends Controller {
+class ControllerApiSeoUrl extends Controller {
 	public function index() {
 		// Decode URL
 		if ( !empty($this->request->get['_route_']) ){

@@ -39,10 +39,6 @@
 		// Stock Watch list of current User
 		var _watchList = '{{ watch_list|json_encode()|raw }}';
 		window.yWatchList = JSON.parse(_watchList);
-
-		// List Stocks of current Market
-		var _stocks = '{{ stocks|json_encode()|raw }}';
-		window.yStocks = JSON.parse(_stocks);
 	</script>
 	{{ block('stock_common_block_watch_list_javascript') }}
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
