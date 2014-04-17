@@ -154,6 +154,7 @@ ul{
 }
 a {
   text-decoration: none;
+  cursor: pointer !important;
 }
 a > i,i{
   color: #0E0E0E; 

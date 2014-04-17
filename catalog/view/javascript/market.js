@@ -33,9 +33,9 @@ function WatchListViewModel(options) {
 
 		if(self.cacheStockDatasource().length === 0)
 			return;
-		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code());
+		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock().code());
 		if(temp){
-			temp.IsAdded(false);
+			temp.isAdded(false);
 		}
 	};
 
@@ -43,20 +43,19 @@ function WatchListViewModel(options) {
 		self.addedWatchList.remove(wl);
 		if(self.cacheStockDatasource().length === 0)
 			return;
-		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code());
+		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock().code());
 		if(temp){
-			temp.IsAdded(false);
+			temp.isAdded(false);
 		}
 	};
 
 	self.addStock = function(wl) {
-		console.log(wl.stock.code());
 		self.addedWatchList.push(wl);
 		if(self.cacheStockDatasource().length === 0)
 			return;
-		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code());
+		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock().code());
 		if(temp){
-			temp.IsAdded(true);
+			temp.isAdded(true);
 		}
 	};
 
@@ -98,7 +97,7 @@ function WatchListViewModel(options) {
 		});
 		self.addedWatchList.removeAll();
 		//Add new item:
-		self.watchList.unshift(new WatchListItem({isNew : true}));
+		self.watchList.unshift(new WatchListItem({isNew : true, stock: null}));
 
 		$.magnificPopup.close();
 	};
@@ -109,14 +108,14 @@ function WatchListViewModel(options) {
 		
 		if(search.length === 0) {
 			result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
-	            return  !st.IsAdded();
+	            return  !st.isAdded();
 	        });
 		}else {
 			result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
 				// To do: fix error when call st.stock.market.name()
-	            return  !st.IsAdded() && (st.stock.code().toLowerCase().indexOf(search) >= 0 ||
-						st.stock.name().toLowerCase().indexOf(search) >= 0 ||
-						st.stock.market.name().toLowerCase().indexOf(search) >= 0);
+	            return  !st.isAdded() && (st.stock().code().toLowerCase().indexOf(search) >= 0 ||
+						st.stock().name().toLowerCase().indexOf(search) >= 0 ||
+						st.stock().market().name().toLowerCase().indexOf(search) >= 0);
 	        });
 		}
 
@@ -131,7 +130,7 @@ function WatchListViewModel(options) {
 			return true;
 		}
 		var temp = ko.utils.arrayFirst(self.cacheStockDatasource(), function(st) {
-			return st.IsAdded() === false;
+			return st.isAdded() === false;
         });
         return (temp === null);
 	});
@@ -139,10 +138,10 @@ function WatchListViewModel(options) {
 	//Private functions:
 	function _getFirstInArray(array, id) {
 		return ko.utils.arrayFirst(array, function(st) {
-			if ( st.stock === undefined ){
+			if ( st.stock() === undefined || st.stock() === null){
 				return false;
 			}
-	        return st.stock.code().toLowerCase() === id.toLowerCase();
+	        return st.stock().code().toLowerCase() === id.toLowerCase();
         });
 	}
 
@@ -156,13 +155,14 @@ function WatchListViewModel(options) {
 	}
 
 	function _loadWatchLists() {
-		window.yStockAddedWatchList = [];
-		for ( var key in window.yWatchList ){
-			self.watchList.push( new WatchListItem({
-				stock: window.yWatchList[key],
-				IsAdded: true
-			}));
-			window.yStockAddedWatchList.push(window.yWatchList[key].id);
+		if(window.yWatchList && window.yWatchList.length > 0){
+			for ( var key in window.yWatchList ){
+				self.watchList.push( new WatchListItem({
+						stock: window.yWatchList[key],
+						isAdded: true
+					})
+				);
+			}
 		}
 	}
 
@@ -170,8 +170,7 @@ function WatchListViewModel(options) {
 		self.isLoading(true);		
 
 		//Add new item:
-		self.watchList.push(new WatchListItem({isNew : true}));
-
+		self.watchList.push(new WatchListItem({isNew : true, stock: null}));
 		_loadWatchLists();
 
 		self.isLoading(false);
@@ -200,9 +199,9 @@ function WatchListViewModel(options) {
 
 		//Remove stock which already added:
 		ko.utils.arrayForEach(self.cacheStockDatasource(), function(st){
-			var temp = _getFirstInArray(self.watchList(), st.stock.code());
+			var temp = _getFirstInArray(self.watchList(), st.stock().code());
 			if(temp){
-				st.IsAdded(true);
+				st.isAdded(true);
 			}
 		});
 
@@ -218,12 +217,13 @@ function WatchListViewModel(options) {
 	function WatchListItem(data) {
 		var that = this;
 
-		that.isNew = ko.observable(false);
-		if ( data.stock !== undefined ){
-			that.stock = new StockModel(data.stock);
-		}
-		that.IsAdded = ko.observable(false);
+		//that.isNew = ko.observable(data.isNew !== undefined ? data.isNew : false);
+		//that.isAdded = ko.observable(data.isAdded !== undefined ? data.isAdded : false);
+		//that.stock = ko.observable(data.stock !== undefined ? data.stock : null);
 
+		that.isNew = ko.observable();
+		that.isAdded = ko.observable();
+		that.stock = ko.observable();
 		ko.mapping.fromJS(data, {}, this);
 	}
 

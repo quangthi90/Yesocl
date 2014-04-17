@@ -5,36 +5,36 @@
 	</div>
 	<div class="block-content">
 	    <ul class="watchlist-items" data-bind="foreach: watchList">
-	    	<!-- ko if: $data.isNew() == false -->
-	        <li class="wl-item" data-bind="with: $data.stock">
-	        	<a href="javascript: void()" data-bind="click: $parent(1).removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
+	    	<!-- ko if: !$data.isNew() -->
+	        <li class="wl-item">
+	        	<a data-bind="click: $parent.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
-	                    <a href="#" class="stock-code" data-bind="text: $data.code"></a>
+	                    <a href="#" class="stock-code" data-bind="text: $data.stock().code"></a>
 	                </div>
 	                <div class="span6">
-	                    <a href="#" class="stock-name" data-bind="text: $data.name"></a>
+	                    <a href="#" class="stock-name" data-bind="text: $data.stock().name"></a>
 	                </div>
 	            </div>
 	            <div class="row-fluid">
 	                <div class="span6">
 	                    <div class="index-status">
 	                        <span class="index-icon">
-	                        	<i data-bind="css : { 'icon-caret-up' : !$data.is_down(), 'icon-caret-down' : $data.is_down() }"></i>
+	                        	<i data-bind="css : { 'icon-caret-up' : !$data.stock().is_down(), 'icon-caret-down' : $data.stock().is_down() }"></i>
                         	</span>
-	                        <span class="index-mount" data-bind="text: $data.last_exchange.close_price"></span>
+	                        <span class="index-mount" data-bind="text: $data.stock().last_exchange.close_price"></span>
 	                    </div>
 	                </div>
 	                <div class="span6">
 	                    <div class="index-status-mount">
-	                        <span class="i-top" data-bind="text: $data.exchange_price"></span> <br />
-	                        <span class="i-bottom" data-bind="text: $data.exchange_percent"></span>
+	                        <span class="i-top" data-bind="text: $data.stock().exchange_price"></span> <br />
+	                        <span class="i-bottom" data-bind="text: $data.stock().exchange_percent"></span>
 	                    </div>
 	                </div>
 	            </div>
 	        </li>
 	        <!-- /ko -->
-	        <!-- ko if: $data.isNew() == true -->
+	        <!-- ko if: $data.isNew() -->
 	        <li class="wl-item wl-item-new">
 	            <a data-bind="click: $parent.startAddWL.bind($data,'#new-wl')" class="btn btn-circle link-popup"><i class="icon-plus"></i>
 	            </a>
@@ -55,7 +55,7 @@
 			    		<!-- ko if: addedWatchList().length > 0 -->
 			    		<ul data-bind="foreach: addedWatchList">
 			    			<li class="wl-selected-item">
-			    				<span class="name" data-bind="text: $data.code"></span>
+			    				<span class="name" data-bind="text: $data.stock().code"></span>
 			    				<a href="#" data-bind="click: $parent.removeStock"><i class="icon-remove"></i></a>
 			    			</li>
 			    		</ul>
@@ -73,10 +73,10 @@
 					    	<!-- ko if: suggestWatchList().length > 0 -->
 				    	    <table class="table table-hover">
 						    	<tbody data-bind="foreach: suggestWatchList">
-						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stock.code() == $parent.defaultSelectedStock().stock.code() }">
-						    			<td data-bind="text: $data.stock.code"></td>
-						    			<td data-bind="text: $data.stock.name"></td>
-						    			<td data-bind="text: $data.stock.market.name"></td>
+						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stock().code == $parent.defaultSelectedStock().stock().code }">
+						    			<td data-bind="text: $data.stock().code"></td>
+						    			<td data-bind="text: $data.stock().name"></td>
+						    			<td data-bind="text: $data.stock().market.name"></td>
 						    		</tr>
 						    	</tbody>
 						    </table>
