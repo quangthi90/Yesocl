@@ -50,6 +50,7 @@ function WatchListViewModel(options) {
 	};
 
 	self.addStock = function(wl) {
+		console.log(wl.stock.code());
 		self.addedWatchList.push(wl);
 		if(self.cacheStockDatasource().length === 0)
 			return;
