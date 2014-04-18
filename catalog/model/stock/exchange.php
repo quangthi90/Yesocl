@@ -14,5 +14,26 @@ class ModelStockExchange extends Model {
 
 		return $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( $query );
 	}
+
+	public function getExchanges( $aData = array() ){
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		if ( empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+
+		$aQuery = array();
+
+		return $this->dm->getRepository('Document\Stock\Exchanges')
+			->findBy( $aQuery )
+			->skip( $aData['start'] )
+			->limit( $aData['limit'] );
+	}
+
+	public function getAllExchanges(){
+		return $this->dm->getRepository('Document\Stock\Exchanges')->findAll();
+	}
 }
 ?>

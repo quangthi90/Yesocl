@@ -8,16 +8,13 @@ class ControllerApiStock extends Controller {
 	        )));
 		}
 
-		$this->load->model('stock/stock');
+		$this->load->model('stock/exchange');
 
-		$lStocks = $this->model_stock_stock->getStocks();
+		$lStockExchanges = $this->model_stock_exchange->getExchanges();
 		
 		$aStocks = array();
-		foreach ( $lStocks as $oStock ) {
-			if ( $oStock->getExchanges()->count() == 0 ){
-				continue;
-			}
-			$aStocks[] = $oStock->formatToCache();
+		foreach ( $lStockExchanges as $oStockExchange ) {
+			$aStocks[] = $oStockExchange->getStock()->formatToCache();
 		}
 		
 		return $this->response->setOutput(json_encode(array(
