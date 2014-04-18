@@ -13,7 +13,7 @@
 	                    <a href="#" class="stock-code" data-bind="text: $data.stock().code"></a>
 	                </div>
 	                <div class="span6">
-	                    <a href="#" class="stock-name" data-bind="text: $data.stock().name"></a>
+	                    <a href="#" class="stock-name" data-bind="text: $data.stock().name, attr: {title: $data.stock().name}"></a>
 	                </div>
 	            </div>
 	            <div class="row-fluid">
