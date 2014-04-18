@@ -25,5 +25,36 @@ class ControllerApiStock extends Controller {
             'stocks' => $aStocks
         )));
 	}
+
+	public function addStocksToWatchList() {
+		if ( !$this->customer->isLogged() ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'permission deney!'
+	        )));
+		}
+
+		if ( empty($this->request->post['stock_ids']) ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'Stock ID is empty!'
+	        )));
+		}
+
+		$this->load->model('user/setting');
+
+		$result = $this->model_user_setting->addStocksToWatchList( $this->customer->getId(), $this->request->post['stock_ids'] );
+		
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'Add Stock to Watch List have error'
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+	}
 }
 ?>

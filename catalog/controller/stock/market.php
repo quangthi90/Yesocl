@@ -62,6 +62,7 @@ class ControllerStockMarket extends Controller {
 		foreach ( $lStocks as $oStock ) {
 			$this->data['watch_list'][] = $oStock->formatToCache();
 		}
+		$this->data['watch_list'] = array_reverse($this->data['watch_list']);
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	

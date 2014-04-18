@@ -88,18 +88,32 @@ function WatchListViewModel(options) {
 	self.saveAddedStock = function() {
 		if(self.addedWatchList().length === 0)
 			return;
-		//Call ajax to save selected stock to Watch List
+
+		// list Stock ID to save database
+		var stock_ids = [];
 
 		//If save successfully -> Add to current watchlist:
 		self.watchList.shift();
 		ko.utils.arrayForEach(self.addedWatchList(), function(st){
 			self.watchList.unshift(st);
+			stock_ids.push( st.stock().id() );
 		});
 		self.addedWatchList.removeAll();
 		//Add new item:
 		self.watchList.unshift(new WatchListItem({isNew : true, stock: null}));
 
 		$.magnificPopup.close();
+
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiPushWatchList'),
+			data: {stock_ids: stock_ids},
+			dataType: 'json',
+			success: function(data) {
+				if ( data.success == 'ok' ){
+				}
+			}
+		});
 	};
 
 	self.suggestWatchList = ko.computed(function(){
@@ -112,7 +126,6 @@ function WatchListViewModel(options) {
 	        });
 		}else {
 			result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
-				// To do: fix error when call st.stock.market.name()
 	            return  !st.isAdded() && (st.stock().code().toLowerCase().indexOf(search) >= 0 ||
 						st.stock().name().toLowerCase().indexOf(search) >= 0 ||
 						st.stock().market().name().toLowerCase().indexOf(search) >= 0);

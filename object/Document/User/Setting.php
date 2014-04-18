@@ -29,7 +29,7 @@ Class Setting {
 		return $this->user;
 	}
 
-	public function addStock( $stock ){
+	public function addStock( \Document\Stock\Stock $stock ){
 		$this->stocks[] = $stock;
 	}
 
