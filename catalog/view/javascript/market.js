@@ -10,7 +10,6 @@ function ChartViewModel (options) {
 	}
 	self.currMarketId = ko.observable(window.yCurrMarketId);
 	self.stock = ko.observable( new StockModel(window.yStock) );
-	// console.log(window.yStock);
 }
 
 function WatchListViewModel(options) {
@@ -30,6 +29,16 @@ function WatchListViewModel(options) {
 	//Public functions:
 	self.removeWatchList = function(wl){
 		self.watchList.remove(wl);
+
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiDeleteWatchListItem', {stock_id: wl.stock().id()}),
+			dataType: 'json',
+			success: function(data) {
+				if ( data.success == 'ok' ){
+				}
+			}
+		});
 
 		if(self.cacheStockDatasource().length === 0)
 			return;

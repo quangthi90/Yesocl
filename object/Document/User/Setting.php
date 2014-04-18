@@ -17,6 +17,16 @@ Class Setting {
     /** @MongoDB\ReferenceMany(targetDocument="Document\Stock\Stock") */
     private $stocks = array();
 
+    public function getStockById( $idStock ){
+    	foreach ( $this->stocks as $oStock ) {
+    		if ( $idStock == $oStock->getId() ){
+    			return $oStock;
+    		}
+    	}
+
+    	return null;
+    }
+
 	public function getId() {
 		return $this->id;
 	}

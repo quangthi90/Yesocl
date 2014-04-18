@@ -56,5 +56,35 @@ class ControllerApiStock extends Controller {
             'success' => 'ok'
         )));
 	}
+
+	public function removeStockFromWatchList() {
+		if ( !$this->customer->isLogged() ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'permission deney!'
+	        )));
+		}
+
+		if ( empty($this->request->get['stock_id']) ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'Stock ID is empty!'
+	        )));
+		}
+
+		$this->load->model('user/setting');
+		$result = $this->model_user_setting->removeStockFromWatchList( $this->customer->getId(), $this->request->get['stock_id'] );
+
+		if ( !$result ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'Remove Stock have error!'
+	        )));
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+	}
 }
 ?>

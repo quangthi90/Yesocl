@@ -42,5 +42,19 @@ class ModelUserSetting extends Model {
 
 		return true;
 	}
+
+	public function removeStockFromWatchList( $idUser, $idStock ){
+		if ( !$oSetting = $this->dm->getRepository('Document\User\Setting')->findOneBy(array('user.id' => $idUser)) ) return false;
+
+		$oStock = $oSetting->getStockById( $idStock );
+
+		if ( !$oStock ) return false;
+
+		$oSetting->getStocks()->removeElement( $oStock );
+
+		$this->dm->flush();
+
+		return true;
+	}
 }
 ?>
