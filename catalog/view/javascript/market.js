@@ -28,23 +28,28 @@ function WatchListViewModel(options) {
 
 	//Public functions:
 	self.removeWatchList = function(wl){
-		self.watchList.remove(wl);
-
-		$.ajax({
-			type: 'POST',
-			url: window.yRouting.generate('ApiDeleteWatchListItem', {stock_id: wl.stock.id}),
-			dataType: 'json',
-			success: function(data) {
-				if ( data.success == 'ok' ){
-					if(self.cacheStockDatasource().length === 0)
-						return;
-					var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code);
-					if(temp){
-						temp.isAdded(false);
-					}
-				}
-			}
-		});
+		bootbox.dialog({
+            title: 'Are you sure you want to remove this stock ?',
+            message: 'Remove watchList',
+            buttons:
+            {
+                cancel: {
+                    label: sCancel,
+                    className: 'btn',
+                    callback: function() {
+                    }
+                },
+                oke: {
+                    label: 'OK',
+                    className: 'btn-primary',
+                    callback: function() {
+                    	self.watchList.remove(wl);
+                        _submitRemoveWatchlist(wl);
+                    }
+                }
+            }
+        });
+		
 	};
 
 	self.removeStock = function(wl) {
@@ -110,19 +115,9 @@ function WatchListViewModel(options) {
 		self.addedWatchList.removeAll();
 		//Add new item:
 		self.watchList.unshift(new WatchListItem({isNew : true, stock: null}));
+		$.magnificPopup.close();		
 
-		$.magnificPopup.close();
-
-		$.ajax({
-			type: 'POST',
-			url: window.yRouting.generate('ApiPushWatchList'),
-			data: {stock_ids: stock_ids},
-			dataType: 'json',
-			success: function(data) {
-				if ( data.success == 'ok' ){
-				}
-			}
-		});
+		_submitSaveWatchlist();
 	};
 
 	self.suggestWatchList = ko.computed(function(){
@@ -231,6 +226,37 @@ function WatchListViewModel(options) {
 			}
 		});
 		self.isLoading(false);
+	}
+
+	function _submitRemoveWatchlist(wl){
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiDeleteWatchListItem', {stock_id: wl.stock.id}),
+			dataType: 'json',
+			success: function(data) {
+				if ( data.success == 'ok' ){					
+					if(self.cacheStockDatasource().length === 0)
+						return;
+					var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code);
+					if(temp){
+						temp.isAdded(false);
+					}
+				}
+			}
+		});
+	}
+
+	function _submitSaveWatchlist(ids) {
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiPushWatchList'),
+			data: {stock_ids: ids},
+			dataType: 'json',
+			success: function(data) {
+				if ( data.success == 'ok' ){
+				}
+			}
+		});
 	}
 
 	function _addSingleWatchList() {
