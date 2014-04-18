@@ -1,10 +1,13 @@
 <?php
-use Document\Stock\Exchange;
+use Document\Stock\Exchange,
+	Document\Stock\Exchanges;
 
 class ModelStockExchange extends Model {
 	public function addExchange( $idStock, $aData = array() ) {
-		$oStock = $this->dm->getRepository('Document\Stock\Stock')->find( $idStock );
-		if ( !$oStock ){
+		$oStockExchanges = $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy(
+			array('stock.id' => $idStock)
+		);
+		if ( !$oStockExchanges ){
 			return false;
 		}
 
@@ -15,7 +18,7 @@ class ModelStockExchange extends Model {
 			return false;
 		}
 
-		if ( !$oExchange = $oStock->getExchangeByCreated($aData['created']) ){
+		if ( !$oExchange = $oStockExchanges->getExchangeByCreated($aData['created']) ){
 			$oExchange = new Exchange();
 		}
 
@@ -52,7 +55,7 @@ class ModelStockExchange extends Model {
 		$oExchange->setCreated( $aData['created'] );
 
 		if ( !$oExchange->getId() ){
-			$oStock->addExchange( $oExchange );
+			$oStockExchanges->addExchange( $oExchange );
 		}
 		
 		$this->dm->flush();
@@ -61,14 +64,14 @@ class ModelStockExchange extends Model {
 	}
 
 	public function editExchange( $idExchange, $aData = array() ) {
-		$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneBy( array(
+		$oStockExchanges = $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( array(
 			'exchanges.id' => $idExchange
 		));
-		if ( !$oStock ){
+		if ( !$oStockExchanges ){
 			return false;
 		}
 
-		if ( !$oExchange = $oStock->getExchangeById($idExchange) ){
+		if ( !$oExchange = $oStockExchanges->getExchangeById($idExchange) ){
 			return false;
 		}
 
@@ -110,15 +113,15 @@ class ModelStockExchange extends Model {
 
 	public function deleteExchanges( $aData = array() ) {
 		if ( !empty($aData['id']) ) {
-			$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneBy( array('exchanges.id' => $aData['id'][0]) );
-			if ( !$oStock ){
+			$oStockExchanges = $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( array('exchanges.id' => $aData['id'][0]) );
+			if ( !$oStockExchanges ){
 				return false;
 			}
 			foreach ($aData['id'] as $id) {
-				$oExchange = $oStock->getExchangeById( $id );
+				$oExchange = $oStockExchanges->getExchangeById( $id );
 
 				if ( $oExchange ) {
-					$oStock->getExchanges()->removeElement( $oExchange );
+					$oStockExchanges->getExchanges()->removeElement( $oExchange );
 				}
 			}
 		}
@@ -126,17 +129,20 @@ class ModelStockExchange extends Model {
 		$this->dm->flush();
 	}
 
-	public function getStock( $aData = array() ){
-		if ( !empty($aData['id']) ){
-			return $this->dm->getRepository('Document\Stock\Stock')->find( $aData['id'] );
-		}elseif ( !empty($aData['code']) ){
-			return $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( strtoupper(trim($aData['code'])) );
+	public function getExchange( $aData = array() ){
+		$query = array();
+		if ( !empty($aData['exchange_id']) ){
+			$query['exchanges.id'] = $aData['exchange_id'];
+		}elseif ( !empty($aData['stock_id']) ){
+			$query['stock.id'] = $aData['stock_id'];
+		}else{
+			return null;
 		}
 
-		return null;
+		return $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( $query );
 	}
 
-	public function getStocks( $aData = array() ){
+	public function getExchanges( $aData = array() ){
 		if ( empty($aData['limit']) ){
 			$aData['limit'] = 10;
 		}
@@ -151,23 +157,18 @@ class ModelStockExchange extends Model {
 		}
 
 		$aQuery = array();
-		if ( !empty($aData['filter_name']) ){
-			$aQuery['name'] = new \MongoRegex('/i*' . strtoupper(trim($aData['filter_name'])) . '.*/i');
+
+		if ( !empty($aData['stock_id']) ){
+			$aQuery['stock.id'] = $aData['stock_id'];
+		
+		}elseif ( !empty($aData['stock_code']) ){
+			$oStock = $this->getRepository('Document\Stock\Stock')->findByCode( $aData['stock_code'] );
+			if ( $oStock ){
+				$aQuery['stock.id'] = $oStock->getId();
+			}
 		}
 
-		if ( !empty($aData['filter_code']) ){
-			$aQuery['code'] = new \MongoRegex('/' . strtoupper(trim($aData['filter_code'])) . '.*/i');
-		}
-
-		if ( !empty($aData['filter_market']) ){
-			$aQuery['market.id'] = $aData['filter_market'];
-		}
-
-		if ( !empty($aData['filter_status']) ){
-			$aQuery['status'] = (boolean)$aData['filter_status'];
-		}
-
-		return $this->dm->getRepository('Document\Stock\Stock')
+		return $this->dm->getRepository('Document\Stock\Exchanges')
 			->findBy( $aQuery )
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] )
@@ -176,7 +177,6 @@ class ModelStockExchange extends Model {
 
 	public function importExchange( $files ){
 		$this->load->model('tool/excel');
-		$this->load->model('stock/stock');
 		
 		$link_files = $files['tmp_name'];
 		foreach ($link_files as $file) {
@@ -184,15 +184,11 @@ class ModelStockExchange extends Model {
 			array_shift($aExchanges);
 			
 			foreach ( $aExchanges as $aExchange ) {
-				if ( !$oStock = $this->model_stock_stock->getStock(array('code' => strtoupper(trim($aExchange['A'])))) ){
+				if ( !$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode(strtoupper(trim($aExchange['A']))) ){
 					continue;
 				}
 				
 				$created = date_create_from_format('m-d-y', $aExchange['B']);
-
-				// if ( $oStock->getExchangeByCreated($created) ){
-				// 	continue;
-				// }
 
 				$oExchange = new Exchange();
 
@@ -202,8 +198,15 @@ class ModelStockExchange extends Model {
 				$oExchange->setClosePrice( $aExchange['F'] );
 				$oExchange->setVolume( $aExchange['G'] );
 				$oExchange->setCreated( $created );
+
+				if ( !$oStockExchanges = $this->getExchange(array('stock_id' => $oStock->getId())) ){
+					$oStockExchanges = new Exchanges();
+					$oStockExchanges->setStock( $oStock );
+					$this->dm->persist( $oStockExchanges );
+					$this->dm->flush();
+				}
 				
-				$oStock->addExchange( $oExchange );
+				$oStockExchanges->addExchange( $oExchange );
 			}
 		}
 

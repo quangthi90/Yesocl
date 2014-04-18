@@ -39,6 +39,71 @@ Class Exchanges {
 		return null;
 	}
 
+	/**
+	 * Calculate Max and Min price in a some day
+	 * 2014/04/13
+	 * Param:
+	 *	- Int iDay
+	 *	- Object system Doctrine systemDoctrine
+	 */
+	public function calculateRangePrice( $iDay, $systemDoctrine = null ){
+        $oTimeLimit = clone $this->lastExchange->getCreated();
+        date_sub($oTimeLimit, date_interval_create_from_date_string($iDay . ' days'));
+        $aExchanges = $this->exchanges->toArray();
+        $aExchanges = array_reverse($aExchanges);
+
+        $iMaxPrice = $this->lastExchange->getHighPrice();
+        $iMinPrice = $this->lastExchange->getLowPrice();
+        foreach ($aExchanges as $oExchange) {
+            if ( $oExchange->getCreated() < $oTimeLimit ){
+                break;
+            }
+
+            if ( $iMaxPrice < $oExchange->getHighPrice() ){
+            	$iMaxPrice = $oExchange->getHighPrice();
+            }
+
+            if ( $iMinPrice > $oExchange->getLowPrice() ){
+            	$iMinPrice = $oExchange->getLowPrice();
+            }
+        }
+
+        $this->stock->setRangePrice(array(
+        	$iDay => array(
+        		'max_price' => $iMaxPrice,
+        		'min_price' => $iMinPrice
+        	)
+        ));
+
+        if ( $systemDoctrine != null ){
+        	$systemDoctrine->flush();
+        }
+	}
+
+	public function getRangePriceByDay( $iDay, $systemDoctrine ){
+		if ( empty($this->stock->getRangePrice()[$iDay]) ){
+			$this->calculateRangePrice( $iDay, $systemDoctrine );
+		}
+
+		return $this->stock->getRangePrice()[$iDay];
+	}
+
+	/** @MongoDB\PrePersist */
+    public function prePersist()
+    {
+    	foreach ( $this->rangePrice as $iDay => $aRange ) {
+    		$this->calculateRangePrice( $iDay );
+    	}
+    }
+
+    /** @MongoDB\PreUpdate */
+    public function preUpdate()
+    {
+    	foreach ( $this->rangePrice as $iDay => $aRange ) {
+    		$this->calculateRangePrice( $iDay );
+    	}
+    }
+
 	public function getId() {
 		return $this->id;
 	}
@@ -66,5 +131,13 @@ Class Exchanges {
 
 	public function getExchanges(){
 		return $this->exchanges;
+	}
+
+	public function setStock( $stock ) {
+		$this->stock = $stock;
+	}
+
+	public function getStock() {
+		return $this->stock;
 	}
 }
