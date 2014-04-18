@@ -10,13 +10,12 @@ class ControllerApiStock extends Controller {
 
 		$this->load->model('stock/stock');
 
-		$lStocks = $this->model_stock_stock->getStocks();
+		$lStocks = $this->model_stock_stock->getAllStocks();
 		
 		$aStocks = array();
 		foreach ( $lStocks as $oStock ) {
-			if ( $oStock->getExchanges()->count() == 0 ){
+			if ( !$oStock->getLastExchange() || !$oStock->getPreLastExchange() )
 				continue;
-			}
 			$aStocks[] = $oStock->formatToCache();
 		}
 		

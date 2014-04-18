@@ -97,6 +97,7 @@ $_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 // Stock
 $_['route']['StockMarket']					= 'stock/market/';
 $_['route']['StockMarketNone']				= 'stock/market/';
+$_['route']['StockPage']					= 'stock/stock/';
 
 // Ajax
 $_['route']['AjaxGetRouting']				= 'api/config/getRoutings/';

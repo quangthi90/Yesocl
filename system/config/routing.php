@@ -95,6 +95,7 @@ $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 // Stock
 $_['routing']['StockMarketNone']				= 'stock/market/';
 $_['routing']['StockMarket']					= 'stock/market/{market_code}/';
+$_['routing']['StockPage']						= 'stock/page/{stock_code}/';
 
 // Ajax
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';
