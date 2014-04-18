@@ -26,11 +26,6 @@ Class Stock {
 	 */
 	private $code;
 
-	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Exchange")
-	 */
-	private $exchanges = array();
-
 	/** @MongoDB\ReferenceOne(targetDocument="Market", inversedBy="stocks") */
 	private $market;
 
@@ -191,31 +186,6 @@ Class Stock {
 
 	public function getCode(){
 		return $this->code;
-	}
-
-	public function addExchange( Exchange $exchange ){
-		$this->exchanges[] = $exchange;
-		// var_dump($exchange->getCreated()); print("<br>");
-		if ( !$this->lastExchange || $exchange->getCreated() > $this->lastExchange->getCreated() ){
-			// Update Pre last Exchange
-			$this->preLastExchange = $this->lastExchange;
-
-			// Update last Exchange
-			$this->lastExchange = $exchange;
-			if ( $this->lastExchange->getClosePrice() >= $exchange->getClosePrice() ){
-				$this->isDown = true;
-			}else{
-				$this->isDown = false;
-			}
-		}
-	}
-
-	public function setExchanges( $exchanges ){
-		$this->exchanges = $exchanges;
-	}
-
-	public function getExchanges(){
-		return $this->exchanges;
 	}
 
 	public function setMarket( $market ){
