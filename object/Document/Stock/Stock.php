@@ -73,7 +73,8 @@ Class Stock {
 			'exchange_percent' => round(($this->lastExchange->getClosePrice() - $this->preLastExchange->getClosePrice()) / $this->preLastExchange->getClosePrice(), 4),
 			'pre_last_exchange' => $this->preLastExchange->formatToCache(),
 			'last_exchange' => $this->lastExchange->formatToCache(),
-			'market' => $this->market->formatToCache()
+			'market' => $this->market->formatToCache(),
+			'range_price' => $this->rangePrice
 		);
 	}
 

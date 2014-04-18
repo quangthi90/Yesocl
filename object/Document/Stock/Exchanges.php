@@ -47,13 +47,13 @@ Class Exchanges {
 	 *	- Object system Doctrine systemDoctrine
 	 */
 	public function calculateRangePrice( $iDay, $systemDoctrine = null ){
-        $oTimeLimit = clone $this->lastExchange->getCreated();
+        $oTimeLimit = clone $this->stock->getLastExchange()->getCreated();
         date_sub($oTimeLimit, date_interval_create_from_date_string($iDay . ' days'));
         $aExchanges = $this->exchanges->toArray();
         $aExchanges = array_reverse($aExchanges);
 
-        $iMaxPrice = $this->lastExchange->getHighPrice();
-        $iMinPrice = $this->lastExchange->getLowPrice();
+        $iMaxPrice = $this->stock->getLastExchange()->getHighPrice();
+        $iMinPrice = $this->stock->getLastExchange()->getLowPrice();
         foreach ($aExchanges as $oExchange) {
             if ( $oExchange->getCreated() < $oTimeLimit ){
                 break;
@@ -68,12 +68,12 @@ Class Exchanges {
             }
         }
 
-        $this->stock->setRangePrice(array(
-        	$iDay => array(
-        		'max_price' => $iMaxPrice,
-        		'min_price' => $iMinPrice
-        	)
-        ));
+        $rangePrice = $this->stock->getRangePrice();
+        $rangePrice[$iDay] = array(
+    		'max_price' => $iMaxPrice,
+    		'min_price' => $iMinPrice
+    	);
+        $this->stock->setRangePrice( $rangePrice );
 
         if ( $systemDoctrine != null ){
         	$systemDoctrine->flush();

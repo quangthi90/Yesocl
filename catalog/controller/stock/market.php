@@ -45,11 +45,16 @@ class ControllerStockMarket extends Controller {
 		// Stock info of Market
 		$oStock = $oCurrMarket->getStockMarket();
 
+		if ( !$oStock->getRangePrice()[84] || !$oStock->getRangePrice()[364] ){
+			$this->load->model('stock/exchange');
+			$oStockExchanges = $this->model_stock_exchange->getExchange( array('stock_id' => $oStock->getId()) );
+			if ( !$oStockExchanges ){
+				return false;
+			}
+			$oStockExchanges->calculateRangePrice(84, $this->dm);
+			$oStockExchanges->calculateRangePrice(364, $this->dm);
+		}
 		$this->data['stock'] = $oStock->formatToCache();
-		$this->data['stock']['range_price'] = array(
-			'84' => $oStock->getRangePriceByDay( 84, $this->dm ),
-			'364' => $oStock->getRangePriceByDay( 364, $this->dm )
-		);
 
 		// Watch list - User Stocks
 		$oLoggedUser = $this->customer->getUser();
