@@ -89,7 +89,13 @@ function WatchListViewModel(options) {
 			modal: false,
 			callbacks:{
 				open: function(){
-					_initStockDatasource();
+					if(!_isInitDatasource) {	
+						_initStockDatasource();
+					}else {
+						setTimeout(function(){
+							$('#wl-query').focus();
+						}, 100);
+					}					
 				}
 			}
 		});
@@ -194,13 +200,10 @@ function WatchListViewModel(options) {
 		self.isLoading(false);
 	}
 
-	function _initStockDatasource() {
-		if(_isInitDatasource){
-			return;
-		}
+	function _initStockDatasource() {		
 		_isInitDatasource = true;
 		self.isLoading(true);
-		if ( self.cacheStockDatasource.length === 0 ){
+		if ( self.cacheStockDatasource().length === 0 ){
 			$.ajax({
 				type: 'POST',
 				url: window.yRouting.generate('ApiGetAllStocks'),
@@ -224,7 +227,7 @@ function WatchListViewModel(options) {
 
 					//Completed:
 					self.isLoading(false);
-					$('#wl-query').focus();
+					$('#wl-query').focus();					
 				},
 				complete : function(){
 					self.isLoading(false);

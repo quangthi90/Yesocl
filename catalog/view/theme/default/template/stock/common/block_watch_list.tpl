@@ -22,7 +22,7 @@
 	                        <span class="index-icon">
 	                        	<i data-bind="css : { 'icon-caret-up' : !$data.stock.is_down, 'icon-caret-down' : $data.stock.is_down }"></i>
                         	</span>
-	                        <span class="index-mount" data-bind="text: $data.stock.last_exchange.close_price"></span>
+	                        <span class="index-mount" data-bind="text: $data.stock.last_exchange.close_price, css: { 'price-down' : $data.stock.is_down }"></span>
 	                    </div>
 	                </div>
 	                <div class="span6">
@@ -74,9 +74,9 @@
 				    	    <table class="table table-hover">
 						    	<tbody data-bind="foreach: suggestWatchList">
 						    		<tr data-bind="click: $parent.addStock, css: { 'tr-selected' : $data.stock.code == $parent.defaultSelectedStock().stock.code }">
-						    			<td data-bind="text: $data.stock.code"></td>
-						    			<td data-bind="text: $data.stock.name"></td>
-						    			<td data-bind="text: $data.stock.market.name"></td>
+						    			<td class="stock-code" data-bind="text: $data.stock.code"></td>
+						    			<td class="stock-name" data-bind="text: $data.stock.name"></td>
+						    			<td class="stock-market" data-bind="text: $data.stock.market.name"></td>
 						    		</tr>						    		
 						    	</tbody>
 						    </table>

@@ -3584,6 +3584,9 @@ a.wall-link:hover {
   font-size: 28px;
   color: #6C8882;
 }
+.wl-item .index-status .index-mount.price-down{
+  color: #F10000;
+}
 .wl-item .index-status-mount {
   font-size: 14px;
   color: green;
@@ -3651,6 +3654,13 @@ a.wall-link:hover {
 }
 .wl-selected-control .live-search-result tr.tr-selected td {
   background-color: #F5F5F5;
+}
+.wl-selected-control .live-search-result tr td.stock-code {
+  font-weight: bold;
+}
+.wl-selected-control .live-search-result tr td.stock-name {
+}
+.wl-selected-control .live-search-result tr td.stock-market {
 }
 .wl-selected-control .live-search-result .loading-overlay {
   padding: 30px 0px;
