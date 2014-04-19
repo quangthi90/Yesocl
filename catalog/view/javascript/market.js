@@ -117,7 +117,7 @@ function WatchListViewModel(options) {
 		self.watchList.unshift(new WatchListItem({isNew : true, stock: null}));
 		$.magnificPopup.close();		
 
-		_submitSaveWatchlist();
+		_submitSaveWatchlist(stock_ids);
 	};
 
 	self.suggestWatchList = ko.computed(function(){
