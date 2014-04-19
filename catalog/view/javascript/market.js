@@ -29,8 +29,8 @@ function WatchListViewModel(options) {
 	//Public functions:
 	self.removeWatchList = function(wl){
 		bootbox.dialog({
-            title: 'Are you sure you want to remove this stock ?',
-            message: 'Remove watchList',
+            title: 'Remove watchList',
+            message: 'Are you sure you want to remove this stock ?',
             buttons:
             {
                 cancel: {
