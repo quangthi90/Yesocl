@@ -10,10 +10,10 @@
 	        	<a data-bind="click: $parent.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
 	                <div class="span6">
-	                    <a href="#" class="stock-code" data-bind="text: $data.stock.code"></a>
+	                    <a class="stock-code" data-bind="link: { text: $data.stock.code ,route: 'StockMarket', params: { market_code :  $data.stock.code} }"></a>
 	                </div>
 	                <div class="span6">
-	                    <a href="#" class="stock-name" data-bind="text: $data.stock.name, attr: {title: $data.stock.name}"></a>
+	                    <a href="#" class="stock-name" data-bind="link: { text: $data.stock.name, title: $data.stock.name, route: 'StockMarket', params: { market_code :  $data.stock.code} }"></a>
 	                </div>
 	            </div>
 	            <div class="row-fluid">
@@ -66,7 +66,7 @@
 			    	</div>
 			    	<div class="wl-selected-control">
 		    		    <div class="input-append live-search">
-						    <input data-bind="value: query, enable: dataSourceEmpty() == false, attr : { 'placeholder' : dataSourceEmpty() == false ? 'Type stock ...' : 'No datasource found !' }, valueUpdate: 'keyup', hasFocus: true, executeOnEnter: addStockEnter" type="text" class="query">
+						    <input data-bind="value: query, enable: dataSourceEmpty() == false, attr : { 'placeholder' : dataSourceEmpty() == false ? 'Type stock ...' : 'No datasource found !' }, valueUpdate: 'keyup', hasFocus: true, executeOnEnter: addStockEnter" type="text" class="query" id="wl-query">
 						    <a href="#" class="btn" data-bind="click: clearQuery, css : { 'disabled' : dataSourceEmpty() == true }"><i class="icon-remove"></i></a>
 					    </div>
 					    <div class="live-search-result">

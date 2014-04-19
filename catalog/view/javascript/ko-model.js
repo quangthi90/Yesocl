@@ -8,11 +8,6 @@ function MarketModel(data) {
 	that.code = ko.observable('');
 
 	ko.mapping.fromJS(data, {}, this);
-
-	this.marketDetailClick = function(){
-		var href = window.yRouting.generate('StockMarket', {market_code: that.code()});
-		window.location.href = href;
-	};
 }
 
 function StockModel(data) {

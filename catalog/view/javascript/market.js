@@ -205,7 +205,7 @@ function WatchListViewModel(options) {
 				type: 'POST',
 				url: window.yRouting.generate('ApiGetAllStocks'),
 				dataType: 'json',
-				async: false,
+				async: true,				
 				success: function(data) {
 					if ( data.success == 'ok' ){
 						for ( var key in data.stocks ){
@@ -214,18 +214,23 @@ function WatchListViewModel(options) {
 							}));
 						}
 					}
+					//Remove stock which already added:
+					ko.utils.arrayForEach(self.cacheStockDatasource(), function(st){
+						var temp = _getFirstInArray(self.watchList(), st.stock.code);
+						if(temp){
+							st.isAdded(true);
+						}
+					});
+
+					//Completed:
+					self.isLoading(false);
+					$('#wl-query').focus();
+				},
+				complete : function(){
+					self.isLoading(false);
 				}
 			});
-		}
-
-		//Remove stock which already added:
-		ko.utils.arrayForEach(self.cacheStockDatasource(), function(st){
-			var temp = _getFirstInArray(self.watchList(), st.stock.code);
-			if(temp){
-				st.isAdded(true);
-			}
-		});
-		self.isLoading(false);
+		}		
 	}
 
 	function _submitRemoveWatchlist(wl){
@@ -293,6 +298,20 @@ ko.bindingHandlers.executeOnEnter = {
         });
     }
 };
+ko.bindingHandlers.link = {
+	init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+		var options = valueAccessor();
+        var href = window.yRouting.generate(options.route, options.params);
+		$(element).attr('href', href);
+		$(element).html(options.text);
+		if(options.isNewTab){
+			$(element).attr('target', '_blank');
+		}
+		if(options.title){
+			$(element).attr('title', options.title);	
+		}
+	}
+}
 
 $(document).ready(function(){
 
