@@ -5,11 +5,13 @@
     </div>
     <div class="block-content">
         <ul class="nav nav-tabs market-list" data-bind="foreach: markets">
-          <!-- ko if: $parent.currMarketId() == $data.id() -->
-          <li class="active"><a href="#" data-bind="text: $data.name, click: $data.marketDetailClick"></a></li>
+          <!-- ko if: $parent.currMarketId() == $data.id -->
+          <li class="active"><a data-bind="text: $data.name"></a></li>
           <!-- /ko -->
-          <!-- ko if: $parent.currMarketId() != $data.id() -->
-          <li><a href="#" data-bind="text: $data.name, click: $data.marketDetailClick"></a></li>
+          <!-- ko if: $parent.currMarketId() != $data.id -->
+          <li>
+            <a data-bind="link: { text: $data.name, title: $data.name, route: 'StockMarket', params: { market_code :  $data.id} }"></a>
+          </li>
           <!-- /ko -->
         </ul>
         <div class="tab-content" data-bind="with: stock">
@@ -19,27 +21,27 @@
                         <div class="span6 index-overview up">
                             <ul>
                                 <li class="index-staus">
-                                    <!-- ko if: $data.is_down() -->
+                                    <!-- ko if: $data.is_down -->
                                     <i class="icon-caret-down"></i>
                                     <!-- /ko -->
-                                    <!-- ko if: !$data.is_down() -->
+                                    <!-- ko if: !$data.is_down -->
                                     <i class="icon-caret-up"></i>
                                     <!-- /ko -->
                                 </li>
                                 <li class="index-mount" data-bind="with: $data.last_exchange"><span data-bind="text: $data.close_price"></span></li>
                                 <li class="index-status-mount">
-                                    <span class="i-top">
-                                        <!-- ko if: $data.exchange_price() > 0 -->
+                                    <span class="i-top" data-bind="css: {'price-down' : $data.exchange_price < 0 }">
+                                        <!-- ko if: $data.exchange_price > 0 -->
                                         +
                                         <!-- /ko -->
                                         <span data-bind="text: $data.exchange_price"></span>
                                     </span> 
                                     <br />
-                                    <span class="i-bottom">
-                                        <!-- ko if: $data.exchange_percent() > 0 -->
+                                    <span class="i-bottom" data-bind="css: {'price-down' : $data.exchange_percent < 0 }">
+                                        <!-- ko if: $data.exchange_percent > 0 -->
                                         +
                                         <!-- /ko -->
-                                        <span data-bind="text: $data.exchange_percent"></span>
+                                        <span data-bind="text: $data.exchange_percent, css: {'price-down' : $data.exchange_percent < 0 }"></span>
                                         %
                                     </span>
                                 </li>
@@ -60,7 +62,7 @@
                                 </div>
                                 <div class="span6" data-bind="with: $data.last_exchange">
                                     <label class="index-label">{% trans %}Open{% endtrans %}</label>
-                                    <span class="index-value" data-bind="text: $data.open_price"></span>
+                                    <span class="index-value" data-bind="text: $data.open_price, css: { 'price-down' : $data.open_price < 0 }"></span>
                                 </div>
                             </div>
                             <div class="row-fluid">
@@ -74,7 +76,7 @@
                                 </div>
                                 <div class="span6" data-bind="with: $data.pre_last_exchange">
                                     <label class="index-label">{% trans %}Previous Closed{% endtrans %}</label>
-                                    <span class="index-value" data-bind="text: $data.close_price"></span>
+                                    <span class="index-value" data-bind="text: $data.close_price, css: { 'price-down' : $data.open_price < 0 }"></span>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +91,13 @@
             <div class="row-fluid">
                 <div class="span6">
                     <div class="btn-group">
-                      <a class="btn active">Day</a>
-                      <a class="btn">Week</a>
-                      <a class="btn">Month</a>
-                      <a class="btn">1 Year</a>
+                      <a class="btn active" data-bind="click: changeTimeFilter.bind($data, 'day')">Day</a>
+                      <a class="btn" data-bind="click: changeTimeFilter.bind($data, 'week')">Week</a>
+                      <a class="btn" data-bind="click: changeTimeFilter.bind($data, 'month')">Month</a>
+                      <a class="btn" data-bind="click: changeTimeFilter.bind($data, 'year')">1 Year</a>
                     </div>
                 </div>
-                <div class="span6">
+                <div class="span6" style="display: none;">
                     <div class="btn-group pull-right">
                       <a class="btn"><i class="icon-ellipsis-horizontal"></i> Index Details</a>
                       <a class="btn"><i class="icon-search"></i>Search Quotes</a>

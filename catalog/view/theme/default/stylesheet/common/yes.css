@@ -3464,6 +3464,7 @@ a.wall-link:hover {
 }
 .chart-content .index-overview.up .index-staus i  {
   color: green;
+  font-size: 35px;
 }
 .chart-content .index-overview .index-mount {
   font-size: 35px;
@@ -3580,7 +3581,7 @@ a.wall-link:hover {
 .wl-item .index-status-mount {
 }
 .wl-item .index-status .index-icon {
-  font-size: 20px;
+  font-size: 25px;
   margin-right: 5px;
 }
 .wl-item .index-status .index-mount {
