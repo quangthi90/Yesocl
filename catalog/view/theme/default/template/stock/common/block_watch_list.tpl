@@ -9,10 +9,10 @@
 	        <li class="wl-item">
 	        	<a data-bind="click: $parent.removeWatchList" class="wl-remove"><i class="icon-remove"></i></a>
 	            <div class="row-fluid">
-	                <div class="span6">
-	                    <a class="stock-code" data-bind="link: { text: $data.stock.code ,route: 'StockMarket', params: { market_code :  $data.stock.code} }"></a>
+	                <div class="span12">
+	                    <a class="stock-code" data-bind="link: { text: $data.stock.code ,route: 'StockMarket', params: { market_code : $data.stock.code} }"></a>
 	                </div>
-	                <div class="span6">
+	                <div class="span12">
 	                    <a href="#" class="stock-name" data-bind="link: { text: $data.stock.name, title: $data.stock.name, route: 'StockMarket', params: { market_code :  $data.stock.code} }"></a>
 	                </div>
 	            </div>
@@ -27,7 +27,7 @@
 	                </div>
 	                <div class="span6">
 	                    <div class="index-status-mount">
-	                        <span class="i-top" data-bind="text: $data.stock.exchange_price, css: { 'price-down' : $data.stock.exchange_price < 0 }"></span> <br />
+	                        <span class="i-top" data-bind="text: $data.stock.exchange_price, css: { 'price-down' : $data.stock.exchange_price < 0 }"></span><br />
 	                        <span class="i-bottom" data-bind="text: $data.stock.exchange_percent, css: { 'price-down' : $data.stock.exchange_percent < 0 }"></span>
 	                    </div>
 	                </div>
