@@ -3401,6 +3401,9 @@ a.wall-link:hover {
 .stock-block .block-content a.btn.active i {
   color: #FFFFFF;
 }
+.stock-block .price-down, .stock-block .icon-caret-down {
+  color: #F10000 !important;
+}
 .stock-block .block-content .nav-tabs {
   border-bottom: none;
 }
@@ -3574,7 +3577,6 @@ a.wall-link:hover {
   line-height: 50px;
 }
 .wl-item .index-status-mount {
-
 }
 .wl-item .index-status .index-icon {
   font-size: 20px;
@@ -3583,9 +3585,6 @@ a.wall-link:hover {
 .wl-item .index-status .index-mount {
   font-size: 28px;
   color: #6C8882;
-}
-.wl-item .index-status .index-mount.price-down{
-  color: #F10000;
 }
 .wl-item .index-status-mount {
   font-size: 14px;

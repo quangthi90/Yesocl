@@ -22,13 +22,13 @@
 	                        <span class="index-icon">
 	                        	<i data-bind="css : { 'icon-caret-up' : !$data.stock.is_down, 'icon-caret-down' : $data.stock.is_down }"></i>
                         	</span>
-	                        <span class="index-mount" data-bind="text: $data.stock.last_exchange.close_price, css: { 'price-down' : $data.stock.is_down }"></span>
+	                        <span class="index-mount" data-bind="text: $data.stock.last_exchange.close_price"></span>
 	                    </div>
 	                </div>
 	                <div class="span6">
 	                    <div class="index-status-mount">
-	                        <span class="i-top" data-bind="text: $data.stock.exchange_price"></span> <br />
-	                        <span class="i-bottom" data-bind="text: $data.stock.exchange_percent"></span>
+	                        <span class="i-top" data-bind="text: $data.stock.exchange_price, css: { 'price-down' : $data.stock.exchange_price < 0 }"></span> <br />
+	                        <span class="i-bottom" data-bind="text: $data.stock.exchange_percent, css: { 'price-down' : $data.stock.exchange_percent < 0 }"></span>
 	                    </div>
 	                </div>
 	            </div>
