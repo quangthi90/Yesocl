@@ -165,10 +165,40 @@ class ControllerBranchPost extends Controller {
 			$this->data['error_warning'] = '';
 		}
 
+		if (isset($this->request->get['filter_title'])) {
+			$filter_title = $this->request->get['filter_title'];
+		} else {
+			$filter_title = null;
+		}
+
+		if (isset($this->request->get['filter_category'])) {
+			$filter_category = $this->request->get['filter_category'];
+		} else {
+			$filter_category = null;
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$filter_status = $this->request->get['filter_status'];
+		} else {
+			$filter_status = null;
+		}
+
 		$url = '';
 
 		if ( !empty($this->request->get['branch_id']) ){
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
+		}
+
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . $this->request->get['filter_title'];
+		}
+
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
 		}
 
 		// page
@@ -201,8 +231,9 @@ class ControllerBranchPost extends Controller {
 
 		// text
 		$this->data['text_no_results'] = $this->language->get( 'text_no_results' );
-		$this->data['text_enable'] = $this->language->get( 'text_enable' );
-		$this->data['text_disable'] = $this->language->get( 'text_disable' );
+		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
+		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
+		$this->data['text_none'] = $this->language->get( 'text_none' );
 
 		// column
 		$this->data['column_post'] = $this->language->get( 'column_post' );
@@ -217,6 +248,7 @@ class ControllerBranchPost extends Controller {
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
 		$this->data['button_delete'] = $this->language->get( 'button_delete' );
 		$this->data['button_back'] = $this->language->get( 'button_back' );
+		$this->data['button_filter'] = $this->language->get( 'button_filter' );
 
 		// link
 		$this->data['insert'] = $this->url->link( 'branch/post/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
@@ -225,6 +257,9 @@ class ControllerBranchPost extends Controller {
 
 		$data = array(
 			'branch_id' => $this->request->get['branch_id'],
+			'filter_title' => $filter_title,
+			'filter_category' => $filter_category,
+			'filter_status' => $filter_status,
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit,
 		);
@@ -266,6 +301,18 @@ class ControllerBranchPost extends Controller {
 			$url .= '&branch_id=' . $this->request->get['branch_id'];
 		}
 
+		if (isset($this->request->get['filter_title'])) {
+			$url .= '&filter_title=' . $this->request->get['filter_title'];
+		}
+
+		if (isset($this->request->get['filter_category'])) {
+			$url .= '&filter_category=' . $this->request->get['filter_category'];
+		}
+
+		if (isset($this->request->get['filter_status'])) {
+			$url .= '&filter_status=' . $this->request->get['filter_status'];
+		}
+
 		// pagination
 		$pagination = new Pagination();
 		$pagination->total = count( $posts );
@@ -275,6 +322,25 @@ class ControllerBranchPost extends Controller {
 		$pagination->url = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url . '&page={page}', 'SSL' );
 
 		$this->data['pagination'] = $pagination->render();
+
+		$this->load->model('branch/category');
+		$lCategories = $this->model_branch_category->getAllCategories( array('branch_id' => $this->request->get['branch_id']) );
+		$this->data['categories'] = array();
+		foreach ( $lCategories as $oCategory ) {
+			$this->data['categories'][] = array(
+				'id' => $oCategory->getId(),
+				'name' => $oCategory->getName()
+			);
+		}
+
+		$this->data['filter_title'] = $filter_title;
+		$this->data['filter_category'] = $filter_category;
+		$this->data['filter_status'] = $filter_status;
+
+		$this->data['token'] = $this->session->data['token'];
+		$this->data['branch_id'] = $this->request->get['branch_id'];
+
+		$this->data['autocomplete_name'] = html_entity_decode( $this->url->link('branch/post/autocompleteName', 'token=' . $this->session->data['token'], 'SSL') );
 
 		// template
 		$this->template = 'branch/post_list.tpl';
@@ -547,6 +613,34 @@ class ControllerBranchPost extends Controller {
 
 	private function isValidateDelete() {
 		return true;
+	}
+
+	public function autocompleteName() {
+		$this->load->model( 'branch/post' );
+
+		$sort = 'name';
+
+		if ( isset( $this->request->get['filter_title'] ) ) {
+			$filter_title = $this->request->get['filter_title'];
+		}else {
+			$filter_title = null;
+		}
+
+		$data = array(
+			'filter_title' => $filter_title
+		);
+
+		$lPosts = $this->model_branch_post->getPosts( $data );
+
+		$json = array();
+		foreach ( $lPosts as $oPost ) {
+			$json[] = array(
+				'name' => html_entity_decode( $oPost->getName() ),
+				'id' => $oPost->getId(),
+			);
+		}
+
+		$this->response->setOutput( json_encode($json) );
 	}
 }
 ?>
