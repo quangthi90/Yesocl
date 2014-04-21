@@ -40,10 +40,10 @@
             <?php foreach ( $exchanges as $exchange ) { ?>
             <tr class="right">
               <td class="center"><input name="id[]" type="checkbox" value="<?php echo $exchange['id']; ?>"/></td>
-              <td><?php echo $exchange['high']; ?></td>
-              <td><?php echo $exchange['low']; ?></td>
-              <td><?php echo $exchange['open']; ?></td>
-              <td><?php echo $exchange['close']; ?></td>
+              <td><?php echo $exchange['high_price']; ?></td>
+              <td><?php echo $exchange['low_price']; ?></td>
+              <td><?php echo $exchange['open_price']; ?></td>
+              <td><?php echo $exchange['close_price']; ?></td>
               <td><?php echo $exchange['volume']; ?></td>
               <td class="center"><?php echo $exchange['created']; ?></td>
               <td class="right"><?php foreach ( $exchange['action'] as $action ) { ?>

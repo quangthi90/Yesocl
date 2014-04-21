@@ -83,6 +83,19 @@ class ModelStockStock extends Model {
 			foreach ($aData['id'] as $id) {
 				$oStock = $this->dm->getRepository( 'Document\Stock\Stock' )->find( $id );
 
+				if ( !empty($oStock) ) {
+					$oStock->setDeleted( true );
+				}
+			}
+		}
+
+		$this->dm->flush();
+	}
+	/*public function deleteStocks( $aData = array() ) {
+		if ( isset( $aData['id'] ) ) {
+			foreach ($aData['id'] as $id) {
+				$oStock = $this->dm->getRepository( 'Document\Stock\Stock' )->find( $id );
+
 				if ( !empty( $oStock ) ) {
 					$this->dm->remove( $oStock );
 				}
@@ -90,16 +103,20 @@ class ModelStockStock extends Model {
 		}
 
 		$this->dm->flush();
-	}
+	}*/
 
 	public function getStock( $aData = array() ){
+		$query = array('deleted' => false);
+
 		if ( !empty($aData['id']) ){
-			return $this->dm->getRepository('Document\Stock\Stock')->find( $aData['id'] );
+			$query['id'] = $aData['id'];
 		}elseif ( !empty($aData['code']) ){
-			return $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( strtoupper(trim($aData['code'])) );
+			$query['code'] = strtoupper(trim($aData['code']));
+		}else{
+			return null;
 		}
 
-		return null;
+		return $this->dm->getRepository('Document\Stock\Stock')->findOneBy( $query );
 	}
 
 	public function getStocks( $aData = array() ){
@@ -116,7 +133,7 @@ class ModelStockStock extends Model {
 			$aData['sort'] = 1;
 		}
 
-		$aQuery = array();
+		$aQuery = array('deleted' => false);
 		if ( !empty($aData['filter_name']) ){
 			$aQuery['name'] = new \MongoRegex('/i*' . strtoupper(trim($aData['filter_name'])) . '.*/i');
 		}

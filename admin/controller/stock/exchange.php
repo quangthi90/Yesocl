@@ -201,16 +201,14 @@ class ControllerStockExchange extends Controller {
 			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 		
-		$lExchanges = $oStockExchanges->getExchanges();
+		$aExchanges = $oStockExchanges->getExchanges();
 		
-		$iExchangeTotal = $lExchanges->count();
+		$iExchangeTotal = count( $aExchanges );
 		
 		$this->data['exchanges'] = array();
-		if ( $lExchanges ){
-			$aExchanges = $lExchanges->toArray();
-			$aExchanges = array_reverse($aExchanges);
+		if ( $aExchanges ){
 			$key = 0;
-			foreach ( $aExchanges as $oExchange ){
+			foreach ( $aExchanges as $aExchange ){
 				if ( $key < $aData['start'] ){
 					$key++;
 					continue;
@@ -224,20 +222,12 @@ class ControllerStockExchange extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'stock/exchange/update', 'exchange_id=' . $oExchange->getId() . '&token=' . $this->session->data['token'] . $url, 'sSL' ),
+					'href' => $this->url->link( 'stock/exchange/update', 'exchange_id=' . $aExchange['id'] . '&token=' . $this->session->data['token'] . $url, 'sSL' ),
 					'icon' => 'icon-edit',
 				);
-			
-				$this->data['exchanges'][] = array(
-					'id' => $oExchange->getId(),
-					'high' => $oExchange->getHighPrice(),
-					'low' => $oExchange->getLowPrice(),
-					'open' => $oExchange->getOpenPrice(),
-					'close' => $oExchange->getClosePrice(),
-					'volume' => $oExchange->getVolume(),
-					'created' => $oExchange->getCreated()->format('d/m/Y'),
-					'action' => $action,
-				);
+
+				$aExchange['created'] = date('d/m/Y', $aExchange['created']);
+				$this->data['exchanges'][] = $aExchange;
 
 				$key++;
 			}

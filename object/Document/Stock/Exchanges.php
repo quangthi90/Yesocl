@@ -12,7 +12,7 @@ Class Exchanges {
 	private $id; 
 
 	/** 
-	 * @MongoDB\EmbedMany(targetDocument="Exchange")
+	 * @MongoDB\Hash
 	 */
 	private $exchanges = array();
 
@@ -49,22 +49,23 @@ Class Exchanges {
 	public function calculateRangePrice( $iDay, $systemDoctrine = null ){
         $oTimeLimit = clone $this->stock->getLastExchange()->getCreated();
         date_sub($oTimeLimit, date_interval_create_from_date_string($iDay . ' days'));
-        $aExchanges = $this->exchanges->toArray();
-        $aExchanges = array_reverse($aExchanges);
+        $oTimeLimit = $oTimeLimit->getTimestamp();
+        $aExchanges = $this->exchanges;
+        // $aExchanges = array_reverse($aExchanges);
 
         $iMaxPrice = $this->stock->getLastExchange()->getHighPrice();
         $iMinPrice = $this->stock->getLastExchange()->getLowPrice();
         foreach ($aExchanges as $oExchange) {
-            if ( $oExchange->getCreated() < $oTimeLimit ){
+            if ( $oExchange['created'] < $oTimeLimit ){
                 break;
             }
 
-            if ( $iMaxPrice < $oExchange->getHighPrice() ){
-            	$iMaxPrice = $oExchange->getHighPrice();
+            if ( $iMaxPrice < $oExchange['high_price'] ){
+            	$iMaxPrice = $oExchange['high_price'];
             }
 
-            if ( $iMinPrice > $oExchange->getLowPrice() ){
-            	$iMinPrice = $oExchange->getLowPrice();
+            if ( $iMinPrice > $oExchange['low_price'] ){
+            	$iMinPrice = $oExchange['low_price'];
             }
         }
 
@@ -108,8 +109,10 @@ Class Exchanges {
 		return $this->id;
 	}
 
-	public function addExchange( Exchange $exchange ){
-		$this->exchanges[] = $exchange;
+	public function addExchange( $exchange ){
+		$timestamp = $exchange->getCreated()->getTimestamp();
+		$this->exchanges[$timestamp] = $exchange->formatToCache();
+		krsort($this->exchanges);
 		// var_dump($exchange->getCreated()); print("<br>");
 		if ( !$this->stock->getLastExchange() || $exchange->getCreated() > $this->stock->getLastExchange()->getCreated() ){
 			// Update Pre last Exchange

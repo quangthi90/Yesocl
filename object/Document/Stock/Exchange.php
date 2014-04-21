@@ -37,7 +37,7 @@ Class Exchange {
 			'high_price' => $this->highPrice,
 			'low_price' => $this->lowPrice,
 			'volume' => $this->volume,
-			'created' => $this->created
+			'created' => $this->created->getTimeStamp()
 		);
 	}
 
