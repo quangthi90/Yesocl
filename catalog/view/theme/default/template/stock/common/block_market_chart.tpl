@@ -10,7 +10,7 @@
           <!-- /ko -->
           <!-- ko if: $parent.currMarketId() != $data.id -->
           <li>
-            <a data-bind="link: { text: $data.name, title: $data.name, route: 'StockMarket', params: { market_code :  $data.id} }"></a>
+            <a data-bind="link: { text: $data.name, title: $data.name, route: 'StockMarket', params: { market_code :  $data.code} }"></a>
           </li>
           <!-- /ko -->
         </ul>
