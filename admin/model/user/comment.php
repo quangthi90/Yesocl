@@ -150,6 +150,8 @@ class ModelUserComment extends Model {
 		    ->getQuery()
 		    ->getSingleResult();
 
+		if ( !$oPosts ) return null;
+
 		$this->dm->clear();
 		return $oPosts->getPostById($idPost)->getComments();
 	}

@@ -169,15 +169,24 @@ class ControllerBranchComment extends Controller {
 			$page = 1;
 		}
 
+		$urlPagination = $url;
 		$url .= '&page=' . $this->request->get['page'];
 
 		// Get Post ID
-		$this->load->model('branch/post');
-		$post = $this->model_branch_post->getPost( $this->request->get['post_id'] );
-		if ( !$post ){
+		if ( !empty($this->request->get['post_id']) ){
+			$idPost = $this->request->get['post_id'];
+		}else{
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('post/post', 'token=' . $this->session->data['token'] . $url, 'SSL') );
 		}
+
+		$aData = array(
+			'start' => ($page - 1) * $this->limit,
+			'limit' => $this->limit
+		);
+
+		$this->load->model('branch/comment');
+		$lComments = $this->model_branch_comment->getComments( $idPost, $aData );
 		
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -197,7 +206,7 @@ class ControllerBranchComment extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'branch/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'branch/comment', 'post_id=' . $idPost . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -230,38 +239,37 @@ class ControllerBranchComment extends Controller {
 		$this->data['back'] = $this->url->link( 'branch/post', 'branch_id=' . $this->request->get['branch_id'] . '&token=' . $this->session->data['token'], 'SSL' );
 
 		// Comment
-		$comments = $post->getComments();
-		
 		$this->data['comments'] = array();
-		if ( $comments ){
-			$comment_total = count( $comments );
+		$iTotalComment = 0;
+		if ( $lComments ){
+			$iTotalComment = $this->model_branch_comment->getTotalComment( $idPost );
 			
-			for ( $i = $comment_total - (($page - 1) * $this->limit) - 1; $i >= $comment_total - ($page * $this->limit) && $i >= 0; $i-- ){
+			foreach ( $lComments as $oComment ) {
 				$action = array();
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'branch/comment/update', 'token=' . $this->session->data['token'] . $url . '&comment_id=' . $comments[$i]->getId(), 'SSL' ),
+					'href' => $this->url->link( 'branch/comment/update', 'token=' . $this->session->data['token'] . $url . '&comment_id=' . $oComment->getId(), 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
 				$this->data['comments'][] = array(
-					'id' => $comments[$i]->getId(),
-					'content' => $comments[$i]->getContent(),
-					'author' => $comments[$i]->getUser()->getFullname(),
-					'created' => $comments[$i]->getCreated()->format( $this->language->get( 'date_time_format' ) ),
-					'status' => $comments[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
+					'id' => $oComment->getId(),
+					'content' => $oComment->getContent(),
+					'author' => $oComment->getUser()->getFullname(),
+					'created' => $oComment->getCreated()->format( $this->language->get( 'date_time_format' ) ),
+					'status' => $oComment->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $comment_total;
+		$pagination->total = $iTotalComment;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('branch/comment', 'token=' . $this->session->data['token'] . '&page={page}' . $url, 'SSL');
+		$pagination->url = $this->url->link('branch/comment', 'token=' . $this->session->data['token'] . '&page={page}' . $urlPagination, 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 

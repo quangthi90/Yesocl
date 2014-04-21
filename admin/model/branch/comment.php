@@ -198,5 +198,36 @@ class ModelBranchComment extends Model {
 
 		return true;
 	}
+
+	public function getComments( $idPost, $aData = array() ) {
+		if ( empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		$oPost = $this->dm->createQueryBuilder('Document\Branch\Post')
+			->field('id')->equals($idPost)
+		    ->selectSlice('comments', $aData['start'], $aData['limit'])
+		    ->getQuery()
+		    ->getSingleResult();
+
+		if ( !$oPost ) return null;
+
+		$this->dm->clear();
+		return $oPost->getComments();
+	}
+
+	public function getTotalComment( $idPost ) {
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->find( $idPost );
+
+		if ( $oPost ){
+			return $oPost->getComments()->count();
+		}
+
+		return 0;
+	}
 }
 ?>
