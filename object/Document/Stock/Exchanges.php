@@ -113,18 +113,17 @@ Class Exchanges {
 		$timestamp = $exchange->getCreated()->getTimestamp();
 		$this->exchanges[$timestamp] = $exchange->formatToCache();
 		krsort($this->exchanges);
-		// var_dump($exchange->getCreated()); print("<br>");
-		if ( !$this->stock->getLastExchange() || $exchange->getCreated() > $this->stock->getLastExchange()->getCreated() ){
-			// Update Pre last Exchange
-			$this->stock->setPreLastExchange( $this->stock->getLastExchange() );
-
-			// Update last Exchange
-			$this->stock->setLastExchange( $exchange );
-			if ( $this->stock->getLastExchange()->getClosePrice() >= $exchange->getClosePrice() ){
+		
+		if ( !$this->stock->getLastExchange() || $exchange->getCreated() >= $this->stock->getLastExchange()->getCreated() ){
+			if ( $this->stock->getLastExchange()->getClosePrice() > $exchange->getClosePrice() ){
 				$this->stock->setIsDown( true );
 			}else{
 				$this->stock->setIsDown( false );
 			}
+			// Update Pre last Exchange
+			$this->stock->setPreLastExchange( $this->stock->getLastExchange() );
+			// Update last Exchange
+			$this->stock->setLastExchange( $exchange );
 		}
 	}
 

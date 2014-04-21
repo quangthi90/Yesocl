@@ -41,11 +41,11 @@ class ControllerStockMarket extends Controller {
 		$oCurrMarket = $aMarkets[0];
 
 		$this->data['curr_market_id'] = $oCurrMarket->getId();
-
+// var_dump($oCurrMarket->getStockMarket()->getIsDown()); exit;
 		// Stock info of Market
 		$oStock = $oCurrMarket->getStockMarket();
 
-		// if ( !$oStock->getRangePrice()[84] || !$oStock->getRangePrice()[364] ){
+		if ( !$oStock->getRangePrice()[84] || !$oStock->getRangePrice()[364] ){
 			$this->load->model('stock/exchange');
 			$oStockExchanges = $this->model_stock_exchange->getExchange( array('stock_id' => $oStock->getId()) );
 			if ( !$oStockExchanges ){
@@ -53,7 +53,7 @@ class ControllerStockMarket extends Controller {
 			}
 			$oStockExchanges->calculateRangePrice(84, $this->dm);
 			$oStockExchanges->calculateRangePrice(364, $this->dm);
-		// }
+		}
 		$this->data['stock'] = $oStock->formatToCache();
 
 		// Security exchange
