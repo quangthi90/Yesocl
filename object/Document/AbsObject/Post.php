@@ -191,7 +191,10 @@ Abstract Class Post {
 		$this->comments = $comments;
 	}
 
-	public function getComments(){
+	public function getComments( $isReverse = false ){
+		if ( $isReverse ){
+			return array_reverse($this->comments->toArray());
+		}
 		return $this->comments;
 	}
 

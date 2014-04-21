@@ -276,16 +276,16 @@ class ControllerPostComment extends Controller {
         switch ($aDatas['post_type']) {
             case $this->config->get('post')['type']['branch']:
                 $this->load->model('branch/comment');
-                $lQueryComments = $this->model_branch_comment->getComments( $aDatas );
+                $aQueryComments = $this->model_branch_comment->getComments( $aDatas, true );
                 break;
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $lQueryComments = $this->model_user_comment->getComments( $aDatas );
+                $aQueryComments = $this->model_user_comment->getComments( $aDatas, true );
                 break;
             
             default:
-                $lQueryComments = null;
+                $aQueryComments = array();
                 break;
         }
 
@@ -295,12 +295,6 @@ class ControllerPostComment extends Controller {
 
         $aUsers = array();
         $idCurrUserId = $this->customer->getId();
-
-        if ( $lQueryComments != null ){
-            $aQueryComments = $lQueryComments->toArray();
-        }else{
-            $aQueryComments = array();
-        }
 
         $aComments = $this->model_tool_object->formatCommentOfPost(
             $aQueryComments,
