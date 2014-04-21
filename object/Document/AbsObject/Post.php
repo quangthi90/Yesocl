@@ -182,7 +182,9 @@ Abstract Class Post {
 	}
 
 	public function addComment( Comment $comment ){
-		$this->comments[] = $comment;
+		$comments = $this->comments->toArray();
+		array_unshift($comments, $comment);
+		$this->comments = $comments;
 	}
 
 	public function setComments( $comments ){

@@ -201,7 +201,9 @@ Class Post {
 	}
 
 	public function addComment( Document\AbsObject\Comment $comment ){
-		$this->comments[] = $comment;
+		$comments = $this->comments->toArray();
+		array_unshift($comments, $comment);
+		$this->comments = $comments;
 	}
 
 	public function setComments( $comments ){
