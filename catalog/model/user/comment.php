@@ -28,7 +28,7 @@ class ModelUserComment extends Model {
 			$post = $posts->getPostBySlug( $data['post_slug'] );
 		}
 		
-		return $post->getComments( true );
+		return $post->getComments();
 	}
 
 	public function getComment( $data = array() ){

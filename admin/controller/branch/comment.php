@@ -214,6 +214,7 @@ class ControllerBranchComment extends Controller {
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
 		$this->data['text_edit'] = $this->language->get( 'text_edit' );
+		$this->data['text_content'] = $this->language->get( 'text_content' );
 		
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get( 'confirm_del' );
@@ -246,6 +247,7 @@ class ControllerBranchComment extends Controller {
 			
 				$this->data['comments'][] = array(
 					'id' => $comments[$i]->getId(),
+					'content' => $comments[$i]->getContent(),
 					'author' => $comments[$i]->getUser()->getFullname(),
 					'created' => $comments[$i]->getCreated()->format( $this->language->get( 'date_time_format' ) ),
 					'status' => $comments[$i]->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),

@@ -115,7 +115,7 @@ class ControllerUserComment extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_user_comment->deletePost( $this->request->get['post_id'], $this->request->post );
+			$this->model_user_comment->deleteComment( $this->request->get['post_id'], $this->request->post );
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $cancel );
 		}
@@ -152,27 +152,27 @@ class ControllerUserComment extends Controller {
 		}
 
 		// Get Post ID
-		$post_id = 0;
+		$idPost = 0;
 		if ( isset($this->request->get['post_id']) && !empty($this->request->get['post_id']) ){
-			$post_id = $this->request->get['post_id'];
+			$idPost = $this->request->get['post_id'];
 		}
 
 		// Check Post exist
-		if ( $post_id == 0 ){
+		if ( $idPost == 0 ){
 			$this->session->data['error_warning'] = $this->language->get('error_post');
 			$this->redirect( $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
-		$this->load->model( 'user/user' );
+		$this->load->model( 'user/comment' );
 		$this->load->model( 'user/post' );
-		$user = $this->model_user_post->getOwner( $post_id );
 
-		if ( !$user ){
-			$this->session->data['error_warning'] = $this->language->get('error_post');
-			$this->redirect( $this->url->link('user/user', 'token=' . $this->session->data['token'], 'SSL') );
-		}
+		$aData = array(
+			'start' => ($page - 1) * $this->limit,
+			'limit' => $this->limit
+		);
+		$lComments = $this->model_user_comment->getComments( $idPost, $aData );
 
-		$post = $user->getPostData()->getPostById( $post_id );
+		$oUser = $this->model_user_post->getOwner( $idPost );
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -187,12 +187,12 @@ class ControllerUserComment extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'user/post', 'group_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'user/post', 'user_id=' . $oUser->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'heading_title' ),
-			'href'      => $this->url->link( 'user/comment', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'user/comment', 'post_id=' . $idPost . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -220,48 +220,41 @@ class ControllerUserComment extends Controller {
 		$this->data['button_back'] = $this->language->get( 'button_back' );
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'user/comment/insert', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['delete'] = $this->url->link( 'user/comment/delete', 'post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' );
-		$this->data['back'] = $this->url->link( 'user/post', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['insert'] = $this->url->link( 'user/comment/insert', 'post_id=' . $idPost . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'user/comment/delete', 'post_id=' . $idPost . '&token=' . $this->session->data['token'], 'SSL' );
+		$this->data['back'] = $this->url->link( 'user/post', 'user_id=' . $oUser->getId() . '&token=' . $this->session->data['token'], 'SSL' );
 
 		// Comment
-		$comments = $post->getComments();
-		$comments = array_reverse($comments->toArray());
-		
-		$comment_total = 0;
-		
+		$iTotalComment = 0;
 		$this->data['comments'] = array();
-		if ( $comments ){
-			$comment_total = count( $comments );
-			// print($this->limit); exit;
-			for ( $i = (($page - 1) * $this->limit); $i < $page * $this->limit && $i < $comment_total; $i++ ){
-				$comment = $comments[$i];
-
+		if ( $lComments ){
+			$iTotalComment = $this->model_user_comment->getTotalComment( $idPost );
+			foreach ( $lComments as $oComment ){
 				$action = array();
 				
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'user/comment/update', 'comment_id=' . $comments[$i]->getId() . '&post_id=' . $post->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'user/comment/update', 'comment_id=' . $oComment->getId() . '&post_id=' . $idPost . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
 				$this->data['comments'][] = array(
-					'id' => $comment->getId(),
-					'author' => $comment->getUser()->getFullname(),
-					'created' => $comment->getCreated()->format( $this->language->get( 'date_time_format' ) ),
-					'content' => strlen($comment->getContent()) < 50 ? $comment->getContent() : substr($comment->getContent(), 0, 50) . '...',
-					'status' => $comment->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
+					'id' => $oComment->getId(),
+					'author' => $oComment->getUser()->getFullname(),
+					'created' => $oComment->getCreated()->format( $this->language->get( 'date_time_format' ) ),
+					'content' => strlen($oComment->getContent()) < 50 ? $oComment->getContent() : substr($oComment->getContent(), 0, 50) . '...',
+					'status' => $oComment->getStatus() ? $this->language->get( 'text_enabled' ) : $this->language->get( 'text_disabled' ),
 					'action' => $action,
 				);
 			}
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $comment_total;
+		$pagination->total = $iTotalComment;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_admin_limit');
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('user/comment', '&post_id=' . $post->getId() . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
+		$pagination->url = $this->url->link('user/comment', '&post_id=' . $idPost . '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -305,8 +298,8 @@ class ControllerUserComment extends Controller {
 		}
 
 		$this->load->model( 'user/post' );
-		$user = $this->model_user_post->getOwner( $this->request->get['post_id'] );
-		$post = $user->getPostData()->getPostById( $this->request->get['post_id'] );
+		$oUser = $this->model_user_post->getOwner( $this->request->get['post_id'] );
+		$post = $oUser->getPostData()->getPostById( $this->request->get['post_id'] );
 
 		if ( empty( $post ) ) {
 			$this->session->data['error_warning'] = $this->language->get('error_post');
@@ -326,7 +319,7 @@ class ControllerUserComment extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get( 'text_post' ),
-			'href'      => $this->url->link( 'user/post', 'user_id=' . $user->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+			'href'      => $this->url->link( 'user/post', 'user_id=' . $oUser->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
    		$this->data['breadcrumbs'][] = array(
