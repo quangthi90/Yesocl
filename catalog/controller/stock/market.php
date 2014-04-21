@@ -41,7 +41,7 @@ class ControllerStockMarket extends Controller {
 		$oCurrMarket = $aMarkets[0];
 
 		$this->data['curr_market_id'] = $oCurrMarket->getId();
-// var_dump($oCurrMarket->getStockMarket()->getIsDown()); exit;
+
 		// Stock info of Market
 		$oStock = $oCurrMarket->getStockMarket();
 
@@ -55,16 +55,6 @@ class ControllerStockMarket extends Controller {
 			$oStockExchanges->calculateRangePrice(364, $this->dm);
 		}
 		$this->data['stock'] = $oStock->formatToCache();
-
-		// Security exchange
-		$this->load->model('stock/exchange');
-		$oStockExchanges = $this->model_stock_exchange->getExchange( array('stock_id' => $oStock->getId()) );
-		if ( $oStockExchanges ){
-			$lExchanges = $oStockExchanges->getExchanges();
-			// print(get_class($lExchanges)); 
-			// var_dump($lExchanges->getKeys());
-			// exit;
-		}
 
 		// Watch list - User Stocks
 		$oLoggedUser = $this->customer->getUser();

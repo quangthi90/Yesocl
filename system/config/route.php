@@ -105,4 +105,5 @@ $_['route']['SetLanguage']					= 'api/language/setLanguage/';
 $_['route']['ApiGetAllStocks']				= 'api/stock/getAllStocks/';
 $_['route']['ApiPushWatchList']				= 'api/stock/addStocksToWatchList/';
 $_['route']['ApiDeleteWatchListItem']		= 'api/stock/removeStockFromWatchList/';
+$_['route']['ApiGetStockExchanges']			= 'api/stock/getStockExchanges/';
 ?>
