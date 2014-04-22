@@ -7,103 +7,56 @@ function ChartViewModel (options) {
 	self.markets = ko.observableArray(window.yMarkets);
 	self.currMarketId = ko.observable(window.yCurrMarketId);
 	self.stock = ko.observable(window.yStock);
-	self.timeFilter = ko.observable('day');
 	self.isLoadSuccess = ko.observable(false);
-	var cacheGroupStock = {
-		'day' : window.yStock,
-		'week' : null,
-		'month': null,
-		'year': null
-	};
-
-	self.changeTimeFilter = function(timeFilter){
-		self.timeFilter(timeFilter);
-		if(cacheGroupStock[timeFilter] === undefined || cacheGroupStock[timeFilter] === null) {
-			_getStockByTimeFilter(timeFilter, function(isSuccess, data){
-				self.isLoadSuccess(isSuccess);
-				if(isSuccess){
-					cacheGroupStock[timeFilter] = data.stock;
-					self.stock(data.stock);					
-				}
-			});
-		}else {
-			self.stock(cacheGroupStock[timeFilter]);
-		}
-	};
 
 	//Private Functions:
-	function _getStockByTimeFilter(timeFilter, callback) {
-		//Gọi ajax để lấy thông tin stock theo tham số timeFilter trên:
-		//Trả về callback kèm theo thông tin: Thành Công hay Thất bại, dữ liệu trả về
-		
-		//$.ajax({
-		//	type: 'POST',
-		//	url: URL,
-		//	dataType: 'json',
-		//	success: function(data) {
-		//		if(callback !== undefined && typeof callback === 'function'){
-		//			callback(data.success === 'oke', data);
-		//		}
-		//	}
-		//});
+	function _loadChart() {
+		var apiUrl = window.yRouting.generate('ApiGetStockExchanges', { stock_code : window.yStock.code });
+		self.isLoadSuccess(false);
+		$.ajax({
+			type: 'POST',
+			url: apiUrl,
+			dataType: 'json',			
+			success: function(data) {
+				if ( data.success == 'ok' ){
+					// Init chart:
+					$('#y-chart-container').highcharts('StockChart', {
+						rangeSelector : {
+							selected : 1
+						},
+						title : {
+							text : window.yStock.name
+						},
+						series : [{
+							name :  window.yStock.name,
+							data : data.exchanges,
+							type : 'area',
+							threshold : null,
+							tooltip : {
+								valueDecimals : 2
+							},
+							fillColor : {
+								linearGradient : {
+									x1: 0, 
+									y1: 0, 
+									x2: 0, 
+									y2: 1
+								},
+								stops : [[0, Highcharts.getOptions().colors[0]], [1, 'rgba(0,0,0,0)']]
+							}
+						}]
+					});
 
-		//Demo:
-		var demoData = {
-			success : 'oke',
-			stock: {
-				id:"534d8523a7c0e9880a000828",
-				name:"VNINDEX",
-				code:"VNINDEX",
-				is_down:true,
-				exchange_price:-0.723,
-				exchange_percent:-0.1013,
-				pre_last_exchange:{
-						"id":"534d8609a7c0e9880a004360",
-						"open_price":543.25,
-						"close_price":232.33,
-						"high_price":211.89,
-						"low_price":232.43,
-						"volume":1213424,
-						"created":{
-							"date":"2014-04-10 02:18:25",
-							"timezone_type":3,
-							"timezone":"Asia\/Bangkok"
-						}
-				},
-				last_exchange:{
-					"id":"53514aa6a7c0e9081d00008a",
-					"open_price":537.87,
-					"close_price":200.57,
-					"high_price":632.01,
-					"low_price":595.96,
-					"volume":1040454010,
-					"created":
-					{
-						"date":"2014-04-11 22:54:14",
-						"timezone_type":3,
-						"timezone":"Asia\/Bangkok"
-					}
-				},
-				market:{
-					"id":"532144f4a7c0e93c0a000000",
-					"name":"HOSE",
-					"code":"HOSE",
-					"order":1
-				},
-				range_price:{
-					"84":{
-						"max_price":809.46,
-						"min_price":147.65
-					},
-					"364":{
-						"max_price":809.46,
-						"min_price":903.04
-					}
+					self.isLoadSuccess(true);
 				}
+			},
+			complete : function(){
+				self.isLoadSuccess(true);
 			}
-		};
-		callback(demoData.success === 'oke', demoData);	
+		});
 	}
+
+	_loadChart();
 }
 
 function WatchListViewModel(options) {

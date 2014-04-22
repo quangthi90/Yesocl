@@ -39,8 +39,11 @@
 		// Stock Watch list of current User
 		var _watchList = '{{ watch_list|json_encode()|raw }}';
 		window.yWatchList = JSON.parse(_watchList);
+
 	</script>
 	{{ block('stock_common_block_watch_list_javascript') }}
+
+	<script type="text/javascript" src="{{ asset_js('libs/highstock/highstock.js') }}"></script>
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 
 {% endblock %}

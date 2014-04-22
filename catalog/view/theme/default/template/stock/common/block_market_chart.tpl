@@ -82,26 +82,9 @@
                         </div>
                     </div>
                     <div class="chart-area">
-                        <img src="image/chart-demo.jpg" alt="" /> 
+                        <div id="y-chart-container">
+                        </div>
                     </div>                    
-                </div>
-            </div>
-        </div>
-        <div class="chart-options">
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="btn-group">
-                      <a class="btn active" data-bind="click: changeTimeFilter.bind($data, 'day')">Day</a>
-                      <a class="btn" data-bind="click: changeTimeFilter.bind($data, 'week')">Week</a>
-                      <a class="btn" data-bind="click: changeTimeFilter.bind($data, 'month')">Month</a>
-                      <a class="btn" data-bind="click: changeTimeFilter.bind($data, 'year')">1 Year</a>
-                    </div>
-                </div>
-                <div class="span6" style="display: none;">
-                    <div class="btn-group pull-right">
-                      <a class="btn"><i class="icon-ellipsis-horizontal"></i> Index Details</a>
-                      <a class="btn"><i class="icon-search"></i>Search Quotes</a>
-                    </div>
                 </div>
             </div>
         </div>
