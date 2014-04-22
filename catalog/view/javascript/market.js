@@ -28,7 +28,7 @@ function ChartViewModel (options) {
 				if ( data.success == 'ok' ){
 					// Update Exchanges format for chart
 					for ( var key in data.exchanges ){
-						var exchange = data.exchanges[key];						
+						var exchange = data.exchanges[key];			
 						self.cacheExchanges.push([
 							exchange.created * 1000, // Change timestamp to UTC format
 							exchange.open_price,
@@ -527,6 +527,28 @@ function WatchListViewModel(options) {
 
 function NewsViewModel(options) {
 	var self = this;
+	self.newsList = ko.observable(y.yNews);
+
+	self.showComments = function(news) {
+		_getComments(news, function(){
+
+		}, function(){
+
+		});
+	}
+
+	self.like = function(news) {
+		
+	}
+
+	self.showLikers = function(news) {
+		
+	}
+
+	//Private functions:
+	function _getComments(news, successCallback, errorCallback) {
+		//Call ajax to get list of comment of seleting news:
+	}
 };
 
 //Common custom handlers:
