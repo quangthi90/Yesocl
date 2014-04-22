@@ -46,7 +46,7 @@ class ModelBranchCategory extends Model {
 		$oCategory->setBranch( $branch );
 		$oCategory->setOrder( $order );
 		$oCategory->setParent( $parent );
-		$oCategory->setIsBranch( (bool)$aData['isStock'] );
+		$oCategory->setIsBranch( (bool)$aData['isBranch'] );
 
 		$this->dm->persist( $oCategory );
 		$this->dm->flush();
@@ -103,7 +103,7 @@ class ModelBranchCategory extends Model {
 		$oCategory->setBranch( $branch );
 		$oCategory->setOrder( $order );
 		$oCategory->setParent( $parent );
-		$oCategory->setIsBranch( (bool)$aData['isStock'] );
+		$oCategory->setIsBranch( (bool)$aData['isBranch'] );
 
 		$this->dm->flush();
 	}

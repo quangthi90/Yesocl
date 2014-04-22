@@ -69,6 +69,59 @@ class ControllerStockMarket extends Controller {
 		}
 		$this->data['watch_list'] = array_reverse($this->data['watch_list']);
 
+		$sStockCode = $this->config->get('branch')['code']['stock'];
+		$this->load->model('branch/branch');
+		$oBranch = $this->model_branch_branch->getBranch( array('branch_code' => $sStockCode) );
+
+		$lPosts = null;
+		if ( $oBranch ){
+			$lCategories = $oBranch->getCategories();
+			$aCategoryIds = array();
+			foreach ( $lCategories as $oCategory ) {
+				if ( $oCategory->getIsBranch() ) $aCategoryIds[] = $oCategory->getId();
+			}
+			if ( count($aCategoryIds) > 0 ){
+				$this->load->model('branch/post');
+				$lPosts = $this->model_branch_post->getPosts(array(
+					'limit' => 3,
+					'branch_id' => $oBranch->getId(),
+					'category_ids' => $aCategoryIds
+				));
+			}
+		}
+
+		$this->data['news'] = array();
+		$aUsers = array();
+		$this->load->model('tool/image');
+		if ( $lPosts ){
+			foreach ( $lPosts as $oPost ) {
+				$aPost = $oPost->formatToCache();
+
+				// check user liked
+				if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+					$aPost['isUserLiked'] = true;
+				}else{
+					$aPost['isUserLiked'] = false;
+				}
+				// thumb
+				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
+				}else{
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+				}
+				$this->data['news'][] = $aPost;
+
+				if ( empty($aUsers[$aPost['user_id']]) ){
+					$oUser = $oPost->getUser();
+					$aUser = $oUser->formatToCache();
+					$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+					$aUsers[$aUser['id']] = $aUser;
+				}
+			}
+		}
+
+		$this->data['users'] = $aUsers;
+
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );	
 		

@@ -255,6 +255,10 @@ class ModelBranchPost extends Model {
 			$query['category.id'] = $aData['category_id'];
 		}
 
+		if ( !empty($aData['category_ids']) ){
+			$query['category.id'] = array('$in' => $aData['category_ids']);
+		}
+
 		if ( !empty($aData['post_ids']) ){
 			$query['id'] = array('$in' => $aData['post_ids']);
 		}elseif (isset($aData['post_ids']) ){
@@ -263,8 +267,8 @@ class ModelBranchPost extends Model {
 
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
-			// ->skip($aData['start'])
-			// ->limit($aData['limit'])
+			->skip($aData['start'])
+			->limit($aData['limit'])
 			->sort(array('created' => -1));
 
 		return $results;

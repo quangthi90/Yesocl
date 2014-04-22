@@ -1,6 +1,6 @@
 <?php
 class ModelBranchBranch extends Model {
-	public function getAllBranches( $data = array() ){
+	public function getAllBranches( $aData = array() ){
 		$query = array('deleted' => false);
 
 		$results = $this->dm->getRepository('Document\Branch\Branch')->findBy( $query );
@@ -8,15 +8,17 @@ class ModelBranchBranch extends Model {
 		return $results;
 	}
 
-	public function getBranch( $data = array() ){
+	public function getBranch( $aData = array() ){
 		$query = array('deleted' => false);
 
-		if ( !empty($data['branch_id']) ){
-			$query['id'] = $data['branch_id'];
+		if ( !empty($aData['branch_id']) ){
+			$query['id'] = $aData['branch_id'];
 		
-		}elseif ( !empty($data['branch_slug']) ){
-			$query['slug'] = $data['branch_slug'];
-		
+		}elseif ( !empty($aData['branch_slug']) ){
+			$query['slug'] = $aData['branch_slug'];
+
+		}elseif ( !empty($aData['branch_code']) ){
+			$query['code'] = $aData['branch_code'];
 		}else{
 			return null;
 		}
