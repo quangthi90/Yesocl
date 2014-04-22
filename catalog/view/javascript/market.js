@@ -8,6 +8,13 @@ function ChartViewModel (options) {
 	self.currMarketId = ko.observable(window.yCurrMarketId);
 	self.stock = ko.observable(window.yStock);
 	self.isLoadSuccess = ko.observable(false);
+	self.chartContainer = $('#y-chart-container');
+	self.cacheExchanges = [];
+	self.cacheVolumes = [];
+
+	self.zoomChart = function(){
+		_runChartAsZoomOut();		
+	};
 
 	//Private Functions:
 	function _loadChart() {
@@ -20,51 +27,25 @@ function ChartViewModel (options) {
 			success: function(data) {
 				if ( data.success == 'ok' ){
 					// Update Exchanges format for chart
-					var exchanges = [];
 					for ( var key in data.exchanges ){
-						var exchange = data.exchanges[key];
-						
-						exchanges.push([
+						var exchange = data.exchanges[key];						
+						self.cacheExchanges.push([
 							exchange.created * 1000, // Change timestamp to UTC format
 							exchange.open_price,
 							exchange.high_price,
 							exchange.low_price,
-							exchange.close_price,
-							// exchange.volume
+							exchange.close_price
+						]);
+
+						self.cacheVolumes.push([
+							exchange.created*1000,
+							exchange.volume
 						]);
 					}
 
-					// Init chart:
-					$('#y-chart-container').highcharts('StockChart', {
-						rangeSelector : {
-							selected : 1
-						},
-						title : {
-							text : window.yStock.name
-						},
-						series : [{
-							name :  window.yStock.name,
-							data : exchanges,
-							type : 'candlestick',
-							threshold : null,
-							tooltip : {
-								valueDecimals : 2
-							},
-							fillColor : {
-								linearGradient : {
-									x1: 0, 
-									y1: 0, 
-									x2: 0, 
-									y2: 1
-								},
-								stops : [[0, Highcharts.getOptions().colors[0]], [1, 'rgba(0,0,0,0)']]
-							},
-							dataGrouping: {
-				                enabled: false
-				            }
-						}]
-					});
-
+					//Run chart:
+					_runChart();
+					
 					self.isLoadSuccess(true);
 				}
 			},
@@ -73,6 +54,202 @@ function ChartViewModel (options) {
 			}
 		});
 	}
+
+	function _runChart() {
+		// Init chart:
+		var options = {};
+		options.rangeSelector = {
+			buttons: [{
+	            type: 'day',
+	            count: 1,
+	            text: '1d'
+	        }, {
+	            type: 'week',
+	            count: 1,
+	            text: '1w'
+	        }, {
+	            type: 'month',
+	            count: 1,
+	            text: '1m'
+	        }, {
+	            type: 'month',
+	            count: 6,
+	            text: '6m'
+	        }, {
+	            type: 'year',
+	            count: 1,
+	            text: '1y'
+	        }, {
+	            type: 'all',
+	            text: 'All'
+	        }],
+	        selected: 1,
+	        inputEnabled : false
+		};
+		options.yAxis = [
+			{
+		        title: {
+		            text: "OHLC"
+		        },
+		        lineWidth: 2,
+		        //height: 200					        
+		    }
+		    //, {
+		    //    title: {
+		    //        text: "Volume"
+		    //    },
+		    //    top: 300,
+		    //    height: 100,
+		    //    offset: 0,
+		    //    lineWidth: 2
+		    //}
+	    ];
+	    options.series = [
+			{
+				name :  "OHLC",
+				data : self.cacheExchanges,
+				type : 'candlestick',
+				dataGrouping: {
+	                enabled: false
+	            }
+			}
+			//,{
+		    //    type: "column",
+		    //    data: self.cacheVolumes,
+		    //    name: "Volume",						        
+		    //    yAxis: 1,
+		    //    dataGrouping: {
+			//		enabled: false
+		    //   }
+		    //}
+	    ];
+	    options.navigator = {
+			enabled : true
+		};
+		options.scrollbar = {
+			enabled : false
+		};
+	    options.title = {
+	    	text: window.yStock.name
+	    };
+
+	    //Resize chart container:
+	    var parentContentEle = self.chartContainer.parents('.tab-content').first();
+	    var chartIndexEle = parentContentEle.find('.chart-indexs');
+	    self.chartContainer.height(parentContentEle.height() - chartIndexEle.height());
+
+	    //Run chart:
+		self.chartContainer.highcharts('StockChart', options);
+	};
+
+	function _runChartAsZoomOut() {
+		// Init chart:
+		var options = {};
+		options.rangeSelector = {
+			buttons: [{
+	            type: 'day',
+	            count: 1,
+	            text: '1d'
+	        }, {
+	            type: 'week',
+	            count: 1,
+	            text: '1w'
+	        }, {
+	            type: 'month',
+	            count: 1,
+	            text: '1m'
+	        }, {
+	            type: 'month',
+	            count: 6,
+	            text: '6m'
+	        }, {
+	            type: 'year',
+	            count: 1,
+	            text: '1y'
+	        }, {
+	            type: 'all',
+	            text: 'All'
+	        }],
+	        selected: 1,
+	        inputEnabled : false
+		};
+		options.yAxis = [
+			{
+		        title: {
+		            text: "OHLC"
+		        },
+		        height: 200,
+		        lineWidth: 2,			        
+		    }
+		    , {
+		        title: {
+		            text: "Volume"
+		        },
+		        top: 300,
+		        height: 100,
+		        offset: 0,
+		        lineWidth: 2
+		    }
+	    ];
+	    options.series = [
+			{
+				name :  "OHLC",
+				data : self.cacheExchanges,
+				type : 'candlestick',
+				dataGrouping: {
+	                enabled: false
+	            }
+			}
+			,{
+		        type: "column",
+		        data: self.cacheVolumes,
+		        name: "Volume",						        
+		        yAxis: 1,
+		        dataGrouping: {
+					enabled: false
+		       }
+		    }
+	    ];
+	    options.navigator = {
+			enabled : true
+		};
+		options.scrollbar = {
+			enabled : true
+		};
+	    options.title = {
+	    	text: window.yStock.name
+	    };
+
+	    //Resize chart container:
+	    var zoomChartEle = $('<div id="zoomChart"></div>').css({
+	    	'min-width' : '1100px',
+	    	'min-height' : '550px',
+	    	'z-index' : '1000',
+	    	'margin' : 'auto',
+	    	'background-color' : '#FFF',
+	    	'opacity' : '0'
+	    }).appendTo('body');
+
+	    //Run chart:
+		zoomChartEle.highcharts('StockChart', options);
+
+		//Show popup:
+		$.magnificPopup.open({
+			items: {
+			    src: zoomChartEle,
+			    type: 'inline'
+			},
+			modal: false,
+			callbacks: {
+				open: function(){
+					zoomChartEle.css('opacity', '1');
+				},
+				close: function(){
+					zoomChartEle.remove();
+				}
+			}
+		});
+	};
 
 	_loadChart();
 }

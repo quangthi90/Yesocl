@@ -17,7 +17,7 @@
         <div class="tab-content" data-bind="with: stock">
             <div class="tab-pane active">
                 <div class="chart-content">
-                    <div class="row-fluid">
+                    <div class="row-fluid chart-indexs">
                         <div class="span6 index-overview up">
                             <ul>
                                 <li class="index-staus">
@@ -81,9 +81,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="chart-area">
-                        <div id="y-chart-container">
-                        </div>
+                    <a class="btn-zoom-chart" data-bind="click: $parent.zoomChart"><i class="icon-external-link"></i></a>          
+                    <div class="chart-area" id="y-chart-container">                  
                     </div>                    
                 </div>
             </div>
