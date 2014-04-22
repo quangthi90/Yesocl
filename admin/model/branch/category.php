@@ -112,7 +112,7 @@ class ModelBranchCategory extends Model {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$oCategory = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
-				$category->setDeleted(true);
+				if ( $oCategory ) $oCategory->setDeleted(true);
 			}
 		}
 		
@@ -160,7 +160,7 @@ class ModelBranchCategory extends Model {
 	}
 
 	public function getAllCategories( $data = array() ) {
-		$query = array();
+		$query = array('deleted' => false);
 		if ( !empty($data['branch_id']) ){
 			$query['branch.id'] = $data['branch_id'];
 		}
@@ -174,11 +174,10 @@ class ModelBranchCategory extends Model {
 	}
 	
 	public function getTotalCategories() {
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' );
+		$query = array('deleted' => false);
+		$categories = $this->dm->getRepository( 'Document\Branch\Category' )->findBy($query);
 
-		$categories = $query->getQuery()->execute();
-
-		return count($categories);
+		return $categories->count();
 	}
 
 	public function getCategoryByCode( $code ){

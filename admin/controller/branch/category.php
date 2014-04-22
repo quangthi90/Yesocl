@@ -154,14 +154,14 @@ class ControllerBranchCategory extends Controller {
 			'start' => $this->limit * ($page - 1),
 		);
 
-		$categories = $this->model_branch_category->getCategories( $data );
+		$lCategories = $this->model_branch_category->getCategories( $data );
 		
-		$oCategory_total = $this->model_branch_category->getTotalCategories();
+		$iTotalCategory = $lCategories->count();
 		
 		$this->data['categories'] = array();
 		
-		if ( $categories ){
-			foreach ( $categories as $oCategory ){
+		if ( $lCategories ){
+			foreach ( $lCategories as $oCategory ){
 				$action = array();
 
 				$action[] = array(
@@ -182,7 +182,7 @@ class ControllerBranchCategory extends Controller {
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $oCategory_total;
+		$pagination->total = $iTotalCategory;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
@@ -394,10 +394,10 @@ class ControllerBranchCategory extends Controller {
 		);
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['branch_id']) ){
 			$this->load->model('branch/category');
-			$categories = $this->model_branch_category->getAllCategories( array('branch_id' => $this->request->post['branch_id']) );
+			$lCategories = $this->model_branch_category->getAllCategories( array('branch_id' => $this->request->post['branch_id']) );
 
-			if ($categories){
-				foreach ( $categories as $oCategory ) {
+			if ($lCategories){
+				foreach ( $lCategories as $oCategory ) {
 					$json[] = array(
 						'id' => $oCategory->getId(),
 						'name' => $oCategory->getName()
