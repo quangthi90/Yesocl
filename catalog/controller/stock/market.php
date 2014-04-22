@@ -6,7 +6,7 @@ class ControllerStockMarket extends Controller {
 		} else {
 			$this->data['base'] = HTTP_SERVER;
 		}
-
+// print(date('m/d/Y h:i:s', 1214524800)); exit;
 		// Market Code
 		$sMaketCode = '';
 		if ( !empty($this->request->get['market_code']) ) {

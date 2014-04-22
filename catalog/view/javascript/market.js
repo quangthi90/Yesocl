@@ -19,6 +19,21 @@ function ChartViewModel (options) {
 			dataType: 'json',			
 			success: function(data) {
 				if ( data.success == 'ok' ){
+					// Update Exchanges format for chart
+					var exchanges = [];
+					for ( var key in data.exchanges ){
+						var exchange = data.exchanges[key];
+						
+						exchanges.push([
+							exchange.created * 1000, // Change timestamp to UTC format
+							exchange.open_price,
+							exchange.high_price,
+							exchange.low_price,
+							exchange.close_price,
+							// exchange.volume
+						]);
+					}
+
 					// Init chart:
 					$('#y-chart-container').highcharts('StockChart', {
 						rangeSelector : {
@@ -29,8 +44,8 @@ function ChartViewModel (options) {
 						},
 						series : [{
 							name :  window.yStock.name,
-							data : data.exchanges,
-							type : 'area',
+							data : exchanges,
+							type : 'candlestick',
 							threshold : null,
 							tooltip : {
 								valueDecimals : 2
@@ -43,7 +58,10 @@ function ChartViewModel (options) {
 									y2: 1
 								},
 								stops : [[0, Highcharts.getOptions().colors[0]], [1, 'rgba(0,0,0,0)']]
-							}
+							},
+							dataGrouping: {
+				                enabled: false
+				            }
 						}]
 					});
 
