@@ -33,7 +33,7 @@ Class Category {
 	private $order;
 
 	/** @MongoDB\Boolean */
-	private $isStock;
+	private $isBranch;
 
 	public function getId(){
 		return $this->id;
@@ -99,11 +99,11 @@ Class Category {
 		return $this->order;
 	}
 
-	public function setIsStock( $isStock ){
-		$this->isStock = $isStock;
+	public function setIsBranch( $isBranch ){
+		$this->isBranch = $isBranch;
 	}
 
-	public function getIsStock(){
-		return $this->isStock;
+	public function getIsBranch(){
+		return $this->isBranch;
 	}
 }

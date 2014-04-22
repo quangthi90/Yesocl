@@ -13,7 +13,7 @@ $_['entry_name']              = 'Category Name:';
 $_['entry_parent']            = 'Category Parent:';
 $_['entry_order']             = 'Order:';
 $_['entry_branch']            = 'Branch:';
-$_['entry_is_stock']          = 'Show in Stock:';
+$_['entry_is_stock']          = 'Show in Branch:';
 
 // error
 $_['error_name']              = 'Category Name must be between 3 and 128 characters!';

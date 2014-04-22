@@ -327,12 +327,12 @@ class ControllerBranchCategory extends Controller {
 		}
 
 		// Entry is Stock
-		if ( !empty($this->request->post['isStock']) ){
-			$this->data['isStock'] = $this->request->post['isStock'];
+		if ( !empty($this->request->post['isBranch']) ){
+			$this->data['isBranch'] = $this->request->post['isBranch'];
 		}elseif ( $oCategory ){
-			$this->data['isStock'] = $oCategory->getIsStock();
+			$this->data['isBranch'] = $oCategory->getIsBranch();
 		}else {
-			$this->data['isStock'] = false;
+			$this->data['isBranch'] = false;
 		}
 		
 		/*if ( $idBranch != 0 ){
