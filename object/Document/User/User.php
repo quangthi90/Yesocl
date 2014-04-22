@@ -89,6 +89,9 @@ Class User {
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch", mappedBy="members") */
 	private $branches = array();
 
+	/** @MongoDB\Boolean */
+	private $deleted;
+
 	/** @MongoDB\PrePersist */
     public function prePersist()
     {
@@ -97,6 +100,7 @@ Class User {
         $this->getDataSolrEmail();
         $this->getDataSolrFullname();
         $this->getDataSolrPrimaryEmail();
+        $this->deleted = false;
     }
 
     /** @MongoDB\PreUpdate */
@@ -170,8 +174,6 @@ Class User {
 		return null;
 	}
 
-	
-
 	/**
 	 * Get Notification By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -218,6 +220,14 @@ Class User {
 
 	public function setId( $id ) {
 		$this->id = $id;
+	}
+
+	public function getDeleted() {
+		return $this->deleted;
+	}
+
+	public function setDeleted( $deleted ) {
+		$this->deleted = $deleted;
 	}
 
 	public function setUsername( $username ){

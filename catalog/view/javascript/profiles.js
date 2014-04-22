@@ -226,8 +226,6 @@
 		});
 	};
 
-	var industries = {};
-
 	function InfoForm($el){
 		this.$el					= $el;
 		this.url					= $el.data('url');
@@ -378,6 +376,7 @@
 			$(this).addClass('label-success').parent().find('input.primary').val('1');
 		});
 
+		var locations = {};
 		this.$locationAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"cityid\"]').val('');
@@ -404,6 +403,7 @@
 			}
 		});
 
+		var industries = {};
 		this.$industryAutoComplete.typeahead({
 			source: function (query, process) {
 				that.$el.find('input[name=\"industryid\"]').val('');

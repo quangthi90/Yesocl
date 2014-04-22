@@ -263,8 +263,8 @@ class ModelBranchPost extends Model {
 
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
-			->skip($aData['start'])
-			->limit($aData['limit'])
+			// ->skip($aData['start'])
+			// ->limit($aData['limit'])
 			->sort(array('created' => -1));
 
 		return $results;

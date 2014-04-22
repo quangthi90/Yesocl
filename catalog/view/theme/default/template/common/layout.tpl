@@ -24,7 +24,9 @@
 	</head>
 	<body>
 		{{ include(template_from_string( header )) }}
-		{{ include(template_from_string( sidebar_control )) }}
+		{% if is_logged() == true %}
+			{{ include(template_from_string( sidebar_control )) }}
+		{% endif %}
 		<div id="y-container">
 			{% block body %}
 			{% endblock %}
@@ -90,7 +92,12 @@
 			var _routing = '{{ get_routing_list()|raw }}';
 			var _user = '{{ get_user_data()|raw }}';
 			window.yRouting = new Routing( JSON.parse(_routing) );
-			window.yUser = new User( JSON.parse(_user) );
+			if ( _user !== '' ){
+				window.yUser = new User( JSON.parse(_user) );
+			}else{
+				$('.post_meta').find('.post_like').hide();
+				$('.post_meta').find('.post_cm').hide();
+			}
 			window.yUsers = new HashTable();
 		</script>
 		<script type="text/javascript">

@@ -182,14 +182,19 @@ Abstract Class Post {
 	}
 
 	public function addComment( Comment $comment ){
-		$this->comments[] = $comment;
+		$comments = $this->comments->toArray();
+		array_unshift($comments, $comment);
+		$this->comments = $comments;
 	}
 
 	public function setComments( $comments ){
 		$this->comments = $comments;
 	}
 
-	public function getComments(){
+	public function getComments( $isReverse = false ){
+		if ( $isReverse ){
+			return array_reverse($this->comments->toArray());
+		}
 		return $this->comments;
 	}
 

@@ -318,29 +318,29 @@ class ModelUserUser extends Model {
 		// Slug
 		$slug = $this->url->create_slug( $data['user']['username'] );
 		
-		$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-		$arr_slugs = array_map(function($user){
-			return $user->getSlug();
-		}, $users->toArray());
+		$arr_slugs = array_map(function($oUser){
+			return $oUser->getSlug();
+		}, $lUsers->toArray());
 
 		$this->load->model( 'tool/slug' );
 		$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
 
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$user = new User();
-		$user->setSlug( $slug );
-		$user->setUsername( $data['user']['username'] );
-		$user->setEmails( $emails );
-		$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
-		$user->setGroupUser( $group );
-		$user->setMeta( $meta );
-		$user->setSalt( $salt );
+		$oUser = new User();
+		$oUser->setSlug( $slug );
+		$oUser->setUsername( $data['user']['username'] );
+		$oUser->setEmails( $emails );
+		$oUser->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
+		$oUser->setGroupUser( $group );
+		$oUser->setMeta( $meta );
+		$oUser->setSalt( $salt );
 		
 		// Add status
 		if ( isset($data['user']['status']) ){
-			$user->setStatus( $data['user']['status'] );
+			$oUser->setStatus( $data['user']['status'] );
 		}
 
 		// Avatar
@@ -348,19 +348,19 @@ class ModelUserUser extends Model {
 		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
+			$path = $folder_link . $oUser->getId();
 			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
+				$oUser->setAvatar( $data['avatar'] );
 			}
 		}
 		
 		// Save to DB
-		$this->dm->persist( $user );
+		$this->dm->persist( $oUser );
 
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
+		$this->model_tool_cache->setObject( $oUser, $this->config->get('common')['type']['user'] );
 		
 		return true;
 	}
@@ -380,8 +380,8 @@ class ModelUserUser extends Model {
 	 * @return: boolean
 	 */
 	public function editUser( $id, $data = array() ) {
-		$user = $this->dm->getRepository('Document\User\User')->find( $id );
-		if ( !$user ) {
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $id );
+		if ( !$oUser ) {
 			return false;
 		}
 		
@@ -676,32 +676,32 @@ class ModelUserUser extends Model {
 		$meta->setFormers( $formers );
 
 		// Slug
-		if ( $data['user']['username'] != $user->getUsername() ){
+		if ( $data['user']['username'] != $oUser->getUsername() ){
 			$slug = $this->url->create_slug( $data['user']['username'] );
 		
-			$users = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
+			$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$slug/i") );
 
-			$arr_slugs = array_map(function($user){
-				return $user->getSlug();
-			}, $users->toArray());
+			$arr_slugs = array_map(function($oUser){
+				return $oUser->getSlug();
+			}, $lUsers->toArray());
 
 			$this->load->model( 'tool/slug' );
 			$slug = $this->model_tool_slug->getSlug( $slug, $arr_slugs );
 			
-			$user->setSlug( $slug );
+			$oUser->setSlug( $slug );
 		}
 		
 		// Create User
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$user->setEmails( $emails );
-		$user->setUsername( $data['user']['username'] );
-		//$user->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
-		$user->setGroupUser( $group );
-		$user->setMeta( $meta );
+		$oUser->setEmails( $emails );
+		$oUser->setUsername( $data['user']['username'] );
+		//$oUser->setPassword( sha1($salt . sha1($salt . sha1($data['user']['password']))) );
+		$oUser->setGroupUser( $group );
+		$oUser->setMeta( $meta );
 	
 		// Add status
 		if ( isset($data['user']['status']) ){
-			$user->setStatus( $data['user']['status'] );
+			$oUser->setStatus( $data['user']['status'] );
 		}
 
 		// Avatar
@@ -709,25 +709,25 @@ class ModelUserUser extends Model {
 		if ( !empty($data['avatar']) && $this->model_tool_image->isValidImage($data['avatar']) ) {
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $user->getId();
+			$path = $folder_link . $oUser->getId();
 			if ( $data['avatar'] = $this->model_tool_image->uploadImage($path, $avatar_name, $data['avatar']) ) {
-				$user->setAvatar( $data['avatar'] );
+				$oUser->setAvatar( $data['avatar'] );
 			}
 		}
 
 		// Save to DB
-		$this->dm->persist( $user );
+		$this->dm->persist( $oUser );
 		$this->dm->flush();
 
 		$this->load->model('tool/cache');
-		$this->model_tool_cache->setObject( $user, $this->config->get('common')['type']['user'] );
+		$this->model_tool_cache->setObject( $oUser, $this->config->get('common')['type']['user'] );
 		
 		return true;
 	}
 
 	public function changePassword( $id, $data = array() ) {
-		$user = $this->dm->getRepository('Document\User\User')->find( $id );
-		if ( !$user ) {
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $id );
+		if ( !$oUser ) {
 			return false;
 		}
 
@@ -737,18 +737,18 @@ class ModelUserUser extends Model {
 		}
 
 		$salt = substr(md5(uniqid(rand(), true)), 0, 9);
-		$user->setSalt( $salt );
-		$user->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
+		$oUser->setSalt( $salt );
+		$oUser->setPassword( sha1($salt . sha1($salt . sha1($data['password']))) );
 
 		// Save to DB
-		$this->dm->persist( $user );
+		$this->dm->persist( $oUser );
 		$this->dm->flush();
 
 		return true;
 	}
 
 	/**
-	 * Delete User
+	 * Update attribute deleted of User is true
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param:
 	 * 	array Data{
@@ -759,7 +759,32 @@ class ModelUserUser extends Model {
 	public function deleteUser( $data = array() ) {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
+				// User info
+				$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $id );
+				if ( $oUser ){
+					$oUser->setDeleted( true );
+				}
+				$this->dm->flush();
+
+				// Delete solr
+				$query = $this->client->createUpdate();
+	            $query->removeDocument( $oUser );
+	            $this->client->execute($query);
+			}
+		}
+
+		return true;
+	}
+
+	// Delete User from database
+	// -- Not Delete -- Check again before delete
+	/*public function deleteUser( $data = array() ) {
+		if ( isset($data['id']) ) {
+			foreach ( $data['id'] as $id ) {
 				$user = $this->dm->getRepository( 'Document\User\User' )->find( $id );
+				$oPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array(
+					'user.id' => $id
+				));
 
 				if ( $user ){
 					$this->load->model('tool/image');
@@ -769,12 +794,15 @@ class ModelUserUser extends Model {
 					
 					$this->dm->remove($user);
 				}
+
+				if ( $oPosts ){
+					$this->dm->remove($oPosts);
+				}
 			}
 		}
 		$this->dm->flush();
 
-		return true;
-	}
+		return true;oU	}*/
 	
 	/**
 	 * Get One User
@@ -783,14 +811,14 @@ class ModelUserUser extends Model {
 	 * @return: Object User
 	 */
 	public function getUser( $data = array() ) {
-		$user_repository = $this->dm->getRepository( 'Document\User\User' );
+		$oUser_repository = $this->dm->getRepository( 'Document\User\User' );
 		
 		if ( isset( $data['user_id']) ){
-			return $user_repository->find( $data['user_id'] );
+			return $oUser_repository->find( $data['user_id'] );
 		}
 		
 		if ( isset( $data['email']) ){
-			return $user_repository->findOneBy( array('emails.email' => $data['email']) );
+			return $oUser_repository->findOneBy( array('emails.email' => $data['email']) );
 		}
 		
 		return null;
@@ -811,6 +839,8 @@ class ModelUserUser extends Model {
 		if ( isset($data['group_id']) ){
 			return $this->dm->getRepository( 'Document\User\User' )->findBy( array('group.id' => $data['group_id']) );
 		}
+
+		$query = array('deleted' => false);
 		
 		if (!isset($data['limit']) || ((int)$data['limit'] < 0)) {
 			$data['limit'] = 10;
@@ -820,7 +850,7 @@ class ModelUserUser extends Model {
 			$data['start'] = 0;
 		}
 
-		return $this->dm->getRepository( 'Document\User\User' )->findAll()
+		return $this->dm->getRepository( 'Document\User\User' )->findBy( $query )
 			->limit( $data['limit'] )->skip( $data['start'] )->sort( array('created' => -1) );
 	}
 	
@@ -831,8 +861,10 @@ class ModelUserUser extends Model {
 	 * @return: int Total User
 	 */
 	public function getTotalUsers() {
-		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
-		return count($users);
+		$query = array('deleted' => false);
+
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( $query );
+		return $lUsers->count();
 	}
 	
 	/**
@@ -842,14 +874,16 @@ class ModelUserUser extends Model {
 	 * @return: boolean
 	 */
 	public function isExistEmail( $curr_user_id, $email ) {
-		$users = $this->dm->getRepository( 'Document\User\User' )->findAll();
+		$query = array('deleted' => false);
+
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( $query );
 		
-		foreach ( $users as $user ) {
-			if ( $user->getId() == $curr_user_id ){
+		foreach ( $lUsers as $oUser ) {
+			if ( $oUser->getId() == $curr_user_id ){
 				continue;
 			}
 			
-			if ( $user->isExistEmail( $email ) ){
+			if ( $oUser->isExistEmail( $email ) ){
 				return true;
 			}
 		}

@@ -112,17 +112,30 @@ class ModelBranchCategory extends Model {
 		if ( isset($data['id']) ) {
 			foreach ( $data['id'] as $id ) {
 				$oCategory = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
+				$category->setDeleted(true);
+			}
+		}
+		
+		$this->dm->flush();
+	}
+	/*public function deleteCategory( $data = array() ) {
+		if ( isset($data['id']) ) {
+			foreach ( $data['id'] as $id ) {
+				$category = $this->dm->getRepository( 'Document\Branch\Category' )->find( $id );
 
 				$this->dm->remove( $oCategory );
 			}
 		}
 		
 		$this->dm->flush();
-	}
+	}*/
 	
-	public function getCategory( $action_id ) {
-		$oCategory = $this->dm->getRepository( 'Document\Branch\Category' )->find( $action_id );
-		return $oCategory;
+	public function getCategory( $category_id ) {
+		$query = array( 
+			'deleted' => false,
+			'id' => $category_id
+		);
+		return $this->dm->getRepository( 'Document\Branch\Category' )->findOneBy( $query );
 	}
 
 	public function getCategories( $data = array() ) {
@@ -136,12 +149,14 @@ class ModelBranchCategory extends Model {
 			$data['sort'] = 'order';
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Category' )
-    		->limit( $data['limit'] )
-    		->skip( $data['start'] )
-    		->sort( $data['sort'] );
-    	
-    	return $query->getQuery()->execute();
+		$query = array(
+			'deleted' => false
+		);
+
+		return $this->dm->getRepository('Document\Branch\Category')->findBy( $query )
+					->limit( $data['limit'] )
+		    		->skip( $data['start'] )
+		    		->sort( $data['sort'] );
 	}
 
 	public function getAllCategories( $data = array() ) {

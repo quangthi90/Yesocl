@@ -84,8 +84,10 @@ class ControllerAccountForgotten extends Controller {
 	private function validate() {
 		if (!isset($this->request->post['email'])) {
 			$this->error['warning'] = $this->language->get('error_email');
-		} elseif ($this->model_user_user->getTotalCustomersByEmail($this->request->post['email']) == 0) {
+		} elseif ( !$oUser = $this->model_user_user->getUserFull(array('email' => $this->request->post['email'])) ) {
 			$this->error['warning'] = $this->language->get('error_email');
+		} elseif ( $oUser->getIsSocial() ) {
+			$this->error['warning'] = $this->language->get('error_email_fb');
 		}
 
 		if (!$this->error) {

@@ -12,6 +12,7 @@ $_['text_created']			  = 'Created';
 $_['text_title']			  = 'Title';
 $_['text_status']			  = 'Status';
 $_['text_action']			  = 'Action';
+$_['text_content'] 			  = 'Content';
 
 // Entry
 $_['entry_title']             = 'Title:';

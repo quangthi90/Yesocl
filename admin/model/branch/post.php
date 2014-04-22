@@ -339,6 +339,18 @@ class ModelBranchPost extends Model {
 			$query['category.id'] = $data['category_id'];
 		}
 
+		if ( !empty($data['filter_title']) ){
+			$query['title'] = new \MongoRegex('/' . trim( $data['filter_title'] ) . './i');
+		}
+
+		if ( !empty($data['filter_category']) ){
+			$query['category.id'] = $data['filter_category'];
+		}
+
+		if ( !empty($data['filter_status']) ){
+			$query['status'] = $data['filter_status'];
+		}
+
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
 			->skip( $data['start'] )

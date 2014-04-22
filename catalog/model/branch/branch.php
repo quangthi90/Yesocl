@@ -9,19 +9,27 @@ class ModelBranchBranch extends Model {
 	}
 
 	public function getBranch( $data = array() ){
+		$query = array('deleted' => false);
+
 		if ( !empty($data['branch_id']) ){
-			return $this->dm->getRepository('Document\Branch\Branch')->find($data['branch_id']);
+			$query['id'] = $data['branch_id'];
+		
 		}elseif ( !empty($data['branch_slug']) ){
-			return $this->dm->getRepository('Document\Branch\Branch')->findOneBySlug($data['branch_slug']);
+			$query['slug'] = $data['branch_slug'];
+		
+		}else{
+			return null;
 		}
 
-		return null;
+		return $this->dm->getRepository('Document\Branch\Branch')->findOneBy($query);
 	}
 
 	public function getBranchByCategoryId( $idCategory ){
 		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $idCategory );
 
-		return $oCategory->getBranch();
+		$oBranch = $oCategory->getBranch();
+		if ( !$oBranch || $oBranch->getDeleted() == true ) return null;
+		return $oBranch;
 	}
 }
 ?>

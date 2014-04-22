@@ -1,6 +1,6 @@
 <?php 
 class ControllerDataValue extends Controller {
-	public function locationAutoComplee(){
+	public function locationAutoComplete(){
 		$json = array();
 
 		if ( !$this->customer->isLogged() ) {

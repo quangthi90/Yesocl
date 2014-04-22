@@ -4,31 +4,17 @@ use Document\AbsObject\Comment;
 use MongoId;
 
 class ModelUserComment extends Model {
-	public function getComments( $data = array() ){
-		$query = array();
+	public function getComments( $aData = array(), $isReverse = false ){
+		$oPosts = $this->dm->createQueryBuilder('Document\User\Posts')
+			->field('posts.slug')->equals($aData['post_slug'])
+		    // ->selectSlice('posts.comments', $aData['start'], $aData['limit'])
+		    ->getQuery()
+		    ->getSingleResult();
 
-		if ( empty($data['page']) ){
-			$data['page'] = 0;
-		}
+		if ( !$oPosts ) return null;
 
-		if ( empty($data['limit']) ){
-			$data['limit'] = 10;
-		}
-
-		if ( empty($data['post_slug']) ){
-			return array();
-		}
-
-		$posts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-			'posts.slug' => $data['post_slug']
-		));
-
-		$post = null;
-		if ( $posts ){
-			$post = $posts->getPostBySlug( $data['post_slug'] );
-		}
-		
-		return $post->getComments( true );
+		$this->dm->clear();
+		return $oPosts->getPostBySlug($aData['post_slug'])->getComments($isReverse);
 	}
 
 	public function getComment( $data = array() ){

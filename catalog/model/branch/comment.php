@@ -4,20 +4,21 @@ use Document\AbsObject\Comment;
 use MongoId;
 
 class ModelBranchComment extends Model {
-	public function getComments( $data = array() ){
+	public function getComments( $data = array(), $isReverse = false ){
 		if ( empty($data['post_slug']) ){
 			return array();
 		}
 
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		$oPost = $this->dm->createQueryBuilder('Document\Branch\Post')
+			->field('slug')->equals($data['post_slug'])
+		    // ->selectSlice('comments', $aData['start'], $aData['limit'])
+		    ->getQuery()
+		    ->getSingleResult();
 
-		$comments = array();
+		if ( !$oPost ) return array();
 
-		if ( $post ){
-			$comments = $post->getComments();
-		}
-		
-		return $comments;
+		$this->dm->clear();
+		return $oPost->getComments($isReverse);
 	}
 
 	public function getComment( $data ){
@@ -26,18 +27,18 @@ class ModelBranchComment extends Model {
 		}
 
 		if ( !empty($data['post_slug']) ){
-			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
 		}else{
-			$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
 				'comments.id' => $data['comment_id']
 			));
 		}
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return null;
 		}
 
-		return $post->getCommentById( $data['comment_id'] );
+		return $oPost->getCommentById( $data['comment_id'] );
 	}
 
 	public function addComment( $data = array() ){
@@ -54,8 +55,8 @@ class ModelBranchComment extends Model {
 		if ( empty($data['post_slug']) ){
 			return false;
 		}
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
-		if ( !$post ){
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
+		if ( !$oPost ){
 			return false;
 		}
 
@@ -73,7 +74,7 @@ class ModelBranchComment extends Model {
 		$comment->setContent( $data['content'] );
 		$comment->setStatus( $data['status'] );
 
-		$post->addComment( $comment );
+		$oPost->addComment( $comment );
 		
 		$this->dm->flush();
 
@@ -81,30 +82,30 @@ class ModelBranchComment extends Model {
 		$type = $this->config->get('post')['cache']['branch'];
 		$this->load->model('cache/post');
 		$data = array(
-			'post_id' => $post->getId(),
+			'post_id' => $oPost->getId(),
 			'type' => $type,
-			'type_id' => $post->getBranch()->getId(),
+			'type_id' => $oPost->getBranch()->getId(),
 			'view' => 0,
 			'created' => $comment->getCreated()
 		);
 		$this->model_cache_post->editPost( $data );
 
 		return array(
-			'post' => $post,
+			'post' => $oPost,
 			'comment' => $comment
 		);
 	}
 
 	public function editComment( $comment_id, $data = array() ){
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
 			'comments.id' => $comment_id
 		));
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
 
-		$comment = $post->getCommentById( $comment_id );
+		$comment = $oPost->getCommentById( $comment_id );
 		
 		if ( !empty($data['likerId']) ){
 			$likerIds = $comment->getLikerIds();
@@ -130,21 +131,21 @@ class ModelBranchComment extends Model {
 	}
 
 	public function deleteComment( $comment_id, $author_id ){
-		$post = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
 			'comments.id' => $comment_id
 		));
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
 
-		$comment = $post->getCommentById( $comment_id );
+		$comment = $oPost->getCommentById( $comment_id );
 		
 		if ( $comment->getUser()->getId() != $author_id ){
 			return false;
 		}
 
-		$post->getComments()->removeElement( $comment );
+		$oPost->getComments()->removeElement( $comment );
 
 		$this->dm->flush();
 

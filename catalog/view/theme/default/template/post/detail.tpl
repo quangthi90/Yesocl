@@ -83,7 +83,9 @@
 					<i class="icon-arrow-left"></i>
 				</a>
 			</div>
+			{% if is_logged() == true %}
 			{{ block('post_common_comment_post_detail') }}
+			{% endif %}
 		</div>
 	</div>
 </div>
