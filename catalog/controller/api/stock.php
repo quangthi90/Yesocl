@@ -87,16 +87,17 @@ class ControllerApiStock extends Controller {
 	}
 
 	public function getStockExchanges() {
-		if ( empty($this->request->get['stock_code']) ){
+		if ( empty($this->request->get['stock_id']) ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
-	            'error' => 'Stock code is empty!'
+	            'error' => 'Stock ID is empty!'
 	        )));
 		}
 
 		$this->load->model('stock/exchange');
+
 		$oStockExchanges = $this->model_stock_exchange->getExchange(array(
-			'stock_id' => $this->request->get['stock_code']
+			'stock_id' => $this->request->get['stock_id']
 		));
 
 		if ( !$oStockExchanges ){

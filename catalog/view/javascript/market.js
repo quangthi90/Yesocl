@@ -11,7 +11,7 @@ function ChartViewModel (options) {
 
 	//Private Functions:
 	function _loadChart() {
-		var apiUrl = window.yRouting.generate('ApiGetStockExchanges', { stock_code : window.yStock.code });
+		var apiUrl = window.yRouting.generate('ApiGetStockExchanges', { stock_id : window.yStock.id });
 		self.isLoadSuccess(false);
 		$.ajax({
 			type: 'POST',
