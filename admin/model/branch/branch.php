@@ -38,22 +38,23 @@ class ModelBranchBranch extends Model {
 
 		$slug = $this->url->create_slug( $aData['name'] ) . '-' . new MongoId();
 
-		$branch = new Branch();
-		$branch->setName( $aData['name'] );
-		$branch->setStatus( $aData['status'] );
-		$branch->setOrder( $aData['order'] );
-		$branch->setSlug( $slug );
+		$oBranch = new Branch();
+		$oBranch->setName( $aData['name'] );
+		$oBranch->setStatus( $aData['status'] );
+		$oBranch->setOrder( $aData['order'] );
+		$oBranch->setSlug( $slug );
+		$oBranch->setCode( $aData['code'] );
 		
-		$this->dm->persist( $branch );
+		$this->dm->persist( $oBranch );
 		$this->dm->flush();
 
 		$this->load->model('tool/image');
 		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
 			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId();
+			$path = $folder_link . $oBranch->getId();
 			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
-				$branch->setLogo( $aData['logo'] );
+				$oBranch->setLogo( $aData['logo'] );
 			}
 		}
 
@@ -78,9 +79,9 @@ class ModelBranchBranch extends Model {
 	*	- true: success
 	*	- false: not success
 	*/
-	public function editBranch( $branch_id, $aData = array(), $aLogo = array() ) {
-		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
-		if ( empty( $branch ) ) {
+	public function editBranch( $idBranch, $aData = array(), $aLogo = array() ) {
+		$oBranch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $idBranch );
+		if ( empty( $oBranch ) ) {
 			return false;
 		}
 
@@ -101,14 +102,15 @@ class ModelBranchBranch extends Model {
 			$aData['order'] = 0;
 		}
 
-		$branch->setName( $aData['name'] );
-		$branch->setStatus( $aData['status'] );
-		$branch->setOrder( $aData['order'] );
+		$oBranch->setName( $aData['name'] );
+		$oBranch->setStatus( $aData['status'] );
+		$oBranch->setOrder( $aData['order'] );
+		$oBranch->setCode( $aData['code'] );
 
-		if ( $aData['name'] != $branch->getName() ){
+		if ( $aData['name'] != $oBranch->getName() ){
 			$slug = $this->url->create_slug( $aData['name'] ) . '-' . new MongoId();
 
-			$branch->setSlug( $slug );
+			$oBranch->setSlug( $slug );
 		}
 		
 		$this->dm->flush();
@@ -117,9 +119,9 @@ class ModelBranchBranch extends Model {
 		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
 			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId();
+			$path = $folder_link . $oBranch->getId();
 			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
-				$branch->setLogo( $aData['logo'] );
+				$oBranch->setLogo( $aData['logo'] );
 			}
 		}
 		
@@ -148,13 +150,13 @@ class ModelBranchBranch extends Model {
 		return false;
 	}
 	/*public function deleteBranches( $aData ) {
-		if ( isset( $data['id'] ) ) {
-			foreach ($data['id'] as $id) {
-				$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
-				if ( !empty( $branch ) ) {
-					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branches.id' )->equals( $branch->getId() )->getQuery()->execute();
+		if ( isset( $aData['id'] ) ) {
+			foreach ($aData['id'] as $id) {
+				$oBranch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
+				if ( !empty( $oBranch ) ) {
+					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branches.id' )->equals( $oBranch->getId() )->getQuery()->execute();
 					
-					$this->dm->remove( $branch );
+					$this->dm->remove( $oBranch );
 				}
 			}
 		}
@@ -168,10 +170,10 @@ class ModelBranchBranch extends Model {
 	* @param: string Branch ID
 	* @return: Object Branch
 	*/
-	public function getBranch( $branch_id ) {
+	public function getBranch( $idBranch ) {
 		$query = array(
 			'deleted' => false,
-			'id' => $branch_id
+			'id' => $idBranch
 		);
 		return $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( $query );
 	}

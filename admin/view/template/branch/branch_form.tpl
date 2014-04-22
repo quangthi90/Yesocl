@@ -29,6 +29,14 @@
             <?php } ?></td>
           </tr>
           <tr>
+            <td><?php echo $entry_code; ?></td>
+            <td><select class="input-large" name="code" >
+              <?php foreach ($codes as $_code){ ?>
+              <option value="<?php echo $_code ?>" <?php if ($code == $_code){ ?>selected="selected"<?php } ?>><?php echo $_code ?></option>
+              <?php } ?>
+            </select></td>
+          </tr>
+          <tr>
             <td><?php echo $entry_logo; ?></td>
             <td>
               <div class="logo fileupload fileupload-new" data-provides="fileupload">

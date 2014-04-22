@@ -54,6 +54,11 @@ Class Branch {
 	 */
 	private $deleted = false;
 
+	/** 
+	 * @MongoDB\String
+	 */
+	private $code;
+
 	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -270,5 +275,13 @@ Class Branch {
 
 	public function getDeleted(){
 		return $this->deleted;
+	}
+
+	public function setCode( $code ){
+		$this->code = $code;
+	}
+
+	public function getCode(){
+		return $this->code;
 	}
 }

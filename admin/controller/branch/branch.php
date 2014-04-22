@@ -186,6 +186,7 @@ class ControllerBranchBranch extends Controller {
 		$this->data['column_action'] = $this->language->get( 'column_action' );
 		$this->data['column_order'] = $this->language->get( 'column_order' );
 		$this->data['column_logo'] = $this->language->get( 'column_logo' );
+		$this->data['column_code'] = $this->language->get( 'column_code' );
 
 		// button
 		$this->data['button_insert'] = $this->language->get( 'button_insert' );
@@ -195,43 +196,44 @@ class ControllerBranchBranch extends Controller {
 		$this->data['insert'] = $this->url->link( 'branch/branch/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'branch/branch/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
-		$data = array(
+		$aData = array(
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit,
 			);
 
 		// branch
-		$branches = $this->model_branch_branch->getBranches( $data );
+		$lBranches = $this->model_branch_branch->getBranches( $aData );
 
 		$this->data['branches'] = array();
-		if ( $branches ){
-			foreach ($branches as $branch) {
+		if ( $lBranches ){
+			foreach ($lBranches as $oBranch) {
 				$action = array();
 
 				$action[] = array(
 					'text' => $this->language->get( 'text_edit' ),
-					'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+					'href' => $this->url->link( 'branch/branch/update', 'token=' . $this->session->data['token'] . '&branch_id=' . $oBranch->getId(), 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 
 				$action[] = array(
 					'text' => $this->language->get( 'button_post' ),
-					'href' => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+					'href' => $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . '&branch_id=' . $oBranch->getId(), 'SSL' ),
 					'icon' => 'icon-list',
 				);
 
 				$action[] = array(
 					'text' => $this->language->get( 'button_members' ),
-					'href' => $this->url->link( 'branch/member', 'token=' . $this->session->data['token'] . '&branch_id=' . $branch->getId(), 'SSL' ),
+					'href' => $this->url->link( 'branch/member', 'token=' . $this->session->data['token'] . '&branch_id=' . $oBranch->getId(), 'SSL' ),
 					'icon' => 'icon-user',
 				);
 
 				$this->data['branches'][] = array(
-					'id' 		=> $branch->getId(),
-					'name' 		=> $branch->getName(),
-					'status' 	=> $branch->getStatus(),
-					'order' 	=> $branch->getOrder(),
-					'logo' 		=> HTTP_IMAGE . $branch->getLogo(),
+					'id' 		=> $oBranch->getId(),
+					'name' 		=> $oBranch->getName(),
+					'status' 	=> $oBranch->getStatus(),
+					'order' 	=> $oBranch->getOrder(),
+					'logo' 		=> HTTP_IMAGE . $oBranch->getLogo(),
+					'code'		=> $oBranch->getCode(),
 					'action' 	=> $action,
 				);
 			}
@@ -239,7 +241,7 @@ class ControllerBranchBranch extends Controller {
 
 		// pagination
 		$pagination = new Pagination();
-		$pagination->total = $branches->count();
+		$pagination->total = $lBranches->count();
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get( 'text_pagination' );
@@ -312,6 +314,7 @@ class ControllerBranchBranch extends Controller {
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_order'] = $this->language->get( 'entry_order' );
 		$this->data['entry_logo'] = $this->language->get( 'entry_logo' );
+		$this->data['entry_code'] = $this->language->get( 'entry_code' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -322,9 +325,9 @@ class ControllerBranchBranch extends Controller {
 
 		// branch
 		if ( isset( $this->request->get['branch_id'] ) ) {
-			$branch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
+			$oBranch = $this->model_branch_branch->getBranch( $this->request->get['branch_id'] );
 
-			if ( empty( $branch ) ) {
+			if ( empty( $oBranch ) ) {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
@@ -332,8 +335,8 @@ class ControllerBranchBranch extends Controller {
 		// name
 		if ( isset( $this->request->post['name'] ) ) {
 			$this->data['name'] = $this->request->post['name'];
-		}elseif ( isset( $branch ) ) {
-			$this->data['name'] = $branch->getName();
+		}elseif ( isset( $oBranch ) ) {
+			$this->data['name'] = $oBranch->getName();
 		}else {
 			$this->data['name'] = '';
 		}
@@ -341,8 +344,8 @@ class ControllerBranchBranch extends Controller {
 		// status
 		if ( isset( $this->request->post['status'] ) ) {
 			$this->data['status'] = $this->request->post['status'];
-		}elseif ( isset( $branch ) ) {
-			$this->data['status'] = $branch->getStatus();
+		}elseif ( isset( $oBranch ) ) {
+			$this->data['status'] = $oBranch->getStatus();
 		}else {
 			$this->data['status'] = 1;
 		}
@@ -350,18 +353,28 @@ class ControllerBranchBranch extends Controller {
 		// order
 		if ( isset($this->request->post['order']) ){
 			$this->data['order'] = $this->request->post['order'];
-		}elseif ( isset($branch) ){
-			$this->data['order'] = $branch->getOrder();
+		}elseif ( isset($oBranch) ){
+			$this->data['order'] = $oBranch->getOrder();
 		}else {
 			$this->data['order'] = 0;
 		}
 
 		// logo
-		if ( isset( $branch ) && trim( $branch->getLogo() ) != '' ) {
-			$this->data['img_logo'] = HTTP_IMAGE . $branch->getLogo();
+		if ( isset( $oBranch ) && trim( $oBranch->getLogo() ) != '' ) {
+			$this->data['img_logo'] = HTTP_IMAGE . $oBranch->getLogo();
 		}else {
 			$this->data['img_logo'] = $this->data['img_default'];
 		}
+
+		// code
+		if ( isset($this->request->post['code']) ){
+			$this->data['code'] = $this->request->post['code'];
+		}elseif ( isset($oBranch) ){
+			$this->data['code'] = $oBranch->getCode();
+		}else {
+			$this->data['code'] = '';
+		}
+		$this->data['codes'] = $this->config->get('branch')['code'];
 
 		// template
 		$this->template = 'branch/branch_form.tpl';
@@ -410,18 +423,18 @@ class ControllerBranchBranch extends Controller {
 			$filter_name = null;
 		}
 
-		$data = array(
+		$aData = array(
 			'filter_name' => $filter_name,
 			);
 
 		$this->load->model( 'branch/branch' );
-		$branches = $this->model_branch_branch->getBranches( $data );
+		$lBranches = $this->model_branch_branch->getBranches( $aData );
 
 		$json = array();
-		foreach ($branches as $branch) {
+		foreach ($lBranches as $oBranch) {
 			$json[] = array(
-				'name' => $branch->getName(),
-				'id' => $branch->getId(),
+				'name' => $oBranch->getName(),
+				'id' => $oBranch->getId(),
 				);
 		}
 
@@ -430,16 +443,16 @@ class ControllerBranchBranch extends Controller {
 
 	public function getCategory() {
 		if ( isset( $this->request->get['branch_id'] ) ) {
-			$branch_id = $this->request->get['branch_id'];
+			$oBranch_id = $this->request->get['branch_id'];
 		}else {
 			return null;
 		}
 
 		$this->load->model( 'branch/branch' );
-		$branch = $this->model_branch_branch->getBranch( $branch_id );
+		$oBranch = $this->model_branch_branch->getBranch( $oBranch_id );
 		
 		$json = array();
-		foreach ($branch->getCategories() as $category) {
+		foreach ($oBranch->getCategories() as $category) {
 			$json[] = array(
 				'name' => $category->getName(),
 				'id' => $category->getId(),
