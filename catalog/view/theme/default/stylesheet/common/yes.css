@@ -3426,15 +3426,16 @@ a.wall-link:hover {
   background-color: #FFFFFF;
   padding: 20px 20px 20px 20px;
 }
-.stock-block .block-content .chart-options {
-  background-color: #FFF;
-  padding: 10px;
-  z-index: 16;
+.stock-block .block-content .btn-zoom-chart {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 36px;
-  border-bottom: 1px solid #F0F0F0;
+  font-size: 20px;
+  right: 35px;
+  z-index: 10;
+  margin-top: 40px;
+  display: none;
+}
+.stock-block .block-content:hover .btn-zoom-chart {
+  display: block;
 }
 .stock-block .chart-title {
   margin: 0px;
