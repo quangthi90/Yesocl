@@ -71,7 +71,7 @@ class ControllerStockExchange extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			if ( $this->model_stock_exchange->editExchange($this->request->get['exchange_id'], $this->request->post) ){
+			if ( $this->model_stock_exchange->editExchange($this->request->get['stock_id'], $this->request->get['exchange_id'], $this->request->post) ){
 				$this->session->data['success'] = $this->language->get('text_success');
 			}else{
 				$this->session->data['error_warning'] = $this->language->get('error_warning');
@@ -101,7 +101,7 @@ class ControllerStockExchange extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_stock_exchange->deleteExchanges( $this->request->post );
+			$this->model_stock_exchange->deleteExchanges( $this->request->get['stock_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 			$this->redirect( $this->url->link('stock/exchange', 'token=' . $this->session->data['token'] . '&stock_id=' . $this->request->get['stock_id'], 'sSL') );
@@ -222,11 +222,13 @@ class ControllerStockExchange extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'stock/exchange/update', 'exchange_id=' . $aExchange['id'] . '&token=' . $this->session->data['token'] . $url, 'sSL' ),
+					'href' => $this->url->link( 'stock/exchange/update', 'exchange_id=' . $aExchange['created'] . '&token=' . $this->session->data['token'] . $url, 'sSL' ),
 					'icon' => 'icon-edit',
 				);
 
+				$aExchange['id'] = $aExchange['created'];
 				$aExchange['created'] = date('d/m/Y', $aExchange['created']);
+				$aExchange['action'] = $action;
 				$this->data['exchanges'][] = $aExchange;
 
 				$key++;
@@ -355,7 +357,7 @@ class ControllerStockExchange extends Controller {
 			$this->redirect( $this->url->link('stock/stock', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 		if ( isset($this->request->get['exchange_id']) ){
-			$oExchange = $oStockExchanges->getExchangeById( $idExchange );
+			$oExchange = $oStockExchanges->getExchanges()[$idExchange];
 			
 			if ( $oExchange ){
 				$this->data['action'] = $this->url->link( 'stock/exchange/update', 'exchange_id=' . $idExchange . '&token=' . $this->session->data['token'] . $url, 'sSL' );
@@ -368,7 +370,7 @@ class ControllerStockExchange extends Controller {
 		if ( isset($this->request->post['high']) ){
 			$this->data['high'] = $this->request->post['high'];
 		}elseif ( isset($oExchange) ){
-			$this->data['high'] = $oExchange->getHighPrice();
+			$this->data['high'] = $oExchange['high_price'];
 		}else {
 			$this->data['high'] = '';
 		}
@@ -377,7 +379,7 @@ class ControllerStockExchange extends Controller {
 		if ( isset($this->request->post['low']) ){
 			$this->data['low'] = $this->request->post['low'];
 		}elseif ( isset($oExchange) ){
-			$this->data['low'] = $oExchange->getLowPrice();
+			$this->data['low'] = $oExchange['low_price'];
 		}else {
 			$this->data['low'] = '';
 		}
@@ -386,7 +388,7 @@ class ControllerStockExchange extends Controller {
 		if ( isset($this->request->post['open']) ){
 			$this->data['open'] = $this->request->post['open'];
 		}elseif ( isset($oExchange) ){
-			$this->data['open'] = $oExchange->getOpenPrice();
+			$this->data['open'] = $oExchange['open_price'];
 		}else {
 			$this->data['open'] = '';
 		}
@@ -395,7 +397,7 @@ class ControllerStockExchange extends Controller {
 		if ( isset($this->request->post['close']) ){
 			$this->data['close'] = $this->request->post['close'];
 		}elseif ( isset($oExchange) ){
-			$this->data['close'] = $oExchange->getClosePrice();
+			$this->data['close'] = $oExchange['close_price'];
 		}else {
 			$this->data['close'] = '';
 		}
@@ -404,7 +406,7 @@ class ControllerStockExchange extends Controller {
 		if ( isset($this->request->post['volume']) ){
 			$this->data['volume'] = $this->request->post['volume'];
 		}elseif ( isset($oExchange) ){
-			$this->data['volume'] = $oExchange->getVolume();
+			$this->data['volume'] = $oExchange['volume'];
 		}else {
 			$this->data['volume'] = '';
 		}
@@ -413,7 +415,7 @@ class ControllerStockExchange extends Controller {
 		if ( isset($this->request->post['created']) ){
 			$this->data['created'] = $this->request->post['created'];
 		}elseif ( isset($oExchange) ){
-			$this->data['created'] = $oExchange->getCreated()->format('m/d/Y');
+			$this->data['created'] = date('m/d/Y', $oExchange['created']);
 		}else {
 			$this->data['created'] = '';
 		}

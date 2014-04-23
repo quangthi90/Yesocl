@@ -19,26 +19,6 @@ Class Exchanges {
 	/** @MongoDB\ReferenceOne(targetDocument="Stock") */
 	private $stock;
 
-	public function getExchangeByCreated( $created ){
-		foreach ( $this->exchanges as $oExchange ) {
-			if ( $oExchange->getCreated == $created ){
-				return $oExchange;
-			}
-		}
-
-		return null;
-	}
-
-	public function getExchangeById( $idExchange ){
-		foreach ( $this->exchanges as $oExchange ) {
-			if ( $oExchange->getId() == $idExchange ){
-				return $oExchange;
-			}
-		}
-
-		return null;
-	}
-
 	/**
 	 * Calculate Max and Min price in a some day
 	 * 2014/04/13
@@ -114,7 +94,7 @@ Class Exchanges {
 		$this->exchanges[$timestamp] = $exchange->formatToCache();
 		krsort($this->exchanges);
 		
-		if ( !$this->stock->getLastExchange() || $exchange->getCreated() >= $this->stock->getLastExchange()->getCreated() ){
+		if ( !$this->stock->getLastExchange() || $exchange->getCreated() > $this->stock->getLastExchange()->getCreated() ){
 			if ( $this->stock->getLastExchange()->getClosePrice() > $exchange->getClosePrice() ){
 				$this->stock->setIsDown( true );
 			}else{

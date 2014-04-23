@@ -63,67 +63,69 @@ class ModelStockExchange extends Model {
 		return true;
 	}
 
-	public function editExchange( $idExchange, $aData = array() ) {
+	public function editExchange( $idStock, $idExchange, $aData = array() ) {
 		$oStockExchanges = $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( array(
-			'exchanges.id' => $idExchange
+			'stock.id' => $idStock
 		));
 		if ( !$oStockExchanges ){
 			return false;
 		}
+		$aExchanges = $oStockExchanges->getExchanges();
 
-		if ( !$oExchange = $oStockExchanges->getExchangeById($idExchange) ){
+		if ( !$aExchange = $aExchanges[$idExchange] ){
 			return false;
 		}
 
 		// created
 		if ( !empty($aData['created']) ) {
-			$aData['created'] = date_create_from_format('m/d/Y', $aData['created']);
-			$oExchange->setCreated( $aData['created'] );
+			$aData['created'] = date_create_from_format('m/d/Y', $aData['created'])->getTimestamp();
+			$aExchange['created'] = $aData['created'];
 		}
 
 		// high price
 		if ( !empty($aData['high']) ) {
-			$oExchange->setHighPrice( $aData['high'] );
+			$aExchange['high_price'] = $aData['high'];
 		}
 
 		// low price
 		if ( !empty($aData['low']) ) {
-			$oExchange->setLowPrice( $aData['low'] );
+			$aExchange['low_price'] = $aData['low'];
 		}
 
 		// open price
 		if ( !empty($aData['open']) ) {
-			$oExchange->setOpenPrice( $aData['open'] );
+			$aExchange['open_price'] = $aData['open'];
 		}
 
 		// close price
 		if ( !empty($aData['close']) ) {
-			$oExchange->setClosePrice( $aData['close'] );
+			$aExchange['close_price'] = $aData['close'];
 		}
 
 		// volume
 		if ( !empty($aData['volume']) ) {
-			$oExchange->setVolume( $aData['volume'] );
+			$aExchange['volume'] = $aData['volume'];
 		}
+
+		$aExchanges[$idExchange] = $aExchange;
+		$oStockExchanges->setExchanges( $aExchanges );
 		
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteExchanges( $aData = array() ) {
+	public function deleteExchanges( $idStock, $aData = array() ) {
 		if ( !empty($aData['id']) ) {
-			$oStockExchanges = $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( array('exchanges.id' => $aData['id'][0]) );
+			$oStockExchanges = $this->dm->getRepository('Document\Stock\Exchanges')->findOneBy( array('stock.id' => $idStock) );
 			if ( !$oStockExchanges ){
 				return false;
 			}
+			$aExchanges = $oStockExchanges->getExchanges();
 			foreach ($aData['id'] as $id) {
-				$oExchange = $oStockExchanges->getExchangeById( $id );
-
-				if ( $oExchange ) {
-					$oStockExchanges->getExchanges()->removeElement( $oExchange );
-				}
+				unset( $aExchanges[$id] );
 			}
+			$oStockExchanges->setExchanges( $aExchanges );
 		}
 
 		$this->dm->flush();
