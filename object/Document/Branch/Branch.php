@@ -60,6 +60,29 @@ Class Branch {
 	private $code;
 
 	/**
+	 * Get All Category of Branch follow isBranch value
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 *		- Boolean $bIsBranch
+	 *		- Boolean $bIsObject
+	 * @return:
+	 * 		- List Category Object if $bIsGetId == false
+	 * 		- List Category ID if $bIsGetId == true
+	 */
+	public function getIsBranchCategories( $bIsBranch, $bIsGetId = false ){
+		$aCategories = array();
+		foreach ( $this->categories as $oCategory ){
+			if ( $oCategory->getIsBranch() == $bIsBranch ){
+				if ( !$bIsGetId ) $aCategories[] = $oCategory;
+				
+				else $aCategories[] = $oCategory->getId();
+			}
+		}
+		
+		return $aCategories;
+	}
+
+	/**
 	 * Get Post By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
 	 * @param: string Post ID

@@ -112,5 +112,65 @@ class ControllerApiStock extends Controller {
             'exchanges' => $oStockExchanges->getExchanges()
         )));
 	}
+
+	public function getLastStockNews() {
+		$sStockCode = $this->config->get('branch')['code']['stock'];
+		
+		$this->load->model('branch/branch');
+		$this->load->model('branch/post');
+		$this->load->model('tool/image');
+		
+		$lPosts = null;
+		$aPosts = array();
+		$aUsers = array();
+
+		$oBranch = $this->model_branch_branch->getBranch( array('branch_code' => $sStockCode) );
+		if ( $oBranch ){
+			$aCategoryIds = $oBranch->getIsBranchCategories( true, true );
+			if ( count($aCategoryIds) > 0 ){
+				$lPosts = $this->model_branch_post->getPosts(array(
+					'limit' => 3,
+					'branch_id' => $oBranch->getId(),
+					'category_ids' => $aCategoryIds
+				));
+			}
+		}
+		
+		if ( $lPosts ){
+			foreach ( $lPosts as $oPost ) {
+				$aPost = $oPost->formatToCache();
+
+				// check user liked
+				if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+					$aPost['isUserLiked'] = true;
+				}else{
+					$aPost['isUserLiked'] = false;
+				}
+				// thumb
+				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
+				}else{
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+				}
+				$aPosts[] = $aPost;
+
+				if ( empty($aUsers[$aPost['user_id']]) ){
+					$oUser = $oPost->getUser();
+					$aUser = $oUser->formatToCache();
+					$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+					$aUsers[$aUser['id']] = $aUser;
+				}
+			}
+		}
+
+		$this->data['posts'] = $aPosts;
+		$this->data['users'] = $aUsers;
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'posts' => $aPosts,
+            'users' => $aUsers
+        )));
+	}
 }
 ?>

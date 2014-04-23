@@ -39,12 +39,6 @@
 		// Stock Watch list of current User
 		var _watchList = '{{ watch_list|json_encode()|raw }}';
 		window.yWatchList = JSON.parse(_watchList);
-
-		{% if news|length > 0 %}
-		// News
-		var _news = '{{ news|json_encode()|raw }}';
-		window.yNews = JSON.parse(_news);
-		{% endif %}
 	</script>
 	{{ block('stock_common_block_watch_list_javascript') }}
 

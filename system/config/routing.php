@@ -104,4 +104,5 @@ $_['routing']['ApiGetAllStocks']				= 'service/get/all-stocks/';
 $_['routing']['ApiPushWatchList']				= 'service/push/user-watch-list/';
 $_['routing']['ApiDeleteWatchListItem']			= 'service/delete/user-watch-list/item/{stock_id}/';
 $_['routing']['ApiGetStockExchanges']			= 'service/get/stock/{stock_id}/exchanges/';
+$_['routing']['ApiGetLastStockNews']			= 'service/get/stock/last-news/';
 ?>
