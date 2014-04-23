@@ -3593,6 +3593,12 @@ a.wall-link:hover {
   font-size: 25px;
   margin-right: 5px;
 }
+.wl-item .index-status .index-icon i.icon-caret-down {
+  color: red !important;
+}
+.wl-item .index-status .index-icon i.icon-caret-up {
+  color: green !important; 
+}
 .wl-item .index-status .index-mount {
   font-size: 28px;
   color: #6C8882;
