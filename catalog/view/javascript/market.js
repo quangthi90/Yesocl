@@ -11,6 +11,41 @@ function ChartViewModel (options) {
 	self.chartContainer = $('#y-chart-container');
 	self.cacheExchanges = [];
 	self.cacheVolumes = [];
+	self.defaultRangeSelector = {
+		buttons: [{
+            type: 'week',
+            count: 1,
+            text: '1w'
+        }, {
+            type: 'month',
+            count: 1,
+            text: '1m'
+        }, {
+            type: 'month',
+            count: 3,
+            text: '3m'
+        }, {
+            type: 'month',
+            count: 6,
+            text: '6m'
+        }, {
+            type: 'year',
+            count: 1,
+            text: '1y'
+        }, {
+            type: 'all',
+            text: 'All'
+        }],
+        selected: 1,
+        inputEnabled : true
+	};
+	self.defaultTooltip = {
+		backgroundColor: "#F0F0F0",
+		borderColor: "#DDDDDD",
+		borderRadius: 0,
+		borderWidth: 1,
+		useHTML : true
+	};
 
 	self.zoomChart = function(){
 		_runChartAsZoomOut();		
@@ -18,17 +53,22 @@ function ChartViewModel (options) {
 
 	//Private Functions:
 	function _loadChart() {
-		var apiUrl = window.yRouting.generate('ApiGetStockExchanges', { stock_id : window.yStock.id });
+
+		//Resize chart container:
+	    var parentContentEle = self.chartContainer.parents('.tab-content').first();
+	    var chartIndexEle = parentContentEle.find('.chart-indexs');
+	    self.chartContainer.height(parentContentEle.height() - chartIndexEle.height());
+
 		self.isLoadSuccess(false);
 		$.ajax({
 			type: 'POST',
-			url: apiUrl,
+			url: window.yRouting.generate('ApiGetStockExchanges', { stock_id : window.yStock.id }),
 			dataType: 'json',			
 			success: function(data) {
 				if ( data.success == 'ok' ){
 					// Update Exchanges format for chart
 					for ( var key in data.exchanges ){
-						var exchange = data.exchanges[key];						
+						var exchange = data.exchanges[key];			
 						self.cacheExchanges.push([
 							exchange.created * 1000, // Change timestamp to UTC format
 							exchange.open_price,
@@ -42,10 +82,10 @@ function ChartViewModel (options) {
 							exchange.volume
 						]);
 					}
-
 					//Run chart:
 					_runChart();
-					
+
+					//Completed loading:
 					self.isLoadSuccess(true);
 				}
 			},
@@ -56,87 +96,31 @@ function ChartViewModel (options) {
 	}
 
 	function _runChart() {
-		// Init chart:
 		var options = {};
-		options.rangeSelector = {
-			buttons: [{
-	            type: 'day',
-	            count: 1,
-	            text: '1d'
-	        }, {
-	            type: 'week',
-	            count: 1,
-	            text: '1w'
-	        }, {
-	            type: 'month',
-	            count: 1,
-	            text: '1m'
-	        }, {
-	            type: 'month',
-	            count: 6,
-	            text: '6m'
-	        }, {
-	            type: 'year',
-	            count: 1,
-	            text: '1y'
-	        }, {
-	            type: 'all',
-	            text: 'All'
-	        }],
-	        selected: 1,
-	        inputEnabled : false
-		};
-		options.yAxis = [
-			{
-		        title: {
-		            text: "OHLC"
-		        },
-		        lineWidth: 2,
-		        //height: 200					        
-		    }
-		    //, {
-		    //    title: {
-		    //        text: "Volume"
-		    //    },
-		    //    top: 300,
-		    //    height: 100,
-		    //    offset: 0,
-		    //    lineWidth: 2
-		    //}
-	    ];
+		options.rangeSelector = self.defaultRangeSelector;
+		options.tooltip = self.defaultTooltip;
 	    options.series = [
 			{
 				name :  "OHLC",
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
-	                enabled: false
+	                enabled: false,
+	                dateTimeLabelFormats: {
+						minute: ['%A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y']
+					}
 	            }
 			}
-			//,{
-		    //    type: "column",
-		    //    data: self.cacheVolumes,
-		    //    name: "Volume",						        
-		    //    yAxis: 1,
-		    //    dataGrouping: {
-			//		enabled: false
-		    //   }
-		    //}
 	    ];
 	    options.navigator = {
-			enabled : true
+			enabled : false
 		};
 		options.scrollbar = {
 			enabled : false
 		};
 	    options.title = {
 	    	text: window.yStock.name
-	    };
-
-	    //Resize chart container:
-	    var parentContentEle = self.chartContainer.parents('.tab-content').first();
-	    var chartIndexEle = parentContentEle.find('.chart-indexs');
-	    self.chartContainer.height(parentContentEle.height() - chartIndexEle.height());
+	    };	    
 
 	    //Run chart:
 		self.chartContainer.highcharts('StockChart', options);
@@ -145,34 +129,7 @@ function ChartViewModel (options) {
 	function _runChartAsZoomOut() {
 		// Init chart:
 		var options = {};
-		options.rangeSelector = {
-			buttons: [{
-	            type: 'day',
-	            count: 1,
-	            text: '1d'
-	        }, {
-	            type: 'week',
-	            count: 1,
-	            text: '1w'
-	        }, {
-	            type: 'month',
-	            count: 1,
-	            text: '1m'
-	        }, {
-	            type: 'month',
-	            count: 6,
-	            text: '6m'
-	        }, {
-	            type: 'year',
-	            count: 1,
-	            text: '1y'
-	        }, {
-	            type: 'all',
-	            text: 'All'
-	        }],
-	        selected: 1,
-	        inputEnabled : false
-		};
+		options.rangeSelector = self.defaultRangeSelector;
 		options.yAxis = [
 			{
 		        title: {
@@ -197,7 +154,10 @@ function ChartViewModel (options) {
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
-	                enabled: false
+	                enabled: false,	                
+	                dateTimeLabelFormats: {
+						minute: ['%A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y']
+					}
 	            }
 			}
 			,{
@@ -527,6 +487,28 @@ function WatchListViewModel(options) {
 
 function NewsViewModel(options) {
 	var self = this;
+	self.newsList = ko.observable(window.yNews);
+
+	self.showComments = function(news) {
+		_getComments(news, function(){
+
+		}, function(){
+
+		});
+	}
+
+	self.like = function(news) {
+		
+	}
+
+	self.showLikers = function(news) {
+		
+	}
+
+	//Private functions:
+	function _getComments(news, successCallback, errorCallback) {
+		//Call ajax to get list of comment of seleting news:
+	}
 };
 
 //Common custom handlers:
