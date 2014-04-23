@@ -11,6 +11,34 @@ function ChartViewModel (options) {
 	self.chartContainer = $('#y-chart-container');
 	self.cacheExchanges = [];
 	self.cacheVolumes = [];
+	self.defaultRangeSelector = {
+			buttons: [{
+	            type: 'week',
+	            count: 1,
+	            text: '1 week'
+	        }, {
+	            type: 'month',
+	            count: 1,
+	            text: '1 month'
+	        }, {
+	            type: 'month',
+	            count: 3,
+	            text: '3 months'
+	        }, {
+	            type: 'month',
+	            count: 6,
+	            text: '6 months'
+	        }, {
+	            type: 'year',
+	            count: 1,
+	            text: '1 year'
+	        }, {
+	            type: 'all',
+	            text: 'All'
+	        }],
+	        selected: 1,
+	        inputEnabled : false
+		};
 
 	self.zoomChart = function(){
 		_runChartAsZoomOut();		
@@ -58,51 +86,14 @@ function ChartViewModel (options) {
 	function _runChart() {
 		// Init chart:
 		var options = {};
-		options.rangeSelector = {
-			buttons: [{
-	            type: 'day',
-	            count: 1,
-	            text: '1d'
-	        }, {
-	            type: 'week',
-	            count: 1,
-	            text: '1w'
-	        }, {
-	            type: 'month',
-	            count: 1,
-	            text: '1m'
-	        }, {
-	            type: 'month',
-	            count: 6,
-	            text: '6m'
-	        }, {
-	            type: 'year',
-	            count: 1,
-	            text: '1y'
-	        }, {
-	            type: 'all',
-	            text: 'All'
-	        }],
-	        selected: 1,
-	        inputEnabled : false
-		};
+		options.rangeSelector = self.rangeSelector;
 		options.yAxis = [
 			{
 		        title: {
 		            text: "OHLC"
 		        },
-		        lineWidth: 2,
-		        //height: 200					        
+		        lineWidth: 2,				        
 		    }
-		    //, {
-		    //    title: {
-		    //        text: "Volume"
-		    //    },
-		    //    top: 300,
-		    //    height: 100,
-		    //    offset: 0,
-		    //    lineWidth: 2
-		    //}
 	    ];
 	    options.series = [
 			{
@@ -113,15 +104,6 @@ function ChartViewModel (options) {
 	                enabled: false
 	            }
 			}
-			//,{
-		    //    type: "column",
-		    //    data: self.cacheVolumes,
-		    //    name: "Volume",						        
-		    //    yAxis: 1,
-		    //    dataGrouping: {
-			//		enabled: false
-		    //   }
-		    //}
 	    ];
 	    options.navigator = {
 			enabled : true
@@ -145,34 +127,7 @@ function ChartViewModel (options) {
 	function _runChartAsZoomOut() {
 		// Init chart:
 		var options = {};
-		options.rangeSelector = {
-			buttons: [{
-	            type: 'day',
-	            count: 1,
-	            text: '1d'
-	        }, {
-	            type: 'week',
-	            count: 1,
-	            text: '1w'
-	        }, {
-	            type: 'month',
-	            count: 1,
-	            text: '1m'
-	        }, {
-	            type: 'month',
-	            count: 6,
-	            text: '6m'
-	        }, {
-	            type: 'year',
-	            count: 1,
-	            text: '1y'
-	        }, {
-	            type: 'all',
-	            text: 'All'
-	        }],
-	        selected: 1,
-	        inputEnabled : false
-		};
+		options.rangeSelector = self.defaultRangeSelector;
 		options.yAxis = [
 			{
 		        title: {
@@ -527,7 +482,7 @@ function WatchListViewModel(options) {
 
 function NewsViewModel(options) {
 	var self = this;
-	self.newsList = ko.observable(y.yNews);
+	self.newsList = ko.observable(window.yNews);
 
 	self.showComments = function(news) {
 		_getComments(news, function(){
