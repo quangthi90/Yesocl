@@ -12,33 +12,40 @@ function ChartViewModel (options) {
 	self.cacheExchanges = [];
 	self.cacheVolumes = [];
 	self.defaultRangeSelector = {
-			buttons: [{
-	            type: 'week',
-	            count: 1,
-	            text: '1 week'
-	        }, {
-	            type: 'month',
-	            count: 1,
-	            text: '1 month'
-	        }, {
-	            type: 'month',
-	            count: 3,
-	            text: '3 months'
-	        }, {
-	            type: 'month',
-	            count: 6,
-	            text: '6 months'
-	        }, {
-	            type: 'year',
-	            count: 1,
-	            text: '1 year'
-	        }, {
-	            type: 'all',
-	            text: 'All'
-	        }],
-	        selected: 1,
-	        inputEnabled : false
-		};
+		buttons: [{
+            type: 'week',
+            count: 1,
+            text: '1w'
+        }, {
+            type: 'month',
+            count: 1,
+            text: '1m'
+        }, {
+            type: 'month',
+            count: 3,
+            text: '3m'
+        }, {
+            type: 'month',
+            count: 6,
+            text: '6m'
+        }, {
+            type: 'year',
+            count: 1,
+            text: '1y'
+        }, {
+            type: 'all',
+            text: 'All'
+        }],
+        selected: 1,
+        inputEnabled : true
+	};
+	self.defaultTooltip = {
+		backgroundColor: "#F0F0F0",
+		borderColor: "#DDDDDD",
+		borderRadius: 0,
+		borderWidth: 1,
+		useHTML : true
+	};
 
 	self.zoomChart = function(){
 		_runChartAsZoomOut();		
@@ -46,11 +53,16 @@ function ChartViewModel (options) {
 
 	//Private Functions:
 	function _loadChart() {
-		var apiUrl = window.yRouting.generate('ApiGetStockExchanges', { stock_id : window.yStock.id });
+
+		//Resize chart container:
+	    var parentContentEle = self.chartContainer.parents('.tab-content').first();
+	    var chartIndexEle = parentContentEle.find('.chart-indexs');
+	    self.chartContainer.height(parentContentEle.height() - chartIndexEle.height());
+
 		self.isLoadSuccess(false);
 		$.ajax({
 			type: 'POST',
-			url: apiUrl,
+			url: window.yRouting.generate('ApiGetStockExchanges', { stock_id : window.yStock.id }),
 			dataType: 'json',			
 			success: function(data) {
 				if ( data.success == 'ok' ){
@@ -70,10 +82,10 @@ function ChartViewModel (options) {
 							exchange.volume
 						]);
 					}
-
 					//Run chart:
 					_runChart();
-					
+
+					//Completed loading:
 					self.isLoadSuccess(true);
 				}
 			},
@@ -84,41 +96,31 @@ function ChartViewModel (options) {
 	}
 
 	function _runChart() {
-		// Init chart:
 		var options = {};
-		options.rangeSelector = self.rangeSelector;
-		options.yAxis = [
-			{
-		        title: {
-		            text: "OHLC"
-		        },
-		        lineWidth: 2,				        
-		    }
-	    ];
+		options.rangeSelector = self.defaultRangeSelector;
+		options.tooltip = self.defaultTooltip;
 	    options.series = [
 			{
 				name :  "OHLC",
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
-	                enabled: false
+	                enabled: false,
+	                dateTimeLabelFormats: {
+						minute: ['%A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y']
+					}
 	            }
 			}
 	    ];
 	    options.navigator = {
-			enabled : true
+			enabled : false
 		};
 		options.scrollbar = {
 			enabled : false
 		};
 	    options.title = {
 	    	text: window.yStock.name
-	    };
-
-	    //Resize chart container:
-	    var parentContentEle = self.chartContainer.parents('.tab-content').first();
-	    var chartIndexEle = parentContentEle.find('.chart-indexs');
-	    self.chartContainer.height(parentContentEle.height() - chartIndexEle.height());
+	    };	    
 
 	    //Run chart:
 		self.chartContainer.highcharts('StockChart', options);
@@ -152,7 +154,10 @@ function ChartViewModel (options) {
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
-	                enabled: false
+	                enabled: false,	                
+	                dateTimeLabelFormats: {
+						minute: ['%A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y']
+					}
 	            }
 			}
 			,{

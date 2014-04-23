@@ -3431,11 +3431,19 @@ a.wall-link:hover {
   font-size: 20px;
   right: 35px;
   z-index: 10;
-  margin-top: 40px;
+  margin-top: 10px;
   display: none;
 }
 .stock-block .block-content:hover .btn-zoom-chart {
   display: block;
+}
+.stock-block .block-content .loading-background {
+  position: absolute;
+  top: 125px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  padding: 100px;
 }
 .stock-block .chart-title {
   margin: 0px;
@@ -3671,7 +3679,7 @@ a.wall-link:hover {
   font-size: 15px;
 }
 
-.news-container .news-column {  
+.news-container .news-column {
   width: 32%;
   margin-right: 1%;
   float: left;

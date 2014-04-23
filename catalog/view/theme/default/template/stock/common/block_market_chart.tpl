@@ -81,9 +81,16 @@
                             </div>
                         </div>
                     </div>
-                    <a class="btn-zoom-chart" data-bind="click: $parent.zoomChart"><i class="icon-external-link"></i></a>          
-                    <div class="chart-area" id="y-chart-container">                  
-                    </div>                    
+                    <!-- ko if: $parent.isLoadSuccess() -->
+                    <a class="btn-zoom-chart" data-bind="click: $parent.zoomChart"><i class="icon-zoom-out"></i></a>
+                    <!-- /ko -->
+                    <div class="chart-area" id="y-chart-container">
+                        <!-- ko if: !$parent.isLoadSuccess() -->
+                        <div class="loading-background">
+                            <i style="font-size: 30px;" class="icon-spin icon-spinner"></i>
+                        </div>
+                        <!-- /ko -->
+                    </div>      
                 </div>
             </div>
         </div>
