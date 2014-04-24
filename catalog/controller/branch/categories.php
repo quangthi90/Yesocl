@@ -54,7 +54,7 @@ class ControllerBranchCategories extends Controller {
 				}
 
 				// thumb
-				if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
 					$aPosts[$i]['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 				}else{
 					$aPosts[$i]['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
