@@ -1,7 +1,7 @@
 {% block stock_common_news_item %}
 <div class="news-item">
 	<a class="news-link" data-bind="link: { title: $data.title, route: 'PostPage', params: { post_type :  'branch', post_slug: $data.slug } }">
-		<img class="news-img" data-bind="attr: { src : $data.thumb, alt : $data.title } ">
+		<img class="news-img" data-bind="attr: { src : $data.image, alt : $data.title } ">
 	</a>
 	<a class="news-title" data-bind="link: { text: $data.title, title: $data.title, route: 'PostPage', params: { post_type : 'branch', post_slug: $data.slug } }">
 	</a>

@@ -22,6 +22,7 @@ function PostModel(data) {
 	that.content = data.content || '';
 	that.created = data.created || null;
 	that.thumb = data.thumb || '';
+	that.image = data.image || '';
 	that.slug = data.slug || '';
 	that.email = data.email || '';
 	that.category = data !== undefined ? {

@@ -488,6 +488,12 @@ function WatchListViewModel(options) {
 function NewsViewModel(options) {
 	var self = this;
 	self.newsList = ko.observableArray();
+	var newsContainer = $(".news-container");
+	var mainContent = $("#y-main-content");
+
+	self.newsList.subscribe(function(value){
+		_adjustLayout(value);
+	});
 
 	self.showComments = function(news) {
 		_getComments(news, function(){
@@ -506,6 +512,12 @@ function NewsViewModel(options) {
 	}
 
 	//Private functions:
+	function _adjustLayout(data){
+		var totalWidth = data.length * 345;
+		newsContainer.parents('.stock-block').width(totalWidth);
+		mainContent.width(mainContent.outerWidth() + totalWidth);
+	}
+
 	function _loadNews(){
 		$.ajax({
 			type: 'POST',

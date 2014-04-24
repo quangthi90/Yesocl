@@ -16,8 +16,7 @@
     <div id="y-main-content" class="has-horizontal stock-page">
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
-        {{ block('stock_common_block_news') }}    
-        {{ block('stock_common_block_ideas') }}
+        {{ block('stock_common_block_news') }} 
         {{ block('stock_common_block_post_report') }}
     </div>
 </div>

@@ -709,18 +709,7 @@ var yCurrUser = new CurrentUser();
 
 			var newContainer = content.find('.news-container');
 			if(newContainer.length > 0) {
-				widthBlock = 0;
-				newContainer.children('.news-item').each(function(){					
-					$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-					$(this).height(heightContent - 20);
-					var heightImage = $(this).find('.news-link').first().outerHeight();
-					var heightTitle = $(this).find('.news-title').first().outerHeight();
-					var heightMeta = $(this).find('.news-meta').first().outerHeight();
-					$(this).find('.news-short-content').height(heightContent - 20 - heightImage - heightTitle - heightMeta);
-
-					$(this).css({ 'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px' });
-					widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
-				});
+				widthBlock = ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
 			}
 
 			$(this).width(widthBlock);
