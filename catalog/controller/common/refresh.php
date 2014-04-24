@@ -56,7 +56,7 @@ class ControllerCommonRefresh extends Controller {
 		// Get list Posts
 		foreach ($aPosts as $i => $aPost) {
 			// thumb
-			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
 				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
 			}else{
 				$aPost['image'] = null;
