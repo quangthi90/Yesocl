@@ -10,46 +10,30 @@ function MarketModel(data) {
 	ko.mapping.fromJS(data, {}, this);
 }
 
-function StockModel(data) {
-	'use strict';
-
+function PostModel(data) {
 	var that = this;
 
-	that.id = ko.observable('');
-	that.name = ko.observable('');
-	that.code = ko.observable('');
-	that.is_down = ko.observable(false);
-	that.exchange_price = ko.observable('');
-	that.exchange_percent = ko.observable('');
-	that.range_price = {
-		84: {
-			min_price: ko.observable(''),
-			max_price: ko.observable('')
-		},
-		364: {
-			min_price: ko.observable(''),
-			max_price: ko.observable('')
-		}
-	};
-	that.pre_last_exchange = new ExchangeModel(data.pre_last_exchange);
-	that.last_exchange = new ExchangeModel(data.last_exchange);
-	that.market = new MarketModel(data.market);
+	that.id = data.id || '';
+	that.author = data.author || '';
+	that.authorId = data.user_id || '';
+	that.authorSlug = data.user_slug || '';
+	that.title = data.title || '';
+	that.description = data.description || '';
+	that.content = data.content || '';
+	that.created = data.created || null;
+	that.thumb = data.thumb || '';
+	that.slug = data.slug || '';
+	that.email = data.email || '';
+	that.category = data !== undefined ? {
+		id : data.category_id,
+		slug: data.category_slug,
+		name : data.category_name
+	} : { };
+	that.commentCount = ko.observable(data.comment_count || 0);
+	that.likeCount = ko.observable(data.like_count || 0);
+	that.likers = ko.observableArray(data.liker_ids || []);
+	that.countViewer = ko.observable(data.count_viewer || 0);
+	that.isLiked = ko.observable(data.isUserLiked || false);
 
-	ko.mapping.fromJS(data, {}, this);
-}
 
-function ExchangeModel(data){
-	'use strict';
-
-	var that = this;
-
-	that.id = ko.observable('');
-	that.open_price = ko.observable('');
-	that.close_price = ko.observable('');
-	that.high_price = ko.observable('');
-	that.low_price = ko.observable('');
-	that.volume = ko.observable('');
-	// that.created = ko.observable('');
-
-	ko.mapping.fromJS(data, {}, this);
 }

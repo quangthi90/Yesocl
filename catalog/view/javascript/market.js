@@ -487,7 +487,7 @@ function WatchListViewModel(options) {
 
 function NewsViewModel(options) {
 	var self = this;
-	self.newsList = ko.observable(window.yNews);
+	self.newsList = ko.observableArray();
 
 	self.showComments = function(news) {
 		_getComments(news, function(){
@@ -506,9 +506,35 @@ function NewsViewModel(options) {
 	}
 
 	//Private functions:
+	function _loadNews(){
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiGetLastStockNews'),
+			dataType: 'json',			
+			success: function(data) {
+				if(data.success === "ok"){
+					ko.utils.arrayForEach(data.posts, function(p){
+						var newsItem = new PostModel(p);
+						self.newsList.push(newsItem);
+					});					
+				}else {
+					self.newsList([]);
+				}
+			},
+			error : function(){
+				//error
+			}
+		});
+	}
+
 	function _getComments(news, successCallback, errorCallback) {
 		//Call ajax to get list of comment of seleting news:
 	}
+
+	//Delay for loading news:
+	setTimeout(function(){
+		_loadNews();
+	}, 1000);	
 };
 
 //Common custom handlers:
@@ -530,7 +556,9 @@ ko.bindingHandlers.link = {
 		var options = valueAccessor();
         var href = window.yRouting.generate(options.route, options.params);
 		$(element).attr('href', href);
-		$(element).html(options.text);
+		if(options.text){
+			$(element).html(options.text);	
+		}
 		if(options.isNewTab){
 			$(element).attr('target', '_blank');
 		}

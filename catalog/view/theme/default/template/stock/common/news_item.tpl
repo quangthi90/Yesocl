@@ -1,24 +1,20 @@
 {% block stock_common_news_item %}
 <div class="news-item">
-	<a href="#" class="news-link">
-		<img class="news-img" src="image/no-image-branch-post.jpg" alt="Title of news">
+	<a class="news-link" data-bind="link: { title: $data.title, route: 'PostPage', params: { post_type :  'branch', post_slug: $data.slug } }">
+		<img class="news-img" data-bind="attr: { src : $data.thumb, alt : $data.title } ">
 	</a>
-	<a href="#" class="news-title">
-		Title of news				
+	<a class="news-title" data-bind="link: { text: $data.title, title: $data.title, route: 'PostPage', params: { post_type : 'branch', post_slug: $data.slug } }">
 	</a>
 	<div class="news-meta">
-		<a href="#">
+		<a data-bind="link: { title: $data.author, route: 'WallPage', params: { user_slug: $data.authorSlug } }">
 			<img class="news-owner-img" src="image/no_user_avatar.png" alt="WMThiet">
 		</a>
 		<div class="fl">
-			<a href="#" class="news-owner">WMThiet</a>
+			<a class="news-owner" data-bind="link: { text: $data.author, title: $data.author, route: 'WallPage', params: { user_slug: $data.authorSlug } }"></a>
 			<span class="news-time">6 hours ago</span>
 		</div>
 	</div>
-	<div class="news-short-content">
-		Content content content content content content content content 
-		content content content content content content content content 
-		content content content content content content content content 
+	<div class="news-short-content" data-bind="text: $data.description">		
 	</div>
 	<div class="news-actions">
 		<div class="row-fluid">
@@ -27,7 +23,7 @@
 					<a href="">
 						<i class="icon-eye-open"></i>
 					</a>
-					<d class="counter">100</d>
+					<d class="counter" data-bind="text: $data.likeCount"></d>
 				</span>
 			</div>
 			<div class="span4">
@@ -35,7 +31,7 @@
 					<a href="">
 						<i class="icon-comments"></i>
 					</a>
-					<d class="counter">100</d>
+					<d class="counter" data-bind="text: $data.commentCount"></d>
 				</span>
 			</div>
 			<div class="span4">
@@ -44,7 +40,7 @@
 						<i class="icon-thumbs-up"></i>	
 					</a>
 					<a href="#">
-						<d class="counter">100</d>
+						<d class="counter" data-bind="text: $data.countViewer"></d>
 					</a>
 				</span>
 			</div>
