@@ -24,8 +24,8 @@ Class Post extends AbstractPost {
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
-			'title' 		=> $this->getTitle(),
-			'description'	=> $this->getDescription(),
+			'title' 		=> html_entity_decode($this->getTitle()),
+			'description'	=> html_entity_decode($this->getDescription()),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),

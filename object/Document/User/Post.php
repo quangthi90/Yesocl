@@ -94,7 +94,7 @@ Class Post {
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
-			'title' 		=> $this->getTitle(),
+			'title' 		=> html_entity_decode($this->getTitle()),
 			'content' 		=> html_entity_decode($this->getContent()),
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),
