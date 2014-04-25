@@ -97,12 +97,20 @@ $_['routing']['StockMarketNone']				= 'stock/market/';
 $_['routing']['StockMarket']					= 'stock/market/{market_code}/';
 $_['routing']['StockPage']						= 'stock/page/{stock_code}/';
 
-// Ajax
+
+//-- API --//
+// Common
 $_['routing']['AjaxGetRouting']					= 'service/get/routing/';
 $_['routing']['SetLanguage']					= 'service/push/language/';
-$_['routing']['ApiGetAllStocks']				= 'service/get/all-stocks/';
-$_['routing']['ApiPushWatchList']				= 'service/push/user-watch-list/';
-$_['routing']['ApiDeleteWatchListItem']			= 'service/delete/user-watch-list/item/{stock_id}/';
+
+// Stock
+$_['routing']['ApiGetAllStocks']				= 'service/get/stock/all/';
+$_['routing']['ApiPostWatchList']				= 'service/post/stock/watch-list/many/';
+$_['routing']['ApiDeleteWatchListItem']			= 'service/delete/stock/watch-list/item/{stock_id}/';
 $_['routing']['ApiGetStockExchanges']			= 'service/get/stock/{stock_id}/exchanges/';
-$_['routing']['ApiGetLastStockNews']			= 'service/get/stock/last-news/';
+$_['routing']['ApiGetLastStockNews']			= 'service/get/stock/news/last/';
+
+// Post
+$_['routing']['ApiPutPostLike']					= 'service/put/{post_type}/post/{post_slug}/like/';
+$_['routing']['ApiPutPostInfo']					= 'service/put/{post_type}/post/{post_slug}/';
 ?>

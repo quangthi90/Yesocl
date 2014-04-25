@@ -459,7 +459,7 @@ function WatchListViewModel(options) {
 	function _submitSaveWatchlist(ids) {
 		$.ajax({
 			type: 'POST',
-			url: window.yRouting.generate('ApiPushWatchList'),
+			url: window.yRouting.generate('ApiPostWatchList'),
 			data: {stock_ids: ids},
 			dataType: 'json',
 			success: function(data) {
