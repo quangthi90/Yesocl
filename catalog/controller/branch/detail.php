@@ -65,7 +65,7 @@ class ControllerBranchDetail extends Controller {
 				$aPost['is_edit'] = false;
 			}
 
-			if ( isset($aPost['thumb']) && !empty($aPost['thumb']) ){
+			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
 				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
 			}else{
 				$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
