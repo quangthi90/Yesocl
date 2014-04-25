@@ -36,11 +36,18 @@
 			</div>
 			<div class="span4">
 				<span href="" class="news-action">
-					<a href="">
+					<!-- ko if: !$data.isLiked() -->
+					<a style="cursor: pointer;" data-bind="click: $data.likePost">
 						<i class="icon-thumbs-up"></i>	
 					</a>
+					<!-- /ko -->
+					<!-- ko if: $data.isLiked() -->
+					<a style="cursor: pointer;" data-bind="click: $data.likePost">
+						<i class="icon-thumbs-down"></i>	
+					</a>
+					<!-- /ko -->
 					<a href="#">
-						<d class="counter" data-bind="text: $data.countViewer"></d>
+						<d class="counter" data-bind="text: $data.likeCount"></d>
 					</a>
 				</span>
 			</div>

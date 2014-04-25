@@ -26,6 +26,7 @@ function PostModel(data) {
 	that.thumb = data.thumb || '';
 	that.image = data.image || '';
 	that.slug = data.slug || '';
+	that.type = data.type || '';
 	that.email = data.email || '';
 	that.category = data !== undefined ? {
 		id : data.category_id,
@@ -38,5 +39,25 @@ function PostModel(data) {
 	that.countViewer = ko.observable(data.count_viewer || 0);
 	that.isLiked = ko.observable(data.isUserLiked || false);
 
-
+	that.likePost = function() {
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiPutPostLike', {
+				post_type: that.type,
+				post_slug: that.slug
+			}),
+			dataType: 'json',			
+			success: function(data) {
+				if(data.success === "ok"){
+					that.isLiked(!that.isLiked());
+					that.likeCount( data.like_count );
+				}else {
+					// error
+				}
+			},
+			error : function(){
+				//error
+			}
+		});
+	};
 }

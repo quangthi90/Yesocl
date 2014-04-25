@@ -41,7 +41,8 @@ Class Post extends AbstractPost {
 			'count_viewer'	=> $this->getCountViewer(),
 			'category_slug'	=> $this->category->getSlug(),
 			'category_name'	=> $this->category->getName(),
-			'category_id'	=> $this->category->getId()
+			'category_id'	=> $this->category->getId(),
+			'type' 			=> 'branch'
 		);
 
 		return $post_data;

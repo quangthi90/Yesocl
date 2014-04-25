@@ -82,7 +82,7 @@ class ControllerApiPost extends Controller {
         )));
     }
 
-	public function Like() {
+	public function like() {
 		if ( empty($this->request->get['post_slug']) ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
