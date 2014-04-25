@@ -30,7 +30,7 @@ Class Post extends AbstractPost {
 			'created'		=> $this->getCreated(),
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
-			'thumb'			=> $this->getThumb(),
+			'thumb'			=> is_file(DIR_IMAGE . $this->getThumb()) ? $this->getThumb() : null,
 			'slug'			=> $this->getSlug(),
 			'status'		=> $this->getStatus(),
 			'email'			=> $this->getEmail(),

@@ -514,9 +514,12 @@ function NewsViewModel(options) {
 			success: function(data) {
 				if(data.success === "ok"){
 					ko.utils.arrayForEach(data.posts, function(p){
+						var user = data.users[p.user_id];
+						p.username = user.username;
+						p.avatar = user.avatar;
 						var newsItem = new PostModel(p);
 						self.newsList.push(newsItem);
-					});					
+					});
 				}else {
 					self.newsList([]);
 				}

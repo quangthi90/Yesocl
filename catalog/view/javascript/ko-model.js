@@ -17,11 +17,14 @@ function PostModel(data) {
 	that.author = data.author || '';
 	that.authorId = data.user_id || '';
 	that.authorSlug = data.user_slug || '';
+	that.username = data.username || '';
+	that.avatar = data.avatar || '';
 	that.title = data.title || '';
 	that.description = data.description || '';
 	that.content = data.content || '';
 	that.created = data.created || null;
 	that.thumb = data.thumb || '';
+	that.image = data.image || '';
 	that.slug = data.slug || '';
 	that.email = data.email || '';
 	that.category = data !== undefined ? {
