@@ -22,9 +22,9 @@ Class Post extends AbstractPost {
 		$limit = 200;
 
 		if ( $isTimestamp == true ){
-			$created = $this->created->getTimestamp();
+			$created = $this->getCreated()->getTimestamp();
 		}else{
-			$created = $this->created;
+			$created = $this->getCreated();
 		}
 
 		$post_data = array(
