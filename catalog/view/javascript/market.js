@@ -459,7 +459,7 @@ function WatchListViewModel(options) {
 	function _submitSaveWatchlist(ids) {
 		$.ajax({
 			type: 'POST',
-			url: window.yRouting.generate('ApiPushWatchList'),
+			url: window.yRouting.generate('ApiPostWatchList'),
 			data: {stock_ids: ids},
 			dataType: 'json',
 			success: function(data) {
@@ -526,9 +526,12 @@ function NewsViewModel(options) {
 			success: function(data) {
 				if(data.success === "ok"){
 					ko.utils.arrayForEach(data.posts, function(p){
+						var user = data.users[p.user_id];
+						p.username = user.username;
+						p.avatar = user.avatar;
 						var newsItem = new PostModel(p);
 						self.newsList.push(newsItem);
-					});					
+					});
 				}else {
 					self.newsList([]);
 				}

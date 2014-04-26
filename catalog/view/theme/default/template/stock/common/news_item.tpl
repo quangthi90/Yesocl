@@ -6,11 +6,11 @@
 	<a class="news-title" data-bind="link: { text: $data.title, title: $data.title, route: 'PostPage', params: { post_type : 'branch', post_slug: $data.slug } }">
 	</a>
 	<div class="news-meta">
-		<a data-bind="link: { title: $data.author, route: 'WallPage', params: { user_slug: $data.authorSlug } }">
-			<img class="news-owner-img" src="image/no_user_avatar.png" alt="WMThiet">
+		<a data-bind="link: { title: $data.username, route: 'WallPage', params: { user_slug: $data.authorSlug } }">
+			<img class="news-owner-img" data-bind="attr: {src: $data.avatar, alt: $data.username}">
 		</a>
 		<div class="fl">
-			<a class="news-owner" data-bind="link: { text: $data.author, title: $data.author, route: 'WallPage', params: { user_slug: $data.authorSlug } }"></a>
+			<a class="news-owner" data-bind="link: { text: $data.username, title: $data.username, route: 'WallPage', params: { user_slug: $data.authorSlug } }"></a>
 			<span class="news-time">6 hours ago</span>
 		</div>
 	</div>
@@ -36,11 +36,18 @@
 			</div>
 			<div class="span4">
 				<span href="" class="news-action">
-					<a href="">
+					<!-- ko if: !$data.isLiked() -->
+					<a style="cursor: pointer;" data-bind="click: $data.likePost">
 						<i class="icon-thumbs-up"></i>	
 					</a>
+					<!-- /ko -->
+					<!-- ko if: $data.isLiked() -->
+					<a style="cursor: pointer;" data-bind="click: $data.likePost">
+						<i class="icon-thumbs-down"></i>	
+					</a>
+					<!-- /ko -->
 					<a href="#">
-						<d class="counter" data-bind="text: $data.countViewer"></d>
+						<d class="counter" data-bind="text: $data.likeCount"></d>
 					</a>
 				</span>
 			</div>

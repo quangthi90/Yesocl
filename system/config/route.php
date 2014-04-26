@@ -99,12 +99,19 @@ $_['route']['StockMarket']					= 'stock/market/';
 $_['route']['StockMarketNone']				= 'stock/market/';
 $_['route']['StockPage']					= 'stock/stock/';
 
-// Ajax
+//-- API --//
+// Common
 $_['route']['AjaxGetRouting']				= 'api/config/getRoutings/';
 $_['route']['SetLanguage']					= 'api/language/setLanguage/';
+
+// Stock
 $_['route']['ApiGetAllStocks']				= 'api/stock/getAllStocks/';
-$_['route']['ApiPushWatchList']				= 'api/stock/addStocksToWatchList/';
+$_['route']['ApiPostWatchList']				= 'api/stock/addStocksToWatchList/';
 $_['route']['ApiDeleteWatchListItem']		= 'api/stock/removeStockFromWatchList/';
 $_['route']['ApiGetStockExchanges']			= 'api/stock/getStockExchanges/';
 $_['route']['ApiGetLastStockNews']			= 'api/stock/getLastStockNews/';
+
+// Post
+$_['route']['ApiPutPostLike']				= 'api/post/like/';
+$_['route']['ApiPutPostInfo']				= 'api/post/edit/';
 ?>

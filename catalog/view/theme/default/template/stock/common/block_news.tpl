@@ -3,7 +3,7 @@
 {% block stock_common_block_news %}
 <div class="feed-block stock-block" data-bind="with: $root.newsModel">
     <div class="block-header">
-        <h3 class="block-title">News <i class="icon-caret-right"></i></h3>
+        <h3 class="block-title">{% trans %}News{% endtrans %} <i class="icon-caret-right"></i></h3>
     </div>
     <div class="block-content">
         <div class="news-container" data-bind="foreach: newsList">
