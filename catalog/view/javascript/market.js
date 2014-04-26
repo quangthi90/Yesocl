@@ -487,13 +487,10 @@ function WatchListViewModel(options) {
 
 function NewsViewModel(options) {
 	var self = this;
+	self.id = ko.observable(options.Id);
 	self.newsList = ko.observableArray();
-	var newsContainer = $(".news-container");
+	self.isLoadSuccess = ko.observable(false);
 	var mainContent = $("#y-main-content");
-
-	self.newsList.subscribe(function(value){
-		_adjustLayout(value);
-	});
 
 	self.showComments = function(news) {
 		_getComments(news, function(){
@@ -503,22 +500,36 @@ function NewsViewModel(options) {
 		});
 	}
 
-	self.like = function(news) {
-		
+	self.like = function(news) {		
 	}
 
-	self.showLikers = function(news) {
-		
+	self.showLikers = function(news) {	
 	}
 
 	//Private functions:
-	function _adjustLayout(data){
-		var totalWidth = data.length * 345;
-		newsContainer.parents('.stock-block').width(totalWidth);
-		mainContent.width(mainContent.outerWidth() + totalWidth);
+	function _adjustLayout(){
+		var widthBlock = 0;
+		var newsContainer = $("#" + options.Id);
+		var heightContent = newsContainer.find('.block-content').height();
+		var heightHeader  = newsContainer.find('.block-header').height();
+		newsContainer.find('.news-item').each(function(){
+			$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
+			$(this).height(heightContent - heightHeader);
+			var heightImage = $(this).find('.news-link').first().outerHeight();
+			var heightTitle = $(this).find('.news-title').first().outerHeight();
+			var heightMeta = $(this).find('.news-meta').first().outerHeight();
+			$(this).find('.news-short-content').height(heightContent - heightHeader - heightImage - heightTitle - heightMeta);
+			$(this).css({ 
+				'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
+			});
+			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
+		});
+		newsContainer.width(widthBlock);
+		mainContent.width(mainContent.outerWidth() + widthBlock);
 	}
 
 	function _loadNews(){
+		self.isLoadSuccess(false);
 		$.ajax({
 			type: 'POST',
 			url: window.yRouting.generate('ApiGetLastStockNews'),
@@ -530,11 +541,13 @@ function NewsViewModel(options) {
 						p.username = user.username;
 						p.avatar = user.avatar;
 						var newsItem = new PostModel(p);
-						self.newsList.push(newsItem);
+						self.newsList.push(newsItem);						
 					});
 				}else {
 					self.newsList([]);
-				}
+				}				
+				self.isLoadSuccess(true);
+				_adjustLayout();
 			},
 			error : function(){
 				//error
@@ -549,7 +562,7 @@ function NewsViewModel(options) {
 	//Delay for loading news:
 	setTimeout(function(){
 		_loadNews();
-	}, 1000);	
+	}, 300);	
 };
 
 //Common custom handlers:
@@ -587,13 +600,13 @@ $(document).ready(function(){
 
 	//Add options to view model:
 	var chartOptions = {
-		API_Url : ''
+		API_Url : ""
 	};
 	var watchListOptions = {
-		API_Url : ''
+		API_Url : ""
 	};
 	var newsOptions = {
-		API_Url : ''
+		Id : "stock-news"
 	};
 
 	var viewModel = {
