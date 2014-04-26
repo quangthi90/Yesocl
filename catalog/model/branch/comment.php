@@ -21,24 +21,16 @@ class ModelBranchComment extends Model {
 		return $oPost->getComments($isReverse);
 	}
 
-	public function getComment( $data ){
-		if ( empty($data['comment_id']) ){
-			return array();
-		}
-
-		if ( !empty($data['post_slug']) ){
-			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $data['post_slug'] );
-		}else{
-			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
-				'comments.id' => $data['comment_id']
-			));
-		}
+	public function getComment( $idComment ){
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+			'comments.id' => $data['comment_id']
+		));
 
 		if ( !$oPost ){
 			return null;
 		}
 
-		return $oPost->getCommentById( $data['comment_id'] );
+		return $oPost->getCommentById( $idComment );
 	}
 
 	public function addComment( $data = array() ){

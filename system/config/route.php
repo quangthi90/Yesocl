@@ -114,4 +114,9 @@ $_['route']['ApiGetLastStockNews']			= 'api/stock/getLastStockNews/';
 // Post
 $_['route']['ApiPutPostLike']				= 'api/post/like/';
 $_['route']['ApiPutPostInfo']				= 'api/post/edit/';
+$_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
+
+// Comment
+$_['route']['ApiGetComments']				= 'api/comment/getComments/';
+$_['route']['ApiGetCommentLiker']			= 'api/comment/getLikers/';
 ?>

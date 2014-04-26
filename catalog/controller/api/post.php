@@ -377,7 +377,7 @@ class ControllerApiPost extends Controller {
                     $aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUser->getId() );
                     $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 
-                    $aUsers[] = $aUser;
+                    $aUsers[$aUser['id']] = $aUser;
                 }
             }
         }
