@@ -20,7 +20,7 @@
 		<div class="row-fluid">
 			<div class="span4">
 				<span class="news-action">
-					<a href="">
+					<a data-bind="click: likePost">
 						<i class="icon-eye-open"></i>
 					</a>
 					<d class="counter" data-bind="text: $data.likeCount"></d>
