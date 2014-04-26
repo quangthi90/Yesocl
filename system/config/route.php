@@ -119,4 +119,5 @@ $_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';
 $_['route']['ApiGetCommentLiker']			= 'api/comment/getLikers/';
+$_['route']['ApiPutCommentLike']			= 'api/comment/like/';
 ?>

@@ -293,75 +293,38 @@ class ControllerApiComment extends Controller {
     public function like(){
         $aDatas = array();
 
-        if ( !empty($this->request->get['comment_id']) ){
-            $aDatas['comment_id'] = $this->request->get['comment_id'];
-        }else{
+        if ( empty($this->request->get['comment_id']) ){
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: comment id empty'
+                'success' => 'not ok',
+                'error' => 'comment id empty'
             )));
         }
 
-        if ( !empty($this->request->get['post_slug']) ){
-            $aDatas['post_slug'] = $this->request->get['post_slug'];
-        }else{
+        if ( empty($this->request->get['post_type']) ){
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: post slug empty'
+                'success' => 'not ok',
+                'error' => 'post type is empty!'
             )));
         }
-
-        if ( !empty($this->request->get['post_type']) ){
-            $aDatas['post_type'] = $this->request->get['post_type'];
-        }else{
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok: post type empty'
-            )));
-        }
-
-        $aDatas['likerId'] = $this->customer->getId();
         
-        switch ($aDatas['post_type']) {
-            case $this->config->get('post')['type']['branch']:
-                $this->load->model('branch/comment');
-                $oComment = $this->model_branch_comment->editComment( $aDatas['comment_id'], $aDatas );
-                break;
+        $sModel = $this->request->get['post_type'] . '/comment';
+        $this->load->model($sModel);
+        $this->load->model('tool/image');
+        $this->load->model('user/user');
+        $this->load->model('friend/friend');
+        $this->load->model('friend/follower');
 
-            case $this->config->get('post')['type']['user']:
-                $this->load->model('user/comment');
-                $oComment = $this->model_user_comment->editComment( $aDatas['comment_id'], $aDatas );
-                break;
-            
-            default:
-                $oComment = null;
-                break;
-        }
+        $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
+        $oComment = $this->$sModelLink->editComment(
+            $this->request->get['comment_id'],
+            array('likerId' => $this->customer->getId())
+        );
 
         if ( !$oComment ){
             return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok'
+                'success' => 'not ok',
+                'error' => 'Like comment has error'
             )));
-        }
-
-        if ( $oComment->getUser()->getId() != $this->customer->getId() ){
-            $this->load->model('user/notification');
-
-            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
-                $this->model_user_notification->addNotification(
-                    $oComment->getUser()->getSlug(),
-                    $this->customer->getUser(),
-                    $this->config->get('common')['action']['like'],
-                    $oComment->getId(),
-                    $aDatas['post_slug'],
-                    $aDatas['post_type'],
-                    $this->config->get('common')['object']['comment']
-                );
-            }else{
-                $this->model_user_notification->deleteNotification(
-                    $oComment->getUser()->getId(),
-                    $this->customer->getId(),
-                    $oComment->getId(),
-                    $this->config->get('common')['action']['like']
-                );
-            }
         }
 
         return $this->response->setOutput(json_encode(array(
@@ -377,13 +340,6 @@ class ControllerApiComment extends Controller {
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'comment id empty'
-            )));
-        }
-
-        if ( empty($this->request->get['post_slug']) ){
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'post slug is empty'
             )));
         }
 

@@ -117,5 +117,6 @@ $_['routing']['ApiGetPostLiker']				= 'service/get/{post_type}/post/{post_slug}/
 
 // Comment
 $_['routing']['ApiGetComments']					= 'service/get/{post_type}/post/{post_slug}/comments/';
-$_['routing']['ApiGetCommentLiker']				= 'service/get/{post_type}/post/{post_slug}/comment/{comment_id}/liker/';
+$_['routing']['ApiGetCommentLiker']				= 'service/get/{post_type}/post/comment/{comment_id}/liker/';
+$_['routing']['ApiPutCommentLike']				= 'service/put/{post_type}/post/comment/{comment_id}/like/';
 ?>
