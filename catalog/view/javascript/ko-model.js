@@ -61,3 +61,8 @@ function PostModel(data) {
 		});
 	};
 }
+
+function CommentModel(data){
+	var that = this;
+	
+}

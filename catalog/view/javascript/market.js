@@ -492,20 +492,6 @@ function NewsViewModel(options) {
 	self.isLoadSuccess = ko.observable(false);
 	var mainContent = $("#y-main-content");
 
-	self.showComments = function(news) {
-		_getComments(news, function(){
-
-		}, function(){
-
-		});
-	}
-
-	self.like = function(news) {		
-	}
-
-	self.showLikers = function(news) {	
-	}
-
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
@@ -555,14 +541,122 @@ function NewsViewModel(options) {
 		});
 	}
 
-	function _getComments(news, successCallback, errorCallback) {
-		//Call ajax to get list of comment of seleting news:
-	}
-
 	//Delay for loading news:
 	setTimeout(function(){
 		_loadNews();
-	}, 300);	
+	}, 300);
+};
+
+function CommentBoxViewModel(params){
+	var self = this;
+
+	this.controlId = ko.observable(params.Id || "comment-box");
+	this.commentList = ko.observableArray(params.commentList || []);
+	this.postData = ko.observable(params.postData|| []);
+
+
+	//Publuc functions:
+	self.showCommentBox = function(commentList, postData){
+		self.commentList(commentList);
+		self.postData(postData);
+		_displayCommentBox();
+	};
+	self.closeCommentBox = function(){
+		_hideCommentBox();
+	};
+	self.addComment = function(){
+		var successCallback = function(data){
+
+		};
+		var failCallback = function(data){
+
+		};
+		var commentData = {};
+		_addComment(commentData, successCallback, failCallback);
+	};
+	self.deleteComment = function(comment) {
+
+	};
+	self.likeComment = function(comment){
+
+	}
+
+	//Private functions:
+	function _displayCommentBox() {
+		$("#" + self.controlId()).show();
+	}
+	function _hideCommentBox() {
+		$("#" + self.controlId()).hide();
+	}
+	function _addComment(data, successCallback, failCallback, errorCallback){
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiGetLastStockNews'),
+			dataType: 'json',			
+			success: function(data) {
+				if(data.success === "ok"){
+					if(successCallback && typeof successCallback === "function"){
+						successCallback(data);
+					}
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			},
+			error : function(){
+				if(errorCallback && typeof errorCallback === "function"){
+					errorCallback();
+				}
+			}
+		});
+	}
+	function _deleteComment(data, successCallback, failCallback, errorCallback){
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiGetLastStockNews'),
+			dataType: 'json',			
+			success: function(data) {
+				if(data.success === "ok"){
+					if(successCallback && typeof successCallback === "function"){
+						successCallback(data);
+					}
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			},
+			error : function(){
+				if(errorCallback && typeof errorCallback === "function"){
+					errorCallback();
+				}
+			}
+		});
+	}
+	function _likeComment(data, successCallback, failCallback, errorCallback){
+		$.ajax({
+			type: 'POST',
+			url: window.yRouting.generate('ApiGetLastStockNews'),
+			dataType: 'json',			
+			success: function(data) {
+				if(data.success === "ok"){
+					if(successCallback && typeof successCallback === "function"){
+						successCallback(data);
+					}
+				}else {
+					if(failCallback && typeof failCallback === "function"){
+						failCallback(data);
+					}
+				}
+			},
+			error : function(){
+				if(errorCallback && typeof errorCallback === "function"){
+					errorCallback();
+				}
+			}
+		});
+	}
 };
 
 //Common custom handlers:

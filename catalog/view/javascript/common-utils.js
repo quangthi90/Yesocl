@@ -42,9 +42,6 @@ YesGlobal.Utils = {
                 }
             }
         });
-    },
-    method2 : function() {
-
     }
 };
 
