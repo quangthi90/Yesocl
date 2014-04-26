@@ -113,4 +113,9 @@ $_['routing']['ApiGetLastStockNews']			= 'service/get/stock/news/last/';
 // Post
 $_['routing']['ApiPutPostLike']					= 'service/put/{post_type}/post/{post_slug}/like/';
 $_['routing']['ApiPutPostInfo']					= 'service/put/{post_type}/post/{post_slug}/';
+$_['routing']['ApiGetPostLiker']				= 'service/get/{post_type}/post/{post_slug}/liker/';
+
+// Comment
+$_['routing']['ApiGetComments']					= 'service/get/{post_type}/post/{post_slug}/comments/';
+$_['routing']['ApiGetCommentLiker']				= 'service/get/{post_type}/post/{post_slug}/comment/{comment_id}/liker/';
 ?>
