@@ -88,15 +88,21 @@ Class Post {
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @return: array Post
 	*/
-	public function formatToCache(){
+	public function formatToCache( $isTimestamp = true ){
 		$limit = 200;
+
+		if ( $isTimestamp == true ){
+			$created = $this->created->getTimestamp();
+		}else{
+			$created = $this->created;
+		}
 
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'title' 		=> $this->getTitle(),
 			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
+			'created'		=> $created,
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'thumb'			=> $this->getThumb(),

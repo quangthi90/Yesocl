@@ -40,12 +40,18 @@ Class Comment {
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @return: array Comments
 	*/
-	public function formatToCache(){
+	public function formatToCache( $isTimestamp = true ){
+		if ( $isTimestamp == true ){
+			$created = $this->created->getTimestamp();
+		}else{
+			$created = $this->created;
+		}
+
 		$data_format = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
+			'created'		=> $created,
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'status'		=> $this->getStatus(),
