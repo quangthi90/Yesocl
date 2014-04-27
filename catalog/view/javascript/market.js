@@ -220,7 +220,7 @@ function WatchListViewModel(options) {
 	var self = this;
 
 	self.API_Url = options.API_Url;
-	self.controlId = ko.observable(options.Id);
+	self.controlId = ko.observable(options.Id || "st-watch-list");
 	self.isLoading = ko.observable(false);
 	self.watchList = ko.observableArray([]);
 	self.cacheStockDatasource = ko.observableArray([]);
@@ -252,7 +252,6 @@ function WatchListViewModel(options) {
                 }
             }
         });
-		
 	};
 
 	self.removeStock = function(wl) {
@@ -401,12 +400,13 @@ function WatchListViewModel(options) {
 		_loadWatchLists();
 
 		//Make scroll for watchlist:
-		$("#" + self.controlId()).makeCustomScroll();
-
+		setTimeout(function(){
+			$("#" + self.controlId()).makeCustomScroll();
+		}, 1000);
 		self.isLoading(false);
 	}
 
-	function _initStockDatasource() {		
+	function _initStockDatasource() {
 		_isInitDatasource = true;
 		self.isLoading(true);
 		if ( self.cacheStockDatasource().length === 0 ){
@@ -418,18 +418,13 @@ function WatchListViewModel(options) {
 				success: function(data) {
 					if ( data.success == 'ok' ){
 						for ( var key in data.stocks ){
-							self.cacheStockDatasource.push( new WatchListItem({
-								stock: data.stocks[key]
-							}));
+							var temp = _getFirstInArray(self.watchList(), data.stocks[key].code);
+							self.cacheStockDatasource.push(new WatchListItem({
+								stock: data.stocks[key],
+								isAdded: temp !== null
+							}));							
 						}
 					}
-					//Remove stock which already added:
-					ko.utils.arrayForEach(self.cacheStockDatasource(), function(st){
-						var temp = _getFirstInArray(self.watchList(), st.stock.code);
-						if(temp){
-							st.isAdded(true);
-						}
-					});
 
 					//Completed:
 					self.isLoading(false);
