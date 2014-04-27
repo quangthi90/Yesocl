@@ -56,12 +56,14 @@ function PostModel(data) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	that.showComment = function() {
-		var ajaxOptions = function(){
-			url : window.yRouting.generate('ApiPutPostLike', {
+		var ajaxOptions = {
+			url : window.yRouting.generate('ApiGetComments', {
 				post_type: that.type,
 				post_slug: that.slug
 			})
 		};
+		var successCallback = fu
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 
 	function _submitLikePost(successCallback, failCallback, errorCallback) {

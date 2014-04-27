@@ -25,25 +25,42 @@
 {% endblock %}
 
 {% block javascript %}
-	<script type="text/javascript">
-		// Market list
-		var _markets = '{{ markets|json_encode()|raw }}';
-		window.yMarkets = JSON.parse(_markets);
-
-		// Stock info of current Market
-		var _stock = '{{ stock|json_encode()|raw }}';
-		window.yStock = JSON.parse(_stock);
-
-		// Current Market ID
-		window.yCurrMarketId = '{{ curr_market_id }}';
-
-		// Stock Watch list of current User
-		var _watchList = '{{ watch_list|json_encode()|raw }}';
-		window.yWatchList = JSON.parse(_watchList);
-	</script>
-	{{ block('stock_common_block_watch_list_javascript') }}
-
 	<script type="text/javascript" src="{{ asset_js('libs/highstock/highstock.js') }}"></script>
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// Market list
+			var _markets = '{{ markets|json_encode()|raw }}';
+			// Stock info of current Market
+			var _stock = '{{ stock|json_encode()|raw }}';
+			// Stock Watch list of current User
+			var _watchList = '{{ watch_list|json_encode()|raw }}';
+
+			//Add options to view model:
+			var chartOptions = {
+				markets :  JSON.parse(_markets),
+				currMarketId : '{{ curr_market_id }}',
+				stock : JSON.parse(_stock)
+			};
+			var watchListOptions = {
+				Id : "st-watch-list",
+				watchList : JSON.parse(_watchList)
+			};
+			var newsOptions = {
+				Id : "stock-news"
+			};
+			var commentBoxOptions = {
+				Id : "comment-box"
+			};
+
+			var viewModel = {
+				chartModel : new ChartViewModel(chartOptions),
+				watchListModel : new WatchListViewModel(watchListOptions),
+				newsModel : new NewsViewModel(newsOptions),
+				commentBoxModel : new CommentBoxViewModel(commentBoxOptions)
+			};
+			ko.applyBindings(viewModel, document.getElementById('y-main-content'));
+		});
+	</script>	
 
 {% endblock %}

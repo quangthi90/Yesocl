@@ -4,9 +4,9 @@ function ChartViewModel (options) {
 	'use strict';
 	var self = this;
 
-	self.markets = ko.observableArray(window.yMarkets);
-	self.currMarketId = ko.observable(window.yCurrMarketId);
-	self.stock = ko.observable(window.yStock);
+	self.markets = ko.observableArray(options.markets || []);
+	self.currMarketId = ko.observable(options.currMarketId || '');
+	self.stock = ko.observable(options.stock || {});
 	self.isLoadSuccess = ko.observable(false);
 	self.chartContainer = $('#y-chart-container');
 	self.cacheExchanges = [];
@@ -62,7 +62,7 @@ function ChartViewModel (options) {
 		self.isLoadSuccess(false);
 		$.ajax({
 			type: 'POST',
-			url: window.yRouting.generate('ApiGetStockExchanges', { stock_id : window.yStock.id }),
+			url: window.yRouting.generate('ApiGetStockExchanges', { stock_id : self.stock().id }),
 			dataType: 'json',			
 			success: function(data) {
 				if ( data.success == 'ok' ){
@@ -119,7 +119,7 @@ function ChartViewModel (options) {
 			enabled : false
 		};
 	    options.title = {
-	    	text: window.yStock.name
+	    	text: self.stock().name
 	    };	    
 
 	    //Run chart:
@@ -177,7 +177,7 @@ function ChartViewModel (options) {
 			enabled : true
 		};
 	    options.title = {
-	    	text: window.yStock.name
+	    	text: self.stock().name
 	    };
 
 	    //Resize chart container:
@@ -382,10 +382,10 @@ function WatchListViewModel(options) {
 	}
 
 	function _loadWatchLists() {
-		if(window.yWatchList && window.yWatchList.length > 0){
-			for ( var key in window.yWatchList ){
+		if(options.watchList && options.watchList.length > 0) {
+			for ( var key in options.watchList) {
 				self.watchList.push( new WatchListItem({
-						stock: window.yWatchList[key],
+						stock: options.watchList[key],
 						isAdded: true
 					})
 				);
@@ -632,27 +632,3 @@ ko.bindingHandlers.link = {
 	}
 }
 
-$(document).ready(function(){
-
-	//Add options to view model:
-	var chartOptions = {		
-	};
-	var watchListOptions = {
-		Id : "st-watch-list"	
-	};
-	var newsOptions = {
-		Id : "stock-news"
-	};
-	var commentBoxOptions = {
-		Id : "comment-box"
-	};
-
-	var viewModel = {
-		chartModel : new ChartViewModel(chartOptions),
-		watchListModel : new WatchListViewModel(watchListOptions),
-		newsModel : new NewsViewModel(newsOptions),
-		commentBoxModel : new CommentBoxViewModel(commentBoxOptions)
-	};
-
-	ko.applyBindings(viewModel, document.getElementById('y-main-content'));
-});
