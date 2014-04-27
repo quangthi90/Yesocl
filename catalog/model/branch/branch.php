@@ -1,19 +1,6 @@
 <?php
 class ModelBranchBranch extends Model {
 	public function getAllBranches( $aData = array() ){
-		$lUsers = $this->dm->getRepository('Document\User\User')->findAll();
-
-		foreach ($lUsers as $oUser) {
-			$lNotifications = $oUser->getNotifications();
-			foreach ($lNotifications as $key => $oNoti) {
-				if ( !$oNoti->getActor() ){
-					$oUser->getNotifications()->removeElement($oNoti);
-				}
-			}
-		}
-
-		$this->dm->flush();
-
 		$query = array('deleted' => false);
 
 		$results = $this->dm->getRepository('Document\Branch\Branch')->findBy( $query );

@@ -17,13 +17,13 @@ class ModelBranchComment extends Model {
 
 		if ( !$oPost ) return array();
 
-		$lComments = $oPost->getComments();
-		  foreach ($lComments as $oComment) {
-		   if ( $oComment->getId() == null ){
-		    $oPost->getComments()->removeElement($oComment);
-		   }
-		  }
-		  $this->dm->flush();
+		// $lComments = $oPost->getComments();
+		//   foreach ($lComments as $oComment) {
+		//    if ( $oComment->getId() == null ){
+		//     $oPost->getComments()->removeElement($oComment);
+		//    }
+		//   }
+		//   $this->dm->flush();
 
 		$this->dm->clear();
 		return $oPost->getComments($isReverse);
