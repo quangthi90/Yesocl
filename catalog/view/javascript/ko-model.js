@@ -40,24 +40,36 @@ function PostModel(data) {
 	that.isLiked = ko.observable(data.isUserLiked || false);
 
 	that.likePost = function() {
-		$.ajax({
-			type: 'POST',
-			url: window.yRouting.generate('ApiPutPostLike', {
+		var ajaxOptions = {
+			url : window.yRouting.generate('ApiPutPostLike', {
 				post_type: that.type,
 				post_slug: that.slug
-			}),
-			dataType: 'json',			
-			success: function(data) {
-				if(data.success === "ok"){
-					that.isLiked(!that.isLiked());
-					that.likeCount( data.like_count );
-				}else {
-					// error
-				}
-			},
-			error : function(){
-				//error
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				that.isLiked(!that.isLiked());
+				that.likeCount( data.like_count);
+			}else {
 			}
-		});
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
+	that.showComment = function() {
+		var ajaxOptions = function(){
+			url : window.yRouting.generate('ApiPutPostLike', {
+				post_type: that.type,
+				post_slug: that.slug
+			})
+		};
+	};
+
+	function _submitLikePost(successCallback, failCallback, errorCallback) {
+
+	};
+}
+
+function CommentModel(data){
+	var that = this;
+	
 }

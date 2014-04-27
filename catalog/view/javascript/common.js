@@ -757,7 +757,7 @@ BlockFeed.prototype.putFeed = function() {
 	var widthColumn = 0;
 	this.columns.each(function(){
 		if($(this).children().length > 0){
-			widthColumn += $(this).outerWidth() + ConfigBlock.MARGIN_POST;	
+			widthColumn += $(this).outerWidth() + ConfigBlock.MARGIN_POST + 2;	
 		}
 	});
 	this.actualWidth = widthColumn;

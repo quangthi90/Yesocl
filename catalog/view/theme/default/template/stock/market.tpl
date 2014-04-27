@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 {% use '@template/default/template/stock/common/block_market_chart.tpl' %}
 {% use '@template/default/template/stock/common/block_watch_list.tpl' %}
 {% use '@template/default/template/stock/common/block_news.tpl' %}
@@ -14,6 +15,7 @@
 {% block body %}
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal stock-page">
+        {{ block('common_ko_template_comment') }}
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
         {{ block('stock_common_block_news') }} 

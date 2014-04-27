@@ -220,6 +220,7 @@ function WatchListViewModel(options) {
 	var self = this;
 
 	self.API_Url = options.API_Url;
+	self.controlId = ko.observable(options.Id);
 	self.isLoading = ko.observable(false);
 	self.watchList = ko.observableArray([]);
 	self.cacheStockDatasource = ko.observableArray([]);
@@ -399,6 +400,9 @@ function WatchListViewModel(options) {
 		self.watchList.push(new WatchListItem({isNew : true, stock: null}));
 		_loadWatchLists();
 
+		//Make scroll for watchlist:
+		$("#" + self.controlId()).makeCustomScroll();
+
 		self.isLoading(false);
 	}
 
@@ -492,24 +496,10 @@ function NewsViewModel(options) {
 	self.isLoadSuccess = ko.observable(false);
 	var mainContent = $("#y-main-content");
 
-	self.showComments = function(news) {
-		_getComments(news, function(){
-
-		}, function(){
-
-		});
-	}
-
-	self.like = function(news) {		
-	}
-
-	self.showLikers = function(news) {	
-	}
-
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
-		var newsContainer = $("#" + options.Id);
+		var newsContainer = $("#" + self.id());
 		var heightContent = newsContainer.find('.block-content').height();
 		var heightHeader  = newsContainer.find('.block-header').height();
 		newsContainer.find('.news-item').each(function(){
@@ -530,39 +520,85 @@ function NewsViewModel(options) {
 
 	function _loadNews(){
 		self.isLoadSuccess(false);
-		$.ajax({
-			type: 'POST',
-			url: window.yRouting.generate('ApiGetLastStockNews'),
-			dataType: 'json',			
-			success: function(data) {
-				if(data.success === "ok"){
-					ko.utils.arrayForEach(data.posts, function(p){
-						var user = data.users[p.user_id];
-						p.username = user.username;
-						p.avatar = user.avatar;
-						var newsItem = new PostModel(p);
-						self.newsList.push(newsItem);						
-					});
-				}else {
-					self.newsList([]);
-				}				
-				self.isLoadSuccess(true);
-				_adjustLayout();
-			},
-			error : function(){
-				//error
+		var ajaxOptions = {
+			url: window.yRouting.generate('ApiGetLastStockNews')
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.posts, function(p){
+					var user = data.users[p.user_id];
+					p.username = user.username;
+					p.avatar = user.avatar;
+					var newsItem = new PostModel(p);
+					self.newsList.push(newsItem);						
+				});
+			}else {
+				self.newsList([]);
 			}
-		});
-	}
-
-	function _getComments(news, successCallback, errorCallback) {
-		//Call ajax to get list of comment of seleting news:
+			self.isLoadSuccess(true);
+			_adjustLayout();
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
 	//Delay for loading news:
 	setTimeout(function(){
 		_loadNews();
-	}, 300);	
+	}, 300);
+};
+
+function CommentBoxViewModel(params){
+	var self = this;
+
+	this.controlId = ko.observable(params.Id || "comment-box");
+	this.commentList = ko.observableArray(params.commentList || []);
+	this.postData = ko.observable(params.postData|| []);
+
+	//Publuc functions:
+	self.showCommentBox = function(commentList, postData){
+		self.commentList(commentList);
+		self.postData(postData);
+		_displayCommentBox();
+	};
+	self.closeCommentBox = function(){
+		_hideCommentBox();
+	};
+	self.addComment = function(){		
+		var ajaxOptions = function(){
+			url : ""
+		};
+		var successCallback = function(data){
+
+		};
+		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	};
+	self.deleteComment = function(comment) {
+		var ajaxOptions = function(){
+			url : ""
+		};
+		var successCallback = function(data){
+
+		};
+		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	};
+	self.likeComment = function(comment){
+		var ajaxOptions = function(){
+			url : ""
+		};
+		var successCallback = function(data){
+
+		};
+		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	//Private functions:
+	function _displayCommentBox() {
+		$("#" + self.controlId()).show();
+	}
+	function _hideCommentBox() {
+		$("#" + self.controlId()).hide();
+	}
 };
 
 //Common custom handlers:
@@ -599,20 +635,23 @@ ko.bindingHandlers.link = {
 $(document).ready(function(){
 
 	//Add options to view model:
-	var chartOptions = {
-		API_Url : ""
+	var chartOptions = {		
 	};
 	var watchListOptions = {
-		API_Url : ""
+		Id : "st-watch-list"	
 	};
 	var newsOptions = {
 		Id : "stock-news"
+	};
+	var commentBoxOptions = {
+		Id : "comment-box"
 	};
 
 	var viewModel = {
 		chartModel : new ChartViewModel(chartOptions),
 		watchListModel : new WatchListViewModel(watchListOptions),
-		newsModel : new NewsViewModel(newsOptions)
+		newsModel : new NewsViewModel(newsOptions),
+		commentBoxModel : new CommentBoxViewModel(commentBoxOptions)
 	};
 
 	ko.applyBindings(viewModel, document.getElementById('y-main-content'));

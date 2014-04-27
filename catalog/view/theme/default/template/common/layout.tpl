@@ -74,12 +74,12 @@
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.cookie.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.truncate.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/knockout.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/knockout.mapping.js') }}"></script>
-		<!-- Common Script -->
+		<!-- Common Script -->		
+		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('ko-model.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
