@@ -177,7 +177,7 @@ class ModelUserComment extends Model {
 		return $oComment;
 	}
 
-	public function deleteComment( $idComment, $data = array(), $author_id ){
+	public function deleteComment( $idComment, $author_id, $data = array() ){
 		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
 			'posts.comments.id' => $idComment
 		));
