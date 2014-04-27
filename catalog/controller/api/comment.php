@@ -144,7 +144,7 @@ class ControllerApiComment extends Controller {
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
         $bResult = $this->$sModelLink->deleteComment(
             $this->request->get['comment_id'],
-            'author_id' => $this->customer->getId()
+            $this->customer->getId()
         );
         
         if ( !$bResult ){
@@ -261,9 +261,9 @@ class ControllerApiComment extends Controller {
         $this->load->model('friend/follower');
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
-        $oComment = $this->$sModelLink->getComment(
+        $oComment = $this->$sModelLink->getComment(array(
             'comment_id' => $this->request->get['comment_id']
-        );
+        ));
 
         $aUsers = array();
 
