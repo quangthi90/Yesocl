@@ -88,7 +88,7 @@ class ModelBranchComment extends Model {
         if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
             $this->model_user_notification->addNotification(
                 $oPost->getUser()->getSlug(),
-                $oUser->getId(),
+                $oUser,
                 $this->config->get('common')['action']['comment'],
                 $oComment->getId(),
                 $oPost->getSlug(),
@@ -103,7 +103,7 @@ class ModelBranchComment extends Model {
             foreach ( $aUserSlugs as $sUserSlug ) {
                 $this->model_user_notification->addNotification(
                     $sUserSlug,
-                    $oUser->getId(),
+                    $oUser,
                     $this->config->get('common')['action']['tag'],
                     $oComment->getId(),
                     $oPost->getSlug(),

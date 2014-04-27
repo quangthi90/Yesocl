@@ -25,56 +25,60 @@ class ControllerPostDetail extends Controller {
 		switch ($this->request->get['post_type']) {
 			case $this->config->get('post')['type']['branch']:
 				$this->load->model('branch/post');
-				$post = $this->model_branch_post->getPost( $this->request->get, true );
+				$oPost = $this->model_branch_post->getPost( $this->request->get, true );
 				$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 				break;
 
 			case $this->config->get('post')['type']['user']:
 				$is_user = true;
 				$this->load->model('user/post');
-				$post = $this->model_user_post->getPost( $this->request->get, true );
+				$oPost = $this->model_user_post->getPost( $this->request->get, true );
 				$this->data['post_type'] = $this->config->get('common')['type']['user'];
 				break;
 			
 			default:
-				$post = null;
+				$oPost = null;
 				break;
 		}
 
-		if ( !$post ){
+		if ( !$oPost ){
 			print("not found post!"); exit;
 		}
 
 		$this->load->model('tool/image');
 		$this->load->model('tool/object');
 
-		$avatar = $this->model_tool_image->getAvatarUser( $post->getUser()->getAvatar(), $post->getUser()->getPrimaryEmail()->getEmail() );
+		$avatar = $this->model_tool_image->getAvatarUser( $oPost->getUser()->getAvatar(), $oPost->getUser()->getPrimaryEmail()->getEmail() );
 		
-		$comment_count = $post->getComments()->count();
+		$comment_count = $oPost->getComments()->count();
 
-		if ( in_array($this->customer->getId(), $post->getLikerIds()) ){
+		if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
 			$liked = true;
 		}else{
 			$liked = false;
 		}
 
 		$this->data['post'] = array(
-			'id'			=> $post->getId(),
-			'author' 		=> $post->getAuthor(),
+			'id'			=> $oPost->getId(),
+			'author' 		=> $oPost->getAuthor(),
 			'avatar' 		=> $avatar,
-			'title' 		=> $post->getTitle(),
-			'content' 		=> html_entity_decode($post->getContent()),
-			'created'		=> $post->getCreated(),
+			'title' 		=> $oPost->getTitle(),
+			'content' 		=> html_entity_decode($oPost->getContent()),
+			'created'		=> $oPost->getCreated(),
 			'comment_count' => $comment_count,
-			'category'		=> !$is_user ? $post->getCategory()->getName() : null,
-			'slug'			=> $post->getSlug(),
-			'like_count'	=> count($post->getLikerIds()),
+			'category'		=> !$is_user ? $oPost->getCategory()->getName() : null,
+			'slug'			=> $oPost->getSlug(),
+			'like_count'	=> count($oPost->getLikerIds()),
 			'isUserLiked'	=> $liked,
-			'user_slug'		=> $post->getUser()->getSlug(),
-			'count_viewer'	=> $post->getCountViewer()
+			'user_slug'		=> $oPost->getUser()->getSlug(),
+			'count_viewer'	=> $oPost->getCountViewer()
 		);
 
-		$this->data['comments'] = $this->model_tool_object->formatCommentOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
+		$this->data['comments'] = array();
+		$aComments = $oPost->getComments();
+		foreach ( $aComments as $oComment ) {
+			$this->data['comments'][] = $oComment->formatToCache();
+		}
 		
 		$this->data['is_user'] = $is_user;
 		
