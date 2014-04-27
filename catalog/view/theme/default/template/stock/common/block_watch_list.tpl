@@ -105,14 +105,5 @@
 			</form>
 		</div>
 	</div>
-
 </div>
-{% endblock %}
-
-{% block stock_common_block_watch_list_javascript %}
-	<script type="text/javascript">
-		$(document).ready(function(){
-	 		$('#st-watch-list .block-content').makeCustomScroll();
-	 	});
-	</script>
 {% endblock %}

@@ -27,8 +27,8 @@
 				</span>
 			</div>
 			<div class="span4">
-				<span href="" class="news-action">
-					<a href="">
+				<span class="news-action">
+					<a data-bind="click: showComment">
 						<i class="icon-comments"></i>
 					</a>
 					<d class="counter" data-bind="text: $data.commentCount"></d>
