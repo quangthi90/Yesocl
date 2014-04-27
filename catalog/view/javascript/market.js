@@ -103,7 +103,7 @@ function ChartViewModel (options) {
 			{
 				name :  "OHLC",
 				data : self.cacheExchanges,
-				type : 'area',
+				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,
 	                dateTimeLabelFormats: {
