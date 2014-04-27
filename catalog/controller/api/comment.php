@@ -144,7 +144,7 @@ class ControllerApiComment extends Controller {
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
         $bResult = $this->$sModelLink->deleteComment(
             $this->request->get['comment_id'],
-            'author_id' => $this->customer->getId()
+            $this->customer->getId()
         );
         
         if ( !$bResult ){
