@@ -85,7 +85,13 @@
         });
 
         //Scroll bar:
-        that.postContent.niceScroll();
+        that.postContent.niceScroll({
+            scrollspeed:150,
+            mousescrollstep:330,
+            touchbehavior:false,
+            horizrailenabled:true,
+            smoothscroll:true
+        });
         that.commentList.mCustomScrollbar({
             autoHideScrollbar:true,
             advanced:{

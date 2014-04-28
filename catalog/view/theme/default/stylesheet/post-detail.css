@@ -24,9 +24,9 @@
     background-color: #fff;
 }
 #post-content {
-    -webkit-column-width: 450px;    
-    -moz-column-width: 450px;
-    column-width: 450px;
+    -webkit-column-width: 250px;    
+    -moz-column-width: 250px;
+    column-width: 250px;
     -moz-column-gap: 35px;    
     -webkit-column-gap: 35px;  
     column-gap: 35px;            
@@ -160,11 +160,12 @@
     -moz-column-break-inside: avoid;
     column-break-inside: avoid;
     white-space: nowrap;
-    max-width: 500px;
+    max-width: 300px;
     max-height: 95%;
     height: auto;
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
+    text-align: center;
 }
 .comment-wrapper .comment-form {
     position: absolute;
