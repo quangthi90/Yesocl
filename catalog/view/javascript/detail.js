@@ -63,20 +63,10 @@
                 that.scrollLeftBtn.fadeOut(200);
                 that.canScrollLeft = false;
             }
-            if(xScroll < ($(this).width() - minWidth )) {
-                that.scrollLastBtn.fadeIn(300);
-                that.canScrollLast = true;
-            }else{
-                that.scrollLastBtn.fadeOut(200);
-                that.canScrollLast = false;
-            }
             that.timeoutId = setTimeout(function(){
                 if(!that.scrollLeftBtn.is(":hover")) {
                     that.scrollLeftBtn.fadeOut(200);    
-                }
-                if(!that.scrollLastBtn.is(":hover")) {
-                    that.scrollLastBtn.fadeOut(200);
-                }                
+                }               
             }, 2000);
         });        
         that.scrollLeftBtn.on('click', function(e){
@@ -86,8 +76,8 @@
 
         //Scroll bar:
         that.postContent.niceScroll({
-            scrollspeed:150,
-            mousescrollstep:330,
+            scrollspeed:0,
+            mousescrollstep:100,
             touchbehavior:false,
             horizrailenabled:true,
             smoothscroll:true
