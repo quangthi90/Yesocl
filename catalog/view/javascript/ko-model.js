@@ -62,7 +62,9 @@ function PostModel(data) {
 				post_slug: that.slug
 			})
 		};
-		var successCallback = fu
+		var successCallback = function(){
+			
+		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 
