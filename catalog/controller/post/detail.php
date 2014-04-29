@@ -74,7 +74,7 @@ class ControllerPostDetail extends Controller {
 			'count_viewer'	=> $post->getCountViewer()
 		);
 
-		$this->data['comments'] = $this->model_tool_object->formatCommentOfPost( $post->getComments()->toArray(), $post->getSlug(), $this->data['post_type'] );
+		$this->data['comments'] = $this->model_tool_object->formatCommentOfPost( $post->getComments(true), $post->getSlug(), $this->data['post_type'] );
 		
 		$this->data['is_user'] = $is_user;
 		
