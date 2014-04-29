@@ -38,6 +38,7 @@ function PostModel(data) {
 	that.likers = ko.observableArray(data.liker_ids || []);
 	that.countViewer = ko.observable(data.count_viewer || 0);
 	that.isLiked = ko.observable(data.isUserLiked || false);
+	that.comments = ko.observableArray([]);
 
 	that.likePost = function() {
 		var ajaxOptions = {
@@ -63,7 +64,18 @@ function PostModel(data) {
 			})
 		};
 		var successCallback = function(){
-			
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.comments, function(c){					
+					var com = new CommentModel(c);
+					that.comments.push(com);					
+				});
+			}else {
+				that.comments([]);
+			}
+			var context = YesGlobal.Utils.getKoContext();
+			if(context !== null){
+				context.$root.commentBoxModel.showComment(that.comments());
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
@@ -76,4 +88,17 @@ function PostModel(data) {
 function CommentModel(data){
 	var that = this;
 	
+	that.id = data.id || '';
+	that.content = ko.observable(data.content || '');
+	that.likeCount = ko.observable(data.like_count || '');
+	that.created = data.created || '';
+	that.author = data.author || '';
+	that.authorId = data.user_id || '';
+	that.authorSlug = data.user_slug || '';
+	that.authorAvatar = '';
+
+	if(data.user_id){
+		var user = data.users[c.user_id];
+		that.authorAvatar = user.avatar;
+	}
 }

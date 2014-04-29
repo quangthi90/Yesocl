@@ -548,12 +548,10 @@ function CommentBoxViewModel(params){
 
 	this.controlId = ko.observable(params.Id || "comment-box");
 	this.commentList = ko.observableArray(params.commentList || []);
-	this.postData = ko.observable(params.postData|| []);
 
 	//Publuc functions:
 	self.showCommentBox = function(commentList, postData){
 		self.commentList(commentList);
-		self.postData(postData);
 		_displayCommentBox();
 	};
 	self.closeCommentBox = function(){
