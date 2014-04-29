@@ -457,7 +457,7 @@
                     }, 500);
 
                     htmlOutput.find('.post_body').magnificPopup({
-                        delegate: 'a',
+                        delegate: 'a.img-link-popup',
                         type: 'image',
                         closeOnContentClick: false,
                         closeBtnInside: false,

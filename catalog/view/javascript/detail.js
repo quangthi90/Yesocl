@@ -92,15 +92,13 @@
         //Img gallery:
         if(that.postContent.find('img').length > 0) {
             that.postContent.find('img').each(function(){
-                if($(this).parent('a').length == 0){
-                    var imgWrapper = $("<a class='img-wrapper'></a>");
-                    imgWrapper.attr('href', $(this).attr('src'));
-                    imgWrapper.attr('title', $(this).attr('alt'));
-                    $(this).wrap(imgWrapper);
-                }
+                var imgWrapper = $("<a class='img-wrapper'></a>");
+                imgWrapper.attr('href', $(this).attr('src'));
+                imgWrapper.attr('title', $(this).attr('alt'));
+                $(this).wrap(imgWrapper);
             });
             that.postContent.magnificPopup({
-                delegate: 'a',
+                delegate: 'a.img-wrapper',
                 type: 'image',
                 closeOnContentClick: false,
                 closeBtnInside: false,
@@ -135,6 +133,38 @@
         var widthComment  = Math.floor(that.widthDetail/4);
         that.postComment.find('.comment-meta').width(widthComment - 90);
         that.postComment.width(widthComment).animate({ right: '0px' }, 400);
+
+        if(that.postComment.find('.comment-item').length > 0) {
+            that.postComment.find('.comment-content img').each(function(){
+                var imgWrapper = $('<a class="img-wrapper"></a>');
+                imgWrapper.attr('href', $(this).attr('src'));
+                imgWrapper.attr('title', $(this).attr('alt'));
+                $(this).wrap(imgWrapper);
+            });            
+            that.postComment.find('.comment-content').magnificPopup({
+                delegate: 'a.img-wrapper',
+                type: 'image',
+                closeOnContentClick: false,
+                closeBtnInside: false,
+                mainClass: 'mfp-with-zoom mfp-img-mobile',
+                image: {
+                    verticalFit: true,
+                    titleSrc: function(item) {
+                        return item.el.attr('title');
+                    }
+                },
+                gallery: {
+                    enabled: true
+                },
+                zoom: {
+                    enabled: true,
+                    duration: 300,
+                    opener: function(element) {
+                        return element.find('img');
+                    }
+                }
+            });
+        }
     }
     DetailSection.prototype.makeFullContentVisible = function() {
         var that = this;
