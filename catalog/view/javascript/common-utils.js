@@ -45,7 +45,7 @@ YesGlobal.Utils = {
         });
     },
     getKoContext: function(eleId){
-        if(ele !== undefined){
+        if(eleId !== undefined){
             return ko.contextFor(document.getElementById(eleId));
         }
         return ko.contextFor(document.getElementById(YesGlobal.Configs.defaultBindingElement));
