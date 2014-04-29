@@ -118,6 +118,8 @@ Class User {
 	* @return: array User
 	*/
     public function formatToCache(){
+    	if ( !$this->getId() ) return array();
+		
 		$data = array(
 			'id'			=> $this->getId(),
 			'username' 		=> $this->getUsername(),
