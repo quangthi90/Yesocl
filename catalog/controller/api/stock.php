@@ -118,7 +118,6 @@ class ControllerApiStock extends Controller {
 		
 		$this->load->model('branch/branch');
 		$this->load->model('branch/post');
-		$this->load->model('tool/image');
 		$this->load->model('tool/object');
 		
 		$lPosts = null;
