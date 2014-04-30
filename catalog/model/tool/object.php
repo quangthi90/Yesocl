@@ -182,5 +182,65 @@ class ModelToolObject extends Model
 
         return $aComment;
 	}
+
+	/**
+	 * Format List Object Posts to Array
+	 * 2014/04/30
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: list object Posts
+	 * @return: Array Posts formated
+	 */
+	public function formatPosts( $lPosts, $isReturnUser = true ) {
+		$aPosts = array();
+		$aUsers = array();
+		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers );
+
+		if ( !$isReturnUser ){
+			return $aPosts
+		}
+		
+		return array(
+			'posts' => $aPosts,
+			'users' => $aUsers
+		);
+	}
+
+	/**
+	 * Format Post to Array
+	 * 2014/04/30
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object Post
+	 * @return: Array Post formated
+	 */
+	public function formatPost( $oPost, &$aUsers = array() ) {
+		$this->load->model('tool/image');
+		$aPost = $oPost->formatToCache();
+
+		// check user liked
+		$aLikerIds = $oPost->getLikerIds();
+		if ( in_array($this->customer->getId(), $aLikerIds) ){
+			$aPost['isLiked'] = true;
+		}else{
+			$aPost['isLiked'] = false;
+		}
+
+		// thumb
+		if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+			$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
+		}else{
+			$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+		}
+
+		if ( empty($aUsers[$aPost['user_id']]) ){
+			$oUser = $oPost->getUser();
+			$aUser = $oUser->formatToCache();
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUsers[$aUser['id']] = $aUser;
+		}
+
+		$aPost['user'] = $aUsers[$aPost['user_id']];
+
+		return $aPost;
+	}
 }
 ?>
