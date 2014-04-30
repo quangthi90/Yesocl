@@ -1,6 +1,9 @@
+{% block common_ko_template_style %}
+<link href="{{ asset_css('comment.css') }}" rel="stylesheet" media="screen" />
+{% endblock %}
 {% block common_ko_template_comment %}
-<div class="y-control" data-bind="with: $root.commentBox">
-	<div class="y-box comment-wrapper" style="display: none;" data-bind="attr:{ 'id' : id }">
+<div class="y-control" data-bind="with: $root.commentBoxModel">
+	<div class="y-box comment-box" data-bind="attr:{ 'id' : controlId }">
 		<div class="comment-container"> 
 			<div class="y-box-header">
 				{% trans %}Comment box{% endtrans %} (<span class="counter"><d data-bind="text: commentList().length"><d></span>)
@@ -18,23 +21,25 @@
 					<li class="comment-item">
 				        <div class="avatar_thumb">
 				            <a data-bind="link: { title: author, route: 'WallPage', params: { user_slug: authorSlug } }">
-				                <img data-bind="attr : { 'src' : avatar, alt : author, title : author }">
+				                <img data-bind="attr : { 'src' : authorAvatar, alt : author, title : author }">
 				            </a>
 				        </div>
 				        <div class="comment-meta">
 				            <div class="comment-info">
 				                <a data-bind="link: { text: author, title: author, route: 'WallPage', params: { user_slug: authorSlug } }"></a> 
-				                <span class="comment-time" data-bind="text: createdDate">
+				                <span class="comment-time" data-bind="text: created">
 				                </span>
 				                <span class="like-container">
-				                	<a href="#" class="like-comment">
-				                		abd				                		
-				                	</a>
+				                	<!-- ko if: isLiked() -->
 				                	<strong class="liked-label">{% trans %}Liked{% endtrans %}</strong>
-				                	&nbsp;(<a class="like-count" href="#" data-bind="text: likeCounter"></a>)
+				                	<!-- /ko -->
+				                	<!-- ko if: !isLiked() -->
+				                	<a class="like-comment"><i class="icon-thumbs-up"></i></a>
+				                	<!-- /ko -->				                	
+				                	&nbsp;(<a class="like-count" data-bind="text: likeCount"></a>)
 				                </span>
 				            </div>
-				            <div class="comment-content" data-bind="text: content">				                
+				            <div class="comment-content" data-bind="html: content">		                
 				            </div>
 				        </div>
 				        <div class="clear">
@@ -43,16 +48,21 @@
 				            <div class="dropdown">
 				                <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i></a>
 				                <ul class="dropdown-menu">
-				                    <li class="un-like-btn{% if comment.is_liked == 0 %} hidden{% endif %}"><a href="#"><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a> </li>
-				                    {% if comment.is_owner == true %}
+				                	<!-- ko if: isLiked() -->
+				                    <li class="un-like-btn">
+				                    	<a><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a>
+				                    </li>
 				                    <li class="divider"></li>
+				                    <!-- /ko -->
+				                    <!-- ko if: isLiked() -->				                    
 				                    <li class="edit-comment-btn">
-								     	<a class="link-popup" href="#" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
+								     	<a class="link-popup" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 							     	</li>
 							     	<li class="divider"></li>
 								    <li class="delete-comment-btn">
-								    	<a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
+								    	<a><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 								    </li>
+								    <!-- /ko -->
 								    {% endif %}
 				                </ul>
 				            </div>

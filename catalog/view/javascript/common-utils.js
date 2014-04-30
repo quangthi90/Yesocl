@@ -1,5 +1,5 @@
 var YesGlobal = YesGlobal || {};
-YesGlobal.configs = {
+YesGlobal.Configs = {
     ajaxOptions : {
         url : "",
         type: "POST",
@@ -8,14 +8,15 @@ YesGlobal.configs = {
         data: {},
         dataType: "json",
         contentType: "application/json; charset=utf-8"
-    }
+    },
+    defaultBindingElement : "y-main-content"
 };
 
 YesGlobal.Utils = {
     ajaxCall : function(options, beforeCallback, successCallback, failCallback) {
         "use strict";
 
-        var settings = $.extend( {}, YesGlobal.configs.ajaxOptions, options);
+        var settings = $.extend( {}, YesGlobal.Configs.ajaxOptions, options);
 
         //Make ajax call:
         $.ajax({
@@ -42,6 +43,12 @@ YesGlobal.Utils = {
                 }
             }
         });
+    },
+    getKoContext: function(eleId){
+        if(eleId !== undefined){
+            return ko.contextFor(document.getElementById(eleId));
+        }
+        return ko.contextFor(document.getElementById(YesGlobal.Configs.defaultBindingElement));
     }
 };
 

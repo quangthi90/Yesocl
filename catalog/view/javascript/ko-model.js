@@ -38,6 +38,7 @@ function PostModel(data) {
 	that.likers = ko.observableArray(data.liker_ids || []);
 	that.countViewer = ko.observable(data.count_viewer || 0);
 	that.isLiked = ko.observable(data.isUserLiked || false);
+	that.comments = ko.observableArray([]);
 
 	that.likePost = function() {
 		var ajaxOptions = {
@@ -62,16 +63,21 @@ function PostModel(data) {
 				post_slug: that.slug
 			})
 		};
-		var successCallback = fu
+		var successCallback = function(data) {
+			if(data.success === "ok"){
+				that.comments(data.comments);
+			}else {
+				that.comments([]);
+			}
+			var context = YesGlobal.Utils.getKoContext();
+			if(context !== null){
+				context.$data.commentBoxModel.showCommentBox(that.comments());
+			}
+		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 
 	function _submitLikePost(successCallback, failCallback, errorCallback) {
 
 	};
-}
-
-function CommentModel(data){
-	var that = this;
-	
 }
