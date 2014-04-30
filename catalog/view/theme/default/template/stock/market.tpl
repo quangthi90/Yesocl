@@ -8,8 +8,8 @@
 {% use '@template/default/template/stock/common/block_post_report.tpl' %}
 
 {% block title %}{% trans %} Market - Stock page {% endtrans %}{% endblock %}
-
 {% block stylesheet %}    
+{{ block('common_ko_template_style') }}
 {% endblock %}
 
 {% block body %}
@@ -18,8 +18,7 @@
         {{ block('common_ko_template_comment') }}
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
-        {{ block('stock_common_block_news') }} 
-        {{ block('stock_common_block_post_report') }}
+        {{ block('stock_common_block_news') }}
     </div>
 </div>
 {% endblock %}

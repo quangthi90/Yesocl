@@ -63,18 +63,15 @@ function PostModel(data) {
 				post_slug: that.slug
 			})
 		};
-		var successCallback = function(){
+		var successCallback = function(data) {
 			if(data.success === "ok"){
-				ko.utils.arrayForEach(data.comments, function(c){					
-					var com = new CommentModel(c);
-					that.comments.push(com);					
-				});
+				that.comments(data.comments);
 			}else {
 				that.comments([]);
 			}
 			var context = YesGlobal.Utils.getKoContext();
 			if(context !== null){
-				context.$root.commentBoxModel.showComment(that.comments());
+				context.$data.commentBoxModel.showCommentBox(that.comments());
 			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
@@ -83,22 +80,4 @@ function PostModel(data) {
 	function _submitLikePost(successCallback, failCallback, errorCallback) {
 
 	};
-}
-
-function CommentModel(data){
-	var that = this;
-	
-	that.id = data.id || '';
-	that.content = ko.observable(data.content || '');
-	that.likeCount = ko.observable(data.like_count || '');
-	that.created = data.created || '';
-	that.author = data.author || '';
-	that.authorId = data.user_id || '';
-	that.authorSlug = data.user_slug || '';
-	that.authorAvatar = '';
-
-	if(data.user_id){
-		var user = data.users[c.user_id];
-		that.authorAvatar = user.avatar;
-	}
 }

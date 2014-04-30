@@ -525,7 +525,7 @@ function NewsViewModel(options) {
 					p.username = user.username;
 					p.avatar = user.avatar;
 					var newsItem = new PostModel(p);
-					self.newsList.push(newsItem);						
+					self.newsList.push(newsItem);					
 				});
 			}else {
 				self.newsList([]);
@@ -550,14 +550,17 @@ function CommentBoxViewModel(params){
 	this.commentList = ko.observableArray(params.commentList || []);
 
 	//Publuc functions:
-	self.showCommentBox = function(commentList, postData){
-		self.commentList(commentList);
+	self.showCommentBox = function(commentList, postData) {
+		ko.utils.arrayForEach(commentList, function(c){			
+			var com = new CommentModel(c);
+			self.commentList.push(com);
+		});
 		_displayCommentBox();
 	};
 	self.closeCommentBox = function(){
 		_hideCommentBox();
 	};
-	self.addComment = function(){		
+	self.addComment = function(){
 		var ajaxOptions = function(){
 			url : ""
 		};
@@ -587,10 +590,26 @@ function CommentBoxViewModel(params){
 
 	//Private functions:
 	function _displayCommentBox() {
-		$("#" + self.controlId()).show();
+		$("#" + self.controlId()).animate({ 'right' : '0px' }, 500);
 	}
 	function _hideCommentBox() {
-		$("#" + self.controlId()).hide();
+		$("#" + self.controlId()).animate({ 'right' : '-50000px' }, 200);
+	}
+
+	//CommentModel:
+	function CommentModel(data){
+		var that = this;
+		
+		that.id = data.id || '';
+		that.content = ko.observable(data.content || '');	
+		that.created = data.created || '';
+		that.author = data.author || '';
+		that.authorId = data.user_id || '';
+		that.authorSlug = data.user_slug || '';
+		that.authorAvatar = 'image/no_user_avatar.png';	
+		that.isOwner = false;
+		that.isLiked = ko.observable(false);
+		that.likeCount = ko.observable(data.like_count || '');
 	}
 };
 
