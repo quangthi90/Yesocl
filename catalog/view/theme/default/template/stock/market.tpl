@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block javascript %}
-	<script type="text/javascript" src="{{ asset_js('libs/highstock/highstock.js') }}"></script>
+	<script type="text/javascript" src="{{ asset_js('libs/highstock/highstock.js') }}"></script>	
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {

@@ -49,6 +49,10 @@ YesGlobal.Utils = {
             return ko.contextFor(document.getElementById(eleId));
         }
         return ko.contextFor(document.getElementById(YesGlobal.Configs.defaultBindingElement));
+    },
+    convertToTimeAgo: function(timeStamp){
+        var dayWrapper = moment(new Date(timeStamp*1000));
+        return dayWrapper.fromNow();
     }
 };
 
@@ -74,5 +78,54 @@ ko.bindingHandlers.select2 = {
     update: function(element) {
         "use strict";
         $(element).trigger("change");
+    }
+};
+ko.bindingHandlers.executeOnEnter = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var allBindings = allBindingsAccessor();
+        $(element).keypress(function (event) {
+            var keyCode = (event.which ? event.which : event.keyCode);
+            if (keyCode === 13) {
+                allBindings.executeOnEnter.call(viewModel, viewModel, valueAccessor, element);
+                return false;
+            }
+            return true;
+        });
+    }
+};
+ko.bindingHandlers.link = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var options = valueAccessor();
+        var href = window.yRouting.generate(options.route, options.params);
+        $(element).attr('href', href);
+        if(options.text){
+            $(element).html(options.text);  
+        }
+        if(options.isNewTab){
+            $(element).attr('target', '_blank');
+        }
+        if(options.title){
+            $(element).attr('title', options.title);    
+        }
+    }
+}
+ko.bindingHandlers.timeAgo = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        var timeValue = ko.utils.unwrapObservable(value);
+        if (strDate) {
+            $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
+        } else {
+            $(element).text('-');
+        }
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        var timeValue = ko.utils.unwrapObservable(value);
+        if (strDate) {
+            $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
+        } else {
+            $(element).text('-');
+        }
     }
 };
