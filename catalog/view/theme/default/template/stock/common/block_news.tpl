@@ -3,7 +3,7 @@
 {% block stock_common_block_news %}
 <div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
     <div class="block-header">
-        <h3 class="block-title">{% trans %}News{% endtrans %} <i class="icon-caret-right"></i></h3>
+        <h3 class="block-title"><a href="{{ path('StockNewsPage') }}">{% trans %}News{% endtrans %} <i class="icon-caret-right"></i></a></h3>
     </div>
     <div class="block-content">
         <!-- ko if: isLoadSuccess() && newsList().length > 0 -->

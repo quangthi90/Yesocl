@@ -28,7 +28,7 @@ class ModelToolObject extends Model
 	                $iLiked = false;
 	            }
 
-	            $aComment = $oComment->formatToCache();
+	            $aComment = $oComment->formatToCache(false);
 
 	            if ( empty($aUsers[$aComment['user_id']]) ){
 	            	$aUser = $oComment->getUser()->formatToCache();
@@ -113,7 +113,7 @@ class ModelToolObject extends Model
             $iLiked = 0;
         }
 
-        $aComment = $lBaseComment->formatToCache();
+        $aComment = $lBaseComment->formatToCache(false);
 
     	$aUser = $lBaseComment->getUser()->formatToCache();
     	

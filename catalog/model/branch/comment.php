@@ -26,7 +26,24 @@ class ModelBranchComment extends Model {
 		//   $this->dm->flush();
 
 		$this->dm->clear();
-		return $oPost->getComments($isReverse);
+
+		// Update permission
+		$lComments = $oPost->getComments($isReverse);
+		$aComments = array();
+		foreach ( $lComments as $oComment ) {
+			$idLoggedUser = $this->customer->getId();
+
+			if ( $idLoggedUser == $oComment->getUser()->getId() ) {
+				$oComment->setCanDelete( true );
+				$oComment->setCanEdit( true );
+			}elseif ( $idLoggedUser == $oPost->getUser()->getId() ) {
+				$oComment->setCanDelete( true );
+			}
+
+			$aComments[] = $oComment;
+		}
+
+		return $aComments;
 	}
 
 	public function getComment( $idComment ){

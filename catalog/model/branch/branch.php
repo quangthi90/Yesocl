@@ -1,6 +1,18 @@
 <?php
 class ModelBranchBranch extends Model {
 	public function getAllBranches( $aData = array() ){
+		$lPosts = $this->dm->getRepository('Document\Branch\Post')->findAll();
+		foreach ($lPosts as $key => $oPost) {
+			$lComments = $oPost->getComments();
+			foreach ($lComments as $key => $oComment) {
+				if ( !$oComment->getId() ){
+					$oPost->getComments()->removeElement($oComment);
+				}
+			}
+		}
+
+		$this->dm->flush();
+
 		$query = array('deleted' => false);
 
 		$results = $this->dm->getRepository('Document\Branch\Branch')->findBy( $query );

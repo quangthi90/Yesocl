@@ -9,6 +9,13 @@ class ModelUserNotification extends Model {
 			return false;
 		}
 
+		if ( !is_object($actor) ){
+			$actor = $this->dm->getRepository('Document\User\User')->find( $actor );
+			if ( !$actor ){
+				return false;
+			}
+		}
+
 		$notification = $user->getNotificationByData( $actor->getId(), $object_id, $action );
 		
 		if ( !$notification ){

@@ -69,6 +69,9 @@ $_['routing']['FollowPost']						= 'follow/list-posts/';
 $_['routing']['AddFollower']					= 'follow/add/{user_slug}/';
 $_['routing']['RemoveFollower']					= 'follow/remove/{user_slug}/';
 
+// Stock
+$_['routing']['StockNewsPage']					= 'stock/news/page/';
+
 //Upload
 $_['routing']['UploadFile'] 					= 'upload/';
 
