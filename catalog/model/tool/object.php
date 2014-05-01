@@ -188,7 +188,7 @@ class ModelToolObject extends Model
 	 * 2014/04/30
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: list object Posts
-	 * @return: Array Posts formated
+	 * @return: Array List Objects Posts formated
 	 */
 	public function formatPosts( $lPosts, $isReturnUser = true ) {
 		$aPosts = array();
@@ -210,7 +210,7 @@ class ModelToolObject extends Model
 	 * 2014/04/30
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: object Post
-	 * @return: Array Post formated
+	 * @return: Array Object Post formated
 	 */
 	public function formatPost( $oPost, &$aUsers = array() ) {
 		$this->load->model('tool/image');
@@ -241,6 +241,51 @@ class ModelToolObject extends Model
 		$aPost['user'] = $aUsers[$aPost['user_id']];
 
 		return $aPost;
+	}
+
+	/**
+	 * Format List Object Comment to Array
+	 * 2014/04/30
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object Comment
+	 * @return: Array List Object Comment formated
+	 */
+	public function formatComments( $lComments, $isReturnUser = true ) {
+		$aComments = array();
+		$aUsers = array();
+
+		foreach ( $lComments as $oComment ) {
+			$aComments[] = $this->formatComment( $oComment, $aUsers );
+		}
+
+		if ( !$isReturnUser ) return $aComments;
+
+		return array(
+			'comments' => $aComments,
+			'users' => $aUsers
+		);
+	}
+
+	/**
+	 * Format Object Comment to Array
+	 * 2014/04/30
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object Comment
+	 * @return: Array Object Comment formated
+	 */
+	public function formatComment( $oComment, &$aUsers = array() ) {
+		$aComment = $oComment->formatToCache();
+		if ( empty($aUsers[$aComment['user_id']]) ){
+			$this->load->model('tool/image');
+			
+			$oUser = $oComment->getUser();
+			$aUser = $oUser->formatToCache();
+			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUsers[$aUser['id']] = $aUser;
+		}
+		$aComment['user'] = $aUsers[$aComment['user_id']];
+
+		return $aComment;
 	}
 }
 ?>
