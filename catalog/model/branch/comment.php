@@ -138,6 +138,11 @@ class ModelBranchComment extends Model {
             }
         }
 
+        if ( $oComment->getUser()->getId() == $this->customer->getId() ){
+        	$oComment->setCanEdit( true );
+        	$oComment->setCanDelete( true );
+        }
+
 		return $oComment;
 	}
 
