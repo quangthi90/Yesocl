@@ -48,7 +48,7 @@ class ModelBranchComment extends Model {
 
 	public function getComment( $idComment ){
 		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
-			'comments.id' => $aData['comment_id']
+			'comments.id' => $idComment
 		));
 
 		if ( !$oPost ){
