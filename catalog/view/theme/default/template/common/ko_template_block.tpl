@@ -3,21 +3,28 @@
 {% endblock %}
 {% block common_ko_template_comment %}
 <div class="y-control" data-bind="with: $root.commentBoxModel">
-	<div class="y-box comment-box" data-bind="attr:{ 'id' : controlId }">
+	<div class="y-box comment-box" data-bind="attr:{ 'id' : controlId }, style: { 'width' : widthControl() + 'px' } ">
 		<div class="comment-container"> 
 			<div class="y-box-header">
 				{% trans %}Comment box{% endtrans %} (<span class="counter"><d data-bind="text: commentList().length"><d></span>)
 				<div class="y-box-expand">
-					<a href="#" class="btn-expand" title="Expand">
+					<!-- ko if: canExpand() -->
+					<a data-bind="click: expandCommentBox" class="btn-expand">
 						<i class="icon-arrow-left"></i>
 					</a>
-					<a data-bind="click: closeCommentBox" class="btn-close" title="Hide">
+					<!-- /ko -->
+					<!-- ko if: !canExpand() -->
+					<a data-bind="click: expandCommentBox" class="btn-expand">
+						<i class="icon-arrow-right"></i>
+					</a>
+					<!-- /ko -->
+					<a data-bind="click: closeCommentBox" class="btn-close">
 						<i class="icon-remove"></i>
 					</a>
 				</div>				
 			</div>
 			<div class="y-box-content comment-body">
-				<ul class="comment-list" data-bind="foreach: commentList">
+				<ul class="comment-list" data-bind="foreach: { data: commentList, beforeRemove: makeDeleteEffect, afterAdd: makeAddEffect }">
 					<li class="comment-item">
 				        <div class="avatar_thumb">
 				            <a data-bind="link: { title: user.author, route: 'WallPage', params: { user_slug: user.slug } }">

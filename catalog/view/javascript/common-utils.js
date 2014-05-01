@@ -6,8 +6,7 @@ YesGlobal.Configs = {
         cache: false,
         async : true,
         data: {},
-        dataType: "json",
-        contentType: "application/json; charset=utf-8"
+        dataType: "json"
     },
     defaultBindingElement : "y-main-content"
 };
@@ -24,7 +23,6 @@ YesGlobal.Utils = {
             type: settings.type,
             dataType: settings.dataType,
             data: settings.data,
-            contentType: settings.contentType,
             cache: settings.cache,
             async: settings.async,
             beforeSend: function () {
@@ -210,6 +208,11 @@ ko.bindingHandlers.mention = {
         });
         
     },
-    update: function (element, valueAccessor, allBindingsAccessor) {        
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor();
+        if(value().length === 0){
+            $(element).mentionsInput("reset");
+            $(element).focus();
+        }
     }
 }

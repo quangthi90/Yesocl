@@ -544,6 +544,9 @@ function CommentBoxViewModel(params){
 	var self = this;
 
 	self.controlId = ko.observable(params.Id || "comment-box");
+	self.widthControl = ko.observable(params.width || 380);
+	self.canExpand = ko.observable(true);
+	self.needEffect = ko.observable(false);
 	self.commentList = ko.observableArray(params.commentList || []);	
 	self.postData = {};
 	self.initComment = new CommentModel({});
@@ -572,11 +575,21 @@ function CommentBoxViewModel(params){
 			}else {
 				//Show message ...
 			}
+			self.needEffect(true);
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);		
 	};
 	self.closeCommentBox = function(){
 		_hideCommentBox();
+		self.needEffect(false);
+	};
+	self.expandCommentBox = function(){
+		if(self.canExpand()){
+			self.widthControl(self.widthControl()*2);
+		} else {
+			self.widthControl(self.widthControl()/2);
+		}
+		self.canExpand(!self.canExpand());
 	};
 	self.addComment = function() {
 		var content = self.initComment.content();
@@ -589,13 +602,15 @@ function CommentBoxViewModel(params){
 				post_type: self.postData.type,
 				post_slug: self.postData.slug
 			}),
-			data: JSON.stringify({
+			data: {
 				content: content
-			})
+			}
 		};
 		var successCallback = function(data){
 			if(data.success === "ok"){
 				self.initComment.content("");
+				var newComment = new CommentModel(data.comment);
+				self.commentList.push(newComment);
 			}else{
 				//Show message
 			}
@@ -651,6 +666,26 @@ function CommentBoxViewModel(params){
 			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+	self.makeDeleteEffect = function(element) {
+		if (element.nodeType === 1 && self.needEffect()) {
+			$(element).addClass("deleting");
+			$(element).fadeOut(1000, function(){
+				$(this).remove();
+			});
+		}
+	}
+	self.makeAddEffect = function(element) {
+		if(element.nodeType === 1 && self.needEffect()) {
+			var control = $("#" + self.controlId());
+			var heightCommentList = control.find(".comment-list").first().height();
+			$(element).addClass("adding");
+			control.find(".comment-body").animate({ scrollTop: heightCommentList + "px" }, 1000, function(){
+				$(element).fadeIn(1000, function() {
+					$(element).removeClass("adding");
+				});			
+			});
+		}
 	}
 
 	//Private functions:

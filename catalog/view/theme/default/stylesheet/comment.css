@@ -230,6 +230,14 @@
 	padding: 5px 0px;
 	width: 100%;
 }
+.y-control .comment-item.deleting {
+	background-color: #FFDDDD;
+	opacity: 0.9;
+}
+.y-control .comment-item.adding {
+	background-color: #DAFFD4;
+	opacity: 0.8;
+}
 .y-control .comment-item  .avatar_thumb {
 	float: none;
 	display: table-cell;
