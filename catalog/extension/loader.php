@@ -224,14 +224,14 @@ class ExtensionLoader
         $this->load->model('friend/follower');
 
         // Friends
-        $lFriends = $this->model_friend_friend->getFriends( $oLoggedUser->getId(), true );
+        $lFriends = $this->registry->get('model_friend_friend')->getFriends( $oLoggedUser->getId(), true );
         $aFriendIds = array();
         foreach ( $lFriends as $oFriend ) 
             $aFriendIds[] = $oFriend->getUser()->getId();
         $aRequestIds = $oLoggedUser->getFriendRequests();
         
         // Followers
-        $oFollowers = $this->model_friend_follower->getFollowers( $oLoggedUser->getId() );
+        $oFollowers = $this->registry->get('model_friend_follower')->getFollowers( $oLoggedUser->getId() );
         $lFolloweds = $oFollowers->getFolloweds();
         $lFollowings = $oFollowers->getFollowings();
         $aFollowedIds = array();
@@ -242,7 +242,7 @@ class ExtensionLoader
             $aFollowingIds[] = $oFollower->getUser()->getId();
         
         // Avatar
-        $sAvatar = $this->model_tool_image->getAvatarUser( 
+        $sAvatar = $this->registry->get('model_tool_image')->getAvatarUser( 
             $oLoggedUser->getAvatar(),
             $oLoggedUser->getPrimaryEmail()->getEmail()
         );

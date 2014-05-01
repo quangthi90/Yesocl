@@ -196,7 +196,7 @@ class ModelToolObject extends Model
 		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers );
 
 		if ( !$isReturnUser ){
-			return $aPosts
+			return $aPosts;
 		}
 		
 		return array(
