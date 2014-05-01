@@ -254,19 +254,16 @@ class ControllerApiComment extends Controller {
         
         $sModel = $this->request->get['post_type'] . '/comment';
         $this->load->model($sModel);
-        $this->load->model('tool/image');
-        $this->load->model('user/user');
-        $this->load->model('friend/friend');
-        $this->load->model('friend/follower');
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
-        $oComment = $this->$sModelLink->getComment(array(
-            'comment_id' => $this->request->get['comment_id']
-        ));
+        $oComment = $this->$sModelLink->getComment( $this->request->get['comment_id'] );
 
         $aUsers = array();
 
         if ( $oComment ){
+            $this->load->model('tool/image');
+            $this->load->model('user/user');
+
             $lQueryUsers = $this->model_user_user->getUsers( array(
                 'user_ids' => $oComment->getLikerIds()
             ));
@@ -274,11 +271,7 @@ class ControllerApiComment extends Controller {
             if ( $lQueryUsers ){
                 foreach ( $lQueryUsers as $oUser ) {
                     $aUser = $oUser->formatToCache();
-
-                    $aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
-                    $aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUser->getId() );
                     $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-
                     $aUsers[$aUser['id']] = $aUser;
                 }
             }
