@@ -118,11 +118,10 @@ class ControllerApiStock extends Controller {
 		
 		$this->load->model('branch/branch');
 		$this->load->model('branch/post');
-		$this->load->model('tool/image');
+		$this->load->model('tool/object');
 		
 		$lPosts = null;
 		$aPosts = array();
-		$aUsers = array();
 
 		$oBranch = $this->model_branch_branch->getBranch( array('branch_code' => $sStockCode) );
 		if ( $oBranch ){
@@ -137,39 +136,12 @@ class ControllerApiStock extends Controller {
 		}
 		
 		if ( $lPosts ){
-			foreach ( $lPosts as $oPost ) {
-				$aPost = $oPost->formatToCache();
-
-				// check user liked
-				if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
-					$aPost['isUserLiked'] = true;
-				}else{
-					$aPost['isUserLiked'] = false;
-				}
-				// thumb
-				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-				}else{
-					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
-				}
-				$aPosts[] = $aPost;
-
-				if ( empty($aUsers[$aPost['user_id']]) ){
-					$oUser = $oPost->getUser();
-					$aUser = $oUser->formatToCache();
-					$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-					$aUsers[$aUser['id']] = $aUser;
-				}
-			}
+			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
 		}
-
-		$this->data['posts'] = $aPosts;
-		$this->data['users'] = $aUsers;
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'posts' => $aPosts,
-            'users' => $aUsers
+            'posts' => $aPosts
         )));
 	}
 }
