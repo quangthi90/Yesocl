@@ -578,12 +578,27 @@ function CommentBoxViewModel(params){
 	self.closeCommentBox = function(){
 		_hideCommentBox();
 	};
-	self.addComment = function(){
+	self.addComment = function() {
+		var content = self.initComment.content();
+		if(content.trim().length === 0){
+			alert("Content is required !");
+			return;
+		}
 		var ajaxOptions = {
-			url : ""
+			url : window.yRouting.generate("ApiPostComment", {
+				post_type: self.postData.type,
+				post_slug: self.postData.slug
+			}),
+			data: JSON.stringify({
+				content: content
+			})
 		};
 		var successCallback = function(data){
-
+			if(data.success === "ok"){
+				self.initComment.content("");
+			}else{
+				//Show message
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
@@ -643,9 +658,9 @@ function CommentBoxViewModel(params){
 		var overlay = $("#overlay");
 		var control = $("#" + self.controlId());
 		overlay.fadeIn(300, function(){
-			control.animate({ 'right' : '0px' }, 500, function(){
+			control.animate({ 'right' : '0px' }, 100, function(){
 				var heightCommentList = $(this).find(".comment-list").first().height();
-				$(this).find(".comment-body").animate({ scrollTop: heightCommentList + "px" }, 1000);
+				$(this).find(".comment-body").animate({ scrollTop: heightCommentList + "px" }, 2000);
 			});			
 			$(this).on('click', function(){
 				_hideCommentBox();
@@ -673,5 +688,6 @@ function CommentBoxViewModel(params){
 		that.content = ko.observable(data.content || '');		
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
+		that.isInit = ko.observable(true);
 	}
 };

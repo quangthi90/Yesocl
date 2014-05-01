@@ -170,3 +170,46 @@ ko.bindingHandlers.seeMore = {
         });
     }
 }
+ko.bindingHandlers.mention = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var observableAttr = valueAccessor();
+        $(element).mentionsInput({
+            onDataRequest:function (mode,currentMentionCollection,query,callback) {
+                if ( window.yListFriends === undefined || window.yListFriends === null ){
+                    var ajaxOptions = {
+                        url: window.yRouting.generate('GetAllFriends'),
+                        async: false
+                    };
+                    YesGlobal.Utils.ajaxCall(ajaxOptions, null, function(res){
+                        if(res.success === "ok"){
+                            window.yListFriends = res.friends;
+                            responseData = _.filter(window.yListFriends, function(item) { 
+                                return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
+                            });
+                            callback.call(this, responseData);
+                        }
+                    }, null);
+                } else {
+                    data = _.filter(window.yListFriends, function(item) {
+                        if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
+                            var checkExisted = _.filter(currentMentionCollection, function(tempItem){
+                                return (item.id === tempItem.id);
+                            });
+                            if(checkExisted.length > 0)
+                                return false;
+                        }                   
+                        return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                    });
+                    callback.call(this, data);
+                }
+            },
+            onMentionChanged: function(){
+                observableAttr($(element).mentionsInput("getHtmlContent"));
+            },
+            fullNameTrigger: true
+        });
+        
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {        
+    }
+}

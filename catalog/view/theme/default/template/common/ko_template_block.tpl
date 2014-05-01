@@ -72,7 +72,7 @@
 		</div>
 		<div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
 			<div class="txt_editor">
-				<textarea data-bind="value: content" class="post_input mention" placeholder="comment ..."></textarea>
+				<textarea required data-bind="mention: content" class="post_input" placeholder="comment ..."></textarea>
 			</div>
 			<div class="comment-action">
 				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	

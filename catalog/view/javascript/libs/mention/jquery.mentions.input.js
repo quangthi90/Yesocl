@@ -19,6 +19,7 @@
     elastic         : true,
     fullNameTrigger : false,
     onDataRequest   : $.noop,
+    onMentionChanged : $.noop,
     minChars        : 1,
     showAvatars     : true,
     classes         : {
@@ -311,6 +312,12 @@
         }
       }
       _.defer(_.bind(doSearch, this, currentDataQuery));
+
+      //Call onMentionChanged 
+      if(settings.onMentionChanged !== undefined && settings.onMentionChanged !== null && 
+        typeof settings.onMentionChanged === "function" ) {
+        settings.onMentionChanged();  
+      }      
     }
 
     function onInputBoxKeyPress(e) {

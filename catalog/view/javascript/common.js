@@ -190,13 +190,9 @@ Tag.prototype.attachEvents = function() {
 
 	that.$tagElement.mentionsInput({
 		onDataRequest:function (mode,currentMentionCollection,query,callback) {
-			if ( window.yListFriends == null && is_send_ajax == 0 ){
-				is_send_ajax = 1;
+			if ( window.yListFriends == null){
 				$.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
-					if ( json.success == 'ok' ){
-						if ( json.friends == undefined ){
-							is_send_ajax = 0;
-						}
+					if ( json.success === 'ok' ) {
 						window.yListFriends = json.friends;
 						responseData = _.filter(window.yListFriends, function(item) { 
 				       		return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
