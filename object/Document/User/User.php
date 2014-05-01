@@ -194,7 +194,7 @@ Class User {
 
 	public function getNotificationByData( $actor_id, $object_id, $action ){
 		foreach ( $this->notifications as $notification ){
-			if ( $notification->getActor()->getId() == $actor_id
+			if ( $notification->getActor() && $notification->getActor()->getId() == $actor_id
 				&& $notification->getObjectId() == $object_id
 				&& $notification->getAction() == $action ){
 				return $notification;
