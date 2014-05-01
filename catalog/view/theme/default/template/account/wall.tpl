@@ -6,7 +6,7 @@
 {% use '@template/default/template/post/common/comment_post_list.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 
-{% block title %}{% trans %}Wall Page of{% endtrans %} {{ users[current_user_id].username }}{% endblock %}
+{% block title %}{{ heading_title }}{% endblock %}
 
 {% block stylesheet %}
     {{ block('post_common_comment_post_list_style') }}
