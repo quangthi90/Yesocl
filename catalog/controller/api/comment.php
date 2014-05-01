@@ -177,6 +177,7 @@ class ControllerApiComment extends Controller {
         $sModel = $this->request->get['post_type'] . '/comment';
         $this->load->model($sModel);
         $this->load->model('tool/image');
+        $this->load->model('tool/object');
         $this->load->model('user/user');
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
@@ -185,9 +186,7 @@ class ControllerApiComment extends Controller {
             true
         );
 
-        $aComments = array_map(function($oComment){
-            return $oComment->formatToCache();
-        }, $aComments);
+        $aComments = $this->model_tool_object->formatComments( $aComments, false );
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
