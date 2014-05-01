@@ -20,29 +20,27 @@
 				<ul class="comment-list" data-bind="foreach: commentList">
 					<li class="comment-item">
 				        <div class="avatar_thumb">
-				            <a data-bind="link: { title: author, route: 'WallPage', params: { user_slug: authorSlug } }">
-				                <img data-bind="attr : { 'src' : authorAvatar, alt : author, title : author }">
+				            <a data-bind="link: { title: user.author, route: 'WallPage', params: { user_slug: user.slug } }">
+				                <img data-bind="attr : { 'src' : user.avatar, alt : user.username, title : user.username }">
 				            </a>
 				        </div>
 				        <div class="comment-meta">
 				            <div class="comment-info">
-				                <a data-bind="link: { text: author, title: author, route: 'WallPage', params: { user_slug: authorSlug } }"></a> 
-				                <span class="comment-time" data-bind="text: created">
+				                <a data-bind="link: { text: user.username, title: user.username, route: 'WallPage', params: { user_slug: user.slug } }"></a> 
+				                <span class="comment-time" data-bind="timeAgo: created">
 				                </span>
 				                <span class="like-container">
 				                	<!-- ko if: isLiked() -->
 				                	<strong class="liked-label">{% trans %}Liked{% endtrans %}</strong>
 				                	<!-- /ko -->
 				                	<!-- ko if: !isLiked() -->
-				                	<a class="like-comment"><i class="icon-thumbs-up"></i></a>
+				                	<a data-bind="click: $parent.likeComment" class="like-comment"><i class="icon-thumbs-up"></i></a>
 				                	<!-- /ko -->				                	
 				                	&nbsp;(<a class="like-count" data-bind="text: likeCount"></a>)
 				                </span>
 				            </div>
-				            <div class="comment-content" data-bind="html: content">		                
+				            <div class="comment-content" data-bind="html: content, seeMore: true">	                
 				            </div>
-				        </div>
-				        <div class="clear">
 				        </div>
 				        <div class="yes-dropdown option-dropdown">
 				            <div class="dropdown">
@@ -62,7 +60,7 @@
 							     	<!-- ko if: canDelete -->
 							     	<li class="divider"></li>
 								    <li class="delete-comment-btn">
-								    	<a data-bind="click: deleteComment"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
+								    	<a data-bind="click: $parent.deleteComment"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 								    </li>
 								    <!-- /ko -->
 				                </ul>
@@ -77,7 +75,7 @@
 				<textarea data-bind="value: content" class="post_input mention" placeholder="What's in your mind ..."></textarea>
 			</div>
 			<div class="comment-action">
-				<a data-bind="click: addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
+				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
                 <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
                 	<input type="checkbox" class="cb-press-enter" />
                 </div>

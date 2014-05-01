@@ -52,7 +52,18 @@ YesGlobal.Utils = {
     },
     convertToTimeAgo: function(timeStamp){
         var dayWrapper = moment(new Date(timeStamp*1000));
-        return dayWrapper.fromNow();
+        var diffY = moment().diff(dayWrapper, "years");
+        if(diffY > 0){
+            return dayWrapper.format("MMM Do YYYY");
+        }
+        var diffM = moment().diff(dayWrapper, "months");
+        if(diffM <= 2){
+            return dayWrapper.fromNow(true);
+        }
+        if(diffM > 2 && diffM < 12 && dayWrapper.toDate().getFullYear() === moment().toDate().getFullYear()) {
+            return dayWrapper.format("MMM Do");
+        }
+        return dayWrapper.format("MMM Do YYYY");
     }
 };
 
@@ -113,7 +124,7 @@ ko.bindingHandlers.timeAgo = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor();
         var timeValue = ko.utils.unwrapObservable(value);
-        if (strDate) {
+        if (timeValue) {
             $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
         } else {
             $(element).text('-');
@@ -122,10 +133,40 @@ ko.bindingHandlers.timeAgo = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor();
         var timeValue = ko.utils.unwrapObservable(value);
-        if (strDate) {
+        if (timeValue) {
             $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
         } else {
             $(element).text('-');
         }
     }
 };
+ko.bindingHandlers.seeMore = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        $(element).expander({
+            slicePoint: 100,
+            widow: 2,
+            expandSpeed: 100,
+            expandText: '[...]',
+            expandPrefix: ' ',
+            userCollapseText: '[^^^]',
+            userCollapsePrefix: ' ', 
+            afterExpand: function(){
+                $(element).find(".details").css("display", "inline");
+            }
+        });
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        $(element).expander({
+            slicePoint: 100,
+            widow: 2,
+            expandSpeed: 100,
+            expandText: '[...]',
+            expandPrefix: ' ',
+            userCollapseText: '[^^^]',
+            userCollapsePrefix: ' ', 
+            afterExpand: function(){
+                $(element).find(".details").css("display", "inline");
+            }
+        });
+    }
+}

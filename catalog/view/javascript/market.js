@@ -521,9 +521,6 @@ function NewsViewModel(options) {
 		var successCallback = function(data){
 			if(data.success === "ok"){
 				ko.utils.arrayForEach(data.posts, function(p){
-					var user = data.users[p.user_id];
-					p.username = user.username;
-					p.avatar = user.avatar;
 					var newsItem = new PostModel(p);
 					self.newsList.push(newsItem);					
 				});
@@ -549,7 +546,7 @@ function CommentBoxViewModel(params){
 	self.controlId = ko.observable(params.Id || "comment-box");
 	self.commentList = ko.observableArray(params.commentList || []);	
 	self.postData = {};
-	self.initComment = new CommentModel();
+	self.initComment = new CommentModel({});
 
 	//Publuc functions:
 	self.showCommentBox = function(postData) {
@@ -558,6 +555,7 @@ function CommentBoxViewModel(params){
 			return;
 		}
 		self.postData = postData;
+		self.commentList.removeAll();
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiGetComments', {
 				post_type: postData.type,
@@ -569,10 +567,9 @@ function CommentBoxViewModel(params){
 				ko.utils.arrayForEach(data.comments, function(c){	
 					var com = new CommentModel(c);
 					self.commentList.push(com);
-				});				
+				});	
 				_displayCommentBox();
 			}else {
-				self.commentList([]);
 				//Show message ...
 			}
 		};
@@ -582,26 +579,30 @@ function CommentBoxViewModel(params){
 		_hideCommentBox();
 	};
 	self.addComment = function(){
-		var ajaxOptions = function(){
+		var ajaxOptions = {
 			url : ""
 		};
 		var successCallback = function(data){
 
 		};
-		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	self.deleteComment = function(comment) {
-		var ajaxOptions = function(){
+		
+		var ajaxOptions = {
 			url : ""
 		};
 		var successCallback = function(data){
 
 		};
-		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	self.likeComment = function(comment){
-		var ajaxOptions = function(){
-			url : ""
+		var ajaxOptions = {
+			url : window.yRouting.generate("ApiPutCommentLike", {
+				post_type: self.postData.type,
+				comment_id : comment.id
+			})
 		};
 		var successCallback = function(data){
 			if(data.success === "ok") {
@@ -611,7 +612,7 @@ function CommentBoxViewModel(params){
 				//Show message
 			}
 		};
-		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
 	//Private functions:
@@ -635,15 +636,12 @@ function CommentBoxViewModel(params){
 		
 		that.id = data.id || '';		
 		that.created = data.created || '';
-		that.author = data.author || '';
-		that.authorId = data.user_id || '';
-		that.authorSlug = data.user_slug || '';
-		that.authorAvatar = 'image/no_user_avatar.png';	
+		that.user = data.user || {};
 		that.isOwner = false;
-		that.canDelete = true;
-		that.canEdit = true;
+		that.canDelete = data.canDelete || true;
+		that.canEdit = data.canDelete || true;
 		that.content = ko.observable(data.content || '');		
 		that.isLiked = ko.observable(false);
-		that.likeCount = ko.observable(data.like_count || '');
+		that.likeCount = ko.observable(data.like_count || 0);
 	}
 };

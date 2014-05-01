@@ -3,15 +3,15 @@
 	<a class="news-link" data-bind="link: { title: $data.title, route: 'PostPage', params: { post_type :  'branch', post_slug: $data.slug } }">
 		<img class="news-img" data-bind="attr: { src : $data.image, alt : $data.title } ">
 	</a>
-	<a class="news-title" data-bind="link: { text: $data.title, title: $data.title, route: 'PostPage', params: { post_type : 'branch', post_slug: $data.slug } }">
+	<a class="news-title" data-bind="link: { text: $data.title, title: $data.title, route: 'PostPage', params: { post_type : $data.type, post_slug: $data.slug } }">
 	</a>
 	<div class="news-meta">
-		<a data-bind="link: { title: $data.username, route: 'WallPage', params: { user_slug: $data.authorSlug } }">
-			<img class="news-owner-img" data-bind="attr: {src: $data.avatar, alt: $data.username}">
+		<a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }">
+			<img class="news-owner-img" data-bind="attr: {src: $data.user.avatar, alt: $data.user.username}">
 		</a>
 		<div class="fl">
-			<a class="news-owner" data-bind="link: { text: $data.username, title: $data.username, route: 'WallPage', params: { user_slug: $data.authorSlug } }"></a>
-			<span class="news-time">6 hours ago</span>
+			<a class="news-owner" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
+			<span class="news-time" data-bind="timeAgo: $data.created"></span>
 		</div>
 	</div>
 	<div class="news-short-content" data-bind="text: $data.description">		
@@ -44,7 +44,7 @@
 						<i class="icon-thumbs-down"></i>	
 					</a>
 					<!-- /ko -->
-					<a href="#">
+					<a>
 						<d class="counter" data-bind="text: $data.likeCount"></d>
 					</a>
 				</span>

@@ -224,3 +224,20 @@
 .comment-wrapper .mCSB_container {
 	margin-right: 20px;
 }
+
+.y-control .comment-item  {
+	display: table;
+	padding: 5px 0px;
+	width: 100%;
+}
+.y-control .comment-item  .avatar_thumb {
+	float: none;
+	display: table-cell;
+	vertical-align: top;
+	width: 45px;
+}
+.y-control .comment-item  .comment-meta  {
+	float: none;
+	display: table-cell;	
+	vertical-align: top;
+}

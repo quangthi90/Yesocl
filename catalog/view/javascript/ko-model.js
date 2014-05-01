@@ -12,13 +12,8 @@ function MarketModel(data) {
 
 function PostModel(data) {
 	var that = this;
-
 	that.id = data.id || '';
-	that.author = data.author || '';
-	that.authorId = data.user_id || '';
-	that.authorSlug = data.user_slug || '';
-	that.username = data.username || '';
-	that.avatar = data.avatar || '';
+	that.user = data.user || {};
 	that.title = data.title || '';
 	that.description = data.description || '';
 	that.content = data.content || '';
@@ -37,7 +32,7 @@ function PostModel(data) {
 	that.likeCount = ko.observable(data.like_count || 0);
 	that.likers = ko.observableArray(data.liker_ids || []);
 	that.countViewer = ko.observable(data.count_viewer || 0);
-	that.isLiked = ko.observable(data.isUserLiked || false);
+	that.isLiked = ko.observable(data.isLiked || false);
 
 	that.likePost = function() {
 		var ajaxOptions = {
