@@ -546,16 +546,37 @@ function NewsViewModel(options) {
 function CommentBoxViewModel(params){
 	var self = this;
 
-	this.controlId = ko.observable(params.Id || "comment-box");
-	this.commentList = ko.observableArray(params.commentList || []);
+	self.controlId = ko.observable(params.Id || "comment-box");
+	self.commentList = ko.observableArray(params.commentList || []);	
+	self.postData = {};
+	self.initComment = new CommentModel();
 
 	//Publuc functions:
-	self.showCommentBox = function(commentList, postData) {
-		ko.utils.arrayForEach(commentList, function(c){			
-			var com = new CommentModel(c);
-			self.commentList.push(com);
-		});
-		_displayCommentBox();
+	self.showCommentBox = function(postData) {
+		if(postData === undefined || postData === null){
+			console.log("Post information is empty ...");
+			return;
+		}
+		self.postData = postData;
+		var ajaxOptions = {
+			url : window.yRouting.generate('ApiGetComments', {
+				post_type: postData.type,
+				post_slug: postData.slug
+			})
+		};
+		var successCallback = function(data) {
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.comments, function(c){	
+					var com = new CommentModel(c);
+					self.commentList.push(com);
+				});				
+				_displayCommentBox();
+			}else {
+				self.commentList([]);
+				//Show message ...
+			}
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);		
 	};
 	self.closeCommentBox = function(){
 		_hideCommentBox();
@@ -583,31 +604,45 @@ function CommentBoxViewModel(params){
 			url : ""
 		};
 		var successCallback = function(data){
-
+			if(data.success === "ok") {
+				comment.isLiked(true);
+				comment.likeCount(data.like_count);
+			} else {
+				//Show message
+			}
 		};
 		YesGlobal.utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
 	//Private functions:
 	function _displayCommentBox() {
-		$("#" + self.controlId()).animate({ 'right' : '0px' }, 500);
+		$("#overlay").fadeIn(300, function(){
+			$("#" + self.controlId()).animate({ 'right' : '0px' }, 500);
+			$(this).on('click', function(){
+				_hideCommentBox();
+			});
+		});
 	}
 	function _hideCommentBox() {
-		$("#" + self.controlId()).animate({ 'right' : '-50000px' }, 200);
+		$("#" + self.controlId()).animate({ 'right' : '-50000px' }, 200, function(){
+			$("#overlay").fadeOut(200);
+		});
 	}
 
 	//CommentModel:
 	function CommentModel(data){
 		var that = this;
 		
-		that.id = data.id || '';
-		that.content = ko.observable(data.content || '');	
+		that.id = data.id || '';		
 		that.created = data.created || '';
 		that.author = data.author || '';
 		that.authorId = data.user_id || '';
 		that.authorSlug = data.user_slug || '';
 		that.authorAvatar = 'image/no_user_avatar.png';	
 		that.isOwner = false;
+		that.canDelete = true;
+		that.canEdit = true;
+		that.content = ko.observable(data.content || '');		
 		that.isLiked = ko.observable(false);
 		that.likeCount = ko.observable(data.like_count || '');
 	}

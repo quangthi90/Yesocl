@@ -54,13 +54,15 @@
 				                    </li>
 				                    <li class="divider"></li>
 				                    <!-- /ko -->
-				                    <!-- ko if: isLiked() -->				                    
+				                    <!-- ko if: canEdit -->				                    
 				                    <li class="edit-comment-btn">
 								     	<a class="link-popup" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 							     	</li>
+							     	<!-- /ko -->
+							     	<!-- ko if: canDelete -->
 							     	<li class="divider"></li>
 								    <li class="delete-comment-btn">
-								    	<a><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
+								    	<a data-bind="click: deleteComment"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 								    </li>
 								    <!-- /ko -->
 				                </ul>
@@ -68,6 +70,17 @@
 				        </div>
 				    </li>
 				</ul>
+			</div>
+		</div>
+		<div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
+			<div class="txt_editor">
+				<textarea data-bind="value: content" class="post_input mention" placeholder="What's in your mind ..."></textarea>
+			</div>
+			<div class="comment-action">
+				<a data-bind="click: addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
+                <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
+                	<input type="checkbox" class="cb-press-enter" />
+                </div>
 			</div>
 		</div>
 	</div>
