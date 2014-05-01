@@ -42,23 +42,22 @@
 				            <div class="comment-content" data-bind="html: content, seeMore: true">	                
 				            </div>
 				        </div>
+				        <!-- ko if: isLiked() && !canEdit && !canDelete -->
 				        <div class="yes-dropdown option-dropdown">
 				            <div class="dropdown">
 				                <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i></a>
 				                <ul class="dropdown-menu">
 				                	<!-- ko if: isLiked() -->
 				                    <li class="un-like-btn">
-				                    	<a><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a>
+				                    	<a data-bind="click: $parent.likeComment"><i class="icon-thumbs-down"></i>{% trans %}Unlike{% endtrans %}</a>
 				                    </li>
-				                    <li class="divider"></li>
 				                    <!-- /ko -->
 				                    <!-- ko if: canEdit -->				                    
 				                    <li class="edit-comment-btn">
-								     	<a class="link-popup" data-mfp-src="#comment-advance-edit-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
+								     	<a><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
 							     	</li>
 							     	<!-- /ko -->
 							     	<!-- ko if: canDelete -->
-							     	<li class="divider"></li>
 								    <li class="delete-comment-btn">
 								    	<a data-bind="click: $parent.deleteComment"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 								    </li>
@@ -66,13 +65,14 @@
 				                </ul>
 				            </div>
 				        </div>
+				        <!-- /ko -->
 				    </li>
 				</ul>
 			</div>
 		</div>
 		<div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
 			<div class="txt_editor">
-				<textarea data-bind="value: content" class="post_input mention" placeholder="What's in your mind ..."></textarea>
+				<textarea data-bind="value: content" class="post_input mention" placeholder="comment ..."></textarea>
 			</div>
 			<div class="comment-action">
 				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
