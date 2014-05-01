@@ -588,7 +588,7 @@ function CommentBoxViewModel(params){
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	self.deleteComment = function(comment) {
-		
+
 		var ajaxOptions = {
 			url : ""
 		};
@@ -606,7 +606,7 @@ function CommentBoxViewModel(params){
 		};
 		var successCallback = function(data){
 			if(data.success === "ok") {
-				comment.isLiked(true);
+				comment.isLiked(!comment.isLiked());
 				comment.likeCount(data.like_count);
 			} else {
 				//Show message
@@ -617,16 +617,23 @@ function CommentBoxViewModel(params){
 
 	//Private functions:
 	function _displayCommentBox() {
-		$("#overlay").fadeIn(300, function(){
-			$("#" + self.controlId()).animate({ 'right' : '0px' }, 500);
+		var overlay = $("#overlay");
+		var control = $("#" + self.controlId());
+		overlay.fadeIn(300, function(){
+			control.animate({ 'right' : '0px' }, 500, function(){
+				var heightCommentList = $(this).find(".comment-list").first().height();
+				$(this).find(".comment-body").animate({ scrollTop: heightCommentList + "px" }, 1000);
+			});			
 			$(this).on('click', function(){
 				_hideCommentBox();
 			});
 		});
 	}
 	function _hideCommentBox() {
-		$("#" + self.controlId()).animate({ 'right' : '-50000px' }, 200, function(){
-			$("#overlay").fadeOut(200);
+		var overlay = $("#overlay");
+		var control = $("#" + self.controlId());
+		control.animate({ 'right' : '-50000px' }, 200, function(){
+			overlay.fadeOut(500);
 		});
 	}
 
@@ -638,10 +645,10 @@ function CommentBoxViewModel(params){
 		that.created = data.created || '';
 		that.user = data.user || {};
 		that.isOwner = false;
-		that.canDelete = data.canDelete || true;
-		that.canEdit = data.canDelete || true;
+		that.canDelete = data.can_delete || false;
+		that.canEdit = data.can_edit || false;
 		that.content = ko.observable(data.content || '');		
-		that.isLiked = ko.observable(false);
+		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
 	}
 };
