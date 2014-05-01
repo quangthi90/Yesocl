@@ -547,6 +547,8 @@ function CommentBoxViewModel(params){
 	self.widthControl = ko.observable(params.width || 380);
 	self.canExpand = ko.observable(true);
 	self.needEffect = ko.observable(false);
+	self.enterToSend = ko.observable(true);
+	self.isProcessing = ko.observable(false);
 	self.commentList = ko.observableArray(params.commentList || []);	
 	self.postData = {};
 	self.initComment = new CommentModel({});
@@ -592,6 +594,10 @@ function CommentBoxViewModel(params){
 		self.canExpand(!self.canExpand());
 	};
 	self.addComment = function() {
+		if(self.isProcessing()){
+			console.log("In process");
+			return;
+		}
 		var content = self.initComment.content();
 		if(content.trim().length === 0){
 			alert("Content is required !");
@@ -614,8 +620,13 @@ function CommentBoxViewModel(params){
 			}else{
 				//Show message
 			}
+			self.isProcessing(false);
 		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		YesGlobal.Utils.ajaxCall(ajaxOptions, function(){
+			self.isProcessing(true);
+		}, successCallback, function() {
+			self.isProcessing(false);	
+		});	
 	};
 	self.deleteComment = function(comment) {
 

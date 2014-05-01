@@ -79,12 +79,17 @@
 		</div>
 		<div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
 			<div class="txt_editor">
-				<textarea required data-bind="mention: content" class="post_input" placeholder="comment ..."></textarea>
+				<textarea required data-bind="mention: content, executeOnEnter: $parent.addComment, attr:{ 'readonly' : $parent.isProcessing() }" class="post_input" placeholder="comment ..."></textarea>
 			</div>
 			<div class="comment-action">
-				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>	
-                <div class="fr comment-press-enter">{% trans %}Press Enter to send{% endtrans %}  
-                	<input type="checkbox" class="cb-press-enter" />
+				<!-- ko if: !$parent.enterToSend() -->
+				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>
+				<!-- /ko -->
+                <div class="fr comment-press-enter checkbox">  
+                	<label>
+                		{% trans %}Press Enter to send{% endtrans %}
+                		<input type="checkbox" class="checkbox" style="float: right; margin: 0px 10px 0px 5px;" data-bind="checked: $parent.enterToSend" data-no-uniform="true" />
+                	</label>  
                 </div>
 			</div>
 		</div>
