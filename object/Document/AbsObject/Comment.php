@@ -34,6 +34,10 @@ Class Comment {
 	/** @MongoDB\Collection */
     private $likerIds;
 
+    private $canDelete;
+
+    private $canEdit;
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
@@ -55,7 +59,9 @@ Class Comment {
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'status'		=> $this->getStatus(),
-			'like_count'	=> count($this->getLikerIds())
+			'like_count'	=> count($this->getLikerIds()),
+			'can_delete'	=> $this->getCanDelete(),
+			'can_edit'		=> $this->getCanEdit()
 		);
 
 		return $data_format;
@@ -144,5 +150,21 @@ Class Comment {
 
 	public function setLikerIds( $likerIds ){
 		$this->likerIds = $likerIds;
+	}
+
+	public function setCanDelete( bool $canDelete ){
+		$this->canDelete = $canDelete;
+	}
+
+	public function getCanDelete(){
+		return (bool)$this->canDelete;
+	}
+
+	public function setCanEdit( bool $canEdit ){
+		$this->canEdit = $canEdit;
+	}
+
+	public function getCanEdit(){
+		return (bool)$this->canEdit;
 	}
 }
