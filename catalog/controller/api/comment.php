@@ -35,6 +35,7 @@ class ControllerApiComment extends Controller {
         $this->load->model($sModel);
         $this->load->model('tool/image');
         $this->load->model('user/user');
+        $this->load->model('tool/object');
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
         $oComment = $this->$sModelLink->addComment(array(
@@ -49,7 +50,7 @@ class ControllerApiComment extends Controller {
             )));
         }
 
-        $aComment = $oComment->formatToCache();
+        $aComment = $this->model_tool_object->formatComment( $oComment );
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
