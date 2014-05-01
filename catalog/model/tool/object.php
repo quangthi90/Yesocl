@@ -255,7 +255,7 @@ class ModelToolObject extends Model
 		$aUsers = array();
 
 		foreach ( $lComments as $oComment ) {
-			$aComment = $this->formatComment( $oComment, $aUsers );
+			$aComments[] = $this->formatComment( $oComment, $aUsers );
 		}
 
 		if ( !$isReturnUser ) return $aComments;
