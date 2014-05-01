@@ -678,4 +678,28 @@ ko.bindingHandlers.link = {
 		}
 	}
 }
+ko.bindingHandlers.dateTimeText = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        // Provide a custom text value
+        var value = valueAccessor(), allBindings = allBindingsAccessor();
+        var dateFormat = allBindings.dateFormat || "LLLL";
+        var strDate = ko.utils.unwrapObservable(value);
+        if (strDate) {
+            $(element).text(CommonGlobal.ConvertDateJsToString(strDate, dateFormat));
+        } else {
+            $(element).text('-');
+        }
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        // Provide a custom text value
+        var value = valueAccessor(), allBindings = allBindingsAccessor();
+        var dateFormat = allBindings.dateFormat || "LLLL";
+        var strDate = ko.utils.unwrapObservable(value);
+        if (strDate) {
+            $(element).text(CommonGlobal.ConvertDateJsToString(strDate, dateFormat));
+        } else {
+            $(element).text('-');
+        }
+    }
+};
 
