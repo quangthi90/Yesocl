@@ -232,7 +232,7 @@ function WatchListViewModel(options) {
 	//Public functions:
 	self.removeWatchList = function(wl){
 		bootbox.dialog({
-            title: 'Remove watchList',
+            title: sConfirm ,
             message: 'Are you sure you want to remove this stock ?',
             buttons:
             {
@@ -243,7 +243,7 @@ function WatchListViewModel(options) {
                     }
                 },
                 oke: {
-                    label: 'OK',
+                    label: sOk,
                     className: 'btn-primary',
                     callback: function() {
                     	self.watchList.remove(wl);
@@ -589,13 +589,36 @@ function CommentBoxViewModel(params){
 	};
 	self.deleteComment = function(comment) {
 
-		var ajaxOptions = {
-			url : ""
-		};
-		var successCallback = function(data){
-
-		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		bootbox.dialog({
+            title: sConfirm,
+            message: 'Are you sure you want to remove this comment ?',
+            buttons:
+            {
+                cancel: {
+                    label: sCancel,
+                    className: 'btn',
+                    callback: function() {
+                    }
+                },
+                oke: {
+                    label: sOk,
+                    className: 'btn-primary',
+                    callback: function() {
+                    	var ajaxOptions = {
+							url : window.yRouting.generate("ApiDeleteComment", {
+								post_type: self.postData.type,
+								comment_id : comment.id
+							})
+						};
+						var successCallback = function(data){
+							self.commentList.remove(comment);
+							self.postData.commentCount(self.commentList().length);
+						};
+						YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+					}
+                }
+            }
+        });
 	};
 	self.likeComment = function(comment){
 		var ajaxOptions = {

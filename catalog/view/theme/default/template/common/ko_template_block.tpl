@@ -42,7 +42,7 @@
 				            <div class="comment-content" data-bind="html: content, seeMore: true">	                
 				            </div>
 				        </div>
-				        <!-- ko if: isLiked() && !canEdit && !canDelete -->
+				        <!-- ko if: isLiked() || canEdit || canDelete -->
 				        <div class="yes-dropdown option-dropdown">
 				            <div class="dropdown">
 				                <a class="dropdown-toggle" data-toggle="dropdown"><i class="icon-reorder"></i></a>
