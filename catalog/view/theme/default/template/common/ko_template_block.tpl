@@ -63,7 +63,6 @@
 								    	<a><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
 								    </li>
 								    <!-- /ko -->
-								    {% endif %}
 				                </ul>
 				            </div>
 				        </div>
