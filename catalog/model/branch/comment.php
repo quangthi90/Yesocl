@@ -64,7 +64,7 @@ class ModelBranchComment extends Model {
 			return false;
 		}
 		$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $aData['user_id'] );
-		if ( empty($oUser) ) {
+		if ( !$oUser ) {
 			return false;
 		}
 

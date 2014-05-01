@@ -39,11 +39,11 @@ class ControllerApiComment extends Controller {
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
         $oComment = $this->$sModelLink->addComment(array(
             'user_id' => $this->customer->getId(),
-            'post_slug' => $this->request->get['post_type'],
-            'content' => $this->request->get['content']
+            'post_slug' => $this->request->get['post_slug'],
+            'content' => $this->request->post['content']
         ));
 
-        if ( !$aResult ){
+        if ( !$oComment ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok: add comment have error'
             )));
