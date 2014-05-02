@@ -232,14 +232,16 @@ class ExtensionLoader
         
         // Followers
         $oFollowers = $this->registry->get('model_friend_follower')->getFollowers( $oLoggedUser->getId() );
-        $lFolloweds = $oFollowers->getFolloweds();
-        $lFollowings = $oFollowers->getFollowings();
         $aFollowedIds = array();
         $aFollowingIds = array();
-        foreach ( $lFolloweds as $oFollower ) 
-            $aFollowedIds[] = $oFollower->getUser()->getId();
-        foreach ( $lFollowings as $oFollower ) 
-            $aFollowingIds[] = $oFollower->getUser()->getId();
+        if ( $oFollowers ){
+            $lFolloweds = $oFollowers->getFolloweds();
+            $lFollowings = $oFollowers->getFollowings();
+            foreach ( $lFolloweds as $oFollower ) 
+                $aFollowedIds[] = $oFollower->getUser()->getId();
+            foreach ( $lFollowings as $oFollower ) 
+                $aFollowingIds[] = $oFollower->getUser()->getId();
+        }
         
         // Avatar
         $sAvatar = $this->registry->get('model_tool_image')->getAvatarUser( 
