@@ -103,26 +103,26 @@ $_['routing']['StockPage']						= 'stock/page/{stock_code}/';
 
 //-- API --//
 // Common
-$_['routing']['AjaxGetRouting']					= 'service/get/routing/';
-$_['routing']['SetLanguage']					= 'service/push/language/';
+$_['routing']['AjaxGetRouting']					= 'services/get/routing/';
+$_['routing']['SetLanguage']					= 'services/push/language/';
 
 // Stock
-$_['routing']['ApiGetAllStocks']				= 'service/get/stock/all/';
-$_['routing']['ApiPostWatchList']				= 'service/post/stock/watch-list/many/';
-$_['routing']['ApiDeleteWatchListItem']			= 'service/delete/stock/watch-list/item/{stock_id}/';
-$_['routing']['ApiGetStockExchanges']			= 'service/get/stock/{stock_id}/exchanges/';
-$_['routing']['ApiGetLastStockNews']			= 'service/get/stock/news/last/';
+$_['routing']['ApiGetAllStocks']				= 'services/get/stock/all/';
+$_['routing']['ApiPostWatchList']				= 'services/post/stock/watch-list/many/';
+$_['routing']['ApiDeleteWatchListItem']			= 'services/delete/stock/watch-list/item/{stock_id}/';
+$_['routing']['ApiGetStockExchanges']			= 'services/get/stock/{stock_id}/exchanges/';
+$_['routing']['ApiGetLastStockNews']			= 'services/get/stock/news/last/';
 
 // Post
-$_['routing']['ApiPutPostLike']					= 'service/put/{post_type}/post/{post_slug}/like/';
-$_['routing']['ApiPutPostInfo']					= 'service/put/{post_type}/post/{post_slug}/';
-$_['routing']['ApiGetPostLiker']				= 'service/get/{post_type}/post/{post_slug}/liker/';
+$_['routing']['ApiPutPostLike']					= 'services/put/{post_type}/post/{post_slug}/like/';
+$_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}/';
+$_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}/liker/';
 
 // Comment
-$_['routing']['ApiGetComments']					= 'service/get/{post_type}/post/{post_slug}/comments/';
-$_['routing']['ApiGetCommentLiker']				= 'service/get/{post_type}/post/comment/{comment_id}/liker/';
-$_['routing']['ApiPutCommentLike']				= 'service/put/{post_type}/post/comment/{comment_id}/like/';
-$_['routing']['ApiPutComment']					= 'service/put/{post_type}/post/comment/{comment_id}/';
-$_['routing']['ApiPostComment']					= 'service/post/{post_type}/post/{post_slug}/comment/';
-$_['routing']['ApiDeleteComment']				= 'service/delete/{post_type}/post/comment/{comment_id}/';
+$_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/';
+$_['routing']['ApiGetCommentLiker']				= 'services/get/{post_type}/post/comment/{comment_id}/liker/';
+$_['routing']['ApiPutCommentLike']				= 'services/put/{post_type}/post/comment/{comment_id}/like/';
+$_['routing']['ApiPutComment']					= 'services/put/{post_type}/post/comment/{comment_id}/';
+$_['routing']['ApiPostComment']					= 'services/post/{post_type}/post/{post_slug}/comment/';
+$_['routing']['ApiDeleteComment']				= 'services/delete/{post_type}/post/comment/{comment_id}/';
 ?>

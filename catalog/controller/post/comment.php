@@ -61,8 +61,13 @@ class ControllerPostComment extends Controller {
             )));
         }
 
-        $oComment = $aResult['comment'];
-        $oPost = $aResult['post'];
+        $oPost = null;
+        if ( is_array($aResult) ){
+            $oComment = $aResult['comment'];
+            $oPost = $aResult['post'];
+        }else{
+            $oComment = $aResult;
+        }
 
         $this->load->model('tool/object');
 
@@ -73,33 +78,35 @@ class ControllerPostComment extends Controller {
         );
 
         // Add notification
-        $this->load->model('user/notification');
-        
-        if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
-            $this->model_user_notification->addNotification(
-                $oPost->getUser()->getSlug(),
-                $this->customer->getUser(),
-                $this->config->get('common')['action']['comment'],
-                $oComment->getId(),
-                $oPost->getSlug(),
-                $aDatas['post_type'],
-                $this->config->get('common')['object']['post']
-            );
-        }
-
-        if ( !empty($this->request->post['tags']) ){
-            $aUserSlugs = $this->request->post['tags'];
-
-            foreach ( $aUserSlugs as $sUserSlug ) {
+        if ( $oPost ){
+            $this->load->model('user/notification');
+            
+            if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
                 $this->model_user_notification->addNotification(
-                    $sUserSlug,
+                    $oPost->getUser()->getSlug(),
                     $this->customer->getUser(),
-                    $this->config->get('common')['action']['tag'],
+                    $this->config->get('common')['action']['comment'],
                     $oComment->getId(),
                     $oPost->getSlug(),
                     $aDatas['post_type'],
-                    $this->config->get('common')['object']['comment']
+                    $this->config->get('common')['object']['post']
                 );
+            }
+
+            if ( !empty($this->request->post['tags']) ){
+                $aUserSlugs = $this->request->post['tags'];
+
+                foreach ( $aUserSlugs as $sUserSlug ) {
+                    $this->model_user_notification->addNotification(
+                        $sUserSlug,
+                        $this->customer->getUser(),
+                        $this->config->get('common')['action']['tag'],
+                        $oComment->getId(),
+                        $oPost->getSlug(),
+                        $aDatas['post_type'],
+                        $this->config->get('common')['object']['comment']
+                    );
+                }
             }
         }
 
@@ -223,7 +230,7 @@ class ControllerPostComment extends Controller {
 
             case $this->config->get('post')['type']['user']:
                 $this->load->model('user/comment');
-                $bResult = $this->model_user_comment->deleteComment( $aDatas['comment_id'], $aDatas, $this->customer->getId() );
+                $bResult = $this->model_user_comment->deleteComment( $aDatas['comment_id'], $this->customer->getId(), $aDatas );
                 break;
             
             default:
