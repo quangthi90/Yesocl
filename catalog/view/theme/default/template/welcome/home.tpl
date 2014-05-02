@@ -69,13 +69,13 @@
 	                <div class="warning hidden">{% trans %}warning{% endtrans %}</div>
             	</div>
             </div>
-            <div class="controls controls-row captcha-row">
+            {#<div class="controls controls-row captcha-row">
             	<label style="font-weight: bold;font-size: 14px;">{% trans %}Security Check{% endtrans %}</label>
             	<div class="captcha-container">
             		{{ recaptcha_html | raw }}	
             	</div>    			
     			<div class="warning hidden">{% trans %}Captcha not match{% endtrans %}!</div>
-    		</div>
+    		</div>#}
             <div class="controls controls-row ">
                 <label class="checkbox" style="margin-bottom:10px;"><input type="checkbox" name="agree" required="required" />{% trans %}I agree Yesocl's policy{% endtrans %}</label>
                 <button type="submit" class="btn btn-success btn-reg">{% trans %}Sign up{% endtrans %}</button>
