@@ -78,10 +78,10 @@ if ( isset($request->cookie['language']) ){
 	if ( is_file($sLangFile) ){
 		$lang = $request->cookie['language'];
 	}else{
-		$lang = 'vi';
+		$lang = 'vi_VN';
 	}
 }else{
-	$lang = 'vi';
+	$lang = 'vi_VN';
 	setcookie('language', $lang, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 }
 
