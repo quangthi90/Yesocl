@@ -69,3 +69,14 @@ function PostModel(data) {
 
 	};
 }
+
+function UserModel(data) {
+	var that = this;
+
+	that.id = data.id || "";
+	that.username = data.username || "";
+	that.slug = data.slug || "";
+	that.avatar = data.avatar || "";
+	that.friendStatus = ko.observable(0);
+	that.followStatus = ko.observable(0);
+}

@@ -96,3 +96,62 @@
 	</div>
 </div>
 {% endblock %}
+{% block common_ko_template_user_box %}
+<div class="y-control hidden" data-bind="with: $root.userBoxModel">
+	<div data-bind="attr:{ 'id' : controlId }">
+		<ul class="user-list-box" data-bind="foreach: userList">
+			<li class="user-item">
+				<div class="user-item-info">
+					<a data-bind="link: { title: username, route: 'WallPage', params: { user_slug: slug } }">
+		                <img data-bind="attr : { 'src' : avatar, alt : username, title : username }">
+		            </a>
+					<div class="user-item-overview">
+						<a data-bind="link: { text: user.username, title: user.username, route: 'WallPage', params: { user_slug: user.slug } }"></a> 					
+						<span data-bind="attr : { title: current }, text: current"></span>
+					</div>
+				</div>
+				<div class="user-actions friend-actions">
+					<!-- ko if: friendStatus() == 2 -->
+					<div class="dropdown friend-group">
+						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Friend{% endtrans %}</a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li><a>{% trans %}Unfriend{% endtrans %}</a></li>
+	                    </ul>
+	                </div>
+					<!-- /ko -->
+					<!-- ko if: friendStatus() == 3 -->
+					<div class="dropdown friend-group">
+						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li>
+	                            <a>{% trans %}Cancel Request{% endtrans %}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+					<!-- /ko -->
+					<!-- ko if: friendStatus() == 3 -->
+					<button class="btn btn-yes friend-group js-makefriend-btn">
+						<i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}
+					</button>
+					<!-- /ko -->
+					<!-- ko if: followStatus() == 3 -->
+					<div class="dropdown follow-group">
+						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
+	                    <ul class="dropdown-menu" role="menu">
+	                        <li>
+	                            <a class="btn-unfollow">{% trans %}Unfollow{% endtrans %}</a>
+	                        </li>
+	                    </ul>
+	                </div>
+	                <!-- /ko -->
+	                <!-- ko if: followStatus() == 3 -->
+	                <button class="btn btn-yes btn-friend follow-group">
+						<i class="icon-rss"></i> {% trans %}Follow{% endtrans %}
+					</button>
+					<!-- /ko -->
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+{% endblock %} }

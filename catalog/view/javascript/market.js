@@ -737,3 +737,26 @@ function CommentBoxViewModel(params){
 		that.isInit = ko.observable(true);
 	}
 };
+
+function CommentBoxViewModel(params){
+	var self = this;
+
+	self.controlId = ko.observable(params.Id || "user-list-box-wrapper");
+	self.userList = ko.observableArray([]);
+
+	self.makeFriend = function(user){
+
+	};
+	self.unFriend = function(user) {
+
+	};
+	self.cancelRequest = function(user){
+
+	};
+	self.follow = function(){
+
+	};
+	self.unFollow = function(){
+
+	};
+}
