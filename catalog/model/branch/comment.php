@@ -194,7 +194,7 @@ class ModelBranchComment extends Model {
 	        }
 		}
 
-		if ( !empty($aData['content']) && $oComment->getUser()->getId() == $aData['author_id'] ){
+		if ( !empty($aData['content']) && $oComment->getUser()->getId() == $this->customer->getId() ){
 			// $oComment->setContent( htmlentities($aData['content']) );
 			$oComment->setContent( $aData['content'] );
 		}
