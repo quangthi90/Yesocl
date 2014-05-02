@@ -17,6 +17,10 @@ class ModelFriendFriend extends Model {
 
 		if ( !$isListFriend ) return $oFriends;
 
+		if ( !$oFriends ){
+			return null;
+		}
+
 		return $oFriends->getFriends();
 	}
 
