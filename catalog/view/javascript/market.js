@@ -625,6 +625,7 @@ function CommentBoxViewModel(params){
 				self.initComment.content("");
 				var newComment = new CommentModel(data.comment);
 				self.commentList.push(newComment);
+				self.postData.commentCount(self.commentList().length);
 			}else{
 				//Show message
 			}
