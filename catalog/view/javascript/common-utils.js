@@ -203,7 +203,7 @@ ko.bindingHandlers.mention = {
             onMentionChanged: function(){
                 observableAttr($(element).mentionsInput("getHtmlContent"));
             },
-            fullNameTrigger: true
+            fullNameTrigger: false
         });
         
     },

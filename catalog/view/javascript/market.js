@@ -561,6 +561,8 @@ function CommentBoxViewModel(params){
 		}
 		self.postData = postData;
 		self.commentList.removeAll();
+		self.needEffect(false);
+
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiGetComments', {
 				post_type: postData.type,
@@ -583,7 +585,6 @@ function CommentBoxViewModel(params){
 	};
 	self.closeCommentBox = function(){
 		_hideCommentBox();
-		self.needEffect(false);
 	};
 	self.expandCommentBox = function(){
 		if(self.canExpand()){
