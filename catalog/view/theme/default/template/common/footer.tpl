@@ -20,7 +20,7 @@
               <a href="#" data-selected="{% if language_code == 'en-US' %}true{% else %}false{% endif %}" data-code="en-US" class="language-item"><img src="image/flags/england.png"> <span>{% trans %}English{% endtrans %}</span></a>
             </li>
             <li>
-              <a href="#" data-selected="{% if language_code == 'vi' or get_cookie('language') == '' %}true{% else %}false{% endif %}" data-code="vi" class="language-item"><img src="image/flags/vn.png"> <span>{% trans %}Vietnamese{% endtrans %}</span></a>
+              <a href="#" data-selected="{% if language_code == 'vi_VN' or get_cookie('language') == '' %}true{% else %}false{% endif %}" data-code="vi_VN" class="language-item"><img src="image/flags/vn.png"> <span>{% trans %}Vietnamese{% endtrans %}</span></a>
             </li>
             {#<li>
               <a href="#" data-selected="{% if language_code == 'zh' %}true{% else %}false{% endif %}" data-code="zh" class="language-item"><img src="image/flags/cn.png"> <span>Chinese</span></a>
