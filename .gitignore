@@ -18,3 +18,7 @@
 /ajax/.htaccess
 /system/twig
 /image/data
+/image/data
+/catalog/language/locale/vi/LC_MESSAGES/cache
+/catalog/language/locale/vi_VN/LC_MESSAGES/cache
+/catalog/language/locale/en-US/LC_MESSAGES/cache
