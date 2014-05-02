@@ -1,4 +1,8 @@
 var YesGlobal = YesGlobal || {};
+YesGlobal.Caches = {
+    StockList: []
+};
+
 YesGlobal.Configs = {
     ajaxOptions : {
         url : "",
@@ -41,6 +45,45 @@ YesGlobal.Utils = {
                 }
             }
         });
+    },
+    initStockList: function(callback) {
+        if(YesGlobal.Caches.StockList.length > 0){
+            callback(YesGlobal.Caches.StockList);
+        }else {
+            var ajaxOptions = {
+                url: window.yRouting.generate('ApiGetAllStocks'),
+                async: false
+            };
+            var successCallback = function(data){
+                if(data.success === "ok"){
+                    YesGlobal.Caches.StockList = data.stocks;
+                    callback(data.stocks);    
+                }else {
+                    callback([]);
+                }
+            }
+            YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+        }
+    },
+    initFriendList: function(callback) {
+        var friendList = window.yListFriends || [];
+        if(friendList.length > 0){
+            callback(friendList);
+        }else {
+            var ajaxOptions = {
+                url: window.yRouting.generate('GetAllFriends'),
+                async: false
+            };
+            var successCallback = function(data){
+                if(data.success === "ok"){
+                    window.yListFriends = data.friends;
+                    callback(data.friends);
+                }else {
+                    callback([]);
+                }
+            }
+            YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+        }
     },
     getKoContext: function(eleId){
         if(eleId !== undefined){
@@ -171,34 +214,41 @@ ko.bindingHandlers.mention = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         var observableAttr = valueAccessor();
         $(element).mentionsInput({
-            onDataRequest:function (mode,currentMentionCollection,query,callback) {
-                if ( window.yListFriends === undefined || window.yListFriends === null ){
-                    var ajaxOptions = {
-                        url: window.yRouting.generate('GetAllFriends'),
-                        async: false
-                    };
-                    YesGlobal.Utils.ajaxCall(ajaxOptions, null, function(res){
-                        if(res.success === "ok"){
-                            window.yListFriends = res.friends;
-                            responseData = _.filter(window.yListFriends, function(item) { 
-                                return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
-                            });
-                            callback.call(this, responseData);
-                        }
-                    }, null);
-                } else {
-                    data = _.filter(window.yListFriends, function(item) {
-                        if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
-                            var checkExisted = _.filter(currentMentionCollection, function(tempItem){
-                                return (item.id === tempItem.id);
-                            });
-                            if(checkExisted.length > 0)
-                                return false;
-                        }                   
-                        return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+            onDataRequest: function (mode,currentMentionCollection,queryObj,callback) {
+                var query = queryObj.queryString;
+                var firstCharacter = queryObj.firstCharacter;
+                if(firstCharacter === "@") {
+                    YesGlobal.Utils.initFriendList(function(queryData){
+                        result = _.filter(queryData, function(item) {
+                            if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
+                                var checkExisted = _.filter(currentMentionCollection, function(tempItem){
+                                    return (item.id === tempItem.id);
+                                });
+                                if(checkExisted.length > 0)
+                                    return false;
+                            }                   
+                            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                        });
+                        callback.call(this, result);
                     });
-                    callback.call(this, data);
-                }
+                    return;
+                } 
+                if(firstCharacter === "$") {
+                    YesGlobal.Utils.initStockList(function(queryData){
+                        result = _.filter(queryData, function(item) {
+                            if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
+                                var checkExisted = _.filter(currentMentionCollection, function(tempItem){
+                                    return (item.id === tempItem.id);
+                                });
+                                if(checkExisted.length > 0)
+                                    return false;
+                            }                   
+                            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                        });
+                        callback.call(this, result);
+                    });
+                    return;
+                }        
             },
             onMentionChanged: function(){
                 observableAttr($(element).mentionsInput("getHtmlContent"));

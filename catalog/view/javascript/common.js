@@ -189,7 +189,9 @@ Tag.prototype.attachEvents = function() {
 	var that = this;
 
 	that.$tagElement.mentionsInput({
-		onDataRequest:function (mode,currentMentionCollection,query,callback) {
+		onDataRequest:function (mode,currentMentionCollection, queryObj,callback) {
+			var query = queryObj.queryString;
+            var firstCharacter = queryObj.firstCharacter;
             if ( window.yListFriends === undefined || window.yListFriends === null ){
                 var ajaxOptions = {
                     url: window.yRouting.generate('GetAllFriends'),

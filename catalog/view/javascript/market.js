@@ -409,32 +409,23 @@ function WatchListViewModel(options) {
 	function _initStockDatasource() {
 		_isInitDatasource = true;
 		self.isLoading(true);
-		if ( self.cacheStockDatasource().length === 0 ){
-			$.ajax({
-				type: 'POST',
-				url: window.yRouting.generate('ApiGetAllStocks'),
-				dataType: 'json',
-				async: true,				
-				success: function(data) {
-					if ( data.success == 'ok' ){
-						for ( var key in data.stocks ){
-							var temp = _getFirstInArray(self.watchList(), data.stocks[key].code);
-							self.cacheStockDatasource.push(new WatchListItem({
-								stock: data.stocks[key],
-								isAdded: temp !== null
-							}));							
-						}
-					}
+		YesGlobal.Utils.initStockList(_loadInitStockList);
+	}
 
-					//Completed:
-					self.isLoading(false);
-					$('#wl-query').focus();					
-				},
-				complete : function(){
-					self.isLoading(false);
-				}
-			});
-		}		
+	function _loadInitStockList(stockList) {
+		if(stockList !== undefined && stockList !== null && stockList.length > 0){
+			self.cacheStockDatasource.removeAll();
+			for ( var key in stockList){
+				var temp = _getFirstInArray(self.watchList(), stockList[key].code);
+				self.cacheStockDatasource.push(new WatchListItem({
+					stock: stockList[key],
+					isAdded: temp !== null
+				}));							
+			}
+		}
+		//Completed:
+		self.isLoading(false);
+		$('#wl-query').focus();
 	}
 
 	function _submitRemoveWatchlist(wl){
