@@ -151,15 +151,13 @@
             //Popup advanced comment:
             commentBox.find('.link-popup').makePopupLink();
             commentBox.find('.comment-content img').each(function(){
-                if($(this).parent('a').length === 0){
-                    var imgWrapper = $('<a class="img-wrapper"></a>');
-                    imgWrapper.attr('href', $(this).attr('src'));
-                    imgWrapper.attr('title', $(this).attr('alt'));
-                    $(this).wrap(imgWrapper);
-                }
-            });
+                var imgWrapper = $('<a class="img-wrapper"></a>');
+                imgWrapper.attr('href', $(this).attr('src'));
+                imgWrapper.attr('title', $(this).attr('alt'));
+                $(this).wrap(imgWrapper);
+            });            
             commentBox.find('.comment-content').magnificPopup({
-                delegate: 'a',
+                delegate: 'a.img-wrapper',
                 type: 'image',
                 closeOnContentClick: false,
                 closeBtnInside: false,
@@ -371,15 +369,13 @@
                 });
                 //Zoom image in comment:
                 commentBox.find('.comment-content img').each(function(){
-                    if($(this).parent('a').length === 0){
-                        var imgWrapper = $('<a class="img-wrapper"></a>');
-                        imgWrapper.attr('href', $(this).attr('src'));
-                        imgWrapper.attr('title', $(this).attr('alt'));
-                        $(this).wrap(imgWrapper);
-                    }
+                    var imgWrapper = $('<a class="img-wrapper"></a>');
+                    imgWrapper.attr('href', $(this).attr('src'));
+                    imgWrapper.attr('title', $(this).attr('alt'));
+                    $(this).wrap(imgWrapper);
                 });
                 commentBox.find('.comment-content').magnificPopup({
-                    delegate: 'a',
+                    delegate: 'a.img-wrapper',
                     type: 'image',
                     closeOnContentClick: false,
                     closeBtnInside: false,
