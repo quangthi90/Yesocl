@@ -85,15 +85,6 @@ if ( isset($request->cookie['language']) ){
 	setcookie('language', $lang, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 }
 
-// default load locale
-// putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
-// putenv("LANGUAGE=$lang"); //same as above
-// setlocale(LC_ALL, $lang . '.UTF-8');
-// // setlocale(LC_MESSAGES, $lang);
-// bindtextdomain($lang, DIR_LANGUAGE . "locale/nocache");
-// bindtextdomain($lang, DIR_LANGUAGE . "locale");
-// textdomain($lang);
-
 // load dynamic locale file name
 $locale = $lang;
 $locales_root = DIR_LANGUAGE . "locale";
