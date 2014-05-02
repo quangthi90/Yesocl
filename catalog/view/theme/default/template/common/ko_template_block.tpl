@@ -86,9 +86,9 @@
 				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>
 				<!-- /ko -->
                 <div class="fr comment-press-enter checkbox">  
-                	<label style="font-size: 12px;">
+                	<label style="font-size: 12px; display: inline-flex;">
                 		{% trans %}Press Enter to send{% endtrans %}
-                		<input type="checkbox" class="checkbox" style="float: right; margin: 0px 10px 0px 5px;" data-bind="checked: $parent.enterToSend" data-no-uniform="true" />
+                		<input type="checkbox" class="checkbox" style="margin: 0px 10px 0px 5px;" data-bind="checked: $parent.enterToSend" data-no-uniform="true" />
                 	</label>  
                 </div>
 			</div>
