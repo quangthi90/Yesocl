@@ -593,6 +593,13 @@ function CommentBoxViewModel(params){
 		}
 		self.canExpand(!self.canExpand());
 	};
+	self.addCommentByEnter = function(){
+		if(self.enterToSend()){
+			self.addComment();
+			return false;
+		}
+		return true;
+	};
 	self.addComment = function() {
 		if(self.isProcessing()){
 			console.log("In process");

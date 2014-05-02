@@ -95,8 +95,7 @@ ko.bindingHandlers.executeOnEnter = {
         $(element).keypress(function (event) {
             var keyCode = (event.which ? event.which : event.keyCode);
             if (keyCode === 13) {
-                allBindings.executeOnEnter.call(viewModel, viewModel, valueAccessor, element);
-                return false;
+                return allBindings.executeOnEnter.call(viewModel, viewModel, valueAccessor, element);
             }
             return true;
         });
@@ -212,7 +211,7 @@ ko.bindingHandlers.mention = {
         var value = valueAccessor();
         if(value().length === 0){
             $(element).mentionsInput("reset");
-            $(element).focus();
+            $(element).height(35).focus();
         }
     }
 }
