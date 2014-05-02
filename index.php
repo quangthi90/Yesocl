@@ -85,11 +85,37 @@ if ( isset($request->cookie['language']) ){
 	setcookie('language', $lang, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 }
 
-putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
-putenv("LANGUAGE=$lang"); //same as above
-setlocale(LC_ALL, $lang);
-bindtextdomain($lang, DIR_LANGUAGE . "locale");
-textdomain($lang);
+// default load locale
+// putenv("LANG=$lang"); //to make sure LANG doesn't override LC_ALL
+// putenv("LANGUAGE=$lang"); //same as above
+// setlocale(LC_ALL, $lang . '.UTF-8');
+// // setlocale(LC_MESSAGES, $lang);
+// bindtextdomain($lang, DIR_LANGUAGE . "locale/nocache");
+// bindtextdomain($lang, DIR_LANGUAGE . "locale");
+// textdomain($lang);
+
+// load dynamic locale file name
+$locale = $lang;
+$locales_root = DIR_LANGUAGE . "locale";
+$domain = $lang;
+
+// activate the locale setting
+setlocale(LC_ALL, $locale);
+setlocale(LC_TIME, $locale);
+putenv("LANG=$locale");
+
+$filename = "$locales_root/$locale/LC_MESSAGES/$domain.mo";
+$mtime = filemtime($filename);
+$filename_new = "$locales_root/$locale/LC_MESSAGES/cache/{$domain}_{$mtime}.mo"; 
+
+if (!file_exists($filename_new)) {  // check if we have created it before
+      // if not, create it now, by copying the original
+      copy($filename,$filename_new);
+}
+
+$domain_new = "cache/{$domain}_{$mtime}";
+bindtextdomain($domain_new,$locales_root);
+textdomain($domain_new);
 
 // Language	
 $language = new Language('english');
