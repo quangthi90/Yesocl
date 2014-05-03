@@ -9,9 +9,17 @@ class ModelBranchComment extends Model {
 			return array();
 		}
 
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 10;
+		}
+
+		if ( empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+
 		$oPost = $this->dm->createQueryBuilder('Document\Branch\Post')
 			->field('slug')->equals($aData['post_slug'])
-		    // ->selectSlice('comments', $aData['start'], $aData['limit'])
+		    ->selectSlice('comments', $aData['start'], $aData['limit'])
 		    ->getQuery()
 		    ->getSingleResult();
 
