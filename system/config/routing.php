@@ -119,7 +119,7 @@ $_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}
 $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}/liker/';
 
 // Comment
-$_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/';
+$_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
 $_['routing']['ApiGetCommentLiker']				= 'services/get/{post_type}/post/comment/{comment_id}/liker/';
 $_['routing']['ApiPutCommentLike']				= 'services/put/{post_type}/post/comment/{comment_id}/like/';
 $_['routing']['ApiPutComment']					= 'services/put/{post_type}/post/comment/{comment_id}/';

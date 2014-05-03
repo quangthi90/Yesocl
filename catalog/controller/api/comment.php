@@ -1,6 +1,7 @@
 <?php 
 class ControllerApiComment extends Controller {
     private $error = array();
+    private $limit = 10;
 
     public function add(){
         if ( !$this->customer->isLogged() ) {
@@ -175,6 +176,18 @@ class ControllerApiComment extends Controller {
             )));
         }
 
+        if ( !empty($this->request->post['page_size']) ){
+            $limit = $this->request->post['page_size'];
+        }else{
+            $limit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $page = $this->request->get['page'];
+        }else{
+            $page = 1;
+        }
+
         $sModel = $this->request->get['post_type'] . '/comment';
         $this->load->model($sModel);
         $this->load->model('tool/image');
@@ -183,7 +196,11 @@ class ControllerApiComment extends Controller {
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
         $aComments = $this->$sModelLink->getComments( 
-            array('post_slug' => $this->request->get['post_slug']),
+            array(
+                'post_slug' => $this->request->get['post_slug'],
+                'limit' => $limit,
+                'start' => $limit * ($page - 1)
+            ),
             true
         );
 
