@@ -99,6 +99,7 @@
 {% block common_ko_template_user_box %}
 <div class="y-control hidden" data-bind="with: $root.userBoxModel">
 	<div data-bind="attr:{ 'id' : controlId }">
+		<!-- ko if: userList().length > 0 -->
 		<ul class="user-list-box" data-bind="foreach: userList">
 			<li class="user-item">
 				<div class="user-item-info">
@@ -115,7 +116,7 @@
 					<div class="dropdown friend-group">
 						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Friend{% endtrans %}</a>
 	                    <ul class="dropdown-menu" role="menu">
-	                        <li><a>{% trans %}Unfriend{% endtrans %}</a></li>
+	                        <li><a data-bind="click: unFriend">{% trans %}Unfriend{% endtrans %}</a></li>
 	                    </ul>
 	                </div>
 					<!-- /ko -->
@@ -124,13 +125,13 @@
 						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
 	                    <ul class="dropdown-menu" role="menu">
 	                        <li>
-	                            <a>{% trans %}Cancel Request{% endtrans %}</a>
+	                            <a data-bind="click: cancelRequest">{% trans %}Cancel Request{% endtrans %}</a>
 	                        </li>
 	                    </ul>
 	                </div>
 					<!-- /ko -->
 					<!-- ko if: friendStatus() == 3 -->
-					<button class="btn btn-yes friend-group js-makefriend-btn">
+					<button class="btn btn-yes friend-group" data-bind="click: makeFriend">
 						<i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}
 					</button>
 					<!-- /ko -->
@@ -139,19 +140,23 @@
 						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
 	                    <ul class="dropdown-menu" role="menu">
 	                        <li>
-	                            <a class="btn-unfollow">{% trans %}Unfollow{% endtrans %}</a>
+	                            <a class="btn-unfollow" data-bind="click: unFollow">{% trans %}Unfollow{% endtrans %}</a>
 	                        </li>
 	                    </ul>
 	                </div>
 	                <!-- /ko -->
 	                <!-- ko if: followStatus() == 3 -->
-	                <button class="btn btn-yes btn-friend follow-group">
+	                <button class="btn btn-yes btn-friend follow-group" data-bind="click: follow">
 						<i class="icon-rss"></i> {% trans %}Follow{% endtrans %}
 					</button>
 					<!-- /ko -->
 				</div>
 			</li>
 		</ul>
+		<!-- /ko -->
+		<!-- ko if: userList().length == 0 -->
+		<p>No users found !</p>
+		<!-- /ko -->
 	</div>
 </div>
 {% endblock %} }

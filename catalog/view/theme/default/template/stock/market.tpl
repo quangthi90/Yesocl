@@ -51,12 +51,15 @@
 			var commentBoxOptions = {
 				Id : "comment-box"
 			};
+			var userBoxOptions = {
+			};
 
 			var viewModel = {
 				chartModel : new ChartViewModel(chartOptions),
 				watchListModel : new WatchListViewModel(watchListOptions),
 				newsModel : new NewsViewModel(newsOptions),
-				commentBoxModel : new CommentBoxViewModel(commentBoxOptions)
+				commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
+				userBoxModel : new UserBoxViewModel(userBoxOptions)
 			};
 			ko.applyBindings(viewModel, document.getElementById('y-main-content'));
 		});

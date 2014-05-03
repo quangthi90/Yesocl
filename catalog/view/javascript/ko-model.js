@@ -58,6 +58,14 @@ function PostModel(data) {
 			console.log("Ko content not found !");
 		}
 	};
+	that.showLikers = function(){
+		var context = YesGlobal.Utils.getKoContext();
+		if(context !== null){
+			context.$data.commentBoxModel.showCommentBox(that);
+		}else {
+			console.log("Ko content not found !");
+		}
+	};
 	that.toJson = function(){
 		return {
 			post_type: that.type,
@@ -66,7 +74,7 @@ function PostModel(data) {
 	};
 
 	function _submitLikePost(successCallback, failCallback, errorCallback) {
-
+		
 	};
 }
 
@@ -77,6 +85,22 @@ function UserModel(data) {
 	that.username = data.username || "";
 	that.slug = data.slug || "";
 	that.avatar = data.avatar || "";
-	that.friendStatus = ko.observable(0);
-	that.followStatus = ko.observable(0);
+	that.friendStatus = ko.observable(data.fr_status || 0);
+	that.followStatus = ko.observable(data.fl_status || 0);
+
+	that.makeFriend = function(user){
+
+	};
+	that.unFriend = function(user) {
+
+	};
+	that.cancelRequest = function(user){
+
+	};
+	that.follow = function(user){
+
+	};
+	that.unFollow = function(user){
+
+	};
 }

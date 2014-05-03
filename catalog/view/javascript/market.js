@@ -101,7 +101,7 @@ function ChartViewModel (options) {
 		options.tooltip = self.defaultTooltip;
 	    options.series = [
 			{
-				name :  "OHLC",
+				name :  self.stock().name,
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
@@ -133,7 +133,7 @@ function ChartViewModel (options) {
 		options.yAxis = [
 			{
 		        title: {
-		            text: "OHLC"
+		            text: self.stock().name
 		        },
 		        height: 200,
 		        lineWidth: 2,			        
@@ -150,7 +150,7 @@ function ChartViewModel (options) {
 	    ];
 	    options.series = [
 			{
-				name :  "OHLC",
+				name :  self.stock().name,
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
@@ -738,25 +738,34 @@ function CommentBoxViewModel(params){
 	}
 };
 
-function CommentBoxViewModel(params){
+function UserBoxViewModel(params){
 	var self = this;
 
 	self.controlId = ko.observable(params.Id || "user-list-box-wrapper");
 	self.userList = ko.observableArray([]);
 
-	self.makeFriend = function(user){
-
+	self.showUserList = function(objectTrigger, apiUrl){
+		var ajaxOptions = {
+			url : apiUrl
+		};
+		self.userList.removeAll();
+		var successCallback = function(data){
+			ko.utils.arrayForEach(data.likers, function(obj){
+				var user = new UserModel(obj);
+				self.userList.push(user);
+			});
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
-	self.unFriend = function(user) {
 
-	};
-	self.cancelRequest = function(user){
-
-	};
-	self.follow = function(){
-
-	};
-	self.unFollow = function(){
-
-	};
+	function _displayBox(){
+		var content = $("#" + self.controlId()).html();
+		bootbox.dialog({
+            message: content,
+            title: 'User list',
+            onEscape: function(){
+                bootbox.hideAll();
+            }
+        });
+	}
 }
