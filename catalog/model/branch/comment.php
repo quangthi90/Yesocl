@@ -231,7 +231,13 @@ class ModelBranchComment extends Model {
 		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
 		if ( !$oPost ){
-			return 0;
+			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+				'comments.id' => $sPostSlug
+			));
+
+			if ( !$oPost ){
+				return -1;
+			}
 		}
 
 		return $oPost->getComments()->count();
