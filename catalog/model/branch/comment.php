@@ -25,14 +25,6 @@ class ModelBranchComment extends Model {
 
 		if ( !$oPost ) return array();
 
-		// $lComments = $oPost->getComments();
-		//   foreach ($lComments as $oComment) {
-		//    if ( $oComment->getId() == null ){
-		//     $oPost->getComments()->removeElement($oComment);
-		//    }
-		//   }
-		//   $this->dm->flush();
-
 		$this->dm->clear();
 
 		// Update permission

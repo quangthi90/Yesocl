@@ -198,8 +198,8 @@ class ControllerApiComment extends Controller {
         $aComments = $this->$sModelLink->getComments( 
             array(
                 'post_slug' => $this->request->get['post_slug'],
-                'limit' => $limit,
-                'start' => $limit * ($page - 1)
+                'limit' => (int)$limit,
+                'start' => (int)($limit * ($page - 1))
             ),
             true
         );
