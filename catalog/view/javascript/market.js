@@ -623,7 +623,7 @@ function CommentBoxViewModel(params){
 				self.initComment.content("");
 				var newComment = new CommentModel(data.comment);
 				self.commentList.push(newComment);
-				self.postData.commentCount(self.commentList().length);
+				self.postData.commentCount(self.postData.commentCount() + 1);
 			}else{
 				//Show message
 			}
@@ -660,7 +660,7 @@ function CommentBoxViewModel(params){
 						};
 						var successCallback = function(data){
 							self.commentList.remove(comment);
-							self.postData.commentCount(self.commentList().length);
+							self.postData.commentCount(self.postData.commentCount() - 1);
 						};
 						YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 					}
@@ -730,7 +730,7 @@ function CommentBoxViewModel(params){
 	//Private functions:
 	function _loadMoreComment(){
 
-		if(self.isLoadingMore() || self.postData.commentCount() === self.commentList().length)
+		if(self.isLoadingMore() || self.postData.commentCount() <= self.commentList().length)
 			return;
 
 		self.currentPage(self.currentPage() + 1);
