@@ -125,4 +125,10 @@ $_['routing']['ApiPutCommentLike']				= 'services/put/{post_type}/post/comment/{
 $_['routing']['ApiPutComment']					= 'services/put/{post_type}/post/comment/{comment_id}/';
 $_['routing']['ApiPostComment']					= 'services/post/{post_type}/post/{post_slug}/comment/';
 $_['routing']['ApiDeleteComment']				= 'services/delete/{post_type}/post/comment/{comment_id}/';
+
+// Friend
+$_['routing']['ApiPutMakeFriend']				= 'services/put/friend/make-friend/{user_slug}/';
+$_['routing']['ApiPutCancelRequest']			= 'services/put/friend/cancel-request/{user_slug}/';
+$_['routing']['ApiPutConfirm']					= 'services/put/friend/confirm/{user_slug}/';
+$_['routing']['ApiPutIgnore']					= 'services/put/friend/ignore/{user_slug}/';
 ?>
