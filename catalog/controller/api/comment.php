@@ -53,9 +53,12 @@ class ControllerApiComment extends Controller {
 
         $aComment = $this->model_tool_object->formatComment( $oComment );
 
+        $iTotalComment = $this->$sModelLink->getTotalComments( $this->request->get['post_slug'] );
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'comment' => $aComment
+            'comment' => $aComment,
+            'comment_count' => $iTotalComment
         )));
     }
 
@@ -156,8 +159,11 @@ class ControllerApiComment extends Controller {
             )));
         }
 
+        $iTotalComment = $this->$sModelLink->getTotalComments( $this->request->get['post_slug'] );
+
         return $this->response->setOutput(json_encode(array(
-            'success' => 'ok'
+            'success' => 'ok',
+            'comment_count' => $iTotalComment
         )));
     }
 
@@ -205,10 +211,13 @@ class ControllerApiComment extends Controller {
         );
 
         $aComments = $this->model_tool_object->formatComments( $aComments, false );
+
+        $iTotalComment = $this->$sModelLink->getTotalComments( $this->request->get['post_slug'] );
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'comments' => $aComments
+            'comments' => $aComments,
+            'comment_count' => $iTotalComment
         )));
     }
 

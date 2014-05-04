@@ -131,4 +131,6 @@ $_['routing']['ApiPutMakeFriend']				= 'services/put/friend/make-friend/{user_sl
 $_['routing']['ApiPutCancelRequest']			= 'services/put/friend/cancel-request/{user_slug}/';
 $_['routing']['ApiPutConfirm']					= 'services/put/friend/confirm/{user_slug}/';
 $_['routing']['ApiPutIgnore']					= 'services/put/friend/ignore/{user_slug}/';
+$_['routing']['ApiPutAddFollower']				= 'services/put/follower/add/{user_slug}/';
+$_['routing']['ApiPutRemoveFollower']			= 'services/put/follower/remove/{user_slug}/';
 ?>

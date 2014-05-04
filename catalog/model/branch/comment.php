@@ -1,6 +1,5 @@
 <?php
 use Document\AbsObject\Comment;
-
 use MongoId;
 
 class ModelBranchComment extends Model {
@@ -42,6 +41,8 @@ class ModelBranchComment extends Model {
 
 			$aComments[] = $oComment;
 		}
+
+		$this->oPost = clone($oPost);
 
 		return $aComments;
 	}
@@ -224,6 +225,16 @@ class ModelBranchComment extends Model {
 		$this->dm->flush();
 
 		return true;
+	}
+
+	public function getTotalComments( $sPostSlug ){
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
+
+		if ( !$oPost ){
+			return 0;
+		}
+
+		return $oPost->getComments()->count();
 	}
 }
 ?>
