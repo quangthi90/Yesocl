@@ -541,6 +541,7 @@ function CommentBoxViewModel(params){
 	self.needEffect = ko.observable(false);
 	self.enterToSend = ko.observable(true);
 	self.isProcessing = ko.observable(false);
+	self.isLoadingMore = ko.observable(false);
 	self.commentList = ko.observableArray(params.commentList || []);	
 	self.postData = {};
 	self.initComment = new CommentModel({});
@@ -707,7 +708,7 @@ function CommentBoxViewModel(params){
 				$(this).remove();
 			});
 		}
-	}
+	};
 	self.makeAddEffect = function(element) {
 		if(element.nodeType === 1 && self.needEffect()) {
 			var control = $("#" + self.controlId());
@@ -719,11 +720,23 @@ function CommentBoxViewModel(params){
 				});			
 			});
 		}
-	}
+	};
+	self.textPage = ko.computed(function() {
+		if(self.postData.commentCount === undefined)
+			return self.commentList().length;
+		return self.commentList().length + "/" + self.postData.commentCount();
+	});
 
 	//Private functions:
-	function _loadMoreComment(beforeCallback, callback){
+	function _loadMoreComment(){
+
+		if(self.isLoadingMore() || self.postData.commentCount() === self.commentList().length)
+			return;
+
 		self.currentPage(self.currentPage() + 1);
+		self.isLoadingMore(true);
+		self.needEffect(false);
+
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiGetComments', {
 				post_type: self.postData.type,
@@ -731,24 +744,22 @@ function CommentBoxViewModel(params){
 				page: self.currentPage()
 			}),
 			data: {
-				//page_size: YesGlobal.Configs.pagingOptions.pageSize
+				page_size: YesGlobal.Configs.pagingOptions.pageSize
 			}
-		};		
+		};
 		var successCallback = function(data) {
 			if(data.success === "ok"){
-				ko.utils.arrayForEach(data.comments, function(c){	
-					var com = new CommentModel(c);
-					self.commentList.push(com);
-				});
-				if(callback !== undefined && typeof callback === "function"){
-					callback(data);
-				}
+				for (var index = data.comments.length - 1; index >= 0; index--) {
+						var com = new CommentModel(data.comments[index]);
+						self.commentList.unshift(com);
+					};	
 			}else {
 				//Show message ...
 			}
 			self.needEffect(true);
+			self.isLoadingMore(false);
 		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, beforeCallback, successCallback, null);
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 	function _displayCommentBox() {
 		var overlay = $("#overlay");
@@ -761,7 +772,7 @@ function CommentBoxViewModel(params){
 				commentBody.on("scroll", function() {
 				    var pos = $(this).scrollTop();
 				    if (pos === 0) {
-				        
+				        _loadMoreComment();
 				    }
 				});
 			});			
