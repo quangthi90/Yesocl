@@ -129,4 +129,5 @@ $_['route']['ApiDeleteComment']				= 'api/comment/delete/';
 
 // Friend
 $_['route']['ApiPutMakeFriend']				= 'api/user/makeFriend/';
+$_['route']['ApiPutCancelRequest']			= 'api/user/cancelRequest/';
 ?>
