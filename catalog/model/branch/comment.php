@@ -236,7 +236,7 @@ class ModelBranchComment extends Model {
 			));
 
 			if ( !$oPost ){
-				return 0;
+				return -1;
 			}
 		}
 
