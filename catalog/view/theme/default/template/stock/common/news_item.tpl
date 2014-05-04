@@ -26,7 +26,7 @@
 			</div>
 			<div class="span4">
 				<span class="news-action">
-					<a data-bind="click: showComment">
+					<a data-bind="click: showComment" title="{% trans %}Comment{% endtrans %}">
 						<i class="icon-comments"></i>
 					</a>
 					<d class="counter" data-bind="text: $data.commentCount"></d>
@@ -35,16 +35,16 @@
 			<div class="span4">
 				<span href="" class="news-action">
 					<!-- ko if: !$data.isLiked() -->
-					<a style="cursor: pointer;" data-bind="click: $data.likePost">
+					<a style="cursor: pointer;" data-bind="click: $data.likePost" title="{% trans %}Like{% endtrans %}">
 						<i class="icon-thumbs-up"></i>	
 					</a>
 					<!-- /ko -->
 					<!-- ko if: $data.isLiked() -->
-					<a style="cursor: pointer;" data-bind="click: $data.likePost">
+					<a style="cursor: pointer;" data-bind="click: $data.likePost" title="{% trans %}Unlike{% endtrans %}">
 						<i class="icon-thumbs-down"></i>	
 					</a>
 					<!-- /ko -->
-					<a data-bind="click: showLikers">
+					<a data-bind="click: showLikers" title="{% trans %}See users liked{% endtrans %}">
 						<d class="counter" data-bind="text: $data.likeCount"></d>
 					</a>
 				</span>
