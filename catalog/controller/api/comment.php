@@ -159,7 +159,7 @@ class ControllerApiComment extends Controller {
             )));
         }
 
-        $iTotalComment = $this->$sModelLink->getTotalComments( $this->request->get['post_slug'] );
+        $iTotalComment = $this->$sModelLink->getTotalComments( $this->request->get['comment_id'] );
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
