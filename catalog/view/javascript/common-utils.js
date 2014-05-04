@@ -12,6 +12,9 @@ YesGlobal.Configs = {
         data: {},
         dataType: "json"
     },
+    pagingOptions:{
+        pageSize : 10
+    },
     defaultBindingElement : "y-main-content"
 };
 

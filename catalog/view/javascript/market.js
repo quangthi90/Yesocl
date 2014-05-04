@@ -536,6 +536,7 @@ function CommentBoxViewModel(params){
 
 	self.controlId = ko.observable(params.Id || "comment-box");
 	self.widthControl = ko.observable(params.width || 380);
+	self.currentPage = ko.observable(1);
 	self.canExpand = ko.observable(true);
 	self.needEffect = ko.observable(false);
 	self.enterToSend = ko.observable(true);
@@ -553,12 +554,17 @@ function CommentBoxViewModel(params){
 		self.postData = postData;
 		self.commentList.removeAll();
 		self.needEffect(false);
+		self.currentPage(1);
 
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiGetComments', {
 				post_type: postData.type,
-				post_slug: postData.slug
-			})
+				post_slug: postData.slug,
+				page: self.currentPage()
+			}),
+			data: {
+				page_size: YesGlobal.Configs.pagingOptions.pageSize
+			}
 		};
 		var successCallback = function(data) {
 			if(data.success === "ok"){
@@ -716,13 +722,48 @@ function CommentBoxViewModel(params){
 	}
 
 	//Private functions:
+	function _loadMoreComment(beforeCallback, callback){
+		self.currentPage(self.currentPage() + 1);
+		var ajaxOptions = {
+			url : window.yRouting.generate('ApiGetComments', {
+				post_type: self.postData.type,
+				post_slug: self.postData.slug,
+				page: self.currentPage()
+			}),
+			data: {
+				//page_size: YesGlobal.Configs.pagingOptions.pageSize
+			}
+		};		
+		var successCallback = function(data) {
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.comments, function(c){	
+					var com = new CommentModel(c);
+					self.commentList.push(com);
+				});
+				if(callback !== undefined && typeof callback === "function"){
+					callback(data);
+				}
+			}else {
+				//Show message ...
+			}
+			self.needEffect(true);
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, beforeCallback, successCallback, null);
+	}
 	function _displayCommentBox() {
 		var overlay = $("#overlay");
 		var control = $("#" + self.controlId());
 		overlay.fadeIn(300, function(){
 			control.animate({ 'right' : '0px' }, 100, function(){
 				var heightCommentList = $(this).find(".comment-list").first().height();
-				$(this).find(".comment-body").animate({ scrollTop: heightCommentList + "px" }, 2000);
+				var commentBody = $(this).find(".comment-body");
+				commentBody.animate({ scrollTop: heightCommentList + "px" }, 500);
+				commentBody.on("scroll", function() {
+				    var pos = $(this).scrollTop();
+				    if (pos === 0) {
+				        
+				    }
+				});
 			});			
 			$(this).on('click', function(){
 				_hideCommentBox();
@@ -732,6 +773,7 @@ function CommentBoxViewModel(params){
 	function _hideCommentBox() {
 		var overlay = $("#overlay");
 		var control = $("#" + self.controlId());
+		var commentBody = control.find(".comment-body").off("scroll");
 		control.animate({ 'right' : '-50000px' }, 200, function(){
 			overlay.fadeOut(500);
 		});
