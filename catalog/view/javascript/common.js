@@ -41,7 +41,7 @@ jQuery.fn.makeScrollWithoutCalResize = function() {
 jQuery.fn.makeCustomScroll = function(isHonrizontal) {
 	$(this).mCustomScrollbar({
 		horizontalScroll: isHonrizontal, /*scroll horizontally: boolean*/
-		scrollInertia:950, /*scrolling inertia: integer (milliseconds)*/
+		scrollInertia:300, /*scrolling inertia: integer (milliseconds)*/
 		mouseWheel:true, /*mousewheel support: boolean*/
 		mouseWheelPixels:"auto", /*mousewheel pixels amount: integer, "auto"*/
 		autoDraggerLength:true, /*auto-adjust scrollbar dragger length: boolean*/

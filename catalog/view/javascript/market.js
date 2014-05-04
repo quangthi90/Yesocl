@@ -400,9 +400,8 @@ function WatchListViewModel(options) {
 		_loadWatchLists();
 
 		//Make scroll for watchlist:
-		setTimeout(function(){
-			$("#" + self.controlId()).makeCustomScroll();
-		}, 1000);
+		$("#" + self.controlId()).find(".block-content").makeCustomScroll();
+
 		self.isLoading(false);
 	}
 
@@ -553,10 +552,25 @@ function CommentBoxViewModel(params){
 			console.log("Post information is empty ...");
 			return;
 		}
+		//Set init data:
 		self.postData = postData;
 		self.commentList.removeAll();
 		self.needEffect(false);
 		self.currentPage(1);
+		self.currentTotalComment(0);
+
+		//Check whether comment list already loaded:
+		if(self.postData.comments.length > 0){
+			ko.utils.arrayForEach(self.postData.comments, function(c){	
+				var com = new CommentModel(c);
+				self.commentList.push(com);
+			});
+			self.currentPage(self.postData.currentCommentPage());
+			self.currentTotalComment(self.postData.commentCount());
+
+			_displayCommentBox();
+			return;
+		}
 
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiGetComments', {
@@ -573,6 +587,7 @@ function CommentBoxViewModel(params){
 				ko.utils.arrayForEach(data.comments, function(c){	
 					var com = new CommentModel(c);
 					self.commentList.push(com);
+					self.postData.comments.push(c);
 				});
 				if(data.comment_count >= 0){
 					self.postData.commentCount(data.comment_count);
@@ -628,6 +643,7 @@ function CommentBoxViewModel(params){
 				self.initComment.content("");
 				var newComment = new CommentModel(data.comment);
 				self.commentList.push(newComment);
+				self.postData.comments.push(data.comment);
 				if(data.comment_count >= 0){
 					self.postData.commentCount(data.comment_count);
 					self.currentTotalComment(data.comment_count);
@@ -668,6 +684,20 @@ function CommentBoxViewModel(params){
 						var successCallback = function(data){
 							if(data.success === "ok") {
 								self.commentList.remove(comment);
+								//Delete from cached data:
+								var deleteCom = ko.utils.arrayFirst(self.postData.comments, function(item){
+									return comment.id === item.id;
+								});
+								var indexDeleted = -1;
+								for (var i = self.postData.comments.length - 1; i >= 0; i--) {
+									if(comment.id === self.postData.comments[i].id){
+										indexDeleted = i;
+										break;
+									}
+								};
+								if(indexDeleted >= 0) {
+									self.postData.comments.splice(index, 1);
+								}					
 								if(data.comment_count >= 0){
 									self.postData.commentCount(data.comment_count);
 									self.currentTotalComment(data.comment_count);
@@ -745,6 +775,7 @@ function CommentBoxViewModel(params){
 			return;
 
 		self.currentPage(self.currentPage() + 1);
+		self.postData.currentCommentPage(self.currentPage());
 		self.isLoadingMore(true);
 		self.needEffect(false);
 
@@ -763,6 +794,7 @@ function CommentBoxViewModel(params){
 				for (var index = data.comments.length - 1; index >= 0; index--) {
 					var com = new CommentModel(data.comments[index]);
 					self.commentList.unshift(com);
+					self.postData.comments.unshift(data.comments[index]);
 				};
 				if(data.comment_count >= 0){
 					self.postData.commentCount(data.comment_count);
@@ -786,7 +818,7 @@ function CommentBoxViewModel(params){
 			control.animate({ 'right' : '0px' }, 100, function(){
 				var heightCommentList = $(this).find(".comment-list").first().height();
 				var commentBody = $(this).find(".comment-body");
-				commentBody.animate({ scrollTop: heightCommentList + "px" }, 500);
+				commentBody.animate({ scrollTop: heightCommentList + "px" }, 0);
 				commentBody.on("scroll", function() {
 				    var pos = $(this).scrollTop();
 				    if (pos === 0) {

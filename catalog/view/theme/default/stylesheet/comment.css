@@ -249,3 +249,8 @@
 	display: table-cell;	
 	vertical-align: top;
 }
+.y-control .comment-item .comment-content img {
+	cursor: -moz-zoom-in;
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+}
