@@ -132,6 +132,7 @@ $_['route']['ApiPutMakeFriend']				= 'api/user/makeFriend/';
 $_['route']['ApiPutCancelRequest']			= 'api/user/cancelRequest/';
 $_['route']['ApiPutConfirm']				= 'api/user/confirm/';
 $_['route']['ApiPutIgnore']					= 'api/user/ignore/';
+$_['route']['ApiPutUnfriend']				= 'api/user/unfriend/';
 $_['route']['ApiPutAddFollower']			= 'api/user/addFollower/';
 $_['route']['ApiPutRemoveFollower']			= 'api/user/removeFollower/';
 ?>
