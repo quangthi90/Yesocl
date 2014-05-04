@@ -2,8 +2,6 @@
 use Document\AbsObject\Comment;
 use MongoId;
 
-private $oPost = null;
-
 class ModelBranchComment extends Model {
 	public function getComments( $aData = array(), $isReverse = false ){
 		if ( empty($aData['post_slug']) ){
@@ -44,7 +42,7 @@ class ModelBranchComment extends Model {
 			$aComments[] = $oComment;
 		}
 
-		$this->oPost = $oPost;
+		$this->oPost = clone($oPost);
 
 		return $aComments;
 	}
@@ -146,8 +144,6 @@ class ModelBranchComment extends Model {
         	$oComment->setCanDelete( true );
         }
 
-        $this->oPost = $oPost;
-
 		return $oComment;
 	}
 
@@ -228,18 +224,10 @@ class ModelBranchComment extends Model {
 
 		$this->dm->flush();
 
-		$this->oPost = $oPost;
-
 		return true;
 	}
 
 	public function getTotalComments( $sPostSlug ){
-		if ( $this->oPost && $sPostSlug == $this->oPost->getSlug() ){
-			$oPost = $this->oPost;
-			$this->oPost = null;
-			return $oPost->getComments()->count();
-		}
-
 		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
 		if ( !$oPost ){
