@@ -728,7 +728,7 @@ function CommentBoxViewModel(params){
 	});
 
 	//Private functions:
-	function _loadMoreComment(){
+	function _loadMoreComment(callback){
 
 		if(self.isLoadingMore() || self.postData.commentCount() <= self.commentList().length)
 			return;
@@ -750,9 +750,12 @@ function CommentBoxViewModel(params){
 		var successCallback = function(data) {
 			if(data.success === "ok"){
 				for (var index = data.comments.length - 1; index >= 0; index--) {
-						var com = new CommentModel(data.comments[index]);
-						self.commentList.unshift(com);
-					};	
+					var com = new CommentModel(data.comments[index]);
+					self.commentList.unshift(com);
+				};
+				if(callback && typeof callback === "function"){
+					callback();
+				}
 			}else {
 				//Show message ...
 			}
@@ -772,7 +775,12 @@ function CommentBoxViewModel(params){
 				commentBody.on("scroll", function() {
 				    var pos = $(this).scrollTop();
 				    if (pos === 0) {
-				        _loadMoreComment();
+				    	$(this).find(".comment-item").removeClass("mark-first");
+				    	$(this).find(".comment-item:first-child").addClass("mark-first");
+				        _loadMoreComment(function(){
+				        	var newPos = commentBody.find(".comment-item.mark-first").position().top - 100;
+				        	commentBody.animate({ scrollTop: newPos + "px" }, 0);
+				        });
 				    }
 				});
 			});			

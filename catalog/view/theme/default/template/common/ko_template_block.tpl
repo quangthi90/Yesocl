@@ -25,7 +25,7 @@
 			</div>
 			<div class="y-box-content comment-body">
 				<!-- ko if: isLoadingMore() -->
-				<p><i class="icon-spin icon-spinner"></i> Loading ...</p>
+				<p style="background-color: rgb(240, 240, 240); padding: 5px 10px; text-align: center;"><i class="icon-spin icon-spinner"></i> {% trans %}Loading{% endtrans %} ... </p>
 				<!-- /ko -->				
 				<ul class="comment-list" data-bind="foreach: { data: commentList, beforeRemove: makeDeleteEffect, afterAdd: makeAddEffect }">
 					<li class="comment-item">
