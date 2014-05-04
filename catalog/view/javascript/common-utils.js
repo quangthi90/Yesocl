@@ -277,3 +277,23 @@ ko.bindingHandlers.mention = {
         }
     }
 }
+ko.bindingHandlers.zoomImage = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var imgList = $(element).find("img");
+        imgList.each(function(){
+            var src = $(this).attr("src");
+            $(this).on("click", function(){
+                $.magnificPopup.open({
+                  items: {
+                    src: src
+                  },
+                  type: 'image',
+                  verticalFit: true,
+                  retina: {
+                    ratio: 2
+                  }
+                });
+            });
+        });
+    }
+}
