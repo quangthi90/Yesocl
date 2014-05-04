@@ -43,7 +43,7 @@
 				                	<!-- ko if: !isLiked() -->
 				                	<a data-bind="click: $parent.likeComment" class="like-comment"><i class="icon-thumbs-up"></i></a>
 				                	<!-- /ko -->				                	
-				                	&nbsp;(<a class="like-count" data-bind="text: likeCount"></a>)
+				                	&nbsp;(<a title="{% trans %}See users liked{% endtrans %}" class="like-count" data-bind="text: likeCount, click: $parent.showLikers"></a>)
 				                </span>
 				            </div>
 				            <div class="comment-content" data-bind="html: content, seeMore: true">	                

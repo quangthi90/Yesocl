@@ -678,6 +678,22 @@ function CommentBoxViewModel(params){
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
+	self.showLikers = function(comment){
+		var context = YesGlobal.Utils.getKoContext();
+		if(context !== null){
+			var apiUrl = yRouting.generate("ApiGetCommentLiker", {
+				post_type: self.postData.type,
+				comment_id: comment.id
+			})
+			context.$data.userBoxModel.showUserList(apiUrl, function(count){
+				if(count !== undefined){
+					comment.likeCount(count);
+				}
+			});
+		}else {
+			console.log("Ko content not found !");
+		}
+	};
 	self.makeDeleteEffect = function(element) {
 		if (element.nodeType === 1 && self.needEffect()) {
 			$(element).addClass("deleting");
@@ -768,11 +784,10 @@ function UserBoxViewModel(params){
 		var content = $("#" + self.controlId()).html();
 		bootbox.dialog({
             message: content,
-            title: 'User list',
+            title: "User list (" + self.userList().length + ")",
             onEscape: function(){
                 bootbox.hideAll();
-            }, 
-            modal: false
+            }
         });
 	}
 }
