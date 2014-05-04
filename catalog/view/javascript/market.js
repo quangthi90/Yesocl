@@ -544,6 +544,7 @@ function CommentBoxViewModel(params){
 	self.isLoadingMore = ko.observable(false);
 	self.commentList = ko.observableArray(params.commentList || []);	
 	self.postData = {};
+	self.currentTotalComment = ko.observable(0);
 	self.initComment = new CommentModel({});
 
 	//Publuc functions:
@@ -572,7 +573,11 @@ function CommentBoxViewModel(params){
 				ko.utils.arrayForEach(data.comments, function(c){	
 					var com = new CommentModel(c);
 					self.commentList.push(com);
-				});	
+				});
+				if(data.comment_count >= 0){
+					self.postData.commentCount(data.comment_count);
+					self.currentTotalComment(data.comment_count);
+				}			
 				_displayCommentBox();
 			}else {
 				//Show message ...
@@ -623,7 +628,10 @@ function CommentBoxViewModel(params){
 				self.initComment.content("");
 				var newComment = new CommentModel(data.comment);
 				self.commentList.push(newComment);
-				self.postData.commentCount(self.postData.commentCount() + 1);
+				if(data.comment_count >= 0){
+					self.postData.commentCount(data.comment_count);
+					self.currentTotalComment(data.comment_count);
+				}
 			}else{
 				//Show message
 			}
@@ -636,7 +644,6 @@ function CommentBoxViewModel(params){
 		});	
 	};
 	self.deleteComment = function(comment) {
-
 		bootbox.dialog({
             title: sConfirm,
             message: 'Are you sure you want to remove this comment ?',
@@ -659,8 +666,17 @@ function CommentBoxViewModel(params){
 							})
 						};
 						var successCallback = function(data){
-							self.commentList.remove(comment);
-							self.postData.commentCount(self.postData.commentCount() - 1);
+							if(data.success === "ok") {
+								self.commentList.remove(comment);
+								if(data.comment_count >= 0){
+									self.postData.commentCount(data.comment_count);
+									self.currentTotalComment(data.comment_count);
+								}else {
+									self.postData.commentCount(self.commentList().length + data.comment_count);
+									self.currentTotalComment(self.commentList().length + data.comment_count);
+								}
+							} else {
+							}					
 						};
 						YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 					}
@@ -721,11 +737,6 @@ function CommentBoxViewModel(params){
 			});
 		}
 	};
-	self.textPage = ko.computed(function() {
-		if(self.postData.commentCount === undefined)
-			return self.commentList().length;
-		return self.commentList().length + "/" + self.postData.commentCount();
-	});
 
 	//Private functions:
 	function _loadMoreComment(callback){
@@ -753,6 +764,10 @@ function CommentBoxViewModel(params){
 					var com = new CommentModel(data.comments[index]);
 					self.commentList.unshift(com);
 				};
+				if(data.comment_count >= 0){
+					self.postData.commentCount(data.comment_count);
+					self.currentTotalComment(data.comment_count);
+				}
 				if(callback && typeof callback === "function"){
 					callback();
 				}
