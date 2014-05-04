@@ -114,5 +114,54 @@ class ControllerApiUser extends Controller {
             'error' => 'confirm make friend have error'
         )));
 	}
+
+	public function ignore(){
+		if ( !$this->customer->isLogged() ){
+			return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'permission deney!'
+	        )));
+		}
+
+		$this->load->model('user/user');
+
+       	if ( empty($this->request->get['user_slug']) ){
+       		return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'user slug is empty'
+	        )));
+       	}
+
+       	$oUserFriend = $this->model_user_user->getUser(array(
+       		'user_slug' => $this->request->get['user_slug']
+       	));
+
+       	if ( !$oUserFriend ){
+       		return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'user slug "' . $this->request->get['user_slug'] . '" is not exist'
+	        )));
+       	}
+
+       	$sUserSlug = $this->customer->getSlug();
+
+       	$result = $this->model_user_user->editUser( 
+       		$sUserSlug,
+       		array(
+       			'request_friend' => $oUserFriend->getId()
+       		) 
+       	);
+
+       	if ( !$result ){
+       		return $this->response->setOutput(json_encode(array(
+	            'success' => 'not ok',
+	            'error' => 'ignore request make friend have error'
+	        )));
+       	}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
+        )));
+	}
 }
 ?>

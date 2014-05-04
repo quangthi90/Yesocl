@@ -131,4 +131,5 @@ $_['route']['ApiDeleteComment']				= 'api/comment/delete/';
 $_['route']['ApiPutMakeFriend']				= 'api/user/makeFriend/';
 $_['route']['ApiPutCancelRequest']			= 'api/user/cancelRequest/';
 $_['route']['ApiPutConfirm']				= 'api/user/confirm/';
+$_['route']['ApiPutIgnore']					= 'api/user/ignore/';
 ?>
