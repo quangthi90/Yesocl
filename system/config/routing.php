@@ -129,4 +129,5 @@ $_['routing']['ApiDeleteComment']				= 'services/delete/{post_type}/post/comment
 // Friend
 $_['routing']['ApiPutMakeFriend']				= 'services/put/friend/make-friend/{user_slug}/';
 $_['routing']['ApiPutCancelRequest']			= 'services/put/friend/cancel-request/{user_slug}/';
+$_['routing']['ApiPutConfirm']					= 'services/put/friend/confirm/{user_slug}/';
 ?>
