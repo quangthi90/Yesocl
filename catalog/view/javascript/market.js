@@ -400,9 +400,8 @@ function WatchListViewModel(options) {
 		_loadWatchLists();
 
 		//Make scroll for watchlist:
-		setTimeout(function(){
-			$("#" + self.controlId()).makeCustomScroll();
-		}, 1000);
+		$("#" + self.controlId()).find(".block-content").makeCustomScroll();
+
 		self.isLoading(false);
 	}
 

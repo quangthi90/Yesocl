@@ -3516,8 +3516,8 @@ a.wall-link:hover {
 }
 .watchlist-items .wl-item {
   display: block;
-  width: 44%;
-  height: 100px;
+  width: 28%;
+  height: 80px;
   float: left;
   padding: 2% 2% 1% 2%;
   margin-right: 1%;
@@ -3572,13 +3572,13 @@ a.wall-link:hover {
   font-weight: bold;
   font-size: 18px;
   color: #06703D;
-  text-align: center;
+  text-align: left;
   display: block;
 }
 .wl-item .stock-name {
   color: #555555;  
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   display: block;
   overflow: hidden;
   white-space: nowrap;

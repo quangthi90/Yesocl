@@ -11,8 +11,6 @@
 	            <div class="row-fluid">
 	                <div class="span12">
 	                    <a class="stock-code" data-bind="link: { text: $data.stock.code ,route: 'StockPage', params: { stock_code : $data.stock.code} }"></a>
-	                </div>
-	                <div class="span12">
 	                    <a href="#" class="stock-name" data-bind="link: { text: $data.stock.name, title: $data.stock.name, route: 'StockPage', params: { stock_code :  $data.stock.code} }"></a>
 	                </div>
 	            </div>
