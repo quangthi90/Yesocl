@@ -3,6 +3,8 @@ use Document\AbsObject\Comment;
 use MongoId;
 
 class ModelBranchComment extends Model {
+	private $oPost = null;
+
 	public function getComments( $aData = array(), $isReverse = false ){
 		if ( empty($aData['post_slug']) ){
 			return array();
@@ -42,8 +44,6 @@ class ModelBranchComment extends Model {
 			$aComments[] = $oComment;
 		}
 
-		$this->oPost = clone($oPost);
-
 		return $aComments;
 	}
 
@@ -55,6 +55,8 @@ class ModelBranchComment extends Model {
 		if ( !$oPost ){
 			return null;
 		}
+
+		$this->oPost = $oPost;
 
 		return $oPost->getCommentById( $idComment );
 	}
@@ -144,6 +146,8 @@ class ModelBranchComment extends Model {
         	$oComment->setCanDelete( true );
         }
 
+        $this->oPost = $oPost;
+
 		return $oComment;
 	}
 
@@ -202,6 +206,8 @@ class ModelBranchComment extends Model {
 
 		$this->dm->flush();
 
+		$this->oPost = $oPost;
+
 		return $oComment;
 	}
 
@@ -224,21 +230,24 @@ class ModelBranchComment extends Model {
 
 		$this->dm->flush();
 
-		return true;
+		$this->oPost = $oPost;
+
+		return $oPost->getComments()->count();
 	}
 
 	public function getTotalComments( $sPostSlug ){
+		$oPost = $this->oPost;
+		if ( $oPost && $oPost->getSlug() == $sPostSlug ){
+			return $oPost->getComments()->count();
+		}
+
 		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
 		if ( !$oPost ){
-			$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
-				'comments.id' => $sPostSlug
-			));
-
-			if ( !$oPost ){
-				return -1;
-			}
+			return -1;
 		}
+
+		$this->oPost = $oPost;
 
 		return $oPost->getComments()->count();
 	}

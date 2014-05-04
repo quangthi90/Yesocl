@@ -69,9 +69,6 @@ $_['routing']['FollowPost']						= 'follow/list-posts/';
 $_['routing']['AddFollower']					= 'follow/add/{user_slug}/';
 $_['routing']['RemoveFollower']					= 'follow/remove/{user_slug}/';
 
-// Stock
-$_['routing']['StockNewsPage']					= 'stock/news/page/';
-
 //Upload
 $_['routing']['UploadFile'] 					= 'upload/';
 
@@ -99,7 +96,8 @@ $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 $_['routing']['StockMarketNone']				= 'stock/market/';
 $_['routing']['StockMarket']					= 'stock/market/{market_code}/';
 $_['routing']['StockPage']						= 'stock/page/{stock_code}/';
-
+$_['routing']['StockNewsPage']					= 'stock/news/page/';
+$_['routing']['StockNIdeaPage']					= 'stock/ideas/page/';
 
 //-- API --//
 // Common

@@ -71,9 +71,6 @@ $_['route']['FollowPost']					= 'friend/follow/listPosts';
 $_['route']['AddFollower']					= 'friend/request/addFollower/';
 $_['route']['RemoveFollower']				= 'friend/request/removeFollower/';
 
-// Stock
-$_['route']['StockNewsPage']				= 'stock/news/';
-
 // Upload
 $_['route']['UploadFile'] 					= 'file/upload';
 
@@ -101,6 +98,8 @@ $_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 $_['route']['StockMarket']					= 'stock/market/';
 $_['route']['StockMarketNone']				= 'stock/market/';
 $_['route']['StockPage']					= 'stock/stock/';
+$_['route']['StockNewsPage']				= 'stock/news/';
+$_['route']['StockNIdeaPage']				= 'stock/ideas/';
 
 //-- API --//
 // Common

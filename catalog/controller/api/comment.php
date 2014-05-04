@@ -147,19 +147,17 @@ class ControllerApiComment extends Controller {
         $this->load->model('user/user');
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_comment';
-        $bResult = $this->$sModelLink->deleteComment(
+        $iTotalComment = $this->$sModelLink->deleteComment(
             $this->request->get['comment_id'],
             $this->customer->getId()
         );
         
-        if ( !$bResult ){
+        if ( !$iTotalComment ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'you not have authentication for this comment'
             )));
         }
-
-        $iTotalComment = $this->$sModelLink->getTotalComments( $this->request->get['comment_id'] );
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
