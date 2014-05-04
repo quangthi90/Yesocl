@@ -100,14 +100,14 @@
 <div class="y-control hidden" data-bind="with: $root.userBoxModel">
 	<div data-bind="attr:{ 'id' : controlId }">
 		<!-- ko if: userList().length > 0 -->
-		<ul class="user-list-box" data-bind="foreach: userList">
+		<ul class="user-viewer" data-bind="foreach: userList">
 			<li class="user-item">
 				<div class="user-item-info">
-					<a data-bind="link: { title: username, route: 'WallPage', params: { user_slug: slug } }">
+					<a class="user-item-avatar fl" data-bind="link: { title: username, route: 'WallPage', params: { user_slug: slug } }">
 		                <img data-bind="attr : { 'src' : avatar, alt : username, title : username }">
 		            </a>
 					<div class="user-item-overview">
-						<a data-bind="link: { text: user.username, title: user.username, route: 'WallPage', params: { user_slug: user.slug } }"></a> 					
+						<a class="user-item-name" data-bind="link: { text: username, title: username, route: 'WallPage', params: { user_slug: slug } }"></a> 					
 						<span data-bind="attr : { title: current }, text: current"></span>
 					</div>
 				</div>
@@ -130,12 +130,12 @@
 	                    </ul>
 	                </div>
 					<!-- /ko -->
-					<!-- ko if: friendStatus() == 3 -->
+					<!-- ko if: friendStatus() == 4 -->
 					<button class="btn btn-yes friend-group" data-bind="click: makeFriend">
 						<i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}
 					</button>
 					<!-- /ko -->
-					<!-- ko if: followStatus() == 3 -->
+					<!-- ko if: followStatus() == 2 -->
 					<div class="dropdown follow-group">
 						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
 	                    <ul class="dropdown-menu" role="menu">

@@ -44,7 +44,7 @@
 						<i class="icon-thumbs-down"></i>	
 					</a>
 					<!-- /ko -->
-					<a>
+					<a data-bind="click: showLikers">
 						<d class="counter" data-bind="text: $data.likeCount"></d>
 					</a>
 				</span>

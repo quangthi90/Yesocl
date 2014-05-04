@@ -61,7 +61,15 @@ function PostModel(data) {
 	that.showLikers = function(){
 		var context = YesGlobal.Utils.getKoContext();
 		if(context !== null){
-			context.$data.commentBoxModel.showCommentBox(that);
+			var apiUrl = yRouting.generate("ApiGetPostLiker", {
+				post_type: that.type,
+				post_slug: that.slug
+			})
+			context.$data.userBoxModel.showUserList(apiUrl, function(count){
+				if(count !== undefined){
+					that.likeCount(count);	
+				}
+			});
 		}else {
 			console.log("Ko content not found !");
 		}
@@ -85,6 +93,7 @@ function UserModel(data) {
 	that.username = data.username || "";
 	that.slug = data.slug || "";
 	that.avatar = data.avatar || "";
+	that.current = data.current || ""
 	that.friendStatus = ko.observable(data.fr_status || 0);
 	that.followStatus = ko.observable(data.fl_status || 0);
 
