@@ -6,7 +6,7 @@
 	<div class="y-box comment-box" data-bind="attr:{ 'id' : controlId }, style: { 'width' : widthControl() + 'px' } ">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				{% trans %}Comment box{% endtrans %} (<span class="counter"><d data-bind="text: commentList().length"><d></span>)
+				{% trans %}Comment box{% endtrans %} (<span class="counter" data-bind="text: textPage"></span>)
 				<div class="y-box-expand">
 					<!-- ko if: canExpand() -->
 					<a data-bind="click: expandCommentBox" class="btn-expand">
@@ -24,6 +24,9 @@
 				</div>				
 			</div>
 			<div class="y-box-content comment-body">
+				<!-- ko if: isLoadingMore() -->
+				<p><i class="icon-spin icon-spinner"></i> Loading ...</p>
+				<!-- /ko -->				
 				<ul class="comment-list" data-bind="foreach: { data: commentList, beforeRemove: makeDeleteEffect, afterAdd: makeAddEffect }">
 					<li class="comment-item">
 				        <div class="avatar_thumb">
