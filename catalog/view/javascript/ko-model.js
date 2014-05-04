@@ -28,7 +28,9 @@ function PostModel(data) {
 		slug: data.category_slug,
 		name : data.category_name
 	} : { };
+	that.comments = [];	
 	that.commentCount = ko.observable(data.comment_count || 0);
+	that.currentCommentPage = ko.observable(1);
 	that.likeCount = ko.observable(data.like_count || 0);
 	that.likers = ko.observableArray(data.liker_ids || []);
 	that.countViewer = ko.observable(data.count_viewer || 0);
@@ -79,10 +81,6 @@ function PostModel(data) {
 			post_type: that.type,
 			post_slug: that.slug
 		};
-	};
-
-	function _submitLikePost(successCallback, failCallback, errorCallback) {
-		
 	};
 }
 

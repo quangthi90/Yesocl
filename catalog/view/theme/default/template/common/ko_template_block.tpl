@@ -6,7 +6,7 @@
 	<div class="y-box comment-box" data-bind="attr:{ 'id' : controlId }, style: { 'width' : widthControl() + 'px' } ">
 		<div class="comment-container"> 
 			<div class="y-box-header">
-				{% trans %}Comment box{% endtrans %} (<span class="counter" data-bind="text: currentTotalComment"></span>)
+				{% trans %}Comment box{% endtrans %} (<span class="counter" data-bind="text: commentList().length + '/' + currentTotalComment()"></span>)
 				<div class="y-box-expand">
 					<!-- ko if: canExpand() -->
 					<a data-bind="click: expandCommentBox" class="btn-expand">
