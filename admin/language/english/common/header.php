@@ -27,6 +27,7 @@ $_['text_import']		              	= 'Import';
 $_['text_stock']		              	= 'Stock';
 $_['text_trading']		              	= 'Security Trading';
 $_['text_market']		              	= 'Market';
+$_['text_fund']			              	= 'Fund';
 
 // Branch
 $_['text_branches']                    	= 'Branches';

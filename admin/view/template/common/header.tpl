@@ -104,6 +104,11 @@ $(document).ready(function(){
               <li><a href="<?php echo $trading_import; ?>"><?php echo $text_trading; ?></a></li>
             </ul>
           </li>
+          <li><a class="parent"><?php echo $text_setting; ?></a>
+            <ul>
+              <li><a href="<?php echo $stock_fund; ?>"><?php echo $text_fund; ?></a></li>
+            </ul>
+          </li>
         </ul>
       </li>
       <li id="company"><a class="top"><?php echo $text_branches; ?></a>
