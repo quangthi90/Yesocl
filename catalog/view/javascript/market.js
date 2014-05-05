@@ -898,3 +898,29 @@ function UserBoxViewModel(params){
 		});
 	}
 }
+
+function CommentAdvanceViewModel(params){
+	var self = this;
+
+	self.controlId = ko.observable(params.Id || "comment-advance-box");
+	self.postData = params.postData || {};
+	self.htmlContent = ko.observable("");
+
+	self.showCommentEditor = function(postData, callback) {
+		if(postData !== null){
+			self.postData = postData;
+			self.htmlContent(postData.content());
+			_displayBox();	
+		}		
+	};
+
+	function _displayBox(){
+        $.magnificPopup.open({
+			items: {
+			    src: $("#" + self.controlId()),
+			    type: 'inline'
+			},
+			modal: false
+		});
+	}
+}
