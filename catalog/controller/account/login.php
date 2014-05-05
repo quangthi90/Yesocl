@@ -117,6 +117,13 @@ class ControllerAccountLogin extends Controller {
         )));
       }
 
+      if ( !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $aDatas['email']) ){
+        return $this->response->setOutput(json_encode(array(
+          'success' => 'not ok',
+          'error' => 'You not login facebook. Please try again!'
+        )));
+      }
+
       $this->customer->login( $aDatas['email'], '', false, true );
 
       return $this->response->setOutput(json_encode(array(
