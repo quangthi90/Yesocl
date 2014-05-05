@@ -100,66 +100,79 @@
 </div>
 {% endblock %}
 {% block common_ko_template_user_box %}
-<div class="y-control hidden" data-bind="with: $root.userBoxModel">
-	<div data-bind="attr:{ 'id' : controlId }">
-		<!-- ko if: userList().length > 0 -->
-		<ul class="user-viewer" data-bind="foreach: userList">
-			<li class="user-item">
-				<div class="user-item-info">
-					<a class="user-item-avatar fl" data-bind="link: { title: username, route: 'WallPage', params: { user_slug: slug } }">
-		                <img data-bind="attr : { 'src' : avatar, alt : username, title : username }">
-		            </a>
-					<div class="user-item-overview">
-						<a class="user-item-name" data-bind="link: { text: username, title: username, route: 'WallPage', params: { user_slug: slug } }"></a> 					
-						<span data-bind="attr : { title: current }, text: current"></span>
-					</div>
-				</div>
-				<div class="user-actions friend-actions">
-					<!-- ko if: friendStatus() == 2 -->
-					<div class="dropdown friend-group">
-						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Friend{% endtrans %}</a>
-	                    <ul class="dropdown-menu" role="menu">
-	                        <li><a data-bind="click: unFriend">{% trans %}Unfriend{% endtrans %}</a></li>
-	                    </ul>
-	                </div>
-					<!-- /ko -->
-					<!-- ko if: friendStatus() == 3 -->
-					<div class="dropdown friend-group">
-						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
-	                    <ul class="dropdown-menu" role="menu">
-	                        <li>
-	                            <a data-bind="click: cancelRequest">{% trans %}Cancel Request{% endtrans %}</a>
-	                        </li>
-	                    </ul>
-	                </div>
-					<!-- /ko -->
-					<!-- ko if: friendStatus() == 4 -->
-					<button class="btn btn-yes friend-group" data-bind="click: makeFriend">
-						<i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}
-					</button>
-					<!-- /ko -->
-					<!-- ko if: followStatus() == 2 -->
-					<div class="dropdown follow-group">
-						<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
-	                    <ul class="dropdown-menu" role="menu">
-	                        <li>
-	                            <a class="btn-unfollow" data-bind="click: unFollow">{% trans %}Unfollow{% endtrans %}</a>
-	                        </li>
-	                    </ul>
-	                </div>
-	                <!-- /ko -->
-	                <!-- ko if: followStatus() == 3 -->
-	                <button class="btn btn-yes btn-friend follow-group" data-bind="click: follow">
-						<i class="icon-rss"></i> {% trans %}Follow{% endtrans %}
-					</button>
-					<!-- /ko -->
-				</div>
-			</li>
-		</ul>
-		<!-- /ko -->
-		<!-- ko if: userList().length == 0 -->
-		<p>No users found !</p>
-		<!-- /ko -->
+<div class="y-control hidden">
+	<div class="y-dlg-container" data-bind="with: $root.userBoxModel, attr:{ 'id' : $root.userBoxModel.controlId }" style="width: 600px;">
+		<div class="y-dlg">
+			<div class="dlg-title">
+		        <i class="icon-yes"></i> 
+		        <span class="js-advance-post-title">{% trans %}Who liked{% endtrans %}</span>
+		    </div>
+		    <div class="dlg-content" style="min-height: 300px;max-height: 450px;overflow-y: auto;">
+		    	<!-- ko if: userList().length > 0 -->
+				<ul class="user-viewer" data-bind="foreach: userList">
+					<li class="user-item">
+						<div class="user-item-info">
+							<a class="user-item-avatar fl" data-bind="link: { title: username, route: 'WallPage', params: { user_slug: slug } }">
+				                <img data-bind="attr : { 'src' : avatar, alt : username, title : username }">
+				            </a>
+							<div class="user-item-overview">
+								<a class="user-item-name" data-bind="link: { text: username, title: username, route: 'WallPage', params: { user_slug: slug } }"></a> 					
+								<span data-bind="attr : { title: current }, text: current"></span>
+							</div>
+						</div>
+						<div class="user-actions">
+							<!-- ko if: friendStatus() == 2 -->
+							<div class="dropdown friend-group">
+								<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Friend{% endtrans %}</a>
+			                    <ul class="dropdown-menu" role="menu">
+			                        <li><a data-bind="click: unFriend">{% trans %}Unfriend{% endtrans %}</a></li>
+			                    </ul>
+			                </div>
+							<!-- /ko -->
+							<!-- ko if: friendStatus() == 3 -->
+							<div class="dropdown friend-group">
+								<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Sent Request{% endtrans %}</a>
+			                    <ul class="dropdown-menu" role="menu">
+			                        <li>
+			                            <a data-bind="click: cancelRequest">{% trans %}Cancel Request{% endtrans %}</a>
+			                        </li>
+			                    </ul>
+			                </div>
+							<!-- /ko -->
+							<!-- ko if: friendStatus() == 4 -->
+							<a class="btn btn-yes friend-group" data-bind="click: makeFriend">
+								<i class="icon-plus-sign"></i> {% trans %}Make Friend{% endtrans %}
+							</a>
+							<!-- /ko -->
+							<!-- ko if: followStatus() == 2 -->
+							<div class="dropdown follow-group">
+								<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Following{% endtrans %}</a>
+			                    <ul class="dropdown-menu" role="menu">
+			                        <li>
+			                            <a class="btn-unfollow" data-bind="click: unFollow">{% trans %}Unfollow{% endtrans %}</a>
+			                        </li>
+			                    </ul>
+			                </div>
+			                <!-- /ko -->
+			                <!-- ko if: followStatus() == 3 -->
+			                <a class="btn btn-yes follow-group" data-bind="click: follow">
+								<i class="icon-rss"></i> {% trans %}Follow{% endtrans %}
+							</a>
+							<!-- /ko -->
+						</div>
+					</li>
+				</ul>
+				<!-- /ko -->
+				<!-- ko if: userList().length == 0 -->
+				<p>No users found !</p>
+				<!-- /ko -->
+		    </div>
+		    <div class="dlg-footer" style="display: none;">
+		    	<div class="controls">
+		    		<button class="btn btn-yes">{% trans %}Close{% endtrans %}</button>
+	            </div>
+		    </div>
+		</div>
 	</div>
 </div>
 {% endblock %} }

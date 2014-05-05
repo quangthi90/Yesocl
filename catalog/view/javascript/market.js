@@ -889,13 +889,12 @@ function UserBoxViewModel(params){
 	};
 
 	function _displayBox(){
-		var content = $("#" + self.controlId()).html();
-		bootbox.dialog({
-            message: content,
-            title: "User list (" + self.userList().length + ")",
-            onEscape: function(){
-                bootbox.hideAll();
-            }
-        });
+        $.magnificPopup.open({
+			items: {
+			    src: $("#" + self.controlId()),
+			    type: 'inline'
+			},
+			modal: false
+		});
 	}
 }

@@ -95,19 +95,74 @@ function UserModel(data) {
 	that.friendStatus = ko.observable(data.fr_status || 0);
 	that.followStatus = ko.observable(data.fl_status || 0);
 
-	that.makeFriend = function(user){
-
+	that.makeFriend = function(){
+		var ajaxOptions = {
+			url : yRouting.generate("ApiPutMakeFriend", {
+				user_slug: that.slug
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				that.friendStatus(data.status);
+			} else {
+			}			
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
-	that.unFriend = function(user) {
-
+	that.unFriend = function() {
+		var ajaxOptions = {
+			url : yRouting.generate("ApiPutUnfriend", {
+				user_slug: that.slug
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				that.friendStatus(data.status);
+			} else {
+			}				
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);	
 	};
-	that.cancelRequest = function(user){
-
+	that.cancelRequest = function(){
+		var ajaxOptions = {
+			url : yRouting.generate("ApiPutCancelRequest", {
+				user_slug: that.slug
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				that.friendStatus(data.status);
+			} else {
+			}			
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
-	that.follow = function(user){
-
+	that.follow = function(){
+		var ajaxOptions = {
+			url : yRouting.generate("ApiPutAddFollower", {
+				user_slug: that.slug
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				that.followStatus(data.status);
+			} else {
+			}			
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
-	that.unFollow = function(user){
-
+	that.unFollow = function(){
+		var ajaxOptions = {
+			url : yRouting.generate("ApiPutRemoveFollower", {
+				user_slug: that.slug
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				that.followStatus(data.status);
+			} else {
+			}				
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 }

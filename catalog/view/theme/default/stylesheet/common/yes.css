@@ -1943,6 +1943,7 @@ a.btn-notification:hover .notification-item-name > i {
   width:auto;
   max-width: 90%;
   margin: 20px auto;
+  background-color: #FFFFFF;
 }
 .y-dlg{
   position: relative;
@@ -2104,7 +2105,7 @@ div[data-role="editor-toolbar"] {
   margin-bottom: 5px;
   padding: 10px 0px;
   border-bottom: 1px solid #f0f0f0;
-  width: 500px;
+  width: 100%;
 }
 .user-viewer .user-item:last-child {
   border-bottom: none;
@@ -2124,10 +2125,10 @@ div[data-role="editor-toolbar"] {
 .user-viewer .user-item .user-actions .dropdown-menu {
   min-width: 130px;
 }
-.user-viewer .user-item .friend-actions .friend-group {
+.user-viewer .user-item .user-actions .friend-group {
   float: left;
 }
-.user-viewer .user-item .friend-actions .follow-group {
+.user-viewer .user-item .user-actions .follow-group {
   float: left;
 }
 .user-viewer .user-item .user-actions .btn {
