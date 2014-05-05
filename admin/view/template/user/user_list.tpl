@@ -25,6 +25,7 @@
           <thead>
             <tr>
               <td><input type="checkbox" onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
+              <td><?php echo $text_username; ?></td>
               <td><?php echo $text_email; ?></td>
               <td><?php echo $text_group; ?></td>
               <td><?php echo $text_status; ?></td>
@@ -36,6 +37,7 @@
             <?php foreach ($users as $user) { ?>
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $user['id']; ?>"/></td>
+              <td><?php echo $user['username']; ?></td>
               <td><?php echo $user['email']; ?></td>
               <td><?php echo $user['group']; ?></td>
               <td><?php echo $user['status']; ?></td>
