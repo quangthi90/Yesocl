@@ -659,6 +659,14 @@ function CommentBoxViewModel(params){
 			self.isProcessing(false);	
 		});	
 	};
+	self.editComment = function(comment){
+		var context = YesGlobal.Utils.getKoContext();
+		if(context !== null){
+			context.$data.commentAdvanceModel.showCommentEditor(comment);
+		}else {
+			console.log("Ko content not found !");
+		}
+	};
 	self.deleteComment = function(comment) {
 		bootbox.dialog({
             title: sConfirm,
@@ -903,13 +911,13 @@ function CommentAdvanceViewModel(params){
 	var self = this;
 
 	self.controlId = ko.observable(params.Id || "comment-advance-box");
-	self.postData = params.postData || {};
+	self.commentData = params.commentData || {};
 	self.htmlContent = ko.observable("");
 
-	self.showCommentEditor = function(postData, callback) {
-		if(postData !== null){
-			self.postData = postData;
-			self.htmlContent(postData.content());
+	self.showCommentEditor = function(commentData) {
+		if(commentData !== null){
+			self.commentData = commentData;
+			self.htmlContent(commentData.content());
 			_displayBox();	
 		}		
 	};

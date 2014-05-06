@@ -267,11 +267,10 @@ ko.bindingHandlers.mention = {
             },
             fullNameTrigger: false
         });
-        
     },
     update: function (element, valueAccessor, allBindingsAccessor) {
-        var value = valueAccessor();
-        if(value().length === 0){
+        var observableAttr = valueAccessor();
+        if(observableAttr().length === 0){
             $(element).mentionsInput("reset");
             $(element).height(35).focus();
         }
@@ -295,5 +294,36 @@ ko.bindingHandlers.zoomImage = {
                 });
             });
         });
+    }
+}
+ko.bindingHandlers.editor = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var observableAttr = valueAccessor();
+        var allBindings = allBindingsAccessor();
+        $(element).summernote({
+            height: allBindings.height || 350,  
+            focus: true,
+            toolbar: [
+                ['tag', ['tag']],
+                ['style', ['style']],
+                ['style', ['bold', 'italic', 'underline', 'clear']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['insert', ['picture', 'link']],        
+                ['fullscreen', ['fullscreen']]
+            ],
+            onkeyup: function(){
+                observableAttr($(element).code());
+            },
+            onpaste: function(){
+                observableAttr($(element).code());
+            }
+        });        
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var observableAttr = valueAccessor();
+        var allBindings = allBindingsAccessor();
+        if(allBindings.isInit && observableAttr().length > 0){
+            $(element).code(observableAttr());
+        }
     }
 }

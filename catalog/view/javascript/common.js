@@ -68,16 +68,12 @@ jQuery.fn.makeEditor = function(heightCustom) {
 	$(this).summernote({
 		height: heightCustom,  
 		focus: true,
-			toolbar: [
-				['tag', ['tag']],
+		toolbar: [
+			['tag', ['tag']],
 		    ['style', ['style']],
 		    ['style', ['bold', 'italic', 'underline', 'clear']],
-		    //['fontsize', ['fontsize']],
-		    //['color', ['color']],
 		    ['para', ['ul', 'ol', 'paragraph']],
-		    //['table', ['table']],
-		    //['height', ['height']],
-		    ['insert', ['picture', 'link']],		    
+		    ['insert', ['picture', 'link']],	    
 		    ['fullscreen', ['fullscreen']]
 	  	]
 	});	
