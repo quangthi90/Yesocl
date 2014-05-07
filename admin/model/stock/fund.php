@@ -5,34 +5,14 @@ class ModelStockFund extends Model {
 	public function addFund( $aData = array() ) {
 		// name is required
 		if ( !empty($aData['name']) ) {
-			$aData['name'] = strtoupper( trim($aData['name']) );
+			$aData['name'] = trim($aData['name']);
 		}else {
 			return false;
-		}
-
-		// code is required
-		if ( !empty($aData['code']) && !$this->getFund($aData['code']) ) {
-			$aData['code'] = strtoupper( trim($aData['code']) );
-		}else {
-			return false;
-		}
-
-		// status
-		if ( empty($aData['status']) ) {
-			$aData['status'] = false;
-		}
-
-		// stock
-		if ( !empty($aData['stock']) ){
-			$aData['stock'] = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode(new \MongoRegex('/' . strtoupper(trim($aData['stock'])) . '.*/i'));
 		}
 
 		$oFund = new Fund();
 		$oFund->setName( $aData['name'] );
-		$oFund->setCode( $aData['code'] );
-		$oFund->setOrder( $aData['order'] );
-		$oFund->setStockFund( $aData['stock'] );
-		$oFund->setStatus( $aData['status'] );
+		$oFund->setType( $aData['type'] );
 
 		$this->dm->persist( $oFund );
 		$this->dm->flush();
@@ -43,14 +23,9 @@ class ModelStockFund extends Model {
 	public function editFund( $idFund, $aData = array() ) {
 		// name is required
 		if ( !empty($aData['name']) ) {
-			$aData['name'] = strtoupper( trim($aData['name']) );
+			$aData['name'] = trim($aData['name']);
 		}else {
 			return false;
-		}
-
-		// status
-		if ( empty($aData['status']) ) {
-			$aData['status'] = false;
 		}
 
 		$oFund = $this->dm->getRepository( 'Document\Stock\Fund' )->find( $idFund );
@@ -59,17 +34,10 @@ class ModelStockFund extends Model {
 		}
 
 		$oFund->setName( $aData['name'] );
-		if ( !empty($aData['order']) ){
-			$oFund->setOrder( $aData['order'] );
-		}
 
-		if ( !empty($aData['stock']) ){
-			if ( !$oFund->getStockFund() || $oFund->getStockFund()->getCode() != $aData['stock'] ){
-				$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( new \MongoRegex('/' . strtoupper(trim($aData['stock'])) . '.*/i') );
-				$oFund->setStockFund( $oStock );
-			}
+		if ( !empty($aData['type']) ){
+			$oFund->setType( $aData['type'] );
 		}
-		$oFund->setStatus( $aData['status'] );
 		
 		$this->dm->flush();
 

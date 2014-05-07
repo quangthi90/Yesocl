@@ -15,17 +15,12 @@ $_['button_cancel'] 				= 'Cancel';
 
 // column
 $_['column_name'] 					= 'Name';
-$_['column_code'] 					= 'Code';
-$_['column_order'] 					= 'Order';
-$_['column_status'] 				= 'Status';
+$_['column_type'] 					= 'Type';
 $_['column_action'] 				= 'Action';
 
 // entry
 $_['entry_name'] 					= 'Name:';
-$_['entry_code'] 					= 'Code:';
-$_['entry_order'] 					= 'Order:';
-$_['entry_stock'] 					= 'Stock Fund:';
-$_['entry_status'] 					= 'Status:';
+$_['entry_type'] 					= 'Type:';
 
 // error
 $_['error_warning'] 				= 'Warning: Error!';

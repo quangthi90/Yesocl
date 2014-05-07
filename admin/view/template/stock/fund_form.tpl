@@ -28,30 +28,12 @@
         </div>
             <?php } ?></td>
           </tr>
-          <?php if ($is_edit == false){ ?>
           <tr>
-            <td><span class="required">*</span> <?php echo $entry_code; ?></td>
-            <td><input class="input-xxlarge" type="text" name="code"  value="<?php echo $code; ?>" />
-            <?php if ($error_code) { ?>
-                <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_code; ?>
-        </div>
-            <?php } ?></td>
-          </tr>
-          <?php } ?>
-          <tr>
-            <td><?php echo $entry_stock; ?></td>
-            <td><input class="input-xxlarge" type="text" name="stock" value="<?php echo $stock; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_order; ?></td>
-            <td><input class="input-xxlarge" type="text" name="order" value="<?php echo $order; ?>" /></td>
-          </tr>
-          <tr>
-            <td><?php echo $entry_status; ?></td>
-            <td><select class="input-large" name="status" >
-              <option value="true"><?php echo $text_enabled; ?></option>
-              <option value="false" <?php if ( $status == false ) { ?>selected="selected"<?php } ?>><?php echo $text_disabled; ?></option>
+            <td><?php echo $entry_type; ?></td>
+            <td><select class="input-large" name="type" >
+              <?php foreach ($types as $_type){ ?>
+              <option value="<?php echo $_type; ?>" <?php if ( $_type == $type ) { ?>selected="selected"<?php } ?>><?php echo $_type; ?></option>
+              <?php } ?>
             </select></td>
           </tr>
         </table>

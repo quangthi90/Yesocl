@@ -131,9 +131,7 @@ class ControllerStockFund extends Controller {
 
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_code'] = $this->language->get('column_code');
-		$this->data['column_order'] = $this->language->get('column_order');
-		$this->data['column_status'] = $this->language->get('column_status');	
+		$this->data['column_type'] = $this->language->get('column_type');
 		$this->data['column_action'] = $this->language->get('column_action');
 		
 		// Confirm
@@ -171,9 +169,7 @@ class ControllerStockFund extends Controller {
 				$this->data['funds'][] = array(
 					'id' => $oFund->getId(),
 					'name' => $oFund->getName(),
-					'code' => $oFund->getCode(),
-					'order' => $oFund->getOrder(),
-					'status' => $oFund->getStatus() ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+					'type' => $oFund->getType(),
 					'action' => $action,
 				);
 			}
@@ -254,10 +250,7 @@ class ControllerStockFund extends Controller {
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_code'] = $this->language->get('entry_code');
-		$this->data['entry_order'] = $this->language->get('entry_order');
-		$this->data['entry_stock'] = $this->language->get('entry_stock');
-		$this->data['entry_status'] = $this->language->get('entry_status');
+		$this->data['entry_type'] = $this->language->get('entry_type');
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'stock/fund', 'token=' . $this->session->data['token'], 'sSL' );
@@ -284,41 +277,16 @@ class ControllerStockFund extends Controller {
 			$this->data['name'] = '';
 		}
 
-		// Entry Code
-		if ( isset($this->request->post['code']) ){
-			$this->data['code'] = $this->request->post['code'];
+		// Entry type
+		if ( isset($this->request->post['type']) ){
+			$this->data['type'] = $this->request->post['type'];
 		}elseif ( isset($oFund) ){
-			$this->data['code'] = $oFund->getCode();
+			$this->data['type'] = $oFund->getType();
 		}else {
-			$this->data['code'] = '';
+			$this->data['type'] = '';
 		}
 
-		// Entry order
-		if ( isset($this->request->post['order']) ){
-			$this->data['order'] = $this->request->post['order'];
-		}elseif ( isset($oFund) ){
-			$this->data['order'] = $oFund->getOrder();
-		}else {
-			$this->data['order'] = '';
-		}
-
-		// Entry stock
-		if ( isset($this->request->post['stock']) ){
-			$this->data['stock'] = $this->request->post['stock'];
-		}elseif ( $oFund && $oFund->getStockfund() ){
-			$this->data['stock'] = $oFund->getStockfund()->getName();
-		}else {
-			$this->data['stock'] = '';
-		}
-
-		// Entry status
-		if ( isset($this->request->post['status']) ){
-			$this->data['status'] = $this->request->post['status'];
-		}elseif ( isset($oFund) ){
-			$this->data['status'] = $oFund->getStatus();
-		}else {
-			$this->data['status'] = true;
-		}
+		$this->data['types'] = $this->config->get('stock')['fund'];
 
 		$this->data['token'] = $this->session->data['token'];
 
@@ -334,14 +302,6 @@ class ControllerStockFund extends Controller {
 	private function isValidateForm( $bIsEdit = false ){
 		if ( empty($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['warning'] = $this->language->get( 'error_name' );
-		}
-
-		if ( $bIsEdit == false && (empty($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 10) ){
-			$this->error['error_code'] = $this->language->get( 'error_code' );
-		}
-
-		elseif ( !empty($this->request->post['code']) && $this->model_stock_fund->getfund(array('code', $this->request->post['code'])) ){
-			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
 		}
 
 		if ( $this->error){
