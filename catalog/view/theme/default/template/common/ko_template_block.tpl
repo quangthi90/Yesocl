@@ -85,6 +85,7 @@
 				<textarea required data-bind="mention: content, executeOnEnter: $parent.addCommentByEnter, attr:{ 'readonly' : $parent.isProcessing() }" class="post_input" placeholder="comment ..."></textarea>
 			</div>
 			<div class="comment-action">
+				<a data-bind="click: $parent.startAdvanceComment" class="fl btn-comment"><i class="icon-external-link"></i></a>
 				<!-- ko if: !$parent.enterToSend() -->
 				<a data-bind="click: $parent.addComment" class="btn btn-yes fr btn-comment">{% trans %}Post{% endtrans %}</a>
 				<!-- /ko -->
@@ -105,7 +106,7 @@
 		    <div class="dlg-content">
 		    	<div class="control-group">
 	    			<label class="control-label">{% trans %}Comment{% endtrans %}</label>
-			    	<div class="post-advance-content" data-bind="editor: htmlContent, isEditing: isEditing"></div>
+			    	<div class="y-editor post-advance-content"></div>
 		    	</div>
 		    </div>
 		    <div class="dlg-footer">

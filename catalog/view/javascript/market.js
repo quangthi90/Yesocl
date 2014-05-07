@@ -545,11 +545,13 @@ function CommentBoxViewModel(params){
 	self.postData = {};
 	self.currentTotalComment = ko.observable(0);
 	self.initComment = new CommentModel({});
-	self.htmlContent = ko.observable();
-	self.isEditing = ko.observable(false);
-	self.currentComment = ko.observable();
+	self.currentComment = ko.observable(null);
 
 	//Publuc functions:
+	self.isNewMode = ko.computed(function(){
+		return self.currentComment() === null;
+	}, this);
+
 	self.showCommentBox = function(postData) {
 		if(postData === undefined || postData === null){
 			console.log("Post information is empty ...");
@@ -663,34 +665,20 @@ function CommentBoxViewModel(params){
 		});	
 	};
 	self.editComment = function(comment){
-		self.isEditing(false);
 		self.currentComment(comment);
-		self.htmlContent(comment.content());
-		self.isEditing(true);
+		_setCommentContent(comment.content());
+		_displayAdvanceBox();
+	};
+	self.startAdvanceComment = function(){
+		self.currentComment(null);		
 		_displayAdvanceBox();
 	};
 	self.saveComment = function(){
-		var ajaxOptions = {
-			url : window.yRouting.generate("ApiPutComment", {
-				post_type: self.postData.type,
-				comment_id : self.currentComment().id
-			}),
-			data:{
-				content : self.htmlContent()
-			}
-		};
-		var successCallback = function(data){
-			if(data.success === "ok") {
-				self.currentComment().content(data.comment.content);
-				self.currentComment().content(data.comment.content);
-				self.currentComment().likeCount(data.comment.like_count);
-			} else {
-				//Show message
-			}
-			self.htmlContent("");
-			_closeAdvanceBox();
-		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+		if(self.currentComment() === null){
+			_saveNew();
+		}else {
+			_saveEditing();
+		}
 	};
 	self.deleteComment = function(comment) {
 		bootbox.dialog({
@@ -847,6 +835,76 @@ function CommentBoxViewModel(params){
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
+	function _saveEditing(){
+		var content = _getCommentContent();
+		if(content.trim().length === 0) {
+			alert("Content is required !");
+			return;
+		}
+		var ajaxOptions = {
+			url : window.yRouting.generate("ApiPutComment", {
+				post_type: self.postData.type,
+				comment_id : self.currentComment().id
+			}),
+			data:{
+				content : content
+			}
+		};
+		var successCallback = function(data){
+			if(data.success === "ok") {
+				self.currentComment().content(data.comment.content);
+				self.currentComment().content(data.comment.content);
+				self.currentComment().likeCount(data.comment.like_count);
+			} else {
+				//Show message
+			}
+			self.currentComment(null);
+			_closeAdvanceBox();
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, function(){
+			self.currentComment(null);
+		});
+	}
+	function _saveNew(){
+		if(self.isProcessing()){
+			console.log("In process");
+			return;
+		}
+		var content = _getCommentContent();
+		if(content.trim().length === 0) {
+			alert("Content is required !");
+			return;
+		}
+		var ajaxOptions = {
+			url : window.yRouting.generate("ApiPostComment", {
+				post_type: self.postData.type,
+				post_slug: self.postData.slug
+			}),
+			data: {
+				content: content
+			}
+		};
+		var successCallback = function(data){
+			if(data.success === "ok") {
+				var newComment = new CommentModel(data.comment);
+				self.commentList.push(newComment);
+				self.postData.comments.push(data.comment);
+				if(data.comment_count >= 0){
+					self.postData.commentCount(data.comment_count);
+					self.currentTotalComment(data.comment_count);
+				}
+			}else{
+				//Show message
+			}
+			self.isProcessing(false);			
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, function(){
+			self.isProcessing(true);
+		}, successCallback, function() {
+			self.isProcessing(false);	
+		});
+		_closeAdvanceBox();
+	}
 	function _displayCommentBox() {
 		var overlay = $("#overlay");
 		var control = $("#" + self.controlId());
@@ -892,6 +950,14 @@ function CommentBoxViewModel(params){
 	}
 	function _closeAdvanceBox(){
 		$.magnificPopup.close();
+	}
+	function _getCommentContent(){
+		var form = $("#comment-advance-form");
+		return form.find(".y-editor").code();
+	}
+	function _setCommentContent(content){
+		var form = $("#comment-advance-form");
+		return form.find(".y-editor").code(content);
 	}
 
 	//CommentModel:
