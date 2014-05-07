@@ -294,6 +294,24 @@ ko.bindingHandlers.zoomImage = {
                 });
             });
         });
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var imgList = $(element).find("img");
+        imgList.each(function(){
+            var src = $(this).attr("src");
+            $(this).on("click", function(){
+                $.magnificPopup.open({
+                  items: {
+                    src: src
+                  },
+                  type: 'image',
+                  verticalFit: true,
+                  retina: {
+                    ratio: 2
+                  }
+                });
+            });
+        });
     }
 }
 ko.bindingHandlers.editor = {
@@ -322,8 +340,8 @@ ko.bindingHandlers.editor = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var observableAttr = valueAccessor();
         var allBindings = allBindingsAccessor();
-        if(allBindings.isInit && observableAttr().length > 0){
-            $(element).code(observableAttr());
-        }
+        if(allBindings.isEditing())
+            return;
+        $(element).code(observableAttr());
     }
 }

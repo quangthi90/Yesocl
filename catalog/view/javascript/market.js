@@ -545,6 +545,9 @@ function CommentBoxViewModel(params){
 	self.postData = {};
 	self.currentTotalComment = ko.observable(0);
 	self.initComment = new CommentModel({});
+	self.htmlContent = ko.observable();
+	self.isEditing = ko.observable(false);
+	self.currentComment = ko.observable();
 
 	//Publuc functions:
 	self.showCommentBox = function(postData) {
@@ -660,12 +663,34 @@ function CommentBoxViewModel(params){
 		});	
 	};
 	self.editComment = function(comment){
-		var context = YesGlobal.Utils.getKoContext();
-		if(context !== null){
-			context.$data.commentAdvanceModel.showCommentEditor(comment);
-		}else {
-			console.log("Ko content not found !");
-		}
+		self.isEditing(false);
+		self.currentComment(comment);
+		self.htmlContent(comment.content());
+		self.isEditing(true);
+		_displayAdvanceBox();
+	};
+	self.saveComment = function(){
+		var ajaxOptions = {
+			url : window.yRouting.generate("ApiPutComment", {
+				post_type: self.postData.type,
+				comment_id : self.currentComment().id
+			}),
+			data:{
+				content : self.htmlContent()
+			}
+		};
+		var successCallback = function(data){
+			if(data.success === "ok") {
+				self.currentComment().content(data.comment.content);
+				self.currentComment().content(data.comment.content);
+				self.currentComment().likeCount(data.comment.like_count);
+			} else {
+				//Show message
+			}
+			self.htmlContent("");
+			_closeAdvanceBox();
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	self.deleteComment = function(comment) {
 		bootbox.dialog({
@@ -775,6 +800,9 @@ function CommentBoxViewModel(params){
 			});
 		}
 	};
+	self.closeAdvanceBox = function(){
+		_closeAdvanceBox();
+	}
 
 	//Private functions:
 	function _loadMoreComment(callback){
@@ -852,6 +880,19 @@ function CommentBoxViewModel(params){
 			overlay.fadeOut(500);
 		});
 	}
+	function _displayAdvanceBox(){
+		var form = $("#comment-advance-form");
+        $.magnificPopup.open({
+			items: {
+			    src: form,
+			    type: 'inline'
+			},
+			modal: false
+		});
+	}
+	function _closeAdvanceBox(){
+		$.magnificPopup.close();
+	}
 
 	//CommentModel:
 	function CommentModel(data){
@@ -894,32 +935,6 @@ function UserBoxViewModel(params){
 			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
-	};
-
-	function _displayBox(){
-        $.magnificPopup.open({
-			items: {
-			    src: $("#" + self.controlId()),
-			    type: 'inline'
-			},
-			modal: false
-		});
-	}
-}
-
-function CommentAdvanceViewModel(params){
-	var self = this;
-
-	self.controlId = ko.observable(params.Id || "comment-advance-box");
-	self.commentData = params.commentData || {};
-	self.htmlContent = ko.observable("");
-
-	self.showCommentEditor = function(commentData) {
-		if(commentData !== null){
-			self.commentData = commentData;
-			self.htmlContent(commentData.content());
-			_displayBox();	
-		}		
 	};
 
 	function _displayBox(){

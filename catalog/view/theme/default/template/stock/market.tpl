@@ -20,7 +20,6 @@
         {{ block('stock_common_block_news') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}
-        {{ block('common_html_block_comment_advance_form') }}
     </div>
 </div>
 {% endblock %}
@@ -55,16 +54,13 @@
 			};
 			var userBoxOptions = {
 			};
-			var advanceCommentOptions = {
-			};
 
 			var viewModel = {
 				chartModel : new ChartViewModel(chartOptions),
 				watchListModel : new WatchListViewModel(watchListOptions),
 				newsModel : new NewsViewModel(newsOptions),
 				commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
-				userBoxModel : new UserBoxViewModel(userBoxOptions),
-				commentAdvanceModel : new CommentAdvanceViewModel(advanceCommentOptions)
+				userBoxModel : new UserBoxViewModel(userBoxOptions)
 			};
 			ko.applyBindings(viewModel, document.getElementById('y-main-content'));
 		});

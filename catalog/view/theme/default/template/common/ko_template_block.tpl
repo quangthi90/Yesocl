@@ -97,6 +97,25 @@
 			</div>
 		</div>
 	</div>
+	<div class="mfp-hide y-dlg-container" id="comment-advance-form">
+		<div class="y-dlg">
+			<div class="dlg-title">
+		        <i class="icon-yes"></i> {% trans %}Advanced comment{% endtrans %}
+		    </div>
+		    <div class="dlg-content">
+		    	<div class="control-group">
+	    			<label class="control-label">{% trans %}Comment{% endtrans %}</label>
+			    	<div class="post-advance-content" data-bind="editor: htmlContent, isEditing: isEditing"></div>
+		    	</div>
+		    </div>
+		    <div class="dlg-footer">
+		    	<div class="controls">
+		    		<a class="btn btn-yes" data-bind="click: saveComment">{% trans %}Submit{% endtrans %}</a>
+	                <button class="btn btn-yes">{% trans %}Close{% endtrans %}</button>
+	            </div>
+		    </div>
+		</div>
+	</div>
 </div>
 {% endblock %}
 {% block common_ko_template_user_box %}
@@ -176,26 +195,3 @@
 	</div>
 </div>
 {% endblock %} }
-{% block common_html_block_comment_advance_form %}
-<div class="y-control hidden">
-	<div class="y-dlg-container" data-bind="with: $root.commentAdvanceModel, attr:{ 'id' : $root.commentAdvanceModel.controlId }">
-		<div class="y-dlg">
-			<div class="dlg-title">
-		        <i class="icon-yes"></i> {% trans %}Advanced comment{% endtrans %}
-		    </div>
-		    <div class="dlg-content">
-		    	<div class="control-group">
-	    			<label class="control-label">{% trans %}Comment{% endtrans %}</label>
-			    	<div class="post-advance-content" data-bind="editor: htmlContent, isInit: true"></div>
-		    	</div>
-		    </div>
-		    <div class="dlg-footer">
-		    	<div class="controls">
-		    		<a class="btn btn-yes" data-bind="click: updateComment">{% trans %}Submit{% endtrans %}</a>
-	                <button class="btn btn-yes">{% trans %}Close{% endtrans %}</button>
-	            </div>
-		    </div>
-		</div>
-	</div>
-</div>
-{% endblock %}

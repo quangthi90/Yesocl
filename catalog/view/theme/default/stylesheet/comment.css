@@ -253,4 +253,5 @@
 	cursor: -moz-zoom-in;
 	cursor: -webkit-zoom-in;
 	cursor: zoom-in;
+	max-width: 290px;
 }
