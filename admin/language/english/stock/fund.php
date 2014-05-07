@@ -16,11 +16,13 @@ $_['button_cancel'] 				= 'Cancel';
 // column
 $_['column_name'] 					= 'Name';
 $_['column_type'] 					= 'Type';
+$_['column_order'] 					= 'Order';
 $_['column_action'] 				= 'Action';
 
 // entry
 $_['entry_name'] 					= 'Name:';
 $_['entry_type'] 					= 'Type:';
+$_['entry_order'] 					= 'Order:';
 
 // error
 $_['error_warning'] 				= 'Warning: Error!';

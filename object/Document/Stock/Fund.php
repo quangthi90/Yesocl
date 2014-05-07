@@ -21,6 +21,11 @@ Class Fund {
 	 */
 	private $type;
 
+	/** 
+	 * @MongoDB\Int 
+	 */
+	private $order;
+
 	public function getId() {
 		return $this->id;
 	}
@@ -39,5 +44,13 @@ Class Fund {
 
 	public function getType(){
 		return $this->type;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 }

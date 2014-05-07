@@ -391,6 +391,9 @@ class ControllerStockStock extends Controller {
 			);
 		}
 
+		// Funds
+		$this->load->model('stock/fund');
+
 		$this->data['is_edit'] = $isEdit;
 
 		$this->template = 'stock/stock_form.tpl';

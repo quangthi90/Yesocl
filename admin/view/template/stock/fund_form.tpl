@@ -36,6 +36,10 @@
               <?php } ?>
             </select></td>
           </tr>
+          <tr>
+            <td><span class="required">*</span> <?php echo $entry_order; ?></td>
+            <td><input class="input-xxlarge" required="required" type="text" name="order" value="<?php echo $order; ?>" /></td>
+          </tr>
         </table>
       </form>
     </div>

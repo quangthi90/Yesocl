@@ -132,6 +132,7 @@ class ControllerStockFund extends Controller {
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
 		$this->data['column_type'] = $this->language->get('column_type');
+		$this->data['column_order'] = $this->language->get('column_order');
 		$this->data['column_action'] = $this->language->get('column_action');
 		
 		// Confirm
@@ -170,6 +171,7 @@ class ControllerStockFund extends Controller {
 					'id' => $oFund->getId(),
 					'name' => $oFund->getName(),
 					'type' => $oFund->getType(),
+					'order' => $oFund->getOrder(),
 					'action' => $action,
 				);
 			}
@@ -251,6 +253,7 @@ class ControllerStockFund extends Controller {
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_type'] = $this->language->get('entry_type');
+		$this->data['entry_order'] = $this->language->get('entry_order');
 		
 		// Link
 		$this->data['cancel'] = $this->url->link( 'stock/fund', 'token=' . $this->session->data['token'], 'sSL' );
@@ -284,6 +287,15 @@ class ControllerStockFund extends Controller {
 			$this->data['type'] = $oFund->getType();
 		}else {
 			$this->data['type'] = '';
+		}
+
+		// Entry order
+		if ( isset($this->request->post['order']) ){
+			$this->data['order'] = $this->request->post['order'];
+		}elseif ( isset($oFund) ){
+			$this->data['order'] = $oFund->getOrder();
+		}else {
+			$this->data['order'] = 0;
 		}
 
 		$this->data['types'] = $this->config->get('stock')['fund'];

@@ -104,6 +104,11 @@ Class Meta {
 	 */
 	private $asset;
 
+	/** 
+	 * @MongoDB\Hash
+	 */
+	private $funds = array();
+
 	public function getId() {
 		return $this->id;
 	}
@@ -258,5 +263,17 @@ Class Meta {
 
 	public function getAsset(){
 		return $this->asset;
+	}
+
+	public function addFund( $key, $fund ){
+		$this->funds[$key] = $fund;
+	}
+
+	public function setFunds( $funds ){
+		$this->funds = $funds;
+	}
+
+	public function getFunds(){
+		return $this->funds;
 	}
 }

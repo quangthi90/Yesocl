@@ -10,9 +10,14 @@ class ModelStockFund extends Model {
 			return false;
 		}
 
+		if ( empty($aData['order']) ){
+			$aData['order'] = 0;
+		}
+
 		$oFund = new Fund();
 		$oFund->setName( $aData['name'] );
 		$oFund->setType( $aData['type'] );
+		$oFund->setOrder( $aData['order'] );
 
 		$this->dm->persist( $oFund );
 		$this->dm->flush();
@@ -33,7 +38,12 @@ class ModelStockFund extends Model {
 			return false;
 		}
 
+		if ( empty($aData['order']) ){
+			$aData['order'] = 0;
+		}
+
 		$oFund->setName( $aData['name'] );
+		$oFund->setOrder( $aData['order'] );
 
 		if ( !empty($aData['type']) ){
 			$oFund->setType( $aData['type'] );
@@ -76,6 +86,12 @@ class ModelStockFund extends Model {
 			->findAll()
 			->skip( $aData['start'] )
 			->limit( $aData['limit'] )
+			->sort( array($aData['order'] => $aData['sort']) );
+	}
+
+	public function getAllFunds( $aData = array() ){
+		return $this->dm->getRepository('Document\Stock\Fund')
+			->findAll()
 			->sort( array($aData['order'] => $aData['sort']) );
 	}
 
