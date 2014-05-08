@@ -11,41 +11,6 @@ function ChartViewModel (options) {
 	self.chartContainer = $('#y-chart-container');
 	self.cacheExchanges = [];
 	self.cacheVolumes = [];
-	self.defaultRangeSelector = {
-		buttons: [{
-            type: 'week',
-            count: 1,
-            text: '1w'
-        }, {
-            type: 'month',
-            count: 1,
-            text: '1m'
-        }, {
-            type: 'month',
-            count: 3,
-            text: '3m'
-        }, {
-            type: 'month',
-            count: 6,
-            text: '6m'
-        }, {
-            type: 'year',
-            count: 1,
-            text: '1y'
-        }, {
-            type: 'all',
-            text: 'All'
-        }],
-        selected: 1,
-        inputEnabled : true
-	};
-	self.defaultTooltip = {
-		backgroundColor: "#F0F0F0",
-		borderColor: "#DDDDDD",
-		borderRadius: 0,
-		borderWidth: 1,
-		useHTML : true
-	};
 
 	self.zoomChart = function(){
 		_runChartAsZoomOut();		
@@ -97,8 +62,8 @@ function ChartViewModel (options) {
 
 	function _runChart() {
 		var options = {};
-		options.rangeSelector = self.defaultRangeSelector;
-		options.tooltip = self.defaultTooltip;
+		options.rangeSelector = YesGlobal.Configs.chartOptions.defaultRangeSelector;
+		options.tooltip = YesGlobal.Configs.chartOptions.defaultTooltip;
 	    options.series = [
 			{
 				name :  self.stock().name,
@@ -129,7 +94,8 @@ function ChartViewModel (options) {
 	function _runChartAsZoomOut() {
 		// Init chart:
 		var options = {};
-		options.rangeSelector = self.defaultRangeSelector;
+		options.rangeSelector = YesGlobal.Configs.chartOptions.defaultRangeSelector;
+		options.tooltip = YesGlobal.Configs.chartOptions.defaultTooltip;
 		options.yAxis = [
 			{
 		        title: {
@@ -483,6 +449,26 @@ function NewsViewModel(options) {
 
 	//Private functions:
 	function _adjustLayout(){
+		var widthBlock = 0;
+		var newsContainer = $("#" + self.id());
+		var heightContent = newsContainer.find('.block-content').height();
+		var heightHeader  = newsContainer.find('.block-header').height();
+		newsContainer.find('.news-item').each(function(){
+			$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
+			$(this).height(heightContent - heightHeader);
+			var heightImage = $(this).find('.news-link').first().outerHeight();
+			var heightTitle = $(this).find('.news-title').first().outerHeight();
+			var heightMeta = $(this).find('.news-meta').first().outerHeight();
+			$(this).find('.news-short-content').height(heightContent - heightHeader - heightImage - heightTitle - heightMeta);
+			$(this).css({ 
+				'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
+			});
+			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
+		});
+		newsContainer.width(widthBlock);
+		mainContent.width(mainContent.outerWidth() + widthBlock);
+	}
+	function _adjustLayout1(){
 		var widthBlock = 0;
 		var newsContainer = $("#" + self.id());
 		var heightContent = newsContainer.find('.block-content').height();

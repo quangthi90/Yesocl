@@ -46,8 +46,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <div class="index-date">
-                                {#{ stock.last_exchange.created|date('d/m/Y') }#}
+                            <div class="index-date" data-bind="dateTimeText: stock.last_exchange.created">
                             </div>
                         </div>
                         <div class="span6 index-values">
@@ -90,7 +89,7 @@
                             <i style="font-size: 30px;" class="icon-spin icon-spinner"></i>
                         </div>
                         <!-- /ko -->
-                    </div>      
+                    </div>
                 </div>
             </div>
         </div>

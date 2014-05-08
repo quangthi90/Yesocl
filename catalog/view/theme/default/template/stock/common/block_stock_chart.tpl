@@ -1,5 +1,5 @@
 {% block stock_common_block_stock_chart %}
-<div class="feed-block stock-block" id="st-market">
+<div class="feed-block stock-block" id="stock-chart" data-bind="with: $root.chartModel">
     <div class="block-header">
         <h3 class="block-title">Mircrosoft Corporation <i class="icon-caret-right"></i></h3> 
     </div>
@@ -7,9 +7,9 @@
         <h3 class="chart-title">
             MSFT (NASDAQ)
         </h3>      
-        <div class="tab-content">
+        <div class="tab-content" data-bind="with: stock">
             <div class="chart-content">
-                <div class="row-fluid">
+                <div class="row-fluid chart-indexs">
                     <div class="span4 index-overview up">
                         <ul>
                             <li class="index-staus">
@@ -64,29 +64,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="chart-area">
-                    <img src="image/chart-demo.jpg" alt="" /> 
-                </div>                    
+                <!-- ko if: $parent.isLoadSuccess() -->
+                <a class="btn-zoom-chart" data-bind="click: $parent.zoomChart"><i class="icon-zoom-out"></i></a>
+                <!-- /ko -->
+                <div class="chart-area" id="y-chart-container">
+                    <!-- ko if: !$parent.isLoadSuccess() -->
+                    <div class="loading-background">
+                        <i style="font-size: 30px;" class="icon-spin icon-spinner"></i>
+                    </div>
+                    <!-- /ko -->
+                </div>               
             </div>                        
-        </div>
-        <div class="chart-options">
-            <div class="row-fluid">
-                <div class="span9">
-                    <div class="btn-group">
-                        <a class="btn active">Day</a>
-                        <a class="btn">Week</a>
-                        <a class="btn">Month</a>
-                        <a class="btn">1 Year</a>
-                        <a class="btn">5 Years</a>
-                        <a class="btn">All</a>
-                    </div>
-                </div>
-                <div class="span3">
-                    <div class="btn-group pull-right">
-                      <a class="btn"><i class="icon-search"></i>Search Quotes</a>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

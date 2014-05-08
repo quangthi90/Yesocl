@@ -12,6 +12,43 @@ YesGlobal.Configs = {
         data: {},
         dataType: "json"
     },
+    chartOptions: {
+        defaultRangeSelector: {
+            buttons: [{
+                type: 'week',
+                count: 1,
+                text: '1w'
+            }, {
+                type: 'month',
+                count: 1,
+                text: '1m'
+            }, {
+                type: 'month',
+                count: 3,
+                text: '3m'
+            }, {
+                type: 'month',
+                count: 6,
+                text: '6m'
+            }, {
+                type: 'year',
+                count: 1,
+                text: '1y'
+            }, {
+                type: 'all',
+                text: 'All'
+            }],
+            selected: 1,
+            inputEnabled : true
+        },
+        defaultTooltip: {
+            backgroundColor: "#F0F0F0",
+            borderColor: "#DDDDDD",
+            borderRadius: 0,
+            borderWidth: 1,
+            useHTML : true
+        }
+    },
     pagingOptions:{
         pageSize : 10
     },
@@ -108,6 +145,10 @@ YesGlobal.Utils = {
             return dayWrapper.format("MMM Do");
         }
         return dayWrapper.format("MMM Do YYYY");
+    },
+    convertDateToString: function(timeStamp, dateFormat){
+        var dayWrapper = moment(new Date(timeStamp*1000));
+        return dayWrapper.format(dateFormat);
     }
 };
 
@@ -178,6 +219,28 @@ ko.bindingHandlers.timeAgo = {
         var timeValue = ko.utils.unwrapObservable(value);
         if (timeValue) {
             $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
+        } else {
+            $(element).text('-');
+        }
+    }
+};
+ko.bindingHandlers.dateTimeText = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor(), allBindings = allBindingsAccessor();
+        var dateFormat = allBindings.dateFormat || "LLLL";
+        var dateValue = ko.utils.unwrapObservable(value);
+        if (strDate) {
+            $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
+        } else {
+            $(element).text('-');
+        }
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = valueAccessor(), allBindings = allBindingsAccessor();
+        var dateFormat = allBindings.dateFormat || "LLLL";
+        var strDate = ko.utils.unwrapObservable(value);
+        if (strDate) {
+            $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
         } else {
             $(element).text('-');
         }
