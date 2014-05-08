@@ -128,7 +128,7 @@ class ControllerApiStock extends Controller {
 			$aCategoryIds = $oBranch->getIsBranchCategories( true, true );
 			if ( count($aCategoryIds) > 0 ){
 				$lPosts = $this->model_branch_post->getPosts(array(
-					'limit' => 3,
+					'limit' => 5,
 					'branch_id' => $oBranch->getId(),
 					'category_ids' => $aCategoryIds
 				));

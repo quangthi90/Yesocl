@@ -468,26 +468,6 @@ function NewsViewModel(options) {
 		newsContainer.width(widthBlock);
 		mainContent.width(mainContent.outerWidth() + widthBlock);
 	}
-	function _adjustLayout1(){
-		var widthBlock = 0;
-		var newsContainer = $("#" + self.id());
-		var heightContent = newsContainer.find('.block-content').height();
-		var heightHeader  = newsContainer.find('.block-header').height();
-		newsContainer.find('.news-item').each(function(){
-			$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-			$(this).height(heightContent - heightHeader);
-			var heightImage = $(this).find('.news-link').first().outerHeight();
-			var heightTitle = $(this).find('.news-title').first().outerHeight();
-			var heightMeta = $(this).find('.news-meta').first().outerHeight();
-			$(this).find('.news-short-content').height(heightContent - heightHeader - heightImage - heightTitle - heightMeta);
-			$(this).css({ 
-				'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
-			});
-			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
-		});
-		newsContainer.width(widthBlock);
-		mainContent.width(mainContent.outerWidth() + widthBlock);
-	}
 
 	function _loadNews(){
 		self.isLoadSuccess(false);
@@ -845,6 +825,7 @@ function CommentBoxViewModel(params){
 				//Show message
 			}
 			self.currentComment(null);
+			_setCommentContent("");
 			_closeAdvanceBox();
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, function(){
