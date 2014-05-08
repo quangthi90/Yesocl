@@ -229,7 +229,7 @@ ko.bindingHandlers.dateTimeText = {
         var value = valueAccessor(), allBindings = allBindingsAccessor();
         var dateFormat = allBindings.dateFormat || "LLLL";
         var dateValue = ko.utils.unwrapObservable(value);
-        if (strDate) {
+        if (dateValue) {
             $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
         } else {
             $(element).text('-');
@@ -238,8 +238,8 @@ ko.bindingHandlers.dateTimeText = {
     update: function (element, valueAccessor, allBindingsAccessor) {
         var value = valueAccessor(), allBindings = allBindingsAccessor();
         var dateFormat = allBindings.dateFormat || "LLLL";
-        var strDate = ko.utils.unwrapObservable(value);
-        if (strDate) {
+        var dateValue = ko.utils.unwrapObservable(value);
+        if (dateValue) {
             $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
         } else {
             $(element).text('-');

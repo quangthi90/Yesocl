@@ -46,7 +46,7 @@
                                     </span>
                                 </li>
                             </ul>
-                            <div class="index-date" data-bind="dateTimeText: stock.last_exchange.created">
+                            <div class="index-date" data-bind="dateTimeText: last_exchange.created">
                             </div>
                         </div>
                         <div class="span6 index-values">
