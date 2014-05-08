@@ -105,7 +105,7 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.friendStatus(data.status);
 			} else {
-			}			
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};

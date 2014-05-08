@@ -547,11 +547,7 @@ function CommentBoxViewModel(params){
 	self.initComment = new CommentModel({});
 	self.currentComment = ko.observable(null);
 
-	//Publuc functions:
-	self.isNewMode = ko.computed(function(){
-		return self.currentComment() === null;
-	}, this);
-
+	//Public functions:
 	self.showCommentBox = function(postData) {
 		if(postData === undefined || postData === null){
 			console.log("Post information is empty ...");
@@ -705,10 +701,7 @@ function CommentBoxViewModel(params){
 						var successCallback = function(data){
 							if(data.success === "ok") {
 								self.commentList.remove(comment);
-								//Delete from cached data:
-								var deleteCom = ko.utils.arrayFirst(self.postData.comments, function(item){
-									return comment.id === item.id;
-								});
+								//Delete from cached data:								
 								var indexDeleted = -1;
 								for (var i = self.postData.comments.length - 1; i >= 0; i--) {
 									if(comment.id === self.postData.comments[i].id){
@@ -717,7 +710,7 @@ function CommentBoxViewModel(params){
 									}
 								};
 								if(indexDeleted >= 0) {
-									self.postData.comments.splice(index, 1);
+									self.postData.comments.splice(indexDeleted, 1);
 								}					
 								if(data.comment_count >= 0){
 									self.postData.commentCount(data.comment_count);
@@ -853,8 +846,15 @@ function CommentBoxViewModel(params){
 		var successCallback = function(data){
 			if(data.success === "ok") {
 				self.currentComment().content(data.comment.content);
-				self.currentComment().content(data.comment.content);
 				self.currentComment().likeCount(data.comment.like_count);
+				//Update cached data:
+				var existing = ko.utils.arrayFirst(self.postData.comments, function(item){
+					return data.comment.id === item.id;
+				});
+				if(existing){
+					existing.content = data.comment.content;
+					existing.like_count = data.comment.like_count;
+				}
 			} else {
 				//Show message
 			}
@@ -904,7 +904,7 @@ function CommentBoxViewModel(params){
 			self.isProcessing(false);	
 		});
 		_closeAdvanceBox();
-	}
+	}	
 	function _displayCommentBox() {
 		var overlay = $("#overlay");
 		var control = $("#" + self.controlId());

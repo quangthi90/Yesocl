@@ -286,16 +286,13 @@ ko.bindingHandlers.zoomImage = {
                   items: {
                     src: src
                   },
-                  type: 'image',
-                  verticalFit: true,
-                  retina: {
-                    ratio: 2
-                  }
+                  type: 'image'
                 });
             });
         });
     },
     update: function (element, valueAccessor, allBindingsAccessor) {
+        var value = ko.utils.unwrapObservable(valueAccessor());
         var imgList = $(element).find("img");
         imgList.each(function(){
             var src = $(this).attr("src");
@@ -304,11 +301,7 @@ ko.bindingHandlers.zoomImage = {
                   items: {
                     src: src
                   },
-                  type: 'image',
-                  verticalFit: true,
-                  retina: {
-                    ratio: 2
-                  }
+                  type: 'image'
                 });
             });
         });

@@ -49,7 +49,7 @@
 				                	&nbsp;(<a title="{% trans %}See users liked{% endtrans %}" class="like-count" data-bind="text: likeCount, click: $parent.showLikers"></a>)
 				                </span>
 				            </div>
-				            <div class="comment-content" data-bind="html: content, seeMore: true, zoomImage: true">
+				            <div class="comment-content" data-bind="html: content, seeMore: true, zoomImage: content">
 				            </div>
 				        </div>
 				        <!-- ko if: isLiked() || canEdit || canDelete -->
