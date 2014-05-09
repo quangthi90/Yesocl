@@ -7,6 +7,9 @@ $_['text_edit'] 					= 'Edit';
 $_['text_enable'] 					= 'Enable';
 $_['text_disable'] 					= 'Disable';
 $_['text_trading'] 					= 'Trading';
+$_['text_fund'] 					= 'Fund';
+$_['text_add'] 						= 'Add';
+$_['text_remove']					= 'Remove';
 
 // button
 $_['button_insert'] 				= 'Insert';
@@ -22,6 +25,10 @@ $_['column_market']					= 'Market';
 $_['column_status'] 				= 'Status';
 $_['column_action'] 				= 'Action';
 
+// tab
+$_['tab_fund']	 					= 'Funds';
+$_['tab_basic']	 					= 'Basic';
+
 // entry
 $_['entry_name'] 					= 'Name:';
 $_['entry_code'] 					= 'Code:';
@@ -33,5 +40,6 @@ $_['error_warning'] 				= 'Warning: Error!';
 $_['error_name'] 					= 'Warning: Error Name is required!';
 $_['error_code'] 					= 'Warning: Error Code is required!';
 $_['error_exist_code'] 				= 'Warning: Error Code is exist!';
+$_['error_fund_percent'] 			= 'Warning: Stock Fund Percent must have value between -100 to 100!';
 $_['text_success'] 					= 'Success: You have modified Stock!';
 ?>

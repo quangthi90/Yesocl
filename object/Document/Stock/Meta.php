@@ -104,10 +104,8 @@ Class Meta {
 	 */
 	private $asset;
 
-	/** 
-	 * @MongoDB\Hash
-	 */
-	private $funds = array();
+	
+	// private $funds = array();
 
 	public function getId() {
 		return $this->id;

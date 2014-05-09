@@ -36,6 +36,13 @@ class ModelStockStock extends Model {
 		$oStock->setMarket( $oMarket );
 		$oStock->setStatus( $aData['status'] );
 
+		if ( !empty($aData['funds']) ){
+			$oMeta = new Meta();
+			$oMeta->setStock( $oStock );
+			$oMeta->setFunds( $aData['funds'] );
+			$this->dm->persist( $oMeta );
+		}
+
 		$this->dm->persist( $oStock );
 		$this->dm->flush();
 
@@ -72,6 +79,19 @@ class ModelStockStock extends Model {
 			}
 		}
 		$oStock->setStatus( $aData['status'] );
+
+		// Funds
+		if ( !empty($aData['funds']) ){
+			if ( !$oMeta = $oStock->getMeta() ){
+				$oMeta = new Meta();
+				$oMeta->setStock( $oStock );
+				$this->dm->persist( $oMeta );
+			}
+			$oMeta->setFunds( $aData['funds'] );
+			// print("<pre>");
+			// var_dump($oMeta->getFunds());
+			// exit;
+		}
 		
 		$this->dm->flush();
 

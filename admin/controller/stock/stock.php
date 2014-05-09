@@ -328,6 +328,13 @@ class ControllerStockStock extends Controller {
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_true'] = $this->language->get('text_true');
 		$this->data['text_false'] = $this->language->get('text_false');
+		$this->data['text_fund'] = $this->language->get('text_fund');
+		$this->data['text_add'] = $this->language->get('text_add');
+		$this->data['text_remove'] = $this->language->get('text_remove');
+
+		// Tab
+		$this->data['tab_fund'] = $this->language->get('tab_fund');
+		$this->data['tab_basic'] = $this->language->get('tab_basic');
 		
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
@@ -392,7 +399,25 @@ class ControllerStockStock extends Controller {
 		}
 
 		// Funds
+		if ( isset($this->request->post['funds']) ){
+			$this->data['funds'] = $this->request->post['funds'];
+		}elseif ( $oStock && $oStock->getMeta() ){
+			$this->data['funds'] = $oStock->getMeta()->getFunds();
+		}else {
+			$this->data['funds'] = array();
+		}
 		$this->load->model('stock/fund');
+		$lFunds = $this->model_stock_fund->getAllFunds();
+		$this->data['all_funds'] = array();
+		foreach ( $lFunds as $oFund ) {
+			$this->data['all_funds'][] = array(
+				'id' => $oFund->getId(),
+				'name' => $oFund->getName(),
+				'type' => $oFund->getType()
+			);
+		}
+
+		$this->data['fund_types'] = $this->config->get('stock')['fund'];
 
 		$this->data['is_edit'] = $isEdit;
 
@@ -416,6 +441,16 @@ class ControllerStockStock extends Controller {
 
 		elseif ( !empty($this->request->post['code']) && $this->model_stock_stock->getStock(array('code', $this->request->post['code'])) ){
 			$this->error['error_code'] = $this->language->get( 'error_exist_code' );
+		}
+
+		elseif ( !empty($this->request->post['funds']) ){
+			foreach ( $this->request->post['funds'] as $aFund ) {
+				$iFundPercent = $aFund[$this->config->get('stock')['fund']['percent']];
+				if ( !empty($iFundPercent) && ($iFundPercent < -100 || $iFundPercent > 100) ){
+					$this->error['warning'] = $this->language->get( 'error_fund_percent' );
+					break;
+				}
+			}
 		}
 
 		if ( $this->error){
