@@ -34,11 +34,13 @@
     <script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            // Stock info of current Market
+            var _stock = '{{ stock|json_encode()|raw }}';
             //Add options to view model:
             var chartOptions = {
                 //markets :  JSON.parse(_markets),
                 //currMarketId : '{{ curr_market_id }}',
-                stock : { id : "534d8523a7c0e9880a000828" }
+                stock : JSON.parse(_stock)
             };
             var newsOptions = {
                 Id : "stock-news"

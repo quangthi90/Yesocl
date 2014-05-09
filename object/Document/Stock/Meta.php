@@ -27,32 +27,32 @@ Class Meta {
 	/** 
 	 * @MongoDB\Int
 	 */
-	private $Pb;
+	private $pb;
 
 	/** 
 	 * @MongoDB\Int
 	 */
-	private $Eps;
+	private $eps;
 
 	/** 
 	 * @MongoDB\Float
 	 */
-	private $Pe;
+	private $pe;
 
 	/** 
 	 * @MongoDB\Int
 	 */
-	private $Roa;
+	private $roa;
 
 	/** 
 	 * @MongoDB\Int
 	 */
-	private $Roe;
+	private $roe;
 
 	/** 
 	 * @MongoDB\Float
 	 */
-	private $Beta;
+	private $beta;
 
 	/** 
 	 * @MongoDB\Int
@@ -108,6 +108,14 @@ Class Meta {
 	 * @MongoDB\Hash
 	 */
 	private $funds = array();
+
+	public function formatToCache(){
+		return array(
+			'market_cap' => $this->capitalMarket,
+			'pe' => $this->getPe(),
+			'eps' => $this->getEps()
+		);
+	}
 
 	public function getId() {
 		return $this->id;

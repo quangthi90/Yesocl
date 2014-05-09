@@ -214,6 +214,7 @@ class ModelStockStock extends Model {
 				$oMeta = new Meta();
 				$oMeta->setStock( $oStock );
 			}
+
 			$oMeta->setCurrentPrice( trim($aStock['C']) );
 			$oMeta->setBookPrice( trim($aStock['D']) );
 			$oMeta->setPb( trim($aStock['E']) );
