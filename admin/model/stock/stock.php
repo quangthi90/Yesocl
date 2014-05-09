@@ -88,9 +88,6 @@ class ModelStockStock extends Model {
 				$this->dm->persist( $oMeta );
 			}
 			$oMeta->setFunds( $aData['funds'] );
-			// print("<pre>");
-			// var_dump($oMeta->getFunds());
-			// exit;
 		}
 		
 		$this->dm->flush();
