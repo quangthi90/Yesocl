@@ -20,11 +20,13 @@
     <div id="y-main-content" class="has-horizontal stock-page">
         {{ block('stock_common_block_stock_chart') }}
         {{ block('stock_common_block_news') }}
-        {{ block('stock_common_block_basic_key') }}
+        {#{ block('stock_common_block_basic_key') }}
         {{ block('stock_common_block_company_profile') }}
-        {{ block('stock_common_block_financial') }}
+        {{ block('stock_common_block_financial') }#}
+        {% if stock.meta.funds|length > 0 %}
         {{ block('stock_common_block_ownership_friend') }}
-        {{ block('stock_common_block_post_report') }}
+        {% endif %}
+        {#{ block('stock_common_block_post_report') }#}
     </div>
 </div>
 {% endblock %}

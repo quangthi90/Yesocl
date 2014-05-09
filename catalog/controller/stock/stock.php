@@ -31,6 +31,19 @@ class ControllerStockStock extends Controller {
 
 		$oMeta = $oStock->getMeta();
 		$this->data['stock']['meta'] = $oMeta->formatToCache();
+
+		$this->load->model('stock/fund');
+		$lFunds = $this->model_stock_fund->getAllFunds();
+		$this->data['funds'] = array();
+		foreach ( $lFunds as $oFund ) {
+			$this->data['funds'][] = array(
+				'id' => $oFund->getId(),
+				'name' => $oFund->getName(),
+				'type' => $oFund->getType()
+			);
+		}
+
+		$this->data['fund_types'] = $this->config->get('stock')['fund'];
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/stock/stock.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/stock/stock.tpl';

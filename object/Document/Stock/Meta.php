@@ -113,7 +113,8 @@ Class Meta {
 		return array(
 			'market_cap' => $this->capitalMarket,
 			'pe' => $this->getPe(),
-			'eps' => $this->getEps()
+			'eps' => $this->getEps(),
+			'funds' => $this->getFunds()
 		);
 	}
 
