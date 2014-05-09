@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 {% use '@template/default/template/stock/common/block_stock_chart.tpl' %}
 {% use '@template/default/template/stock/common/block_news.tpl' %}
 {% use '@template/default/template/stock/common/block_ideas.tpl' %}
@@ -7,12 +8,12 @@
 {% use '@template/default/template/stock/common/block_company_profile.tpl' %}
 {% use '@template/default/template/stock/common/block_financial.tpl' %}
 {% use '@template/default/template/stock/common/block_ownership_friend.tpl' %}
-{% use '@template/default/template/stock/common/block_financial.tpl' %}
 {% use '@template/default/template/stock/common/block_post_report.tpl' %}
 
 {% block title %}{% trans %} Stock - Stock page {% endtrans %}{% endblock %}
 
-{% block stylesheet %}    
+{% block stylesheet %} 
+{{ block('common_ko_template_style') }}   
 {% endblock %}
 
 {% block body %}
@@ -27,6 +28,8 @@
         {{ block('stock_common_block_ownership_friend') }}
         {% endif %}
         {#{ block('stock_common_block_post_report') }#}
+        {{ block('common_ko_template_comment') }}
+        {{ block('common_ko_template_user_box') }}
     </div>
 </div>
 {% endblock %}
