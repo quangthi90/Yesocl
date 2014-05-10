@@ -47,6 +47,19 @@ function ChartViewModel (options) {
 							exchange.volume
 						]);
 					}
+
+					//Revert data to re-sort:
+					if(self.cacheExchanges.length > 1){
+						if(self.cacheExchanges[0][0] > self.cacheExchanges[1][0]) {
+							self.cacheExchanges.reverse();
+						}
+					}
+					if(self.cacheVolumes.length > 1){
+						if(self.cacheVolumes[0][0] > self.cacheVolumes[1][0]) {
+							self.cacheVolumes.reverse();
+						}
+					}
+
 					//Run chart:
 					_runChart();
 
@@ -67,7 +80,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges.reverse(),
+				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,
@@ -77,6 +90,12 @@ function ChartViewModel (options) {
 	            }
 			}
 	    ];
+	    options.plotOptions = {
+	    	candlestick: {
+	    		color: 'red',
+	    		upColor: 'green'
+	    	}
+	    };
 	    options.navigator = {
 			enabled : false
 		};
@@ -85,7 +104,7 @@ function ChartViewModel (options) {
 		};
 	    options.title = {
 	    	text: self.stock().name
-	    };	    
+	    };  
 
 	    //Run chart:
 		self.chartContainer.highcharts('StockChart', options);
@@ -117,7 +136,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges.reverse(),
+				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,	                
@@ -128,14 +147,20 @@ function ChartViewModel (options) {
 			}
 			,{
 		        type: "column",
-		        data: self.cacheVolumes.reverse(),
+		        data: self.cacheVolumes,
 		        name: "Volume",						        
 		        yAxis: 1,
 		        dataGrouping: {
 					enabled: false
 		       }
 		    }
-	    ];
+	    ];	    
+	    options.plotOptions = {
+	    	candlestick: {
+	    		color: 'red',
+	    		upColor: 'green'
+	    	}
+	    }
 	    options.navigator = {
 			enabled : true
 		};
