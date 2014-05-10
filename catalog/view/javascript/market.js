@@ -47,6 +47,11 @@ function ChartViewModel (options) {
 							exchange.volume
 						]);
 					}
+
+					//Revert data to re-sort:
+					self.cacheExchanges.reverse();
+					self.cacheVolumes.reverse();
+
 					//Run chart:
 					_runChart();
 
@@ -67,7 +72,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges.reverse(),
+				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,
@@ -123,7 +128,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges.reverse(),
+				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,	                
@@ -141,13 +146,13 @@ function ChartViewModel (options) {
 					enabled: false
 		       }
 		    }
-	    ];
+	    ];	    
 	    options.plotOptions = {
 	    	candlestick: {
-	    		color: 'green',
-	    		upColor: 'red'
+	    		color: 'red',
+	    		upColor: 'green'
 	    	}
-	    };
+	    }
 	    options.navigator = {
 			enabled : true
 		};
