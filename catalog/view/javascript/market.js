@@ -49,8 +49,16 @@ function ChartViewModel (options) {
 					}
 
 					//Revert data to re-sort:
-					self.cacheExchanges.reverse();
-					self.cacheVolumes.reverse();
+					if(self.cacheExchanges.length > 1){
+						if(self.cacheExchanges[0][0] > self.cacheExchanges[1][0]) {
+							self.cacheExchanges.reverse();
+						}
+					}
+					if(self.cacheVolumes.length > 1){
+						if(self.cacheVolumes[0][0] > self.cacheVolumes[1][0]) {
+							self.cacheVolumes.reverse();
+						}
+					}
 
 					//Run chart:
 					_runChart();
@@ -139,7 +147,7 @@ function ChartViewModel (options) {
 			}
 			,{
 		        type: "column",
-		        data: self.cacheVolumes.reverse(),
+		        data: self.cacheVolumes,
 		        name: "Volume",						        
 		        yAxis: 1,
 		        dataGrouping: {
