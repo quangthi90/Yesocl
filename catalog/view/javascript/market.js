@@ -443,6 +443,9 @@ function WatchListViewModel(options) {
 function NewsViewModel(options) {
 	var self = this;
 	self.id = ko.observable(options.Id);
+	self.canLoadMore = ko.observable(options.canLoadMore || false);
+	self.stockCode = ko.observable(options.stockCode || "DEMO");
+	self.currentPage = ko.observable(1);
 	self.newsList = ko.observableArray();
 	self.isLoadSuccess = ko.observable(false);
 	var mainContent = $("#y-main-content");	
@@ -466,23 +469,30 @@ function NewsViewModel(options) {
 			});
 			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
 		});
-		console.log("newsContainer: " + widthBlock);
 		newsContainer.width(widthBlock);
 		mainContent.width(mainContent.outerWidth() - oldWidth + widthBlock);
-		console.log("mainContent.width: " + mainContent.width());
 		mainContent.parent("#y-content").getNiceScroll()[0].show().onResize();
 	}
+
+	this.loadMore = function(){
+		alert("load more");
+	};
 
 	function _loadNews(){
 		self.isLoadSuccess(false);
 		var ajaxOptions = {
-			url: window.yRouting.generate('ApiGetLastStockNews')
+			url: window.yRouting.generate('ApiGetLastStockNews'),
+			stock_code : self.stockCode(),
+			page: self.currentPage(),
+			data : {
+				limit : 5
+			}
 		};
 		var successCallback = function(data){
 			if(data.success === "ok"){
 				ko.utils.arrayForEach(data.posts, function(p){
 					var newsItem = new PostModel(p);
-					self.newsList.push(newsItem);					
+					self.newsList.push(newsItem);		
 				});
 			}else {
 				self.newsList([]);
@@ -550,7 +560,7 @@ function CommentBoxViewModel(params){
 				page: self.currentPage()
 			}),
 			data: {
-				page_size: YesGlobal.Configs.pagingOptions.pageSize
+				limit: YesGlobal.Configs.pagingOptions.pageSize
 			}
 		};
 		var successCallback = function(data) {
@@ -774,7 +784,7 @@ function CommentBoxViewModel(params){
 				page: self.currentPage()
 			}),
 			data: {
-				page_size: YesGlobal.Configs.pagingOptions.pageSize
+				limit: YesGlobal.Configs.pagingOptions.pageSize
 			}
 		};
 		var successCallback = function(data) {

@@ -709,9 +709,6 @@ HorizontalBlock.prototype.LayoutStockPage = function() {
 		totalWidth += widthBlock + ConfigBlock.MARGIN_BLOCK;
 	});
 
-	//Width of root:
-	console.log("this.root.width(): " + this.root.width());
-
 	if(totalWidth > this.widthMain) {
 		this.root.width(totalWidth);		
 	}

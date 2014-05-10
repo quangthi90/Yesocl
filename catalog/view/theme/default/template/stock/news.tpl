@@ -22,7 +22,9 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var newsOptions = {
-				Id : "stock-news"
+				Id : "stock-news",
+				canLoadMore: true,
+				stockCode : "BCE"
 			};
 			var commentBoxOptions = {
 				Id : "comment-box"
