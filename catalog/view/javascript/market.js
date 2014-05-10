@@ -632,7 +632,8 @@ function CommentBoxViewModel(params){
 		_displayAdvanceBox();
 	};
 	self.startAdvanceComment = function(){
-		self.currentComment(null);		
+		self.currentComment(null);
+		_setCommentContent("");
 		_displayAdvanceBox();
 	};
 	self.saveComment = function(){

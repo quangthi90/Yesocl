@@ -112,7 +112,7 @@
 		    <div class="dlg-footer">
 		    	<div class="controls">
 		    		<a class="btn btn-yes" data-bind="click: saveComment">{% trans %}Submit{% endtrans %}</a>
-	                <button class="btn btn-yes">{% trans %}Close{% endtrans %}</button>
+	                <button class="btn btn-yes" data-bind="click: closeAdvanceBox">{% trans %}Close{% endtrans %}</button>
 	            </div>
 		    </div>
 		</div>
