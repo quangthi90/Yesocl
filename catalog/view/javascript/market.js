@@ -449,7 +449,8 @@ function NewsViewModel(options) {
 	self.newsList = ko.observableArray([]);
 	self.isLoadSuccess = ko.observable(false);
 	self.isLoadingMore = ko.observable(false);
-	var mainContent = $("#y-main-content");	
+	var mainContent = $("#y-main-content");
+	var root = $("#y-content");
 
 	this.loadMore = function(){
 		if(self.isLoadingMore()) return;
@@ -458,13 +459,8 @@ function NewsViewModel(options) {
 		self.currentPage(self.currentPage() + 1);
 		_loadNews(function(){
 			self.isLoadingMore(false);
+			root.scrollLeft(root.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
 		});
-	};
-
-	this.makeAddEffect = function(element) {
-		if(element.nodeType === 1) {
-			
-		}
 	};
 
 	//Private functions:
@@ -494,7 +490,7 @@ function NewsViewModel(options) {
 		});
 		newsContainer.width(widthBlock);
 		mainContent.width(mainContent.outerWidth() - oldWidth + widthBlock);
-		mainContent.parent("#y-content").getNiceScroll()[0].show().onResize();
+		root.getNiceScroll().onResize();
 		
 		//Add effect:
 		setTimeout(function(){
@@ -530,11 +526,23 @@ function NewsViewModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
-	//Delay for loading news:
-	setTimeout(function(){
-		self.isLoadSuccess(false);
-		_loadNews();
-	}, 300);
+	function _initNews(){
+		if(self.canLoadMore()){
+			root.scroll(function(){
+				var rootWidth = $(this).width();
+				if(root.scrollLeft() + rootWidth === root[0].scrollWidth - 20){
+					self.loadMore();
+				}
+			});	
+		}		
+		//Delay for loading news:
+		setTimeout(function(){
+			self.isLoadSuccess(false);
+			_loadNews();
+		}, 300);
+	}
+
+	_initNews();
 };
 
 function CommentBoxViewModel(params){

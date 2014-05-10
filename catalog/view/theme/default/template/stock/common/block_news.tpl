@@ -7,7 +7,7 @@
     </div>
     <div class="block-content">
         <!-- ko if: newsList().length > 0 -->
-            <div class="news-container" data-bind="foreach: { data: newsList, afterAdd: makeAddEffect }">
+            <div class="news-container" data-bind="foreach: newsList">
     			{{ block('stock_common_news_item') }}
     		</div>
             <!-- ko if: canLoadMore() -->
