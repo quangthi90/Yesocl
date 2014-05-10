@@ -20,8 +20,10 @@ function Routing( _routing )
         var url = this.routing.getItem(name);
         
         for ( var key in params ){
+            if ( params[key] == '' ) continue;
             url = url.replace( '{' + key + '}', params[key] );
         }
+        url = url.replace( new RegExp("/{[A-Za-z0-9_]+}", "g"), "" );
 
         return $('base').attr('href') + method + url;
     };
