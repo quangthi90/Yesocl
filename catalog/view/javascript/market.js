@@ -33,7 +33,7 @@ function ChartViewModel (options) {
 				if ( data.success == 'ok' ){
 					// Update Exchanges format for chart
 					for ( var key in data.exchanges ){
-						var exchange = data.exchanges[key];			
+						var exchange = data.exchanges[key];
 						self.cacheExchanges.push([
 							exchange.created * 1000, // Change timestamp to UTC format
 							exchange.open_price,
@@ -67,7 +67,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges,
+				data : self.cacheExchanges.reverse(),
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,
@@ -117,7 +117,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges,
+				data : self.cacheExchanges.reverse(),
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,	                
@@ -128,7 +128,7 @@ function ChartViewModel (options) {
 			}
 			,{
 		        type: "column",
-		        data: self.cacheVolumes,
+		        data: self.cacheVolumes.reverse(),
 		        name: "Volume",						        
 		        yAxis: 1,
 		        dataGrouping: {
@@ -446,9 +446,22 @@ function NewsViewModel(options) {
 	self.canLoadMore = ko.observable(options.canLoadMore || false);
 	self.stockCode = ko.observable(options.stockCode || "DEMO");
 	self.currentPage = ko.observable(1);
-	self.newsList = ko.observableArray();
+	self.newsList = ko.observableArray([]);
 	self.isLoadSuccess = ko.observable(false);
-	var mainContent = $("#y-main-content");	
+	self.isLoadingMore = ko.observable(false);
+	var mainContent = $("#y-main-content");
+	var root = $("#y-content");
+
+	this.loadMore = function(){
+		if(self.isLoadingMore()) return;
+
+		self.isLoadingMore(true);
+		self.currentPage(self.currentPage() + 1);
+		_loadNews(function(){
+			self.isLoadingMore(false);
+			root.scrollLeft(root.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
+		});
+	};
 
 	//Private functions:
 	function _adjustLayout(){
@@ -457,33 +470,40 @@ function NewsViewModel(options) {
 		var oldWidth = newsContainer.width();
 		var heightContent = newsContainer.find('.block-content').height();
 		var heightHeader  = newsContainer.find('.block-header').height();
-		newsContainer.find('.news-item').each(function(){
-			$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-			$(this).height(heightContent - heightHeader);
-			var heightImage = $(this).find('.news-link').first().outerHeight();
-			var heightTitle = $(this).find('.news-title').first().outerHeight();
-			var heightMeta = $(this).find('.news-meta').first().outerHeight();
-			$(this).find('.news-short-content').height(heightContent - heightHeader - heightImage - heightTitle - heightMeta);
-			$(this).css({ 
-				'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
-			});
+		var newsItem = newsContainer.find('.news-item');
+		newsItem.each(function(){
+			var loaded = $(this).hasClass("loaded");
+			if(!loaded) {
+				$(this).addClass("loaded");
+				$(this).addClass("adding");
+				$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
+				$(this).height(heightContent - heightHeader);
+				var heightImage = $(this).find('.news-link').first().outerHeight();
+				var heightTitle = $(this).find('.news-title').first().outerHeight();
+				var heightMeta = $(this).find('.news-meta').first().outerHeight();
+				$(this).find('.news-short-content').height(heightContent - heightHeader - heightImage - heightTitle - heightMeta);
+				$(this).css({ 
+					'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
+				});				
+			}
 			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
 		});
 		newsContainer.width(widthBlock);
 		mainContent.width(mainContent.outerWidth() - oldWidth + widthBlock);
-		mainContent.parent("#y-content").getNiceScroll()[0].show().onResize();
+		root.getNiceScroll().onResize();
+		
+		//Add effect:
+		setTimeout(function(){
+			newsContainer.find(".adding").removeClass("adding");	
+		}, 1000);		
 	}
 
-	this.loadMore = function(){
-		alert("load more");
-	};
-
-	function _loadNews(){
-		self.isLoadSuccess(false);
+	function _loadNews(callback){
 		var ajaxOptions = {
-			url: window.yRouting.generate('ApiGetLastStockNews'),
-			stock_code : self.stockCode(),
-			page: self.currentPage(),
+			url: window.yRouting.generate('ApiGetLastStockNews', {
+				stock_code : self.stockCode(),
+				page: self.currentPage()
+			}),
 			data : {
 				limit : 5
 			}
@@ -492,22 +512,37 @@ function NewsViewModel(options) {
 			if(data.success === "ok"){
 				ko.utils.arrayForEach(data.posts, function(p){
 					var newsItem = new PostModel(p);
-					self.newsList.push(newsItem);		
-				});
-			}else {
-				self.newsList([]);
+					self.newsList.push(newsItem);	
+				});				
 			}
-			self.isLoadSuccess(true);
+			self.isLoadSuccess(true);			
 			_adjustLayout();
+
+			if(callback && typeof callback === "function"){
+				callback(data);
+			}
 		}
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
-	//Delay for loading news:
-	setTimeout(function(){
-		_loadNews();
-	}, 300);
+	function _initNews(){
+		if(self.canLoadMore()){
+			root.scroll(function(){
+				var rootWidth = $(this).width();
+				if(root.scrollLeft() + rootWidth === root[0].scrollWidth - 20){
+					self.loadMore();
+				}
+			});	
+		}		
+		//Delay for loading news:
+		setTimeout(function(){
+			self.isLoadSuccess(false);
+			_loadNews();
+		}, 300);
+	}
+
+	_initNews();
 };
 
 function CommentBoxViewModel(params){
@@ -785,7 +820,8 @@ function CommentBoxViewModel(params){
 			}),
 			data: {
 				limit: YesGlobal.Configs.pagingOptions.pageSize
-			}
+			},
+			showLoading: false
 		};
 		var successCallback = function(data) {
 			if(data.success === "ok"){

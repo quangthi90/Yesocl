@@ -10,7 +10,8 @@ YesGlobal.Configs = {
         cache: false,
         async : true,
         data: {},
-        dataType: "json"
+        dataType: "json",
+        showLoading : true
     },
     chartOptions: {
         defaultRangeSelector: {
@@ -52,6 +53,7 @@ YesGlobal.Configs = {
     pagingOptions:{
         pageSize : 10
     },
+    loadingElement : "#yes-loading-more",
     defaultBindingElement : "y-main-content"
 };
 
@@ -70,16 +72,30 @@ YesGlobal.Utils = {
             cache: settings.cache,
             async: settings.async,
             beforeSend: function () {
+                if(settings.showLoading){
+                    var ele = $(YesGlobal.Configs.loadingElement);
+                    if(ele.hasClass("hidden")){
+                        ele.removeClass("hidden");
+                    }
+                }
                 if(beforeCallback !== undefined && typeof beforeCallback === "function"){
                     beforeCallback();
                 }
             },
             success: function (data) {
+                if(settings.showLoading){
+                    var ele = $(YesGlobal.Configs.loadingElement);
+                    ele.addClass("hidden");
+                }
                 if(successCallback !== undefined && typeof successCallback === "function"){
                     successCallback(data);
                 }
             },
             error: function (xhr, textStatus, errorThrown) {
+                if(settings.showLoading){
+                    var ele = $(YesGlobal.Configs.loadingElement);
+                    ele.addClass("hidden");
+                }
                 if(failCallback !== undefined && typeof failCallback === "function"){
                     failCallback(errorThrown);
                 }

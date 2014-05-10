@@ -376,6 +376,15 @@ a.btn-link-circle:hover {
 a.btn-link-circle:hover i {
   color: #000;
 }
+#yes-loading-more {
+  position: absolute; 
+  top: 35px; 
+  left: 169px; 
+  height: 20px; 
+  width: 500px; 
+  z-index: 1000; 
+  background: url("../../image/y-loading.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
 
 /* ------------------------------------- COMMON LAYOUT ---------------------------------------- */
 #y-container
@@ -3695,10 +3704,14 @@ a.wall-link:hover {
   float: left;
 }
 .news-container .news-item {
-  background-color: #FFFFFF;  
+  background-color: #FFFFFF; 
   padding-bottom: 20px;
   float: left;
   position: relative;
+}
+.news-container .news-item.adding {
+  background-color: #DAFFD4;
+  opacity: 0.8;
 }
 .news-item .news-link {
   display: block;

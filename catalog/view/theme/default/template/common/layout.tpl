@@ -33,7 +33,7 @@
 		</div>
 		{{ include(template_from_string( footer )) }}
 		<div id="overlay"></div>
-		
+		<div id="yes-loading-more" class="hidden"></div>
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		{{ include('@template/default/template/common/quick_search.tpl') }}	
 		{{ block('common_language_block') }}

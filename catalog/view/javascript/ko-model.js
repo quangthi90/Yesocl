@@ -35,7 +35,7 @@ function PostModel(data) {
 	that.likers = ko.observableArray(data.liker_ids || []);
 	that.countViewer = ko.observable(data.count_viewer || 0);
 	that.isLiked = ko.observable(data.isLiked || false);
-
+	
 	that.likePost = function() {
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiPutPostLike', {
