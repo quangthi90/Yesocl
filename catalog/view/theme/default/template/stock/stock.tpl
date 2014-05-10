@@ -43,8 +43,6 @@
             var _stock = '{{ stock|json_encode()|raw }}';
             //Add options to view model:
             var chartOptions = {
-                //markets :  JSON.parse(_markets),
-                //currMarketId : '{{ curr_market_id }}',
                 stock : JSON.parse(_stock)
             };
             var newsOptions = {
