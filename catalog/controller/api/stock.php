@@ -1,5 +1,7 @@
 <?php
 class ControllerApiStock extends Controller {
+	private $limit = 5;
+
 	public function getAllStocks() {
 		if ( !$this->customer->isLogged() ){
 			return $this->response->setOutput(json_encode(array(
@@ -115,6 +117,18 @@ class ControllerApiStock extends Controller {
 
 	public function getLastStockNews() {
 		$sStockCode = $this->config->get('branch')['code']['stock'];
+
+		if ( !empty($this->request->post['limit']) ){
+			$limit = $this->request->post['limit'];
+		}else{
+			$limit = $this->limit;
+		}
+
+		if ( !empty($this->request->get['page']) ){
+			$page = $this->request->get['page'];
+		}else{
+			$page = 1;
+		}
 		
 		$this->load->model('branch/branch');
 		$this->load->model('branch/post');
@@ -128,7 +142,8 @@ class ControllerApiStock extends Controller {
 			$aCategoryIds = $oBranch->getIsBranchCategories( true, true );
 			if ( count($aCategoryIds) > 0 ){
 				$lPosts = $this->model_branch_post->getPosts(array(
-					'limit' => 5,
+					'limit' => $limit,
+					'start' => ($page - 1) * $limit,
 					'branch_id' => $oBranch->getId(),
 					'category_ids' => $aCategoryIds
 				));

@@ -109,7 +109,7 @@ $_['routing']['ApiGetAllStocks']				= 'services/get/stock/all/';
 $_['routing']['ApiPostWatchList']				= 'services/post/stock/watch-list/many/';
 $_['routing']['ApiDeleteWatchListItem']			= 'services/delete/stock/watch-list/item/{stock_id}/';
 $_['routing']['ApiGetStockExchanges']			= 'services/get/stock/{stock_id}/exchanges/';
-$_['routing']['ApiGetLastStockNews']			= 'services/get/stock/news/last/';
+$_['routing']['ApiGetLastStockNews']			= 'services/get/stock/{stock_code}/news/last/{page}/';
 
 // Post
 $_['routing']['ApiPutPostLike']					= 'services/put/{post_type}/post/{post_slug}/like/';
