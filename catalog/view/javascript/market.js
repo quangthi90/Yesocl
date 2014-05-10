@@ -33,7 +33,7 @@ function ChartViewModel (options) {
 				if ( data.success == 'ok' ){
 					// Update Exchanges format for chart
 					for ( var key in data.exchanges ){
-						var exchange = data.exchanges[key];			
+						var exchange = data.exchanges[key];
 						self.cacheExchanges.push([
 							exchange.created * 1000, // Change timestamp to UTC format
 							exchange.open_price,
@@ -67,7 +67,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges,
+				data : self.cacheExchanges.reverse(),
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,
@@ -117,7 +117,7 @@ function ChartViewModel (options) {
 	    options.series = [
 			{
 				name :  self.stock().code,
-				data : self.cacheExchanges,
+				data : self.cacheExchanges.reverse(),
 				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,	                
@@ -128,7 +128,7 @@ function ChartViewModel (options) {
 			}
 			,{
 		        type: "column",
-		        data: self.cacheVolumes,
+		        data: self.cacheVolumes.reverse(),
 		        name: "Volume",						        
 		        yAxis: 1,
 		        dataGrouping: {
