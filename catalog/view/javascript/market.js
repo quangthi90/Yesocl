@@ -77,6 +77,12 @@ function ChartViewModel (options) {
 	            }
 			}
 	    ];
+	    options.plotOptions = {
+	    	candlestick: {
+	    		color: 'red',
+	    		upColor: 'green'
+	    	}
+	    };
 	    options.navigator = {
 			enabled : false
 		};
@@ -85,7 +91,7 @@ function ChartViewModel (options) {
 		};
 	    options.title = {
 	    	text: self.stock().name
-	    };	    
+	    };  
 
 	    //Run chart:
 		self.chartContainer.highcharts('StockChart', options);
@@ -136,6 +142,12 @@ function ChartViewModel (options) {
 		       }
 		    }
 	    ];
+	    options.plotOptions = {
+	    	candlestick: {
+	    		color: 'green',
+	    		upColor: 'red'
+	    	}
+	    };
 	    options.navigator = {
 			enabled : true
 		};
