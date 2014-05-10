@@ -691,7 +691,7 @@ HorizontalBlock.prototype.LayoutStockPage = function() {
 	if(widthStandard < ConfigBlock.MIN_STOCK_BLOCK_WIDTH){
 		widthStandard = ConfigBlock.MIN_STOCK_BLOCK_WIDTH;
 	}
-
+	
 	var totalWidth = 0;
 	this.blocks.each(function() {
 		var widthBlock = widthStandard;
@@ -703,15 +703,17 @@ HorizontalBlock.prototype.LayoutStockPage = function() {
 		var newContainer = content.find('.news-container');
 		if(newContainer.length > 0) {
 			widthBlock = ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
-		}
-
+		}		
 		$(this).width(widthBlock);
 		$(this).css('margin-right', ConfigBlock.MARGIN_BLOCK + 'px');
 		totalWidth += widthBlock + ConfigBlock.MARGIN_BLOCK;
 	});
 
+	//Width of root:
+	console.log("this.root.width(): " + this.root.width());
+
 	if(totalWidth > this.widthMain) {
-		this.root.width(totalWidth);				
+		this.root.width(totalWidth);		
 	}
 	this.blocks.css('opacity', '1');
 	this.rootContent.niceScroll();
