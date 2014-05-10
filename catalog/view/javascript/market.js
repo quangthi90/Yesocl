@@ -445,12 +445,13 @@ function NewsViewModel(options) {
 	self.id = ko.observable(options.Id);
 	self.newsList = ko.observableArray();
 	self.isLoadSuccess = ko.observable(false);
-	var mainContent = $("#y-main-content");
+	var mainContent = $("#y-main-content");	
 
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
 		var newsContainer = $("#" + self.id());
+		var oldWidth = newsContainer.width();
 		var heightContent = newsContainer.find('.block-content').height();
 		var heightHeader  = newsContainer.find('.block-header').height();
 		newsContainer.find('.news-item').each(function(){
@@ -465,8 +466,11 @@ function NewsViewModel(options) {
 			});
 			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
 		});
+		console.log("newsContainer: " + widthBlock);
 		newsContainer.width(widthBlock);
-		mainContent.width(mainContent.outerWidth() + widthBlock);
+		mainContent.width(mainContent.outerWidth() - oldWidth + widthBlock);
+		console.log("mainContent.width: " + mainContent.width());
+		mainContent.parent("#y-content").getNiceScroll()[0].show().onResize();
 	}
 
 	function _loadNews(){
