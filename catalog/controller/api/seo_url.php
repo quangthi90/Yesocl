@@ -14,26 +14,33 @@ class ControllerApiSeoUrl extends Controller {
 			array_unshift($_parts, "services");
 
 			$routings = $this->config->get('routing');
+			
 			foreach ( $routings as $route => $routing ) {
 				$request_gets = array();
 				$parts = array_filter(explode('/', $routing));
-				$is_url = false;
-				if ( count($parts) == count($_parts) ){
+
+				$is_url = true;
+				if ( count($parts) != 0 || count($_parts) != 0 ) $is_url = false;
+
+				for ( $key = 0; $key < count($parts); $key++ ){
+					$part = $parts[$key];
 					$is_url = true;
-					foreach ( $parts as $key => $part ) {
-						if ( $_parts[$key] != $part ){
-							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
-								$param = substr(substr($part, 1), 0, -1);
-								if ( $_parts[$key] != "null" ){
-									$request_gets[$param] = $_parts[$key];
-								}
+					if ( $_parts[$key] && $_parts[$key] != $part ){
+						if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
+							if ( ($parts[$key+1] && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
+								unset($parts[$key]);
+								$key++;
 							}else{
-								$is_url = false;
-								break;
+								$param = substr(substr($part, 1), 0, -1);
+								$request_gets[$param] = $_parts[$key];
 							}
+						}else{
+							$is_url = false;
+							break;
 						}
 					}
 				}
+
 				if ( $is_url ){
 					$this->request->get = $request_gets;
 					$this->request->get['route'] = $this->config->get('route')[$route];
