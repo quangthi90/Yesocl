@@ -11,8 +11,15 @@
     			{{ block('stock_common_news_item') }}
     		</div>
             <!-- ko if: canLoadMore() -->
-            <div class="load-more-wrapper" style="position: absolute; right: 0px; top: 0px; bottom: 0px; width: 10px; padding: 13% 0px;">
-                <a title="Load more ..." data-bind="click: loadMore" class="btn-load-more" style="height: 100%;"><i class="icon-chevron-right"></i></a>
+            <div class="load-more-wrapper" style="position: absolute; right: 0px; top: 0px; bottom: 0px; width: 10px;">
+                <!-- ko if: !isLoadingMore() -->
+                <a title="Load more ..." data-bind="click: loadMore" class="btn-load-more" style="display: block; height: 100%;">
+                    <i class="icon-chevron-right"></i>
+                </a>                
+                <!-- /ko -->
+                <!-- ko if: isLoadingMore() -->
+                <i class="icon-spin icon-spinner"></i> Loading ...          
+                <!-- /ko -->
             </div>
             <!-- /ko -->
         <!-- /ko -->        
