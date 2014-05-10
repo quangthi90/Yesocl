@@ -169,17 +169,17 @@ $registry->set('encryption', new Encryption($config->get('config_encryption')));
 $controller = new Front($registry);
 
 // SEO URL's
-$controller->addPreAction(new Action('ajax/seo_url'));
+$controller->addPreAction(new Action('api/seo_url'));
 
 // Router
 if ( isset($request->get['route']) ){
 	$action = new Action($request->get['route']);
 }else{
-	$action = new Action('ajax/error');
+	$action = new Action('api/error');
 }
 
 // Dispatch
-$controller->dispatch($action, new Action('ajax/error'));
+$controller->dispatch($action, new Action('api/error'));
 
 // Output
 $response->output();

@@ -23,7 +23,7 @@ function Routing( _routing )
             if ( params[key] == '' ) continue;
             url = url.replace( '{' + key + '}', params[key] );
         }
-        url = url.replace( new RegExp("/{[A-Za-z0-9_]+}", "g"), "" );
+        url = url.replace( new RegExp("{[A-Za-z0-9_]+}", "g"), "null" );
 
         return $('base').attr('href') + method + url;
     };

@@ -1,10 +1,11 @@
-<?php
+	<?php
 class ControllerApiSeoUrl extends Controller {
 	public function index() {
 		// Decode URL
 		if ( !empty($this->request->get['_route_']) ){
 			$_route = $this->request->get['_route_'];
 			$_parts = array_filter(explode('/', $_route));
+			array_unshift($_parts, "services");
 
 			$routings = $this->config->get('routing');
 			foreach ( $routings as $route => $routing ) {
@@ -17,7 +18,9 @@ class ControllerApiSeoUrl extends Controller {
 						if ( $_parts[$key] != $part ){
 							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
 								$param = substr(substr($part, 1), 0, -1);
-								$request_gets[$param] = $_parts[$key];
+								if ( $_parts[$key] != "null" ){
+									$request_gets[$param] = $_parts[$key];
+								}
 							}else{
 								$is_url = false;
 								break;
