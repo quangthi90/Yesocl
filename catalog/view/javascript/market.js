@@ -66,7 +66,7 @@ function ChartViewModel (options) {
 		options.tooltip = YesGlobal.Configs.chartOptions.defaultTooltip;
 	    options.series = [
 			{
-				name :  self.stock().name,
+				name :  self.stock().code,
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
@@ -99,7 +99,7 @@ function ChartViewModel (options) {
 		options.yAxis = [
 			{
 		        title: {
-		            text: self.stock().name
+		            text: self.stock().code
 		        },
 		        height: 200,
 		        lineWidth: 2,			        
@@ -116,7 +116,7 @@ function ChartViewModel (options) {
 	    ];
 	    options.series = [
 			{
-				name :  self.stock().name,
+				name :  self.stock().code,
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
