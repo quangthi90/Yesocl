@@ -6,8 +6,8 @@
         <h3 class="block-title"><a href="{{ path('StockNewsPage') }}">{% trans %}News{% endtrans %} <i class="icon-caret-right"></i></a></h3>
     </div>
     <div class="block-content">
-        <!-- ko if: isLoadSuccess() && newsList().length > 0 -->
-            <div class="news-container" data-bind="foreach: newsList">
+        <!-- ko if: newsList().length > 0 -->
+            <div class="news-container" data-bind="foreach: { data: newsList, afterAdd: makeAddEffect }">
     			{{ block('stock_common_news_item') }}
     		</div>
             <!-- ko if: canLoadMore() -->
@@ -22,7 +22,7 @@
                 <!-- /ko -->
             </div>
             <!-- /ko -->
-        <!-- /ko -->        
+        <!-- /ko -->
         <!-- ko if: isLoadSuccess() && newsList().length == 0 -->
         <div class="news-container">
             <p>No news to display !</p>

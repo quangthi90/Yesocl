@@ -463,10 +463,7 @@ function NewsViewModel(options) {
 
 	this.makeAddEffect = function(element) {
 		if(element.nodeType === 1) {
-			$(element).addClass("adding");
-			$(element).fadeIn(800, function() {
-				$(element).removeClass("adding");
-			});
+			
 		}
 	};
 
@@ -478,10 +475,11 @@ function NewsViewModel(options) {
 		var heightContent = newsContainer.find('.block-content').height();
 		var heightHeader  = newsContainer.find('.block-header').height();
 		var newsItem = newsContainer.find('.news-item');
-		console.log("newsItem " + newsItem.length);
 		newsItem.each(function(){
 			var loaded = $(this).hasClass("loaded");
 			if(!loaded) {
+				$(this).addClass("loaded");
+				$(this).addClass("adding");
 				$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
 				$(this).height(heightContent - heightHeader);
 				var heightImage = $(this).find('.news-link').first().outerHeight();
@@ -490,14 +488,19 @@ function NewsViewModel(options) {
 				$(this).find('.news-short-content').height(heightContent - heightHeader - heightImage - heightTitle - heightMeta);
 				$(this).css({ 
 					'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px'
-				});
-				$(this).addClass("loaded");
+				});				
 			}
 			widthBlock += ConfigBlock.MIN_NEWS_WIDTH + ConfigBlock.MARGIN_POST_PER_COLUMN;
 		});
 		newsContainer.width(widthBlock);
 		mainContent.width(mainContent.outerWidth() - oldWidth + widthBlock);
 		mainContent.parent("#y-content").getNiceScroll()[0].show().onResize();
+		
+		//Add effect:
+		setTimeout(function(){
+			newsContainer.find(".adding").removeClass("adding");	
+		}, 1000);
+		
 	}
 
 	function _loadNews(callback){

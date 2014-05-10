@@ -3695,10 +3695,14 @@ a.wall-link:hover {
   float: left;
 }
 .news-container .news-item {
-  background-color: #FFFFFF;  
+  background-color: #FFFFFF; 
   padding-bottom: 20px;
   float: left;
   position: relative;
+}
+.news-container .news-item.adding {
+  background-color: #DAFFD4;
+  opacity: 0.8;
 }
 .news-item .news-link {
   display: block;
