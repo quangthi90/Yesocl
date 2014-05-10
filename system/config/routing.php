@@ -96,8 +96,8 @@ $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 $_['routing']['StockMarketNone']				= 'stock/market/';
 $_['routing']['StockMarket']					= 'stock/market/{market_code}/';
 $_['routing']['StockPage']						= 'stock/page/{stock_code}/';
-$_['routing']['StockNewsPage']					= 'stock/news/page/';
-$_['routing']['StockNIdeaPage']					= 'stock/ideas/page/';
+$_['routing']['StockNewsPage']					= 'stock/{stock_code}/news/page/';
+$_['routing']['StockIdeaPage']					= 'stock/ideas/page/';
 
 //-- API --//
 // Common
