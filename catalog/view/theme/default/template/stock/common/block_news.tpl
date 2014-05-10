@@ -17,9 +17,6 @@
                     <i class="icon-chevron-right"></i>
                 </a>                
                 <!-- /ko -->
-                <!-- ko if: isLoadingMore() -->
-                <i class="icon-spin icon-spinner"></i> Loading ...          
-                <!-- /ko -->
             </div>
             <!-- /ko -->
         <!-- /ko -->

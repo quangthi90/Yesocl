@@ -499,8 +499,7 @@ function NewsViewModel(options) {
 		//Add effect:
 		setTimeout(function(){
 			newsContainer.find(".adding").removeClass("adding");	
-		}, 1000);
-		
+		}, 1000);		
 	}
 
 	function _loadNews(callback){
@@ -813,7 +812,8 @@ function CommentBoxViewModel(params){
 			}),
 			data: {
 				limit: YesGlobal.Configs.pagingOptions.pageSize
-			}
+			},
+			showLoading: false
 		};
 		var successCallback = function(data) {
 			if(data.success === "ok"){
