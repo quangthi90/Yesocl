@@ -122,9 +122,8 @@ YesGlobal.Utils = {
         }
     },
     initFriendList: function(callback) {
-        var friendList = window.yListFriends || [];
-        if(friendList.length > 0){
-            callback(friendList);
+        if(window.yListFriends){
+            callback(window.yListFriends);
         }else {
             var ajaxOptions = {
                 url: window.yRouting.generate('GetAllFriends'),
@@ -132,7 +131,7 @@ YesGlobal.Utils = {
             };
             var successCallback = function(data){
                 if(data.success === "ok"){
-                    window.yListFriends = data.friends;
+                    window.yListFriends = data.friends;                    
                     callback(data.friends);
                 }else {
                     callback([]);

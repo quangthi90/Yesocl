@@ -185,36 +185,50 @@ Tag.prototype.attachEvents = function() {
 	var that = this;
 
 	that.$tagElement.mentionsInput({
-		onDataRequest:function (mode,currentMentionCollection, queryObj,callback) {
-			var query = queryObj.queryString;
+		onDataRequest: function (mode,currentMentionCollection,queryObj,callback) {
+            var query = queryObj.queryString;
             var firstCharacter = queryObj.firstCharacter;
-            if ( window.yListFriends === undefined || window.yListFriends === null ){
-                var ajaxOptions = {
-                    url: window.yRouting.generate('GetAllFriends'),
-                    async: false
-                };
-                YesGlobal.Utils.ajaxCall(ajaxOptions, null, function(res){
-                    if(res.success === "ok"){
-                        window.yListFriends = res.friends;
-                        responseData = _.filter(window.yListFriends, function(item) { 
-                            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 
-                        });
-                        callback.call(this, responseData);
-                    }
-                }, null);
-            } else {
-                data = _.filter(window.yListFriends, function(item) {
-                    if(currentMentionCollection !== undefined && currentMentionCollection.length > 0) {
-                        var checkExisted = _.filter(currentMentionCollection, function(tempItem){
-                            return (item.id === tempItem.id);
-                        });
-                        if(checkExisted.length > 0)
-                            return false;
-                    }                   
-                    return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+            if(firstCharacter === "@") {
+                YesGlobal.Utils.initFriendList(function(queryData){
+                    result = _.filter(queryData, function(item) {
+                        if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
+                            var checkExisted = _.find(currentMentionCollection, function(tempItem){
+                                return (item.id === tempItem.id);
+                            });
+                            if(checkExisted)
+                                return false;
+                        }                   
+                        return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                    });
+                    callback.call(this, _.first(result, 5));
                 });
-                callback.call(this, data);
-            }
+                return;
+            } 
+            if(firstCharacter === "$") {
+                YesGlobal.Utils.initStockList(function(queryData){
+                    result = _.filter(queryData, function(item) {
+                        if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
+                            var checkExisted = _.find(currentMentionCollection, function(tempItem){
+                                return (item.code === tempItem.id);
+                            });
+                            if(checkExisted)
+                                return false;
+                        }                   
+                        return item.code.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                    });
+                    var lastResult = _.map(_.first(result, 5), function(obj) {
+                        return {
+                            id : obj.code,
+                            name: obj.code,
+                            wall: yRouting.generate("StockPage", { stock_code : obj.code }),
+                            type: "stock",
+                            avatar : "image/stock_icon.png"
+                        }
+                    });
+                    callback.call(this, lastResult);
+                });
+                return;
+            }        
         },
         fullNameTrigger: false
   	});
