@@ -85,6 +85,10 @@
             <td><?php echo $entry_status; ?></td>
             <td><select class="input-large" name="status" ><?php if ( $status ) { ?><option value="1" selected="selected" ><?php echo $text_enable; ?></option><option value="0" ><?php echo $text_disable; ?><?php }else { ?><option value="1" ><?php echo $text_enable; ?></option><option value="0" selected="selected" ><?php echo $text_disable; ?><?php } ?></select></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_tag_stock; ?></td>
+            <td><input class="input-xxlarge" type="text" name="stocks" /></td>
+          </tr>
         </table>
       </form>
     </div>

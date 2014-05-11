@@ -32,6 +32,7 @@ $_['entry_description'] = 'Description:';
 $_['entry_content'] 	= 'Content:';
 $_['entry_category'] 	= 'Category:';
 $_['entry_status'] 		= 'Status:';
+$_['entry_tag_stock']	= 'Tag Stock:';
 
 // error
 $_['error_warning'] 	= 'Warning: Error!';

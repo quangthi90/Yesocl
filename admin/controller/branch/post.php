@@ -449,6 +449,7 @@ class ControllerBranchPost extends Controller {
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 		$this->data['entry_content'] = $this->language->get( 'entry_content' );
 		$this->data['entry_thumb'] = $this->language->get( 'entry_thumb' );
+		$this->data['entry_tag_stock'] = $this->language->get( 'entry_tag_stock' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
