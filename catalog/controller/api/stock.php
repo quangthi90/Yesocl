@@ -6,7 +6,7 @@ class ControllerApiStock extends Controller {
 		if ( !$this->customer->isLogged() ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
-	            'error' => 'permission deney!'
+	            'error' => 'permission deny!'
 	        )));
 		}
 
@@ -31,7 +31,7 @@ class ControllerApiStock extends Controller {
 		if ( !$this->customer->isLogged() ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
-	            'error' => 'permission deney!'
+	            'error' => 'permission deny!'
 	        )));
 		}
 
@@ -62,7 +62,7 @@ class ControllerApiStock extends Controller {
 		if ( !$this->customer->isLogged() ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
-	            'error' => 'permission deney!'
+	            'error' => 'permission deny!'
 	        )));
 		}
 
