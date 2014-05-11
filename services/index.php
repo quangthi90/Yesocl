@@ -39,6 +39,10 @@ $registry->set('db', $db);
 $registry->set('dm', $db->getDm());
 $registry->set('client', $db->getClient());
 
+// Session
+$session = new Session();
+$registry->set('session', $session);
+
 // Customer
 require_once(DIR_SYSTEM . 'library/customer.php');
 $customer = new Customer($registry);
@@ -100,10 +104,6 @@ $registry->set('response', $response);
 // Cache
 $cache = new Cache();
 $registry->set('cache', $cache); 
-
-// Session
-$session = new Session();
-$registry->set('session', $session); 
 
 // Language Detection
 $languages = array();
