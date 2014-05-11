@@ -140,7 +140,7 @@
 								<span data-bind="attr : { title: current }, text: current"></span>
 							</div>
 						</div>
-						<div class="user-actions">
+						<div class="user-actions" style="display: block;">
 							<!-- ko if: friendStatus() == 2 -->
 							<div class="dropdown friend-group">
 								<a class="btn btn-yes dropdown-toggle" role="button" data-toggle="dropdown"><i class="icon-ok"></i> {% trans %}Friend{% endtrans %}</a>

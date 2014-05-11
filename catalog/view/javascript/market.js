@@ -81,7 +81,7 @@ function ChartViewModel (options) {
 			{
 				name :  self.stock().code,
 				data : self.cacheExchanges,
-				type : 'candlestick',
+				type : 'candlestick',				
 				dataGrouping: {
 	                enabled: false,
 	                dateTimeLabelFormats: {
@@ -92,8 +92,12 @@ function ChartViewModel (options) {
 	    ];
 	    options.plotOptions = {
 	    	candlestick: {
-	    		color: 'red',
-	    		upColor: 'green'
+	    		color: "red",
+	    		upColor: "green",
+	    		upLineColor: "green",
+	    		tooltip: {
+	    			headerFormat : '<span style="font-size: 10px; font-weight: bold;">{point.key}</span><br/>'
+	    		}
 	    	}
 	    };
 	    options.navigator = {
@@ -157,8 +161,12 @@ function ChartViewModel (options) {
 	    ];	    
 	    options.plotOptions = {
 	    	candlestick: {
-	    		color: 'red',
-	    		upColor: 'green'
+	    		color: "red",
+	    		upColor: "green",
+	    		upLineColor: "green",
+	    		tooltip: {
+	    			headerFormat : '<span style="font-size: 10px; font-weight: bold;">{point.key}</span><br/>'
+	    		}
 	    	}
 	    }
 	    options.navigator = {
