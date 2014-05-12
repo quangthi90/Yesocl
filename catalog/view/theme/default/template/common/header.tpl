@@ -210,7 +210,7 @@
     <div class="login-social">
       <ul>
           <li class="btn-fb-login">
-              <a href="#">
+              <a style="cursor: pointer;">
                   <i class="icon-facebook"></i>
               </a>
           </li>
