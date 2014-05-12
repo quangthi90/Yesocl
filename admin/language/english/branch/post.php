@@ -26,6 +26,7 @@ $_['column_category'] 	= 'Category';
 
 // entry
 $_['entry_title'] 		= 'Title:';
+$_['entry_files'] 		= 'Upload Files:';
 $_['entry_thumb'] 		= 'Image:';
 $_['entry_author'] 		= 'Author:';
 $_['entry_description'] = 'Description:';

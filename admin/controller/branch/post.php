@@ -443,6 +443,7 @@ class ControllerBranchPost extends Controller {
 
 		// entry
 		$this->data['entry_title'] = $this->language->get( 'entry_title' );
+		$this->data['entry_files'] = $this->language->get( 'entry_files' );
 		$this->data['entry_status'] = $this->language->get( 'entry_status' );
 		$this->data['entry_author'] = $this->language->get( 'entry_author' );
 		$this->data['entry_category'] = $this->language->get( 'entry_category' );
@@ -558,6 +559,12 @@ class ControllerBranchPost extends Controller {
 		}else {
 			$this->data['status'] = 1;
 		}
+
+		// file upload
+		$folder_link = $this->config->get('branch')['default']['image_link'];
+		$folder_name = $this->config->get('post')['default']['image_folder'];
+		$avatar_name = $this->config->get('post')['default']['avatar_name'];
+		$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId() . '/upload';
 
 		$this->data['token'] = $this->session->data['token'];
 
