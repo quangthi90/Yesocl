@@ -218,25 +218,34 @@ class ModelUserUser extends Model {
 		return false;
 	}
 
-	public function editPassword($oEmail, $sPassword) {
+	public function editPassword($oEmail, $sOldPass = null, $sPassword = null) {
 		$oUser = $this->dm->getRepository('Document\User\User')->findOneBy(array(
 			'deleted' => false,
 			'emails.email' => $oEmail
 		));
 
-		if ( !$oUser || $oUser->getIsSocial() == true ){
+		if ( !$oUser ){
 			return null;
 		}
 
 		$sSalt = $oUser->getSalt();
-		$sPasswordInput = substr(md5(mt_rand()), 0, 10);
-		$sPassword = sha1($sSalt . sha1($sSalt . sha1($sPasswordInput)));
-		
-		$oUser->setForgotten( $sPassword );
+
+		if ( $sOldPass == null && $sPassword == null ){
+			$sPassword = substr(md5(mt_rand()), 0, 10);
+			$sPasswordInput = sha1($sSalt . sha1($sSalt . sha1($sPassword)));
+			$oUser->setForgotten( $sPasswordInput );
+		}else{
+			$sOldPass = sha1($salt . sha1($salt . sha1($sOldPass)));
+			if ( $oUser->getPassword() && $sOldPass != $oUser->getPassword() ){
+				return null;
+			}
+			$sPasswordInput = sha1($sSalt . sha1($sSalt . sha1($sPassword)));
+			$oUser->setPassword( $sPasswordInput );
+		}
 
 		$this->dm->flush();
 
-		return $sPasswordInput;
+		return $sPassword;
 	}
 
 	public function getTotalCustomersByEmail($oEmail) {

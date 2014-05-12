@@ -18,6 +18,11 @@ class Session {
 		$this->data[$key] = $value;
 	}
 
+	public function hasFlash( $key ){
+		if ( !$this->data[$key] ) return false;
+		return true;
+	}
+
 	public function getFlash( $key ){
 		if ( empty($this->data[$key]) ){
 			return null;
