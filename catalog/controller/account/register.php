@@ -65,7 +65,10 @@ class ControllerAccountRegister extends Controller {
     	}elseif ((utf8_strlen($this->request->post['email']) > 96) || !preg_match('/^[^\@]+@.*\.[a-z]{2,6}$/i', $this->request->post['email'])) {
       		$this->error['warning'] = $this->language->get('error_email');
     	
-    	}elseif ( $this->model_user_user->getUserFull(array('email' => $this->request->post['email'])) ) {
+    	}elseif ( $oUser = $this->model_user_user->getUserFull(array('email' => $this->request->post['email'])), true ) {
+    		if ( $oUser->getDeleted() ){
+    			$this->error['warning'] = gettext('This account has beed deleted by system, please contact admin to get your account!');
+    		}
       		$this->error['warning'] = $this->language->get('error_exists');
     	}else{
    //  		$this->load->library('recaptcha');
