@@ -268,6 +268,7 @@ class ModelUserUser extends Model {
 		}
 
 		$oUser->setToken('');
+		$oUser->setTokenTime('');
 
 		$this->dm->flush();
 
