@@ -678,13 +678,27 @@ function CommentBoxViewModel(params){
 			alert("Content is required !");
 			return;
 		}
+		var $content = $('#comment-box').find('.post_input');
+		var tags = $content.mentionsInput('getMentions');
+		var userTags = [];
+		var stockTags = [];
+		for ( var key in tags ){
+			if ( tags[key].type == 'contact' ){
+				userTags.push( tags[key].id );
+			}else if ( tags[key].type == 'stock' ){
+				stockTags.push( tags[key].id );
+			}
+		}
+
 		var ajaxOptions = {
 			url : window.yRouting.generate("ApiPostComment", {
 				post_type: self.postData.type,
 				post_slug: self.postData.slug
 			}),
 			data: {
-				content: content
+				content: content,
+				userTags: userTags,
+				stockTags: stockTags
 			}
 		};
 		var successCallback = function(data){
