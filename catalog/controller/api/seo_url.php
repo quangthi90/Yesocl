@@ -42,11 +42,16 @@ class ControllerApiSeoUrl extends Controller {
 				}
 
 				if ( $is_url ){
-					// print($route); exit;
 					$this->request->get = $request_gets;
 					$this->request->get['route'] = $this->config->get('route')[$route];
 					break;
 				}
+			}
+
+			// Check login
+			if ( !$this->customer->isLogged() 
+				&& !in_array($route, $this->config->get('ignore')) ){
+				print("You not login!"); exit;
 			}
 			
 			if (isset($this->request->get['route'])) {
