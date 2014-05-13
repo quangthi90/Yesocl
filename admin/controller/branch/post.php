@@ -458,6 +458,7 @@ class ControllerBranchPost extends Controller {
 		// link
 		$this->data['cancel'] = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
+		$this->data['autocomplete_stock'] = html_entity_decode( $this->url->link( 'stock/stock/search', 'token=' . $this->session->data['token'], 'SSL' ) );
 		
 		// image
 		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
