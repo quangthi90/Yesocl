@@ -49,6 +49,7 @@ class ExtensionLoader
             new Twig_SimpleFunction('get_current_user', array($this, 'getCurrentUser')),
             new Twig_SimpleFunction('is_logged', array($this, 'isLogged')),
             new Twig_SimpleFunction('get_flash', array($this, 'getFlash')),
+            new Twig_SimpleFunction('has_flash', array($this, 'hasFlash')),
             new Twig_SimpleFunction('get_friend_list', array($this, 'getFriendList')),
             new Twig_SimpleFunction('in_array', array($this, 'inArray')),
             new Twig_SimpleFunction('get_request_friend', array($this, 'getRequestFriend')),
@@ -120,6 +121,10 @@ class ExtensionLoader
 
     public function getFlash( $key ){
         return $this->session->getFlash( $key );
+    }
+
+    public function hasFlash( $key ){
+        return $this->session->hasFlash( $key );
     }
 
     public function getFriendList($array = false){

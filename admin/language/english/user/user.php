@@ -7,6 +7,7 @@ $_['text_action']			  		= 'Action';
 $_['text_change_password']		  	= 'Change Password';
 $_['text_delete']		  			= 'Delete';
 $_['text_email']		  			= 'Email';
+$_['text_username']		  			= 'Username';
 $_['text_female']			  		= 'Female';
 $_['text_group']			  		= 'Group';
 $_['text_im']			  			= 'Im';

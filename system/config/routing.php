@@ -115,6 +115,9 @@ $_['routing']['ApiGetLastStockNews']			= 'services/get/stock/{stock_code}/news/l
 $_['routing']['ApiPutPostLike']					= 'services/put/{post_type}/post/{post_slug}/like/';
 $_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}/';
 $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}/liker/';
+$_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/';
+$_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
+$_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
 
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';

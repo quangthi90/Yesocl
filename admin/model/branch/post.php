@@ -340,7 +340,7 @@ class ModelBranchPost extends Model {
 		}
 
 		if ( !empty($data['filter_title']) ){
-			$query['title'] = new \MongoRegex('/' . trim( $data['filter_title'] ) . './i');
+			$query['title'] = new \MongoRegex('/' . trim( $data['filter_title'] ) . '/');
 		}
 
 		if ( !empty($data['filter_category']) ){

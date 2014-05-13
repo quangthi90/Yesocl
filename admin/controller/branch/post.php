@@ -637,7 +637,7 @@ class ControllerBranchPost extends Controller {
 		$json = array();
 		foreach ( $lPosts as $oPost ) {
 			$json[] = array(
-				'name' => html_entity_decode( $oPost->getName() ),
+				'name' => html_entity_decode( $oPost->getTitle() ),
 				'id' => $oPost->getId(),
 			);
 		}
