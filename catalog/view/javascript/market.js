@@ -678,18 +678,7 @@ function CommentBoxViewModel(params){
 			alert("Content is required !");
 			return;
 		}
-		var $content = $('#comment-box').find('.post_input');
-		var tags = $content.mentionsInput('getMentions');
-		var userTags = [];
-		var stockTags = [];
-		for ( var key in tags ){
-			if ( tags[key].type == 'contact' ){
-				userTags.push( tags[key].id );
-			}else if ( tags[key].type == 'stock' ){
-				stockTags.push( tags[key].id );
-			}
-		}
-
+		var tagInfo = getTagInfo();
 		var ajaxOptions = {
 			url : window.yRouting.generate("ApiPostComment", {
 				post_type: self.postData.type,
@@ -697,8 +686,8 @@ function CommentBoxViewModel(params){
 			}),
 			data: {
 				content: content,
-				userTags: userTags,
-				stockTags: stockTags
+				userTags: tagInfo.userTags,
+				stockTags: tagInfo.stockTags
 			}
 		};
 		var successCallback = function(data){
@@ -1023,6 +1012,24 @@ function CommentBoxViewModel(params){
 	function _setCommentContent(content){
 		var form = $("#comment-advance-form");
 		return form.find(".y-editor").code(content);
+	}
+	function getTagInfo(){
+		var $ele = $("#" + self.controlId()).find('.post_input');
+		var tags = $ele.mentionsInput('getMentions');
+		var userTags = [];
+		var stockTags = [];
+		
+		ko.utils.arrayForEach(tags, function(t){
+			if(t.type === "contact"){
+				userTags.push(t.id);
+			} else if(t.type === "stock") {
+				stockTags.push(t.id);
+			}
+		});
+		return {
+			userTags: userTags,
+			stockTags : stockTags
+		};
 	}
 
 	//CommentModel:
