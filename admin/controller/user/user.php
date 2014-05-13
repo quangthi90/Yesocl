@@ -655,6 +655,7 @@ class ControllerUserUser extends Controller {
 		$this->data['text_group'] = $this->language->get( 'text_group' );
 		$this->data['text_status'] = $this->language->get( 'text_status' );
 		$this->data['text_email'] = $this->language->get( 'text_email' );	
+		$this->data['text_username'] = $this->language->get( 'text_username' );
 		$this->data['text_action'] = $this->language->get( 'text_action' );
 		$this->data['text_enabled'] = $this->language->get( 'text_enabled' );
 		$this->data['text_disabled'] = $this->language->get( 'text_disabled' );
@@ -713,6 +714,7 @@ class ControllerUserUser extends Controller {
 				$this->data['users'][] = array(
 					'id' => $user->getId(),
 					'email' => $user->getPrimaryEmail()->getEmail(),
+					'username' => $user->getUsername(),
 					'status' => $user->getStatus() === true ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'group' => $user->getGroupUser()->getName(),
 					'action' => $action,

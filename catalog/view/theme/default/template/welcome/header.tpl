@@ -5,9 +5,9 @@
         </div>
         <div class="span4">
             <div class="row-fluid" id="y-welcome-menu">
-                <div class="span4">
+                {#<div class="span4">
                     <a href="#">Yestock</a>
-                </div>
+                </div>#}
                 <div class="span4">
                     <a href="#">Why Yesocl ?</a>
                 </div>

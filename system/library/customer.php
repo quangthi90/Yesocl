@@ -67,10 +67,10 @@ class Customer {
 		    		}
 		    	}
 
-		    	if ( $customer_query->getTokenTime() != null && $customer_query->getTokenTime() < $date ){
-		    		$this->db->getDm()->remove( $customer_query );
+		    	if ( $customer_query->getToken() && $customer_query->getTokenTime() != null && $customer_query->getTokenTime() < $date ){
+		    		$customer_query->setDeleted(true);
 		    		$this->db->getDm()->flush();
-		    		$this->session->setFlash('warning_delete_account', 'Your account had deleted because not active!');
+		    		$this->session->setFlash('warning_delete_account', 'Your account had deleted because not active! Please contact admin to get your account');
 		    		return false;
 		    	}
 		    }
