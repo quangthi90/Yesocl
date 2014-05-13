@@ -168,10 +168,8 @@ $('input[name=\'author\']').autocomplete({
         });
       }, 
       select: function(event, ui) {
-        stocks.push(ui.item.value);
         addTag(ui.item.value);
-        $(this).val("").focus();
-        $('input[name=\'stocks\']').val(stocks);
+        $(this).val("").focus();       
 
         return false;
       },
@@ -187,6 +185,7 @@ $('input[name=\'author\']').autocomplete({
       };
     }
     function addTag(tag) {
+      stocks.push(tag);
       var tagContent = $('<span class="btn tagItem" data-tag="' + tag + '" style="margin: 5px;"><span class="tag-name" style="margin-right: 10px;">' + tag + '</span> <i class="icon-remove" style="cursor: pointer;"></i></span>');
       tagContent.find(".icon-remove").on("click", function(){
         var parent = $(this).parent();
@@ -196,6 +195,7 @@ $('input[name=\'author\']').autocomplete({
         });
       });
       tagContent.appendTo(tagContainer);
+      $('input[name=\'stocks\']').val(stocks);
     }
     function removeTag(tag) {
       var index = stocks.indexOf(tag);
