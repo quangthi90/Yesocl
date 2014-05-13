@@ -2,7 +2,7 @@
 class ControllerApiPost extends Controller {
     private $error = array();
 
-    public function addPost(){
+    public function add(){
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
             if ( empty($this->request->get['post_slug']) ){
                 return $this->response->setOutput(json_encode(array(
@@ -75,85 +75,8 @@ class ControllerApiPost extends Controller {
 
             $aAuthor = $oPost->getUser()->formatToCache();
 
-            // avatar
-            $sAvatar = $this->model_tool_image->getAvatarUser( $aAuthor['avatar'], $aAuthor['email'] );
-
-            // thumb
-            $sThumb = $oPost->getThumb();
-            if ( !empty($sThumb) ){
-                $sImage = $this->model_tool_image->resize( $sThumb, 400, 250 );
-            }else{
-                $sImage = null;
-            }
-
-            // href
-            $aData_post_infos = array(
-                'post_type' => $sPostType,
-                'post_slug' => $oPost->getSlug()
-            );
-            $aHref = array(
-                'comment_list' => $this->extension->path( "CommentList", $aData_post_infos ),
-                'comment_add' => $this->extension->path( "CommentAdd", $aData_post_infos ),
-                'post_like' => $this->extension->path( "PostLike", $aData_post_infos ),
-                'post_detail' => $this->extension->path( "PostPage", $aData_post_infos ),
-                'user_info' => $this->extension->path( "WallPage", array('user_slug' => $aAuthor['slug']) ),
-                'post_get_liked' => $this->extension->path( "PostGetLiker", $aData_post_infos )
-            );
-
-            $bIsSeeMore = false;
-
-            $aReturnData = array(
-                'post' => array(
-                    'user' => array(
-                        'avatar' => $sAvatar,
-                        'username' => $oPost->getAuthor()
-                    ),
-                    'created' => $this->extension->dateFormat( $oPost->getCreated() ),
-                    'image' => $sImage,
-                    'thumb' => $sThumb,
-                    'title' => $oPost->getTitle(),
-                    'content' => html_entity_decode($oPost->getContent()),
-                    'see_more' => $bIsSeeMore,
-                    'slug' => $oPost->getSlug()
-                ),
-                'post_type' => $sPostType,
-                'href' => $aHref,
-                'is_owner' => true
-            );
-
-            // Check owner
-            // If post of wall & owner = false ==> user A post on all of user B
-            // If post of branch ==> user A post on any Branch
-            switch ( $sPostType ) {
-                case $this->config->get('common')['type']['user']:
-                    if ( $aAuthor['id'] != $oPost->getOwnerId() ){
-                        $this->load->model('user/user');
-
-                        $aOwner = $this->model_user_user->getUser( $this->request->get['user_slug'] );
-                        if ( $aOwner ){
-                            $aReturnData['is_owner'] = false;
-                            $aReturnData['owner'] = array(
-                                'username' => $aOwner['username'],
-                                'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
-                            );
-                        }
-                    }
-                    break;
-
-                case $this->config->get('common')['type']['branch']:
-                    $oCategory = $oPost->getCategory();
-
-                    $aReturnData['is_owner'] = false;
-                    $aReturnData['owner'] = array(
-                        'username' => $oCategory->getName(),
-                        'href' => $this->extension->path("BranchCategory", array('branch_slug' => $oCategory->getSlug()) )
-                    );
-                    break;
-                
-                default:
-                    $oPost = null;
-                    break;
-            }
+            $this->load->model('tool/object');
+            $aPost = $this->model_tool_object->formatPost( $oPost );
 
             // Add notification
             $this->load->model('user/notification');
@@ -188,7 +111,7 @@ class ControllerApiPost extends Controller {
 
             return $this->response->setOutput(json_encode(array(
                 'success' => 'ok',
-                'post' => $aReturnData
+                'post' => $aPost
             )));
         }
         
@@ -268,6 +191,42 @@ class ControllerApiPost extends Controller {
         return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => $this->error['warning']
+        )));
+    }
+
+    public function delete(){
+        $aDatas = array();
+
+        if ( empty($this->request->get['post_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'post slug is empty'
+            )));
+        }
+
+        if ( empty($this->request->get['post_type']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'post type is empty!'
+            )));
+        }
+
+        $sModel = $this->request->get['post_type'] . '/post';
+        $this->load->model($sModel);
+
+        $sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
+        $bResult = $this->$sModelLink->deletePost( 
+            $this->request->get['post_slug']
+        );
+
+        if ( $bResult == false ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok'
+            )));
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok'
         )));
     }
 
@@ -399,14 +358,14 @@ class ControllerApiPost extends Controller {
             }
         
         }elseif ( isset($this->request->get['user_slug']) && empty($this->request->get['user_slug']) ){
-            $this->error['warning'] = 'user slug is empty';
+            $this->error['warning'] = gettext( 'user slug is empty' );
         
         }elseif ( $this->request->get['post_type'] == $this->config->get('common')['type']['branch'] ){
             if ( empty($this->request->post['description']) ){
-                $this->error['warning'] = 'description is empty';
+                $this->error['warning'] = gettext( 'description is empty' );
             
             }elseif ( empty($this->request->post['category']) ){
-                $this->error['warning'] = 'category is empty';
+                $this->error['warning'] = gettext( 'category is empty' );
             }
         }
 

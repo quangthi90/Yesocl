@@ -4,13 +4,6 @@ class ControllerApiComment extends Controller {
     private $limit = 10;
 
     public function add(){
-        if ( !$this->customer->isLogged() ) {
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'user not login'
-            )));
-        }
-
         if ( empty($this->request->get['post_slug']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
@@ -63,13 +56,6 @@ class ControllerApiComment extends Controller {
     }
 
     public function edit(){
-        if ( !$this->customer->isLogged() ) {
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'user not login'
-            )));
-        }
-
         if ( empty($this->request->get['comment_id']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
@@ -120,13 +106,6 @@ class ControllerApiComment extends Controller {
     }    
 
     public function delete(){
-        if ( !$this->customer->isLogged() ) {
-            return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'user not login'
-            )));
-        }
-
         if ( empty($this->request->get['comment_id']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
