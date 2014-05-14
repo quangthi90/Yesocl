@@ -387,9 +387,9 @@
         var that = this;
 
         if ( this.is_add == 1 ){
-            this.url = window.yRouting.generate('ApiPostPost', {
+            this.url = window.yRouting.generate('PostAdd', {
                 post_type: that.postType,
-                slug: that.userSlug
+                user_slug: that.userSlug
             });
         }else{
             this.url = window.yRouting.generate('PostEdit', {
