@@ -1,13 +1,8 @@
 <?php
 class ControllerApiUser extends Controller {
-	public function makeFriend() {
-		if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
+    private $limit = 5;
 
+	public function makeFriend() {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			$this->load->model('user/user');
 
@@ -37,13 +32,6 @@ class ControllerApiUser extends Controller {
 	}
 
 	public function cancelRequest() {
-		if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
-
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 			$this->load->model('user/user');
 
@@ -73,13 +61,6 @@ class ControllerApiUser extends Controller {
 	}
 
 	public function confirm(){
-		if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
-
 		$this->load->model('user/user');
 		$this->load->model('friend/friend');
 
@@ -116,13 +97,6 @@ class ControllerApiUser extends Controller {
 	}
 
 	public function ignore(){
-		if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
-
 		$this->load->model('user/user');
 
        	if ( empty($this->request->get['user_slug']) ){
@@ -166,13 +140,6 @@ class ControllerApiUser extends Controller {
 	}
 
 	public function unFriend(){
-		if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
-
 		$this->load->model('friend/friend');
 		$this->load->model('user/user');
 
@@ -213,14 +180,7 @@ class ControllerApiUser extends Controller {
 	}
 
     public function addFollower(){
-    	if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
-
-        $this->load->model('friend/follower');
+    	$this->load->model('friend/follower');
         $this->load->model('user/user');
 
         if ( empty($this->request->get['user_slug']) ){
@@ -260,14 +220,7 @@ class ControllerApiUser extends Controller {
     }
 
     public function removeFollower(){
-    	if ( !$this->customer->isLogged() ){
-			return $this->response->setOutput(json_encode(array(
-	            'success' => 'not ok',
-	            'error' => 'permission deny!'
-	        )));
-		}
-
-        $this->load->model('friend/follower');
+    	$this->load->model('friend/follower');
         $this->load->model('user/user');
 
         if ( empty($this->request->get['user_slug']) ){
@@ -303,6 +256,61 @@ class ControllerApiUser extends Controller {
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'status' => 3
+        )));
+    }
+
+    public function getPosts(){
+        if ( empty($this->request->get['user_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+        }
+
+        if ( !empty($this->request->post['limit']) ){
+            $limit = $this->request->post['limit'];
+        }else{
+            $limit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $page = $this->request->get['page'];
+        }else{
+            $page = 1;
+        }
+
+        $sUserSlug = $this->request->get['user_slug'];
+
+        $this->load->model('user/user');
+        $oUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
+
+        if ( !$oUser ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user with slug ' . $sUserSlug . ' is not exist'
+            )));
+        }
+
+        $oPosts = $oUser->getPostData();
+
+        $aPosts = array();
+        $bCanLoadMore = false;
+        if ( $oPosts ){
+            $iPostCount = $oPosts->getPosts(false)->count();
+            $lPosts = $oPosts->getPosts(false)->slice( ($page - 1) * $limit, $limit );
+
+            $this->load->model('tool/object');
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+
+            if ( ($page - 1) * $limit + $limit < $iPostCount ){
+                $bCanLoadMore = true;
+            }
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'posts' => $aPosts,
+            'canLoadMore' => $bCanLoadMore
         )));
     }
 }

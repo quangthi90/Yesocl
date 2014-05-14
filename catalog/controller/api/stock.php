@@ -150,14 +150,12 @@ class ControllerApiStock extends Controller {
 			}
 		}
 		
+		$bCanLoadMore = false;
 		if ( $lPosts ){
 			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
-		}
-
-		if ( ($page - 1) * $limit + $limit >= $lPosts->count() ){
-			$bCanLoadMore = false;
-		}else{
-			$bCanLoadMore = true;
+			if ( ($page - 1) * $limit + $limit < $lPosts->count() ){
+				$bCanLoadMore = true;
+			}
 		}
 
 		return $this->response->setOutput(json_encode(array(
