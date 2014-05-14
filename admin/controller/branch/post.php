@@ -92,7 +92,7 @@ class ControllerBranchPost extends Controller {
 			if ( !isset( $this->request->files['thumb'] ) ) {
 				$this->request->files['thumb'] = array();
 			}
-			
+			$this->request->post['stocks'] = explode( ',', $this->request->post['stocks'] );
 			$return = $this->model_branch_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] );
 
 			if ( $return ) {
@@ -559,6 +559,15 @@ class ControllerBranchPost extends Controller {
 			$this->data['status'] = $post->getStatus();
 		}else {
 			$this->data['status'] = 1;
+		}
+
+		// stocks
+		if ( isset( $this->request->post['stocks'] ) ) {
+			$this->data['stocks'] = $this->request->post['stocks'];
+		}elseif ( isset( $post ) ) {
+			$this->data['stocks'] = implode( ',', $post->getStockCodes() );
+		}else {
+			$this->data['stocks'] = '';
 		}
 
 		$this->data['token'] = $this->session->data['token'];

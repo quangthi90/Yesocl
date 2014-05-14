@@ -12,7 +12,7 @@
     <div class="heading">
       <span><img src="view/image/user.png" alt="<?php echo $heading_title; ?>" /> <?php echo $heading_title; ?></span>
       <div class="buttons">
-      	<a onclick="return checkSubmit(); $('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
+      	<a onclick="$('#form').submit();" class="btn btn-success"><?php echo $button_save; ?></a>
       	<a onclick="location = '<?php echo $cancel; ?>';" class="btn btn-danger"><?php echo $button_cancel; ?></a>
       </div>
     </div>
@@ -91,7 +91,7 @@
               <div id="tagContainer" style="padding: 5px; margin: 5px 0px 10px 0px; border: 1px solid #F0F0F0;">                
               </div>
               <input class="input-xxlarge" type="text" name="stockTag" />
-              <input name="stocks" type="hidden" value="" />
+              <input name="stocks" type="hidden" value="<?php echo $stocks; ?>" />
             </td>
           </tr>
         </table>
@@ -205,9 +205,5 @@ $('input[name=\'author\']').autocomplete({
       }
     }
   });
-  function checkSubmit(){
-    var stocks = $('input[name=\'stocks\']').val();
-    alert(stocks);
-  }
 //--></script>
 <?php echo $footer; ?>

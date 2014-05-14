@@ -12,6 +12,9 @@ Class Post extends AbstractPost {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Category") */
 	private $category;
 
+	/** @MongoDB\Collection */
+	private $stockCodes = array();
+
 	/**
 	* Format array to save to Cache
 	* 2014/02/27
@@ -80,5 +83,17 @@ Class Post extends AbstractPost {
 
 	public function getCategory(){
 		return $this->category;
+	}
+
+	public function addStockCode( $stockCode ){
+		$this->stockCodes[] = $stockCode;
+	}
+
+	public function setStockCodes( $stockCodes ){
+		$this->stockCodes = $stockCodes;
+	}
+
+	public function getStockCodes(){
+		return $this->stockCodes;
 	}
 }
