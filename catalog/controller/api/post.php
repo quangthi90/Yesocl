@@ -4,7 +4,7 @@ class ControllerApiPost extends Controller {
 
     public function add(){
         if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-            if ( empty($this->request->get['post_slug']) ){
+            if ( empty($this->request->get['slug']) ){
                 return $this->response->setOutput(json_encode(array(
                     'success' => 'not ok',
                     'error' => 'post slug is empty'
@@ -36,7 +36,7 @@ class ControllerApiPost extends Controller {
                     $aDatas = array(
                         'content'       => $this->request->post['content'],
                         'title'         => $this->request->post['title'],
-                        'user_slug'     => $this->request->get['user_slug'],
+                        'user_slug'     => $this->request->get['slug'],
                         'author_id'     => $this->customer->getId(),
                         'image_link'    => $sImageLink,
                         'extension'     => $sExtension
@@ -56,13 +56,13 @@ class ControllerApiPost extends Controller {
                     break;
                 
                 default:
-                    $aData = array();
+                    $aDatas = array();
                     break;
             }
 
-            if ( count($aData) > 0 ){
+            if ( count($aDatas) > 0 ){
                 $sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
-                $oPost = $this->$sModelLink->addPost( $aData );
+                $oPost = $this->$sModelLink->addPost( $aDatas );
             }else{
                 $oPost = null;
             }
