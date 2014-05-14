@@ -8,6 +8,7 @@ $_['post']['default']['avatar_name'] 		= 'avatar';
 $_['post']['type']['branch']				= 'branch';
 $_['post']['type']['group']					= 'group';
 $_['post']['type']['user']					= 'user';
+$_['post']['type']['stock']					= 'stock';
 
 $_['post']['cache']['branch']				= 'Branch';
 $_['post']['cache']['group']				= 'Group';
