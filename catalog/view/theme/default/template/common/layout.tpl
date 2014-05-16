@@ -33,7 +33,26 @@
 		</div>
 		{{ include(template_from_string( footer )) }}
 		<div id="overlay"></div>
-		<div id="yes-loading-more" class="hidden"></div>
+		<div id="yes-loading-more" class="hidden">
+			<div id="fountainG">
+			<div id="fountainG_1" class="fountainG">
+			</div>
+			<div id="fountainG_2" class="fountainG">
+			</div>
+			<div id="fountainG_3" class="fountainG">
+			</div>
+			<div id="fountainG_4" class="fountainG">
+			</div>
+			<div id="fountainG_5" class="fountainG">
+			</div>
+			<div id="fountainG_6" class="fountainG">
+			</div>
+			<div id="fountainG_7" class="fountainG">
+			</div>
+			<div id="fountainG_8" class="fountainG">
+			</div>
+			</div> 
+		</div>
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		{{ include('@template/default/template/common/quick_search.tpl') }}	
 		{{ block('common_language_block') }}

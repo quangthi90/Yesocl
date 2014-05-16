@@ -376,7 +376,6 @@
           }
 
           return false;
-
         case KEY.RETURN:
         case KEY.TAB:
           if (elmActiveAutoCompleteItem && elmActiveAutoCompleteItem.length) {

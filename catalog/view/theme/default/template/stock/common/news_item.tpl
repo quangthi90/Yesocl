@@ -1,5 +1,5 @@
 {% block stock_common_news_item %}
-	<div class="news-item feed post post_status">
+	<div class="feed post post_status news-item">
 		{#<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
@@ -79,8 +79,7 @@
 					<img class="news-img" data-bind="attr: { src : $data.image, alt : $data.title } ">
 				</a>
 			</div>
-			{#<div class="news-short-content" data-bind="text: $data.description">#}
+			<div class="news-short-content" data-bind="html: $data.content"></div>
 		</div>
-		{#<a class="yes-see-more" data-bind="link: { text: 'See more', route: 'PostPage', params: { post_type : $data.type, post_slug: $data.slug } }"> <i class=" icon-double-angle-right"></i></a>#}
 	</div>
 {% endblock %}
