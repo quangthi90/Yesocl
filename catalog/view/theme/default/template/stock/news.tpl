@@ -17,7 +17,8 @@
 </div>
 {% endblock %}
 
-{% block javascript %}	
+{% block javascript %}
+	{{ block('stock_common_block_news_javascript') }}
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -39,6 +40,5 @@
 			};
 			ko.applyBindings(viewModel, document.getElementById('y-main-content'));
 		});
-	</script>	
-
+	</script>
 {% endblock %}

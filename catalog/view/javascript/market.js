@@ -500,10 +500,20 @@ function NewsViewModel(options) {
 	function _adjustLayout(){
 		var widthBlock = 0;
 		var newsContainer = $("#" + self.id());
-		var oldWidth = newsContainer.width();
-		var heightContent = newsContainer.find('.block-content').height();
-		var heightHeader  = newsContainer.find('.block-header').height();
-		var newsItem = newsContainer.find('.news-item');
+		var oldWidth = newsContainer.outerWidth();
+		var oldMainWidth = mainContent.outerWidth();
+		var heightContent = newsContainer.find(".block-content").height();
+		var heightHeader  = newsContainer.find(".block-header").height();
+		var newsItem = newsContainer.find(".news-item");
+		var blockNew = newsContainer.find(".news-creating-container");
+		if(blockNew.length > 0){
+			blockNew.width(ConfigBlock.MIN_FIRST_COLUMN);
+			blockNew.height(heightContent - heightHeader - 30);
+			blockNew.css({
+				'margin-right' : ConfigBlock.MARGIN_POST_PER_COLUMN + 'px',
+				'opacity' : '1'
+			});
+		}
 		newsItem.each(function(){
 			var loaded = $(this).hasClass("loaded");
 			if(!loaded) {
@@ -541,8 +551,8 @@ function NewsViewModel(options) {
 			}
 			widthBlock += $(this).outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN;
 		});
-		newsContainer.width(widthBlock);
-		mainContent.width(mainContent.outerWidth() - oldWidth + widthBlock);
+		newsContainer.width(widthBlock + blockNew.outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN);
+		mainContent.width(oldMainWidth - oldWidth + newsContainer.outerWidth());
 		mainContent.css("display", "block");
 		root.getNiceScroll().onResize();
 		
