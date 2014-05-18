@@ -35,6 +35,8 @@ class ControllerAccountWall extends Controller {
 		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 150, 150 );
 		$this->data['current_user'] = $aCurrUser;
 
+		$this->data['post_type'] = $this->config->get('common')['type']['user'];
+
 		// set selected menu
 		$this->session->setFlash( 'menu', 'wall' );
 

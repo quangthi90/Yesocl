@@ -61,7 +61,8 @@
 <script type="text/javascript">
     var _currUser = '{{ current_user|json_encode()|raw }}';
     var currUser = new User( JSON.parse(_currUser) );
-    console.log(currUser);
+
+    var postType = '{{ post_type }}';
 </script>
 <script type="text/javascript">
 $(function(){
