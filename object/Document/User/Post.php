@@ -114,7 +114,8 @@ Class Post {
 			'liker_ids'		=> $this->getLikerIds(),
 			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer(),
-			'owner_id' 		=> $this->getOwnerId()
+			'owner_id' 		=> $this->getOwnerId(),
+			'type'			=> 'user'
 		);
 
 		return $post_data;
