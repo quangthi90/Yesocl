@@ -31,7 +31,7 @@
         <!-- /ko -->
         <!-- ko if: !isLoadSuccess() -->
         <div class="loading-background">
-            <i style="font-size: 30px;" class="icon-spin icon-spinner"></i>
+            Loading data ...
         </div>
         <!-- /ko -->
     </div>

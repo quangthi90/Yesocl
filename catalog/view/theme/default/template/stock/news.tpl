@@ -25,7 +25,14 @@
 			var newsOptions = {
 				Id : "stock-news",
 				canLoadMore: true,
-				stockCode : "BCE"
+				stockCode : "BCE",
+				validate: function(postData){
+					//Validate here, return a collection of error if any
+
+					return [];
+				},
+				postType: "user",
+				wallUser: "user2"
 			};
 			var commentBoxOptions = {
 				Id : "comment-box"
