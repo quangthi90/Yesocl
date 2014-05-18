@@ -506,7 +506,6 @@ function NewsViewModel(options) {
 		var postData = _collectData(false);
 		_addPost(postData, function(){
 			_clearAfterAdding(false);
-			self.closeAdvanceNew();
 		});
 	};
 
@@ -557,7 +556,7 @@ function NewsViewModel(options) {
 				var postImg    = postBody.children('.post_image');
 				var postTextRaw = postBody.children('.news-short-content');
 				var imgInTextRaw = postTextRaw.find('img');
-				postBody.height($(this).height() - postHeader.height() - 20);
+				postBody.height($(this).height() - postHeader.height());
 				if(postTitle.length > 0){
 					postImg.height(postBody.height()*0.6);
 				}else {
