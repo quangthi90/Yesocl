@@ -64,19 +64,16 @@ Class Posts {
 	}
 
 	public function addPost( Post $post ){
-		$this->posts[] = $post;
+		$posts = $this->posts->toArray();
+		array_unshift($posts, $post);
+		$this->posts = $posts;
 	}
 
 	public function setPosts( $posts ){
 		$this->posts = $posts;
 	}
 
-	public function getPosts( $is_array = true ){
-		if ( $is_array ){
-			$posts = $this->posts->toArray();
-			return array_reverse($posts);
-		}
-
+	public function getPosts(){
 		return $this->posts;
 	}
 }

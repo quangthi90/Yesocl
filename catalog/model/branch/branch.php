@@ -1,6 +1,14 @@
 <?php
 class ModelBranchBranch extends Model {
 	public function getAllBranches( $aData = array() ){
+		// $lUserPosts = $this->dm->getRepository('Document\User\Posts')->findAll();
+		// foreach ($lUserPosts as $oPosts) {
+		// 	$aPosts = $oPosts->getPosts()->toArray();
+		// 	$aPosts = array_reverse($aPosts);
+		// 	$oPosts->setPosts( $aPosts );
+		// }
+		// $this->dm->flush();
+
 		$lPosts = $this->dm->getRepository('Document\Branch\Post')->findAll();
 		foreach ($lPosts as $key => $oPost) {
 			$lComments = $oPost->getComments();
