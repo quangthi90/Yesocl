@@ -23,19 +23,19 @@ class ModelBranchPost extends Model {
 	 */
 	public function addPost( $aData = array() ) {
 		// Check user author
-		if ( empty($aData['user_slug']) ){
+		if ( empty($aData['author_id']) ){
 			return false;
 		}
-		$oUserAuthor = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+		$oUserAuthor = $this->dm->getRepository('Document\User\User')->find( $aData['author_id'] );
 		if ( !$oUserAuthor ){
 			return false;
 		}
 
 		// Check category
-		if ( empty($aData['category']) ){
+		if ( empty($aData['cat_slug']) ){
 			return false;
 		}
-		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
 		if ( !$oCategory ){
 			return false;
 		}

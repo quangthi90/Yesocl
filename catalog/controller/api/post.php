@@ -7,7 +7,7 @@ class ControllerApiPost extends Controller {
             if ( empty($this->request->get['slug']) ){
                 return $this->response->setOutput(json_encode(array(
                     'success' => 'not ok',
-                    'error' => 'post slug is empty'
+                    'error' => 'slug is empty'
                 )));
             }
 
@@ -31,38 +31,36 @@ class ControllerApiPost extends Controller {
                 $sExtension = explode('.', $sFilename)[1];
             }
 
+            $aData = array(
+                'content'       => $this->request->post['content'],
+                'title'         => $this->request->post['title'],
+                'author_id'     => $this->customer->getId(),
+                'image_link'    => $sImageLink,
+                'extension'     => $sExtension
+            );
+
             switch ( $this->request->get['post_type'] ) {
                 case $this->config->get('common')['type']['user']:
-                    $aDatas = array(
-                        'content'       => $this->request->post['content'],
-                        'title'         => $this->request->post['title'],
-                        'user_slug'     => $this->request->get['slug'],
-                        'author_id'     => $this->customer->getId(),
-                        'image_link'    => $sImageLink,
-                        'extension'     => $sExtension
-                    );
+                    $aData = array_merge($aData, array(
+                        'user_slug'     => $this->request->get['slug']
+                    ));
                     break;
 
                 case $this->config->get('common')['type']['branch']:
-                    $aDatas = array(
-                        'content'       => $this->request->post['content'],
-                        'title'         => $this->request->post['title'],
+                    $aData = array_merge($aData, array(
                         'description'   => $this->request->post['description'],
-                        'category'      => $this->request->post['category'],
-                        'user_slug'     => $this->customer->getSlug(),
-                        'image_link'    => $sImageLink,
-                        'extension'     => $sExtension
-                    );
+                        'cat_slug'      => $this->request->get['slug'],
+                    ));
                     break;
                 
                 default:
-                    $aDatas = array();
+                    $aData = array();
                     break;
             }
 
-            if ( count($aDatas) > 0 ){
+            if ( count($aData) > 0 ){
                 $sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
-                $oPost = $this->$sModelLink->addPost( $aDatas );
+                $oPost = $this->$sModelLink->addPost( $aData );
             }else{
                 $oPost = null;
             }
@@ -195,7 +193,7 @@ class ControllerApiPost extends Controller {
     }
 
     public function delete(){
-        $aDatas = array();
+        $aData = array();
 
         if ( empty($this->request->get['post_slug']) ){
             return $this->response->setOutput(json_encode(array(
@@ -292,7 +290,7 @@ class ControllerApiPost extends Controller {
 	}
 
     public function getLikers() {
-        $aDatas = array();
+        $aData = array();
 
         if ( empty($this->request->get['post_slug']) ){
             return $this->response->setOutput(json_encode(array(
