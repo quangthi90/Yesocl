@@ -28,7 +28,7 @@
  			</div>
 		</div>
 	</div>
-	<div class="mfp-hide y-dlg-container form-advance" data-height="200" data-focus-type="input[type='text']" id="news-advance-post">
+	<div class="mfp-hide y-dlg-container form-advance" data-focus-type="input[type='text']" id="news-advance-post">
 		<div class="y-dlg">
 			<div class="dlg-title">
 		        <i class="icon-yes"></i> 
@@ -67,7 +67,7 @@
 		    		</div>
 		    		<div class="control-group">
 		    			<label class="control-label">{% trans %}Content{% endtrans %}</label>
-				    	<div class="y-editor" id="post-adv-editor"></div>
+				    	<div class="y-editor" id="post-adv-editor" data-height="200" ></div>
 			    	</div>
 				</div>
 		    </div>

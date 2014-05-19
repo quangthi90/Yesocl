@@ -3235,7 +3235,8 @@ a.wall-link:hover {
   overflow-y: inherit;
 }
 .note-editor .note-tag-dialog .tag-data {
-  width: 525px;
+  width: 515px;
+  padding: 5px;
 }
 .note-editor .note-tag-dialog .typeahead{
   width: 528px;

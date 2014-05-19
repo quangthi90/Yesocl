@@ -179,12 +179,12 @@ ko.bindingHandlers.autoCompleteTag = {
                 YesGlobal.Utils.initStockList(function(queryData) {
                     var data = { results : [] };
                     ko.utils.arrayForEach(queryData, function(t) {
-                        if(t.code.toLowerCase().indexOf(query.term)){
+                        if(t.code.toUpperCase().indexOf(query.term.toUpperCase()) >= 0){
                             data.results.push(t);
-                        }                        
+                        }
                     });
                     query.callback(data);
-                });
+                });                
             },
             formatResult: function(item) { return item.code + " : " + item.name },
             formatSelection: function(item) { return item.code  }

@@ -624,9 +624,12 @@ function NewsViewModel(options) {
 		if(isAdvance){
 			containerElement = $("#news-advance-post");
 			containerElement.find("input.img-url").val("");
-			containerElement.find(".img-previewer-container").html("");
+			var imgContainer = containerElement.find(".img-previewer-container");
+			imgContainer.find(".drop-zone-show").show(0);
+			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.post-title-input").val("");
 			containerElement.find("#post-adv-editor").code("");
+			containerElement.find("input.autocomplete-tag-input").select2("val", "");
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			containerElement.find("input.img-url").val("");
@@ -679,8 +682,11 @@ function NewsViewModel(options) {
 			containerElement = $("#news-advance-post");
 			post.thumb = containerElement.find("input.img-url").val();
 			post.title = containerElement.find("input.post-title-input").val();
-			post.content = containerElement.find("#post-adv-editor").code();
-			post.stockTags = containerElement.find(".autocomplete-tag-input").val();
+
+			var editorCode = containerElement.find("#post-adv-editor");
+			post.content = editorCode.code();
+			post.userTags = editorCode.getTags();
+			post.stockTags = containerElement.find("input.autocomplete-tag-input").select2("val");			
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();

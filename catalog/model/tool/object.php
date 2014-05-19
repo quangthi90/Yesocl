@@ -249,7 +249,7 @@ class ModelToolObject extends Model
                     $aPost['is_owner'] = false;
                     $aPost['owner'] = array(
                         'username' => $aOwner['username'],
-                        'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
+                        'href' => '#' //$this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
                     );
                 }
                 break;
@@ -260,7 +260,7 @@ class ModelToolObject extends Model
                 $aPost['is_owner'] = false;
                 $aPost['owner'] = array(
                     'username' => $oCategory->getName(),
-                    'href' => $this->extension->path("BranchCategory", array('branch_slug' => $oCategory->getSlug()) )
+                    'href' => '#' //$this->extension->path("BranchCategory", array('branch_slug' => $oCategory->getSlug()) )
                 );
                 break;
         }
