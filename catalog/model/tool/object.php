@@ -243,7 +243,7 @@ class ModelToolObject extends Model
 		// Check owner
         // If post of wall & owner = false ==> user A post on all of user B
         // If post of branch ==> user A post on any Branch
-        switch ( $sPostType ) {
+        switch ( $aPost['type'] ) {
             case $this->config->get('common')['type']['user']:
                 if ( $oPost->getUser()->getId() != $oPost->getOwnerId() ){
                     $aPost['is_owner'] = false;

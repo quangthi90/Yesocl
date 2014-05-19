@@ -25,80 +25,15 @@ class ControllerAccountWall extends Controller {
 		$this->load->model('friend/friend');
 		$this->load->model('friend/follower');
 
-		$oLoggedUser = $this->customer->getUser();
 		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
 
 		if ( !$oCurrUser ){
 			return false;
 		}
 
-		$aUser = $oCurrUser->formatToCache();
-
-		$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'], 150, 150 );
-		$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
-		$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oCurrUser->getId() );
-		$this->data['users'] = array( $aUser['id'] => $aUser );
-
-		$this->data['current_user_id'] = $oCurrUser->getId();
-
-		$this->data['posts'] = array();
-		if ( $oCurrUser->getPostData() ){
-			$lPosts = $oCurrUser->getPostData()->getPosts();
-		}else{
-			$lPosts = array();
-		}
-		$iStart = 0;
-		$iCountPost = 1;
-
-		foreach ( $lPosts as $iKey => $oPost ) {
-			if ( $iKey < $iStart ){
-				continue;
-			}
-
-			if ( $iCountPost > $this->iLimit ){
-				break;
-			}
-
-			$aPost = $oPost->formatToCache();
-
-			if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
-				$aPost['isUserLiked'] = true;
-			}else{
-				$aPost['isUserLiked'] = false;
-			}
-
-			$oUser = $oPost->getUser();
-
-			if ( $oLoggedUser && ($oCurrUser->getId() == $oLoggedUser->getId() || $oLoggedUser->getId() == $oUser->getId()) ){
-				$aPost['is_del'] = true;
-			}else{
-				$aPost['is_del'] = false;
-			}
-
-			if ( $this->customer->getId() == $aPost['user_id'] ){
-				$aPost['is_edit'] = true;
-			}else{
-				$aPost['is_edit'] = false;
-			}
-
-			if ( !array_key_exists($oUser->getId(), $this->data['users']) ){
-				$aUser = $oUser->formatToCache();
-
-				$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-
-				$this->data['users'][$aUser['id']] = $aUser;
-			}
-
-			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-			}else{
-				$aPost['image'] = null;
-			}
-
-			$this->data['posts'][] = $aPost;
-			
-			$iCountPost++;
-		}
+		$aCurrUser = $oCurrUser->formatToCache();
+		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 150, 150 );
+		$this->data['current_user'] = $aCurrUser;
 
 		$this->data['post_type'] = $this->config->get('common')['type']['user'];
 
