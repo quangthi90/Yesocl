@@ -16,6 +16,8 @@
 		<link href="{{ asset_css('libs/mcustomscrollbar.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/mention-input.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/summernote.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/select2.css') }}" rel="stylesheet" media="screen" />
+		<link href="{{ asset_css('libs/select2-bootstrap.css') }}" rel="stylesheet" media="screen" />
 		<!-- Common css -->
 		<link href="{{ asset_css('common/yes.css') }}" rel="stylesheet" media="screen" />
 		<!-- Custom css -->
@@ -95,6 +97,7 @@
 		<script type="text/javascript" src="{{ asset_js('libs/knockout.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/momment/moment.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/expander/expander.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('libs/select/select2.min.js') }}"></script>
 		<!-- Common Script -->		
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>

@@ -7,9 +7,11 @@
         <h3 class="block-title"><a href="{{ path('StockNewsPage') }}">{% trans %}News{% endtrans %} <i class="icon-caret-right"></i></a></h3>
     </div>
     <div class="block-content">
+        <!-- ko if: hasNewPost() -->
         <div class="news-creating-container fl" style="opacity: 0;">
             {{ block('common_news_item_add_edit') }}
         </div>
+        <!-- /ko -->
         <!-- ko if: newsList().length > 0 -->
         <div class="news-container" data-bind="foreach: newsList">
 			{{ block('stock_common_news_item') }}

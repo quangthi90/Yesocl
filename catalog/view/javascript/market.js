@@ -482,6 +482,7 @@ function NewsViewModel(options) {
 	self.newsList = ko.observableArray([]);
 	self.isLoadSuccess = ko.observable(false);
 	self.isLoadingMore = ko.observable(false);
+	self.hasNewPost = ko.observable(options.hasNewPost || false);
 	self.validate = options.validate || null;
 	self.postType = options.postType || "user";
 	self.wallUser = options.wallUser || "";
