@@ -516,6 +516,33 @@ function NewsViewModel(options) {
 		});
 	};
 
+	this.startEditPost = function(post) {
+		console.log("Imcomplete");
+	};
+
+	this.deletePost = function(post) {
+		bootbox.dialog({
+            title: sConfirm,
+            message: 'Are you sure you want to remove this post ?',
+            buttons:
+            {
+                cancel: {
+                    label: sCancel,
+                    className: 'btn',
+                    callback: function() {
+                    }
+                },
+                oke: {
+                    label: sOk,
+                    className: 'btn-primary',
+                    callback: function() {
+                    	_deletePost(post, function(){  });
+					}
+                }
+            }
+        });
+	};	
+
 	this.resetAdvanceNew = function(){
 		_clearAfterAdding(true);
 	}
@@ -612,6 +639,26 @@ function NewsViewModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
+	function _deletePost(post, callback) {
+		var ajaxOptions = {
+			url: window.yRouting.generate("ApiDeletePost", {
+				post_type: post.type,
+				post_slug : post.slug
+			})
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				self.newsList.remove(post);
+				_adjustLayout();
+			}
+			if(callback && typeof callback === "function"){
+				callback(data);
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
 	function _clearAfterAdding(isAdvance){
 		var newsContainer = $("#" + self.id());
 		var containerElement = null;
@@ -636,7 +683,6 @@ function NewsViewModel(options) {
 	function _loadNews(callback){
 		var loadOptions = self.urls.loadNews.params;
 		loadOptions.page = self.currentPage();
-		console.log(loadOptions);
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
 			data : {

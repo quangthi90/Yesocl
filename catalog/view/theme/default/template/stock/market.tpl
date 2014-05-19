@@ -47,7 +47,12 @@
 				watchList : JSON.parse(_watchList)
 			};
 			var newsOptions = {
-				Id : "stock-news"
+				Id : "stock-news",
+                canLoadMore: false,
+                hasNewPost: false,
+                urls : {
+                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                }
 			};
 			var commentBoxOptions = {
 				Id : "comment-box"
