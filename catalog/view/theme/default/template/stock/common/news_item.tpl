@@ -1,29 +1,31 @@
 {% block stock_common_news_item %}
 	<div class="feed post post_status news-item">
-		{#<div class="yes-dropdown">
+		<!-- ko if: $data.isLiked() || $data.isEdit || $data.isDelete -->
+		<div class="yes-dropdown">
             <div class="dropdown">
                <a class="dropdown-toggle" data-toggle="dropdown">
                     <i class="icon-caret-down"></i>
                </a>
                <ul class="dropdown-menu">
-               		<li class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
-                        <a href="#"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
+               		<!-- ko if: $data.isLiked() -->
+               		<li class="unlike-post">
+                        <a data-bind="click: $data.likePost" title="{% trans %}Like{% endtrans %}"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
                     </li>
-                    {% if post.is_edit is defined and post.is_edit == true %}
-                    <li class="divider"></li>
+                    <!-- /ko -->
+                    <!-- ko if: $data.isEdit -->
                     <li class="post-edit-btn">
-                        <a href="#" class="link-popup" data-mfp-src=".js-advance-post"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
+                        <a data-bind="click: $parent.startEditPost" title="Edit" class="link-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
                     </li>
-                    {% endif %}
-                    {% if post.is_del is defined and post.is_del == true %}
-                    <li class="divider"></li>
+                    <!-- /ko -->
+                    <!-- ko if: $data.isDelete -->
                     <li class="post-delete-btn">
-                        <a href="#"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
+                        <a data-bind="click: $parent.deletePost" title="Delete"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
                     </li>
-                    {% endif %}
+                    <!-- /ko -->
                 </ul>
             </div>
-        </div>#}
+        </div>
+        <!-- /ko -->
 		<div class="post_header">
 			<div class="avatar_thumb">
 				<a data-bind="link: { title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }">
@@ -33,7 +35,7 @@
 			<div class="post_meta_info">
 				<div class="post_user">
 					<a class="news-owner" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
-					<!-- ko if: !$data.isOwner -->
+					<!-- ko if: $data.isOwner -->
 						<span><i class="icon-caret-right"></i></span>
 						<a data-bind="attr: { href: $data.owner.href, title : $data.owner.username }, text: $data.owner.username"></a>
 					<!-- /ko -->
@@ -47,9 +49,7 @@
 						</a>
 						<!-- /ko -->
 						<!-- ko if: $data.isLiked() -->
-						<a style="cursor: pointer;" data-bind="click: $data.likePost" title="{% trans %}Unlike{% endtrans %}">
-							<i class="icon-thumbs-down"></i>	
-						</a>
+						<span>{% trans %}Liked{% endtrans %}</span>
 						<!-- /ko -->
 						<a data-bind="click: showLikers" title="{% trans %}See users liked{% endtrans %}">
 							<d class="counter" data-bind="text: $data.likeCount"></d>
