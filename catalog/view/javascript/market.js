@@ -477,15 +477,13 @@ function NewsViewModel(options) {
 	var self = this;
 	self.id = ko.observable(options.Id);
 	self.canLoadMore = ko.observable(options.canLoadMore || false);
-	self.stockCode = ko.observable(options.stockCode || "DEMO");
 	self.currentPage = ko.observable(1);
 	self.newsList = ko.observableArray([]);
 	self.isLoadSuccess = ko.observable(false);
 	self.isLoadingMore = ko.observable(false);
 	self.hasNewPost = ko.observable(options.hasNewPost || false);
 	self.validate = options.validate || null;
-	self.postType = options.postType || "user";
-	self.wallUser = options.wallUser || "";
+	self.urls = options.urls || [];
 	var mainContent = $("#y-main-content");
 	var root = $("#y-content");	
 
@@ -597,10 +595,7 @@ function NewsViewModel(options) {
 			return;
 		}
 		var ajaxOptions = {
-			url: window.yRouting.generate('ApiPostPost', {
-				post_type: self.postType,
-				slug: self.wallUser
-			}),
+			url: window.yRouting.generate(self.urls.postNews.name, self.urls.postNews.params),
 			data: post
 		};
 		var successCallback = function(data){
@@ -639,11 +634,11 @@ function NewsViewModel(options) {
 	}
 
 	function _loadNews(callback){
+		var loadOptions = self.urls.loadNews.params;
+		loadOptions.page = self.currentPage();
+		console.log(loadOptions);
 		var ajaxOptions = {
-			url: window.yRouting.generate('ApiGetLastStockNews', {
-				stock_code : self.stockCode(),
-				page: self.currentPage()
-			}),
+			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
 			data : {
 				limit : 5
 			}
@@ -691,7 +686,7 @@ function NewsViewModel(options) {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
 			post.content = containerElement.find(".post_input").mentionsInput("getHtmlContent");
-			
+
 			var tagInfo = _getTagInfo(containerElement.find(".post_input"));
 			post.userTags = tagInfo.userTags;
 			post.stockTags = tagInfo.stockTags;

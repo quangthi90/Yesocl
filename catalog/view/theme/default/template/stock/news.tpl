@@ -25,15 +25,14 @@
 			var newsOptions = {
 				Id : "stock-news",
 				canLoadMore: true,
-				stockCode : "BCE",
-				validate: function(postData){
+				hasNewPost: false,
+				validate: function(postData) {
 					//Validate here, return a collection of error if any
-
 					return [];
 				},
-				hasNewPost: true,
-				postType: "user",
-				wallUser: "user2"
+                urls : {
+                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                }
 			};
 			var commentBoxOptions = {
 				Id : "comment-box"
