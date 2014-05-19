@@ -2139,9 +2139,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "bao-cao-ngan-ve-tong-cong-ty-co-phan-dau-tu-phat-trien-xay-dung-dig-5216d154471dee800a000000",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d154471dee800a000001\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Tổng Công ty Cổ phần Đầu tư Phát triển Xây dựng (DIG)",
-  "updated": ISODate("2014-01-23T06:28:24.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2403,7 +2406,7 @@ db.getCollection("branch_post").insert({
     }
   ],
   "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Gần đây đã có bài báo viết về việc SJS (đánh giá Kém khả quan) phải đối mặt với nguy cơ hủy niêm yết trong năm sau nếu công ty tiếp tục lỗ trong năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Hiện tại, chúng tôi cho rằng khả năng hủy niêm yết là khá thấp.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi cho rằng trong năm 2013, SJS sẽ lãi nhẹ nhờ ghi nhận lợi nhuận từ đất tại dự án Nam An Khánh đã bán trong năm 2011.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Và để có thể ghi nhận lợi nhuận, SJS chỉ cần hoàn thành phần nền móng của phần diện tích đã bán.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Tuy nhiên, công ty vẫn nợ nhiều với khoảng 1 nghìn tỷ đồng nợ gốc và lãi đến hạn thanh toán trong năm 2013.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi cho rằng SJS sẽ xin giãn nợ để không phải gán nợ khoảng 10ha đất.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Dựa trên dự báo của chúng tôi, giá cổ phiếu SJS thấp hơn 30% so với NAV; P\/E dự phóng là 42,4 lần và P\/B 1,3 lần.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Chúng tôi tiếp tục duy trì đánh giá Kém khả quan.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về CTCP Đầu tư Phát triển Đô thị và KCN Sông Đà_Mã chứng khoán: SJS – HSX (cập nhật ngày 11\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=173987&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;173987&lt;\/a&gt;&lt;\/p&gt;\r\n",
-  "countViewer": NumberInt(11),
+  "countViewer": NumberInt(13),
   "created": ISODate("2013-08-23T03:09:53.0Z"),
   "deleted": false,
   "description": "Gần đây đã có bài báo viết về việc SJS (đánh giá Kém khả quan) phải đối mặt với nguy cơ hủy niêm yết trong năm sau nếu công [...]",
@@ -2415,9 +2418,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "bao-cao-ngan-ve-cong-ty-cong-ty-co-phan-dau-tu-phat-trien-do-thi-va-khu-cong-nghiep-song-da-sjs-5216d281471dee840a000004",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d281471dee840a000005\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Đầu tư Phát triển Đô thị và Khu Công nghiệp Sông Đà (SJS)",
-  "updated": ISODate("2014-05-01T15:41:46.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2524,9 +2530,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "wb-phe-duyet-250-trieu-usd-tin-dung-cho-viet-nam-5216d0e6471dee700b000000",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d0e6471dee700b000001\/avatar.jpeg",
   "title": "WB phê duyệt 250 triệu USD tín dụng cho Việt Nam",
-  "updated": ISODate("2014-04-16T18:05:31.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -2736,9 +2745,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "ctcp-sua-viet-nam-vnm-hsx-uoc-kqkd-6-thang-va-trien-vong-kqkd-2013-va-2014-tiep-tuc-duy-tri-danh-gia-kha-quan-521887e7471dee9c0b000002",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d059471dee740b000001\/avatar.jpg",
   "title": "CTCP sữa Việt Nam (VNM – HSX): Ước KQKD 6 tháng và triển vọng KQKD 2013 và 2014. Tiếp tục duy trì đánh giá Khả quan",
-  "updated": ISODate("2014-04-28T15:37:49.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -3065,275 +3077,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "bao-cao-ngan-ve-cong-ty-cong-ty-co-phan-co-dien-lanh-ree-5216d1f7471dee840a000002",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d1f7471dee840a000003\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty Công ty Cổ phần Cơ điện lạnh (REE)",
-  "updated": ISODate("2014-02-10T18:19:21.0Z"),
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5555471deea409000000"),
-    "$db": "yesocl"
-  }
-});
-db.getCollection("branch_post").insert({
-  "_id": ObjectId("521792d9471deeb408000003"),
-  "author": "Quang Thi",
-  "branch": {
-    "$ref": "branch",
-    "$id": ObjectId("51d39ba5d87459c40a000017"),
-    "$db": "yesocl"
-  },
-  "category": {
-    "$ref": "branch_category",
-    "$id": ObjectId("51d3ceced874596804000000"),
-    "$db": "yesocl"
-  },
-  "comments": [
-    {
-      "_id": ObjectId("521e0893471dee8c09000000"),
-      "author": "user1",
-      "content": "1111111111111111",
-      "created": ISODate("2013-08-28T14:26:27.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-02T10:20:38.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0d36471dee5c09000000"),
-      "author": "user1",
-      "content": "2222222222222",
-      "created": ISODate("2013-08-28T14:46:14.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-11-16T09:32:18.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0db9471dee5c09000001"),
-      "author": "user1",
-      "content": "3333333333",
-      "created": ISODate("2013-08-28T14:48:25.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T06:27:09.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0f9f471dee5c09000002"),
-      "author": "user1",
-      "content": "444444444444",
-      "created": ISODate("2013-08-28T14:56:31.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T06:26:57.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e0fd1471dee5c09000003"),
-      "author": "user1",
-      "content": "55555555555555",
-      "created": ISODate("2013-08-28T14:57:21.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-11-16T09:31:28.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("521e1012471dee5c09000004"),
-      "author": "user1",
-      "content": "6666666666666",
-      "created": ISODate("2013-08-28T14:58:26.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "status": true,
-      "updated": ISODate("2013-09-01T06:26:49.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5222d7f7471dee0c0a000000"),
-      "content": "777777777777",
-      "status": true,
-      "created": ISODate("2013-09-01T06:00:23.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "author": "user1",
-      "email": "quangthi_90@yahoo.com.vn",
-      "deleted": false
-    },
-    {
-      "_id": ObjectId("527b6d8d471dee780b000000"),
-      "author": "Quang Thi",
-      "content": "fdsafajdslkf jadslfjl ajdsfkljsdakljfklas jklfjsdaktjfklsadjmc[f jtskdajfkldaj,fsdklaj fldaf sdafdsa",
-      "created": ISODate("2013-11-07T10:38:05.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-07T10:38:06.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("527b6dc5471dee780b000001"),
-      "author": "Quang Thi",
-      "content": "\n\nReview quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch  thấp. Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.\n\nQuan điểm kĩ thuật ngắn hạn:\n\nChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều,  cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.\n\nQuan điểm kĩ thuật trung hạn:\n\nĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.\n\nChiến lược giao dịch ngắn hạn:\n\n    Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.\n    Thanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.\n\n",
-      "created": ISODate("2013-11-07T10:39:01.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-07T10:39:01.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5294305b471dee6809000000"),
-      "author": "Quang Thi",
-      "content": "10000000",
-      "created": ISODate("2013-11-26T05:23:39.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        
-      ],
-      "status": true,
-      "updated": ISODate("2013-11-26T05:23:53.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52943248471dee6809000001"),
-      "author": "Quang Thi",
-      "content": "11000000000",
-      "created": ISODate("2013-11-26T05:31:52.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-26T05:31:52.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52943343471dee6409000000"),
-      "author": "Quang Thi",
-      "content": "1200000000000000",
-      "created": ISODate("2013-11-26T05:36:03.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-26T05:36:03.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("529433aa471dee5809000000"),
-      "author": "Quang Thi",
-      "content": "130000000000000",
-      "created": ISODate("2013-11-26T05:37:46.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2013-11-26T05:37:46.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5322906aa7c0e9e809000003"),
-      "author": "Quang Thi",
-      "content": "yeahhhh :D\n",
-      "created": ISODate("2014-03-14T05:15:22.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "status": true,
-      "updated": ISODate("2014-03-14T05:15:22.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      }
-    }
-  ],
-  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước :&lt;\/strong&gt; …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều, &amp;nbsp;cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tThanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
-  "countViewer": NumberInt(2),
-  "created": ISODate("2013-08-23T16:50:33.0Z"),
-  "deleted": false,
-  "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
-  "email": "quangthi_90@yahoo.com.vn",
-  "likerIds": [
-    "518f5555471deea409000000",
-    "518f5f43471deeb40900001f"
-  ],
-  "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
-  "status": true,
-  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
-  "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
-  "updated": ISODate("2014-05-09T18:06:19.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -3576,7 +3325,7 @@ db.getCollection("branch_post").insert({
     }
   ],
   "content": "&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; PVFC đã trình bản đề xuất kiến nghị hỗ trợ từ phía PVN và NHNN trước, trong và sau quá trình hợp nhất với Western Bank.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; PVF đề xuất xin hỗ trợ dưới hình thức cấp vốn vay trung và dài hạn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Thông qua bản đề xuất với kỳ vọng nhận được cam kết hỗ trợ tài chính chắc chắn trước khi quá trình hợp nhất diễn ra sẽ làm tăng cơ hội thành công cuối cùng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Ít có khả năng toàn bộ nội dung kiến nghị và đề xuất sẽ được chấp nhận. Tuy nhiên, bản đề xuất sẽ khiến các cơ quan chức năng phải ngồi lại và suy ngẫm về những gì nên làm và theo đó có thể sẽ có thêm những hướng dẫn và thủ tục giúp hỗ trợ cho quá trình tái cơ cấu trong ngành ngân hàng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t·&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; Theo đó, cho dù kết quả cuối cùng có thế nào đi chăng nữa thì PVF và Western Bank sẽ đóng góp đáng kể vào quá trình tái cơ cấu trong ngành ngân hàng.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&amp;nbsp;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tQuý khách hàng có thể truy cập “Báo cáo ngắn” về Tổng Công ty Tài chính cổ phần Dầu khí Việt Nam_Mã chứng khoán: PVF – HSX (cập nhật ngày 13\/3\/2013) bằng cách truy cập đường dẫn sau đây &lt;a href=&quot;https:\/\/www.hsc.com.vn\/hscportal\/downloadFile?fileid=174688&quot; target=&quot;_blank&quot;&gt;https:\/\/www.hsc.com.vn\/&lt;wbr \/&gt;hscportal\/downloadFile?fileid=&lt;wbr \/&gt;174688&lt;\/a&gt;&lt;\/p&gt;\r\n",
-  "countViewer": NumberInt(1),
+  "countViewer": NumberInt(2),
   "created": ISODate("2013-08-23T03:08:43.0Z"),
   "deleted": false,
   "description": "PVFC đã trình bản đề xuất kiến nghị hỗ trợ từ phía PVN và NHNN trước, trong và sau quá trình hợp nhất với Western Bank.",
@@ -3588,9 +3337,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "bao-cao-ngan-ve-tong-cong-ty-tai-chinh-co-phan-dau-khi-viet-nam-pvf-5216d23b471dee600b000000",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d23b471dee600b000001\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Tổng Công ty Tài Chính Cổ phần Dầu khí Việt Nam (PVF)",
-  "updated": ISODate("2014-05-01T09:33:54.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -3701,9 +3453,12 @@ db.getCollection("branch_post").insert({
   "email": "quangthi_90@yahoo.com.vn",
   "slug": "lang-kinh-yestoc-tuan-1908-2308-tang-ti-trong-co-phieu-khi-vnindex-pha-vo-vung-can-507-510-52179237471deeb408000000",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179237471deeb408000001\/avatar.jpg",
   "title": "Lăng kính Yestoc tuần 19\/08-23\/08: ” tăng tỉ trọng cổ phiếu khi Vnindex phá vỡ vùng cản 507-510″",
-  "updated": ISODate("2014-03-07T05:03:43.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -3928,9 +3683,12 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "bao-cao-ngan-ve-cong-ty-co-phan-tap-doan-container-viet-nam-vsc-5216d192471dee840a000000",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5216d192471dee840a000001\/avatar.jpg",
   "title": "“Báo cáo ngắn” về Công ty cổ phần Tập đoàn Container Việt Nam (VSC)",
-  "updated": ISODate("2013-12-20T05:49:43.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -4427,9 +4185,304 @@ db.getCollection("branch_post").insert({
   ],
   "slug": "lang-kinh-yestoc-phien-1608-can-trong-vung-khang-cu-manh-5217929f471dee3c08000000",
   "status": true,
+  "stockCodes": [
+    
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/5217929f471dee3c08000001\/avatar.png",
   "title": "Lăng kính Yestoc phiên 16\/08: “cẩn trọng vùng kháng cự mạnh”",
-  "updated": ISODate("2014-05-04T15:11:28.0Z"),
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5555471deea409000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("branch_post").insert({
+  "_id": ObjectId("521792d9471deeb408000003"),
+  "author": "Quang Thi",
+  "branch": {
+    "$ref": "branch",
+    "$id": ObjectId("51d39ba5d87459c40a000017"),
+    "$db": "yesocl"
+  },
+  "category": {
+    "$ref": "branch_category",
+    "$id": ObjectId("51d3ceced874596804000000"),
+    "$db": "yesocl"
+  },
+  "comments": [
+    {
+      "_id": ObjectId("536dcf1da7c0e9f809000000"),
+      "author": "Thanh Hương",
+      "content": "ssssssssssss",
+      "created": ISODate("2014-05-10T07:02:52.0Z"),
+      "deleted": false,
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "likerIds": [
+        "533087c3a7c0e9741e000000"
+      ],
+      "status": true,
+      "updated": ISODate("2014-05-13T06:53:31.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("521e0893471dee8c09000000"),
+      "content": "1111111111111111",
+      "status": true,
+      "created": ISODate("2013-08-28T14:26:27.0Z"),
+      "updated": ISODate("2013-09-02T10:20:38.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ]
+    },
+    {
+      "_id": ObjectId("521e0d36471dee5c09000000"),
+      "content": "2222222222222",
+      "status": true,
+      "created": ISODate("2013-08-28T14:46:14.0Z"),
+      "updated": ISODate("2013-11-16T09:32:18.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ]
+    },
+    {
+      "_id": ObjectId("521e0db9471dee5c09000001"),
+      "content": "3333333333",
+      "status": true,
+      "created": ISODate("2013-08-28T14:48:25.0Z"),
+      "updated": ISODate("2013-09-01T06:27:09.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ]
+    },
+    {
+      "_id": ObjectId("521e0f9f471dee5c09000002"),
+      "content": "444444444444",
+      "status": true,
+      "created": ISODate("2013-08-28T14:56:31.0Z"),
+      "updated": ISODate("2013-09-01T06:26:57.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ]
+    },
+    {
+      "_id": ObjectId("521e0fd1471dee5c09000003"),
+      "content": "55555555555555",
+      "status": true,
+      "created": ISODate("2013-08-28T14:57:21.0Z"),
+      "updated": ISODate("2013-11-16T09:31:28.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ]
+    },
+    {
+      "_id": ObjectId("521e1012471dee5c09000004"),
+      "content": "6666666666666",
+      "status": true,
+      "created": ISODate("2013-08-28T14:58:26.0Z"),
+      "updated": ISODate("2013-09-01T06:26:49.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "user1",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ]
+    },
+    {
+      "_id": ObjectId("5222d7f7471dee0c0a000000"),
+      "author": "user1",
+      "content": "777777777777",
+      "created": ISODate("2013-09-01T06:00:23.0Z"),
+      "deleted": false,
+      "email": "quangthi_90@yahoo.com.vn",
+      "likerIds": [
+        "533087c3a7c0e9741e000000"
+      ],
+      "status": true,
+      "updated": ISODate("2014-05-13T06:53:37.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("527b6d8d471dee780b000000"),
+      "content": "fdsafajdslkf jadslfjl ajdsfkljsdakljfklas jklfjsdaktjfklsadjmc[f jtskdajfkldaj,fsdklaj fldaf sdafdsa",
+      "status": true,
+      "created": ISODate("2013-11-07T10:38:05.0Z"),
+      "updated": ISODate("2013-11-07T10:38:06.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("527b6dc5471dee780b000001"),
+      "content": "\n\nReview quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch  thấp. Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.\n\nQuan điểm kĩ thuật ngắn hạn:\n\nChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều,  cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.\n\nQuan điểm kĩ thuật trung hạn:\n\nĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.\n\nChiến lược giao dịch ngắn hạn:\n\n    Nhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.\n    Thanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.\n\n",
+      "status": true,
+      "created": ISODate("2013-11-07T10:39:01.0Z"),
+      "updated": ISODate("2013-11-07T10:39:01.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5294305b471dee6809000000"),
+      "content": "10000000",
+      "status": true,
+      "created": ISODate("2013-11-26T05:23:39.0Z"),
+      "updated": ISODate("2013-11-26T05:23:53.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false,
+      "likerIds": [
+        
+      ]
+    },
+    {
+      "_id": ObjectId("52943248471dee6809000001"),
+      "content": "11000000000",
+      "status": true,
+      "created": ISODate("2013-11-26T05:31:52.0Z"),
+      "updated": ISODate("2013-11-26T05:31:52.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("52943343471dee6409000000"),
+      "content": "1200000000000000",
+      "status": true,
+      "created": ISODate("2013-11-26T05:36:03.0Z"),
+      "updated": ISODate("2013-11-26T05:36:03.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("529433aa471dee5809000000"),
+      "content": "130000000000000",
+      "status": true,
+      "created": ISODate("2013-11-26T05:37:46.0Z"),
+      "updated": ISODate("2013-11-26T05:37:46.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    },
+    {
+      "_id": ObjectId("5322906aa7c0e9e809000003"),
+      "content": "yeahhhh :D\n",
+      "status": true,
+      "created": ISODate("2014-03-14T05:15:22.0Z"),
+      "updated": ISODate("2014-03-14T05:15:22.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "deleted": false
+    }
+  ],
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điểm tuần trước :&lt;\/strong&gt; …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi cho rằng xu thế tăng điểm trong ngắn hạn sẽ được duy trì khi Vnindex bức phá vùng 495-497 và test lại thành công ngưỡng 500 điểm. Tuy nhiên, thanh khoản vẫn chưa được cải thiện đang kể cũng như hai chỉ số Vnindex và Hnxindex dịch chuyển nghịch chiều, &amp;nbsp;cho thấy thị trường đủ động lục để tăng mạnh. Theo quan sát của chúng tôi thì mức kháng cự mạnh của Vnindex là vùng đỉnh cũ 507-510 và trên Hnxindex là vùng 62.5.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư ngắn hạn đã giải ngân khi Vnindex test lại vùng 508 như khuyến nghị trong bản tin trước có thể tiếp tục nắm giữ và hạn chế giải ngân khi Vnindex tăng lên vùng 507-510.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tThanh khoản hiện tại khá thấp do đó Danh mục chỉ nên tập trung vào các mã bluechip thu hút dòng tiền trên Vnindex.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "countViewer": NumberInt(2),
+  "created": ISODate("2013-08-23T16:50:33.0Z"),
+  "deleted": false,
+  "description": "Review quan điểm tuần trước : …trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì thị trường vẫn chỉ giao [...]",
+  "email": "quangthi_90@yahoo.com.vn",
+  "likerIds": [
+    "518f5555471deea409000000",
+    "518f5f43471deeb40900001f",
+    "533087c3a7c0e9741e000000"
+  ],
+  "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
+  "status": true,
+  "stockCodes": [
+    
+  ],
+  "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/521792d9471deeb408000003\/avatar.jpg",
+  "title": "Lăng kính Yestoc tuần 12-16\/08: ” Đà tăng ngắn hạn có thể tiếp tục”",
+  "updated": ISODate("2014-05-14T17:31:51.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -4451,11 +4504,26 @@ db.getCollection("branch_post").insert({
   },
   "comments": [
     {
-      "_id": ObjectId("536207eea7c0e9b809000000"),
-      "content": "fjlasj fklasdj klfjasdkf",
+      "_id": ObjectId("5372c8dfa7c0e9100c000000"),
+      "author": "Thanh Hương",
+      "content": "&lt;a href=&quot;http:\/\/localhost\/yesocl\/stock\/page\/HAG\/&quot; class=&quot;wall-link&quot; data-ref=&quot;HAG&quot; data-content-syntax=&quot;@[HAG](stock:HAG)&quot;&gt;HAG&lt;\/a&gt;, &lt;a href=&quot;http:\/\/localhost\/yesocl\/stock\/page\/ACB\/&quot; class=&quot;wall-link&quot; data-ref=&quot;ACB&quot; data-content-syntax=&quot;@[ACB](stock:ACB)&quot;&gt;ACB&lt;\/a&gt;, &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/quang-thi\/&quot; class=&quot;wall-link&quot; data-ref=&quot;quang-thi&quot; data-content-syntax=&quot;@[Quang Thi](contact:quang-thi)&quot;&gt;Quang Thi&lt;\/a&gt; ",
+      "created": ISODate("2014-05-14T01:37:35.0Z"),
+      "deleted": false,
+      "email": "thanhhuong_2704@yahoo.com.vn",
       "status": true,
-      "created": ISODate("2014-05-01T08:38:06.0Z"),
-      "updated": ISODate("2014-05-01T08:38:07.0Z"),
+      "updated": ISODate("2014-05-14T01:37:35.0Z"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      }
+    },
+    {
+      "_id": ObjectId("5372c869a7c0e9140c000000"),
+      "content": "&lt;a href=&quot;http:\/\/localhost\/yesocl\/stock\/page\/ABT\/&quot; class=&quot;wall-link&quot; data-ref=&quot;ABT&quot; data-content-syntax=&quot;@[ABT](stock:ABT)&quot;&gt;ABT&lt;\/a&gt;, &lt;a href=&quot;http:\/\/localhost\/yesocl\/stock\/page\/VCB\/&quot; class=&quot;wall-link&quot; data-ref=&quot;VCB&quot; data-content-syntax=&quot;@[VCB](stock:VCB)&quot;&gt;VCB&lt;\/a&gt;, &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/quang-thi\/&quot; class=&quot;wall-link&quot; data-ref=&quot;quang-thi&quot; data-content-syntax=&quot;@[Quang Thi](contact:quang-thi)&quot;&gt;Quang Thi&lt;\/a&gt; ",
+      "status": true,
+      "created": ISODate("2014-05-14T01:35:37.0Z"),
+      "updated": ISODate("2014-05-14T01:35:37.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("533087c3a7c0e9741e000000"),
@@ -4497,10 +4565,10 @@ db.getCollection("branch_post").insert({
     },
     {
       "_id": ObjectId("535cb726a7c0e9740b000000"),
-      "content": "aaaaaaaaaa",
+      "content": "         aaaaaaaaaabbbb",
       "status": true,
       "created": ISODate("2014-04-27T07:52:06.0Z"),
-      "updated": ISODate("2014-04-27T07:52:06.0Z"),
+      "updated": ISODate("2014-05-10T17:34:19.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("533087c3a7c0e9741e000000"),
@@ -4606,7 +4674,7 @@ db.getCollection("branch_post").insert({
       "content": "        555555555555555 &lt;b&gt;&lt;u&gt;Edited&lt;\/u&gt;&lt;\/b&gt;",
       "status": true,
       "created": ISODate("2013-12-03T17:33:11.0Z"),
-      "updated": ISODate("2014-02-03T08:18:00.0Z"),
+      "updated": ISODate("2014-05-13T06:54:54.0Z"),
       "user": {
         "$ref": "user",
         "$id": ObjectId("518f5555471deea409000000"),
@@ -4616,7 +4684,8 @@ db.getCollection("branch_post").insert({
       "email": "quangthi_90@yahoo.com.vn",
       "deleted": false,
       "likerIds": [
-        "518f5f43471deeb40900001f"
+        "518f5f43471deeb40900001f",
+        "533126bfa7c0e9442b000000"
       ]
     },
     {
@@ -4825,20 +4894,25 @@ db.getCollection("branch_post").insert({
       "deleted": false
     }
   ],
-  "content": "\n\t\t\t\t\n\t\t\t\t&lt;p&gt;\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\n&lt;p&gt;\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\n&lt;p&gt;\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\n&lt;p&gt;\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\n&lt;p&gt;\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\n&lt;p&gt;\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\n&lt;ul&gt;\n\t&lt;li&gt;\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\n\t&lt;li&gt;\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\n\t&lt;li&gt;\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\n&lt;\/ul&gt;\n\n\t\t\t\n\t\t\t",
-  "countViewer": NumberInt(51),
+  "content": "&lt;p&gt;\r\n\t&lt;strong&gt;Review quan điềm tuần trước&lt;\/strong&gt;:&amp;nbsp;&amp;nbsp;Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp&amp;nbsp;tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng cự của nhịp hồi ngắn này là 495 – 497 trên chỉ số VNIndex và 61.5 trên chỉ số HNXIndex. Do đó, nhà đầu tư có thể tận dụng nhịp hồi sắp tới của thị trường để hạ tỉ trọng cổ phiếu xuống mức thấp và chờ tín hiệu xác nhận điểm giải ngân của chúng tôi.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tChúng tôi vẫn bảo lưu quan điểm trong nhận định trước đó và cho rằng sự tăng điểm trong tuần vừa qua chỉ là phản ứng mang tính kĩ thuật của thị trường trong ngắn hạn. Khả năng các phiên đầu tuần thị trường sẽ gặp&amp;nbsp;áp lực bán mạnh do tâm lý nhà đầu tư vẫn ở mức thận trọng cũng như dòng tiền lớn đứng ngoài. Tuy nhiên,&amp;nbsp;trạng thái mua bán chỉ xuất hiện khi có sự bứt phá hoặc giảm điểm rõ rệt, nếu không thì&amp;nbsp;thị trường vẫn chỉ giao dịch trong trạng thái tích lũy biên độ hẹp và khối lượng giao dịch&amp;nbsp; thấp.&amp;nbsp;Vị thế mua chỉ bắt đầu khi VNIndex phá vỡ ngưỡng cản 495 – 497 , và khối lượng giao dịch cải thiện trên 40 triệu\/phiên, ngược lại, nếu phá ngưỡng 488-490, Vnindex sẽ tiếp tục giảm về vùng 470.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Quan điểm kĩ thuật trung hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;p&gt;\r\n\tĐồ thị tuần, Vnindex vẫn đang trong trạng thái trung tín, và đang có xu hướng giảm về vùng hỗ trợ trung hạn 466-470. Chúng tôi tiếp tục giữ quan điểm thận trong như trong các khuyến nghĩ trước, nếu ngưỡng hỗ trợ này bị phá vỡ thì xác suất hình thành mẫu hình vai đầu vai ở đỉnh sẽ khá cao. Do đó, nhà đầu tư trung hạn nên dừng trạng thái mua trong giai đoạn này và chờ đợi xu hướng rõ ràng hơn.&lt;\/p&gt;\r\n&lt;p&gt;\r\n\t&lt;strong&gt;Chiến lược giao dịch ngắn hạn:&lt;\/strong&gt;&lt;\/p&gt;\r\n&lt;ul&gt;\r\n\t&lt;li&gt;\r\n\t\tNhà đầu tư nên tạm dừng việc giải ngân và chờ đợi thị trường cân bằng hơn cùng sự cải thiện của thanh khoản.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tNếu thị trường tiếp tục phá vỡ ngưỡng hỗ trợ 488-490,việc xem xét giảm tỷ lệ cổ phiếu là cần thiết.&lt;\/li&gt;\r\n\t&lt;li&gt;\r\n\t\tĐối với nhà đầu tư chấp nhận rủi ro cao, có thể giải ngân khi thị trường xuất hiện nhịp điều chỉnh đầu tuần.&lt;\/li&gt;\r\n&lt;\/ul&gt;\r\n",
+  "countViewer": NumberInt(62),
   "created": ISODate("2013-08-23T16:51:28.0Z"),
   "deleted": false,
   "description": "Review quan điềm tuần trước:  Chúng tôi cho rằng nhịp tăng nhẹ có thể sẽ tiếp tục trong phiên đầu tuần với khối lượng duy trì ở mức trung bình. Vùng kháng [...]",
-  "email": "quangthi_90@yahoo.com.vn",
+  "email": "lqthi.khtn@gmail.com",
   "likerIds": [
-    null
+    null,
+    "533126bfa7c0e9442b000000"
   ],
   "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
   "status": true,
+  "stockCodes": [
+    "VCB",
+    "HAG"
+  ],
   "thumb": "data\/catalog\/branch\/51d39ba5d87459c40a000017\/post\/52179310471deec003000001\/avatar.jpg",
   "title": "Lăng kính Yestoc tuần 05-09\/08: “chờ đợi xu hướng rõ ràng”",
-  "updated": ISODate("2014-05-09T18:06:29.0Z"),
+  "updated": ISODate("2014-05-14T17:34:17.0Z"),
   "user": {
     "$ref": "user",
     "$id": ObjectId("518f5555471deea409000000"),
@@ -7313,7 +7387,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("521e0893471dee8c09000001"),
-  "created": ISODate("2014-03-14T05:15:22.0Z"),
+  "created": ISODate("2014-05-10T07:02:52.0Z"),
   "view": NumberInt(0),
   "postId": "521792d9471deeb408000003",
   "type": "Branch",
@@ -7337,7 +7411,7 @@ db.getCollection("cache_post").insert({
 });
 db.getCollection("cache_post").insert({
   "_id": ObjectId("52486249471dee740b000001"),
-  "created": ISODate("2014-05-08T11:19:58.0Z"),
+  "created": ISODate("2014-05-14T01:37:35.0Z"),
   "view": NumberInt(0),
   "postId": "52179310471deec003000001",
   "type": "Branch",
@@ -8286,6 +8360,182 @@ db.getCollection("cache_post").insert({
   "postId": "53635984a7c0e9e40a000009",
   "type": "User",
   "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("536e634ca7c0e96020000002"),
+  "created": ISODate("2014-05-10T17:35:08.0Z"),
+  "view": NumberInt(0),
+  "postId": "536e634ca7c0e96020000001",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("536e635ea7c0e90c18000002"),
+  "created": ISODate("2014-05-10T17:35:25.0Z"),
+  "view": NumberInt(0),
+  "postId": "536e635da7c0e90c18000001",
+  "type": "Branch",
+  "typeId": "51d39ba5d87459c40a000017"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("536ef41ea7c0e9300d000002"),
+  "created": ISODate("2014-05-11T03:53:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "536ef41da7c0e9300d000001",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5371bce3a7c0e96c1b000002"),
+  "created": ISODate("2014-05-13T06:34:10.0Z"),
+  "view": NumberInt(0),
+  "postId": "5371bce2a7c0e96c1b000001",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5371bceca7c0e96c1b000005"),
+  "created": ISODate("2014-05-13T06:34:20.0Z"),
+  "view": NumberInt(0),
+  "postId": "5371bceca7c0e96c1b000004",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5372c7a5a7c0e9180c000002"),
+  "created": ISODate("2014-05-14T01:32:21.0Z"),
+  "view": NumberInt(0),
+  "postId": "5372c7a5a7c0e9180c000001",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5372c7cba7c0e9180c000005"),
+  "created": ISODate("2014-05-14T01:32:59.0Z"),
+  "view": NumberInt(0),
+  "postId": "5372c7cba7c0e9180c000004",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5372c8f9a7c0e9100c000004"),
+  "created": ISODate("2014-05-14T01:38:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "5372c8f9a7c0e9100c000003",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5372cb58a7c0e9cc04000002"),
+  "created": ISODate("2014-05-14T01:48:08.0Z"),
+  "view": NumberInt(0),
+  "postId": "5372cb58a7c0e9cc04000001",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5372cc43a7c0e9cc04000005"),
+  "created": ISODate("2014-05-14T01:52:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "5372cc43a7c0e9cc04000004",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("5373054da7c0e9cc04000008"),
+  "created": ISODate("2014-05-14T05:55:20.0Z"),
+  "view": NumberInt(0),
+  "postId": "53730549a7c0e9cc04000007",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("53730554a7c0e9cc0400000b"),
+  "created": ISODate("2014-05-14T05:55:32.0Z"),
+  "view": NumberInt(0),
+  "postId": "53730554a7c0e9cc0400000a",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537305a4a7c0e93809000002"),
+  "created": ISODate("2014-05-14T05:56:52.0Z"),
+  "view": NumberInt(0),
+  "postId": "537305a4a7c0e93809000001",
+  "type": "User",
+  "typeId": "533087c3a7c0e9741e000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3e94a7c0e9ac0a000002"),
+  "created": ISODate("2014-05-19T17:25:39.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3e93a7c0e9ac0a000001",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3f58a7c0e9ac0a000005"),
+  "created": ISODate("2014-05-19T17:28:56.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3f58a7c0e9ac0a000004",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3f5da7c0e9ac0a000008"),
+  "created": ISODate("2014-05-19T17:29:01.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3f5da7c0e9ac0a000007",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3f5fa7c0e9ac0a00000b"),
+  "created": ISODate("2014-05-19T17:29:03.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3f5fa7c0e9ac0a00000a",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3f61a7c0e9ac0a00000e"),
+  "created": ISODate("2014-05-19T17:29:05.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3f61a7c0e9ac0a00000d",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3f63a7c0e9ac0a000011"),
+  "created": ISODate("2014-05-19T17:29:06.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3f62a7c0e9ac0a000010",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3fa1a7c0e9ac0a000014"),
+  "created": ISODate("2014-05-19T17:30:09.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3fa1a7c0e9ac0a000013",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3fa3a7c0e9ac0a000017"),
+  "created": ISODate("2014-05-19T17:30:11.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3fa3a7c0e9ac0a000016",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
+});
+db.getCollection("cache_post").insert({
+  "_id": ObjectId("537a3fa4a7c0e9ac0a00001a"),
+  "created": ISODate("2014-05-19T17:30:12.0Z"),
+  "view": NumberInt(0),
+  "postId": "537a3fa4a7c0e9ac0a000019",
+  "type": "User",
+  "typeId": "533126bfa7c0e9442b000000"
 });
 
 /** city records **/
@@ -27620,7 +27870,7 @@ db.getCollection("stock").insert({
     "$id": ObjectId("5321464ea7c0e93c0a000001"),
     "$db": "yesocl"
   },
-  "name": "Công ty cổ phần Nhựa và Môi trường xanh An Phát",
+  "name": "CôNG TY Cổ PHầN NHựA Và MôI TRườNG XANH AN PHáT",
   "preLastExchange": {
     "_id": ObjectId("5357b5cfa7c0e9800b000005"),
     "openPrice": 19.5,
@@ -59544,6 +59794,11 @@ db.getCollection("stock_meta").insert({
       "rating": "5",
       "buying": "buying",
       "percent": "78.33"
+    },
+    " dd sd ad ad a": {
+      "rating": "3",
+      "buying": "selling",
+      "percent": "55.66"
     }
   },
   "liability": NumberInt(598551),
@@ -64597,6 +64852,36 @@ db.getCollection("street").insert({
 
 /** user records **/
 db.getCollection("user").insert({
+  "_id": ObjectId("533126ada7c0e94828000012"),
+  "avatar": "data\/catalog\/user\/533126ada7c0e94828000012\/avatar.jpg",
+  "created": ISODate("2014-03-25T06:48:13.0Z"),
+  "deleted": true,
+  "emails": [
+    {
+      "_id": ObjectId("533126ada7c0e94828000014"),
+      "email": "@facebook.com",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": true,
+  "meta": {
+    "_id": ObjectId("533126ada7c0e94828000013"),
+    "birthday": ISODate("2014-03-24T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "current": "Job Seeker"
+  },
+  "salt": "a7c711b32",
+  "slug": "",
+  "status": true,
+  "token": "ee4196cb9335d9ba4628605548aee8ea",
+  "tokenTime": ISODate("2014-04-01T06:48:13.0Z")
+});
+db.getCollection("user").insert({
   "_id": ObjectId("52885f1a471deef408000000"),
   "created": ISODate("2013-11-17T06:15:54.0Z"),
   "deleted": false,
@@ -64628,52 +64913,6 @@ db.getCollection("user").insert({
   ],
   "salt": "cfb5654d7",
   "slug": "user-temp-5",
-  "status": true
-});
-db.getCollection("user").insert({
-  "_id": ObjectId("52601121471dee680b000000"),
-  "avatar": "data\/catalog\/user\/52601121471dee680b000000\/avatar.jpg",
-  "created": ISODate("2013-10-17T16:32:33.0Z"),
-  "deleted": false,
-  "emails": [
-    {
-      "_id": ObjectId("52601121471dee680b000002"),
-      "email": "user7@test.com",
-      "primary": true
-    }
-  ],
-  "friendRequests": [
-    
-  ],
-  "friends": [
-    {
-      "_id": ObjectId("52c759e3471deea00b000000"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "created": ISODate("2014-01-04T00:46:27.0Z")
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "meta": {
-    "_id": ObjectId("52601121471dee680b000001"),
-    "firstname": "Bommer",
-    "lastname": "Luu",
-    "birthday": ISODate("2010-06-02T22:00:00.0Z"),
-    "sex": NumberInt(1)
-  },
-  "password": "248f2093c0f2f6049950cbf42a51927cb028408a",
-  "refreshIds": [
-    
-  ],
-  "salt": "fc48b431c",
-  "slug": "user-temp-3",
   "status": true
 });
 db.getCollection("user").insert({
@@ -64733,13 +64972,13 @@ db.getCollection("user").insert({
   "unRead": NumberInt(1)
 });
 db.getCollection("user").insert({
-  "_id": ObjectId("533126ada7c0e94828000012"),
-  "avatar": "data\/catalog\/user\/533126ada7c0e94828000012\/avatar.jpg",
-  "created": ISODate("2014-03-25T06:48:13.0Z"),
+  "_id": ObjectId("535b806ea7c0e9080b000000"),
+  "avatar": "data\/catalog\/user\/535b806ea7c0e9080b000000\/avatar.jpg",
+  "created": ISODate("2014-04-26T09:46:22.0Z"),
   "deleted": true,
   "emails": [
     {
-      "_id": ObjectId("533126ada7c0e94828000014"),
+      "_id": ObjectId("535b806ea7c0e9080b000002"),
       "email": "@facebook.com",
       "primary": true
     }
@@ -64751,16 +64990,83 @@ db.getCollection("user").insert({
   },
   "isSocial": true,
   "meta": {
-    "_id": ObjectId("533126ada7c0e94828000013"),
-    "birthday": ISODate("2014-03-24T17:00:00.0Z"),
+    "_id": ObjectId("535b806ea7c0e9080b000001"),
+    "birthday": ISODate("2014-04-25T17:00:00.0Z"),
     "sex": NumberInt(1),
     "current": "Job Seeker"
   },
-  "salt": "a7c711b32",
-  "slug": "",
+  "salt": "fae0b759a",
+  "slug": "-1",
   "status": true,
-  "token": "ee4196cb9335d9ba4628605548aee8ea",
-  "tokenTime": ISODate("2014-04-01T06:48:13.0Z")
+  "token": "b7c6ab96fcd79fd292bb959701bd7422",
+  "tokenTime": ISODate("2014-05-03T09:46:23.0Z")
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("53609f94a7c0e95c0b000000"),
+  "avatar": "data\/catalog\/user\/53609f94a7c0e95c0b000000\/avatar.jpg",
+  "created": ISODate("2014-04-30T07:00:35.0Z"),
+  "deleted": false,
+  "emails": [
+    {
+      "_id": ObjectId("53609f94a7c0e95c0b000002"),
+      "email": "user1@the-c.vn",
+      "primary": true
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": true,
+  "meta": {
+    "_id": ObjectId("53609f94a7c0e95c0b000001"),
+    "firstname": "Hoang",
+    "lastname": "Hau",
+    "birthday": ISODate("1992-03-13T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "current": "Job Seeker"
+  },
+  "salt": "78a937b23",
+  "slug": "hoang-hau",
+  "status": true,
+  "token": "d40294af180af69a471b127ef1dc22ca",
+  "tokenTime": ISODate("2014-05-07T07:00:36.0Z")
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("533eebd4a7c0e9700a000000"),
+  "avatar": "data\/catalog\/user\/533eebd4a7c0e9700a000000\/avatar.jpg",
+  "created": ISODate("2014-04-04T17:28:52.0Z"),
+  "deleted": false,
+  "emails": [
+    {
+      "_id": ObjectId("533eebd4a7c0e9700a000002"),
+      "email": "hoang.tuan.7503314@facebook.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": true,
+  "meta": {
+    "_id": ObjectId("533eebd4a7c0e9700a000001"),
+    "firstname": "Hoang",
+    "lastname": "Tuan",
+    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
+    "sex": NumberInt(1),
+    "current": "Job Seeker"
+  },
+  "salt": "1ccebd26d",
+  "slug": "hoang-tuan",
+  "status": true,
+  "token": "bc45e9b2a3f800f4835527a0a1efdf47",
+  "tokenTime": ISODate("2014-04-11T17:28:52.0Z")
 });
 db.getCollection("user").insert({
   "_id": ObjectId("52d40c10471deee809000006"),
@@ -64903,6 +65209,142 @@ db.getCollection("user").insert({
   ],
   "salt": "a87e4d797",
   "slug": "user-temp-2",
+  "status": true
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("533087c3a7c0e9741e000000"),
+  "avatar": "data\/catalog\/user\/533087c3a7c0e9741e000000\/avatar.jpg",
+  "created": ISODate("2014-03-24T19:30:11.0Z"),
+  "deleted": false,
+  "emails": [
+    {
+      "_id": ObjectId("5348c56ca7c0e9580a000001"),
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "isSocial": true,
+  "meta": {
+    "_id": ObjectId("533087c3a7c0e9741e000001"),
+    "address": "129\/6\/5 Lê Văn Thọ, F11, Gò Vấp",
+    "background": {
+      "_id": ObjectId("533087c7a7c0e9741e000004"),
+      "educations": [
+        {
+          "_id": ObjectId("533087c7a7c0e9741e000005"),
+          "school": "Trường THPT Ng&ocirc; Gia Tự- eakar",
+          "started": "",
+          "ended": "2008",
+          "degree": "",
+          "fieldOfStudy": ""
+        },
+        {
+          "_id": ObjectId("533087c7a7c0e9741e000006"),
+          "school": "Trường Đại học T&agrave;i ch&iacute;nh - Marketing",
+          "started": "",
+          "ended": "",
+          "degree": "",
+          "fieldOfStudy": ""
+        },
+        {
+          "_id": ObjectId("533087c7a7c0e9741e000007"),
+          "school": "Saigonact",
+          "started": "",
+          "ended": "",
+          "degree": "",
+          "fieldOfStudy": ""
+        }
+      ],
+      "experiences": [
+        {
+          "_id": ObjectId("533087c7a7c0e9741e000008"),
+          "company": "The-c.vn",
+          "location": {
+            "_id": ObjectId("533087c7a7c0e9741e000009"),
+            "location": "Ho Chi Minh City, Vietnam"
+          },
+          "started": ISODate("2013-09-30T19:30:15.0Z"),
+          "selfEmployed": false
+        }
+      ]
+    },
+    "birthday": ISODate("1990-04-27T04:47:40.0Z"),
+    "current": "working at The-c.vn",
+    "current_id": "533087c7a7c0e9741e000008",
+    "firstname": "Thanh",
+    "industry": "Hotel and Restaurant Management",
+    "industry_id": "",
+    "lastname": "Hương",
+    "location": {
+      "_id": ObjectId("5348c56ca7c0e9580a000000"),
+      "location": "HCM, Việt Nam",
+      "cityId": "5143bfca913db4a408000012"
+    },
+    "sex": NumberInt(0)
+  },
+  "notifications": [
+    
+  ],
+  "password": "6923c61590221396a67a18c08881da9af31cf1ba",
+  "salt": "6658e1763",
+  "slug": "thanh-huong",
+  "status": true,
+  "token": "",
+  "tokenTime": null,
+  "username": "Thanh Hương"
+});
+db.getCollection("user").insert({
+  "_id": ObjectId("52601121471dee680b000000"),
+  "avatar": "data\/catalog\/user\/52601121471dee680b000000\/avatar.jpg",
+  "created": ISODate("2013-10-17T16:32:33.0Z"),
+  "deleted": false,
+  "emails": [
+    {
+      "_id": ObjectId("52601121471dee680b000002"),
+      "email": "user7@test.com",
+      "primary": true
+    }
+  ],
+  "friendRequests": [
+    
+  ],
+  "friends": [
+    {
+      "_id": ObjectId("52c759e3471deea00b000000"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-01-04T00:46:27.0Z")
+    }
+  ],
+  "groupUser": {
+    "$ref": "user_group",
+    "$id": ObjectId("516b4a91913db43009000000"),
+    "$db": "yesocl"
+  },
+  "meta": {
+    "_id": ObjectId("52601121471dee680b000001"),
+    "firstname": "Bommer",
+    "lastname": "Luu",
+    "birthday": ISODate("2010-06-02T22:00:00.0Z"),
+    "sex": NumberInt(1)
+  },
+  "password": "248f2093c0f2f6049950cbf42a51927cb028408a",
+  "refreshIds": [
+    
+  ],
+  "salt": "fc48b431c",
+  "slug": "user-temp-3",
   "status": true
 });
 db.getCollection("user").insert({
@@ -65059,192 +65501,6 @@ db.getCollection("user").insert({
   "username": "user2"
 });
 db.getCollection("user").insert({
-  "_id": ObjectId("535b806ea7c0e9080b000000"),
-  "avatar": "data\/catalog\/user\/535b806ea7c0e9080b000000\/avatar.jpg",
-  "created": ISODate("2014-04-26T09:46:22.0Z"),
-  "deleted": true,
-  "emails": [
-    {
-      "_id": ObjectId("535b806ea7c0e9080b000002"),
-      "email": "@facebook.com",
-      "primary": true
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "isSocial": true,
-  "meta": {
-    "_id": ObjectId("535b806ea7c0e9080b000001"),
-    "birthday": ISODate("2014-04-25T17:00:00.0Z"),
-    "sex": NumberInt(1),
-    "current": "Job Seeker"
-  },
-  "salt": "fae0b759a",
-  "slug": "-1",
-  "status": true,
-  "token": "b7c6ab96fcd79fd292bb959701bd7422",
-  "tokenTime": ISODate("2014-05-03T09:46:23.0Z")
-});
-db.getCollection("user").insert({
-  "_id": ObjectId("53609f94a7c0e95c0b000000"),
-  "avatar": "data\/catalog\/user\/53609f94a7c0e95c0b000000\/avatar.jpg",
-  "created": ISODate("2014-04-30T07:00:35.0Z"),
-  "deleted": false,
-  "emails": [
-    {
-      "_id": ObjectId("53609f94a7c0e95c0b000002"),
-      "email": "user1@the-c.vn",
-      "primary": true
-    }
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "isSocial": true,
-  "meta": {
-    "_id": ObjectId("53609f94a7c0e95c0b000001"),
-    "firstname": "Hoang",
-    "lastname": "Hau",
-    "birthday": ISODate("1992-03-13T17:00:00.0Z"),
-    "sex": NumberInt(1),
-    "current": "Job Seeker"
-  },
-  "salt": "78a937b23",
-  "slug": "hoang-hau",
-  "status": true,
-  "token": "d40294af180af69a471b127ef1dc22ca",
-  "tokenTime": ISODate("2014-05-07T07:00:36.0Z")
-});
-db.getCollection("user").insert({
-  "_id": ObjectId("533eebd4a7c0e9700a000000"),
-  "avatar": "data\/catalog\/user\/533eebd4a7c0e9700a000000\/avatar.jpg",
-  "created": ISODate("2014-04-04T17:28:52.0Z"),
-  "deleted": false,
-  "emails": [
-    {
-      "_id": ObjectId("533eebd4a7c0e9700a000002"),
-      "email": "hoang.tuan.7503314@facebook.com",
-      "primary": true
-    }
-  ],
-  "friendRequests": [
-    
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "isSocial": true,
-  "meta": {
-    "_id": ObjectId("533eebd4a7c0e9700a000001"),
-    "firstname": "Hoang",
-    "lastname": "Tuan",
-    "birthday": ISODate("1990-08-12T17:00:00.0Z"),
-    "sex": NumberInt(1),
-    "current": "Job Seeker"
-  },
-  "salt": "1ccebd26d",
-  "slug": "hoang-tuan",
-  "status": true,
-  "token": "bc45e9b2a3f800f4835527a0a1efdf47",
-  "tokenTime": ISODate("2014-04-11T17:28:52.0Z")
-});
-db.getCollection("user").insert({
-  "_id": ObjectId("533087c3a7c0e9741e000000"),
-  "avatar": "data\/catalog\/user\/533087c3a7c0e9741e000000\/avatar.jpg",
-  "created": ISODate("2014-03-24T19:30:11.0Z"),
-  "deleted": false,
-  "emails": [
-    {
-      "_id": ObjectId("5348c56ca7c0e9580a000001"),
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "primary": true
-    }
-  ],
-  "friendRequests": [
-    
-  ],
-  "groupUser": {
-    "$ref": "user_group",
-    "$id": ObjectId("516b4a91913db43009000000"),
-    "$db": "yesocl"
-  },
-  "isSocial": true,
-  "meta": {
-    "_id": ObjectId("533087c3a7c0e9741e000001"),
-    "address": "129\/6\/5 Lê Văn Thọ, F11, Gò Vấp",
-    "background": {
-      "_id": ObjectId("533087c7a7c0e9741e000004"),
-      "educations": [
-        {
-          "_id": ObjectId("533087c7a7c0e9741e000005"),
-          "school": "Trường THPT Ng&ocirc; Gia Tự- eakar",
-          "started": "",
-          "ended": "2008",
-          "degree": "",
-          "fieldOfStudy": ""
-        },
-        {
-          "_id": ObjectId("533087c7a7c0e9741e000006"),
-          "school": "Trường Đại học T&agrave;i ch&iacute;nh - Marketing",
-          "started": "",
-          "ended": "",
-          "degree": "",
-          "fieldOfStudy": ""
-        },
-        {
-          "_id": ObjectId("533087c7a7c0e9741e000007"),
-          "school": "Saigonact",
-          "started": "",
-          "ended": "",
-          "degree": "",
-          "fieldOfStudy": ""
-        }
-      ],
-      "experiences": [
-        {
-          "_id": ObjectId("533087c7a7c0e9741e000008"),
-          "company": "The-c.vn",
-          "location": {
-            "_id": ObjectId("533087c7a7c0e9741e000009"),
-            "location": "Ho Chi Minh City, Vietnam"
-          },
-          "started": ISODate("2013-09-30T19:30:15.0Z"),
-          "selfEmployed": false
-        }
-      ]
-    },
-    "birthday": ISODate("1990-04-27T04:47:40.0Z"),
-    "current": "working at The-c.vn",
-    "current_id": "533087c7a7c0e9741e000008",
-    "firstname": "Thanh",
-    "industry": "Hotel and Restaurant Management",
-    "industry_id": "",
-    "lastname": "Hương",
-    "location": {
-      "_id": ObjectId("5348c56ca7c0e9580a000000"),
-      "location": "HCM, Việt Nam",
-      "cityId": "5143bfca913db4a408000012"
-    },
-    "sex": NumberInt(0)
-  },
-  "notifications": [
-    
-  ],
-  "salt": "6658e1763",
-  "slug": "thanh-huong",
-  "status": true,
-  "token": "",
-  "tokenTime": ISODate("2014-03-31T19:49:05.0Z"),
-  "username": "Thanh Hương"
-});
-db.getCollection("user").insert({
   "_id": ObjectId("533126bfa7c0e9442b000000"),
   "avatar": "data\/catalog\/user\/533126bfa7c0e9442b000000\/avatar.jpg",
   "created": ISODate("2014-03-25T06:48:31.0Z"),
@@ -65312,8 +65568,40 @@ db.getCollection("user").insert({
     "sex": NumberInt(1)
   },
   "notifications": [
-    
+    {
+      "_id": ObjectId("5371bceca7c0e96c1b000006"),
+      "action": "tag",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "5371bceca7c0e96c1b000004",
+      "slug": "5371bceca7c0e96c1b000003",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T06:34:20.0Z")
+    },
+    {
+      "_id": ObjectId("5372c7cba7c0e9180c000006"),
+      "action": "tag",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "user",
+      "object": "post",
+      "objectId": "5372c7cba7c0e9180c000004",
+      "slug": "5372c7cba7c0e9180c000003",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-14T01:32:59.0Z")
+    }
   ],
+  "password": "8d91a7eee8b60e2dd98f6a47574c38eaf724964b",
   "salt": "ce4f8d0cb",
   "slug": "quang-thi",
   "status": true,
@@ -66086,6 +66374,170 @@ db.getCollection("user").insert({
       "read": false,
       "status": true,
       "created": ISODate("2014-05-04T15:10:31.0Z")
+    },
+    {
+      "_id": ObjectId("5371adbea7c0e94816000002"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "post",
+      "objectId": "5371adbda7c0e94816000001",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T05:29:34.0Z")
+    },
+    {
+      "_id": ObjectId("5371bb4ba7c0e95415000001"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "post",
+      "objectId": "5371bb4ba7c0e95415000000",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T06:27:23.0Z")
+    },
+    {
+      "_id": ObjectId("5371c171a7c0e9dc11000000"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "comment",
+      "objectId": "5222d7f7471dee0c0a000000",
+      "slug": "lang-kinh-yestoc-tuan-12-1608-da-tang-ngan-han-co-the-tiep-tuc-521792d9471deeb408000002",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T06:53:37.0Z")
+    },
+    {
+      "_id": ObjectId("5371c1a6a7c0e9dc11000001"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "post",
+      "objectId": "52179310471deec003000001",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T06:54:30.0Z")
+    },
+    {
+      "_id": ObjectId("5371c1bea7c0e95415000002"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "comment",
+      "objectId": "529e15d7471dee080b000000",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T06:54:54.0Z")
+    },
+    {
+      "_id": ObjectId("5371c1bea7c0e95415000002"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "comment",
+      "objectId": "529e15d7471dee080b000000",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-13T06:54:54.0Z")
+    },
+    {
+      "_id": ObjectId("5372c869a7c0e9140c000001"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "post",
+      "objectId": "5372c869a7c0e9140c000000",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-14T01:35:37.0Z")
+    },
+    {
+      "_id": ObjectId("5372c8dfa7c0e9100c000001"),
+      "action": "comment",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "type": "branch",
+      "object": "post",
+      "objectId": "5372c8dfa7c0e9100c000000",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-14T01:37:35.0Z")
+    },
+    {
+      "status": true
+    },
+    {
+      "_id": ObjectId("53665867a7c0e9280b000000"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "object": "post",
+      "objectId": "52179310471deec003000001",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-04T15:10:31.0Z")
+    },
+    {
+      "status": true
+    },
+    {
+      "_id": ObjectId("53665867a7c0e9280b000000"),
+      "action": "like",
+      "actor": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "object": "post",
+      "objectId": "52179310471deec003000001",
+      "slug": "lang-kinh-yestoc-tuan-05-0908-cho-doi-xu-huong-ro-rang-52179310471deec003000000",
+      "read": false,
+      "status": true,
+      "created": ISODate("2014-05-04T15:10:31.0Z")
     }
   ],
   "password": "918ee61c3343e557ef1e75672fca90da58d8ce06",
@@ -66101,25 +66553,6 @@ db.getCollection("user").insert({
 });
 
 /** user_follower records **/
-db.getCollection("user_follower").insert({
-  "_id": ObjectId("531c39eaa7c0e9ec09000005"),
-  "followeds": [
-    {
-      "_id": ObjectId("531e0868a7c0e9dc0900000f"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "created": ISODate("2014-03-10T18:46:00.0Z")
-    }
-  ],
-  "user": {
-    "$ref": "user",
-    "$id": ObjectId("518f5f43471deeb40900001f"),
-    "$db": "yesocl"
-  }
-});
 db.getCollection("user_follower").insert({
   "_id": ObjectId("531c39f1a7c0e9ec09000008"),
   "followeds": [
@@ -66241,9 +66674,48 @@ db.getCollection("user_follower").insert({
       "created": ISODate("2014-04-27T04:22:42.0Z")
     }
   ],
+  "followings": [
+    {
+      "_id": ObjectId("536e5d6ca7c0e93401000002"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-05-10T17:10:04.0Z")
+    }
+  ],
   "user": {
     "$ref": "user",
     "$id": ObjectId("533087c3a7c0e9741e000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_follower").insert({
+  "_id": ObjectId("531c39eaa7c0e9ec09000005"),
+  "followeds": [
+    {
+      "_id": ObjectId("531e0868a7c0e9dc0900000f"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-03-10T18:46:00.0Z")
+    },
+    {
+      "_id": ObjectId("536e5d6ca7c0e93401000003"),
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "created": ISODate("2014-05-10T17:10:04.0Z")
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("518f5f43471deeb40900001f"),
     "$db": "yesocl"
   }
 });
@@ -67323,59 +67795,59 @@ db.getCollection("user_post").insert({
   "posts": [
     {
       "_id": ObjectId("52b3ec44471dee5809000002"),
+      "content": "Hôm trời đẹp quá ^^",
+      "status": true,
+      "created": ISODate("2013-12-20T07:05:40.0Z"),
+      "updated": ISODate("2013-12-20T07:09:52.0Z"),
       "author": "Bommer Luu",
+      "email": "user8@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("5260e5b4471dee6c08000000"),
+        "$db": "yesocl"
+      },
       "comments": [
         {
           "_id": ObjectId("52b3ecda471dee6c09000002"),
-          "author": "Lưu Quang Thi",
           "content": "nhảm",
-          "created": ISODate("2013-12-20T07:08:10.0Z"),
-          "deleted": false,
-          "email": "user4@test.com",
-          "likerIds": [
-            "5260e5b4471dee6c08000000"
-          ],
           "status": true,
+          "created": ISODate("2013-12-20T07:08:10.0Z"),
           "updated": ISODate("2013-12-20T07:08:20.0Z"),
           "user": {
             "$ref": "user",
             "$id": ObjectId("5296a817471dee180b000000"),
             "$db": "yesocl"
-          }
+          },
+          "author": "Lưu Quang Thi",
+          "email": "user4@test.com",
+          "deleted": false,
+          "likerIds": [
+            "5260e5b4471dee6c08000000"
+          ]
         },
         {
           "_id": ObjectId("52b3ece8471dee7c09000001"),
-          "author": "Bommer Luu",
           "content": "quá nhảm",
-          "created": ISODate("2013-12-20T07:08:24.0Z"),
-          "deleted": false,
-          "email": "user8@test.com",
           "status": true,
+          "created": ISODate("2013-12-20T07:08:24.0Z"),
           "updated": ISODate("2013-12-20T07:08:24.0Z"),
           "user": {
             "$ref": "user",
             "$id": ObjectId("5260e5b4471dee6c08000000"),
             "$db": "yesocl"
-          }
+          },
+          "author": "Bommer Luu",
+          "email": "user8@test.com",
+          "deleted": false
         }
       ],
-      "content": "Hôm trời đẹp quá ^^",
-      "countViewer": NumberInt(1),
-      "created": ISODate("2013-12-20T07:05:40.0Z"),
+      "slug": "52b3ec44471dee5809000000",
       "deleted": false,
-      "email": "user8@test.com",
       "likerIds": [
         "518f5555471deea409000000",
         "5296a817471dee180b000000"
       ],
-      "slug": "52b3ec44471dee5809000000",
-      "status": true,
-      "updated": ISODate("2013-12-20T07:09:52.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("5260e5b4471dee6c08000000"),
-        "$db": "yesocl"
-      }
+      "countViewer": NumberInt(1)
     }
   ],
   "user": {
@@ -67388,12 +67860,12 @@ db.getCollection("user_post").insert({
   "_id": ObjectId("524cee4c471dee0c0b000001"),
   "posts": [
     {
-      "_id": ObjectId("532e9d2ba7c0e91c0a000001"),
-      "title": "hello bommer",
-      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;boomer&lt;\/strong&gt;&lt;\/p&gt;\r\n",
+      "_id": ObjectId("532ea1cea7c0e9500a000011"),
+      "title": "aaaaaaaaaaaaa",
+      "content": "&amp;lt;p&amp;gt;\r\n\t&amp;lt;strong&amp;gt;hello world!&amp;lt;\/strong&amp;gt;&amp;lt;\/p&amp;gt;\r\n",
       "status": true,
-      "created": ISODate("2014-03-23T08:36:59.0Z"),
-      "updated": ISODate("2014-03-23T08:36:59.0Z"),
+      "created": ISODate("2014-03-23T08:56:46.0Z"),
+      "updated": ISODate("2014-03-23T08:56:46.0Z"),
       "author": "Quang Thi",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -67401,43 +67873,7 @@ db.getCollection("user_post").insert({
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       },
-      "slug": "hello-bommer-532e9d2ba7c0e91c0a000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("532e9d8aa7c0e91c0a000004"),
-      "content": "&amp;lt;b&amp;gt;Hello&amp;lt;\/b&amp;gt;",
-      "status": true,
-      "created": ISODate("2014-03-23T08:38:34.0Z"),
-      "updated": ISODate("2014-03-23T08:38:34.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5555471deea409000000",
-      "slug": "532e9d8aa7c0e91c0a000003",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("532e9eb6a7c0e91c0a000007"),
-      "content": "&amp;amp;lt;a href=&amp;amp;quot;http:\/\/google.com.vn&amp;amp;quot;&amp;amp;gt;hello&amp;amp;lt;\/a&amp;amp;gt;",
-      "status": true,
-      "created": ISODate("2014-03-23T08:43:34.0Z"),
-      "updated": ISODate("2014-03-23T08:43:34.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5555471deea409000000",
-      "slug": "532e9eb6a7c0e91c0a000006",
+      "slug": "aaaaaaaaaaaaa-532ea1cea7c0e9500a000010",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
@@ -67460,12 +67896,11 @@ db.getCollection("user_post").insert({
       "countViewer": NumberInt(1)
     },
     {
-      "_id": ObjectId("532ea1cea7c0e9500a000011"),
-      "title": "aaaaaaaaaaaaa",
-      "content": "&amp;lt;p&amp;gt;\r\n\t&amp;lt;strong&amp;gt;hello world!&amp;lt;\/strong&amp;gt;&amp;lt;\/p&amp;gt;\r\n",
+      "_id": ObjectId("532e9eb6a7c0e91c0a000007"),
+      "content": "&amp;amp;lt;a href=&amp;amp;quot;http:\/\/google.com.vn&amp;amp;quot;&amp;amp;gt;hello&amp;amp;lt;\/a&amp;amp;gt;",
       "status": true,
-      "created": ISODate("2014-03-23T08:56:46.0Z"),
-      "updated": ISODate("2014-03-23T08:56:46.0Z"),
+      "created": ISODate("2014-03-23T08:43:34.0Z"),
+      "updated": ISODate("2014-03-23T08:43:34.0Z"),
       "author": "Quang Thi",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -67473,7 +67908,44 @@ db.getCollection("user_post").insert({
         "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
       },
-      "slug": "aaaaaaaaaaaaa-532ea1cea7c0e9500a000010",
+      "ownerId": "518f5555471deea409000000",
+      "slug": "532e9eb6a7c0e91c0a000006",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("532e9d8aa7c0e91c0a000004"),
+      "content": "&amp;lt;b&amp;gt;Hello&amp;lt;\/b&amp;gt;",
+      "status": true,
+      "created": ISODate("2014-03-23T08:38:34.0Z"),
+      "updated": ISODate("2014-03-23T08:38:34.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "518f5555471deea409000000",
+      "slug": "532e9d8aa7c0e91c0a000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("532e9d2ba7c0e91c0a000001"),
+      "title": "hello bommer",
+      "content": "&lt;p&gt;\r\n\t&lt;strong&gt;boomer&lt;\/strong&gt;&lt;\/p&gt;\r\n",
+      "status": true,
+      "created": ISODate("2014-03-23T08:36:59.0Z"),
+      "updated": ISODate("2014-03-23T08:36:59.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "hello-bommer-532e9d2ba7c0e91c0a000000",
       "deleted": false,
       "countViewer": NumberInt(0)
     }
@@ -67488,32 +67960,11 @@ db.getCollection("user_post").insert({
   "_id": ObjectId("52486543471dee340b000003"),
   "posts": [
     {
-      "_id": ObjectId("52b69e99471dee2c0b000011"),
-      "author": "user2",
-      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user1&quot; data-content-syntax=&quot;@[Quang Thi](contact:user1)&quot;&gt;Quang Thi&lt;\/a&gt;",
-      "countViewer": NumberInt(1),
-      "created": ISODate("2013-12-22T08:11:05.0Z"),
-      "deleted": false,
-      "email": "user2@test.com",
-      "likerIds": [
-        "518f5555471deea409000000"
-      ],
-      "slug": "52b69e99471dee2c0b000010",
+      "_id": ObjectId("5344ff74a7c0e91c0c0068d2"),
+      "content": "@USER[thanh-huong]: &lt;b&gt;hello",
       "status": true,
-      "updated": ISODate("2013-12-23T06:01:01.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("52b7d20f471dee280b000001"),
-      "title": "Hello world!",
-      "content": "&lt;p&gt;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user1&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Quang Thi&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot;&gt;Quang Thi&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;Hello&amp;nbsp;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user-temp&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Bommer Luu&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user-temp\/&quot;&gt;Bommer Luu&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;br&gt;&lt;\/p&gt;",
-      "status": true,
-      "created": ISODate("2013-12-23T06:02:55.0Z"),
-      "updated": ISODate("2013-12-23T06:07:40.0Z"),
+      "created": ISODate("2014-04-09T08:06:12.0Z"),
+      "updated": ISODate("2014-04-09T08:06:12.0Z"),
       "author": "user2",
       "email": "user2@test.com",
       "user": {
@@ -67521,68 +67972,36 @@ db.getCollection("user_post").insert({
         "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
       },
-      "slug": "hello-world-52b7d20f471dee280b000000",
-      "thumb": "data\/catalog\/user\/518f5f43471deeb40900001f\/post\/hello-world-52b7d20f471dee280b000000\/avatar.jpg",
-      "deleted": false,
-      "countViewer": NumberInt(1)
-    },
-    {
-      "_id": ObjectId("52c759f3471dee800b000004"),
-      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user2\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user2&quot; data-content-syntax=&quot;@[user2](contact:user2)&quot;&gt;user2&lt;\/a&gt;",
-      "status": true,
-      "created": ISODate("2014-01-04T00:46:43.0Z"),
-      "updated": ISODate("2014-01-04T00:46:43.0Z"),
-      "author": "Bommer Luu",
-      "email": "user7@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("52601121471dee680b000000"),
-        "$db": "yesocl"
-      },
-      "slug": "52c759f3471dee800b000003",
+      "ownerId": "518f5f43471deeb40900001f",
+      "slug": "5344ff74a7c0e91c0c0068d1",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("52c75a79471dee4c0b000004"),
-      "content": "hello all",
+      "_id": ObjectId("5331d54ea7c0e90c0b00000b"),
+      "content": "        f dasf dsaf sadf asdfasd        ",
       "status": true,
-      "created": ISODate("2014-01-04T00:48:57.0Z"),
-      "updated": ISODate("2014-01-04T00:48:57.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
+      "created": ISODate("2014-03-25T19:13:18.0Z"),
+      "updated": ISODate("2014-03-25T19:13:28.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
       "user": {
         "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
         "$db": "yesocl"
       },
-      "slug": "52c75a79471dee4c0b000003",
+      "ownerId": "518f5f43471deeb40900001f",
+      "slug": "5331d54ea7c0e90c0b00000a",
+      "thumb": "data\/catalog\/user\/533087c3a7c0e9741e000000\/post\/5331d54ea7c0e90c0b00000b\/avatar.jpg",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("52cd921f471deebc0a000001"),
-      "content": "dfa fsda f",
+      "_id": ObjectId("532c3d71a7c0e94c0a000004"),
+      "content": "f dsa fdasf asd",
       "status": true,
-      "created": ISODate("2014-01-08T17:59:59.0Z"),
-      "updated": ISODate("2014-03-09T17:00:04.0Z"),
-      "author": "user2",
-      "email": "user2@test.com",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5f43471deeb40900001f"),
-        "$db": "yesocl"
-      },
-      "slug": "52cd921f471deebc0a000000",
-      "deleted": false,
-      "countViewer": NumberInt(1)
-    },
-    {
-      "_id": ObjectId("52f91bbb471deea40a000001"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-02-10T18:34:35.0Z"),
-      "updated": ISODate("2014-02-10T18:34:35.0Z"),
+      "created": ISODate("2014-03-21T13:24:01.0Z"),
+      "updated": ISODate("2014-03-21T13:24:01.0Z"),
       "author": "Quang Thi",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -67591,25 +68010,7 @@ db.getCollection("user_post").insert({
         "$db": "yesocl"
       },
       "ownerId": "518f5f43471deeb40900001f",
-      "slug": "52f91bbb471deea40a000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("52f91bd6471deeb40a000008"),
-      "content": "bbbbbbbbbbb",
-      "status": true,
-      "created": ISODate("2014-02-10T18:35:02.0Z"),
-      "updated": ISODate("2014-02-10T18:35:02.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("518f5555471deea409000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "518f5f43471deeb40900001f",
-      "slug": "52f91bd6471deeb40a000007",
+      "slug": "532c3d71a7c0e94c0a000003",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
@@ -67632,11 +68033,11 @@ db.getCollection("user_post").insert({
       "countViewer": NumberInt(1)
     },
     {
-      "_id": ObjectId("532c3d71a7c0e94c0a000004"),
-      "content": "f dsa fdasf asd",
+      "_id": ObjectId("52f91bd6471deeb40a000008"),
+      "content": "bbbbbbbbbbb",
       "status": true,
-      "created": ISODate("2014-03-21T13:24:01.0Z"),
-      "updated": ISODate("2014-03-21T13:24:01.0Z"),
+      "created": ISODate("2014-02-10T18:35:02.0Z"),
+      "updated": ISODate("2014-02-10T18:35:02.0Z"),
       "author": "Quang Thi",
       "email": "quangthi_90@yahoo.com.vn",
       "user": {
@@ -67645,35 +68046,34 @@ db.getCollection("user_post").insert({
         "$db": "yesocl"
       },
       "ownerId": "518f5f43471deeb40900001f",
-      "slug": "532c3d71a7c0e94c0a000003",
+      "slug": "52f91bd6471deeb40a000007",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("5331d54ea7c0e90c0b00000b"),
-      "author": "Thanh Hương",
-      "content": "        f dasf dsaf sadf asdfasd        ",
-      "countViewer": NumberInt(0),
-      "created": ISODate("2014-03-25T19:13:18.0Z"),
-      "deleted": false,
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "ownerId": "518f5f43471deeb40900001f",
-      "slug": "5331d54ea7c0e90c0b00000a",
+      "_id": ObjectId("52f91bbb471deea40a000001"),
+      "content": "aaaaaaaa",
       "status": true,
-      "thumb": "data\/catalog\/user\/533087c3a7c0e9741e000000\/post\/5331d54ea7c0e90c0b00000b\/avatar.jpg",
-      "updated": ISODate("2014-03-25T19:13:28.0Z"),
+      "created": ISODate("2014-02-10T18:34:35.0Z"),
+      "updated": ISODate("2014-02-10T18:34:35.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
       "user": {
         "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$id": ObjectId("518f5555471deea409000000"),
         "$db": "yesocl"
-      }
+      },
+      "ownerId": "518f5f43471deeb40900001f",
+      "slug": "52f91bbb471deea40a000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("5344ff74a7c0e91c0c0068d2"),
-      "content": "@USER[thanh-huong]: &lt;b&gt;hello",
+      "_id": ObjectId("52cd921f471deebc0a000001"),
+      "content": "dfa fsda f",
       "status": true,
-      "created": ISODate("2014-04-09T08:06:12.0Z"),
-      "updated": ISODate("2014-04-09T08:06:12.0Z"),
+      "created": ISODate("2014-01-08T17:59:59.0Z"),
+      "updated": ISODate("2014-03-09T17:00:04.0Z"),
       "author": "user2",
       "email": "user2@test.com",
       "user": {
@@ -67681,10 +68081,82 @@ db.getCollection("user_post").insert({
         "$id": ObjectId("518f5f43471deeb40900001f"),
         "$db": "yesocl"
       },
-      "ownerId": "518f5f43471deeb40900001f",
-      "slug": "5344ff74a7c0e91c0c0068d1",
+      "slug": "52cd921f471deebc0a000000",
+      "deleted": false,
+      "countViewer": NumberInt(1)
+    },
+    {
+      "_id": ObjectId("52c75a79471dee4c0b000004"),
+      "content": "hello all",
+      "status": true,
+      "created": ISODate("2014-01-04T00:48:57.0Z"),
+      "updated": ISODate("2014-01-04T00:48:57.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5555471deea409000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52c75a79471dee4c0b000003",
       "deleted": false,
       "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52c759f3471dee800b000004"),
+      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user2\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user2&quot; data-content-syntax=&quot;@[user2](contact:user2)&quot;&gt;user2&lt;\/a&gt;",
+      "status": true,
+      "created": ISODate("2014-01-04T00:46:43.0Z"),
+      "updated": ISODate("2014-01-04T00:46:43.0Z"),
+      "author": "Bommer Luu",
+      "email": "user7@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("52601121471dee680b000000"),
+        "$db": "yesocl"
+      },
+      "slug": "52c759f3471dee800b000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("52b7d20f471dee280b000001"),
+      "title": "Hello world!",
+      "content": "&lt;p&gt;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user1&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Quang Thi&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot;&gt;Quang Thi&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;Hello&amp;nbsp;&lt;span class=&quot;tag-wrapper&quot;&gt;&lt;span class=&quot;tagItem&quot; data-value=&quot;user-temp&quot; contenteditable=&quot;false&quot;&gt;&lt;b class=&quot;tag-name&quot;&gt;Bommer Luu&lt;\/b&gt;&lt;a class=&quot;wall-link&quot; href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user-temp\/&quot;&gt;Bommer Luu&lt;\/a&gt;&lt;i class=&quot;icon-remove&quot;&gt;&lt;\/i&gt;&lt;\/span&gt;&lt;span class=&quot;space&quot;&gt;&amp;nbsp;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;\/span&gt;&lt;br&gt;&lt;\/p&gt;",
+      "status": true,
+      "created": ISODate("2013-12-23T06:02:55.0Z"),
+      "updated": ISODate("2013-12-23T06:07:40.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "hello-world-52b7d20f471dee280b000000",
+      "thumb": "data\/catalog\/user\/518f5f43471deeb40900001f\/post\/hello-world-52b7d20f471dee280b000000\/avatar.jpg",
+      "deleted": false,
+      "countViewer": NumberInt(1)
+    },
+    {
+      "_id": ObjectId("52b69e99471dee2c0b000011"),
+      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/user1\/&quot; class=&quot;wall-link&quot; data-ref=&quot;user1&quot; data-content-syntax=&quot;@[Quang Thi](contact:user1)&quot;&gt;Quang Thi&lt;\/a&gt;",
+      "status": true,
+      "created": ISODate("2013-12-22T08:11:05.0Z"),
+      "updated": ISODate("2013-12-23T06:01:01.0Z"),
+      "author": "user2",
+      "email": "user2@test.com",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("518f5f43471deeb40900001f"),
+        "$db": "yesocl"
+      },
+      "slug": "52b69e99471dee2c0b000010",
+      "deleted": false,
+      "likerIds": [
+        "518f5555471deea409000000"
+      ],
+      "countViewer": NumberInt(1)
     }
   ],
   "user": {
@@ -67696,24 +68168,6 @@ db.getCollection("user_post").insert({
 db.getCollection("user_post").insert({
   "_id": ObjectId("5360a000a7c0e97c0b000001"),
   "posts": [
-    {
-      "_id": ObjectId("5360a000a7c0e97c0b000002"),
-      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/hoang-tuan\/&quot; class=&quot;wall-link&quot; data-ref=&quot;hoang-tuan&quot; data-content-syntax=&quot;@[Hoang Tuan](contact:hoang-tuan)&quot;&gt;Hoang Tuan&lt;\/a&gt;",
-      "status": true,
-      "created": ISODate("2014-04-30T07:02:24.0Z"),
-      "updated": ISODate("2014-04-30T07:02:24.0Z"),
-      "author": "Hoang Hau",
-      "email": "user1@the-c.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("53609f94a7c0e95c0b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533eebd4a7c0e9700a000000",
-      "slug": "5360a000a7c0e97c0b000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
     {
       "_id": ObjectId("5360a023a7c0e97c0b000007"),
       "title": "aaaaaaaaaaaaa",
@@ -67732,6 +68186,24 @@ db.getCollection("user_post").insert({
       "slug": "aaaaaaaaaaaaa-5360a023a7c0e97c0b000006",
       "deleted": false,
       "countViewer": NumberInt(1)
+    },
+    {
+      "_id": ObjectId("5360a000a7c0e97c0b000002"),
+      "content": "hello &lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/hoang-tuan\/&quot; class=&quot;wall-link&quot; data-ref=&quot;hoang-tuan&quot; data-content-syntax=&quot;@[Hoang Tuan](contact:hoang-tuan)&quot;&gt;Hoang Tuan&lt;\/a&gt;",
+      "status": true,
+      "created": ISODate("2014-04-30T07:02:24.0Z"),
+      "updated": ISODate("2014-04-30T07:02:24.0Z"),
+      "author": "Hoang Hau",
+      "email": "user1@the-c.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("53609f94a7c0e95c0b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533eebd4a7c0e9700a000000",
+      "slug": "5360a000a7c0e97c0b000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
     }
   ],
   "user": {
@@ -67744,25 +68216,184 @@ db.getCollection("user_post").insert({
   "_id": ObjectId("53634b25a7c0e9240b000004"),
   "posts": [
     {
-      "_id": ObjectId("53634c06a7c0e9240b000011"),
-      "author": "Quang Thi",
-      "content": "aaaaaaaaa",
-      "countViewer": NumberInt(0),
-      "created": ISODate("2014-05-02T07:40:54.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "533126bfa7c0e9442b000000"
-      ],
-      "ownerId": "533126bfa7c0e9442b000000",
-      "slug": "53634c06a7c0e9240b000010",
+      "_id": ObjectId("537a3fa4a7c0e9ac0a000019"),
+      "content": "777777777",
       "status": true,
-      "updated": ISODate("2014-05-02T07:53:09.0Z"),
+      "created": ISODate("2014-05-19T17:30:12.0Z"),
+      "updated": ISODate("2014-05-19T17:30:12.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
       "user": {
         "$ref": "user",
         "$id": ObjectId("533126bfa7c0e9442b000000"),
         "$db": "yesocl"
-      }
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3fa4a7c0e9ac0a000018",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3fa3a7c0e9ac0a000016"),
+      "content": "666666666666",
+      "status": true,
+      "created": ISODate("2014-05-19T17:30:11.0Z"),
+      "updated": ISODate("2014-05-19T17:30:11.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3fa3a7c0e9ac0a000015",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3fa1a7c0e9ac0a000013"),
+      "content": "555555555",
+      "status": true,
+      "created": ISODate("2014-05-19T17:30:09.0Z"),
+      "updated": ISODate("2014-05-19T17:30:09.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3fa1a7c0e9ac0a000012",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3f62a7c0e9ac0a000010"),
+      "content": "444444444444",
+      "status": true,
+      "created": ISODate("2014-05-19T17:29:06.0Z"),
+      "updated": ISODate("2014-05-19T17:29:07.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3f62a7c0e9ac0a00000f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3f61a7c0e9ac0a00000d"),
+      "content": "333333333333",
+      "status": true,
+      "created": ISODate("2014-05-19T17:29:05.0Z"),
+      "updated": ISODate("2014-05-19T17:29:05.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3f61a7c0e9ac0a00000c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3f5fa7c0e9ac0a00000a"),
+      "content": "22222222222",
+      "status": true,
+      "created": ISODate("2014-05-19T17:29:03.0Z"),
+      "updated": ISODate("2014-05-19T17:29:03.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3f5fa7c0e9ac0a000009",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3f5da7c0e9ac0a000007"),
+      "content": "11111111",
+      "status": true,
+      "created": ISODate("2014-05-19T17:29:01.0Z"),
+      "updated": ISODate("2014-05-19T17:29:01.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3f5da7c0e9ac0a000006",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3f58a7c0e9ac0a000004"),
+      "content": "f dsaf saf",
+      "status": true,
+      "created": ISODate("2014-05-19T17:28:56.0Z"),
+      "updated": ISODate("2014-05-19T17:28:56.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3f58a7c0e9ac0a000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("537a3e93a7c0e9ac0a000001"),
+      "content": "dfa dfa fdas",
+      "status": true,
+      "created": ISODate("2014-05-19T17:25:39.0Z"),
+      "updated": ISODate("2014-05-19T17:25:40.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "537a3e93a7c0e9ac0a000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("536e634ca7c0e96020000001"),
+      "content": "aaaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-05-10T17:35:08.0Z"),
+      "updated": ISODate("2014-05-10T17:35:08.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "536e634ca7c0e96020000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
     },
     {
       "_id": ObjectId("53635668a7c0e9140b00000c"),
@@ -67781,6 +68412,27 @@ db.getCollection("user_post").insert({
       "slug": "53635668a7c0e9140b00000b",
       "deleted": false,
       "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53634c06a7c0e9240b000011"),
+      "content": "aaaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-05-02T07:40:54.0Z"),
+      "updated": ISODate("2014-05-02T07:53:09.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533126bfa7c0e9442b000000",
+      "slug": "53634c06a7c0e9240b000010",
+      "deleted": false,
+      "likerIds": [
+        "533126bfa7c0e9442b000000"
+      ],
+      "countViewer": NumberInt(0)
     }
   ],
   "user": {
@@ -67793,3621 +68445,122 @@ db.getCollection("user_post").insert({
   "_id": ObjectId("5331be9ca7c0e90c0b000001"),
   "posts": [
     {
-      "_id": ObjectId("533301e4a7c0e90c0b00000f"),
+      "_id": ObjectId("536ef41da7c0e9300d000001"),
+      "content": "gffdtjsersejra",
+      "status": true,
+      "created": ISODate("2014-05-11T03:53:01.0Z"),
+      "updated": ISODate("2014-05-11T03:53:02.0Z"),
       "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "536ef41da7c0e9300d000000",
+      "thumb": "data\/catalog\/user\/533087c3a7c0e9741e000000\/post\/536ef41da7c0e9300d000001\/avatar.jpg",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("536356dda7c0e9040b000001"),
+      "content": "&lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/quang-thi\/&quot; class=&quot;wall-link&quot; data-ref=&quot;quang-thi&quot; data-content-syntax=&quot;@[Quang Thi](contact:quang-thi)&quot;&gt;Quang Thi&lt;\/a&gt; hhehehehlfhaslkfdjk sajfs djaflkjsad kfljsda\n",
+      "status": true,
+      "created": ISODate("2014-05-02T08:27:08.0Z"),
+      "updated": ISODate("2014-05-02T08:27:09.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "536356dca7c0e9040b000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53635682a7c0e9140b000010"),
+      "content": "&lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/quang-thi\/&quot; class=&quot;wall-link&quot; data-ref=&quot;quang-thi&quot; data-content-syntax=&quot;@[Quang Thi](contact:quang-thi)&quot;&gt;Quang Thi&lt;\/a&gt;",
+      "status": true,
+      "created": ISODate("2014-05-02T08:25:38.0Z"),
+      "updated": ISODate("2014-05-02T08:25:38.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53635682a7c0e9140b00000f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53372b40a7c0e9200b000004"),
+      "content": "aaaaaaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T20:21:19.0Z"),
+      "updated": ISODate("2014-04-02T12:53:35.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53372b3fa7c0e9200b000003",
+      "thumb": "data\/catalog\/user\/533087c3a7c0e9741e000000\/post\/53372b40a7c0e9200b000004\/avatar.jpg",
+      "deleted": false,
+      "likerIds": [
+        
+      ],
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371725a7c0e9100b000001"),
+      "content": "aaaaa",
+      "status": true,
+      "created": ISODate("2014-03-25T18:55:33.0Z"),
+      "updated": ISODate("2014-03-29T20:05:55.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
       "comments": [
         {
-          "_id": ObjectId("533301e8a7c0e90c0b000011"),
-          "author": "Thanh Hương",
-          "content": "bbbbbbbbbb",
-          "created": ISODate("2014-03-26T16:35:52.0Z"),
-          "deleted": false,
-          "email": "thanhhuong_2704@yahoo.com.vn",
+          "_id": ObjectId("533727a0a7c0e9400b00012c"),
+          "content": "aaaa",
           "status": true,
-          "updated": ISODate("2014-03-26T16:35:52.0Z"),
+          "created": ISODate("2014-03-29T20:05:52.0Z"),
+          "updated": ISODate("2014-03-29T20:05:52.0Z"),
           "user": {
             "$ref": "user",
             "$id": ObjectId("533087c3a7c0e9741e000000"),
             "$db": "yesocl"
-          }
-        },
-        {
-          "_id": ObjectId("533301f1a7c0e90c0b000012"),
+          },
           "author": "Thanh Hương",
-          "content": "ccccccccc",
-          "created": ISODate("2014-03-26T16:36:01.0Z"),
-          "deleted": false,
           "email": "thanhhuong_2704@yahoo.com.vn",
-          "status": true,
-          "updated": ISODate("2014-03-26T16:36:01.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("533087c3a7c0e9741e000000"),
-            "$db": "yesocl"
-          }
+          "deleted": false
         }
       ],
-      "content": "aaaaaaaa",
-      "countViewer": NumberInt(0),
-      "created": ISODate("2014-03-26T16:35:48.0Z"),
+      "slug": "53371725a7c0e9100b000000",
       "deleted": false,
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "533301e4a7c0e90c0b00000e",
-      "status": true,
-      "updated": ISODate("2014-03-26T16:36:01.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("5336fd75a7c0e9180b000001"),
-      "content": "abc xxx",
-      "status": true,
-      "created": ISODate("2014-03-29T17:05:56.0Z"),
-      "updated": ISODate("2014-03-29T17:05:57.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5336fd74a7c0e9180b000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371046a7c0e9240b000001"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:14.0Z"),
-      "updated": ISODate("2014-03-29T18:26:15.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371046a7c0e9240b000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371047a7c0e9240b000004"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:15.0Z"),
-      "updated": ISODate("2014-03-29T18:26:15.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371047a7c0e9240b000003",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371047a7c0e9240b000007"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:15.0Z"),
-      "updated": ISODate("2014-03-29T18:26:15.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371047a7c0e9240b000006",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371047a7c0e9240b00000a"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:15.0Z"),
-      "updated": ISODate("2014-03-29T18:26:15.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371047a7c0e9240b000009",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371047a7c0e9240b00000d"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:15.0Z"),
-      "updated": ISODate("2014-03-29T18:26:15.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371047a7c0e9240b00000c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371048a7c0e9240b000010"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:16.0Z"),
-      "updated": ISODate("2014-03-29T18:26:16.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371048a7c0e9240b00000f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371048a7c0e9240b000013"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:16.0Z"),
-      "updated": ISODate("2014-03-29T18:26:16.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371048a7c0e9240b000012",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371048a7c0e9240b000016"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:16.0Z"),
-      "updated": ISODate("2014-03-29T18:26:16.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371048a7c0e9240b000015",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371048a7c0e9240b000019"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:16.0Z"),
-      "updated": ISODate("2014-03-29T18:26:16.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371048a7c0e9240b000018",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371049a7c0e9240b00001c"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:17.0Z"),
-      "updated": ISODate("2014-03-29T18:26:17.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371049a7c0e9240b00001b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371049a7c0e9240b00001f"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:17.0Z"),
-      "updated": ISODate("2014-03-29T18:26:17.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371049a7c0e9240b00001e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371049a7c0e9240b000022"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:17.0Z"),
-      "updated": ISODate("2014-03-29T18:26:17.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371049a7c0e9240b000021",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371049a7c0e9240b000025"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:17.0Z"),
-      "updated": ISODate("2014-03-29T18:26:17.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371049a7c0e9240b000024",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104aa7c0e9240b000028"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:18.0Z"),
-      "updated": ISODate("2014-03-29T18:26:18.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104aa7c0e9240b000027",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104aa7c0e9240b00002b"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:18.0Z"),
-      "updated": ISODate("2014-03-29T18:26:18.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104aa7c0e9240b00002a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104aa7c0e9240b00002e"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:18.0Z"),
-      "updated": ISODate("2014-03-29T18:26:18.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104aa7c0e9240b00002d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104aa7c0e9240b000031"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:18.0Z"),
-      "updated": ISODate("2014-03-29T18:26:18.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104aa7c0e9240b000030",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104aa7c0e9240b000034"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:18.0Z"),
-      "updated": ISODate("2014-03-29T18:26:18.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104aa7c0e9240b000033",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ba7c0e9240b000037"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:19.0Z"),
-      "updated": ISODate("2014-03-29T18:26:19.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ba7c0e9240b000036",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ba7c0e9240b00003a"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:19.0Z"),
-      "updated": ISODate("2014-03-29T18:26:19.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ba7c0e9240b000039",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ba7c0e9240b00003d"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:19.0Z"),
-      "updated": ISODate("2014-03-29T18:26:19.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ba7c0e9240b00003c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ba7c0e9240b000040"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:19.0Z"),
-      "updated": ISODate("2014-03-29T18:26:19.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ba7c0e9240b00003f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ba7c0e9240b000043"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:19.0Z"),
-      "updated": ISODate("2014-03-29T18:26:19.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ba7c0e9240b000042",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ca7c0e9240b000046"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:20.0Z"),
-      "updated": ISODate("2014-03-29T18:26:20.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ca7c0e9240b000045",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ca7c0e9240b000049"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:20.0Z"),
-      "updated": ISODate("2014-03-29T18:26:20.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ca7c0e9240b000048",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ca7c0e9240b00004c"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:20.0Z"),
-      "updated": ISODate("2014-03-29T18:26:20.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ca7c0e9240b00004b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ca7c0e9240b00004f"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:20.0Z"),
-      "updated": ISODate("2014-03-29T18:26:20.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ca7c0e9240b00004e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ca7c0e9240b000052"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:20.0Z"),
-      "updated": ISODate("2014-03-29T18:26:20.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ca7c0e9240b000051",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104da7c0e9240b000055"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:21.0Z"),
-      "updated": ISODate("2014-03-29T18:26:21.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104da7c0e9240b000054",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104da7c0e9240b000058"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:21.0Z"),
-      "updated": ISODate("2014-03-29T18:26:21.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104da7c0e9240b000057",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104da7c0e9240b00005b"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:21.0Z"),
-      "updated": ISODate("2014-03-29T18:26:21.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104da7c0e9240b00005a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104da7c0e9240b00005e"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:21.0Z"),
-      "updated": ISODate("2014-03-29T18:26:21.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104da7c0e9240b00005d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104da7c0e9240b000061"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:21.0Z"),
-      "updated": ISODate("2014-03-29T18:26:21.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104da7c0e9240b000060",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104da7c0e9240b000064"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:21.0Z"),
-      "updated": ISODate("2014-03-29T18:26:21.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104da7c0e9240b000063",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ea7c0e9240b000067"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:22.0Z"),
-      "updated": ISODate("2014-03-29T18:26:22.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ea7c0e9240b000066",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ea7c0e9240b00006a"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:22.0Z"),
-      "updated": ISODate("2014-03-29T18:26:22.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ea7c0e9240b000069",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ea7c0e9240b00006d"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:22.0Z"),
-      "updated": ISODate("2014-03-29T18:26:22.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ea7c0e9240b00006c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ea7c0e9240b000070"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:22.0Z"),
-      "updated": ISODate("2014-03-29T18:26:22.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ea7c0e9240b00006f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104ea7c0e9240b000073"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:22.0Z"),
-      "updated": ISODate("2014-03-29T18:26:22.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104ea7c0e9240b000072",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104fa7c0e9240b000076"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:23.0Z"),
-      "updated": ISODate("2014-03-29T18:26:23.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104fa7c0e9240b000075",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104fa7c0e9240b000079"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:23.0Z"),
-      "updated": ISODate("2014-03-29T18:26:23.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104fa7c0e9240b000078",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104fa7c0e9240b00007c"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:23.0Z"),
-      "updated": ISODate("2014-03-29T18:26:23.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104fa7c0e9240b00007b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104fa7c0e9240b00007f"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:23.0Z"),
-      "updated": ISODate("2014-03-29T18:26:23.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104fa7c0e9240b00007e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337104fa7c0e9240b000082"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:23.0Z"),
-      "updated": ISODate("2014-03-29T18:26:23.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337104fa7c0e9240b000081",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371050a7c0e9240b000085"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:24.0Z"),
-      "updated": ISODate("2014-03-29T18:26:24.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371050a7c0e9240b000084",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371050a7c0e9240b000088"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:24.0Z"),
-      "updated": ISODate("2014-03-29T18:26:24.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371050a7c0e9240b000087",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371050a7c0e9240b00008b"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:24.0Z"),
-      "updated": ISODate("2014-03-29T18:26:24.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371050a7c0e9240b00008a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371050a7c0e9240b00008e"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:24.0Z"),
-      "updated": ISODate("2014-03-29T18:26:24.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371050a7c0e9240b00008d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371050a7c0e9240b000091"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:24.0Z"),
-      "updated": ISODate("2014-03-29T18:26:24.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371050a7c0e9240b000090",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371051a7c0e9240b000094"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:25.0Z"),
-      "updated": ISODate("2014-03-29T18:26:25.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371051a7c0e9240b000093",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371051a7c0e9240b000097"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:25.0Z"),
-      "updated": ISODate("2014-03-29T18:26:25.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371051a7c0e9240b000096",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371051a7c0e9240b00009a"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:25.0Z"),
-      "updated": ISODate("2014-03-29T18:26:25.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371051a7c0e9240b000099",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371051a7c0e9240b00009d"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:25.0Z"),
-      "updated": ISODate("2014-03-29T18:26:25.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371051a7c0e9240b00009c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371051a7c0e9240b0000a0"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:25.0Z"),
-      "updated": ISODate("2014-03-29T18:26:25.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371051a7c0e9240b00009f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371052a7c0e9240b0000a3"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:26.0Z"),
-      "updated": ISODate("2014-03-29T18:26:26.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371052a7c0e9240b0000a2",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371052a7c0e9240b0000a6"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:26.0Z"),
-      "updated": ISODate("2014-03-29T18:26:26.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371052a7c0e9240b0000a5",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371052a7c0e9240b0000a9"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:26.0Z"),
-      "updated": ISODate("2014-03-29T18:26:26.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371052a7c0e9240b0000a8",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371052a7c0e9240b0000ac"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:26.0Z"),
-      "updated": ISODate("2014-03-29T18:26:26.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371052a7c0e9240b0000ab",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371052a7c0e9240b0000af"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:26.0Z"),
-      "updated": ISODate("2014-03-29T18:26:26.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371052a7c0e9240b0000ae",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371053a7c0e9240b0000b2"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:27.0Z"),
-      "updated": ISODate("2014-03-29T18:26:27.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371053a7c0e9240b0000b1",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371053a7c0e9240b0000b5"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:27.0Z"),
-      "updated": ISODate("2014-03-29T18:26:27.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371053a7c0e9240b0000b4",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371053a7c0e9240b0000b8"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:27.0Z"),
-      "updated": ISODate("2014-03-29T18:26:27.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371053a7c0e9240b0000b7",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371053a7c0e9240b0000bb"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:27.0Z"),
-      "updated": ISODate("2014-03-29T18:26:27.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371053a7c0e9240b0000ba",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371054a7c0e9240b0000be"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:28.0Z"),
-      "updated": ISODate("2014-03-29T18:26:28.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371054a7c0e9240b0000bd",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371054a7c0e9240b0000c1"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:28.0Z"),
-      "updated": ISODate("2014-03-29T18:26:28.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371054a7c0e9240b0000c0",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371054a7c0e9240b0000c4"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:28.0Z"),
-      "updated": ISODate("2014-03-29T18:26:28.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371054a7c0e9240b0000c3",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371054a7c0e9240b0000c7"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:28.0Z"),
-      "updated": ISODate("2014-03-29T18:26:29.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371054a7c0e9240b0000c6",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371055a7c0e9240b0000ca"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:29.0Z"),
-      "updated": ISODate("2014-03-29T18:26:29.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371055a7c0e9240b0000c9",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371055a7c0e9240b0000cd"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:29.0Z"),
-      "updated": ISODate("2014-03-29T18:26:29.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371055a7c0e9240b0000cc",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371055a7c0e9240b0000d0"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:29.0Z"),
-      "updated": ISODate("2014-03-29T18:26:29.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371055a7c0e9240b0000cf",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371055a7c0e9240b0000d3"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:29.0Z"),
-      "updated": ISODate("2014-03-29T18:26:30.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371055a7c0e9240b0000d2",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371056a7c0e9240b0000d6"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:30.0Z"),
-      "updated": ISODate("2014-03-29T18:26:30.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371056a7c0e9240b0000d5",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371056a7c0e9240b0000d9"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:30.0Z"),
-      "updated": ISODate("2014-03-29T18:26:30.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371056a7c0e9240b0000d8",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371056a7c0e9240b0000dc"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:30.0Z"),
-      "updated": ISODate("2014-03-29T18:26:30.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371056a7c0e9240b0000db",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371056a7c0e9240b0000df"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:30.0Z"),
-      "updated": ISODate("2014-03-29T18:26:31.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371056a7c0e9240b0000de",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371057a7c0e9240b0000e2"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:31.0Z"),
-      "updated": ISODate("2014-03-29T18:26:31.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371057a7c0e9240b0000e1",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371057a7c0e9240b0000e5"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:31.0Z"),
-      "updated": ISODate("2014-03-29T18:26:31.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371057a7c0e9240b0000e4",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371057a7c0e9240b0000e8"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:31.0Z"),
-      "updated": ISODate("2014-03-29T18:26:31.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371057a7c0e9240b0000e7",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371058a7c0e9240b0000eb"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:32.0Z"),
-      "updated": ISODate("2014-03-29T18:26:32.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371058a7c0e9240b0000ea",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371058a7c0e9240b0000ee"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:32.0Z"),
-      "updated": ISODate("2014-03-29T18:26:32.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371058a7c0e9240b0000ed",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371058a7c0e9240b0000f1"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:32.0Z"),
-      "updated": ISODate("2014-03-29T18:26:32.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371058a7c0e9240b0000f0",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371058a7c0e9240b0000f4"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:32.0Z"),
-      "updated": ISODate("2014-03-29T18:26:32.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371058a7c0e9240b0000f3",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371059a7c0e9240b0000f7"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:33.0Z"),
-      "updated": ISODate("2014-03-29T18:26:33.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371059a7c0e9240b0000f6",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371059a7c0e9240b0000fa"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:33.0Z"),
-      "updated": ISODate("2014-03-29T18:26:33.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371059a7c0e9240b0000f9",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371059a7c0e9240b0000fd"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:33.0Z"),
-      "updated": ISODate("2014-03-29T18:26:33.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371059a7c0e9240b0000fc",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371059a7c0e9240b000100"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:33.0Z"),
-      "updated": ISODate("2014-03-29T18:26:34.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371059a7c0e9240b0000ff",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105aa7c0e9240b000103"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:34.0Z"),
-      "updated": ISODate("2014-03-29T18:26:34.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105aa7c0e9240b000102",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105aa7c0e9240b000106"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:34.0Z"),
-      "updated": ISODate("2014-03-29T18:26:34.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105aa7c0e9240b000105",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105aa7c0e9240b000109"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:34.0Z"),
-      "updated": ISODate("2014-03-29T18:26:34.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105aa7c0e9240b000108",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ba7c0e9240b00010c"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:35.0Z"),
-      "updated": ISODate("2014-03-29T18:26:35.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ba7c0e9240b00010b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ba7c0e9240b00010f"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:35.0Z"),
-      "updated": ISODate("2014-03-29T18:26:35.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ba7c0e9240b00010e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ca7c0e9240b000112"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:36.0Z"),
-      "updated": ISODate("2014-03-29T18:26:36.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ba7c0e9240b000111",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ca7c0e9400b000001"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:36.0Z"),
-      "updated": ISODate("2014-03-29T18:26:36.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ca7c0e9400b000000",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ca7c0e9240b000115"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:36.0Z"),
-      "updated": ISODate("2014-03-29T18:26:37.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ca7c0e9240b000114",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ca7c0e9400b000004"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:36.0Z"),
-      "updated": ISODate("2014-03-29T18:26:36.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ca7c0e9400b000003",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105da7c0e9240b000118"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:37.0Z"),
-      "updated": ISODate("2014-03-29T18:26:37.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ca7c0e9240b000117",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105da7c0e9400b000007"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:37.0Z"),
-      "updated": ISODate("2014-03-29T18:26:37.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105da7c0e9400b000006",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105da7c0e9240b00011b"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:37.0Z"),
-      "updated": ISODate("2014-03-29T18:26:37.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105da7c0e9240b00011a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105da7c0e9400b00000a"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:37.0Z"),
-      "updated": ISODate("2014-03-29T18:26:40.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105da7c0e9400b000009",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ea7c0e9400b00000d"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:38.0Z"),
-      "updated": ISODate("2014-03-29T18:26:38.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ea7c0e9400b00000c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ea7c0e9240b00011e"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:38.0Z"),
-      "updated": ISODate("2014-03-29T18:26:40.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ea7c0e9240b00011d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ea7c0e9400b000010"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:38.0Z"),
-      "updated": ISODate("2014-03-29T18:26:38.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ea7c0e9400b00000f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105ea7c0e9240b000121"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:38.0Z"),
-      "updated": ISODate("2014-03-29T18:26:38.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105ea7c0e9240b000120",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105fa7c0e9400b000013"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:39.0Z"),
-      "updated": ISODate("2014-03-29T18:26:39.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105fa7c0e9400b000012",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105fa7c0e9240b000124"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:39.0Z"),
-      "updated": ISODate("2014-03-29T18:26:39.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105fa7c0e9240b000123",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105fa7c0e9400b000016"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:39.0Z"),
-      "updated": ISODate("2014-03-29T18:26:39.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105fa7c0e9400b000015",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105fa7c0e9240b000127"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:39.0Z"),
-      "updated": ISODate("2014-03-29T18:26:39.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105fa7c0e9240b000126",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337105fa7c0e9400b000019"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:39.0Z"),
-      "updated": ISODate("2014-03-29T18:26:39.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337105fa7c0e9400b000018",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371060a7c0e9400b00001c"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:40.0Z"),
-      "updated": ISODate("2014-03-29T18:26:40.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371060a7c0e9400b00001b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371060a7c0e9240b00012a"),
-      "content": "abc",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:40.0Z"),
-      "updated": ISODate("2014-03-29T18:26:40.0Z"),
-      "author": "Quang Thi",
-      "email": "quangthi_90@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533126bfa7c0e9442b000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371060a7c0e9240b000129",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371061a7c0e9400b00001f"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:41.0Z"),
-      "updated": ISODate("2014-03-29T18:26:41.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371060a7c0e9400b00001e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371061a7c0e9400b000022"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:41.0Z"),
-      "updated": ISODate("2014-03-29T18:26:41.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371061a7c0e9400b000021",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371062a7c0e9400b000025"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:42.0Z"),
-      "updated": ISODate("2014-03-29T18:26:42.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371062a7c0e9400b000024",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371062a7c0e9400b000028"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:42.0Z"),
-      "updated": ISODate("2014-03-29T18:26:42.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371062a7c0e9400b000027",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371063a7c0e9400b00002b"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:43.0Z"),
-      "updated": ISODate("2014-03-29T18:26:43.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371063a7c0e9400b00002a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371063a7c0e9400b00002e"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:43.0Z"),
-      "updated": ISODate("2014-03-29T18:26:43.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371063a7c0e9400b00002d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371063a7c0e9400b000031"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:43.0Z"),
-      "updated": ISODate("2014-03-29T18:26:43.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371063a7c0e9400b000030",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371064a7c0e9400b000034"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:44.0Z"),
-      "updated": ISODate("2014-03-29T18:26:47.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371064a7c0e9400b000033",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371064a7c0e9400b000037"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:44.0Z"),
-      "updated": ISODate("2014-03-29T18:26:44.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371064a7c0e9400b000036",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371064a7c0e9400b00003a"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:44.0Z"),
-      "updated": ISODate("2014-03-29T18:26:44.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371064a7c0e9400b000039",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371065a7c0e9400b00003d"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:45.0Z"),
-      "updated": ISODate("2014-03-29T18:26:48.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371065a7c0e9400b00003c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371065a7c0e9400b000040"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:45.0Z"),
-      "updated": ISODate("2014-03-29T18:26:45.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371065a7c0e9400b00003f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371065a7c0e9400b000043"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:45.0Z"),
-      "updated": ISODate("2014-03-29T18:26:45.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371065a7c0e9400b000042",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371066a7c0e9400b000046"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:46.0Z"),
-      "updated": ISODate("2014-03-29T18:26:46.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371066a7c0e9400b000045",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371066a7c0e9400b000049"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:46.0Z"),
-      "updated": ISODate("2014-03-29T18:26:46.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371066a7c0e9400b000048",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371066a7c0e9400b00004c"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:46.0Z"),
-      "updated": ISODate("2014-03-29T18:26:50.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371066a7c0e9400b00004b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371067a7c0e9400b00004f"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:47.0Z"),
-      "updated": ISODate("2014-03-29T18:26:47.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371067a7c0e9400b00004e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371067a7c0e9400b000052"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:47.0Z"),
-      "updated": ISODate("2014-03-29T18:26:47.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371067a7c0e9400b000051",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371068a7c0e9400b000055"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:47.0Z"),
-      "updated": ISODate("2014-03-29T18:26:51.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371067a7c0e9400b000054",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371068a7c0e9400b000058"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:48.0Z"),
-      "updated": ISODate("2014-03-29T18:26:48.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371068a7c0e9400b000057",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371068a7c0e9400b00005b"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:48.0Z"),
-      "updated": ISODate("2014-03-29T18:26:48.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371068a7c0e9400b00005a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371069a7c0e9400b00005e"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:49.0Z"),
-      "updated": ISODate("2014-03-29T18:26:52.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371069a7c0e9400b00005d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371069a7c0e9400b000061"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:49.0Z"),
-      "updated": ISODate("2014-03-29T18:26:49.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371069a7c0e9400b000060",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106aa7c0e9400b000064"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:49.0Z"),
-      "updated": ISODate("2014-03-29T18:26:49.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371069a7c0e9400b000063",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106aa7c0e9400b000067"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:50.0Z"),
-      "updated": ISODate("2014-03-29T18:26:50.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106aa7c0e9400b000066",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106aa7c0e9400b00006a"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:50.0Z"),
-      "updated": ISODate("2014-03-29T18:26:50.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106aa7c0e9400b000069",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106aa7c0e9400b00006d"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:50.0Z"),
-      "updated": ISODate("2014-03-29T18:26:50.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106aa7c0e9400b00006c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ba7c0e9400b000070"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:51.0Z"),
-      "updated": ISODate("2014-03-29T18:26:51.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ba7c0e9400b00006f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ba7c0e9400b000073"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:51.0Z"),
-      "updated": ISODate("2014-03-29T18:26:54.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ba7c0e9400b000072",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ba7c0e9400b000076"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:51.0Z"),
-      "updated": ISODate("2014-03-29T18:26:51.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ba7c0e9400b000075",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ca7c0e9400b000079"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:52.0Z"),
-      "updated": ISODate("2014-03-29T18:26:52.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ca7c0e9400b000078",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ca7c0e9400b00007c"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:52.0Z"),
-      "updated": ISODate("2014-03-29T18:26:52.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ca7c0e9400b00007b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ca7c0e9400b00007f"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:52.0Z"),
-      "updated": ISODate("2014-03-29T18:26:52.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ca7c0e9400b00007e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106da7c0e9400b000082"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:53.0Z"),
-      "updated": ISODate("2014-03-29T18:26:53.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106da7c0e9400b000081",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106da7c0e9400b000085"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:53.0Z"),
-      "updated": ISODate("2014-03-29T18:26:53.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106da7c0e9400b000084",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106da7c0e9400b000088"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:53.0Z"),
-      "updated": ISODate("2014-03-29T18:26:56.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106da7c0e9400b000087",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106da7c0e9400b00008b"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:53.0Z"),
-      "updated": ISODate("2014-03-29T18:26:53.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106da7c0e9400b00008a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ea7c0e9400b00008e"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:54.0Z"),
-      "updated": ISODate("2014-03-29T18:26:54.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ea7c0e9400b00008d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ea7c0e9400b000091"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:54.0Z"),
-      "updated": ISODate("2014-03-29T18:26:57.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ea7c0e9400b000090",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106ea7c0e9400b000094"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:54.0Z"),
-      "updated": ISODate("2014-03-29T18:26:54.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106ea7c0e9400b000093",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106fa7c0e9400b000097"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:55.0Z"),
-      "updated": ISODate("2014-03-29T18:26:55.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106fa7c0e9400b000096",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106fa7c0e9400b00009a"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:55.0Z"),
-      "updated": ISODate("2014-03-29T18:26:58.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106fa7c0e9400b000099",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106fa7c0e9400b00009d"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:55.0Z"),
-      "updated": ISODate("2014-03-29T18:26:55.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106fa7c0e9400b00009c",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337106fa7c0e9400b0000a0"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:55.0Z"),
-      "updated": ISODate("2014-03-29T18:26:55.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337106fa7c0e9400b00009f",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371070a7c0e9400b0000a3"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:56.0Z"),
-      "updated": ISODate("2014-03-29T18:26:56.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371070a7c0e9400b0000a2",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371070a7c0e9400b0000a6"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:56.0Z"),
-      "updated": ISODate("2014-03-29T18:26:56.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371070a7c0e9400b0000a5",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371071a7c0e9400b0000a9"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:56.0Z"),
-      "updated": ISODate("2014-03-29T18:26:56.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371070a7c0e9400b0000a8",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371071a7c0e9400b0000ac"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:57.0Z"),
-      "updated": ISODate("2014-03-29T18:26:57.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371071a7c0e9400b0000ab",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371071a7c0e9400b0000af"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:57.0Z"),
-      "updated": ISODate("2014-03-29T18:26:57.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371071a7c0e9400b0000ae",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371071a7c0e9400b0000b2"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:57.0Z"),
-      "updated": ISODate("2014-03-29T18:26:57.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371071a7c0e9400b0000b1",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371072a7c0e9400b0000b5"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:58.0Z"),
-      "updated": ISODate("2014-03-29T18:26:58.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371072a7c0e9400b0000b4",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371072a7c0e9400b0000b8"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:58.0Z"),
-      "updated": ISODate("2014-03-29T18:26:58.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371072a7c0e9400b0000b7",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371072a7c0e9400b0000bb"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:58.0Z"),
-      "updated": ISODate("2014-03-29T18:26:58.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371072a7c0e9400b0000ba",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371073a7c0e9400b0000be"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:59.0Z"),
-      "updated": ISODate("2014-03-29T18:26:59.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371073a7c0e9400b0000bd",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371073a7c0e9400b0000c1"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:59.0Z"),
-      "updated": ISODate("2014-03-29T18:26:59.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371073a7c0e9400b0000c0",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371073a7c0e9400b0000c4"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:26:59.0Z"),
-      "updated": ISODate("2014-03-29T18:26:59.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371073a7c0e9400b0000c3",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371074a7c0e9400b0000c7"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:00.0Z"),
-      "updated": ISODate("2014-03-29T18:27:03.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371074a7c0e9400b0000c6",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371074a7c0e9400b0000ca"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:00.0Z"),
-      "updated": ISODate("2014-03-29T18:27:00.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371074a7c0e9400b0000c9",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371074a7c0e9400b0000cd"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:00.0Z"),
-      "updated": ISODate("2014-03-29T18:27:00.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371074a7c0e9400b0000cc",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371075a7c0e9400b0000d0"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:01.0Z"),
-      "updated": ISODate("2014-03-29T18:27:04.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371075a7c0e9400b0000cf",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371075a7c0e9400b0000d3"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:01.0Z"),
-      "updated": ISODate("2014-03-29T18:27:01.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371075a7c0e9400b0000d2",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371075a7c0e9400b0000d6"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:01.0Z"),
-      "updated": ISODate("2014-03-29T18:27:01.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371075a7c0e9400b0000d5",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371076a7c0e9400b0000d9"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:02.0Z"),
-      "updated": ISODate("2014-03-29T18:27:05.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371076a7c0e9400b0000d8",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371076a7c0e9400b0000dc"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:02.0Z"),
-      "updated": ISODate("2014-03-29T18:27:02.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371076a7c0e9400b0000db",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371076a7c0e9400b0000df"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:02.0Z"),
-      "updated": ISODate("2014-03-29T18:27:02.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371076a7c0e9400b0000de",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371077a7c0e9400b0000e2"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:03.0Z"),
-      "updated": ISODate("2014-03-29T18:27:03.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371077a7c0e9400b0000e1",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371077a7c0e9400b0000e5"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:03.0Z"),
-      "updated": ISODate("2014-03-29T18:27:03.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371077a7c0e9400b0000e4",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371077a7c0e9400b0000e8"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:03.0Z"),
-      "updated": ISODate("2014-03-29T18:27:03.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371077a7c0e9400b0000e7",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371078a7c0e9400b0000eb"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:04.0Z"),
-      "updated": ISODate("2014-03-29T18:27:04.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371078a7c0e9400b0000ea",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371078a7c0e9400b0000ee"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:04.0Z"),
-      "updated": ISODate("2014-03-29T18:27:04.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371078a7c0e9400b0000ed",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371078a7c0e9400b0000f1"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:04.0Z"),
-      "updated": ISODate("2014-03-29T18:27:08.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371078a7c0e9400b0000f0",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371079a7c0e9400b0000f4"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:05.0Z"),
-      "updated": ISODate("2014-03-29T18:27:05.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371079a7c0e9400b0000f3",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("53371079a7c0e9400b0000f7"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:05.0Z"),
-      "updated": ISODate("2014-03-29T18:27:05.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371079a7c0e9400b0000f6",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107aa7c0e9400b0000fa"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:06.0Z"),
-      "updated": ISODate("2014-03-29T18:27:09.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371079a7c0e9400b0000f9",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107aa7c0e9400b0000fd"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:06.0Z"),
-      "updated": ISODate("2014-03-29T18:27:06.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107aa7c0e9400b0000fc",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107aa7c0e9400b000100"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:06.0Z"),
-      "updated": ISODate("2014-03-29T18:27:06.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107aa7c0e9400b0000ff",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ba7c0e9400b000103"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:07.0Z"),
-      "updated": ISODate("2014-03-29T18:27:10.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107aa7c0e9400b000102",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ba7c0e9400b000106"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:07.0Z"),
-      "updated": ISODate("2014-03-29T18:27:07.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ba7c0e9400b000105",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ba7c0e9400b000109"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:07.0Z"),
-      "updated": ISODate("2014-03-29T18:27:07.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ba7c0e9400b000108",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ca7c0e9400b00010c"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:08.0Z"),
-      "updated": ISODate("2014-03-29T18:27:08.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ca7c0e9400b00010b",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ca7c0e9400b00010f"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:08.0Z"),
-      "updated": ISODate("2014-03-29T18:27:08.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ca7c0e9400b00010e",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ca7c0e9400b000112"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:08.0Z"),
-      "updated": ISODate("2014-03-29T18:27:08.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ca7c0e9400b000111",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107da7c0e9400b000115"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:09.0Z"),
-      "updated": ISODate("2014-03-29T18:27:09.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107da7c0e9400b000114",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107da7c0e9400b000118"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:09.0Z"),
-      "updated": ISODate("2014-03-29T18:27:09.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107da7c0e9400b000117",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107da7c0e9400b00011b"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:09.0Z"),
-      "updated": ISODate("2014-03-29T18:27:09.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107da7c0e9400b00011a",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ea7c0e9400b00011e"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:10.0Z"),
-      "updated": ISODate("2014-03-29T18:27:10.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ea7c0e9400b00011d",
-      "deleted": false,
-      "countViewer": NumberInt(0)
-    },
-    {
-      "_id": ObjectId("5337107ea7c0e9400b000121"),
-      "content": "aaaaaaaa",
-      "status": true,
-      "created": ISODate("2014-03-29T18:27:10.0Z"),
-      "updated": ISODate("2014-03-29T18:27:10.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      },
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ea7c0e9400b000120",
-      "deleted": false,
+      "likerIds": [
+        "533087c3a7c0e9741e000000"
+      ],
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("5337107fa7c0e9400b000124"),
+      "_id": ObjectId("5337107fa7c0e9400b00012a"),
       "content": "aaaaaaaa",
       "status": true,
       "created": ISODate("2014-03-29T18:27:11.0Z"),
@@ -71420,7 +68573,7 @@ db.getCollection("user_post").insert({
         "$db": "yesocl"
       },
       "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107ea7c0e9400b000123",
+      "slug": "5337107fa7c0e9400b000129",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
@@ -71443,7 +68596,7 @@ db.getCollection("user_post").insert({
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("5337107fa7c0e9400b00012a"),
+      "_id": ObjectId("5337107fa7c0e9400b000124"),
       "content": "aaaaaaaa",
       "status": true,
       "created": ISODate("2014-03-29T18:27:11.0Z"),
@@ -71456,94 +68609,1600 @@ db.getCollection("user_post").insert({
         "$db": "yesocl"
       },
       "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "5337107fa7c0e9400b000129",
+      "slug": "5337107ea7c0e9400b000123",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("53371725a7c0e9100b000001"),
-      "author": "Quang Thi",
-      "comments": [
-        {
-          "_id": ObjectId("533727a0a7c0e9400b00012c"),
-          "author": "Thanh Hương",
-          "content": "aaaa",
-          "created": ISODate("2014-03-29T20:05:52.0Z"),
-          "deleted": false,
-          "email": "thanhhuong_2704@yahoo.com.vn",
-          "status": true,
-          "updated": ISODate("2014-03-29T20:05:52.0Z"),
-          "user": {
-            "$ref": "user",
-            "$id": ObjectId("533087c3a7c0e9741e000000"),
-            "$db": "yesocl"
-          }
-        }
-      ],
-      "content": "aaaaa",
-      "countViewer": NumberInt(0),
-      "created": ISODate("2014-03-25T18:55:33.0Z"),
-      "deleted": false,
-      "email": "quangthi_90@yahoo.com.vn",
-      "likerIds": [
-        "533087c3a7c0e9741e000000"
-      ],
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53371725a7c0e9100b000000",
+      "_id": ObjectId("5337107ea7c0e9400b000121"),
+      "content": "aaaaaaaa",
       "status": true,
-      "updated": ISODate("2014-03-29T20:05:55.0Z"),
+      "created": ISODate("2014-03-29T18:27:10.0Z"),
+      "updated": ISODate("2014-03-29T18:27:10.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ea7c0e9400b000120",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ea7c0e9400b00011e"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:10.0Z"),
+      "updated": ISODate("2014-03-29T18:27:10.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ea7c0e9400b00011d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107da7c0e9400b00011b"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:09.0Z"),
+      "updated": ISODate("2014-03-29T18:27:09.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107da7c0e9400b00011a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107da7c0e9400b000118"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:09.0Z"),
+      "updated": ISODate("2014-03-29T18:27:09.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107da7c0e9400b000117",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107da7c0e9400b000115"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:09.0Z"),
+      "updated": ISODate("2014-03-29T18:27:09.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107da7c0e9400b000114",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ca7c0e9400b000112"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:08.0Z"),
+      "updated": ISODate("2014-03-29T18:27:08.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ca7c0e9400b000111",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ca7c0e9400b00010f"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:08.0Z"),
+      "updated": ISODate("2014-03-29T18:27:08.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ca7c0e9400b00010e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ca7c0e9400b00010c"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:08.0Z"),
+      "updated": ISODate("2014-03-29T18:27:08.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ca7c0e9400b00010b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ba7c0e9400b000109"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:07.0Z"),
+      "updated": ISODate("2014-03-29T18:27:07.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ba7c0e9400b000108",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ba7c0e9400b000106"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:07.0Z"),
+      "updated": ISODate("2014-03-29T18:27:07.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107ba7c0e9400b000105",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107ba7c0e9400b000103"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:07.0Z"),
+      "updated": ISODate("2014-03-29T18:27:10.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107aa7c0e9400b000102",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107aa7c0e9400b000100"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:06.0Z"),
+      "updated": ISODate("2014-03-29T18:27:06.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107aa7c0e9400b0000ff",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107aa7c0e9400b0000fd"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:06.0Z"),
+      "updated": ISODate("2014-03-29T18:27:06.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337107aa7c0e9400b0000fc",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337107aa7c0e9400b0000fa"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:06.0Z"),
+      "updated": ISODate("2014-03-29T18:27:09.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371079a7c0e9400b0000f9",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371079a7c0e9400b0000f7"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:05.0Z"),
+      "updated": ISODate("2014-03-29T18:27:05.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371079a7c0e9400b0000f6",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371079a7c0e9400b0000f4"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:05.0Z"),
+      "updated": ISODate("2014-03-29T18:27:05.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371079a7c0e9400b0000f3",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371078a7c0e9400b0000f1"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:04.0Z"),
+      "updated": ISODate("2014-03-29T18:27:08.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371078a7c0e9400b0000f0",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371078a7c0e9400b0000ee"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:04.0Z"),
+      "updated": ISODate("2014-03-29T18:27:04.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371078a7c0e9400b0000ed",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371078a7c0e9400b0000eb"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:04.0Z"),
+      "updated": ISODate("2014-03-29T18:27:04.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371078a7c0e9400b0000ea",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371077a7c0e9400b0000e8"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:03.0Z"),
+      "updated": ISODate("2014-03-29T18:27:03.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371077a7c0e9400b0000e7",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371077a7c0e9400b0000e5"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:03.0Z"),
+      "updated": ISODate("2014-03-29T18:27:03.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371077a7c0e9400b0000e4",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371077a7c0e9400b0000e2"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:03.0Z"),
+      "updated": ISODate("2014-03-29T18:27:03.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371077a7c0e9400b0000e1",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371076a7c0e9400b0000df"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:02.0Z"),
+      "updated": ISODate("2014-03-29T18:27:02.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371076a7c0e9400b0000de",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371076a7c0e9400b0000dc"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:02.0Z"),
+      "updated": ISODate("2014-03-29T18:27:02.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371076a7c0e9400b0000db",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371076a7c0e9400b0000d9"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:02.0Z"),
+      "updated": ISODate("2014-03-29T18:27:05.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371076a7c0e9400b0000d8",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371075a7c0e9400b0000d6"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:01.0Z"),
+      "updated": ISODate("2014-03-29T18:27:01.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371075a7c0e9400b0000d5",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371075a7c0e9400b0000d3"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:01.0Z"),
+      "updated": ISODate("2014-03-29T18:27:01.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371075a7c0e9400b0000d2",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371075a7c0e9400b0000d0"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:01.0Z"),
+      "updated": ISODate("2014-03-29T18:27:04.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371075a7c0e9400b0000cf",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371074a7c0e9400b0000cd"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:00.0Z"),
+      "updated": ISODate("2014-03-29T18:27:00.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371074a7c0e9400b0000cc",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371074a7c0e9400b0000ca"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:00.0Z"),
+      "updated": ISODate("2014-03-29T18:27:00.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371074a7c0e9400b0000c9",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371074a7c0e9400b0000c7"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:27:00.0Z"),
+      "updated": ISODate("2014-03-29T18:27:03.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371074a7c0e9400b0000c6",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371073a7c0e9400b0000c4"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:59.0Z"),
+      "updated": ISODate("2014-03-29T18:26:59.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371073a7c0e9400b0000c3",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371073a7c0e9400b0000c1"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:59.0Z"),
+      "updated": ISODate("2014-03-29T18:26:59.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371073a7c0e9400b0000c0",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371073a7c0e9400b0000be"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:59.0Z"),
+      "updated": ISODate("2014-03-29T18:26:59.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371073a7c0e9400b0000bd",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371072a7c0e9400b0000bb"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:58.0Z"),
+      "updated": ISODate("2014-03-29T18:26:58.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371072a7c0e9400b0000ba",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371072a7c0e9400b0000b8"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:58.0Z"),
+      "updated": ISODate("2014-03-29T18:26:58.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371072a7c0e9400b0000b7",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371072a7c0e9400b0000b5"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:58.0Z"),
+      "updated": ISODate("2014-03-29T18:26:58.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371072a7c0e9400b0000b4",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371071a7c0e9400b0000b2"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:57.0Z"),
+      "updated": ISODate("2014-03-29T18:26:57.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371071a7c0e9400b0000b1",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371071a7c0e9400b0000af"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:57.0Z"),
+      "updated": ISODate("2014-03-29T18:26:57.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371071a7c0e9400b0000ae",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371071a7c0e9400b0000ac"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:57.0Z"),
+      "updated": ISODate("2014-03-29T18:26:57.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371071a7c0e9400b0000ab",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371071a7c0e9400b0000a9"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:56.0Z"),
+      "updated": ISODate("2014-03-29T18:26:56.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371070a7c0e9400b0000a8",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371070a7c0e9400b0000a6"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:56.0Z"),
+      "updated": ISODate("2014-03-29T18:26:56.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371070a7c0e9400b0000a5",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371070a7c0e9400b0000a3"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:56.0Z"),
+      "updated": ISODate("2014-03-29T18:26:56.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371070a7c0e9400b0000a2",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106fa7c0e9400b0000a0"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:55.0Z"),
+      "updated": ISODate("2014-03-29T18:26:55.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106fa7c0e9400b00009f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106fa7c0e9400b00009d"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:55.0Z"),
+      "updated": ISODate("2014-03-29T18:26:55.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106fa7c0e9400b00009c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106fa7c0e9400b00009a"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:55.0Z"),
+      "updated": ISODate("2014-03-29T18:26:58.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106fa7c0e9400b000099",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106fa7c0e9400b000097"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:55.0Z"),
+      "updated": ISODate("2014-03-29T18:26:55.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106fa7c0e9400b000096",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ea7c0e9400b000094"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:54.0Z"),
+      "updated": ISODate("2014-03-29T18:26:54.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ea7c0e9400b000093",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ea7c0e9400b000091"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:54.0Z"),
+      "updated": ISODate("2014-03-29T18:26:57.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ea7c0e9400b000090",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ea7c0e9400b00008e"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:54.0Z"),
+      "updated": ISODate("2014-03-29T18:26:54.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ea7c0e9400b00008d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106da7c0e9400b00008b"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:53.0Z"),
+      "updated": ISODate("2014-03-29T18:26:53.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106da7c0e9400b00008a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106da7c0e9400b000088"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:53.0Z"),
+      "updated": ISODate("2014-03-29T18:26:56.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106da7c0e9400b000087",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106da7c0e9400b000085"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:53.0Z"),
+      "updated": ISODate("2014-03-29T18:26:53.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106da7c0e9400b000084",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106da7c0e9400b000082"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:53.0Z"),
+      "updated": ISODate("2014-03-29T18:26:53.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106da7c0e9400b000081",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ca7c0e9400b00007f"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:52.0Z"),
+      "updated": ISODate("2014-03-29T18:26:52.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ca7c0e9400b00007e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ca7c0e9400b00007c"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:52.0Z"),
+      "updated": ISODate("2014-03-29T18:26:52.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ca7c0e9400b00007b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ca7c0e9400b000079"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:52.0Z"),
+      "updated": ISODate("2014-03-29T18:26:52.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ca7c0e9400b000078",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ba7c0e9400b000076"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:51.0Z"),
+      "updated": ISODate("2014-03-29T18:26:51.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ba7c0e9400b000075",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ba7c0e9400b000073"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:51.0Z"),
+      "updated": ISODate("2014-03-29T18:26:54.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ba7c0e9400b000072",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106ba7c0e9400b000070"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:51.0Z"),
+      "updated": ISODate("2014-03-29T18:26:51.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106ba7c0e9400b00006f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106aa7c0e9400b00006d"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:50.0Z"),
+      "updated": ISODate("2014-03-29T18:26:50.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106aa7c0e9400b00006c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106aa7c0e9400b00006a"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:50.0Z"),
+      "updated": ISODate("2014-03-29T18:26:50.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106aa7c0e9400b000069",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106aa7c0e9400b000067"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:50.0Z"),
+      "updated": ISODate("2014-03-29T18:26:50.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337106aa7c0e9400b000066",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337106aa7c0e9400b000064"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:49.0Z"),
+      "updated": ISODate("2014-03-29T18:26:49.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371069a7c0e9400b000063",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371069a7c0e9400b000061"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:49.0Z"),
+      "updated": ISODate("2014-03-29T18:26:49.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371069a7c0e9400b000060",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371069a7c0e9400b00005e"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:49.0Z"),
+      "updated": ISODate("2014-03-29T18:26:52.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371069a7c0e9400b00005d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371068a7c0e9400b00005b"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:48.0Z"),
+      "updated": ISODate("2014-03-29T18:26:48.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371068a7c0e9400b00005a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371068a7c0e9400b000058"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:48.0Z"),
+      "updated": ISODate("2014-03-29T18:26:48.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371068a7c0e9400b000057",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371068a7c0e9400b000055"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:47.0Z"),
+      "updated": ISODate("2014-03-29T18:26:51.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371067a7c0e9400b000054",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371067a7c0e9400b000052"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:47.0Z"),
+      "updated": ISODate("2014-03-29T18:26:47.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371067a7c0e9400b000051",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371067a7c0e9400b00004f"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:47.0Z"),
+      "updated": ISODate("2014-03-29T18:26:47.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371067a7c0e9400b00004e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371066a7c0e9400b00004c"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:46.0Z"),
+      "updated": ISODate("2014-03-29T18:26:50.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371066a7c0e9400b00004b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371066a7c0e9400b000049"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:46.0Z"),
+      "updated": ISODate("2014-03-29T18:26:46.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371066a7c0e9400b000048",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371066a7c0e9400b000046"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:46.0Z"),
+      "updated": ISODate("2014-03-29T18:26:46.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371066a7c0e9400b000045",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371065a7c0e9400b000043"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:45.0Z"),
+      "updated": ISODate("2014-03-29T18:26:45.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371065a7c0e9400b000042",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371065a7c0e9400b000040"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:45.0Z"),
+      "updated": ISODate("2014-03-29T18:26:45.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371065a7c0e9400b00003f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371065a7c0e9400b00003d"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:45.0Z"),
+      "updated": ISODate("2014-03-29T18:26:48.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371065a7c0e9400b00003c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371064a7c0e9400b00003a"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:44.0Z"),
+      "updated": ISODate("2014-03-29T18:26:44.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371064a7c0e9400b000039",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371064a7c0e9400b000037"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:44.0Z"),
+      "updated": ISODate("2014-03-29T18:26:44.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371064a7c0e9400b000036",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371064a7c0e9400b000034"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:44.0Z"),
+      "updated": ISODate("2014-03-29T18:26:47.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371064a7c0e9400b000033",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371063a7c0e9400b000031"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:43.0Z"),
+      "updated": ISODate("2014-03-29T18:26:43.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371063a7c0e9400b000030",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371063a7c0e9400b00002e"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:43.0Z"),
+      "updated": ISODate("2014-03-29T18:26:43.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371063a7c0e9400b00002d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371063a7c0e9400b00002b"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:43.0Z"),
+      "updated": ISODate("2014-03-29T18:26:43.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371063a7c0e9400b00002a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371062a7c0e9400b000028"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:42.0Z"),
+      "updated": ISODate("2014-03-29T18:26:42.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371062a7c0e9400b000027",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371062a7c0e9400b000025"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:42.0Z"),
+      "updated": ISODate("2014-03-29T18:26:42.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371062a7c0e9400b000024",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371061a7c0e9400b000022"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:41.0Z"),
+      "updated": ISODate("2014-03-29T18:26:41.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371061a7c0e9400b000021",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371061a7c0e9400b00001f"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:41.0Z"),
+      "updated": ISODate("2014-03-29T18:26:41.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371060a7c0e9400b00001e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371060a7c0e9240b00012a"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:40.0Z"),
+      "updated": ISODate("2014-03-29T18:26:40.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
       "user": {
         "$ref": "user",
         "$id": ObjectId("533126bfa7c0e9442b000000"),
         "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("53372b40a7c0e9200b000004"),
-      "author": "Thanh Hương",
-      "content": "aaaaaaaaaaaa",
-      "countViewer": NumberInt(0),
-      "created": ISODate("2014-03-29T20:21:19.0Z"),
-      "deleted": false,
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "likerIds": [
-        
-      ],
-      "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53372b3fa7c0e9200b000003",
-      "status": true,
-      "thumb": "data\/catalog\/user\/533087c3a7c0e9741e000000\/post\/53372b40a7c0e9200b000004\/avatar.jpg",
-      "updated": ISODate("2014-04-02T12:53:35.0Z"),
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
-      }
-    },
-    {
-      "_id": ObjectId("53635682a7c0e9140b000010"),
-      "content": "&lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/quang-thi\/&quot; class=&quot;wall-link&quot; data-ref=&quot;quang-thi&quot; data-content-syntax=&quot;@[Quang Thi](contact:quang-thi)&quot;&gt;Quang Thi&lt;\/a&gt;",
-      "status": true,
-      "created": ISODate("2014-05-02T08:25:38.0Z"),
-      "updated": ISODate("2014-05-02T08:25:38.0Z"),
-      "author": "Thanh Hương",
-      "email": "thanhhuong_2704@yahoo.com.vn",
-      "user": {
-        "$ref": "user",
-        "$id": ObjectId("533087c3a7c0e9741e000000"),
-        "$db": "yesocl"
       },
       "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "53635682a7c0e9140b00000f",
+      "slug": "53371060a7c0e9240b000129",
       "deleted": false,
       "countViewer": NumberInt(0)
     },
     {
-      "_id": ObjectId("536356dda7c0e9040b000001"),
-      "content": "&lt;a href=&quot;http:\/\/localhost\/yesocl\/wall-page\/quang-thi\/&quot; class=&quot;wall-link&quot; data-ref=&quot;quang-thi&quot; data-content-syntax=&quot;@[Quang Thi](contact:quang-thi)&quot;&gt;Quang Thi&lt;\/a&gt; hhehehehlfhaslkfdjk sajfs djaflkjsad kfljsda\n",
+      "_id": ObjectId("53371060a7c0e9400b00001c"),
+      "content": "aaaaaaaa",
       "status": true,
-      "created": ISODate("2014-05-02T08:27:08.0Z"),
-      "updated": ISODate("2014-05-02T08:27:09.0Z"),
+      "created": ISODate("2014-03-29T18:26:40.0Z"),
+      "updated": ISODate("2014-03-29T18:26:40.0Z"),
       "author": "Thanh Hương",
       "email": "thanhhuong_2704@yahoo.com.vn",
       "user": {
@@ -71552,7 +70211,2019 @@ db.getCollection("user_post").insert({
         "$db": "yesocl"
       },
       "ownerId": "533087c3a7c0e9741e000000",
-      "slug": "536356dca7c0e9040b000000",
+      "slug": "53371060a7c0e9400b00001b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105fa7c0e9400b000019"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:39.0Z"),
+      "updated": ISODate("2014-03-29T18:26:39.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105fa7c0e9400b000018",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105fa7c0e9240b000127"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:39.0Z"),
+      "updated": ISODate("2014-03-29T18:26:39.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105fa7c0e9240b000126",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105fa7c0e9400b000016"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:39.0Z"),
+      "updated": ISODate("2014-03-29T18:26:39.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105fa7c0e9400b000015",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105fa7c0e9240b000124"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:39.0Z"),
+      "updated": ISODate("2014-03-29T18:26:39.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105fa7c0e9240b000123",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105fa7c0e9400b000013"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:39.0Z"),
+      "updated": ISODate("2014-03-29T18:26:39.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105fa7c0e9400b000012",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ea7c0e9240b000121"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:38.0Z"),
+      "updated": ISODate("2014-03-29T18:26:38.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ea7c0e9240b000120",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ea7c0e9400b000010"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:38.0Z"),
+      "updated": ISODate("2014-03-29T18:26:38.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ea7c0e9400b00000f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ea7c0e9240b00011e"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:38.0Z"),
+      "updated": ISODate("2014-03-29T18:26:40.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ea7c0e9240b00011d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ea7c0e9400b00000d"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:38.0Z"),
+      "updated": ISODate("2014-03-29T18:26:38.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ea7c0e9400b00000c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105da7c0e9400b00000a"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:37.0Z"),
+      "updated": ISODate("2014-03-29T18:26:40.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105da7c0e9400b000009",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105da7c0e9240b00011b"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:37.0Z"),
+      "updated": ISODate("2014-03-29T18:26:37.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105da7c0e9240b00011a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105da7c0e9400b000007"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:37.0Z"),
+      "updated": ISODate("2014-03-29T18:26:37.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105da7c0e9400b000006",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105da7c0e9240b000118"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:37.0Z"),
+      "updated": ISODate("2014-03-29T18:26:37.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ca7c0e9240b000117",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ca7c0e9400b000004"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:36.0Z"),
+      "updated": ISODate("2014-03-29T18:26:36.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ca7c0e9400b000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ca7c0e9240b000115"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:36.0Z"),
+      "updated": ISODate("2014-03-29T18:26:37.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ca7c0e9240b000114",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ca7c0e9400b000001"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:36.0Z"),
+      "updated": ISODate("2014-03-29T18:26:36.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ca7c0e9400b000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ca7c0e9240b000112"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:36.0Z"),
+      "updated": ISODate("2014-03-29T18:26:36.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ba7c0e9240b000111",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ba7c0e9240b00010f"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:35.0Z"),
+      "updated": ISODate("2014-03-29T18:26:35.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ba7c0e9240b00010e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105ba7c0e9240b00010c"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:35.0Z"),
+      "updated": ISODate("2014-03-29T18:26:35.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105ba7c0e9240b00010b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105aa7c0e9240b000109"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:34.0Z"),
+      "updated": ISODate("2014-03-29T18:26:34.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105aa7c0e9240b000108",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105aa7c0e9240b000106"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:34.0Z"),
+      "updated": ISODate("2014-03-29T18:26:34.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105aa7c0e9240b000105",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337105aa7c0e9240b000103"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:34.0Z"),
+      "updated": ISODate("2014-03-29T18:26:34.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337105aa7c0e9240b000102",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371059a7c0e9240b000100"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:33.0Z"),
+      "updated": ISODate("2014-03-29T18:26:34.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371059a7c0e9240b0000ff",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371059a7c0e9240b0000fd"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:33.0Z"),
+      "updated": ISODate("2014-03-29T18:26:33.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371059a7c0e9240b0000fc",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371059a7c0e9240b0000fa"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:33.0Z"),
+      "updated": ISODate("2014-03-29T18:26:33.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371059a7c0e9240b0000f9",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371059a7c0e9240b0000f7"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:33.0Z"),
+      "updated": ISODate("2014-03-29T18:26:33.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371059a7c0e9240b0000f6",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371058a7c0e9240b0000f4"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:32.0Z"),
+      "updated": ISODate("2014-03-29T18:26:32.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371058a7c0e9240b0000f3",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371058a7c0e9240b0000f1"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:32.0Z"),
+      "updated": ISODate("2014-03-29T18:26:32.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371058a7c0e9240b0000f0",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371058a7c0e9240b0000ee"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:32.0Z"),
+      "updated": ISODate("2014-03-29T18:26:32.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371058a7c0e9240b0000ed",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371058a7c0e9240b0000eb"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:32.0Z"),
+      "updated": ISODate("2014-03-29T18:26:32.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371058a7c0e9240b0000ea",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371057a7c0e9240b0000e8"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:31.0Z"),
+      "updated": ISODate("2014-03-29T18:26:31.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371057a7c0e9240b0000e7",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371057a7c0e9240b0000e5"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:31.0Z"),
+      "updated": ISODate("2014-03-29T18:26:31.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371057a7c0e9240b0000e4",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371057a7c0e9240b0000e2"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:31.0Z"),
+      "updated": ISODate("2014-03-29T18:26:31.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371057a7c0e9240b0000e1",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371056a7c0e9240b0000df"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:30.0Z"),
+      "updated": ISODate("2014-03-29T18:26:31.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371056a7c0e9240b0000de",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371056a7c0e9240b0000dc"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:30.0Z"),
+      "updated": ISODate("2014-03-29T18:26:30.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371056a7c0e9240b0000db",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371056a7c0e9240b0000d9"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:30.0Z"),
+      "updated": ISODate("2014-03-29T18:26:30.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371056a7c0e9240b0000d8",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371056a7c0e9240b0000d6"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:30.0Z"),
+      "updated": ISODate("2014-03-29T18:26:30.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371056a7c0e9240b0000d5",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371055a7c0e9240b0000d3"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:29.0Z"),
+      "updated": ISODate("2014-03-29T18:26:30.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371055a7c0e9240b0000d2",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371055a7c0e9240b0000d0"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:29.0Z"),
+      "updated": ISODate("2014-03-29T18:26:29.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371055a7c0e9240b0000cf",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371055a7c0e9240b0000cd"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:29.0Z"),
+      "updated": ISODate("2014-03-29T18:26:29.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371055a7c0e9240b0000cc",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371055a7c0e9240b0000ca"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:29.0Z"),
+      "updated": ISODate("2014-03-29T18:26:29.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371055a7c0e9240b0000c9",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371054a7c0e9240b0000c7"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:28.0Z"),
+      "updated": ISODate("2014-03-29T18:26:29.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371054a7c0e9240b0000c6",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371054a7c0e9240b0000c4"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:28.0Z"),
+      "updated": ISODate("2014-03-29T18:26:28.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371054a7c0e9240b0000c3",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371054a7c0e9240b0000c1"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:28.0Z"),
+      "updated": ISODate("2014-03-29T18:26:28.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371054a7c0e9240b0000c0",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371054a7c0e9240b0000be"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:28.0Z"),
+      "updated": ISODate("2014-03-29T18:26:28.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371054a7c0e9240b0000bd",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371053a7c0e9240b0000bb"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:27.0Z"),
+      "updated": ISODate("2014-03-29T18:26:27.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371053a7c0e9240b0000ba",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371053a7c0e9240b0000b8"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:27.0Z"),
+      "updated": ISODate("2014-03-29T18:26:27.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371053a7c0e9240b0000b7",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371053a7c0e9240b0000b5"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:27.0Z"),
+      "updated": ISODate("2014-03-29T18:26:27.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371053a7c0e9240b0000b4",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371053a7c0e9240b0000b2"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:27.0Z"),
+      "updated": ISODate("2014-03-29T18:26:27.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371053a7c0e9240b0000b1",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371052a7c0e9240b0000af"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:26.0Z"),
+      "updated": ISODate("2014-03-29T18:26:26.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371052a7c0e9240b0000ae",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371052a7c0e9240b0000ac"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:26.0Z"),
+      "updated": ISODate("2014-03-29T18:26:26.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371052a7c0e9240b0000ab",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371052a7c0e9240b0000a9"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:26.0Z"),
+      "updated": ISODate("2014-03-29T18:26:26.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371052a7c0e9240b0000a8",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371052a7c0e9240b0000a6"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:26.0Z"),
+      "updated": ISODate("2014-03-29T18:26:26.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371052a7c0e9240b0000a5",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371052a7c0e9240b0000a3"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:26.0Z"),
+      "updated": ISODate("2014-03-29T18:26:26.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371052a7c0e9240b0000a2",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371051a7c0e9240b0000a0"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:25.0Z"),
+      "updated": ISODate("2014-03-29T18:26:25.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371051a7c0e9240b00009f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371051a7c0e9240b00009d"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:25.0Z"),
+      "updated": ISODate("2014-03-29T18:26:25.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371051a7c0e9240b00009c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371051a7c0e9240b00009a"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:25.0Z"),
+      "updated": ISODate("2014-03-29T18:26:25.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371051a7c0e9240b000099",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371051a7c0e9240b000097"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:25.0Z"),
+      "updated": ISODate("2014-03-29T18:26:25.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371051a7c0e9240b000096",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371051a7c0e9240b000094"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:25.0Z"),
+      "updated": ISODate("2014-03-29T18:26:25.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371051a7c0e9240b000093",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371050a7c0e9240b000091"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:24.0Z"),
+      "updated": ISODate("2014-03-29T18:26:24.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371050a7c0e9240b000090",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371050a7c0e9240b00008e"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:24.0Z"),
+      "updated": ISODate("2014-03-29T18:26:24.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371050a7c0e9240b00008d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371050a7c0e9240b00008b"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:24.0Z"),
+      "updated": ISODate("2014-03-29T18:26:24.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371050a7c0e9240b00008a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371050a7c0e9240b000088"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:24.0Z"),
+      "updated": ISODate("2014-03-29T18:26:24.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371050a7c0e9240b000087",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371050a7c0e9240b000085"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:24.0Z"),
+      "updated": ISODate("2014-03-29T18:26:24.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371050a7c0e9240b000084",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104fa7c0e9240b000082"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:23.0Z"),
+      "updated": ISODate("2014-03-29T18:26:23.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104fa7c0e9240b000081",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104fa7c0e9240b00007f"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:23.0Z"),
+      "updated": ISODate("2014-03-29T18:26:23.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104fa7c0e9240b00007e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104fa7c0e9240b00007c"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:23.0Z"),
+      "updated": ISODate("2014-03-29T18:26:23.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104fa7c0e9240b00007b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104fa7c0e9240b000079"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:23.0Z"),
+      "updated": ISODate("2014-03-29T18:26:23.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104fa7c0e9240b000078",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104fa7c0e9240b000076"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:23.0Z"),
+      "updated": ISODate("2014-03-29T18:26:23.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104fa7c0e9240b000075",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ea7c0e9240b000073"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:22.0Z"),
+      "updated": ISODate("2014-03-29T18:26:22.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ea7c0e9240b000072",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ea7c0e9240b000070"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:22.0Z"),
+      "updated": ISODate("2014-03-29T18:26:22.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ea7c0e9240b00006f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ea7c0e9240b00006d"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:22.0Z"),
+      "updated": ISODate("2014-03-29T18:26:22.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ea7c0e9240b00006c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ea7c0e9240b00006a"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:22.0Z"),
+      "updated": ISODate("2014-03-29T18:26:22.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ea7c0e9240b000069",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ea7c0e9240b000067"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:22.0Z"),
+      "updated": ISODate("2014-03-29T18:26:22.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ea7c0e9240b000066",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104da7c0e9240b000064"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:21.0Z"),
+      "updated": ISODate("2014-03-29T18:26:21.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104da7c0e9240b000063",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104da7c0e9240b000061"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:21.0Z"),
+      "updated": ISODate("2014-03-29T18:26:21.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104da7c0e9240b000060",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104da7c0e9240b00005e"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:21.0Z"),
+      "updated": ISODate("2014-03-29T18:26:21.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104da7c0e9240b00005d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104da7c0e9240b00005b"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:21.0Z"),
+      "updated": ISODate("2014-03-29T18:26:21.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104da7c0e9240b00005a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104da7c0e9240b000058"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:21.0Z"),
+      "updated": ISODate("2014-03-29T18:26:21.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104da7c0e9240b000057",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104da7c0e9240b000055"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:21.0Z"),
+      "updated": ISODate("2014-03-29T18:26:21.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104da7c0e9240b000054",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ca7c0e9240b000052"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:20.0Z"),
+      "updated": ISODate("2014-03-29T18:26:20.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ca7c0e9240b000051",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ca7c0e9240b00004f"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:20.0Z"),
+      "updated": ISODate("2014-03-29T18:26:20.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ca7c0e9240b00004e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ca7c0e9240b00004c"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:20.0Z"),
+      "updated": ISODate("2014-03-29T18:26:20.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ca7c0e9240b00004b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ca7c0e9240b000049"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:20.0Z"),
+      "updated": ISODate("2014-03-29T18:26:20.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ca7c0e9240b000048",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ca7c0e9240b000046"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:20.0Z"),
+      "updated": ISODate("2014-03-29T18:26:20.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ca7c0e9240b000045",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ba7c0e9240b000043"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:19.0Z"),
+      "updated": ISODate("2014-03-29T18:26:19.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ba7c0e9240b000042",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ba7c0e9240b000040"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:19.0Z"),
+      "updated": ISODate("2014-03-29T18:26:19.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ba7c0e9240b00003f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ba7c0e9240b00003d"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:19.0Z"),
+      "updated": ISODate("2014-03-29T18:26:19.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ba7c0e9240b00003c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ba7c0e9240b00003a"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:19.0Z"),
+      "updated": ISODate("2014-03-29T18:26:19.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ba7c0e9240b000039",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104ba7c0e9240b000037"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:19.0Z"),
+      "updated": ISODate("2014-03-29T18:26:19.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104ba7c0e9240b000036",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104aa7c0e9240b000034"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:18.0Z"),
+      "updated": ISODate("2014-03-29T18:26:18.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104aa7c0e9240b000033",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104aa7c0e9240b000031"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:18.0Z"),
+      "updated": ISODate("2014-03-29T18:26:18.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104aa7c0e9240b000030",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104aa7c0e9240b00002e"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:18.0Z"),
+      "updated": ISODate("2014-03-29T18:26:18.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104aa7c0e9240b00002d",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104aa7c0e9240b00002b"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:18.0Z"),
+      "updated": ISODate("2014-03-29T18:26:18.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104aa7c0e9240b00002a",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5337104aa7c0e9240b000028"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:18.0Z"),
+      "updated": ISODate("2014-03-29T18:26:18.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5337104aa7c0e9240b000027",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371049a7c0e9240b000025"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:17.0Z"),
+      "updated": ISODate("2014-03-29T18:26:17.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371049a7c0e9240b000024",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371049a7c0e9240b000022"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:17.0Z"),
+      "updated": ISODate("2014-03-29T18:26:17.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371049a7c0e9240b000021",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371049a7c0e9240b00001f"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:17.0Z"),
+      "updated": ISODate("2014-03-29T18:26:17.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371049a7c0e9240b00001e",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371049a7c0e9240b00001c"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:17.0Z"),
+      "updated": ISODate("2014-03-29T18:26:17.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371049a7c0e9240b00001b",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371048a7c0e9240b000019"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:16.0Z"),
+      "updated": ISODate("2014-03-29T18:26:16.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371048a7c0e9240b000018",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371048a7c0e9240b000016"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:16.0Z"),
+      "updated": ISODate("2014-03-29T18:26:16.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371048a7c0e9240b000015",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371048a7c0e9240b000013"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:16.0Z"),
+      "updated": ISODate("2014-03-29T18:26:16.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371048a7c0e9240b000012",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371048a7c0e9240b000010"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:16.0Z"),
+      "updated": ISODate("2014-03-29T18:26:16.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371048a7c0e9240b00000f",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371047a7c0e9240b00000d"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:15.0Z"),
+      "updated": ISODate("2014-03-29T18:26:15.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371047a7c0e9240b00000c",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371047a7c0e9240b00000a"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:15.0Z"),
+      "updated": ISODate("2014-03-29T18:26:15.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371047a7c0e9240b000009",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371047a7c0e9240b000007"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:15.0Z"),
+      "updated": ISODate("2014-03-29T18:26:15.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371047a7c0e9240b000006",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371047a7c0e9240b000004"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:15.0Z"),
+      "updated": ISODate("2014-03-29T18:26:15.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371047a7c0e9240b000003",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("53371046a7c0e9240b000001"),
+      "content": "abc",
+      "status": true,
+      "created": ISODate("2014-03-29T18:26:14.0Z"),
+      "updated": ISODate("2014-03-29T18:26:15.0Z"),
+      "author": "Quang Thi",
+      "email": "quangthi_90@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533126bfa7c0e9442b000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "53371046a7c0e9240b000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("5336fd75a7c0e9180b000001"),
+      "content": "abc xxx",
+      "status": true,
+      "created": ISODate("2014-03-29T17:05:56.0Z"),
+      "updated": ISODate("2014-03-29T17:05:57.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "slug": "5336fd74a7c0e9180b000000",
+      "deleted": false,
+      "countViewer": NumberInt(0)
+    },
+    {
+      "_id": ObjectId("533301e4a7c0e90c0b00000f"),
+      "content": "aaaaaaaa",
+      "status": true,
+      "created": ISODate("2014-03-26T16:35:48.0Z"),
+      "updated": ISODate("2014-03-26T16:36:01.0Z"),
+      "author": "Thanh Hương",
+      "email": "thanhhuong_2704@yahoo.com.vn",
+      "user": {
+        "$ref": "user",
+        "$id": ObjectId("533087c3a7c0e9741e000000"),
+        "$db": "yesocl"
+      },
+      "ownerId": "533087c3a7c0e9741e000000",
+      "comments": [
+        {
+          "_id": ObjectId("533301e8a7c0e90c0b000011"),
+          "content": "bbbbbbbbbb",
+          "status": true,
+          "created": ISODate("2014-03-26T16:35:52.0Z"),
+          "updated": ISODate("2014-03-26T16:35:52.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("533087c3a7c0e9741e000000"),
+            "$db": "yesocl"
+          },
+          "author": "Thanh Hương",
+          "email": "thanhhuong_2704@yahoo.com.vn",
+          "deleted": false
+        },
+        {
+          "_id": ObjectId("533301f1a7c0e90c0b000012"),
+          "content": "ccccccccc",
+          "status": true,
+          "created": ISODate("2014-03-26T16:36:01.0Z"),
+          "updated": ISODate("2014-03-26T16:36:01.0Z"),
+          "user": {
+            "$ref": "user",
+            "$id": ObjectId("533087c3a7c0e9741e000000"),
+            "$db": "yesocl"
+          },
+          "author": "Thanh Hương",
+          "email": "thanhhuong_2704@yahoo.com.vn",
+          "deleted": false
+        }
+      ],
+      "slug": "533301e4a7c0e90c0b00000e",
       "deleted": false,
       "countViewer": NumberInt(0)
     }
@@ -71602,6 +72273,31 @@ db.getCollection("user_setting").insert({
   "user": {
     "$ref": "user",
     "$id": ObjectId("533126bfa7c0e9442b000000"),
+    "$db": "yesocl"
+  }
+});
+db.getCollection("user_setting").insert({
+  "_id": ObjectId("5371ac9aa7c0e94816000000"),
+  "stocks": [
+    {
+      "$ref": "stock",
+      "$id": ObjectId("534d84eba7c0e9880a0002bb"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "stock",
+      "$id": ObjectId("534d84eba7c0e9880a000376"),
+      "$db": "yesocl"
+    },
+    {
+      "$ref": "stock",
+      "$id": ObjectId("534d84eba7c0e9880a000527"),
+      "$db": "yesocl"
+    }
+  ],
+  "user": {
+    "$ref": "user",
+    "$id": ObjectId("5371a9eaa7c0e91415000000"),
     "$db": "yesocl"
   }
 });
