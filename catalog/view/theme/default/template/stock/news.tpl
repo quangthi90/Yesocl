@@ -5,6 +5,8 @@
 {% block title %}{{ heading_title }}{% endblock %}
 {% block stylesheet %}    
 {{ block('common_ko_template_style') }}
+<link href="{{ asset_css('libs/select2.css') }}" rel="stylesheet" media="screen" />
+<link href="{{ asset_css('libs/select2-bootstrap.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -19,6 +21,7 @@
 
 {% block javascript %}
 	{{ block('stock_common_block_news_javascript') }}
+	<script type="text/javascript" src="{{ asset_js('libs/select/select2.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {

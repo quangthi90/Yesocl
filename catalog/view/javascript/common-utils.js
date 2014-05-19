@@ -168,23 +168,28 @@ YesGlobal.Utils = {
 };
 
 //KO custom handlers:
-ko.bindingHandlers.select2 = {
+ko.bindingHandlers.autoCompleteTag = {
     init: function(element, valueAccessor, allBindingsAccessor) {
         "use strict";
-        var obj = valueAccessor(),
-            allBindings = allBindingsAccessor(),
-            lookupKey = allBindings.lookupKey;
-        $(element).select2(obj);
-        if (lookupKey) {
-            var value = ko.utils.unwrapObservable(allBindings.value);
-            $(element).select2("data", ko.utils.arrayFirst(obj.data.results, function(item) {
-                return item[lookupKey] === value;
-            }));
-        }
- 
-        ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-            $(element).select2("destroy");
+        $(element).select2({
+            multiple: true,
+            minimumInputLength: 1, 
+            initSelection: [],
+            query: function (query) {
+                YesGlobal.Utils.initStockList(function(queryData) {
+                    var data = { results : [] };
+                    ko.utils.arrayForEach(queryData, function(t) {
+                        if(t.code.toLowerCase().indexOf(query.term)){
+                            data.results.push(t);
+                        }                        
+                    });
+                    query.callback(data);
+                });
+            },
+            formatResult: function(item) { return item.code + " : " + item.name },
+            formatSelection: function(item) { return item.code  }
         });
+
     },
     update: function(element) {
         "use strict";

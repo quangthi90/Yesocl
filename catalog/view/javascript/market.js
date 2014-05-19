@@ -679,6 +679,7 @@ function NewsViewModel(options) {
 			post.thumb = containerElement.find("input.img-url").val();
 			post.title = containerElement.find("input.post-title-input").val();
 			post.content = containerElement.find("#post-adv-editor").code();
+			post.stockTags = containerElement.find(".autocomplete-tag-input").val();
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();

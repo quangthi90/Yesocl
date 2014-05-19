@@ -28,7 +28,7 @@
  			</div>
 		</div>
 	</div>
-	<div class="mfp-hide y-dlg-container form-advance" data-focus-type="input[type='text']" id="news-advance-post">
+	<div class="mfp-hide y-dlg-container form-advance" data-height="200" data-focus-type="input[type='text']" id="news-advance-post">
 		<div class="y-dlg">
 			<div class="dlg-title">
 		        <i class="icon-yes"></i> 
@@ -57,6 +57,12 @@
 			    		<label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
 			    		<div class="controls">
 			    			<input placeholder="Your title" type="text" name="title" class="post-title-input" style="width: 98%;" />
+			    		</div>
+		    		</div>
+		    		<div class="control-group">
+			    		<label for="title" class="control-label">{% trans %}Stock tag{% endtrans %}</label>
+			    		<div class="controls">
+			    			<input type="hidden" multiple class="autocomplete-tag-input" data-bind="autoCompleteTag: true" style="width: 100%;"/>
 			    		</div>
 		    		</div>
 		    		<div class="control-group">
