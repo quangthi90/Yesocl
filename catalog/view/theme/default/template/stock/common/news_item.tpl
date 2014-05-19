@@ -33,14 +33,10 @@
 			<div class="post_meta_info">
 				<div class="post_user">
 					<a class="news-owner" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
-					{#% if post.owner_id is defined and post.owner_id != null and post.owner_id != user.id %}
-					<span><i class="icon-caret-right"></i></span>
-					<a href="{{ path('WallPage', {user_slug: users[post.owner_id].slug}) }}">{{ users[post.owner_id].username }}</a>
-					{% endif %}
-					{% if post.category_slug is defined %}
-					<span><i class="icon-caret-right"></i></span>
-					<a href="{{ path('BranchCategory', {category_slug: post.category_slug}) }}">{{ post.category_name }}</a>
-					{% endif %#}
+					<!-- ko if: !$data.isOwner -->
+						<span><i class="icon-caret-right"></i></span>
+						<a data-bind="attr: { href: $data.owner.href, title : $data.owner.username }, text: $data.owner.username"></a>
+					<!-- /ko -->
 				</div>
 				<div class="post_meta">
 					<span class="news-time post_time fl" data-bind="timeAgo: $data.created"></span>
