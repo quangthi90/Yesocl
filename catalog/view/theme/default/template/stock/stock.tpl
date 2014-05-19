@@ -46,7 +46,12 @@
                 stock : JSON.parse(_stock)
             };
             var newsOptions = {
-                Id : "stock-news"
+                Id : "stock-news",
+                canLoadMore: false,
+                hasNewPost: false,
+                urls : {
+                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                }
             };
             var userBoxOptions = {
             };            

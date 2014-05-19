@@ -137,5 +137,5 @@ $_['routing']['ApiPutAddFollower']				= 'services/put/follower/add/{user_slug}/'
 $_['routing']['ApiPutRemoveFollower']			= 'services/put/follower/remove/{user_slug}/';
 
 // User
-$_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/';
+$_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
 ?>
