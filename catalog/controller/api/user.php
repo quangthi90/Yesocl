@@ -179,6 +179,43 @@ class ControllerApiUser extends Controller {
         )));
 	}
 
+    public function getAllFriends() {
+        $this->load->model('tool/image');
+        $this->load->model('friend/friend');
+
+        $oCurrUser = $this->customer->getUser();
+
+        $aFriends = array();
+
+        $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+        if ( $oFriends ){
+            $lFriends = $oFriends->getFriends();
+        }else{
+            $lFriends = array();
+        }
+
+        foreach ( $lFriends as $oFriend ) {
+            $oUser = $oFriend->getUser();
+
+            $aUser = $oUser->formatToCache();
+
+            // Mapping to return for tag js
+            // Check again when change libs tag js
+            $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+            $aUser['name'] = $aUser['username'];
+            $aUser['id'] = $aUser['slug'];
+            $aUser['type'] = 'contact';
+            $aUser['wall'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
+
+            $aFriends[$aUser['slug']] = $aUser;
+        }
+
+        return $this->response->setOutput( json_encode(array(
+            'success' => 'ok',
+            'friends' => $aFriends
+        )));
+    }
+
     public function addFollower(){
     	$this->load->model('friend/follower');
         $this->load->model('user/user');

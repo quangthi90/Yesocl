@@ -126,7 +126,7 @@ YesGlobal.Utils = {
             callback(window.yListFriends);
         }else {
             var ajaxOptions = {
-                url: window.yRouting.generate('GetAllFriends'),
+                url: window.yRouting.generate('ApiGetAllFriends'),
                 async: false
             };
             var successCallback = function(data){
