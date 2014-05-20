@@ -239,6 +239,7 @@ class ModelToolObject extends Model
 		}
 
 		$aPost['user'] = $aUsers[$aPost['user_id']];
+		$aPost['is_owner'] = true;
 
 		// Check owner
         // If post of wall & owner = false ==> user A post on all of user B
@@ -246,10 +247,11 @@ class ModelToolObject extends Model
         switch ( $aPost['type'] ) {
             case $this->config->get('common')['type']['user']:
                 if ( $oPost->getUser()->getId() != $oPost->getOwnerId() ){
+                	$oOwner = $this->dm->getRepository('Document\User\User')->find( $oPost->getOwnerId() );
                     $aPost['is_owner'] = false;
                     $aPost['owner'] = array(
-                        'username' => $aOwner['username'],
-                        'href' => $this->extension->path( "WallPage", array('user_slug' => $aOwner['slug']) )
+                        'username' => $oOwner->getUsername(),
+                        'href' => $this->extension->path( "WallPage", array('user_slug' => $oOwner->getSlug()) )
                     );
                 }
                 break;
@@ -262,7 +264,7 @@ class ModelToolObject extends Model
                     'username' => $oCategory->getName(),
                     'href' => $this->extension->path("BranchCategory", array('category_slug' => $oCategory->getSlug()) )
                 );
-                break;
+                break;            	
         }
 
 		return $aPost;

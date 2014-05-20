@@ -35,7 +35,7 @@
 			<div class="post_meta_info">
 				<div class="post_user">
 					<a class="news-owner" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
-					<!-- ko if: $data.isOwner -->
+					<!-- ko if: !$data.isOwner -->
 						<span><i class="icon-caret-right"></i></span>
 						<a data-bind="attr: { href: $data.owner.href, title : $data.owner.username }, text: $data.owner.username"></a>
 					<!-- /ko -->

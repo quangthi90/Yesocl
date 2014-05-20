@@ -4,7 +4,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
 	Document\AbsObject\Post as AbstractPost;
 
 /** @MongoDB\EmbeddedDocument */
-Class Post {
+Class Post extends AbstractPost {
 	/** 
 	 * @MongoDB\Id
 	 */
@@ -18,69 +18,10 @@ Class Post {
 	/** 
 	 * @MongoDB\String
 	 */
-	private $description;
-
-	/** 
-	 * @MongoDB\String
-	 */
 	private $content;
-	
-	/** @MongoDB\Boolean */
-	private $status;
-	
-	/** @MongoDB\Date */
-	private $created;
-
-	/** @MongoDB\Date */
-	private $updated;
-
-	/** @MongoDB\String */
-	private $author;
-
-	/** @MongoDB\String */
-	private $email;
-	
-	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User", inversedBy="posts") */
-    private $user;
 
     /** @MongoDB\String */
 	private $ownerId;
-
-	/** @MongoDB\EmbedMany(targetDocument="Document\AbsObject\Comment") */
-	private $comments = array();
-
-	/** @MongoDB\String */
-	private $slug;
-
-	/** @MongoDB\String */
-	private $thumb;
-
-	/** @MongoDB\Boolean */
-	private $deleted;
-
-	/** @MongoDB\Collection */
-    private $likerIds;
-
-    /** @MongoDB\Int */
-    private $countViewer = 0;
-
-	/**
-	 * Get Comment By ID
-	 * @author: Bommer <lqthi.khtn@gmail.com>
-	 * @param: MongoDB ID
-	 * @return:
-	 * 		- Object Comment
-	 * 		- null if not found
-	 */
-	public function getCommentById( $comment_id ){
-		foreach ( $this->comments as $comment ){
-			if ( $comment->getId() === $comment_id ){
-				return  $comment;
-			}
-		}
-		
-		return null;
-	}
 
 	/**
 	* Format array to save to Cache
@@ -92,9 +33,9 @@ Class Post {
 		$limit = 200;
 
 		if ( $isTimestamp == true ){
-			$created = $this->created->getTimestamp();
+			$created = $this->getCreated()->getTimestamp();
 		}else{
-			$created = $this->created;
+			$created = $this->getCreated();
 		}
 
 		$post_data = array(
@@ -137,135 +78,12 @@ Class Post {
 		return $this->title;
 	}
 
-	public function setDescription( $description ){
-		$this->description = $description;
-	}
-
-	public function getDescription(){
-		return $this->description;
-	}
-
 	public function setContent( $content ){
 		$this->content = $content;
 	}
 
 	public function getContent(){
 		return $this->content;
-	}
-
-	public function setStatus( $status ){
-		$this->status = $status;
-	}
-
-	public function getStatus(){
-		return $this->status;
-	}
-
-	public function setCreated( $created ){
-		$this->created = $created;
-	}
-
-	public function getCreated(){
-		return $this->created;
-	}
-
-	/** @MongoDB\PrePersist */
-	public function prePersist(){
-		$this->created = new \DateTime();
-		$this->updated = new \DateTime();
-		$this->deleted = false;
-	}
-
-	/** @MongoDB\PreUpdate */
-	public function preUpdate(){
-		$this->updated = new \DateTime();
-	}
-
-	public function setAuthor( $author ){
-		$this->author = $author;
-	}
-
-	public function getAuthor(){
-		return $this->author;
-	}
-
-	public function setEmail( $email ){
-		$this->email = $email;
-	}
-
-	public function getEmail(){
-		return $this->email;
-	}
-
-	public function setUser( $user ){
-		$this->user = $user;
-		$this->author = $user->getUsername();
-		$this->email = $user->getPrimaryEmail()->getEmail();
-	}
-
-	public function getUser(){
-		return $this->user;
-	}
-
-	public function addComment( Document\AbsObject\Comment $comment ){
-		$comments = $this->comments->toArray();
-		array_unshift($comments, $comment);
-		$this->comments = $comments;
-	}
-
-	public function setComments( $comments ){
-		$this->comments = $comments;
-	}
-
-	public function getComments( $isReverse = false ){
-		if ( $isReverse ){
-			return array_reverse($this->comments->toArray());
-		}
-		return $this->comments;
-	}
-
-	public function setSlug( $slug ){
-		$this->slug = $slug;
-	}
-
-	public function getSlug(){
-		return $this->slug;
-	}
-
-	public function setThumb( $thumb ){
-		$this->thumb = $thumb;
-	}
-
-	public function getThumb(){
-		return $this->thumb;
-	}
-
-	public function setDeleted( $deleted ){
-		$this->deleted = $deleted;
-	}
-
-	public function getDeleted(){
-		return $this->deleted;
-	}
-
-	public function getLikerIds(){
-		return $this->likerIds;
-	}
-
-	public function addLikerId( $likerId ){
-		$this->likerIds[] = (string)$likerId;
-	}
-
-	public function setLikerIds( $likerIds ){
-		$this->likerIds = $likerIds;
-	}
-
-	public function setCountViewer( $countViewer ){
-		$this->countViewer = $countViewer;
-	}
-
-	public function getCountViewer(){
-		return $this->countViewer;
 	}
 
 	public function setOwnerId( $ownerId ){
