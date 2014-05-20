@@ -17,7 +17,7 @@
 							<i class="icon-camera icon-2x"></i>							
 						</a>
 						<input type="file" data-no-uniform="true" class="img-upload" title="{% trans %}Choose image to upload{% endtrans %}" name="files[]" data-url="{{ path('UploadFile') }}" id="img-upload" />
-						<a title="{% trans %}Advance post{% endtrans %}" data-mfp-src="#news-advance-post" class="link-popup">
+						<a title="{% trans %}Advance post{% endtrans %}" data-bind="click: openAdvancePost">
 							<i class="icon-external-link-sign icon-2x"></i>
 						</a>
 					</div>
@@ -73,9 +73,9 @@
 		    </div>
 		    <div class="dlg-footer">
 		    	<div class="controls">
-		    		<a class="btn btn-yes" data-bind="click: addAdvancePost">{% trans %}Submit{% endtrans %}</a>
-		    		<a class="btn btn-yes" data-bind="click: resetAdvanceNew">{% trans %}Reset{% endtrans %}</a>
-		    		<a class="btn btn-yes" data-bind="click: closeAdvanceNew">{% trans %}Close{% endtrans %}</a>
+		    		<a class="btn btn-yes" data-bind="click: saveAdvancePost">{% trans %}Submit{% endtrans %}</a>
+		    		<a class="btn btn-yes" data-bind="click: resetAdvancePost">{% trans %}Reset{% endtrans %}</a>
+		    		<a class="btn btn-yes" data-bind="click: closeAdvancePost">{% trans %}Close{% endtrans %}</a>
 	            </div>
 		    </div>
 		</div>

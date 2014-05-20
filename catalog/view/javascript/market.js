@@ -484,6 +484,7 @@ function NewsViewModel(options) {
 	self.hasNewPost = ko.observable(options.hasNewPost || false);
 	self.validate = options.validate || null;
 	self.urls = options.urls || [];
+	self.currentPost = ko.observable(null);
 	var mainContent = $("#y-main-content");
 	var root = $("#y-content");	
 
@@ -508,16 +509,35 @@ function NewsViewModel(options) {
 		});
 	};
 
+	this.saveAdvancePost = function() {
+		if(self.currentPost() != null){
+			self.updateAdvancePost();
+		}else {
+			self.addAdvancePost();
+		}
+	};
+
 	this.addAdvancePost = function(){
 		var postData = _collectData(true);
 		_addPost(postData, function(data){
 			_clearAfterAdding(true);
-			self.closeAdvanceNew();
+			self.closeAdvancePost();
+		});
+	};
+
+	this.updateAdvancePost = function() {
+		var newData = _collectData(true);
+		_savePost(newData, function(data){
+			_clearAfterAdding(true);
+			self.closeAdvancePost();
 		});
 	};
 
 	this.startEditPost = function(post) {
-		console.log("Imcomplete");
+		self.currentPost(post);
+		_openAdvancePost(function() {
+			_fillInDataForEdit(post);
+		});
 	};
 
 	this.deletePost = function(post) {
@@ -543,11 +563,16 @@ function NewsViewModel(options) {
         });
 	};	
 
-	this.resetAdvanceNew = function(){
+	this.resetAdvancePost = function(){
 		_clearAfterAdding(true);
 	}
 
-	this.closeAdvanceNew = function(){
+	this.openAdvancePost = function(){
+		self.currentPost(null);
+		_openAdvancePost();
+	}
+
+	this.closeAdvancePost = function(){
 		$.magnificPopup.close();
 	}
 
@@ -639,6 +664,32 @@ function NewsViewModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
+	function _savePost(post, callback){
+		if(self.validate(post).length > 0) {
+			return;
+		}
+		var updateOptions = self.urls.updateNews.params;
+		updateOptions.post_slug = self.currentPost().slug;
+		var ajaxOptions = {
+			url: window.yRouting.generate(self.urls.updateNews.name, updateOptions),
+			data: post
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				self.currentPost().title = post.title;
+				self.currentPost().thumb = post.thumb;
+				self.currentPost().content = post.content;
+				self.currentPost().stockTags(post.stockTags);
+				self.currentPost().userTags(post.userTags);
+			}
+			if(callback && typeof callback === "function"){
+				callback(data);
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
 	function _deletePost(post, callback) {
 		var ajaxOptions = {
 			url: window.yRouting.generate("ApiDeletePost", {
@@ -678,6 +729,50 @@ function NewsViewModel(options) {
 			containerElement.find(".img-previewer-container").html("");
 			containerElement.find(".post_input").mentionsInput("reset");
 		}
+	}
+
+	function _fillInDataForEdit(post) {
+		var containerElement = $("#news-advance-post");
+		var imgContainer = containerElement.find(".img-previewer-container");
+		if(post.thumb === null) {
+			imgContainer.find(".drop-zone-show").show(0);
+			imgContainer.find(".post_image_item").remove();
+			containerElement.find("input.img-url").val("");
+		} else {
+			containerElement.find("input.img-url").val(post.thumb);
+			imgContainer.find(".drop-zone-show").hide(0);
+			var postImageItem = $("<div class='post_image_item'></div>");
+			postImageItem.append('<img src="' + post.thumb + '" class="img-uploaded"><span class="close"><i class="icon-remove"></i></span>');
+			postImageItem.find("span.close").on("click", function(){
+				$(this).parent().remove();
+				imgContainer.find(".drop-zone-show").show(0);
+			});
+			imgContainer.append(postImageItem);
+		}		
+		containerElement.find("input.post-title-input").val(post.title);
+		containerElement.find("#post-adv-editor").code(post.content);
+		containerElement.find("input.autocomplete-tag-input").select2("data", post.stockTags());
+	}
+
+	function _openAdvancePost (openCallback) {
+		var form = $("#news-advance-post");
+        $.magnificPopup.open({
+			items: {
+			    src: form,
+			    type: 'inline'
+			},
+			modal: true,
+			callbacks: {
+				open: function(){
+					setTimeout(function(){
+						form.find(".post-title-input").focus();
+					}, 200);
+					if(openCallback && typeof openCallback === "function") {
+						openCallback();
+					}
+				}
+			}
+		});
 	}
 
 	function _loadNews(callback){

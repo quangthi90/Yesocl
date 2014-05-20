@@ -24,7 +24,7 @@ function PostModel(data) {
 	that.type = data.type || '';
 	that.email = data.email || '';
 	that.isOwner = data.is_owner || false;
-	that.isEdit = data.is_edit || false;
+	that.isEdit = data.is_edit || true;
 	that.isDelete = data.is_delete || false;
 	that.owner = data.owner || {};
 	that.category = data !== undefined ? {
@@ -39,6 +39,8 @@ function PostModel(data) {
 	that.likers = ko.observableArray(data.liker_ids || []);
 	that.countViewer = ko.observable(data.count_viewer || 0);
 	that.isLiked = ko.observable(data.isLiked || false);
+	that.userTags = ko.observableArray(data.user_tags || []);
+	that.stockTags = ko.observableArray(data.stock_tags || []);
 	
 	that.likePost = function() {
 		var ajaxOptions = {

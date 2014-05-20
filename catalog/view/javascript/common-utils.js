@@ -173,8 +173,7 @@ ko.bindingHandlers.autoCompleteTag = {
         "use strict";
         $(element).select2({
             multiple: true,
-            minimumInputLength: 1, 
-            initSelection: [],
+            minimumInputLength: 1,
             query: function (query) {
                 YesGlobal.Utils.initStockList(function(queryData) {
                     var data = { results : [] };

@@ -35,7 +35,8 @@
                 hasNewPost: true,
                 urls : {
                     loadNews : { name: "ApiGetUserPost",  params: { user_slug : currUser.slug } },
-                    postNews : { name: "ApiPostPost", params: { slug : currUser.slug, post_type: postType } }
+                    postNews : { name: "ApiPostPost", params: { slug : currUser.slug, post_type: postType } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : postType } }
                 }
             };
             var commentBoxOptions = {
