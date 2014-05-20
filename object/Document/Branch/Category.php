@@ -25,6 +25,9 @@ Class Category {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="parent") */
 	private $children;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="category") */
+	private $posts = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -98,6 +101,14 @@ Class Category {
 
 	public function getChildren(){
 		return $this->children;
+	}
+
+	public function setPosts( $posts ){
+		$this->posts = $posts;
+	}
+
+	public function getPosts(){
+		return $this->posts;
 	}
 
 	public function setOrder( $order ){

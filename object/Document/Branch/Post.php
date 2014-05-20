@@ -2,18 +2,24 @@
 namespace Document\Branch;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
 	Document\AbsObject\Post as AbstractPost;
-use Doctrine\Solr\Mapping\Annotations as SOLR;
 
-/** @MongoDB\Document(collection="branch_post") */
+/** 
+ * @MongoDB\Document(collection="branch_post")
+ */
 Class Post extends AbstractPost {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Branch", inversedBy="posts") */
 	private $branch;
 
-	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Category") */
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Category", inversedBy="posts") */
 	private $category;
 
 	/** @MongoDB\Collection */
 	private $stockCodes = array();
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $description;
 
 	/**
 	* Format array to save to Cache
@@ -60,13 +66,13 @@ Class Post extends AbstractPost {
 	/** @MongoDB\PostPersist */
     public function postPersist()
     {
-    	$this->setType('Branch');
+    	$this->updateSolrData();
     }
 
     /** @MongoDB\PostUpdate */
     public function postUpdate()
     {
-    	$this->setType('Branch');
+    	$this->updateSolrData();
     }
 
 	public function setBranch( $branch ){
@@ -95,5 +101,13 @@ Class Post extends AbstractPost {
 
 	public function getStockCodes(){
 		return $this->stockCodes;
+	}
+
+	public function setDescription( $description ){
+		$this->description = $description;
+	}
+
+	public function getDescription(){
+		return $this->description;
 	}
 }

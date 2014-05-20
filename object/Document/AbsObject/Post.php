@@ -14,25 +14,16 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 Abstract Class Post {
 	/** 
 	 * @MongoDB\Id 
-	 * @SOLR\Field(type="id")
 	 */
 	private $id;
 
 	/** 
-	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
+	 * @MongoDB\String
 	 */
 	private $title;
 
 	/** 
-	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
-	 */
-	private $description;
-
-	/** 
-	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
+	 * @MongoDB\String
 	 */
 	private $content;
 	
@@ -73,9 +64,19 @@ Abstract Class Post {
     private $countViewer = 0;
 
     /** 
+	 * @SOLR\Field(type="id")
+	 */
+	private $solrId;
+
+	/** 
 	 * @SOLR\Field(type="text")
 	 */
-	private $type;
+	private $solrTitle;
+
+	/** 
+	 * @SOLR\Field(type="text")
+	 */
+	private $solrContent;
 
 	/**
 	 * Get Comment By ID
@@ -109,14 +110,6 @@ Abstract Class Post {
 
 	public function getTitle(){
 		return $this->title;
-	}
-
-	public function setDescription( $description ){
-		$this->description = $description;
-	}
-
-	public function getDescription(){
-		return $this->description;
 	}
 
 	public function setContent( $content ){
@@ -242,11 +235,33 @@ Abstract Class Post {
 		return $this->countViewer;
 	}
 
-	public function setType( $type ){
-		$this->type = $type;
+	public function updateSolrData(){
+    	$this->solrId = $this->getId();
+    	$this->solrTitle = $this->getTitle();
+    	$this->solrContent = $this->getContent();
+    }
+
+	public function setSorlId( $sorlId ){
+		$this->sorlId = $sorlId;
 	}
 
-	public function getType(){
-		return $this->type;
+	public function getSorlId(){
+		return $this->sorlId;
+	}
+
+	public function setSorlTitle( $sorlTitle ){
+		$this->sorlTitle = $sorlTitle;
+	}
+
+	public function getSorlTitle(){
+		return $this->sorlTitle;
+	}
+
+	public function setSorlContent( $sorlContent ){
+		$this->sorlContent = $sorlContent;
+	}
+
+	public function getSorlContent(){
+		return $this->sorlContent;
 	}
 }
