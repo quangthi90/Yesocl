@@ -46,6 +46,9 @@ Abstract Class Post {
     /** @MongoDB\Int */
     private $countViewer = 0;
 
+	/** @MongoDB\Collection */
+	private $stockCodes = array();
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -177,5 +180,17 @@ Abstract Class Post {
 
 	public function getCountViewer(){
 		return $this->countViewer;
+	}
+
+	public function addStockCode( $stockCode ){
+		$this->stockCodes[] = $stockCode;
+	}
+
+	public function setStockCodes( $stockCodes ){
+		$this->stockCodes = $stockCodes;
+	}
+
+	public function getStockCodes(){
+		return $this->stockCodes;
 	}
 }

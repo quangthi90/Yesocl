@@ -264,7 +264,7 @@ class ModelToolObject extends Model
                     'username' => $oCategory->getName(),
                     'href' => $this->extension->path("BranchCategory", array('category_slug' => $oCategory->getSlug()) )
                 );
-                break;            	
+                break;
         }
 
 		return $aPost;

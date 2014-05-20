@@ -33,9 +33,6 @@ Class Post extends AbstractPost {
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Category", inversedBy="posts") */
 	private $category;
 
-	/** @MongoDB\Collection */
-	private $stockCodes = array();
-
 	/** 
 	 * @MongoDB\String 
 	 */
@@ -121,18 +118,6 @@ Class Post extends AbstractPost {
 
 	public function getCategory(){
 		return $this->category;
-	}
-
-	public function addStockCode( $stockCode ){
-		$this->stockCodes[] = $stockCode;
-	}
-
-	public function setStockCodes( $stockCodes ){
-		$this->stockCodes = $stockCodes;
-	}
-
-	public function getStockCodes(){
-		return $this->stockCodes;
 	}
 
 	public function setDescription( $description ){
