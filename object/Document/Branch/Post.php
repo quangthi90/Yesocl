@@ -2,11 +2,31 @@
 namespace Document\Branch;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB,
 	Document\AbsObject\Post as AbstractPost;
+use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** 
  * @MongoDB\Document(collection="branch_post")
+ * @SOLR\Document(collection="post")
  */
 Class Post extends AbstractPost {
+	/** 
+	 * @MongoDB\Id 
+	 * @SOLR\Field(type="id")
+	 */
+	private $id;
+
+	/** 
+	 * @MongoDB\String
+	 * @SOLR\Field(type="text")
+	 */
+	private $title;
+
+	/** 
+	 * @MongoDB\String
+	 * @SOLR\Field(type="text")
+	 */
+	private $content;
+
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Branch\Branch", inversedBy="posts") */
 	private $branch;
 
@@ -63,17 +83,29 @@ Class Post extends AbstractPost {
 		return $post_data;
 	}
 
-	/** @MongoDB\PostPersist */
-    public function postPersist()
-    {
-    	$this->updateSolrData();
-    }
+	public function getId(){
+		return $this->id;
+	}
+	
+	public function setId( $id ) {
+		$this->id = $id;
+	}
+	
+	public function setTitle( $title ){
+		$this->title = $title;
+	}
 
-    /** @MongoDB\PostUpdate */
-    public function postUpdate()
-    {
-    	$this->updateSolrData();
-    }
+	public function getTitle(){
+		return $this->title;
+	}
+
+	public function setContent( $content ){
+		$this->content = $content;
+	}
+
+	public function getContent(){
+		return $this->content;
+	}
 
 	public function setBranch( $branch ){
 		$this->branch = $branch;

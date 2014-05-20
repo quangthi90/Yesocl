@@ -1,7 +1,6 @@
 <?php
 namespace Document\AbsObject;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /**
  * @MongoDB\MappedSuperclass
@@ -9,24 +8,8 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
  * @MongoDB\DiscriminatorMap({
  *     "BranchPost"="\Document\Branch\Post"
  * })
- * @SOLR\Document(collection="post")
  */
 Abstract Class Post {
-	/** 
-	 * @MongoDB\Id 
-	 */
-	private $id;
-
-	/** 
-	 * @MongoDB\String
-	 */
-	private $title;
-
-	/** 
-	 * @MongoDB\String
-	 */
-	private $content;
-	
 	/** @MongoDB\Boolean */
 	private $status;
 	
@@ -63,21 +46,6 @@ Abstract Class Post {
     /** @MongoDB\Int */
     private $countViewer = 0;
 
-    /** 
-	 * @SOLR\Field(type="id")
-	 */
-	private $solrId;
-
-	/** 
-	 * @SOLR\Field(type="text")
-	 */
-	private $solrTitle;
-
-	/** 
-	 * @SOLR\Field(type="text")
-	 */
-	private $solrContent;
-
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -94,30 +62,6 @@ Abstract Class Post {
 		}
 		
 		return null;
-	}
-
-	public function getId(){
-		return $this->id;
-	}
-	
-	public function setId( $id ) {
-		$this->id = $id;
-	}
-	
-	public function setTitle( $title ){
-		$this->title = $title;
-	}
-
-	public function getTitle(){
-		return $this->title;
-	}
-
-	public function setContent( $content ){
-		$this->content = $content;
-	}
-
-	public function getContent(){
-		return $this->content;
 	}
 
 	public function setStatus( $status ){
@@ -233,35 +177,5 @@ Abstract Class Post {
 
 	public function getCountViewer(){
 		return $this->countViewer;
-	}
-
-	public function updateSolrData(){
-    	$this->solrId = $this->getId();
-    	$this->solrTitle = $this->getTitle();
-    	$this->solrContent = $this->getContent();
-    }
-
-	public function setSorlId( $sorlId ){
-		$this->sorlId = $sorlId;
-	}
-
-	public function getSorlId(){
-		return $this->sorlId;
-	}
-
-	public function setSorlTitle( $sorlTitle ){
-		$this->sorlTitle = $sorlTitle;
-	}
-
-	public function getSorlTitle(){
-		return $this->sorlTitle;
-	}
-
-	public function setSorlContent( $sorlContent ){
-		$this->sorlContent = $sorlContent;
-	}
-
-	public function getSorlContent(){
-		return $this->sorlContent;
 	}
 }
