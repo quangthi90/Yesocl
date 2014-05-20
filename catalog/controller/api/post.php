@@ -36,7 +36,9 @@ class ControllerApiPost extends Controller {
                 'title'         => $this->request->post['title'],
                 'author_id'     => $this->customer->getId(),
                 'image_link'    => $sImageLink,
-                'extension'     => $sExtension
+                'extension'     => $sExtension,
+                'stockTags'     => $this->request->post['stockTags'],
+                'userTags'      => $this->request->post['userTags']
             );
 
             switch ( $this->request->get['post_type'] ) {
@@ -79,7 +81,7 @@ class ControllerApiPost extends Controller {
             // Add notification
             $this->load->model('user/notification');
             
-            if ( $this->customer->getSlug() != $this->request->get['user_slug'] ){
+            if ( $this->customer->getSlug() != $this->request->get['slug'] ){
                 $this->model_user_notification->addNotification(
                     $this->request->get['user_slug'],
                     $this->customer->getUser(),
@@ -90,6 +92,10 @@ class ControllerApiPost extends Controller {
                     $this->config->get('common')['object']['wall']
                 );
             }
+
+            // if ( $this->request->get['post_type'] == $this->config->get('common')['type']['user'] ){
+                
+            // }
 
             if ( !empty($this->request->post['tags']) ){
                 $aUserSlugs = $this->request->post['tags'];

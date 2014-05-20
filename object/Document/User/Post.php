@@ -56,6 +56,8 @@ Class Post extends AbstractPost {
 			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer(),
 			'owner_id' 		=> $this->getOwnerId(),
+			'stock_tags'	=> $this->getStockTags(),
+			'user_tags'		=> $this->getUserTags(),
 			'type'			=> 'user'
 		);
 
