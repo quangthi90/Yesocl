@@ -85,6 +85,10 @@ class ModelBranchPost extends Model {
 		$oPost->setStatus( $data['status'] );
 		$oPost->setBranch( $branch );
 
+		if ( !empty($data['stocks']) ){
+			$oPost->setStockTags( $data['stocks'] );
+		}
+
 		$this->dm->persist( $oPost );
 		$this->dm->flush();
 		
@@ -218,7 +222,7 @@ class ModelBranchPost extends Model {
 		$oPost->setStatus( $data['status'] );
 
 		if ( !empty($data['stocks']) ){
-			$oPost->setStockCodes( $data['stocks'] );
+			$oPost->setStockTags( $data['stocks'] );
 		}
 
 		$branch = $oPost->getBranch();

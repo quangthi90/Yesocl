@@ -47,7 +47,7 @@ Abstract Class Post {
     private $countViewer = 0;
 
 	/** @MongoDB\Collection */
-	private $stockCodes = array();
+	private $stockTags = array();
 
 	/**
 	 * Get Comment By ID
@@ -182,15 +182,15 @@ Abstract Class Post {
 		return $this->countViewer;
 	}
 
-	public function addStockCode( $stockCode ){
-		$this->stockCodes[] = $stockCode;
+	public function addStockTag( $stockTag ){
+		$this->stockTags[] = $stockTag;
 	}
 
-	public function setStockCodes( $stockCodes ){
-		$this->stockCodes = $stockCodes;
+	public function setStockTags( $stockTags ){
+		$this->stockTags = $stockTags;
 	}
 
-	public function getStockCodes(){
-		return $this->stockCodes;
+	public function getStockTags(){
+		return $this->stockTags;
 	}
 }

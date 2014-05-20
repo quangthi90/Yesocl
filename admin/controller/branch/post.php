@@ -565,7 +565,7 @@ class ControllerBranchPost extends Controller {
 		if ( isset( $this->request->post['stocks'] ) ) {
 			$this->data['stocks'] = $this->request->post['stocks'];
 		}elseif ( isset( $post ) ) {
-			$this->data['stocks'] = implode( ',', $post->getStockCodes() );
+			$this->data['stocks'] = implode( ',', $post->getStockTags() );
 		}else {
 			$this->data['stocks'] = '';
 		}
