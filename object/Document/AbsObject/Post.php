@@ -49,6 +49,9 @@ Abstract Class Post {
 	/** @MongoDB\Collection */
 	private $stockTags = array();
 
+	/** @MongoDB\Collection */
+	private $userTags = array();
+
 	/**
 	 * Get Comment By ID
 	 * @author: Bommer <lqthi.khtn@gmail.com>
@@ -192,5 +195,17 @@ Abstract Class Post {
 
 	public function getStockTags(){
 		return $this->stockTags;
+	}
+
+	public function addUserTag( $userTag ){
+		$this->userTags[] = $userTag;
+	}
+
+	public function setUserTags( $userTags ){
+		$this->userTags = $userTags;
+	}
+
+	public function getUserTags(){
+		return $this->userTags;
 	}
 }
