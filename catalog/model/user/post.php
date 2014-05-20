@@ -22,16 +22,20 @@ class ModelUserPost extends Model {
 		if ( empty($data['user_slug']) ){
 			return false;
 		}
-		$user = $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['user_slug'] );
-		if ( !$user ){
+		$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $data['user_slug'] );
+		if ( !$oUser ){
 			return false;
 		}
 
 		if ( empty($data['author_id']) ){
 			return false;
 		}
-		$author = $this->dm->getRepository('Document\User\User')->find( $data['author_id'] );
-		if ( !$author ){
+		if ( $data['author_id'] != $oUser->getId() ){
+			$oAuthor = $this->dm->getRepository('Document\User\User')->find( $data['author_id'] );
+		}else{
+			$oAuthor = $oUser;
+		}
+		if ( !$oAuthor ){
 			return false;
 		}
 
@@ -47,47 +51,57 @@ class ModelUserPost extends Model {
 		
 		$oPost = new Post();
 		$oPost->setContent( $data['content'] );
-		$oPost->setUser( $author );
+		$oPost->setUser( $oAuthor );
 		$oPost->setStatus( true );
 		$oPost->setSlug( $slug );
-		$oPost->setOwnerId( $user->getId() );
+		$oPost->setOwnerId( $oUser->getId() );
 
 		if ( !empty($data['title']) ){
 			$oPost->setTitle( $data['title'] );
 		}
 
-		$lPosts = $user->getPostData();
+		if ( !empty($data['stockTags']) ){
+			$oPost->setStockTags( $data['stockTags'] );
+		}
+
+		if ( !empty($data['userTags']) ){
+			$oPost->setUserTags( $data['userTags'] );
+		}
+
+		$lPosts = $oUser->getPostData();
 
 		if ( !$lPosts ){
 			$lPosts = new Posts();
 			$this->dm->persist( $lPosts );
-			$lPosts->setUser( $user );
+			$lPosts->setUser( $oUser );
 		}
 
 		$lPosts->addPost( $oPost );
 		
 		$this->dm->flush();
 
+		// Add Image
 		if ( !empty($data['image_link']) && !empty($data['extension']) && is_file($data['image_link']) ){
 			$folder_link = $this->config->get('user')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $author->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $data['extension'];
+			$path = $folder_link . $oAuthor->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $data['extension'];
 			$dest = DIR_IMAGE . $path;
 			
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($data['image_link'], $dest) ){
 				$oPost->setThumb( $path );
 			}
+
+			$this->dm->flush();
 		}
 
-		$this->dm->flush();
-
+		// Cache post for what's new
 		$this->load->model('cache/post');
 		$data = array(
 			'post_id' => $oPost->getId(),
 			'type' => $this->config->get('post')['cache']['user'],
-			'type_id' => $user->getId(),
+			'type_id' => $oUser->getId(),
 			'view' => 0,
 			'created' => $oPost->getCreated()
 		);
