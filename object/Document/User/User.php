@@ -527,7 +527,7 @@ Class User {
 
 	public function getDataSolrFullname(){
 		try{
-			$this->solrFullname .= $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+			$this->solrFullname = $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr Fullname!<br>See User Document <b>Function getDataSolrFullname()</b>', 0, $e);
@@ -549,7 +549,7 @@ Class User {
 
 	public function getDataSolrPrimaryEmail(){
 		try{
-			$this->solrPrimaryEmail .= $this->getPrimaryEmail()->getEmail();
+			$this->solrPrimaryEmail = $this->getPrimaryEmail()->getEmail();
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);
