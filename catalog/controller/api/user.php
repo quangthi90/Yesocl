@@ -181,6 +181,7 @@ class ControllerApiUser extends Controller {
 
     public function getAllFriends() {
         $this->load->model('tool/image');
+        $this->load->model('tool/object');
         $this->load->model('friend/friend');
 
         $oCurrUser = $this->customer->getUser();
@@ -205,7 +206,7 @@ class ControllerApiUser extends Controller {
             $aUser['name'] = $aUser['username'];
             $aUser['id'] = $aUser['slug'];
             $aUser['type'] = 'contact';
-            $aUser['wall'] = $this->extension->path('WallPage', array('user_slug' => $aUser['slug']));
+            $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
 
             $aFriends[$aUser['slug']] = $aUser;
         }
