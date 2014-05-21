@@ -112,8 +112,8 @@ $_['routing']['ApiGetStockExchanges']			= 'services/get/stock/{stock_id}/exchang
 $_['routing']['ApiGetLastStockNews']			= 'services/get/stock/{stock_code}/news/last/{page}/';
 
 // Post
-$_['routing']['ApiPutPostLike']					= 'services/put/{post_type}/post/{post_slug}/like/';
 $_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}/';
+$_['routing']['ApiPutPostLike']					= 'services/put/{post_type}/post/{post_slug}/like/';
 $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}/liker/';
 $_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
 $_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
@@ -122,8 +122,8 @@ $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slu
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
 $_['routing']['ApiGetCommentLiker']				= 'services/get/{post_type}/post/comment/{comment_id}/liker/';
-$_['routing']['ApiPutCommentLike']				= 'services/put/{post_type}/post/comment/{comment_id}/like/';
 $_['routing']['ApiPutComment']					= 'services/put/{post_type}/post/comment/{comment_id}/';
+$_['routing']['ApiPutCommentLike']				= 'services/put/{post_type}/post/comment/{comment_id}/like/';
 $_['routing']['ApiPostComment']					= 'services/post/{post_type}/post/{post_slug}/comment/';
 $_['routing']['ApiDeleteComment']				= 'services/delete/{post_type}/post/comment/{comment_id}/';
 
