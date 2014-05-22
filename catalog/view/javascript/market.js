@@ -676,9 +676,10 @@ function NewsViewModel(options) {
 		};
 		var successCallback = function(data){
 			if(data.success === "ok"){
-				self.currentPost().title = post.title;
-				self.currentPost().thumb = post.thumb;
-				self.currentPost().content = post.content;
+				self.currentPost().title(post.title);
+				self.currentPost().thumb(post.thumb);
+				self.currentPost().image(post.thumb);
+				self.currentPost().content(post.content);
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);
 			}
@@ -739,18 +740,18 @@ function NewsViewModel(options) {
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.img-url").val("");
 		} else {
-			containerElement.find("input.img-url").val(post.thumb);
+			containerElement.find("input.img-url").val(post.thumb());
 			imgContainer.find(".drop-zone-show").hide(0);
 			var postImageItem = $("<div class='post_image_item'></div>");
-			postImageItem.append('<img src="' + post.thumb + '" class="img-uploaded"><span class="close"><i class="icon-remove"></i></span>');
+			postImageItem.append('<img src="' + post.thumb() + '" class="img-uploaded"><span class="close"><i class="icon-remove"></i></span>');
 			postImageItem.find("span.close").on("click", function(){
 				$(this).parent().remove();
 				imgContainer.find(".drop-zone-show").show(0);
 			});
 			imgContainer.append(postImageItem);
 		}		
-		containerElement.find("input.post-title-input").val(post.title);
-		containerElement.find("#post-adv-editor").code(post.content);
+		containerElement.find("input.post-title-input").val(post.title());
+		containerElement.find("#post-adv-editor").code(post.content());
 		containerElement.find("input.autocomplete-tag-input").select2("data", post.stockTags());
 	}
 

@@ -14,12 +14,12 @@ function PostModel(data) {
 	var that = this;
 	that.id = data.id || '';
 	that.user = data.user || {};
-	that.title = data.title || '';
-	that.description = data.description || '';
-	that.content = data.content || '';
+	that.title = ko.observable(data.title || '');
+	that.content = ko.observable(data.content || '');
+	that.thumb = ko.observable(data.thumb || '');
+	that.image = ko.observable(data.image || '');
 	that.created = data.created || null;
-	that.thumb = data.thumb || '';
-	that.image = data.image || '';
+	that.description = data.description || '';
 	that.slug = data.slug || '';
 	that.type = data.type || '';
 	that.email = data.email || '';
