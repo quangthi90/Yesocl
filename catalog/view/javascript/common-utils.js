@@ -389,3 +389,16 @@ ko.bindingHandlers.zoomImage = {
         });
     }
 }
+ko.bindingHandlers.zoomInitImage = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var image = ko.utils.unwrapObservable(valueAccessor());
+        $(element).on("click", function(){
+            $.magnificPopup.open({
+              items: {
+                src: image
+              },
+              type: 'image'
+            });
+        });
+    }
+}

@@ -75,11 +75,7 @@
                 if (file.url) {
                     var imageUploaded = $('<img>').prop('src', file.url).addClass('img-uploaded');
                     $(data.context[index]).children('canvas').replaceWith(imageUploaded);
-                    if(that.listImgUrl.length == 0){
-                        that.listImgUrl = file.url;
-                    }else {                    
-                        that.listImgUrl += ('*' + file.url);
-                    }
+                    that.listImgUrl = file.url;
                 } else if (file.error) {
                     var error = $('<div class="alert alert-error"/>').html('<strong>Error</strong> ' + file.error);
                     $(data.context[index]).append(error);

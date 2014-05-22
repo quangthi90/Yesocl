@@ -677,10 +677,10 @@ function NewsViewModel(options) {
 		};
 		var successCallback = function(data){
 			if(data.success === "ok"){
-				self.currentPost().title(post.title);
-				self.currentPost().thumb(post.thumb);
-				self.currentPost().image(post.thumb);
-				self.currentPost().content(post.content);
+				self.currentPost().title(data.post.title);
+				self.currentPost().thumb(data.post.thumb);
+				self.currentPost().image(data.post.image);
+				self.currentPost().content(data.post.content);
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);
 			}
@@ -736,7 +736,7 @@ function NewsViewModel(options) {
 	function _fillInDataForEdit(post) {
 		var containerElement = $("#news-advance-post");
 		var imgContainer = containerElement.find(".img-previewer-container");
-		if(post.thumb()) { 
+		if(post.thumb()) {
 			containerElement.find("input.img-url").val(post.thumb());
 			imgContainer.find(".drop-zone-show").hide(0);
 			var postImageItem = $("<div class='post_image_item'></div>");

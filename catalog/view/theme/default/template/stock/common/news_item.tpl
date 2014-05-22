@@ -74,7 +74,7 @@
 			<!-- /ko -->
 			<!-- ko if: $data.image -->
 			<div class="post_image">
-				<a class="news-link" data-bind="link: { title: $data.title(), route: 'PostPage', params: { post_type :  'branch', post_slug: $data.slug } }">
+				<a class="news-link" data-bind="zoomInitImage: $data.thumb">
 					<img class="news-img" data-bind="attr: { src : $data.image(), alt : $data.title() } ">
 				</a>
 			</div>			
