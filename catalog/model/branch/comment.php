@@ -31,9 +31,8 @@ class ModelBranchComment extends Model {
 		// Update permission
 		$lComments = $oPost->getComments($isReverse);
 		$aComments = array();
+		$idLoggedUser = $this->customer->getId();
 		foreach ( $lComments as $oComment ) {
-			$idLoggedUser = $this->customer->getId();
-
 			if ( $idLoggedUser == $oComment->getUser()->getId() ) {
 				$oComment->setCanDelete( true );
 				$oComment->setCanEdit( true );

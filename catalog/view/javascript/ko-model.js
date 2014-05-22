@@ -24,8 +24,8 @@ function PostModel(data) {
 	that.type = data.type || '';
 	that.email = data.email || '';
 	that.isOwner = data.is_owner || false;
-	that.isEdit = data.is_edit || true;
-	that.isDelete = data.is_delete || false;
+	that.isEdit = data.can_edit || false;
+	that.isDelete = data.can_delete || false;
 	that.owner = data.owner || {};
 	that.category = data !== undefined ? {
 		id : data.category_id,

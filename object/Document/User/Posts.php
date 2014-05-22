@@ -51,6 +51,16 @@ Class Posts {
 		return null;
 	}
 
+	public function getPostByCommentId( $comment_id ){
+		foreach ( $this->posts as $post ) {
+			if ( $post->getCommentById($comment_id) ){
+				return $post;
+			}
+		}
+
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}

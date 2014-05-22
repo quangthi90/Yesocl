@@ -46,15 +46,15 @@ class ModelToolObject extends Model
 	                $aComment['author'] = $aComment['author'];
 	            }
 
-	            $aComment['href_user'] = $this->extension->path('WallPage', array(
+	            $aComment['href_user'] = $this->path('WallPage', array(
 	                'user_slug' => $aUser['slug']
 	            ));
-	            $aComment['href_like'] = $this->extension->path('CommentLike', array(
+	            $aComment['href_like'] = $this->path('CommentLike', array(
 	                'post_slug' => $sPostSlug,
 	                'post_type' => $sPostType,
 	                'comment_id' => $aComment['id']
 	            ));
-	            $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+	            $aComment['href_liked_user'] = $this->path('CommentGetLiker', array(
 	                'post_slug' => $sPostSlug,
 	                'post_type' => $sPostType,
 	                'comment_id' => $aComment['id']
@@ -63,12 +63,12 @@ class ModelToolObject extends Model
 
 	            if ( $aComment['user_id'] == $idCurrUserId ){
 	            	$aComment['is_owner'] = true;
-	            	$aComment['href_edit'] = $this->extension->path('CommentEdit', array(
+	            	$aComment['href_edit'] = $this->path('CommentEdit', array(
 	                'post_slug' => $sPostSlug,
 	                'post_type' => $sPostType,
 	                'comment_id' => $aComment['id']
 		            ));
-		            $aComment['href_delete'] = $this->extension->path('CommentDelete', array(
+		            $aComment['href_delete'] = $this->path('CommentDelete', array(
 		                'post_slug' => $sPostSlug,
 		                'post_type' => $sPostType,
 		                'comment_id' => $aComment['id']
@@ -125,15 +125,15 @@ class ModelToolObject extends Model
             $aComment['author'] = $aComment['author'];
         }
 
-        $aComment['href_user'] = $this->extension->path('WallPage', array(
+        $aComment['href_user'] = $this->path('WallPage', array(
             'user_slug' => $aUser['slug']
         ));
-        $aComment['href_like'] = $this->extension->path('CommentLike', array(
+        $aComment['href_like'] = $this->path('CommentLike', array(
             'post_slug' => $sPostSlug,
             'post_type' => $sPostType,
             'comment_id' => $aComment['id']
         ));
-        $aComment['href_liked_user'] = $this->extension->path('CommentGetLiker', array(
+        $aComment['href_liked_user'] = $this->path('CommentGetLiker', array(
             'post_slug' => $sPostSlug,
             'post_type' => $sPostType,
             'comment_id' => $aComment['id']
@@ -142,12 +142,12 @@ class ModelToolObject extends Model
         $aComment['is_liked'] = $iLiked;
         if ( $aComment['user_id'] == $idCurrUserId ){
         	$aComment['is_owner'] = true;
-        	$aComment['href_edit'] = $this->extension->path('CommentEdit', array(
+        	$aComment['href_edit'] = $this->path('CommentEdit', array(
 	            'post_slug' => $sPostSlug,
 	            'post_type' => $sPostType,
 	            'comment_id' => $aComment['id']
 	        ));
-	        $aComment['href_delete'] = $this->extension->path('CommentDelete', array(
+	        $aComment['href_delete'] = $this->path('CommentDelete', array(
 	            'post_slug' => $sPostSlug,
 	            'post_type' => $sPostType,
 	            'comment_id' => $aComment['id']
@@ -224,13 +224,6 @@ class ModelToolObject extends Model
 			$aPost['isLiked'] = false;
 		}
 
-		// thumb
-		if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-			$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-		}else{
-			$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
-		}
-
 		if ( empty($aUsers[$aPost['user_id']]) ){
 			$oUser = $oPost->getUser();
 			$aUser = $oUser->formatToCache();
@@ -251,9 +244,22 @@ class ModelToolObject extends Model
                     $aPost['is_owner'] = false;
                     $aPost['owner'] = array(
                         'username' => $oOwner->getUsername(),
-                        'href' => $this->extension->path( "WallPage", array('user_slug' => $oOwner->getSlug()) )
+                        'href' => $this->path( "WallPage", array('user_slug' => $oOwner->getSlug()) )
                     );
                 }
+
+                // Check permission
+                if ( $oPost->getUser()->getId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                	$aPost['can_edit'] = true;
+                }elseif ( $oPost->getOwnerId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                }
+
+                // thumb
+				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+				}
                 break;
 
             case $this->config->get('common')['type']['branch']:
@@ -262,8 +268,20 @@ class ModelToolObject extends Model
                 $aPost['is_owner'] = false;
                 $aPost['owner'] = array(
                     'username' => $oCategory->getName(),
-                    'href' => $this->extension->path("BranchCategory", array('category_slug' => $oCategory->getSlug()) )
+                    'href' => $this->path("BranchCategory", array('category_slug' => $oCategory->getSlug()) )
                 );
+
+                if ( $oPost->getUser()->getId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                	$aPost['can_edit'] = true;
+                }
+
+                // thumb
+				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+				}else{
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+				}
                 break;
         }
 
@@ -314,5 +332,28 @@ class ModelToolObject extends Model
 
 		return $aComment;
 	}
+
+	// Generate url
+	public function path( $path, $params = array() ){
+        $routing = $this->config->get('routing')[$path];
+        $parts = explode( '/', $routing );
+
+        foreach ( $params as $key => $param ) {
+            $index = array_search( "{".$key."}", $parts );
+            if ( $index !== false ){
+                $parts[$index] = $param;
+            }
+        }
+
+        if ( count($params) == 0 ){
+            foreach ( $parts as $key => $data ) {
+                if ( preg_match('/^{/', $data) && preg_match('/}$/', $data) ){
+                    array_splice($parts, $key, 1);
+                }
+            }
+        }
+        
+        return HTTPS_SERVER . implode('/', $parts);
+    }
 }
 ?>
