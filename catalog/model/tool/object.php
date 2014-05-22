@@ -224,13 +224,6 @@ class ModelToolObject extends Model
 			$aPost['isLiked'] = false;
 		}
 
-		// thumb
-		if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-			$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-		}else{
-			$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
-		}
-
 		if ( empty($aUsers[$aPost['user_id']]) ){
 			$oUser = $oPost->getUser();
 			$aUser = $oUser->formatToCache();
@@ -262,6 +255,11 @@ class ModelToolObject extends Model
                 }elseif ( $oPost->getOwnerId() == $this->customer->getId() ){
                 	$aPost['can_delete'] = true;
                 }
+
+                // thumb
+				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+				}
                 break;
 
             case $this->config->get('common')['type']['branch']:
@@ -277,6 +275,13 @@ class ModelToolObject extends Model
                 	$aPost['can_delete'] = true;
                 	$aPost['can_edit'] = true;
                 }
+
+                // thumb
+				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+				}else{
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+				}
                 break;
         }
 
