@@ -77,9 +77,9 @@
 				<a class="news-link" data-bind="link: { title: $data.title(), route: 'PostPage', params: { post_type :  'branch', post_slug: $data.slug } }">
 					<img class="news-img" data-bind="attr: { src : $data.image(), alt : $data.title() } ">
 				</a>
-			</div>
-			<div class="news-short-content" data-bind="html: $data.content()"></div>
+			</div>			
 			<!-- /ko -->
+			<div class="news-short-content" data-bind="html: $data.content()"></div>
 		</div>
 	</div>
 {% endblock %}
