@@ -131,7 +131,7 @@ class ControllerApiComment extends Controller {
             $this->customer->getId()
         );
         
-        if ( !$iTotalComment ){
+        if ( $iTotalComment === false ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'you not have authentication for this comment'

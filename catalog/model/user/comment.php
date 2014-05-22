@@ -260,7 +260,7 @@ class ModelUserComment extends Model {
 
 		$this->oPost = $oPost;
 
-		return true;
+		return $oPost->getComments()->count();
 	}
 
 	public function getTotalComments( $sPostSlug ){
