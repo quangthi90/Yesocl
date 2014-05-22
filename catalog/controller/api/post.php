@@ -7,14 +7,14 @@ class ControllerApiPost extends Controller {
             if ( empty($this->request->get['slug']) ){
                 return $this->response->setOutput(json_encode(array(
                     'success' => 'not ok',
-                    'error' => 'slug is empty'
+                    'error' => gettext('slug is empty')
                 )));
             }
 
             if ( empty($this->request->get['post_type']) ){
                 return $this->response->setOutput(json_encode(array(
                     'success' => 'not ok',
-                    'error' => 'post type is empty!'
+                    'error' => gettext('post type is empty!')
                 )));
             }
 
@@ -69,7 +69,8 @@ class ControllerApiPost extends Controller {
 
             if ( !$oPost ){
                 return $this->response->setOutput(json_encode(array(
-                    'success' => 'not ok: Save Post have error',
+                    'success' => 'not ok',
+                    'error' => gettext('Save Post have error')
                 )));
             }
 
@@ -130,14 +131,14 @@ class ControllerApiPost extends Controller {
             if ( empty($this->request->get['post_slug']) ){
                 return $this->response->setOutput(json_encode(array(
                     'success' => 'not ok',
-                    'error' => 'post slug is empty'
+                    'error' => gettext('post slug is empty')
                 )));
             }
 
             if ( empty($this->request->get['post_type']) ){
 				return $this->response->setOutput(json_encode(array(
 		            'success' => 'not ok',
-		            'error' => 'post type is empty!'
+		            'error' => gettext('post type is empty!')
 		        )));
 			}
 
@@ -172,7 +173,7 @@ class ControllerApiPost extends Controller {
             if ( !$oPost ){
                 return $this->response->setOutput(json_encode(array(
                     'success' => 'not ok',
-                    'error' => 'edit post has error'
+                    'error' => gettext('edit post has error')
                 )));
             }
 
@@ -204,14 +205,14 @@ class ControllerApiPost extends Controller {
         if ( empty($this->request->get['post_slug']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'post slug is empty'
+                'error' => gettext('post slug is empty')
             )));
         }
 
         if ( empty($this->request->get['post_type']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'post type is empty!'
+                'error' => gettext('post type is empty!')
             )));
         }
 
@@ -238,14 +239,14 @@ class ControllerApiPost extends Controller {
 		if ( empty($this->request->get['post_slug']) ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
-	            'error' => 'post slug is empty!'
+	            'error' => gettext('post slug is empty!')
 	        )));
 		}
 
 		if ( empty($this->request->get['post_type']) ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
-	            'error' => 'post type is empty!'
+	            'error' => gettext('post type is empty!')
 	        )));
 		}
 
@@ -291,7 +292,7 @@ class ControllerApiPost extends Controller {
 
         return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
-            'error' => 'like post has error'
+            'error' => gettext('like post has error')
         )));
 	}
 
@@ -301,14 +302,14 @@ class ControllerApiPost extends Controller {
         if ( empty($this->request->get['post_slug']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'post slug is empty!'
+                'error' => gettext('post slug is empty!')
             )));
         }
 
         if ( empty($this->request->get['post_type']) ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
-                'error' => 'post type is empty!'
+                'error' => gettext('post type is empty!')
             )));
         }
 
