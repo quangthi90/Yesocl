@@ -254,6 +254,14 @@ class ModelToolObject extends Model
                         'href' => $this->path( "WallPage", array('user_slug' => $oOwner->getSlug()) )
                     );
                 }
+
+                // Check permission
+                if ( $oPost->getUser()->getId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                	$aPost['can_edit'] = true;
+                }elseif ( $oPost->getOwnerId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                }
                 break;
 
             case $this->config->get('common')['type']['branch']:
@@ -264,6 +272,11 @@ class ModelToolObject extends Model
                     'username' => $oCategory->getName(),
                     'href' => $this->path("BranchCategory", array('category_slug' => $oCategory->getSlug()) )
                 );
+
+                if ( $oPost->getUser()->getId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                	$aPost['can_edit'] = true;
+                }
                 break;
         }
 
