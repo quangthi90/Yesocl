@@ -386,7 +386,9 @@ ko.bindingHandlers.mention = {
                 }        
             },
             onMentionChanged: function(){
-                observableAttr($(element).mentionsInput("getHtmlContent"));
+                var content = $(element).mentionsInput("getHtmlContent");
+                console.log(content);
+                observableAttr(content);
             },
             fullNameTrigger: false
         });

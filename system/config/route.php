@@ -99,7 +99,7 @@ $_['route']['StockMarket']					= 'stock/market/';
 $_['route']['StockMarketNone']				= 'stock/market/';
 $_['route']['StockPage']					= 'stock/stock/';
 $_['route']['StockNewsPage']				= 'stock/news/';
-$_['route']['StockNIdeaPage']				= 'stock/ideas/';
+$_['route']['StockIdeaPage']				= 'stock/ideas/';
 
 //-- API --//
 // Common

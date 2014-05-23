@@ -21,6 +21,7 @@
     <div id="y-main-content" class="has-horizontal stock-page">
         {{ block('stock_common_block_stock_chart') }}
         {{ block('stock_common_block_news') }}
+        {{ block('stock_common_block_ideas') }}
         {#{ block('stock_common_block_basic_key') }}
         {{ block('stock_common_block_company_profile') }}
         {{ block('stock_common_block_financial') }#}
@@ -53,6 +54,14 @@
                     loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
                 }
             };
+            var ideasOptions = {
+                Id : "stock-ideas",
+                canLoadMore: false,
+                hasNewPost: false,
+                urls : {
+                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                }
+            };
             var userBoxOptions = {
             };            
             var commentBoxOptions = {
@@ -64,6 +73,7 @@
             var viewModel = {
                 chartModel : new ChartViewModel(chartOptions),
                 newsModel: new NewsViewModel(newsOptions),
+                ideasModel: new NewsViewModel(ideasOptions),
                 commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
                 userBoxModel : new UserBoxViewModel(userBoxOptions)
             };
