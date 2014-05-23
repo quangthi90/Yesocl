@@ -179,14 +179,25 @@ ko.bindingHandlers.autoCompleteTag = {
                     var data = { results : [] };
                     ko.utils.arrayForEach(queryData, function(t) {
                         if(t.code.toUpperCase().indexOf(query.term.toUpperCase()) >= 0){
-                            data.results.push(t);
+                            data.results.push({ id: t.code, text: t.code });
                         }
                     });
                     query.callback(data);
                 });                
             },
-            formatResult: function(item) { return item.code + " : " + item.name },
-            formatSelection: function(item) { return item.code  }
+            formatResult: function(item) { return item.text },
+            formatSelection: function(item) { return item.text },
+            initSelection : function (element, callback) {
+                var data = [];
+                var value = $(element).val();
+                if(value){
+                    var tags = value.split(",");
+                    ko.utils.arrayForEach(tags, function(t){
+                        data.push({ id : t, text: t });
+                    });
+                }
+                callback(data);
+            }
         });
 
     },

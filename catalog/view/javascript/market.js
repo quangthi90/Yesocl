@@ -755,7 +755,7 @@ function NewsViewModel(options) {
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
 		console.log(post.stockTags());
-		containerElement.find("input.autocomplete-tag-input").select2("data", post.stockTags());
+		containerElement.find("input.autocomplete-tag-input").select2("val", post.stockTags());
 	}
 
 	function _openAdvancePost (openCallback) {
