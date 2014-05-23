@@ -2,10 +2,16 @@
 {% use '@template/default/template/stock/common/news_item_add_edit.tpl' %}
 
 {% block stock_common_block_news %}
+{% if news_title is not defined %}
+    {% set news_title = 'News'|trans %}
+{% endif %}
+
 <div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
+    {% if news_title != '' %}
     <div class="block-header">
-        <h3 class="block-title"><a href="{{ path('StockNewsPage') }}">{% trans %}News{% endtrans %} <i class="icon-caret-right"></i></a></h3>
+        <h3 class="block-title"><a href="{{ path('StockNewsPage') }}">{{ news_title }} <i class="icon-caret-right"></i></a></h3>
     </div>
+    {% endif %}
     <div class="block-content">
         <!-- ko if: hasNewPost() -->
         <div class="news-creating-container fl" style="opacity: 0;">
