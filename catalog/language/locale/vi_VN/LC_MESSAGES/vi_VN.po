@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-05-23 07:55+0700\n"
-"PO-Revision-Date: 2014-05-23 07:57+0700\n"
+"POT-Creation-Date: 2014-05-23 08:01+0700\n"
+"PO-Revision-Date: 2014-05-23 08:01+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -1295,40 +1295,37 @@ msgid "Branch Detail Page"
 msgstr "Trang chi tiết ngành"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:86
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:122
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:87
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:109
-msgid "Week"
-msgstr "Tuần"
+msgid "12 - Week Range"
+msgstr "Hạng 12 tuần"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:88
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:124
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:89
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:111
-msgid "Range"
-msgstr "Hạng"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:99
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:100
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:97
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:98
 msgid "Open Price"
 msgstr "Giá mở cửa"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:106
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:104
 msgid "Volume"
 msgstr "Khối lượng"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:113
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:111
 msgid "Market Cap"
 msgstr "Vốn thị trường"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:135
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:122
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:120
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:107
+msgid "52 - Week Range"
+msgstr "Hạng 52 tuần"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:131
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:118
 msgid "Previous Closed Price"
 msgstr "Giá đóng của trước"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:146
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:142
+#, fuzzy
 msgid "Price/Earnings"
-msgstr ""
+msgstr "Giá mở cửa"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/6a/25/3bb748d3fc3e34f502280045019d4a3587a0df9da610bf1dbb1f32193e63.php:67
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/a2/ed/69f585c7b5db44c64745c806e110770329641886289bae8aef1a5efd68bf.php:67
@@ -1560,6 +1557,12 @@ msgstr "Bài viết của người bạn theo đuôi"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/ec/6e/58c720c32dd60fcaa86e1b5fca54533d3a9ca6c184c15ea2153f6d7bb4c5.php:61
 msgid "News"
 msgstr "Tin tức"
+
+#~ msgid "Week"
+#~ msgstr "Tuần"
+
+#~ msgid "Range"
+#~ msgstr "Hạng"
 
 #~ msgid "Open"
 #~ msgstr "Giá mở cửa"

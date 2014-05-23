@@ -44,7 +44,7 @@
                     <div class="span8 index-values">
                         <div class="row-fluid">
                             <div class="span3">
-                                <label class="index-label">12-{% trans %}Week{% endtrans %} {% trans %}Range{% endtrans %}</label>
+                                <label class="index-label">{% trans %}12 - Week Range{% endtrans %}</label>
                                 <span class="index-value">
                                     <span data-bind="text: $data.range_price[84].min_price"></span>
                                      - 
@@ -66,7 +66,7 @@
                         </div>
                         <div class="row-fluid">
                             <div class="span3">
-                                <label class="index-label">52-{% trans %}Week{% endtrans %} {% trans %}Range{% endtrans %}</label>
+                                <label class="index-label">{% trans %}52 - Week Range{% endtrans %}</label>
                                 <span class="index-value">
                                     <span data-bind="text: $data.range_price[364].min_price"></span>
                                      - 
