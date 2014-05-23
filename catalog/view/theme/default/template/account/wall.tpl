@@ -31,8 +31,18 @@
                 Id : "posts-wall",
                 canLoadMore: true,
                 validate: function(postData){
+                    var validationMsgs = [];
                     //Validate here, return a collection of error if any
-                    return [];
+                    if(postData.content.length === 0) {
+                        validationMsgs.push("Content is required");
+                    }else {
+                        var temp = $("<div></div>");
+                        temp.append(postData.content);
+                        if(temp.html().trim().length === 0){
+                            validationMsgs.push("Content is required");
+                        }
+                    }
+                    return validationMsgs;
                 },
                 hasNewPost: true,
                 urls : {

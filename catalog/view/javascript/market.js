@@ -521,7 +521,6 @@ function NewsViewModel(options) {
 		var postData = _collectData(true);
 		_addPost(postData, function(data){
 			_clearAfterAdding(true);
-			self.closeAdvancePost();
 		});
 	};
 
@@ -529,7 +528,6 @@ function NewsViewModel(options) {
 		var newData = _collectData(true);
 		_savePost(newData, function(data){
 			_clearAfterAdding(true);
-			self.closeAdvancePost();
 		});
 	};
 
@@ -568,6 +566,7 @@ function NewsViewModel(options) {
 	}
 
 	this.openAdvancePost = function(){
+		_clearAfterAdding(true);
 		self.currentPost(null);
 		_openAdvancePost();
 	}
@@ -644,7 +643,8 @@ function NewsViewModel(options) {
 	}
 
 	function _addPost(post, callback){
-		if(self.validate(post).length > 0) {
+		var msgs = self.validate(post);
+		if(msgs.length > 0) {
 			return;
 		}
 		var ajaxOptions = {
@@ -661,12 +661,16 @@ function NewsViewModel(options) {
 				callback(data);
 			}
 		}
+		//Close advance box:
+		self.closeAdvancePost();
+
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
 	function _savePost(post, callback){
-		if(self.validate(post).length > 0) {
+		var msgs = self.validate(post);
+		if(msgs.length > 0) {
 			return;
 		}
 		var updateOptions = self.urls.updateNews.params;
@@ -688,6 +692,9 @@ function NewsViewModel(options) {
 				callback(data);
 			}
 		}
+		//Close advance box:
+		self.closeAdvancePost();
+
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
@@ -754,7 +761,6 @@ function NewsViewModel(options) {
 		}		
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
-		console.log(post.stockTags());
 		containerElement.find("input.autocomplete-tag-input").select2("val", post.stockTags());
 	}
 

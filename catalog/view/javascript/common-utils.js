@@ -102,6 +102,33 @@ YesGlobal.Utils = {
             }
         });
     },
+    showMessage: function(data, callback) {
+        var message = "";
+        if(typeof data === "string") {
+            message = data;
+        }else if(typeof data === "object"){
+            message = data.join("\n");
+        }
+
+        if(message.length === 0){
+            return;
+        }
+        bootbox.dialog({
+            message: message,
+            title: "Information",
+            buttons: {
+                main: {
+                    label: "Close",
+                    className: "btn-primary",
+                    callback: function() {
+                        if(callback && typeof callback === "function"){
+                            callback();
+                        }
+                    }
+                }
+            }
+        });
+    },
     initStockList: function(callback) {
         if(YesGlobal.Caches.StockList.length > 0){
             callback(YesGlobal.Caches.StockList);
