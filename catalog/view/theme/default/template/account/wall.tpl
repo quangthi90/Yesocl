@@ -36,8 +36,10 @@
                     if(postData.content.length === 0) {
                         validationMsgs.push("Content is required");
                     }else {
+                        var content = postData.content.replace(new RegExp("&nbsp;", 'g'), "");
+                        content = content.replace(new RegExp("<br>", 'g'), "");
                         var temp = $("<div></div>");
-                        temp.append(postData.content);
+                        temp.html(content);
                         if(temp.html().trim().length === 0){
                             validationMsgs.push("Content is required");
                         }
