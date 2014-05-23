@@ -346,7 +346,7 @@ class ControllerApiPost extends Controller {
     }
 
 	private function validate(){
-        if ( empty($this->request->post['content']) || strlen($this->request->post['content']) == 0 ) {
+        if ( empty($this->request->post['content']) || strlen(trim($this->request->post['content'])) == 0 ) {
             $this->error['warning'] = gettext( 'content is empty' );
         
         }elseif ( !empty($this->request->files['thumb']) && $this->request->files['thumb']['size'] > 0 ) {
@@ -359,7 +359,7 @@ class ControllerApiPost extends Controller {
             $this->error['warning'] = gettext( 'user slug is empty' );
         
         }elseif ( $this->request->get['post_type'] == $this->config->get('common')['type']['branch'] ){
-            if ( empty($this->request->post['description']) || strlen($this->request->post['description']) == 0 ){
+            if ( empty($this->request->post['description']) || strlen(trim($this->request->post['description'])) == 0 ){
                 $this->error['warning'] = gettext( 'description is empty' );
             
             }elseif ( empty($this->request->post['category']) ){
