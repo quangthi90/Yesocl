@@ -145,6 +145,7 @@ class ControllerApiPost extends Controller {
 			$sModel = $this->request->get['post_type'] . '/post';
 			$this->load->model($sModel);
             $this->load->model('tool/image');
+            $this->load->model('tool/object');
 
             $sImageLink = null;
             $sExtension = null;
@@ -177,15 +178,7 @@ class ControllerApiPost extends Controller {
                 )));
             }
 
-            $aPost = $oPost->formatToCache();
-
-            // thumb
-            if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-                $aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-            }else{
-                $aPost['image'] = null;
-                $aPost['thumb'] = null;
-            }
+            $aPost = $this->model_tool_object->formatPost( $oPost );
 
             return $this->response->setOutput(json_encode(array(
                 'success' => 'ok',
