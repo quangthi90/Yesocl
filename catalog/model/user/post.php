@@ -151,6 +151,10 @@ class ModelUserPost extends Model {
 			}
 		}
 
+		if ( empty($data['image_link']) && empty($data['extension']) ){
+			$oPost->setThumb( null );
+		}
+
 		if ( !empty($data['content']) ){
 			// $oPost->setContent( htmlentities($data['content']) );
 			$oPost->setContent( $data['content'] );
