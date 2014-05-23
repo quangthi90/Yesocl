@@ -18,7 +18,7 @@ class ControllerApiComment extends Controller {
             )));
         }
 
-        if ( empty($this->request->post['content']) ){
+        if ( empty($this->request->post['content']) || strlen(trim($this->request->post['content'])) == 0 ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'content is empty!'
@@ -70,7 +70,7 @@ class ControllerApiComment extends Controller {
             )));
         }
 
-        if ( empty($this->request->post['content']) ){
+        if ( empty($this->request->post['content']) || strlen(trim($this->request->post['content'])) == 0 ){
             return $this->response->setOutput(json_encode(array(
                 'success' => 'not ok',
                 'error' => 'content is empty!'
