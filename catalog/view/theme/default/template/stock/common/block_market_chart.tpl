@@ -60,7 +60,7 @@
                                     </span>
                                 </div>
                                 <div class="span6" data-bind="with: $data.last_exchange">
-                                    <label class="index-label">{% trans %}Open{% endtrans %}</label>
+                                    <label class="index-label">{% trans %}Open Price{% endtrans %}</label>
                                     <span class="index-value" data-bind="text: $data.open_price, css: { 'price-down' : $data.open_price < 0 }"></span>
                                 </div>
                             </div>
@@ -74,7 +74,7 @@
                                     </span>
                                 </div>
                                 <div class="span6" data-bind="with: $data.pre_last_exchange">
-                                    <label class="index-label">{% trans %}Previous Closed{% endtrans %}</label>
+                                    <label class="index-label">{% trans %}Previous Closed Price{% endtrans %}</label>
                                     <span class="index-value" data-bind="text: $data.close_price, css: { 'price-down' : $data.open_price < 0 }"></span>
                                 </div>
                             </div>
