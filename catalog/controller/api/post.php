@@ -79,41 +79,6 @@ class ControllerApiPost extends Controller {
             $this->load->model('tool/object');
             $aPost = $this->model_tool_object->formatPost( $oPost );
 
-            // Add notification
-            $this->load->model('user/notification');
-            
-            if ( $this->customer->getSlug() != $this->request->get['slug'] ){
-                $this->model_user_notification->addNotification(
-                    $this->request->get['user_slug'],
-                    $this->customer->getUser(),
-                    $this->config->get('common')['action']['post'],
-                    $oPost->getId(),
-                    $oPost->getSlug(),
-                    $sPostType,
-                    $this->config->get('common')['object']['wall']
-                );
-            }
-
-            // if ( $this->request->get['post_type'] == $this->config->get('common')['type']['user'] ){
-                
-            // }
-
-            if ( !empty($this->request->post['tags']) ){
-                $aUserSlugs = $this->request->post['tags'];
-
-                foreach ( $aUserSlugs as $sUserSlug ) {
-                    $this->model_user_notification->addNotification(
-                        $sUserSlug,
-                        $this->customer->getUser(),
-                        $this->config->get('common')['action']['tag'],
-                        $oPost->getId(),
-                        $oPost->getSlug(),
-                        $sPostType,
-                        $this->config->get('common')['object']['post']
-                    );
-                }
-            }
-
             return $this->response->setOutput(json_encode(array(
                 'success' => 'ok',
                 'post' => $aPost

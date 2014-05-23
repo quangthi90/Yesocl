@@ -106,6 +106,10 @@ class ModelUserPost extends Model {
 			'created' => $oPost->getCreated()
 		);
 		$this->model_cache_post->addPost( $data );
+
+		// Notifications
+		$this->load->model('tool/object');
+		$this->model_tool_object->checkPostNotification( $oPost );
 		
 		return $oPost;
 	}
@@ -187,6 +191,10 @@ class ModelUserPost extends Model {
 		}
 		
 		$this->dm->flush();
+
+		// Notifications
+		$this->load->model('tool/object');
+		$this->model_tool_object->checkPostNotification( $oPost );
 		
 		return $oPost;
 	}

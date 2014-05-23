@@ -2,11 +2,12 @@
 use Document\User\Notification;
 
 class ModelUserNotification extends Model {
-	public function addNotification( $user_id, $actor, $action, $object_id, $slug, $type, $object ){
-		$user = $this->dm->getRepository('Document\User\User')->findOneBy( array('slug' => $user_id) );
+	public function addNotification( $idUser, $actor, $sAction, $idObject, $sPostSlug, $sType, $sObject ){
+		$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $idUser );
 		
-		if ( !$user ){
-			return false;
+		if ( !$oUser ){
+			$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
+			if ( !$oUser ) return false;
 		}
 
 		if ( !is_object($actor) ){
@@ -16,21 +17,21 @@ class ModelUserNotification extends Model {
 			}
 		}
 
-		$notification = $user->getNotificationByData( $actor->getId(), $object_id, $action );
+		$oNotification = $oUser->getNotificationByData( $actor->getId(), $idObject, $sAction );
 		
-		if ( !$notification ){
-			$notification = new Notification();
-			$this->dm->persist( $notification );
-			$notification->setActor( $actor );
-			$notification->setAction( $action );
-			$notification->setObjectId( $object_id );
-			$notification->setSlug( $slug );
-			$notification->setType( $type );
-			$notification->setObject( $object );
+		if ( !$oNotification ){
+			$oNotification = new Notification();
+			$this->dm->persist( $oNotification );
+			$oNotification->setActor( $actor );
+			$oNotification->setAction( $sAction );
+			$oNotification->setObjectId( $idObject );
+			$oNotification->setSlug( $sPostSlug );
+			$oNotification->setType( $sType );
+			$oNotification->setObject( $sObject );
 
-			$user->addNotification( $notification );
+			$oUser->addNotification( $oNotification );
 		}else{
-			$notification->setStatus( true );
+			$oNotification->setStatus( true );
 		}
 
 		$this->dm->flush();
@@ -38,41 +39,41 @@ class ModelUserNotification extends Model {
 		return true;
 	}
 
-	public function deleteNotification( $user_id, $actor_id, $object_id, $action ){
-		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+	public function deleteNotification( $idUser, $actor_id, $idObject, $sAction ){
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
 
-		if ( !$user ){
+		if ( !$oUser ){
 			return false;
 		}
 
-		$notification = $user->getNotificationByData( $actor_id, $object_id, $action );
+		$oNotification = $oUser->getNotificationByData( $actor_id, $idObject, $sAction );
 
-		if ( !$notification ){
+		if ( !$oNotification ){
 			return false;
 		}
 
-		$notification->setStatus( false );
+		$oNotification->setStatus( false );
 
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteNotifications( $user_id, $notification_ids ){
-		$user = $this->dm->getRepository('Document\User\User')->find( $user_id );
+	public function deleteNotifications( $idUser, $aNotificationIds ){
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
 
-		if ( !$user ){
+		if ( !$oUser ){
 			return false;
 		}
 
-		foreach ( $notification_ids as $notification_id ) {
-			$notification = $user->getNotificationById( $notification_id );
+		foreach ( $aNotificationIds as $idNotification ) {
+			$oNotification = $oUser->getNotificationById( $idNotification );
 
-			if ( !$notification ){
+			if ( !$oNotification ){
 				continue;
 			}
 
-			$user->getNotifications()->removeElement( $notification );
+			$oUser->getNotifications()->removeElement( $oNotification );
 		}
 
 		$this->dm->flush();
@@ -80,8 +81,28 @@ class ModelUserNotification extends Model {
 		return true;
 	}
 
-	public function readAll( $user_id ){
-		$oUser = $this->dm->getRepository('Document\User\User')->find( $user_id );
+	public function disabledNotifications( $idUser, $idObject ) {
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
+
+		if ( !$oUser ){
+			return false;
+		}
+
+		$lNotifications = $oUser->getNotifications();
+
+		foreach ( $lNotifications as $oNotification ) {
+			if ( $oNotification->getObjectId() == $idObject ){
+				$oNotification->setStatus( false );
+			}
+		}
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function readAll( $idUser ){
+		$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
 
 		if ( !$oUser ){
 			return false;

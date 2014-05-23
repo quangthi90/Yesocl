@@ -360,11 +360,121 @@ class ModelToolObject extends Model
 	 * Check post to add notification
 	 * 2014/04/30
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: object Comment
-	 * @return: Array Object Comment formated
+	 * @param: object Post
+	 * @return: Bool
 	 */
-	public function checkPostNotification( $oPostA, $oPostB ) {
-		
+	public function checkPostNotification( $oPost ) {
+		$aNotis = array();
+
+		// Check user A post on wall of user B
+		if ( $oPost->getOwnerId() != $oPost->getUser()->getId() ) {
+			$aNotis[] = array(
+				'user_id' => $oPost->getOwnerId(),
+				'actor' => $oPost->getUser(),
+				'action' => $this->config->get('common')['action']['post'],
+				'object_id' => $oPost->getId(),
+				'slug' => $oPost->getSlug(),
+				'type' => $this->config->get('common')['type']['user'],
+				'object' => $this->config->get('common')['object']['wall']
+			);
+		}
+
+		// Check User tags
+		$aUserTags = $oPost->getUserTags();
+		foreach ( $aUserTags as $sUserSlug ) {
+			$aNotis[] = array(
+				'user_id' => $sUserSlug,
+				'actor' => $oPost->getUser(),
+				'action' => $this->config->get('common')['action']['tag'],
+				'object_id' => $oPost->getId(),
+				'slug' => $oPost->getSlug(),
+				'type' => $this->config->get('common')['type']['user'],
+				'object' => $this->config->get('common')['object']['post']
+			);
+		}
+
+		$this->load->model('user/notification');
+		foreach ( $aNotis as $aNoty ) {
+			$this->model_user_notification->addNotification(
+				$aNoty['user_id'],
+				$aNoty['actor'],
+				$aNoty['action'],
+				$aNoty['object_id'],
+				$aNoty['slug'],
+				$aNoty['type'],
+				$aNoty['object']
+			);
+		}
+
+		return true;
+	}
+
+	/**
+	 * Check Comment to add notification
+	 * 2014/04/30
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object Post, MongoID Comment ID
+	 * @return: Bool
+	 */
+	public function checkCommentNotification( $oPost, $idComment ) {
+		$aNotis = array();
+		$aPost = $oPost->formatToCache();
+		$oComment = $oPost->getCommentById( $idComment );
+
+		// Check user A comment on post in wall of user B
+		if ( $oPost->getOwnerId() && $oPost->getOwnerId() != $oComment->getUser()->getId() ) {
+			$aNotis[] = array(
+				'user_id' => $oPost->getOwnerId(),
+				'actor' => $oComment->getUser(),
+				'action' => $this->config->get('common')['action']['comment'],
+				'object_id' => $oComment->getId(),
+				'slug' => $oPost->getSlug(),
+				'type' => $aPost['type'],
+				'object' => $this->config->get('common')['object']['post']
+			);
+		}
+
+		// Check user A comment on post of User B
+		if ( $oPost->getUser()->getId() != $oComment->getUser()->getId() ) {
+			$aNotis[] = array(
+				'user_id' => $oPost->getUser()->getId(),
+				'actor' => $oComment->getUser(),
+				'action' => $this->config->get('common')['action']['comment'],
+				'object_id' => $oComment->getId(),
+				'slug' => $oPost->getSlug(),
+				'type' => $aPost['type'],
+				'object' => $this->config->get('common')['object']['post']
+			);
+		}
+
+		$aUserTags = $oPost->getUserTags();
+
+		foreach ( $aUserTags as $sUserSlug ) {
+			$aNotis[] = array(
+				'user_id' => $sUserSlug,
+				'actor' => $oPost->getUser(),
+				'action' => $this->config->get('common')['action']['tag'],
+				'object_id' => $oPost->getId(),
+				'slug' => $oPost->getSlug(),
+				'type' => $this->config->get('common')['type']['user'],
+				'object' => $this->config->get('common')['object']['post']
+			);
+		}
+
+		$this->load->model('user/notification');
+		foreach ( $aNotis as $aNoty ) {
+			$this->model_user_notification->addNotification(
+				$aNoty['user_id'],
+				$aNoty['actor'],
+				$aNoty['action'],
+				$aNoty['object_id'],
+				$aNoty['slug'],
+				$aNoty['type'],
+				$aNoty['object']
+			);
+		}
+
+		return true;
 	}
 }
 ?>
