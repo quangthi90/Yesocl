@@ -400,5 +400,16 @@ ko.bindingHandlers.zoomInitImage = {
               type: 'image'
             });
         });
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var image = ko.utils.unwrapObservable(valueAccessor());
+        $(element).on("click", function(){
+            $.magnificPopup.open({
+              items: {
+                src: image
+              },
+              type: 'image'
+            });
+        });
     }
 }

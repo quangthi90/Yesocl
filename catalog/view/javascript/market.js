@@ -678,8 +678,8 @@ function NewsViewModel(options) {
 		var successCallback = function(data){
 			if(data.success === "ok"){
 				self.currentPost().title(data.post.title);
-				self.currentPost().thumb(data.post.thumb);
-				self.currentPost().image(data.post.image);
+				self.currentPost().thumb(data.post.thumb + "?" + (new Date().getTime()));
+				self.currentPost().image(data.post.image + "?" + (new Date().getTime()));
 				self.currentPost().content(data.post.content);
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);
@@ -743,6 +743,7 @@ function NewsViewModel(options) {
 			postImageItem.append('<img src="' + post.thumb() + '" class="img-uploaded"><span class="close"><i class="icon-remove"></i></span>');
 			postImageItem.find("span.close").on("click", function(){
 				$(this).parent().remove();
+				containerElement.find("input.img-url").val("");
 				imgContainer.find(".drop-zone-show").show(0);
 			});
 			imgContainer.append(postImageItem);
@@ -753,6 +754,7 @@ function NewsViewModel(options) {
 		}		
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
+		console.log(post.stockTags());
 		containerElement.find("input.autocomplete-tag-input").select2("data", post.stockTags());
 	}
 
