@@ -5,11 +5,14 @@
 {% if news_title is not defined %}
     {% set news_title = 'News'|trans %}
 {% endif %}
+{% if news_href is not defined %}
+    {% set news_href = path('StockNewsPage') %}
+{% endif %}
 
 <div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
     {% if news_title != '' %}
     <div class="block-header">
-        <h3 class="block-title"><a href="{{ path('StockNewsPage') }}">{{ news_title }} <i class="icon-caret-right"></i></a></h3>
+        <h3 class="block-title"><a href="{{ news_href }}">{{ news_title }} <i class="icon-caret-right"></i></a></h3>
     </div>
     {% endif %}
     <div class="block-content">
