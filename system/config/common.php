@@ -8,6 +8,7 @@ $_['common']['default']['category'] 			= 'category';
 $_['common']['type']['branch'] 					= 'branch';
 $_['common']['type']['group'] 					= 'group';
 $_['common']['type']['user'] 					= 'user';
+$_['common']['type']['stock'] 					= 'stock';
 
 $_['common']['block']['limit']					= 6;
 
