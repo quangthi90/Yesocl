@@ -678,8 +678,8 @@ function NewsViewModel(options) {
 		var successCallback = function(data){
 			if(data.success === "ok"){
 				self.currentPost().title(data.post.title);
-				self.currentPost().thumb(data.post.thumb + "?" + (new Date().getTime()));
-				self.currentPost().image(data.post.image + "?" + (new Date().getTime()));
+				self.currentPost().thumb(data.post.thumb ? data.post.thumb + "?" + (new Date().getTime()) : data.post.thumb);
+				self.currentPost().image(data.post.image ? data.post.image + "?" + (new Date().getTime()) : data.post.image);
 				self.currentPost().content(data.post.content);
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);

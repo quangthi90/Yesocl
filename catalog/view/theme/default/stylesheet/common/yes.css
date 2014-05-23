@@ -3923,7 +3923,7 @@ a.wall-link:hover {
   line-height: 12px;
 }
 .news-item .news-short-content {
-  padding: 0px 10px;
+  padding: 0px 0px;
   overflow: hidden;
 }
 
