@@ -355,5 +355,16 @@ class ModelToolObject extends Model
         
         return HTTPS_SERVER . implode('/', $parts);
     }
+
+    /**
+	 * Check post to add notification
+	 * 2014/04/30
+	 * @author: Bommer <bommer@bommerdesign.com>
+	 * @param: object Comment
+	 * @return: Array Object Comment formated
+	 */
+	public function checkPostNotification( $oPostA, $oPostB ) {
+		
+	}
 }
 ?>

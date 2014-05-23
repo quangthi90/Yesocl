@@ -159,11 +159,31 @@ class ControllerApiPost extends Controller {
             $aData = array(
                 'content'       => $this->request->post['content'],
                 'title'         => $this->request->post['title'],
-                'description'   => $this->request->post['description'],
-                'category'      => $this->request->post['category'],
+                'author_id'     => $this->customer->getId(),
                 'image_link'    => $sImageLink,
-                'extension'     => $sExtension
+                'extension'     => $sExtension,
+                'stockTags'     => $this->request->post['stockTags'],
+                'userTags'      => $this->request->post['userTags']
             );
+
+            switch ( $this->request->get['post_type'] ) {
+                case $this->config->get('common')['type']['user']:
+                    $aData = array_merge($aData, array(
+                        'user_slug'     => $this->request->get['slug']
+                    ));
+                    break;
+
+                case $this->config->get('common')['type']['branch']:
+                    $aData = array_merge($aData, array(
+                        'description'   => $this->request->post['description'],
+                        'cat_slug'      => $this->request->get['slug'],
+                    ));
+                    break;
+                
+                default:
+                    $aData = array();
+                    break;
+            }
 
 			$sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
 			$oPost = $this->$sModelLink->editPost( 

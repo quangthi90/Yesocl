@@ -21,18 +21,17 @@ class ModelUserNotification extends Model {
 		if ( !$notification ){
 			$notification = new Notification();
 			$this->dm->persist( $notification );
+			$notification->setActor( $actor );
+			$notification->setAction( $action );
+			$notification->setObjectId( $object_id );
+			$notification->setSlug( $slug );
+			$notification->setType( $type );
+			$notification->setObject( $object );
+
+			$user->addNotification( $notification );
 		}else{
 			$notification->setStatus( true );
 		}
-
-		$notification->setActor( $actor );
-		$notification->setAction( $action );
-		$notification->setObjectId( $object_id );
-		$notification->setSlug( $slug );
-		$notification->setType( $type );
-		$notification->setObject( $object );
-
-		$user->addNotification( $notification );
 
 		$this->dm->flush();
 

@@ -177,6 +177,14 @@ class ModelUserPost extends Model {
 				$oPost->setLikerIds( $likerIds );
 			}
 		}
+
+		if ( !empty($data['stockTags']) ){
+			$oPost->setStockTags( $data['stockTags'] );
+		}
+
+		if ( !empty($data['userTags']) ){
+			$oPost->setUserTags( $data['userTags'] );
+		}
 		
 		$this->dm->flush();
 		
