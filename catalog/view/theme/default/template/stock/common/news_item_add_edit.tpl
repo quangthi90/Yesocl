@@ -33,6 +33,7 @@
 			<div class="dlg-title">
 		        <i class="icon-yes"></i> 
 		        <span>{% trans %}New post{% endtrans %}</span>
+		        <a title="Close" style="display: inline-block; float: right; margin-right: 10px;" data-bind="click: closeAdvancePost">X</a>
 		    </div>
 		    <div class="dlg-content">
 		    	<div class="dlg-column upload-container fl" style="width:28%;">

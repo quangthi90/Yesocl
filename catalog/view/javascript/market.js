@@ -1188,10 +1188,13 @@ function CommentBoxViewModel(params){
 	}
 	function _saveEditing(){
 		var content = _getCommentContent();
-		if(content.trim().length === 0) {
-			alert("Content is required !");
-			return;
-		}
+		content = content.replace(new RegExp("&nbsp;", 'g'), "");
+        content = content.replace(new RegExp("<br>", 'g'), "");
+        var temp = $("<div></div>");
+        temp.html(content);
+        if(temp.html().trim().length === 0) {
+            return;
+        }
 		var ajaxOptions = {
 			url : window.yRouting.generate("ApiPutComment", {
 				post_type: self.postData.type,
@@ -1231,7 +1234,6 @@ function CommentBoxViewModel(params){
 		}
 		var content = _getCommentContent();
 		if(content.trim().length === 0) {
-			alert("Content is required !");
 			return;
 		}
 		var ajaxOptions = {
