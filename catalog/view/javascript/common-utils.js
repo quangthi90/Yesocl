@@ -267,6 +267,7 @@ ko.bindingHandlers.timeAgo = {
         var timeValue = ko.utils.unwrapObservable(value);
         if (timeValue) {
             $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
+            $(element).attr('title', YesGlobal.Utils.convertDateToString(timeValue, "LLLL"));
         } else {
             $(element).text('-');
         }
@@ -276,6 +277,7 @@ ko.bindingHandlers.timeAgo = {
         var timeValue = ko.utils.unwrapObservable(value);
         if (timeValue) {
             $(element).text(YesGlobal.Utils.convertToTimeAgo(timeValue));
+            $(element).attr('title', YesGlobal.Utils.convertDateToString(timeValue, "LLLL"));
         } else {
             $(element).text('-');
         }
@@ -288,6 +290,7 @@ ko.bindingHandlers.dateTimeText = {
         var dateValue = ko.utils.unwrapObservable(value);
         if (dateValue) {
             $(element).text(YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
+            $(element).attr("title", YesGlobal.Utils.convertDateToString(dateValue, dateFormat));
         } else {
             $(element).text('-');
         }
