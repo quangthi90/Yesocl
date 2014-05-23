@@ -78,8 +78,8 @@
                                 <span class="index-value" data-bind="text: $data.close_price, css: { 'price-down' : $data.open_price < 0 }"></span>
                             </div>
                             <div class="span3 text-right">
-                                <label class="index-label">Average Volume</label>
-                                <span class="index-value">10M </span>
+                                <label class="index-label">{% trans %}Average Volume{% endtrans %}</label>
+                                <span class="index-value" data-bind="text: $data.range_price[364].average"></span>
                             </div>
                             <div class="span3 text-right">
                                 <label class="index-label">{% trans %}Price/Earnings{% endtrans %}</label>

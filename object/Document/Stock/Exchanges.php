@@ -35,10 +35,15 @@ Class Exchanges {
 
         $iMaxPrice = $this->stock->getLastExchange()->getHighPrice();
         $iMinPrice = $this->stock->getLastExchange()->getLowPrice();
+        $iCount = 0;
+        $iTotalVolume = 0;
         foreach ($aExchanges as $oExchange) {
-            if ( $oExchange['created'] < $oTimeLimit ){
-                break;
-            }
+        	if ( $iCount == $iDay ) break;
+
+        	$iTotalVolume += $oExchange['volume'];
+        	$iCount++;
+
+            if ( $oExchange['created'] < $oTimeLimit ) continue;
 
             if ( $iMaxPrice < $oExchange['high_price'] ){
             	$iMaxPrice = $oExchange['high_price'];
@@ -52,7 +57,8 @@ Class Exchanges {
         $rangePrice = $this->stock->getRangePrice();
         $rangePrice[$iDay] = array(
     		'max_price' => $iMaxPrice,
-    		'min_price' => $iMinPrice
+    		'min_price' => $iMinPrice,
+    		'average'	=> round($iTotalVolume / $iDay, 0)
     	);
         $this->stock->setRangePrice( $rangePrice );
 
