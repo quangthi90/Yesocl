@@ -21,7 +21,7 @@ Class Post extends AbstractPost {
 	private $content;
 
     /** @MongoDB\String */
-	private $ownerId;
+	private $ownerSlug;
 
 	/**
 	* Format array to save to Cache
@@ -55,7 +55,7 @@ Class Post extends AbstractPost {
 			'liker_ids'		=> $this->getLikerIds(),
 			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer(),
-			'owner_id' 		=> $this->getOwnerId(),
+			'owner_slug' 	=> $this->getOwnerSlug(),
 			'stock_tags'	=> $this->getStockTags(),
 			'user_tags'		=> $this->getUserTags(),
 			'type'			=> 'user'
@@ -88,11 +88,11 @@ Class Post extends AbstractPost {
 		return $this->content;
 	}
 
-	public function setOwnerId( $ownerId ){
-		$this->ownerId = $ownerId;
+	public function setOwnerSlug( $ownerSlug ){
+		$this->ownerSlug = $ownerSlug;
 	}
 
-	public function getOwnerId(){
-		return $this->ownerId;
+	public function getOwnerSlug(){
+		return $this->ownerSlug;
 	}
 }

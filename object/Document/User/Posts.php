@@ -74,9 +74,14 @@ Class Posts {
 	}
 
 	public function addPost( Post $post ){
-		$posts = $this->posts->toArray();
+		$post->setOwnerSlug( $this->user->getSlug() );
+		if ( $posts = $this->posts ){
+			$posts = $posts->toArray();
+		}else{
+			$posts = array();
+		}
 		array_unshift($posts, $post);
-		$this->posts = $posts;
+		$this->setPosts( $posts );
 	}
 
 	public function setPosts( $posts ){

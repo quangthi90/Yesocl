@@ -54,7 +54,6 @@ class ModelUserPost extends Model {
 		$oPost->setUser( $oAuthor );
 		$oPost->setStatus( true );
 		$oPost->setSlug( $slug );
-		$oPost->setOwnerId( $oUser->getId() );
 
 		if ( !empty($data['title']) ){
 			$oPost->setTitle( $data['title'] );
@@ -182,13 +181,8 @@ class ModelUserPost extends Model {
 			}
 		}
 
-		if ( !empty($data['stockTags']) ){
-			$oPost->setStockTags( $data['stockTags'] );
-		}
-
-		if ( !empty($data['userTags']) ){
-			$oPost->setUserTags( $data['userTags'] );
-		}
+		$oPost->setStockTags( $data['stockTags'] );
+		$oPost->setUserTags( $data['userTags'] );
 		
 		$this->dm->flush();
 

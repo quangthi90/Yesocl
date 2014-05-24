@@ -38,6 +38,9 @@ Class Comment {
 
     private $canEdit;
 
+	/** @MongoDB\Collection */
+	private $userTags = array();
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
@@ -166,5 +169,17 @@ Class Comment {
 
 	public function getCanEdit(){
 		return (bool)$this->canEdit;
+	}
+
+	public function addUserTag( $userTag ){
+		$this->userTags[] = $userTag;
+	}
+
+	public function setUserTags( $userTags ){
+		$this->userTags = $userTags;
+	}
+
+	public function getUserTags(){
+		return $this->userTags;
 	}
 }

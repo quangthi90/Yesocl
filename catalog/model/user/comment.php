@@ -29,20 +29,24 @@ class ModelUserComment extends Model {
 
 		$this->dm->clear();
 
+		$oPost = $oPosts->getPostBySlug($aData['post_slug']);
+
 		// Update permission
-		$lComments = $oPosts->getPostBySlug($aData['post_slug'])->getComments($isReverse);
+		$lComments = $oPost->getComments($isReverse);
 		$aComments = array();
 		$idLoggedUser = $this->customer->getId();
 		foreach ( $lComments as $oComment ) {
 			if ( $idLoggedUser == $oComment->getUser()->getId() ) {
 				$oComment->setCanDelete( true );
 				$oComment->setCanEdit( true );
-			}elseif ( $idLoggedUser == $oPost->getUser()->getId() || $idLoggedUser == $oPost->getOwnerId() ) {
+			}elseif ( $idLoggedUser == $oPost->getUser()->getId() || $this->customer->getSlug() == $oPost->getOwnerSlug() ) {
 				$oComment->setCanDelete( true );
 			}
 
 			$aComments[] = $oComment;
 		}
+
+		$this->oPost = $oPost;
 
 		return $aComments;
 	}
@@ -122,37 +126,11 @@ class ModelUserComment extends Model {
 		);
 		$this->model_cache_post->editPost( $data );
 
-		// Add notification
-        $this->load->model('user/notification');
-        
-        if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
-            $this->model_user_notification->addNotification(
-                $oPost->getUser()->getSlug(),
-                $oUser,
-                $this->config->get('common')['action']['comment'],
-                $oComment->getId(),
-                $oPost->getSlug(),
-                $this->config->get('common')['type']['branch'],
-                $this->config->get('common')['object']['post']
-            );
-        }
+		// Notifications
+		$this->load->model('tool/object');
+		$this->model_tool_object->checkCommentNotification( $oPost, $oComment->getId() );
 
-        if ( !empty($this->request->post['tags']) ){
-            $aUserSlugs = $this->request->post['tags'];
-
-            foreach ( $aUserSlugs as $sUserSlug ) {
-                $this->model_user_notification->addNotification(
-                    $sUserSlug,
-                    $oUser,
-                    $this->config->get('common')['action']['tag'],
-                    $oComment->getId(),
-                    $oPost->getSlug(),
-                    $this->config->get('common')['type']['branch'],
-                    $this->config->get('common')['object']['comment']
-                );
-            }
-        }
-
+		// Update permission
         if ( $oComment->getUser()->getId() == $this->customer->getId() ){
         	$oComment->setCanEdit( true );
         	$oComment->setCanDelete( true );

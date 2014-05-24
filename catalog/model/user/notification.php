@@ -81,18 +81,23 @@ class ModelUserNotification extends Model {
 		return true;
 	}
 
-	public function disabledNotifications( $idUser, $idObject ) {
-		$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
+	public function disabledNotifications( $idObject ) {
+		$lUsers = $this->dm->getRepository('Document\User\User')->findBy(array(
+			'notifications.objectId' => $idObject,
+			'notifications.status' => true
+		));
 
-		if ( !$oUser ){
+		if ( !$lUsers ){
 			return false;
 		}
 
-		$lNotifications = $oUser->getNotifications();
+		foreach ( $lUsers as $oUser ) {
+			$lNotifications = $oUser->getNotifications();
 
-		foreach ( $lNotifications as $oNotification ) {
-			if ( $oNotification->getObjectId() == $idObject ){
-				$oNotification->setStatus( false );
+			foreach ( $lNotifications as $oNotification ) {
+				if ( $oNotification->getObjectId() == $idObject ){
+					$oNotification->setStatus( false );
+				}
 			}
 		}
 
