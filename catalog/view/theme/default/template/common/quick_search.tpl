@@ -2,7 +2,7 @@
 	<div class="input-container">
 		<div class="input-append">
 		    <input data-bind="value: throttledValue, valueUpdate: 'afterkeydown', hasFocus: true" class="span5" class="input-search" placeholder="{% trans %}Enter your key{% endtrans %} ..." type="text" style="height: 20px;">
-		    <button class="btn btn-yes" type="button" title="Search"><i class="icon-search"></i></button>
+		    <button style="display: none;" class="btn btn-yes" type="button" title="Search"><i class="icon-search"></i></button>
 	    </div>
 	</div>
 	<!-- ko if: searchInprocessing() -->
