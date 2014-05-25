@@ -46,7 +46,7 @@ Abstract Class Post {
     /** @MongoDB\Int */
     private $countViewer = 0;
 
-	/** @MongoDB\Collection */
+	/** @MongoDB\Hash */
 	private $stockTags = array();
 
 	/** @MongoDB\Collection */

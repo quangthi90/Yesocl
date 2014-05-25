@@ -103,6 +103,7 @@ $_['routing']['StockIdeaPage']					= 'stock/ideas/page/';
 // Common
 $_['routing']['AjaxGetRouting']					= 'services/get/routing/';
 $_['routing']['SetLanguage']					= 'services/push/language/';
+$_['routing']['ApiSearchByKeyword']				= 'services/get/search/{keyword}/';
 
 // Stock
 $_['routing']['ApiGetAllStocks']				= 'services/get/stock/all/';

@@ -69,6 +69,39 @@ class ModelToolSearch extends Model
 		return $this->client->execute( $query );
 	}
 
+	public function searchStockByKeyword( $aData = array() ) {
+		if ( empty($aData['keyword']) ) {
+			return array();
+		}
+
+		$query = $this->client->createSelect(
+    		array(
+				'mappedDocument' => 'Document\Stock\Stock',
+			)
+    	);
+
+		$sQuery = 'name_t:*' . $aData['keyword'] . '* OR ';
+		$sQuery .= 'code_t:' . $aData['keyword'] . '*';
+
+		if ( isset( $aData['start'] ) ) {
+			$aData['start'] = (int)$aData['start'];
+		}else {
+			$aData['start'] = 0;
+		}
+
+		if ( isset( $aData['limit'] ) ) {
+			$aData['limit'] = (int)$aData['limit'];
+		}else {
+			$aData['limit'] = 5;
+		}
+
+		$query->setQuery( $sQuery );
+		$query->setRows( $aData['limit'] );
+		$query->setStart( $aData['start'] );
+ 
+		return $this->client->execute( $query );
+	}
+
 	public function searchDataValueByKeyword( $sType, $aData = array() ) {
 		if ( !isset( $aData['keyword'] ) || empty( $aData['keyword'] ) ) {
 			return array();
