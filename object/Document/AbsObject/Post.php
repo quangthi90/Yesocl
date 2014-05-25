@@ -185,8 +185,8 @@ Abstract Class Post {
 		return $this->countViewer;
 	}
 
-	public function addStockTag( $stockTag ){
-		$this->stockTags[] = $stockTag;
+	public function addStockTag( $key, $stockTag ){
+		$this->stockTags[$key] = $stockTag;
 	}
 
 	public function setStockTags( $stockTags ){
