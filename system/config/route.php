@@ -125,6 +125,7 @@ $_['route']['ApiDeletePost']				= 'api/post/delete/';
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';
 $_['route']['ApiGetCommentLiker']			= 'api/comment/getLikers/';
+$_['route']['ApiGetCommentTags']			= 'api/comment/getUserTags/';
 $_['route']['ApiPutCommentLike']			= 'api/comment/like/';
 $_['route']['ApiPutComment']				= 'api/comment/edit/';
 $_['route']['ApiPostComment']				= 'api/comment/add/';

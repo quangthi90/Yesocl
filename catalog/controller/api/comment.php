@@ -286,5 +286,97 @@ class ControllerApiComment extends Controller {
             'users' => $aUsers
         )));
     }
+
+    public function getUserTags(){
+        $aDatas = array();
+
+        if ( empty($this->request->get['post_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'comment id empty'
+            )));
+        }
+
+        if ( empty($this->request->get['post_type']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'post type is empty!'
+            )));
+        }
+        
+        $sModel = $this->request->get['post_type'] . '/post';
+        $this->load->model($sModel);
+
+        $sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
+        $oPost = $this->$sModelLink->getPost( array('post_slug' => $this->request->get['post_slug']) );
+
+        $aUsers = array();
+
+        $this->load->model('tool/object');
+        if ( $oPost ){
+            $this->load->model('tool/image');
+            $this->load->model('user/user');
+            $this->load->model('friend/friend');
+
+            $lQueryUsers = $this->model_user_user->getUsers( array(
+                'user_ids' => $oPost->getLikerIds()
+            ));
+
+            if ( $lQueryUsers ){
+                foreach ( $lQueryUsers as $oUser ) {
+                    if ( $aUsers[$oUser->getId()] ) continue;
+
+                    $aUser = $oUser->formatToCache();
+                    $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+                    $aUser['name'] = $aUser['username'];
+                    $aUser['id'] = $aUser['slug'];
+                    $aUser['type'] = 'contact';
+                    $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
+                    $aUsers[$aUser['id']] = $aUser;
+                }
+            }
+
+            $lComments = $oPost->getComments();
+            foreach ( $lComments as $oComment ) {
+                if ( $aUsers[$oUser->getId()] ) continue;
+
+                $oUser = $oComment->getUser();
+                $aUser = $oUser->formatToCache();
+                $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+                $aUser['name'] = $aUser['username'];
+                $aUser['id'] = $aUser['slug'];
+                $aUser['type'] = 'contact';
+                $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
+                $aUsers[$aUser['id']] = $aUser;
+            }
+        }
+
+        $oFriends = $this->model_friend_friend->getFriends( $this->customer->getId() );
+        if ( $oFriends ){
+            $lFriends = $oFriends->getFriends();
+        }else{
+            $lFriends = array();
+        }
+
+        foreach ( $lFriends as $oFriend ) {
+            $oUser = $oFriend->getUser();
+
+            $aUser = $oUser->formatToCache();
+
+            // Mapping to return for tag js
+            // Check again when change libs tag js
+            $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+            $aUser['name'] = $aUser['username'];
+            $aUser['id'] = $aUser['slug'];
+            $aUser['type'] = 'contact';
+            $aUser['wall'] = $this->model_tool_object->path('WallPage', array('user_slug' => $aUser['slug']));
+            $aUsers[$aUser['id']] = $aUser;
+        }
+        
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'users' => $aUsers
+        )));
+    }
 }
 ?>
