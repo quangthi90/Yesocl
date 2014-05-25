@@ -376,6 +376,12 @@ a.btn-link-circle:hover {
 a.btn-link-circle:hover i {
   color: #000;
 }
+.overflow-text {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 /* Loading */
 #yes-loading-more {
@@ -2792,124 +2798,52 @@ ul.user_actions li:hover i{
 /* ------------------------------------- END MY_BRANCH --------------------------------------- */
 
 /* ------------------------------------ START SEARCH RESULT ------------------------------------ */
-.tt-dropdown-menu {
-  background-color: #FFF;
-  padding: 15px;
-}
-.tt-dropdown-menu .tt-dataset-dataset-friend {
-  overflow: hidden;
-  float: left;
-  margin-right: 30px;
-  width: 250px;
-}
-.tt-dropdown-menu .tt-dataset-dataset-friend:last-child {
-  margin-right: 10px;
-}
-.tt-dataset-dataset-friend .tt-suggestions {
-  overflow: hidden;
-}
-
-.tt-dropdown-menu .tt-dataset-dataset-post {
-  overflow: hidden;
-  float: left;
-  margin-right: 10px;
-  width: 300px;
-}
-.tt-dataset-dataset-post .tt-suggestions {
-  overflow: hidden;
-}
-.tt-suggestions .tt-suggestion {
-  display: block;
-  clear: left;
-  border-bottom: 1px solid #f0f0f0;
-  padding: 5px 5px;
-}
-.tt-suggestions .tt-suggestion:last-child {
-  border-bottom: none;
-}
-.tt-suggestions .tt-is-under-cursor,
-.tt-suggestions .tt-suggestion:hover {
-  background-color: #F7F7F7;
-}
-.tt-is-under-cursor .data-detail .data-meta-info .data-name {
-  color: #009B77;
-}
-.data-detail {
-  overflow: hidden;
-  display: block;
-}
-.data-detail img{
-  width: 40px;
-  height: 40px;
-  float: left;
-  margin-right: 10px;
-}
-.data-detail .data-meta-info {
-  float: left;
-  max-width: 235px;
-}
-.data-detail .data-meta-info .data-name {
-  font-size: 13px;
-  font-weight: bold;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #4D4D4D;
-}
-.data-detail:hover .data-meta-info .data-name {
-  color: #000;
-}
-.data-detail .data-meta-info .data-name strong {
-  color: #009B77;
-}
-.data-detail .data-meta-info .data-more {
-  white-space: nowrap;  
-  font-size: 11px;
-  color: #414141;
-}
-.tt-dataset-dataset-friend .data-detail .data-meta-info  {
-  max-width: 185px;
-}
-
 #search-panel {
-  position: absolute;
-  top: 60px;
-  right: 0px;
-  min-width: 660px;
-  min-height: 40px;
-  max-height: 390px;
-  padding: 30px 25px;
   background-color: #CCCCCC;
-  z-index: 99;
+  max-height: 390px;
+  min-height: 40px;
   overflow: hidden;
+  padding: 25px;
+  position: absolute;
+  right: 0;
+  top: 60px;
+  z-index: 99;
   display: none;
 }
-#search-panel .search-ctrl {
-  width: 600px;
-  padding: 10px;  
-  font-size: 15px;
-  outline: none;
-}
-#search-panel .tt-hint {
-  width: 600px;
+.search-panel .search-loadding {
+  background-color: #FFFFFF;
   padding: 10px;
-  font-size: 15px;
-  color:#ccc;
 }
-#search-panel .twitter-typeahead {
-  vertical-align: top;
+.search-panel .result-container {
+  background-color: #FFFFFF;
+  padding: 10px;
+  display: table;
 }
-#search-panel .twitter-typeahead i {
-  position: absolute;
-  right: 10px;
-  top: 12px;
-  font-size: 16px;
+.search-panel .result-column {
+  max-width: 300px;
+  display: table-cell;
 }
-#search-panel .btn-search {
-  padding: 8px 18px;
-  margin-left: -5px;
-  border-left: none;
-  z-index: 1;
+.result-column .result-title {
+  border-bottom: 1px solid #F0F0F0;
+  font-size: 18px;
+  line-height: 30px;
+  margin: 0 0 10px;
+}
+.result-column .result-data {
+}
+.result-column .result-data > ul {
+}
+.result-column .result-data > ul > li {
+  margin-bottom: 5px;
+}
+.result-column .result-data > ul > li a.result-link {
+}
+.result-column .result-data > ul > li > a.result-link .result-avatar {
+}
+.result-column .result-data > ul > li > a.result-link .result-avatar > img {
+}
+.result-column .result-data > ul > li > a.result-link .result-text {
+  margin-left: 20px;
 }
 
 .search-category {
