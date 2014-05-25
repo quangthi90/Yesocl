@@ -1,20 +1,21 @@
 (function($, ko, document, undefined) {
 	function QuickSearchViewModel(params) {
         var that = this;
-        that.results = ko.observableArray([]);
-        that.query = ko.observable("");
+        that.results = ko.observable({users: [],posts: [],stocks: []});
+        that.throttledValue = ko.observable("");
         that.queryType = ko.observable("friend");
-        that.minimumInputLength = ko.observable(1);
         that.searchInprocessing = ko.observable(false);
 
-        that.query.subscribe(function(){
-            that.search();
+        that.query = ko.computed(that.throttledValue).extend({ throttle: 500 });
+
+        that.query.subscribe(function(value) {
+            that.search(value);
         });
-        that.search = function(){
+
+        that.search = function(queryString){
             //Ignore if search in process:
-            if(that.searchInprocessing()) return;
+            if(that.searchInprocessing() || queryString.trim().length === 0) return;
             
-            var queryString = that.query();
             getData(queryString, function(){});
         };
 
@@ -28,14 +29,15 @@
             }
             var beforeCallback = function(){
                 showLoading();
-                results.removeAll();
+                that.results(formatResult(null));
             }
             var failCallback = function() {
                 hideLoading();
             }
             var successCallback = function(data) {
-                var formatedData = formatResult(data);
-                that.results(formatedData);
+            	if(data.success === "ok") {
+            		that.results(formatResult(data.results));
+            	}
                 hideLoading();
 
                 if(callback && typeof callback === "function") {
@@ -45,7 +47,18 @@
             YesGlobal.Utils.ajaxCall(ajaxOptions, beforeCallback, successCallback, failCallback);
         }
         function formatResult(data) {
-            return data;
+        	if(data === null) {
+        		return {
+        			users: [],
+        			posts: [],
+        			stocks: []
+        		}
+        	}
+        	return {
+        		users: data.users,
+    			posts: data.posts,
+    			stocks: data.stocks
+        	};
         }
         function showLoading(){
             that.searchInprocessing(true);
@@ -55,8 +68,8 @@
         }
     };
 	function QuickSearch (options) {
-	    if(options.element === undefined || options.element === null || options.element.length === 0) return;
-
+	    if(options.elementId === undefined || options.elementId === null || options.elementId.length === 0) return;
+		
 	    var self = this;
 	    self.defaultTemplate = options.template || "quick-search-autocomplete";
 	    self.elementId = options.elementId;
@@ -76,8 +89,7 @@
 			});
 			self.notIncluding.on("click", function(){
 				closeSearch();	
-			});
-
+			});			
 	        var viewModel = new QuickSearchViewModel({});
 	        ko.applyBindings(viewModel, document.getElementById(self.elementId));
 	    };
@@ -93,8 +105,8 @@
 	$(document).ready(function(){
 		var options  = {
 			elementId : "search-panel"
-		};
-		window.quickSearch = new QuickSearch(options);
+		};		
+		window.QuickSearch = new QuickSearch(options);
 	});
 }(jQuery, ko, document));
 

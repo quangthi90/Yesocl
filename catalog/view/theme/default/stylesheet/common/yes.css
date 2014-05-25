@@ -2812,16 +2812,17 @@ ul.user_actions li:hover i{
 }
 .search-panel .search-loadding {
   background-color: #FFFFFF;
-  padding: 10px;
+  padding: 10px 20px;
 }
 .search-panel .result-container {
   background-color: #FFFFFF;
-  padding: 10px;
-  display: table;
+  padding: 10px 20px;
+  overflow: hidden;
 }
 .search-panel .result-column {
-  max-width: 300px;
-  display: table-cell;
+  width: 350px;
+  margin-left: 15px;
+  float: left;
 }
 .result-column .result-title {
   border-bottom: 1px solid #F0F0F0;
@@ -2837,6 +2838,11 @@ ul.user_actions li:hover i{
   margin-bottom: 5px;
 }
 .result-column .result-data > ul > li a.result-link {
+  display: block;
+}
+.result-column .result-data > ul > li a.result-link:hover {
+  background-color: #F0F0F0;
+  color: #000;
 }
 .result-column .result-data > ul > li > a.result-link .result-avatar {
 }
