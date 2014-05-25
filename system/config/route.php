@@ -105,6 +105,7 @@ $_['route']['StockIdeaPage']				= 'stock/ideas/';
 // Common
 $_['route']['AjaxGetRouting']				= 'api/config/getRoutings/';
 $_['route']['SetLanguage']					= 'api/language/setLanguage/';
+$_['route']['ApiSearchByKeyword']			= 'api/search/searchAll/';
 
 // Stock
 $_['route']['ApiGetAllStocks']				= 'api/stock/getAllStocks/';
