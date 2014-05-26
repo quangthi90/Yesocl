@@ -1,8 +1,8 @@
 <div id="search-panel" class="search-panel">
 	<div class="input-container">
 		<div class="input-append">
-		    <input data-bind="value: throttledValue, valueUpdate: 'afterkeydown', hasFocus: true" class="span5" class="input-search" placeholder="{% trans %}Enter your key{% endtrans %} ..." type="text" style="height: 20px;">
-		    <button style="display: none;" class="btn btn-yes" type="button" title="Search"><i class="icon-search"></i></button>
+		    <input data-bind="executeOnEnter: handleEnter, value: throttledValue, valueUpdate: 'afterkeydown', hasFocus: true" class="input-search" placeholder="{% trans %}Enter your key{% endtrans %} ..." type="text" style="height: 20px; width: 350px;">
+		    <button data-bind="click: goSearchPage" class="btn btn-yes" type="button" title="Search"><i class="icon-search"></i></button>
 	    </div>
 	</div>
 	<!-- ko if: searchInprocessing() -->
@@ -19,7 +19,7 @@
 		            <h3 class="result-title">User</h3>
 		            <div class="result-data">
 		                <ul data-bind="foreach: results().users">
-		                	<li>
+		                	<li >
 			                	<a data-bind="link: { title: username, route: 'WallPage', params: { user_slug: slug } }" class="result-link">
 			                		<div class="row-fluid">
 			                			<div class="span2 result-avatar">

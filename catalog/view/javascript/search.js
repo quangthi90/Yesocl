@@ -1,6 +1,7 @@
 (function($, ko, document, undefined) {
 	function QuickSearchViewModel(params) {
         var that = this;
+        that.parentEle = params.parentEle;
         that.results = ko.observable({users: [],posts: [],stocks: []});
         that.throttledValue = ko.observable("");
         that.queryType = ko.observable("friend");
@@ -12,11 +13,43 @@
             that.search(value);
         });
 
-        that.search = function(queryString){
+        that.goSearchPage = function() {
+        	var keyword = that.throttledValue();
+			if(keyword.trim().length === 0) {
+				return;
+			}
+			var url = yRouting.generate("SearchPage", {
+				keyword : encodeURIComponent(keyword)
+			});
+			location.href = url;
+        };
+
+        that.handleEnter = function() {
+        	var parentEle = $("#" + that.parentEle);
+        	var selectingLink = parentEle.find(".result-column .result-data a.result-link.selecting").first();
+        	if(selectingLink.length > 0) {
+        		location.href = selectingLink.prop("href");
+        	} else {
+        		var keyword = that.throttledValue();
+				if(keyword.trim().length === 0) {
+					return;
+				}
+				var url = yRouting.generate("SearchPage", {
+					keyword : encodeURIComponent(keyword)
+				});
+				location.href = url;
+        	}	
+        };
+
+        that.search = function(queryString) {
             //Ignore if search in process:
             if(that.searchInprocessing() || queryString.trim().length === 0) return;
             
-            getData(queryString, function(){});
+            getData(queryString, function(){
+            	setTimeout(function(){
+            		focusFirstResult();
+            	}, 300);
+            });
         };
 
         //Private:
@@ -54,11 +87,12 @@
         			stocks: []
         		}
         	}
-        	return {
+        	var lastResult = {
         		users: data.users,
     			posts: data.posts,
     			stocks: data.stocks
         	};
+        	return lastResult;
         }
         function showLoading(){
             that.searchInprocessing(true);
@@ -66,37 +100,57 @@
         function hideLoading(){
             that.searchInprocessing(false);
         }
+        function focusFirstResult(){
+        	var parentEle = $("#" + that.parentEle);
+        	var links = parentEle.find(".result-column .result-data a.result-link");
+        	var firstResult = parentEle.find(".result-column:first-child .result-data a.result-link:first-child").first();
+        	if(firstResult.length > 0) {
+        		links.removeClass("selecting");
+        		firstResult.addClass("selecting");
+        	}
+        }
     };
 	function QuickSearch (options) {
 	    if(options.elementId === undefined || options.elementId === null || options.elementId.length === 0) return;
 		
 	    var self = this;
-	    self.defaultTemplate = options.template || "quick-search-autocomplete";
 	    self.elementId = options.elementId;
-	    self.invokeElement = options.invokeElement || "#btn-search-invoke-on";
+	    self.invokeElement = options.invokeElement || "btn-search-invoke-on";
 	    self.notIncluding = $('#y-header').find('.btn-header-not-search');
 
 	    function init(){
 	    	//Add events:
-	    	$(self.invokeElement).on("click", function(e) {
+	    	$("#" + self.invokeElement).on("click", function(e) {
 				e.preventDefault();
 				if($(this).hasClass('active')) {
 					closeSearch();
 					$(this).removeClass('active');
 				}else {
 					openSearch();
+					$(this).addClass('active');
 				}
 			});
+
 			self.notIncluding.on("click", function(){
-				closeSearch();	
-			});			
-	        var viewModel = new QuickSearchViewModel({});
+				closeSearch();
+			});
+
+			$(document).keyup(function(e) {
+			  	if (e.keyCode === 27) { 
+			  		closeSearch();
+			  	}
+			});
+
+	        var viewModel = new QuickSearchViewModel({ parentEle : self.elementId });
 	        ko.applyBindings(viewModel, document.getElementById(self.elementId));
 	    };
 	    function closeSearch(){
-
+	    	var control = $("#" + self.elementId);
+	    	control.slideUp(100);
 	    }
 	    function openSearch() {
+	    	var control = $("#" + self.elementId);
+	    	control.slideDown();
 	    }
 
 	    init();
