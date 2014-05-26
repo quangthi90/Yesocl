@@ -7,13 +7,14 @@ class ControllerStockNews extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
-		$this->document->setDescription($this->config->get('config_meta_description'));		
+		if ( empty($this->request->get['stock_code']) ){
+			return false;
+		}
 		
+		$this->data['stock_code'] = $this->request->get['stock_code'];
+
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );
-
-		// Title
-		$this->data['heading_title'] = gettext('News of Stock');
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/stock/news.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/stock/news.tpl';
