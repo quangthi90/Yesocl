@@ -2824,6 +2824,9 @@ ul.user_actions li:hover i{
   margin-left: 15px;
   float: left;
 }
+.search-panel .result-column:first-child {
+  margin-left: 0px;
+}
 .result-column .result-title {
   border-bottom: 1px solid #F0F0F0;
   font-size: 18px;
@@ -2839,7 +2842,9 @@ ul.user_actions li:hover i{
 }
 .result-column .result-data > ul > li a.result-link {
   display: block;
+  padding: 5px;
 }
+.result-column .result-data > ul > li a.result-link.selecting,
 .result-column .result-data > ul > li a.result-link:hover {
   background-color: #F0F0F0;
   color: #000;
