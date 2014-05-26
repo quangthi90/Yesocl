@@ -7,11 +7,7 @@ class ControllerStockNews extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
-		if ( empty($this->request->get['stock_code']) ){
-			return false;
-		}
-		
-		$this->data['stock_code'] = $this->request->get['stock_code'];
+		$this->data['heading_title'] = gettext('News of Stock');
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'stock' );

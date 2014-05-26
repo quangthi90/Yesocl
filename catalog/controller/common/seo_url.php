@@ -20,6 +20,7 @@ class ControllerCommonSeoUrl extends Controller {
 							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
 								if ( ($parts[$key+1] && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
 									unset($parts[$key]);
+									$parts = array_values($parts);
 									$key++;
 								}else{
 									$param = substr(substr($part, 1), 0, -1);

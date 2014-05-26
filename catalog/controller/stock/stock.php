@@ -7,6 +7,12 @@ class ControllerStockStock extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		if ( empty($this->request->get['stock_code']) ){
+			return false;
+		}
+		
+		$this->data['stock_code'] = $this->request->get['stock_code'];
+
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		$this->data['heading_title'] = $this->config->get('config_title');
