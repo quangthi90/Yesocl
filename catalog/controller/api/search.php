@@ -58,7 +58,7 @@ class ControllerApiSearch extends Controller {
             'results' => array(
             	'users' => $aUsers,
             	'posts' => $aPosts,
-            	'stocks' => $aStocks
+            	'stocks' => array_values($aStocks)
             )
         )));
 	}
