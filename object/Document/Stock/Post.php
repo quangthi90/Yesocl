@@ -6,6 +6,21 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /** @MongoDB\Document(collection="stock_post") */
 Class Post extends AbstractPost {
+	/** 
+	 * @MongoDB\Id
+	 */
+	private $id;
+
+	/** 
+	 * @MongoDB\String
+	 */
+	private $title;
+
+	/** 
+	 * @MongoDB\String
+	 */
+	private $content;
+	
 	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", inversedBy="posts") */
 	private $stock;
 
