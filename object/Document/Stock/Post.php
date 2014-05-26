@@ -59,18 +59,26 @@ Class Post extends AbstractPost {
 
 		return $post_data;
 	}
+	
+	public function getId() {
+		return $this->id;
+	}
+	
+	public function setTitle( $title ){
+		$this->title = $title;
+	}
 
-	/** @MongoDB\PostPersist */
-    public function postPersist()
-    {
-    	$this->setType('Stock');
-    }
+	public function getTitle(){
+		return $this->title;
+	}
 
-    /** @MongoDB\PostUpdate */
-    public function postUpdate()
-    {
-    	$this->setType('Stock');
-    }
+	public function setContent( $content ){
+		$this->content = $content;
+	}
+
+	public function getContent(){
+		return $this->content;
+	}
 
 	public function setStock( $stock ){
 		$this->stock = $stock;

@@ -13,6 +13,7 @@ $_['post']['type']['stock']					= 'stock';
 $_['post']['cache']['branch']				= 'Branch';
 $_['post']['cache']['group']				= 'Group';
 $_['post']['cache']['user']					= 'User';
+$_['post']['cache']['stock']				= 'Stock';
 
 $_['category']['cache']['folder']			= 'category';
 

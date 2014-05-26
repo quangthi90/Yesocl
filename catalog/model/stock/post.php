@@ -1,43 +1,38 @@
 <?php
-use Document\User\Post,
-	Document\User\Posts;
+use Document\Stock\Post;
 
-class ModelUserPost extends Model {
+class ModelStockPost extends Model {
 	/**
-	 * Add Post of User to Database
+	 * Add Post of Stock to Database
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	array data:
-	 *		- string User Wall Slug (user_slug) 					-- Required
-	 *		- string User Author Slug (author_id)					-- Required
-	 *		- string Title (title)
-	 *		- string Content (content)								-- Required
-	 *		- string Upload Image link (image_link) (root/image/data/upload)
-	 *		- string Extension of Image (extension)
-	 *		- array Slugs of User Tagged (userTags)
-	 *		- array Codes of Stock Tagged (stockTags)
+	 *		- string Stock Code 	 								-- Required
+	 *		- string User Author Slug 								-- Required
+	 *		- string Title
+	 *		- string Content 										-- Required
+	 *		- string Upload Image link (root/image/data/upload)
+	 *		- string Extension of Image
+	 *		- array Slugs of User Tagged
+	 *		- array Codes of Stock Tagged
 	 * @return: bool
 	 *	- object post: success
 	 * 	- null: not success
 	 */
-	public function addPost( $aData = array() ) {
-		if ( empty($aData['user_slug']) ){
+	public function addPost( $aData = array(), $bIsDuplicate = false ) {
+		if ( empty($aData['stock_code']) ){
 			return null;
 		}
-		$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
-		if ( !$oUser ){
+		$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( $aData['stock_code'] );
+		if ( !$oStock ){
 			return null;
 		}
 
 		if ( empty($aData['author_id']) ){
 			return null;
 		}
-		if ( $aData['author_id'] != $oUser->getId() ){
-			$oAuthor = $this->dm->getRepository('Document\User\User')->find( $aData['author_id'] );
-		}else{
-			$oAuthor = $oUser;
-		}
+		$oAuthor = $this->dm->getRepository('Document\User\User')->find( $aData['author_id'] );
 		if ( !$oAuthor ){
 			return null;
 		}
@@ -53,6 +48,7 @@ class ModelUserPost extends Model {
 		$slug = (!empty($aData['title']) ? $this->url->create_slug( $aData['title'] ) . '-' : '') . new MongoId();
 		
 		$oPost = new Post();
+		$oPost->setStock( $oStock );
 		$oPost->setContent( $aData['content'] );
 		$oPost->setUser( $oAuthor );
 		$oPost->setStatus( true );
@@ -62,24 +58,19 @@ class ModelUserPost extends Model {
 			$oPost->setTitle( $aData['title'] );
 		}
 
-		if ( !empty($aData['userTags']) ){
-			$oPost->setUserTags( $aData['userTags'] );
+		if ( !empty($aData['stockTags']) ){
+			$oPost->setStockTags( $aData['stockTags'] );
 		}
 
-		$lPosts = $oUser->getPostData();
-
-		if ( !$lPosts ){
-			$lPosts = new Posts();
-			$this->dm->persist( $lPosts );
-			$lPosts->setUser( $oUser );
+		if ( $bIsDuplicate ){
+			$oPost->setThumb( $aData['thumb'] );
 		}
 
-		$lPosts->addPost( $oPost );
-		
+		$this->dm->persist( $oPost );
 		$this->dm->flush();
 
 		// Add Image
-		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+		if ( !$bIsDuplicate && !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
@@ -96,33 +87,14 @@ class ModelUserPost extends Model {
 
 		// Cache post for what's new
 		$this->load->model('cache/post');
-		$aCacheData = array(
+		$aData = array(
 			'post_id' => $oPost->getId(),
-			'type' => $this->config->get('post')['cache']['user'],
-			'type_id' => $oUser->getId(),
+			'type' => $this->config->get('post')['cache']['stock'],
+			'type_id' => $oStock->getId(),
 			'view' => 0,
 			'created' => $oPost->getCreated()
 		);
-		$this->model_cache_post->addPost( $aCacheData );
-
-		// Notifications
-		$this->load->model('tool/object');
-		$this->model_tool_object->checkPostNotification( $oPost );
-
-		// Duplicate post for Stock
-		if ( !empty($aData['stockTags']) ){
-			$this->load->model('stock/post');
-			foreach ( $aData['stockTags'] as $sStockCode ) {
-				$aData['stock_code'] = $sStockCode;
-				$aData['thumb'] = $oPost->getThumb();
-				$oStockPost = $this->model_stock_post->addPost( $aData, true );
-
-				if ( $oStockPost ){
-					$oPost->addStockTag( $oStockPost->getId(), $sStockCode );
-				}
-			}
-			$this->dm->flush();
-		}
+		$this->model_cache_post->addPost( $aData );
 		
 		return $oPost;
 	}
