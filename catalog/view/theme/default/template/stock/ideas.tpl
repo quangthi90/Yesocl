@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var postType = "{{ stock_type }}";
+			var postType = "{{ post_type }}";
 			var stockCode = "{{ stock_code }}";
 
 			var newsOptions = {

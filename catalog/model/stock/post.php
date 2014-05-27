@@ -212,13 +212,24 @@ class ModelStockPost extends Model {
 	}
 
 	public function getPosts( $aData = array() ){
-		$query = array();
+		if (  empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 20;
+		}
+
+		$query = array('deleted' => false);
 		if ( !empty($aData['stock_code']) ){
 			$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( $aData['stock_code'] );
 			if ( $oStock ) $query['stock.id'] = $oStock->getId();
 		}
 
-		$lPosts = $this->dm->getRepository('Document\Stock\Post')->findBy( $query );
+		$lPosts = $this->dm->getRepository('Document\Stock\Post')
+			->findBy($query)
+			->skip($aData['start'])
+			->limit($aData['limit'])
+			->sort(array('created' => -1));
 
 		return $lPosts;
 	}

@@ -139,7 +139,11 @@ class ControllerApiStock extends Controller {
 		$this->load->model('tool/object');
 		
 		$aPosts = array();
-		$lPosts = $this->model_stock_post->getPosts( array('stock_code' => $this->request->get['stock_code']) );
+		$lPosts = $this->model_stock_post->getPosts(array(
+			'stock_code' => $this->request->get['stock_code'],
+			'limit' => $limit,
+			'start' => ($page - 1) * $limit,
+		));
 		
 		$bCanLoadMore = false;
 		if ( $lPosts ){
