@@ -22,8 +22,8 @@
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var postType = "user";
-			var stockCode = "AAA";
+			var postType = "{{ stock_type }}";
+			var stockCode = "{{ stock_code }}";
 
 			var newsOptions = {
 				Id : "stock-news",
@@ -46,7 +46,7 @@
                     return validationMsgs;
                 },
                 urls : {
-                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : stockCode } },
+                    loadNews : { name: "ApiGetStockIdeas",  params: { stock_code : stockCode } },
                     postNews : { name: "ApiPostPost", params: { slug : stockCode, post_type: postType } },
                     updateNews : { name: "ApiPutPost", params: { post_type : postType } }
                 }

@@ -7,6 +7,13 @@ class ControllerStockIdeas extends Controller {
 			$this->data['base'] = HTTP_SERVER;
 		}
 
+		if ( empty($this->request->get['stock_code']) ) {
+			return false;
+		}
+
+		$this->data['stock_code'] = $this->request->get['stock_code'];
+		$this->data['post_type'] = $this->config->get('common')['type']['stock'];
+
 		$this->document->setDescription($this->config->get('config_meta_description'));		
 		
 		// set selected menu
