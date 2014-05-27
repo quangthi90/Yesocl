@@ -115,7 +115,48 @@ class ControllerApiStock extends Controller {
         )));
 	}
 
-	public function getLastStockNews() {
+	public function getIdeas() {
+		if ( empty($this->request->get['stock_code']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => gettext('stock code is empty')
+            )));
+        }
+
+		if ( !empty($this->request->post['limit']) ){
+			$limit = $this->request->post['limit'];
+		}else{
+			$limit = $this->limit;
+		}
+
+		if ( !empty($this->request->get['page']) ){
+			$page = $this->request->get['page'];
+		}else{
+			$page = 1;
+		}
+		
+		$this->load->model('stock/post');
+		$this->load->model('tool/object');
+		
+		$aPosts = array();
+		$lPosts = $this->model_stock_post->getPosts( array('stock_code' => $this->request->get['stock_code']) );
+		
+		$bCanLoadMore = false;
+		if ( $lPosts ){
+			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+			if ( ($page - 1) * $limit + $limit < $lPosts->count() ){
+				$bCanLoadMore = true;
+			}
+		}
+
+		return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'posts' => $aPosts,
+            'canLoadMore' => $bCanLoadMore
+        )));
+	}
+
+	public function getNews() {
 		$sStockCode = $this->config->get('branch')['code']['stock'];
 
 		if ( !empty($this->request->post['limit']) ){

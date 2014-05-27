@@ -59,7 +59,7 @@
                 canLoadMore: false,
                 hasNewPost: false,
                 urls : {
-                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                    loadNews : { name: "ApiGetStockIdeas",  params: { stock_code : "{{ stock_code }}" } }
                 }
             };
             var userBoxOptions = {

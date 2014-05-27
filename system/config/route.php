@@ -112,7 +112,8 @@ $_['route']['ApiGetAllStocks']				= 'api/stock/getAllStocks/';
 $_['route']['ApiPostWatchList']				= 'api/stock/addStocksToWatchList/';
 $_['route']['ApiDeleteWatchListItem']		= 'api/stock/removeStockFromWatchList/';
 $_['route']['ApiGetStockExchanges']			= 'api/stock/getStockExchanges/';
-$_['route']['ApiGetLastStockNews']			= 'api/stock/getLastStockNews/';
+$_['route']['ApiGetLastStockNews']			= 'api/stock/getNews/';
+$_['route']['ApiGetStockIdeas']				= 'api/stock/getIdeas/';
 
 // Post
 $_['route']['ApiPutPostLike']				= 'api/post/like/';

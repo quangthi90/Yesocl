@@ -30,16 +30,21 @@ Class Post extends AbstractPost {
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @return: array User
 	*/
-	public function formatToCache(){
+	public function formatToCache( $isTimestamp = true ){
 		$limit = 200;
+
+		if ( $isTimestamp == true ){
+			$created = $this->getCreated()->getTimestamp();
+		}else{
+			$created = $this->getCreated();
+		}
 
 		$post_data = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'title' 		=> $this->getTitle(),
-			'description'	=> $this->getDescription(),
 			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
+			'created'		=> $created,
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'thumb'			=> $this->getThumb(),
@@ -51,9 +56,6 @@ Class Post extends AbstractPost {
 			'liker_ids'		=> $this->getLikerIds(),
 			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer(),
-			'category_slug'	=> $this->category->getSlug(),
-			'category_name'	=> $this->category->getName(),
-			'category_id'	=> $this->category->getId(),
 			'type'			=> 'stock'
 		);
 
