@@ -42,16 +42,17 @@
         $(document).ready(function() {
             // Stock info of current Market
             var _stock = '{{ stock|json_encode()|raw }}';
+            var stockInfo = JSON.parse(_stock);
             //Add options to view model:
             var chartOptions = {
-                stock : JSON.parse(_stock)
+                stock : stockInfo
             };
             var newsOptions = {
                 Id : "stock-news",
                 canLoadMore: false,
                 hasNewPost: false,
                 urls : {
-                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "{{ stock_code }}" } }
+                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : stockInfo.code } }
                 }
             };
             var ideasOptions = {
@@ -59,7 +60,7 @@
                 canLoadMore: false,
                 hasNewPost: false,
                 urls : {
-                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                    loadNews : { name: "ApiGetStockIdeas",  params: { stock_code : stockInfo.code } }
                 }
             };
             var userBoxOptions = {

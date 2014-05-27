@@ -18,6 +18,7 @@
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
         {{ block('stock_common_block_news') }}
+        {{ block('stock_common_block_ideas') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}
     </div>
@@ -31,16 +32,19 @@
 		$(document).ready(function() {
 			// Market list
 			var _markets = '{{ markets|json_encode()|raw }}';
+			var marketsInfo = JSON.parse(_markets);
 			// Stock info of current Market
 			var _stock = '{{ stock|json_encode()|raw }}';
+			var stockInfo = JSON.parse(_stock);
+			
 			// Stock Watch list of current User
 			var _watchList = '{{ watch_list|json_encode()|raw }}';
 
 			//Add options to view model:
 			var chartOptions = {
-				markets :  JSON.parse(_markets),
+				markets :  marketsInfo,
 				currMarketId : '{{ curr_market_id }}',
-				stock : JSON.parse(_stock)
+				stock : stockInfo
 			};
 			var watchListOptions = {
 				Id : "st-watch-list",
@@ -54,6 +58,14 @@
                     loadNews : { name: "ApiGetLastStockNews",  params: {} }
                 }
 			};
+			var ideasOptions = {
+                Id : "stock-ideas",
+                canLoadMore: false,
+                hasNewPost: false,
+                urls : {
+                    loadNews : { name: "ApiGetStockIdeas",  params: { stock_code : stockInfo.code } }
+                }
+            };
 			var commentBoxOptions = {
 				Id : "comment-box"
 			};
@@ -64,6 +76,7 @@
 				chartModel : new ChartViewModel(chartOptions),
 				watchListModel : new WatchListViewModel(watchListOptions),
 				newsModel : new NewsViewModel(newsOptions),
+				ideasModel: new NewsViewModel(ideasOptions),
 				commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
 				userBoxModel : new UserBoxViewModel(userBoxOptions)
 			};
