@@ -265,6 +265,10 @@ class ModelBranchPost extends Model {
 			return null;
 		}
 
+		if ( !empty($aData['stock_code']) ){
+			$query['stockTags'] = $aData['stock_code'];
+		}
+
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
 			->skip($aData['start'])

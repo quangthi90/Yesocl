@@ -139,13 +139,21 @@ class ControllerApiStock extends Controller {
 
 		$oBranch = $this->model_branch_branch->getBranch( array('branch_code' => $sStockCode) );
 		if ( $oBranch ){
-			$aCategoryIds = $oBranch->getIsBranchCategories( true, true );
-			if ( count($aCategoryIds) > 0 ){
+			if ( empty($this->request->get['stock_code']) ){
+				$aCategoryIds = $oBranch->getIsBranchCategories( true, true );
+				if ( count($aCategoryIds) > 0 ){
+					$lPosts = $this->model_branch_post->getPosts(array(
+						'limit' => $limit,
+						'start' => ($page - 1) * $limit,
+						'branch_id' => $oBranch->getId(),
+						'category_ids' => $aCategoryIds
+					));
+				}
+			}else{
 				$lPosts = $this->model_branch_post->getPosts(array(
 					'limit' => $limit,
 					'start' => ($page - 1) * $limit,
-					'branch_id' => $oBranch->getId(),
-					'category_ids' => $aCategoryIds
+					'stock_code' => $this->request->get['stock_code']
 				));
 			}
 		}
