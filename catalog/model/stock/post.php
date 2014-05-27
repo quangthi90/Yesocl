@@ -211,6 +211,18 @@ class ModelStockPost extends Model {
 		return true;
 	}
 
+	public function getPosts( $aData = array() ){
+		$query = array();
+		if ( !empty($aData['stock_code']) ){
+			$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( $aData['stock_code'] );
+			if ( $oStock ) $query['stock.id'] = $oStock->getId();
+		}
+
+		$lPosts = $this->dm->getRepository('Document\Stock\Post')->findBy( $query );
+
+		return $lPosts;
+	}
+
 	public function getPost( $aData = array(), $increase_viewer = false ){
 		$query = array();
 		if ( !empty($aData['post_id']) ){
@@ -240,18 +252,6 @@ class ModelStockPost extends Model {
 		}
 
 		return $oPost;
-	}
-
-	public function getPostBySlug( $sPostSlug ){
-		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy(array(
-			'posts.slug' => $sPostSlug
-		));
-
-		if ( !$lPosts ){
-			return null;
-		}
-
-		return $lPosts->getPostBySlug( $sPostSlug );
 	}
 }
 ?>

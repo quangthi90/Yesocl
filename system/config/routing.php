@@ -111,6 +111,7 @@ $_['routing']['ApiPostWatchList']				= 'services/post/stock/watch-list/many/';
 $_['routing']['ApiDeleteWatchListItem']			= 'services/delete/stock/watch-list/item/{stock_id}/';
 $_['routing']['ApiGetStockExchanges']			= 'services/get/stock/{stock_id}/exchanges/';
 $_['routing']['ApiGetLastStockNews']			= 'services/get/stock/{stock_code}/news/last/{page}/';
+$_['routing']['ApiGetStockIdeas']				= 'services/get/stock/{stock_code}/ideas/{page}/';
 
 // Post
 $_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}/';
