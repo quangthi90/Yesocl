@@ -272,6 +272,12 @@
       // Set correct focus and selection
       elmInputBox.focus();
       utils.setCaratPosition(elmInputBox[0], startEndIndex);
+
+      //Call onMentionChanged 
+      if(settings.onMentionChanged !== undefined && settings.onMentionChanged !== null && 
+        typeof settings.onMentionChanged === "function" ) {
+        settings.onMentionChanged();
+      }
     }
 
     function getInputBoxValue() {
