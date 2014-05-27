@@ -22,8 +22,6 @@ class ControllerAccountWall extends Controller {
 
 		$this->load->model('user/user');
 		$this->load->model('tool/image');
-		$this->load->model('friend/friend');
-		$this->load->model('friend/follower');
 
 		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
 
