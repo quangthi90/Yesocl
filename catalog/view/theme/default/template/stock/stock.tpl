@@ -21,6 +21,7 @@
     <div id="y-main-content" class="has-horizontal stock-page">
         {{ block('stock_common_block_stock_chart') }}
         {{ block('stock_common_block_news') }}
+        {% set ideas_href = path('StockIdeaPage', {stock_code: stock.code}) %}
         {{ block('stock_common_block_ideas') }}
         {#{ block('stock_common_block_basic_key') }}
         {{ block('stock_common_block_company_profile') }}

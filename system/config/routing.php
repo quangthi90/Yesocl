@@ -97,7 +97,7 @@ $_['routing']['StockMarketNone']				= 'stock/market/';
 $_['routing']['StockMarket']					= 'stock/market/{market_code}/';
 $_['routing']['StockPage']						= 'stock/page/{stock_code}/';
 $_['routing']['StockNewsPage']					= 'stock/{stock_code}/news/page/';
-$_['routing']['StockIdeaPage']					= 'stock/ideas/page/';
+$_['routing']['StockIdeaPage']					= 'stock/{stock_code}/ideas/page/';
 
 //-- API --//
 // Common

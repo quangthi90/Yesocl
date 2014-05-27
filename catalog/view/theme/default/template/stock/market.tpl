@@ -18,6 +18,7 @@
         {{ block('stock_common_block_market_chart') }}
         {{ block('stock_common_block_watch_list') }}
         {{ block('stock_common_block_news') }}
+        {% set ideas_href = path('StockIdeaPage', {stock_code: stock.code}) %}
         {{ block('stock_common_block_ideas') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}
