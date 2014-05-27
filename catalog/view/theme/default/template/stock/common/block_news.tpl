@@ -36,8 +36,8 @@
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko if: isLoadSuccess() && newsList().length == 0 -->
-        <div class="news-container">
-            <p>No news to display !</p>
+        <div class="news-container" style="width: 200px;">
+            <p>No data to display !</p>
         </div>
         <!-- /ko -->
         <!-- ko if: !isLoadSuccess() -->
