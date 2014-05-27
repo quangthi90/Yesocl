@@ -22,16 +22,33 @@
 	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var postType = "user";
+			var stockCode = "AAA";
+
 			var newsOptions = {
 				Id : "stock-news",
 				canLoadMore: true,
 				hasNewPost: true,
-				validate: function(postData) {
-					//Validate here, return a collection of error if any
-					return [];
-				},
+				validate: function(postData){
+                    var validationMsgs = [];
+                    //Validate here, return a collection of error if any
+                    if(postData.content.length === 0) {
+                        validationMsgs.push("Content is required");
+                    }else {
+                        var content = postData.content.replace(new RegExp("&nbsp;", 'g'), "");
+                        content = content.replace(new RegExp("<br>", 'g'), "");
+                        var temp = $("<div></div>");
+                        temp.html(content);
+                        if(temp.html().trim().length === 0){
+                            validationMsgs.push("Content is required");
+                        }
+                    }
+                    return validationMsgs;
+                },
                 urls : {
-                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : "A" } }
+                    loadNews : { name: "ApiGetLastStockNews",  params: { stock_code : stockCode } },
+                    postNews : { name: "ApiPostPost", params: { slug : stockCode, post_type: postType } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : postType } }
                 }
 			};
 			var commentBoxOptions = {
