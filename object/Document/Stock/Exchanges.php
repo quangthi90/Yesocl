@@ -96,7 +96,7 @@ Class Exchanges {
 	}
 
 	public function addExchange( $exchange ){
-		$timestamp = $exchange->getCreated()->getTimestamp();
+		$timestamp = $exchange->getCreated()->format('ymd');
 		$this->exchanges[$timestamp] = $exchange->formatToCache();
 		krsort($this->exchanges);
 		

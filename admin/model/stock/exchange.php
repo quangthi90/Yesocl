@@ -78,7 +78,7 @@ class ModelStockExchange extends Model {
 
 		// created
 		if ( !empty($aData['created']) ) {
-			$aData['created'] = date_create_from_format('m/d/Y', $aData['created'])->getTimestamp();
+			$aData['created'] = date_create_from_format('m/d/Y', $aData['created'])->format('ymd');
 			$aExchange['created'] = $aData['created'];
 		}
 
