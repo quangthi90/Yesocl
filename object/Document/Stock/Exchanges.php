@@ -101,7 +101,7 @@ Class Exchanges {
 		krsort($this->exchanges);
 		
 		if ( !$this->stock->getLastExchange() || $exchange->getCreated() > $this->stock->getLastExchange()->getCreated() ){
-			if ( $this->stock->getLastExchange()->getClosePrice() > $exchange->getClosePrice() ){
+			if ( $this->stock->getLastExchange() && $this->stock->getLastExchange()->getClosePrice() > $exchange->getClosePrice() ){
 				$this->stock->setIsDown( true );
 			}else{
 				$this->stock->setIsDown( false );
