@@ -285,6 +285,20 @@ class ModelToolObject extends Model
 					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
 				}
                 break;
+
+            case $this->config->get('common')['type']['stock']:
+                if ( $oPost->getUser()->getId() == $this->customer->getId() ){
+                	$aPost['can_delete'] = true;
+                	$aPost['can_edit'] = true;
+                }
+
+                // thumb
+				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+				}else{
+					$aPost['image'] = null;
+				}
+                break;
         }
 
 		return $aPost;
@@ -368,8 +382,10 @@ class ModelToolObject extends Model
 	public function checkPostNotification( $oPost ) {
 		$aNotis = array();
 
+		$aPost = $oPost->formatToCache();
+
 		// Check user A post on wall of user B
-		if ( $oPost->getOwnerSlug() != $oPost->getUser()->getSlug() ) {
+		if ( $aPost['type'] == 'user' && $oPost->getOwnerSlug() != $oPost->getUser()->getSlug() ) {
 			$aNotis[$oPost->getOwnerSlug()] = array(
 				'user_id' => $oPost->getOwnerSlug(),
 				'actor' => $oPost->getUser(),

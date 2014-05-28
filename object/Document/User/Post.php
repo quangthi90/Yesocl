@@ -23,6 +23,11 @@ Class Post extends AbstractPost {
     /** @MongoDB\String */
 	private $ownerSlug;
 
+	/** 
+	 * @MongoDB\String
+	 */
+	private $stockPostId;
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
@@ -90,5 +95,13 @@ Class Post extends AbstractPost {
 
 	public function getOwnerSlug(){
 		return $this->ownerSlug;
+	}
+
+	public function setStockPostId( $stockPostId ){
+		$this->stockPostId = $stockPostId;
+	}
+
+	public function getStockPostId(){
+		return $this->stockPostId;
 	}
 }

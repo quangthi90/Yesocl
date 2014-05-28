@@ -150,6 +150,12 @@ class ControllerApiPost extends Controller {
                         'cat_slug'      => $this->request->get['slug'],
                     ));
                     break;
+
+                case $this->config->get('common')['type']['stock']:
+                    $aData = array_merge($aData, array(
+                        'stock_code'   => $this->request->get['slug']
+                    ));
+                    break;
                 
                 default:
                     $aData = array();

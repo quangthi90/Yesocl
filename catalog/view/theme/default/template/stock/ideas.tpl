@@ -10,6 +10,8 @@
 {% block body %}
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
+    	{% set news_title = 'Ideas'|trans %}
+        {% set news_href = '#' %}
         {{ block('stock_common_block_news') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}

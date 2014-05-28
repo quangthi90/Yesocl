@@ -46,7 +46,7 @@ Abstract Class Post {
     /** @MongoDB\Int */
     private $countViewer = 0;
 
-	/** @MongoDB\Hash */
+	/** @MongoDB\Collection */
 	private $stockTags = array();
 
 	/** @MongoDB\Collection */
@@ -185,8 +185,8 @@ Abstract Class Post {
 		return $this->countViewer;
 	}
 
-	public function addStockTag( $key, $stockTag ){
-		$this->stockTags[$key] = $stockTag;
+	public function addStockTag( $stockTag ){
+		$this->stockTags[] = $stockTag;
 	}
 
 	public function setStockTags( $stockTags ){

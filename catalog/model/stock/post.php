@@ -8,7 +8,6 @@ class ModelStockPost extends Model {
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
 	 *	array data:
-	 *		- string Stock Code 	 								-- Required
 	 *		- string User Author Slug 								-- Required
 	 *		- string Title
 	 *		- string Content 										-- Required
@@ -20,15 +19,7 @@ class ModelStockPost extends Model {
 	 *	- object post: success
 	 * 	- null: not success
 	 */
-	public function addPost( $aData = array(), $bIsDuplicate = false ) {
-		if ( empty($aData['stock_code']) ){
-			return null;
-		}
-		$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( $aData['stock_code'] );
-		if ( !$oStock ){
-			return null;
-		}
-
+	public function addPost( $aData = array() ) {
 		if ( empty($aData['author_id']) ){
 			return null;
 		}
@@ -48,7 +39,6 @@ class ModelStockPost extends Model {
 		$slug = (!empty($aData['title']) ? $this->url->create_slug( $aData['title'] ) . '-' : '') . new MongoId();
 		
 		$oPost = new Post();
-		$oPost->setStock( $oStock );
 		$oPost->setContent( $aData['content'] );
 		$oPost->setUser( $oAuthor );
 		$oPost->setStatus( true );
@@ -62,15 +52,13 @@ class ModelStockPost extends Model {
 			$oPost->setStockTags( $aData['stockTags'] );
 		}
 
-		if ( $bIsDuplicate ){
-			$oPost->setThumb( $aData['thumb'] );
-		}
-
 		$this->dm->persist( $oPost );
 		$this->dm->flush();
 
 		// Add Image
-		if ( !$bIsDuplicate && !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+		if ( !empty($aData['thumb']) ) {
+			$oPost->setThumb( $aData['thumb'] );
+		}elseif ( !$bIsDuplicate && !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ) {
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
@@ -90,7 +78,7 @@ class ModelStockPost extends Model {
 		$aData = array(
 			'post_id' => $oPost->getId(),
 			'type' => $this->config->get('post')['cache']['stock'],
-			'type_id' => $oStock->getId(),
+			'type_id' => new MongoId(),
 			'view' => 0,
 			'created' => $oPost->getCreated()
 		);
@@ -104,30 +92,36 @@ class ModelStockPost extends Model {
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
 	 * @param: 
-	 *	- string Post ID
-	 *	- array Thumb
-	 *	- array data
-	 * 	{
-	 *		string Liker ID (User ID)
-	 * 	}
+	 *  string Post Slug or Post Id
+	 *	array data:
+	 *		- string Stock Code 	 								-- Required
+	 *		- string User Author Slug 								-- Required
+	 *		- string Title
+	 *		- string Content 										-- Required
+	 *		- string Upload Image link (root/image/data/upload)
+	 *		- string Extension of Image
+	 *		- array Slugs of User Tagged
+	 *		- array Codes of Stock Tagged
+	 *	bool is duplicate when user post in wall & tag stock
+	 *	bool is Id when edit post by ID
 	 * @return: bool
 	 *	- object post: success
 	 * 	- false: not success
 	 */
-	public function editPost( $sPostSlug, $aData = array() ) {
-		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $sPostSlug) );
-		
-		if ( !$lPosts ){
-			return false;
+	public function editPost( $sPostSlug, $aData = array(), $bIsId = false ) {
+		if ( !$bIsId ) {
+			$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBySlug( $sPostSlug );
+		}else{
+			$oPost = $this->dm->getRepository('Document\Stock\Post')->find( $sPostSlug );
 		}
-		
-		$oPost = $lPosts->getPostBySlug( $sPostSlug );
 
 		if ( !$oPost ){
 			return false;
 		}
 
-		if ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
+		if ( !empty($aData['thumb']) ) {
+			$oPost->setThumb( $aData['thumb'] );
+		}elseif ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ){
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
@@ -138,9 +132,7 @@ class ModelStockPost extends Model {
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
 			}
-		}
-
-		if ( empty($aData['image_link']) && empty($aData['extension']) ){
+		}elseif ( empty($aData['image_link']) && empty($aData['extension']) ) {
 			$oPost->setThumb( null );
 		}
 
@@ -154,7 +146,7 @@ class ModelStockPost extends Model {
 			$oPost->setTitle( $aData['title'] );
 		}
 		
-		if ( !empty($aData['likerId']) ){
+		if ( !empty($addPostata['likerId']) ){
 			$likerIds = $oPost->getLikerIds();
 
 			$key = array_search( $aData['likerId'], $likerIds );
@@ -179,14 +171,12 @@ class ModelStockPost extends Model {
 		return $oPost;
 	}
 
-	public function deletePost( $sPostSlug ) {
-		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $sPostSlug) );
-
-		if ( !$lPosts ){
-			return false;
+	public function deletePost( $sPostSlug, $bIsId = false ) {
+		if ( !$bIsId ){
+			$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBySlug( $sPostSlug );
+		}else{
+			$oPost = $this->dm->getRepository('Document\Stock\Post')->find( $sPostSlug );
 		}
-		
-		$oPost = $lPosts->getPostBySlug( $sPostSlug );
 
 		if ( !$oPost ){
 			return false;
@@ -196,7 +186,7 @@ class ModelStockPost extends Model {
 		if ( $oPost->getThumb() ){
 			$this->load->model('tool/image');
 
-			$sFolderLink = $this->config->get('user')['default']['image_link'];
+			$sFolderLink = $this->config->get('stock')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$path = DIR_IMAGE . $sFolderLink . $oPost->getUser()->getId() . '/' . $sFolderName . '/' . $oPost->getId();
 			
@@ -204,7 +194,7 @@ class ModelStockPost extends Model {
 			$this->model_tool_image->deleteDirectoryImage( $path );
 		}
 		
-		$lPosts->getPosts(false)->removeElement( $oPost );
+		$this->dm->remove( $oPost );
 		
 		$this->dm->flush();
 		
@@ -221,8 +211,7 @@ class ModelStockPost extends Model {
 
 		$query = array('deleted' => false);
 		if ( !empty($aData['stock_code']) ){
-			$oStock = $this->dm->getRepository('Document\Stock\Stock')->findOneByCode( $aData['stock_code'] );
-			if ( $oStock ) $query['stock.id'] = $oStock->getId();
+			$query['stockTags'] = $aData['stock_code'];
 		}
 
 		$lPosts = $this->dm->getRepository('Document\Stock\Post')

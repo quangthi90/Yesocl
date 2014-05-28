@@ -57,13 +57,11 @@ class ModelUserPost extends Model {
 		$oPost->setUser( $oAuthor );
 		$oPost->setStatus( true );
 		$oPost->setSlug( $slug );
+		$oPost->setUserTags( $aData['userTags'] );
+		$oPost->setStockTags( $aData['stockTags'] );
 
 		if ( !empty($aData['title']) ){
 			$oPost->setTitle( $aData['title'] );
-		}
-
-		if ( !empty($aData['userTags']) ){
-			$oPost->setUserTags( $aData['userTags'] );
 		}
 
 		$lPosts = $oUser->getPostData();
@@ -112,15 +110,9 @@ class ModelUserPost extends Model {
 		// Duplicate post for Stock
 		if ( !empty($aData['stockTags']) ){
 			$this->load->model('stock/post');
-			foreach ( $aData['stockTags'] as $sStockCode ) {
-				$aData['stock_code'] = $sStockCode;
-				$aData['thumb'] = $oPost->getThumb();
-				$oStockPost = $this->model_stock_post->addPost( $aData, true );
-
-				if ( $oStockPost ){
-					$oPost->addStockTag( $oStockPost->getId(), $sStockCode );
-				}
-			}
+			$aData['thumb'] = $oPost->getThumb();
+			$oStockPost = $this->model_stock_post->addPost( $aData );
+			$oPost->setStockPostId( $oStockPost->getId() );
 			$this->dm->flush();
 		}
 		
@@ -166,9 +158,7 @@ class ModelUserPost extends Model {
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
 			}
-		}
-
-		if ( empty($aData['image_link']) && empty($aData['extension']) ){
+		}elseif ( empty($aData['image_link']) && empty($aData['extension']) ) {
 			$oPost->setThumb( null );
 		}
 
@@ -195,10 +185,17 @@ class ModelUserPost extends Model {
 			}
 		}
 
-		$oPost->setStockTags( $aData['stockTags'] );
 		$oPost->setUserTags( $aData['userTags'] );
+		$oPost->setStockTags( $aData['stockTags'] );
 		
 		$this->dm->flush();
+
+		// Update Stock Post
+		if ( $oPost->getStockPostId() ) {
+			$this->load->model('stock/post');
+			$aData['thumb'] = $oPost->getThumb();
+			$this->model_stock_post->editPost( $oPost->getStockPostId(), $aData, true );
+		}
 
 		// Notifications
 		$this->load->model('tool/object');
@@ -231,6 +228,9 @@ class ModelUserPost extends Model {
 			// remove Image
 			$this->model_tool_image->deleteDirectoryImage( $path );
 		}
+
+		$this->load->model('stock/post');
+		$this->model_stock_post->deletePost( $oPost->getStockPostId(), true );
 		
 		$lPosts->getPosts(false)->removeElement( $oPost );
 		

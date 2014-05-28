@@ -20,9 +20,6 @@ Class Post extends AbstractPost {
 	 * @MongoDB\String
 	 */
 	private $content;
-	
-	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", inversedBy="posts") */
-	private $stock;
 
 	/**
 	* Format array to save to Cache
@@ -56,6 +53,8 @@ Class Post extends AbstractPost {
 			'liker_ids'		=> $this->getLikerIds(),
 			'like_count'	=> count($this->getLikerIds()),
 			'count_viewer'	=> $this->getCountViewer(),
+			'stock_tags'	=> array_values($this->getStockTags()),
+			'user_tags'		=> $this->getUserTags(),
 			'type'			=> 'stock'
 		);
 
@@ -80,13 +79,5 @@ Class Post extends AbstractPost {
 
 	public function getContent(){
 		return $this->content;
-	}
-
-	public function setStock( $stock ){
-		$this->stock = $stock;
-	}
-
-	public function getStock(){
-		return $this->stock;
 	}
 }
