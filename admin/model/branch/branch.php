@@ -18,42 +18,43 @@ class ModelBranchBranch extends Model {
 	*	- true: success
 	*	- false: not success
 	*/
-	public function addBranch( $data = array(), $aLogo = array() ) {
+	public function addBranch( $aData = array(), $aLogo = array() ) {
 		// name is required & isn't exist
-		if ( isset($data['name']) && !empty($data['name']) ) {
-			$this->data['name'] = strtolower( trim($data['name']) );
+		if ( isset($aData['name']) && !empty($aData['name']) ) {
+			$this->data['name'] = strtolower( trim($aData['name']) );
 		}else {
 			return false;
 		}
 
 		// order
-		if ( !isset($data['order']) || empty($data['order']) ){
-			$data['order'] = 0;
+		if ( !isset($aData['order']) || empty($aData['order']) ){
+			$aData['order'] = 0;
 		}
 		
 		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		if ( !isset( $aData['status'] ) ) {
+			$aData['status'] = 0;
 		}
 
-		$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
+		$slug = $this->url->create_slug( $aData['name'] ) . '-' . new MongoId();
 
-		$branch = new Branch();
-		$branch->setName( $data['name'] );
-		$branch->setStatus( $data['status'] );
-		$branch->setOrder( $data['order'] );
-		$branch->setSlug( $slug );
+		$oBranch = new Branch();
+		$oBranch->setName( $aData['name'] );
+		$oBranch->setStatus( $aData['status'] );
+		$oBranch->setOrder( $aData['order'] );
+		$oBranch->setSlug( $slug );
+		$oBranch->setCode( $aData['code'] );
 		
-		$this->dm->persist( $branch );
+		$this->dm->persist( $oBranch );
 		$this->dm->flush();
 
 		$this->load->model('tool/image');
 		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
 			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId();
+			$path = $folder_link . $oBranch->getId();
 			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
-				$branch->setLogo( $aData['logo'] );
+				$oBranch->setLogo( $aData['logo'] );
 			}
 		}
 
@@ -78,37 +79,38 @@ class ModelBranchBranch extends Model {
 	*	- true: success
 	*	- false: not success
 	*/
-	public function editBranch( $branch_id, $data = array(), $aLogo = array() ) {
-		$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
-		if ( empty( $branch ) ) {
+	public function editBranch( $idBranch, $aData = array(), $aLogo = array() ) {
+		$oBranch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $idBranch );
+		if ( empty( $oBranch ) ) {
 			return false;
 		}
 
 		// name is required
-		if ( isset( $data['name'] ) ) {
-			$this->data['name'] = strtolower( trim( $data['name'] ) );
+		if ( isset( $aData['name'] ) ) {
+			$this->data['name'] = strtolower( trim( $aData['name'] ) );
 		}else {
 			return false;
 		}
 		
 		// status
-		if ( !isset( $data['status'] ) ) {
-			$data['status'] = 0;
+		if ( !isset( $aData['status'] ) ) {
+			$aData['status'] = 0;
 		}
 
 		// order
-		if ( !isset($data['order']) || empty($data['order']) ){
-			$data['order'] = 0;
+		if ( !isset($aData['order']) || empty($aData['order']) ){
+			$aData['order'] = 0;
 		}
 
-		$branch->setName( $data['name'] );
-		$branch->setStatus( $data['status'] );
-		$branch->setOrder( $data['order'] );
+		$oBranch->setName( $aData['name'] );
+		$oBranch->setStatus( $aData['status'] );
+		$oBranch->setOrder( $aData['order'] );
+		$oBranch->setCode( $aData['code'] );
 
-		if ( $data['name'] != $branch->getName() ){
-			$slug = $this->url->create_slug( $data['name'] ) . '-' . new MongoId();
+		if ( $aData['name'] != $oBranch->getName() ){
+			$slug = $this->url->create_slug( $aData['name'] ) . '-' . new MongoId();
 
-			$branch->setSlug( $slug );
+			$oBranch->setSlug( $slug );
 		}
 		
 		$this->dm->flush();
@@ -117,9 +119,9 @@ class ModelBranchBranch extends Model {
 		if ( !empty($aLogo) && $this->model_tool_image->isValidImage($aLogo) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
 			$avatar_name = $this->config->get('branch')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId();
+			$path = $folder_link . $oBranch->getId();
 			if ( $aData['logo'] = $this->model_tool_image->uploadImage($path, $avatar_name, $aLogo) ) {
-				$branch->setLogo( $aData['logo'] );
+				$oBranch->setLogo( $aData['logo'] );
 			}
 		}
 		
@@ -134,20 +136,32 @@ class ModelBranchBranch extends Model {
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @param: array string ID
 	*/
-	public function deleteBranches( $data ) {
-		if ( isset( $data['id'] ) ) {
-			foreach ($data['id'] as $id) {
-				$branch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
-				if ( !empty( $branch ) ) {
-					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branches.id' )->equals( $branch->getId() )->getQuery()->execute();
+	public function deleteBranches( $aData ) {
+		if ( empty($aData['id']) ) return false;
+		
+		foreach ( $aData['id'] as $id ) {
+			$oBranch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
+			if ( !$oBranch ) continue;
+			$oBranch->setDeleted( true );
+		}
+
+		$this->dm->flush();
+
+		return false;
+	}
+	/*public function deleteBranches( $aData ) {
+		if ( isset( $aData['id'] ) ) {
+			foreach ($aData['id'] as $id) {
+				$oBranch = $this->dm->getRepository( 'Document\Branch\Branch' )->find( $id );
+				if ( !empty( $oBranch ) ) {
+					$this->dm->createQueryBuilder( 'Document\Branch\Position' )->remove()->field( 'branches.id' )->equals( $oBranch->getId() )->getQuery()->execute();
 					
-					$this->dm->remove( $branch );
+					$this->dm->remove( $oBranch );
 				}
 			}
 		}
 
-		$this->dm->flush();
-	}
+		$this->dm->flush();aD	}*/
 
 	/**
 	* Get Branch by ID
@@ -156,8 +170,12 @@ class ModelBranchBranch extends Model {
 	* @param: string Branch ID
 	* @return: Object Branch
 	*/
-	public function getBranch( $branch_id ) {
-		return $this->dm->getRepository( 'Document\Branch\Branch' )->find( $branch_id );
+	public function getBranch( $idBranch ) {
+		$query = array(
+			'deleted' => false,
+			'id' => $idBranch
+		);
+		return $this->dm->getRepository( 'Document\Branch\Branch' )->findOneBy( $query );
 	}
 
 	/**
@@ -172,24 +190,26 @@ class ModelBranchBranch extends Model {
 	*	}
 	* @return: list Object Branch Sort by Order
 	*/
-	public function getBranches( $data = array() ) {
-		if ( isset( $data['start'] ) && $data['start'] >= 0 ) {
-			$data['start'] = (int)$data['start'];
+	public function getBranches( $aData = array() ) {
+		if ( isset( $aData['start'] ) && $aData['start'] >= 0 ) {
+			$aData['start'] = (int)$aData['start'];
 		}else {
-			$data['start'] = 0;
+			$aData['start'] = 0;
 		}
 
-		if ( isset( $data['limit'] ) && $data['limit'] > 0 ) {
-			$data['limit'] = (int)$data['limit'];
+		if ( isset( $aData['limit'] ) && $aData['limit'] > 0 ) {
+			$aData['limit'] = (int)$aData['limit'];
 		}else {
-			$data['limit'] = 10;
+			$aData['limit'] = 10;
 		}
 
-		$query = $this->dm->createQueryBuilder( 'Document\Branch\Branch' )
-			->skip( $data['start'] )->limit( $data['limit'] )
+		$query = array('deleted' => false);
+
+		return $this->dm->getRepository('Document\Branch\Branch')
+			->findBy( $query )
+			->skip( $aData['start'] )
+			->limit( $aData['limit'] )
 			->sort( array('order' => 1) );
-
-		return $query->getQuery()->execute();
 	}
 
 	/**

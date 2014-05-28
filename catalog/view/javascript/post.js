@@ -322,17 +322,22 @@
             }
 
             // content, user tagged, thumb
-            var usersTagged = [];
+            var userTags = [];
+            var stockTags = [];
             var content, thumb;
             if ( !that.$content.hasClass('js-post-status') ){
                 content = that.$content.code();
-                usersTagged = that.$content.getTags();
+                userTags = that.$content.getTags();
                 thumb = that.$el.find('.img-uploaded').attr('src');
             
             }else{
-                var mentions = that.$content.mentionsInput('getMentions');
-                $.each(mentions, function(key, value){
-                    usersTagged.push(value.id);
+                var mentions = that.$content.mentionsInput('getMentions');                
+                $.each(mentions, function(key, t){
+                    if(t.type === "contact"){
+                        userTags.push(t.id);
+                    } else if(t.type === "stock") {
+                        stockTags.push(t.id);
+                    }
                 });
                 content = that.$content.mentionsInput('getHtmlContent');
                 thumb = that.$el.find('.img-uploaded').attr('src');
@@ -343,7 +348,8 @@
                 category    : that.$category.val(),
                 description : that.$description.val(),
                 content     : content,
-                tags        : usersTagged,
+                userTags    : userTags,
+                stockTags   : stockTags,
                 thumb       : thumb
             };
 

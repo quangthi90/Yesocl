@@ -1,10 +1,10 @@
 <?php
 
 // Branch
-$_['route']['BranchCategories'] 				= 'branch/categories';
-$_['route']['BranchCategory']					= 'branch/category';
-$_['route']['BranchList']						= 'branch/list';
-$_['route']['BranchDetail']						= 'branch/detail';
+$_['route']['BranchCategories'] 			= 'branch/categories';
+$_['route']['BranchCategory']				= 'branch/category';
+$_['route']['BranchList']					= 'branch/list';
+$_['route']['BranchDetail']					= 'branch/detail';
 
 // Post
 $_['route']['PostPage'] 					= 'post/detail';
@@ -94,7 +94,54 @@ $_['route']['MessageGetLast']				= 'account/message/getLastMessages/';
 $_['route']['MessageDeleteAll']				= 'account/message/deleteUserMessages/';
 $_['route']['MessageDeleteOne']				= 'account/message/deleteMessage/';
 
-// Ajax
-$_['route']['AjaxGetRouting']				= 'ajax/config/getRoutings/';
-$_['route']['SetLanguage']					= 'ajax/language/setLanguage/';
+// Stock
+$_['route']['StockMarket']					= 'stock/market/';
+$_['route']['StockMarketNone']				= 'stock/market/';
+$_['route']['StockPage']					= 'stock/stock/';
+$_['route']['StockNewsPage']				= 'stock/news/';
+$_['route']['StockIdeaPage']				= 'stock/ideas/';
+
+//-- API --//
+// Common
+$_['route']['AjaxGetRouting']				= 'api/config/getRoutings/';
+$_['route']['SetLanguage']					= 'api/language/setLanguage/';
+$_['route']['ApiSearchByKeyword']			= 'api/search/searchAll/';
+
+// Stock
+$_['route']['ApiGetAllStocks']				= 'api/stock/getAllStocks/';
+$_['route']['ApiPostWatchList']				= 'api/stock/addStocksToWatchList/';
+$_['route']['ApiDeleteWatchListItem']		= 'api/stock/removeStockFromWatchList/';
+$_['route']['ApiGetStockExchanges']			= 'api/stock/getStockExchanges/';
+$_['route']['ApiGetLastStockNews']			= 'api/stock/getNews/';
+$_['route']['ApiGetStockIdeas']				= 'api/stock/getIdeas/';
+
+// Post
+$_['route']['ApiPutPostLike']				= 'api/post/like/';
+$_['route']['ApiPutPostInfo']				= 'api/post/edit/';
+$_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
+$_['route']['ApiPostPost']					= 'api/post/add/';
+$_['route']['ApiPutPost']					= 'api/post/edit/';
+$_['route']['ApiDeletePost']				= 'api/post/delete/';
+
+// Comment
+$_['route']['ApiGetComments']				= 'api/comment/getComments/';
+$_['route']['ApiGetCommentLiker']			= 'api/comment/getLikers/';
+$_['route']['ApiGetCommentTags']			= 'api/comment/getUserTags/';
+$_['route']['ApiPutCommentLike']			= 'api/comment/like/';
+$_['route']['ApiPutComment']				= 'api/comment/edit/';
+$_['route']['ApiPostComment']				= 'api/comment/add/';
+$_['route']['ApiDeleteComment']				= 'api/comment/delete/';
+
+// Friend
+$_['route']['ApiPutMakeFriend']				= 'api/user/makeFriend/';
+$_['route']['ApiPutCancelRequest']			= 'api/user/cancelRequest/';
+$_['route']['ApiPutConfirm']				= 'api/user/confirm/';
+$_['route']['ApiPutIgnore']					= 'api/user/ignore/';
+$_['route']['ApiPutUnfriend']				= 'api/user/unfriend/';
+$_['route']['ApiPutAddFollower']			= 'api/user/addFollower/';
+$_['route']['ApiPutRemoveFollower']			= 'api/user/removeFollower/';
+$_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
+
+// User
+$_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
 ?>

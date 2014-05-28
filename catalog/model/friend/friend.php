@@ -10,12 +10,18 @@ class ModelFriendFriend extends Model {
 	 * 	MongoID User ID
 	 * @return: list object Friends
 	 */
-	public function getFriends( $idUser ){
+	public function getFriends( $idUser, $isListFriend = false ){
 		$oFriends = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
 			'user.id' => $idUser
 		));
 
-		return $oFriends;
+		if ( !$isListFriend ) return $oFriends;
+
+		if ( !$oFriends ){
+			return null;
+		}
+
+		return $oFriends->getFriends();
 	}
 
 	/**

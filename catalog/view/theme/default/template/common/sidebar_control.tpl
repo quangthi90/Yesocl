@@ -46,12 +46,17 @@
 			  			</a>
 				  	</li>
 				  	{% if show_branch_menu == true %}
-					  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
-					  		<a href="{{ path('BranchList') }}">
-					  			<i class="icon-fire"></i> <span>{% trans %}Branch{% endtrans %}</span>
-				  			</a>
-					  	</li>
+				  	<li class="menu-item {% if menu == 'branch' %}active{% endif %}">
+				  		<a href="{{ path('BranchList') }}">
+				  			<i class="icon-fire"></i> <span>{% trans %}Branch{% endtrans %}</span>
+			  			</a>
+				  	</li>
 				  	{% endif %}
+				  	<li class="menu-item {% if menu == 'stock' %}active{% endif %}">
+				  		<a href="{{ path('StockMarket') }}">
+				  			<i class="icon-fire"></i> <span>{% trans %}Stock{% endtrans %}</span>
+			  			</a>
+				  	</li>
 			  	{% endblock %}
 			</ul>	
 		</div>

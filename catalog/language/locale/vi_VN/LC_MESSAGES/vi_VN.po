@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Yesocl\n"
-"POT-Creation-Date: 2014-04-11 16:11+0700\n"
-"PO-Revision-Date: 2014-05-02 22:12+0700\n"
+"POT-Creation-Date: 2014-05-23 08:01+0700\n"
+"PO-Revision-Date: 2014-05-23 08:01+0700\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: vi_VN\n"
@@ -16,22 +16,141 @@ msgstr ""
 "X-Poedit-SearchPath-1: E:\\Programs\\xampp\\htdocs\\Yesocl\\catalog"
 "\\controller\n"
 
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/password.php:18
+msgid "Warning: Old Password is not correct!"
+msgstr "Cảnh báo: Mật khẩu cũ không đúng!"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/password.php:21
+msgid "Success: Your password has been successfully updated!"
+msgstr "Thành công: Mật khẩu của bạn đã được thay đổi thành công!"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/password.php:51
+msgid "Old Password must be between 4 and 20 characters!"
+msgstr "Mật khẩu cũ phải có từ 4 đến 20 ký tự!"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/password.php:54
+msgid "New Password must be between 4 and 20 characters!"
+msgstr "Mật khẩu mới phải có từ 4 đến 20 ký tự!"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/password.php:57
+msgid "Password confirmation does not match password!"
+msgstr "Xác nhận mật khẩu không đúng!"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/register.php:70
+msgid ""
+"This account has beed deleted by system, please contact admin to get your "
+"account!"
+msgstr ""
+"Tài khoản này đã được xóa bởi hệ thống, vui lòng liên hệ với Quản lý của "
+"Website để lấy lại tài lấy lại tài khoản của bạn!"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/account/wall.php:44
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/09/fd/165fc8851d8abdbb716ae7cf1e83b50beb44fb76c894e33569a8a17fad40.php:84
+msgid "Wall Page of"
+msgstr "Tường nhà của"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:10
+msgid "slug is empty"
+msgstr ""
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:17
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:141
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:215
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:249
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:312
+#, fuzzy
+msgid "post type is empty!"
+msgstr "Nhập lại mật khẩu"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:73
+msgid "Save Post have error"
+msgstr ""
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:134
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:208
+#, fuzzy
+msgid "post slug is empty"
+msgstr "Bài viết"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:176
+#, fuzzy
+msgid "edit post has error"
+msgstr "Sửa bài viết"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:242
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:305
+#, fuzzy
+msgid "post slug is empty!"
+msgstr "Bài viết"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:295
+msgid "like post has error"
+msgstr ""
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:357
+#, fuzzy
+msgid "content is empty"
+msgstr "Nội dung"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:362
+#, fuzzy
+msgid "image is too large"
+msgstr "Chọn hình ảnh"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:366
+msgid "user slug is empty"
+msgstr ""
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:370
+#, fuzzy
+msgid "description is empty"
+msgstr "Mô tả"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/api/post.php:373
+#, fuzzy
+msgid "category is empty"
+msgstr "Danh mục"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/common/notification.php:101
+msgid "Today"
+msgstr "Hôm nay"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/common/notification.php:103
+msgid "Yesterday"
+msgstr "Hôm qua"
+
+#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/stock/news.php:16
+msgid "News of Stock"
+msgstr "Tin tức chứng khoán"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/03/36/872a16315fa5b2d9edc0df900df0766b86d04310f083327694d2923ae13a.php:75
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/db/8e/ec4fc2163c0b3e6baf023ead704d1eff646f870fdee778feef6afe80fd66.php:75
 msgid "Edit Profile"
 msgstr "Sửa hồ sơ"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/09/fd/165fc8851d8abdbb716ae7cf1e83b50beb44fb76c894e33569a8a17fad40.php:84
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/ea/0e/5aaa0751557229adbf9c5b2cccaebf0884c6aaf005c7f0f124245c15e0e5.php:84
-msgid "Wall Page of"
-msgstr "Tường nhà của"
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/05/a9/9a1e02ebba2377ee543ef92cdc5c8313a4c5753afd4ebae15a7c172d8f8d.php:33
+msgid "Fund ownership friend"
+msgstr "Quỹ đầu tư giao dịch"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/05/a9/9a1e02ebba2377ee543ef92cdc5c8313a4c5753afd4ebae15a7c172d8f8d.php:43
+msgid "Funds"
+msgstr "Quỹ đầu tư"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/05/a9/9a1e02ebba2377ee543ef92cdc5c8313a4c5753afd4ebae15a7c172d8f8d.php:130
+msgid "Buying"
+msgstr "Mua"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/05/a9/9a1e02ebba2377ee543ef92cdc5c8313a4c5753afd4ebae15a7c172d8f8d.php:136
+msgid "Selling"
+msgstr "Bán"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/09/fd/165fc8851d8abdbb716ae7cf1e83b50beb44fb76c894e33569a8a17fad40.php:127
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0c/ab/da4216c705fb4e2485bd016203096731aa6510239c111925b615269814c5.php:152
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:157
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/5b/44/68d583fd94f480fccfabb5545feb3a41125b66a717395abb66c3a456ae76.php:106
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/d8/ea/56c67dcb70261eef399d08d6d90c6c7a7fc437588d03e775a25cdcc4040c.php:106
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/e3/3f/25cccee26ee86346678279afa13a2fbac308f812618c2248d2301d1634b6.php:152
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/ea/0e/5aaa0751557229adbf9c5b2cccaebf0884c6aaf005c7f0f124245c15e0e5.php:127
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/ea/0e/5aaa0751557229adbf9c5b2cccaebf0884c6aaf005c7f0f124245c15e0e5.php:80
 msgid "Post"
 msgstr "Bài viết"
 
@@ -52,6 +171,8 @@ msgstr "lúc"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0a/af/6955148d8e712bfaa00d1ce537c56fc2e8c35c868ace23c7f0f0f5299395.php:154
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:207
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:41
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:87
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:136
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:207
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/48/16/7641f05b8f26024a61523ab9603523a7929269fe6f31c14136ff9bbdc6a8.php:150
@@ -64,6 +185,8 @@ msgstr "Thích"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:232
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:499
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/13/f6/bb9c57bc4e2d56ed5f893de18ca393ed7780da9c1b5c4839b379cb9e7563.php:42
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:43
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:120
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:175
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/41/e2/bfdf58477a0189b26207b6954bfb967f43a39ba5cd5bb83ccd8b06e870b4.php:65
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:232
@@ -85,7 +208,8 @@ msgstr "Mở cửa sổ bình luận"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0b/09/0009799eb835dda672d967bf23eb2eed0066f05062814ff2ec26713be434.php:63
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:36
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:62
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:36
 msgid "Login"
 msgstr "Đăng nhập"
 
@@ -99,7 +223,7 @@ msgstr "Đăng nhập"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/23/82/acec7218040ee55b0eb297d329f58f90e0db81cadf2663f2d4ba035564c7.php:258
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/23/82/acec7218040ee55b0eb297d329f58f90e0db81cadf2663f2d4ba035564c7.php:606
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/23/82/acec7218040ee55b0eb297d329f58f90e0db81cadf2663f2d4ba035564c7.php:884
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:79
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:78
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/9a/24/053904ac6ada49a7ad4238ff716d4db8491de1bdb564f60a29c28503fc30.php:66
 msgid "Email"
 msgstr "Email"
@@ -107,8 +231,9 @@ msgstr "Email"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0b/09/0009799eb835dda672d967bf23eb2eed0066f05062814ff2ec26713be434.php:89
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:107
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:96
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:89
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:88
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:96
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:107
 msgid "Password"
 msgstr "Mật khẩu"
 
@@ -116,21 +241,22 @@ msgstr "Mật khẩu"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/94/96efc465de3dac00618ee28737b9da0b7b2ba9d35185395a5eb339e827c6.php:412
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:84
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/43/6fd3a04822182418dc7aaf5c9374ff5b25043874f45c7909c679fcdb09f0.php:412
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:97
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:96
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:84
 msgid "Remember me"
 msgstr "Ghi nhớ"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0b/09/0009799eb835dda672d967bf23eb2eed0066f05062814ff2ec26713be434.php:104
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/94/96efc465de3dac00618ee28737b9da0b7b2ba9d35185395a5eb339e827c6.php:419
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/43/6fd3a04822182418dc7aaf5c9374ff5b25043874f45c7909c679fcdb09f0.php:419
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:104
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:103
 msgid "Forgot password"
 msgstr "Quên mật khẩu"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0b/09/0009799eb835dda672d967bf23eb2eed0066f05062814ff2ec26713be434.php:110
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/94/96efc465de3dac00618ee28737b9da0b7b2ba9d35185395a5eb339e827c6.php:426
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/43/6fd3a04822182418dc7aaf5c9374ff5b25043874f45c7909c679fcdb09f0.php:426
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:110
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/66/1b/f0b2f05d1f55b74121152db68dd98543a2cbcbbd90d53fe456b1c49b3fa6.php:109
 msgid "Sign in"
 msgstr "Đăng nhập"
 
@@ -190,22 +316,27 @@ msgstr "Bình luận của bạn"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:162
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:339
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:466
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:193
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/19/cb4980c0c10afa92eae4072db0df3bfa31b829e8e44caf7851c537d7e790.php:97
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/35/33/4e461b31178ebe9d0c7e0403d18c88541c8512cb5547a95757ec3b63087f.php:99
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:106
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:162
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:339
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:466
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:69
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:153
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:108
 msgid "Submit"
 msgstr "Gửi lên"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:110
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:164
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:110
 msgid "Press Enter to send"
 msgstr "Nhấn \"Enter\" để gửi"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:140
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:177
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:140
 msgid "Advanced comment"
 msgstr "Khung soạn thảo bình luận đầy đủ"
@@ -218,11 +349,14 @@ msgstr "Khung soạn thảo bình luận đầy đủ"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:404
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:67
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:67
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:120
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:84
 msgid "Warning"
 msgstr "Cảnh báo"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:152
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:108
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:184
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:152
 msgid "Comment"
 msgstr "Bình luận"
@@ -230,6 +364,8 @@ msgstr "Bình luận"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:212
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:556
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/13/f6/bb9c57bc4e2d56ed5f893de18ca393ed7780da9c1b5c4839b379cb9e7563.php:99
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:95
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:96
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:144
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/41/e2/bfdf58477a0189b26207b6954bfb967f43a39ba5cd5bb83ccd8b06e870b4.php:188
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:212
@@ -246,6 +382,8 @@ msgstr "Đã thích"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:240
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:506
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/13/f6/bb9c57bc4e2d56ed5f893de18ca393ed7780da9c1b5c4839b379cb9e7563.php:50
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:51
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:128
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:185
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/41/e2/bfdf58477a0189b26207b6954bfb967f43a39ba5cd5bb83ccd8b06e870b4.php:76
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:240
@@ -261,6 +399,8 @@ msgstr "Sửa"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:513
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:695
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/13/f6/bb9c57bc4e2d56ed5f893de18ca393ed7780da9c1b5c4839b379cb9e7563.php:58
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:59
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:136
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:192
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/41/e2/bfdf58477a0189b26207b6954bfb967f43a39ba5cd5bb83ccd8b06e870b4.php:89
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:247
@@ -277,6 +417,7 @@ msgstr "Xóa"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:366
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:276
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:366
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:82
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/90/e6/3920f5a58074e19aeb8c6dbc9ecfb573f36360f26e23b2cc40acfa32e045.php:74
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/ba/d3/180bbe42d02741e7449d0acce568ad436ef290507c89c590aa837638ce95.php:74
 msgid "New post"
@@ -286,6 +427,7 @@ msgstr "Bài viết mới"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:373
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:283
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:373
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:89
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:47
 msgid "Choose an image for new post"
 msgstr "Chọn hình đại diện cho bài viết"
@@ -300,6 +442,8 @@ msgstr "Chọn hình đại diện cho bài viết"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:292
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:378
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:382
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:94
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:98
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/90/e6/3920f5a58074e19aeb8c6dbc9ecfb573f36360f26e23b2cc40acfa32e045.php:136
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:52
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:57
@@ -311,6 +455,7 @@ msgstr "Kéo hình ảnh vào"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:392
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:302
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:392
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:108
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:72
 msgid "Choose image"
 msgstr "Chọn hình ảnh"
@@ -319,6 +464,7 @@ msgstr "Chọn hình ảnh"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:409
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:319
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:409
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:125
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/9b/c3/efce230546b6c80c91f105db529f2fbf738c4d989f0a1f6abe8bc2a9acb9.php:154
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:89
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/ef/cb/38eaddd8f36e2af41a72c347b12cbc87fadc2b70128cbe996de328566ada.php:154
@@ -331,6 +477,7 @@ msgstr "Tiêu đề"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:329
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:455
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:640
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:143
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:98
 msgid "Content"
 msgstr "Nội dung"
@@ -339,6 +486,7 @@ msgstr "Nội dung"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/24/f54fe7671766b980f2badba821c6ca8a0a337560d0cb410f55472e27c7ec.php:470
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:343
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/42/df/ede9f761b893c5a6ad5b9a209ccc516a864cd2f029f688495e9d464f89c4.php:470
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:157
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b9/7e/c05b51657971c4628db80ae67f1cb965220c0d9273e3072465a3745b0a7a.php:112
 msgid "Reset"
 msgstr "Trả về ban đầu"
@@ -415,6 +563,7 @@ msgid "Edit profile"
 msgstr "Thay đổi hồ sơ"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/94/96efc465de3dac00618ee28737b9da0b7b2ba9d35185395a5eb339e827c6.php:83
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:57
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/43/6fd3a04822182418dc7aaf5c9374ff5b25043874f45c7909c679fcdb09f0.php:83
 msgid "Change password"
 msgstr "Thay đổi mật khẩu"
@@ -422,6 +571,7 @@ msgstr "Thay đổi mật khẩu"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/0d/94/96efc465de3dac00618ee28737b9da0b7b2ba9d35185395a5eb339e827c6.php:94
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/43/6fd3a04822182418dc7aaf5c9374ff5b25043874f45c7909c679fcdb09f0.php:94
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/c5/30c7f59b5975a6391de9474c313a31058f0be3fface6009194cdacb9ecae.php:58
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/32/d5/a9eba5143660c694dfd9e9d5f0674c302ca76b2005a2d1cd75d01e4515dd.php:58
 msgid "Change avatar"
 msgstr "Thay đổi hình đại diện"
 
@@ -666,6 +816,34 @@ msgstr "Ngành nghề"
 msgid "Enter your key"
 msgstr "Nhập từ khóa"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:35
+msgid "Change Password"
+msgstr "Thay đổi mật khẩu"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:87
+msgid "Old"
+msgstr "Cũ"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:97
+msgid "New"
+msgstr "Mới"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:104
+msgid "Re-New"
+msgstr "Xác nhận"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:111
+msgid "Change"
+msgstr "Thay đổi"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/1b/f2/8eee8c3cc7b61dc3bfd226bd05e7a98d1ac9de2d3fb52e15dcd940188a93.php:117
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:290
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:338
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:351
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/3f/a712249358e676e35737b69653c452f95aa9bbbb13e2156463b76c793f6e.php:289
+msgid "Cancel"
+msgstr "Hủy"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/1e/4e/8f349e418e8deef58029bced89d7ff34b38bcaa6cd69a2b4394e5c714179.php:42
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/23/82/acec7218040ee55b0eb297d329f58f90e0db81cadf2663f2d4ba035564c7.php:42
 msgid "Basic Information"
@@ -706,20 +884,30 @@ msgstr "Tất cả ghi chú"
 msgid "Sent"
 msgstr "Gửi đi"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/75/909e2c894b3623b7197388ac977eec4ec332abeef6b7c042878367d4516f.php:100
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:104
+msgid "See users liked"
+msgstr "Danh sách đã thích"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:57
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:90
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:57
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:90
 msgid "Sign In"
 msgstr "Đăng nhập"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:99
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:99
 msgid "Don't have an account"
 msgstr "Chưa có tài khoản"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:101
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:101
 msgid "Sign Up"
 msgstr "Đăng ký"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/21/99/48e6c3a423858aa27c01851a867b0a804f7b752eddc352e313d1785768f8.php:105
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/f3/aa/233e1456dfadf343464874ac4f565655e3f51144b54ee4eb03328443202d.php:105
 msgid "Remind"
 msgstr "Gợi nhớ"
 
@@ -747,12 +935,13 @@ msgid "Wall Page"
 msgstr "Tường nhà"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/24/b3/3bc14d1e52e1b54afdf03d678d014964adf923255fecb9b4ccfed6dbab63.php:125
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c6/44/af423d9e632861c3cdac703834ea57ca5c72cac367e0987ddb3f0ecc56aa.php:98
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c6/44/af423d9e632861c3cdac703834ea57ca5c72cac367e0987ddb3f0ecc56aa.php:104
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/fc/bf/d2efac0e081b12a51785a871d53ad1a66aae456d787cd6d0c0b3988cb891.php:98
 msgid "Profile"
 msgstr "Hồ sơ"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/24/b3/3bc14d1e52e1b54afdf03d678d014964adf923255fecb9b4ccfed6dbab63.php:141
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:239
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:42
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:46
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/4d/59/5cc6966bd70ae3a71bdc1669307dceb08821f49c5a7a715bc597de38d12d.php:108
@@ -773,6 +962,10 @@ msgstr "Người theo đuôi"
 msgid "Branch"
 msgstr "Ngành nghề"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/24/b3/3bc14d1e52e1b54afdf03d678d014964adf923255fecb9b4ccfed6dbab63.php:194
+msgid "Stock"
+msgstr "Chứng khoán"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/24/c3/58163b953a51fe2892a7d08de941de2936c3247a633966ea03298f91589c.php:43
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/24/c3/58163b953a51fe2892a7d08de941de2936c3247a633966ea03298f91589c.php:59
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/29/f6/343d6ec662b91f1e95c682bd52564b3c73f6fba1182978f4443a3bff3bb0.php:36
@@ -787,21 +980,149 @@ msgid "Summary"
 msgstr "Tóm tắt"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/26/c5/30c7f59b5975a6391de9474c313a31058f0be3fface6009194cdacb9ecae.php:36
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/32/d5/a9eba5143660c694dfd9e9d5f0674c302ca76b2005a2d1cd75d01e4515dd.php:36
 msgid "Change Avatar"
 msgstr "Thay đổi hình đại diện"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:55
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/48/16/7641f05b8f26024a61523ab9603523a7929269fe6f31c14136ff9bbdc6a8.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/6b/f0/4794e6d836f345105666c3a7ccbf95edec0fdefd0f83f6eca6413a6be99c.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/75/39/d90642f9bf9e60e97b3594fb3f5d3129d6c450808da572c33c23aa0fe808.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/9f/a8/956716c9d333362671100eb0be85d8e4efd84382383a7be199691330b9b4.php:34
+msgid "Comment box"
+msgstr "Cửa sổ bình luận"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:77
+msgid "Loading"
+msgstr "Đang tải"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:197
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:309
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:161
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:138
+msgid "Close"
+msgstr "Đóng"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:218
+msgid "Who liked"
+msgstr "Ai đã thích"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:244
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:48
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:52
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:52
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:63
+msgid "Unfriend"
+msgstr "Hủy kết bạn"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:253
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:59
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:124
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:63
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:124
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:74
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:133
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:74
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:133
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:74
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:133
+msgid "Sent Request"
+msgstr "Gửi yêu cầu"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:259
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:65
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:69
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:130
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:69
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:130
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:80
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:139
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:80
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:139
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:80
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:139
+msgid "Cancel Request"
+msgstr "Hủy yêu cầu"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:269
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:76
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:80
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:117
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:80
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:117
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:49
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:126
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:49
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:126
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:49
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:126
+msgid "Make Friend"
+msgstr "Kết bạn"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:277
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2e/fb/382838baec494db99ed93c8d9afed16fb649774473bcf4bb7f35cb59ad60.php:71
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:85
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:88
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:88
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/94/74/a3c966b01c66a7b201f77c9951cf9ff8f8988d9e0fc19e72a463b206e3a1.php:44
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/94/ec/65256b43b28245e9945c4695a5c112e2f8bc2cc3c060dea7538ab4a4be6d.php:71
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:96
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:149
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:96
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:149
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:96
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:149
+msgid "Following"
+msgstr "Đang theo đuôi"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:283
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:91
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:94
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:94
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:101
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:154
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:101
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:154
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:101
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:154
+msgid "Unfollow"
+msgstr "Không theo đuôi"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/18/57b7f4294ed21f85722ebeca59400535ebdfd51f063c6a57a7cc9321fe15.php:293
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:102
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:104
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:104
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a1/bf/e0ba259fb596c5c2c60991e8628ec2f9c2c6559a5c9d3ddbbd93ce2119d8.php:108
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/aa/85/cca73b094fd5c1fd79dac391896e272fec0febaa0bec02d6af713f5ebd4c.php:108
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/df/8c/0cdf706cb1d1ac425487ae58cc01e460e32549f81312af59454f76243ce1.php:108
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:109
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:162
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:109
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:162
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:109
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:162
+msgid "Follow"
+msgstr "Theo đuôi"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/19/cb4980c0c10afa92eae4072db0df3bfa31b829e8e44caf7851c537d7e790.php:66
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/35/33/4e461b31178ebe9d0c7e0403d18c88541c8512cb5547a95757ec3b63087f.php:68
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:38
 msgid "What's in your mind"
 msgstr "Bạn đang nghĩ gì"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/19/cb4980c0c10afa92eae4072db0df3bfa31b829e8e44caf7851c537d7e790.php:83
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/35/33/4e461b31178ebe9d0c7e0403d18c88541c8512cb5547a95757ec3b63087f.php:85
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:55
 msgid "Choose image to upload"
 msgstr "Chọn hình"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/2d/19/cb4980c0c10afa92eae4072db0df3bfa31b829e8e44caf7851c537d7e790.php:89
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/35/33/4e461b31178ebe9d0c7e0403d18c88541c8512cb5547a95757ec3b63087f.php:91
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:61
 msgid "Advance post"
 msgstr "Khung soạn thảo bình luận đầy đủ"
 
@@ -844,21 +1165,6 @@ msgstr "Kết bạn"
 msgid "Female Friends"
 msgstr "Bạn gái"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/2e/fb/382838baec494db99ed93c8d9afed16fb649774473bcf4bb7f35cb59ad60.php:71
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:85
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:88
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:88
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/94/74/a3c966b01c66a7b201f77c9951cf9ff8f8988d9e0fc19e72a463b206e3a1.php:44
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/94/ec/65256b43b28245e9945c4695a5c112e2f8bc2cc3c060dea7538ab4a4be6d.php:71
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:96
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:149
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:96
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:149
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:96
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:149
-msgid "Following"
-msgstr "Đang theo đuôi"
-
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/2e/fb/382838baec494db99ed93c8d9afed16fb649774473bcf4bb7f35cb59ad60.php:77
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/94/ec/65256b43b28245e9945c4695a5c112e2f8bc2cc3c060dea7538ab4a4be6d.php:77
 msgid "Followed"
@@ -873,87 +1179,9 @@ msgstr "Được theo đuôi"
 msgid "Education Background"
 msgstr "Thông tin học vấn"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:48
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:52
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:52
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:63
-msgid "Unfriend"
-msgstr "Hủy kết bạn"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:59
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:124
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:124
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:74
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:133
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:74
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:133
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:74
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:133
-msgid "Sent Request"
-msgstr "Gửi yêu cầu"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:65
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:69
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:130
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:69
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:130
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:80
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:139
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:80
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:139
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:80
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:139
-msgid "Cancel Request"
-msgstr "Hủy yêu cầu"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:76
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:80
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:117
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:80
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:117
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:49
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:126
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:49
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:126
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:49
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:126
-msgid "Make Friend"
-msgstr "Kết bạn"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:91
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:94
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:94
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:101
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:154
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:101
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:154
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:101
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:154
-msgid "Unfollow"
-msgstr "Không theo đuôi"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/53/d340ac7d47ccadd1e18cacf65167b2dde26aacc1656c3d75b446e757ea93.php:102
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/45/17/59eab0c7cf8687c4355fbe37463fee953773e857a4a0da334758387969b7.php:104
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/59/ba/ea80a1ae64c914e972724d48a4fe94cbc3f283f0025d135e0ed8562e7e9a.php:104
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a1/bf/e0ba259fb596c5c2c60991e8628ec2f9c2c6559a5c9d3ddbbd93ce2119d8.php:108
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/aa/85/cca73b094fd5c1fd79dac391896e272fec0febaa0bec02d6af713f5ebd4c.php:108
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/df/8c/0cdf706cb1d1ac425487ae58cc01e460e32549f81312af59454f76243ce1.php:108
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:109
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e4/31/bfa575e0dec18e9e48475f9a85bf9dac055e0032192600658195d94a63c4.php:162
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:109
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/fc/548e77260d02e3a329cd80830500aa039d3e1eaf2ea2bc0398a232d1ce8f.php:162
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:109
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/e9/455af2577ff49a53958dd2440716df8ca01bc4c275091c2827586b8bec9b.php:162
-msgid "Follow"
-msgstr "Theo đuôi"
-
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/3a/8f/a46c0aed344486558f21917300a329ec808917ca7e1fdcef216dc679e6c9.php:67
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/9e/2a/0d37a78d6269158de40ac2706df2f4fa0878ace9a6ecfc2550f76c8e28c3.php:67
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:311
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:441
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/3f/a712249358e676e35737b69653c452f95aa9bbbb13e2156463b76c793f6e.php:311
 msgid "Home Feed"
 msgstr "Trang chủ"
@@ -962,14 +1190,6 @@ msgstr "Trang chủ"
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/9e/2a/0d37a78d6269158de40ac2706df2f4fa0878ace9a6ecfc2550f76c8e28c3.php:157
 msgid "Follow Posts"
 msgstr "Bài viết của người bạn đang theo đuôi"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/3c/ac/3316094a6c2520261876c2428d90fd2be35e91394507570dac6c1a7dcb0d.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/48/16/7641f05b8f26024a61523ab9603523a7929269fe6f31c14136ff9bbdc6a8.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/6b/f0/4794e6d836f345105666c3a7ccbf95edec0fdefd0f83f6eca6413a6be99c.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/75/39/d90642f9bf9e60e97b3594fb3f5d3129d6c450808da572c33c23aa0fe808.php:63
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/9f/a8/956716c9d333362671100eb0be85d8e4efd84382383a7be199691330b9b4.php:34
-msgid "Comment box"
-msgstr "Cửa sổ bình luận"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:57
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:57
@@ -1033,22 +1253,20 @@ msgid "Select gender"
 msgstr "Chọn giới tính"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:215
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:215
 msgid "Security Check"
 msgstr "Kiểm tra bảo mật"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:225
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:225
 msgid "Captcha not match"
 msgstr "Captcha không đúng"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:231
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:231
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:217
 msgid "I agree Yesocl's policy"
 msgstr "Tôi đồng ý với chính sách của Yesocl"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/43/15/192ee8492cb81c2df1a186a2067444331f1d384fd1b5a7e11be329d5f9c2.php:235
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:235
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/82/52/48450a03fb6292fec2dfefa3c63c319e645054cbe2ce0f1c970be1bca3dc.php:221
 msgid "Sign up"
 msgstr "Đăng ký"
 
@@ -1057,9 +1275,9 @@ msgstr "Đăng ký"
 msgid "friend"
 msgstr "bạn bè"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/49/e5/100c4b3dc703220730fbdccec8d7f91588e2cff0307069822ce831c4af16.php:82
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/49/e5/100c4b3dc703220730fbdccec8d7f91588e2cff0307069822ce831c4af16.php:90
 msgid "Market - Stock page"
-msgstr ""
+msgstr "Sàn giao dịch - Trang chứng khoán"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/4d/59/5cc6966bd70ae3a71bdc1669307dceb08821f49c5a7a715bc597de38d12d.php:76
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/e6/dd/43f772da34974c27402348249a4a788d827f301dfe352f49f33824c1f7bd.php:76
@@ -1076,12 +1294,46 @@ msgstr "Không tìm thấy bạn bè nào"
 msgid "Branch Detail Page"
 msgstr "Trang chi tiết ngành"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:86
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:87
+msgid "12 - Week Range"
+msgstr "Hạng 12 tuần"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:97
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:98
+msgid "Open Price"
+msgstr "Giá mở cửa"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:104
+msgid "Volume"
+msgstr "Khối lượng"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:111
+msgid "Market Cap"
+msgstr "Vốn thị trường"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:120
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:107
+msgid "52 - Week Range"
+msgstr "Hạng 52 tuần"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:131
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:118
+msgid "Previous Closed Price"
+msgstr "Giá đóng của trước"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/62/f6/7ab28385beab1d8b6865919b0091c0adddbc841be973eccc70827dc66a49.php:142
+#, fuzzy
+msgid "Price/Earnings"
+msgstr "Giá mở cửa"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/6a/25/3bb748d3fc3e34f502280045019d4a3587a0df9da610bf1dbb1f32193e63.php:67
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a2/ed/69f585c7b5db44c64745c806e110770329641886289bae8aef1a5efd68bf.php:67
 msgid "Branch Categories Page"
 msgstr "Trang loại lĩnh vực"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/75/e2/9fbe560b54e28e439f935907394ce0c9995f8c2951f8f4d14474e773d56b.php:133
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c1/f7/3ff300c443f15fa97336b97242521fb27fff0bc7df653e34afa506277b4a.php:133
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c1/f7/3ff300c443f15fa97336b97242521fb27fff0bc7df653e34afa506277b4a.php:204
 msgid "Welcome Page"
 msgstr "Trang chào mừng"
 
@@ -1095,6 +1347,10 @@ msgstr "Xem hồ sơ"
 msgid "Background"
 msgstr "Nền"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/8f/7c/ed3bc939c97167f12b06df9ce5b8cf79a548d122b6808269713cb42f5dc3.php:134
+msgid "Stock tag"
+msgstr "Tag mã chứng khoán"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/90/e6/3920f5a58074e19aeb8c6dbc9ecfb573f36360f26e23b2cc40acfa32e045.php:81
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/ba/d3/180bbe42d02741e7449d0acce568ad436ef290507c89c590aa837638ce95.php:81
 msgid "Members"
@@ -1106,8 +1362,9 @@ msgid "Leave branch"
 msgstr "Ra khỏi trang này"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/94/74/a3c966b01c66a7b201f77c9951cf9ff8f8988d9e0fc19e72a463b206e3a1.php:38
+#, fuzzy
 msgid "Follow each other"
-msgstr ""
+msgstr "Theo đuôi"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/95/50/ca71aafc2391894ff8d1910b85fdac43be50334493dda1c73d25bdb1d718.php:52
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/f8/46/97e8ad596f10cc3c55a4d5bb5297a4694db04113b6a6e79d1bb215c8cdee.php:52
@@ -1119,19 +1376,19 @@ msgstr "Tiếng Anh"
 msgid "Vietnamese"
 msgstr "Tiếng Việt"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:87
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:78
 msgid "New Watch List"
-msgstr ""
+msgstr "Thêm mã chứng khoán mới"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:132
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:94
+msgid "No stock choosen"
+msgstr "Không có mã chứng khoán nào"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:134
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:299
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:347
 msgid "OK"
 msgstr "Đồng ý"
-
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/98/7e/02f17f2c67d77ddbb0fb602fd6256f72d0dd70ccde3cdcd1c047a6102b25.php:136
-msgid "Close"
-msgstr ""
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/9b/c3/efce230546b6c80c91f105db529f2fbf738c4d989f0a1f6abe8bc2a9acb9.php:40
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/ef/cb/38eaddd8f36e2af41a72c347b12cbc87fadc2b70128cbe996de328566ada.php:40
@@ -1185,6 +1442,10 @@ msgstr "Bạn chưa theo đuôi người khác"
 msgid "View your profile"
 msgstr "Xem hồ sơ của mình"
 
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/a9/ef/bf4ba5d1b59f2419f8683aeb437dabfa322620e085b57db5d33e93df05eb.php:33
+msgid "Market"
+msgstr "Sàn giao dịch"
+
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/b8/b3/4c274605ca871f2e126ae0b6cc242968e8ff8c12e181be293f5f5af8b0ad.php:109
 msgid "My Wall"
 msgstr "Tường nhà của mình"
@@ -1230,16 +1491,14 @@ msgstr "Xóa"
 msgid "Are you sure to delete all messages of current user"
 msgstr "Bạn có chắc muốn xóa tất cả tin nhắn của người dùng hiện tại không"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:290
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:338
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:289
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/3f/a712249358e676e35737b69653c452f95aa9bbbb13e2156463b76c793f6e.php:289
-msgid "Cancel"
-msgstr "Hủy"
-
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/b1/28692d6150a2f2a92bb20aa30c5a53bf82cb5bd542e2cf1dec813e225395.php:331
 msgid "Are you sure to delete this message"
 msgstr "Bạn có chắc muốn xóa tin nhắn này không"
+
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/bb/be/bcec9f0bc9ecbbae2c7f14bf4ca3fa55440ba902e2a0eefcc676a1a06199.php:67
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/de/32/a7e9a618051d1586b323ad43e29f7648f039437d55dc102967013f83de35.php:67
+msgid "Category Detail Page"
+msgstr "Trang chi tiết loại lĩnh vực"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/bf/84/217ed8b5f00b785afabab909b12f684885afc6a3b8cf37e3103cf0bb4226.php:47
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/fb/3c/6af1c136c64f2acc3eef5d9ac68b910b0fa3058721d5fe7051ea6536af12.php:47
@@ -1263,9 +1522,9 @@ msgstr "bài viết"
 
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/c6/42/55fc8587b955478da2b847bcd76e9ba48be482319a7251a325c72163d665.php:114
 msgid "Stock - Stock page"
-msgstr ""
+msgstr "Chứng khoán - Trang chứng khoán"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c6/44/af423d9e632861c3cdac703834ea57ca5c72cac367e0987ddb3f0ecc56aa.php:106
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c6/44/af423d9e632861c3cdac703834ea57ca5c72cac367e0987ddb3f0ecc56aa.php:112
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/fc/bf/d2efac0e081b12a51785a871d53ad1a66aae456d787cd6d0c0b3988cb891.php:106
 msgid "Friends"
 msgstr "Bạn bè"
@@ -1275,17 +1534,17 @@ msgstr "Bạn bè"
 msgid "Social Network"
 msgstr "Mạng xã hội"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:285
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:347
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/3f/a712249358e676e35737b69653c452f95aa9bbbb13e2156463b76c793f6e.php:285
 msgid "Are you sure you want to delete this post"
 msgstr "Bạn có chắc muốn xóa bài viết này không"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:293
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:355
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/3f/a712249358e676e35737b69653c452f95aa9bbbb13e2156463b76c793f6e.php:293
 msgid "Confirm"
 msgstr "Xác nhận"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:297
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/c7/76/3561dba872f9154a5ea865c05540d4caec318a35072c9f8e777b4cf8f0ad.php:359
 #: E:\Programs\xampp\htdocs\Yesocl\system\twig/e9/3f/a712249358e676e35737b69653c452f95aa9bbbb13e2156463b76c793f6e.php:297
 msgid "Ok"
 msgstr "Đồng ý"
@@ -1295,17 +1554,18 @@ msgstr "Đồng ý"
 msgid "Follow's Posts"
 msgstr "Bài viết của người bạn theo đuôi"
 
-#: E:\Programs\xampp\htdocs\Yesocl\system\twig/de/32/a7e9a618051d1586b323ad43e29f7648f039437d55dc102967013f83de35.php:67
-msgid "Category Detail Page"
-msgstr "Trang chi tiết loại lĩnh vực"
+#: E:\Programs\xampp\htdocs\Yesocl\system\twig/ec/6e/58c720c32dd60fcaa86e1b5fca54533d3a9ca6c184c15ea2153f6d7bb4c5.php:61
+msgid "News"
+msgstr "Tin tức"
 
-#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/common/notification.php:93
-msgid "Today"
-msgstr "hôm nay"
+#~ msgid "Week"
+#~ msgstr "Tuần"
 
-#: E:\Programs\xampp\htdocs\Yesocl\catalog\controller/common/notification.php:95
-msgid "Yesterday"
-msgstr "hôm qua"
+#~ msgid "Range"
+#~ msgstr "Hạng"
+
+#~ msgid "Open"
+#~ msgstr "Giá mở cửa"
 
 #~ msgid "My Following"
 #~ msgstr "Người tôi đang theo đuôi"

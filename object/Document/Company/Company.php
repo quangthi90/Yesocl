@@ -41,6 +41,9 @@ Class Company {
 	/** @MongoDB\ReferenceMany(targetDocument="Company", inversedBy="relativeCompanies") */
 	private $relativeCompanies = array();
 
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", mappedBy="company") */
+	private $stock;
+
 	/** @MongoDB\Date */
 	private $created;
 
@@ -62,6 +65,18 @@ Class Company {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Document\Branch\Branch") */
 	private $branches = array();
+
+	/** @MongoDB\String */
+	private $address;
+
+	/** @MongoDB\String */
+	private $phone;
+
+	/** @MongoDB\String */
+	private $fax;
+
+	/** @MongoDB\String */
+	private $website;
 
 	/**
 	 * Get Group of Member By ID
@@ -243,5 +258,45 @@ Class Company {
 
 	public function getBranches(){
 		return $this->branches;
+	}
+
+	public function setStock( $stock ){
+		$this->stock = $stock;
+	}
+
+	public function getStock(){
+		return $this->stock;
+	}
+
+	public function setAddress( $address ){
+		$this->address = $address;
+	}
+
+	public function getAddress(){
+		return $this->address;
+	}
+
+	public function setPhone( $phone ){
+		$this->phone = $phone;
+	}
+
+	public function getPhone(){
+		return $this->phone;
+	}
+
+	public function setFax( $fax ){
+		$this->fax = $fax;
+	}
+
+	public function getFax(){
+		return $this->fax;
+	}
+
+	public function setWebsite( $website ){
+		$this->website = $website;
+	}
+
+	public function getWebsite(){
+		return $this->website;
 	}
 }

@@ -196,7 +196,8 @@ Class User {
 
 	public function getNotificationByData( $actor_id, $object_id, $action ){
 		foreach ( $this->notifications as $notification ){
-			if ( $notification->getActor()->getId() == $actor_id
+			if ( $notification->getActor() 
+				&& $notification->getActor()->getId() == $actor_id
 				&& $notification->getObjectId() == $object_id
 				&& $notification->getAction() == $action ){
 				return $notification;
@@ -526,7 +527,7 @@ Class User {
 
 	public function getDataSolrFullname(){
 		try{
-			$this->solrFullname .= $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
+			$this->solrFullname = $this->meta->getFirstname() . ' ' . $this->meta->getLastname();
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr Fullname!<br>See User Document <b>Function getDataSolrFullname()</b>', 0, $e);
@@ -548,7 +549,7 @@ Class User {
 
 	public function getDataSolrPrimaryEmail(){
 		try{
-			$this->solrPrimaryEmail .= $this->getPrimaryEmail()->getEmail();
+			$this->solrPrimaryEmail = $this->getPrimaryEmail()->getEmail();
 		}
 		catch(Exception $e){
 			throw new Exception( 'Have error when add Data for Solr PrimaryEmail!<br>See User Document <b>Function getDataSolrPrimaryEmail()</b>', 0, $e);

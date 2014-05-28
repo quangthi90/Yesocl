@@ -54,6 +54,15 @@
               <input id="old-parent-id" type="hidden" value="<?php echo $parent_id; ?>" />
             </td>
           </tr>
+          <tr>
+            <td><?php echo $entry_is_stock; ?></td>
+            <td>
+              <select name="isBranch" class="parent">
+                <option value="0"><?php echo $text_false; ?></option>
+                <option <?php if ($isBranch == true){ ?>selected="selected"<?php } ?> value="1"><?php echo $text_true; ?></option>
+              </select>
+            </td>
+          </tr>
         </table>
       </form>
     </div>

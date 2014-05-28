@@ -75,17 +75,21 @@ class ModelBranchPost extends Model {
 
 		$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 
-		$post = new Post();
-		$post->setSlug( $slug );
-		$post->setTitle( $data['title'] );
-		$post->setUser( $user );
-		$post->setCategory( $category );
-		$post->setDescription( $data['description'] );
-		$post->setContent( $data['post_content'] );
-		$post->setStatus( $data['status'] );
-		$post->setBranch( $branch );
+		$oPost = new Post();
+		$oPost->setSlug( $slug );
+		$oPost->setTitle( $data['title'] );
+		$oPost->setUser( $user );
+		$oPost->setCategory( $category );
+		$oPost->setDescription( $data['description'] );
+		$oPost->setContent( $data['post_content'] );
+		$oPost->setStatus( $data['status'] );
+		$oPost->setBranch( $branch );
 
-		$this->dm->persist( $post );
+		if ( !empty($data['stocks']) ){
+			$oPost->setStockTags( $data['stocks'] );
+		}
+
+		$this->dm->persist( $oPost );
 		$this->dm->flush();
 		
 		$this->load->model('tool/image');
@@ -93,9 +97,9 @@ class ModelBranchPost extends Model {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+			$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $oPost->getId();
 			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
-				$post->setThumb( $data['thumb'] );
+				$oPost->setThumb( $data['thumb'] );
 			}
 		}
 
@@ -104,19 +108,19 @@ class ModelBranchPost extends Model {
 		//-- Update 6 last posts
 		$this->load->model('tool/cache');
 
-		$posts = $this->getPosts( array(
+		$oPosts = $this->getPosts( array(
 			'branch_id' => $branch_id,
 			'category_id' => $data['category_id'],
 			'limit' => 6
 		));
 
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
+		foreach ( $oPosts as $p ) {
+			if ( $oPost->getId() == $p->getId() ){
 				$this->model_tool_cache->updateLastCategoryPosts( 
 					$this->config->get('post')['type']['branch'], 
 					$branch->getId(), 
 					$category->getId(), 
-					$posts 
+					$oPosts 
 				);
 			}
 		}
@@ -124,15 +128,15 @@ class ModelBranchPost extends Model {
 		$type = $this->config->get('post')['cache']['branch'];
 		$this->load->model('cache/post');
 		$data = array(
-			'post_id' => $post->getId(),
+			'post_id' => $oPost->getId(),
 			'type' => $type,
 			'type_id' => $branch->getId(),
 			'view' => 0,
-			'created' => $post->getCreated()
+			'created' => $oPost->getCreated()
 		);
 		$this->model_cache_post->addPost( $data );
 		
-		return $post;
+		return $oPost;
 	}
 
 	/**
@@ -156,7 +160,7 @@ class ModelBranchPost extends Model {
 	 *	- true: success
 	 * 	- false: not success
 	 */
-	public function editPost( $post_id, $data = array(), $thumb = array() ) {
+	public function editPost( $oPost_id, $data = array(), $thumb = array() ) {
 		// Title is required
 		if ( !isset( $data['title'] ) || empty( $data['title'] ) ) {
 			return false;
@@ -197,36 +201,40 @@ class ModelBranchPost extends Model {
 			$data['status'] = false;
 		}
 
-		$post = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
+		$oPost = $this->dm->getRepository('Document\Branch\Post')->find( $oPost_id );
 
-		if ( !$post ){
+		if ( !$oPost ){
 			return false;
 		}
 
 		// Check slug
-		if ( $data['title'] != $post->getTitle() ){
+		if ( $data['title'] != $oPost->getTitle() ){
 			$slug = $this->url->create_slug( $data['title'] ) . '-' . new MongoId();
 
-			$post->setSlug( $slug );
+			$oPost->setSlug( $slug );
 		}
 
-		$post->setTitle( $data['title'] );
-		$post->setUser( $user );
-		$post->setCategory( $category );
-		$post->setDescription( $data['description'] );
-		$post->setContent( $data['post_content'] );
-		$post->setStatus( $data['status'] );
+		$oPost->setTitle( $data['title'] );
+		$oPost->setUser( $user );
+		$oPost->setCategory( $category );
+		$oPost->setDescription( $data['description'] );
+		$oPost->setContent( $data['post_content'] );
+		$oPost->setStatus( $data['status'] );
 
-		$branch = $post->getBranch();
+		if ( !empty($data['stocks']) ){
+			$oPost->setStockTags( $data['stocks'] );
+		}
+
+		$branch = $oPost->getBranch();
 
 		$this->load->model('tool/image');
 		if ( !empty($thumb) && $this->model_tool_image->isValidImage($thumb) ) {
 			$folder_link = $this->config->get('branch')['default']['image_link'];
 			$folder_name = $this->config->get('post')['default']['image_folder'];
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
-			$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $post->getId();
+			$path = $folder_link . $branch->getId() . '/' . $folder_name . '/' . $oPost->getId();
 			if ( $data['thumb'] = $this->model_tool_image->uploadImage($path, $avatar_name, $thumb) ) {
-				$post->setThumb( $data['thumb'] );
+				$oPost->setThumb( $data['thumb'] );
 			}
 		}
 
@@ -235,19 +243,19 @@ class ModelBranchPost extends Model {
 		//-- Update 6 last posts
 		$this->load->model('tool/cache');
 
-		$posts = $this->getPosts( array(
+		$oPosts = $this->getPosts( array(
 			'branch_id' => $branch_id,
 			'category_id' => $data['category_id'],
 			'limit' => 6
 		));
 		
-		foreach ( $posts as $p ) {
-			if ( $post->getId() == $p->getId() ){
+		foreach ( $oPosts as $p ) {
+			if ( $oPost->getId() == $p->getId() ){
 				$this->model_tool_cache->updateLastCategoryPosts( 
 					$this->config->get('post')['type']['branch'], 
 					$branch->getId(), 
 					$category->getId(), 
-					$posts 
+					$oPosts 
 				);
 			}
 		}
@@ -273,18 +281,18 @@ class ModelBranchPost extends Model {
 
 		if ( isset($data['id']) ) {			
 			foreach ( $data['id'] as $id ) {
-				$post = $this->dm->getRepository('Document\Branch\Post')->find( $id );
-				if ( !empty( $post ) ) {
-					$category_id = $post->getCategory()->getId();
+				$oPost = $this->dm->getRepository('Document\Branch\Post')->find( $id );
+				if ( !empty( $oPost ) ) {
+					$category_id = $oPost->getCategory()->getId();
 					$category_ids[$category_id] = $category_id;
 
 					$folder_link = $this->config->get('branch')['default']['image_link'];
 					$folder_name = $this->config->get('post')['default']['image_folder'];
-					$path = DIR_IMAGE . $folder_link . $branch_id . '/' . $folder_name . '/' . $post->getId();
+					$path = DIR_IMAGE . $folder_link . $branch_id . '/' . $folder_name . '/' . $oPost->getId();
 					
 					$this->model_tool_image->deleteDirectoryImage( $path );
 					
-					$this->dm->remove( $post );
+					$this->dm->remove( $oPost );
 				}
 			}
 		}
@@ -295,7 +303,7 @@ class ModelBranchPost extends Model {
 			//-- Update 6 last posts
 			$this->load->model('tool/cache');
 
-			$posts = $this->getPosts( array(
+			$oPosts = $this->getPosts( array(
 				'branch_id' => $branch_id,
 				'category_id' => $category_id,
 				'limit' => 6
@@ -304,7 +312,7 @@ class ModelBranchPost extends Model {
 				$this->config->get('post')['type']['branch'], 
 				$branch_id, 
 				$category_id, 
-				$posts 
+				$oPosts 
 			);
 		}
 
@@ -368,8 +376,8 @@ class ModelBranchPost extends Model {
 	 *	- string Post ID
 	 * @return: array object Posts
 	 */
-	public function getPost( $post_id ){
-		$result = $this->dm->getRepository('Document\Branch\Post')->find( $post_id );
+	public function getPost( $oPost_id ){
+		$result = $this->dm->getRepository('Document\Branch\Post')->find( $oPost_id );
 
 		return $result;
 	}

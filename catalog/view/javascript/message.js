@@ -110,7 +110,7 @@ var _ScrollReachTop = 'SCROLL_REACHED_TOP';
               map = {};
               if ( window.yListFriends == null && is_send_ajax == 0 ){
                 is_send_ajax = 1;
-                $.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
+                $.getJSON(window.yRouting.generate('ApiGetAllFriends'), function(json) {
                   if ( json.success == 'ok' ){
                     if ( json.friends == undefined ){
                       is_send_ajax = 0;

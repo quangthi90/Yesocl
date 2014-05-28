@@ -94,6 +94,23 @@ $(document).ready(function(){
           <li><a href="<?php echo $company_group; ?>"><?php echo $text_company_group; ?></a></li>
         </ul>
       </li>
+      <li id="company"><a class="top"><?php echo $text_stocks; ?></a>
+        <ul>
+          <li><a href="<?php echo $stock_market; ?>"><?php echo $text_market; ?></a></li>
+          <li><a href="<?php echo $stock; ?>"><?php echo $text_stock; ?></a></li>
+          <li><a class="parent"><?php echo $text_import; ?></a>
+            <ul>
+              <li><a href="<?php echo $stock_import; ?>"><?php echo $text_stock; ?></a></li>
+              <li><a href="<?php echo $trading_import; ?>"><?php echo $text_trading; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_setting; ?></a>
+            <ul>
+              <li><a href="<?php echo $stock_fund; ?>"><?php echo $text_fund; ?></a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
       <li id="company"><a class="top"><?php echo $text_branches; ?></a>
         <ul>
           <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>

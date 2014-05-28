@@ -25,6 +25,9 @@ Class Category {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Category", mappedBy="parent") */
 	private $children;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Post", mappedBy="category") */
+	private $posts = array();
 	
 	/** @MongoDB\Boolean */
 	private $status;
@@ -32,6 +35,9 @@ Class Category {
 	/** @MongoDB\Int */
 	private $order;
 
+	/** @MongoDB\Boolean */
+	private $isBranch;
+	
 	/** @MongoDB\Boolean */
 	private $deleted;
 
@@ -97,12 +103,28 @@ Class Category {
 		return $this->children;
 	}
 
+	public function setPosts( $posts ){
+		$this->posts = $posts;
+	}
+
+	public function getPosts(){
+		return $this->posts;
+	}
+
 	public function setOrder( $order ){
 		$this->order = $order;
 	}
 
 	public function getOrder(){
 		return $this->order;
+	}
+
+	public function setIsBranch( $isBranch ){
+		$this->isBranch = $isBranch;
+	}
+
+	public function getIsBranch(){
+		return $this->isBranch;
 	}
 
 	public function getDeleted() {

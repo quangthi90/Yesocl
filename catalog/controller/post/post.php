@@ -111,7 +111,7 @@ class ControllerPostPost extends Controller {
             // If post of branch ==> user A post on any Branch
             switch ( $sPostType ) {
                 case $this->config->get('common')['type']['user']:
-                    if ( $aAuthor['id'] != $oPost->getOwnerId() ){
+                    if ( $aAuthor['id'] != $oPost->getOwnerSlug() ){
                         $this->load->model('user/user');
 
                         $aOwner = $this->model_user_user->getUser( $this->request->get['user_slug'] );

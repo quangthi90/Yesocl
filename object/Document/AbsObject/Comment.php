@@ -34,22 +34,37 @@ Class Comment {
 	/** @MongoDB\Collection */
     private $likerIds;
 
+    private $canDelete;
+
+    private $canEdit;
+
+	/** @MongoDB\Collection */
+	private $userTags = array();
+
 	/**
 	* Format array to save to Cache
 	* 05/26/2013
 	* @author: Bommer <bommer@bommerdesign.com>
 	* @return: array Comments
 	*/
-	public function formatToCache(){
+	public function formatToCache( $isTimestamp = true ){
+		if ( $isTimestamp == true ){
+			$created = $this->created->getTimestamp();
+		}else{
+			$created = $this->created;
+		}
+
 		$data_format = array(
 			'id'			=> $this->getId(),
 			'author' 		=> $this->getAuthor(),
 			'content' 		=> html_entity_decode($this->getContent()),
-			'created'		=> $this->getCreated(),
+			'created'		=> $created,
 			'user_id'		=> $this->getUser()->getId(),
 			'user_slug'		=> $this->getUser()->getSlug(),
 			'status'		=> $this->getStatus(),
-			'like_count'	=> count($this->getLikerIds())
+			'like_count'	=> count($this->getLikerIds()),
+			'can_delete'	=> $this->getCanDelete(),
+			'can_edit'		=> $this->getCanEdit()
 		);
 
 		return $data_format;
@@ -138,5 +153,33 @@ Class Comment {
 
 	public function setLikerIds( $likerIds ){
 		$this->likerIds = $likerIds;
+	}
+
+	public function setCanDelete( bool $canDelete ){
+		$this->canDelete = $canDelete;
+	}
+
+	public function getCanDelete(){
+		return (bool)$this->canDelete;
+	}
+
+	public function setCanEdit( bool $canEdit ){
+		$this->canEdit = $canEdit;
+	}
+
+	public function getCanEdit(){
+		return (bool)$this->canEdit;
+	}
+
+	public function addUserTag( $userTag ){
+		$this->userTags[] = $userTag;
+	}
+
+	public function setUserTags( $userTags ){
+		$this->userTags = $userTags;
+	}
+
+	public function getUserTags(){
+		return $this->userTags;
 	}
 }

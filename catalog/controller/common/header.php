@@ -44,6 +44,10 @@ class ControllerCommonHeader extends Controller {
 					continue;
 				}
 
+				if ( !$oNotification->getStatus() ){
+					continue;
+				}
+
 				$actor = $oNotification->getActor();
 
 				if ( !array_key_exists($actor->getId(), $users) ){

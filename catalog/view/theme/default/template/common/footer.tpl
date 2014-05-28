@@ -1,9 +1,9 @@
+<div id="scroll-footer">
+    <a href="#" class="btn-link-circle medium" id="auto-scroll-left" title="Scroll Left" style="display: none;">
+      <i class="icon-arrow-left"></i>
+    </a>
+</div>
 <div id="y-footer">
-    <div id="scroll-footer">
-        <a href="#" class="btn-link-circle medium" id="auto-scroll-left" title="Scroll Left" style="display: none;">
-          <i class="icon-arrow-left"></i>
-        </a>
-    </div>
     <div id="yes-info">
         <div class="copyright">
             Copyright &copy; 2013 - <strong>YESOCL.com</strong>

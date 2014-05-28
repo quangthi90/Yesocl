@@ -1,7 +1,6 @@
 <?php
 namespace Document\AbsObject;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use Doctrine\Solr\Mapping\Annotations as SOLR;
 
 /**
  * @MongoDB\MappedSuperclass
@@ -9,33 +8,8 @@ use Doctrine\Solr\Mapping\Annotations as SOLR;
  * @MongoDB\DiscriminatorMap({
  *     "BranchPost"="\Document\Branch\Post"
  * })
- * @SOLR\Document(collection="post")
  */
 Abstract Class Post {
-	/** 
-	 * @MongoDB\Id 
-	 * @SOLR\Field(type="id")
-	 */
-	private $id;
-
-	/** 
-	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
-	 */
-	private $title;
-
-	/** 
-	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
-	 */
-	private $description;
-
-	/** 
-	 * @MongoDB\String 
-	 * @SOLR\Field(type="text")
-	 */
-	private $content;
-	
 	/** @MongoDB\Boolean */
 	private $status;
 	
@@ -72,10 +46,11 @@ Abstract Class Post {
     /** @MongoDB\Int */
     private $countViewer = 0;
 
-    /** 
-	 * @SOLR\Field(type="text")
-	 */
-	private $type;
+	/** @MongoDB\Collection */
+	private $stockTags = array();
+
+	/** @MongoDB\Collection */
+	private $userTags = array();
 
 	/**
 	 * Get Comment By ID
@@ -93,38 +68,6 @@ Abstract Class Post {
 		}
 		
 		return null;
-	}
-
-	public function getId(){
-		return $this->id;
-	}
-	
-	public function setId( $id ) {
-		$this->id = $id;
-	}
-	
-	public function setTitle( $title ){
-		$this->title = $title;
-	}
-
-	public function getTitle(){
-		return $this->title;
-	}
-
-	public function setDescription( $description ){
-		$this->description = $description;
-	}
-
-	public function getDescription(){
-		return $this->description;
-	}
-
-	public function setContent( $content ){
-		$this->content = $content;
-	}
-
-	public function getContent(){
-		return $this->content;
 	}
 
 	public function setStatus( $status ){
@@ -242,11 +185,27 @@ Abstract Class Post {
 		return $this->countViewer;
 	}
 
-	public function setType( $type ){
-		$this->type = $type;
+	public function addStockTag( $stockTag ){
+		$this->stockTags[] = $stockTag;
 	}
 
-	public function getType(){
-		return $this->type;
+	public function setStockTags( $stockTags ){
+		$this->stockTags = $stockTags;
+	}
+
+	public function getStockTags(){
+		return $this->stockTags;
+	}
+
+	public function addUserTag( $userTag ){
+		$this->userTags[] = $userTag;
+	}
+
+	public function setUserTags( $userTags ){
+		$this->userTags = $userTags;
+	}
+
+	public function getUserTags(){
+		return $this->userTags;
 	}
 }

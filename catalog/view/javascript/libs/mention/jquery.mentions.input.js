@@ -15,10 +15,11 @@
   // Settings
   var KEY = { BACKSPACE : 8, TAB : 9, RETURN : 13, ESC : 27, LEFT : 37, UP : 38, RIGHT : 39, DOWN : 40, COMMA : 188, SPACE : 32, HOME : 36, END : 35 }; // Keys "enum"
   var defaultSettings = {
-    triggerChar     : '@',
+    triggerChars     : ['@', '$'],
     elastic         : true,
     fullNameTrigger : false,
     onDataRequest   : $.noop,
+    onMentionChanged : $.noop,
     minChars        : 1,
     showAvatars     : true,
     classes         : {
@@ -115,6 +116,7 @@
     var mentionsCollection = [];
     var inputBuffer = [];
     var currentDataQuery;
+    var currentTriggerCharacter;
     var cursorEndPosition;
 
     function initTextarea() {
@@ -234,7 +236,7 @@
       }
       else {
         // Using a regex to figure out positions
-        var regex = new RegExp("\\" + settings.triggerChar + currentDataQuery, "gi");
+        var regex = new RegExp("\\" + currentTriggerCharacter + currentDataQuery, "gi");
         regex.exec(currentMessage);
 
         var startCaretPosition = regex.lastIndex - currentDataQuery.length - 1;
@@ -270,6 +272,12 @@
       // Set correct focus and selection
       elmInputBox.focus();
       utils.setCaratPosition(elmInputBox[0], startEndIndex);
+
+      //Call onMentionChanged 
+      if(settings.onMentionChanged !== undefined && settings.onMentionChanged !== null && 
+        typeof settings.onMentionChanged === "function" ) {
+        settings.onMentionChanged();
+      }
     }
 
     function getInputBoxValue() {
@@ -301,16 +309,26 @@
       if (settings.fullNameTrigger)
         currentDataQuery = inputBuffer.join('');
       else {
-        var triggerCharIndex = _.lastIndexOf(inputBuffer, settings.triggerChar);
-        if (triggerCharIndex > -1) {
-          currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
-          currentDataQuery = utils.rtrim(currentDataQuery);
-        }
-        else {
-          currentDataQuery = null;
-        }
+        for(var index = 0; index < settings.triggerChars.length; index ++){
+          var triggerC = settings.triggerChars[index];
+          var triggerCharIndex = _.lastIndexOf(inputBuffer, triggerC);
+          if (triggerCharIndex > -1) {
+            currentTriggerCharacter = triggerC;
+            currentDataQuery = inputBuffer.slice(triggerCharIndex + 1).join('');
+            currentDataQuery = utils.rtrim(currentDataQuery);
+            break;
+          }else {
+            currentDataQuery = null;
+          }
+        }        
       }
       _.defer(_.bind(doSearch, this, currentDataQuery));
+
+      //Call onMentionChanged 
+      if(settings.onMentionChanged !== undefined && settings.onMentionChanged !== null && 
+        typeof settings.onMentionChanged === "function" ) {
+        settings.onMentionChanged();  
+      }      
     }
 
     function onInputBoxKeyPress(e) {
@@ -364,7 +382,6 @@
           }
 
           return false;
-
         case KEY.RETURN:
         case KEY.TAB:
           if (elmActiveAutoCompleteItem && elmActiveAutoCompleteItem.length) {
@@ -447,7 +464,11 @@
         if (settings.fullNameTrigger) {
           doSearchFullNameTrigger(query);
         } else {
-          settings.onDataRequest.call(this, 'search', mentionsCollection, query, function (responseData) {
+          var queryObject = {
+            firstCharacter : currentTriggerCharacter,
+            queryString : query
+          };
+          settings.onDataRequest.call(this, 'search', mentionsCollection, queryObject, function (responseData) {
             populateDropdown(query, responseData);
           });
         }
@@ -462,7 +483,11 @@
         query = query.substring(query.lastIndexOf(arr[arr.length - 1]));
         if(query.length < settings.minChars) { return; }
 
-        settings.onDataRequest.call(this, 'search', mentionsCollection, query, function (responseData) {
+        var queryObject = {
+            firstCharacter : currentTriggerCharacter,
+            queryString : query
+        };
+        settings.onDataRequest.call(this, 'search', mentionsCollection, queryObject, function (responseData) {
           currentDataQuery = query;
           populateDropdown(query, responseData);
         });

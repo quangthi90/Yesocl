@@ -9,7 +9,7 @@ $_['routing']['BranchDetail'] 					= 'branch/detail/{branch_slug}';
 // Post
 $_['routing']['PostPage'] 						= '{post_type}/post/{post_slug}/';
 $_['routing']['PostLike'] 						= '{post_type}/post/{post_slug}/like/';
-$_['routing']['PostAdd'] 						= '{post_type}/{user_slug}/post/add/';
+$_['routing']['PostAdd'] 						= '{post_type}/post/{user_slug}/add/';
 $_['routing']['PostGetLiker'] 					= '{post_type}/post/{post_slug}/get-liker/';
 $_['routing']['PostDelete'] 					= '{post_type}/post/{post_slug}/delete/';
 $_['routing']['PostEdit'] 						= '{post_type}/post/{post_slug}/edit/';
@@ -92,7 +92,54 @@ $_['routing']['MessageGetLast']					= 'message/get-last/';
 $_['routing']['MessageDeleteAll']				= 'message/delete/all/{user_slug}/';
 $_['routing']['MessageDeleteOne']				= 'message/delete/one/{message_id}/';
 
-// Ajax
-$_['routing']['AjaxGetRouting']					= 'service/get/routing/';
-$_['routing']['SetLanguage']					= 'service/push/language/';
+// Stock
+$_['routing']['StockMarketNone']				= 'stock/market/';
+$_['routing']['StockMarket']					= 'stock/market/{market_code}/';
+$_['routing']['StockPage']						= 'stock/page/{stock_code}/';
+$_['routing']['StockNewsPage']					= 'stock/{stock_code}/news/page/';
+$_['routing']['StockIdeaPage']					= 'stock/{stock_code}/ideas/page/';
+
+//-- API --//
+// Common
+$_['routing']['AjaxGetRouting']					= 'services/get/routing/';
+$_['routing']['SetLanguage']					= 'services/push/language/';
+$_['routing']['ApiSearchByKeyword']				= 'services/get/search/{keyword}/';
+
+// Stock
+$_['routing']['ApiGetAllStocks']				= 'services/get/stock/all/';
+$_['routing']['ApiPostWatchList']				= 'services/post/stock/watch-list/many/';
+$_['routing']['ApiDeleteWatchListItem']			= 'services/delete/stock/watch-list/item/{stock_id}/';
+$_['routing']['ApiGetStockExchanges']			= 'services/get/stock/{stock_id}/exchanges/';
+$_['routing']['ApiGetLastStockNews']			= 'services/get/stock/{stock_code}/news/last/{page}/';
+$_['routing']['ApiGetStockIdeas']				= 'services/get/stock/{stock_code}/ideas/{page}/';
+
+// Post
+$_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}/';
+$_['routing']['ApiPutPostLike']					= 'services/put/{post_type}/post/{post_slug}/like/';
+$_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}/liker/';
+$_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
+$_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
+$_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
+
+// Comment
+$_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
+$_['routing']['ApiGetCommentLiker']				= 'services/get/{post_type}/post/comment/{comment_id}/liker/';
+$_['routing']['ApiGetCommentTags']				= 'services/get/{post_type}/post/{post_slug}/comment/getTags/';
+$_['routing']['ApiPutComment']					= 'services/put/{post_type}/post/comment/{comment_id}/';
+$_['routing']['ApiPutCommentLike']				= 'services/put/{post_type}/post/comment/{comment_id}/like/';
+$_['routing']['ApiPostComment']					= 'services/post/{post_type}/post/{post_slug}/comment/';
+$_['routing']['ApiDeleteComment']				= 'services/delete/{post_type}/post/comment/{comment_id}/';
+
+// Friend
+$_['routing']['ApiPutMakeFriend']				= 'services/put/friend/make-friend/{user_slug}/';
+$_['routing']['ApiPutCancelRequest']			= 'services/put/friend/cancel-request/{user_slug}/';
+$_['routing']['ApiPutConfirm']					= 'services/put/friend/confirm/{user_slug}/';
+$_['routing']['ApiPutIgnore']					= 'services/put/friend/ignore/{user_slug}/';
+$_['routing']['ApiPutUnfriend']					= 'services/put/friend/unfriend/{user_slug}/';
+$_['routing']['ApiPutAddFollower']				= 'services/put/follower/add/{user_slug}/';
+$_['routing']['ApiPutRemoveFollower']			= 'services/put/follower/remove/{user_slug}/';
+$_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
+
+// User
+$_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
 ?>

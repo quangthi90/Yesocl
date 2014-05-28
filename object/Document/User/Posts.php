@@ -51,6 +51,16 @@ Class Posts {
 		return null;
 	}
 
+	public function getPostByCommentId( $comment_id ){
+		foreach ( $this->posts as $post ) {
+			if ( $post->getCommentById($comment_id) ){
+				return $post;
+			}
+		}
+
+		return null;
+	}
+
 	public function getId() {
 		return $this->id;
 	}
@@ -64,19 +74,21 @@ Class Posts {
 	}
 
 	public function addPost( Post $post ){
-		$this->posts[] = $post;
+		$post->setOwnerSlug( $this->user->getSlug() );
+		if ( $posts = $this->posts ){
+			$posts = $posts->toArray();
+		}else{
+			$posts = array();
+		}
+		array_unshift($posts, $post);
+		$this->setPosts( $posts );
 	}
 
 	public function setPosts( $posts ){
 		$this->posts = $posts;
 	}
 
-	public function getPosts( $is_array = true ){
-		if ( $is_array ){
-			$posts = $this->posts->toArray();
-			return array_reverse($posts);
-		}
-
+	public function getPosts(){
 		return $this->posts;
 	}
 }

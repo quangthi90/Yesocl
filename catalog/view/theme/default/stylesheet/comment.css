@@ -224,3 +224,34 @@
 .comment-wrapper .mCSB_container {
 	margin-right: 20px;
 }
+
+.y-control .comment-item  {
+	display: table;
+	padding: 5px 0px;
+	width: 100%;
+}
+.y-control .comment-item.deleting {
+	background-color: #FFDDDD;
+	opacity: 0.9;
+}
+.y-control .comment-item.adding {
+	background-color: #DAFFD4;
+	opacity: 0.8;
+}
+.y-control .comment-item  .avatar_thumb {
+	float: none;
+	display: table-cell;
+	vertical-align: top;
+	width: 45px;
+}
+.y-control .comment-item  .comment-meta  {
+	float: none;
+	display: table-cell;	
+	vertical-align: top;
+}
+.y-control .comment-item .comment-content img {
+	cursor: -moz-zoom-in;
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+	max-width: 290px;
+}

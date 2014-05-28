@@ -222,14 +222,51 @@ class ExtensionLoader
     public function getUserData(){
         $oLoggedUser = $this->customer->getUser();
         if ( !$oLoggedUser ){
-            return null;
+            return json_encode( array() );
         }
+        $this->load->model('tool/image');
+        $this->load->model('friend/friend');
+        $this->load->model('friend/follower');
+
+        // Friends
+        $lFriends = $this->registry->get('model_friend_friend')->getFriends( $oLoggedUser->getId(), true );
+        $aFriendIds = array();
+        foreach ( $lFriends as $oFriend ) 
+            $aFriendIds[] = $oFriend->getUser()->getId();
+        $aRequestIds = $oLoggedUser->getFriendRequests();
+        
+        // Followers
+        $oFollowers = $this->registry->get('model_friend_follower')->getFollowers( $oLoggedUser->getId() );
+        $aFollowedIds = array();
+        $aFollowingIds = array();
+        if ( $oFollowers ){
+            $lFolloweds = $oFollowers->getFolloweds();
+            $lFollowings = $oFollowers->getFollowings();
+            foreach ( $lFolloweds as $oFollower ) 
+                $aFollowedIds[] = $oFollower->getUser()->getId();
+            foreach ( $lFollowings as $oFollower ) 
+                $aFollowingIds[] = $oFollower->getUser()->getId();
+        }
+        
+        // Avatar
+        $sAvatar = $this->registry->get('model_tool_image')->getAvatarUser( 
+            $oLoggedUser->getAvatar(),
+            $oLoggedUser->getPrimaryEmail()->getEmail()
+        );
         $aReturn = array(
             'id' => $oLoggedUser->getId(),
             'username' => $oLoggedUser->getUsername(),
             'fullname' => $oLoggedUser->getFullname(),
-            'email' => $oLoggedUser->getPrimaryEmail()->getEmail(),
-            'slug' => $oLoggedUser->getSlug()
+            'slug' => $oLoggedUser->getSlug(),
+            'avatar' => $sAvatar,
+            'friends' => array(
+                'friend_ids' => $aFriendIds,
+                'request_ids' => $aRequestIds
+            ),
+            'followers' => array(
+                'followed_ids' => $aFollowedIds,
+                'following_ids' => $aFollowingIds
+            )
         );
 
         return json_encode( $aReturn );

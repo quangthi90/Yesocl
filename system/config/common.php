@@ -8,6 +8,7 @@ $_['common']['default']['category'] 			= 'category';
 $_['common']['type']['branch'] 					= 'branch';
 $_['common']['type']['group'] 					= 'group';
 $_['common']['type']['user'] 					= 'user';
+$_['common']['type']['stock'] 					= 'stock';
 
 $_['common']['block']['limit']					= 6;
 
@@ -36,4 +37,9 @@ $_['email']['username']							= 'bommerdesign@gmail.com';
 $_['email']['password']							= '13081990';
 $_['email']['port']								= '465';
 $_['email']['protocol']							= 'smtp';
+
+$_['stock']['fund']['text']						= 'text';
+$_['stock']['fund']['rating']					= 'rating';
+$_['stock']['fund']['percent']					= 'percent';
+$_['stock']['fund']['buying']					= 'buying';
 ?>

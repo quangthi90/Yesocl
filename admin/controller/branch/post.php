@@ -92,7 +92,7 @@ class ControllerBranchPost extends Controller {
 			if ( !isset( $this->request->files['thumb'] ) ) {
 				$this->request->files['thumb'] = array();
 			}
-			
+			$this->request->post['stocks'] = explode( ',', $this->request->post['stocks'] );
 			$return = $this->model_branch_post->editPost( $this->request->get['post_id'], $this->request->post, $this->request->files['thumb'] );
 
 			if ( $return ) {
@@ -449,6 +449,7 @@ class ControllerBranchPost extends Controller {
 		$this->data['entry_description'] = $this->language->get( 'entry_description' );
 		$this->data['entry_content'] = $this->language->get( 'entry_content' );
 		$this->data['entry_thumb'] = $this->language->get( 'entry_thumb' );
+		$this->data['entry_tag_stock'] = $this->language->get( 'entry_tag_stock' );
 
 		// button
 		$this->data['button_save'] = $this->language->get( 'button_save' );
@@ -457,6 +458,7 @@ class ControllerBranchPost extends Controller {
 		// link
 		$this->data['cancel'] = $this->url->link( 'branch/post', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		$this->data['autocomplete_user'] = html_entity_decode( $this->url->link( 'user/user/searchUser', 'token=' . $this->session->data['token'], 'SSL' ) );
+		$this->data['autocomplete_stock'] = html_entity_decode( $this->url->link( 'stock/stock/search', 'token=' . $this->session->data['token'], 'SSL' ) );
 		
 		// image
 		$this->data['img_default'] = HTTP_IMAGE . 'no_image.jpg';
@@ -557,6 +559,15 @@ class ControllerBranchPost extends Controller {
 			$this->data['status'] = $post->getStatus();
 		}else {
 			$this->data['status'] = 1;
+		}
+
+		// stocks
+		if ( isset( $this->request->post['stocks'] ) ) {
+			$this->data['stocks'] = $this->request->post['stocks'];
+		}elseif ( isset( $post ) ) {
+			$this->data['stocks'] = implode( ',', $post->getStockTags() );
+		}else {
+			$this->data['stocks'] = '';
 		}
 
 		$this->data['token'] = $this->session->data['token'];

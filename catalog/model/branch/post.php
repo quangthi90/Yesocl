@@ -23,19 +23,19 @@ class ModelBranchPost extends Model {
 	 */
 	public function addPost( $aData = array() ) {
 		// Check user author
-		if ( empty($aData['user_slug']) ){
+		if ( empty($aData['author_id']) ){
 			return false;
 		}
-		$oUserAuthor = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+		$oUserAuthor = $this->dm->getRepository('Document\User\User')->find( $aData['author_id'] );
 		if ( !$oUserAuthor ){
 			return false;
 		}
 
 		// Check category
-		if ( empty($aData['category']) ){
+		if ( empty($aData['cat_slug']) ){
 			return false;
 		}
-		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
 		if ( !$oCategory ){
 			return false;
 		}
@@ -255,16 +255,24 @@ class ModelBranchPost extends Model {
 			$query['category.id'] = $aData['category_id'];
 		}
 
+		if ( !empty($aData['category_ids']) ){
+			$query['category.id'] = array('$in' => $aData['category_ids']);
+		}
+
 		if ( !empty($aData['post_ids']) ){
 			$query['id'] = array('$in' => $aData['post_ids']);
 		}elseif (isset($aData['post_ids']) ){
 			return null;
 		}
 
+		if ( !empty($aData['stock_code']) ){
+			$query['stockTags'] = $aData['stock_code'];
+		}
+
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
-			// ->skip($aData['start'])
-			// ->limit($aData['limit'])
+			->skip($aData['start'])
+			->limit($aData['limit'])
 			->sort(array('created' => -1));
 
 		return $results;

@@ -51,7 +51,7 @@ class ControllerDesignAction extends Controller {
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
-		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm(true) ){
 			$this->model_design_action->editAction( $this->request->get['action_id'], $this->request->post );
 			
 			$this->session->design['success'] = $this->language->get( 'text_success' );
@@ -310,12 +310,12 @@ class ControllerDesignAction extends Controller {
 		$this->response->setOutput( $this->render() );
 	}
 
-	private function isValidateForm(){
+	private function isValidateForm( $bIsEdit = false ){
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}
 
-		if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 20 ){
+		if ( $bIsEdit == false && (!isset($this->request->post['code']) || strlen($this->request->post['code']) < 3 || strlen($this->request->post['code']) > 20) ){
 			$this->error['error_code'] = $this->language->get( 'error_code' );
 		}
 

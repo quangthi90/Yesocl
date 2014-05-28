@@ -119,25 +119,25 @@
      */
     var loadImage = function (sUrl) {
       return $.Deferred(function (deferred) {
-        var image = new Image();
-        image.onload = loaded;
-        image.onerror = errored; // URL returns 404, etc
-        image.onabort = errored; // IE may call this if user clicks "Stop"
-        image.src = sUrl;
-         
-        function loaded() {
-          unbindEvents();
+        var image = new Image();
+        image.onload = loaded;
+        image.onerror = errored; // URL returns 404, etc
+        image.onabort = errored; // IE may call this if user clicks "Stop"
+        image.src = sUrl;
+        
+        function loaded() {
+          unbindEvents();
           deferred.resolve(image);
-        }
-        function errored() {
-          unbindEvents();
+        }
+        function errored() {
+          unbindEvents();
           deferred.reject(image);
-        }
-        function unbindEvents() {
-          image.onload = null;
-          image.onerror = null;
-          image.onabort = null;
-        }
+        }
+        function unbindEvents() {
+          image.onload = null;
+          image.onerror = null;
+          image.onabort = null;
+        }
       }).promise();
     };
 
@@ -1260,7 +1260,7 @@
           map = {};
           if ( window.yListFriends == null && is_send_ajax == 0 ){
             is_send_ajax = 1;
-            $.getJSON(window.yRouting.generate('GetAllFriends'), function(json) {
+            $.getJSON(window.yRouting.generate('ApiGetAllFriends'), function(json) {
               if ( json.success == 'ok' ){
                 if ( json.friends == undefined ){
                   is_send_ajax = 0;

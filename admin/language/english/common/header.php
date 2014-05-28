@@ -21,6 +21,14 @@ $_['text_companies']                    = 'Companies';
 $_['text_company']                      = 'Company';
 $_['text_company_group']              	= 'Company Group';
 
+// Stock
+$_['text_stocks']        		      	= 'Stocks';
+$_['text_import']		              	= 'Import';
+$_['text_stock']		              	= 'Stock';
+$_['text_trading']		              	= 'Security Trading';
+$_['text_market']		              	= 'Market';
+$_['text_fund']			              	= 'Fund Columns';
+
 // Branch
 $_['text_branches']                    	= 'Branches';
 $_['text_branch']                      	= 'Branch';

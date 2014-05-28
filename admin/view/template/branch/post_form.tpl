@@ -85,6 +85,15 @@
             <td><?php echo $entry_status; ?></td>
             <td><select class="input-large" name="status" ><?php if ( $status ) { ?><option value="1" selected="selected" ><?php echo $text_enable; ?></option><option value="0" ><?php echo $text_disable; ?><?php }else { ?><option value="1" ><?php echo $text_enable; ?></option><option value="0" selected="selected" ><?php echo $text_disable; ?><?php } ?></select></td>
           </tr>
+          <tr>
+            <td><?php echo $entry_tag_stock; ?></td>
+            <td>
+              <div id="tagContainer" style="padding: 5px; margin: 5px 0px 10px 0px; border: 1px solid #F0F0F0;">                
+              </div>
+              <input class="input-xxlarge" type="text" name="stockTag" />
+              <input name="stocks" type="hidden" value="<?php echo $stocks; ?>" />
+            </td>
+          </tr>
         </table>
       </form>
     </div>
@@ -128,5 +137,73 @@ $('input[name=\'author\']').autocomplete({
         return false;
     }
 });
+//--></script>
+<script type="text/javascript"><!--//
+  var stocks = [];
+  $(document).ready(function(){
+    var tagContainer = $("#tagContainer");
+    var existings = $('input[name=\'stocks\']').val();
+    if(existings) {
+      initTag(existings);
+    }
+
+    $('input[name=\'stockTag\']').autocomplete({
+      delay: 0,
+      source: function(request, response) {
+        $.ajax({
+          url: '<?php echo $autocomplete_stock; ?>&code=' +  encodeURIComponent(request.term),
+          dataType: 'json',
+          success: function(json) {
+            var res = [];
+            $.each(json, function(item) {
+              var filters = $.grep(stocks, function(stock){
+                return stock === item;
+              });
+              if(filters.length === 0) {
+                res.push({ label: item, value: item });
+              }
+            });
+            response(res);
+          }
+        });
+      }, 
+      select: function(event, ui) {
+        addTag(ui.item.value);
+        $(this).val("").focus();       
+
+        return false;
+      },
+      focus: function(event, ui) {
+        return false;
+      }
+    });
+    function initTag(tags) {
+      if(existings.length === 0) return;
+      var tagSplitings = tags.split(",");
+      for (var i = tagSplitings.length - 1; i >= 0; i--) {
+        addTag(tagSplitings[i]);
+      };
+    }
+    function addTag(tag) {
+      stocks.push(tag);
+      var tagContent = $('<span class="btn tagItem" data-tag="' + tag + '" style="margin: 5px;"><span class="tag-name" style="margin-right: 10px;">' + tag + '</span> <i class="icon-remove" style="cursor: pointer;"></i></span>');
+      tagContent.find(".icon-remove").on("click", function(){
+        var parent = $(this).parent();
+        removeTag(parent.data("tag"));
+        parent.fadeOut(10, function(){
+          $(this).remove();
+        });
+      });
+      tagContent.appendTo(tagContainer);
+      $('input[name=\'stocks\']').val(stocks);
+    }
+    function removeTag(tag) {
+      var index = stocks.indexOf(tag);
+      if (index > -1) {
+        stocks.splice(index, 1);
+        $('input[name=\'stocks\']').val(stocks);
+      }
+    }
+  });
 //--></script>
 <?php echo $footer; ?>
