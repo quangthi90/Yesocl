@@ -375,7 +375,7 @@ class ControllerApiComment extends Controller {
         
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'users' => $aUsers
+            'users' => array_values($aUsers)
         )));
     }
 }
