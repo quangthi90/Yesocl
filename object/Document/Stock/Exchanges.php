@@ -89,6 +89,7 @@ Class Exchanges {
     	foreach ( $this->rangePrice as $iDay => $aRange ) {
     		$this->calculateRangePrice( $iDay );
     	}
+    	krsort($this->exchanges);
     }
 
 	public function getId() {
@@ -98,7 +99,6 @@ Class Exchanges {
 	public function addExchange( $exchange ){
 		$timestamp = $exchange->getCreated()->format('ymd');
 		$this->exchanges[$timestamp] = $exchange->formatToCache();
-		krsort($this->exchanges);
 		
 		if ( !$this->stock->getLastExchange() || $exchange->getCreated() > $this->stock->getLastExchange()->getCreated() ){
 			if ( $this->stock->getLastExchange() && $this->stock->getLastExchange()->getClosePrice() > $exchange->getClosePrice() ){
