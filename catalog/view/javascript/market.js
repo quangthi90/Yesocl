@@ -912,6 +912,8 @@ function CommentBoxViewModel(params){
 		}
 		//Set init data:
 		self.postData = postData;
+		YesGlobal.Caches.CurrentPost = postData;
+		YesGlobal.Caches.UsersCanTag = [];
 		self.commentList.removeAll();
 		self.needEffect(false);
 		self.currentPage(1);

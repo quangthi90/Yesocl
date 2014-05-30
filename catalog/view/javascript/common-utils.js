@@ -1,6 +1,8 @@
 var YesGlobal = YesGlobal || {};
 YesGlobal.Caches = {
-    StockList: []
+    StockList: [],
+    UsersCanTag: [],
+    CurrentPost: null
 };
 
 YesGlobal.Configs = {
@@ -161,6 +163,28 @@ YesGlobal.Utils = {
                     window.yListFriends = data.friends;                    
                     callback(data.friends);
                 }else {
+                    callback([]);
+                }
+            }
+            YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+        }
+    },
+    initUserListForTag: function(callback) {
+        if(YesGlobal.Caches.UsersCanTag.length > 0){
+            callback(YesGlobal.Caches.UsersCanTag);
+        }else {
+            var ajaxOptions = {
+                url: window.yRouting.generate("ApiGetCommentTags", {
+                    post_type : YesGlobal.Caches.CurrentPost ? YesGlobal.Caches.CurrentPost.type : "",
+                    post_slug: YesGlobal.Caches.CurrentPost ? YesGlobal.Caches.CurrentPost.slug : ""
+                }),
+                async: false
+            };
+            var successCallback = function(data) {
+                if(data.success === "ok") {
+                    YesGlobal.Caches.UsersCanTag = data.users;
+                    callback(data.users);
+                } else {
                     callback([]);
                 }
             }
@@ -335,7 +359,7 @@ ko.bindingHandlers.seeMore = {
             }
         });
     }
-}
+};
 ko.bindingHandlers.mention = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         var observableAttr = valueAccessor();
@@ -386,7 +410,7 @@ ko.bindingHandlers.mention = {
                 }        
             },
             onMentionChanged: function(){
-                var content = $(element).mentionsInput("getHtmlContent"); console.log(content);
+                var content = $(element).mentionsInput("getHtmlContent");
                 observableAttr(content);
             },
             fullNameTrigger: false
@@ -399,7 +423,71 @@ ko.bindingHandlers.mention = {
             $(element).height(35).focus();
         }
     }
-}
+};
+ko.bindingHandlers.mentionInComment = {
+    init: function (element, valueAccessor, allBindingsAccessor) {
+        var observableAttr = valueAccessor();
+        $(element).mentionsInput({
+            onDataRequest: function (mode,currentMentionCollection,queryObj,callback) {
+                var query = queryObj.queryString;
+                var firstCharacter = queryObj.firstCharacter;
+                if(firstCharacter === "@") {
+                    YesGlobal.Utils.initUserListForTag(function(queryData){
+                        result = _.filter(queryData, function(item) {
+                            if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
+                                var checkExisted = _.find(currentMentionCollection, function(tempItem){
+                                    return (item.id === tempItem.id);
+                                });
+                                if(checkExisted)
+                                    return false;
+                            }                   
+                            return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                        });
+                        callback.call(this, _.first(result, 5));
+                    });
+                    return;
+                } 
+                if(firstCharacter === "$") {
+                    YesGlobal.Utils.initStockList(function(queryData){
+                        result = _.filter(queryData, function(item) {
+                            if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
+                                var checkExisted = _.find(currentMentionCollection, function(tempItem){
+                                    return (item.code === tempItem.id);
+                                });
+                                if(checkExisted)
+                                    return false;
+                            }                   
+                            return item.code.toLowerCase().indexOf(query.toLowerCase()) > -1;
+                        });
+                        var lastResult = _.map(_.first(result, 5), function(obj) {
+                            return {
+                                id : obj.code,
+                                name: obj.code,
+                                wall: yRouting.generate("StockPage", { stock_code : obj.code }),
+                                type: "stock",
+                                avatar : "image/stock_icon.png"
+                            }
+                        });
+                        callback.call(this, lastResult);
+                    });
+                    return;
+                }        
+            },
+            onMentionChanged: function(){
+                var content = $(element).mentionsInput("getHtmlContent");
+                observableAttr(content);
+            },
+            fullNameTrigger: false
+        });
+    },
+    update: function (element, valueAccessor, allBindingsAccessor) {
+        var observableAttr = valueAccessor();
+        if(observableAttr().length === 0){
+            $(element).mentionsInput("reset");
+            $(element).height(35).focus();
+        }
+    }
+};
 ko.bindingHandlers.zoomImage = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         var imgList = $(element).find("img");
@@ -430,7 +518,7 @@ ko.bindingHandlers.zoomImage = {
             });
         });
     }
-}
+};
 ko.bindingHandlers.zoomInitImage = {
     init: function (element, valueAccessor, allBindingsAccessor) {
         var image = ko.utils.unwrapObservable(valueAccessor());
@@ -454,4 +542,4 @@ ko.bindingHandlers.zoomInitImage = {
             });
         });
     }
-}
+};
