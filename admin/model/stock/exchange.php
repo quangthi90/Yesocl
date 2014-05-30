@@ -209,10 +209,10 @@ class ModelStockExchange extends Model {
 				}
 				
 				$oStockExchanges->addExchange( $oExchange );
-
-				$this->dm->flush();
 			}
 		}
+
+		$this->dm->flush();
 
 		return true;
 	}
