@@ -82,7 +82,7 @@
 		</div>
 		<div class="y-comment-reply post post_new comment-form" data-bind="with: initComment">
 			<div class="txt_editor">
-				<textarea required data-bind="mentionInComment: content, executeOnEnter: $parent.addCommentByEnter, attr:{ 'readonly' : $parent.isProcessing() }" class="post_input" placeholder="comment ..." style="font-size: 12px;"></textarea>
+				<textarea required data-bind="mention: content, executeOnEnter: $parent.addCommentByEnter, attr:{ 'readonly' : $parent.isProcessing() }" class="post_input" placeholder="comment ..." style="font-size: 12px;"></textarea>
 			</div>
 			<div class="comment-action">
 				<a data-bind="click: $parent.startAdvanceComment" class="fl btn-comment"><i class="icon-external-link"></i></a>
@@ -106,7 +106,7 @@
 		    <div class="dlg-content">
 		    	<div class="control-group">
 	    			<label class="control-label">{% trans %}Comment{% endtrans %}</label>
-			    	<div class="y-editor post-advance-content" data-forComment="true"></div>
+			    	<div class="y-editor post-advance-content"></div>
 		    	</div>
 		    </div>
 		    <div class="dlg-footer">

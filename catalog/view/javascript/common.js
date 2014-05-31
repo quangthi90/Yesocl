@@ -189,7 +189,7 @@ Tag.prototype.attachEvents = function() {
             var query = queryObj.queryString;
             var firstCharacter = queryObj.firstCharacter;
             if(firstCharacter === "@") {
-                YesGlobal.Utils.initFriendList(function(queryData){
+                YesGlobal.Utils.initUserListForTag(function(queryData) {
                     result = _.filter(queryData, function(item) {
                         if(currentMentionCollection !== null && currentMentionCollection.length > 0) {
                             var checkExisted = _.find(currentMentionCollection, function(tempItem){

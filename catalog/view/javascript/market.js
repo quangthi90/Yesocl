@@ -962,6 +962,9 @@ function CommentBoxViewModel(params){
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);		
 	};
 	self.closeCommentBox = function(){
+		self.initComment.content("");
+		YesGlobal.Caches.CurrentPost = null;
+		YesGlobal.Caches.UsersCanTag = [];		
 		_hideCommentBox();
 	};
 	self.expandCommentBox = function(){
@@ -1304,6 +1307,7 @@ function CommentBoxViewModel(params){
 		control.animate({ 'right' : '-50000px' }, 200, function(){
 			overlay.fadeOut(500);
 		});
+		control.find(".post_input").mentionsInput("reset");
 	}
 	function _displayAdvanceBox(){
 		var form = $("#comment-advance-form");

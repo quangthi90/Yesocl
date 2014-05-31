@@ -1258,27 +1258,13 @@
         source: function (query, process) {
           friendList = [];
           map = {};
-          if ( window.yListFriends == null && is_send_ajax == 0 ){
-            is_send_ajax = 1;
-            $.getJSON(window.yRouting.generate('ApiGetAllFriends'), function(json) {
-              if ( json.success == 'ok' ){
-                if ( json.friends == undefined ){
-                  is_send_ajax = 0;
-                }
-                window.yListFriends = json.friends;
-              }
-            });
-          }
-
-          if ( window.yListFriends == null ){
-            return false;
-          }
-
-          $.each(window.yListFriends, function (i, item) {
+          YesGlobal.Utils.initUserListForTag(function(queryData) {
+            $.each(queryData, function (i, item) {
               friendList.push(item.id + '-' + item.name);
               map[item.id + '-' + item.name] = item;
+            });
+            process(friendList);
           });
-          process(friendList);
         },
         updater: function (item) {
           var selectedFriend = map[item];
