@@ -1,6 +1,7 @@
 #y-content {
     padding: 15px 0px 0px 0px;
-    background: #EBEBEB;
+    background-color: #FFF;
+    top: 48px;
 }
 #post-detail {
     width: 100%;
@@ -14,6 +15,7 @@
     right: 0px;
     height: 70px;
     border-bottom: 1px solid #ddd;
+    background-color: #FFF;
 }
 #detail-content {
     position: absolute;    

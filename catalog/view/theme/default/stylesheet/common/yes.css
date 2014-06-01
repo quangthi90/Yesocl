@@ -3531,6 +3531,10 @@ a.wall-link:hover {
 }
 .stock-block .block-content .nav-tabs {
   border-bottom: none;
+  background-color: #FFFFFF;
+}
+.stock-block .block-content .nav-tabs > li {
+  margin-bottom: 0px;
 }
 .stock-block .block-content .nav-tabs > li > a {
   border: none;
@@ -3544,12 +3548,13 @@ a.wall-link:hover {
 }
 .stock-block .block-content .tab-content {
   position: absolute;
-  top: 36px;
+  top: 35px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   background-color: #FFFFFF;
   padding: 20px 20px 20px 20px;
+  border-top: 1px solid #F0F0F0;
 }
 .stock-block .block-content .btn-zoom-chart {
   position: absolute;
