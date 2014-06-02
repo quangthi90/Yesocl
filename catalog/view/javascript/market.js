@@ -1402,3 +1402,8 @@ function UserBoxViewModel(params){
 		});
 	}
 }
+
+function UserInfoColumnViewModel(params) {
+	var self = this;
+	this.wallUser = new UserModel(params.wallUser || {});
+}

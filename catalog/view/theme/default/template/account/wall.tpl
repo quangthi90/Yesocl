@@ -1,6 +1,7 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 {% use '@template/default/template/stock/common/block_news.tpl' %}
 {% use '@template/default/template/common/ko_template_block.tpl' %}
+{% use '@template/default/template/account/common/profile_column.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
 {% block stylesheet %}    
@@ -12,6 +13,7 @@
     <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
         {% set news_title = 'Post'|trans %}
         {% set news_href = '#' %}
+        {{ block('account_common_profile_column') }}
         {{ block('stock_common_block_news') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}
@@ -58,11 +60,15 @@
             };
             var userBoxOptions = {
             };
+            var wallUserColumnOptions = {
+                wallUser : currUser
+            };
 
             var viewModel = {
                 newsModel : new NewsViewModel(postOptions),
                 commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
-                userBoxModel : new UserBoxViewModel(userBoxOptions)
+                userBoxModel : new UserBoxViewModel(userBoxOptions),
+                userInfoColumnModel : new UserInfoColumnViewModel(wallUserColumnOptions)
             };
             ko.applyBindings(viewModel, document.getElementById('y-main-content'));
         });

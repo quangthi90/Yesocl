@@ -29,25 +29,6 @@ function Routing( _routing )
     };
 }
 
-// Object current User info
-function User( _user )
-{
-    'use strict';
-
-    var that = this;
-
-    this.user = new HashTable();
-    
-    for ( var key in _user ){
-        that.user.setItem( key, _user[key] );
-    }
-    
-    this.get = function( value )
-    {
-        return that.user.getItem( value );
-    };
-}
-
 function UserFunction()
 {
     'use strict';

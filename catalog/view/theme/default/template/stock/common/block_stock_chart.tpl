@@ -89,7 +89,7 @@
                     </div>
                 </div>
                 <!-- ko if: $parent.isLoadSuccess() -->
-                <a class="btn-zoom-chart" data-bind="click: $parent.zoomChart"><i class="icon-zoom-out"></i></a>
+                <a class="btn-zoom-chart" data-bind="click: $parent.zoomChart"><i class="icon-zoom-in"></i></a>
                 <!-- /ko -->
                 <div class="chart-area" id="y-chart-container">
                     <!-- ko if: !$parent.isLoadSuccess() -->

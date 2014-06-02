@@ -88,27 +88,31 @@
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('notification.js') }}"></script>
-		<!-- Custom Script -->
-    	{% block javascript %}
-		{% endblock %}
-		<!-- Defined Data for Script -->
+		
 		<script type="text/javascript">
-			var _routing = '{{ get_routing_list()|raw }}';
-			var _user = '{{ get_user_data()|raw }}';
-			window.yRouting = new Routing( JSON.parse(_routing) );
-			if ( _user !== '' ){
-				window.yUser = new User( JSON.parse(_user) );
-			}else{
-				$('.post_meta').find('.post_like').hide();
-				$('.post_meta').find('.post_cm').hide();
-			}
-			window.yUsers = new HashTable();
+			$(document).ready(function(){
+				var user = '{{ get_user_data()|raw }}';
+				var routing = '{{ get_routing_list()|raw }}';
+				window.yRouting = new Routing( JSON.parse(routing) );
+				if ( user ){
+					window.yUser = JSON.parse(user);
+				}else{
+					$('.post_meta').find('.post_like').hide();
+					$('.post_meta').find('.post_cm').hide();
+				}
+				window.yUsers = new HashTable();
+			});
 
 			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',
 				sCancel = '{% trans %}Cancel{% endtrans %}',
 				sConfirm = '{% trans %}Confirm{% endtrans %}',
 				sOk = '{% trans %}Ok{% endtrans %}';
 		</script>
+
+		<!-- Custom Script -->
+    	{% block javascript %}
+		{% endblock %}
+		<!-- Defined Data for Script -->
 		{% block datascript %}
 		{% endblock %}
 
