@@ -1405,5 +1405,14 @@ function UserBoxViewModel(params){
 
 function UserInfoColumnViewModel(params) {
 	var self = this;
-	this.wallUser = new UserModel(params.wallUser || {});
+
+	this.isLogined = window.yUser != undefined ? true : false;
+	this.isCurrentUser = this.isLogined ? params.wallUser.id === window.yUser.id : false ;
+	this.wallUser = new UserModel(params.wallUser);
+
+	setTimeout(function(){
+		$("#wall-user-info-column").css({
+			'opacity' : '1'
+		})
+	}, 1000);
 }
