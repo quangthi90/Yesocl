@@ -37,6 +37,7 @@ class ModelFriendFriend extends Model {
 	 *	4: not relationship
 	 *	-1: not found User B
 	 */
+	private $oFriendAs = null;
 	public function checkStatus( $idUserA, $idUserB ){
 		// me
 		if ( $idUserA == $idUserB ){
@@ -44,21 +45,26 @@ class ModelFriendFriend extends Model {
         
         }
 
-        $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
+        if ( $this->oFriendAs && $this->oFriendAs->getUser()->getId() == $idUserA ) {
+			$oFriendAs = $this->oFriendAs;
+		}else{
+			$oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
+				'user.id' => $idUserA
+			));
+			$this->oFriendAs = $oFriendAs;
+		}
 
-        if ( !$oUserB ){
-        	return -1;
-        }
-
-        $oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
-			'user.id' => $idUserA
-		));
-
-		if ( $oFriendAs && $oFriendAs->getFriendByUserId($idUserB) ){
+		if ( $oFriendAs && $oFriendAs->getFriendByUserId($idUserB) ) {
 	        return 2;
 		}
 
-		if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ){
+		$oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
+
+        if ( !$oUserB ) {
+        	return -1;
+        }
+
+		if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ) {
             return 3;
         }
 
