@@ -24,6 +24,8 @@ class ControllerBranchDetail extends Controller {
     		return false;
     	}
 
+    	$this->data['branch_slug'] = $sBranchSlug;
+
     	$oLoggedUser = $this->customer->getUser();
 
     	$this->load->model('branch/post');
@@ -119,13 +121,13 @@ class ControllerBranchDetail extends Controller {
 		} else {
 			$this->template = 'default/template/account/branch/detail.tpl';
 		}
-		
+
 		$this->children = array(
 			'common/sidebar_control',
 			'common/footer',
 			'common/header'
 		);
-				
-		$this->response->setOutput($this->twig_render());			
+
+		$this->response->setOutput($this->twig_render());
 	}
 }

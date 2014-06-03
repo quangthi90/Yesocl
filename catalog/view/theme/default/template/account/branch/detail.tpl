@@ -1,66 +1,71 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 
-{% use '@template/default/template/common/html_block.tpl' %}
-{% use '@template/default/template/post/common/post_status_branch.tpl' %}
-{% use '@template/default/template/post/common/post_item_wall.tpl' %}
-{% use '@template/default/template/post/common/comment_post_list.tpl' %}
+{% use '@template/default/template/post/common/ko_post_item_wall.tpl' %}
+{% use '@template/default/template/post/common/ko_post_status_branch.tpl' %}
 
 {% block title %}{{ branch.name }}|{% trans %}Branch Detail Page{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
-    {{ block('post_common_comment_post_list_style') }}
-    {{ block('post_common_post_status_branch_style') }}
+<style type="text/css">
+    .block-content .post-item.adding {
+        background-color: #DAFFD4;
+        opacity: 0.8;
+    }
+</style>
 {% endblock %}
 
 {% block body %}
     <div id="y-content">
         <div id="y-main-content" class="has-horizontal post-per-column" style="width: 9999px;">
-            <div class="feed-block block-post-new">
+            <div id="branch-news" class="feed-block block-post-new" data-bind="with: $root.newsModel">
                 <div class="block-header">
                     <a class="block-title fl" href="#">
-                        {% trans %}Post{% endtrans %}                   
-                    </a>  
-                    <a class="block-seemore fl" href="#"> 
+                        {% trans %}Post{% endtrans %}
+                    </a>
+                    <a class="block-seemore fl" href="#">
                         <i class="icon-angle-right"></i>
-                    </a>           
+                    </a>
                 </div>
                 <div class="block-content">
-                    <div class="column has-new-post branch-info">
-                        {% set user = users[current_user_id] %}
-                        {{ block('post_common_post_status_branch') }}
-                    </div>
-                    {% for post in posts %}
-                        <div class="column">
-                            {% set user = users[post.user_id] %}
-                            {{ block('post_common_post_item_wall') }}
-                        </div>
-                    {% endfor %}
+                    {{ block('post_common_ko_post_status_branch') }}
+                    {{ block('post_common_ko_post_item_wall') }}
                 </div>
             </div>
-            {{ block('post_common_comment_post_list') }}
         </div>
     </div>
 {% endblock %}
 
 {% block template %}
-    {{ block('post_common_post_status_branch_html_template') }}
-    {{ block('post_common_comment_post_list_template') }}
 {% endblock %}
 
 {% block datascript %}
-    {{ block('post_common_post_status_branch_html_datascript') }}
+    <script type="text/javascript" src="{{ asset_js('branch.js') }}"></script>
     <script type="text/javascript">
-        var _members = '{{ members|json_encode()|raw }}';
-        window.members = JSON.parse(_members);
-        console.log(window.members);
-        $('.js-branch-member').on('click', function(){
-            window.userFunction.showPopupUserList( window.members );
-            return false;
+        $(document).ready(function() {
+            var newsOptions = {
+                Id : "branch-news",
+                canLoadMore: true,
+                //hasNewPost: false,
+                validate: function(postData) {
+                    //Validate here, return a collection of error if any
+                    return [];
+                },
+                urls : {
+                    loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : "{{ branch_slug }}" } }
+                }
+            };
+            var commentBoxOptions = {
+            };
+            var userBoxOptions = {
+            };
+
+            var viewModel = {
+                newsModel : new NewsViewModel(newsOptions),
+            };
+            ko.applyBindings(viewModel, document.getElementById('y-main-content'));
         });
     </script>
 {% endblock %}
 
 {% block javascript %}
-{{ block('post_common_comment_post_list_javascript') }}
-{{ block('post_common_post_status_branch_javascript') }}
 {% endblock %}
