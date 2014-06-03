@@ -516,5 +516,97 @@ class ModelToolObject extends Model
 
 		return true;
 	}
+
+	/**
+	 * Check status of 2 users
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	MongoId User A
+	 * 	MongoId User B
+	 * @return: int
+	 *	1: me
+	 *	2: friend
+	 *	3: sent request make friend
+	 *	4: not relationship
+	 *	-1: not found User B
+	 */
+	private $oFriendAs = null;
+	public function checkFriendStatus( $idUserA, $idUserB ){
+		// me
+		if ( $idUserA == $idUserB ){
+            return 1;
+        
+        }
+
+        if ( $this->oFriendAs && $this->oFriendAs->getUser()->getId() == $idUserA ) {
+			$oFriendAs = $this->oFriendAs;
+		}else{
+			$oFriendAs = $this->dm->getRepository('Document\Friend\Friends')->findOneBy(array(
+				'user.id' => $idUserA
+			));
+			$this->oFriendAs = $oFriendAs;
+		}
+
+		if ( $oFriendAs && $oFriendAs->getFriendByUserId($idUserB) ) {
+	        return 2;
+		}
+
+		$oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
+
+        if ( !$oUserB ) {
+        	return -1;
+        }
+
+		if ( $oUserB->getFriendRequests() && in_array($idUserA, $oUserB->getFriendRequests()) ) {
+            return 3;
+        }
+
+    	return 4;
+	}
+
+	/**
+	 * Check User A has follow User B
+	 * @author: Bommer <lqthi.khtn@gmail.com>
+	 * @param: 
+	 * 	MongoId User A
+	 * 	MongoId User B
+	 * @return: int
+	 *		1: me
+	 *		2: Follower
+	 *		3: not relationship
+	 *		-1: not found User B
+	 */
+	private $oFollowerAs = null;
+	public function checkFollowerStatus( $idUserA, $idUserB ){
+		// me
+		if ( $idUserA == $idUserB ){
+            return 1;
+        }
+
+        $oUserB = $this->dm->getRepository('Document\User\User')->find( $idUserB );
+
+        if ( !$oUserB ){
+        	return -1;
+        }
+
+        if ( $this->oFollowerAs && $this->oFollowerAs->getUser()->getId() == $idUserA ) {
+        	$oFollowerAs = $this->oFollowerAs;
+        }else{
+        	$oFollowerAs = $this->dm->getRepository('Document\Friend\Followers')->findOneBy(array(
+				'user.id' => $idUserA
+			));
+			$this->oFollowerAs = $oFollowerAs;
+        }
+
+		if ( !$oFollowerAs ){
+			return 3;
+		}
+
+        if ( $oFollowerAs->getFollowingByUserId($idUserB) ){
+            return 2;
+        }
+
+    	return 3;
+	}
 }
 ?>
