@@ -37,7 +37,7 @@ class ControllerPostDetail extends Controller {
 				break;
 
 			case $this->config->get('post')['type']['stock']:
-				$is_user = true;
+				$is_user = false;
 				$this->load->model('stock/post');
 				$oPost = $this->model_stock_post->getPost( $this->request->get, true );
 				$this->data['post_type'] = $this->config->get('common')['type']['stock'];
@@ -48,46 +48,20 @@ class ControllerPostDetail extends Controller {
 				break;
 		}
 
+		$sModel = $this->request->get['post_type'] . '/comment';
+        $this->load->model($sModel);
+        $this->load->model('tool/object');
+
+		$sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
+		$oPost = $this->$sModelLink->getPost( $this->request->get, true );
+
+		$this->data['post_type'] = $this->request->get['post_type'];
+
 		if ( !$oPost ){
 			print("not found post!"); exit;
 		}
 
-		$this->load->model('tool/image');
-		$this->load->model('tool/object');
-
-		$avatar = $this->model_tool_image->getAvatarUser( $oPost->getUser()->getAvatar(), $oPost->getUser()->getPrimaryEmail()->getEmail() );
-		
-		$comment_count = $oPost->getComments()->count();
-
-		if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
-			$liked = true;
-		}else{
-			$liked = false;
-		}
-
-		$this->data['post'] = array(
-			'id'			=> $oPost->getId(),
-			'author' 		=> $oPost->getAuthor(),
-			'avatar' 		=> $avatar,
-			'title' 		=> $oPost->getTitle(),
-			'content' 		=> html_entity_decode($oPost->getContent()),
-			'created'		=> $oPost->getCreated(),
-			'comment_count' => $comment_count,
-			'category'		=> !$is_user ? $oPost->getCategory()->getName() : null,
-			'slug'			=> $oPost->getSlug(),
-			'like_count'	=> count($oPost->getLikerIds()),
-			'isUserLiked'	=> $liked,
-			'user_slug'		=> $oPost->getUser()->getSlug(),
-			'count_viewer'	=> $oPost->getCountViewer()
-		);
-
-		$this->data['comments'] = array();
-		$aComments = $oPost->getComments();
-		foreach ( $aComments as $oComment ) {
-			$this->data['comments'][] = $oComment->formatToCache();
-		}
-		
-		$this->data['is_user'] = $is_user;
+		$this->data['post'] = $this->model_tool_object->formatPost( $oPost );
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/post/detail.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/post/detail.tpl';
