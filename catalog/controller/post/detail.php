@@ -35,6 +35,13 @@ class ControllerPostDetail extends Controller {
 				$oPost = $this->model_user_post->getPost( $this->request->get, true );
 				$this->data['post_type'] = $this->config->get('common')['type']['user'];
 				break;
+
+			case $this->config->get('post')['type']['stock']:
+				$is_user = true;
+				$this->load->model('stock/post');
+				$oPost = $this->model_stock_post->getPost( $this->request->get, true );
+				$this->data['post_type'] = $this->config->get('common')['type']['stock'];
+				break;
 			
 			default:
 				$oPost = null;
