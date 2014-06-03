@@ -344,6 +344,8 @@ class ModelToolObject extends Model
 			$oUser = $oComment->getUser();
 			$aUser = $oUser->formatToCache();
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+			$aUser['fr_status'] = $this->checkFriendStatus( $this->customer->getId(), $aUser['id'] );
+			$aUser['fl_status'] = $this->checkFollowerStatus( $this->customer->getId(), $aUser['id'] );
 			$aUsers[$aUser['id']] = $aUser;
 		}
 		$aComment['user'] = $aUsers[$aComment['user_id']];

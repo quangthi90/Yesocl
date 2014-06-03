@@ -315,9 +315,8 @@ class ControllerApiPost extends Controller {
 
         if ( $oPost ){
             $this->load->model('user/user');
-            $this->load->model('friend/friend');
-            $this->load->model('friend/follower');
             $this->load->model('tool/image');
+            $this->load->model('tool/object');
 
             $lUsers = $this->model_user_user->getUsers(array(
                 'user_ids' => $oPost->getLikerIds()
@@ -326,9 +325,8 @@ class ControllerApiPost extends Controller {
             if ( $lUsers ){
                 foreach ( $lUsers as $oUser ) {
                     $aUser = $oUser->formatToCache();
-                    
-                    $aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
-                    $aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUser->getId() );
+                    $aUser['fr_status'] = $this->model_tool_object->checkFriendStatus( $this->customer->getId(), $oUser->getId() );
+                    $aUser['fl_status'] = $this->model_tool_object->checkFollowerStatus( $this->customer->getId(), $oUser->getId() );
                     $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
 
                     $aUsers[$aUser['id']] = $aUser;
