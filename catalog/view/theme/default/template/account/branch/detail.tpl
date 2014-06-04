@@ -30,7 +30,7 @@
                                 <i class="icon-pencil"></i>
                                 <span>{% trans %}New post{% endtrans %}</span>
                             </a>
-                            <a href="#" style="width: 30%;" class="branch-function">
+                            <a href="#" style="width: 30%;" class="branch-function" data-bind="click: showBranchMembers">
                                 <i class="icon-group"></i>
                                 <span>{% trans %}Members{% endtrans %} ({{ branch.member_count }})</span>
                             </a>
@@ -51,7 +51,7 @@
                     <div class="mfp-hide y-dlg-container form-advance" data-focus-type="input[type='text']" id="news-advance-post">
                         <div class="y-dlg">
                             <div class="dlg-title">
-                                <i class="icon-yes"></i> 
+                                <i class="icon-yes"></i>
                                 <span>{% trans %}New post{% endtrans %}</span>
                                 <a title="Close" style="display: inline-block; float: right; margin-right: 10px;" data-bind="click: closeAdvancePost">X</a>
                             </div>
@@ -65,7 +65,7 @@
                                     <div class="y-progress">
                                         <div class="bar" style="width: 0%;"></div>
                                     </div>
-                                    <div class="drag-img-upload">                           
+                                    <div class="drag-img-upload">
                                         <a class="btn btn-yes" onclick="$('#img-upload-adv').click() ; return false;">
                                             <span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
                                         </a>
@@ -233,14 +233,32 @@
     <script type="text/javascript" src="{{ asset_js('branch.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
+            var currUser = JSON.parse('{{ current_user|json_encode()|raw }}');
+            var postType = '{{ post_type }}';
             var postOptions = {
                 Id : "branch-detail",
                 canLoadMore: true,
                 hasNewPost: true,
                 validate: function(postData){
+                    var validationMsgs = [];
+                    //Validate here, return a collection of error if any
+                    if(postData.content.length === 0) {
+                        validationMsgs.push("Content is required");
+                    }else {
+                        var content = postData.content.replace(new RegExp("&nbsp;", 'g'), "");
+                        content = content.replace(new RegExp("<br>", 'g'), "");
+                        var temp = $("<div></div>");
+                        temp.html(content);
+                        if(temp.html().trim().length === 0){
+                            validationMsgs.push("Content is required");
+                        }
+                    }
+                    return validationMsgs;
                 },
                 urls : {
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
+                    postNews : { name: "ApiPostPost", params: { slug : currUser.slug, post_type: postType } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : postType } }
                 }
             };
             var commentBoxOptions = {

@@ -117,6 +117,7 @@ $_['route']['ApiGetStockIdeas']				= 'api/stock/getIdeas/';
 
 // Branch
 $_['route']['ApiGetLastBranchNews']			= 'api/branch/getNews/';
+$_['route']['ApiGetBranchMember']			= 'api/branch/getMembers/';
 
 // Post
 $_['route']['ApiPutPostLike']				= 'api/post/like/';

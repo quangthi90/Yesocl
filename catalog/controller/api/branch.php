@@ -160,6 +160,41 @@ class ControllerApiBranch extends Controller {
         )));
 	}*/
 
+    public function getMembers(){
+    	if ( empty($this->request->get['branch_slug']) ){
+    		return $this->response->setOutput(json_encode(array(
+    		'success' => 'not ok',
+    		'users' => array()
+    		)));
+    	}
+
+    	$sBranchSlug = $this->request->get['branch_slug'];
+    	$oLoggedUser = $this->customer->getUser();
+    	$oBranch = $oLoggedUser->getBranchBySlug( $sBranchSlug );
+
+		// Member of Branch
+    	$aUsers = array();
+    	if ( $oBranch ){
+    		$this->load->model('tool/image');
+    		$this->load->model('friend/friend');
+    		$this->load->model('friend/follower');
+
+    		$lUser = $oBranch->getMembers();
+    		foreach ( $lUser as $oUser ) {
+    			$aUser = $oUser->formatToCache();
+    			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUser->getId() );
+    			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUser->getId() );
+    			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+    			$aUsers[$aUser['id']] = $aUser;
+    		}
+    	}
+
+    	return $this->response->setOutput(json_encode(array(
+    		'success' => 'ok',
+    		'users' => $aUsers
+    		)));
+    }
+
 	public function getNews() {
 		if ( !empty($this->request->post['limit']) ){
 			$limit = $this->request->post['limit'];

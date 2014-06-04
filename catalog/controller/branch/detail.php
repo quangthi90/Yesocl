@@ -9,76 +9,33 @@ class ControllerBranchDetail extends Controller {
 
     	$this->document->setTitle($this->language->get('heading_title'));
 
-    	$oLoggedUser = $this->customer->getUser();
-
     	if ( empty($this->request->get['branch_slug']) ){
     		print("Branch slug is empty");
     		return false;
     	}
 
-    	$sBranchSlug = $this->request->get['branch_slug'];
-    	$oBranch = $oLoggedUser->getBranchBySlug( $sBranchSlug );
+    	$this->data['branch_slug'] = $this->request->get['branch_slug'];
 
+    	$oLoggedUser = $this->customer->getUser();
+
+    	$oBranch = $oLoggedUser->getBranchBySlug( $this->data['branch_slug'] );
     	if ( !$oBranch ){
     		print("You not have authentication");
     		return false;
     	}
 
-    	$this->data['branch_slug'] = $sBranchSlug;
-
-    	$oLoggedUser = $this->customer->getUser();
-
-    	$this->load->model('branch/post');
-    	$this->load->model('friend/friend');
-    	$this->load->model('friend/follower');
     	$this->load->model('tool/image');
+    	$this->load->model('user/user');
 
-    	$lPosts = $this->model_branch_post->getPosts( array('branch_id' => $oBranch->getId()) );
-    	$aUsers = array();
-    	$aPosts = array();
+    	// Current User
+		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $oLoggedUser->getSlug() ) );
+		if ( !$oCurrUser ){
+			return false;
+		}
 
-    	foreach ( $lPosts as $oPost ) {
-    		$aPost = $oPost->formatToCache();
-    		$oUser = $oPost->getUser();
-
-    		if ( empty($aUsers[$oUser->getId()]) ){
-    			$aUser = $oUser->formatToCache();
-    			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-    			$aUsers[$oUser->getId()] = $aUser;
-    		}
-
-    		if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
-				$aPost['isUserLiked'] = true;
-			}else{
-				$aPost['isUserLiked'] = false;
-			}
-
-			$oUser = $oPost->getUser();
-
-			if ( $oUser->getId() == $oLoggedUser->getId() ){
-				$aPost['is_del'] = true;
-			}else{
-				$aPost['is_del'] = false;
-			}
-
-			if ( $this->customer->getId() == $aPost['user_id'] ){
-				$aPost['is_edit'] = true;
-			}else{
-				$aPost['is_edit'] = false;
-			}
-
-			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
-			}else{
-				$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
-			}
-
-    		$aPosts[] = $aPost;
-    	}
-
-    	$this->data['users'] = $aUsers;
-    	$this->data['posts'] = $aPosts;
-    	$this->data['post_type'] = $this->config->get('common')['type']['branch'];
+		$aCurrUser = $oCurrUser->formatToCache();
+		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 150, 150 );
+		$this->data['current_user'] = $aCurrUser;
 
     	// Branch
     	$aBranch = $oBranch->formatToCache();
@@ -89,31 +46,8 @@ class ControllerBranchDetail extends Controller {
 		}
 		$this->data['branch'] = $aBranch;
 
-		// Member of Branch
-		$lUserMembers = $oBranch->getMembers();
-		$aUserMembers = array();
-		foreach ( $lUserMembers as $oUserMember ) {
-			$aUserMember = $oUserMember->formatToCache();
-			$aUserMember['fr_status'] = $this->model_friend_friend->checkStatus( $this->customer->getId(), $oUserMember->getId() );
-			$aUserMember['fl_status'] = $this->model_friend_follower->checkStatus( $this->customer->getId(), $oUserMember->getId() );
-			$aUserMember['avatar'] = $this->model_tool_image->getAvatarUser( $aUserMember['avatar'], $aUserMember['email'] );
-
-			$aUserMembers[] = $aUserMember;
-		}
-		$this->data['members'] = $aUserMembers;
-
-		// Categories
-		$lCategories = $oBranch->getCategories();
-		$aCategories = array();
-		foreach ( $lCategories as $oCategory ) {
-			$aCategories[] = array(
-				'id' => $oCategory->getId(),
-				'name' => $oCategory->getName()
-			);
-		}
-		$this->data['categories'] = $aCategories;
-
 		$this->session->setFlash( 'menu', 'branch' );
+
 		$this->data['post_type'] = $this->config->get('common')['type']['branch'];
 
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/account/branch/detail.tpl')) {

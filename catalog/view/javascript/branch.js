@@ -10,6 +10,7 @@ function NewsViewModel(options) {
 	self.validate = options.validate || null;
 	self.urls = options.urls || [];
 	self.currentPost = ko.observable(null);
+	self.branch_slug = ko.observable(options.branch_slug);
 	var mainContent = $("#y-main-content");
 	var root = $("#y-content");
 
@@ -100,6 +101,22 @@ function NewsViewModel(options) {
 		_clearAfterAdding(true);
 		$.magnificPopup.close();
 	}
+
+	this.showBranchMembers = function(){
+		var context = YesGlobal.Utils.getKoContext();
+		if(context !== null){
+			var apiUrl = yRouting.generate("ApiGetBranchMember", {
+				branch_slug: self.urls.loadNews.params.branch_slug
+			})
+			context.$data.userBoxModel.showUserList(apiUrl, function(count){
+				// if(count !== undefined){
+				// 	comment.likeCount(count);
+				// }
+			});
+		}else {
+			console.log("Ko content not found !");
+		}
+	};
 
 	//Private functions:
 	function _adjustLayout(){
@@ -295,7 +312,7 @@ function NewsViewModel(options) {
 	}
 
 	function _openAdvancePost (openCallback) {
-		var form = $("#news-advance-post");console.log(form.length);
+		var form = $("#news-advance-post");
         $.magnificPopup.open({
 			items: {
 			    src: form,
@@ -903,7 +920,7 @@ function UserBoxViewModel(params){
 			url : apiUrl
 		};
 		self.userList.removeAll();
-		var successCallback = function(data){
+		var successCallback = function(data){console.log(data);
 			if(data.success === "ok") {
 				for(var key in data.users){
 					var usrData = data.users[key];

@@ -115,6 +115,7 @@ $_['routing']['ApiGetStockIdeas']				= 'services/get/stock/{stock_code}/ideas/{p
 
 // Branch
 $_['routing']['ApiGetLastBranchNews']			= 'services/get/branch/{branch_slug}/news/last/{page}/';
+$_['routing']['ApiGetBranchMember']				= 'services/get/branch/{branch_slug}/member/';
 
 // Post
 $_['routing']['ApiPutPostInfo']					= 'services/put/{post_type}/post/{post_slug}/';
