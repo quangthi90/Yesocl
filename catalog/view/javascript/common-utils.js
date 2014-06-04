@@ -56,7 +56,7 @@ YesGlobal.Configs = {
         pageSize : 10
     },
     loadingElement : "#yes-loading-more",
-    defaultBindingElement : "y-main-content"
+    defaultBindingElement : "y-content"
 };
 
 YesGlobal.Utils = {
