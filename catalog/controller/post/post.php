@@ -39,7 +39,7 @@ class ControllerPostPost extends Controller {
                         'title'         => $this->request->post['title'],
                         'description'   => $this->request->post['description'],
                         'category'      => $this->request->post['category'],
-                        'user_slug'     => $this->customer->getSlug(),
+                        'author_id'     => $this->customer->getId(),
                         'image_link'    => $sImageLink,
                         'extension'     => $sExtension
                     );
