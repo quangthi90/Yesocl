@@ -890,3 +890,40 @@ function CommentBoxViewModel(params){
 		that.isInit = ko.observable(true);
 	}
 };
+
+function UserBoxViewModel(params){
+	var self = this;
+
+	self.controlId = ko.observable(params.Id || "user-list-box-wrapper");
+	self.userList = ko.observableArray([]);
+
+	self.showUserList = function(apiUrl, callback){
+		var ajaxOptions = {
+			url : apiUrl
+		};
+		self.userList.removeAll();
+		var successCallback = function(data){
+			if(data.success === "ok") {
+				for(var key in data.users){
+					var usrData = data.users[key];
+					self.userList.push(new UserModel(usrData));
+				}
+				if(callback !== undefined && typeof callback === "function"){
+					callback(self.userList().length);
+				}
+				_displayBox();
+			}
+		};
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	};
+
+	function _displayBox(){
+        $.magnificPopup.open({
+			items: {
+			    src: $("#" + self.controlId()),
+			    type: 'inline'
+			},
+			modal: false
+		});
+	}
+}

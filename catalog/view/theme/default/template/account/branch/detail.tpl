@@ -1,15 +1,17 @@
 {% extends '@template/default/template/common/layout.tpl' %}
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 
 {% block title %}{{ branch.name }}|{% trans %}Branch Detail Page{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
+{{ block('common_ko_template_style') }}
 {% endblock %}
 
 {% block body %}
     <div id="y-content">
         <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
-        {% set news_title = 'Post'|trans %}
-        {% set news_href = '#' %}
+            {% set news_title = 'Post'|trans %}
+            {% set news_href = '#' %}
             <div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
                 {% if news_title != '' %}
                 <div class="block-header">
@@ -19,6 +21,32 @@
                 <div class="block-content">
                     <!-- ko if: hasNewPost() -->
                     <div class="news-creating-container fl" style="opacity: 0;">
+                        <div class="branch-overview">
+                            <img class="branch-logo" src="{{ branch.logo }}">
+                            <h3 class="branch-name">{{ branch.name }}</h3>
+                        </div>
+                        <div class="branch-tool">
+                            <a href="#" class="branch-function link-popup js-show-popup-btn" data-mfp-src=".js-advance-post">
+                                <i class="icon-pencil"></i>
+                                <span>{% trans %}New post{% endtrans %}</span>
+                            </a>
+                            <a href="#" style="width: 30%;" class="branch-function js-branch-member">
+                                <i class="icon-group"></i>
+                                <span>{% trans %}Members{% endtrans %} ({{ branch.member_count }})</span>
+                            </a>
+                            {#% set isMember = true %}
+                            {% if isMember == true %#}
+                            <a href="{{ path('BranchList') }}" class="branch-function">
+                                <i class="icon-signout"></i>
+                                <span>{% trans %}Leave branch{% endtrans %}</span>
+                            </a>
+                            {#% else %}
+                            <a href="#" class="branch-function">
+                                <i class="icon-signin"></i>
+                                <span>{% trans %}Join branch{% endtrans %}</span>
+                            </a>
+                            {% endif %#}
+                        </div>
                     </div>
                     <!-- /ko -->
                     <!-- ko if: newsList().length > 0 -->
@@ -129,6 +157,8 @@
                     <!-- /ko -->
                 </div>
             </div>
+            {{ block('common_ko_template_comment') }}
+            {{ block('common_ko_template_user_box') }}
         </div>
     </div>
 {% endblock %}
@@ -160,9 +190,16 @@
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
                 }
             };
+            var commentBoxOptions = {
+                Id : "comment-box"
+            };
+            var userBoxOptions = {
+            };
 
             var viewModel = {
                 newsModel : new NewsViewModel(postOptions),
+                commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
+                userBoxModel : new UserBoxViewModel(userBoxOptions),
             };
             ko.applyBindings(viewModel, document.getElementById('y-main-content'));
         });
