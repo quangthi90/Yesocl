@@ -95,7 +95,7 @@ class ExtensionLoader
     }
 
     public function assetJs( $path ){
-        return HTTPS_SERVER . 'catalog/view/javascript/' . $path;
+        return HTTPS_SERVER . 'catalog/view/javascript/' . $path . '?' . YS_VERSION;
     }
 
     public function assetImg( $path ){
