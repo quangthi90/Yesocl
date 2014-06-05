@@ -156,21 +156,25 @@ class ExtensionLoader
         $this->load->model('user/user');
         $this->load->model('tool/image');
 
-        $users = $this->registry->get('model_user_user')->getUsers(array(
+        $lUsers = $this->registry->get('model_user_user')->getUsers(array(
             'user_ids' => $friend_ids
         ));
 
-        $returns = array();
+        if ( !$lUsers ){
+            return array();
+        }
 
-        foreach ( $users as $user ) {
+        $aRequestFriends = array();
+
+        foreach ( $lUsers as $user ) {
             $user = $user->formatToCache();
 
             $user['avatar'] = $this->registry->get('model_tool_image')->getAvatarUser( $user['avatar'], $user['email'] );
 
-            $returns[] = $user;
+            $aRequestFriends[] = $user;
         }
 
-        return $returns;
+        return $aRequestFriends;
     }
 
     public function dateFormat( DateTime $datetime = null ){

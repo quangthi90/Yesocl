@@ -1,7 +1,7 @@
 <?php
 use Document\Cache\Post;
 
-use MongoId;
+use \MongoId;
 
 class ModelCachePost extends Model {
 	/**
