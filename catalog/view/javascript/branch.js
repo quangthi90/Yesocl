@@ -102,22 +102,6 @@ function NewsViewModel(options) {
 		$.magnificPopup.close();
 	}
 
-	this.showBranchMembers = function(){
-		var context = YesGlobal.Utils.getKoContext();
-		if(context !== null){
-			var apiUrl = yRouting.generate("ApiGetBranchMember", {
-				branch_slug: self.urls.loadNews.params.branch_slug
-			})
-			context.$data.userBoxModel.showUserList(apiUrl, function(count){
-				// if(count !== undefined){
-				// 	comment.likeCount(count);
-				// }
-			});
-		}else {
-			console.log("Ko content not found !");
-		}
-	};
-
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
@@ -200,7 +184,7 @@ function NewsViewModel(options) {
 			url: window.yRouting.generate(self.urls.postNews.name, urlOptions),
 			data: post
 		};
-		var successCallback = function(data){console.log(data);
+		var successCallback = function(data){
 			if(data.success === "ok" && data.post !== null){
 				var newPost = new PostModel(data.post);
 				self.newsList.unshift(newPost);
@@ -212,7 +196,7 @@ function NewsViewModel(options) {
 		}
 		//Close advance box:
 		self.closeAdvancePost();
-console.log(ajaxOptions);
+
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
@@ -952,4 +936,26 @@ function UserBoxViewModel(params){
 			modal: false
 		});
 	}
+}
+
+function BranchInforModel(params){
+	var self = this;
+	self.branchSlug = ko.observable(params.branchSlug || '');
+	self.memberCount = ko.observable(params.memberCount || 0);
+
+	self.showMemberList = function(){
+		var context = YesGlobal.Utils.getKoContext();
+		if(context !== null){
+			var apiUrl = yRouting.generate("ApiGetBranchMember", {
+				branch_slug: self.branchSlug
+			})
+			context.$data.userBoxModel.showUserList(apiUrl, function(count){
+				if(count !== undefined){
+					self.memberCount(count);
+				}
+			});
+		}else {
+			console.log("Ko content not found !");
+		}
+	};
 }

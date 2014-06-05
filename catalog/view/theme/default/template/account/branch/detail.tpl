@@ -30,7 +30,7 @@
                                 <i class="icon-pencil"></i>
                                 <span>{% trans %}New post{% endtrans %}</span>
                             </a>
-                            <a href="#" style="width: 30%;" class="branch-function" data-bind="click: showBranchMembers">
+                            <a href="#" style="width: 30%;" class="branch-function" data-bind="click: $root.branchInforModel.showMemberList">
                                 <i class="icon-group"></i>
                                 <span>{% trans %}Members{% endtrans %} ({{ branch.member_count }})</span>
                             </a>
@@ -242,7 +242,7 @@
     <script type="text/javascript" src="{{ asset_js('libs/upload/jquery.fileupload-validate.js') }}"></script>
     <script type="text/javascript" src="{{ asset_js('libs/upload/upload-app.js') }}"></script>
 
-    <script type="text/javascript" src="{{ asset_js('branch.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var categories = JSON.parse('{{ categories|json_encode()|raw }}');
@@ -310,13 +310,17 @@
             };
             var userBoxOptions = {
             };
+            var branchOptions = {
+                branchSlug: '{{ branch_slug }}',
+            };
 
             var viewModel = {
                 newsModel : new NewsViewModel(postOptions),
                 commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
                 userBoxModel : new UserBoxViewModel(userBoxOptions),
+                branchInforModel : new BranchInforModel(branchOptions),
             };
-            ko.applyBindings(viewModel, document.getElementById('y-main-content'));
+            ko.applyBindings(viewModel, document.getElementById('y-content'));
         });
     </script>
 {% endblock %}
