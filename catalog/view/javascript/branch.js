@@ -928,7 +928,7 @@ function UserBoxViewModel(params){
 			url : apiUrl
 		};
 		self.userList.removeAll();
-		var successCallback = function(data){console.log(data);
+		var successCallback = function(data){
 			if(data.success === "ok") {
 				for(var key in data.users){
 					var usrData = data.users[key];
