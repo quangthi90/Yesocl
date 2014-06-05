@@ -266,6 +266,7 @@ class ControllerApiComment extends Controller {
 
         if ( $oComment ){
             $this->load->model('tool/image');
+            $this->load->model('tool/object');
             $this->load->model('user/user');
 
             $lQueryUsers = $this->model_user_user->getUsers( array(
@@ -276,6 +277,9 @@ class ControllerApiComment extends Controller {
                 foreach ( $lQueryUsers as $oUser ) {
                     $aUser = $oUser->formatToCache();
                     $aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
+                    $aUser['fr_status'] = $this->model_tool_object->checkFriendStatus( $this->customer->getId(), $oUser->getId() );
+                    $aUser['fl_status'] = $this->model_tool_object->checkFollowerStatus( $this->customer->getId(), $oUser->getId() );
+
                     $aUsers[$aUser['id']] = $aUser;
                 }
             }

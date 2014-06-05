@@ -226,24 +226,9 @@ class ModelStockPost extends Model {
 	public function getPost( $aData = array(), $increase_viewer = false ){
 		$query = array();
 		if ( !empty($aData['post_id']) ){
-			$query['posts.id'] = $aData['post_id'];
+			$oPost = $this->dm->getRepository('Document\Stock\Post')->find( $aData['post_id'] );
 		}elseif ( !empty($aData['post_slug']) ){
-			$query['posts.slug'] = $aData['post_slug'];
-		}
-
-		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( $query );
-
-		if ( !$lPosts ){
-			return null;
-		}
-
-		$oPost = null;
-		if ( !empty($aData['post_id']) ){
-			$oPost =  $lPosts->getPostById( $aData['post_id'] );
-		}
-
-		if ( !empty($aData['post_slug']) ){
-			$oPost = $lPosts->getPostBySlug( $aData['post_slug'] );
+			$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBySlug( $aData['post_slug'] );
 		}
 
 		if ( $oPost != null && $increase_viewer == true ){

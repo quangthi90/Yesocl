@@ -146,11 +146,15 @@
 	    };
 	    function closeSearch(){
 	    	var control = $("#" + self.elementId);
-	    	control.slideUp(100);
+	    	control.slideUp(100, function(){
+                $("#" + self.invokeElement).removeClass("active");
+            });
 	    }
 	    function openSearch() {
 	    	var control = $("#" + self.elementId);
-	    	control.slideDown();
+	    	control.slideDown(function(){
+                control.find(".input-search").val("").focus();
+            });
 	    }
 
 	    init();

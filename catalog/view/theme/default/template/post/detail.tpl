@@ -24,19 +24,12 @@
 				<div class="post-detail-meta">
 					<div class="post-user-time fl">
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
-							<img class="small-avatar" src="{{ post.avatar }}" alt="{{ post.author }}">
+							<img class="small-avatar" src="{{ post.user.avatar }}" alt="{{ post.author }}">
 						</a>
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 							{{ post.author }}
 						</a> - 
-						<span class="post-time">
-							{% set date_timeago = get_datetime_from_now(-2) %}
-							{% if post.created >= date_timeago %}
-                            <d class="timeago" title="{{ post.created|date('c') }}"></d>
-                            {% else %}
-                            <d title="{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "cccc, d MMMM yyyy '" ~ 'at'|trans ~ "' hh:ss") }}">{{ post.created|localizeddate('full', 'none', get_cookie('language'), null, "d MMMM '" ~ 'at'|trans ~ "' hh:ss") }}</d>
-                            {% endif %}
-						</span>
+						<span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
 					</div>
 					<ul class="post-actions fr post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
 						<li>

@@ -32,10 +32,17 @@ class ModelBranchPost extends Model {
 		}
 
 		// Check category
-		if ( empty($aData['cat_slug']) ){
+		// if ( empty($aData['cat_slug']) ){
+		// 	return false;
+		// }
+		// $oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
+		// if ( !$oCategory ){
+		// 	return false;
+		// }
+		if ( empty($aData['category']) ){
 			return false;
 		}
-		$oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
 		if ( !$oCategory ){
 			return false;
 		}
