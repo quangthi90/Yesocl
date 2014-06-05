@@ -1,4 +1,4 @@
-	<?php
+<?php
 class ControllerApiSeoUrl extends Controller {
 	public function index() {
 		if ( !empty($this->request->get['_route_']) ){

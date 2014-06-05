@@ -58,7 +58,7 @@ class ModelStockPost extends Model {
 		// Add Image
 		if ( !empty($aData['thumb']) ) {
 			$oPost->setThumb( $aData['thumb'] );
-		}elseif ( !$bIsDuplicate && !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ) {
+		}elseif ( !empty($aData['image_link']) && !empty($aData['extension']) && is_file($aData['image_link']) ) {
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
