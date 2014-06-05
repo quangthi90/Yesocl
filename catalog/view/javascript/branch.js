@@ -212,7 +212,7 @@ function NewsViewModel(options) {
 		}
 		//Close advance box:
 		self.closeAdvancePost();
-
+console.log(ajaxOptions);
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
