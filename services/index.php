@@ -50,7 +50,7 @@ $registry->set('customer', $customer);
 
 // Log 
 // $log = new Log($config->get('config_error_filename'));
-$log = new Log('text.txt');
+$log = new Log('error.txt');
 $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
