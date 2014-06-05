@@ -1,18 +1,16 @@
 {% extends '@template/default/template/common/layout.tpl' %}
-
-{% use '@template/default/template/common/html_block.tpl' %}
-{% use '@template/default/template/post/common/comment_post_detail.tpl' %}
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block stylesheet %}
-    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
-    {{ block('post_common_comment_post_detail_style') }}
+	{{ block('common_ko_template_style') }}
+    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />    
 {% endblock %}
 
 {% block body %}
 <div id="y-content" class="no-scroll">
-	<div id="post-detail">
+	<div id="post-detail" data-bind="with: detailModel">
 		<div id="detail-header">
 			<div class="goback-link fl">
 				<a href="#" class="tooltip-bottom btn-goback" title="Go back" > 
@@ -31,36 +29,37 @@
 						</a> - 
 						<span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
 					</div>
-					<ul class="post-actions fr post-item" data-url="{{ path('PostLike', {post_slug: post.slug, post_type: post_type}) }}" data-is-liked="{{ post.isUserLiked }}">
+					<ul class="post-actions fr post-item">
 						<li>
-							<a class="like-post{% if post.isUserLiked == 1 %} hidden{% endif %}" href="#" title="{% trans %}Like{% endtrans %}">
+							<!-- ko if: isLogged && !postData.isLiked() -->
+							<a class="like-post" title="{% trans %}Like{% endtrans %}" data-bind="click: likePost">
 								<i class="icon-thumbs-up medium-icon"></i>
 		                    </a>
-		                    <span class="unlike-post{% if post.isUserLiked == 0 %} hidden{% endif %}">
-			                    <a href="#" title="{% trans %}Unlike{% endtrans %}">
-			                        <i class="icon-thumbs-down medium-icon"></i>
+		                    <!-- /ko -->
+		                    <!-- ko if: isLogged && postData.isLiked() -->
+		                    <span class="unlike-post" data-bind="click: likePost">
+			                    <a title="{% trans %}Unlike{% endtrans %}">
+			                        <i class="icon-thumbs-down"></i>
 								</a>
 							</span>
+							<!-- /ko -->
 							<span class="number">
-								<a class="post-liked-list" href="#" 
-									data-url="{{ path('PostGetLiker', {post_type: post_type, post_slug: post.slug}) }}" 
-									data-like-count="{{ post.like_count }}" 
-									title="View who liked">
-									<d>{{ post.like_count }}</d>
+								<a class="post-liked-list" title="View who liked" data-bind="click: showLikers">
+									<d data-bind="text: postData.likeCount">{{ post.like_count }}</d>
 								</a>
 							</span>
 						</li>
-						<li style="display: none;" class="toggle-comment">
-							<a class="open-comment disabled" href="#" title="{% trans %}Open comment box{% endtrans %}">
-								<i class="icon-comments-alt medium-icon"></i>
+						<li class="toggle-comment">
+							<a class="open-comment" data-bind="click: showComment" title="{% trans %}Open comment box{% endtrans %}">
+								<i class="icon-comments-alt"></i>
 							</a>
-							<span class="number" id="post-detail-comment-number">{{ comments|length }}</span>
+							<span class="number" data-bind="text: postData.commentCount">{{ post.comment_count }}</span>
 						</li>
 						<li>
-							<a class="">
-								<i class="icon-eye-open medium-icon"></i>
+							<a>
+								<i class="icon-eye-open"></i>
 							</a>
-							<span class="number">{{ post.count_viewer }}</span>
+							<span class="number" data-bind="text: postData.countViewer">{{ post.count_viewer }}</span>
 						</li>			
 					</ul>			
 					<div class="clear"></div>	
@@ -72,23 +71,49 @@
 				{{ post.content|raw }}
 			</div>
 			<div id="detail-scroll">
-				<a class="btn-link-round fl" id="detail-first" href="#" style="display: none;">
+				<a class="btn-link-round fl" id="detail-first" style="display: none;">
 					<i class="icon-arrow-left"></i>
 				</a>
 			</div>
-			{% if is_logged() == true %}
-			{{ block('post_common_comment_post_detail') }}
-			{% endif %}
 		</div>
 	</div>
+	{{ block('common_ko_template_comment') }}
+    {{ block('common_ko_template_user_box') }}
 </div>
 {% endblock %}
 
-{% block template %}
-    {{ block('post_common_comment_post_detail_template') }}
-{% endblock %}
-
 {% block javascript %}
-<script type="text/javascript" src="{{ asset_js('detail.js') }}"></script>
-{{ block('post_common_comment_post_detail_javascript') }}
+<script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
+<script type="text/javascript" src="{{ asset_js('ko-detail.js') }}"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var detailInfo = {
+			isLogged : {{ is_logged() }},
+			postData : {
+				id: '{{ post.id|raw }}',
+				slug: '{{ post.slug|raw }}',
+				type: '{{ post.type|raw }}',
+				created: '{{ post.created|raw }}',
+				comment_count: {{ post.comment_count }},
+				like_count: {{ post.like_count }},
+				count_viewer: {{ post.count_viewer }},
+				isLiked: '{{ post.isLiked|raw }}' === '1',
+				category_id: '{{ post.category_id|raw }}',
+				category_slug: '{{ post.category_slug|raw }}',
+				category_name: '{{ post.category_name|raw }}'
+			}
+		};
+		var commentBoxOptions = {
+            Id : "comment-box"
+        };
+        var userBoxOptions = {
+        };
+		var viewModel = {
+			detailModel: new DetailFormView(detailInfo),
+			commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
+            userBoxModel : new UserBoxViewModel(userBoxOptions)
+		};
+		ko.applyBindings(viewModel, document.getElementById(YesGlobal.Configs.defaultBindingElement));
+	});
+</script>
 {% endblock %}
