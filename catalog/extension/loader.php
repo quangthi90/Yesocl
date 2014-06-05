@@ -116,8 +116,8 @@ class ExtensionLoader
     }
 
     public function isLogged(){
-        if ( !$this->customer->isLogged() ) return false;
-        return true;
+        if ( !$this->customer->isLogged() ) return 0;
+        return 1;
     }
 
     public function getFlash( $key ){
