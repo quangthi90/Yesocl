@@ -10,15 +10,14 @@ class ControllerCommonSeoUrl extends Controller {
 			foreach ( $routings as $route => $routing ) {
 				$request_gets = array();
 				$parts = array_filter(explode('/', $routing));
-				
 				if ( count($parts) >= count($_parts) ){
 					$is_url = true;
 					for ( $key = 0; $key < count($parts); $key++ ){
 						$part = $parts[$key];
 						$is_url = true;
-						if ( $_parts[$key] != $part ){
+						if ( empty($_parts[$key]) || $part != $_parts[$key] ){
 							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
-								if ( ($parts[$key+1] && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
+								if ( (!empty($parts[$key+1]) && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
 									unset($parts[$key]);
 									$parts = array_values($parts);
 									$key++;
@@ -34,7 +33,6 @@ class ControllerCommonSeoUrl extends Controller {
 					}
 				}
 				if ( $is_url ){
-					// print($route); exit;
 					$this->request->get = $request_gets;
 					$this->request->get['route'] = $this->config->get('route')[$route];
 					break;

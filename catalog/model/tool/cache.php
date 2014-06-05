@@ -129,7 +129,7 @@ class ModelToolCache extends Model {
 	public function getCachePost($post_id){
 		$path = $this->config->get('post')['default']['cache_link'];
 		
-		$file_name = $post['id'];
+		$file_name = $post_id;
 		
 		return $this->cache->get($file_name, $path);
 	}

@@ -43,7 +43,8 @@ class ControllerCommonHome extends Controller {
 			foreach ($lPosts as $oPost) {
 				$aPost = $oPost->formatToCache();
 
-				if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
+				$aPostLikerIds = $oPost->getLikerIds();
+				if ( !empty($aPostLikerIds) && in_array($this->customer->getId(), $aPostLikerIds) ){
 					$aPost['isUserLiked'] = true;
 				}else{
 					$aPost['isUserLiked'] = false;

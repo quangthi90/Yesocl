@@ -118,7 +118,8 @@ $url = new Url($config->get('config_url'), $config->get('config_use_ssl') ? $con
 $registry->set('url', $url);
 
 // Log 
-$log = new Log($config->get('config_error_filename'));
+// $log = new Log($config->get('config_error_filename'));
+$log = new Log('error.txt');
 $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
@@ -146,9 +147,9 @@ function error_handler($errno, $errstr, $errfile, $errline) {
 		echo '<b>' . $error . '</b>: ' . $errstr . ' in <b>' . $errfile . '</b> on line <b>' . $errline . '</b>';
 	}
 	
-	if ($config->get('config_error_log')) {
+	// if ($config->get('config_error_log')) {
 		$log->write('PHP ' . $error . ':  ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
-	}
+	// }
 
 	return true;
 }

@@ -49,7 +49,8 @@ $customer = new Customer($registry);
 $registry->set('customer', $customer);
 
 // Log 
-$log = new Log($config->get('config_error_filename'));
+// $log = new Log($config->get('config_error_filename'));
+$log = new Log('error.txt');
 $registry->set('log', $log);
 
 function error_handler($errno, $errstr, $errfile, $errline) {
@@ -77,9 +78,9 @@ function error_handler($errno, $errstr, $errfile, $errline) {
 		echo '<b>' . $error . '</b>: ' . $errstr . ' in <b>' . $errfile . '</b> on line <b>' . $errline . '</b>';
 	}
 	
-	if ($config->get('config_error_log')) {
+	// if ($config->get('config_error_log')) {
 		$log->write('PHP ' . $error . ':  ' . $errstr . ' in ' . $errfile . ' on line ' . $errline);
-	}
+	// }
 
 	return true;
 }

@@ -19,7 +19,7 @@
 
 {% block javascript %}
 	{{ block('stock_common_block_news_javascript') }}
-	<script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
+	<script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var newsOptions = {
@@ -45,7 +45,7 @@
 				commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
 				userBoxModel : new UserBoxViewModel(userBoxOptions)
 			};
-			ko.applyBindings(viewModel, document.getElementById('y-main-content'));
+			ko.applyBindings(viewModel, document.getElementById(YesGlobal.Configs.defaultBindingElement));
 		});
 	</script>
 {% endblock %}

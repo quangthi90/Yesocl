@@ -23,7 +23,7 @@
 
 {% block javascript %}
     {{ block('stock_common_block_news_javascript') }}
-    <script type="text/javascript" src="{{ asset_js('market.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             var currUser = JSON.parse('{{ current_user|json_encode()|raw }}');
@@ -70,7 +70,7 @@
                 userBoxModel : new UserBoxViewModel(userBoxOptions),
                 userInfoColumnModel : new UserInfoColumnViewModel(wallUserColumnOptions)
             };
-            ko.applyBindings(viewModel, document.getElementById('y-main-content'));
+            ko.applyBindings(viewModel, document.getElementById(YesGlobal.Configs.defaultBindingElement));
         });
     </script>
 {% endblock %}

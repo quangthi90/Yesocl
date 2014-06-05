@@ -218,7 +218,7 @@ class ModelToolObject extends Model
 
 		// check user liked
 		$aLikerIds = $oPost->getLikerIds();
-		if ( in_array($this->customer->getId(), $aLikerIds) ){
+		if ( !empty($aLikerIds) && in_array($this->customer->getId(), $aLikerIds) ){
 			$aPost['isLiked'] = true;
 		}else{
 			$aPost['isLiked'] = false;
