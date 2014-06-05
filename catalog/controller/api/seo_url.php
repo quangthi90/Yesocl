@@ -19,6 +19,7 @@ class ControllerApiSeoUrl extends Controller {
 				$request_gets = array();
 				$parts = array_filter(explode('/', $routing));
 
+				$is_url = false;
 				if ( count($parts) >= count($_parts) ){
 					$is_url = true;
 					for ( $key = 0; $key < count($parts); $key++ ){
