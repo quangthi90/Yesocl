@@ -33,10 +33,6 @@ class ControllerBranchDetail extends Controller {
 			return false;
 		}
 
-		$aCurrUser = $oCurrUser->formatToCache();
-		$aCurrUser['avatar'] = $this->model_tool_image->getAvatarUser( $aCurrUser['avatar'], $aCurrUser['email'], 150, 150 );
-		$this->data['current_user'] = $aCurrUser;
-
     	// Branch
     	$aBranch = $oBranch->formatToCache();
     	if ( !empty($aBranch['logo']) ){
@@ -45,6 +41,18 @@ class ControllerBranchDetail extends Controller {
 			$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 360, 360 );
 		}
 		$this->data['branch'] = $aBranch;
+
+		// Categories
+		$lCategories = $oBranch->getCategories();
+		$aCategories = array();
+		foreach ( $lCategories as $oCategory ) {
+			$aCategories[] = array(
+				'id' => $oCategory->getId(),
+				'slug' => $oCategory->getSlug(),
+				'name' => $oCategory->getName()
+			);
+		}
+		$this->data['categories'] = $aCategories;
 
 		$this->session->setFlash( 'menu', 'branch' );
 

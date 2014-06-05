@@ -48,57 +48,69 @@
                             {% endif %#}
                         </div>
                     </div>
-                    <div class="mfp-hide y-dlg-container form-advance" data-focus-type="input[type='text']" id="news-advance-post">
+                    <div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="news-advance-post">
                         <div class="y-dlg">
-                            <div class="dlg-title">
-                                <i class="icon-yes"></i>
-                                <span>{% trans %}New post{% endtrans %}</span>
-                                <a title="Close" style="display: inline-block; float: right; margin-right: 10px;" data-bind="click: closeAdvancePost">X</a>
-                            </div>
-                            <div class="dlg-content">
-                                <div class="dlg-column upload-container fl" style="width:28%;">
-                                    <label class="control-label">{% trans %}Choose an image for new post{% endtrans %}</label>
-                                    <input type="hidden" name="img-url" class="img-url" value="" />
-                                    <div class="img-previewer-container" placeholder="{% trans %}Drag an image here{% endtrans %}">
-                                        <p class="drop-zone-show">{% trans %}Drag an image here{% endtrans %}</p>
-                                    </div>
-                                    <div class="y-progress">
-                                        <div class="bar" style="width: 0%;"></div>
-                                    </div>
-                                    <div class="drag-img-upload">
-                                        <a class="btn btn-yes" onclick="$('#img-upload-adv').click() ; return false;">
-                                            <span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
-                                        </a>
-                                        <input type="file" data-no-uniform="true" id="img-upload-adv" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
-                                    </div>
+                                <div class="dlg-title">
+                                    <i class="icon-yes"></i>
+                                    <span class="js-advance-post-title">{% trans %}New post{% endtrans %}</span>
+                                    <a title="Close" style="display: inline-block; float: right; margin-right: 10px;" data-bind="click: closeAdvancePost">X</a>
                                 </div>
-                                <div class="dlg-column fr" style="width:68%;">
-                                    <div class="alert alert-error top-warning hidden">{% trans %}Warning{% endtrans %}!!</div>
-                                    <div class="control-group">
-                                        <label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
-                                        <div class="controls">
-                                            <input placeholder="Your title" type="text" name="title" class="post-title-input" style="width: 98%;" />
+                                <div class="dlg-content">
+                                    <div class="dlg-column upload-container fl" style="width:28%;">
+                                        <label class="control-label">{% trans %}Choose an image for new post{% endtrans %}</label>
+                                        <input type="hidden" name="img-url" class="img-url" value="" />
+                                        <div class="img-previewer-container" placeholder="{% trans %}Drag an image here{% endtrans %}">
+                                            <p class="drop-zone-show">{% trans %}Drag an image here{% endtrans %}</p>
+                                        </div>
+                                        <div class="y-progress">
+                                            <div class="bar" style="width: 0%;"></div>
+                                        </div>
+                                        <div class="drag-img-upload">
+                                            <a href="#" class="btn btn-yes" onclick="$('#img-upload-adv').click() ; return false;">
+                                                <span><i class="icon-upload"></i> {% trans %}Choose image{% endtrans %}</span>
+                                            </a>
+                                            <input type="file" data-no-uniform="true" id="img-upload-adv" class="img-upload" title="Choose image to upload" name="files[]" data-url="{{ path('UploadFile') }}" />
                                         </div>
                                     </div>
-                                    <div class="control-group">
-                                        <label for="title" class="control-label">{% trans %}Stock tag{% endtrans %}</label>
-                                        <div class="controls">
-                                            <input type="hidden" multiple class="autocomplete-tag-input" data-bind="autoCompleteTag: true" style="width: 100%;"/>
+                                    <div class="dlg-column fr" style="width:68%;">
+                                        <div class="alert alert-error top-warning hidden">{% trans %}Warning{% endtrans %}!!</div>
+                                        <div class="control-group">
+                                            <label for="title" class="control-label">{% trans %}Title{% endtrans %}</label>
+                                            <div class="controls">
+                                                <input class="post-title-input" placeholder="Your title" type="text" name="title"
+                                                    style="width: 98%;" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="description" class="control-label">{% trans %}Description{% endtrans %}</label>
+                                            <div class="controls">
+                                                <textarea class="post-title-input" placeholder="Your description" type="text" name="description" style="width: 98%; height: 40px; resize: none;" max-length="200"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="category-branch" class="control-label">{% trans %}Category{% endtrans %}</label>
+                                            <div class="controls">
+                                                <select class="post-title-input" name="category_slug" style="width: 99%;height: 30px;font-size: 13px;">
+                                                    {% for category in categories %}
+                                                    <option value="{{ category.slug }}">{{ category.name }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label">{% trans %}Content{% endtrans %}</label>
+                                            <div class="y-editor js-post-content" id="post-adv-editor" data-height="150">
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="control-group">
-                                        <label class="control-label">{% trans %}Content{% endtrans %}</label>
-                                        <div class="y-editor" id="post-adv-editor" data-height="200" ></div>
-                                    </div>
                                 </div>
-                            </div>
-                            <div class="dlg-footer">
-                                <div class="controls">
+                                <div class="dlg-footer">
+                                    <div class="controls">
                                     <a class="btn btn-yes" data-bind="click: saveAdvancePost">{% trans %}Submit{% endtrans %}</a>
                                     <a class="btn btn-yes" data-bind="click: resetAdvancePost">{% trans %}Reset{% endtrans %}</a>
                                     <a class="btn btn-yes" data-bind="click: closeAdvancePost">{% trans %}Close{% endtrans %}</a>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
                     <!-- /ko -->
@@ -233,8 +245,24 @@
     <script type="text/javascript" src="{{ asset_js('branch.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var currUser = JSON.parse('{{ current_user|json_encode()|raw }}');
-            var postType = '{{ post_type }}';
+            var categories = JSON.parse('{{ categories|json_encode()|raw }}');
+            var validCategorySlug = function (slug) {
+                if(slug === null) {
+                    return "Category is required";
+                }else {
+                    var check = false;
+                    $.each(categories, function(index, val) {
+                        if (val.slug === slug) {
+                            return check = true;
+                        }
+                    })
+                    if (!check) {
+                        return "Category is required";
+                    }else {
+                        return "";
+                    }
+                }
+            }
             var postOptions = {
                 Id : "branch-detail",
                 canLoadMore: true,
@@ -253,12 +281,28 @@
                             validationMsgs.push("Content is required");
                         }
                     }
+                    if(postData.description.length === 0) {
+                        validationMsgs.push("Description is required");
+                    }else {
+                        var description = postData.description.replace(new RegExp("&nbsp;", 'g'), "");
+                        description = description.replace(new RegExp("<br>", 'g'), "");
+                        var temp = $("<div></div>");
+                        temp.html(content);
+                        if(temp.html().trim().length === 0){
+                            validationMsgs.push("Description is required");
+                        }
+                    }
+                    var validCategorySlugMsg = validCategorySlug(postData.category_slug);
+                    if (validCategorySlugMsg != "") {
+                        validationMsgs.push(validCategorySlugMsg);
+                    }
+
                     return validationMsgs;
                 },
                 urls : {
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
-                    postNews : { name: "ApiPostPost", params: { slug : currUser.slug, post_type: postType } },
-                    updateNews : { name: "ApiPutPost", params: { post_type : postType } }
+                    postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}' } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : '{{ post_type }}' } }
                 }
             };
             var commentBoxOptions = {

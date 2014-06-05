@@ -194,11 +194,13 @@ function NewsViewModel(options) {
 		if(msgs.length > 0) {
 			return;
 		}
+		var urlOptions = self.urls.postNews.params;
+		urlOptions.slug = post.category_slug;
 		var ajaxOptions = {
-			url: window.yRouting.generate(self.urls.postNews.name, self.urls.postNews.params),
+			url: window.yRouting.generate(self.urls.postNews.name, urlOptions),
 			data: post
 		};
-		var successCallback = function(data){
+		var successCallback = function(data){console.log(data);
 			if(data.success === "ok" && data.post !== null){
 				var newPost = new PostModel(data.post);
 				self.newsList.unshift(newPost);
@@ -366,7 +368,9 @@ function NewsViewModel(options) {
 			title : "",
 			content: "",
 			userTags: [],
-			stockTags: []
+			stockTags: [],
+			description: "",
+			category_slug: ""
 		};
 		var containerElement = null;
 
@@ -375,6 +379,8 @@ function NewsViewModel(options) {
 			containerElement = $("#news-advance-post");
 			post.thumb = containerElement.find("input.img-url").val();
 			post.title = containerElement.find("input.post-title-input").val();
+			post.description = containerElement.find("[name=\'description\']").val();
+			post.category_slug = containerElement.find("[name=\'category_slug\']").val();
 
 			var editorCode = containerElement.find("#post-adv-editor");
 			post.content = editorCode.code();
@@ -384,6 +390,8 @@ function NewsViewModel(options) {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
 			post.content = containerElement.find(".post_input").mentionsInput("getHtmlContent");
+			post.description = containerElement.find("[name=\'description\']").val();
+			post.category_slug = containerElement.find("[name=\'category_slug\']").val();
 
 			var tagInfo = _getTagInfo(containerElement.find(".post_input"));
 			post.userTags = tagInfo.userTags;
