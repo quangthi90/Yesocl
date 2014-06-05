@@ -50,7 +50,7 @@ class ControllerCommonHeader extends Controller {
 
 				$actor = $oNotification->getActor();
 
-				if ( !array_key_exists($actor->getId(), $users) ){
+				if ( !array_key_exists($actor->getId(), $this->data['users']) ){
 					$user = $actor->formatToCache();
 
 					$user['avatar'] = $this->model_tool_image->getAvatarUser( $user['avatar'], $user['email'], 100, 100 );
