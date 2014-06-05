@@ -27,7 +27,7 @@ class ControllerApiSeoUrl extends Controller {
 						$is_url = true;
 						if ( $_parts[$key] && $_parts[$key] != $part ){
 							if ( preg_match('/^{/', $part) && preg_match('/}$/', $part) ){
-								if ( ($parts[$key+1] && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
+								if ( (!empty($parts[$key+1]) && $parts[$key+1] && $parts[$key+1] == $_parts[$key]) || !$_parts[$key] ){
 									unset($parts[$key]);
 									$parts = array_values($parts);
 									$key++;
