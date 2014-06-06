@@ -29,13 +29,13 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var categories = JSON.parse('{{ categories|json_encode()|raw }}');
-            var validCategorySlug = function (slug) {
-                if(slug === null) {
+            var validCategoryId = function (categoryId) {
+                if(categoryId === null) {
                     return "Category is required";
                 }else {
                     var check = false;
                     $.each(categories, function(index, val) {
-                        if (val.slug === slug) {
+                        if (val.id === categoryId) {
                             return check = true;
                         }
                     })
@@ -64,23 +64,38 @@
                             validationMsgs.push("Content is required");
                         }
                     }
-                    if(postData.description.length === 0) {
-                        validationMsgs.push("Description is required");
-                    }else {
-                        var description = postData.description.replace(new RegExp("&nbsp;", 'g'), "");
-                        description = description.replace(new RegExp("<br>", 'g'), "");
-                        var temp = $("<div></div>");
-                        temp.html(content);
-                        if(temp.html().trim().length === 0){
-                            validationMsgs.push("Description is required");
-                        }
-                    }
-                    var validCategorySlugMsg = validCategorySlug(postData.category_slug);
-                    if (validCategorySlugMsg != "") {
-                        validationMsgs.push(validCategorySlugMsg);
+                    var validCategoryIdMsg = validCategoryId(postData.categoryId);
+                    if (validCategoryIdMsg != "") {
+                        validationMsgs.push(validCategoryIdMsg);
                     }
 
                     return validationMsgs;
+                },
+                collectData: function(isAdvance) {
+                    var post = {
+                        isAdvance : isAdvance,
+                        thumb: "",
+                        title : "",
+                        content: "",
+                        categoryId: "",
+                    };
+                    var containerElement = null;
+
+                    var newsContainer = $("#" + self.id());
+                    if(isAdvance){
+                        containerElement = $("#news-advance-post");
+                        post.thumb = containerElement.find("input.img-url").val();
+                        post.title = containerElement.find("input.post-title-input").val();
+
+                        var editorCode = containerElement.find("#post-adv-editor");
+                        post.content = editorCode.code();
+                    }else {
+                        containerElement = newsContainer.find(".form-status");
+                        post.thumb = containerElement.find("input.img-url").val();
+                        post.content = containerElement.find(".post_input").mentionsInput("getHtmlContent");
+                    }
+
+                    return post;
                 },
                 urls : {
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },

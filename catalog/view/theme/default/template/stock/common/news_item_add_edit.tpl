@@ -144,24 +144,18 @@
 					</div>
 				</div>
 				<div class="control-group">
-					<label for="description" class="control-label">{% trans %}Description{% endtrans %}</label>
-					<div class="controls">
-						<textarea class="post-title-input" placeholder="Your description" type="text" name="description" style="width: 98%; height: 40px; resize: none;" max-length="200"></textarea>
-					</div>
-				</div>
-				<div class="control-group">
 					<label for="category-branch" class="control-label">{% trans %}Category{% endtrans %}</label>
 					<div class="controls">
-						<select class="post-title-input" name="category_slug" style="width: 99%;height: 30px;font-size: 13px;">
+						<select class="post-title-input" name="categoryId" style="width: 100%;height: 30px;font-size: 13px;">
 							{% for category in categories %}
-							<option value="{{ category.slug }}">{{ category.name }}</option>
+							<option value="{{ category.id }}">{{ category.name }}</option>
 							{% endfor %}
 						</select>
 					</div>
 				</div>
 				<div class="control-group">
 					<label class="control-label">{% trans %}Content{% endtrans %}</label>
-					<div class="y-editor js-post-content" id="post-adv-editor" data-height="150">
+					<div class="y-editor js-post-content" id="post-adv-editor" data-height="190">
 					</div>
 				</div>
 			</div>
