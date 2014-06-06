@@ -37,8 +37,8 @@ class ControllerApiPost extends Controller {
                 'author_id'     => $this->customer->getId(),
                 'image_link'    => $sImageLink,
                 'extension'     => $sExtension,
-                'stockTags'     => $this->request->post['stockTags'],
-                'userTags'      => $this->request->post['userTags']
+                'stockTags'     => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags'],
+                'userTags'      => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags']
             );
 
             switch ( $this->request->get['post_type'] ) {
@@ -134,15 +134,12 @@ class ControllerApiPost extends Controller {
                 'author_id'     => $this->customer->getId(),
                 'image_link'    => $sImageLink,
                 'extension'     => $sExtension,
-                'stockTags'     => $this->request->post['stockTags'],
-                'userTags'      => $this->request->post['userTags']
+                'stockTags'     => empty($this->request->post['stockTags']) ? array() : $this->request->post['stockTags'],
+                'userTags'      => empty($this->request->post['userTags']) ? array() : $this->request->post['userTags']
             );
 
             switch ( $this->request->get['post_type'] ) {
                 case $this->config->get('common')['type']['user']:
-                    $aData = array_merge($aData, array(
-                        'user_slug'     => $this->request->get['slug']
-                    ));
                     break;
 
                 case $this->config->get('common')['type']['branch']:

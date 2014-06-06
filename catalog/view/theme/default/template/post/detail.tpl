@@ -26,8 +26,11 @@
 						</a>
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 							{{ post.author }}
-						</a> - 
+						</a>
 						<span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
+						{% if post.is_owner == false %}
+							<a href="{{ post.owner.href }}">{{ post.owner.username }}</a>
+						{% endif  %}						
 					</div>
 					<ul class="post-actions fr post-item">
 						<li>
