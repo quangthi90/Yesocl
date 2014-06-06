@@ -483,6 +483,8 @@ function NewsViewModel(options) {
 	self.isLoadingMore = ko.observable(false);
 	self.hasNewPost = ko.observable(options.hasNewPost || false);
 	self.validate = options.validate || null;
+	self.getAdditionalInfo = options.getAdditionalInfo || null;
+	self.clearData = options.clearData || null;
 	self.urls = options.urls || [];
 	self.currentPost = ko.observable(null);
 	var mainContent = $("#y-main-content");
@@ -742,6 +744,10 @@ function NewsViewModel(options) {
 			containerElement.find(".img-previewer-container").html("");
 			containerElement.find(".post_input").mentionsInput("reset");
 		}
+
+		if(self.clearData && typeof self.clearData === "function"){
+			self.clearData();
+		}
 	}
 
 	function _fillInDataForEdit(post) {
@@ -845,6 +851,13 @@ function NewsViewModel(options) {
 			var tagInfo = _getTagInfo(containerElement.find(".post_input"));
 			post.userTags = tagInfo.userTags;
 			post.stockTags = tagInfo.stockTags;
+		}
+
+		if(self.getAdditionalInfo && typeof self.getAdditionalInfo === "function"){
+			var info = self.getAdditionalInfo();
+			if(info){
+				$.extend(post, info);
+			}
 		}
 
 		return post;
