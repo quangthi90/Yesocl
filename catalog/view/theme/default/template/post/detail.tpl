@@ -28,7 +28,7 @@
 							{{ post.author }}
 						</a>
 						<span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
-						{% if post.owner is not empty %}
+						{% if post.is_owner == false %}
 							<a href="{{ post.owner.href }}">{{ post.owner.username }}</a>
 						{% endif  %}						
 					</div>

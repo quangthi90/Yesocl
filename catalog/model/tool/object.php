@@ -289,6 +289,14 @@ class ModelToolObject extends Model
                 break;
 
             case $this->config->get('common')['type']['stock']:
+            	if ( count($oPost->getStockTags()) > 0 ){
+	            	$aPost['is_owner'] = false;
+	                $aPost['owner'] = array(
+	                    'username' => $oPost->getStockTags()[0],
+	                    'href' => $this->path("StockPage", array('stock_code' => $oPost->getStockTags()[0]) )
+	                );
+	            }
+
                 if ( $oPost->getUser()->getId() == $this->customer->getId() ){
                 	$aPost['can_delete'] = true;
                 	$aPost['can_edit'] = true;

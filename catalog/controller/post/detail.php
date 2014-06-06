@@ -22,33 +22,7 @@ class ControllerPostDetail extends Controller {
 
 		$is_user = false;
 
-		switch ($this->request->get['post_type']) {
-			case $this->config->get('post')['type']['branch']:
-				$this->load->model('branch/post');
-				$oPost = $this->model_branch_post->getPost( $this->request->get, true );
-				$this->data['post_type'] = $this->config->get('common')['type']['branch'];
-				break;
-
-			case $this->config->get('post')['type']['user']:
-				$is_user = true;
-				$this->load->model('user/post');
-				$oPost = $this->model_user_post->getPost( $this->request->get, true );
-				$this->data['post_type'] = $this->config->get('common')['type']['user'];
-				break;
-
-			case $this->config->get('post')['type']['stock']:
-				$is_user = false;
-				$this->load->model('stock/post');
-				$oPost = $this->model_stock_post->getPost( $this->request->get, true );
-				$this->data['post_type'] = $this->config->get('common')['type']['stock'];
-				break;
-			
-			default:
-				$oPost = null;
-				break;
-		}
-
-		$sModel = $this->request->get['post_type'] . '/comment';
+		$sModel = $this->request->get['post_type'] . '/post';
         $this->load->model($sModel);
         $this->load->model('tool/object');
 
