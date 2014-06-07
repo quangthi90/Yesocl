@@ -658,6 +658,7 @@ function NewsViewModel(options) {
 			data: post
 		};
 		var successCallback = function(data){
+			console.log(data);
 			if(data.success === "ok" && data.post !== null){
 				var newPost = new PostModel(data.post);
 				self.newsList.unshift(newPost);
@@ -685,7 +686,7 @@ function NewsViewModel(options) {
 			url: window.yRouting.generate(self.urls.updateNews.name, updateOptions),
 			data: post
 		};
-		var successCallback = function(data){console.log(data);
+		var successCallback = function(data){
 			if(data.success === "ok"){
 				self.currentPost().title(data.post.title);
 				self.currentPost().thumb(data.post.thumb ? data.post.thumb + "?" + (new Date().getTime()) : data.post.thumb);
@@ -737,10 +738,7 @@ function NewsViewModel(options) {
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.post-title-input").val("");
 			containerElement.find("#post-adv-editor").code("");
-			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
-			if(tagStockControl.length > 0){
-				tagStockControl.select2("val", "");
-			}
+			containerElement.find("input.autocomplete-tag-input").select2("val", "");
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			containerElement.find("input.img-url").val("");
@@ -774,11 +772,7 @@ function NewsViewModel(options) {
 		}
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
-
-		var tagStockControl = containerElement.find("input.autocomplete-tag-input");
-		if(tagStockControl.length > 0){
-			tagStockControl.select2("val", post.stockTags());
-		}
+		containerElement.find("input.autocomplete-tag-input").select2("val", post.stockTags());
 	}
 
 	function _openAdvancePost (openCallback) {
@@ -849,8 +843,7 @@ function NewsViewModel(options) {
 			var editorCode = containerElement.find("#post-adv-editor");
 			post.content = editorCode.code();
 			post.userTags = editorCode.getTags();
-			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
-			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];
+			post.stockTags = containerElement.find("input.autocomplete-tag-input").select2("val");
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
