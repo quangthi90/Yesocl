@@ -605,7 +605,7 @@ function NewsViewModel(options) {
 					$(this).addClass("loaded");
 					$(this).addClass("adding");
 					$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-					$(this).height(heightContent - heightHeader - 30);
+					$(this).height(heightContent - heightHeader);
 					var postHeader = $(this).children('.post_header');
 					var postBody   = $(this).children('.post_body');
 					var postTitle  = postBody.children('.post_title');
@@ -614,11 +614,11 @@ function NewsViewModel(options) {
 					var imgInTextRaw = postTextRaw.find('img');
 					postBody.height($(this).height() - postHeader.height());
 					if(postTitle.length > 0){
-						postImg.height(postBody.height()*0.6);
+						postImg.css("max-height", postBody.height()*0.6 + "px");
 					}else {
-						postImg.height(postBody.height()*0.7);
+						postImg.css("max-height", postBody.height()*0.7 + "px");
 					}
-					var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+					var maxHeightText = postBody.height() - (postTitle.length > 0 ? postTitle.height() : 30) - postImg.height();
 					postTextRaw.height(Math.floor(maxHeightText/20)*20);
 					if(imgInTextRaw.length > 0) {
 						imgInTextRaw.hide(0);
