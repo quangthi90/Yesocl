@@ -1,5 +1,5 @@
 {% extends '@template/default/template/common/layout.tpl' %}
-{% use '@template/default/template/stock/common/block_news.tpl' %}
+{% use '@template/default/template/branch/common/block_news.tpl' %}
 {% use '@template/default/template/common/ko_template_block.tpl' %}
 
 {% block title %}{{ branch.name }}|{% trans %}Branch Detail Page{% endtrans %}{% endblock %}
@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block datascript %}
-    {{ block('stock_common_block_news_javascript') }}
+    {{ block('branch_common_block_news_javascript') }}
     <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -71,36 +71,18 @@
 
                     return validationMsgs;
                 },
-                collectData: function(isAdvance) {
-                    var post = {
-                        isAdvance : isAdvance,
-                        thumb: "",
-                        title : "",
-                        content: "",
-                        categoryId: "",
+                getAdditionalInfo: function(){
+                    return {
+                        categoryId : $("#news-advance-post [name=\'categoryId\']").val(),
                     };
-                    var containerElement = null;
-
-                    var newsContainer = $("#" + self.id());
-                    if(isAdvance){
-                        containerElement = $("#news-advance-post");
-                        post.thumb = containerElement.find("input.img-url").val();
-                        post.title = containerElement.find("input.post-title-input").val();
-
-                        var editorCode = containerElement.find("#post-adv-editor");
-                        post.content = editorCode.code();
-                    }else {
-                        containerElement = newsContainer.find(".form-status");
-                        post.thumb = containerElement.find("input.img-url").val();
-                        post.content = containerElement.find(".post_input").mentionsInput("getHtmlContent");
-                    }
-
-                    return post;
+                },
+                clearData: function(){
+                    $("#news-advance-post [name=\'categoryId\'] option[value=\'0\']").prop('selected', 'selected');
                 },
                 urls : {
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
-                    postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}' } },
-                    updateNews : { name: "ApiPutPost", params: { post_type : '{{ post_type }}' } }
+                    postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}', slug: '{{ branch_slug }}' } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : '{{ post_type }}',slug: '{{ branch_slug }}' } }
                 }
             };
             var commentBoxOptions = {

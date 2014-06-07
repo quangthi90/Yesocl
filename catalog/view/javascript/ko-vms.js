@@ -658,6 +658,7 @@ function NewsViewModel(options) {
 			data: post
 		};
 		var successCallback = function(data){
+			console.log(data);
 			if(data.success === "ok" && data.post !== null){
 				var newPost = new PostModel(data.post);
 				self.newsList.unshift(newPost);
@@ -666,7 +667,7 @@ function NewsViewModel(options) {
 			if(callback && typeof callback === "function"){
 				callback(data);
 			}
-		}
+		};
 		//Close advance box:
 		self.closeAdvancePost();
 
