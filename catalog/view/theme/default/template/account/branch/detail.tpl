@@ -45,7 +45,7 @@
                         return "";
                     }
                 }
-            }
+            };
             var postOptions = {
                 Id : "branch-detail",
                 canLoadMore: true,

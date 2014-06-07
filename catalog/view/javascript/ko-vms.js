@@ -738,7 +738,10 @@ function NewsViewModel(options) {
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.post-title-input").val("");
 			containerElement.find("#post-adv-editor").code("");
-			containerElement.find("input.autocomplete-tag-input").select2("val", "");
+			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+			if(tagStockControl.length > 0){
+				tagStockControl.select2("val", "");
+			}
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			containerElement.find("input.img-url").val("");
@@ -772,7 +775,11 @@ function NewsViewModel(options) {
 		}
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
-		containerElement.find("input.autocomplete-tag-input").select2("val", post.stockTags());
+
+		var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+		if(tagStockControl.length > 0){
+			tagStockControl.select2("val", post.stockTags());
+		}
 	}
 
 	function _openAdvancePost (openCallback) {
@@ -843,7 +850,8 @@ function NewsViewModel(options) {
 			var editorCode = containerElement.find("#post-adv-editor");
 			post.content = editorCode.code();
 			post.userTags = editorCode.getTags();
-			post.stockTags = containerElement.find("input.autocomplete-tag-input").select2("val");
+			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
