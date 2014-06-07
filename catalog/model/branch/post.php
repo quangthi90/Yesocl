@@ -32,20 +32,20 @@ class ModelBranchPost extends Model {
 		}
 
 		// Check category
-		// if ( empty($aData['cat_slug']) ){
-		// 	return false;
-		// }
-		// $oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
-		// if ( !$oCategory ){
-		// 	return false;
-		// }
-		if ( empty($aData['category']) ){
+		if ( empty($aData['cat_slug']) ){
 			return false;
 		}
-		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+		$oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
 		if ( !$oCategory ){
 			return false;
 		}
+		// if ( empty($aData['category']) ){
+		// 	return false;
+		// }
+		// $oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+		// if ( !$oCategory ){
+		// 	return false;
+		// }
 		$oBranch = $oCategory->getBranch();
 		if ( !$oBranch ){
 			return false;
@@ -63,9 +63,9 @@ class ModelBranchPost extends Model {
 		}
 
 		// Check description
-		if ( empty($aData['description']) ){
-			return false;
-		}
+		// if ( empty($aData['description']) ){
+		// 	return false;
+		// }
 
 		// Check content
 		if ( empty($aData['content']) ){
@@ -81,7 +81,7 @@ class ModelBranchPost extends Model {
 		
 		$oPost = new Post();
 		$oPost->setTitle( $aData['title'] );
-		$oPost->setDescription( $aData['description'] );
+		//$oPost->setDescription( $aData['description'] );
 		$oPost->setContent( $aData['content'] );
 		$oPost->setCategory( $oCategory );
 		$oPost->setBranch( $oBranch );

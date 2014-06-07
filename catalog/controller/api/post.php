@@ -50,8 +50,9 @@ class ControllerApiPost extends Controller {
 
                 case $this->config->get('common')['type']['branch']:
                     $aData = array_merge($aData, array(
-                        'description'   => $this->request->post['description'],
-                        'cat_slug'      => $this->request->get['slug'],
+                        // 'description'   => $this->request->post['description'],
+                        // 'cat_slug'      => $this->request->get['slug'],
+                        'cat_slug'      => $this->request->post['categorySlug'],
                     ));
                     break;
 
@@ -352,10 +353,13 @@ class ControllerApiPost extends Controller {
             $this->error['warning'] = gettext( 'user slug is empty' );
         
         }elseif ( $this->request->get['post_type'] == $this->config->get('common')['type']['branch'] ){
-            if ( empty($this->request->post['description']) || strlen(trim($this->request->post['description'])) == 0 ){
-                $this->error['warning'] = gettext( 'description is empty' );
+            // if ( empty($this->request->post['description']) || strlen(trim($this->request->post['description'])) == 0 ){
+            //     $this->error['warning'] = gettext( 'description is empty' );
             
-            }elseif ( empty($this->request->post['category']) ){
+            // }elseif ( empty($this->request->post['category']) ){
+            //     $this->error['warning'] = gettext( 'category is empty' );
+            // }
+            if ( empty($this->request->post['categorySlug']) ){
                 $this->error['warning'] = gettext( 'category is empty' );
             }
         }

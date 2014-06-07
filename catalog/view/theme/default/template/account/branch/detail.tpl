@@ -29,13 +29,13 @@
     <script type="text/javascript">
         $(document).ready(function() {
             var categories = JSON.parse('{{ categories|json_encode()|raw }}');
-            var validCategoryId = function (categoryId) {
-                if(categoryId === null) {
+            var validCategorySlug = function (categorySlug) {
+                if(categorySlug === null) {
                     return "Category is required";
                 }else {
                     var check = false;
                     $.each(categories, function(index, val) {
-                        if (val.id === categoryId) {
+                        if (val.slug === categorySlug) {
                             return check = true;
                         }
                     })
@@ -64,20 +64,20 @@
                             validationMsgs.push("Content is required");
                         }
                     }
-                    var validCategoryIdMsg = validCategoryId(postData.categoryId);
-                    if (validCategoryIdMsg != "") {
-                        validationMsgs.push(validCategoryIdMsg);
+                    var validCategorySlugMsg = validCategorySlug(postData.categorySlug);
+                    if (validCategorySlugMsg != "") {
+                        validationMsgs.push(validCategorySlugMsg);
                     }
 
                     return validationMsgs;
                 },
                 getAdditionalInfo: function(){
                     return {
-                        categoryId : $("#news-advance-post [name=\'categoryId\']").val(),
+                        categorySlug : $("#news-advance-post [name=\'categorySlug\']").val(),
                     };
                 },
                 clearData: function(){
-                    $("#news-advance-post [name=\'categoryId\'] option[value=\'0\']").prop('selected', 'selected');
+                    $("#news-advance-post [name=\'categorySlug\'] option[value=\'0\']").prop('selected', 'selected');
                 },
                 urls : {
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },

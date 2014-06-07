@@ -658,7 +658,6 @@ function NewsViewModel(options) {
 			data: post
 		};
 		var successCallback = function(data){
-			console.log(data);
 			if(data.success === "ok" && data.post !== null){
 				var newPost = new PostModel(data.post);
 				self.newsList.unshift(newPost);
@@ -686,7 +685,7 @@ function NewsViewModel(options) {
 			url: window.yRouting.generate(self.urls.updateNews.name, updateOptions),
 			data: post
 		};
-		var successCallback = function(data){
+		var successCallback = function(data){console.log(data);
 			if(data.success === "ok"){
 				self.currentPost().title(data.post.title);
 				self.currentPost().thumb(data.post.thumb ? data.post.thumb + "?" + (new Date().getTime()) : data.post.thumb);

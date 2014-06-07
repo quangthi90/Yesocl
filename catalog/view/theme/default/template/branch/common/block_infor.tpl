@@ -61,10 +61,10 @@
 				<div class="control-group">
 					<label for="category-branch" class="control-label">{% trans %}Category{% endtrans %}</label>
 					<div class="controls">
-						<select class="post-title-input" name="categoryId" style="width: 100%;height: 30px;font-size: 13px;">
+						<select class="post-title-input" name="categorySlug" style="width: 100%;height: 30px;font-size: 13px;">
 							<option value="0">{% trans %}Choose category{% endtrans %}</option>
 							{% for category in categories %}
-							<option value="{{ category.id }}">{{ category.name }}</option>
+							<option value="{{ category.slug }}">{{ category.name }}</option>
 							{% endfor %}
 						</select>
 					</div>
