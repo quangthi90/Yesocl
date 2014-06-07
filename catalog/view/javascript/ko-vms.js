@@ -659,7 +659,6 @@ function NewsViewModel(options) {
 			data: post
 		};
 		var successCallback = function(data){
-			console.log(data);
 			if(data.success === "ok" && data.post !== null){
 				var newPost = new PostModel(data.post);
 				self.newsList.unshift(newPost);
@@ -695,6 +694,8 @@ function NewsViewModel(options) {
 				self.currentPost().content(data.post.content);
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);
+				console.log(self.currentPost());
+				console.log(data);
 			}
 			if(callback && typeof callback === "function"){
 				callback(data);
@@ -702,7 +703,7 @@ function NewsViewModel(options) {
 		}
 		//Close advance box:
 		self.closeAdvancePost();
-console.log(ajaxOptions);
+
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}

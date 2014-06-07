@@ -69,8 +69,8 @@
 			</div>
 		</div>
 		<div class="post_body">
-			<!-- ko if: $data.title().length > 0 -->
-			<h4 class="post_title"><a data-bind="link: { text: $data.title, title: $data.title, route: 'PostPage', params: { post_type : $data.type, post_slug: $data.slug } }"></a></h4>
+			<!-- ko if: $data.title -->
+			<h4 class="post_title"><a data-bind="link: { text: $data.title(), title: $data.title(), route: 'PostPage', params: { post_type : $data.type, post_slug: $data.slug } }"></a></h4>
 			<!-- /ko -->
 			<!-- ko if: $data.image -->
 			<div class="post_image">
