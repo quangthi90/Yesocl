@@ -47,7 +47,7 @@ class ModelStockComment extends Model {
 	}
 
 	public function getComment( $idComment ){
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+		$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBy( array(
 			'comments.id' => $idComment
 		));
 
