@@ -156,6 +156,9 @@ a {
   text-decoration: none;
   cursor: pointer !important;
 }
+a.disabled {
+  pointer-events: none;
+}
 a > i,i{
   color: #0E0E0E; 
 }
@@ -3072,7 +3075,8 @@ ul.user_actions li:hover i{
   right: 0px;
   height: 58px;
   background: #ECEBEB;
-  overflow: hidden;  
+  overflow: hidden;
+  z-index: 10;
 }
 #y-logo-no-login {
   float: left;

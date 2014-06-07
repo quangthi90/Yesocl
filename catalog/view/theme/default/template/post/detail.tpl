@@ -13,7 +13,7 @@
 	<div id="post-detail" data-bind="with: detailModel">
 		<div id="detail-header">
 			<div class="goback-link fl">
-				<a href="#" class="tooltip-bottom btn-goback" title="Go back" > 
+				<a class="tooltip-bottom btn-goback" title="Go back" > 
 					<i class="icon-arrow-left medium-icon"></i>					
 				</a>
 			</div>
@@ -27,19 +27,22 @@
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
 							{{ post.author }}
 						</a>
+						<span style="color: #CCC;">&nbsp;|&nbsp;</span>
 						<span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
 						{% if post.is_owner == false %}
+							<span style="color: #CCC;">&nbsp;|&nbsp;</span>
 							<a href="{{ post.owner.href }}">{{ post.owner.username }}</a>
-						{% endif  %}						
+						{% endif  %}					
 					</div>
 					<ul class="post-actions fr post-item">
+						{% if is_logged() == true %}
 						<li>
-							<!-- ko if: isLogged && !postData.isLiked() -->
+							<!-- ko if: !postData.isLiked() -->
 							<a class="like-post" title="{% trans %}Like{% endtrans %}" data-bind="click: likePost">
 								<i class="icon-thumbs-up medium-icon"></i>
 		                    </a>
 		                    <!-- /ko -->
-		                    <!-- ko if: isLogged && postData.isLiked() -->
+		                    <!-- ko if: postData.isLiked() -->
 		                    <span class="unlike-post" data-bind="click: likePost">
 			                    <a title="{% trans %}Unlike{% endtrans %}">
 			                        <i class="icon-thumbs-down"></i>
@@ -56,13 +59,35 @@
 							<a class="open-comment" data-bind="click: showComment" title="{% trans %}Open comment box{% endtrans %}">
 								<i class="icon-comments-alt"></i>
 							</a>
-							<span class="number" data-bind="text: postData.commentCount">{{ post.comment_count }}</span>
+							<span class="number">
+								<d data-bind="text: postData.commentCount">{{ post.comment_count }}</d>
+							</span>
 						</li>
+						{% else %}
 						<li>
-							<a>
+							<a class="disabled">
+								<i class="icon-thumbs-up medium-icon"></i>
+		                    </a>
+							<span class="number">
+								<d>{{ post.like_count }}</d>
+							</span>
+						</li>
+						<li class="toggle-comment">
+							<a class="disabled">
+								<i class="icon-comments-alt"></i>
+							</a>
+							<span class="number">
+								<d>{{ post.comment_count }}</d>
+							</span>
+						</li>
+						{% endif  %}
+						<li>
+							<a class="disabled">
 								<i class="icon-eye-open"></i>
 							</a>
-							<span class="number" data-bind="text: postData.countViewer">{{ post.count_viewer }}</span>
+							<span class="number">
+								<d>{{ post.count_viewer }}</d>
+							</span>
 						</li>			
 					</ul>			
 					<div class="clear"></div>	

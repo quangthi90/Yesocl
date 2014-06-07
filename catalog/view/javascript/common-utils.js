@@ -132,7 +132,7 @@ YesGlobal.Utils = {
         });
     },
     initStockList: function(callback) {
-        if(YesGlobal.Caches.StockList.length > 0){
+        if(YesGlobal.Caches.StockList && YesGlobal.Caches.StockList.length > 0){
             callback(YesGlobal.Caches.StockList);
         }else {
             var ajaxOptions = {
@@ -170,7 +170,7 @@ YesGlobal.Utils = {
         }
     },
     initUserListForTag: function(callback) {
-        if(YesGlobal.Caches.UsersCanTag.length > 0){
+        if(YesGlobal.Caches.UsersCanTag && YesGlobal.Caches.UsersCanTag.length > 0){
             callback(YesGlobal.Caches.UsersCanTag);
         }else {
             var apiUrl = "";
@@ -188,8 +188,12 @@ YesGlobal.Utils = {
             };
             var successCallback = function(data) {
                 if(data.success === "ok") {
-                    YesGlobal.Caches.UsersCanTag = data.users;
-                    callback(data.users);
+                    if(YesGlobal.Caches.CurrentPost == null){
+                        YesGlobal.Caches.UsersCanTag = data.friends;
+                    }else {
+                        YesGlobal.Caches.UsersCanTag = data.users;    
+                    }
+                    callback(YesGlobal.Caches.UsersCanTag);                    
                 } else {
                     callback([]);
                 }

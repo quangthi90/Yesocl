@@ -927,7 +927,7 @@ function CommentBoxViewModel(params){
 		self.postData = postData;
 		YesGlobal.Caches.CurrentPost = postData;
 		YesGlobal.Caches.UsersCanTag = [];
-		self.commentList.removeAll();
+		self.commentList([]);
 		self.needEffect(false);
 		self.currentPage(1);
 		self.currentTotalComment(0);
@@ -936,7 +936,7 @@ function CommentBoxViewModel(params){
 		if(self.postData.comments.length > 0){
 			ko.utils.arrayForEach(self.postData.comments, function(c){
 				var com = new CommentModel(c);
-				self.commentList.push(com);
+				self.commentList.push(com);		
 			});
 			self.currentPage(self.postData.currentCommentPage());
 			self.currentTotalComment(self.postData.commentCount());
@@ -975,7 +975,9 @@ function CommentBoxViewModel(params){
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	self.closeCommentBox = function(){
+		self.needEffect(false);
 		self.initComment.content("");
+		self.commentList.removeAll();
 		YesGlobal.Caches.CurrentPost = null;
 		YesGlobal.Caches.UsersCanTag = [];
 		_hideCommentBox();
@@ -1141,12 +1143,16 @@ function CommentBoxViewModel(params){
 		}
 	};
 	self.makeDeleteEffect = function(element) {
-		if (element.nodeType === 1 && self.needEffect()) {
-			$(element).addClass("deleting");
-			$(element).fadeOut(1000, function(){
-				$(this).remove();
-			});
-		}
+		if (element.nodeType === 1) {
+			if(self.needEffect()){
+				$(element).addClass("deleting");
+				$(element).fadeOut(1000, function(){
+					$(this).remove();
+				});	
+			}else {
+				$(element).remove();
+			}
+		}		
 	};
 	self.makeAddEffect = function(element) {
 		if(element.nodeType === 1 && self.needEffect()) {
@@ -1309,7 +1315,7 @@ function CommentBoxViewModel(params){
 				});
 			});
 			$(this).on('click', function(){
-				_hideCommentBox();
+				self.closeCommentBox();
 			});
 		});
 	}

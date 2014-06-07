@@ -155,20 +155,20 @@ Class Comment {
 		$this->likerIds = $likerIds;
 	}
 
-	public function setCanDelete( bool $canDelete ){
+	public function setCanDelete( boolean $canDelete ){
 		$this->canDelete = $canDelete;
 	}
 
 	public function getCanDelete(){
-		return (bool)$this->canDelete;
+		return (boolean)$this->canDelete;
 	}
 
-	public function setCanEdit( bool $canEdit ){
+	public function setCanEdit( boolean $canEdit ){
 		$this->canEdit = $canEdit;
 	}
 
 	public function getCanEdit(){
-		return (bool)$this->canEdit;
+		return (boolean)$this->canEdit;
 	}
 
 	public function addUserTag( $userTag ){

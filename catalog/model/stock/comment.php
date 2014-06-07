@@ -1,7 +1,7 @@
 <?php
 use Document\AbsObject\Comment;
 
-class ModelBranchComment extends Model {
+class ModelStockComment extends Model {
 	private $oPost = null;
 
 	public function getComments( $aData = array(), $isReverse = false ){
@@ -17,7 +17,7 @@ class ModelBranchComment extends Model {
 			$aData['start'] = 0;
 		}
 
-		$oPost = $this->dm->createQueryBuilder('Document\Branch\Post')
+		$oPost = $this->dm->createQueryBuilder('Document\Stock\Post')
 			->field('slug')->equals($aData['post_slug'])
 		    ->selectSlice('comments', $aData['start'], $aData['limit'])
 		    ->getQuery()
@@ -46,7 +46,7 @@ class ModelBranchComment extends Model {
 	}
 
 	public function getComment( $idComment ){
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy( array(
+		$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBy( array(
 			'comments.id' => $idComment
 		));
 
@@ -73,7 +73,7 @@ class ModelBranchComment extends Model {
 		if ( empty($aData['post_slug']) ){
 			return false;
 		}
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $aData['post_slug'] );
+		$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBySlug( $aData['post_slug'] );
 		if ( !$oPost ){
 			return false;
 		}
@@ -97,47 +97,17 @@ class ModelBranchComment extends Model {
 		$this->dm->flush();
 
 		// Update cache post for what's new
-		$type = $this->config->get('post')['cache']['branch'];
 		$this->load->model('cache/post');
 		$aData = array(
 			'post_id' => $oPost->getId(),
-			'type' => $type,
-			'type_id' => $oPost->getBranch()->getId(),
+			'type' => $this->config->get('post')['cache']['stock'],
+			'type_id' => $oPost->getStockTags()[0],
 			'view' => 0,
 			'created' => $oComment->getCreated()
 		);
 		$this->model_cache_post->editPost( $aData );
 
 		// Add notification
-        $this->load->model('user/notification');
-        
-        if ( $this->customer->getSlug() != $oPost->getUser()->getSlug() ){
-            $this->model_user_notification->addNotification(
-                $oPost->getUser()->getSlug(),
-                $oUser,
-                $this->config->get('common')['action']['comment'],
-                $oComment->getId(),
-                $oPost->getSlug(),
-                $this->config->get('common')['type']['branch'],
-                $this->config->get('common')['object']['post']
-            );
-        }
-
-        if ( !empty($this->request->post['tags']) ){
-            $aUserSlugs = $this->request->post['tags'];
-
-            foreach ( $aUserSlugs as $sUserSlug ) {
-                $this->model_user_notification->addNotification(
-                    $sUserSlug,
-                    $oUser,
-                    $this->config->get('common')['action']['tag'],
-                    $oComment->getId(),
-                    $oPost->getSlug(),
-                    $this->config->get('common')['type']['branch'],
-                    $this->config->get('common')['object']['comment']
-                );
-            }
-        }
 
         if ( $oComment->getUser()->getId() == $this->customer->getId() ){
         	$oComment->setCanEdit( true );
@@ -150,7 +120,7 @@ class ModelBranchComment extends Model {
 	}
 
 	public function editComment( $idComment, $aData = array() ){
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+		$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBy(array(
 			'comments.id' => $idComment
 		));
 
@@ -173,7 +143,7 @@ class ModelBranchComment extends Model {
 			}
 
 			// Update notification
-			if ( $oComment->getUser()->getId() != $this->customer->getId() ){
+			/*if ( $oComment->getUser()->getId() != $this->customer->getId() ){
 	            $this->load->model('user/notification');
 
 	            if ( in_array($this->customer->getId(), $oComment->getLikerIds()) ){
@@ -194,7 +164,7 @@ class ModelBranchComment extends Model {
 	                    $this->config->get('common')['action']['like']
 	                );
 	            }
-	        }
+	        }*/
 		}
 
 		if ( !empty($aData['content']) && $oComment->getUser()->getId() == $this->customer->getId() ){
@@ -210,7 +180,7 @@ class ModelBranchComment extends Model {
 	}
 
 	public function deleteComment( $idComment, $author_id ){
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBy(array(
+		$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBy(array(
 			'comments.id' => $idComment
 		));
 
@@ -239,7 +209,7 @@ class ModelBranchComment extends Model {
 			return $oPost->getComments()->count();
 		}
 
-		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
+		$oPost = $this->dm->getRepository('Document\Stock\Post')->findOneBySlug( $sPostSlug );
 
 		if ( !$oPost ){
 			return -1;

@@ -146,7 +146,7 @@ class ModelStockPost extends Model {
 			$oPost->setTitle( $aData['title'] );
 		}
 		
-		if ( !empty($addPostata['likerId']) ){
+		if ( !empty($aData['likerId']) ){
 			$likerIds = $oPost->getLikerIds();
 
 			$key = array_search( $aData['likerId'], $likerIds );
@@ -159,8 +159,13 @@ class ModelStockPost extends Model {
 			}
 		}
 
-		$oPost->setStockTags( $aData['stockTags'] );
-		$oPost->setUserTags( $aData['userTags'] );
+		if ( isset($aData['stockTags']) ) {
+			$oPost->setStockTags( $aData['stockTags'] );
+		}
+
+		if ( isset($aData['userTags']) ) {
+			$oPost->setUserTags( $aData['userTags'] );
+		}
 		
 		$this->dm->flush();
 
