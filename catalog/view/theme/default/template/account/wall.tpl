@@ -48,6 +48,14 @@
                     }
                     return validationMsgs;
                 },
+                getAdditionalInfo: function(){
+                    return {
+                        justDemo : "Demo"
+                    };
+                },
+                clearData: function(){
+                    //Clear more data
+                },
                 hasNewPost: true,
                 urls : {
                     loadNews : { name: "ApiGetUserPost",  params: { user_slug : currUser.slug } },

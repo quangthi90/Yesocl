@@ -47,6 +47,14 @@
                     }
                     return validationMsgs;
                 },
+                getAdditionalInfo: function(){
+                    return {
+                        justDemo : "Demo"
+                    };
+                },
+                clearData: function(){
+                    //Clear more data
+                },
                 urls : {
                     loadNews : { name: "ApiGetStockIdeas",  params: { stock_code : stockCode } },
                     postNews : { name: "ApiPostPost", params: { slug : stockCode, post_type: postType } },
