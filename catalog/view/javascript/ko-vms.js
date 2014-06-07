@@ -485,7 +485,7 @@ function NewsViewModel(options) {
 	self.validate = options.validate || null;
 	self.getAdditionalInfo = options.getAdditionalInfo || null;
 	self.clearData = options.clearData || null;
-	self.fillData = options.clearData || null;
+	self.fillData = options.fillData || null;
 	self.urls = options.urls || [];
 	self.currentPost = ko.observable(null);
 	var mainContent = $("#y-main-content");
@@ -786,7 +786,7 @@ function NewsViewModel(options) {
 
 		//Additional option function:
 		if(self.fillData && typeof self.fillData === "function"){
-			self.fillData();
+			self.fillData(post);
 		}
 	}
 
