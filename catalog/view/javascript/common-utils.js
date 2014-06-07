@@ -284,15 +284,28 @@ ko.bindingHandlers.link = {
         var options = valueAccessor();
         var href = window.yRouting.generate(options.route, options.params);
         $(element).attr('href', href);
-        if(options.text){
-            $(element).html(options.text);  
+        var textValue = ko.utils.unwrapObservable(options.text);
+        var titleValue = ko.utils.unwrapObservable(options.title);
+        if(textValue){
+            $(element).html(textValue);
+        }
+        if(titleValue){
+            $(element).attr('title', titleValue);    
         }
         if(options.isNewTab){
             $(element).attr('target', '_blank');
         }
-        if(options.title){
-            $(element).attr('title', options.title);    
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var options = valueAccessor();
+        var textValue = ko.utils.unwrapObservable(options.text);
+        var titleValue = ko.utils.unwrapObservable(options.title);
+        if(textValue){
+            $(element).html(textValue);
         }
+        if(titleValue){
+            $(element).attr('title', titleValue);    
+        }        
     }
 }
 ko.bindingHandlers.timeAgo = {
