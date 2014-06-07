@@ -79,6 +79,9 @@
                 clearData: function(){
                     $("#news-advance-post [name=\'categorySlug\'] option[value=\'0\']").prop('selected', 'selected');
                 },
+                fillData: function(post) {
+                    $("#news-advance-post [name=\'categorySlug\'] option[value=\'" + post.category.slug + "\']").prop('selected', 'selected');
+                },
                 urls : {
                     loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
                     postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}', slug: '{{ branch_slug }}' } },

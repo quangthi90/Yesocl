@@ -702,7 +702,7 @@ function NewsViewModel(options) {
 		}
 		//Close advance box:
 		self.closeAdvancePost();
-
+console.log(ajaxOptions);
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
@@ -775,7 +775,7 @@ function NewsViewModel(options) {
 			imgContainer.find(".drop-zone-show").show(0);
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.img-url").val("");
-		}		
+		}
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
 
@@ -860,7 +860,7 @@ function NewsViewModel(options) {
 			post.userTags = editorCode.getTags();
 
 			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
-			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];		
+			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
@@ -954,7 +954,7 @@ function CommentBoxViewModel(params){
 		if(self.postData.comments.length > 0){
 			ko.utils.arrayForEach(self.postData.comments, function(c){
 				var com = new CommentModel(c);
-				self.commentList.push(com);		
+				self.commentList.push(com);
 			});
 			self.currentPage(self.postData.currentCommentPage());
 			self.currentTotalComment(self.postData.commentCount());
@@ -1166,11 +1166,11 @@ function CommentBoxViewModel(params){
 				$(element).addClass("deleting");
 				$(element).fadeOut(1000, function(){
 					$(this).remove();
-				});	
+				});
 			}else {
 				$(element).remove();
 			}
-		}		
+		}
 	};
 	self.makeAddEffect = function(element) {
 		if(element.nodeType === 1 && self.needEffect()) {
