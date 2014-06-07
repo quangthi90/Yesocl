@@ -1,6 +1,5 @@
 <?php
 use Document\AbsObject\Comment;
-use MongoId;
 
 class ModelStockComment extends Model {
 	private $oPost = null;

@@ -213,7 +213,7 @@ class ControllerApiUser extends Controller {
 
         return $this->response->setOutput( json_encode(array(
             'success' => 'ok',
-            'friends' => $aFriends
+            'friends' => count($aFriends) == 0 ? array() : array_values($aFriends)
         )));
     }
 
