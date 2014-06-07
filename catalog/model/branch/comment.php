@@ -1,6 +1,5 @@
 <?php
 use Document\AbsObject\Comment;
-use MongoId;
 
 class ModelBranchComment extends Model {
 	private $oPost = null;
