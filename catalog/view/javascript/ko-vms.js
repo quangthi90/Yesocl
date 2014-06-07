@@ -485,6 +485,7 @@ function NewsViewModel(options) {
 	self.validate = options.validate || null;
 	self.getAdditionalInfo = options.getAdditionalInfo || null;
 	self.clearData = options.clearData || null;
+	self.fillData = options.clearData || null;
 	self.urls = options.urls || [];
 	self.currentPost = ko.observable(null);
 	var mainContent = $("#y-main-content");
@@ -737,7 +738,11 @@ function NewsViewModel(options) {
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.post-title-input").val("");
 			containerElement.find("#post-adv-editor").code("");
-			containerElement.find("input.autocomplete-tag-input").select2("val", "");
+
+			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+			if(tagStockControl.length > 0){
+				tagStockControl.select2("val", "");
+			}
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			containerElement.find("input.img-url").val("");
@@ -745,6 +750,7 @@ function NewsViewModel(options) {
 			containerElement.find(".post_input").mentionsInput("reset");
 		}
 
+		//Additional option function:
 		if(self.clearData && typeof self.clearData === "function"){
 			self.clearData();
 		}
@@ -768,10 +774,19 @@ function NewsViewModel(options) {
 			imgContainer.find(".drop-zone-show").show(0);
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.img-url").val("");
-		}		
+		}	
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
-		containerElement.find("input.autocomplete-tag-input").select2("val", post.stockTags());
+
+		var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+		if(tagStockControl.length > 0){
+			tagStockControl.select2("val", post.stockTags());
+		}
+
+		//Additional option function:
+		if(self.fillData && typeof self.fillData === "function"){
+			self.fillData();
+		}
 	}
 
 	function _openAdvancePost (openCallback) {
@@ -842,7 +857,8 @@ function NewsViewModel(options) {
 			var editorCode = containerElement.find("#post-adv-editor");
 			post.content = editorCode.code();
 			post.userTags = editorCode.getTags();
-			post.stockTags = containerElement.find("input.autocomplete-tag-input").select2("val");			
+			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];		
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
