@@ -485,6 +485,7 @@ function NewsViewModel(options) {
 	self.validate = options.validate || null;
 	self.getAdditionalInfo = options.getAdditionalInfo || null;
 	self.clearData = options.clearData || null;
+	self.fillData = options.clearData || null;
 	self.urls = options.urls || [];
 	self.currentPost = ko.observable(null);
 	var mainContent = $("#y-main-content");
@@ -605,7 +606,7 @@ function NewsViewModel(options) {
 					$(this).addClass("loaded");
 					$(this).addClass("adding");
 					$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-					$(this).height(heightContent - heightHeader - 30);
+					$(this).height(heightContent - heightHeader);
 					var postHeader = $(this).children('.post_header');
 					var postBody   = $(this).children('.post_body');
 					var postTitle  = postBody.children('.post_title');
@@ -614,11 +615,11 @@ function NewsViewModel(options) {
 					var imgInTextRaw = postTextRaw.find('img');
 					postBody.height($(this).height() - postHeader.height());
 					if(postTitle.length > 0){
-						postImg.height(postBody.height()*0.6);
+						postImg.css("max-height", postBody.height()*0.6 + "px");
 					}else {
-						postImg.height(postBody.height()*0.7);
+						postImg.css("max-height", postBody.height()*0.7 + "px");
 					}
-					var maxHeightText = postBody.height() - postTitle.height() - postImg.height() - 15;
+					var maxHeightText = postBody.height() - (postTitle.length > 0 ? postTitle.height() : 30) - postImg.height();
 					postTextRaw.height(Math.floor(maxHeightText/20)*20);
 					if(imgInTextRaw.length > 0) {
 						imgInTextRaw.hide(0);
@@ -738,7 +739,11 @@ function NewsViewModel(options) {
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.post-title-input").val("");
 			containerElement.find("#post-adv-editor").code("");
-			containerElement.find("input.autocomplete-tag-input").select2("val", "");
+
+			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+			if(tagStockControl.length > 0){
+				tagStockControl.select2("val", "");
+			}
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			containerElement.find("input.img-url").val("");
@@ -746,6 +751,7 @@ function NewsViewModel(options) {
 			containerElement.find(".post_input").mentionsInput("reset");
 		}
 
+		//Additional option function:
 		if(self.clearData && typeof self.clearData === "function"){
 			self.clearData();
 		}
@@ -769,10 +775,19 @@ function NewsViewModel(options) {
 			imgContainer.find(".drop-zone-show").show(0);
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.img-url").val("");
-		}
+		}		
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
-		containerElement.find("input.autocomplete-tag-input").select2("val", post.stockTags());
+
+		var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+		if(tagStockControl.length > 0){
+			tagStockControl.select2("val", post.stockTags());
+		}
+
+		//Additional option function:
+		if(self.fillData && typeof self.fillData === "function"){
+			self.fillData();
+		}
 	}
 
 	function _openAdvancePost (openCallback) {
@@ -843,7 +858,9 @@ function NewsViewModel(options) {
 			var editorCode = containerElement.find("#post-adv-editor");
 			post.content = editorCode.code();
 			post.userTags = editorCode.getTags();
-			post.stockTags = containerElement.find("input.autocomplete-tag-input").select2("val");
+
+			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
+			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];		
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();

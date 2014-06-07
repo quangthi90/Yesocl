@@ -81,5 +81,8 @@
 			<!-- /ko -->
 			<div class="news-short-content" data-bind="html: $data.content()"></div>
 		</div>
+		<!-- ko if: $data.title().length == 0 -->
+		<div class="post_more"><a data-bind="link: { title: 'See more', route: 'PostPage', params: { post_type : $data.type, post_slug: $data.slug } }">See more <i style="margin-left: 3px;" class="icon-double-angle-right"></i></a></div>
+		<!-- /ko -->
 	</div>
 {% endblock %}

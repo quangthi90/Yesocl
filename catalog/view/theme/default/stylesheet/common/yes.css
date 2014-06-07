@@ -1436,6 +1436,34 @@ a.btn-notification:hover .notification-item-name > i {
   width: 100%;
   border: none;
 }
+.post .post_more {
+  position: absolute; 
+  bottom: 0px; 
+  left: 0px; 
+  right: 0px; 
+  text-align: center;
+  border-top: 1px solid #009B77; 
+  background-color: #FBFBFB;
+  padding: 3px 10px;
+  z-index: 1;
+}
+.post .post_more:hover {
+  background-color: #009B77;
+  border-top: none;
+}
+.post .post_more a {
+  color: #555555;
+  font-size: 10px;
+  text-transform: uppercase;
+  display: block;
+}
+.post .post_more:hover a {
+  color: #FFFFFF;
+}
+.post .post_more:hover a i {
+  color: #FFFFFF;
+  margin-left: 5px;
+}
 .post_remove {
   position: absolute;
   right: 2px;
