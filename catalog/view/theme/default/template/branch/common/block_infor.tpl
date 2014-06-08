@@ -70,8 +70,14 @@
 					</div>
 				</div>
 				<div class="control-group">
+					<label for="title" class="control-label">{% trans %}Stock tag{% endtrans %}</label>
+					<div class="controls">
+						<input type="hidden" multiple class="autocomplete-tag-input" data-bind="autoCompleteTag: true" style="width: 100%;"/>
+					</div>
+				</div>
+				<div class="control-group">
 					<label class="control-label">{% trans %}Content{% endtrans %}</label>
-					<div class="y-editor js-post-content" id="post-adv-editor" data-height="190">
+					<div class="y-editor js-post-content" id="post-adv-editor" data-height="150">
 					</div>
 				</div>
 			</div>
