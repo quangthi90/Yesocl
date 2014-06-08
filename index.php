@@ -220,5 +220,9 @@ if ( isset($request->get['route']) ){
 $controller->dispatch($action, new Action('error/not_found'));
 
 // Output
-$response->output();
+try {
+    $response->output();
+} catch (Exception $e) {
+    var_dump($e->getMessage());
+}
 ?>
