@@ -100,6 +100,10 @@ class ModelBranchPost extends Model {
 			}
 		}
 
+		if ( !empty($aData['stockTags']) ){
+			$oPost->setStockTags( $aData['stockTags'] );
+		}
+
 		$this->dm->persist( $oPost );
 
 		$this->dm->flush();
@@ -193,6 +197,10 @@ class ModelBranchPost extends Model {
 				unset($likerIds[$key]);
 				$oPost->setLikerIds( $likerIds );
 			}
+		}
+
+		if ( !empty($aData['stockTags']) ){
+			$oPost->setStockTags( $aData['stockTags'] );
 		}
 
 		$this->dm->flush();

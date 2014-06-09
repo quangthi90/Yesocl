@@ -696,8 +696,6 @@ function NewsViewModel(options) {
 				self.currentPost().content(data.post.content);
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);
-				console.log(self.currentPost());
-				console.log(data);
 			}
 			if(callback && typeof callback === "function"){
 				callback(data);
