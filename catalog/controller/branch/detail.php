@@ -35,10 +35,10 @@ class ControllerBranchDetail extends Controller {
 
     	// Branch
     	$aBranch = $oBranch->formatToCache();
-    	if ( !empty($aBranch['logo']) ){
+    	if ( !empty($aBranch['logo']) && is_file(DIR_IMAGE . $aBranch['logo']) ){
 			$aBranch['logo'] = $this->model_tool_image->resize( $aBranch['logo'], 360, 360 );
 		}else{
-			$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 360, 360 );
+			$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['image'], 360, 360 );
 		}
 		$this->data['branch'] = $aBranch;
 
