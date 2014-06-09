@@ -175,7 +175,7 @@ class ControllerApiUser extends Controller {
 
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
-            'status' => 3
+            'status' => 4
         )));
 	}
 

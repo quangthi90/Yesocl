@@ -591,11 +591,13 @@ function NewsViewModel(options) {
 		var blockNew = newsContainer.find(".news-creating-container");
 		if(blockNew.length > 0){
 			blockNew.width(ConfigBlock.MIN_FIRST_COLUMN);
-			blockNew.height(heightContent - heightHeader - 30);
+			blockNew.height(heightContent - heightHeader + 30);
 			blockNew.css({
 				'margin-right' : ConfigBlock.MARGIN_POST_PER_COLUMN + 'px',
 				'opacity' : '1'
 			});
+			var input = blockNew.find(".post_input");
+			input.css({ "max-height" : blockNew.height()*4/11 + "px", "padding-bottom" : "30px" });
 		}
 		if(newsItem.length === 0){
 			widthBlock = 120;
