@@ -689,6 +689,9 @@ HorizontalBlock.prototype.LayoutNotificationPage = function() {
 	var heightBlockContent = this.heightMain - 42;
 	this.root.find('.block-content').height(heightBlockContent - 5);			
 	var ntfContainer = this.root.find('.ntf-container');
+	ntfContainer.find(".ntf-content").each(function(){
+		$(this).html($(this).text().trim());
+	});
 	ntfContainer.height(heightBlockContent - 5 - 20);
 	ntfContainer.css('opacity', '1');
 	setTimeout(function(){				
