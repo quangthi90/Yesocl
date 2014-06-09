@@ -9,90 +9,57 @@ class ControllerCommonSearch extends Controller {
 		
 		$this->load->model('tool/image');
 		$this->load->model('tool/search');
+		$this->load->model('tool/object');
 		$this->load->model('user/user');
-		$this->load->model('friend/friend');
-		$this->load->model('friend/follower');
 		$this->load->model('branch/post');
 
-		$this->document->setTitle($this->config->get('config_title'));
-		$this->document->setDescription($this->config->get('config_meta_description'));
-
 		$sKeyword = $this->request->get['keyword'];
-
 		if ( empty($sKeyword) ){
 			return false;
 		}
-
+		// Search with Solr
 		$lSearchUsers = $this->model_tool_search->searchUserByKeyword( array('keyword' => $sKeyword) );
 		$lSearchPosts = $this->model_tool_search->searchPostByKeyword( array('keyword' => $sKeyword) );
+		$lSearchStocks = $this->model_tool_search->searchStockByKeyword( array('keyword' => $sKeyword) );
 
+		// Get list Users
 		$aUserIds = array();
 		foreach ($lSearchUsers as $oSearchUser) {
 			$aUserIds[$oSearchUser->getId()] = $oSearchUser->getId();
 		}
-
 		$lQueryUsers = $this->model_user_user->getUsers( array('user_ids' => $aUserIds) );
-
 		$aUsers = array();
-		$oCurrUser = $this->customer->getUser();
-		$this->data['search_user_ids'] = array();
-
 		foreach ( $lQueryUsers as $oQueryUser ) {
-			if ( $oQueryUser->getId() == $oCurrUser->getId() ){
+			if ( $oQueryUser->getId() == $this->customer->getId() ){
 				continue;
 			}
-
 			$aUser = $oQueryUser->formatToCache();
-
-			$aUser['fr_status'] = $this->model_friend_friend->checkStatus( $oCurrUser->getId(), $oQueryUser->getId() );
-			$aUser['fl_status'] = $this->model_friend_follower->checkStatus( $oCurrUser->getId(), $oQueryUser->getId() );
 			$aUser['avatar'] = $this->model_tool_image->getAvatarUser( $aUser['avatar'], $aUser['email'] );
-			$aUser['gender'] = $oQueryUser->getMeta()->getSex();
-
 			$aUser['metaInfo'] = '';
 			if ( $oQueryUser->getMeta() && $oQueryUser->getMeta()->getLocation() ){
 				$aUser['metaInfo'] = $oQueryUser->getMeta()->getLocation()->getLocation();
 			}
-
-			$aUsers[$aUser['id']] = $aUser;
-			$this->data['search_user_ids'][] = $aUser['id'];
+			$aUsers[] = $aUser;
 		}
-		
-		$this->data['users'] = $aUsers;
 
+		// Get list posts of branch
 		$aBranchPostIds = array();
 		foreach ( $lSearchPosts as $oPost ) {
-			switch ( $oPost->getType() ) {
-				case $this->config->get('post')['cache']['branch']:
-					$aBranchPostIds[$oPost->getId()] = $oPost->getId();
-					break;
-			}
+			$aBranchPostIds[$oPost->getId()] = $oPost->getId();
 		}
-
 		$lBranchPosts = $this->model_branch_post->getPosts( array('post_ids' => $aBranchPostIds) );
+		$aPosts = $this->model_tool_object->formatPosts( $lBranchPosts, false );
 
-		$aPosts = array();
-
-		foreach ( $lBranchPosts as $oPost ) {
-			if ( $oPost->getId() == $this->customer->getId() ){
-				continue;
-			}
-
-			$aPost = $oPost->formatToCache();
-
-			$aPost['metaInfo'] = $aPost['like_count'] . ' likes - ' . $aPost['comment_count'] . ' comments - ' . $aPost['count_viewer'] . ' views';
-			
-			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 100, 100 );
-			}else{
-				$aPost['image'] = null;
-			}
-
-			$aPost['type'] = $this->config->get('post')['type']['branch'];
-
-			$aPosts[$aPost['id']] = $aPost;
+		// Get list stocks
+		$aStocks = array();
+		foreach ( $lSearchStocks as $oStock ) {
+			$aStocks[$oStock->getCode()] = array(
+				'code' => $oStock->getCode(),
+				'name' => $oStock->getName()
+			);
 		}
 
+		$this->data['users'] = $aUsers;
 		$this->data['posts'] = $aPosts;
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/common/search.tpl')) {
