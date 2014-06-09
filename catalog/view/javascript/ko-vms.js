@@ -694,6 +694,11 @@ function NewsViewModel(options) {
 				self.currentPost().thumb(data.post.thumb ? data.post.thumb + "?" + (new Date().getTime()) : data.post.thumb);
 				self.currentPost().image(data.post.image ? data.post.image + "?" + (new Date().getTime()) : data.post.image);
 				self.currentPost().content(data.post.content);
+				if(!self.currentPost().isOwner){
+					self.currentPost().ownerHref(data.post.owner.href);
+					self.currentPost().ownerName(data.post.owner.username);
+				}
+				self.currentPost().category.slug = data.post.category_slug;
 				self.currentPost().stockTags(post.stockTags);
 				self.currentPost().userTags(post.userTags);
 			}

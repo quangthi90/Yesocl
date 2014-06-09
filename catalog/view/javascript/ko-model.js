@@ -27,6 +27,8 @@ function PostModel(data) {
 	that.isEdit = data.can_edit || false;
 	that.isDelete = data.can_delete || false;
 	that.owner = data.owner || {};
+	that.ownerName = ko.observable(that.owner.username || "");
+	that.ownerHref = ko.observable(that.owner.href || "");
 	that.category = data !== undefined ? {
 		id : data.category_id,
 		slug: data.category_slug,
