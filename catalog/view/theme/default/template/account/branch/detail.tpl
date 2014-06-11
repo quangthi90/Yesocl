@@ -92,9 +92,11 @@
                 Id : "comment-box"
             };
             var userBoxOptions = {
+                defaultTitle: '{% trans %}Who liked{% endtrans %}',
             };
             var branchOptions = {
                 branchSlug: '{{ branch_slug }}',
+                userBoxTitle: '{% trans %}Member list{% endtrans %}',
             };
 
             var viewModel = {

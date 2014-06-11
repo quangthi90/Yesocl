@@ -1412,14 +1412,21 @@ function CommentBoxViewModel(params){
 function UserBoxViewModel(params){
 	var self = this;
 
+	self.title = ko.observable(params.title || '');
+	self.defaultTitle = params.defaultTitle;
 	self.controlId = ko.observable(params.Id || "user-list-box-wrapper");
 	self.userList = ko.observableArray([]);
 
-	self.showUserList = function(apiUrl, callback){
+	self.showUserList = function(apiUrl, callback, title){
 		var ajaxOptions = {
 			url : apiUrl
 		};
 		self.userList.removeAll();
+		if (title != '' && title != null && title != undefined) {
+			self.title(title);
+		}else {
+			self.title(self.defaultTitle);
+		}
 		var successCallback = function(data){
 			if(data.success === "ok") {
 				for(var key in data.users){
@@ -1462,6 +1469,7 @@ function UserInfoColumnViewModel(params) {
 
 function BranchInforModel(params){
 	var self = this;
+	self.userBoxTitle = params.userBoxTitle;
 	self.branchSlug = ko.observable(params.branchSlug || '');
 	self.memberCount = ko.observable(params.memberCount || 0);
 
@@ -1475,7 +1483,7 @@ function BranchInforModel(params){
 				if(count !== undefined){
 					self.memberCount(count);
 				}
-			});
+			}, self.userBoxTitle);
 		}else {
 			console.log("Ko content not found !");
 		}
