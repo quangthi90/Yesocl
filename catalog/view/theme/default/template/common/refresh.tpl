@@ -88,9 +88,9 @@
                         return validationMsgs;
                 },
                 urls : {
-                    loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '' } },
-                    postNews : { name: "ApiPostPost", params: { post_type: '', slug: '' } },
-                    updateNews : { name: "ApiPutPost", params: { post_type : '', slug: '' } }
+                    loadNews : { name: "ApiGetFollowPost",  params: {} },
+                    postNews : { name: "ApiPostPost", params: {} },
+                    updateNews : { name: "ApiPutPost", params: {} }
                 }
             };
             var commentBoxOptions = {

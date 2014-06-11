@@ -24,7 +24,7 @@ class ControllerApiUser extends Controller {
 		        )));
 			}
     	}
-		
+
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => 'send request have error'
@@ -53,7 +53,7 @@ class ControllerApiUser extends Controller {
 		        )));
 			}
     	}
-		
+
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => 'cancel request have error'
@@ -72,7 +72,7 @@ class ControllerApiUser extends Controller {
        	}
 
        	$aUserB = $this->model_user_user->getUser( $this->request->get['user_slug'] );
-       	
+
        	if ( !$aUserB ){
        		return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
@@ -89,7 +89,7 @@ class ControllerApiUser extends Controller {
 	            'status' => 2
 	        )));
        	}
-		
+
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => 'confirm make friend have error'
@@ -119,11 +119,11 @@ class ControllerApiUser extends Controller {
 
        	$sUserSlug = $this->customer->getSlug();
 
-       	$result = $this->model_user_user->editUser( 
+       	$result = $this->model_user_user->editUser(
        		$sUserSlug,
        		array(
        			'request_friend' => $oUserFriend->getId()
-       		) 
+       		)
        	);
 
        	if ( !$result ){
@@ -161,7 +161,7 @@ class ControllerApiUser extends Controller {
 	        )));
        	}
 
-       	$result = $this->model_friend_friend->unFriend( 
+       	$result = $this->model_friend_friend->unFriend(
        		$aUser['id'], // User A
        		$this->customer->getId() // User B
        	);
@@ -239,7 +239,7 @@ class ControllerApiUser extends Controller {
             )));
         }
 
-        $result = $this->model_friend_follower->makeFollow( 
+        $result = $this->model_friend_follower->makeFollow(
             $this->customer->getId(), // User A
             $aUser['id'] // User B
         );
@@ -279,7 +279,7 @@ class ControllerApiUser extends Controller {
             )));
         }
 
-        $result = $this->model_friend_follower->unFollow( 
+        $result = $this->model_friend_follower->unFollow(
             $this->customer->getId(), // User A
             $aUser['id'] // User B
         );
@@ -349,6 +349,88 @@ class ControllerApiUser extends Controller {
             'success' => 'ok',
             'posts' => $aPosts,
             'canLoadMore' => $bCanLoadMore
+        )));
+    }
+
+    public function getFollowPosts() {
+      // Get current user
+      $oCurrUser = $this->customer->getUser();
+      if (!$oCurrUser) {
+        return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+      }
+      $aUserIds = array();
+      $aUserIds[] = $oCurrUser->getId();
+
+      // Limit & page
+      if ( !empty($this->request->post['limit']) ){
+        $limit = $this->request->post['limit'];
+      }else{
+        $limit = $this->limit;
+      }
+
+      if ( !empty($this->request->get['page']) ){
+        $page = $this->request->get['page'];
+      }else{
+        $page = 1;
+      }
+
+      // Get list friends
+      $this->load->model( 'friend/friend' );
+      $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+      if ( $oFriends ){
+        $lFriends = $oFriends->getFriends();
+      }else{
+        $lFriends = array();
+      }
+      foreach ( $lFriends as $oFriend ) {
+        $oUser = $oFriend->getUser();
+        $aUserIds[] = $oUser->getId();
+      }
+
+      // Get branchs
+      $this->load->model( 'branch/branch' );
+      $aBranches = $this->model_branch_branch->getAllBranches()->toArray();
+      $aBranchIds = array_keys($aBranches);
+
+      // Get posts
+      $this->load->model( 'cache/post' );
+      $aPosts = $this->model_cache_post->getPosts(array(
+        'limit' => $limit,
+        'start' => ($page - 1)*$limit,
+        'sort' => 'created',
+        'type_ids' => array_merge($aBranchIds, $aUserIds),
+      ));
+
+      if (count($aPosts) < $limit) {
+        $bCanLoadMore = false;
+      }else {
+        $bCanLoadMore = true;
+      }
+
+      // Format Posts
+      $this->load->model( 'tool/image' );
+      foreach ($aPosts as $i => $aPost) {
+        // thumb
+        if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
+          $aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );
+        }else{
+          $aPost['image'] = null;
+        }
+
+        if ( in_array($this->customer->getId(), $aPost['liker_ids']) ){
+          $aPost['isUserLiked'] = true;
+        }else{
+          $aPost['isUserLiked'] = false;
+        }
+      }
+
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'ok',
+        'posts' => $aPosts,
+        'canLoadMore' => $bCanLoadMore
         )));
     }
 }
