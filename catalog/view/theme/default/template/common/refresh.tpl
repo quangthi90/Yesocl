@@ -1,47 +1,111 @@
 {% extends '@template/default/template/common/layout.tpl' %}
-
-{% use '@template/default/template/common/html_block.tpl' %}
-{% use '@template/default/template/post/common/post_item_wall.tpl' %}
-{% use '@template/default/template/post/common/comment_post_list.tpl' %}
+{% use '@template/default/template/stock/common/news_item.tpl' %}
+{% use '@template/default/template/stock/common/news_item_add_edit.tpl' %}
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 
 {% block title %}{% trans %}What's new{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
-    <link href="{{ asset_css('home.css') }}" rel="stylesheet" media="screen" />
-    {{ block('post_common_comment_post_list_style') }}
+{{ block('common_ko_template_style') }}
 {% endblock %}
 
 {% block body %}
-<div id="y-content" class="no-header-fixed">
-    <div id="y-main-content" class="has-horizontal post-per-column">
-        <div class="feed-block block-what-new">
+{% if news_title is not defined %}
+{% set news_title = 'News'|trans %}
+{% endif %}
+{% if news_href is not defined %}
+{% set news_href = path('StockNewsPage') %}
+{% endif %}
+
+<div id="y-content">
+    <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
+        <div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
+            {% if news_title != '' %}
             <div class="block-header">
-                <a class="block-title fl" href="#">
-                    {% trans %}What's new{% endtrans %}
-                </a>  
-                <a class="block-seemore fl" href="#"> 
-                    <i class="icon-angle-right"></i>
-                </a>           
+                <h3 class="block-title"><a href="{{ news_href }}">{{ news_title }} <i class="icon-caret-right"></i></a></h3>
             </div>
+            {% endif %}
             <div class="block-content">
-                {% for post in posts %}
-                    <div class="column">
-                        {% set user = users[post.user_id] %}
-                        {{ block('post_common_post_item_wall') }}
-                    </div>
-                {% endfor %}
+                <!-- ko if: newsList().length > 0 -->
+                <div class="news-container" data-bind="foreach: newsList">
+                    {{ block('stock_common_news_item') }}
+                </div>
+                <!-- ko if: canLoadMore() -->
+                <div class="load-more-wrapper" style="position: absolute; right: 0px; top: 0px; bottom: 0px; width: 10px;">
+                    <!-- ko if: !isLoadingMore() -->
+                    <a title="Load more ..." data-bind="click: loadMore" class="btn-load-more" style="display: block; height: 100%;">
+                        <i class="icon-chevron-right"></i>
+                    </a>
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: isLoadSuccess() && newsList().length == 0 -->
+                <div class="news-container" style="width: 200px;">
+                    <p>No data to display !</p>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: !isLoadSuccess() -->
+                <div class="loading-background">
+                    Loading data ...
+                </div>
+                <!-- /ko -->
             </div>
         </div>
+        {{ block('common_ko_template_comment') }}
+        {{ block('common_ko_template_user_box') }}
     </div>
 </div>
-{{ block('post_common_comment_post_list') }}
 {% endblock %}
 
 {% block template %}
-    {{ block('post_common_comment_post_list_template') }}
 {% endblock %}
 
 {% block javascript %}
-{{ block('post_common_comment_post_list_javascript') }}
-<script type="text/javascript" src="{{ asset_js('libs/modernizr.custom.js') }}"></script>
+{{ block('common_news_item_add_edit_javascript') }}
+<script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
+<script type="text/javascript">
+        $(document).ready(function() {
+            var postOptions = {
+                Id : "whats-new",
+                canLoadMore: true,
+                hasNewPost: true,
+                validate: function(postData){
+                    var validationMsgs = [];
+                        //Validate here, return a collection of error if any
+                        if(postData.content.length === 0) {
+                            validationMsgs.push("Content is required");
+                        }else {
+                            var content = postData.content.replace(new RegExp("&nbsp;", 'g'), "");
+                            content = content.replace(new RegExp("<br>", 'g'), "");
+                            var temp = $("<div></div>");
+                            temp.html(content);
+                            if(temp.html().trim().length === 0){
+                                validationMsgs.push("Content is required");
+                            }
+                        }
+
+                        return validationMsgs;
+                },
+                urls : {
+                    loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
+                    postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}', slug: '{{ branch_slug }}' } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : '{{ post_type }}',slug: '{{ branch_slug }}' } }
+                }
+            };
+            var commentBoxOptions = {
+                Id : "comment-box"
+            };
+            var userBoxOptions = {
+                defaultTitle: '{% trans %}Who liked{% endtrans %}',
+            };
+
+            var viewModel = {
+                newsModel : new NewsViewModel(postOptions),
+                commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
+                userBoxModel : new UserBoxViewModel(userBoxOptions),
+            };
+            ko.applyBindings(viewModel, document.getElementById('y-content'));
+        });
+</script>
 {% endblock %}
