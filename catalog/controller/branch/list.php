@@ -18,10 +18,10 @@ class ControllerBranchList extends Controller {
 			$aBranch = $oBranch->formatToCache();
 
 			// thumb
-			if ( !empty($aBranch['logo']) ){
+			if ( !empty($aBranch['logo']) && is_file(DIR_IMAGE . $aBranch['logo']) ){
 				$aBranch['logo'] = $this->model_tool_image->resize( $aBranch['logo'], 130, 130 );
 			}else{
-				$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 130, 130 );
+				$aBranch['logo'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['image'], 130, 130 );
 			}
 
 			$this->data['branches'][] = $aBranch;
