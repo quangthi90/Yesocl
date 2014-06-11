@@ -228,25 +228,6 @@ YesGlobal.Utils = {
     }
 };
 
-YesGlobal.Controls = {
-    NewsTickerControl: function(options){
-        return new newsTicker(options);
-    }
-};
-
-//Function as Class:
-function newsTicker(options) {
-    var defaults = {
-        container : "#news-ticker-container",
-        url: yRouting.generate("ApiGetLastStockNews", { stock_code: "VNINDEX" }),
-        template: "<ul data-bind='foreach: newsList'></ul>"
-    };
-
-    this.customOptions = $.extend({}, defaults, options);
-}
-//End function as Class:
-
-
 //KO custom handlers:
 ko.bindingHandlers.autoCompleteTag = {
     init: function(element, valueAccessor, allBindingsAccessor) {
