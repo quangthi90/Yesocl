@@ -14,7 +14,7 @@
 {% set news_title = 'News'|trans %}
 {% endif %}
 {% if news_href is not defined %}
-{% set news_href = path('StockNewsPage') %}
+{% set news_href = '#' %}
 {% endif %}
 
 <div id="y-content">
@@ -88,9 +88,9 @@
                         return validationMsgs;
                 },
                 urls : {
-                    loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
-                    postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}', slug: '{{ branch_slug }}' } },
-                    updateNews : { name: "ApiPutPost", params: { post_type : '{{ post_type }}',slug: '{{ branch_slug }}' } }
+                    loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '' } },
+                    postNews : { name: "ApiPostPost", params: { post_type: '', slug: '' } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : '', slug: '' } }
                 }
             };
             var commentBoxOptions = {
