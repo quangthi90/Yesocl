@@ -1,66 +1,114 @@
 {% extends '@template/default/template/common/layout.tpl' %}
-
-{% use '@template/default/template/common/html_block.tpl' %}
-{% use '@template/default/template/post/common/post_status_branch.tpl' %}
-{% use '@template/default/template/post/common/post_item_wall.tpl' %}
-{% use '@template/default/template/post/common/comment_post_list.tpl' %}
+{% use '@template/default/template/branch/common/block_news.tpl' %}
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 
 {% block title %}{{ branch.name }}|{% trans %}Branch Detail Page{% endtrans %}{% endblock %}
 
 {% block stylesheet %}
-    {{ block('post_common_comment_post_list_style') }}
-    {{ block('post_common_post_status_branch_style') }}
+{{ block('common_ko_template_style') }}
 {% endblock %}
 
 {% block body %}
     <div id="y-content">
-        <div id="y-main-content" class="has-horizontal post-per-column" style="width: 9999px;">
-            <div class="feed-block block-post-new">
-                <div class="block-header">
-                    <a class="block-title fl" href="#">
-                        {% trans %}Post{% endtrans %}                   
-                    </a>  
-                    <a class="block-seemore fl" href="#"> 
-                        <i class="icon-angle-right"></i>
-                    </a>           
-                </div>
-                <div class="block-content">
-                    <div class="column has-new-post branch-info">
-                        {% set user = users[current_user_id] %}
-                        {{ block('post_common_post_status_branch') }}
-                    </div>
-                    {% for post in posts %}
-                        <div class="column">
-                            {% set user = users[post.user_id] %}
-                            {{ block('post_common_post_item_wall') }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {{ block('post_common_comment_post_list') }}
+        <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
+            {% set news_title = 'Post'|trans %}
+            {% set news_href = '#' %}
+            {{ block('branch_common_block_news') }}
+            {{ block('common_ko_template_comment') }}
+            {{ block('common_ko_template_user_box') }}
         </div>
     </div>
 {% endblock %}
 
 {% block template %}
-    {{ block('post_common_post_status_branch_html_template') }}
-    {{ block('post_common_comment_post_list_template') }}
 {% endblock %}
 
 {% block datascript %}
-    {{ block('post_common_post_status_branch_html_datascript') }}
+    {{ block('branch_common_block_news_javascript') }}
+    <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
     <script type="text/javascript">
-        var _members = '{{ members|json_encode()|raw }}';
-        window.members = JSON.parse(_members);
-        console.log(window.members);
-        $('.js-branch-member').on('click', function(){
-            window.userFunction.showPopupUserList( window.members );
-            return false;
+        $(document).ready(function() {
+            var categories = JSON.parse('{{ categories|json_encode()|raw }}');
+            var validCategorySlug = function (categorySlug) {
+                if(categorySlug === null) {
+                    return "Category is required";
+                }else {
+                    var check = false;
+                    $.each(categories, function(index, val) {
+                        if (val.slug === categorySlug) {
+                            return check = true;
+                        }
+                    })
+                    if (!check) {
+                        return "Category is required";
+                    }else {
+                        return "";
+                    }
+                }
+            };
+            var postOptions = {
+                Id : "branch-detail",
+                canLoadMore: true,
+                hasNewPost: true,
+                validate: function(postData){
+                    var validationMsgs = [];
+                    //Validate here, return a collection of error if any
+                    if(postData.content.length === 0) {
+                        validationMsgs.push("Content is required");
+                    }else {
+                        var content = postData.content.replace(new RegExp("&nbsp;", 'g'), "");
+                        content = content.replace(new RegExp("<br>", 'g'), "");
+                        var temp = $("<div></div>");
+                        temp.html(content);
+                        if(temp.html().trim().length === 0){
+                            validationMsgs.push("Content is required");
+                        }
+                    }
+                    var validCategorySlugMsg = validCategorySlug(postData.categorySlug);
+                    if (validCategorySlugMsg != "") {
+                        validationMsgs.push(validCategorySlugMsg);
+                    }
+
+                    return validationMsgs;
+                },
+                getAdditionalInfo: function(){
+                    return {
+                        categorySlug : $("#news-advance-post [name=\'categorySlug\']").val(),
+                    };
+                },
+                clearData: function(){
+                    $("#news-advance-post [name=\'categorySlug\'] option[value=\'0\']").prop('selected', 'selected');
+                },
+                fillData: function(post) {
+                    $("#news-advance-post [name=\'categorySlug\'] option[value=\'" + post.category.slug + "\']").prop('selected', 'selected');
+                },
+                urls : {
+                    loadNews : { name: "ApiGetLastBranchNews",  params: { branch_slug : '{{ branch_slug }}' } },
+                    postNews : { name: "ApiPostPost", params: { post_type: '{{ post_type }}', slug: '{{ branch_slug }}' } },
+                    updateNews : { name: "ApiPutPost", params: { post_type : '{{ post_type }}',slug: '{{ branch_slug }}' } }
+                }
+            };
+            var commentBoxOptions = {
+                Id : "comment-box"
+            };
+            var userBoxOptions = {
+                defaultTitle: '{% trans %}Who liked{% endtrans %}',
+            };
+            var branchOptions = {
+                branchSlug: '{{ branch_slug }}',
+                userBoxTitle: '{% trans %}Member list{% endtrans %}',
+            };
+
+            var viewModel = {
+                newsModel : new NewsViewModel(postOptions),
+                commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
+                userBoxModel : new UserBoxViewModel(userBoxOptions),
+                branchInforModel : new BranchInforModel(branchOptions),
+            };
+            ko.applyBindings(viewModel, document.getElementById('y-content'));
         });
     </script>
 {% endblock %}
 
 {% block javascript %}
-{{ block('post_common_comment_post_list_javascript') }}
-{{ block('post_common_post_status_branch_javascript') }}
 {% endblock %}

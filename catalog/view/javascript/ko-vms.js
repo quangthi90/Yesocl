@@ -13,7 +13,7 @@ function ChartViewModel (options) {
 	self.cacheVolumes = [];
 
 	self.zoomChart = function(){
-		_runChartAsZoomOut();		
+		_runChartAsZoomOut();
 	};
 
 	//Private Functions:
@@ -28,7 +28,7 @@ function ChartViewModel (options) {
 		$.ajax({
 			type: 'POST',
 			url: window.yRouting.generate('ApiGetStockExchanges', { stock_id : self.stock().id }),
-			dataType: 'json',			
+			dataType: 'json',
 			success: function(data) {
 				if ( data.success == 'ok' ){
 					// Update Exchanges format for chart
@@ -81,7 +81,7 @@ function ChartViewModel (options) {
 			{
 				name :  self.stock().code,
 				data : self.cacheExchanges,
-				type : 'candlestick',				
+				type : 'candlestick',
 				dataGrouping: {
 	                enabled: false,
 	                dateTimeLabelFormats: {
@@ -108,7 +108,7 @@ function ChartViewModel (options) {
 		};
 	    options.title = {
 	    	text: self.stock().name
-	    };  
+	    };
 
 	    //Run chart:
 		self.chartContainer.highcharts('StockChart', options);
@@ -125,7 +125,7 @@ function ChartViewModel (options) {
 		            text: self.stock().code
 		        },
 		        height: 200,
-		        lineWidth: 2,			        
+		        lineWidth: 2,
 		    }
 		    , {
 		        title: {
@@ -143,7 +143,7 @@ function ChartViewModel (options) {
 				data : self.cacheExchanges,
 				type : 'candlestick',
 				dataGrouping: {
-	                enabled: false,	                
+	                enabled: false,
 	                dateTimeLabelFormats: {
 						minute: ['%A, %b %e, %Y', '%A, %b %e', '-%A, %b %e, %Y']
 					}
@@ -152,13 +152,13 @@ function ChartViewModel (options) {
 			,{
 		        type: "column",
 		        data: self.cacheVolumes,
-		        name: "Volume",						        
+		        name: "Volume",
 		        yAxis: 1,
 		        dataGrouping: {
 					enabled: false
 		       }
 		    }
-	    ];	    
+	    ];
 	    options.plotOptions = {
 	    	candlestick: {
 	    		color: "red",
@@ -264,12 +264,12 @@ function WatchListViewModel(options) {
 	self.addStock = function(wl) {
 		if(wl.isAdded()){
 			return;
-		}		
+		}
 		self.addedWatchList.push(wl);
 		var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code);
 		if(temp){
 			temp.isAdded(true);
-		}		
+		}
 	};
 
 	self.addStockEnter = function(){
@@ -290,13 +290,13 @@ function WatchListViewModel(options) {
 			modal: false,
 			callbacks:{
 				open: function(){
-					if(!_isInitDatasource) {	
+					if(!_isInitDatasource) {
 						_initStockDatasource();
 					}else {
 						setTimeout(function(){
 							$('#wl-query').focus();
 						}, 100);
-					}					
+					}
 				}
 			}
 		});
@@ -322,14 +322,14 @@ function WatchListViewModel(options) {
 		self.addedWatchList.removeAll();
 		//Add new item:
 		self.watchList.unshift(new WatchListItem({isNew : true, stock: null}));
-		$.magnificPopup.close();		
+		$.magnificPopup.close();
 
 		_submitSaveWatchlist(stock_ids);
 	};
 
 	self.suggestWatchList = ko.computed(function(){
 		var search = self.query().toLowerCase();
-		
+
 		if(search.length <= 0) {
 			return [];
 		}
@@ -337,7 +337,7 @@ function WatchListViewModel(options) {
 		var result = ko.utils.arrayFilter(self.cacheStockDatasource(), function(st) {
             return  !st.isAdded() && (st.stock.code.toLowerCase().indexOf(search) >= 0 ||
 					st.stock.name.toLowerCase().indexOf(search) >= 0 ||
-					st.stock.market.name.toLowerCase().indexOf(search) >= 0);	            
+					st.stock.market.name.toLowerCase().indexOf(search) >= 0);
         });
 
         if(result && result.length > 0){
@@ -392,7 +392,7 @@ function WatchListViewModel(options) {
 	}
 
 	function _loadStartUp() {
-		self.isLoading(true);		
+		self.isLoading(true);
 
 		//Add new item:
 		self.watchList.push(new WatchListItem({isNew : true, stock: null}));
@@ -418,7 +418,7 @@ function WatchListViewModel(options) {
 				self.cacheStockDatasource.push(new WatchListItem({
 					stock: stockList[key],
 					isAdded: temp !== null
-				}));							
+				}));
 			}
 		}
 		//Completed:
@@ -432,7 +432,7 @@ function WatchListViewModel(options) {
 			url: window.yRouting.generate('ApiDeleteWatchListItem', {stock_id: wl.stock.id}),
 			dataType: 'json',
 			success: function(data) {
-				if ( data.success == 'ok' ){					
+				if ( data.success == 'ok' ){
 					if(self.cacheStockDatasource().length === 0)
 						return;
 					var temp = _getFirstInArray(self.cacheStockDatasource(), wl.stock.code);
@@ -466,7 +466,7 @@ function WatchListViewModel(options) {
 		var that = this;
 
 		that.isAdded = ko.observable(data.isAdded !== undefined ? data.isAdded : false);
-		that.isNew = data.isNew !== undefined ? data.isNew : false;		
+		that.isNew = data.isNew !== undefined ? data.isNew : false;
 		that.stock = data.stock !== undefined ? data.stock : null;
 	}
 
@@ -489,7 +489,7 @@ function NewsViewModel(options) {
 	self.urls = options.urls || [];
 	self.currentPost = ko.observable(null);
 	var mainContent = $("#y-main-content");
-	var root = $("#y-content");	
+	var root = $("#y-content");
 
 	this.loadMore = function(){
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
@@ -562,7 +562,7 @@ function NewsViewModel(options) {
                 }
             }
         });
-	};	
+	};
 
 	this.resetAdvancePost = function(){
 		_clearAfterAdding(true);
@@ -600,7 +600,7 @@ function NewsViewModel(options) {
 			input.css({ "max-height" : blockNew.height()*4/11 + "px", "padding-bottom" : "30px" });
 		}
 		if(newsItem.length === 0){
-			widthBlock = 120;		
+			widthBlock = 120;
 		}else{
 			newsItem.each(function(){
 				var loaded = $(this).hasClass("loaded");
@@ -632,23 +632,23 @@ function NewsViewModel(options) {
 					    side: 'right',
 					    multiline: true
 					});
-					$(this).css({ 
+					$(this).css({
 						'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px',
 						'margin-bottom' : '0px'
-					});		
+					});
 				}
 				widthBlock += $(this).outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN;
-			});	
-		}		
+			});
+		}
 		newsContainer.width(widthBlock + blockNew.outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN);
 		mainContent.width(oldMainWidth - oldWidth + newsContainer.outerWidth());
 		mainContent.css("display", "block");
 		root.getNiceScroll().onResize();
-		
+
 		//Add effect:
 		setTimeout(function(){
-			newsContainer.find(".adding").removeClass("adding");	
-		}, 1000);		
+			newsContainer.find(".adding").removeClass("adding");
+		}, 1000);
 	}
 
 	function _addPost(post, callback){
@@ -669,7 +669,7 @@ function NewsViewModel(options) {
 			if(callback && typeof callback === "function"){
 				callback(data);
 			}
-		}
+		};
 		//Close advance box:
 		self.closeAdvancePost();
 
@@ -781,7 +781,7 @@ function NewsViewModel(options) {
 			imgContainer.find(".drop-zone-show").show(0);
 			imgContainer.find(".post_image_item").remove();
 			containerElement.find("input.img-url").val("");
-		}	
+		}
 		containerElement.find("input.post-title-input").val(post.title());
 		containerElement.find("#post-adv-editor").code(post.content());
 
@@ -830,11 +830,11 @@ function NewsViewModel(options) {
 			if(data.success === "ok"){
 				ko.utils.arrayForEach(data.posts, function(p){
 					var newsItem = new PostModel(p);
-					self.newsList.push(newsItem);	
-				});				
+					self.newsList.push(newsItem);
+				});
 			}
-			self.isLoadSuccess(true);			
-			_adjustLayout();			
+			self.isLoadSuccess(true);
+			_adjustLayout();
 
 			if(callback && typeof callback === "function"){
 				callback(data);
@@ -864,8 +864,9 @@ function NewsViewModel(options) {
 			var editorCode = containerElement.find("#post-adv-editor");
 			post.content = editorCode.code();
 			post.userTags = editorCode.getTags();
+
 			var tagStockControl = containerElement.find("input.autocomplete-tag-input");
-			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];		
+			post.stockTags = tagStockControl.length > 0 ? tagStockControl.select2("val") : [];
 		}else {
 			containerElement = newsContainer.find(".form-status");
 			post.thumb = containerElement.find("input.img-url").val();
@@ -890,7 +891,7 @@ function NewsViewModel(options) {
 		var tags = $ele.mentionsInput('getMentions');
 		var userTags = [];
 		var stockTags = [];
-		
+
 		ko.utils.arrayForEach(tags, function(t){
 			if(t.type === "contact"){
 				userTags.push(t.id);
@@ -911,8 +912,8 @@ function NewsViewModel(options) {
 				if(root.scrollLeft() + rootWidth === root[0].scrollWidth - 20){
 					self.loadMore();
 				}
-			});	
-		}		
+			});
+		}
 		//Delay for loading news:
 		setTimeout(function(){
 			self.isLoadSuccess(false);
@@ -934,7 +935,7 @@ function CommentBoxViewModel(params){
 	self.enterToSend = ko.observable(true);
 	self.isProcessing = ko.observable(false);
 	self.isLoadingMore = ko.observable(false);
-	self.commentList = ko.observableArray(params.commentList || []);	
+	self.commentList = ko.observableArray(params.commentList || []);
 	self.postData = {};
 	self.currentTotalComment = ko.observable(0);
 	self.initComment = new CommentModel({});
@@ -957,9 +958,9 @@ function CommentBoxViewModel(params){
 
 		//Check whether comment list already loaded:
 		if(self.postData.comments.length > 0){
-			ko.utils.arrayForEach(self.postData.comments, function(c){	
+			ko.utils.arrayForEach(self.postData.comments, function(c){
 				var com = new CommentModel(c);
-				self.commentList.push(com);		
+				self.commentList.push(com);
 			});
 			self.currentPage(self.postData.currentCommentPage());
 			self.currentTotalComment(self.postData.commentCount());
@@ -980,7 +981,7 @@ function CommentBoxViewModel(params){
 		};
 		var successCallback = function(data) {
 			if(data.success === "ok"){
-				ko.utils.arrayForEach(data.comments, function(c){	
+				ko.utils.arrayForEach(data.comments, function(c){
 					var com = new CommentModel(c);
 					self.commentList.push(com);
 					self.postData.comments.push(c);
@@ -988,14 +989,14 @@ function CommentBoxViewModel(params){
 				if(data.comment_count >= 0){
 					self.postData.commentCount(data.comment_count);
 					self.currentTotalComment(data.comment_count);
-				}			
+				}
 				_displayCommentBox();
 			}else {
 				//Show message ...
 			}
 			self.needEffect(true);
 		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);		
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	self.closeCommentBox = function(){
 		self.needEffect(false);
@@ -1060,8 +1061,8 @@ function CommentBoxViewModel(params){
 		YesGlobal.Utils.ajaxCall(ajaxOptions, function(){
 			self.isProcessing(true);
 		}, successCallback, function() {
-			self.isProcessing(false);	
-		});	
+			self.isProcessing(false);
+		});
 	};
 	self.editComment = function(comment){
 		self.currentComment(comment);
@@ -1105,7 +1106,7 @@ function CommentBoxViewModel(params){
 						var successCallback = function(data){
 							if(data.success === "ok") {
 								self.commentList.remove(comment);
-								//Delete from cached data:								
+								//Delete from cached data:
 								var indexDeleted = -1;
 								for (var i = self.postData.comments.length - 1; i >= 0; i--) {
 									if(comment.id === self.postData.comments[i].id){
@@ -1115,7 +1116,7 @@ function CommentBoxViewModel(params){
 								};
 								if(indexDeleted >= 0) {
 									self.postData.comments.splice(indexDeleted, 1);
-								}					
+								}
 								if(data.comment_count >= 0){
 									self.postData.commentCount(data.comment_count);
 									self.currentTotalComment(data.comment_count);
@@ -1124,7 +1125,7 @@ function CommentBoxViewModel(params){
 									self.currentTotalComment(self.commentList().length + data.comment_count);
 								}
 							} else {
-							}					
+							}
 						};
 						YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 					}
@@ -1171,11 +1172,11 @@ function CommentBoxViewModel(params){
 				$(element).addClass("deleting");
 				$(element).fadeOut(1000, function(){
 					$(this).remove();
-				});	
+				});
 			}else {
 				$(element).remove();
 			}
-		}		
+		}
 	};
 	self.makeAddEffect = function(element) {
 		if(element.nodeType === 1 && self.needEffect()) {
@@ -1185,7 +1186,7 @@ function CommentBoxViewModel(params){
 			control.find(".comment-body").animate({ scrollTop: heightCommentList + "px" }, 1000, function(){
 				$(element).fadeIn(1000, function() {
 					$(element).removeClass("adding");
-				});			
+				});
 			});
 		}
 	};
@@ -1308,15 +1309,15 @@ function CommentBoxViewModel(params){
 			}else{
 				//Show message
 			}
-			self.isProcessing(false);			
+			self.isProcessing(false);
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, function(){
 			self.isProcessing(true);
 		}, successCallback, function() {
-			self.isProcessing(false);	
+			self.isProcessing(false);
 		});
 		_closeAdvanceBox();
-	}	
+	}
 	function _displayCommentBox() {
 		var overlay = $("#overlay");
 		var control = $("#" + self.controlId());
@@ -1336,7 +1337,7 @@ function CommentBoxViewModel(params){
 				        });
 				    }
 				});
-			});			
+			});
 			$(this).on('click', function(){
 				self.closeCommentBox();
 			});
@@ -1377,7 +1378,7 @@ function CommentBoxViewModel(params){
 		var tags = $ele.mentionsInput('getMentions');
 		var userTags = [];
 		var stockTags = [];
-		
+
 		ko.utils.arrayForEach(tags, function(t){
 			if(t.type === "contact"){
 				userTags.push(t.id);
@@ -1394,14 +1395,14 @@ function CommentBoxViewModel(params){
 	//CommentModel:
 	function CommentModel(data){
 		var that = this;
-		
-		that.id = data.id || '';		
+
+		that.id = data.id || '';
 		that.created = data.created || '';
 		that.user = data.user || {};
 		that.isOwner = false;
 		that.canDelete = data.can_delete || false;
 		that.canEdit = data.can_edit || false;
-		that.content = ko.observable(data.content || '');		
+		that.content = ko.observable(data.content || '');
 		that.isLiked = ko.observable(data.like_count || false);
 		that.likeCount = ko.observable(data.like_count || 0);
 		that.isInit = ko.observable(true);
@@ -1411,20 +1412,27 @@ function CommentBoxViewModel(params){
 function UserBoxViewModel(params){
 	var self = this;
 
+	self.title = ko.observable(params.title || '');
+	self.defaultTitle = params.defaultTitle;
 	self.controlId = ko.observable(params.Id || "user-list-box-wrapper");
 	self.userList = ko.observableArray([]);
 
-	self.showUserList = function(apiUrl, callback){
+	self.showUserList = function(apiUrl, callback, title){
 		var ajaxOptions = {
 			url : apiUrl
 		};
 		self.userList.removeAll();
+		if (title != '' && title != null && title != undefined) {
+			self.title(title);
+		}else {
+			self.title(self.defaultTitle);
+		}
 		var successCallback = function(data){
 			if(data.success === "ok") {
 				for(var key in data.users){
 					var usrData = data.users[key];
 					self.userList.push(new UserModel(usrData));
-				}				
+				}
 				if(callback !== undefined && typeof callback === "function"){
 					callback(self.userList().length);
 				}
@@ -1457,4 +1465,27 @@ function UserInfoColumnViewModel(params) {
 			'opacity' : '1'
 		})
 	}, 1000);
+}
+
+function BranchInforModel(params){
+	var self = this;
+	self.userBoxTitle = params.userBoxTitle;
+	self.branchSlug = ko.observable(params.branchSlug || '');
+	self.memberCount = ko.observable(params.memberCount || 0);
+
+	self.showMemberList = function(){
+		var context = YesGlobal.Utils.getKoContext();
+		if(context !== null){
+			var apiUrl = yRouting.generate("ApiGetBranchMember", {
+				branch_slug: self.branchSlug()
+			});
+			context.$root.userBoxModel.showUserList(apiUrl, function(count){
+				if(count !== undefined){
+					self.memberCount(count);
+				}
+			}, self.userBoxTitle);
+		}else {
+			console.log("Ko content not found !");
+		}
+	};
 }
