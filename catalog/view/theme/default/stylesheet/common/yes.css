@@ -1652,9 +1652,8 @@ a.btn-notification:hover .notification-item-name > i {
 .post_new  .txt_editor {  
 }
 .txt_editor .post_input {
-  min-height: 70px;
+  min-height: 50px;
   margin: 0px;
-  border:none;
 }
 .post_new .post_new_control  {
     height: 25px;
