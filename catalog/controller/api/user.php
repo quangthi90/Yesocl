@@ -361,6 +361,17 @@ class ControllerApiUser extends Controller {
                 'error' => 'user slug is empty'
             )));
       }
+
+      $this->load->model( 'user/setting' );
+
+      // $this->model_user_setting->TestAddSettings($oCurrUser->getId());
+      // $setting = $this->model_user_setting->getSettingByUser($oCurrUser->getId());
+      // $displaySettings = $setting->getDisplaySettings();
+      // return $this->response->setOutput(json_encode(array(
+      //           'success' => 'not ok',
+      //           'error' => $displaySettings['whatsnew'][0],
+      //       )));
+
       $aUserIds = array();
       $aUserIds[] = $oCurrUser->getId();
 

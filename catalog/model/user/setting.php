@@ -6,7 +6,7 @@ class ModelUserSetting extends Model {
 	 * Get Setting by User
 	 * 2014/04/15
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string User ID
 	 * @return: Object User Setting
 	 */
@@ -56,5 +56,29 @@ class ModelUserSetting extends Model {
 
 		return true;
 	}
+
+	// public function TestAddSettings( $user_id ) {
+	// 	$setting = $this->getSettingByUser( $user_id );
+	// 	if (!$setting) {
+	// 		$setting = new Setting();
+
+	// 		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
+	// 			'id' => $user_id
+	// 		));
+
+	// 		if ($user) {
+	// 			$setting->setUser($user);
+	// 		}
+	// 	}else {
+
+	// 	}
+
+	// 	$setting->setDisplaySettings(array(
+	// 		'whatsnew' => array($this->config->get('post')['cache']['branch'], $this->config->get('post')['cache']['stock'], $this->config->get('post')['cache']['user']),
+	// 		));
+
+	// 	$this->dm->persist($setting);
+	// 	$this->dm->flush();
+	// }
 }
 ?>
