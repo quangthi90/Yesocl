@@ -74,6 +74,7 @@ Class Post extends AbstractPost {
 			'category_slug'	=> $this->category->getSlug(),
 			'category_name'	=> $this->category->getName(),
 			'category_id'	=> $this->category->getId(),
+			'stock_tags'	=> array_values($this->getStockTags()),
 			'type' 			=> 'branch'
 		);
 

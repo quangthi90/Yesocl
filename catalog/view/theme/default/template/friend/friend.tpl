@@ -47,4 +47,19 @@
 
 {% block javascript %}
     {{ block('common_user_block_user_item_javascript') }}
+    <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var currUser = JSON.parse('{{ users[current_user_id]|json_encode()|raw }}');
+
+            var wallUserColumnOptions = {
+                wallUser : currUser
+            };
+
+            var viewModel = {
+                userInfoColumnModel : new UserInfoColumnViewModel(wallUserColumnOptions)
+            };
+            ko.applyBindings(viewModel, document.getElementById(YesGlobal.Configs.defaultBindingElement));
+        });
+    </script>
 {% endblock %}

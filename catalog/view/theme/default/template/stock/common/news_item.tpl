@@ -37,7 +37,7 @@
 					<a class="news-owner" data-bind="link: { text: $data.user.username, title: $data.user.username, route: 'WallPage', params: { user_slug: $data.user.slug } }"></a>
 					<!-- ko if: !$data.isOwner -->
 						<span><i class="icon-caret-right"></i></span>
-						<a data-bind="attr: { href: $data.owner.href, title : $data.owner.username }, text: $data.owner.username"></a>
+						<a data-bind="attr: { href: $data.ownerHref, title : $data.ownerName }, text: $data.ownerName"></a>
 					<!-- /ko -->
 				</div>
 				<div class="post_meta">
@@ -81,5 +81,8 @@
 			<!-- /ko -->
 			<div class="news-short-content" data-bind="html: $data.content()"></div>
 		</div>
+		<!-- ko if: $data.title().length == 0 -->
+		<div class="post_more"><a data-bind="link: { title: 'See more', route: 'PostPage', params: { post_type : $data.type, post_slug: $data.slug } }">See more <i style="margin-left: 3px;" class="icon-double-angle-right"></i></a></div>
+		<!-- /ko -->
 	</div>
 {% endblock %}

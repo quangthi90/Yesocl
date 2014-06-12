@@ -397,7 +397,7 @@ class ModelToolObject extends Model
 		$aPost = $oPost->formatToCache();
 
 		// Check user A post on wall of user B
-		if ( $aPost['type'] == 'user' && $oPost->getOwnerSlug() != $oPost->getUser()->getSlug() ) {
+		if ( $aPost['type'] == 'user' && $oPost->getOwnerSlug() && $oPost->getOwnerSlug() != $oPost->getUser()->getSlug() ) {
 			$aNotis[$oPost->getOwnerSlug()] = array(
 				'user_id' => $oPost->getOwnerSlug(),
 				'actor' => $oPost->getUser(),
@@ -428,6 +428,7 @@ class ModelToolObject extends Model
 		$this->load->model('user/notification');
 		// Disabled all notifications
 		$this->model_user_notification->disabledNotifications( $oPost->getId() );
+		// Add notifications again
 		foreach ( $aNotis as $aNoty ) {
 			$this->model_user_notification->addNotification(
 				$aNoty['user_id'],

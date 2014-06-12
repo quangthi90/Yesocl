@@ -132,7 +132,7 @@ YesGlobal.Utils = {
         });
     },
     initStockList: function(callback) {
-        if(YesGlobal.Caches.StockList.length > 0){
+        if(YesGlobal.Caches.StockList && YesGlobal.Caches.StockList.length > 0){
             callback(YesGlobal.Caches.StockList);
         }else {
             var ajaxOptions = {
@@ -170,7 +170,7 @@ YesGlobal.Utils = {
         }
     },
     initUserListForTag: function(callback) {
-        if(YesGlobal.Caches.UsersCanTag.length > 0){
+        if(YesGlobal.Caches.UsersCanTag && YesGlobal.Caches.UsersCanTag.length > 0){
             callback(YesGlobal.Caches.UsersCanTag);
         }else {
             var apiUrl = "";
@@ -188,8 +188,12 @@ YesGlobal.Utils = {
             };
             var successCallback = function(data) {
                 if(data.success === "ok") {
-                    YesGlobal.Caches.UsersCanTag = data.users;
-                    callback(data.users);
+                    if(YesGlobal.Caches.CurrentPost == null){
+                        YesGlobal.Caches.UsersCanTag = data.friends;
+                    }else {
+                        YesGlobal.Caches.UsersCanTag = data.users;    
+                    }
+                    callback(YesGlobal.Caches.UsersCanTag);                    
                 } else {
                     callback([]);
                 }
@@ -280,15 +284,28 @@ ko.bindingHandlers.link = {
         var options = valueAccessor();
         var href = window.yRouting.generate(options.route, options.params);
         $(element).attr('href', href);
-        if(options.text){
-            $(element).html(options.text);  
+        var textValue = ko.utils.unwrapObservable(options.text);
+        var titleValue = ko.utils.unwrapObservable(options.title);
+        if(textValue){
+            $(element).html(textValue);
+        }
+        if(titleValue){
+            $(element).attr('title', titleValue);    
         }
         if(options.isNewTab){
             $(element).attr('target', '_blank');
         }
-        if(options.title){
-            $(element).attr('title', options.title);    
+    },
+    update: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var options = valueAccessor();
+        var textValue = ko.utils.unwrapObservable(options.text);
+        var titleValue = ko.utils.unwrapObservable(options.title);
+        if(textValue){
+            $(element).html(textValue);
         }
+        if(titleValue){
+            $(element).attr('title', titleValue);    
+        }        
     }
 }
 ko.bindingHandlers.timeAgo = {

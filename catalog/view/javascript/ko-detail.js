@@ -62,6 +62,15 @@ function DetailLayout(el) {
                 });
             });
         });
+
+        var likeBtn = that.root.find(".like-post");
+        var unLikeBtn = that.root.find(".unlike-post");
+        if(likeBtn.length > 0 && likeBtn.hasClass("hidden")){
+            likeBtn.removeClass("hidden");
+        }
+        if(unLikeBtn.length && unLikeBtn.hasClass("hidden") > 0){
+            unLikeBtn.removeClass("hidden");
+        }
     }
 
     attachEvents();

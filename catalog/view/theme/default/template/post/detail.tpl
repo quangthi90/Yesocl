@@ -38,12 +38,12 @@
 						{% if is_logged() == true %}
 						<li>
 							<!-- ko if: !postData.isLiked() -->
-							<a class="like-post" title="{% trans %}Like{% endtrans %}" data-bind="click: likePost">
+							<a class="like-post hidden" title="{% trans %}Like{% endtrans %}" data-bind="click: likePost">
 								<i class="icon-thumbs-up medium-icon"></i>
 		                    </a>
 		                    <!-- /ko -->
 		                    <!-- ko if: postData.isLiked() -->
-		                    <span class="unlike-post" data-bind="click: likePost">
+		                    <span class="unlike-post hidden" data-bind="click: likePost">
 			                    <a title="{% trans %}Unlike{% endtrans %}">
 			                        <i class="icon-thumbs-down"></i>
 								</a>
