@@ -216,13 +216,13 @@ if ( isset($request->get['route']) ){
 	}
 }
 
-// Dispatch
-$controller->dispatch($action, new Action('error/not_found'));
-
 // Output
 try {
-    $response->output();
+	// Dispatch
+	$controller->dispatch($action, new Action('common/warning'));
 } catch (Exception $e) {
-    var_dump($e->getMessage());
+	$session->setFlash( 'message', $e->getMessage() );
+    $controller->dispatch(new Action('common/warning'), new Action('common/warning'));
 }
+$response->output();
 ?>
