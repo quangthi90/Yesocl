@@ -196,8 +196,3 @@
 	</div>
 </div>
 {% endblock %} }
-{% block common_ko_template_news_sticker %}
-<div class="y-control hidden">
-	
-</div>
-{% endblock %} }
