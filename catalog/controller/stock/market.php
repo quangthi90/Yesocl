@@ -22,7 +22,7 @@ class ControllerStockMarket extends Controller {
 		$lMarkets = $this->model_stock_market->getMarkets();
 
 		if ( !$lMarkets ) {
-			return false;
+			throw new Exception(gettext("Market's data is empty!"));
 		}
 
 		$this->data['markets'] = array();
@@ -48,11 +48,10 @@ class ControllerStockMarket extends Controller {
 		if ( !$oStock->getRangePrice()[84] || !$oStock->getRangePrice()[364] ){
 			$this->load->model('stock/exchange');
 			$oStockExchanges = $this->model_stock_exchange->getExchange( array('stock_id' => $oStock->getId()) );
-			if ( !$oStockExchanges ){
-				return false;
+			if ( $oStockExchanges ){
+				$oStockExchanges->calculateRangePrice(84, $this->dm);
+				$oStockExchanges->calculateRangePrice(364, $this->dm);
 			}
-			$oStockExchanges->calculateRangePrice(84, $this->dm);
-			$oStockExchanges->calculateRangePrice(364, $this->dm);
 		}
 		$this->data['stock'] = $oStock->formatToCache();
 

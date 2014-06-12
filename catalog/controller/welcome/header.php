@@ -8,14 +8,6 @@ class ControllerWelcomeHeader extends Controller {
 		} else {
 			$this->data['base'] = HTTP_SERVER;
 		}
-		// print($this->extension->path('FaceBookConnect')); exit;
-		// $this->data['action'] = array(
-		// 	'connect_face'	=> $this->facebook->getLoginUrl( array( 
-		// 		'scope' => 'publish_stream, email',
-		// 		'redirect_uri' => $this->extension->path('FaceBookConnect'),
-		// 		) 
-		// 	)
-		// );
 				
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/welcome/header.tpl')) {
 			$this->template = $this->config->get('config_template') . '/template/welcome/header.tpl';

@@ -12,6 +12,10 @@ class ControllerBranchCategories extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 
+		if ( empty($this->request->get['branch_slug']) ){
+			throw new Exception(gettext("Page not found!"));
+		}
+
 		$this->load->model( 'branch/branch' );
 		$this->load->model( 'branch/category' );
 		$this->load->model( 'branch/post' );
@@ -21,7 +25,7 @@ class ControllerBranchCategories extends Controller {
 		$oBranch = $this->model_branch_branch->getBranch( array('branch_slug' => $this->request->get['branch_slug']) );
 
 		if ( !$oBranch ){
-			return false;
+			throw new Exception(gettext("This Branch doesn't exist in system!"));
 		}
 
 		$lCategories = $this->model_branch_category->getAllCategories( $oBranch->getId() );

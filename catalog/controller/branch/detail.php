@@ -10,8 +10,7 @@ class ControllerBranchDetail extends Controller {
     	$this->document->setTitle($this->language->get('heading_title'));
 
     	if ( empty($this->request->get['branch_slug']) ){
-    		print("Branch slug is empty");
-    		return false;
+    		throw new Exception(gettext("Page not found!"));
     	}
 
     	$this->data['branch_slug'] = $this->request->get['branch_slug'];
@@ -20,18 +19,10 @@ class ControllerBranchDetail extends Controller {
 
     	$oBranch = $oLoggedUser->getBranchBySlug( $this->data['branch_slug'] );
     	if ( !$oBranch ){
-    		print("You not have authentication");
-    		return false;
+    		throw new Exception(gettext("You don't have authentication to enter this Page!"));
     	}
 
     	$this->load->model('tool/image');
-    	$this->load->model('user/user');
-
-    	// Current User
-		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $oLoggedUser->getSlug() ) );
-		if ( !$oCurrUser ){
-			return false;
-		}
 
     	// Branch
     	$aBranch = $oBranch->formatToCache();

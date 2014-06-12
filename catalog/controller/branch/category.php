@@ -8,8 +8,7 @@ class ControllerBranchCategory extends Controller {
 		}
 
 		if ( empty($this->request->get['category_slug']) ){
-			print("Category slug is empty");
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$sSlug = $this->request->get['category_slug'];
@@ -27,8 +26,7 @@ class ControllerBranchCategory extends Controller {
 		$oCategory = $this->model_branch_category->getCategory( array('category_slug' => $sSlug) );
 
 		if ( !$oCategory ){
-			print("This category is not exist");
-			return false;
+			throw new Exception(gettext("This category doesn't exist in system!"));
 		}
 		
 		$this->data['category'] = array(

@@ -8,7 +8,7 @@ class ControllerStockIdeas extends Controller {
 		}
 
 		if ( empty($this->request->get['stock_code']) ) {
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$this->data['stock_code'] = $this->request->get['stock_code'];

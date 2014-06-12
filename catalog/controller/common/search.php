@@ -15,7 +15,7 @@ class ControllerCommonSearch extends Controller {
 
 		$sKeyword = $this->request->get['keyword'];
 		if ( empty($sKeyword) ){
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 		// Search with Solr
 		$lSearchUsers = $this->model_tool_search->searchUserByKeyword( array('keyword' => $sKeyword) );
@@ -94,7 +94,7 @@ class ControllerCommonSearch extends Controller {
 		$sKeyword = $this->request->get['keyword'];
 
 		if ( empty($sKeyword) ){
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$aUsers = $this->model_tool_search->searchUserByKeyword( array('keyword' => $sKeyword) );
@@ -149,7 +149,7 @@ class ControllerCommonSearch extends Controller {
 		$sKeyword = $this->request->get['keyword'];
 
 		if ( empty($sKeyword) ){
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$aPosts = $this->model_tool_search->searchPostByKeyword( array('keyword' => $sKeyword) );

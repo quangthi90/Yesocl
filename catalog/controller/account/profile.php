@@ -198,7 +198,7 @@ class ControllerAccountProfile extends Controller {
 		}
 
 		if ( !$oUser ){
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$aUser = $oUser->formatToCache();

@@ -8,30 +8,30 @@ class ControllerStockStock extends Controller {
 		}
 
 		if ( empty($this->request->get['stock_code']) ){
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
+		$sStockCode = $this->request->get['stock_code'];
 		
 		$this->data['stock_code'] = $this->request->get['stock_code'];
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
 		$this->data['heading_title'] = $this->config->get('config_title');
-
-		if ( empty($this->request->get['stock_code']) ) return false;
-		$sStockCode = $this->request->get['stock_code'];
+		
 
 		$this->load->model('stock/stock');
 		$oStock = $this->model_stock_stock->getStock( array('code' => $sStockCode) );
-		if ( empty($oStock) ) return false;
+		if ( empty($oStock) ) {
+			throw new Exception(gettext("This stock doesn't exist in system!"));
+		}
 
 		if ( !$oStock->getRangePrice()[84] || !$oStock->getRangePrice()[364] ){
 			$this->load->model('stock/exchange');
 			$oStockExchanges = $this->model_stock_exchange->getExchange( array('stock_id' => $oStock->getId()) );
 			if ( !$oStockExchanges ){
-				return false;
+				$oStockExchanges->calculateRangePrice(84, $this->dm);
+				$oStockExchanges->calculateRangePrice(364, $this->dm);
 			}
-			$oStockExchanges->calculateRangePrice(84, $this->dm);
-			$oStockExchanges->calculateRangePrice(364, $this->dm);
 		}
 		$this->data['stock'] = $oStock->formatToCache();
 

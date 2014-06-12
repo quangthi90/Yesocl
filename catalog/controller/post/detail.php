@@ -13,11 +13,11 @@ class ControllerPostDetail extends Controller {
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		if ( empty($this->request->get['post_type']) ){
-			print("post type is empty!"); exit;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		if ( empty($this->request->get['post_slug']) ){
-			print("post slug is empty!"); exit;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$is_user = false;
@@ -32,7 +32,7 @@ class ControllerPostDetail extends Controller {
 		$this->data['post_type'] = $this->request->get['post_type'];
 
 		if ( !$oPost ){
-			print("not found post!"); exit;
+			throw new Exception(gettext("This post is deleted by Author or doesn't exist in system!"));
 		}
 
 		$this->data['post'] = $this->model_tool_object->formatPost( $oPost );

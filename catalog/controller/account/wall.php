@@ -25,9 +25,9 @@ class ControllerAccountWall extends Controller {
 		$this->load->model('tool/object');
 
 		$oCurrUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
-// trigger_error('hello Bommer'); exit;
+
 		if ( !$oCurrUser ){
-			return false;
+			throw new Exception(gettext("This user doesn't exist in system!"));
 		}
 
 		$aCurrUser = $oCurrUser->formatToCache();

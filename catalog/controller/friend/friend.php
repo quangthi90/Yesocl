@@ -24,7 +24,7 @@ class ControllerFriendFriend extends Controller {
 		}
 
 		if ( !$oCurrUser ){
-			return false;
+			throw new Exception(gettext("Page not found!"));
 		}
 
 		$oLoggedUser = $this->customer->getUser();
