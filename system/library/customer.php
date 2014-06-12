@@ -12,7 +12,6 @@ class Customer {
 	private $url;
 	private $friend_requests;
 	private $user;
-	private $settings;
 	
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
@@ -39,17 +38,6 @@ class Customer {
 				$this->avatar = $customer_query->getAvatar();
 				$this->friend_requests = $customer_query->getFriendRequests();
 				$this->user = $customer_query;
-
-				// USER SETTINGS
-				$setting_query = $this->db->getDm()->getRepository('Document\User\Setting')->findOneBy( array(
-					'status' => true,
-					'user.id' => $this->customer_id
-				));
-				if ($setting_query) {
-					$this->settings = $setting_query;
-				}else {
-					$this->settings = null;
-				}
 			} else {
 				$this->logout();
 			}
@@ -214,10 +202,6 @@ class Customer {
 
   	public function getUser(){
   		return $this->user;
-  	}
-
-  	public function getSettings(){
-  		return $this->settings;
   	}
 }
 ?>
