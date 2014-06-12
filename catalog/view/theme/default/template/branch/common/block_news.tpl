@@ -1,7 +1,7 @@
 {% use '@template/default/template/stock/common/news_item.tpl' %}
-{% use '@template/default/template/stock/common/news_item_add_edit.tpl' %}
+{% use '@template/default/template/branch/common/block_infor.tpl' %}
 
-{% block stock_common_block_news %}
+{% block branch_common_block_news %}
 {% if news_title is not defined %}
 {% set news_title = 'News'|trans %}
 {% endif %}
@@ -17,8 +17,8 @@
     {% endif %}
     <div class="block-content">
         <!-- ko if: hasNewPost() -->
-        <div class="news-creating-container fl" style="opacity: 0;">
-            {{ block('common_news_item_add_edit') }}
+        <div class="news-creating-container fl branch-info" style="opacity: 0;">
+            {{ block('branch_common_block_infor') }}
         </div>
         <!-- /ko -->
         <!-- ko if: newsList().length > 0 -->
@@ -35,13 +35,11 @@
         </div>
         <!-- /ko -->
         <!-- /ko -->
-
         <!-- ko if: isLoadSuccess() && newsList().length == 0 -->
         <div class="news-container" style="width: 200px;">
             <p>No data to display !</p>
         </div>
         <!-- /ko -->
-
         <!-- ko if: !isLoadSuccess() -->
         <div class="loading-background">
             Loading data ...
@@ -51,6 +49,6 @@
 </div>
 {% endblock %}
 
-{% block stock_common_block_news_javascript %}
-{{ block('common_news_item_add_edit_javascript') }}
+{% block branch_common_block_news_javascript %}
+{{ block('branch_common_block_infor_javascript') }}
 {% endblock %}

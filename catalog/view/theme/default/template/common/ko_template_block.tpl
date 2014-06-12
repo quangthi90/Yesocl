@@ -125,7 +125,7 @@
 		<div class="y-dlg">
 			<div class="dlg-title">
 		        <i class="icon-yes"></i> 
-		        <span class="js-advance-post-title">{% trans %}Who liked{% endtrans %}</span>
+		        <span class="js-advance-post-title" data-bind="text: title"></span>
 		    </div>
 		    <div class="dlg-content" style="min-height: 300px;max-height: 450px;overflow-y: auto;">
 		    	<!-- ko if: userList().length > 0 -->

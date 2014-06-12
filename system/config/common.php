@@ -30,7 +30,8 @@ $_['notify']['action']['post-wall']				= 'posts on your wall';
 $_['notify']['action']['tag-comment']			= 'mentioned you in a comment';
 $_['notify']['action']['tag-post']				= 'mentioned you in a post';
 
-$_['no_image']['branch']['post']				= 'no-image-branch-post.jpg';
+$_['no_image']['branch']['post']				= 'no-branch-post.jpg';
+$_['no_image']['branch']['image']				= 'no-branch.jpg';
 
 $_['email']['hostname']							= 'ssl://smtp.gmail.com';
 $_['email']['username']							= 'bommerdesign@gmail.com';
