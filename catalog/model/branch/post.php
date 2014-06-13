@@ -6,7 +6,7 @@ class ModelBranchPost extends Model {
 	 * Add Post of Branch to Database
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- array data
 	 * 	{
 	 *		string user slug (author)
@@ -32,20 +32,18 @@ class ModelBranchPost extends Model {
 		}
 
 		// Check category
-		// if ( empty($aData['cat_slug']) ){
-		// 	return false;
-		// }
-		// $oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
-		// if ( !$oCategory ){
-		// 	return false;
-		// }
-		if ( empty($aData['category']) ){
+		if ( !empty($aData['cat_slug']) ){
+			$oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
+		}else if ( !empty($aData['category']) ) {
+			$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+		}else {
 			return false;
 		}
-		$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
+
 		if ( !$oCategory ){
 			return false;
 		}
+
 		$oBranch = $oCategory->getBranch();
 		if ( !$oBranch ){
 			return false;
@@ -63,9 +61,9 @@ class ModelBranchPost extends Model {
 		}
 
 		// Check description
-		if ( empty($aData['description']) ){
-			return false;
-		}
+		// if ( empty($aData['description']) ){
+		// 	return false;
+		// }
 
 		// Check content
 		if ( empty($aData['content']) ){
@@ -78,10 +76,10 @@ class ModelBranchPost extends Model {
 		// $data['description'] = htmlentities( $data['description'] );
 
 		$slug = $this->url->create_slug( $aData['title'] ) . new MongoId();
-		
+
 		$oPost = new Post();
 		$oPost->setTitle( $aData['title'] );
-		$oPost->setDescription( $aData['description'] );
+		//$oPost->setDescription( $aData['description'] );
 		$oPost->setContent( $aData['content'] );
 		$oPost->setCategory( $oCategory );
 		$oPost->setBranch( $oBranch );
@@ -95,15 +93,19 @@ class ModelBranchPost extends Model {
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
 			$path = $folder_link . $oBranch->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $aData['extension'];
 			$dest = DIR_IMAGE . $path;
-			
+
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
 			}
 		}
 
+		if ( !empty($aData['stockTags']) ){
+			$oPost->setStockTags( $aData['stockTags'] );
+		}
+
 		$this->dm->persist( $oPost );
-		
+
 		$this->dm->flush();
 
 		$this->load->model('cache/post');
@@ -115,7 +117,7 @@ class ModelBranchPost extends Model {
 			'created' => $oPost->getCreated()
 		);
 		$this->model_cache_post->addPost( $aData );
-		
+
 		return $oPost;
 	}
 
@@ -123,7 +125,7 @@ class ModelBranchPost extends Model {
 	 * Edit Post of Branch to Database
 	 * 2014/03/02
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Post ID
 	 *	- array data
 	 * 	{
@@ -139,7 +141,7 @@ class ModelBranchPost extends Model {
 	 */
 	public function editPost( $oPost_slug, $aData = array() ) {
 		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $oPost_slug );
-		
+
 		if ( !$oPost ){
 			return false;
 		}
@@ -152,7 +154,7 @@ class ModelBranchPost extends Model {
 			$avatar_name = $this->config->get('post')['default']['avatar_name'];
 			$path = $folder_link . $oBranch->getId() . '/' . $folder_name . '/' . $oPost->getId() . '/' . $avatar_name . '.' . $aData['extension'];
 			$dest = DIR_IMAGE . $path;
-			
+
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
@@ -174,18 +176,21 @@ class ModelBranchPost extends Model {
 			$oPost->setDescription( $aData['description'] );
 		}
 
-		if ( !empty($aData['category']) ){
+		// Check category
+		if ( !empty($aData['cat_slug']) ){
+			$oCategory = $this->dm->getRepository('Document\Branch\Category')->findOneBySlug( $aData['cat_slug'] );
+		}else if ( !empty($aData['category']) ) {
 			$oCategory = $this->dm->getRepository('Document\Branch\Category')->find( $aData['category'] );
-
-			if ( $oCategory ){
-				$oPost->setCategory( $oCategory );
-			}
 		}
-		
+
+		if ( isset($oCategory) && $oCategory ){
+			$oPost->setCategory( $oCategory );
+		}
+
 		if ( !empty($aData['likerId']) ){
 			$likerIds = $oPost->getLikerIds();
 			$key = array_search( $aData['likerId'], $likerIds );
-			
+
 			if ( !$likerIds || $key === false ){
 				$oPost->addLikerId( $aData['likerId'] );
 			}else{
@@ -193,9 +198,13 @@ class ModelBranchPost extends Model {
 				$oPost->setLikerIds( $likerIds );
 			}
 		}
-		
+
+		if ( !empty($aData['stockTags']) ){
+			$oPost->setStockTags( $aData['stockTags'] );
+		}
+
 		$this->dm->flush();
-		
+
 		return $oPost;
 	}
 
@@ -203,7 +212,7 @@ class ModelBranchPost extends Model {
 	 * Delete post
 	 * 2014/02/27
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Post ID
 	 *	- array Thumb
 	 *	- array data
@@ -234,11 +243,11 @@ class ModelBranchPost extends Model {
 			'limit' => 6
 		));
 
-		$this->model_tool_cache->updateLastCategoryPosts( 
-			$this->config->get('post')['type']['branch'], 
-			$oPost->getBranch()->getId(), 
-			$oPost->getCategory()->getId(), 
-			$oPosts 
+		$this->model_tool_cache->updateLastCategoryPosts(
+			$this->config->get('post')['type']['branch'],
+			$oPost->getBranch()->getId(),
+			$oPost->getCategory()->getId(),
+			$oPosts
 		);
 
 		return true;
@@ -310,7 +319,7 @@ class ModelBranchPost extends Model {
 			$branch_id,
 			$category_id
 		);
-		
+
 		if ( count($results) == 0 ){
 			$this->load->model('branch/post');
 			$oPosts = $this->getPosts(array(
@@ -325,7 +334,7 @@ class ModelBranchPost extends Model {
 				$oPosts
 			);
 		}
-		
+
 		return $results;
 	}
 

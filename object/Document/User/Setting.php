@@ -17,6 +17,9 @@ Class Setting {
     /** @MongoDB\ReferenceMany(targetDocument="Document\Stock\Stock") */
     private $stocks = array();
 
+	/** @MongoDB\String */
+	private $displaySettings;
+
     public function getStockById( $idStock ){
     	foreach ( $this->stocks as $oStock ) {
     		if ( $idStock == $oStock->getId() ){
@@ -49,5 +52,24 @@ Class Setting {
 
 	public function getStocks(){
 		return $this->stocks;
+	}
+
+	public function setDisplaySettings( $settings ){
+		if (is_array($settings)) {
+			$this->displaySettings = serialize($settings);
+		}
+	}
+
+	public function addDisplaySetting( $setting ){
+		$settings = $this->getDisplaySettings();
+		if (is_array($settings)) {
+			$this->setDisplaySettings(array_merge($settings, $setting));
+		}else {
+			$this->setDisplaySettings(array_merge($settings, (array)$setting));
+		}
+	}
+
+	public function getDisplaySettings(){
+		return unserialize($this->displaySettings);
 	}
 }

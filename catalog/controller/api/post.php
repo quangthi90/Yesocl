@@ -50,8 +50,9 @@ class ControllerApiPost extends Controller {
 
                 case $this->config->get('common')['type']['branch']:
                     $aData = array_merge($aData, array(
-                        'description'   => $this->request->post['description'],
-                        'cat_slug'      => $this->request->get['slug'],
+                        // 'description'   => $this->request->post['description'],
+                        // 'cat_slug'      => $this->request->get['slug'],
+                        'cat_slug'      => $this->request->post['categorySlug'],
                     ));
                     break;
 
@@ -61,7 +62,7 @@ class ControllerApiPost extends Controller {
                         'stock_code'   => $this->request->get['slug']
                     ));
                     break;
-                
+
                 default:
                     $aData = array();
                     break;
@@ -91,7 +92,7 @@ class ControllerApiPost extends Controller {
                 'post' => $aPost
             )));
         }
-        
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => $this->error['warning']
@@ -144,8 +145,9 @@ class ControllerApiPost extends Controller {
 
                 case $this->config->get('common')['type']['branch']:
                     $aData = array_merge($aData, array(
-                        'description'   => $this->request->post['description'],
-                        'cat_slug'      => $this->request->get['slug'],
+                        // 'description'   => $this->request->post['description'],
+                        // 'cat_slug'      => $this->request->get['slug'],
+                        'cat_slug'      => $this->request->post['categorySlug'],
                     ));
                     break;
 
@@ -154,14 +156,14 @@ class ControllerApiPost extends Controller {
                         'stock_code'   => $this->request->get['slug']
                     ));
                     break;
-                
+
                 default:
                     $aData = array();
                     break;
             }
 
 			$sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
-			$oPost = $this->$sModelLink->editPost( 
+			$oPost = $this->$sModelLink->editPost(
 				$this->request->get['post_slug'],
 				$aData
 			);
@@ -180,7 +182,7 @@ class ControllerApiPost extends Controller {
                 'post' => $aPost
             )));
         }
-        
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => $this->error['warning']
@@ -208,7 +210,7 @@ class ControllerApiPost extends Controller {
         $this->load->model($sModel);
 
         $sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
-        $bResult = $this->$sModelLink->deletePost( 
+        $bResult = $this->$sModelLink->deletePost(
             $this->request->get['post_slug']
         );
 
@@ -217,7 +219,7 @@ class ControllerApiPost extends Controller {
                 'success' => 'not ok'
             )));
         }
-        
+
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok'
         )));
@@ -242,7 +244,7 @@ class ControllerApiPost extends Controller {
 		$this->load->model($sModel);
 
 		$sModelLink = 'model_' . $this->request->get['post_type'] . '_post';
-		$oPost = $this->$sModelLink->editPost( 
+		$oPost = $this->$sModelLink->editPost(
 			$this->request->get['post_slug'],
 			array('likerId' => $this->customer->getId())
 		);
@@ -251,7 +253,7 @@ class ControllerApiPost extends Controller {
 			// Update notification
             if ( $oPost->getUser()->getId() != $this->customer->getId() ){
                 $this->load->model('user/notification');
-                
+
                 if ( in_array($this->customer->getId(), $oPost->getLikerIds()) ){
                     $this->model_user_notification->addNotification(
                         $oPost->getUser()->getSlug(),
@@ -319,7 +321,7 @@ class ControllerApiPost extends Controller {
             $lUsers = $this->model_user_user->getUsers(array(
                 'user_ids' => $oPost->getLikerIds()
             ));
-            
+
             if ( $lUsers ){
                 foreach ( $lUsers as $oUser ) {
                     $aUser = $oUser->formatToCache();
@@ -341,21 +343,24 @@ class ControllerApiPost extends Controller {
 	private function validate(){
         if ( empty($this->request->post['content']) || strlen(trim($this->request->post['content'])) == 0 ) {
             $this->error['warning'] = gettext( 'content is empty' );
-        
+
         }elseif ( !empty($this->request->files['thumb']) && $this->request->files['thumb']['size'] > 0 ) {
             $this->load->model('tool/image');
             if ( !$this->model_tool_image->isValidImage( $this->request->files['thumb'] ) ) {
                 $this->error['warning'] = gettext( 'image is too large' );
             }
-        
+
         }elseif ( isset($this->request->get['user_slug']) && empty($this->request->get['user_slug']) ){
             $this->error['warning'] = gettext( 'user slug is empty' );
-        
+
         }elseif ( $this->request->get['post_type'] == $this->config->get('common')['type']['branch'] ){
-            if ( empty($this->request->post['description']) || strlen(trim($this->request->post['description'])) == 0 ){
-                $this->error['warning'] = gettext( 'description is empty' );
-            
-            }elseif ( empty($this->request->post['category']) ){
+            // if ( empty($this->request->post['description']) || strlen(trim($this->request->post['description'])) == 0 ){
+            //     $this->error['warning'] = gettext( 'description is empty' );
+
+            // }elseif ( empty($this->request->post['category']) ){
+            //     $this->error['warning'] = gettext( 'category is empty' );
+            // }
+            if ( empty($this->request->post['categorySlug']) ){
                 $this->error['warning'] = gettext( 'category is empty' );
             }
         }

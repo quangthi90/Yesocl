@@ -353,6 +353,47 @@ class ControllerApiUser extends Controller {
     }
 
     public function getFollowPosts() {
+      // GET DATA FOR TEST
+      if ( !empty($this->request->post['limit']) ){
+        $limit = $this->request->post['limit'];
+      }else{
+        $limit = $this->limit;
+      }
+
+      if ( !empty($this->request->get['page']) ){
+        $page = $this->request->get['page'];
+      }else{
+        $page = 1;
+      }
+
+      $aPosts = array();
+      $this->load->model('branch/post');
+      $lPosts = $this->model_branch_post->getPosts( array(
+        'branch_id' => '51d39ba5d87459c40a000017',
+        'limit' => $limit,
+        'start' => ($page - 1) * $limit,
+        ) );
+
+      $bCanLoadMore = false;
+      if ( $lPosts ){
+        $this->load->model('tool/object');
+        $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+        if ( ($page - 1) * $limit + $limit < $lPosts->count() ){
+          $bCanLoadMore = true;
+        }
+      }
+
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'ok',
+        'posts' => $aPosts,
+        'canLoadMore' => $bCanLoadMore
+        )));
+      // GET DATA FOR TEST
+
+      // PARAMS FOR TEST
+      $test_params = 'whatsnews';
+      $defaultDisplaySettings = array($this->config->get('post')['cache']['user']);
+
       // Get current user
       $oCurrUser = $this->customer->getUser();
       if (!$oCurrUser) {
@@ -361,8 +402,31 @@ class ControllerApiUser extends Controller {
                 'error' => 'user slug is empty'
             )));
       }
-      $aUserIds = array();
-      $aUserIds[] = $oCurrUser->getId();
+
+      // Get User Settings
+      $this->load->model( 'user/setting' );
+      $oSettings = $this->model_user_setting->getSettingByUser($oCurrUser->getId());
+      if ($oSettings) {
+        $oDisplaySettings = $oSettings->getDisplaySettings();
+        if (is_array($oDisplaySettings) && isset($oDisplaySettings[$test_params])) {
+          $oDisplaySettings = $oDisplaySettings[$test_params];
+        }else {
+          $oDisplaySettings = null;
+        }
+      }
+
+      // Set Default Settings
+      if (!isset($oDisplaySettings)) {
+        $oDisplaySettings = $defaultDisplaySettings;
+      }
+
+      // $this->model_user_setting->TestAddSettings($oCurrUser->getId());
+      // $setting = $this->model_user_setting->getSettingByUser($oCurrUser->getId());
+      // $displaySettings = $setting->getDisplaySettings();
+      // return $this->response->setOutput(json_encode(array(
+      //           'success' => 'not ok',
+      //           'error' => $displaySettings['whatsnew'][0],
+      //       )));
 
       // Limit & page
       if ( !empty($this->request->post['limit']) ){
@@ -377,23 +441,37 @@ class ControllerApiUser extends Controller {
         $page = 1;
       }
 
-      // Get list friends
-      $this->load->model( 'friend/friend' );
-      $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
-      if ( $oFriends ){
-        $lFriends = $oFriends->getFriends();
-      }else{
-        $lFriends = array();
-      }
-      foreach ( $lFriends as $oFriend ) {
-        $oUser = $oFriend->getUser();
-        $aUserIds[] = $oUser->getId();
+      $type_ids = array();
+
+      if (in_array($this->config->get('post')['cache']['user'], $oDisplaySettings)) {
+        $type_ids[] = $oCurrUser->getId();
+
+        // Get list friends
+        $this->load->model( 'friend/friend' );
+        $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
+        if ( $oFriends ){
+          $lFriends = $oFriends->getFriends();
+        }else{
+          $lFriends = array();
+        }
+        foreach ( $lFriends as $oFriend ) {
+          $oUser = $oFriend->getUser();
+          $type_ids[] = $oUser->getId();
+        }
       }
 
       // Get branchs
-      $this->load->model( 'branch/branch' );
-      $aBranches = $this->model_branch_branch->getAllBranches()->toArray();
-      $aBranchIds = array_keys($aBranches);
+      if (in_array($this->config->get('post')['cache']['branch'], $oDisplaySettings)) {
+        $this->load->model( 'branch/branch' );
+        $aBranches = $this->model_branch_branch->getAllBranches()->toArray();
+        $type_ids = array_merge(array_keys($aBranches));
+      }
+
+      if (in_array($this->config->get('post')['cache']['stock'], $oDisplaySettings)) {
+        $this->load->model( 'stock/stock' );
+        $aStocks = $this->model_stock_stock->getAllStocks()->toArray();
+        $type_ids = array_merge(array_keys($aStocks));
+      }
 
       // Get posts
       $this->load->model( 'cache/post' );
@@ -401,7 +479,7 @@ class ControllerApiUser extends Controller {
         'limit' => $limit,
         'start' => ($page - 1)*$limit,
         'sort' => 'created',
-        'type_ids' => array_merge($aBranchIds, $aUserIds),
+        'type_ids' => $type_ids,
       ));
 
       if (count($aPosts) < $limit) {
