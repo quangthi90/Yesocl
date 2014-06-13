@@ -89,7 +89,7 @@
                         return validationMsgs;
                 },
                 urls : {
-                    loadNews : { name: "ApiGetFollowPost",  params: {} },
+                    loadNews : { name: "ApiGetLastestPost",  params: {} },
                     postNews : { name: "ApiPostPost", params: {} },
                     updateNews : { name: "ApiPutPost", params: {} }
                 }

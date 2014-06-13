@@ -8,7 +8,7 @@ class ModelCachePost extends Model {
 	 * Add new cache Post
 	 * 2013/08/25
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Branch ID
 	 *	- array Thumb
 	 *	- array data
@@ -26,7 +26,7 @@ class ModelCachePost extends Model {
 		if ( empty($data['post_id']) ){
 			return false;
 		}
-		
+
 		if ( empty($data['type']) ){
 			return false;
 		}
@@ -34,22 +34,22 @@ class ModelCachePost extends Model {
 		if ( empty($data['type_id']) ){
 			return false;
 		}
-		
+
 		if ( !isset($data['view']) ){
 			return false;
 		}
-		
+
 		if ( empty($data['created']) ){
 			return false;
 		}
-		
+
 		$post = new Post();
 		$post->setPostId( $data['post_id'] );
 		$post->setType( $data['type'] );
 		$post->setTypeId( $data['type_id'] );
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
-		
+
 		$this->dm->persist( $post );
 		$this->dm->flush();
 	}
@@ -58,7 +58,7 @@ class ModelCachePost extends Model {
 	 * Edit Cache Post
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Branch ID
 	 *	- array Thumb
 	 *	- array data
@@ -114,7 +114,7 @@ class ModelCachePost extends Model {
 	 * Delete Post by ID
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- array string Post ID
 	 * @return: boolean
 	 */
@@ -127,7 +127,7 @@ class ModelCachePost extends Model {
 				}
 			}
 		}
-		
+
 		$this->dm->flush();
 
 		return true;
@@ -151,9 +151,9 @@ class ModelCachePost extends Model {
 			$data['limit'] = 20;
 		}
 
-		if ( empty($data['type_ids']) ){
-			return null;
-		}
+		// if ( empty($data['type_ids']) ){
+		// 	return null;
+		// }
 
 		if ( empty($data['sort']) ){
 			return null;
@@ -171,7 +171,7 @@ class ModelCachePost extends Model {
 			->sort( array($data['sort'] => $data['order']) );
 
 		$posts = array();
-		
+
 		foreach ( $cache_posts as $cache_post ) {
 			$type = $cache_post->getType();
 			if ( $type == $this->config->get('post')['cache']['branch'] ){
@@ -189,7 +189,8 @@ class ModelCachePost extends Model {
 				continue;
 			}
 
-			$post['type'] = strtolower( $type );
+			// $post['type'] = strtolower( $type );
+			// $posts[] = $post->formatToCache();
 			$posts[] = $post;
 		}
 
