@@ -1,6 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 {% use '@template/default/template/stock/common/news_item.tpl' %}
-{% use '@template/default/template/stock/common/news_item_add_edit.tpl' %}
+{% use '@template/default/template/branch/common/block_infor.tpl' %}
 {% use '@template/default/template/common/ko_template_block.tpl' %}
 
 {% block title %}{% trans %}What's new{% endtrans %}{% endblock %}
@@ -26,6 +26,7 @@
             </div>
             {% endif %}
             <div class="block-content">
+                {{ block('branch_common_block_advance_form') }}
                 <!-- ko if: newsList().length > 0 -->
                 <div class="news-container" data-bind="foreach: newsList">
                     {{ block('stock_common_news_item') }}
@@ -62,7 +63,7 @@
 {% endblock %}
 
 {% block javascript %}
-{{ block('common_news_item_add_edit_javascript') }}
+{{ block('branch_common_block_infor_javascript') }}
 <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
 <script type="text/javascript">
         $(document).ready(function() {

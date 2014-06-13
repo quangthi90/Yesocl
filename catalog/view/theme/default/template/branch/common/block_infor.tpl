@@ -25,6 +25,10 @@
 	</a>
 	{% endif %#}
 </div>
+{{ block('branch_common_block_advance_form') }}
+{% endblock %}
+
+{% block branch_common_block_advance_form %}
 <div class="mfp-hide y-dlg-container" data-focus-type="input[type='text']" id="news-advance-post">
 	<div class="y-dlg">
 		<div class="dlg-title">

@@ -353,6 +353,43 @@ class ControllerApiUser extends Controller {
     }
 
     public function getFollowPosts() {
+      // GET DATA FOR TEST
+      if ( !empty($this->request->post['limit']) ){
+        $limit = $this->request->post['limit'];
+      }else{
+        $limit = $this->limit;
+      }
+
+      if ( !empty($this->request->get['page']) ){
+        $page = $this->request->get['page'];
+      }else{
+        $page = 1;
+      }
+
+      $aPosts = array();
+      $this->load->model('branch/post');
+      $lPosts = $this->model_branch_post->getPosts( array(
+        'branch_id' => '51d39ba5d87459c40a000017',
+        'limit' => $limit,
+        'start' => ($page - 1) * $limit,
+        ) );
+
+      $bCanLoadMore = false;
+      if ( $lPosts ){
+        $this->load->model('tool/object');
+        $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+        if ( ($page - 1) * $limit + $limit < $lPosts->count() ){
+          $bCanLoadMore = true;
+        }
+      }
+
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'ok',
+        'posts' => $aPosts,
+        'canLoadMore' => $bCanLoadMore
+        )));
+      // GET DATA FOR TEST
+
       // PARAMS FOR TEST
       $test_params = 'whatsnews';
       $defaultDisplaySettings = array($this->config->get('post')['cache']['user']);
