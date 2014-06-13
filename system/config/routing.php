@@ -27,6 +27,7 @@ $_['routing']['RefreshPage'] 					= 'what-s-new/';
 $_['routing']['WelcomePage']					= '';
 $_['routing']['HomePage']	 					= 'home/';
 $_['routing']['WallPage']	 					= 'wall-page/{user_slug}/';
+$_['routing']['StatisticsPage']	 				= 'statistics-page/{user_slug}/';
 $_['routing']['ChangePassword']					= 'change-password/';
 $_['routing']['Logout']							= 'logout/';
 $_['routing']['SearchPage']						= 'search/{keyword}/';

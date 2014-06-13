@@ -27,6 +27,7 @@ $_['route']['RefreshPage']					= 'common/refresh';
 $_['route']['WelcomePage']					= '';
 $_['route']['HomePage']						= 'common/home';
 $_['route']['WallPage']						= 'account/wall';
+$_['route']['StatisticsPage']				= 'account/statistics';
 $_['route']['ChangePassword']				= 'account/password';
 $_['route']['Logout']						= 'account/logout';
 $_['route']['SearchPage']					= 'common/search';

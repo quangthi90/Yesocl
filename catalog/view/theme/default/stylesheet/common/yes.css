@@ -1971,6 +1971,42 @@ a.btn-notification:hover .notification-item-name > i {
 .feed-block .block-header:hover a.block-back i {
   color: #fff;
 }
+
+.feed-block .block-tabable {
+  display: block;
+}
+.feed-block .block-tabable .block-tabs {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.feed-block .block-tabable .block-tabs .block-tab-item {
+  display: block;  
+  float: left;
+  margin: 0;
+  margin-right: 2px;
+}
+.feed-block .block-tabable .block-tabs .block-tab-item > a {
+  text-transform: uppercase;
+  display: block;
+  padding: 6px 15px;
+  color: #0E0E0E;
+  border: 1px solid #DDD;
+  border-bottom: none;
+  border-radius: 1px 1px 0px 0px;
+}
+.feed-block .block-tabable .block-tabs .block-tab-item > a:hover {
+  background-color: #009B77;  
+  color: #FFF;
+  border: 1px solid #009B77;
+  border-bottom: none;
+}
+.feed-block .block-tabable .block-tabs .block-tab-item.active > a {
+  color: #009B77;  
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-bottom: none;
+  pointer-events: none;
+}
 /* ------------------------------------- END CATEGORY -------------------------------------- */
 /* ----------------------------------- START FOOTER BAR ---------------------------------------- */
 #yes-info {

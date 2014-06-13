@@ -1,8 +1,5 @@
-// -----------------------------------
-// VIEW MODELs
-// Declare viewModels using in Knockout lib
-// -----------------------------------
 
+//Register ViewModel for Stock Page
 function ChartViewModel (options) {
 	'use strict';
 	var self = this;
@@ -474,7 +471,7 @@ function WatchListViewModel(options) {
 	}
 
 	_loadStartUp();
-}
+};
 
 function NewsViewModel(options) {
 	var self = this;
@@ -687,6 +684,7 @@ function NewsViewModel(options) {
 		}
 		var updateOptions = self.urls.updateNews.params;
 		updateOptions.post_slug = self.currentPost().slug;
+		updateOptions.post_type = self.currentPost().type;
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.updateNews.name, updateOptions),
 			data: post
@@ -800,7 +798,7 @@ function NewsViewModel(options) {
 	}
 
 	function _openAdvancePost (openCallback) {
-		var form = $("#news-advance-post");
+		var form = $("#news-advance-post").first();console.log(form.html())
         $.magnificPopup.open({
 			items: {
 			    src: form,
@@ -925,7 +923,7 @@ function NewsViewModel(options) {
 	}
 
 	_initNews();
-}
+};
 
 function CommentBoxViewModel(params){
 	var self = this;
@@ -1410,7 +1408,7 @@ function CommentBoxViewModel(params){
 		that.likeCount = ko.observable(data.like_count || 0);
 		that.isInit = ko.observable(true);
 	}
-}
+};
 
 function UserBoxViewModel(params){
 	var self = this;
