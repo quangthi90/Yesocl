@@ -468,7 +468,9 @@ class ControllerApiUser extends Controller {
       }
 
       if (in_array($this->config->get('post')['cache']['stock'], $oDisplaySettings)) {
-
+        $this->load->model( 'stock/stock' );
+        $aStocks = $this->model_stock_stock->getAllStocks()->toArray();
+        $type_ids = array_merge(array_keys($aStocks));
       }
 
       // Get posts
