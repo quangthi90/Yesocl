@@ -163,12 +163,19 @@ class ModelCachePost extends Model {
 			$data['order'] = -1;
 		}
 
-		$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy(array(
-			'typeId' => array('$in' => $data['type_ids'])
-		))
-			->skip( $data['start'] )
-			->limit( $data['limit'] )
-			->sort( array($data['sort'] => $data['order']) );
+		if (!empty($data['type_ids'])) {
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy(array(
+				'typeId' => array('$in' => $data['type_ids'])
+			))
+				->skip( $data['start'] )
+				->limit( $data['limit'] )
+				->sort( array($data['sort'] => $data['order']) );
+		}else {
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll()
+				->skip( $data['start'] )
+				->limit( $data['limit'] )
+				->sort( array($data['sort'] => $data['order']) );
+		}
 
 		$posts = array();
 

@@ -376,7 +376,8 @@ class ControllerApiPost extends Controller {
     public function getLastest() {
       // PARAMS FOR TEST
       $sTestParams = 'whatsnews';
-      $aDefaultDisplaySettings = array($this->config->get('post')['cache']['user']);
+      // $aDefaultDisplaySettings = array($this->config->get('post')['cache']['user']);
+      $aDefaultDisplaySettings = array();
 
       // Get current user
       $oCurrUser = $this->customer->getUser();
