@@ -90,7 +90,6 @@
                 },
                 urls : {
                     loadNews : { name: "ApiGetLastestPost",  params: {} },
-                    postNews : { name: "ApiPostPost", params: {} },
                     updateNews : { name: "ApiPutPost", params: {} }
                 }
             };
