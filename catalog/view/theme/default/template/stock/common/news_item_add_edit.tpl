@@ -2,7 +2,7 @@
 <div class="form-status upload-container">
 	<div class="post_new drop-zone">
 		<div class="row-fluid txt_editor">
-			<textarea class="post_input mention" style="resize: none;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
+			<textarea class="post_input mention" style="resize: none; min-height: 70px;" placeholder="{% trans %}What's in your mind{% endtrans %}? ..." maxlength="1000"></textarea>
 			<input type="hidden" name="img-url" class="img-url" value="" />
 		</div>
 		<div class="img-previewer-container">
