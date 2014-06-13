@@ -684,6 +684,7 @@ function NewsViewModel(options) {
 		}
 		var updateOptions = self.urls.updateNews.params;
 		updateOptions.post_slug = self.currentPost().slug;
+		updateOptions.post_type = self.currentPost().type;
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.updateNews.name, updateOptions),
 			data: post
