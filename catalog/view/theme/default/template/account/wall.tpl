@@ -12,7 +12,6 @@
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
         {{ block('account_common_profile_column') }}
-        {% set news_title = 'Post'|trans %}
         {{ block('post_common_ko_block_post_wall') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}

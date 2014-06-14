@@ -2,11 +2,11 @@
 {% use '@template/default/template/post/common_ko/post_item_add_edit.tpl' %}
 
 {% block post_common_ko_block_post_wall %}
-<div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
-    <div class="block-header block-tabable">
+<div class="feed-block stock-block block-tabable" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
+    <div class="block-header">
         <ul class="block-tabs">
             <li class="block-tab-item active">
-                <a href="#">{% trans %}News{% endtrans %}</a>
+                <a href="#">{% trans %}Overview{% endtrans %}</a>
             </li>
             <li class="block-tab-item">
                 <a href="{{ path('StatisticsPage', {user_slug: current_user.slug}) }}">{% trans %}Statistics{% endtrans %}</a>
