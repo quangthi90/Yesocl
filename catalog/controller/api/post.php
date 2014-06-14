@@ -476,6 +476,7 @@ class ControllerApiPost extends Controller {
         $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
       }
 
+      // TODO: REMOVE, DISABLED EDIT & DELETE
       foreach ($aPosts as $key => $aPost) {
           $aPosts[$key]['can_edit'] = false;
           $aPosts[$key]['can_delete'] = false;
