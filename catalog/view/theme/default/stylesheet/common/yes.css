@@ -2192,6 +2192,42 @@ a.btn-notification:hover .notification-item-name > i {
 .column-special .post-weak .post_image {
   display: none;
 }
+
+.post-item-small {
+  margin: 0px 10px 10px 0px;  padding: 0px;  
+  padding-bottom: 10px;
+  width: 380px;  
+  height: 100px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+  float: left;
+  overflow: hidden;
+}
+.post-item-small .post_meta {
+  overflow: hidden;
+  padding: 5px 10px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.post-item-small .post_meta span {
+  margin-right: 15px;
+}
+.post-item-small .post_meta .post_time {
+  color: #555;
+  font-weight: bold;
+  font-size: 9px;
+}
+.post-item-small .post_overview {
+  padding: 5px 5px 5px 10px;
+}
+.post-item-small .post_overview .post_title {
+  font-size: 14px;
+}
+.post-item-small .post_overview .post_title a {
+  color: #555;
+}
+.post-item-small .post_overview .post_title a:hover {
+  color: #009B77;
+}
+
 /* ------------------------------------ END CUSTOM for POST ----------------------------------- */
 /* ------------------------------------------ POPUP ------------------------------------------- */
 .y-dlg-container {
