@@ -476,6 +476,11 @@ class ControllerApiPost extends Controller {
         $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
       }
 
+      foreach ($aPosts as $key => $aPost) {
+          $aPosts[$key]['can_edit'] = false;
+          $aPosts[$key]['can_delete'] = false;
+      }
+
       return $this->response->setOutput(json_encode(array(
         'success' => 'ok',
         'posts' => $aPosts,
