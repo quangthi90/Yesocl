@@ -351,5 +351,50 @@ class ControllerApiUser extends Controller {
             'canLoadMore' => $bCanLoadMore
         )));
     }
+
+    public function getStatisticTimePost(){
+        if ( empty($this->request->get['user_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+        }
+
+        $sUserSlug = $this->request->get['user_slug'];
+
+        $this->load->model('user/user');
+        $oUser = $this->model_user_user->getUserFull( array('user_slug' => $sUserSlug) );
+
+        if ( !$oUser ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user with slug ' . $sUserSlug . ' is not exist'
+            )));
+        }
+
+        $oPosts = $oUser->getPostData();
+
+        $aTimes = array();
+        $bCanLoadMore = false;
+        if ( $oPosts ){
+            $oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes) {
+                $time = $oPost->getCreated()->format('Ym');
+                $aTimes[$time][] = $oPost->getCreated()->getTimestamp();
+                return true;
+            });
+        }
+
+        $aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime[0],
+                'count' => count($aTime)
+            );
+        }, $aTimes);
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'times' => array_values($aTimes)
+        )));
+    }
 }
 ?>

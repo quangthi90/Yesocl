@@ -147,4 +147,5 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
+$_['routing']['ApiGetUserStatisticTimePost']	= 'services/get/user/{user_slug}/statistic/time/';
 ?>
