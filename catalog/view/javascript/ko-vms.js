@@ -1523,23 +1523,18 @@ function PostStatisticsModel(options) {
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
-		var postContainer = $("#" + self.id());
-		var oldWidth = postContainer.outerWidth();
-		var oldMainWidth = mainContent.outerWidth();
+		var postContainer = $("#" + self.id()).find(".masonry-horizontal");
 		var heightContent = postContainer.find(".block-content").height();
 		var heightHeader  = postContainer.find(".block-header").height();
 		var postItems = postContainer.find(".post");
 		
 		if(postItems.length === 0){
 			widthBlock = 120;
-		}else{
+		} else {
 			postItems.each(function(){
 				var loaded = $(this).hasClass("loaded");
 				if(!loaded) {
-					$(this).addClass("loaded");
-					$(this).addClass("adding");
 					$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-										
 					$(this).css({
 						'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px',
 						'margin-bottom' : '0px'
@@ -1548,14 +1543,10 @@ function PostStatisticsModel(options) {
 				widthBlock += $(this).outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN;
 			});
 		}
-		postContainer.width(widthBlock + ConfigBlock.MARGIN_POST_PER_COLUMN);
-		mainContent.width(oldMainWidth - oldWidth + postContainer.outerWidth());
-		mainContent.css("display", "block");
-		root.getNiceScroll().onResize();
 
 		//Add effect:
 		setTimeout(function(){
-			postContainer.find(".adding").removeClass("adding");
+			
 		}, 1000);
 	}
 
@@ -1573,10 +1564,14 @@ function PostStatisticsModel(options) {
 				ko.utils.arrayForEach(data.posts, function(p){
 					var postItem = new PostModel(p);
 					self.postList.push(postItem);
+					self.postList.push(postItem);
+					self.postList.push(postItem);
+					self.postList.push(postItem);
+					self.postList.push(postItem);
 				});
 			}
 			self.isLoadSuccess(true);
-			//_adjustLayout();
+			
 
 			if(callback && typeof callback === "function"){
 				callback(data);

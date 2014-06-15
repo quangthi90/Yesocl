@@ -1,7 +1,7 @@
 {% use '@template/default/template/post/common_ko/post_item_small_style.tpl' %}
 
 {% block post_common_ko_post_statistics %}
-<div class="feed-block block-tabable" data-bind="style: { 'width' : $root.postStatisticsModel.width }, attr: { 'id' : $root.postStatisticsModel.id }, with: $root.postStatisticsModel">
+<div class="feed-block block-tabable block-post-statistics" data-bind="style: { 'width' : $root.postStatisticsModel.width }, attr: { 'id' : $root.postStatisticsModel.id }, with: $root.postStatisticsModel">
     <div class="block-header">
         <ul class="block-tabs">
             <li class="block-tab-item">
@@ -13,14 +13,14 @@
         </ul>
     </div>
     <div class="block-content">
-        <div class="post-container fl" style="width: 85%;">
+        <div class="post-container">
             <!-- ko if: postList().length > 0 -->
-                <div data-bind="foreach: postList">
+                <div data-bind="foreach: postList" class="masonry-horizontal">
                     {{ block('post_common_ko_post_item_small') }}
                 </div>
             <!-- /ko -->
         </div>
-        <div class="post-filters fr" style="width: 15%;">
+        <div class="post-filters">
             <ul class="nav nav-list">
                 <li class="active"><a href="#"><i class="icon-fixed-width icon-star"></i> Popular posts</a></li>
                 <li class="nav-header">By time
