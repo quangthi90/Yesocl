@@ -21,6 +21,7 @@
             <!-- /ko -->
         </div>
         <div class="post-filters">
+            <h5 class="header">Filters</h5>
             <ul class="nav nav-list">
                 <li class="active"><a href="#"><i class="icon-fixed-width icon-star"></i> Popular posts</a></li>
                 <li class="nav-header">By time

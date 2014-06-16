@@ -1523,31 +1523,22 @@ function PostStatisticsModel(options) {
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
-		var postContainer = $("#" + self.id()).find(".masonry-horizontal");
-		var heightContent = postContainer.find(".block-content").height();
-		var heightHeader  = postContainer.find(".block-header").height();
+		var postContainer = $("#" + self.id()).find(".post-container");
+		var masonryHorizontal = postContainer.find(".masonry-horizontal");
 		var postItems = postContainer.find(".post");
 		
 		if(postItems.length === 0){
-			widthBlock = 120;
-		} else {
-			postItems.each(function(){
-				var loaded = $(this).hasClass("loaded");
-				if(!loaded) {
-					$(this).width(ConfigBlock.MIN_NEWS_WIDTH);
-					$(this).css({
-						'margin-right': ConfigBlock.MARGIN_POST_PER_COLUMN + 'px',
-						'margin-bottom' : '0px'
-					});
-				}
-				widthBlock += $(this).outerWidth() + ConfigBlock.MARGIN_POST_PER_COLUMN;
-			});
+			return;
 		}
 
-		//Add effect:
-		setTimeout(function(){
-			
-		}, 1000);
+		//Layout:
+		var heightPostItem = postItems.first().outerHeight();
+		var widthPostItem = postItems.first().outerWidth();
+		var numberRow = Math.floor(postContainer.height()/(heightPostItem + 15));
+		var numberCol = Math.floor(postItems.length/numberRow) + 1;
+		masonryHorizontal.width(numberCol * (widthPostItem + 15));
+
+		postContainer.niceScroll();
 	}
 
 	function _loadNews(callback){
@@ -1571,7 +1562,7 @@ function PostStatisticsModel(options) {
 				});
 			}
 			self.isLoadSuccess(true);
-			
+			_adjustLayout();
 
 			if(callback && typeof callback === "function"){
 				callback(data);
@@ -1582,6 +1573,7 @@ function PostStatisticsModel(options) {
 	}
 
 	function _initNews(){
+
 		if(self.canLoadMore()){
 			root.scroll(function(){
 				var rootWidth = $(this).width();
