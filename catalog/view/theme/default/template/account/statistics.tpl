@@ -29,7 +29,8 @@
                 width: "1080px",
                 canLoadMore: true,
                 urls : {
-                    loadNews : { name: "ApiGetUserPost",  params: { user_slug : currUser.slug } }
+                    loadNews : { name: "ApiGetUserPost",  params: { user_slug : currUser.slug } },
+                    loadTimes : { name: "ApiGetUserStatisticTimePost", params: { user_slug : currUser.slug } }
                 }
             };
             var commentBoxOptions = {

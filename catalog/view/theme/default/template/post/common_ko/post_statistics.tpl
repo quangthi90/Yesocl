@@ -14,32 +14,30 @@
     </div>
     <div class="block-content">
         <div class="post-container">
-            <!-- ko if: postList().length > 0 -->
+            <!-- ko if: isLoadSuccess() && postList().length > 0 -->
                 <div data-bind="foreach: postList" class="masonry-horizontal">
                     {{ block('post_common_ko_post_item_small') }}
                 </div>
             <!-- /ko -->
+            <!-- ko if: isLoadSuccess() && postList().length == 0 -->
+            <p>No post found ! </p>
+            <!-- /ko -->
+            <!-- ko if: !isLoadSuccess() && postList().length == 0 -->
+            <p><i class="icon-spinner icon-spin"></i> Loading ...</p>
+            <!-- /ko -->
         </div>
         <div class="post-filters">
-            <h5 class="header">Filters</h5>
+            <h5 class="header" >Filters</h5>
             <ul class="nav nav-list">
                 <li class="active"><a href="#"><i class="icon-fixed-width icon-star"></i> Popular posts</a></li>
                 <li class="nav-header">By time
-                    <ul>
+                    <ul data-bind="foreach: times">
                         <li>
-                           <a href=""><i class="icon-fixed-width icon-arrow-right"></i> 2013/12 <strong>(10)</strong></a> 
-                        </li>
-                        <li>
-                           <a href=""><i class="icon-fixed-width icon-arrow-right"></i> 2013/12 <strong>(10)</strong></a> 
-                        </li>
-                        <li>
-                           <a href=""><i class="icon-fixed-width icon-arrow-right"></i> 2013/12 <strong>(10)</strong></a> 
-                        </li>
-                        <li>
-                           <a href=""><i class="icon-fixed-width icon-arrow-right"></i> 2013/12 <strong>(10)</strong></a> 
-                        </li>
-                        <li>
-                           <a href=""><i class="icon-fixed-width icon-arrow-right"></i> 2013/12 <strong>(10)</strong></a> 
+                           <a data-bind="click: $parent.loadPosts">
+                                <i class="icon-fixed-width icon-arrow-right"></i>
+                                <span data-bind="dateTimeText: time, dateFormat: 'YYYY/MM'"></span> 
+                                (<b data-bind="text: count"></b>)
+                            </a> 
                         </li>
                     </ul>
                 </li>

@@ -1493,37 +1493,39 @@ function BranchInforModel(params){
 
 function PostStatisticsModel(options) {
 	var self = this;
-	self.id = ko.observable(options.id);
+	self.id = options.id;
 	self.width = ko.observable(options.width);
 	self.currentPage = ko.observable(1);
 	self.postList = ko.observableArray([]);
 	self.urls = options.urls || [];
-	self.currentPost = ko.observable(null);
-	self.canLoadMore = ko.observable(options.canLoadMore || false);	
+	self.currentPost = ko.observable(null);	
 	self.isLoadSuccess = ko.observable(false);
 	self.isLoadingMore = ko.observable(false);
+	self.canLoadMore = ko.observable(true);
+	self.times = ko.observableArray([]);
 	
-	var mainContent = $("#y-main-content");
-	var root = $("#y-content");
-
-	this.loadMore = function(){
+	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
 
 		self.isLoadingMore(true);
 		self.currentPage(self.currentPage() + 1);
 		_loadNews(function(data){
 			self.isLoadingMore(false);
-			root.scrollLeft(root.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
-			if(data.canLoadMore !== undefined) {
-				self.canLoadMore(data.canLoadMore);
-			}
 		});
 	};
+
+	self.loadPosts = function(time) {
+		console.log(time);
+		self.currentPage(1);
+		self.postList.removeAll();
+		_loadNews(function(data){
+		});
+	}
 
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
-		var postContainer = $("#" + self.id()).find(".post-container");
+		var postContainer = $("#" + self.id).find(".post-container");
 		var masonryHorizontal = postContainer.find(".masonry-horizontal");
 		var postItems = postContainer.find(".post");
 		
@@ -1537,17 +1539,35 @@ function PostStatisticsModel(options) {
 		var numberRow = Math.floor(postContainer.height()/(heightPostItem + 15));
 		var numberCol = Math.floor(postItems.length/numberRow) + 1;
 		masonryHorizontal.width(numberCol * (widthPostItem + 15));
-
-		postContainer.niceScroll();
+		
+		//postContainer.scrollLeft(postContainer.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
+		var niceScrollInstance = postContainer.getNiceScroll();
+		if(niceScrollInstance.length > 0){
+			niceScrollInstance.onResize();
+		}else {
+			postContainer.niceScroll();	
+		}
+		
+		postContainer.on("scroll", function() {
+			var rootWidth = $(this).width();
+			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 10) {
+				self.loadMore();
+			}
+		});
 	}
 
 	function _loadNews(callback){
+
+		//Turn off scroll event:
+		 $("#" + self.id).find(".post-container").off("scroll");
+
 		var loadOptions = self.urls.loadNews.params;
 		loadOptions.page = self.currentPage();
+		
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
 			data : {
-				limit : 5
+				limit : 15
 			}
 		};
 		var successCallback = function(data){
@@ -1555,13 +1575,10 @@ function PostStatisticsModel(options) {
 				ko.utils.arrayForEach(data.posts, function(p){
 					var postItem = new PostModel(p);
 					self.postList.push(postItem);
-					self.postList.push(postItem);
-					self.postList.push(postItem);
-					self.postList.push(postItem);
-					self.postList.push(postItem);
 				});
 			}
 			self.isLoadSuccess(true);
+			self.canLoadMore(data.canLoadMore || false);
 			_adjustLayout();
 
 			if(callback && typeof callback === "function"){
@@ -1572,21 +1589,32 @@ function PostStatisticsModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
-	function _initNews(){
-
-		if(self.canLoadMore()){
-			root.scroll(function(){
-				var rootWidth = $(this).width();
-				if(root.scrollLeft() + rootWidth === root[0].scrollWidth - 20){
-					self.loadMore();
-				}
-			});
+	function _loadTimes(callback){
+		var ajaxOptions = {
+			url: window.yRouting.generate(self.urls.loadTimes.name, self.urls.loadTimes.params)
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				self.times(data.times);
+			}
+			if(callback && typeof callback === "function"){
+				callback(data);
+			}
 		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	function _initNews(){
+		
 		//Delay for loading news:
 		setTimeout(function(){
 			self.isLoadSuccess(false);
-			_loadNews();
-		}, 300);
+			_loadTimes(function(){
+				_loadNews();	
+			});
+			
+		}, 100);
 	}
 
 	_initNews();
