@@ -281,5 +281,32 @@ class ModelUserPost extends Model {
 
 		return $lPosts->getPostBySlug( $sPostSlug );
 	}
+
+	public function getStatisticTime( $sUserSlug ){
+		if ( $sUserSlug == $this->customer->getSlug() ){
+			$oUser = $this->customer->getUser();
+		}else{
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+		}
+
+		if ( !$oUser ) return null;
+
+		$oPosts = $oUser->getPostData();
+
+		if ( !$oPosts ) return null;
+
+		$aTimes = array();
+
+		$oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes) {
+            if ( !$oPost->getTitle() ){
+                return false;
+            }
+            $time = $oPost->getCreated()->format('Ym');
+            $aTimes[$time][] = $oPost->getCreated()->getTimestamp();
+            return true;
+        });
+
+        return $aTimes;
+	}
 }
 ?>

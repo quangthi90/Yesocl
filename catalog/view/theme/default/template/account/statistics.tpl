@@ -30,7 +30,7 @@
                 canLoadMore: true,
                 urls : {
                     loadNews : { name: "ApiGetUserPost",  params: { user_slug : currUser.slug } },
-                    loadTimes : { name: "ApiGetUserStatisticTimePost", params: { user_slug : currUser.slug } }
+                    loadTimes : { name: "ApiGetPostStatisticTime", params: { user_slug : currUser.slug } }
                 }
             };
             var commentBoxOptions = {
