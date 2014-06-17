@@ -106,58 +106,45 @@ $registry->set('response', $response);
 $cache = new Cache();
 $registry->set('cache', $cache); 
 
-// Language Detection
-$languages = array();
-
-$db = new DB(DB_DRIVER, DB_HOSTNAME, DB_USERNAME, DB_PASSWORD, DB_DATABASE);
-$query = $db->query("SELECT * FROM " . DB_PREFIX . "language WHERE status = '1'"); 
-
-foreach ($query->rows as $result) {
-	$languages[$result['code']] = $result;
-}
-
-$detect = '';
-
-if (isset($request->server['HTTP_ACCEPT_LANGUAGE']) && ($request->server['HTTP_ACCEPT_LANGUAGE'])) { 
-	$browser_languages = explode(',', $request->server['HTTP_ACCEPT_LANGUAGE']);
-	
-	foreach ($browser_languages as $browser_language) {
-		foreach ($languages as $key => $value) {
-			if ($value['status']) {
-				$locale = explode(',', $value['locale']);
-
-				if (in_array($browser_language, $locale)) {
-					$detect = $key;
-				}
-			}
-		}
+// Multi languages
+if ( isset($request->cookie['language']) ){
+	$sLangFile = DIR_LANGUAGE . 'locale/' . $request->cookie['language'] . '/LC_MESSAGES/' . $request->cookie['language'] . '.po';
+	if ( is_file($sLangFile) ){
+		$lang = $request->cookie['language'];
+	}else{
+		$lang = 'vi_VN';
 	}
+}else{
+	$lang = 'vi_VN';
+	setcookie('language', $lang, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
 }
 
-if (isset($session->data['language']) && array_key_exists($session->data['language'], $languages) && $languages[$session->data['language']]['status']) {
-	$code = $session->data['language'];
-} elseif (isset($request->cookie['language']) && array_key_exists($request->cookie['language'], $languages) && $languages[$request->cookie['language']]['status']) {
-	$code = $request->cookie['language'];
-} elseif ($detect) {
-	$code = $detect;
-} else {
-	$code = "en";
+// load dynamic locale file name
+$locale = $lang;
+$locales_root = DIR_LANGUAGE . "locale";
+$domain = $lang;
+
+// activate the locale setting
+setlocale(LC_ALL, $locale);
+setlocale(LC_TIME, $locale);
+putenv("LANG=$locale");
+
+$filename = "$locales_root/$locale/LC_MESSAGES/$domain.mo";
+$mtime = filemtime($filename);
+$filename_new = "$locales_root/$locale/LC_MESSAGES/cache/{$domain}_{$mtime}.mo"; 
+
+if (!file_exists($filename_new)) {  // check if we have created it before
+      // if not, create it now, by copying the original
+      copy($filename,$filename_new);
 }
 
-if (!isset($session->data['language']) || $session->data['language'] != $code) {
-	$session->data['language'] = $code;
-}
-
-// if (!isset($request->cookie['language']) || $request->cookie['language'] != $code) {	  
-// 	setcookie('language', $code, time() + 60 * 60 * 24 * 30, '/', $request->server['HTTP_HOST']);
-// }
-
-$config->set('config_language_id', $languages[$code]['language_id']);
-$config->set('config_language', $languages[$code]['code']);
+$domain_new = "cache/{$domain}_{$mtime}";
+bindtextdomain($domain_new,$locales_root);
+textdomain($domain_new);
 
 // Language	
-$language = new Language($languages[$code]['directory']);
-$language->load($languages[$code]['filename']);	
+$language = new Language('english');
+$language->load('english');	
 $registry->set('language', $language); 
 
 // Document

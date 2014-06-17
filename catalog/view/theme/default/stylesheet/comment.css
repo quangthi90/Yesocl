@@ -124,18 +124,19 @@
 	font-weight: normal;
 	font-size: 14px;
  }
-.comment-item  .comment-info  a:hover {
+.comment-item .comment-info  a:hover {
 	color: #009B77;
 }
-.comment-item  .comment-info span.comment-time {
+.comment-item .comment-info span.comment-time {
 	font-size: 10px;
 	font-weight: normal;
 	margin-left: 10px;
 }
-.comment-item  .comment-content {
+.comment-item .comment-content {
     line-height: 18px;
     font-size: 12px;
-    word-wrap: break-word;
+    padding-right: 10px;
+    word-break: break-all;
 }
 .comment-box .post_new {
 	position: absolute;
