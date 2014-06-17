@@ -127,6 +127,7 @@ $_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
 $_['route']['ApiPostPost']					= 'api/post/add/';
 $_['route']['ApiPutPost']					= 'api/post/edit/';
 $_['route']['ApiDeletePost']				= 'api/post/delete/';
+$_['route']['ApiGetPostStatisticTime']		= 'api/post/getStatisticTime/';
 
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';
@@ -149,5 +150,4 @@ $_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
 
 // User
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
-$_['route']['ApiGetUserStatisticTimePost']	= 'api/user/getStatisticTimePost/';
 ?>

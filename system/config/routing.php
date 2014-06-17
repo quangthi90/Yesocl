@@ -125,6 +125,7 @@ $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}
 $_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
 $_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
 $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
+$_['routing']['ApiGetPostStatisticTime']		= 'services/get/{post_type}/post/{user_slug}/statistic/time/';
 
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
@@ -147,5 +148,4 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
-$_['routing']['ApiGetUserStatisticTimePost']	= 'services/get/user/{user_slug}/statistic/time/';
 ?>

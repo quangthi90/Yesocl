@@ -22,6 +22,12 @@ Class Post {
 	/** @MongoDB\String */
 	private $typeId;
 
+	/** @MongoDB\Boolean */
+	private $isStatistic;
+
+	/** @MongoDB\String */
+	private $authorId;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -64,5 +70,21 @@ Class Post {
 
 	public function getTypeId(){
 		return $this->typeId;
+	}
+
+	public function setIsStatistic( $isStatistic ){
+		$this->isStatistic = $isStatistic;
+	}
+
+	public function getIsStatistic(){
+		return $this->isStatistic;
+	}
+
+	public function setAuthorId( $authorId ){
+		$this->authorId = $authorId;
+	}
+
+	public function getAuthorId(){
+		return $this->authorId;
 	}
 }
