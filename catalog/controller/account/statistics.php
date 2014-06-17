@@ -34,7 +34,6 @@ class ControllerAccountStatistics extends Controller {
 		$aCurrUser['fr_status'] = $this->model_tool_object->checkFriendStatus( $this->customer->getId(), $aCurrUser['id'] );
         $aCurrUser['fl_status'] = $this->model_tool_object->checkFollowerStatus( $this->customer->getId(), $aCurrUser['id'] );
 		$this->data['current_user'] = $aCurrUser;
-		$this->data['post_type'] = $this->config->get('common')['type']['user'];
 
 		// set selected menu
 		$this->session->setFlash( 'menu', 'wall' );

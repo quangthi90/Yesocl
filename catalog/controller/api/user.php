@@ -378,6 +378,9 @@ class ControllerApiUser extends Controller {
         $bCanLoadMore = false;
         if ( $oPosts ){
             $oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes) {
+                if ( !$oPost->getTitle() ){
+                    return false;
+                }
                 $time = $oPost->getCreated()->format('Ym');
                 $aTimes[$time][] = $oPost->getCreated()->getTimestamp();
                 return true;
