@@ -11,17 +11,7 @@
                		<li class="unlike-post">
                         <a data-bind="click: $data.likePost" title="{% trans %}Like{% endtrans %}"><i class="icon-thumbs-down medium-icon"></i> {% trans %}Unlike{% endtrans %}</a>
                     </li>
-                    <!-- /ko -->
-                    <!-- ko if: $data.isEdit -->
-                    <li class="post-edit-btn">
-                        <a data-bind="click: $parent.startEditPost" title="Edit" class="link-popup"><i class="icon-edit"></i>{% trans %}Edit{% endtrans %}</a>
-                    </li>
-                    <!-- /ko -->
-                    <!-- ko if: $data.isDelete -->
-                    <li class="post-delete-btn">
-                        <a data-bind="click: $parent.deletePost" title="Delete"><i class="icon-trash"></i>{% trans %}Delete{% endtrans %}</a>
-                    </li>
-                    <!-- /ko -->
+                    <!-- /ko -->                    
                 </ul>
             </div>
         </div>
