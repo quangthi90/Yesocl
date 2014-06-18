@@ -1503,6 +1503,9 @@ function PostStatisticsModel(options) {
 	self.isLoadingMore = ko.observable(false);
 	self.canLoadMore = ko.observable(true);
 	self.times = ko.observableArray([]);
+	self.types = ["user", "branch", "stock"];
+	self.currentType = ko.observable("user");
+	self.currentTime = ko.observable("");
 	
 	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
@@ -1514,13 +1517,23 @@ function PostStatisticsModel(options) {
 		});
 	};
 
-	self.loadPosts = function(time) {
-		console.log(time);
+	self.loadPosts = function(dataTime) {
+		self.currentTime(dataTime.time);
 		self.currentPage(1);
 		self.postList.removeAll();
-		_loadNews(function(data){
+
+		_loadPosts(function(data){
 		});
-	}
+	};
+
+	self.updateType = function(type){
+		self.currentType(type);
+	};
+
+	self.currentType.subscribe(function(value){
+		_loadTimes(function(){
+		});
+	});
 
 	//Private functions:
 	function _adjustLayout(){
@@ -1556,12 +1569,13 @@ function PostStatisticsModel(options) {
 		});
 	}
 
-	function _loadNews(callback){
-
+	function _loadPosts(callback){
 		//Turn off scroll event:
 		 $("#" + self.id).find(".post-container").off("scroll");
 
+		//Bommer: add more params here
 		var loadOptions = self.urls.loadNews.params;
+		loadOptions.time = self.currentTime();
 		loadOptions.page = self.currentPage();
 		
 		var ajaxOptions = {
@@ -1590,11 +1604,14 @@ function PostStatisticsModel(options) {
 	}
 
 	function _loadTimes(callback){
+		var params = self.urls.loadTimes.params;
+		params.post_type = self.currentType();
+
 		var ajaxOptions = {
-			url: window.yRouting.generate(self.urls.loadTimes.name, self.urls.loadTimes.params)
+			url: window.yRouting.generate(self.urls.loadTimes.name, params)
 		};
 		var successCallback = function(data){
-			if(data.success === "ok"){
+			if(data.success === "ok") {
 				self.times(data.times);
 			}
 			if(callback && typeof callback === "function"){
@@ -1605,15 +1622,13 @@ function PostStatisticsModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
-	function _initNews(){
-		
+	function _initNews() {
 		//Delay for loading news:
 		setTimeout(function(){
 			self.isLoadSuccess(false);
 			_loadTimes(function(){
-				_loadNews();	
-			});
-			
+				_loadPosts();
+			});			
 		}, 100);
 	}
 
