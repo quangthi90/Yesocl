@@ -12,13 +12,31 @@
 			<a href="#" class="btn-search"><i class="icon-search"></i></a>
 		</div>
 		<div class="sidebar-controls">
-			<ul class="yes-menu-list left-menu">
+			<ul class="yes-menu-list left-menu disable-select">
 				{% block sidebar_control %}
 					{% set menu = get_flash('menu') %}
 				  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
 				  		<a href="{{ path('RefreshPage') }}"> 
 				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
 				  		</a>
+				  		<a class="toogle-submenu down">
+				  			<i class="icon-chevron-up"></i>
+				  			<i class="icon-chevron-down"></i>
+			  			</a>
+				  		<ul class="sub-menu">
+						  	<li class="menu-item sub-menu-item">
+						  		<a><i class="icon-ok"></i> <span>All posts</span></a>
+					  		</li>
+					  		<li class="menu-item sub-menu-item">
+						  		<a><i class="icon-hand-right"></i> <span>Stock posts</span></a>
+					  		</li>
+					  		<li class="menu-item sub-menu-item">
+						  		<a><i class="icon-hand-right"></i> <span>Branch posts</span></a>
+					  		</li>
+					  		<li class="menu-item sub-menu-item">
+						  		<a><i class="icon-hand-right"></i> <span>Friend, Friend's friend posts</span></a>
+					  		</li>
+						</ul>
 				  	</li>
 				  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
 				  		<a href="{{ path('HomePage') }}"> 

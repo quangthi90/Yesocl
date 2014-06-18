@@ -117,7 +117,6 @@ function Sidebar(el){
 	this.sidebarRoot = el.find("#y-sidebar");
 	this.sidebarToggle = this.sidebarRoot.find("#sidebar-toggle");
 	this.menuContainer = this.sidebarRoot.find(".sidebar-controls");
-	this.searchCtrl	   = this.sidebarRoot.find("input#ss-keyword");
 	this.closeSidebar  = this.sidebarRoot.find("#sidebar-close");		
 	this.makeCustomVerticalScroll();
 	this.attachEvents();
@@ -153,6 +152,18 @@ Sidebar.prototype.attachEvents = function(){
 	that.closeSidebar.click(function(){
 		that.hideSidebar();
 	});
+
+	that.menuContainer.find(".toogle-submenu").each(function(){
+		$(this).on("click", function(){
+			var subMenu = $(this).parent().find(".sub-menu");
+			if(subMenu.length > 0){
+				subMenu.toggleClass("hidden");
+			}
+			$(this).toggleClass("down");			
+			return false;
+		});		
+	});
+
 	//Click content to hide sidebar:
 	$("#y-header, #y-content, #y-footer").click(function(){
 		that.hideSidebar();
@@ -163,8 +174,6 @@ Sidebar.prototype.hideSidebar = function() {
 	var that = this;
 	if(parseInt(that.sidebarRoot.css('left')) == 0 ) {
 		that.sidebarRoot.mouseleave();
-		that.searchCtrl.val('');
-		that.searchCtrl.blur();
 	}
 };
 
