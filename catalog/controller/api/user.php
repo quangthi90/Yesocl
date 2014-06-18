@@ -351,5 +351,30 @@ class ControllerApiUser extends Controller {
             'canLoadMore' => $bCanLoadMore
         )));
     }
+
+    public function setPrivateOption() {
+      // Get current user
+      $oCurrUser = $this->customer->getUser();
+      if (!$oCurrUser) {
+        return $this->response->setOutput(json_encode(array(
+          'success' => 'not ok',
+          'error' => 'user slug is empty'
+          )));
+      }
+
+      if (isset($this->request->post['option_value']) && isset($this->request->post['option_key'])) {
+        $this->load->model( 'user/setting' );
+        if ($this->model_user_setting->setPrivateSetting($oCurrUser->getId(), array($this->request->post['option_value'] => $this->request->post['option_key'])) !== FALSE) {
+          return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            )));
+        }
+      }
+
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'not ok',
+        'error' => 'there are error occur'
+        )));
+    }
 }
 ?>
