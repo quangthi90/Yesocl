@@ -24,18 +24,12 @@
 				  			<i class="icon-chevron-down"></i>
 			  			</a>
 				  		<ul class="sub-menu">
+				  			{% for option in aWhatSNewOptions %}
+        						<li></li>
 						  	<li class="menu-item sub-menu-item">
-						  		<a><i class="icon-ok"></i> <span>All posts</span></a>
+						  		<a href="{{ path('SetDisplayRefreshPage', {option: option.option}) }}">{% if option.enabled == true %}<i class="icon-ok"></i>{% else %}<i class="icon-hand-right"></i>{% endif %} <span>{{ option.title }}</span></a>
 					  		</li>
-					  		<li class="menu-item sub-menu-item">
-						  		<a><i class="icon-hand-right"></i> <span>Stock posts</span></a>
-					  		</li>
-					  		<li class="menu-item sub-menu-item">
-						  		<a><i class="icon-hand-right"></i> <span>Branch posts</span></a>
-					  		</li>
-					  		<li class="menu-item sub-menu-item">
-						  		<a><i class="icon-hand-right"></i> <span>Friend, Friend's friend posts</span></a>
-					  		</li>
+    						{% endfor %}
 						</ul>
 				  	</li>
 				  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">

@@ -24,6 +24,7 @@ $_['routing']['CommentEdit']					= '{post_type}/post/{post_slug}/comment/{commen
 
 // Page
 $_['routing']['RefreshPage'] 					= 'what-s-new/';
+$_['routing']['SetDisplayRefreshPage'] 			= 'what-s-new/setoption/{option}';
 $_['routing']['WelcomePage']					= '';
 $_['routing']['HomePage']	 					= 'home/';
 $_['routing']['WallPage']	 					= 'wall-page/{user_slug}/';

@@ -29,5 +29,18 @@ class ControllerCommonRefresh extends Controller {
 
 		$this->response->setOutput($this->twig_render());
 	}
+
+	public function setOption() {
+		$oLoggedUser = $this->customer->getUser();
+		if ($oLoggedUser) {
+			// Check exit $_GET['option']
+			if (isset($this->request->get['option']) && isset($this->config->get('whatsnew')['option'][$this->request->get['option']])) {
+				$this->load->model( 'user/setting' );
+	        	$this->model_user_setting->setPrivateSetting($oLoggedUser->getId(), array('config_display_whatsnew' => $this->request->get['option']));
+			}
+		}
+		// Redirect
+        $this->redirect($this->extension->path('RefreshPage'));
+	}
 }
 ?>

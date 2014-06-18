@@ -24,6 +24,7 @@ $_['route']['CommentEdit']					= 'post/comment/editComment';
 
 // Page
 $_['route']['RefreshPage']					= 'common/refresh';
+$_['route']['SetDisplayRefreshPage']		= 'common/refresh/setOption';
 $_['route']['WelcomePage']					= '';
 $_['route']['HomePage']						= 'common/home';
 $_['route']['WallPage']						= 'account/wall';
