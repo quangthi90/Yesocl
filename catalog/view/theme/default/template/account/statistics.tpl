@@ -1,5 +1,6 @@
 {% extends '@template/default/template/common/layout.tpl' %}
 {% use '@template/default/template/post/common_ko/post_statistics.tpl' %}
+{% use '@template/default/template/common/ko_template_block.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 
 {% block title %}{{ heading_title }}{% endblock %}
@@ -11,7 +12,9 @@
 <div id="y-content">
     <div id="y-main-content">
         {{ block('account_common_profile_column') }}
-        {{ block('post_common_ko_post_statistics') }}   
+        {{ block('post_common_ko_post_statistics') }}
+        {{ block('common_ko_template_comment') }}
+        {{ block('common_ko_template_user_box') }}
     </div>
 </div>
 {% endblock %}
