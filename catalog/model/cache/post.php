@@ -151,10 +151,6 @@ class ModelCachePost extends Model {
 			$data['limit'] = 20;
 		}
 
-		// if ( empty($data['type_ids']) ){
-		// 	return null;
-		// }
-
 		if ( empty($data['sort']) ){
 			return null;
 		}
@@ -163,10 +159,24 @@ class ModelCachePost extends Model {
 			$data['order'] = -1;
 		}
 
-		if (!empty($data['type_ids'])) {
-			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy(array(
-				'typeId' => array('$in' => $data['type_ids'])
-			))
+		// Type ids
+	  	if ( isset($data['type_ids']) ){
+	   		$query['typeId'] = array('$in' => $data['type_ids']);
+	  	}
+
+	  	// Single type
+	  	if ( !empty($data['type']) ){
+	   		$query['type'] = $data['type'];
+	  	}
+
+	  	// Multi types
+	  	if ( !empty($data['types']) ){
+	   		$query['type'] = array('$in' => $data['type']);
+	  	}
+
+		if (isset($query)) {
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy($query
+			)
 				->skip( $data['start'] )
 				->limit( $data['limit'] )
 				->sort( array($data['sort'] => $data['order']) );

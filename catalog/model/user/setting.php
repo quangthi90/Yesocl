@@ -57,28 +57,20 @@ class ModelUserSetting extends Model {
 		return true;
 	}
 
-	// public function TestAddSettings( $user_id ) {
-	// 	$setting = $this->getSettingByUser( $user_id );
-	// 	if (!$setting) {
-	// 		$setting = new Setting();
+	public function setPrivateSetting( $idUser, $setting ) {
+		$privateSettings = $this->dm->getRepository('Document\User\Setting')->findOneBy(array(
+			'user.id' => $idUser
+		));
 
-	// 		$user = $this->dm->getRepository('Document\User\User')->findOneBy(array(
-	// 			'id' => $user_id
-	// 		));
+		if (!$privateSettings) {
+			return FALSE;
+		}
 
-	// 		if ($user) {
-	// 			$setting->setUser($user);
-	// 		}
-	// 	}else {
+		$privateSettings->addPrivate( $setting );
 
-	// 	}
+		$this->dm->flush();
 
-	// 	$setting->setDisplaySettings(array(
-	// 		'whatsnew' => array($this->config->get('post')['cache']['branch'], $this->config->get('post')['cache']['stock'], $this->config->get('post')['cache']['user']),
-	// 		));
-
-	// 	$this->dm->persist($setting);
-	// 	$this->dm->flush();
-	// }
+		return true;
+	}
 }
 ?>

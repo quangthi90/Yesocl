@@ -373,116 +373,201 @@ class ControllerApiPost extends Controller {
         }
     }
 
-    public function getLastest() {
-      // PARAMS FOR TEST
-      $sTestParams = 'whatsnews';
-      // $aDefaultDisplaySettings = array($this->config->get('post')['cache']['user']);
-      $aDefaultDisplaySettings = array();
+    private function getAllPosts() {
+        $aUser = array();
 
-      // Get current user
-      $oCurrUser = $this->customer->getUser();
-      if (!$oCurrUser) {
-        return $this->response->setOutput(json_encode(array(
-                'success' => 'not ok',
-                'error' => 'user slug is empty'
-            )));
-      }
-
-      // Get User Settings
-      $this->load->model( 'user/setting' );
-      $oSettings = $this->model_user_setting->getSettingByUser($oCurrUser->getId());
-      if ($oSettings) {
-        $aDisplaySettings = $oSettings->getDisplaySettings();
-        if (is_array($aDisplaySettings) && isset($aDisplaySettings[$sTestParams])) {
-          $aDisplaySettings = $aDisplaySettings[$sTestParams];
-        }else {
-          $aDisplaySettings = $aDefaultDisplaySettings;
+        $oCurrUser = $this->customer->getUser();
+        if (!$oCurrUser) {
+            return FALSE;
         }
-      }
 
-      // Limit & page
-      if ( !empty($this->request->post['limit']) ){
-        $iLimit = $this->request->post['limit'];
-      }else{
-        $iLimit = $this->limit;
-      }
-
-      if ( !empty($this->request->get['page']) ){
-        $iPage = $this->request->get['page'];
-      }else{
-        $iPage = 1;
-      }
-
-      $aTypeIds = array();
-
-      if (in_array($this->config->get('post')['cache']['user'], $aDisplaySettings)) {
-        $aTypeIds[] = $oCurrUser->getId();
-
-        // Get list friends
-        $this->load->model( 'friend/friend' );
-        $oFriends = $this->model_friend_friend->getFriends( $oCurrUser->getId() );
-        if ( $oFriends ){
-          $lFriends = $oFriends->getFriends();
+        // Limit & page
+        if ( !empty($this->request->post['limit']) ){
+            $iLimit = $this->request->post['limit'];
         }else{
-          $lFriends = array();
+            $iLimit = $this->limit;
         }
-        foreach ( $lFriends as $oFriend ) {
-          $oUser = $oFriend->getUser();
-          $aTypeIds[] = $oUser->getId();
+
+        if ( !empty($this->request->get['page']) ){
+            $iPage = $this->request->get['page'];
+        }else{
+            $iPage = 1;
         }
-      }
 
-      // Get branchs
-      if (in_array($this->config->get('post')['cache']['branch'], $aDisplaySettings)) {
-        $this->load->model( 'branch/branch' );
-        $aBranches = $this->model_branch_branch->getAllBranches()->toArray();
-        $aTypeIds = array_merge(array_keys($aBranches));
-      }
+        $this->load->model( 'cache/post' );
+        $lPosts = $this->model_cache_post->getPosts(array(
+            'limit' => $iLimit,
+            'start' => ($iPage - 1)*$iLimit,
+            'sort' => 'created',
+            ));
 
-      // Get Stocks
-      if (in_array($this->config->get('post')['cache']['stock'], $aDisplaySettings)) {
-        $this->load->model( 'stock/stock' );
-        $aStocks = $this->model_stock_stock->getAllStocks()->toArray();
-        $aTypeIds = array_merge(array_keys($aStocks));
-      }
+        return $lPosts;
+    }
 
-      // Get posts
-      $this->load->model( 'cache/post' );
-      if (count($aTypeIds) > 0) {
+    private function getAllBranchPosts() {
+        $aUser = array();
+
+        $oCurrUser = $this->customer->getUser();
+        if (!$oCurrUser) {
+            return FALSE;
+        }
+
+        // Limit & page
+        if ( !empty($this->request->post['limit']) ){
+            $iLimit = $this->request->post['limit'];
+        }else{
+            $iLimit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $iPage = $this->request->get['page'];
+        }else{
+            $iPage = 1;
+        }
+
+        $this->load->model( 'cache/post' );
+        $lPosts = $this->model_cache_post->getPosts(array(
+            'limit' => $iLimit,
+            'start' => ($iPage - 1)*$iLimit,
+            'sort' => 'created',
+            'type' => $this->config->get('post')['type']['branch'],
+            ));
+
+        return $lPosts;
+    }
+
+    private function getAllStockPosts() {
+        $aUser = array();
+
+        $oCurrUser = $this->customer->getUser();
+        if (!$oCurrUser) {
+            return FALSE;
+        }
+
+        // Limit & page
+        if ( !empty($this->request->post['limit']) ){
+            $iLimit = $this->request->post['limit'];
+        }else{
+            $iLimit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $iPage = $this->request->get['page'];
+        }else{
+            $iPage = 1;
+        }
+
+        $this->load->model( 'cache/post' );
+        $lPosts = $this->model_cache_post->getPosts(array(
+            'limit' => $iLimit,
+            'start' => ($iPage - 1)*$iLimit,
+            'sort' => 'created',
+            'type' => $this->config->get('post')['type']['stock'],
+            ));
+
+        return $lPosts;
+    }
+
+    private function getAllUserPosts() {
+        $aUser = array();
+
+        $oCurrUser = $this->customer->getUser();
+        if (!$oCurrUser) {
+            return array();
+        }
+
+        // aTypeIds
+        $this->load->model('friend/friend');
+        $aTypeIds = array();
+        foreach ($this->model_friend_friend->getFriends($oCurrUser->getId()) as $key => $friend) {
+            $oFriend = $friend->getUser();
+            $aTypeIds[$oFriend->getId()] = $oFriend->getId();
+
+            foreach ($this->model_friend_friend->getFriends($oFriend->getId()) as $key => $friendSFriend) {
+                $oFriendSFriend = $friendSFriend->getUser();
+                $aTypeIds[$oFriendSFriend->getId()] = $oFriendSFriend->getId();
+            }
+        }
+
+        if (isset($aTypeIds[$oCurrUser->getId()])) {
+            unset($aTypeIds[$oCurrUser->getId()]);
+        }
+
+        // Limit & page
+        if ( !empty($this->request->post['limit']) ){
+            $iLimit = $this->request->post['limit'];
+        }else{
+            $iLimit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $iPage = $this->request->get['page'];
+        }else{
+            $iPage = 1;
+        }
+
+        $this->load->model( 'cache/post' );
         $lPosts = $this->model_cache_post->getPosts(array(
             'limit' => $iLimit,
             'start' => ($iPage - 1)*$iLimit,
             'sort' => 'created',
             'type_ids' => $aTypeIds,
             ));
-      }else {
-        $lPosts = $this->model_cache_post->getPosts(array(
-            'limit' => $iLimit,
-            'start' => ($iPage - 1)*$iLimit,
-            'sort' => 'created',
-            ));
-      }
 
-      if (count($lPosts) < $iLimit) {
-        $bCanLoadMore = false;
-      }else {
-        $bCanLoadMore = true;
-      }
+        return $lPosts;
+    }
 
-      // Format Posts
-      $aPosts = array();
-      if ($lPosts) {
-        $this->load->model( 'tool/object' );
-        $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
-      }
+    public function getLastest() {
+        // Get current user
+        $oCurrUser = $this->customer->getUser();
+        if (!$oCurrUser) {
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+                )));
+        }
 
-      // TODO: REMOVE, DISABLED EDIT & DELETE
-      foreach ($aPosts as $key => $aPost) {
-          $aPosts[$key]['can_edit'] = false;
-          $aPosts[$key]['can_delete'] = false;
-      }
+        // Get User Settings
+        $this->load->model( 'user/setting' );
+        $oSettings = $this->model_user_setting->getSettingByUser($oCurrUser->getId());
+        if ($oSettings) {
+            $sDisplaySetting = $oSettings->getPrivateByKey('config_display_whatsnew');
+        }
 
-      return $this->response->setOutput(json_encode(array(
+        $lPosts = array();
+        if (isset($sDisplaySetting) && $sDisplaySetting != NULL) {
+            $lPosts = $this->{$this->config->get('whatsnew')['option_function'][$sDisplaySetting]}();
+        }else {
+            $lPosts = $this->{$this->config->get('whatsnew')['option_function']['all']}();
+        }
+
+        // Limit & page
+        if ( !empty($this->request->post['limit']) ){
+            $iLimit = $this->request->post['limit'];
+        }else{
+            $iLimit = $this->limit;
+        }
+
+        if (count($lPosts) < $iLimit) {
+            $bCanLoadMore = false;
+        }else {
+            $bCanLoadMore = true;
+        }
+
+        // Format Posts
+        $aPosts = array();
+        if ($lPosts) {
+            $this->load->model( 'tool/object' );
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+        }
+
+        // TODO: REMOVE, DISABLED EDIT & DELETE
+        foreach ($aPosts as $key => $aPost) {
+            $aPosts[$key]['can_edit'] = false;
+            $aPosts[$key]['can_delete'] = false;
+        }
+
+        return $this->response->setOutput(json_encode(array(
         'success' => 'ok',
         'posts' => $aPosts,
         'canLoadMore' => $bCanLoadMore

@@ -2,14 +2,14 @@
 namespace Document\User;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
-/** 
+/**
  * @MongoDB\Document(db="yesocl", collection="user_setting")
  */
 Class Setting {
-	/** 
+	/**
 	 * @MongoDB\Id
 	 */
-	private $id; 
+	private $id;
 
 	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
     private $user;
@@ -18,7 +18,7 @@ Class Setting {
     private $stocks = array();
 
 	/** @MongoDB\String */
-	private $displaySettings;
+	private $private;
 
     public function getStockById( $idStock ){
     	foreach ( $this->stocks as $oStock ) {
@@ -54,22 +54,37 @@ Class Setting {
 		return $this->stocks;
 	}
 
-	public function setDisplaySettings( $settings ){
+	public function setPrivate( $settings ){
 		if (is_array($settings)) {
-			$this->displaySettings = serialize($settings);
+			$this->private = serialize($settings);
 		}
 	}
 
-	public function addDisplaySetting( $setting ){
-		$settings = $this->getDisplaySettings();
-		if (is_array($settings)) {
-			$this->setDisplaySettings(array_merge($settings, $setting));
+	public function addPrivate( $setting ){
+		$settings = $this->getPrivate();
+
+		if (is_array($setting)) {
+			$this->setPrivate(array_merge($settings, $setting));
 		}else {
-			$this->setDisplaySettings(array_merge($settings, (array)$setting));
+			return FALSE;
 		}
 	}
 
-	public function getDisplaySettings(){
-		return unserialize($this->displaySettings);
+	public function getPrivate(){
+		$settings = unserialize($this->private);
+		if ($settings !== FALSE) {
+			return $settings;
+		}else {
+			return array();
+		}
+	}
+
+	public function getPrivateByKey( $key ) {
+		$settings = $this->getPrivate();
+		if (isset($settings[$key])) {
+			return $settings[$key];
+		}else {
+			return NULL;
+		}
 	}
 }
