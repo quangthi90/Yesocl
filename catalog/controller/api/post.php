@@ -430,7 +430,7 @@ class ControllerApiPost extends Controller {
             'limit' => $iLimit,
             'start' => ($iPage - 1)*$iLimit,
             'sort' => 'created',
-            'type' => $this->config->get('post')['type']['branch'],
+            'type' => $this->config->get('post')['cache']['branch'],
             ));
 
         return $lPosts;
@@ -462,7 +462,7 @@ class ControllerApiPost extends Controller {
             'limit' => $iLimit,
             'start' => ($iPage - 1)*$iLimit,
             'sort' => 'created',
-            'type' => $this->config->get('post')['type']['stock'],
+            'type' => $this->config->get('post')['cache']['stock'],
             ));
 
         return $lPosts;
