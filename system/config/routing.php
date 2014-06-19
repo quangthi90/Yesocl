@@ -125,7 +125,7 @@ $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}
 $_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
 $_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
 $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
-$_['routing']['ApiGetLastestPost']					= 'services/post/getlastest/{page}/';
+$_['routing']['ApiGetLastestPost']				= 'services/get/post/lastest/{page}/';
 
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
@@ -148,5 +148,5 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
-$_['routing']['ApiSetPrivateSetting']				= 'services/set/privateoption/';
+$_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
 ?>

@@ -127,7 +127,7 @@ $_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
 $_['route']['ApiPostPost']					= 'api/post/add/';
 $_['route']['ApiPutPost']					= 'api/post/edit/';
 $_['route']['ApiDeletePost']				= 'api/post/delete/';
-$_['route']['ApiGetLastestPost']				= 'api/post/getLastest/';
+$_['route']['ApiGetLastestPost']			= 'api/post/getLastest/';
 
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';
