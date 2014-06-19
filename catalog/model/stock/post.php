@@ -243,5 +243,48 @@ class ModelStockPost extends Model {
 
 		return $oPost;
 	}
+
+	public function getStatisticTime( $sUserSlug ){
+		if ( $sUserSlug == $this->customer->getSlug() ){
+			$oUser = $this->customer->getUser();
+		}else{
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+		}
+
+		if ( !$oUser ) return array();
+
+		$aTimes = array();
+		
+		$lTimes = $this->dm->createQueryBuilder('Document\Stock\Post')
+			->map("function() {
+	            if ( this.title != null ){
+	            	var y = this.created.getFullYear().toString(),
+	            		m = (this.created.getMonth() + 1).toString(),
+	            		time = new Date(m + '/1/' + y);
+	                emit(time, 1);
+	            }
+	        }")
+	        ->reduce('function(k, vals) {
+		        var sum = 0;
+		        for (var i in vals) {
+		            sum++;
+		        }
+		        return sum;
+		    }')
+			->field('user.id')->equals( $oUser->getId() )
+			->field('title')->notEqual( null )
+			->getQuery()->execute();
+
+		$aTimes = iterator_to_array($lTimes);
+
+		$aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime['_id']->sec,
+                'count' => $aTime['value']
+            );
+        }, $aTimes);
+
+        return $aTimes;
+	}
 }
 ?>
