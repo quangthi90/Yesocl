@@ -343,5 +343,38 @@ class ModelBranchPost extends Model {
 
 		return $oPost;
 	}
+
+	public function getStatisticTime( $sUserSlug ){
+		if ( $sUserSlug == $this->customer->getSlug() ){
+			$oUser = $this->customer->getUser();
+		}else{
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+		}
+
+		if ( !$oUser ) return array();
+
+		$aTimes = array();
+		
+		$lPosts = $this->dm->createQueryBuilder('Document\Branch\Post')
+			// ->where("function() {
+	  //           if ( this.title == null ){
+	  //               return false;
+	  //           }
+	  //           var time = this.created->getYear() + this.created->getMonth();
+	  //           this.created = time;
+	  //           return true;
+	  //       }")
+			->field('user.id')->equals( $oUser->getId() )
+			// ->group(array(), array('created' => 0))
+			->getQuery()->execute();
+
+		// var_dump($lPosts); exit;
+		print($lPosts->count());
+		// foreach ($lPosts as $oPost) {
+		// 	var_dump($oPost); exit;
+		// }
+
+        return $aTimes;
+	}
 }
 ?>

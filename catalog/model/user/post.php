@@ -289,11 +289,11 @@ class ModelUserPost extends Model {
 			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
 		}
 
-		if ( !$oUser ) return null;
+		if ( !$oUser ) return array();
 
 		$oPosts = $oUser->getPostData();
 
-		if ( !$oPosts ) return null;
+		if ( !$oPosts ) return array();
 
 		$aTimes = array();
 
