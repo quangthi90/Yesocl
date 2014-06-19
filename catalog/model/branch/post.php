@@ -356,14 +356,14 @@ class ModelBranchPost extends Model {
 		$aTimes = array();
 		
 		$lPosts = $this->dm->createQueryBuilder('Document\Branch\Post')
-			// ->where("function() {
-	  //           if ( this.title == null ){
-	  //               return false;
-	  //           }
-	  //           var time = this.created->getYear() + this.created->getMonth();
-	  //           this.created = time;
-	  //           return true;
-	  //       }")
+			->where("function() {
+	            if ( this.title == null ){
+	                return false;
+	            }
+	            var time = this.created->getYear() + this.created->getMonth();
+	            
+	            return time;
+	        }")
 			->field('user.id')->equals( $oUser->getId() )
 			// ->group(array(), array('created' => 0))
 			->getQuery()->execute();

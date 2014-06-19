@@ -387,13 +387,13 @@ class ControllerApiPost extends Controller {
             $sPostType = $this->request->get['post_type'];
         }
 
-        //$this->load->model($sPostType . '/post');
-        //$sModel = 'model_' . $sPostType . '_post';
+        $this->load->model($sPostType . '/post');
+        $sModel = 'model_' . $sPostType . '_post';
         
-        //$aTimes = $this->$sModel->getStatisticTime( $sUserSlug );
+        $aTimes = $this->$sModel->getStatisticTime( $sUserSlug );
 
-        $this->load->model('user/post');
-        $aTimes = $this->model_user_post->getStatisticTime($sUserSlug);
+        // $this->load->model('user/post');
+        // $aTimes = $this->model_user_post->getStatisticTime($sUserSlug);
 
         $aTimes = array_map(function($aTime){
             return array(
