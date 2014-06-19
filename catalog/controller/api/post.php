@@ -392,16 +392,6 @@ class ControllerApiPost extends Controller {
         
         $aTimes = $this->$sModel->getStatisticTime( $sUserSlug );
 
-        // $this->load->model('user/post');
-        // $aTimes = $this->model_user_post->getStatisticTime($sUserSlug);
-
-        $aTimes = array_map(function($aTime){
-            return array(
-                'time' => $aTime[0],
-                'count' => count($aTime)
-            );
-        }, $aTimes);
-
         return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'times' => array_values($aTimes)

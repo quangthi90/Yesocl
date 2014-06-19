@@ -355,24 +355,34 @@ class ModelBranchPost extends Model {
 
 		$aTimes = array();
 		
-		$lPosts = $this->dm->createQueryBuilder('Document\Branch\Post')
-			->where("function() {
-	            if ( this.title == null ){
-	                return false;
+		$lTimes = $this->dm->createQueryBuilder('Document\Branch\Post')
+			->map("function() {
+	            if ( this.title != null ){
+	            	var y = this.created.getFullYear().toString(),
+	            		m = (this.created.getMonth() + 1).toString(),
+	            		time = new Date(m + '/1/' + y);
+	                emit(time, 1);
 	            }
-	            var time = this.created->getYear() + this.created->getMonth();
-	            
-	            return time;
 	        }")
+	        ->reduce('function(k, vals) {
+		        var sum = 0;
+		        for (var i in vals) {
+		            sum++;
+		        }
+		        return sum;
+		    }')
 			->field('user.id')->equals( $oUser->getId() )
-			// ->group(array(), array('created' => 0))
+			->field('title')->notEqual( null )
 			->getQuery()->execute();
 
-		// var_dump($lPosts); exit;
-		print($lPosts->count());
-		// foreach ($lPosts as $oPost) {
-		// 	var_dump($oPost); exit;
-		// }
+		$aTimes = iterator_to_array($lTimes);
+
+		$aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime['_id']->sec,
+                'count' => $aTime['value']
+            );
+        }, $aTimes);
 
         return $aTimes;
 	}

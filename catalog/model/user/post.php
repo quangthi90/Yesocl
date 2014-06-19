@@ -305,6 +305,13 @@ class ModelUserPost extends Model {
             return true;
         });
 
+        $aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime[0],
+                'count' => count($aTime)
+            );
+        }, $aTimes);
+
         return $aTimes;
 	}
 }
