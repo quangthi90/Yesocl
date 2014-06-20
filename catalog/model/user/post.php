@@ -289,22 +289,28 @@ class ModelUserPost extends Model {
 			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
 		}
 
-		if ( !$oUser ) return null;
+		if ( !$oUser ) return array();
 
 		$oPosts = $oUser->getPostData();
 
-		if ( !$oPosts ) return null;
+		if ( !$oPosts ) return array();
 
 		$aTimes = array();
-
 		$oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes) {
-            if ( !$oPost->getTitle() ){
-                return false;
+            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $this->customer->getId() ){
+                return true;
             }
             $time = $oPost->getCreated()->format('Ym');
             $aTimes[$time][] = $oPost->getCreated()->getTimestamp();
             return true;
         });
+
+        $aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime[0],
+                'count' => count($aTime)
+            );
+        }, $aTimes);
 
         return $aTimes;
 	}
