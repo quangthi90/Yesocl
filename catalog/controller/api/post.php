@@ -397,5 +397,67 @@ class ControllerApiPost extends Controller {
             'times' => array_values($aTimes)
         )));
     }
+
+    public function getStatisticPosts(){
+        if ( empty($this->request->get['user_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+        }
+        $sUserSlug = $this->request->get['user_slug'];
+
+        if ( empty($this->request->get['post_type']) ){
+            $sPostType = $this->config->get('common')['type']['user'];
+        }else{
+            $sPostType = $this->request->get['post_type'];
+        }
+
+        if ( !empty($this->request->post['limit']) ){
+            $limit = $this->request->post['limit'];
+        }else{
+            $limit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $page = $this->request->get['page'];
+        }else{
+            $page = 1;
+        }
+
+        $sUserSlug = $this->request->get['user_slug'];
+
+        $this->load->model($sPostType . '/post');
+        $sModel = 'model_' . $sPostType . '_post';
+        $lPosts = $this->$sModel->getPosts(array(
+            'user_slug' => $sUserSlug,
+            'start' => ($page - 1) * $limit,
+            'limit' => $limit
+        ));
+
+        $aPosts = array();
+        $bCanLoadMore = false;
+        if ( $lPosts ){
+            if ( is_array($lPosts) ){
+                $iPostCount = $lPosts['total'];
+                $lPosts = $lPosts['posts'];
+            }else{
+                $iPostCount = $lPosts->count();
+            }
+
+            $this->load->model('tool/object');
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+
+            if ( ($page - 1) * $limit + $limit < $iPostCount ){
+                $bCanLoadMore = true;
+            }
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'posts' => $aPosts,
+            'canLoadMore' => $bCanLoadMore
+        )));
+    }
 }
 ?>
