@@ -128,6 +128,7 @@ $_['route']['ApiPostPost']					= 'api/post/add/';
 $_['route']['ApiPutPost']					= 'api/post/edit/';
 $_['route']['ApiDeletePost']				= 'api/post/delete/';
 $_['route']['ApiGetPostStatisticTime']		= 'api/post/getStatisticTime/';
+$_['route']['ApiGetPostStatistic']			= 'api/post/getStatisticPosts/';
 
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';

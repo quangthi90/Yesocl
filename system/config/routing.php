@@ -126,6 +126,7 @@ $_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
 $_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
 $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
 $_['routing']['ApiGetPostStatisticTime']		= 'services/get/{post_type}/post/user/{user_slug}/statistic/time/';
+$_['routing']['ApiGetPostStatistic']			= 'services/get/{post_type}/post/user/{user_slug}/statistic/{time}/list/{page}/';
 
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
