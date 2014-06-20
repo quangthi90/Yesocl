@@ -30,11 +30,32 @@
             <h5 class="header" >Filters</h5>
             <ul class="nav nav-list">
                 <li class="active"><a href="#"><i class="icon-fixed-width icon-star"></i> Popular posts</a></li>
+                <li class="nav-header">Type
+                    <ul data-bind="foreach: types">
+                        <li>
+                           <a data-bind="click: $parent.updateType">
+                                <!-- ko if: $data == $parent.currentType() -->
+                                <i class="icon-ok" style="color: green;"></i>
+                                <!-- /ko -->
+                                <!-- ko if: $data != $parent.currentType() -->
+                                <i class="icon-arrow-right"></i>
+                                <!-- /ko -->
+                                <span data-bind="text: $data"></span>
+                           </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
                 <li class="nav-header">By time
                     <ul data-bind="foreach: times">
                         <li>
                            <a data-bind="click: $parent.loadPosts">
-                                <i class="icon-fixed-width icon-arrow-right"></i>
+                                <!-- ko if: $parent.currentTime() == time -->
+                                <i class="icon-ok" style="color: green;"></i>
+                                <!-- /ko -->
+                                <!-- ko if: $parent.currentTime() != time -->
+                                <i class="icon-arrow-right"></i>
+                                <!-- /ko -->
                                 <span data-bind="dateTimeText: time, dateFormat: 'YYYY/MM'"></span> 
                                 (<b data-bind="text: count"></b>)
                             </a> 
