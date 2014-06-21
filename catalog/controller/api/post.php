@@ -425,15 +425,19 @@ class ControllerApiPost extends Controller {
             $page = 1;
         }
 
-        $sUserSlug = $this->request->get['user_slug'];
+        $aData = array(
+            'user_slug' => $this->request->get['user_slug'],
+            'start' => ($page - 1) * $limit,
+            'limit' => $limit
+        );
+
+        if ( empty($this->request->get['time']) ){
+            $aData['order'] = 'countViewer';
+        }
 
         $this->load->model($sPostType . '/post');
         $sModel = 'model_' . $sPostType . '_post';
-        $lPosts = $this->$sModel->getPosts(array(
-            'user_slug' => $sUserSlug,
-            'start' => ($page - 1) * $limit,
-            'limit' => $limit
-        ));
+        $lPosts = $this->$sModel->getPosts( $aData );
 
         $aPosts = array();
         $bCanLoadMore = false;
@@ -446,7 +450,7 @@ class ControllerApiPost extends Controller {
             }
 
             $this->load->model('tool/object');
-            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 100, 75 );
 
             if ( ($page - 1) * $limit + $limit < $iPostCount ){
                 $bCanLoadMore = true;

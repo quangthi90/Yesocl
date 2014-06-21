@@ -257,8 +257,17 @@ class ModelBranchPost extends Model {
 		if (  empty($aData['start']) ){
 			$aData['start'] = 0;
 		}
+
 		if ( empty($aData['limit']) ){
-			$aData['limit'] = 20;
+			$aData['limit'] = 15;
+		}
+
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'created';
+		}
+
+		if ( empty($aData['order']) ){
+			$aData['order'] = -1;
 		}
 
 		$query = array('deleted' => false);
@@ -285,11 +294,18 @@ class ModelBranchPost extends Model {
 			$query['stockTags'] = $aData['stock_code'];
 		}
 
+		if ( !empty($aData['user_slug']) ){
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+			if ( $oUser ){
+				$query['user.id'] = $oUser->getId();
+			}
+		}
+
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
 			->skip($aData['start'])
 			->limit($aData['limit'])
-			->sort(array('created' => -1));
+			->sort(array($aData['sort'] => $aData['order']));
 
 		return $results;
 	}
