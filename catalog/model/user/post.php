@@ -306,17 +306,23 @@ class ModelUserPost extends Model {
             if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $this->customer->getId() ){
                 return false;
             }
+            if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
+            	if ( $oPost->getCreated() < $aData['start'] || $oPost->getCreated() > $aData['end'] )
+            		return false;
+            }
             return true;
         });
 
         $aPosts = $lPosts->toArray();
 
-		usort($aPosts, function ($a, $b){
-		    if ( $a->getCountViewer() == $b->getCountViewer() ) {
-		        return 0;
-		    }
-		    return ($a->getCountViewer() > $b->getCountViewer()) ? -1 : 1;
-		});
+        if ( !empty($aData['start_time']) || !empty($aData['end_time']) ){
+			usort($aPosts, function ($a, $b){
+			    if ( $a->getCountViewer() == $b->getCountViewer() ) {
+			        return 0;
+			    }
+			    return ($a->getCountViewer() > $b->getCountViewer()) ? -1 : 1;
+			});
+		}
 
 		return array(
 			'total' => $lPosts->count(),
@@ -343,7 +349,7 @@ class ModelUserPost extends Model {
                 return true;
             }
             $time = $oPost->getCreated()->format('Ym');
-            $aTimes[$time][] = $oPost->getCreated()->getTimestamp();
+            $aTimes[$time][] = $oPost->getCreated()->setTime(00, 00)->getTimestamp();
             return true;
         });
 

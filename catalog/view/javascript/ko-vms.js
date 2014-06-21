@@ -1577,6 +1577,7 @@ function PostStatisticsModel(options) {
 		var loadOptions = self.urls.loadNews.params;
 		loadOptions.time = self.currentTime();
 		loadOptions.page = self.currentPage();
+		loadOptions.post_type = self.currentType();
 		
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),

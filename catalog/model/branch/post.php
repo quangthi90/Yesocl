@@ -301,6 +301,13 @@ class ModelBranchPost extends Model {
 			}
 		}
 
+		if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
+			$query['created'] = array(
+				'$gte' => $aData['start_time'],
+				'$lte' => $aData['end_time']
+			);
+		}
+		
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
 			->skip($aData['start'])

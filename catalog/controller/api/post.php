@@ -433,6 +433,10 @@ class ControllerApiPost extends Controller {
 
         if ( empty($this->request->get['time']) ){
             $aData['order'] = 'countViewer';
+        }else{
+            $time = new DateTime( date('Y-m-d', $this->request->get['time']) );
+            $aData['start_time'] = clone($time->modify('first day of this month'));
+            $aData['end_time'] = clone($time->modify('first day of next month'));
         }
 
         $this->load->model($sPostType . '/post');

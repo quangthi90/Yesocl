@@ -235,6 +235,13 @@ class ModelStockPost extends Model {
 			}
 		}
 
+		if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
+			$query['created'] = array(
+				'$gte' => $aData['start_time'],
+				'$lte' => $aData['end_time']
+			);
+		}
+
 		$lPosts = $this->dm->getRepository('Document\Stock\Post')
 			->findBy($query)
 			->skip($aData['start'])

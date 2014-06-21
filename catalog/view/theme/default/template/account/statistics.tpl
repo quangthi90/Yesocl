@@ -32,8 +32,8 @@
                 width: "1080px",
                 canLoadMore: true,
                 urls : {
-                    loadNews : { name: "ApiGetPostStatistic",  params: { user_slug : currUser.slug } },
-                    loadTimes : { name: "ApiGetPostStatisticTime", params: { user_slug : currUser.slug } }
+                    loadNews : { name: "ApiGetPostStatistic",  params: { user_slug : currUser.slug, post_type: 'branch' } },
+                    loadTimes : { name: "ApiGetPostStatisticTime", params: { user_slug : currUser.slug, post_type: 'branch' } }
                 }
             };
             var commentBoxOptions = {
