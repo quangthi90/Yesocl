@@ -2269,6 +2269,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .post-item-small .post_content {
   padding: 10px;
+  margin-left: 100px;
 }
 .post-item-small .post_title {
   font-size: 12px;
