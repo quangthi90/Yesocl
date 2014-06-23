@@ -55,7 +55,7 @@
                         <!-- /ko -->
                         <span>Popular posts</span>
                     </a>
-                </li>                
+                </li>
                 <li>
                     <ul data-bind="foreach: times">
                         <li>

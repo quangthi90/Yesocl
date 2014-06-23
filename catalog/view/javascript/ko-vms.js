@@ -1505,7 +1505,7 @@ function PostStatisticsModel(options) {
 	self.times = ko.observableArray([]);
 	self.types = ["user", "branch", "stock"];
 	self.currentType = ko.observable("user");
-	self.currentTime = ko.observable("");
+	self.currentTime = ko.observable(0);
 	
 	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
@@ -1633,10 +1633,8 @@ function PostStatisticsModel(options) {
 		setTimeout(function(){
 			self.isLoadSuccess(false);
 			_loadTimes(function(){
-				_loadPosts();
 			});			
 		}, 100);
 	}
-
 	_initNews();
 };

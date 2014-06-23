@@ -2251,7 +2251,7 @@ a.btn-notification:hover .notification-item-name > i {
   padding: 5px 20px 5px 10px;
   border-bottom: 1px solid #F0F0F0;
 }
-.post-item-small .post_meta span {
+.post-item-small .post_meta > span {
   margin-right: 10px;
 }
 .post-item-small .post_meta .post_time {
