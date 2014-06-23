@@ -454,7 +454,7 @@ class ControllerApiPost extends Controller {
             }
 
             $this->load->model('tool/object');
-            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 100, 75 );
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 125, 90 );
 
             if ( ($page - 1) * $limit + $limit < $iPostCount ){
                 $bCanLoadMore = true;
