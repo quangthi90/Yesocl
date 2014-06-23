@@ -1519,9 +1519,6 @@ function PostStatisticsModel(options) {
 
 	self.loadPosts = function(dataTime) {
 		self.currentTime(dataTime.time);
-		self.currentPage(1);
-		self.postList.removeAll();
-
 		_loadPosts(function(data){
 		});
 	};
@@ -1532,6 +1529,8 @@ function PostStatisticsModel(options) {
 
 	self.currentType.subscribe(function(value){
 		_loadTimes(function(){
+			self.currentTime(0);
+			_loadPosts(function(data) {});
 		});
 	});
 
@@ -1600,6 +1599,12 @@ function PostStatisticsModel(options) {
 				callback(data);
 			}
 		}
+
+		//Reset params:
+		self.currentPage(1);
+		self.isLoadSuccess(false);
+		self.postList.removeAll();
+
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}

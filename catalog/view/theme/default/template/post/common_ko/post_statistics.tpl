@@ -20,7 +20,7 @@
                 </div>
             <!-- /ko -->
             <!-- ko if: isLoadSuccess() && postList().length == 0 -->
-            <p>No post found ! </p>
+            <p>No posts found ! </p>
             <!-- /ko -->
             <!-- ko if: !isLoadSuccess() && postList().length == 0 -->
             <p><i class="icon-spinner icon-spin"></i> Loading ...</p>
@@ -29,7 +29,6 @@
         <div class="post-filters">
             <h5 class="header" >Filters</h5>
             <ul class="nav nav-list">
-                <li class="active"><a href="#"><i class="icon-fixed-width icon-star"></i> Popular posts</a></li>
                 <li class="nav-header">Type
                     <ul data-bind="foreach: types">
                         <li>
@@ -46,7 +45,18 @@
                     </ul>
                 </li>
                 <li class="divider"></li>
-                <li class="nav-header">By time
+                <li>
+                    <a data-bind="click: loadPosts({ time: 0 })">
+                        <!-- ko if: currentTime() == 0 -->
+                        <i class="icon-ok" style="color: green;"></i>
+                        <!-- /ko -->
+                        <!-- ko if: currentTime() != 0 -->
+                        <i class="icon-arrow-right"></i>
+                        <!-- /ko -->
+                        <span>Popular posts</span>
+                    </a>
+                </li>                
+                <li>
                     <ul data-bind="foreach: times">
                         <li>
                            <a data-bind="click: $parent.loadPosts">
