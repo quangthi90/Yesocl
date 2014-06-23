@@ -1,4 +1,3 @@
-
 //Register ViewModel for Stock Page
 function ChartViewModel (options) {
 	'use strict';
@@ -1506,33 +1505,46 @@ function PostStatisticsModel(options) {
 	self.types = ["user", "branch", "stock"];
 	self.currentType = ko.observable("user");
 	self.currentTime = ko.observable(0);
+	self.userCaching = ko.observable(options.userCaching || false);
+
+	var cacheManager = new YesGlobal.CacheManager(false);
+	if(options.clearCacheWhenReload){
+		cacheManager.clearCache();
+	}
 	
 	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
 
 		self.isLoadingMore(true);
 		self.currentPage(self.currentPage() + 1);
-		_loadNews(function(data){
+		_loadPosts(function(data){
 			self.isLoadingMore(false);
 		});
 	};
 
 	self.loadPosts = function(dataTime) {
+		self.currentPage(1);
 		self.currentTime(dataTime.time);
 		_loadPosts(function(data){
 		});
 	};
 
-	self.updateType = function(type){
-		self.currentType(type);
+	self.loadPopularPost = function(){
+		self.currentPage(1);
+		self.currentTime(0);
+		_loadPosts(function(data){
+
+		});
 	};
 
-	self.currentType.subscribe(function(value){
+	self.updateType = function(type){
+		self.currentType(type);
+		self.currentPage(1);
 		_loadTimes(function(){
 			self.currentTime(0);
 			_loadPosts(function(data) {});
 		});
-	});
+	};
 
 	//Private functions:
 	function _adjustLayout(){
@@ -1572,7 +1584,24 @@ function PostStatisticsModel(options) {
 		//Turn off scroll event:
 		 $("#" + self.id).find(".post-container").off("scroll");
 
-		//Bommer: add more params here
+		if(self.userCaching()){
+			//Load from cache first:
+			var cachedObject = _getPostFromCache();
+			if(cachedObject != null) {
+				self.currentPage(cachedObject.currentPage);
+				self.canLoadMore(cachedObject.canLoadMore);
+				self.postList.removeAll();
+				ko.utils.arrayForEach(cachedObject.postList, function(p){
+					var postItem = new PostModel(p);
+					self.postList.push(postItem);
+				});
+
+				//End loading:
+				_defaulAfterPostLoaded(callback, cachedObject.postList);
+				return;
+			}
+		}
+
 		var loadOptions = self.urls.loadNews.params;
 		loadOptions.time = self.currentTime();
 		loadOptions.page = self.currentPage();
@@ -1590,18 +1619,20 @@ function PostStatisticsModel(options) {
 					var postItem = new PostModel(p);
 					self.postList.push(postItem);
 				});
-			}
-			self.isLoadSuccess(true);
-			self.canLoadMore(data.canLoadMore || false);
-			_adjustLayout();
+				self.canLoadMore(data.canLoadMore || false);
 
-			if(callback && typeof callback === "function"){
-				callback(data);
+				if(self.userCaching()) {
+					//Save to cache:
+					var cachedObject = _formatToCache(data.posts);
+					cacheManager.setItem(cachedObject.key, JSON.stringify(cachedObject.value));	
+				}
 			}
+
+			//End loading:
+			_defaulAfterPostLoaded(callback, data);
 		}
 
 		//Reset params:
-		self.currentPage(1);
 		self.isLoadSuccess(false);
 		self.postList.removeAll();
 
@@ -1609,7 +1640,31 @@ function PostStatisticsModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
-	function _loadTimes(callback){
+	function _defaulAfterPostLoaded(callback, data){
+		self.isLoadSuccess(true);
+		_adjustLayout();
+
+		if(callback && typeof callback === "function"){
+			callback(data);
+		}
+	}
+
+	function _loadTimes(callback) {
+		if(self.userCaching()){
+			//Load from cache first:
+			var cachedObject = _getTimeFromCache();
+			if(cachedObject != null) {
+				self.times.removeAll();
+				self.times(cachedObject);
+
+				if(callback && typeof callback === "function"){
+					callback(cachedObject);
+				}
+
+				return;
+			}
+		}
+
 		var params = self.urls.loadTimes.params;
 		params.post_type = self.currentType();
 
@@ -1619,6 +1674,12 @@ function PostStatisticsModel(options) {
 		var successCallback = function(data){
 			if(data.success === "ok") {
 				self.times(data.times);
+
+				if(self.userCaching()){
+					//Save to cache:
+					var cachedObject = _formatTimeToCache(data.times);
+					cacheManager.setItem(cachedObject.key, JSON.stringify(cachedObject.value));
+				}
 			}
 			if(callback && typeof callback === "function"){
 				callback(data);
@@ -1628,13 +1689,56 @@ function PostStatisticsModel(options) {
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
+	function _getPostFromCache(){
+		var key = _getCachedKey();
+		var value = cacheManager.getItem(key);
+		if(value != null){
+			return JSON.parse(value);
+		}
+		return null;
+	}
+
+	function _getTimeFromCache(){
+		var value = cacheManager.getItem(_getTimeCachedKey());
+		if(value != null)
+			return JSON.parse(value);
+		return null;
+	}
+
+	function _formatToCache(posts){
+		return {
+			key: _getCachedKey(),
+			value: {
+				postList : posts,
+				currentPage : self.currentPage(),
+				canLoadMore : self.canLoadMore()
+			}
+		};
+	}
+
+	function _formatTimeToCache(times){
+		return {
+			key: _getTimeCachedKey(),
+			value : times
+		};
+	}
+
+	function _getCachedKey() {
+		return "st-" + self.currentType() + "-" + self.currentTime();
+	}
+
+	function _getTimeCachedKey(){
+		return "st-" + self.currentType();
+	}
+
 	function _initNews() {
 		//Delay for loading news:
 		setTimeout(function(){
 			self.isLoadSuccess(false);
-			_loadTimes(function(){
-			});			
+			self.updateType("user");
+			$(".post-filters").css("opacity", 1);
 		}, 100);
 	}
+
 	_initNews();
 };

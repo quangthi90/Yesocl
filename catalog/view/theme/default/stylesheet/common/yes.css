@@ -2218,6 +2218,7 @@ a.btn-notification:hover .notification-item-name > i {
   border-right: none;
   background-color: #FFFFFF;
   width: 150px;
+  opacity: 0;
 }
 .block-post-statistics .post-filters .header {
   margin:0px;

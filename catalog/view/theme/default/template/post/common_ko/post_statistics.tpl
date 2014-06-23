@@ -46,7 +46,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a data-bind="click: loadPosts({ time: 0 })">
+                    <a data-bind="click: loadPopularPost">
                         <!-- ko if: currentTime() == 0 -->
                         <i class="icon-ok" style="color: green;"></i>
                         <!-- /ko -->
