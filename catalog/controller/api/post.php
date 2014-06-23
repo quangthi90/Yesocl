@@ -431,7 +431,7 @@ class ControllerApiPost extends Controller {
             'limit' => $limit
         );
 
-        if ( empty($this->request->get['time']) ){
+        if ( empty($this->request->get['time']) || $this->request->get['time'] == 0 ){
             $aData['order'] = 'countViewer';
         }else{
             $time = new DateTime( date('Y-m-d', $this->request->get['time']) );
