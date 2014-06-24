@@ -180,11 +180,6 @@ function RefreshOptionModel(data) {
 	that.href = window.yRouting.generate('SetDisplayRefreshPage', {option: data.option});
 	that.title = ko.observable(data.title || '');
 	that.isEnabled = ko.observable(data.enabled || false);
-
-	that.enable = function () {
-		// call update api
-		that.isEnabled(true);
-	}
 }
 
 function RefreshOptionConfigModel(options) {
@@ -193,7 +188,12 @@ function RefreshOptionConfigModel(options) {
 	that.items = ko.observableArray([]);
 
 	that.enable = function (item) {
-		item.isEnabled(true);
+		if (!item.isEnabled()) {
+			ko.utils.arrayForEach(that.items(), function(p){
+				p.isEnabled(false);
+			});
+			item.isEnabled(true);
+		}
 	}
 
 	function _init () {
