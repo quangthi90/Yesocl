@@ -12,6 +12,22 @@ class ControllerCommonRefresh extends Controller {
 
 		$this->data['heading_title'] = $this->config->get('config_title');
 
+		// Get User Settings
+		$oLoggedUser = $this->customer->getUser();
+        $this->load->model( 'user/setting' );
+        $oSettings = $this->model_user_setting->getSettingByUser($oLoggedUser->getId());
+        if ($oSettings) {
+            $sWhatSNewOption = $oSettings->getPrivateByKey('config_display_whatsnew');
+        }
+		$this->data['aWhatSNewOptions'] = array();
+		foreach ($this->config->get('whatsnew')['option'] as $option) {
+			$this->data['aWhatSNewOptions'][] = array(
+				'title' => htmlspecialchars($this->config->get('whatsnew')['option_title'][$option], ENT_QUOTES),
+				'option' => $option,
+				'enabled' => (($option == $sWhatSNewOption) || ($option == $this->config->get('whatsnew')['option']['all'] && $sWhatSNewOption == NULL)),
+				);
+		}
+
 		// set selected menu
 		$this->session->setFlash( 'menu', 'refresh' );
 

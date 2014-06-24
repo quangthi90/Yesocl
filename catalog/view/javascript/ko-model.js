@@ -34,7 +34,7 @@ function PostModel(data) {
 		slug: data.category_slug,
 		name : data.category_name
 	} : { };
-	that.comments = [];	
+	that.comments = [];
 	that.commentCount = ko.observable(data.comment_count || 0);
 	that.currentCommentPage = ko.observable(1);
 	that.likeCount = ko.observable(data.like_count || 0);
@@ -43,7 +43,7 @@ function PostModel(data) {
 	that.isLiked = ko.observable(data.isLiked || false);
 	that.userTags = ko.observableArray(data.user_tags || []);
 	that.stockTags = ko.observableArray(data.stock_tags || []);
-	
+
 	that.likePost = function() {
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiPutPostLike', {
@@ -77,7 +77,7 @@ function PostModel(data) {
 			})
 			context.$data.userBoxModel.showUserList(apiUrl, function(count){
 				if(count !== undefined){
-					that.likeCount(count);	
+					that.likeCount(count);
 				}
 			});
 		}else {
@@ -127,9 +127,9 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.friendStatus(data.status);
 			} else {
-			}				
+			}
 		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);	
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	that.cancelRequest = function(){
 		var ajaxOptions = {
@@ -141,7 +141,7 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.friendStatus(data.status);
 			} else {
-			}			
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
@@ -155,7 +155,7 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.followStatus(data.status);
 			} else {
-			}			
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
@@ -169,8 +169,39 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.followStatus(data.status);
 			} else {
-			}				
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
+}
+
+function RefreshOptionModel(data) {
+	var that = this;
+	that.href = window.yRouting.generate('SetDisplayRefreshPage', {option: data.option});
+	that.title = ko.observable(data.title || '');
+	that.isEnabled = ko.observable(data.enabled || false);
+
+	that.enable = function () {
+		// call update api
+		that.isEnabled(true);
+	}
+}
+
+function RefreshOptionConfigModel(options) {
+	var that = this;
+	that.id = options.id;
+	that.items = ko.observableArray([]);
+
+	that.enable = function (item) {
+		item.isEnabled(true);
+	}
+
+	function _init () {
+		ko.utils.arrayForEach(options.items, function(p){
+			var optionItem = new RefreshOptionModel(p);
+			that.items.push(optionItem);
+		});
+	}
+
+	_init();
 }

@@ -3,7 +3,7 @@
 	<div class="sidebar-wrapper">
 		<div class="sidebar-header">
 			<h3>
-				<span id="sidebar-close"><i class="icon-hand-left"></i></span> 
+				<span id="sidebar-close"><i class="icon-hand-left"></i></span>
 				{% trans %}Main Menu{% endtrans %}
 			</h3>
 		</div>
@@ -15,25 +15,31 @@
 			<ul class="yes-menu-list left-menu disable-select">
 				{% block sidebar_control %}
 					{% set menu = get_flash('menu') %}
-				  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}">
-				  		<a href="{{ path('RefreshPage') }}"> 
+				  	<li id="refresh-page-item" class="menu-item {% if menu == 'refresh' %}active{% endif %}" data-bind="with: $root.refreshOptionConfigModel">
+				  		<a href="{{ path('RefreshPage') }}">
 				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
 				  		</a>
 				  		<a class="toogle-submenu down">
 				  			<i class="icon-chevron-up"></i>
 				  			<i class="icon-chevron-down"></i>
 			  			</a>
-				  		<ul class="sub-menu hidden">
-				  			{% for option in aWhatSNewOptions %}
-        						<li></li>
-						  	<li class="menu-item sub-menu-item">
-						  		<a href="{{ path('SetDisplayRefreshPage', {option: option.option}) }}">{% if option.enabled == true %}<i class="icon-ok"></i>{% else %}<i class="icon-hand-right"></i>{% endif %} <span>{{ option.title }}</span></a>
+					    <!-- ko if: items().length > 0 -->
+				  		<ul class="sub-menu hidden" data-bind="foreach: items()">
+				  			<!-- ko if: $data.isEnabled() -->
+    						<li class="menu-item sub-menu-item">
+						  		<a href="javascript:void(0);"><i class="icon-ok"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
 					  		</li>
-    						{% endfor %}
+					  		<!-- /ko -->
+					  		<!-- ko if: !$data.isEnabled() -->
+    						<li class="menu-item sub-menu-item" data-bind="click: $parent.enable($data)">
+						  		<a href="javascript:void(0);"><i class="icon-hand-right"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
+					  		</li>
+					  		<!-- /ko -->
 						</ul>
+					    <!-- /ko -->
 				  	</li>
 				  	<li class="menu-item {% if menu == 'home' %}active{% endif %}">
-				  		<a href="{{ path('HomePage') }}"> 
+				  		<a href="{{ path('HomePage') }}">
 				  			<i class="icon-home"></i> <span>{% trans %}Home feed{% endtrans %}</span>
 				  		</a>
 				  	</li>
@@ -41,7 +47,7 @@
 				  		<a href="{{ path('WallPage', {user_slug: user_slug}) }}">
 				  			<i class="icon-bookmark"></i> <span>{% trans %}Wall Page{% endtrans %}</span>
 			  			</a>
-				  	</li>	
+				  	</li>
 				  	<li class="menu-item {% if menu == 'profile' %}active{% endif %}">
 				  		<a href="{{ path('ProfilePage', {user_slug: user_slug}) }}">
 				  			<i class="icon-user-md"></i> <span>{% trans %}Profile{% endtrans %}</span>
@@ -70,7 +76,7 @@
 			  			</a>
 				  	</li>
 			  	{% endblock %}
-			</ul>	
+			</ul>
 		</div>
 	</div>
 	<div id="sidebar-toggle">
@@ -78,6 +84,6 @@
 			<i class="icon-circle"></i><br/>
 			<i class="icon-circle"></i><br/>
 			<i class="icon-circle"></i>
-		</span>		
+		</span>
 	</div>
 </div>
