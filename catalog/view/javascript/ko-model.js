@@ -180,6 +180,7 @@ function RefreshOptionModel(data) {
 	that.href = window.yRouting.generate('SetDisplayRefreshPage', {option: data.option});
 	that.title = ko.observable(data.title || '');
 	that.isEnabled = ko.observable(data.enabled || false);
+	that.value = data.option;
 }
 
 function RefreshOptionConfigModel(options) {
@@ -189,10 +190,20 @@ function RefreshOptionConfigModel(options) {
 
 	that.enable = function (item) {
 		if (!item.isEnabled()) {
-			ko.utils.arrayForEach(that.items(), function(p){
-				p.isEnabled(false);
-			});
-			item.isEnabled(true);
+			var ajaxOptions = {
+				url: window.yRouting.generate('ApiSetPrivateSetting', {}),
+				data: { option_key: 'config_display_whatsnew', option_value: item.option },
+			};
+			var successCallback = function(data){
+				if(data.success === "ok"){
+					ko.utils.arrayForEach(that.items(), function(p){
+						p.isEnabled(false);
+					});
+					item.isEnabled(true);
+				}
+			}
+			//Call common ajax Call:
+			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 		}
 	}
 

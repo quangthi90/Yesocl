@@ -364,7 +364,7 @@ class ControllerApiUser extends Controller {
 
       if (isset($this->request->post['option_value']) && isset($this->request->post['option_key'])) {
         $this->load->model( 'user/setting' );
-        if ($this->model_user_setting->setPrivateSetting($oCurrUser->getId(), array($this->request->post['option_value'] => $this->request->post['option_key'])) !== FALSE) {
+        if ($this->model_user_setting->setPrivateSetting($oCurrUser->getId(), array($this->request->post['option_key'] => $this->request->post['option_value'])) !== FALSE) {
           return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             )));
