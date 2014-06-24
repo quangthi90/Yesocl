@@ -302,7 +302,7 @@ class ModelUserPost extends Model {
 		$oPosts = $oUser->getPostData();
 		if ( empty($oPosts) ) return null;
 
-		$lPosts = $oPosts->getPosts(false)->filter( function($oPost) {
+		$lPosts = $oPosts->getPosts(false)->filter( function($oPost) use ($oUser) {
             if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $oUser->getId() ){
                 return false;
             }
