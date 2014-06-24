@@ -376,5 +376,37 @@ class ControllerApiUser extends Controller {
         'error' => 'there are error occur'
         )));
     }
+
+    public function getDisplayOption() {
+      // Get User Settings
+      $oLoggedUser = $this->customer->getUser();
+
+      if (!$oLoggedUser) {
+        return $this->response->setOutput(json_encode(array(
+          'success' => 'not ok',
+          'error' => 'user slug is empty'
+          )));
+      }
+
+      $this->load->model( 'user/setting' );
+      $oSettings = $this->model_user_setting->getSettingByUser($oLoggedUser->getId());
+      if ($oSettings) {
+        $sWhatSNewOption = $oSettings->getPrivateByKey('config_display_whatsnew');
+      }
+
+      $aWhatSNewOptions = array();
+      foreach ($this->config->get('whatsnew')['option'] as $option) {
+        $aWhatSNewOptions[] = array(
+          'title' => htmlspecialchars($this->config->get('whatsnew')['option_title'][$option], ENT_QUOTES),
+          'option' => $option,
+          'enabled' => (($option == $sWhatSNewOption) || ($option == $this->config->get('whatsnew')['option']['all'] && $sWhatSNewOption == NULL)),
+          );
+      }
+
+      return $this->response->setOutput(json_encode(array(
+          'success' => 'ok',
+          'items' => $aWhatSNewOptions,
+          )));
+    }
 }
 ?>

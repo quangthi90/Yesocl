@@ -151,4 +151,5 @@ $_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
 // User
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
 $_['route']['ApiSetPrivateSetting']			= 'api/user/setPrivateOption/';
+$_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
 ?>

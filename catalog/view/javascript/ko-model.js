@@ -197,10 +197,19 @@ function RefreshOptionConfigModel(options) {
 	}
 
 	function _init () {
-		ko.utils.arrayForEach(options.items, function(p){
-			var optionItem = new RefreshOptionModel(p);
-			that.items.push(optionItem);
-		});
+		var ajaxOptions = {
+			url: window.yRouting.generate('ApiGetDisplayOption', {}),
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.items, function(p){
+					var optionItem = new RefreshOptionModel(p);
+					that.items.push(optionItem);
+				});
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
 	_init();
