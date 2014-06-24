@@ -315,7 +315,7 @@ class ModelUserPost extends Model {
 
         $aPosts = $lPosts->toArray();
 
-        if ( !empty($aData['start_time']) || !empty($aData['end_time']) ){
+        if ( empty($aData['start_time']) && empty($aData['end_time']) ){
 			usort($aPosts, function ($a, $b){
 			    if ( $a->getCountViewer() == $b->getCountViewer() ) {
 			        return 0;
