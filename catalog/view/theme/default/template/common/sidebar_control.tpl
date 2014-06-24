@@ -23,7 +23,7 @@
 				  			<i class="icon-chevron-up"></i>
 				  			<i class="icon-chevron-down"></i>
 			  			</a>
-				  		<ul class="sub-menu">
+				  		<ul class="sub-menu hidden">
 				  			{% for option in aWhatSNewOptions %}
         						<li></li>
 						  	<li class="menu-item sub-menu-item">
