@@ -257,8 +257,17 @@ class ModelBranchPost extends Model {
 		if (  empty($aData['start']) ){
 			$aData['start'] = 0;
 		}
+
 		if ( empty($aData['limit']) ){
-			$aData['limit'] = 20;
+			$aData['limit'] = 15;
+		}
+
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'created';
+		}
+
+		if ( empty($aData['order']) ){
+			$aData['order'] = -1;
 		}
 
 		$query = array('deleted' => false);
@@ -285,11 +294,25 @@ class ModelBranchPost extends Model {
 			$query['stockTags'] = $aData['stock_code'];
 		}
 
+		if ( !empty($aData['user_slug']) ){
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+			if ( $oUser ){
+				$query['user.id'] = $oUser->getId();
+			}
+		}
+
+		if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
+			$query['created'] = array(
+				'$gte' => $aData['start_time'],
+				'$lte' => $aData['end_time']
+			);
+		}
+		
 		$results = $this->dm->getRepository('Document\Branch\Post')
 			->findBy( $query )
 			->skip($aData['start'])
 			->limit($aData['limit'])
-			->sort(array('created' => -1));
+			->sort(array($aData['sort'] => $aData['order']));
 
 		return $results;
 	}
@@ -342,6 +365,49 @@ class ModelBranchPost extends Model {
 		$oPost = $this->dm->getRepository('Document\Branch\Post')->findOneBySlug( $sPostSlug );
 
 		return $oPost;
+	}
+
+	public function getStatisticTime( $sUserSlug ){
+		if ( $sUserSlug == $this->customer->getSlug() ){
+			$oUser = $this->customer->getUser();
+		}else{
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+		}
+
+		if ( !$oUser ) return array();
+
+		$aTimes = array();
+		
+		$lTimes = $this->dm->createQueryBuilder('Document\Branch\Post')
+			->map("function() {
+	            if ( this.title != null ){
+	            	var y = this.created.getFullYear().toString(),
+	            		m = (this.created.getMonth() + 1).toString(),
+	            		time = new Date(m + '/1/' + y);
+	                emit(time, 1);
+	            }
+	        }")
+	        ->reduce('function(k, vals) {
+		        var sum = 0;
+		        for (var i in vals) {
+		            sum++;
+		        }
+		        return sum;
+		    }')
+			->field('user.id')->equals( $oUser->getId() )
+			->field('title')->notEqual( null )
+			->getQuery()->execute();
+
+		$aTimes = iterator_to_array($lTimes);
+
+		$aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime['_id']->sec,
+                'count' => $aTime['value']
+            );
+        }, $aTimes);
+
+        return $aTimes;
 	}
 }
 ?>

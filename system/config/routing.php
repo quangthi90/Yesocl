@@ -27,6 +27,7 @@ $_['routing']['RefreshPage'] 					= 'what-s-new/';
 $_['routing']['WelcomePage']					= '';
 $_['routing']['HomePage']	 					= 'home/';
 $_['routing']['WallPage']	 					= 'wall-page/{user_slug}/';
+$_['routing']['StatisticsPage']	 				= 'statistics-page/{user_slug}/';
 $_['routing']['ChangePassword']					= 'change-password/';
 $_['routing']['Logout']							= 'logout/';
 $_['routing']['SearchPage']						= 'search/{keyword}/';
@@ -124,6 +125,8 @@ $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}
 $_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
 $_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
 $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
+$_['routing']['ApiGetPostStatisticTime']		= 'services/get/{post_type}/post/user/{user_slug}/statistic/time/';
+$_['routing']['ApiGetPostStatistic']			= 'services/get/{post_type}/post/user/{user_slug}/statistic/{time}/list/page/{page}/';
 
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';

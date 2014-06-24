@@ -228,6 +228,27 @@ YesGlobal.Utils = {
     }
 };
 
+YesGlobal.CacheManager = function(isLocalMode){
+    var that = this;
+    that.cachePointer = isLocalMode ? localStorage : sessionStorage;
+
+    that.isSupportStorage = function(){
+        return typeof(Storage) !== "undefined";
+    };
+    that.getItem = function(key){
+        return that.cachePointer.getItem(key);
+    };
+    that.setItem = function(key, value){
+        that.cachePointer.setItem(key, value);
+    };
+    that.removeItem = function(key){
+        that.cachePointer.removeItem(key);
+    };
+    that.clearCache = function(){
+        that.cachePointer.clear();
+    };
+}; 
+
 //KO custom handlers:
 ko.bindingHandlers.autoCompleteTag = {
     init: function(element, valueAccessor, allBindingsAccessor) {
@@ -502,3 +523,4 @@ ko.bindingHandlers.zoomInitImage = {
         });
     }
 };
+//End KO custom handlers

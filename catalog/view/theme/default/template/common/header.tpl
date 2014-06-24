@@ -12,6 +12,8 @@
 				<img src="{{ asset_img('template/logo.png') }}" />
 			</a>
 		</div>
+    <div id="news-ticker-container">
+    </div>
 		<div id="header-user">
 			<div id="user-info-wrapper" class="fr">	
 				<div class="fr user-avatar dropdown">

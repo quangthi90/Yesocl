@@ -1,4 +1,3 @@
-
 //Register ViewModel for Stock Page
 function ChartViewModel (options) {
 	'use strict';
@@ -798,7 +797,7 @@ function NewsViewModel(options) {
 	}
 
 	function _openAdvancePost (openCallback) {
-		var form = $("#news-advance-post");
+		var form = $("#news-advance-post").first();console.log(form.html())
         $.magnificPopup.open({
 			items: {
 			    src: form,
@@ -1490,3 +1489,256 @@ function BranchInforModel(params){
 		}
 	};
 }
+
+function PostStatisticsModel(options) {
+	var self = this;
+	self.id = options.id;
+	self.width = ko.observable(options.width);
+	self.currentPage = ko.observable(1);
+	self.postList = ko.observableArray([]);
+	self.urls = options.urls || [];
+	self.currentPost = ko.observable(null);	
+	self.isLoadSuccess = ko.observable(false);
+	self.isLoadingMore = ko.observable(false);
+	self.canLoadMore = ko.observable(true);
+	self.times = ko.observableArray([]);
+	self.types = ["user", "branch", "stock"];
+	self.currentType = ko.observable("user");
+	self.currentTime = ko.observable(0);
+	self.userCaching = ko.observable(options.userCaching || false);
+
+	var cacheManager = new YesGlobal.CacheManager(false);
+	if(options.clearCacheWhenReload){
+		cacheManager.clearCache();
+	}
+	
+	self.loadMore = function() {
+		if(!self.canLoadMore() || self.isLoadingMore()) return;
+
+		self.isLoadingMore(true);
+		self.currentPage(self.currentPage() + 1);
+		_loadPosts(function(data){
+			self.isLoadingMore(false);
+		});
+	};
+
+	self.loadPosts = function(dataTime) {
+		self.currentPage(1);
+		self.currentTime(dataTime.time);
+		_loadPosts(function(data){
+		});
+	};
+
+	self.loadPopularPost = function(){
+		self.currentPage(1);
+		self.currentTime(0);
+		_loadPosts(function(data){
+
+		});
+	};
+
+	self.updateType = function(type){
+		self.currentType(type);
+		self.currentPage(1);
+		_loadTimes(function(){
+			self.currentTime(0);
+			_loadPosts(function(data) {});
+		});
+	};
+
+	//Private functions:
+	function _adjustLayout(){
+		var widthBlock = 0;
+		var postContainer = $("#" + self.id).find(".post-container");
+		var masonryHorizontal = postContainer.find(".masonry-horizontal");
+		var postItems = postContainer.find(".post");
+		
+		if(postItems.length === 0){
+			return;
+		}
+
+		//Layout:
+		var heightPostItem = postItems.first().outerHeight();
+		var widthPostItem = postItems.first().outerWidth();
+		var numberRow = Math.floor(postContainer.height()/(heightPostItem + 15));
+		var numberCol = Math.floor(postItems.length/numberRow) + 1;
+		masonryHorizontal.width(numberCol * (widthPostItem + 15));
+		
+		//postContainer.scrollLeft(postContainer.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
+		var niceScrollInstance = postContainer.getNiceScroll();
+		if(niceScrollInstance.length > 0){
+			niceScrollInstance.onResize();
+		}else {
+			postContainer.niceScroll();	
+		}
+		
+		postContainer.on("scroll", function() {
+			var rootWidth = $(this).width();
+			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 10) {
+				self.loadMore();
+			}
+		});
+	}
+
+	function _loadPosts(callback){
+		//Turn off scroll event:
+		 $("#" + self.id).find(".post-container").off("scroll");
+
+		if(self.userCaching()){
+			//Load from cache first:
+			var cachedObject = _getPostFromCache();
+			if(cachedObject != null) {
+				self.currentPage(cachedObject.currentPage);
+				self.canLoadMore(cachedObject.canLoadMore);
+				self.postList.removeAll();
+				ko.utils.arrayForEach(cachedObject.postList, function(p){
+					var postItem = new PostModel(p);
+					self.postList.push(postItem);
+				});
+
+				//End loading:
+				_defaulAfterPostLoaded(callback, cachedObject.postList);
+				return;
+			}
+		}
+
+		var loadOptions = self.urls.loadNews.params;
+		loadOptions.time = self.currentTime();
+		loadOptions.page = self.currentPage();
+		loadOptions.post_type = self.currentType();
+		
+		var ajaxOptions = {
+			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
+			data : {
+				limit : 15
+			}
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.posts, function(p){
+					var postItem = new PostModel(p);
+					self.postList.push(postItem);
+				});
+				self.canLoadMore(data.canLoadMore || false);
+
+				if(self.userCaching()) {
+					//Save to cache:
+					var cachedObject = _formatToCache(data.posts);
+					cacheManager.setItem(cachedObject.key, JSON.stringify(cachedObject.value));	
+				}
+			}
+
+			//End loading:
+			_defaulAfterPostLoaded(callback, data);
+		}
+
+		//Reset params:
+		self.isLoadSuccess(false);
+		self.postList.removeAll();
+
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	function _defaulAfterPostLoaded(callback, data){
+		self.isLoadSuccess(true);
+		_adjustLayout();
+
+		if(callback && typeof callback === "function"){
+			callback(data);
+		}
+	}
+
+	function _loadTimes(callback) {
+		if(self.userCaching()){
+			//Load from cache first:
+			var cachedObject = _getTimeFromCache();
+			if(cachedObject != null) {
+				self.times.removeAll();
+				self.times(cachedObject);
+
+				if(callback && typeof callback === "function"){
+					callback(cachedObject);
+				}
+
+				return;
+			}
+		}
+
+		var params = self.urls.loadTimes.params;
+		params.post_type = self.currentType();
+
+		var ajaxOptions = {
+			url: window.yRouting.generate(self.urls.loadTimes.name, params)
+		};
+		var successCallback = function(data){
+			if(data.success === "ok") {
+				self.times(data.times);
+
+				if(self.userCaching()){
+					//Save to cache:
+					var cachedObject = _formatTimeToCache(data.times);
+					cacheManager.setItem(cachedObject.key, JSON.stringify(cachedObject.value));
+				}
+			}
+			if(callback && typeof callback === "function"){
+				callback(data);
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	function _getPostFromCache(){
+		var key = _getCachedKey();
+		var value = cacheManager.getItem(key);
+		if(value != null){
+			return JSON.parse(value);
+		}
+		return null;
+	}
+
+	function _getTimeFromCache(){
+		var value = cacheManager.getItem(_getTimeCachedKey());
+		if(value != null)
+			return JSON.parse(value);
+		return null;
+	}
+
+	function _formatToCache(posts){
+		return {
+			key: _getCachedKey(),
+			value: {
+				postList : posts,
+				currentPage : self.currentPage(),
+				canLoadMore : self.canLoadMore()
+			}
+		};
+	}
+
+	function _formatTimeToCache(times){
+		return {
+			key: _getTimeCachedKey(),
+			value : times
+		};
+	}
+
+	function _getCachedKey() {
+		return "st-" + self.currentType() + "-" + self.currentTime();
+	}
+
+	function _getTimeCachedKey(){
+		return "st-" + self.currentType();
+	}
+
+	function _initNews() {
+		//Delay for loading news:
+		setTimeout(function(){
+			self.isLoadSuccess(false);
+			self.updateType("user");
+			$(".post-filters").css("opacity", 1);
+		}, 100);
+	}
+
+	_initNews();
+};

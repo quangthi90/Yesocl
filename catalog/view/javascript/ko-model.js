@@ -90,6 +90,33 @@ function PostModel(data) {
 			post_slug: that.slug
 		};
 	};
+	that.fullyToJSON = function(){
+		return {
+			id : ko.utils.unwrapObservable(that.id),
+			title : ko.utils.unwrapObservable(that.id),
+			content : ko.utils.unwrapObservable(that.content),
+			thumb : ko.utils.unwrapObservable(that.thumb),
+			image : ko.utils.unwrapObservable(that.image),
+			created : ko.utils.unwrapObservable(that.created),
+			description : ko.utils.unwrapObservable(that.description),
+			slug : ko.utils.unwrapObservable(that.slug),
+			type : ko.utils.unwrapObservable(that.type),
+			email : ko.utils.unwrapObservable(that.email),
+			isOwner : ko.utils.unwrapObservable(that.isOwner),
+			isEdit : ko.utils.unwrapObservable(that.isEdit),
+			isDelete : ko.utils.unwrapObservable(that.isDelete),
+			owner : ko.utils.unwrapObservable(that.owner),
+			ownerName : ko.utils.unwrapObservable(that.ownerName),
+			ownerHref : ko.utils.unwrapObservable(that.ownerHref),
+			category : ko.utils.unwrapObservable(that.category),
+			commentCount : ko.utils.unwrapObservable(that.commentCount),
+			currentCommentPage : ko.utils.unwrapObservable(that.currentCommentPage),
+			likeCount : ko.utils.unwrapObservable(that.likeCount),
+			likers : ko.utils.unwrapObservable(that.likers),
+			countViewer : ko.utils.unwrapObservable(that.countViewer),
+			isLiked : ko.utils.unwrapObservable(that.isLiked)
+		};
+	};
 }
 
 function UserModel(data) {

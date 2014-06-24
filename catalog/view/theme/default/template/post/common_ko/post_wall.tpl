@@ -1,20 +1,18 @@
 {% use '@template/default/template/post/common_ko/post_item.tpl' %}
 {% use '@template/default/template/post/common_ko/post_item_add_edit.tpl' %}
 
-{% block post_common_ko_block_post_list %}
-{% if post_title is not defined %}
-    {% set post_title = 'News'|trans %}
-{% endif %}
-{% if news_href is not defined %}
-    {% set news_href = path('StockNewsPage') %}
-{% endif %}
-
-<div class="feed-block stock-block" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
-    {% if post_title != '' %}
+{% block post_common_ko_block_post_wall %}
+<div class="feed-block stock-block block-tabable" data-bind="attr: { 'id' : $root.newsModel.id }, with: $root.newsModel">
     <div class="block-header">
-        <h3 class="block-title"><a href="{{ news_href }}">{{ post_title }} <i class="icon-caret-right"></i></a></h3>
+        <ul class="block-tabs">
+            <li class="block-tab-item active">
+                <a href="#">{% trans %}Overview{% endtrans %}</a>
+            </li>
+            <li class="block-tab-item">
+                <a href="{{ path('StatisticsPage', {user_slug: current_user.slug}) }}">{% trans %}Statistics{% endtrans %}</a>
+            </li>
+        </ul>
     </div>
-    {% endif %}
     <div class="block-content">
         <!-- ko if: hasNewPost() -->
         <div class="news-creating-container fl" style="opacity: 0;">
@@ -48,6 +46,6 @@
     </div>
 </div>
 {% endblock %}
-{% block post_common_ko_block_post_list_javascript %}
+{% block post_common_ko_block_post_wall_javascript %}
     {{ block('post_common_ko_post_item_add_edit_javascript') }}
 {% endblock %}

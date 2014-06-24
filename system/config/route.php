@@ -27,6 +27,7 @@ $_['route']['RefreshPage']					= 'common/refresh';
 $_['route']['WelcomePage']					= '';
 $_['route']['HomePage']						= 'common/home';
 $_['route']['WallPage']						= 'account/wall';
+$_['route']['StatisticsPage']				= 'account/statistics';
 $_['route']['ChangePassword']				= 'account/password';
 $_['route']['Logout']						= 'account/logout';
 $_['route']['SearchPage']					= 'common/search';
@@ -126,6 +127,8 @@ $_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
 $_['route']['ApiPostPost']					= 'api/post/add/';
 $_['route']['ApiPutPost']					= 'api/post/edit/';
 $_['route']['ApiDeletePost']				= 'api/post/delete/';
+$_['route']['ApiGetPostStatisticTime']		= 'api/post/getStatisticTime/';
+$_['route']['ApiGetPostStatistic']			= 'api/post/getStatisticPosts/';
 
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';

@@ -1,5 +1,5 @@
 {% extends '@template/default/template/common/layout.tpl' %}
-{% use '@template/default/template/stock/common/block_news.tpl' %}
+{% use '@template/default/template/post/common_ko/post_wall.tpl' %}
 {% use '@template/default/template/common/ko_template_block.tpl' %}
 {% use '@template/default/template/account/common/profile_column.tpl' %}
 
@@ -11,10 +11,8 @@
 {% block body %}
 <div id="y-content">
     <div id="y-main-content" class="has-horizontal stock-page" style="min-width: inherit; display: inline-block;">
-        {% set news_title = 'Post'|trans %}
-        {% set news_href = '#' %}
         {{ block('account_common_profile_column') }}
-        {{ block('stock_common_block_news') }}
+        {{ block('post_common_ko_block_post_wall') }}
         {{ block('common_ko_template_comment') }}
         {{ block('common_ko_template_user_box') }}
     </div>
@@ -22,7 +20,7 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ block('stock_common_block_news_javascript') }}
+    {{ block('post_common_ko_block_post_wall_javascript') }}
     <script type="text/javascript" src="{{ asset_js('ko-vms.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -71,7 +69,6 @@
             var wallUserColumnOptions = {
                 wallUser : currUser
             };
-
             var viewModel = {
                 newsModel : new NewsViewModel(postOptions),
                 commentBoxModel : new CommentBoxViewModel(commentBoxOptions),
