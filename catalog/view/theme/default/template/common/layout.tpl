@@ -113,7 +113,6 @@
 			$(document).ready(function() {
 				var oRefreshOptions = {
 					'id': 'refresh-page-item',
-					'items': JSON.parse('{{ aWhatSNewOptions|json_encode()|raw }}'),
 				}
 				var viewModel = {
 					'refreshOptionConfigModel': new RefreshOptionConfigModel(oRefreshOptions),
