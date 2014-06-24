@@ -344,8 +344,8 @@ class ModelUserPost extends Model {
 		if ( !$oPosts ) return array();
 
 		$aTimes = array();
-		$oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes) {
-            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $this->customer->getId() ){
+		$oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes, $oUser) {
+            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $oUser->getId() ){
                 return true;
             }
             $time = $oPost->getCreated()->format('Ym');
