@@ -307,7 +307,7 @@ class ModelUserPost extends Model {
                 return false;
             }
             if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
-            	if ( $oPost->getCreated() < $aData['start'] || $oPost->getCreated() > $aData['end'] )
+            	if ( $oPost->getCreated() < $aData['start_time'] || $oPost->getCreated() > $aData['end_time'] )
             		return false;
             }
             return true;
