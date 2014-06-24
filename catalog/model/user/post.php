@@ -303,7 +303,7 @@ class ModelUserPost extends Model {
 		if ( empty($oPosts) ) return null;
 
 		$lPosts = $oPosts->getPosts(false)->filter( function($oPost) {
-            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $this->customer->getId() ){
+            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $oUser->getId() ){
                 return false;
             }
             if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
