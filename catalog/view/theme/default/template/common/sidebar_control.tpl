@@ -27,12 +27,12 @@
 				  		<ul class="sub-menu hidden" data-bind="foreach: items()">
 				  			<!-- ko if: $data.isEnabled() -->
     						<li class="menu-item sub-menu-item">
-						  		<a href="javascript:void(0);"><i class="icon-ok"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
+						  		<a href="javascript:void(0)"><i class="icon-ok"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
 					  		</li>
 					  		<!-- /ko -->
-					  		<!-- ko if: !$data.isEnabled() -->
-    						<li class="menu-item sub-menu-item" data-bind="click: $parent.enable($data)">
-						  		<a href="javascript:void(0);"><i class="icon-hand-right"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
+					  		<!-- ko ifnot: $data.isEnabled() -->
+    						<li class="menu-item sub-menu-item">
+						  		<a href="javascript:void(0)" data-bind="click: $parent.enable"><i class="icon-hand-right"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
 					  		</li>
 					  		<!-- /ko -->
 						</ul>
