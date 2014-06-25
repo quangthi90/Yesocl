@@ -217,10 +217,15 @@ function RefreshOptionConfigModel(options) {
 
 	that.handleClick = function(item, event){
 		if(!item.isEnabled()){
+			// ENABLE ITEM
 			that.enable(item);
+
+			// COPPLASE SUBMENU
 			if(!$('#' + that.id).hasClass('hidden')) {
 				$('#' + that.id).addClass('hidden');
 			}
+
+			// RELOAD POST IF WAS WHAT'S NEW PAGE
 		}
 		event.stopPropagation();
 	};

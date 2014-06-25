@@ -832,6 +832,9 @@ function NewsViewModel(options) {
 					var newsItem = new PostModel(p);
 					self.newsList.push(newsItem);
 				});
+				if(data.canLoadMore !== undefined) {
+					self.canLoadMore(data.canLoadMore);
+				}
 			}
 			self.isLoadSuccess(true);
 			_adjustLayout();
