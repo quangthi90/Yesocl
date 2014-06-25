@@ -479,6 +479,7 @@ class ControllerApiPost extends Controller {
         // aTypeIds
         $this->load->model('friend/friend');
         $aTypeIds = array();
+        $aTypeIds[$oCurrUser->getId()] = $oCurrUser->getId();
         foreach ($this->model_friend_friend->getFriends($oCurrUser->getId()) as $key => $friend) {
             $oFriend = $friend->getUser();
             $aTypeIds[$oFriend->getId()] = $oFriend->getId();
@@ -489,9 +490,9 @@ class ControllerApiPost extends Controller {
             }
         }
 
-        if (isset($aTypeIds[$oCurrUser->getId()])) {
-            unset($aTypeIds[$oCurrUser->getId()]);
-        }
+        // if (isset($aTypeIds[$oCurrUser->getId()])) {
+        //     unset($aTypeIds[$oCurrUser->getId()]);
+        // }
 
         // Limit & page
         if ( !empty($this->request->post['limit']) ){
