@@ -19,7 +19,7 @@
 				  		<a href="{{ path('RefreshPage') }}">
 				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
 				  		</a>
-				  		<a class="toogle-submenu down">
+				  		<a class="toogle-submenu">
 				  			<i class="icon-chevron-up"></i>
 				  			<i class="icon-chevron-down"></i>
 			  			</a>
@@ -27,10 +27,10 @@
 				  		<ul class="sub-menu hidden" data-bind="foreach: items()">
     						<li class="menu-item sub-menu-item">
 				  			<!-- ko if: $data.isEnabled() -->
-						  		<a href="javascript:void(0);"><i class="icon-ok"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
+						  		<a data-bind="click: $parent.handleClick"><i class="icon-ok"></i><span data-bind="text: 'aaa'"></span></a>
 					  		<!-- /ko -->
 					  		<!-- ko ifnot: $data.isEnabled() -->
-						  		<a href="javascript:void(0);" data-bind="click: $parent.enable"><i class="icon-hand-right"></i><span data-bind="text: $('<textarea />').html($data.title()).text()"></span></a>
+						  		<a data-bind="click: $parent.handleClick"><i class="icon-hand-right"></i><span data-bind="text: 'ddd'"></span></a>
 					  		<!-- /ko -->
 					  		</li>
 						</ul>

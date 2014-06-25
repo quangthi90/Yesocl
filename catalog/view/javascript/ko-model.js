@@ -215,23 +215,28 @@ function RefreshOptionConfigModel(options) {
 	that.id = options.id;
 	that.items = ko.observableArray([]);
 
-	that.enable = function (item) {
-		if (!item.isEnabled()) {
-			var ajaxOptions = {
-				url: window.yRouting.generate('ApiSetPrivateSetting', {}),
-				data: { option_key: 'config_display_whatsnew', option_value: item.value },
-			};
-			var successCallback = function(data){
-				if(data.success === "ok"){
-					ko.utils.arrayForEach(that.items(), function(p){
-						p.isEnabled(false);
-					});
-					item.isEnabled(true);
-				}
-			}
-			//Call common ajax Call:
-			YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	that.handleClick = function(item, event){
+		if(!item.isEnabled()){
+			that.enable(item);
 		}
+		event.stopPropagation();
+	};
+
+	that.enable = function (item) {
+		var ajaxOptions = {
+			url: window.yRouting.generate('ApiSetPrivateSetting', {}),
+			data: { option_key: 'config_display_whatsnew', option_value: item.value },
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(that.items(), function(p){
+					p.isEnabled(false);
+				});
+				item.isEnabled(true);
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	}
 
 	function _init () {
