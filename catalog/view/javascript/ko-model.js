@@ -219,9 +219,9 @@ function RefreshOptionConfigModel(options) {
 		if (!item.isEnabled()) {
 			var ajaxOptions = {
 				url: window.yRouting.generate('ApiSetPrivateSetting', {}),
-				data: { option_key: 'config_display_whatsnew', option_value: item.option },
+				data: { option_key: 'config_display_whatsnew', option_value: item.value },
 			};
-			var successCallback = function(data){
+			var successCallback = function(data){console.log(data);
 				if(data.success === "ok"){
 					ko.utils.arrayForEach(that.items(), function(p){
 						p.isEnabled(false);
