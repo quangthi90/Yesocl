@@ -15,7 +15,7 @@
 			<ul class="yes-menu-list left-menu disable-select">
 				{% block sidebar_control %}
 					{% set menu = get_flash('menu') %}
-				  	<li class="menu-item {% if menu == 'refresh' %}active{% endif %}" data-bind="with: $root.refreshOptionConfigModel">
+				  	<li class="menu-item what-new-item {% if menu == 'refresh' %}active{% endif %}" data-bind="with: $root.refreshOptionConfigModel">
 				  		<a href="{{ path('RefreshPage') }}">
 				  			<i class="icon-refresh"></i> <span>{% trans %}What's new{% endtrans %}</span>
 				  		</a>
@@ -27,10 +27,10 @@
 				  		<ul id="refresh-page-item" class="sub-menu hidden" data-bind="foreach: items()">
     						<li class="menu-item sub-menu-item">
 				  			<!-- ko if: $data.isEnabled() -->
-						  		<a data-bind="click: $parent.handleClick"><i class="icon-ok"></i><span data-bind="text: $('<textarea></textarea>').html($data.title()).text()"></span></a>
+						  		<a data-bind="click: $parent.handleClick"><i class="icon-ok"></i><span data-bind="text: $data.titleText"></span></a>
 					  		<!-- /ko -->
 					  		<!-- ko ifnot: $data.isEnabled() -->
-						  		<a data-bind="click: $parent.handleClick"><i class="icon-hand-right"></i><span data-bind="text: $('<textarea></textarea>').html($data.title()).text()"></span></a>
+						  		<a data-bind="click: $parent.handleClick"><i class="icon-hand-right"></i><span data-bind="text: $data.titleText"></span></a>
 					  		<!-- /ko -->
 					  		</li>
 						</ul>

@@ -208,6 +208,11 @@ function RefreshOptionModel(data) {
 	that.title = ko.observable(data.title || '');
 	that.isEnabled = ko.observable(data.enabled || false);
 	that.value = data.option;
+
+	that.titleText = ko.computed(function(){
+		var value = ko.utils.unwrapObservable(that.title);
+		return $("<div>").html(value).text();
+	});
 }
 
 function RefreshOptionConfigModel(options) {
@@ -217,20 +222,26 @@ function RefreshOptionConfigModel(options) {
 
 	that.handleClick = function(item, event){
 		if(!item.isEnabled()){
-			// ENABLE ITEM
-			that.enable(item);
 
 			// COPPLASE SUBMENU
-			if(!$('#' + that.id).hasClass('hidden')) {
-				$('#' + that.id).addClass('hidden');
+			var switchEle = $('#' + that.id).parent("li.menu-item").find(".toogle-submenu").first();
+			if(switchEle){
+				switchEle.trigger("click");
 			}
 
-			// RELOAD POST IF WAS WHAT'S NEW PAGE
+			// ENABLE ITEM
+			that.enable(item, function() {
+				// RELOAD POST IF CURRENT PAGE IS WHAT'S NEW PAGE
+				var paths = window.location.pathname.split('/');
+				if(paths.indexOf("what-s-new") >= 0) {
+					window.location.reload();
+				}
+			});
 		}
 		event.stopPropagation();
 	};
 
-	that.enable = function (item) {
+	that.enable = function (item, callback) {
 		var ajaxOptions = {
 			url: window.yRouting.generate('ApiSetPrivateSetting', {}),
 			data: { option_key: 'config_display_whatsnew', option_value: item.value },
@@ -241,6 +252,10 @@ function RefreshOptionConfigModel(options) {
 					p.isEnabled(false);
 				});
 				item.isEnabled(true);
+
+				if(callback && typeof callback === "function"){
+					callback(item);
+				}
 			}
 		}
 		//Call common ajax Call:

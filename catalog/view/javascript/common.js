@@ -159,7 +159,13 @@ Sidebar.prototype.attachEvents = function(){
 			if(subMenu.length > 0){
 				subMenu.toggleClass("hidden");
 			}
-			$(this).toggleClass("down");			
+			$(this).toggleClass("down");
+
+			if($(this).hasClass("down")){
+				$(this).parent().addClass("expanding");
+			} else {
+				$(this).parent().removeClass("expanding");
+			}
 			return false;
 		});		
 	});

@@ -1244,7 +1244,8 @@ a.btn-notification:hover .notification-item-name > i {
 .yes-menu-list .menu-item > a:focus {
   background-color: #009B77;
 }
-.yes-menu-list .menu-item.active > a {
+.yes-menu-list .menu-item.active > a,
+.yes-menu-list .menu-item.expanding > a {
   background-color: #009B77;
   font-weight: bold;
 }
@@ -1283,6 +1284,7 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .yes-menu-list .menu-item .toogle-submenu i {
   font-size: 13px;
+  background-color: transparent;
 }
 .yes-menu-list .menu-item .toogle-submenu i.icon-chevron-up {
   display: none;
