@@ -498,9 +498,6 @@ function NewsViewModel(options) {
 		_loadNews(function(data){
 			self.isLoadingMore(false);
 			root.scrollLeft(root.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
-			if(data.canLoadMore !== undefined) {
-				self.canLoadMore(data.canLoadMore);
-			}
 		});
 	};
 
