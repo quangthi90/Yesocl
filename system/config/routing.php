@@ -152,5 +152,5 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
 $_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
-$_['routing']['ApiGetDisplayOption']			= 'services/get/displayoption/';
+$_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/display/option/';
 ?>
