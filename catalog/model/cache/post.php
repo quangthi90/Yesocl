@@ -175,8 +175,7 @@ class ModelCachePost extends Model {
 	  	}
 
 		if (isset($query)) {
-			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy($query
-			)
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy($query)
 				->skip( $data['start'] )
 				->limit( $data['limit'] )
 				->sort( array($data['sort'] => $data['order']) );
