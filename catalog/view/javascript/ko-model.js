@@ -218,6 +218,9 @@ function RefreshOptionConfigModel(options) {
 	that.handleClick = function(item, event){
 		if(!item.isEnabled()){
 			that.enable(item);
+			if(!$('#' + that.id).hasClass('hidden')) {
+				$('#' + that.id).addClass('hidden');
+			}
 		}
 		event.stopPropagation();
 	};
