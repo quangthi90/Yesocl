@@ -171,7 +171,7 @@ class ModelCachePost extends Model {
 
 	  	// Multi types
 	  	if ( !empty($data['types']) ){
-	   		$query['type'] = array('$in' => $data['type']);
+	   		$query['type'] = array('$in' => $data['types']);
 	  	}
 
 		if (isset($query)) {
