@@ -161,7 +161,7 @@ class ModelCachePost extends Model {
 
 		// Type ids
 	  	if ( isset($data['type_ids']) ){
-	   		$query['typeId'] = array('$in' => $data['type_ids']);
+	   		$query['typeId'] = array('$in' => array_values($data['type_ids']) );
 	  	}
 
 	  	// Single type
