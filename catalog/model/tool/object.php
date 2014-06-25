@@ -190,10 +190,10 @@ class ModelToolObject extends Model
 	 * @param: list object Posts
 	 * @return: Array List Objects Posts formated
 	 */
-	public function formatPosts( $lPosts, $isReturnUser = true ) {
+	public function formatPosts( $lPosts, $isReturnUser = true, $bIsMustImage = false, $with = 330, $height = 246 ) {
 		$aPosts = array();
 		$aUsers = array();
-		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers );
+		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers, $bIsMustImage, $with, $height );
 
 		if ( !$isReturnUser ){
 			return $aPosts;
@@ -212,7 +212,7 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Object Post formated
 	 */
-	public function formatPost( $oPost, &$aUsers = array() ) {
+	public function formatPost( $oPost, &$aUsers = array(), $bIsMustImage = false, $with = 330, $height = 246 ) {
 		$this->load->model('tool/image');
 		$aPost = $oPost->formatToCache();
 
@@ -262,8 +262,13 @@ class ModelToolObject extends Model
 
                 // thumb
 				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], $with, $height );
+				}elseif ( $bIsMustImage ){
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], $with, $height );
+				}else{
+					$aPost['image'] = null;
 				}
+
                 break;
 
             case $this->config->get('common')['type']['branch']:
@@ -282,9 +287,9 @@ class ModelToolObject extends Model
 
                 // thumb
 				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], $with, $height );
 				}else{
-					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], 400, 250 );
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], $with, $height );
 				}
                 break;
 
@@ -304,7 +309,9 @@ class ModelToolObject extends Model
 
                 // thumb
 				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
-					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 330, 246 );
+					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], $with, $height );
+				}elseif ( $bIsMustImage ){
+					$aPost['image'] = $this->model_tool_image->resize( $this->config->get('no_image')['branch']['post'], $with, $height );
 				}else{
 					$aPost['image'] = null;
 				}

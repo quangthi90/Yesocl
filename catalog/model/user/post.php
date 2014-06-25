@@ -286,5 +286,86 @@ class ModelUserPost extends Model {
 
 		return $lPosts->getPostBySlug( $sPostSlug );
 	}
+
+	public function getPosts( $aData = array() ){
+		if ( empty($aData['user_slug']) ) return null;
+
+		if ( $aData['user_slug'] == $this->customer->getSlug() ){
+			$oUser = $this->customer->getUser();
+		}else{
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $aData['user_slug'] );
+			if ( empty($oUser) ) return null;
+		}
+
+		if (  empty($aData['start']) ){
+			$aData['start'] = 0;
+		}
+		if ( empty($aData['limit']) ){
+			$aData['limit'] = 15;
+		}
+
+		$oPosts = $oUser->getPostData();
+		if ( empty($oPosts) ) return null;
+
+		$lPosts = $oPosts->getPosts(false)->filter( function($oPost) use ($oUser) {
+            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $oUser->getId() ){
+                return false;
+            }
+            if ( !empty($aData['start_time']) && !empty($aData['end_time']) ){
+            	if ( $oPost->getCreated() < $aData['start_time'] || $oPost->getCreated() > $aData['end_time'] )
+            		return false;
+            }
+            return true;
+        });
+
+        $aPosts = $lPosts->toArray();
+
+        if ( empty($aData['start_time']) && empty($aData['end_time']) ){
+			usort($aPosts, function ($a, $b){
+			    if ( $a->getCountViewer() == $b->getCountViewer() ) {
+			        return 0;
+			    }
+			    return ($a->getCountViewer() > $b->getCountViewer()) ? -1 : 1;
+			});
+		}
+
+		return array(
+			'total' => $lPosts->count(),
+			'posts' => array_slice($aPosts, $aData['start'], $aData['limit'])
+		);
+	}
+
+	public function getStatisticTime( $sUserSlug ){
+		if ( $sUserSlug == $this->customer->getSlug() ){
+			$oUser = $this->customer->getUser();
+		}else{
+			$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $sUserSlug );
+		}
+
+		if ( !$oUser ) return array();
+
+		$oPosts = $oUser->getPostData();
+
+		if ( !$oPosts ) return array();
+
+		$aTimes = array();
+		$oPosts->getPosts(false)->forAll( function($key, $oPost) use (&$aTimes, $oUser) {
+            if ( !$oPost->getTitle() || $oPost->getUser()->getId() != $oUser->getId() ){
+                return true;
+            }
+            $time = $oPost->getCreated()->format('Ym');
+            $aTimes[$time][] = $oPost->getCreated()->setTime(00, 00)->getTimestamp();
+            return true;
+        });
+
+        $aTimes = array_map(function($aTime){
+            return array(
+                'time' => $aTime[0],
+                'count' => count($aTime)
+            );
+        }, $aTimes);
+
+        return $aTimes;
+	}
 }
 ?>

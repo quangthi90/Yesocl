@@ -2024,6 +2024,45 @@ a.btn-notification:hover .notification-item-name > i {
 .feed-block .block-header:hover a.block-back i {
   color: #fff;
 }
+
+.feed-block.block-tabable .block-header {
+  display: block;
+}
+.feed-block.block-tabable .block-header  .block-tabs {
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.feed-block.block-tabable .block-header  .block-tabs .block-tab-item {
+  display: block;  
+  float: left;
+  margin: 0;
+  margin-right: 2px;
+}
+.feed-block.block-tabable .block-header  .block-tabs .block-tab-item > a {
+  text-transform: uppercase;
+  display: block;
+  padding: 6px 15px;
+  color: #0E0E0E;
+  border: 1px solid #DDD;
+  border-bottom: none;
+  border-top-width: 2px;
+}
+.feed-block.block-tabable .block-header  .block-tabs .block-tab-item > a:hover {
+  background-color: #009B77;  
+  color: #FFF;
+  border: 1px solid #009B77;
+  border-bottom: none;
+  border-top-width: 2px;
+}
+.feed-block.block-tabable .block-header  .block-tabs .block-tab-item.active > a {
+  color: #009B77;  
+  background-color: #FFF;
+  border: 1px solid #DDD;
+  border-bottom: none;
+  pointer-events: none;
+  border-top: 2px solid #009B77;
+}
+
 /* ------------------------------------- END CATEGORY -------------------------------------- */
 /* ----------------------------------- START FOOTER BAR ---------------------------------------- */
 #yes-info {
@@ -2206,6 +2245,103 @@ a.btn-notification:hover .notification-item-name > i {
 .column-special .post-weak .post_image {
   display: none;
 }
+
+.block-post-statistics {
+  position: relative;
+}
+.block-post-statistics .block-content {
+}
+.block-post-statistics .post-container {
+  position: absolute;
+  top: 45px;
+  left: 0px;
+  right: 150px;
+  bottom: 0px;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.block-post-statistics .post-container > div {
+  height: 100%;
+}
+.block-post-statistics .post-filters {
+  position: absolute;
+  right: -20px;
+  top: 0px;
+  bottom: 1px;
+  border: 1px solid #F0F0F0;
+  border-right: none;
+  background-color: #FFFFFF;
+  width: 150px;
+  opacity: 0;
+}
+.block-post-statistics .post-filters .header {
+  margin:0px;
+  padding: 5px; 
+  text-align: center;
+  border-bottom: 1px solid #F0F0F0;
+  margin-bottom: 12px;
+}
+.block-post-statistics .post-filters .nav-list li.active a {
+  background-color: #009B77;
+  font-weight: bold;
+}
+.block-post-statistics .post-filters .nav-list li.active {
+  margin-left: -2px;
+}
+.block-post-statistics .post-filters .nav-list li.active a  i {
+  color: #FFFFFF;
+}
+
+.post-item-small {
+  margin: 0px 15px 15px 0px;  
+  padding: 0px;  
+  width: 400px;
+  height: 90px;
+  box-shadow: 1px 2px 4px -1px #ccc;
+  float: left;
+  overflow: hidden;
+}
+.post-item-small .post_meta {
+  overflow: hidden;
+  padding: 5px 20px 5px 10px;
+  border-bottom: 1px solid #F0F0F0;
+}
+.post-item-small .post_meta > span {
+  margin-right: 10px;
+}
+.post-item-small .post_meta .post_time {
+  color: #555;
+  font-weight: bold;
+  font-size: 9px;
+}
+.post-item-small .post_overview {
+    overflow: hidden;
+}
+.post-item-small .post_image {
+  float: left;
+  height: 90px;
+  width: 125px;
+  margin-right: 5px;
+}
+.post-item-small .post_image img {
+  width: 100%;
+  height: 100%;
+}
+.post-item-small .post_content {
+  padding: 5px;
+  line-height: 17px;
+}
+.post-item-small .post_title {
+  font-size: 12px;
+  font-weight: bold;
+}
+.post-item-small .post_title a {
+  color: #555;
+}
+.post-item-small .post_title a:hover {
+  color: #009B77;
+}
+
 /* ------------------------------------ END CUSTOM for POST ----------------------------------- */
 /* ------------------------------------------ POPUP ------------------------------------------- */
 .y-dlg-container {
@@ -4134,5 +4270,64 @@ a.wall-link:hover {
 
 /* ======================================== END STOCK ============================================= */
 
-/*END CUSTOM LIB's CSS*/
-
+/* ======================================== NEWS TICKER =========================================== */
+#news-ticker-container {
+  height: 58px;
+  left: 200px;
+  overflow-y: auto;
+  padding: 5px;
+  position: fixed;
+  top: 5px;
+  width: 550px;
+}
+.ticker-header {
+  border-bottom: 1px solid #F0F0F0;
+  margin-bottom: 5px;
+}
+.ticker-header h6 {
+  display: inline-block;
+}
+.ticker-header .buttons {
+  margin-left: 10px;
+  padding-left: 10px;
+}
+.ticker-header .buttons a {
+  margin-left: 5px;
+}
+.ticker-header .buttons a > i {
+  font-size: 10px;
+}
+.news-ticker-container {
+}
+.news-ticker-container li.news-ticker {
+  display: table;
+  width: 100%;
+}
+.news-ticker-container li.news-ticker .ticker-time {
+  color: #555555;
+  display: table-cell;
+  font-size: 11px;
+  font-weight: bold;
+  padding-left: 5px;
+  text-transform: capitalize;
+  vertical-align: middle;
+  width: 100px;
+}
+.news-ticker-container li.news-ticker .ticker-info {
+  display: table-cell;
+  padding: 5px 5px 5px 0;
+}
+.news-ticker-container li.news-ticker .ticker-info a {
+  color: #555555;
+  display: block;
+  max-width: 410px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.news-ticker-container li.news-ticker .ticker-info a:hover {
+    color: #009B77;
+}
+.news-ticker-container li.news-ticker:hover {
+  background-color: #FFFFFF;
+}

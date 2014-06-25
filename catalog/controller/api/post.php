@@ -573,5 +573,100 @@ class ControllerApiPost extends Controller {
         'canLoadMore' => $bCanLoadMore
         )));
     }
+    public function getStatisticTime(){
+        if ( empty($this->request->get['user_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+        }
+        $sUserSlug = $this->request->get['user_slug'];
+
+        if ( empty($this->request->get['post_type']) ){
+            $sPostType = $this->config->get('common')['type']['user'];
+        }else{
+            $sPostType = $this->request->get['post_type'];
+        }
+
+        $this->load->model($sPostType . '/post');
+        $sModel = 'model_' . $sPostType . '_post';
+        
+        $aTimes = $this->$sModel->getStatisticTime( $sUserSlug );
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'times' => array_values($aTimes)
+        )));
+    }
+
+    public function getStatisticPosts(){
+        if ( empty($this->request->get['user_slug']) ){
+            return $this->response->setOutput(json_encode(array(
+                'success' => 'not ok',
+                'error' => 'user slug is empty'
+            )));
+        }
+        $sUserSlug = $this->request->get['user_slug'];
+
+        if ( empty($this->request->get['post_type']) ){
+            $sPostType = $this->config->get('common')['type']['user'];
+        }else{
+            $sPostType = $this->request->get['post_type'];
+        }
+
+        if ( !empty($this->request->post['limit']) ){
+            $limit = $this->request->post['limit'];
+        }else{
+            $limit = $this->limit;
+        }
+
+        if ( !empty($this->request->get['page']) ){
+            $page = $this->request->get['page'];
+        }else{
+            $page = 1;
+        }
+
+        $aData = array(
+            'user_slug' => $this->request->get['user_slug'],
+            'start' => ($page - 1) * $limit,
+            'limit' => $limit
+        );
+
+        if ( empty($this->request->get['time']) || $this->request->get['time'] == 0 ){
+            $aData['order'] = 'countViewer';
+        }else{
+            $time = new DateTime( date('Y-m-d', $this->request->get['time']) );
+            $aData['start_time'] = clone($time->modify('first day of this month'));
+            $aData['end_time'] = clone($time->modify('first day of next month'));
+        }
+
+        $this->load->model($sPostType . '/post');
+        $sModel = 'model_' . $sPostType . '_post';
+        $lPosts = $this->$sModel->getPosts( $aData );
+
+        $aPosts = array();
+        $bCanLoadMore = false;
+        if ( $lPosts ){
+            if ( is_array($lPosts) ){
+                $iPostCount = $lPosts['total'];
+                $lPosts = $lPosts['posts'];
+            }else{
+                $iPostCount = $lPosts->count();
+            }
+
+            $this->load->model('tool/object');
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false, true, 125, 90 );
+
+            if ( ($page - 1) * $limit + $limit < $iPostCount ){
+                $bCanLoadMore = true;
+            }
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'posts' => $aPosts,
+            'canLoadMore' => $bCanLoadMore
+        )));
+    }
 }
 ?>

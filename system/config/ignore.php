@@ -10,6 +10,6 @@ $_['ignore'][] 					= 'HomePage';
 $_['ignore'][] 					= 'BranchCategories';
 $_['ignore'][] 					= 'BranchCategory';
 $_['ignore'][] 					= 'PostPage';
-$_['ignore'][] 					= 'WallPage';
+// $_['ignore'][] 					= 'WallPage';
 $_['ignore'][] 					= 'ProfilePage';
 ?>

@@ -78,11 +78,13 @@
 		<script type="text/javascript" src="{{ asset_js('libs/momment/moment.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/expander/expander.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/select/select2.min.js') }}"></script>
-		<!-- Common Script -->
+		<script type="text/javascript" src="{{ asset_js('libs/newsTicker/jquery.newsTicker.min.js') }}"></script>
+		<!-- Common Script -->		
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('ko-model.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>
+		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>		
+		<script type="text/javascript" src="{{ asset_js('ko-common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
@@ -101,6 +103,13 @@
 					$('.post_meta').find('.post_cm').hide();
 				}
 				window.yUsers = new HashTable();
+
+				//News sticker:
+				var tickerOptions = {
+					url: window.yRouting.generate("ApiGetLastStockNews", { page: 1 }),
+					maxShow: 12				
+				};
+				new NewsTicker(tickerOptions);
 			});
 
 			var sConfirmDeletePost = '{% trans %}Are you sure you want to delete this post {% endtrans %}?',
