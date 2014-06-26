@@ -484,7 +484,7 @@ class ControllerApiPost extends Controller {
             $oFriend = $friend->getUser();
             $aTypeIds[$oFriend->getId()] = $oFriend->getId();
 
-            foreach ($this->model_friend_friend->getFriends($oFriend->getId()) as $key => $friendSFriend) {
+            foreach ($this->model_friend_friend->getFriends($oFriend->getId())->getFriends() as $friendSFriend) {
                 $oFriendSFriend = $friendSFriend->getUser();
                 $aTypeIds[$oFriendSFriend->getId()] = $oFriendSFriend->getId();
             }
