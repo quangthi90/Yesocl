@@ -154,7 +154,9 @@ class ControllerFriendFollow extends Controller {
 		));
 		
 		// Get list Posts
-		foreach ($aPosts as $i => $aPost) {
+		foreach ($aPosts as $i => $oPost) {
+			$aPost = $oPost->formatToCache();
+			
 			// thumb
 			if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
 				$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250, true );

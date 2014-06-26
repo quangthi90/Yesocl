@@ -99,7 +99,9 @@ class ControllerCommonHome extends Controller {
 			}
 
 			$this->data['fl_posts'] = array();
-			foreach ($aPosts as $aPost) {
+			foreach ($aPosts as $oPost) {
+				$aPost = $oPost->formatToCache();
+				
 				// thumb
 				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
 					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
