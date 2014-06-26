@@ -63,14 +63,22 @@ class ModelUserSetting extends Model {
 		));
 
 		if (!$privateSettings) {
-			return FALSE;
-		}
+			$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
+			if( !$oUser ) {
+				return FALSE;
+			}
 
-		$privateSettings->addPrivate( $setting );
+			$privateSettings = new Setting();
+			$privateSettings->addPrivate( $setting );
+			$privateSettings->setUser( $oUser );
+			$this->dm->persist($privateSettings);
+		}else {
+			$privateSettings->addPrivate( $setting );
+		}
 
 		$this->dm->flush();
 
-		return true;
+		return TRUE;
 	}
 }
 ?>

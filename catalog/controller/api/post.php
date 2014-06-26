@@ -480,7 +480,7 @@ class ControllerApiPost extends Controller {
         $this->load->model('friend/friend');
         $aTypeIds = array();
         $aTypeIds[$oCurrUser->getId()] = $oCurrUser->getId();
-        foreach ($this->model_friend_friend->getFriends($oCurrUser->getId()) as $key => $friend) {
+        foreach ($this->model_friend_friend->getFriends($oCurrUser->getId())->getFriends() as $friend) {
             $oFriend = $friend->getUser();
             $aTypeIds[$oFriend->getId()] = $oFriend->getId();
 
