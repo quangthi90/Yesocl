@@ -911,10 +911,11 @@ function NewsViewModel(options) {
 	}
 
 	function _clearPost(callback) {
+		self.canLoadMore(false);
 		self.newsList([]);
-		self.canLoadMore(true);
-		self.isLoadSuccess(true);
 		_adjustLayout();
+		self.currentPage(1);
+		root.scrollLeft(0);
 	}
 
 	function _initNews(){
