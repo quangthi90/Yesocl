@@ -232,11 +232,20 @@ function RefreshOptionConfigModel(options) {
 			// ENABLE ITEM
 			that.enable(item, function() {
 				// RELOAD POST IF CURRENT PAGE IS WHAT'S NEW PAGE
-				var paths = window.location.pathname.split('/');
-				if(paths.indexOf("what-s-new") >= 0) {
-					window.location.reload();
+				var context = YesGlobal.Utils.getKoContext();
+				if(context !== null){
+					if (context.$root.newsModel.id() === 'whats-new') {
+						context.$root.newsModel.resetPost();
+					}
+				}else {
+					console.log("Ko content not found !");
 				}
+				// var paths = window.location.pathname.split('/');
+				// if(paths.indexOf("what-s-new") >= 0) {
+				// 	window.location.reload();
+				// }
 			});
+
 		}
 		event.stopPropagation();
 	};

@@ -575,6 +575,11 @@ function NewsViewModel(options) {
 		$.magnificPopup.close();
 	}
 
+	this.resetPost = function() {
+		_clearPost();
+		_initNews();
+	}
+
 	//Private functions:
 	function _adjustLayout(){
 		var widthBlock = 0;
@@ -903,6 +908,13 @@ function NewsViewModel(options) {
 			userTags: userTags,
 			stockTags : stockTags
 		};
+	}
+
+	function _clearPost(callback) {
+		self.newsList([]);
+		self.canLoadMore(true);
+		self.isLoadSuccess(true);
+		_adjustLayout();
 	}
 
 	function _initNews(){
