@@ -6,7 +6,7 @@ class ModelUserSetting extends Model {
 	 * Get Setting by User
 	 * 2014/04/15
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string User ID
 	 * @return: Object User Setting
 	 */
@@ -51,6 +51,22 @@ class ModelUserSetting extends Model {
 		if ( !$oStock ) return false;
 
 		$oSetting->getStocks()->removeElement( $oStock );
+
+		$this->dm->flush();
+
+		return true;
+	}
+
+	public function setPrivateSetting( $idUser, $setting ) {
+		$privateSettings = $this->dm->getRepository('Document\User\Setting')->findOneBy(array(
+			'user.id' => $idUser
+		));
+
+		if (!$privateSettings) {
+			return FALSE;
+		}
+
+		$privateSettings->addPrivate( $setting );
 
 		$this->dm->flush();
 

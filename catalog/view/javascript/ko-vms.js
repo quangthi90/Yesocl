@@ -498,9 +498,6 @@ function NewsViewModel(options) {
 		_loadNews(function(data){
 			self.isLoadingMore(false);
 			root.scrollLeft(root.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
-			if(data.canLoadMore !== undefined) {
-				self.canLoadMore(data.canLoadMore);
-			}
 		});
 	};
 
@@ -576,6 +573,11 @@ function NewsViewModel(options) {
 	this.closeAdvancePost = function(){
 		_clearAfterAdding(true);
 		$.magnificPopup.close();
+	}
+
+	this.resetPost = function() {
+		_clearPost();
+		_initNews();
 	}
 
 	//Private functions:
@@ -832,6 +834,9 @@ function NewsViewModel(options) {
 					var newsItem = new PostModel(p);
 					self.newsList.push(newsItem);
 				});
+				if(data.canLoadMore !== undefined) {
+					self.canLoadMore(data.canLoadMore);
+				}
 			}
 			self.isLoadSuccess(true);
 			_adjustLayout();
@@ -903,6 +908,14 @@ function NewsViewModel(options) {
 			userTags: userTags,
 			stockTags : stockTags
 		};
+	}
+
+	function _clearPost(callback) {
+		self.canLoadMore(false);
+		self.newsList([]);
+		_adjustLayout();
+		self.currentPage(1);
+		root.scrollLeft(0);
 	}
 
 	function _initNews(){

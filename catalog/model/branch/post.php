@@ -230,25 +230,29 @@ class ModelBranchPost extends Model {
 			return true;
 		}
 
+		// DELETE POST CACHE
+		$this->load->model('cache/post');
+		$lPostCache = $this->model_cache_post->deletePost(array('id' => array( $oPost->getId() )));
+
 		$this->dm->remove( $oPost );
 
 		$this->dm->flush();
 
 		//-- Update 6 last posts
-		$this->load->model('tool/cache');
+		// $this->load->model('tool/cache');
 
-		$oPosts = $this->getPosts( array(
-			'branch_id' => $branch_id,
-			'category_id' => $aData['category_id'],
-			'limit' => 6
-		));
+		// $oPosts = $this->getPosts( array(
+		// 	'branch_id' => $branch_id,
+		// 	'category_id' => $aData['category_id'],
+		// 	'limit' => 6
+		// ));
 
-		$this->model_tool_cache->updateLastCategoryPosts(
-			$this->config->get('post')['type']['branch'],
-			$oPost->getBranch()->getId(),
-			$oPost->getCategory()->getId(),
-			$oPosts
-		);
+		// $this->model_tool_cache->updateLastCategoryPosts(
+		// 	$this->config->get('post')['type']['branch'],
+		// 	$oPost->getBranch()->getId(),
+		// 	$oPost->getCategory()->getId(),
+		// 	$oPosts
+		// );
 
 		return true;
 	}

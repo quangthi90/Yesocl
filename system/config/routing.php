@@ -24,6 +24,7 @@ $_['routing']['CommentEdit']					= '{post_type}/post/{post_slug}/comment/{commen
 
 // Page
 $_['routing']['RefreshPage'] 					= 'what-s-new/';
+$_['routing']['SetDisplayRefreshPage'] 			= 'what-s-new/setoption/{option}';
 $_['routing']['WelcomePage']					= '';
 $_['routing']['HomePage']	 					= 'home/';
 $_['routing']['WallPage']	 					= 'wall-page/{user_slug}/';
@@ -125,6 +126,7 @@ $_['routing']['ApiGetPostLiker']				= 'services/get/{post_type}/post/{post_slug}
 $_['routing']['ApiPostPost']					= 'services/post/{post_type}/post/{slug}/';
 $_['routing']['ApiPutPost']						= 'services/put/{post_type}/post/{post_slug}/';
 $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slug}/';
+$_['routing']['ApiGetLastestPost']				= 'services/get/post/lastest/{page}/';
 $_['routing']['ApiGetPostStatisticTime']		= 'services/get/{post_type}/post/user/{user_slug}/statistic/time/';
 $_['routing']['ApiGetPostStatistic']			= 'services/get/{post_type}/post/user/{user_slug}/statistic/{time}/list/page/{page}/';
 
@@ -149,4 +151,6 @@ $_['routing']['ApiGetAllFriends']				= 'services/get/friend/all/';
 
 // User
 $_['routing']['ApiGetUserPost']					= 'services/get/user/{user_slug}/posts/{page}/';
+$_['routing']['ApiSetPrivateSetting']			= 'services/set/privateoption/';
+$_['routing']['ApiGetDisplayOption']			= 'services/get/setting/what-s-new/display/option/';
 ?>

@@ -34,7 +34,7 @@ function PostModel(data) {
 		slug: data.category_slug,
 		name : data.category_name
 	} : { };
-	that.comments = [];	
+	that.comments = [];
 	that.commentCount = ko.observable(data.comment_count || 0);
 	that.currentCommentPage = ko.observable(1);
 	that.likeCount = ko.observable(data.like_count || 0);
@@ -43,7 +43,7 @@ function PostModel(data) {
 	that.isLiked = ko.observable(data.isLiked || false);
 	that.userTags = ko.observableArray(data.user_tags || []);
 	that.stockTags = ko.observableArray(data.stock_tags || []);
-	
+
 	that.likePost = function() {
 		var ajaxOptions = {
 			url : window.yRouting.generate('ApiPutPostLike', {
@@ -77,7 +77,7 @@ function PostModel(data) {
 			})
 			context.$data.userBoxModel.showUserList(apiUrl, function(count){
 				if(count !== undefined){
-					that.likeCount(count);	
+					that.likeCount(count);
 				}
 			});
 		}else {
@@ -154,9 +154,9 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.friendStatus(data.status);
 			} else {
-			}				
+			}
 		};
-		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);	
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
 	that.cancelRequest = function(){
 		var ajaxOptions = {
@@ -168,7 +168,7 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.friendStatus(data.status);
 			} else {
-			}			
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
@@ -182,7 +182,7 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.followStatus(data.status);
 			} else {
-			}			
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
@@ -196,8 +196,96 @@ function UserModel(data) {
 			if(data.success === "ok"){
 				that.followStatus(data.status);
 			} else {
-			}				
+			}
 		};
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
 	};
+}
+
+function RefreshOptionModel(data) {
+	var that = this;
+	that.href = window.yRouting.generate('SetDisplayRefreshPage', {option: data.option});
+	that.title = ko.observable(data.title || '');
+	that.isEnabled = ko.observable(data.enabled || false);
+	that.value = data.option;
+
+	that.titleText = ko.computed(function(){
+		var value = ko.utils.unwrapObservable(that.title);
+		return $("<div>").html(value).text();
+	});
+}
+
+function RefreshOptionConfigModel(options) {
+	var that = this;
+	that.id = options.id;
+	that.items = ko.observableArray([]);
+
+	that.handleClick = function(item, event){
+		if(!item.isEnabled()){
+
+			// COPPLASE SUBMENU
+			var switchEle = $('#' + that.id).parent("li.menu-item").find(".toogle-submenu").first();
+			if(switchEle){
+				switchEle.trigger("click");
+			}
+
+			// ENABLE ITEM
+			that.enable(item, function() {
+				// RELOAD POST IF CURRENT PAGE IS WHAT'S NEW PAGE
+				var context = YesGlobal.Utils.getKoContext();
+				if(context !== null){
+					if (context.$root.newsModel.id() === 'whats-new') {
+						context.$root.newsModel.resetPost();
+					}
+				}else {
+					console.log("Ko content not found !");
+				}
+				// var paths = window.location.pathname.split('/');
+				// if(paths.indexOf("what-s-new") >= 0) {
+				// 	window.location.reload();
+				// }
+			});
+
+		}
+		event.stopPropagation();
+	};
+
+	that.enable = function (item, callback) {
+		var ajaxOptions = {
+			url: window.yRouting.generate('ApiSetPrivateSetting', {}),
+			data: { option_key: 'config_display_whatsnew', option_value: item.value },
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(that.items(), function(p){
+					p.isEnabled(false);
+				});
+				item.isEnabled(true);
+
+				if(callback && typeof callback === "function"){
+					callback(item);
+				}
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	function _init () {
+		var ajaxOptions = {
+			url: window.yRouting.generate('ApiGetDisplayOption', {}),
+		};
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.items, function(p){
+					var optionItem = new RefreshOptionModel(p);
+					that.items.push(optionItem);
+				});
+			}
+		}
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	_init();
 }

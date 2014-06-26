@@ -8,7 +8,7 @@ class ModelCachePost extends Model {
 	 * Add new cache Post
 	 * 2013/08/25
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Branch ID
 	 *	- array Thumb
 	 *	- array data
@@ -26,7 +26,7 @@ class ModelCachePost extends Model {
 		if ( empty($data['post_id']) ){
 			return false;
 		}
-		
+
 		if ( empty($data['type']) ){
 			return false;
 		}
@@ -34,22 +34,22 @@ class ModelCachePost extends Model {
 		if ( empty($data['type_id']) ){
 			return false;
 		}
-		
+
 		if ( !isset($data['view']) ){
 			return false;
 		}
-		
+
 		if ( empty($data['created']) ){
 			return false;
 		}
-		
+
 		$post = new Post();
 		$post->setPostId( $data['post_id'] );
 		$post->setType( $data['type'] );
 		$post->setTypeId( $data['type_id'] );
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
-		
+
 		$this->dm->persist( $post );
 		$this->dm->flush();
 	}
@@ -58,7 +58,7 @@ class ModelCachePost extends Model {
 	 * Edit Cache Post
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Branch ID
 	 *	- array Thumb
 	 *	- array data
@@ -114,7 +114,7 @@ class ModelCachePost extends Model {
 	 * Delete Post by ID
 	 * 2013/07/24
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- array string Post ID
 	 * @return: boolean
 	 */
@@ -127,7 +127,7 @@ class ModelCachePost extends Model {
 				}
 			}
 		}
-		
+
 		$this->dm->flush();
 
 		return true;
@@ -151,10 +151,6 @@ class ModelCachePost extends Model {
 			$data['limit'] = 20;
 		}
 
-		if ( empty($data['type_ids']) ){
-			return null;
-		}
-
 		if ( empty($data['sort']) ){
 			return null;
 		}
@@ -163,41 +159,55 @@ class ModelCachePost extends Model {
 			$data['order'] = -1;
 		}
 
-		$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy(array(
-			'typeId' => array('$in' => $data['type_ids'])
-		))
-			->skip( $data['start'] )
-			->limit( $data['limit'] )
-			->sort( array($data['sort'] => $data['order']) );
+		// Type ids
+	  	if ( isset($data['type_ids']) ){
+	   		$query['typeId'] = array('$in' => array_values($data['type_ids']) );
+	  	}
+
+	  	// Single type
+	  	if ( !empty($data['type']) ){
+	   		$query['type'] = $data['type'];
+	  	}
+
+	  	// Multi types
+	  	if ( !empty($data['types']) ){
+	   		$query['type'] = array('$in' => $data['types']);
+	  	}
+
+		if (isset($query)) {
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy($query)
+				->skip( $data['start'] )
+				->limit( $data['limit'] )
+				->sort( array($data['sort'] => $data['order']) );
+		}else {
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll()
+				->skip( $data['start'] )
+				->limit( $data['limit'] )
+				->sort( array($data['sort'] => $data['order']) );
+		}
 
 		$posts = array();
 
-		$this->load->model('tool/cache');
 		foreach ( $cache_posts as $cache_post ) {
-			$post = $this->model_tool_cache->getCachePost( $cache_post->getPostId() );
+			$type = $cache_post->getType();
+			if ( $type == $this->config->get('post')['cache']['user'] ){
+				$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
+				if ( !$object ){
+					$post = null;
+				}else{
+					$post = $object->getPostById( $cache_post->getPostId() );
+				}
+			}else{
+				$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
+			}
 
 			if ( !$post ){
-				$type = $cache_post->getType();
-				if ( $type == $this->config->get('post')['cache']['branch'] ){
-					$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
-				}else{
-					$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
-					if ( !$object ){
-						$post = null;
-					}else{
-						$post = $object->getPostById( $cache_post->getPostId() );
-					}
-				}
-
-				if ( !$post ){
-					continue;
-				}
-
-				$post = $this->model_tool_cache->setCachePost( $post );
-
-				$post['type'] = strtolower( $type );
-				$posts[] = $post;
+				continue;
 			}
+
+			// $post['type'] = strtolower( $type );
+			// $posts[] = $post->formatToCache();
+			$posts[] = $post;
 		}
 
 		return $posts;

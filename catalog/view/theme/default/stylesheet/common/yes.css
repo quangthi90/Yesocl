@@ -379,6 +379,12 @@ a.btn-link-circle:hover {
 a.btn-link-circle:hover i {
   color: #000;
 }
+.disable-select {
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none;
+}
 .overflow-text {
   display: block;
   overflow: hidden;
@@ -607,7 +613,7 @@ a.btn-link-circle:hover i {
   font-size: 12px;
 }
 #y-sidebar {
-  width: 370px;
+  width: 350px;
   background: #0A4B3E;
   position: fixed;
   top: 0px; 
@@ -1219,8 +1225,10 @@ a.btn-notification:hover .notification-item-name > i {
 }
 .sidebar-controls .yes-menu-list {
 }
-.yes-menu-list .menu-item {
+.yes-menu-list > .menu-item {
   margin-bottom: 10px;
+  position: relative;
+  user-select: none;
 }
 .yes-menu-list .menu-item > a {
   display: block;
@@ -1236,7 +1244,8 @@ a.btn-notification:hover .notification-item-name > i {
 .yes-menu-list .menu-item > a:focus {
   background-color: #009B77;
 }
-.yes-menu-list .menu-item.active > a {
+.yes-menu-list .menu-item.active > a,
+.yes-menu-list .menu-item.expanding > a {
   background-color: #009B77;
   font-weight: bold;
 }
@@ -1266,6 +1275,53 @@ a.btn-notification:hover .notification-item-name > i {
 .yes-menu-list .menu-item > a:hover > i,
 .yes-menu-list .menu-item > a:focus > i {  
 }
+
+.yes-menu-list .menu-item .toogle-submenu {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  user-select: none;
+}
+.yes-menu-list .menu-item .toogle-submenu i {
+  font-size: 13px;
+  background-color: transparent;
+}
+.yes-menu-list .menu-item .toogle-submenu i.icon-chevron-up {
+  display: none;
+}
+.yes-menu-list .menu-item .toogle-submenu i.icon-chevron-down {
+  display: block;
+}
+.yes-menu-list .menu-item .toogle-submenu.down i.icon-chevron-up {
+  display: block;
+}
+.yes-menu-list .menu-item .toogle-submenu.down i.icon-chevron-down {
+  display: none;
+}
+.yes-menu-list .menu-item .sub-menu {
+  z-index: 10;
+  width: 100%;
+  margin-top: 3px;
+  margin-left: 10px;
+  user-select: none;
+}
+.yes-menu-list .menu-item .sub-menu .menu-item {
+  margin-bottom: 1px;
+}
+.yes-menu-list .menu-item .sub-menu .menu-item a {  
+}
+.yes-menu-list .menu-item .sub-menu .menu-item a:hover {  
+}
+.yes-menu-list .menu-item .sub-menu .menu-item a i {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  font-size: 13px;
+}
+.yes-menu-list .menu-item .sub-menu .menu-item a span {
+  font-size: 13px;
+}
+
 /* ------------------------------------- END NAV SIDEBAR ------------------------------------- */
 /* -------------------------------------- FEED STYLE ----------------------------------------- */
 .content-part{

@@ -187,6 +187,10 @@ class ModelStockPost extends Model {
 			return false;
 		}
 
+		// DELETE POST CACHE
+		$this->load->model('cache/post');
+		$lPostCache = $this->model_cache_post->deletePost(array('id' => array( $oPost->getId() )));
+
 		// Remove image
 		if ( $oPost->getThumb() ){
 			$this->load->model('tool/image');

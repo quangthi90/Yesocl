@@ -2,11 +2,11 @@
 
 <!DOCTYPE html>
 <html>
-	<head>		
+	<head>
 		<title>{% block title %}{% trans %}Home Feed{% endtrans %}{% endblock %} | Yesocl - {% trans %}Social Network{% endtrans %}</title>
-		<base href="{{ base }}" />		
+		<base href="{{ base }}" />
 		<!-- Icon -->
-		<link rel="shortcut icon" href="image/template/favicon.png">		
+		<link rel="shortcut icon" href="image/template/favicon.png">
 		<!-- Library css -->
 		<link href="{{ asset_css('libs/bootstrap.css') }}" rel="stylesheet" media="screen" />
 		<link href="{{ asset_css('libs/bootstrap-responsive.min.css') }}" rel="stylesheet" media="screen" />
@@ -46,7 +46,7 @@
 		{{ include('@template/default/template/post/common/liked_user.tpl') }}
 		{{ include('@template/default/template/common/quick_search.tpl') }}
 		{{ block('common_language_block') }}
-		
+
 		<div id="html-template" class="hidden">
 			{% block template %}
 			{% endblock %}
@@ -68,7 +68,7 @@
 		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.elastic.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.events.input.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/mention/underscore.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.mentions.input.js') }}"></script>		
+		<script type="text/javascript" src="{{ asset_js('libs/mention/jquery.mentions.input.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/summernote.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/jquery.hotkeys.js') }}"></script>
@@ -90,7 +90,7 @@
 		<script type="text/javascript" src="{{ asset_js('account.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('friend.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('notification.js') }}"></script>
-		
+
 		<script type="text/javascript">
 			$(document).ready(function(){
 				var user = '{{ get_user_data()|raw }}';
@@ -118,6 +118,18 @@
 				sOk = '{% trans %}Ok{% endtrans %}';
 		</script>
 
+		<script type="text/javascript"><!--//
+			$(document).ready(function() {
+				var oRefreshOptions = {
+					'id': 'refresh-page-item',
+				}
+				var viewModel = {
+					'refreshOptionConfigModel': new RefreshOptionConfigModel(oRefreshOptions),
+				}
+				ko.applyBindings(viewModel, document.getElementById('y-sidebar'));
+			});
+		//--></script>
+
 		<!-- Custom Script -->
     	{% block javascript %}
 		{% endblock %}
@@ -132,8 +144,8 @@
 			FB.init({
 	            appId   : '{{ get_fb_api_id() }}',
 	            status  : true,
-	            cookie  : true, 
-	            xfbml   : true 
+	            cookie  : true,
+	            xfbml   : true
 	        });
 	        function callFBLogin(){
 	            FB.login(function(response) {

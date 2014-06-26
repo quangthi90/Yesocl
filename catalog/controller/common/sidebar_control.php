@@ -1,4 +1,4 @@
-<?php  
+<?php
 class ControllerCommonSidebarControl extends Controller {
 	public function index() {
 		$oLoggedUser = $this->customer->getUser();

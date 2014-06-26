@@ -24,7 +24,7 @@ class ControllerApiUser extends Controller {
 		        )));
 			}
     	}
-		
+
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => 'send request have error'
@@ -53,7 +53,7 @@ class ControllerApiUser extends Controller {
 		        )));
 			}
     	}
-		
+
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => 'cancel request have error'
@@ -72,7 +72,7 @@ class ControllerApiUser extends Controller {
        	}
 
        	$aUserB = $this->model_user_user->getUser( $this->request->get['user_slug'] );
-       	
+
        	if ( !$aUserB ){
        		return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
@@ -89,7 +89,7 @@ class ControllerApiUser extends Controller {
 	            'status' => 2
 	        )));
        	}
-		
+
     	return $this->response->setOutput(json_encode(array(
             'success' => 'not ok',
             'error' => 'confirm make friend have error'
@@ -119,11 +119,11 @@ class ControllerApiUser extends Controller {
 
        	$sUserSlug = $this->customer->getSlug();
 
-       	$result = $this->model_user_user->editUser( 
+       	$result = $this->model_user_user->editUser(
        		$sUserSlug,
        		array(
        			'request_friend' => $oUserFriend->getId()
-       		) 
+       		)
        	);
 
        	if ( !$result ){
@@ -161,7 +161,7 @@ class ControllerApiUser extends Controller {
 	        )));
        	}
 
-       	$result = $this->model_friend_friend->unFriend( 
+       	$result = $this->model_friend_friend->unFriend(
        		$aUser['id'], // User A
        		$this->customer->getId() // User B
        	);
@@ -239,7 +239,7 @@ class ControllerApiUser extends Controller {
             )));
         }
 
-        $result = $this->model_friend_follower->makeFollow( 
+        $result = $this->model_friend_follower->makeFollow(
             $this->customer->getId(), // User A
             $aUser['id'] // User B
         );
@@ -279,7 +279,7 @@ class ControllerApiUser extends Controller {
             )));
         }
 
-        $result = $this->model_friend_follower->unFollow( 
+        $result = $this->model_friend_follower->unFollow(
             $this->customer->getId(), // User A
             $aUser['id'] // User B
         );
@@ -350,6 +350,66 @@ class ControllerApiUser extends Controller {
             'posts' => $aPosts,
             'canLoadMore' => $bCanLoadMore
         )));
+    }
+
+    public function setPrivateOption() {
+      // Get current user
+      $oCurrUser = $this->customer->getUser();
+      if (!$oCurrUser) {
+        return $this->response->setOutput(json_encode(array(
+          'success' => 'not ok',
+          'error' => 'user slug is empty'
+          )));
+      }
+
+      if (isset($this->request->post['option_value']) && isset($this->request->post['option_key'])) {
+        $this->load->model( 'user/setting' );
+        if ($this->model_user_setting->setPrivateSetting($oCurrUser->getId(), array($this->request->post['option_key'] => $this->request->post['option_value'])) !== FALSE) {
+          return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            )));
+        }
+      }
+
+      return $this->response->setOutput(json_encode(array(
+        'success' => 'not ok',
+        'error' => 'there are error occur'
+        )));
+    }
+
+    public function getDisplayOption() {
+      // Get User Settings
+      $oLoggedUser = $this->customer->getUser();
+
+      $aWhatSNewOptions = array();
+      if ($oLoggedUser) {
+        $this->load->model( 'user/setting' );
+        $oSettings = $this->model_user_setting->getSettingByUser($oLoggedUser->getId());
+        if ($oSettings) {
+          $sWhatSNewOption = $oSettings->getPrivateByKey('config_display_whatsnew');
+        }
+
+        foreach ($this->config->get('whatsnew')['option'] as $option) {
+          $aWhatSNewOptions[] = array(
+            'title' => htmlspecialchars($this->config->get('whatsnew')['option_title'][$option], ENT_QUOTES),
+            'option' => $option,
+            'enabled' => (($option == $sWhatSNewOption) || ($option == $this->config->get('whatsnew')['option']['all'] && $sWhatSNewOption == NULL)),
+            );
+        }
+      }else {
+        foreach ($this->config->get('whatsnew')['option'] as $option) {
+          $aWhatSNewOptions[] = array(
+            'title' => htmlspecialchars($this->config->get('whatsnew')['option_title'][$option], ENT_QUOTES),
+            'option' => $option,
+            'enabled' => false,
+            );
+        }
+      }
+
+      return $this->response->setOutput(json_encode(array(
+          'success' => 'ok',
+          'items' => $aWhatSNewOptions,
+          )));
     }
 }
 ?>

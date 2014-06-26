@@ -7,7 +7,7 @@ class ModelUserPost extends Model {
 	 * Add Post of User to Database
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	array data:
 	 *		- string User Wall Slug (user_slug) 					-- Required
 	 *		- string User Author Slug (author_id)					-- Required
@@ -51,7 +51,7 @@ class ModelUserPost extends Model {
 		// $aData['title'] = htmlentities( $aData['title'] );
 
 		$slug = (!empty($aData['title']) ? $this->url->create_slug( $aData['title'] ) . '-' : '') . new MongoId();
-		
+
 		$oPost = new Post();
 		$oPost->setContent( $aData['content'] );
 		$oPost->setUser( $oAuthor );
@@ -73,7 +73,7 @@ class ModelUserPost extends Model {
 		}
 
 		$lPosts->addPost( $oPost );
-		
+
 		$this->dm->flush();
 
 		// Add Image
@@ -83,7 +83,7 @@ class ModelUserPost extends Model {
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
 			$path = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
 			$dest = DIR_IMAGE . $path;
-			
+
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
@@ -115,7 +115,7 @@ class ModelUserPost extends Model {
 			$oPost->setStockPostId( $oStockPost->getId() );
 			$this->dm->flush();
 		}
-		
+
 		return $oPost;
 	}
 
@@ -123,7 +123,7 @@ class ModelUserPost extends Model {
 	 * Edit Post of User to Database
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	- string Post ID
 	 *	- array Thumb
 	 *	- array data
@@ -136,11 +136,11 @@ class ModelUserPost extends Model {
 	 */
 	public function editPost( $sPostSlug, $aData = array() ) {
 		$lPosts = $this->dm->getRepository('Document\User\Posts')->findOneBy( array('posts.slug' => $sPostSlug) );
-		
+
 		if ( !$lPosts ){
 			return false;
 		}
-		
+
 		$oPost = $lPosts->getPostBySlug( $sPostSlug );
 
 		if ( !$oPost ){
@@ -153,7 +153,7 @@ class ModelUserPost extends Model {
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
 			$path = $sFolderLink . $oPost->getUser()->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
 			$dest = DIR_IMAGE . $path;
-			
+
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
@@ -171,12 +171,12 @@ class ModelUserPost extends Model {
 			// $oPost->setTitle( htmlentities($aData['title']) );
 			$oPost->setTitle( $aData['title'] );
 		}
-		
+
 		if ( !empty($aData['likerId']) ){
 			$likerIds = $oPost->getLikerIds();
 
 			$key = array_search( $aData['likerId'], $likerIds );
-			
+
 			if ( !$likerIds || $key === false ){
 				$oPost->addLikerId( $aData['likerId'] );
 			}else{
@@ -187,7 +187,7 @@ class ModelUserPost extends Model {
 
 		$oPost->setUserTags( $aData['userTags'] );
 		$oPost->setStockTags( $aData['stockTags'] );
-		
+
 		$this->dm->flush();
 
 		// Update Stock Post
@@ -200,7 +200,7 @@ class ModelUserPost extends Model {
 		// Notifications
 		$this->load->model('tool/object');
 		$this->model_tool_object->checkPostNotification( $oPost );
-		
+
 		return $oPost;
 	}
 
@@ -210,12 +210,16 @@ class ModelUserPost extends Model {
 		if ( !$lPosts ){
 			return false;
 		}
-		
+
 		$oPost = $lPosts->getPostBySlug( $sPostSlug );
 
 		if ( !$oPost ){
 			return false;
 		}
+
+		// DELETE POST CACHE
+		$this->load->model('cache/post');
+		$lPostCache = $this->model_cache_post->deletePost(array('id' => array( $oPost->getId() )));
 
 		// Remove image
 		if ( $oPost->getThumb() ){
@@ -224,18 +228,19 @@ class ModelUserPost extends Model {
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$path = DIR_IMAGE . $sFolderLink . $oPost->getUser()->getId() . '/' . $sFolderName . '/' . $oPost->getId();
-			
+
 			// remove Image
 			$this->model_tool_image->deleteDirectoryImage( $path );
 		}
 
 		$this->load->model('stock/post');
 		$this->model_stock_post->deletePost( $oPost->getStockPostId(), true );
-		
+
 		$lPosts->getPosts(false)->removeElement( $oPost );
-		
+
 		$this->dm->flush();
-		
+
+
 		return true;
 	}
 

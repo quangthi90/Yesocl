@@ -24,6 +24,7 @@ $_['route']['CommentEdit']					= 'post/comment/editComment';
 
 // Page
 $_['route']['RefreshPage']					= 'common/refresh';
+$_['route']['SetDisplayRefreshPage']		= 'common/refresh/setOption';
 $_['route']['WelcomePage']					= '';
 $_['route']['HomePage']						= 'common/home';
 $_['route']['WallPage']						= 'account/wall';
@@ -127,6 +128,7 @@ $_['route']['ApiGetPostLiker']				= 'api/post/getLikers/';
 $_['route']['ApiPostPost']					= 'api/post/add/';
 $_['route']['ApiPutPost']					= 'api/post/edit/';
 $_['route']['ApiDeletePost']				= 'api/post/delete/';
+$_['route']['ApiGetLastestPost']			= 'api/post/getLastest/';
 $_['route']['ApiGetPostStatisticTime']		= 'api/post/getStatisticTime/';
 $_['route']['ApiGetPostStatistic']			= 'api/post/getStatisticPosts/';
 
@@ -151,4 +153,6 @@ $_['route']['ApiGetAllFriends']				= 'api/user/getAllFriends/';
 
 // User
 $_['route']['ApiGetUserPost']				= 'api/user/getPosts/';
+$_['route']['ApiSetPrivateSetting']			= 'api/user/setPrivateOption/';
+$_['route']['ApiGetDisplayOption']			= 'api/user/getDisplayoption/';
 ?>
