@@ -6,7 +6,7 @@ class ModelStockPost extends Model {
 	 * Add Post of Stock to Database
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *	array data:
 	 *		- string User Author Slug 								-- Required
 	 *		- string Title
@@ -37,7 +37,7 @@ class ModelStockPost extends Model {
 		// $aData['title'] = htmlentities( $aData['title'] );
 
 		$slug = (!empty($aData['title']) ? $this->url->create_slug( $aData['title'] ) . '-' : '') . new MongoId();
-		
+
 		$oPost = new Post();
 		$oPost->setContent( $aData['content'] );
 		$oPost->setUser( $oAuthor );
@@ -64,7 +64,7 @@ class ModelStockPost extends Model {
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
 			$path = $sFolderLink . $oAuthor->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
 			$dest = DIR_IMAGE . $path;
-			
+
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
@@ -80,10 +80,11 @@ class ModelStockPost extends Model {
 			'type' => $this->config->get('post')['cache']['stock'],
 			'type_id' => new MongoId(),
 			'view' => 0,
-			'created' => $oPost->getCreated()
+			'created' => $oPost->getCreated(),
+			'hasTitle' => !empty($aData['title']),
 		);
-		$this->model_cache_post->addPost( $aData );
-		
+		$this->model_cache_post->editPost( $aData );
+
 		return $oPost;
 	}
 
@@ -91,7 +92,7 @@ class ModelStockPost extends Model {
 	 * Edit Post of User to Database
 	 * 2013/08/29
 	 * @author: Bommer <bommer@bommerdesign.com>
-	 * @param: 
+	 * @param:
 	 *  string Post Slug or Post Id
 	 *	array data:
 	 *		- string Stock Code 	 								-- Required
@@ -127,7 +128,7 @@ class ModelStockPost extends Model {
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
 			$path = $sFolderLink . $oPost->getUser()->getId() . '/' . $sFolderName . '/' . $oPost->getId() . '/' . $sAvatarName . '.' . $aData['extension'];
 			$dest = DIR_IMAGE . $path;
-			
+
 			$this->load->model('tool/image');
 			if ( $this->model_tool_image->moveFile($aData['image_link'], $dest) ){
 				$oPost->setThumb( $path );
@@ -145,12 +146,12 @@ class ModelStockPost extends Model {
 			// $oPost->setTitle( htmlentities($aData['title']) );
 			$oPost->setTitle( $aData['title'] );
 		}
-		
+
 		if ( !empty($aData['likerId']) ){
 			$likerIds = $oPost->getLikerIds();
 
 			$key = array_search( $aData['likerId'], $likerIds );
-			
+
 			if ( !$likerIds || $key === false ){
 				$oPost->addLikerId( $aData['likerId'] );
 			}else{
@@ -166,13 +167,25 @@ class ModelStockPost extends Model {
 		if ( isset($aData['userTags']) ) {
 			$oPost->setUserTags( $aData['userTags'] );
 		}
-		
+
 		$this->dm->flush();
 
 		// Notifications
 		$this->load->model('tool/object');
 		$this->model_tool_object->checkPostNotification( $oPost );
-		
+
+		// Cache post for what's new
+		$this->load->model('cache/post');
+		$aData = array(
+			'post_id' => $oPost->getId(),
+			'type' => $this->config->get('post')['cache']['stock'],
+			'type_id' => new MongoId(),
+			'view' => $oPost->getCountViewer(),
+			'created' => new \DateTime(),
+			'hasTitle' => !empty($aData['title']),
+		);
+		$this->model_cache_post->editPost( $aData );
+
 		return $oPost;
 	}
 
@@ -198,15 +211,15 @@ class ModelStockPost extends Model {
 			$sFolderLink = $this->config->get('stock')['default']['image_link'];
 			$sFolderName = $this->config->get('post')['default']['image_folder'];
 			$path = DIR_IMAGE . $sFolderLink . $oPost->getUser()->getId() . '/' . $sFolderName . '/' . $oPost->getId();
-			
+
 			// remove Image
 			$this->model_tool_image->deleteDirectoryImage( $path );
 		}
-		
+
 		$this->dm->remove( $oPost );
-		
+
 		$this->dm->flush();
-		
+
 		return true;
 	}
 
@@ -281,7 +294,7 @@ class ModelStockPost extends Model {
 		if ( !$oUser ) return array();
 
 		$aTimes = array();
-		
+
 		$lTimes = $this->dm->createQueryBuilder('Document\Stock\Post')
 			->map("function() {
 	            if ( this.title != null ){

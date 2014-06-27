@@ -92,6 +92,10 @@ class ModelUserPost extends Model {
 			$this->dm->flush();
 		}
 
+		// Notifications
+		$this->load->model('tool/object');
+		$this->model_tool_object->checkPostNotification( $oPost );
+
 		// Cache post for what's new
 		$this->load->model('cache/post');
 		$aCacheData = array(
@@ -99,13 +103,10 @@ class ModelUserPost extends Model {
 			'type' => $this->config->get('post')['cache']['user'],
 			'type_id' => $oUser->getId(),
 			'view' => 0,
-			'created' => $oPost->getCreated()
+			'created' => $oPost->getCreated(),
+			'hasTitle' => !empty($aData['title']),
 		);
 		$this->model_cache_post->addPost( $aCacheData );
-
-		// Notifications
-		$this->load->model('tool/object');
-		$this->model_tool_object->checkPostNotification( $oPost );
 
 		// Duplicate post for Stock
 		if ( !empty($aData['stockTags']) ){
@@ -200,6 +201,18 @@ class ModelUserPost extends Model {
 		// Notifications
 		$this->load->model('tool/object');
 		$this->model_tool_object->checkPostNotification( $oPost );
+
+		// Cache post for what's new
+		$this->load->model('cache/post');
+		$aCacheData = array(
+			'post_id' => $oPost->getId(),
+			'type' => $this->config->get('post')['cache']['user'],
+			'type_id' => $oPost->getUser()->getId(),
+			'view' => $oPost->getCountViewer(),
+			'created' => new \DateTime(),
+			'hasTitle' => !empty($aData['title']),
+		);
+		$this->model_cache_post->editPost( $aCacheData );
 
 		return $oPost;
 	}

@@ -6,7 +6,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 Class Post {
 	/** @MongoDB\Id */
 	private $id;
-	
+
 	/** @MongoDB\Date */
 	private $created;
 
@@ -28,6 +28,9 @@ Class Post {
 	/** @MongoDB\String */
 	private $authorId;
 
+	/** @MongoDB\Boolean */
+	private $hasTitle;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -39,7 +42,7 @@ Class Post {
 	public function getCreated(){
 		return $this->created;
 	}
-	
+
 	public function setView( $view ){
 		$this->view = $view;
 	}
@@ -55,7 +58,7 @@ Class Post {
 	public function getPostId(){
 		return $this->postId;
 	}
-	
+
 	public function setType( $type ){
 		$this->type = $type;
 	}
@@ -86,5 +89,13 @@ Class Post {
 
 	public function getAuthorId(){
 		return $this->authorId;
+	}
+
+	public function setHasTitle( $hasTitle ){
+		$this->hasTitle = $hasTitle;
+	}
+
+	public function getHasTitle(){
+		return $this->hasTitle;
 	}
 }

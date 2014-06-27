@@ -43,12 +43,17 @@ class ModelCachePost extends Model {
 			return false;
 		}
 
+		if ( !isset($data['hasTitle']) ){
+			return false;
+		}
+
 		$post = new Post();
 		$post->setPostId( $data['post_id'] );
 		$post->setType( $data['type'] );
 		$post->setTypeId( $data['type_id'] );
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
+		$post->setHasTitle( $data['hasTitle'] );
 
 		$this->dm->persist( $post );
 		$this->dm->flush();
@@ -93,6 +98,10 @@ class ModelCachePost extends Model {
 			return false;
 		}
 
+		if ( empty($data['hasTitle']) ){
+			return false;
+		}
+
 		$post = $this->dm->getRepository('Document\Cache\Post')->findOneByPostId( $data['post_id'] );
 
 		if ( !$post ){
@@ -105,6 +114,7 @@ class ModelCachePost extends Model {
 		$post->setTypeId( $data['type_id'] );
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
+		$post->setHasTitle( $data['hasTitle'] );
 
 		$this->dm->persist( $post );
 		$this->dm->flush();

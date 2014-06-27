@@ -108,15 +108,17 @@ class ModelBranchPost extends Model {
 
 		$this->dm->flush();
 
+		// Cache post for what's new
 		$this->load->model('cache/post');
 		$aData = array(
 			'post_id' => $oPost->getId(),
 			'type' => $this->config->get('post')['cache']['branch'],
 			'type_id' => $oBranch->getId(),
 			'view' => 0,
-			'created' => $oPost->getCreated()
+			'created' => $oPost->getCreated(),
+			'hasTitle' => !empty($aData['title']),
 		);
-		$this->model_cache_post->addPost( $aData );
+		$this->model_cache_post->editPost( $aData );
 
 		return $oPost;
 	}
@@ -204,6 +206,18 @@ class ModelBranchPost extends Model {
 		}
 
 		$this->dm->flush();
+
+		// Cache post for what's new
+		$this->load->model('cache/post');
+		$aData = array(
+			'post_id' => $oPost->getId(),
+			'type' => $this->config->get('post')['cache']['branch'],
+			'type_id' => $oBranch->getId(),
+			'view' => $oPost->getCountViewer(),
+			'created' => new \DateTime(),
+			'hasTitle' => !empty($aData['title']),
+		);
+		$this->model_cache_post->editPost( $aData );
 
 		return $oPost;
 	}
