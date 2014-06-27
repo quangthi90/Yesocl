@@ -12,6 +12,7 @@ function NewsTicker(options) {
     this.interval = options.interval || 10*60*1000;
     this.title = options.title || "Hot news";
     this.isPaused = ko.observable(false);
+    this.hasTitle = 1;
 
     this.tickers = ko.observableArray([]);
 
@@ -34,7 +35,8 @@ function NewsTicker(options) {
     	var ajaxOptions = {
 			url : self.url,
 			data:{
-				limit: self.maxShow
+				limit: self.maxShow,
+                hasTitle: self.hasTitle
 			}
 		};
 		var successCallback = function(data){

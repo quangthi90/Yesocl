@@ -106,7 +106,7 @@
 
 				//News sticker:
 				var tickerOptions = {
-					url: window.yRouting.generate("ApiGetLastStockNews", { page: 1 }),
+					url: window.yRouting.generate("ApiGetLastAllNews", { page: 1 }),
 					maxShow: 12				
 				};
 				new NewsTicker(tickerOptions);

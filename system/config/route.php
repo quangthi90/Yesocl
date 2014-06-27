@@ -131,6 +131,7 @@ $_['route']['ApiDeletePost']				= 'api/post/delete/';
 $_['route']['ApiGetLastestPost']			= 'api/post/getLastest/';
 $_['route']['ApiGetPostStatisticTime']		= 'api/post/getStatisticTime/';
 $_['route']['ApiGetPostStatistic']			= 'api/post/getStatisticPosts/';
+$_['route']['ApiGetLastAllNews']			= 'api/post/getLastNews/';
 
 // Comment
 $_['route']['ApiGetComments']				= 'api/comment/getComments/';

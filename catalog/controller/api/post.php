@@ -394,12 +394,18 @@ class ControllerApiPost extends Controller {
             $iPage = 1;
         }
 
-        $this->load->model( 'cache/post' );
-        $lPosts = $this->model_cache_post->getPosts(array(
+        $filter = array(
             'limit' => $iLimit,
             'start' => ($iPage - 1)*$iLimit,
             'sort' => 'created',
-            ));
+            );
+
+        if ( isset( $this->request->post['hasTitle'] ) ) {
+            $filter['hasTitle'] = $this->request->post['hasTitle'];
+        }
+
+        $this->load->model( 'cache/post' );
+        $lPosts = $this->model_cache_post->getPosts( $filter );
 
         return $lPosts;
     }
@@ -574,6 +580,7 @@ class ControllerApiPost extends Controller {
         'canLoadMore' => $bCanLoadMore
         )));
     }
+
     public function getStatisticTime(){
         if ( empty($this->request->get['user_slug']) ){
             return $this->response->setOutput(json_encode(array(
@@ -591,7 +598,7 @@ class ControllerApiPost extends Controller {
 
         $this->load->model($sPostType . '/post');
         $sModel = 'model_' . $sPostType . '_post';
-        
+
         $aTimes = $this->$sModel->getStatisticTime( $sUserSlug );
 
         return $this->response->setOutput(json_encode(array(
@@ -668,6 +675,42 @@ class ControllerApiPost extends Controller {
             'posts' => $aPosts,
             'canLoadMore' => $bCanLoadMore
         )));
+    }
+
+    public function getLastNews() {
+        $lPosts = $this->getAllPosts();
+
+        // Limit & page
+        if ( !empty($this->request->post['limit']) ){
+            $iLimit = $this->request->post['limit'];
+        }else{
+            $iLimit = $this->limit;
+        }
+
+        if (count($lPosts) < $iLimit) {
+            $bCanLoadMore = false;
+        }else {
+            $bCanLoadMore = true;
+        }
+
+        // Format Posts
+        $aPosts = array();
+        if ($lPosts) {
+            $this->load->model( 'tool/object' );
+            $aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+        }
+
+        // TODO: REMOVE, DISABLED EDIT & DELETE
+        foreach ($aPosts as $key => $aPost) {
+            $aPosts[$key]['can_edit'] = false;
+            $aPosts[$key]['can_delete'] = false;
+        }
+
+        return $this->response->setOutput(json_encode(array(
+            'success' => 'ok',
+            'posts' => $aPosts,
+            'canLoadMore' => $bCanLoadMore
+            )));
     }
 }
 ?>

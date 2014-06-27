@@ -98,7 +98,7 @@ class ModelCachePost extends Model {
 			return false;
 		}
 
-		if ( empty($data['hasTitle']) ){
+		if ( !isset($data['hasTitle']) ){
 			return false;
 		}
 
@@ -184,8 +184,12 @@ class ModelCachePost extends Model {
 	   		$query['type'] = array('$in' => $data['types']);
 	  	}
 
+		if ( isset($data['hasTitle']) ){
+			$query['hasTitle'] = (boolean)$data['hasTitle'];
+		}
+
 		if (isset($query)) {
-			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy($query)
+			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy( $query )
 				->skip( $data['start'] )
 				->limit( $data['limit'] )
 				->sort( array($data['sort'] => $data['order']) );

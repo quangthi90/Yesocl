@@ -129,6 +129,7 @@ $_['routing']['ApiDeletePost']					= 'services/delete/{post_type}/post/{post_slu
 $_['routing']['ApiGetLastestPost']				= 'services/get/post/lastest/{page}/';
 $_['routing']['ApiGetPostStatisticTime']		= 'services/get/{post_type}/post/user/{user_slug}/statistic/time/';
 $_['routing']['ApiGetPostStatistic']			= 'services/get/{post_type}/post/user/{user_slug}/statistic/{time}/list/page/{page}/';
+$_['routing']['ApiGetLastAllNews']				= 'services/get/all/post/lastest/{page}';
 
 // Comment
 $_['routing']['ApiGetComments']					= 'services/get/{post_type}/post/{post_slug}/comments/{page}/';
