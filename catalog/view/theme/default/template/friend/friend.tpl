@@ -18,7 +18,7 @@
             <div class="block-content user-container">
                 <!-- ko if: userList().length  -->
                 <!-- ko foreach: userList() -->
-                <div class="block-content-item user-item js-friend-info">
+                <div class="user-item js-friend-info">
                     <a class="user-img" data-bind="link: { title: $data.name, route: 'WallPage', params: { user_slug: $data.slug } }">
                         <img data-bind="attr: {src: $data.avatar, alt: $data.username}">
                     </a>
