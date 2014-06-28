@@ -302,7 +302,7 @@ class ModelCachePost extends Model {
 		foreach ($oPosts as $post) {
 			$data = array();
 			$data['post_id'] = $post->getId();
-			$data['type'] = $type;
+			$data['type'] = $this->config->get('post')['cache'][$type];
 			if ($type == $this->config->get('post')['type']['user']) {
 				$data['type_id'] = $post->getUser()->getId();
 			}elseif ($type == $this->config->get('post')['type']['branch']) {

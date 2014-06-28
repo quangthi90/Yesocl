@@ -383,7 +383,7 @@ class ControllerApiPost extends Controller {
 
         // Limit & page
         if ( !empty($this->request->post['limit']) ){
-            $iLimit = $this->request->post['limit'];
+            $iLimit = (int)$this->request->post['limit'];
         }else{
             $iLimit = $this->limit;
         }
