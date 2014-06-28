@@ -226,5 +226,120 @@ class ModelCachePost extends Model {
 
 		return $posts;
 	}
+
+	/**
+	 * Update Cache Posts
+	 * 2014/06/28
+	 * @author: Vn3352 <vn3352@bommerdesign.com>
+	 * @param: array data
+	 * @return: array next query inf
+	 */
+	public function updateCachePosts( $data = array() ){
+		if ( !isset($data['start']) ){
+			$start = 0;
+		}else {
+			$start = (int)$data['start'];
+		}
+
+		if ( !isset($data['limit']) ){
+			$limit = 20;
+		}else {
+			$limit = (int)$data['limit'];
+		}
+
+		if ( !isset($data['sort']) ){
+			$sort = 'created';
+		}else {
+			$sort = $data['sort'];
+		}
+
+		if ( !isset($data['order']) ){
+			$order = -1;
+		}else {
+			$order = (int)$data['order'];
+		}
+
+	  	// GET BEFORE QUERY INF
+	  	if ( !isset($data['type']) || !in_array($data['type'], $this->config->get('post')['type']) ){
+	   		$type = $this->config->get('post')['type']['branch'];
+	  	}else {
+	  		$type = $data['type'];
+	  	}
+
+	  	if ( isset($data['isDone']) && $data['isDone'] == 1 ) {
+	  		return $data;
+	  	}
+
+	  	// GET POST
+		if ($type == $this->config->get('post')['type']['branch']) {
+			$results = $this->dm->getRepository('Document\Branch\Post')
+				->findAll()
+				->skip($start)
+				->limit($limit)
+				->sort(array($sort => $order));
+			$oPosts = $results;
+		}elseif ($type == $this->config->get('post')['type']['stock']) {
+			$results = $this->dm->getRepository('Document\Stock\Post')
+				->findAll()
+				->skip($start)
+				->limit($limit)
+				->sort(array($sort => $order));
+			$oPosts = $results;
+		}elseif ($type == $this->config->get('post')['type']['user']) {
+			$results = $this->dm->getRepository('Document\User\Posts')
+				->findAll()
+				->skip($start)
+				->limit($limit);
+			$oPosts = array();
+			foreach ($results as $value) {
+				foreach ($value->getPosts() as $post) {
+					$oPosts[] = $post;
+				}
+			}
+		}
+
+		// UPDATE TO CACHE POST
+		foreach ($oPosts as $post) {
+			$data = array();
+			$data['post_id'] = $post->getId();
+			$data['type'] = $type;
+			if ($type == $this->config->get('post')['type']['user']) {
+				$data['type_id'] = $post->getUser()->getId();
+			}elseif ($type == $this->config->get('post')['type']['branch']) {
+				$data['type_id'] = $post->getBranch()->getId();
+			}elseif ($type == $this->config->get('post')['type']['stock']) {
+				$data['type_id'] = new MongoId();
+			}
+			$data['view'] = $post->getCountViewer();
+			$data['created'] = new \DateTime();
+			$data['hasTitle'] = (strlen($post->getTitle()) > 0);
+
+			$this->editPost($data);
+		}
+
+		// SET NEW QUERY INF
+		$isDone = 0;
+		if ($limit > count($results)) {
+			$start = 0;
+			if ($type == $this->config->get('post')['type']['user']) {
+				$isDone = 1;
+			}elseif ($type == $this->config->get('post')['type']['branch']) {
+				$type = $this->config->get('post')['type']['stock'];
+			}elseif ($type == $this->config->get('post')['type']['stock']) {
+				$type = $this->config->get('post')['type']['user'];
+			}
+		}else {
+			$start += $limit;
+		}
+
+		return array(
+			'isDone' => $isDone,
+			'start' => $start,
+			'limit' => $limit,
+			'type' => $type,
+			'sort' => $sort,
+			'order' => $order,
+			);
+	}
 }
 ?>
