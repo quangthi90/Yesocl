@@ -79,11 +79,11 @@
 		<script type="text/javascript" src="{{ asset_js('libs/expander/expander.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/select/select2.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('libs/newsTicker/jquery.newsTicker.min.js') }}"></script>
-		<!-- Common Script -->		
+		<!-- Common Script -->
 		<script type="text/javascript" src="{{ asset_js('yes.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('ko-model.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('common-utils.js') }}"></script>
-		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>		
+		<script type="text/javascript" src="{{ asset_js('common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('ko-common.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('object.js') }}"></script>
 		<script type="text/javascript" src="{{ asset_js('search.js') }}"></script>
@@ -107,7 +107,7 @@
 				//News sticker:
 				var tickerOptions = {
 					url: window.yRouting.generate("ApiGetLastAllNews", { page: 1 }),
-					maxShow: 12				
+					maxShow: 20,
 				};
 				new NewsTicker(tickerOptions);
 			});
