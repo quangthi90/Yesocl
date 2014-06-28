@@ -1510,7 +1510,7 @@ function PostStatisticsModel(options) {
 	self.currentPage = ko.observable(1);
 	self.postList = ko.observableArray([]);
 	self.urls = options.urls || [];
-	self.currentPost = ko.observable(null);	
+	self.currentPost = ko.observable(null);
 	self.isLoadSuccess = ko.observable(false);
 	self.isLoadingMore = ko.observable(false);
 	self.canLoadMore = ko.observable(true);
@@ -1524,7 +1524,7 @@ function PostStatisticsModel(options) {
 	if(options.clearCacheWhenReload){
 		cacheManager.clearCache();
 	}
-	
+
 	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
 
@@ -1565,7 +1565,7 @@ function PostStatisticsModel(options) {
 		var postContainer = $("#" + self.id).find(".post-container");
 		var masonryHorizontal = postContainer.find(".masonry-horizontal");
 		var postItems = postContainer.find(".post");
-		
+
 		if(postItems.length === 0){
 			return;
 		}
@@ -1576,15 +1576,15 @@ function PostStatisticsModel(options) {
 		var numberRow = Math.floor(postContainer.height()/(heightPostItem + 15));
 		var numberCol = Math.floor(postItems.length/numberRow) + 1;
 		masonryHorizontal.width(numberCol * (widthPostItem + 15));
-		
+
 		//postContainer.scrollLeft(postContainer.scrollLeft() + 2*ConfigBlock.MIN_NEWS_WIDTH);
 		var niceScrollInstance = postContainer.getNiceScroll();
 		if(niceScrollInstance.length > 0){
 			niceScrollInstance.onResize();
 		}else {
-			postContainer.niceScroll();	
+			postContainer.niceScroll();
 		}
-		
+
 		postContainer.on("scroll", function() {
 			var rootWidth = $(this).width();
 			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 10) {
@@ -1619,7 +1619,7 @@ function PostStatisticsModel(options) {
 		loadOptions.time = self.currentTime();
 		loadOptions.page = self.currentPage();
 		loadOptions.post_type = self.currentType();
-		
+
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
 			data : {
@@ -1637,7 +1637,7 @@ function PostStatisticsModel(options) {
 				if(self.userCaching()) {
 					//Save to cache:
 					var cachedObject = _formatToCache(data.posts);
-					cacheManager.setItem(cachedObject.key, JSON.stringify(cachedObject.value));	
+					cacheManager.setItem(cachedObject.key, JSON.stringify(cachedObject.value));
 				}
 			}
 
@@ -1755,3 +1755,64 @@ function PostStatisticsModel(options) {
 
 	_initNews();
 };
+
+function FriendViewModel(options) {
+	var self = this;
+
+	this.urls = options.urls || [];
+	this.doInit = options.doInit || false;
+	this.limit = options.limit;
+
+	this.userList = ko.observableArray([]);
+	this.canLoadMore = ko.observable(false);
+	this.isLoadSuccess = ko.observable(true);
+	this.currentPage = ko.observable(1);
+	this.isLoadingMore = ko.observable(false);
+
+	this.loadMore = function () {
+
+	}
+
+	function _loadData(callback) {
+		var loadOptions = self.urls.loadData.params;
+		loadOptions.page = self.currentPage();
+
+		var ajaxOptions = {
+			url: window.yRouting.generate(self.urls.loadData.name, loadOptions),
+			data : {
+				limit : self.limit
+			}
+		};
+
+		var successCallback = function(data){
+			if(data.success === "ok"){
+				ko.utils.arrayForEach(data.friends, function(p){
+					var item = new UserModel(p);
+					self.userList.push(item);
+				});
+
+				if(data.canLoadMore !== undefined) {
+					self.canLoadMore(data.canLoadMore);
+				}
+			}
+
+			self.isLoadSuccess(true);
+
+			if(callback && typeof callback === "function"){
+				callback(data);
+			}
+		}
+
+		//Call common ajax Call:
+		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
+	}
+
+	function _init() {
+		if (self.doInit) {
+			self.isLoadSuccess(false);
+			_loadData();
+		}
+	}
+
+	_init();
+}
