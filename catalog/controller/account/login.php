@@ -107,13 +107,13 @@ class ControllerAccountLogin extends Controller {
     $this->load->model('user/user');
     $this->load->model('user/background');
 
-    $oUser = $this->model_user_user->getUserFull( array('email' => $aDatas['email']) );
+    $oUser = $this->model_user_user->getUserFull( array('email' => $aDatas['email']), true );
 
     if ( $oUser ){
       if ( !$oUser->getIsSocial() ){
         return $this->response->setOutput(json_encode(array(
           'success' => 'not ok',
-          'error' => 'Email already exists in the system!'
+          'error' => gettext('Email already exists in the system! This email was created or deleted by system, try with "forgot password" or contact admin to get your account')
         )));
       }
 
