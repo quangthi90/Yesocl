@@ -311,7 +311,7 @@ class ModelCachePost extends Model {
 				$data['type_id'] = new MongoId();
 			}
 			$data['view'] = $post->getCountViewer();
-			$data['created'] = new \DateTime();
+			$data['created'] = $post->getUpdated();
 			$data['hasTitle'] = (strlen($post->getTitle()) > 0);
 
 			$this->editPost($data);
