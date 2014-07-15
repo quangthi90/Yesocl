@@ -235,7 +235,37 @@ class ModelCachePost extends Model {
 	 * @return: array next query inf
 	 */
 	public function updateCachePosts( $data = array() ){
-		if ( !isset($data['start']) ){
+		$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll();
+$i = 0;
+		foreach ( $cache_posts as $cache_post ) {
+			$type = $cache_post->getType();
+			if ( $type == $this->config->get('post')['cache']['user'] ){
+				$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
+				if ( !$object ){$i++;
+					$post = null;
+					$this->dm->remove($cache_post);
+				}else{
+					$post = $object->getPostById( $cache_post->getPostId() );
+				}
+			}else{
+				$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
+			}
+
+			if ( !$post ){
+				continue;
+			}
+
+			if ( $post->getTitle() == null ){
+				$cache_post->setHasTitle( false );
+			}else{
+				$cache_post->setHasTitle( true );
+			}
+		}
+// print($i); exit;
+		$this->dm->flush();
+		print("Update cache posts completed !"); exit;
+
+		/*if ( !isset($data['start']) ){
 			$start = 0;
 		}else {
 			$start = (int)$data['start'];
@@ -339,7 +369,7 @@ class ModelCachePost extends Model {
 			'type' => $type,
 			'sort' => $sort,
 			'order' => $order,
-			);
+			);*/
 	}
 }
 ?>
