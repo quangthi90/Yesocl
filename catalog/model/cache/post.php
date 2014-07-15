@@ -219,11 +219,7 @@ class ModelCachePost extends Model {
 				continue;
 			}
 
-			if ( isset($data['hasTitle']) ){
-				$posts[$post->getCreated()->getTimestamp()] = $post;
-			}else{
-				$posts[] = $post;
-			}
+			$posts[] = $post;
 		}
 
 		return $posts;
