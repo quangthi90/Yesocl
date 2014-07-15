@@ -166,7 +166,7 @@ class ModelCachePost extends Model {
 		}
 
 		if ( empty($data['order']) ){
-			$data['order'] = -1;
+			$data['order'] = 1;
 		}
 
 		// Type ids
