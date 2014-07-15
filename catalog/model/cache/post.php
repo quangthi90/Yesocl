@@ -166,7 +166,7 @@ class ModelCachePost extends Model {
 		}
 
 		if ( empty($data['order']) ){
-			$data['order'] = 1;
+			$data['order'] = -1;
 		}
 
 		// Type ids
@@ -236,12 +236,12 @@ class ModelCachePost extends Model {
 	 */
 	public function updateCachePosts( $data = array() ){
 		$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll();
-$i = 0;
+
 		foreach ( $cache_posts as $cache_post ) {
 			$type = $cache_post->getType();
 			if ( $type == $this->config->get('post')['cache']['user'] ){
 				$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
-				if ( !$object ){$i++;
+				if ( !$object ){
 					$post = null;
 				}else{
 					$post = $object->getPostById( $cache_post->getPostId() );
@@ -255,13 +255,15 @@ $i = 0;
 				continue;
 			}
 
+			$cache_post->setPostCreated( $post->getCreated() );
+
 			if ( $post->getTitle() == null ){
 				$cache_post->setHasTitle( false );
 			}else{
 				$cache_post->setHasTitle( true );
 			}
 		}
-// print($i); exit;
+
 		$this->dm->flush();
 		print("Update cache posts completed !"); exit;
 
