@@ -2,6 +2,8 @@
 Class ControllerTestTest extends Controller {
 	private $error = array();
 
+	private $limit = 10000;
+
 	public function index() {
 		$this->load->model('test/test');
 		// $this->model_test_test->getMongoDBSpeed(110000);
@@ -19,6 +21,8 @@ Class ControllerTestTest extends Controller {
 		}
 		if (isset($this->request->get['limit'])) {
 			$query_inf['limit'] = $this->request->get['limit'];
+		}else {
+			$query_inf['limit'] = $this->limit;
 		}
 
 		// DO: UPDATE TO CACHE POST
