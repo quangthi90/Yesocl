@@ -54,6 +54,7 @@ class ModelCachePost extends Model {
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
 		$post->setHasTitle( $data['hasTitle'] );
+		$post->setPostCreated( $data['created'] );
 
 		$this->dm->persist( $post );
 		$this->dm->flush();
@@ -106,6 +107,7 @@ class ModelCachePost extends Model {
 
 		if ( !$post ){
 			$post = new Post();
+			$post->setPostCreated( $data['created'] );
 		}
 
 		$post->setPostId( $data['post_id'] );
