@@ -243,7 +243,6 @@ $i = 0;
 				$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
 				if ( !$object ){$i++;
 					$post = null;
-					$this->dm->remove($cache_post);
 				}else{
 					$post = $object->getPostById( $cache_post->getPostId() );
 				}
@@ -252,6 +251,7 @@ $i = 0;
 			}
 
 			if ( !$post ){
+				$this->dm->remove($cache_post);
 				continue;
 			}
 
