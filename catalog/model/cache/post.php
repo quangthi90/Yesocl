@@ -219,9 +219,11 @@ class ModelCachePost extends Model {
 				continue;
 			}
 
-			// $post['type'] = strtolower( $type );
-			// $posts[] = $post->formatToCache();
-			$posts[] = $post;
+			if ( isset($data['hasTitle']) ){
+				$posts[$post->getCreated()->getTimestamp()] = $post;
+			}else{
+				$posts[] = $post;
+			}
 		}
 
 		return $posts;
