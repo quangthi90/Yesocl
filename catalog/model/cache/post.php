@@ -233,7 +233,7 @@ class ModelCachePost extends Model {
 	 * @return: array next query inf
 	 */
 	public function updateCachePosts( $data = array() ){
-		$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll();
+		/*$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll();
 
 		foreach ( $cache_posts as $cache_post ) {
 			$type = $cache_post->getType();
@@ -263,9 +263,9 @@ class ModelCachePost extends Model {
 		}
 
 		$this->dm->flush();
-		print("Update cache posts completed !"); exit;
+		print("Update cache posts completed !"); exit;*/
 
-		/*if ( !isset($data['start']) ){
+		if ( !isset($data['start']) ){
 			$start = 0;
 		}else {
 			$start = (int)$data['start'];
@@ -341,7 +341,7 @@ class ModelCachePost extends Model {
 				$data['type_id'] = new MongoId();
 			}
 			$data['view'] = $post->getCountViewer();
-			$data['created'] = $post->getUpdated();
+			$data['created'] = $post->getCreated();
 			$data['hasTitle'] = (strlen($post->getTitle()) > 0);
 
 			$this->editPost($data);
@@ -369,7 +369,7 @@ class ModelCachePost extends Model {
 			'type' => $type,
 			'sort' => $sort,
 			'order' => $order,
-			);*/
+			);
 	}
 }
 ?>
