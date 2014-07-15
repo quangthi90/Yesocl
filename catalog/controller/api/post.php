@@ -402,6 +402,7 @@ class ControllerApiPost extends Controller {
 
         if ( isset( $this->request->post['hasTitle'] ) ) {
             $filter['hasTitle'] = $this->request->post['hasTitle'];
+            $filter['sort'] = 'postCreated';
         }
 
         $this->load->model( 'cache/post' );
