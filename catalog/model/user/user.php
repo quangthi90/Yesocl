@@ -176,6 +176,9 @@ class ModelUserUser extends Model {
 
 	public function getUserFull( $aData = array(), $deleted = false ){
 		$query = array('deleted' => $deleted);
+		if ( $deleted != false ){
+			$query = array();
+		}
 
 		if ( !empty($aData['user_id']) ){
 			$query['id'] = $aData['user_id'];

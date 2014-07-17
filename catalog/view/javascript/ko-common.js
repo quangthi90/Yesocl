@@ -53,7 +53,7 @@ function NewsTicker(options) {
 		    row_height: 30,
 		    max_rows: 1,
 		    speed: 600,
-		    direction: 'down',
+		    direction: 'up',
 		    duration: 5000,
 		    autostart: 1,
 		    pauseOnHover: 1

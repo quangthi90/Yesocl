@@ -54,6 +54,7 @@ class ModelCachePost extends Model {
 		$post->setView( $data['view'] );
 		$post->setCreated( $data['created'] );
 		$post->setHasTitle( $data['hasTitle'] );
+		$post->setPostCreated( $data['created'] );
 
 		$this->dm->persist( $post );
 		$this->dm->flush();
@@ -106,6 +107,7 @@ class ModelCachePost extends Model {
 
 		if ( !$post ){
 			$post = new Post();
+			$post->setPostCreated( $data['created'] );
 		}
 
 		$post->setPostId( $data['post_id'] );
@@ -219,8 +221,6 @@ class ModelCachePost extends Model {
 				continue;
 			}
 
-			// $post['type'] = strtolower( $type );
-			// $posts[] = $post->formatToCache();
 			$posts[] = $post;
 		}
 
@@ -235,6 +235,38 @@ class ModelCachePost extends Model {
 	 * @return: array next query inf
 	 */
 	public function updateCachePosts( $data = array() ){
+		/*$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findAll();
+
+		foreach ( $cache_posts as $cache_post ) {
+			$type = $cache_post->getType();
+			if ( $type == $this->config->get('post')['cache']['user'] ){
+				$object = $this->dm->getRepository('Document\\' . $type . '\Posts')->findOneBy( array('posts.id' => $cache_post->getPostId()) );
+				if ( !$object ){
+					$post = null;
+				}else{
+					$post = $object->getPostById( $cache_post->getPostId() );
+				}
+			}else{
+				$post = $this->dm->getRepository('Document\\' . $type . '\Post')->find( $cache_post->getPostId() );
+			}
+
+			if ( !$post ){
+				$this->dm->remove($cache_post);
+				continue;
+			}
+
+			$cache_post->setPostCreated( $post->getCreated() );
+
+			if ( $post->getTitle() == null ){
+				$cache_post->setHasTitle( false );
+			}else{
+				$cache_post->setHasTitle( true );
+			}
+		}
+
+		$this->dm->flush();
+		print("Update cache posts completed !"); exit;*/
+
 		if ( !isset($data['start']) ){
 			$start = 0;
 		}else {
@@ -311,7 +343,7 @@ class ModelCachePost extends Model {
 				$data['type_id'] = new MongoId();
 			}
 			$data['view'] = $post->getCountViewer();
-			$data['created'] = new \DateTime();
+			$data['created'] = $post->getCreated();
 			$data['hasTitle'] = (strlen($post->getTitle()) > 0);
 
 			$this->editPost($data);

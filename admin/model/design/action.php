@@ -108,7 +108,7 @@ class ModelDesignAction extends Model {
 	}
 
 	public function getAllActions() {
-		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )->sort( 'order' );
+		$query = $this->dm->createQueryBuilder( 'Document\Design\Action' )->sort( array('order' => 1) );
     		
     	return $query->getQuery()->execute();
 	}

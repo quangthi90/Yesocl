@@ -31,6 +31,9 @@ Class Post {
 	/** @MongoDB\Boolean */
 	private $hasTitle;
 
+	/** @MongoDB\Date */
+	private $postCreated;
+
 	public function getId(){
 		return $this->id;
 	}
@@ -97,5 +100,13 @@ Class Post {
 
 	public function getHasTitle(){
 		return $this->hasTitle;
+	}
+
+	public function setPostCreated( $postCreated ){
+		$this->postCreated = $postCreated;
+	}
+
+	public function getPostCreated(){
+		return $this->postCreated;
 	}
 }

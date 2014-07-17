@@ -86,6 +86,10 @@ Abstract Class Post {
 		return $this->created;
 	}
 
+	public function getUpdated(){
+		return $this->updated;
+	}
+
 	/** @MongoDB\PrePersist */
 	public function prePersist(){
 		$this->created = new \DateTime();
