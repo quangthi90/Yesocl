@@ -38,6 +38,9 @@ Class Stock {
 	/** @MongoDB\ReferenceOne(targetDocument="Meta", mappedBy="stock") */
 	private $meta;
 
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", mappedBy="stock") */
+	private $stock;
+
 	/** @MongoDB\Hash */
 	private $rangePrice = array();
 
@@ -185,12 +188,12 @@ Class Stock {
 		return $this->isDown;
 	}
 
-	public function setCreated( $created ){
-		$this->created = $created;
+	public function setFinance( $finance ){
+		$this->finance = $finance;
 	}
 
-	public function getCreated(){
-		return $this->created;
+	public function getFinance(){
+		return $this->finance;
 	}
 
 	public function setRangePrice( $rangePrice ){
@@ -199,6 +202,14 @@ Class Stock {
 
 	public function getRangePrice(){
 		return $this->rangePrice;
+	}
+
+	public function setCreated( $created ){
+		$this->created = $created;
+	}
+
+	public function getCreated(){
+		return $this->created;
 	}
 
 	public function setDeleted( $deleted ){

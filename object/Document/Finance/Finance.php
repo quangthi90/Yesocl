@@ -1,0 +1,134 @@
+<?php
+namespace Document\Finance;
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/** 
+ * @MongoDB\Document(db="yesocl", collection="finance")
+ */
+Class Finance {
+	/** 
+	 * @MongoDB\Id 
+	 */
+	private $id; 
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $name;
+
+	/** 
+	 * @MongoDB\String 
+	 */
+	private $slug;
+
+	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", inversedBy="finance") */
+	private $stock;
+
+	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="finances") */
+	private $group;
+
+	/** @MongoDB\ReferenceMany(targetDocument="Finance", inversedBy="parentFinance") */
+	private $childFinances = array();
+
+	/** @MongoDB\ReferenceOne(targetDocument="Finance", inversedBy="childFinances") */
+	private $parentFinance;
+
+	/** @MongoDB\Hash */
+	private $values = array();
+	
+	/** @MongoDB\Boolean */
+	private $status = true;
+
+	/** @MongoDB\Boolean */
+	private $deleted;
+
+	/** @MongoDB\Date */
+	private $created;
+
+	public function formatToCache() {
+		return array(
+			'id' => $this->id,
+			'name' => $this->name,
+			'slug' => $this->slug
+		);
+	}
+
+	/** @MongoDB\PrePersist */
+    public function prePersist()
+    {
+    	$this->created = new \DateTime();
+    	$this->deleted = false;
+    }
+
+	public function getId() {
+		return $this->id;
+	}
+
+	public function setName( $name ){
+		$this->name = $name;
+	}
+
+	public function getName(){
+		return $this->name;
+	}
+
+	public function setSlug( $slug ){
+		$this->slug = $slug;
+	}
+
+	public function getSlug(){
+		return $this->slug;
+	}
+
+	public function setStock( $stock ){
+		$this->stock = $stock;
+	}
+
+	public function getStock(){
+		return $this->stock;
+	}
+
+	public function setGroup( $group ){
+		$this->group = $group;
+	}
+
+	public function getGroup(){
+		return $this->group;
+	}
+
+	public function setChildFinances( $childFinances ){
+		$this->childFinances = $childFinances;
+	}
+
+	public function addChildFinance( Finance $childFinance ){
+		$this->childFinance[] = $childFinance;
+	}
+
+	public function getChildFinances(){
+		return $this->childFinances;
+	}
+
+	public function setParentFinance( $parentFinance ){
+		$this->parentFinance = $parentFinance;
+	}
+
+	public function getParentFinance(){
+		return $this->parentFinance;
+	}
+
+	public function setStatus( $status ){
+		$this->status = $status;
+	}
+
+	public function getStatus(){
+		return $this->status;
+	}
+
+	public function setDeleted( $deleted ){
+		$this->deleted = $deleted;
+	}
+
+	public function getDeleted(){
+		return $this->deleted;
+	}
+}
