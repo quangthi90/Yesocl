@@ -111,6 +111,25 @@ $(document).ready(function(){
           </li>
         </ul>
       </li>
+      <li id="finance"><a class="top"><?php echo $text_finances; ?></a>
+        <ul>
+          <li><a class="parent"><?php echo $text_finances; ?></a>
+            <ul>
+              <li><a href="<?php echo $finance; ?>"><?php echo $text_finance; ?></a></li>
+              <li><a href="<?php echo $finance_group; ?>"><?php echo $text_fi_group; ?></a></li>
+              <li><a href="<?php echo $finance_import; ?>"><?php echo $text_import; ?></a></li>
+              <li><a href="<?php echo $finance_code; ?>"><?php echo $text_code; ?></a></li>
+              <li><a href="<?php echo $finance_function; ?>"><?php echo $text_function; ?></a></li>
+            </ul>
+          </li>
+          <li><a class="parent"><?php echo $text_dates; ?></a>
+            <ul>
+              <li><a href="<?php echo $finance_date; ?>"><?php echo $text_date; ?></a></li>
+              <li><a href="<?php echo $finance_date_group; ?>"><?php echo $text_fi_group; ?></a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
       <li id="company"><a class="top"><?php echo $text_branches; ?></a>
         <ul>
           <li><a href="<?php echo $branch; ?>"><?php echo $text_branch; ?></a></li>
