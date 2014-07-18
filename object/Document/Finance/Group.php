@@ -5,7 +5,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /** 
  * @MongoDB\Document(db="yesocl", collection="finance_group")
  */
-Class Finance {
+Class Group {
 	/** 
 	 * @MongoDB\Id 
 	 */
@@ -18,6 +18,11 @@ Class Finance {
 
 	/** @MongoDB\ReferenceMany(targetDocument="Finance", mappedBy="group") */
 	private $finances = array();
+
+	/** 
+	 * @MongoDB\Int 
+	 */
+	private $order;
 	
 	/** @MongoDB\Boolean */
 	private $status = true;
@@ -64,6 +69,14 @@ Class Finance {
 
 	public function getFinances(){
 		return $this->childFinances;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 
 	public function setStatus( $status ){
