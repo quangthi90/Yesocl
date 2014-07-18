@@ -1,6 +1,6 @@
 <?php
 // heading title
-$_['heading_title'] 				= 'Finance Date Group';
+$_['heading_title'] 				= 'Finance Date';
 
 // text
 $_['text_edit'] 					= 'Edit';
@@ -14,19 +14,19 @@ $_['button_save'] 					= 'Save';
 $_['button_cancel'] 				= 'Cancel';
 
 // column
-$_['column_name'] 					= 'Name';
-$_['column_format']					= 'Format';
+$_['column_quarter'] 				= 'Quarter';
+$_['column_year']	 				= 'Year';
 $_['column_status'] 				= 'Status';
 $_['column_action'] 				= 'Action';
 
 // entry
-$_['entry_name'] 					= 'Name:';
-$_['entry_format'] 					= 'Format:';
+$_['entry_quarter'] 				= 'Quarter: (is 0 if Quarter is empty)';
+$_['entry_year']	 				= 'Year:';
 $_['entry_status'] 					= 'Status:';
 
 // error
 $_['error_warning'] 				= 'Warning: Error!';
-$_['error_name'] 					= 'Warning: Error Name is required!';
-$_['error_code'] 					= 'Warning: Error Format is required!';
+$_['error_quarter']					= 'Warning: Error Quarter is required!';
+$_['error_year']					= 'Warning: Error Year is required!';
 $_['text_success'] 					= 'Success: You have modified Date!';
 ?>

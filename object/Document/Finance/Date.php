@@ -12,12 +12,14 @@ Class Date {
 	private $id; 
 
 	/** 
-	 * @MongoDB\String 
+	 * @MongoDB\Int 
 	 */
-	private $value;
+	private $quarter;
 
-	/** @MongoDB\ReferenceOne(targetDocument="DateGroup", inversedBy="dates") */
-	private $group;
+	/** 
+	 * @MongoDB\Int 
+	 */
+	private $year;
 	
 	/** @MongoDB\Boolean */
 	private $status = true;
@@ -46,20 +48,20 @@ Class Date {
 		return $this->id;
 	}
 
-	public function setValue( $value ){
-		$this->value = $value;
+	public function setQuarter( $quarter ){
+		$this->quarter = $quarter;
 	}
 
-	public function getValue(){
-		return $this->value;
+	public function getQuarter(){
+		return $this->quarter;
 	}
 
-	public function setGroup( $group ){
-		$this->group = $group;
+	public function setYear( $year ){
+		$this->year = $year;
 	}
 
-	public function getGroup(){
-		return $this->group;
+	public function getYear(){
+		return $this->year;
 	}
 
 	public function setStatus( $status ){

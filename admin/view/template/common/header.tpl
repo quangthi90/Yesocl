@@ -122,12 +122,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $finance_function; ?>"><?php echo $text_function; ?></a></li>
             </ul>
           </li>
-          <li><a class="parent"><?php echo $text_dates; ?></a>
-            <ul>
-              <li><a href="<?php echo $finance_date; ?>"><?php echo $text_date; ?></a></li>
-              <li><a href="<?php echo $finance_date_group; ?>"><?php echo $text_fi_group; ?></a></li>
-            </ul>
-          </li>
+          <li><a href="<?php echo $finance_date; ?>"><?php echo $text_date; ?></a></li>
         </ul>
       </li>
       <li id="company"><a class="top"><?php echo $text_branches; ?></a>

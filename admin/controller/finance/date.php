@@ -1,16 +1,16 @@
 <?php 
-class ControllerFinanceDateGroup extends Controller {
+class ControllerFinanceDate extends Controller {
 	private $error = array( );
 	private $limit = 10;
-	private $route = 'finance/date_group';
+	private $route = 'finance/date';
  
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'finance/date_group' );
-		$this->load->model( 'finance/date_group' );
+		$this->load->language( 'finance/date' );
+		$this->load->model( 'finance/date' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 		
@@ -22,20 +22,20 @@ class ControllerFinanceDateGroup extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'finance/date_group' );
-		$this->load->model( 'finance/date_group' );
+		$this->load->language( 'finance/date' );
+		$this->load->model( 'finance/date' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
-			$this->model_finance_date_group->addGroup( $this->request->post );
+			$this->model_finance_date->addDate( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/date_group', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('finance/date', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'finance/date_group/insert', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['action'] = $this->url->link( 'finance/date/insert', 'token=' . $this->session->data['token'], 'sSL' );
 		
 		$this->getForm();
 	}
@@ -45,17 +45,17 @@ class ControllerFinanceDateGroup extends Controller {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'finance/date_group' );
-		$this->load->model( 'finance/date_group' );
+		$this->load->language( 'finance/date' );
+		$this->load->model( 'finance/date' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm(true) ){
-			$this->model_finance_date_group->editGroup( $this->request->get['group_id'], $this->request->post );
+			$this->model_finance_date->editDate( $this->request->get['date_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/date_group', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('finance/date', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 		
 		$this->getForm();
@@ -66,17 +66,17 @@ class ControllerFinanceDateGroup extends Controller {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'finance/date_group' );
-		$this->load->model( 'finance/date_group' );
+		$this->load->language( 'finance/date' );
+		$this->load->model( 'finance/date' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateDelete() ){
-			$this->model_finance_date_group->deleteGroups( $this->request->post );
+			$this->model_finance_date->deleteDates( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/date_group', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('finance/date', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 
 		$this->getList( );
@@ -118,7 +118,7 @@ class ControllerFinanceDateGroup extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/date_group', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'finance/date', 'token=' . $this->session->data['token'], 'sSL' ),
       		'separator' => ' :: '
    		);
 
@@ -130,8 +130,8 @@ class ControllerFinanceDateGroup extends Controller {
 		$this->data['text_edit'] = $this->language->get('text_edit');
 
 		// Column
-		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_format'] = $this->language->get('column_format');
+		$this->data['column_quarter'] = $this->language->get('column_quarter');
+		$this->data['column_year'] = $this->language->get('column_year');
 		$this->data['column_status'] = $this->language->get('column_status');	
 		$this->data['column_action'] = $this->language->get('column_action');
 		
@@ -143,8 +143,8 @@ class ControllerFinanceDateGroup extends Controller {
 		$this->data['button_delete'] = $this->language->get('button_delete');
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'finance/date_group/insert', 'token=' . $this->session->data['token'], 'sSL' );
-		$this->data['delete'] = $this->url->link( 'finance/date_group/delete', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['insert'] = $this->url->link( 'finance/date/insert', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['delete'] = $this->url->link( 'finance/date/delete', 'token=' . $this->session->data['token'], 'sSL' );
 
 		// finance
 		$aData = array(
@@ -152,41 +152,41 @@ class ControllerFinanceDateGroup extends Controller {
 			'limit' => $this->limit
 		);
 		
-		$lGroups = $this->model_finance_date_group->getGroups( $aData );
+		$lDates = $this->model_finance_date->getDates( $aData );
 		
-		$iGroupTotal = $lGroups->count();
+		$iDateTotal = $lDates->count();
 		
-		$this->data['groups'] = array();
-		if ( $lGroups ){
-			foreach ( $lGroups as $oGroup ){
+		$this->data['dates'] = array();
+		if ( $lDates ){
+			foreach ( $lDates as $oDate ){
 				$action = array();
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'finance/date_group/update', 'group_id=' . $oGroup->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'href' => $this->url->link( 'finance/date/update', 'date_id=' . $oDate->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
 					'icon' => 'icon-edit',
 				);
 			
-				$this->data['groups'][] = array(
-					'id' => $oGroup->getId(),
-					'name' => $oGroup->getName(),
-					'format' => $oGroup->getFormat(),
-					'status' => $oGroup->getStatus() ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				$this->data['dates'][] = array(
+					'id' => $oDate->getId(),
+					'quarter' => $oDate->getQuarter(),
+					'year' => $oDate->getYear(),
+					'status' => $oDate->getStatus() ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'action' => $action,
 				);
 			}
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $oGroup;
+		$pagination->total = $oDate;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('finance/date_group', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
+		$pagination->url = $this->url->link('finance/date', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
-		$this->template = 'finance/date_group_list.tpl';
+		$this->template = 'finance/date_list.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -211,19 +211,19 @@ class ControllerFinanceDateGroup extends Controller {
 			$this->data['success'] = '';
 		}
 		
-		if ( isset($this->error['error_name']) ) {
-			$this->data['error_name'] = $this->error['error_name'];
+		if ( isset($this->error['error_quarter']) ) {
+			$this->data['error_quarter'] = $this->error['error_quarter'];
 		} else {
-			$this->data['error_name'] = '';
+			$this->data['error_quarter'] = '';
 		}
 
-		if ( isset($this->error['error_code']) ) {
-			$this->data['error_code'] = $this->error['error_code'];
+		if ( isset($this->error['error_year']) ) {
+			$this->data['error_year'] = $this->error['error_year'];
 		} else {
-			$this->data['error_code'] = '';
+			$this->data['error_year'] = '';
 		}
 
-		$idGroup = $this->request->get['group_id'];
+		$idDate = $this->request->get['date_id'];
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
@@ -233,7 +233,7 @@ class ControllerFinanceDateGroup extends Controller {
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/date_group', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'finance/date', 'token=' . $this->session->data['token'], 'sSL' ),
       		'separator' => ' :: '
    		);
 
@@ -251,53 +251,53 @@ class ControllerFinanceDateGroup extends Controller {
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
 		
 		// Entry
-		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_format'] = $this->language->get('entry_format');
+		$this->data['entry_quarter'] = $this->language->get('entry_quarter');
+		$this->data['entry_year'] = $this->language->get('entry_year');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'finance/date_group', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['cancel'] = $this->url->link( 'finance/date', 'token=' . $this->session->data['token'], 'sSL' );
 		
 		// finance
-		if ( isset($this->request->get['group_id']) ){
-			$oGroup = $this->model_finance_date_group->getGroup( $idGroup );
-			if ( $oGroup ){
-				$this->data['action'] = $this->url->link( 'finance/date_group/update', 'group_id=' . $idGroup . '&token=' . $this->session->data['token'], 'sSL' );
+		if ( isset($this->request->get['date_id']) ){
+			$oDate = $this->model_finance_date->getDate( $idDate );
+			if ( $oDate ){
+				$this->data['action'] = $this->url->link( 'finance/date/update', 'date_id=' . $idDate . '&token=' . $this->session->data['token'], 'sSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
 
-		// Entry name
-		if ( isset($this->request->post['name']) ){
-			$this->data['name'] = $this->request->post['name'];
-		}elseif ( isset($oGroup) ){
-			$this->data['name'] = $oGroup->getName();
+		// Entry quarter
+		if ( isset($this->request->post['quarter']) ){
+			$this->data['quarter'] = $this->request->post['quarter'];
+		}elseif ( isset($oDate) ){
+			$this->data['quarter'] = $oDate->getQuarter();
 		}else {
-			$this->data['name'] = '';
+			$this->data['quarter'] = 0;
 		}
 
-		// Entry Format
-		if ( isset($this->request->post['format']) ){
-			$this->data['format'] = $this->request->post['format'];
-		}elseif ( isset($oGroup) ){
-			$this->data['format'] = $oGroup->getFormat();
+		// Entry year
+		if ( isset($this->request->post['year']) ){
+			$this->data['year'] = $this->request->post['year'];
+		}elseif ( isset($oDate) ){
+			$this->data['year'] = $oDate->getYear();
 		}else {
-			$this->data['format'] = '';
+			$this->data['year'] = '';
 		}
 
 		// Entry status
 		if ( isset($this->request->post['status']) ){
 			$this->data['status'] = $this->request->post['status'];
-		}elseif ( isset($oGroup) ){
-			$this->data['status'] = $oGroup->getStatus();
+		}elseif ( isset($oDate) ){
+			$this->data['status'] = $oDate->getStatus();
 		}else {
 			$this->data['status'] = true;
 		}
 
 		$this->data['token'] = $this->session->data['token'];
 
-		$this->template = 'finance/date_group_form.tpl';
+		$this->template = 'finance/date_form.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -307,12 +307,12 @@ class ControllerFinanceDateGroup extends Controller {
 	}
 
 	private function isValidateForm( $bIsEdit = false ){
-		if ( empty($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
-			$this->error['warning'] = $this->language->get( 'error_name' );
+		if ( !isset($this->request->post['quarter']) || strlen($this->request->post['quarter']) < 1 || strlen($this->request->post['quarter']) > 128 ){
+			$this->error['error_quarter'] = $this->language->get( 'error_quarter' );
 		}
 
-		if ( $bIsEdit == false && (empty($this->request->post['format']) || strlen($this->request->post['format']) < 3 || strlen($this->request->post['format']) > 10) ){
-			$this->error['error_format'] = $this->language->get( 'error_format' );
+		if ( empty($this->request->post['year']) || strlen($this->request->post['year']) < 4 || strlen($this->request->post['year']) > 128 ){
+			$this->error['error_quarter'] = $this->language->get( 'error_year' );
 		}
 
 		if ( $this->error){

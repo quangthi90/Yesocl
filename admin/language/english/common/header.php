@@ -35,7 +35,6 @@ $_['text_finance']		              	= 'Finance';
 $_['text_fi_group']		              	= 'Group';
 $_['text_code']		              		= 'Code';
 $_['text_date']		              		= 'Date';
-$_['text_dates']		              	= 'Dates';
 $_['text_function']		              	= 'Function';
 
 // Branch
