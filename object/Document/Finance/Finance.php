@@ -21,20 +21,19 @@ Class Finance {
 	 */
 	private $slug;
 
-	/** @MongoDB\ReferenceOne(targetDocument="Document\Stock\Stock", inversedBy="finance") */
-	private $stock;
-
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="finances") */
 	private $group;
 
 	/** @MongoDB\ReferenceMany(targetDocument="Finance", inversedBy="parentFinance") */
 	private $childFinances = array();
 
-	/** @MongoDB\ReferenceOne(targetDocument="Finance", inversedBy="childFinances") */
+	/** @MongoDB\ReferenceOne(targetDocument="Finance", mappedBy="childFinances") */
 	private $parentFinance;
 
-	/** @MongoDB\Hash */
-	private $values = array();
+	/** 
+	 * @MongoDB\Int 
+	 */
+	private $order;
 	
 	/** @MongoDB\Boolean */
 	private $status = true;
@@ -114,6 +113,14 @@ Class Finance {
 
 	public function getParentFinance(){
 		return $this->parentFinance;
+	}
+
+	public function setOrder( $order ){
+		$this->order = $order;
+	}
+
+	public function getOrder(){
+		return $this->order;
 	}
 
 	public function setStatus( $status ){

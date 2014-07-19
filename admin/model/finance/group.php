@@ -105,6 +105,20 @@ class ModelFinanceGroup extends Model {
 			->sort( array($aData['sort'] => $aData['order']) );
 	}
 
+	public function getAllGroups( $aData = array() ){
+		if ( empty($aData['order']) ){
+			$aData['order'] = 1;
+		}
+
+		if ( empty($aData['sort']) ){
+			$aData['sort'] = 'order';
+		}
+
+		return $this->dm->getRepository('Document\Finance\Group')
+			->findAll()
+			->sort( array($aData['sort'] => $aData['order']) );
+	}
+
 	public function getGroup( $id ){
 		return $this->dm->getRepository('Document\Finance\Group')->find( $id );
 	}
