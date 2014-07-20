@@ -44,7 +44,7 @@ class ModelFinanceFinance extends Model {
 		$oFinance->setOrder( $aData['order'] );
 		$oFinance->setGroup( $oFiGroup );
 		if ( $oFiParent ){
-			$oFinance->setParent( $oFiParent );
+			$oFinance->setParentFinance( $oFiParent );
 		}
 		$oFinance->setStatus( $aData['status'] );
 
@@ -100,7 +100,7 @@ class ModelFinanceFinance extends Model {
 		$oFinance->setGroup( $oFiGroup );
 		$oFinance->setOrder( $aData['order'] );
 		if ( $oFiParent ){
-			$oFinance->setParent( $oFiParent );
+			$oFinance->setParentFinance( $oFiParent );
 		}
 		$oFinance->setStatus( $aData['status'] );
 
@@ -149,6 +149,13 @@ class ModelFinanceFinance extends Model {
 
 	public function getFinance( $id ){
 		return $this->dm->getRepository('Document\Finance\Finance')->find( $id );
+	}
+
+	public function searchFinanceByKeyword( $data = array() ) {
+		return $this->dm->getRepository('Document\Finance\Finance')->findBy(array(
+			'deleted' => false,
+			'name' => new MongoRegex("/^" . trim($data['filter_name']) . "*/i")
+		));
 	}
 }
 ?>

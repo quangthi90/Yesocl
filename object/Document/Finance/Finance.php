@@ -24,10 +24,10 @@ Class Finance {
 	/** @MongoDB\ReferenceOne(targetDocument="Group", inversedBy="finances") */
 	private $group;
 
-	/** @MongoDB\ReferenceMany(targetDocument="Finance", inversedBy="parentFinance") */
+	/** @MongoDB\ReferenceMany(targetDocument="Finance", mappedBy="parentFinance") */
 	private $childFinances = array();
 
-	/** @MongoDB\ReferenceOne(targetDocument="Finance", mappedBy="childFinances") */
+	/** @MongoDB\ReferenceOne(targetDocument="Finance", inversedBy="childFinances") */
 	private $parentFinance;
 
 	/** 

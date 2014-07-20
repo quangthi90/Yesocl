@@ -32,10 +32,10 @@ class ControllerFinanceFinance extends Controller {
 			$this->model_finance_finance->addFinance( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['action'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		$this->getForm();
 	}
@@ -55,7 +55,7 @@ class ControllerFinanceFinance extends Controller {
 			$this->model_finance_finance->editFinance( $this->request->get['finance_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -76,7 +76,7 @@ class ControllerFinanceFinance extends Controller {
 			$this->model_finance_finance->deleteFinances( $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->getList( );
@@ -113,12 +113,12 @@ class ControllerFinanceFinance extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -145,8 +145,8 @@ class ControllerFinanceFinance extends Controller {
 		$this->data['button_delete'] = $this->language->get('button_delete');
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'sSL' );
-		$this->data['delete'] = $this->url->link( 'finance/finance/delete', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['insert'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'SSL' );
+		$this->data['delete'] = $this->url->link( 'finance/finance/delete', 'token=' . $this->session->data['token'], 'SSL' );
 
 		// finance
 		$aData = array(
@@ -165,7 +165,7 @@ class ControllerFinanceFinance extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'finance/finance/upFinance', 'finance_id=' . $oFinance->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'href' => $this->url->link( 'finance/finance/upFinance', 'finance_id=' . $oFinance->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -186,7 +186,7 @@ class ControllerFinanceFinance extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('finance/finance', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
+		$pagination->url = $this->url->link('finance/finance', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
@@ -238,12 +238,12 @@ class ControllerFinanceFinance extends Controller {
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -268,13 +268,13 @@ class ControllerFinanceFinance extends Controller {
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['cancel'] = $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'SSL' );
 		
 		// finance
 		if ( isset($this->request->get['finance_id']) ){
 			$oFinance = $this->model_finance_finance->getFinance( $idFinance );
 			if ( $oFinance ){
-				$this->data['action'] = $this->url->link( 'finance/finance/upFinance', 'finance_id=' . $idFinance . '&token=' . $this->session->data['token'], 'sSL' );
+				$this->data['action'] = $this->url->link( 'finance/finance/upFinance', 'finance_id=' . $idFinance . '&token=' . $this->session->data['token'], 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -310,8 +310,8 @@ class ControllerFinanceFinance extends Controller {
 		// Entry order
 		if ( isset($this->request->post['order']) ){
 			$this->data['order'] = $this->request->post['order'];
-		}elseif ( isset($oGroup) ){
-			$this->data['order'] = $oGroup->getOrder();
+		}elseif ( isset($oFinance) ){
+			$this->data['order'] = $oFinance->getOrder();
 		}else {
 			$this->data['order'] = 0;
 		}
@@ -337,6 +337,7 @@ class ControllerFinanceFinance extends Controller {
 		}
 
 		$this->data['token'] = $this->session->data['token'];
+		$this->data['autocomplete_finance'] = html_entity_decode($this->url->link('finance/finance/searchFinance', 'token=' . $this->session->data['token'], 'SSL'));
 
 		$this->template = 'finance/finance_form.tpl';
 		$this->children = array(
@@ -377,6 +378,32 @@ class ControllerFinanceFinance extends Controller {
 		}else {
 			return true;	
 		}
+	}
+
+	public function searchFinance() {
+		$this->load->model('finance/finance');
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name
+		);
+
+		$lFinances = $this->model_finance_finance->searchFinanceByKeyword( $data );
+
+		$json = array();
+		foreach ($lFinances as $oFinance) {
+			$json[] = array(
+				'name' => html_entity_decode( $oFinance->getName() ),
+				'id' => $oFinance->getId(),
+			);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
 	}
 }
 ?>

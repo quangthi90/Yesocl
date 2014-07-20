@@ -67,3 +67,30 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--
+$('input[name=\'parent\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: '<?php echo $autocomplete_finance; ?>&filter_name=' +  encodeURIComponent(request.term),
+      dataType: 'json',
+      success: function(json) {   
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  }, 
+  select: function(event, ui) {
+    $('input[name=\'parent\']').val(ui.item.label);
+            
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>
