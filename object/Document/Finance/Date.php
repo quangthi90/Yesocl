@@ -32,8 +32,10 @@ Class Date {
 
 	public function formatToCache() {
 		return array(
-			'id' => $this->id,
-			'value' => $this->value
+			'id' => $this->getId(),
+			'quarter' => $this->getQuarter(),
+			'year' => $this->getYear(),
+			'status' => $this->getStatus()
 		);
 	}
 
