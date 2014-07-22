@@ -17,6 +17,7 @@ $_['button_delete'] 				= 'Delete';
 $_['button_save'] 					= 'Save';
 $_['button_cancel'] 				= 'Cancel';
 $_['button_post'] 					= 'Posts';
+$_['button_finance'] 				= 'Finances';
 
 // column
 $_['column_name'] 					= 'Name';
