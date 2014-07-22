@@ -47,8 +47,11 @@ Class Finance {
 	public function formatToCache() {
 		return array(
 			'id' => $this->id,
-			'name' => $this->name,
-			'slug' => $this->slug
+			'name' => $this->getName(),
+			'slug' => $this->getSlug(),
+			'parent' => $this->getParentFinance()->formatToCache(),
+			'order' => $this->getOrder(),
+			'status' => $this->getStatus()
 		);
 	}
 
