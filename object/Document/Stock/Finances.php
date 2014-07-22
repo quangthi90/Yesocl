@@ -41,6 +41,15 @@ Class Finances {
     	$this->deleted = false;
     }
 
+    public function getFinanceById( $idFinance ){
+    	foreach ( $this->getFinances() as $finance ) {
+    		if ( $finance->getId() == $idFinance ){
+    			return $finance;
+    		}
+    	}
+    	return null;
+    }
+
 	public function getId() {
 		return $this->id;
 	}

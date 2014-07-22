@@ -1,16 +1,16 @@
 <?php 
-class ControllerFinanceFinance extends Controller {
-	private $error = array( );
+class ControllerStockFinance extends Controller {
+	private $error = array();
 	private $limit = 10;
-	private $route = 'finance/finance';
+	private $route = 'stock/finance';
  
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'finance/finance' );
-		$this->load->model( 'finance/finance' );
+		$this->load->language( 'stock/finance' );
+		$this->load->model( 'stock/finance' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 		
@@ -22,40 +22,40 @@ class ControllerFinanceFinance extends Controller {
 			return $this->forward('error/permission');
 		}
 
-		$this->load->language( 'finance/finance' );
-		$this->load->model( 'finance/finance' );
+		$this->load->language( 'stock/finance' );
+		$this->load->model( 'stock/finance' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiFinanceForm() ){
-			$this->model_finance_finance->addFinance( $this->request->post );
+			$this->model_stock_finance->addFinance( $this->request->get['stock_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('stock/finance', 'token=' . $this->session->data['token'] . '&stock_id=' . $this->request->get['stock_id'], 'SSL') );
 		}
 
-		$this->data['action'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['action'] = $this->url->link( 'stock/finance/insert', 'token=' . $this->session->data['token'] . '&stock_id=' . $this->request->get['stock_id'], 'SSL' );
 		
 		$this->getForm();
 	}
 
-	public function upFinance(){
+	public function update(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'finance/finance' );
-		$this->load->model( 'finance/finance' );
+		$this->load->language( 'stock/finance' );
+		$this->load->model( 'stock/finance' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiFinanceForm(true) ){
-			$this->model_finance_finance->editFinance( $this->request->get['Finance_id'], $this->request->post );
+			$this->model_stock_finance->editFinance( $this->request->get['stock_id'], $this->request->get['finance_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('stock/finance', 'token=' . $this->session->data['token'] . '&stock_id=' . $this->request->get['stock_id'], 'SSL') );
 		}
 		
 		$this->getForm();
@@ -66,23 +66,23 @@ class ControllerFinanceFinance extends Controller {
 			return $this->forward('error/permission');
 		}
 		
-		$this->load->language( 'finance/finance' );
-		$this->load->model( 'finance/finance' );
+		$this->load->language( 'stock/finance' );
+		$this->load->model( 'stock/finance' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiFinanceDelete() ){
-			$this->model_finance_finance->deleteFinances( $this->request->post );
+			$this->model_stock_finance->deleteFinances( $this->request->get['stock_id'], $this->request->post );
 			
 			$this->session->data['success'] = $this->language->get( 'text_success' );
-			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'sSL') );
+			$this->redirect( $this->url->link('stock/finance', 'token=' . $this->session->data['token'] . '&stock_id=' . $this->request->get['stock_id'], 'SSL') );
 		}
 
-		$this->getList( );
+		$this->getList();
 	}
 
-	private function getList( ){
+	private function getList(){
 		// catch error
 		if ( isset($this->error['warning']) ){
 			$this->data['error_warning'] = $this->error['warning'];
@@ -103,22 +103,16 @@ class ControllerFinanceFinance extends Controller {
 		} else {
 			$this->data['success'] = '';
 		}
-		
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
-		} else {
-			$page = 1;
-		}
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'stock/finance', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
 
@@ -131,7 +125,6 @@ class ControllerFinanceFinance extends Controller {
 
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_order'] = $this->language->get('column_order');
 		$this->data['column_status'] = $this->language->get('column_status');	
 		$this->data['column_action'] = $this->language->get('column_action');
 		
@@ -141,36 +134,52 @@ class ControllerFinanceFinance extends Controller {
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
+
+		$url = '';
+		if ( !empty($this->request->get['stock_id']) ){
+			$idStock = $this->request->get['stock_id'];
+			$url .= '&stock_id=' . $idStock;
+		}
+
+		if ( !empty($this->request->get['page']) ){
+			$page = $this->request->get['page'];
+			$url .= '&page=' . $page;
+		}else{
+			$page = 1;
+		}
 		
 		// Link
-		$this->data['insert'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'sSL' );
-		$this->data['delete'] = $this->url->link( 'finance/finance/delete', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['insert'] = $this->url->link( 'stock/finance/insert', 'token=' . $this->session->data['token'] . $url, 'SSL' );
+		$this->data['delete'] = $this->url->link( 'stock/finance/delete', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 
-		// finance
+		// Stock
 		$aData = array(
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit
 		);
 		
-		$lFinances = $this->model_finance_finance->getFinances( $aData );
+		$oFinances = $this->model_stock_finance->getFinances( $idStock );
+		$lFinances = array();
+		$iFinanceTotal = 0;
+		if ( $oFinances ){
+			$lFinances = $oFinances->getFinances()->slice( $aData['start'], $aData['limit'] );
+			$iFinanceTotal = $oFinances->getFinances()->count( true );
+		}
 		
-		$iFinanceTotal = $lFinances->count();
-		
-		$this->data['Finances'] = array();
+		$this->data['finances'] = array();
 		if ( $lFinances ){
 			foreach ( $lFinances as $oFinance ){
 				$action = array();
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'finance/finance/upFinance', 'Finance_id=' . $oFinance->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'href' => $this->url->link( 'stock/finance/update', 'token=' . $this->session->data['token'] . '&finance_id=' . $oFinance->getId() . $url, 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
-				$this->data['Finances'][] = array(
+				$this->data['finances'][] = array(
 					'id' => $oFinance->getId(),
-					'name' => $oFinance->getName(),
-					'order' => $oFinance->getOrder(),
+					'name' => $oFinance->getFinance()->getName(),
 					'status' => $oFinance->getStatus() ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 					'action' => $action,
 				);
@@ -182,11 +191,11 @@ class ControllerFinanceFinance extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('finance/finance', '&page={page}' . '&token=' . $this->session->data['token'], 'sSL');
+		$pagination->url = $this->url->link('stock/finance', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
-		$this->template = 'finance/finance_list.tpl';
+		$this->template = 'stock/finance_list.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -211,31 +220,37 @@ class ControllerFinanceFinance extends Controller {
 			$this->data['success'] = '';
 		}
 		
-		if ( isset($this->error['error_name']) ) {
-			$this->data['error_name'] = $this->error['error_name'];
+		if ( isset($this->error['error_finance_name']) ) {
+			$this->data['error_finance_name'] = $this->error['error_finance_name'];
 		} else {
-			$this->data['error_name'] = '';
+			$this->data['error_finance_name'] = '';
 		}
-
-		if ( isset($this->error['error_order']) ) {
-			$this->data['error_order'] = $this->error['error_order'];
-		} else {
-			$this->data['error_order'] = '';
-		}
-
-		$idFinance = $this->request->get['Finance_id'];
 
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home'),
-			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => false
    		);
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('heading_title'),
-			'href'      => $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'sSL' ),
+			'href'      => $this->url->link( 'stock/finance', 'token=' . $this->session->data['token'], 'SSL' ),
       		'separator' => ' :: '
    		);
+
+   		$url = '';
+
+   		if ( !empty($this->request->get['stock_id']) ){
+   			$idStock = $this->request->get['stock_id'];
+   			$url .= '&stock_id=' . $idStock;
+   		}
+
+		if ( !empty($this->request->get['page']) ){
+			$page = $this->request->get['page'];
+			$url .= '&page=' . $page;
+		}else{
+			$page = 1;
+		}
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get('heading_title');
@@ -245,36 +260,58 @@ class ControllerFinanceFinance extends Controller {
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_true'] = $this->language->get('text_true');
 		$this->data['text_false'] = $this->language->get('text_false');
+		$this->data['text_datetime'] = $this->language->get('text_datetime');
+		$this->data['text_value'] = $this->language->get('text_value');
+		$this->data['text_year'] = $this->language->get('text_year');
+		$this->data['text_quarter'] = $this->language->get('text_quarter');
 		
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
+		$this->data['button_add'] = $this->language->get('button_add');
 		
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_order'] = $this->language->get('entry_order');
+		$this->data['entry_values'] = $this->language->get('entry_values');
 		$this->data['entry_status'] = $this->language->get('entry_status');
 		
 		// Link
-		$this->data['cancel'] = $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'sSL' );
+		$this->data['cancel'] = $this->url->link( 'stock/finance', 'token=' . $this->session->data['token'] . $url, 'SSL' );
 		
-		// finance
-		if ( isset($this->request->get['Finance_id']) ){
-			$oFinance = $this->model_finance_finance->getFinance( $idFinance );
-			if ( $oFinance ){
-				$this->data['action'] = $this->url->link( 'finance/finance/upFinance', 'Finance_id=' . $idFinance . '&token=' . $this->session->data['token'], 'sSL' );
+		// Stock
+		if ( isset($this->request->get['finance_id']) ){
+			$idFinance = $this->request->get['finance_id'];
+			$oFinances = $this->model_stock_finance->getFinances( $idStock );
+			if ( $oFinances ){
+				$oStockFinance = $oFinances->getFinanceById( $idFinance );
+			}else{
+				$this->redirect( $this->data['cancel'] );
+			}
+			if ( $oStockFinance ){
+				$this->data['action'] = $this->url->link( 'stock/finance/update', 'token=' . $this->session->data['token'] . '&finance_id=' . $idFinance . $url, 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
 		}
 
-		// Entry name
-		if ( isset($this->request->post['name']) ){
-			$this->data['name'] = $this->request->post['name'];
+		$oFinance = $oStockFinance->getFinance();
+
+		// Entry finance name
+		if ( isset($this->request->post['finance_name']) ){
+			$this->data['finance_name'] = $this->request->post['finance_name'];
 		}elseif ( isset($oFinance) ){
-			$this->data['name'] = $oFinance->getName();
+			$this->data['finance_name'] = $oFinance->getName();
 		}else {
-			$this->data['name'] = '';
+			$this->data['finance_name'] = '';
+		}
+
+		// Entry finance id
+		if ( isset($this->request->post['finance_id']) ){
+			$this->data['finance_id'] = $this->request->post['finance_id'];
+		}elseif ( isset($oFinance) ){
+			$this->data['finance_id'] = $oFinance->getId();
+		}else {
+			$this->data['finance_id'] = '';
 		}
 
 		// Entry order
@@ -295,9 +332,26 @@ class ControllerFinanceFinance extends Controller {
 			$this->data['status'] = true;
 		}
 
+		// Entry values
+		if ( isset($this->request->post['values']) ){
+			$this->data['values'] = $this->request->post['values'];
+		}elseif ( isset($oStockFinance) ){
+			$this->data['values'] = $oStockFinance->getValues();
+		}else {
+			$this->data['values'] = true;
+		}
+
+		// Finance Datetime data
+		$this->load->model('finance/date');
+		$lDates = $this->model_finance_date->getAllDates();
+		$this->data['dates'] = array();
+		foreach ( $lDates as $oDate ) {
+			$this->data['dates'][] = $oDate->formatToCache();
+		}
+
 		$this->data['token'] = $this->session->data['token'];
 
-		$this->template = 'finance/finance_form.tpl';
+		$this->template = 'stock/finance_form.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
@@ -307,12 +361,8 @@ class ControllerFinanceFinance extends Controller {
 	}
 
 	private function isValiFinanceForm( $bIsEdit = false ){
-		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 3 || strlen($this->request->post['name']) > 128 ){
-			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}
-
-		if ( !isset($this->request->post['order']) || strlen($this->request->post['order']) < 1 || strlen($this->request->post['order']) > 128 ){
-			$this->error['error_order'] = $this->language->get( 'error_order' );
+		if ( !isset($this->request->post['finance_name']) || strlen($this->request->post['finance_name']) < 3 || strlen($this->request->post['finance_name']) > 128 ){
+			$this->error['error_finance_name'] = $this->language->get( 'error_finance_name' );
 		}
 
 		if ( $this->error){
