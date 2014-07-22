@@ -38,7 +38,7 @@
           </tr>
           <tr>
             <td><span class="required">*</span> <?php echo $entry_parent; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="parent" value="<?php echo $parent; ?>" />
+            <td><input class="input-xxlarge" required="required" type="text" name="parent" value="<?php echo $parent; ?>" /><input type="hidden" name="parent_id" value="<?php echo $parent_id; ?>" />
             <?php if ($error_parent) { ?>
                 <div class="alert alert-error">
           <strong>Error!</strong> <?php echo $error_parent; ?>
@@ -86,7 +86,7 @@ $('input[name=\'parent\']').autocomplete({
   }, 
   select: function(event, ui) {
     $('input[name=\'parent\']').val(ui.item.label);
-            
+    $('input[name=\'parent_id\']').val(ui.item.value);
     return false;
   },
   focus: function(event, ui) {

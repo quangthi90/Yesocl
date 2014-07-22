@@ -307,6 +307,15 @@ class ControllerFinanceFinance extends Controller {
 			$this->data['parent'] = 'root';
 		}
 
+		// Entry parent id
+		if ( isset($this->request->post['parent_id']) ){
+			$this->data['parent_id'] = $this->request->post['parent_id'];
+		}elseif ( isset($oFinance) && $oFinance->getparentFinance() ){
+			$this->data['parent_id'] = $oFinance->getparentFinance()->getId();
+		}else {
+			$this->data['parent_id'] = '';
+		}
+
 		// Entry order
 		if ( isset($this->request->post['order']) ){
 			$this->data['order'] = $this->request->post['order'];

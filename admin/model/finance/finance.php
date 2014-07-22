@@ -20,9 +20,8 @@ class ModelFinanceFinance extends Model {
 		}
 
 		// parent is required
-		if ( isset($aData['parent']) ) {
-			$aData['parent'] = trim($aData['parent']);
-			$oFiParent = $this->dm->getRepository('Document\Finance\Finance')->findOneByName( $aData['parent'] );
+		if ( isset($aData['parent_id']) ) {
+			$oFiParent = $this->dm->getRepository('Document\Finance\Finance')->find( $aData['parent_id'] );
 		}else {
 			return false;
 		}
@@ -83,9 +82,8 @@ class ModelFinanceFinance extends Model {
 		}
 
 		// parent is required
-		if ( isset($aData['parent']) ) {
-			$aData['parent'] = trim($aData['parent']);
-			$oFiParent = $this->dm->getRepository('Document\Finance\Finance')->findOneByName( $aData['parent'] );
+		if ( isset($aData['parent_id']) ) {
+			$oFiParent = $this->dm->getRepository('Document\Finance\Finance')->find( $aData['parent_id'] );
 		}else {
 			return false;
 		}
