@@ -346,7 +346,7 @@ class ControllerFinanceFinance extends Controller {
 		}
 
 		$this->data['token'] = $this->session->data['token'];
-		$this->data['autocomplete_finance'] = html_entity_decode($this->url->link('finance/finance/searchFinance', 'token=' . $this->session->data['token'], 'SSL'));
+		$this->data['autocomplete_finance'] = html_entity_decode($this->url->link('finance/finance/search', 'token=' . $this->session->data['token'], 'SSL'));
 
 		$this->template = 'finance/finance_form.tpl';
 		$this->children = array(
@@ -389,7 +389,7 @@ class ControllerFinanceFinance extends Controller {
 		}
 	}
 
-	public function searchFinance() {
+	public function search() {
 		$this->load->model('finance/finance');
 
 		if ( isset( $this->request->get['filter_name'] ) ) {

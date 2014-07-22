@@ -96,6 +96,10 @@ class ModelFinanceDate extends Model {
 			->limit( $aData['limit'] );
 	}
 
+	public function getAllDates(){
+		return $this->dm->getRepository('Document\Finance\Date')->findAll();
+	}
+
 	public function getDate( $id ){
 		return $this->dm->getRepository('Document\Finance\Date')->find( $id );
 	}
