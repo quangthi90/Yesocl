@@ -39,8 +39,19 @@ class ModelFinanceFinance extends Model {
 			$aData['status'] = false;
 		}
 
+		// Slug
+		$sSlug = $this->url->create_slug( $aData['name'] );
+		$lFinances = $this->dm->getRepository('Document\Finance\Finance')->findBySlug( new MongoRegex("/^$sSlug/i") );
+		$aSlugs = array_map(function($oFinance){
+			return $oFinance->getSlug();
+		}, $lFinances->toArray());
+
+		$this->load->model( 'tool/slug' );
+		$sSlug = $this->model_tool_slug->getSlug( $sSlug, $aSlugs );
+
 		$oFinance = new Finance();
 		$oFinance->setName( $aData['name'] );
+		$oFinance->setSlug( $sSlug );
 		$oFinance->setOrder( $aData['order'] );
 		$oFinance->setGroup( $oFiGroup );
 		if ( $oFiParent ){
@@ -95,6 +106,18 @@ class ModelFinanceFinance extends Model {
 		if ( empty($aData['status']) ) {
 			$aData['status'] = false;
 		}
+
+		// Slug
+		// if ( $data['name'] != $oFinance->getName() ){
+			$sSlug = $this->url->create_slug( $aData['name'] );
+			$lFinances = $this->dm->getRepository('Document\Finance\Finance')->findBySlug( new MongoRegex("/^$sSlug/i") );
+			$aSlugs = array_map(function($oFinance){
+				return $oFinance->getSlug();
+			}, $lFinances->toArray());
+			$this->load->model( 'tool/slug' );
+			$sSlug = $this->model_tool_slug->getSlug( $sSlug, $aSlugs );
+			$oFinance->setSlug( $sSlug );
+		// }
 
 		$oFinance->setName( $aData['name'] );
 		$oFinance->setGroup( $oFiGroup );
