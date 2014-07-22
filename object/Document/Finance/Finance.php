@@ -79,14 +79,6 @@ Class Finance {
 		return $this->slug;
 	}
 
-	public function setStock( $stock ){
-		$this->stock = $stock;
-	}
-
-	public function getStock(){
-		return $this->stock;
-	}
-
 	public function setGroup( $group ){
 		$this->group = $group;
 	}
