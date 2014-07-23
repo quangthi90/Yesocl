@@ -40,7 +40,7 @@ class ControllerFinanceGroup extends Controller {
 		$this->getForm();
 	}
 
-	public function upGroup(){
+	public function update(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
@@ -163,7 +163,7 @@ class ControllerFinanceGroup extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'finance/group/upGroup', 'group_id=' . $oGroup->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'href' => $this->url->link( 'finance/group/update', 'group_id=' . $oGroup->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -262,7 +262,7 @@ class ControllerFinanceGroup extends Controller {
 		if ( isset($this->request->get['group_id']) ){
 			$oGroup = $this->model_finance_group->getGroup( $idGroup );
 			if ( $oGroup ){
-				$this->data['action'] = $this->url->link( 'finance/group/upGroup', 'group_id=' . $idGroup . '&token=' . $this->session->data['token'], 'sSL' );
+				$this->data['action'] = $this->url->link( 'finance/group/update', 'group_id=' . $idGroup . '&token=' . $this->session->data['token'], 'sSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
