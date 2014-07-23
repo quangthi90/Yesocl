@@ -486,6 +486,8 @@ class ControllerStockStock extends Controller {
 		$this->load->language('stock/import_stock');
 		$this->load->model('stock/stock');
 
+		$this->document->setTitle( $this->language->get('heading_title') );
+
 		// breadcrumbs
    		$this->data['breadcrumbs'][] = array(
        		'text'      => $this->language->get('text_home' ),
