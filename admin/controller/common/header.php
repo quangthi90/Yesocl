@@ -145,7 +145,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['finance'] = $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_group'] = $this->url->link('finance/group', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_code'] = $this->url->link('finance/code', 'token=' . $this->session->data['token'], 'SSL');
-			$this->data['finance_import'] = $this->url->link('finance/import', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['finance_import'] = $this->url->link('finance/finance/import', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_function'] = $this->url->link('finance/function', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_date'] = $this->url->link('finance/date', 'token=' . $this->session->data['token'], 'SSL');
 

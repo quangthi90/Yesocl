@@ -38,7 +38,7 @@ class ModelStockFinance extends Model {
 		
 		$this->dm->flush();
 
-		return true;
+		return $oFinances;
 	}
 
 	public function editFinance( $idStock, $idFinance, $aData = array() ) {

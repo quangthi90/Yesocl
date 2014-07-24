@@ -103,5 +103,12 @@ class ModelFinanceDate extends Model {
 	public function getDate( $id ){
 		return $this->dm->getRepository('Document\Finance\Date')->find( $id );
 	}
+
+	public function getDateByTime( $quarter, $year ){
+		return $this->dm->getRepository('Document\Finance\Date')->findOneBy(array(
+			'quarter' => $quarter,
+			'year' => $year
+		));
+	}
 }
 ?>

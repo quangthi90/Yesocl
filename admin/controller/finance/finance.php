@@ -40,7 +40,7 @@ class ControllerFinanceFinance extends Controller {
 		$this->getForm();
 	}
 
-	public function upFinance(){
+	public function update(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
@@ -165,7 +165,7 @@ class ControllerFinanceFinance extends Controller {
 			
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'finance/finance/upFinance', 'finance_id=' . $oFinance->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
+					'href' => $this->url->link( 'finance/finance/update', 'finance_id=' . $oFinance->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
 			
@@ -182,7 +182,7 @@ class ControllerFinanceFinance extends Controller {
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $oFinance;
+		$pagination->total = $iFinanceTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
@@ -274,7 +274,7 @@ class ControllerFinanceFinance extends Controller {
 		if ( isset($this->request->get['finance_id']) ){
 			$oFinance = $this->model_finance_finance->getFinance( $idFinance );
 			if ( $oFinance ){
-				$this->data['action'] = $this->url->link( 'finance/finance/upFinance', 'finance_id=' . $idFinance . '&token=' . $this->session->data['token'], 'SSL' );
+				$this->data['action'] = $this->url->link( 'finance/finance/update', 'finance_id=' . $idFinance . '&token=' . $this->session->data['token'], 'SSL' );
 			}else {
 				$this->redirect( $this->data['cancel'] );
 			}
@@ -387,6 +387,54 @@ class ControllerFinanceFinance extends Controller {
 		}else {
 			return true;	
 		}
+	}
+
+	public function import(){
+		if ( !$this->user->hasPermission($this->route, $this->config->get('action_import')) ) {
+			return $this->forward('error/permission');
+		}
+		
+		$this->load->language('finance/import');
+		$this->load->model('finance/finance');
+
+		$this->document->setTitle( $this->language->get('heading_title') );
+
+		// breadcrumbs
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get('text_home' ),
+			'href'      => $this->url->link( 'common/home', 'token=' . $this->session->data['token'], 'sSL' ),
+      		'separator' => false
+   		);
+   		$this->data['breadcrumbs'][] = array(
+       		'text'      => $this->language->get('heading_title' ),
+			'href'      => $this->url->link( 'finance/import', 'token=' . $this->session->data['token'], 'sSL' ),
+      		'separator' => ' :: '
+   		);
+
+   		// Heading title
+		$this->data['heading_title'] = $this->language->get('heading_title');
+
+		$this->data['entry_import'] = $this->language->get('entry_import');
+		$this->data['button_submit'] = $this->language->get('button_submit');
+
+		// request
+		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && !empty($this->request->files['file']) ){
+			if ( $this->model_finance_finance->import($this->request->files['file']) ){
+				$this->data['success'] = $this->language->get('text_success');
+			}else{
+				$this->data['error_warning'] = $this->language->get('text_error');
+			}
+		}
+
+		$this->data['action'] = $this->url->link( 'finance/finance/import', 'token=' . $this->session->data['token'], 'sSL');
+		
+		$this->template = 'stock/import_exchange.tpl';
+		$this->children = array(
+			'common/header',
+			'common/footer'
+		);
+				
+		$this->response->setOutput( $this->render() );
 	}
 
 	public function search() {

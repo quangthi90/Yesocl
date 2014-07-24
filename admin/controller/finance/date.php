@@ -178,7 +178,7 @@ class ControllerFinanceDate extends Controller {
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $oDate;
+		$pagination->total = $iDateTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');

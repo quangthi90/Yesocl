@@ -12,7 +12,6 @@ class ModelFinanceFinance extends Model {
 
 		// group is required
 		if ( isset($aData['group']) ) {
-			$aData['group'] = trim($aData['group']);
 			$oFiGroup = $this->dm->getRepository('Document\Finance\Group')->find( $aData['group'] );
 			if ( !$oFiGroup ) return false;
 		}else {
@@ -22,8 +21,6 @@ class ModelFinanceFinance extends Model {
 		// parent is required
 		if ( isset($aData['parent_id']) ) {
 			$oFiParent = $this->dm->getRepository('Document\Finance\Finance')->find( $aData['parent_id'] );
-		}else {
-			return false;
 		}
 
 		// order is required
@@ -61,7 +58,7 @@ class ModelFinanceFinance extends Model {
 		$this->dm->persist( $oFinance );
 		$this->dm->flush();
 
-		return true;
+		return $oFinance;
 	}
 
 	public function editFinance( $id, $aData = array() ) {
@@ -84,8 +81,6 @@ class ModelFinanceFinance extends Model {
 		// parent is required
 		if ( isset($aData['parent_id']) ) {
 			$oFiParent = $this->dm->getRepository('Document\Finance\Finance')->find( $aData['parent_id'] );
-		}else {
-			return false;
 		}
 
 		// order is required
@@ -170,6 +165,102 @@ class ModelFinanceFinance extends Model {
 
 	public function getFinance( $id ){
 		return $this->dm->getRepository('Document\Finance\Finance')->find( $id );
+	}
+
+	public function getFinanceByName( $sFiName ){
+		return $this->dm->getRepository('Document\Finance\Finance')->findOneByName( $sFiName );
+	}
+
+	public function import( $files ){
+		$this->load->model('finance/group');
+		$this->load->model('finance/finance');
+		$this->load->model('finance/date');
+		$this->load->model('stock/finance');
+		$this->load->model('stock/stock');
+		
+		$link_files = $files['tmp_name'];
+		foreach ($link_files as $file) {
+			$string = file_get_contents( $file );
+			$aJson = json_decode( $string, true );
+
+			$sStockCode = $aJson['StockCode'];
+			$oStock = $this->model_stock_stock->getStock( array('code' => $sStockCode) );
+			if ( !$oStock ){
+				continue;
+			}
+			$aGroups = $aJson['Groups'];
+			$aTimes = array();
+
+			foreach ( $aGroups as $aGroup ) {
+				$sGroupName = $aGroup['Name'];
+				$aFinances = $aGroup['DataNames'];
+
+				$oFiGroup = $this->model_finance_group->getGroupByName( $sGroupName );
+				if ( !$oFiGroup ){
+					$oFiGroup = $this->model_finance_group->addGroup(array(
+						'name' => $sGroupName,
+						'order' => 0, // set as default, update after
+						'status' => true
+					));
+				}
+
+				foreach ( $aFinances as $aFinance ) {
+					$sFiName = $aFinance['Name'];
+					$aFiValues = $aFinance['Values'];
+
+					$oFinance = $this->getFinanceByName( $sFiName );
+					if ( !$oFinance ){
+						$oFinance = $this->addFinance(array(
+							'name' => $sFiName,
+							'group' => $oFiGroup->getId(),
+							'order' => 0, // set as default, update after
+							'status' => true
+						));
+					}
+
+					$aFiResultValues = array();
+					foreach ( $aFiValues as $aFiValue ) {
+						$aFiResultValues[$aFiValue['Time']] = $aFiValue['Value'];
+						$aTimes[$aFiValue['Time']] = $aFiValue['Time'];
+					}
+
+					$oStockFinances = $this->model_stock_finance->getFinances( $oStock->getId() );
+					if ( $oStockFinances ){
+						$oStockFinance = $oStockFinances->getFinanceById( $oFinance->getId() );
+					}
+					if ( !$oStockFinances || !$oStockFinance ){
+						$this->model_stock_finance->addFinance( $oStock->getId(), array(
+							'finance_id' => $oFinance->getId(),
+							'status' => true,
+							'values' => $aFiResultValues
+						));
+					}else{
+						$this->model_stock_finance->editFinance( $oStock->getId(), $oStockFinances->getId(), array(
+							'finance_id' => $oFinance->getId(),
+							'status' => true,
+							'values' => $aFiResultValues
+						));
+					}
+				}
+			}
+
+			foreach ( $aTimes as $aTime ) {
+				$aTimeParts = explode( '-', $aTime );
+				if ( count($aTimeParts) < 2 ) continue;
+				$oDate = $this->model_finance_date->getDateByTime( $aTimeParts[1], $aTimeParts[0] );
+				if ( !$oDate ){
+					$this->model_finance_date->addDate(array(
+						'year' => $aTimeParts[0],
+						'quarter' => $aTimeParts[1],
+						'status' => true
+					));
+				}
+			}
+		}
+
+		$this->dm->flush();
+
+		return true;
 	}
 
 	public function searchFinanceByKeyword( $data = array() ) {

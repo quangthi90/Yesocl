@@ -30,7 +30,7 @@ class ModelFinanceGroup extends Model {
 		$this->dm->persist( $oGroup );
 		$this->dm->flush();
 
-		return true;
+		return $oGroup;
 	}
 
 	public function editGroup( $id, $aData = array() ) {
@@ -121,6 +121,10 @@ class ModelFinanceGroup extends Model {
 
 	public function getGroup( $id ){
 		return $this->dm->getRepository('Document\Finance\Group')->find( $id );
+	}
+
+	public function getGroupByName( $sGroupName ){
+		return $this->dm->getRepository('Document\Finance\Group')->findOneByName( $sGroupName );
 	}
 }
 ?>

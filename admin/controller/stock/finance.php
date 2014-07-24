@@ -161,9 +161,10 @@ class ControllerStockFinance extends Controller {
 		$oFinances = $this->model_stock_finance->getFinances( $idStock );
 		$lFinances = array();
 		$iFinanceTotal = 0;
+		
 		if ( $oFinances ){
 			$lFinances = $oFinances->getFinances()->slice( $aData['start'], $aData['limit'] );
-			$iFinanceTotal = $oFinances->getFinances()->count( true );
+			$iFinanceTotal = $oFinances->getFinances()->count();
 		}
 		
 		$this->data['finances'] = array();
@@ -187,11 +188,11 @@ class ControllerStockFinance extends Controller {
 		}
 		
 		$pagination = new Pagination();
-		$pagination->total = $oFinance;
+		$pagination->total = $iFinanceTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('stock/finance', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
+		$pagination->url = $this->url->link('stock/finance', '&page={page}' . '&token=' . $this->session->data['token'] . '&stock_id=' . $idStock, 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
