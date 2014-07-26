@@ -29,5 +29,6 @@ $_['error_warning'] 				= 'Warning: Error!';
 $_['error_code']					= 'Warning: Error Code is required!';
 $_['error_code_exist']				= 'Warning: Error Code is exist!';
 $_['error_finance']					= 'Warning: Error Finance is required!';
+$_['error_finance_exist']			= 'Warning: Error Finance is exist!';
 $_['text_success'] 					= 'Success: You have modified Code!';
 ?>
