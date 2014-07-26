@@ -1,9 +1,9 @@
-<?php 
+<?php
 class ControllerFinanceFinance extends Controller {
 	private $error = array( );
 	private $limit = 10;
 	private $route = 'finance/finance';
- 
+
 	public function index(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_view')) ) {
 			return $this->forward('error/permission');
@@ -13,7 +13,7 @@ class ControllerFinanceFinance extends Controller {
 		$this->load->model( 'finance/finance' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-		
+
 		$this->getList();
 	}
 
@@ -29,14 +29,22 @@ class ControllerFinanceFinance extends Controller {
 
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiFinanceForm() ){
-			$this->model_finance_finance->addFinance( $this->request->post );
-			
+			$oFinance = $this->model_finance_finance->addFinance( $this->request->post );
+
+			// ADD FINANCE CODE
+			if ($oFinance) {
+				$this->load->model('finance/code');
+				$this->request->post['code'] = $this->request->post['name'];
+				$this->request->post['finance_id'] = $oFinance->getId();
+				$this->model_finance_code->addCode( $this->request->post );
+			}
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL') );
 		}
 
 		$this->data['action'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'SSL' );
-		
+
 		$this->getForm();
 	}
 
@@ -44,7 +52,7 @@ class ControllerFinanceFinance extends Controller {
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_edit')) ) {
 			return $this->forward('error/permission');
 		}
-		
+
 		$this->load->language( 'finance/finance' );
 		$this->load->model( 'finance/finance' );
 
@@ -53,19 +61,19 @@ class ControllerFinanceFinance extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiFinanceForm(true) ){
 			$this->model_finance_finance->editFinance( $this->request->get['finance_id'], $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL') );
 		}
-		
+
 		$this->getForm();
 	}
- 
+
 	public function delete(){
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_delete')) ) {
 			return $this->forward('error/permission');
 		}
-		
+
 		$this->load->language( 'finance/finance' );
 		$this->load->model( 'finance/finance' );
 
@@ -74,7 +82,7 @@ class ControllerFinanceFinance extends Controller {
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValiFinanceDelete() ){
 			$this->model_finance_finance->deleteFinances( $this->request->post );
-			
+
 			$this->session->data['success'] = $this->language->get( 'text_success' );
 			$this->redirect( $this->url->link('finance/finance', 'token=' . $this->session->data['token'], 'SSL') );
 		}
@@ -90,20 +98,20 @@ class ControllerFinanceFinance extends Controller {
 			unset( $this->session->data['error_warning'] );
 		} elseif ( isset($this->session->data['error_warning']) ) {
 			$this->data['error_warning'] = $this->session->data['error_warning'];
-			
+
 			unset( $this->session->data['error_warning'] );
 		} else {
 			$this->data['error_warning'] = '';
 		}
-		
+
 		if ( isset($this->session->data['success']) ){
 			$this->data['success'] = $this->session->data['success'];
-		
+
 			unset( $this->session->data['success'] );
 		} else {
 			$this->data['success'] = '';
 		}
-		
+
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
@@ -124,7 +132,7 @@ class ControllerFinanceFinance extends Controller {
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get( 'heading_title' );
-		
+
 		// Text
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
 		$this->data['text_edit'] = $this->language->get('text_edit');
@@ -134,16 +142,16 @@ class ControllerFinanceFinance extends Controller {
 		$this->data['column_group'] = $this->language->get('column_group');
 		$this->data['column_parent'] = $this->language->get('column_parent');
 		$this->data['column_order'] = $this->language->get('column_order');
-		$this->data['column_status'] = $this->language->get('column_status');	
+		$this->data['column_status'] = $this->language->get('column_status');
 		$this->data['column_action'] = $this->language->get('column_action');
-		
+
 		// Confirm
 		$this->data['confirm_del'] = $this->language->get('confirm_del');
-		
+
 		// Button
 		$this->data['button_insert'] = $this->language->get('button_insert');
 		$this->data['button_delete'] = $this->language->get('button_delete');
-		
+
 		// Link
 		$this->data['insert'] = $this->url->link( 'finance/finance/insert', 'token=' . $this->session->data['token'], 'SSL' );
 		$this->data['delete'] = $this->url->link( 'finance/finance/delete', 'token=' . $this->session->data['token'], 'SSL' );
@@ -153,22 +161,22 @@ class ControllerFinanceFinance extends Controller {
 			'start' => ($page - 1) * $this->limit,
 			'limit' => $this->limit
 		);
-		
+
 		$lFinances = $this->model_finance_finance->getFinances( $aData );
-		
+
 		$iFinanceTotal = $lFinances->count();
-		
+
 		$this->data['finances'] = array();
 		if ( $lFinances ){
 			foreach ( $lFinances as $oFinance ){
 				$action = array();
-			
+
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
 					'href' => $this->url->link( 'finance/finance/update', 'finance_id=' . $oFinance->getId() . '&token=' . $this->session->data['token'], 'SSL' ),
 					'icon' => 'icon-edit',
 				);
-			
+
 				$this->data['finances'][] = array(
 					'id' => $oFinance->getId(),
 					'name' => $oFinance->getName(),
@@ -180,14 +188,14 @@ class ControllerFinanceFinance extends Controller {
 				);
 			}
 		}
-		
+
 		$pagination = new Pagination();
 		$pagination->total = $iFinanceTotal;
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
 		$pagination->url = $this->url->link('finance/finance', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
-			
+
 		$this->data['pagination'] = $pagination->render();
 
 		$this->template = 'finance/finance_list.tpl';
@@ -195,7 +203,7 @@ class ControllerFinanceFinance extends Controller {
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -206,15 +214,15 @@ class ControllerFinanceFinance extends Controller {
 		} else {
 			$this->data['error_warning'] = '';
 		}
-		
+
 		if ( isset($this->session->data['success']) ){
 			$this->data['success'] = $this->session->data['success'];
-		
+
 			unset( $this->session->data['success'] );
 		} else {
 			$this->data['success'] = '';
 		}
-		
+
 		if ( isset($this->error['error_name']) ) {
 			$this->data['error_name'] = $this->error['error_name'];
 		} else {
@@ -249,27 +257,27 @@ class ControllerFinanceFinance extends Controller {
 
    		// Heading title
 		$this->data['heading_title'] = $this->language->get('heading_title');
-		
-		// Text	
+
+		// Text
 		$this->data['text_enabled'] = $this->language->get('text_enabled');
 		$this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_true'] = $this->language->get('text_true');
 		$this->data['text_false'] = $this->language->get('text_false');
-		
+
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
-		
+
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_group'] = $this->language->get('entry_group');
 		$this->data['entry_parent'] = $this->language->get('entry_parent');
 		$this->data['entry_order'] = $this->language->get('entry_order');
 		$this->data['entry_status'] = $this->language->get('entry_status');
-		
+
 		// Link
 		$this->data['cancel'] = $this->url->link( 'finance/finance', 'token=' . $this->session->data['token'], 'SSL' );
-		
+
 		// finance
 		if ( isset($this->request->get['finance_id']) ){
 			$oFinance = $this->model_finance_finance->getFinance( $idFinance );
@@ -353,7 +361,7 @@ class ControllerFinanceFinance extends Controller {
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 
@@ -373,7 +381,7 @@ class ControllerFinanceFinance extends Controller {
 		if ( $this->error){
 			return false;
 		}else {
-			return true;	
+			return true;
 		}
 	}
 
@@ -385,7 +393,7 @@ class ControllerFinanceFinance extends Controller {
 		if ( $this->error){
 			return false;
 		}else {
-			return true;	
+			return true;
 		}
 	}
 
@@ -393,7 +401,7 @@ class ControllerFinanceFinance extends Controller {
 		if ( !$this->user->hasPermission($this->route, $this->config->get('action_import')) ) {
 			return $this->forward('error/permission');
 		}
-		
+
 		$this->load->language('finance/import');
 		$this->load->model('finance/finance');
 
@@ -427,13 +435,13 @@ class ControllerFinanceFinance extends Controller {
 		}
 
 		$this->data['action'] = $this->url->link( 'finance/finance/import', 'token=' . $this->session->data['token'], 'sSL');
-		
+
 		$this->template = 'stock/import_exchange.tpl';
 		$this->children = array(
 			'common/header',
 			'common/footer'
 		);
-				
+
 		$this->response->setOutput( $this->render() );
 	}
 

@@ -350,8 +350,6 @@ class ControllerFinanceCode extends Controller {
 		}else {
 			return true;
 		}
-
-		return false;
 	}
 
 	private function isValidateDelete(){

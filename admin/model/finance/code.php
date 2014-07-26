@@ -3,17 +3,17 @@ use Document\Finance\Code;
 
 class ModelFinanceCode extends Model {
 	public function addCode( $aData = array() ) {
-		// code is required
-		if ( isset($aData['code']) ) {
-			$aData['code'] = trim($aData['code']);
-		}else {
+		// code is required & not exist
+		if ( !isset($aData['code']) || $this->isExistCode($aData['code']) ) {
 			return false;
+		}else {
+			$aData['code'] = trim($aData['code']);
 		}
 
-		// finance is required
+		// finance is required & not exist
 		if ( isset($aData['finance_id']) ) {
 			$oFinance = $this->dm->getRepository( 'Document\Finance\Finance' )->find( $aData['finance_id'] );
-			if ( !$oFinance ) {
+			if ( !$oFinance || $this->isExistFinance($aData['finance_id']) ) {
 				return false;
 			}
 		}else {
@@ -37,17 +37,17 @@ class ModelFinanceCode extends Model {
 	}
 
 	public function editCode( $id, $aData = array() ) {
-		// code is required
-		if ( isset($aData['code']) ) {
-			$aData['code'] = trim($aData['code']);
-		}else {
+		// code is required & not exist
+		if ( !isset($aData['code']) || $this->isExistCode($aData['code'], $id) ) {
 			return false;
+		}else {
+			$aData['code'] = trim($aData['code']);
 		}
 
-		// finance is required
+		// finance is required & not exist
 		if ( isset($aData['finance_id']) ) {
 			$oFinance = $this->dm->getRepository( 'Document\Finance\Finance' )->find( $aData['finance_id'] );
-			if ( !$oFinance ) {
+			if ( !$oFinance || $this->isExistFinance($aData['finance_id'], $id) ) {
 				return false;
 			}
 		}else {
@@ -123,6 +123,26 @@ class ModelFinanceCode extends Model {
 			'finance.id' => trim($finance_id),
 			'deleted' => false,
 			));
+	}
+
+	public function isExistCode( $code, $code_id = null ) {
+		$oCode =  $this->getCodeByCode( $code );
+
+		if ( !$oCode || (isset($code_id) && $oCode->getId() == $code_id) ) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	public function isExistFinance( $finance_id, $code_id = null ) {
+		$oCode =  $this->getCodeByFinance( $finance_id );
+
+		if ( !$oCode || (isset($code_id) && $oCode->getId() == $code_id) ) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 }
 ?>
