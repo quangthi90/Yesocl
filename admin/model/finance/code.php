@@ -114,6 +114,14 @@ class ModelFinanceCode extends Model {
 	public function getCodeByCode( $code ) {
 		return $this->dm->getRepository('Document\Finance\Code')->findOneBy( array(
 			'code' => new MongoRegex("/^" . trim($code) . "$/i"),
+			'deleted' => false,
+			));
+	}
+
+	public function getCodeByFinance( $finance_id ) {
+		return $this->dm->getRepository('Document\Finance\Code')->findOneBy( array(
+			'finance.id' => trim($finance_id),
+			'deleted' => false,
 			));
 	}
 }

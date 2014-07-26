@@ -317,6 +317,8 @@ class ControllerFinanceCode extends Controller {
 
 		if ( empty($this->request->post['finance_id']) ){
 			$this->error['error_finance'] = $this->language->get( 'error_finance' );
+		}elseif ( $this->isExistFinance($this->request->post['finance_id']) ) {
+			$this->error['error_finance'] = $this->language->get( 'error_finance_exist' );
 		}
 
 		if ( $this->error){
@@ -336,6 +338,20 @@ class ControllerFinanceCode extends Controller {
 		}else {
 			return true;
 		}
+	}
+
+	private function isExistFinance( $finance_id ) {
+		$this->load->model('finance/code');
+
+		$oCode =  $this->model_finance_code->getCodeByFinance( $finance_id );
+
+		if ( !$oCode || (isset($this->request->get['code_id']) && $oCode->getId() == $this->request->get['code_id']) ) {
+			return false;
+		}else {
+			return true;
+		}
+
+		return false;
 	}
 
 	private function isValidateDelete(){
