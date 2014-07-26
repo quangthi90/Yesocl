@@ -177,7 +177,7 @@ class ModelFinanceFinance extends Model {
 		$this->load->model('finance/date');
 		$this->load->model('stock/finance');
 		$this->load->model('stock/stock');
-		
+
 		$link_files = $files['tmp_name'];
 		foreach ($link_files as $file) {
 			$string = file_get_contents( $file );
@@ -264,10 +264,18 @@ class ModelFinanceFinance extends Model {
 	}
 
 	public function searchFinanceByKeyword( $data = array() ) {
+		if ( empty($data['limit']) ){
+			$data['limit'] = 10;
+		}
+
+		if ( empty($data['start']) ){
+			$data['start'] = 0;
+		}
+
 		return $this->dm->getRepository('Document\Finance\Finance')->findBy(array(
 			'deleted' => false,
 			'name' => new MongoRegex("/^" . trim($data['filter_name']) . "*/i")
-		));
+		))->skip( $data['start'] )->limit( $data['limit'] );
 	}
 }
 ?>

@@ -54,6 +54,14 @@ Class Code {
 		return $this->code;
 	}
 
+	public function setFinance( $finance ){
+		$this->finance = $finance;
+	}
+
+	public function getFinance(){
+		return $this->finance;
+	}
+
 	public function setStatus( $status ){
 		$this->status = $status;
 	}

@@ -447,7 +447,8 @@ class ControllerFinanceFinance extends Controller {
 		}
 
 		$data = array(
-			'filter_name' => $filter_name
+			'filter_name' => $filter_name,
+			'limit'		  => 20,
 		);
 
 		$lFinances = $this->model_finance_finance->searchFinanceByKeyword( $data );
