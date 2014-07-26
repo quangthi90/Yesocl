@@ -311,6 +311,8 @@ class ControllerFinanceCode extends Controller {
 	private function isValidateForm( $bIsEdit = false ){
 		if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 1 || strlen($this->request->post['code']) > 128 ){
 			$this->error['error_code'] = $this->language->get( 'error_code' );
+		}elseif ( $this->isExistCode($this->request->post['code']) ) {
+			$this->error['error_code'] = $this->language->get( 'error_code_exist' );
 		}
 
 		if ( empty($this->request->post['finance_id']) ){
@@ -318,6 +320,18 @@ class ControllerFinanceCode extends Controller {
 		}
 
 		if ( $this->error){
+			return false;
+		}else {
+			return true;
+		}
+	}
+
+	private function isExistCode( $code ) {
+		$this->load->model('finance/code');
+
+		$oCode =  $this->model_finance_code->getCodeByCode( $code );
+
+		if ( !$oCode || (isset($this->request->get['code_id']) && $oCode->getId() == $this->request->get['code_id']) ) {
 			return false;
 		}else {
 			return true;

@@ -27,6 +27,7 @@ $_['entry_status'] 					= 'Status:';
 // error
 $_['error_warning'] 				= 'Warning: Error!';
 $_['error_code']					= 'Warning: Error Code is required!';
+$_['error_code_exist']				= 'Warning: Error Code is exist!';
 $_['error_finance']					= 'Warning: Error Finance is required!';
 $_['text_success'] 					= 'Success: You have modified Code!';
 ?>
