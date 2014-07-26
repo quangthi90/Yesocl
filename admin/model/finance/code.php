@@ -79,13 +79,12 @@ class ModelFinanceCode extends Model {
 				$oCode = $this->dm->getRepository('Document\Finance\Code')->find( $id );
 
 				if ( $oCode ) {
-					$oCode->setDelete( true );
+					$oCode->setDeleted( true );
 					// $this->dm->remove( $oCode );
+					$this->dm->flush();
 				}
 			}
 		}
-
-		$this->dm->flush();
 	}
 
 	public function getCodes( $aData = array() ){
