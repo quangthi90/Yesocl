@@ -16,7 +16,7 @@ Class Formual {
 	 */
 	private $name;
 
-	/** @MongoDB\ReferenceOne(targetDocument="User") */
+	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
 	private $owner;
 
 	/**

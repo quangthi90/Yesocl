@@ -162,15 +162,14 @@ class ControllerFinanceFunction extends Controller {
 
 				$action[] = array(
 					'text' => $this->language->get('text_edit'),
-					'href' => $this->url->link( 'finance/function/update', 'function_id=' . $oCode->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+					'href' => $this->url->link( 'finance/function/update', 'function_id=' . $oFunction->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
 					'icon' => 'icon-edit',
 				);
 
 				$this->data['functions'][] = array(
 					'id' => $oFunction->getId(),
 					'name' => $oFunction->getName(),
-					'owner' => $oCode->getOwner()->getPrimaryEmail(),
-					// 'status' => $oCode->getStatus() ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+					'owner' => $oFunction->getOwner()->getFullname() . ' (' . $oFunction->getOwner()->getPrimaryEmail()->getEmail() . ')',
 					'action' => $action,
 				);
 			}
@@ -288,7 +287,7 @@ class ControllerFinanceFunction extends Controller {
 			$this->data['owner'] = $this->request->post['owner'];
 		}elseif ( isset($oFunction) ){
 			$this->data['owner_id'] = $oFunction->getOwner()->getId();
-			$this->data['owner'] = $oFunction->getOwner()->getFullname() . ' (' . $oFunction->getOwner()->getPrimaryEmail() . ')';
+			$this->data['owner'] = $oFunction->getOwner()->getFullname() . ' (' . $oFunction->getOwner()->getPrimaryEmail()->getEmail() . ')';
 		}else {
 			$this->data['owner_id'] = '';
 			$this->data['owner'] = '';
