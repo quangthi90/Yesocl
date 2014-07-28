@@ -9,15 +9,15 @@
 
 {% block body %}
 	<div id="y-content">
-		<div id="y-main-content" style="overflow-y: auto;">
+		<div id="y-main-content" class="about-page" style="overflow-y: auto;">
             <div class="row">
                 <div class="span12">
                     <div class="front-page">
                         <div class="row-fluid">
                             <div class="span4">
-                                <div class="content-block">
-                                    <p>
-                                        <a href="#">YESOCL.COM </a>là mạng xã hội để trao đổi thông tin tài chính – nơi liên kết nhà đầu tư và doanh nghiệp.
+                                <div class="content-block" style="background-color: #56C2A9;padding: 40px;height: 468px;color: #FFF;">
+                                    <p style="font-size: 20px;height: 160px;">
+                                        <a class="system-link" href="#">YESOCL.COM </a>là mạng xã hội để trao đổi thông tin tài chính – nơi liên kết nhà đầu tư và doanh nghiệp.
                                     </p>
                                     <p>
                                         Chúng tôi không ngần ngại chia sẻ thông tin về thị trường chứng khoán và tin tức quan trọng  xoay quanh thị trường. Chúng tôi tạo ra cộng đồng tài chính để nhà đầu tư nêu quan điểm cá nhân. Chúng tôi tạo ra kênh truyền thông để doanh nghiệp minh bạch thông tin.
@@ -25,26 +25,25 @@
                                 </div>
                             </div>
                             <div class="span4">
-                                <div class="content-block">
-                                    <h1>
-                                        <a href="#">YESOCL.COM</a>
+                                <div class="content-block" style="text-align: center;">
+                                    <h1 style=""><a class="system-link" href="#" style="color: #009B77;">YESOCL.COM</a>
                                     </h1>
-                                    <h3>Say yes to connect business</h3>
-                                    <p>Mạng xã hội tài chính tại Việt Nam</p>
+                                    <h3 style="color: #009B77;">Say yes to connect business</h3>
+                                    <h3>Mạng xã hội tài chính tại Việt Nam</h3>
                                 </div>
                             </div>
                             <div class="span4">
                                 <div class="content-block">
-                                    <p>
+                                    <p style="text-align: right; font-size: 23px; line-height: 35px;">
                                         Tin tức
-                                    <br />
+                                    <br>
                                         Chứng Khoán
-                                    <br />
+                                    <br>
                                         Phân Tích Đầu Tư
-                                    <br />
+                                    <br>
                                         Tin Doanh Nghiệp
                                     </p>
-                                    <p style="background-image: url(image/template/about-1.jpg); background-repeat:no-repeat; width: 100%; min-height: 300px;"></p>
+                                    <p style="background-image: url(image/template/about-1.jpg); background-repeat:no-repeat; background-position: 100% top;width: 100%; min-height: 300px;"></p>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +55,7 @@
                     	<div class="content-block">
                     		<h3 class="content-block-title">Thương Hiệu Cá Nhân</h3>
                     		<p>
-                    			Tại mạng xã hội <a href="#">Yesocl.com</a> – bạn chỉ mất 3 phút thực hiện đăng nhập và tự bản thân tạo nên page cá nhân, có hơn hàng ngàn lượt truy cập mỗi ngày. Hãy để <a href="#">Yesocl.com</a> truyền tải hình ảnh của bạn đến với cộng đồng tài chính:
+                    			Tại mạng xã hội <a class="system-link" href="#">Yesocl.com</a> – bạn chỉ mất 3 phút thực hiện đăng nhập và tự bản thân tạo nên page cá nhân, có hơn hàng ngàn lượt truy cập mỗi ngày. Hãy để <a class="system-link" href="#">Yesocl.com</a> truyền tải hình ảnh của bạn đến với cộng đồng tài chính:
                     		</p>
                     		<ul>
                     			<li>
