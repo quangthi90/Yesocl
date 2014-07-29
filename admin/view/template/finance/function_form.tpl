@@ -28,16 +28,6 @@
         </div>
             <?php } ?></td>
           </tr>
-          <tr>
-            <td><span class="required">*</span> <?php echo $entry_owner; ?></td>
-            <td><input class="input-xxlarge" required="required" type="text" name="owner" value="<?php echo $owner; ?>" />
-              <input type="hidden" name="owner_id" value="<?php echo $owner_id; ?>"/>
-            <?php if ($error_owner) { ?>
-                <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_owner; ?>
-        </div>
-            <?php } ?></td>
-          </tr>
           <style type="text/css">
             ul.multti-select-box {
               float: left;
@@ -97,30 +87,4 @@
 </div>
 <?php echo $footer; ?>
 <script type="text/javascript"><!--//
-$('input[name=\'owner\']').autocomplete({
-  delay: 0,
-  source: function(request, response) {
-    $.ajax({
-      url: 'index.php?route=user/user/searchUser&filter=' +  encodeURIComponent(request.term) + '&token=<?php echo $token; ?>',
-      dataType: 'json',
-      success: function(json) {
-        response($.map(json, function(item) {
-          return {
-            label: item.primary,
-            value: item.id
-          }
-        }));
-      }
-    });
-  },
-  select: function(event, ui) {
-    $('input[name=\'owner\']').val(ui.item.label);
-    $('input[name=\'owner_id\']').val(ui.item.value);
-
-    return false;
-  },
-  focus: function(event, ui) {
-        return false;
-    }
-});
 //--></script>

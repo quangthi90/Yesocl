@@ -16,9 +16,6 @@ Class Formual {
 	 */
 	private $name;
 
-	/** @MongoDB\ReferenceOne(targetDocument="Document\User\User") */
-	private $owner;
-
 	/**
 	 * @MongoDB\String
 	 */
@@ -58,14 +55,6 @@ Class Formual {
 
 	public function getName(){
 		return $this->name;
-	}
-
-	public function setOwner( $owner ){
-		$this->owner = $owner;
-	}
-
-	public function getOwner(){
-		return $this->owner;
 	}
 
 	public function setFunction( $function ){

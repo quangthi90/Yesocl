@@ -10,14 +10,6 @@ class ModelFinanceFunction extends Model {
 			$aData['name'] = trim($aData['name']);
 		}
 
-		// user is required
-		if ( isset($aData['owner_id']) ) {
-			$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $aData['owner_id'] );
-		}
-		if ( !isset($oUser) || !$oUser) {
-			return false;
-		}
-
 		// function is required
 		if ( !isset($aData['function']) || !$this->isValidateFunction($aData['function']) ) {
 			return false;
@@ -27,7 +19,6 @@ class ModelFinanceFunction extends Model {
 
 		$oFunction = new Formual();
 		$oFunction->setName( $aData['name'] );
-		$oFunction->setOwner( $oUser );
 		$oFunction->setFunction( $aData['function'] );
 
 		$this->dm->persist( $oFunction );
@@ -44,14 +35,6 @@ class ModelFinanceFunction extends Model {
 			$aData['name'] = trim($aData['name']);
 		}
 
-		// user is required
-		if ( isset($aData['owner_id']) ) {
-			$oUser = $this->dm->getRepository( 'Document\User\User' )->find( $aData['owner_id'] );
-		}
-		if ( !isset($oUser) || !$oUser) {
-			return false;
-		}
-
 		// function is required
 		if ( !isset($aData['function']) || !$this->isValidateFunction($aData['function']) ) {
 			return false;
@@ -64,7 +47,6 @@ class ModelFinanceFunction extends Model {
 			return false;
 		}
 		$oFunction->setName( $aData['name'] );
-		$oFunction->setOwner( $oUser );
 		$oFunction->setFunction( $aData['function'] );
 
 		$this->dm->persist( $oFunction );

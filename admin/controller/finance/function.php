@@ -131,7 +131,6 @@ class ControllerFinanceFunction extends Controller {
 
 		// Column
 		$this->data['column_name'] = $this->language->get('column_name');
-		$this->data['column_owner'] = $this->language->get('column_owner');
 		$this->data['column_action'] = $this->language->get('column_action');
 
 		// Confirm
@@ -169,7 +168,6 @@ class ControllerFinanceFunction extends Controller {
 				$this->data['functions'][] = array(
 					'id' => $oFunction->getId(),
 					'name' => $oFunction->getName(),
-					'owner' => $oFunction->getOwner()->getFullname() . ' (' . $oFunction->getOwner()->getPrimaryEmail()->getEmail() . ')',
 					'action' => $action,
 				);
 			}
@@ -215,12 +213,6 @@ class ControllerFinanceFunction extends Controller {
 			$this->data['error_name'] = '';
 		}
 
-		if ( isset($this->error['error_owner']) ) {
-			$this->data['error_owner'] = $this->error['error_owner'];
-		} else {
-			$this->data['error_owner'] = '';
-		}
-
 		if ( isset($this->error['error_function']) ) {
 			$this->data['error_function'] = $this->error['error_function'];
 		} else {
@@ -256,7 +248,6 @@ class ControllerFinanceFunction extends Controller {
 
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_owner'] = $this->language->get('entry_owner');
 		$this->data['entry_function'] = $this->language->get('entry_function');
 
 		// Link
@@ -279,18 +270,6 @@ class ControllerFinanceFunction extends Controller {
 			$this->data['name'] = $oFunction->getName();
 		}else {
 			$this->data['name'] = '';
-		}
-
-		// Entry Owner
-		if ( isset($this->request->post['owner_id']) ){
-			$this->data['owner_id'] = $this->request->post['owner_id'];
-			$this->data['owner'] = $this->request->post['owner'];
-		}elseif ( isset($oFunction) ){
-			$this->data['owner_id'] = $oFunction->getOwner()->getId();
-			$this->data['owner'] = $oFunction->getOwner()->getFullname() . ' (' . $oFunction->getOwner()->getPrimaryEmail()->getEmail() . ')';
-		}else {
-			$this->data['owner_id'] = '';
-			$this->data['owner'] = '';
 		}
 
 		// Entry function
@@ -316,10 +295,6 @@ class ControllerFinanceFunction extends Controller {
 	private function isValidateForm( $bIsEdit = false ){
 		if ( !isset($this->request->post['name']) || strlen($this->request->post['name']) < 1 || strlen($this->request->post['name']) > 128 ){
 			$this->error['error_name'] = $this->language->get( 'error_name' );
-		}
-
-		if ( empty($this->request->post['owner_id']) ){
-			$this->error['error_owner'] = $this->language->get( 'error_owner' );
 		}
 
 		if ( !isset($this->request->post['function']) || !$this->isValidateFunction($this->request->post['function']) ){

@@ -25,7 +25,6 @@
           <thead>
             <tr>
               <td><input type="checkbox"  onclick="$('input[name*=\'id\']').attr('checked', this.checked);" /></td>
-              <td><?php echo $column_owner; ?></td>
               <td><?php echo $column_name; ?></td>
               <td><?php echo $column_action; ?></td>
             </tr>
@@ -35,7 +34,6 @@
             <?php foreach ( $functions as $function ) { ?>
             <tr>
               <td><input name="id[]" type="checkbox" value="<?php echo $function['id']; ?>"/></td>
-              <td><?php echo $function['owner']; ?></td>
               <td><?php echo $function['name']; ?></td>
               <td class="right"><?php foreach ( $function['action'] as $action ) { ?>
                	<a class="btn btn-primary" href="<?php echo $action['href']; ?>"><?php echo $action['text']; ?> <i class="<?php echo $action['icon']; ?>"></i></a>
@@ -45,7 +43,7 @@
             <?php }?>
             <?php if ( !$functions ) { ?>
             <tr class="center">
-              <td colspan="4"><?php echo $text_no_results; ?></td>
+              <td colspan="3"><?php echo $text_no_results; ?></td>
             </tr>
             <?php } ?>
           </tbody>
