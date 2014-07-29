@@ -474,7 +474,8 @@ var ConfigBlock = {
 	df_FRIEND_ACCOUNT : 'block-auto-floatleft',
 	df_SEARCH_PAGE 	: 'search-page',
 	df_NOTIFICATION_PAGE : 'notification-page',
-	df_STOCK_PAGE 	: 'stock-page'
+	df_STOCK_PAGE 	: 'stock-page',
+	df_ABOUT_PAGE 	: 'about-page'
 };
 
 function HorizontalBlock(el) {
@@ -512,7 +513,10 @@ HorizontalBlock.prototype.initializeBlock = function() {
 	}
 	else if (this.root.hasClass(ConfigBlock.df_STOCK_PAGE)) {
 		this.LayoutStockPage();
-	}		
+	}
+	else if (this.root.hasClass(ConfigBlock.df_ABOUT_PAGE)) {
+		this.LayoutAboutPage();
+	}
 };
 
 HorizontalBlock.prototype.LayoutPostHasBlock = function() {
@@ -745,6 +749,10 @@ HorizontalBlock.prototype.LayoutStockPage = function() {
 		this.root.width(totalWidth);		
 	}
 	this.blocks.css('opacity', '1');
+	this.rootContent.niceScroll();
+};
+
+HorizontalBlock.prototype.LayoutAboutPage = function() {
 	this.rootContent.niceScroll();
 };
 
