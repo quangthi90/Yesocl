@@ -58,9 +58,6 @@ class ControllerFinanceFunction extends Controller {
 			$this->redirect( $this->url->link('finance/function', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 
-		// TEST
-		$this->test();
-
 		$this->getForm();
 	}
 
