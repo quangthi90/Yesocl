@@ -33,7 +33,11 @@ Class Formual {
 	public function formatToCache() {
 		return array(
 			'id' => $this->id,
-			'code' => $this->code
+			'name' => $this->name,
+			//'owner' => $this->owner,
+			'function' => $this->function,
+			'deleted' => $this->deleted,
+			'created' => $this->created,
 		);
 	}
 

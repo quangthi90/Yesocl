@@ -58,6 +58,9 @@ class ControllerFinanceFunction extends Controller {
 			$this->redirect( $this->url->link('finance/function', 'token=' . $this->session->data['token'], 'sSL') );
 		}
 
+		// TEST
+		$this->test();
+
 		$this->getForm();
 	}
 
@@ -349,6 +352,112 @@ class ControllerFinanceFunction extends Controller {
 		}else {
 			return true;
 		}
+	}
+
+	private function test() {
+		if ( isset($this->request->get['function_id']) ){
+			$oFunction = $this->model_finance_function->getFunction( $this->request->get['function_id'] );
+			$aFunction = $oFunction->formatToCache();
+
+			// GET FUNCTION
+			$strFunction = $aFunction['function'];
+
+			// REFORMAT FUNCTION
+			// 1. REMOVE BACKSPACE
+			$strFunction = str_replace(' ', '', $strFunction);
+			// 2. ADD BACKSPACE
+			$aSearch = array( "+", "-", "*", "/", "(", ")" );
+			foreach ($aSearch as $tmp) {
+				$strFunction = str_replace($tmp, " " . $tmp . " ", $strFunction);
+			}
+			// 3. REMOVE BACKSPACE
+			$strFunction = str_replace("  ", " ", $strFunction);
+
+			echo '<pre>';var_dump($strFunction);
+
+			// SPIT TO ARRAY
+			$arrFunction = explode(' ', $strFunction);
+
+			// SORT ARRAY
+			$arrSortFunction = array();
+			$aStack = array();
+			$iLayer = 0;
+			$currentOperator = array();
+			$isDown = false;
+			foreach ($arrFunction as $value) {
+				// DEFINE STACK IF NOT EXIST
+				if (empty($aStack[$iLayer])) {
+					$aStack[$iLayer] = array();
+				}
+
+				switch ($value) {
+					case '+':
+					case '-':
+						if ($currentOperator[$iLayer] == '/' || $currentOperator[$iLayer] == '*') {
+							$aStack[$iLayer][] = $currentOperator[$iLayer];
+						}elseif ($currentOperator[$iLayer] == '+' || $currentOperator[$iLayer] == '-') {
+							$aStack[$iLayer][] = $currentOperator[$iLayer];
+						}
+						$currentOperator[$iLayer] = $value;
+						break;
+					case '*':
+					case '/':
+						if ($currentOperator[$iLayer] == '/' || $currentOperator[$iLayer] == '*') {
+							$aStack[$iLayer][] = $currentOperator[$iLayer];
+						}elseif ($currentOperator[$iLayer] == '+' || $currentOperator[$iLayer] == '-') {
+							$iLayer++;
+							$isDown = true;
+						}
+						$currentOperator[$iLayer] = $value;
+						break;
+					case '(':
+						$iLayer++;
+						break;
+					case ')':
+						if ($currentOperator[$iLayer] != '') {
+							$aStack[$iLayer][] = $currentOperator[$iLayer];
+						}
+						$aStack[$iLayer - 1] = array_merge($aStack[$iLayer - 1], $aStack[$iLayer]);
+						// DOWN STACK
+						unset($aStack[$iLayer]);
+						$iLayer--;
+						break;
+					default:
+						$aStack[$iLayer][] = $value;
+						// ISDOWN PROGESS
+						if ($isDown) {
+							if ($currentOperator[$iLayer] != '') {
+								$aStack[$iLayer][] = $currentOperator[$iLayer];
+							}
+							$aStack[$iLayer - 1] = array_merge($aStack[$iLayer - 1], $aStack[$iLayer]);
+							// RESET CURRENT STACK
+							// $aStack[$iLayer] = array();
+							// $currentOperator[$iLayer] = '';
+							unset($aStack[$iLayer]);
+							// DOWN STACK
+							$iLayer--;
+						}
+						break;
+				}
+			}
+
+			// COLLECT DATA
+			for ($i = count($aStack) - 1; $i >= 0; $i--) {
+				if ($currentOperator[$i] != '') {
+					$aStack[$i][] = $currentOperator[$i];
+				}
+				if (!empty($aStack[$i]) && $i != 0) {
+					$aStack[$i-1] = array_merge($aStack[$i-1], $aStack[$i]);
+				}
+			}
+
+			// REVERSE ARRAY
+			$arrSortFunction = array_reverse($aStack[0]);
+
+			echo '<pre>';var_dump($arrSortFunction);
+		}
+
+		exit();
 	}
 }
 ?>
