@@ -373,7 +373,7 @@ class ControllerFinanceFunction extends Controller {
 			// 3. REMOVE BACKSPACE
 			$strFunction = str_replace("  ", " ", $strFunction);
 
-			echo '<pre>';var_dump($strFunction);
+			// echo '<pre>';var_dump($strFunction);
 
 			// SPIT TO ARRAY
 			$arrFunction = explode(' ', $strFunction);
@@ -452,9 +452,54 @@ class ControllerFinanceFunction extends Controller {
 			}
 
 			// REVERSE ARRAY
-			$arrSortFunction = array_reverse($aStack[0]);
+			$arrSortFunction = $aStack[0];
 
-			echo '<pre>';var_dump($arrSortFunction);
+			// GENERATE TREE
+			$arrTreeFunction = array();
+			$treeStack = array();
+			$iLever = 0;
+			while ($token = array_pop($arrSortFunction)) {
+				switch ($token) {
+					case '+':
+					case '-':
+					case '*':
+					case '/':
+						if (!isset($treeStack[$iLever][0])) {
+						}elseif (!isset($treeStack[$iLever][2]) || !isset($treeStack[$iLever][1])) {
+							$iLever++;
+							$treeStack[$iLever] = array();
+						}
+						$treeStack[$iLever][0] = $token;
+						break;
+					default:
+						if (!isset($treeStack[$iLever][2])) {
+							$treeStack[$iLever][2] = $token;
+						}elseif (!isset($treeStack[$iLever][1])) {
+							$treeStack[$iLever][1] = $token;
+							if ($iLever > 0) {
+								for ($i=$iLever; $i > 0; $i--) {
+									if (!isset($treeStack[$i - 1][2])) {
+										$treeStack[$i - 1][2] = $treeStack[$i];
+										// CLEAR NOTE
+										unset($treeStack[$i]);
+										$iLever--;
+										break;
+									}elseif (!isset($treeStack[$i - 1][1])) {
+										$treeStack[$i - 1][1] = $treeStack[$i];
+										// CLEAR NOTE
+										unset($treeStack[$i]);
+										$iLever--;
+									}
+								}
+							}
+						}
+						break;
+				}
+			}
+
+			// CACULATOR
+
+			echo '<pre>';var_dump($treeStack);
 		}
 
 		exit();
