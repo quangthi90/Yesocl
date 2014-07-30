@@ -19,7 +19,7 @@ class ModelFinanceFunction extends Model {
 
 		$oFunction = new Formual();
 		$oFunction->setName( $aData['name'] );
-		$oFunction->setFunction( $aData['function'] );
+		$oFunction->setFunction( $this->reformatFunction($aData['function']) );
 
 		$this->dm->persist( $oFunction );
 		$this->dm->flush();
@@ -47,7 +47,7 @@ class ModelFinanceFunction extends Model {
 			return false;
 		}
 		$oFunction->setName( $aData['name'] );
-		$oFunction->setFunction( $aData['function'] );
+		$oFunction->setFunction( $this->reformatFunction($aData['function']) );
 
 		$this->dm->persist( $oFunction );
 		$this->dm->flush();
@@ -94,6 +94,22 @@ class ModelFinanceFunction extends Model {
 
 	public function isValidateFunction( $function ) {
 		return true;
+	}
+
+	public function reformatFunction( $function ) {
+		// 1. REMOVE BACKSPACE
+		$function = str_replace(' ', '', $function);
+
+		// 2. ADD BACKSPACE
+		$aSearch = array( "+", "-", "*", "/", "(", ")" );
+		foreach ($aSearch as $tmp) {
+			$function = str_replace($tmp, " " . $tmp . " ", $function);
+		}
+
+		// 3. REMOVE BACKSPACE
+		$function = str_replace("  ", " ", $function);
+
+		return $function;
 	}
 }
 ?>
