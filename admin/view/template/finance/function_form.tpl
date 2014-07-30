@@ -209,15 +209,14 @@
       }
 
       function validatePress() {
-        return false;
+        return true;
       }
 
       function showError( error ) {
         // REMOVE CURRENT ERROR
-        that.$el.parent().find('div.alert.alert-error').hide('fast', function() {});
-        console.log(that.errorTemp.format( error ));
-        that.$el.before( that.errorTemp.format( error ) );
-        that.$el.parent().find('div.alert.alert-error').remove();
+        // that.$el.parent().find('div.alert.alert-error').hide('fast', function() {});
+        // that.$el.before( that.errorTemp.format( error ) );
+        // that.$el.parent().find('div.alert.alert-error').remove();
 
         return true;
       }
