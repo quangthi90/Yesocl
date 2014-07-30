@@ -131,25 +131,25 @@
             <?php } ?>
               <div class="caculator input-xxlarge">
                 <ul>
-                  <li class="first"><a class="btn">7</a></li>
-                  <li><a class="btn">8</a></li>
-                  <li><a class="btn">9</a></li>
-                  <li><a class="btn">+</a></li>
-                  <li><a class="btn">-</a></li>
-                  <li><a class="btn">(</a></li>
-                  <li class="first"><a class="btn">4</a></li>
-                  <li><a class="btn">5</a></li>
-                  <li><a class="btn">6</a></li>
-                  <li><a class="btn">*</a></li>
-                  <li><a class="btn">/</a></li>
-                  <li><a class="btn">)</a></li>
-                  <li class="first"><a class="btn">1</a></li>
-                  <li><a class="btn">2</a></li>
-                  <li><a class="btn">3</a></li>
-                  <li class="double"><a class="btn">0</a></li>
-                  <li><a class="btn"><i class="icon-arrow-left"></i></a></li>
+                  <li class="first"><a class="btn btn-number">7</a></li>
+                  <li><a class="btn btn-number">8</a></li>
+                  <li><a class="btn btn-number">9</a></li>
+                  <li><a class="btn btn-operator">+</a></li>
+                  <li><a class="btn btn-operator">-</a></li>
+                  <li><a class="btn btn-express">(</a></li>
+                  <li class="first"><a class="btn btn-number">4</a></li>
+                  <li><a class="btn btn-number">5</a></li>
+                  <li><a class="btn btn-number">6</a></li>
+                  <li><a class="btn btn-operator">*</a></li>
+                  <li><a class="btn btn-operator">/</a></li>
+                  <li><a class="btn btn-express">)</a></li>
+                  <li class="first"><a class="btn btn-number">1</a></li>
+                  <li><a class="btn btn-number">2</a></li>
+                  <li><a class="btn btn-number">3</a></li>
+                  <li class="double"><a class="btn btn-number">0</a></li>
+                  <li><a class="btn btn-backspace"><i class="icon-arrow-left"></i></a></li>
                   <li class="first quadruple"><input type="text" value=""/></li>
-                  <li><a class="btn"><i class="icon-plus"></i></a></li>
+                  <li><a class="btn btn-enter"><i class="icon-plus"></i></a></li>
                 </ul>
               </div>
             </td>
@@ -162,19 +162,113 @@
 <?php echo $footer; ?>
 <script type="text/javascript"><!--//
   $(function () {
+    // First, checks if it isn't implemented yet.
+    if (!String.prototype.format) {
+      String.prototype.format = function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) {
+          return typeof args[number] != 'undefined'
+            ? args[number]
+            : match
+          ;
+        });
+      };
+    }
+
     var Caculator = function( $el, json ) {
       var that = this;
       this.$el = $el;
       this.$strOutput = null;
       this.$htmlOutput = null;
       this.data = json;
-      this.temp = '';
+      this.temp = '<li>{0}</li>';
+      this.errorTemp = '<div class="alert alert-error"><strong>Error!</strong> {0}</div>';
 
       // PRIVATE FUNCTIONS
       function transferToInput() {
+        if ( that.$strOutput != null ) {
+          that.$strOutput.value = that.getFunction();
+        }
+
+        if ( that.$htmlOutput != null ) {
+          var html = '';
+          $.each(that.data, function(index, token) {
+            html += that.temp.format( token.label );
+          });
+
+          that.$htmlOutput.html(html);
+        }
+      }
+
+      function validatefunction() {
+        // VALIDATE
+        // CSS WHEN VALIDATE
+        // CSS WHEN NOT VALIDATE
+
+        return true;
+      }
+
+      function validatePress() {
+        return false;
+      }
+
+      function showError( error ) {
+        // REMOVE CURRENT ERROR
+        that.$el.parent().find('div.alert.alert-error').hide('fast', function() {});
+        console.log(that.errorTemp.format( error ));
+        that.$el.before( that.errorTemp.format( error ) );
+        that.$el.parent().find('div.alert.alert-error').remove();
+
+        return true;
+      }
+
+      function _init() {
+        that.$el.find('a.btn.btn-number, a.btn.btn-operator, a.btn.btn-express').click(function () {
+          if ( !$(this).hasClass('disabled') ) {
+            $(this).addClass('disabled');
+
+            if (validatePress()) {
+              that.data.push({"label":$(this).html(),"value":$(this).html()});
+              transferToInput();
+            }else {
+              showError('Error');
+            }
+
+            $(this).removeClass('disabled');
+            validatefunction();
+          }
+        });
+
+        that.$el.find('a.btn.btn-backspace').click(function () {
+          if ( !$(this).hasClass('disabled') ) {
+            $(this).addClass('disabled');
+
+            that.data.pop();
+            transferToInput();
+
+            $(this).removeClass('disabled');
+            validatefunction();
+          }
+        });
+
+        that.$el.find('a.btn.btn-enter').click(function () {
+          if ( !$(this).hasClass('disabled') ) {
+            $(this).addClass('disabled');
+
+            if (validatePress()) {
+              transferToInput();
+            }else {
+              showError('Error');
+            }
+
+            $(this).removeClass('disabled');
+            validatefunction();
+          }
+        });
       }
 
       // EVENTS
+      _init();
     }
 
     // PUBLIC FUNCTION
@@ -202,8 +296,11 @@
     }
 
     Caculator.prototype.setHtmlOutput = function( $output, temp  ) {
-      this.$jsonOutput = $output;
-      this.temp  = typeof String !== 'undefined' ? temp : '<li>{0}</li>';
+      this.$htmlOutput = $output;
+
+      if ( temp !== undefined ) {
+        this.temp = temp;
+      }
     }
 
     var caculator = new Caculator( $('div.caculator'), <?php echo json_encode($function_detail); ?>);
