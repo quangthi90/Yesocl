@@ -111,5 +111,37 @@ class ModelFinanceFunction extends Model {
 
 		return $function;
 	}
+
+	public function getFunctionDetail( $function ) {
+		// SPIT TO ARRAY
+		$arrFunction = explode(' ', $function);
+
+		$results = array();
+		foreach ($arrFunction as $token) {
+			$tmp = explode('@', $token);
+
+			if ($tmp[0] == '') {
+				$oFinance = $this->dm->getRepository('Document\Finance\Finance')->find( $tmp[1] );
+				if ($oFinance) {
+					$results[] = array(
+						'label' => $oFinance->getName(),
+						'value' => $tmp[1],
+						);
+				}else {
+					$results[] = array(
+						'label' => 'Error',
+						'value' => $tmp[1],
+						);
+				}
+			}else {
+				$results[] = array(
+					'label' => $tmp[0],
+					'value' => $tmp[0],
+					);
+			}
+		}
+
+		return $results;
+	}
 }
 ?>

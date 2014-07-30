@@ -275,10 +275,13 @@ class ControllerFinanceFunction extends Controller {
 		// Entry function
 		if ( isset($this->request->post['function']) ){
 			$this->data['function'] = $this->request->post['function'];
+			$this->data['function_detail'] = $this->model_finance_function->getFunctionDetail($this->request->post['function']);
 		}elseif ( isset($oFunction) ){
 			$this->data['function'] = $oFunction->getFunction();
+			$this->data['function_detail'] = $this->model_finance_function->getFunctionDetail($oFunction->getFunction());
 		}else {
 			$this->data['function'] = '';
+			$this->data['function_detail'] = array();
 		}
 
 		$this->data['token'] = $this->session->data['token'];

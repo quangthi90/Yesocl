@@ -41,12 +41,11 @@
               -o-transition: border linear .2s,box-shadow linear .2s;
               transition: border linear .2s,box-shadow linear .2s;
               display: inline-block;
-              height: 20px;
-              padding: 4px 6px;
+              height: auto;
+              padding: 2px 6px;
               margin: 0;
               margin-bottom: 10px;
               font-size: 14px;
-              line-height: 20px;
               color: #555;
               vertical-align: middle;
               -webkit-border-radius: 4px;
@@ -58,9 +57,9 @@
             ul.multti-select-box li {
               float: left;
               border-radius: 4px;
-              margin-left: 2px;
+              margin-left: 4px;
               position: relative;
-              padding: 3px 5px 2px 5px;
+              padding: 1px 5px 1px 5px;
               border: 1px solid #aaa;
               background-color: #e4e4e4;
               background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(20%, #f4f4f4), color-stop(50%, #f0f0f0), color-stop(52%, #e8e8e8), color-stop(100%, #eeeeee));
@@ -71,7 +70,8 @@
               background-clip: padding-box;
               box-shadow: 0 0 2px white inset, 0 1px 0 rgba(0, 0, 0, 0.05);
               color: #333;
-              line-height: 13px;
+              line-height: 20px;
+              font-size: 12px;
               cursor: default;
               list-style: none;
             }
@@ -119,10 +119,10 @@
             <td><span class="required">*</span> <?php echo $entry_function; ?></td>
             <td>
               <input type="hidden" name="function" value="<?php echo $function; ?>">
-              <ul class="multti-select-box input-xxlarge">
-                <li>+</li>
-                <li>a</li>
-                <li>b</li>
+              <ul class="multti-select-box input-xxlarge function-presentation">
+                <?php foreach ($function_detail as $token) { ?>
+                <li><?php echo $token['label']; ?></li>
+                <?php } ?>
               </ul>
               <?php if ($error_function) { ?>
                 <div class="alert alert-error">
@@ -161,4 +161,53 @@
 </div>
 <?php echo $footer; ?>
 <script type="text/javascript"><!--//
+  $(function () {
+    var Caculator = function( $el, json ) {
+      var that = this;
+      this.$el = $el;
+      this.$strOutput = null;
+      this.$htmlOutput = null;
+      this.data = json;
+      this.temp = '';
+
+      // PRIVATE FUNCTIONS
+      function transferToInput() {
+      }
+
+      // EVENTS
+    }
+
+    // PUBLIC FUNCTION
+    Caculator.prototype.getFunction = function( type ) {
+      type = typeof String !== 'undefined' ? type : 'string';
+
+      if ( type == 'string' ) {
+        var tmpStr = '';
+        $.each( this.data, function( index, token ) {
+          if (tmpStr == '') {
+            tmpStr += token.value;
+          }else {
+            tmpStr += ' ' + token.value;
+          }
+        });
+
+        return tmpStr;
+      }else {
+        return this.data;
+      }
+    }
+
+    Caculator.prototype.setStringOutput = function( $output ) {
+      this.$strOutput = $output;
+    }
+
+    Caculator.prototype.setHtmlOutput = function( $output, temp  ) {
+      this.$jsonOutput = $output;
+      this.temp  = typeof String !== 'undefined' ? temp : '<li>{0}</li>';
+    }
+
+    var caculator = new Caculator( $('div.caculator'), <?php echo json_encode($function_detail); ?>);
+    caculator.setStringOutput( $('[name=\'function\']') );
+    caculator.setHtmlOutput( $('ul.function-presentation') );
+  });
 //--></script>
