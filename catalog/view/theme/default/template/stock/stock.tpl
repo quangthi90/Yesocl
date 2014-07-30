@@ -23,8 +23,8 @@
         {{ block('stock_common_block_news') }}
         {% set ideas_href = path('StockIdeaPage', {stock_code: stock.code}) %}
         {{ block('stock_common_block_ideas') }}
-        {#{ block('stock_common_block_basic_key') }}
-        {{ block('stock_common_block_company_profile') }}
+        {{ block('stock_common_block_basic_key') }}
+        {#{ block('stock_common_block_company_profile') }}
         {{ block('stock_common_block_financial') }#}
         {% if stock.meta.funds|length > 0 %}
         {{ block('stock_common_block_ownership_friend') }}
