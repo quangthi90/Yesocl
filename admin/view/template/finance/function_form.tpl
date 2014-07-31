@@ -42,7 +42,7 @@
               transition: border linear .2s,box-shadow linear .2s;
               display: inline-block;
               height: auto;
-              padding: 2px 6px;
+              padding: 2px 6px 0px 6px;
               margin: 0;
               margin-bottom: 10px;
               font-size: 14px;
@@ -69,6 +69,7 @@
               float: left;
               border-radius: 4px;
               margin-left: 4px;
+              margin-bottom: 2px;
               position: relative;
               padding: 1px 5px 1px 5px;
               border: 1px solid #aaa;
@@ -136,7 +137,7 @@
                 <?php } ?>
               </ul>
               <?php if ($error_function) { ?>
-                <div class="alert alert-error">
+                <div class="alert alert-error" style="float: left; width: 100%;">
           <strong>Error!</strong> <?php echo $error_function; ?>
         </div>
             <?php } ?>

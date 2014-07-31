@@ -92,7 +92,38 @@ class ModelFinanceFunction extends Model {
 		return $this->dm->getRepository('Document\Finance\Formual')->find( $id );
 	}
 
+	private function isOperator( $token ) {
+		$aOperators = array( '+', '-', '*', '/' );
+
+		return in_array($token, $aOperators);
+	}
+
 	public function isValidateFunction( $function ) {
+		$function = trim( $this->reformatFunction( $function ) );
+
+		// SPIT TO ARRAY
+		$arrFunction = explode(' ', $function);
+
+		// VALIDATE PARENTHESES
+		$iCount = 0;
+		foreach ($arrFunction as $key => $token) {
+			if ( $token == '(' ) {
+				$iCount++;
+			}elseif ( $token == ')' ) {
+				$iCount--;
+			}
+		}
+		if ( $iCount ) {
+			return false;
+		}
+
+		// VALIDATE LAST TOKEN
+		if ( count( $arrFunction ) ) {
+			if ( $this->isOperator( $arrFunction[count( $arrFunction ) - 1] ) ) {
+				return false;
+			}
+		}
+
 		return true;
 	}
 
@@ -109,7 +140,7 @@ class ModelFinanceFunction extends Model {
 		// 3. REMOVE BACKSPACE
 		$function = str_replace("  ", " ", $function);
 
-		return $function;
+		return trim( $function );
 	}
 
 	public function getFunctionDetail( $function ) {
@@ -120,7 +151,7 @@ class ModelFinanceFunction extends Model {
 		foreach ($arrFunction as $token) {
 			$tmp = explode('@', $token);
 
-			if ($tmp[0] == '') {
+			if ( $tmp[0] == '' && isset( $tmp[1] ) ) {
 				$oFinance = $this->dm->getRepository('Document\Finance\Finance')->find( $tmp[1] );
 				if ($oFinance) {
 					$results[] = array(
