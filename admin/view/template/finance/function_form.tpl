@@ -53,6 +53,17 @@
               border-radius: 4px;
               list-style: none;
               cursor: text;
+              min-height: 24px;
+            }
+            ul.multti-select-box.success {
+              border-color: rgba(82,168,236,0.8);
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(82,168,236,0.8);
+              outline: 0 none;
+            }
+            ul.multti-select-box.error {
+              border-color: rgba(250, 14, 14, 0.6);
+              box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(250, 14, 14, 0.6);
+              outline: 0 none;
             }
             ul.multti-select-box li {
               float: left;
@@ -120,8 +131,8 @@
             <td>
               <input type="hidden" name="function" value="<?php echo $function; ?>">
               <ul class="multti-select-box input-xxlarge function-presentation">
-                <?php foreach ($function_detail as $token) { ?>
-                <li><?php echo $token['label']; ?></li>
+                <?php foreach ($function_detail as $value) { ?>
+                <li><?php echo $value['label']; ?></li>
                 <?php } ?>
               </ul>
               <?php if ($error_function) { ?>
@@ -148,7 +159,7 @@
                   <li><a class="btn btn-number">3</a></li>
                   <li class="double"><a class="btn btn-number">0</a></li>
                   <li><a class="btn btn-backspace"><i class="icon-arrow-left"></i></a></li>
-                  <li class="first quadruple"><input type="text" value=""/></li>
+                  <li class="first quadruple"><input name="finance" type="text" value=""/><input name="finance_id" type="hidden" value=""/></li>
                   <li><a class="btn btn-enter"><i class="icon-plus"></i></a></li>
                 </ul>
               </div>
@@ -160,6 +171,34 @@
   </div>
 </div>
 <?php echo $footer; ?>
+<script type="text/javascript"><!--//
+$('input[name=\'finance\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=finance/finance/search&filter_name=' +  encodeURIComponent(request.term) + '&token=<?php echo $token; ?>',
+      dataType: 'json',
+      success: function(json) {
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  },
+  select: function(event, ui) {
+    $('input[name=\'finance\']').val(ui.item.label);
+    $('input[name=\'finance_id\']').val(ui.item.value);
+
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>
 <script type="text/javascript"><!--//
   $(function () {
     // First, checks if it isn't implemented yet.
@@ -187,7 +226,7 @@
       // PRIVATE FUNCTIONS
       function transferToInput() {
         if ( that.$strOutput != null ) {
-          that.$strOutput.value = that.getFunction();
+          that.$strOutput.val(that.getFunction());
         }
 
         if ( that.$htmlOutput != null ) {
@@ -200,15 +239,110 @@
         }
       }
 
-      function validatefunction() {
+      function validateFunction() {
+        var error = false;
         // VALIDATE
-        // CSS WHEN VALIDATE
-        // CSS WHEN NOT VALIDATE
+        if ( that.data.length ) {
+          var token = that.data[that.data.length - 1];
+          if ( isOperator(token.label) ) {
+            error = true;
+          }
+        }
+
+        if ( canParentheses() ) {
+          error = true;
+        }
+
+        that.$htmlOutput.removeClass('error');
+        if (error) {
+          that.$htmlOutput.addClass('error');
+        }
+
+        return !error;
+      }
+
+      function validateFinance() {
+        if (that.$el.find('[name=\'finance\']').val() == '') {
+          return false;
+        }
+
+        if (that.$el.find('[name=\'finance_id\']').val() == '') {
+          return false;
+        }
 
         return true;
       }
 
-      function validatePress() {
+      function isOperator( btn ) {
+        if ( btn == '+') {
+          return true;
+        }
+
+        if ( btn == '-') {
+          return true;
+        }
+
+        if ( btn == '*') {
+          return true;
+        }
+
+        if ( btn == '/') {
+          return true;
+        }
+
+        return false;
+      }
+
+      function canParentheses() {
+        var bCan = 0;
+        $.each(that.data, function(index, token) {
+          if ( token.label == '(' ) {
+            bCan++;
+          }else if ( token.label == ')' ) {
+            bCan--;
+          }
+        });
+
+        return bCan;
+      }
+
+      function validatePress( btn ) {
+        if ( that.data.length ) {
+          var token = that.data[that.data.length - 1];
+          switch( token.label ) {
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '(':
+                if ( isOperator( btn ) || btn == ')' ) {
+                  return false;
+                }
+                break;
+            case ')':
+                if ( isOperator( btn ) || (btn == ')' && canParentheses()) ) {
+                  return true;
+                }
+                break;
+            default:
+              if ( isOperator( btn ) ) {
+                return true;
+              }
+
+              if ( btn != ')' ) {
+                if ( isNaN(token.label) ) {
+                    return false;
+                }else {
+                  if ( isNaN(btn) ) {
+                    return false;
+                  }
+                }
+              }else if ( !canParentheses() ) {
+                return false;
+              }
+          }
+        }
+
         return true;
       }
 
@@ -217,6 +351,7 @@
         // that.$el.parent().find('div.alert.alert-error').hide('fast', function() {});
         // that.$el.before( that.errorTemp.format( error ) );
         // that.$el.parent().find('div.alert.alert-error').remove();
+        console.log(error);
 
         return true;
       }
@@ -226,7 +361,7 @@
           if ( !$(this).hasClass('disabled') ) {
             $(this).addClass('disabled');
 
-            if (validatePress()) {
+            if (validatePress( $(this).html() )) {
               that.data.push({"label":$(this).html(),"value":$(this).html()});
               transferToInput();
             }else {
@@ -234,7 +369,7 @@
             }
 
             $(this).removeClass('disabled');
-            validatefunction();
+            validateFunction();
           }
         });
 
@@ -246,7 +381,7 @@
             transferToInput();
 
             $(this).removeClass('disabled');
-            validatefunction();
+            validateFunction();
           }
         });
 
@@ -254,14 +389,18 @@
           if ( !$(this).hasClass('disabled') ) {
             $(this).addClass('disabled');
 
-            if (validatePress()) {
+            if ( validateFinance() && validatePress( 'function' ) ) {
+              that.data.push({"label":that.$el.find('[name=\'finance\']').val(),"value": '@' + that.$el.find('[name=\'finance_id\']').val()});
               transferToInput();
             }else {
               showError('Error');
             }
 
+            that.$el.find('[name=\'finance\']').val('');
+            that.$el.find('[name=\'finance_id\']').val('');
+
             $(this).removeClass('disabled');
-            validatefunction();
+            validateFunction();
           }
         });
       }
@@ -272,7 +411,7 @@
 
     // PUBLIC FUNCTION
     Caculator.prototype.getFunction = function( type ) {
-      type = typeof String !== 'undefined' ? type : 'string';
+      type = typeof(type) !== 'undefined' ? type : 'string';
 
       if ( type == 'string' ) {
         var tmpStr = '';

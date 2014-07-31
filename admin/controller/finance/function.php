@@ -253,6 +253,8 @@ class ControllerFinanceFunction extends Controller {
 		// Link
 		$this->data['cancel'] = $this->url->link( 'finance/function', 'token=' . $this->session->data['token'], 'sSL' );
 
+		$this->data['token'] = $this->session->data['token'];
+
 		// function
 		if ( isset($this->request->get['function_id']) ){
 			$oFunction = $this->model_finance_function->getFunction( $idFunction );
@@ -283,8 +285,6 @@ class ControllerFinanceFunction extends Controller {
 			$this->data['function'] = '';
 			$this->data['function_detail'] = array();
 		}
-
-		$this->data['token'] = $this->session->data['token'];
 
 		$this->template = 'finance/function_form.tpl';
 		$this->children = array(
