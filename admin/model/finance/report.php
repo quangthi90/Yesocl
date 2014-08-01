@@ -116,6 +116,10 @@ class ModelFinanceReport extends Model {
 	}
 
 	public function getDetailDates( $strDates ) {
+		if ( trim($strDates) == '' ) {
+			return array();
+		}
+
 		$aDates = explode( ',', $strDates );
 
 		$result = array();

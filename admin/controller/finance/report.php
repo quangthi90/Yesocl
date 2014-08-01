@@ -251,8 +251,9 @@ class ControllerFinanceReport extends Controller {
 		$this->data['text_none'] = $this->language->get('text_none');
 		$this->data['text_year'] = $this->language->get('text_year');
 		$this->data['text_quarter'] = $this->language->get('text_quarter');
-		$this->data['text_error_dates'] = $this->error['error_dates'];
-		$this->data['text_error_functions'] = $this->error['error_functions'];
+		$this->data['text_error_dates'] = $this->language->get('error_dates');
+		$this->data['text_error_exist_date'] = $this->language->get('error_exist_date');
+		$this->data['text_error_functions'] = $this->language->get('error_functions');
 
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');

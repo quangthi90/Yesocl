@@ -35,6 +35,7 @@ $_['entry_function_name'] 			= 'Function Name:';
 $_['error_warning'] 				= 'Warning: Error!';
 $_['error_name']					= 'Warning: Error Name is required!';
 $_['error_dates']					= 'Warning: Error Dates is required!';
+$_['error_exist_date']				= 'Warning: Error Date is exist!';
 $_['error_functions']				= 'Warning: Error Functions is required!';
 $_['text_success'] 					= 'Success: You have modified Finance Report!';
 ?>

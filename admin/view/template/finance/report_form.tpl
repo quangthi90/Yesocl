@@ -42,8 +42,11 @@
                 <a class="btn btn-primary btn-add-date"><i class="icon-plus"></i></a>
                 <input name="dates" type="hidden" value="<?php echo $dates; ?>" />
               </div>
-              <div class="alert alert-error pull-left<?php if (!$error_dates) echo ' hidden'; ?>" style="width: 95%; margin-bottom: 0px;">
+              <div class="alert alert-error pull-left error-dates<?php if (!$error_dates) echo ' hidden'; ?>" style="width: 95%; margin-bottom: 5px;">
           <strong>Error!</strong> <?php echo $text_error_dates; ?>
+        </div>
+              <div class="alert alert-error pull-left hidden error-exist-date" style="width: 95%; margin-bottom: 5px;">
+          <strong>Error!</strong> <?php echo $text_error_exist_date; ?>
         </div>
               <div class="pull-left dates-html-output" style="width: 95%;">
                 <?php foreach ($aDates as $key => $value) { ?>
@@ -193,21 +196,37 @@ $('input[name=\'function\']').autocomplete({
       }
 
       function _addDate() {
-        if ( that.$el.find('[name=\'date_quarter\']').val() == '0' ) {
-          that.data.push( {
-            'label':that.labelAFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
-            'value':that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
-          } );
+        if ( _isExistDate( that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ) ) ) {
+          that.$el.find('div.alert-error.error-exist-date').removeClass('hidden');
         }else {
-          that.data.push( {
-            'label':that.labelBFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
-            'value':that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
-          } );
+          if ( that.$el.find('[name=\'date_quarter\']').val() == '0' ) {
+            that.data.push( {
+              'label':that.labelAFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+              'value':that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+            } );
+          }else {
+            that.data.push( {
+              'label':that.labelBFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+              'value':that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+            } );
+          }
         }
       }
 
+      function _isExistDate( value ) {
+        var bool = false;
+        $.each( that.data, function(index, val) {
+          if (value == val.value) {
+            bool = true;
+            return bool;
+          }
+        });
+
+        return bool;
+      }
+
       function _showError() {
-        that.$el.find('div.alert-error').removeClass('hidden');
+        that.$el.find('div.alert-error.error-dates').removeClass('hidden');
       }
 
       function _getStrDates() {
@@ -242,6 +261,7 @@ $('input[name=\'function\']').autocomplete({
       }
 
       function _removeDate( key ) {
+        that.$el.find('div.alert-error').addClass('hidden');
         that.data.splice(key, 1);
       }
 
