@@ -36,6 +36,7 @@ $_['text_fi_group']		              	= 'Group';
 $_['text_code']		              		= 'Code';
 $_['text_date']		              		= 'Date';
 $_['text_function']		              	= 'Function';
+$_['text_report']		              	= 'Report';
 
 // Branch
 $_['text_branches']                    	= 'Branches';

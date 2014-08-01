@@ -59,6 +59,7 @@ class ControllerCommonHeader extends Controller {
 		$this->data['text_date'] = $this->language->get('text_date');
 		$this->data['text_code'] = $this->language->get('text_code');
 		$this->data['text_function'] = $this->language->get('text_function');
+		$this->data['text_report'] = $this->language->get('text_report');
 
 		// Branch
 		$this->data['text_branches'] = $this->language->get('text_branches');
@@ -148,6 +149,7 @@ class ControllerCommonHeader extends Controller {
 			$this->data['finance_import'] = $this->url->link('finance/finance/import', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_function'] = $this->url->link('finance/function', 'token=' . $this->session->data['token'], 'SSL');
 			$this->data['finance_date'] = $this->url->link('finance/date', 'token=' . $this->session->data['token'], 'SSL');
+			$this->data['finance_report'] = $this->url->link('finance/report', 'token=' . $this->session->data['token'], 'SSL');
 
 			// Company
 			$this->data['company_group'] = $this->url->link('company/group', 'token=' . $this->session->data['token'], 'SSL');

@@ -237,7 +237,9 @@ class ControllerFinanceReport extends Controller {
 
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
-		$this->data['entry_function'] = $this->language->get('entry_function');
+		$this->data['entry_dates'] = $this->language->get('entry_dates');
+		$this->data['entry_functions'] = $this->language->get('entry_functions');
+		$this->data['entry_function_name'] = $this->language->get('entry_function_name');
 
 		// Link
 		$this->data['cancel'] = $this->url->link( 'finance/report', 'token=' . $this->session->data['token'], 'sSL' );
