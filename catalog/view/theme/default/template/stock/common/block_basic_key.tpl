@@ -5,7 +5,7 @@
     </div>
     <div class="block-content">
         <div class="vertical-content">
-        	<table class="table table-striped basic-key-table">
+        	<table class="table table-striped table-stock">
 			 <thead>
 			 	<tr>
 			 		<td>&nbsp;</td>
