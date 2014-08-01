@@ -7,7 +7,7 @@
         <h3 class="chart-title">
             {{ stock.code }} (<a href="{{ path('StockMarket', {market_code: stock.market.code}) }}">{{ stock.market.code }}</a>)
         </h3>      
-        <div class="tab-content" data-bind="with: stock">
+        <div class="chart-content-container" data-bind="with: stock">
             <div class="chart-content">
                 <div class="row-fluid chart-indexs">
                     <div class="span4 index-overview up">
