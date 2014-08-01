@@ -6,21 +6,25 @@ $_['heading_title'] 				= 'Finance Report';
 $_['text_edit'] 					= 'Edit';
 $_['text_enable'] 					= 'Enable';
 $_['text_disable'] 					= 'Disable';
+$_['text_enter_function_name'] 		= 'Enter Function Name';
+$_['text_search_function'] 			= 'Search Function';
 
 // button
 $_['button_insert'] 				= 'Insert';
 $_['button_delete'] 				= 'Delete';
 $_['button_save'] 					= 'Save';
 $_['button_cancel'] 				= 'Cancel';
+$_['button_add_function'] 			= 'Add Function';
 
 // column
 $_['column_name'] 					= 'Name';
 $_['column_action'] 				= 'Action';
+$_['column_function'] 				= 'Function';
 
 // entry
 $_['entry_name'] 					= 'Name:';
 $_['entry_dates']	 				= 'Dates:';
-$_['entry_functions'] 				= 'Functions:';
+$_['entry_functions'] 				= 'Finance Functions:';
 $_['entry_function_name'] 			= 'Function Name:';
 
 // error

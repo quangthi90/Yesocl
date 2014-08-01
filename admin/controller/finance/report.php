@@ -230,10 +230,19 @@ class ControllerFinanceReport extends Controller {
 		// $this->data['text_disabled'] = $this->language->get('text_disabled');
 		$this->data['text_true'] = $this->language->get('text_true');
 		$this->data['text_false'] = $this->language->get('text_false');
+		$this->data['text_enter_function_name'] = $this->language->get('text_enter_function_name');
+		$this->data['text_search_function'] = $this->language->get('text_search_function');
+		$this->data['text_no_results'] = $this->language->get('text_no_results');
 
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
 		$this->data['button_cancel'] = $this->language->get('button_cancel');
+		$this->data['button_add_function'] = $this->language->get('button_add_function');
+
+		// Column
+		$this->data['column_name'] = $this->language->get('column_name');
+		$this->data['column_function'] = $this->language->get('column_function');
+		$this->data['column_action'] = $this->language->get('column_action');
 
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
