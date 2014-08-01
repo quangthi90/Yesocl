@@ -69,13 +69,13 @@
                 <tbody class="functions-html-output">
                   <?php if ($functions) { ?>
                   <?php foreach ($functions as $key => $function) { ?>
-                  <tr>
+                  <tr class="functions-html-item">
                     <td><?php echo $function['name']; ?></td>
                     <td><?php echo $function['function']; ?></td>
-                    <td><a class="btn btn-danger functions-html-remove"><i class="icon-trash"></i></a>
+                    <td><a class="btn btn-danger functions-html-remove" data-key="<?php echo $function['id']; ?>"><i class="icon-trash"></i></a>
                       <input name="functions[0][name]" type="hidden" value="<?php echo $function['name']; ?>" />
-                      <input name="functions[0][function]" type="hidden" value="<?php echo $function['name']; ?>" />
-                      <input name="functions[0][id]" type="hidden" value="<?php echo $function['id']; ?>" />
+                      <input name="functions[0][function]" type="hidden" value="<?php echo $function['function']; ?>" />
+                      <input name="functions[0][id]" type="hidden" value="<?php echo $function['function_id']; ?>" />
                     </td>
                   </tr>
                   <?php } ?>
@@ -156,7 +156,7 @@ $('input[name=\'function\']').autocomplete({
       this.labelAFormat = '<?php echo $text_year; ?> {0}';
       this.labelBFormat = '<?php echo $text_quarter; ?> {1} <?php echo $text_year; ?> {0}';
       this.valueFormat  = '{0}-{1}';
-      this.htmlFormat  = '<span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">{1} <a style="color: red;" data-key="{0}"><i class="icon-remove"></i></a></span>';
+      this.htmlFormat  = '<span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">{1} <a class="dates-html-remove" style="color: red;" data-key="{0}"><i class="icon-remove"></i></a></span>';
 
       // PRIVATE FUNCTIONS
       function _init() {
@@ -175,7 +175,7 @@ $('input[name=\'function\']').autocomplete({
           }
         });
 
-        that.$htmlOutput.on('click', '.dates-html-remove', function(event) {
+        $('.dates-html-remove').live('click', function(event) {
           event.preventDefault();
           /* Act on the event */
           _removeDate( $(this).data('key') );
@@ -258,7 +258,7 @@ $('input[name=\'function\']').autocomplete({
       this.$htmlOutput = $el.find('.functions-html-output');
 
       this.data = json;
-      this.htmlFormat = '<tr><td>{0}</td><td>{1}</td><td><a class="btn btn-danger functions-html-remove"><i class="icon-trash"></i></a><input name="functions[{3}][name]" type="hidden" value="{0}" /><input name="functions[{3}][function]" type="hidden" value="{1}" /><input name="functions[{3}][id]" type="hidden" value="{2}" /></td></tr>';
+      this.htmlFormat = '<tr class="functions-html-item"><td>{0}</td><td>{1}</td><td><a class="btn btn-danger functions-html-remove" data-key="{2}"><i class="icon-trash"></i></a><input name="functions[{3}][name]" type="hidden" value="{0}" /><input name="functions[{3}][function]" type="hidden" value="{1}" /><input name="functions[{3}][id]" type="hidden" value="{2}" /></td></tr>';
       this.noResultFormat = '<tr class="functions-no-result"><td colspan="3"><?php echo $text_no_results; ?></td></tr>';
 
       // PRIVATE FUNCTIONS
@@ -267,9 +267,18 @@ $('input[name=\'function\']').autocomplete({
           /* Act on the event */
           if ( _validateFunction() ) {
             _addFunction();
+            _refreshHtmlOutput();
           }else {
             _showError();
           }
+        });
+
+        $('.functions-html-remove').live('click', function(event) {
+          event.preventDefault();
+          /* Act on the event */
+          $(this).parents('.functions-html-item').eq(0).remove();
+          _removeFunction( $(this).data('key') );
+          _refreshHtmlOutput();
         });
       }
 
@@ -299,6 +308,10 @@ $('input[name=\'function\']').autocomplete({
           'function':that.$el.find('[name=\'function\']').val(),
           'function_id':that.$el.find('[name=\'function_id\']').val(),
         });
+
+        that.$el.find('[name=\'function_name\']').val('');
+        that.$el.find('[name=\'function\']').val('');
+        that.$el.find('[name=\'function_id\']').val('');
       }
 
       function _showError() {
@@ -308,7 +321,20 @@ $('input[name=\'function\']').autocomplete({
       function _refreshHtmlOutput() {
         that.$el.find('.functions-no-result').remove();
         if ( !that.data.length && !that.$el.find('.functions-no-result').length ) {
-          that.$el.$htmlOutput.append( that.noResultFormat );
+          that.$htmlOutput.append( that.noResultFormat );
+        }
+      }
+
+      function _removeFunction( iKey ) {
+        var key = -1;
+        $.each(that.data, function(index, val) {
+          if ( val.function_id == iKey ) {
+            key = index;
+          }
+        });
+
+        if ( key != -1 ) {
+          that.data.splice(key, 1);
         }
       }
 

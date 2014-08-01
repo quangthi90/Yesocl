@@ -155,6 +155,21 @@ class ControllerFinanceReport extends Controller {
 		$iReportTotal = $lReports->count();
 
 		$this->data['reports'] = array();
+		foreach ($lReports as $key => $oReport) {
+			$action = array();
+
+			$action[] = array(
+				'text' => $this->language->get('text_edit'),
+				'href' => $this->url->link( 'finance/report/update', 'report_id=' . $oReport->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+				'icon' => 'icon-edit',
+			);
+
+			$this->data['reports'][] = array(
+				'id' => $oReport->getId(),
+				'name' => $oReport->getName(),
+				'action' => $action,
+				);
+		}
 
 		$pagination = new Pagination();
 		$pagination->total = $iReportTotal;
@@ -300,7 +315,7 @@ class ControllerFinanceReport extends Controller {
 		if ( isset($this->request->post['functions']) ){
 			$this->data['functions'] = $this->request->post['functions'];
 		}elseif ( isset($oReport) ){
-			$this->data['functions'] = $oReport->getFunctions();
+			$this->data['functions'] = $this->model_finance_report->getDetailFunction( $oReport->getFunctions() );
 		}else {
 			$this->data['functions'] = array();
 		}

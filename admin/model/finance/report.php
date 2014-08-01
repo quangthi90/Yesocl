@@ -22,10 +22,15 @@ class ModelFinanceReport extends Model {
 			return false;
 		}
 
+		$functions = array();
+		foreach ($aData['functions'] as $key => $value) {
+			$functions[$value['name']] = $value['id'];
+		}
+
 		$oReport = new Report();
 		$oReport->setName( $aData['name'] );
 		$oReport->setDates( $aData['dates'] );
-		$oReport->setFunctions( $aData['functions'] );
+		$oReport->setFunctions( $functions );
 
 		$this->dm->persist( $oReport );
 		$this->dm->flush();
@@ -53,6 +58,11 @@ class ModelFinanceReport extends Model {
 			return false;
 		}
 
+		$functions = array();
+		foreach ($aData['functions'] as $key => $value) {
+			$functions[$value['name']] = $value['id'];
+		}
+
 		$oReport = $this->dm->getRepository('Document\Finance\Report')->find( $id );
 		if ( !$oReport ){
 			return false;
@@ -60,7 +70,7 @@ class ModelFinanceReport extends Model {
 
 		$oReport->setName( $aData['name'] );
 		$oReport->setDates( $aData['dates'] );
-		$oReport->setFunctions( $aData['functions'] );
+		$oReport->setFunctions( $functions );
 
 		$this->dm->persist( $oReport );
 		$this->dm->flush();
@@ -106,7 +116,39 @@ class ModelFinanceReport extends Model {
 	}
 
 	public function getDetailDates( $strDates ) {
-		return array();
+		$aDates = explode( ',', $strDates );
+
+		$result = array();
+		foreach ($aDates as $key => $value) {
+			$arr1 = explode( '(', str_replace(')', '(', trim($value)) );
+			if ( !empty($arr1) ) {
+				$result[] = array(
+					'label' => trim($arr1[1]),
+					'value' => trim($arr1[0]),
+					);
+			}
+		}
+
+		return $result;
+	}
+
+	public function getDetailFunction( $aFunction ) {
+		$this->load->model('finance/function');
+
+		$result = array();
+		foreach ($aFunction as $key => $value) {
+			$oFunction = $this->model_finance_function->getFunction( $value );
+
+			if ($oFunction) {
+				$result[] = array(
+					'name' => $key,
+					'function' => $oFunction->getName(),
+					'function_id' => $oFunction->getId(),
+					);
+			}
+		}
+
+		return $result;
 	}
 }
 ?>
