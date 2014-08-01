@@ -184,9 +184,13 @@ class ModelFinanceFunction extends Model {
 			$data['start'] = 0;
 		}
 
+		if ( !isset($data['filter_name']) ) {
+			return array();
+		}
+
 		return $this->dm->getRepository('Document\Finance\Formual')->findBy(array(
 			'deleted' => false,
-			'name' => new MongoRegex("/^" . trim($data['filter_name']) . "*/i")
+			'name' => new MongoRegex("/" . trim($data['filter_name']) . "/i")
 		))->skip( $data['start'] )->limit( $data['limit'] );
 	}
 }

@@ -131,7 +131,8 @@ class ModelFinanceFinance extends Model {
 				$oFinance = $this->dm->getRepository('Document\Finance\Finance')->find( $id );
 
 				if ( $oFinance ) {
-					$this->dm->remove( $oFinance );
+					$oFinance->setDeleted( true );
+					// $this->dm->remove( $oFinance );
 				}
 			}
 		}
@@ -274,7 +275,7 @@ class ModelFinanceFinance extends Model {
 
 		return $this->dm->getRepository('Document\Finance\Finance')->findBy(array(
 			'deleted' => false,
-			'name' => new MongoRegex("/^" . trim($data['filter_name']) . "*/i")
+			'name' => new MongoRegex("/" . trim($data['filter_name']) . "/i")
 		))->skip( $data['start'] )->limit( $data['limit'] );
 	}
 }
