@@ -479,5 +479,32 @@ class ControllerFinanceFunction extends Controller {
 
 		exit();
 	}
+
+	public function search() {
+		$this->load->model('finance/function');
+
+		if ( isset( $this->request->get['filter_name'] ) ) {
+			$filter_name = $this->request->get['filter_name'];
+		}else {
+			$filter_name = null;
+		}
+
+		$data = array(
+			'filter_name' => $filter_name,
+			'limit'		  => 20,
+		);
+
+		$lFunctions = $this->model_finance_function->searchFunctionByKeyword( $data );
+
+		$json = array();
+		foreach ($lFunctions as $oFunction) {
+			$json[] = array(
+				'name' => html_entity_decode( $oFunction->getName() ),
+				'id' => $oFunction->getId(),
+			);
+		}
+
+		$this->response->setOutput( json_encode( $json ) );
+	}
 }
 ?>

@@ -233,6 +233,11 @@ class ControllerFinanceReport extends Controller {
 		$this->data['text_enter_function_name'] = $this->language->get('text_enter_function_name');
 		$this->data['text_search_function'] = $this->language->get('text_search_function');
 		$this->data['text_no_results'] = $this->language->get('text_no_results');
+		$this->data['text_none'] = $this->language->get('text_none');
+		$this->data['text_year'] = $this->language->get('text_year');
+		$this->data['text_quarter'] = $this->language->get('text_quarter');
+		$this->data['text_error_dates'] = $this->error['error_dates'];
+		$this->data['text_error_functions'] = $this->error['error_functions'];
 
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
@@ -247,6 +252,8 @@ class ControllerFinanceReport extends Controller {
 		// Entry
 		$this->data['entry_name'] = $this->language->get('entry_name');
 		$this->data['entry_dates'] = $this->language->get('entry_dates');
+		$this->data['entry_year'] = $this->language->get('entry_year');
+		$this->data['entry_quarter'] = $this->language->get('entry_quarter');
 		$this->data['entry_functions'] = $this->language->get('entry_functions');
 		$this->data['entry_function_name'] = $this->language->get('entry_function_name');
 
@@ -254,6 +261,9 @@ class ControllerFinanceReport extends Controller {
 		$this->data['cancel'] = $this->url->link( 'finance/report', 'token=' . $this->session->data['token'], 'sSL' );
 
 		$this->data['token'] = $this->session->data['token'];
+
+		// Year
+		$this->data['year'] = date('Y');
 
 		// report
 		if ( isset($this->request->get['report_id']) ){
@@ -277,10 +287,13 @@ class ControllerFinanceReport extends Controller {
 		// Entry dates
 		if ( isset($this->request->post['dates']) ){
 			$this->data['dates'] = $this->request->post['dates'];
+			$this->data['aDates'] = $this->model_finance_report->getDetailDates( $this->request->post['dates'] );
 		}elseif ( isset($oReport) ){
 			$this->data['dates'] = $oReport->getDates();
+			$this->data['aDates'] = $this->model_finance_report->getDetailDates( $this->data['dates'] );
 		}else {
 			$this->data['dates'] = '';
+			$this->data['aDates'] = array();
 		}
 
 		// Entry functions
@@ -289,7 +302,7 @@ class ControllerFinanceReport extends Controller {
 		}elseif ( isset($oReport) ){
 			$this->data['functions'] = $oReport->getFunctions();
 		}else {
-			$this->data['functions'] = '';
+			$this->data['functions'] = array();
 		}
 
 		$this->template = 'finance/report_form.tpl';

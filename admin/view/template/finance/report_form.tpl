@@ -28,44 +28,37 @@
         </div>
             <?php } ?></td>
           </tr>
-          <tr>
+          <tr class="dates-control">
             <td colspan="2">
               <h4 class="pull-left"><span class="required">*</span> <?php echo $entry_dates; ?></h4>
               <div class="pull-right form-inline">
-                Năm: <select><option>2010</option><option>2011</option><option>2012</option></select>
-                Quý: <select><option>1</option><option>2</option><option>3</option></select>
-                <button class="btn btn-primary"><i class="icon-plus"></i></button>
-                <input name="dates" type="hidden" value="" />
+                <?php echo $entry_year; ?> <select name="date_year">
+                <?php for ($i=0; $i < 100; $i++) { ?>
+                  <option value="<?php echo $year - $i; ?>"><?php echo $year - $i; ?></option>
+                <?php } ?>
+                </select>
+                <?php echo $entry_quarter; ?> <select name="date_quarter"><option value="0"><?php echo $text_none; ?></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                </select>
+                <a class="btn btn-primary btn-add-date"><i class="icon-plus"></i></a>
+                <input name="dates" type="hidden" value="<?php echo $dates; ?>" />
               </div>
-              <?php if ($error_dates ) { ?>
-              <div class="alert alert-error pull-left" style="width: 95%;">
-          <strong>Error!</strong> <?php echo $error_dates; ?>
+              <div class="alert alert-error pull-left<?php if (!$error_dates) echo ' hidden'; ?>" style="width: 95%; margin-bottom: 0px;">
+          <strong>Error!</strong> <?php echo $text_error_dates; ?>
         </div>
-              <?php } ?>
-              <div class="pull-left" style="width: 95%;">
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
-                <span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">Info Info Info Info <a style="color: red;"><i class="icon-remove"></i></a></span>
+              <div class="pull-left dates-html-output" style="width: 95%;">
+                <?php foreach ($aDates as $key => $value) { ?>
+                <span class="label label-info dates-html-item" style="margin-right: 5px; margin-bottom: 5px;"><?php echo $value['label']; ?> <a class="dates-html-remove" style="color: red;" data-key="<?php echo $key; ?>"><i class="icon-remove"></i></a></span>
+                <?php } ?>
               </div>
             </td>
           </tr>
           <tr>
             <td colspan="2">
               <h4><span class="required">*</span> <?php echo $entry_functions; ?></h4>
-              <?php if ($error_functions ) { ?>
-              <div class="alert alert-error">
-          <strong>Error!</strong> <?php echo $error_functions; ?>
+              <div class="alert alert-error<?php if ( !$error_functions ) echo ' hidden'; ?>">
+          <strong>Error!</strong> <?php echo $text_error_functions; ?>
         </div>
-              <?php } ?>
-              <table class="table table-striped">
+              <table class="table table-striped functions-control">
                 <thead>
                   <tr>
                     <th><?php echo $column_name; ?></th>
@@ -73,40 +66,30 @@
                     <th><?php echo $column_action; ?></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody class="functions-html-output">
+                  <?php if ($functions) { ?>
+                  <?php foreach ($functions as $key => $function) { ?>
                   <tr>
-                    <td>AAA</td>
-                    <td>BBB</td>
-                    <td><a class="btn btn-danger"><i class="icon-trash"></i></a>
-                      <input name="functions[0][name]" type="hidden" value="" />
-                      <input name="functions[0][function]" type="hidden" value="" />
+                    <td><?php echo $function['name']; ?></td>
+                    <td><?php echo $function['function']; ?></td>
+                    <td><a class="btn btn-danger functions-html-remove"><i class="icon-trash"></i></a>
+                      <input name="functions[0][name]" type="hidden" value="<?php echo $function['name']; ?>" />
+                      <input name="functions[0][function]" type="hidden" value="<?php echo $function['name']; ?>" />
+                      <input name="functions[0][id]" type="hidden" value="<?php echo $function['id']; ?>" />
                     </td>
                   </tr>
-                  <tr>
-                    <td>AAA</td>
-                    <td>BBB</td>
-                    <td><a class="btn btn-danger"><i class="icon-trash"></i></a>
-                      <input name="functions[1][name]" type="hidden" value="" />
-                      <input name="functions[1][function]" type="hidden" value="" />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>AAA</td>
-                    <td>BBB</td>
-                    <td><a class="btn btn-danger"><i class="icon-trash"></i></a>
-                      <input name="functions[2][name]" type="hidden" value="" />
-                      <input name="functions[2][function]" type="hidden" value="" />
-                    </td>
-                  </tr>
-                  <!-- <tr>
+                  <?php } ?>
+                  <?php }else { ?>
+                  <tr class="functions-no-result">
                     <td colspan="3"><?php echo $text_no_results; ?></td>
-                  </tr> -->
+                  </tr>
+                  <?php } ?>
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td><input type="text" value="" placeholder="<?php echo $text_enter_function_name; ?>" /></td>
-                    <td><input type="text" value="" placeholder="<?php echo $text_search_function; ?>" /></td>
-                    <td><button class="btn btn-primary"><i class="icon-plus"></i> <?php echo $button_add_function; ?></button></td>
+                    <td><input name="function_name" type="text" value="" placeholder="<?php echo $text_enter_function_name; ?>" /></td>
+                    <td><input name="function" type="text" value="" placeholder="<?php echo $text_search_function; ?>" /><input name="function_id" type="hidden" value="" /></td>
+                    <td><a class="btn btn-primary functions-add-function"><i class="icon-plus"></i> <?php echo $button_add_function; ?></a></td>
                   </tr>
                 </tfoot>
               </table>
@@ -119,7 +102,222 @@
 </div>
 <?php echo $footer; ?>
 <script type="text/javascript"><!--//
-  $(function () {
+$('input[name=\'function\']').autocomplete({
+  delay: 0,
+  source: function(request, response) {
+    $.ajax({
+      url: 'index.php?route=finance/function/search&filter_name=' +  encodeURIComponent(request.term) + '&token=<?php echo $token; ?>',
+      dataType: 'json',
+      success: function(json) {
+        response($.map(json, function(item) {
+          return {
+            label: item.name,
+            value: item.id
+          }
+        }));
+      }
+    });
+  },
+  select: function(event, ui) {
+    $('input[name=\'function\']').val(ui.item.label);
+    $('input[name=\'function_id\']').val(ui.item.value);
 
+    return false;
+  },
+  focus: function(event, ui) {
+        return false;
+    }
+});
+//--></script>
+<script type="text/javascript"><!--//
+  $(function () {
+    // First, checks if it isn't implemented yet.
+    if (!String.prototype.format) {
+      String.prototype.format = function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) {
+          return typeof args[number] != 'undefined'
+            ? args[number]
+            : match
+          ;
+        });
+      };
+    }
+
+    // DATES CONTROL
+    var DatesControl = function ( $el, json ) {
+      // PROPERTIES
+      var that = this;
+      this.$el = $el;
+      this.$strOutput = $el.find('[name=\'dates\']');
+      this.$htmlOutput = $el.find('div.dates-html-output');
+
+      this.data = typeof(json) == 'undefined' ? [] : json;
+      this.labelAFormat = '<?php echo $text_year; ?> {0}';
+      this.labelBFormat = '<?php echo $text_quarter; ?> {1} <?php echo $text_year; ?> {0}';
+      this.valueFormat  = '{0}-{1}';
+      this.htmlFormat  = '<span class="label label-info" style="margin-right: 5px; margin-bottom: 5px;">{1} <a style="color: red;" data-key="{0}"><i class="icon-remove"></i></a></span>';
+
+      // PRIVATE FUNCTIONS
+      function _init() {
+        that.$el.find('.btn-add-date').click(function () {
+          if ( !$(this).hasClass('disabled') ) {
+            $(this).addClass('disabled');
+
+            if ( _validateDate() ) {
+              _addDate();
+              _transferToInput();
+            }else {
+              _showError();
+            }
+
+            $(this).removeClass('disabled');
+          }
+        });
+
+        that.$htmlOutput.on('click', '.dates-html-remove', function(event) {
+          event.preventDefault();
+          /* Act on the event */
+          _removeDate( $(this).data('key') );
+          _transferToInput();
+        });
+      }
+
+      function _validateDate() {
+        that.$el.find('div.alert-error').addClass('hidden');
+        if ( that.$el.find('[name=\'date_year\']').val() == '' ) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function _addDate() {
+        if ( that.$el.find('[name=\'date_quarter\']').val() == '0' ) {
+          that.data.push( {
+            'label':that.labelAFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+            'value':that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+          } );
+        }else {
+          that.data.push( {
+            'label':that.labelBFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+            'value':that.valueFormat.format( that.$el.find('[name=\'date_year\']').val(), that.$el.find('[name=\'date_quarter\']').val() ),
+          } );
+        }
+      }
+
+      function _showError() {
+        that.$el.find('div.alert-error').removeClass('hidden');
+      }
+
+      function _getStrDates() {
+        var str = '';
+        $.each(that.data, function(index, val) {
+          if (str == '') {
+            str += val.value + ' (' + val.label + ')';
+          }else {
+            str += ', ' + val.value + ' (' + val.label + ')';
+          }
+        });
+
+        return str;
+      }
+
+      function _getHtmlDates() {
+        var output = '';
+        $.each(that.data, function(index, val) {
+          if (output == '') {
+            output += that.htmlFormat.format( index, val.label );
+          }else {
+            output += that.htmlFormat.format( index, val.label );
+          }
+        });
+
+        return output;
+      }
+
+      function _transferToInput() {
+        that.$strOutput.val(_getStrDates());
+        that.$htmlOutput.html(_getHtmlDates());
+      }
+
+      function _removeDate( key ) {
+        that.data.splice(key, 1);
+      }
+
+      // EVENTS
+      _init();
+    }
+      // PUBLIC FUNCTIONS
+
+    // FUNCTION CONTROL
+    var FunctionsControl = function ( $el, json ) {
+      // PROPERTIES
+      var that = this;
+      this.$el = $el;
+      this.$htmlOutput = $el.find('.functions-html-output');
+
+      this.data = json;
+      this.htmlFormat = '<tr><td>{0}</td><td>{1}</td><td><a class="btn btn-danger functions-html-remove"><i class="icon-trash"></i></a><input name="functions[{3}][name]" type="hidden" value="{0}" /><input name="functions[{3}][function]" type="hidden" value="{1}" /><input name="functions[{3}][id]" type="hidden" value="{2}" /></td></tr>';
+      this.noResultFormat = '<tr class="functions-no-result"><td colspan="3"><?php echo $text_no_results; ?></td></tr>';
+
+      // PRIVATE FUNCTIONS
+      function _init() {
+        that.$el.find('.functions-add-function').click(function(event) {
+          /* Act on the event */
+          if ( _validateFunction() ) {
+            _addFunction();
+          }else {
+            _showError();
+          }
+        });
+      }
+
+      function _validateFunction() {
+        that.$el.find('.alert-error').addClass('hidden');
+
+        if ( that.$el.find('[name=\'function_name\']').val() == '' ) {
+          return false;
+        }
+
+        if ( that.$el.find('[name=\'function\']').val() == '' ) {
+          return false;
+        }
+
+        if ( that.$el.find('[name=\'function_id\']').val() == '' ) {
+          return false;
+        }
+
+        return true;
+      }
+
+      function _addFunction() {
+        that.$htmlOutput.append( that.htmlFormat.format( that.$el.find('[name=\'function_name\']').val(), that.$el.find('[name=\'function\']').val(), that.$el.find('[name=\'function_id\']').val(), that.data.length ) );
+
+        that.data.push({
+          'name':that.$el.find('[name=\'function_name\']').val(),
+          'function':that.$el.find('[name=\'function\']').val(),
+          'function_id':that.$el.find('[name=\'function_id\']').val(),
+        });
+      }
+
+      function _showError() {
+        that.$el.find('.alert-error').removeClass('hidden');
+      }
+
+      function _refreshHtmlOutput() {
+        that.$el.find('.functions-no-result').remove();
+        if ( !that.data.length && !that.$el.find('.functions-no-result').length ) {
+          that.$el.$htmlOutput.append( that.noResultFormat );
+        }
+      }
+
+      // EVENTS
+      _init();
+    }
+      // PUBLIC FUNCTIONS
+
+    var datesCtrl = new DatesControl( $('.dates-control'), <?php echo json_encode($aDates); ?>);
+    var functionsCtrl = new FunctionsControl( $('.functions-control'), <?php echo json_encode($functions); ?>);
   });
 //--></script>

@@ -8,6 +8,8 @@ $_['text_enable'] 					= 'Enable';
 $_['text_disable'] 					= 'Disable';
 $_['text_enter_function_name'] 		= 'Enter Function Name';
 $_['text_search_function'] 			= 'Search Function';
+$_['text_year'] 					= 'Year';
+$_['text_quarter'] 					= 'Quarter';
 
 // button
 $_['button_insert'] 				= 'Insert';
@@ -24,6 +26,8 @@ $_['column_function'] 				= 'Function';
 // entry
 $_['entry_name'] 					= 'Name:';
 $_['entry_dates']	 				= 'Dates:';
+$_['entry_year']	 				= 'Year:';
+$_['entry_quarter']	 				= 'Quarter:';
 $_['entry_functions'] 				= 'Finance Functions:';
 $_['entry_function_name'] 			= 'Function Name:';
 

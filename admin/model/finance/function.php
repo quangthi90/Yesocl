@@ -174,5 +174,20 @@ class ModelFinanceFunction extends Model {
 
 		return $results;
 	}
+
+	public function searchFunctionByKeyword( $data = array() ) {
+		if ( empty($data['limit']) ){
+			$data['limit'] = 10;
+		}
+
+		if ( empty($data['start']) ){
+			$data['start'] = 0;
+		}
+
+		return $this->dm->getRepository('Document\Finance\Formual')->findBy(array(
+			'deleted' => false,
+			'name' => new MongoRegex("/^" . trim($data['filter_name']) . "*/i")
+		))->skip( $data['start'] )->limit( $data['limit'] );
+	}
 }
 ?>

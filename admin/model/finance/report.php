@@ -104,5 +104,9 @@ class ModelFinanceReport extends Model {
 	public function getReport( $id ){
 		return $this->dm->getRepository('Document\Finance\Report')->find( $id );
 	}
+
+	public function getDetailDates( $strDates ) {
+		return array();
+	}
 }
 ?>
