@@ -4346,31 +4346,32 @@ a.wall-link:hover {
   line-height: 30px;
   text-align: justify;
 }
-.about-page h1 {  
+.about-page ul {
+  list-style-type: circle;
+  padding-left: 20px;
 }
-.about-page h2 {  
+.about-page h3 {
+  line-height: 32px;
 }
-.about-page h3 {  
-}
-.about-page h4 {  
-}
-.about-page .front-page {
+.about-page #front-page {
   display: table;
 }
-.about-page .content-page {  
-}
-.front-page .content-block  {
+#front-page .content-block  {
   display: table-cell;
+  padding-left: 20px;
 }
-.content-page .content-block  {
-  -webkit-column-width: 300px;
-  -moz-column-width: 300px;
-  column-width: 300px;
+.about-page #content-page {  
+  -webkit-column-width: 400px;
+  -moz-column-width: 400px;
+  column-width: 400px;
   -moz-column-gap: 35px;
   -webkit-column-gap: 35px;
   column-gap: 35px;
   text-align: justify;
 }
-.about-page .content-block-title {
+#content-page .content-block  {
+  margin-bottom: 15px;
+}
+#content-page .content-block .content-block-title {
   color: #4A9E8B;
 }

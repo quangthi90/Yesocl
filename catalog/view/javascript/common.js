@@ -753,6 +753,11 @@ HorizontalBlock.prototype.LayoutStockPage = function() {
 };
 
 HorizontalBlock.prototype.LayoutAboutPage = function() {
+	this.root.find(".about-part").height(this.root.height() - 20);
+	var frontPage = this.root.find("#front-page");
+	var contentPage = this.root.find("#content-page");
+
+	this.root.width(frontPage.outerWidth() + contentPage.outerWidth() + 100);
 	this.rootContent.niceScroll();
 };
 

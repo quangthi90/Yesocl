@@ -9,13 +9,13 @@
 
 {% block body %}
 	<div id="y-content">
-		<div id="y-main-content" class="has-horizontal about-page" style="width: 2500px;">
-			<div class="front-page fl" style="width: 1200px; margin-right: 50px;">
+		<div id="y-main-content" class="has-horizontal about-page" style="width: 4500px;">
+			<div class="about-part fl" id="front-page" style="margin-right: 50px;">
 				<div class="content-block" style="background-color: #56C2A9; color: #FFF;width: 300px;">
-                    <p style="font-size: 20px; padding: 25px; height: 160px;">
+                    <p style="font-size: 20px; padding: 25px 25px 25px 5px; height: 160px;">
                         <a class="system-link" href="#">YESOCL.COM </a>là mạng xã hội để trao đổi thông tin tài chính – nơi liên kết nhà đầu tư và doanh nghiệp.
                     </p>
-                    <p style="font-size: 15x; padding: 25px;">
+                    <p style="font-size: 15x; padding: 25px 25px 25px 5px;">
                         Chúng tôi không ngần ngại chia sẻ thông tin về thị trường chứng khoán và tin tức quan trọng  xoay quanh thị trường. Chúng tôi tạo ra cộng đồng tài chính để nhà đầu tư nêu quan điểm cá nhân. Chúng tôi tạo ra kênh truyền thông để doanh nghiệp minh bạch thông tin.
                     </p>
                 </div>
@@ -38,8 +38,10 @@
                     <p style="background-image: url(image/template/about-1.jpg); background-repeat:no-repeat; background-position: 100% top;width: 100%; min-height: 300px;"></p>
                 </div>
             </div>
-            <div class="content-page fl">
-            	<p style="background-image:url(image/template/about-2.jpg); background-repeat:no-repeat; width: 100%; min-height: 200px;"></p>
+            <div class="about-part content-page fl" id="content-page">
+            	<p>
+                 <img src="image/template/about-2.jpg" alt="yesocl-about">   
+                </p>
             	<div class="content-block">
             		<h3 class="content-block-title">Thương Hiệu Cá Nhân</h3>
             		<p>
@@ -100,7 +102,7 @@
             		</ul>
             	</div>
             	<div class="content-block">
-            		<h2>Sứ mệnh  Yesocl – mạng xã hội tài chính Việt Nam - nơi tinh hoa của sự chia sẻ được kết nối bởi cộng đồng tài chính.</h2>
+            		<h4>Sứ mệnh  Yesocl – mạng xã hội tài chính Việt Nam - nơi tinh hoa của sự chia sẻ được kết nối bởi cộng đồng tài chính.</h4>
             	</div>
             	<div class="content-block">
             		<h3 class="content-block-title">Giá trị cốt lõi</h3>
@@ -118,8 +120,10 @@
             	</div>
             	<div class="content-block">
             		<h3 class="content-block-title">Liên Hệ</h3>
-            		<h4>YESOCL.COM - Mạng xã hội tài chính tại Việt Nam</h4>
-            		<h5><a href="www.yesocl.com">www.yesocl.com</a></h5>
+                    <p>
+                        <strong>YESOCL.COM - Mạng xã hội tài chính tại Việt Nam</strong> <br />
+                        <a href="www.yesocl.com">www.yesocl.com</a>
+                    </p>
             	</div>
             </div>
         </div>
