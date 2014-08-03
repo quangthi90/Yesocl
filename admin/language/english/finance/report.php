@@ -4,6 +4,7 @@ $_['heading_title'] 				= 'Finance Report';
 
 // text
 $_['text_edit'] 					= 'Edit';
+$_['text_export'] 					= 'Export';
 $_['text_enable'] 					= 'Enable';
 $_['text_disable'] 					= 'Disable';
 $_['text_enter_function_name'] 		= 'Enter Function Name';

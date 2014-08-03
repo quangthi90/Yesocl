@@ -164,6 +164,12 @@ class ControllerFinanceReport extends Controller {
 				'icon' => 'icon-edit',
 			);
 
+			$action[] = array(
+				'text' => $this->language->get('text_export'),
+				'href' => $this->url->link( 'finance/report/export', 'report_id=' . $oReport->getId() . '&token=' . $this->session->data['token'], 'sSL' ),
+				'icon' => ' icon-circle-arrow-up',
+			);
+
 			$this->data['reports'][] = array(
 				'id' => $oReport->getId(),
 				'name' => $oReport->getName(),
