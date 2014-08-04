@@ -154,7 +154,9 @@ class ControllerDesignAction extends Controller {
 		);
 
 		$actions = $this->model_design_action->getActions( $data );
-		
+		// print("<pre>");
+		// var_dump($actions);
+		// exit;
 		$action_total = $this->model_design_action->getTotalActions();
 		
 		$this->data['actions'] = array();
