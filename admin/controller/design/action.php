@@ -154,9 +154,7 @@ class ControllerDesignAction extends Controller {
 		);
 
 		$actions = $this->model_design_action->getActions( $data );
-		// print("<pre>");
-		// var_dump($actions);
-		// exit;
+		
 		$action_total = $this->model_design_action->getTotalActions();
 		
 		$this->data['actions'] = array();
@@ -190,7 +188,7 @@ class ControllerDesignAction extends Controller {
 		$pagination->page = $page;
 		$pagination->limit = $this->limit;
 		$pagination->text = $this->language->get('text_pagination');
-		$pagination->url = $this->url->link('design/action', '&page={page}', '&token=' . $this->session->data['token'], 'SSL');
+		$pagination->url = $this->url->link('design/action', '&page={page}' . '&token=' . $this->session->data['token'], 'SSL');
 			
 		$this->data['pagination'] = $pagination->render();
 
