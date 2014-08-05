@@ -4298,7 +4298,7 @@ a.wall-link:hover {
   font-size: 10px;
 }
 .news-ticker-container {
-  max-height: 65px;
+  max-height: 45px;
   overflow-y: auto;
 }
 .news-ticker-container li.news-ticker {
