@@ -87,7 +87,7 @@ class ModelFinanceFunction extends Model {
 	public function getAllFunctions( $aData = array() ){
 		if ( !empty($aData['function_ids']) ){
 			return $this->dm->getRepository('Document\Finance\Formual')->findBy(array(
-				'id' => array('$in' => $aData['function_ids'])
+				'id' => array('$in' => array_values($aData['function_ids']))
 			));
 		}
 		return $this->dm->getRepository('Document\Finance\Formual')->findAll();
