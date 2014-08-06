@@ -367,5 +367,56 @@ class ControllerFinanceReport extends Controller {
 			return true;
 		}
 	}
+
+	public function export(){
+		if ( empty($this->request->get['report_id']) ){
+			return false;
+		}
+
+		$idReport = $this->request->get['report_id'];
+
+		$this->load->model('finance/report');
+		$this->load->model('finance/function');
+		$this->load->model('tool/excel');
+		// Report
+		$oReport = $this->model_finance_report->getReport( $idReport );
+		// Function
+		$aFunctionIds = $oReport->getFunctions();
+		$lFunctions = $this->model_finance_function->getAllFunctions( array('function_ids' => $aFunctionIds) );
+		if ( $lFunctions ){
+			$aFunctions = $lFunctions->toArray();
+		}
+		// Date
+		$sDates = $oReport->getDates();
+		$sDates = preg_replace('/ \([a-zA-Z0-9 \)]+/', '', $sDates);
+		$aDates = explode(', ', $sDates);
+		// format column excel for list time
+		$iAsciiRun = 66;
+		$iAsciiPlus = 64;
+		$aNewDates = array();
+		foreach ( $aDates as $sDate ) {
+			if ( $iAsciiRun > 68 ) {
+				$iAsciiRun = 65;
+				$iAsciiPlus++;
+			}
+			$sChar = '';
+			if ( $iAsciiPlus > 64 ) $sChar .= chr( $iAsciiPlus );
+			$sChar .= chr($iAsciiRun);
+			$aNewDates[$sChar] = $sDate;
+			$iAsciiRun++;
+		}
+		// calculate data for list function
+		$aMatrix = array();
+		foreach ( $aFunctionIds as $sFunctionName => $sFunctionId ) {
+			$oFunction = $aFunctions[$sFunctionId];
+			$aDetail = $this->model_finance_function->getFunctionDetail($oFunction->getFunction());
+			print("<pre>");
+			var_dump($aDetail); exit;
+		}
+
+		// $this->model_tool_excel->createExcelFile();
+
+		var_dump($aNewDates); exit;
+	}
 }
 ?>
