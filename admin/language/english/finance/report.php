@@ -11,6 +11,7 @@ $_['text_enter_function_name'] 		= 'Enter Function Name';
 $_['text_search_function'] 			= 'Search Function';
 $_['text_year'] 					= 'Year';
 $_['text_quarter'] 					= 'Quarter';
+$_['text_choose_year'] 				= '-- Choose Year --';
 
 // button
 $_['button_insert'] 				= 'Insert';

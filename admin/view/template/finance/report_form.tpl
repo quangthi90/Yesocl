@@ -33,15 +33,13 @@
               <h4 class="pull-left"><span class="required">*</span> <?php echo $entry_dates; ?></h4>
               <div class="pull-right form-inline">
                 <?php echo $entry_year; ?> <select name="date_year">
-                  <option value="0"><?php echo $text_choose_year; ?></option>
+                  <option value=""><?php echo $text_choose_year; ?></option>
                   <?php foreach ($aYears as $key => $value) { ?>
                     <option value="<?php echo $key; ?>"><?php echo $key; ?></option>
                   <?php } ?>
                 </select>
-                <?php echo $entry_quarter; ?> <select name="date_quarter">
+                <?php echo $entry_quarter; ?> <select name="date_quarter" disabled="disabled">
                   <option value="0"><?php echo $text_none; ?></option>
-                  <option>2</option>
-                  <option>3</option>
                 </select>
                 <a class="btn btn-primary btn-add-date"><i class="icon-plus"></i></a>
                 <input name="dates" type="hidden" value="<?php echo $dates; ?>" />
@@ -170,7 +168,18 @@ $('input[name=\'function\']').autocomplete({
       function _init() {
         that.$el.find('[name=\'date_year\']').change(function(event) {
           /* Act on the event */
-          console.log(that.years);
+          var tmp = $(this).val();
+          if ( tmp ) {
+            $.each(that.years, function(index, val) {
+               /* iterate through array or object */
+              if ( tmp == index ) {
+                _chooseYear( val );
+                return false;
+              }
+            });
+          }else {
+            that.$el.find('[name=\'date_quarter\']').prop('disabled', true);
+          }
         });
 
         that.$el.find('.btn-add-date').click(function () {
@@ -203,6 +212,20 @@ $('input[name=\'function\']').autocomplete({
         }
 
         return true;
+      }
+
+      function _chooseYear( data ) {
+        var html = '';
+        $.each(data, function(index, val) {
+           /* iterate through array or object */
+          if ( val == 0 ) {
+            html += '<option value="{0}"><?php echo $text_none; ?></option>'.format(val);
+          }else {
+            html += '<option value="{0}">{0}</option>'.format(val);
+          }
+        });
+        that.$el.find('[name=\'date_quarter\']').html( html );
+        that.$el.find('[name=\'date_quarter\']').prop('disabled', false);
       }
 
       function _addDate() {
