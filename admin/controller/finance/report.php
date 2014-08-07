@@ -393,6 +393,7 @@ class ControllerFinanceReport extends Controller {
 
 		$this->load->model('finance/report');
 		$this->load->model('finance/function');
+		$this->load->model('stock/finance');
 		$this->load->model('tool/excel');
 		// Report
 		$oReport = $this->model_finance_report->getReport( $idReport );
@@ -409,9 +410,11 @@ class ControllerFinanceReport extends Controller {
 		// format column excel for list time
 		$iAsciiRun = 66;
 		$iAsciiPlus = 64;
-		$aNewDates = array();
+		$aNewDates = array('A' => '');
+		$aMatrix = array();
+		sort($aDates);
 		foreach ( $aDates as $sDate ) {
-			if ( $iAsciiRun > 68 ) {
+			if ( $iAsciiRun > 90 ) {
 				$iAsciiRun = 65;
 				$iAsciiPlus++;
 			}
@@ -421,18 +424,33 @@ class ControllerFinanceReport extends Controller {
 			$aNewDates[$sChar] = $sDate;
 			$iAsciiRun++;
 		}
-		// calculate data for list function
-		$aMatrix = array();
-		foreach ( $aFunctionIds as $sFunctionName => $sFunctionId ) {
-			$oFunction = $aFunctions[$sFunctionId];
-			$aDetail = $this->model_finance_function->getFunctionDetail($oFunction->getFunction());
-			print("<pre>");
-			var_dump($aDetail); exit;
+		$aMatrix[] = $aNewDates;
+		array_shift($aNewDates);
+		// get list stocks
+		$lStockFinances = $this->model_stock_finance->getAllFinances();
+		foreach ( $lStockFinances as $oStockFinances ) {
+			$iRow = 1;
+			// calculate data for list function
+			foreach ( $aFunctionIds as $sFunctionName => $sFunctionId ) {
+				$oFunction = $aFunctions[$sFunctionId];
+				$aDetails = $this->model_finance_function->getFunctionDetail($oFunction->getFunction());
+				$aValues['A'] = $sFunctionName;
+				foreach ( $aNewDates as $sColumnName => $sDate ) {
+					$aNewDetails = array_map(function($aDetail) use ($oStockFinances, $sDate){
+						if ( $aDetail['is_fi'] ){
+							$aFinanceValues = $oStockFinances->getFinanceByFinanceId($aDetail['value']);
+							return $aFinanceValues->getValues()[$sDate];
+						}
+						return $aDetail['value'];
+					}, $aDetails);
+					$aValues[$sColumnName] = (int)implode('', $aNewDetails);
+				}
+				$aMatrix[$iRow] = $aValues;
+				$iRow++;
+			}
+			$this->model_tool_excel->createExcelFile( $aMatrix, $oStockFinances->getStock()->getCode() );
 		}
 
-		// $this->model_tool_excel->createExcelFile();
-
-		var_dump($aNewDates); exit;
 	}
 }
 ?>
