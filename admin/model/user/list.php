@@ -17,6 +17,11 @@ class ModelUserList extends Model {
 			$aData['code'] = trim($aData['code']);
 		}
 
+		// description
+		if ( !isset($aData['description']) ) {
+			$aData['description'] = '';
+		}
+
 		// status
 		if ( !isset($aData['status']) ) {
 			$aData['status'] = true;
@@ -24,19 +29,20 @@ class ModelUserList extends Model {
 			$aData['status'] = (int)$aData['status'];
 		}
 
-		// users is required
+		// users
 		if ( empty($aData['users']) ) {
 			$aData['users'] = array();
 		}
 
 		$users = array();
 		foreach ($aData['users'] as $key => $value) {
-			$users[$value] = $value;
+			$users[$value['id']] = $value['id'];
 		}
 
 		$oUserList = new UserList();
 		$oUserList->setName( $aData['name'] );
 		$oUserList->setCode( $aData['code'] );
+		$oUserList->setDescription( $aData['description'] );
 		$oUserList->setStatus( $aData['status'] );
 		$oUserList->setUsers( $users );
 
@@ -46,7 +52,7 @@ class ModelUserList extends Model {
 		return true;
 	}
 
-	public function editReport( $id, $aData = array() ) {
+	public function editUserList( $id, $aData = array() ) {
 		// name is required
 		if ( !isset($aData['name']) ) {
 			return false;
@@ -54,45 +60,51 @@ class ModelUserList extends Model {
 			$aData['name'] = trim($aData['name']);
 		}
 
-		// dates is required
-		if ( !isset($aData['dates']) ) {
-			return false;
+		// description
+		if ( !isset($aData['description']) ) {
+			$aData['description'] = '';
+		}
+
+		// status
+		if ( !isset($aData['status']) ) {
+			$aData['status'] = true;
 		}else {
-			$aData['dates'] = trim($aData['dates']);
+			$aData['status'] = (int)$aData['status'];
 		}
 
-		// functions is required
-		if ( empty($aData['functions']) ) {
+		// users
+		if ( empty($aData['users']) ) {
+			$aData['users'] = array();
+		}
+
+		$users = array();
+		foreach ($aData['users'] as $key => $value) {
+			$users[$value['id']] = $value['id'];
+		}
+
+		$oUserList = $this->dm->getRepository('Document\User\UserList')->find( $id );
+		if ( !$oUserList ){
 			return false;
 		}
 
-		$functions = array();
-		foreach ($aData['functions'] as $key => $value) {
-			$functions[$value['name']] = $value['id'];
-		}
+		$oUserList->setName( $aData['name'] );
+		$oUserList->setDescription( $aData['description'] );
+		$oUserList->setStatus( $aData['status'] );
+		$oUserList->setUsers( $users );
 
-		$oReport = $this->dm->getRepository('Document\Finance\Report')->find( $id );
-		if ( !$oReport ){
-			return false;
-		}
-
-		$oReport->setName( $aData['name'] );
-		$oReport->setDates( $aData['dates'] );
-		$oReport->setFunctions( $functions );
-
-		$this->dm->persist( $oReport );
+		$this->dm->persist( $oUserList );
 		$this->dm->flush();
 
 		return true;
 	}
 
-	public function deleteReports( $aData = array() ) {
+	public function deleteUserLists( $aData = array() ) {
 		if ( !empty($aData['id']) ) {
 			foreach ($aData['id'] as $id) {
-				$oReport = $this->dm->getRepository('Document\Finance\Report')->find( $id );
+				$oUserList = $this->dm->getRepository('Document\User\UserList')->find( $id );
 
-				if ( $oReport ) {
-					$oReport->setDeleted( true );
+				if ( $oUserList ) {
+					$this->dm->remove($oUserList);
 					$this->dm->flush();
 				}
 			}
@@ -113,26 +125,28 @@ class ModelUserList extends Model {
 			->limit( $aData['limit'] );
 	}
 
-	public function getAllReports(){
-		return $this->dm->getRepository('Document\Finance\Report')->findAll();
+	public function getAllUserLists(){
+		return $this->dm->getRepository('Document\User\UserList')->findAll();
 	}
 
-	public function getReport( $id ){
-		return $this->dm->getRepository('Document\Finance\Report')->find( $id );
+	public function getUserList( $id ){
+		return $this->dm->getRepository('Document\User\UserList')->find( $id );
 	}
 
-	public function getDetailFunction( $aFunction ) {
-		$this->load->model('finance/function');
+	public function getDetailUsers( $aUsers ) {
+		$this->load->model('user/user');
 
 		$result = array();
-		foreach ($aFunction as $key => $value) {
-			$oFunction = $this->model_finance_function->getFunction( $value );
+		foreach ($aUsers as $key => $value) {
+			$oUser = $this->model_user_user->getUser( array( 'user_id' => $value ) );
 
-			if ($oFunction) {
+			if ($oUser) {
+				$primary = ( $oUser->getUsername()) ? $oUser->getUsername() : '';
+				$primary .= ' (' . $oUser->getPrimaryEmail()->getEmail() . ')';
+
 				$result[] = array(
-					'name' => $key,
-					'function' => $oFunction->getName(),
-					'function_id' => $oFunction->getId(),
+					'name' => $primary,
+					'id' => $oUser->getId(),
 					);
 			}
 		}
