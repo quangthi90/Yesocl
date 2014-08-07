@@ -153,5 +153,21 @@ class ModelUserList extends Model {
 
 		return $result;
 	}
+
+	public function getUserListByCode( $code ) {
+		return $this->dm->getRepository('Document\User\UserList')->findOneBy( array( 'code' => trim($code) ) );
+	}
+
+	public function isExistCode( $code, $id = '' ) {
+		$oUserList = $this->getUserListByCode( $code );
+
+		if ( $oUserList ) {
+			if ( $id == '' || ($id != '' && $oUserList->getId() == $id) ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
 ?>

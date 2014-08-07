@@ -30,6 +30,7 @@ $_['entry_users'] 					= 'Users:';
 $_['error_warning'] 				= 'Warning: Error!';
 $_['error_name']					= 'Warning: Error Name is required!';
 $_['error_code']					= 'Warning: Error Code is required!';
+$_['error_exist_code']				= 'Warning: Error Code is exist!';
 $_['error_users']					= 'Warning: Error User List is invalid!';
 $_['text_success'] 					= 'Success: You have modified User List!';
 ?>

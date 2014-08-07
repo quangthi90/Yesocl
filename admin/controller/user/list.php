@@ -49,7 +49,7 @@ class ControllerUserList extends Controller {
 		$this->load->model( 'user/list' );
 
 		$this->document->setTitle( $this->language->get('heading_title') );
-// echo '<pre>';var_dump($this->request->post);exit();
+
 		// request
 		if ( ($this->request->server['REQUEST_METHOD'] == 'POST') && $this->isValidateForm() ){
 			$this->model_user_list->editUserList( $this->request->get['list_id'], $this->request->post );
@@ -348,6 +348,10 @@ class ControllerUserList extends Controller {
 			if ( !isset($this->request->post['code']) || strlen($this->request->post['code']) < 1 || strlen($this->request->post['code']) > 128 ){
 				$this->error['error_code'] = $this->language->get( 'error_code' );
 			}
+
+			if ( $this->isExistCode( $this->request->post['code'] ) ) {
+				$this->error['error_code'] = $this->language->get( 'error_exist_code' );
+			}
 		}
 
 		if ( isset($this->request->post['users']) ) {
@@ -382,6 +386,18 @@ class ControllerUserList extends Controller {
 		}
 
 		return count($tmp) == count($data);
+	}
+
+	private function isExistCode( $code ) {
+		$this->load->model('user/list');
+
+		if ( isset( $this->request->get['list_id'] ) ) {
+			$list_id = $this->request->get['list_id'];
+		}else {
+			$list_id = '';
+		}
+
+		return $this->model_user_list->isExistCode( $code, $list_id );
 	}
 }
 ?>
