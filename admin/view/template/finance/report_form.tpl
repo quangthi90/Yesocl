@@ -60,7 +60,7 @@
           <tr>
             <td colspan="2">
               <h4><span class="required">*</span> <?php echo $entry_functions; ?></h4>
-              <div class="alert alert-error<?php if ( !$error_functions ) echo ' hidden'; ?>">
+              <div class="functions-control-alert alert alert-error<?php if ( !$error_functions ) echo ' hidden'; ?>">
           <strong>Error!</strong> <?php echo $text_error_functions; ?>
         </div>
               <table class="table table-striped functions-control">
@@ -336,7 +336,7 @@ $('input[name=\'function\']').autocomplete({
       }
 
       function _validateFunction() {
-        that.$el.find('.alert-error').addClass('hidden');
+        $('.alert-error.functions-control-alert').addClass('hidden');
 
         if ( that.$el.find('[name=\'function_name\']').val() == '' ) {
           return false;
@@ -368,7 +368,7 @@ $('input[name=\'function\']').autocomplete({
       }
 
       function _showError() {
-        that.$el.find('.alert-error').removeClass('hidden');
+        $('.alert-error.functions-control-alert').removeClass('hidden');
       }
 
       function _refreshHtmlOutput() {
