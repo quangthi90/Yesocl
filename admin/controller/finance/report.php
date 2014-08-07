@@ -319,10 +319,10 @@ class ControllerFinanceReport extends Controller {
 		// Entry dates
 		if ( isset($this->request->post['dates']) ){
 			$this->data['dates'] = $this->request->post['dates'];
-			$this->data['aDates'] = $this->model_finance_report->getDetailDates( $this->request->post['dates'] );
+			$this->data['aDates'] = $this->model_finance_date->getDetailDates( $this->request->post['dates'] );
 		}elseif ( isset($oReport) ){
 			$this->data['dates'] = $oReport->getDates();
-			$this->data['aDates'] = $this->model_finance_report->getDetailDates( $this->data['dates'] );
+			$this->data['aDates'] = $this->model_finance_date->getDetailDates( $this->data['dates'] );
 		}else {
 			$this->data['dates'] = '';
 			$this->data['aDates'] = array();
@@ -378,8 +378,10 @@ class ControllerFinanceReport extends Controller {
 		}
 	}
 
-	private function isValidateDates() {
-		return true;
+	private function isValidateDates( $dates ) {
+		$this->load->model('finance/date');
+
+		return $this->model_finance_date->isValidateDates( $dates );
 	}
 
 	public function export(){

@@ -111,5 +111,44 @@ class ModelFinanceDate extends Model {
 			'year' => $year
 		));
 	}
+
+	public function getDetailDates( $strDates ) {
+		if ( trim($strDates) == '' ) {
+			return array();
+		}
+
+		$aDates = explode( ',', $strDates );
+
+		$result = array();
+		foreach ($aDates as $key => $value) {
+			$arr1 = explode( '(', str_replace(')', '(', trim($value)) );
+			if ( !empty($arr1) ) {
+				$result[] = array(
+					'label' => trim($arr1[1]),
+					'value' => trim($arr1[0]),
+					);
+			}
+		}
+
+		return $result;
+	}
+
+	public function isValidateDates( $dates ) {
+		if ( !is_array($dates) ) {
+			$dates = $this->getDetailDates( $dates );
+		}
+
+		foreach ($dates as $key => $value) {
+			$tmp = explode('-', $value['value']);
+
+			$tmpDate = $this->getDateByTime( (int)$tmp[1], (int)$tmp[0] );
+
+			if ( !$tmpDate ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
 }
 ?>

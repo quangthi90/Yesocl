@@ -115,27 +115,6 @@ class ModelFinanceReport extends Model {
 		return $this->dm->getRepository('Document\Finance\Report')->find( $id );
 	}
 
-	public function getDetailDates( $strDates ) {
-		if ( trim($strDates) == '' ) {
-			return array();
-		}
-
-		$aDates = explode( ',', $strDates );
-
-		$result = array();
-		foreach ($aDates as $key => $value) {
-			$arr1 = explode( '(', str_replace(')', '(', trim($value)) );
-			if ( !empty($arr1) ) {
-				$result[] = array(
-					'label' => trim($arr1[1]),
-					'value' => trim($arr1[0]),
-					);
-			}
-		}
-
-		return $result;
-	}
-
 	public function getDetailFunction( $aFunction ) {
 		$this->load->model('finance/function');
 
