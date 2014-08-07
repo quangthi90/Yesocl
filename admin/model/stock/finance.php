@@ -94,5 +94,9 @@ class ModelStockFinance extends Model {
 			'stock.id' => $idStock
 		));
 	}
+
+	public function getAllFinances(){
+		return $this->dm->getRepository('Document\Stock\Finances')->findAll();
+	}
 }
 ?>

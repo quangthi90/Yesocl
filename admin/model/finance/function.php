@@ -162,6 +162,7 @@ class ModelFinanceFunction extends Model {
 					$results[] = array(
 						'label' => $oFinance->getName(),
 						'value' => $tmp[1],
+						'is_fi' => true
 						);
 				}else {
 					$results[] = array(
@@ -173,6 +174,7 @@ class ModelFinanceFunction extends Model {
 				$results[] = array(
 					'label' => $tmp[0],
 					'value' => $tmp[0],
+					'is_fi' => false
 					);
 			}
 		}

@@ -8,7 +8,7 @@ class ModelToolExcel extends Model {
 		return $sheetData;
 	}
 
-	public function createExcelFile(){
+	public function createExcelFile( $aMatrix, $sFilename ){
 		$objPHPExcel = new PHPExcel();
 
 		// Set properties
@@ -18,14 +18,28 @@ class ModelToolExcel extends Model {
 		// $objPHPExcel->getProperties()->setSubject("Office 2007 XLSX Test Document");
 		// $objPHPExcel->getProperties()->setDescription("Test document for Office 2007 XLSX, generated using PHP classes.");
 
-		// Add some data
+		// Add data
 		$objPHPExcel->setActiveSheetIndex(0);
-		// $objPHPExcel->getActiveSheet()->SetCellValue('A1', 'Hello');
-		// $objPHPExcel->getActiveSheet()->SetCellValue('B2', 'world!');
-		// $objPHPExcel->getActiveSheet()->SetCellValue('C1', 'Hello');
-		// $objPHPExcel->getActiveSheet()->SetCellValue('D2', 'world!');
+		foreach ( $aMatrix as $iRowNum => $aCols ) {
+			$iRowNum += 1;
+			foreach ( $aCols as $sColName => $iValue ) {
+				$objPHPExcel->getActiveSheet()->SetCellValue($sColName.$iRowNum, $iValue);
+			}
+		}
 
-		print(get_class($objPHPExcel->getActiveSheet())); exit;
+		// Rename sheet
+		// $objPHPExcel->getActiveSheet()->setTitle('Simple');
+				
+		// Save Excel 2007 file
+		$objWriter = new PHPExcel_Writer_Excel2007( $objPHPExcel );
+		$objWriter->save( DIR_CACHE . $sFilename . '.xlsx' );
+
+		// Redirect output to a client’s web browser (Excel2007)
+		header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+		header('Content-Disposition: attachment;filename="'.$sFilename.'.xlsx"');
+		header('Cache-Control: max-age=0');
+		readfile( DIR_CACHE . $sFilename . '.xlsx' );
+exit;
 	}
 }
 ?>

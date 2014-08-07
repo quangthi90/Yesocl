@@ -50,6 +50,15 @@ Class Finances {
     	return null;
     }
 
+    public function getFinanceByFinanceId( $idFinance ){
+    	foreach ( $this->getFinances() as $finance ) {
+    		if ( $finance->getFinance()->getId() == $idFinance ){
+    			return $finance;
+    		}
+    	}
+    	return null;
+    }
+
 	public function getId() {
 		return $this->id;
 	}
