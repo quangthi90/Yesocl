@@ -286,6 +286,16 @@ class ControllerFinanceReport extends Controller {
 
 		// Year
 		$this->data['year'] = date('Y');
+		$this->data['aYear'] = array();
+		$this->load->model('finance/date');
+		$aYears = $this->model_finance_date->getDates( array( 'limit' => 999 ) );
+		foreach ($aYears as $key => $value) {
+			if ( !isset($this->data['aYear'][$value->getYear()]) ) {
+				$this->data['aYear'][$value->getYear()] = array();
+			}
+
+			$this->data['aYear'][$value->getYear()][$value->getQuarter()] = $value->getQuarter();
+		}
 
 		// report
 		if ( isset($this->request->get['report_id']) ){
