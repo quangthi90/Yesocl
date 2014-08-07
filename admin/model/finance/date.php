@@ -93,9 +93,7 @@ class ModelFinanceDate extends Model {
 		return $this->dm->getRepository('Document\Finance\Date')
 			->findAll()
 			->skip( $aData['start'] )
-			->limit( $aData['limit'] )
-			->sort( array('year' => -1) )
-			->sort( array('quarter' => 1) );
+			->limit( $aData['limit'] );
 	}
 
 	public function getAllDates(){

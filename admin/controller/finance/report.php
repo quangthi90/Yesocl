@@ -260,6 +260,7 @@ class ControllerFinanceReport extends Controller {
 		$this->data['text_error_dates'] = $this->language->get('error_dates');
 		$this->data['text_error_exist_date'] = $this->language->get('error_exist_date');
 		$this->data['text_error_functions'] = $this->language->get('error_functions');
+		$this->data['text_choose_year'] = $this->language->get('text_choose_year');
 
 		// Button
 		$this->data['button_save'] = $this->language->get('button_save');
@@ -285,18 +286,18 @@ class ControllerFinanceReport extends Controller {
 		$this->data['token'] = $this->session->data['token'];
 
 		// Year
-		$this->data['year'] = date('Y');
-		$this->data['aYear'] = array();
+		$this->data['aYears'] = array();
 		$this->load->model('finance/date');
 		$aYears = $this->model_finance_date->getDates( array( 'limit' => 999 ) );
 		foreach ($aYears as $key => $value) {
-			if ( !isset($this->data['aYear'][$value->getYear()]) ) {
-				$this->data['aYear'][$value->getYear()] = array();
+			if ( !isset($this->data['aYears'][$value->getYear()]) ) {
+				$this->data['aYears'][$value->getYear()] = array();
 			}
 
-			$this->data['aYear'][$value->getYear()][$value->getQuarter()] = $value->getQuarter();
+			$this->data['aYears'][$value->getYear()][$value->getQuarter() ] = $value->getQuarter();
 		}
-
+echo '<pre>';var_dump($this->data['aYears']);
+echo '<pre>';var_dump(json_encode($this->data['aYears']));exit();
 		// report
 		if ( isset($this->request->get['report_id']) ){
 			$oReport = $this->model_finance_report->getReport( $idReport );
@@ -351,7 +352,7 @@ class ControllerFinanceReport extends Controller {
 			$this->error['error_name'] = $this->language->get( 'error_name' );
 		}
 
-		if ( !isset($this->request->post['dates']) || strlen($this->request->post['dates']) < 1 ){
+		if ( !isset($this->request->post['dates']) || strlen($this->request->post['dates']) < 1 || !$this->isValidateDates($this->request->post['dates']) ){
 			$this->error['error_dates'] = $this->language->get( 'error_dates' );
 		}
 
@@ -376,6 +377,10 @@ class ControllerFinanceReport extends Controller {
 		}else {
 			return true;
 		}
+	}
+
+	private function isValidateDates() {
+		return true;
 	}
 
 	public function export(){

@@ -33,11 +33,15 @@
               <h4 class="pull-left"><span class="required">*</span> <?php echo $entry_dates; ?></h4>
               <div class="pull-right form-inline">
                 <?php echo $entry_year; ?> <select name="date_year">
-                <?php for ($i=0; $i < 100; $i++) { ?>
-                  <option value="<?php echo $year - $i; ?>"><?php echo $year - $i; ?></option>
-                <?php } ?>
+                  <option value="0"><?php echo $text_choose_year; ?></option>
+                  <?php foreach ($aYears as $key => $value) { ?>
+                    <option value="<?php echo $key; ?>"><?php echo $key; ?></option>
+                  <?php } ?>
                 </select>
-                <?php echo $entry_quarter; ?> <select name="date_quarter"><option value="0"><?php echo $text_none; ?></option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
+                <?php echo $entry_quarter; ?> <select name="date_quarter">
+                  <option value="0"><?php echo $text_none; ?></option>
+                  <option>2</option>
+                  <option>3</option>
                 </select>
                 <a class="btn btn-primary btn-add-date"><i class="icon-plus"></i></a>
                 <input name="dates" type="hidden" value="<?php echo $dates; ?>" />
@@ -148,7 +152,7 @@ $('input[name=\'function\']').autocomplete({
     }
 
     // DATES CONTROL
-    var DatesControl = function ( $el, json ) {
+    var DatesControl = function ( $el, json, years ) {
       // PROPERTIES
       var that = this;
       this.$el = $el;
@@ -156,6 +160,7 @@ $('input[name=\'function\']').autocomplete({
       this.$htmlOutput = $el.find('div.dates-html-output');
 
       this.data = typeof(json) == 'undefined' ? [] : json;
+      this.years = typeof(years) == 'undefined' ? [] : years;
       this.labelAFormat = '<?php echo $text_year; ?> {0}';
       this.labelBFormat = '<?php echo $text_quarter; ?> {1} <?php echo $text_year; ?> {0}';
       this.valueFormat  = '{0}-{1}';
@@ -163,6 +168,11 @@ $('input[name=\'function\']').autocomplete({
 
       // PRIVATE FUNCTIONS
       function _init() {
+        that.$el.find('[name=\'date_year\']').change(function(event) {
+          /* Act on the event */
+          console.log(that.years);
+        });
+
         that.$el.find('.btn-add-date').click(function () {
           if ( !$(this).hasClass('disabled') ) {
             $(this).addClass('disabled');
@@ -363,7 +373,7 @@ $('input[name=\'function\']').autocomplete({
     }
       // PUBLIC FUNCTIONS
 
-    var datesCtrl = new DatesControl( $('.dates-control'), <?php echo json_encode($aDates); ?>);
+    var datesCtrl = new DatesControl( $('.dates-control'), <?php echo json_encode($aDates); ?>, <?php echo json_encode($aYears); ?>);
     var functionsCtrl = new FunctionsControl( $('.functions-control'), <?php echo json_encode($functions); ?>);
   });
 //--></script>
