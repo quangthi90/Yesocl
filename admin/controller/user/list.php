@@ -376,10 +376,13 @@ class ControllerUserList extends Controller {
 		}
 	}
 
-	private function isValidateDates( $dates ) {
-		$this->load->model('finance/date');
+	private function isValidateUserList( $data ) {
+		$tmp = array();
+		foreach ($data as $key => $value) {
+			$tmp[$value] = $value;
+		}
 
-		return $this->model_finance_date->isValidateDates( $dates );
+		return count($tmp) == count($data);
 	}
 }
 ?>
