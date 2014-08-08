@@ -11,6 +11,7 @@ $_['text_group_manage']             	= 'Group Manage';
 $_['text_user']                        	= 'User Account';
 $_['text_user_group']              		= 'User Group';
 $_['text_user_manage']             		= 'User Manage';
+$_['text_user_list']             		= 'User List';
 $_['text_admin']                        = 'Admin Account';
 $_['text_admin_group']             		= 'Admin Group';
 $_['text_admin_manage']            		= 'Admin Manage';

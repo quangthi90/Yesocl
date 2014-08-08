@@ -20,4 +20,9 @@ $_['whatsnew']['option_function']['branch'] = 'getAllBranchPosts';
 $_['whatsnew']['option_function']['stock'] = 'getAllStockPosts';
 $_['whatsnew']['option_function']['user'] = 'getAllUserPosts';
 
+$_['userlist']['following']['active'] = true;
+$_['userlist']['notification']['active'] = true;
+$_['userlist']['code']['following'] = 'following';
+$_['userlist']['code']['notification'] = 'notification';
+
 ?>
