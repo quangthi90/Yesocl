@@ -17,6 +17,8 @@ $_['button_add_user'] 				= 'Add User';
 
 // column
 $_['column_user'] 					= 'User';
+$_['column_name'] 					= 'Name';
+$_['column_code'] 					= 'Code';
 $_['column_action'] 				= 'Action';
 
 // entry
