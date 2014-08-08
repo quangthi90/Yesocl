@@ -137,18 +137,15 @@ class ModelUserList extends Model {
 		$this->load->model('user/user');
 
 		$result = array();
-		foreach ($aUsers as $key => $value) {
-			$oUser = $this->model_user_user->getUser( array( 'user_id' => $value ) );
+		$lUsers = $this->dm->getRepository('Document\User\User')->findBy( array( 'id' => array( '$in' => array_values($aUsers) ) ));
+		foreach ($lUsers as $key => $oUser) {
+			$primary = ( $oUser->getUsername()) ? $oUser->getUsername() : '';
+			$primary .= ' (' . $oUser->getPrimaryEmail()->getEmail() . ')';
 
-			if ($oUser) {
-				$primary = ( $oUser->getUsername()) ? $oUser->getUsername() : '';
-				$primary .= ' (' . $oUser->getPrimaryEmail()->getEmail() . ')';
-
-				$result[] = array(
-					'name' => $primary,
-					'id' => $oUser->getId(),
-					);
-			}
+			$result[] = array(
+				'name' => $primary,
+				'id' => $oUser->getId(),
+				);
 		}
 
 		return $result;
