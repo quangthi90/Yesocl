@@ -5,7 +5,7 @@
 
 {% block stylesheet %}
 	{{ block('common_ko_template_style') }}
-    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />    
+    <link href="{{ asset_css('post-detail.css') }}" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
@@ -13,11 +13,11 @@
 	<div id="post-detail" data-bind="with: detailModel">
 		<div id="detail-header">
 			<div class="goback-link fl">
-				<a class="tooltip-bottom btn-goback" title="Go back" > 
-					<i class="icon-arrow-left medium-icon"></i>					
+				<a class="tooltip-bottom btn-goback" title="Go back" >
+					<i class="icon-arrow-left medium-icon"></i>
 				</a>
 			</div>
-			<div class="post-title-container">				
+			<div class="post-title-container">
 				<h2 class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
 				<div class="post-detail-meta">
 					<div class="post-user-time fl">
@@ -29,10 +29,17 @@
 						</a>
 						<span style="color: #CCC;">&nbsp;|&nbsp;</span>
 						<span class="post-time" data-bind="timeAgo: {{ post.created }}"></span>
-						{% if post.is_owner == false %}
-							<span style="color: #CCC;">&nbsp;|&nbsp;</span>
-							<a href="{{ post.owner.href }}">{{ post.owner.username }}</a>
-						{% endif  %}					
+						{% if post_type == post_types.stock and post.stock_tags|length > 0 %}
+							{% for stock_tag in post.stock_tags %}
+								<span style="color: #CCC;">&nbsp;|&nbsp;</span>
+								<a href="{{ path('StockPage', {stock_code: stock_tag}) }}">{{ stock_tag }}</a>
+							{% endfor %}
+						{% else  %}
+							{% if post.is_owner == false %}
+								<span style="color: #CCC;">&nbsp;|&nbsp;</span>
+								<a href="{{ post.owner.href }}">{{ post.owner.username }}</a>
+							{% endif  %}
+						{% endif  %}
 					</div>
 					<ul class="post-actions fr post-item">
 						{% if is_logged() == true %}
@@ -88,12 +95,12 @@
 							<span class="number">
 								<d>{{ post.count_viewer }}</d>
 							</span>
-						</li>			
-					</ul>			
-					<div class="clear"></div>	
+						</li>
+					</ul>
+					<div class="clear"></div>
 				</div>
 			</div>
-		</div>		
+		</div>
 		<div id="detail-content">
 			<div id="post-content">
 				{{ post.content|raw }}

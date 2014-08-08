@@ -13,14 +13,14 @@ class ControllerApiStock extends Controller {
 		$this->load->model('stock/stock');
 
 		$lStocks = $this->model_stock_stock->getAllStocks();
-		
+
 		$aStocks = array();
 		foreach ( $lStocks as $oStock ) {
 			if ( !$oStock->getLastExchange() || !$oStock->getPreLastExchange() )
 				continue;
 			$aStocks[] = $oStock->formatToCache();
 		}
-		
+
 		return $this->response->setOutput(json_encode(array(
             'success' => 'ok',
             'stocks' => $aStocks
@@ -45,7 +45,7 @@ class ControllerApiStock extends Controller {
 		$this->load->model('user/setting');
 
 		$result = $this->model_user_setting->addStocksToWatchList( $this->customer->getId(), $this->request->post['stock_ids'] );
-		
+
 		if ( !$result ){
 			return $this->response->setOutput(json_encode(array(
 	            'success' => 'not ok',
@@ -134,20 +134,20 @@ class ControllerApiStock extends Controller {
 		}else{
 			$page = 1;
 		}
-		
+
 		$this->load->model('stock/post');
 		$this->load->model('tool/object');
-		
+
 		$aPosts = array();
 		$lPosts = $this->model_stock_post->getPosts(array(
 			'stock_code' => $this->request->get['stock_code'],
 			'limit' => $limit,
 			'start' => ($page - 1) * $limit,
 		));
-		
+
 		$bCanLoadMore = false;
 		if ( $lPosts ){
-			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
+			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false, false, 330, 246, array( 'current_stock' => $this->request->get['stock_code'] ) );
 			if ( ($page - 1) * $limit + $limit < $lPosts->count() ){
 				$bCanLoadMore = true;
 			}
@@ -174,11 +174,11 @@ class ControllerApiStock extends Controller {
 		}else{
 			$page = 1;
 		}
-		
+
 		$this->load->model('branch/branch');
 		$this->load->model('branch/post');
 		$this->load->model('tool/object');
-		
+
 		$lPosts = null;
 		$aPosts = array();
 
@@ -202,7 +202,7 @@ class ControllerApiStock extends Controller {
 				));
 			}
 		}
-		
+
 		$bCanLoadMore = false;
 		if ( $lPosts ){
 			$aPosts = $this->model_tool_object->formatPosts( $lPosts, false );
