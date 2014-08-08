@@ -190,10 +190,11 @@ class ModelToolObject extends Model
 	 * @param: list object Posts
 	 * @return: Array List Objects Posts formated
 	 */
-	public function formatPosts( $lPosts, $isReturnUser = true, $bIsMustImage = false, $with = 330, $height = 246 ) {
+	public function formatPosts( $lPosts, $isReturnUser = true, $bIsMustImage = false, $with = 330, $height = 246, $options = array() ) {
 		$aPosts = array();
 		$aUsers = array();
-		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers, $bIsMustImage, $with, $height );
+
+		foreach ( $lPosts as $oPost ) $aPosts[] = $this->formatPost( $oPost, $aUsers, $bIsMustImage, $with, $height, $options );
 
 		if ( !$isReturnUser ){
 			return $aPosts;
@@ -212,7 +213,7 @@ class ModelToolObject extends Model
 	 * @param: object Post
 	 * @return: Array Object Post formated
 	 */
-	public function formatPost( $oPost, &$aUsers = array(), $bIsMustImage = false, $with = 330, $height = 246 ) {
+	public function formatPost( $oPost, &$aUsers = array(), $bIsMustImage = false, $with = 330, $height = 246, $options = array() ) {
 		$this->load->model('tool/image');
 		$aPost = $oPost->formatToCache();
 
@@ -296,10 +297,18 @@ class ModelToolObject extends Model
             case $this->config->get('common')['type']['stock']:
             	if ( count($oPost->getStockTags()) > 0 ){
 	            	$aPost['is_owner'] = false;
-	                $aPost['owner'] = array(
-	                    'username' => $oPost->getStockTags()[0],
-	                    'href' => $this->path("StockPage", array('stock_code' => $oPost->getStockTags()[0]) )
-	                );
+	            	// SHOW CURRENT STOCK CODE
+            		if (isset( $options['current_stock'] )) {
+		                $aPost['owner'] = array(
+		                    'username' => $options['current_stock'],
+		                    'href' => $this->path("StockPage", array('stock_code' => $options['current_stock']) )
+		                );
+            		}else {
+		                $aPost['owner'] = array(
+		                    'username' => $oPost->getStockTags()[0],
+		                    'href' => $this->path("StockPage", array('stock_code' => $oPost->getStockTags()[0]) )
+		                );
+            		}
 	            }
 
                 if ( $oPost->getUser()->getId() == $this->customer->getId() ){
