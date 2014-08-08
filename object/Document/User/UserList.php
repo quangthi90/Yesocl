@@ -27,7 +27,7 @@ Class UserList {
 	private $code;
 
 	/**
-	 * @MongoDB\Hash
+	 * @MongoDB\Collection
 	 */
 	private $users = array();
 
