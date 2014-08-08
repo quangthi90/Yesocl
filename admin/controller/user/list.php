@@ -322,12 +322,18 @@ class ControllerUserList extends Controller {
 		}
 
 		// Entry users
+		$this->data['users'] = array();
 		if ( isset($this->request->post['users']) ){
 			$this->data['users'] = $this->request->post['users'];
 		}elseif ( isset($oItem) ){
-			$this->data['users'] = $this->model_user_list->getDetailUsers( $oItem->getUsers() );
-		}else {
-			$this->data['users'] = array();
+			$this->load->model('user/user');
+			$lUsers = $this->model_user_user->getUsers( array( 'ids' => $oItem->getUsers() ) );
+			foreach ($lUsers as $key => $oUser) {
+				$this->data['users'][] = array(
+					'name' => (( $oUser->getUsername() ) ? $oUser->getUsername() : '') . ' (' . $oUser->getPrimaryEmail()->getEmail() . ')',
+					'id' => $oUser->getId(),
+					);
+			}
 		}
 
 		$this->template = 'user/user_list_form.tpl';

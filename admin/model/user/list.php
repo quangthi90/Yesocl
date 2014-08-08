@@ -133,23 +133,23 @@ class ModelUserList extends Model {
 		return $this->dm->getRepository('Document\User\UserList')->find( $id );
 	}
 
-	public function getDetailUsers( $aUsers ) {
-		$this->load->model('user/user');
+	// public function getDetailUsers( $aUsers ) {
+	// 	$this->load->model('user/user');
 
-		$result = array();
-		$lUsers = $this->dm->getRepository('Document\User\User')->findBy( array( 'id' => array( '$in' => array_values($aUsers) ) ));
-		foreach ($lUsers as $key => $oUser) {
-			$primary = ( $oUser->getUsername()) ? $oUser->getUsername() : '';
-			$primary .= ' (' . $oUser->getPrimaryEmail()->getEmail() . ')';
+	// 	$result = array();
+	// 	$lUsers = $this->dm->getRepository('Document\User\User')->findBy( array( 'id' => array( '$in' => array_values($aUsers) ) ));
+	// 	foreach ($lUsers as $key => $oUser) {
+	// 		$primary = ( $oUser->getUsername()) ? $oUser->getUsername() : '';
+	// 		$primary .= ' (' . $oUser->getPrimaryEmail()->getEmail() . ')';
 
-			$result[] = array(
-				'name' => $primary,
-				'id' => $oUser->getId(),
-				);
-		}
+	// 		$result[] = array(
+	// 			'name' => $primary,
+	// 			'id' => $oUser->getId(),
+	// 			);
+	// 	}
 
-		return $result;
-	}
+	// 	return $result;
+	// }
 
 	public function getUserListByCode( $code ) {
 		return $this->dm->getRepository('Document\User\UserList')->findOneBy( array( 'code' => trim($code) ) );
