@@ -18,7 +18,7 @@
 				</a>
 			</div>
 			<div class="post-title-container">
-				<h2 class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
+				<h2 data-bind="click: showComment" class="post-title" title="{{ post.title }}">{{ post.title }}</h2>
 				<div class="post-detail-meta">
 					<div class="post-user-time fl">
 						<a href="{{ path('WallPage', {user_slug: post.user_slug}) }}">
