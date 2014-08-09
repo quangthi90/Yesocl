@@ -4331,7 +4331,7 @@ a.wall-link:hover {
     color: #009B77;
 }
 .news-ticker-container li.news-ticker:hover {
-  background-color: #FFFFFF;
+  /*background-color: #FFFFFF;*/
 }
 .news-ticker-container .mCSB_scrollTools .mCSB_draggerRail {
   width: 6px;

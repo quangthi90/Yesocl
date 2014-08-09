@@ -12,7 +12,7 @@ function NewsTicker(options) {
     this.tickers = ko.observableArray([]);
 
     //Test
-    /*
+    
     var item1 = { title: 'Test Test Test Test Test Test Test Test Test 1', slug:'test', type:'branch', created: 1402124813 };
     var item2 = { title: 'Test Test Test Test Test Test Test Test Test  2', slug:'test', type:'branch', created: 1402124813 };
     var item3 = { title: 'Test Test Test Test Test Test Test Test Test  3', slug:'test', type:'branch', created: 1402124813 };
@@ -25,7 +25,7 @@ function NewsTicker(options) {
     this.tickers.push(item4);
     this.tickers.push(item5);
     this.tickers.push(item6);
-    */
+    
 
 	//Private menthods:
     function loadNews(){
@@ -38,7 +38,7 @@ function NewsTicker(options) {
 		};
 		var successCallback = function(data){
 			if(data.success === "ok") {
-				self.tickers(data.posts);
+				//self.tickers(data.posts);
 				makeTicker();
 			}
 		};
