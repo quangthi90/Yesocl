@@ -7,6 +7,8 @@ $_['user']['default']['cache_link'] = 'user/';
 $_['user']['network']['default'] = 'default';
 $_['user']['network']['facebook'] = 'facebook';
 
+$_['user']['checking']['active'] = false;
+
 $_['whatsnew']['option']['all'] = 'all';
 $_['whatsnew']['option']['branch'] = 'branch';
 $_['whatsnew']['option']['stock'] = 'stock';
