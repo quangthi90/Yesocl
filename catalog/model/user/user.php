@@ -85,21 +85,23 @@ class ModelUserUser extends Model {
 			$oUser->setAvatar( $sPath );
 		}
 
-		$sToken = md5( time() );
-		$oUser->setToken( $sToken );
+		if ( $this->config->get('user')['checking']['active'] ){
+			$sToken = md5( time() );
+			$oUser->setToken( $sToken );
 
-		$this->dm->flush();
-		$this->language->load('mail/user');
+			$this->dm->flush();
+			$this->language->load('mail/user');
 
-		$sSubject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
-		$sMessage = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
-		$sMessage .= $this->language->get('text_approval') . "\n" ;
-		$sMessage .= $this->extension->path('ActiveAccount', array('token' => $sToken)) . "\n\n";
-		$sMessage .= $this->language->get('text_services') . "\n\n";
-		$sMessage .= $this->language->get('text_thanks') . "\n";
-		$sMessage .= $this->config->get('config_name');
+			$sSubject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+			$sMessage = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
+			$sMessage .= $this->language->get('text_approval') . "\n" ;
+			$sMessage .= $this->extension->path('ActiveAccount', array('token' => $sToken)) . "\n\n";
+			$sMessage .= $this->language->get('text_services') . "\n\n";
+			$sMessage .= $this->language->get('text_thanks') . "\n";
+			$sMessage .= $this->config->get('config_name');
 
-		$this->model_tool_mail->sendMail( $aData['email'], $sSubject, $sMessage );
+			$this->model_tool_mail->sendMail( $aData['email'], $sSubject, $sMessage );
+		}
 
 		// Auto Following User List: 'following'
 		if ( $this->config->get('userlist')['following']['active'] ) {
