@@ -694,8 +694,6 @@ class ControllerApiPost extends Controller {
         }
 
         $filter = array(
-            'limit' => $iLimit,
-            'start' => ($iPage - 1)*$iLimit,
             'sort' => 'created',
             'filter_created' => new DateTime(),
             );
