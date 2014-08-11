@@ -190,6 +190,10 @@ class ModelCachePost extends Model {
 			$query['hasTitle'] = (boolean)$data['hasTitle'];
 		}
 
+		if ( isset($data['filter_created']) ){
+			$query['created'] = $data['filter_created'];
+		}
+
 		if (isset($query)) {
 			$cache_posts = $this->dm->getRepository('Document\Cache\Post')->findBy( $query )
 				->skip( $data['start'] )
