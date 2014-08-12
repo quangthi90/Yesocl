@@ -30,6 +30,16 @@ $_['text_trading']		              	= 'Security Trading';
 $_['text_market']		              	= 'Market';
 $_['text_fund']			              	= 'Fund Columns';
 
+// Finance
+$_['text_finances']		              	= 'Finances';
+$_['text_finance']		              	= 'Finance';
+$_['text_fi_group']		              	= 'Group';
+$_['text_code']		              		= 'Code';
+$_['text_date']		              		= 'Date';
+$_['text_function']		              	= 'Function';
+$_['text_report']		              	= 'Report';
+$_['text_export']		              	= 'Export';
+
 // Branch
 $_['text_branches']                    	= 'Branches';
 $_['text_branch']                      	= 'Branch';

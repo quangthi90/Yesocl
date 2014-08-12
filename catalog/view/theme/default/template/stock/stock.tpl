@@ -7,6 +7,7 @@
 {% use '@template/default/template/stock/common/block_basic_key.tpl' %}
 {% use '@template/default/template/stock/common/block_company_profile.tpl' %}
 {% use '@template/default/template/stock/common/block_financial.tpl' %}
+{% use '@template/default/template/stock/common/block_finance.tpl' %}
 {% use '@template/default/template/stock/common/block_ownership_friend.tpl' %}
 {% use '@template/default/template/stock/common/block_post_report.tpl' %}
 
@@ -23,8 +24,9 @@
         {{ block('stock_common_block_news') }}
         {% set ideas_href = path('StockIdeaPage', {stock_code: stock.code}) %}
         {{ block('stock_common_block_ideas') }}
-        {#{ block('stock_common_block_basic_key') }}
-        {{ block('stock_common_block_company_profile') }}
+        {{ block('stock_common_block_finance') }}
+        {{ block('stock_common_block_basic_key') }}
+        {#{ block('stock_common_block_company_profile') }}
         {{ block('stock_common_block_financial') }#}
         {% if stock.meta.funds|length > 0 %}
         {{ block('stock_common_block_ownership_friend') }}

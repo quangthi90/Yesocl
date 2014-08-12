@@ -182,6 +182,14 @@ class ModelStockStock extends Model {
 		return $lStock;
 	}
 
+	public function getAllStocks(){
+		$aQuery = array('deleted' => false);
+
+		return $this->dm->getRepository('Document\Stock\Stock')
+			->findBy( $aQuery )
+			->sort( array($aData['order'] => $aData['sort']) );
+	}
+
 	public function importStock( $file ){
 		$this->load->model('tool/excel');
 		$this->load->model('stock/market');
