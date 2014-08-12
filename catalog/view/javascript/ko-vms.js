@@ -1518,12 +1518,24 @@ function PostStatisticsModel(options) {
 	self.types = ["user", "branch", "stock"];
 	self.currentType = ko.observable("user");
 	self.currentTime = ko.observable(0);
+	self.totalPopularPost = ko.observable(0);
 	self.userCaching = ko.observable(options.userCaching || false);
 
 	var cacheManager = new YesGlobal.CacheManager(false);
 	if(options.clearCacheWhenReload){
 		cacheManager.clearCache();
 	}
+
+	self.times.subscribe(function(value){
+		self.totalPopularPost(0);
+		if(value){
+			var total = 0;
+			ko.utils.arrayForEach(self.times(), function(item){
+				total += item.count;
+			});
+			self.totalPopularPost(total);
+		}
+	});
 	
 	self.loadMore = function() {
 		if(!self.canLoadMore() || self.isLoadingMore()) return;
@@ -1587,7 +1599,7 @@ function PostStatisticsModel(options) {
 		
 		postContainer.on("scroll", function() {
 			var rootWidth = $(this).width();
-			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 10) {
+			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 30) {
 				self.loadMore();
 			}
 		});
@@ -1623,7 +1635,7 @@ function PostStatisticsModel(options) {
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
 			data : {
-				limit : 15
+				limit : 10
 			}
 		};
 		var successCallback = function(data){
