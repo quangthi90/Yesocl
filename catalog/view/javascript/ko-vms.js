@@ -1550,6 +1550,7 @@ function PostStatisticsModel(options) {
 	self.loadPosts = function(dataTime) {
 		self.currentPage(1);
 		self.currentTime(dataTime.time);
+		self.postList([]);
 		_loadPosts(function(data){
 		});
 	};
@@ -1567,6 +1568,7 @@ function PostStatisticsModel(options) {
 		self.currentPage(1);
 		_loadTimes(function(){
 			self.currentTime(0);
+			self.postList([]);
 			_loadPosts(function(data) {});
 		});
 	};
