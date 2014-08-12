@@ -1599,7 +1599,7 @@ function PostStatisticsModel(options) {
 		
 		postContainer.on("scroll", function() {
 			var rootWidth = $(this).width();
-			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 30) {
+			if(postContainer.scrollLeft() + rootWidth >= postContainer[0].scrollWidth - 20) {
 				self.loadMore();
 			}
 		});
@@ -1615,7 +1615,6 @@ function PostStatisticsModel(options) {
 			if(cachedObject != null) {
 				self.currentPage(cachedObject.currentPage);
 				self.canLoadMore(cachedObject.canLoadMore);
-				self.postList.removeAll();
 				ko.utils.arrayForEach(cachedObject.postList, function(p){
 					var postItem = new PostModel(p);
 					self.postList.push(postItem);
@@ -1635,7 +1634,7 @@ function PostStatisticsModel(options) {
 		var ajaxOptions = {
 			url: window.yRouting.generate(self.urls.loadNews.name, loadOptions),
 			data : {
-				limit : 10
+				limit : 15
 			}
 		};
 		var successCallback = function(data){
@@ -1659,7 +1658,6 @@ function PostStatisticsModel(options) {
 
 		//Reset params:
 		self.isLoadSuccess(false);
-		self.postList.removeAll();
 
 		//Call common ajax Call:
 		YesGlobal.Utils.ajaxCall(ajaxOptions, null, successCallback, null);
@@ -1749,7 +1747,7 @@ function PostStatisticsModel(options) {
 	}
 
 	function _getCachedKey() {
-		return "st-" + self.currentType() + "-" + self.currentTime();
+		return "st-" + self.currentType() + "-" + self.currentTime() + '-' + self.currentPage();
 	}
 
 	function _getTimeCachedKey(){
