@@ -17,11 +17,11 @@ class ModelUserUser extends Model {
 		}
 
 		$aUserConfig = $this->config->get('user');
-		
+
 		$oUserGroup = $this->dm->getRepository('Document\User\Group')->findOneByName( $aUserConfig['default']['group_name']);
-		
+
 		$sSalt = substr(md5(uniqid(rand(), true)), 0, 9);
-		
+
 		$oMeta = new Meta();
 		if ( !empty( $aData['firstname'] ) ) {
 			$oMeta->setFirstname( $aData['firstname'] );
@@ -41,14 +41,14 @@ class ModelUserUser extends Model {
 			$oLocation->setLocation( $aData['location'] );
 			$oMeta->setLocation( $oLocation );
 		}
-		
+
 		$oEmail = new Email();
 		$oEmail->setEmail( $aData['email'] );
 		$oEmail->setPrimary( true );
 
 		// Slug
 		$sSlug = $this->url->create_slug( $aData['firstname'] . ' ' . $aData['lastname'] );
-		
+
 		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBySlug( new MongoRegex("/^$sSlug/i") );
 
 		$aSlugs = array_map(function($oUser){
@@ -80,26 +80,40 @@ class ModelUserUser extends Model {
 			$sFolderLink = $this->config->get('user')['default']['image_link'];
 			$sAvatarName = $this->config->get('post')['default']['avatar_name'];
 			$sPath = $sFolderLink . $oUser->getId() . '/' . $sAvatarName . '.jpg';
-			
+
 			$this->model_tool_image->moveFile( $aData['avatar'], DIR_IMAGE . $sPath );
 			$oUser->setAvatar( $sPath );
 		}
 
-		$sToken = md5( time() );
-		$oUser->setToken( $sToken );
+		if ( $this->config->get('user')['checking']['active'] ){
+			$sToken = md5( time() );
+			$oUser->setToken( $sToken );
 
-		$this->dm->flush();
-		$this->language->load('mail/user');
+			$this->dm->flush();
+			$this->language->load('mail/user');
 
-		$sSubject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));		
-		$sMessage = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
-		$sMessage .= $this->language->get('text_approval') . "\n" ;
-		$sMessage .= $this->extension->path('ActiveAccount', array('token' => $sToken)) . "\n\n";
-		$sMessage .= $this->language->get('text_services') . "\n\n";
-		$sMessage .= $this->language->get('text_thanks') . "\n";
-		$sMessage .= $this->config->get('config_name');
-		
-		$this->model_tool_mail->sendMail( $aData['email'], $sSubject, $sMessage );
+			$sSubject = sprintf($this->language->get('text_subject'), $this->config->get('config_name'));
+			$sMessage = sprintf($this->language->get('text_welcome'), $this->config->get('config_name')) . "\n\n";
+			$sMessage .= $this->language->get('text_approval') . "\n" ;
+			$sMessage .= $this->extension->path('ActiveAccount', array('token' => $sToken)) . "\n\n";
+			$sMessage .= $this->language->get('text_services') . "\n\n";
+			$sMessage .= $this->language->get('text_thanks') . "\n";
+			$sMessage .= $this->config->get('config_name');
+
+			$this->model_tool_mail->sendMail( $aData['email'], $sSubject, $sMessage );
+		}
+
+		// Auto Following User List: 'following'
+		if ( $this->config->get('userlist')['following']['active'] ) {
+			$this->load->model('user/list');
+			$this->load->model('friend/follower');
+			$aUserList = $this->model_user_list->getUserListByCode( $this->config->get('userlist')['code']['following'] );
+			if ( $aUserList ) {
+				foreach ($aUserList->getUsers() as $key => $value) {
+					$this->model_friend_follower->makeFollow( $value, $oUser->getId() );
+				}
+			}
+		}
 
 		return $oUser;
 	}
@@ -161,7 +175,7 @@ class ModelUserUser extends Model {
 				'slug' => $sUserSlug
 			);
 			$oUser = $this->dm->getRepository('Document\User\User')->findOneBy( $query );
-			
+
 			if ( !$oUser ){
 				return null;
 			}
@@ -205,11 +219,11 @@ class ModelUserUser extends Model {
 	}
 
 	public function isExistEmail( $oEmail, $idUser = '' ) {
-		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( array( 
+		$lUsers = $this->dm->getRepository( 'Document\User\User' )->findBy( array(
 			'deleted' => false,
-			'emails.email' => $oEmail 
+			'emails.email' => $oEmail
 		));
-		
+
 		foreach ( $lUsers as $oUser ) {
 			if ( $oUser->getId() == $idUser ){
 				continue;
@@ -217,7 +231,7 @@ class ModelUserUser extends Model {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

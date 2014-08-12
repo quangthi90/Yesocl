@@ -703,6 +703,11 @@ a.btn-link-circle:hover i {
 .user-info .user-more-info {
   color: #0e0e0e;
   font-size: 12px;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  white-space: nowrap;
 }
 .user-menu .toggle-user-menu {
 }

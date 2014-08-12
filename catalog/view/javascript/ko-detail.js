@@ -3,6 +3,7 @@ function DetailLayout(el) {
 
     this.root = el;
     this.goBackBtn = el.find('.btn-goback');
+    this.openCommentBtn = el.find('.open-comment');
     this.detailContentWrapper = el.find('#detail-content');
     this.widthDetail = this.detailContentWrapper.width();
     this.heightDetail = this.detailContentWrapper.height();
@@ -14,6 +15,10 @@ function DetailLayout(el) {
 
     function attachEvents() {
         //Events:
+        setTimeout(function(){
+            that.openCommentBtn.click(); 
+        }, 1000);
+
         that.goBackBtn.on('click', function(){
             history.go(-1); 
             return false;

@@ -1,4 +1,4 @@
-<?php  
+<?php
 class ControllerCommonHome extends Controller {
 	private $limit = 6;
 
@@ -11,7 +11,7 @@ class ControllerCommonHome extends Controller {
 
 		$this->document->setTitle($this->config->get('config_title'));
 		$this->document->setDescription($this->config->get('config_meta_description'));
-		
+
 		$this->data['heading_title'] = $this->config->get('config_title');
 
 		$this->load->model( 'branch/branch' );
@@ -39,7 +39,7 @@ class ControllerCommonHome extends Controller {
 				'branch_id' => $aBranch['id'],
 				'limit' => 6
 			));
-			
+
 			foreach ($lPosts as $oPost) {
 				$aPost = $oPost->formatToCache();
 
@@ -101,7 +101,7 @@ class ControllerCommonHome extends Controller {
 			$this->data['fl_posts'] = array();
 			foreach ($aPosts as $oPost) {
 				$aPost = $oPost->formatToCache();
-				
+
 				// thumb
 				if ( !empty($aPost['thumb']) && is_file(DIR_IMAGE . $aPost['thumb']) ){
 					$aPost['image'] = $this->model_tool_image->resize( $aPost['thumb'], 400, 250 );
@@ -134,14 +134,16 @@ class ControllerCommonHome extends Controller {
 
 		$this->data['branch_type'] = $this->config->get('common')['type']['branch'];
 		$this->data['user_type'] = $this->config->get('common')['type']['user'];
-		
+
 		// set selected menu
 		$this->session->setFlash( 'menu', 'home' );
 
 		// Check current account is actived
-		$date = new DateTime();
-		if ( $oLoggedUser && $oLoggedUser->getToken() != '' && $oLoggedUser->getTokenTime() >= $date ){
-			$this->data['warning_active'] = 'An active link has been sent to your email, please active your account before ' . $oLoggedUser->getTokenTime()->format('d/m/Y') . ' (your account will be DELETED if you do not active before this time)';
+		if ( $this->config->get('user')['checking']['active'] ) {
+			$date = new DateTime();
+			if ( $oLoggedUser && $oLoggedUser->getToken() != '' && $oLoggedUser->getTokenTime() >= $date ){
+				$this->data['warning_active'] = 'An active link has been sent to your email, please active your account before ' . $oLoggedUser->getTokenTime()->format('d/m/Y') . ' (your account will be DELETED if you do not active before this time)';
+			}
 		}
 
 		// Facebook config
@@ -152,13 +154,13 @@ class ControllerCommonHome extends Controller {
 		} else {
 			$this->template = 'default/template/common/home.tpl';
 		}
-		
+
 		$this->children = array(
 			'common/sidebar_control',
 			'common/footer',
 			'common/header'
 		);
-										
+
 		$this->response->setOutput($this->twig_render());
 	}
 }

@@ -84,6 +84,7 @@ $(document).ready(function(){
               <li><a href="<?php echo $social_network; ?>"><?php echo $text_social_network; ?></a></li>
       			</ul>
       		</li>
+          <li><a href="<?php echo $user_list; ?>"><?php echo $text_user_list; ?></a></li>
       	</ul>
       </li>
       <!--li id="attribute"><a class="top"><?php echo $text_attributes; ?></a>

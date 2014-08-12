@@ -39,7 +39,8 @@ class ControllerBranchCategory extends Controller {
 		$this->data['all_posts'] = array();
 
 		$lPosts = $this->model_branch_post->getPosts(array(
-			'category_id' => $oCategory->getId()
+			'category_id' => $oCategory->getId(),
+			'limit' => 100
 		));
 
 		$iPostCount = $lPosts->count(true);

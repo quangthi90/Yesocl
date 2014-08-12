@@ -12,7 +12,7 @@ class Customer {
 	private $url;
 	private $friend_requests;
 	private $user;
-	
+
   	public function __construct($registry) {
 		$this->config = $registry->get('config');
 		$this->db = $registry->get('db');
@@ -20,13 +20,13 @@ class Customer {
 		$this->session = $registry->get('session');
 		$this->facebook = $registry->get('facebook');
 		$this->url = $registry->get('url');
-			
-		if (isset($this->session->data['customer_id'])) { 
+
+		if (isset($this->session->data['customer_id'])) {
 			$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
 				'status' => true,
 				'id' => $this->session->data['customer_id']
 			));
-			
+
 			if ($customer_query) {
 				$this->customer_id = $customer_query->getId();
 				$this->firstname = $customer_query->getMeta()->getFirstName();
@@ -43,13 +43,13 @@ class Customer {
 			}
   		}
 	}
-		
-  	public function login($email, $password, $remember = false, $is_social = false, $is_pass_encode = false) {
+
+  	public function login($email, $password, $remember = false, $is_social = false, $is_pass_encode = false, $options = array() ) {
 		$customer_query = $this->db->getDm()->getRepository('Document\User\User')->findOneBy( array(
 			'status' => true,
 			'emails.email' => $email
 		));
-		
+
 		if ($customer_query) {
 			if ( !$is_social ){
 				$salt = $customer_query->getSalt();
@@ -61,23 +61,25 @@ class Customer {
 		    	}
 
 				$date = new DateTime();
-		    	if ( $user_password != $customer_query->getPassword() ){
-		    		if ( $customer_query->getForgotCreated() < $date || $user_password != $customer_query->getForgotten() ){
-		    			return false;
-		    		}
-		    	}
+			    if ( $user_password != $customer_query->getPassword() ){
+			    	if ( $customer_query->getForgotCreated() < $date || $user_password != $customer_query->getForgotten() ){
+			    		return false;
+			    	}
+			    }
 
-		    	if ( $customer_query->getToken() && $customer_query->getTokenTime() != null && $customer_query->getTokenTime() < $date ){
-		    		$customer_query->setDeleted(true);
-		    		$this->db->getDm()->flush();
-		    		$this->session->setFlash('warning_delete_account', 'Your account had deleted because not active! Please contact admin to get your account');
-		    		return false;
+		    	if ( isset( $options['checking_active'] ) && $options['checking_active'] ) {
+			    	if ( $customer_query->getToken() && $customer_query->getTokenTime() != null && $customer_query->getTokenTime() < $date ){
+			    		$customer_query->setDeleted(true);
+			    		$this->db->getDm()->flush();
+			    		$this->session->setFlash('warning_delete_account', 'Your account had deleted because not active! Please contact admin to get your account');
+			    		return false;
+			    	}
 		    	}
 		    }
 
 			$this->session->data['customer_id'] = $customer_query->getId();
 			$this->session->data['customer_slug'] = $customer_query->getSlug();
-									
+
 			$this->customer_id = $customer_query->getId();
 			$this->firstname = $customer_query->getMeta()->getFirstName();
 			$this->lastname = $customer_query->getMeta()->getLastName();
@@ -94,7 +96,7 @@ class Customer {
 	        	setcookie('yid', $email, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	    		setcookie('ypass', $user_password, time() + 60 * 60 * 24 * 30, '/', $_SERVER['SERVER_NAME']);
 	        }
-			
+
 	  		return true;
     	} else {
       		return false;
@@ -106,10 +108,10 @@ class Customer {
 			'status' => true,
 			'emails.email' => $email
 		));
-		
+
 		if ($customer_query) {
 			$this->session->data['customer_id'] = $customer_query->getId();
-									
+
 			$this->customer_id = $customer_query->getId();
 			$this->firstname = $customer_query->getMeta()->getFirstName();
 			$this->lastname = $customer_query->getMeta()->getLastName();
@@ -120,14 +122,14 @@ class Customer {
 			$this->avatar = $customer_query->getAvatar();
 			$this->friend_requests = $customer_query->getFriendRequests();
 			$this->user = $customer_query;
-			
+
 	  		return true;
     	} else {
       		return false;
     	}
   	}
-  	
-	public function logout() {		
+
+	public function logout() {
 		unset($this->session->data['customer_id']);
 		unset($this->session->data['customer_slug']);
 
@@ -145,7 +147,7 @@ class Customer {
 			setcookie('ypass', '', time() - 3600, '/', $_SERVER['SERVER_NAME']);
 		}
   	}
-  
+
   	public function isLogged() {
   		if ($this->customer_id) {
   			return $this->customer_id;
@@ -156,7 +158,7 @@ class Customer {
   	}
 
   	public function hasRemember() {
-  		
+
   		return false;
   	}
 
@@ -167,15 +169,15 @@ class Customer {
   	public function getUsername(){
   		return $this->username;
   	}
-      
+
   	public function getFirstName() {
 		return $this->firstname;
   	}
-  
+
   	public function getLastName() {
 		return $this->lastname;
   	}
-  
+
   	public function getEmail() {
 		return $this->email;
   	}
@@ -185,7 +187,7 @@ class Customer {
   	}
 
   	public function getCustomerGroupId() {
-		return $this->customer_group_id;	
+		return $this->customer_group_id;
   	}
 
   	public function getSlug(){

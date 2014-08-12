@@ -4,7 +4,7 @@ use Document\User\Notification;
 class ModelUserNotification extends Model {
 	public function addNotification( $idUser, $actor, $sAction, $idObject, $sPostSlug, $sType, $sObject ){
 		$oUser = $this->dm->getRepository('Document\User\User')->findOneBySlug( $idUser );
-		
+
 		if ( !$oUser ){
 			$oUser = $this->dm->getRepository('Document\User\User')->find( $idUser );
 			if ( !$oUser ) return false;
@@ -18,7 +18,7 @@ class ModelUserNotification extends Model {
 		}
 
 		$oNotification = $oUser->getNotificationByData( $actor->getId(), $idObject, $sAction );
-		
+
 		if ( !$oNotification ){
 			$oNotification = new Notification();
 			$this->dm->persist( $oNotification );
@@ -35,6 +35,43 @@ class ModelUserNotification extends Model {
 		}
 
 		$this->dm->flush();
+
+		// AUTO NOTIFICATION USER LIST: 'notification'
+		if ( $this->config->get('userlist')['notification']['active'] ) {
+			$this->load->model('user/list');
+			$oUserList = $this->model_user_list->getUserListByCode( $this->config->get('userlist')['code']['notification'] );
+			if ( $oUserList ) {
+				foreach ($oUserList->getUsers() as $key => $value) {
+					$oOtherUser = $this->dm->getRepository('Document\User\User')->find( $value );
+
+					// SKIP IF User is Other User
+					if ( $value == $oUser->getId() ) {
+						continue;
+					}
+
+					if ( $oOtherUser ) {
+						$oOtherNotification = $oOtherUser->getNotificationByData( $actor->getId(), $idObject, $sAction );
+
+						if ( !$oOtherNotification ){
+							$oOtherNotification = new Notification();
+							$this->dm->persist( $oOtherNotification );
+							$oOtherNotification->setActor( $actor );
+							$oOtherNotification->setAction( $sAction );
+							$oOtherNotification->setObjectId( $idObject );
+							$oOtherNotification->setSlug( $sPostSlug );
+							$oOtherNotification->setType( $sType );
+							$oOtherNotification->setObject( $sObject );
+
+							$oOtherUser->addNotification( $oOtherNotification );
+						}else{
+							$oOtherNotification->setStatus( true );
+						}
+
+						$this->dm->flush();
+					}
+				}
+			}
+		}
 
 		return true;
 	}

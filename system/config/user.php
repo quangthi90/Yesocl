@@ -7,6 +7,8 @@ $_['user']['default']['cache_link'] = 'user/';
 $_['user']['network']['default'] = 'default';
 $_['user']['network']['facebook'] = 'facebook';
 
+$_['user']['checking']['active'] = false;
+
 $_['whatsnew']['option']['all'] = 'all';
 $_['whatsnew']['option']['branch'] = 'branch';
 $_['whatsnew']['option']['stock'] = 'stock';
@@ -19,5 +21,10 @@ $_['whatsnew']['option_function']['all'] = 'getAllPosts';
 $_['whatsnew']['option_function']['branch'] = 'getAllBranchPosts';
 $_['whatsnew']['option_function']['stock'] = 'getAllStockPosts';
 $_['whatsnew']['option_function']['user'] = 'getAllUserPosts';
+
+$_['userlist']['following']['active'] = true;
+$_['userlist']['notification']['active'] = true;
+$_['userlist']['code']['following'] = 'following';
+$_['userlist']['code']['notification'] = 'notification';
 
 ?>
