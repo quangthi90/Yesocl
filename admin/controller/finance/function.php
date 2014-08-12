@@ -278,7 +278,7 @@ class ControllerFinanceFunction extends Controller {
 		if ( isset($this->request->post['function']) ){
 			$this->data['function'] = $this->request->post['function'];
 			$this->data['function_detail'] = $this->model_finance_function->getFunctionDetail($this->request->post['function']);
-		}elseif ( isset($oFunction) ){
+		}elseif ( isset($oFunction) && $oFunction->getFunction() ){
 			$this->data['function'] = $oFunction->getFunction();
 			$this->data['function_detail'] = $this->model_finance_function->getFunctionDetail($oFunction->getFunction());
 		}else {
